@@ -8,7 +8,7 @@
 <meta name="author" content="Salvador Rigual Valls">
 <meta name="robots" content="index, follow">
 <link rel="canonical"
-href="https://srigual-png.github.io/mates-primer-ESO/sentit-numeric.html">
+href="https://srigual-png.github.io/mates-primer-ESO/1 - sentit numeric.html">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -278,17 +278,52 @@ function wrongNums(correct,n,minVal){
 function buildOpts(correct,wrongs){
   var seen=new Set([String(correct)]);
   var result=[correct];
+
+  // 1. Afegim els distractors proporcionats pel generador
   for(var i=0;i<wrongs.length&&result.length<4;i++){
     var ws=String(wrongs[i]);
-    if(!seen.has(ws)){seen.add(ws);result.push(wrongs[i]);}
+
+    if(!seen.has(ws)){
+      seen.add(ws);
+      result.push(wrongs[i]);
+    }
   }
-  var fb=1;
-  while(result.length<4){
-    var c=parseFloat(String(correct).replace(/[^0-9.\-]/g,''))||0;
-    var cand=String(Math.round((c+fb)*100)/100);
-    if(!seen.has(cand)){seen.add(cand);result.push(cand);}
-    fb++;
+
+  // 2. Si falten opcions, intentem completar-les automàticament
+  //    només quan la resposta té una part numèrica clara.
+  if(result.length<4){
+    var m=String(correct).match(/^(-?\d+(?:\.\d+)?)(.*)$/);
+
+    if(m){
+      var num=parseFloat(m[1]);
+      var suffix=m[2];
+      var extra=wrongNums(num,10).map(function(v){
+        return String(v)+suffix;
+      });
+
+      for(var j=0;j<extra.length&&result.length<4;j++){
+        var es=String(extra[j]);
+
+        if(!seen.has(es)){
+          seen.add(es);
+          result.push(extra[j]);
+        }
+      }
+    }
   }
+
+  // 3. Avisem si, malgrat tot, no hem pogut arribar a 4.
+  if(result.length<4){
+    console.warn(
+      'buildOpts(): menys de 4 opcions vàlides',
+      {
+        correct:correct,
+        wrongs:wrongs,
+        result:result
+      }
+    );
+  }
+
   return shuffle(result);
 }
 
@@ -323,23 +358,78 @@ function genNaturals(){
     correct=sorted.join(sep);opts=buildOpts(correct,wrongOrders(pool,correct));
     guide=['Conta les xifres: menys xifres = nombre menor','Amb mateixes xifres, compara des de l\'esquerra'];
     solution=['Nombres: '+pool.join(', '),'Ordenats: '+correct];
-  } else if(type===2){
-    diff=1;var a=rnd(10000,99999),b=rnd(10000,99999);
+    } else if(type===2){
+    diff=1;
+
+    var a=rnd(10000,99999),b=rnd(10000,99999);
     while(a===b)b=rnd(10000,99999);
+
     var sign=a>b?'>':'<';
+
     question='Quin signe va entre:<br><span class="fc">'+a+' ___ '+b+'</span>';
+
     correct=a+' '+sign+' '+b;
-    opts=buildOpts(correct,[a+(a>b?' < ':' > ')+b,a+' = '+b,a+(a>b?' <= ':' >= ')+b]);
-    guide=['Compara les xifres des de l\'esquerra'];solution=['Resultat: '+correct];
-  } else if(type===3){
-    diff=2;var n=rnd(10000,99999);
-    var t=rnd(1,3),div=t===1?1000:t===2?100:10,nomPos=t===1?'milers':t===2?'centenes':'desenes';
+
+    opts=buildOpts(correct,[
+      a+' '+(a>b?'<':'>')+' '+b,
+      a+' = '+b,
+      a+' ≠ '+b
+    ]);
+
+    guide=['Compara les xifres des de l\'esquerra'];
+    solution=['Resultat: '+correct];
+    } else if(type===3){
+    diff=2;
+
+    var n=rnd(10000,99999);
+    var t=rnd(1,3);
+    var div=t===1?1000:t===2?100:10;
+    var nomPos=t===1?'milers':t===2?'centenes':'desenes';
+
     var rounded=Math.round(n/div)*div;
+
     question='Arrodoneix <span class="fc">'+n+'</span> a les '+nomPos;
     correct=String(rounded);
-    var alt1=Math.floor(n/div)*div,alt2=Math.ceil(n/div)*div;
-    if(String(alt1)===correct)alt1+=div;if(String(alt2)===correct)alt2+=div;
-    opts=buildOpts(correct,[String(alt1),String(alt2),String(rounded+div)]);
+
+    // ── DISTRACTORS PEDAGÒGICS ─────────────────────────────────────────
+    // 1. Arrodoniment a una posició inferior
+    // 2. Arrodoniment a una posició superior
+    // 3. Mateixa posició però en sentit contrari
+    //
+    // Es generen diversos candidats i s'eliminen:
+    // - la resposta correcta
+    // - els duplicats
+
+    var lowerUnit=div/10;
+    var upperUnit=div*10;
+
+    var candidates3=[
+      Math.round(n/lowerUnit)*lowerUnit,
+      Math.round(n/upperUnit)*upperUnit,
+      rounded-div,
+      rounded+div,
+
+      // Alternatives de reserva
+      rounded-lowerUnit,
+      rounded+lowerUnit,
+      rounded-upperUnit,
+      rounded+upperUnit
+    ];
+
+    var distractors3=[];
+    var seen3=new Set([correct]);
+  
+    for(var i3=0;i3<candidates3.length&&distractors3.length<3;i3++){
+      var candidate3=String(candidates3[i3]);
+
+      if(!seen3.has(candidate3)){
+        seen3.add(candidate3);
+        distractors3.push(candidate3);
+      }
+    }
+
+    opts=buildOpts(correct,shuffle(distractors3));
+
     guide=['Mira la xifra inferior a '+nomPos+': >=5 puja, <5 baixa'];
     solution=['Nombre: '+n,'Arrodonit a les '+nomPos+': '+correct];
   } else if(type===4){
@@ -347,7 +437,11 @@ function genNaturals(){
     var nP=rnd(3,8),res=rnd(20,150),total=nP*res;
     var txts=['Una escola te <b>'+total+'</b> llibres per repartir en <b>'+nP+'</b> aules iguals. Quants llibres hi ha a cada aula?','Un magatzem rep <b>'+total+'</b> paquets per distribuir entre <b>'+nP+'</b> botigues. Quants paquets rep cada botiga?'];
     question='<span class="pt">'+txts[rnd(0,1)]+'</span>';correct=String(res)+' unitats';
-    opts=buildOpts(correct,wrongNums(res,3,1).map(function(v){return String(v)+' unitats';}));
+    opts=buildOpts(correct,[
+	  String(total+nP)+' unitats',
+	  String(total-nP)+' unitats',
+	  String(total*nP)+' unitats'
+	]);
     guide=['Repartir = dividir','Total / grups = '+total+' / '+nP+' = '+res];
     solution=['Operacio: '+total+' / '+nP+' = '+res,'OK '+correct];
   } else {
@@ -355,7 +449,15 @@ function genNaturals(){
     var p=rnd(3,8),q=rnd(10,50),extra=rnd(5,30),tot2=p*q+extra;
     question='<span class="pt">Una fabrica te <b>'+p+'</b> maquines que produeixen <b>'+q+'</b> peces cadascuna. A mes, hi ha <b>'+extra+'</b> peces de reserva. Quantes peces hi ha en total?</span>';
     correct=String(tot2)+' peces';
-    opts=buildOpts(correct,wrongNums(tot2,3,1).map(function(v){return String(v)+' peces';}));
+    var distractors5=shuffle([
+    String(p*q)+' peces',
+    String(p*(q+extra))+' peces',
+    String(p+q+extra)+' peces',
+    String(p*q-extra)+' peces'
+  ]);
+
+    opts=buildOpts(correct,distractors5.slice(0,3));
+
     guide=['Primer: '+p+' x '+q+' = '+(p*q),'Suma reserves: '+(p*q)+' + '+extra+' = '+tot2];
     solution=['Produccio: '+p+'x'+q+'='+(p*q),'Total: '+(p*q)+'+'+extra+'='+tot2];
   }
@@ -612,11 +714,16 @@ function genDivisibilitat(){
     var resDiv2=ok2?'Sí ('+div2+')':'No ('+div2+')';
     correct=resDiv1+' i '+resDiv2;
     // Distractors sempre lògicament distints de la correcta i entre ells
-    var d1='Sí ('+div1+') i Sí ('+div2+')';   // ambdós sí
-    var d2='No ('+div1+') i No ('+div2+')';    // ambdós no
-    var d3='Sí ('+div2+') i No ('+div1+')';    // a l\'inrevés
-    // Elimina els que coincideixin amb la correcta
-    var distractors=[d1,d2,d3].filter(function(d){return d!==correct;});
+    var d1='Sí ('+div1+') i Sí ('+div2+')';
+    var d2='Sí ('+div1+') i No ('+div2+')';
+    var d3='No ('+div1+') i Sí ('+div2+')';
+    var d4='No ('+div1+') i No ('+div2+')';
+
+    // La correcta serà una de les quatre combinacions.
+    // Les altres tres seran els distractors.
+    var distractors=[d1,d2,d3,d4].filter(function(d){
+      return d!==correct;
+    });
     opts=buildOpts(correct,distractors);
     guide=[total+'/'+div1+': residu '+(total%div1),total+'/'+div2+': residu '+(total%div2)];
     solution=[total+'/'+div1+' → residu '+(total%div1)+' → '+(ok1?'divisible':'no divisible'),
