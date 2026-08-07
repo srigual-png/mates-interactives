@@ -355,10 +355,18 @@ function genNaturals(){
     var sorted=pool.slice().sort(function(a,b){return ascending?a-b:b-a;});
     var sep=ascending?' < ':' > ';
     question='Ordena de '+(ascending?'menor a major':'major a menor')+':<br><span class="fc">'+pool.join('&nbsp;&mdash;&nbsp;')+'</span>';
-    correct=sorted.join(sep);opts=buildOpts(correct,wrongOrders(pool,correct));
-    guide=['Conta les xifres: menys xifres = nombre menor','Amb mateixes xifres, compara des de l\'esquerra'];
-    solution=['Nombres: '+pool.join(', '),'Ordenats: '+correct];
-    } else if(type===2){
+    correct=sorted.join(sep);
+    opts=buildOpts(correct,wrongOrders(pool,correct));
+    guide=[
+      'Conta les xifres: menys xifres = nombre menor',
+      'Amb mateixes xifres, compara des de l\'esquerra'
+    ];
+    solution=[
+      'Nombres: '+pool.join(', '),
+      'Ordenats: '+correct
+    ];
+
+  } else if(type===2){
     diff=1;
 
     var a=rnd(10000,99999),b=rnd(10000,99999);
@@ -370,15 +378,25 @@ function genNaturals(){
 
     correct=a+' '+sign+' '+b;
 
+    // ── NOMÉS 3 RESPOSTES: <, > i = ───────────────────────────────
+    // No incloem ≠ perquè també seria matemàticament correcta
+    // quan a i b són diferents.
     opts=buildOpts(correct,[
       a+' '+(a>b?'<':'>')+' '+b,
-      a+' = '+b,
-      a+' ≠ '+b
+      a+' = '+b
     ]);
 
-    guide=['Compara les xifres des de l\'esquerra'];
-    solution=['Resultat: '+correct];
-    } else if(type===3){
+    guide=[
+      'Compara les xifres des de l\'esquerra.',
+      'Quan trobis la primera xifra diferent, el nombre que tingui la xifra més gran és el més gran.'
+    ];
+    solution=[
+      'Compara '+a+' i '+b+' des de l\'esquerra.',
+      'La primera xifra diferent indica quin nombre és més gran.',
+      'Resultat: '+correct
+    ];
+
+  } else if(type===3){
     diff=2;
 
     var n=rnd(10000,99999);
@@ -430,307 +448,924 @@ function genNaturals(){
 
     opts=buildOpts(correct,shuffle(distractors3));
 
-    guide=['Mira la xifra inferior a '+nomPos+': >=5 puja, <5 baixa'];
-    solution=['Nombre: '+n,'Arrodonit a les '+nomPos+': '+correct];
+    guide=[
+      'Mira la xifra inferior a '+nomPos+': >=5 puja, <5 baixa'
+    ];
+    solution=[
+      'Nombre: '+n,
+      'Arrodonit a les '+nomPos+': '+correct
+    ];
+
   } else if(type===4){
     diff=2;isProblem=true;
     var nP=rnd(3,8),res=rnd(20,150),total=nP*res;
-    var txts=['Una escola te <b>'+total+'</b> llibres per repartir en <b>'+nP+'</b> aules iguals. Quants llibres hi ha a cada aula?','Un magatzem rep <b>'+total+'</b> paquets per distribuir entre <b>'+nP+'</b> botigues. Quants paquets rep cada botiga?'];
-    question='<span class="pt">'+txts[rnd(0,1)]+'</span>';correct=String(res)+' unitats';
+    var txts=[
+      'Una escola te <b>'+total+'</b> llibres per repartir en <b>'+nP+'</b> aules iguals. Quants llibres hi ha a cada aula?',
+      'Un magatzem rep <b>'+total+'</b> paquets per distribuir entre <b>'+nP+'</b> botigues. Quants paquets rep cada botiga?'
+    ];
+    question='<span class="pt">'+txts[rnd(0,1)]+'</span>';
+    correct=String(res)+' unitats';
+
     opts=buildOpts(correct,[
-	  String(total+nP)+' unitats',
-	  String(total-nP)+' unitats',
-	  String(total*nP)+' unitats'
-	]);
-    guide=['Repartir = dividir','Total / grups = '+total+' / '+nP+' = '+res];
-    solution=['Operacio: '+total+' / '+nP+' = '+res,'OK '+correct];
+      String(total+nP)+' unitats',
+      String(total-nP)+' unitats',
+      String(total*nP)+' unitats'
+    ]);
+
+    guide=[
+      'Repartir en grups iguals = dividir.',
+      'Divideix el total entre el nombre de grups.'
+    ];
+    solution=[
+      'Operació: '+total+' / '+nP+' = '+res,
+      'Resultat: '+correct
+    ];
+
   } else {
     diff=3;isProblem=true;
     var p=rnd(3,8),q=rnd(10,50),extra=rnd(5,30),tot2=p*q+extra;
     question='<span class="pt">Una fabrica te <b>'+p+'</b> maquines que produeixen <b>'+q+'</b> peces cadascuna. A mes, hi ha <b>'+extra+'</b> peces de reserva. Quantes peces hi ha en total?</span>';
     correct=String(tot2)+' peces';
+
     var distractors5=shuffle([
-    String(p*q)+' peces',
-    String(p*(q+extra))+' peces',
-    String(p+q+extra)+' peces',
-    String(p*q-extra)+' peces'
-  ]);
+      String(p*q)+' peces',
+      String(p*(q+extra))+' peces',
+      String(p+q+extra)+' peces',
+      String(p*q-extra)+' peces'
+    ]);
 
     opts=buildOpts(correct,distractors5.slice(0,3));
 
-    guide=['Primer: '+p+' x '+q+' = '+(p*q),'Suma reserves: '+(p*q)+' + '+extra+' = '+tot2];
-    solution=['Produccio: '+p+'x'+q+'='+(p*q),'Total: '+(p*q)+'+'+extra+'='+tot2];
+    guide=[
+      'Primer, calcula quantes peces produeixen totes les maquines.',
+      'Després, suma les peces de reserva.'
+    ];
+    solution=[
+      'Producció: '+p+' x '+q+' = '+(p*q),
+      'Total: '+(p*q)+' + '+extra+' = '+tot2,
+      'Resultat: '+correct
+    ];
   }
-  return{question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+
+  return{
+    question:question,
+    correct:correct,
+    options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),
+    guide:guide,
+    solution:solution,
+    isProblem:isProblem,
+    diff:diff
+  };
 }
 
 // ── GEN SISTEMA DECIMAL ────────────────────────────────────────────────────
 function genDecimalSys(){
   var type=rnd(1,4),question,correct,opts,guide,solution,isProblem=false,diff=1;
+
   if(type===1){
-    diff=1;var n=rnd(10000,999999),s=String(n),pos=rnd(0,s.length-1);
-    var digit=parseInt(s[pos]),tries=0;
-    while(digit===0&&tries<20){pos=rnd(0,s.length-1);digit=parseInt(s[pos]);tries++;}
-    var posVal=Math.pow(10,s.length-1-pos),realVal=digit*posVal;
-    var posNames={'1':'unitats','10':'desenes','100':'centenes','1000':'milers','10000':'desenes de miler','100000':'centenes de miler'};
+    diff=1;
+
+    var n,s,pos,digit,tries=0;
+
+    // Generem un nombre i busquem una xifra que aparegui una sola vegada
+    do{
+      n=rnd(10000,999999);
+      s=String(n);
+      pos=rnd(0,s.length-1);
+      digit=parseInt(s[pos]);
+
+      var count=0;
+      for(var j=0;j<s.length;j++){
+        if(parseInt(s[j])===digit)count++;
+      }
+
+      tries++;
+    }while(count!==1 && tries<100);
+
+    // Si per algun motiu no s'ha trobat una xifra única,
+    // regenerem fins garantir-ne una.
+    if(count!==1){
+      do{
+        n=rnd(10000,999999);
+        s=String(n);
+        pos=rnd(0,s.length-1);
+        digit=parseInt(s[pos]);
+
+        count=0;
+        for(var k=0;k<s.length;k++){
+          if(parseInt(s[k])===digit)count++;
+        }
+      }while(count!==1);
+    }
+
+    var posVal=Math.pow(10,s.length-1-pos);
+    var realVal=digit*posVal;
+    var posNames={
+      '1':'unitats',
+      '10':'desenes',
+      '100':'centenes',
+      '1000':'milers',
+      '10000':'desenes de miler',
+      '100000':'centenes de miler'
+    };
     var posName=posNames[String(posVal)]||('x'+posVal);
+
     question='Quin es el valor posicional de la xifra <b>'+digit+'</b> al nombre <span class="fc">'+n+'</span>?';
     correct=String(realVal);
-    opts=buildOpts(correct,[String(digit),String(posVal),String(realVal*10),String(Math.max(1,realVal/10))]);
-    guide=['La xifra '+digit+' ocupa les '+posName,'Valor = '+digit+' x '+posVal+' = '+realVal];
-    solution=['Posicio: '+posName,'Valor: '+digit+'x'+posVal+'='+realVal];
+
+    opts=buildOpts(correct,[
+      String(digit),
+      String(posVal),
+      String(realVal*10),
+      String(Math.max(1,realVal/10))
+    ]);
+
+    guide=[
+      'La xifra '+digit+' ocupa les '+posName,
+      'El valor de la xifra depèn de la posició que ocupa'
+    ];
+
+    solution=[
+      'Posicio: '+posName,
+      'Valor: '+digit+'x'+posVal+'='+realVal
+    ];
+
   } else if(type===2){
-    diff=2;var a=rnd(1,9),b=rnd(0,9),c=rnd(0,9),d=rnd(1,9),e=rnd(0,9),n2=a*10000+b*1000+c*100+d*10+e;
+    diff=2;
+
+    var a=rnd(1,9),b=rnd(0,9),c=rnd(0,9),d=rnd(1,9),e=rnd(0,9),n2=a*10000+b*1000+c*100+d*10+e;
+
     question='Descompon el nombre <span class="fc">'+n2+'</span>';
+
     correct=a+'x10000+'+b+'x1000+'+c+'x100+'+d+'x10+'+e+'x1';
-    var w1=a+'x1000+'+b+'x100+'+c+'x10+'+d+'x1+'+e,w2=a+'x10000+'+b+'x1000+'+d+'x100+'+c+'x10+'+e+'x1',w3=(a+1)+'x10000+'+b+'x1000+'+c+'x100+'+d+'x10+'+e+'x1';
-    opts=shuffle([correct,w1,w2,w3]);guide=['Cada xifra val 10 vegades mes que la de la seva dreta'];
-    solution=[n2+' = '+correct];
+
+    var w1=a+'x1000+'+b+'x100+'+c+'x10+'+d+'x1+'+e,
+        w2=a+'x10000+'+b+'x1000+'+d+'x100+'+c+'x10+'+e+'x1',
+        w3=(a+1)+'x10000+'+b+'x1000+'+c+'x100+'+d+'x10+'+e+'x1';
+
+    opts=shuffle([correct,w1,w2,w3]);
+
+    guide=[
+      'Comença per la xifra de més a l\'esquerra',
+      'Multiplica cada xifra pel valor de la seva posició'
+    ];
+
+    solution=[
+      n2+' = '+correct
+    ];
+
   } else if(type===3){
-    diff=2;var n3=rnd(100000,999999);
-    var u3=n3%10,de3=Math.floor(n3/10)%10,ce3=Math.floor(n3/100)%10,mi3=Math.floor(n3/1000)%10,dm3=Math.floor(n3/10000)%10,cm3=Math.floor(n3/100000)%10;
+    diff=2;
+
+    var n3=rnd(100000,999999);
+    var u3=n3%10,
+        de3=Math.floor(n3/10)%10,
+        ce3=Math.floor(n3/100)%10,
+        mi3=Math.floor(n3/1000)%10,
+        dm3=Math.floor(n3/10000)%10,
+        cm3=Math.floor(n3/100000);
+
     question='Quin nombre correspon a:<br><span class="fc">'+cm3+' cm, '+dm3+' dm, '+mi3+' m, '+ce3+' c, '+de3+' d, '+u3+' u</span>';
-    correct=String(n3);opts=buildOpts(correct,wrongNums(n3,3,1).map(String));
-    guide=['Suma: '+cm3+'x100000+'+dm3+'x10000+'+mi3+'x1000+'+ce3+'x100+'+de3+'x10+'+u3+'x1'];
-    solution=['Suma de posicions = '+n3];
+
+    correct=String(n3);
+
+    opts=buildOpts(correct,wrongNums(n3,3,1).map(String));
+
+    guide=[
+      'Multiplica cada xifra pel valor de la seva posició',
+      'Després, suma els valors obtinguts'
+    ];
+
+    solution=[
+      'Suma de posicions = '+n3
+    ];
+
   } else {
-    diff=3;isProblem=true;
-    var t1=rnd(2,9),t2=rnd(1,9),t3=rnd(0,9),t4=rnd(1,9),num=t1*1000+t2*100+t3*10+t4;
-    question='<span class="pt">El numero de matricules es <b>'+num+'</b>. Quant val la xifra de les centenes multiplicada pel seu valor posicional?</span>';
-    correct=String(t2*100);
-    opts=buildOpts(correct,[String(t2),String(t2*10),String(t1*1000),String(t3*10||t4+1)]);
-    guide=['Centenes de '+num+': xifra '+t2,'Valor = '+t2+' x 100 = '+t2*100];
-    solution=['Xifra centenes: '+t2,'Valor: '+t2+'x100='+t2*100];
+    diff=3;
+    isProblem=true;
+
+    var pos=rnd(0,3);
+    var posData=[
+      {name:'unitats',      value:1,    digit:null},
+      {name:'desenes',      value:10,   digit:null},
+      {name:'centenes',     value:100,  digit:null},
+      {name:'milers',       value:1000, digit:null}
+    ];
+
+    // Generem un nombre de 4 xifres
+    // i assegurem que la xifra de la posició escollida sigui diferent de 0
+    var t1=rnd(2,9),
+        t2=rnd(1,9),
+        t3=rnd(0,9),
+        t4=rnd(1,9);
+
+    var num=t1*1000+t2*100+t3*10+t4;
+
+    // Associem la xifra corresponent a cada posició
+    var digits=[t4,t3,t2,t1];
+    posData[pos].digit=digits[pos];
+
+    var posName=posData[pos].name;
+    var posValue=posData[pos].value;
+    var digitPos=posData[pos].digit;
+
+    question='<span class="pt">El numero de matricules es <b>'+num+
+      '</b>. Quant val la xifra de les '+posName+
+      ' multiplicada pel seu valor posicional?</span>';
+
+    correct=String(digitPos*posValue);
+
+    opts=buildOpts(correct,[
+      String(digitPos),
+      String(digitPos*(posValue/10)),
+      String(digitPos*(posValue*10)),
+      String((digitPos+1)*posValue)
+    ]);
+
+    guide=[
+      'Xifra de les '+posName+' de '+num+': '+digitPos,
+      'El valor posicional de les '+posName+' és '+posValue,
+      'Calcula: '+digitPos+' x '+posValue
+    ];
+
+    solution=[
+      'Xifra de les '+posName+': '+digitPos,
+      'Valor: '+digitPos+'x'+posValue+'='+digitPos*posValue
+    ];
   }
-  return{question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+
+  return{
+    question:question,
+    correct:correct,
+    options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),
+    guide:guide,
+    solution:solution,
+    isProblem:isProblem,
+    diff:diff
+  };
 }
 
 // ── GEN OPERACIONS ─────────────────────────────────────────────────────────
 function genOps(){
   var type=rnd(1,6),question,correct,opts,guide,solution,isProblem=false,diff=1;
+
   if(type===1){
-    diff=1;var a=rnd(1000,9999),b=rnd(1000,9999);correct=String(a+b);
+    diff=1;
+    var a=rnd(1000,9999),b=rnd(1000,9999);
+    correct=String(a+b);
+
     question='Calcula: <span class="fc">'+a+' + '+b+'</span>';
+
     opts=buildOpts(correct,wrongNums(a+b,3,2).map(String));
-    guide=['Suma columna per columna, porta l\'1 si cal'];solution=[a+'+'+b+'='+correct];
+
+    guide=[
+      'Suma columna per columna, començant per les unitats',
+      'Si la suma d’una columna és 10 o més, porta una desena a la columna següent'
+    ];
+
+    solution=[
+      a+'+'+b+'='+correct
+    ];
+
   } else if(type===2){
-    diff=1;var b2=rnd(1000,5000),a2=b2+rnd(1000,4999);correct=String(a2-b2);
+    diff=1;
+    var b2=rnd(1000,5000),a2=b2+rnd(1000,4999);
+    correct=String(a2-b2);
+
     question='Calcula: <span class="fc">'+a2+' - '+b2+'</span>';
+
     opts=buildOpts(correct,wrongNums(a2-b2,3,1).map(String));
-    guide=['Resta columna per columna, porta si cal'];solution=[a2+'-'+b2+'='+correct];
+
+    guide=[
+      'Resta columna per columna, començant per les unitats',
+      'Si una xifra no arriba per fer la resta, demana una desena a la columna següent'
+    ];
+
+    solution=[
+      a2+'-'+b2+'='+correct
+    ];
+
   } else if(type===3){
-    diff=2;var a3=rnd(10,99),b3=rnd(100,999);correct=String(a3*b3);
+    diff=2;
+    var a3=rnd(10,99),b3=rnd(100,999);
+    correct=String(a3*b3);
+
     question='Calcula: <span class="fc">'+a3+' x '+b3+'</span>';
+
     opts=buildOpts(correct,wrongNums(a3*b3,3,1).map(String));
-    guide=['Productes parcials i suma'];solution=[a3+'x'+b3+'='+correct];
+
+    guide=[
+      'Multiplica cada xifra del segon factor pel primer',
+      'Escriu els productes parcials i suma’ls'
+    ];
+
+    solution=[
+      a3+'x'+b3+'='+correct
+    ];
+
   } else if(type===4){
-    diff=2;var b4=rnd(3,15),q=rnd(10,99),r=rnd(0,b4-1),a4=b4*q+r;
+    diff=2;
+    var b4=rnd(3,15),q=rnd(10,99),r=rnd(0,b4-1),a4=b4*q+r;
+
     correct=r===0?String(q)+' exacta':'Cocient '+q+', residu '+r;
+
     question='Calcula: <span class="fc">'+a4+' / '+b4+'</span>';
+
     var a1x=r===0?String(q+1)+' exacta':'Cocient '+(q+1)+', residu '+r;
     var a2x='Cocient '+(q-1)+', residu '+(b4-1);
     var a3x=r===0?'Cocient '+q+', residu 1':'Cocient '+q+', residu '+(r>0?r-1:1);
+
     opts=buildOpts(correct,[a1x,a2x,a3x]);
-    guide=['Comprovacio: '+b4+'x'+q+'+'+(r)+' = '+a4];
-    solution=[a4+'/'+b4,'Cocient: '+q+', Residu: '+r];
+
+    guide=[
+      'Busca quantes vegades cap el divisor dins del dividend',
+      'Si no és una divisió exacta, indica també el residu',
+      'Comprova que el residu sigui menor que el divisor'
+    ];
+
+    solution=[
+      a4+'/'+b4,
+      'Cocient: '+q+', Residu: '+r
+    ];
+
   } else if(type===5){
-    diff=2;isProblem=true;
-    var preu=rnd(5,30),quant=rnd(4,20),total=preu*quant,pagat=Math.ceil(total/10)*10+(rnd(0,3)*10),canvi=pagat-total;
-    question='<span class="pt">La Maria compra <b>'+quant+'</b> quaderns a <b>'+preu+' euros</b>. Paga <b>'+pagat+' euros</b>. Quant de canvi rep?</span>';
+    diff=2;
+    isProblem=true;
+
+    var preu=rnd(5,30),quant=rnd(4,20),total=preu*quant,
+        pagat=Math.ceil(total/10)*10+(rnd(0,3)*10),
+        canvi=pagat-total;
+
+    question='<span class="pt">La Maria compra <b>'+quant+
+      '</b> quaderns a <b>'+preu+' euros</b>. Paga <b>'+pagat+
+      ' euros</b>. Quant de canvi rep?</span>';
+
     correct=String(canvi)+' euros';
-    opts=buildOpts(correct,wrongNums(canvi,3,0).map(function(v){return v+' euros';}));
-    guide=['Total: '+quant+'x'+preu+'='+total,'Canvi: '+pagat+'-'+total+'='+canvi];
-    solution=['Cost: '+total+' euros','Canvi: '+pagat+'-'+total+'='+canvi];
+
+    opts=buildOpts(correct,
+      wrongNums(canvi,3,0).map(function(v){
+        return v+' euros';
+      })
+    );
+
+    guide=[
+      'Primer calcula quant costen tots els quaderns',
+      'Després resta el cost total dels diners que ha pagat'
+    ];
+
+    solution=[
+      'Cost: '+total+' euros',
+      'Canvi: '+pagat+'-'+total+'='+canvi
+    ];
+
   } else {
-    diff=3;isProblem=true;
-    var dies=rnd(5,30),torn=rnd(2,4),perTorn=rnd(100,500),tot3=dies*torn*perTorn;
-    question='<span class="pt">Una fabrica treballa <b>'+dies+'</b> dies, <b>'+torn+'</b> torns/dia, <b>'+perTorn+'</b> unitats/torn. Total?</span>';
+    diff=3;
+    isProblem=true;
+
+    var dies=rnd(5,30),torn=rnd(2,4),perTorn=rnd(100,500),
+        tot3=dies*torn*perTorn;
+
+    question='<span class="pt">Una fabrica treballa <b>'+dies+
+      '</b> dies, <b>'+torn+
+      '</b> torns/dia, <b>'+perTorn+
+      '</b> unitats/torn. Total?</span>';
+
     correct=String(tot3)+' unitats';
-    opts=buildOpts(correct,wrongNums(tot3,3,1).map(function(v){return v+' unitats';}));
-    guide=['Per dia: '+torn+'x'+perTorn+'='+(torn*perTorn),'Total: '+(torn*perTorn)+'x'+dies+'='+tot3];
-    solution=['u/dia: '+(torn*perTorn),'Total: '+(torn*perTorn)+'x'+dies+'='+tot3];
+
+    opts=buildOpts(correct,
+      wrongNums(tot3,3,1).map(function(v){
+        return v+' unitats';
+      })
+    );
+
+    guide=[
+      'Primer calcula quantes unitats es fabriquen en un dia',
+      'Per saber-ho, multiplica els torns que hi ha cada dia per les unitats de cada torn',
+      'Després multiplica les unitats d’un dia pel nombre de dies'
+    ];
+
+    solution=[
+      'u/dia: '+(torn*perTorn),
+      'Total: '+(torn*perTorn)+'x'+dies+'='+tot3
+    ];
   }
-  return{question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+
+  return{
+    question:question,
+    correct:correct,
+    options:buildOpts(correct,opts.filter(function(o){
+      return o!==correct;
+    })),
+    guide:guide,
+    solution:solution,
+    isProblem:isProblem,
+    diff:diff
+  };
 }
 
 // ── GEN JERARQUIA ──────────────────────────────────────────────────────────
 function genJerarquia(){
   var type=rnd(1,7),question,correct,opts,guide,solution,isProblem=false,diff=1;
+
   if(type===1){
-    diff=1;var a=rnd(1,10),b=rnd(2,9),c=rnd(2,9),res=a+b*c;
+    diff=1;
+    var a=rnd(1,10),b=rnd(2,9),c=rnd(2,9),res=a+b*c;
     question='Calcula respectant la jerarquia:<br><span class="fc">'+a+' + '+b+' x '+c+'</span>';
-    correct=String(res);opts=buildOpts(correct,[String((a+b)*c)].concat(wrongNums(res,2).map(String)));
-    guide=['Primer la multiplicació: '+b+'x'+c+'='+(b*c),'Despres la suma: '+a+'+'+(b*c)+'='+res];
-    solution=['Pas 1: '+b+'x'+c+'='+(b*c),'Pas 2: '+a+'+'+(b*c)+'='+res];
+    correct=String(res);
+    opts=buildOpts(correct,[String((a+b)*c)].concat(wrongNums(res,2).map(String)));
+
+    guide=[
+      'Primer fes la multiplicació',
+      'Despres fes la suma'
+    ];
+
+    solution=[
+      'Pas 1: '+b+'x'+c+'='+(b*c),
+      'Pas 2: '+a+'+'+(b*c)+'='+res
+    ];
+
   } else if(type===2){
-    diff=1;var a2=rnd(2,10),b2=rnd(2,9),c2=rnd(2,10),d2=rnd(2,9),res2=a2*b2+c2*d2;
+    diff=1;
+    var a2=rnd(2,10),b2=rnd(2,9),c2=rnd(2,10),d2=rnd(2,9),res2=a2*b2+c2*d2;
     question='Calcula:<br><span class="fc">'+a2+' x '+b2+' + '+c2+' x '+d2+'</span>';
-    correct=String(res2);opts=buildOpts(correct,[String((a2*b2+c2)*d2),String(a2*(b2+c2)*d2)].concat(wrongNums(res2,1).map(String)));
-    guide=['Primer TOTES les multiplicacions',''+a2+'x'+b2+'='+(a2*b2)+' i '+c2+'x'+d2+'='+(c2*d2),'Suma: '+(a2*b2)+'+'+(c2*d2)+'='+res2];
-    solution=['Pas 1: '+a2+'x'+b2+'='+(a2*b2),'Pas 2: '+c2+'x'+d2+'='+(c2*d2),'Pas 3: '+(a2*b2)+'+'+(c2*d2)+'='+res2];
+    correct=String(res2);
+    opts=buildOpts(correct,[String((a2*b2+c2)*d2),String(a2*(b2+c2)*d2)].concat(wrongNums(res2,1).map(String)));
+
+    guide=[
+      'Primer resol les dues multiplicacions',
+      'Despres suma els dos resultats'
+    ];
+
+    solution=[
+      'Pas 1: '+a2+'x'+b2+'='+(a2*b2),
+      'Pas 2: '+c2+'x'+d2+'='+(c2*d2),
+      'Pas 3: '+(a2*b2)+'+'+(c2*d2)+'='+res2
+    ];
+
   } else if(type===3){
-    diff=2;var a3=rnd(2,8),b3=rnd(2,6),c3=rnd(1,10),res3=a3+b3*b3-c3;
-    while(res3<=0){c3=1;res3=a3+b3*b3-c3;}
+    diff=2;
+    var a3=rnd(2,8),b3=rnd(2,6),c3=rnd(1,10),res3=a3+b3*b3-c3;
+    while(res3<=0){
+      c3=1;
+      res3=a3+b3*b3-c3;
+    }
+
     question='Calcula:<br><span class="fc">'+a3+' + '+b3+'\u00b2 - '+c3+'</span>';
-    correct=String(res3);opts=buildOpts(correct,[String((a3+b3)*b3-c3),String(a3+b3*b3+c3)].concat(wrongNums(res3,1).map(String)));
-    guide=['Primer la potencia: '+b3+'\u00b2='+(b3*b3),'Ara: '+a3+'+'+(b3*b3)+'-'+c3+'='+res3];
-    solution=['Potencia: '+b3+'\u00b2='+(b3*b3),'Resultat: '+a3+'+'+(b3*b3)+'-'+c3+'='+res3];
+    correct=String(res3);
+    opts=buildOpts(correct,[String((a3+b3)*b3-c3),String(a3+b3*b3+c3)].concat(wrongNums(res3,1).map(String)));
+
+    guide=[
+      'Primer fes la potencia',
+      'Despres fes la suma i la resta d esquerra a dreta'
+    ];
+
+    solution=[
+      'Potencia: '+b3+'\u00b2='+(b3*b3),
+      'Resultat: '+a3+'+'+(b3*b3)+'-'+c3+'='+res3
+    ];
+
   } else if(type===4){
-    diff=2;var a4=rnd(2,6),b4=rnd(2,5),c4=rnd(2,5),d4=rnd(1,5),inner=b4+c4,res4=a4*inner-d4;
+    diff=2;
+    var a4=rnd(2,6),b4=rnd(2,5),c4=rnd(2,5),d4=rnd(1,5),inner=b4+c4,res4=a4*inner-d4;
     question='Calcula:<br><span class="fc">'+a4+' x ('+b4+' + '+c4+') - '+d4+'</span>';
-    correct=String(res4);opts=buildOpts(correct,[String(a4*b4+c4-d4),String(a4*b4+a4*c4+d4)].concat(wrongNums(res4,1).map(String)));
-    guide=['Primer el parentesi: '+b4+'+'+c4+'='+inner,'Multiplica: '+a4+'x'+inner+'='+(a4*inner),'Resta: '+(a4*inner)+'-'+d4+'='+res4];
-    solution=['Parentesi: '+b4+'+'+c4+'='+inner,'x: '+a4+'x'+inner+'='+(a4*inner),'-: '+(a4*inner)+'-'+d4+'='+res4];
+    correct=String(res4);
+    opts=buildOpts(correct,[String(a4*b4+c4-d4),String(a4*b4+a4*c4+d4)].concat(wrongNums(res4,1).map(String)));
+
+    guide=[
+      'Primer resol el parentesi',
+      'Despres fes la multiplicacio',
+      'Finalment fes la resta'
+    ];
+
+    solution=[
+      'Parentesi: '+b4+'+'+c4+'='+inner,
+      'x: '+a4+'x'+inner+'='+(a4*inner),
+      '-: '+(a4*inner)+'-'+d4+'='+res4
+    ];
+
   } else if(type===5){
-    diff=2;var a5=rnd(2,5),b5=rnd(2,4),c5=rnd(2,5),d5=rnd(2,4),res5=(a5+b5)*(c5-d5);
-    while(c5<=d5){c5=rnd(3,7);d5=rnd(1,c5-1);res5=(a5+b5)*(c5-d5);}
+    diff=2;
+    var a5=rnd(2,5),b5=rnd(2,4),c5=rnd(2,5),d5=rnd(2,4),res5=(a5+b5)*(c5-d5);
+
+    while(c5<=d5){
+      c5=rnd(3,7);
+      d5=rnd(1,c5-1);
+      res5=(a5+b5)*(c5-d5);
+    }
+
     question='Calcula:<br><span class="fc">('+a5+' + '+b5+') x ('+c5+' - '+d5+')</span>';
-    correct=String(res5);opts=buildOpts(correct,[String(a5*c5+b5*d5),String(a5+b5+c5-d5)].concat(wrongNums(res5,1).map(String)));
-    guide=['Primer cada parentesi per separat','('+a5+'+'+b5+') = '+(a5+b5)+' i ('+c5+'-'+d5+') = '+(c5-d5),'Multiplica: '+(a5+b5)+'x'+(c5-d5)+'='+res5];
-    solution=['P1: '+a5+'+'+b5+'='+(a5+b5),'P2: '+c5+'-'+d5+'='+(c5-d5),'x: '+(a5+b5)+'x'+(c5-d5)+'='+res5];
+    correct=String(res5);
+    opts=buildOpts(correct,[String(a5*c5+b5*d5),String(a5+b5+c5-d5)].concat(wrongNums(res5,1).map(String)));
+
+    guide=[
+      'Primer resol els dos parentesis per separat',
+      'Despres multiplica els dos resultats'
+    ];
+
+    solution=[
+      'P1: '+a5+'+'+b5+'='+(a5+b5),
+      'P2: '+c5+'-'+d5+'='+(c5-d5),
+      'x: '+(a5+b5)+'x'+(c5-d5)+'='+res5
+    ];
+
   } else if(type===6){
-    diff=3;var a6=rnd(2,5),b6=rnd(2,4),c6=rnd(2,5),d6=rnd(2,4),e6=rnd(1,8),res6=a6*b6*b6-(c6+d6)+e6;
+    diff=3;
+    var a6=rnd(2,5),b6=rnd(2,4),c6=rnd(2,5),d6=rnd(2,4),e6=rnd(1,8),res6=a6*b6*b6-(c6+d6)+e6;
     question='Calcula:<br><span class="fc">'+a6+' x '+b6+'\u00b2 - ('+c6+' + '+d6+') + '+e6+'</span>';
-    correct=String(res6);opts=buildOpts(correct,[String(a6*b6*b6-c6+d6+e6),String((a6*b6)*b6-c6-d6+e6)].concat(wrongNums(res6,1).map(String)));
-    guide=['1r: potencia '+b6+'\u00b2='+(b6*b6),'2n: parentesi '+c6+'+'+d6+'='+(c6+d6),'3r: '+a6+'x'+(b6*b6)+'='+(a6*b6*b6),'4t: '+(a6*b6*b6)+'-'+(c6+d6)+'+'+e6+'='+res6];
-    solution=['Potencia='+(b6*b6),'Parentesi='+(c6+d6),'x='+(a6*b6*b6),'Final='+res6];
+    correct=String(res6);
+    opts=buildOpts(correct,[String(a6*b6*b6-c6+d6+e6),String((a6*b6)*b6-c6-d6+e6)].concat(wrongNums(res6,1).map(String)));
+
+    guide=[
+      'Primer fes la potencia',
+      'Despres resol el parentesi',
+      'Ara fes la multiplicacio',
+      'Finalment resol les sumes i restes d esquerra a dreta'
+    ];
+
+    solution=[
+      'Potencia='+(b6*b6),
+      'Parentesi='+(c6+d6),
+      'x='+(a6*b6*b6),
+      'Final='+res6
+    ];
+
   } else {
-    diff=3;isProblem=true;
+    diff=3;
+    isProblem=true;
+
     var pU=rnd(3,15),q1=rnd(2,8),q2=rnd(2,8),desc=rnd(1,5),tot4=pU*(q1+q2)-desc;
+
     question='<span class="pt">Una samarreta val <b>'+pU+' €</b>. La Laia en compra <b>'+q1+'</b> i el seu germa <b>'+q2+'</b>. Descompte de <b>'+desc+' €</b>. Total?</span>';
-    correct=String(tot4)+' euros';opts=buildOpts(correct,wrongNums(tot4,3,1).map(function(v){return v+' euros';}));
-    guide=['Samarretes: '+q1+'+'+q2+'='+(q1+q2),'Cost: '+pU+'x'+(q1+q2)+'='+(pU*(q1+q2)),'Descompte: '+(pU*(q1+q2))+'-'+desc+'='+tot4];
-    solution=['Quantitat: '+(q1+q2),'Cost: '+(pU*(q1+q2)),'Descompte: '+tot4];
+    correct=String(tot4)+' euros';
+    opts=buildOpts(correct,wrongNums(tot4,3,1).map(function(v){
+      return v+' euros';
+    }));
+
+    guide=[
+      'Primer calcula quantes samarretes compren en total',
+      'Despres calcula el cost de totes les samarretes',
+      'Finalment aplica el descompte'
+    ];
+
+    solution=[
+      'Quantitat: '+(q1+q2),
+      'Cost: '+(pU*(q1+q2)),
+      'Descompte: '+tot4
+    ];
   }
-  return{question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+
+  return{
+    question:question,
+    correct:correct,
+    options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),
+    guide:guide,
+    solution:solution,
+    isProblem:isProblem,
+    diff:diff
+  };
 }
+
 
 // ── GEN DIVISIBILITAT ──────────────────────────────────────────────────────
 function genDivisibilitat(){
   var type=rnd(1,7),question,correct,opts,guide,solution,isProblem=false,diff=1;
+
   if(type===1){
-    diff=1;var bases=[2,3,5,10],crit={2:'acaba en 0,2,4,6,8',3:'suma de xifres divisible per 3',5:'acaba en 0 o 5',10:'acaba en 0'};
-    var base=bases[rnd(0,3)],mult=rnd(5,30)*base,wrongs=[],t=0;
-    while(wrongs.length<3&&t<500){t++;var vv=rnd(base*2,base*35);if(vv%base!==0&&vv!==mult&&wrongs.indexOf(vv)<0)wrongs.push(vv);}
-    question='Quin nombre es divisible per <b>'+base+'</b>?';correct=String(mult);
+    diff=1;
+    var bases=[2,3,5,10],
+        crit={
+          2:'acaba en 0, 2, 4, 6 o 8',
+          3:'la suma de les xifres és divisible per 3',
+          5:'acaba en 0 o 5',
+          10:'acaba en 0'
+        };
+
+    var base=bases[rnd(0,3)],
+        mult=rnd(5,30)*base,
+        wrongs=[],
+        t=0;
+
+    while(wrongs.length<3&&t<500){
+      t++;
+      var vv=rnd(base*2,base*35);
+      if(vv%base!==0&&vv!==mult&&wrongs.indexOf(vv)<0)wrongs.push(vv);
+    }
+
+    question='Quin nombre es divisible per <b>'+base+'</b>?';
+    correct=String(mult);
     opts=buildOpts(correct,wrongs.slice(0,3).map(String));
-    guide=['Criteri del '+base+': '+crit[base]];solution=['Criteri: '+crit[base],mult+' el compleix'];
+
+    // GUIA: indica el criteri, però no comprova cap opció
+    guide=['Aplica el criteri de divisibilitat del '+base];
+
+    solution=['Criteri: '+crit[base],mult+' el compleix'];
+
   } else if(type===2){
     diff=1;
-    var n2=rnd(100,999),divs2=[2,3,5,9,10];
-    var divisors2=divs2.filter(function(d){return n2%d===0;});
-    var non2=divs2.filter(function(d){return n2%d!==0;});
-    if(divisors2.length===0){n2=rnd(3,9)*6;divisors2=[2,3,6].filter(function(d){return n2%d===0;});non2=divs2.filter(function(d){return n2%d!==0;});}
+
+    var n2=rnd(100,999),
+        divs2=[2,3,5,9,10],
+        divisors2=divs2.filter(function(d){return n2%d===0;}),
+        non2=divs2.filter(function(d){return n2%d!==0;});
+
+    if(divisors2.length===0){
+      n2=rnd(3,9)*6;
+      divisors2=[2,3,6].filter(function(d){return n2%d===0;});
+      non2=[2,3,6].filter(function(d){return n2%d!==0;});
+    }
+
     var picked2=divisors2[rnd(0,divisors2.length-1)];
+
     question='Es divisible <span class="fc">'+n2+'</span> per <b>'+picked2+'</b>? Justifica amb el criteri.';
+
     correct='Si, es divisible per '+picked2;
-    var crit2={2:'acaba en xifra parella',3:'suma xifres='+(String(n2).split('').map(Number).reduce(function(a,b){return a+b;},0))+' (div. per 3)',5:'acaba en 0 o 5',9:'suma xifres='+(String(n2).split('').map(Number).reduce(function(a,b){return a+b;},0))+' (div. per 9)',10:'acaba en 0'};
-    opts=buildOpts(correct,['No, no es divisible per '+picked2,'Nomes si el resultat es enter','No es pot saber sense dividir']);
-    guide=['Criteri del '+picked2+': '+crit2[picked2]];
-    solution=['Criteri: '+crit2[picked2],'OK: '+correct];
+
+    opts=buildOpts(correct,[
+      'No, no es divisible per '+picked2,
+      'Nomes si el resultat es enter',
+      'No es pot saber sense dividir'
+    ]);
+
+    // GUIA: només indica què cal comprovar
+    guide=['Recorda el criteri de divisibilitat del '+picked2,
+           'Comprova aquest criteri en el nombre'];
+
+    var crit2={
+      2:'acaba en xifra parella',
+      3:'la suma de les xifres és divisible per 3',
+      5:'acaba en 0 o 5',
+      9:'la suma de les xifres és divisible per 9',
+      10:'acaba en 0'
+    };
+
+    solution=[
+      'Criteri: '+crit2[picked2],
+      'Comprova el criteri amb '+n2,
+      'OK: '+correct
+    ];
+
   } else if(type===3){
-    diff=2;var allP=[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47];
+    diff=2;
+
+    var allP=[2,3,5,7,11,13,17,19,23,29,31,37,41,43,47];
     var p=allP[rnd(0,allP.length-1)];
     var comps=[4,6,8,9,10,12,14,15,16,18,20,21,22,24,25,26,27,28];
-    question='Quin d\'aquests nombres es primer?';correct=String(p);
+
+    question='Quin d\'aquests nombres es primer?';
+    correct=String(p);
     opts=buildOpts(correct,shuffle(comps).slice(0,3).map(String));
-    guide=['Primer: nomes divisible per 1 i ell mateix'];
-    solution=['Comprova divisors de '+p+' fins a sqrt('+p+')='+Math.ceil(Math.sqrt(p)),'Cap: '+p+' es primer'];
+
+    // GUIA: indica la definició/procediment, sense aplicar-lo al nombre
+    guide=['Un nombre primer només té dos divisors: 1 i ell mateix',
+           'Comprova si algun altre nombre el pot dividir exactament'];
+
+    solution=[
+      'Comprova divisors fins a sqrt('+p+')',
+      'Cap altre divisor: '+p+' es primer'
+    ];
+
   } else if(type===4){
-    // ── FACTORITZACIÓ CORREGIDA ──
+
+    // ── FACTORITZACIÓ ──
     diff=2;
-    // Nombres entre 12 i 120, excloent primers, amb factorització clara
-    var candidates=[12,18,20,24,28,30,36,40,42,45,48,50,54,56,60,63,70,72,75,80,84,90,96,100,108,120];
+
+    var candidates=[
+      12,18,20,24,28,30,36,40,42,45,48,50,54,56,60,
+      63,70,72,75,80,84,90,96,100,108,120
+    ];
+
     var n4=candidates[rnd(0,candidates.length-1)];
     correct=factCorrect(n4);
+
     // Generar distractors incorrectes però plausibles
     var wrongOpts=new Set([correct]);
     var distract=[];
+
     // Distractor 1: factorització d'un nombre proper
-    var near=[n4-1,n4+1,n4-2,n4+2].filter(function(x){return x>1;});
+    var near=[n4-1,n4+1,n4-2,n4+2].filter(function(x){
+      return x>1;
+    });
+
     for(var ni=0;ni<near.length&&distract.length<3;ni++){
       var fc=factCorrect(near[ni]);
-      if(!wrongOpts.has(fc)){wrongOpts.add(fc);distract.push(fc);}
+      if(!wrongOpts.has(fc)){
+        wrongOpts.add(fc);
+        distract.push(fc);
+      }
     }
-    // Distractor 2: multiplicar tots els factors sense agrupar
-    var plainFact=[];var tmpP=n4,psP=[2,3,5,7,11,13];
-    for(var pi=0;pi<psP.length;pi++){while(tmpP%psP[pi]===0){plainFact.push(psP[pi]);tmpP/=psP[pi];}}
+
+    // Distractor 2: factors sense agrupar
+    var plainFact=[],
+        tmpP=n4,
+        psP=[2,3,5,7,11,13];
+
+    for(var pi=0;pi<psP.length;pi++){
+      while(tmpP%psP[pi]===0){
+        plainFact.push(psP[pi]);
+        tmpP/=psP[pi];
+      }
+    }
+
     if(tmpP>1)plainFact.push(tmpP);
+
     if(plainFact.length>1){
       var noExp=plainFact.join(' x ');
-      if(!wrongOpts.has(noExp)&&noExp!==correct){wrongOpts.add(noExp);distract.push(noExp);}
+      if(!wrongOpts.has(noExp)&&noExp!==correct){
+        wrongOpts.add(noExp);
+        distract.push(noExp);
+      }
     }
-    // Distractor 3: n4 (ja es primer)
-    var isPrimN4=(function(x){if(x<2)return false;for(var i=2;i<=Math.sqrt(x);i++){if(x%i===0)return false;}return true;})(n4);
+
+    // Distractor 3: nombre indicat com si fos primer
+    var isPrimN4=(function(x){
+      if(x<2)return false;
+      for(var i=2;i<=Math.sqrt(x);i++){
+        if(x%i===0)return false;
+      }
+      return true;
+    })(n4);
+
     if(!isPrimN4){
       var d3str=n4+' (ja es primer)';
-      if(!wrongOpts.has(d3str)){wrongOpts.add(d3str);distract.push(d3str);}
+      if(!wrongOpts.has(d3str)){
+        wrongOpts.add(d3str);
+        distract.push(d3str);
+      }
     }
+
     // Omplir si cal
-    var extra=[factCorrect(n4*2),factCorrect(n4+6),factCorrect(n4-6>1?n4-6:n4+4)];
+    var extra=[
+      factCorrect(n4*2),
+      factCorrect(n4+6),
+      factCorrect(n4-6>1?n4-6:n4+4)
+    ];
+
     for(var ei=0;ei<extra.length&&distract.length<3;ei++){
-      if(!wrongOpts.has(extra[ei])){wrongOpts.add(extra[ei]);distract.push(extra[ei]);}
+      if(!wrongOpts.has(extra[ei])){
+        wrongOpts.add(extra[ei]);
+        distract.push(extra[ei]);
+      }
     }
 
     question='Factoritza <span class="fc">'+n4+'</span> en factors primers';
     opts=buildOpts(correct,distract);
-    guide=['Divideix successivament per 2, 3, 5, 7...','Agrupa els factors iguals com a potencies'];
+
+    // GUIA: només ordre del procediment
+    guide=[
+      'Comença provant els nombres primers més petits',
+      'Divideix successivament mentre la divisió sigui exacta',
+      'Agrupa els factors iguals com a potències'
+    ];
+
     solution=factSteps(n4);
+
   } else if(type===5){
-    diff=1;var base5=rnd(2,9),q5=rnd(2,12);
-    var mult5=base5*q5;
+    diff=1;
+
+    var base5=rnd(2,9),
+        q5=rnd(2,12),
+        mult5=base5*q5;
+
     question='Quin d\'aquests nombres es <b>multiple de '+base5+'</b>?';
     correct=String(mult5);
-    var ws5=[];var tt5=0;while(ws5.length<3&&tt5<300){tt5++;var vv5=rnd(base5+1,base5*15);if(vv5%base5!==0&&ws5.indexOf(vv5)<0)ws5.push(vv5);}
+
+    var ws5=[],
+        tt5=0;
+
+    while(ws5.length<3&&tt5<300){
+      tt5++;
+      var vv5=rnd(base5+1,base5*15);
+      if(vv5%base5!==0&&ws5.indexOf(vv5)<0)ws5.push(vv5);
+    }
+
     opts=buildOpts(correct,ws5.map(String));
-    guide=['Multiple de '+base5+': es pot escriure com '+base5+' x k','Comprova: '+mult5+' / '+base5+' = '+q5];
-    solution=[mult5+' = '+base5+' x '+q5,'OK: multiple de '+base5];
+
+    // GUIA: abans donava directament la divisió amb resultat
+    guide=[
+      'Recorda què significa ser múltiple d’un nombre',
+      'Comprova si es pot escriure com el nombre donat multiplicat per un enter'
+    ];
+
+    solution=[
+      mult5+' = '+base5+' x '+q5,
+      'OK: multiple de '+base5
+    ];
+
   } else if(type===6){
     diff=2;
-    // Tria un nombre compost amb almenys 4 divisors (excloent 1 i ell mateix en tenim ≥2)
-    var compostos=[12,14,15,16,18,20,21,22,24,25,26,27,28,30,32,33,34,35,36,38,39,40,42,44,45,46,48];
+
+    // Tria un nombre compost
+    var compostos=[
+      12,14,15,16,18,20,21,22,24,25,26,27,28,30,
+      32,33,34,35,36,38,39,40,42,44,45,46,48
+    ];
+
     var n6=compostos[rnd(0,compostos.length-1)];
-    var divs6=[];for(var k6=1;k6<=n6;k6++){if(n6%k6===0)divs6.push(k6);}
-    // Cerca un no-divisor que sigui plausible (entre 2 i n6-1)
-    var noDivs6=[];var tt6=0;
-    while(noDivs6.length<1&&tt6<300){tt6++;var vv6=rnd(2,n6-1);if(n6%vv6!==0&&noDivs6.indexOf(vv6)<0)noDivs6.push(vv6);}
-    var noDiv6=noDivs6[0];correct=String(noDiv6);
-    // Les 3 opcions incorrectes han de ser divisors reals (inclosos 1 i n6 si cal)
+
+    var divs6=[];
+    for(var k6=1;k6<=n6;k6++){
+      if(n6%k6===0)divs6.push(k6);
+    }
+
+    // Cerca un no-divisor
+    var noDivs6=[],
+        tt6=0;
+
+    while(noDivs6.length<1&&tt6<300){
+      tt6++;
+      var vv6=rnd(2,n6-1);
+      if(n6%vv6!==0&&noDivs6.indexOf(vv6)<0)noDivs6.push(vv6);
+    }
+
+    var noDiv6=noDivs6[0];
+    correct=String(noDiv6);
+
+    // Les 3 opcions incorrectes són divisors reals
     var divsPerOpts=shuffle(divs6.slice());
-    // Intentem posar divisors no trivials primer
-    var nonTrivial=divsPerOpts.filter(function(d){return d!==1&&d!==n6;});
-    var threeDiv6=nonTrivial.length>=3?shuffle(nonTrivial).slice(0,3):shuffle(divsPerOpts).slice(0,3);
+
+    var nonTrivial=divsPerOpts.filter(function(d){
+      return d!==1&&d!==n6;
+    });
+
+    var threeDiv6=
+      nonTrivial.length>=3
+      ?shuffle(nonTrivial).slice(0,3)
+      :shuffle(divsPerOpts).slice(0,3);
+
     opts=buildOpts(correct,threeDiv6.map(String));
+
     question='Quin d\'aquests nombres <b>NO</b> es divisor de <span class="fc">'+n6+'</span>?';
-    guide=['Divisors de '+n6+': '+divs6.join(', ')];
-    solution=['Divisors: '+divs6.join(', '),noDiv6+' NO es divisor: '+n6+'÷'+noDiv6+' no es exacte'];
+
+    // GUIA: no mostra la llista de divisors, perquè això resol pràcticament l'exercici
+    guide=[
+      'Un divisor ha de dividir el nombre exactament',
+      'Comprova les opcions una per una'
+    ];
+
+    solution=[
+      'Divisors: '+divs6.join(', '),
+      noDiv6+' NO es divisor: '+n6+'÷'+noDiv6+' no es exacte'
+    ];
+
   } else {
-    diff=3;isProblem=true;var total=rnd(20,80),div1=[3,4,5,6][rnd(0,3)],div2=[3,4,5,6][rnd(0,3)];
-    while(div2===div1)div2=[3,4,5,6][rnd(0,3)];
-    var ok1=total%div1===0,ok2=total%div2===0;
+
+    diff=3;
+    isProblem=true;
+
+    var total=rnd(20,80),
+        div1=[3,4,5,6][rnd(0,3)],
+        div2=[3,4,5,6][rnd(0,3)];
+
+    while(div2===div1){
+      div2=[3,4,5,6][rnd(0,3)];
+    }
+
+    var ok1=total%div1===0,
+        ok2=total%div2===0;
+
     question='<span class="pt">Hi ha <b>'+total+' caixes</b>. Es poden repartir en grups de <b>'+div1+'</b> o de <b>'+div2+'</b> (sense que sobri res)?</span>';
-    // Resposta correcta en format clar
+
     var resDiv1=ok1?'Sí ('+div1+')':'No ('+div1+')';
     var resDiv2=ok2?'Sí ('+div2+')':'No ('+div2+')';
+
     correct=resDiv1+' i '+resDiv2;
-    // Distractors sempre lògicament distints de la correcta i entre ells
+
     var d1='Sí ('+div1+') i Sí ('+div2+')';
     var d2='Sí ('+div1+') i No ('+div2+')';
     var d3='No ('+div1+') i Sí ('+div2+')';
     var d4='No ('+div1+') i No ('+div2+')';
 
-    // La correcta serà una de les quatre combinacions.
-    // Les altres tres seran els distractors.
     var distractors=[d1,d2,d3,d4].filter(function(d){
       return d!==correct;
     });
+
     opts=buildOpts(correct,distractors);
-    guide=[total+'/'+div1+': residu '+(total%div1),total+'/'+div2+': residu '+(total%div2)];
-    solution=[total+'/'+div1+' → residu '+(total%div1)+' → '+(ok1?'divisible':'no divisible'),
-              total+'/'+div2+' → residu '+(total%div2)+' → '+(ok2?'divisible':'no divisible'),
-              'Resposta: '+correct];
+
+    // GUIA: indica què cal fer, però NO dona els residus
+    guide=[
+      'Comprova si el nombre es divisible pel primer nombre de grups',
+      'Després comprova si és divisible pel segon',
+      'Sense que sobri res significa que la divisió ha de ser exacta'
+    ];
+
+    solution=[
+      total+'/'+div1+' → residu '+(total%div1)+' → '+(ok1?'divisible':'no divisible'),
+      total+'/'+div2+' → residu '+(total%div2)+' → '+(ok2?'divisible':'no divisible'),
+      'Resposta: '+correct
+    ];
   }
-  return{question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+
+  return{
+    question:question,
+    correct:correct,
+    options:buildOpts(correct,opts.filter(function(o){
+      return o!==correct;
+    })),
+    guide:guide,
+    solution:solution,
+    isProblem:isProblem,
+    diff:diff
+  };
 }
 
 // ── GEN MCM MCD ────────────────────────────────────────────────────────────
@@ -738,260 +1373,1002 @@ function genMcmMcd(){
   var type=rnd(1,5),question,correct,opts,guide,solution,isProblem=false,diff=1;
   var parelles=[[4,6],[6,8],[8,12],[9,12],[6,9],[10,15],[12,18],[15,20],[12,16],[18,24],[20,30],[14,21],[15,25]];
   var tripletes=[[4,6,8],[6,9,12],[4,6,10],[8,12,16],[6,10,15]];
+
   if(type===1){
-    diff=1;var pr=parelles[rnd(0,parelles.length-1)],a=pr[0],b=pr[1],res=gcd(a,b);
-    question='Calcula <span class="fc">MCD('+a+', '+b+')</span>';correct=String(res);
+    diff=1;
+    var pr=parelles[rnd(0,parelles.length-1)],
+        a=pr[0],
+        b=pr[1],
+        res=gcd(a,b);
+
+    question='Calcula <span class="fc">MCD('+a+', '+b+')</span>';
+    correct=String(res);
+
     opts=buildOpts(correct,wrongNums(res,3,1).map(String));
-    guide=['Factoritza: '+a+'='+factStr(a)+' | '+b+'='+factStr(b),'MCD = factors COMUNS exponent MINIM'];
-    solution=[''+a+'='+factStr(a),''+b+'='+factStr(b),'MCD='+res];
+
+    guide=[
+      'Factoritza els dos nombres en factors primers',
+      'Identifica els factors que apareixen en COMÚ',
+      'Per a cada factor comú, tria l\'exponent MENOR',
+      'Multiplica els factors comuns amb exponent menor'
+    ];
+
+    solution=[
+      ''+a+'='+factStr(a),
+      ''+b+'='+factStr(b),
+      'MCD='+res
+    ];
+
   } else if(type===2){
-    diff=1;var pr2=parelles[rnd(0,parelles.length-1)],a2=pr2[0],b2=pr2[1],res2=lcm(a2,b2);
-    question='Calcula <span class="fc">mcm('+a2+', '+b2+')</span>';correct=String(res2);
+    diff=1;
+    var pr2=parelles[rnd(0,parelles.length-1)],
+        a2=pr2[0],
+        b2=pr2[1],
+        res2=lcm(a2,b2);
+
+    question='Calcula <span class="fc">mcm('+a2+', '+b2+')</span>';
+    correct=String(res2);
+
     opts=buildOpts(correct,wrongNums(res2,3,1).map(String));
-    guide=['Factoritza: '+a2+'='+factStr(a2)+' | '+b2+'='+factStr(b2),'mcm = TOTS els factors exponent MAXIM','Comprov: mcm x MCD = '+a2+' x '+b2+' = '+a2*b2];
-    solution=[''+a2+'='+factStr(a2),''+b2+'='+factStr(b2),'mcm='+res2,'Comprov: '+res2+'x'+gcd(a2,b2)+'='+a2*b2];
+
+    guide=[
+      'Factoritza els dos nombres en factors primers',
+      'Reuneix TOTS els factors que apareixen',
+      'Per a cada factor, tria l\'exponent MÀXIM',
+      'Multiplica tots els factors amb el seu exponent màxim',
+      'Comprova el resultat amb mcm × MCD = primer nombre × segon nombre'
+    ];
+
+    solution=[
+      ''+a2+'='+factStr(a2),
+      ''+b2+'='+factStr(b2),
+      'mcm='+res2,
+      'Comprov: '+res2+'x'+gcd(a2,b2)+'='+a2*b2
+    ];
+
   } else if(type===3){
-    diff=2;var tr=tripletes[rnd(0,tripletes.length-1)],a3=tr[0],b3=tr[1],c3=tr[2],res3=lcm(lcm(a3,b3),c3);
-    question='Calcula <span class="fc">mcm('+a3+', '+b3+', '+c3+')</span>';correct=String(res3);
+    diff=2;
+    var tr=tripletes[rnd(0,tripletes.length-1)],
+        a3=tr[0],
+        b3=tr[1],
+        c3=tr[2],
+        res3=lcm(lcm(a3,b3),c3);
+
+    question='Calcula <span class="fc">mcm('+a3+', '+b3+', '+c3+')</span>';
+    correct=String(res3);
+
     opts=buildOpts(correct,wrongNums(res3,3,1).map(String));
-    guide=['mcm('+a3+','+b3+')='+lcm(a3,b3),'mcm('+lcm(a3,b3)+','+c3+')='+res3];
-    solution=['mcm('+a3+','+b3+')='+lcm(a3,b3),'mcm('+lcm(a3,b3)+','+c3+')='+res3];
+
+    guide=[
+      'Calcula primer el mcm dels dos primers nombres',
+      'Utilitza aquest resultat amb el tercer nombre',
+      'Calcula el mcm del resultat anterior i el tercer nombre'
+    ];
+
+    solution=[
+      'mcm('+a3+','+b3+')='+lcm(a3,b3),
+      'mcm('+lcm(a3,b3)+','+c3+')='+res3
+    ];
+
   } else if(type===4){
-    diff=2;isProblem=true;var pr4=parelles[rnd(0,parelles.length-1)],a4=pr4[0],b4=pr4[1],res4=lcm(a4,b4);
-    var ctxs=['Dos llums parpellegen cada <b>'+a4+'</b> i <b>'+b4+' segons</b>. D\'aqui a quants segons tornaran a coincidir?','Dos autobusos passen cada <b>'+a4+'</b> i <b>'+b4+' minuts</b>. Quan tornaran a sortir junts?'];
-    var unit4=rnd(0,1)===0?'segons':'minuts';
-    question='<span class="pt">'+ctxs[rnd(0,1)]+'</span>';correct=String(res4)+' '+unit4;
-    opts=buildOpts(correct,wrongNums(res4,3,1).map(function(v){return v+' '+unit4;}));
-    guide=['Periodicitat repetida -> mcm','mcm('+a4+','+b4+')='+res4];
-    solution=['mcm('+a4+','+b4+')='+res4,'OK '+correct];
+    diff=2;
+    isProblem=true;
+
+    var pr4=parelles[rnd(0,parelles.length-1)],
+        a4=pr4[0],
+        b4=pr4[1],
+        res4=lcm(a4,b4);
+
+    // Triem primer el context i la unitat queda lligada al context.
+    var context4=rnd(0,1);
+
+    var unit4=context4===0?'segons':'minuts';
+
+    if(context4===0){
+      question='<span class="pt">Dos llums parpellegen cada <b>'+a4+'</b> i <b>'+b4+'</b> segons. D\'aqui a quants segons tornaran a coincidir?</span>';
+    }else{
+      question='<span class="pt">Dos autobusos passen cada <b>'+a4+'</b> i <b>'+b4+'</b> minuts. Quan tornaran a sortir junts?</span>';
+    }
+
+    correct=String(res4)+' '+unit4;
+
+    opts=buildOpts(
+      correct,
+      wrongNums(res4,3,1).map(function(v){
+        return v+' '+unit4;
+      })
+    );
+
+    guide=[
+      'Com que busquem quan els dos esdeveniments coincideixen de nou, cal calcular un mcm',
+      'Calcula el mcm dels dos intervals',
+      'Expressa el resultat amb la unitat del problema'
+    ];
+
+    solution=[
+      'mcm('+a4+','+b4+')='+res4,
+      'OK '+correct
+    ];
+
   } else {
-    diff=3;isProblem=true;var pr5=parelles[rnd(0,parelles.length-1)],g5=gcd(pr5[0],pr5[1]),a5=pr5[0]*g5,b5=pr5[1]*g5,res5=gcd(a5,b5);
+    diff=3;
+    isProblem=true;
+
+    var pr5=parelles[rnd(0,parelles.length-1)],
+        g5=gcd(pr5[0],pr5[1]),
+        a5=pr5[0]*g5,
+        b5=pr5[1]*g5,
+        res5=gcd(a5,b5);
+
     question='<span class="pt">Tenim <b>'+a5+' pomes</b> i <b>'+b5+' taronges</b>. Bosses identiques mes grans possible sense que sobri res. Quantes bosses?</span>';
-    correct=String(res5)+' bosses';opts=buildOpts(correct,wrongNums(res5,3,1).map(function(v){return v+' bosses';}));
-    guide=['Repartiment maxim equitatiu -> MCD','MCD('+a5+','+b5+')='+res5];
-    solution=['MCD('+a5+','+b5+')='+res5,'OK '+correct];
+    correct=String(res5)+' bosses';
+
+    opts=buildOpts(
+      correct,
+      wrongNums(res5,3,1).map(function(v){
+        return v+' bosses';
+      })
+    );
+
+    guide=[
+      'Com que volem fer grups iguals i tan grans com sigui possible, cal calcular un MCD',
+      'Calcula el MCD de les dues quantitats',
+      'Expressa el resultat en bosses'
+    ];
+
+    solution=[
+      'MCD('+a5+','+b5+')='+res5,
+      'OK '+correct
+    ];
   }
-  return{question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+
+  return{
+    question:question,
+    correct:correct,
+    options:buildOpts(correct,opts.filter(function(o){
+      return o!==correct;
+    })),
+    guide:guide,
+    solution:solution,
+    isProblem:isProblem,
+    diff:diff
+  };
 }
 
 // ── GEN ENTERS ─────────────────────────────────────────────────────────────
 function genEnters(){
   var type=rnd(1,6),question,correct,opts,guide,solution,isProblem=false,diff=1;
+
   if(type===1){
-    diff=1;var pool=[-20,-15,-10,-8,-5,-3,-1,0,2,4,7,10,12,15];
+    diff=1;
+    var pool=[-20,-15,-10,-8,-5,-3,-1,0,2,4,7,10,12,15];
     var nums=shuffle(pool).slice(0,4);
     var ascending=rnd(0,1)===0;
     var sorted=nums.slice().sort(function(a,b){return ascending?a-b:b-a;});
     var sep=ascending?' < ':' > ';
+
     question='Ordena de '+(ascending?'menor a major':'major a menor')+':<br><span class="fc">'+nums.join('&nbsp;&mdash;&nbsp;')+'</span>';
-    correct=sorted.join(sep);opts=buildOpts(correct,wrongOrders(nums,correct));
-    guide=['Negatius a l\'esquerra, positius a la dreta','Com mes negatiu, mes petit'];
+    correct=sorted.join(sep);
+    opts=buildOpts(correct,wrongOrders(nums,correct));
+
+    guide=[
+      'Negatius a l\'esquerra, positius a la dreta',
+      'Com més negatiu, més petit'
+    ];
+
     solution=['Ordenats: '+correct];
+
   } else if(type===2){
-    diff=1;var a=rndNZ(-15,15),b=rndNZ(-15,15),res=a+b;
-    question='Calcula: <span class="fc">('+a+') + ('+b+')</span>';correct=String(res);
-    opts=buildOpts(correct,[String(Math.abs(a)+Math.abs(b)),String(-res),String(res+1),String(res-1)]);
-    guide=['Mateixos signes: suma i conserva signe','Signes diferents: resta, posa el signe del major'];
+    diff=1;
+    var a=rndNZ(-15,15),b=rndNZ(-15,15),res=a+b;
+
+    question='Calcula: <span class="fc">('+a+') + ('+b+')</span>';
+    correct=String(res);
+    opts=buildOpts(correct,[
+      String(Math.abs(a)+Math.abs(b)),
+      String(-res),
+      String(res+1),
+      String(res-1)
+    ]);
+
+    guide=[
+      'Mateixos signes: suma els valors i conserva el signe',
+      'Signes diferents: resta els valors i posa el signe del nombre de més valor absolut'
+    ];
+
     solution=['('+a+')+('+b+')='+res];
+
   } else if(type===3){
-    diff=2;var a2=rndNZ(-12,12),b2=rndNZ(-12,12),res2=a2-b2;
-    question='Calcula: <span class="fc">('+a2+') - ('+b2+')</span>';correct=String(res2);
-    opts=buildOpts(correct,[String(a2+b2),String(-res2),String(res2+2),String(res2-2)]);
-    guide=['Restar = sumar l\'oposat','('+a2+')-('+b2+') = ('+a2+')+('+(-b2)+')'];
+    diff=2;
+    var a2=rndNZ(-12,12),b2=rndNZ(-12,12),res2=a2-b2;
+
+    question='Calcula: <span class="fc">('+a2+') - ('+b2+')</span>';
+    correct=String(res2);
+    opts=buildOpts(correct,[
+      String(a2+b2),
+      String(-res2),
+      String(res2+2),
+      String(res2-2)
+    ]);
+
+    guide=[
+      'Transforma la resta en una suma',
+      'Canvia el signe del segon nombre i després aplica la regla de la suma d’enters'
+    ];
+
     solution=['Canvia a suma: '+a2+'+('+(-b2)+')='+res2];
+
   } else if(type===4){
-    diff=2;var a3=rndNZ(-8,8),b3=rndNZ(-8,8),res3=a3*b3;
-    question='Calcula: <span class="fc">('+a3+') x ('+b3+')</span>';correct=String(res3);
-    opts=buildOpts(correct,[String(-res3),String(Math.abs(res3)+1),String(Math.abs(res3))]);
-    guide=['Regla signes: (+)x(+)=(+), (-)x(-)=(+), altres=(-)','V.A.: '+Math.abs(a3)+'x'+Math.abs(b3)+'='+Math.abs(res3)];
-    solution=['V.A.='+Math.abs(res3),'Signe='+(res3>=0?'+':'-'),'OK '+res3];
+    diff=2;
+    var a3=rndNZ(-8,8),b3=rndNZ(-8,8),res3=a3*b3;
+
+    question='Calcula: <span class="fc">('+a3+') x ('+b3+')</span>';
+    correct=String(res3);
+    opts=buildOpts(correct,[
+      String(-res3),
+      String(Math.abs(res3)+1),
+      String(Math.abs(res3))
+    ]);
+
+    guide=[
+      'Primer calcula el producte dels valors absoluts',
+      'Després determina el signe segons la regla dels signes',
+      'Aplica el signe al resultat'
+    ];
+
+    solution=[
+      'V.A.='+Math.abs(res3),
+      'Signe='+(res3>=0?'+':'-'),
+      'OK '+res3
+    ];
+
   } else if(type===5){
-    diff=2;isProblem=true;var t1=rnd(-15,5),diff5=rnd(3,20),t2=t1+diff5;
+    diff=2;
+    isProblem=true;
+    var t1=rnd(-15,5),diff5=rnd(3,20),t2=t1+diff5;
+
     question='<span class="pt">La temperatura es <b>'+t1+' graus</b>. Puja <b>'+diff5+' graus</b>. Quina temperatura fa despres?</span>';
-    correct=String(t2)+' graus';opts=buildOpts(correct,[String(t1-diff5)+' graus',String(Math.abs(t1)+diff5)+' graus',String(t2+1)+' graus']);
-    guide=['Pujar = sumar',t1+'+'+diff5+'='+t2];solution=['T final: '+t1+'+'+diff5+'='+t2];
+    correct=String(t2)+' graus';
+    opts=buildOpts(correct,[
+      String(t1-diff5)+' graus',
+      String(Math.abs(t1)+diff5)+' graus',
+      String(t2+1)+' graus'
+    ]);
+
+    guide=[
+      'Una pujada de temperatura indica una suma',
+      'Suma la temperatura inicial i els graus que puja'
+    ];
+
+    solution=['T final: '+t1+'+'+diff5+'='+t2];
+
   } else {
-    diff=3;isProblem=true;var saldo=rnd(-50,200),ing=rnd(10,100),desp=rnd(10,200),final=saldo+ing-desp;
+    diff=3;
+    isProblem=true;
+    var saldo=rnd(-50,200),ing=rnd(10,100),desp=rnd(10,200),final=saldo+ing-desp;
+
     question='<span class="pt">Saldo: <b>'+saldo+' euros</b>. Ingres <b>'+ing+'</b>, retirada <b>'+desp+'</b>. Saldo final?</span>';
-    correct=String(final)+' euros';opts=buildOpts(correct,wrongNums(final,3).map(function(v){return v+' euros';}));
-    guide=['Saldo='+saldo+' Ingres=+'+ing+' Retirada=-'+desp,'Final='+saldo+'+'+ing+'-'+desp+'='+final];
-    solution=[saldo+'+'+ing+'='+(saldo+ing),(saldo+ing)+'-'+desp+'='+final];
+    correct=String(final)+' euros';
+    opts=buildOpts(correct,wrongNums(final,3).map(function(v){
+      return v+' euros';
+    }));
+
+    guide=[
+      'Comença amb el saldo inicial',
+      'Primer suma l’ingrés',
+      'Després resta la retirada',
+      'El resultat d’aquesta última operació és el saldo final'
+    ];
+
+    solution=[
+      saldo+'+'+ing+'='+(saldo+ing),
+      (saldo+ing)+'-'+desp+'='+final
+    ];
   }
-  return{question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+
+  return{
+    question:question,
+    correct:correct,
+    options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),
+    guide:guide,
+    solution:solution,
+    isProblem:isProblem,
+    diff:diff
+  };
 }
 
 // ── GEN DECIMALS ───────────────────────────────────────────────────────────
 function genDecimals(){
   var type=rnd(1,7),question,correct,opts,guide,solution,isProblem=false,diff=1;
+
   if(type===1){
-    diff=1;var a=+(rnd(10,99)/10).toFixed(1),b=+(rnd(10,99)/10).toFixed(1),res=+(a+b).toFixed(1);
-    question='Calcula: <span class="fc">'+a.toFixed(1)+' + '+b.toFixed(1)+'</span>';correct=res.toFixed(1);
-    opts=buildOpts(correct,[(res+0.1).toFixed(1),(res-0.1).toFixed(1),(res+1).toFixed(1),(res+0.2).toFixed(1)]);
-    guide=['Alinia les comes i suma'];solution=[a.toFixed(1)+'+'+b.toFixed(1)+'='+correct];
+    diff=1;
+    var a=+(rnd(10,99)/10).toFixed(1),
+        b=+(rnd(10,99)/10).toFixed(1),
+        res=+(a+b).toFixed(1);
+
+    question='Calcula: <span class="fc">'+a.toFixed(1)+' + '+b.toFixed(1)+'</span>';
+    correct=res.toFixed(1);
+
+    opts=buildOpts(correct,[
+      (res+0.1).toFixed(1),
+      (res-0.1).toFixed(1),
+      (res+1).toFixed(1),
+      (res+0.2).toFixed(1)
+    ]);
+
+    guide=[
+      'Alinia les comes',
+      'Suma les parts corresponents'
+    ];
+
+    solution=[
+      a.toFixed(1)+' + '+b.toFixed(1)+' = '+correct
+    ];
+
   } else if(type===2){
-    diff=2;var a2=+(rnd(11,49)/10).toFixed(1),b2=+(rnd(11,49)/10).toFixed(1),res2=+(a2*b2).toFixed(2);
-    question='Calcula: <span class="fc">'+a2.toFixed(1)+' x '+b2.toFixed(1)+'</span>';correct=res2.toFixed(2);
-    opts=buildOpts(correct,[(res2+0.1).toFixed(2),(res2-0.1).toFixed(2),(res2*10).toFixed(1),(res2/10).toFixed(3)]);
-    guide=['Sense coma: '+Math.round(a2*10)+'x'+Math.round(b2*10)+'='+Math.round(a2*b2*100),'2 decimals: '+correct];
-    solution=['Sense coma: '+Math.round(a2*b2*100),'2 decimals: '+correct];
+    diff=2;
+    var a2=+(rnd(11,49)/10).toFixed(1),
+        b2=+(rnd(11,49)/10).toFixed(1),
+        res2=+(a2*b2).toFixed(2);
+
+    question='Calcula: <span class="fc">'+a2.toFixed(1)+' x '+b2.toFixed(1)+'</span>';
+    correct=res2.toFixed(2);
+
+    opts=buildOpts(correct,[
+      (res2+0.1).toFixed(2),
+      (res2-0.1).toFixed(2),
+      (res2*10).toFixed(1),
+      (res2/10).toFixed(3)
+    ]);
+
+    guide=[
+      'Multiplica primer els nombres sense tenir en compte les comes',
+      'Compta les xifres decimals dels dos factors',
+      'Col·loca la coma al resultat segons el nombre de xifres decimals'
+    ];
+
+    solution=[
+      'Multiplica els factors',
+      'Tingues en compte les xifres decimals',
+      'Resultat: '+correct
+    ];
+
   } else if(type===3){
-    diff=2;var n3=+(rnd(100,9999)/100).toFixed(3),r3=+(Math.round(n3*100)/100).toFixed(2);
-    var mil3=(Math.round(n3*1000)%10);
-    question='Arrodoneix <span class="fc">'+n3.toFixed(3)+'</span> a les centesimes';correct=r3.toFixed(2);
-    opts=buildOpts(correct,[(+(r3+0.01)).toFixed(2),(+(r3-0.01)).toFixed(2),(+(r3+0.1)).toFixed(2),(+(r3-0.1)).toFixed(2)]);
-    guide=['Mira la mil.lesima: '+mil3,(mil3>=5?'>= 5: arrodoneix amunt':'< 5: arrodoneix avall')];
-    solution=['Mil.lesima: '+mil3,'OK '+correct];
+    diff=2;
+
+    // Generem realment un nombre amb 3 decimals
+    var n3=rnd(1000,99999)/1000;
+
+    // Arrodoniment a les centèsimes
+    var r3=Math.round(n3*100)/100;
+
+    question='Arrodoneix <span class="fc">'+n3.toFixed(3)+'</span> a les centèsimes';
+    correct=r3.toFixed(2);
+
+    opts=buildOpts(correct,[
+      (r3+0.01).toFixed(2),
+      (r3-0.01).toFixed(2),
+      (r3+0.1).toFixed(2),
+      (r3-0.1).toFixed(2)
+    ]);
+
+    guide=[
+      'Mira la xifra de les mil·lèsimes',
+      'Decideix si cal arrodonir la xifra de les centèsimes cap amunt o mantenir-la',
+      'Escriu el nombre amb dues xifres decimals'
+    ];
+
+    solution=[
+      'Mira la xifra de les mil·lèsimes',
+      'Aplica la regla d’arrodoniment',
+      'Resultat: '+correct
+    ];
+
   } else if(type===4){
-    diff=2;var fracs=[[1,2],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],[1,8],[3,8],[5,8],[7,8],[1,10],[3,10],[7,10]];
-    var f4=fracs[rnd(0,fracs.length-1)],n4=f4[0],d4=f4[1],dec4=+(n4/d4).toFixed(4);
-    question='Converteix la fraccio <span class="fc">'+n4+'/'+d4+'</span> a decimal';
-    correct=dec4.toFixed(dec4===Math.floor(dec4)?0:4).replace(/0+$/,'').replace(/\.$/,'');
-    if(!correct)correct=String(n4/d4);
-    opts=buildOpts(correct,[String(n4*d4),(n4+d4)+'/10',String(Math.round(dec4*10)/10),String(dec4+0.1)]);
-    guide=['Divideix el numerador pel denominador: '+n4+'/'+d4+'='+correct];
-    solution=[n4+'/'+d4+' = '+n4+' / '+d4+' = '+correct];
+    diff=2;
+    var fracs=[
+      [1,2],[1,4],[3,4],[1,5],[2,5],[3,5],[4,5],
+      [1,8],[3,8],[5,8],[7,8],[1,10],[3,10],[7,10]
+    ];
+
+    var f4=fracs[rnd(0,fracs.length-1)],
+        n4=f4[0],
+        d4=f4[1],
+        dec4=+(n4/d4).toFixed(4);
+
+    question='Converteix la fracció <span class="fc">'+n4+'/'+d4+'</span> a decimal';
+
+    correct=dec4.toFixed(dec4===Math.floor(dec4)?0:4)
+      .replace(/0+$/,'')
+      .replace(/\.$/,'');
+
+    if(!correct) correct=String(n4/d4);
+
+    opts=buildOpts(correct,[
+      String(n4*d4),
+      (n4+d4)+'/10',
+      String(Math.round(dec4*10)/10),
+      String(dec4+0.1)
+    ]);
+
+    guide=[
+      'Divideix el numerador pel denominador',
+      'Escriu el quocient en forma decimal'
+    ];
+
+    solution=[
+      n4+'/'+d4+' = '+correct
+    ];
+
   } else if(type===5){
-    diff=2;var decs=[[0.5,'1/2'],[0.25,'1/4'],[0.75,'3/4'],[0.1,'1/10'],[0.2,'1/5'],[0.4,'2/5'],[0.6,'3/5'],[0.8,'4/5'],[0.125,'1/8'],[0.375,'3/8']];
+    diff=2;
+
+    var decs=[
+      [0.5,'1/2'],
+      [0.25,'1/4'],
+      [0.75,'3/4'],
+      [0.1,'1/10'],
+      [0.2,'1/5'],
+      [0.4,'2/5'],
+      [0.6,'3/5'],
+      [0.8,'4/5'],
+      [0.125,'1/8'],
+      [0.375,'3/8']
+    ];
+
     var d5=decs[rnd(0,decs.length-1)];
-    question='Converteix <span class="fc">'+d5[0]+'</span> a fraccio simplificada';correct=d5[1];
-    var wrongs5=[d5[0]+'1/10',String(Math.round(d5[0]*100))+'/100',String(Math.round(d5[0]*10))+'/10'];
+
+    question='Converteix <span class="fc">'+d5[0]+'</span> a fracció simplificada';
+    correct=d5[1];
+
+    var wrongs5=[
+      d5[0]+'1/10',
+      String(Math.round(d5[0]*100))+'/100',
+      String(Math.round(d5[0]*10))+'/10'
+    ];
+
     opts=buildOpts(correct,wrongs5);
-    guide=['Multiplica per la potencia de 10 adequada i simplifica'];
-    solution=[d5[0]+' = '+correct];
+
+    guide=[
+      'Expressa el decimal com una fracció amb potència de 10 al denominador',
+      'Simplifica la fracció'
+    ];
+
+    solution=[
+      d5[0]+' = '+correct
+    ];
+
   } else if(type===6){
-    diff=2;isProblem=true;
-    var p1=+(rnd(10,50)/10).toFixed(1),p2=+(rnd(10,50)/10).toFixed(1),p3=+(rnd(10,50)/10).toFixed(1);
-    var total6=+(p1+p2+p3).toFixed(1),pagat6=Math.ceil(total6),canvi6=+(pagat6-total6).toFixed(1);
-    question='<span class="pt">Tres productes: <b>'+p1.toFixed(1)+' €</b>, <b>'+p2.toFixed(1)+' €</b> i <b>'+p3.toFixed(1)+' €</b>. Pagues <b>'+pagat6+' €</b>. Canvi?</span>';
+    diff=2;
+    isProblem=true;
+
+    var p1=+(rnd(10,50)/10).toFixed(1),
+        p2=+(rnd(10,50)/10).toFixed(1),
+        p3=+(rnd(10,50)/10).toFixed(1);
+
+    var total6=+(p1+p2+p3).toFixed(1),
+        pagat6=Math.ceil(total6),
+        canvi6=+(pagat6-total6).toFixed(1);
+
+    question='<span class="pt">Tres productes: <b>'+
+      p1.toFixed(1)+' €</b>, <b>'+
+      p2.toFixed(1)+' €</b> i <b>'+
+      p3.toFixed(1)+' €</b>. Pagues <b>'+
+      pagat6+' €</b>. Canvi?</span>';
+
     correct=canvi6.toFixed(1)+' euros';
-    opts=buildOpts(correct,[(canvi6+0.1).toFixed(1)+' euros',(Math.max(0,canvi6-0.1)).toFixed(1)+' euros',(canvi6+1).toFixed(1)+' euros',(canvi6+0.2).toFixed(1)+' euros']);
-    guide=['Suma: '+total6.toFixed(1),'Canvi: '+pagat6+'-'+total6.toFixed(1)+'='+canvi6.toFixed(1)];
-    solution=['Total: '+total6.toFixed(1)+' euros','Canvi: '+canvi6.toFixed(1)+' euros'];
+
+    opts=buildOpts(correct,[
+      (canvi6+0.1).toFixed(1)+' euros',
+      Math.max(0,canvi6-0.1).toFixed(1)+' euros',
+      (canvi6+1).toFixed(1)+' euros',
+      (canvi6+0.2).toFixed(1)+' euros'
+    ]);
+
+    guide=[
+      'Suma els preus dels tres productes',
+      'Resta el total del que has pagat',
+      'Expressa el canvi en euros'
+    ];
+
+    solution=[
+      'Calcula el total dels productes',
+      'Resta el total de l’import pagat',
+      'Canvi: '+canvi6.toFixed(1)+' euros'
+    ];
+
   } else {
-    diff=3;isProblem=true;var vel=+(rnd(5,25)/10).toFixed(1),temps7=rnd(2,10),dist7=+(vel*temps7).toFixed(1);
-    question='<span class="pt">Ciclista a <b>'+vel.toFixed(1)+' km/min</b> durant <b>'+temps7+' min</b>. Distancia?</span>';
+    diff=3;
+    isProblem=true;
+
+    var vel=+(rnd(5,25)/10).toFixed(1),
+        temps7=rnd(2,10),
+        dist7=+(vel*temps7).toFixed(1);
+
+    question='<span class="pt">Ciclista a <b>'+
+      vel.toFixed(1)+' km/min</b> durant <b>'+
+      temps7+' min</b>. Distància?</span>';
+
     correct=dist7.toFixed(1)+' km';
-    opts=buildOpts(correct,[(dist7+0.5).toFixed(1)+' km',(Math.max(0.1,dist7-0.5)).toFixed(1)+' km',(dist7*2).toFixed(1)+' km',(dist7+1).toFixed(1)+' km']);
-    guide=['d = v x t = '+vel.toFixed(1)+'x'+temps7+'='+dist7.toFixed(1)+' km'];
-    solution=['d='+vel.toFixed(1)+'x'+temps7+'='+dist7.toFixed(1)+' km'];
+
+    opts=buildOpts(correct,[
+      (dist7+0.5).toFixed(1)+' km',
+      Math.max(0.1,dist7-0.5).toFixed(1)+' km',
+      (dist7*2).toFixed(1)+' km',
+      (dist7+1).toFixed(1)+' km'
+    ]);
+
+    guide=[
+      'Identifica la velocitat i el temps',
+      'Aplica la fórmula: distància = velocitat × temps',
+      'Expressa el resultat en quilòmetres'
+    ];
+
+    solution=[
+      'd = v × t',
+      'd = '+vel.toFixed(1)+' × '+temps7,
+      'd = '+dist7.toFixed(1)+' km'
+    ];
   }
-  return{question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+
+  return{
+    question:question,
+    correct:correct,
+    options:buildOpts(
+      correct,
+      opts.filter(function(o){return o!==correct;})
+    ),
+    guide:guide,
+    solution:solution,
+    isProblem:isProblem,
+    diff:diff
+  };
 }
 
 // ── GEN FRACCIONS ──────────────────────────────────────────────────────────
 function genFraccions(){
   var type=rnd(1,8),question,correct,opts,guide,solution,isProblem=false,diff=1;
+
   if(type===1){
-    diff=1;var d=rnd(3,9),k=rnd(2,5),n=rnd(1,d-1),sp=simplify(n*k,d*k);
-    question='Simplifica: <span class="fc">'+(n*k)+'/'+(d*k)+'</span>';correct=sp[0]+'/'+sp[1];
-    opts=buildOpts(correct,[(n*k-1)+'/'+(d*k),n+'/'+(d+1),(n+1)+'/'+d,n*k+'/'+d]);
-    guide=['MCD('+(n*k)+','+(d*k)+')='+k,'Divideix num i den per '+k];
+    diff=1;
+    var d=rnd(3,9),k=rnd(2,5),n=rnd(1,d-1),sp=simplify(n*k,d*k);
+
+    question='Simplifica: <span class="fc">'+(n*k)+'/'+(d*k)+'</span>';
+    correct=sp[0]+'/'+sp[1];
+
+    opts=buildOpts(correct,[
+      (n*k-1)+'/'+(d*k),
+      n+'/'+(d+1),
+      (n+1)+'/'+d,
+      n*k+'/'+d
+    ]);
+
+    guide=[
+      'Calcula el MCD del numerador i el denominador',
+      'Divideix el numerador i el denominador pel mateix divisor'
+    ];
+
     solution=['MCD='+k,correct];
+
   } else if(type===2){
-    diff=1;var d2=rnd(4,10),n1=rnd(1,d2-2),n2f=rnd(1,d2-1-n1),rn=n1+n2f,sp2=simplify(rn,d2);
-    correct=rn>=d2?Math.floor(rn/d2)+' i '+(rn%d2)+'/'+d2:sp2[0]+'/'+sp2[1];
+    diff=1;
+    var d2=rnd(4,10),n1=rnd(1,d2-2),n2f=rnd(1,d2-1-n1),rn=n1+n2f,sp2=simplify(rn,d2);
+
+    correct=rn>=d2
+      ? Math.floor(rn/d2)+' i '+(rn%d2)+'/'+d2
+      : sp2[0]+'/'+sp2[1];
+
     question='Calcula: <span class="fc">'+n1+'/'+d2+' + '+n2f+'/'+d2+'</span>';
-    opts=buildOpts(correct,[(n1+n2f)+'/'+(d2*2),(n1*n2f)+'/'+d2,(n1+n2f+1)+'/'+d2,(n1+n2f-1)+'/'+d2]);
-    guide=['Den iguals: suma els numeradors'];solution=[n1+'/'+d2+'+'+n2f+'/'+d2+'='+rn+'/'+d2,'Simplif: '+correct];
+
+    opts=buildOpts(correct,[
+      (n1+n2f)+'/'+(d2*2),
+      (n1*n2f)+'/'+d2,
+      (n1+n2f+1)+'/'+d2,
+      (n1+n2f-1)+'/'+d2
+    ]);
+
+    guide=[
+      'Comprova que els denominadors són iguals',
+      'Suma els numeradors i mantén el mateix denominador',
+      'Simplifica la fracció si és possible'
+    ];
+
+    solution=[
+      n1+'/'+d2+'+'+n2f+'/'+d2+'='+rn+'/'+d2,
+      'Simplif: '+correct
+    ];
+
   } else if(type===3){
-    diff=2;var d3=rnd(2,6),d4f=rnd(2,6);while(d3===d4f)d4f=rnd(2,6);
-    var n3=rnd(1,d3),n4f=rnd(1,d4f),mcd34=lcm(d3,d4f),rn2=n3*(mcd34/d3)+n4f*(mcd34/d4f),sp3=simplify(rn2,mcd34);
+    diff=2;
+    var d3=rnd(2,6),d4f=rnd(2,6);
+    while(d3===d4f)d4f=rnd(2,6);
+
+    var n3=rnd(1,d3),n4f=rnd(1,d4f),
+        mcd34=lcm(d3,d4f),
+        rn2=n3*(mcd34/d3)+n4f*(mcd34/d4f),
+        sp3=simplify(rn2,mcd34);
+
     correct=sp3[0]+'/'+sp3[1];
+
     question='Calcula: <span class="fc">'+n3+'/'+d3+' + '+n4f+'/'+d4f+'</span>';
-    opts=buildOpts(correct,[(n3+n4f)+'/'+(d3+d4f),(n3*n4f)+'/'+(d3*d4f),rn2+'/'+(mcd34+1),(rn2+1)+'/'+mcd34]);
-    guide=['mcm('+d3+','+d4f+')='+mcd34,'Converteix i suma'];
-    solution=['mcm='+mcd34,n3+'/'+d3+'='+(n3*mcd34/d3)+'/'+mcd34,n4f+'/'+d4f+'='+(n4f*mcd34/d4f)+'/'+mcd34,'Suma: '+rn2+'/'+mcd34,'Simplif: '+correct];
+
+    opts=buildOpts(correct,[
+      (n3+n4f)+'/'+(d3+d4f),
+      (n3*n4f)+'/'+(d3*d4f),
+      rn2+'/'+(mcd34+1),
+      (rn2+1)+'/'+mcd34
+    ]);
+
+    guide=[
+      'Calcula el mcm dels denominadors',
+      'Transforma les dues fraccions perquè tinguin el mateix denominador',
+      'Suma els numeradors',
+      'Simplifica el resultat si és possible'
+    ];
+
+    solution=[
+      'mcm='+mcd34,
+      n3+'/'+d3+'='+(n3*mcd34/d3)+'/'+mcd34,
+      n4f+'/'+d4f+'='+(n4f*mcd34/d4f)+'/'+mcd34,
+      'Suma: '+rn2+'/'+mcd34,
+      'Simplif: '+correct
+    ];
+
   } else if(type===4){
-    diff=2;var n5=rnd(1,5),d5=rnd(3,8),n6=rnd(1,5),d6=rnd(3,8),sp4=simplify(n5*n6,d5*d6);
+    diff=2;
+    var n5=rnd(1,5),d5=rnd(3,8),
+        n6=rnd(1,5),d6=rnd(3,8),
+        sp4=simplify(n5*n6,d5*d6);
+
     correct=sp4[0]+'/'+sp4[1];
+
     question='Calcula: <span class="fc">'+n5+'/'+d5+' x '+n6+'/'+d6+'</span>';
-    opts=buildOpts(correct,[(n5+n6)+'/'+(d5+d6),(n5*d6)+'/'+(d5*n6),(n5*n6+1)+'/'+(d5*d6),(n5*n6)+'/'+(d5*d6+1)]);
-    guide=['Multiplica num amb num, den amb den'];
-    solution=[n5+'x'+n6+'='+(n5*n6)+' / '+d5+'x'+d6+'='+(d5*d6),'Simplif: '+correct];
+
+    opts=buildOpts(correct,[
+      (n5+n6)+'/'+(d5+d6),
+      (n5*d6)+'/'+(d5*n6),
+      (n5*n6+1)+'/'+(d5*d6),
+      (n5*n6)+'/'+(d5*d6+1)
+    ]);
+
+    guide=[
+      'Multiplica els numeradors entre ells',
+      'Multiplica els denominadors entre ells',
+      'Simplifica la fracció si és possible'
+    ];
+
+    solution=[
+      n5+'x'+n6+'='+(n5*n6)+' / '+d5+'x'+d6+'='+(d5*d6),
+      'Simplif: '+correct
+    ];
+
   } else if(type===5){
-    diff=2;var n7=rnd(1,5),d7=rnd(3,8),n8=rnd(1,5),d8=rnd(3,8),sp5=simplify(n7*d8,d7*n8);
+    diff=2;
+    var n7=rnd(1,5),d7=rnd(3,8),
+        n8=rnd(1,5),d8=rnd(3,8),
+        sp5=simplify(n7*d8,d7*n8);
+
     correct=sp5[0]+'/'+sp5[1];
+
     question='Calcula: <span class="fc">'+n7+'/'+d7+' / '+n8+'/'+d8+'</span>';
-    opts=buildOpts(correct,[(n7*n8)+'/'+(d7*d8),(n7+n8)+'/'+(d7+d8),(n7*d7)+'/'+(d8*n8),(n7*d8+1)+'/'+(d7*n8)]);
-    guide=['Dividir = multiplicar per la inversa',n7+'/'+d7+' x '+d8+'/'+n8];
-    solution=[n7+'/'+d7+'x'+d8+'/'+n8+'='+(n7*d8)+'/'+(d7*n8),'Simplif: '+correct];
+
+    opts=buildOpts(correct,[
+      (n7*n8)+'/'+(d7*d8),
+      (n7+n8)+'/'+(d7+d8),
+      (n7*d7)+'/'+(d8*n8),
+      (n7*d8+1)+'/'+(d7*n8)
+    ]);
+
+    guide=[
+      'Transforma la divisió en una multiplicació',
+      'Inverteix la segona fracció',
+      'Multiplica numeradors entre ells',
+      'Multiplica denominadors entre ells',
+      'Simplifica el resultat si és possible'
+    ];
+
+    solution=[
+      n7+'/'+d7+'x'+d8+'/'+n8+'='+(n7*d8)+'/'+(d7*n8),
+      'Simplif: '+correct
+    ];
+
   } else if(type===6){
-    diff=2;var d6a=rnd(3,8),d6b=rnd(3,8);while(d6a===d6b)d6b=rnd(3,8);
+    diff=2;
+    var d6a=rnd(3,8),d6b=rnd(3,8);
+    while(d6a===d6b)d6b=rnd(3,8);
+
     var n6a=rnd(1,d6a-1),n6b=rnd(1,d6b-1);
     var cross1=n6a*d6b,cross2=n6b*d6a;
+
     var signeRaw=cross1>cross2?'>':cross1<cross2?'<':'=';
+
     question='Compara les fraccions:<br><span class="fc">'+n6a+'/'+d6a+' ___ '+n6b+'/'+d6b+'</span>';
+
     correct=n6a+'/'+d6a+' '+signeRaw+' '+n6b+'/'+d6b;
-    opts=buildOpts(correct,[n6a+'/'+d6a+' '+(signeRaw==='>'?'<':signeRaw==='<'?'>':'>')+' '+n6b+'/'+d6b,n6a+'/'+d6a+' = '+n6b+'/'+d6b,'No es pot comparar',n6b+'/'+d6b+' '+signeRaw+' '+n6a+'/'+d6a]);
-    guide=['Metode: productes creuats',''+n6a+'x'+d6b+'='+cross1+' vs '+n6b+'x'+d6a+'='+cross2];
-    solution=['Creuats: '+cross1+' vs '+cross2,correct];
+
+    opts=buildOpts(correct,[
+      n6a+'/'+d6a+' '+(signeRaw==='>'?'<':signeRaw==='<'?'>':'>')+' '+n6b+'/'+d6b,
+      n6a+'/'+d6a+' = '+n6b+'/'+d6b,
+      'No es pot comparar',
+      n6b+'/'+d6b+' '+signeRaw+' '+n6a+'/'+d6a
+    ]);
+
+    guide=[
+      'Compara les fraccions mitjançant productes creuats',
+      'Calcula els dos productes creuats',
+      'Compara els dos resultats i tria el signe corresponent'
+    ];
+
+    solution=[
+      'Creuats: '+cross1+' vs '+cross2,
+      correct
+    ];
+
   } else if(type===7){
-    diff=1;var d7a=rnd(2,6),n7a=rnd(1,d7a-1),k7=rnd(2,5);
+    diff=1;
+    var d7a=rnd(2,6),n7a=rnd(1,d7a-1),k7=rnd(2,5);
+
     question='Quina fraccio es equivalent a <span class="fc">'+n7a+'/'+d7a+'</span>?';
+
     correct=(n7a*k7)+'/'+(d7a*k7);
-    var ws7a=[(n7a+1)+'/'+(d7a*k7),(n7a*k7+1)+'/'+(d7a*k7),(n7a*k7)+'/'+(d7a*k7+1)];
+
+    var ws7a=[
+      (n7a+1)+'/'+(d7a*k7),
+      (n7a*k7+1)+'/'+(d7a*k7),
+      (n7a*k7)+'/'+(d7a*k7+1)
+    ];
+
     opts=buildOpts(correct,ws7a);
-    guide=['Multiplica (o divideix) num i den pel MATEIX nombre',''+n7a+'/'+d7a+' x '+k7+'/'+k7+' = '+(n7a*k7)+'/'+(d7a*k7)];
-    solution=[n7a+'/'+d7a+' = '+(n7a*k7)+'/'+(d7a*k7)+' (x'+k7+')','OK '+correct];
+
+    guide=[
+      'Multiplica el numerador i el denominador pel mateix nombre',
+      'Comprova que el valor de la fracció es manté'
+    ];
+
+    solution=[
+      n7a+'/'+d7a+' = '+(n7a*k7)+'/'+(d7a*k7)+' (x'+k7+')',
+      'OK '+correct
+    ];
+
   } else {
-    diff=3;isProblem=true;var d10=rnd(3,6),n10=rnd(1,d10-1),total2=d10*rnd(4,12),vendudes=total2*n10/d10,resta=total2-vendudes;
+    diff=3;
+    isProblem=true;
+
+    var d10=rnd(3,6),
+        n10=rnd(1,d10-1),
+        total2=d10*rnd(4,12),
+        vendudes=total2*n10/d10,
+        resta=total2-vendudes;
+
     question='<span class="pt">Una pizzeria fa <b>'+total2+' pizzes</b>. En ven <b>'+n10+'/'+d10+'</b>. Quantes li queden?</span>';
-    correct=String(resta)+' pizzes';opts=buildOpts(correct,wrongNums(resta,3,0).map(function(v){return v+' pizzes';}));
-    guide=['Venudes: '+n10+'/'+d10+'x'+total2+'='+vendudes,'Queden: '+total2+'-'+vendudes+'='+resta];
-    solution=['Venudes: '+vendudes,'Queden: '+resta];
+
+    correct=String(resta)+' pizzes';
+
+    opts=buildOpts(
+      correct,
+      wrongNums(resta,3,0).map(function(v){
+        return v+' pizzes';
+      })
+    );
+
+    guide=[
+      'Calcula quantes pizzes representa la fracció venuda',
+      'Després resta les pizzes venudes del total',
+      'Expressa la resposta en pizzes'
+    ];
+
+    solution=[
+      'Venudes: '+vendudes,
+      'Queden: '+resta
+    ];
   }
-  return{question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+
+  return{
+    question:question,
+    correct:correct,
+    options:buildOpts(correct,opts.filter(function(o){
+      return o!==correct;
+    })),
+    guide:guide,
+    solution:solution,
+    isProblem:isProblem,
+    diff:diff
+  };
 }
+
 
 // ── GEN PERCENTATGES ───────────────────────────────────────────────────────
 function genPercentatges(){
   var type=rnd(1,7),question,correct,opts,guide,solution,isProblem=false,diff=1;
+
   if(type===1){
-    diff=1;var pcts=[5,10,15,20,25,30,40,50],pct=pcts[rnd(0,pcts.length-1)],base=rnd(4,25)*20,res=base*pct/100;
-    question='Calcula el <span class="fc">'+pct+'%</span> de <span class="fc">'+base+'</span>';correct=String(res);
+    diff=1;
+    var pcts=[5,10,15,20,25,30,40,50],
+        pct=pcts[rnd(0,pcts.length-1)],
+        base=rnd(4,25)*20,
+        res=base*pct/100;
+
+    question='Calcula el <span class="fc">'+pct+'%</span> de <span class="fc">'+base+'</span>';
+    correct=String(res);
     opts=buildOpts(correct,wrongNums(res,3,1).map(String));
-    guide=[pct+'% = '+pct+'/100',''+base+'x'+(pct/100)+'='+res];solution=[pct+'% de '+base+'='+res];
+
+    // Només indica el procediment, sense calcular.
+    guide=[
+      'Escriu el percentatge com una fracció sobre 100.',
+      'Multiplica la quantitat pel percentatge expressat com a fracció.'
+    ];
+    solution=[pct+'% de '+base+'='+res];
+
   } else if(type===2){
-    diff=1;var pcts2=[10,20,25,50,75,15,30],pct2=pcts2[rnd(0,pcts2.length-1)],total2=rnd(5,20)*20,part2=total2*pct2/100;
-    question='Quin percentatge representa <span class="fc">'+part2+'</span> de <span class="fc">'+total2+'</span>?';correct=pct2+'%';
-    opts=buildOpts(correct,[(pct2+10)+'%',(pct2+5)+'%',Math.max(pct2-10,5)+'%',(100-pct2)+'%']);
-    guide=['%=(part/total)x100','('+part2+'/'+total2+')x100='+pct2+'%'];solution=['('+part2+'/'+total2+')x100='+pct2+'%'];
+    diff=1;
+    var pcts2=[10,20,25,50,75,15,30],
+        pct2=pcts2[rnd(0,pcts2.length-1)],
+        total2=rnd(5,20)*20,
+        part2=total2*pct2/100;
+
+    question='Quin percentatge representa <span class="fc">'+part2+'</span> de <span class="fc">'+total2+'</span>?';
+    correct=pct2+'%';
+    opts=buildOpts(correct,[
+      (pct2+10)+'%',
+      (pct2+5)+'%',
+      Math.max(pct2-10,5)+'%',
+      (100-pct2)+'%'
+    ]);
+
+    guide=[
+      'Divideix la part entre el total.',
+      'Multiplica el resultat per 100.'
+    ];
+    solution=['('+part2+'/'+total2+')x100='+pct2+'%'];
+
   } else if(type===3){
-    diff=2;var pcts3=[10,20,25,50],pct3=pcts3[rnd(0,3)],part3=rnd(2,15)*pct3,total3=part3/(pct3/100);
-    question='Si <span class="fc">'+part3+'</span> es el <span class="fc">'+pct3+'%</span>, quin es el total?';correct=String(total3);
+    diff=2;
+    var pcts3=[10,20,25,50],
+        pct3=pcts3[rnd(0,3)],
+        part3=rnd(2,15)*pct3,
+        total3=part3/(pct3/100);
+
+    question='Si <span class="fc">'+part3+'</span> es el <span class="fc">'+pct3+'%</span>, quin es el total?';
+    correct=String(total3);
     opts=buildOpts(correct,wrongNums(total3,3,1).map(String));
-    guide=['total = part / (pct/100)','= '+part3+'/'+(pct3/100)+'='+total3];solution=['total='+total3];
+
+    guide=[
+      'Expressa el percentatge com un decimal.',
+      'Divideix la part entre el percentatge expressat com a decimal.'
+    ];
+    solution=['total='+total3];
+
   } else if(type===4){
-    diff=2;isProblem=true;var base4=rnd(5,30)*20,pct4=[5,10,15,20,25,30][rnd(0,5)],aug4=base4*pct4/100,total4=base4+aug4;
-    question='<span class="pt">Una bicicleta valia <b>'+base4+' €</b> i ha pujat un <b>'+pct4+'%</b>. Nou preu?</span>';correct=String(total4)+' euros';
-    opts=buildOpts(correct,wrongNums(total4,3,1).map(function(v){return v+' euros';}));
-    guide=['Augment='+base4+'x'+pct4+'%='+aug4,'Nou preu='+base4+'+'+aug4+'='+total4];solution=['Augment: '+aug4,'Nou preu: '+total4];
+    diff=2;
+    isProblem=true;
+
+    var base4=rnd(5,30)*20,
+        pct4=[5,10,15,20,25,30][rnd(0,5)],
+        aug4=base4*pct4/100,
+        total4=base4+aug4;
+
+    question='<span class="pt">Una bicicleta valia <b>'+base4+' €</b> i ha pujat un <b>'+pct4+'%</b>. Nou preu?</span>';
+    correct=String(total4)+' euros';
+    opts=buildOpts(correct,wrongNums(total4,3,1).map(function(v){
+      return v+' euros';
+    }));
+
+    guide=[
+      'Calcula primer l\'augment aplicant el percentatge al preu inicial.',
+      'Suma l\'augment al preu inicial.'
+    ];
+    solution=['Augment: '+aug4,'Nou preu: '+total4];
+
   } else if(type===5){
-    diff=2;isProblem=true;var base5=rnd(5,30)*20,pct5=[10,15,20,25,30,40,50][rnd(0,6)],disc=base5*pct5/100,total5=base5-disc;
-    question='<span class="pt">Un ordinador costa <b>'+base5+' €</b> amb descompte del <b>'+pct5+'%</b>. Preu final?</span>';correct=String(total5)+' euros';
-    opts=buildOpts(correct,wrongNums(total5,3,1).map(function(v){return v+' euros';}));
-    guide=['Descompte='+base5+'x'+pct5+'%='+disc,'Preu final='+base5+'-'+disc+'='+total5];solution=['Descompte: '+disc,'Preu: '+total5];
+    diff=2;
+    isProblem=true;
+
+    var base5=rnd(5,30)*20,
+        pct5=[10,15,20,25,30,40,50][rnd(0,6)],
+        disc=base5*pct5/100,
+        total5=base5-disc;
+
+    question='<span class="pt">Un ordinador costa <b>'+base5+' €</b> amb descompte del <b>'+pct5+'%</b>. Preu final?</span>';
+    correct=String(total5)+' euros';
+    opts=buildOpts(correct,wrongNums(total5,3,1).map(function(v){
+      return v+' euros';
+    }));
+
+    guide=[
+      'Calcula primer l\'import del descompte aplicant el percentatge al preu inicial.',
+      'Resta el descompte al preu inicial.'
+    ];
+    solution=['Descompte: '+disc,'Preu: '+total5];
+
   } else if(type===6){
-    diff=2;var pctFracs=[[10,'1/10',0.1],[20,'1/5',0.2],[25,'1/4',0.25],[50,'1/2',0.5],[75,'3/4',0.75],[40,'2/5',0.4]];
+    diff=2;
+
+    var pctFracs=[
+      [10,'1/10',0.1],
+      [20,'1/5',0.2],
+      [25,'1/4',0.25],
+      [50,'1/2',0.5],
+      [75,'3/4',0.75],
+      [40,'2/5',0.4]
+    ];
+
     var pf=pctFracs[rnd(0,pctFracs.length-1)];
     var askType=rnd(0,1);
+
     if(askType===0){
-      question='Quin percentatge correspon a la fraccio <span class="fc">'+pf[1]+'</span>?';correct=pf[0]+'%';
-      opts=buildOpts(correct,[(pf[0]+10)+'%',(pf[0]+5)+'%',Math.max(pf[0]-10,5)+'%',(100-pf[0])+'%']);
-      guide=['Divideix i multiplica per 100: '+pf[1]+' = '+pf[2]+' -> '+pf[0]+'%'];
+      question='Quin percentatge correspon a la fraccio <span class="fc">'+pf[1]+'</span>?';
+      correct=pf[0]+'%';
+
+      opts=buildOpts(correct,[
+        (pf[0]+10)+'%',
+        (pf[0]+5)+'%',
+        Math.max(pf[0]-10,5)+'%',
+        (100-pf[0])+'%'
+      ]);
+
+      guide=[
+        'Converteix la fracció en un nombre decimal.',
+        'Multiplica el nombre decimal per 100.'
+      ];
+
     } else {
-      question='Quin decimal correspon a <span class="fc">'+pf[0]+'%</span>?';correct=String(pf[2]);
-      opts=buildOpts(correct,[String(pf[2]*10),String(pf[2]/10),String(pf[0]),String(1-pf[2])]);
-      guide=[pf[0]+'% = '+pf[0]+'/100 = '+pf[2]];
+      question='Quin decimal correspon a <span class="fc">'+pf[0]+'%</span>?';
+      correct=String(pf[2]);
+
+      opts=buildOpts(correct,[
+        String(pf[2]*10),
+        String(pf[2]/10),
+        String(pf[0]),
+        String(1-pf[2])
+      ]);
+
+      guide=[
+        'Escriu el percentatge com una fracció sobre 100.',
+        'Converteix la fracció en un nombre decimal.'
+      ];
     }
-    solution=[pf[0]+'% = '+pf[1]+' = '+pf[2],'OK '+correct];guide=guide||[];
+
+    solution=[
+      pf[0]+'% = '+pf[1]+' = '+pf[2],
+      'OK '+correct
+    ];
+    guide=guide||[];
+
   } else {
-    diff=3;isProblem=true;var pcts4=[10,20,25,50],pct6=pcts4[rnd(0,3)],total6=rnd(5,20)*pct6,part6=total6*pct6/100;
+    diff=3;
+    isProblem=true;
+
+    var pcts4=[10,20,25,50],
+        pct6=pcts4[rnd(0,3)],
+        total6=rnd(5,20)*pct6,
+        part6=total6*pct6/100;
+
     question='<span class="pt"><b>'+part6+' persones</b> (el <b>'+pct6+'%</b>) diuen que els agrada l\'esport. Quantes van respondre l\'enquesta?</span>';
-    correct=String(total6)+' persones';opts=buildOpts(correct,wrongNums(total6,3,1).map(function(v){return v+' persones';}));
-    guide=['total = part / (pct/100)','= '+part6+'/'+(pct6/100)+'='+total6];solution=['total='+total6];
+    correct=String(total6)+' persones';
+
+    opts=buildOpts(correct,wrongNums(total6,3,1).map(function(v){
+      return v+' persones';
+    }));
+
+    guide=[
+      'Expressa el percentatge com un nombre decimal.',
+      'Divideix la part entre el percentatge expressat com a decimal.'
+    ];
+    solution=['total='+total6];
   }
-  return{question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide||[],solution:solution,isProblem:isProblem,diff:diff};
+
+  return{
+    question:question,
+    correct:correct,
+    options:buildOpts(correct,opts.filter(function(o){
+      return o!==correct;
+    })),
+    guide:guide||[],
+    solution:solution,
+    isProblem:isProblem,
+    diff:diff
+  };
 }
 
 // ── TOPICS ─────────────────────────────────────────────────────────────────
@@ -1364,7 +2741,7 @@ function nextEQ(){
 
 // ── TEST AUTOMATIC ─────────────────────────────────────────────────────────
 function runAutoTest(){
-  var REPS=200,results=[];
+  var REPS=10000,results=[];
   TOPICS.forEach(function(t){
     var bugs=[];
     for(var i=0;i<REPS;i++){

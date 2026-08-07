@@ -10,7 +10,7 @@ content="Practica el sentit de la mesura de 1r d'ESO amb exercicis interactius s
 <meta name="author" content="Salvador Rigual Valls">
 <meta name="robots" content="index, follow">
 <link rel="canonical"
-href="https://srigual-png.github.io/mates-primer-ESO/sentit-mesura.html">
+href="https://srigual-png.github.io/mates-primer-ESO/2 - sentit mesura.html">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -248,95 +248,464 @@ function fmtNum(n){
   return String(Math.round(n*10000)/10000).replace('.',',');
 }
 
-// Genera 3 distractors numèrics garantits (no iguals entre ells ni a correct)
+// ── DISTRACTORS ────────────────────────────────────────────────────────────
+// Genera 3 distractors numèrics pedagògics.
+// Criteris:
+// - No iguals entre ells ni a la correcta
+// - Evita 0 com a distractor
+// - Evita notació científica
+// - Prioritza errors propers i plausibles
+// - Evita que una única xifra final permeti identificar la correcta
+// - Respecta customWrong quan són vàlids
 function distractors(correctVal, unit, customWrong=[]){
+  const correctStr=`${fmtNum(correctVal)} ${unit}`;
   const set=new Set();
+
+  // ── Afegeix un candidat si és vàlid ─────────────────────────────────────
+  function add(v){
+    if(!Number.isFinite(v) || v<=0) return false;
+
+    // Arrodoniment per evitar errors de coma flotant
+    v=Math.round(v*100000)/100000;
+
+    if(v===correctVal) return false;
+
+    const s=`${fmtNum(v)} ${unit}`;
+
+    if(s===correctStr || set.has(s)) return false;
+
+    set.add(s);
+    return true;
+  }
+
+  // ── 1. Primer: errors personalitzats ───────────────────────────────────
+  // Només els acceptem si són realment diferents.
   for(const w of customWrong){
-    const s=typeof w==='string'?w:`${fmtNum(w)} ${unit}`;
-    if(s!==`${fmtNum(correctVal)} ${unit}`) set.add(s);
-    if(set.size>=3) break;
-  }
-  const mults=[2,0.5,10,0.1,5,0.2,3,4,0.25,100,0.01];
-  for(const m of mults){
-    const v=Math.round(correctVal*m*10000)/10000;
-    if(v>0&&v!==correctVal){
-      const s=`${fmtNum(v)} ${unit}`;
-      if(!set.has(s)) set.add(s);
+    let v;
+
+    if(typeof w==='number'){
+      v=w;
+    }else{
+      const parsed=parseFloat(String(w).replace(',','.'));
+      if(Number.isFinite(parsed)) v=parsed;
     }
+
+    if(v!==undefined) add(v);
+
     if(set.size>=3) break;
   }
-  const deltas=[1,2,3,5,10,20,50,100,0.5,-1,-2,-3,-5];
-  for(const d of deltas){
-    const v=Math.round((correctVal+d)*10000)/10000;
-    if(v>0&&v!==correctVal){
-      const s=`${fmtNum(v)} ${unit}`;
-      if(!set.has(s)) set.add(s);
+
+  // ── 2. Errors de magnitud / posició de la coma ──────────────────────────
+  // Són més pedagògics que multiplicacions arbitràries.
+  const candidates=[];
+
+  if(correctVal>=100){
+    candidates.push(
+      correctVal-10,
+      correctVal+10,
+      correctVal-100,
+      correctVal+100
+    );
+  }else if(correctVal>=10){
+    candidates.push(
+      correctVal-1,
+      correctVal+1,
+      correctVal-10,
+      correctVal+10
+    );
+  }else if(correctVal>=1){
+    candidates.push(
+      correctVal-0.1,
+      correctVal+0.1,
+      correctVal-1,
+      correctVal+1
+    );
+  }else{
+    candidates.push(
+      correctVal*10,
+      correctVal/10,
+      correctVal*100,
+      correctVal/100
+    );
+  }
+
+  // Afegim els candidats més propers primer.
+  for(const v of candidates){
+    add(v);
+    if(set.size>=3) break;
+  }
+
+  // ── 3. Si encara falten distractors, fem variacions controlades ─────────
+  if(set.size<3){
+    const fallback=[
+      correctVal*2,
+      correctVal*0.5,
+      correctVal*3,
+      correctVal*0.25,
+      correctVal*4,
+      correctVal*0.2
+    ];
+
+    for(const v of fallback){
+      add(v);
+      if(set.size>=3) break;
     }
+  }
+
+  // ── 4. Evitem que l'última xifra identifiqui una única opció ────────────
+  // Si tenim 4 opcions i només una acaba amb una determinada xifra,
+  // intentem substituir algun distractor per un altre amb una terminació
+  // ja present.
+  let arr=[...set];
+
+  function lastDigit(str){
+    const clean=str
+      .split(' ')[0]
+      .replace(',','')
+      .replace('.','')
+      .replace('-','');
+
+    const digits=clean.match(/\d/g);
+    return digits ? digits[digits.length-1] : null;
+  }
+
+  const all=[correctStr,...arr];
+  const counts={};
+
+  for(const s of all){
+    const d=lastDigit(s);
+    if(d!==null) counts[d]=(counts[d]||0)+1;
+  }
+
+  // Si la correcta és l'única amb la seva última xifra,
+  // intentem crear un distractor amb la mateixa terminació.
+  const correctLast=lastDigit(correctStr);
+
+  if(counts[correctLast]===1){
+    const base=[
+      correctVal+1,
+      correctVal+10,
+      correctVal+100,
+      correctVal*10+correctVal%10
+    ];
+
+    for(const v of base){
+      if(v>0){
+        const s=`${fmtNum(v)} ${unit}`;
+
+        if(
+          lastDigit(s)===correctLast &&
+          s!==correctStr &&
+          !set.has(s)
+        ){
+          // Substituïm el distractor menys útil
+          if(arr.length>=3){
+            arr[arr.length-1]=s;
+          }else{
+            arr.push(s);
+          }
+          break;
+        }
+      }
+    }
+  }
+
+  // ── 5. Garantim 3 distractors ──────────────────────────────────────────
+  let n=1;
+
+  while(arr.length<3){
+    let v=correctVal+n;
+
+    if(v===correctVal) v+=1;
+
+    const s=`${fmtNum(v)} ${unit}`;
+
+    if(v>0 && s!==correctStr && !arr.includes(s)){
+      arr.push(s);
+    }
+
+    n++;
+  }
+
+  const result=shuffle([
+    correctStr,
+    ...arr.slice(0,3)
+  ]);
+
+  return result;
+}
+
+
+// ── DISTRACTORS ESPECÍFICS DEL SISTEMA MÈTRIC ─────────────────────────────
+function metricDistractors(correctVal,unit,stepFactor,steps){
+
+  // Format específic per evitar notació científica.
+  function formatMetric(n){
+    if(n===0) return '0';
+
+    if(Math.abs(n)<0.001){
+      return String(Number(n.toFixed(12))).replace('.',',');
+    }
+
+    return fmtNum(n);
+  }
+
+  const correctStr=`${formatMetric(correctVal)} ${unit}`;
+  const set=new Set();
+
+  function add(v){
+    if(!Number.isFinite(v) || v<=0) return false;
+
+    v=Math.round(v*1000000000000)/1000000000000;
+
+    if(v===correctVal) return false;
+
+    const s=`${formatMetric(v)} ${unit}`;
+
+    if(s===correctStr || set.has(s)) return false;
+
+    set.add(s);
+    return true;
+  }
+
+  // ── DISTRACTORS BASATS EN EL DESPLAÇAMENT DE LA COMA ───────────────────
+  //
+  // La idea és mantenir les mateixes xifres significatives
+  // i variar només el nombre de posicions desplaçades.
+  //
+  // Exemple:
+  // 4 cm → km = 0,00004 km
+  // distractors → 0,0004 | 0,004 | 0,04
+  //
+  // Exemple:
+  // 3 mg → g = 0,003 g
+  // distractors → 0,03 | 0,3 | 3
+  //
+  const shifts=[
+    -1,
+    1,
+    2,
+    -2,
+    3,
+    -3
+  ];
+
+  for(const shift of shifts){
+
+    const v=correctVal*Math.pow(10,shift);
+
+    add(v);
+
     if(set.size>=3) break;
   }
-  const correct=`${fmtNum(correctVal)} ${unit}`;
-  const arr=shuffle([correct,...[...set].slice(0,3)]);
-  return arr.length<4?[...arr,...Array(4-arr.length).fill(`${correctVal+999} ${unit}`)]:arr.slice(0,4);
+
+  // ── FALLBACK ────────────────────────────────────────────────────────────
+  // Només per garantir 3 distractors en casos molt particulars.
+  if(set.size<3){
+
+    const fallback=[
+      correctVal*Math.pow(stepFactor,-1),
+      correctVal*stepFactor,
+      correctVal*Math.pow(stepFactor,2),
+      correctVal*Math.pow(stepFactor,-2)
+    ];
+
+    for(const v of fallback){
+      add(v);
+
+      if(set.size>=3) break;
+    }
+  }
+
+  // ── GARANTIA FINAL ─────────────────────────────────────────────────────
+  let shift=4;
+
+  while(set.size<3 && shift<10){
+
+    add(correctVal*Math.pow(10,shift));
+    add(correctVal*Math.pow(10,-shift));
+
+    shift++;
+  }
+
+  return shuffle([
+    correctStr,
+    ...[...set].slice(0,3)
+  ]);
 }
 
 // ── GENERADORS ────────────────────────────────
 
-// 1. SISTEMA MÈTRIC DECIMAL
 function genMetric(){
   const type=rnd(1,3);
+
+  // ── PISTES DEL NIVELL GUIAT ─────────────────────────────────────────────
+  // Indiquen el procediment, però NO donen:
+  // - factors numèrics
+  // - resultats intermedis
+  // - resposta final
+ function metricGuide(fr,to,units,stepFactor){
+   const i1=units.indexOf(fr);
+   const i2=units.indexOf(to);
+   const steps=Math.abs(i2-i1);
+   const direction=i2>i1?'dreta':'esquerra';
+   const operation=i2>i1?'multiplica':'divideix';
+
+   return [
+     `Ordena les unitats: ${units.join(' → ')}`,
+     `De ${fr} a ${to}: fes ${steps} salt${steps===1?'':'s'} cap a la ${direction}`,
+     `A cada salt, ${operation} per ${stepFactor}`,
+     `Aplica aquests salts al nombre inicial`
+   ];
+ }
+
+  // ── FORMAT ESPECÍFIC PER A MESURES ──────────────────────────────────────
+  // Evita notacions com 1e-8 i conserva decimals petits.
+  function fmtMetric(n){
+    if(n===0) return '0';
+
+    if(Math.abs(n)<0.001){
+      return String(Number(n.toFixed(10))).replace('.',',');
+    }
+
+    return fmtNum(n);
+  }
+
+  // ── LONGITUD ─────────────────────────────────────────────────────────────
   if(type===1){
-    // Longitud — parelles netes
+    const units=['km','hm','dam','m','dm','cm','mm'];
+
+    // Màxim 2 salts.
+    // Evitem conversions extremes com cm → km o mm → km.
     const pairs=[
-      [{n:'km',f:1000},{n:'m',f:1}],  [{n:'m',f:1},{n:'km',f:1000}],
-      [{n:'m',f:1},{n:'cm',f:0.01}],  [{n:'cm',f:0.01},{n:'m',f:1}],
-      [{n:'cm',f:0.01},{n:'mm',f:0.001}],[{n:'mm',f:0.001},{n:'cm',f:0.01}],
-      [{n:'m',f:1},{n:'dm',f:0.1}],   [{n:'dm',f:0.1},{n:'m',f:1}],
-      [{n:'m',f:1},{n:'mm',f:0.001}], [{n:'mm',f:0.001},{n:'m',f:1}],
-      [{n:'km',f:1000},{n:'cm',f:0.01}],[{n:'dam',f:10},{n:'m',f:1}],
+      ['km','hm'],['hm','km'],
+      ['hm','dam'],['dam','hm'],
+      ['dam','m'],['m','dam'],
+      ['m','dm'],['dm','m'],
+      ['dm','cm'],['cm','dm'],
+      ['cm','mm'],['mm','cm'],
+
+      ['km','dam'],['dam','km'],
+      ['hm','m'],['m','hm'],
+      ['dam','dm'],['dm','dam'],
+      ['m','cm'],['cm','m'],
+      ['dm','mm'],['mm','dm']
     ];
+
     const [fr,to]=pairs[rnd(0,pairs.length-1)];
+
     const val=rnd(1,20);
-    const res=Math.round(val*(fr.f/to.f)*100000)/100000;
-    const q=`Converteix ${val} ${fr.n} a ${to.n}`;
-    const c=`${fmtNum(res)} ${to.n}`;
-    const ratio=fr.f/to.f;
-    const guide=[`Taula: cada pas cap a la dreta ÷10`,`De ${fr.n} a ${to.n}: factor = ${fmtNum(ratio)}`,`${val} × ${fmtNum(ratio)} = ${fmtNum(res)}`];
-    const sol=[...guide,`✅ ${val} ${fr.n} = ${c}`];
-    return {question:q,correct:c,options:distractors(res,to.n,[res*10,res/10,res*100]),guide,solution:sol,difficulty:'easy'};
-  }
-  if(type===2){
-    // Massa
-    const pairs=[
-      [{n:'kg',f:1},{n:'g',f:0.001}],  [{n:'g',f:0.001},{n:'kg',f:1}],
-      [{n:'t',f:1000},{n:'kg',f:1}],   [{n:'kg',f:1},{n:'t',f:1000}],
-      [{n:'g',f:0.001},{n:'mg',f:1e-6}],[{n:'mg',f:1e-6},{n:'g',f:0.001}],
-      [{n:'t',f:1000},{n:'g',f:0.001}],
+
+    const i1=units.indexOf(fr);
+    const i2=units.indexOf(to);
+    const ratio=Math.pow(10,i2-i1);
+    const res=val*ratio;
+
+    const q=`Converteix ${val} ${fr} a ${to}`;
+    const c=`${fmtMetric(res)} ${to}`;
+
+    const guide=metricGuide(fr,to,units,10);
+
+    const sol=[
+      ...guide,
+      `Calcula la conversió`,
+      `✅ ${val} ${fr} = ${c}`
     ];
-    const [fr,to]=pairs[rnd(0,pairs.length-1)];
-    const val=rnd(1,15);
-    const res=val*(fr.f/to.f);
-    const q=`Converteix ${val} ${fr.n} a ${to.n}`;
-    const c=`${fmtNum(res)} ${to.n}`;
-    const ratio=fr.f/to.f;
-    const guide=[`1 t = 1000 kg | 1 kg = 1000 g | 1 g = 1000 mg`,`Factor de ${fr.n} a ${to.n}: ${fmtNum(ratio)}`,`${val} × ${fmtNum(ratio)} = ${fmtNum(res)}`];
-    return {question:q,correct:c,options:distractors(res,to.n,[res*10,res/10,res*1000]),guide,solution:[...guide,`✅ ${c}`],difficulty:'easy'};
+
+    return {
+      question:q,
+      correct:c,
+      options:metricDistractors(res,to,10,Math.abs(i2-i1)),
+      guide,
+      solution:sol,
+      difficulty:'easy'
+    };
   }
-  // Capacitat
+
+  // ── MASSA ────────────────────────────────────────────────────────────────
+  if(type===2){
+    const units=['t','kg','g','mg'];
+
+    // NOMÉS unitats consecutives.
+    // Evitem mg → kg, g → t, mg → t, etc.
+    // Així no apareixen resultats com 0,000002 kg o 1e-8 t.
+    const pairs=[
+      ['t','kg'],['kg','t'],
+      ['kg','g'],['g','kg'],
+      ['g','mg'],['mg','g']
+    ];
+
+    const [fr,to]=pairs[rnd(0,pairs.length-1)];
+
+    const val=rnd(1,15);
+
+    const i1=units.indexOf(fr);
+    const i2=units.indexOf(to);
+    const ratio=Math.pow(1000,i2-i1);
+    const res=val*ratio;
+
+    const q=`Converteix ${val} ${fr} a ${to}`;
+    const c=`${fmtMetric(res)} ${to}`;
+
+    const guide=metricGuide(fr,to,units,1000);
+
+    const sol=[
+      ...guide,
+      `Calcula la conversió`,
+      `✅ ${val} ${fr} = ${c}`
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:metricDistractors(res,to,1000,Math.abs(i2-i1)),
+      guide,
+      solution:sol,
+      difficulty:'easy'
+    };
+  }
+
+  // ── CAPACITAT ────────────────────────────────────────────────────────────
+  const units=['l','dl','cl','ml'];
+
+  // Unitats consecutives i conversions de màxim 2 salts.
   const pairs=[
-    [{n:'l',f:1},{n:'dl',f:0.1}],[{n:'dl',f:0.1},{n:'l',f:1}],
-    [{n:'l',f:1},{n:'cl',f:0.01}],[{n:'cl',f:0.01},{n:'l',f:1}],
-    [{n:'l',f:1},{n:'ml',f:0.001}],[{n:'ml',f:0.001},{n:'l',f:1}],
-    [{n:'cl',f:0.01},{n:'ml',f:0.001}],[{n:'ml',f:0.001},{n:'cl',f:0.01}],
-    [{n:'l',f:1},{n:'cl',f:0.01}],
+    ['l','dl'],['dl','l'],
+    ['dl','cl'],['cl','dl'],
+    ['cl','ml'],['ml','cl'],
+
+    ['l','cl'],['cl','l'],
+    ['dl','ml'],['ml','dl']
   ];
+
   const [fr,to]=pairs[rnd(0,pairs.length-1)];
+
   const val=rnd(2,20);
-  const res=val*(fr.f/to.f);
-  const q=`Converteix ${val} ${fr.n} a ${to.n}`;
-  const c=`${fmtNum(res)} ${to.n}`;
-  const ratio=fr.f/to.f;
-  const guide=[`1 l = 10 dl = 100 cl = 1000 ml`,`Factor de ${fr.n} a ${to.n}: ${fmtNum(ratio)}`,`${val} × ${fmtNum(ratio)} = ${fmtNum(res)}`];
-  return {question:q,correct:c,options:distractors(res,to.n,[res*2,res/2,res*10]),guide,solution:[...guide,`✅ ${c}`],difficulty:'easy'};
+
+  const i1=units.indexOf(fr);
+  const i2=units.indexOf(to);
+  const ratio=Math.pow(10,i2-i1);
+  const res=val*ratio;
+
+  const q=`Converteix ${val} ${fr} a ${to}`;
+  const c=`${fmtMetric(res)} ${to}`;
+
+  const guide=metricGuide(fr,to,units,10);
+
+  const sol=[
+    ...guide,
+    `Calcula la conversió`,
+    `✅ ${val} ${fr} = ${c}`
+  ];
+
+  return {
+    question:q,
+    correct:c,
+    options:metricDistractors(res,to,10,Math.abs(i2-i1)),
+    guide,
+    solution:sol,
+    difficulty:'easy'
+  };
 }
 
 // 2. CONVERSIONS D'UNITATS (inclou àrees i problemes mixtos)
@@ -409,6 +778,8 @@ function genConversions(){
 // 3. MESURA DEL TEMPS (inclou sexagesimal i operacions)
 function genTemps(){
   const type=rnd(1,5);
+
+    // ── 1. CONVERSIONS ──────────────────────────────────────────────────────
   if(type===1){
     const convs=[
       {fr:'hores',to:'minuts',f:60,val:rnd(2,12)},
@@ -416,325 +787,1318 @@ function genTemps(){
       {fr:'dies',to:'hores',f:24,val:rnd(2,7)},
       {fr:'setmanes',to:'dies',f:7,val:rnd(2,4)},
       {fr:'anys',to:'mesos',f:12,val:rnd(2,5)},
-      {fr:'hores',to:'segons',f:3600,val:rnd(1,4)},
+      {fr:'hores',to:'segons',f:3600,val:rnd(1,4)}
     ];
+
     const c=convs[rnd(0,convs.length-1)];
     const res=c.val*c.f;
+
     const q=`Converteix ${c.val} ${c.fr} a ${c.to}`;
     const corr=`${res} ${c.to}`;
-    const guide=[`1 ${c.fr.slice(0,-1)||c.fr} = ${c.f} ${c.to}`,`${c.val} × ${c.f} = ${res}`];
-    return {question:q,correct:corr,options:distractors(res,c.to,[res+c.f,res-c.f,res*2]),guide,solution:[...guide,`✅ ${corr}`],difficulty:'easy'};
+
+    const candidates=[];
+
+    const addCandidate=(n)=>{
+      if(n>0 && n!==res){
+        const s=`${n} ${c.to}`;
+        if(!candidates.includes(s)){
+          candidates.push(s);
+        }
+      }
+    };
+
+    // ── Errors plausibles segons el factor de conversió ──────────────────
+
+    if(c.f===60){
+      // Confondre multiplicació amb una operació senzilla
+      addCandidate(c.val);
+      addCandidate(res-60);
+      addCandidate(res+60);
+      addCandidate(c.val*30);
+      addCandidate(c.val*120);
+
+    }else if(c.f===24){
+      // Dies → hores
+      // Errors típics: usar 12, 60 o oblidar la conversió
+      addCandidate(c.val);
+      addCandidate(c.val*12);
+      addCandidate(c.val*60);
+      addCandidate(res-24);
+      addCandidate(res+24);
+      addCandidate(c.val*48);
+
+    }else if(c.f===7){
+      // Setmanes → dies
+      addCandidate(c.val);
+      addCandidate(c.val*5);
+      addCandidate(c.val*6);
+      addCandidate(c.val*8);
+      addCandidate(res-7);
+      addCandidate(res+7);
+
+    }else if(c.f===12){
+      // Anys → mesos
+      addCandidate(c.val);
+      addCandidate(c.val*10);
+      addCandidate(c.val*11);
+      addCandidate(c.val*24);
+      addCandidate(res-12);
+      addCandidate(res+12);
+
+    }else if(c.f===3600){
+      // Hores → segons
+      addCandidate(c.val);
+      addCandidate(c.val*60);
+      addCandidate(c.val*600);
+      addCandidate(c.val*360);
+      addCandidate(res-3600);
+      addCandidate(res+3600);
+    }
+
+    // ── Garantia absoluta de 3 distractors diferents ─────────────────────
+    // Si per algun cas encara en falten, generem alternatives numèriques
+    // vàlides que no coincideixin amb la resposta correcta.
+    let increment=1;
+
+    while(candidates.length<3){
+      addCandidate(res+increment);
+      addCandidate(res-increment);
+      increment++;
+    }
+
+    const opts=shuffle([
+      corr,
+      ...candidates.slice(0,3)
+    ]);
+
+    const guide=[
+      `Identifica el factor de conversió entre ${c.fr} i ${c.to}`,
+      `Com que passes a una unitat més petita, multiplica`,
+      `Multiplica la quantitat pel factor de conversió`
+    ];
+
+    return {
+      question:q,
+      correct:corr,
+      options:opts,
+      guide,
+      solution:[...guide,`✅ ${corr}`],
+      difficulty:'easy'
+    };
   }
+
+    // ── 2. SUMA DE TEMPS ────────────────────────────────────────────────────
   if(type===2){
-    // Suma de temps (hora d'acabar)
-    const h1=rnd(8,11),m1=rnd(0,3)*15;
-    const durH=rnd(0,2),durM=[15,30,45][rnd(0,2)];
-    let h2=h1+durH,m2=m1+durM;
-    if(m2>=60){m2-=60;h2++;}
+    const h1=rnd(8,11);
+    const m1=rnd(0,3)*15;
+    const durH=rnd(0,2);
+    const durM=[15,30,45][rnd(0,2)];
+
+    let h2=h1+durH;
+    let m2=m1+durM;
+
+    if(m2>=60){
+      m2-=60;
+      h2++;
+    }
+
     const durStr=(durH>0?durH+'h ':'')+durM+'min';
+
     const q=`Una classe comença a les ${h1}:${m1<10?'0'+m1:m1} h i dura ${durStr}. A quina hora acaba?`;
     const corr=`${h2}:${m2<10?'0'+m2:m2} h`;
-    const cands=[`${h2+1}:${m2<10?'0'+m2:m2} h`,`${h2-1}:${m2<10?'0'+m2:m2} h`,`${h2}:${((m2+15)%60)<10?'0'+((m2+15)%60):(m2+15)%60} h`,`${h2+1}:${((m2+30)%60)<10?'0'+((m2+30)%60):(m2+30)%60} h`].filter(o=>o!==corr);
-    const opts=shuffle([corr,...[...new Set(cands)].slice(0,3)]);
-    const guide=['Suma els minuts primer (pot passar de 60)','Si min ≥ 60: min − 60 i hora + 1','Suma les hores'];
-    return {question:q,correct:corr,options:opts.slice(0,4),guide,solution:[...guide,`✅ Acaba a les ${corr}`],difficulty:'medium'};
+
+    // Generem molts candidats i després ens quedem amb 3
+    // distractors diferents del correcte.
+    const candidates=[];
+
+    const addTime=(h,m)=>{
+      // Normalitza minuts perquè 10:75 no aparegui com a opció.
+      while(m>=60){
+        m-=60;
+        h++;
+      }
+      while(m<0){
+        m+=60;
+        h--;
+      }
+
+      if(h>=0 && h<24){
+        const s=`${h}:${m<10?'0'+m:m} h`;
+        if(s!==corr && !candidates.includes(s)){
+          candidates.push(s);
+        }
+      }
+    };
+
+    // Errors plausibles:
+    // 1. Oblidar els minuts de la durada.
+    addTime(h2,m1);
+
+    // 2. Afegir una hora de més.
+    addTime(h2+1,m2);
+
+    // 3. Afegir una hora de menys.
+    addTime(h2-1,m2);
+
+    // 4. Sumar només una part dels minuts.
+    addTime(h2,m1+15);
+
+    // 5. Sumar 30 minuts de més.
+    addTime(h2,m2+30);
+
+    // 6. Oblidar una part de les hores.
+    addTime(h2-1,m1);
+
+    // 7. Afegir 15 minuts.
+    addTime(h2,m2+15);
+
+    // 8. Afegir 30 minuts.
+    addTime(h2,m2+30);
+
+    const opts=shuffle([
+      corr,
+      ...candidates.slice(0,3)
+    ]);
+
+    const guide=[
+      `Suma els minuts de l'hora inicial i de la durada`,
+      `Si els minuts arriben a 60 o més, transforma 60 minuts en 1 hora`,
+      `Suma les hores i incorpora l'hora obtinguda dels minuts`
+    ];
+
+    return {
+      question:q,
+      correct:corr,
+      options:opts,
+      guide,
+      solution:[...guide,`✅ Acaba a les ${corr}`],
+      difficulty:'medium'
+    };
   }
+
+
+  // ── 3. DURADA ENTRE DUES HORES ──────────────────────────────────────────
   if(type===3){
-    // Durada entre hores
-    const hI=rnd(8,12),mI=[0,15,30][rnd(0,2)];
-    const hF=hI+rnd(1,3),mF=[0,15,30,45][rnd(0,3)];
-    let dur=(hF-hI)*60+(mF-mI);
-    if(dur<=0) dur+=60;
-    const dH=Math.floor(dur/60),dM=dur%60;
+    const hI=rnd(8,12);
+    const mI=[0,15,30,45][rnd(0,3)];
+    const hF=hI+rnd(1,3);
+    const mF=[0,15,30,45][rnd(0,3)];
+
+    const dur=(hF-hI)*60+(mF-mI);
+
+    const dH=Math.floor(dur/60);
+    const dM=dur%60;
+
     const q=`Quant de temps passa entre les ${hI}:${mI<10?'0'+mI:mI} h i les ${hF}:${mF<10?'0'+mF:mF} h?`;
-    const corr=dH>0?(dM>0?`${dH} h ${dM} min`:`${dH} h`):`${dM} min`;
-    const cands=[dH>0?`${dH+1} h`:`${dur+15} min`,dH>0&&dM>0?`${dH} h`:`${dur+30} min`,`${dH+1} h ${dM} min`,dH>0?`${dH-1} h ${dM+30>59?dM:dM+30} min`:`${dur-15>0?dur-15:dur+45} min`].filter(o=>o!==corr&&o!==`${dur} min`);
-    const opts=shuffle([corr,...[...new Set(cands)].slice(0,3)]);
-    const guide=['Resta les hores: hores finals − hores inicials','Resta els minuts: minuts finals − minuts inicials','Combina hores i minuts'];
-    return {question:q,correct:corr,options:opts.slice(0,4),guide,solution:[...guide,`✅ Durada = ${corr}`],difficulty:'medium'};
+
+    const corr=dH>0
+      ?(dM>0?`${dH} h ${dM} min`:`${dH} h`)
+      :`${dM} min`;
+
+    const candidates=[];
+
+    const addDuration=(minutes)=>{
+      if(minutes<=0) return;
+
+      const h=Math.floor(minutes/60);
+      const m=minutes%60;
+
+      const s=h>0
+        ?(m>0?`${h} h ${m} min`:`${h} h`)
+        :`${m} min`;
+
+      if(s!==corr && !candidates.includes(s)){
+        candidates.push(s);
+      }
+    };
+
+    // Errors plausibles:
+    // 1. Oblidar els minuts.
+    if(dH>0){
+      addDuration(dH*60);
+    }
+
+    // 2. Afegir 15 minuts.
+    addDuration(dur+15);
+
+    // 3. Restar 15 minuts.
+    addDuration(dur-15);
+
+    // 4. Afegir 30 minuts.
+    addDuration(dur+30);
+
+    // 5. Restar 30 minuts.
+    addDuration(dur-30);
+
+    // 6. Afegir una hora.
+    addDuration(dur+60);
+
+    // 7. Restar una hora.
+    addDuration(dur-60);
+
+    // 8. Error de combinar hores i minuts.
+    if(dH>0){
+      addDuration(dH*60+30);
+      addDuration((dH+1)*60+dM);
+    }
+
+    const opts=shuffle([
+      corr,
+      ...candidates.slice(0,3)
+    ]);
+
+    // Pistes sense donar cap resultat intermedi.
+    const guide=[];
+
+    if(mF>=mI){
+      guide.push('Resta els minuts: minuts finals − minuts inicials');
+      guide.push('Resta les hores: hores finals − hores inicials');
+    }else{
+      guide.push('Com que els minuts finals són menors, transforma 1 hora en 60 minuts');
+      guide.push('Resta els minuts després de fer aquesta transformació');
+      guide.push('Resta les hores tenint en compte l’hora transformada');
+    }
+
+    guide.push('Expressa la durada combinant hores i minuts');
+
+    return {
+      question:q,
+      correct:corr,
+      options:opts,
+      guide,
+      solution:[...guide,`✅ Durada = ${corr}`],
+      difficulty:'medium'
+    };
   }
+
+  // ── 4. SISTEMA SEXAGESIMAL ──────────────────────────────────────────────
   if(type===4){
-    // Sistema sexagesimal — expressió composta (NOU)
     const totalMin=rnd(2,5)*60+[15,20,30,40,45][rnd(0,4)];
-    const h=Math.floor(totalMin/60),m=totalMin%60;
+    const h=Math.floor(totalMin/60);
+    const m=totalMin%60;
+
     const q=`Expressa ${totalMin} minuts en hores i minuts`;
     const corr=`${h} h ${m} min`;
-    const guide=[`Divideix ${totalMin} ÷ 60`,`Quocient = ${h} h (part sencera)`,`Resta: ${totalMin} − ${h*60} = ${m} min`];
-    const cands=[`${h+1} h ${m} min`,`${h} h ${m+10} min`,`${h-1>0?h-1:0} h ${m+30} min`].filter(o=>o!==corr);
-    const opts=shuffle([corr,...cands.slice(0,3)]);
-    return {question:q,correct:corr,options:opts.slice(0,4),guide,solution:[...guide,`✅ ${corr}`],difficulty:'medium'};
+
+    // Errors plausibles:
+    // - una hora de més
+    // - error en els minuts
+    // - no convertir correctament la part restant
+    const wrong=[
+      `${h+1} h ${m} min`,
+      `${h} h ${m+10} min`,
+      `${h-1} h ${m+30} min`
+    ].filter(x=>x!==corr);
+
+    const opts=shuffle([corr,...[...new Set(wrong)].slice(0,3)]);
+
+    const guide=[
+      'Divideix la quantitat de minuts entre 60',
+      'El quocient indica el nombre d’hores',
+      'Calcula els minuts que sobren després de formar les hores',
+      'Expressa el resultat en hores i minuts'
+    ];
+
+    return {
+      question:q,
+      correct:corr,
+      options:opts.slice(0,4),
+      guide,
+      solution:[...guide,`✅ ${corr}`],
+      difficulty:'medium'
+    };
   }
-  // Preguntes de coneixement
+
+  // ── 5. PREGUNTES DE CONEIXEMENT ─────────────────────────────────────────
   const qs=[
-    {q:'Quants minuts té un dia?',a:'1440 min',w:['24 min','60 min','720 min'],g:['1 dia = 24 hores','24 × 60 = 1440 min']},
-    {q:'Quants segons té 1 hora?',a:'3600 s',w:['360 s','600 s','60 s'],g:['1 h = 60 min','60 × 60 = 3600 s']},
-    {q:'Quants dies té un any no bixest?',a:'365 dies',w:['360 dies','366 dies','350 dies'],g:['Un any normal = 365 dies','Bixest = 366 dies']},
-    {q:'Quants segons té un dia sencer?',a:'86400 s',w:['3600 s','24000 s','43200 s'],g:['1 dia = 24 h = 1440 min','1440 × 60 = 86400 s']},
+    {
+      q:'Quants minuts té un dia?',
+      a:'1440 min',
+      w:['720 min','1480 min','2400 min'],
+      g:[
+        'Recorda quantes hores té un dia',
+        'Converteix les hores del dia a minuts'
+      ]
+    },
+    {
+      q:'Quants segons té 1 hora?',
+      a:'3600 s',
+      w:['600 s','360 s','3660 s'],
+      g:[
+        'Recorda quants minuts té una hora',
+        'Converteix els minuts a segons'
+      ]
+    },
+    {
+      q:'Quants dies té un any no bixest?',
+      a:'365 dies',
+      w:['360 dies','366 dies','364 dies'],
+      g:[
+        'Distingeix entre any normal i any bixest',
+        'Recorda la durada d’un any no bixest'
+      ]
+    },
+    {
+      q:'Quants segons té un dia sencer?',
+      a:'86400 s',
+      w:['43200 s','8640 s','90000 s'],
+      g:[
+        'Passa primer el dia a hores',
+        'Després converteix les hores a minuts',
+        'Finalment converteix els minuts a segons'
+      ]
+    }
   ];
+
   const item=qs[rnd(0,qs.length-1)];
   const opts=shuffle([item.a,...item.w]);
-  return {question:item.q,correct:item.a,options:opts,guide:item.g,solution:[...item.g,`✅ ${item.a}`],difficulty:'easy'};
+
+  return {
+    question:item.q,
+    correct:item.a,
+    options:opts,
+    guide:item.g,
+    solution:[...item.g,`✅ ${item.a}`],
+    difficulty:'easy'
+  };
 }
+
 
 // 4. PERÍMETRES
 function genPerimetres(){
   const type=rnd(1,5);
+
   if(type===1){
     const l=rnd(2,15);
     const res=4*l;
     const q=`Perímetre d'un quadrat de costat ${l} cm`;
     const c=`${res} cm`;
-    const guide=['Perímetre quadrat = 4 × costat',`4 × ${l} = ${res} cm`];
-    return {question:q,correct:c,options:distractors(res,'cm',[res+4,res-4,l*l,2*l]),guide,solution:[...guide,`✅ P = ${c}`],difficulty:'easy'};
+
+    const guide=[
+      'Perímetre quadrat = 4 × costat',
+      `Calcula 4 × ${l}`
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:distractors(res,'cm',[
+        res+4,
+        res-4,
+        l*l,
+        2*l
+      ]),
+      guide,
+      solution:[...guide,`✅ P = ${c}`],
+      difficulty:'easy'
+    };
   }
+
   if(type===2){
-    const a=rnd(3,15),b=rnd(3,15);
+    const a=rnd(3,15);
+    const b=rnd(3,15);
     const res=2*(a+b);
     const q=`Perímetre d'un rectangle de ${a} cm × ${b} cm`;
     const c=`${res} cm`;
-    const guide=['Perímetre rectangle = 2 × (base + alçada)',`2 × (${a} + ${b}) = 2 × ${a+b} = ${res} cm`];
-    return {question:q,correct:c,options:distractors(res,'cm',[a+b,res+2*(Math.max(a,b)),a*b,res+4]),guide,solution:[...guide,`✅ P = ${c}`],difficulty:'easy'};
+
+    const guide=[
+      'Perímetre rectangle = 2 × (base + alçada)',
+      `Suma la base i l'alçada i multiplica el resultat per 2`
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:distractors(res,'cm',[
+        a+b,
+        a*b,
+        2*a+b,
+        2*b+a
+      ]),
+      guide,
+      solution:[...guide,`✅ P = ${c}`],
+      difficulty:'easy'
+    };
   }
+
   if(type===3){
-    const a=rnd(3,10),b=rnd(3,10),c=rnd(3,10);
+    const a=rnd(3,10);
+    const b=rnd(3,10);
+    const c=rnd(3,10);
     const res=a+b+c;
-    const q=`Perímetre d'un triangle de costats ${a} cm, ${b} cm i ${c} cm`;
     const corr=`${res} cm`;
-    const guide=['Perímetre = suma dels tres costats',`${a} + ${b} + ${c} = ${res} cm`];
-    return {question:q,correct:corr,options:distractors(res,'cm',[res+2,res-2,a*b,res+a]),guide,solution:[...guide,`✅ P = ${corr}`],difficulty:'easy'};
+
+    const q=`Perímetre d'un triangle de costats ${a} cm, ${b} cm i ${c} cm`;
+
+    const guide=[
+      'Perímetre triangle = suma dels tres costats',
+      `Suma els tres costats: ${a}, ${b} i ${c}`
+    ];
+
+    return {
+      question:q,
+      correct:corr,
+      options:distractors(res,'cm',[
+        a+b,
+        a+c,
+        b+c,
+        res+a
+      ]),
+      guide,
+      solution:[...guide,`✅ P = ${corr}`],
+      difficulty:'easy'
+    };
   }
+
   if(type===4){
     const r=rnd(2,10);
     const res=Math.round(2*3.14*r*10)/10;
     const q=`Circumferència d'un cercle de radi ${r} cm (π ≈ 3,14)`;
     const c=`${fmtNum(res)} cm`;
-    const guide=['C = 2 × π × r','π ≈ 3,14',`2 × 3,14 × ${r} = ${fmtNum(res)} cm`];
-    return {question:q,correct:c,options:distractors(res,'cm',[3.14*r,res+r*2,2*3.14*(r+1),2*3.14*(r-1)].map(v=>Math.round(v*10)/10)),guide,solution:[...guide,`✅ C = ${c}`],difficulty:'medium'};
+
+    const guide=[
+      'Longitud de la circumferència = 2 × π × radi',
+      'Substitueix π per 3,14',
+      `Calcula 2 × 3,14 × ${r}`
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:distractors(
+        res,
+        'cm',
+        [
+          Math.round(3.14*r*10)/10,
+          Math.round(2*r*10)/10,
+          Math.round(2*3.14*(r+1)*10)/10,
+          Math.round(2*3.14*(r-1)*10)/10
+        ]
+      ),
+      guide,
+      solution:[...guide,`✅ C = ${c}`],
+      difficulty:'medium'
+    };
   }
-  // Perímetre de figura composta (NOU - difícil)
-  const a=rnd(4,10),b=rnd(2,a-1),h=rnd(2,6);
-  // Figura en forma de L (rectangle gran menys cantonada)
-  // Costats externs: a, h, (a-b), ?, b, ?
-  const side1=a,side2=h+rnd(1,4),side3=a-b,side4=side2-(side2-h),side5=b,side6=h;
-  // Simplifiquem: rectangle gran a×(h+extra) amb un forat, però perímetre extern
-  const extra=rnd(2,5);
-  const tot=a+side2+b+extra+(a-b)+h; // simplificat per figura L coherent
-  // Generem una figura L senzilla amb perímetres clars
-  const W=rnd(6,12),H=rnd(6,12),w=rnd(2,W-2),hh=rnd(2,H-2);
-  const perimL=2*W+2*H-2*w-2*hh+2*w+2*hh; // = 2*(W+H) sempre per figura L!
-  // Simplifiquem: figura de 6 costats W, H, w, hh
-  // Perímetre = W + H + w + hh + (W-w) + (H-hh) = 2W+2H... massa trivial
-  // Usem: rectangle amb enclau — perímetre = 2*(W+H) (no canvia!)
+
+  // Perímetre de figura composta
+  const W=rnd(6,12);
+  const H=rnd(6,12);
+  const w=rnd(2,W-2);
+  const hh=rnd(2,H-2);
+
+  // En retirar un racó d'un rectangle:
+  // desapareixen els trams w i hh,
+  // però apareixen dos trams de les mateixes longituds.
+  // Per tant, el perímetre es manté igual.
   const P=2*(W+H);
+
   const q=`Figura en forma de L: rectangle de ${W}×${H} cm amb un racó de ${w}×${hh} cm retirat. Quin és el perímetre?`;
   const c=`${P} cm`;
+
   const guide=[
-    'En una figura L, el perímetre = 2×(amplada total + alçada total)',
-    'El forat NO canvia el perímetre exterior!',
-    `2 × (${W} + ${H}) = 2 × ${W+H} = ${P} cm`
+    'Calcula primer el perímetre del rectangle: 2 × (amplada + alçada)',
+    'Compara els trams que desapareixen amb els nous trams de la figura',
+    'Els trams nous tenen la mateixa longitud total que els trams retirats'
   ];
-  return {question:q,correct:c,options:distractors(P,'cm',[P+2*(w+hh),P-2*(w+hh),W*H,2*(W+H+w+hh)]),guide,solution:[...guide,`✅ P = ${c}`],difficulty:'hard'};
+
+  return {
+    question:q,
+    correct:c,
+    options:distractors(P,'cm',[
+      P+2*(w+hh),
+      P-2*(w+hh),
+      W*H,
+      P+w+hh
+    ]),
+    guide,
+    solution:[
+      ...guide,
+      `Perímetre del rectangle = 2 × (${W} + ${H})`,
+      `Per tant, el perímetre es manté igual`,
+      `✅ P = ${c}`
+    ],
+    difficulty:'hard'
+  };
 }
 
-// 5. ÀREES (inclou figures compostes)
+// ── 5. ÀREES (inclou figures compostes) ───────────────────────────────────
 function genArees(){
   const type=rnd(1,6);
+
+  // Genera 4 opcions: 1 correcta + 3 distractors diferents
+  function areaOptions(correct, unit, candidates){
+    const values=[];
+    const used=new Set();
+
+    // Afegim la correcta
+    const correctNum=Number(correct);
+    used.add(correctNum);
+    values.push(`${fmtNum(correctNum)} ${unit}`);
+
+    // Afegim fins a 3 distractors diferents
+    for(const v of candidates){
+      const n=Number(v);
+
+      if(!Number.isFinite(n)) continue;
+      if(n<=0) continue;
+      if(used.has(n)) continue;
+
+      used.add(n);
+      values.push(`${fmtNum(n)} ${unit}`);
+
+      if(values.length===4) break;
+    }
+
+    // Seguretat: si algun conjunt de candidats genera coincidències,
+    // completem fins a 4 opcions.
+    let extra=1;
+
+    while(values.length<4){
+      let n=correctNum+extra;
+
+      if(n<=0 || used.has(n)){
+        extra++;
+        continue;
+      }
+
+      used.add(n);
+      values.push(`${fmtNum(n)} ${unit}`);
+      extra++;
+    }
+
+    // Barreja les opcions
+    for(let i=values.length-1;i>0;i--){
+      const j=rnd(0,i);
+      [values[i],values[j]]=[values[j],values[i]];
+    }
+
+    return values;
+  }
+
+  // ── 1. QUADRAT ──────────────────────────────────────────────────────────
   if(type===1){
     const l=rnd(2,12);
     const res=l*l;
+
     const q=`Àrea d'un quadrat de costat ${l} cm`;
     const c=`${res} cm²`;
-    const guide=['A = costat²',`${l}² = ${l} × ${l} = ${res} cm²`];
-    return {question:q,correct:c,options:distractors(res,'cm²',[res+l*2,4*l,res+l,res*2]),guide,solution:[...guide,`✅ A = ${c}`],difficulty:'easy'};
+
+    const guide=[
+      '1. Aplica la fórmula de l’àrea del quadrat: A = costat².',
+      '2. Eleva el costat al quadrat.'
+    ];
+
+    const candidates=[
+      4*l,       // perímetre
+      l*3,       // multiplicació incorrecta
+      res+l,     // suma incorrecta
+      res*2      // duplica l'àrea
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:areaOptions(res,'cm²',candidates),
+      guide,
+      solution:[
+        `A = costat²`,
+        `${l}² = ${l} × ${l} = ${res} cm²`,
+        `✅ A = ${c}`
+      ],
+      difficulty:'easy'
+    };
   }
+
+  // ── 2. RECTANGLE ────────────────────────────────────────────────────────
   if(type===2){
-    const b=rnd(2,12),h=rnd(2,12);
+    const b=rnd(2,12);
+    const h=rnd(2,12);
     const res=b*h;
+
     const q=`Àrea d'un rectangle de base ${b} cm i alçada ${h} cm`;
     const c=`${res} cm²`;
-    const guide=['A = base × alçada',`${b} × ${h} = ${res} cm²`];
-    return {question:q,correct:c,options:distractors(res,'cm²',[2*(b+h),res+b*2,res+h*2,res-b]),guide,solution:[...guide,`✅ A = ${c}`],difficulty:'easy'};
+
+    const guide=[
+      '1. Aplica la fórmula de l’àrea del rectangle: A = base × alçada.',
+      '2. Multiplica la base per l’alçada.'
+    ];
+
+    const candidates=[
+      2*(b+h),       // perímetre
+      b*h+b,         // afegeix la base
+      b*h+h,         // afegeix l'alçada
+      2*b*h          // duplica l'àrea
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:areaOptions(res,'cm²',candidates),
+      guide,
+      solution:[
+        `A = base × alçada`,
+        `${b} × ${h} = ${res} cm²`,
+        `✅ A = ${c}`
+      ],
+      difficulty:'easy'
+    };
   }
+
+  // ── 3. TRIANGLE ─────────────────────────────────────────────────────────
   if(type===3){
-    const b=rnd(4,14),h=rnd(3,10);
+    const b=rnd(4,14);
+    const h=rnd(3,10);
     const res=b*h/2;
+
     const q=`Àrea d'un triangle de base ${b} cm i alçada ${h} cm`;
     const c=`${fmtNum(res)} cm²`;
-    const guide=['A = (base × alçada) / 2',`(${b} × ${h}) / 2 = ${b*h} / 2 = ${fmtNum(res)} cm²`];
-    return {question:q,correct:c,options:distractors(res,'cm²',[b*h,res+h,b+h,res*2+b]),guide,solution:[...guide,`✅ A = ${c}`],difficulty:'easy'};
+
+    const guide=[
+      '1. Aplica la fórmula de l’àrea del triangle: A = (base × alçada) / 2.',
+      '2. Multiplica la base per l’alçada.',
+      '3. Divideix el resultat entre 2.'
+    ];
+
+    const candidates=[
+      b*h,        // oblida dividir entre 2
+      res*2,      // duplica el resultat
+      res+b,      // error de càlcul
+      res+h       // error de càlcul
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:areaOptions(res,'cm²',candidates),
+      guide,
+      solution:[
+        `A = (base × alçada) / 2`,
+        `(${b} × ${h}) / 2`,
+        `= ${b*h} / 2`,
+        `= ${fmtNum(res)} cm²`,
+        `✅ A = ${c}`
+      ],
+      difficulty:'easy'
+    };
   }
+
+  // ── 4. ROMBE ────────────────────────────────────────────────────────────
   if(type===4){
-    const d1=rnd(4,14)*2,d2=rnd(3,10)*2;
+    const d1=rnd(4,14)*2;
+    const d2=rnd(3,10)*2;
     const res=d1*d2/2;
+
     const q=`Àrea d'un rombe de diagonals ${d1} cm i ${d2} cm`;
     const c=`${fmtNum(res)} cm²`;
-    const guide=['A = (diagonal major × diagonal menor) / 2',`(${d1} × ${d2}) / 2 = ${d1*d2} / 2 = ${fmtNum(res)} cm²`];
-    return {question:q,correct:c,options:distractors(res,'cm²',[d1*d2,res+d1,2*(d1+d2),res+d2]),guide,solution:[...guide,`✅ A = ${c}`],difficulty:'medium'};
+
+    const guide=[
+      '1. Aplica la fórmula de l’àrea del rombe: A = (diagonal major × diagonal menor) / 2.',
+      '2. Multiplica les dues diagonals.',
+      '3. Divideix el resultat entre 2.'
+    ];
+
+    const candidates=[
+      d1*d2,     // oblida dividir entre 2
+      res*2,     // duplica el resultat
+      res+d1,    // error de càlcul
+      res+d2     // error de càlcul
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:areaOptions(res,'cm²',candidates),
+      guide,
+      solution:[
+        'A = (diagonal major × diagonal menor) / 2',
+        `(${d1} × ${d2}) / 2`,
+        `= ${d1*d2} / 2`,
+        `= ${fmtNum(res)} cm²`,
+        `✅ A = ${c}`
+      ],
+      difficulty:'medium'
+    };
   }
+
+  // ── 5. TRAPEZI ──────────────────────────────────────────────────────────
   if(type===5){
-    const B=rnd(6,14),b=rnd(2,B-2),h=rnd(3,10);
+    const B=rnd(6,14);
+    const b=rnd(2,B-2);
+    const h=rnd(3,10);
     const res=(B+b)*h/2;
+
     const q=`Àrea d'un trapezi de bases ${B} cm i ${b} cm, alçada ${h} cm`;
     const c=`${fmtNum(res)} cm²`;
-    const guide=['A = (base major + base menor) × alçada / 2',`(${B} + ${b}) × ${h} / 2 = ${B+b} × ${h} / 2 = ${(B+b)*h} / 2 = ${fmtNum(res)} cm²`];
-    return {question:q,correct:c,options:distractors(res,'cm²',[(B+b)*h,res+h,B*h/2,b*h/2]),guide,solution:[...guide,`✅ A = ${c}`],difficulty:'medium'};
+
+    const guide=[
+      '1. Aplica la fórmula de l’àrea del trapezi: A = (base major + base menor) × alçada / 2.',
+      '2. Suma les dues bases.',
+      '3. Multiplica la suma per l’alçada.',
+      '4. Divideix el resultat entre 2.'
+    ];
+
+    const candidates=[
+      (B+b)*h,          // oblida dividir entre 2
+      (B+b)*h/2+h,      // afegeix l'alçada al resultat
+      B*h/2,            // utilitza només la base major
+      b*h/2             // utilitza només la base menor
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:areaOptions(res,'cm²',candidates),
+      guide,
+      solution:[
+        'A = (base major + base menor) × alçada / 2',
+        `(${B} + ${b}) × ${h} / 2`,
+        `= ${B+b} × ${h} / 2`,
+        `= ${(B+b)*h} / 2`,
+        `= ${fmtNum(res)} cm²`,
+        `✅ A = ${c}`
+      ],
+      difficulty:'medium'
+    };
   }
-  // Àrea figura composta (NOU - difícil)
-  const w1=rnd(4,8),h1=rnd(4,8),w2=rnd(2,w1-1),h2=rnd(2,h1-1);
-  const res=w1*h1-w2*h2;
+
+  // ── 6. FIGURA COMPOSTA ─────────────────────────────────────────────────
+  const w1=rnd(4,8);
+  const h1=rnd(4,8);
+  const w2=rnd(2,w1-1);
+  const h2=rnd(2,h1-1);
+
+  const gran=w1*h1;
+  const petit=w2*h2;
+  const res=gran-petit;
+
   const q=`Àrea d'una figura en L: rectangle gran ${w1}×${h1} cm menys rectangle petit ${w2}×${h2} cm`;
   const c=`${res} cm²`;
+
   const guide=[
-    `Àrea total = rectangle gran − rectangle petit`,
-    `${w1}×${h1} − ${w2}×${h2} = ${w1*h1} − ${w2*h2} = ${res} cm²`
+    '1. Calcula l’àrea del rectangle gran.',
+    '2. Calcula l’àrea del rectangle petit.',
+    '3. Com que el rectangle petit es treu de la figura, resta les dues àrees.'
   ];
-  return {question:q,correct:c,options:distractors(res,'cm²',[w1*h1,w2*h2,res+w2*h2,res+w1]),guide,solution:[...guide,`✅ A = ${c}`],difficulty:'hard'};
+
+  const candidates=[
+    gran,             // només calcula el rectangle gran
+    petit,            // només calcula el rectangle petit
+    gran+petit,       // suma en lloc de restar
+    res+petit         // suma el rectangle petit en lloc de restar-lo
+  ];
+
+  return {
+    question:q,
+    correct:c,
+    options:areaOptions(res,'cm²',candidates),
+    guide,
+    solution:[
+      `Àrea del rectangle gran: ${w1} × ${h1} = ${gran} cm²`,
+      `Àrea del rectangle petit: ${w2} × ${h2} = ${petit} cm²`,
+      `Àrea total = ${gran} − ${petit} = ${res} cm²`,
+      `✅ A = ${c}`
+    ],
+    difficulty:'hard'
+  };
 }
 
-// 6. ESTIMACIÓ (ampliada)
+// ── 6. ESTIMACIÓ (ampliada) ────────────────────────────────────────────────
 function genEstimacio(){
   const type=rnd(1,4);
+
+  // ── LONGITUD ────────────────────────────────────────────────────────────
   if(type===1){
     const items=[
-      {obj:'una porta',real:'2 m',w:['20 cm','200 m','5 km']},
-      {obj:'un llapis',real:'15 cm',w:['3 mm','3 m','30 m']},
-      {obj:'una persona adulta',real:'1,7 m',w:['17 cm','17 m','170 km']},
-      {obj:'un cotxe (longitud)',real:'4 m',w:['40 cm','40 m','4 km']},
-      {obj:'una formiga',real:'5 mm',w:['50 cm','3 m','1 km']},
-      {obj:'una taula de classe',real:'60 cm',w:['6 mm','6 m','600 m']},
-      {obj:'un edifici de 5 plantes',real:'15 m',w:['1,5 m','150 m','1500 m']},
-      {obj:'un bolígraf',real:'14 cm',w:['1,4 mm','140 m','1,4 km']},
+      {obj:'una porta',real:'2 m',w:['20 cm','20 m','200 m']},
+      {obj:'un llapis',real:'15 cm',w:['1,5 cm','1,5 m','3 m']},
+      {obj:'una persona adulta',real:'1,7 m',w:['17 cm','1,2 m','17 m']},
+      {obj:'un cotxe (longitud)',real:'4 m',w:['40 cm','2 m','40 m']},
+      {obj:'una formiga',real:'5 mm',w:['2 mm','5 cm','50 cm']},
+      {obj:'una taula de classe',real:'60 cm',w:['6 mm','40 cm','6 m']},
+      {obj:'un edifici de 5 plantes',real:'15 m',w:['1,5 m','8 m','150 m']},
+      {obj:'un bolígraf',real:'14 cm',w:['1,4 cm','7 cm','140 cm']},
     ];
+
     const item=items[rnd(0,items.length-1)];
     const q=`Quina és la mesura aproximada de ${item.obj}?`;
     const opts=shuffle([item.real,...item.w]);
-    const guide=['Pensa en objectes que coneixes com a referència','Descarta les opcions clarament absurdes'];
-    return {question:q,correct:item.real,options:opts,guide,solution:[...guide,`✅ ${item.obj} ≈ ${item.real}`],difficulty:'easy'};
+
+    const guide=[
+      'Pensa en una mida coneguda que et serveixi de referència.',
+      'Compara la mida de l’objecte amb aquesta referència.',
+      'Tria l’opció que tingui una escala raonable.'
+    ];
+
+    return {
+      question:q,
+      correct:item.real,
+      options:opts,
+      guide,
+      solution:[
+        ...guide,
+        `✅ ${item.obj} ≈ ${item.real}`
+      ],
+      difficulty:'easy'
+    };
   }
+
+  // ── CAPACITAT ───────────────────────────────────────────────────────────
   if(type===2){
     const items=[
-      {obj:'un got d\'aigua',real:'250 ml',w:['25 cl','5 l','2500 l']},
-      {obj:'una ampolla d\'aigua gran',real:'1,5 l',w:['15 cl','150 ml','15 l']},
-      {obj:'una culleradeta de sal',real:'5 ml',w:['50 cl','500 dl','50 l']},
-      {obj:'una tassa de cafè',real:'100 ml',w:['10 cl','1 l','10 dl']},
+      {obj:'un got d\'aigua',real:'250 ml',w:['25 ml','500 ml','2,5 l']},
+      {obj:'una ampolla d\'aigua gran',real:'1,5 l',w:['150 ml','500 ml','15 l']},
+      {obj:'una culleradeta de sal',real:'5 ml',w:['1 ml','50 ml','500 ml']},
+      {obj:'una tassa de cafè',real:'100 ml',w:['10 ml','500 ml','1 l']},
     ];
+
     const item=items[rnd(0,items.length-1)];
-    const guide=['1 litre ≈ 4 gots d\'aigua','Compara amb recipients que coneixes'];
-    return {question:`Quina és la capacitat de ${item.obj}?`,correct:item.real,options:shuffle([item.real,...item.w]),guide,solution:[...guide,`✅ ${item.obj} ≈ ${item.real}`],difficulty:'easy'};
+
+    const guide=[
+      'Pensa en un recipient de capacitat coneguda que et serveixi de referència.',
+      'Compara la capacitat de l’objecte amb aquesta referència.',
+      'Tria l’opció que sigui coherent amb la mida del recipient.'
+    ];
+
+    return {
+      question:`Quina és la capacitat de ${item.obj}?`,
+      correct:item.real,
+      options:shuffle([item.real,...item.w]),
+      guide,
+      solution:[
+        ...guide,
+        `✅ ${item.obj} ≈ ${item.real}`
+      ],
+      difficulty:'easy'
+    };
   }
+
+  // ── MASSA ───────────────────────────────────────────────────────────────
   if(type===3){
     const items=[
-      {obj:'una taronja',real:'200 g',w:['2 g','20 kg','2 t']},
-      {obj:'un cotxe',real:'1,5 t',w:['150 g','15 kg','150 t']},
-      {obj:'un ou de gallina',real:'60 g',w:['6 mg','600 kg','6 t']},
-      {obj:'un litre d\'aigua',real:'1 kg',w:['1 mg','100 kg','1 t']},
-      {obj:'una persona adulta',real:'70 kg',w:['70 g','70 t','7000 g']},
+      {obj:'una taronja',real:'200 g',w:['20 g','2 kg','20 kg']},
+      {obj:'un cotxe',real:'1,5 t',w:['15 kg','150 kg','15 t']},
+      {obj:'un ou de gallina',real:'60 g',w:['6 g','600 g','6 kg']},
+      {obj:'un litre d\'aigua',real:'1 kg',w:['100 g','10 kg','100 kg']},
+      {obj:'una persona adulta',real:'70 kg',w:['70 g','7 kg','700 kg']},
     ];
+
     const item=items[rnd(0,items.length-1)];
-    const guide=['1 kg = 1000 g | 1 t = 1000 kg','Compara amb objectes quotidians'];
-    return {question:`Quina és la massa aproximada de ${item.obj}?`,correct:item.real,options:shuffle([item.real,...item.w.slice(0,3)]),guide,solution:[...guide,`✅ ${item.obj} ≈ ${item.real}`],difficulty:'easy'};
+
+    const guide=[
+      'Pensa en un objecte o una quantitat de massa coneguda que et serveixi de referència.',
+      'Compara la massa de l’objecte amb aquesta referència.',
+      'Tria l’opció que tingui una escala raonable.'
+    ];
+
+    return {
+      question:`Quina és la massa aproximada de ${item.obj}?`,
+      correct:item.real,
+      options:shuffle([item.real,...item.w]),
+      guide,
+      solution:[
+        ...guide,
+        `✅ ${item.obj} ≈ ${item.real}`
+      ],
+      difficulty:'easy'
+    };
   }
-  // Estimació d'àrees (NOU)
+
+  // ── ÀREES ──────────────────────────────────────────────────────────────
   const items=[
     {obj:'una postal (15×10 cm)',real:'150 cm²',w:['15 cm²','1500 cm²','50 cm²']},
-    {obj:'una porta (2×0,8 m)',real:'1,6 m²',w:['16 m²','160 m²','0,16 m²']},
+    {obj:'una porta (2×0,8 m)',real:'1,6 m²',w:['0,16 m²','8 m²','16 m²']},
     {obj:'una taula de classe (60×40 cm)',real:'2400 cm²',w:['240 cm²','24000 cm²','600 cm²']},
-    {obj:'un camp de futbol (100×60 m)',real:'6000 m²',w:['600 m²','60 m²','60000 m²']},
+    {obj:'un camp de futbol (100×60 m)',real:'6000 m²',w:['600 m²','60000 m²','16000 m²']},
   ];
+
   const item=items[rnd(0,items.length-1)];
-  const guide=['Àrea ≈ amplada × alçada','Comprova que la unitat té sentit'];
-  return {question:`Quina és l'àrea aproximada de ${item.obj}?`,correct:item.real,options:shuffle([item.real,...item.w]),guide,solution:[...guide,`✅ ${item.obj} ≈ ${item.real}`],difficulty:'medium'};
+
+  const guide=[
+    'Identifica les dues dimensions que determinen la superfície.',
+    'Multiplica les dues dimensions per obtenir l’àrea.',
+    'Comprova que la unitat final és una unitat quadrada.'
+  ];
+
+  return {
+    question:`Quina és l'àrea aproximada de ${item.obj}?`,
+    correct:item.real,
+    options:shuffle([item.real,...item.w]),
+    guide,
+    solution:[
+      ...guide,
+      `✅ ${item.obj} ≈ ${item.real}`
+    ],
+    difficulty:'medium'
+  };
 }
 
-// 7. PROBLEMES DE CONTEXT (NOU — el que més val als exàmens)
+// ── 7. PROBLEMES DE CONTEXT ────────────────────────────────────────────────
 function genProblemes(){
   const type=rnd(1,6);
+
+  // Genera 4 opcions úniques, amb la correcta sempre inclosa.
+  function makeOptions(correct,candidates,suffix){
+    const clean=[];
+    const correctNum=Number(correct);
+
+    for(const v of candidates){
+      const n=Number(v);
+      if(!Number.isFinite(n)) continue;
+      if(n<=0) continue;
+      if(n===correctNum) continue;
+      if(!clean.includes(n)) clean.push(n);
+    }
+
+    let delta=1;
+    while(clean.length<3){
+      const extra=correctNum+delta;
+      if(extra>0 && extra!==correctNum && !clean.includes(extra)){
+        clean.push(extra);
+      }
+      delta++;
+    }
+
+    return shuffle([
+      `${correctNum}${suffix}`,
+      `${clean[0]}${suffix}`,
+      `${clean[1]}${suffix}`,
+      `${clean[2]}${suffix}`
+    ]);
+  }
+
+  // ── 1. RAJOLES ──────────────────────────────────────────────────────────
   if(type===1){
-    // Rajoles
-    const L=rnd(3,8),W=rnd(3,6);
-    const tileL=rnd(20,50),tileW=rnd(20,40);
-    const areaHab=L*W; // m²
-    const areaTile=tileL*tileW; // cm²
-    // Convertim taulell a m²
-    const tileLm=tileL/100,tileWm=tileW/100;
+    const L=rnd(3,8);
+    const W=rnd(3,6);
+    const tileL=rnd(20,50);
+    const tileW=rnd(20,40);
+
+    const areaHab=L*W;
+    const tileLm=tileL/100;
+    const tileWm=tileW/100;
     const areaTileM=tileLm*tileWm;
-    const n=Math.ceil(areaHab/areaTileM);
-    const q=`Una habitació de ${L}×${W} m ha de pavimentar-se amb rajoles de ${tileL}×${tileW} cm. Quantes rajoles calen?`;
+
+    const exact=areaHab/areaTileM;
+    const n=Math.ceil(exact);
+    const senseN=Math.floor(exact);
+
+    const q=
+      `Una habitació de ${L}×${W} m ha de pavimentar-se amb rajoles ` +
+      `de ${tileL}×${tileW} cm. Quantes rajoles calen?`;
+
     const c=`${n} rajoles`;
+
     const guide=[
-      `Àrea hab. = ${L}×${W} = ${L*W} m²`,
-      `Rajola: ${tileL} cm = ${tileLm} m i ${tileW} cm = ${tileWm} m`,
-      `Àrea rajola = ${tileLm}×${tileWm} = ${Math.round(areaTileM*10000)/10000} m²`,
-      `Núm. = ${L*W} ÷ ${Math.round(areaTileM*10000)/10000} = ${n}`
+      `1. Calcula l'àrea de l'habitació.`,
+      `2. Converteix les dimensions de la rajola a metres.`,
+      `3. Calcula l'àrea d'una rajola en m².`,
+      `4. Divideix l'àrea de l'habitació entre l'àrea d'una rajola.`,
+      `5. Arrodoneix el resultat cap amunt, perquè les rajoles són senceres.`
     ];
-    const opts=distractors(n,'rajoles',[n+10,n-5,Math.floor(n/2),n+n]);
-    return {question:q,correct:c,options:opts,guide,solution:[...guide,`✅ ${c}`],difficulty:'hard'};
+
+    const candidates=[
+      senseN,
+      Math.ceil(exact/2),
+      Math.ceil(exact*2),
+      Math.ceil(areaHab/(tileL*tileW/100))
+    ];
+
+    const opts=makeOptions(n,candidates,' rajoles');
+
+    const solution=[
+      `Àrea de l'habitació = ${L}×${W} = ${areaHab} m²`,
+      `Rajola: ${tileL} cm = ${tileLm} m`,
+      `Rajola: ${tileW} cm = ${tileWm} m`,
+      `Àrea d'una rajola = ${tileLm}×${tileWm} = ${areaTileM} m²`,
+      `Nombre de rajoles = ${areaHab} ÷ ${areaTileM} = ${exact}`,
+      `Com que necessitem rajoles senceres: ${n}`,
+      `✅ ${c}`
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:opts,
+      guide,
+      solution,
+      difficulty:'hard'
+    };
   }
+
+  // ── 2. PINTAR PARETS ────────────────────────────────────────────────────
   if(type===2){
-    // Pintar parets
-    const L=rnd(4,8),W=rnd(3,5),H=rnd(2,3);
+    const L=rnd(4,8);
+    const W=rnd(3,5);
+    const H=rnd(2,3);
+    const rendiment=rnd(8,12);
+
     const areaParet=2*(L+W)*H;
-    const rendiment=rnd(8,12); // m² per pot
+    const areaSenseFactor=(L+W)*H;
+    const areaUnaDimensio=L*H;
     const pots=Math.ceil(areaParet/rendiment);
-    const q=`Una habitació de ${L}×${W} m i ${H} m d'alçada s'ha de pintar (només parets). Un pot cobreix ${rendiment} m². Quants pots calen?`;
+
+    const q=
+      `Una habitació de ${L}×${W} m i ${H} m d'alçada s'ha de pintar ` +
+      `(només parets). Un pot cobreix ${rendiment} m². Quants pots calen?`;
+
     const c=`${pots} pots`;
+
     const guide=[
-      `Àrea parets = 2×(${L}+${W})×${H} = 2×${L+W}×${H} = ${areaParet} m²`,
-      `Pots = ⌈${areaParet} ÷ ${rendiment}⌉ = ${pots}`
+      `1. Calcula el perímetre de l'habitació.`,
+      `2. Multiplica el perímetre per l'alçada per obtenir l'àrea de les parets.`,
+      `3. Divideix l'àrea de les parets entre la superfície que cobreix un pot.`,
+      `4. Arrodoneix el resultat cap amunt, perquè els pots són sencers.`
     ];
-    const opts=distractors(pots,'pots',[pots+1,pots-1,Math.ceil(areaParet/5),pots*2]);
-    return {question:q,correct:c,options:opts,guide,solution:[...guide,`✅ ${c}`],difficulty:'hard'};
+
+    const candidates=[
+      Math.ceil(areaSenseFactor/rendiment),
+      Math.ceil(areaUnaDimensio/rendiment),
+      Math.ceil(areaParet/(rendiment*2)),
+      pots+1
+    ];
+
+    const opts=makeOptions(pots,candidates,' pots');
+
+    const solution=[
+      `Perímetre = 2×(${L}+${W}) = ${2*(L+W)} m`,
+      `Àrea de les parets = ${2*(L+W)}×${H} = ${areaParet} m²`,
+      `Nombre de pots = ${areaParet} ÷ ${rendiment} = ${areaParet/rendiment}`,
+      `Com que necessitem pots sencers: ${pots}`,
+      `✅ ${c}`
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:opts,
+      guide,
+      solution,
+      difficulty:'hard'
+    };
   }
+
+  // ── 3. TANCA DEL JARDÍ ──────────────────────────────────────────────────
   if(type===3){
-    // Perímetre del jardí — tanca
-    const L=rnd(8,25),W=rnd(5,15);
+    const L=rnd(8,25);
+    const W=rnd(5,15);
+    const preuPer=rnd(15,30);
+
     const per=2*(L+W);
-    const preuPer=rnd(15,30); // €/m
+    const area=L*W;
     const total=per*preuPer;
-    const q=`Un jardí rectangular de ${L}×${W} m necessita una tanca perimetral a ${preuPer} €/m. Quin és el cost total?`;
+
+    const q=
+      `Un jardí rectangular de ${L}×${W} m necessita una tanca ` +
+      `perimetral a ${preuPer} €/m. Quin és el cost total?`;
+
     const c=`${total} €`;
+
     const guide=[
-      `Perímetre = 2×(${L}+${W}) = 2×${L+W} = ${per} m`,
-      `Cost = ${per} × ${preuPer} = ${total} €`
+      `1. Calcula el perímetre del jardí.`,
+      `2. Multiplica el perímetre pel preu de cada metre de tanca.`
     ];
-    const opts=distractors(total,'€',[per*preuPer+preuPer*2,L*W*preuPer,per*preuPer*2,(L+W)*preuPer]);
-    return {question:q,correct:c,options:opts,guide,solution:[...guide,`✅ ${c}`],difficulty:'hard'};
+
+    const candidates=[
+      (L+W)*preuPer,
+      area*preuPer,
+      per*preuPer*2,
+      (L+W)*preuPer+preuPer
+    ];
+
+    const opts=makeOptions(total,candidates,' €');
+
+    const solution=[
+      `Perímetre = 2×(${L}+${W}) = ${per} m`,
+      `Cost = ${per}×${preuPer} = ${total} €`,
+      `✅ ${c}`
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:opts,
+      guide,
+      solution,
+      difficulty:'hard'
+    };
   }
+
+  // ── 4. TEMPS — VIATGE ──────────────────────────────────────────────────
   if(type===4){
-    // Temps — viatge
-    const hI=rnd(7,10),mI=[0,15,30][rnd(0,2)];
-    const durH=rnd(1,3),durM=[0,15,30,45][rnd(0,3)];
-    let hF=hI+durH,mF=mI+durM;
-    if(mF>=60){mF-=60;hF++;}
-    const durStr=(durH>0?durH+'h ':'')+durM+'min';
-    const q=`Un tren surt a les ${hI}:${mI<10?'0'+mI:mI} h i arriba a les ${hF}:${mF<10?'0'+mF:mF} h. Quant ha durat el viatge?`;
-    const corr=durStr.trim()||`${durH} h`;
-    const guide=['Resta hora final − hora inicial','Ajusta els minuts si és negatiu'];
-    const cands=[`${durH+1}h ${durM}min`,`${durH}h ${(durM+15)%60}min`,`${durH>0?durH-1:1}h ${durM}min`].filter(o=>o.trim()!==corr);
-    const opts=shuffle([corr,...[...new Set(cands)].slice(0,3)]).slice(0,4);
-    return {question:q,correct:corr,options:opts,guide,solution:[...guide,`✅ ${corr}`],difficulty:'hard'};
+    const hI=rnd(7,10);
+    const mI=[0,15,30][rnd(0,2)];
+
+    const durH=rnd(1,3);
+    const durM=[0,15,30,45][rnd(0,3)];
+
+    let hF=hI+durH;
+    let mF=mI+durM;
+
+    if(mF>=60){
+      mF-=60;
+      hF++;
+    }
+
+    function timeStr(h,m){
+      if(m===0) return `${h}h`;
+      return `${h}h ${m}min`;
+    }
+
+    const corr=timeStr(durH,durM);
+
+    const q=
+      `Un tren surt a les ${hI}:${String(mI).padStart(2,'0')} h i arriba ` +
+      `a les ${hF}:${String(mF).padStart(2,'0')} h. Quant ha durat el viatge?`;
+
+    const candidates=[];
+
+    function addTime(h,m){
+      if(h<0 || m<0 || m>=60) return;
+      const s=timeStr(h,m);
+      if(s!==corr && !candidates.includes(s)){
+        candidates.push(s);
+      }
+    }
+
+    addTime(durH+1,durM);
+    addTime(Math.max(0,durH-1),durM);
+
+    if(durM+15<60){
+      addTime(durH,durM+15);
+    }else{
+      addTime(durH+1,durM-45);
+    }
+
+    if(durM>=15){
+      addTime(durH,durM-15);
+    }else{
+      addTime(Math.max(0,durH-1),45);
+    }
+
+    let k=1;
+    while(candidates.length<3){
+      addTime(durH+k,durM);
+      k++;
+    }
+
+    const opts=shuffle([
+      corr,
+      ...candidates.slice(0,3)
+    ]);
+
+    const guide=[
+      `1. Resta l'hora de sortida de l'hora d'arribada.`,
+      `2. Resta els minuts de sortida dels minuts d'arribada.`,
+      `3. Si cal, fes un préstec d'una hora per poder restar els minuts.`,
+      `4. Expressa la durada final en hores i minuts.`
+    ];
+
+    const solution=[
+      `Hora d'arribada − hora de sortida`,
+      `${hF}:${String(mF).padStart(2,'0')} − ${hI}:${String(mI).padStart(2,'0')}`,
+      `Durada = ${corr}`,
+      `✅ ${corr}`
+    ];
+
+    return {
+      question:q,
+      correct:corr,
+      options:opts,
+      guide,
+      solution,
+      difficulty:'hard'
+    };
   }
+
+  // ── 5. KG → PORCIONS ───────────────────────────────────────────────────
   if(type===5){
-    // Conversió amb operació
     const kg=rnd(3,20);
-    const total=kg*1000;
-    const q=`En un supermercat, cada caixa pesa ${kg} kg. Si s'apilen 1000 g per paquet, quants paquets surten d'una caixa?`;
-    // Simplifica: quants grams té, quants paquets de 100g calen
     const tamPaquet=[100,200,250,500][rnd(0,3)];
+
+    const total=kg*1000;
     const paquets=Math.floor(total/tamPaquet);
-    const q2=`Una caixa pesa ${kg} kg. Si s'empaqueta en porcions de ${tamPaquet} g, quantes porcions surten?`;
+
+    const q=
+      `Una caixa pesa ${kg} kg. Si s'empaqueta en porcions de ` +
+      `${tamPaquet} g, quantes porcions surten?`;
+
     const c=`${paquets} porcions`;
-    const guide=[`${kg} kg = ${total} g`,`Porcions = ${total} ÷ ${tamPaquet} = ${paquets}`];
-    return {question:q2,correct:c,options:distractors(paquets,'porcions',[paquets+10,paquets-5,paquets*2,total]),guide,solution:[...guide,`✅ ${c}`],difficulty:'hard'};
+
+    const guide=[
+      `1. Converteix la massa total de kg a grams.`,
+      `2. Divideix la massa total en grams entre la massa de cada porció.`,
+      `3. Comprova que el resultat correspon al nombre de porcions.`
+    ];
+
+    const candidates=[
+      Math.floor(kg/tamPaquet),
+      Math.floor(total/(tamPaquet*2)),
+      Math.floor(total/(tamPaquet/2)),
+      total
+    ];
+
+    const opts=makeOptions(paquets,candidates,' porcions');
+
+    const solution=[
+      `${kg} kg = ${total} g`,
+      `Porcions = ${total} ÷ ${tamPaquet} = ${paquets}`,
+      `✅ ${c}`
+    ];
+
+    return {
+      question:q,
+      correct:c,
+      options:opts,
+      guide,
+      solution,
+      difficulty:'hard'
+    };
   }
-  // Àrea + unitats
-  const b=rnd(4,12),h=rnd(3,8);
+
+  // ── 6. ÀREA + CONVERSIÓ D'UNITATS ──────────────────────────────────────
+  const b=rnd(4,12);
+  const h=rnd(3,8);
+
   const aM=b*h;
   const aCm=aM*10000;
-  const q=`Un rectangle fa ${b} m de base i ${h} m d'alçada. Quina és la seva àrea en cm²?`;
+
+  const q=
+    `Un rectangle fa ${b} m de base i ${h} m d'alçada. ` +
+    `Quina és la seva àrea en cm²?`;
+
   const c=`${aCm} cm²`;
-  const guide=[`Àrea = ${b}×${h} = ${aM} m²`,`1 m² = 10000 cm²`,`${aM} × 10000 = ${aCm} cm²`];
-  return {question:q,correct:c,options:distractors(aCm,'cm²',[aM,aCm/100,aCm*10,aM*100]),guide,solution:[...guide,`✅ ${c}`],difficulty:'hard'};
+
+  const guide=[
+    `1. Calcula l'àrea del rectangle en m².`,
+    `2. Converteix l'àrea de m² a cm² utilitzant el factor de conversió corresponent.`,
+    `3. Expressa el resultat final en cm².`
+  ];
+
+  const candidates=[
+    aM*100,
+    aM,
+    aCm/100,
+    aCm*10
+  ];
+
+  const opts=makeOptions(aCm,candidates,' cm²');
+
+  const solution=[
+    `Àrea = ${b}×${h} = ${aM} m²`,
+    `1 m² = 10.000 cm²`,
+    `${aM}×10.000 = ${aCm} cm²`,
+    `✅ ${c}`
+  ];
+
+  return {
+    question:q,
+    correct:c,
+    options:opts,
+    guide,
+    solution,
+    difficulty:'hard'
+  };
 }
 
 // ── TOPICS ────────────────────────────────────
