@@ -10,7 +10,7 @@ content="Practica el sentit espacial de 1r d'ESO amb exercicis interactius sobre
 <meta name="author" content="Salvador Rigual Valls">
 <meta name="robots" content="index, follow">
 <link rel="canonical"
-href="https://srigual-png.github.io/mates-primer-ESO/sentit-espacial.html">
+href="https://srigual-png.github.io/mates-primer-ESO/3 - sentit espacial.html">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -167,6 +167,7 @@ href="https://srigual-png.github.io/mates-primer-ESO/sentit-espacial.html">
 </style>
 <script data-goatcounter="https://srigual.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
+<!-- Versió final revisada 11/08/2026: distractors, pistes, errors i SVG auditats -->
 </head>
 <body>
 
@@ -193,9 +194,9 @@ href="https://srigual-png.github.io/mates-primer-ESO/sentit-espacial.html">
   <div class="home-header"><h2>🔷 Sentit Espacial</h2><p>1r d'ESO · Geometria i orientació · Exercicis interactius · Correcció immediata</p></div>
 <div class="intro-card">
   <p>
-    El <strong>sentit espacial</strong> t'ajudarà a comprendre les figures geomètriques, els angles, les simetries, els plànols i els mapes. Aprendràs a observar, representar i interpretar l'espai per resoldre problemes de manera visual i raonada.
+    El <strong>sentit espacial</strong> t'ajudarà a comprendre les figures geomètriques, els angles i les relacions de l'espai. Aprendràs a observar, representar i interpretar figures per resoldre problemes de manera visual i raonada.
     <br><br>
-    T'explicaré cada concepte amb exemples senzills i podràs practicar amb <strong>exercicis interactius</strong>, pistes i correcció immediata. Escull el tema que necessitis i avança al teu ritme.
+    El bloc principal correspon a <strong>1r d'ESO</strong>. Al final trobaràs una zona d'<strong>⭐ Ampliació · prepara 2n d'ESO</strong> amb continguts que pots practicar si vols avançar. <strong>El Mode Examen només inclou continguts de 1r d'ESO.</strong>
   </p>
 </div>
   <div class="topics-grid" id="topicsGrid"></div>
@@ -369,211 +370,430 @@ function svgRect(){
 
 // ── GENERADORS ─────────────────────────────────────────────────────────
 
-// 1. ELEMENTS GEOMÈTRICS
+// ── 1. ELEMENTS GEOMÈTRICS BÀSICS ───────────────────────────────────────
 function genElements(){
   const q=rnd(1,6);
   let question,correct,opts,guide,solution,svg='';
+
+  // 1. Punt, recta, segment i semirecta
   if(q===1){
     const items=[
-      {name:'punt',def:'Cap dimensió; indica una posició en el pla',wrong:['Té longitud però no amplada','Té 2 dimensions','Forma un angle']},
-      {name:'recta',def:'Línia infinita que no s\'acaba mai, sense extrems',wrong:['Línia amb dos extrems','Línia corba infinita','Superfície plana']},
-      {name:'segment',def:'Part d\'una recta entre dos punts (extrems)',wrong:['Recta sense extrems','Línia corba amb extrems','Angle entre dues rectes']},
-      {name:'semirecta',def:'Part d\'una recta amb un extrem i s\'estén infinitament per l\'altre costat',wrong:['Segment amb dos extrems','Recta completament infinita','Angle recte']},
+      {
+        q:'Quin element geomètric <b>no té dimensions</b> i només indica una posició?',
+        a:'Punt',
+        w:['Segment','Recta','Semirecta']
+      },
+      {
+        q:'Quin element geomètric té <b>dos extrems</b> i una longitud determinada?',
+        a:'Segment',
+        w:['Recta','Semirecta','Punt']
+      },
+      {
+        q:'Quin element geomètric és <b>infinit en les dues direccions</b>?',
+        a:'Recta',
+        w:['Segment','Semirecta','Punt']
+      },
+      {
+        q:'Quin element geomètric té <b>un extrem</b> i s\'allarga infinitament en una sola direcció?',
+        a:'Semirecta',
+        w:['Segment','Recta','Punt']
+      }
     ];
+
     const it=items[rnd(0,items.length-1)];
-    question=`Quina és la definició de <b>${it.name}</b>?`;
-    correct=it.def; opts=uniq4(correct,it.wrong);
-    guide=[`${it.name} → pensa en les seves dimensions i extrems`];
-    solution=[...guide,`✅ ${it.name}: ${correct}`];
+    question=it.q;
+    correct=it.a;
+    opts=uniq4(correct,it.w);
+
+    guide=[
+      'Identifica primer si l’element té extrems.',
+      'Comprova si té longitud limitada o si s’allarga infinitament.',
+      'Si no té longitud ni extrems i només indica una posició, és un element diferent.'
+    ];
+
+    solution=[
+      'Punt: indica una posició i no té dimensions.',
+      'Segment: té dos extrems i longitud limitada.',
+      'Recta: no té extrems i s’allarga infinitament en les dues direccions.',
+      'Semirecta: té un extrem i s’allarga infinitament en una direcció.',
+      `✅ ${correct}`
+    ];
+
+  // 2. Posicions relatives de rectes
   } else if(q===2){
-    const pols=[{n:'triangle',ns:3},{n:'quadrilàter',ns:4},{n:'pentàgon',ns:5},{n:'hexàgon',ns:6},{n:'heptàgon',ns:7},{n:'octàgon',ns:8}];
-    const p=pols[rnd(0,pols.length-1)];
-    svg=svgPolygon(p.ns,p.n);
-    question=`Quants costats té un <b>${p.n}</b>?`;
-    correct=`${p.ns} costats`;
-    opts=uniq4(correct,pols.filter(x=>x.n!==p.n).map(x=>`${x.ns} costats`));
-    guide=['tri=3, quad=4, penta=5, hexa=6, hepta=7, octa=8'];
-    solution=[...guide,`✅ ${p.n}: ${p.ns} costats`];
-  } else if(q===3){
-    question=`Quina és la diferència entre una <b>recta</b> i un <b>segment</b>?`;
-    correct='La recta és infinita; el segment té dos extrems';
-    opts=uniq4(correct,['La recta té dos extrems; el segment és infinit','Ambdós són infinits','El segment és corbat; la recta és recta']);
-    guide=['Recta → sense extrems, infinita','Segment → dos extrems, longitud finita'];
-    solution=[...guide,`✅ ${correct}`];
-  } else if(q===4){
     const items=[
-      {q:'Dues rectes que no es tallen mai i estan al mateix pla',a:'Rectes paral·leles',w:['Rectes perpendiculars','Rectes secants','Rectes coincidents']},
-      {q:'Dues rectes que es tallen formant 4 angles de 90°',a:'Rectes perpendiculars',w:['Rectes paral·leles','Rectes obliqüetes','Rectes coincidents']},
-      {q:'Dues rectes que es tallen en un punt',a:'Rectes secants',w:['Rectes paral·leles','Rectes perpendiculars','Rectes coincidents']},
-      {q:'Dues rectes que comparteixen tots els punts',a:'Rectes coincidents',w:['Rectes paral·leles','Rectes perpendiculars','Rectes secants']},
+      {
+        q:'Dues rectes que <b>no es tallen mai</b> són...',
+        a:'Paral·leles',
+        w:['Perpendiculars','Secants','Coincidents']
+      },
+      {
+        q:'Dues rectes que es tallen formant un angle de <b>90°</b> són...',
+        a:'Perpendiculars',
+        w:['Paral·leles','Secants obliqües','Coincidents']
+      },
+      {
+        q:'Dues rectes que es tallen en un punt i <b>no formen 90°</b> són...',
+        a:'Secants obliqües',
+        w:['Paral·leles','Perpendiculars','Coincidents']
+      },
+      {
+        q:'Dues rectes que tenen <b>tots els punts en comú</b> són...',
+        a:'Coincidents',
+        w:['Paral·leles','Perpendiculars','Secants']
+      }
     ];
+
     const it=items[rnd(0,items.length-1)];
-    question=it.q; correct=it.a; opts=uniq4(correct,it.w);
-    guide=['Paral·leles: no es tallen | Perp.: 90° | Secants: 1 punt | Coincidents: tots els punts'];
-    solution=[...guide,`✅ ${correct}`];
-  } else if(q===5){
-    // NOU: mediatriu i bisectriu
-    const items=[
-      {q:'La <b>mediatriu</b> d\'un segment és...',a:'La recta perpendicular al segment pel seu punt mig',w:['La recta paral·lela al segment','La bisectriu de l\'angle','La recta que passa pels extrems']},
-      {q:'La <b>bisectriu</b> d\'un angle és...',a:'La semirecta que divideix l\'angle en dues parts iguals',w:['La mediatriu del costat','La recta perpendicular al vèrtex','La diagonal del quadrilàter']},
+    question=it.q;
+    correct=it.a;
+    opts=uniq4(correct,it.w);
+
+    guide=[
+      'Comprova primer si les dues rectes es tallen.',
+      'Si es tallen, observa l’angle que formen.',
+      'Si no es tallen, comprova si mantenen sempre la mateixa distància.'
     ];
-    const it=items[rnd(0,1)]; question=it.q; correct=it.a; opts=uniq4(correct,it.w);
-    guide=['Mediatriu: perpendicular + punt mig','Bisectriu: divideix l\'angle en 2 parts iguals'];
-    solution=[...guide,`✅ ${correct}`];
+
+    solution=[
+      'Paral·leles: no tenen cap punt en comú.',
+      'Perpendiculars: es tallen formant angles rectes.',
+      'Secants obliqües: es tallen sense formar angles rectes.',
+      'Coincidents: tenen tots els punts en comú.',
+      `✅ ${correct}`
+    ];
+
+  // 3. Mediatriu
+  } else if(q===3){
+    question='La <b>mediatriu</b> d’un segment és...';
+    correct='La recta perpendicular al segment que passa pel seu punt mig';
+    opts=uniq4(correct,[
+      'La recta paral·lela al segment que passa pel seu punt mig',
+      'La recta perpendicular al segment que passa per un dels seus extrems',
+      'La recta que uneix els dos extrems del segment'
+    ]);
+
+    guide=[
+      'Identifica primer quin element geomètric està relacionat amb la mediatriu.',
+      'Comprova en quin punt del segment ha de passar.',
+      'Comprova quina relació ha de tenir amb el segment.'
+    ];
+
+    solution=[
+      'La mediatriu està relacionada amb un segment.',
+      'Passa pel punt mig del segment.',
+      'És perpendicular al segment.',
+      `✅ ${correct}`
+    ];
+
+  // 4. Bisectriu
+  } else if(q===4){
+    question='La <b>bisectriu</b> d’un angle és...';
+    correct='La semirecta que divideix l’angle en dues parts iguals';
+    opts=uniq4(correct,[
+      'La recta perpendicular a un dels costats de l’angle',
+      'La semirecta que divideix el segment en dues parts iguals',
+      'La recta que uneix els dos costats de l’angle pels seus extrems'
+    ]);
+
+    guide=[
+      'Identifica primer si la definició fa referència a un angle o a un segment.',
+      'Comprova què ha de dividir la bisectriu.',
+      'Comprova com han de ser les dues parts resultants.'
+    ];
+
+    solution=[
+      'La bisectriu està relacionada amb un angle.',
+      'Divideix l’angle en dues parts.',
+      'Les dues parts tenen la mateixa amplitud.',
+      `✅ ${correct}`
+    ];
+
+  // 5. Mediatriu vs bisectriu
+  } else if(q===5){
+    const items=[
+      {
+        q:'Quina construcció divideix un <b>segment</b> en dues parts iguals i és perpendicular al segment?',
+        a:'Mediatriu',
+        w:['Bisectriu','Paral·lela','Diagonal']
+      },
+      {
+        q:'Quina construcció divideix un <b>angle</b> en dues parts iguals?',
+        a:'Bisectriu',
+        w:['Mediatriu','Mediadora','Perpendicular']
+      },
+      {
+        q:'Quina afirmació és correcta?',
+        a:'La mediatriu correspon a un segment i la bisectriu a un angle',
+        w:[
+          'La bisectriu correspon a un segment i la mediatriu a un angle',
+          'Totes dues divideixen segments',
+          'Totes dues divideixen angles'
+        ]
+      }
+    ];
+
+    const it=items[rnd(0,items.length-1)];
+    question=it.q;
+    correct=it.a;
+    opts=uniq4(correct,it.w);
+
+    guide=[
+      'Identifica si l’element que es divideix és un segment o un angle.',
+      'Relaciona cada construcció amb l’element corresponent.',
+      'Comprova què significa “dividir en dues parts iguals”.'
+    ];
+
+    solution=[
+      'Mediatriu → segment.',
+      'Bisectriu → angle.',
+      'La mediatriu passa pel punt mig i és perpendicular al segment.',
+      'La bisectriu divideix l’angle en dues parts iguals.',
+      `✅ ${correct}`
+    ];
+
+  // 6. Identificació conceptual
   } else {
     const items=[
-      {q:'Com es diu el punt on es troben els dos costats d\'un angle?',a:'Vèrtex',w:['Extrem','Origen','Bisectriu']},
-      {q:'Un polígon és <b>regular</b> quan...',a:'Tots els costats i angles són iguals',w:['Té un angle recte','No té diagonals','Té un nombre parell de costats']},
-      {q:'Com s\'anomena la línia recta que uneix dos vèrtexs no adjacents d\'un polígon?',a:'Diagonal',w:['Costat','Aresta','Mediatriu']},
+      {
+        q:'Quina afirmació descriu correctament una <b>recta</b>?',
+        a:'No té extrems i s’allarga infinitament en les dues direccions',
+        w:[
+          'Té dos extrems i longitud limitada',
+          'Té un extrem i s’allarga infinitament en una direcció',
+          'No té dimensions i només indica una posició'
+        ]
+      },
+      {
+        q:'Quina afirmació descriu correctament un <b>segment</b>?',
+        a:'Té dos extrems i una longitud limitada',
+        w:[
+          'No té extrems i és infinit',
+          'Té un extrem i és infinit per l’altre costat',
+          'No té longitud i només indica una posició'
+        ]
+      },
+      {
+        q:'Quina afirmació descriu correctament una <b>semirecta</b>?',
+        a:'Té un extrem i s’allarga infinitament en una direcció',
+        w:[
+          'Té dos extrems i longitud limitada',
+          'No té extrems i s’allarga en dues direccions',
+          'No té dimensions i només indica una posició'
+        ]
+      }
     ];
-    const it=items[rnd(0,items.length-1)]; question=it.q; correct=it.a; opts=uniq4(correct,it.w);
-    guide=['Recorda la terminologia bàsica de geometria'];
-    solution=[...guide,`✅ ${correct}`];
+
+    const it=items[rnd(0,items.length-1)];
+    question=it.q;
+    correct=it.a;
+    opts=uniq4(correct,it.w);
+
+    guide=[
+      'Comprova primer quants extrems té l’element.',
+      'Després determina si la seva longitud és limitada o infinita.',
+      'Finalment relaciona aquestes característiques amb l’element geomètric corresponent.'
+    ];
+
+    solution=[
+      'Recta → sense extrems i infinita en dues direccions.',
+      'Segment → dos extrems i longitud limitada.',
+      'Semirecta → un extrem i infinita en una direcció.',
+      `✅ ${correct}`
+    ];
   }
-  return {question,correct,options:opts,guide,solution,svg};
+
+  return {topicId:'elements',type:q,question,correct,options:opts,guide,solution,svg};
 }
 
 // 2. ANGLES
 function genAngles(){
   const q=rnd(1,7);
   let question,correct,opts,guide,solution,svg='';
+
   if(q===1){
     const tipus=[
-      {nom:'agut',rang:'entre 0° i 90°',ex:rnd(15,89)},
-      {nom:'recte',rang:'exactament 90°',ex:90},
-      {nom:'obtús',rang:'entre 90° i 180°',ex:rnd(91,179)},
-      {nom:'pla',rang:'exactament 180°',ex:180},
+      {nom:'agut',ex:rnd(15,89)},
+      {nom:'recte',ex:90},
+      {nom:'obtús',ex:rnd(91,179)},
+      {nom:'pla',ex:180}
     ];
     const t=tipus[rnd(0,tipus.length-1)];
-    svg=svgAngle(t.ex);
     question=`Quin tipus d'angle mesura <b>${t.ex}°</b>?`;
-    correct=`Angle ${t.nom} (${t.rang})`;
-    opts=uniq4(correct,tipus.filter(x=>x.nom!==t.nom).map(x=>`Angle ${x.nom} (${x.rang})`));
-    guide=['Agut: 0°–90° | Recte: =90° | Obtús: 90°–180° | Pla: =180°',`El teu angle és ${t.ex}°`];
-    solution=[...guide,`✅ ${correct}`];
-  } else if(q===2){
-    const a=rnd(15,74); const b=90-a;
-    question=`Dos angles són <b>complementaris</b>. Un és <b>${a}°</b>. Quant mesura l'altre?`;
-    correct=`${b}°`; opts=uniq4(correct,[`${180-a}°`,`${90+a}°`,`${a}°`]);
-    guide=['Complementaris → sumen 90°',`90° − ${a}° = ${b}°`];
-    solution=[...guide,`✅ ${b}°`];
-  } else if(q===3){
-    const a=rnd(20,159); const b=180-a;
-    question=`Dos angles són <b>suplementaris</b>. Un és <b>${a}°</b>. Quant mesura l'altre?`;
-    const d1=b+10<=360?b+10:b-10; const d2=b+20<=360?b+20:b-20; const d3=360-a!==b?360-a:b+30;
-    correct=`${b}°`; opts=uniq4(correct,[`${d1}°`,`${d2}°`,`${d3}°`]);
-    guide=['Suplementaris → sumen 180°',`180° − ${a}° = ${b}°`];
-    solution=[...guide,`✅ ${b}°`];
-  } else if(q===4){
-    const a=rnd(20,160);
-    question=`L'angle <b>oposat pel vèrtex</b> d'un angle de <b>${a}°</b> mesura...?`;
-    const d1=180-a!==a?180-a:a+15; const d2=360-a!==a?360-a:a+20; const d3=a+30<=360?a+30:a-15;
-    correct=`${a}°`; opts=uniq4(correct,[`${d1}°`,`${d2}°`,`${d3}°`]);
-    guide=['Oposats pel vèrtex → sempre iguals'];
-    solution=[...guide,`✅ ${a}°`];
-  } else if(q===5){
-    // NOU: angles explementaris (sumen 360°)
-    const a=rnd(30,330); const b=360-a;
-    question=`Dos angles formen una volta completa. Un és <b>${a}°</b>. Quant mesura l'altre? (angles explementaris)`;
-    correct=`${b}°`; opts=uniq4(correct,[`${180-a>0?180-a:a-180}°`,`${360+a}°`,`${a}°`]);
-    guide=['Explementaris → sumen 360°',`360° − ${a}° = ${b}°`];
-    solution=[...guide,`✅ ${b}°`];
-  } else if(q===6){
-    // NOU: angles amb rectes paral·leles (alterns, corresponents, conjugats)
-    const alpha=rnd(30,150);
-    const items=[
-      {q:`Una transversal talla dues rectes paral·leles. Un angle forma <b>${alpha}°</b>. Quant mesuren els angles <b>alterns interns</b>?`,a:`${alpha}°`,w:[`${180-alpha}°`,`${360-alpha}°`,`${90}°`],g:['Angles alterns interns → iguals quan les rectes són paral·leles']},
-      {q:`Una transversal talla dues rectes paral·leles. Un angle forma <b>${alpha}°</b>. Quant mesuren els angles <b>corresponents</b>?`,a:`${alpha}°`,w:[`${180-alpha}°`,`${360-alpha}°`,`${alpha+10}°`],g:['Angles corresponents → iguals quan les rectes són paral·leles']},
-      {q:`Una transversal talla dues rectes paral·leles. Un angle forma <b>${alpha}°</b>. Quant mesuren els angles <b>conjugats interns</b> (co-interns)?`,a:`${180-alpha}°`,w:[`${alpha}°`,`${360-alpha}°`,`${90}°`],g:['Angles conjugats interns → sumen 180° quan les rectes són paral·leles']},
+    correct=`Angle ${t.nom}`;
+    opts=uniq4(correct,['Angle agut','Angle recte','Angle obtús','Angle pla'].filter(x=>x!==correct));
+    guide=[
+      'Compara la mesura de l’angle amb 90° i 180°.',
+      'Decideix si és menor que 90°, exactament 90°, entre 90° i 180°, o exactament 180°.'
     ];
+    solution=[
+      'Agut: menor de 90°; recte: 90°; obtús: entre 90° i 180°; pla: 180°.',
+      `✅ ${correct}`
+    ];
+    svg=svgAngle(t.ex);
+
+  }else if(q===2){
+    const a=rnd(15,75),b=90-a;
+    question=`Dos angles són <b>complementaris</b>. Un mesura <b>${a}°</b>. Quant mesura l'altre?`;
+    correct=`${b}°`;
+    opts=uniq4(correct,[`${90+a}°`,`${180-a}°`,`${a}°`,`${180-b}°`]);
+    guide=[
+      'Recorda què significa que dos angles siguin complementaris.',
+      'Calcula quant falta a l’angle conegut per arribar a la suma corresponent.'
+    ];
+    solution=[`Els angles complementaris sumen 90°.`,`90° − ${a}° = ${b}°.`,`✅ ${b}°`];
+
+  }else if(q===3){
+    const a=rnd(20,160),b=180-a;
+    question=`Dos angles són <b>suplementaris</b>. Un mesura <b>${a}°</b>. Quant mesura l'altre?`;
+    correct=`${b}°`;
+    opts=uniq4(correct,[`${180+a}°`,`${360-a}°`,`${a}°`,`${90-a>0?90-a:90+a}°`]);
+    guide=[
+      'Recorda què significa que dos angles siguin suplementaris.',
+      'Calcula quant falta a l’angle conegut per completar la suma corresponent.'
+    ];
+    solution=[`Els angles suplementaris sumen 180°.`,`180° − ${a}° = ${b}°.`,`✅ ${b}°`];
+
+  }else if(q===4){
+    const a=rnd(25,155);
+    question=`Un angle mesura <b>${a}°</b>. Quant mesura el seu <b>oposat pel vèrtex</b>?`;
+    correct=`${a}°`;
+    opts=uniq4(correct,[`${180-a}°`,`${360-a}°`,`${90}°`,`${a+20}°`]);
+    guide=[
+      'Observa la relació geomètrica entre dos angles oposats pel vèrtex.',
+      'No cal sumar-los ni completar cap angle pla.'
+    ];
+    solution=[`Els angles oposats pel vèrtex tenen la mateixa mesura.`,`✅ ${a}°`];
+
+  }else if(q===5){
+    const a=rnd(30,330),b=360-a;
+    question=`Dos angles són <b>explementaris</b>. Un mesura <b>${a}°</b>. Quant mesura l'altre?`;
+    correct=`${b}°`;
+    opts=uniq4(correct,[`${180-a>0?180-a:a-180}°`,`${a}°`,`${360+a}°`,`${180+b}°`]);
+    guide=[
+      'Relaciona els angles explementaris amb una volta completa.',
+      'Calcula quina part de la volta falta després de l’angle conegut.'
+    ];
+    solution=[`Els angles explementaris sumen 360°.`,`360° − ${a}° = ${b}°.`,`✅ ${b}°`];
+
+  }else if(q===6){
+    const alpha=rnd(35,145);
+    const items=[
+      {q:`Una transversal talla dues rectes paral·leles. Un angle mesura <b>${alpha}°</b>. Quant mesura el seu <b>altern intern</b>?`,a:`${alpha}°`,w:[`${180-alpha}°`,`${360-alpha}°`,`90°`],rel:'alterns interns'},
+      {q:`Una transversal talla dues rectes paral·leles. Un angle mesura <b>${alpha}°</b>. Quant mesura el seu <b>corresponent</b>?`,a:`${alpha}°`,w:[`${180-alpha}°`,`${360-alpha}°`,`90°`],rel:'corresponents'},
+      {q:`Una transversal talla dues rectes paral·leles. Un angle mesura <b>${alpha}°</b>. Quant mesura el seu <b>conjugat intern</b>?`,a:`${180-alpha}°`,w:[`${alpha}°`,`${360-alpha}°`,`90°`],rel:'conjugats interns'}
+    ];
+    const it=items[rnd(0,items.length-1)];
+    question=it.q; correct=it.a; opts=uniq4(correct,it.w);
+    guide=[
+      'Identifica primer quin tipus de parella d’angles indica l’enunciat.',
+      'Recorda si aquesta relació conserva la mesura o completa un angle pla.'
+    ];
+    solution=[it.rel==='conjugats interns'?'Els conjugats interns sumen 180°.':'Aquesta parella d’angles té la mateixa mesura.',`✅ ${correct}`];
     svg=svgParalelRec();
-    const it=items[rnd(0,items.length-1)]; question=it.q; correct=it.a; opts=uniq4(correct,it.w);
-    guide=it.g; solution=[...guide,`✅ ${correct}`];
-  } else {
-    // NOU: angles en polígons regulars
+
+  }else{
     const pols=[{n:3,nom:'triangle',si:60},{n:4,nom:'quadrat',si:90},{n:5,nom:'pentàgon',si:108},{n:6,nom:'hexàgon',si:120},{n:8,nom:'octàgon',si:135}];
     const p=pols[rnd(0,pols.length-1)];
-    svg=svgPolygon(p.n,p.nom);
     question=`Quant mesura cada angle interior d'un <b>${p.nom} regular</b>?`;
     correct=`${p.si}°`;
-    opts=uniq4(correct,pols.filter(x=>x.n!==p.n).map(x=>`${x.si}°`));
-    guide=['Angle interior polígon regular = (n−2)×180° / n',`(${p.n}−2)×180° / ${p.n} = ${(p.n-2)*180/p.n}°`];
-    solution=[...guide,`✅ ${p.si}°`];
+    const wrongs=pols.filter(x=>x.n!==p.n).map(x=>`${x.si}°`);
+    opts=uniq4(correct,wrongs);
+    guide=[
+      'Identifica el nombre de costats del polígon regular.',
+      'Calcula primer la suma dels angles interiors.',
+      'Com que és regular, reparteix aquesta suma entre tots els angles.'
+    ];
+    solution=[`Suma interior = (${p.n}−2) × 180°.`,`Cada angle = [(${p.n}−2) × 180°] ÷ ${p.n} = ${p.si}°.`,`✅ ${p.si}°`];
+    svg=svgPolygon(p.n,p.nom);
   }
-  return {question,correct,options:opts,guide,solution,svg};
+
+  return {topicId:'angles',type:q,question,correct,options:opts,guide,solution,svg};
 }
 
 // 3. OPERACIONS SEXAGESIMALS
 function genSexa(){
   const q=rnd(1,5);
-  let question,correct,opts,guide,solution;
+  let question,correct,opts,guide,solution,svg='';
+
+  function f(g,m,se){return `${g}° ${m}' ${se}"`;}
+
   if(q===1){
-    const g1=rnd(10,80),m1=rnd(5,55),s1=rnd(1,55);
-    const g2=rnd(5,79),m2=rnd(5,54),s2=rnd(1,54);
-    let sS=s1+s2,sM=m1+m2,sG=g1+g2;
-    if(sS>=60){sS-=60;sM++;}
-    if(sM>=60){sM-=60;sG++;}
-    question=`${g1}° ${m1}' ${s1}" + ${g2}° ${m2}' ${s2}" = ?`;
-    correct=`${sG}° ${sM}' ${sS}"`;
-    // Distractors sempre diferents de la correcta
-    const d1=`${sG+1}° ${sM}' ${sS}"`,d2=`${sG}° ${(sM+2)%60}' ${sS}"`,d3=`${sG}° ${sM}' ${(sS+5)%60}"`;
-    opts=uniq4(correct,[d1,d2,d3]);
-    guide=['1. Suma els segons (si ≥60, porta 1 als min)','2. Suma els minuts (si ≥60, porta 1 als graus)','3. Suma els graus'];
-    solution=[`Seg: ${s1}+${s2}=${s1+s2}${s1+s2>=60?` → ${sS}" + porto 1`:''}`,`Min: ${m1}+${m2}${s1+s2>=60?'+1':''}=${sM}'`,`Graus: ${g1}+${g2}${m1+m2+(s1+s2>=60?1:0)>=60?'+1':''}=${sG}°`,`✅ ${correct}`];
-  } else if(q===2){
-    let g1=rnd(40,120),m1=rnd(10,58),s1=rnd(5,58);
-    let g2=rnd(5,g1-5),m2=rnd(0,m1-1>0?m1-2:0),s2=rnd(0,s1-2>0?s1-2:0);
-    let rS=s1-s2,rM=m1-m2,rG=g1-g2;
-    if(rS<0){rS+=60;rM--;}
-    if(rM<0){rM+=60;rG--;}
-    if(rG<0){return genSexa();}
-    question=`${g1}° ${m1}' ${s1}" − ${g2}° ${m2}' ${s2}" = ?`;
-    correct=`${rG}° ${rM}' ${rS}"`;
-    const e1=`${rG+1}° ${rM}' ${rS}"`,e2=`${rG}° ${(rM+3)%60}' ${rS}"`,e3=`${rG}° ${rM}' ${(rS+4)%60}"`;
-    opts=uniq4(correct,[e1,e2,e3]);
-    guide=['1. Resta els segons (si cal, manlleua 60 del minut)','2. Resta els minuts (si cal, manlleua 60 del grau)','3. Resta els graus'];
-    solution=[`Seg: ${s1}−${s2}=${s1-s2<0?s1-s2+60+'" (manlleuo 60)':rS+'"'}`,`Min: ${m1}−${m2}${s1<s2?'−1':''}=${rM}'`,`Graus: ${rG}°`,`✅ ${correct}`];
-  } else if(q===3){
-    // Conversió graus decimals → sexagesimals
-    const g=rnd(5,89);
-    const decArr=[25,5,75,1,50,4,6,2,8];
-    const dec=decArr[rnd(0,decArr.length-1)];
-    const totalMin=dec*60/100;
-    const mInt=Math.floor(totalMin);
-    const seg=Math.round((totalMin-mInt)*60);
-    question=`Converteix <b>${g},${String(dec).padStart(2,'0')}°</b> a graus, minuts i segons`;
-    correct=`${g}° ${mInt}' ${seg}"`;
-    opts=uniq4(correct,[`${g}° ${dec}' 0"`,`${g+1}° ${mInt}' ${seg}"`,`${g}° ${mInt+1}' ${seg}"`]);
-    guide=['Part decimal → minuts: 0,xx° × 60','Part decimal dels minuts → segons: 0,xx\' × 60'];
-    solution=[`0,${dec}° × 60 = ${totalMin}'`,`Part decimal: ${(totalMin-mInt).toFixed(3)}' × 60 = ${seg}"`,`✅ ${correct}`];
-  } else if(q===4){
-    // Conversió sexagesimals → decimals (m sempre >0 per evitar opcions idèntiques)
-    const g=rnd(10,60),m=rnd(5,55);
-    const dec=+(g+m/60).toFixed(4);
-    const decRound=Math.round(dec*100)/100;
-    question=`Converteix <b>${g}° ${m}' 0"</b> a graus decimals (2 decimals)`;
-    correct=`${decRound}°`;
-    // Distractors: error comú (m sense dividir), error de suma directa, off-by-one
-    const d1=`${Math.round((g+m/100)*100)/100}°`;
-    const d2=`${g+m}°`;
-    const d3=`${Math.round((decRound+0.5)*100)/100}°`;
-    opts=uniq4(correct,[d1,d2,d3].filter(d=>d!==correct));
-    guide=['Graus decimals = graus + minuts/60 + segons/3600',`${g} + ${m}/60 = ${dec.toFixed(4)} ≈ ${decRound}°`];
-    solution=[...guide,`✅ ${decRound}°`];
-  } else {
+    const g1=rnd(10,70),m1=rnd(10,55),s1=rnd(10,55);
+    const g2=rnd(5,50),m2=rnd(10,55),s2=rnd(10,55);
+    let sg=s1+s2,sm=m1+m2,gg=g1+g2;
+    const rawS=sg,rawM=sm;
+    if(sg>=60){sg-=60;sm++;}
+    if(sm>=60){sm-=60;gg++;}
+    question=`Calcula: <b>${f(g1,m1,s1)} + ${f(g2,m2,s2)}</b>`;
+    correct=f(gg,sm,sg);
+    const noCarry=f(g1+g2,rawM,rawS);
+    const carrySecOnly=f(g1+g2,rawM+(rawS>=60?1:0),rawS>=60?rawS-60:rawS);
+    const carryWrong=f(gg+1,sm,sg);
+    opts=uniq4(correct,[noCarry,carrySecOnly,carryWrong,f(gg,sg,sm)]);
+    guide=[
+      'Suma per separat graus, minuts i segons.',
+      'Comença pels segons i comprova si cal transformar-ne una part en minuts.',
+      'Després revisa els minuts i transforma’ls en graus si cal.'
+    ];
+    solution=[`Resultat normalitzat: ${correct}.`,`✅ ${correct}`];
+
+  }else if(q===2){
+    let g1=rnd(30,100),m1=rnd(0,59),s1=rnd(0,59);
+    const g2=rnd(5,g1-5),m2=rnd(0,59),s2=rnd(0,59);
+    let total1=g1*3600+m1*60+s1,total2=g2*3600+m2*60+s2;
+    if(total2>=total1){total1=total2+rnd(600,5000);g1=Math.floor(total1/3600);m1=Math.floor(total1%3600/60);s1=total1%60;}
+    let dif=total1-total2,gg=Math.floor(dif/3600),sm=Math.floor(dif%3600/60),sg=dif%60;
+    question=`Calcula: <b>${f(g1,m1,s1)} − ${f(g2,m2,s2)}</b>`;
+    correct=f(gg,sm,sg);
+    const absParts=f(Math.abs(g1-g2),Math.abs(m1-m2),Math.abs(s1-s2));
+    opts=uniq4(correct,[absParts,f(gg,sg,sm),f(gg+1,sm,sg),f(Math.max(0,gg-1),sm,sg)]);
+    guide=[
+      'Resta començant pels segons.',
+      'Si una quantitat no és suficient, manlleva una unitat del rang superior.',
+      'Recorda que cada manlleu aporta 60 unitats del rang inferior.'
+    ];
+    solution=[`Després dels manlleus necessaris, el resultat és ${correct}.`,`✅ ${correct}`];
+
+  }else if(q===3){
+    const g=rnd(5,80),minChoices=[6,12,18,24,30,36,42,48,54],m=minChoices[rnd(0,minChoices.length-1)];
+    const dec=+(g+m/60).toFixed(2);
+    question=`Converteix <b>${String(dec).replace('.',',')}°</b> a graus i minuts.`;
+    correct=`${g}° ${m}'`;
+    const decPart=String(dec).split('.')[1]||'0';
+    opts=uniq4(correct,[`${g}° ${parseInt(decPart,10)}'`,`${g}° ${Math.min(59,m+6)}'`,`${g+1}° ${m}'`,`${g}° ${Math.max(0,m-6)}'`]);
+    guide=[
+      'Separa la part entera de la part decimal dels graus.',
+      'Conserva la part entera com a graus.',
+      'Transforma només la part decimal al següent nivell del sistema sexagesimal.'
+    ];
+    solution=[`La part decimal es transforma a minuts: ${m}'.`,`✅ ${correct}`];
+
+  }else if(q===4){
+    const g=rnd(5,80),m=[6,12,18,24,30,36,42,48,54][rnd(0,8)];
+    const dec=+(g+m/60).toFixed(2);
+    question=`Converteix <b>${g}° ${m}'</b> a graus decimals.`;
+    correct=`${String(dec).replace('.',',')}°`;
+    opts=uniq4(correct,[`${String(+(g+m/100).toFixed(2)).replace('.',',')}°`,`${String(+(g+m).toFixed(2)).replace('.',',')}°`,`${String(+(g+m/3600).toFixed(2)).replace('.',',')}°`,`${String(+(g-m/60).toFixed(2)).replace('.',',')}°`]);
+    guide=[
+      'Mantén els graus sencers.',
+      'Converteix els minuts en una fracció de grau.',
+      'Afegeix aquesta fracció als graus sencers.'
+    ];
+    solution=[`Els minuts representen ${m}/60 de grau.`,`✅ ${correct}`];
+
+  }else{
     const items=[
-      {q:'Quants minuts té 1 grau?',a:"60'",w:["100'","360'","30'"]},
-      {q:'Quants segons té 1 minut?',a:'60"',w:['100"','360"','30"']},
-      {q:'Quants segons té 1 grau?',a:'3.600"',w:['360"','600"','1.000"']},
-      {q:'Quants graus té una volta completa?',a:'360°',w:['180°','90°','270°']},
-      {q:'Quant val la meitat d\'un angle recte?',a:"45° = 45° 0' 0\"",w:["30° 0' 0\"","60° 0' 0\"","90° 0' 0\""]},
+      {q:`Quants minuts d'arc hi ha en <b>2°</b>?`,a:`120'`,w:[`60'`,`200'`,`7200'`],g:['Transforma cada grau en minuts i aplica-ho als dos graus.']},
+      {q:`Quants segons d'arc hi ha en <b>2'</b>?`,a:`120"`,w:[`60"`,`200"`,`7200"`],g:['Transforma cada minut en segons i aplica-ho als dos minuts.']},
+      {q:`Quants minuts són <b>180'</b>?`,a:`180'`,w:[`3'`,`10800'`,`60'`],g:['L’enunciat ja està expressat en minuts; comprova si realment cal convertir la unitat.']},
+      {q:`Quants graus són <b>180'</b>?`,a:`3°`,w:[`180°`,`60°`,`2°`],g:['Agrupa els minuts en blocs que equivalguin a un grau complet.']}
     ];
     const it=items[rnd(0,items.length-1)];
-    question=it.q; correct=it.a; opts=uniq4(correct,it.w);
-    guide=["1° = 60' | 1' = 60\" | 1° = 3.600\""];
-    solution=[...guide,`✅ ${correct}`];
+    question=it.q;correct=it.a;opts=uniq4(correct,it.w);guide=it.g;solution=[`✅ ${correct}`];
   }
-  return {question,correct,options:opts,guide,solution,svg:''};
+
+  return {topicId:'sexa',type:q,question,correct,options:opts,guide,solution,svg};
 }
 
 // 4. TRIANGLES
@@ -581,1046 +801,2714 @@ const PYTHAG_TRIPLES=[[3,4,5],[5,12,13],[8,15,17],[6,8,10],[9,12,15],[7,24,25],[
 function genTriangles(){
   const q=rnd(1,7);
   let question,correct,opts,guide,solution,svg='';
+
+  function fmtTri(n){return String(+n.toFixed(2)).replace('.',',');}
+
   if(q===1){
-    const tipus=[
-      {nom:'equilàter',def:'3 costats iguals (i 3 angles de 60°)',w:['2 costats iguals i 1 diferent','3 costats tots diferents','Té un angle recte']},
-      {nom:'isòsceles',def:'Exactament 2 costats iguals i 1 diferent',w:['3 costats iguals','3 costats tots diferents','Cap costat igual']},
-      {nom:'escalè',def:'3 costats tots diferents',w:['3 costats iguals','2 costats iguals','Té un angle recte']},
+    const kinds=[
+      {name:'Equilàter',s:[6,6,6],w:['Isòsceles','Escalè','Rectangle'],svg:'equilàter'},
+      {name:'Isòsceles',s:[7,7,10],w:['Equilàter','Escalè','Rectangle'],svg:'isòsceles'},
+      {name:'Escalè',s:[6,8,9],w:['Equilàter','Isòsceles','Rectangle'],svg:'escalè'}
     ];
-    const t=tipus[rnd(0,tipus.length-1)]; svg=svgTriangle(t.nom);
-    question=`Definició de triangle <b>${t.nom}</b> (per costats):`;
-    correct=t.def; opts=uniq4(correct,t.w);
-    guide=['Equilàter: 3=|Isòsceles: 2=|Escalè: tots ≠'];
-    solution=[...guide,`✅ ${t.nom}: ${correct}`];
-  } else if(q===2){
-    const tipus=[
-      {nom:'acutangle',def:'Tots els angles menors de 90°'},
-      {nom:'rectangle',def:'Exactament un angle de 90°'},
-      {nom:'obtusangle',def:'Un angle major de 90°'},
+    const it=kinds[rnd(0,kinds.length-1)];
+    question=`Un triangle té costats de <b>${it.s[0]} cm, ${it.s[1]} cm i ${it.s[2]} cm</b>. Com es classifica segons els costats?`;
+    correct=it.name;opts=uniq4(correct,it.w);
+    guide=['Compara les longituds dels tres costats.','Compta quants costats tenen la mateixa longitud.'];
+    solution=[`Costats: ${it.s.join(', ')} cm.`,`✅ ${correct}`];
+    svg=svgTriangle(it.svg);
+
+  }else if(q===2){
+    const kinds=[
+      {name:'Acutangle',a:[55,60,65],w:['Rectangle','Obtusangle','Equilàter']},
+      {name:'Rectangle',a:[35,55,90],w:['Acutangle','Obtusangle','Isòsceles']},
+      {name:'Obtusangle',a:[30,40,110],w:['Acutangle','Rectangle','Equilàter']}
     ];
-    const t=tipus[rnd(0,tipus.length-1)]; svg=svgTriangle(t.nom==='rectangle'?'rectangle':'equilàter');
-    question=`Definició de triangle <b>${t.nom}</b> (per angles):`;
-    // Sempre hi ha exactament 3 definicions, 1 correcta + 2 errònies + 1 extra
-    const wrongDefs=tipus.filter(x=>x.nom!==t.nom).map(x=>x.def);
-    wrongDefs.push('Té almenys dos angles iguals');
-    correct=t.def; opts=uniq4(correct,wrongDefs);
-    guide=['Acutangle: tots <90° | Rectangle: =90° | Obtusangle: un >90°'];
-    solution=[...guide,`✅ ${t.nom}: ${correct}`];
-  } else if(q===3){
-    const a=rnd(30,80),b=rnd(20,Math.min(90,175-a));
-    const c=180-a-b;
-    question=`Un triangle té angles de <b>${a}°</b> i <b>${b}°</b>. Quant mesura el tercer?`;
+    const it=kinds[rnd(0,kinds.length-1)];
+    question=`Un triangle té angles de <b>${it.a[0]}°, ${it.a[1]}° i ${it.a[2]}°</b>. Com es classifica segons els angles?`;
+    correct=it.name;opts=uniq4(correct,it.w);
+    guide=['Observa especialment l’angle més gran.','Compara’l amb 90°.'];
+    solution=[`Angles: ${it.a.join('°, ')}°.`,`✅ ${correct}`];
+    svg=it.name==='Rectangle'?svgTriangle('rectangle'):'';
+
+  }else if(q===3){
+    const a=rnd(25,80),b=rnd(25,Math.min(90,150-a)),c=180-a-b;
+    question=`Un triangle té angles de <b>${a}°</b> i <b>${b}°</b>. Quant mesura el tercer angle?`;
     correct=`${c}°`;
-    opts=uniq4(correct,[`${c+10}°`,`${c-10>0?c-10:c+5}°`,`${180-a}°`]);
-    guide=['Suma dels angles d\'un triangle = 180°',`${a}+${b}+? = 180 → ? = ${c}°`];
-    solution=[...guide,`✅ ${c}°`];
-  } else if(q===4){
-    const triples=[[3,4,5,true],[5,5,8,true],[6,8,10,true],[2,3,6,false],[1,2,4,false],[4,4,4,true],[5,12,13,true],[3,3,7,false],[2,2,5,false],[10,10,10,true],[7,8,9,true],[1,1,3,false]];
+    opts=uniq4(correct,[`${a+b}°`,`${180-a}°`,`${180-b}°`,`${Math.abs(a-b)}°`]);
+    guide=['Recorda la suma dels angles interiors d’un triangle.','Suma els dos angles coneguts.','Calcula quant falta per arribar a la suma total.'];
+    solution=[`${a}° + ${b}° = ${a+b}°.`,`180° − ${a+b}° = ${c}°.`,`✅ ${c}°`];
+
+  }else if(q===4){
+    const triples=[[3,4,5,true],[5,5,8,true],[6,8,10,true],[2,3,6,false],[1,2,4,false],[4,4,4,true],[5,12,13,true],[3,3,7,false],[2,2,5,false],[7,8,9,true],[1,1,3,false]];
     const [a,b,c,valid]=triples[rnd(0,triples.length-1)];
-    question=`Costats de ${a} cm, ${b} cm i ${c} cm — formen un triangle vàlid?`;
-    correct=valid?'Sí, és un triangle vàlid':'No, no forma un triangle';
-    // Sempre 2 opcions clares + 2 de reforç
-    opts=uniq4(correct,['Sí, és un triangle vàlid','No, no forma un triangle','Depèn dels angles','Només si és rectangle'].filter(x=>x!==correct));
-    guide=['Desigualtat triangular: cada costat < suma dels altres dos',`${a}+${b}=${a+b} ${a+b>c?'>':'≤'} ${c}`];
-    solution=[...guide,`✅ ${correct}`];
-  } else if(q===5){
+    question=`Els costats <b>${a} cm, ${b} cm i ${c} cm</b> poden formar un triangle?`;
+    correct=valid?'Sí, formen un triangle':'No, no formen un triangle';
+    opts=uniq4(correct,['Sí, formen un triangle','No, no formen un triangle','Només si és rectangle','Només si és isòsceles'].filter(x=>x!==correct));
+    guide=['Ordena mentalment els costats i identifica el més llarg.','Compara el costat més llarg amb la suma dels altres dos.'];
+    solution=[`${a}+${b}${a+b>c?'>':'≤'}${c}.`,`✅ ${correct}`];
+
+  }else if(q===5){
     const [a,b,c]=PYTHAG_TRIPLES[rnd(0,PYTHAG_TRIPLES.length-1)];
     svg=svgTriangle('rectangle');
     if(rnd(0,1)===0){
-      question=`Triangle rectangle, cates ${a} i ${b} cm. Hipotenusa = ?`;
-      correct=`${c} cm`; opts=uniq4(correct,[`${c+1} cm`,`${a+b} cm`,`${c+2} cm`]);
-      guide=['Pitàgores: c² = a² + b²',`c² = ${a}²+${b}² = ${a*a+b*b}`,`c = √${a*a+b*b} = ${c}`];
-    } else {
-      question=`Triangle rectangle, hipotenusa ${c} cm i cata ${a} cm. Altra cata = ?`;
-      correct=`${b} cm`; opts=uniq4(correct,[`${b+2} cm`,`${c-a} cm`,`${b+1} cm`]);
-      guide=['Pitàgores: b² = c²−a²',`b² = ${c}²−${a}² = ${c*c-a*a}`,`b = √${b*b} = ${b}`];
+      question=`En un triangle rectangle, els catets mesuren <b>${a} cm</b> i <b>${b} cm</b>. Quant mesura la hipotenusa?`;
+      correct=`${c} cm`;
+      opts=uniq4(correct,[`${a+b} cm`,`${a*a+b*b} cm`,`${Math.abs(a-b)} cm`,`${Math.round(Math.sqrt(a+b))} cm`]);
+      guide=['Identifica els dos catets i la hipotenusa desconeguda.','Aplica la relació de Pitàgores entre els quadrats dels tres costats.','Al final, recupera la longitud a partir del seu quadrat.'];
+      solution=[`c²=${a}²+${b}²=${c*c}.`,`c=${c}.`,`✅ ${c} cm`];
+    }else{
+      question=`En un triangle rectangle, la hipotenusa mesura <b>${c} cm</b> i un catet <b>${a} cm</b>. Quant mesura l'altre catet?`;
+      correct=`${b} cm`;
+      opts=uniq4(correct,[`${c-a} cm`,`${c*c-a*a} cm`,`${a+c} cm`,`${Math.round(Math.sqrt(c*c+a*a))} cm`]);
+      guide=['Identifica la hipotenusa i el catet conegut.','Aïlla el quadrat del catet desconegut a la relació de Pitàgores.','Al final, recupera la longitud a partir del seu quadrat.'];
+      solution=[`b²=${c}²−${a}²=${b*b}.`,`b=${b}.`,`✅ ${b} cm`];
     }
-    solution=[...guide,`✅ ${correct}`];
-  } else if(q===6){
-    // NOU: rectes notables del triangle
+
+  }else if(q===6){
     const items=[
-      {q:'La <b>mediatriu</b> d\'un costat del triangle és...',a:'La perpendicular al costat pel seu punt mig',w:['La bisectriu de l\'angle oposat','La línia del vèrtex al costat oposat','La diagonal del triangle']},
-      {q:'La <b>bisectriu</b> d\'un angle del triangle és...',a:'La semirecta que divideix l\'angle en dues parts iguals',w:['La perpendicular al costat','La línia del vèrtex al costat oposat perpendicularment','La mediatriu del costat']},
-      {q:'L\'<b>altura</b> d\'un triangle és...',a:'El segment perpendicular d\'un vèrtex al costat oposat',w:['El segment del vèrtex al punt mig del costat oposat','La bisectriu de l\'angle','La mediatriu del costat oposat']},
-      {q:'La <b>mitjana</b> d\'un triangle és...',a:'El segment que uneix un vèrtex amb el punt mig del costat oposat',w:['La perpendicular al costat','La bisectriu','L\'altura del triangle']},
-      {q:'El punt on es tallen les tres <b>mediatrius</b> d\'un triangle s\'anomena...',a:'Circumcentre',w:['Incentre','Baricentre','Ortocentre']},
-      {q:'El punt on es tallen les tres <b>bisectrius</b> d\'un triangle s\'anomena...',a:'Incentre',w:['Circumcentre','Baricentre','Ortocentre']},
-      {q:'El punt on es tallen les tres <b>mitjanes</b> d\'un triangle s\'anomena...',a:'Baricentre',w:['Incentre','Circumcentre','Ortocentre']},
-      {q:'El punt on es tallen les tres <b>altures</b> d\'un triangle s\'anomena...',a:'Ortocentre',w:['Incentre','Circumcentre','Baricentre']},
+      {q:'La <b>mediatriu</b> d’un costat d’un triangle és...',a:'La recta perpendicular al costat que passa pel seu punt mig',w:['La semirecta que divideix un angle en dues parts iguals','El segment d’un vèrtex al punt mig del costat oposat','El segment perpendicular d’un vèrtex al costat oposat'],g:['Fixa’t que la mediatriu es defineix a partir d’un costat, no d’un vèrtex.','Busca una recta perpendicular que passi pel punt mig.']},
+      {q:'La <b>bisectriu</b> d’un angle d’un triangle és...',a:'La semirecta que divideix l’angle en dues parts iguals',w:['La perpendicular a un costat pel punt mig','El segment d’un vèrtex al punt mig del costat oposat','El segment perpendicular d’un vèrtex al costat oposat'],g:['Fixa’t que la bisectriu es defineix a partir d’un angle.','Busca l’element que el divideix en dues parts iguals.']},
+      {q:'L’<b>altura</b> d’un triangle és...',a:'El segment perpendicular d’un vèrtex al costat oposat o a la seva prolongació',w:['El segment d’un vèrtex al punt mig del costat oposat','La recta perpendicular a un costat pel punt mig','La semirecta que divideix un angle en dues parts iguals'],g:['Parteix d’un vèrtex.','Fixa’t en la condició de perpendicularitat amb el costat oposat.']},
+      {q:'La <b>mediana</b> d’un triangle és...',a:'El segment que uneix un vèrtex amb el punt mig del costat oposat',w:['El segment perpendicular d’un vèrtex al costat oposat','La recta perpendicular a un costat pel punt mig','La semirecta que divideix un angle en dues parts iguals'],g:['Parteix d’un vèrtex.','Fixa’t que acaba exactament al punt mig del costat oposat.']},
+      {q:'On es tallen les tres <b>mediatrius</b>?',a:'Circumcentre',w:['Incentre','Baricentre','Ortocentre'],g:['Relaciona cada recta notable amb el centre geomètric que determina.','Pensa en el centre de la circumferència circumscrita.']},
+      {q:'On es tallen les tres <b>bisectrius</b>?',a:'Incentre',w:['Circumcentre','Baricentre','Ortocentre'],g:['Relaciona cada recta notable amb el centre geomètric que determina.','Pensa en el centre de la circumferència inscrita.']},
+      {q:'On es tallen les tres <b>medianes</b>?',a:'Baricentre',w:['Incentre','Circumcentre','Ortocentre'],g:['Relaciona cada recta notable amb el punt de concurrència corresponent.','Pensa en el centre de gravetat del triangle.']},
+      {q:'On es tallen les tres <b>altures</b>?',a:'Ortocentre',w:['Incentre','Circumcentre','Baricentre'],g:['Relaciona cada recta notable amb el punt de concurrència corresponent.','Fixa’t que la pregunta parla d’altures.']}
     ];
-    const it=items[rnd(0,items.length-1)]; question=it.q; correct=it.a; opts=uniq4(correct,it.w);
-    guide=['Mediatriu→Circumcentre | Bisectriu→Incentre','Mitjana→Baricentre | Altura→Ortocentre'];
-    solution=[...guide,`✅ ${correct}`];
-  } else {
-    // NOU: perímetres i àrea del triangle
-    const b=rnd(4,15),h=rnd(3,12);
-    const area=+(b*h/2).toFixed(1);
+    const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;opts=uniq4(correct,it.w);guide=it.g;solution=[`✅ ${correct}`];
+
+  }else{
     if(rnd(0,1)===0){
-      question=`Àrea d'un triangle de base <b>${b} cm</b> i altura <b>${h} cm</b>`;
-      correct=`${area} cm²`; opts=uniq4(correct,[`${b*h} cm²`,`${b+h} cm²`,`${+(b*h/3).toFixed(1)} cm²`]);
-      guide=['Àrea triangle = (base × altura) / 2',`(${b} × ${h}) / 2 = ${area} cm²`];
-      solution=[...guide,`✅ ${area} cm²`];
-    } else {
-      const a1=rnd(5,12),a2=rnd(5,12),a3=rnd(5,12);
-      const p=a1+a2+a3;
-      question=`Perímetre d'un triangle de costats <b>${a1}, ${a2} i ${a3} cm</b>`;
-      correct=`${p} cm`; opts=uniq4(correct,[`${p+2} cm`,`${p-2} cm`,`${p+5} cm`]);
-      guide=['Perímetre = suma dels tres costats',`${a1}+${a2}+${a3} = ${p} cm`];
-      solution=[...guide,`✅ ${p} cm`];
+      const b=rnd(4,15),h=rnd(3,12),area=b*h/2;
+      question=`Calcula l'àrea d'un triangle de base <b>${b} cm</b> i altura <b>${h} cm</b>.`;
+      correct=`${fmtTri(area)} cm²`;
+      opts=uniq4(correct,[`${fmtTri(b*h)} cm²`,`${fmtTri(b+h)} cm²`,`${fmtTri((b*h)/3)} cm²`,`${fmtTri(2*(b+h))} cm²`]);
+      guide=['Identifica la base i l’altura perpendicular.','Calcula primer el producte de les dues mesures.','L’àrea del triangle és només una part d’aquest producte.'];
+      solution=[`Àrea=(${b}×${h})÷2=${fmtTri(area)} cm².`,`✅ ${correct}`];
+    }else{
+      let a=rnd(5,10),b=rnd(5,10),c=rnd(Math.abs(a-b)+1,a+b-1),p=a+b+c;
+      question=`Calcula el perímetre d'un triangle de costats <b>${a} cm, ${b} cm i ${c} cm</b>.`;
+      correct=`${p} cm`;
+      opts=uniq4(correct,[`${a*b*c} cm`,`${a+b} cm`,`${2*(a+b)} cm`,`${p-c+c*2} cm`]);
+      guide=['El perímetre és la longitud total del contorn.','Compta els tres costats una sola vegada.'];
+      solution=[`${a}+${b}+${c}=${p}.`,`✅ ${p} cm`];
     }
-    svg=svgTriangle('equilàter');
+    svg='';
   }
-  return {question,correct,options:opts,guide,solution,svg};
+
+  return {topicId:'triangles',type:q,question,correct,options:opts,guide,solution,svg};
 }
 
 // 5. QUADRILÀTERS
 function genQuadrilaters(){
   const q=rnd(1,6);
   let question,correct,opts,guide,solution,svg='';
+
   if(q===1){
-    const tipus=[
-      {nom:'quadrat',def:'4 costats iguals i 4 angles rectes'},
-      {nom:'rectangle',def:'2 parells de costats iguals i 4 angles rectes'},
-      {nom:'rombe',def:'4 costats iguals però angles no necessàriament rectes'},
-      {nom:'romboide',def:'2 parells de costats paral·lels, angles no rectes'},
-      {nom:'trapezi',def:'Exactament un parell de costats paral·lels'},
-      {nom:'trapezoide',def:'Cap parell de costats paral·lels'},
-    ];
-    const t=tipus[rnd(0,tipus.length-1)];
-    question=`Definició de <b>${t.nom}</b>:`; correct=t.def;
-    opts=uniq4(correct,tipus.filter(x=>x.nom!==t.nom).map(x=>x.def));
-    guide=['Paral·lelogram: 2 parells //','Quadrat i rombe: 4 costats =','Trapezi: 1 parell //'];
-    solution=[...guide,`✅ ${t.nom}: ${correct}`];
-  } else if(q===2){
     const items=[
-      {q:'Diagonals del <b>quadrat</b>:',a:'Iguals i perpendiculars',w:['Iguals i paral·leles','Desiguals i perpendiculars','Desiguals i obliqüetes'],svg:svgRect()},
-      {q:'Diagonals del <b>rectangle</b>:',a:'Iguals però no perpendiculars',w:['Iguals i perpendiculars','Desiguals i perpendiculars','Desiguals i iguals'],svg:svgRect()},
-      {q:'Diagonals del <b>rombe</b>:',a:'Perpendiculars però no iguals',w:['Iguals i perpendiculars','Iguals i paral·leles','Desiguals i paral·leles'],svg:svgRhombus()},
+      {q:`Quin quadrilàter té <b>4 costats iguals</b> i <b>4 angles rectes</b>?`,a:'Quadrat',w:['Rectangle','Rombe','Romboide'],svg:'',solution:['Té quatre costats iguals i quatre angles rectes.','✅ Quadrat']},
+      {q:`Quin quadrilàter té <b>4 angles rectes</b>, els costats oposats iguals i <b>no té els quatre costats iguals</b>?`,a:'Rectangle',w:['Quadrat','Rombe','Trapezi'],svg:svgRect(),solution:['Té quatre angles rectes i dos parells de costats oposats iguals.','Com que no té els quatre costats iguals, no és un quadrat.','✅ Rectangle']},
+      {q:`Quin quadrilàter té <b>4 costats iguals</b> però no té necessàriament angles rectes?`,a:'Rombe',w:['Quadrat','Rectangle','Romboide'],svg:svgRhombus(),solution:['Té els quatre costats iguals.','Els seus angles no han de ser necessàriament rectes.','✅ Rombe']},
+      {q:`Quin quadrilàter té <b>dos parells de costats oposats paral·lels</b>, sense tenir tots els costats iguals ni quatre angles rectes?`,a:'Romboide',w:['Quadrat','Rombe','Trapezi'],svg:'',solution:['Té dos parells de costats oposats paral·lels.','No és ni rectangle ni rombe ni quadrat.','✅ Romboide']},
+      {q:`Quin quadrilàter té <b>exactament un parell de costats paral·lels</b>?`,a:'Trapezi',w:['Romboide','Rectangle','Trapezoide'],svg:'',solution:['Té exactament un parell de costats paral·lels.','✅ Trapezi']},
+      {q:`Quin quadrilàter <b>no té cap parell de costats paral·lels</b>?`,a:'Trapezoide',w:['Trapezi','Romboide','Rectangle'],svg:'',solution:['No té cap parell de costats paral·lels.','✅ Trapezoide']}
     ];
-    const it=items[rnd(0,items.length-1)];
-    question=it.q; correct=it.a; svg=it.svg;
-    opts=uniq4(correct,it.w);
-    guide=['Quadrat: iguals i 90° | Rectangle: iguals (no 90°) | Rombe: 90° (no iguals)'];
-    solution=[...guide,`✅ ${correct}`];
-  } else if(q===3){
-    const a=rnd(60,120),b=rnd(60,120),c=rnd(60,120);
-    const d=360-a-b-c;
-    if(d<=0||d>=360) return genQuadrilaters();
-    question=`Quadrilàter amb angles <b>${a}°, ${b}° i ${c}°</b>. Quart angle = ?`;
-    correct=`${d}°`; opts=uniq4(correct,[`${d+20}°`,`${d-20>0?d-20:d+30}°`,`${180-a}°`]);
-    guide=['Suma angles quadrilàter = 360°',`360−${a}−${b}−${c} = ${d}°`];
-    solution=[...guide,`✅ ${d}°`];
-  } else if(q===4){
-    // àrea i perímetre quadrilàters
-    const tipus=rnd(0,2);
-    if(tipus===0){
-      const l=rnd(5,14); // l≥5 evita que l²=4l (l=4)
-      question=`Àrea d'un <b>quadrat</b> de costat <b>${l} cm</b>`;
-      correct=`${l*l} cm²`; opts=uniq4(correct,[`${l*4} cm²`,`${l*l+l*2} cm²`,`${l*l*2} cm²`]);
-      guide=['Àrea quadrat = costat²',`${l}² = ${l*l} cm²`]; svg=svgRect();
-      solution=[...guide,`✅ ${l*l} cm²`];
-    } else if(tipus===1){
-      const b=rnd(4,14),h=rnd(3,10);
-      question=`Àrea d'un <b>rectangle</b> de ${b} cm × ${h} cm`;
-      correct=`${b*h} cm²`; opts=uniq4(correct,[`${b+h} cm²`,`${b*h+b} cm²`,`${2*(b+h)} cm²`]);
-      guide=['Àrea rectangle = base × alçada',`${b} × ${h} = ${b*h} cm²`]; svg=svgRect();
-      solution=[...guide,`✅ ${b*h} cm²`];
-    } else {
-      const b=rnd(6,16),h=rnd(4,10); // valors suficientment grans i parells per evitar coincidències
-      const a=+(b*h/2).toFixed(1);
-      question=`Àrea d'un <b>rombe</b> de diagonals <b>${b} cm</b> i <b>${h} cm</b>`;
-      correct=`${a} cm²`; opts=uniq4(correct,[`${b*h} cm²`,`${b+h} cm²`,`${a+b+1} cm²`]);
-      guide=['Àrea rombe = (diagonal₁ × diagonal₂) / 2',`(${b}×${h})/2 = ${a} cm²`]; svg=svgRhombus();
-      solution=[...guide,`✅ ${a} cm²`];
-    }
-  } else if(q===5){
-    const tipus=rnd(0,1);
-    if(tipus===0){
-      const l=rnd(5,15); // ≥5 per evitar 4l=l² (l=4)
-      question=`Perímetre d'un <b>quadrat</b> de costat <b>${l} cm</b>`;
-      correct=`${4*l} cm`; opts=uniq4(correct,[`${l*l} cm`,`${l*2} cm`,`${4*l+4} cm`]);
-      guide=['Perímetre quadrat = 4 × costat',`4 × ${l} = ${4*l} cm`]; svg=svgRect();
-      solution=[...guide,`✅ ${4*l} cm`];
-    } else {
-      const b=rnd(6,14),h=rnd(3,b-2);
-      question=`Perímetre d'un <b>rectangle</b> de ${b} cm × ${h} cm`;
-      correct=`${2*(b+h)} cm`; opts=uniq4(correct,[`${b*h} cm`,`${b+h} cm`,`${2*(b+h)+4} cm`]);
-      guide=['Perímetre rectangle = 2×(base + alçada)',`2×(${b}+${h}) = ${2*(b+h)} cm`]; svg=svgRect();
-      solution=[...guide,`✅ ${2*(b+h)} cm`];
-    }
-  } else {
+    const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;svg=it.svg;opts=uniq4(correct,it.w);
+    guide=['Observa primer quants parells de costats paral·lels apareixen a la descripció.','Després fixa’t en si els costats tenen la mateixa longitud.','Finalment comprova si hi ha angles rectes.','Combina aquestes propietats per identificar el quadrilàter.'];
+    solution=it.solution;
+
+  }else if(q===2){
     const items=[
-      {q:'Quin quadrilàter té tots 4 costats iguals i 4 angles rectes?',a:'Quadrat',w:['Rectangle','Rombe','Trapezi']},
-      {q:'Quin quadrilàter té exactament un parell de costats paral·lels?',a:'Trapezi',w:['Quadrat','Rectangle','Rombe']},
-      {q:'Com es diuen els quadrilàters amb 2 parells de costats paral·lels?',a:'Paral·lelograms',w:['Trapezis','Trapezoïdes','Polígons regulars']},
-      {q:'El <b>trapezi isòsceles</b> té...', a:'Les dues cames iguals',w:['Tots els angles rectes','Cap parell de costats iguals','Tots els costats iguals']},
+      {q:`Com són les diagonals d'un <b>quadrat</b>?`,a:'Iguals i perpendiculars',w:['Iguals i no perpendiculars','Desiguals i perpendiculars','Desiguals i no perpendiculars'],svg:'',solution:['Les diagonals del quadrat tenen la mateixa longitud.','Quan es tallen formen angles rectes.','✅ Iguals i perpendiculars']},
+      {q:`Com són les diagonals d'un <b>rectangle</b> que no és un quadrat?`,a:'Iguals i no perpendiculars',w:['Iguals i perpendiculars','Desiguals i perpendiculars','Desiguals i no perpendiculars'],svg:svgRect(),solution:['Les diagonals d’un rectangle tenen la mateixa longitud.','En un rectangle que no és quadrat no són perpendiculars.','✅ Iguals i no perpendiculars']},
+      {q:`Com són les diagonals d'un <b>rombe</b> que no és un quadrat?`,a:'Desiguals i perpendiculars',w:['Iguals i perpendiculars','Iguals i no perpendiculars','Desiguals i no perpendiculars'],svg:svgRhombus(),solution:['En un rombe que no és quadrat, les diagonals tenen longituds diferents.','Les diagonals es tallen perpendicularment.','✅ Desiguals i perpendiculars']}
     ];
-    const it=items[rnd(0,items.length-1)]; question=it.q; correct=it.a; opts=uniq4(correct,it.w);
-    guide=['Paral·lelogram→2 parells // | Trapezi→1 parell // | Trapezoide→cap'];
-    solution=[...guide,`✅ ${correct}`];
+    const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;svg=it.svg;opts=uniq4(correct,it.w);
+    guide=['Pensa per separat en dues propietats de les diagonals.','Primer compara les seves longituds.','Després pensa en l’angle que formen quan es tallen.'];
+    solution=it.solution;
+
+  }else if(q===3){
+    const a=rnd(70,105),b=rnd(70,105),c=rnd(70,105),suma=a+b+c,d=360-suma;
+    question=`Un quadrilàter té tres angles de <b>${a}°</b>, <b>${b}°</b> i <b>${c}°</b>. Quant mesura el quart angle?`;
+    correct=`${d}°`;
+    opts=uniq4(correct,[`${suma}°`,`${360-a-b}°`,`${360-a-c}°`,`${360-b-c}°`]);
+    guide=['Recorda quina és la suma dels quatre angles interiors d’un quadrilàter.','Suma els tres angles que ja coneixes.','Calcula quant falta per arribar a la suma total.'];
+    solution=[`Els angles interiors d’un quadrilàter sumen 360°.`,`${a}° + ${b}° + ${c}° = ${suma}°.`,`360° − ${suma}° = ${d}°.`,`✅ ${d}°`];
+
+  }else if(q===4){
+    const tipus=rnd(1,3);
+    if(tipus===1){
+      const l=rnd(5,14),area=l*l;
+      question=`Calcula l'àrea d'un <b>quadrat</b> de costat <b>${l} cm</b>.`;correct=`${area} cm²`;
+      opts=uniq4(correct,[`${4*l} cm²`,`${2*l} cm²`,`${area/2} cm²`,`${2*area} cm²`]);
+      guide=['Identifica la longitud del costat.','Pensa com es calcula la superfície d’un quadrat a partir de dues dimensions iguals.','El resultat d’una àrea s’expressa en unitats quadrades.'];
+      solution=[`Àrea del quadrat = costat × costat.`,`${l} × ${l} = ${area}.`,`✅ ${area} cm²`];svg='';
+    }else if(tipus===2){
+      const b=rnd(5,14),h=rnd(3,10),area=b*h;
+      question=`Calcula l'àrea d'un <b>rectangle</b> de <b>${b} cm × ${h} cm</b>.`;correct=`${area} cm²`;
+      opts=uniq4(correct,[`${b+h} cm²`,`${2*(b+h)} cm²`,`${2*b*h} cm²`,`${Math.abs(b-h)} cm²`]);
+      guide=['Identifica la base i l’altura del rectangle.','Per calcular una superfície has de combinar totes dues dimensions.','Recorda expressar el resultat en unitats quadrades.'];
+      solution=[`Àrea del rectangle = base × altura.`,`${b} × ${h} = ${area}.`,`✅ ${area} cm²`];svg=svgRect();
+    }else{
+      const D=rnd(8,16),d=rnd(4,10),area=D*d/2;
+      question=`Calcula l'àrea d'un <b>rombe</b> de diagonals <b>${D} cm</b> i <b>${d} cm</b>.`;correct=`${area} cm²`;
+      opts=uniq4(correct,[`${D*d} cm²`,`${D+d} cm²`,`${(D+d)/2} cm²`,`${2*(D+d)} cm²`]);
+      guide=['Identifica les longituds de les dues diagonals.','Combina les dues diagonals per obtenir el producte necessari.','Recorda que l’àrea del rombe correspon només a una part d’aquest producte.','Expressa el resultat en unitats quadrades.'];
+      solution=[`Àrea del rombe = (diagonal major × diagonal menor) ÷ 2.`,`(${D} × ${d}) ÷ 2 = ${area}.`,`✅ ${area} cm²`];svg=svgRhombus();
+    }
+
+  }else if(q===5){
+    const tipus=rnd(1,2);
+    if(tipus===1){
+      const l=rnd(5,15),p=4*l;
+      question=`Calcula el perímetre d'un <b>quadrat</b> de costat <b>${l} cm</b>.`;correct=`${p} cm`;
+      opts=uniq4(correct,[`${l*l} cm`,`${2*l} cm`,`${3*l} cm`,`${l+4} cm`]);
+      guide=['El perímetre és la longitud total del contorn.','Compta quants costats té el quadrat.','Tots els seus costats tenen la mateixa longitud.','Combina les longituds de tots els costats.'];
+      solution=[`El quadrat té quatre costats de ${l} cm.`,`${l} + ${l} + ${l} + ${l} = ${p}.`,`✅ ${p} cm`];svg='';
+    }else{
+      const b=rnd(6,14),h=rnd(3,b-2),p=2*(b+h);
+      question=`Calcula el perímetre d'un <b>rectangle</b> de <b>${b} cm × ${h} cm</b>.`;correct=`${p} cm`;
+      opts=uniq4(correct,[`${b*h} cm`,`${b+h} cm`,`${2*b+h} cm`,`${b+2*h} cm`]);
+      guide=['El perímetre és la longitud total del contorn.','Recorda que en un rectangle els costats oposats tenen la mateixa longitud.','Assegura’t de comptar els quatre costats.'];
+      solution=[`El rectangle té dos costats de ${b} cm i dos de ${h} cm.`,`${b} + ${h} + ${b} + ${h} = ${p}.`,`✅ ${p} cm`];svg=svgRect();
+    }
+
+  }else{
+    const items=[
+      {q:`Quin quadrilàter té <b>4 costats iguals</b> i <b>4 angles rectes</b>?`,a:'Quadrat',w:['Rectangle','Rombe','Trapezi'],g:['Fixa’t alhora en les longituds dels costats i en els angles.','La resposta ha de complir totes dues condicions.']},
+      {q:`Quin quadrilàter té <b>exactament un parell de costats paral·lels</b>?`,a:'Trapezi',w:['Quadrat','Rectangle','Rombe'],g:['Fixa’t especialment en el nombre de parells de costats paral·lels.','Diferencia entre tenir-ne dos parells, un parell o cap.']},
+      {q:`Com s'anomenen els quadrilàters que tenen <b>dos parells de costats paral·lels</b>?`,a:'Paral·lelograms',w:['Trapezis','Trapezoides','Polígons regulars'],g:['Compta els parells de costats paral·lels que indica l’enunciat.','Busca el nom de la família de quadrilàters definida per aquesta propietat.']},
+      {q:`Quina propietat característica té un <b>trapezi isòsceles</b>?`,a:'Els dos costats no paral·lels tenen la mateixa longitud',w:['Tots quatre costats tenen la mateixa longitud','Tots quatre angles són rectes','No té cap costat paral·lel'],g:['Recorda primer què caracteritza un trapezi.','Després pensa què afegeix el terme “isòsceles”.','Fixa’t especialment en els dos costats que no són paral·lels.']}
+    ];
+    const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;opts=uniq4(correct,it.w);guide=it.g;solution=[`✅ ${correct}`];svg='';
   }
-  return {question,correct,options:opts,guide,solution,svg};
+
+  return {topicId:'quadrilaters',type:q,question,correct,options:opts,guide,solution,svg};
 }
 
 // 6. CIRCUMFERÈNCIA I CERCLE
 function genCircle(){
   const q=rnd(1,7);
   let question,correct,opts,guide,solution,svg='';
+  function fmtCircle(n){const v=Math.round(n*100)/100;return (Number.isInteger(v)?String(v):String(v).replace('.',','));}
+
   if(q===1){
     const items=[
-      {q:'Diferència entre <b>circumferència</b> i <b>cercle</b>:',a:'La circumferència és la línia corba; el cercle inclou l\'interior',w:['Són el mateix','La circumferència inclou l\'interior; el cercle no','El cercle és la línia corba']},
-      {q:'Segment del centre a la circumferència:',a:'Radi',w:['Diàmetre','Corda','Arc']},
-      {q:'Segment que creua la circumferència passant pel centre:',a:'Diàmetre',w:['Radi','Corda','Arc']},
-      {q:'Relació entre diàmetre (d) i radi (r):',a:'d = 2 × r',w:['r = 2 × d','d = r²','d = r/2']},
+      {q:`Quina diferència hi ha entre una <b>circumferència</b> i un <b>cercle</b>?`,a:`La circumferència és la línia corba; el cercle inclou també l'interior`,w:[`Són exactament el mateix`,`La circumferència inclou l'interior i el cercle no`,`El cercle és només la línia corba exterior`],sv:'',g:['Fixa’t en si cada concepte fa referència només al contorn o també a la regió interior.','Diferencia una línia tancada de la superfície que queda dins seu.']},
+      {q:`Com s'anomena el segment que uneix <b>el centre</b> amb un punt de la circumferència?`,a:'Radi',w:['Diàmetre','Corda','Arc'],sv:svgCircle(false),g:['Fixa’t en els dos extrems del segment.','Un dels extrems és el centre i l’altre és un punt de la circumferència.']},
+      {q:`Com s'anomena el segment que uneix dos punts de la circumferència i <b>passa pel centre</b>?`,a:'Diàmetre',w:['Radi','Corda','Arc'],sv:svgCircle(false),g:['Observa que els dos extrems són a la circumferència.','Fixa’t especialment en el fet que el segment passa pel centre.']},
+      {q:`Quina relació hi ha entre el <b>diàmetre</b> i el <b>radi</b>?`,a:'El diàmetre és el doble del radi',w:['El radi és el doble del diàmetre','El diàmetre és el quadrat del radi','El diàmetre és la meitat del radi'],sv:svgCircle(false),g:['Imagina un diàmetre dividit pel centre.','Observa quants radis consecutius formen aquest segment.']}
     ];
-    const it=items[rnd(0,items.length-1)]; question=it.q; correct=it.a; opts=uniq4(correct,it.w);
-    svg=svgCircle(false);
-    guide=['Circ.: línia | Cercle: + interior','Radi: centre→circ. | Diàmetre = 2r'];
-    solution=[...guide,`✅ ${correct}`];
-  } else if(q===2){
-    svg=svgCircle(false);
-    const r=rnd(3,15); const d=r*2;
+    const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;opts=uniq4(correct,it.w);guide=it.g;solution=[`✅ ${correct}`];svg=it.sv;
+
+  }else if(q===2){
+    const r=rnd(4,15),d=2*r;svg=svgCircle(false);
     if(rnd(0,1)===0){
-      question=`Radi = <b>${r} cm</b> → Diàmetre = ?`;
-      correct=`${d} cm`; opts=uniq4(correct,[`${r} cm`,`${d+r} cm`,`${r+1} cm`]);
-      guide=['d = 2r',`2×${r} = ${d} cm`];
-    } else {
-      question=`Diàmetre = <b>${d} cm</b> → Radi = ?`;
-      correct=`${r} cm`; opts=uniq4(correct,[`${d} cm`,`${r+2} cm`,`${r-1>0?r-1:r+3} cm`]);
-      guide=['r = d/2',`${d}/2 = ${r} cm`];
+      question=`Una circumferència té radi <b>${r} cm</b>. Quant mesura el diàmetre?`;correct=`${d} cm`;
+      opts=uniq4(correct,[`${r} cm`,`${fmtCircle(r/2)} cm`,`${3*r} cm`,`${4*r} cm`]);
+      guide=['Identifica quina longitud coneixes i quina has de trobar.','Imagina el diàmetre passant pel centre de la circumferència.','Relaciona la longitud del diàmetre amb els radis que el formen.'];
+      solution=['El diàmetre està format per dos radis.',`${r}+${r}=${d}.`,`✅ ${d} cm`];
+    }else{
+      question=`Una circumferència té diàmetre <b>${d} cm</b>. Quant mesura el radi?`;correct=`${r} cm`;
+      opts=uniq4(correct,[`${d} cm`,`${2*d} cm`,`${fmtCircle(d/4)} cm`,`${3*d} cm`]);
+      guide=['Identifica quina longitud coneixes i quina has de trobar.','Recorda que el centre divideix el diàmetre en dues parts iguals.','Utilitza aquesta relació per obtenir una sola de les parts.'];
+      solution=['El radi és la meitat del diàmetre.',`${d}÷2=${r}.`,`✅ ${r} cm`];
     }
-    solution=[...guide,`✅ ${correct}`];
-  } else if(q===3){
-    svg=svgCircle(false);
-    const r=rnd(3,12);
-    const c=Math.round(2*3.14*r*100)/100;
-    question=`Longitud circumferència de radi <b>${r} cm</b> (π≈3,14)`;
-    correct=`${c} cm`; opts=uniq4(correct,[`${Math.round(3.14*r*100)/100} cm`,`${Math.round(c+r*1)} cm`,`${Math.round(2*3.14*(r+1)*100)/100} cm`]);
-    guide=['C = 2 × π × r',`2 × 3,14 × ${r} = ${c} cm`];
-    solution=[...guide,`✅ C = ${c} cm`];
-  } else if(q===4){
-    svg=svgCircle(false);
-    const r=rnd(3,12);
-    const a=Math.round(3.14*r*r*100)/100;
-    question=`Àrea del cercle de radi <b>${r} cm</b> (π≈3,14)`;
-    correct=`${a} cm²`; opts=uniq4(correct,[`${Math.round(2*3.14*r*100)/100} cm²`,`${Math.round(3.14*r*100)/100} cm²`,`${Math.round(3.14*(r+1)*(r+1)*100)/100} cm²`]);
-    guide=['A = π × r²',`3,14 × ${r}² = 3,14 × ${r*r} = ${a} cm²`];
-    solution=[...guide,`✅ A = ${a} cm²`];
-  } else if(q===5){
-    // Longitud d'arc — r≥5 i deg≥45 per evitar valors massa petits que coincideixen
-    svg=svgCircle(true);
-    const r=rnd(5,12); const deg=[45,60,90,120,180][rnd(0,4)];
-    const arc=Math.round(2*3.14*r*(deg/360)*100)/100;
-    question=`Longitud de l'<b>arc</b> de radi <b>${r} cm</b> i angle central <b>${deg}°</b> (π≈3,14)`;
-    correct=`${arc} cm`;
-    // Distractors ben diferenciats
-    const d1=Math.round(3.14*r*(deg/360)*100)/100; // falta el factor 2
-    const d2=Math.round(arc*2*100)/100;             // el doble
-    const d3=Math.round((arc+r)*100)/100;           // suma el radi per error
-    opts=uniq4(correct,[`${d1} cm`,`${d2} cm`,`${d3} cm`]);
-    guide=['Longitud arc = (α/360) × 2πr',`(${deg}/360) × 2 × 3,14 × ${r} = ${arc} cm`];
-    solution=[...guide,`✅ Arc = ${arc} cm`];
-  } else if(q===6){
-    // Àrea sector circular — r≥5 per valors més distincts
-    svg=svgCircle(true);
-    const r=rnd(5,10); const deg=[45,60,90,120][rnd(0,3)];
-    const sector=Math.round(3.14*r*r*(deg/360)*100)/100;
-    question=`Àrea del <b>sector circular</b> de radi <b>${r} cm</b> i angle <b>${deg}°</b> (π≈3,14)`;
-    correct=`${sector} cm²`;
-    const d1=Math.round(3.14*r*r*100)/100;        // àrea cercle sencer
-    const d2=Math.round(sector*2*100)/100;          // el doble
-    const d3=Math.round(2*3.14*r*(deg/360)*100)/100; // arc en lloc de sector
-    opts=uniq4(correct,[`${d1} cm²`,`${d2} cm²`,`${d3} cm²`]);
-    guide=['Àrea sector = (α/360) × π × r²',`(${deg}/360) × 3,14 × ${r}² = ${sector} cm²`];
-    solution=[...guide,`✅ Sector = ${sector} cm²`];
-  } else {
+
+  }else if(q===3){
+    const r=rnd(3,12),pi=3.14,c=Math.round(2*pi*r*100)/100;svg=svgCircle(false);
+    question=`Calcula la longitud d'una circumferència de radi <b>${r} cm</b> (π ≈ 3,14).`;correct=`${fmtCircle(c)} cm`;
+    opts=uniq4(correct,[`${fmtCircle(pi*r)} cm`,`${fmtCircle(2*r)} cm`,`${fmtCircle(pi*r*r)} cm`,`${fmtCircle(2*pi*r*r)} cm`]);
+    guide=['Identifica el radi de la circumferència.','Pensa en la relació entre el radi i la longitud de tot el contorn.','Utilitza el valor de π indicat a l’enunciat.','Comprova que el resultat s’expressa en unitats de longitud.'];
+    solution=['Longitud de la circumferència = 2 × π × radi.',`2 × 3,14 × ${r} = ${fmtCircle(c)}.`,`✅ ${fmtCircle(c)} cm`];
+
+  }else if(q===4){
+    const r=rnd(3,12),pi=3.14,a=Math.round(pi*r*r*100)/100;svg=svgCircle(false);
+    question=`Calcula l'àrea d'un cercle de radi <b>${r} cm</b> (π ≈ 3,14).`;correct=`${fmtCircle(a)} cm²`;
+    opts=uniq4(correct,[`${fmtCircle(2*pi*r)} cm²`,`${fmtCircle(pi*r)} cm²`,`${fmtCircle(pi*(2*r)*(2*r))} cm²`,`${fmtCircle(2*pi*r*r)} cm²`]);
+    guide=['Identifica el radi del cercle.','Recorda que en el càlcul de l’àrea intervé el radi elevat al quadrat.','Utilitza el valor de π indicat a l’enunciat.','Comprova que el resultat s’expressa en unitats quadrades.'];
+    solution=['Àrea del cercle = π × radi².',`3,14 × ${r}² = ${fmtCircle(a)}.`,`✅ ${fmtCircle(a)} cm²`];
+
+  }else if(q===5){
+    const r=rnd(5,12),deg=[45,60,90,120,180][rnd(0,4)],pi=3.14,full=2*pi*r,arc=Math.round(full*(deg/360)*100)/100;svg='';
+    question=`Calcula la longitud de l'<b>arc</b> d'una circumferència de radi <b>${r} cm</b> i angle central <b>${deg}°</b> (π ≈ 3,14).`;correct=`${fmtCircle(arc)} cm`;
+    opts=uniq4(correct,[`${fmtCircle(pi*r*(deg/360))} cm`,`${fmtCircle(full)} cm`,`${fmtCircle(full*(360/deg))} cm`,`${fmtCircle(full*(deg/180))} cm`]);
+    guide=['Compara l’angle central amb una volta completa.','Determina quina fracció de la circumferència representa aquest angle.','Relaciona aquesta fracció amb la longitud de tota la circumferència.'];
+    solution=[`Una volta completa correspon a 360°.`,`L’arc representa ${deg}/360 de la circumferència.`,`✅ ${fmtCircle(arc)} cm`];
+
+  }else if(q===6){
+    const r=rnd(5,10),deg=[45,60,90,120][rnd(0,3)],pi=3.14,full=pi*r*r,sector=Math.round(full*(deg/360)*100)/100;svg='';
+    question=`Calcula l'àrea del <b>sector circular</b> de radi <b>${r} cm</b> i angle central <b>${deg}°</b> (π ≈ 3,14).`;correct=`${fmtCircle(sector)} cm²`;
+    opts=uniq4(correct,[`${fmtCircle(full)} cm²`,`${fmtCircle(pi*r*(deg/360))} cm²`,`${fmtCircle(2*pi*r*(deg/360))} cm²`,`${fmtCircle(full*(deg/180))} cm²`]);
+    guide=['Compara l’angle central amb una volta completa.','Determina quina fracció del cercle representa el sector.','Relaciona aquesta fracció amb l’àrea de tot el cercle.','Expressa el resultat en unitats quadrades.'];
+    solution=[`El sector representa ${deg}/360 del cercle.`,`✅ ${fmtCircle(sector)} cm²`];
+
+  }else{
     const items=[
-      {q:'Porció de circumferència entre dos punts:',a:'Arc',w:['Corda','Sector','Radi']},
-      {q:'Porció del cercle delimitada per un arc i dos radis:',a:'Sector circular',w:['Arc','Corda','Corona circular']},
-      {q:'Segment que uneix dos punts de la circumferència (sense passar pel centre):',a:'Corda',w:['Radi','Diàmetre','Arc']},
-      {q:'Regió del cercle entre dues circumferències concèntriques:',a:'Corona circular',w:['Sector circular','Arc','Segment circular']},
+      {q:`Com s'anomena una porció de <b>circumferència</b> compresa entre dos punts?`,a:'Arc',w:['Corda','Sector circular','Radi'],g:['Fixa’t que l’enunciat parla d’una part de la línia de la circumferència.','No es tracta d’un segment recte ni d’una superfície interior.']},
+      {q:`Com s'anomena la porció del <b>cercle</b> delimitada per dos radis i l'arc que uneix els seus extrems?`,a:'Sector circular',w:['Arc','Corda','Corona circular'],g:['Fixa’t que l’enunciat descriu una regió interior del cercle.','Observa quins elements formen els seus límits.']},
+      {q:`Com s'anomena el segment que uneix dos punts d'una circumferència?`,a:'Corda',w:['Radi','Diàmetre','Arc'],g:['Fixa’t que es tracta d’un segment recte.','Els dos extrems són punts de la circumferència.','No és necessari que el segment passi pel centre.']},
+      {q:`Com s'anomena la regió situada entre <b>dues circumferències concèntriques</b>?`,a:'Corona circular',w:['Sector circular','Arc','Segment circular'],g:['Fixa’t que es tracta d’una superfície interior.','Les dues circumferències tenen el mateix centre.']}
     ];
-    svg=svgCircle(true);
-    const it=items[rnd(0,items.length-1)]; question=it.q; correct=it.a; opts=uniq4(correct,it.w);
-    guide=['Arc: tros de línia | Corda: segment | Sector: "porció de pastís" | Corona: anell'];
-    solution=[...guide,`✅ ${correct}`];
+    const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;opts=uniq4(correct,it.w);guide=it.g;solution=[`✅ ${correct}`];svg='';
   }
-  return {question,correct,options:opts,guide,solution,svg};
+
+  return {topicId:'cercle',type:q,question,correct,options:opts,guide,solution,svg};
 }
 
 // 7. POLIEDRES
 function genPoliedres(){
   const q=rnd(1,6);
   let question,correct,opts,guide,solution,svg='';
+
   if(q===1){
     const items=[
-      {q:'Quantes cares té un <b>cub</b>?',a:'6 cares',w:['4 cares','8 cares','12 cares'],sv:svgPrism()},
-      {q:'Quantes arestes té un <b>cub</b>?',a:'12 arestes',w:['6 arestes','8 arestes','10 arestes'],sv:svgPrism()},
-      {q:'Quants vèrtexs té un <b>cub</b>?',a:'8 vèrtexs',w:['4 vèrtexs','6 vèrtexs','10 vèrtexs'],sv:svgPrism()},
-      {q:'Quantes cares té un <b>tetraedre</b> (piràmide triangular)?',a:'4 cares',w:['3 cares','5 cares','6 cares'],sv:svgPyramid()},
-      {q:'Quantes cares té una <b>piràmide quadrangular</b>?',a:'5 cares',w:['4 cares','6 cares','8 cares'],sv:svgPyramid()},
-      {q:'Quants vèrtexs té un <b>prisma triangular</b>?',a:'6 vèrtexs',w:['3 vèrtexs','8 vèrtexs','9 vèrtexs'],sv:svgPrism()},
-      {q:'Quantes arestes té un <b>prisma triangular</b>?',a:'9 arestes',w:['6 arestes','12 arestes','8 arestes'],sv:svgPrism()},
+      {q:'Quantes <b>cares</b> té un cub?',a:'6 cares',w:['8 cares','12 cares','4 cares'],g:['Visualitza el cub com una capsa tancada.','Compta només les superfícies planes que formen l’exterior.'],s:['Un cub té 6 cares quadrades.','✅ 6 cares']},
+      {q:'Quantes <b>arestes</b> té un cub?',a:'12 arestes',w:['6 arestes','8 arestes','10 arestes'],g:['Una aresta és el segment on es troben dues cares.','Compta les arestes de la part superior, de la inferior i les que les uneixen.'],s:['El cub té 12 arestes.','✅ 12 arestes']},
+      {q:'Quants <b>vèrtexs</b> té un cub?',a:'8 vèrtexs',w:['6 vèrtexs','12 vèrtexs','4 vèrtexs'],g:['Un vèrtex és un punt on es troben diverses arestes.','Compta els punts de les dues bases del cub.'],s:['El cub té 8 vèrtexs.','✅ 8 vèrtexs']},
+      {q:'Quantes <b>cares</b> té un prisma triangular?',a:'5 cares',w:['3 cares','6 cares','8 cares'],g:['Identifica primer les dues bases triangulars.','Després compta les cares laterals que uneixen els costats corresponents de les bases.'],s:['Té 2 bases triangulars i 3 cares laterals.','2 + 3 = 5.','✅ 5 cares']},
+      {q:'Quants <b>vèrtexs</b> té un prisma triangular?',a:'6 vèrtexs',w:['3 vèrtexs','5 vèrtexs','9 vèrtexs'],g:['Compta els vèrtexs d’una base triangular.','Recorda que el prisma té una segona base igual.'],s:['Cada base triangular té 3 vèrtexs.','3 + 3 = 6.','✅ 6 vèrtexs']},
+      {q:'Quantes <b>arestes</b> té un prisma triangular?',a:'9 arestes',w:['6 arestes','5 arestes','12 arestes'],g:['Compta primer les arestes de les dues bases.','Després afegeix les arestes laterals que uneixen els vèrtexs corresponents.'],s:['Les dues bases aporten 6 arestes.','Hi ha 3 arestes laterals.','6 + 3 = 9.','✅ 9 arestes']}
     ];
-    const it=items[rnd(0,items.length-1)]; question=it.q; correct=it.a; svg=it.sv;
-    opts=uniq4(correct,it.w);
-    guide=['Cares(C), Arestes(A), Vèrtexs(V)','Cub: C=6, A=12, V=8'];
-    solution=[...guide,`✅ ${correct}`];
-  } else if(q===2){
-    // Fórmula d'Euler
-    const poliedres=[
-      {nom:'cub',C:6,A:12,V:8},{nom:'tetraedre',C:4,A:6,V:4},
-      {nom:'prisma triangular',C:5,A:9,V:6},{nom:'piràmide quadrangular',C:5,A:8,V:5},
-      {nom:'prisma quadrangular',C:6,A:12,V:8},{nom:'piràmide triangular',C:4,A:6,V:4},
-      {nom:'prisma pentagonal',C:7,A:15,V:10},{nom:'piràmide pentagonal',C:6,A:10,V:6},
-    ];
-    const p=poliedres[rnd(0,poliedres.length-1)];
-    const type=rnd(0,2); svg=p.nom.includes('piràmide')?svgPyramid():svgPrism();
+    const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;opts=uniq4(correct,it.w);guide=it.g;solution=it.s;svg='';
+
+  }else if(q===2){
+    const poliedres=[{nom:'cub',C:6,A:12,V:8},{nom:'tetraedre',C:4,A:6,V:4},{nom:'prisma triangular',C:5,A:9,V:6},{nom:'piràmide quadrangular',C:5,A:8,V:5},{nom:'prisma quadrangular',C:6,A:12,V:8},{nom:'piràmide triangular',C:4,A:6,V:4},{nom:'prisma pentagonal',C:7,A:15,V:10},{nom:'piràmide pentagonal',C:6,A:10,V:6}];
+    const p=poliedres[rnd(0,poliedres.length-1)],type=rnd(0,2);svg='';
     if(type===0){
-      question=`<b>${p.nom}</b>: C=${p.C}, A=${p.A}. Quants vèrtexs? (C+V=A+2)`;
-      correct=`V = ${p.V}`; opts=uniq4(correct,[`V = ${p.V+1}`,`V = ${p.V-1}`,`V = ${p.A-p.C}`]);
-    } else if(type===1){
-      question=`<b>${p.nom}</b>: V=${p.V}, A=${p.A}. Quantes cares? (C+V=A+2)`;
-      correct=`C = ${p.C}`; opts=uniq4(correct,[`C = ${p.C+1}`,`C = ${p.C-1}`,`C = ${p.A-p.V}`]);
-    } else {
-      question=`<b>${p.nom}</b>: C=${p.C}, V=${p.V}. Quantes arestes? (A=C+V−2)`;
-      correct=`A = ${p.A}`; opts=uniq4(correct,[`A = ${p.A+1}`,`A = ${p.A-1}`,`A = ${p.C+p.V}`]);
+      question=`<b>${p.nom}</b>: C=${p.C}, A=${p.A}. Quants vèrtexs té?`;correct=`V = ${p.V}`;
+      opts=uniq4(correct,[`V = ${p.A-p.C}`,`V = ${p.A+p.C-2}`,`V = ${p.A-p.C-2}`,`V = ${p.C+p.A}`]);
+      guide=['Identifica quines dades coneixes: cares i arestes.','Relaciona cares, arestes i vèrtexs mitjançant la fórmula d’Euler.','Aïlla el nombre de vèrtexs abans de substituir les dades.'];
+    }else if(type===1){
+      question=`<b>${p.nom}</b>: V=${p.V}, A=${p.A}. Quantes cares té?`;correct=`C = ${p.C}`;
+      opts=uniq4(correct,[`C = ${p.A-p.V}`,`C = ${p.A+p.V-2}`,`C = ${p.A-p.V-2}`,`C = ${p.A+p.V}`]);
+      guide=['Identifica quines dades coneixes: vèrtexs i arestes.','Utilitza la relació d’Euler entre cares, arestes i vèrtexs.','Aïlla el nombre de cares abans de calcular.'];
+    }else{
+      question=`<b>${p.nom}</b>: C=${p.C}, V=${p.V}. Quantes arestes té?`;correct=`A = ${p.A}`;
+      opts=uniq4(correct,[`A = ${p.C+p.V}`,`A = ${p.C+p.V+2}`,`A = ${Math.abs(p.C-p.V)+2}`,`A = ${Math.abs(p.C-p.V)}`]);
+      guide=['Identifica les cares i els vèrtexs coneguts.','Relaciona les tres quantitats mitjançant la fórmula d’Euler.','Aïlla el nombre d’arestes.'];
     }
-    guide=['Euler: C + V = A + 2'];
-    solution=[...guide,`${p.nom}: ${p.C}+${p.V}=${p.A}+2 → ${p.C+p.V}=${p.A+2} ✓`,`✅ ${correct}`];
-  } else if(q===3){
+    solution=['La fórmula d’Euler és C + V = A + 2.',`${p.C} + ${p.V} = ${p.A} + 2.`,`✅ ${correct}`];
+
+  }else if(q===3){
     const items=[
-      {q:'Diferència principal entre <b>prisma</b> i <b>piràmide</b>:',a:'El prisma té 2 bases iguals; la piràmide té 1 base i un vèrtex superior',w:['La piràmide té 2 bases; el prisma té 1','Ambdós tenen una base i un vèrtex','Cap diferència significativa']},
-      {q:'Com es diuen les cares superiors i inferiors d\'un prisma?',a:'Bases',w:['Cares laterals','Arestes','Vèrtexs']},
-      {q:'Com s\'anomena la distància entre les dues bases d\'un prisma?',a:'Alçada',w:['Aresta','Apotema','Diagonal']},
-      {q:'Les cares laterals d\'un prisma recte son...',a:'Rectangles',w:['Triangles','Quadrats','Trapezis']},
-      {q:'Les cares laterals d\'una piràmide son...',a:'Triangles',w:['Rectangles','Quadrats','Romboides']},
+      {q:'Quina és la diferència principal entre un <b>prisma</b> i una <b>piràmide</b>?',a:'El prisma té 2 bases iguals; la piràmide té 1 base i un vèrtex superior',w:['La piràmide té 2 bases i el prisma només 1','Tots dos tenen una sola base i un vèrtex superior','Tots dos tenen dues bases iguals'],sv:'',g:['Fixa’t en el nombre de bases de cadascun dels dos cossos.','Observa també si les cares laterals arriben a un únic vèrtex superior.']},
+      {q:`Com s'anomenen les cares iguals i paral·leles situades als extrems d'un prisma?`,a:'Bases',w:['Cares laterals','Arestes','Vèrtexs'],sv:svgPrism(),g:['Diferencia les cares dels extrems de les cares que les uneixen.','Fixa’t que aquestes dues cares són iguals i paral·leles.']},
+      {q:`Com s'anomena la distància perpendicular entre les dues bases d'un prisma?`,a:'Alçada',w:['Aresta','Apotema','Diagonal'],sv:svgPrism(),g:['Fixa’t que l’enunciat parla d’una distància entre les dues bases.','La distància s’ha de mesurar perpendicularment.']},
+      {q:`En un <b>prisma recte</b>, les cares laterals són...`,a:'Rectangles',w:['Triangles','Trapezis','Rombes'],sv:svgPrism(),g:['Observa com s’uneixen els costats corresponents de les dues bases.','En un prisma recte, les arestes laterals són perpendiculars a les bases.']},
+      {q:`Les cares laterals d'una <b>piràmide</b> són...`,a:'Triangles',w:['Rectangles','Quadrats','Romboides'],sv:svgPyramid(),g:['Cada cara lateral parteix d’un costat de la base.','Els seus altres dos costats arriben al vèrtex superior.']}
     ];
-    const it=items[rnd(0,items.length-1)]; question=it.q; correct=it.a;
-    svg=rnd(0,1)?svgPrism():svgPyramid();
-    opts=uniq4(correct,it.w);
-    guide=['Prisma: 2 bases polieg. + lat. rectangulars','Piràmide: 1 base + lat. triangulars → vèrtex'];
-    solution=[...guide,`✅ ${correct}`];
-  } else if(q===4){
-    // Cares de prismes i piràmides
-    const bases=[{nom:'triangular',n:3},{nom:'quadrangular',n:4},{nom:'pentagonal',n:5},{nom:'hexagonal',n:6}];
-    const b=bases[rnd(0,bases.length-1)];
-    const tipus=rnd(0,1)?'prisma':'piràmide';
-    const cares=tipus==='prisma'?b.n+2:b.n+1;
-    svg=tipus==='prisma'?svgPrism():svgPyramid();
-    question=`Quantes cares té un <b>${tipus} ${b.nom}</b>?`;
-    correct=`${cares} cares`;
-    // Distractors ben separats i sempre ≥1
-    const d1=cares+1,d2=cares-1>0?cares-1:cares+3,d3=cares+2;
-    opts=uniq4(correct,[`${d1} cares`,`${d2} cares`,`${d3} cares`]);
-    guide=[tipus==='prisma'?`Prisma: 2 bases + ${b.n} lat. = ${cares}`:`Piràmide: 1 base + ${b.n} lat. = ${cares}`];
-    solution=[...guide,`✅ ${correct}`];
-  } else if(q===5){
-    // NOU: poliedres regulars (sòlids de Plató)
-    const plato=[
-      {nom:'tetraedre',cares:'4 (triangles equilàters)',v:4,a:6},
-      {nom:'hexaedre (cub)',cares:'6 (quadrats)',v:8,a:12},
-      {nom:'octaedre',cares:'8 (triangles equilàters)',v:6,a:12},
-      {nom:'dodecaedre',cares:'12 (pentàgons regulars)',v:20,a:30},
-      {nom:'icosaedre',cares:'20 (triangles equilàters)',v:12,a:30},
-    ];
-    const p=plato[rnd(0,plato.length-1)];
-    svg=svgPyramid();
-    const type=rnd(0,1);
-    if(type===0){
-      question=`Quantes cares té un <b>${p.nom}</b>?`;
-      correct=p.cares; opts=uniq4(correct,plato.filter(x=>x.nom!==p.nom).map(x=>x.cares));
-    } else {
-      question=`Quants vèrtexs té un <b>${p.nom}</b>?`;
-      correct=`${p.v} vèrtexs`; opts=uniq4(correct,plato.filter(x=>x.nom!==p.nom).map(x=>`${x.v} vèrtexs`));
+    const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;opts=uniq4(correct,it.w);guide=it.g;solution=[`✅ ${correct}`];svg=it.sv;
+
+  }else if(q===4){
+    const bases=[{nom:'triangular',n:3},{nom:'quadrangular',n:4},{nom:'pentagonal',n:5},{nom:'hexagonal',n:6}],b=bases[rnd(0,bases.length-1)],tipus=rnd(0,1)?'prisma':'piràmide',cares=tipus==='prisma'?b.n+2:b.n+1;svg='';
+    question=`Quantes cares té un <b>${tipus} ${b.nom}</b>?`;correct=`${cares} cares`;
+    if(tipus==='prisma'){
+      opts=uniq4(correct,[`${b.n} cares`,`${b.n+1} cares`,`${2*b.n} cares`,`${b.n+3} cares`]);
+      guide=['Identifica quants costats té el polígon de la base.','Cada costat de la base correspon a una cara lateral.','Recorda quantes bases té un prisma.'];
+    }else{
+      opts=uniq4(correct,[`${b.n} cares`,`${b.n+2} cares`,`${2*b.n} cares`,`${2*b.n+1} cares`]);
+      guide=['Identifica quants costats té el polígon de la base.','Cada costat de la base origina una cara lateral.','Recorda quantes bases té una piràmide.'];
     }
-    guide=['Sòlids de Plató: 5 poliedres regulars','Tetra=4, Cub=6, Octa=8, Dodeca=12, Icosa=20 cares'];
-    solution=[...guide,`✅ ${correct}`];
-  } else {
-    // NOU: àrees i volums de prismes
-    const b=rnd(3,8),h=rnd(4,12),bh=rnd(3,6);
-    const tipusQ=rnd(0,1);
-    if(tipusQ===0){
-      const vol=b*b*h;
-      svg=svgPrism();
-      question=`Volum d'un <b>prisma quadrangular (ortoedre)</b> de base ${b}×${b} cm i alçada ${h} cm`;
-      correct=`${vol} cm³`;
-      opts=uniq4(correct,[`${vol+b*2} cm³`,`${b*b+h} cm³`,`${vol+h*2} cm³`]);
-      guide=['Volum prisma = Àrea base × alçada',`${b}×${b}×${h} = ${vol} cm³`];
-      solution=[...guide,`✅ ${vol} cm³`];
-    } else {
-      const abase=+(bh*b/2).toFixed(1);
-      const vol=+(abase*h).toFixed(1);
-      svg=svgPrism();
-      question=`Volum d'un <b>prisma triangular</b> de base ${b} cm, altura triàng. ${bh} cm i alçada ${h} cm`;
-      correct=`${vol} cm³`;
-      opts=uniq4(correct,[`${+(vol+b*2).toFixed(1)} cm³`,`${+(b*bh*h).toFixed(1)} cm³`,`${+(vol*2).toFixed(1)} cm³`]);
-      guide=['Volum prisma = Àrea base × alçada',`Àrea triangular = (${b}×${bh})/2 = ${abase}`,`${abase} × ${h} = ${vol} cm³`];
-      solution=[...guide,`✅ ${vol} cm³`];
+    solution=[`✅ ${cares} cares`];
+
+  }else if(q===5){
+    const plato=[{nom:'tetraedre',cares:4,cara:'triangles equilàters',v:4,a:6},{nom:'hexaedre (cub)',cares:6,cara:'quadrats',v:8,a:12},{nom:'octaedre',cares:8,cara:'triangles equilàters',v:6,a:12},{nom:'dodecaedre',cares:12,cara:'pentàgons regulars',v:20,a:30},{nom:'icosaedre',cares:20,cara:'triangles equilàters',v:12,a:30}];
+    const p=plato[rnd(0,plato.length-1)],type=rnd(0,2);svg='';
+    if(type===0){question=`Quantes cares té un <b>${p.nom}</b>?`;correct=`${p.cares} cares`;opts=uniq4(correct,plato.filter(x=>x.nom!==p.nom).map(x=>`${x.cares} cares`));guide=['Recorda que només hi ha cinc sòlids de Plató.','Relaciona el nom del sòlid amb el polígon regular que forma les seves cares.'];solution=[`El ${p.nom} té ${p.cares} cares formades per ${p.cara}.`,`✅ ${correct}`];}
+    else if(type===1){question=`Quants vèrtexs té un <b>${p.nom}</b>?`;correct=`${p.v} vèrtexs`;opts=uniq4(correct,plato.filter(x=>x.nom!==p.nom).map(x=>`${x.v} vèrtexs`));guide=['Identifica primer quin sòlid de Plató és.','No confonguis el nombre de vèrtexs amb el de cares o arestes.'];solution=[`✅ ${correct}`];}
+    else{question=`Quantes arestes té un <b>${p.nom}</b>?`;correct=`${p.a} arestes`;opts=uniq4(correct,plato.filter(x=>x.nom!==p.nom).map(x=>`${x.a} arestes`));guide=['Identifica el sòlid de Plató indicat.','Recorda que una aresta és la unió de dues cares.'];solution=[`✅ ${correct}`];}
+
+  }else{
+    if(rnd(0,1)===0){
+      const b=rnd(3,8),h=rnd(4,12),area=b*b,vol=area*h;svg=svgPrism();
+      question=`Calcula el volum d'un <b>prisma quadrangular</b> de base <b>${b} × ${b} cm</b> i alçada <b>${h} cm</b>.`;correct=`${vol} cm³`;
+      opts=uniq4(correct,[`${area} cm³`,`${b*h} cm³`,`${2*vol} cm³`,`${b+b+h} cm³`]);
+      guide=['Calcula primer l’àrea de la base del prisma.','Identifica després l’alçada del prisma.','Relaciona l’àrea de la base amb l’alçada per obtenir el volum.','Expressa el resultat en unitats cúbiques.'];
+      solution=[`Àrea de la base=${area} cm².`,`Volum=${area}×${h}=${vol} cm³.`,`✅ ${vol} cm³`];
+    }else{
+      const b=rnd(4,10),ht=rnd(3,8),hp=rnd(4,12),area=b*ht/2,vol=area*hp;svg='';
+      question=`Calcula el volum d'un <b>prisma triangular</b> amb base del triangle de <b>${b} cm</b>, altura del triangle de <b>${ht} cm</b> i alçada del prisma de <b>${hp} cm</b>.`;correct=`${vol} cm³`;
+      opts=uniq4(correct,[`${b*ht*hp} cm³`,`${area} cm³`,`${b*hp/2} cm³`,`${ht*hp} cm³`]);
+      guide=['Comença calculant l’àrea de la base triangular.','Diferencia l’altura del triangle de l’alçada del prisma.','Quan tinguis l’àrea de la base, relaciona-la amb l’alçada del prisma.','Expressa el resultat final en unitats cúbiques.'];
+      solution=[`Àrea base=(${b}×${ht})÷2=${area} cm².`,`Volum=${area}×${hp}=${vol} cm³.`,`✅ ${vol} cm³`];
     }
   }
-  return {question,correct,options:opts,guide,solution,svg};
+
+  return {topicId:'poliedres',type:q,question,correct,options:opts,guide,solution,svg};
 }
 
 // 8. COSSOS RODONS
 function genCossos(){
   const q=rnd(1,6);
   let question,correct,opts,guide,solution,svg='';
+  function fmtCossos(n){const v=Math.round(n*100)/100;return Number.isInteger(v)?String(v):String(v).replace('.',',');}
+
   if(q===1){
     const items=[
-      {q:'Cos format per 2 cercles paral·lels units per una superfície lateral corbada:',a:'Cilindre',w:['Con','Esfera','Prisma'],sv:svgCylinder()},
-      {q:'Cos amb una base circular i un vèrtex (apex):',a:'Con',w:['Cilindre','Esfera','Piràmide'],sv:svgCone()},
-      {q:'Cos on tots els punts estan a la mateixa distància del centre:',a:'Esfera',w:['Cercle','Cilindre','Con'],sv:svgSphere()},
+      {q:`Quin cos rodó està format per <b>dues bases circulars iguals i paral·leles</b> unides per una superfície lateral corba?`,a:'Cilindre',w:['Con','Esfera','Prisma'],sv:svgCylinder(),g:['Fixa’t primer en el nombre de bases planes.','Observa si les dues bases són iguals i paral·leles.','Comprova si la superfície lateral és plana o corba.']},
+      {q:`Quin cos rodó té <b>una base circular</b> i una superfície lateral que acaba en un <b>vèrtex</b>?`,a:'Con',w:['Cilindre','Esfera','Piràmide'],sv:svgCone(),g:['Fixa’t en el nombre de bases.','Observa si el cos acaba en un únic vèrtex.','Comprova si la superfície lateral és corba.']},
+      {q:`Quin cos rodó té tots els punts de la seva superfície a la mateixa distància del <b>centre</b>?`,a:'Esfera',w:['Cilindre','Con','Cercle'],sv:svgSphere(),g:['Fixa’t que l’enunciat parla d’un cos tridimensional.','Busca quin cos es defineix a partir d’un centre i una distància constant.']}
     ];
-    const it=items[rnd(0,items.length-1)]; question=it.q; correct=it.a; svg=it.sv;
-    opts=uniq4(correct,it.w);
-    guide=['Cilindre: 2 bases circ. | Con: 1 base + vèrtex | Esfera: 0 bases'];
-    solution=[...guide,`✅ ${correct}`];
-  } else if(q===2){
-    svg=svgCylinder();
-    const r=rnd(3,10),h=rnd(4,14);
-    const type=rnd(0,1);
+    const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;opts=uniq4(correct,it.w);guide=it.g;solution=[`✅ ${correct}`];svg=it.sv;
+
+  }else if(q===2){
+    const r=rnd(3,10),h=rnd(4,14),pi=3.14,type=rnd(0,1);svg=svgCylinder();
     if(type===0){
-      const al=Math.round(2*3.14*r*h*100)/100;
-      question=`Àrea lateral del <b>cilindre</b>: r=${r} cm, h=${h} cm (π≈3,14)`;
-      correct=`${al} cm²`; opts=uniq4(correct,[`${Math.round(3.14*r*h*100)/100} cm²`,`${Math.round(al+r*2)} cm²`,`${Math.round(2*3.14*r*100)/100} cm²`]);
-      guide=['A_lat = 2πrh',`2×3,14×${r}×${h} = ${al} cm²`];
-      solution=[...guide,`✅ A_lat = ${al} cm²`];
-    } else {
-      const v=Math.round(3.14*r*r*h*100)/100;
-      question=`Volum del <b>cilindre</b>: r=${r} cm, h=${h} cm (π≈3,14)`;
-      correct=`${v} cm³`; opts=uniq4(correct,[`${Math.round(v/2*100)/100} cm³`,`${Math.round(3.14*r*h*100)/100} cm³`,`${Math.round(v+h*5)} cm³`]);
-      guide=['V = π × r² × h',`3,14×${r}²×${h} = 3,14×${r*r}×${h} = ${v} cm³`];
-      solution=[...guide,`✅ V = ${v} cm³`];
+      const al=Math.round(2*pi*r*h*100)/100;
+      question=`Calcula l'àrea lateral d'un <b>cilindre</b> de radi <b>${r} cm</b> i alçada <b>${h} cm</b> (π ≈ 3,14).`;correct=`${fmtCossos(al)} cm²`;
+      opts=uniq4(correct,[`${fmtCossos(pi*r*h)} cm²`,`${fmtCossos(2*pi*r)} cm²`,`${fmtCossos(pi*r*r)} cm²`,`${fmtCossos(2*pi*r*r)} cm²`]);
+      guide=['Imagina la superfície lateral del cilindre desplegada.','Relaciona una de les dimensions del rectangle obtingut amb el contorn de la base.','L’altra dimensió correspon a l’alçada del cilindre.'];
+      solution=['Àrea lateral = longitud de la circumferència de la base × alçada.',`✅ ${correct}`];
+    }else{
+      const ab=pi*r*r,v=Math.round(ab*h*100)/100;
+      question=`Calcula el volum d'un <b>cilindre</b> de radi <b>${r} cm</b> i alçada <b>${h} cm</b> (π ≈ 3,14).`;correct=`${fmtCossos(v)} cm³`;
+      opts=uniq4(correct,[`${fmtCossos(ab)} cm³`,`${fmtCossos(pi*r*h)} cm³`,`${fmtCossos(2*pi*r*r*h)} cm³`,`${fmtCossos(pi*r*r*h/3)} cm³`]);
+      guide=['Calcula primer l’àrea de la base circular.','Identifica després l’alçada del cilindre.','Relaciona l’àrea de la base amb l’alçada per obtenir el volum.'];
+      solution=[`Àrea base=${fmtCossos(ab)} cm².`,`✅ ${correct}`];
     }
-  } else if(q===3){
-    svg=svgCone();
-    const r=rnd(3,9),h=rnd(4,12);
-    const v=Math.round(1/3*3.14*r*r*h*100)/100;
-    const type=rnd(0,1);
+
+  }else if(q===3){
+    const r=rnd(3,9),h=rnd(4,12),pi=3.14,type=rnd(0,1);svg=svgCone();
     if(type===0){
-      question=`Volum del <b>con</b>: r=${r} cm, h=${h} cm (π≈3,14)`;
-      correct=`${v} cm³`; opts=uniq4(correct,[`${Math.round(3.14*r*r*h*100)/100} cm³`,`${Math.round(v*2*100)/100} cm³`,`${Math.round(v+r*3)} cm³`]);
-      guide=['V = (1/3) × π × r² × h',`(1/3)×3,14×${r}²×${h} = ${v} cm³`];
-      solution=[...guide,`✅ V = ${v} cm³`];
-    } else {
-      // Àrea lateral con
-      const g=+(Math.sqrt(r*r+h*h)).toFixed(2);
-      const al=Math.round(3.14*r*g*100)/100;
-      question=`Àrea lateral del <b>con</b>: r=${r} cm, h=${h} cm, generatriu g=√(r²+h²) (π≈3,14)`;
-      correct=`${al} cm²`;
-      // Distractors: base en lloc de g, h en lloc de g, doble
-      const d1=Math.round(3.14*r*r*100)/100;   // error: usa r²
-      const d2=Math.round(3.14*r*h*100)/100;   // error: usa h en lloc de g
-      const d3=Math.round(al*2*100)/100;        // doble
-      opts=uniq4(correct,[`${d1} cm²`,`${d2} cm²`,`${d3} cm²`]);
-      guide=['A_lat = π × r × g',`g = √(${r}²+${h}²) = √${r*r+h*h} ≈ ${g}`,`3,14×${r}×${g} = ${al} cm²`];
-      solution=[...guide,`✅ A_lat = ${al} cm²`];
+      const cyl=pi*r*r*h,v=Math.round(cyl/3*100)/100;
+      question=`Calcula el volum d'un <b>con</b> de radi <b>${r} cm</b> i alçada <b>${h} cm</b> (π ≈ 3,14).`;correct=`${fmtCossos(v)} cm³`;
+      opts=uniq4(correct,[`${fmtCossos(cyl)} cm³`,`${fmtCossos(cyl/2)} cm³`,`${fmtCossos(pi*r*h/3)} cm³`,`${fmtCossos(pi*r*r/3)} cm³`]);
+      guide=['Calcula primer l’àrea de la base circular.','Relaciona aquesta àrea amb l’alçada del con.','Recorda que el con només ocupa una fracció del cilindre amb la mateixa base i alçada.'];
+      solution=['El volum del con és una tercera part del cilindre amb la mateixa base i alçada.',`✅ ${correct}`];
+    }else{
+      const g=Math.round(Math.sqrt(r*r+h*h)*100)/100,al=Math.round(pi*r*g*100)/100;
+      question=`Calcula l'àrea lateral d'un <b>con</b> de radi <b>${r} cm</b>, alçada <b>${h} cm</b> i generatriu <b>${fmtCossos(g)} cm</b> (π ≈ 3,14).`;correct=`${fmtCossos(al)} cm²`;
+      opts=uniq4(correct,[`${fmtCossos(pi*r*r)} cm²`,`${fmtCossos(pi*r*h)} cm²`,`${fmtCossos(2*pi*r*g)} cm²`,`${fmtCossos(pi*g*g)} cm²`]);
+      guide=['Identifica el radi de la base i la generatriu.','No confonguis la generatriu amb l’alçada vertical del con.','Relaciona el radi i la generatriu amb la superfície lateral.'];
+      solution=['Àrea lateral del con = π × radi × generatriu.',`✅ ${correct}`];
     }
-  } else if(q===4){
-    svg=svgSphere();
-    const r=rnd(3,10);
-    const type=rnd(0,1);
+
+  }else if(q===4){
+    const r=rnd(3,10),pi=3.14,type=rnd(0,1);svg=svgSphere();
     if(type===0){
-      const v=Math.round(4/3*3.14*r*r*r*100)/100;
-      question=`Volum de l'<b>esfera</b>: r=${r} cm (π≈3,14)`;
-      correct=`${v} cm³`;
-      // Distractors: sense el factor 4/3, àrea en lloc de volum, off-by-radi
-      const d1=Math.round(3.14*r*r*r*100)/100;      // sense el 4/3
-      const d2=Math.round(4*3.14*r*r*100)/100;       // fórmula de l'àrea
-      const d3=Math.round(4/3*3.14*(r+1)*(r+1)*(r+1)*100)/100; // r+1
-      opts=uniq4(correct,[`${d1} cm³`,`${d2} cm³`,`${d3} cm³`]);
-      guide=['V = (4/3) × π × r³',`(4/3)×3,14×${r}³ = (4/3)×3,14×${r*r*r} = ${v} cm³`];
-      solution=[...guide,`✅ V = ${v} cm³`];
-    } else {
-      const a=Math.round(4*3.14*r*r*100)/100;
-      question=`Àrea de l'<b>esfera</b>: r=${r} cm (π≈3,14)`;
-      correct=`${a} cm²`; opts=uniq4(correct,[`${Math.round(3.14*r*r*100)/100} cm²`,`${Math.round(2*3.14*r*100)/100} cm²`,`${Math.round(a+r*2)} cm²`]);
-      guide=['A = 4 × π × r²',`4×3,14×${r}² = 4×3,14×${r*r} = ${a} cm²`];
-      solution=[...guide,`✅ A = ${a} cm²`];
+      const v=Math.round((4/3)*pi*r*r*r*100)/100;
+      question=`Calcula el volum d'una <b>esfera</b> de radi <b>${r} cm</b> (π ≈ 3,14).`;correct=`${fmtCossos(v)} cm³`;
+      opts=uniq4(correct,[`${fmtCossos(pi*r*r*r)} cm³`,`${fmtCossos(4*pi*r*r)} cm³`,`${fmtCossos(4*pi*r*r*r)} cm³`,`${fmtCossos((4/3)*pi*r*r)} cm³`]);
+      guide=['Identifica el radi de l’esfera.','Recorda que en el volum de l’esfera el radi intervé tres vegades.','Tingues en compte també el factor propi de la fórmula de l’esfera.'];
+      solution=['Volum de l’esfera = (4/3) × π × radi³.',`✅ ${correct}`];
+    }else{
+      const a=Math.round(4*pi*r*r*100)/100;
+      question=`Calcula l'àrea d'una <b>esfera</b> de radi <b>${r} cm</b> (π ≈ 3,14).`;correct=`${fmtCossos(a)} cm²`;
+      opts=uniq4(correct,[`${fmtCossos(pi*r*r)} cm²`,`${fmtCossos(2*pi*r*r)} cm²`,`${fmtCossos(4*pi*r)} cm²`,`${fmtCossos((4/3)*pi*r*r*r)} cm²`]);
+      guide=['Identifica el radi de l’esfera.','Recorda que per calcular una superfície el radi intervé elevat al quadrat.','Tingues en compte el factor característic de l’àrea de l’esfera.'];
+      solution=['Àrea de l’esfera = 4 × π × radi².',`✅ ${correct}`];
     }
-  } else if(q===5){
+
+  }else if(q===5){
     const items=[
-      {q:'Quantes bases (planes) té un cilindre?',a:'2 bases circulars',w:['1 base circular','Cap base','3 bases'],sv:svgCylinder()},
-      {q:'Quantes bases (planes) té un con?',a:'1 base circular',w:['2 bases circulars','Cap base','3 bases'],sv:svgCone()},
-      {q:'Quantes bases (planes) té una esfera?',a:'Cap base plana',w:['1 base circular','2 bases circulars','3 bases'],sv:svgSphere()},
-      {q:'Quin cos rodon no té cap aresta ni vèrtex?',a:'Esfera',w:['Cilindre','Con','Prisma'],sv:svgSphere()},
-      {q:'El <b>generatriu</b> d\'un con és...',a:'El segment que uneix el vèrtex amb un punt de la base',w:['El radi de la base','L\'alçada del con','El diàmetre de la base'],sv:svgCone()},
+      {q:`Quantes <b>bases planes</b> té un cilindre?`,a:'2 bases circulars',w:['1 base circular','Cap base plana','3 bases circulars'],sv:svgCylinder(),g:['Fixa’t només en les superfícies planes del cos.','No comptis la superfície lateral corba.','Observa els dos extrems del cilindre.']},
+      {q:`Quantes <b>bases planes</b> té un con?`,a:'1 base circular',w:['2 bases circulars','Cap base plana','3 bases circulars'],sv:svgCone(),g:['Fixa’t només en les superfícies planes.','No comptis la superfície lateral corba.','Observa la part oposada al vèrtex.']},
+      {q:`Quantes <b>bases planes</b> té una esfera?`,a:'Cap base plana',w:['1 base circular','2 bases circulars','3 bases circulars'],sv:svgSphere(),g:['Observa si la superfície del cos presenta alguna zona plana.','No confonguis una secció circular imaginària amb una base real.']},
+      {q:`Quin cos rodó no té <b>cap aresta ni cap vèrtex</b>?`,a:'Esfera',w:['Cilindre','Con','Prisma'],sv:svgSphere(),g:['Fixa’t si el cos presenta algun punt singular com un vèrtex.','Busca el cos amb una superfície completament contínua.']},
+      {q:`Què és la <b>generatriu</b> d'un con?`,a:'El segment que uneix el vèrtex amb un punt de la circumferència de la base',w:['El radi de la base','L’alçada perpendicular del con','El diàmetre de la base'],sv:svgCone(),g:['Fixa’t que es tracta d’un segment situat sobre la superfície lateral.','Un dels seus extrems és el vèrtex del con.']}
     ];
-    const it=items[rnd(0,items.length-1)]; question=it.q; correct=it.a; svg=it.sv;
-    opts=uniq4(correct,it.w);
-    guide=['Cilindre: 2 circ. | Con: 1 circ. + vèrtex | Esfera: 0 plans'];
-    solution=[...guide,`✅ ${correct}`];
-  } else {
-    // NOU: comparació i relació entre cossos
+    const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;opts=uniq4(correct,it.w);guide=it.g;solution=[`✅ ${correct}`];svg=it.sv;
+
+  }else{
     const items=[
-      {q:'Si el radi d\'un cilindre es duplica, el seu volum...',a:'Es multiplica per 4 (V=πr²h)',w:['Es duplica','Es multiplica per 8','Es manté igual'],sv:svgCylinder()},
-      {q:'Un con i un cilindre de la mateixa base i alçada. Quina relació hi ha entre els seus volums?',a:'V_con = (1/3) × V_cilindre',w:['V_con = V_cilindre','V_con = (1/2) × V_cilindre','V_con = 3 × V_cilindre'],sv:svgCone()},
-      {q:'Quina fórmula dóna l\'àrea total d\'un cilindre (2 bases + lateral)?',a:'A = 2πr² + 2πrh',w:['A = πr² + 2πrh','A = 2πrh','A = 4πr²'],sv:svgCylinder()},
+      {q:`Si mantenim la mateixa alçada i <b>dupliquem el radi</b> d'un cilindre, què passa amb el seu volum?`,a:'Es multiplica per 4',w:['Es duplica','Es multiplica per 8','Es manté igual'],sv:svgCylinder(),g:['Fixa’t en com intervé el radi en el càlcul del volum.','Analitza què passa quan una magnitud que està elevada al quadrat es duplica.','L’alçada es manté constant.']},
+      {q:`Un <b>con</b> i un <b>cilindre</b> tenen la mateixa base i la mateixa alçada. Quina relació hi ha entre els seus volums?`,a:'El volum del con és una tercera part del volum del cilindre',w:['Tenen el mateix volum','El volum del con és la meitat del volum del cilindre','El volum del con és tres vegades el volum del cilindre'],sv:'',g:['Compara les fórmules de volum dels dos cossos.','La base i l’alçada són exactament les mateixes.','Fixa’t en el factor que diferencia la fórmula del con de la del cilindre.']},
+      {q:`Quina expressió permet calcular l'<b>àrea total d'un cilindre</b>?`,a:'Àrea de les dues bases + àrea lateral',w:['Àrea d’una base + àrea lateral','Només l’àrea lateral','Només l’àrea de les dues bases'],sv:svgCylinder(),g:['Pensa en totes les superfícies que formen l’exterior del cilindre.','Separa les superfícies planes de la superfície lateral corba.','Assegura’t que no deixes cap part exterior sense comptar.']}
     ];
-    const it=items[rnd(0,items.length-1)]; question=it.q; correct=it.a; svg=it.sv;
-    opts=uniq4(correct,it.w);
-    guide=['Cilindre: V=πr²h | Con: V=(1/3)πr²h | Esfera: V=(4/3)πr³'];
-    solution=[...guide,`✅ ${correct}`];
+    const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;opts=uniq4(correct,it.w);guide=it.g;solution=[`✅ ${correct}`];svg=it.sv;
   }
-  return {question,correct,options:opts,guide,solution,svg};
+
+  return {topicId:'cossos',type:q,question,correct,options:opts,guide,solution,svg};
+}
+
+// ── FILTRES CURRICULARS: 1r ESO / AMPLIACIÓ ─────────────────────────────
+// El generador original es conserva complet, però el bloc principal de 1r
+// només serveix els tipus que corresponen a 1r ESO.
+function genTriangles1r(){
+  let ex,tries=0;
+  do{
+    ex=genTriangles();
+    tries++;
+  }while(tries<50 && ex && ex.type===5); // Pitàgores → ampliació de 2n
+  return ex;
+}
+
+function genPitagoresAmpliacio(){
+  let ex,tries=0;
+  do{
+    ex=genTriangles();
+    tries++;
+  }while(tries<100 && (!ex || ex.type!==5));
+  if(ex)ex.topicId='pitagores';
+  return ex;
+}
+
+function genCircle1r(){
+  const allowed=new Set([1,2,3,7]);
+  let ex,tries=0;
+  do{
+    ex=genCircle();
+    tries++;
+  }while(tries<100 && ex && !allowed.has(ex.type));
+  return ex;
+}
+
+function genCircleAmpliacio(){
+  const allowed=new Set([4,5,6]);
+  let ex,tries=0;
+  do{
+    ex=genCircle();
+    tries++;
+  }while(tries<100 && ex && !allowed.has(ex.type));
+  if(ex)ex.topicId='cercle2';
+  return ex;
 }
 
 // ── TOPICS ────────────────────────────────────────────────────────────
 const TOPICS=[
-  {id:'elements',icon:'📍',name:'Elements geomètrics bàsics',short:'Punt, recta, segment, semirecta i posicions',
+  // ── 1r ESO ───────────────────────────────────────────────────────────
+  {id:'elements',course:'1r',exam1r:true,icon:'📍',name:'Elements geomètrics bàsics',short:'Punt, recta, segment, semirecta i posicions',
    theory:{title:'Elements geomètrics bàsics',text:'La geometria comença pels elements més senzills. El punt no té dimensions. La recta és infinita. El segment té dos extrems. La semirecta té un extrem.',
    formulas:['• Punt: 0 dimensions, posició','• Recta: infinita, sense extrems','• Segment: 2 extrems, longitud finita','• Semirecta: 1 extrem, infinita per l\'altre costat','• Mediatriu: perpendicular al segment pel punt mig','• Bisectriu: divideix l\'angle en 2 parts iguals','• Paral·leles: no es tallen | Perpendiculars: 90° | Secants: es tallen']},gen:genElements},
-  {id:'angles',icon:'📐',name:'Angles: tipus i relacions',short:'Agut, recte, obtús, complementaris, suplementaris, paral·leles',
+
+  {id:'angles',course:'1r',exam1r:true,icon:'📐',name:'Angles: tipus i relacions',short:'Agut, recte, obtús, complementaris, suplementaris i paral·leles',
    theory:{title:'Angles',text:'Obertura entre dos semirectes amb el mateix origen (vèrtex). Es mesura en graus (°).',
-   formulas:['• Agut: 0°–90° | Recte: =90° | Obtús: 90°–180° | Pla: =180°','• Complementaris: sumen 90° | Suplementaris: sumen 180°','• Explementaris: sumen 360°','• Oposats pel vèrtex: iguals','• Rectes paral·leles+transversal: alterns = | corresponents = | conjugats sumen 180°','• Angle interior polígon regular = (n−2)×180° / n']},gen:genAngles},
-  {id:'sexa',icon:'🕐',name:'Operacions sexagesimals',short:'Graus, minuts, segons — sumes, restes i conversions',
+   formulas:['• Agut: 0°–90° | Recte: =90° | Obtús: 90°–180° | Pla: =180°','• Complementaris: sumen 90° | Suplementaris: sumen 180°','• Explementaris: sumen 360°','• Oposats pel vèrtex: iguals','• Rectes paral·leles + transversal: alterns i corresponents iguals; conjugats sumen 180°','• Angle interior d’un polígon regular = (n−2)×180° / n']},gen:genAngles},
+
+  {id:'sexa',course:'1r',exam1r:true,icon:'🕐',name:'Operacions sexagesimals',short:'Graus, minuts, segons — sumes, restes i conversions',
    theory:{title:'Operacions sexagesimals',text:'Sistema de mesura d\'angles: no és decimal, avança de 60 en 60.',
    formulas:["• 1° = 60' (minuts d'arc) | 1' = 60\" (segons d'arc)","• 1° = 3.600\"","• Suma: si seg≥60, porta 1 als min; si min≥60, porta 1 als graus","• Resta: si cal, manlleua 60 del rang superior","• Decimal → sexa: 0,d° × 60 = minuts | 0,m' × 60 = segons","• Sexa → decimal: graus + min/60 + seg/3.600"]},gen:genSexa},
-  {id:'triangles',icon:'🔺',name:'Triangles',short:'Classificació, angles, Pitàgores, àrees i rectes notables',
-   theory:{title:'Triangles',text:'Polígon de 3 costats. Suma d\'angles = 180°.',
-   formulas:['• Per costats: equilàter (3=), isòsceles (2=), escalè (cap=)','• Per angles: acutangle (<90°), rectangle (=90°), obtusangle (>90°)','• α+β+γ = 180°','• Pitàgores: c² = a²+b² (triangle rectangle)','• Àrea = (base × altura) / 2','• Desigualtat: cada costat < suma dels altres dos','• Rectes notables: mediatriu→circumcentre | bisectriu→incentre | mitjana→baricentre | altura→ortocentre']},gen:genTriangles},
-  {id:'quadrilaters',icon:'⬛',name:'Quadrilàters',short:'Paral·lelograms, trapezis, àrees i perímetres',
-   theory:{title:'Quadrilàters',text:'Polígons de 4 costats. Suma angles = 360°.',
-   formulas:['• Paral·lelograms: quadrat, rectangle, rombe, romboide','• Quadrat: 4=, 4 rectes | Rectangle: 2 parells =, 4 rectes','• Rombe: 4=, angles no rectes | Romboide: 2 parells //, no rectes','• Trapezi: 1 parell // | Trapezoide: cap parell //','• Àrea quadrat = l² | Àrea rectangle = b×h','• Àrea rombe = (d₁×d₂)/2 | Àrea paral·lelogram = b×h','• Àrea trapezi = ((B+b)×h)/2','• Perímetre = suma dels 4 costats']},gen:genQuadrilaters},
-  {id:'cercle',icon:'⭕',name:'Circumferència i cercle',short:'Radi, diàmetre, arc, sector, àrea i longitud',
-   theory:{title:'Circumferència i cercle',text:'Circumferència = línia corba. Cercle = línia + interior.',
-   formulas:['• d = 2r','• Longitud circumferència = 2πr','• Àrea cercle = πr²','• Longitud arc = (α/360)×2πr','• Àrea sector = (α/360)×πr²','• Corona circular = π(R²−r²)','• π ≈ 3,14']},gen:genCircle},
-  {id:'poliedres',icon:'🔷',name:'Poliedres',short:'Prismes, piràmides, Euler i sòlids de Plató',
-   theory:{title:'Poliedres',text:'Cos tancat per cares planes. Elements: Cares (C), Arestes (A), Vèrtexs (V).',
-   formulas:['• Euler: C + V = A + 2','• Prisma n-gonal: C=n+2, A=3n, V=2n','• Piràmide n-gonal: C=n+1, A=2n, V=n+1','• Cub: C=6, A=12, V=8','• Volum prisma = Àrea base × alçada','• Sòlids de Plató: tetraedre(4), cub(6), octaedre(8), dodecaedre(12), icosaedre(20)']},gen:genPoliedres},
-  {id:'cossos',icon:'🌐',name:'Cossos rodons',short:'Cilindre, con i esfera — àrees i volums',
-   theory:{title:'Cossos rodons',text:'Cossos amb superfícies corbes. Generats per revolució d\'una figura plana.',
-   formulas:['• Cilindre: V=πr²h | A_lat=2πrh | A_tot=2πr²+2πrh','• Con: V=(1/3)πr²h | A_lat=πrg (g=generatriu=√(r²+h²))','• Esfera: V=(4/3)πr³ | A=4πr²','• π ≈ 3,14']},gen:genCossos},
+
+  {id:'triangles',course:'1r',exam1r:true,examTypes:[1,2,3,4,6,7],icon:'🔺',name:'Triangles',short:'Classificació, angles, desigualtat, àrees i rectes notables',
+   theory:{title:'Triangles',text:'Polígon de 3 costats. La suma dels seus angles interiors és 180°.',
+   formulas:['• Per costats: equilàter (3=), isòsceles (2=), escalè (cap=)','• Per angles: acutangle (<90°), rectangle (=90°), obtusangle (>90°)','• α+β+γ = 180°','• Àrea = (base × altura) / 2','• Desigualtat triangular: cada costat < suma dels altres dos','• Rectes notables: mediatriu→circumcentre | bisectriu→incentre | mediana→baricentre | altura→ortocentre']},gen:genTriangles1r},
+
+  {id:'quadrilaters',course:'1r',exam1r:true,icon:'⬛',name:'Quadrilàters',short:'Classificació, paral·lelisme, àrees i perímetres',
+   theory:{title:'Quadrilàters',text:'Polígons de 4 costats. La suma dels angles interiors és 360°.',
+   formulas:['• Paral·lelograms: quadrat, rectangle, rombe, romboide','• Quadrat: 4 costats iguals i 4 angles rectes','• Rectangle: 2 parells de costats iguals i 4 angles rectes','• Rombe: 4 costats iguals; angles no necessàriament rectes','• Romboide: 2 parells de costats paral·lels','• Trapezi: 1 parell de costats paral·lels | Trapezoide: cap parell','• Àrea rectangle/paral·lelogram = b×h | triangle = (b×h)/2','• Àrea trapezi = ((B+b)×h)/2 | Perímetre = suma dels costats']},gen:genQuadrilaters},
+
+  {id:'cercle',course:'1r',exam1r:true,examTypes:[1,2,3,7],icon:'⭕',name:'Circumferència i cercle',short:'Centre, radi, diàmetre, longitud, π, arc, corda i sector',
+   theory:{title:'Circumferència i cercle',text:'Circumferència = línia corba tancada. Cercle = circumferència i regió interior.',
+   formulas:['• d = 2r','• Longitud de la circumferència = 2πr','• π és la raó entre la longitud de la circumferència i el diàmetre','• Arc: part de la circumferència','• Corda: segment entre dos punts de la circumferència','• Sector circular: regió limitada per dos radis i un arc','• π ≈ 3,14']},gen:genCircle1r},
+
+  // ── AMPLIACIÓ / PREPARA 2n ESO ──────────────────────────────────────
+  // Es mantenen als índexs 6 i 7 per compatibilitat amb el progrés ja desat.
+  {id:'poliedres',course:'2n',exam1r:false,icon:'🔷',name:'Poliedres',short:'⭐ Ampliació · Prismes, piràmides, Euler i sòlids de Plató',
+   theory:{title:'⭐ Ampliació · Poliedres (prepara 2n ESO)',text:'Contingut d’ampliació: propietats i elements dels cossos geomètrics, prismes i piràmides.',
+   formulas:['• Euler: C + V = A + 2','• Prisma n-gonal: C=n+2, A=3n, V=2n','• Piràmide n-gonal: C=n+1, A=2n, V=n+1','• Cub: C=6, A=12, V=8','• Volum prisma = Àrea base × alçada','• Sòlids de Plató: tetraedre, cub, octaedre, dodecaedre i icosaedre']},gen:genPoliedres},
+
+  {id:'cossos',course:'2n',exam1r:false,icon:'🌐',name:'Cossos rodons',short:'⭐ Ampliació · Cilindre, con i esfera — àrees i volums',
+   theory:{title:'⭐ Ampliació · Cossos rodons (prepara 2n ESO)',text:'Contingut d’ampliació: classificació i càlculs amb cilindre, con i esfera.',
+   formulas:['• Cilindre: V=πr²h | A_lat=2πrh | A_tot=2πr²+2πrh','• Con: V=(1/3)πr²h | A_lat=πrg','• Esfera: V=(4/3)πr³ | A=4πr²','• π ≈ 3,14']},gen:genCossos},
+
+  {id:'pitagores',course:'2n',exam1r:false,icon:'📐',name:'Teorema de Pitàgores',short:'⭐ Ampliació · Calcula costats de triangles rectangles',
+   theory:{title:'⭐ Ampliació · Pitàgores (prepara 2n ESO)',text:'En un triangle rectangle, el quadrat de la hipotenusa és igual a la suma dels quadrats dels catets.',
+   formulas:['• c² = a² + b²','• La hipotenusa és el costat oposat a l’angle recte','• Per trobar una longitud, al final cal fer l’arrel quadrada']},gen:genPitagoresAmpliacio},
+
+  {id:'cercle2',course:'2n',exam1r:false,icon:'🟣',name:'Càlculs circulars avançats',short:'⭐ Ampliació · Àrea del cercle, arcs i sectors',
+   theory:{title:'⭐ Ampliació · Càlculs circulars (prepara 2n ESO)',text:'Contingut d’ampliació sobre superfícies circulars i proporcionalitat angular.',
+   formulas:['• Àrea cercle = πr²','• Longitud arc = (α/360)×2πr','• Àrea sector = (α/360)×πr²','• π ≈ 3,14']},gen:genCircleAmpliacio},
 ];
 
 // ── ESTAT ──────────────────────────────────────────────────────────────
-let state={unlockedIds:[],done:[],currentTopic:0,level:1,exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0,examPerTopic:{}};
-const NEEDED_LVL1=10,NEEDED_LVL2=15;
+let state={
+  unlockedIds:[],
+  done:[],
+  errors:[],
+  currentTopic:0,
+  level:1,
+  exCount:0,
+  correctStreak:0,
+  answered:false,
+  examQs:[],
+  examIdx:0,
+  examScore:0,
+  examPerTopic:{}
+};
 
-function isTopicUnlocked(i){return state.unlockedIds.includes(TOPICS[i].id);}
+const NEEDED_LVL1=10, NEEDED_LVL2=15;
+const STORAGE_KEY='sentitEspacialState_v1';
+
+let currentEx=null;
+let currentErrorIndex=-1;
+
+// ── PERSISTÈNCIA ────────────────────────────────────────────────────────
+
+function saveState(){
+  try{
+    const data={
+      unlockedIds:Array.isArray(state.unlockedIds)?state.unlockedIds:[],
+      done:Array.isArray(state.done)?state.done:[],
+      errors:Array.isArray(state.errors)?state.errors:[],
+      currentTopic:Number.isInteger(state.currentTopic)?state.currentTopic:0,
+      level:state.level===2?2:1
+    };
+
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
+  }catch(e){
+    console.warn('No s’ha pogut desar l’estat:',e);
+  }
+}
 
 function loadState(){
   try{
-    const s=JSON.parse(sessionStorage.getItem('se1eso_v2')||'{}');
-    if(s.unlockedIds) state.unlockedIds=s.unlockedIds;
-    else if(s.unlocked) state.unlockedIds=TOPICS.slice(0,s.unlocked).map(t=>t.id);
-    if(s.done) state.done=s.done;
-  }catch(e){}
-  try{
-    const s=JSON.parse(localStorage.getItem('se1eso_v2')||'{}');
-    if(s.unlockedIds&&s.unlockedIds.length>state.unlockedIds.length) state.unlockedIds=s.unlockedIds;
-    else if(s.unlocked&&s.unlocked>state.unlockedIds.length) state.unlockedIds=TOPICS.slice(0,s.unlocked).map(t=>t.id);
-    if(s.done&&s.done.length>state.done.length) state.done=s.done;
-  }catch(e){}
-  if(!state.unlockedIds.includes(TOPICS[0].id)) state.unlockedIds.unshift(TOPICS[0].id);
+    const raw=localStorage.getItem(STORAGE_KEY);
+
+    if(!raw){
+      state.unlockedIds=TOPICS.length?[TOPICS[0].id]:[];
+      state.done=[];
+      state.errors=[];
+      return;
+    }
+
+    const data=JSON.parse(raw);
+
+    state.unlockedIds=Array.isArray(data.unlockedIds)
+      ?data.unlockedIds.filter(id=>TOPICS.some(t=>t.id===id))
+      :(TOPICS.length?[TOPICS[0].id]:[]);
+
+    state.done=Array.isArray(data.done)
+      ?data.done.filter(id=>TOPICS.some(t=>t.id===id))
+      :[];
+
+    state.errors=Array.isArray(data.errors)
+      ?data.errors
+      :[];
+
+    state.currentTopic=
+      Number.isInteger(data.currentTopic)&&
+      data.currentTopic>=0&&
+      data.currentTopic<TOPICS.length
+        ?data.currentTopic
+        :0;
+
+    state.level=data.level===2?2:1;
+
+    // El primer tema sempre ha d'estar disponible
+    if(TOPICS.length && !state.unlockedIds.includes(TOPICS[0].id)){
+      state.unlockedIds.unshift(TOPICS[0].id);
+    }
+
+  }catch(e){
+    console.warn('Error carregant l’estat:',e);
+
+    state.unlockedIds=TOPICS.length?[TOPICS[0].id]:[];
+    state.done=[];
+    state.errors=[];
+  }
 }
-function saveState(){
-  const data=JSON.stringify({unlockedIds:state.unlockedIds,done:state.done});
-  try{sessionStorage.setItem('se1eso_v2',data);}catch(e){}
-  try{localStorage.setItem('se1eso_v2',data);}catch(e){}
+
+function isTopicUnlocked(i){
+  return state.unlockedIds.includes(TOPICS[i].id);
 }
-let currentEx=null;
+
+
+// ── REGISTRE D'ERRORS ───────────────────────────────────────────────────
+
+function registerError(ex,studentAnswer,source='practice'){
+  if(!ex)return;
+
+  const topic=TOPICS[state.currentTopic];
+
+  if(!topic)return;
+
+  const error={
+    id:Date.now()+'_'+Math.random().toString(36).slice(2,8),
+
+    topicId:ex.topicId||topic.id,
+    topicName:topic.name,
+    type:(ex.type!==undefined?ex.type:null),
+
+    question:ex.question||'',
+    correct:ex.correct,
+    answer:studentAnswer,
+
+    // Guardem també les dades originals per poder mostrar l'error
+    // després de recarregar la pàgina.
+    options:Array.isArray(ex.options)?[...ex.options]:[],
+    guide:Array.isArray(ex.guide)?[...ex.guide]:[],
+    solution:Array.isArray(ex.solution)?[...ex.solution]:[],
+    svg:ex.svg||'',
+
+    level:state.level,
+
+    source:source,
+
+    timestamp:new Date().toISOString()
+  };
+
+  /*
+   * Evitem duplicar exactament el mateix error consecutiu.
+   * Això permet que una mateixa pregunta pugui tornar a aparèixer
+   * més endavant i tornar a registrar-se.
+   */
+  const last=state.errors[state.errors.length-1];
+
+  const isSameAsLast=
+    last &&
+    last.topicId===error.topicId &&
+    last.question===error.question &&
+    last.answer===error.answer &&
+    last.correct===error.correct &&
+    last.source===error.source;
+
+  if(!isSameAsLast){
+    state.errors.push(error);
+  }
+
+  saveState();
+}
+
 
 // ── STREAK BAR ─────────────────────────────────────────────────────────
 function renderStreakBar(){
   const needed=state.level===1?NEEDED_LVL1:NEEDED_LVL2;
-  document.getElementById('streakLabel').textContent=`Encerts seguits: ${state.correctStreak}/${needed}`;
+
+  document.getElementById('streakLabel').textContent=
+    `Encerts seguits: ${state.correctStreak}/${needed}`;
+
   let html='';
-  for(let i=0;i<needed;i++) html+=`<div class="streak-dot ${i<state.correctStreak?'ok':''}"></div>`;
+
+  for(let i=0;i<needed;i++){
+    html+=`<div class="streak-dot ${i<state.correctStreak?'ok':''}"></div>`;
+  }
+
   document.getElementById('streakBar').innerHTML=html;
 }
 
+
 // ── UI ─────────────────────────────────────────────────────────────────
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById('sidebar').style.display=(id==='screenHome')?'flex':'none';}
+function showScreen(id){
+  document.querySelectorAll('.screen')
+    .forEach(s=>s.classList.remove('active'));
+
+  document.getElementById(id).classList.add('active');
+
+  document.getElementById('sidebar').style.display=
+    (id==='screenHome')?'flex':'none';
+}
 
 function showHome(){
   document.getElementById('navBack').style.display='none';
   document.getElementById('navTitle').textContent='Sentit Espacial · 1r ESO';
-  renderHome();showScreen('screenHome');
+
+  renderHome();
+  showScreen('screenHome');
 }
 
 function renderHome(){
   const grid=document.getElementById('topicsGrid');
-  let html='';
+
+  let html=`
+    <div style="grid-column:1/-1;margin:2px 0 6px">
+      <div style="font-weight:800;color:var(--primary);font-size:1rem">📘 Continguts de 1r d'ESO</div>
+      <div style="font-size:.82rem;color:var(--muted);margin-top:3px">
+        Aquests són els continguts que poden aparèixer al Mode Examen.
+      </div>
+    </div>`;
+
+  const coreIndexes=[];
+  const extensionIndexes=[];
+
   TOPICS.forEach((t,i)=>{
-    const unlocked=isTopicUnlocked(i);
-    const done=state.done.includes(t.id);
-    html+=`<div class="topic-card ${!unlocked?'locked':''} ${done?'done':''}" onclick="${unlocked?`selectTopic(${i})`:''}" >
-      <div class="topic-icon">${t.icon}</div>
-      <div class="topic-info"><h3>${t.name}</h3><p>${t.short}</p></div>
-      <span class="topic-badge ${done?'badge-done':(!unlocked?'badge-locked':'badge-active')}">${done?'✓ Fet':(!unlocked?'🔒':'Practicar')}</span>
-    </div>`;
+    if(t.course==='1r')coreIndexes.push(i);
+    else extensionIndexes.push(i);
   });
-  if(state.unlockedIds.length>=5){
-    html+=`<div class="topic-card" onclick="showApps()" style="border:2px dashed #8b5cf6">
-      <div class="topic-icon">🌍</div>
-      <div class="topic-info"><h3>Aplicacions Reals</h3><p>Figures en objectes reals i calculadores</p></div>
-      <span class="topic-badge badge-app">Aplicacions</span>
-    </div>`;
+
+  function topicCard(i,isExtension=false){
+    const t=TOPICS[i];
+    const unlocked=isExtension ? true : isTopicUnlocked(i);
+    const done=state.done.includes(t.id);
+
+    return `
+      <div class="topic-card ${!unlocked?'locked':''} ${done?'done':''}"
+           onclick="${unlocked?`selectTopic(${i})`:''}"
+           ${isExtension?'style="border-style:dashed"':''}>
+        <div class="topic-icon">${t.icon}</div>
+        <div class="topic-info">
+          <h3>${t.name}</h3>
+          <p>${t.short}</p>
+        </div>
+        <span class="topic-badge ${
+          done
+            ?'badge-done'
+            :(isExtension?'badge-app':(!unlocked?'badge-locked':'badge-active'))
+        }">
+          ${done?'✓ Fet':(isExtension?'Ampliació':(!unlocked?'🔒':'Practicar'))}
+        </span>
+      </div>`;
   }
-  if(state.unlockedIds.length>=3){
-    html+=`<div class="topic-card" onclick="startExam()" style="border:2px dashed var(--warn)">
-      <div class="topic-icon">📝</div>
-      <div class="topic-info"><h3>Mode Examen</h3><p>Repassa tots els temes desbloquejats (20 preguntes)</p></div>
-      <span class="topic-badge badge-exam">Examen</span>
-    </div>`;
+
+  coreIndexes.forEach(i=>{html+=topicCard(i,false);});
+
+  const coreUnlocked=coreIndexes.filter(i=>isTopicUnlocked(i)).length;
+
+  if(coreUnlocked>=5){
+    html+=`
+      <div class="topic-card"
+           onclick="showApps()"
+           style="border:2px dashed #8b5cf6">
+        <div class="topic-icon">🌍</div>
+        <div class="topic-info">
+          <h3>Aplicacions Reals</h3>
+          <p>Geometria en situacions quotidianes · 1r + ampliació indicada</p>
+        </div>
+        <span class="topic-badge badge-app">Aplicacions</span>
+      </div>`;
   }
+
+  if(coreUnlocked>=3){
+    html+=`
+      <div class="topic-card"
+           onclick="startExam()"
+           style="border:2px dashed var(--warn)">
+        <div class="topic-icon">📝</div>
+        <div class="topic-info">
+          <h3>Mode Examen · 1r ESO</h3>
+          <p>20 preguntes només dels continguts de 1r desbloquejats</p>
+        </div>
+        <span class="topic-badge badge-exam">Examen 1r</span>
+      </div>`;
+  }
+
+  html+=`
+    <div style="grid-column:1/-1;margin:18px 0 6px;padding-top:14px;border-top:1px solid var(--border)">
+      <div style="font-weight:800;color:#8b5cf6;font-size:1rem">⭐ Ampliació · prepara 2n d'ESO</div>
+      <div style="font-size:.82rem;color:var(--muted);margin-top:3px">
+        És material opcional. <b>No entra mai al Mode Examen de 1r ESO.</b>
+      </div>
+    </div>`;
+
+  // Ordre pedagògic de l'ampliació, independent dels índexs interns.
+  ['pitagores','cercle2','poliedres','cossos'].forEach(id=>{
+    const i=TOPICS.findIndex(t=>t.id===id);
+    if(i>=0)html+=topicCard(i,true);
+  });
+
+  // ── TARGETA D'ERRORS ────────────────────────────────────────────────
+  const errorCount=Array.isArray(state.errors)?state.errors.length:0;
+  html+=`
+    <div class="topic-card"
+         onclick="showErrors()"
+         style="border:2px dashed ${errorCount?'var(--error)':'var(--border)'};grid-column:1/-1">
+      <div class="topic-icon">❌</div>
+      <div class="topic-info">
+        <h3>Errors guardats</h3>
+        <p>${errorCount
+          ? `Tens ${errorCount} error${errorCount===1?'':'s'} per repassar`
+          : 'Encara no tens errors guardats'}</p>
+      </div>
+      <span class="topic-badge ${errorCount?'badge-exam':'badge-active'}">
+        ${errorCount?'Repassar':'Veure'}
+      </span>
+    </div>`;
+
   grid.innerHTML=html;
-  const pct=(state.done.length/TOPICS.length)*100;
+
+  const coreDone=coreIndexes.filter(i=>state.done.includes(TOPICS[i].id)).length;
+  const pct=coreIndexes.length?(coreDone/coreIndexes.length)*100:0;
+
   document.getElementById('globalProgress').style.width=pct+'%';
 }
 
+
+function showErrors(){
+  const errors=Array.isArray(state.errors)?state.errors:[];
+
+  document.getElementById('navBack').style.display='block';
+  document.getElementById('navTitle').textContent='Errors guardats';
+
+  let html=`
+    <div class="home-header" style="padding-top:10px">
+      <h2>❌ Errors guardats</h2>
+      <p>Aquí es conserven les respostes incorrectes encara que tanquis o recarreguis l'aplicació.</p>
+    </div>`;
+
+  if(!errors.length){
+    html+=`
+      <div class="app-card">
+        <h3>✅ Cap error guardat</h3>
+        <p>Quan fallis un exercici, quedarà registrat automàticament aquí.</p>
+      </div>`;
+  }else{
+    html+=`
+      <div style="margin-bottom:12px;color:var(--muted);font-size:.85rem">
+        ${errors.length} error${errors.length===1?'':'s'} guardat${errors.length===1?'':'s'}
+      </div>`;
+
+    [...errors].reverse().forEach((e,revIndex)=>{
+      const realIndex=errors.length-1-revIndex;
+      const date=e.timestamp
+        ?new Date(e.timestamp).toLocaleString('ca-ES',{dateStyle:'short',timeStyle:'short'})
+        :'';
+
+      html+=`
+        <div class="app-card" style="border-left:4px solid var(--error);margin-bottom:12px">
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start">
+            <h3 style="margin:0 0 6px">❌ ${e.topicName||'Tema'}</h3>
+            <span style="font-size:.72rem;color:var(--muted)">${date}</span>
+          </div>
+
+          <div style="margin:8px 0;line-height:1.5">
+            ${e.svg||''}
+            <div>${e.question||'Pregunta no disponible'}</div>
+          </div>
+
+          <div style="font-size:.86rem;margin-top:8px">
+            <div>La teva resposta:
+              <b style="color:var(--error)">${e.answer??'—'}</b>
+            </div>
+            <div>Resposta correcta:
+              <b style="color:var(--success)">${e.correct??'—'}</b>
+            </div>
+            <div style="color:var(--muted);margin-top:4px">
+              ${e.source==='exam'?'📝 Examen':'🧩 Pràctica'} ·
+              ${e.level===2?'Nivell 2':'Nivell 1'}
+            </div>
+          </div>
+
+          <button class="btn-secondary"
+                  onclick="deleteSavedError(${realIndex})"
+                  style="margin-top:10px;border-color:var(--error);color:var(--error)">
+            🗑️ Esborrar aquest error
+          </button>
+        </div>`;
+    });
+  }
+
+  if(errors.length){
+    html+=`
+      <button class="btn-secondary"
+              onclick="clearSavedErrors()"
+              style="margin-top:8px;border-color:var(--error);color:var(--error)">
+        🗑️ Esborrar tots els errors
+      </button>`;
+  }
+
+  html+=`
+    <button class="btn-secondary" onclick="showHome()" style="margin-top:8px">
+      ← Tornar al menú
+    </button>`;
+
+  document.getElementById('appContent').innerHTML=html;
+  document.getElementById('sidebar').style.display='none';
+  showScreen('screenApp');
+}
+
+
+function deleteSavedError(index){
+  if(!Array.isArray(state.errors)) state.errors=[];
+  if(index<0 || index>=state.errors.length) return;
+
+  state.errors.splice(index,1);
+  saveState();
+  showErrors();
+}
+
+function clearSavedErrors(){
+  if(!Array.isArray(state.errors) || state.errors.length===0) return;
+
+  const ok=confirm('Vols esborrar tots els errors guardats? Aquesta acció no es pot desfer.');
+  if(!ok) return;
+
+  state.errors=[];
+  saveState();
+  showErrors();
+}
+
+
 function selectTopic(i){
-  state.currentTopic=i;state.level=1;state.exCount=0;state.correctStreak=0;
+  state.currentTopic=i;
+  state.level=1;
+  state.exCount=0;
+  state.correctStreak=0;
+  state.answered=false;
+
   const t=TOPICS[i];
+
   document.getElementById('navBack').style.display='block';
   document.getElementById('navTitle').textContent=t.name;
-  let html=`<div class="theory-box"><h3>📖 ${t.theory.title}</h3><p>${t.theory.text}</p>`;
-  t.theory.formulas.forEach(f=>{html+=`<div class="formula">${f}</div>`;});
+
+  let html=`
+    <div class="theory-box">
+      <h3>📖 ${t.theory.title}</h3>
+      <p>${t.theory.text}</p>`;
+
+  t.theory.formulas.forEach(f=>{
+    html+=`<div class="formula">${f}</div>`;
+  });
+
   html+=`</div>`;
+
   document.getElementById('introContent').innerHTML=html;
+
   document.getElementById('btnLvl1').classList.add('active');
   document.getElementById('btnLvl2').classList.remove('active');
+
   showScreen('screenIntro');
 }
 
+
 function selectLevel(l){
   state.level=l;
-  document.getElementById('btnLvl1').classList.toggle('active',l===1);
-  document.getElementById('btnLvl2').classList.toggle('active',l===2);
+
+  document.getElementById('btnLvl1')
+    .classList.toggle('active',l===1);
+
+  document.getElementById('btnLvl2')
+    .classList.toggle('active',l===2);
 }
 
-function startPractice(){state.exCount=0;state.correctStreak=0;showExercise();}
+
+function startPractice(){
+  state.exCount=0;
+  state.correctStreak=0;
+  state.answered=false;
+
+  showExercise();
+}
+
+
+// ── EXERCICIS ──────────────────────────────────────────────────────────
 
 function showExercise(){
   state.answered=false;
+
   const t=TOPICS[state.currentTopic];
+
   let tries=0;
-  do{currentEx=t.gen();tries++;}while(tries<10&&(!currentEx||!currentEx.options||!currentEx.options.includes(currentEx.correct)));
+
+  do{
+    currentEx=t.gen();
+    tries++;
+  }while(
+    tries<10 &&
+    (
+      !currentEx ||
+      !currentEx.options ||
+      !currentEx.options.includes(currentEx.correct)
+    )
+  );
+
+  if(
+    !currentEx ||
+    !Array.isArray(currentEx.options) ||
+    !currentEx.options.includes(currentEx.correct)
+  ){
+    console.error('Exercici invàlid:',currentEx);
+    return;
+  }
+
   state.exCount++;
-  document.getElementById('exNum').textContent=`Exercici ${state.exCount} · ${t.name}`;
+
+  document.getElementById('exNum').textContent=
+    `Exercici ${state.exCount} · ${t.name}`;
+
   let qHTML='';
-  if(currentEx.svg) qHTML+=currentEx.svg;
+
+  if(currentEx.svg){
+    qHTML+=currentEx.svg;
+  }
+
   qHTML+=`<span class="q-text">${currentEx.question}</span>`;
+
   document.getElementById('exQuestion').innerHTML=qHTML;
+
   const gs=document.getElementById('guideSteps');
+
   if(state.level===1){
+
     gs.style.display='block';
-    gs.innerHTML=`<h4>💡 Pistes:</h4>`+currentEx.guide.map(s=>`• ${s}`).join('<br>');
-  } else gs.style.display='none';
-  document.getElementById('optionsGrid').innerHTML=currentEx.options.map((o,i)=>`<button class="opt-btn" onclick="selectAnswer(${i},this)">${o}</button>`).join('');
+
+    const guide=Array.isArray(currentEx.guide)
+      ?currentEx.guide
+      :[];
+
+    gs.innerHTML=
+      `<h4>💡 Pistes:</h4>`+
+      guide.map(s=>`• ${s}`).join('<br>');
+
+  }else{
+    gs.style.display='none';
+  }
+
+  document.getElementById('optionsGrid').innerHTML=
+    currentEx.options
+      .map((o,i)=>
+        `<button class="opt-btn"
+                 onclick="selectAnswer(${i},this)">
+          ${o}
+        </button>`
+      )
+      .join('');
+
   document.getElementById('feedbackArea').innerHTML='';
+
   document.getElementById('btnNext').style.display='none';
+
   document.getElementById('btnChangeTopic').style.display='none';
+
   renderStreakBar();
+
   showScreen('screenExercise');
 }
 
+
+// ── CORRECCIÓ + REGISTRE ERROR ─────────────────────────────────────────
+
 function selectAnswer(idx,btn){
-  if(state.answered) return;
+
+  if(state.answered)return;
+
   state.answered=true;
+
   const ans=currentEx.options[idx];
-  const isCorrect=ans===currentEx.correct;
-  document.querySelectorAll('.opt-btn').forEach(b=>{b.disabled=true;if(b.textContent===currentEx.correct)b.classList.add('correct');});
-  if(!isCorrect) btn.classList.add('wrong');
-  const fb=document.getElementById('feedbackArea');
-  const needed=state.level===1?NEEDED_LVL1:NEEDED_LVL2;
-  if(isCorrect){
-    state.correctStreak++;
-    const msg=state.correctStreak>=needed?'🏆 Has completat el tema! Molt bé!':'✅ Correcte!';
-    fb.innerHTML=`<div class="feedback-box ok"><h4>${msg}</h4>${state.correctStreak>=needed?'Clica "Següent" per veure el resum.':'Segueix així.'}</div>`;
-    if(state.correctStreak>=needed) markTopicDone();
-  } else {
-    state.correctStreak=0;
-    const solSteps=currentEx.solution.map((s,i)=>`<div class="step"><b>Pas ${i+1}:</b> <span class="highlight">${s}</span></div>`).join('');
-    fb.innerHTML=`<div class="feedback-box ko"><h4>❌ No és correcte</h4>La resposta és: <b>${currentEx.correct}</b><br>
-    <button class="sol-btn" onclick="toggleSolution(this)">Veure solució pas a pas ▼</button>
-    <div class="solution-box" id="solBox">${solSteps}</div></div>`;
+
+  const isCorrect=
+    ans===currentEx.correct;
+
+  document
+    .querySelectorAll('.opt-btn')
+    .forEach(b=>{
+      b.disabled=true;
+
+      if(b.textContent.trim()===String(currentEx.correct).trim()){
+        b.classList.add('correct');
+      }
+    });
+
+  if(!isCorrect){
+
+    btn.classList.add('wrong');
+
+    // ★ AQUÍ ES GUARDA L'ERROR
+    registerError(
+      currentEx,
+      ans,
+      'practice'
+    );
   }
+
+  const fb=document.getElementById('feedbackArea');
+
+  const needed=
+    state.level===1
+      ?NEEDED_LVL1
+      :NEEDED_LVL2;
+
+  if(isCorrect){
+
+    state.correctStreak++;
+
+    const msg=
+      state.correctStreak>=needed
+        ?'🏆 Has completat el tema! Molt bé!'
+        :'✅ Correcte!';
+
+    fb.innerHTML=`
+      <div class="feedback-box ok">
+        <h4>${msg}</h4>
+        ${
+          state.correctStreak>=needed
+            ?'Clica "Següent" per veure el resum.'
+            :'Segueix així.'
+        }
+      </div>`;
+
+    if(state.correctStreak>=needed){
+      markTopicDone();
+    }
+
+  }else{
+
+    state.correctStreak=0;
+
+    const solution=
+      Array.isArray(currentEx.solution)
+        ?currentEx.solution
+        :[];
+
+    const solSteps=
+      solution
+        .map((s,i)=>
+          `<div class="step">
+             <b>Pas ${i+1}:</b>
+             <span class="highlight">${s}</span>
+           </div>`
+        )
+        .join('');
+
+    fb.innerHTML=`
+      <div class="feedback-box ko">
+        <h4>❌ No és correcte</h4>
+
+        La resposta és:
+        <b>${currentEx.correct}</b><br>
+
+        <button class="sol-btn"
+                onclick="toggleSolution(this)">
+          Veure solució pas a pas ▼
+        </button>
+
+        <div class="solution-box" id="solBox">
+          ${solSteps}
+        </div>
+      </div>`;
+  }
+
   renderStreakBar();
+
   document.getElementById('btnNext').style.display='block';
-  if(state.exCount>=3) document.getElementById('btnChangeTopic').style.display='block';
+
+  if(state.exCount>=3){
+    document.getElementById('btnChangeTopic').style.display='block';
+  }
 }
+
 
 function toggleSolution(btn){
+
   const box=document.getElementById('solBox');
+
+  if(!box)return;
+
   box.classList.toggle('show');
-  btn.textContent=box.classList.contains('show')?'Amagar ▲':'Veure solució pas a pas ▼';
+
+  btn.textContent=
+    box.classList.contains('show')
+      ?'Amagar ▲'
+      :'Veure solució pas a pas ▼';
 }
 
+
+// ── PROGRÉS ────────────────────────────────────────────────────────────
+
 function markTopicDone(){
+
   const tid=TOPICS[state.currentTopic].id;
+
   if(!state.done.includes(tid)){
+
     state.done.push(tid);
-    if(state.currentTopic+1<TOPICS.length&&!isTopicUnlocked(state.currentTopic+1)) state.unlockedIds.push(TOPICS[state.currentTopic+1].id);
+
+    if(
+      state.currentTopic+1<TOPICS.length &&
+      !isTopicUnlocked(state.currentTopic+1)
+    ){
+      state.unlockedIds.push(
+        TOPICS[state.currentTopic+1].id
+      );
+    }
+
     saveState();
   }
 }
 
+
 function nextExercise(){
-  const needed=state.level===1?NEEDED_LVL1:NEEDED_LVL2;
-  if(state.correctStreak>=needed&&state.done.includes(TOPICS[state.currentTopic].id)){showCongrats();return;}
+
+  const needed=
+    state.level===1
+      ?NEEDED_LVL1
+      :NEEDED_LVL2;
+
+  if(
+    state.correctStreak>=needed &&
+    state.done.includes(TOPICS[state.currentTopic].id)
+  ){
+    showCongrats();
+    return;
+  }
+
   showExercise();
 }
 
+
 function showCongrats(){
+
   const t=TOPICS[state.currentTopic];
-  const next=state.currentTopic+1<TOPICS.length?TOPICS[state.currentTopic+1]:null;
-  document.getElementById('feedbackArea').innerHTML=`<div class="congrats">
-    <div class="trophy">🏆</div><h2>Excel·lent!</h2>
-    <p>Has dominat <b>${t.name}</b>!</p>
-    <button class="btn-primary" onclick="showHome()">Tornar al menú</button>
-    ${next&&next.id&&isTopicUnlocked(state.currentTopic+1)?`<button class="btn-secondary" onclick="selectTopic(${state.currentTopic+1})">Següent: ${next.name} →</button>`:''}
-  </div>`;
+
+  const next=
+    state.currentTopic+1<TOPICS.length
+      ?TOPICS[state.currentTopic+1]
+      :null;
+
+  document.getElementById('feedbackArea').innerHTML=`
+    <div class="congrats">
+
+      <div class="trophy">🏆</div>
+
+      <h2>Excel·lent!</h2>
+
+      <p>
+        Has dominat <b>${t.name}</b>!
+      </p>
+
+      <button class="btn-primary"
+              onclick="showHome()">
+        Tornar al menú
+      </button>
+
+      ${
+        next &&
+        next.id &&
+        next.course===t.course &&
+        isTopicUnlocked(state.currentTopic+1)
+          ?
+          `<button class="btn-secondary"
+                   onclick="selectTopic(${state.currentTopic+1})">
+             Següent: ${next.name} →
+           </button>`
+          :''
+      }
+
+    </div>`;
+
   document.getElementById('btnNext').style.display='none';
 }
 
-function goBack(){showHome();}
+
+function goBack(){
+  showHome();
+}
+
 
 // ── EXAMEN ─────────────────────────────────────────────────────────────
+
 function startExam(){
-  state.examQs=[];state.examPerTopic={};
-  const available=TOPICS.filter((_,i)=>isTopicUnlocked(i));
+
+  state.examQs=[];
+  state.examPerTopic={};
+
+  // EXAMEN ESTRICTAMENT DE 1r ESO:
+  // - exclou tots els temes marcats com a ampliació/2n
+  // - en temes mixtos valida també el subtype (type)
+  const available=TOPICS.filter((t,i)=>
+    t.course==='1r' &&
+    t.exam1r!==false &&
+    isTopicUnlocked(i)
+  );
+
   const total=20;
+
+  if(!available.length)return;
+
   const perTema=Math.floor(total/available.length);
   const extra=total-(perTema*available.length);
   const quota=available.map((_,i)=>perTema+(i<extra?1:0));
 
   available.forEach((t,i)=>{
-    const usedQs=new Set(); let tries=0;
-    state.examPerTopic[t.id]={name:t.name,correct:0,total:quota[i]};
-    while(state.examQs.filter(q=>q.topicId===t.id).length<quota[i]&&tries<300){
+
+    const usedQs=new Set();
+    let tries=0;
+
+    state.examPerTopic[t.id]={
+      name:t.name,
+      correct:0,
+      total:quota[i]
+    };
+
+    while(
+      state.examQs.filter(q=>q.topicId===t.id).length<quota[i] &&
+      tries<500
+    ){
+
       tries++;
       let ex;
+
       try{
         let genTries=0;
-        do{ex=t.gen();genTries++;}while(genTries<20&&(!ex||!ex.options||!ex.options.includes(ex.correct)));
-        if(!ex||!ex.options||!ex.options.includes(ex.correct)) continue;
-      } catch(e){continue;}
-      const qKey=ex.question.replace(/<[^>]+>/g,'').trim().substring(0,80);
-      if(!usedQs.has(qKey)){usedQs.add(qKey);state.examQs.push({...ex,topicId:t.id,topicName:t.name});}
+
+        do{
+          ex=t.gen();
+          genTries++;
+        }while(
+          genTries<50 &&
+          (
+            !ex ||
+            !ex.options ||
+            !ex.options.includes(ex.correct) ||
+            (Array.isArray(t.examTypes) && !t.examTypes.includes(ex.type))
+          )
+        );
+
+        if(
+          !ex ||
+          !ex.options ||
+          !ex.options.includes(ex.correct) ||
+          (Array.isArray(t.examTypes) && !t.examTypes.includes(ex.type))
+        ){
+          continue;
+        }
+
+      }catch(e){
+        continue;
+      }
+
+      const qKey=
+        `${t.id}|${ex.type!==undefined?ex.type:''}|`+
+        ex.question
+          .replace(/<[^>]+>/g,'')
+          .replace(/\s+/g,' ')
+          .trim();
+
+      if(!usedQs.has(qKey)){
+        usedQs.add(qKey);
+        state.examQs.push({
+          ...ex,
+          topicId:t.id,
+          topicName:t.name
+        });
+      }
     }
   });
 
   state.examQs=shuffle(state.examQs);
-  state.examIdx=0;state.examScore=0;
+  state.examIdx=0;
+  state.examScore=0;
+
   document.getElementById('navBack').style.display='block';
-  document.getElementById('navTitle').textContent='Mode Examen';
-  showExamQuestion();showScreen('screenExam');
+  document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
+
+  showExamQuestion();
+  showScreen('screenExam');
 }
 
+
 function showExamQuestion(){
+
   const q=state.examQs[state.examIdx];
+
+  if(!q)return;
+
   let qHTML='';
-  if(q.svg) qHTML+=q.svg;
+
+  if(q.svg){
+    qHTML+=q.svg;
+  }
+
   qHTML+=`<span class="q-text">${q.question}</span>`;
-  document.getElementById('examContent').innerHTML=`<div class="ex-header"><div class="ex-num">Pregunta ${state.examIdx+1}/${state.examQs.length} · ${q.topicName}</div></div><div class="ex-question">${qHTML}</div>`;
-  document.getElementById('examOptions').innerHTML=q.options.map((o,i)=>`<button class="opt-btn" onclick="selectExamAnswer(${i},this)">${o}</button>`).join('');
+
+  document.getElementById('examContent').innerHTML=`
+    <div class="ex-header">
+      <div class="ex-num">
+        Pregunta ${state.examIdx+1}/${state.examQs.length}
+        · ${q.topicName}
+      </div>
+    </div>
+
+    <div class="ex-question">
+      ${qHTML}
+    </div>`;
+
+  document.getElementById('examOptions').innerHTML=
+    q.options
+      .map((o,i)=>
+        `<button class="opt-btn"
+                 onclick="selectExamAnswer(${i},this)">
+          ${o}
+        </button>`
+      )
+      .join('');
+
   document.getElementById('examFeedback').innerHTML='';
+
   document.getElementById('btnNextExam').style.display='none';
+
   document.getElementById('examResult').style.display='none';
 }
 
+
+// ── EXAMEN: CORRECCIÓ + REGISTRE ERROR ─────────────────────────────────
+
 function selectExamAnswer(idx,btn){
+
   const q=state.examQs[state.examIdx];
-  const ans=q.options[idx]; const ok=ans===q.correct;
-  if(ok){state.examScore++;if(state.examPerTopic[q.topicId])state.examPerTopic[q.topicId].correct++;}
-  document.querySelectorAll('#examOptions .opt-btn').forEach(b=>{b.disabled=true;if(b.textContent===q.correct)b.classList.add('correct');});
-  if(!ok) btn.classList.add('wrong');
-  document.getElementById('examFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':' Resposta correcta: <b>'+q.correct+'</b>'}</div>`;
+
+  const ans=q.options[idx];
+
+  const ok=
+    ans===q.correct;
+
+  if(ok){
+
+    state.examScore++;
+
+    if(state.examPerTopic[q.topicId]){
+      state.examPerTopic[q.topicId].correct++;
+    }
+
+  }else{
+
+    /*
+     * ★ REGISTRE DE L'ERROR DE L'EXAMEN
+     *
+     * Com que el tema actual no necessàriament coincideix
+     * amb la pregunta de l'examen, registrem directament
+     * el topicId de la pregunta.
+     */
+
+    const error={
+      id:Date.now()+'_'+Math.random().toString(36).slice(2,8),
+
+      topicId:q.topicId,
+      topicName:q.topicName,
+
+      type:(q.type!==undefined?q.type:null),
+
+      question:q.question||'',
+      correct:q.correct,
+      answer:ans,
+
+      options:Array.isArray(q.options)?[...q.options]:[],
+      guide:Array.isArray(q.guide)?[...q.guide]:[],
+      solution:Array.isArray(q.solution)?[...q.solution]:[],
+      svg:q.svg||'',
+
+      level:0,
+
+      source:'exam',
+
+      timestamp:new Date().toISOString()
+    };
+
+    const last=
+      state.errors[state.errors.length-1];
+
+    const isSameAsLast=
+      last &&
+      last.topicId===error.topicId &&
+      last.question===error.question &&
+      last.answer===error.answer &&
+      last.correct===error.correct &&
+      last.source===error.source;
+
+    if(!isSameAsLast){
+      state.errors.push(error);
+    }
+
+    saveState();
+  }
+
+  document
+    .querySelectorAll('#examOptions .opt-btn')
+    .forEach(b=>{
+      b.disabled=true;
+
+      if(b.textContent.trim()===String(q.correct).trim()){
+        b.classList.add('correct');
+      }
+    });
+
+  if(!ok){
+    btn.classList.add('wrong');
+  }
+
+  document.getElementById('examFeedback').innerHTML=`
+    <div class="feedback-box ${ok?'ok':'ko'}">
+      <h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>
+
+      ${
+        ok
+          ?''
+          :'Resposta correcta: <b>'+q.correct+'</b>'
+      }
+    </div>`;
+
   document.getElementById('btnNextExam').style.display='block';
-  document.getElementById('btnNextExam').textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';
+
+  document.getElementById('btnNextExam').textContent=
+    state.examIdx+1<state.examQs.length
+      ?'Següent →'
+      :'Veure resultat';
 }
+
 
 function nextExamQ(){
+
   state.examIdx++;
-  if(state.examIdx<state.examQs.length){showExamQuestion();return;}
-  const pct=Math.round((state.examScore/state.examQs.length)*100);
-  const emoji=pct>=90?'🏆':pct>=70?'👍':'💪';
-  let breakdownHtml='<div class="exam-breakdown"><h4>📊 Resultats per tema:</h4>';
-  for(const tid in state.examPerTopic){
-    const d=state.examPerTopic[tid];
-    const p=Math.round((d.correct/d.total)*100);
-    const col=p>=80?'var(--success)':p>=50?'var(--warn)':'var(--error)';
-    breakdownHtml+=`<div class="breakdown-row"><span>${d.name}</span><span class="breakdown-pct" style="color:${col}">${d.correct}/${d.total} (${p}%)</span></div>`;
+
+  if(state.examIdx<state.examQs.length){
+    showExamQuestion();
+    return;
   }
+
+  const pct=
+    Math.round(
+      (state.examScore/state.examQs.length)*100
+    );
+
+  const emoji=
+    pct>=90
+      ?'🏆'
+      :pct>=70
+        ?'👍'
+        :'💪';
+
+  let breakdownHtml=`
+    <div class="exam-breakdown">
+      <h4>📊 Resultats per tema:</h4>`;
+
+  for(const tid in state.examPerTopic){
+
+    const d=state.examPerTopic[tid];
+
+    const p=
+      Math.round((d.correct/d.total)*100);
+
+    const col=
+      p>=80
+        ?'var(--success)'
+        :p>=50
+          ?'var(--warn)'
+          :'var(--error)';
+
+    breakdownHtml+=`
+      <div class="breakdown-row">
+
+        <span>${d.name}</span>
+
+        <span class="breakdown-pct"
+              style="color:${col}">
+          ${d.correct}/${d.total} (${p}%)
+        </span>
+
+      </div>`;
+  }
+
   breakdownHtml+='</div>';
-  document.getElementById('examContent').innerHTML=`<div class="congrats"><div class="trophy">${emoji}</div><h2>Resultat de l'examen</h2></div>`;
+
+  document.getElementById('examContent').innerHTML=`
+    <div class="congrats">
+      <div class="trophy">${emoji}</div>
+      <h2>Resultat de l'examen</h2>
+    </div>`;
+
   document.getElementById('examOptions').innerHTML='';
   document.getElementById('examFeedback').innerHTML='';
+
   document.getElementById('btnNextExam').style.display='none';
+
   document.getElementById('examResult').style.display='block';
-  document.getElementById('examResult').innerHTML=`<div class="exam-score">${state.examScore}/${state.examQs.length}<span>${pct}% d'encerts</span></div>
-  ${breakdownHtml}
-  <p style="text-align:center;color:var(--muted);margin-bottom:18px">${pct>=90?'Perfecte! Domines tots els conceptes.':pct>=70?'Molt bé! Repassa els temes amb menys %':pct>=50?'Bé, però cal repassar. Fixa\'t en els temes en vermell.':'Repassa els temes amb calma i torna-ho a intentar.'}</p>
-  <button class="btn-primary" onclick="showHome()">Tornar al menú</button>
-  <button class="btn-secondary" onclick="startExam()">Repetir examen</button>`;
+
+  document.getElementById('examResult').innerHTML=`
+    <div class="exam-score">
+      ${state.examScore}/${state.examQs.length}
+      <span>${pct}% d'encerts</span>
+    </div>
+
+    ${breakdownHtml}
+
+    <p style="
+      text-align:center;
+      color:var(--muted);
+      margin-bottom:18px">
+
+      ${
+        pct>=90
+          ?'Perfecte! Domines tots els conceptes.'
+          :pct>=70
+            ?'Molt bé! Repassa els temes amb menys %.'
+            :pct>=50
+              ?'Bé, però cal repassar. Fixa\'t en els temes en vermell.'
+              :'Repassa els temes amb calma i torna-ho a intentar.'
+      }
+
+    </p>
+
+    <button class="btn-primary"
+            onclick="showHome()">
+      Tornar al menú
+    </button>
+
+    <button class="btn-secondary"
+            onclick="startExam()">
+      Repetir examen
+    </button>`;
 }
 
+
 // ── APLICACIONS ─────────────────────────────────────────────────────────
+
 function showApps(){
+
   document.getElementById('navBack').style.display='block';
-  document.getElementById('navTitle').textContent='Aplicacions Reals';
+
+  document.getElementById('navTitle').textContent=
+    'Aplicacions Reals';
+
   document.getElementById('appContent').innerHTML=`
-    <div class="home-header" style="padding-top:10px"><h2>🌍 Aplicacions Reals</h2><p>Geometria en el món que t'envolta</p></div>
+    <div class="home-header" style="padding-top:10px">
+      <h2>🌍 Aplicacions Reals</h2>
+      <p>Geometria en el món que t'envolta</p>
+    </div>
 
     <div class="app-card">
-      <h3>🏠 Identifica la figura!</h3>
-      <p>Quin cos geomètric té aquest objecte real?</p>
-      <button class="btn-app" onclick="novaFigura()">Nova figura</button>
-      <div class="app-result" id="figResult" style="margin-top:10px;min-height:50px">Clica "Nova figura" per començar</div>
-      <div id="figOpts" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px"></div>
+      <h3>🏠 Identifica la figura! <span style="font-size:.72rem;color:#8b5cf6">⭐ Ampliació · 2n</span></h3>
+      <p>Relaciona objectes quotidians amb els cossos geomètrics que has treballat.</p>
+
+      <button class="btn-app" onclick="novaFigura()">
+        Nova figura
+      </button>
+
+      <div class="app-result"
+           id="figResult"
+           style="margin-top:10px;min-height:50px">
+        Clica "Nova figura" per començar
+      </div>
+
+      <div id="figOpts"
+           style="display:grid;
+                  grid-template-columns:1fr 1fr;
+                  gap:8px;
+                  margin-top:8px">
+      </div>
     </div>
 
     <div class="app-card">
       <h3>📐 Calculadora d'angles</h3>
-      <p>Introdueix un angle i calcula automàticament el complement, suplement i explementari.</p>
+
+      <p>
+        Introdueix un angle i calcula automàticament
+        el complement, suplement i explementari quan existeixin.
+      </p>
+
       <div class="app-input-row">
-        <input class="app-input" type="number" id="angVal" value="35" min="1" max="359"> °
-        <button class="btn-app" onclick="calcAngle()">Calcula</button>
+        <input class="app-input"
+               type="number"
+               id="angVal"
+               value="35"
+               min="1"
+               max="359">
+        °
+
+        <button class="btn-app"
+                onclick="calcAngle()">
+          Calcula
+        </button>
       </div>
-      <div class="app-result" id="angResult">—</div>
+
+      <div class="app-result"
+           id="angResult">
+        —
+      </div>
     </div>
 
     <div class="app-card">
-      <h3>🔷 Verificador d'Euler</h3>
-      <p>Introdueix Cares (C), Arestes (A) i Vèrtexs (V) per comprovar la fórmula d'Euler: C+V=A+2.</p>
+
+      <h3>🔷 Verificador d'Euler <span style="font-size:.72rem;color:#8b5cf6">⭐ Ampliació · 2n</span></h3>
+
+      <p>
+        Introdueix Cares (C), Arestes (A) i Vèrtexs (V)
+        per comprovar la fórmula d'Euler: C+V=A+2.
+      </p>
+
       <div class="app-input-row">
-        <label style="font-size:0.85rem">C:</label><input class="app-input" type="number" id="euC" value="6" min="1">
-        <label style="font-size:0.85rem">A:</label><input class="app-input" type="number" id="euA" value="12" min="1">
-        <label style="font-size:0.85rem">V:</label><input class="app-input" type="number" id="euV" value="8" min="1">
-        <button class="btn-app" onclick="calcEuler()">Verifica</button>
+
+        <label style="font-size:0.85rem">C:</label>
+
+        <input class="app-input"
+               type="number"
+               id="euC"
+               value="6"
+               min="1">
+
+        <label style="font-size:0.85rem">A:</label>
+
+        <input class="app-input"
+               type="number"
+               id="euA"
+               value="12"
+               min="1">
+
+        <label style="font-size:0.85rem">V:</label>
+
+        <input class="app-input"
+               type="number"
+               id="euV"
+               value="8"
+               min="1">
+
+        <button class="btn-app"
+                onclick="calcEuler()">
+          Verifica
+        </button>
       </div>
-      <div class="app-result" id="euResult">—</div>
+
+      <div class="app-result"
+           id="euResult">
+        —
+      </div>
     </div>
 
     <div class="app-card">
-      <h3>🌐 Calculadora de cossos rodons</h3>
-      <p>Calcula volum i àrea d'un cos rodon (π≈3,14).</p>
+
+      <h3>🌐 Calculadora de cossos rodons <span style="font-size:.72rem;color:#8b5cf6">⭐ Ampliació · 2n</span></h3>
+
+      <p>
+        Calcula volum i àrea d'un cos rodon (π≈3,14).
+      </p>
+
       <div class="app-input-row">
-        <select class="app-select" id="cosSelect"><option value="cil">Cilindre</option><option value="con">Con</option><option value="esf">Esfera</option></select>
-        r:<input class="app-input" type="number" id="cosR" value="5" min="1"> cm
-        h:<input class="app-input" type="number" id="cosH" value="10" min="1"> cm
-        <button class="btn-app" onclick="calcCos()">Calcula</button>
+
+        <select class="app-select"
+                id="cosSelect"
+                onchange="updateCosInputs()">
+
+          <option value="cil">Cilindre</option>
+          <option value="con">Con</option>
+          <option value="esf">Esfera</option>
+
+        </select>
+
+        <label>r:</label>
+
+        <input class="app-input"
+               type="number"
+               id="cosR"
+               value="5"
+               min="1">
+
+        <span>cm</span>
+
+        <span id="cosHWrap" style="display:inline-flex;align-items:center;gap:6px">
+          <label>h:</label>
+          <input class="app-input"
+                 type="number"
+                 id="cosH"
+                 value="10"
+                 min="1">
+          <span>cm</span>
+        </span>
+
+        <button class="btn-app"
+                onclick="calcCos()">
+          Calcula
+        </button>
+
       </div>
-      <div class="app-result" id="cosResult">—</div>
+
+      <div class="app-result"
+           id="cosResult">
+        —
+      </div>
+
     </div>
 
-    <button class="btn-secondary" onclick="showHome()" style="margin-top:8px">← Tornar al menú</button>
+    <div class="app-card">
+      <h3>🎨 Quanta pintura necessito?</h3>
+      <p>
+        Calcula l'àrea d'una paret rectangular i estima els litres de pintura necessaris.
+      </p>
+
+      <div class="app-input-row">
+        <label style="font-size:0.85rem">Amplada:</label>
+        <input class="app-input" type="number" id="paintW" value="4" min="0.1" step="0.1"> m
+
+        <label style="font-size:0.85rem">Alçada:</label>
+        <input class="app-input" type="number" id="paintH" value="2.5" min="0.1" step="0.1"> m
+
+        <label style="font-size:0.85rem">Rendiment:</label>
+        <input class="app-input" type="number" id="paintR" value="8" min="0.1" step="0.1"> m²/L
+
+        <button class="btn-app" onclick="calcPintura()">
+          Calcula
+        </button>
+      </div>
+
+      <div class="app-result" id="paintResult">—</div>
+    </div>
+
+    <button class="btn-secondary"
+            onclick="showHome()"
+            style="margin-top:8px">
+      ← Tornar al menú
+    </button>
   `;
+
   showScreen('screenApp');
+  updateCosInputs();
 }
+
 
 const FIGURES_REALS=[
-  {obj:'Una llauna de refresc',forma:'Cilindre',perque:'2 bases circulars + superfície lateral corbada'},
-  {obj:'Una pilota de futbol',forma:'Esfera',perque:'Tots els punts a la mateixa distància del centre'},
-  {obj:'Un dau de joc',forma:'Cub',perque:'6 cares quadrades iguals (C=6, A=12, V=8)'},
-  {obj:'Una caixa de cereals',forma:'Prisma rectangular',perque:'6 cares rectangulars (ortoedre)'},
-  {obj:'Un gelat de cucurutxo',forma:'Con',perque:'1 base circular + lateral que acaba en vèrtex'},
-  {obj:'Una tenda de campanya triangular',forma:'Prisma triangular',perque:'2 bases triangulars + 3 cares laterals rectangulars'},
-  {obj:'Una piràmide de Gizeh',forma:'Piràmide quadrangular',perque:'1 base quadrada + 4 cares triangulars → vèrtex'},
-  {obj:'Un got cilíndric',forma:'Cilindre',perque:'Cilindre (sense tapa superior en la pràctica)'},
-  {obj:'Una pilota de rugby',forma:'Esfera aplatada (aproximada)',perque:'S\'aproxima a un esferoide, similar a una esfera'},
-  {obj:'Un embut de cuina',forma:'Con truncat (tronc de con)',perque:'Con amb la punta tallada → 2 bases circulars de diferent mida'},
-];
-let figActual=null;
-function novaFigura(){
-  figActual=FIGURES_REALS[rnd(0,FIGURES_REALS.length-1)];
-  document.getElementById('figResult').textContent=`🔍 Quin cos geomètric és: "${figActual.obj}"?`;
-  const totsFormes=['Cilindre','Esfera','Cub','Prisma rectangular','Con','Prisma triangular','Piràmide quadrangular'];
-  const opts=shuffle([...new Set([figActual.forma,...shuffle(totsFormes).filter(f=>f!==figActual.forma)])]).slice(0,4);
-  document.getElementById('figOpts').innerHTML=opts.map(o=>`<button class="opt-btn" onclick="respFigura(this,'${o.replace(/'/,"\\'")}')">${o}</button>`).join('');
-}
-function respFigura(btn,ans){
-  document.querySelectorAll('#figOpts .opt-btn').forEach(b=>{b.disabled=true;if(b.textContent===figActual.forma)b.classList.add('correct');});
-  if(ans!==figActual.forma) btn.classList.add('wrong');
-  document.getElementById('figResult').innerHTML=`${ans===figActual.forma?'✅':'❌'} <b>${figActual.forma}</b> — ${figActual.perque}`;
-}
-function calcAngle(){
-  const a=parseFloat(document.getElementById('angVal').value)||0;
-  const lines=[];
-  if(a>0&&a<90) lines.push(`Complement (suma 90°): ${90-a}°`);
-  else lines.push('No té angle complementari (ha de ser 0°–90°)');
-  if(a>0&&a<180) lines.push(`Suplement (suma 180°): ${180-a}°`);
-  else lines.push('No té angle suplementari (ha de ser 0°–180°)');
-  lines.push(`Explementari (suma 360°): ${360-a}°`);
-  document.getElementById('angResult').innerHTML=lines.join('<br>');
-}
-function calcEuler(){
-  const C=parseInt(document.getElementById('euC').value)||0;
-  const A=parseInt(document.getElementById('euA').value)||0;
-  const V=parseInt(document.getElementById('euV').value)||0;
-  const ok=C+V===A+2;
-  document.getElementById('euResult').innerHTML=`C+V = ${C}+${V} = <b>${C+V}</b><br>A+2 = ${A}+2 = <b>${A+2}</b><br>${ok?'✅ Compleix Euler!':'❌ NO compleix Euler'}`;
-}
-function calcCos(){
-  const tipo=document.getElementById('cosSelect').value;
-  const r=parseFloat(document.getElementById('cosR').value)||0;
-  const h=parseFloat(document.getElementById('cosH').value)||0;
-  const pi=3.14;
-  let res='';
-  if(tipo==='cil'){
-    const v=+(pi*r*r*h).toFixed(2),al=+(2*pi*r*h).toFixed(2),at=+(2*pi*r*r+2*pi*r*h).toFixed(2);
-    res=`Cilindre (r=${r}, h=${h}):<br>Volum = πr²h = <b>${v} cm³</b><br>Àrea lat. = 2πrh = <b>${al} cm²</b><br>Àrea total = <b>${at} cm²</b>`;
-  } else if(tipo==='con'){
-    const g=+(Math.sqrt(r*r+h*h)).toFixed(2),v=+(pi*r*r*h/3).toFixed(2),al=+(pi*r*g).toFixed(2);
-    res=`Con (r=${r}, h=${h}):<br>Generatriu g=√(r²+h²)=<b>${g} cm</b><br>Volum = (1/3)πr²h = <b>${v} cm³</b><br>Àrea lat. = πrg = <b>${al} cm²</b>`;
-  } else {
-    const v=+(4/3*pi*r*r*r).toFixed(2),a=+(4*pi*r*r).toFixed(2);
-    res=`Esfera (r=${r}):<br>Volum = (4/3)πr³ = <b>${v} cm³</b><br>Àrea = 4πr² = <b>${a} cm²</b>`;
+  {
+    obj:'Una llauna de refresc',
+    forma:'Cilindre',
+    w:['Con','Esfera','Prisma rectangular'],
+    perque:'té dues bases circulars i una superfície lateral corba'
+  },
+  {
+    obj:'Una pilota de futbol',
+    forma:'Esfera',
+    w:['Cilindre','Con','Cub'],
+    perque:'s’aproxima a un cos amb tots els punts de la superfície a la mateixa distància del centre'
+  },
+  {
+    obj:'Un dau de joc',
+    forma:'Cub',
+    w:['Prisma rectangular','Piràmide quadrangular','Esfera'],
+    perque:'té 6 cares quadrades iguals'
+  },
+  {
+    obj:'Una caixa de cereals',
+    forma:'Prisma rectangular',
+    w:['Cub','Prisma triangular','Cilindre'],
+    perque:'té forma d’ortoedre, amb cares rectangulars'
+  },
+  {
+    obj:'Un gelat de cucurutxo',
+    forma:'Con',
+    w:['Cilindre','Piràmide quadrangular','Esfera'],
+    perque:'té una base circular i una superfície lateral que acaba en un vèrtex'
+  },
+  {
+    obj:'Una tenda de campanya amb secció triangular',
+    forma:'Prisma triangular',
+    w:['Prisma rectangular','Piràmide quadrangular','Con'],
+    perque:'té dues bases triangulars iguals unides per cares laterals'
+  },
+  {
+    obj:'Una piràmide de base quadrada',
+    forma:'Piràmide quadrangular',
+    w:['Prisma triangular','Cub','Con'],
+    perque:'té una base quadrada i quatre cares laterals triangulars que arriben a un vèrtex'
+  },
+  {
+    obj:'Un rotlle de paper de cuina',
+    forma:'Cilindre',
+    w:['Con','Prisma rectangular','Esfera'],
+    perque:'s’aproxima a un cilindre amb dues bases circulars'
+  },
+  {
+    obj:'Una bola de Nadal',
+    forma:'Esfera',
+    w:['Cilindre','Cub','Con'],
+    perque:'s’aproxima a una esfera'
+  },
+  {
+    obj:'Un cub de Rubik',
+    forma:'Cub',
+    w:['Prisma rectangular','Prisma triangular','Piràmide quadrangular'],
+    perque:'té sis cares quadrades iguals'
+  },
+  {
+    obj:'Una capsa de sabates',
+    forma:'Prisma rectangular',
+    w:['Cub','Prisma triangular','Cilindre'],
+    perque:'té sis cares rectangulars i forma d’ortoedre'
+  },
+  {
+    obj:'Un barret de festa punxegut',
+    forma:'Con',
+    w:['Cilindre','Piràmide quadrangular','Esfera'],
+    perque:'s’aproxima a un con: base circular i un vèrtex'
+  },
+  {
+    obj:'Un envàs cilíndric de patates',
+    forma:'Cilindre',
+    w:['Prisma rectangular','Con','Esfera'],
+    perque:'té forma cilíndrica'
+  },
+  {
+    obj:'Una peça decorativa amb base quadrada i punta',
+    forma:'Piràmide quadrangular',
+    w:['Cub','Prisma rectangular','Con'],
+    perque:'té base quadrada i cares triangulars que convergeixen en un vèrtex'
   }
+];
+
+
+let figActual=null;
+
+
+function novaFigura(){
+
+  figActual=
+    FIGURES_REALS[
+      rnd(0,FIGURES_REALS.length-1)
+    ];
+
+  document.getElementById('figResult').textContent=
+    `🔍 Quin cos geomètric s'hi aproxima més: "${figActual.obj}"?`;
+
+  const opts=
+    shuffle([
+      figActual.forma,
+      ...figActual.w
+    ]);
+
+  document.getElementById('figOpts').innerHTML=
+    opts
+      .map(o=>
+        `<button class="opt-btn"
+                 onclick="respFigura(this,'${o.replace(/'/g,"\\'")}')">
+          ${o}
+        </button>`
+      )
+      .join('');
+}
+
+
+function respFigura(btn,ans){
+
+  document
+    .querySelectorAll('#figOpts .opt-btn')
+    .forEach(b=>{
+      b.disabled=true;
+
+      if(b.textContent.trim()===figActual.forma){
+        b.classList.add('correct');
+      }
+    });
+
+  if(ans!==figActual.forma){
+    btn.classList.add('wrong');
+  }
+
+  document.getElementById('figResult').innerHTML=
+    `${ans===figActual.forma?'✅':'❌'}
+     <b>${figActual.forma}</b> — ${figActual.perque}`;
+}
+
+
+function calcAngle(){
+
+  const a=
+    parseFloat(
+      document.getElementById('angVal').value
+    )||0;
+
+  const lines=[];
+
+  if(a>0&&a<90){
+    lines.push(`Complement (suma 90°): ${90-a}°`);
+  }else{
+    lines.push(
+      'No té angle complementari (ha de ser 0°–90°)'
+    );
+  }
+
+  if(a>0&&a<180){
+    lines.push(`Suplement (suma 180°): ${180-a}°`);
+  }else{
+    lines.push(
+      'No té angle suplementari (ha de ser 0°–180°)'
+    );
+  }
+
+  lines.push(
+    `Explementari (suma 360°): ${360-a}°`
+  );
+
+  document.getElementById('angResult').innerHTML=
+    lines.join('<br>');
+}
+
+
+function calcEuler(){
+
+  const C=
+    parseInt(
+      document.getElementById('euC').value
+    )||0;
+
+  const A=
+    parseInt(
+      document.getElementById('euA').value
+    )||0;
+
+  const V=
+    parseInt(
+      document.getElementById('euV').value
+    )||0;
+
+  const ok=
+    C+V===A+2;
+
+  document.getElementById('euResult').innerHTML=`
+    C+V = ${C}+${V} = <b>${C+V}</b><br>
+    A+2 = ${A}+2 = <b>${A+2}</b><br>
+    ${ok?'✅ Compleix Euler!':'❌ NO compleix Euler'}
+  `;
+}
+
+
+function updateCosInputs(){
+
+  const sel=document.getElementById('cosSelect');
+  const wrap=document.getElementById('cosHWrap');
+
+  if(!sel||!wrap)return;
+
+  wrap.style.display=
+    sel.value==='esf'
+      ?'none'
+      :'inline-flex';
+}
+
+
+function calcCos(){
+
+  const tipo=
+    document.getElementById('cosSelect').value;
+
+  const r=
+    parseFloat(
+      document.getElementById('cosR').value
+    )||0;
+
+  const h=
+    parseFloat(
+      document.getElementById('cosH').value
+    )||0;
+
+  const pi=3.14;
+
+  const fmt=n=>{
+    const v=Math.round(n*100)/100;
+    return String(v).replace('.',',');
+  };
+
+  if(r<=0 || (tipo!=='esf' && h<=0)){
+    document.getElementById('cosResult').innerHTML=
+      '⚠️ Introdueix mesures positives.';
+    return;
+  }
+
+  let res='';
+
+  if(tipo==='cil'){
+
+    const v=pi*r*r*h;
+    const al=2*pi*r*h;
+    const at=2*pi*r*r+2*pi*r*h;
+
+    res=`
+      Cilindre (r=${fmt(r)}, h=${fmt(h)}):<br>
+      Volum = πr²h = <b>${fmt(v)} cm³</b><br>
+      Àrea lat. = 2πrh = <b>${fmt(al)} cm²</b><br>
+      Àrea total = <b>${fmt(at)} cm²</b>
+    `;
+
+  }else if(tipo==='con'){
+
+    const g=Math.sqrt(r*r+h*h);
+    const v=pi*r*r*h/3;
+    const al=pi*r*g;
+
+    res=`
+      Con (r=${fmt(r)}, h=${fmt(h)}):<br>
+      Generatriu g=√(r²+h²)=<b>${fmt(g)} cm</b><br>
+      Volum = (1/3)πr²h = <b>${fmt(v)} cm³</b><br>
+      Àrea lat. = πrg = <b>${fmt(al)} cm²</b>
+    `;
+
+  }else{
+
+    const v=4/3*pi*r*r*r;
+    const a=4*pi*r*r;
+
+    res=`
+      Esfera (r=${fmt(r)}):<br>
+      Volum = (4/3)πr³ = <b>${fmt(v)} cm³</b><br>
+      Àrea = 4πr² = <b>${fmt(a)} cm²</b>
+    `;
+  }
+
   document.getElementById('cosResult').innerHTML=res;
 }
 
+
+function calcPintura(){
+
+  const w=parseFloat(document.getElementById('paintW').value)||0;
+  const h=parseFloat(document.getElementById('paintH').value)||0;
+  const rend=parseFloat(document.getElementById('paintR').value)||0;
+
+  if(w<=0||h<=0||rend<=0){
+    document.getElementById('paintResult').innerHTML=
+      '⚠️ Introdueix valors positius.';
+    return;
+  }
+
+  const area=w*h;
+  const litres=area/rend;
+
+  const fmt=n=>{
+    const v=Math.round(n*100)/100;
+    return String(v).replace('.',',');
+  };
+
+  document.getElementById('paintResult').innerHTML=`
+    Àrea de la paret = ${fmt(w)} × ${fmt(h)} = <b>${fmt(area)} m²</b><br>
+    Pintura necessària = ${fmt(area)} ÷ ${fmt(rend)} = <b>${fmt(litres)} L</b><br>
+    <span style="color:var(--muted);font-size:0.82rem">Estimació sense descomptar portes o finestres.</span>
+  `;
+}
+
+
 // ── MODE TEST AUTOMÀTIC (triple clic) ──────────────────────────────────
+
 function runAutoTest(){
-  const REPS=200; const results=[];
+
+  const REPS=200;
+
+  const results=[];
+
   TOPICS.forEach(t=>{
+
     let bugs=[];
+
     for(let i=0;i<REPS;i++){
+
       let ex;
+
       try{
+
         let tries=0;
-        do{ex=t.gen();tries++;}while(tries<15&&(!ex||!ex.options||!ex.options.includes(ex.correct)));
-      } catch(e){bugs.push(`crash: ${e.message}`);continue;}
-      if(!ex||!ex.options){bugs.push('ex o options és null');continue;}
-      if(!ex.options.includes(ex.correct)) bugs.push(`Correcta "${ex.correct}" no a options: [${ex.options.join('|')}] Q: ${ex.question.substring(0,60)}`);
+
+        do{
+          ex=t.gen();
+          tries++;
+        }while(
+          tries<15 &&
+          (
+            !ex ||
+            !ex.options ||
+            !ex.options.includes(ex.correct)
+          )
+        );
+
+      }catch(e){
+
+        bugs.push(`crash: ${e.message}`);
+        continue;
+      }
+
+      if(!ex||!ex.options){
+
+        bugs.push('ex o options és null');
+        continue;
+      }
+
+      if(!ex.options.includes(ex.correct)){
+        bugs.push(
+          `Correcta "${ex.correct}" no a options: [`+
+          `${ex.options.join('|')}] Q:`+
+          `${ex.question.substring(0,60)}`
+        );
+      }
+
       const uniq=new Set(ex.options);
-      if(uniq.size!==ex.options.length) bugs.push(`Duplicats: [${ex.options.join('|')}]`);
-      if(ex.options.length!==4) bugs.push(`${ex.options.length} opts (cal 4)`);
-      if(ex.options.some(o=>o===undefined||o===null||String(o).trim()===''||String(o).startsWith('Opció_'))) bugs.push(`Opció buida/fallback Q:${ex.question.substring(0,40)}`);
+
+      if(uniq.size!==ex.options.length){
+        bugs.push(
+          `Duplicats: [${ex.options.join('|')}]`
+        );
+      }
+
+      if(ex.options.length!==4){
+        bugs.push(
+          `${ex.options.length} opts (cal 4)`
+        );
+      }
+
+      if(
+        ex.options.some(
+          o=>
+            o===undefined||
+            o===null||
+            String(o).trim()===''||
+            String(o).startsWith('Opció_')
+        )
+      ){
+        bugs.push(
+          `Opció buida/fallback Q:${ex.question.substring(0,40)}`
+        );
+      }
     }
-    results.push({name:t.name,ok:REPS-bugs.length,total:REPS,bugs:bugs.slice(0,8)});
+
+    results.push({
+      name:t.name,
+      ok:REPS-bugs.length,
+      total:REPS,
+      bugs:bugs.slice(0,8)
+    });
   });
 
-  // Botó de descàrrega del log
-  const allBugs=results.map(r=>`=== ${r.name} (${r.ok}/${r.total}) ===\n`+(r.bugs.length?r.bugs.join('\n'):'Cap error')).join('\n\n');
-  const blob=new Blob([allBugs],{type:'text/plain'});
-  const url=URL.createObjectURL(blob);
 
-  let html=`<div style="padding:18px;max-width:680px;margin:0 auto">
-    <h2 style="color:var(--primary);margin-bottom:4px">🧪 Informe de Test Automàtic</h2>
-    <p style="color:var(--muted);font-size:0.85rem;margin-bottom:10px">${REPS} exercicis per tema</p>
-    <a href="${url}" download="bugs_sentit_espacial.txt" style="display:inline-block;background:var(--primary);color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:0.85rem;margin-bottom:14px">⬇️ Descarregar log de bugs</a>`;
+  const allBugs=
+    results
+      .map(r=>
+        `=== ${r.name} (${r.ok}/${r.total}) ===\n`+
+        (
+          r.bugs.length
+            ?r.bugs.join('\n')
+            :'Cap error'
+        )
+      )
+      .join('\n\n');
+
+  const blob=
+    new Blob(
+      [allBugs],
+      {type:'text/plain'}
+    );
+
+  const url=
+    URL.createObjectURL(blob);
+
+
+  let html=`
+    <div style="
+      padding:18px;
+      max-width:680px;
+      margin:0 auto">
+
+      <h2 style="
+        color:var(--primary);
+        margin-bottom:4px">
+        🧪 Informe de Test Automàtic
+      </h2>
+
+      <p style="
+        color:var(--muted);
+        font-size:0.85rem;
+        margin-bottom:10px">
+        ${REPS} exercicis per tema
+      </p>
+
+      <a href="${url}"
+         download="bugs_sentit_espacial.txt"
+         style="
+           display:inline-block;
+           background:var(--primary);
+           color:white;
+           padding:8px 16px;
+           border-radius:8px;
+           text-decoration:none;
+           font-size:0.85rem;
+           margin-bottom:14px">
+        ⬇️ Descarregar log de bugs
+      </a>`;
+
   results.forEach(r=>{
-    const pct=Math.round(r.ok/r.total*100);
-    const color=pct===100?'var(--success)':pct>=90?'var(--warn)':'var(--error)';
-    html+=`<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b>${r.name}</b><span style="color:${color};font-weight:700">${pct}% (${r.ok}/${r.total})</span></div>
-      <div style="height:6px;background:var(--border);border-radius:3px;margin-bottom:8px"><div style="height:6px;background:${color};border-radius:3px;width:${pct}%"></div></div>`;
+
+    const pct=
+      Math.round(r.ok/r.total*100);
+
+    const color=
+      pct===100
+        ?'var(--success)'
+        :pct>=90
+          ?'var(--warn)'
+          :'var(--error)';
+
+    html+=`
+      <div style="
+        background:var(--card);
+        border:1px solid var(--border);
+        border-radius:12px;
+        padding:14px 16px;
+        margin-bottom:10px">
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          margin-bottom:6px">
+
+          <b>${r.name}</b>
+
+          <span style="
+            color:${color};
+            font-weight:700">
+            ${pct}% (${r.ok}/${r.total})
+          </span>
+
+        </div>
+
+        <div style="
+          height:6px;
+          background:var(--border);
+          border-radius:3px;
+          margin-bottom:8px">
+
+          <div style="
+            height:6px;
+            background:${color};
+            border-radius:3px;
+            width:${pct}%">
+          </div>
+
+        </div>`;
+
     if(r.bugs.length>0){
-      html+=`<details><summary style="font-size:0.82rem;color:var(--error);cursor:pointer">${r.bugs.length} error(s) (mostra fins a 8)</summary>
-        <div style="margin-top:8px;font-size:0.78rem;line-height:1.8;color:#a02020;background:#fdeaea;border-radius:8px;padding:10px">${r.bugs.map((b,i)=>`<div><b>#${i+1}</b> ${b}</div>`).join('')}</div></details>`;
-    } else html+=`<div style="font-size:0.82rem;color:var(--success)">✅ Cap error</div>`;
+
+      html+=`
+        <details>
+
+          <summary style="
+            font-size:0.82rem;
+            color:var(--error);
+            cursor:pointer">
+
+            ${r.bugs.length}
+            error(s) (mostra fins a 8)
+
+          </summary>
+
+          <div style="
+            margin-top:8px;
+            font-size:0.78rem;
+            line-height:1.8;
+            color:#a02020;
+            background:#fdeaea;
+            border-radius:8px;
+            padding:10px">
+
+            ${r.bugs.map(
+              (b,i)=>
+                `<div><b>#${i+1}</b> ${b}</div>`
+            ).join('')}
+
+          </div>
+
+        </details>`;
+
+    }else{
+
+      html+=`
+        <div style="
+          font-size:0.82rem;
+          color:var(--success)">
+          ✅ Cap error
+        </div>`;
+    }
+
     html+=`</div>`;
   });
-  const totalBugs=results.reduce((s,r)=>s+r.bugs.length,0);
-  html+=`<div style="text-align:center;padding:16px;background:${totalBugs===0?'#e6f9ef':'#fdeaea'};border-radius:12px">
-    <b style="color:${totalBugs===0?'var(--success)':'var(--error)'}">${totalBugs===0?'🏆 Tot correcte!':'⚠️ '+totalBugs+' bugs'}</b></div>
-  <button onclick="showHome()" style="margin-top:14px;width:100%;background:var(--primary);color:white;border:none;border-radius:12px;padding:13px;font-size:0.93rem;font-weight:600;cursor:pointer">← Tornar al menú</button></div>`;
+
+
+  const totalBugs=
+    results.reduce(
+      (s,r)=>s+r.bugs.length,
+      0
+    );
+
+  html+=`
+    <div style="
+      text-align:center;
+      padding:16px;
+      background:${totalBugs===0?'#e6f9ef':'#fdeaea'};
+      border-radius:12px">
+
+      <b style="
+        color:${totalBugs===0?'var(--success)':'var(--error)'}">
+
+        ${
+          totalBugs===0
+            ?'🏆 Tot correcte!'
+            :'⚠️ '+totalBugs+' bugs'
+        }
+
+      </b>
+
+    </div>
+
+    <button onclick="showHome()"
+            style="
+              margin-top:14px;
+              width:100%;
+              background:var(--primary);
+              color:white;
+              border:none;
+              border-radius:12px;
+              padding:13px;
+              font-size:0.93rem;
+              font-weight:600;
+              cursor:pointer">
+
+      ← Tornar al menú
+
+    </button>
+
+    </div>`;
+
+
   document.getElementById('navBack').style.display='none';
-  document.getElementById('navTitle').textContent='🧪 Test Automàtic';
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById('screenApp').classList.add('active');
+
+  document.getElementById('navTitle').textContent=
+    '🧪 Test Automàtic';
+
+  document
+    .querySelectorAll('.screen')
+    .forEach(s=>s.classList.remove('active'));
+
+  document
+    .getElementById('screenApp')
+    .classList.add('active');
+
   document.getElementById('sidebar').style.display='none';
+
   document.getElementById('appContent').innerHTML=html;
 }
 
-// Triple clic al títol → test automàtic
-let navClicks=0,navTimer=null;
-document.getElementById('navTitle').addEventListener('click',()=>{
-  navClicks++;clearTimeout(navTimer);
-  navTimer=setTimeout(()=>navClicks=0,600);
-  if(navClicks>=3){navClicks=0;runAutoTest();}
-});
 
-// ── PANELL DESBLOQUEIG ───────────────────────
+// ── TRIPLE CLIC AL TÍTOL → TEST AUTOMÀTIC ─────────────────────────────
+
+let navClicks=0;
+let navTimer=null;
+
+document
+  .getElementById('navTitle')
+  .addEventListener('click',()=>{
+
+    navClicks++;
+
+    clearTimeout(navTimer);
+
+    navTimer=setTimeout(()=>{
+      navClicks=0;
+    },600);
+
+    if(navClicks>=3){
+
+      navClicks=0;
+
+      runAutoTest();
+    }
+  });
+
+
+// ── PANELL DESBLOQUEIG ─────────────────────────────────────────────────
+
 function toggleUnlockPanel(){
-  const panel=document.getElementById('unlockPanel');
-  const overlay=document.getElementById('unlockOverlay');
-  const isOpen=panel.classList.contains('open');
+
+  const panel=
+    document.getElementById('unlockPanel');
+
+  const overlay=
+    document.getElementById('unlockOverlay');
+
+  const isOpen=
+    panel.classList.contains('open');
+
   disarmReset();
-  if(isOpen){ closeUnlockPanel(); }
-  else {
+
+  if(isOpen){
+
+    closeUnlockPanel();
+
+  }else{
+
     renderUnlockPanel();
+
     panel.classList.add('open');
     overlay.classList.add('open');
   }
 }
 
+
 function closeUnlockPanel(){
+
   disarmReset();
-  document.getElementById('unlockPanel').classList.remove('open');
-  document.getElementById('unlockOverlay').classList.remove('open');
+
+  document
+    .getElementById('unlockPanel')
+    .classList.remove('open');
+
+  document
+    .getElementById('unlockOverlay')
+    .classList.remove('open');
 }
 
+
 function renderUnlockPanel(){
-  const list=document.getElementById('unlockTopicList');
+
+  const list=
+    document.getElementById('unlockTopicList');
+
   let html='';
+
   TOPICS.forEach((t,i)=>{
-    const isUnlocked=isTopicUnlocked(i);
-    const isDone=state.done.includes(t.id);
-    const canToggle=i>0; // el primer sempre obert
-    html+=`<div class="unlock-topic-row">
-      <span class="unlock-topic-name ${isDone?'is-done':''}">${t.icon} ${t.name.split(' ')[0]}${isDone?' ✓':''}</span>
-      ${canToggle
-        ? `<button class="unlock-toggle ${isUnlocked?'active':''}" onclick="toggleTopicUnlock(${i})">${isUnlocked?'Obert':'Tancat'}</button>`
-        : `<span style="font-size:.75rem;color:var(--success);font-weight:600">Base</span>`
-      }
-    </div>`;
+
+    const isUnlocked=
+      isTopicUnlocked(i);
+
+    const isDone=
+      state.done.includes(t.id);
+
+    const canToggle=i>0;
+
+    html+=`
+      <div class="unlock-topic-row">
+
+        <span class="unlock-topic-name ${isDone?'is-done':''}">
+          ${t.icon}
+          ${t.name.split(' ')[0]}
+          ${t.course==='2n'?' ⭐':''}
+          ${isDone?' ✓':''}
+        </span>
+
+        ${
+          canToggle
+            ?
+              `<button
+                 class="unlock-toggle ${isUnlocked?'active':''}"
+                 onclick="toggleTopicUnlock(${i})">
+                 ${isUnlocked?'Obert':'Tancat'}
+               </button>`
+            :
+              `<span style="
+                 font-size:.75rem;
+                 color:var(--success);
+                 font-weight:600">
+                 Base
+               </span>`
+        }
+
+      </div>`;
   });
+
   list.innerHTML=html;
 }
 
+
 function toggleTopicUnlock(i){
+
   const t=TOPICS[i];
-  const isUnlocked=isTopicUnlocked(i);
+
+  const isUnlocked=
+    isTopicUnlocked(i);
+
   if(isUnlocked){
-    // Bloquejar només aquest tema (no afecta els altres)
-    state.unlockedIds=state.unlockedIds.filter(id=>id!==t.id);
-    state.done=state.done.filter(id=>id!==t.id);
-  } else {
-    // Desbloquejar només el tema seleccionat, sense afectar els anteriors o posteriors
-    if(!state.unlockedIds.includes(t.id)) state.unlockedIds.push(t.id);
+
+    state.unlockedIds=
+      state.unlockedIds.filter(
+        id=>id!==t.id
+      );
+
+    state.done=
+      state.done.filter(
+        id=>id!==t.id
+      );
+
+  }else{
+
+    if(!state.unlockedIds.includes(t.id)){
+      state.unlockedIds.push(t.id);
+    }
   }
+
   saveState();
+
   renderUnlockPanel();
   renderHome();
 }
+
 
 function unlockAllTopics(){
-  state.unlockedIds=TOPICS.map(t=>t.id);
+
+  state.unlockedIds=
+    TOPICS.map(t=>t.id);
+
   saveState();
+
   renderUnlockPanel();
   renderHome();
 }
 
-let resetArmed=false,resetArmTimer=null;
+
+// ── REINICIAR PROGRÉS ──────────────────────────────────────────────────
+
+let resetArmed=false;
+let resetArmTimer=null;
+
+
 function resetProgress(){
-  const btn=document.getElementById('btnResetProgress');
+
+  const btn=
+    document.getElementById('btnResetProgress');
+
   if(!resetArmed){
+
     resetArmed=true;
-    btn.textContent='⚠ Prem per confirmar';
-    btn.style.borderColor='var(--error)';btn.style.color='var(--error)';
+
+    btn.textContent=
+      '⚠ Prem per confirmar';
+
+    btn.style.borderColor=
+      'var(--error)';
+
+    btn.style.color=
+      'var(--error)';
+
     clearTimeout(resetArmTimer);
-    resetArmTimer=setTimeout(()=>disarmReset(),3000);
+
+    resetArmTimer=
+      setTimeout(
+        ()=>disarmReset(),
+        3000
+      );
+
     return;
   }
+
   disarmReset();
-  state.unlockedIds=[TOPICS[0].id]; state.done=[];
+
+  state.unlockedIds=
+    TOPICS.length
+      ?[TOPICS[0].id]
+      :[];
+
+  state.done=[];
+
+  // ★ TAMBÉ ESBORREM ELS ERRORS
+  state.errors=[];
+
+  state.currentTopic=0;
+  state.level=1;
+  state.exCount=0;
+  state.correctStreak=0;
+
   saveState();
+
   renderUnlockPanel();
   renderHome();
+
   closeUnlockPanel();
 }
+
+
 function disarmReset(){
-  resetArmed=false;clearTimeout(resetArmTimer);
-  const btn=document.getElementById('btnResetProgress');
-  if(btn){btn.innerHTML='↺ Reiniciar progrés';btn.style.borderColor='';btn.style.color='';}
+
+  resetArmed=false;
+
+  clearTimeout(resetArmTimer);
+
+  const btn=
+    document.getElementById('btnResetProgress');
+
+  if(btn){
+
+    btn.innerHTML=
+      '↺ Reiniciar progrés';
+
+    btn.style.borderColor='';
+    btn.style.color='';
+  }
 }
 
-loadState();showHome();
+
+// ── INICI ──────────────────────────────────────────────────────────────
+
+loadState();
+
+showHome();
+
 </script>
 </body>
 </html>
