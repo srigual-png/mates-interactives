@@ -74,6 +74,7 @@ href="https://srigual-png.github.io/mates-primer-ESO/3 - sentit espacial.html">
   .badge-locked{background:var(--border);color:var(--locked);}
   .badge-exam{background:#fff3e0;color:var(--warn);}
   .badge-app{background:#f0e6ff;color:#8b5cf6;}
+.badge-coords{background:#e0f0ff;color:#2980b9;}
 
   .theory-box{background:#f0eeff;border-left:4px solid var(--primary);border-radius:10px;padding:15px 17px;margin-bottom:18px;font-size:0.91rem;line-height:1.7;}
   .theory-box h3{color:var(--primary);margin-bottom:8px;font-size:0.97rem;}
@@ -135,6 +136,17 @@ href="https://srigual-png.github.io/mates-primer-ESO/3 - sentit espacial.html">
   .btn-app{background:var(--primary);color:white;border:none;border-radius:8px;padding:9px 18px;font-size:0.88rem;font-weight:600;cursor:pointer;}
   .btn-app:hover{background:var(--primary-dark);}
 
+
+
+/* PLA CARTESIÀ · AMPLIACIÓ 2n ESO */
+.coords-wrap{text-align:center;}
+.coords-wrap canvas{border:1px solid var(--border);border-radius:12px;background:#fff;cursor:crosshair;display:block;margin:0 auto;max-width:100%;height:auto;}
+.coords-info{font-size:0.88rem;color:var(--primary);font-weight:600;min-height:22px;margin:8px 0;}
+.coords-btns{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:8px;}
+.coord-btn{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:7px 14px;font-size:0.82rem;cursor:pointer;font-weight:500;}
+.coord-btn:hover{border-color:var(--primary);color:var(--primary);}
+.coord-ex-box{background:#fff0eb;border-radius:10px;padding:10px 14px;margin-top:10px;font-size:0.86rem;min-height:36px;}
+
   .streak-bar{display:flex;gap:4px;margin-bottom:12px;flex-wrap:wrap;}
   .streak-dot{width:14px;height:14px;border-radius:50%;background:var(--border);transition:background 0.3s;}
   .streak-dot.ok{background:var(--success);}
@@ -167,7 +179,7 @@ href="https://srigual-png.github.io/mates-primer-ESO/3 - sentit espacial.html">
 </style>
 <script data-goatcounter="https://srigual.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
-<!-- Versió final revisada 11/08/2026: distractors, pistes, errors i SVG auditats -->
+<!-- Versió final revisada 12/08/2026: s'afegeixen Coordenades cartesianes com a ampliació de 2n, Pla Cartesià interactiu i registre d'errors -->
 </head>
 <body>
 
@@ -235,6 +247,13 @@ href="https://srigual-png.github.io/mates-primer-ESO/3 - sentit espacial.html">
   <div id="examFeedback"></div>
   <button class="btn-primary" id="btnNextExam" onclick="nextExamQ()" style="display:none">Següent →</button>
   <div id="examResult" style="display:none"></div>
+</div>
+
+
+
+<!-- PLA CARTESIÀ · AMPLIACIÓ 2n ESO -->
+<div class="screen" id="screenCoords">
+  <div id="coordsBody"></div>
 </div>
 
 <div class="screen" id="screenApp">
@@ -1265,6 +1284,110 @@ function genCircleAmpliacio(){
   return ex;
 }
 
+
+
+// 9. COORDENADES CARTESIANES · AMPLIACIÓ / PREPARA 2n ESO
+function genCoords(){
+  const q=rnd(1,6);
+  let question,correct,opts,guide,solution;
+
+  if(q===1){
+    const px=rnd(-4,4),py=rnd(-4,4);
+    question=`El punt <b>A(${px}, ${py})</b>: quina és la seva <b>abscissa</b> i <b>ordenada</b>?`;
+    correct=`x = ${px}, y = ${py}`;
+    opts=uniq4(correct,[
+      `x = ${py}, y = ${px}`,
+      `x = ${px+1}, y = ${py}`,
+      `x = ${px}, y = ${py+1}`,
+      `x = ${px-1}, y = ${py}`
+    ]);
+    guide=[
+      'En un punt (x, y), mira primer la coordenada horitzontal (abscissa)',
+      'Després identifica la coordenada vertical (ordenada)'
+    ];
+    solution=[`Abscissa x = ${px} | Ordenada y = ${py}`];
+
+  }else if(q===2){
+    const xs=rnd(0,1)===0?rnd(1,5):-rnd(1,5);
+    const ys=rnd(0,1)===0?rnd(1,5):-rnd(1,5);
+    const quad=xs>0&&ys>0?'I':xs<0&&ys>0?'II':xs<0&&ys<0?'III':'IV';
+    const desc={I:'x>0, y>0',II:'x<0, y>0',III:'x<0, y<0',IV:'x>0, y<0'};
+    question=`En quin <b>quadrant</b> es troba <b>(${xs}, ${ys})</b>?`;
+    correct=`Quadrant ${quad} (${desc[quad]})`;
+    opts=shuffle(['I','II','III','IV'].map(v=>`Quadrant ${v} (${desc[v]})`));
+    guide=[
+      'Observa primer el signe de x i després el signe de y',
+      'Relaciona la combinació de signes amb el quadrant corresponent'
+    ];
+    solution=[`x=${xs}${xs>0?'>0':'<0'}, y=${ys}${ys>0?'>0':'<0'} → <b>Quadrant ${quad}</b>`];
+
+  }else if(q===3){
+    const x1=rnd(-5,-1),x2=rnd(1,5);
+    const dist=Math.abs(x2-x1);
+    question=`Distància entre <b>A(${x1}, 0)</b> i <b>B(${x2}, 0)</b>?`;
+    correct=String(dist);
+    opts=uniq4(correct,[String(dist+1),String(dist+2),String(Math.max(1,dist-1)),String(dist+3)]);
+    guide=[
+      'Com que els dos punts són sobre l’eix x, compara només les abscisses',
+      'La distància és el valor absolut de la diferència entre les dues coordenades x'
+    ];
+    solution=[`|${x2} − (${x1})| = <b>${dist}</b> unitats`];
+
+  }else if(q===4){
+    const items=[
+      {q:'Com es diu el punt on es creuen els dos eixos?',a:'L\'origen de coordenades O(0, 0)',w:['El punt (1, 1)','El centre del primer quadrant','El punt neutre (1, 0)']},
+      {q:'L\'eix horitzontal s\'anomena…',a:'Eix de les abscisses (eix x)',w:['Eix de les ordenades (eix y)','Eix vertical','Eix d\'ordenades']},
+      {q:'L\'eix vertical s\'anomena…',a:'Eix de les ordenades (eix y)',w:['Eix de les abscisses (eix x)','Eix horitzontal','Eix d\'abscisses']},
+      {q:'Els punts sobre l\'eix de les x (abscisses) tenen sempre…',a:'y = 0',w:['x = 0','x = y','y = 1']},
+      {q:'Els punts sobre l\'eix de les y (ordenades) tenen sempre…',a:'x = 0',w:['y = 0','x = 1','y = x']}
+    ];
+    const it=items[rnd(0,items.length-1)];
+    question=it.q;
+    correct=it.a;
+    opts=uniq4(correct,it.w);
+    guide=[
+      'Recorda quin eix és horitzontal i quin és vertical',
+      'En un punt sobre un eix, l’altra coordenada val 0'
+    ];
+    solution=[`✅ ${correct}`];
+
+  }else if(q===5){
+    const casos=[
+      {q:'On es troba el punt P(0, 4)?',a:'Sobre l\'eix y (x=0)',w:['Sobre l\'eix x (y=0)','Quadrant I','A l\'origen']},
+      {q:'On es troba el punt Q(−3, 0)?',a:'Sobre l\'eix x (y=0)',w:['Sobre l\'eix y (x=0)','Quadrant III','A l\'origen']},
+      {q:'On es troba el punt R(0, 0)?',a:'A l\'origen de coordenades',w:['Sobre l\'eix x','Sobre l\'eix y','Quadrant I']}
+    ];
+    const cas=casos[rnd(0,casos.length-1)];
+    question=`<b>${cas.q}</b>`;
+    correct=cas.a;
+    opts=uniq4(correct,cas.w);
+    guide=[
+      'Mira si alguna de les dues coordenades és 0',
+      'Si totes dues són 0, el punt és l’origen'
+    ];
+    solution=[`✅ ${correct}`];
+
+  }else{
+    const qds=[
+      {q:'Un punt amb x = −2 i y = 3 es troba al…',a:'Quadrant II',w:['Quadrant I','Quadrant III','Quadrant IV']},
+      {q:'Un punt amb x > 0 i y < 0 es troba al…',a:'Quadrant IV',w:['Quadrant I','Quadrant II','Quadrant III']},
+      {q:'Un punt amb x < 0 i y < 0 es troba al…',a:'Quadrant III',w:['Quadrant I','Quadrant II','Quadrant IV']},
+      {q:'El punt (5, 7) es troba al…',a:'Quadrant I',w:['Quadrant II','Quadrant III','Quadrant IV']}
+    ];
+    const qd=qds[rnd(0,qds.length-1)];
+    question=`<b>${qd.q}</b>`;
+    correct=qd.a;
+    opts=uniq4(correct,qd.w);
+    guide=[
+      'Identifica el signe de x i el signe de y',
+      'Situa mentalment el punt respecte dels dos eixos'
+    ];
+    solution=[`✅ ${correct}`];
+  }
+
+  return {topicId:'coordenades',type:q,question,correct,options:opts,guide,solution,svg:''};
+}
+
 // ── TOPICS ────────────────────────────────────────────────────────────
 const TOPICS=[
   // ── 1r ESO ───────────────────────────────────────────────────────────
@@ -1309,6 +1432,10 @@ const TOPICS=[
   {id:'cercle2',course:'2n',exam1r:false,icon:'🟣',name:'Càlculs circulars avançats',short:'⭐ Ampliació · Àrea del cercle, arcs i sectors',
    theory:{title:'⭐ Ampliació · Càlculs circulars (prepara 2n ESO)',text:'Contingut d’ampliació sobre superfícies circulars i proporcionalitat angular.',
    formulas:['• Àrea cercle = πr²','• Longitud arc = (α/360)×2πr','• Àrea sector = (α/360)×πr²','• π ≈ 3,14']},gen:genCircleAmpliacio},
+
+  {id:'coordenades',course:'2n',exam1r:false,icon:'📍',name:'Coordenades cartesianes',short:'⭐ Ampliació · Punts, eixos, origen i quadrants al pla',
+   theory:{title:'⭐ Ampliació · Coordenades cartesianes (prepara 2n ESO)',text:'El pla cartesià permet localitzar punts mitjançant dues coordenades ordenades (x, y).',
+   formulas:['• P(x, y): x = abscissa (horitzontal) | y = ordenada (vertical)','• Origen: O(0, 0)','• Eix x: y = 0 | Eix y: x = 0','• Q.I: (+,+) | Q.II: (−,+) | Q.III: (−,−) | Q.IV: (+,−)','• Distància entre dos punts del mateix eix x: |x₂ − x₁|']},gen:genCoords},
 ];
 
 // ── ESTAT ──────────────────────────────────────────────────────────────
@@ -1581,9 +1708,23 @@ function renderHome(){
     </div>`;
 
   // Ordre pedagògic de l'ampliació, independent dels índexs interns.
-  ['pitagores','cercle2','poliedres','cossos'].forEach(id=>{
+  ['coordenades','pitagores','cercle2','poliedres','cossos'].forEach(id=>{
     const i=TOPICS.findIndex(t=>t.id===id);
     if(i>=0)html+=topicCard(i,true);
+
+    if(id==='coordenades'){
+      html+=`
+        <div class="topic-card"
+             onclick="showPlaCartesia()"
+             style="border:2px dashed #2980b9">
+          <div class="topic-icon">📐</div>
+          <div class="topic-info">
+            <h3>Pla Cartesià Interactiu</h3>
+            <p>⭐ Ampliació · Col·loca punts i practica eixos i quadrants</p>
+          </div>
+          <span class="topic-badge badge-coords">Interactiu</span>
+        </div>`;
+    }
   });
 
   // ── TARGETA D'ERRORS ────────────────────────────────────────────────
@@ -2426,6 +2567,226 @@ function nextExamQ(){
             onclick="startExam()">
       Repetir examen
     </button>`;
+}
+
+
+
+
+// ── PLA CARTESIÀ INTERACTIU · AMPLIACIÓ 2n ESO ───────────────────────
+let coordPts=[],coordExMode=false,coordExTarget=null;
+
+function showPlaCartesia(){
+  const coordsIndex=TOPICS.findIndex(t=>t.id==='coordenades');
+  if(coordsIndex>=0)state.currentTopic=coordsIndex;
+  state.level=1;
+
+  document.getElementById('navBack').style.display='block';
+  document.getElementById('navTitle').textContent='Pla Cartesià Interactiu · Ampliació 2n';
+  document.getElementById('coordsBody').innerHTML=
+    '<div class="home-header" style="padding-top:8px"><h2>📐 Pla Cartesià</h2><p>⭐ Ampliació · prepara 2n d\'ESO · Clica al pla per col·locar punts i practicar quadrants</p></div>'
+    +'<div class="coords-wrap">'
+    +'<div class="coords-info" id="coordsInfo">Clica al pla per col·locar un punt</div>'
+    +'<canvas id="coordsCanvas" width="300" height="300"></canvas>'
+    +'<div class="coords-btns">'
+    +'<button class="coord-btn" onclick="coordNetejar()">🗑️ Netejar</button>'
+    +'<button class="coord-btn" onclick="coordPuntAleatori()">🎲 Punt aleatori</button>'
+    +'<button class="coord-btn" onclick="coordExercici()">📝 Exercici</button>'
+    +'</div>'
+    +'<div class="coord-ex-box" id="coordExBox" style="display:none"></div>'
+    +'</div>'
+    +'<button class="btn-secondary" onclick="showHome()" style="margin-top:16px">← Tornar al menú</button>';
+
+  showScreen('screenCoords');
+  coordPts=[];
+  coordExMode=false;
+  coordExTarget=null;
+  initCanvas();
+}
+
+function initCanvas(){
+  const cv=document.getElementById('coordsCanvas');
+  if(!cv)return;
+  const ctx=cv.getContext('2d');
+  drawCoords(ctx);
+
+  cv.onclick=function(e){
+    const r=cv.getBoundingClientRect();
+    const sx=cv.width/r.width;
+    const sy=cv.height/r.height;
+    const mouseX=(e.clientX-r.left)*sx;
+    const mouseY=(e.clientY-r.top)*sy;
+    const cx=Math.round((mouseX-150)/20);
+    const cy=Math.round((150-mouseY)/20);
+
+    if(Math.abs(cx)>7||Math.abs(cy)>7)return;
+
+    if(coordExMode&&coordExTarget){
+      const target={...coordExTarget};
+      const ok=cx===target.x&&cy===target.y;
+      const box=document.getElementById('coordExBox');
+
+      box.style.background=ok?'#e6f9ef':'#fdeaea';
+      box.innerHTML=ok
+        ?`✅ <b>Correcte!</b> (${cx}, ${cy}) és el punt ${target.nom}.`
+        :`❌ Has clicat (${cx}, ${cy}). El punt ${target.nom} era <b>(${target.x}, ${target.y})</b>.`;
+
+      if(!ok){
+        registerError({
+          topicId:'coordenades',
+          type:7,
+          question:`Pla cartesià interactiu: clica el punt <b>${target.nom}(${target.x}, ${target.y})</b>.`,
+          correct:`(${target.x}, ${target.y})`,
+          options:[],
+          guide:['Localitza primer x sobre l’eix horitzontal','Després puja o baixa fins al valor de y'],
+          solution:[`El punt correcte és <b>(${target.x}, ${target.y})</b>.`],
+          svg:''
+        },`(${cx}, ${cy})`,'practice');
+      }
+
+      coordExMode=false;
+      coordExTarget=null;
+      coordPts.push({x:cx,y:cy,lbl:ok?'✓':'✗'});
+      drawCoords(ctx);
+      return;
+    }
+
+    const q=cx===0&&cy===0?'Origen':cx===0?'Eix y':cy===0?'Eix x':cx>0&&cy>0?'Q.I':cx<0&&cy>0?'Q.II':cx<0&&cy<0?'Q.III':'Q.IV';
+    document.getElementById('coordsInfo').textContent=`Punt (${cx}, ${cy}) → ${q}`;
+    coordPts.push({x:cx,y:cy,lbl:'P'+(coordPts.length+1)});
+    drawCoords(ctx);
+  };
+}
+
+function drawCoords(ctx){
+  const W=300,C=150,S=20;
+  ctx.clearRect(0,0,W,W);
+
+  // Grid alineada amb els eixos
+  ctx.strokeStyle='#dce3ed';
+  ctx.lineWidth=1;
+  for(let i=-7;i<=7;i++){
+    const p=C+i*S;
+
+    ctx.beginPath();
+    ctx.moveTo(p,10);
+    ctx.lineTo(p,W-10);
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.moveTo(10,p);
+    ctx.lineTo(W-10,p);
+    ctx.stroke();
+  }
+
+  // Eixos
+  ctx.strokeStyle='#2c3e50';
+  ctx.lineWidth=2;
+  ctx.beginPath();
+  ctx.moveTo(10,C);
+  ctx.lineTo(W-10,C);
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.moveTo(C,10);
+  ctx.lineTo(C,W-10);
+  ctx.stroke();
+
+  // Fletxes
+  ctx.fillStyle='#2c3e50';
+  ctx.beginPath();
+  ctx.moveTo(W-18,C-4);
+  ctx.lineTo(W-10,C);
+  ctx.lineTo(W-18,C+4);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.moveTo(C-4,18);
+  ctx.lineTo(C,10);
+  ctx.lineTo(C+4,18);
+  ctx.fill();
+
+  // Numeració dels eixos
+  ctx.font='11px sans-serif';
+  ctx.fillStyle='#7f8c9a';
+  for(let v=-6;v<=6;v++){
+    if(v===0)continue;
+
+    // Eix X
+    ctx.fillText(v,C+v*S-4,C+16);
+
+    // Eix Y (positius a dalt, negatius a baix)
+    ctx.fillText(v,C+6,C-v*S+4);
+  }
+
+  // Etiquetes x i y
+  ctx.fillStyle='#e8622a';
+  ctx.font='bold 13px sans-serif';
+  ctx.fillText('x',W-16,C-8);
+  ctx.fillText('y',C+8,20);
+
+  // Quadrants
+  ctx.font='11px sans-serif';
+  ctx.fillStyle='rgba(232,98,42,0.35)';
+  ctx.fillText('I',C+45,C-45);
+  ctx.fillText('II',C-55,C-45);
+  ctx.fillText('III',C-60,C+55);
+  ctx.fillText('IV',C+45,C+55);
+
+  // Punts col·locats
+  coordPts.forEach(p=>{
+    const px=C+p.x*S,py=C-p.y*S;
+    ctx.beginPath();
+    ctx.arc(px,py,5,0,2*Math.PI);
+    ctx.fillStyle='#e8622a';
+    ctx.fill();
+
+    ctx.font='bold 10px sans-serif';
+    ctx.fillStyle='#c04a18';
+    ctx.fillText(`${p.lbl}(${p.x}, ${p.y})`,px+7,py-5);
+  });
+}
+
+function coordNetejar(){
+  coordPts=[];
+  coordExMode=false;
+  coordExTarget=null;
+  const cv=document.getElementById('coordsCanvas');
+  if(!cv)return;
+  drawCoords(cv.getContext('2d'));
+  const info=document.getElementById('coordsInfo');
+  if(info)info.textContent='Clica al pla per col·locar un punt';
+  const box=document.getElementById('coordExBox');
+  if(box)box.style.display='none';
+}
+
+function coordPuntAleatori(){
+  const x=rnd(-5,5),y=rnd(-5,5);
+  const q=x===0&&y===0?'Origen':x===0?'Eix y':y===0?'Eix x':x>0&&y>0?'Q.I':x<0&&y>0?'Q.II':x<0&&y<0?'Q.III':'Q.IV';
+  document.getElementById('coordsInfo').textContent=`Punt (${x}, ${y}) → ${q}`;
+  coordPts.push({x,y,lbl:'P'+(coordPts.length+1)});
+  const cv=document.getElementById('coordsCanvas');
+  if(cv)drawCoords(cv.getContext('2d'));
+}
+
+function coordExercici(){
+  const punts=[
+    {x:2,y:3,nom:'A'},{x:-3,y:1,nom:'B'},{x:-2,y:-4,nom:'C'},{x:4,y:-2,nom:'D'},
+    {x:0,y:3,nom:'E'},{x:-5,y:0,nom:'F'},{x:3,y:0,nom:'G'},{x:0,y:-2,nom:'H'}
+  ];
+  const p=punts[rnd(0,punts.length-1)];
+
+  // Netegem PRIMER i activem el repte DESPRÉS (correcció del bug original).
+  coordNetejar();
+  coordExMode=true;
+  coordExTarget=p;
+
+  const box=document.getElementById('coordExBox');
+  box.style.display='block';
+  box.style.background='#fff0eb';
+  box.innerHTML=`📍 Clica on es troba el punt <b>${p.nom}(${p.x}, ${p.y})</b> al pla.`;
+
+  const cv=document.getElementById('coordsCanvas');
+  if(cv)drawCoords(cv.getContext('2d'));
 }
 
 
