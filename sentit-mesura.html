@@ -6,7 +6,7 @@
 <title>Exercicis de Sentit de la Mesura | Matemàtiques 1r d'ESO</title>
 
 <meta name="description"
-content="Practica el sentit de la mesura de 1r d'ESO amb exercicis interactius sobre longitud, massa, capacitat, superfície, volum, temps i conversions d'unitats. Explicacions pas a pas, pistes i correcció immediata.">
+content="Practica el sentit de la mesura de 1r d'ESO amb exercicis interactius sobre unitats, temps, perímetres, àrees, estimació, instruments, escales, angles i precisió. Inclou ampliació de volum per preparar 2n d'ESO.">
 <meta name="author" content="Salvador Rigual Valls">
 <meta name="robots" content="index, follow">
 <link rel="canonical"
@@ -17,7 +17,7 @@ href="https://srigual-png.github.io/mates-primer-ESO/2 - sentit mesura.html">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <style>
   :root {
-    --bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--primary-dark:#3a6fd8;
+    --bg:#f7f9fc;--card:#fff;--primary:#58b957;--primary-dark:#378f3a;
     --success:#34c97e;--error:#e05c5c;--warn:#f5a623;--text:#2c3e50;
     --muted:#7f8c9a;--border:#dce3ed;--locked:#c8d3e0;--shadow:0 2px 12px rgba(0,0,0,.08);
   }
@@ -35,7 +35,7 @@ href="https://srigual-png.github.io/mates-primer-ESO/2 - sentit mesura.html">
   .layout #screenHome{flex:1;min-width:0;margin:0;padding:20px 0}
   .sidebar{width:160px;flex-shrink:0;padding:20px 0;display:flex;flex-direction:column;gap:10px;align-items:stretch}
   .sidebar-btn{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:14px 10px;cursor:pointer;text-align:center;font-size:.82rem;font-weight:600;color:var(--muted);transition:all .2s;line-height:1.5}
-  .sidebar-btn:hover{border-color:var(--primary);color:var(--primary);background:#eaf1fd}
+  .sidebar-btn:hover{border-color:var(--primary);color:var(--primary);background:#eef9ee}
   .sidebar-btn .sb-icon{font-size:1.4rem;display:block;margin-bottom:4px}
   .home-header{text-align:center;padding:28px 0 18px}
   .home-header h2{font-size:1.7rem;color:var(--primary);margin-bottom:6px}
@@ -51,16 +51,19 @@ href="https://srigual-png.github.io/mates-primer-ESO/2 - sentit mesura.html">
   .topic-info p{font-size:.78rem;color:var(--muted);margin-top:2px}
   .topic-badge{font-size:.73rem;padding:3px 10px;border-radius:20px;font-weight:600;white-space:nowrap}
   .badge-done{background:#e6f9ef;color:var(--success)}
-  .badge-active{background:#eaf1fd;color:var(--primary)}
+  .badge-active{background:#eef9ee;color:var(--primary)}
   .badge-locked{background:var(--border);color:var(--locked)}
   .badge-exam{background:#fff3e0;color:var(--warn)}
   .badge-app{background:#f0e6ff;color:#8b5cf6}
-  .theory-box{background:#eaf1fd;border-left:4px solid var(--primary);border-radius:10px;padding:15px 17px;margin-bottom:18px;font-size:.91rem;line-height:1.7}
+  .badge-extension{background:#f3e8ff;color:#8b5cf6}
+  .topic-card.extension{border:2px dashed #b794f4;background:#fcfaff}
+  .topics-section-title{font-size:.82rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin:18px 2px 8px}
+  .theory-box{background:#eef9ee;border-left:4px solid var(--primary);border-radius:10px;padding:15px 17px;margin-bottom:18px;font-size:.91rem;line-height:1.7}
   .theory-box h3{color:var(--primary);margin-bottom:8px;font-size:.97rem}
   .theory-box .formula{background:white;border-radius:8px;padding:9px 13px;margin:8px 0;font-family:'Courier New',monospace;font-size:.92rem;border:1px solid var(--border)}
   .level-select{display:flex;gap:12px;margin-bottom:22px}
   .level-btn{flex:1;padding:11px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.88rem;font-weight:600;color:var(--muted);transition:all .2s}
-  .level-btn.active{border-color:var(--primary);color:var(--primary);background:#eaf1fd}
+  .level-btn.active{border-color:var(--primary);color:var(--primary);background:#eef9ee}
   .level-btn:hover{border-color:var(--primary)}
   .ex-header .ex-num{font-size:.78rem;color:var(--muted);margin-bottom:4px}
   .ex-question{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;font-size:1.05rem;text-align:center;margin-bottom:16px;box-shadow:var(--shadow);min-height:68px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px}
@@ -70,7 +73,7 @@ href="https://srigual-png.github.io/mates-primer-ESO/2 - sentit mesura.html">
   .guide-steps h4{color:var(--warn);margin-bottom:5px;font-size:.83rem}
   .options-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
   .opt-btn{background:var(--card);border:2px solid var(--border);border-radius:12px;padding:13px 8px;font-family:'Courier New',monospace;font-size:.97rem;cursor:pointer;transition:all .15s;text-align:center}
-  .opt-btn:hover:not(:disabled){border-color:var(--primary);background:#eaf1fd}
+  .opt-btn:hover:not(:disabled){border-color:var(--primary);background:#eef9ee}
   .opt-btn.correct{border-color:var(--success);background:#e6f9ef;color:#1a7a4a}
   .opt-btn.wrong{border-color:var(--error);background:#fdeaea;color:var(--error)}
   .opt-btn:disabled{cursor:default}
@@ -88,7 +91,7 @@ href="https://srigual-png.github.io/mates-primer-ESO/2 - sentit mesura.html">
   .btn-primary{background:var(--primary);color:white;border:none;border-radius:12px;padding:13px 26px;font-size:.93rem;font-weight:600;cursor:pointer;width:100%;transition:background .2s;margin-top:6px}
   .btn-primary:hover{background:var(--primary-dark)}
   .btn-secondary{background:var(--card);color:var(--primary);border:2px solid var(--primary);border-radius:12px;padding:11px 26px;font-size:.93rem;font-weight:600;cursor:pointer;width:100%;margin-top:9px;transition:all .2s}
-  .btn-secondary:hover{background:#eaf1fd}
+  .btn-secondary:hover{background:#eef9ee}
   .congrats{text-align:center;padding:36px 18px}
   .congrats .trophy{font-size:2.8rem;margin-bottom:14px}
   .congrats h2{font-size:1.4rem;color:var(--primary);margin-bottom:9px}
@@ -101,7 +104,7 @@ href="https://srigual-png.github.io/mates-primer-ESO/2 - sentit mesura.html">
   .app-input-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px}
   .app-input{border:1px solid var(--border);border-radius:8px;padding:8px 11px;font-size:.92rem;width:100px}
   .app-select{border:1px solid var(--border);border-radius:8px;padding:8px 11px;font-size:.92rem;background:white}
-  .app-result{background:#eaf1fd;border-radius:8px;padding:10px 14px;font-size:.92rem;color:var(--primary-dark);font-weight:600;margin-top:6px;min-height:36px}
+  .app-result{background:#eef9ee;border-radius:8px;padding:10px 14px;font-size:.92rem;color:var(--primary-dark);font-weight:600;margin-top:6px;min-height:36px}
   .btn-app{background:var(--primary);color:white;border:none;border-radius:8px;padding:9px 18px;font-size:.88rem;font-weight:600;cursor:pointer}
   .btn-app:hover{background:var(--primary-dark)}
   .streak-bar{display:flex;gap:3px;margin-bottom:10px;flex-wrap:wrap}
@@ -113,11 +116,23 @@ href="https://srigual-png.github.io/mates-primer-ESO/2 - sentit mesura.html">
   .tag-medium{background:#fff3e0;color:var(--warn)}
   .tag-hard{background:#fdeaea;color:var(--error)}
 
+  .error-tag{font-size:.72rem;padding:2px 8px;border-radius:10px;font-weight:700;margin-left:5px;background:#fdeaea;color:#a02020;white-space:nowrap}
+  .error-panel{background:#fff8f8;border:1px solid #f0b0b0;border-radius:12px;padding:14px 16px;margin-top:14px}
+  .error-panel h4{color:var(--error);margin-bottom:10px;font-size:.9rem}
+  .error-row{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:5px 0;border-bottom:1px solid #fde;font-size:.83rem}
+  .error-row:last-child{border:none}
+  .saved-error-card{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--error);border-radius:14px;padding:15px 17px;margin-bottom:12px;box-shadow:var(--shadow)}
+  .saved-error-meta{font-size:.78rem;color:var(--muted);margin-top:7px}
+  .saved-error-answer{font-size:.86rem;line-height:1.7;margin-top:8px}
+  .saved-error-question{margin:10px 0;line-height:1.55}
+  .btn-danger{background:var(--card);color:var(--error);border:2px solid var(--error);border-radius:12px;padding:10px 20px;font-size:.88rem;font-weight:600;cursor:pointer;width:100%;margin-top:8px;transition:all .2s}
+  .btn-danger:hover{background:#fdeaea}
+
   /* ── PANELL DESBLOQUEIG ── */
   .unlock-fab{position:fixed;top:60px;right:18px;width:120px;background:var(--card);border:2px solid var(--border);border-radius:14px;padding:12px 8px;cursor:pointer;text-align:center;font-size:.78rem;font-weight:600;color:var(--muted);transition:all .2s;line-height:1.4;box-shadow:0 2px 10px rgba(0,0,0,.08);z-index:200}
-  .unlock-fab:hover{border-color:var(--primary);color:var(--primary);background:#eaf1fd}
+  .unlock-fab:hover{border-color:var(--primary);color:var(--primary);background:#eef9ee}
   .unlock-fab .fab-icon{font-size:1.4rem;display:block;margin-bottom:4px}
-  .unlock-panel{position:fixed;top:60px;right:18px;width:230px;background:var(--card);border:1.5px solid var(--border);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.13);z-index:200;padding:16px;display:none;animation:panelIn .2s ease}
+  .unlock-panel{position:fixed;top:60px;right:18px;width:230px;max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;background:var(--card);border:1.5px solid var(--border);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.13);z-index:200;padding:16px;display:none;animation:panelIn .2s ease}
   .unlock-panel.open{display:block}
   @keyframes panelIn{from{opacity:0;transform:translateY(-8px) scale(.97)}to{opacity:1;transform:none}}
   .unlock-panel h4{font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;display:flex;align-items:center;gap:6px}
@@ -126,7 +141,7 @@ href="https://srigual-png.github.io/mates-primer-ESO/2 - sentit mesura.html">
   .unlock-topic-name{font-size:.83rem;color:var(--text);flex:1;margin-right:8px}
   .unlock-topic-name.is-done{color:var(--success)}
   .unlock-toggle{background:none;border:1.5px solid var(--border);border-radius:8px;padding:3px 9px;font-size:.75rem;cursor:pointer;font-weight:600;color:var(--muted);transition:all .15s;white-space:nowrap}
-  .unlock-toggle.active{background:#eaf1fd;border-color:var(--primary);color:var(--primary)}
+  .unlock-toggle.active{background:#eef9ee;border-color:var(--primary);color:var(--primary)}
   .unlock-toggle:hover{border-color:var(--primary);color:var(--primary)}
   .unlock-all-btn{width:100%;margin-top:12px;background:var(--primary);color:white;border:none;border-radius:10px;padding:9px;font-size:.82rem;font-weight:700;cursor:pointer;transition:background .2s}
   .unlock-all-btn:hover{background:var(--primary-dark)}
@@ -193,7 +208,7 @@ href="https://srigual-png.github.io/mates-primer-ESO/2 - sentit mesura.html">
 
   <div class="intro-card">
     <p>
-      El sentit de la mesura t'ajudarà a treballar amb les unitats que fem servir cada dia: longitud, massa, capacitat, temps, perímetres, àrees i estimació. Aprendràs a convertir unitats, escollir la més adequada en cada situació i resoldre problemes de manera raonada. T'explicaré cada concepte amb exemples senzills i podràs practicar amb exercicis interactius, pistes i correcció immediata. Escull el tema que necessitis i avança al teu ritme.
+      El sentit de la mesura t'ajudarà a treballar amb les unitats que fem servir cada dia: longitud, massa, capacitat, temps, perímetres, àrees i estimació. També practicaràs la tria d'instruments i unitats, les escales, els angles i la precisió de les mesures. Aprendràs a convertir unitats i a resoldre problemes de manera raonada, amb pistes guiades i correcció immediata. Escull el tema que necessitis i avança al teu ritme.
     </p>
   </div>
 
@@ -241,6 +256,7 @@ href="https://srigual-png.github.io/mates-primer-ESO/2 - sentit mesura.html">
 // ── UTILS ────────────────────────────────────
 function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
 function shuffle(a){return [...a].sort(()=>Math.random()-.5);}
+function escHtml(s){return String(s===undefined||s===null?'':s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));}
 
 function fmtNum(n){
   // Retorna el nombre sense zeros innecessaris i amb coma decimal (estil català)
@@ -534,1073 +550,423 @@ function metricDistractors(correctVal,unit,stepFactor,steps){
   ]);
 }
 
+// ── CONTROL DE VARIETAT PER SESSIÓ ────────────────────────────────────────
+// Evita repetir exactament la mateixa pregunta dins d'una sessió i procura
+// alternar els tipus d'exercici. El cicle es renova automàticament per no
+// bloquejar els tests massius ni les sessions molt llargues.
+const VARIETY_STATE={};
+
+function resetVarietyKey(key){
+  VARIETY_STATE[key]={seen:new Set(),lastType:null};
+}
+
+function resetAllVariety(){
+  Object.keys(VARIETY_STATE).forEach(k=>resetVarietyKey(k));
+}
+
+function takeVariedExercise(key,make,cycleSize=60){
+  if(!VARIETY_STATE[key])resetVarietyKey(key);
+  let st=VARIETY_STATE[key];
+
+  if(st.seen.size>=cycleSize){
+    resetVarietyKey(key);
+    st=VARIETY_STATE[key];
+  }
+
+  let fallback=null;
+  for(let tries=0;tries<300;tries++){
+    const ex=make();
+    fallback=ex;
+    const qKey=String(ex&&ex.question!==undefined?ex.question:'');
+    const repeated=st.seen.has(qKey);
+    const sameType=st.lastType!==null&&ex&&ex.type===st.lastType;
+
+    if(!repeated&&!sameType){
+      st.seen.add(qKey);
+      st.lastType=ex.type;
+      return ex;
+    }
+  }
+
+  // Si una família és massa petita, prioritzem no repetir la pregunta.
+  for(let tries=0;tries<300;tries++){
+    const ex=make();
+    fallback=ex;
+    const qKey=String(ex&&ex.question!==undefined?ex.question:'');
+    if(!st.seen.has(qKey)){
+      st.seen.add(qKey);
+      st.lastType=ex.type;
+      return ex;
+    }
+  }
+
+  // Seguretat final: iniciem un cicle nou.
+  resetVarietyKey(key);
+  st=VARIETY_STATE[key];
+  const ex=fallback||make();
+  st.seen.add(String(ex.question||''));
+  st.lastType=ex.type;
+  return ex;
+}
+
 // ── GENERADORS ────────────────────────────────
 
-function genMetric(){
+function genMetricRaw(){
   const type=rnd(1,3);
 
-  // ── PISTES DEL NIVELL GUIAT ─────────────────────────────────────────────
-  // Indiquen el procediment, però NO donen:
-  // - factors numèrics
-  // - resultats intermedis
-  // - resposta final
- function metricGuide(fr,to,units,stepFactor){
-   const i1=units.indexOf(fr);
-   const i2=units.indexOf(to);
-   const steps=Math.abs(i2-i1);
-   const direction=i2>i1?'dreta':'esquerra';
-   const operation=i2>i1?'multiplica':'divideix';
+  function metricGuide(fr,to,units){
+    const i1=units.indexOf(fr),i2=units.indexOf(to);
+    const direction=i2>i1?'cap a unitats més petites':'cap a unitats més grans';
+    return [
+      `Localitza ${fr} i ${to} dins l'escala d'unitats`,
+      `Decideix quants canvis d'unitat cal fer ${direction}`,
+      `Aplica la regla de conversió corresponent a cada canvi`,
+      `Comprova que el valor final sigui coherent amb la unitat demanada`
+    ];
+  }
 
-   return [
-     `Ordena les unitats: ${units.join(' → ')}`,
-     `De ${fr} a ${to}: fes ${steps} salt${steps===1?'':'s'} cap a la ${direction}`,
-     `A cada salt, ${operation} per ${stepFactor}`,
-     `Aplica aquests salts al nombre inicial`
-   ];
- }
-
-  // ── FORMAT ESPECÍFIC PER A MESURES ──────────────────────────────────────
-  // Evita notacions com 1e-8 i conserva decimals petits.
   function fmtMetric(n){
-    if(n===0) return '0';
-
-    if(Math.abs(n)<0.001){
-      return String(Number(n.toFixed(10))).replace('.',',');
-    }
-
+    if(n===0)return '0';
+    if(Math.abs(n)<0.001)return String(Number(n.toFixed(12))).replace('.',',');
     return fmtNum(n);
   }
 
-  // ── LONGITUD ─────────────────────────────────────────────────────────────
   if(type===1){
     const units=['km','hm','dam','m','dm','cm','mm'];
-
-    // Màxim 2 salts.
-    // Evitem conversions extremes com cm → km o mm → km.
     const pairs=[
-      ['km','hm'],['hm','km'],
-      ['hm','dam'],['dam','hm'],
-      ['dam','m'],['m','dam'],
-      ['m','dm'],['dm','m'],
-      ['dm','cm'],['cm','dm'],
-      ['cm','mm'],['mm','cm'],
-
-      ['km','dam'],['dam','km'],
-      ['hm','m'],['m','hm'],
-      ['dam','dm'],['dm','dam'],
-      ['m','cm'],['cm','m'],
-      ['dm','mm'],['mm','dm']
+      ['km','hm'],['hm','km'],['hm','dam'],['dam','hm'],['dam','m'],['m','dam'],
+      ['m','dm'],['dm','m'],['dm','cm'],['cm','dm'],['cm','mm'],['mm','cm'],
+      ['km','dam'],['dam','km'],['hm','m'],['m','hm'],['dam','dm'],['dm','dam'],
+      ['m','cm'],['cm','m'],['dm','mm'],['mm','dm'],['km','m'],['m','km'],
+      ['hm','dm'],['dm','hm'],['dam','cm'],['cm','dam'],['m','mm'],['mm','m']
     ];
-
     const [fr,to]=pairs[rnd(0,pairs.length-1)];
-
-    const val=rnd(1,20);
-
-    const i1=units.indexOf(fr);
-    const i2=units.indexOf(to);
-    const ratio=Math.pow(10,i2-i1);
-    const res=val*ratio;
-
-    const q=`Converteix ${val} ${fr} a ${to}`;
+    const val=rnd(1,50);
+    const i1=units.indexOf(fr),i2=units.indexOf(to),steps=Math.abs(i2-i1);
+    const ratio=Math.pow(10,i2-i1),res=val*ratio;
+    const q=`Converteix ${fmtNum(val)} ${fr} a ${to}`;
     const c=`${fmtMetric(res)} ${to}`;
-
-    const guide=metricGuide(fr,to,units,10);
-
-    const sol=[
-      ...guide,
-      `Calcula la conversió`,
-      `✅ ${val} ${fr} = ${c}`
-    ];
-
+    const operation=i2>i1?'multiplica':'divideix',factor=Math.pow(10,steps);
     return {
-      question:q,
-      correct:c,
-      options:metricDistractors(res,to,10,Math.abs(i2-i1)),
-      guide,
-      solution:sol,
-      difficulty:'easy'
+      type,question:q,correct:c,options:metricDistractors(res,to,10,steps),
+      guide:metricGuide(fr,to,units),
+      solution:[`Entre ${fr} i ${to} hi ha ${steps} canvi${steps===1?'':'s'} d'unitat`,`${operation.charAt(0).toUpperCase()+operation.slice(1)} ${fmtNum(val)} per ${factor}`,`✅ ${fmtNum(val)} ${fr} = ${c}`],
+      difficulty:steps===1?'easy':'medium'
     };
   }
 
-  // ── MASSA ────────────────────────────────────────────────────────────────
   if(type===2){
     const units=['t','kg','g','mg'];
-
-    // NOMÉS unitats consecutives.
-    // Evitem mg → kg, g → t, mg → t, etc.
-    // Així no apareixen resultats com 0,000002 kg o 1e-8 t.
-    const pairs=[
-      ['t','kg'],['kg','t'],
-      ['kg','g'],['g','kg'],
-      ['g','mg'],['mg','g']
-    ];
-
+    const pairs=[['t','kg'],['kg','t'],['kg','g'],['g','kg'],['g','mg'],['mg','g']];
     const [fr,to]=pairs[rnd(0,pairs.length-1)];
-
-    const val=rnd(1,15);
-
-    const i1=units.indexOf(fr);
-    const i2=units.indexOf(to);
-    const ratio=Math.pow(1000,i2-i1);
-    const res=val*ratio;
-
-    const q=`Converteix ${val} ${fr} a ${to}`;
+    const val=rnd(1,40);
+    const i1=units.indexOf(fr),i2=units.indexOf(to),res=val*Math.pow(1000,i2-i1);
+    const q=`Converteix ${fmtNum(val)} ${fr} a ${to}`;
     const c=`${fmtMetric(res)} ${to}`;
-
-    const guide=metricGuide(fr,to,units,1000);
-
-    const sol=[
-      ...guide,
-      `Calcula la conversió`,
-      `✅ ${val} ${fr} = ${c}`
-    ];
-
+    const operation=i2>i1?'multiplica':'divideix';
     return {
-      question:q,
-      correct:c,
-      options:metricDistractors(res,to,1000,Math.abs(i2-i1)),
-      guide,
-      solution:sol,
+      type,question:q,correct:c,options:metricDistractors(res,to,1000,1),guide:metricGuide(fr,to,units),
+      solution:[`En l'escala t ↔ kg ↔ g ↔ mg, ${fr} i ${to} són unitats consecutives`,`${operation.charAt(0).toUpperCase()+operation.slice(1)} ${fmtNum(val)} per 1000`,`✅ ${fmtNum(val)} ${fr} = ${c}`],
       difficulty:'easy'
     };
   }
 
-  // ── CAPACITAT ────────────────────────────────────────────────────────────
   const units=['l','dl','cl','ml'];
-
-  // Unitats consecutives i conversions de màxim 2 salts.
   const pairs=[
-    ['l','dl'],['dl','l'],
-    ['dl','cl'],['cl','dl'],
-    ['cl','ml'],['ml','cl'],
-
-    ['l','cl'],['cl','l'],
-    ['dl','ml'],['ml','dl']
+    ['l','dl'],['dl','l'],['dl','cl'],['cl','dl'],['cl','ml'],['ml','cl'],
+    ['l','cl'],['cl','l'],['dl','ml'],['ml','dl'],['l','ml'],['ml','l']
   ];
-
   const [fr,to]=pairs[rnd(0,pairs.length-1)];
-
-  const val=rnd(2,20);
-
-  const i1=units.indexOf(fr);
-  const i2=units.indexOf(to);
-  const ratio=Math.pow(10,i2-i1);
-  const res=val*ratio;
-
-  const q=`Converteix ${val} ${fr} a ${to}`;
+  const val=rnd(1,50);
+  const i1=units.indexOf(fr),i2=units.indexOf(to),steps=Math.abs(i2-i1);
+  const ratio=Math.pow(10,i2-i1),res=val*ratio;
+  const q=`Converteix ${fmtNum(val)} ${fr} a ${to}`;
   const c=`${fmtMetric(res)} ${to}`;
-
-  const guide=metricGuide(fr,to,units,10);
-
-  const sol=[
-    ...guide,
-    `Calcula la conversió`,
-    `✅ ${val} ${fr} = ${c}`
-  ];
-
+  const operation=i2>i1?'multiplica':'divideix',factor=Math.pow(10,steps);
   return {
-    question:q,
-    correct:c,
-    options:metricDistractors(res,to,10,Math.abs(i2-i1)),
-    guide,
-    solution:sol,
-    difficulty:'easy'
+    type,question:q,correct:c,options:metricDistractors(res,to,10,steps),guide:metricGuide(fr,to,units),
+    solution:[`Entre ${fr} i ${to} hi ha ${steps} canvi${steps===1?'':'s'} d'unitat`,`${operation.charAt(0).toUpperCase()+operation.slice(1)} ${fmtNum(val)} per ${factor}`,`✅ ${fmtNum(val)} ${fr} = ${c}`],
+    difficulty:steps===1?'easy':'medium'
   };
 }
 
-// 2. CONVERSIONS D'UNITATS (inclou àrees i problemes mixtos)
-function genConversions(){
+// 2. CONVERSIONS D'UNITATS (àrees, mesures mixtes, comparacions i context)
+function genConversionsRaw(){
   const type=rnd(1,4);
+
   if(type===1){
-    // Conversió d'unitats d'àrea (NOU)
     const pairs=[
-      [{n:'m²',f:1},{n:'cm²',f:0.0001}],
-      [{n:'cm²',f:0.0001},{n:'m²',f:1}],
-      [{n:'m²',f:1},{n:'dm²',f:0.01}],
-      [{n:'dm²',f:0.01},{n:'m²',f:1}],
-      [{n:'km²',f:1e6},{n:'m²',f:1}],
-      [{n:'m²',f:1},{n:'km²',f:1e6}],
-      [{n:'cm²',f:0.0001},{n:'mm²',f:1e-6}],
-      [{n:'mm²',f:1e-6},{n:'cm²',f:0.0001}],
+      {fr:'m²',to:'dm²',factor:100,vals:[1,2,3,4,5,6,8,10,12,15,20]},
+      {fr:'dm²',to:'m²',factor:0.01,vals:[100,200,300,400,500,800,1000,1200,1500,2000]},
+      {fr:'m²',to:'cm²',factor:10000,vals:[1,2,3,4,5,6,8,10,12,15]},
+      {fr:'cm²',to:'m²',factor:0.0001,vals:[10000,20000,30000,40000,50000,80000,100000]},
+      {fr:'km²',to:'m²',factor:1000000,vals:[1,2,3,4,5,8,10]},
+      {fr:'m²',to:'km²',factor:0.000001,vals:[1000000,2000000,3000000,5000000,8000000]},
+      {fr:'cm²',to:'mm²',factor:100,vals:[1,2,4,5,8,10,12,20,25,40]},
+      {fr:'mm²',to:'cm²',factor:0.01,vals:[100,200,400,500,800,1000,1200,2000]}
     ];
-    const [fr,to]=pairs[rnd(0,pairs.length-1)];
-    // Tria val perquè el resultat sigui net
-    const ratio=fr.f/to.f;
-    const val=ratio>=1?rnd(1,8):rnd(1,5)*Math.round(1/ratio/100)*100||rnd(1,5);
-    const res=Math.round(val*ratio*1e8)/1e8;
-    const q=`Converteix ${fmtNum(val)} ${fr.n} a ${to.n}`;
-    const c=`${fmtNum(res)} ${to.n}`;
-    const guide=[
-      `Unitats d'àrea: cada "salt" és ×100 (no ×10!)`,
-      `m²↔cm²: ×10000 | m²↔dm²: ×100 | km²↔m²: ×1 000 000`,
-      `${fmtNum(val)} × ${fmtNum(ratio)} = ${fmtNum(res)}`
-    ];
-    return {question:q,correct:c,options:distractors(res,to.n,[res*10,res/10,res*100]),guide,solution:[...guide,`✅ ${c}`],difficulty:'medium'};
+    const it=pairs[rnd(0,pairs.length-1)],val=it.vals[rnd(0,it.vals.length-1)],res=val*it.factor;
+    const q=`Converteix ${fmtNum(val)} ${it.fr} a ${it.to}`;
+    const c=`${fmtNum(res)} ${it.to}`;
+    const guide=['Recorda que en unitats quadrades el canvi d’escala també queda elevat al quadrat','Localitza la unitat inicial i la final i decideix si passes a una unitat més gran o més petita','Aplica el canvi d’unitat i comprova que la unitat final sigui quadrada'];
+    return {type,question:q,correct:c,options:distractors(res,it.to,[res*10,res/10,res*100]),guide,solution:[`Factor de conversió entre ${it.fr} i ${it.to}: ${fmtNum(it.factor)}`,`${fmtNum(val)} × ${fmtNum(it.factor)} = ${fmtNum(res)}`,`✅ ${c}`],difficulty:'medium'};
   }
+
   if(type===2){
-    // Suma de mesures mixtes
-    const a=rnd(1,5),b=rnd(100,900);
-    const res=a*1000+b;
-    const q=`${a} km i ${b} m, quants metres en total?`;
-    const c=`${fmtNum(res)} m`;
-    const guide=[`1 km = 1000 m`,`${a} km = ${a*1000} m`,`${a*1000} + ${b} = ${res} m`];
-    return {question:q,correct:c,options:distractors(res,'m',[a*1000,b,res+100]),guide,solution:[...guide,`✅ ${c}`],difficulty:'medium'};
-  }
-  if(type===3){
-    // Comparació d'unitats
-    const pairs=[
-      ['500 cm','5 m',true],['2 km','200 m',false],['3000 g','3 kg',true],
-      ['2 l','250 cl',false],['1500 ml','1,5 l',true],['400 cm','40 dm',true],
-      ['2 t','2000 kg',true],['0,5 km','500 m',true],['1 h','360 s',false],
-      ['2 dm²','200 cm²',true],['1 m²','100 cm²',false],
+    const families=[
+      {aU:'km',bU:'m',to:'m',factorA:1000,bMax:950,contexts:['Una ruta té','Un recorregut suma','Una excursió combina']},
+      {aU:'m',bU:'cm',to:'cm',factorA:100,bMax:95,contexts:['Una peça mesura','Una corda té','Un passadís suma']},
+      {aU:'kg',bU:'g',to:'g',factorA:1000,bMax:950,contexts:['Una caixa pesa','Un paquet pesa','Una comanda pesa']},
+      {aU:'l',bU:'cl',to:'cl',factorA:100,bMax:95,contexts:['Un recipient conté','Una gerra conté','Una barreja té']}
     ];
-    const [a,b,eq]=pairs[rnd(0,pairs.length-1)];
-    const q=`Són iguals ${a} i ${b}?`;
-    const c=eq?'Sí, són iguals':'No, no són iguals';
-    const other=eq?'No, no són iguals':'Sí, són iguals';
-    const opts=shuffle([c,other,`${a} és el doble`,`${b} és el doble`]);
-    const guide=['Converteix les dues mesures a la mateixa unitat','Compara els valors obtinguts'];
-    return {question:q,correct:c,options:opts,guide,solution:[...guide,`✅ ${c}`],difficulty:'medium'};
+    const f=families[rnd(0,families.length-1)],a=rnd(1,8),b=rnd(1,f.bMax),res=a*f.factorA+b;
+    const context=f.contexts[rnd(0,f.contexts.length-1)];
+    const q=`${context} ${a} ${f.aU} i ${b} ${f.bU}. Quants ${f.to} són en total?`;
+    const c=`${fmtNum(res)} ${f.to}`;
+    const guide=['Expressa primer les dues mesures amb la mateixa unitat','Converteix només la quantitat que està en una unitat diferent de la demanada','Suma les dues quantitats quan ja tinguin la mateixa unitat'];
+    return {type,question:q,correct:c,options:distractors(res,f.to,[a*f.factorA,b,res+f.factorA]),guide,solution:[`${a} ${f.aU} = ${a*f.factorA} ${f.to}`,`${a*f.factorA} + ${b} = ${res} ${f.to}`,`✅ ${c}`],difficulty:'medium'};
   }
-  // Problema de context amb conversió (NOU)
-  const ctx=[
-    {q:'Una habitació fa 4 m d\'ample. Quants centímetres mesura?',a:400,u:'cm',g:['1 m = 100 cm','4 × 100 = 400 cm']},
-    {q:'Una piscina té 25 m de llarg. Quants dm mesura?',a:250,u:'dm',g:['1 m = 10 dm','25 × 10 = 250 dm']},
-    {q:'Un cotxe pesa 1,5 t. Quants kg pesa?',a:1500,u:'kg',g:['1 t = 1000 kg','1,5 × 1000 = 1500 kg']},
-    {q:'Una ampolla té 2 l. Quants cl té?',a:200,u:'cl',g:['1 l = 100 cl','2 × 100 = 200 cl']},
-    {q:'Un corredor fa 5 km. Quants metres corre?',a:5000,u:'m',g:['1 km = 1000 m','5 × 1000 = 5000 m']},
+
+  if(type===3){
+    const families=[
+      {u1:'m',u2:'cm',factor:100,vals:[1,2,3,4,5,7,8,10,12,15]},
+      {u1:'km',u2:'m',factor:1000,vals:[1,2,3,4,5,8,10]},
+      {u1:'kg',u2:'g',factor:1000,vals:[1,2,3,4,5,8,10,12]},
+      {u1:'l',u2:'ml',factor:1000,vals:[1,2,3,4,5,8,10]},
+      {u1:'dm²',u2:'cm²',factor:100,vals:[1,2,3,4,5,8,10]},
+      {u1:'h',u2:'min',factor:60,vals:[1,2,3,4,5,6]}
+    ];
+    const f=families[rnd(0,families.length-1)],base=f.vals[rnd(0,f.vals.length-1)],eq=rnd(0,1)===0;
+    const exact=base*f.factor;
+    const delta=Math.max(1,Math.round(f.factor/10))*[1,2,3][rnd(0,2)];
+    const other=eq?exact:(rnd(0,1)?exact+delta:Math.max(1,exact-delta));
+    const a=`${fmtNum(base)} ${f.u1}`,b=`${fmtNum(other)} ${f.u2}`;
+    const q=`Són iguals ${a} i ${b}?`;
+    const c=eq?'Sí, són iguals':'No, no són iguals',otherAns=eq?'No, no són iguals':'Sí, són iguals';
+    const guide=['Expressa les dues mesures amb la mateixa unitat','Compara els valors un cop feta la conversió'];
+    return {type,question:q,correct:c,options:shuffle([c,otherAns,'No es poden comparar sense mesurar de nou','Sempre són diferents si les unitats escrites són diferents']),guide,solution:[`${a} = ${fmtNum(exact)} ${f.u2}`,eq?`Coincideix amb ${b}`:`No coincideix amb ${b}`,`✅ ${c}`],difficulty:'medium'};
+  }
+
+  const contexts=[
+    {obj:'Una habitació',val:4,fr:'m',to:'cm',factor:100,u:'cm',txt:'fa {v} m d’amplada'},
+    {obj:'Una piscina',val:25,fr:'m',to:'dm',factor:10,u:'dm',txt:'té {v} m de llarg'},
+    {obj:'Un cotxe',val:1.5,fr:'t',to:'kg',factor:1000,u:'kg',txt:'pesa {v} t'},
+    {obj:'Una ampolla',val:2,fr:'l',to:'cl',factor:100,u:'cl',txt:'conté {v} l'},
+    {obj:'Un corredor',val:5,fr:'km',to:'m',factor:1000,u:'m',txt:'recorre {v} km'},
+    {obj:'Una cinta',val:3,fr:'m',to:'mm',factor:1000,u:'mm',txt:'mesura {v} m'},
+    {obj:'Una motxilla',val:4,fr:'kg',to:'g',factor:1000,u:'g',txt:'pesa {v} kg'},
+    {obj:'Una gerra',val:15,fr:'dl',to:'ml',factor:100,u:'ml',txt:'conté {v} dl'},
+    {obj:'Un sender',val:12,fr:'hm',to:'m',factor:100,u:'m',txt:'té {v} hm'},
+    {obj:'Una rajola',val:6,fr:'dm²',to:'cm²',factor:100,u:'cm²',txt:'té una superfície de {v} dm²'},
+    {obj:'Un terreny',val:3,fr:'km²',to:'m²',factor:1000000,u:'m²',txt:'té una superfície de {v} km²'},
+    {obj:'Una cursa',val:2,fr:'h',to:'min',factor:60,u:'min',txt:'dura {v} h'}
   ];
-  const item=ctx[rnd(0,ctx.length-1)];
-  const c=`${fmtNum(item.a)} ${item.u}`;
-  return {question:item.q,correct:c,options:distractors(item.a,item.u,[item.a/10,item.a*10,item.a+100]),guide:item.g,solution:[...item.g,`✅ ${c}`],difficulty:'medium'};
+  const it=contexts[rnd(0,contexts.length-1)],res=it.val*it.factor;
+  const phrase=it.txt.replace('{v}',fmtNum(it.val));
+  const q=`${it.obj} ${phrase}. Quants ${it.u} són?`;
+  const c=`${fmtNum(res)} ${it.u}`;
+  const guide=['Identifica la unitat inicial i la unitat que et demanen','Decideix si passes a una unitat més gran o més petita','Aplica la conversió i mantén la unitat demanada al resultat'];
+  return {type,question:q,correct:c,options:distractors(res,it.u,[res/10,res*10,res+it.factor]),guide,solution:[`${fmtNum(it.val)} ${it.fr} = ${fmtNum(res)} ${it.to}`,`✅ ${c}`],difficulty:'medium'};
 }
 
-// 3. MESURA DEL TEMPS (inclou sexagesimal i operacions)
-function genTemps(){
+// 3. MESURA DEL TEMPS (conversions, horaris i sistema sexagesimal)
+function genTempsRaw(){
   const type=rnd(1,5);
 
-    // ── 1. CONVERSIONS ──────────────────────────────────────────────────────
   if(type===1){
     const convs=[
-      {fr:'hores',to:'minuts',f:60,val:rnd(2,12)},
-      {fr:'minuts',to:'segons',f:60,val:rnd(2,10)*5},
-      {fr:'dies',to:'hores',f:24,val:rnd(2,7)},
-      {fr:'setmanes',to:'dies',f:7,val:rnd(2,4)},
-      {fr:'anys',to:'mesos',f:12,val:rnd(2,5)},
-      {fr:'hores',to:'segons',f:3600,val:rnd(1,4)}
+      {fr:'hores',to:'minuts',f:60,mode:'mul',vals:[1,2,3,4,5,6,8,10,12]},
+      {fr:'minuts',to:'segons',f:60,mode:'mul',vals:[5,10,15,20,30,45,60,90]},
+      {fr:'dies',to:'hores',f:24,mode:'mul',vals:[1,2,3,4,5,6,7,10]},
+      {fr:'setmanes',to:'dies',f:7,mode:'mul',vals:[1,2,3,4,5,6,8]},
+      {fr:'anys',to:'mesos',f:12,mode:'mul',vals:[1,2,3,4,5,6,10]},
+      {fr:'hores',to:'segons',f:3600,mode:'mul',vals:[1,2,3,4,5]},
+      {fr:'minuts',to:'hores',f:60,mode:'div',vals:[60,120,180,240,300,360]},
+      {fr:'segons',to:'minuts',f:60,mode:'div',vals:[60,120,180,300,600,900]},
+      {fr:'hores',to:'dies',f:24,mode:'div',vals:[24,48,72,96,120,168]},
+      {fr:'dies',to:'setmanes',f:7,mode:'div',vals:[7,14,21,28,35,42]},
+      {fr:'mesos',to:'anys',f:12,mode:'div',vals:[12,24,36,48,60,72]}
     ];
-
-    const c=convs[rnd(0,convs.length-1)];
-    const res=c.val*c.f;
-
-    const q=`Converteix ${c.val} ${c.fr} a ${c.to}`;
-    const corr=`${res} ${c.to}`;
-
+    const it=convs[rnd(0,convs.length-1)],val=it.vals[rnd(0,it.vals.length-1)],res=it.mode==='mul'?val*it.f:val/it.f;
+    const q=`Converteix ${val} ${it.fr} a ${it.to}`,corr=`${fmtNum(res)} ${it.to}`;
     const candidates=[];
-
-    const addCandidate=(n)=>{
-      if(n>0 && n!==res){
-        const s=`${n} ${c.to}`;
-        if(!candidates.includes(s)){
-          candidates.push(s);
-        }
-      }
-    };
-
-    // ── Errors plausibles segons el factor de conversió ──────────────────
-
-    if(c.f===60){
-      // Confondre multiplicació amb una operació senzilla
-      addCandidate(c.val);
-      addCandidate(res-60);
-      addCandidate(res+60);
-      addCandidate(c.val*30);
-      addCandidate(c.val*120);
-
-    }else if(c.f===24){
-      // Dies → hores
-      // Errors típics: usar 12, 60 o oblidar la conversió
-      addCandidate(c.val);
-      addCandidate(c.val*12);
-      addCandidate(c.val*60);
-      addCandidate(res-24);
-      addCandidate(res+24);
-      addCandidate(c.val*48);
-
-    }else if(c.f===7){
-      // Setmanes → dies
-      addCandidate(c.val);
-      addCandidate(c.val*5);
-      addCandidate(c.val*6);
-      addCandidate(c.val*8);
-      addCandidate(res-7);
-      addCandidate(res+7);
-
-    }else if(c.f===12){
-      // Anys → mesos
-      addCandidate(c.val);
-      addCandidate(c.val*10);
-      addCandidate(c.val*11);
-      addCandidate(c.val*24);
-      addCandidate(res-12);
-      addCandidate(res+12);
-
-    }else if(c.f===3600){
-      // Hores → segons
-      addCandidate(c.val);
-      addCandidate(c.val*60);
-      addCandidate(c.val*600);
-      addCandidate(c.val*360);
-      addCandidate(res-3600);
-      addCandidate(res+3600);
-    }
-
-    // ── Garantia absoluta de 3 distractors diferents ─────────────────────
-    // Si per algun cas encara en falten, generem alternatives numèriques
-    // vàlides que no coincideixin amb la resposta correcta.
-    let increment=1;
-
-    while(candidates.length<3){
-      addCandidate(res+increment);
-      addCandidate(res-increment);
-      increment++;
-    }
-
-    const opts=shuffle([
-      corr,
-      ...candidates.slice(0,3)
-    ]);
-
-    const guide=[
-      `Identifica el factor de conversió entre ${c.fr} i ${c.to}`,
-      `Com que passes a una unitat més petita, multiplica`,
-      `Multiplica la quantitat pel factor de conversió`
-    ];
-
-    return {
-      question:q,
-      correct:corr,
-      options:opts,
-      guide,
-      solution:[...guide,`✅ ${corr}`],
-      difficulty:'easy'
-    };
+    const add=n=>{if(n>0&&n!==res){const s=`${fmtNum(n)} ${it.to}`;if(!candidates.includes(s))candidates.push(s);}};
+    add(val);add(it.mode==='mul'?val*(it.f/2):val/(it.f/2));add(it.mode==='mul'?res+it.f:res+1);add(it.mode==='mul'?Math.max(1,res-it.f):Math.max(0.5,res-1));add(res*2);add(res/2);
+    let k=1;while(candidates.length<3){add(res+k);k++;}
+    const direction=it.mode==='mul'?'més petita':'més gran';
+    const guide=[`Identifica la relació entre ${it.fr} i ${it.to}`,`Decideix l’operació necessària perquè passes a una unitat ${direction}`,'Aplica la conversió a la quantitat inicial'];
+    return {type,question:q,correct:corr,options:shuffle([corr,...candidates.slice(0,3)]),guide,solution:[`Factor entre les unitats: ${it.f}`,it.mode==='mul'?`${val} × ${it.f} = ${fmtNum(res)}`:`${val} ÷ ${it.f} = ${fmtNum(res)}`,`✅ ${corr}`],difficulty:'easy'};
   }
 
-    // ── 2. SUMA DE TEMPS ────────────────────────────────────────────────────
   if(type===2){
-    const h1=rnd(8,11);
-    const m1=rnd(0,3)*15;
-    const durH=rnd(0,2);
-    const durM=[15,30,45][rnd(0,2)];
-
-    let h2=h1+durH;
-    let m2=m1+durM;
-
-    if(m2>=60){
-      m2-=60;
-      h2++;
-    }
-
-    const durStr=(durH>0?durH+'h ':'')+durM+'min';
-
-    const q=`Una classe comença a les ${h1}:${m1<10?'0'+m1:m1} h i dura ${durStr}. A quina hora acaba?`;
-    const corr=`${h2}:${m2<10?'0'+m2:m2} h`;
-
-    // Generem molts candidats i després ens quedem amb 3
-    // distractors diferents del correcte.
-    const candidates=[];
-
-    const addTime=(h,m)=>{
-      // Normalitza minuts perquè 10:75 no aparegui com a opció.
-      while(m>=60){
-        m-=60;
-        h++;
-      }
-      while(m<0){
-        m+=60;
-        h--;
-      }
-
-      if(h>=0 && h<24){
-        const s=`${h}:${m<10?'0'+m:m} h`;
-        if(s!==corr && !candidates.includes(s)){
-          candidates.push(s);
-        }
-      }
-    };
-
-    // Errors plausibles:
-    // 1. Oblidar els minuts de la durada.
-    addTime(h2,m1);
-
-    // 2. Afegir una hora de més.
-    addTime(h2+1,m2);
-
-    // 3. Afegir una hora de menys.
-    addTime(h2-1,m2);
-
-    // 4. Sumar només una part dels minuts.
-    addTime(h2,m1+15);
-
-    // 5. Sumar 30 minuts de més.
-    addTime(h2,m2+30);
-
-    // 6. Oblidar una part de les hores.
-    addTime(h2-1,m1);
-
-    // 7. Afegir 15 minuts.
-    addTime(h2,m2+15);
-
-    // 8. Afegir 30 minuts.
-    addTime(h2,m2+30);
-
-    const opts=shuffle([
-      corr,
-      ...candidates.slice(0,3)
-    ]);
-
-    const guide=[
-      `Suma els minuts de l'hora inicial i de la durada`,
-      `Si els minuts arriben a 60 o més, transforma 60 minuts en 1 hora`,
-      `Suma les hores i incorpora l'hora obtinguda dels minuts`
-    ];
-
-    return {
-      question:q,
-      correct:corr,
-      options:opts,
-      guide,
-      solution:[...guide,`✅ Acaba a les ${corr}`],
-      difficulty:'medium'
-    };
+    const contexts=['Una classe','Una pel·lícula','Un entrenament','Un taller','Una visita guiada','Una reunió','Una activitat extraescolar','Un partit'];
+    const startH=rnd(8,18),startM=[0,10,15,20,30,40,45,50][rnd(0,7)],durH=rnd(0,2),durM=[10,15,20,30,40,45,50][rnd(0,6)];
+    let endH=startH+durH,endM=startM+durM;if(endM>=60){endM-=60;endH++;}
+    const name=contexts[rnd(0,contexts.length-1)],durStr=(durH?`${durH} h `:'')+`${durM} min`;
+    const q=`${name} comença a les ${startH}:${String(startM).padStart(2,'0')} h i dura ${durStr}. A quina hora acaba?`;
+    const corr=`${endH}:${String(endM).padStart(2,'0')} h`,candidates=[];
+    const addTime=(h,m)=>{while(m>=60){m-=60;h++;}while(m<0){m+=60;h--;}if(h>=0&&h<24){const s=`${h}:${String(m).padStart(2,'0')} h`;if(s!==corr&&!candidates.includes(s))candidates.push(s);}};
+    addTime(endH,startM);addTime(endH+1,endM);addTime(endH-1,endM);addTime(endH,endM+15);addTime(endH,endM-15);addTime(startH+durH,startM+durM-10);
+    let k=5;while(candidates.length<3){addTime(endH,endM+k);k+=5;}
+    const guide=['Suma per separat els minuts de l’hora inicial i de la durada','Si els minuts completen una hora, transforma aquesta part abans de continuar','Suma les hores tenint en compte qualsevol transformació feta'];
+    return {type,question:q,correct:corr,options:shuffle([corr,...candidates.slice(0,3)]),guide,solution:[`Inici: ${startH}:${String(startM).padStart(2,'0')} h`,`Durada: ${durStr}`,`Hora final: ${corr}`,`✅ ${corr}`],difficulty:'medium'};
   }
 
-
-  // ── 3. DURADA ENTRE DUES HORES ──────────────────────────────────────────
   if(type===3){
-    const hI=rnd(8,12);
-    const mI=[0,15,30,45][rnd(0,3)];
-    const hF=hI+rnd(1,3);
-    const mF=[0,15,30,45][rnd(0,3)];
-
-    const dur=(hF-hI)*60+(mF-mI);
-
-    const dH=Math.floor(dur/60);
-    const dM=dur%60;
-
-    const q=`Quant de temps passa entre les ${hI}:${mI<10?'0'+mI:mI} h i les ${hF}:${mF<10?'0'+mF:mF} h?`;
-
-    const corr=dH>0
-      ?(dM>0?`${dH} h ${dM} min`:`${dH} h`)
-      :`${dM} min`;
-
-    const candidates=[];
-
-    const addDuration=(minutes)=>{
-      if(minutes<=0) return;
-
-      const h=Math.floor(minutes/60);
-      const m=minutes%60;
-
-      const s=h>0
-        ?(m>0?`${h} h ${m} min`:`${h} h`)
-        :`${m} min`;
-
-      if(s!==corr && !candidates.includes(s)){
-        candidates.push(s);
-      }
-    };
-
-    // Errors plausibles:
-    // 1. Oblidar els minuts.
-    if(dH>0){
-      addDuration(dH*60);
-    }
-
-    // 2. Afegir 15 minuts.
-    addDuration(dur+15);
-
-    // 3. Restar 15 minuts.
-    addDuration(dur-15);
-
-    // 4. Afegir 30 minuts.
-    addDuration(dur+30);
-
-    // 5. Restar 30 minuts.
-    addDuration(dur-30);
-
-    // 6. Afegir una hora.
-    addDuration(dur+60);
-
-    // 7. Restar una hora.
-    addDuration(dur-60);
-
-    // 8. Error de combinar hores i minuts.
-    if(dH>0){
-      addDuration(dH*60+30);
-      addDuration((dH+1)*60+dM);
-    }
-
-    const opts=shuffle([
-      corr,
-      ...candidates.slice(0,3)
-    ]);
-
-    // Pistes sense donar cap resultat intermedi.
-    const guide=[];
-
-    if(mF>=mI){
-      guide.push('Resta els minuts: minuts finals − minuts inicials');
-      guide.push('Resta les hores: hores finals − hores inicials');
-    }else{
-      guide.push('Com que els minuts finals són menors, transforma 1 hora en 60 minuts');
-      guide.push('Resta els minuts després de fer aquesta transformació');
-      guide.push('Resta les hores tenint en compte l’hora transformada');
-    }
-
-    guide.push('Expressa la durada combinant hores i minuts');
-
-    return {
-      question:q,
-      correct:corr,
-      options:opts,
-      guide,
-      solution:[...guide,`✅ Durada = ${corr}`],
-      difficulty:'medium'
-    };
+    const contexts=['un viatge','una prova','una visita','un entrenament','una excursió','una sessió d’estudi','un taller','una activitat'];
+    const hI=rnd(7,17),mI=[0,10,15,20,30,40,45,50][rnd(0,7)],durMins=[35,40,45,50,60,70,75,80,90,100,105,120,135,150,165][rnd(0,14)];
+    const start=hI*60+mI,end=start+durMins,hF=Math.floor(end/60),mF=end%60,dH=Math.floor(durMins/60),dM=durMins%60;
+    const ctx=contexts[rnd(0,contexts.length-1)];
+    const q=`Quant dura ${ctx} que comença a les ${hI}:${String(mI).padStart(2,'0')} h i acaba a les ${hF}:${String(mF).padStart(2,'0')} h?`;
+    const corr=dH?(dM?`${dH} h ${dM} min`:`${dH} h`):`${dM} min`,candidates=[];
+    const add=minutes=>{if(minutes<=0)return;const h=Math.floor(minutes/60),m=minutes%60,s=h?(m?`${h} h ${m} min`:`${h} h`):`${m} min`;if(s!==corr&&!candidates.includes(s))candidates.push(s);};
+    add(durMins+15);add(durMins-15);add(durMins+30);add(durMins-30);add(durMins+60);add(durMins-60);if(dH)add(dH*60);
+    let k=5;while(candidates.length<3){add(durMins+k);k+=5;}
+    const guide=['Compara primer els minuts de l’hora final i inicial','Si cal, transforma una hora en minuts abans de restar','Resta després les hores tenint en compte la transformació','Expressa la durada combinant hores i minuts'];
+    return {type,question:q,correct:corr,options:shuffle([corr,...candidates.slice(0,3)]),guide,solution:[`Inici: ${hI}:${String(mI).padStart(2,'0')} h`,`Final: ${hF}:${String(mF).padStart(2,'0')} h`,`Diferència total: ${durMins} min`,`✅ Durada = ${corr}`],difficulty:'medium'};
   }
 
-  // ── 4. SISTEMA SEXAGESIMAL ──────────────────────────────────────────────
   if(type===4){
-    const totalMin=rnd(2,5)*60+[15,20,30,40,45][rnd(0,4)];
-    const h=Math.floor(totalMin/60);
-    const m=totalMin%60;
-
-    const q=`Expressa ${totalMin} minuts en hores i minuts`;
-    const corr=`${h} h ${m} min`;
-
-    // Errors plausibles:
-    // - una hora de més
-    // - error en els minuts
-    // - no convertir correctament la part restant
-    const wrong=[
-      `${h+1} h ${m} min`,
-      `${h} h ${m+10} min`,
-      `${h-1} h ${m+30} min`
-    ].filter(x=>x!==corr);
-
-    const opts=shuffle([corr,...[...new Set(wrong)].slice(0,3)]);
-
-    const guide=[
-      'Divideix la quantitat de minuts entre 60',
-      'El quocient indica el nombre d’hores',
-      'Calcula els minuts que sobren després de formar les hores',
-      'Expressa el resultat en hores i minuts'
-    ];
-
-    return {
-      question:q,
-      correct:corr,
-      options:opts.slice(0,4),
-      guide,
-      solution:[...guide,`✅ ${corr}`],
-      difficulty:'medium'
-    };
+    const mode=rnd(0,1);
+    if(mode===0){
+      const totalMin=rnd(1,6)*60+[10,15,20,25,30,35,40,45,50,55][rnd(0,9)],h=Math.floor(totalMin/60),m=totalMin%60;
+      const q=`Expressa ${totalMin} minuts en hores i minuts`,corr=`${h} h ${m} min`;
+      const wrong=[];
+      const addHM=(hh,mm)=>{while(mm>=60){mm-=60;hh++;}while(mm<0){mm+=60;hh--;}if(hh>=0){const st=`${hh} h ${mm} min`;if(st!==corr&&!wrong.includes(st))wrong.push(st);}};
+      addHM(h+1,m);addHM(h,m+10);addHM(Math.max(0,h-1),m+30);addHM(h,m-10);
+      return {type,question:q,correct:corr,options:shuffle([corr,...wrong.slice(0,3)]),guide:['Determina quantes hores completes es poden formar amb els minuts donats','Separa la part corresponent a hores','Calcula quants minuts queden sense completar una altra hora'],solution:[`${totalMin} ÷ 60 = ${h} hores completes i sobren ${m} minuts`,`✅ ${corr}`],difficulty:'medium'};
+    }
+    const totalSec=rnd(1,8)*60+[10,15,20,30,40,45,50][rnd(0,6)],m=Math.floor(totalSec/60),s=totalSec%60;
+    const q=`Expressa ${totalSec} segons en minuts i segons`,corr=`${m} min ${s} s`;
+    const wrong=[];
+    const addMS=(mm,ss)=>{while(ss>=60){ss-=60;mm++;}while(ss<0){ss+=60;mm--;}if(mm>=0){const st=`${mm} min ${ss} s`;if(st!==corr&&!wrong.includes(st))wrong.push(st);}};
+    addMS(m+1,s);addMS(m,s+10);addMS(Math.max(0,m-1),s+30);addMS(m,s-10);
+    return {type,question:q,correct:corr,options:shuffle([corr,...wrong.slice(0,3)]),guide:['Determina quants minuts complets es poden formar amb els segons donats','Separa la part corresponent a minuts','Calcula quants segons queden sense completar un altre minut'],solution:[`${totalSec} ÷ 60 = ${m} minuts complets i sobren ${s} segons`,`✅ ${corr}`],difficulty:'medium'};
   }
 
-  // ── 5. PREGUNTES DE CONEIXEMENT ─────────────────────────────────────────
   const qs=[
-    {
-      q:'Quants minuts té un dia?',
-      a:'1440 min',
-      w:['720 min','1480 min','2400 min'],
-      g:[
-        'Recorda quantes hores té un dia',
-        'Converteix les hores del dia a minuts'
-      ]
-    },
-    {
-      q:'Quants segons té 1 hora?',
-      a:'3600 s',
-      w:['600 s','360 s','3660 s'],
-      g:[
-        'Recorda quants minuts té una hora',
-        'Converteix els minuts a segons'
-      ]
-    },
-    {
-      q:'Quants dies té un any no bixest?',
-      a:'365 dies',
-      w:['360 dies','366 dies','364 dies'],
-      g:[
-        'Distingeix entre any normal i any bixest',
-        'Recorda la durada d’un any no bixest'
-      ]
-    },
-    {
-      q:'Quants segons té un dia sencer?',
-      a:'86400 s',
-      w:['43200 s','8640 s','90000 s'],
-      g:[
-        'Passa primer el dia a hores',
-        'Després converteix les hores a minuts',
-        'Finalment converteix els minuts a segons'
-      ]
-    }
+    {q:'Quants minuts té un dia?',a:'1440 min',w:['720 min','1480 min','2400 min'],s:['Un dia té 24 hores','24 × 60 = 1440 minuts']},
+    {q:'Quants segons té 1 hora?',a:'3600 s',w:['600 s','360 s','3660 s'],s:['Una hora té 60 minuts i cada minut 60 segons','60 × 60 = 3600 segons']},
+    {q:'Quants dies té un any no bixest?',a:'365 dies',w:['360 dies','366 dies','364 dies'],s:['Un any no bixest té 365 dies']},
+    {q:'Quants segons té un dia sencer?',a:'86400 s',w:['43200 s','8640 s','90000 s'],s:['Un dia té 24 hores i cada hora 3600 segons','24 × 3600 = 86400 segons']},
+    {q:'Quantes hores té una setmana?',a:'168 h',w:['120 h','144 h','196 h'],s:['Una setmana té 7 dies i cada dia 24 hores','7 × 24 = 168 hores']},
+    {q:'Quants minuts tenen 2 hores?',a:'120 min',w:['60 min','90 min','200 min'],s:['Cada hora té 60 minuts','2 × 60 = 120 minuts']},
+    {q:'Quants dies tenen 3 setmanes?',a:'21 dies',w:['18 dies','24 dies','30 dies'],s:['Cada setmana té 7 dies','3 × 7 = 21 dies']},
+    {q:'Quants mesos tenen 2 anys?',a:'24 mesos',w:['20 mesos','22 mesos','36 mesos'],s:['Cada any té 12 mesos','2 × 12 = 24 mesos']},
+    {q:'Quants segons tenen 5 minuts?',a:'300 s',w:['250 s','360 s','500 s'],s:['Cada minut té 60 segons','5 × 60 = 300 segons']},
+    {q:'Quantes hores tenen 2 dies?',a:'48 h',w:['24 h','36 h','60 h'],s:['Cada dia té 24 hores','2 × 24 = 48 hores']},
+    {q:'Quants minuts té mitja hora?',a:'30 min',w:['20 min','45 min','60 min'],s:['Una hora té 60 minuts','La meitat de 60 és 30 minuts']},
+    {q:'Quants minuts té un quart d’hora?',a:'15 min',w:['10 min','20 min','25 min'],s:['Una hora té 60 minuts','La quarta part de 60 és 15 minuts']}
   ];
-
-  const item=qs[rnd(0,qs.length-1)];
-  const opts=shuffle([item.a,...item.w]);
-
-  return {
-    question:item.q,
-    correct:item.a,
-    options:opts,
-    guide:item.g,
-    solution:[...item.g,`✅ ${item.a}`],
-    difficulty:'easy'
-  };
+  const it=qs[rnd(0,qs.length-1)];
+  return {type,question:it.q,correct:it.a,options:shuffle([it.a,...it.w]),guide:['Recorda la relació entre les unitats de temps implicades','Aplica aquesta relació sense barrejar el sistema decimal amb el sexagesimal'],solution:[...it.s,`✅ ${it.a}`],difficulty:'easy'};
 }
 
-
 // 4. PERÍMETRES
-function genPerimetres(){
-  const type=rnd(1,5);
+function genPerimetresRaw(){
+  const type=rnd(1,6);
+  const unit=rnd(0,1)?'cm':'m';
 
   if(type===1){
-    const l=rnd(2,15);
-    const res=4*l;
-    const q=`Perímetre d'un quadrat de costat ${l} cm`;
-    const c=`${res} cm`;
-
-    const guide=[
-      'Perímetre quadrat = 4 × costat',
-      `Calcula 4 × ${l}`
-    ];
-
-    return {
-      question:q,
-      correct:c,
-      options:distractors(res,'cm',[
-        res+4,
-        res-4,
-        l*l,
-        2*l
-      ]),
-      guide,
-      solution:[...guide,`✅ P = ${c}`],
-      difficulty:'easy'
-    };
+    const l=rnd(2,30),res=4*l;
+    const templates=unit==='cm'?[`Perímetre d'un quadrat de costat ${l} cm`,`Un marc quadrat té un costat de ${l} cm. Quina longitud té tot el contorn?`,`Una peça quadrada té costat ${l} cm. Quin és el seu perímetre?`]:[`Perímetre d'un quadrat de costat ${l} m`,`Una parcel·la quadrada té costat ${l} m. Quin és el seu perímetre?`,`Una zona quadrada té costat ${l} m. Quants metres fa el contorn?`];
+    const q=templates[rnd(0,templates.length-1)],c=`${res} ${unit}`;
+    const guide=['Recorda que tots els costats d’un quadrat són iguals','Suma la longitud de tots els costats del contorn'];
+    return {type,question:q,correct:c,options:distractors(res,unit,[res+4,res-4,l*l,2*l]),guide,solution:[`P = ${l}+${l}+${l}+${l} = ${res} ${unit}`,`✅ P = ${c}`],difficulty:'easy'};
   }
 
   if(type===2){
-    const a=rnd(3,15);
-    const b=rnd(3,15);
-    const res=2*(a+b);
-    const q=`Perímetre d'un rectangle de ${a} cm × ${b} cm`;
-    const c=`${res} cm`;
-
-    const guide=[
-      'Perímetre rectangle = 2 × (base + alçada)',
-      `Suma la base i l'alçada i multiplica el resultat per 2`
-    ];
-
-    return {
-      question:q,
-      correct:c,
-      options:distractors(res,'cm',[
-        a+b,
-        a*b,
-        2*a+b,
-        2*b+a
-      ]),
-      guide,
-      solution:[...guide,`✅ P = ${c}`],
-      difficulty:'easy'
-    };
+    const a=rnd(3,35),b=rnd(2,25),res=2*(a+b);
+    const templates=unit==='cm'?[`Perímetre d'un rectangle de ${a} cm × ${b} cm`,`Una cartolina rectangular mesura ${a} cm per ${b} cm. Quin és el perímetre?`,`Un marc rectangular fa ${a} cm × ${b} cm. Quant mesura el contorn?`]:[`Perímetre d'un rectangle de ${a} m × ${b} m`,`Un jardí rectangular fa ${a} m de llarg i ${b} m d'ample. Quants metres té el contorn?`,`Una pista rectangular mesura ${a} m per ${b} m. Quin és el perímetre?`];
+    const q=templates[rnd(0,templates.length-1)],c=`${res} ${unit}`;
+    const guide=['Identifica les dues parelles de costats iguals del rectangle','Suma totes les longituds que formen el contorn'];
+    return {type,question:q,correct:c,options:distractors(res,unit,[a+b,a*b,2*a+b,2*b+a]),guide,solution:[`P = ${a}+${b}+${a}+${b} = ${res} ${unit}`,`✅ P = ${c}`],difficulty:'easy'};
   }
 
   if(type===3){
-    const a=rnd(3,10);
-    const b=rnd(3,10);
-    const c=rnd(3,10);
-    const res=a+b+c;
-    const corr=`${res} cm`;
-
-    const q=`Perímetre d'un triangle de costats ${a} cm, ${b} cm i ${c} cm`;
-
-    const guide=[
-      'Perímetre triangle = suma dels tres costats',
-      `Suma els tres costats: ${a}, ${b} i ${c}`
-    ];
-
-    return {
-      question:q,
-      correct:corr,
-      options:distractors(res,'cm',[
-        a+b,
-        a+c,
-        b+c,
-        res+a
-      ]),
-      guide,
-      solution:[...guide,`✅ P = ${corr}`],
-      difficulty:'easy'
-    };
+    let a,b,cSide;do{a=rnd(3,20);b=rnd(3,20);cSide=rnd(3,20);}while(a+b<=cSide||a+cSide<=b||b+cSide<=a);
+    const res=a+b+cSide,corr=`${res} ${unit}`;
+    const templates=unit==='cm'?[`Perímetre d'un triangle de costats ${a} cm, ${b} cm i ${cSide} cm`,`Un triangle té costats de ${a} cm, ${b} cm i ${cSide} cm. Quant mesura el contorn?`,`Una peça triangular té costats ${a}, ${b} i ${cSide} cm. Quin perímetre té?`]:[`Perímetre d'un triangle de costats ${a} m, ${b} m i ${cSide} m`,`Una parcel·la triangular té costats de ${a} m, ${b} m i ${cSide} m. Quin és el perímetre?`,`Un recorregut triangular té costats ${a}, ${b} i ${cSide} m. Quina longitud té el contorn?`];
+    const q=templates[rnd(0,templates.length-1)];
+    const guide=['Recorre el contorn del triangle','Suma les longituds dels seus tres costats'];
+    return {type,question:q,correct:corr,options:distractors(res,unit,[a+b,a+cSide,b+cSide,res+a]),guide,solution:[`P = ${a}+${b}+${cSide} = ${res} ${unit}`,`✅ P = ${corr}`],difficulty:'easy'};
   }
 
   if(type===4){
-    const r=rnd(2,10);
-    const res=Math.round(2*3.14*r*10)/10;
-    const q=`Circumferència d'un cercle de radi ${r} cm (π ≈ 3,14)`;
-    const c=`${fmtNum(res)} cm`;
-
-    const guide=[
-      'Longitud de la circumferència = 2 × π × radi',
-      'Substitueix π per 3,14',
-      `Calcula 2 × 3,14 × ${r}`
-    ];
-
-    return {
-      question:q,
-      correct:c,
-      options:distractors(
-        res,
-        'cm',
-        [
-          Math.round(3.14*r*10)/10,
-          Math.round(2*r*10)/10,
-          Math.round(2*3.14*(r+1)*10)/10,
-          Math.round(2*3.14*(r-1)*10)/10
-        ]
-      ),
-      guide,
-      solution:[...guide,`✅ C = ${c}`],
-      difficulty:'medium'
-    };
+    const r=rnd(2,20),res=Math.round(2*3.14*r*10)/10,c=`${fmtNum(res)} ${unit}`;
+    const templates=unit==='cm'?[`Longitud d'una circumferència de radi ${r} cm (π ≈ 3,14)`,`Una roda té radi ${r} cm. Quina longitud fa una volta completa? (π ≈ 3,14)`,`Un cercle té radi ${r} cm. Quant mesura la seva circumferència? (π ≈ 3,14)`]:[`Longitud d'una circumferència de radi ${r} m (π ≈ 3,14)`,`Una zona circular té radi ${r} m. Quant mesura el seu contorn? (π ≈ 3,14)`,`Una pista circular té radi ${r} m. Quina longitud té una volta? (π ≈ 3,14)`];
+    const q=templates[rnd(0,templates.length-1)];
+    const guide=['Relaciona el radi amb el diàmetre','Utilitza la relació entre la longitud de la circumferència, el diàmetre i π','Substitueix les dades només quan tinguis clara la relació que has d’aplicar'];
+    return {type,question:q,correct:c,options:distractors(res,unit,[Math.round(3.14*r*10)/10,2*r,Math.round(2*3.14*(r+1)*10)/10,Math.round(2*3.14*Math.max(1,r-1)*10)/10]),guide,solution:[`Diàmetre = 2 × ${r} = ${2*r} ${unit}`,`C = π × d ≈ 3,14 × ${2*r} = ${fmtNum(res)} ${unit}`,`✅ C = ${c}`],difficulty:'medium'};
   }
 
-  // Perímetre de figura composta
-  const W=rnd(6,12);
-  const H=rnd(6,12);
-  const w=rnd(2,W-2);
-  const hh=rnd(2,H-2);
+  if(type===5){
+    const W=rnd(6,24),H=rnd(6,24),w=rnd(2,W-2),hh=rnd(2,H-2),P=2*(W+H),c=`${P} ${unit}`;
+    const templates=[`Figura en forma de L: rectangle de ${W}×${H} ${unit} amb un racó de ${w}×${hh} ${unit} retirat. Quin és el perímetre?`,`D’un rectangle de ${W}×${H} ${unit} es retira un racó de ${w}×${hh} ${unit}. Quin perímetre té la figura en L resultant?`];
+    const q=templates[rnd(0,templates.length-1)];
+    const guide=['Recorre tot el contorn exterior de la figura en L','Relaciona els trams interiors amb les dimensions totals del rectangle inicial','Suma totes les longituds del contorn una sola vegada'];
+    return {type,question:q,correct:c,options:distractors(P,unit,[P+2*(w+hh),P-2*(w+hh),W*H,P+w+hh]),guide,solution:[`Rectangle inicial: perímetre = 2 × (${W}+${H}) = ${P} ${unit}`,`Els trams retirats es substitueixen per trams interiors de la mateixa longitud total`,`✅ P = ${c}`],difficulty:'hard'};
+  }
 
-  // En retirar un racó d'un rectangle:
-  // desapareixen els trams w i hh,
-  // però apareixen dos trams de les mateixes longituds.
-  // Per tant, el perímetre es manté igual.
-  const P=2*(W+H);
-
-  const q=`Figura en forma de L: rectangle de ${W}×${H} cm amb un racó de ${w}×${hh} cm retirat. Quin és el perímetre?`;
-  const c=`${P} cm`;
-
-  const guide=[
-    'Calcula primer el perímetre del rectangle: 2 × (amplada + alçada)',
-    'Compara els trams que desapareixen amb els nous trams de la figura',
-    'Els trams nous tenen la mateixa longitud total que els trams retirats'
-  ];
-
-  return {
-    question:q,
-    correct:c,
-    options:distractors(P,'cm',[
-      P+2*(w+hh),
-      P-2*(w+hh),
-      W*H,
-      P+w+hh
-    ]),
-    guide,
-    solution:[
-      ...guide,
-      `Perímetre del rectangle = 2 × (${W} + ${H})`,
-      `Per tant, el perímetre es manté igual`,
-      `✅ P = ${c}`
-    ],
-    difficulty:'hard'
-  };
+  const n=[5,6,7,8,9,10,12][rnd(0,6)],side=rnd(2,18),res=n*side,c=`${res} ${unit}`;
+  const names={5:'pentàgon',6:'hexàgon',7:'heptàgon',8:'octàgon',9:'eneàgon',10:'decàgon',12:'dodecàgon'};
+  const q=`Un ${names[n]} regular té costat ${side} ${unit}. Quin és el seu perímetre?`;
+  const guide=['Identifica quants costats iguals té el polígon regular','Multiplica la longitud d’un costat pel nombre total de costats'];
+  return {type,question:q,correct:c,options:distractors(res,unit,[n+side,2*n*side,side*side,res+side]),guide,solution:[`P = ${n} × ${side} = ${res} ${unit}`,`✅ P = ${c}`],difficulty:'medium'};
 }
 
 // ── 5. ÀREES (inclou figures compostes) ───────────────────────────────────
-function genArees(){
+function genAreesRaw(){
   const type=rnd(1,6);
 
-  // Genera 4 opcions: 1 correcta + 3 distractors diferents
-  function areaOptions(correct, unit, candidates){
-    const values=[];
-    const used=new Set();
-
-    // Afegim la correcta
-    const correctNum=Number(correct);
-    used.add(correctNum);
-    values.push(`${fmtNum(correctNum)} ${unit}`);
-
-    // Afegim fins a 3 distractors diferents
-    for(const v of candidates){
-      const n=Number(v);
-
-      if(!Number.isFinite(n)) continue;
-      if(n<=0) continue;
-      if(used.has(n)) continue;
-
-      used.add(n);
-      values.push(`${fmtNum(n)} ${unit}`);
-
-      if(values.length===4) break;
-    }
-
-    // Seguretat: si algun conjunt de candidats genera coincidències,
-    // completem fins a 4 opcions.
-    let extra=1;
-
-    while(values.length<4){
-      let n=correctNum+extra;
-
-      if(n<=0 || used.has(n)){
-        extra++;
-        continue;
-      }
-
-      used.add(n);
-      values.push(`${fmtNum(n)} ${unit}`);
-      extra++;
-    }
-
-    // Barreja les opcions
-    for(let i=values.length-1;i>0;i--){
-      const j=rnd(0,i);
-      [values[i],values[j]]=[values[j],values[i]];
-    }
-
-    return values;
+  function areaOptions(correct,unit,candidates){
+    const values=[],used=new Set(),correctNum=Number(correct);used.add(correctNum);values.push(`${fmtNum(correctNum)} ${unit}`);
+    for(const v of candidates){const n=Number(v);if(!Number.isFinite(n)||n<=0||used.has(n))continue;used.add(n);values.push(`${fmtNum(n)} ${unit}`);if(values.length===4)break;}
+    let extra=1;while(values.length<4){const n=correctNum+extra;if(n>0&&!used.has(n)){used.add(n);values.push(`${fmtNum(n)} ${unit}`);}extra++;}
+    return shuffle(values);
   }
 
-  // ── 1. QUADRAT ──────────────────────────────────────────────────────────
+  const u=rnd(0,1)?'cm':'m',u2=`${u}²`;
+
   if(type===1){
-    const l=rnd(2,12);
-    const res=l*l;
-
-    const q=`Àrea d'un quadrat de costat ${l} cm`;
-    const c=`${res} cm²`;
-
-    const guide=[
-      '1. Aplica la fórmula de l’àrea del quadrat: A = costat².',
-      '2. Eleva el costat al quadrat.'
-    ];
-
-    const candidates=[
-      4*l,       // perímetre
-      l*3,       // multiplicació incorrecta
-      res+l,     // suma incorrecta
-      res*2      // duplica l'àrea
-    ];
-
-    return {
-      question:q,
-      correct:c,
-      options:areaOptions(res,'cm²',candidates),
-      guide,
-      solution:[
-        `A = costat²`,
-        `${l}² = ${l} × ${l} = ${res} cm²`,
-        `✅ A = ${c}`
-      ],
-      difficulty:'easy'
-    };
+    const l=rnd(2,25),res=l*l,c=`${res} ${u2}`;
+    const qs=u==='cm'?[`Àrea d'un quadrat de costat ${l} cm`,`Una rajola quadrada té costat ${l} cm. Quina superfície ocupa?`,`Una peça quadrada té costat ${l} cm. Quina és la seva àrea?`]:[`Àrea d'un quadrat de costat ${l} m`,`Una parcel·la quadrada té costat ${l} m. Quina és la seva àrea?`,`Una zona quadrada té costat ${l} m. Quina superfície ocupa?`];
+    const guide=['Identifica que els dos costats que determinen l’àrea tenen la mateixa longitud','Multiplica el costat per ell mateix'];
+    return {type,question:qs[rnd(0,qs.length-1)],correct:c,options:areaOptions(res,u2,[4*l,l*3,res+l,res*2]),guide,solution:[`A = costat²`,`${l}² = ${l} × ${l} = ${res} ${u2}`,`✅ A = ${c}`],difficulty:'easy'};
   }
 
-  // ── 2. RECTANGLE ────────────────────────────────────────────────────────
   if(type===2){
-    const b=rnd(2,12);
-    const h=rnd(2,12);
-    const res=b*h;
-
-    const q=`Àrea d'un rectangle de base ${b} cm i alçada ${h} cm`;
-    const c=`${res} cm²`;
-
-    const guide=[
-      '1. Aplica la fórmula de l’àrea del rectangle: A = base × alçada.',
-      '2. Multiplica la base per l’alçada.'
-    ];
-
-    const candidates=[
-      2*(b+h),       // perímetre
-      b*h+b,         // afegeix la base
-      b*h+h,         // afegeix l'alçada
-      2*b*h          // duplica l'àrea
-    ];
-
-    return {
-      question:q,
-      correct:c,
-      options:areaOptions(res,'cm²',candidates),
-      guide,
-      solution:[
-        `A = base × alçada`,
-        `${b} × ${h} = ${res} cm²`,
-        `✅ A = ${c}`
-      ],
-      difficulty:'easy'
-    };
+    const b=rnd(2,30),h=rnd(2,25),res=b*h,c=`${res} ${u2}`;
+    const qs=u==='cm'?[`Àrea d'un rectangle de base ${b} cm i alçada ${h} cm`,`Una cartolina rectangular mesura ${b} cm × ${h} cm. Quina és la seva àrea?`,`Una fotografia rectangular fa ${b} cm per ${h} cm. Quina superfície ocupa?`]:[`Àrea d'un rectangle de base ${b} m i alçada ${h} m`,`Una habitació rectangular fa ${b} m per ${h} m. Quina superfície té?`,`Una pista rectangular mesura ${b} m × ${h} m. Quina és la seva àrea?`];
+    const guide=['Identifica la base i l’alçada del rectangle','Multiplica aquestes dues dimensions per obtenir la superfície'];
+    return {type,question:qs[rnd(0,qs.length-1)],correct:c,options:areaOptions(res,u2,[2*(b+h),b*h+b,b*h+h,2*b*h]),guide,solution:[`A = base × alçada`,`${b} × ${h} = ${res} ${u2}`,`✅ A = ${c}`],difficulty:'easy'};
   }
 
-  // ── 3. TRIANGLE ─────────────────────────────────────────────────────────
   if(type===3){
-    const b=rnd(4,14);
-    const h=rnd(3,10);
-    const res=b*h/2;
-
-    const q=`Àrea d'un triangle de base ${b} cm i alçada ${h} cm`;
-    const c=`${fmtNum(res)} cm²`;
-
-    const guide=[
-      '1. Aplica la fórmula de l’àrea del triangle: A = (base × alçada) / 2.',
-      '2. Multiplica la base per l’alçada.',
-      '3. Divideix el resultat entre 2.'
-    ];
-
-    const candidates=[
-      b*h,        // oblida dividir entre 2
-      res*2,      // duplica el resultat
-      res+b,      // error de càlcul
-      res+h       // error de càlcul
-    ];
-
-    return {
-      question:q,
-      correct:c,
-      options:areaOptions(res,'cm²',candidates),
-      guide,
-      solution:[
-        `A = (base × alçada) / 2`,
-        `(${b} × ${h}) / 2`,
-        `= ${b*h} / 2`,
-        `= ${fmtNum(res)} cm²`,
-        `✅ A = ${c}`
-      ],
-      difficulty:'easy'
-    };
+    const b=rnd(4,30),h=rnd(3,24),res=b*h/2,c=`${fmtNum(res)} ${u2}`;
+    const qs=u==='cm'?[`Àrea d'un triangle de base ${b} cm i alçada ${h} cm`,`Un triangle té base ${b} cm i alçada ${h} cm. Quina àrea té?`,`Una peça triangular té base ${b} cm i alçada perpendicular ${h} cm. Calcula'n l'àrea.`]:[`Àrea d'un triangle de base ${b} m i alçada ${h} m`,`Una parcel·la triangular té base ${b} m i alçada ${h} m. Quina àrea té?`,`Una zona triangular té base ${b} m i alçada perpendicular ${h} m. Calcula'n l'àrea.`];
+    const guide=['Imagina un rectangle amb la mateixa base i la mateixa alçada que el triangle','Calcula primer l’àrea d’aquest rectangle','El triangle ocupa la meitat d’aquesta superfície'];
+    return {type,question:qs[rnd(0,qs.length-1)],correct:c,options:areaOptions(res,u2,[b*h,res+b,res+h,res/2]),guide,solution:[`A = (base × alçada) / 2`,`(${b} × ${h}) / 2 = ${fmtNum(res)} ${u2}`,`✅ A = ${c}`],difficulty:'easy'};
   }
 
-  // ── 4. ROMBE ────────────────────────────────────────────────────────────
   if(type===4){
-    const d1=rnd(4,14)*2;
-    const d2=rnd(3,10)*2;
-    const res=d1*d2/2;
-
-    const q=`Àrea d'un rombe de diagonals ${d1} cm i ${d2} cm`;
-    const c=`${fmtNum(res)} cm²`;
-
-    const guide=[
-      '1. Aplica la fórmula de l’àrea del rombe: A = (diagonal major × diagonal menor) / 2.',
-      '2. Multiplica les dues diagonals.',
-      '3. Divideix el resultat entre 2.'
-    ];
-
-    const candidates=[
-      d1*d2,     // oblida dividir entre 2
-      res*2,     // duplica el resultat
-      res+d1,    // error de càlcul
-      res+d2     // error de càlcul
-    ];
-
-    return {
-      question:q,
-      correct:c,
-      options:areaOptions(res,'cm²',candidates),
-      guide,
-      solution:[
-        'A = (diagonal major × diagonal menor) / 2',
-        `(${d1} × ${d2}) / 2`,
-        `= ${d1*d2} / 2`,
-        `= ${fmtNum(res)} cm²`,
-        `✅ A = ${c}`
-      ],
-      difficulty:'medium'
-    };
+    const d1=rnd(4,20)*2,d2=rnd(3,15)*2,res=d1*d2/2,c=`${fmtNum(res)} ${u2}`;
+    const q=`Àrea d'un rombe de diagonals ${d1} ${u} i ${d2} ${u}`;
+    const guide=['Identifica les dues diagonals del rombe','Multiplica les dues diagonals','Pren la meitat del producte per obtenir l’àrea'];
+    return {type,question:q,correct:c,options:areaOptions(res,u2,[d1*d2,res+d1,res+d2,res/2]),guide,solution:[`A = (diagonal major × diagonal menor) / 2`,`(${d1} × ${d2}) / 2 = ${fmtNum(res)} ${u2}`,`✅ A = ${c}`],difficulty:'medium'};
   }
 
-  // ── 5. TRAPEZI ──────────────────────────────────────────────────────────
   if(type===5){
-    const B=rnd(6,14);
-    const b=rnd(2,B-2);
-    const h=rnd(3,10);
-    const res=(B+b)*h/2;
-
-    const q=`Àrea d'un trapezi de bases ${B} cm i ${b} cm, alçada ${h} cm`;
-    const c=`${fmtNum(res)} cm²`;
-
-    const guide=[
-      '1. Aplica la fórmula de l’àrea del trapezi: A = (base major + base menor) × alçada / 2.',
-      '2. Suma les dues bases.',
-      '3. Multiplica la suma per l’alçada.',
-      '4. Divideix el resultat entre 2.'
-    ];
-
-    const candidates=[
-      (B+b)*h,          // oblida dividir entre 2
-      (B+b)*h/2+h,      // afegeix l'alçada al resultat
-      B*h/2,            // utilitza només la base major
-      b*h/2             // utilitza només la base menor
-    ];
-
-    return {
-      question:q,
-      correct:c,
-      options:areaOptions(res,'cm²',candidates),
-      guide,
-      solution:[
-        'A = (base major + base menor) × alçada / 2',
-        `(${B} + ${b}) × ${h} / 2`,
-        `= ${B+b} × ${h} / 2`,
-        `= ${(B+b)*h} / 2`,
-        `= ${fmtNum(res)} cm²`,
-        `✅ A = ${c}`
-      ],
-      difficulty:'medium'
-    };
+    const B=rnd(6,30),b=rnd(2,B-2),h=rnd(3,20),res=(B+b)*h/2,c=`${fmtNum(res)} ${u2}`;
+    const q=`Àrea d'un trapezi de bases ${B} ${u} i ${b} ${u}, alçada ${h} ${u}`;
+    const guide=['Identifica les dues bases paral·leles i l’alçada','Suma les dues bases i combina aquesta suma amb l’alçada','Pren la meitat del producte obtingut'];
+    return {type,question:q,correct:c,options:areaOptions(res,u2,[(B+b)*h,B*h/2,b*h/2,res+h]),guide,solution:[`A = (base major + base menor) × alçada / 2`,`(${B} + ${b}) × ${h} / 2 = ${fmtNum(res)} ${u2}`,`✅ A = ${c}`],difficulty:'medium'};
   }
 
-  // ── 6. FIGURA COMPOSTA ─────────────────────────────────────────────────
-  const w1=rnd(4,8);
-  const h1=rnd(4,8);
-  const w2=rnd(2,w1-1);
-  const h2=rnd(2,h1-1);
-
-  const gran=w1*h1;
-  const petit=w2*h2;
-  const res=gran-petit;
-
-  const q=`Àrea d'una figura en L: rectangle gran ${w1}×${h1} cm menys rectangle petit ${w2}×${h2} cm`;
-  const c=`${res} cm²`;
-
-  const guide=[
-    '1. Calcula l’àrea del rectangle gran.',
-    '2. Calcula l’àrea del rectangle petit.',
-    '3. Com que el rectangle petit es treu de la figura, resta les dues àrees.'
-  ];
-
-  const candidates=[
-    gran,             // només calcula el rectangle gran
-    petit,            // només calcula el rectangle petit
-    gran+petit,       // suma en lloc de restar
-    res+petit         // suma el rectangle petit en lloc de restar-lo
-  ];
-
-  return {
-    question:q,
-    correct:c,
-    options:areaOptions(res,'cm²',candidates),
-    guide,
-    solution:[
-      `Àrea del rectangle gran: ${w1} × ${h1} = ${gran} cm²`,
-      `Àrea del rectangle petit: ${w2} × ${h2} = ${petit} cm²`,
-      `Àrea total = ${gran} − ${petit} = ${res} cm²`,
-      `✅ A = ${c}`
-    ],
-    difficulty:'hard'
-  };
+  const w1=rnd(5,16),h1=rnd(5,16),w2=rnd(2,w1-1),h2=rnd(2,h1-1),gran=w1*h1,petit=w2*h2,res=gran-petit,c=`${fmtNum(res)} ${u2}`;
+  const qs=[`Àrea d'una figura en L: rectangle gran ${w1}×${h1} ${u} menys rectangle petit ${w2}×${h2} ${u}`,`D’un rectangle de ${w1}×${h1} ${u} es retalla un rectangle de ${w2}×${h2} ${u}. Quina àrea queda?`];
+  const guide=['Calcula l’àrea del rectangle gran','Calcula l’àrea de la part rectangular que es retira','Resta la part retirada de la superfície inicial'];
+  return {type,question:qs[rnd(0,qs.length-1)],correct:c,options:areaOptions(res,u2,[gran,petit,gran+petit,res+petit]),guide,solution:[`Àrea gran: ${w1} × ${h1} = ${gran} ${u2}`,`Àrea retirada: ${w2} × ${h2} = ${petit} ${u2}`,`Àrea final = ${gran} − ${petit} = ${res} ${u2}`,`✅ A = ${c}`],difficulty:'hard'};
 }
 
 // ── 6. ESTIMACIÓ ───────────────────────────────────────────────────────────
@@ -1609,6 +975,7 @@ function genArees(){
 // Quan s'acaba, es torna a omplir i es barreja.
 
 let bossaEstimacio = [];
+let lastEstimacioType = null;
 
 // ── CREAR LA BOSSA ─────────────────────────────────────────────────────────
 function crearBossaEstimacio(){
@@ -1884,14 +1251,26 @@ function crearBossaEstimacio(){
 // ── OBTENIR UNA PREGUNTA DE LA BOSSA ──────────────────────────────────────
 function treureEstimacio(){
 
-  // Si la bossa està buida, en creem una de nova i la barregem.
   if(bossaEstimacio.length===0){
-    bossaEstimacio=crearBossaEstimacio();
-    bossaEstimacio=shuffle(bossaEstimacio);
+    bossaEstimacio=shuffle(crearBossaEstimacio());
   }
 
-  // Agafem la primera pregunta i l'eliminem de la bossa.
-  return bossaEstimacio.pop();
+  // Evitem, quan és possible, dues estimacions de la mateixa família seguides.
+  if(lastEstimacioType!==null && bossaEstimacio.length>1 && bossaEstimacio[bossaEstimacio.length-1].type===lastEstimacioType){
+    let idx=-1;
+    for(let i=bossaEstimacio.length-2;i>=0;i--){
+      if(bossaEstimacio[i].type!==lastEstimacioType){idx=i;break;}
+    }
+    if(idx>=0){
+      const tmp=bossaEstimacio[idx];
+      bossaEstimacio[idx]=bossaEstimacio[bossaEstimacio.length-1];
+      bossaEstimacio[bossaEstimacio.length-1]=tmp;
+    }
+  }
+
+  const item=bossaEstimacio.pop();
+  lastEstimacioType=item.type;
+  return item;
 }
 
 
@@ -1907,7 +1286,7 @@ function genEstimacio(){
   // ── LONGITUD ────────────────────────────────────────────────────────────
   if(item.type===1){
 
-    question=`Quina és la mesura aproximada de ${item.obj}?`;
+    question=`Quina mesura aproximada té ${item.obj}?`;
 
     guide=[
       'Pensa en una mida coneguda que et serveixi de referència.',
@@ -1921,7 +1300,7 @@ function genEstimacio(){
   // ── CAPACITAT ───────────────────────────────────────────────────────────
   else if(item.type===2){
 
-    question=`Quina és la capacitat de ${item.obj}?`;
+    question=`Quina capacitat aproximada té ${item.obj}?`;
 
     guide=[
       'Pensa en un recipient de capacitat coneguda que et serveixi de referència.',
@@ -1935,7 +1314,7 @@ function genEstimacio(){
   // ── MASSA ───────────────────────────────────────────────────────────────
   else if(item.type===3){
 
-    question=`Quina és la massa aproximada de ${item.obj}?`;
+    question=`Quina massa aproximada té ${item.obj}?`;
 
     guide=[
       'Pensa en un objecte o una quantitat de massa coneguda que et serveixi de referència.',
@@ -1949,7 +1328,7 @@ function genEstimacio(){
   // ── ÀREES ───────────────────────────────────────────────────────────────
   else{
 
-    question=`Quina és l'àrea aproximada de ${item.obj}?`;
+    question=`Quina àrea aproximada té ${item.obj}?`;
 
     guide=[
       'Identifica les dues dimensions que determinen la superfície.',
@@ -1966,20 +1345,22 @@ function genEstimacio(){
   ]);
 
   return {
+    type:item.type,
     question,
     correct:item.real,
     options,
     guide,
     solution:[
-      ...guide,
-      `✅ ${item.obj} ≈ ${item.real}`
+      `Una estimació raonable per a ${item.obj} és aproximadament ${item.real}.`,
+      `Les altres opcions tenen una escala poc coherent amb la mida o la magnitud de l'objecte.`,
+      `✅ ${item.real}`
     ],
     difficulty
   };
 }
 
 // ── 7. PROBLEMES DE CONTEXT ────────────────────────────────────────────────
-function genProblemes(){
+function genProblemesRaw(){
 
   const type = rnd(1,6);
 
@@ -2026,10 +1407,10 @@ function genProblemes(){
     }
 
     return shuffle([
-      `${correctNum}${suffix}`,
-      `${clean[0]}${suffix}`,
-      `${clean[1]}${suffix}`,
-      `${clean[2]}${suffix}`
+      `${fmtNum(correctNum)}${suffix}`,
+      `${fmtNum(clean[0])}${suffix}`,
+      `${fmtNum(clean[1])}${suffix}`,
+      `${fmtNum(clean[2])}${suffix}`
     ]);
   }
 
@@ -2056,7 +1437,7 @@ function genProblemes(){
 
     const q =
       `Una habitació de ${L}×${W} m ha de pavimentar-se amb rajoles ` +
-      `de ${tileL}×${tileW} cm. Quantes rajoles calen?`;
+      `de ${tileL}×${tileW} cm. Suposant que els retalls es poden aprofitar i sense pèrdues, quantes rajoles calen?`;
 
     const c = `${n} rajoles`;
 
@@ -2084,15 +1465,16 @@ function genProblemes(){
 
     const solution = [
       `Àrea de l'habitació = ${L}×${W} = ${areaHab} m²`,
-      `Rajola: ${tileL} cm = ${tileLm} m`,
-      `Rajola: ${tileW} cm = ${tileWm} m`,
-      `Àrea d'una rajola = ${tileLm}×${tileWm} = ${areaTileM} m²`,
-      `Nombre de rajoles = ${areaHab} ÷ ${areaTileM} = ${exact}`,
-      `Com que necessitem rajoles senceres: ${n}`,
+      `Rajola: ${tileL} cm = ${fmtNum(tileLm)} m`,
+      `Rajola: ${tileW} cm = ${fmtNum(tileWm)} m`,
+      `Àrea d'una rajola = ${fmtNum(tileLm)}×${fmtNum(tileWm)} = ${fmtNum(areaTileM)} m²`,
+      `Nombre de rajoles = ${areaHab} ÷ ${fmtNum(areaTileM)} ≈ ${fmtNum(exact)}`,
+      `Com que necessitem rajoles senceres, arrodonim cap amunt: ${n}`,
       `✅ ${c}`
     ];
 
     return {
+    type:type,
       question:q,
       correct:c,
       options:opts,
@@ -2119,7 +1501,7 @@ function genProblemes(){
 
     const q =
       `Una habitació de ${L}×${W} m i ${H} m d'alçada s'ha de pintar ` +
-      `(només parets). Un pot cobreix ${rendiment} m². Quants pots calen?`;
+      `(només parets, sense descomptar portes ni finestres). Un pot cobreix ${rendiment} m². Quants pots calen?`;
 
     const c = `${pots} pots`;
 
@@ -2150,12 +1532,13 @@ function genProblemes(){
     const solution = [
       `Perímetre = 2×(${L}+${W}) = ${perimetre} m`,
       `Àrea de les parets = ${perimetre}×${H} = ${areaParet} m²`,
-      `Nombre de pots = ${areaParet} ÷ ${rendiment} = ${exact}`,
+      `Nombre de pots = ${areaParet} ÷ ${rendiment} ≈ ${fmtNum(exact)}`,
       `Com que necessitem pots sencers: ${pots}`,
       `✅ ${c}`
     ];
 
     return {
+    type:type,
       question:q,
       correct:c,
       options:opts,
@@ -2208,6 +1591,7 @@ function genProblemes(){
     ];
 
     return {
+    type:type,
       question:q,
       correct:c,
       options:opts,
@@ -2308,6 +1692,7 @@ function genProblemes(){
     ];
 
     return {
+    type:type,
       question:q,
       correct:corr,
       options:opts,
@@ -2346,7 +1731,7 @@ function genProblemes(){
     // - confondre la conversió de kg i g
     const candidates = [
       kg,
-      total / (tamPaquet * 2),
+      Math.floor(total / (tamPaquet * 2)),
       total / (tamPaquet / 2),
       total / 100
     ];
@@ -2360,6 +1745,7 @@ function genProblemes(){
     ];
 
     return {
+    type:type,
       question:q,
       correct:c,
       options:opts,
@@ -2413,6 +1799,7 @@ function genProblemes(){
     ];
 
     return {
+    type:type,
       question:q,
       correct:c,
       options:opts,
@@ -2423,141 +1810,381 @@ function genProblemes(){
   }
 }
 
+
+// ── 8. MESURAMENT, ESCALES I PRECISIÓ (1r ESO) ───────────────────────────
+function genMesuramentPrecisioRaw(){
+  const type=rnd(1,8);
+
+  function opts4(correct,wrongs){
+    const arr=[correct];
+    for(const w of wrongs){if(w!==correct&&!arr.includes(w))arr.push(w);if(arr.length===4)break;}
+    let k=1;while(arr.length<4){const w=`Opció ${k++}`;if(!arr.includes(w))arr.push(w);}
+    return shuffle(arr.slice(0,4));
+  }
+
+  if(type===1){
+    const items=[
+      {q:'la llargada d’una aula',a:'Cinta mètrica',w:['Termòmetre','Balança','Proveta graduada'],mag:'longitud'},
+      {q:'el diàmetre d’una moneda amb precisió',a:'Peu de rei',w:['Cinta mètrica','Cronòmetre','Balança'],mag:'longitud petita'},
+      {q:'la massa d’una motxilla',a:'Balança',w:['Transportador','Cinta mètrica','Termòmetre'],mag:'massa'},
+      {q:'la temperatura de l’aigua',a:'Termòmetre',w:['Balança','Regle','Cronòmetre'],mag:'temperatura'},
+      {q:'el volum d’un líquid al laboratori',a:'Proveta graduada',w:['Transportador','Peu de rei','Cronòmetre'],mag:'capacitat'},
+      {q:'l’amplitud d’un angle dibuixat',a:'Transportador',w:['Balança','Proveta graduada','Cinta mètrica'],mag:'angle'},
+      {q:'el temps que tarda un atleta en una cursa curta',a:'Cronòmetre',w:['Balança','Regle','Proveta graduada'],mag:'temps'},
+      {q:'la longitud d’un passadís',a:'Cinta mètrica',w:['Peu de rei','Termòmetre','Cronòmetre'],mag:'longitud'},
+      {q:'el gruix d’una peça petita amb precisió',a:'Peu de rei',w:['Cinta mètrica','Balança','Transportador'],mag:'longitud petita'},
+      {q:'la massa d’un ingredient de cuina',a:'Balança',w:['Cronòmetre','Termòmetre','Cinta mètrica'],mag:'massa'}
+    ];
+    const it=items[rnd(0,items.length-1)];
+    return {type,question:`Quin instrument és més adequat per mesurar ${it.q}?`,correct:it.a,options:opts4(it.a,it.w),guide:['Identifica quina magnitud vols mesurar','Pensa quin grau de precisió necessites','Tria l’instrument dissenyat per a aquella magnitud i precisió'],solution:[`Magnitud: ${it.mag}`,`Instrument adequat: ${it.a}`,`✅ ${it.a}`],difficulty:'easy'};
+  }
+
+  if(type===2){
+    const items=[
+      {q:'la longitud d’un llapis',a:'cm',w:['km','kg','l']},
+      {q:'la distància entre dues ciutats',a:'km',w:['cm','ml','g']},
+      {q:'la massa d’una poma',a:'g',w:['km','l','h']},
+      {q:'la massa d’un camió',a:'t',w:['mg','cm','ml']},
+      {q:'la capacitat d’una tassa',a:'ml',w:['km','kg','m²']},
+      {q:'la superfície d’una habitació',a:'m²',w:['m','l','g']},
+      {q:'la durada d’una classe',a:'min',w:['kg','cm²','ml']},
+      {q:'l’amplitud d’un angle',a:'graus',w:['metres','litres','grams']},
+      {q:'la longitud d’un carrer',a:'m',w:['mg','ml','s']},
+      {q:'la capacitat d’una piscina',a:'l',w:['cm²','kg','min']},
+      {q:'la massa d’un medicament petit',a:'mg',w:['km','l','h']},
+      {q:'la superfície d’una pista esportiva',a:'m²',w:['m','kg','ml']}
+    ];
+    const it=items[rnd(0,items.length-1)];
+    return {type,question:`Quina unitat és més adequada per expressar ${it.q}?`,correct:it.a,options:opts4(it.a,it.w),guide:['Identifica la magnitud que es vol expressar','Imagina l’ordre de magnitud habitual de l’objecte o situació','Tria una unitat que doni un valor fàcil d’interpretar'],solution:[`Unitat adequada: ${it.a}`,`✅ ${it.a}`],difficulty:'easy'};
+  }
+
+  if(type===3){
+    const one=[2,5,10,20][rnd(0,3)];
+    const d=rnd(2,8);
+    const real=one*d;
+    const q=`En un plànol, 1 cm representa ${one} m reals. Una paret hi mesura ${d} cm. Quina longitud real té?`;
+    const c=`${real} m`;
+    return {type,question:q,correct:c,options:distractors(real,'m',[real/one,real+one,d]),guide:['Interpreta què representa una unitat de longitud al plànol','Mantén la mateixa proporció per a la longitud dibuixada','Expressa el resultat amb la unitat real indicada'],solution:[`1 cm del plànol ↔ ${one} m reals`,`${d} cm ↔ ${d} × ${one} = ${real} m`,`✅ ${c}`],difficulty:'medium'};
+  }
+
+  if(type===4){
+    const real=[10,20,25,50,100][rnd(0,4)];
+    const diff=[0.5,1,2][rnd(0,2)];
+    const measured=Math.round((real+(rnd(0,1)?diff:-diff))*10)/10;
+    const err=Math.abs(measured-real);
+    const q=`El valor de referència és ${fmtNum(real)} cm i una mesura dona ${fmtNum(measured)} cm. Quin és l'error absolut?`;
+    const c=`${fmtNum(err)} cm`;
+    return {type,question:q,correct:c,options:distractors(err,'cm',[err*2,Math.abs(measured),Math.abs(real)]),guide:['Compara el valor mesurat amb el valor de referència','Calcula la diferència entre tots dos sense tenir en compte el signe','Mantén la mateixa unitat de la mesura'],solution:[`Error absolut = |${fmtNum(measured)} − ${fmtNum(real)}|`,`= ${fmtNum(err)} cm`,`✅ ${c}`],difficulty:'medium'};
+  }
+
+  if(type===5){
+    const real=[20,40,50,100][rnd(0,3)];
+    const pct=[2,5,10][rnd(0,2)];
+    const err=real*pct/100;
+    const measured=Math.round((real+(rnd(0,1)?err:-err))*100)/100;
+    const q=`El valor de referència és ${fmtNum(real)} cm i la mesura és ${fmtNum(measured)} cm. Quin és l'error relatiu percentual?`;
+    const c=`${fmtNum(pct)}%`;
+    const wrong=[`${fmtNum(err)}%`,`${fmtNum(pct*2)}%`,`${fmtNum(pct/2)}%`,`${fmtNum(real)}%`];
+    return {type,question:q,correct:c,options:opts4(c,wrong),guide:['Calcula primer l’error absolut','Compara aquest error amb el valor de referència mitjançant una divisió','Expressa la proporció obtinguda en percentatge'],solution:[`Error absolut = |${fmtNum(measured)} − ${fmtNum(real)}| = ${fmtNum(err)} cm`,`Error relatiu = ${fmtNum(err)} ÷ ${fmtNum(real)} = ${fmtNum(err/real)}`,`En percentatge: ${fmtNum(pct)}%`,`✅ ${c}`],difficulty:'hard'};
+  }
+
+  if(type===6){
+    if(rnd(0,1)===0){
+      let a,b,c;
+      do{a=rnd(30,80);b=rnd(30,80);c=180-a-b;}while(c<=20||c>=120);
+      const q=`En un triangle, dos angles mesuren ${a}° i ${b}°. Quant mesura el tercer angle?`;
+      const corr=`${c}°`;
+      return {type,question:q,correct:corr,options:opts4(corr,[`${a+b}°`,`${180-c}°`,`${c+10}°`,`${Math.max(1,c-10)}°`]),guide:['Recorda la suma dels angles interiors d’un triangle','Suma els angles que coneixes','Resta aquesta suma del total dels angles interiors'],solution:[`${a}° + ${b}° = ${a+b}°`,`180° − ${a+b}° = ${c}°`,`✅ ${corr}`],difficulty:'medium'};
+    }
+    let a,b,c,d;
+    do{a=rnd(70,110);b=rnd(70,110);c=rnd(70,110);d=360-a-b-c;}while(d<=30||d>=160);
+    const q=`En un quadrilàter, tres angles mesuren ${a}°, ${b}° i ${c}°. Quant mesura el quart angle?`;
+    const corr=`${d}°`;
+    return {type,question:q,correct:corr,options:opts4(corr,[`${a+b+c}°`,`${Math.abs(180-d)}°`,`${d+20}°`,`${Math.max(1,d-20)}°`]),guide:['Recorda la suma dels angles interiors d’un quadrilàter','Suma els tres angles coneguts','Resta aquesta suma del total dels angles interiors'],solution:[`${a}° + ${b}° + ${c}° = ${a+b+c}°`,`360° − ${a+b+c}° = ${d}°`,`✅ ${corr}`],difficulty:'medium'};
+  }
+
+  if(type===7){
+    const d=[5,10,20,25][rnd(0,3)];
+    const C=Math.round(3.14*d*100)/100;
+    const q=`Una circumferència mesura aproximadament ${fmtNum(C)} cm i el seu diàmetre és ${d} cm. Quin valor aproximat s'obté en dividir la longitud de la circumferència pel diàmetre?`;
+    const corr='3,14';
+    return {type,question:q,correct:corr,options:opts4(corr,['6,28','1,57','2','4']),guide:['Forma el quocient entre la longitud de la circumferència i el diàmetre','Calcula aquesta divisió','Relaciona el valor obtingut amb la constant π'],solution:[`${fmtNum(C)} ÷ ${d} ≈ 3,14`,`Aquesta raó és π`,`✅ ${corr}`],difficulty:'medium'};
+  }
+
+  const items=[
+    {q:'Volem posar una tanca al voltant d’un jardí. Quina magnitud hem de calcular?',a:'Perímetre',w:['Àrea','Volum','Capacitat']},
+    {q:'Volem cobrir el terra d’una habitació amb rajoles. Quina magnitud hem de calcular?',a:'Àrea',w:['Perímetre','Massa','Temps']},
+    {q:'Volem saber quanta cinta cal per envoltar una cartolina. Quina magnitud hem de calcular?',a:'Perímetre',w:['Àrea','Capacitat','Massa']},
+    {q:'Volem saber quanta pintura cal per cobrir una paret. Quina magnitud de la paret és rellevant?',a:'Àrea',w:['Perímetre','Temps','Massa']},
+    {q:'Volem posar una sanefa al voltant d’una taula rectangular. Quina magnitud necessitem?',a:'Perímetre',w:['Àrea','Volum','Massa']},
+    {q:'Volem posar gespa a tot un jardí rectangular. Quina magnitud necessitem?',a:'Àrea',w:['Perímetre','Capacitat','Temps']},
+    {q:'Volem col·locar un marc al voltant d’un pòster. Quina magnitud hem de calcular?',a:'Perímetre',w:['Àrea','Massa','Volum']},
+    {q:'Volem enrajolar tota una terrassa. Quina magnitud de la terrassa és rellevant?',a:'Àrea',w:['Perímetre','Temps','Capacitat']}
+  ];
+  const it=items[rnd(0,items.length-1)];
+  return {type,question:it.q,correct:it.a,options:opts4(it.a,it.w),guide:['Decideix si la situació parla del contorn o de la superfície interior','Relaciona el context amb la magnitud geomètrica adequada'],solution:[`Magnitud adequada: ${it.a}`,`✅ ${it.a}`],difficulty:'easy'};
+}
+
+// ── AMPLIACIÓ 2n ESO · VOLUM I CAPACITAT ─────────────────────────────────
+function genVolumCapacitatRaw(){
+  const type=rnd(1,6);
+
+  if(type===1){
+    const a=rnd(2,8),b=rnd(2,7),h=rnd(2,6),res=a*b*h;
+    const q=`Volum d'un ortoedre de ${a} cm × ${b} cm × ${h} cm`;
+    const c=`${res} cm³`;
+    return {type,question:q,correct:c,options:distractors(res,'cm³',[a*b,a*b+h,2*(a+b+h)]),guide:['Identifica les tres dimensions de l’ortoedre','Multiplica llargada, amplada i alçada','Expressa el resultat en unitats cúbiques'],solution:[`V = ${a} × ${b} × ${h} = ${res} cm³`,`✅ ${c}`],difficulty:'easy'};
+  }
+  if(type===2){
+    const cst=rnd(2,9),res=cst**3;
+    const q=`Volum d'un cub d'aresta ${cst} cm`;
+    const c=`${res} cm³`;
+    return {type,question:q,correct:c,options:distractors(res,'cm³',[cst*cst,4*cst,6*cst*cst]),guide:['En un cub les tres dimensions són iguals','Multiplica l’aresta per ella mateixa tres vegades','Expressa el resultat en unitats cúbiques'],solution:[`V = ${cst} × ${cst} × ${cst} = ${res} cm³`,`✅ ${c}`],difficulty:'easy'};
+  }
+  if(type===3){
+    const l=rnd(1,12),res=l;
+    const q=`Quants dm³ corresponen a ${l} l?`;
+    const c=`${res} dm³`;
+    return {type,question:q,correct:c,options:distractors(res,'dm³',[res*10,res/10,res+1]),guide:['Recorda la relació directa entre litre i decímetre cúbic','Mantén el mateix valor numèric quan apliquis aquesta equivalència'],solution:[`1 l = 1 dm³`,`${l} l = ${l} dm³`,`✅ ${c}`],difficulty:'medium'};
+  }
+  if(type===4){
+    const l=rnd(1,8),res=l*1000;
+    const q=`Quants cm³ corresponen a ${l} l?`;
+    const c=`${res} cm³`;
+    return {type,question:q,correct:c,options:distractors(res,'cm³',[l*100,l*10,l]),guide:['Relaciona primer litres amb decímetres cúbics','Després expressa aquest volum en centímetres cúbics','Comprova que passes a una unitat cúbica més petita'],solution:[`${l} l = ${l} dm³`,`1 dm³ = 1000 cm³`,`${l} l = ${res} cm³`,`✅ ${c}`],difficulty:'medium'};
+  }
+  if(type===5){
+    const L=[20,30,40,50][rnd(0,3)],W=[20,30,40][rnd(0,2)],H=[20,30,40][rnd(0,2)];
+    const cm3=L*W*H,litres=cm3/1000;
+    const q=`Un aquari rectangular fa ${L}×${W}×${H} cm. Quina capacitat té en litres?`;
+    const c=`${fmtNum(litres)} l`;
+    return {type,question:q,correct:c,options:distractors(litres,'l',[cm3,litres*10,litres/10]),guide:['Calcula primer el volum de l’aquari amb les tres dimensions','Expressa el volum en centímetres cúbics','Utilitza la relació entre volum i capacitat per passar a litres'],solution:[`V = ${L} × ${W} × ${H} = ${cm3} cm³`,`${cm3} cm³ = ${fmtNum(litres)} l`,`✅ ${c}`],difficulty:'hard'};
+  }
+  const items=[
+    {q:'Quina unitat és adequada per expressar el volum d’una capsa petita?',a:'cm³',w:['cm²','cm','kg']},
+    {q:'Quina unitat és adequada per expressar la capacitat d’una ampolla?',a:'l',w:['m²','kg','cm']},
+    {q:'Quina unitat és adequada per expressar el volum d’una habitació?',a:'m³',w:['m²','m','l/min']}
+  ];
+  const it=items[rnd(0,items.length-1)];
+  return {type,question:it.q,correct:it.a,options:shuffle([it.a,...it.w]),guide:['Identifica si la situació parla de volum o de capacitat','Tria una unitat coherent amb la mida de l’objecte'],solution:[`Unitat adequada: ${it.a}`,`✅ ${it.a}`],difficulty:'easy'};
+}
+
+// ── GENERADORS AMB CONTROL DE VARIETAT ────────────────────────────────────
+function genMetric(){return takeVariedExercise('metric',genMetricRaw,80);}
+function genConversions(){return takeVariedExercise('conversions',genConversionsRaw,80);}
+function genTemps(){return takeVariedExercise('temps',genTempsRaw,80);}
+function genPerimetres(){return takeVariedExercise('perimetres',genPerimetresRaw,80);}
+function genArees(){return takeVariedExercise('arees',genAreesRaw,80);}
+function genProblemes(){return takeVariedExercise('problemes',genProblemesRaw,60);}
+function genMesuramentPrecisio(){return takeVariedExercise('mesurament',genMesuramentPrecisioRaw,60);}
+function genVolumCapacitat(){return takeVariedExercise('volum',genVolumCapacitatRaw,60);}
+
 // ── TOPICS ────────────────────────────────────
 const TOPICS=[
   {
-    id:'metric',icon:'📐',name:'Sistema Mètric Decimal',
-    short:'Longitud, massa i capacitat',
+    id:'metric',icon:'📐',name:'Sistema Mètric Decimal',short:'Longitud, massa i capacitat',course:'1r',exam1r:true,
     theory:{
       title:'Sistema Mètric Decimal',
-      text:'El sistema mètric decimal s\'organitza a partir d\'unitats base: el metre (longitud), el quilogram (massa) i el litre (capacitat). Cada prefix multiplica o divideix per 10.',
+      text:'Per mesurar longitud, massa i capacitat fem servir unitats relacionades entre elles. En longitud i capacitat, cada pas entre unitats consecutives de l’escala decimal canvia una posició; en aquesta pràctica de massa treballem t ↔ kg ↔ g ↔ mg, amb equivalències de mil en mil.',
       formulas:[
         'Longitud: km · hm · dam · m · dm · cm · mm',
-        'Massa: t · kg · g · mg  (1 kg = 1000 g)',
-        'Capacitat: kl · l · dl · cl · ml  (1 l = 1000 ml)',
-        'Cap a la dreta → ÷10 | Cap a l\'esquerra → ×10'
+        'Massa treballada: t · kg · g · mg',
+        'Capacitat: l · dl · cl · ml',
+        'En l’escala escrita d’esquerra a dreta: cap a la dreta → unitats més petites; cap a l’esquerra → unitats més grans'
       ]
-    },
-    gen:genMetric
+    },gen:genMetric
   },
   {
-    id:'conversions',icon:'🔄',name:'Conversions d\'unitats',
-    short:'Canvis d\'unitat, àrees i comparacions',
+    id:'conversions',icon:'🔄',name:'Conversions d\'unitats',short:'Canvis d\'unitat, àrees i comparacions',course:'1r',exam1r:true,
     theory:{
       title:'Conversions d\'unitats',
-      text:'Per convertir entre unitats, comptem els "passos" a la taula. Les unitats d\'àrea (cm², m²) canvien de 100 en 100 per cada salt (no de 10 en 10).',
-      formulas:[
-        '3 km → m: ×1000 → 3000 m',
-        '500 cm → m: ÷100 → 5 m',
-        'Àrees: 1 m² = 100 dm² = 10000 cm²',
-        'Regla: unitat gran → petita = multiplicar'
-      ]
-    },
-    gen:genConversions
+      text:'Per comparar o operar mesures, sovint cal expressar-les amb la mateixa unitat. En les unitats d’àrea, el canvi d’escala és quadràtic perquè una superfície combina dues dimensions.',
+      formulas:['3 km → m: ×1000 → 3000 m','500 cm → m: ÷100 → 5 m','Àrees: 1 m² = 100 dm² = 10.000 cm²','Unitat gran → petita: el valor numèric augmenta; petita → gran: disminueix']
+    },gen:genConversions
   },
   {
-    id:'temps',icon:'⏱️',name:'Mesura del temps',
-    short:'Conversions, durades i sistema sexagesimal',
+    id:'temps',icon:'⏱️',name:'Mesura del temps',short:'Conversions, durades i sistema sexagesimal',course:'1r',exam1r:true,
     theory:{
       title:'Mesura del temps',
-      text:'Les unitats de temps no segueixen el sistema decimal (60 s = 1 min, 60 min = 1 h, 24 h = 1 dia...). Les operacions es fan en sistema sexagesimal.',
-      formulas:[
-        '1 min = 60 s | 1 h = 60 min = 3600 s',
-        '1 dia = 24 h | 1 setmana = 7 dies',
-        '1 any = 12 mesos = 365 dies',
-        '200 min = 200÷60 = 3 h 20 min (quocient + resta)'
-      ]
-    },
-    gen:genTemps
+      text:'Les unitats de temps no segueixen una escala decimal. Per calcular durades cal tenir en compte les equivalències entre segons, minuts, hores i dies.',
+      formulas:['1 min = 60 s | 1 h = 60 min = 3600 s','1 dia = 24 h | 1 setmana = 7 dies','1 any = 12 mesos = 365 dies','En sumes i restes de temps, transforma una hora quan els minuts ho requereixin']
+    },gen:genTemps
   },
   {
-    id:'perimetres',icon:'📏',name:'Perímetres',
-    short:'Quadrat, rectangle, triangle, cercle i figures compostes',
+    id:'perimetres',icon:'📏',name:'Perímetres',short:'Quadrat, rectangle, triangle, circumferència i figures compostes',course:'1r',exam1r:true,
     theory:{
       title:'Perímetres',
-      text:'El perímetre és la longitud del contorn d\'una figura. Per a figures compostes (L, U...) sumem tots els costats exteriors.',
-      formulas:[
-        'Quadrat: P = 4 × c',
-        'Rectangle: P = 2 × (b + h)',
-        'Triangle: P = a + b + c',
-        'Cercle: C = 2 × π × r  (π ≈ 3,14)',
-        'Figura L: P = 2×(amplada total + alçada total)'
-      ]
-    },
-    gen:genPerimetres
+      text:'El perímetre és la longitud del contorn d’una figura. En figures compostes cal recórrer tot el contorn exterior. En una circumferència, la longitud està relacionada amb el diàmetre mitjançant π.',
+      formulas:['Quadrat: suma dels quatre costats iguals','Rectangle: suma de les dues parelles de costats iguals','Triangle: suma dels seus costats','Circumferència: C = π · d = 2 · π · r','Figura composta: recorre i suma tots els trams del contorn']
+    },gen:genPerimetres
   },
   {
-    id:'arees',icon:'⬜',name:'Àrees',
-    short:'Totes les figures + compostes',
+    id:'arees',icon:'⬜',name:'Àrees',short:'Polígons i figures compostes',course:'1r',exam1r:true,
     theory:{
       title:'Àrees',
-      text:'L\'àrea és la superfície interior d\'una figura, mesurada en unitats quadrades. Per a figures compostes, sumem o restem les àrees parcials.',
-      formulas:[
-        'Quadrat: A = c²',
-        'Rectangle: A = b × h',
-        'Triangle: A = (b × h) / 2',
-        'Rombe: A = (D × d) / 2',
-        'Trapezi: A = (B + b) × h / 2',
-        'Figura composta: A = suma/resta de parts'
-      ]
-    },
-    gen:genArees
+      text:'L’àrea és la superfície interior d’una figura i s’expressa en unitats quadrades. Les figures compostes es poden descompondre en figures d’àrea coneguda.',
+      formulas:['Quadrat: A = costat · costat','Rectangle: A = base · alçada','Triangle: la meitat del rectangle amb la mateixa base i alçada','Rombe: la meitat del producte de les diagonals','Trapezi: combina les dues bases i l’alçada i pren-ne la meitat','Figura composta: suma o resta les àrees de les parts']
+    },gen:genArees
   },
   {
-    id:'estimacio',icon:'🎯',name:'Estimació',
-    short:'Mesures reals i àrees estimades',
+    id:'mesurament',icon:'🧭',name:'Mesurament i precisió',short:'Instruments, unitats, escales, angles, error i π',course:'1r',exam1r:true,
+    theory:{
+      title:'Mesurament, escales i precisió',
+      text:'Mesurar implica triar una magnitud, una unitat i un instrument adequats. També cal interpretar escales, mesurar angles i valorar la precisió dels resultats mitjançant l’error absolut i relatiu.',
+      formulas:['Instrument i unitat depenen de la magnitud i de la precisió necessària','Escala: mantén la mateixa proporció entre dibuix i realitat','Error absolut: diferència en valor absolut entre mesura i referència','Error relatiu: error absolut comparat amb el valor de referència','Angles d’un polígon: utilitza les relacions entre els seus angles','π ≈ longitud de la circumferència ÷ diàmetre']
+    },gen:genMesuramentPrecisio
+  },
+  {
+    id:'estimacio',icon:'🎯',name:'Estimació',short:'Mesures reals i àrees estimades',course:'1r',exam1r:true,
     theory:{
       title:'Estimació de mesures',
-      text:'Estimar és aproximar una mesura sense mesurar directament. Usem objectes quotidians com a referència i descartem opcions absurdes.',
-      formulas:[
-        'Persona: ≈ 1,7 m | Porta: ≈ 2 m | Edifici 5 plantes: ≈ 15 m',
-        'Got d\'aigua: ≈ 250 ml | Ampolla gran: ≈ 1,5 l',
-        'Taronja: ≈ 200 g | Cotxe: ≈ 1,5 t',
-        'Postal (15×10 cm): ≈ 150 cm² | Porta: ≈ 1,6 m²'
-      ]
-    },
-    gen:genEstimacio
+      text:'Estimar és aproximar una mesura sense mesurar directament. Usem referències conegudes, triem una escala raonable i després podem contrastar l’estimació amb una mesura real.',
+      formulas:['Persona: ≈ 1,7 m | Porta: ≈ 2 m | Edifici 5 plantes: ≈ 15 m','Got d\'aigua: ≈ 250 ml | Ampolla gran: ≈ 1,5 l','Taronja: ≈ 200 g | Cotxe: ≈ 1,5 t','Postal (15×10 cm): ≈ 150 cm² | Porta: ≈ 1,6 m²']
+    },gen:genEstimacio
   },
   {
-    id:'problemes',icon:'🧩',name:'Problemes de context',
-    short:'Rajoles, pintura, jardins, viatges...',
+    id:'problemes',icon:'🧩',name:'Problemes de context',short:'Rajoles, pintura, jardins, viatges...',course:'1r',exam1r:true,
     theory:{
       title:'Problemes de context',
-      text:'Els problemes de context combinen diverses habilitats: convertir unitats, calcular àrees/perímetres i interpretar el resultat en situacions reals.',
-      formulas:[
-        '1. Llegeix bé l\'enunciat i identifica el que et demanen',
-        '2. Converteix totes les mesures a la mateixa unitat',
-        '3. Aplica la fórmula adient (àrea, perímetre...)',
-        '4. Comprova que el resultat té sentit (estimació!)'
-      ]
-    },
-    gen:genProblemes
+      text:'Els problemes de context combinen conversions, temps, àrees, perímetres i estimació. Cal interpretar les dades, decidir les operacions i comprovar si el resultat és raonable.',
+      formulas:['1. Identifica què et demanen','2. Expressa les dades amb unitats compatibles','3. Tria l’estratègia o fórmula adequada','4. Interpreta i comprova el resultat']
+    },gen:genProblemes
+  },
+  {
+    id:'volum',icon:'🧊',name:'Volum i capacitat',short:'Ortoedres, cubs i relació volum-capacitat',course:'2n',exam1r:false,extension:true,
+    theory:{
+      title:'Ampliació · Volum i capacitat',
+      text:'Aquesta ampliació prepara continguts de 2n d’ESO: volum d’ortoedres i cubs i relació entre unitats de volum i capacitat.',
+      formulas:['Ortoedre: V = llargada · amplada · alçada','Cub: V = aresta³','1 dm³ = 1 l','1 cm³ = 1 ml']
+    },gen:genVolumCapacitat
   }
 ];
 
-// ── STATE ─────────────────────────────────────
-let ST={unlockedIds:[],done:[],currentTopic:0,level:1,exCount:0,streak:0,answered:false,examQs:[],examIdx:0,examScore:0};
+function coreTopicIndices(){return TOPICS.map((t,i)=>t.course==='1r'?i:-1).filter(i=>i>=0);}
+function extensionTopicIndices(){return TOPICS.map((t,i)=>t.course!=='1r'?i:-1).filter(i=>i>=0);}
+function coreTopics(){return TOPICS.filter(t=>t.course==='1r');}
+function unlockedCoreCount(){return coreTopicIndices().filter(i=>isTopicUnlocked(i)).length;}
 
-function isTopicUnlocked(i){return ST.unlockedIds.includes(TOPICS[i].id);}
+// ── STATE ─────────────────────────────────────
+let ST={
+  unlockedIds:[],done:[],currentTopic:0,level:1,exCount:0,streak:0,answered:false,
+  examQs:[],examIdx:0,examScore:0,examAnswers:[],errors:{}
+};
+
+function isTopicUnlocked(i){const t=TOPICS[i];return t.course!=='1r'||ST.unlockedIds.includes(t.id);}
+
+function makeErrorId(){
+  return Date.now()+'_'+Math.random().toString(36).slice(2,8);
+}
+
+function normalizeErrorEntry(e,topicId){
+  e=e||{};
+  const tid=e.topicId||topicId||null;
+  const topic=TOPICS.find(t=>t.id===tid)||null;
+  let timestamp=e.timestamp;
+  if(!timestamp&&e.ts){
+    try{timestamp=new Date(e.ts).toISOString();}catch(_e){timestamp='';}
+  }
+  return {
+    id:e.id||makeErrorId(),
+    topicId:tid,
+    topicName:e.topicName||(topic?topic.name:'Tema'),
+    type:e.type!==undefined?e.type:null,
+    question:e.question!==undefined?e.question:(e.q||''),
+    correct:String(e.correct!==undefined?e.correct:(e.c!==undefined?e.c:'')),
+    answer:e.answer!==undefined?String(e.answer):'',
+    options:Array.isArray(e.options)?e.options.slice():[],
+    guide:Array.isArray(e.guide)?e.guide.slice():[],
+    solution:Array.isArray(e.solution)?e.solution.slice():[],
+    level:e.level!==undefined?e.level:null,
+    source:e.source||'legacy',
+    difficulty:e.difficulty!==undefined?e.difficulty:null,
+    timestamp:timestamp||new Date().toISOString()
+  };
+}
+
+function normalizeErrorStore(raw){
+  const out={};
+  const add=(e,tid)=>{
+    const ne=normalizeErrorEntry(e,tid);
+    if(!ne.topicId)return;
+    if(!out[ne.topicId])out[ne.topicId]=[];
+    out[ne.topicId].push(ne);
+  };
+  if(Array.isArray(raw)){
+    raw.forEach(e=>add(e,e&&e.topicId));
+  }else if(raw&&typeof raw==='object'){
+    Object.keys(raw).forEach(tid=>{
+      const arr=Array.isArray(raw[tid])?raw[tid]:[];
+      arr.forEach(e=>add(e,tid));
+    });
+  }
+  return out;
+}
+
+function decorateExercise(topic,ex){
+  if(!ex||typeof ex!=='object')return ex;
+  ex.topicId=topic.id;
+  ex.topicName=topic.name;
+  return ex;
+}
+
+function buildErrorRecord(ex,studentAnswer,source='practice'){
+  if(!ex)return null;
+  const topic=TOPICS.find(t=>t.id===ex.topicId)||TOPICS[ST.currentTopic]||null;
+  return {
+    id:makeErrorId(),
+    topicId:ex.topicId||(topic?topic.id:null),
+    topicName:ex.topicName||(topic?topic.name:'Tema'),
+    type:ex.type!==undefined?ex.type:null,
+    question:ex.question||'',
+    correct:String(ex.correct),
+    answer:String(studentAnswer),
+    options:Array.isArray(ex.options)?ex.options.slice():[],
+    guide:Array.isArray(ex.guide)?ex.guide.slice():[],
+    solution:Array.isArray(ex.solution)?ex.solution.slice():[],
+    level:source==='exam'?0:ST.level,
+    source,
+    difficulty:ex.difficulty!==undefined?ex.difficulty:null,
+    timestamp:new Date().toISOString()
+  };
+}
+
+function registerError(ex,studentAnswer,source='practice'){
+  const error=buildErrorRecord(ex,studentAnswer,source);
+  if(!error||!error.topicId)return;
+  if(!ST.errors||Array.isArray(ST.errors)||typeof ST.errors!=='object')ST.errors={};
+  if(!ST.errors[error.topicId])ST.errors[error.topicId]=[];
+  const bucket=ST.errors[error.topicId];
+  const last=bucket[bucket.length-1];
+  const sameAsLast=last&&last.type===error.type&&last.question===error.question&&last.answer===error.answer&&last.correct===error.correct&&last.source===error.source;
+  if(!sameAsLast)bucket.push(error);
+  saveST();
+}
 
 function loadST(){
-  try{
-    const s=JSON.parse(sessionStorage.getItem('sm1eso_v2')||'{}');
-    if(s.unlockedIds) ST.unlockedIds=s.unlockedIds;
-    else if(s.unlocked) ST.unlockedIds=TOPICS.slice(0,s.unlocked).map(t=>t.id);
-    if(s.done) ST.done=s.done;
-  }catch(e){}
-  // Prova localStorage com a backup
-  try{
-    const s=JSON.parse(localStorage.getItem('sm1eso_v2')||'{}');
-    if(s.unlockedIds&&s.unlockedIds.length>ST.unlockedIds.length) ST.unlockedIds=s.unlockedIds;
-    else if(s.unlocked&&s.unlocked>ST.unlockedIds.length) ST.unlockedIds=TOPICS.slice(0,s.unlocked).map(t=>t.id);
-    if(s.done&&s.done.length>ST.done.length) ST.done=s.done;
-  }catch(e){}
-  if(!ST.unlockedIds.includes(TOPICS[0].id)) ST.unlockedIds.unshift(TOPICS[0].id);
+  let sessionData=null,localData=null;
+  try{sessionData=JSON.parse(sessionStorage.getItem('sm1eso_v2')||'{}');}catch(e){}
+  try{localData=JSON.parse(localStorage.getItem('sm1eso_v2')||'{}');}catch(e){}
+
+  const sources=[sessionData,localData].filter(Boolean);
+  sources.forEach(s=>{
+    if(s.unlockedIds&&s.unlockedIds.length>ST.unlockedIds.length)ST.unlockedIds=s.unlockedIds;
+    else if(s.unlocked&&s.unlocked>ST.unlockedIds.length)ST.unlockedIds=coreTopics().slice(0,s.unlocked).map(t=>t.id);
+    if(s.done&&s.done.length>ST.done.length)ST.done=s.done;
+  });
+
+  // Els errors es desen de manera persistent. Si hi ha dades a tots dos magatzems,
+  // prioritzem localStorage perquè és el registre de llarg termini.
+  const rawErrors=(localData&&localData.errors)!==undefined?localData.errors:(sessionData&&sessionData.errors);
+  if(rawErrors)ST.errors=normalizeErrorStore(rawErrors);
+
+  const firstCore=coreTopics()[0];
+  if(firstCore&&!ST.unlockedIds.includes(firstCore.id))ST.unlockedIds.unshift(firstCore.id);
 }
+
 function saveST(){
-  const data=JSON.stringify({unlockedIds:ST.unlockedIds,done:ST.done});
+  const data=JSON.stringify({unlockedIds:ST.unlockedIds,done:ST.done,errors:ST.errors});
   try{sessionStorage.setItem('sm1eso_v2',data);}catch(e){}
   try{localStorage.setItem('sm1eso_v2',data);}catch(e){}
 }
@@ -2576,33 +2203,47 @@ function showHome(){
 
 function renderHome(){
   const grid=document.getElementById('topicsGrid');
-  let html='';
-  TOPICS.forEach((t,i)=>{
-    const unlocked=isTopicUnlocked(i);
-    const done=ST.done.includes(t.id);
-    html+=`<div class="topic-card ${!unlocked?'locked':''} ${done?'done':''}" onclick="${unlocked?`selectTopic(${i})`:''}" >
+  let html='<div class="topics-section-title">📘 Continguts de 1r d\'ESO</div>';
+
+  coreTopicIndices().forEach(i=>{
+    const t=TOPICS[i],unlocked=isTopicUnlocked(i),done=ST.done.includes(t.id);
+    const errCount=(ST.errors[t.id]||[]).length;
+    const errTag=errCount>0&&unlocked?`<span class="error-tag">${errCount} error${errCount===1?'':'s'}</span>`:'';
+    html+=`<div class="topic-card ${!unlocked?'locked':''} ${done?'done':''}" onclick="${unlocked?`selectTopic(${i})`:''}">
       <div class="topic-icon">${t.icon}</div>
-      <div class="topic-info"><h3>${t.name}</h3><p>${t.short}</p></div>
+      <div class="topic-info"><h3>${t.name}${errTag}</h3><p>${t.short}</p></div>
       <span class="topic-badge ${done?'badge-done':(!unlocked?'badge-locked':'badge-active')}">${done?'✓ Fet':(!unlocked?'🔒':'Practicar')}</span>
     </div>`;
   });
-  if(ST.unlockedIds.length>=4){
+
+  const unlockedCore=unlockedCoreCount();
+  if(unlockedCore>=4){
     html+=`<div class="topic-card" onclick="showApps()" style="border:2px dashed #8b5cf6">
-      <div class="topic-icon">🌍</div>
-      <div class="topic-info"><h3>Aplicacions Reals</h3><p>Cuina, construcció i viatges</p></div>
-      <span class="topic-badge badge-app">Eines</span>
-    </div>`;
+      <div class="topic-icon">🌍</div><div class="topic-info"><h3>Aplicacions Reals</h3><p>Cuina, construcció i viatges</p></div><span class="topic-badge badge-app">Eines</span></div>`;
   }
-  if(ST.unlockedIds.length>=3){
+  if(unlockedCore>=3){
     html+=`<div class="topic-card" onclick="startExam()" style="border:2px dashed var(--warn)">
-      <div class="topic-icon">📝</div>
-      <div class="topic-info"><h3>Mode Examen</h3><p>10 preguntes de tots els temes</p></div>
-      <span class="topic-badge badge-exam">Examen</span>
-    </div>`;
+      <div class="topic-icon">📝</div><div class="topic-info"><h3>Mode Examen · 1r ESO</h3><p>10 preguntes dels continguts de 1r desbloquejats</p></div><span class="topic-badge badge-exam">Examen</span></div>`;
   }
+  const totalErr=Object.values(ST.errors||{}).reduce((sum,a)=>sum+(Array.isArray(a)?a.length:0),0);
+  if(totalErr>0){
+    html+=`<div class="topic-card" onclick="showErrorSummary()" style="border:2px dashed var(--error)">
+      <div class="topic-icon">❌</div><div class="topic-info"><h3>Errors guardats</h3><p>${totalErr} error${totalErr===1?'':'s'} · Repassa les explicacions</p></div><span class="topic-badge" style="background:#fdeaea;color:#a02020">Repassar</span></div>`;
+  }
+
+  html+='<div class="topics-section-title">⭐ Ampliació · prepara 2n d\'ESO</div>';
+  extensionTopicIndices().forEach(i=>{
+    const t=TOPICS[i];
+    const errCount=(ST.errors[t.id]||[]).length;
+    const errTag=errCount>0?`<span class="error-tag">${errCount} error${errCount===1?'':'s'}</span>`:'';
+    html+=`<div class="topic-card extension" onclick="selectTopic(${i})">
+      <div class="topic-icon">${t.icon}</div><div class="topic-info"><h3>${t.name}${errTag}</h3><p>${t.short}</p></div><span class="topic-badge badge-extension">Ampliació</span></div>`;
+  });
+
   grid.innerHTML=html;
-  const pct=(ST.done.length/TOPICS.length)*100;
-  document.getElementById('globalProgress').style.width=pct+'%';
+  const core=coreTopics();
+  const doneCore=core.filter(t=>ST.done.includes(t.id)).length;
+  document.getElementById('globalProgress').style.width=(core.length?doneCore/core.length*100:0)+'%';
 }
 
 function selectTopic(i){
@@ -2610,9 +2251,33 @@ function selectTopic(i){
   const t=TOPICS[i];
   document.getElementById('navBack').style.display='block';
   document.getElementById('navTitle').textContent=t.name;
-  let html=`<div class="theory-box"><h3>📖 ${t.theory.title}</h3><p>${t.theory.text}</p>`;
+  let html=`<div class="theory-box"><h3>📖 ${t.theory.title}${t.course!=='1r'?' <span class="topic-badge badge-extension">Ampliació 2n</span>':''}</h3><p>${t.theory.text}</p>`;
   t.theory.formulas.forEach(f=>{html+=`<div class="formula">${f}</div>`;});
   html+=`</div>`;
+  const errs=(ST.errors[t.id]||[]);
+  if(errs.length>0){
+    html+=`<div class="error-panel"><h4>❌ Últims errors en aquest tema</h4>`;
+    errs.slice(-5).reverse().forEach(e=>{
+      const localSolId='topicSol_'+String(e.id||makeErrorId()).replace(/[^a-zA-Z0-9_]/g,'');
+      const questionText=escHtml(String(e.question||'').replace(/<[^>]*>/g,'').slice(0,110));
+      html+=`<div style="padding:10px 0;border-bottom:1px solid #fde">
+        <div class="error-row" style="border-bottom:none;padding:0">
+          <span style="flex:1">${questionText}</span>
+        </div>
+        <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;font-size:.8rem">
+          <span>La teva resposta: <b style="color:var(--error)">${escHtml(e.answer||'—')}</b></span>
+          <span>Correcta: <b style="color:var(--success)">${escHtml(e.correct||'—')}</b></span>
+        </div>`;
+      if(Array.isArray(e.solution)&&e.solution.length){
+        html+=`<button class="btn-secondary" onclick="toggleSavedSolution('${localSolId}',this)" style="margin-top:8px;padding:7px 10px">📘 Veure explicació</button>
+          <div class="solution-box" id="${localSolId}" style="display:none">${e.solution.map((s,j)=>`<div class="step"><b>Pas ${j+1}:</b> <span class="highlight">${escHtml(s)}</span></div>`).join('')}</div>`;
+      }else{
+        html+=`<div style="margin-top:8px;font-size:.78rem;color:var(--muted)">Aquest error és d'una versió anterior i no tenia l'explicació desada.</div>`;
+      }
+      html+=`</div>`;
+    });
+    html+=`<button class="btn-danger" style="padding:8px;margin-top:10px" onclick="clearTopicErrorsById('${t.id}');selectTopic(${i})">🗑 Esborra errors d'aquest tema</button></div>`;
+  }
   document.getElementById('introContent').innerHTML=html;
   document.getElementById('btnLvl1').classList.add('active');
   document.getElementById('btnLvl2').classList.remove('active');
@@ -2625,7 +2290,13 @@ function selectLevel(l){
   document.getElementById('btnLvl2').classList.toggle('active',l===2);
 }
 
-function startPractice(){ST.exCount=0;ST.streak=0;showExercise();}
+function startPractice(){
+  ST.exCount=0;ST.streak=0;
+  const t=TOPICS[ST.currentTopic];
+  resetVarietyKey(t.id);
+  if(t.id==='estimacio'){bossaEstimacio=[];lastEstimacioType=null;}
+  showExercise();
+}
 
 function renderStreakBar(needed){
   const bar=document.getElementById('streakBar');
@@ -2639,7 +2310,7 @@ function renderStreakBar(needed){
 function showExercise(){
   ST.answered=false;
   const t=TOPICS[ST.currentTopic];
-  curEx=t.gen(); ST.exCount++;
+  curEx=decorateExercise(t,t.gen()); ST.exCount++;
   const needed=ST.level===1?NEEDED_LVL1:NEEDED_LVL2;
   const diffTag=curEx.difficulty?`<span class="tag-difficulty tag-${curEx.difficulty}">${curEx.difficulty==='easy'?'Fàcil':curEx.difficulty==='medium'?'Mitjà':'Difícil'}</span>`:'';
   document.getElementById('exNum').innerHTML=`Exercici ${ST.exCount} ${diffTag}`;
@@ -2680,6 +2351,7 @@ function selectAnswer(idx,btn){
   } else {
     ST.streak=0;
     renderStreakBar(needed);
+    registerError(curEx,ans,'practice');
     fb.innerHTML=`<div class="feedback-box ko"><h4>❌ No és correcte</h4>La resposta correcta és: <b>${curEx.correct}</b><br>
     <button class="sol-btn" onclick="toggleSolution(this)">Veure solució pas a pas</button>
     <div class="solution-box" id="solBox">${curEx.solution.map((s,i)=>`<div class="step"><b>Pas ${i+1}:</b> <span class="highlight">${s}</span></div>`).join('')}</div></div>`;
@@ -2695,46 +2367,127 @@ function toggleSolution(btn){
 }
 
 function markTopicDone(){
-  const tid=TOPICS[ST.currentTopic].id;
-  if(!ST.done.includes(tid)){
-    ST.done.push(tid);
-    if(ST.currentTopic+1<TOPICS.length&&!isTopicUnlocked(ST.currentTopic+1)) ST.unlockedIds.push(TOPICS[ST.currentTopic+1].id);
+  const t=TOPICS[ST.currentTopic];
+  if(t.course!=='1r')return;
+  if(!ST.done.includes(t.id)){
+    ST.done.push(t.id);
+    const coreIdx=coreTopicIndices();
+    const pos=coreIdx.indexOf(ST.currentTopic);
+    if(pos>=0&&pos+1<coreIdx.length){
+      const nextI=coreIdx[pos+1];
+      if(!isTopicUnlocked(nextI))ST.unlockedIds.push(TOPICS[nextI].id);
+    }
     saveST();
   }
 }
 
 function nextExercise(){
   const needed=ST.level===1?NEEDED_LVL1:NEEDED_LVL2;
-  if(ST.streak>=needed&&ST.done.includes(TOPICS[ST.currentTopic].id)){showCongrats();return;}
+  const t=TOPICS[ST.currentTopic];
+  if(ST.streak>=needed&&(t.course!=='1r'||ST.done.includes(t.id))){showCongrats();return;}
   showExercise();
 }
 
 function showCongrats(){
   const t=TOPICS[ST.currentTopic];
-  const next=ST.currentTopic+1<TOPICS.length?TOPICS[ST.currentTopic+1]:null;
+  let nextIndex=null;
+  if(t.course==='1r'){
+    const ci=coreTopicIndices(),pos=ci.indexOf(ST.currentTopic);
+    if(pos>=0&&pos+1<ci.length)nextIndex=ci[pos+1];
+  }
   document.getElementById('feedbackArea').innerHTML=`<div class="congrats">
     <div class="trophy">🏆</div><h2>Excel·lent!</h2>
-    <p>Has dominat <b>${t.name}</b>!</p>
+    <p>${t.course==='1r'?'Has dominat':'Has completat una sessió de'} <b>${t.name}</b>!</p>
     <button class="btn-primary" onclick="showHome()">Tornar al menú</button>
-    ${next&&next.id!=='problemes'?`<button class="btn-secondary" onclick="selectTopic(${ST.currentTopic+1})">Següent: ${next.name} →</button>`:''}
+    ${nextIndex!==null?`<button class="btn-secondary" onclick="selectTopic(${nextIndex})">Següent: ${TOPICS[nextIndex].name} →</button>`:''}
   </div>`;
   document.getElementById('btnNext').style.display='none';
 }
 
 function goBack(){showHome();}
 
+// ── ERRORS GUARDATS ────────────────────────────
+function showErrorSummary(){
+  document.getElementById('navBack').style.display='block';
+  document.getElementById('navTitle').textContent='Errors guardats';
+  const totalErr=Object.values(ST.errors||{}).reduce((sum,arr)=>sum+(Array.isArray(arr)?arr.length:0),0);
+  let html=`<div class="home-header" style="padding-top:10px"><h2 style="font-size:1.35rem">❌ Errors guardats</h2><p>Conservem l'exercici que vas fallar i la seva explicació original.</p></div>`;
+
+  if(totalErr===0){
+    html+=`<div class="saved-error-card" style="border-left-color:var(--success)"><h3>✅ Cap error guardat</h3><p style="margin-top:6px;color:var(--muted)">Quan fallis un exercici, quedarà registrat automàticament aquí.</p></div>`;
+  }else{
+    html+=`<div style="margin-bottom:12px;color:var(--muted);font-size:.85rem">${totalErr} error${totalErr===1?'':'s'} guardat${totalErr===1?'':'s'}</div>`;
+    TOPICS.forEach(t=>{
+      const errs=ST.errors[t.id]||[];
+      if(!errs.length)return;
+      html+=`<div style="font-weight:800;color:var(--primary);margin:18px 0 8px">${t.icon} ${t.name} · ${errs.length}</div>`;
+      errs.slice().reverse().forEach(e=>{
+        let date='';
+        try{date=e.timestamp?new Date(e.timestamp).toLocaleString('ca-ES',{dateStyle:'short',timeStyle:'short'}):'';}catch(_e){}
+        const modeTxt=e.source==='exam'?'📝 Examen':e.source==='legacy'?'📦 Error antic':(`🧩 Pràctica · ${e.level===2?'Nivell 2':'Nivell 1'}`);
+        const typeTxt=(e.type!==null&&e.type!==undefined)?` · Tipus ${e.type}`:'';
+        const diffTxt=e.difficulty?` · ${e.difficulty==='easy'?'Fàcil':e.difficulty==='medium'?'Mitjà':'Difícil'}`:'';
+        const solId='savedSol_'+String(e.id||makeErrorId()).replace(/[^a-zA-Z0-9_]/g,'');
+        html+=`<div class="saved-error-card">
+          <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><h3 style="margin:0">❌ ${escHtml(e.topicName||t.name)}</h3><span style="font-size:.72rem;color:var(--muted)">${escHtml(date)}</span></div>
+          <div class="saved-error-question">${e.question||'Pregunta no disponible'}</div>
+          <div class="saved-error-answer"><div>La teva resposta: <b style="color:var(--error)">${escHtml(e.answer||'—')}</b></div><div>Resposta correcta: <b style="color:var(--success)">${escHtml(e.correct||'—')}</b></div></div>
+          <div class="saved-error-meta">${modeTxt}${typeTxt}${diffTxt}</div>`;
+        if(Array.isArray(e.solution)&&e.solution.length){
+          html+=`<button class="btn-secondary" onclick="toggleSavedSolution('${solId}',this)" style="margin-top:10px">📘 Veure explicació</button>
+            <div class="solution-box" id="${solId}" style="display:none">${e.solution.map((s,i)=>`<div class="step"><b>Pas ${i+1}:</b> <span class="highlight">${s}</span></div>`).join('')}</div>`;
+        }else{
+          html+=`<div style="margin-top:10px;font-size:.8rem;color:var(--muted)">Aquest error és d'una versió anterior i no tenia l'explicació desada.</div>`;
+        }
+        html+=`<button class="btn-danger" onclick="deleteSavedError('${t.id}','${escHtml(e.id)}')">🗑 Esborrar aquest error</button></div>`;
+      });
+      html+=`<button class="btn-secondary" style="margin-top:0;border-color:var(--error);color:var(--error)" onclick="clearTopicErrorsById('${t.id}')">🗑 Esborrar els errors de ${escHtml(t.name)}</button>`;
+    });
+    html+=`<button class="btn-danger" onclick="clearAllErrors()" style="margin-top:18px">🗑 Esborrar tots els errors</button>`;
+  }
+  html+=`<button class="btn-secondary" style="margin-top:8px" onclick="showHome()">← Tornar al menú</button>`;
+  document.getElementById('appContent').innerHTML=html;
+  showScreen('screenApp');
+}
+
+function toggleSavedSolution(id,btn){
+  const box=document.getElementById(id);
+  if(!box)return;
+  const willShow=box.style.display==='none'||box.style.display==='';
+  box.style.display=willShow?'block':'none';
+  btn.textContent=willShow?'📕 Amagar explicació':'📘 Veure explicació';
+}
+
+function deleteSavedError(topicId,errorId){
+  const arr=ST.errors[topicId]||[];
+  ST.errors[topicId]=arr.filter(e=>String(e.id)!==String(errorId));
+  saveST();showErrorSummary();
+}
+
+function clearTopicErrorsById(topicId){
+  ST.errors[topicId]=[];
+  saveST();
+  if(document.getElementById('screenApp').classList.contains('active'))showErrorSummary();
+}
+
+function clearAllErrors(){
+  if(!confirm('Vols esborrar tots els errors guardats? Aquesta acció no es pot desfer.'))return;
+  ST.errors={};saveST();showErrorSummary();
+}
+
 // ── EXAMEN ────────────────────────────────────
 function startExam(){
   ST.examQs=[];
-  const avail=TOPICS.filter((_,i)=>isTopicUnlocked(i));
+  resetAllVariety();ST.examAnswers=[];
+  const avail=TOPICS.filter((t,i)=>t.course==='1r'&&t.exam1r!==false&&isTopicUnlocked(i));
   // Repartim 10 preguntes uniformement + inclou sempr almenys 1 de problemes si desbloquejat
   for(let i=0;i<10;i++){
     const t=avail[rnd(0,avail.length-1)];
-    ST.examQs.push({...t.gen(),topicName:t.name});
+    ST.examQs.push(decorateExercise(t,t.gen()));
   }
   ST.examIdx=0; ST.examScore=0;
   document.getElementById('navBack').style.display='block';
-  document.getElementById('navTitle').textContent='Mode Examen';
+  document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
   showExamQ(); showScreen('screenExam');
 }
 
@@ -2753,9 +2506,12 @@ function selectExamAns(idx,btn){
   const ans=q.options[idx];
   const ok=ans===q.correct;
   if(ok) ST.examScore++;
+  ST.examAnswers.push({ok,question:q.question,correct:q.correct,given:ans,topicId:q.topicId,topicName:q.topicName});
+  if(!ok)registerError(q,ans,'exam');
   document.querySelectorAll('#examOptions .opt-btn').forEach(b=>{b.disabled=true;if(b.textContent===q.correct)b.classList.add('correct');});
   if(!ok) btn.classList.add('wrong');
-  document.getElementById('examFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':'La resposta correcta era: <b>'+q.correct+'</b>'}</div>`;
+  const solutionHTML=Array.isArray(q.solution)?`<div class="solution-box show" style="display:block">${q.solution.map((s,i)=>`<div class="step"><b>Pas ${i+1}:</b> <span class="highlight">${s}</span></div>`).join('')}</div>`:'';
+  document.getElementById('examFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':'La resposta correcta era: <b>'+q.correct+'</b>'+solutionHTML}</div>`;
   document.getElementById('btnNextExam').style.display='block';
   document.getElementById('btnNextExam').textContent=ST.examIdx+1<ST.examQs.length?'Següent →':'Veure resultat';
 }
@@ -2771,8 +2527,18 @@ function nextExamQ(){
   document.getElementById('examFeedback').innerHTML='';
   document.getElementById('btnNextExam').style.display='none';
   document.getElementById('examResult').style.display='block';
+  const wrongOnes=(ST.examAnswers||[]).filter(a=>!a.ok);
+  let detailHTML='';
+  if(wrongOnes.length){
+    detailHTML=`<div class="error-panel"><h4>❌ Preguntes fallades</h4>`;
+    wrongOnes.forEach(a=>{
+      detailHTML+=`<div class="error-row" style="flex-direction:column;align-items:flex-start"><span style="color:var(--muted);font-size:.8rem">${escHtml(a.topicName)}</span><span>${String(a.question).replace(/<[^>]*>/g,'')}</span><span style="color:var(--success)">R correcta: ${escHtml(a.correct)}</span></div>`;
+    });
+    detailHTML+=`</div>`;
+  }
   document.getElementById('examResult').innerHTML=`<div class="exam-score">${ST.examScore}/${ST.examQs.length}<span>${pct}% · Nota orientativa: ${nota}</span></div>
   <p style="text-align:center;color:var(--muted);margin-bottom:18px">${pct>=90?'Impressionant! Estàs preparat/da per l\'examen.':pct>=70?'Bé! Repassa els exercicis que has fallat.':pct>=50?'Anem bé, però cal practicar més. Torna a repassar tema per tema.':'No et preocupis, continua practicant tema a tema!'}</p>
+  ${detailHTML}
   <button class="btn-primary" onclick="showHome()">Tornar al menú</button>
   <button class="btn-secondary" onclick="startExam()">Repetir examen</button>`;
 }
@@ -3164,76 +2930,103 @@ function calcRajoles(){
 
 // ── TEST AUTOMÀTIC (triple clic) ───────────────
 function runAutoTest(){
-  const REPS=200;
+  const REPS=10000;
   const results=[];
+
   TOPICS.forEach(t=>{
-    const bugs=[];
+    let badExercises=0;
+    let issueCount=0;
+    const samples=[];
+
     for(let i=0;i<REPS;i++){
       let ex;
-      try{ex=t.gen();}catch(e){bugs.push(`gen() crash: ${e.message}`);continue;}
-      if(!ex.options.includes(ex.correct)) bugs.push(`Correcta "${ex.correct}" no a options: [${ex.options.join('|')}] Q:${ex.question}`);
-      const uniq=new Set(ex.options);
-      if(uniq.size!==ex.options.length) bugs.push(`Opcions duplicades: [${ex.options.join('|')}] Q:${ex.question}`);
-      if(ex.options.length!==4) bugs.push(`${ex.options.length} opcions (cal 4) Q:${ex.question}`);
-      if(ex.options.some(o=>o===undefined||o===null||String(o).trim()==='')) bugs.push(`Opció buida Q:${ex.question}`);
+      const issues=[];
+      try{ex=decorateExercise(t,t.gen());}
+      catch(e){issues.push(`CRASH: ${e.message}`);}
+
+      if(ex){
+        if(!Array.isArray(ex.options))issues.push('No hi ha array options');
+        else{
+          if(!ex.options.map(String).includes(String(ex.correct)))issues.push(`Correcta "${ex.correct}" no és a options`);
+          if(new Set(ex.options.map(String)).size!==ex.options.length)issues.push(`Opcions duplicades: [${ex.options.join('|')}]`);
+          if(ex.options.length!==4)issues.push(`${ex.options.length} opcions (cal 4)`);
+          if(ex.options.some(o=>o===undefined||o===null||String(o).trim()===''))issues.push('Opció buida');
+        }
+        if(!Array.isArray(ex.guide)||ex.guide.length===0)issues.push('guide absent o buit');
+        if(!Array.isArray(ex.solution)||ex.solution.length===0)issues.push('solution absent o buida');
+        if(ex.type===undefined||ex.type===null)issues.push('type absent');
+        if(ex.topicId!==t.id)issues.push('topicId incorrecte');
+        if(ex.topicName!==t.name)issues.push('topicName incorrecte');
+
+        const generatedText=[ex.question,ex.correct,...(ex.options||[]),...(ex.solution||[])].map(String).join(' ');
+        if(/\d(?:\.\d+)?e[+-]?\d+/i.test(generatedText))issues.push('Notació científica no desitjada');
+        if(/\b\d+\.(?:\d{1,2}|\d{4,})\b/.test(generatedText))issues.push('Decimal amb punt en lloc de coma');
+
+        const wrong=Array.isArray(ex.options)?ex.options.find(o=>String(o)!==String(ex.correct)):'';
+        const rec=buildErrorRecord(ex,wrong,'practice');
+        if(!rec||rec.topicId!==t.id||!rec.question||!rec.correct||!Array.isArray(rec.solution)||rec.solution.length===0||!Array.isArray(rec.options)||rec.options.length!==4){
+          issues.push('registre d’error incomplet');
+        }
+      }
+
+      if(issues.length){
+        badExercises++;
+        issueCount+=issues.length;
+        if(samples.length<10)samples.push(`Q: ${ex&&ex.question?ex.question:'—'} · ${issues.join(' | ')}`);
+      }
     }
-    const ok=REPS-bugs.length;
-    results.push({name:t.name,ok,total:REPS,bugs:bugs.slice(0,10)});
+
+    results.push({name:t.name,ok:REPS-badExercises,total:REPS,bad:badExercises,issueCount,samples});
   });
+
+  const totalBad=results.reduce((s,r)=>s+r.bad,0);
+  const totalIssues=results.reduce((s,r)=>s+r.issueCount,0);
   let html=`<div style="padding:18px;max-width:680px;margin:0 auto">
     <h2 style="color:var(--primary);margin-bottom:4px">🧪 Test Automàtic</h2>
-    <p style="color:var(--muted);font-size:.85rem;margin-bottom:18px">${REPS} exercicis per tema</p>`;
+    <p style="color:var(--muted);font-size:.85rem;margin-bottom:18px">${REPS.toLocaleString('ca-ES')} exercicis per tema</p>`;
+
   results.forEach(r=>{
     const pct=Math.round(r.ok/r.total*100);
     const col=pct===100?'var(--success)':pct>=90?'var(--warn)':'var(--error)';
     html+=`<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;box-shadow:var(--shadow)">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
-        <b style="font-size:.95rem">${r.name}</b>
-        <span style="color:${col};font-weight:700;font-size:.95rem">${pct}% (${r.ok}/${r.total})</span>
-      </div>
-      <div style="height:6px;background:var(--border);border-radius:3px;margin-bottom:8px">
-        <div style="height:6px;background:${col};border-radius:3px;width:${pct}%"></div>
-      </div>`;
-    if(r.bugs.length>0){
-      html+=`<details><summary style="font-size:.82rem;color:var(--error);cursor:pointer">${r.bugs.length} error(s)</summary>
-        <div style="margin-top:8px;font-size:.78rem;line-height:1.8;color:#a02020;background:#fdeaea;border-radius:8px;padding:10px">
-          ${r.bugs.map((b,i)=>`<div style="border-bottom:1px solid #f0b0b0;padding:3px 0"><b>#${i+1}</b> ${b}</div>`).join('')}
-        </div></details>`;
-    } else {
-      html+=`<div style="font-size:.82rem;color:var(--success)">✅ Cap error detectat</div>`;
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b>${r.name}</b><span style="color:${col};font-weight:700">${pct}% (${r.ok}/${r.total})</span></div>
+      <div style="height:6px;background:var(--border);border-radius:3px;margin-bottom:8px"><div style="height:6px;background:${col};border-radius:3px;width:${pct}%"></div></div>`;
+    if(r.bad>0){
+      html+=`<details><summary style="font-size:.82rem;color:var(--error);cursor:pointer">${r.bad} exercici(s) amb incidències · ${r.issueCount} incidència(es)</summary>
+        <div style="margin-top:8px;font-size:.78rem;line-height:1.8;color:#a02020;background:#fdeaea;border-radius:8px;padding:10px">${r.samples.map((b,i)=>`<div style="border-bottom:1px solid #f0b0b0;padding:3px 0"><b>#${i+1}</b> ${escHtml(b)}</div>`).join('')}</div></details>`;
+    }else{
+      html+=`<div style="font-size:.82rem;color:var(--success)">✅ Cap incidència detectada</div>`;
     }
     html+=`</div>`;
   });
-  const totalBugs=results.reduce((s,r)=>s+r.bugs.length,0);
-  html+=`<div style="text-align:center;padding:16px;background:${totalBugs===0?'#e6f9ef':'#fdeaea'};border-radius:12px;margin-top:4px">
-    <b style="font-size:1.1rem;color:${totalBugs===0?'var(--success)':'var(--error)'}">
-      ${totalBugs===0?'🏆 Tot correcte!':'⚠️ '+totalBugs+' bugs trobats'}
-    </b>
+
+  html+=`<div style="text-align:center;padding:16px;background:${totalBad===0?'#e6f9ef':'#fdeaea'};border-radius:12px;margin-top:4px">
+    <b style="font-size:1.1rem;color:${totalBad===0?'var(--success)':'var(--error)'}">${totalBad===0?'🏆 Tot correcte!':`⚠️ ${totalBad} exercicis amb errors · ${totalIssues} incidències`}</b>
   </div>
-  <button onclick="downloadReport(${JSON.stringify(results).replace(/"/g,'&quot;')})" style="margin-top:14px;width:100%;background:#8b5cf6;color:white;border:none;border-radius:12px;padding:13px;font-size:.93rem;font-weight:600;cursor:pointer">⬇️ Descarregar informe .txt</button>
-  <button onclick="showHome()" style="margin-top:10px;width:100%;background:var(--primary);color:white;border:none;border-radius:12px;padding:13px;font-size:.93rem;font-weight:600;cursor:pointer">← Tornar al menú</button>
-  </div>`;
+  <button onclick="downloadReport()" style="margin-top:14px;width:100%;background:#8b5cf6;color:white;border:none;border-radius:12px;padding:13px;font-size:.93rem;font-weight:600;cursor:pointer">⬇️ Descarregar informe .txt</button>
+  <button onclick="showHome()" style="margin-top:10px;width:100%;background:var(--primary);color:white;border:none;border-radius:12px;padding:13px;font-size:.93rem;font-weight:600;cursor:pointer">← Tornar al menú</button></div>`;
+
+  window._lastMeasureTest={reps:REPS,results,totalBad,totalIssues};
   document.getElementById('navBack').style.display='none';
   document.getElementById('navTitle').textContent='🧪 Test Automàtic';
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  const sc=document.getElementById('screenApp');sc.classList.add('active');
-  document.getElementById('sidebar').style.display='none';
   document.getElementById('appContent').innerHTML=html;
+  showScreen('screenApp');
 }
 
-function downloadReport(results){
-  const totalBugs=results.reduce((s,r)=>s+r.bugs.length,0);
-  const lines=['INFORME DE TEST AUTOMÀTIC — Sentit de la Mesura · 1r ESO','='.repeat(60),`Data: ${new Date().toLocaleString('ca-ES')}`,`200 exercicis per tema | Total bugs: ${totalBugs}`,''  ];
-  results.forEach(r=>{
+function downloadReport(){
+  const data=window._lastMeasureTest;
+  if(!data)return;
+  const lines=['INFORME DE TEST AUTOMÀTIC — Sentit de la Mesura · 1r ESO','='.repeat(64),`Data: ${new Date().toLocaleString('ca-ES')}`,`${data.reps} exercicis per tema | Exercicis amb incidències: ${data.totalBad} | Incidències totals: ${data.totalIssues}`,''];
+  data.results.forEach(r=>{
     const pct=Math.round(r.ok/r.total*100);
-    lines.push('-'.repeat(60),`TEMA: ${r.name}`,`Resultat: ${pct}% (${r.ok}/${r.total})`);
-    if(r.bugs.length===0){lines.push('✓ Cap error detectat');}
-    else{lines.push(`✗ ${r.bugs.length} error(s):`);r.bugs.forEach((b,i)=>lines.push(`  #${i+1} ${b}`));}
+    lines.push('-'.repeat(64),`TEMA: ${r.name}`,`Resultat: ${pct}% (${r.ok}/${r.total})`,`Exercicis amb incidències: ${r.bad} | Incidències: ${r.issueCount}`);
+    if(r.samples.length===0)lines.push('✓ Cap incidència detectada');
+    else r.samples.forEach((b,i)=>lines.push(`  #${i+1} ${b}`));
     lines.push('');
   });
-  lines.push('='.repeat(60),totalBugs===0?'RESULTAT FINAL: TOT CORRECTE ✓':`RESULTAT FINAL: ${totalBugs} BUGS ✗`);
+  lines.push('='.repeat(64),data.totalBad===0?'RESULTAT FINAL: TOT CORRECTE ✓':`RESULTAT FINAL: ${data.totalBad} EXERCICIS AMB INCIDÈNCIES ✗`);
   const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
-  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='informe_test_mesura_v2.txt';a.click();
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='informe_test_mesura_punt1.txt';a.click();
 }
 
 // ── PANELL DESBLOQUEIG ───────────────────────
@@ -3259,18 +3052,15 @@ function closeUnlockPanel(){
 function renderUnlockPanel(){
   const list=document.getElementById('unlockTopicList');
   let html='';
-  TOPICS.forEach((t,i)=>{
-    const isUnlocked=isTopicUnlocked(i);
-    const isDone=ST.done.includes(t.id);
-    const canToggle=i>0; // el primer sempre obert
+  const coreIdx=coreTopicIndices();
+  coreIdx.forEach((i,pos)=>{
+    const t=TOPICS[i],isUnlocked=isTopicUnlocked(i),isDone=ST.done.includes(t.id),canToggle=pos>0;
     html+=`<div class="unlock-topic-row">
-      <span class="unlock-topic-name ${isDone?'is-done':''}">${t.icon} ${t.name.split(' ')[0]}${isDone?' ✓':''}</span>
-      ${canToggle
-        ? `<button class="unlock-toggle ${isUnlocked?'active':''}" onclick="toggleTopicUnlock(${i})">${isUnlocked?'Obert':'Tancat'}</button>`
-        : `<span style="font-size:.75rem;color:var(--success);font-weight:600">Base</span>`
-      }
+      <span class="unlock-topic-name ${isDone?'is-done':''}">${t.icon} ${t.name}${isDone?' ✓':''}</span>
+      ${canToggle?`<button class="unlock-toggle ${isUnlocked?'active':''}" onclick="toggleTopicUnlock(${i})">${isUnlocked?'Obert':'Tancat'}</button>`:`<span style="font-size:.75rem;color:var(--success);font-weight:600">Base</span>`}
     </div>`;
   });
+  html+=`<div style="font-size:.75rem;color:var(--muted);margin-top:10px">Les ampliacions de 2n sempre estan disponibles i no afecten el progrés.</div>`;
   list.innerHTML=html;
 }
 
@@ -3291,7 +3081,7 @@ function toggleTopicUnlock(i){
 }
 
 function unlockAllTopics(){
-  ST.unlockedIds=TOPICS.map(t=>t.id);
+  ST.unlockedIds=coreTopics().map(t=>t.id);
   saveST();
   renderUnlockPanel();
   renderHome();
@@ -3309,7 +3099,7 @@ function resetProgress(){
     return;
   }
   disarmReset();
-  ST.unlockedIds=[TOPICS[0].id]; ST.done=[];
+  ST.unlockedIds=[coreTopics()[0].id]; ST.done=[];
   saveST();
   renderUnlockPanel();
   renderHome();
