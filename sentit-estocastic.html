@@ -10,7 +10,7 @@ content="Practica el sentit estocàstic de 1r d'ESO amb exercicis interactius de
 <meta name="author" content="Salvador Rigual Valls">
 <meta name="robots" content="index, follow">
 <link rel="canonical"
-href="https://srigual-png.github.io/mates-primer-ESO/sentit-estocastic.html">
+href="https://srigual-png.github.io/mates-primer-ESO/5 - sentit estocastic.html">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -71,6 +71,7 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .badge-active{background:#f0ebff;color:var(--primary);}
 .badge-locked{background:var(--border);color:var(--locked);}
 .badge-exam{background:#fff3e0;color:var(--warn);}
+.badge-extension{background:#f3e8ff;color:#8b5cf6;}
 .theory-box{background:#f0ebff;border-left:4px solid var(--primary);border-radius:10px;padding:15px 17px;margin-bottom:18px;font-size:0.91rem;line-height:1.7;}
 .theory-box h3{color:var(--primary);margin-bottom:8px;font-size:0.97rem;}
 .theory-box .formula{background:white;border-radius:8px;padding:9px 13px;margin:6px 0;font-size:0.88rem;border:1px solid var(--border);}
@@ -146,6 +147,10 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .home-link:hover{
     text-decoration:underline;
 }
+
+.saved-error-card{background:var(--card);border:1px solid var(--border);border-left:4px solid var(--error);border-radius:14px;padding:15px 17px;margin-bottom:12px;box-shadow:var(--shadow);}
+.saved-error-meta{font-size:.78rem;color:var(--muted);margin-top:7px;}
+.saved-error-answer{font-size:.86rem;line-height:1.7;margin-top:8px;}
 </style>
 <script data-goatcounter="https://srigual.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
@@ -222,6 +227,7 @@ T'explicaré cada concepte amb exemples senzills i podràs practicar amb <strong
 </div>
 
 <div class="screen" id="screenTest"><div id="testContent"></div></div>
+<div class="screen" id="screenErrors"><div id="errorsContent"></div></div>
 
 <script>
 // ── UTILS ────────────────────────────────────
@@ -231,37 +237,83 @@ function frac(n,d){var g=gcd(n,d);return (n/g)+'/'+(d/g);}
 function gcd(a,b){return b===0?a:gcd(b,a%b);}
 function round2(x){return Math.round(x*100)/100;}
 function round1(x){return Math.round(x*10)/10;}
+function ordinalCa(n){
+  if(n===1)return '1r';
+  if(n===2)return '2n';
+  if(n===3)return '3r';
+  if(n===4)return '4t';
+  return n+'è';
+}
+
+function intervalCa(a,b){
+  return '['+a+', '+b+')';
+}
 
 function wrongNums(correct,n){
   n=n||3;
+  var c=Number(correct);
   var s=new Set();
-  var deltas=[1,2,3,4,5,6,7,8,10,15,20];
-  var di=0;
-  while(s.size<n&&di<deltas.length*2){
-    var sign=(di%2===0)?1:-1;
-    var d=deltas[Math.floor(di/2)]*sign;
-    var v=round2(correct+d);
-    if(v>=0&&v!==correct&&!s.has(v))s.add(v);
-    di++;
+  var deltas=[1,-1,2,-2,3,-3,4,-4,5,-5,10,-10];
+  for(var i=0;i<deltas.length&&s.size<n;i++){
+    var v=round2(c+deltas[i]);
+    if(v>=0&&v!==c)s.add(String(v));
   }
   return shuffle([...s]).slice(0,n);
 }
 
 function buildOpts(correct,wrongs){
-  var seen=new Set([String(correct)]);
-  var result=[correct];
-  for(var i=0;i<wrongs.length&&result.length<4;i++){
-    var ws=String(wrongs[i]);
-    if(!seen.has(ws)){seen.add(ws);result.push(wrongs[i]);}
+  var c=String(correct);
+  var seen=new Set([c]);
+  var result=[c];
+  (wrongs||[]).forEach(function(w){
+    var ws=String(w);
+    if(result.length<4&&ws.trim()!==''&&!seen.has(ws)){
+      seen.add(ws);result.push(ws);
+    }
+  });
+
+  // Fallback defensiu només per respostes numèriques (amb % o ° opcionals).
+  // Els generadors auditats ja aporten prou distractors; això evita bucles infinits.
+  if(result.length<4){
+    var m=c.match(/^(-?\d+(?:[.,]\d+)?)(.*)$/);
+    if(m){
+      var base=Number(m[1].replace(',','.'));
+      var suffix=m[2]||'';
+      var step=Math.abs(base)<1?0.1:1;
+      var k=1;
+      while(result.length<4&&k<30){
+        [base+k*step,base-k*step].forEach(function(v){
+          if(result.length>=4||v<0)return;
+          var num=round2(v);
+          var ws=String(num)+suffix;
+          if(!seen.has(ws)){seen.add(ws);result.push(ws);}
+        });
+        k++;
+      }
+    }
   }
-  var fb=1;
-  while(result.length<4){
-    var v=round2(parseFloat(correct)+fb);
-    var c=String(v);
-    if(!seen.has(c)){seen.add(c);result.push(String(v));}
-    fb++;
+
+  if(result.length!==4){
+    throw new Error('No hi ha 3 distractors únics per a la resposta "'+c+'"');
   }
   return shuffle(result);
+}
+
+function probabilityDistractors(fav,total){
+  var correct=frac(fav,total);
+  var pairs=[
+    [fav+1,total],[fav-1,total],[fav,total+1],[fav,total-1],
+    [total-fav,total],[fav+2,total],[Math.max(1,fav-2),total],
+    [total-fav,total+1]
+  ];
+  var out=[];var seen=new Set([correct]);
+  pairs.forEach(function(p){
+    var n=p[0],d=p[1];
+    if(d<=0||n<0||n>d)return;
+    var s=frac(n,d);
+    if(!seen.has(s)){seen.add(s);out.push(s);}
+  });
+  return out;
 }
 
 // ── VISUAL HELPERS (gràfics SVG reals) ───────
@@ -384,324 +436,832 @@ function freqTableHtml(vals,freqs,rowLabel1,rowLabel2,extraRowLabel,extraRow){
 // ── GENERATORS ───────────────────────────────
 
 // 1. Recollida de dades
-function genRecollida(){
-  var type=rnd(1,4);
-  var q,correct,opts,guide,solution;
-  if(type===1){
-    var vars=[
-      {v:'color dels ulls',t:'qualitativa'},
-      {v:'nombre de germans',t:'quantitativa discreta'},
-      {v:'alçada en cm',t:'quantitativa contínua'},
-      {v:'esport preferit',t:'qualitativa'},
-      {v:'temperatura corporal',t:'quantitativa contínua'},
-      {v:'puntuació d\'un joc',t:'quantitativa discreta'}
-    ];
-    var item=vars[rnd(0,vars.length-1)];
-    q='Quin tipus de variable és: "'+item.v+'"?';
-    correct=item.t;
-    var all=['qualitativa','quantitativa discreta','quantitativa contínua','numèrica ordinal'];
-    opts=buildOpts(correct,all.filter(x=>x!==correct));
-    guide=['Variables qualitatives: expressen una qualitat (color, nom, tipus)','Variables quantitatives discretes: nombres enters comptables (0,1,2,3...)','Variables quantitatives contínues: poden prendre qualsevol valor real (mesures)'];
-    solution=guide.concat(['✅ "'+item.v+'" és '+correct]);
-  } else if(type===2){
-    var n=rnd(20,40);
-    var mostra=rnd(5,n-5);
-    q='En un estudi sobre '+n+' alumnes, es pregunta a '+mostra+' alumnes seleccionats. Com s\'anomenen aquests '+mostra+' alumnes?';
-    correct='Mostra';
-    opts=buildOpts(correct,['Població','Univers estadístic','Cens']);
-    guide=['La POBLACIÓ és el conjunt de tots els elements estudiats (aquí: '+n+' alumnes)','La MOSTRA és el subconjunt seleccionat (aquí: '+mostra+' alumnes)'];
-    solution=guide.concat(['✅ El subconjunt seleccionat s\'anomena: '+correct]);
-  } else if(type===3){
-    var situations=[
-      {s:'Preguntar a tots els habitants d\'un poble quin és el seu color favorit',r:'Cens'},
-      {s:'Analitzar 200 productes d\'una fàbrica per controlar la qualitat',r:'Mostra'},
-      {s:'Registrar la nota de TOTS els alumnes d\'una classe',r:'Cens'},
-      {s:'Enquestar 500 persones per saber qui guanyarà les eleccions',r:'Mostra'}
-    ];
-    var sit=situations[rnd(0,situations.length-1)];
-    q='Identifica el tipus d\'estudi: "'+sit.s+'"';
-    correct=sit.r;
-    opts=buildOpts(correct,['Mostra','Cens','Experiment','Estadística descriptiva'].filter(x=>x!==correct));
-    guide=['CENS: s\'estudia tota la població sense excepció','MOSTRA: s\'estudia una part representativa de la població'];
-    solution=guide.concat(['✅ Es tracta d\'un: '+correct]);
-  } else {
-    var methods=[
-      {m:'Observació directa',ex:'Anotar el nombre de cotxes que passen per un carrer'},
-      {m:'Enquesta',ex:'Preguntar als alumnes quina assignatura els agrada més'},
-      {m:'Experiment',ex:'Llançar un dau 50 vegades i anotar els resultats'},
-      {m:'Fonts secundàries',ex:'Consultar dades de l\'INE sobre la població espanyola'}
-    ];
-    var met=methods[rnd(0,methods.length-1)];
-    q='Quin mètode de recollida de dades s\'utilitza si: "'+met.ex+'"?';
-    correct=met.m;
-    opts=buildOpts(correct,methods.map(x=>x.m).filter(x=>x!==correct));
-    guide=['Observació directa: el investigador recull les dades personalment','Enquesta: es fa preguntes als individus','Experiment: es provoca una situació per recollir dades','Fonts secundàries: dades ja recollides per altres'];
-    solution=guide.concat(['✅ El mètode és: '+correct]);
-  }
-  return {question:q,correct:correct,options:opts,guide:guide,solution:solution};
+// 1. Recollida de dades — bossa de 76 preguntes sense repeticions
+var recollidaBag=[];
+
+function buildRecollidaPool(){
+  var pool=[];
+
+  // ── A. TIPUS DE VARIABLE (24 situacions) ──────────────────────────────
+  var vars=[
+    // Qualitatives
+    {v:'color dels ulls',t:'qualitativa'},
+    {v:'esport preferit',t:'qualitativa'},
+    {v:'mitjà de transport per anar a l\'institut',t:'qualitativa'},
+    {v:'tipus de música preferida',t:'qualitativa'},
+    {v:'marca de mòbil utilitzada',t:'qualitativa'},
+    {v:'municipi de residència',t:'qualitativa'},
+    {v:'assignatura preferida',t:'qualitativa'},
+    {v:'color de la motxilla',t:'qualitativa'},
+
+    // Quantitatives discretes
+    {v:'nombre de germans',t:'quantitativa discreta'},
+    {v:'nombre de llibres llegits aquest mes',t:'quantitativa discreta'},
+    {v:'nombre de gols marcats en un partit',t:'quantitativa discreta'},
+    {v:'nombre de mascotes a casa',t:'quantitativa discreta'},
+    {v:'nombre de missatges rebuts en una hora',t:'quantitativa discreta'},
+    {v:'nombre de persones que viuen a casa',t:'quantitativa discreta'},
+    {v:'nombre d\'errors en un dictat',t:'quantitativa discreta'},
+    {v:'nombre de monedes que portes a la butxaca',t:'quantitativa discreta'},
+
+    // Quantitatives contínues
+    {v:'alçada en cm',t:'quantitativa contínua'},
+    {v:'temperatura corporal',t:'quantitativa contínua'},
+    {v:'pes d\'una motxilla',t:'quantitativa contínua'},
+    {v:'temps que es triga a arribar a l\'institut',t:'quantitativa contínua'},
+    {v:'longitud d\'un llapis',t:'quantitativa contínua'},
+    {v:'quantitat d\'aigua d\'una ampolla',t:'quantitativa contínua'},
+    {v:'distància recorreguda en bicicleta',t:'quantitativa contínua'},
+    {v:'durada d\'una cançó',t:'quantitativa contínua'}
+  ];
+
+  vars.forEach(function(item){
+    var correct=item.t;
+    pool.push({
+      topicId:'recollida',type:1,
+      question:'Quin tipus de variable és: "'+item.v+'"?',
+      correct:correct,
+      options:buildOpts(correct,['qualitativa','quantitativa discreta','quantitativa contínua','no és una variable estadística'].filter(function(x){return x!==correct;})),
+      guide:[
+        'Decideix primer si la dada és una categoria o bé un valor numèric.',
+        'Si és numèrica, pregunta\'t si es compta en valors separats o si es mesura i pot prendre valors intermedis.'
+      ],
+      solution:[
+        'Una variable qualitativa descriu categories; una quantitativa dona valors numèrics.',
+        'Les quantitatives discretes es compten i les contínues es mesuren.',
+        '✅ "'+item.v+'" és '+correct+'.'
+      ]
+    });
+  });
+
+  // ── B. POBLACIÓ I MOSTRA (16 contextos) ───────────────────────────────
+  var mostraContexts=[
+    {p:'alumnes d\'un institut',s:'alumnes seleccionats per respondre una enquesta'},
+    {p:'famílies d\'un barri',s:'famílies entrevistades sobre els hàbits de reciclatge'},
+    {p:'arbres d\'un parc',s:'arbres mesurats per estudiar-ne l\'alçada'},
+    {p:'peces fabricades en un torn',s:'peces revisades per comprovar-ne la qualitat'},
+    {p:'llibres d\'una biblioteca',s:'llibres escollits per estudiar-ne el nombre de pàgines'},
+    {p:'clients d\'un supermercat durant un dia',s:'clients preguntats sobre la satisfacció'},
+    {p:'habitatges d\'un municipi',s:'habitatges visitats per fer un estudi energètic'},
+    {p:'jugadors d\'un club esportiu',s:'jugadors seleccionats per estudiar les hores d\'entrenament'},
+    {p:'alumnes de 1r d\'ESO d\'una ciutat',s:'alumnes enquestats sobre l\'ús del mòbil'},
+    {p:'ampolles produïdes en una fàbrica',s:'ampolles inspeccionades per comprovar-ne el volum'},
+    {p:'usuaris d\'una piscina municipal',s:'usuaris entrevistats sobre els horaris'},
+    {p:'cotxes que circulen per una comarca',s:'cotxes observats en diversos controls'},
+    {p:'ordinadors d\'una empresa',s:'ordinadors revisats per mesurar-ne el rendiment'},
+    {p:'plantes d\'un hivernacle',s:'plantes seleccionades per mesurar-ne el creixement'},
+    {p:'comandes d\'una botiga en línia',s:'comandes analitzades per estudiar el temps de lliurament'},
+    {p:'partits d\'una lliga escolar',s:'partits seleccionats per estudiar el nombre de gols'}
+  ];
+
+  mostraContexts.forEach(function(c,idx){
+    var total=rnd(40,180);
+    var mostra=rnd(10,Math.max(10,Math.floor(total*0.65)));
+    var askSample=(idx%2===0);
+    var q=askSample
+      ?'En un estudi hi ha '+total+' '+c.p+'. Se\'n seleccionen '+mostra+' ('+c.s+'). Com s\'anomena aquest grup de '+mostra+' elements?'
+      :'En un estudi hi ha '+total+' '+c.p+' i se\'n seleccionen '+mostra+' ('+c.s+'). Quin conjunt constitueix la població de l\'estudi?';
+    var correct=askSample?'Mostra':'Els '+total+' '+c.p;
+    var wrongs=askSample
+      ?['Població','Cens','Variable estadística']
+      :['Els '+mostra+' '+c.s,'Només els elements que responen correctament','La variable que s\'estudia'];
+
+    pool.push({
+      topicId:'recollida',type:2,
+      question:q,
+      correct:correct,
+      options:buildOpts(correct,wrongs),
+      guide:askSample ? [
+        'Diferencia el conjunt total que es vol estudiar del subconjunt que realment s\'ha seleccionat.',
+        'La pregunta demana el nom del grup seleccionat, no del conjunt complet.'
+      ] : [
+        'Identifica quin és el conjunt complet sobre el qual es vol obtenir informació.',
+        'No confonguis la població amb el grup més petit que s\'ha seleccionat per recollir dades.'
+      ],
+      solution:askSample ? [
+        'La població és el conjunt dels '+total+' '+c.p+'.',
+        'Els '+mostra+' elements seleccionats formen només una part d\'aquest conjunt.',
+        '✅ Aquest grup és la mostra.'
+      ] : [
+        'La població és tot el conjunt sobre el qual tracta l\'estudi.',
+        'Els '+mostra+' elements seleccionats formen la mostra.',
+        '✅ La població són els '+total+' '+c.p+'.'
+      ]
+    });
+  });
+
+  // ── C. CENS O ESTUDI AMB MOSTRA (16 situacions) ──────────────────────
+  var situations=[
+    {s:'Preguntar a tots els alumnes d\'una classe quin esport prefereixen',r:'Cens'},
+    {s:'Registrar l\'alçada de tots els jugadors d\'un equip',r:'Cens'},
+    {s:'Comptar els llibres de totes les prestatgeries d\'una aula',r:'Cens'},
+    {s:'Revisar totes les bicicletes aparcades al pati per saber-ne el color',r:'Cens'},
+    {s:'Preguntar a totes les famílies d\'un edifici quantes persones hi viuen',r:'Cens'},
+    {s:'Mesurar la longitud de tots els pupitres d\'una classe',r:'Cens'},
+    {s:'Registrar la nota de tots els alumnes de 1r d\'ESO d\'un centre',r:'Cens'},
+    {s:'Comptar el nombre de finestres de totes les aules d\'un institut',r:'Cens'},
+
+    {s:'Enquestar 300 habitants d\'una ciutat per conèixer l\'ús del transport públic',r:'Mostra'},
+    {s:'Analitzar 50 bombetes d\'una producció de 5.000 per comprovar-ne la durada',r:'Mostra'},
+    {s:'Preguntar a 80 alumnes d\'un institut de 900 sobre les hores de son',r:'Mostra'},
+    {s:'Revisar 25 paquets d\'un magatzem amb centenars de paquets',r:'Mostra'},
+    {s:'Mesurar 40 arbres d\'un bosc per estimar-ne l\'alçada mitjana',r:'Mostra'},
+    {s:'Observar 100 vehicles d\'una carretera per estudiar-ne l\'ocupació',r:'Mostra'},
+    {s:'Analitzar 60 tiquets d\'un supermercat per estimar la despesa mitjana',r:'Mostra'},
+    {s:'Preguntar a 120 persones d\'un municipi per estudiar els hàbits esportius',r:'Mostra'}
+  ];
+
+  situations.forEach(function(sit){
+    var correct=sit.r;
+    pool.push({
+      topicId:'recollida',type:3,
+      question:'Identifica el tipus d\'estudi: "'+sit.s+'"',
+      correct:correct,
+      options:buildOpts(correct,['Mostra','Cens','Experiment','Estudi teòric'].filter(function(x){return x!==correct;})),
+      guide:[
+        'Fixa\'t si la situació estudia tots els elements de la població o només una part.',
+        'Si s\'analitza la població completa és un cens; si només se\'n selecciona una part, es treballa amb una mostra.'
+      ],
+      solution:[
+        'Un cens estudia tota la població; un estudi amb mostra només n\'analitza una part.',
+        '✅ En aquesta situació es tracta d\'un '+correct+'.'
+      ]
+    });
+  });
+
+  // ── D. MÈTODES DE RECOLLIDA (20 situacions) ──────────────────────────
+  var methods=[
+    // Observació directa
+    {m:'Observació directa',ex:'Anotar quants cotxes passen per davant de l\'institut durant 20 minuts'},
+    {m:'Observació directa',ex:'Comptar quants alumnes porten motxilla al pati'},
+    {m:'Observació directa',ex:'Registrar els ocells que arriben a una menjadora durant una hora'},
+    {m:'Observació directa',ex:'Anotar quantes persones entren a una biblioteca cada deu minuts'},
+    {m:'Observació directa',ex:'Comptar les bicicletes que passen per un carril bici'},
+
+    // Enquesta
+    {m:'Enquesta',ex:'Preguntar als alumnes quina assignatura els agrada més'},
+    {m:'Enquesta',ex:'Demanar a diverses famílies quants dies a la setmana reciclen'},
+    {m:'Enquesta',ex:'Preguntar als usuaris d\'un poliesportiu si estan satisfets amb les instal·lacions'},
+    {m:'Enquesta',ex:'Demanar als companys quantes hores dormen habitualment'},
+    {m:'Enquesta',ex:'Preguntar als veïns quin mitjà de transport utilitzen més'},
+
+    // Experiment
+    {m:'Experiment',ex:'Llançar un dau 100 vegades i anotar els resultats'},
+    {m:'Experiment',ex:'Llançar una moneda 60 vegades per comptar quantes cares surten'},
+    {m:'Experiment',ex:'Fer germinar llavors amb dues quantitats d\'aigua diferents i comparar-ne el creixement'},
+    {m:'Experiment',ex:'Deixar caure una pilota des de diferents altures i mesurar fins on rebota'},
+    {m:'Experiment',ex:'Cronometrar un mateix recorregut amb dos tipus de bicicleta i comparar els temps'},
+
+    // Fonts secundàries
+    {m:'Fonts secundàries',ex:'Consultar les dades de població publicades per l\'INE'},
+    {m:'Fonts secundàries',ex:'Utilitzar les temperatures mensuals publicades pel servei meteorològic'},
+    {m:'Fonts secundàries',ex:'Consultar les estadístiques de visitants publicades per un museu'},
+    {m:'Fonts secundàries',ex:'Fer servir les dades de reciclatge publicades per l\'ajuntament'},
+    {m:'Fonts secundàries',ex:'Analitzar les dades de gols d\'una lliga publicades al web de la federació'}
+  ];
+
+  methods.forEach(function(met){
+    var correct=met.m;
+    var methodNames=['Observació directa','Enquesta','Experiment','Fonts secundàries'];
+    pool.push({
+      topicId:'recollida',type:4,
+      question:'Quin mètode de recollida de dades s\'utilitza si: "'+met.ex+'"?',
+      correct:correct,
+      options:buildOpts(correct,methodNames.filter(function(x){return x!==correct;})),
+      guide:[
+        'Pregunta\'t com s\'obtenen les dades: observant, preguntant, fent una prova o consultant dades ja existents.',
+        'Tria el mètode que descriu exactament l\'acció de la situació.'
+      ],
+      solution:[
+        'Observació: es registra allò que passa; enquesta: es pregunta; experiment: es provoca una prova; fonts secundàries: s\'usen dades ja publicades.',
+        '✅ El mètode és '+correct+'.'
+      ]
+    });
+  });
+
+  return shuffle(pool);
 }
 
-// 2. Taules de freqüències
-function genTaules(){
-  var type=rnd(1,5);
-  var q,correct,opts,guide,solution,visual;
-  var noms=['1','2','3','4','5','6'];
-  var total=rnd(15,30);
-  var freqs=[];
-  var rem=total;
-  for(var i=0;i<5;i++){
-    var f=(i===4)?rem:rnd(1,Math.max(1,rem-5+i));
-    freqs.push(f);rem-=f;
+function genRecollida(){
+  // La bossa només es torna a omplir quan s'han consumit totes les preguntes.
+  // Així, dins d'un mateix cicle de 76 exercicis no es repeteix cap enunciat.
+  if(!Array.isArray(recollidaBag)||recollidaBag.length===0){
+    recollidaBag=buildRecollidaPool();
   }
-  if(rem>0)freqs.push(rem);else freqs[freqs.length-1]+=rem;
+  return recollidaBag.pop();
+}
 
-  if(type===1){
-    var idx=rnd(0,freqs.length-1);
-    q='En un estudi de '+total+' dades, la categoria "'+noms[idx]+'" apareix les vegades que s\'indica a la taula. Si la freqüència relativa és '+round2(freqs[idx]/total)+', quina és la freqüència absoluta?';
-    correct=String(freqs[idx]);
-    opts=buildOpts(correct,wrongNums(freqs[idx],3).map(String));
-    guide=['Freqüència absoluta (fᵢ): nombre de vegades que apareix cada valor','Fórmula: fᵢ = hᵢ × N','hᵢ = '+round2(freqs[idx]/total)+' | N = '+total,'fᵢ = '+round2(freqs[idx]/total)+' × '+total+' = '+freqs[idx]];
-    solution=guide.concat(['✅ Freqüència absoluta = '+correct]);
-  } else if(type===2){
-    var idx2=rnd(0,freqs.length-1);
-    q='En un estudi de '+total+' dades, la categoria "'+noms[idx2]+'" apareix '+freqs[idx2]+' vegades. Quina és la seva freqüència relativa?';
-    var res=round2(freqs[idx2]/total);
-    correct=String(res);
-    opts=buildOpts(correct,[round2(freqs[idx2]/(total+5)),round2(freqs[idx2]/total*100),round2((freqs[idx2]+1)/total)].map(String));
-    guide=['Freqüència relativa (hᵢ): proporció respecte al total','Fórmula: hᵢ = fᵢ / N','hᵢ = '+freqs[idx2]+' / '+total+' = '+res,'La suma de totes les freqüències relatives ha de ser 1'];
-    solution=guide.concat(['✅ Freqüència relativa = '+correct]);
-  } else if(type===3){
-    q='En una taula de freqüències de '+total+' dades, la suma de totes les freqüències relatives (hᵢ) ha de ser exactament:';
-    correct='1';
-    opts=buildOpts(correct,['100','0,5',String(total),'10']);
-    guide=['La freqüència relativa de cada valor és fᵢ/N','La SUMA de tots els fᵢ = N (total de dades)','Per tant, la SUMA de tots els hᵢ = N/N = 1','(Equivalent: si ho expressem en % → suma = 100%)'];
-    solution=guide.concat(['✅ La suma de les freqüències relatives = '+correct]);
-  } else if(type===4){
-    var acum=0;
-    var idx3=rnd(1,freqs.length-1);
-    for(var i=0;i<=idx3;i++)acum+=freqs[i];
-    q='En un recull de dades, les freqüències absolutes dels primers '+(idx3+1)+' valors són: '+freqs.slice(0,idx3+1).join(', ')+'. Quina és la freqüència acumulada fins al valor '+(idx3+1)+'?';
-    correct=String(acum);
-    opts=buildOpts(correct,wrongNums(acum,3).map(String));
-    guide=['Freqüència acumulada (Fᵢ): suma de freqüències fins a un valor','Fᵢ = f₁ + f₂ + ... + fᵢ','Aquí: '+freqs.slice(0,idx3+1).join(' + ')+' = '+acum];
-    solution=guide.concat(['✅ Freqüència acumulada = '+correct]);
-  } else {
-    var rangeMax=rnd(4,6);
-    var nRaw=rnd(12,20);
-    var raw=Array.from({length:nRaw},()=>rnd(1,rangeMax));
-    var freqMap={};
-    raw.forEach(v=>{freqMap[v]=(freqMap[v]||0)+1;});
-    var targetVal=rnd(1,rangeMax);
-    var fAbs=freqMap[targetVal]||0;
-    var askType=rnd(0,1);
-    if(askType===0){
-      q='Aquestes són les notes (de 1 a '+rangeMax+') de '+nRaw+' alumnes: '+raw.join(', ')+'. Quina és la freqüència absoluta del valor '+targetVal+'?';
-      correct=String(fAbs);
-      opts=buildOpts(correct,wrongNums(fAbs,3).map(String));
-      guide=['Compta quantes vegades apareix el valor '+targetVal+' a la llista','Repassa la llista d\'esquerra a dreta i marca cada coincidència'];
-      solution=guide.concat(['✅ El valor '+targetVal+' apareix '+fAbs+' vegades']);
-    } else {
-      var fRel=round2(fAbs/nRaw);
-      q='Aquestes són les notes (de 1 a '+rangeMax+') de '+nRaw+' alumnes: '+raw.join(', ')+'. Quina és la freqüència relativa del valor '+targetVal+'?';
-      correct=String(fRel);
-      opts=buildOpts(correct,wrongNums(fRel,3).map(String));
-      guide=['Primer compta la freqüència absoluta del valor '+targetVal,'fᵢ = '+fAbs,'Freqüència relativa hᵢ = fᵢ / N = '+fAbs+' / '+nRaw+' = '+fRel];
-      solution=guide.concat(['✅ Freqüència relativa = '+correct]);
+// 2. Taules de freqüències — bossa de 68 exercicis de 1r ESO
+var taulesBag=[];
+var lastTaulesContext=null;
+
+function buildTaulesPool(){
+  var contexts=[
+    {id:'esports',title:'els esports preferits',cats:['Futbol','Bàsquet','Natació','Atletisme']},
+    {id:'fruites',title:'les fruites preferides',cats:['Poma','Plàtan','Taronja','Pera']},
+    {id:'transport',title:'el transport per anar a classe',cats:['A peu','Bus','Cotxe','Bici']},
+    {id:'colors',title:'els colors preferits',cats:['Blau','Verd','Vermell','Groc']},
+    {id:'mascotes',title:'les mascotes de casa',cats:['Gos','Gat','Peixos','Cap']},
+    {id:'assignatures',title:'les assignatures preferides',cats:['Mates','Català','Anglès','Ciències']},
+    {id:'llibres',title:'els gèneres de llibres preferits',cats:['Aventura','Còmic','Misteri','Fantasia']},
+    {id:'musica',title:'els estils de música preferits',cats:['Pop','Rock','Rap','Clàssica']}
+  ];
+  var pool=[];
+
+  function add(ctx,type,q,correct,wrongs,guide,solution,visual){
+    pool.push({
+      topicId:'taules',type:type,contextId:ctx.id,
+      question:q,correct:String(correct),options:buildOpts(String(correct),wrongs),
+      guide:guide,solution:solution,visual:visual
+    });
+  }
+
+  contexts.forEach(function(ctx,ci){
+    var cats=ctx.cats;
+
+    // 1. Lectura directa d'una freqüència absoluta
+    var f1=uniqueBarValues(4,2,12),i1=ci%4;
+    add(ctx,1,
+      'Observa la taula sobre '+ctx.title+'. Quina és la freqüència absoluta de "'+cats[i1]+'"?',
+      f1[i1],wrongNums(f1[i1],6),
+      ['Localitza la categoria demanada a la primera fila.','Llegeix el nombre que apareix a la fila de freqüències sota aquesta categoria.'],
+      ['La categoria "'+cats[i1]+'" té freqüència '+f1[i1]+'.','✅ Freqüència absoluta = '+f1[i1]+'.'],
+      freqTableHtml(cats,f1,'Categoria','Freqüència'));
+
+    // 2. Total de dades a partir de la taula
+    var f2=uniqueBarValues(4,2,12),total2=f2.reduce(function(a,b){return a+b;},0);
+    add(ctx,2,
+      'Observa la taula sobre '+ctx.title+'. Quantes dades hi ha en total?',
+      total2,wrongNums(total2,8),
+      ['Cada freqüència indica quantes dades hi ha en una categoria.','Suma les quatre freqüències una sola vegada.'],
+      ['Total = '+f2.join(' + ')+' = '+total2+'.','✅ N = '+total2+'.'],
+      freqTableHtml(cats,f2,'Categoria','Freqüència'));
+
+    // 3. Freqüència relativa a partir d'una taula
+    var f3=uniqueBarValues(4,2,12),total3=f3.reduce(function(a,b){return a+b;},0),i3=(ci+1)%4;
+    var h3=round2(f3[i3]/total3);
+    add(ctx,3,
+      'Observa la taula sobre '+ctx.title+'. Quina és la freqüència relativa de "'+cats[i3]+'"? Arrodoneix a dues xifres decimals si cal.',
+      h3,[String(round2((f3[i3]+1)/total3)),String(round2(f3[i3]/(total3+1))),String(round2((total3-f3[i3])/total3)),String(f3[i3])],
+      ['Calcula primer el nombre total de dades sumant les freqüències.','Divideix la freqüència de la categoria pel nombre total de dades.'],
+      ['N = '+total3+'.','h = '+f3[i3]+' / '+total3+' = '+h3+'.','✅ Freqüència relativa = '+h3+'.'],
+      freqTableHtml(cats,f3,'Categoria','Freqüència'));
+
+    // 4. Freqüència absoluta a partir de N i una freqüència relativa exacta
+    var possiblesF=[2,4,5,6,8,10,12,15,16,18];
+    var fa4=possiblesF[(ci*3)%possiblesF.length],N4=20,h4=round2(fa4/N4);
+    add(ctx,4,
+      'En un estudi de '+N4+' dades sobre '+ctx.title+', una categoria té freqüència relativa '+h4+'. Quina és la seva freqüència absoluta?',
+      fa4,[String(N4-fa4),String(Math.max(0,fa4-1)),String(fa4+1),String(round2(h4*100))],
+      ['Relaciona la freqüència relativa amb la freqüència absoluta i el total de dades.','Multiplica la part del total pel nombre de dades.'],
+      ['f = h × N.','f = '+h4+' × '+N4+' = '+fa4+'.','✅ Freqüència absoluta = '+fa4+'.']);
+
+    // 5. Freqüència que falta perquè la suma sigui N
+    var f5=uniqueBarValues(4,2,10),miss5=(ci+2)%4,total5=f5.reduce(function(a,b){return a+b;},0);
+    var conegudes5=f5.filter(function(_,i){return i!==miss5;});
+    add(ctx,5,
+      'En una taula de '+total5+' dades sobre '+ctx.title+', tres freqüències són '+conegudes5.join(', ')+'. Quina freqüència falta?',
+      f5[miss5],wrongNums(f5[miss5],6),
+      ['La suma de totes les freqüències absolutes ha de ser igual al total N.','Suma les freqüències conegudes i resta aquest resultat del total.'],
+      ['Freqüències conegudes = '+conegudes5.join(' + ')+' = '+conegudes5.reduce(function(a,b){return a+b;},0)+'.','✅ Freqüència que falta = '+f5[miss5]+'.']);
+
+    // 6. Categoria amb freqüència màxima
+    var f6=uniqueBarValues(4,2,12),max6=Math.max.apply(null,f6),im6=f6.indexOf(max6);
+    add(ctx,6,
+      'Observa la taula sobre '+ctx.title+'. Quina categoria té la freqüència més alta?',
+      cats[im6],cats.filter(function(c){return c!==cats[im6];}),
+      ['Compara les freqüències de totes les categories.','Busca el valor més gran de la fila de freqüències.'],
+      ['La freqüència màxima és '+max6+'.','✅ Correspon a '+cats[im6]+'.'],
+      freqTableHtml(cats,f6,'Categoria','Freqüència'));
+
+    // 7. Identificar categoria a partir d'una freqüència
+    var f7=uniqueBarValues(4,2,12),i7=(ci+3)%4;
+    add(ctx,7,
+      'Observa la taula sobre '+ctx.title+'. Quina categoria té freqüència '+f7[i7]+'?',
+      cats[i7],cats.filter(function(c){return c!==cats[i7];}),
+      ['Busca la freqüència indicada a la segona fila.','Llegeix la categoria situada just a sobre d\'aquesta freqüència.'],
+      ['La freqüència '+f7[i7]+' correspon a "'+cats[i7]+'".','✅ '+cats[i7]+'.'],
+      freqTableHtml(cats,f7,'Categoria','Freqüència'));
+
+    // 8. Dades que NO pertanyen a una categoria
+    var f8=uniqueBarValues(4,2,12),i8=ci%4,total8=f8.reduce(function(a,b){return a+b;},0),no8=total8-f8[i8];
+    add(ctx,8,
+      'Observa la taula sobre '+ctx.title+'. Quantes dades NO pertanyen a la categoria "'+cats[i8]+'"?',
+      no8,wrongNums(no8,8),
+      ['Calcula el total de dades de la taula.','Resta del total la freqüència de la categoria indicada.'],
+      ['N = '+total8+' i la freqüència de "'+cats[i8]+'" és '+f8[i8]+'.','✅ '+total8+' − '+f8[i8]+' = '+no8+'.'],
+      freqTableHtml(cats,f8,'Categoria','Freqüència'));
+  });
+
+  pool.push({topicId:'taules',type:9,contextId:'teoria1',question:'Què indica la freqüència absoluta d\'un valor?',correct:'Quantes vegades apareix aquest valor',options:buildOpts('Quantes vegades apareix aquest valor',['La part del total expressada sempre en graus','La suma de tots els valors de la variable','La diferència entre el valor més gran i el més petit']),guide:['Pensa què comptem directament en una taula de freqüències.','La freqüència absoluta és un recompte, no una proporció.'],solution:['La freqüència absoluta compta les aparicions d\'un valor o categoria.','✅ Indica quantes vegades apareix.']});
+  pool.push({topicId:'taules',type:10,contextId:'teoria2',question:'Quina relació defineix la freqüència relativa h?',correct:'h = f / N',options:buildOpts('h = f / N',['h = N / f','h = f + N','h = N − f']),guide:['Relaciona el recompte d\'una categoria amb el total de dades.','La freqüència relativa expressa quina part del total representa la categoria.'],solution:['La freqüència relativa és la freqüència absoluta dividida pel total de dades.','✅ h = f / N.']});
+  pool.push({topicId:'taules',type:11,contextId:'teoria3',question:'Quant ha de sumar la fila de freqüències absolutes d\'una taula completa?',correct:'El nombre total de dades N',options:buildOpts('El nombre total de dades N',['1','100','La freqüència més gran']),guide:['Cada dada queda comptada en una de les categories de la taula.','Quan sumem tots els recomptes recuperem el total de dades.'],solution:['La suma de totes les freqüències absolutes compta totes les dades.','✅ La suma és N.']});
+  pool.push({topicId:'taules',type:12,contextId:'teoria4',question:'Quant han de sumar totes les freqüències relatives d\'una taula completa?',correct:'1',options:buildOpts('1',['100','N','0,5']),guide:['Cada freqüència relativa representa una part del conjunt total.','Pensa quin nombre representa el total complet quan treballem amb proporcions.'],solution:['Totes les parts juntes formen el total complet.','✅ La suma de les freqüències relatives és 1.']});
+
+  return shuffle(pool);
+}
+
+function genTaules(){
+  if(!Array.isArray(taulesBag)||taulesBag.length===0)taulesBag=buildTaulesPool();
+  var pick=taulesBag.length-1;
+  if(lastTaulesContext!==null&&taulesBag[pick].contextId===lastTaulesContext&&taulesBag.length>1){
+    for(var i=taulesBag.length-2;i>=0;i--){
+      if(taulesBag[i].contextId!==lastTaulesContext){
+        var tmp=taulesBag[pick];taulesBag[pick]=taulesBag[i];taulesBag[i]=tmp;
+        break;
+      }
     }
   }
-  return {question:q,correct:correct,options:opts,guide:guide,solution:solution,visual:visual};
+  var ex=taulesBag.pop();
+  lastTaulesContext=ex.contextId;
+  return ex;
 }
 
-// 3. Diagrames de barres
-function genBarres(){
+// AMPLIACIÓ 2n — Freqüències acumulades
+function genAcumulades(){
   var type=rnd(1,4);
   var q,correct,opts,guide,solution,visual;
-  var categories=['Futbol','Bàsquet','Tennis','Natació','Ciclisme'];
-  var valors=[rnd(8,20),rnd(5,15),rnd(3,10),rnd(4,12),rnd(2,8)];
-  var catIdx=rnd(0,categories.length-1);
 
   if(type===1){
-    q='Observa el diagrama de barres sobre l\'esport preferit. Quants alumnes prefereixen el '+categories[catIdx]+'?';
-    correct=String(valors[catIdx]);
-    opts=buildOpts(correct,wrongNums(valors[catIdx],3).map(String));
-    guide=['En un diagrama de barres, l\'alçada de cada barra = freqüència de la categoria','Llegeix l\'etiqueta sobre la barra de "'+categories[catIdx]+'"'];
-    solution=guide.concat(['✅ '+valors[catIdx]+' alumnes prefereixen el '+categories[catIdx]]);
-    visual=svgBarChart(categories,valors,catIdx);
+    var freqs=Array.from({length:4},()=>rnd(1,8));
+    var idx=rnd(1,3);
+    var acum=freqs.slice(0,idx+1).reduce((a,b)=>a+b,0);
+    q='Les freqüències absolutes dels primers '+(idx+1)+' valors són: '+freqs.slice(0,idx+1).join(', ')+'. Quina és la freqüència acumulada fins al '+ordinalCa(idx+1)+' valor?';
+    correct=String(acum);
+    opts=buildOpts(correct,[String(freqs[idx]),String(acum-freqs[0]),String(freqs.reduce((a,b)=>a+b,0))].concat(wrongNums(acum,5)));
+    guide=['La freqüència acumulada suma les freqüències des del primer valor fins al valor indicat.','Atura la suma exactament en el valor que demana l\'enunciat.'];
+    solution=['Fᵢ = f₁ + f₂ + ... + fᵢ',freqs.slice(0,idx+1).join(' + ')+' = '+acum,'✅ Freqüència acumulada = '+acum];
   } else if(type===2){
-    var slice2=valors.slice(0,4);
-    q='Observa el diagrama de barres. Sumant '+categories.slice(0,4).join(', ')+', quants alumnes hi ha en total?';
-    correct=String(slice2.reduce((a,b)=>a+b,0));
-    opts=buildOpts(correct,wrongNums(parseInt(correct),3).map(String));
-    guide=['Per obtenir el total, sumem totes les freqüències que es veuen al gràfic','Total = '+slice2.join(' + ')+' = '+correct];
-    solution=guide.concat(['✅ Total = '+correct+' alumnes']);
-    visual=svgBarChart(categories.slice(0,4),slice2,-1);
+    var f1=rnd(2,7),f2=rnd(2,7),f3=rnd(2,7),f4=rnd(2,7);
+    var fs=[f1,f2,f3,f4],cum=[],s=0;fs.forEach(function(f){s+=f;cum.push(s);});
+    var k=rnd(1,3);
+    q='Les freqüències acumulades són '+cum.join(', ')+'. Quina és la freqüència absoluta del '+ordinalCa(k+1)+' valor?';
+    correct=String(fs[k]);
+    opts=buildOpts(correct,[String(cum[k]),String(cum[k-1]),String(cum[k]-cum[0])].concat(wrongNums(fs[k],5)));
+    guide=['Una freqüència acumulada conté tot el que hi havia fins al valor anterior més la freqüència nova.','Resta dues freqüències acumulades consecutives per recuperar la freqüència absoluta.'];
+    solution=['f'+(k+1)+' = F'+(k+1)+' − F'+k,cum[k]+' − '+cum[k-1]+' = '+fs[k],'✅ Freqüència absoluta = '+fs[k]];
   } else if(type===3){
-    var sliceVals=valors.slice(0,4);
-    var maxV3=Math.max(...sliceVals);
-    var maxIdxLocal=sliceVals.indexOf(maxV3);
-    q='Observa el diagrama de barres dels esports. Quin esport és el preferit (té la barra més alta)?';
-    correct=categories[maxIdxLocal];
-    opts=buildOpts(correct,categories.filter((c,i)=>i!==maxIdxLocal).slice(0,3));
-    guide=['El valor més gran correspon a l\'esport més preferit','Compara visualment l\'alçada de les barres'];
-    solution=guide.concat(['✅ L\'esport preferit és: '+correct]);
-    visual=svgBarChart(categories.slice(0,4),sliceVals,maxIdxLocal);
+    q='Què indica la freqüència acumulada d\'un valor en una taula ordenada?';
+    correct='El nombre de dades des del primer valor fins a aquell valor, inclòs';
+    opts=buildOpts(correct,['Només quantes vegades apareix aquell valor','El percentatge que representa aquell valor','La diferència entre la freqüència més gran i la més petita']);
+    guide=['Pensa en el significat de la paraula “acumulada”.','La suma es va construint des del primer valor i no torna a començar a cada fila.'];
+    solution=['La freqüència acumulada afegeix successivament les freqüències absolutes.','✅ Indica quantes dades s\'han comptat fins a aquell valor, inclòs.'];
   } else {
-    q='Quan és millor usar un DIAGRAMA DE BARRES en comptes d\'un diagrama de sectors?';
-    correct='Quan volem comparar quantitats entre categories';
-    opts=buildOpts(correct,['Quan volem veure proporcions respecte al total','Quan les dades formen una distribució contínua','Quan tenim una sola categoria']);
-    guide=['Diagrama de BARRES: ideal per comparar valors absoluts entre categories','Diagrama de SECTORS: ideal per veure proporcions o percentatges del total','Histograma: per dades contínues agrupades en intervals'];
-    solution=guide.concat(['✅ '+correct]);
+    var vals=[1,2,3,4],freqs4=vals.map(()=>rnd(1,6)),cum4=[],sum4=0;freqs4.forEach(function(f){sum4+=f;cum4.push(sum4);});
+    var ask=rnd(0,3);
+    q='Observa la taula. Quina és la freqüència acumulada del valor '+vals[ask]+'?';
+    correct=String(cum4[ask]);
+    opts=buildOpts(correct,[String(freqs4[ask]),String(sum4),String(Math.max(0,cum4[ask]-freqs4[ask]))].concat(wrongNums(cum4[ask],5)));
+    guide=['Llegeix les freqüències des del primer valor fins al valor demanat.','Suma-les totes, inclosa la freqüència del valor demanat.'];
+    solution=['Freqüències fins a '+vals[ask]+': '+freqs4.slice(0,ask+1).join(' + '),'✅ Freqüència acumulada = '+cum4[ask]];
+    visual=freqTableHtml(vals,freqs4,'Valor','Freqüència','F. acumulada',cum4);
   }
-  return {question:q,correct:correct,options:opts,guide:guide,solution:solution,visual:visual};
+  return {topicId:'acumulades2',type:type,question:q,correct:String(correct),options:opts,guide:guide,solution:solution,visual:visual};
+}
+
+// 3. Diagrames de barres — bossa de 100 preguntes sense repeticions
+var barresBag=[];
+var lastBarresContext=null;
+
+function uniqueBarValues(n,min,max){
+  var pool=[];
+  for(var v=min;v<=max;v++)pool.push(v);
+  return shuffle(pool).slice(0,n);
+}
+
+function buildBarresPool(){
+  var contexts=[
+    {id:'esports',title:'els esports preferits',cats:['Futbol','Bàsquet','Tennis','Natació','Ciclisme']},
+    {id:'fruites',title:'les fruites preferides',cats:['Poma','Plàtan','Taronja','Pera','Kiwi']},
+    {id:'transport',title:'el transport per anar a classe',cats:['A peu','Bus','Cotxe','Bici','Patinet']},
+    {id:'mascotes',title:'les mascotes de casa',cats:['Gos','Gat','Peixos','Ocells','Cap']},
+    {id:'colors',title:'els colors preferits',cats:['Blau','Verd','Vermell','Lila','Groc']},
+    {id:'assignatures',title:'les assignatures preferides',cats:['Mates','Català','Anglès','Ciències','Música']},
+    {id:'extraescolars',title:'les activitats extraescolars',cats:['Handbol','Dansa','Teatre','Música','Robòtica']},
+    {id:'llibres',title:'els gèneres de llibres preferits',cats:['Aventura','Misteri','Còmic','Fantasia','Humor']},
+    {id:'jocs',title:'els jocs de taula preferits',cats:['Escacs','Parxís','Dames','Uno','Dobble']},
+    {id:'esmorzar',title:'els esmorzars preferits',cats:['Entrepà','Fruita','Cereals','Iogurt','Galetes']},
+    {id:'musica',title:'els estils de música preferits',cats:['Pop','Rock','Rap','Clàssica','Electrònica']},
+    {id:'pati',title:'les zones preferides del pati',cats:['Pista','Jardí','Porxo','Bancs','Pati gran']}
+  ];
+
+  var pool=[];
+
+  function makeEx(ctx,type,q,correct,wrongs,guide,solution,vals,highlightIdx){
+    pool.push({
+      topicId:'barres',type:type,contextId:ctx.id,
+      question:q,correct:String(correct),options:buildOpts(String(correct),wrongs),
+      guide:guide,solution:solution,
+      visual:vals?svgBarChart(ctx.cats,vals,highlightIdx===undefined?-1:highlightIdx):undefined
+    });
+  }
+
+  contexts.forEach(function(ctx,ci){
+    var cats=ctx.cats;
+
+    var v1=uniqueBarValues(5,3,20),i1=ci%5;
+    makeEx(ctx,1,
+      'Observa el diagrama de barres sobre '+ctx.title+'. Quina freqüència té la categoria "'+cats[i1]+'"?',
+      v1[i1],wrongNums(v1[i1],6),
+      ['Localitza la categoria demanada a l\'eix horitzontal.','Llegeix la freqüència que correspon a l\'alçada de la seva barra.'],
+      ['La barra de "'+cats[i1]+'" arriba fins a la freqüència '+v1[i1]+'.','✅ Freqüència = '+v1[i1]+'.'],v1,i1);
+
+    var v2=uniqueBarValues(5,3,20),max2=Math.max(...v2),imx=v2.indexOf(max2);
+    makeEx(ctx,2,
+      'Observa el diagrama de barres sobre '+ctx.title+'. Quina categoria té la freqüència més alta?',
+      cats[imx],cats.filter(function(c){return c!==cats[imx];}),
+      ['Compara les alçades de totes les barres.','Busca la barra que arriba més amunt.'],
+      ['La freqüència màxima del gràfic és '+max2+'.','✅ La categoria amb més freqüència és '+cats[imx]+'.'],v2,imx);
+
+    var v3=uniqueBarValues(5,3,20),min3=Math.min(...v3),imn=v3.indexOf(min3);
+    makeEx(ctx,3,
+      'Observa el diagrama de barres sobre '+ctx.title+'. Quina categoria té la freqüència més baixa?',
+      cats[imn],cats.filter(function(c){return c!==cats[imn];}),
+      ['Compara les alçades de totes les barres.','Busca la barra que arriba menys amunt.'],
+      ['La freqüència mínima del gràfic és '+min3+'.','✅ La categoria amb menys freqüència és '+cats[imn]+'.'],v3,imn);
+
+    var v4=uniqueBarValues(5,3,20),a4=ci%5,b4=(ci+2)%5,d4=Math.abs(v4[a4]-v4[b4]);
+    makeEx(ctx,4,
+      'En el diagrama sobre '+ctx.title+', quina diferència de freqüència hi ha entre "'+cats[a4]+'" i "'+cats[b4]+'"?',
+      d4,wrongNums(d4,6),
+      ['Llegeix la freqüència de les dues categories indicades.','Resta la freqüència menor de la major.'],
+      ['Les freqüències són '+v4[a4]+' i '+v4[b4]+'.','Diferència = '+Math.max(v4[a4],v4[b4])+' − '+Math.min(v4[a4],v4[b4]),'✅ Diferència = '+d4+'.'],v4,-1);
+
+    var v5=uniqueBarValues(5,3,20),a5=(ci+1)%5,b5=(ci+3)%5,sum5=v5[a5]+v5[b5];
+    makeEx(ctx,5,
+      'Observa el diagrama sobre '+ctx.title+'. Quina és la freqüència conjunta de "'+cats[a5]+'" i "'+cats[b5]+'"?',
+      sum5,wrongNums(sum5,6),
+      ['Llegeix la freqüència de cadascuna de les dues barres.','Suma les dues freqüències una sola vegada.'],
+      ['Les freqüències són '+v5[a5]+' i '+v5[b5]+'.',v5[a5]+' + '+v5[b5]+' = '+sum5,'✅ Freqüència conjunta = '+sum5+'.'],v5,-1);
+
+    var v6=uniqueBarValues(5,3,20),tot6=v6.reduce(function(a,b){return a+b;},0);
+    makeEx(ctx,6,
+      'Observa el diagrama sobre '+ctx.title+'. Quantes dades representa el gràfic en total?',
+      tot6,wrongNums(tot6,6),
+      ['Llegeix la freqüència de totes les barres.','Suma totes les freqüències del gràfic.'],
+      ['Total = '+v6.join(' + '),'✅ Total = '+tot6+'.'],v6,-1);
+
+    var v7=uniqueBarValues(5,3,20),i7=(ci+1)%5;
+    makeEx(ctx,7,
+      'En el diagrama sobre '+ctx.title+', quina categoria té freqüència '+v7[i7]+'?',
+      cats[i7],cats.filter(function(c){return c!==cats[i7];}),
+      ['Busca a l\'eix vertical la freqüència indicada.','Identifica quina barra arriba exactament a aquesta freqüència.'],
+      ['La barra que té freqüència '+v7[i7]+' correspon a "'+cats[i7]+'".','✅ '+cats[i7]+'.'],v7,i7);
+
+    var v8=uniqueBarValues(5,3,20),a8=(ci+2)%5,b8=(ci+4)%5,win8=v8[a8]>v8[b8]?a8:b8,lose8=win8===a8?b8:a8;
+    makeEx(ctx,8,
+      'Segons el diagrama sobre '+ctx.title+', quina de les dues categories té més freqüència: "'+cats[a8]+'" o "'+cats[b8]+'"?',
+      cats[win8],[cats[lose8],'Tenen la mateixa freqüència','No es pot saber amb el gràfic'],
+      ['Compara només les dues barres indicades.','La barra més alta correspon a la freqüència més gran.'],
+      ['"'+cats[win8]+'" té freqüència '+v8[win8]+' i "'+cats[lose8]+'" en té '+v8[lose8]+'.','✅ Té més freqüència '+cats[win8]+'.'],v8,-1);
+  });
+
+  pool.push({topicId:'barres',type:9,contextId:'teoria1',question:'Per què les barres d\'un diagrama de barres acostumen a estar separades?',correct:'Perquè representen categories o valors discrets diferenciats',options:buildOpts('Perquè representen categories o valors discrets diferenciats',['Perquè representen intervals continus','Per indicar que sempre falten dades','Perquè totes les freqüències són diferents']),guide:['Pensa quin tipus de valors es col·loquen habitualment a l\'eix horitzontal.','Compara aquest gràfic amb un histograma.'],solution:['En un diagrama de barres cada barra representa una categoria o un valor discret separat dels altres.','✅ Per això les barres es dibuixen separades.']});
+  pool.push({topicId:'barres',type:10,contextId:'teoria2',question:'En un diagrama de barres de freqüències, què representa habitualment l\'eix vertical?',correct:'La freqüència',options:buildOpts('La freqüència',['Les categories','Els intervals continus','El nom de l\'estudi']),guide:['Recorda què indica l\'alçada de cada barra.','L\'eix horitzontal i el vertical tenen funcions diferents.'],solution:['A l\'eix horitzontal situem les categories o valors.','✅ L\'eix vertical representa la freqüència.']});
+  pool.push({topicId:'barres',type:11,contextId:'teoria3',question:'Quan és especialment útil un diagrama de barres?',correct:'Quan volem comparar freqüències entre categories',options:buildOpts('Quan volem comparar freqüències entre categories',['Quan volem representar intervals continus sense separació','Quan només volem calcular una probabilitat','Quan volem ordenar operacions aritmètiques']),guide:['Pensa què permet comparar visualment l\'alçada de diverses barres.','Diferencia categories de dades contínues agrupades en intervals.'],solution:['Les alçades de les barres permeten comparar ràpidament les freqüències de categories diferents.','✅ És especialment útil per comparar categories.']});
+  pool.push({topicId:'barres',type:12,contextId:'teoria4',question:'Quina afirmació descriu correctament un diagrama de barres?',correct:'Cada barra associa una categoria o valor discret amb una freqüència',options:buildOpts('Cada barra associa una categoria o valor discret amb una freqüència',['Cada barra representa sempre un interval continu','Les barres han d\'estar obligatòriament juntes','L\'alçada de les barres no té relació amb la freqüència']),guide:['Relaciona cada barra amb el valor o categoria de l\'eix horitzontal.','Pensa què significa l\'alçada de la barra.'],solution:['Cada barra correspon a una categoria o valor discret i la seva alçada indica la freqüència.','✅ Aquesta és la descripció correcta.']});
+
+  return shuffle(pool);
+}
+
+function genBarres(){
+  if(!Array.isArray(barresBag)||barresBag.length===0)barresBag=buildBarresPool();
+  var pick=barresBag.length-1;
+  if(lastBarresContext!==null&&barresBag[pick].contextId===lastBarresContext&&barresBag.length>1){
+    for(var i=barresBag.length-2;i>=0;i--){
+      if(barresBag[i].contextId!==lastBarresContext){
+        var tmp=barresBag[pick];barresBag[pick]=barresBag[i];barresBag[i]=tmp;
+        break;
+      }
+    }
+  }
+  var ex=barresBag.pop();
+  lastBarresContext=ex.contextId;
+  return ex;
 }
 
 // 4. Histogrames
 function genHistograma(){
-  var type=rnd(1,5);
+  var type=rnd(1,6);
   var q,correct,opts,guide,solution,visual;
 
   if(type===1){
     q='Quina és la principal diferència entre un histograma i un diagrama de barres?';
     correct='Al histograma les barres estan juntes (sense espai) i representen intervals';
-    opts=buildOpts(correct,['Al histograma les barres estan separades','El histograma usa colors i el diagrama de barres no','El histograma és per a dades qualitatives']);
-    guide=['Diagrama de barres: dades DISCRETES o QUALITATIVES, barres separades','Histograma: dades CONTÍNUES agrupades en intervals, barres juntes','Al histograma, l\'eix X representa intervals (rangs de valors), no categories'];
-    solution=guide.concat(['✅ '+correct]);
+    opts=buildOpts(correct,['Al histograma les barres estan separades i representen categories','El histograma només es pot usar amb percentatges','El histograma és per a dades qualitatives']);
+    guide=['Fixa\'t en el tipus de dades representades a l\'eix horitzontal.','Recorda què passa amb l\'espai entre barres quan els valors s\'agrupen en intervals continus.'];
+    solution=['Un diagrama de barres representa categories o valors discrets amb barres separades.','Un histograma representa intervals de dades contínues amb barres juntes.','✅ '+correct+'.'];
     visual=svgBarsVsHistogram();
   } else if(type===2){
     var intervals=[{a:0,b:10},{a:10,b:20},{a:20,b:30},{a:30,b:40},{a:40,b:50}];
-    var freqsH=[rnd(3,8),rnd(5,12),rnd(8,15),rnd(4,10),rnd(2,6)];
-    var idxH=rnd(0,4);
-    q='Observa l\'histograma d\'edats. Quantes persones hi ha en l\'interval ['+intervals[idxH].a+', '+intervals[idxH].b+'[?';
-    correct=String(freqsH[idxH]);
-    opts=buildOpts(correct,wrongNums(freqsH[idxH],3).map(String));
-    guide=["En un histograma, l'ALÇADA de la barra = freqüència absoluta de l'interval",'Interval ['+intervals[idxH].a+', '+intervals[idxH].b+'[ vol dir: valors ≥ '+intervals[idxH].a+' i < '+intervals[idxH].b];
-    solution=guide.concat(['✅ Hi ha '+correct+' persones en l\'interval ['+intervals[idxH].a+', '+intervals[idxH].b+'[']);
-    visual=svgHistogram(intervals.map(iv=>'['+iv.a+','+iv.b+'['),freqsH,idxH);
+    var freqs=[rnd(3,8),rnd(5,12),rnd(8,15),rnd(4,10),rnd(2,6)];
+    var idx=rnd(0,4),txt=intervalCa(intervals[idx].a,intervals[idx].b);
+    q='Observa l\'histograma de temps de trajecte (en minuts). Quantes dades hi ha en l\'interval '+txt+'?';
+    correct=String(freqs[idx]);
+    opts=buildOpts(correct,wrongNums(freqs[idx],6));
+    guide=['En la notació [a, b), el límit inferior s\'inclou i el superior s\'exclou.','Localitza l\'interval demanat i llegeix la freqüència que correspon a l\'alçada de la seva barra.'];
+    solution=['L\'interval '+txt+' vol dir '+intervals[idx].a+' ≤ x < '+intervals[idx].b+'.','La seva barra té freqüència '+freqs[idx]+'.','✅ Freqüència = '+freqs[idx]+'.'];
+    visual=svgHistogram(intervals.map(function(iv){return intervalCa(iv.a,iv.b);}),freqs,idx);
   } else if(type===3){
-    var ample=rnd(5,10);
-    var inici=rnd(0,5)*10;
+    var ample=rnd(5,10),inici=rnd(0,5)*10;
+    var ini3=inici+2*ample,fi3=inici+3*ample;
     q='En un histograma, els intervals comencen a '+inici+' i tenen amplada '+ample+'. Quin és el 3r interval?';
-    var ini3=inici+2*ample;
-    var fi3=inici+3*ample;
-    correct='['+ini3+', '+fi3+'[';
-    opts=buildOpts(correct,['['+inici+', '+(inici+ample)+'[','['+(inici+ample)+', '+(inici+2*ample)+'[','['+fi3+', '+(fi3+ample)+'[']);
-    guide=['Interval 1: ['+inici+', '+(inici+ample)+'[','Interval 2: ['+(inici+ample)+', '+(inici+2*ample)+'[','Interval 3: ['+(inici+2*ample)+', '+(inici+3*ample)+'['];
-    solution=guide.concat(['✅ El 3r interval és: '+correct]);
+    correct=intervalCa(ini3,fi3);
+    opts=buildOpts(correct,[intervalCa(inici,inici+ample),intervalCa(inici+ample,inici+2*ample),intervalCa(fi3,fi3+ample)]);
+    guide=['Construeix els intervals consecutivament mantenint sempre la mateixa amplada.','Cada interval inclou el límit esquerre i exclou el límit dret.'];
+    solution=['1r interval: '+intervalCa(inici,inici+ample),'2n interval: '+intervalCa(inici+ample,inici+2*ample),'✅ 3r interval: '+correct];
   } else if(type===4){
-    var totalDades=rnd(30,60);
-    var freqI=[rnd(5,10),rnd(8,15)];
-    var freqI3=rnd(5,12);
-    var resta=totalDades-freqI[0]-freqI[1]-freqI3;
-    if(resta<1)resta=1;
-    q='En un histograma de '+totalDades+' dades, els intervals 1, 2 i 3 tenen freqüències '+freqI[0]+', '+freqI[1]+' i '+freqI3+'. Quantes dades hi ha als intervals restants?';
+    var f1=rnd(5,10),f2=rnd(8,15),f3=rnd(5,12),resta=rnd(4,15);
+    var total=f1+f2+f3+resta;
+    q='En un histograma de '+total+' dades, els intervals 1, 2 i 3 tenen freqüències '+f1+', '+f2+' i '+f3+'. Quantes dades hi ha als intervals restants?';
     correct=String(resta);
-    opts=buildOpts(correct,wrongNums(resta,3).map(String));
-    guide=['La suma de TOTES les freqüències = total de dades ('+totalDades+')','Dades restants = '+totalDades+' − '+freqI[0]+' − '+freqI[1]+' − '+freqI3+' = '+resta];
-    solution=guide.concat(['✅ Dades als intervals restants = '+correct]);
+    opts=buildOpts(correct,[String(total-(f1+f2)),String(f1+f2+f3),String(total-f3)].concat(wrongNums(resta,6)));
+    guide=['La suma de totes les freqüències ha de coincidir amb el nombre total de dades.','Resta del total les freqüències dels intervals que ja coneixes.'];
+    solution=['Dades restants = '+total+' − '+f1+' − '+f2+' − '+f3,'✅ Dades restants = '+resta];
+  } else if(type===5){
+    var width=10,nIntervals=4,start=rnd(0,2)*10,nRaw=rnd(10,16);
+    var raw=Array.from({length:nRaw},function(){return rnd(start,start+width*nIntervals-1);});
+    raw[0]=start+width;
+    var counts=new Array(nIntervals).fill(0);
+    raw.forEach(function(v){counts[Math.floor((v-start)/width)]++;});
+    var askIdx=rnd(0,nIntervals-1);
+    var low=start+askIdx*width,high=start+(askIdx+1)*width,txt5=intervalCa(low,high);
+    q='Aquestes són unes dades: '+raw.join(', ')+'. Si les agrupem en intervals d\'amplada '+width+' a partir de '+start+', quantes cauen a l\'interval '+txt5+'?';
+    correct=String(counts[askIdx]);
+    opts=buildOpts(correct,wrongNums(counts[askIdx],6));
+    guide=['Recorda: '+txt5+' vol dir '+low+' ≤ x < '+high+'.','Compta els valors que compleixen les dues condicions; el límit superior no entra en aquest interval.'];
+    solution=['A '+txt5+' hi entren els valors amb '+low+' ≤ x < '+high+'.','✅ Freqüència = '+counts[askIdx]+'.'];
   } else {
-    var width=10,nIntervals=4;
-    var start=rnd(0,2)*10;
-    var nRaw2=rnd(10,16);
-    var raw2=Array.from({length:nRaw2},()=>rnd(start,start+width*nIntervals-1));
-    var counts2=new Array(nIntervals).fill(0);
-    raw2.forEach(function(v){var idx=Math.min(nIntervals-1,Math.floor((v-start)/width));counts2[idx]++;});
-    var askIdx2=rnd(0,nIntervals-1);
-    q='Aquestes són les edats de '+nRaw2+' persones: '+raw2.join(', ')+'. Si agrupem en intervals d\'amplada '+width+' a partir de '+start+', quantes persones hi ha a l\'interval ['+(start+askIdx2*width)+', '+(start+(askIdx2+1)*width)+'[?';
-    correct=String(counts2[askIdx2]);
-    opts=buildOpts(correct,wrongNums(counts2[askIdx2],3).map(String));
-    guide=['Determina els límits de l\'interval ['+(start+askIdx2*width)+', '+(start+(askIdx2+1)*width)+'[','Repassa la llista i compta quants valors hi entren (límit inferior inclòs, superior exclòs)'];
-    solution=guide.concat(['✅ Hi ha '+counts2[askIdx2]+' persones a l\'interval']);
+    var w=[5,10][rnd(0,1)],st=rnd(0,2)*10,k=rnd(1,3),boundary=st+k*w;
+    var left=intervalCa(boundary-w,boundary),right=intervalCa(boundary,boundary+w),next=intervalCa(boundary+w,boundary+2*w);
+    q='Els intervals consecutius són '+left+', '+right+', ... A quin interval pertany exactament el valor '+boundary+'?';
+    correct=right;
+    opts=buildOpts(correct,[left,next,'Pertany als dos intervals']);
+    guide=['En la notació [a, b), el límit esquerre s\'inclou i el límit dret s\'exclou.','Quan un valor coincideix amb una frontera, pertany a l\'interval que comença en aquell valor.'];
+    solution=[left+' conté valors '+(boundary-w)+' ≤ x < '+boundary+', per tant no inclou '+boundary+'.',right+' comença en '+boundary+' i sí que l\'inclou.','✅ '+boundary+' pertany a '+right+'.'];
   }
-  return {question:q,correct:correct,options:opts,guide:guide,solution:solution,visual:visual};
+  return {topicId:'histograma',type:type,question:q,correct:String(correct),options:opts,guide:guide,solution:solution,visual:visual};
 }
 
-// 5. Diagrames de sectors
+// 5. Diagrames de sectors — bossa de 94 preguntes sense repeticions
+var sectorsBag=[];
+var lastSectorsContext=null;
+
+function sectorPercentages(){
+  var candidates=[10,15,20,25,30,35,40,45,50];
+  for(var tries=0;tries<500;tries++){
+    var first=shuffle(candidates).slice(0,3);
+    var last=100-first.reduce(function(a,b){return a+b;},0);
+    if(last>=10&&last<=50&&last%5===0&&first.indexOf(last)<0){
+      return shuffle(first.concat([last]));
+    }
+  }
+  return shuffle([40,30,20,10]);
+}
+
+function buildSectorsPool(){
+  var contexts=[
+    {id:'esports',title:'els esports preferits',cats:['Futbol','Bàsquet','Natació','Atletisme']},
+    {id:'fruites',title:'les fruites preferides',cats:['Poma','Plàtan','Taronja','Pera']},
+    {id:'transport',title:'el transport per anar a classe',cats:['A peu','Bus','Cotxe','Bici']},
+    {id:'colors',title:'els colors preferits',cats:['Blau','Verd','Vermell','Groc']},
+    {id:'mascotes',title:'les mascotes de casa',cats:['Gos','Gat','Peixos','Cap']},
+    {id:'llibres',title:'els gèneres de llibres preferits',cats:['Aventura','Còmic','Misteri','Fantasia']},
+    {id:'musica',title:'els estils de música preferits',cats:['Pop','Rock','Rap','Electrònica']},
+    {id:'pati',title:'les zones preferides del pati',cats:['Pista','Jardí','Porxo','Bancs']},
+    {id:'esmorzar',title:'els esmorzars preferits',cats:['Entrepà','Fruita','Cereals','Iogurt']},
+    {id:'extraescolars',title:'les activitats extraescolars',cats:['Handbol','Dansa','Música','Robòtica']}
+  ];
+  var totals=[20,40,60,80,100];
+  var pool=[];
+
+  function addEx(ctx,type,q,correct,wrongs,guide,solution,visual){
+    pool.push({
+      topicId:'sectors',type:type,contextId:ctx.id,
+      question:q,correct:String(correct),options:buildOpts(String(correct),wrongs),
+      guide:guide,solution:solution,visual:visual
+    });
+  }
+
+  contexts.forEach(function(ctx,ci){
+    var cats=ctx.cats;
+
+    // 1. Lectura directa d'un percentatge
+    var p1=sectorPercentages(),i1=ci%4;
+    addEx(ctx,1,
+      'Observa el diagrama de sectors sobre '+ctx.title+'. Quin percentatge correspon a "'+cats[i1]+'"?',
+      p1[i1]+'%',p1.filter(function(_,i){return i!==i1;}).map(function(v){return v+'%';}),
+      ['Localitza la categoria demanada a la llegenda.','Relaciona-la amb el percentatge indicat per al seu sector.'],
+      ['El sector de "'+cats[i1]+'" representa '+p1[i1]+'% del total.','✅ Percentatge = '+p1[i1]+'%.'],
+      svgPieChart(cats,p1,i1)+pieLegend(cats,p1,'%'));
+
+    // 2. Percentatge -> graus
+    var p2=sectorPercentages(),i2=(ci+1)%4,g2=p2[i2]*3.6;
+    addEx(ctx,2,
+      'En el diagrama sobre '+ctx.title+', "'+cats[i2]+'" representa el '+p2[i2]+'% del total. Quants graus ocupa aquest sector?',
+      g2+'°',[p2[i2]+'°',(g2+18)+'°',Math.max(0,g2-18)+'°',(360-g2)+'°'],
+      ['Recorda que el cercle complet representa el 100% i té 360°.','Transforma el percentatge en la part corresponent dels 360°.'],
+      ['Graus = '+p2[i2]+' × 360 / 100','✅ '+p2[i2]+'% = '+g2+'°.'],
+      svgPieChart(cats,p2,i2)+pieLegend(cats,p2,'%'));
+
+    // 3. Graus -> percentatge
+    var p3=sectorPercentages(),i3=(ci+2)%4,g3=p3[i3]*3.6;
+    addEx(ctx,3,
+      'En un diagrama sobre '+ctx.title+', un sector ocupa '+g3+'°. Quin percentatge del cercle representa?',
+      p3[i3]+'%',[(p3[i3]+5)+'%',Math.max(0,p3[i3]-5)+'%',g3+'%',(100-p3[i3])+'%'],
+      ['Compara els graus del sector amb els 360° del cercle complet.','Converteix aquesta proporció en percentatge.'],
+      ['Percentatge = ('+g3+' / 360) × 100','✅ Percentatge = '+p3[i3]+'%.'],
+      svgPieChart(['Sector','Resta'],[g3,360-g3],0)+pieLegend(['Sector','Resta'],[g3,360-g3],'°'));
+
+    // 4. Percentatge -> nombre de persones
+    var p4=sectorPercentages(),i4=(ci+3)%4,total4=totals[ci%totals.length],n4=p4[i4]*total4/100;
+    addEx(ctx,4,
+      'En una enquesta de '+total4+' persones sobre '+ctx.title+', el '+p4[i4]+'% ha triat "'+cats[i4]+'". Quantes persones són?',
+      n4,wrongNums(n4,6),
+      ['Interpreta el percentatge com una part del total de persones.','Calcula aquesta part sobre el total de l\'enquesta.'],
+      [p4[i4]+'% de '+total4+' = '+n4,'✅ '+n4+' persones.'],
+      svgPieChart(cats,p4,i4)+pieLegend(cats,p4,'%'));
+
+    // 5. Nombre de persones -> percentatge
+    var p5=sectorPercentages(),i5=ci%4,total5=totals[(ci+2)%totals.length],n5=p5[i5]*total5/100;
+    addEx(ctx,5,
+      'En una enquesta de '+total5+' persones, '+n5+' han triat "'+cats[i5]+'". Quin percentatge del total representen?',
+      p5[i5]+'%',p5.filter(function(_,i){return i!==i5;}).map(function(v){return v+'%';}),
+      ['Compara el nombre de persones de la categoria amb el total de l\'enquesta.','Expressa aquesta fracció sobre 100.'],
+      ['Percentatge = ('+n5+' / '+total5+') × 100','✅ Percentatge = '+p5[i5]+'%.'],
+      svgPieChart(cats,p5,i5)+pieLegend(cats,p5,'%'));
+
+    // 6. Diferència entre dos sectors
+    var p6=sectorPercentages(),a6=(ci+1)%4,b6=(ci+3)%4,d6=Math.abs(p6[a6]-p6[b6]);
+    addEx(ctx,6,
+      'Observa el diagrama sobre '+ctx.title+'. Quina diferència percentual hi ha entre "'+cats[a6]+'" i "'+cats[b6]+'"?',
+      d6+'%',wrongNums(d6,6).map(function(v){return v+'%';}),
+      ['Llegeix el percentatge de les dues categories.','Resta el percentatge menor del major.'],
+      ['Els percentatges són '+p6[a6]+'% i '+p6[b6]+'%.','Diferència = '+Math.max(p6[a6],p6[b6])+' − '+Math.min(p6[a6],p6[b6])+' = '+d6+'.','✅ Diferència = '+d6+'%.'],
+      svgPieChart(cats,p6,-1)+pieLegend(cats,p6,'%'));
+
+    // 7. Sector més gran
+    var p7=sectorPercentages(),max7=Math.max.apply(null,p7),im7=p7.indexOf(max7);
+    addEx(ctx,7,
+      'Observa el diagrama de sectors sobre '+ctx.title+'. Quina categoria ocupa el sector més gran?',
+      cats[im7],cats.filter(function(c){return c!==cats[im7];}),
+      ['Compara la mida dels quatre sectors.','El sector més gran correspon al percentatge més alt.'],
+      ['El percentatge més alt és '+max7+'%.','✅ El sector més gran correspon a '+cats[im7]+'.'],
+      svgPieChart(cats,p7,im7)+pieLegend(cats,p7,'%'));
+
+    // 8. Percentatge que falta fins a 100%
+    var p8=sectorPercentages(),i8=(ci+2)%4,known8=p8.filter(function(_,i){return i!==i8;}),sum8=known8.reduce(function(a,b){return a+b;},0);
+    addEx(ctx,8,
+      'En un diagrama sobre '+ctx.title+', tres categories ocupen el '+known8[0]+'%, el '+known8[1]+'% i el '+known8[2]+'%. Quin percentatge ocupa la quarta categoria?',
+      p8[i8]+'%',wrongNums(p8[i8],6).map(function(v){return v+'%';}),
+      ['Tots els sectors d\'un diagrama circular han de sumar el 100%.','Suma els tres percentatges coneguts i calcula què falta fins al total.'],
+      ['Percentatges coneguts = '+known8.join(' + ')+' = '+sum8+'%.','100 − '+sum8+' = '+p8[i8]+'.','✅ Falta '+p8[i8]+'%.'],
+      undefined);
+
+    // 9. Graus que falten fins a 360°
+    var p9=sectorPercentages(),i9=(ci+1)%4,g9=p9.map(function(v){return v*3.6;}),known9=g9.filter(function(_,i){return i!==i9;}),sum9=known9.reduce(function(a,b){return a+b;},0);
+    addEx(ctx,9,
+      'En un diagrama sobre '+ctx.title+', tres sectors mesuren '+known9[0]+'°, '+known9[1]+'° i '+known9[2]+'°. Quants graus ha de mesurar el sector que falta?',
+      g9[i9]+'°',wrongNums(g9[i9],6).map(function(v){return v+'°';}),
+      ['El cercle complet té 360°.','Suma els graus coneguts i calcula quants en falten per completar el cercle.'],
+      ['Graus coneguts = '+known9.join(' + ')+' = '+sum9+'°.','360 − '+sum9+' = '+g9[i9]+'.','✅ Sector que falta = '+g9[i9]+'°.'],
+      undefined);
+  });
+
+  pool.push({topicId:'sectors',type:10,contextId:'teoria1',question:'Què representa el cercle complet en un diagrama de sectors?',correct:'El 100% de les dades',options:buildOpts('El 100% de les dades',['Una sola categoria','La freqüència més alta','Només les dades qualitatives']),guide:['Pensa què representa el conjunt de tots els sectors junts.','Relaciona el cercle complet amb el total de dades.'],solution:['Tots els sectors junts representen el conjunt complet.','✅ El cercle representa el 100% de les dades.']});
+  pool.push({topicId:'sectors',type:11,contextId:'teoria2',question:'Quants graus té un cercle complet?',correct:'360°',options:buildOpts('360°',['100°','180°','90°']),guide:['Recorda la mesura angular d\'una volta completa.','No confonguis graus amb percentatge.'],solution:['Una volta completa correspon a un cercle sencer.','✅ El cercle complet té 360°.']});
+  pool.push({topicId:'sectors',type:12,contextId:'teoria3',question:'Quan és especialment útil un diagrama de sectors?',correct:'Quan volem comparar les parts d’un total',options:buildOpts('Quan volem comparar les parts d’un total',['Quan volem representar intervals continus','Quan volem mostrar una successió numèrica','Quan volem resoldre una equació']),guide:['Pensa què mostra cadascuna de les porcions del cercle.','Relaciona cada sector amb una part del conjunt total.'],solution:['Cada sector representa una part proporcional del total.','✅ És útil per comparar les parts d\'un total.']});
+  pool.push({topicId:'sectors',type:13,contextId:'teoria4',question:'Si un sector representa el 25% del total, quina part del cercle ocupa?',correct:'Una quarta part',options:buildOpts('Una quarta part',['La meitat','Tres quartes parts','Una desena part']),guide:['Expressa el 25% com una fracció senzilla de 100.','Relaciona aquesta fracció amb una part del cercle.'],solution:['25/100 es simplifica a 1/4.','✅ Ocupa una quarta part del cercle.']});
+
+  return shuffle(pool);
+}
+
 function genSectors(){
-  var type=rnd(1,4);
-  var q,correct,opts,guide,solution,visual;
-
-  if(type===1){
-    var pcts=[10,15,20,25,30,40,50];
-    var p=pcts[rnd(0,pcts.length-1)];
-    var rem=100-p;
-    var split=rnd(Math.max(5,Math.floor(rem*0.3)),Math.floor(rem*0.7));
-    var others=[split,rem-split];
-    var catsS=['Futbol','Bàsquet','Natació'];
-    var valsS=[p,others[0],others[1]];
-    var graus=Math.round(p*360/100);
-    q='Observa el diagrama de sectors. La categoria "Futbol" ocupa el '+p+'% del total. Quants graus representa el sector de "Futbol"?';
-    correct=String(graus)+'°';
-    opts=buildOpts(correct,[String(graus+10)+'°',String(graus-10)+'°',String(p)+'°',String(Math.round(p*3.6+10))+'°']);
-    guide=['El cercle sencer té 360°','Graus = percentatge × 360 / 100','Graus = '+p+' × 360 / 100 = '+graus+'°'];
-    solution=guide.concat(['✅ El '+p+'% del cercle = '+correct]);
-    visual=svgPieChart(catsS,valsS,0)+pieLegend(catsS,valsS,'%');
-  } else if(type===2){
-    var grausDats=rnd(30,180);
-    var pctRes=round1(grausDats/360*100);
-    correct=pctRes+'%';
-    q='Observa el diagrama de sectors. El sector destacat ocupa '+grausDats+'°. Quin percentatge del total representa?';
-    opts=buildOpts(correct,[round1(grausDats/360*100+5)+'%',round1(grausDats/3.6)+'%',round1(grausDats/360*100-5)+'%',round1(grausDats/360*100*2)+'%']);
-    guide=['% = (graus / 360) × 100','% = ('+grausDats+' / 360) × 100 = '+pctRes+'%'];
-    solution=guide.concat(['✅ '+grausDats+'° representa el '+correct]);
-    visual=svgPieChart(['Sector','Resta'],[grausDats,360-grausDats],0)+pieLegend(['Sector','Resta'],[grausDats,360-grausDats],'°');
-  } else if(type===3){
-    var n3=rnd(40,100);
-    var p3=rnd(1,4)*25;
-    var part=Math.round(n3*p3/100);
-    q='Observa el diagrama de sectors d\'una enquesta de '+n3+' persones. L\'opció A ocupa el '+p3+'%. Quants graus ocupa l\'opció A al diagrama?';
-    var g3=Math.round(p3*360/100);
-    correct=String(g3)+'°';
-    opts=buildOpts(correct,[String(g3+18)+'°',String(p3)+'°',String(Math.round(part*360/n3))+'°',String(g3-18)+'°']);
-    guide=['Primer calculem el %: '+p3+'% ','Graus = '+p3+' × 360 / 100 = '+g3+'°'];
-    solution=guide.concat(['✅ L\'opció A ocupa '+correct+' al diagrama de sectors']);
-    visual=svgPieChart(['Opció A','Resta'],[p3,100-p3],0)+pieLegend(['Opció A','Resta'],[p3,100-p3],'%');
-  } else {
-    q='Quan és millor usar un diagrama de SECTORS en comptes d\'un de barres?';
-    correct='Quan volem mostrar la proporció de cada part respecte al total';
-    opts=buildOpts(correct,['Quan volem comparar valors absoluts entre categories','Quan tenim moltes categories (més de 10)','Quan les dades varien amb el temps']);
-    guide=['Diagrama de SECTORS (circular): ideal per mostrar proporcions d\'un tot','Les porcions sumen sempre 360° (100% del total)','Si hi ha moltes categories, el diagrama de barres és més llegible'];
-    solution=guide.concat(['✅ '+correct]);
+  if(!Array.isArray(sectorsBag)||sectorsBag.length===0)sectorsBag=buildSectorsPool();
+  var pick=sectorsBag.length-1;
+  if(lastSectorsContext!==null&&sectorsBag[pick].contextId===lastSectorsContext&&sectorsBag.length>1){
+    for(var i=sectorsBag.length-2;i>=0;i--){
+      if(sectorsBag[i].contextId!==lastSectorsContext){
+        var tmp=sectorsBag[pick];sectorsBag[pick]=sectorsBag[i];sectorsBag[i]=tmp;
+        break;
+      }
+    }
   }
-  return {question:q,correct:correct,options:opts,guide:guide,solution:solution,visual:visual};
+  var ex=sectorsBag.pop();
+  lastSectorsContext=ex.contextId;
+  return ex;
 }
 
-// 6. Polígons de freqüències
-function genPoligons(){
-  var type=rnd(1,4);
-  var q,correct,opts,guide,solution,visual;
+// 6. Polígons de freqüències — bossa de 84 exercicis de lectura i interpretació (1r ESO)
+var poligonsBag=[];
+var lastPoligonsContext=null;
 
-  if(type===1){
-    q='Què és un polígon de freqüències?';
-    correct='Una línia que uneix els punts superiors de cada barra d\'un histograma';
-    opts=buildOpts(correct,['Un diagrama circular que mostra percentatges','Un diagrama de barres amb les barres juntes','Una taula amb les freqüències acumulades']);
-    guide=['El polígon de freqüències s\'obté unint amb línies els PUNTS MITJANS de les barres','Permet veure la tendència i la forma de la distribució','Útil per comparar dues distribucions al mateix gràfic'];
-    solution=guide.concat(['✅ '+correct]);
-  } else if(type===2){
-    var punts=[rnd(3,8),rnd(5,12),rnd(10,18),rnd(6,11),rnd(2,5)];
-    var idxMax=punts.indexOf(Math.max(...punts));
-    var intervs=['[0,10[','[10,20[','[20,30[','[30,40[','[40,50['];
-    q='Observa el polígon de freqüències. A quin interval hi ha la freqüència màxima?';
-    correct=intervs[idxMax];
-    opts=buildOpts(correct,intervs.filter(x=>x!==correct).slice(0,3));
-    guide=["El punt MÉS ALT del polígon = interval amb més freqüència",'Comparant: '+punts.map((v,i)=>intervs[i]+'='+v).join(', '),'El màxim és '+Math.max(...punts)+' → interval '+intervs[idxMax]];
-    solution=guide.concat(['✅ La freqüència màxima és a: '+correct]);
-    visual=svgPolygon(intervs,punts,idxMax);
-  } else if(type===3){
-    q='En un polígon de freqüències, els punts es marquen a la posició:';
-    correct='Al punt mig (marca de classe) de cada interval';
-    opts=buildOpts(correct,['Al inici de cada interval','Al final de cada interval','A qualsevol punt dins l\'interval']);
-    guide=['La MARCA DE CLASSE és el punt mig de cada interval','Per l\'interval [10, 20[, la marca de classe és (10+20)/2 = 15','El punt es col·loca a l\'alçada de la freqüència i al punt mig de l\'interval'];
-    solution=guide.concat(['✅ '+correct]);
-  } else {
-    var a=rnd(10,30),b=rnd(40,60);
-    var mc=Math.round((a+b)/2);
-    q='Quina és la marca de classe de l\'interval ['+a+', '+b+'[?';
-    correct=String(mc);
-    opts=buildOpts(correct,[String(a),String(b),String(mc+5),String(mc-5)]);
-    guide=['Marca de classe = (extrem inferior + extrem superior) / 2','Marca = ('+a+' + '+b+') / 2 = '+(a+b)+' / 2 = '+mc];
-    solution=guide.concat(['✅ La marca de classe és: '+correct]);
+function buildPoligonsPool(){
+  var contexts=[
+    {id:'llibres',title:'el nombre de llibres llegits en un mes',labels:['0','1','2','3','4']},
+    {id:'germans',title:'el nombre de germans',labels:['0','1','2','3','4']},
+    {id:'gols',title:'el nombre de gols marcats en un partit',labels:['0','1','2','3','4']},
+    {id:'mascotes',title:'el nombre de mascotes a casa',labels:['0','1','2','3','4']},
+    {id:'esport',title:'els dies d\'esport per setmana',labels:['1','2','3','4','5']},
+    {id:'prestecs',title:'el nombre de llibres agafats en préstec',labels:['1','2','3','4','5']},
+    {id:'absencies',title:'el nombre d\'absències en un mes',labels:['0','1','2','3','4']},
+    {id:'lectura',title:'les hores de lectura setmanals',labels:['1','2','3','4','5']},
+    {id:'victories',title:'el nombre de partits guanyats',labels:['0','1','2','3','4']},
+    {id:'llar',title:'el nombre de persones que viuen a casa',labels:['2','3','4','5','6']}
+  ];
+  var pool=[];
+
+  function add(ctx,type,q,correct,wrongs,guide,solution,vals,highlightIdx){
+    pool.push({
+      topicId:'poligons',type:type,contextId:ctx.id,
+      question:q,correct:String(correct),options:buildOpts(String(correct),wrongs),
+      guide:guide,solution:solution,
+      visual:vals?svgPolygon(ctx.labels,vals,highlightIdx===undefined?-1:highlightIdx):undefined
+    });
   }
-  return {question:q,correct:correct,options:opts,guide:guide,solution:solution,visual:visual};
+
+  contexts.forEach(function(ctx,ci){
+    var labels=ctx.labels;
+
+    // 1. Llegir una freqüència
+    var f1=uniqueBarValues(5,2,14),i1=ci%5;
+    add(ctx,1,'Observa el polígon de freqüències sobre '+ctx.title+'. Quina freqüència correspon al valor '+labels[i1]+'?',
+      f1[i1],wrongNums(f1[i1],6),
+      ['Localitza el valor demanat a l\'eix horitzontal.','Llegeix l\'alçada del punt situat sobre aquest valor.'],
+      ['El punt del valor '+labels[i1]+' té freqüència '+f1[i1]+'.','✅ Freqüència = '+f1[i1]+'.'],f1,i1);
+
+    // 2. Valor més freqüent
+    var f2=uniqueBarValues(5,2,14),max2=Math.max.apply(null,f2),im2=f2.indexOf(max2);
+    add(ctx,2,'Observa el polígon sobre '+ctx.title+'. Quin valor és el més freqüent?',
+      labels[im2],labels.filter(function(v){return v!==labels[im2];}),
+      ['Busca el punt més alt del polígon.','Llegeix el valor de l\'eix horitzontal que correspon a aquest punt.'],
+      ['La freqüència màxima és '+max2+'.','✅ El valor més freqüent és '+labels[im2]+'.'],f2,im2);
+
+    // 3. Valor menys freqüent
+    var f3=uniqueBarValues(5,2,14),min3=Math.min.apply(null,f3),im3=f3.indexOf(min3);
+    add(ctx,3,'Observa el polígon sobre '+ctx.title+'. Quin valor és el menys freqüent?',
+      labels[im3],labels.filter(function(v){return v!==labels[im3];}),
+      ['Busca el punt més baix del polígon.','Llegeix el valor de l\'eix horitzontal que correspon a aquest punt.'],
+      ['La freqüència mínima és '+min3+'.','✅ El valor menys freqüent és '+labels[im3]+'.'],f3,im3);
+
+    // 4. Comparar dos valors
+    var f4=uniqueBarValues(5,2,14),a4=ci%5,b4=(ci+2)%5,win4=f4[a4]>f4[b4]?a4:b4,lose4=win4===a4?b4:a4;
+    add(ctx,4,'Observa el polígon sobre '+ctx.title+'. Quin valor té més freqüència: '+labels[a4]+' o '+labels[b4]+'?',
+      labels[win4],[labels[lose4],'Tenen la mateixa freqüència','No es pot saber amb el gràfic'],
+      ['Compara només l\'alçada dels dos punts indicats.','El punt més alt correspon a la freqüència més gran.'],
+      [labels[win4]+' té freqüència '+f4[win4]+' i '+labels[lose4]+' en té '+f4[lose4]+'.','✅ Té més freqüència el valor '+labels[win4]+'.'],f4,-1);
+
+    // 5. Diferència entre dues freqüències
+    var f5=uniqueBarValues(5,2,14),a5=(ci+1)%5,b5=(ci+3)%5,d5=Math.abs(f5[a5]-f5[b5]);
+    add(ctx,5,'Observa el polígon sobre '+ctx.title+'. Quina diferència de freqüència hi ha entre els valors '+labels[a5]+' i '+labels[b5]+'?',
+      d5,wrongNums(d5,6),
+      ['Llegeix les freqüències dels dos punts indicats.','Resta la freqüència menor de la major.'],
+      ['Les freqüències són '+f5[a5]+' i '+f5[b5]+'.','✅ Diferència = '+d5+'.'],f5,-1);
+
+    // 6. Freqüència conjunta de dos valors
+    var f6=uniqueBarValues(5,2,14),a6=(ci+2)%5,b6=(ci+4)%5,s6=f6[a6]+f6[b6];
+    add(ctx,6,'Observa el polígon sobre '+ctx.title+'. Quina és la freqüència conjunta dels valors '+labels[a6]+' i '+labels[b6]+'?',
+      s6,wrongNums(s6,8),
+      ['Llegeix la freqüència de cadascun dels dos punts.','Suma les dues freqüències una sola vegada.'],
+      ['Les freqüències són '+f6[a6]+' i '+f6[b6]+'.','✅ Freqüència conjunta = '+s6+'.'],f6,-1);
+
+    // 7. Total de dades
+    var f7=uniqueBarValues(5,2,14),total7=f7.reduce(function(a,b){return a+b;},0);
+    add(ctx,7,'Observa el polígon sobre '+ctx.title+'. Quantes dades representa en total?',
+      total7,wrongNums(total7,10),
+      ['Cada punt representa la freqüència d\'un valor.','Suma les cinc freqüències una sola vegada.'],
+      ['Total = '+f7.join(' + ')+' = '+total7+'.','✅ Total de dades = '+total7+'.'],f7,-1);
+
+    // 8. Identificar un valor a partir de la seva freqüència
+    var f8=uniqueBarValues(5,2,14),i8=(ci+4)%5;
+    add(ctx,8,'Observa el polígon sobre '+ctx.title+'. Quin valor té freqüència '+f8[i8]+'?',
+      labels[i8],labels.filter(function(v){return v!==labels[i8];}),
+      ['Busca a quina alçada apareix la freqüència indicada.','Llegeix el valor situat just sota aquest punt.'],
+      ['La freqüència '+f8[i8]+' correspon al valor '+labels[i8]+'.','✅ Valor = '+labels[i8]+'.'],f8,i8);
+  });
+
+  pool.push({topicId:'poligons',type:9,contextId:'teoria1',question:'Què representa cada punt d\'un polígon de freqüències?',correct:'Un valor de la variable i la seva freqüència',options:buildOpts('Un valor de la variable i la seva freqüència',['Un percentatge i uns graus','Dos intervals superposats','Només el total de dades']),guide:['Relaciona la posició horitzontal del punt amb la seva alçada.','Cada punt combina una dada de l\'eix X amb una dada de l\'eix Y.'],solution:['L\'eix X mostra els valors i l\'eix Y les freqüències.','✅ Cada punt relaciona un valor amb la seva freqüència.']});
+  pool.push({topicId:'poligons',type:10,contextId:'teoria2',question:'Com es forma un polígon de freqüències?',correct:'Unint amb segments els punts que representen les freqüències',options:buildOpts('Unint amb segments els punts que representen les freqüències',['Dibuixant sectors d\'un cercle','Ajuntant barres sense espai','Ordenant només les freqüències de major a menor']),guide:['Pensa en la forma visual del gràfic.','Primer es representen punts i després es connecten consecutivament.'],solution:['Es col·loca un punt per a cada valor i la seva freqüència.','✅ Després s\'uneixen els punts amb segments.']});
+  pool.push({topicId:'poligons',type:11,contextId:'teoria3',question:'Què representa habitualment l\'eix vertical d\'un polígon de freqüències?',correct:'Les freqüències',options:buildOpts('Les freqüències',['Els noms de les categories','Els graus d\'un cercle','Només el nombre total de dades']),guide:['Recorda què indica l\'alçada de cada punt.','Compara-ho amb un diagrama de barres de freqüències.'],solution:['L\'alçada de cada punt depèn del nombre de vegades que apareix el valor.','✅ L\'eix vertical representa les freqüències.']});
+  pool.push({topicId:'poligons',type:12,contextId:'teoria4',question:'En un polígon de freqüències, què indica el punt més alt?',correct:'El valor amb la freqüència més gran',options:buildOpts('El valor amb la freqüència més gran',['El valor numèric més gran necessàriament','El nombre total de dades','El valor amb freqüència zero']),guide:['Fixa\'t que l\'alçada representa freqüència.','El punt més alt té la freqüència més gran.'],solution:['L\'altura dels punts representa les freqüències.','✅ El punt més alt correspon al valor més freqüent.']});
+
+  return shuffle(pool);
+}
+
+function genPoligons(){
+  if(!Array.isArray(poligonsBag)||poligonsBag.length===0)poligonsBag=buildPoligonsPool();
+  var pick=poligonsBag.length-1;
+  if(lastPoligonsContext!==null&&poligonsBag[pick].contextId===lastPoligonsContext&&poligonsBag.length>1){
+    for(var i=poligonsBag.length-2;i>=0;i--){
+      if(poligonsBag[i].contextId!==lastPoligonsContext){
+        var tmp=poligonsBag[pick];poligonsBag[pick]=poligonsBag[i];poligonsBag[i]=tmp;
+        break;
+      }
+    }
+  }
+  var ex=poligonsBag.pop();
+  lastPoligonsContext=ex.contextId;
+  return ex;
 }
 
 // 7. Mitjana
@@ -710,54 +1270,48 @@ function genMitjana(){
   var q,correct,opts,guide,solution,visual;
 
   if(type===1){
-    var n=rnd(4,7);
-    var dades=Array.from({length:n},()=>rnd(3,10));
-    var suma=dades.reduce((a,b)=>a+b,0);
-    var mitj=round2(suma/n);
+    var n=rnd(4,7),dades=Array.from({length:n},()=>rnd(3,10));
+    var suma=dades.reduce((a,b)=>a+b,0),mitj=round2(suma/n);
+    var ordenades=[...dades].sort((a,b)=>a-b);
+    var med=n%2?ordenades[Math.floor(n/2)]:round2((ordenades[n/2-1]+ordenades[n/2])/2);
     q='Calcula la mitjana aritmètica de: '+dades.join(', ');
     correct=String(mitj);
-    opts=buildOpts(correct,wrongNums(mitj,3).map(String));
-    guide=['Suma totes les dades: '+dades.join(' + ')+' = '+suma,'Divideix pel nombre de dades ('+n+')','Mitjana = '+suma+' / '+n+' = '+mitj];
-    solution=guide.concat(['✅ Mitjana = '+correct]);
+    opts=buildOpts(correct,[String(round2(suma/(n-1))),String(round2(suma/(n+1))),String(med),String(suma)].concat(wrongNums(mitj,5)));
+    guide=['Suma totes les dades una sola vegada.','Divideix la suma pel nombre de dades.'];
+    solution=['Suma = '+dades.join(' + ')+' = '+suma,'Mitjana = '+suma+' / '+n,'✅ Mitjana = '+mitj];
   } else if(type===2){
-    var n2=rnd(4,6);
-    var dades2=Array.from({length:n2-1},()=>rnd(3,9));
-    var mitjObj=rnd(5,8);
-    var manquant=mitjObj*n2-dades2.reduce((a,b)=>a+b,0);
-    if(manquant<1||manquant>10){dades2=Array.from({length:n2-1},()=>rnd(4,7));manquant=mitjObj*n2-dades2.reduce((a,b)=>a+b,0);}
-    if(manquant<1)manquant=1;
-    q='La mitjana de '+n2+' notes és '+mitjObj+'. Les primeres '+(n2-1)+' notes són: '+dades2.join(', ')+'. Quina és l\'última nota?';
+    var n2,notes,mitjObj,manquant,tries=0;
+    do{
+      n2=rnd(4,6);mitjObj=rnd(5,8);
+      notes=Array.from({length:n2-1},()=>rnd(3,9));
+      manquant=mitjObj*n2-notes.reduce((a,b)=>a+b,0);
+      tries++;
+    }while((manquant<1||manquant>10)&&tries<500);
+    if(manquant<1||manquant>10){n2=4;mitjObj=6;notes=[5,6,7];manquant=6;}
+    q='La mitjana de '+n2+' notes és '+mitjObj+'. Les primeres '+(n2-1)+' notes són: '+notes.join(', ')+'. Quina és l\'última nota?';
     correct=String(manquant);
-    opts=buildOpts(correct,wrongNums(manquant,3).map(String));
-    guide=['Suma total = mitjana × nombre de dades = '+mitjObj+' × '+n2+' = '+(mitjObj*n2),'Suma coneguda = '+dades2.join(' + ')+' = '+dades2.reduce((a,b)=>a+b,0),'Nota manquant = '+(mitjObj*n2)+' − '+dades2.reduce((a,b)=>a+b,0)+' = '+manquant];
-    solution=guide.concat(['✅ L\'última nota és: '+correct]);
+    opts=buildOpts(correct,[String(mitjObj),String(manquant+1),String(Math.max(0,manquant-1)),String(manquant+2),String(Math.max(0,manquant-2))]);
+    guide=['Calcula quina suma total han de tenir totes les notes a partir de la mitjana i del nombre de dades.','Resta d\'aquesta suma total les notes que ja coneixes.'];
+    solution=['Suma total = '+mitjObj+' × '+n2+' = '+(mitjObj*n2),'Suma coneguda = '+notes.reduce((a,b)=>a+b,0),'✅ Nota manquant = '+manquant];
   } else if(type===3){
-    var n3=rnd(3,5);
-    var dades3=Array.from({length:n3},()=>rnd(2,9));
-    var suma3=dades3.reduce((a,b)=>a+b,0);
-    var mitj3=round2(suma3/n3);
+    var n3=rnd(3,6),mitj3=rnd(3,9),suma3=n3*mitj3;
     q='Quina és la suma de les dades si la mitjana de '+n3+' valors és '+mitj3+'?';
     correct=String(suma3);
-    opts=buildOpts(correct,wrongNums(suma3,3).map(String));
-    guide=['Suma = Mitjana × Nombre de dades','Suma = '+mitj3+' × '+n3+' = '+suma3];
-    solution=guide.concat(['✅ La suma és: '+correct]);
+    opts=buildOpts(correct,[String(mitj3),String(suma3+n3),String(Math.max(0,suma3-n3)),String(n3)].concat(wrongNums(suma3,5)));
+    guide=['Parteix de la relació entre mitjana, suma total i nombre de dades.','Aïlla la suma total abans de substituir les dades.'];
+    solution=['Suma = mitjana × nombre de dades',mitj3+' × '+n3+' = '+suma3,'✅ Suma = '+suma3];
   } else {
-    var nVals=rnd(3,5);
-    var usedVals=new Set();
-    while(usedVals.size<nVals)usedVals.add(rnd(1,10));
-    var vals4=[...usedVals].sort((a,b)=>a-b);
-    var freqs4=vals4.map(()=>rnd(1,6));
-    var sumProd=vals4.reduce((s,v,i)=>s+v*freqs4[i],0);
-    var Ntot=freqs4.reduce((a,b)=>a+b,0);
-    var mitjPond=round2(sumProd/Ntot);
-    q='Observa la taula de freqüències. Calcula la mitjana ponderada (mitjana aritmètica de dades agrupades).';
-    correct=String(mitjPond);
-    opts=buildOpts(correct,wrongNums(mitjPond,3).map(String));
-    guide=['Mitjana ponderada = Σ(valor × freqüència) / N','Multiplica cada valor pel seu freqüència: '+vals4.map((v,i)=>v+'×'+freqs4[i]).join(', '),'Suma dels productes = '+sumProd+' | N (suma freqüències) = '+Ntot,'Mitjana = '+sumProd+' / '+Ntot+' = '+mitjPond];
-    solution=guide.concat(['✅ Mitjana ponderada = '+correct]);
-    visual=freqTableHtml(vals4,freqs4);
+    var nVals=rnd(3,5),used=new Set();while(used.size<nVals)used.add(rnd(1,10));
+    var vals=[...used].sort((a,b)=>a-b),freqs=vals.map(()=>rnd(1,6));
+    var sumProd=vals.reduce((s,v,i)=>s+v*freqs[i],0),N=freqs.reduce((a,b)=>a+b,0),mitjP=round2(sumProd/N);
+    q='Observa la taula de freqüències. Calcula la mitjana aritmètica de les dades.';
+    correct=String(mitjP);
+    opts=buildOpts(correct,[String(round2(vals.reduce((a,b)=>a+b,0)/vals.length)),String(round2(sumProd/(N+1))),String(round2(sumProd/Math.max(1,N-1))),String(N)].concat(wrongNums(mitjP,5)));
+    guide=['Multiplica cada valor per la seva freqüència.','Suma aquests productes i divideix pel nombre total de dades.'];
+    solution=['Σ(valor × freqüència) = '+sumProd,'N = '+N,'✅ Mitjana = '+sumProd+' / '+N+' = '+mitjP];
+    visual=freqTableHtml(vals,freqs);
   }
-  return {question:q,correct:correct,options:opts,guide:guide,solution:solution,visual:visual};
+  return {topicId:'mitjana',type:type,question:q,correct:String(correct),options:opts,guide:guide,solution:solution,visual:visual};
 }
 
 // 8. Mediana
@@ -766,195 +1320,465 @@ function genMediana(){
   var q,correct,opts,guide,solution,visual;
 
   if(type===1){
-    var isOdd=(rnd(0,1)===0);
-    var n=isOdd?rnd(3,9)*2-1:rnd(2,5)*2;
-    var dades=shuffle(Array.from({length:n},()=>rnd(2,15)));
-    var sorted=[...dades].sort((a,b)=>a-b);
-    var med;
-    if(n%2===1){med=sorted[Math.floor(n/2)];}
-    else{med=round2((sorted[n/2-1]+sorted[n/2])/2);}
+    var isOdd=rnd(0,1)===0,n=isOdd?(rnd(2,5)*2-1):(rnd(2,5)*2);
+    var dades=Array.from({length:n},()=>rnd(2,15));
+    var sorted=[...dades].sort((a,b)=>a-b),med;
+    if(n%2===1)med=sorted[Math.floor(n/2)];
+    else med=round2((sorted[n/2-1]+sorted[n/2])/2);
+    var mean=round2(dades.reduce((a,b)=>a+b,0)/n);
     q='Calcula la mediana de: '+dades.join(', ')+' (n='+n+')';
     correct=String(med);
-    opts=buildOpts(correct,wrongNums(med,3).map(String));
-    guide=['Ordena les dades de menor a major: '+sorted.join(', '),n%2===1?'n='+n+' (senar) → la mediana és el valor central: posició '+(Math.floor(n/2)+1):'n='+n+' (parell) → la mediana és la mitjana dels dos valors centrals: ('+sorted[n/2-1]+'+'+sorted[n/2]+')/2'];
-    solution=guide.concat(['✅ Mediana = '+correct]);
+    opts=buildOpts(correct,[String(mean),String(sorted[Math.floor((n-1)/2)]),String(sorted[Math.ceil((n-1)/2)])].concat(wrongNums(med,6)));
+    guide=['Ordena les dades de menor a major.','Comprova si el nombre de dades és parell o senar i aplica la regla del valor o valors centrals.'];
+    solution=['Dades ordenades: '+sorted.join(', '),n%2===1?'Valor central = '+med:'Valors centrals = '+sorted[n/2-1]+' i '+sorted[n/2],'✅ Mediana = '+med];
   } else if(type===2){
     q='Quina diferència hi ha entre la MITJANA i la MEDIANA?';
     correct='La mediana és el valor central quan les dades estan ordenades; la mitjana és la suma dividida per n';
-    opts=buildOpts(correct,['La mediana es calcula sumant i dividint; la mitjana és el valor central','Són el mateix però la mediana s\'usa per a dades qualitatives','La mitjana és sempre major que la mediana']);
-    guide=['MITJANA: suma de tots els valors dividida per n. Sensible a valors extrems','MEDIANA: valor que queda al centre en ordenar les dades. Robusta a extrems','Exemple: dades 1,2,3,4,100 → Mitjana=22, Mediana=3'];
-    solution=guide.concat(['✅ '+correct]);
+    opts=buildOpts(correct,['La mediana es calcula sumant i dividint; la mitjana és el valor central','Són exactament el mateix paràmetre estadístic','La mitjana és sempre major que la mediana']);
+    guide=['Recorda quin paràmetre necessita sumar totes les dades.','Pensa quin paràmetre depèn de la posició central després d\'ordenar.'];
+    solution=['La mitjana es calcula amb la suma de totes les dades dividida per n.','La mediana depèn de la posició central de les dades ordenades.','✅ '+correct+'.'];
   } else if(type===3){
     var dades3=[rnd(2,5),rnd(4,7),rnd(6,9),rnd(8,11)];
-    var sorted3=[...dades3].sort((a,b)=>a-b);
-    var med3=round2((sorted3[1]+sorted3[2])/2);
-    q='Ordena i troba la mediana de: '+dades3.join(', ')+'  (n=4, parell)';
+    var sorted3=[...dades3].sort((a,b)=>a-b),med3=round2((sorted3[1]+sorted3[2])/2);
+    var mean3=round2(dades3.reduce((a,b)=>a+b,0)/4);
+    q='Ordena i troba la mediana de: '+dades3.join(', ')+' (n=4, parell)';
     correct=String(med3);
-    opts=buildOpts(correct,[sorted3[1],sorted3[2],round2(dades3.reduce((a,b)=>a+b,0)/4)].map(String));
-    guide=['Ordenat: '+sorted3.join(', '),'n=4 (parell): mediana = (valor 2 + valor 3) / 2','= ('+sorted3[1]+' + '+sorted3[2]+') / 2 = '+med3];
-    solution=guide.concat(['✅ Mediana = '+correct]);
+    opts=buildOpts(correct,[String(sorted3[1]),String(sorted3[2]),String(mean3)].concat(wrongNums(med3,5)));
+    guide=['Ordena primer els quatre valors de menor a major.','Com que hi ha un nombre parell de dades, usa els dos valors centrals per obtenir la mediana.'];
+    solution=['Ordenat: '+sorted3.join(', '),'Valors centrals: '+sorted3[1]+' i '+sorted3[2],'✅ Mediana = '+med3];
   } else {
-    var nVals2=rnd(3,5);
-    var usedVals2=new Set();
-    while(usedVals2.size<nVals2)usedVals2.add(rnd(1,12));
-    var vals5=[...usedVals2].sort((a,b)=>a-b);
-    var freqs5=vals5.map(()=>rnd(1,5));
-    var N5=freqs5.reduce((a,b)=>a+b,0);
-    var cum5=[];var c5=0;
-    for(var i=0;i<vals5.length;i++){c5+=freqs5[i];cum5.push(c5);}
-    function valAtPos(pos){for(var j=0;j<cum5.length;j++){if(pos<=cum5[j])return vals5[j];}return vals5[vals5.length-1];}
-    var med5;
-    if(N5%2===1){med5=valAtPos((N5+1)/2);}
-    else{var v1=valAtPos(N5/2),v2=valAtPos(N5/2+1);med5=round2((v1+v2)/2);}
-    q='Observa la taula de freqüències. Calcula la mediana.';
-    correct=String(med5);
-    opts=buildOpts(correct,wrongNums(med5,3).map(String));
-    guide=['Calcula la freqüència acumulada de cada valor: '+cum5.join(', '),'N (total) = '+N5,N5%2===1?'Com N és senar, busca la posició ('+N5+'+1)/2='+((N5+1)/2)+' a la freqüència acumulada':'Com N és parell, la mediana és la mitjana dels valors a les posicions '+(N5/2)+' i '+(N5/2+1)];
-    solution=guide.concat(['✅ Mediana = '+correct]);
-    visual=freqTableHtml(vals5,freqs5,'Valor','Freqüència','F. acumulada',cum5);
+    // Variant deliberadament senzilla per mantenir el nivell de 1r d'ESO.
+    var n4=[5,7,9][rnd(0,2)];
+    var dades4=Array.from({length:n4},()=>rnd(1,10)).sort((a,b)=>a-b);
+    // Forcem alguna repetició perquè no sigui sempre una llista de valors diferents.
+    if(n4>=5)dades4[rnd(1,n4-2)]=dades4[rnd(1,n4-2)];
+    dades4.sort((a,b)=>a-b);
+    var pos4=Math.floor(n4/2),med4=dades4[pos4];
+    q='Les dades ja estan ordenades: '+dades4.join(', ')+'. Quina és la mediana?';
+    correct=String(med4);
+    opts=buildOpts(correct,[String(dades4[Math.max(0,pos4-1)]),String(dades4[Math.min(n4-1,pos4+1)]),String(round2(dades4.reduce((a,b)=>a+b,0)/n4))].concat(wrongNums(med4,6)));
+    guide=['Com que les dades ja estan ordenades, no cal tornar-les a ordenar.','Hi ha un nombre senar de dades: localitza directament el valor que queda al centre.'];
+    solution=['Hi ha '+n4+' dades, així que el valor central ocupa la posició '+(pos4+1)+'.','✅ Mediana = '+med4];
   }
-  return {question:q,correct:correct,options:opts,guide:guide,solution:solution,visual:visual};
+  return {topicId:'mediana',type:type,question:q,correct:String(correct),options:opts,guide:guide,solution:solution,visual:visual};
 }
 
-// 9. Moda
+// 9. Moda — bossa de 50 exercicis variats (1r ESO)
+var modaBag=[];
+var lastModaContext=null;
+
+function buildModaPool(){
+  var pool=[];
+
+  function add(type,contextId,q,correct,wrongs,guide,solution,visual){
+    pool.push({
+      topicId:'moda',type:type,contextId:contextId,
+      question:q,correct:String(correct),options:buildOpts(String(correct),wrongs),
+      guide:guide,solution:solution,visual:visual
+    });
+  }
+
+  // 1. Moda numèrica única (12 casos)
+  var numericSets=[
+    [2,2,2,1,3,4],[5,5,5,2,7,9],[4,4,4,1,6,8],[7,7,7,3,5,9],
+    [1,1,1,2,4,6],[6,6,6,2,3,8],[8,8,8,1,5,9],[3,3,3,2,6,7],
+    [9,9,9,4,6,8],[4,4,4,4,2,5,7],[6,6,6,6,1,3,9],[2,2,2,2,5,7,8]
+  ];
+  numericSets.forEach(function(base,idx){
+    var dades=shuffle(base),counts={};
+    dades.forEach(function(v){counts[v]=(counts[v]||0)+1;});
+    var mode=Object.keys(counts).sort(function(a,b){return counts[b]-counts[a];})[0];
+    var wrong=Object.keys(counts).filter(function(v){return v!==mode;});
+    add(1,'numeric','Quina és la moda de les dades: '+dades.join(', ')+'?',mode,wrong,
+      ['Compta quantes vegades apareix cada valor.','La moda és el valor amb la freqüència més alta.'],
+      ['El valor '+mode+' és el que apareix més vegades.','✅ Moda = '+mode+'.']);
+  });
+
+  // 2. Moda qualitativa a partir d'una taula (12 contextos)
+  var contexts=[
+    {id:'colors',title:'colors preferits',cats:['Blau','Verd','Vermell','Groc']},
+    {id:'fruites',title:'fruites preferides',cats:['Poma','Plàtan','Taronja','Pera']},
+    {id:'esports',title:'esports preferits',cats:['Futbol','Bàsquet','Natació','Handbol']},
+    {id:'transport',title:'mitjans de transport',cats:['A peu','Bus','Cotxe','Bici']},
+    {id:'mascotes',title:'mascotes',cats:['Gos','Gat','Peixos','Ocells']},
+    {id:'assignatures',title:'assignatures preferides',cats:['Mates','Català','Anglès','Ciències']},
+    {id:'musica',title:'estils de música',cats:['Pop','Rock','Rap','Clàssica']},
+    {id:'esmorzar',title:'tipus d\'esmorzar',cats:['Entrepà','Fruita','Cereals','Iogurt']},
+    {id:'llibres',title:'gèneres de llibres',cats:['Aventura','Còmic','Misteri','Fantasia']},
+    {id:'pati',title:'zones del pati',cats:['Pista','Jardí','Porxo','Bancs']},
+    {id:'extra',title:'activitats extraescolars',cats:['Dansa','Música','Teatre','Robòtica']},
+    {id:'jocs',title:'jocs de taula',cats:['Escacs','Parxís','Dames','Uno']}
+  ];
+  contexts.forEach(function(ctx,ci){
+    var freqs=uniqueBarValues(4,2,12),max=Math.max.apply(null,freqs),im=freqs.indexOf(max);
+    add(2,'qualitativa','Observa la taula de '+ctx.title+'. Quina és la moda?',ctx.cats[im],ctx.cats.filter(function(c){return c!==ctx.cats[im];}),
+      ['Compara les freqüències de totes les categories.','La moda és la categoria associada a la freqüència més alta.'],
+      ['La freqüència més alta és '+max+', corresponent a '+ctx.cats[im]+'.','✅ Moda = '+ctx.cats[im]+'.'],
+      freqTableHtml(ctx.cats,freqs,'Categoria','Freqüència'));
+  });
+
+  // 3. Distribucions bimodals (10 casos)
+  var bimodals=[
+    [2,5,1,8],[3,7,1,9],[4,6,2,9],[1,8,3,6],[5,9,2,7],
+    [2,6,4,9],[3,8,1,5],[4,7,2,8],[1,6,3,9],[5,8,2,4]
+  ];
+  bimodals.forEach(function(v){
+    var a=v[0],b=v[1],c=v[2],d=v[3],dades=shuffle([a,a,a,b,b,b,c,d]);
+    var aa=Math.min(a,b),bb=Math.max(a,b),correct=aa+' i '+bb;
+    add(3,'bimodal','Les dades són: '+dades.join(', ')+'. Quina és la moda?',correct,
+      [String(a),String(b),Math.min(c,d)+' i '+Math.max(c,d)],
+      ['Compta quantes vegades apareix cada valor.','Si dos valors comparteixen la freqüència màxima, tots dos són modes.'],
+      [a+' apareix 3 vegades i '+b+' també apareix 3 vegades.','✅ Les modes són '+correct+'.']);
+  });
+
+  // 4. Canvi de moda en afegir dades (10 casos)
+  var canvis=[
+    {a:2,b:5,c:8},{a:3,b:6,c:9},{a:4,b:7,c:1},{a:5,b:8,c:2},{a:6,b:9,c:3},
+    {a:1,b:4,c:7},{a:2,b:6,c:9},{a:3,b:7,c:5},{a:4,b:8,c:6},{a:5,b:9,c:1}
+  ];
+  canvis.forEach(function(x){
+    var dades=shuffle([x.a,x.a,x.a,x.b,x.b,x.c]);
+    add(4,'canvi','Les dades són '+dades.join(', ')+'. Si hi afegim dues dades més de valor '+x.b+', quina serà la nova moda?',x.b,
+      [String(x.a),String(x.c),'Hi haurà dues modes'],
+      ['Compta primer les freqüències actuals.','Afegeix dues aparicions al valor indicat i torna a comparar les freqüències.'],
+      [x.a+' apareix 3 vegades i '+x.b+' apareix 2 vegades.','Després d\'afegir dos '+x.b+', aquest valor apareix 4 vegades.','✅ Nova moda = '+x.b+'.']);
+  });
+
+  // 5. Conceptes de moda (6 casos)
+  add(5,'teoria1','Què és la moda d\'un conjunt de dades?','El valor o categoria amb la freqüència més alta',['La suma de totes les dades','El valor que queda al centre sempre','La diferència entre el màxim i el mínim'],['Pensa en quantes vegades apareix cada valor.','La moda depèn de la freqüència de repetició.'],['La moda és el valor o categoria que apareix més vegades.','✅ És el de freqüència més alta.']);
+  add(6,'teoria2','Pot haver-hi més d\'una moda en un conjunt de dades?','Sí, si diversos valors comparteixen la freqüència màxima',['No, sempre n\'hi ha exactament una','Només si la mitjana és un nombre enter','Només en variables qualitatives'],['Pensa què passa quan dos valors empaten en el nombre màxim d\'aparicions.','La moda no ha de ser necessàriament única.'],['Si dos o més valors tenen la mateixa freqüència màxima, tots són modes.','✅ Sí, pot haver-hi més d\'una moda.']);
+  add(7,'teoria3','La moda es pot calcular en dades qualitatives com el color preferit?','Sí',['No, només es pot calcular amb nombres','Només si convertim els colors en graus','Només si totes les freqüències són iguals'],['La moda només necessita comparar freqüències.','No és necessari que els valors siguin numèrics.'],['Podem comptar quantes vegades apareix cada categoria qualitativa.','✅ Sí, la moda també s\'aplica a dades qualitatives.']);
+  add(8,'teoria4','En una taula de freqüències, com localitzem la moda?','Buscant la freqüència més alta i el valor o categoria corresponent',['Sumant totes les freqüències','Buscant sempre el valor numèric més gran','Dividint la suma entre el nombre de dades'],['Compara els nombres de la fila de freqüències.','Després relaciona el màxim amb la seva categoria o valor.'],['La moda correspon a la freqüència màxima.','✅ Busquem el màxim i llegim el valor associat.']);
+  add(9,'teoria5','Si el valor 4 apareix 7 vegades i cap altre valor apareix més de 7 vegades, què podem afirmar?','4 és una moda',['4 és necessàriament la mitjana','4 és necessàriament la mediana','No podem dir res sobre la moda'],['La moda depèn de quina freqüència és la més gran.','Compara les 7 aparicions amb les freqüències dels altres valors.'],['Cap altre valor supera la freqüència de 4.','✅ 4 és una moda.']);
+  add(10,'teoria6','Quina afirmació és correcta sobre la moda?','Pot ser una categoria no numèrica',['Sempre coincideix amb la mitjana','Sempre és única','Només existeix si les dades estan ordenades'],['Recorda que la moda només depèn del recompte d\'aparicions.','Pensa en exemples com colors o esports preferits.'],['Una categoria qualitativa també pot ser la més freqüent.','✅ La moda pot ser no numèrica.']);
+
+  return shuffle(pool);
+}
+
 function genModa(){
-  var type=rnd(1,3);
-  var q,correct,opts,guide,solution,visual;
-
-  if(type===1){
-    var base=Array.from({length:3},()=>rnd(2,9));
-    var moda=base[rnd(0,2)];
-    var dades=shuffle([...base,moda,rnd(2,9),rnd(2,9)]);
-    while(new Set(dades).size===dades.length){dades=[...base,moda,rnd(2,9)];}
-    var counts={};
-    dades.forEach(x=>{counts[x]=(counts[x]||0)+1;});
-    var maxFreq=Math.max(...Object.values(counts));
-    var modes=Object.keys(counts).filter(k=>counts[k]===maxFreq);
-    q='Quina és la moda de les dades: '+dades.join(', ')+'?';
-    if(modes.length>1){correct='Bimodal: '+modes.sort().join(' i ');}
-    else{correct=modes[0];}
-    opts=buildOpts(correct,[String(Math.min(...dades)),String(Math.max(...dades)),String(round2(dades.reduce((a,b)=>a+b,0)/dades.length))]);
-    guide=['La MODA és el valor que apareix MÉS vegades','Compta quantes vegades apareix cada valor','Freqüències: '+Object.entries(counts).map(([k,v])=>k+'→'+v+'cops').join(', ')];
-    solution=guide.concat(['✅ Moda = '+correct]);
-  } else if(type===2){
-    q='Quina afirmació sobre la moda és CORRECTA?';
-    correct='Una distribució pot tenir més d\'una moda (bimodal o multimodal)';
-    opts=buildOpts(correct,['La moda sempre és igual a la mitjana','La moda és la suma dividida pel nombre de dades','La moda és sempre el valor central de les dades ordenades']);
-    guide=["La MODA pot no ser única: si dos valors apareixen el mateix nombre màxim de vegades, hi ha dues modes (distribució bimodal)",'La moda és l\'ÚNIC paràmetre que es pot calcular per a dades qualitatives','Si tots els valors apareixen el mateix nombre de vegades, no hi ha moda'];
-    solution=guide.concat(['✅ '+correct]);
-  } else {
-    var catsM=shuffle(['Blau','Vermell','Verd','Groc','Taronja']).slice(0,4);
-    var freqsM=catsM.map(()=>rnd(1,9));
-    var maxF=Math.max(...freqsM);
-    var maxIdxs=freqsM.map((f,i)=>f===maxF?i:-1).filter(i=>i>=0);
-    if(maxIdxs.length>1){freqsM[maxIdxs[0]]=maxF+1;}
-    var maxIdx=freqsM.indexOf(Math.max(...freqsM));
-    q='Observa la taula de freqüències qualitatives. Quina és la moda?';
-    correct=catsM[maxIdx];
-    opts=buildOpts(correct,catsM.filter((c,i)=>i!==maxIdx));
-    guide=['La MODA per a dades QUALITATIVES: el valor que apareix més vegades','Compara les freqüències de la taula','El valor més gran indica la moda'];
-    solution=guide.concat(['✅ Moda = '+correct]);
-    visual=freqTableHtml(catsM,freqsM,'Categoria','Freqüència');
+  if(!Array.isArray(modaBag)||modaBag.length===0)modaBag=buildModaPool();
+  var pick=modaBag.length-1;
+  if(lastModaContext!==null&&modaBag[pick].contextId===lastModaContext&&modaBag.length>1){
+    for(var i=modaBag.length-2;i>=0;i--){
+      if(modaBag[i].contextId!==lastModaContext){
+        var tmp=modaBag[pick];modaBag[pick]=modaBag[i];modaBag[i]=tmp;
+        break;
+      }
+    }
   }
-  return {question:q,correct:correct,options:opts,guide:guide,solution:solution,visual:visual};
+  var ex=modaBag.pop();
+  lastModaContext=ex.contextId;
+  return ex;
 }
 
-// 10. Probabilitat (Laplace)
-function genProbabilitat(){
-  var type=rnd(1,5);
-  var q,correct,opts,guide,solution;
+// 10. Probabilitat — 1r ESO: bossa àmplia d'atzar, espai mostral, Laplace i experimentació
+var probabilitatBag=[];
+var lastProbContext=null;
 
-  if(type===1){
-    var cares=6;
-    var favorable=rnd(1,3);
-    var event=favorable===1?'un nombre parell (2,4,6)':'un nombre major que '+(cares-favorable);
-    var cases_fav=favorable===1?3:favorable;
-    q='Llancem un dau de '+cares+' cares. Quina és la probabilitat de treure '+event+'?';
-    correct=frac(cases_fav,cares);
-    opts=buildOpts(correct,[frac(cases_fav+1,cares),frac(cases_fav-1>0?cases_fav-1:1,cares),String(round2(cases_fav/cares)),frac(cares-cases_fav,cares)]);
-    guide=['Espai mostral: {1,2,3,4,5,6} → '+cares+' casos possibles','Casos favorables: '+cases_fav,'Probabilitat = casos favorables / casos possibles','P = '+cases_fav+' / '+cares+' = '+correct];
-    solution=guide.concat(['✅ P = '+correct]);
-  } else if(type===2){
-    var total=rnd(8,15);
-    var vermelles=rnd(2,total-3);
-    var blaves=rnd(1,total-vermelles-1);
-    var verdes=total-vermelles-blaves;
-    q='En una bossa hi ha '+vermelles+' boles vermelles, '+blaves+' blaves i '+verdes+' verdes. Quina és la probabilitat de treure una bola VERMELLA?';
-    correct=frac(vermelles,total);
-    opts=buildOpts(correct,[frac(blaves,total),frac(verdes,total),frac(vermelles,total-1),frac(vermelles+1,total)]);
-    guide=['Total de boles: '+vermelles+'+'+blaves+'+'+verdes+' = '+total,'Casos favorables (vermelles): '+vermelles,'P(vermella) = '+vermelles+' / '+total+' = '+correct];
-    solution=guide.concat(['✅ P(vermella) = '+correct]);
-  } else if(type===3){
-    var pals=['Oros','Copes','Espases','Bastos'];
-    var pal=pals[rnd(0,3)];
-    q='En una baralla espanyola de 40 cartes (4 pals de 10 cartes cadascun). Quina és la probabilitat de treure una carta del pal d\''+pal+'?';
-    correct='1/4';
-    opts=buildOpts(correct,['1/10','1/40','1/8','3/4']);
-    guide=['Total de cartes: 40','Cartes del pal d\''+pal+': 10','P = 10/40 = 1/4'];
-    solution=guide.concat(['✅ P('+pal+') = '+correct]);
-  } else if(type===4){
-    var totalC=rnd(10,20);
-    var fav=rnd(2,totalC-2);
-    var pFav=frac(fav,totalC);
-    q='La probabilitat de que plogui demà és '+pFav+'. Quina és la probabilitat que NO plogui?';
-    correct=frac(totalC-fav,totalC);
-    opts=buildOpts(correct,[pFav,frac(fav-1,totalC),frac(totalC,totalC-fav),'0']);
-    guide=['P(no ploure) = 1 − P(ploure)','P(ploure) = '+pFav,'P(no ploure) = 1 − '+fav+'/'+totalC+' = '+(totalC-fav)+'/'+totalC+' = '+correct];
-    solution=guide.concat(['✅ P(no ploure) = '+correct]);
-  } else {
-    var events=[
-      {e:'Treure un número entre 1 i 6 llançant un dau de 6 cares',r:'Segur (P=1)'},
-      {e:'Treure el número 7 llançant un dau de 6 cares',r:'Impossible (P=0)'},
-      {e:'Treure cara en llançar una moneda',r:'Equiprobable (P=1/2)'},
-      {e:'Treure una bola vermella d\'una bossa amb 9 vermelles i 1 blava',r:'Molt probable (P=9/10)'}
-    ];
-    var ev=events[rnd(0,events.length-1)];
-    q='Classifica l\'event: "'+ev.e+'"';
-    correct=ev.r;
-    opts=buildOpts(correct,events.map(x=>x.r).filter(x=>x!==correct).slice(0,3));
-    guide=['Segur: P=1 → sempre passa','Impossible: P=0 → mai passa','Probable: 0 < P < 1 → pot passar','Com més gran la P, més probable'];
-    solution=guide.concat(['✅ '+correct]);
+function buildProbabilitatPool(){
+  var pool=[];
+
+  function add(type,contextId,q,correct,wrongs,guide,solution){
+    pool.push({
+      topicId:'probabilitat',type:type,contextId:contextId,
+      question:q,correct:String(correct),options:buildOpts(String(correct),wrongs),
+      guide:guide,solution:solution
+    });
   }
-  return {question:q,correct:correct,options:opts,guide:guide,solution:solution};
+
+  // ── 1. FENOMEN ALEATORI O DETERMINISTA (18 casos) ───────────────────────
+  var fenomens=[
+    {s:'Llançar un dau i observar quin número surt',r:'Aleatori'},
+    {s:'Calcular el perímetre d\'un quadrat de costat 5 cm',r:'Determinista'},
+    {s:'Treure una carta d\'una baralla ben barrejada',r:'Aleatori'},
+    {s:'Sumar 12 + 8',r:'Determinista'},
+    {s:'Llançar una moneda i observar si surt cara o creu',r:'Aleatori'},
+    {s:'Calcular quants minuts hi ha en 2 hores',r:'Determinista'},
+    {s:'Fer girar una ruleta i observar en quin sector s\'atura',r:'Aleatori'},
+    {s:'Calcular l\'àrea d\'un rectangle de 4 cm per 7 cm',r:'Determinista'},
+    {s:'Extreure una bola d\'una bossa sense mirar',r:'Aleatori'},
+    {s:'Convertir 3 metres en centímetres',r:'Determinista'},
+    {s:'Escollir a l\'atzar un alumne d\'una classe',r:'Aleatori'},
+    {s:'Calcular el doble de 35',r:'Determinista'},
+    {s:'Observar quin nombre surt en una ruleta numerada de l\'1 al 8',r:'Aleatori'},
+    {s:'Calcular quants segons hi ha en 5 minuts',r:'Determinista'},
+    {s:'Treure una fitxa d\'una capsa després de barrejar-les',r:'Aleatori'},
+    {s:'Calcular 9 × 7',r:'Determinista'},
+    {s:'Llançar un dau de 8 cares i anotar el resultat',r:'Aleatori'},
+    {s:'Calcular la meitat de 120',r:'Determinista'}
+  ];
+  fenomens.forEach(function(x){
+    add(1,'fenomen',
+      'Classifica el fenomen: "'+x.s+'"',x.r,
+      ['Aleatori','Determinista','Impossible','Equiprobable'].filter(function(v){return v!==x.r;}),
+      ['Pregunta\'t si el resultat es pot conèixer amb certesa abans de fer l\'acció.','Si, repetint les mateixes condicions, poden aparèixer resultats diferents, el fenomen és aleatori.'],
+      ['Un fenomen determinista té un resultat previsible; un fenomen aleatori pot donar resultats diferents.','✅ '+x.r+'.']);
+  });
+
+  // ── 2. ESPAI MOSTRAL (8 casos) ──────────────────────────────────────────
+  var espais=[
+    {q:'Quin és l\'espai mostral quan llancem un dau de 6 cares?',c:'{1, 2, 3, 4, 5, 6}',w:['{1, 2, 3, 4, 5}','{0, 1, 2, 3, 4, 5}','{parell, senar}']},
+    {q:'Quin és l\'espai mostral quan llancem una moneda?',c:'{cara, creu}',w:['{cara}','{creu}','{cara, creu, cantell}']},
+    {q:'Una ruleta té quatre sectors numerats 1, 2, 3 i 4. Quin és el seu espai mostral?',c:'{1, 2, 3, 4}',w:['{0, 1, 2, 3}','{1, 2, 3}','{parell, senar}']},
+    {q:'Una ruleta té cinc sectors: blau, verd, groc, vermell i lila. Quin és l\'espai mostral?',c:'{blau, verd, groc, vermell, lila}',w:['{blau, verd, groc, vermell}','{5 colors}','{blau, lila}']},
+    {q:'En una bossa només hi ha boles vermelles, blaves i verdes. Si en traiem una, quin és l\'espai mostral del color?',c:'{vermell, blau, verd}',w:['{vermell, blau}','{1, 2, 3}','{bola vermella, bola blava}']},
+    {q:'Triem a l\'atzar una targeta numerada 0, 1, 2 o 3. Quin és l\'espai mostral?',c:'{0, 1, 2, 3}',w:['{1, 2, 3}','{0, 1, 2}','{parell, senar}']},
+    {q:'Llancem un dau de 4 cares numerades de l\'1 al 4. Quin és l\'espai mostral?',c:'{1, 2, 3, 4}',w:['{0, 1, 2, 3}','{1, 2, 3}','{1, 4}']},
+    {q:'Escollim a l\'atzar una lletra entre A, B, C i D. Quin és l\'espai mostral?',c:'{A, B, C, D}',w:['{A, B, C}','{1, 2, 3, 4}','{A, D}']}
+  ];
+  espais.forEach(function(x){
+    add(2,'espai',x.q,x.c,x.w,
+      ['L\'espai mostral conté tots els resultats possibles de l\'experiment.','Inclou cada resultat possible una sola vegada i no n\'afegeixis cap d\'impossible.'],
+      ['L\'espai mostral és el conjunt de tots els resultats possibles.','✅ '+x.c]);
+  });
+
+  // ── 3. PROBABILITAT QUALITATIVA (15 casos inequívocs) ───────────────────
+  var qualLabels=['Segur','Impossible','Molt probable','Poc probable','Igual de probable que no'];
+  var qualitatius=[
+    {e:'Treure un número entre 1 i 6 llançant un dau de 6 cares',r:'Segur'},
+    {e:'Treure el número 7 llançant un dau de 6 cares',r:'Impossible'},
+    {e:'Treure cara en llançar una moneda equilibrada',r:'Igual de probable que no'},
+    {e:'Treure una bola vermella d\'una bossa amb 9 vermelles i 1 blava',r:'Molt probable'},
+    {e:'Treure una bola blava d\'una bossa amb 9 vermelles i 1 blava',r:'Poc probable'},
+    {e:'Treure un nombre menor que 7 amb un dau de 6 cares',r:'Segur'},
+    {e:'Treure un nombre negatiu amb un dau de 6 cares',r:'Impossible'},
+    {e:'Treure vermell d\'una bossa amb 8 boles vermelles i 2 verdes',r:'Molt probable'},
+    {e:'Treure verd d\'una bossa amb 8 boles vermelles i 2 verdes',r:'Poc probable'},
+    {e:'Treure un nombre parell amb un dau de 6 cares',r:'Igual de probable que no'},
+    {e:'Treure una bola blava d\'una bossa on totes 12 són blaves',r:'Segur'},
+    {e:'Treure una bola groga d\'una bossa que només conté boles blaves i verdes',r:'Impossible'},
+    {e:'Aturar una ruleta en blau si 7 dels 8 sectors iguals són blaus',r:'Molt probable'},
+    {e:'Aturar una ruleta en lila si només 1 dels 8 sectors iguals és lila',r:'Poc probable'},
+    {e:'Triar una targeta parella entre {1, 2, 3, 4}',r:'Igual de probable que no'}
+  ];
+  qualitatius.forEach(function(x){
+    add(3,'qualitativa','Classifica qualitativament l\'esdeveniment: "'+x.e+'"',x.r,
+      shuffle(qualLabels.filter(function(v){return v!==x.r;})),
+      ['Comprova primer si l\'esdeveniment és segur o impossible.','Si pot passar, compara els casos favorables amb els no favorables per decidir el grau de probabilitat.'],
+      ['La classificació depèn de la proporció de casos favorables respecte del total.','✅ '+x.r+'.']);
+  });
+
+  // ── 4. REGLA DE LAPLACE AMB DAUS (16 casos) ─────────────────────────────
+  var dauCases=[
+    {n:6,txt:'un nombre parell',fav:[2,4,6]},
+    {n:6,txt:'un nombre senar',fav:[1,3,5]},
+    {n:6,txt:'un nombre major que 4',fav:[5,6]},
+    {n:6,txt:'un nombre menor que 3',fav:[1,2]},
+    {n:6,txt:'un múltiple de 3',fav:[3,6]},
+    {n:6,txt:'un nombre primer',fav:[2,3,5]},
+    {n:6,txt:'1 o 6',fav:[1,6]},
+    {n:6,txt:'un nombre menor o igual que 4',fav:[1,2,3,4]},
+    {n:6,txt:'un nombre major que 1',fav:[2,3,4,5,6]},
+    {n:6,txt:'exactament un 4',fav:[4]},
+    {n:6,txt:'un nombre diferent de 6',fav:[1,2,3,4,5]},
+    {n:6,txt:'un múltiple de 2',fav:[2,4,6]},
+    {n:8,txt:'un nombre parell',fav:[2,4,6,8]},
+    {n:8,txt:'un nombre major que 6',fav:[7,8]},
+    {n:8,txt:'un nombre primer',fav:[2,3,5,7]},
+    {n:8,txt:'un múltiple de 3',fav:[3,6]}
+  ];
+  dauCases.forEach(function(x){
+    var fav=x.fav.length,correct=frac(fav,x.n);
+    add(4,'dau','Llancem un dau de '+x.n+' cares numerades de l\'1 al '+x.n+'. Quina és la probabilitat de treure '+x.txt+'?',correct,
+      probabilityDistractors(fav,x.n),
+      ['Identifica tots els resultats possibles del dau.','Compta quants compleixen la condició i aplica casos favorables dividit entre casos possibles.'],
+      ['Casos favorables: '+x.fav.join(', ')+'.','P = '+fav+'/'+x.n+' = '+correct+'.','✅ P = '+correct]);
+  });
+
+  // ── 5. BOLES DE COLORS (20 casos) ───────────────────────────────────────
+  var bagCounts=[
+    [2,3,5],[4,3,3],[5,2,3],[1,4,5],[3,5,2],
+    [6,3,1],[2,6,2],[3,2,7],[5,4,3],[4,6,2],
+    [7,2,3],[3,7,4],[5,5,2],[2,5,5],[6,2,4],
+    [4,3,5],[8,3,1],[3,8,1],[4,5,6],[6,5,4]
+  ];
+  var colorPlural=['vermelles','blaves','verdes'];
+  var colorSing=['vermella','blava','verda'];
+  bagCounts.forEach(function(c,i){
+    var target=i%3,total=c[0]+c[1]+c[2],fav=c[target],correct=frac(fav,total);
+    add(5,'boles',
+      'En una bossa hi ha '+c[0]+' boles vermelles, '+c[1]+' blaves i '+c[2]+' verdes. Quina és la probabilitat de treure una bola '+colorSing[target].toUpperCase()+'?',correct,
+      probabilityDistractors(fav,total),
+      ['Calcula el nombre total de boles de la bossa.','Pren com a casos favorables només les boles del color demanat i aplica la regla de Laplace.'],
+      ['Total = '+total+' boles; favorables = '+fav+' '+colorPlural[target]+'.','P('+colorSing[target]+') = '+fav+'/'+total+' = '+correct+'.','✅ P = '+correct]);
+  });
+
+  // ── 6. BARALLA ESPANYOLA DE 40 CARTES (10 casos) ───────────────────────
+  var cartes=[
+    {e:'una carta d\'oros',fav:10},
+    {e:'una carta de copes',fav:10},
+    {e:'una carta d\'espases',fav:10},
+    {e:'una carta de bastos',fav:10},
+    {e:'un rei',fav:4},
+    {e:'un cavall',fav:4},
+    {e:'una sota',fav:4},
+    {e:'una figura (sota, cavall o rei)',fav:12},
+    {e:'un as',fav:4},
+    {e:'una carta d\'oros o de copes',fav:20}
+  ];
+  cartes.forEach(function(x){
+    var correct=frac(x.fav,40);
+    add(6,'cartes','En una baralla espanyola de 40 cartes, quina és la probabilitat de treure '+x.e+'?',correct,
+      probabilityDistractors(x.fav,40),
+      ['Determina quantes cartes compleixen la condició indicada.','Compara aquest nombre amb les 40 cartes de la baralla i simplifica la fracció si cal.'],
+      ['Casos favorables = '+x.fav+'; casos possibles = 40.','P = '+x.fav+'/40 = '+correct+'.','✅ P = '+correct]);
+  });
+
+  // ── 7. RULETES AMB SECTORS EQUIPROBABLES (12 casos) ─────────────────────
+  var ruletes=[
+    {n:6,f:1,color:'blau'},{n:6,f:2,color:'verd'},{n:6,f:3,color:'vermell'},
+    {n:8,f:1,color:'lila'},{n:8,f:2,color:'groc'},{n:8,f:3,color:'blau'},
+    {n:8,f:4,color:'verd'},{n:10,f:2,color:'taronja'},{n:10,f:3,color:'blau'},
+    {n:10,f:4,color:'vermell'},{n:12,f:3,color:'verd'},{n:12,f:5,color:'lila'}
+  ];
+  ruletes.forEach(function(x){
+    var correct=frac(x.f,x.n);
+    add(7,'ruleta','Una ruleta té '+x.n+' sectors iguals i '+x.f+' són de color '+x.color+'. Quina és la probabilitat d\'aturar-se en '+x.color+'?',correct,
+      probabilityDistractors(x.f,x.n),
+      ['Com que tots els sectors tenen la mateixa mida, són equiprobables.','Compta els sectors favorables i divideix-los entre el nombre total de sectors.'],
+      ['Casos favorables = '+x.f+'; casos possibles = '+x.n+'.','P('+x.color+') = '+x.f+'/'+x.n+' = '+correct+'.','✅ P = '+correct]);
+  });
+
+  // ── 8. COMPARAR QUIN ESDEVENIMENT ÉS MÉS PROBABLE (12 casos) ───────────
+  var femPlural={vermella:'vermelles',blava:'blaves',verda:'verdes',groga:'grogues',lila:'liles',taronja:'taronges'};
+  var comparacions=[
+    {a:'vermella',fa:2,b:'blava',fb:5,altres:3},
+    {a:'vermella',fa:4,b:'blava',fb:4,altres:2},
+    {a:'verda',fa:6,b:'groga',fb:2,altres:2},
+    {a:'blava',fa:3,b:'verda',fb:5,altres:4},
+    {a:'groga',fa:1,b:'vermella',fb:7,altres:2},
+    {a:'lila',fa:5,b:'blava',fb:5,altres:2},
+    {a:'vermella',fa:6,b:'verda',fb:3,altres:3},
+    {a:'blava',fa:2,b:'groga',fb:6,altres:4},
+    {a:'verda',fa:4,b:'lila',fb:4,altres:4},
+    {a:'taronja',fa:3,b:'blava',fb:7,altres:2},
+    {a:'vermella',fa:5,b:'groga',fb:2,altres:5},
+    {a:'lila',fa:2,b:'verda',fb:5,altres:3}
+  ];
+  comparacions.forEach(function(x){
+    var correct=x.fa===x.fb?'Són igual de probables':(x.fa>x.fb?'Treure una bola '+x.a:'Treure una bola '+x.b);
+    var options=['Treure una bola '+x.a,'Treure una bola '+x.b,'Són igual de probables','No es pot saber amb aquestes dades'];
+    add(8,'comparar','En una mateixa bossa hi ha '+x.fa+' boles '+femPlural[x.a]+', '+x.fb+' '+femPlural[x.b]+' i '+x.altres+' d\'altres colors. Quin esdeveniment és més probable?',correct,
+      options.filter(function(v){return v!==correct;}),
+      ['Els dos esdeveniments comparteixen el mateix nombre total de boles.','Per comparar-los, n\'hi ha prou amb comparar quants casos favorables té cadascun.'],
+      [x.a+': '+x.fa+' casos favorables; '+x.b+': '+x.fb+' casos favorables.','✅ '+correct+'.']);
+  });
+
+  // ── 9. FREQÜÈNCIA RELATIVA EXPERIMENTAL (12 casos) ──────────────────────
+  var experiments=[
+    {n:20,k:11,e:'cara en llançar una moneda',nom:'cara'},
+    {n:20,k:7,e:'creu en llançar una moneda',nom:'creu'},
+    {n:25,k:9,e:'el color blau en una ruleta',nom:'blau'},
+    {n:25,k:15,e:'el color verd en una ruleta',nom:'verd'},
+    {n:40,k:8,e:'un 6 en llançar un dau',nom:'6'},
+    {n:40,k:14,e:'un nombre parell en llançar un dau',nom:'parell'},
+    {n:50,k:21,e:'cara en llançar una moneda',nom:'cara'},
+    {n:50,k:29,e:'creu en llançar una moneda',nom:'creu'},
+    {n:50,k:12,e:'el color vermell en una ruleta',nom:'vermell'},
+    {n:100,k:18,e:'un 5 en llançar un dau',nom:'5'},
+    {n:100,k:47,e:'un nombre senar en llançar un dau',nom:'senar'},
+    {n:100,k:63,e:'el color groc en una ruleta',nom:'groc'}
+  ];
+  experiments.forEach(function(x){
+    var val=round2(x.k/x.n),correct=String(val);
+    add(9,'experimental','En '+x.n+' repeticions d\'un experiment ha aparegut '+x.e+' '+x.k+' vegades. Quina és la seva freqüència relativa?',correct,
+      [String(round2((x.k+1)/x.n)),String(round2(Math.max(0,x.k-1)/x.n)),String(round2((x.n-x.k)/x.n)),String(x.k)],
+      ['La freqüència relativa experimental compara quantes vegades ha aparegut el resultat amb el nombre total de proves.','Divideix el nombre d\'aparicions entre el nombre total de repeticions.'],
+      ['Freqüència relativa = '+x.k+'/'+x.n+'.','✅ Freqüència relativa = '+correct+'.']);
+  });
+
+  // ── 10. TEÒRICA O EXPERIMENTAL? (8 casos) ───────────────────────────────
+  var teoExp=[
+    {s:'En una moneda equilibrada, P(cara)=1/2 abans de fer cap llançament.',r:'Probabilitat teòrica'},
+    {s:'En 50 llançaments d\'una moneda han sortit 27 cares, així que la freqüència relativa és 27/50.',r:'Freqüència relativa experimental'},
+    {s:'En un dau equilibrat, P(6)=1/6.',r:'Probabilitat teòrica'},
+    {s:'En 60 llançaments d\'un dau, el 6 ha aparegut 8 vegades: 8/60.',r:'Freqüència relativa experimental'},
+    {s:'Una ruleta té 4 sectors iguals i un és blau, per tant P(blau)=1/4.',r:'Probabilitat teòrica'},
+    {s:'Fem girar una ruleta 40 vegades i el blau surt 13 vegades: 13/40.',r:'Freqüència relativa experimental'},
+    {s:'En una bossa hi ha 3 boles vermelles de 10, per tant P(vermella)=3/10.',r:'Probabilitat teòrica'},
+    {s:'En 100 extraccions, retornant la bola a la bossa cada vegada, una bola vermella ha aparegut 34 vegades: 34/100.',r:'Freqüència relativa experimental'}
+  ];
+  teoExp.forEach(function(x){
+    add(10,'teoriaexp','Aquesta afirmació descriu una probabilitat teòrica o un resultat experimental? "'+x.s+'"',x.r,
+      ['Probabilitat teòrica','Freqüència relativa experimental','Espai mostral','Fenomen determinista'].filter(function(v){return v!==x.r;}),
+      ['Fixa\'t si el valor es dedueix del model abans de fer proves o si prové de resultats observats.','Les repeticions reals produeixen freqüències relatives experimentals.'],
+      ['La probabilitat teòrica es calcula a partir del model; la freqüència experimental prové de dades observades.','✅ '+x.r+'.']);
+  });
+
+  // ── 11. LAPLACE A PARTIR DE CASOS FAVORABLES I POSSIBLES (10 casos) ────
+  var abstractes=[[1,4],[2,5],[3,8],[4,10],[5,12],[2,9],[6,15],[3,10],[7,14],[4,16]];
+  abstractes.forEach(function(pair){
+    var fav=pair[0],total=pair[1],correct=frac(fav,total);
+    add(11,'laplace','En un experiment hi ha '+total+' resultats equiprobables i '+fav+' són favorables a l\'esdeveniment A. Quina és P(A)?',correct,
+      probabilityDistractors(fav,total),
+      ['Com que tots els resultats són equiprobables, pots aplicar la regla de Laplace.','Divideix el nombre de casos favorables entre el nombre total de casos possibles.'],
+      ['P(A) = casos favorables / casos possibles.','P(A) = '+fav+'/'+total+' = '+correct+'.','✅ P(A) = '+correct]);
+  });
+
+  return shuffle(pool);
+}
+
+function genProbabilitat(){
+  if(!Array.isArray(probabilitatBag)||probabilitatBag.length===0){
+    probabilitatBag=buildProbabilitatPool();
+  }
+
+  var pick=probabilitatBag.length-1;
+  if(lastProbContext!==null&&probabilitatBag[pick].contextId===lastProbContext&&probabilitatBag.length>1){
+    for(var i=probabilitatBag.length-2;i>=0;i--){
+      if(probabilitatBag[i].contextId!==lastProbContext){
+        var tmp=probabilitatBag[pick];probabilitatBag[pick]=probabilitatBag[i];probabilitatBag[i]=tmp;
+        break;
+      }
+    }
+  }
+
+  var ex=probabilitatBag.pop();
+  lastProbContext=ex.contextId;
+  return ex;
 }
 
 // ── TOPICS ───────────────────────────────────
 var TOPICS=[
-  {id:'recollida',icon:'📋',name:'Recollida de dades',short:'Població, mostra, variables i mètodes',
+  {id:'recollida',course:'1r',exam1r:true,icon:'📋',name:'Recollida de dades',short:'Població, mostra, variables i mètodes',
    theory:{title:'Recollida de dades',text:'L\'estadística estudia com recollir, organitzar i interpretar dades. La POBLACIÓ és el conjunt de tots els elements estudiats. La MOSTRA és un subconjunt representatiu de la població.',
    formulas:['Variables QUALITATIVES: color, nom, tipus (no numèriques)','Variables QUANTITATIVES DISCRETES: 0, 1, 2, 3... (comptables)','Variables QUANTITATIVES CONTÍNUES: alçada, pes, temperatura (mesurables)','CENS = estudi de tota la població | MOSTRA = estudi parcial']},gen:genRecollida},
-  {id:'taules',icon:'📊',name:'Taules de freqüències',short:'Absoluta, relativa i acumulada',
-   theory:{title:'Taules de freqüències',text:'Una taula de freqüències organitza les dades mostrant quantes vegades apareix cada valor.',
-   formulas:['Freqüència absoluta (fᵢ): nombre de vegades que apareix el valor','Freqüència relativa (hᵢ) = fᵢ / N  (on N = total de dades)','Freqüència acumulada (Fᵢ) = f₁ + f₂ + ... + fᵢ','Suma de tots els hᵢ = 1  |  Suma de tots els fᵢ = N']},gen:genTaules},
-  {id:'barres',icon:'📉',name:'Diagrames de barres',short:'Representació gràfica de categories',
+  {id:'taules',course:'1r',exam1r:true,icon:'📊',name:'Taules de freqüències',short:'Freqüència absoluta i relativa',
+   theory:{title:'Taules de freqüències',text:'Una taula de freqüències organitza les dades mostrant quantes vegades apareix cada valor i quina part representa del total.',
+   formulas:['Freqüència absoluta (fᵢ): nombre de vegades que apareix el valor','Freqüència relativa (hᵢ) = fᵢ / N  (on N = total de dades)','Suma de tots els hᵢ = 1','Suma de tots els fᵢ = N']},gen:genTaules},
+  {id:'barres',course:'1r',exam1r:true,icon:'📉',name:'Diagrames de barres',short:'Representació gràfica de categories',
    theory:{title:'Diagrames de barres',text:'El diagrama de barres representa dades amb rectangles (barres). L\'alçada de cada barra és proporcional a la freqüència. Ideal per comparar categories.',
-   formulas:['Eix X (horitzontal): categories o valors','Eix Y (vertical): freqüències','Alçada de la barra = freqüència de la categoria','Barres SEPARADES (a diferència de l\'histograma)']},gen:genBarres},
-  {id:'histograma',icon:'📈',name:'Histogrames',short:'Dades contínues agrupades en intervals',
-   theory:{title:'Histogrames',text:'L\'histograma és com el diagrama de barres però per a dades contínues agrupades en intervals. Les barres estan JUNTES (sense espai entre elles).',
-   formulas:['Marca de classe = (extrem inferior + extrem superior) / 2','Amplada de l\'interval = extrem superior − extrem inferior','Barres JUNTES: representen intervals continus','Cada barra cobreix un rang de valors: [a, b[']},gen:genHistograma},
-  {id:'sectors',icon:'🥧',name:'Diagrames de sectors',short:'Proporcions i percentatges en un cercle',
+   formulas:['Eix X (horitzontal): categories o valors','Eix Y (vertical): freqüències','Alçada de la barra = freqüència de la categoria','Barres SEPARADES']},gen:genBarres},
+  {id:'sectors',course:'1r',exam1r:true,icon:'🥧',name:'Diagrames de sectors',short:'Proporcions i percentatges en un cercle',
    theory:{title:'Diagrames de sectors',text:'El diagrama de sectors (o diagrama circular) representa proporcions. El cercle = 360° = 100% de les dades.',
    formulas:['Graus d\'un sector = (fᵢ / N) × 360°','% d\'un sector = (fᵢ / N) × 100','La suma de tots els sectors = 360°','Ideal per mostrar parts d\'un total']},gen:genSectors},
-  {id:'poligons',icon:'📐',name:'Polígons de freqüències',short:'Corba que connecta les freqüències',
-   theory:{title:'Polígons de freqüències',text:'El polígon de freqüències s\'obté unint amb segments els punts centrals de cada barra d\'un histograma. Mostra la tendència general de la distribució.',
-   formulas:['Punt mig de cada barra = marca de classe del interval','El punt es col·loca a (marca de classe, freqüència)','Útil per comparar dues distribucions al mateix gràfic','S\'uneixen els punts amb segments rectes']},gen:genPoligons},
-  {id:'mitjana',icon:'➗',name:'Mitjana aritmètica',short:'Suma de dades dividida per n',
-   theory:{title:'Mitjana aritmètica (x̄)',text:'La mitjana aritmètica és la mesura de centralització més usada. Es calcula sumant tots els valors i dividint pel nombre de dades.',
-   formulas:['x̄ = (x₁ + x₂ + ... + xₙ) / n','Exemple: dades 4, 7, 8, 5, 9 → suma=33, n=5 → x̄=6,6','Suma total = x̄ × n','Mitjana ponderada (taula de freq.) = Σ(valor×freq) / N']},gen:genMitjana},
-  {id:'mediana',icon:'⚖️',name:'Mediana',short:'Valor central de les dades ordenades',
+  {id:'poligons',course:'1r',exam1r:true,icon:'📐',name:'Polígons de freqüències',short:'Punts units per comparar freqüències',
+   theory:{title:'Polígons de freqüències',text:'Un polígon de freqüències representa cada valor amb un punt situat a l\'alçada de la seva freqüència i uneix els punts consecutius amb segments.',
+   formulas:['Eix X: valors de la variable','Eix Y: freqüències','Cada punt té coordenades (valor, freqüència)','S\'uneixen els punts consecutius amb segments rectes']},gen:genPoligons},
+  {id:'mitjana',course:'1r',exam1r:true,icon:'➗',name:'Mitjana aritmètica',short:'Suma de dades dividida per n',
+   theory:{title:'Mitjana aritmètica (x̄)',text:'La mitjana aritmètica és una mesura de centralització. Es calcula sumant tots els valors i dividint pel nombre de dades.',
+   formulas:['x̄ = (x₁ + x₂ + ... + xₙ) / n','Exemple: dades 4, 7, 8, 5, 9 → suma=33, n=5 → x̄=6,6','Suma total = x̄ × n','Amb una taula, cada valor es compta tantes vegades com indica la seva freqüència']},gen:genMitjana},
+  {id:'mediana',course:'1r',exam1r:true,icon:'⚖️',name:'Mediana',short:'Valor central de les dades ordenades',
    theory:{title:'Mediana (Me)',text:'La mediana és el valor que queda al centre quan ordenem les dades de menor a major. No es veu afectada pels valors extrems.',
-   formulas:['n senar: Me = valor de la posició (n+1)/2','n parell: Me = mitjana dels valors de les posicions n/2 i n/2+1','Exemple (n=5): 2,4,6,8,10 → Me = 6 (posició 3)','En taules de freqüències, s\'usa la freqüència acumulada']},gen:genMediana},
-  {id:'moda',icon:'🏆',name:'Moda',short:'El valor que apareix més vegades',
-   theory:{title:'Moda (Mo)',text:'La moda és el valor que apareix amb major freqüència. Pot haver-hi més d\'una moda (distribució bimodal o multimodal). És l\'única mesura aplicable a variables qualitatives.',
-   formulas:['Mo = valor (o valors) amb la màxima freqüència','Exemple: 2,3,3,4,5,5,5 → Mo = 5','Bimodal: 1,2,2,3,4,4,5 → Mo = 2 i 4','Sense moda: tots els valors apareixen el mateix nombre de vegades']},gen:genModa},
-  {id:'probabilitat',icon:'🎲',name:'Probabilitat (Laplace)',short:'Casos favorables sobre casos possibles',
-   theory:{title:'Probabilitat · Regla de Laplace',text:'La probabilitat mesura la possibilitat que ocorri un event en un experiment aleatori. La regla de Laplace s\'aplica quan tots els casos tenen la mateixa probabilitat.',
-   formulas:['P(A) = casos favorables / casos possibles','0 ≤ P(A) ≤ 1  |  P(segur) = 1  |  P(impossible) = 0','P(A complement) = 1 − P(A)','Exemple: P(cara) = 1/2 = 0,5 = 50%']},gen:genProbabilitat}
+   formulas:['n senar: Me = valor de la posició (n+1)/2','n parell: Me = mitjana dels valors de les posicions n/2 i n/2+1','Exemple (n=5): 2,4,6,8,10 → Me = 6','Abans de calcular-la, cal ordenar les dades de menor a major']},gen:genMediana},
+  {id:'moda',course:'1r',exam1r:true,icon:'🏆',name:'Moda',short:'El valor que apareix més vegades',
+   theory:{title:'Moda (Mo)',text:'La moda és el valor que apareix amb major freqüència. Pot haver-hi més d\'una moda si diversos valors comparteixen la freqüència màxima.',
+   formulas:['Mo = valor (o valors) amb la màxima freqüència','Exemple: 2,3,3,4,5,5,5 → Mo = 5','Pot haver-hi més d\'una moda si hi ha un empat en la freqüència màxima','També es pot calcular amb variables qualitatives']},gen:genModa},
+  {id:'probabilitat',course:'1r',exam1r:true,icon:'🎲',name:'Probabilitat',short:'Atzar, espai mostral i Laplace senzill',
+   theory:{title:'Probabilitat',text:'La probabilitat estudia fenòmens aleatoris. Primer identifiquem els resultats possibles i el grau de certesa; en casos equiprobables podem aplicar la regla de Laplace.',
+   formulas:['Espai mostral = conjunt de tots els resultats possibles','Segur · molt probable · igual de probable que no · poc probable · impossible','P(A) = casos favorables / casos possibles (si són equiprobables)','Freqüència relativa experimental = aparicions / nombre de proves','0 ≤ P(A) ≤ 1']},gen:genProbabilitat},
+
+  {id:'acumulades2',course:'2n',exam1r:false,icon:'📈',name:'Freqüències acumulades',short:'⭐ Ampliació · sumes progressives de freqüències',
+   theory:{title:'Freqüències acumulades',text:'La freqüència acumulada indica quantes dades s\'han comptat des del primer valor fins a un valor determinat.',
+   formulas:['Fᵢ = f₁ + f₂ + ... + fᵢ','La darrera freqüència acumulada és N','fᵢ = Fᵢ − Fᵢ₋₁','Cal ordenar els valors abans d\'acumular']},gen:genAcumulades},
+  {id:'histograma',course:'2n',exam1r:false,icon:'📊',name:'Histogrames',short:'⭐ Ampliació · dades contínues agrupades en intervals',
+   theory:{title:'Histogrames',text:'L\'histograma representa dades contínues agrupades en intervals. Les barres estan juntes perquè els intervals són consecutius.',
+   formulas:['Amplada de l\'interval = extrem superior − extrem inferior','Barres JUNTES: representen intervals continus','[a, b) vol dir a ≤ x < b','Un valor que coincideix amb una frontera pertany a l\'interval que comença en aquell valor']},gen:genHistograma}
 ];
 
 // ── STATE ────────────────────────────────────
 var NEEDED={1:10,2:20};
-var state={unlockedIds:[],done:[],currentTopic:0,level:1,exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0};
+var state={unlockedIds:[],done:[],errors:[],currentTopic:0,level:1,exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
 var currentEx=null;
 
 function isTopicUnlocked(i){return state.unlockedIds.indexOf(TOPICS[i].id)>=0;}
@@ -971,6 +1795,7 @@ async function loadState(){
         if(s.unlockedIds) state.unlockedIds=s.unlockedIds;
         else if(s.unlocked) state.unlockedIds=TOPICS.slice(0,s.unlocked).map(t=>t.id);
         if(s.done)state.done=s.done;
+        if(Array.isArray(s.errors))state.errors=s.errors;
       }
     } else {
       var raw=localStorage.getItem('se1eso_progress');
@@ -979,6 +1804,7 @@ async function loadState(){
         if(s2.unlockedIds) state.unlockedIds=s2.unlockedIds;
         else if(s2.unlocked) state.unlockedIds=TOPICS.slice(0,s2.unlocked).map(t=>t.id);
         if(s2.done)state.done=s2.done;
+        if(Array.isArray(s2.errors))state.errors=s2.errors;
       }
     }
   }catch(e){ /* encara no hi ha progrés desat */ }
@@ -986,13 +1812,41 @@ async function loadState(){
 }
 async function saveState(){
   try{
-    var data=JSON.stringify({unlockedIds:state.unlockedIds,done:state.done});
+    var data=JSON.stringify({unlockedIds:state.unlockedIds,done:state.done,errors:Array.isArray(state.errors)?state.errors:[]});
     if(hasCloudStorage()){
       await window.storage.set('progress',data,false);
     } else {
       localStorage.setItem('se1eso_progress',data);
     }
   }catch(e){console.error('Error desant el progrés:',e);}
+}
+
+
+function registerError(ex,studentAnswer,source){
+  if(!ex)return;
+  source=source||'practice';
+  if(!Array.isArray(state.errors))state.errors=[];
+  var topic=TOPICS.find(t=>t.id===ex.topicId)||TOPICS[state.currentTopic]||null;
+  var error={
+    id:Date.now()+'_'+Math.random().toString(36).slice(2,8),
+    topicId:ex.topicId||(topic?topic.id:null),
+    topicName:ex.topicName||(topic?topic.name:'Tema'),
+    type:ex.type!==undefined?ex.type:null,
+    question:ex.question||'',
+    visual:ex.visual||'',
+    correct:String(ex.correct),
+    answer:String(studentAnswer),
+    options:Array.isArray(ex.options)?[...ex.options]:[],
+    guide:Array.isArray(ex.guide)?[...ex.guide]:[],
+    solution:Array.isArray(ex.solution)?[...ex.solution]:[],
+    level:source==='exam'?0:state.level,
+    source:source,
+    timestamp:new Date().toISOString()
+  };
+  var last=state.errors[state.errors.length-1];
+  var sameAsLast=last&&last.topicId===error.topicId&&last.type===error.type&&last.question===error.question&&last.answer===error.answer&&last.correct===error.correct&&last.source===error.source;
+  if(!sameAsLast)state.errors.push(error);
+  saveState();
 }
 
 function showScreen(id){
@@ -1009,23 +1863,107 @@ function showHome(){
 
 function renderHome(){
   var grid=document.getElementById('topicsGrid');
-  var html='';
-  TOPICS.forEach(function(t,i){
-    var unlocked=isTopicUnlocked(i),done=state.done.indexOf(t.id)>=0;
-    html+='<div class="topic-card '+(unlocked?'':'locked ')+' '+(done?'done':'')+'" onclick="'+(unlocked?'selectTopic('+i+')':'')+'">'
+  var coreIndexes=[],extensionIndexes=[];
+  TOPICS.forEach(function(t,i){if(t.course==='1r')coreIndexes.push(i);else extensionIndexes.push(i);});
+
+  function topicCard(i,isExtension){
+    var t=TOPICS[i];
+    var unlocked=isExtension?true:isTopicUnlocked(i);
+    var done=state.done.indexOf(t.id)>=0;
+    return '<div class="topic-card '+(!unlocked?'locked ':'')+(done?'done':'')+'" '
+      +'onclick="'+(unlocked?'selectTopic('+i+')':'')+'" '+(isExtension?'style="border-style:dashed"':'')+'>'
       +'<div class="topic-icon">'+t.icon+'</div>'
       +'<div class="topic-info"><h3>'+t.name+'</h3><p>'+t.short+'</p></div>'
-      +'<span class="topic-badge '+(done?'badge-done':unlocked?'badge-active':'badge-locked')+'">'+(done?'✓ Fet':unlocked?'Practicar':'🔒')+'</span>'
-      +'</div>';
-  });
-  if(state.unlockedIds.length>3){
+      +'<span class="topic-badge '+(done?'badge-done':isExtension?'badge-extension':unlocked?'badge-active':'badge-locked')+'">'
+      +(done?'✓ Fet':isExtension?'Ampliació':unlocked?'Practicar':'🔒')+'</span></div>';
+  }
+
+  var html='<div style="grid-column:1/-1;margin:2px 0 6px">'
+    +'<div style="font-weight:800;color:var(--primary);font-size:1rem">📘 Continguts de 1r d\'ESO</div>'
+    +'<div style="font-size:.82rem;color:var(--muted);margin-top:3px">Aquests són els continguts que poden aparèixer al Mode Examen.</div></div>';
+
+  coreIndexes.forEach(function(i){html+=topicCard(i,false);});
+
+  var coreUnlocked=coreIndexes.filter(function(i){return isTopicUnlocked(i);}).length;
+  if(coreUnlocked>=3){
     html+='<div class="topic-card" onclick="startExam()" style="border:2px dashed var(--warn)">'
       +'<div class="topic-icon">📝</div>'
-      +'<div class="topic-info"><h3>Mode Examen</h3><p>Repassa tots els temes desblocats</p></div>'
-      +'<span class="topic-badge badge-exam">Examen</span></div>';
+      +'<div class="topic-info"><h3>Mode Examen · 1r ESO</h3><p>10 preguntes només dels continguts de 1r desbloquejats</p></div>'
+      +'<span class="topic-badge badge-exam">Examen 1r</span></div>';
   }
+
+  html+='<div style="grid-column:1/-1;margin:18px 0 6px;padding-top:14px;border-top:1px solid var(--border)">'
+    +'<div style="font-weight:800;color:#8b5cf6;font-size:1rem">⭐ Ampliació · prepara 2n d\'ESO</div>'
+    +'<div style="font-size:.82rem;color:var(--muted);margin-top:3px">Material opcional. <b>No compta per al progrés ni entra al Mode Examen de 1r ESO.</b></div></div>';
+  extensionIndexes.forEach(function(i){html+=topicCard(i,true);});
+
+  var errorCount=Array.isArray(state.errors)?state.errors.length:0;
+  html+='<div class="topic-card" onclick="showErrors()" style="border:2px dashed '+(errorCount?'var(--error)':'var(--border)')+';grid-column:1/-1">'
+    +'<div class="topic-icon">❌</div>'
+    +'<div class="topic-info"><h3>Errors guardats</h3><p>'+(errorCount?('Tens '+errorCount+' error'+(errorCount===1?'':'s')+' per repassar'):'Encara no tens errors guardats')+'</p></div>'
+    +'<span class="topic-badge '+(errorCount?'badge-exam':'badge-active')+'">'+(errorCount?'Repassar':'Veure')+'</span></div>';
+
   grid.innerHTML=html;
-  document.getElementById('globalProgress').style.width=((state.done.length/TOPICS.length)*100)+'%';
+  var coreDone=coreIndexes.filter(function(i){return state.done.indexOf(TOPICS[i].id)>=0;}).length;
+  document.getElementById('globalProgress').style.width=(coreIndexes.length?(coreDone/coreIndexes.length)*100:0)+'%';
+}
+
+function showErrors(){
+  var errors=Array.isArray(state.errors)?state.errors:[];
+  document.getElementById('navBack').style.display='block';
+  document.getElementById('navTitle').textContent='Errors guardats';
+
+  var html='<div class="home-header" style="padding-top:10px"><h2>❌ Errors guardats</h2>'
+    +'<p>Aquí es conserven les respostes incorrectes encara que tanquis o recarreguis la pàgina.</p></div>';
+
+  if(!errors.length){
+    html+='<div class="saved-error-card" style="border-left-color:var(--success)"><h3>✅ Cap error guardat</h3>'
+      +'<p style="margin-top:6px;color:var(--muted)">Quan fallis un exercici, quedarà registrat automàticament aquí.</p></div>';
+  } else {
+    html+='<div style="margin-bottom:12px;color:var(--muted);font-size:.85rem">'+errors.length+' error'+(errors.length===1?'':'s')+' guardat'+(errors.length===1?'':'s')+'</div>';
+    [...errors].reverse().forEach(function(e,revIndex){
+      var realIndex=errors.length-1-revIndex;
+      var date=e.timestamp?new Date(e.timestamp).toLocaleString('ca-ES',{dateStyle:'short',timeStyle:'short'}):'';
+      var typeTxt=(e.type!==null&&e.type!==undefined)?' · Tipus '+e.type:'';
+      var modeTxt=e.source==='exam'?'📝 Examen':('🧩 Pràctica · '+(e.level===2?'Nivell 2':'Nivell 1'));
+      html+='<div class="saved-error-card">'
+        +'<div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><h3 style="margin:0">❌ '+(e.topicName||'Tema')+'</h3><span style="font-size:.72rem;color:var(--muted)">'+date+'</span></div>'
+        +'<div style="margin:10px 0;line-height:1.5">'+(e.visual||'')+'<div>'+(e.question||'Pregunta no disponible')+'</div></div>'
+        +'<div class="saved-error-answer"><div>La teva resposta: <b style="color:var(--error)">'+(e.answer||'—')+'</b></div>'
+        +'<div>Resposta correcta: <b style="color:var(--success)">'+(e.correct||'—')+'</b></div></div>'
+        +'<div class="saved-error-meta">'+modeTxt+typeTxt+'</div>'
+        +(Array.isArray(e.solution)&&e.solution.length
+          ?'<button class="sol-btn" onclick="toggleSavedSolution(\'savedSol'+realIndex+'\',this)" style="margin-top:10px">📘 Veure explicació</button>'
+            +'<div class="solution-box" id="savedSol'+realIndex+'">'
+            +e.solution.map(function(s,i){return '<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>';}).join('')
+            +'</div>'
+          :'')
+        +'<button class="btn-secondary" onclick="deleteSavedError('+realIndex+')" style="margin-top:10px;border-color:var(--error);color:var(--error)">🗑️ Esborrar aquest error</button>'
+        +'</div>';
+    });
+    html+='<button class="btn-secondary" onclick="clearSavedErrors()" style="margin-top:8px;border-color:var(--error);color:var(--error)">🗑️ Esborrar tots els errors</button>';
+  }
+  html+='<button class="btn-secondary" onclick="showHome()" style="margin-top:8px">← Tornar al menú</button>';
+  document.getElementById('errorsContent').innerHTML=html;
+  showScreen('screenErrors');
+}
+
+function toggleSavedSolution(id,btn){
+  var box=document.getElementById(id);
+  if(!box)return;
+  box.classList.toggle('show');
+  btn.textContent=box.classList.contains('show')?'📕 Amagar explicació':'📘 Veure explicació';
+}
+
+function deleteSavedError(index){
+  if(!Array.isArray(state.errors)||index<0||index>=state.errors.length)return;
+  state.errors.splice(index,1);saveState();showErrors();
+}
+
+function clearSavedErrors(){
+  if(!Array.isArray(state.errors)||state.errors.length===0)return;
+  if(!confirm('Vols esborrar tots els errors guardats? Aquesta acció no es pot desfer.'))return;
+  state.errors=[];saveState();showErrors();
 }
 
 function selectTopic(i){
@@ -1047,7 +1985,20 @@ function selectLevel(l){
   document.getElementById('btnLvl1').classList.toggle('active',l===1);
   document.getElementById('btnLvl2').classList.toggle('active',l===2);
 }
-function startPractice(){state.exCount=0;state.correctStreak=0;showExercise();}
+function startPractice(){
+  state.exCount=0;
+  state.correctStreak=0;
+  // Cada nova sessió de Recollida comença amb la bossa completa i barrejada.
+  // Això garanteix que en 10 o 20 exercicis no es repeteixi cap pregunta.
+  if(TOPICS[state.currentTopic]&&TOPICS[state.currentTopic].id==='recollida'){
+    recollidaBag=buildRecollidaPool();
+  }
+  if(TOPICS[state.currentTopic]&&TOPICS[state.currentTopic].id==='barres'){
+    barresBag=buildBarresPool();
+    lastBarresContext=null;
+  }
+  showExercise();
+}
 
 function updateStreakBar(){
   var needed=NEEDED[state.level];
@@ -1096,6 +2047,7 @@ function selectAnswer(idx,btn){
     if(state.correctStreak>=NEEDED[state.level])markTopicDone();
   } else {
     state.correctStreak=0;updateStreakBar();
+    registerError(currentEx,ans,'practice');
     fb.innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4>Revisa els passos i torna-ho a intentar.<br>'
       +'<button class="sol-btn" onclick="toggleSolution(this)">Veure solució pas a pas</button>'
       +'<div class="solution-box" id="solBox">'+currentEx.solution.map((s,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div></div>';
@@ -1111,11 +2063,13 @@ function toggleSolution(btn){
 }
 
 function markTopicDone(){
-  var tid=TOPICS[state.currentTopic].id;
-  if(state.done.indexOf(tid)<0){
-    state.done.push(tid);
-    if(state.currentTopic+1<TOPICS.length&&!isTopicUnlocked(state.currentTopic+1))
-      state.unlockedIds.push(TOPICS[state.currentTopic+1].id);
+  var t=TOPICS[state.currentTopic];
+  if(state.done.indexOf(t.id)<0){
+    state.done.push(t.id);
+    if(t.course==='1r'){
+      var nextCore=TOPICS.findIndex(function(x,i){return i>state.currentTopic&&x.course==='1r';});
+      if(nextCore>=0&&!isTopicUnlocked(nextCore))state.unlockedIds.push(TOPICS[nextCore].id);
+    }
     saveState();
   }
 }
@@ -1129,12 +2083,12 @@ function nextExercise(){
 
 function showCongrats(){
   var t=TOPICS[state.currentTopic];
-  var next=state.currentTopic+1<TOPICS.length?TOPICS[state.currentTopic+1]:null;
+  var nextIndex=TOPICS.findIndex(function(x,i){return i>state.currentTopic&&x.course===t.course;});
   document.getElementById('feedbackArea').innerHTML='<div class="congrats">'
     +'<div class="trophy">🏆</div><h2>Excel·lent!</h2>'
     +'<p>Has dominat el tema de <b>'+t.name+'</b>!</p>'
     +'<button class="btn-primary" onclick="showHome()">Tornar al menú</button>'
-    +(next?'<button class="btn-secondary" onclick="selectTopic('+(state.currentTopic+1)+')">Següent: '+next.name+' →</button>':'')
+    +(nextIndex>=0?'<button class="btn-secondary" onclick="selectTopic('+nextIndex+')">Següent: '+TOPICS[nextIndex].name+' →</button>':'')
     +'</div>';
   document.getElementById('btnNext').style.display='none';
 }
@@ -1142,15 +2096,18 @@ function showCongrats(){
 function goBack(){showHome();}
 
 function startExam(){
-  state.examQs=[];
-  var available=TOPICS.filter((_,i)=>isTopicUnlocked(i));
+  state.examQs=[];state.examLog=[];
+  var available=TOPICS.filter(function(t,i){return t.course==='1r'&&t.exam1r!==false&&isTopicUnlocked(i);});
+  if(!available.length)available=TOPICS.filter(function(t){return t.course==='1r'&&t.exam1r!==false;}).slice(0,1);
   for(var i=0;i<10;i++){
     var t=available[rnd(0,available.length-1)];
-    var ex=t.gen();ex.topicName=t.name;state.examQs.push(ex);
+    var ex=t.gen();
+    ex.topicId=ex.topicId||t.id;ex.topicName=t.name;
+    state.examQs.push(ex);
   }
   state.examIdx=0;state.examScore=0;
   document.getElementById('navBack').style.display='block';
-  document.getElementById('navTitle').textContent='Mode Examen';
+  document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
   showExamQuestion();showScreen('screenExam');
 }
 
@@ -1173,6 +2130,8 @@ function selectExamAnswer(idx,btn){
   var ans=q.options[idx];
   var ok=ans===q.correct;
   if(ok)state.examScore++;
+  else registerError(q,ans,'exam');
+  state.examLog.push({q:q.question,correct:q.correct,given:ans,ok:ok,topic:q.topicName});
   document.querySelectorAll('#examOptions .opt-btn').forEach(b=>{
     b.disabled=true;
     if(b.textContent.trim()===String(q.correct).trim())b.classList.add('correct');
@@ -1188,74 +2147,103 @@ function selectExamAnswer(idx,btn){
 function nextExamQ(){
   state.examIdx++;
   if(state.examIdx<state.examQs.length){showExamQuestion();return;}
-  var pct2=Math.round((state.examScore/state.examQs.length)*100);
-  var emoji=pct2>=80?'🏆':pct2>=60?'👍':'💪';
+  var pct=Math.round((state.examScore/state.examQs.length)*100);
+  var emoji=pct>=80?'🏆':pct>=60?'👍':'💪';
+
+  var byTopic={};
+  state.examLog.forEach(function(l){
+    if(!byTopic[l.topic])byTopic[l.topic]={ok:0,tot:0};
+    byTopic[l.topic].tot++;if(l.ok)byTopic[l.topic].ok++;
+  });
+  var topicHtml='<div style="margin:14px 0 8px;font-weight:600">Resultats per tema:</div>';
+  Object.entries(byTopic).forEach(function(entry){
+    var name=entry[0],r=entry[1];
+    var col=r.ok===r.tot?'var(--success)':r.ok/r.tot>=0.5?'var(--warn)':'var(--error)';
+    topicHtml+='<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:.85rem"><span>'+name+'</span><span style="font-weight:700;color:'+col+'">'+r.ok+'/'+r.tot+'</span></div>';
+  });
+
+  var errs=state.examLog.filter(l=>!l.ok),errsHtml='';
+  if(errs.length){
+    errsHtml='<div style="margin:16px 0 8px;font-weight:600">❌ Per repassar ('+errs.length+' errors):</div>';
+    errs.forEach(function(e){
+      errsHtml+='<div class="saved-error-card" style="padding:10px 12px"><div style="font-size:.76rem;color:var(--muted);font-weight:700">'+e.topic+'</div>'
+        +'<div style="font-size:.84rem;margin-top:4px">'+e.q.replace(/<[^>]+>/g,'').slice(0,120)+'</div>'
+        +'<div style="font-size:.8rem;margin-top:5px"><span style="color:var(--error)">La teva: '+e.given+'</span> · <span style="color:var(--success)">✓ '+e.correct+'</span></div></div>';
+    });
+  }
+
   document.getElementById('examContent').innerHTML='<div class="congrats"><div class="trophy">'+emoji+'</div><h2>Resultat de l\'examen</h2></div>';
   document.getElementById('examOptions').innerHTML='';
   document.getElementById('examFeedback').innerHTML='';
   document.getElementById('btnNextExam').style.display='none';
   document.getElementById('examResult').style.display='block';
   document.getElementById('examResult').innerHTML='<div class="exam-score">'+state.examScore+'/'+state.examQs.length
-    +'<span>'+pct2+"% d'encerts</span></div>"
+    +'<span>'+pct+'% d\'encerts</span></div>'
     +'<p style="text-align:center;color:var(--muted);margin-bottom:18px">'
-    +(pct2>=80?'Molt bé! Domines els conceptes.':pct2>=60?'Bé, però pots millorar.':'Repassa els temes amb calma.')+'</p>'
+    +(pct>=80?'Molt bé! Domines els conceptes.':pct>=60?'Bé, però pots millorar.':'Repassa els temes amb calma.')+'</p>'
+    +topicHtml+errsHtml
     +'<button class="btn-primary" onclick="showHome()">Tornar al menú</button>'
     +'<button class="btn-secondary" onclick="startExam()">Tornar a examinar-me</button>';
 }
 
 // ── TEST AUTOMÀTIC ───────────────────────────
 function runAutoTest(){
-  var REPS=200;
+  var REPS=10000;
   var results=[];
   TOPICS.forEach(function(t){
-    var bugs=[];
+    var badExercises=0,totalIssues=0,samples=[];
     for(var i=0;i<REPS;i++){
-      var ex;
-      try{ex=t.gen();}catch(e){bugs.push('gen() crash: '+e.message);continue;}
-      if(!ex||ex.correct===undefined||ex.correct===null)
-        {bugs.push('correct és undefined/null | Q: '+(ex?ex.question:'?'));continue;}
-      if(ex.options.map(String).indexOf(String(ex.correct))<0)
-        bugs.push('Correcta "'+ex.correct+'" no és a options: ['+ex.options.join(' | ')+'] | Q: '+ex.question);
-      var uniq=new Set(ex.options.map(String));
-      if(uniq.size!==ex.options.length)
-        bugs.push('Opcions duplicades: ['+ex.options.join(' | ')+'] | Q: '+ex.question);
-      if(ex.options.length!==4)
-        bugs.push(ex.options.length+' opcions (cal 4) | Q: '+ex.question);
-      if(ex.options.some(o=>o===undefined||o===null||String(o).trim()===''))
-        bugs.push('Opció buida | Q: '+ex.question);
+      var ex,issues=[];
+      try{ex=t.gen();}catch(e){issues.push('gen() crash: '+e.message);}
+      if(ex){
+        if(ex.correct===undefined||ex.correct===null)issues.push('correct és undefined/null');
+        if(!Array.isArray(ex.options))issues.push('options no és un array');
+        else{
+          if(ex.options.map(String).indexOf(String(ex.correct))<0)issues.push('Correcta "'+ex.correct+'" no és a options: ['+ex.options.join(' | ')+']');
+          var uniq=new Set(ex.options.map(String));
+          if(uniq.size!==ex.options.length)issues.push('Opcions duplicades: ['+ex.options.join(' | ')+']');
+          if(ex.options.length!==4)issues.push(ex.options.length+' opcions (cal 4)');
+          if(ex.options.some(o=>o===undefined||o===null||String(o).trim()===''))issues.push('Opció buida');
+          if(ex.options.some(o=>/NaN|undefined|null/.test(String(o))))issues.push('Opció invàlida (NaN/undefined/null)');
+        }
+        if(!Array.isArray(ex.guide)||ex.guide.length===0)issues.push('Sense pistes guiades');
+        if(!Array.isArray(ex.solution)||ex.solution.length===0)issues.push('Sense solució');
+        if(ex.topicId!==t.id)issues.push('topicId incorrecte o absent: '+ex.topicId);
+        if(ex.type===undefined||ex.type===null)issues.push('type absent');
+        var qPlain=String(ex.question||'').replace(/<[^>]*>/g,'').trim();
+        if(/^Observa\b/i.test(qPlain)&&!ex.visual)issues.push('Pregunta visual sense visual');
+      }
+      if(issues.length){
+        badExercises++;totalIssues+=issues.length;
+        if(samples.length<10)samples.push(issues.join(' · ')+' | Q: '+(ex&&ex.question?ex.question:'?'));
+      }
     }
-    results.push({name:t.name,ok:REPS-bugs.length,total:REPS,bugs:bugs.slice(0,10)});
+    results.push({name:t.name,ok:REPS-badExercises,total:REPS,bad:badExercises,issueCount:totalIssues,bugs:samples});
   });
 
-  var totalBugs=results.reduce((s,r)=>s+r.bugs.length,0);
+  var totalBad=results.reduce((s,r)=>s+r.bad,0);
+  var totalIssues=results.reduce((s,r)=>s+r.issueCount,0);
   var html='<div style="padding:18px;max-width:680px;margin:0 auto">'
     +'<h2 style="color:var(--primary);margin-bottom:4px">🧪 Test Automàtic</h2>'
-    +'<p style="color:var(--muted);font-size:0.85rem;margin-bottom:18px">'+REPS+' exercicis per tema</p>';
+    +'<p style="color:var(--muted);font-size:.85rem;margin-bottom:18px">'+REPS+' exercicis per tema</p>';
   results.forEach(function(r){
-    var pct2=Math.round(r.ok/r.total*100);
-    var color=pct2===100?'var(--success)':pct2>=90?'var(--warn)':'var(--error)';
+    var pct=Math.round(r.ok/r.total*10000)/100;
+    var color=r.bad===0?'var(--success)':pct>=99?'var(--warn)':'var(--error)';
     html+='<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px;box-shadow:var(--shadow)">'
-      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">'
-      +'<b style="font-size:0.95rem">'+r.name+'</b>'
-      +'<span style="color:'+color+';font-weight:700">'+pct2+'% ('+r.ok+'/'+r.total+')</span></div>'
-      +'<div style="height:6px;background:var(--border);border-radius:3px;margin-bottom:8px">'
-      +'<div style="height:6px;background:'+color+';border-radius:3px;width:'+pct2+'%"></div></div>';
-    if(r.bugs.length>0){
-      html+='<details><summary style="font-size:0.82rem;color:var(--error);cursor:pointer">'+r.bugs.length+' error(s)</summary>'
-        +'<div style="margin-top:8px;font-size:0.78rem;line-height:1.8;color:#a02020;background:#fdeaea;border-radius:8px;padding:10px">'
-        +r.bugs.map((b,i)=>'<div style="border-bottom:1px solid #f0b0b0;padding:3px 0"><b>#'+(i+1)+'</b> '+b+'</div>').join('')
-        +'</div></details>';
-    }else{
-      html+='<div style="font-size:0.82rem;color:var(--success)">✅ Cap error detectat</div>';
-    }
+      +'<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><b style="font-size:.95rem">'+r.name+'</b>'
+      +'<span style="color:'+color+';font-weight:700">'+pct+'% ('+r.ok+'/'+r.total+')</span></div>'
+      +'<div style="height:6px;background:var(--border);border-radius:3px;margin-bottom:8px"><div style="height:6px;background:'+color+';border-radius:3px;width:'+pct+'%"></div></div>';
+    if(r.bad){
+      html+='<details><summary style="font-size:.82rem;color:var(--error);cursor:pointer">'+r.bad+' exercici(s) amb error · '+r.issueCount+' incidència(es)</summary>'
+        +'<div style="margin-top:8px;font-size:.78rem;line-height:1.8;color:#a02020;background:#fdeaea;border-radius:8px;padding:10px">'
+        +r.bugs.map((b,i)=>'<div style="border-bottom:1px solid #f0b0b0;padding:3px 0"><b>#'+(i+1)+'</b> '+b+'</div>').join('')+'</div></details>';
+    } else html+='<div style="font-size:.82rem;color:var(--success)">✅ Cap error detectat</div>';
     html+='</div>';
   });
-  html+='<div style="text-align:center;padding:16px;background:'+(totalBugs===0?'#e6f9ef':'#fdeaea')+';border-radius:12px;margin-top:4px">'
-    +'<b style="font-size:1.1rem;color:'+(totalBugs===0?'var(--success)':'var(--error)')+'">'
-    +(totalBugs===0?'🏆 Tot correcte!':'⚠️ '+totalBugs+' bugs trobats')+'</b></div>';
-  html+='<button onclick="downloadReport()" style="margin-top:14px;width:100%;background:#8b5cf6;color:white;border:none;border-radius:12px;padding:13px;font-size:0.93rem;font-weight:600;cursor:pointer">⬇️ Descarregar informe .txt</button>';
-  html+='<button onclick="showHome()" style="margin-top:10px;width:100%;background:var(--primary);color:white;border:none;border-radius:12px;padding:13px;font-size:0.93rem;font-weight:600;cursor:pointer">← Tornar al menú</button>';
-  html+='</div>';
+  html+='<div style="text-align:center;padding:16px;background:'+(totalBad===0?'#e6f9ef':'#fdeaea')+';border-radius:12px;margin-top:4px"><b style="font-size:1.1rem;color:'+(totalBad===0?'var(--success)':'var(--error)')+'">'
+    +(totalBad===0?'🏆 Tot correcte!':'⚠️ '+totalBad+' exercicis amb error · '+totalIssues+' incidències')+'</b></div>';
+  html+='<button onclick="downloadReport()" style="margin-top:14px;width:100%;background:#8b5cf6;color:white;border:none;border-radius:12px;padding:13px;font-size:.93rem;font-weight:600;cursor:pointer">⬇️ Descarregar informe .txt</button>';
+  html+='<button onclick="showHome()" style="margin-top:10px;width:100%;background:var(--primary);color:white;border:none;border-radius:12px;padding:13px;font-size:.93rem;font-weight:600;cursor:pointer">← Tornar al menú</button></div>';
 
   window._lastTestResults=results;
   document.getElementById('navBack').style.display='none';
@@ -1266,27 +2254,22 @@ function runAutoTest(){
 
 function downloadReport(){
   var results=window._lastTestResults||[];
-  var totalBugs=results.reduce((s,r)=>s+r.bugs.length,0);
-  var lines=[
-    'INFORME DE TEST AUTOMÀTIC — Sentit Estocàstic · 1r ESO',
-    '='.repeat(60),
-    'Data: '+new Date().toLocaleString('ca-ES'),
-    '200 exercicis per tema | Total bugs: '+totalBugs,
-    ''
-  ];
+  var totalBad=results.reduce((s,r)=>s+r.bad,0),totalIssues=results.reduce((s,r)=>s+r.issueCount,0);
+  var reps=results.length?results[0].total:10000;
+  var lines=['INFORME DE TEST AUTOMÀTIC — Sentit Estocàstic · 1r ESO','='.repeat(60),'Data: '+new Date().toLocaleString('ca-ES'),reps+' exercicis per tema | Exercicis amb error: '+totalBad+' | Incidències: '+totalIssues,''];
   results.forEach(function(r){
-    var pct2=Math.round(r.ok/r.total*100);
-    lines.push('-'.repeat(60),'TEMA: '+r.name,'Resultat: '+pct2+'% ('+r.ok+'/'+r.total+')');
-    if(r.bugs.length===0){lines.push('✓ Cap error detectat');}
-    else{lines.push('✗ '+r.bugs.length+' error(s):');r.bugs.forEach((b,i)=>lines.push('  #'+(i+1)+' '+b));}
+    var pct=Math.round(r.ok/r.total*10000)/100;
+    lines.push('-'.repeat(60),'TEMA: '+r.name,'Resultat: '+pct+'% ('+r.ok+'/'+r.total+')');
+    if(r.bad===0)lines.push('✓ Cap error detectat');
+    else{
+      lines.push('✗ '+r.bad+' exercici(s) amb error · '+r.issueCount+' incidència(es)');
+      r.bugs.forEach((b,i)=>lines.push('  #'+(i+1)+' '+b));
+    }
     lines.push('');
   });
-  lines.push('='.repeat(60),totalBugs===0?'RESULTAT FINAL: TOT CORRECTE ✓':'RESULTAT FINAL: '+totalBugs+' BUGS TROBATS ✗');
+  lines.push('='.repeat(60),totalBad===0?'RESULTAT FINAL: TOT CORRECTE ✓':'RESULTAT FINAL: '+totalBad+' EXERCICIS AMB ERROR · '+totalIssues+' INCIDÈNCIES ✗');
   var blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
-  var a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download='informe_test_estocstic.txt';
-  a.click();
+  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='informe_test_estocastic.txt';a.click();
 }
 
 // Triple clic al títol → test automàtic
@@ -1322,14 +2305,17 @@ function renderUnlockPanel(){
   var list=document.getElementById('unlockTopicList');
   var html='';
   TOPICS.forEach(function(t,i){
-    var isUnlocked=isTopicUnlocked(i);
+    var isExtension=t.course==='2n';
+    var isUnlocked=isExtension||isTopicUnlocked(i);
     var isDone=state.done.indexOf(t.id)>=0;
-    var canToggle=i>0; // el primer sempre obert
+    var canToggle=!isExtension&&i>0;
     html+='<div class="unlock-topic-row">'
-      +'<span class="unlock-topic-name '+(isDone?'is-done':'')+'">'+t.icon+' '+t.name.split(' ')[0]+(isDone?' ✓':'')+'</span>'
-      +(canToggle
-        ? '<button class="unlock-toggle '+(isUnlocked?'active':'')+'" onclick="toggleTopicUnlock('+i+')">'+(isUnlocked?'Obert':'Tancat')+'</button>'
-        : '<span style="font-size:.75rem;color:var(--success);font-weight:600">Base</span>')
+      +'<span class="unlock-topic-name '+(isDone?'is-done':'')+'">'+t.icon+' '+t.name+(isDone?' ✓':'')+'</span>'
+      +(isExtension
+        ? '<span style="font-size:.72rem;color:#8b5cf6;font-weight:700">Ampliació</span>'
+        : canToggle
+          ? '<button class="unlock-toggle '+(isUnlocked?'active':'')+'" onclick="toggleTopicUnlock('+i+')">'+(isUnlocked?'Obert':'Tancat')+'</button>'
+          : '<span style="font-size:.75rem;color:var(--success);font-weight:600">Base</span>')
       +'</div>';
   });
   list.innerHTML=html;
@@ -1350,7 +2336,7 @@ async function toggleTopicUnlock(i){
 }
 
 async function unlockAllTopics(){
-  state.unlockedIds=TOPICS.map(t=>t.id);
+  state.unlockedIds=TOPICS.filter(function(t){return t.course==='1r';}).map(function(t){return t.id;});
   await saveState();
   renderUnlockPanel();
   renderHome();
@@ -1369,7 +2355,7 @@ function resetProgress(){
   }
   disarmReset();
   (async function(){
-    state.unlockedIds=[TOPICS[0].id]; state.done=[];
+    state.unlockedIds=[TOPICS.find(function(t){return t.course==='1r';}).id]; state.done=[];
     await saveState();
     renderUnlockPanel();
     renderHome();
