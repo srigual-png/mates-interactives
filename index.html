@@ -1,194 +1,266 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
+
 <html lang="ca">
 <head>
-<meta name="google-site-verification" content="O_If_iPpolcE8n372AXMIlp0nhoFxJwzdyUJ_RpdF5U" />
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Practica matemàtiques de 1r d'ESO amb exercicis interactius autocorrectius. Nombres naturals, fraccions, decimals, enters, àlgebra, geometria, probabilitat i problemes guiats pas a pas.">
-<meta name="author" content="Salvador Rigual Valls">
-<meta name="robots" content="index, follow">
-<title>Exercicis de Matemàtiques de 1r d'ESO | Exercicis Interactius Gratuïts</title>
-<link rel="canonical" href="https://srigual-png.github.io/mates-primer-ESO/">
-<link rel="icon" href="favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<style>
-:root{--bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--pd:#3a6fd8;--ok:#34c97e;--err:#e05c5c;--warn:#f5a623;--text:#2c3e50;--muted:#7f8c9a;--border:#dce3ed;--sh:0 2px 12px rgba(0,0,0,0.08);}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
-nav{background:var(--card);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh);position:sticky;top:0;z-index:100;}
-nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;}
-.wrap{padding:20px;max-width:1000px;margin:0 auto;}
-.topic{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin-bottom:16px;box-shadow:var(--sh);}
-.thead{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
-.ticon{font-size:1.7rem;width:42px;text-align:center;flex-shrink:0;}
-.tinfo{flex:1;}
-.tinfo h3{font-size:1.05rem;font-weight:700;color:var(--text);}
-.tinfo p{font-size:.8rem;color:var(--muted);margin-top:2px;}
-.tnum{font-size:.72rem;font-weight:700;color:var(--primary);background:#eaf1fd;padding:2px 9px;border-radius:20px;}
-.lkrow{display:flex;gap:10px;margin-top:14px;}
-.lk{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;border-radius:12px;padding:13px 10px;font-size:.88rem;font-weight:600;transition:transform .15s,box-shadow .15s;}
-.lk:hover{transform:translateY(-2px);}
-.lk-base{background:var(--primary);color:#fff;}
-.lk-base:hover{background:var(--pd);box-shadow:0 6px 16px rgba(91,141,238,.3);}
-.lk-amp{background:#fff3e0;color:#b85c00;border:2px solid var(--warn);}
-.lk-amp:hover{background:#ffe9c4;box-shadow:0 6px 16px rgba(245,166,35,.25);}
-.foot{text-align:center;color:var(--muted);font-size:.78rem;padding:24px 0 10px;}
-.intro-card{
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px 24px;
-    margin: 0 0 24px 0;
-    box-shadow: var(--sh);
-}
-
-.intro-card p{
-    margin: 0;
-    line-height: 1.7;
-    color: var(--text);
-    text-align: justify;
-}
-    /* tot el teu CSS */
-
-.hh{
-    text-align:center;
-    padding:24px 0 18px;
-}
-
-.hh h1{
-    margin:0;
-    font-size:2.3rem;
-    font-weight:700;
-    color:#1f2937;
-}
-
-.hh h2{
-    margin:6px 0 12px;
-    font-size:1.5rem;
-    font-weight:600;
-    color:var(--primary);
-}
-
-.hh p{
-    margin-top:0;
-    color:var(--muted);
-    font-size:.9rem;
-}
-</style>
-<script data-goatcounter="https://srigual.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Exercicis de matemàtiques ESO interactius | Mates Interactives</title>
+<meta content="Exercicis interactius i autocorrectius de matemàtiques per a l’ESO, amb teoria, pistes, problemes i mode examen. Recurs gratuït adaptat al currículum de Catalunya." name="description"/>
+<link href="https://srigual-png.github.io/mates-interactives/" rel="canonical"/>
+<!-- Favicon -->
+<link href="assets/images/favicon.ico" rel="icon"/>
+<link href="assets/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="assets/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="assets/images/apple-touch-icon.png" rel="apple-touch-icon"/>
+<!-- Open Graph -->
+<meta content="Exercicis de matemàtiques ESO interactius | Mates Interactives" property="og:title"/>
+<meta content="Exercicis interactius i autocorrectius de matemàtiques per a l’ESO, amb teoria, pistes, problemes i mode examen. Recurs gratuït adaptat al currículum de Catalunya." property="og:description"/>
+<meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/>
+<meta content="https://srigual-png.github.io/mates-interactives/" property="og:url"/>
+<meta content="website" property="og:type"/>
+<meta content="ca_ES" property="og:locale"/>
+<!-- Twitter -->
+<meta content="summary_large_image" name="twitter:card"/>
+<!-- CSS -->
+<link href="assets/css/variables.css" rel="stylesheet"/>
+<link href="assets/css/base.css" rel="stylesheet"/>
+<link href="assets/css/layout.css" rel="stylesheet"/>
+<link href="assets/css/components.css" rel="stylesheet"/>
+<link href="assets/css/home.css" rel="stylesheet"/>
+<meta content="index, follow" name="robots"/><meta content="O_If_iPpolcE8n372AXMIlp0nhoFxJwzdyUJ_RpdF5U" name="google-site-verification"/></head>
 <body>
-<nav><h1>🔢 Mates Interactives</h1></nav>
-<div class="wrap">
-  <div class="hh">
-    <h1>Mates Interactives</h1>
-
-    <h2>Matemàtiques de 1r d'ESO</h2>
-
-    <p>
-      Practica tot el temari de Matemàtiques de 1r d'ESO amb exercicis interactius,
-      explicacions pas a pas, pistes, correcció immediata i mode examen.
-    </p>
-  </div>
-
-<div class="intro-card">
-    <p>
-        Aquesta web t'ajuda a practicar tots els continguts de <strong>Matemàtiques de 1r d'ESO</strong> mitjançant exercicis interactius. Cada tema inclou explicacions clares, exercicis interactius, pistes, activitats d'ampliació i correcció immediata perquè puguis aprendre dels teus errors.
-    </p>
-
-    <br>
-
-    <p>
-        Els continguts segueixen el currículum de 1r d'ESO i estan organitzats per blocs: <strong>Sentit numèric</strong>, <strong>Sentit de la mesura</strong>, <strong>Sentit espacial</strong>, <strong>Sentit algebraic (àlgebra)</strong> i <strong>Sentit estocàstic (estadística i probabilitat)</strong>. Escull el bloc que necessitis i avança al teu ritme.
-    </p>
+<header class="site-header">
+<div class="container site-header__inner">
+<div class="site-header__brand">
+<img alt="Logotip Mates Interactives" class="site-header__logo" src="assets/images/logo-principal.webp"/>
+<div class="site-header__identity">
+<div class="site-header__title">
+                    Mates Interactives
+                </div>
+<div class="site-header__subtitle">
+                    Aprèn matemàtiques practicant
+                </div>
 </div>
-  <div class="topic">
-    <div class="thead">
-      <div class="ticon">🔢</div>
-      <div class="tinfo"><h3>Sentit numèric</h3><p>Naturals, enters, decimals, fraccions, percentatges...</p></div>
-      <span class="tnum">Tema 1</span>
-    </div>
-    <div class="lkrow">
-      <a class="lk lk-base" href="sentit-numeric.html">📘 Continguts</a>
-      <a class="lk lk-amp" href="ampliacio-sentit-numeric.html">✏️ Ampliació</a>
-    </div>
-  </div>
-
-  <div class="topic">
-    <div class="thead">
-      <div class="ticon">📏</div>
-      <div class="tinfo"><h3>Sentit de la mesura</h3><p>Unitats, longitud, massa, capacitat, temps...</p></div>
-      <span class="tnum">Tema 2</span>
-    </div>
-    <div class="lkrow">
-      <a class="lk lk-base" href="sentit-mesura.html">📘 Continguts</a>
-      <a class="lk lk-amp" href="ampliacio-sentit-mesura.html">✏️ Ampliació</a>
-    </div>
-  </div>
-
-  <div class="topic">
-    <div class="thead">
-      <div class="ticon">📐</div>
-      <div class="tinfo"><h3>Sentit espacial</h3><p>Figures, angles, simetries, plànols i mapes...</p></div>
-      <span class="tnum">Tema 3</span>
-    </div>
-    <div class="lkrow">
-      <a class="lk lk-base" href="sentit-espacial.html">📘 Continguts</a>
-      <a class="lk lk-amp" href="ampliacio-sentit-espacial.html">✏️ Ampliació</a>
-    </div>
-  </div>
-
-  <div class="topic">
-    <div class="thead">
-      <div class="ticon">🔣</div>
-      <div class="tinfo"><h3>Sentit algebraic</h3><p>Patrons, expressions, equacions senzilles...</p></div>
-      <span class="tnum">Tema 4</span>
-    </div>
-    <div class="lkrow">
-      <a class="lk lk-base" href="sentit-algebraic.html">📘 Continguts</a>
-      <a class="lk lk-amp" href="ampliacio-sentit-algebraic.html">✏️ Ampliació</a>
-    </div>
-  </div>
-
-  <div class="topic">
-    <div class="thead">
-      <div class="ticon">🎲</div>
-      <div class="tinfo"><h3>Sentit estocàstic</h3><p>Probabilitat, estadística, gràfics i dades...</p></div>
-      <span class="tnum">Tema 5</span>
-    </div>
-    <div class="lkrow">
-      <a class="lk lk-base" href="sentit-estocastic.html">📘 Continguts</a>
-      <a class="lk lk-amp" href="ampliacio-sentit-estocastic.html">✏️ Ampliació</a> 
-    </div>
-  </div>
-
 </div>
-<div style="text-align: center; margin-top: 40px; margin-bottom: 20px; font-family: sans-serif;">
-    <p style="font-size: 16px; color: #333;">T'ha servit aquesta aplicació de matemàtiques?</p>
-    <a href="https://buymeacoffee.com/srigual" target="_blank" style="background-color: #FFDD00; color: #000000; padding: 12px 24px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block; box-shadow: 0px 2px 4px rgba(0,0,0,0.1);">
-        ☕ Convida'm a un cafè!
-    </a>
+<nav aria-label="Navegació principal" class="nav">
+<ul class="nav__list">
+<li class="nav__item">
+<a class="nav__link" href="index.html">
+                        Inici
+                    </a>
+</li>
+<li class="nav__item">
+<a class="nav__link" href="1eso/index.html">
+                        1r ESO
+                    </a>
+</li>
+<li class="nav__item">
+<a class="nav__link" href="#projecte">
+                        Projecte
+                    </a>
+</li>
+<li class="nav__item">
+<a class="nav__link" href="#suport">
+                        Suport
+                    </a>
+</li>
+</ul>
+</nav>
 </div>
+</header>
+<main class="container">
+<section class="hero">
+<div class="hero__content">
+<p class="hero__eyebrow">
+            Plataforma educativa gratuïta
+        </p>
+<h1 class="hero__title">
+            Practica. Equivoca't.<br/>
+            Aprèn. Continua.
+        </h1>
+<p class="hero__subtitle">
+            Aprèn matemàtiques practicant amb exercicis interactius adaptats al currículum de Catalunya.
+            Corregeix els errors, reforça els conceptes i avança al teu ritme.
+        </p>
+<div class="hero__actions">
+<a class="btn btn--primary" href="1eso/index.html">
 
-<section style="max-width:1000px;margin:60px auto;padding:25px;background:#f8f9ff;border-radius:12px;line-height:1.7;font-size:16px;color:#444;">
+                Comença amb 1r d'ESO
 
-<h2>Sobre aquesta plataforma</h2>
-
-<p>
-Aquesta plataforma ofereix <strong>exercicis interactius de matemàtiques de 1r d'ESO</strong> per practicar els continguts del curs d'una manera dinàmica i autocorrectiva.
-</p>
-
-<p>
-Hi trobaràs activitats de <strong>nombres naturals, sistema decimal, operacions, divisibilitat, nombres enters, decimals, fraccions, percentatges, geometria, àlgebra, estadística i probabilitat</strong>. Els exercicis estan organitzats per temes i diferents nivells de dificultat perquè cada alumne pugui avançar al seu ritme.
-</p>
-
-<p>
-La plataforma també inclou <strong>problemes oberts amb pistes pas a pas</strong>, activitats d'ampliació i un <strong>mode examen</strong> per preparar les proves de matemàtiques de 1r d'ESO. Com que els exercicis es generen automàticament, és possible practicar tantes vegades com calgui amb preguntes diferents.
-</p>
-
+            </a>
+</div>
+<div class="hero__highlights">
+<div class="hero__highlight">
+                ⚡ Correcció immediata
+            </div>
+<div class="hero__highlight">
+                📘 Currículum oficial
+            </div>
+<div class="hero__highlight">
+                ❤️ Sense anuncis
+            </div>
+</div>
+</div>
 </section>
+<section class="features">
+<h2>
+        Per què Mates Interactives?
+    </h2>
+<p class="section-intro">
+        Una manera diferent d'aprendre matemàtiques: practicant, equivocant-te i millorant pas a pas.
+    </p>
+<div class="grid grid-2">
+<article class="card">
+<h3>
+                ⚡ Correcció immediata
+            </h3>
+<p>
+                Comprova cada resposta a l'instant, detecta els errors i continua avançant sense perdre el ritme.
+            </p>
+</article>
+<article class="card">
+<h3>
+                💡 Aprenentatge actiu
+            </h3>
+<p>
+                Practicar és la millor manera d'entendre les matemàtiques i consolidar els conceptes de forma natural.
+            </p>
+</article>
+<article class="card">
+<h3>
+                📚 Currículum oficial
+            </h3>
+<p>
+                Exercicis organitzats segons el currículum oficial de Catalunya perquè puguis treballar cada tema quan toca.
+            </p>
+</article>
+<article class="card">
+<h3>
+                📱 Sempre disponible
+            </h3>
+<p>
+                Funciona des de qualsevol dispositiu, sense instal·lar cap aplicació i completament des del navegador.
+            </p>
+</article>
+</div>
+</section>
+<section class="courses">
+<h2>
+        Escull el teu curs
+    </h2>
+<p class="section-intro">
+        Comença pel curs que estàs estudiant. Nous cursos s'aniran incorporant progressivament.
+    </p>
+<div class="grid grid-4">
+<article class="card card--course">
+<h3 class="card__title">
+                1r ESO
+            </h3>
+<p class="card__text">
+                Exercicis interactius, autocorrecció immediata i continguts adaptats al currículum de Catalunya.
+            </p>
+<a class="btn btn--primary" href="1eso/index.html">
+
+                Comença
+
+            </a>
+</article>
+<article class="card card--course">
+<h3 class="card__title">
+                🔒 2n ESO
+            </h3>
+<p class="card__text">
+                En desenvolupament.
+                Disponible pròximament.
+            </p>
+</article>
+<article class="card card--course">
+<h3 class="card__title">
+                🔒 3r ESO
+            </h3>
+<p class="card__text">
+                En desenvolupament.
+                Disponible pròximament.
+            </p>
+</article>
+<article class="card card--course">
+<h3 class="card__title">
+                🔒 4t ESO
+            </h3>
+<p class="card__text">
+                En desenvolupament.
+                Disponible pròximament.
+            </p>
+</article>
+</div>
+</section>
+<section class="info-grid">
+<div class="grid grid-2">
+<article class="card" id="projecte">
+<div class="info-icon">
+                🎯
+            </div>
+<h2>
+                El nostre compromís
+            </h2>
+<p>
+<strong>Mates Interactives</strong> neix amb un objectiu molt senzill:
+                ajudar els estudiants a aprendre matemàtiques practicant.
+                Creiem que equivocar-se forma part del procés d'aprenentatge i que cada exercici és una oportunitat per millorar.
+            </p>
+<p>
+                La plataforma és completament gratuïta, està adaptada al currículum de Catalunya i evoluciona constantment amb nous recursos, activitats i cursos.
+            </p>
+</article>
+<article class="card support-card" id="suport">
+<div class="info-icon">
+                ☕
+            </div>
+<h2>
+                Dóna suport al projecte
+            </h2>
+<p>
+                Si Mates Interactives t'ha ajudat, pots contribuir a mantenir aquest projecte viu.
+            </p>
+<p>
+                Les donacions es destinen íntegrament a crear nous exercicis, millorar la plataforma i incorporar nous cursos perquè cada vegada sigui més útil per als estudiants.
+            </p>
+<a class="btn btn--primary" href="https://buymeacoffee.com/srigual" rel="noopener noreferrer" target="_blank">
+
+                ☕ Convida'm a un cafè
+
+            </a>
+</article>
+</div>
+</section>
+</main>
+<footer class="site-footer">
+<div class="container">
+<p>
+            © 2026 Mates Interactives · Desenvolupat per Salvador Rigual
+        </p>
+<p>
+            100 % gratuït · Sense anuncis · Sense cookies · Fet amb ❤️ a Catalunya
+        </p>
+</div>
+</footer>
+<!-- GoatCounter (només quan la web està publicada) -->
+<script>
+
+if (location.protocol !== "file:") {
+
+    const s = document.createElement("script");
+
+    s.async = true;
+
+    s.dataset.goatcounter = "https://srigual.goatcounter.com/count";
+
+    s.src = "https://gc.zgo.at/count.js";
+
+    document.body.appendChild(s);
+
+}
+
+</script>
 </body>
 </html>

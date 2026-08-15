@@ -1,0 +1,1018 @@
+/* ==========================================================
+   1ESO.CSS
+   Mates Interactives — Matemàtiques de 1r d'ESO
+
+   Arquitectura:
+   01. Mapa del curs
+   02. Centre
+   03. Nodes
+   04. Posicions
+========================================================== */
+
+
+/* ==========================================================
+   01. MAPA DEL CURS
+========================================================== */
+
+.course-map{
+
+    padding:
+        clamp(3rem, 6vw, 5rem)
+        0
+        clamp(4rem, 7vw, 6rem);
+
+}
+
+.course-map .container{
+
+    width:100%;
+
+}
+
+.course-map__wrapper{
+
+    position:relative;
+
+    width:100%;
+    max-width:1000px;
+
+    height:820px;
+
+    margin:0 auto;
+
+}
+
+
+/* ==========================================================
+   02. CENTRE DEL MAPA
+========================================================== */
+
+.course-center{
+
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    width:170px;
+    height:170px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    transform:translate(-50%, -50%);
+
+    z-index:10;
+
+    text-align:center;
+
+    background:var(--surface-3);
+
+    border:1px solid var(--border-color);
+
+    border-radius:50%;
+
+    box-shadow:var(--shadow-md);
+
+}
+
+
+/* ---------- Títol central ---------- */
+
+.course-center__title{
+
+    display:block;
+
+    margin:0;
+
+    font-size:clamp(1.8rem, 3vw, 2.5rem);
+
+    font-weight:800;
+
+    line-height:1.1;
+
+    letter-spacing:-0.025em;
+
+    color:var(--color-text);
+
+}
+
+
+/* ==========================================================
+   03. NODES DEL MAPA
+========================================================== */
+
+.course-node{
+
+    position:absolute;
+
+    width:230px;
+    height:230px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    padding:1rem;
+
+    box-sizing:border-box;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    color:inherit;
+
+    background:#fcfcfd;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 10px 26px rgba(15,23,42,.08);
+
+    cursor:pointer;
+
+    -webkit-tap-highlight-color:transparent;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+
+}
+
+
+/* ---------- Imatges ---------- */
+
+.course-node img{
+
+    display:block;
+
+    width:128px;
+    height:128px;
+
+    object-fit:contain;
+
+    flex-shrink:0;
+
+    margin:0 0 1rem;
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+    transition:
+        transform .25s ease;
+
+}
+
+.course-node:hover img{
+
+    transform:scale(1.04);
+
+}
+
+
+/* ---------- Text ---------- */
+
+.course-node span{
+
+    display:block;
+
+    max-width:190px;
+
+    margin:0;
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    line-height:1.35;
+
+    color:var(--color-text);
+
+}
+
+
+/* ---------- Hover ---------- */
+
+.course-node:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 20px 42px rgba(15,23,42,.14);
+
+    border-color:#d1d5db;
+
+}
+
+
+/* ---------- Focus accessible ---------- */
+
+.course-node:focus-visible{
+
+    outline:3px solid var(--color-primary);
+
+    outline-offset:5px;
+
+}
+
+
+/* ==========================================================
+   04. POSICIONS DELS CINC SENTITS
+========================================================== */
+
+
+/* ==========================================================
+   SENTIT NUMÈRIC
+========================================================== */
+
+.course-node--numeric{
+
+    top:0;
+    left:50%;
+
+    transform:translateX(-50%);
+
+}
+
+.course-node--numeric:hover{
+
+    transform:
+        translateX(-50%)
+        translateY(-6px);
+
+}
+
+
+/* ==========================================================
+   SENTIT DE LA MESURA
+========================================================== */
+
+.course-node--mesura{
+
+    top:180px;
+    left:0;
+
+}
+
+.course-node--mesura:hover{
+
+    transform:translateY(-6px);
+
+}
+
+
+/* ==========================================================
+   SENTIT ESPACIAL
+========================================================== */
+
+.course-node--espacial{
+
+    top:180px;
+    right:0;
+
+}
+
+.course-node--espacial:hover{
+
+    transform:translateY(-6px);
+
+}
+
+
+/* ==========================================================
+   SENTIT ALGEBRAIC
+========================================================== */
+
+.course-node--algebraic{
+
+    bottom:0;
+    left:120px;
+
+}
+
+.course-node--algebraic:hover{
+
+    transform:translateY(-6px);
+
+}
+
+
+/* ==========================================================
+   SENTIT ESTOCÀSTIC
+========================================================== */
+
+.course-node--estocastic{
+
+    right:120px;
+    bottom:0;
+
+}
+
+.course-node--estocastic:hover{
+
+    transform:translateY(-6px);
+
+}
+
+
+/* ==========================================================
+   05. HERO DEL CURS
+========================================================== */
+
+.course-hero{
+
+    padding:
+        clamp(2.5rem, 5vw, 4rem)
+        0
+        clamp(1.5rem, 3vw, 2.5rem);
+
+    text-align:center;
+
+}
+
+.course-hero__content{
+
+    max-width:760px;
+
+    margin:0 auto;
+
+}
+
+
+/* ---------- Títol ---------- */
+
+.course-hero h1{
+
+    margin:0;
+
+    font-size:
+        clamp(2rem, 5vw, 3.25rem);
+
+    font-weight:800;
+
+    line-height:1.1;
+
+    letter-spacing:-0.03em;
+
+    color:var(--color-text);
+
+}
+
+
+/* ---------- Descripció ---------- */
+
+.course-hero p{
+
+    max-width:650px;
+
+    margin:
+        1.25rem auto 0;
+
+    font-size:
+        clamp(1rem, 2vw, 1.2rem);
+
+    line-height:1.7;
+
+    color:var(--color-text-light);
+
+}
+
+
+/* ==========================================================
+   06. GUIA DEL CURS
+========================================================== */
+
+.course-guide{
+
+    padding:
+        1rem 0
+        clamp(4rem, 7vw, 6rem);
+
+}
+
+
+/* ---------- Capçalera ---------- */
+
+.course-guide h2{
+
+    margin:
+        0 0 2.5rem;
+
+    text-align:center;
+
+    font-size:
+        clamp(1.6rem, 3vw, 2.2rem);
+
+    font-weight:800;
+
+    line-height:1.2;
+
+    letter-spacing:-0.02em;
+
+    color:var(--color-text);
+
+}
+
+
+/* ==========================================================
+   07. GRAELLA DE LA GUIA
+========================================================== */
+
+.guide-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap:1.5rem;
+
+    max-width:1050px;
+
+    margin:0 auto;
+
+}
+
+
+/* ==========================================================
+   08. PAS DE LA GUIA
+========================================================== */
+
+.guide-step{
+
+    position:relative;
+
+    padding:
+        2rem 1.5rem 1.75rem;
+
+    text-align:center;
+
+    background:#fcfcfd;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:16px;
+
+    box-shadow:
+        0 8px 24px rgba(15,23,42,.06);
+
+}
+
+
+/* ---------- Número ---------- */
+
+.guide-step__number{
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    width:46px;
+    height:46px;
+
+    margin:
+        0 auto 1.25rem;
+
+    border-radius:50%;
+
+    background:var(--color-primary);
+
+    color:#ffffff;
+
+    font-size:1.15rem;
+
+    font-weight:800;
+
+    line-height:1;
+
+}
+
+
+/* ---------- Títol ---------- */
+
+.guide-step h3{
+
+    margin:0;
+
+    font-size:1.15rem;
+
+    font-weight:750;
+
+    line-height:1.3;
+
+    color:var(--color-text);
+
+}
+
+
+/* ---------- Text ---------- */
+
+.guide-step p{
+
+    margin:
+        .75rem auto 0;
+
+    max-width:300px;
+
+    font-size:.98rem;
+
+    line-height:1.65;
+
+    color:var(--color-text-light);
+
+}
+Bloc 2/2 — separació, responsive i final
+/* ==========================================================
+   09. SEPARACIÓ VISUAL ENTRE MAPA I GUIA
+========================================================== */
+
+.course-map + .course-guide{
+
+    border-top:1px solid var(--border-color);
+
+}
+
+
+/* ==========================================================
+   10. DETALLS DE LA GUIA
+========================================================== */
+
+.guide-step{
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+
+}
+
+.guide-step:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 16px 34px rgba(15,23,42,.09);
+
+    border-color:#d1d5db;
+
+}
+
+
+/* ==========================================================
+   11. RESPONSIVE — TABLET
+========================================================== */
+
+@media (max-width: 900px){
+
+    .course-map{
+
+        padding-top:3rem;
+
+    }
+
+    .course-map__wrapper{
+
+        max-width:760px;
+
+        height:760px;
+
+    }
+
+
+    /* ---------- Nodes ---------- */
+
+    .course-node{
+
+        width:190px;
+        height:190px;
+
+    }
+
+    .course-node img{
+
+        width:112px;
+        height:112px;
+
+        margin-bottom:.8rem;
+
+    }
+
+    .course-node span{
+
+        font-size:.95rem;
+
+    }
+
+
+    /* ---------- Posicions ---------- */
+
+    .course-node--mesura{
+
+        top:170px;
+
+    }
+
+    .course-node--espacial{
+
+        top:170px;
+
+    }
+
+    .course-node--algebraic{
+
+        left:70px;
+
+    }
+
+    .course-node--estocastic{
+
+        right:70px;
+
+    }
+
+
+    /* ---------- Centre ---------- */
+
+    .course-center__title{
+
+        font-size:2.4rem;
+
+    }
+
+
+    /* ---------- Guia ---------- */
+
+    .guide-grid{
+
+        gap:1.25rem;
+
+    }
+
+    .guide-step{
+
+        padding:
+            1.75rem 1.25rem;
+
+    }
+
+}
+
+
+/* ==========================================================
+   12. RESPONSIVE — MÒBIL
+========================================================== */
+
+@media (max-width: 680px){
+
+    /* ------------------------------------------------------
+       HERO
+    ------------------------------------------------------ */
+
+    .course-hero{
+
+        padding:
+            2rem 0
+            1rem;
+
+    }
+
+    .course-hero h1{
+
+        font-size:2rem;
+
+    }
+
+    .course-hero p{
+
+        margin-top:1rem;
+
+        padding:0 .75rem;
+
+        font-size:1rem;
+
+        line-height:1.6;
+
+    }
+
+
+    /* ------------------------------------------------------
+       MAPA
+    ------------------------------------------------------ */
+
+    .course-map{
+
+        padding:
+            2rem 0
+            3.5rem;
+
+    }
+
+    .course-map__wrapper{
+
+        position:relative;
+
+        width:100%;
+        max-width:none;
+
+        height:auto;
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:center;
+
+        gap:1.25rem;
+
+    }
+
+
+    /* ------------------------------------------------------
+       CENTRE
+    ------------------------------------------------------ */
+
+    .course-center{
+
+        position:static;
+
+        order:0;
+
+        transform:none;
+
+        width:100%;
+
+        min-height:90px;
+
+        margin-bottom:.5rem;
+
+    }
+
+    .course-center__title{
+
+        font-size:2rem;
+
+    }
+
+
+    /* ------------------------------------------------------
+       NODES
+    ------------------------------------------------------ */
+
+    .course-node{
+
+        position:static;
+
+        width:min(260px, 88vw);
+        height:auto;
+
+        min-height:210px;
+
+        flex-shrink:0;
+
+        transform:none;
+
+        padding:1.25rem;
+
+    }
+
+
+    .course-node:hover{
+
+        transform:translateY(-4px);
+
+    }
+
+
+    .course-node--numeric:hover{
+
+        transform:translateY(-4px);
+
+    }
+
+
+    .course-node img{
+
+        width:135px;
+        height:135px;
+
+        margin-bottom:.8rem;
+
+    }
+
+
+    .course-node span{
+
+        font-size:1rem;
+
+    }
+
+
+    /* ------------------------------------------------------
+       ORDRE DEL MAPA EN MÒBIL
+    ------------------------------------------------------ */
+
+    .course-node--numeric{
+
+        order:1;
+
+    }
+
+    .course-node--mesura{
+
+        order:2;
+
+    }
+
+    .course-node--espacial{
+
+        order:3;
+
+    }
+
+    .course-node--algebraic{
+
+        order:4;
+
+    }
+
+    .course-node--estocastic{
+
+        order:5;
+
+    }
+
+
+    /* ------------------------------------------------------
+       GUIA
+    ------------------------------------------------------ */
+
+    .course-guide{
+
+        padding:
+            3rem 0
+            4rem;
+
+    }
+
+    .course-guide h2{
+
+        margin-bottom:2rem;
+
+        padding:0 .75rem;
+
+        font-size:1.7rem;
+
+    }
+
+    .guide-grid{
+
+        grid-template-columns:1fr;
+
+        gap:1rem;
+
+    }
+
+    .guide-step{
+
+        padding:
+            1.5rem 1.25rem;
+
+    }
+
+    .guide-step:hover{
+
+        transform:none;
+
+    }
+
+}
+
+
+/* ==========================================================
+   13. RESPONSIVE — MÒBIL PETIT
+========================================================== */
+
+@media (max-width: 400px){
+
+    .course-hero h1{
+
+        font-size:1.8rem;
+
+    }
+
+    .course-hero p{
+
+        font-size:.95rem;
+
+    }
+
+
+    .course-map__wrapper{
+
+        gap:1rem;
+
+    }
+
+
+    .course-center{
+
+        min-height:75px;
+
+    }
+
+    .course-center__title{
+
+        font-size:1.8rem;
+
+    }
+
+
+    .course-node{
+
+        width:90vw;
+
+        min-height:195px;
+
+    }
+
+    .course-node img{
+
+        width:120px;
+        height:120px;
+
+    }
+
+
+    .course-guide h2{
+
+        font-size:1.5rem;
+
+    }
+
+}
+
+
+/* ==========================================================
+   14. ACCESSIBILITAT — MOVIMENT REDUÏT
+========================================================== */
+
+@media (prefers-reduced-motion: reduce){
+
+    .course-node,
+    .course-node img,
+    .guide-step{
+
+        transition:none;
+
+    }
+
+    .course-node:hover,
+    .course-node--numeric:hover,
+    .guide-step:hover{
+
+        transform:none;
+
+    }
+
+    .course-node:hover img{
+
+        transform:none;
+
+    }
+
+}
+
+
+/* ==========================================================
+   15. DETALLS FINALS
+========================================================== */
+
+.course-node{
+
+    -webkit-tap-highlight-color:transparent;
+
+}
+
+.course-node img{
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+}
+
+
+/* ==========================================================
+   FI DE 1ESO.CSS
+========================================================== */

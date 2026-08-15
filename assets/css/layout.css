@@ -1,0 +1,224 @@
+/* ==========================================================
+   MATES INTERACTIVES
+   layout.css v1.1
+   Sistema de maquetació
+========================================================== */
+
+/* ==========================================================
+   CONTENIDORS
+========================================================== */
+
+.container{
+    width:min(92%, var(--container-max));
+    margin-inline:auto;
+}
+
+.container-sm{
+    width:min(92%, var(--container-sm));
+    margin-inline:auto;
+}
+
+.container-md{
+    width:min(92%, var(--container-md));
+    margin-inline:auto;
+}
+
+
+/* ==========================================================
+   SECCIONS
+========================================================== */
+
+.section{
+    padding-block:var(--space-8);
+}
+
+.section--small{
+    padding-block:var(--space-6);
+}
+
+.section--large{
+    padding-block:var(--space-10);
+}
+
+
+/* ==========================================================
+   INTRODUCCIONS DE SECCIÓ
+========================================================== */
+
+.section-intro{
+    max-width:42rem;
+    margin:0 auto var(--space-6);
+    text-align:center;
+    color:var(--color-text-light);
+}
+
+
+/* ==========================================================
+   FLOW
+========================================================== */
+
+.flow > * + *{
+    margin-top:var(--space-4);
+}
+
+.flow-lg > * + *{
+    margin-top:var(--space-6);
+}
+
+
+/* ==========================================================
+   STACK
+========================================================== */
+
+.stack > * + *{
+    margin-top:var(--space-4);
+}
+
+
+/* ==========================================================
+   CLUSTER
+========================================================== */
+
+.cluster{
+    display:flex;
+    flex-wrap:wrap;
+    gap:var(--space-4);
+    align-items:center;
+}
+
+
+/* ==========================================================
+   GRID
+========================================================== */
+
+.grid{
+    display:grid;
+    gap:var(--space-5);
+}
+
+.grid-2{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.grid-3{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+}
+
+/* Graella adaptable per a targetes */
+.grid-4{
+    grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));
+}
+
+.grid-auto{
+    grid-template-columns:repeat(auto-fit,minmax(18rem,1fr));
+}
+
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
+
+.sidebar-layout{
+    display:grid;
+    grid-template-columns:18rem 1fr;
+    gap:var(--space-6);
+}
+
+
+/* ==========================================================
+   FLEX
+========================================================== */
+
+.flex{
+    display:flex;
+}
+
+.flex-column{
+    display:flex;
+    flex-direction:column;
+}
+
+.flex-wrap{
+    flex-wrap:wrap;
+}
+
+.justify-between{
+    justify-content:space-between;
+}
+
+.justify-center{
+    justify-content:center;
+}
+
+.align-center{
+    align-items:center;
+}
+
+
+/* ==========================================================
+   CENTRAT
+========================================================== */
+
+.center{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.center-column{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+
+/* ==========================================================
+   UTILITATS
+========================================================== */
+
+.full-width{
+    width:100%;
+}
+
+.max-width{
+    max-width:var(--container-max);
+    margin-inline:auto;
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width:62rem){
+
+    .sidebar-layout{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media (max-width:48rem){
+
+    .section{
+        padding-block:var(--space-6);
+    }
+
+    .section--large{
+        padding-block:var(--space-8);
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4{
+        grid-template-columns:1fr;
+    }
+
+    .cluster{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+}

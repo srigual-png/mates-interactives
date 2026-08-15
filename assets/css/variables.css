@@ -1,0 +1,158 @@
+/* ==========================================================
+   Mates Interactives
+   variables.css v2.0
+   Sistema de disseny global
+========================================================== */
+
+:root{
+
+/* ==========================================================
+   COLORS
+========================================================== */
+
+--color-primary:#2563eb;
+--color-primary-hover:#1d4ed8;
+--color-primary-soft:#dbeafe;
+
+--color-success:#16a34a;
+--color-warning:#f59e0b;
+--color-danger:#dc2626;
+--color-info:#0891b2;
+
+--surface-1:#ffffff;
+--surface-2:#f8fafc;
+--surface-3:#eef2f7;
+--surface-4:#e5eaf1;
+
+--text-primary:#1f2937;
+--text-secondary:#6b7280;
+--text-muted:#9ca3af;
+
+--border-color:#dbe3ec;
+
+
+/* ==========================================================
+   TIPOGRAFIA
+========================================================== */
+
+--font-family:
+system-ui,
+-apple-system,
+"Segoe UI",
+Roboto,
+Arial,
+sans-serif;
+
+--font-size-xs:.75rem;
+--font-size-sm:.875rem;
+--font-size-base:1rem;
+--font-size-lg:1.125rem;
+--font-size-xl:1.25rem;
+--font-size-2xl:1.5rem;
+--font-size-3xl:2rem;
+--font-size-4xl:3rem;
+
+--font-weight-normal:400;
+--font-weight-medium:500;
+--font-weight-semibold:600;
+--font-weight-bold:700;
+
+--line-height-tight:1.25;
+--line-height:1.6;
+--line-height-loose:1.8;
+
+
+/* ==========================================================
+   ESPAIAT
+========================================================== */
+
+--space-1:.25rem;
+--space-2:.5rem;
+--space-3:.75rem;
+--space-4:1rem;
+--space-5:1.5rem;
+--space-6:2rem;
+--space-7:3rem;
+--space-8:4rem;
+--space-9:5rem;
+--space-10:6rem;
+
+
+/* ==========================================================
+   RADIS
+========================================================== */
+
+--radius-sm:.375rem;
+--radius-md:.625rem;
+--radius-lg:1rem;
+--radius-xl:1.5rem;
+--radius-pill:9999px;
+
+
+/* ==========================================================
+   OMBRES
+========================================================== */
+
+--shadow-sm:
+0 1px 3px rgba(0,0,0,.08);
+
+--shadow-md:
+0 6px 16px rgba(0,0,0,.08);
+
+--shadow-lg:
+0 12px 32px rgba(0,0,0,.12);
+
+
+/* ==========================================================
+   TRANSICIONS
+========================================================== */
+
+--transition-fast:150ms ease;
+--transition:250ms ease;
+--transition-slow:400ms ease;
+
+
+/* ==========================================================
+   CONTENIDORS
+========================================================== */
+
+--container-sm:48rem;
+--container-md:64rem;
+--container-lg:75rem;
+
+/* amplada màxima real de la web */
+
+--container-max:1200px;
+
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+--header-height:72px;
+
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+--hero-padding:5rem;
+
+
+/* ==========================================================
+   BOTONS
+========================================================== */
+
+--button-height:46px;
+
+
+/* ==========================================================
+   CAPES
+========================================================== */
+
+--z-header:100;
+--z-dropdown:500;
+--z-modal:1000;
+--z-toast:2000;
+
+}

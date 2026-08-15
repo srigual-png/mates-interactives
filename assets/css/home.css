@@ -1,0 +1,637 @@
+/* ==========================================================
+   MATES INTERACTIVES
+   home.css v2.0
+   Estils exclusius de la portada
+========================================================== */
+
+
+/* ==========================================================
+   VARIABLES DE LA PORTADA
+========================================================== */
+
+:root{
+
+    --hero-max-width: 920px;
+    --section-gap: clamp(4rem, 7vw, 6rem);
+
+}
+
+
+/* ==========================================================
+   MAIN
+========================================================== */
+
+main.container{
+
+    padding-top:2rem;
+    padding-bottom:5rem;
+
+}
+
+
+/* ==========================================================
+   SECCIONS
+========================================================== */
+
+.hero,
+.features,
+.courses,
+.info-grid{
+
+    margin-bottom:var(--section-gap);
+
+}
+
+.features:last-child,
+.courses:last-child,
+.info-grid:last-child{
+
+    margin-bottom:0;
+
+}
+
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.hero{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    min-height:65vh;
+
+    text-align:center;
+
+    padding:2rem 0 1rem;
+
+}
+
+.hero__content{
+
+    max-width:var(--hero-max-width);
+    margin-inline:auto;
+
+}
+
+.hero__eyebrow{
+
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:.45rem 1rem;
+
+    margin-bottom:1.5rem;
+
+    border-radius:999px;
+
+    background:var(--color-primary-soft);
+
+    color:var(--color-primary);
+
+    font-size:.92rem;
+    font-weight:700;
+
+    letter-spacing:.03em;
+
+}
+
+.hero__title{
+
+    margin:0;
+
+    font-size:clamp(3rem,6vw,4.8rem);
+
+    line-height:1.08;
+
+    font-weight:800;
+
+    color:var(--text-primary);
+
+}
+
+.hero__subtitle{
+
+    max-width:760px;
+
+    margin:2rem auto 0;
+
+    font-size:1.15rem;
+
+    line-height:1.8;
+
+    color:var(--text-secondary);
+
+}
+
+.hero__actions{
+
+    display:flex;
+    justify-content:center;
+
+    margin-top:2.5rem;
+
+}
+
+.hero__actions .btn{
+
+    padding:1rem 2rem;
+
+    font-size:1.05rem;
+
+}
+
+.hero__highlights{
+
+    display:flex;
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+    gap:1rem;
+
+    margin-top:3rem;
+
+}
+
+.hero__highlight{
+
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+
+    padding:.9rem 1.25rem;
+
+    background:var(--surface-1);
+
+    border:1px solid var(--border-color);
+
+    border-radius:999px;
+
+    box-shadow:var(--shadow-sm);
+
+    font-weight:600;
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        border-color .25s;
+
+}
+
+.hero__highlight:hover{
+
+    transform:translateY(-4px);
+
+    border-color:var(--color-primary);
+
+    box-shadow:var(--shadow-md);
+
+}
+
+
+/* ==========================================================
+   TÍTOLS DE SECCIÓ
+========================================================== */
+
+.features h2,
+.courses h2,
+.info-grid h2{
+
+    margin-bottom:1rem;
+
+    text-align:center;
+
+    font-size:clamp(2rem,4vw,2.6rem);
+
+    color:var(--text-primary);
+
+}
+
+.section-intro{
+
+    max-width:760px;
+
+    margin:0 auto 3rem;
+
+    text-align:center;
+
+    font-size:1.1rem;
+
+    line-height:1.8;
+
+    color:var(--text-secondary);
+
+}
+
+/* ==========================================================
+   FEATURES
+========================================================== */
+
+.features .grid{
+
+    gap:2rem;
+
+}
+
+.features .card{
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+
+    padding:2.25rem;
+
+    text-align:center;
+
+    background:linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #fbfcff 100%
+    );
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        border-color .25s;
+
+}
+
+.features .card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:var(--color-primary);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.features h3{
+
+    margin-bottom:1rem;
+
+    font-size:1.35rem;
+
+    color:var(--text-primary);
+
+}
+
+.features p{
+
+    margin:0;
+
+    line-height:1.75;
+
+    color:var(--text-secondary);
+
+}
+
+
+/* ==========================================================
+   CURSOS
+========================================================== */
+
+.courses .grid{
+
+    gap:2rem;
+
+}
+
+.card--course{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    min-height:320px;
+
+    padding:2rem;
+
+    background:linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #fbfcff 100%
+    );
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        border-color .25s;
+
+}
+
+.card--course:hover{
+
+    transform:translateY(-6px);
+
+    border-color:var(--color-primary);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.card--course .card__title{
+
+    margin-bottom:1rem;
+
+    font-size:1.55rem;
+
+    color:var(--text-primary);
+
+}
+
+.card--course .card__text{
+
+    flex:1;
+
+    margin-bottom:2rem;
+
+    line-height:1.7;
+
+    color:var(--text-secondary);
+
+}
+
+.card--course .btn{
+
+    width:100%;
+
+    justify-content:center;
+
+}
+
+
+/* ==========================================================
+   CURSOS EN DESENVOLUPAMENT
+========================================================== */
+
+.card--disabled{
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+.card--disabled .card__title{
+
+    margin-bottom:1rem;
+
+}
+
+.card--disabled .card__text{
+
+    flex:0;
+
+    margin:0;
+
+    color:var(--text-secondary);
+
+}
+
+
+/* ==========================================================
+   EFECTES VISUALS
+========================================================== */
+
+.features .card,
+.card--course{
+
+    border:1px solid var(--border-color);
+
+}
+
+.features .card:hover,
+.card--course:hover{
+
+    background:#ffffff;
+
+}
+
+/* ==========================================================
+   INFO GRID
+========================================================== */
+
+.info-grid{
+
+    margin-top:1rem;
+
+}
+
+.info-grid .grid{
+
+    align-items:stretch;
+
+    gap:2rem;
+
+}
+
+.info-grid .card{
+
+    display:flex;
+
+    flex-direction:column;
+
+    height:100%;
+
+    padding:2.5rem;
+
+    background:#ffffff;
+
+    border:1px solid var(--border-color);
+
+    border-radius:var(--radius-lg);
+
+    box-shadow:var(--shadow-sm);
+
+    transition:
+        transform .25s,
+        box-shadow .25s,
+        border-color .25s;
+
+}
+
+.info-grid .card:hover{
+
+    transform:translateY(-6px);
+
+    border-color:var(--color-primary);
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.info-icon{
+
+    display:flex;
+
+    justify-content:center;
+    align-items:center;
+
+    width:72px;
+    height:72px;
+
+    margin:0 auto 1.5rem;
+
+    border-radius:50%;
+
+    background:var(--color-primary-soft);
+
+    font-size:2rem;
+
+}
+
+.info-grid h2{
+
+    margin-bottom:1.5rem;
+
+}
+
+.info-grid p{
+
+    margin-bottom:1.4rem;
+
+    line-height:1.8;
+
+    color:var(--text-secondary);
+
+}
+
+.info-grid p:last-of-type{
+
+    margin-bottom:2rem;
+
+}
+
+.support-card{
+
+    text-align:center;
+
+}
+
+.support-card .btn{
+
+    align-self:center;
+
+    min-width:260px;
+
+    padding:1rem 2rem;
+
+    font-size:1.05rem;
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width:62rem){
+
+    .hero{
+
+        min-height:auto;
+
+        padding:3rem 0;
+
+    }
+
+    .hero__title{
+
+        font-size:clamp(2.5rem,8vw,3.8rem);
+
+    }
+
+    .card--course{
+
+        min-height:280px;
+
+    }
+
+}
+
+
+@media (max-width:48rem){
+
+    main.container{
+
+        padding-top:1rem;
+
+        padding-bottom:3rem;
+
+    }
+
+    .hero{
+
+        padding:2rem 0;
+
+    }
+
+    .hero__subtitle{
+
+        font-size:1rem;
+
+    }
+
+    .hero__highlights{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .hero__highlight{
+
+        justify-content:center;
+
+    }
+
+    .features .card,
+    .card--course,
+    .info-grid .card{
+
+        padding:1.75rem;
+
+    }
+
+    .support-card .btn{
+
+        width:100%;
+
+        min-width:0;
+
+    }
+
+}
+
+
+/* ==========================================================
+   PETITS RETOCS
+========================================================== */
+
+.hero__actions .btn{
+
+    box-shadow:var(--shadow-md);
+
+}
+
+.hero__actions .btn:hover{
+
+    box-shadow:var(--shadow-lg);
+
+}
+
+.card{
+
+    overflow:hidden;
+
+}

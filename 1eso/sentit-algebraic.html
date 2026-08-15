@@ -1,0 +1,2578 @@
+<!DOCTYPE html>
+
+<html lang="ca">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Exercicis d’àlgebra 1r ESO: patrons i equacions | Mates Interactives</title>
+<meta content="Exercicis interactius d’àlgebra de 1r ESO: llenguatge algebraic, patrons, expressions, simplificació i equacions senzilles, amb pistes, problemes i correcció immediata." name="description"/>
+<meta content="Salvador Rigual Valls" name="author"/>
+<meta content="index, follow" name="robots"/>
+<link href="https://srigual-png.github.io/mates-interactives/1eso/sentit-algebraic.html" rel="canonical"/>
+<link href="../assets/images/favicon.ico" rel="icon" sizes="any"/>
+<link href="../assets/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="../assets/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="../assets/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<style>
+:root{--bg:#f7f9fc;--card:#fff;--primary:#e8622a;--primary-dark:#c04a18;--success:#34c97e;--error:#e05c5c;--warn:#f5a623;--text:#2c3e50;--muted:#7f8c9a;--border:#dce3ed;--locked:#c8d3e0;--shadow:0 2px 12px rgba(0,0,0,0.08);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+nav{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:12px;box-shadow:var(--shadow);position:sticky;top:0;z-index:100;}
+nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:pointer;user-select:none;}
+.nav-back{background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.2rem;padding:4px 8px;border-radius:6px;}
+.nav-back:hover{background:var(--bg);}
+.progress-bar-wrap{height:6px;background:var(--border);border-radius:3px;width:110px;}
+.progress-bar-fill{height:6px;background:var(--primary);border-radius:3px;transition:width 0.4s;}
+.screen{display:none;padding:20px;max-width:680px;margin:0 auto;}
+.screen.active{display:block;}
+.layout{display:flex;gap:16px;max-width:900px;margin:0 auto;}
+.layout #screenHome{flex:1;min-width:0;margin:0;padding:20px 0;}
+.sidebar{width:160px;flex-shrink:0;padding:20px 0;display:flex;flex-direction:column;gap:10px;align-items:stretch;}
+.sidebar-btn{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:14px 10px;cursor:pointer;text-align:center;font-size:.78rem;font-weight:600;color:var(--muted);transition:all .2s;line-height:1.4;}
+.sidebar-btn:hover{border-color:var(--primary);color:var(--primary);background:#fff0eb;}
+.sidebar-btn .sb-icon{font-size:1.4rem;display:block;margin-bottom:4px;}
+.unlock-panel{position:fixed;top:60px;right:18px;width:230px;max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;background:var(--card);border:1.5px solid var(--border);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.13);z-index:200;padding:16px;display:none;animation:panelIn .2s ease;}
+.unlock-panel.open{display:block;}
+@keyframes panelIn{from{opacity:0;transform:translateY(-8px) scale(.97)}to{opacity:1;transform:none}}
+.unlock-panel h4{font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.unlock-topic-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);}
+.unlock-topic-row:last-of-type{border:none;}
+.unlock-topic-name{font-size:.83rem;color:var(--text);flex:1;margin-right:8px;}
+.unlock-topic-name.is-done{color:var(--success);}
+.unlock-toggle{background:none;border:1.5px solid var(--border);border-radius:8px;padding:3px 9px;font-size:.75rem;cursor:pointer;font-weight:600;color:var(--muted);transition:all .15s;white-space:nowrap;}
+.unlock-toggle.active{background:#fff0eb;border-color:var(--primary);color:var(--primary);}
+.unlock-toggle:hover{border-color:var(--primary);color:var(--primary);}
+.unlock-all-btn{width:100%;margin-top:12px;background:var(--primary);color:white;border:none;border-radius:10px;padding:9px;font-size:.82rem;font-weight:700;cursor:pointer;transition:background .2s;}
+.unlock-all-btn:hover{background:var(--primary-dark);}
+.unlock-reset-btn{width:100%;margin-top:6px;background:none;color:var(--muted);border:1.5px solid var(--border);border-radius:10px;padding:7px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;}
+.unlock-reset-btn:hover{border-color:var(--error);color:var(--error);}
+.unlock-panel-overlay{position:fixed;inset:0;z-index:190;display:none;}
+.unlock-panel-overlay.open{display:block;}
+.home-header{text-align:center;padding:28px 0 18px;}
+.home-header h2{font-size:1.7rem;color:var(--primary);margin-bottom:6px;}
+.home-header p{color:var(--muted);font-size:0.9rem;}
+.topics-grid{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
+.topic-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);transition:transform 0.15s,box-shadow 0.15s;}
+.topic-card:hover:not(.locked){transform:translateY(-2px);box-shadow:0 6px 20px rgba(232,98,42,0.15);}
+.topic-card.locked{opacity:0.5;cursor:not-allowed;}
+.topic-card.done{border-left:4px solid var(--success);}
+.topic-icon{font-size:1.5rem;width:38px;text-align:center;flex-shrink:0;}
+.topic-info{flex:1;}
+.topic-info h3{font-size:0.97rem;font-weight:600;}
+.topic-info p{font-size:0.78rem;color:var(--muted);margin-top:2px;}
+.topic-badge{font-size:0.73rem;padding:3px 10px;border-radius:20px;font-weight:600;white-space:nowrap;}
+.badge-done{background:#e6f9ef;color:var(--success);}
+.badge-active{background:#fff0eb;color:var(--primary);}
+.badge-locked{background:var(--border);color:var(--locked);}
+.badge-exam{background:#fff3e0;color:var(--warn);}
+.badge-app{background:#f0e6ff;color:#8b5cf6;}
+
+/* TEORIA */
+.theory-tabs{display:flex;gap:8px;margin-bottom:12px;}
+.tab-btn{flex:1;padding:9px;border:1.5px solid var(--border);border-radius:10px;background:var(--card);cursor:pointer;font-size:0.83rem;font-weight:600;color:var(--muted);transition:all 0.2s;text-align:center;}
+.tab-btn.active{border-color:var(--primary);color:var(--primary);background:#fff0eb;}
+.theory-box{background:#fff0eb;border-left:4px solid var(--primary);border-radius:10px;padding:15px 17px;margin-bottom:14px;font-size:0.91rem;line-height:1.7;}
+.theory-box h3{color:var(--primary);margin-bottom:8px;font-size:0.97rem;}
+.theory-box .formula{background:white;border-radius:8px;padding:9px 13px;margin:6px 0;font-size:0.89rem;border:1px solid var(--border);}
+.example-box{background:#f0f7ff;border-left:4px solid #2980b9;border-radius:10px;padding:15px 17px;margin-bottom:14px;font-size:0.88rem;line-height:1.8;}
+.example-box h3{color:#2980b9;margin-bottom:8px;font-size:0.95rem;}
+.example-box .ex-step{padding:3px 0;border-bottom:1px solid #dde8f5;}
+.example-box .ex-step:last-child{border:none;}
+.example-box .ex-res{color:var(--primary);font-weight:700;}
+
+.level-select{display:flex;gap:12px;margin-bottom:14px;}
+.level-btn{flex:1;padding:11px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:0.88rem;font-weight:600;color:var(--muted);transition:all 0.2s;}
+.level-btn.active{border-color:var(--primary);color:var(--primary);background:#fff0eb;}
+.mode-select{display:flex;gap:12px;margin-bottom:18px;}
+.mode-btn{flex:1;padding:10px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:0.85rem;font-weight:600;color:var(--muted);transition:all 0.2s;}
+.mode-btn.active{border-color:#8b5cf6;color:#8b5cf6;background:#f5f0ff;}
+
+/* EXERCICI */
+.streak-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.streak-bar-wrap{flex:1;height:7px;background:var(--border);border-radius:4px;}
+.streak-bar-fill{height:7px;background:linear-gradient(90deg,var(--primary),#f5a623);border-radius:4px;transition:width 0.4s;}
+.streak-label{font-size:0.78rem;color:var(--muted);white-space:nowrap;}
+.ex-header .ex-num{font-size:0.78rem;color:var(--muted);margin-bottom:6px;}
+.ex-question{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;font-size:1rem;text-align:center;margin-bottom:14px;box-shadow:var(--shadow);min-height:80px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
+.ex-question .q-text{font-weight:600;color:var(--text);line-height:1.55;}
+.guide-steps{background:#fffbea;border:1px solid #f5e0a0;border-radius:12px;padding:13px 15px;margin-bottom:14px;font-size:0.86rem;line-height:1.8;}
+.guide-steps h4{color:var(--warn);margin-bottom:5px;font-size:0.83rem;}
+.options-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+.opt-btn{background:var(--card);border:2px solid var(--border);border-radius:12px;padding:13px 8px;font-size:0.93rem;cursor:pointer;transition:all 0.15s;text-align:center;min-height:52px;}
+.opt-btn:hover:not(:disabled){border-color:var(--primary);background:#fff0eb;}
+.opt-btn.correct{border-color:var(--success);background:#e6f9ef;color:#1a7a4a;}
+.opt-btn.wrong{border-color:var(--error);background:#fdeaea;color:var(--error);}
+.opt-btn:disabled{cursor:default;}
+
+/* RESPOSTA OBERTA */
+.open-wrap{margin-bottom:14px;}
+.open-input{width:100%;border:2px solid var(--border);border-radius:12px;padding:13px 16px;font-size:1rem;font-family:inherit;outline:none;transition:border-color 0.2s;}
+.open-input:focus{border-color:var(--primary);}
+.open-input.ok{border-color:var(--success);background:#e8fdf3;}
+.open-input.ko{border-color:var(--error);background:#fdeaea;}
+.btn-check{width:100%;margin-top:8px;background:#8b5cf6;color:white;border:none;border-radius:12px;padding:12px;font-size:0.93rem;font-weight:600;cursor:pointer;}
+.btn-check:hover{background:#7c3aed;}
+.open-hint{font-size:0.77rem;color:var(--muted);margin-top:5px;}
+
+.feedback-box{border-radius:12px;padding:14px 16px;margin-bottom:14px;font-size:0.88rem;line-height:1.6;}
+.feedback-box.ok{background:#e6f9ef;border:1px solid #a0e6c0;color:#1a7a4a;}
+.feedback-box.ko{background:#fdeaea;border:1px solid #f0b0b0;color:#a02020;}
+.feedback-box h4{font-size:0.93rem;margin-bottom:5px;}
+.sol-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:6px 13px;font-size:0.83rem;cursor:pointer;color:var(--muted);margin-top:7px;}
+.sol-btn:hover{background:var(--bg);}
+.solution-box{background:#f8f8ff;border:1px solid var(--border);border-radius:12px;padding:13px 15px;margin-top:9px;font-size:0.86rem;line-height:1.9;display:none;}
+.solution-box.show{display:block;}
+.solution-box .step{padding:3px 0;border-bottom:1px solid #eee;}
+.solution-box .step:last-child{border:none;}
+.solution-box .highlight{color:var(--primary);font-weight:700;}
+.btn-primary{background:var(--primary);color:white;border:none;border-radius:12px;padding:13px 26px;font-size:0.93rem;font-weight:600;cursor:pointer;width:100%;transition:background 0.2s;margin-top:6px;}
+.btn-primary:hover{background:var(--primary-dark);}
+.btn-secondary{background:var(--card);color:var(--primary);border:2px solid var(--primary);border-radius:12px;padding:11px 26px;font-size:0.93rem;font-weight:600;cursor:pointer;width:100%;margin-top:9px;transition:all 0.2s;}
+.btn-secondary:hover{background:#fff0eb;}
+.congrats{text-align:center;padding:36px 18px;}
+.congrats .trophy{font-size:2.8rem;margin-bottom:14px;}
+.congrats h2{font-size:1.4rem;color:var(--primary);margin-bottom:9px;}
+.congrats p{color:var(--muted);margin-bottom:22px;}
+
+/* EXAMEN */
+.exam-score{text-align:center;font-size:2.2rem;font-weight:700;color:var(--primary);margin:18px 0;}
+.exam-score span{font-size:0.97rem;color:var(--muted);display:block;font-weight:400;}
+.exam-review-item{background:var(--card);border-left:4px solid var(--error);border-radius:10px;padding:12px 14px;margin-bottom:8px;font-size:0.85rem;}
+.exam-review-item.ok{border-left-color:var(--success);}
+.exam-review-item .rev-topic{font-size:0.73rem;color:var(--muted);margin-bottom:3px;}
+.exam-review-item .rev-q{font-weight:600;margin-bottom:4px;line-height:1.4;}
+.exam-review-item .rev-ans{display:flex;gap:10px;flex-wrap:wrap;}
+.rev-correct{color:var(--success);font-size:0.82rem;}
+.rev-wrong{color:var(--error);font-size:0.82rem;text-decoration:line-through;}
+
+
+
+/* APPS */
+.app-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:12px;box-shadow:var(--shadow);}
+.app-card h3{color:var(--primary);margin-bottom:6px;font-size:1rem;}
+.app-card p{font-size:0.83rem;color:var(--muted);margin-bottom:10px;line-height:1.5;}
+.app-input-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px;}
+.app-input{border:1px solid var(--border);border-radius:8px;padding:8px 11px;font-size:0.92rem;width:75px;font-family:inherit;}
+.app-result{background:#fff0eb;border-radius:8px;padding:10px 14px;font-size:0.9rem;color:var(--primary-dark);margin-top:6px;min-height:36px;line-height:1.9;}
+.btn-app{background:var(--primary);color:white;border:none;border-radius:8px;padding:9px 18px;font-size:0.88rem;font-weight:600;cursor:pointer;}
+.btn-app:hover{background:var(--primary-dark);}
+.intro-card{
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px 24px;
+    margin: 0 0 24px 0;
+    box-shadow: var(--shadow);
+}
+
+.intro-card p{
+    margin: 0;
+    line-height: 1.7;
+    color: var(--text);
+    text-align: justify;
+}
+.home-link{
+    text-decoration:none;
+    color:var(--primary);
+    font-weight:700;
+    white-space:nowrap;
+}
+
+.home-link:hover{
+    text-decoration:underline;
+}
+
+
+/* Navegació jeràrquica: Inici → 1r ESO → inici del sentit */
+.course-home-link,
+.sense-home-btn{
+    text-decoration:none;
+    color:var(--primary);
+    font-weight:700;
+    white-space:nowrap;
+    border:1.5px solid var(--border);
+    background:var(--card);
+    border-radius:9px;
+    padding:6px 9px;
+    font:inherit;
+    font-size:.78rem;
+    cursor:pointer;
+    transition:all .15s;
+}
+.course-home-link:hover,
+.sense-home-btn:hover{
+    border-color:var(--primary);
+    background:var(--bg);
+}
+.course-home-short,
+.sense-home-short{display:none;}
+@media (max-width:700px){
+    nav.top-nav{gap:6px;padding:9px 8px;}
+    .home-link{padding:6px 4px;}
+    .nav-main-label,
+    .course-home-label,
+    .sense-home-text{display:none;}
+    .course-home-short,
+    .sense-home-short{display:inline;}
+    .course-home-link,
+    .sense-home-btn{padding:6px 7px;font-size:.72rem;}
+    nav.top-nav h1{font-size:.86rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .progress-bar-wrap,.pbw{width:58px;}
+}
+@media (max-width:520px){
+    .progress-bar-wrap,.pbw{display:none!important;}
+}
+
+
+/* ── PROBLEMES OBERTS · 1r ESO ─────────────────────────────── */
+.alg-open-toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 16px}
+.alg-open-toolbar select{flex:1;min-width:145px;border:1.5px solid var(--border);border-radius:10px;padding:9px 10px;background:var(--card);color:var(--text);font-family:inherit}
+.alg-open-card{background:var(--card);border:2px solid var(--primary);border-radius:15px;padding:18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.alg-open-meta{font-size:.77rem;color:var(--muted);margin-bottom:10px}
+.alg-open-q{font-size:1rem;font-weight:600;line-height:1.65}
+.alg-open-hint{background:#fffbea;border:1px solid #f5e0a0;border-radius:10px;padding:10px 12px;font-size:.84rem;line-height:1.7;margin:10px 0;display:none}
+.alg-open-hint.show{display:block}
+.alg-open-input{width:100%;border:2px solid var(--border);border-radius:11px;padding:12px 14px;font-size:1rem;font-family:inherit;outline:none;margin:8px 0}
+.alg-open-input:focus{border-color:var(--primary)}
+.alg-open-input.ok{border-color:var(--success);background:#e8fdf3}
+.alg-open-input.ko{border-color:var(--error);background:#fdeaea}
+.alg-open-family{background:#eaf3fb;color:#2980b9;font-size:.72rem;font-weight:700;border-radius:20px;padding:2px 9px;margin-left:5px}
+.alg-open-diff{font-size:.72rem;font-weight:700;border-radius:20px;padding:2px 9px;margin-left:5px;background:#fff3e0;color:var(--warn)}
+.alg-open-summary{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:var(--shadow);text-align:center}
+.alg-open-summary .big{font-size:2.2rem;font-weight:800;color:var(--primary);margin:10px 0}
+.alg-open-solution{background:#f8f8ff;border:1px solid var(--border);border-radius:11px;padding:11px 13px;margin-top:10px;font-size:.85rem;line-height:1.8}
+
+</style>
+<script async="" data-goatcounter="https://srigual.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+<meta content="Àlgebra 1r ESO: patrons, expressions i equacions" property="og:title"/><meta content="Exercicis interactius d’àlgebra de 1r ESO: llenguatge algebraic, patrons, expressions, simplificació i equacions senzilles, amb pistes, problemes i correcció immediata." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-algebraic.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/></head>
+<body>
+<nav class="top-nav">
+<button class="nb" id="navBack" onclick="goBack()" style="display:none">←</button>
+<a aria-label="Inici de Mates Interactives" class="home-link nav-main-home" href="../index.html" title="Inici de Mates Interactives">🏠 <span class="nav-main-label">Mates Interactives</span></a>
+<a aria-label="Tornar a 1r d'ESO" class="course-home-link" href="index.html" title="Tornar a 1r d'ESO">📘 <span class="course-home-label">1r ESO</span><span class="course-home-short">1r</span></a>
+<button aria-label="Tornar a l'inici del Sentit Algebraic" class="sense-home-btn" onclick="showHome()" title="Tornar a l'inici del Sentit Algebraic" type="button">⌂ <span class="sense-home-text">Sentit Algebraic</span><span class="sense-home-short">Sentit</span></button>
+<h1 id="navTitle">Sentit Algebraic · 1r ESO</h1>
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="globalProgress" style="width:0%"></div></div>
+</nav>
+<!-- HOME -->
+<!-- Overlay per tancar el panell -->
+<div class="unlock-panel-overlay" id="unlockOverlay" onclick="closeUnlockPanel()"></div>
+<!-- Panell de desbloqueig -->
+<div class="unlock-panel" id="unlockPanel">
+<h4>🔓 Gestionar temes</h4>
+<div id="unlockTopicList"></div>
+<button class="unlock-all-btn" onclick="unlockAllTopics()">🔓 Desbloquejar tots</button>
+<button class="unlock-reset-btn" id="btnResetProgress" onclick="resetProgress()">↺ Reiniciar progrés</button>
+</div>
+<div class="layout">
+<div class="screen active" id="screenHome">
+<div class="home-header"><h2>🔢 Sentit Algebraic</h2><p>1r d'ESO · Patrons i àlgebra · Exercicis interactius · Correcció immediata</p></div>
+<div class="intro-card">
+<p>
+    El <strong>sentit algebraic</strong> t'ajudarà a descobrir patrons, escriure expressions algebraiques i resoldre equacions senzilles. Aprendràs a utilitzar lletres per representar nombres, interpretar relacions i resoldre problemes de manera lògica.
+    <br/><br/>
+    T'explicaré cada concepte amb exemples senzills i podràs practicar amb <strong>exercicis interactius</strong>, pistes i correcció immediata. Escull el tema que necessitis i avança al teu ritme.
+    <br/><br/>
+    El bloc principal correspon a <strong>1r d'ESO</strong>. Al final trobaràs una zona d'<strong>⭐ Ampliació · prepara 2n d'ESO</strong> amb continguts opcionals per avançar. <strong>El Mode Examen només inclou continguts de 1r d'ESO.</strong>
+</p>
+</div>
+<div class="topics-grid" id="topicsGrid"></div>
+</div>
+<div class="sidebar" id="sidebar">
+<button class="sidebar-btn" id="unlockFab" onclick="toggleUnlockPanel()" title="Gestionar temes">
+<span class="sb-icon">🔓</span>Desbloqueja temes
+  </button>
+</div>
+</div>
+<!-- INTRO / TEORIA -->
+<div class="screen" id="screenIntro">
+<div class="theory-tabs">
+<button class="tab-btn active" onclick="showTab('tabTheory')">📖 Teoria</button>
+<button class="tab-btn" onclick="showTab('tabExample')">✏️ Exemple resolt</button>
+</div>
+<div id="tabTheory"></div>
+<div id="tabExample" style="display:none"></div>
+<div class="level-select" style="margin-top:16px;">
+<button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Nivell 1<br/><small>Guiat</small></button>
+<button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Nivell 2<br/><small>Sol/a</small></button>
+</div>
+<div class="mode-select">
+<button class="mode-btn active" id="btnModeA" onclick="selectMode('multi')">🔘 Opció múltiple</button>
+<button class="mode-btn" id="btnModeB" onclick="selectMode('open')">✍️ Resposta oberta</button>
+</div>
+<button class="btn-primary" onclick="startPractice()">Comença a practicar →</button>
+</div>
+<!-- EXERCICI -->
+<div class="screen" id="screenExercise">
+<div class="ex-header">
+<div class="streak-row">
+<div class="streak-bar-wrap"><div class="streak-bar-fill" id="streakFill" style="width:0%"></div></div>
+<span class="streak-label" id="streakLabel">0/10</span>
+</div>
+<div class="ex-num" id="exNum"></div>
+</div>
+<div class="ex-question" id="exQuestion"></div>
+<div class="guide-steps" id="guideSteps" style="display:none"></div>
+<div class="options-grid" id="optionsGrid"></div>
+<div class="open-wrap" id="openWrap" style="display:none">
+<input autocomplete="off" autocorrect="off" class="open-input" id="openInput" placeholder="Escriu la teva resposta aquí…" spellcheck="false" type="text"/>
+<div class="open-hint" id="openHint"></div>
+<button class="btn-check" onclick="checkOpen()">Comprova →</button>
+</div>
+<div id="feedbackArea"></div>
+<button class="btn-primary" id="btnNext" onclick="nextExercise()" style="display:none">Següent exercici →</button>
+<button class="btn-secondary" id="btnChangeTopic" onclick="showHome()" style="display:none">← Canviar de tema</button>
+</div>
+<!-- EXAMEN -->
+<div class="screen" id="screenExam">
+<div id="examContent"></div>
+<div class="options-grid" id="examOptions"></div>
+<div class="open-wrap" id="examOpenWrap" style="display:none">
+<input autocomplete="off" class="open-input" id="examOpenInput" placeholder="Escriu la teva resposta…" spellcheck="false" type="text"/>
+<button class="btn-check" onclick="checkExamOpen()" style="margin-top:8px">Comprova →</button>
+</div>
+<div id="examFeedback"></div>
+<button class="btn-primary" id="btnNextExam" onclick="nextExamQ()" style="display:none">Següent →</button>
+<div id="examResult" style="display:none"></div>
+</div>
+<!-- PROBLEMES OBERTS · 1r ESO -->
+<div class="screen" id="screenOpenHome"><div id="algOpenHome"></div></div>
+<div class="screen" id="screenOpenProblem"><div id="algOpenProblem"></div></div>
+<div class="screen" id="screenOpenResult"><div id="algOpenResult"></div></div>
+<!-- APPS -->
+<div class="screen" id="screenApp">
+<div id="appContent"></div>
+</div>
+<script>
+/* ── UTILS ─────────────────────────────────────────────────── */
+function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function shuffle(a){return [...a].sort(()=>Math.random()-0.5);}
+function sup(n){return n>1?'<sup>'+n+'</sup>':'';}
+function uniq4(correct,pool){
+  const c=String(correct),seen=new Set([c]),res=[c];
+  for(const o of shuffle(pool||[])){
+    const s=String(o);
+    if(s&&s.trim()&&!seen.has(s)){seen.add(s);res.push(s);}
+    if(res.length===4)break;
+  }
+  // Xarxa de seguretat. Els generadors han d'aportar distractors pedagògics;
+  // aquest bloc només evita trencar la interfície si dos candidats coincideixen.
+  if(res.length<4){
+    const numOnly=c.match(/^\s*(-?\d+(?:[.,]\d+)?)\s*$/);
+    const xEq=c.match(/^\s*x\s*=\s*(-?\d+(?:[.,]\d+)?)\s*$/i);
+    const n=numOnly?Number(numOnly[1].replace(',','.')):(xEq?Number(xEq[1].replace(',','.')):NaN);
+    if(Number.isFinite(n)){
+      const vals=[-n,n*2,n/2,n+10,n-10].filter(v=>Number.isFinite(v)&&v!==n);
+      for(const v of vals){
+        const clean=Number.isInteger(v)?String(v):String(Math.round(v*100)/100).replace('.',',');
+        const cand=xEq?'x = '+clean:clean;
+        if(!seen.has(cand)){seen.add(cand);res.push(cand);}
+        if(res.length===4)break;
+      }
+    }else{
+      const variants=[];
+      if(c.includes('+'))variants.push(c.replace('+','-'));
+      if(c.includes('-'))variants.push(c.replace('-','+'));
+      if(/\d+x/.test(c))variants.push(c.replace(/(\d+)x/,(_,a)=>(Number(a)*2)+'x'));
+      if(/x²/.test(c))variants.push(c.replace(/x²/g,'2x'));
+      if(/x\/?\d/.test(c))variants.push(c.replace('/','·'));
+      for(const cand of variants){if(cand!==c&&!seen.has(cand)){seen.add(cand);res.push(cand);}if(res.length===4)break;}
+    }
+  }
+  let k=2;
+  while(res.length<4){
+    const cand=/x/i.test(c)?`${k}x`:`${k}`;
+    if(cand!==c&&!seen.has(cand)){seen.add(cand);res.push(cand);}
+    k++;
+  }
+  return shuffle(res.slice(0,4));
+}
+
+/* Normalitzar respostes obertes: elimina espais, minúscules, variants */
+function norm(s){
+  const superDigits=['⁰','¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹'];
+
+  return String(s).toLowerCase()
+    // Converteix potències HTML (x<sup>3</sup>) a superíndex Unicode (x³)
+    .replace(/<sup>\s*(\d)\s*<\/sup>/g,(m,d)=>superDigits[+d]||m)
+    // Elimina qualsevol altra etiqueta HTML que pugui arribar a la resposta
+    .replace(/<[^>]*>/g,'')
+    .replace(/\s+/g,'')
+    // Accepta x=4 com 4, però només quan x= és al principi de la resposta
+    .replace(/^x=/,'')
+    .replace(/,/g,'.')
+    .replace(/[−–—]/g,'-')
+    .replace(/\*/g,'·')
+    .replace(/\^(\d)/g,(m,d)=>superDigits[+d]||m);
+}
+function openOk(correct, alts, input){
+  const ni=norm(input);
+  const all=[correct,...(alts||[])];
+  return all.some(a=>norm(String(a))===ni);
+}
+
+/* ── TEORIA I EXEMPLES RESOLTS ─────────────────────────────── */
+const TEORIA={
+  traduccio:{
+    title:'Traducció al llenguatge algebraic',
+    text:'La lletra <b>x</b> representa un nombre desconegut. Les paraules del problema es tradueixen a operacions matemàtiques.',
+    formulas:[
+      '• Un nombre qualsevol → <b>x</b>',
+      '• El doble → 2x &nbsp;|&nbsp; el triple → 3x &nbsp;|&nbsp; la meitat → x/2',
+      '• Nombre parell → 2x &nbsp;|&nbsp; nombre senar → 2x + 1',
+      '• Consecutiu de x → x + 1 &nbsp;|&nbsp; anterior → x − 1',
+      '• "augmentat en 5" → x + 5 &nbsp;|&nbsp; "disminuït en 3" → x − 3',
+      '• "n vegades" → nx &nbsp;|&nbsp; "el quadrat" → x²'
+    ],
+    exemple:{
+      title:'Exemple: traducció natural → algebraic',
+      steps:[
+        'Enunciat: <em>"Tres vegades un nombre menys quatre"</em>',
+        '"tres vegades" → × 3 → <b>3x</b>',
+        '"menys quatre" → − 4',
+        'Expressió: <span class="ex-res">3x − 4</span>',
+        'Comprovació amb x = 2: 3·2 − 4 = 6 − 4 = <b>2</b> ✓'
+      ]
+    }
+  },
+  patrons:{
+    title:'Patrons numèrics i geomètrics',
+    text:'Un <b>patró</b> és una regularitat que es repeteix o evoluciona seguint una regla. A 1r d\'ESO l\'objectiu és observar, descriure i utilitzar aquesta regla sense necessitat d\'escriure encara una fórmula general.',
+    formulas:[
+      '• Busca què canvia d\'un terme o figura al següent',
+      '• En un patró additiu sempre s\'afegeix o es resta la mateixa quantitat',
+      '• En un patró multiplicatiu es repeteix la mateixa multiplicació',
+      '• En patrons geomètrics, compta quins elements es mantenen i quins s\'afegeixen',
+      '• Comprova la regla amb més d\'un pas abans de fer una predicció'
+    ],
+    exemple:{
+      title:'Exemple: descobrir i continuar un patró',
+      steps:[
+        'Successió: 5, 8, 11, 14, …',
+        'Compareu termes consecutius: cada vegada augmenta en 3',
+        'La regla verbal és: «afegeix 3»',
+        'El terme següent és <span class="ex-res">17</span>'
+      ]
+    }
+  },
+  patrons2:{
+    title:'⭐ Ampliació · Terme general de successions (prepara 2n ESO)',
+    text:'A 2n d\'ESO es pot expressar algebraicament la regla d\'una successió aritmètica i calcular qualsevol terme sense haver d\'escriure tots els anteriors.',
+    formulas:[
+      '• Terme general: <b>aₙ = a₁ + (n − 1)·d</b>',
+      '• a₁ és el primer terme i d és la diferència constant',
+      '• De la posició 1 a la posició n hi ha n − 1 salts'
+    ],
+    exemple:{
+      title:'Exemple: terme general',
+      steps:[
+        'Successió: 5, 8, 11, 14, …',
+        'Primer terme: a₁ = 5; diferència: d = 3',
+        'Regla: aₙ = 5 + (n − 1)·3',
+        'Aquesta fórmula permet calcular directament qualsevol posició'
+      ]
+    }
+  },
+  monomis:{
+    title:'Expressions: termes i coeficients',
+    text:'En una expressió algebraica, una lletra representa una quantitat indeterminada. A 1r d\'ESO treballem sobretot expressions lineals senzilles, el seu valor numèric i la reducció de termes que tenen la mateixa part literal.',
+    formulas:[
+      '• 5x → coeficient 5 i part literal x',
+      '• −x → coeficient −1',
+      '• 3x + 7 → dos termes: 3x i 7',
+      '• 4x + 3x = 7x perquè tots dos termes tenen la mateixa part literal x',
+      '• Un terme independent és un nombre que no porta cap lletra'
+    ],
+    exemple:{
+      title:'Exemple: termes d\'una expressió',
+      steps:[
+        'Expressió: 6x + 4 − 2x',
+        'Els termes amb x són 6x i −2x; 4 és el terme independent',
+        'Els termes amb x es poden reduir perquè tenen la mateixa part literal',
+        'Resultat: <span class="ex-res">4x + 4</span>'
+      ]
+    }
+  },
+  monomis2:{
+    title:'⭐ Ampliació · Grau i producte de monomis (prepara 2n ESO)',
+    text:'Ampliació amb potències de la variable. Es treballa el grau d\'un monomi, els termes semblants amb potències i el producte de monomis.',
+    formulas:[
+      '• El grau és l\'exponent de la variable: 5x³ té grau 3',
+      '• Només són semblants els termes amb exactament la mateixa part literal',
+      '• En multiplicar monomis, multiplica els coeficients',
+      '• xᵃ · xᵇ = xᵃ⁺ᵇ'
+    ],
+    exemple:{
+      title:'Exemple: producte de monomis',
+      steps:[
+        'Expressió: 3x · 4x²',
+        'Multiplica els coeficients',
+        'Suma els exponents de la mateixa lletra',
+        'Resultat: <span class="ex-res">12x³</span>'
+      ]
+    }
+  },
+  simplificacio:{
+    title:'Simplificació d\'expressions algebraiques',
+    text:'Per simplificar, <b>agrupa i opera els termes semblants</b>. A 1r d\'ESO treballarem expressions lineals senzilles amb x i termes independents.',
+    formulas:[
+      '• 4x + 5x − 2x = <b>7x</b>',
+      '• 3x + 4 + 2x − 1 = <b>5x + 3</b>',
+      '• Agrupa els termes amb x per una banda i els nombres per l\'altra',
+      '• La part literal no canvia quan sumes o restes termes semblants'
+    ],
+    exemple:{
+      title:'Exemple: reducció d\'una expressió lineal',
+      steps:[
+        'Expressió: 5x + 4 + 2x − 1',
+        'Agrupem: (5x + 2x) + (4 − 1)',
+        '= <span class="ex-res">7x + 3</span>'
+      ]
+    }
+  },
+  simplificacio2:{
+    title:'⭐ Ampliació · Simplificació avançada (prepara 2n ESO)',
+    text:'Ampliació amb diferents graus de x o amb més d\'una variable. Només es poden reduir els termes que tenen exactament la mateixa part literal.',
+    formulas:[
+      '• 3x² − x² + 7x + 2x − 5 = 2x² + 9x − 5',
+      '• Agrupa per separat x², x i termes independents',
+      '• 3x + 2y + x − y = 4x + y',
+      '• x i y no són termes semblants'
+    ],
+    exemple:{
+      title:'Exemple: dues variables',
+      steps:[
+        'Expressió: 3x + 2y + x − y',
+        'Agrupem els termes amb x i els termes amb y',
+        '= <span class="ex-res">4x + y</span>'
+      ]
+    }
+  },
+  equacions:{
+    title:'Equacions de primer grau',
+    text:'Una <b>equació</b> és una igualtat que es compleix per a un valor concret de x. A 1r d\'ESO treballarem equacions senzilles del tipus x+b=c, ax=b i ax+b=c.',
+    formulas:[
+      '• Aplica la mateixa operació als dos membres de la igualtat',
+      '• Per desfer una suma, resta als dos membres',
+      '• Per desfer una multiplicació, divideix els dos membres',
+      '• Sempre comprova el resultat substituint x'
+    ],
+    exemple:{
+      title:'Exemple: equació ax + b = c',
+      steps:[
+        'Equació: 3x + 5 = 26',
+        'Primer elimina el terme independent aplicant l\'operació inversa als dos membres',
+        'Després divideix els dos membres pel coeficient de x',
+        'Comprova la solució substituint x a l\'equació inicial'
+      ]
+    }
+  },
+  equacions2:{
+    title:'⭐ Ampliació · Equacions avançades (prepara 2n ESO)',
+    text:'Ampliació amb la incògnita als dos membres o amb parèntesis. Aquest contingut no entra al Mode Examen de 1r ESO.',
+    formulas:[
+      '• Amb x als dos membres: agrupa les x en un costat i els nombres en l\'altre',
+      '• Amb parèntesis: resol de manera ordenada mantenint l\'equivalència',
+      '• Comprova sempre la solució final'
+    ],
+    exemple:{
+      title:'Exemple orientatiu',
+      steps:[
+        'Equació: 5x + 2 = 2x + 11',
+        'Agrupa els termes amb x en un membre',
+        'Agrupa els termes independents en l\'altre',
+        'Aïlla x i comprova la solució'
+      ]
+    }
+  },
+  computacional:{
+    title:'Pensament computacional',
+    text:'El pensament computacional ajuda a resoldre problemes descomponent-los, reconeixent patrons i descrivint procediments com una seqüència ordenada d’instruccions. A 1r d’ESO el treball és sobretot desendollat i connectat amb situacions matemàtiques senzilles.',
+    formulas:[
+      '• Descompon un problema gran en passos petits i ordenats',
+      '• Un algorisme és una seqüència d’instruccions que es pot executar',
+      '• Repetir una instrucció diverses vegades és una iteració',
+      '• Una condició decideix quin camí seguir segons es compleixi o no',
+      '• Depurar és detectar quin pas produeix un resultat incorrecte'
+    ],
+    exemple:{
+      title:'Exemple: executar i revisar un algorisme',
+      steps:[
+        'Valor inicial: 4',
+        'Instrucció 1: suma 3',
+        'Instrucció 2: multiplica el resultat per 2',
+        'Executa les instruccions exactament en l’ordre indicat',
+        'Si el resultat no coincideix, revisa quin pas s’ha aplicat malament'
+      ]
+    }
+  }
+};
+
+/* ── GENERADORS ─────────────────────────────────────────────── */
+function genTraduccio(){
+  // Tipus reals del generador:
+  // 1 = paraules → expressió (té doble pes)
+  // 2 = expressió → paraules
+  // 3 = problema → expressió
+  // 4 = valor numèric d'una variable
+  // 5 = valor numèric de dues variables
+  // 6 = context real → expressió
+  const type=shuffle([1,1,2,3,4,5,6])[0];
+
+  let question,correct,alts=[],opts,guide,solution;
+
+  if(type===1){
+    const frases=[
+      {n:'El doble d\'un nombre',a:'2x',w:['x+2','x²','x/2','3x']},
+      {n:'El triple d\'un nombre',a:'3x',w:['x+3','2x','x/3','4x']},
+      {n:'La meitat d\'un nombre',a:'x/2',w:['2x','x-2','x+2','x/3']},
+      {n:'Un nombre parell',a:'2x',w:['x+1','2x+1','x/2','2x-1']},
+      {n:'Un nombre senar',a:'2x+1',w:['2x','x+1','2x-2','2x+2']},
+      {n:'El consecutiu de x',a:'x+1',w:['x-1','2x','x+2','x+3']},
+      {n:'El nombre anterior a x',a:'x-1',w:['x+1','2x-1','x-2','x']},
+      {n:'Un nombre menys quatre',a:'x-4',w:['4-x','x+4','4x','x-3']},
+      {n:'Sis vegades un nombre més dos',a:'6x+2',w:['6(x+2)','6x-2','x+8','2x+6']},
+      {n:'El quadrat d\'un nombre',a:'x²',w:['2x','x+2','x³','x/2']},
+      {n:'El triple d\'un nombre menys quatre',a:'3x-4',w:['3x+4','4-3x','3x-3','2x-4']},
+      {n:'Tres vegades la suma d\'un nombre i dos',a:'3(x+2)',al:['3x+6'],w:['3x+2','x+6','3(x-2)','6x']},
+      {n:'La suma del doble i el triple d\'un nombre',a:'2x+3x',al:['5x'],w:['5x²','6x','2x+3','2(x+3)']}
+    ];
+
+    const f=frases[rnd(0,frases.length-1)];
+
+    question='Tradueix: <b>"'+f.n+'"</b>';
+    correct=f.a;
+    alts=[f.a,...(f.al||[])];
+    opts=uniq4(correct,f.w);
+
+    guide=[
+      'Representa el nombre desconegut amb x',
+      'Identifica quines operacions indica l’enunciat i en quin ordre s’han de fer',
+      'Si una operació afecta tota una suma o diferència, pensa si cal utilitzar parèntesis'
+    ];
+
+    solution=[
+      'Representem el nombre desconegut amb x',
+      '"'+f.n+'" → <b>'+f.a+'</b>'
+    ];
+
+  } else if(type===2){
+    const exprs=[
+      {a:'x+5',n:'Un nombre més cinc'},
+      {a:'x-3',n:'Un nombre menys tres'},
+      {a:'4x',n:'El quàdruple d\'un nombre'},
+      {a:'x/3',n:'Un nombre dividit entre tres'},
+      {a:'x²',n:'El quadrat d\'un nombre'},
+      {a:'2x+1',n:'El doble d\'un nombre més u'},
+      {a:'3x-2',n:'El triple d\'un nombre menys dos'}
+    ];
+
+    const ex=exprs[rnd(0,exprs.length-1)];
+
+    question='Expressa amb paraules: <b>'+ex.a+'</b>';
+    correct=ex.n;
+    alts=[ex.n];
+    opts=uniq4(correct,exprs.filter(e=>e.a!==ex.a).map(e=>e.n));
+
+    guide=[
+      'Llegeix primer què representa la x',
+      'Identifica si hi ha multiplicació, divisió, suma, resta o potència',
+      'Descriu les operacions en el mateix ordre que apareixen a l’expressió'
+    ];
+
+    solution=[ex.a+' → <b>"'+ex.n+'"</b>'];
+
+  } else if(type===3){
+    const probs=[
+      {e:'En Marc té x anys. Quina edat tenia fa 5 anys?',a:'x-5',w:['x+5','5x','x/5','x-4']},
+      {e:'Una samarreta val x €. Quant costen 6 samarretes?',a:'6x',w:['x+6','x-6','x/6','5x']},
+      {e:'Tens x caramels i en menges 9. Quants queden?',a:'x-9',w:['x+9','9x','x/9','x-8']},
+      {e:'La meitat dels alumnes d\'una classe de x persones.',a:'x/2',w:['2x','x-2','x+2','x/3']},
+      {e:'En Joan guanya x € al mes. Quant guanya en 12 mesos?',a:'12x',w:['x+12','x-12','x/12','11x']},
+      {e:'Tens 50 € i gastes x €. Quant et queda?',a:'50-x',w:['x-50','50+x','50x','x+50']},
+      {e:'Un rectangle té base x i altura 4. Quina és la seva àrea?',a:'4x',w:['x+4','2(x+4)','x-4','x/4']}
+    ];
+
+    const pr=probs[rnd(0,probs.length-1)];
+
+    question='<b>'+pr.e+'</b><br>Quina expressió algebraica ho representa?';
+    correct=pr.a;
+    alts=[pr.a];
+    opts=uniq4(correct,pr.w);
+
+    guide=[
+      'Identifica quina quantitat representa x',
+      'Decideix quina operació relaciona les dades del problema',
+      'Escriu només l’expressió que representa la situació, sense inventar cap valor per a x'
+    ];
+
+    solution=[
+      'Identifiquem la relació entre les quantitats',
+      'Expressió: <b>'+pr.a+'</b>'
+    ];
+
+  } else if(type===4){
+    const a=rnd(2,6),b=rnd(1,8),xv=rnd(1,7);
+    const val=a*xv+b;
+
+    question='Si <b>x = '+xv+'</b>, quant val <b>'+a+'x + '+b+'</b>?';
+    correct=String(val);
+    alts=[String(val)];
+
+    opts=uniq4(correct,[
+      String(a*(xv+b)),   // suma abans de multiplicar
+      String(a*xv),       // oblida el terme independent
+      String(xv+b),       // oblida el coeficient
+      String(a+xv+b),     // suma tots els nombres
+      String(a*(xv+b)+b), // agrupa malament i torna a sumar b
+      String(val+a)       // torna a sumar el coeficient
+    ]);
+
+    guide=[
+      'Substitueix x pel valor indicat',
+      'Respecta la jerarquia d’operacions: calcula primer la multiplicació',
+      'Després incorpora el terme independent'
+    ];
+
+    solution=[
+      a+'·'+xv+' + '+b+' = '+a*xv+' + '+b,
+      'Resultat: <b>'+val+'</b>'
+    ];
+
+  } else if(type===5){
+    const a=rnd(2,4),b=rnd(1,3),xv=rnd(1,5),yv=rnd(1,4);
+    const val=a*xv+b*yv;
+
+    question='Si <b>x = '+xv+'</b> i <b>y = '+yv+'</b>, quant val <b>'+a+'x + '+b+'y</b>?';
+    correct=String(val);
+    alts=[String(val)];
+
+    opts=uniq4(correct,[
+      String(a*xv+b),          // no substitueix y
+      String(xv+b*yv),         // oblida el coeficient de x
+      String(a*(xv+b*yv)),     // agrupa malament
+      String(a*xv+b+yv),       // no multiplica b·y
+      String((a+b)*(xv+yv)), // barreja coeficients i valors
+      String(val+a+b)         // afegeix els coeficients al final
+    ]);
+
+    guide=[
+      'Substitueix cada lletra pel valor que li correspon',
+      'Calcula per separat els productes de cada terme',
+      'Finalment suma els resultats dels termes'
+    ];
+
+    solution=[
+      a+'·'+xv+' + '+b+'·'+yv+' = '+a*xv+' + '+b*yv,
+      'Resultat: <b>'+val+'</b>'
+    ];
+
+  } else {
+    const probs=[
+      {
+        e:'🍕 Una pizzeria cobra 7 € per pizza i 2 € d\'entrega. Quant es paga per x pizzes?',
+        a:'7x+2',
+        al:['2+7x'],
+        w:['7(x+2)','9x','7x-2','2x+7']
+      },
+      {
+        e:'🚗 Un taxi cobra 2 € de baixada i 1,5 €/km. Quant es paga per x km?',
+        a:'1,5x+2',
+        al:['1.5x+2','2+1,5x','2+1.5x'],
+        w:['2x+1,5','3,5x','1,5(x+2)','1,5x-2']
+      },
+      {
+        e:'📚 Un llibre val x €. Compres 3 llibres i tens 5 € de descompte. Quant pagues?',
+        a:'3x-5',
+        w:['3x+5','3+x-5','3(x-5)','5x-3']
+      }
+    ];
+
+    const pr=probs[rnd(0,probs.length-1)];
+
+    question=pr.e+'<br><small>Quina expressió algebraica ho representa?</small>';
+    correct=pr.a;
+    alts=[pr.a,...(pr.al||[])];
+    opts=uniq4(correct,pr.w);
+
+    guide=[
+      'Separa les quantitats que depenen de x de les quantitats fixes',
+      'Representa el cost variable amb una multiplicació',
+      'Afegeix o resta el cost fix segons indiqui l’enunciat'
+    ];
+
+    solution=['Expressió: <b>'+pr.a+'</b>'];
+  }
+
+  return {
+    topicId:'traduccio',
+    type,
+    question,
+    correct,
+    alts,
+    options:opts,
+    guide,
+    solution
+  };
+}
+
+function genPatrons(){
+  const type=rnd(1,6);
+  let question,correct,alts=[],opts,guide,solution;
+
+  if(type===1){
+    const a=rnd(1,15),d=rnd(2,8);
+    const decreasing=rnd(0,3)===0 && a+4*d<=50;
+    const seq=decreasing?[a+4*d,a+3*d,a+2*d,a+d,a]:[a,a+d,a+2*d,a+3*d,a+4*d];
+    const pos=rnd(1,3),miss=seq[pos];
+    const shown=seq.map((v,i)=>i===pos?'<b>?</b>':String(v));
+    const step=Math.abs(seq[1]-seq[0]);
+    question='Quin nombre falta al patró?<br><b>'+shown.join(' , ')+'</b>';
+    correct=String(miss);alts=[correct];
+    opts=uniq4(correct,[String(miss+step),String(miss-step),String(miss+1),String(miss-1)]);
+    guide=['Compara dos termes consecutius que coneguis','Busca una variació que es repeteixi','Aplica la mateixa variació a la posició buida'];
+    solution=['La variació constant és '+(seq[1]>seq[0]?'+':'−')+step,'El nombre que falta és <b>'+miss+'</b>'];
+
+  }else if(type===2){
+    const mode=rnd(1,3);
+    let seq,wrong;
+    if(mode===1){
+      const a=rnd(1,10),d=rnd(2,7);seq=[a,a+d,a+2*d,a+3*d];
+      correct='Cada terme augmenta en '+d;
+      wrong=['Cada terme augmenta en '+(d+1),'Cada terme es multiplica per '+d,'Cada terme disminueix en '+d];
+    }else if(mode===2){
+      const d=rnd(2,6),last=rnd(2,8),a=last+3*d;seq=[a,a-d,a-2*d,a-3*d];
+      correct='Cada terme disminueix en '+d;
+      wrong=['Cada terme disminueix en '+(d+1),'Cada terme augmenta en '+d,'Cada terme es divideix entre '+d];
+    }else{
+      const a=rnd(1,4),m=rnd(2,3);seq=[a,a*m,a*m*m,a*m*m*m];
+      correct='Cada terme es multiplica per '+m;
+      wrong=['Cada terme augmenta en '+m,'Cada terme es multiplica per '+(m+1),'Cada terme disminueix en '+m];
+    }
+    question='Quina regla descriu millor el patró?<br><b>'+seq.join(', ')+'…</b>';
+    alts=[correct];opts=uniq4(correct,wrong);
+    guide=['Compara cada terme amb l’anterior','Comprova si es repeteix una suma, una resta o una multiplicació','Verifica la mateixa regla en més d’un pas'];
+    solution=['La regla que es repeteix és: <b>'+correct+'</b>'];
+
+  }else if(type===3){
+    const mode=rnd(1,2);
+    let seq,next,wrong;
+    if(mode===1){
+      const a=rnd(1,12),d=rnd(2,8);seq=[a,a+d,a+2*d,a+3*d];next=a+4*d;
+      wrong=[next+d,next-d,next+1,next-1];
+    }else{
+      const a=rnd(1,4),m=rnd(2,3);seq=[a,a*m,a*m*m,a*m*m*m];next=a*m*m*m*m;
+      wrong=[next+m,next-m,seq[3]+m,next/m];
+    }
+    question='Continua el patró: <b>'+seq.join(', ')+', …</b>';
+    correct=String(next);alts=[correct];opts=uniq4(correct,wrong.map(String));
+    guide=['Descobreix què es repeteix entre termes consecutius','Comprova la regla amb els termes que ja tens','Aplica-la una vegada més'];
+    solution=['Aplicant la mateixa regla, el terme següent és <b>'+next+'</b>'];
+
+  }else if(type===4){
+    const n=rnd(3,10),pals=3*n+1;
+    question='Una fila de quadrats fets amb pals segueix el patró:<br><small>1 quadrat → 4 pals | 2 → 7 | 3 → 10</small><br>Quants pals calen per a <b>'+n+' quadrats</b>?';
+    correct=String(pals);alts=[correct,pals+' pals'];
+    opts=uniq4(correct,[String(4*n),String(3*n),String(3*n+2),String(pals+3)]);
+    guide=['Observa quants pals s’afegeixen quan apareix un quadrat nou','Tingues en compte que els quadrats consecutius comparteixen un costat','Continua el patró fins al nombre de quadrats demanat'];
+    solution=['Cada quadrat nou afegeix 3 pals al patró','Per '+n+' quadrats calen <b>'+pals+' pals</b>'];
+
+  }else if(type===5){
+    const n=rnd(5,9);
+    const totals=[1,3,6,10,15,21,28,36,45];
+    const tri=totals[n-1];
+    const shown=totals.slice(0,Math.min(5,n-1));
+    question='Patró de punts triangulars: <b>'+shown.join(', ')+', …</b><br>Quants punts té la figura <b>'+n+'</b>?';
+    correct=String(tri);alts=[correct,tri+' punts'];
+    opts=uniq4(correct,[String(tri+n),String(tri-n),String(n*n),String(tri-1)]);
+    guide=['Mira quants punts s’afegeixen de cada figura a la següent','Els increments també segueixen un patró','Continua els increments fins a la figura demanada'];
+    solution=['Els increments són 2, 3, 4, 5…','La figura '+n+' té <b>'+tri+' punts</b>'];
+
+  }else{
+    const contexts=[
+      {q:'Un cinema té 12 seients a la primera fila, 14 a la segona, 16 a la tercera i 18 a la quarta. Quants en tindrà la cinquena?',a:'20',w:['19','21','22','24'],s:'Cada fila té 2 seients més que l’anterior'},
+      {q:'Una construcció usa 3 peces a la figura 1, 6 a la figura 2, 9 a la figura 3 i 12 a la figura 4. Quantes peces usa la figura 5?',a:'15',w:['13','14','18','24'],s:'Cada figura afegeix 3 peces'},
+      {q:'Una població de bacteris en un model didàctic segueix 2, 4, 8, 16… Quina quantitat ve després?',a:'32',w:['18','24','30','64'],s:'Cada terme és el doble de l’anterior'},
+      {q:'Les rajoles d’un mosaic per files segueixen 20, 17, 14, 11… Quantes n’hi ha a la fila següent?',a:'8',w:['7','9','10','14'],s:'Cada fila té 3 rajoles menys'}
+    ];
+    const c=contexts[rnd(0,contexts.length-1)];
+    question='🌍 '+c.q;correct=c.a;alts=[correct];opts=uniq4(correct,c.w);
+    guide=['Identifica la regularitat que relaciona les dades consecutives','Comprova que la mateixa regla funciona en més d’un pas','Aplica la regla al pas següent'];
+    solution=[c.s,'Resposta: <b>'+correct+'</b>'];
+  }
+
+  return {topicId:'patrons',type,question,correct,alts,options:opts,guide,solution};
+}
+
+function genPatronsAmpliacio(){
+  const type=rnd(1,3);
+  let question,correct,alts=[],opts,guide,solution;
+  const a=rnd(1,8),d=rnd(2,7);
+  if(type===1){
+    const t2=a+d,t3=a+2*d,k=a-d;
+    let linear=k===0?d+'n':(k>0?d+'n+'+k:d+'n−'+Math.abs(k));
+    correct='aₙ = '+a+' + (n−1)·'+d;
+    alts=[correct,'a_n='+a+'+(n-1)*'+d,'an='+a+'+(n-1)*'+d,'aₙ='+linear,linear.replace(/−/g,'-')];
+    question='⭐ Successió: <b>'+a+', '+t2+', '+t3+', …</b><br>Quina és la regla general?';
+    opts=uniq4(correct,['aₙ = '+a+' + n·'+d,'aₙ = '+a+'·n + '+d,'aₙ = '+(a+d)+' + (n−1)·'+d,'aₙ = '+a+' + (n−1) + '+d]);
+    guide=['Identifica el primer terme','Calcula la diferència constant','Relaciona la posició n amb el nombre de salts des de la posició 1'];
+    solution=['a₁ = '+a+' i d = '+d,'Regla general: <b>'+correct+'</b>','Forma equivalent: <b>aₙ = '+linear+'</b>'];
+  }else if(type===2){
+    const n=rnd(5,12),an=a+(n-1)*d;
+    question='⭐ Si <b>a₁ = '+a+'</b> i <b>d = '+d+'</b>, quin és <b>a<sub>'+n+'</sub></b>?';
+    correct=String(an);alts=[correct];
+    opts=uniq4(correct,[String(a+n*d),String(an-d),String(n*d),String(an+d),String(an-2*d),String(an+2*d)]);
+    guide=['Utilitza la relació entre el primer terme, la diferència i la posició','Compta els salts que hi ha des de la posició 1 fins a la posició demanada','Substitueix les dades i calcula'];
+    solution=['Hi ha '+(n-1)+' salts de '+d,a+' + '+(n-1)+'·'+d+' = <b>'+an+'</b>'];
+  }else{
+    const n=rnd(4,10),an=a+(n-1)*d;
+    const pos=rnd(2,n-1),ap=a+(pos-1)*d;
+    question='⭐ La successió comença en <b>'+a+'</b> i augmenta de <b>'+d+'</b> en <b>'+d+'</b>. Quin terme ocupa la posició '+pos+' i quin ocupa la '+n+'?';
+    correct=ap+' i '+an;alts=[correct];
+    opts=uniq4(correct,[(ap+d)+' i '+an,ap+' i '+(an+d),(ap-d)+' i '+an,ap+' i '+(an-d)]);
+    guide=['Expressa la regularitat de la successió','Relaciona cada posició amb els salts des del primer terme','Aplica la mateixa regla a les dues posicions'];
+    solution=['Posició '+pos+': <b>'+ap+'</b>','Posició '+n+': <b>'+an+'</b>'];
+  }
+  return {topicId:'patrons2',type,course:'2n',question,correct,alts,options:opts,guide,solution};
+}
+
+function genMonomis(forceType){
+  const coreTypes=[1,2,3,4];
+  const type=forceType || coreTypes[rnd(0,coreTypes.length-1)];
+  let question,correct,alts=[],opts,guide,solution;
+
+  if(type===1){
+    const coefs=[-9,-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8,9];
+    const c=coefs[rnd(0,coefs.length-1)];
+    const mono=c===1?'x':(c===-1?'−x':c+'x');
+    question='A l’expressió <b>'+mono+'</b>, quin és el <b>coeficient</b>?';
+    correct=String(c);alts=[correct];
+    opts=uniq4(correct,[String(-c),String(Math.abs(c)),String(c>0?c+1:c-1),'0']);
+    guide=['Localitza el nombre que multiplica la x','Tingues en compte el signe','Si no hi ha cap nombre escrit davant de x, pensa quin factor hi ha implícit'];
+    solution=['El factor numèric de '+mono+' és <b>'+c+'</b>'];
+
+  }else if(type===2){
+    const a=rnd(2,9),b=rnd(1,12),minus=rnd(0,1)===1;
+    const expr=a+'x '+(minus?'−':' + ')+' '+b;
+    question='A l’expressió <b>'+expr+'</b>, quin és el <b>terme independent</b>?';
+    correct=String(minus?-b:b);alts=[correct];
+    opts=uniq4(correct,[String(a),String(-a),String(b),String(minus?b:-b),String(a+b),String(-(a+b))]);
+    guide=['Separa el terme que conté x del terme que no en conté','El terme independent és el que no porta cap lletra','Conserva el signe que acompanya aquest terme'];
+    solution=['El terme sense x és <b>'+correct+'</b>'];
+
+  }else if(type===3){
+    const resta=rnd(0,1)===1;
+    let a,b,res,sign;
+    if(resta){a=rnd(4,12);b=rnd(1,a-1);res=a-b;sign=' − ';}
+    else{a=rnd(2,9);b=rnd(1,8);res=a+b;sign=' + ';}
+    question='Redueix: <b>'+a+'x'+sign+b+'x</b>';
+    correct=res+'x';alts=[correct];
+    opts=uniq4(correct,[(resta?a+b:a*b)+'x',res+'x²',String(res),(res+1)+'x',a+'x',b+'x']);
+    guide=['Comprova que els dos termes tenen la mateixa part literal x','Opera només els coeficients respectant el signe','Conserva la x en el resultat'];
+    solution=['Operem els coeficients: '+a+(resta?' − ':' + ')+b+' = '+res,'Resultat: <b>'+correct+'</b>'];
+
+  }else{
+    const casos=[
+      {e:'3x i 7x',ok:true,why:'tots dos tenen la mateixa part literal x'},
+      {e:'−2x i 5x',ok:true,why:'el signe i els coeficients poden ser diferents; la part literal continua sent x'},
+      {e:'4x i 4',ok:false,why:'un terme porta x i l’altre és independent'},
+      {e:'6x i −3',ok:false,why:'només un dels termes té part literal x'},
+      {e:'x i 9x',ok:true,why:'x té coeficient implícit 1 i comparteix la mateixa part literal'}
+    ];
+    const c=casos[rnd(0,casos.length-1)];
+    question='<b>'+c.e+'</b><br>Són termes semblants?';
+    correct=c.ok?'Sí, es poden reduir':'No, no són termes semblants';
+    alts=c.ok?['sí','si','s','es poden reduir']:['no','no es poden reduir'];
+    opts=uniq4(correct,c.ok?[
+      'No, perquè els coeficients són diferents','No, perquè només serien semblants si fossin idèntics','Cal multiplicar-los','Només si els coeficients tenen el mateix signe'
+    ]:[
+      'Sí, perquè tots dos són nombres','Sí, perquè es poden sumar sempre','Sí, perquè el coeficient és suficient','Cal multiplicar-los per fer-los semblants'
+    ]);
+    guide=['Compara si tots dos termes tenen exactament la mateixa part literal','Els coeficients no han de ser iguals','Un terme sense lletra no és semblant a un terme amb x'];
+    solution=[c.why,'<b>'+correct+'</b>'];
+  }
+  return {topicId:'monomis',type,question,correct,alts,options:opts,guide,solution};
+}
+
+function genMonomisAmpliacio(){
+  const type=rnd(1,4);
+  let question,correct,alts=[],opts,guide,solution;
+  if(type===1){
+    const c=[-7,-5,-3,2,4,6,8][rnd(0,6)],g=rnd(2,5);
+    const mono=(c===-1?'−':String(c))+'x'+sup(g);
+    question='⭐ Quin és el <b>grau</b> del monomi <b>'+mono+'</b>?';
+    correct='Grau '+g;alts=[String(g),'grau '+g,correct];
+    opts=uniq4(correct,['Grau '+Math.max(0,g-1),'Grau '+(g+1),'Grau '+Math.abs(c),'Grau 1','Grau 0','Grau '+(g+2)]);
+    guide=['Busca l’exponent de la variable','No confonguis exponent i coeficient','El grau depèn de la part literal'];
+    solution=['L’exponent de x és '+g,'Per tant: <b>'+correct+'</b>'];
+  }else if(type===2){
+    const a=rnd(2,7),b=rnd(2,6),e1=rnd(1,3),e2=rnd(1,3),rc=a*b,re=e1+e2;
+    question='⭐ Calcula: <b>'+a+'x'+sup(e1)+' · '+b+'x'+sup(e2)+'</b>';
+    correct=rc+'x'+sup(re);alts=[correct,rc+'x^'+re];
+    opts=uniq4(correct,[(a+b)+'x'+sup(re),rc+'x'+sup(Math.max(e1,e2)),rc+'x'+sup(e1*e2),(rc+1)+'x'+sup(re),rc+'x'+sup(re+1),(rc+a)+'x'+sup(re)]);
+    guide=['Multiplica els coeficients','Quan multipliques potències de la mateixa lletra, combina els exponents segons la regla del producte','Escriu el resultat com un únic monomi'];
+    solution=['Coeficients: '+a+' · '+b+' = '+rc,'Exponents: '+e1+' + '+e2+' = '+re,'Resultat: <b>'+correct+'</b>'];
+  }else if(type===3){
+    const a=rnd(2,6),b=rnd(2,5),e1=rnd(1,3),e2=rnd(1,3),rc=-(a*b),re=e1+e2;
+    question='⭐ Calcula: <b>−'+a+'x'+sup(e1)+' · '+b+'x'+sup(e2)+'</b>';
+    correct='−'+Math.abs(rc)+'x'+sup(re);alts=[correct,'-'+Math.abs(rc)+'x^'+re];
+    opts=uniq4(correct,[Math.abs(rc)+'x'+sup(re),'−'+(a+b)+'x'+sup(re),'−'+Math.abs(rc)+'x'+sup(Math.max(e1,e2)),'−'+Math.abs(rc)+'x'+sup(e1*e2),'−'+Math.abs(rc)+'x'+sup(re+1),'−'+(Math.abs(rc)+a)+'x'+sup(re)]);
+    guide=['Determina primer el signe del producte','Multiplica els valors absoluts dels coeficients','Combina els exponents de la mateixa lletra amb la regla del producte'];
+    solution=['Signe: negatiu','Coeficient: '+a+' · '+b+' = '+Math.abs(rc),'Exponent: '+e1+' + '+e2+' = '+re,'Resultat: <b>'+correct+'</b>'];
+  }else{
+    const g1=rnd(1,4),g2=rnd(1,4),same=rnd(0,1)===1;
+    const gB=same?g1:(g2===g1?(g1%4)+1:g2);
+    const a=rnd(2,8),b=rnd(2,8);
+    question='⭐ <b>'+a+'x'+sup(g1)+' i '+b+'x'+sup(gB)+'</b><br>Són termes semblants?';
+    correct=same?'Sí, són semblants':'No, no són semblants';alts=same?['sí','si']:['no'];
+    opts=uniq4(correct,same?['No, perquè els coeficients són diferents','No, perquè tenen x','Només si els coeficients coincideixen','Cal multiplicar-los']:['Sí, perquè tots dos tenen x','Sí, perquè els coeficients són enters','Sí, sempre que aparegui la mateixa lletra','Cal sumar els exponents']);
+    guide=['Compara tota la part literal, inclòs l’exponent','Els coeficients poden ser diferents','Només són semblants si la part literal coincideix exactament'];
+    solution=[same?'Els exponents coincideixen':'Els exponents són diferents','<b>'+correct+'</b>'];
+  }
+  return {topicId:'monomis2',type,course:'2n',question,correct,alts,options:opts,guide,solution};
+}
+
+function genSimplificacio(forceType){
+  // En la pràctica normal de 1r ESO només apareixen els tipus 1, 3, 5 i 6.
+  // Els tipus 2 i 4 es conserven al generador per a la futura zona
+  // ⭐ Ampliació · prepara 2n ESO i es poden cridar amb genSimplificacio(2/4).
+  const coreTypes=[1,3,5,6];
+  const type=forceType || coreTypes[rnd(0,coreTypes.length-1)];
+  let question,correct,alts=[],opts,guide,solution;
+
+  // Formata expressions evitant 1x, 0x i signes com "+ -2".
+  function fmtExpr(terms){
+    let out='';
+    terms.forEach(([coef,literal])=>{
+      if(coef===0)return;
+      const abs=Math.abs(coef);
+      const body=literal
+        ?(abs===1?literal:abs+literal)
+        :String(abs);
+
+      if(!out){
+        out=(coef<0?'−':'')+body;
+      }else{
+        out+=coef<0?' − '+body:' + '+body;
+      }
+    });
+    return out||'0';
+  }
+
+  function basicAlts(expr){
+    return [
+      expr,
+      expr.replace(/\s+/g,''),
+      expr.replace(/−/g,'-')
+    ];
+  }
+
+  // ── 1. REDUIR TRES TERMES SEMBLANTS ──────────────────────────────────
+  if(type===1){
+    const a=rnd(2,8),b=rnd(1,6);
+    const c=rnd(1,Math.min(6,a+b-1));
+    const res=a+b-c;
+
+    question='Redueix: <b>'+a+'x + '+b+'x − '+c+'x</b>';
+    correct=fmtExpr([[res,'x']]);
+    alts=basicAlts(correct);
+
+    opts=uniq4(correct,[
+      fmtExpr([[a+b+c,'x']]),          // ignora que l'últim terme resta
+      fmtExpr([[res,'x²']]),           // modifica l'exponent
+      fmtExpr([[a+b,'x'],[-c,'']]),    // tracta l'últim coeficient com a constant
+      fmtExpr([[res+1,'x']]),          // error aritmètic d'una unitat
+      fmtExpr([[Math.max(1,res-1),'x']]),
+      fmtExpr([[a+b,'x']]),
+      fmtExpr([[a-c,'x']])
+    ]);
+
+    guide=[
+      'Comprova que tots els termes tenen la mateixa part literal x',
+      'Opera només els coeficients, respectant els signes',
+      'Conserva la part literal x sense modificar-la'
+    ];
+
+    solution=[
+      'Els tres termes són semblants, així que operem els coeficients',
+      '('+a+' + '+b+' − '+c+')x = <b>'+correct+'</b>'
+    ];
+
+  // ── 2. AMPLIACIÓ: x², x I TERME INDEPENDENT ──────────────────────────
+  } else if(type===2){
+    const a=rnd(2,6),b=rnd(1,a-1);
+    const cX=rnd(3,8),dX=rnd(1,4),cst=rnd(2,9);
+    const rX2=a-b,rX=cX+dX;
+
+    question='⭐ Ampliació · Redueix: <b>'+a+'x² − '+b+'x² + '+cX+'x + '+dX+'x − '+cst+'</b>';
+    correct=fmtExpr([[rX2,'x²'],[rX,'x'],[-cst,'']]);
+    alts=basicAlts(correct);
+
+    opts=uniq4(correct,[
+      fmtExpr([[a+b,'x²'],[rX,'x'],[-cst,'']]),       // suma els coeficients de x²
+      fmtExpr([[rX2,'x²'],[cX-dX,'x'],[-cst,'']]),   // resta els coeficients de x
+      fmtExpr([[rX2,'x²'],[rX,'x'],[cst,'']]),       // perd el signe del terme independent
+      fmtExpr([[rX2+1,'x²'],[rX,'x'],[-cst,'']]),
+      fmtExpr([[rX2,'x²'],[rX+1,'x'],[-cst,'']])
+    ]);
+
+    guide=[
+      'Agrupa per separat els termes amb x², els termes amb x i els termes independents',
+      'Opera només els coeficients dels termes que tenen exactament la mateixa part literal',
+      'Mantén separats els grups x², x i nombre'
+    ];
+
+    solution=[
+      'Agrupem els termes semblants de cada tipus',
+      'x²: '+a+' − '+b+' = '+rX2+'; x: '+cX+' + '+dX+' = '+rX,
+      'Resultat: <b>'+correct+'</b>'
+    ];
+
+  // ── 3. SIMPLIFICAR I DESPRÉS CALCULAR UN VALOR ───────────────────────
+  } else if(type===3){
+    const a=rnd(3,8),b=rnd(1,a-1),xv=rnd(2,5);
+    const coef=a-b;
+    const val=coef*xv;
+
+    question='Simplifica <b>'+a+'x − '+b+'x</b> i calcula el valor per <b>x = '+xv+'</b>';
+    correct=String(val);
+    alts=[String(val)];
+
+    opts=uniq4(correct,[
+      String((a+b)*xv),        // suma en lloc de restar
+      String(a*xv-b),          // només multiplica el primer terme per x
+      String(coef+xv),         // suma en lloc de multiplicar després de simplificar
+      String((coef+1)*xv),     // error en la reducció
+      String(coef*(xv+1)),
+      String(a*xv),          // oblida restar el segon terme
+      String(b*xv),          // conserva només el terme restat
+      String(coef*(xv-1))    // substitueix malament x
+    ]);
+
+    guide=[
+      'Primer redueix els termes semblants',
+      'Quan tinguis una sola expressió amb x, substitueix x pel valor indicat',
+      'Fes la multiplicació final respectant l’ordre de les operacions'
+    ];
+
+    solution=[
+      a+'x − '+b+'x = '+coef+'x',
+      'Substituint x = '+xv+': '+coef+' · '+xv+' = <b>'+val+'</b>'
+    ];
+
+  // ── 4. AMPLIACIÓ: DUES VARIABLES ─────────────────────────────────────
+  } else if(type===4){
+    const a=rnd(3,7),b=rnd(3,7),c=rnd(1,3),d=rnd(1,b-1);
+    const rX=a+c,rY=b-d;
+
+    question='⭐ Ampliació · Redueix: <b>'+a+'x + '+b+'y + '+c+'x − '+d+'y</b>';
+    correct=fmtExpr([[rX,'x'],[rY,'y']]);
+    alts=basicAlts(correct);
+
+    opts=uniq4(correct,[
+      fmtExpr([[a-c,'x'],[rY,'y']]),         // resta en lloc de sumar els x
+      fmtExpr([[rX,'x'],[b+d,'y']]),         // suma en lloc de restar els y
+      fmtExpr([[a+b+c-d,'x']]),              // tracta x i y com si fossin semblants
+      fmtExpr([[rY,'x'],[rX,'y']]),          // intercanvia coeficients finals
+      fmtExpr([[rX+1,'x'],[rY,'y']])
+    ]);
+
+    guide=[
+      'Agrupa els termes amb x per una banda i els termes amb y per l’altra',
+      'Només pots reduir termes que tenen la mateixa part literal',
+      'Opera els coeficients de cada grup respectant els signes'
+    ];
+
+    solution=[
+      'Termes amb x: '+a+'x + '+c+'x = '+rX+'x',
+      'Termes amb y: '+b+'y − '+d+'y = '+rY+'y',
+      'Resultat: <b>'+correct+'</b>'
+    ];
+
+  // ── 5. IDENTIFICAR EL RESULTAT D'UNA REDUCCIÓ ────────────────────────
+  } else if(type===5){
+    const a=rnd(3,7),b=rnd(1,4),c=rnd(1,4);
+    const res=a+b+c;
+
+    question='<b>'+a+'x + '+b+'x + '+c+'x</b> = ?';
+    correct=fmtExpr([[res,'x']]);
+    alts=basicAlts(correct);
+
+    opts=uniq4(correct,[
+      fmtExpr([[a+b,'x'],[c,'']]),       // deixa l'últim coeficient com a constant
+      fmtExpr([[res,'x²']]),             // suma exponent
+      String(res),                       // perd la part literal
+      fmtExpr([[a*b+c,'x']]),            // multiplica coeficients
+      fmtExpr([[res+1,'x']])
+    ]);
+
+    guide=[
+      'Observa que tots els termes tenen la mateixa part literal x',
+      'Suma només els coeficients',
+      'Conserva la x en el resultat'
+    ];
+
+    solution=[
+      'Tots els termes són semblants',
+      '('+a+' + '+b+' + '+c+')x = <b>'+correct+'</b>'
+    ];
+
+  // ── 6. TERMES AMB x I TERMES INDEPENDENTS ────────────────────────────
+  } else {
+    const a=rnd(3,7),b=rnd(1,4);
+    const cst1=rnd(1,6),cst2=rnd(1,8);
+    const rX=a+b,rN=cst1-cst2;
+
+    question='Redueix: <b>'+a+'x + '+cst1+' + '+b+'x − '+cst2+'</b>';
+    correct=fmtExpr([[rX,'x'],[rN,'']]);
+    alts=basicAlts(correct);
+
+    // També acceptem l'ordre "constant + terme amb x" en resposta oberta.
+    if(rN>0)alts.push(rN+' + '+fmtExpr([[rX,'x']]));
+    if(rN<0)alts.push('−'+Math.abs(rN)+' + '+fmtExpr([[rX,'x']]));
+
+    opts=uniq4(correct,[
+      fmtExpr([[rX,'x'],[cst1+cst2,'']]),       // suma les constants
+      fmtExpr([[a-b,'x'],[rN,'']]),             // resta els coeficients de x
+      fmtExpr([[a+b+cst1-cst2,'x']]),           // tracta les constants com coeficients de x
+      fmtExpr([[rX,'x'],[-rN,'']]),              // canvia el signe de la constant final
+      fmtExpr([[rX+1,'x'],[rN,'']])
+    ]);
+
+    guide=[
+      'Agrupa primer els termes que contenen x',
+      'Agrupa per separat els termes independents',
+      'Opera cada grup respectant els signes i escriu després l’expressió reduïda'
+    ];
+
+    solution=[
+      'Termes amb x: '+a+'x + '+b+'x = '+rX+'x',
+      'Termes independents: '+cst1+' − '+cst2+' = '+rN,
+      'Resultat: <b>'+correct+'</b>'
+    ];
+  }
+
+  return {
+    topicId:'simplificacio',
+    type,
+    course:(type===2||type===4)?'2n':'1r',
+    question,
+    correct,
+    alts,
+    options:opts,
+    guide,
+    solution
+  };
+}
+
+
+function genSimplificacioAmpliacio(){
+  const t=shuffle([2,4])[0];
+  const ex=genSimplificacio(t);
+  return Object.assign({},ex,{topicId:'simplificacio2',type:t});
+}
+
+function genEquacions(forceType){
+  // 1r ESO: tipus 1,2,3,4 i problemes de context (7/8)
+  // ⭐ Ampliació 2n: tipus 5 i 6
+  const coreTypes=[1,2,3,4,7,8];
+  const type=forceType || coreTypes[rnd(0,coreTypes.length-1)];
+  let question,correct,alts=[],opts,guide,solution;
+
+  // Formata nombres per als distractors sense decimals innecessaris.
+  function fmtEqNum(n){
+    if(Number.isInteger(n)) return String(n);
+    return String(Math.round(n*100)/100).replace('.',',');
+  }
+  function xOpt(n){ return 'x = '+fmtEqNum(n); }
+
+  if(type===1){
+    // x + b = c
+    const b=rnd(2,15),x=rnd(2,12),c=x+b;
+
+    question='Resol: <b>x + '+b+' = '+c+'</b>';
+    correct='x = '+x;
+    alts=[String(x),'x='+x];
+
+    opts=uniq4(correct,[
+      xOpt(c+b),      // suma en lloc de restar
+      xOpt(c/b),      // divideix indegudament
+      xOpt(b-c),      // inverteix la resta
+      xOpt(c)         // no elimina el terme independent
+    ]);
+
+    guide=[
+      'Identifica l’operació que acompanya x',
+      'Desfés la suma aplicant la resta als dos membres de la igualtat',
+      'Comprova la solució substituint x a l’equació inicial'
+    ];
+
+    solution=[
+      'Restem '+b+' als dos membres: x = '+c+' − '+b,
+      'x = <b>'+x+'</b>',
+      'Comprovació: '+x+' + '+b+' = '+c+' ✓'
+    ];
+
+  } else if(type===2){
+    // ax = b
+    const a=rnd(2,9),x=rnd(2,8),b=a*x;
+
+    question='Resol: <b>'+a+'x = '+b+'</b>';
+    correct='x = '+x;
+    alts=[String(x),'x='+x];
+
+    opts=uniq4(correct,[
+      xOpt(b-a),      // resta el coeficient
+      xOpt(b+a),      // suma el coeficient
+      xOpt(b),        // oblida dividir
+      xOpt(a),        // respon el coeficient
+      xOpt(b/(a+1)), // divideix per un coeficient incorrecte
+      xOpt(a>2?b/(a-1):b/3)
+    ]);
+
+    guide=[
+      'Observa que x està multiplicada per un coeficient',
+      'Desfés la multiplicació dividint els dos membres pel mateix coeficient',
+      'Comprova la solució substituint x a l’equació inicial'
+    ];
+
+    solution=[
+      'Dividim els dos membres per '+a+': x = '+b+' ÷ '+a,
+      'x = <b>'+x+'</b>',
+      'Comprovació: '+a+' · '+x+' = '+b+' ✓'
+    ];
+
+  } else if(type===3){
+    // ax + b = c
+    const a=rnd(2,5),b=rnd(1,10),x=rnd(2,8),c=a*x+b;
+
+    question='Resol: <b>'+a+'x + '+b+' = '+c+'</b>';
+    correct='x = '+x;
+    alts=[String(x),'x='+x];
+
+    opts=uniq4(correct,[
+      xOpt(c-b),          // elimina b però oblida dividir per a
+      xOpt((c+b)/a),      // usa el signe contrari
+      xOpt(c/a),          // ignora el terme independent
+      xOpt((c-b)/a + 1),  // petit error final
+      xOpt((c-b)/(a+1)), // divideix per un coeficient incorrecte
+      xOpt(a>2?(c-b)/(a-1):(c-b)/(a+2))
+    ]);
+
+    guide=[
+      'Primer elimina el terme independent aplicant l’operació inversa als dos membres',
+      'Després desfés la multiplicació dividint els dos membres pel coeficient de x',
+      'Comprova la solució substituint x a l’equació inicial'
+    ];
+
+    solution=[
+      'Restem '+b+' als dos membres: '+a+'x = '+(c-b),
+      'Dividim els dos membres per '+a+': x = '+(c-b)+' ÷ '+a,
+      'x = <b>'+x+'</b>',
+      'Comprovació: '+a+' · '+x+' + '+b+' = '+c+' ✓'
+    ];
+
+  } else if(type===4){
+    // ax − b = c
+    const a=rnd(2,5),b=rnd(1,8),x=rnd(2,9),c=a*x-b;
+
+    question='Resol: <b>'+a+'x − '+b+' = '+c+'</b>';
+    correct='x = '+x;
+    alts=[String(x),'x='+x];
+
+    opts=uniq4(correct,[
+      xOpt(c+b),          // suma b però oblida dividir
+      xOpt((c-b)/a),      // resta b en lloc de sumar-lo
+      xOpt(c/a),          // ignora el terme independent
+      xOpt((c+b)/a + 1)   // petit error final
+    ]);
+
+    guide=[
+      'Primer elimina el terme independent aplicant l’operació inversa als dos membres',
+      'Després desfés la multiplicació dividint els dos membres pel coeficient de x',
+      'Comprova la solució substituint x a l’equació inicial'
+    ];
+
+    solution=[
+      'Sumem '+b+' als dos membres: '+a+'x = '+(c+b),
+      'Dividim els dos membres per '+a+': x = '+(c+b)+' ÷ '+a,
+      'x = <b>'+x+'</b>',
+      'Comprovació: '+a+' · '+x+' − '+b+' = '+c+' ✓'
+    ];
+
+  } else if(type===5){
+    // ⭐ Ampliació: ax+b = cx+d
+    let x,a,c,b,d,diff,tries=0;
+    do{
+      x=rnd(1,6);
+      a=rnd(3,7);
+      c=rnd(1,a-1);
+      d=rnd(2,10);
+      diff=a-c;
+      b=d-diff*x;
+      tries++;
+    }while((diff<=0 || b<-15 || b>15) && tries<100);
+
+    const bStr=b>=0?' + '+b:' − '+Math.abs(b);
+    question='Resol: <b>'+a+'x'+bStr+' = '+c+'x + '+d+'</b>';
+    correct='x = '+x;
+    alts=[String(x),'x='+x];
+
+    const rhs=d-b;
+    opts=uniq4(correct,[
+      xOpt(rhs),               // agrupa nombres però no coeficients
+      xOpt(rhs/(a+c)),         // suma coeficients en lloc de restar-los
+      xOpt((d+b)/diff),        // signe incorrecte amb els independents
+      xOpt(d/diff),            // ignora un terme independent
+      xOpt((d-b)/(diff+1)),
+      xOpt(diff>1?(d-b)/(diff-1):(d-b)/(diff+2))
+    ]);
+
+    guide=[
+      'Agrupa els termes amb x en un mateix membre aplicant la mateixa operació als dos costats',
+      'Agrupa els termes independents a l’altre membre',
+      'Quan quedi un únic terme amb x, divideix els dos membres pel seu coeficient',
+      'Comprova la solució a l’equació inicial'
+    ];
+
+    solution=[
+      'Agrupant termes: '+diff+'x = '+rhs,
+      'Dividim per '+diff+': x = '+rhs+' ÷ '+diff,
+      'x = <b>'+x+'</b>',
+      'Comprovació correcta ✓'
+    ];
+
+  } else if(type===6){
+    // ⭐ Ampliació: a(x+b)=c
+    const a=rnd(2,4),b=rnd(1,5),x=rnd(2,6),rhs=a*(x+b);
+
+    question='Resol: <b>'+a+'(x + '+b+') = '+rhs+'</b>';
+    correct='x = '+x;
+    alts=[String(x),'x='+x];
+
+    opts=uniq4(correct,[
+      xOpt(rhs/a),             // divideix però oblida desfer +b
+      xOpt(rhs-a*b),           // distribueix però oblida dividir per a
+      xOpt(rhs/(a+b)),         // divideix pel contingut del parèntesi
+      xOpt(rhs/a+b),           // suma b en lloc de restar-lo
+      xOpt(rhs/(a+1)-b),
+      xOpt(rhs/a-b+1)
+    ]);
+
+    guide=[
+      'Elimina primer el factor que multiplica el parèntesi aplicant l’operació inversa als dos membres',
+      'Quan el parèntesi quedi aïllat, desfés la suma que acompanya x',
+      'Comprova la solució a l’equació inicial'
+    ];
+
+    solution=[
+      'Dividim els dos membres per '+a+': x + '+b+' = '+(rhs/a),
+      'Restem '+b+' als dos membres: x = '+x,
+      'x = <b>'+x+'</b>',
+      'Comprovació: '+a+' · ('+x+' + '+b+') = '+rhs+' ✓'
+    ];
+
+  } else {
+    // 1r ESO: problemes de context. Els tipus 7 i 8 donen més pes als problemes.
+    const probs=[
+      {txt:'Penso en un nombre, el multiplico per 3 i li sumo 5. El resultat és 26.',eq:'3x + 5 = 26',x:7,w:[12,9,21,6]},
+      {txt:'El doble d’un nombre més 8 és igual a 20.',eq:'2x + 8 = 20',x:6,w:[14,10,4,12]},
+      {txt:'Cinc vegades un nombre menys 3 és igual a 17.',eq:'5x − 3 = 17',x:4,w:[20,14,5,3]},
+      {txt:'Un nombre multiplicat per 4 dóna 36.',eq:'4x = 36',x:9,w:[32,40,4,36]},
+      {txt:'Un nombre menys 11 és igual a 7.',eq:'x − 11 = 7',x:18,w:[4,11,7,16]},
+      {txt:'El triple d’un nombre augmentat en 2 és 14.',eq:'3x + 2 = 14',x:4,w:[12,16,6,3]}
+    ];
+    const pr=probs[rnd(0,probs.length-1)];
+
+    question='🌍 <b>'+pr.txt+'</b><br><small>Planteja l’equació i troba x.</small>';
+    correct='x = '+pr.x;
+    alts=[String(pr.x),'x='+pr.x];
+    opts=uniq4(correct,pr.w.map(xOpt));
+
+    guide=[
+      'Representa el nombre desconegut amb x',
+      'Tradueix, en el mateix ordre, les operacions que descriu l’enunciat fins a formar una igualtat',
+      'Resol l’equació desfent les operacions en ordre invers i aplicant sempre la mateixa operació als dos membres',
+      'Comprova que el valor obtingut compleix la situació inicial'
+    ];
+
+    solution=[
+      'Equació: '+pr.eq,
+      'Resolent-la obtenim x = <b>'+pr.x+'</b>',
+      'Comprovació correcta ✓'
+    ];
+  }
+
+  return {
+    topicId:type===5||type===6?'equacions2':'equacions',
+    type,
+    course:type===5||type===6?'2n':'1r',
+    question,
+    correct,
+    alts,
+    options:opts,
+    guide,
+    solution
+  };
+}
+function genEquacionsAmpliacio(){
+  const t=shuffle([5,6])[0];
+  const ex=genEquacions(t);
+  return Object.assign({},ex,{topicId:'equacions2',type:t});
+}
+
+
+
+/* ── PENSAMENT COMPUTACIONAL · 1r ESO ─────────────────────── */
+function genComputacional(){
+  const type=rnd(1,6);
+  let question,correct,alts=[],opts,guide,solution;
+
+  if(type===1){
+    const start=rnd(2,12),add=rnd(2,8),mul=rnd(2,5);
+    const res=(start+add)*mul;
+    question=`Executa l'algorisme sobre el nombre <b>${start}</b>:<br>1) suma ${add}; 2) multiplica el resultat per ${mul}. Quin valor final obtens?`;
+    correct=String(res);alts=[correct];
+    opts=uniq4(correct,[String(start+add*mul),String(start*mul+add),String(start+add+mul),String((start-add)*mul),String(start*add*mul),String(res+mul),String(res-add),String(start*mul-add)]);
+    guide=['Llegeix totes les instruccions abans de començar','Executa-les una a una i respecta l’ordre indicat','No facis totes les operacions com si fossin una sola expressió sense parèntesis'];
+    solution=[`Primer: ${start}+${add}=${start+add}`,`Després: ${start+add}·${mul}=<b>${res}</b>`];
+  }else if(type===2){
+    const start=rnd(1,10),inc=rnd(2,7),rep=rnd(3,6),res=start+inc*rep;
+    question=`Comença amb <b>${start}</b>. Repeteix <b>${rep} vegades</b> la instrucció «suma ${inc}». Quin valor final obtens?`;
+    correct=String(res);alts=[correct];
+    opts=uniq4(correct,[String((start+inc)*rep),String(start+inc),String(inc*rep),String(start+rep),String(start+inc*(rep-1)),String(start+inc*(rep+1))]);
+    guide=['Identifica quina instrucció es repeteix','Calcula l’efecte total de repetir-la el nombre de vegades indicat','Afegeix aquest canvi al valor inicial'];
+    solution=[`Canvi total: ${rep}·${inc}=${rep*inc}`,`${start}+${rep*inc}=<b>${res}</b>`];
+  }else if(type===3){
+    const n=rnd(4,30),even=n%2===0;
+    const res=even?n/2:3*n+1;
+    question=`Algorisme: «Si el nombre és parell, divideix-lo entre 2; si és senar, multiplica'l per 3 i suma 1». Què obtens si el nombre inicial és <b>${n}</b>?`;
+    correct=String(res);alts=[correct];
+    const other=even?3*n+1:n/2;
+    opts=uniq4(correct,[String(other),String(n+1),String(2*n),String(Math.abs(n-2))]);
+    guide=['Comprova primer si el nombre inicial és parell o senar','Aplica només la branca de l’algorisme que correspon','No executis les dues branques'];
+    solution=[`El nombre ${n} és ${even?'parell':'senar'}.`,`Apliquem la branca corresponent i obtenim <b>${res}</b>.`];
+  }else if(type===4){
+    const a=rnd(2,10),k=rnd(2,7),m=rnd(2,5),good1=a+k,good2=good1*m;
+    const badStep=rnd(1,2);
+    const shown1=badStep===1?good1+1:good1;
+    const shown2=badStep===2?good2+m:shown1*m;
+    question=`Un alumne executa: valor inicial ${a}; Pas 1: suma ${k} → <b>${shown1}</b>; Pas 2: multiplica per ${m} → <b>${shown2}</b>. Quin és el primer pas incorrecte?`;
+    correct='Pas '+badStep;alts=['pas '+badStep,String(badStep)];
+    opts=uniq4(correct,['Pas 1','Pas 2','Cap pas','Tots dos passos']);
+    guide=['Recalcula el primer pas a partir del valor inicial','Només si el primer és correcte, comprova el següent','Busca el primer punt on el resultat deixa de coincidir'];
+    solution=[`Pas 1 correcte seria: ${a}+${k}=${good1}`,`Pas 2 correcte seria: ${good1}·${m}=${good2}`,`Primer error: <b>Pas ${badStep}</b>.`];
+  }else if(type===5){
+    const op=rnd(1,4),a=rnd(3,12);let k,res,label,wrongs;
+    if(op===1){k=rnd(2,9);res=a+k;label='sumar '+k;wrongs=['restar '+k,'multiplicar per '+k,'dividir entre '+k,'sumar '+(k+1)];}
+    else if(op===2){k=rnd(2,Math.min(8,a-1));res=a-k;label='restar '+k;wrongs=['sumar '+k,'multiplicar per '+k,'dividir entre '+k,'restar '+(k+1)];}
+    else if(op===3){k=rnd(2,5);res=a*k;label='multiplicar per '+k;wrongs=['sumar '+k,'restar '+k,'dividir entre '+k,'multiplicar per '+(k+1)];}
+    else {k=[2,3,4][rnd(0,2)];const base=rnd(2,8),a2=base*k;res=base;question=`Quina instrucció transforma <b>${a2}</b> en <b>${res}</b>?`;label='dividir entre '+k;correct=label;alts=[label];opts=uniq4(correct,['multiplicar per '+k,'sumar '+k,'restar '+k,'dividir entre '+(k+1)]);guide=['Compara el valor inicial amb el final','Decideix quina operació desfà la diferència o el factor entre tots dos'];solution=[`${a2} ÷ ${k} = ${res}`,`Instrucció: <b>${label}</b>.`];return {topicId:'computacional',type,question,correct,alts,options:opts,guide,solution};}
+    question=`Quina instrucció transforma <b>${a}</b> en <b>${res}</b>?`;
+    correct=label;alts=[label];opts=uniq4(correct,wrongs);
+    guide=['Compara el valor inicial amb el final','Decideix si el canvi és additiu o multiplicatiu','Comprova la instrucció aplicant-la al valor inicial'];
+    solution=[`La instrucció correcta és <b>${label}</b>.`];
+  }else{
+    const limit=rnd(8,15),d=rnd(2,6),n=rnd(4,20),greater=n>limit,res=greater?n-d:n+d;
+    question=`Algorisme: «Si x és més gran que ${limit}, resta ${d}; en cas contrari, suma ${d}». Quin resultat dona per <b>x=${n}</b>?`;
+    correct=String(res);alts=[correct];
+    opts=uniq4(correct,[String(greater?n+d:n-d),String(n),String(limit+d),String(greater?n-2*d:n+2*d),String(limit-d)]);
+    guide=['Compara primer x amb el valor de la condició','Decideix quina de les dues instruccions s’ha d’executar','Aplica només aquesta instrucció'];
+    solution=[`${n} ${greater?'és més gran':'no és més gran'} que ${limit}.`,`Resultat: <b>${res}</b>.`];
+  }
+  return {topicId:'computacional',type,question,correct,alts,options:opts,guide,solution};
+}
+
+/* ── TEMES ──────────────────────────────────────────────────── */
+const TOPICS=[
+  // ── 1r ESO ───────────────────────────────────────────────────────────
+  {id:'traduccio',course:'1r',exam1r:true,icon:'🔄',name:'Traducció al llenguatge algebraic',short:'De paraules a expressions i viceversa',theoryKey:'traduccio',gen:genTraduccio},
+  {id:'patrons',course:'1r',exam1r:true,icon:'🔢',name:'Patrons numèrics i geomètrics',short:'Successions, regles i figures',theoryKey:'patrons',gen:genPatrons},
+  {id:'monomis',course:'1r',exam1r:true,icon:'🧮',name:'Expressions: termes i coeficients',short:'Coeficient, terme independent i termes semblants',theoryKey:'monomis',gen:genMonomis},
+  {id:'simplificacio',course:'1r',exam1r:true,icon:'✂️',name:'Simplificació d\'expressions',short:'Reduir expressions lineals senzilles',theoryKey:'simplificacio',gen:genSimplificacio},
+  {id:'equacions',course:'1r',exam1r:true,icon:'⚖️',name:'Equacions de primer grau',short:'x+b=c · ax=b · ax+b=c · problemes senzills',theoryKey:'equacions',gen:genEquacions},
+  {id:'computacional',course:'1r',exam1r:true,icon:'🧠',name:'Pensament computacional',short:'Algorismes, iteracions, condicions i depuració',theoryKey:'computacional',gen:genComputacional},
+
+  // ── ⭐ AMPLIACIÓ · PREPARA 2n ESO ────────────────────────────────────
+  {id:'patrons2',course:'2n',exam1r:false,icon:'🔢',name:'Terme general de successions',short:'⭐ Ampliació · Regla algebraica i terme enèsim',theoryKey:'patrons2',gen:genPatronsAmpliacio},
+  {id:'monomis2',course:'2n',exam1r:false,icon:'✖️',name:'Monomis: grau i producte',short:'⭐ Ampliació · Potències, grau i multiplicació',theoryKey:'monomis2',gen:genMonomisAmpliacio},
+  {id:'simplificacio2',course:'2n',exam1r:false,icon:'🧩',name:'Simplificació avançada',short:'⭐ Ampliació · x² i expressions amb dues variables',theoryKey:'simplificacio2',gen:genSimplificacioAmpliacio},
+  {id:'equacions2',course:'2n',exam1r:false,icon:'⚖️',name:'Equacions avançades',short:'⭐ Ampliació · x als dos membres i parèntesis',theoryKey:'equacions2',gen:genEquacionsAmpliacio},
+
+];
+
+/* ── VARIETAT DE SESSIÓ ─────────────────────────────────────────────── */
+const variationMemory={};
+function variationKey(ex){
+  return String(ex&&ex.question||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
+}
+function resetVariationSession(topicId){
+  if(topicId) variationMemory[topicId]={seen:new Set(),queue:[],lastType:null};
+  else Object.keys(variationMemory).forEach(k=>delete variationMemory[k]);
+}
+function variedGenerator(topicId,baseGen){
+  return function(){
+    if(!variationMemory[topicId]) resetVariationSession(topicId);
+    const mem=variationMemory[topicId];
+    let ex=null,key='',tries=0;
+    while(tries<80){
+      tries++;
+      const cand=baseGen();
+      const candKey=variationKey(cand);
+      const repeat=mem.seen.has(candKey);
+      const sameType=mem.lastType!==null && String(cand.type)===String(mem.lastType);
+      if(!repeat && (!sameType || tries>55)){
+        ex=cand;key=candKey;break;
+      }
+    }
+    if(!ex){
+      // Si el banc temporal queda massa restringit, conservem només les 10 darreres.
+      while(mem.queue.length>10){const old=mem.queue.shift();mem.seen.delete(old);}
+      for(let i=0;i<40;i++){
+        const cand=baseGen(),candKey=variationKey(cand);
+        if(!mem.seen.has(candKey)){ex=cand;key=candKey;break;}
+      }
+    }
+    if(!ex){ex=baseGen();key=variationKey(ex);}
+    mem.seen.add(key);mem.queue.push(key);mem.lastType=ex.type;
+    while(mem.queue.length>60){const old=mem.queue.shift();mem.seen.delete(old);}
+    return ex;
+  };
+}
+TOPICS.forEach(t=>{t._baseGen=t.gen;t.gen=variedGenerator(t.id,t.gen);});
+
+/* ── PROBLEMES OBERTS · SENTIT ALGEBRAIC · 1r ESO ─────────── */
+const ALG_OPEN_FAMILIES=[
+  {id:'mix',name:'Barreja de tot',icon:'🎯'},
+  {id:'traduccio',name:'Llenguatge i variable',icon:'🔄'},
+  {id:'patrons',name:'Patrons',icon:'🔢'},
+  {id:'monomis',name:'Termes i coeficients',icon:'🧮'},
+  {id:'simplificacio',name:'Simplificació',icon:'✂️'},
+  {id:'equacions',name:'Equacions i contextos',icon:'⚖️'},
+  {id:'computacional',name:'Pensament computacional',icon:'🧠'}
+];
+const ALG_OPEN_PATTERNS=[];
+function algAdd(id,family,topicId,diff,gen){ALG_OPEN_PATTERNS.push({id,family,topicId,diff,gen});}
+function algProblem(o){
+  return Object.assign({patternId:'',family:'',topicId:'',diff:1,question:'',hint:[],solution:[],answer:null},o,{type:o.patternId});
+}
+function algNumAnswer(v,tol=0.001,unit=''){
+  const val=Number(v);
+  return {val:String(Number.isInteger(val)?val:Math.round(val*100)/100)+(unit?(' '+unit):''),check(input){
+    const m=String(input).replace(',','.').match(/-?\d+(?:\.\d+)?/);if(!m)return false;
+    return Math.abs(Number(m[0])-val)<=tol;
+  }};
+}
+function algExprAnswer(v,alts=[]){return {val:v,check(input){return openOk(v,alts,input);}};}
+function algTextAnswer(v,alts=[]){
+  const canon=[v,...alts].map(x=>norm(String(x)).replace(/[àá]/g,'a').replace(/[èé]/g,'e').replace(/[íï]/g,'i').replace(/[òó]/g,'o').replace(/[úü]/g,'u'));
+  return {val:v,check(input){const ni=norm(String(input)).replace(/[àá]/g,'a').replace(/[èé]/g,'e').replace(/[íï]/g,'i').replace(/[òó]/g,'o').replace(/[úü]/g,'u');return canon.includes(ni);}};
+}
+function algDiffLabel(d){return d===1?'Bàsic':d===2?'Mitjà':'Repte';}
+function algTopicName(id){const t=TOPICS.find(x=>x.id===id);return t?t.name:id;}
+
+// LLENGUATGE I VARIABLE (7)
+algAdd('T1','traduccio','traduccio',1,()=>{const p=rnd(3,12);return algProblem({patternId:'T1',family:'traduccio',topicId:'traduccio',diff:1,question:`Una entrada costa <b>${p} €</b>. Escriu l'expressió del cost de <b>x entrades</b>.`,answer:algExprAnswer(`${p}x`,[`x·${p}`,`${p}·x`]),hint:['Identifica quina quantitat es repeteix per cada entrada','Representa el nombre d’entrades amb x'],solution:[`Cost = preu per entrada · nombre d’entrades = <b>${p}x</b>.`]});});
+algAdd('T2','traduccio','traduccio',2,()=>{const f=rnd(2,6),p=rnd(1,4);return algProblem({patternId:'T2',family:'traduccio',topicId:'traduccio',diff:2,question:`Un servei cobra <b>${f} € fixos</b> i <b>${p} € per ús</b>. Escriu el cost total per <b>x usos</b>.`,answer:algExprAnswer(`${p}x+${f}`,[`${f}+${p}x`]),hint:['Separa el cost que depèn de x del cost que es paga una sola vegada'],solution:[`Cost variable: ${p}x; cost fix: ${f}.`,`Expressió: <b>${p}x + ${f}</b>.`]});});
+algAdd('T3','traduccio','traduccio',1,()=>{const k=rnd(2,9);return algProblem({patternId:'T3',family:'traduccio',topicId:'traduccio',diff:1,question:`En Martí té <b>x anys</b>. Quina expressió representa l'edat que tenia fa <b>${k} anys</b>?`,answer:algExprAnswer(`x-${k}`),hint:['Anar cap enrere en el temps disminueix l’edat actual'],solution:[`Edat de fa ${k} anys: <b>x − ${k}</b>.`]});});
+algAdd('T4','traduccio','traduccio',2,()=>{const h=rnd(2,9);return algProblem({patternId:'T4',family:'traduccio',topicId:'traduccio',diff:2,question:`Un rectangle té base <b>x cm</b> i altura <b>${h} cm</b>. Escriu una expressió simplificada per al perímetre.`,answer:algExprAnswer(`2x+${2*h}`,[`${2*h}+2x`]),hint:['El perímetre suma dues bases i dues altures','Agrupa els dos termes que contenen x'],solution:[`P = 2x + 2·${h} = <b>2x + ${2*h}</b>.`]});});
+algAdd('T5','traduccio','traduccio',1,()=>{const a=rnd(2,7),b=rnd(1,9),x=rnd(1,8),r=a*x+b;return algProblem({patternId:'T5',family:'traduccio',topicId:'traduccio',diff:1,question:`Si <b>x=${x}</b>, quin valor té l'expressió <b>${a}x+${b}</b>?`,answer:algNumAnswer(r),hint:['Substitueix x pel valor indicat','Calcula primer el producte i després incorpora el terme independent'],solution:[`${a}·${x}+${b}=${a*x}+${b}=<b>${r}</b>.`]});});
+algAdd('T6','traduccio','traduccio',2,()=>{const a=rnd(2,6),b=rnd(2,8);return algProblem({patternId:'T6',family:'traduccio',topicId:'traduccio',diff:2,question:`Tradueix al llenguatge algebraic: <b>«${a} vegades un nombre, disminuït en ${b}»</b>.`,answer:algExprAnswer(`${a}x-${b}`),hint:['Representa el nombre amb x','Respecta l’ordre de les operacions descrites'],solution:[`«${a} vegades un nombre» → ${a}x`,`«disminuït en ${b}» → <b>${a}x − ${b}</b>.`]});});
+algAdd('T7','traduccio','traduccio',2,()=>{const a=rnd(2,5),b=rnd(1,6);return algProblem({patternId:'T7',family:'traduccio',topicId:'traduccio',diff:2,question:`Quina expressió representa <b>${a} vegades la suma d'un nombre i ${b}</b>?`,answer:algExprAnswer(`${a}(x+${b})`,[`${a}x+${a*b}`]),hint:['La multiplicació afecta tota la suma','Pensa si cal agrupar la suma abans de multiplicar'],solution:[`La suma és x+${b}.`,`Multipliquem tota la suma: <b>${a}(x+${b})</b>.`]});});
+
+// PATRONS (7)
+algAdd('P1','patrons','patrons',1,()=>{const a=rnd(2,15),d=rnd(2,8),seq=[a,a+d,a+2*d,a+3*d],r=a+4*d;return algProblem({patternId:'P1',family:'patrons',topicId:'patrons',diff:1,question:`Continua el patró: <b>${seq.join(', ')}, …</b>`,answer:algNumAnswer(r),hint:['Compara termes consecutius i busca un canvi constant'],solution:[`Cada terme augmenta en ${d}.`,`Següent: <b>${r}</b>.`]});});
+algAdd('P2','patrons','patrons',1,()=>{const a=rnd(2,12),d=rnd(2,7),vals=[a,a+d,a+2*d,a+3*d,a+4*d],pos=rnd(1,3),miss=vals[pos];vals[pos]='?';return algProblem({patternId:'P2',family:'patrons',topicId:'patrons',diff:1,question:`Quin nombre falta? <b>${vals.join(', ')}</b>`,answer:algNumAnswer(miss),hint:['Comprova el canvi entre els termes que sí coneixes','Mantén la mateixa regla a tots els passos'],solution:[`La diferència constant és ${d}.`,`Falta <b>${miss}</b>.`]});});
+algAdd('P3','patrons','patrons',1,()=>{const a=rnd(1,5),m=rnd(2,4),seq=[a,a*m,a*m*m,a*m*m*m],r=a*m*m*m*m;return algProblem({patternId:'P3',family:'patrons',topicId:'patrons',diff:1,question:`Continua el patró multiplicatiu: <b>${seq.join(', ')}, …</b>`,answer:algNumAnswer(r),hint:['Mira per quin factor es multiplica cada terme per obtenir el següent'],solution:[`Cada terme es multiplica per ${m}.`,`Següent: <b>${r}</b>.`]});});
+algAdd('P4','patrons','patrons',1,()=>{const start=rnd(8,20),inc=rnd(2,6);const day=rnd(4,7),r=start+(day-1)*inc;return algProblem({patternId:'P4',family:'patrons',topicId:'patrons',diff:1,question:`Una planta fa <b>${start} cm</b> el dia 1 i creix <b>${inc} cm cada dia</b>. Si el patró continua, quant farà el dia <b>${day}</b>?`,answer:algNumAnswer(r,.001,'cm'),hint:['Compta quants creixements hi ha des del dia 1 fins al dia demanat','Aplica el mateix augment a cada pas'],solution:[`Hi ha ${day-1} augments.`,`Altura: ${start}+${day-1}·${inc}=<b>${r} cm</b>.`]});});
+algAdd('P5','patrons','patrons',2,()=>{const n=rnd(3,7),r=3*n+1;return algProblem({patternId:'P5',family:'patrons',topicId:'patrons',diff:2,question:`Es construeix una fila de quadrats amb escuradents: 1 quadrat necessita 4 escuradents i cada quadrat nou comparteix un costat, de manera que n'afegeix 3. Quants escuradents calen per a <b>${n} quadrats</b>?`,answer:algNumAnswer(r),hint:['Parteix del primer quadrat','Compta quants quadrats nous s’afegeixen i què aporta cadascun'],solution:[`Primer quadrat: 4.`,`${n-1} quadrats nous aporten ${n-1}·3.`,`Total: <b>${r}</b>.`]});});
+algAdd('P6','patrons','patrons',2,()=>{const n=rnd(4,8),r=n*(n+1)/2;return algProblem({patternId:'P6',family:'patrons',topicId:'patrons',diff:2,question:`Un patró de punts forma files d'<b>1, 2, 3, …</b> punts. Quants punts hi ha en total en les primeres <b>${n} files</b>?`,answer:algNumAnswer(r),hint:['Suma les quantitats de punts de totes les files fins a la indicada'],solution:[`1+2+…+${n}=<b>${r}</b>.`]});});
+algAdd('P7','patrons','patrons',2,()=>{const a=rnd(3,10),d=rnd(2,6);return algProblem({patternId:'P7',family:'patrons',topicId:'patrons',diff:2,question:`Observa <b>${a}, ${a+d}, ${a+2*d}, ${a+3*d}, …</b>. Escriu amb paraules la regla que permet passar d'un terme al següent.`,answer:algTextAnswer(`sumar ${d}`,[`afegeix ${d}`,`afegir ${d}`,`+${d}`]),hint:['Compara un terme amb el següent','Descriu només l’operació que es repeteix'],solution:[`La regla és <b>sumar ${d}</b> a cada pas.`]});});
+
+// TERMES I COEFICIENTS (6)
+algAdd('M1','monomis','monomis',1,()=>{const a=rnd(2,12);return algProblem({patternId:'M1',family:'monomis',topicId:'monomis',diff:1,question:`Quin és el coeficient del terme <b>${a}x</b>?`,answer:algNumAnswer(a),hint:['El coeficient és el nombre que multiplica la part literal'],solution:[`En ${a}x, el coeficient és <b>${a}</b>.`]});});
+algAdd('M2','monomis','monomis',1,()=>{const a=rnd(2,9),b=rnd(1,12);return algProblem({patternId:'M2',family:'monomis',topicId:'monomis',diff:1,question:`Quin és el terme independent de <b>${a}x + ${b}</b>?`,answer:algNumAnswer(b),hint:['Busca el terme que no conté cap lletra'],solution:[`El terme sense x és <b>${b}</b>.`]});});
+algAdd('M3','monomis','monomis',1,()=>{const a=rnd(2,8),b=rnd(2,8);return algProblem({patternId:'M3',family:'monomis',topicId:'monomis',diff:1,question:`Redueix els termes semblants: <b>${a}x + ${b}x</b>.`,answer:algExprAnswer(`${a+b}x`),hint:['Els dos termes tenen la mateixa part literal','Opera només els coeficients'],solution:[`${a}x+${b}x=(${a}+${b})x=<b>${a+b}x</b>.`]});});
+algAdd('M4','monomis','monomis',1,()=>{const a=rnd(5,12),b=rnd(1,a-1);return algProblem({patternId:'M4',family:'monomis',topicId:'monomis',diff:1,question:`Redueix: <b>${a}x − ${b}x</b>.`,answer:algExprAnswer(`${a-b}x`),hint:['Mantén la x i resta els coeficients'],solution:[`${a}x−${b}x=(${a}−${b})x=<b>${a-b}x</b>.`]});});
+algAdd('M5','monomis','monomis',2,()=>{const a=rnd(2,7),b=rnd(2,9);return algProblem({patternId:'M5',family:'monomis',topicId:'monomis',diff:2,question:`A l'expressió <b>${a}x + ${b}</b>, quants termes hi ha?`,answer:algNumAnswer(2),hint:['Els termes queden separats pels signes de suma o resta'],solution:[`Els termes són ${a}x i ${b}: en total, <b>2 termes</b>.`]});});
+algAdd('M6','monomis','monomis',2,()=>{const a=rnd(2,6),b=rnd(1,9),x=rnd(2,7),r=a*x+b;return algProblem({patternId:'M6',family:'monomis',topicId:'monomis',diff:2,question:`L'expressió <b>${a}x+${b}</b> té coeficient ${a} i terme independent ${b}. Quin valor numèric té si <b>x=${x}</b>?`,answer:algNumAnswer(r),hint:['Substitueix la variable pel valor indicat','Calcula el producte abans de sumar el terme independent'],solution:[`${a}·${x}+${b}=<b>${r}</b>.`]});});
+
+// SIMPLIFICACIÓ (6)
+algAdd('S1','simplificacio','simplificacio',1,()=>{const a=rnd(2,8),b=rnd(2,8);return algProblem({patternId:'S1',family:'simplificacio',topicId:'simplificacio',diff:1,question:`Simplifica <b>${a}x + ${b}x</b>.`,answer:algExprAnswer(`${a+b}x`),hint:['Agrupa els termes que tenen la mateixa part literal'],solution:[`(${a}+${b})x=<b>${a+b}x</b>.`]});});
+algAdd('S2','simplificacio','simplificacio',1,()=>{const a=rnd(6,13),b=rnd(1,5);return algProblem({patternId:'S2',family:'simplificacio',topicId:'simplificacio',diff:1,question:`Simplifica <b>${a}x − ${b}x</b>.`,answer:algExprAnswer(`${a-b}x`),hint:['Opera els coeficients i conserva la part literal'],solution:[`(${a}−${b})x=<b>${a-b}x</b>.`]});});
+algAdd('S3','simplificacio','simplificacio',2,()=>{const a=rnd(2,6),c=rnd(2,6),b=rnd(2,9),d=rnd(1,b-1),coef=a+c,ind=b-d;return algProblem({patternId:'S3',family:'simplificacio',topicId:'simplificacio',diff:2,question:`Simplifica <b>${a}x + ${b} + ${c}x − ${d}</b>.`,answer:algExprAnswer(`${coef}x+${ind}`,[`${ind}+${coef}x`]),hint:['Agrupa per una banda els termes amb x','Agrupa per una altra els nombres sense x'],solution:[`(${a}x+${c}x)+(${b}−${d})`,`=<b>${coef}x+${ind}</b>.`]});});
+algAdd('S4','simplificacio','simplificacio',2,()=>{const a=rnd(2,6),b=rnd(2,6),coef=a+b;return algProblem({patternId:'S4',family:'simplificacio',topicId:'simplificacio',diff:2,question:`En una activitat, un grup recull <b>${a}x</b> taps i un altre <b>${b}x</b> taps. Escriu de manera simplificada el total.`,answer:algExprAnswer(`${coef}x`),hint:['Les dues quantitats tenen la mateixa part literal','Suma els coeficients'],solution:[`${a}x+${b}x=<b>${coef}x</b>.`]});});
+algAdd('S5','simplificacio','simplificacio',2,()=>{const a=rnd(2,6),b=rnd(1,8),coef=a+1;return algProblem({patternId:'S5',family:'simplificacio',topicId:'simplificacio',diff:2,question:`Simplifica <b>x + ${a}x + ${b}</b>.`,answer:algExprAnswer(`${coef}x+${b}`,[`${b}+${coef}x`]),hint:['Recorda que x té coeficient 1','Agrupa només els termes semblants'],solution:[`x+${a}x=(1+${a})x=${coef}x`,`Resultat: <b>${coef}x+${b}</b>.`]});});
+algAdd('S6','simplificacio','simplificacio',2,()=>{const a=rnd(2,5),b=rnd(a+1,a+6),coef=a-b;return algProblem({patternId:'S6',family:'simplificacio',topicId:'simplificacio',diff:2,question:`Simplifica <b>${a}x − ${b}x + 4</b>.`,answer:algExprAnswer(`${coef}x+4`,[`4${coef<0?'':'+'}${coef}x`,`4+${coef}x`]),hint:['Resta els coeficients dels termes amb x','El terme independent no es pot combinar amb x'],solution:[`(${a}−${b})x=${coef}x`,`Resultat: <b>${coef}x+4</b>.`]});});
+
+// EQUACIONS I CONTEXTOS (10)
+algAdd('E1','equacions','equacions',1,()=>{const x=rnd(2,15),b=rnd(2,10),c=x+b;return algProblem({patternId:'E1',family:'equacions',topicId:'equacions',diff:1,question:`Resol <b>x + ${b} = ${c}</b>.`,answer:algNumAnswer(x),hint:['Desfés la suma aplicant l’operació inversa als dos membres'],solution:[`x=${c}−${b}=<b>${x}</b>.`]});});
+algAdd('E2','equacions','equacions',1,()=>{const x=rnd(5,20),b=rnd(2,Math.min(10,x-1)),c=x-b;return algProblem({patternId:'E2',family:'equacions',topicId:'equacions',diff:1,question:`Resol <b>x − ${b} = ${c}</b>.`,answer:algNumAnswer(x),hint:['Desfés la resta mantenint l’equivalència dels dos membres'],solution:[`x=${c}+${b}=<b>${x}</b>.`]});});
+algAdd('E3','equacions','equacions',1,()=>{const a=rnd(2,9),x=rnd(2,12),c=a*x;return algProblem({patternId:'E3',family:'equacions',topicId:'equacions',diff:1,question:`Resol <b>${a}x = ${c}</b>.`,answer:algNumAnswer(x),hint:['Desfés la multiplicació dividint els dos membres pel coeficient de x'],solution:[`x=${c}÷${a}=<b>${x}</b>.`]});});
+algAdd('E4','equacions','equacions',2,()=>{const a=rnd(2,7),x=rnd(2,12),b=rnd(1,9),c=a*x+b;return algProblem({patternId:'E4',family:'equacions',topicId:'equacions',diff:2,question:`Resol <b>${a}x + ${b} = ${c}</b>.`,answer:algNumAnswer(x),hint:['Elimina primer el terme independent','Després desfés la multiplicació pel coeficient'],solution:[`${a}x=${c}−${b}=${a*x}`,`x=${a*x}÷${a}=<b>${x}</b>.`]});});
+algAdd('E5','equacions','equacions',2,()=>{const a=rnd(2,7),x=rnd(3,12),b=rnd(1,Math.min(9,a*x-1)),c=a*x-b;return algProblem({patternId:'E5',family:'equacions',topicId:'equacions',diff:2,question:`Resol <b>${a}x − ${b} = ${c}</b>.`,answer:algNumAnswer(x),hint:['Desfés primer la resta','Després divideix pel coeficient de x'],solution:[`${a}x=${c}+${b}=${a*x}`,`x=${a*x}÷${a}=<b>${x}</b>.`]});});
+algAdd('E6','equacions','equacions',2,()=>{const x=rnd(8,16),k=rnd(3,12),known=x+k;return algProblem({patternId:'E6',family:'equacions',topicId:'equacions',diff:2,question:`La Júlia té <b>${k} anys més</b> que en Pau. La Júlia té <b>${known} anys</b>. Quants anys té en Pau?`,answer:algNumAnswer(x,.001,'anys'),hint:['Representa l’edat d’en Pau amb x','Expressa l’edat de la Júlia sumant la diferència','Forma una equació senzilla i aïlla x'],solution:[`x+${k}=${known}`,`x=<b>${x} anys</b>.`]});});
+algAdd('E7','equacions','equacions',3,()=>{const x=rnd(3,10),a=rnd(5,15),saved=rnd(10,40),target=saved+a*x;return algProblem({patternId:'E7',family:'equacions',topicId:'equacions',diff:3,question:`Tens <b>${saved} €</b> estalviats i afegeixes <b>${a} € cada setmana</b>. Quantes setmanes necessites per arribar exactament a <b>${target} €</b>?`,answer:algNumAnswer(x,.001,'setmanes'),hint:['Representa les setmanes amb x','Suma els diners inicials i l’estalvi acumulat','Iguala l’expressió al total objectiu'],solution:[`${saved}+${a}x=${target}`,`${a}x=${target-saved}`,`x=<b>${x} setmanes</b>.`]});});
+algAdd('E8','equacions','equacions',3,()=>{const x=rnd(4,14),w=rnd(2,9),p=2*(x+w);return algProblem({patternId:'E8',family:'equacions',topicId:'equacions',diff:3,question:`Un rectangle té amplada <b>${w} cm</b> i llargada desconeguda. El perímetre és <b>${p} cm</b>. Quina és la llargada?`,answer:algNumAnswer(x,.001,'cm'),hint:['Representa la llargada amb x','Escriu el perímetre com dues llargades més dues amplades','Resol l’equació resultant'],solution:[`2x+2·${w}=${p}`,`2x=${p-2*w}`,`x=<b>${x} cm</b>.`]});});
+algAdd('E9','equacions','equacions',3,()=>{const x=rnd(4,15),base=rnd(3,12),p=2*x+base;return algProblem({patternId:'E9',family:'equacions',topicId:'equacions',diff:3,question:`Un triangle isòsceles té dos costats iguals de longitud desconeguda i una base de <b>${base} cm</b>. El perímetre és <b>${p} cm</b>. Quant mesura cadascun dels costats iguals?`,answer:algNumAnswer(x,.001,'cm'),hint:['Representa cada costat igual amb x','Suma els tres costats per formar el perímetre','Aïlla x'],solution:[`2x+${base}=${p}`,`2x=${p-base}`,`x=<b>${x} cm</b>.`]});});
+algAdd('E10','equacions','equacions',3,()=>{const n=rnd(3,9),price=rnd(3,12),fixed=rnd(1,6),total=price*n+fixed;return algProblem({patternId:'E10',family:'equacions',topicId:'equacions',diff:3,question:`Una activitat costa <b>${price} € per persona</b> i hi ha una taxa fixa de <b>${fixed} €</b>. El grup paga <b>${total} €</b>. Quantes persones hi ha?`,answer:algNumAnswer(n),hint:['Representa el nombre de persones amb x','El cost variable és preu per persona multiplicat per x','Afegeix la taxa fixa i iguala al total'],solution:[`${price}x+${fixed}=${total}`,`${price}x=${total-fixed}`,`x=<b>${n}</b>.`]});});
+
+// PENSAMENT COMPUTACIONAL (6)
+algAdd('C1','computacional','computacional',1,()=>{const a=rnd(2,10),k=rnd(2,7),m=rnd(2,5),r=(a+k)*m;return algProblem({patternId:'C1',family:'computacional',topicId:'computacional',diff:1,question:`Executa: comença amb <b>${a}</b>, suma ${k} i després multiplica per ${m}. Quin és el resultat?`,answer:algNumAnswer(r),hint:['Executa les instruccions exactament en l’ordre escrit'],solution:[`${a}+${k}=${a+k}`,`${a+k}·${m}=<b>${r}</b>.`]});});
+algAdd('C2','computacional','computacional',1,()=>{const a=rnd(1,8),k=rnd(2,6),rep=rnd(3,6),r=a+k*rep;return algProblem({patternId:'C2',family:'computacional',topicId:'computacional',diff:1,question:`Comença amb <b>${a}</b> i repeteix ${rep} vegades «suma ${k}». On acabes?`,answer:algNumAnswer(r),hint:['Calcula l’efecte total de repetir la mateixa instrucció'],solution:[`${rep}·${k}=${rep*k}`,`${a}+${rep*k}=<b>${r}</b>.`]});});
+algAdd('C3','computacional','computacional',2,()=>{const n=rnd(4,25),even=n%2===0,r=even?n/2:3*n+1;return algProblem({patternId:'C3',family:'computacional',topicId:'computacional',diff:2,question:`Regla: si n és parell, n÷2; si és senar, 3n+1. Quin valor produeix per <b>n=${n}</b>?`,answer:algNumAnswer(r),hint:['Decideix primer quina condició compleix n','Aplica només la branca corresponent'],solution:[`${n} és ${even?'parell':'senar'}.`,`Resultat: <b>${r}</b>.`]});});
+algAdd('C4','computacional','computacional',2,()=>{const a=rnd(2,8),k=rnd(2,6),m=rnd(2,4),good=a+k,bad=good+1;return algProblem({patternId:'C4',family:'computacional',topicId:'computacional',diff:2,question:`Algorisme: inicia amb ${a}; suma ${k}; multiplica per ${m}. Un alumne escriu: «després del primer pas tinc <b>${bad}</b>». Quin pas conté el primer error?`,answer:algTextAnswer('pas 1',['1','primer pas']),hint:['Recalcula el primer pas abans de revisar els següents'],solution:[`El primer pas hauria de donar ${a}+${k}=${good}.`,`Per tant, el primer error és al <b>pas 1</b>.`]});});
+algAdd('C5','computacional','computacional',2,()=>{const a=rnd(3,10),k=rnd(2,7),r=a+k;return algProblem({patternId:'C5',family:'computacional',topicId:'computacional',diff:2,question:`Quina instrucció falta per transformar <b>${a}</b> en <b>${r}</b>?`,answer:algTextAnswer(`sumar ${k}`,[`+${k}`,`afegeix ${k}`,`afegir ${k}`]),hint:['Compara la diferència entre el valor inicial i el final'],solution:[`${a}+${k}=${r}.`,`Falta la instrucció <b>sumar ${k}</b>.`]});});
+algAdd('C6','computacional','computacional',2,()=>{const lim=rnd(7,14),d=rnd(2,6),n=rnd(4,20),gt=n>lim,r=gt?n-d:n+d;return algProblem({patternId:'C6',family:'computacional',topicId:'computacional',diff:2,question:`Si x>${lim}, resta ${d}; si no, suma ${d}. Quin resultat dona per <b>x=${n}</b>?`,answer:algNumAnswer(r),hint:['Comprova la condició abans de fer cap operació','Escull només una de les dues branques'],solution:[`${n} ${gt?'compleix':'no compleix'} x>${lim}.`,`Resultat: <b>${r}</b>.`]});});
+
+const algOpenCfg={family:'mix',nq:10,diff:0};
+let algOpenSession={active:false,problems:[],idx:0,correct:0,answered:false};
+function algUnlockedCoreIds(){return TOPICS.map((t,i)=>({t,i})).filter(o=>o.t.course==='1r'&&isTopicUnlocked(o.i)).map(o=>o.t.id);}
+function algEligiblePatterns(family,diff,topicIds){
+  const allowed=new Set(topicIds||algUnlockedCoreIds());
+  return ALG_OPEN_PATTERNS.filter(p=>allowed.has(p.topicId)&&(family==='mix'||p.family===family)&&(!diff||p.diff===diff));
+}
+function algPickProblems(n,family='mix',diff=0,topicIds=null){
+  const pool=algEligiblePatterns(family,diff,topicIds);if(!pool.length)return [];
+  const chosen=[],used=new Set();let lastFamily=null,tries=0;
+  while(chosen.length<n&&used.size<pool.length&&tries<2000){
+    tries++;
+    const candidates=pool.filter(p=>!used.has(p.id)&&(p.family!==lastFamily||pool.filter(x=>!used.has(x.id)&&x.family!==lastFamily).length===0));
+    if(!candidates.length)break;
+    const pat=candidates[rnd(0,candidates.length-1)];
+    let prob;try{prob=pat.gen();}catch(e){continue;}
+    if(!prob||!prob.answer||typeof prob.answer.check!=='function')continue;
+    used.add(pat.id);lastFamily=pat.family;chosen.push(prob);
+  }
+  // Només repetim patrons si l'usuari demana més problemes que patrons disponibles.
+  while(chosen.length<n&&pool.length&&tries<4000){
+    tries++;const pat=pool[rnd(0,pool.length-1)];let prob;try{prob=pat.gen();}catch(e){continue;}if(prob&&prob.answer)chosen.push(prob);
+  }
+  return chosen;
+}
+function algRenderOpenHome(){
+  algOpenSession.active=true;
+  const unlocked=new Set(algUnlockedCoreIds());
+  const fams=ALG_OPEN_FAMILIES.filter(f=>f.id==='mix'||unlocked.has(f.id));
+  document.getElementById('algOpenHome').innerHTML=`
+    <div class="home-header"><h2>✍️ Problemes oberts</h2><p>Sentit Algebraic · 1r ESO · Interpreta, modelitza i resol</p></div>
+    <div class="intro-card"><p>Aquí no hi ha opcions per triar. Escriu la resposta final i utilitza la pista només si la necessites. Els problemes combinen llenguatge algebraic, patrons, expressions, equacions i pensament computacional. Alguns d'aquests problemes també poden aparèixer al Mode Examen.</p></div>
+    <div class="alg-open-toolbar">
+      <select id="algOpenFamily">${fams.map(f=>`<option value="${f.id}" ${algOpenCfg.family===f.id?'selected':''}>${f.icon} ${f.name}</option>`).join('')}</select>
+      <select id="algOpenN"><option value="5" ${algOpenCfg.nq===5?'selected':''}>5 problemes</option><option value="10" ${algOpenCfg.nq===10?'selected':''}>10 problemes</option><option value="15" ${algOpenCfg.nq===15?'selected':''}>15 problemes</option></select>
+      <select id="algOpenDiff"><option value="0">Totes les dificultats</option><option value="1">Bàsic</option><option value="2">Mitjà</option><option value="3">Repte</option></select>
+    </div>
+    <button class="btn-primary" onclick="algStartOpenSession()">Comença els problemes →</button>
+    <button class="btn-secondary" onclick="algExitOpenProblems()">← Tornar al Sentit Algebraic</button>`;
+  showScreen('screenOpenHome');
+}
+function startAlgebraProblems(){
+  document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Problemes oberts · Sentit Algebraic';
+  algRenderOpenHome();
+}
+function algExitOpenProblems(){algOpenSession.active=false;showHome();}
+function algStartOpenSession(){
+  algOpenCfg.family=document.getElementById('algOpenFamily').value;algOpenCfg.nq=Number(document.getElementById('algOpenN').value);algOpenCfg.diff=Number(document.getElementById('algOpenDiff').value);
+  const probs=algPickProblems(algOpenCfg.nq,algOpenCfg.family,algOpenCfg.diff);
+  if(!probs.length){alert('No hi ha prou problemes amb aquesta selecció. Prova una altra dificultat o família.');return;}
+  algOpenSession={active:true,problems:probs,idx:0,correct:0,answered:false};algRenderOpenProblem();showScreen('screenOpenProblem');
+}
+function algRenderOpenProblem(){
+  const p=algOpenSession.problems[algOpenSession.idx];algOpenSession.answered=false;
+  const family=ALG_OPEN_FAMILIES.find(f=>f.id===p.family);
+  document.getElementById('algOpenProblem').innerHTML=`
+    <div class="alg-open-card"><div class="alg-open-meta">Problema ${algOpenSession.idx+1}/${algOpenSession.problems.length} · ${algTopicName(p.topicId)} <span class="alg-open-family">${family?family.name:p.family}</span><span class="alg-open-diff">${algDiffLabel(p.diff)}</span></div><div class="alg-open-q">${p.question}</div></div>
+    <button class="btn-secondary" id="algHintBtn" onclick="algToggleHint()" style="margin-bottom:8px">💡 Mostrar pista</button>
+    <div class="alg-open-hint" id="algOpenHint">${(p.hint||[]).map(h=>'• '+h).join('<br>')}</div>
+    <input class="alg-open-input" id="algOpenInput" type="text" placeholder="Escriu la resposta final…" autocomplete="off" spellcheck="false">
+    <div id="algOpenFeedback"></div>
+    <button class="btn-primary" id="algOpenCheck" onclick="algCheckOpen()">Comprova ✓</button>
+    <button class="btn-primary" id="algOpenNext" onclick="algNextOpen()" style="display:none">Següent problema →</button>
+    <button class="btn-secondary" onclick="algRenderOpenHome()">← Canviar configuració</button>`;
+}
+function algToggleHint(){const b=document.getElementById('algOpenHint'),btn=document.getElementById('algHintBtn');b.classList.toggle('show');btn.textContent=b.classList.contains('show')?'🙈 Amagar pista':'💡 Mostrar pista';}
+function algCheckOpen(){
+  if(algOpenSession.answered)return;const p=algOpenSession.problems[algOpenSession.idx],inp=document.getElementById('algOpenInput'),val=inp.value.trim();if(!val)return;
+  const ok=p.answer.check(val);algOpenSession.answered=true;inp.disabled=true;inp.className='alg-open-input '+(ok?'ok':'ko');if(ok)algOpenSession.correct++;
+  const errObj={topicId:p.topicId,topicName:algTopicName(p.topicId),type:p.patternId,question:p.question,correct:p.answer.val,options:[],guide:[...(p.hint||[])],solution:[...(p.solution||[])]};if(!ok)registerError(errObj,val,'open');
+  document.getElementById('algOpenFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':`Resposta correcta: <b>${p.answer.val}</b>`}<div class="alg-open-solution">${(p.solution||[]).map((s,i)=>`<div><b>Pas ${i+1}:</b> ${s}</div>`).join('')}</div></div>`;
+  document.getElementById('algOpenCheck').style.display='none';document.getElementById('algOpenNext').style.display='block';document.getElementById('algOpenNext').textContent=algOpenSession.idx+1<algOpenSession.problems.length?'Següent problema →':'Veure resultat';
+}
+function algNextOpen(){algOpenSession.idx++;if(algOpenSession.idx<algOpenSession.problems.length){algRenderOpenProblem();return;}algRenderOpenResult();}
+function algRenderOpenResult(){
+  const total=algOpenSession.problems.length,pct=Math.round(algOpenSession.correct/total*100),emoji=pct>=90?'🏆':pct>=70?'👍':'💪';
+  document.getElementById('algOpenResult').innerHTML=`<div class="home-header"><h2>${emoji} Resultat</h2><p>Problemes oberts · Sentit Algebraic</p></div><div class="alg-open-summary"><div class="big">${algOpenSession.correct}/${total}</div><p>${pct}% d'encerts</p></div><button class="btn-primary" onclick="algStartOpenSession()">Repetir configuració</button><button class="btn-secondary" onclick="algRenderOpenHome()">Canviar configuració</button><button class="btn-secondary" onclick="algExitOpenProblems()">Tornar al menú</button>`;
+  showScreen('screenOpenResult');
+}
+function algGenerateExamProblems(n,topicIds){return algPickProblems(n,'mix',0,topicIds);}
+
+
+/* ── ESTAT ──────────────────────────────────────────────────── */
+let state={unlockedIds:[],done:[],errors:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
+function isTopicUnlocked(i){return state.unlockedIds.includes(TOPICS[i].id);}
+function loadState(){
+  try{
+    const s=JSON.parse(sessionStorage.getItem('sa1eso_v4')||'{}');
+    if(s.unlockedIds) state.unlockedIds=s.unlockedIds;
+    else if(s.unlocked) state.unlockedIds=TOPICS.slice(0,s.unlocked).map(t=>t.id);
+    if(s.done) state.done=s.done;
+  }catch(e){}
+
+  try{
+    const s=JSON.parse(localStorage.getItem('sa1eso_v4')||'{}');
+    if(s.unlockedIds&&s.unlockedIds.length>state.unlockedIds.length) state.unlockedIds=s.unlockedIds;
+    else if(s.unlocked&&s.unlocked>state.unlockedIds.length) state.unlockedIds=TOPICS.slice(0,s.unlocked).map(t=>t.id);
+    if(s.done&&s.done.length>state.done.length) state.done=s.done;
+    state.errors=Array.isArray(s.errors)?s.errors:[];
+  }catch(e){
+    state.errors=[];
+  }
+
+  const validIds=new Set(TOPICS.map(t=>t.id));
+  state.unlockedIds=state.unlockedIds.filter(id=>validIds.has(id));
+  state.done=state.done.filter(id=>validIds.has(id));
+  if(!state.unlockedIds.includes(TOPICS[0].id)) state.unlockedIds.unshift(TOPICS[0].id);
+  // Migració: si Equacions ja estava completat abans d'afegir Pensament computacional,
+  // desbloquegem el nou últim tema de 1r sense alterar la resta del progrés.
+  if(state.done.includes('equacions')&&!state.unlockedIds.includes('computacional'))state.unlockedIds.push('computacional');
+}
+
+function saveState(){
+  const data=JSON.stringify({
+    unlockedIds:state.unlockedIds,
+    done:state.done,
+    errors:Array.isArray(state.errors)?state.errors:[]
+  });
+  try{sessionStorage.setItem('sa1eso_v4',data);}catch(e){}
+  try{localStorage.setItem('sa1eso_v4',data);}catch(e){}
+}
+
+function registerError(ex,studentAnswer,source='practice'){
+  if(!ex)return;
+  if(!Array.isArray(state.errors))state.errors=[];
+
+  let topic=null;
+  if(ex.topicId) topic=TOPICS.find(t=>t.id===ex.topicId)||null;
+  if(!topic) topic=TOPICS[state.currentTopic]||null;
+
+  const error={
+    id:Date.now()+'_'+Math.random().toString(36).slice(2,8),
+    topicId:ex.topicId||(topic?topic.id:null),
+    topicName:ex.topicName||(topic?topic.name:'Tema'),
+    type:(ex.type!==undefined?ex.type:null),
+    question:ex.question||'',
+    correct:ex.correct,
+    answer:studentAnswer,
+    options:Array.isArray(ex.options)?[...ex.options]:[],
+    guide:Array.isArray(ex.guide)?[...ex.guide]:[],
+    solution:Array.isArray(ex.solution)?[...ex.solution]:[],
+    level:source==='exam'?0:state.level,
+    source,
+    timestamp:new Date().toISOString()
+  };
+
+  const last=state.errors[state.errors.length-1];
+  const sameAsLast=last &&
+    last.topicId===error.topicId &&
+    last.type===error.type &&
+    last.question===error.question &&
+    last.answer===error.answer &&
+    last.correct===error.correct &&
+    last.source===error.source;
+
+  if(!sameAsLast) state.errors.push(error);
+  saveState();
+}
+
+let currentEx=null;
+
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById('sidebar').style.display=(id==='screenHome')?'flex':'none';}
+
+function showHome(){
+  document.getElementById('navBack').style.display='none';
+  document.getElementById('navTitle').textContent='Sentit Algebraic · 1r ESO';
+  renderHome();showScreen('screenHome');
+}
+
+function renderHome(){
+  const grid=document.getElementById('topicsGrid');
+
+  let html='<div style="grid-column:1/-1;margin:2px 0 6px">'
+    +'<div style="font-weight:800;color:var(--primary);font-size:1rem">📘 Continguts de 1r d\'ESO</div>'
+    +'<div style="font-size:.82rem;color:var(--muted);margin-top:3px">Aquests són els continguts que poden aparèixer al Mode Examen.</div>'
+    +'</div>';
+
+  const coreIndexes=[];
+  const extensionIndexes=[];
+  TOPICS.forEach((t,i)=>{
+    if(t.course==='1r')coreIndexes.push(i);
+    else extensionIndexes.push(i);
+  });
+
+  function topicCard(i,isExtension){
+    const t=TOPICS[i];
+    const unlocked=isExtension?true:isTopicUnlocked(i);
+    const done=state.done.includes(t.id);
+    return '<div class="topic-card '+(!unlocked?'locked ':'')+(done?'done':'')+'" '
+      +'onclick="'+(unlocked?'selectTopic('+i+')':'')+'" '+(isExtension?'style="border-style:dashed"':'')+'>'
+      +'<div class="topic-icon">'+t.icon+'</div>'
+      +'<div class="topic-info"><h3>'+t.name+'</h3><p>'+t.short+'</p></div>'
+      +'<span class="topic-badge '+(done?'badge-done':(isExtension?'badge-app':(unlocked?'badge-active':'badge-locked')))+'">'
+      +(done?'✓ Fet':(isExtension?'Ampliació':(unlocked?'Practicar':'🔒')))+'</span></div>';
+  }
+
+  coreIndexes.forEach(i=>{html+=topicCard(i,false);});
+
+  const coreUnlocked=coreIndexes.filter(i=>isTopicUnlocked(i)).length;
+
+  if(coreUnlocked>=1)
+    html+='<div class="topic-card" onclick="startAlgebraProblems()" style="border:2px dashed var(--primary)">'
+      +'<div class="topic-icon">✍️</div>'
+      +'<div class="topic-info"><h3>Problemes oberts</h3><p>42 patrons · llenguatge, patrons, expressions, equacions i algorismes</p></div>'
+      +'<span class="topic-badge badge-active">Problemes</span></div>';
+
+  if(coreUnlocked>=5)
+    html+='<div class="topic-card" onclick="showApps()" style="border:2px dashed #8b5cf6">'
+      +'<div class="topic-icon">🌍</div>'
+      +'<div class="topic-info"><h3>Aplicacions Reals</h3><p>Calculadora d\'equacions, successió i valor numèric</p></div>'
+      +'<span class="topic-badge badge-app">Eines</span></div>';
+
+  if(coreUnlocked>=3)
+    html+='<div class="topic-card" onclick="startExam()" style="border:2px dashed var(--warn)">'
+      +'<div class="topic-icon">📝</div>'
+      +'<div class="topic-info"><h3>Mode Examen · 1r ESO</h3><p>10 preguntes · 7 exercicis + 3 problemes oberts</p></div>'
+      +'<span class="topic-badge badge-exam">Examen 1r</span></div>';
+
+  html+='<div style="grid-column:1/-1;margin:18px 0 6px;padding-top:14px;border-top:1px solid var(--border)">'
+    +'<div style="font-weight:800;color:#8b5cf6;font-size:1rem">⭐ Ampliació · prepara 2n d\'ESO</div>'
+    +'<div style="font-size:.82rem;color:var(--muted);margin-top:3px">És material opcional. <b>No entra mai al Mode Examen de 1r ESO.</b></div>'
+    +'</div>';
+
+  extensionIndexes.forEach(i=>{html+=topicCard(i,true);});
+
+  const errorCount=Array.isArray(state.errors)?state.errors.length:0;
+  html+='<div class="topic-card" onclick="showErrors()" style="border:2px dashed '+(errorCount?'var(--error)':'var(--border)')+';grid-column:1/-1">'
+    +'<div class="topic-icon">❌</div>'
+    +'<div class="topic-info"><h3>Errors guardats</h3><p>'+(errorCount?('Tens '+errorCount+' error'+(errorCount===1?'':'s')+' per repassar'):'Encara no tens errors guardats')+'</p></div>'
+    +'<span class="topic-badge '+(errorCount?'badge-exam':'badge-active')+'">'+(errorCount?'Repassar':'Veure')+'</span></div>';
+
+  grid.innerHTML=html;
+
+  const coreDone=coreIndexes.filter(i=>state.done.includes(TOPICS[i].id)).length;
+  document.getElementById('globalProgress').style.width=(coreIndexes.length?(coreDone/coreIndexes.length)*100:0)+'%';
+}
+
+function showErrors(){
+  const errors=Array.isArray(state.errors)?state.errors:[];
+  document.getElementById('navBack').style.display='block';
+  document.getElementById('navTitle').textContent='Errors guardats';
+  let html='<div class="home-header" style="padding-top:10px"><h2>❌ Errors guardats</h2><p>Repassa la pregunta original i l’explicació exacta que es va generar quan vas fallar.</p></div>';
+  if(!errors.length){
+    html+='<div class="app-card"><h3>✅ Cap error guardat</h3><p>Quan fallis un exercici, quedarà registrat automàticament aquí.</p></div>';
+  }else{
+    html+='<div style="margin-bottom:12px;color:var(--muted);font-size:.85rem">'+errors.length+' error'+(errors.length===1?'':'s')+' guardat'+(errors.length===1?'':'s')+'</div>';
+    [...errors].reverse().forEach((e,revIndex)=>{
+      const realIndex=errors.length-1-revIndex;
+      const date=e.timestamp?new Date(e.timestamp).toLocaleString('ca-ES',{dateStyle:'short',timeStyle:'short'}):'';
+      const typeTxt=(e.type!==null&&e.type!==undefined)?' · Tipus '+e.type:'';
+      const modeTxt=e.source==='exam'?'📝 Examen':('🧩 Pràctica · '+(e.level===2?'Nivell 2':'Nivell 1'));
+      const solId='savedSol_'+realIndex;
+      html+='<div class="app-card" style="border-left:4px solid var(--error);margin-bottom:12px">'
+        +'<div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><h3 style="margin:0 0 6px">❌ '+(e.topicName||'Tema')+'</h3><span style="font-size:.72rem;color:var(--muted)">'+date+'</span></div>'
+        +'<div style="margin:8px 0;line-height:1.5">'+(e.question||'Pregunta no disponible')+'</div>'
+        +'<div style="font-size:.86rem;margin-top:8px"><div>La teva resposta: <b style="color:var(--error)">'+(e.answer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+(e.correct??'—')+'</b></div><div style="color:var(--muted);margin-top:4px">'+modeTxt+typeTxt+'</div></div>';
+      if(Array.isArray(e.solution)&&e.solution.length){
+        html+='<button class="sol-btn" style="margin-top:9px" onclick="toggleSavedSolution(\''+solId+'\',this)">📘 Veure explicació</button>'
+          +'<div class="solution-box" id="'+solId+'">'+e.solution.map((x,j)=>'<div class="step"><b>Pas '+(j+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>';
+      }else{
+        html+='<div style="font-size:.78rem;color:var(--muted);margin-top:8px">Explicació no disponible: error desat amb una versió anterior.</div>';
+      }
+      html+='<button class="btn-secondary" onclick="deleteSavedError('+realIndex+')" style="margin-top:10px;border-color:var(--error);color:var(--error)">🗑️ Esborrar aquest error</button></div>';
+    });
+  }
+  if(errors.length) html+='<button class="btn-secondary" onclick="clearSavedErrors()" style="margin-top:8px;border-color:var(--error);color:var(--error)">🗑️ Esborrar tots els errors</button>';
+  html+='<button class="btn-secondary" onclick="showHome()" style="margin-top:8px">← Tornar al menú</button>';
+  document.getElementById('appContent').innerHTML=html;document.getElementById('sidebar').style.display='none';showScreen('screenApp');
+}
+
+function toggleSavedSolution(id,btn){
+  const box=document.getElementById(id);if(!box)return;
+  box.classList.toggle('show');
+  if(btn)btn.textContent=box.classList.contains('show')?'📕 Amaga explicació':'📘 Veure explicació';
+}
+function clearTopicErrors(topicId){
+  if(!Array.isArray(state.errors))state.errors=[];
+  state.errors=state.errors.filter(e=>e.topicId!==topicId);saveState();
+  const idx=TOPICS.findIndex(t=>t.id===topicId);if(idx>=0)selectTopic(idx);else showHome();
+}
+
+function deleteSavedError(index){
+  if(!Array.isArray(state.errors))state.errors=[];
+  if(index<0||index>=state.errors.length)return;
+  state.errors.splice(index,1);
+  saveState();
+  showErrors();
+}
+
+function clearSavedErrors(){
+  if(!Array.isArray(state.errors)||state.errors.length===0)return;
+  if(!confirm('Vols esborrar tots els errors guardats? Aquesta acció no es pot desfer.'))return;
+  state.errors=[];
+  saveState();
+  showErrors();
+}
+
+/* TABS teoria/exemple */
+function showTab(id){
+  document.getElementById('tabTheory').style.display=id==='tabTheory'?'block':'none';
+  document.getElementById('tabExample').style.display=id==='tabExample'?'block':'none';
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&id==='tabTheory')||(i===1&&id==='tabExample')));
+}
+
+function selectTopic(i){
+  state.currentTopic=i;state.level=1;state.mode='multi';state.exCount=0;state.correctStreak=0;
+  const t=TOPICS[i];const th=TEORIA[t.theoryKey];
+  resetVariationSession(t.id);
+  document.getElementById('navBack').style.display='block';
+  document.getElementById('navTitle').textContent=t.name;
+  // Teoria
+  let theoryHtml='<div class="theory-box"><h3>📖 '+th.title+'</h3><p>'+th.text+'</p>';
+  th.formulas.forEach(f=>{theoryHtml+='<div class="formula">'+f+'</div>';});
+  theoryHtml+='</div>';
+  // Exemple resolt
+  let exHtml='<div class="example-box"><h3>✏️ '+th.exemple.title+'</h3>';
+  th.exemple.steps.forEach((s,idx)=>{exHtml+='<div class="ex-step"><b>'+(idx+1)+'.</b> '+s+'</div>';});
+  exHtml+='</div>';
+  const topicErrors=(Array.isArray(state.errors)?state.errors:[]).filter(e=>e.topicId===t.id).slice(-5).reverse();
+  if(topicErrors.length){
+    theoryHtml+='<div class="app-card" style="border:1.5px solid #f0b0b0;background:#fffafa;margin-top:14px">'
+      +'<h3 style="color:var(--error);margin-bottom:10px">❌ Últims errors en aquest tema</h3>';
+    topicErrors.forEach(e=>{
+      const solId='topicSol_'+String(e.id||Math.random()).replace(/[^a-zA-Z0-9_]/g,'');
+      theoryHtml+='<div style="padding:9px 0;border-bottom:1px solid #fdeaea">'
+        +'<div style="line-height:1.45">'+(e.question||'Pregunta no disponible')+'</div>'
+        +'<div style="font-size:.82rem;margin-top:5px"><span style="color:var(--error)">La teva: <b>'+(e.answer??'—')+'</b></span> · '
+        +'<span style="color:var(--success)">Correcta: <b>'+(e.correct??'—')+'</b></span></div>';
+      if(Array.isArray(e.solution)&&e.solution.length){
+        theoryHtml+='<button class="sol-btn" style="margin-top:7px" onclick="toggleSavedSolution(\''+solId+'\',this)">📘 Veure explicació</button>'
+          +'<div class="solution-box" id="'+solId+'">'+e.solution.map((s,j)=>'<div class="step"><b>Pas '+(j+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div>';
+      }else{
+        theoryHtml+='<div style="font-size:.78rem;color:var(--muted);margin-top:6px">Explicació no disponible: error desat amb una versió anterior.</div>';
+      }
+      theoryHtml+='</div>';
+    });
+    theoryHtml+='<button class="btn-secondary" style="border-color:var(--error);color:var(--error);margin-top:10px" onclick="clearTopicErrors(\''+t.id+'\')">🗑️ Esborra errors d’aquest tema</button></div>';
+  }
+  document.getElementById('tabTheory').innerHTML=theoryHtml;
+  document.getElementById('tabExample').innerHTML=exHtml;
+  document.getElementById('tabTheory').style.display='block';
+  document.getElementById('tabExample').style.display='none';
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
+  document.getElementById('btnLvl1').classList.add('active');document.getElementById('btnLvl2').classList.remove('active');
+  document.getElementById('btnModeA').classList.add('active');document.getElementById('btnModeB').classList.remove('active');
+  showScreen('screenIntro');
+}
+
+function selectLevel(l){state.level=l;document.getElementById('btnLvl1').classList.toggle('active',l===1);document.getElementById('btnLvl2').classList.toggle('active',l===2);}
+function selectMode(m){state.mode=m;document.getElementById('btnModeA').classList.toggle('active',m==='multi');document.getElementById('btnModeB').classList.toggle('active',m==='open');}
+function startPractice(){state.exCount=0;state.correctStreak=0;showExercise();}
+
+function showExercise(){
+  state.answered=false;
+  currentEx=TOPICS[state.currentTopic].gen();
+  state.exCount++;
+  const goal=state.level===1?10:20;
+  document.getElementById('streakFill').style.width=Math.min(100,(state.correctStreak/goal*100))+'%';
+  document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal;
+  document.getElementById('exNum').textContent='Exercici '+state.exCount+' · Tema: '+TOPICS[state.currentTopic].name;
+  document.getElementById('exQuestion').innerHTML='<span class="q-text">'+currentEx.question+'</span>';
+  const gs=document.getElementById('guideSteps');
+  if(state.level===1){gs.style.display='block';gs.innerHTML='<h4>💡 Pistes:</h4>'+currentEx.guide.map(s=>'• '+s).join('<br>');}
+  else gs.style.display='none';
+  if(state.mode==='open'){
+    document.getElementById('optionsGrid').innerHTML='';
+    document.getElementById('openWrap').style.display='block';
+    const inp=document.getElementById('openInput');inp.value='';inp.className='open-input';inp.disabled=false;
+    document.getElementById('openHint').textContent='Pots escriure el número o "x = ..."';
+    setTimeout(()=>inp.focus(),80);
+  } else {
+    document.getElementById('openWrap').style.display='none';
+    document.getElementById('optionsGrid').innerHTML=currentEx.options.map((o,i)=>'<button class="opt-btn" onclick="selectAnswer('+i+',this)">'+o+'</button>').join('');
+  }
+  document.getElementById('feedbackArea').innerHTML='';
+  document.getElementById('btnNext').style.display='none';
+  document.getElementById('btnChangeTopic').style.display='none';
+  showScreen('screenExercise');
+}
+
+function checkOpen(){
+  if(state.answered)return;
+  const inp=document.getElementById('openInput');
+  const val=inp.value.trim();
+  if(!val)return;
+  const ok=openOk(currentEx.correct,currentEx.alts,val);
+  inp.className='open-input '+(ok?'ok':'ko');
+  inp.disabled=true;
+  processAnswer(ok,val);
+}
+
+function selectAnswer(idx,btn){
+  if(state.answered)return;
+  const studentAnswer=currentEx.options[idx];
+  const ok=studentAnswer===currentEx.correct;
+  document.querySelectorAll('.opt-btn').forEach(b=>{b.disabled=true;if(b.textContent===currentEx.correct||b.innerHTML===currentEx.correct)b.classList.add('correct');});
+  if(!ok)btn.classList.add('wrong');
+  processAnswer(ok,studentAnswer);
+}
+
+function processAnswer(ok,studentAnswer){
+  state.answered=true;
+  const goal=state.level===1?10:20;
+  if(ok){
+    state.correctStreak++;
+    document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ok"><h4>✅ Correcte!</h4>Molt bé, segueix així.</div>';
+    if(state.correctStreak>=goal)markTopicDone();
+  } else {
+    state.correctStreak=Math.max(0,state.correctStreak-1);
+    registerError(currentEx,studentAnswer,'practice');
+    document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4>'
+      +'La resposta correcta és: <b>'+currentEx.correct+'</b><br>'
+      +'<button class="sol-btn" onclick="toggleSolution(this)">Veure solució pas a pas</button>'
+      +'<div class="solution-box" id="solBox">'+currentEx.solution.map((s,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div></div>';
+  }
+  document.getElementById('streakFill').style.width=Math.min(100,(state.correctStreak/goal*100))+'%';
+  document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal;
+  document.getElementById('btnNext').style.display='block';
+  if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
+}
+
+function toggleSolution(btn){const box=document.getElementById('solBox');box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'Amagar solució':'Veure solució pas a pas';}
+function markTopicDone(){
+  const t=TOPICS[state.currentTopic];
+  if(!state.done.includes(t.id)){
+    state.done.push(t.id);
+    if(t.course==='1r'){
+      const nextCoreIndex=TOPICS.findIndex((x,i)=>i>state.currentTopic&&x.course==='1r');
+      if(nextCoreIndex>=0&&!isTopicUnlocked(nextCoreIndex))state.unlockedIds.push(TOPICS[nextCoreIndex].id);
+    }
+    saveState();
+  }
+}
+function nextExercise(){
+  const goal=state.level===1?10:20;
+  if(state.correctStreak>=goal&&state.done.includes(TOPICS[state.currentTopic].id)){showCongrats();return;}
+  showExercise();
+}
+function showCongrats(){
+  const t=TOPICS[state.currentTopic];
+  let nextIndex=-1;
+  if(t.course==='1r') nextIndex=TOPICS.findIndex((x,i)=>i>state.currentTopic&&x.course==='1r');
+  else nextIndex=TOPICS.findIndex((x,i)=>i>state.currentTopic&&x.course==='2n');
+  document.getElementById('feedbackArea').innerHTML='<div class="congrats"><div class="trophy">🏆</div><h2>Excel·lent!</h2><p>Has dominat <b>'+t.name+'</b>!</p>'
+    +'<button class="btn-primary" onclick="showHome()">Tornar al menú</button>'
+    +(nextIndex>=0?'<button class="btn-secondary" onclick="selectTopic('+nextIndex+')">Següent tema →</button>':'')+'</div>';
+  document.getElementById('btnNext').style.display='none';
+}
+function goBack(){
+  const active=document.querySelector('.screen.active');
+  const id=active?active.id:'';
+  if(id==='screenOpenProblem'||id==='screenOpenResult'){algRenderOpenHome();return;}
+  if(id==='screenOpenHome'){algExitOpenProblems();return;}
+  showHome();
+}
+
+/* ── EXAMEN · 7 EXERCICIS + 3 PROBLEMES OBERTS ───────────── */
+function startExam(){
+  state.examQs=[];state.examLog=[];state.examIdx=0;state.examScore=0;
+  const avail=TOPICS.filter((t,i)=>t.course==='1r'&&t.exam1r!==false&&isTopicUnlocked(i));
+  if(!avail.length)return;
+  avail.forEach(t=>resetVariationSession(t.id));
+
+  const normal=[];const used=new Set();let cursor=0,tries=0;
+  while(normal.length<7&&tries<1500){
+    tries++;const t=avail[cursor%avail.length];cursor++;
+    let ex;try{ex=t.gen();}catch(e){continue;}
+    if(!ex)continue;
+    const key=(t.id+'|'+String(ex.question).replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim());
+    if(used.has(key))continue;used.add(key);
+    normal.push(Object.assign({},ex,{topicId:ex.topicId||t.id,topicName:t.name,isOpenProblem:false}));
+  }
+  const open=algGenerateExamProblems(3,avail.map(t=>t.id)).map(p=>Object.assign({},p,{isOpenProblem:true,topicName:algTopicName(p.topicId),correct:p.answer.val,guide:[...(p.hint||[])],options:[]}));
+  const openPositions=new Set([2,6,9]);let ni=0,oi=0;
+  for(let i=0;i<10;i++){
+    if(openPositions.has(i)&&oi<open.length)state.examQs.push(open[oi++]);
+    else if(ni<normal.length)state.examQs.push(normal[ni++]);
+    else if(oi<open.length)state.examQs.push(open[oi++]);
+  }
+  // Si alguna selecció molt restringida no permetés arribar a 10, completem amb exercicis normals.
+  while(state.examQs.length<10&&tries<3000){
+    tries++;const t=avail[rnd(0,avail.length-1)];const ex=t.gen();state.examQs.push(Object.assign({},ex,{topicId:ex.topicId||t.id,topicName:t.name,isOpenProblem:false}));
+  }
+  document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
+  renderExamQ();showScreen('screenExam');
+}
+
+function renderExamQ(){
+  const q=state.examQs[state.examIdx];if(!q)return;
+  const label=q.isOpenProblem?' · Problema':' · Exercici';
+  document.getElementById('examContent').innerHTML='<div class="ex-header"><div class="ex-num">Pregunta '+(state.examIdx+1)+'/'+state.examQs.length+' · '+q.topicName+label+'</div></div><div class="ex-question"><span class="q-text">'+q.question+'</span></div>';
+  document.getElementById('examFeedback').innerHTML='';document.getElementById('btnNextExam').style.display='none';document.getElementById('examResult').style.display='none';
+  if(q.isOpenProblem){
+    document.getElementById('examOptions').innerHTML='';document.getElementById('examOpenWrap').style.display='block';
+    const inp=document.getElementById('examOpenInput');inp.value='';inp.className='open-input';inp.disabled=false;inp.placeholder='Escriu la resposta final…';
+  }else{
+    document.getElementById('examOpenWrap').style.display='none';
+    document.getElementById('examOptions').innerHTML=q.options.map((o,i)=>'<button class="opt-btn" onclick="selectExamAnswer('+i+',this)">'+o+'</button>').join('');
+  }
+}
+
+function checkExamOpen(){
+  const q=state.examQs[state.examIdx];if(!q||!q.isOpenProblem)return;
+  const inp=document.getElementById('examOpenInput'),val=inp.value.trim();if(!val)return;
+  const ok=q.answer.check(val);inp.className='open-input '+(ok?'ok':'ko');inp.disabled=true;if(ok)state.examScore++;
+  const errObj={topicId:q.topicId,topicName:q.topicName,type:q.patternId,question:q.question,correct:q.answer.val,options:[],guide:[...(q.hint||[])],solution:[...(q.solution||[])]};
+  if(!ok)registerError(errObj,val,'exam');
+  state.examLog.push({q:q.question,correct:q.answer.val,given:val,ok,topic:q.topicName,solution:[...(q.solution||[])],isProblem:true});
+  document.getElementById('examFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'+(ok?'':('Resposta correcta: <b>'+q.answer.val+'</b><br><button class="sol-btn" onclick="toggleExamSolution(this)">📘 Veure explicació</button><div class="solution-box" id="examSolBox">'+(q.solution||[]).map((s,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div>'))+'</div>';
+  document.getElementById('btnNextExam').style.display='block';document.getElementById('btnNextExam').textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';
+}
+
+function selectExamAnswer(idx,btn){
+  const q=state.examQs[state.examIdx];if(!q||q.isOpenProblem)return;
+  const studentAnswer=q.options[idx],ok=studentAnswer===q.correct;if(ok)state.examScore++;else registerError(q,studentAnswer,'exam');
+  state.examLog.push({q:q.question,correct:q.correct,given:studentAnswer,ok,topic:q.topicName,solution:Array.isArray(q.solution)?[...q.solution]:[],isProblem:false});
+  document.querySelectorAll('#examOptions .opt-btn').forEach((b,j)=>{b.disabled=true;if(q.options[j]===q.correct)b.classList.add('correct');});if(!ok)btn.classList.add('wrong');
+  document.getElementById('examFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'+(ok?'':('Resposta correcta: <b>'+q.correct+'</b><br><button class="sol-btn" onclick="toggleExamSolution(this)">📘 Veure explicació</button><div class="solution-box" id="examSolBox">'+(Array.isArray(q.solution)?q.solution:[]).map((s,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div>'))+'</div>';
+  document.getElementById('btnNextExam').style.display='block';document.getElementById('btnNextExam').textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';
+}
+function toggleExamSolution(btn){const box=document.getElementById('examSolBox');if(!box)return;box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'📕 Amaga explicació':'📘 Veure explicació';}
+function nextExamQ(){
+  state.examIdx++;if(state.examIdx<state.examQs.length){renderExamQ();return;}
+  const pct=Math.round((state.examScore/state.examQs.length)*100),nota=(state.examScore/state.examQs.length*10).toFixed(1),emoji=pct>=90?'🏆':pct>=70?'👍':'💪';
+  const byTopic={};state.examLog.forEach(l=>{if(!byTopic[l.topic])byTopic[l.topic]={ok:0,tot:0};byTopic[l.topic].tot++;if(l.ok)byTopic[l.topic].ok++;});
+  let topicHtml='<div style="margin:14px 0 8px;font-weight:600">Resultats per tema:</div>';Object.entries(byTopic).forEach(([name,v])=>{const col=v.ok===v.tot?'var(--success)':v.ok/v.tot>=.5?'var(--warn)':'var(--error)';topicHtml+='<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:.85rem"><span>'+name+'</span><span style="font-weight:700;color:'+col+'">'+v.ok+'/'+v.tot+'</span></div>';});
+  const errs=state.examLog.filter(l=>!l.ok);let errsHtml='';if(errs.length){errsHtml='<div style="margin:16px 0 8px;font-weight:600">❌ Per repassar ('+errs.length+' errors):</div>';errs.forEach((e,i)=>{const rid='examReviewSol_'+i;errsHtml+='<div class="exam-review-item"><div class="rev-topic">'+e.topic+(e.isProblem?' · Problema':'')+'</div><div class="rev-q">'+String(e.q).replace(/<[^>]+>/g,'').slice(0,120)+'</div><div class="rev-ans"><span class="rev-wrong">La teva: '+e.given+'</span><span class="rev-correct">✓ '+e.correct+'</span></div>'+(e.solution&&e.solution.length?'<button class="sol-btn" onclick="toggleSavedSolution(\''+rid+'\',this)">📘 Veure explicació</button><div class="solution-box" id="'+rid+'">'+e.solution.map((s,j)=>'<div class="step"><b>Pas '+(j+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div>':'')+'</div>';});}
+  document.getElementById('examContent').innerHTML='<div class="congrats" style="padding-bottom:8px"><div class="trophy">'+emoji+'</div><h2>Resultat de l\'examen</h2></div>';document.getElementById('examOptions').innerHTML='';document.getElementById('examOpenWrap').style.display='none';document.getElementById('examFeedback').innerHTML='';document.getElementById('btnNextExam').style.display='none';document.getElementById('examResult').style.display='block';
+  document.getElementById('examResult').innerHTML='<div class="exam-score">'+nota+'/10<span>'+state.examScore+'/'+state.examQs.length+' correctes ('+pct+'%)</span></div><p style="text-align:center;color:var(--muted);margin-bottom:14px">'+(pct>=90?'Excel·lent! Estàs preparat/da per a l\'examen real!':pct>=70?'Molt bé! Repassa els errors i estaràs llest/a.':pct>=50?'Continua practicant, vas per bon camí.':'Repassa els temes i torna a intentar-ho.')+'</p>'+topicHtml+errsHtml+'<button class="btn-primary" onclick="showHome()" style="margin-top:16px">Tornar al menú</button><button class="btn-secondary" onclick="startExam()">Repetir examen</button>';
+}
+
+/* ── APLICACIONS REALS ──────────────────────────────────────── */
+function readAppNumber(id){
+  const el=document.getElementById(id);
+  if(!el)return NaN;
+  const raw=String(el.value).trim().replace(',','.');
+  if(raw==='')return NaN;
+  const n=Number(raw);
+  return Number.isFinite(n)?n:NaN;
+}
+
+function fmtAppNumber(n){
+  if(!Number.isFinite(n))return '—';
+  const v=Math.abs(n)<1e-10?0:Math.round(n*1000)/1000;
+  return String(v).replace('.',',');
+}
+
+function showApps(){
+  document.getElementById('navBack').style.display='block';
+  document.getElementById('navTitle').textContent='Aplicacions Reals';
+  document.getElementById('appContent').innerHTML=`
+    <div class="home-header" style="padding-top:8px">
+      <h2>🌍 Aplicacions Reals</h2>
+      <p>Utilitza l'àlgebra per interpretar situacions quotidianes de 1r d'ESO</p>
+    </div>
+
+    <div class="app-card">
+      <h3>🚕 Quant costa un trajecte? <span style="font-size:.72rem;color:var(--success)">1r ESO</span></h3>
+      <p>Un taxi cobra una <b>baixada de bandera</b> i un preu per cada quilòmetre. Escriu el model algebraic i calcula el cost d'un trajecte concret.</p>
+      <div class="app-input-row">
+        <label>€/km:</label>
+        <input class="app-input" type="number" id="evA" value="1.5" min="0" step="0.1">
+        <label>Quota fixa (€):</label>
+        <input class="app-input" type="number" id="evB" value="2" min="0" step="0.1">
+        <label>km:</label>
+        <input class="app-input" type="number" id="evX" value="8" min="0" step="0.1">
+        <button class="btn-app" onclick="avaluaExpr()">Calcula</button>
+      </div>
+      <div class="app-result" id="evResult">—</div>
+    </div>
+
+    <div class="app-card">
+      <h3>🚲 Quantes hores has llogat la bicicleta? <span style="font-size:.72rem;color:var(--success)">1r ESO</span></h3>
+      <p>Un lloguer cobra una <b>quota fixa</b> més un preu per hora. Si coneixes el total pagat, una equació et permet trobar el nombre d'hores.</p>
+      <div class="app-input-row">
+        <label>€/h:</label>
+        <input class="app-input" type="number" id="eqA" value="4" min="0.1" step="0.1">
+        <label>Quota fixa (€):</label>
+        <input class="app-input" type="number" id="eqB" value="3" min="0" step="0.1">
+        <label>Total (€):</label>
+        <input class="app-input" type="number" id="eqC" value="19" min="0" step="0.1">
+        <button class="btn-app" onclick="resolEquacio()">Resol</button>
+      </div>
+      <div class="app-result" id="eqResult">—</div>
+    </div>
+
+    <div class="app-card">
+      <h3>🏟️ Files de seients <span style="font-size:.72rem;color:var(--success)">1r ESO</span></h3>
+      <p>En una grada, cada fila pot tenir el mateix nombre de seients més que l'anterior. Modelitza el patró amb una successió aritmètica.</p>
+      <div class="app-input-row">
+        <label>1a fila:</label>
+        <input class="app-input" type="number" id="seqA1" value="12" min="1" step="1">
+        <label>Augment per fila:</label>
+        <input class="app-input" type="number" id="seqD" value="2" min="0" step="1">
+        <label>Fila n:</label>
+        <input class="app-input" type="number" id="seqN" value="8" min="1" max="20" step="1">
+        <button class="btn-app" onclick="generaSuccessio()">Calcula</button>
+      </div>
+      <div class="app-result" id="seqResult">—</div>
+    </div>
+
+    <div class="intro-card" style="margin-top:12px">
+      <p style="margin:0"><b>💡 Idea clau:</b> en totes tres situacions, una lletra representa una quantitat que pot variar. L'àlgebra permet escriure la relació una sola vegada i utilitzar-la amb valors diferents.</p>
+    </div>
+
+    <button class="btn-secondary" onclick="showHome()" style="margin-top:8px">← Tornar al menú</button>`;
+  showScreen('screenApp');
+}
+
+function resolEquacio(){
+  const a=readAppNumber('eqA');
+  const b=readAppNumber('eqB');
+  const c=readAppNumber('eqC');
+  const box=document.getElementById('eqResult');
+
+  if(!Number.isFinite(a)||!Number.isFinite(b)||!Number.isFinite(c)){
+    box.innerHTML='⚠️ Introdueix nombres vàlids als tres camps.';
+    return;
+  }
+  if(a<=0){
+    box.innerHTML='⚠️ El preu per hora ha de ser més gran que 0.';
+    return;
+  }
+  if(b<0||c<0){
+    box.innerHTML='⚠️ En aquest context, els imports no poden ser negatius.';
+    return;
+  }
+  if(c<b){
+    box.innerHTML='⚠️ El total pagat no pot ser inferior a la quota fixa.';
+    return;
+  }
+
+  const x=(c-b)/a;
+  const aF=fmtAppNumber(a),bF=fmtAppNumber(b),cF=fmtAppNumber(c),xF=fmtAppNumber(x);
+
+  box.innerHTML=
+    '<b>Model algebraic:</b> '+aF+'x + '+bF+' = '+cF+'<br>'+
+    'Primer traiem la quota fixa: '+aF+'x = '+cF+' − '+bF+' = '+fmtAppNumber(c-b)+'<br>'+
+    'Després dividim pel preu per hora: x = '+fmtAppNumber(c-b)+' ÷ '+aF+' = <b>'+xF+' hores</b><br>'+
+    '<span style="color:var(--muted)">Comprovació: '+aF+' · '+xF+' + '+bF+' = '+fmtAppNumber(a*x+b)+' € ✓</span>';
+}
+
+function avaluaExpr(){
+  const a=readAppNumber('evA');
+  const b=readAppNumber('evB');
+  const xv=readAppNumber('evX');
+  const box=document.getElementById('evResult');
+
+  if(!Number.isFinite(a)||!Number.isFinite(b)||!Number.isFinite(xv)){
+    box.innerHTML='⚠️ Introdueix nombres vàlids als tres camps.';
+    return;
+  }
+  if(a<0||b<0||xv<0){
+    box.innerHTML='⚠️ En aquest context, el preu i la distància no poden ser negatius.';
+    return;
+  }
+
+  const total=a*xv+b;
+  const aF=fmtAppNumber(a),bF=fmtAppNumber(b),xF=fmtAppNumber(xv);
+
+  box.innerHTML=
+    '<b>Model algebraic:</b> C(x) = '+aF+'x + '+bF+'<br>'+
+    'Per a x = '+xF+' km: '+aF+' · '+xF+' + '+bF+' = '+fmtAppNumber(a*xv)+' + '+bF+'<br>'+
+    '<b>Cost del trajecte: '+fmtAppNumber(total)+' €</b>';
+}
+
+function generaSuccessio(){
+  const a1=readAppNumber('seqA1');
+  const d=readAppNumber('seqD');
+  const nRaw=readAppNumber('seqN');
+  const box=document.getElementById('seqResult');
+
+  if(!Number.isFinite(a1)||!Number.isFinite(d)||!Number.isFinite(nRaw)){
+    box.innerHTML='⚠️ Introdueix nombres vàlids als tres camps.';
+    return;
+  }
+  if(a1<1||d<0){
+    box.innerHTML='⚠️ La primera fila ha de tenir almenys 1 seient i l’augment no pot ser negatiu.';
+    return;
+  }
+  if(!Number.isInteger(nRaw)||nRaw<1||nRaw>20){
+    box.innerHTML='⚠️ El número de fila ha de ser un enter entre 1 i 20.';
+    return;
+  }
+
+  const n=nRaw;
+  const shown=Math.min(n,8);
+  const terms=Array.from({length:shown},(_,i)=>a1+i*d);
+  const an=a1+(n-1)*d;
+  const a1F=fmtAppNumber(a1),dF=fmtAppNumber(d),anF=fmtAppNumber(an);
+
+  box.innerHTML=
+    '<b>Primeres files:</b> '+terms.map(fmtAppNumber).join(', ')+(n>8?', …':'')+'<br>'+
+    '<b>Regla:</b> aₙ = a₁ + (n − 1) · d<br>'+
+    'Per a la fila '+n+': a'+n+' = '+a1F+' + ('+n+' − 1) · '+dF+'<br>'+
+    '<b>La fila '+n+' té '+anF+' seients.</b>';
+}
+
+/* ── TEST AUTOMÀTIC (drecera: 3 clics al títol) ─────────────── */
+let lastBugReport=[];
+function downloadBugs(){
+  if(!lastBugReport.length)return;
+  const lines=['INFORME D\'ERRORS — Sentit Algebraic · 1r ESO · final auditat','Data: '+new Date().toLocaleString('ca'),'='.repeat(60),''];
+  lastBugReport.forEach(r=>{
+    lines.push('TEMA: '+r.name+' | '+r.ok+'/'+r.total+' correctes');
+    if(!r.bugs.length)lines.push('  Cap error');
+    else r.bugs.forEach((b,i)=>lines.push('  #'+(i+1)+' '+b));
+    lines.push('');
+  });
+  const blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='errors_sentit_algebraic_final.txt';a.click();URL.revokeObjectURL(a.href);
+}
+function runAutoTest(){
+  const REPS=10000,results=[];
+  TOPICS.forEach(t=>{
+    resetVariationSession(t.id);
+    let badExercises=0,issueCount=0;
+    const samples=[];
+    for(let i=0;i<REPS;i++){
+      let ex;const issues=[];
+      try{ex=t.gen();}catch(e){issues.push('crash: '+e.message);}
+      if(ex){
+        const opts=Array.isArray(ex.options)?ex.options.map(String):[];
+        const cs=String(ex.correct);
+        if(!Array.isArray(ex.options))issues.push('options no és array');
+        else{
+          if(opts.length!==4)issues.push(opts.length+' opcions (cal 4)');
+          if(new Set(opts).size!==opts.length)issues.push('opcions duplicades');
+          if(!opts.includes(cs))issues.push('correcta no inclosa');
+          if(opts.some(o=>!o||o.trim()===''||/^Op\.|^Cap de les anteriors|^Incorrecte \(|^− − −/.test(o)))issues.push('opció buida/fallback');
+          const valid=opts.filter(o=>openOk(ex.correct,ex.alts,o));
+          if(valid.length!==1)issues.push(valid.length+' opcions acceptables com a correctes');
+        }
+        if(!ex.topicId)issues.push('topicId absent');
+        if(ex.type===undefined||ex.type===null)issues.push('type absent');
+        if(!ex.question||String(ex.question).trim()==='')issues.push('pregunta buida');
+        if(!Array.isArray(ex.guide)||!ex.guide.length)issues.push('guide buit');
+        if(!Array.isArray(ex.solution)||!ex.solution.length)issues.push('solution buit');
+        if(t.course==='1r'&&ex.course==='2n')issues.push('contingut 2n dins tema 1r');
+      }
+      if(issues.length){badExercises++;issueCount+=issues.length;if(samples.length<10)samples.push('#'+(i+1)+' '+issues.join(' | ')+' Q:'+(ex&&ex.question?String(ex.question).replace(/<[^>]*>/g,'').slice(0,80):'—'));}
+    }
+    results.push({name:t.name,ok:REPS-badExercises,total:REPS,bad:badExercises,issues:issueCount,bugs:samples});
+  });
+  lastBugReport=results;
+  const totalBad=results.reduce((s,r)=>s+r.bad,0),totalIssues=results.reduce((s,r)=>s+r.issues,0);
+  let html='<div style="padding:18px;max-width:680px;margin:0 auto"><h2 style="color:var(--primary);margin-bottom:4px">🧪 Test Automàtic</h2><p style="color:var(--muted);font-size:.85rem;margin-bottom:18px">'+REPS.toLocaleString('ca-ES')+' exercicis per tema · estructura, opcions, pistes, solucions i classificació</p>';
+  results.forEach(r=>{
+    const pct=Math.round(r.ok/r.total*100),col=pct===100?'var(--success)':pct>=90?'var(--warn)':'var(--error)';
+    html+='<div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-bottom:10px"><div style="display:flex;justify-content:space-between;margin-bottom:6px"><b>'+r.name+'</b><span style="color:'+col+';font-weight:700">'+pct+'% ('+r.ok+'/'+r.total+')</span></div>';
+    if(r.bad)html+='<details><summary style="font-size:.82rem;color:var(--error);cursor:pointer">'+r.bad+' exercicis amb incidències · '+r.issues+' incidències</summary><div style="margin-top:8px;font-size:.78rem;line-height:1.8;color:#a02020;background:#fdeaea;border-radius:8px;padding:10px">'+r.bugs.map(x=>'<div>'+x+'</div>').join('')+'</div></details>';
+    else html+='<div style="font-size:.82rem;color:var(--success)">✅ Cap incidència detectada</div>';
+    html+='</div>';
+  });
+  html+='<div style="text-align:center;padding:16px;background:'+(totalBad===0?'#e6f9ef':'#fdeaea')+';border-radius:12px;margin-bottom:10px"><b style="color:'+(totalBad===0?'var(--success)':'var(--error)')+'">'+(totalBad===0?'🏆 Tot correcte!':('⚠️ '+totalBad+' exercicis amb error · '+totalIssues+' incidències'))+'</b></div><button onclick="showHome()" style="width:100%;background:var(--primary);color:white;border:none;border-radius:12px;padding:13px;font-size:.93rem;font-weight:600;cursor:pointer">← Tornar al menú</button></div>';
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screenApp').classList.add('active');document.getElementById('sidebar').style.display='none';document.getElementById('navBack').style.display='none';document.getElementById('navTitle').textContent='🧪 Test Automàtic';document.getElementById('appContent').innerHTML=html;
+}
+let navClicks=0,navTimer=null;
+document.getElementById('navTitle').addEventListener('click',()=>{
+  navClicks++;clearTimeout(navTimer);navTimer=setTimeout(()=>navClicks=0,600);
+  if(navClicks>=3){navClicks=0;runAutoTest();}
+});
+
+// ── PANELL DESBLOQUEIG ───────────────────────
+function toggleUnlockPanel(){
+  const panel=document.getElementById('unlockPanel');
+  const overlay=document.getElementById('unlockOverlay');
+  const isOpen=panel.classList.contains('open');
+  disarmReset();
+  if(isOpen){ closeUnlockPanel(); }
+  else {
+    renderUnlockPanel();
+    panel.classList.add('open');
+    overlay.classList.add('open');
+  }
+}
+
+function closeUnlockPanel(){
+  disarmReset();
+  document.getElementById('unlockPanel').classList.remove('open');
+  document.getElementById('unlockOverlay').classList.remove('open');
+}
+
+function renderUnlockPanel(){
+  const list=document.getElementById('unlockTopicList');
+  let html='';
+  TOPICS.forEach((t,i)=>{
+    if(t.course!=='1r')return;
+    const isUnlocked=isTopicUnlocked(i);
+    const isDone=state.done.includes(t.id);
+    const canToggle=i>0;
+    html+=`<div class="unlock-topic-row">
+      <span class="unlock-topic-name ${isDone?'is-done':''}">${t.icon} ${t.name.split(' ')[0]}${isDone?' ✓':''}</span>
+      ${canToggle
+        ? `<button class="unlock-toggle ${isUnlocked?'active':''}" onclick="toggleTopicUnlock(${i})">${isUnlocked?'Obert':'Tancat'}</button>`
+        : `<span style="font-size:.75rem;color:var(--success);font-weight:600">Base</span>`
+      }
+    </div>`;
+  });
+  list.innerHTML=html;
+}
+
+function toggleTopicUnlock(i){
+  const t=TOPICS[i];
+  const isUnlocked=isTopicUnlocked(i);
+  if(isUnlocked){
+    state.unlockedIds=state.unlockedIds.filter(id=>id!==t.id);
+    state.done=state.done.filter(id=>id!==t.id);
+  } else {
+    if(!state.unlockedIds.includes(t.id)) state.unlockedIds.push(t.id);
+  }
+  saveState();
+  renderUnlockPanel();
+  renderHome();
+}
+
+function unlockAllTopics(){
+  state.unlockedIds=TOPICS.filter(t=>t.course==='1r').map(t=>t.id);
+  saveState();
+  renderUnlockPanel();
+  renderHome();
+}
+
+let resetArmed=false,resetArmTimer=null;
+function resetProgress(){
+  const btn=document.getElementById('btnResetProgress');
+  if(!resetArmed){
+    resetArmed=true;
+    btn.textContent='⚠ Prem per confirmar';
+    btn.style.borderColor='var(--error)';btn.style.color='var(--error)';
+    clearTimeout(resetArmTimer);
+    resetArmTimer=setTimeout(()=>disarmReset(),3000);
+    return;
+  }
+  disarmReset();
+  state.unlockedIds=[TOPICS[0].id]; state.done=[];
+  saveState();
+  renderUnlockPanel();
+  renderHome();
+  closeUnlockPanel();
+}
+function disarmReset(){
+  resetArmed=false;clearTimeout(resetArmTimer);
+  const btn=document.getElementById('btnResetProgress');
+  if(btn){btn.innerHTML='↺ Reiniciar progrés';btn.style.borderColor='';btn.style.color='';}
+}
+
+loadState();showHome();
+</script>
+</body>
+</html>

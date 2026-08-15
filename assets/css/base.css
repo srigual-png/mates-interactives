@@ -1,0 +1,194 @@
+/* ==========================================================
+   MATES INTERACTIVES
+   base.css v1.0
+   Reset + estils globals
+========================================================== */
+
+/* ===========================
+   RESET
+=========================== */
+
+*,
+*::before,
+*::after{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    min-height:100vh;
+
+    font-family:var(--font-family);
+    font-size:var(--font-size-base);
+    font-weight:var(--font-weight-normal);
+    line-height:var(--line-height);
+
+    color:var(--text-primary);
+    background:var(--surface-2);
+
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+}
+
+/* ===========================
+   TIPOGRAFIA
+=========================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    margin:0 0 var(--space-4);
+    font-weight:var(--font-weight-bold);
+    line-height:var(--line-height-tight);
+    color:var(--text-primary);
+}
+
+h1{font-size:var(--font-size-4xl);}
+h2{font-size:var(--font-size-3xl);}
+h3{font-size:var(--font-size-2xl);}
+h4{font-size:var(--font-size-xl);}
+h5{font-size:var(--font-size-lg);}
+h6{font-size:var(--font-size-base);}
+
+p{
+    margin:0 0 var(--space-4);
+    color:var(--text-secondary);
+}
+
+small{
+    font-size:var(--font-size-sm);
+}
+
+/* ===========================
+   ENLLAÇOS
+=========================== */
+
+a{
+    color:var(--color-primary);
+    text-decoration:none;
+    transition:color var(--transition);
+}
+
+a:hover{
+    color:var(--color-primary-hover);
+}
+
+a:focus-visible{
+    outline:3px solid var(--color-primary-soft);
+    outline-offset:3px;
+    border-radius:var(--radius-sm);
+}
+
+/* ===========================
+   LLISTES
+=========================== */
+
+ul,
+ol{
+    margin:0 0 var(--space-4);
+    padding-left:1.5rem;
+}
+
+li+li{
+    margin-top:var(--space-2);
+}
+
+/* ===========================
+   IMATGES
+=========================== */
+
+img,
+picture{
+    display:block;
+    max-width:100%;
+    height:auto;
+}
+
+/* ===========================
+   FORMULARIS
+=========================== */
+
+input,
+select,
+textarea,
+button{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+/* ===========================
+   TAULES
+=========================== */
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th,
+td{
+    padding:var(--space-3);
+    border:1px solid var(--border-color);
+    text-align:left;
+}
+
+th{
+    background:var(--surface-3);
+}
+
+/* ===========================
+   HR
+=========================== */
+
+hr{
+    border:none;
+    border-top:1px solid var(--border-color);
+    margin:var(--space-7) 0;
+}
+
+/* ===========================
+   SELECCIÓ DE TEXT
+=========================== */
+
+::selection{
+    background:var(--color-primary-soft);
+}
+
+/* ===========================
+   FOCUS GLOBAL
+=========================== */
+
+:focus-visible{
+    outline:3px solid var(--color-primary-soft);
+    outline-offset:3px;
+}
+
+/* ===========================
+   UTILITATS
+=========================== */
+
+.hidden{
+    display:none !important;
+}
+
+.visually-hidden{
+    position:absolute;
+    width:1px;
+    height:1px;
+    padding:0;
+    margin:-1px;
+    overflow:hidden;
+    clip:rect(0 0 0 0);
+    white-space:nowrap;
+    border:0;
+}
