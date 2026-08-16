@@ -215,7 +215,7 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 @media(max-width:620px){.st-open-toolbar{grid-template-columns:1fr}.st-open-card{padding:15px}}
 
 </style>
-<script async="" data-goatcounter="https://srigual.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+
 <meta content="Estadística i probabilitat 1r ESO: exercicis interactius" property="og:title"/><meta content="Exercicis interactius d’estadística i probabilitat de 1r ESO: taules, gràfics, mitjana, mediana, moda, inferència i probabilitat, amb problemes i mode examen." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-estocastic.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/></head>
 <body>
 <nav class="top-nav">
@@ -2767,6 +2767,32 @@ function disarmReset(){
   await loadState();
   showHome();
 })();
+</script>
+<!-- ===================================================== -->
+<!-- GOATCOUNTER -->
+<!-- Només quan la web està publicada -->
+<!-- ===================================================== -->
+<script>
+
+const isLocal =
+    location.protocol === "file:" ||
+    ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+
+if (!isLocal) {
+
+    const s = document.createElement("script");
+
+    s.async = true;
+
+    s.dataset.goatcounter =
+        "https://srigual.goatcounter.com/count";
+
+    s.src = "https://gc.zgo.at/count.js";
+
+    document.body.appendChild(s);
+
+}
+
 </script>
 </body>
 </html>

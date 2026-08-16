@@ -271,7 +271,7 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .amp-scope .part{color:var(--warn);font-weight:700;}
 .amp-scope .scroll-top{display:none;}
 </style>
-<script async="" data-goatcounter="https://srigual.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+
 <meta content="Sentit numèric 1r ESO: exercicis interactius" property="og:title"/><meta content="Exercicis interactius de matemàtiques 1r ESO: nombres naturals, divisibilitat, enters, decimals, fraccions i percentatges. Sentit numèric amb pistes i correcció immediata." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-numeric.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/></head>
 <body>
 <nav class="top-nav">
@@ -4172,6 +4172,32 @@ document.getElementById('navTitle').addEventListener('click',function(){
 });
 
 loadState();showHome();
+</script>
+<!-- ===================================================== -->
+<!-- GOATCOUNTER -->
+<!-- Només quan la web està publicada -->
+<!-- ===================================================== -->
+<script>
+
+const isLocal =
+    location.protocol === "file:" ||
+    ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+
+if (!isLocal) {
+
+    const s = document.createElement("script");
+
+    s.async = true;
+
+    s.dataset.goatcounter =
+        "https://srigual.goatcounter.com/count";
+
+    s.src = "https://gc.zgo.at/count.js";
+
+    document.body.appendChild(s);
+
+}
+
 </script>
 </body>
 </html>

@@ -21,7 +21,8 @@
 <link href="../assets/css/layout.css" rel="stylesheet"/>
 <link href="../assets/css/components.css" rel="stylesheet"/>
 <link href="../assets/css/1eso.css" rel="stylesheet"/>
-<meta content="Exercicis de matemàtiques 1r ESO | Mates Interactives" property="og:title"/><meta content="Exercicis interactius i autocorrectius de matemàtiques de 1r d’ESO: nombres, mesures, geometria, àlgebra, estadística i probabilitat, amb pistes, problemes i mode examen." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/index.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/></head>
+<meta content="Exercicis de matemàtiques 1r ESO | Mates Interactives" property="og:title"/><meta content="Exercicis interactius i autocorrectius de matemàtiques de 1r d’ESO: nombres, mesures, geometria, àlgebra, estadística i probabilitat, amb pistes, problemes i mode examen." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/index.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/>
+</head>
 <body>
 <header class="site-header">
 <div class="container site-header__inner">
@@ -197,7 +198,11 @@
 <!-- ===================================================== -->
 <script>
 
-if (location.protocol !== "file:") {
+const isLocal =
+    location.protocol === "file:" ||
+    ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+
+if (!isLocal) {
 
     const s = document.createElement("script");
 

@@ -215,7 +215,7 @@
     .progress-bar-wrap,.pbw{display:none!important;}
 }
 </style>
-<script async="" data-goatcounter="https://srigual.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+
 <meta content="Sentit de la mesura 1r ESO: exercicis interactius" property="og:title"/><meta content="Exercicis interactius de matemàtiques 1r ESO sobre unitats, temps, perímetres, àrees, escales, estimació i precisió. Sentit de la mesura amb problemes i pistes." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-mesura.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/></head>
 <body>
 <nav class="top-nav">
@@ -2828,6 +2828,32 @@ document.getElementById('navTitle').addEventListener('click',()=>{
   navTimer=setTimeout(()=>navClicks=0,600);
   if(navClicks>=3){navClicks=0;runAutoTest();}
 });
+</script>
+<!-- ===================================================== -->
+<!-- GOATCOUNTER -->
+<!-- Només quan la web està publicada -->
+<!-- ===================================================== -->
+<script>
+
+const isLocal =
+    location.protocol === "file:" ||
+    ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+
+if (!isLocal) {
+
+    const s = document.createElement("script");
+
+    s.async = true;
+
+    s.dataset.goatcounter =
+        "https://srigual.goatcounter.com/count";
+
+    s.src = "https://gc.zgo.at/count.js";
+
+    document.body.appendChild(s);
+
+}
+
 </script>
 </body>
 </html>

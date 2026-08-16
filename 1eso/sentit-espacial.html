@@ -239,7 +239,7 @@
 .sp-open-exam{grid-column:1/-1;width:100%}
 @media(max-width:560px){.sp-open-grid{grid-template-columns:1fr}}
 </style>
-<script async="" data-goatcounter="https://srigual.goatcounter.com/count" src="//gc.zgo.at/count.js"></script>
+
 <!-- Versió final revisada 12/08/2026: s'afegeixen Coordenades cartesianes com a ampliació de 2n, Pla Cartesià interactiu i registre d'errors -->
 <meta content="Geometria 1r ESO: angles, polígons i exercicis interactius" property="og:title"/><meta content="Exercicis interactius de geometria de 1r ESO: rectes, angles, polígons, triangles, quadrilàters i circumferència. Sentit espacial amb problemes, pistes i mode examen." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-espacial.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/></head>
 <body>
@@ -4379,6 +4379,32 @@ function disarmReset(){
 loadState();
 
 showHome();
+
+</script>
+<!-- ===================================================== -->
+<!-- GOATCOUNTER -->
+<!-- Només quan la web està publicada -->
+<!-- ===================================================== -->
+<script>
+
+const isLocal =
+    location.protocol === "file:" ||
+    ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+
+if (!isLocal) {
+
+    const s = document.createElement("script");
+
+    s.async = true;
+
+    s.dataset.goatcounter =
+        "https://srigual.goatcounter.com/count";
+
+    s.src = "https://gc.zgo.at/count.js";
+
+    document.body.appendChild(s);
+
+}
 
 </script>
 </body>
