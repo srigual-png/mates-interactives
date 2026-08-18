@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nombres decimals 1r ESO: teoria, exemples i exercicis | Mates Interactives</title>
+<meta name="description" content="Aprèn els nombres decimals de 1r d'ESO: suma, resta i multiplicació, arrodoniment, conversió entre fraccions i decimals, problemes i errors absolut i relatiu.">
+<meta name="author" content="Salvador Rigual Valls">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://srigual-png.github.io/mates-interactives/1eso/teoria/numeric/nombres-decimals-1r-eso.html">
+<link rel="icon" href="../../../assets/images/favicon.ico" sizes="any">
+<link rel="icon" href="../../../assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="../../../assets/images/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="../../../assets/images/apple-touch-icon.png" sizes="180x180">
+<meta property="og:title" content="Nombres decimals 1r ESO: teoria i exercicis">
+<meta property="og:description" content="Teoria clara i exemples de nombres decimals de 1r ESO: operacions, aproximacions, conversions i error.">
+<meta property="og:url" content="https://srigual-png.github.io/mates-interactives/1eso/teoria/numeric/nombres-decimals-1r-eso.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ca_ES">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"LearningResource",
+  "name":"Nombres decimals 1r ESO: teoria, exemples i exercicis",
+  "description":"Teoria de nombres decimals de 1r ESO: operacions, arrodoniment, conversions, problemes i errors d'aproximació.",
+  "educationalLevel":"1r ESO",
+  "inLanguage":"ca",
+  "isAccessibleForFree":true,
+  "learningResourceType":"lesson",
+  "url":"https://srigual-png.github.io/mates-interactives/1eso/teoria/numeric/nombres-decimals-1r-eso.html"
+}
+</script>
+<style>
+:root{
+  --bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--pd:#3a6fd8;--ok:#34c97e;
+  --err:#e05c5c;--warn:#f5a623;--text:#2c3e50;--muted:#7f8c9a;
+  --border:#dce3ed;--sh:0 2px 12px rgba(0,0,0,.08);--soft:#eaf1fd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:75px}
+body{font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
+a{color:inherit}
+.top-nav{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh);position:sticky;top:0;z-index:100}
+.nav-link{color:var(--muted);text-decoration:none;font-size:.83rem;font-weight:650;padding:5px 8px;border-radius:8px;white-space:nowrap}
+.nav-link:hover{background:var(--soft);color:var(--primary)}
+.nav-title{flex:1;min-width:0;font-size:1rem;font-weight:750;color:var(--primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.wrap{width:min(790px,calc(100% - 32px));margin:0 auto;padding:30px 0 54px}
+.hero{text-align:center;padding:10px 8px 22px}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:var(--primary);border-radius:999px;padding:5px 11px;font-size:.75rem;font-weight:750;margin-bottom:12px}
+.hero h1{font-size:clamp(1.7rem,4vw,2.25rem);color:var(--primary);line-height:1.15;margin-bottom:9px}
+.hero p{color:var(--muted);font-size:.96rem;max-width:660px;margin:0 auto}
+.hero-actions{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:12px;padding:12px 20px;text-decoration:none;font-size:.91rem;font-weight:700;transition:.18s ease}
+.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--pd);transform:translateY(-1px)}
+.btn-secondary{background:var(--card);color:var(--primary);border:2px solid var(--primary)}.btn-secondary:hover{background:var(--soft)}
+.quick-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:4px 0 22px}
+.quick-nav a{text-decoration:none;text-align:center;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:10px 7px;color:var(--muted);font-size:.78rem;font-weight:700}
+.quick-nav a:hover{border-color:var(--primary);color:var(--primary);background:var(--soft)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px;box-shadow:var(--sh)}
+.card h2{font-size:1.18rem;color:var(--primary);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card h3{font-size:.96rem;margin:18px 0 7px}.card p+p{margin-top:9px}
+.callout{background:var(--soft);border-left:4px solid var(--primary);border-radius:10px;padding:13px 15px;margin:13px 0;font-size:.91rem}
+.example{background:#fbfcfe;border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:12px 0}
+.example-label{display:inline-block;font-size:.72rem;font-weight:800;color:var(--primary);background:var(--soft);border-radius:999px;padding:2px 9px;margin-bottom:7px}
+.math{font-family:'Courier New',monospace;font-weight:700;color:var(--pd);line-height:1.9;overflow-wrap:anywhere}
+.steps{counter-reset:pas;display:grid;gap:8px;margin-top:12px}
+.step{position:relative;padding:10px 12px 10px 42px;background:#fbfcfe;border:1px solid var(--border);border-radius:10px;font-size:.9rem}
+.step:before{counter-increment:pas;content:counter(pas);position:absolute;left:11px;top:9px;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--primary);color:#fff;font-size:.72rem;font-weight:800}
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.rule{border:1px solid var(--border);border-radius:12px;padding:13px;background:#fbfcfe;font-size:.88rem}
+.rule strong{display:block;color:var(--primary);margin-bottom:4px}
+.tip{background:#fffbea;border:1px solid #f5e0a0;border-radius:11px;padding:12px 14px;margin-top:13px;font-size:.88rem;color:#785800}
+.mistakes{background:#fff8f8;border:1px solid #f0b0b0}.mistakes h2{color:var(--err)}.mistakes ul{padding-left:20px}.mistakes li+li{margin-top:6px}
+.check details{border:1px solid var(--border);border-radius:11px;background:#fbfcfe;padding:12px 14px;margin-top:9px}
+.check summary{cursor:pointer;font-weight:650;color:var(--text)}
+.answer{margin-top:9px;padding-top:9px;border-top:1px solid var(--border);color:#1a7a4a;font-size:.9rem}
+.final-cta{background:linear-gradient(135deg,#edf3ff,#fff);border:1px solid #cad9f7;border-radius:18px;padding:24px;text-align:center;margin-top:20px}
+.final-cta h2{color:var(--primary);font-size:1.25rem;margin-bottom:6px}.final-cta p{color:var(--muted);font-size:.9rem;margin-bottom:15px}.final-cta .hero-actions{margin-top:0}
+.footer{text-align:center;color:var(--muted);font-size:.76rem;padding:4px 0 25px}
+@media(max-width:650px){
+  .top-nav{padding:10px 10px;gap:4px}.nav-link{padding:5px 5px;font-size:.75rem}.nav-main-label,.sense-label{display:none}.nav-title{font-size:.86rem}
+  .wrap{width:min(100% - 20px,790px);padding-top:20px}.quick-nav{grid-template-columns:1fr 1fr}.card{padding:17px}.rule-grid{grid-template-columns:1fr}
+  .hero-actions{flex-direction:column}.btn{width:100%}
+}
+</style>
+</head>
+
+<body>
+<nav class="top-nav" aria-label="Navegació principal">
+  <a class="nav-link" href="../../../index.html">🏠 <span class="nav-main-label">Mates Interactives</span></a>
+  <a class="nav-link" href="../../index.html">📘 1r ESO</a>
+  <a class="nav-link" href="../../sentit-numeric.html">🔢 <span class="sense-label">Sentit Numèric</span></a>
+  <div class="nav-title">Nombres decimals</div>
+</nav>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">1r ESO · Sentit numèric</div>
+    <h1>🔲 Nombres decimals</h1>
+    <p>Aprèn a operar amb decimals, aproximar-los, relacionar-los amb fraccions i entendre l'error que cometem quan fem una aproximació.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="../../sentit-numeric.html?tema=decimals&nivell=1">🧩 Nivell 1 · Guiat</a>
+      <a class="btn btn-secondary" href="../../sentit-numeric.html?tema=decimals&nivell=2">✏️ Nivell 2 · Autònom</a>
+      <a class="btn btn-secondary" href="#operacions">📘 Comença la teoria</a>
+    </div>
+  </header>
+
+  <nav class="quick-nav" aria-label="Continguts de la teoria">
+    <a href="#operacions">1. Operacions</a>
+    <a href="#arrodonir">2. Arrodonir</a>
+    <a href="#fraccions">3. Fraccions</a>
+    <a href="#problemes">4. Problemes</a>
+    <a href="#error-absolut">5. Error absolut</a>
+    <a href="#error-relatiu">6. Error relatiu</a>
+  </nav>
+
+  <section class="card" id="operacions">
+    <h2>➕✖️ 1. Operacions amb nombres decimals</h2>
+
+    <h3>Suma i resta</h3>
+    <p>Per sumar o restar decimals, col·loca els nombres de manera que les <strong>comes quedin alineades</strong>. Així també quedaran alineades les unitats, dècimes, centèsimes...</p>
+    <div class="example">
+      <span class="example-label">EXEMPLE</span>
+      <div class="math">12,7 + 3,45 = 16,15</div>
+    </div>
+
+    <h3>Multiplicació</h3>
+    <div class="steps">
+      <div class="step">Multiplica primer com si no hi hagués comes.</div>
+      <div class="step">Compta quantes xifres decimals tenen, en total, els dos factors.</div>
+      <div class="step">Col·loca la coma al resultat deixant aquest mateix nombre de xifres decimals.</div>
+    </div>
+    <div class="example">
+      <span class="example-label">EXEMPLE</span>
+      <div class="math">2,4 × 1,5 → 24 × 15 = 360 → 3,60 = 3,6</div>
+    </div>
+  </section>
+
+  <section class="card" id="arrodonir">
+    <h2>🎯 2. Arrodonir nombres decimals</h2>
+    <p>Per arrodonir a una posició decimal, mira la xifra que hi ha <strong>just a la dreta</strong>.</p>
+    <div class="steps">
+      <div class="step">Decideix si arrodoneixes a dècimes, centèsimes...</div>
+      <div class="step">Mira la xifra immediatament de la dreta.</div>
+      <div class="step">Si és 0–4, mantén la xifra; si és 5–9, augmenta-la en una unitat.</div>
+      <div class="step">Elimina les xifres que queden a la dreta.</div>
+    </div>
+    <div class="example">
+      <span class="example-label">EXEMPLE · A LES CENTÈSIMES</span>
+      <div class="math">7,386 → 7,39</div>
+      <p>La xifra de les mil·lèsimes és 6, així que la centèsima puja d'8 a 9.</p>
+    </div>
+  </section>
+
+  <section class="card" id="fraccions">
+    <h2>½ ↔ 0,5 · 3. Fraccions i decimals</h2>
+
+    <h3>Fracció → decimal</h3>
+    <p>Divideix el numerador pel denominador.</p>
+    <div class="example">
+      <span class="example-label">EXEMPLE</span>
+      <div class="math">3/4 = 3 ÷ 4 = 0,75</div>
+    </div>
+
+    <h3>Decimal → fracció</h3>
+    <div class="steps">
+      <div class="step">Escriu el decimal com una fracció amb 10, 100, 1.000... al denominador.</div>
+      <div class="step">Simplifica la fracció.</div>
+    </div>
+    <div class="example">
+      <span class="example-label">EXEMPLE</span>
+      <div class="math">0,25 = 25/100 = 1/4</div>
+    </div>
+
+    <div class="callout">
+      Algunes equivalències útils:
+      <div class="math">1/2 = 0,5 · 1/4 = 0,25 · 3/4 = 0,75 · 1/5 = 0,2</div>
+    </div>
+  </section>
+
+  <section class="card" id="problemes">
+    <h2>💶⏱️ 4. Decimals en problemes reals</h2>
+    <p>Els decimals apareixen constantment en preus, mesures i taxes.</p>
+
+    <div class="rule-grid">
+      <div class="rule">
+        <strong>Compra i canvi</strong>
+        Suma els preus i resta el total de la quantitat pagada.
+        <div class="math">canvi = pagat − total</div>
+      </div>
+      <div class="rule">
+        <strong>Taxa × temps</strong>
+        Si una quantitat es dona per unitat de temps, multiplica-la pel temps total.
+        <div class="math">quantitat = taxa × temps</div>
+      </div>
+    </div>
+
+    <div class="example">
+      <span class="example-label">EXEMPLE · TAXA</span>
+      <p>Una aixeta omple 3,5 L/min durant 8 minuts.</p>
+      <div class="math">3,5 × 8 = 28 L</div>
+    </div>
+  </section>
+
+  <section class="card" id="error-absolut">
+    <h2>📏 5. Error absolut</h2>
+    <p>Quan aproximem un valor, podem mesurar la distància entre el valor exacte i l'aproximat.</p>
+    <div class="callout">
+      <div class="math">error absolut = |valor exacte − valor aproximat|</div>
+    </div>
+    <div class="example">
+      <span class="example-label">EXEMPLE</span>
+      <p>Valor exacte: 6,37. Aproximació: 6,4.</p>
+      <div class="math">|6,37 − 6,4| = 0,03</div>
+    </div>
+    <div class="tip">💡 L'error absolut sempre és positiu o zero perquè utilitzem valor absolut.</div>
+  </section>
+
+  <section class="card" id="error-relatiu">
+    <h2>% 6. Error relatiu</h2>
+    <p>L'error relatiu compara l'error absolut amb la mida del valor exacte. Sovint s'expressa en percentatge.</p>
+    <div class="callout">
+      <div class="math">error relatiu = error absolut / valor exacte</div>
+      <div class="math">error relatiu (%) = error relatiu × 100</div>
+    </div>
+    <div class="example">
+      <span class="example-label">EXEMPLE</span>
+      <p>Valor exacte: 50. Aproximació: 45.</p>
+      <div class="math">error absolut = |50 − 45| = 5</div>
+      <div class="math">error relatiu = 5/50 = 0,1 = 10%</div>
+    </div>
+  </section>
+
+  <section class="card mistakes">
+    <h2>⚠️ Errors típics</h2>
+    <ul>
+      <li>No alinear les comes en una suma o una resta.</li>
+      <li>Col·locar la coma del producte sense comptar les xifres decimals dels factors.</li>
+      <li>Arrodonir mirant la mateixa xifra que vols conservar en lloc de la de la dreta.</li>
+      <li>Per passar de fracció a decimal, multiplicar numerador i denominador en lloc de dividir.</li>
+      <li>Confondre error absolut amb error relatiu.</li>
+      <li>Oblidar multiplicar per 100 quan l'error relatiu es demana en percentatge.</li>
+    </ul>
+  </section>
+
+  <section class="card check">
+    <h2>✅ Comprova si ho has entès</h2>
+    <details><summary>1. Calcula 4,8 + 2,35.</summary><div class="answer"><strong>7,15</strong>.</div></details>
+    <details><summary>2. Arrodoneix 5,684 a les centèsimes.</summary><div class="answer"><strong>5,68</strong>, perquè la mil·lèsima és 4.</div></details>
+    <details><summary>3. Converteix 3/5 a decimal.</summary><div class="answer"><strong>0,6</strong>.</div></details>
+    <details><summary>4. El valor exacte és 20 i l'aproximat és 18. Quin és l'error absolut i el relatiu?</summary><div class="answer">Error absolut = <strong>2</strong>. Error relatiu = 2/20 = 0,1 = <strong>10%</strong>.</div></details>
+  </section>
+
+  <section class="final-cta">
+    <h2>Ja tens la teoria. Ara toca practicar.</h2>
+    <p>Practica operacions, aproximacions, conversions i errors amb exercicis interactius.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="../../sentit-numeric.html?tema=decimals&nivell=1">🧩 Nivell 1 · Guiat</a>
+      <a class="btn btn-secondary" href="../../sentit-numeric.html?tema=decimals&nivell=2">✏️ Nivell 2 · Autònom</a>
+      <a class="btn btn-secondary" href="../../sentit-numeric.html">← Sentit Numèric</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">Mates Interactives · Matemàtiques de 1r d'ESO · Recurs gratuït</footer>
+
+<script>
+if(location.protocol!=="file:"){
+  const s=document.createElement("script");
+  s.async=true;
+  s.dataset.goatcounter="https://srigual.goatcounter.com/count";
+  s.src="https://gc.zgo.at/count.js";
+  document.body.appendChild(s);
+}
+</script>
+</body>
+</html>

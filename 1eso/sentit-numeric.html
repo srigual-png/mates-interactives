@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-
 <html lang="ca">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Exercicis de nombres, fraccions i enters 1r ESO | Mates Interactives</title>
-<meta content="Exercicis interactius de matemàtiques 1r ESO: nombres naturals, divisibilitat, enters, decimals, fraccions i percentatges. Sentit numèric amb pistes i correcció immediata." name="description"/>
-<meta content="Salvador Rigual Valls" name="author"/>
-<meta content="index, follow" name="robots"/>
-<link href="https://srigual-png.github.io/mates-interactives/1eso/sentit-numeric.html" rel="canonical"/>
-<link href="../assets/images/favicon.ico" rel="icon" sizes="any"/>
-<link href="../assets/images/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
-<link href="../assets/images/favicon-16x16.png" rel="icon" sizes="16x16" type="image/png"/>
-<link href="../assets/images/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentit numèric - Exercicis de Matemàtiques de 1r d'ESO</title>
+<meta name="description" content="Exercicis interactius de sentit numèric per a Matemàtiques de 1r d'ESO: nombres naturals, decimals, fraccions, enters, divisibilitat, percentatges i més, amb pistes i correcció immediata.">
+<meta name="author" content="Salvador Rigual Valls">
+<meta name="robots" content="index, follow">
+<link rel="canonical"
+href="https://srigual-png.github.io/mates-interactives/1eso/sentit-numeric.html">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <style>
 :root{--bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--pd:#3a6fd8;--ok:#34c97e;--err:#e05c5c;--warn:#f5a623;--text:#2c3e50;--muted:#7f8c9a;--border:#dce3ed;--locked:#c8d3e0;--sh:0 2px 12px rgba(0,0,0,0.08);}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -86,6 +86,24 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .bp:hover{background:var(--pd);}
 .bs{background:var(--card);color:var(--primary);border:2px solid var(--primary);border-radius:12px;padding:11px 26px;font-size:.93rem;font-weight:600;cursor:pointer;width:100%;margin-top:9px;transition:all .2s;}
 .bs:hover{background:#eaf1fd;}
+.theory-page-link{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  width:100%;
+  margin:-6px 0 18px;
+  padding:10px 16px;
+  background:var(--card);
+  color:var(--primary);
+  border:2px solid var(--primary);
+  border-radius:12px;
+  text-decoration:none;
+  font-size:.88rem;
+  font-weight:700;
+  transition:all .2s;
+}
+.theory-page-link:hover{background:#eaf1fd;}
 .bw{background:var(--card);color:var(--warn);border:2px solid var(--warn);border-radius:12px;padding:11px 26px;font-size:.93rem;font-weight:600;cursor:pointer;width:100%;margin-top:9px;transition:all .2s;}
 .bw:hover{background:#fff3e0;}
 .cg{text-align:center;padding:36px 18px;}
@@ -154,47 +172,6 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 
 .home-link:hover{
     text-decoration:underline;
-}
-
-
-/* Navegació jeràrquica: Inici → 1r ESO → inici del sentit */
-.course-home-link,
-.sense-home-btn{
-    text-decoration:none;
-    color:var(--primary);
-    font-weight:700;
-    white-space:nowrap;
-    border:1.5px solid var(--border);
-    background:var(--card);
-    border-radius:9px;
-    padding:6px 9px;
-    font:inherit;
-    font-size:.78rem;
-    cursor:pointer;
-    transition:all .15s;
-}
-.course-home-link:hover,
-.sense-home-btn:hover{
-    border-color:var(--primary);
-    background:var(--bg);
-}
-.course-home-short,
-.sense-home-short{display:none;}
-@media (max-width:700px){
-    nav.top-nav{gap:6px;padding:9px 8px;}
-    .home-link{padding:6px 4px;}
-    .nav-main-label,
-    .course-home-label,
-    .sense-home-text{display:none;}
-    .course-home-short,
-    .sense-home-short{display:inline;}
-    .course-home-link,
-    .sense-home-btn{padding:6px 7px;font-size:.72rem;}
-    nav.top-nav h1{font-size:.86rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-    .progress-bar-wrap,.pbw{width:58px;}
-}
-@media (max-width:520px){
-    .progress-bar-wrap,.pbw{display:none!important;}
 }
 
 /* ── AMPLIACIÓ · PROBLEMES OBERTS (integrada i aïllada) ───────────── */
@@ -271,111 +248,116 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .amp-scope .part{color:var(--warn);font-weight:700;}
 .amp-scope .scroll-top{display:none;}
 </style>
-
-<meta content="Sentit numèric 1r ESO: exercicis interactius" property="og:title"/><meta content="Exercicis interactius de matemàtiques 1r ESO: nombres naturals, divisibilitat, enters, decimals, fraccions i percentatges. Sentit numèric amb pistes i correcció immediata." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-numeric.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/></head>
+<script data-goatcounter="https://srigual.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</head>
 <body>
 <nav class="top-nav">
-<button class="nb" id="navBack" onclick="goBack()" style="display:none">←</button>
-<a aria-label="Inici de Mates Interactives" class="home-link nav-main-home" href="../index.html" title="Inici de Mates Interactives">🏠 <span class="nav-main-label">Mates Interactives</span></a>
-<a aria-label="Tornar a 1r d'ESO" class="course-home-link" href="index.html" title="Tornar a 1r d'ESO">📘 <span class="course-home-label">1r ESO</span><span class="course-home-short">1r</span></a>
-<button aria-label="Tornar a l'inici del Sentit Numèric" class="sense-home-btn" onclick="showHome()" title="Tornar a l'inici del Sentit Numèric" type="button">⌂ <span class="sense-home-text">Sentit Numèric</span><span class="sense-home-short">Sentit</span></button>
-<h1 id="navTitle">Sentit Numèric · 1r ESO</h1>
-<span id="navAmpScore" style="display:none;font-size:.82rem;color:var(--muted);font-weight:600;"></span>
-<div class="pbw" id="mainProgressWrap"><div class="pbf" id="gp" style="width:0%"></div></div>
+  <button class="nb" id="navBack" onclick="goBack()" style="display:none">&#8592;</button>
+  <a class="home-link" href="index.html">🏠 Mates Interactives</a>
+  <h1 id="navTitle">Sentit Numeric 1r ESO</h1>
+  <span id="navAmpScore" style="display:none;font-size:.82rem;color:var(--muted);font-weight:600;"></span>
+  <div class="pbw" id="mainProgressWrap"><div class="pbf" id="gp" style="width:0%"></div></div>
 </nav>
 <div class="layout">
-<div class="screen active" id="sHome"><div class="hh"><h2>🔢 Sentit Numèric</h2><p>1r ESO · Explicacions clares · Exercicis interactius · Correcció immediata</p></div>
+<div class="screen active" id="sHome"><div class="hh"><h2>&#128290; Sentit Numeric</h2><p>1r ESO &middot; Explicacions clares · Exercicis interactius · Correcció immediata</p></div>
 <div class="intro-card">
 <p>
 El <strong>sentit numèric</strong> és la base de les Matemàtiques de 1r d'ESO. En aquest bloc aprendràs a comprendre i utilitzar els nombres en diferents situacions, des dels <strong>nombres naturals</strong> fins als <strong>enters</strong>, <strong>decimals</strong>, <strong>fraccions</strong> i <strong>percentatges</strong>. També practicaràs el sistema de numeració decimal, les operacions, la jerarquia d'operacions i la divisibilitat.
 </p>
-<br/>
+
+<br>
+
 <p>
 Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immediata</strong>, pistes i explicacions dels errors perquè puguis aprendre mentre practiques. Quan dominis un tema es desbloquejarà el següent i, al final, podràs posar-te a prova amb el <strong>Mode Examen</strong> i revisar els errors més freqüents.
 </p>
 </div>
 <div class="tg" id="tGrid"></div></div>
 <div class="sidebar" id="sidebar">
-<button class="sidebar-btn" id="btnUnlock" onclick="toggleUnlockPanel()">
-<span class="sb-icon">🔓</span>Desbloqueja temes
+  <button class="sidebar-btn" id="btnUnlock" onclick="toggleUnlockPanel()">
+    <span class="sb-icon">&#128275;</span>Desbloqueja temes
   </button>
 </div>
 </div>
 <div class="unlock-panel-overlay" id="unlockOverlay" onclick="closeUnlockPanel()"></div>
 <div class="unlock-panel" id="unlockPanel">
-<h4>🔓 Gestionar temes</h4>
-<div id="unlockTopicList"></div>
-<button class="unlock-all-btn" onclick="unlockAllTopics()">🔓 Desbloquejar tots</button>
-<button class="unlock-reset-btn" id="btnReset" onclick="resetProgress()">↶ Reiniciar progrés</button>
+  <h4>&#128275; Gestionar temes</h4>
+  <div id="unlockTopicList"></div>
+  <button class="unlock-all-btn" onclick="unlockAllTopics()">&#128275; Desbloquejar tots</button>
+  <button class="unlock-reset-btn" id="btnReset" onclick="resetProgress()">&#8630; Reiniciar progrés</button>
 </div>
-<div class="screen" id="sIntro"><div id="introC"></div><div class="lvs"><button class="lvb active" id="bL1" onclick="selLv(1)">🧩 Nivell 1<br/><small>Guiat · 10 encerts</small></button><button class="lvb" id="bL2" onclick="selLv(2)">✏️ Nivell 2<br/><small>Sol/a · 20 encerts</small></button></div><button class="bp" onclick="startP()">Comenca a practicar →</button></div>
+<div class="screen" id="sIntro"><div id="introC"></div><div class="lvs"><button class="lvb active" id="bL1" onclick="selLv(1)">&#129513; Nivell 1<br><small>Guiat &middot; 10 encerts</small></button><button class="lvb" id="bL2" onclick="selLv(2)">&#9999;&#65039; Nivell 2<br><small>Sol/a &middot; 20 encerts</small></button></div><button class="bp" onclick="startP()">Comenca a practicar &rarr;</button></div>
 <div class="screen" id="sEx">
-<div class="exn" id="exN"></div>
-<div class="slb" id="slb"></div>
-<div class="sbw"><div class="sbf" id="sb" style="width:0%"></div></div>
-<div class="exq" id="exQ"></div>
-<div class="gs" id="gst" style="display:none"></div>
-<div class="og" id="og"></div>
-<div id="fbA"></div>
-<button class="bp" id="bNext" onclick="nextEx()" style="display:none">Seguent exercici →</button>
-<button class="bs" id="bChg" onclick="showHome()" style="display:none">← Canviar de tema</button>
+  <div class="exn" id="exN"></div>
+  <div class="slb" id="slb"></div>
+  <div class="sbw"><div class="sbf" id="sb" style="width:0%"></div></div>
+  <div class="exq" id="exQ"></div>
+  <div class="gs" id="gst" style="display:none"></div>
+  <div class="og" id="og"></div>
+  <div id="fbA"></div>
+  <button class="bp" id="bNext" onclick="nextEx()" style="display:none">Seguent exercici &rarr;</button>
+  <button class="bs" id="bChg" onclick="showHome()" style="display:none">&#8592; Canviar de tema</button>
 </div>
-<div class="screen" id="sExam"><div id="examCfgArea"></div><div id="examC"></div><div class="og" id="examO"></div><div id="examF"></div><button class="bp" id="bNExam" onclick="nextEQ()" style="display:none">Seguent →</button><div id="examR" style="display:none"></div></div>
+<div class="screen" id="sExam"><div id="examCfgArea"></div><div id="examC"></div><div class="og" id="examO"></div><div id="examF"></div><button class="bp" id="bNExam" onclick="nextEQ()" style="display:none">Seguent &rarr;</button><div id="examR" style="display:none"></div></div>
 <div class="screen" id="sTest"><div id="testC"></div></div>
+
 <!-- ── AMPLIACIÓ · PROBLEMES OBERTS ───────────────────────────────────── -->
 <div class="screen amp-scope" id="sAmpHome">
-<div class="hh">
-<h2>📝 Ampliació · Problemes oberts</h2>
-<p>Problemes de 1r d'ESO amb resposta escrita i càlculs pas a pas</p>
+  <div class="hh">
+    <h2>📝 Ampliació · Problemes oberts</h2>
+    <p>Problemes de 1r d'ESO amb resposta escrita i càlculs pas a pas</p>
+  </div>
+  <div class="intro-card">
+    <p>Aquest espai serveix per aplicar els continguts del sentit numèric en problemes més oberts, sense opcions per triar. És material opcional de 1r d'ESO: <strong>no compta per desbloquejar temes ni entra al Mode Examen</strong>.</p>
+  </div>
+  <div class="cats" id="ampCatGrid"></div>
+  <div style="margin-top:20px;">
+    <p style="font-size:.82rem;color:var(--muted);margin-bottom:8px;font-weight:600;">NOMBRE DE PROBLEMES</p>
+    <div class="cfg-row" id="ampNqRow">
+      <button class="cfg-btn sel" onclick="ampSelNQ(5,this)">5</button>
+      <button class="cfg-btn" onclick="ampSelNQ(10,this)">10</button>
+      <button class="cfg-btn" onclick="ampSelNQ(15,this)">15</button>
+    </div>
+    <p style="font-size:.82rem;color:var(--muted);margin-top:14px;margin-bottom:8px;font-weight:600;">DIFICULTAT</p>
+    <div class="cfg-row" id="ampDiffRow">
+      <button class="cfg-btn sel" onclick="ampSelDiff(0,this)">Totes</button>
+      <button class="cfg-btn" onclick="ampSelDiff(1,this)">🟢 Bàsica</button>
+      <button class="cfg-btn" onclick="ampSelDiff(2,this)">🟡 Mitja</button>
+      <button class="cfg-btn" onclick="ampSelDiff(3,this)">🔴 Difícil</button>
+    </div>
+  </div>
+  <div id="ampHomeMsg"></div>
+  <button class="start-btn" onclick="ampStartSession()">Comença ▶</button>
+  <button class="bs" onclick="showHome()">← Tornar al Sentit Numèric</button>
 </div>
-<div class="intro-card">
-<p>Aquest espai serveix per aplicar els continguts del sentit numèric en problemes més oberts, sense opcions per triar. És material opcional de 1r d'ESO: <strong>no compta per desbloquejar temes ni entra al Mode Examen</strong>.</p>
-</div>
-<div class="cats" id="ampCatGrid"></div>
-<div style="margin-top:20px;">
-<p style="font-size:.82rem;color:var(--muted);margin-bottom:8px;font-weight:600;">NOMBRE DE PROBLEMES</p>
-<div class="cfg-row" id="ampNqRow">
-<button class="cfg-btn sel" onclick="ampSelNQ(5,this)">5</button>
-<button class="cfg-btn" onclick="ampSelNQ(10,this)">10</button>
-<button class="cfg-btn" onclick="ampSelNQ(15,this)">15</button>
-</div>
-<p style="font-size:.82rem;color:var(--muted);margin-top:14px;margin-bottom:8px;font-weight:600;">DIFICULTAT</p>
-<div class="cfg-row" id="ampDiffRow">
-<button class="cfg-btn sel" onclick="ampSelDiff(0,this)">Totes</button>
-<button class="cfg-btn" onclick="ampSelDiff(1,this)">🟢 Bàsica</button>
-<button class="cfg-btn" onclick="ampSelDiff(2,this)">🟡 Mitja</button>
-<button class="cfg-btn" onclick="ampSelDiff(3,this)">🔴 Difícil</button>
-</div>
-</div>
-<div id="ampHomeMsg"></div>
-<button class="start-btn" onclick="ampStartSession()">Comença ▶</button>
-<button class="bs" onclick="showHome()">← Tornar al Sentit Numèric</button>
-</div>
+
 <div class="screen amp-scope" id="sAmpProb">
-<div class="prog-bar-wrap"><div class="prog-bar" id="ampProgBar" style="width:0%"></div></div>
-<div class="prob-meta" id="ampProbMeta"></div>
-<div class="prob-card" id="ampProbCard"></div>
-<div id="ampHintArea"></div>
-<div class="steps-section" id="ampStepsSection"></div>
-<div class="final-row" id="ampFinalRow"></div>
-<div id="ampFbArea"></div>
-<div class="action-row" id="ampActionRow" style="display:none">
-<button class="btn-home" onclick="showAmpHome()">◀ Menú</button>
-<button class="btn-next" id="ampBtnNext" onclick="ampNextProb()">Següent ▶</button>
+  <div class="prog-bar-wrap"><div class="prog-bar" id="ampProgBar" style="width:0%"></div></div>
+  <div class="prob-meta" id="ampProbMeta"></div>
+  <div class="prob-card" id="ampProbCard"></div>
+  <div id="ampHintArea"></div>
+  <div class="steps-section" id="ampStepsSection"></div>
+  <div class="final-row" id="ampFinalRow"></div>
+  <div id="ampFbArea"></div>
+  <div class="action-row" id="ampActionRow" style="display:none">
+    <button class="btn-home" onclick="showAmpHome()">◀ Menú</button>
+    <button class="btn-next" id="ampBtnNext" onclick="ampNextProb()">Següent ▶</button>
+  </div>
 </div>
-</div>
+
 <div class="screen amp-scope" id="sAmpResults">
-<div class="res-card">
-<div class="res-emoji" id="ampResEmoji"></div>
-<div class="res-score" id="ampResScore"></div>
-<div class="res-label" id="ampResLabel"></div>
-<div style="display:flex;gap:10px;margin-bottom:4px;">
-<button class="start-btn" onclick="ampStartSession()" style="margin-top:0;flex:2">Repetir ▶</button>
-<button class="btn-home" onclick="showAmpHome()" style="flex:1;margin-top:0">Menú</button>
+  <div class="res-card">
+    <div class="res-emoji" id="ampResEmoji"></div>
+    <div class="res-score" id="ampResScore"></div>
+    <div class="res-label" id="ampResLabel"></div>
+    <div style="display:flex;gap:10px;margin-bottom:4px;">
+      <button class="start-btn" onclick="ampStartSession()" style="margin-top:0;flex:2">Repetir ▶</button>
+      <button class="btn-home" style="flex:1;margin-top:0" onclick="showAmpHome()">Menú</button>
+    </div>
+    <div class="res-breakdown" id="ampResBreakdown"></div>
+  </div>
 </div>
-<div class="res-breakdown" id="ampResBreakdown"></div>
-</div>
-</div>
+
 <script>
 // ── UTILS ──────────────────────────────────────────────────────────────────
 function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
@@ -3577,6 +3559,23 @@ function selTopic(i){
   var html='<div class="thbox"><h3>&#128218; '+t.theory.title+'</h3><p>'+t.theory.text+'</p>';
   t.theory.formulas.forEach(function(f){html+='<div class="fm">'+f+'</div>';});
   html+='</div>';
+  var theoryPages={
+    naturals:'teoria/numeric/nombres-naturals-1r-eso.html',
+    decimal_sys:'teoria/numeric/nombres-naturals-1r-eso.html#sistema-decimal',
+    ops:'teoria/numeric/nombres-naturals-1r-eso.html#operacions',
+    potencies:'teoria/numeric/potencies-arrels-1r-eso.html',
+    jerarquia:'teoria/numeric/jerarquia-operacions-1r-eso.html',
+    divis:'teoria/numeric/divisibilitat-mcm-mcd-1r-eso.html#divisibilitat',
+    mcmmcd:'teoria/numeric/divisibilitat-mcm-mcd-1r-eso.html#mcm-mcd',
+    enters:'teoria/numeric/nombres-enters-1r-eso.html',
+    decimals:'teoria/numeric/nombres-decimals-1r-eso.html',
+    fraccions:'teoria/numeric/fraccions-1r-eso.html',
+    proporcionalitat:'teoria/numeric/proporcionalitat-percentatges-1r-eso.html#proporcionalitat',
+    percentatges:'teoria/numeric/proporcionalitat-percentatges-1r-eso.html#percentatges'
+  };
+  if(theoryPages[t.id]){
+    html+='<a class="theory-page-link" href="'+theoryPages[t.id]+'">&#128214; Teoria i exemples</a>';
+  }
   var errs=(state.errors[t.id]||[]);
   if(errs.length>0){
     html+='<div class="errpanel"><h4>&#128203; Ultims errors en aquest tema</h4>';
@@ -4171,33 +4170,32 @@ document.getElementById('navTitle').addEventListener('click',function(){
   if(navClicks>=3){navClicks=0;runAutoTest();}
 });
 
-loadState();showHome();
-</script>
-<!-- ===================================================== -->
-<!-- GOATCOUNTER -->
-<!-- Només quan la web està publicada -->
-<!-- ===================================================== -->
-<script>
+function initPage(){
+  var params=new URLSearchParams(window.location.search);
+  var topicId=params.get('tema');
+  var levelParam=parseInt(params.get('nivell'),10);
 
-const isLocal =
-    location.protocol === "file:" ||
-    ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+  if(topicId){
+    var idx=TOPICS.findIndex(function(t){return t.id===topicId;});
+    if(idx>=0){
+      // Un enllaç directe des d'una pàgina de teoria expressa que
+      // l'alumne vol treballar aquest tema. Si és de 1r i encara
+      // estava bloquejat, el fem accessible i conservem l'elecció.
+      if(TOPICS[idx].course==="1r" && !isUnlocked(idx)){
+        state.unlockedIds.push(TOPICS[idx].id);
+        saveState();
+      }
+      selTopic(idx);
+      selLv(levelParam===2 ? 2 : 1);
+      startP();
+      return;
+    }
+  }
 
-if (!isLocal) {
-
-    const s = document.createElement("script");
-
-    s.async = true;
-
-    s.dataset.goatcounter =
-        "https://srigual.goatcounter.com/count";
-
-    s.src = "https://gc.zgo.at/count.js";
-
-    document.body.appendChild(s);
-
+  showHome();
 }
 
+loadState();initPage();
 </script>
 </body>
 </html>

@@ -59,6 +59,8 @@
   .theory-box{background:#eef9ee;border-left:4px solid var(--primary);border-radius:10px;padding:15px 17px;margin-bottom:18px;font-size:.91rem;line-height:1.7}
   .theory-box h3{color:var(--primary);margin-bottom:8px;font-size:.97rem}
   .theory-box .formula{background:white;border-radius:8px;padding:9px 13px;margin:8px 0;font-family:'Courier New',monospace;font-size:.92rem;border:1px solid var(--border)}
+  .theory-page-link{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card);border:2px solid var(--primary);border-radius:12px;padding:11px 14px;margin:-6px 0 18px;color:var(--primary-dark);font-size:.9rem;font-weight:700;text-decoration:none;transition:all .15s}
+  .theory-page-link:hover{background:#eef9ee;transform:translateY(-1px)}
   .level-select{display:flex;gap:12px;margin-bottom:22px}
   .level-btn{flex:1;padding:11px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.88rem;font-weight:600;color:var(--muted);transition:all .2s}
   .level-btn.active{border-color:var(--primary);color:var(--primary);background:#eef9ee}
@@ -1879,6 +1881,20 @@ function selectTopic(i){
   let html=`<div class="theory-box"><h3>📖 ${t.theory.title}${t.course!=='1r'?' <span class="topic-badge badge-extension">Ampliació 2n</span>':''}</h3><p>${t.theory.text}</p>`;
   t.theory.formulas.forEach(f=>{html+=`<div class="formula">${f}</div>`;});
   html+=`</div>`;
+  const theoryPages={
+    metric:'teoria/mesura/sistema-metric-decimal-1r-eso.html',
+    conversions:'teoria/mesura/conversions-unitats-1r-eso.html',
+    temps:'teoria/mesura/mesura-temps-1r-eso.html',
+    perimetres:'teoria/mesura/perimetres-1r-eso.html',
+    arees:'teoria/mesura/arees-1r-eso.html',
+    mesurament:'teoria/mesura/mesurament-precisio-1r-eso.html',
+    estimacio:'teoria/mesura/estimacio-mesures-1r-eso.html',
+    problemes:'teoria/mesura/problemes-mesura-1r-eso.html',
+    volum:'teoria/mesura/volum-capacitat-ampliacio-2n-eso.html'
+  };
+  if(theoryPages[t.id]){
+    html+=`<a class="theory-page-link" href="${theoryPages[t.id]}">📖 Teoria i exemples</a>`;
+  }
   const errs=(ST.errors[t.id]||[]);
   if(errs.length>0){
     html+=`<div class="error-panel"><h4>❌ Últims errors en aquest tema</h4>`;
@@ -2817,7 +2833,28 @@ function disarmReset(){
 }
 
 // ── INIT ─────────────────────────────────────
-loadST(); showHome();
+function initPage(){
+  const params=new URLSearchParams(window.location.search);
+  const topicId=params.get('tema');
+  const levelParam=parseInt(params.get('nivell'),10);
+
+  if(topicId){
+    const idx=TOPICS.findIndex(t=>t.id===topicId);
+    if(idx>=0){
+      if(TOPICS[idx].course==='1r'&&!isTopicUnlocked(idx)){
+        ST.unlockedIds.push(TOPICS[idx].id);
+        saveST();
+      }
+      selectTopic(idx);
+      selectLevel(levelParam===2?2:1);
+      startPractice();
+      return;
+    }
+  }
+  showHome();
+}
+
+loadST(); initPage();
 
 // Triple clic al títol → test automàtic
 let navClicks=0,navTimer=null;

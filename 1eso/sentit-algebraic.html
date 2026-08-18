@@ -79,6 +79,8 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:poin
 .example-box .ex-step{padding:3px 0;border-bottom:1px solid #dde8f5;}
 .example-box .ex-step:last-child{border:none;}
 .example-box .ex-res{color:var(--primary);font-weight:700;}
+.theory-page-link{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card);border:2px solid var(--primary);border-radius:12px;padding:11px 14px;margin:-6px 0 18px;color:var(--primary-dark);font-size:.9rem;font-weight:700;text-decoration:none;transition:all .15s;}
+.theory-page-link:hover{background:#fff0eb;transform:translateY(-1px);}
 
 .level-select{display:flex;gap:12px;margin-bottom:14px;}
 .level-btn{flex:1;padding:11px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:0.88rem;font-weight:600;color:var(--muted);transition:all 0.2s;}
@@ -2039,6 +2041,23 @@ function selectTopic(i){
   let theoryHtml='<div class="theory-box"><h3>📖 '+th.title+'</h3><p>'+th.text+'</p>';
   th.formulas.forEach(f=>{theoryHtml+='<div class="formula">'+f+'</div>';});
   theoryHtml+='</div>';
+
+  const theoryPages={
+    traduccio:'teoria/algebraic/llenguatge-algebraic-1r-eso.html',
+    patrons:'teoria/algebraic/patrons-numerics-geometrics-1r-eso.html',
+    monomis:'teoria/algebraic/expressions-termes-coeficients-1r-eso.html',
+    simplificacio:'teoria/algebraic/simplificacio-expressions-1r-eso.html',
+    equacions:'teoria/algebraic/equacions-primer-grau-1r-eso.html',
+    computacional:'teoria/algebraic/pensament-computacional-1r-eso.html',
+    patrons2:'teoria/algebraic/terme-general-successions-ampliacio-2n-eso.html',
+    monomis2:'teoria/algebraic/monomis-grau-producte-ampliacio-2n-eso.html',
+    simplificacio2:'teoria/algebraic/simplificacio-avancada-ampliacio-2n-eso.html',
+    equacions2:'teoria/algebraic/equacions-avancades-ampliacio-2n-eso.html'
+  };
+  if(theoryPages[t.id]){
+    theoryHtml+=`<a class="theory-page-link" href="${theoryPages[t.id]}">📖 Teoria i exemples</a>`;
+  }
+
   // Exemple resolt
   let exHtml='<div class="example-box"><h3>✏️ '+th.exemple.title+'</h3>';
   th.exemple.steps.forEach((s,idx)=>{exHtml+='<div class="ex-step"><b>'+(idx+1)+'.</b> '+s+'</div>';});
@@ -2572,7 +2591,28 @@ function disarmReset(){
   if(btn){btn.innerHTML='↺ Reiniciar progrés';btn.style.borderColor='';btn.style.color='';}
 }
 
-loadState();showHome();
+function initPage(){
+  const params=new URLSearchParams(window.location.search);
+  const topicId=params.get('tema');
+  const levelParam=parseInt(params.get('nivell'),10);
+
+  if(topicId){
+    const idx=TOPICS.findIndex(t=>t.id===topicId);
+    if(idx>=0){
+      if(TOPICS[idx].course==='1r'&&!isTopicUnlocked(idx)){
+        if(!state.unlockedIds.includes(TOPICS[idx].id)) state.unlockedIds.push(TOPICS[idx].id);
+        saveState();
+      }
+      selectTopic(idx);
+      selectLevel(levelParam===2?2:1);
+      startPractice();
+      return;
+    }
+  }
+  showHome();
+}
+
+loadState();initPage();
 </script>
 <!-- ===================================================== -->
 <!-- GOATCOUNTER -->

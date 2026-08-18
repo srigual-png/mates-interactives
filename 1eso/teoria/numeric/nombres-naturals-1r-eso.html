@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nombres naturals 1r ESO: teoria, exemples i exercicis | Mates Interactives</title>
+<meta name="description" content="Aprèn i repassa els nombres naturals de 1r d'ESO: comparació, arrodoniment, sistema de numeració decimal, valor posicional, operacions bàsiques i problemes, amb exemples i exercicis.">
+<meta name="author" content="Salvador Rigual Valls">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://srigual-png.github.io/mates-interactives/1eso/teoria/numeric/nombres-naturals-1r-eso.html">
+
+<link rel="icon" href="../../../assets/images/favicon.ico" sizes="any">
+<link rel="icon" href="../../../assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="../../../assets/images/favicon-16x16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="../../../assets/images/apple-touch-icon.png" sizes="180x180">
+
+<meta property="og:title" content="Nombres naturals 1r ESO: teoria i exemples">
+<meta property="og:description" content="Repàs de nombres naturals, sistema decimal i operacions bàsiques de 1r d'ESO amb teoria clara, exemples resolts i exercicis interactius.">
+<meta property="og:image" content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png">
+<meta property="og:url" content="https://srigual-png.github.io/mates-interactives/1eso/teoria/numeric/nombres-naturals-1r-eso.html">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ca_ES">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  "name": "Nombres naturals 1r ESO: teoria, exemples i exercicis",
+  "description": "Teoria i exemples sobre nombres naturals de 1r d'ESO: comparació, ordre, arrodoniment, sistema decimal, valor posicional, operacions bàsiques i problemes.",
+  "educationalLevel": "1r ESO",
+  "inLanguage": "ca",
+  "isAccessibleForFree": true,
+  "learningResourceType": "lesson",
+  "url": "https://srigual-png.github.io/mates-interactives/1eso/teoria/numeric/nombres-naturals-1r-eso.html"
+}
+</script>
+
+<style>
+:root{
+  --bg:#f7f9fc;
+  --card:#fff;
+  --primary:#5b8dee;
+  --pd:#3a6fd8;
+  --ok:#34c97e;
+  --err:#e05c5c;
+  --warn:#f5a623;
+  --text:#2c3e50;
+  --muted:#7f8c9a;
+  --border:#dce3ed;
+  --sh:0 2px 12px rgba(0,0,0,.08);
+  --soft:#eaf1fd;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  line-height:1.6;
+}
+a{color:inherit}
+.top-nav{
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  box-shadow:var(--sh);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.nav-link{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:.83rem;
+  font-weight:650;
+  padding:5px 8px;
+  border-radius:8px;
+  white-space:nowrap;
+}
+.nav-link:hover{background:var(--soft);color:var(--primary)}
+.nav-title{
+  flex:1;
+  min-width:0;
+  font-size:1rem;
+  font-weight:750;
+  color:var(--primary);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.wrap{
+  width:min(760px,calc(100% - 32px));
+  margin:0 auto;
+  padding:30px 0 54px;
+}
+.hero{text-align:center;padding:10px 8px 22px}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:var(--soft);
+  color:var(--primary);
+  border-radius:999px;
+  padding:5px 11px;
+  font-size:.75rem;
+  font-weight:750;
+  margin-bottom:12px;
+}
+.hero h1{
+  font-size:clamp(1.7rem,4vw,2.25rem);
+  color:var(--primary);
+  line-height:1.15;
+  margin-bottom:9px;
+}
+.hero p{color:var(--muted);font-size:.96rem;max-width:620px;margin:0 auto}
+.hero-actions{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border-radius:12px;
+  padding:12px 20px;
+  text-decoration:none;
+  font-size:.91rem;
+  font-weight:700;
+  transition:.18s ease;
+}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--pd);transform:translateY(-1px)}
+.btn-secondary{background:var(--card);color:var(--primary);border:2px solid var(--primary)}
+.btn-secondary:hover{background:var(--soft)}
+.quick-nav{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin:4px 0 22px;
+}
+.quick-nav a{
+  text-decoration:none;
+  text-align:center;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:10px 7px;
+  color:var(--muted);
+  font-size:.78rem;
+  font-weight:700;
+  box-shadow:0 1px 5px rgba(0,0,0,.04);
+}
+.quick-nav a:hover{border-color:var(--primary);color:var(--primary);background:var(--soft)}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:16px;
+  box-shadow:var(--sh);
+}
+.card h2{
+  font-size:1.18rem;
+  color:var(--primary);
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.card h3{font-size:.96rem;margin:18px 0 7px}
+.card p + p{margin-top:9px}
+.callout{
+  background:var(--soft);
+  border-left:4px solid var(--primary);
+  border-radius:10px;
+  padding:13px 15px;
+  margin:13px 0;
+  font-size:.91rem;
+}
+.example{
+  background:#fbfcfe;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px 16px;
+  margin:12px 0;
+}
+.example-label{
+  display:inline-block;
+  font-size:.72rem;
+  font-weight:800;
+  color:var(--primary);
+  background:var(--soft);
+  border-radius:999px;
+  padding:2px 9px;
+  margin-bottom:7px;
+}
+.math{
+  font-family:'Courier New',monospace;
+  font-weight:700;
+  color:var(--pd);
+  line-height:1.8;
+}
+.steps{
+  counter-reset:pas;
+  display:grid;
+  gap:8px;
+  margin-top:12px;
+}
+.step{
+  position:relative;
+  padding:10px 12px 10px 42px;
+  background:#fbfcfe;
+  border:1px solid var(--border);
+  border-radius:10px;
+  font-size:.9rem;
+}
+.step:before{
+  counter-increment:pas;
+  content:counter(pas);
+  position:absolute;
+  left:11px;
+  top:9px;
+  width:22px;
+  height:22px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-size:.72rem;
+  font-weight:800;
+}
+.symbols{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin-top:12px;
+  font-size:.88rem;
+}
+.symbols th,.symbols td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left}
+.symbols tr:last-child td{border-bottom:0}
+.symbols th{background:var(--soft);color:var(--primary);font-weight:750}
+.symbols td:first-child{width:70px;text-align:center;font-size:1.1rem;font-weight:800;color:var(--pd)}
+.tip{
+  background:#fffbea;
+  border:1px solid #f5e0a0;
+  border-radius:11px;
+  padding:12px 14px;
+  margin-top:13px;
+  font-size:.88rem;
+  color:#785800;
+}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.problem{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:13px;
+  background:#fbfcfe;
+  font-size:.88rem;
+}
+.problem strong{display:block;color:var(--primary);margin-bottom:5px}
+.mistakes{
+  background:#fff8f8;
+  border:1px solid #f0b0b0;
+}
+.mistakes h2{color:var(--err)}
+.mistakes ul{padding-left:20px}
+.mistakes li+li{margin-top:6px}
+.check details{
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:#fbfcfe;
+  padding:12px 14px;
+  margin-top:9px;
+}
+.check summary{cursor:pointer;font-weight:650;color:var(--text)}
+.answer{
+  margin-top:9px;
+  padding-top:9px;
+  border-top:1px solid var(--border);
+  color:#1a7a4a;
+  font-size:.9rem;
+}
+.final-cta{
+  background:linear-gradient(135deg,#edf3ff,#fff);
+  border:1px solid #cad9f7;
+  border-radius:18px;
+  padding:24px;
+  text-align:center;
+  margin-top:20px;
+}
+.final-cta h2{color:var(--primary);font-size:1.25rem;margin-bottom:6px}
+.final-cta p{color:var(--muted);font-size:.9rem;margin-bottom:15px}
+.final-cta .hero-actions{margin-top:0}
+.footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:.76rem;
+  padding:4px 0 25px;
+}
+@media(max-width:650px){
+  .top-nav{padding:10px 10px;gap:4px}
+  .nav-link{padding:5px 5px;font-size:.75rem}
+  .nav-main-label,.sense-label{display:none}
+  .nav-title{font-size:.86rem}
+  .wrap{width:min(100% - 20px,760px);padding-top:20px}
+  .quick-nav{grid-template-columns:1fr 1fr}
+  .card{padding:17px}
+  .problem-grid{grid-template-columns:1fr}
+  .hero-actions{flex-direction:column}
+  .btn{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<nav class="top-nav" aria-label="Navegació principal">
+  <a class="nav-link" href="../../../index.html" title="Inici de Mates Interactives">🏠 <span class="nav-main-label">Mates Interactives</span></a>
+  <a class="nav-link" href="../../index.html" title="Matemàtiques de 1r ESO">📘 1r ESO</a>
+  <a class="nav-link" href="../../sentit-numeric.html" title="Sentit Numèric de 1r ESO">🔢 <span class="sense-label">Sentit Numèric</span></a>
+  <div class="nav-title">Nombres naturals</div>
+</nav>
+
+<main class="wrap">
+  <header class="hero">
+    <div class="eyebrow">1r ESO · Sentit numèric</div>
+    <h1>1️⃣ Nombres naturals</h1>
+    <p>Repassem els nombres naturals, el sistema de numeració decimal i les operacions bàsiques: comparar, arrodonir, entendre el valor posicional i resoldre problemes.</p>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="../../sentit-numeric.html?tema=naturals&nivell=1">🧩 Nivell 1 · Guiat</a>
+      <a class="btn btn-secondary" href="../../sentit-numeric.html?tema=naturals&nivell=2">✏️ Nivell 2 · Autònom</a>
+      <a class="btn btn-secondary" href="#que-son">📘 Comença la teoria</a>
+    </div>
+  </header>
+
+  <nav class="quick-nav" aria-label="Continguts de la teoria">
+    <a href="#que-son">1. Què són?</a>
+    <a href="#comparar">2. Comparar</a>
+    <a href="#arrodonir">3. Arrodonir</a>
+    <a href="#sistema-decimal">4. Sistema decimal</a>
+    <a href="#operacions">5. Operacions</a>
+    <a href="#problemes">6. Problemes</a>
+  </nav>
+
+  <section class="card" id="que-son">
+    <h2>🔢 1. Què són els nombres naturals?</h2>
+    <p>Els <strong>nombres naturals</strong> són els que fem servir habitualment per <strong>comptar</strong> i <strong>ordenar</strong>.</p>
+
+    <div class="callout">
+      En aquesta web considerarem que el <strong>0 també és un nombre natural</strong>:
+      <div class="math">0, 1, 2, 3, 4, 5, 6, ...</div>
+    </div>
+
+    <p>Els podem trobar a tot arreu: nombre d'alumnes d'una classe, habitants d'una ciutat, pàgines d'un llibre, punts d'un partit o posicions d'una classificació.</p>
+
+    <div class="example">
+      <span class="example-label">EXEMPLE</span>
+      <p>Una biblioteca té <strong>12.480 llibres</strong>. El nombre 12.480 és un nombre natural perquè expressa una quantitat que podem comptar.</p>
+    </div>
+
+    <div class="tip">💡 <strong>Recorda:</strong> els naturals no tenen part decimal i, en aquest nivell, no inclouen nombres negatius.</div>
+  </section>
+
+  <section class="card" id="comparar">
+    <h2>⚖️ 2. Comparar i ordenar nombres naturals</h2>
+    <p>Comparar dos nombres vol dir decidir quin és més gran, quin és més petit o si són iguals.</p>
+
+    <table class="symbols" aria-label="Símbols de comparació">
+      <thead><tr><th>Símbol</th><th>Significat</th><th>Exemple</th></tr></thead>
+      <tbody>
+        <tr><td>&gt;</td><td>més gran que</td><td>8.420 &gt; 7.999</td></tr>
+        <tr><td>&lt;</td><td>més petit que</td><td>3.508 &lt; 3.580</td></tr>
+        <tr><td>=</td><td>igual que</td><td>12.006 = 12.006</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Com els comparem?</h3>
+    <div class="steps">
+      <div class="step">Primer mira <strong>quantes xifres</strong> té cada nombre. Si un en té més, és el més gran.</div>
+      <div class="step">Si tenen el mateix nombre de xifres, compara-les <strong>des de l'esquerra</strong>.</div>
+      <div class="step">La <strong>primera xifra diferent</strong> decideix quin nombre és més gran.</div>
+    </div>
+
+    <div class="example">
+      <span class="example-label">EXEMPLE RESOLT</span>
+      <p>Compara <strong>48.205</strong> i <strong>47.999</strong>.</p>
+      <div class="math">48.205 &gt; 47.999</div>
+      <p>Tenen cinc xifres. La primera és igual (4), però a la segona comparem 8 i 7. Com que 8 &gt; 7, ja sabem que 48.205 és més gran.</p>
+    </div>
+
+    <div class="tip">💡 No cal comparar totes les xifres: quan trobes la primera que és diferent, ja pots decidir.</div>
+  </section>
+
+  <section class="card" id="arrodonir">
+    <h2>🎯 3. Arrodonir nombres naturals</h2>
+    <p>Arrodonir serveix per obtenir un nombre més senzill i proper a l'original. És molt útil per fer <strong>estimacions</strong>.</p>
+
+    <h3>Regla d'arrodoniment</h3>
+    <div class="steps">
+      <div class="step">Decideix a quina posició vols arrodonir: desenes, centenes, milers...</div>
+      <div class="step">Mira la xifra que queda <strong>just a la dreta</strong> de la posició escollida.</div>
+      <div class="step">Si és <strong>0, 1, 2, 3 o 4</strong>, mantén la xifra. Si és <strong>5, 6, 7, 8 o 9</strong>, augmenta-la en una unitat.</div>
+      <div class="step">Substitueix per zeros totes les xifres que queden a la dreta.</div>
+    </div>
+
+    <div class="example">
+      <span class="example-label">EXEMPLE · A LES CENTENES</span>
+      <p>Arrodoneix <strong>3.764</strong> a les centenes.</p>
+      <div class="math">3.764 → 3.800</div>
+      <p>La xifra de les centenes és 7. Mirem la xifra de la dreta: és 6. Com que 6 ≥ 5, el 7 passa a 8.</p>
+    </div>
+
+    <div class="example">
+      <span class="example-label">EXEMPLE · ALS MILERS</span>
+      <p>Arrodoneix <strong>27.451</strong> als milers.</p>
+      <div class="math">27.451 → 27.000</div>
+      <p>La xifra dels milers és 7. Mirem la xifra de les centenes: és 4. Com que 4 &lt; 5, el 7 es manté.</p>
+    </div>
+
+    <div class="tip">💡 <strong>Pregunta clau:</strong> «A quina posició arrodoneixo?» Després mira només la xifra immediatament de la dreta.</div>
+  </section>
+
+
+  <section class="card" id="sistema-decimal">
+    <h2>🔻 4. Sistema de numeració decimal</h2>
+    <p>En el nostre sistema de numeració, el valor d'una xifra depèn de la <strong>posició</strong> que ocupa. Cada posició val deu vegades més que la que té a la seva dreta.</p>
+
+    <div class="callout">
+      <div class="math">345.678 = 3×100.000 + 4×10.000 + 5×1.000 + 6×100 + 7×10 + 8</div>
+    </div>
+
+    <h3>Posicions de les xifres</h3>
+    <table class="symbols" aria-label="Valor posicional de les xifres">
+      <thead><tr><th>Posició</th><th>Valor</th><th>Exemple al nombre 345.678</th></tr></thead>
+      <tbody>
+        <tr><td>u</td><td>unitats</td><td>8 → 8</td></tr>
+        <tr><td>d</td><td>desenes</td><td>7 → 70</td></tr>
+        <tr><td>c</td><td>centenes</td><td>6 → 600</td></tr>
+        <tr><td>m</td><td>milers</td><td>5 → 5.000</td></tr>
+        <tr><td>dm</td><td>desenes de miler</td><td>4 → 40.000</td></tr>
+        <tr><td>cm</td><td>centenes de miler</td><td>3 → 300.000</td></tr>
+      </tbody>
+    </table>
+
+    <div class="example">
+      <span class="example-label">EXEMPLE · VALOR POSICIONAL</span>
+      <p>Al nombre <strong>72.541</strong>, la xifra 5 ocupa la posició de les centenes.</p>
+      <div class="math">5 × 100 = 500</div>
+    </div>
+
+    <div class="example">
+      <span class="example-label">EXEMPLE · DESCOMPOSICIÓ</span>
+      <div class="math">48.306 = 4×10.000 + 8×1.000 + 3×100 + 0×10 + 6×1</div>
+    </div>
+
+    <div class="tip">💡 El mateix dígit pot tenir valors molt diferents segons la posició: el 4 de 4.000 val 4.000, però el 4 de 40 val 40.</div>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="../../sentit-numeric.html?tema=decimal_sys&nivell=1">🧩 Sistema decimal · Nivell 1</a>
+      <a class="btn btn-secondary" href="../../sentit-numeric.html?tema=decimal_sys&nivell=2">✏️ Sistema decimal · Nivell 2</a>
+    </div>
+  </section>
+
+  <section class="card" id="operacions">
+    <h2>➕ 5. Operacions bàsiques amb nombres naturals</h2>
+    <p>Les quatre operacions bàsiques permeten ajuntar, comparar, repetir i repartir quantitats. Abans de calcular, convé identificar què representa cada operació.</p>
+
+    <div class="problem-grid">
+      <div class="problem">
+        <strong>➕ Suma</strong>
+        Alinea les xifres per posició i suma començant per les unitats.
+        <div class="math">2.438 + 1.765 = 4.203</div>
+      </div>
+
+      <div class="problem">
+        <strong>➖ Resta</strong>
+        Alinea les xifres i, si una columna no arriba, reagrupa una unitat de la posició següent.
+        <div class="math">5.204 − 1.879 = 3.325</div>
+      </div>
+
+      <div class="problem">
+        <strong>✖️ Multiplicació</strong>
+        Calcula els productes parcials respectant el valor posicional i suma'ls.
+        <div class="math">24 × 36 = 864</div>
+      </div>
+
+      <div class="problem">
+        <strong>➗ Divisió</strong>
+        Reparteix o agrupa una quantitat. El residu indica allò que sobra.
+        <div class="math">95 ÷ 8 = 11 i residu 7</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      En qualsevol divisió amb nombres naturals:
+      <div class="math">dividend = divisor × quocient + residu</div>
+    </div>
+
+    <div class="example">
+      <span class="example-label">COMPROVACIÓ D'UNA DIVISIÓ</span>
+      <div class="math">95 = 8 × 11 + 7</div>
+    </div>
+
+    <div class="tip">💡 En un problema, no ignoris el residu: pot indicar persones, objectes o places que encara necessiten un grup més.</div>
+
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="../../sentit-numeric.html?tema=ops&nivell=1">🧩 Operacions · Nivell 1</a>
+      <a class="btn btn-secondary" href="../../sentit-numeric.html?tema=ops&nivell=2">✏️ Operacions · Nivell 2</a>
+    </div>
+  </section>
+
+  <section class="card" id="problemes">
+    <h2>🧠 6. Problemes amb nombres naturals</h2>
+    <p>En un problema, el més important no és calcular de seguida. Primer cal entendre <strong>què sabem</strong> i <strong>què ens demanen</strong>.</p>
+
+    <div class="steps">
+      <div class="step">Llegeix el problema sencer i identifica la pregunta.</div>
+      <div class="step">Selecciona només les dades que necessites.</div>
+      <div class="step">Decideix quina operació o quines operacions representen la situació.</div>
+      <div class="step">Calcula i comprova que la resposta tingui sentit en el context.</div>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem">
+        <strong>➕ Ajuntar quantitats</strong>
+        Un museu rep 1.275 visitants al matí i 986 a la tarda.
+        <div class="math">1.275 + 986 = 2.261</div>
+      </div>
+
+      <div class="problem">
+        <strong>➖ Saber què queda</strong>
+        Una biblioteca té 3.420 llibres i n'ha prestat 875.
+        <div class="math">3.420 − 875 = 2.545</div>
+      </div>
+
+      <div class="problem">
+        <strong>✖️ Grups iguals</strong>
+        Hi ha 24 caixes amb 36 llapis a cada caixa.
+        <div class="math">24 × 36 = 864</div>
+      </div>
+
+      <div class="problem">
+        <strong>➗ Repartir o agrupar</strong>
+        945 alumnes viatgen en autocars de 50 places. Calen 19 autocars, perquè 18 no són suficients.
+        <div class="math">945 ÷ 50 = 18 i sobren 45</div>
+      </div>
+    </div>
+
+    <div class="tip">💡 En els problemes, el <strong>residu</strong> també pot tenir significat. Si sobren persones, pot caldre un grup o vehicle més.</div>
+  </section>
+
+  <section class="card mistakes">
+    <h2>⚠️ Errors típics</h2>
+    <ul>
+      <li>Comparar només les últimes xifres i ignorar les primeres.</li>
+      <li>Arrodonir mirant la mateixa xifra que vols conservar, en lloc de mirar la de la dreta.</li>
+      <li>Confondre la xifra amb el seu valor posicional: un 5 pot valer 5, 50, 500...</li>
+      <li>Desalinear les xifres en una suma o una resta.</li>
+      <li>Oblidar el valor posicional dels productes parcials en una multiplicació.</li>
+      <li>Ignorar el residu d'una divisió quan té significat en el problema.</li>
+      <li>Fer una operació abans d'entendre què pregunta el problema.</li>
+      <li>Donar un resultat numèric correcte però que no respon el que es demana.</li>
+    </ul>
+  </section>
+
+  <section class="card check">
+    <h2>✅ Comprova si ho has entès</h2>
+
+    <details>
+      <summary>1. Quin és més gran: 53.809 o 53.890?</summary>
+      <div class="answer"><strong>53.890</strong>. Les primeres tres xifres coincideixen; després comparem 0 i 8.</div>
+    </details>
+
+    <details>
+      <summary>2. Arrodoneix 6.748 a les centenes.</summary>
+      <div class="answer"><strong>6.700</strong>. Mirem la xifra de les desenes: és 4, així que la centena es manté.</div>
+    </details>
+
+    <details>
+      <summary>3. Una entrada costa 12 € i hi van 35 alumnes. Quants euros paguen en total?</summary>
+      <div class="answer"><strong>420 €</strong>, perquè 35 × 12 = 420.</div>
+    </details>
+
+    <details>
+      <summary>4. Quin valor té la xifra 7 al nombre 274.315?</summary>
+      <div class="answer"><strong>70.000</strong>, perquè el 7 ocupa la posició de les desenes de miler.</div>
+    </details>
+
+    <details>
+      <summary>5. En la divisió 157 ÷ 12, el quocient és 13 i el residu és 1. Com ho comproves?</summary>
+      <div class="answer"><strong>12 × 13 + 1 = 157</strong>.</div>
+    </details>
+  </section>
+
+  <section class="final-cta">
+    <h2>Ja tens la teoria. Ara toca practicar.</h2>
+    <p>Fes exercicis guiats, passa després al nivell autònom i repassa els errors que vagis cometent.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="../../sentit-numeric.html?tema=naturals&nivell=1">🧩 Nivell 1 · Guiat</a>
+      <a class="btn btn-secondary" href="../../sentit-numeric.html?tema=naturals&nivell=2">✏️ Nivell 2 · Autònom</a>
+      <a class="btn btn-secondary" href="../../sentit-numeric.html">← Sentit Numèric</a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  Mates Interactives · Matemàtiques de 1r d'ESO · Recurs gratuït
+</footer>
+
+<script>
+if (location.protocol !== "file:") {
+  const s = document.createElement("script");
+  s.async = true;
+  s.dataset.goatcounter = "https://srigual.goatcounter.com/count";
+  s.src = "https://gc.zgo.at/count.js";
+  document.body.appendChild(s);
+}
+</script>
+
+</body>
+</html>

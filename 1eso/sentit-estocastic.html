@@ -73,6 +73,8 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .theory-box{background:#fff6e5;border-left:4px solid var(--primary);border-radius:10px;padding:15px 17px;margin-bottom:18px;font-size:0.91rem;line-height:1.7;}
 .theory-box h3{color:var(--primary);margin-bottom:8px;font-size:0.97rem;}
 .theory-box .formula{background:white;border-radius:8px;padding:9px 13px;margin:6px 0;font-size:0.88rem;border:1px solid var(--border);}
+.theory-page-link{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card);border:2px solid var(--primary);border-radius:12px;padding:11px 14px;margin:-8px 0 18px;color:var(--primary-dark);font-size:.9rem;font-weight:700;text-decoration:none;transition:all .15s;}
+.theory-page-link:hover{background:#fff6e5;transform:translateY(-1px);}
 .level-select{display:flex;gap:12px;margin-bottom:22px;}
 .level-btn{flex:1;padding:11px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:0.88rem;font-weight:600;color:var(--muted);transition:all 0.2s;}
 .level-btn.active{border-color:var(--primary);color:var(--primary);background:#fff6e5;}
@@ -2353,6 +2355,22 @@ function selectTopic(i){
   var html='<div class="theory-box"><h3>📖 '+t.theory.title+'</h3><p>'+t.theory.text+'</p>';
   t.theory.formulas.forEach(f=>{html+='<div class="formula">'+f+'</div>';});
   html+='</div>';
+  const theoryPages={
+    recollida:'teoria/estocastic/recollida-dades-inferencia-1r-eso.html',
+    taules:'teoria/estocastic/taules-frequencies-1r-eso.html',
+    barres:'teoria/estocastic/diagrames-barres-1r-eso.html',
+    sectors:'teoria/estocastic/diagrames-sectors-1r-eso.html',
+    poligons:'teoria/estocastic/poligons-frequencies-1r-eso.html',
+    mitjana:'teoria/estocastic/mitjana-aritmetica-1r-eso.html',
+    mediana:'teoria/estocastic/mediana-1r-eso.html',
+    moda:'teoria/estocastic/moda-1r-eso.html',
+    probabilitat:'teoria/estocastic/probabilitat-1r-eso.html',
+    acumulades2:'teoria/estocastic/frequencies-acumulades-ampliacio-2n-eso.html',
+    histograma:'teoria/estocastic/histogrames-ampliacio-2n-eso.html'
+  };
+  if(theoryPages[t.id]){
+    html+='<a class="theory-page-link" href="'+theoryPages[t.id]+'">📖 Teoria i exemples</a>';
+  }
   document.getElementById('introContent').innerHTML=html;
   document.getElementById('btnLvl1').classList.add('active');
   document.getElementById('btnLvl2').classList.remove('active');
@@ -2765,6 +2783,22 @@ function disarmReset(){
 (async function init(){
   document.getElementById('topicsGrid').innerHTML='<p style="text-align:center;color:var(--muted);padding:24px;font-size:0.85rem">Carregant el teu progrés...</p>';
   await loadState();
+  const params=new URLSearchParams(window.location.search);
+  const topicId=params.get('tema');
+  const levelParam=parseInt(params.get('nivell'),10);
+  if(topicId){
+    const idx=TOPICS.findIndex(function(t){return t.id===topicId;});
+    if(idx>=0){
+      if(TOPICS[idx].course==='1r'&&!isTopicUnlocked(idx)){
+        if(state.unlockedIds.indexOf(TOPICS[idx].id)<0)state.unlockedIds.push(TOPICS[idx].id);
+        await saveState();
+      }
+      selectTopic(idx);
+      selectLevel(levelParam===2?2:1);
+      startPractice();
+      return;
+    }
+  }
   showHome();
 })();
 </script>
