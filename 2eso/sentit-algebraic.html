@@ -95,6 +95,9 @@ nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;
 .example-box .ex-step:last-child{border:none;}
 .example-box .ex-res{color:var(--primary);font-weight:700;}
 
+.theory-page-link{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;margin:4px 0 16px;padding:11px 14px;border:2px solid var(--primary);border-radius:12px;background:#fff;color:var(--primary-dark);text-decoration:none;font-size:.88rem;font-weight:750;transition:all .2s;}
+.theory-page-link:hover{background:#fff0eb;transform:translateY(-1px);}
+
 .level-select{display:flex;gap:12px;margin-bottom:14px;}
 .level-btn{flex:1;padding:11px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:0.88rem;font-weight:600;color:var(--muted);transition:all 0.2s;}
 .level-btn.active{border-color:var(--primary);color:var(--primary);background:#fff0eb;}
@@ -266,6 +269,7 @@ nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;
   </div>
   <div id="tabTheory"></div>
   <div id="tabExample" style="display:none"></div>
+  <div id="externalTheoryLink"></div>
   <div class="level-select" style="margin-top:16px;">
     <button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Nivell 1<br><small>Guiat</small></button>
     <button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Nivell 2<br><small>Sol/a</small></button>
@@ -2759,6 +2763,20 @@ const TOPICS=[
   {id:'sistemes3r',course:'3r',exam2n:false,icon:'⭐',name:'Sistemes de dues equacions · introducció',short:'Ampliació · Prepara 3r · Solucions (x,y), eliminació, substitució i intersecció',theoryKey:'sistemes3r',gen:genSistemes2x2Intro3r}
 ];
 
+/* ── PÀGINES DE TEORIA EXTERNA ─────────────────────────────── */
+const THEORY_PAGES={
+  patrons:'teoria/algebraic/patrons-terme-general.html',
+  expressions:'teoria/algebraic/expressions-algebraiques.html',
+  equacions:'teoria/algebraic/equacions-primer-grau.html',
+  problemes:'teoria/algebraic/problemes-equacions.html',
+  relacions:'teoria/algebraic/relacions-funcions.html',
+  funcionslineals:'teoria/algebraic/funcions-lineals-afins.html',
+  computacional:'teoria/algebraic/pensament-computacional.html',
+  productes3r:'teoria/algebraic/productes-factor-comu.html',
+  identitats3r:'teoria/algebraic/identitats-notables.html',
+  sistemes3r:'teoria/algebraic/sistemes-dues-equacions.html'
+};
+
 /* ── VARIETAT DE SESSIÓ ─────────────────────────────────────────────── */
 const variationMemory={};
 function variationKey(ex){
@@ -3042,6 +3060,10 @@ function selectTopic(i){
   }
   document.getElementById('tabTheory').innerHTML=theoryHtml;
   document.getElementById('tabExample').innerHTML=exHtml;
+  const theoryUrl=THEORY_PAGES[t.id];
+  document.getElementById('externalTheoryLink').innerHTML=theoryUrl
+    ? '<a class="theory-page-link" href="'+theoryUrl+'">📘 Teoria i exemples complets →</a>'
+    : '';
   document.getElementById('tabTheory').style.display='block';
   document.getElementById('tabExample').style.display='none';
   document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
@@ -3577,7 +3599,33 @@ function disarmReset(){
   if(btn){btn.innerHTML='↺ Reiniciar progrés';btn.style.borderColor='';btn.style.color='';}
 }
 
-loadState();showHome();
+/* ── ACCÉS DIRECTE DES DE LA TEORIA / GOOGLE ───────────────── */
+function applyDeepLink(){
+  const params=new URLSearchParams(window.location.search);
+  const topicId=params.get('topic');
+  if(!topicId)return false;
+  const idx=TOPICS.findIndex(t=>t.id===topicId);
+  if(idx<0)return false;
+  if(!state.unlockedIds.includes(topicId)){
+    state.unlockedIds.push(topicId);
+    saveState();
+  }
+  state.currentTopic=idx;
+  const level=Number(params.get('level'));
+  state.level=level===2?2:1;
+  state.mode='multi';
+  if(params.get('practice')==='1'){
+    setNavContext(TOPICS[idx].name,true,true);
+    startPractice();
+  }else{
+    selectTopic(idx);
+  }
+  return true;
+}
+
+/* ── INICI ─────────────────────────────────────────────────── */
+loadState();
+if(!applyDeepLink())showHome();
 </script>
 <!-- ===================================================== -->
 <!-- GOATCOUNTER -->

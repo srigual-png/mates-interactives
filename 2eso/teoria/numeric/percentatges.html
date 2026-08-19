@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Percentatges | Teoria de Matemàtiques 2n ESO</title>
+<meta name="description" content="Aprèn a calcular parts, percentatges i totals, i a interpretar augments, disminucions, variacions i percentatges successius. Teoria clara, exemples resolts i accés directe a exercicis interactius de 2n d'ESO.">
+<meta name="author" content="Salvador Rigual Valls">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://srigual-png.github.io/mates-interactives/2eso/teoria/numeric/percentatges.html">
+<link rel="icon" href="../../../assets/images/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../assets/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../assets/images/apple-touch-icon.png">
+<style>
+:root{
+  --bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--primary-dark:#3a6fd8;
+  --text:#2c3e50;--muted:#718096;--border:#dce3ed;--soft:#eaf1fd;
+  --success:#248a58;--warn:#a96a00;--shadow:0 4px 18px rgba(33,52,78,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+a{color:inherit}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.topbar__inner{max-width:1050px;margin:auto;padding:10px 20px;display:flex;align-items:center;gap:8px;overflow-x:auto;white-space:nowrap}
+.crumb{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:700;padding:5px 8px;border:1px solid var(--border);border-radius:8px;background:#fff}
+.crumb:hover{color:var(--primary-dark);border-color:var(--primary)}
+.sep{color:#b8c3d1;font-size:.8rem}
+.hero{background:linear-gradient(180deg,#eef4ff 0%,#f7f9fc 100%);border-bottom:1px solid #e3eaf5}
+.hero__inner{max-width:900px;margin:auto;padding:54px 22px 42px;text-align:center}
+.eyebrow{display:inline-block;padding:5px 11px;border-radius:999px;background:#fff;border:1px solid #ccdaf3;color:var(--primary-dark);font-size:.78rem;font-weight:800;margin-bottom:12px}
+h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin:0;color:var(--primary-dark)}
+.hero p{max-width:720px;margin:16px auto 0;color:#536477;font-size:1.02rem}
+.hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;border-radius:12px;padding:11px 16px;font-weight:800;font-size:.9rem;transition:.18s}
+.btn--primary{background:var(--primary);color:white;border:2px solid var(--primary)}
+.btn--primary:hover{background:var(--primary-dark);border-color:var(--primary-dark);transform:translateY(-1px)}
+.btn--secondary{background:#fff;color:var(--primary-dark);border:2px solid var(--primary)}
+.btn--secondary:hover{background:var(--soft);transform:translateY(-1px)}
+.btn--ghost{background:#fff;color:var(--muted);border:1px solid var(--border)}
+main{max-width:900px;margin:auto;padding:28px 20px 48px}
+.intro{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);margin-bottom:18px}
+.intro p{margin:0}
+.toc{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin:18px 0 24px}
+.toc strong{display:block;color:var(--primary-dark);margin-bottom:8px}
+.toc__links{display:flex;flex-wrap:wrap;gap:8px}
+.toc a{text-decoration:none;color:#52667e;background:#f8fafc;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
+.theory-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;margin:16px 0;box-shadow:var(--shadow)}
+.section-kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--primary);font-weight:900;margin-bottom:3px}
+h2{font-size:1.4rem;line-height:1.25;color:var(--primary-dark);margin:0 0 10px}
+h3{line-height:1.3}
+.theory-card p{margin:0 0 12px}
+.clean-list{padding-left:1.2rem;margin:10px 0 0}
+.clean-list li{margin:6px 0}
+.callout{background:var(--soft);border-left:4px solid var(--primary);border-radius:10px;padding:12px 14px;margin-top:14px;font-weight:650}
+.math-table{width:100%;border-collapse:collapse;margin:14px 0 4px;font-size:.92rem}
+.math-table th,.math-table td{border:1px solid var(--border);padding:9px 10px;text-align:left}
+.math-table th{background:#f4f7fb;color:var(--primary-dark)}
+.examples-wrap{margin:28px 0}
+.example-card{background:#f0f7ff;border:1px solid #cee0f5;border-left:5px solid #2980b9;border-radius:16px;padding:20px 22px;margin:14px 0}
+.example-card__tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#2473a5;font-weight:900}
+.example-card h3{margin:3px 0 8px;color:#245f89}
+.example-card ol{margin:8px 0 10px;padding-left:1.4rem}
+.example-card li{margin:5px 0}
+.result{background:#fff;border:1px solid #c5daef;border-radius:10px;padding:10px 12px;color:var(--primary-dark);font-weight:800}
+.mistakes-wrap{background:#fffaf0;border:1px solid #efd6a6;border-radius:18px;padding:22px;margin:26px 0}
+.mistakes-wrap>h2{color:#946015}
+.mistake{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #f0dfbd}
+.mistake:last-child{border-bottom:0;padding-bottom:0}
+.mistake h3{font-size:.98rem;margin:0 0 3px;color:#7f571a}
+.mistake p{margin:0;font-size:.9rem}
+.summary{background:#f0fbf5;border:1px solid #bfe5cf;border-radius:18px;padding:22px;margin:26px 0}
+.summary h2{color:var(--success)}
+.practice-panel{background:#fff;border:2px solid #cbdaf2;border-radius:20px;padding:24px;text-align:center;margin:28px 0 18px;box-shadow:var(--shadow)}
+.practice-panel p{margin:0 auto 16px;color:var(--muted);max-width:620px}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.pager__link{display:flex;align-items:center;text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:12px;padding:11px 13px;color:var(--primary-dark);font-size:.84rem;font-weight:800}
+.pager__link--next{justify-content:flex-end;text-align:right}
+.footer{border-top:1px solid var(--border);background:#fff;color:var(--muted);text-align:center;padding:24px 18px;font-size:.8rem}
+@media(max-width:650px){
+  .topbar__inner{padding:8px 10px}
+  .hero__inner{padding:38px 16px 32px}
+  main{padding:20px 13px 38px}
+  .theory-card,.intro{padding:19px 17px}
+  .hero-actions{flex-direction:column}
+  .btn{width:100%}
+  .math-table{font-size:.82rem}
+  .math-table th,.math-table td{padding:7px}
+  .pager{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <nav class="topbar__inner" aria-label="Navegació">
+    <a class="crumb" href="../../../index.html">🏠 Mates Interactives</a>
+    <span class="sep">›</span>
+    <a class="crumb" href="../../index.html">📘 2n ESO</a>
+    <span class="sep">›</span>
+    <a class="crumb" href="../../sentit-numeric.html">🔢 Sentit Numèric</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero__inner">
+    <span class="eyebrow">Teoria · Sentit Numèric · 2n ESO</span>
+    <h1>Percentatges</h1>
+    <p>Aprèn a calcular parts, percentatges i totals, i a interpretar augments, disminucions, variacions i percentatges successius</p>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=percentatges&level=1&practice=1">🧩 Practica · Nivell 1</a>
+      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=percentatges&level=2&practice=1">✏️ Practica · Nivell 2</a>
+      <a class="btn btn--ghost" href="../../sentit-numeric.html?topic=percentatges">Veure el bloc →</a>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="intro"><p>Els percentatges apareixen en descomptes, impostos, estadístiques i moltes situacions quotidianes. A 2n d'ESO cal distingir <strong>què coneixem i què volem trobar</strong>: la part, el percentatge o el total.</p></div>
+
+  <nav class="toc" aria-label="Índex de la teoria">
+    <strong>En aquesta pàgina</strong>
+    <div class="toc__links">
+      <a href="#significat">Què és un percentatge?</a><a href="#part">Trobar una part a partir del percentatge</a><a href="#percentatge">Trobar el percentatge</a><a href="#total">Trobar el total</a><a href="#augment-disminucio">Augments i disminucions percentuals</a><a href="#variacio">Variació percentual</a><a href="#successius">Percentatges successius</a>
+      <a href="#exemples">Exemples resolts</a>
+      <a href="#errors">Errors habituals</a>
+      <a href="#resum">Resum</a>
+    </div>
+  </nav>
+
+  
+<section class="theory-card" id="significat">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Què és un percentatge?</h2>
+  <p>Un percentatge expressa una proporció respecte de 100. Per exemple, 25% significa 25 de cada 100 i equival a 25/100 = 0,25.</p>
+  <ul class='clean-list'><li>El símbol <strong>%</strong> vol dir «de cada 100».</li><li>Un percentatge es pot escriure com a fracció o decimal.</li><li>50% = 1/2 = 0,5; 20% = 1/5 = 0,2.</li></ul>
+  
+  <div class='callout'>Percentatge, fracció i decimal són tres representacions d'una mateixa proporció.</div>
+</section>
+<section class="theory-card" id="part">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Trobar una part a partir del percentatge</h2>
+  <p>Si coneixem el total i el percentatge, podem calcular quina quantitat representa aquella part.</p>
+  <ul class='clean-list'><li>Expressa el percentatge com a decimal o fracció.</li><li>Multiplica el total pel percentatge.</li><li>Si el percentatge és inferior al 100%, la part ha de ser menor que el total.</li></ul>
+  
+  
+</section>
+<section class="theory-card" id="percentatge">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Trobar el percentatge</h2>
+  <p>Si coneixem una part i el total, podem calcular quin percentatge representa aquella part.</p>
+  <ul class='clean-list'><li>Divideix la part entre el total.</li><li>Multiplica el resultat per 100 per expressar-lo en percentatge.</li></ul>
+  
+  
+</section>
+<section class="theory-card" id="total">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Trobar el total</h2>
+  <p>Quan coneixem una part i sabem quin percentatge representa, hem de reconstruir el 100%.</p>
+  <ul class='clean-list'><li>Pots calcular primer quant representa l'1% i després arribar al 100%.</li><li>També pots plantejar una proporció equivalent.</li><li>Si el percentatge és inferior al 100%, el total ha de ser més gran que la part.</li></ul>
+  
+  
+</section>
+<section class="theory-card" id="augment-disminucio">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Augments i disminucions percentuals</h2>
+  <p>Un augment o una disminució percentual modifica una quantitat inicial.</p>
+  <ul class='clean-list'><li>Augmentar p% equival a quedar-se amb (100 + p)% del valor inicial.</li><li>Disminuir p% equival a quedar-se amb (100 − p)% del valor inicial.</li><li>Un augment del 20% equival a multiplicar per 1,20.</li><li>Una disminució del 20% equival a multiplicar per 0,80.</li></ul>
+  
+  
+</section>
+<section class="theory-card" id="variacio">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Variació percentual</h2>
+  <p>La variació percentual compara el canvi produït amb el valor inicial.</p>
+  <ul class='clean-list'><li>Calcula la diferència entre valor final i inicial.</li><li>Divideix el canvi pel valor inicial.</li><li>Expressa el resultat en percentatge.</li></ul>
+  
+  <div class='callout'>Variació percentual = (canvi / valor inicial) · 100.</div>
+</section>
+<section class="theory-card" id="successius">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Percentatges successius</h2>
+  <p>Quan s'apliquen diversos percentatges un darrere l'altre, cada canvi actua sobre el resultat del pas anterior.</p>
+  <ul class='clean-list'><li>Un descompte del 20% i després un altre del 10% no equivalen a un 30%.</li><li>Aplica primer un factor i després l'altre.</li><li>Els factors multiplicatius mostren l'efecte acumulat.</li></ul>
+  
+  
+</section>
+
+  <section class="examples-wrap" id="exemples">
+    <h2>✏️ Exemples resolts</h2>
+    
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Calcular el 35% de 240</h3>
+  <ol><li>35% = 0,35.</li><li>240 · 0,35 = 84.</li></ol>
+  <div class="result">El 35% de 240 és 84.</div>
+</article>
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Quin percentatge és 18 de 60?</h3>
+  <ol><li>18 ÷ 60 = 0,3.</li><li>0,3 · 100 = 30.</li></ol>
+  <div class="result">18 representa el 30% de 60.</div>
+</article>
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Trobar el total</h3>
+  <ol><li>24 és el 30% d'un grup.</li><li>24 ÷ 30 = 0,8 correspon a l'1%.</li><li>0,8 · 100 = 80.</li><li>Comprovació: el 30% de 80 és 24.</li></ol>
+  <div class="result">El grup té 80 alumnes.</div>
+</article>
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Descompte del 20%</h3>
+  <ol><li>Preu inicial: 150 €.</li><li>Descomptar 20% significa pagar 80%.</li><li>150 · 0,80 = 120.</li></ol>
+  <div class="result">El preu final és 120 €.</div>
+</article>
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Dos descomptes successius</h3>
+  <ol><li>Preu inicial: 100 €.</li><li>20% de descompte → 80 €.</li><li>10% de descompte sobre 80 € → 72 €.</li></ol>
+  <div class="result">El descompte efectiu total és del 28%, no del 30%.</div>
+</article>
+  </section>
+
+  <section class="mistakes-wrap" id="errors">
+    <h2>⚠️ Errors habituals que convé evitar</h2>
+    <article class="mistake"><div class="mistake__icon">⚠️</div>
+        <div><h3>Confondre percentatge amb quantitat</h3><p>25% no són 25 unitats: és una proporció que necessita un total de referència.</p></div></article><article class="mistake"><div class="mistake__icon">⚠️</div>
+        <div><h3>Invertir el pas entre decimal i percentatge</h3><p>De percentatge a decimal divideixes entre 100; de decimal a percentatge multipliques per 100.</p></div></article><article class="mistake"><div class="mistake__icon">⚠️</div>
+        <div><h3>Fer el problema invers com si fos directe</h3><p>Si 24 és el 30% del total, calcular el 30% de 24 no reconstrueix el total.</p></div></article><article class="mistake"><div class="mistake__icon">⚠️</div>
+        <div><h3>Usar el valor final en la variació</h3><p>La variació percentual es compara amb el valor inicial.</p></div></article><article class="mistake"><div class="mistake__icon">⚠️</div>
+        <div><h3>Sumar percentatges successius</h3><p>Cada percentatge s'aplica sobre una base nova.</p></div></article>
+  </section>
+
+  <section class="summary" id="resum">
+    <h2>✅ Què hauries de tenir clar</h2>
+    <ul><li>Interpretar un percentatge respecte de 100.</li><li>Calcular una part, un percentatge o un total.</li><li>Calcular augments i disminucions percentuals.</li><li>Interpretar la variació percentual respecte del valor inicial.</li><li>Resoldre percentatges successius sense sumar-los mecànicament.</li></ul>
+  </section>
+
+  <section class="practice-panel">
+    <h2>Ara toca practicar</h2>
+    <p>Tria el nivell. Si has arribat aquí directament des d'un cercador, el tema s'obrirà automàticament perquè puguis començar.</p>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=percentatges&level=1&practice=1">🧩 Nivell 1 · Guiat</a>
+      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=percentatges&level=2&practice=1">✏️ Nivell 2 · Sol/a</a>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Altres continguts de teoria">
+    <a class="pager__link" href="proporcionalitat-directa.html">← Proporcionalitat directa</a>
+    <a class="pager__link pager__link--next" href="recomptes-sistematics.html">Recomptes sistemàtics →</a>
+  </nav>
+</main>
+
+<footer class="footer">
+  © 2026 Mates Interactives · Creat per Salvador Rigual · 100 % gratuït · Sense anuncis · Sense cookies
+</footer>
+
+<script>
+const isLocal =
+  location.protocol === "file:" ||
+  ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+
+if (!isLocal) {
+  const s = document.createElement("script");
+  s.async = true;
+  s.dataset.goatcounter = "https://srigual.goatcounter.com/count";
+  s.src = "https://gc.zgo.at/count.js";
+  document.body.appendChild(s);
+}
+</script>
+</body>
+</html>

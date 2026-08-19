@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aproximacions, precisió i errors | Teoria de Matemàtiques 2n ESO</title>
+<meta name="description" content="Aprèn a arrodonir, aproximar per defecte o per excés, calcular errors i valorar si un resultat és prou precís. Teoria clara, exemples resolts i accés directe a exercicis interactius de 2n d'ESO.">
+<meta name="author" content="Salvador Rigual Valls">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://srigual-png.github.io/mates-interactives/2eso/teoria/numeric/aproximacions-errors.html">
+<link rel="icon" href="../../../assets/images/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../assets/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../assets/images/apple-touch-icon.png">
+<style>
+:root{
+  --bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--primary-dark:#3a6fd8;
+  --text:#2c3e50;--muted:#718096;--border:#dce3ed;--soft:#eaf1fd;
+  --success:#248a58;--warn:#a96a00;--shadow:0 4px 18px rgba(33,52,78,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+a{color:inherit}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.topbar__inner{max-width:1050px;margin:auto;padding:10px 20px;display:flex;align-items:center;gap:8px;overflow-x:auto;white-space:nowrap}
+.crumb{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:700;padding:5px 8px;border:1px solid var(--border);border-radius:8px;background:#fff}
+.crumb:hover{color:var(--primary-dark);border-color:var(--primary)}
+.sep{color:#b8c3d1;font-size:.8rem}
+.hero{background:linear-gradient(180deg,#eef4ff 0%,#f7f9fc 100%);border-bottom:1px solid #e3eaf5}
+.hero__inner{max-width:900px;margin:auto;padding:54px 22px 42px;text-align:center}
+.eyebrow{display:inline-block;padding:5px 11px;border-radius:999px;background:#fff;border:1px solid #ccdaf3;color:var(--primary-dark);font-size:.78rem;font-weight:800;margin-bottom:12px}
+h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin:0;color:var(--primary-dark)}
+.hero p{max-width:720px;margin:16px auto 0;color:#536477;font-size:1.02rem}
+.hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;border-radius:12px;padding:11px 16px;font-weight:800;font-size:.9rem;transition:.18s}
+.btn--primary{background:var(--primary);color:white;border:2px solid var(--primary)}
+.btn--primary:hover{background:var(--primary-dark);border-color:var(--primary-dark);transform:translateY(-1px)}
+.btn--secondary{background:#fff;color:var(--primary-dark);border:2px solid var(--primary)}
+.btn--secondary:hover{background:var(--soft);transform:translateY(-1px)}
+.btn--ghost{background:#fff;color:var(--muted);border:1px solid var(--border)}
+main{max-width:900px;margin:auto;padding:28px 20px 48px}
+.intro{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);margin-bottom:18px}
+.intro p{margin:0}
+.toc{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin:18px 0 24px}
+.toc strong{display:block;color:var(--primary-dark);margin-bottom:8px}
+.toc__links{display:flex;flex-wrap:wrap;gap:8px}
+.toc a{text-decoration:none;color:#52667e;background:#f8fafc;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
+.toc a:hover{color:var(--primary-dark);border-color:var(--primary)}
+.theory-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;margin:16px 0;box-shadow:var(--shadow)}
+.section-kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--primary);font-weight:900;margin-bottom:3px}
+h2{font-size:1.4rem;line-height:1.25;color:var(--primary-dark);margin:0 0 10px}
+h3{line-height:1.3}
+.theory-card p{margin:0 0 12px}
+.clean-list{padding-left:1.2rem;margin:10px 0 0}
+.clean-list li{margin:6px 0}
+.callout{background:var(--soft);border-left:4px solid var(--primary);border-radius:10px;padding:12px 14px;margin-top:14px;font-weight:650}
+.math-table{width:100%;border-collapse:collapse;margin:14px 0 4px;font-size:.92rem}
+.math-table th,.math-table td{border:1px solid var(--border);padding:9px 10px;text-align:left}
+.math-table th{background:#f4f7fb;color:var(--primary-dark)}
+.examples-wrap{margin:28px 0}
+.example-card{background:#f0f7ff;border:1px solid #cee0f5;border-left:5px solid #2980b9;border-radius:16px;padding:20px 22px;margin:14px 0}
+.example-card__tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#2473a5;font-weight:900}
+.example-card h3{margin:3px 0 8px;color:#245f89}
+.example-card ol{margin:8px 0 10px;padding-left:1.4rem}
+.example-card li{margin:5px 0}
+.result{background:#fff;border:1px solid #c5daef;border-radius:10px;padding:10px 12px;color:var(--primary-dark);font-weight:800}
+.mistakes-wrap{background:#fffaf0;border:1px solid #efd6a6;border-radius:18px;padding:22px;margin:26px 0}
+.mistakes-wrap>h2{color:#946015}
+.mistake{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #f0dfbd}
+.mistake:last-child{border-bottom:0;padding-bottom:0}
+.mistake h3{font-size:.98rem;margin:0 0 3px;color:#7f571a}
+.mistake p{margin:0;font-size:.9rem}
+.summary{background:#f0fbf5;border:1px solid #bfe5cf;border-radius:18px;padding:22px;margin:26px 0}
+.summary h2{color:var(--success)}
+.practice-panel{background:#fff;border:2px solid #cbdaf2;border-radius:20px;padding:24px;text-align:center;margin:28px 0 18px;box-shadow:var(--shadow)}
+.practice-panel p{margin:0 auto 16px;color:var(--muted);max-width:620px}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.pager__link{display:flex;align-items:center;text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:12px;padding:11px 13px;color:var(--primary-dark);font-size:.84rem;font-weight:800}
+.pager__link--next{justify-content:flex-end;text-align:right}
+.footer{border-top:1px solid var(--border);background:#fff;color:var(--muted);text-align:center;padding:24px 18px;font-size:.8rem}
+@media(max-width:650px){
+  .topbar__inner{padding:8px 10px}
+  .hero__inner{padding:38px 16px 32px}
+  main{padding:20px 13px 38px}
+  .theory-card,.intro{padding:19px 17px}
+  .hero-actions{flex-direction:column}
+  .btn{width:100%}
+  .math-table{font-size:.82rem}
+  .math-table th,.math-table td{padding:7px}
+  .pager{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <nav class="topbar__inner" aria-label="Navegació">
+    <a class="crumb" href="../../../index.html">🏠 Mates Interactives</a>
+    <span class="sep">›</span>
+    <a class="crumb" href="../../index.html">📘 2n ESO</a>
+    <span class="sep">›</span>
+    <a class="crumb" href="../../sentit-numeric.html">🔢 Sentit Numèric</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero__inner">
+    <span class="eyebrow">Teoria · Sentit Numèric · 2n ESO</span>
+    <h1>Aproximacions, precisió i errors</h1>
+    <p>Aprèn a arrodonir, aproximar per defecte o per excés, calcular errors i valorar si un resultat és prou precís</p>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=aproximacions&level=1&practice=1">🧩 Practica · Nivell 1</a>
+      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=aproximacions&level=2&practice=1">✏️ Practica · Nivell 2</a>
+      <a class="btn btn--ghost" href="../../sentit-numeric.html?topic=aproximacions">Veure el bloc →</a>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="intro"><p>En moltes situacions reals no necessitem totes les xifres d'un nombre. El més important és saber <strong>quina precisió necessitem</strong>, com expressar una aproximació i com valorar l'error que cometem. L'estimació també és una eina molt potent per comprovar càlculs.</p></div>
+
+  <nav class="toc" aria-label="Índex de la teoria">
+    <strong>En aquesta pàgina</strong>
+    <div class="toc__links">
+      <a href="#aproximar">Què vol dir aproximar?</a><a href="#arrodonir">Arrodoniment</a><a href="#exc-def">Aproximació per defecte i per excés</a><a href="#error-absolut">Error absolut</a><a href="#error-relatiu">Error relatiu</a><a href="#interval">Quin podia ser el valor original?</a><a href="#estimar">Estimació i validació de resultats</a>
+      <a href="#exemples">Exemples resolts</a>
+      <a href="#errors">Errors habituals</a>
+      <a href="#resum">Resum</a>
+    </div>
+  </nav>
+
+
+<section class="theory-card" id="aproximar">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Què vol dir aproximar?</h2>
+  <p>Aproximar és substituir un valor per un altre de proper que sigui més fàcil d'utilitzar. El valor aproximat no és exactament igual a l'original, però pot ser prou precís per al context.</p>
+  <ul class="clean-list"><li><strong>Valor exacte:</strong> és el valor real o calculat sense aproximació.</li><li><strong>Valor aproximat:</strong> és un valor proper que utilitzem per simplificar o comunicar.</li><li>La precisió adequada depèn del problema: no mesurem igual una carretera que una peça mecànica.</li></ul>
+
+  <div class="callout">Una aproximació no és «incorrecta» pel fet de no ser exacta: és útil si la precisió és adequada al context.</div>
+</section>
+<section class="theory-card" id="arrodonir">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Arrodoniment</h2>
+  <p>Per arrodonir a una posició determinada, conservem les xifres fins aquella posició i observem la xifra següent per decidir si l'última xifra conservada es manté o augmenta.</p>
+  <ul class="clean-list"><li>Si la xifra següent és <strong>0, 1, 2, 3 o 4</strong>, mantenim l'última xifra conservada.</li><li>Si és <strong>5, 6, 7, 8 o 9</strong>, augmentem en una unitat l'última xifra conservada.</li><li>Podem arrodonir a unitats, dècimes, centèsimes, mil·lèsimes...</li></ul>
+
+  <div class="callout">Exemple: 8,746 arrodonit a centèsimes és 8,75.</div>
+</section>
+<section class="theory-card" id="exc-def">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Aproximació per defecte i per excés</h2>
+  <p>Una aproximació també pot fer-se obligant el resultat a quedar per sota o per sobre del valor real.</p>
+  <ul class="clean-list"><li>Per defecte no significa «restar una unitat»: significa triar una aproximació menor o igual que el valor real.</li><li>Per excés no significa «sumar una unitat»: significa triar una aproximació major o igual.</li><li>Aquestes aproximacions són especialment útils quan el context exigeix assegurar un mínim o no superar un màxim.</li></ul>
+  <table class="math-table">
+<thead><tr><th>Tipus</th><th>Condició</th><th>Exemple amb 4,37 a dècimes</th></tr></thead>
+<tbody>
+<tr><td>Per defecte</td><td>queda per sota</td><td>4,3</td></tr>
+<tr><td>Per excés</td><td>queda per sobre</td><td>4,4</td></tr>
+<tr><td>Arrodoniment</td><td>tria el més proper</td><td>4,4</td></tr>
+</tbody>
+</table>
+
+</section>
+<section class="theory-card" id="error-absolut">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Error absolut</h2>
+  <p>L'error absolut mesura la distància entre el valor real i el valor aproximat.</p>
+  <ul class="clean-list"><li><strong>Error absolut = |valor real − valor aproximat|</strong>.</li><li>Com que és una distància, l'error absolut mai no és negatiu.</li><li>S'expressa amb les mateixes unitats que la magnitud original.</li></ul>
+
+  <div class="callout">Si una longitud real és 8,72 m i l'aproximes a 8,7 m, l'error absolut és 0,02 m.</div>
+</section>
+<section class="theory-card" id="error-relatiu">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Error relatiu</h2>
+  <p>El mateix error absolut pot ser molt important en una quantitat petita i gairebé irrellevant en una quantitat gran. L'error relatiu compara l'error amb la mida del valor real.</p>
+  <ul class="clean-list"><li><strong>Error relatiu = error absolut / |valor real|</strong>.</li><li>Es pot expressar com a nombre decimal o com a percentatge.</li><li>Permet comparar la precisió d'aproximacions fetes sobre magnituds de mides diferents.</li></ul>
+
+  <div class="callout">Per valorar la qualitat d'una aproximació, sovint és més informatiu l'error relatiu que l'error absolut.</div>
+</section>
+<section class="theory-card" id="interval">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Quin podia ser el valor original?</h2>
+  <p>Quan coneixem un nombre arrodonit, podem determinar un interval de valors originals que haurien produït aquella aproximació.</p>
+  <ul class="clean-list"><li>Si 7,3 és el resultat d'arrodonir a dècimes, el valor original està aproximadament entre 7,25 i 7,35.</li><li>El límit inferior s'inclou perquè 7,25 arrodoneix a 7,3.</li><li>El límit superior depèn de la convenció d'arrodoniment; en el treball escolar habitual es considera l'interval fins abans de 7,35.</li></ul>
+
+
+</section>
+<section class="theory-card" id="estimar">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Estimació i validació de resultats</h2>
+  <p>Estimar abans o després d'un càlcul ajuda a detectar respostes impossibles, errors de coma decimal i ordres de magnitud equivocats.</p>
+  <ul class="clean-list"><li>Substitueix mentalment les dades per nombres propers i fàcils.</li><li>Comprova si el resultat exacte queda a prop de l'estimació.</li><li>Mira si el nombre de xifres o la posició de la coma és coherent.</li><li>En un problema real, comprova si la resposta té sentit físic o econòmic.</li></ul>
+
+
+</section>
+
+  <section class="examples-wrap" id="exemples">
+    <h2>✏️ Exemples resolts</h2>
+
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Arrodonir 12,486</h3>
+
+  <ol><li>A dècimes: observem la centèsima, que és 8.</li><li>Com que 8 és igual o superior a 5, la dècima augmenta.</li><li>12,486 arrodonit a dècimes és 12,5.</li><li>A centèsimes: observem la mil·lèsima, que és 6, i obtenim 12,49.</li></ol>
+  <div class="result">A dècimes: 12,5. A centèsimes: 12,49.</div>
+</article>
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Error absolut d'una mesura</h3>
+
+  <ol><li>Valor real: 8,72 m.</li><li>Valor aproximat: 8,7 m.</li><li>Calculem la distància: |8,72 − 8,7|.</li><li>La diferència és 0,02 m.</li></ol>
+  <div class="result">L'error absolut és 0,02 m.</div>
+</article>
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Comparar dues precisions</h3>
+
+  <ol><li>Mesura A: error absolut 1 cm sobre una longitud real de 20 cm.</li><li>Mesura B: error absolut 1 cm sobre una longitud real de 200 cm.</li><li>L'error absolut és igual en tots dos casos.</li><li>Però proporcionalment 1 cm pesa molt més sobre 20 cm que sobre 200 cm.</li></ol>
+  <div class="result">La mesura B és proporcionalment més precisa.</div>
+</article>
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Validar amb una estimació</h3>
+
+  <ol><li>Calculem mentalment si 49,8 · 19,7 pot donar aproximadament 98.</li><li>49,8 és prop de 50 i 19,7 és prop de 20.</li><li>50 · 20 = 1000.</li><li>Per tant, 98 és massa petit i indica un error de magnitud.</li></ol>
+  <div class="result">L'estimació detecta que el resultat correcte ha d'estar prop de 1000.</div>
+</article>
+  </section>
+
+  <section class="mistakes-wrap" id="errors">
+    <h2>⚠️ Errors habituals que convé evitar</h2>
+
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Mirar la xifra equivocada en arrodonir</h3><p>Per arrodonir a centèsimes has de mirar la mil·lèsima, no la dècima ni una xifra més llunyana.</p></div>
+</article>
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Confondre arrodoniment amb defecte o excés</h3><p>L'arrodoniment busca el valor més proper; defecte i excés imposen quedar per sota o per sobre.</p></div>
+</article>
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Donar un error absolut negatiu</h3><p>L'error absolut és una distància i, per tant, sempre és zero o positiu.</p></div>
+</article>
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Comparar només errors absoluts</h3><p>Dos errors absoluts iguals poden tenir importància molt diferent segons la mida de la magnitud.</p></div>
+</article>
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Acceptar qualsevol nombre de decimals</h3><p>La precisió ha de ser coherent amb el context i amb les dades disponibles.</p></div>
+</article>
+  </section>
+
+  <section class="summary" id="resum">
+    <h2>✅ Què hauries de tenir clar</h2>
+    <ul><li>Distingir valor exacte i valor aproximat.</li><li>Arrodonir a unitats, dècimes, centèsimes o mil·lèsimes.</li><li>Diferenciar aproximació per defecte, per excés i arrodoniment.</li><li>Calcular i interpretar l'error absolut.</li><li>Entendre l'error relatiu com a mesura proporcional de la precisió.</li><li>Interpretar l'interval de possibles valors originals a partir d'un arrodoniment.</li><li>Utilitzar l'estimació per validar resultats.</li></ul>
+  </section>
+
+  <section class="practice-panel">
+    <h2>Ara toca practicar</h2>
+    <p>Tria el nivell. Si has arribat aquí directament des d'un cercador, el tema s'obrirà automàticament perquè puguis començar.</p>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=aproximacions&level=1&practice=1">🧩 Nivell 1 · Guiat</a>
+      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=aproximacions&level=2&practice=1">✏️ Nivell 2 · Sol/a</a>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Altres continguts de teoria">
+    <a class="pager__link" href="potencies.html">← Potències</a>
+    <a class="pager__link pager__link--next" href="proporcionalitat-directa.html">Proporcionalitat directa →</a>
+  </nav>
+</main>
+
+<footer class="footer">
+  © 2026 Mates Interactives · Creat per Salvador Rigual · 100 % gratuït · Sense anuncis · Sense cookies
+</footer>
+
+<script>
+const isLocal =
+  location.protocol === "file:" ||
+  ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+
+if (!isLocal) {
+  const s = document.createElement("script");
+  s.async = true;
+  s.dataset.goatcounter = "https://srigual.goatcounter.com/count";
+  s.src = "https://gc.zgo.at/count.js";
+  document.body.appendChild(s);
+}
+</script>
+</body>
+</html>

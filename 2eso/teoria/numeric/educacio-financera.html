@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Educació financera | Teoria de Matemàtiques 2n ESO</title>
+<meta name="description" content="Percentatges aplicats a descomptes, increments, IVA indicat, retencions, comissions i factures. Ampliació opcional del Sentit Numèric de 2n d'ESO amb teoria, exemples resolts i pràctica interactiva.">
+<meta name="author" content="Salvador Rigual Valls">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://srigual-png.github.io/mates-interactives/2eso/teoria/numeric/educacio-financera.html">
+<link rel="icon" href="../../../assets/images/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../assets/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../assets/images/apple-touch-icon.png">
+<style>
+:root{
+  --bg:#f8f7fc;--card:#fff;--primary:#7c3aed;--primary-dark:#6530c7;
+  --text:#2c3e50;--muted:#718096;--border:#ddd8eb;--soft:#f3e8ff;
+  --success:#248a58;--warn:#a96a00;--shadow:0 4px 18px rgba(64,45,96,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+a{color:inherit}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.topbar__inner{max-width:1050px;margin:auto;padding:10px 20px;display:flex;align-items:center;gap:8px;overflow-x:auto;white-space:nowrap}
+.crumb{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:700;padding:5px 8px;border:1px solid var(--border);border-radius:8px;background:#fff}
+.crumb:hover{color:var(--primary-dark);border-color:var(--primary)}
+.sep{color:#b8c3d1;font-size:.8rem}
+.hero{background:linear-gradient(180deg,#f3e8ff 0%,#f8f7fc 100%);border-bottom:1px solid #e6dcf5}
+.hero__inner{max-width:900px;margin:auto;padding:54px 22px 42px;text-align:center}
+.eyebrow{display:inline-block;padding:5px 11px;border-radius:999px;background:#fff;border:1px solid #d8c4f5;color:var(--primary-dark);font-size:.78rem;font-weight:800;margin-bottom:12px}
+h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin:0;color:var(--primary-dark)}
+.hero p{max-width:720px;margin:16px auto 0;color:#536477;font-size:1.02rem}
+.extension-note{max-width:760px;margin:18px auto 0;background:#fff;border:1px solid #dccaf6;border-radius:12px;padding:10px 13px;color:#67557e;font-size:.84rem}
+.hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;border-radius:12px;padding:11px 16px;font-weight:800;font-size:.9rem;transition:.18s}
+.btn--primary{background:var(--primary);color:white;border:2px solid var(--primary)}
+.btn--primary:hover{background:var(--primary-dark);border-color:var(--primary-dark);transform:translateY(-1px)}
+.btn--secondary{background:#fff;color:var(--primary-dark);border:2px solid var(--primary)}
+.btn--secondary:hover{background:var(--soft);transform:translateY(-1px)}
+.btn--ghost{background:#fff;color:var(--muted);border:1px solid var(--border)}
+main{max-width:900px;margin:auto;padding:28px 20px 48px}
+.intro{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);margin-bottom:18px}
+.intro p{margin:0}
+.toc{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin:18px 0 24px}
+.toc strong{display:block;color:var(--primary-dark);margin-bottom:8px}
+.toc__links{display:flex;flex-wrap:wrap;gap:8px}
+.toc a{text-decoration:none;color:#62546f;background:#fbfaff;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
+.theory-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;margin:16px 0;box-shadow:var(--shadow)}
+.section-kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--primary);font-weight:900;margin-bottom:3px}
+h2{font-size:1.4rem;line-height:1.25;color:var(--primary-dark);margin:0 0 10px}
+h3{line-height:1.3}
+.theory-card p{margin:0 0 12px}
+.clean-list{padding-left:1.2rem;margin:10px 0 0}
+.clean-list li{margin:6px 0}
+.callout{background:var(--soft);border-left:4px solid var(--primary);border-radius:10px;padding:12px 14px;margin-top:14px;font-weight:650}
+.math-table{width:100%;border-collapse:collapse;margin:14px 0 4px;font-size:.92rem}
+.math-table th,.math-table td{border:1px solid var(--border);padding:9px 10px;text-align:left}
+.math-table th{background:#faf7fe;color:var(--primary-dark)}
+.examples-wrap{margin:28px 0}
+.example-card{background:#f7f2ff;border:1px solid #ddd0f2;border-left:5px solid var(--primary);border-radius:16px;padding:20px 22px;margin:14px 0}
+.example-card__tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--primary);font-weight:900}
+.example-card h3{margin:3px 0 8px;color:var(--primary-dark)}
+.example-card ol{margin:8px 0 10px;padding-left:1.4rem}
+.example-card li{margin:5px 0}
+.result{background:#fff;border:1px solid #d6c7ed;border-radius:10px;padding:10px 12px;color:var(--primary-dark);font-weight:800}
+.mistakes-wrap{background:#fffaf0;border:1px solid #efd6a6;border-radius:18px;padding:22px;margin:26px 0}
+.mistakes-wrap>h2{color:#946015}
+.mistake{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #f0dfbd}
+.mistake:last-child{border-bottom:0;padding-bottom:0}
+.mistake h3{font-size:.98rem;margin:0 0 3px;color:#7f571a}
+.mistake p{margin:0;font-size:.9rem}
+.summary{background:#f0fbf5;border:1px solid #bfe5cf;border-radius:18px;padding:22px;margin:26px 0}
+.summary h2{color:var(--success)}
+.practice-panel{background:#fff;border:2px solid #d8c5f2;border-radius:20px;padding:24px;text-align:center;margin:28px 0 18px;box-shadow:var(--shadow)}
+.practice-panel p{margin:0 auto 16px;color:var(--muted);max-width:620px}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.pager__link{display:flex;align-items:center;text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:12px;padding:11px 13px;color:var(--primary-dark);font-size:.84rem;font-weight:800}
+.pager__link--next{justify-content:flex-end;text-align:right}
+.footer{border-top:1px solid var(--border);background:#fff;color:var(--muted);text-align:center;padding:24px 18px;font-size:.8rem}
+@media(max-width:650px){
+  .topbar__inner{padding:8px 10px}
+  .hero__inner{padding:38px 16px 32px}
+  main{padding:20px 13px 38px}
+  .theory-card,.intro{padding:19px 17px}
+  .hero-actions{flex-direction:column}
+  .btn{width:100%}
+  .math-table{font-size:.82rem}
+  .math-table th,.math-table td{padding:7px}
+  .pager{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <nav class="topbar__inner" aria-label="Navegació">
+    <a class="crumb" href="../../../index.html">🏠 Mates Interactives</a>
+    <span class="sep">›</span>
+    <a class="crumb" href="../../index.html">📘 2n ESO</a>
+    <span class="sep">›</span>
+    <a class="crumb" href="../../sentit-numeric.html">🔢 Sentit Numèric</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero__inner">
+    <span class="eyebrow">💶 Ampliació de 2n ESO · Sentit Numèric</span>
+    <h1>Educació financera</h1>
+    <p>Percentatges aplicats a descomptes, increments, IVA indicat, retencions, comissions i factures</p>
+    <div class="extension-note">Contingut opcional d'ampliació. No forma part del Mode Examen de 2n ESO.</div>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=financeraAmp&level=1&practice=1">🧩 Practica · Nivell 1</a>
+      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=financeraAmp&level=2&practice=1">✏️ Practica · Nivell 2</a>
+      <a class="btn btn--ghost" href="../../sentit-numeric.html?topic=financeraAmp">Veure el bloc →</a>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="intro"><p>Aquesta ampliació aplica els percentatges a situacions econòmiques senzilles. No és un tema de fiscalitat: el que es treballa és <strong>interpretar correctament la base de cada percentatge i comprovar que el resultat sigui coherent</strong>.</p></div>
+
+  <nav class="toc" aria-label="Índex de la teoria">
+    <strong>En aquesta pàgina</strong>
+    <div class="toc__links">
+      <a href="#percentatges-economia">Percentatges en situacions econòmiques</a><a href="#descomptes">Descomptes i increments</a><a href="#iva">IVA indicat a l'enunciat</a><a href="#valor-inicial">Recuperar el valor inicial</a><a href="#successius">Canvis percentuals successius</a><a href="#retencions">Retencions, comissions i import net</a>
+      <a href="#exemples">Exemples resolts</a>
+      <a href="#errors">Errors habituals</a>
+      <a href="#resum">Resum</a>
+    </div>
+  </nav>
+
+  
+<section class="theory-card" id="percentatges-economia">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Percentatges en situacions econòmiques</h2>
+  <p>Els percentatges permeten interpretar descomptes, increments, impostos indicats, retencions, comissions i factures. La idea central és identificar sempre <strong>sobre quina quantitat s'aplica el percentatge</strong>.</p>
+  <ul class='clean-list'><li>Un augment del p% deixa el valor en el <strong>(100 + p)%</strong> de l'inicial.</li><li>Un descompte del p% deixa el valor en el <strong>(100 − p)%</strong> de l'inicial.</li><li>El percentatge s'ha d'aplicar sobre la base que indiqui l'enunciat.</li></ul>
+  
+  
+</section>
+<section class="theory-card" id="descomptes">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Descomptes i increments</h2>
+  <p>Un descompte redueix el valor inicial i un increment l'augmenta. Es poden calcular trobant primer la part percentual o utilitzant directament un factor multiplicatiu.</p>
+  
+  <table class="math-table">
+<thead><tr><th>Canvi</th><th>Factor</th></tr></thead>
+<tbody>
+<tr><td>Augment del 15%</td><td>1,15</td></tr>
+<tr><td>Descompte del 15%</td><td>0,85</td></tr>
+<tr><td>Augment del 8%</td><td>1,08</td></tr>
+<tr><td>Descompte del 8%</td><td>0,92</td></tr>
+</tbody>
+</table>
+  <div class='callout'>El factor multiplicatiu representa quin percentatge del valor inicial queda després del canvi.</div>
+</section>
+<section class="theory-card" id="iva">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>IVA indicat a l'enunciat</h2>
+  <p>Quan un problema dona un preu base i indica un percentatge d'IVA, el preu final és el preu base més aquell percentatge.</p>
+  <ul class='clean-list'><li>Si l'IVA és p%, el preu final representa <strong>(100 + p)%</strong> del preu base.</li><li>L'objectiu aquí és practicar percentatges, no memoritzar tipus fiscals.</li><li>Utilitza sempre el percentatge que indiqui explícitament l'enunciat.</li></ul>
+  
+  
+</section>
+<section class="theory-card" id="valor-inicial">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Recuperar el valor inicial</h2>
+  <p>De vegades coneixem el valor després d'un canvi i hem de trobar el valor inicial. En aquest cas no n'hi ha prou amb sumar o restar el mateix percentatge.</p>
+  <ul class='clean-list'><li>Després d'un descompte del 20%, el valor final representa el 80% de l'inicial.</li><li>Per recuperar l'inicial cal preguntar: «quin valor té aquest 80%?»</li><li>La mateixa idea serveix per a increments.</li></ul>
+  
+  <div class='callout'>Desfer un −20% no consisteix a aplicar +20%. Cal reconstruir el 100% original.</div>
+</section>
+<section class="theory-card" id="successius">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Canvis percentuals successius</h2>
+  <p>Quan hi ha diversos canvis, cada percentatge s'aplica sobre el valor existent en aquell moment.</p>
+  <ul class='clean-list'><li>Primer calcula el resultat del primer canvi.</li><li>Utilitza aquest nou valor com a base del segon percentatge.</li><li>No sumis ni restis mecànicament percentatges successius.</li></ul>
+  
+  
+</section>
+<section class="theory-card" id="retencions">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Retencions, comissions i import net</h2>
+  <p>Una retenció o una comissió és una part percentual d'una quantitat. Cal distingir entre l'import de partida, la part que es reté o cobra i el valor net final.</p>
+  <ul class='clean-list'><li><strong>Import brut:</strong> quantitat abans de la retenció o comissió.</li><li><strong>Import retingut / comissió:</strong> part percentual.</li><li><strong>Import net:</strong> quantitat que queda després de restar aquella part.</li></ul>
+  
+  
+</section>
+
+  <section class="examples-wrap" id="exemples">
+    <h2>✏️ Exemples resolts</h2>
+    
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Descompte i IVA indicat</h3>
+  <ol><li>Preu inicial: 100 €.</li><li>Descompte del 20%: es paga el 80%, és a dir, 80 €.</li><li>Després s'aplica un IVA del 21% sobre els 80 €.</li><li>80 · 1,21 = 96,80 €.</li></ol>
+  <div class="result">El preu final és 96,80 €. Els percentatges s'han aplicat successivament.</div>
+</article>
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Recuperar un preu abans del descompte</h3>
+  <ol><li>Després d'un descompte del 25%, un article costa 60 €.</li><li>El preu final representa el 75% de l'original.</li><li>60 ÷ 0,75 = 80.</li></ol>
+  <div class="result">El preu original era 80 €.</div>
+</article>
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Comissió</h3>
+  <ol><li>Una operació de 500 € té una comissió del 2%.</li><li>La comissió és 500 · 0,02 = 10 €.</li><li>Si la comissió es resta de l'import, el net és 500 − 10.</li></ol>
+  <div class="result">Comissió: 10 €. Import net: 490 €.</div>
+</article>
+  </section>
+
+  <section class="mistakes-wrap" id="errors">
+    <h2>⚠️ Errors habituals que convé evitar</h2>
+    
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Aplicar el segon percentatge sobre el valor inicial</h3><p>En canvis successius, el segon percentatge actua sobre el resultat del primer canvi.</p></div>
+</article>
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Desfer un descompte sumant el mateix percentatge</h3><p>Si el preu final és el 80% de l'inicial, cal reconstruir el 100%; no n'hi ha prou amb augmentar-lo un 20%.</p></div>
+</article>
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Confondre brut, retenció i net</h3><p>Són tres quantitats diferents i cal identificar què demana exactament l'enunciat.</p></div>
+</article>
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Memoritzar percentatges fiscals</h3><p>En aquest bloc s'utilitza sempre el percentatge indicat al problema; l'objectiu és el càlcul percentual.</p></div>
+</article>
+  </section>
+
+  <section class="summary" id="resum">
+    <h2>✅ Què hauries de tenir clar</h2>
+    <ul><li>Interpretar percentatges en descomptes, increments, impostos indicats, retencions i comissions.</li><li>Utilitzar factors multiplicatius per calcular canvis.</li><li>Recuperar un valor inicial a partir d'un valor final.</li><li>Aplicar correctament percentatges successius.</li><li>Distingir import brut, part percentual i import net.</li></ul>
+  </section>
+
+  <section class="practice-panel">
+    <h2>Ara toca practicar</h2>
+    <p>Aquest bloc és opcional. Pots practicar-lo sense que compti en el Mode Examen de 2n ESO.</p>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=financeraAmp&level=1&practice=1">🧩 Nivell 1 · Guiat</a>
+      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=financeraAmp&level=2&practice=1">✏️ Nivell 2 · Sol/a</a>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Altres continguts de teoria">
+    <a class="pager__link" href="recomptes-sistematics.html">← Recomptes sistemàtics</a>
+    <a class="pager__link pager__link--next" href="fraccio-generatriu-irracionals.html">Fracció generatriu i irracionals →</a>
+  </nav>
+</main>
+
+<footer class="footer">
+  © 2026 Mates Interactives · Creat per Salvador Rigual · 100 % gratuït · Sense anuncis · Sense cookies
+</footer>
+
+<script>
+const isLocal =
+  location.protocol === "file:" ||
+  ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+if (!isLocal) {
+  const s = document.createElement("script");
+  s.async = true;
+  s.dataset.goatcounter = "https://srigual.goatcounter.com/count";
+  s.src = "https://gc.zgo.at/count.js";
+  document.body.appendChild(s);
+}
+</script>
+</body>
+</html>

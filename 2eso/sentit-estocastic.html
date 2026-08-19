@@ -207,6 +207,9 @@ nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;
   .screen{padding:14px}.options-grid{grid-template-columns:1fr}.topic-card{padding:13px 14px}.topic-badge{font-size:.68rem;padding:3px 7px}
   .level-select,.mode-select{gap:8px}.level-btn,.mode-btn{padding:9px 6px;font-size:.8rem}.intro-card{padding:17px}
 }
+.theory-page-link{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;margin:4px 0 16px;padding:11px 14px;border:2px solid var(--primary);border-radius:12px;background:#fff;color:var(--primary-dark);text-decoration:none;font-size:.88rem;font-weight:750;transition:all .2s}
+.theory-page-link:hover{background:#fff6e5;transform:translateY(-1px)}
+
 </style>
 
 </head>
@@ -262,6 +265,7 @@ nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;
   </div>
   <div id="tabTheory"></div>
   <div id="tabExample" style="display:none"></div>
+  <div id="externalTheoryLink"></div>
   <div class="level-select" style="margin-top:16px">
     <button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Nivell 1<br><small>Guiat</small></button>
     <button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Nivell 2<br><small>Sol/a</small></button>
@@ -636,6 +640,21 @@ const TEORIA={
       'Per obtenir una bola de cada color en qualsevol ordre hem de considerar dos camins: vermella–blava i blava–vermella, i sumar-ne les probabilitats.'
     ]
   }
+};
+
+
+const THEORY_PAGES={
+  dades:'teoria/estocastic/dades-poblacio-variables.html',
+  frequencias:'teoria/estocastic/taules-frequencies.html',
+  grafics:'teoria/estocastic/grafics-estadistics.html',
+  centralitzacio:'teoria/estocastic/centralitzacio-dispersio.html',
+  investigacions:'teoria/estocastic/investigacions-estadistiques.html',
+  probabilitat:'teoria/estocastic/probabilitat-teorica-experimental.html',
+  experiments:'teoria/estocastic/experiments-compostos.html',
+  intervals3r:'teoria/estocastic/variables-continues-intervals.html',
+  grafics3r:'teoria/estocastic/histogrames-poligons-caixa.html',
+  dispersio3r:'teoria/estocastic/quartils-dispersio.html',
+  probabilitat3r:'teoria/estocastic/probabilitat-cap-3r.html'
 };
 
 /* ── UTILITATS ESTADÍSTIQUES ─────────────────────────────── */
@@ -1550,6 +1569,8 @@ function selectTopic(i){
   }
   document.getElementById('tabTheory').innerHTML=theory;
   document.getElementById('tabExample').innerHTML='<div class="example-box"><h3>'+th.exampleTitle+'</h3>'+th.exampleSteps.map((x,i)=>'<div class="ex-step"><b>Pas '+(i+1)+':</b> '+x+'</div>').join('')+'</div>';
+  const theoryUrl=THEORY_PAGES[t.id];
+  document.getElementById('externalTheoryLink').innerHTML=theoryUrl ? '<a class="theory-page-link" href="'+theoryUrl+'">📘 Teoria i exemples complets →</a>' : '';
   document.getElementById('tabTheory').style.display='block';document.getElementById('tabExample').style.display='none';
   document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',j===0));
   document.getElementById('btnLvl1').classList.toggle('active',state.level===1);document.getElementById('btnLvl2').classList.toggle('active',state.level===2);
@@ -1769,8 +1790,33 @@ function runAutoTest(){
 let navClicks=0,navTimer=null;
 document.getElementById('navTitle').addEventListener('click',()=>{navClicks++;clearTimeout(navTimer);navTimer=setTimeout(()=>navClicks=0,600);if(navClicks>=3){navClicks=0;runAutoTest()}});
 
+
+function applyDeepLink(){
+  const params=new URLSearchParams(window.location.search);
+  const topicId=params.get('topic');
+  if(!topicId)return false;
+  const idx=TOPICS.findIndex(t=>t.id===topicId);
+  if(idx<0)return false;
+  if(!state.unlockedIds.includes(topicId)){
+    state.unlockedIds.push(topicId);
+    saveState();
+  }
+  state.currentTopic=idx;
+  const level=Number(params.get('level'));
+  state.level=level===2?2:1;
+  state.mode='multi';
+  if(params.get('practice')==='1'){
+    setNavContext(TOPICS[idx].name,true,true);
+    startPractice();
+  }else{
+    selectTopic(idx);
+  }
+  return true;
+}
+
 /* ── INICI ─────────────────────────────────────────────────── */
-loadState();renderHome();
+loadState();
+if(!applyDeepLink())renderHome();
 </script>
 <!-- ===================================================== -->
 <!-- GOATCOUNTER -->

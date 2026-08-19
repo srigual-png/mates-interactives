@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fraccions amb sentit | Teoria de Matemàtiques 2n ESO</title>
+<meta name="description" content="Aprèn a interpretar les fraccions com a divisió, operador, part d'un total i raó, i a resoldre problemes directes, inversos i successius. Teoria clara, exemples resolts i accés directe a exercicis interactius de 2n d'ESO.">
+<meta name="author" content="Salvador Rigual Valls">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://srigual-png.github.io/mates-interactives/2eso/teoria/numeric/fraccions-amb-sentit.html">
+<link rel="icon" href="../../../assets/images/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../assets/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../assets/images/apple-touch-icon.png">
+<style>
+:root{
+  --bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--primary-dark:#3a6fd8;
+  --text:#2c3e50;--muted:#718096;--border:#dce3ed;--soft:#eaf1fd;
+  --success:#248a58;--warn:#a96a00;--shadow:0 4px 18px rgba(33,52,78,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+a{color:inherit}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.topbar__inner{max-width:1050px;margin:auto;padding:10px 20px;display:flex;align-items:center;gap:8px;overflow-x:auto;white-space:nowrap}
+.crumb{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:700;padding:5px 8px;border:1px solid var(--border);border-radius:8px;background:#fff}
+.crumb:hover{color:var(--primary-dark);border-color:var(--primary)}
+.sep{color:#b8c3d1;font-size:.8rem}
+.hero{background:linear-gradient(180deg,#eef4ff 0%,#f7f9fc 100%);border-bottom:1px solid #e3eaf5}
+.hero__inner{max-width:900px;margin:auto;padding:54px 22px 42px;text-align:center}
+.eyebrow{display:inline-block;padding:5px 11px;border-radius:999px;background:#fff;border:1px solid #ccdaf3;color:var(--primary-dark);font-size:.78rem;font-weight:800;margin-bottom:12px}
+h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin:0;color:var(--primary-dark)}
+.hero p{max-width:720px;margin:16px auto 0;color:#536477;font-size:1.02rem}
+.hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;border-radius:12px;padding:11px 16px;font-weight:800;font-size:.9rem;transition:.18s}
+.btn--primary{background:var(--primary);color:white;border:2px solid var(--primary)}
+.btn--primary:hover{background:var(--primary-dark);border-color:var(--primary-dark);transform:translateY(-1px)}
+.btn--secondary{background:#fff;color:var(--primary-dark);border:2px solid var(--primary)}
+.btn--secondary:hover{background:var(--soft);transform:translateY(-1px)}
+.btn--ghost{background:#fff;color:var(--muted);border:1px solid var(--border)}
+main{max-width:900px;margin:auto;padding:28px 20px 48px}
+.intro{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);margin-bottom:18px}
+.intro p{margin:0}
+.toc{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin:18px 0 24px}
+.toc strong{display:block;color:var(--primary-dark);margin-bottom:8px}
+.toc__links{display:flex;flex-wrap:wrap;gap:8px}
+.toc a{text-decoration:none;color:#52667e;background:#f8fafc;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
+.toc a:hover{color:var(--primary-dark);border-color:var(--primary)}
+.theory-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;margin:16px 0;box-shadow:var(--shadow)}
+.section-kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--primary);font-weight:900;margin-bottom:3px}
+h2{font-size:1.4rem;line-height:1.25;color:var(--primary-dark);margin:0 0 10px}
+h3{line-height:1.3}
+.theory-card p{margin:0 0 12px}
+.clean-list{padding-left:1.2rem;margin:10px 0 0}
+.clean-list li{margin:6px 0}
+.callout{background:var(--soft);border-left:4px solid var(--primary);border-radius:10px;padding:12px 14px;margin-top:14px;font-weight:650}
+.math-table{width:100%;border-collapse:collapse;margin:14px 0 4px;font-size:.92rem}
+.math-table th,.math-table td{border:1px solid var(--border);padding:9px 10px;text-align:left}
+.math-table th{background:#f4f7fb;color:var(--primary-dark)}
+.examples-wrap{margin:28px 0}
+.examples-wrap>h2{margin-bottom:12px}
+.example-card{background:#f0f7ff;border:1px solid #cee0f5;border-left:5px solid #2980b9;border-radius:16px;padding:20px 22px;margin:14px 0}
+.example-card__tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#2473a5;font-weight:900}
+.example-card h3{margin:3px 0 8px;color:#245f89}
+.example-card p{margin:0 0 8px}
+.example-card ol{margin:8px 0 10px;padding-left:1.4rem}
+.example-card li{margin:5px 0}
+.result{background:#fff;border:1px solid #c5daef;border-radius:10px;padding:10px 12px;color:var(--primary-dark);font-weight:800}
+.mistakes-wrap{background:#fffaf0;border:1px solid #efd6a6;border-radius:18px;padding:22px;margin:26px 0}
+.mistakes-wrap>h2{color:#946015}
+.mistake{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #f0dfbd}
+.mistake:last-child{border-bottom:0;padding-bottom:0}
+.mistake__icon{font-size:1.2rem}
+.mistake h3{font-size:.98rem;margin:0 0 3px;color:#7f571a}
+.mistake p{margin:0;font-size:.9rem}
+.summary{background:#f0fbf5;border:1px solid #bfe5cf;border-radius:18px;padding:22px;margin:26px 0}
+.summary h2{color:var(--success)}
+.summary ul{margin:8px 0 0;padding-left:1.2rem}
+.practice-panel{background:#fff;border:2px solid #cbdaf2;border-radius:20px;padding:24px;text-align:center;margin:28px 0 18px;box-shadow:var(--shadow)}
+.practice-panel h2{margin-bottom:6px}
+.practice-panel p{margin:0 auto 16px;color:var(--muted);max-width:620px}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.pager__link{display:flex;align-items:center;text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:12px;padding:11px 13px;color:var(--primary-dark);font-size:.84rem;font-weight:800}
+.pager__link--next{justify-content:flex-end;text-align:right}
+.footer{border-top:1px solid var(--border);background:#fff;color:var(--muted);text-align:center;padding:24px 18px;font-size:.8rem}
+@media(max-width:650px){
+  .topbar__inner{padding:8px 10px}
+  .hero__inner{padding:38px 16px 32px}
+  main{padding:20px 13px 38px}
+  .theory-card,.intro{padding:19px 17px}
+  .hero-actions{flex-direction:column}
+  .btn{width:100%}
+  .math-table{font-size:.82rem}
+  .math-table th,.math-table td{padding:7px}
+  .pager{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <nav class="topbar__inner" aria-label="Navegació">
+    <a class="crumb" href="../../../index.html">🏠 Mates Interactives</a>
+    <span class="sep">›</span>
+    <a class="crumb" href="../../index.html">📘 2n ESO</a>
+    <span class="sep">›</span>
+    <a class="crumb" href="../../sentit-numeric.html">🔢 Sentit Numèric</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero__inner">
+    <span class="eyebrow">Teoria · Sentit Numèric · 2n ESO</span>
+    <h1>Fraccions amb sentit</h1>
+    <p>Aprèn a interpretar les fraccions com a divisió, operador, part d'un total i raó, i a resoldre problemes directes, inversos i successius</p>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=fraccionsSentit&level=1&practice=1">🧩 Practica · Nivell 1</a>
+      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=fraccionsSentit&level=2&practice=1">✏️ Practica · Nivell 2</a>
+      <a class="btn btn--ghost" href="../../sentit-numeric.html?topic=fraccionsSentit">Veure el bloc →</a>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="intro">
+    <p>A 2n d'ESO una fracció deixa de ser només «numerador i denominador». El repte és entendre <strong>què està comparant o sobre quina quantitat està actuant</strong>. Aquesta interpretació és la clau per resoldre problemes sense aplicar fórmules de manera mecànica.</p>
+  </div>
+
+  <nav class="toc" aria-label="Índex de la teoria">
+    <strong>En aquesta pàgina</strong>
+    <div class="toc__links">
+      <a href="#significats">Una fracció pot tenir significats diferents</a><a href="#operador">Fracció com a operador</a><a href="#invers">Problemes inversos: reconstruir el total</a><a href="#rao">Fracció com a raó</a><a href="#resta">La fracció que queda i les fraccions successives</a>
+      <a href="#exemples">Exemples resolts</a>
+      <a href="#errors">Errors habituals</a>
+      <a href="#resum">Resum</a>
+    </div>
+  </nav>
+
+
+        <section class="theory-card" id="significats">
+          <div class="section-kicker">Concepte clau</div>
+          <h2>Una fracció pot tenir significats diferents</h2>
+          <p>Una fracció <strong>a/b</strong> no és només una operació. Segons el context pot representar una divisió, una part d'un total, un operador aplicat a una quantitat o una raó entre dos grups.</p>
+
+          <table class="math-table">
+          <thead><tr><th>Significat</th><th>Exemple</th><th>Què indica?</th></tr></thead>
+          <tbody>
+            <tr><td>Divisió</td><td>3/4</td><td>3 ÷ 4</td></tr>
+            <tr><td>Part d'un total</td><td>3/4 de la classe</td><td>3 de cada 4 parts iguals</td></tr>
+            <tr><td>Operador</td><td>3/4 de 20</td><td>aplicar la fracció sobre 20</td></tr>
+            <tr><td>Raó</td><td>3/4</td><td>comparar 3 elements d'un tipus amb 4 d'un altre</td></tr>
+          </tbody>
+        </table>
+          <div class="callout">Abans de calcular, pregunta't: «Què representa aquesta fracció en aquest problema?»</div>
+        </section>
+
+        <section class="theory-card" id="operador">
+          <div class="section-kicker">Concepte clau</div>
+          <h2>Fracció com a operador</h2>
+          <p>Quan busquem una fracció d'una quantitat, la fracció actua com un operador. El denominador indica en quantes parts iguals pensem el total i el numerador quantes d'aquestes parts prenem.</p>
+          <ul class="clean-list"><li>Per trobar <strong>a/b d'una quantitat</strong>, pots dividir primer entre b i multiplicar després per a.</li><li>També pots multiplicar directament la quantitat per a/b si entens què representa.</li><li>Si la fracció és menor que 1 i la quantitat és positiva, el resultat ha de ser menor que el total.</li></ul>
+
+
+        </section>
+
+        <section class="theory-card" id="invers">
+          <div class="section-kicker">Concepte clau</div>
+          <h2>Problemes inversos: reconstruir el total</h2>
+          <p>De vegades coneixem una part i sabem quina fracció del total representa. Llavors hem de fer el camí invers: trobar quant val una sola part i reconstruir totes les parts del total.</p>
+          <ul class="clean-list"><li>Si 3/5 del total són 24, els 24 corresponen a <strong>3 parts</strong>.</li><li>Troba el valor d'<strong>1 part</strong> dividint entre 3.</li><li>Multiplica després pel nombre total de parts, 5.</li><li>Comprova que el total sigui coherent: si 3/5 són 24, el total ha de ser més gran que 24.</li></ul>
+
+
+        </section>
+
+        <section class="theory-card" id="rao">
+          <div class="section-kicker">Concepte clau</div>
+          <h2>Fracció com a raó</h2>
+          <p>Una raó compara dues quantitats. Cal llegir amb molta atenció què hi ha al numerador i què hi ha al denominador, perquè «vermells/blau» no significa el mateix que «vermells/total».</p>
+          <ul class="clean-list"><li>En una raó 3/2 entre nois i noies, el 3 i el 2 comparen <strong>dos grups diferents</strong>.</li><li>La fracció del total seria diferent: si hi ha 3 nois i 2 noies, els nois són 3/5 del grup.</li><li>Mantén sempre el mateix ordre quan comparis dues raons.</li></ul>
+
+
+        </section>
+
+        <section class="theory-card" id="resta">
+          <div class="section-kicker">Concepte clau</div>
+          <h2>La fracció que queda i les fraccions successives</h2>
+          <p>Si utilitzem una fracció del total, la part que queda és la diferència fins a la unitat. En problemes successius, la segona fracció pot aplicar-se al que queda i no al total inicial.</p>
+          <ul class="clean-list"><li>Si gastes 3/8 del total, queda <strong>1 − 3/8 = 5/8</strong>.</li><li>Si després gastes 1/2 del que queda, aquesta meitat s'aplica sobre 5/8 del total inicial.</li><li>No sumis automàticament fraccions que s'apliquen sobre totals diferents.</li><li>Dibuixar una barra o un esquema pot ajudar molt a veure sobre quina quantitat actua cada fracció.</li></ul>
+
+          <div class="callout">En problemes successius, identifica sempre la «base» de cada fracció: total inicial, part restant o un altre grup.</div>
+        </section>
+
+
+  <section class="examples-wrap" id="exemples">
+    <h2>✏️ Exemples resolts</h2>
+
+        <article class="example-card">
+          <div class="example-card__tag">Exemple resolt</div>
+          <h3>Trobar 3/5 de 40</h3>
+          <p></p>
+          <ol><li>El denominador 5 indica cinc parts iguals.</li><li>40 ÷ 5 = 8, així que una part val 8.</li><li>Prenem 3 parts: 3 · 8 = 24.</li></ol>
+          <div class="result">3/5 de 40 = 24.</div>
+        </article>
+
+        <article class="example-card">
+          <div class="example-card__tag">Exemple resolt</div>
+          <h3>Trobar el total si 3/5 són 24</h3>
+          <p></p>
+          <ol><li>Els 24 corresponen a 3 parts iguals.</li><li>Una part val 24 ÷ 3 = 8.</li><li>El total té 5 parts: 5 · 8 = 40.</li><li>Comprovació: 3/5 de 40 és 24.</li></ol>
+          <div class="result">El total és 40.</div>
+        </article>
+
+        <article class="example-card">
+          <div class="example-card__tag">Exemple resolt</div>
+          <h3>Fracció de la resta</h3>
+          <p></p>
+          <ol><li>Una persona gasta 1/4 dels diners; per tant queda 3/4 del total.</li><li>Després gasta 2/3 del que queda.</li><li>La segona fracció s'aplica sobre 3/4, no sobre el total inicial.</li><li>La quantitat gastada en el segon pas és 2/3 de 3/4 = 1/2 del total inicial.</li></ol>
+          <div class="result">Cal distingir sempre el total inicial de la quantitat que queda.</div>
+        </article>
+
+  </section>
+
+  <section class="mistakes-wrap" id="errors">
+    <h2>⚠️ Errors habituals que convé evitar</h2>
+    <article class="mistake">
+          <div class="mistake__icon">⚠️</div>
+          <div><h3>Confondre part/total amb una raó entre grups</h3><p>Si hi ha 6 vermells i 4 blaus, vermells/blau és 6/4, però vermells/total és 6/10.</p></div>
+        </article><article class="mistake">
+          <div class="mistake__icon">⚠️</div>
+          <div><h3>Aplicar la fracció inversa</h3><p>Per trobar 3/5 de 20 no cal multiplicar per 5/3. La fracció indicada és l'operador que s'aplica sobre el total.</p></div>
+        </article><article class="mistake">
+          <div class="mistake__icon">⚠️</div>
+          <div><h3>Fer el problema invers com si fos directe</h3><p>Si 3/5 són 24, calcular 3/5 de 24 no reconstrueix el total. Primer has d'identificar el valor d'una part.</p></div>
+        </article><article class="mistake">
+          <div class="mistake__icon">⚠️</div>
+          <div><h3>Aplicar totes les fraccions al total inicial</h3><p>Quan l'enunciat diu «del que queda», la nova fracció té una base diferent.</p></div>
+        </article>
+  </section>
+
+  <section class="summary" id="resum">
+    <h2>✅ Què hauries de tenir clar</h2>
+    <ul><li>Interpretar una fracció com a divisió, operador, part d'un total o raó.</li><li>Calcular una fracció d'una quantitat.</li><li>Reconstruir el total quan coneixes una fracció i el valor d'aquesta part.</li><li>Distingir una raó entre dos grups d'una fracció respecte del total.</li><li>Calcular la fracció que queda i interpretar correctament fraccions successives.</li></ul>
+  </section>
+
+  <section class="practice-panel">
+    <h2>Ara toca practicar</h2>
+    <p>Tria el nivell. Si has arribat aquí directament des d'un cercador, el tema s'obrirà automàticament perquè puguis començar.</p>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=fraccionsSentit&level=1&practice=1">🧩 Nivell 1 · Guiat</a>
+      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=fraccionsSentit&level=2&practice=1">✏️ Nivell 2 · Sol/a</a>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Altres continguts de teoria">
+    <a class="pager__link" href="nombres-racionals.html">← Nombres racionals</a>
+    <a class="pager__link pager__link--next" href="operacions-racionals.html">Operacions amb racionals →</a>
+  </nav>
+</main>
+
+<footer class="footer">
+  © 2026 Mates Interactives · Creat per Salvador Rigual · 100 % gratuït · Sense anuncis · Sense cookies
+</footer>
+
+<script>
+const isLocal =
+  location.protocol === "file:" ||
+  ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+
+if (!isLocal) {
+  const s = document.createElement("script");
+  s.async = true;
+  s.dataset.goatcounter = "https://srigual.goatcounter.com/count";
+  s.src = "https://gc.zgo.at/count.js";
+  document.body.appendChild(s);
+}
+</script>
+</body>
+</html>

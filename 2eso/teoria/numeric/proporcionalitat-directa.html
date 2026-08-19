@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proporcionalitat directa | Teoria de Matemàtiques 2n ESO</title>
+<meta name="description" content="Aprèn a reconèixer relacions proporcionals i a resoldre-les amb reducció a la unitat, factors, proporcions i repartiments. Teoria clara, exemples resolts i accés directe a exercicis interactius de 2n d'ESO.">
+<meta name="author" content="Salvador Rigual Valls">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://srigual-png.github.io/mates-interactives/2eso/teoria/numeric/proporcionalitat-directa.html">
+<link rel="icon" href="../../../assets/images/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../../../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../../../assets/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../../../assets/images/apple-touch-icon.png">
+<style>
+:root{
+  --bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--primary-dark:#3a6fd8;
+  --text:#2c3e50;--muted:#718096;--border:#dce3ed;--soft:#eaf1fd;
+  --success:#248a58;--warn:#a96a00;--shadow:0 4px 18px rgba(33,52,78,.08);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+a{color:inherit}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
+.topbar__inner{max-width:1050px;margin:auto;padding:10px 20px;display:flex;align-items:center;gap:8px;overflow-x:auto;white-space:nowrap}
+.crumb{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:700;padding:5px 8px;border:1px solid var(--border);border-radius:8px;background:#fff}
+.crumb:hover{color:var(--primary-dark);border-color:var(--primary)}
+.sep{color:#b8c3d1;font-size:.8rem}
+.hero{background:linear-gradient(180deg,#eef4ff 0%,#f7f9fc 100%);border-bottom:1px solid #e3eaf5}
+.hero__inner{max-width:900px;margin:auto;padding:54px 22px 42px;text-align:center}
+.eyebrow{display:inline-block;padding:5px 11px;border-radius:999px;background:#fff;border:1px solid #ccdaf3;color:var(--primary-dark);font-size:.78rem;font-weight:800;margin-bottom:12px}
+h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin:0;color:var(--primary-dark)}
+.hero p{max-width:720px;margin:16px auto 0;color:#536477;font-size:1.02rem}
+.hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;border-radius:12px;padding:11px 16px;font-weight:800;font-size:.9rem;transition:.18s}
+.btn--primary{background:var(--primary);color:white;border:2px solid var(--primary)}
+.btn--primary:hover{background:var(--primary-dark);border-color:var(--primary-dark);transform:translateY(-1px)}
+.btn--secondary{background:#fff;color:var(--primary-dark);border:2px solid var(--primary)}
+.btn--secondary:hover{background:var(--soft);transform:translateY(-1px)}
+.btn--ghost{background:#fff;color:var(--muted);border:1px solid var(--border)}
+main{max-width:900px;margin:auto;padding:28px 20px 48px}
+.intro{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);margin-bottom:18px}
+.intro p{margin:0}
+.toc{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin:18px 0 24px}
+.toc strong{display:block;color:var(--primary-dark);margin-bottom:8px}
+.toc__links{display:flex;flex-wrap:wrap;gap:8px}
+.toc a{text-decoration:none;color:#52667e;background:#f8fafc;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
+.toc a:hover{color:var(--primary-dark);border-color:var(--primary)}
+.theory-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;margin:16px 0;box-shadow:var(--shadow)}
+.section-kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--primary);font-weight:900;margin-bottom:3px}
+h2{font-size:1.4rem;line-height:1.25;color:var(--primary-dark);margin:0 0 10px}
+h3{line-height:1.3}
+.theory-card p{margin:0 0 12px}
+.clean-list{padding-left:1.2rem;margin:10px 0 0}
+.clean-list li{margin:6px 0}
+.callout{background:var(--soft);border-left:4px solid var(--primary);border-radius:10px;padding:12px 14px;margin-top:14px;font-weight:650}
+.math-table{width:100%;border-collapse:collapse;margin:14px 0 4px;font-size:.92rem}
+.math-table th,.math-table td{border:1px solid var(--border);padding:9px 10px;text-align:left}
+.math-table th{background:#f4f7fb;color:var(--primary-dark)}
+.examples-wrap{margin:28px 0}
+.example-card{background:#f0f7ff;border:1px solid #cee0f5;border-left:5px solid #2980b9;border-radius:16px;padding:20px 22px;margin:14px 0}
+.example-card__tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#2473a5;font-weight:900}
+.example-card h3{margin:3px 0 8px;color:#245f89}
+.example-card ol{margin:8px 0 10px;padding-left:1.4rem}
+.example-card li{margin:5px 0}
+.result{background:#fff;border:1px solid #c5daef;border-radius:10px;padding:10px 12px;color:var(--primary-dark);font-weight:800}
+.mistakes-wrap{background:#fffaf0;border:1px solid #efd6a6;border-radius:18px;padding:22px;margin:26px 0}
+.mistakes-wrap>h2{color:#946015}
+.mistake{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #f0dfbd}
+.mistake:last-child{border-bottom:0;padding-bottom:0}
+.mistake h3{font-size:.98rem;margin:0 0 3px;color:#7f571a}
+.mistake p{margin:0;font-size:.9rem}
+.summary{background:#f0fbf5;border:1px solid #bfe5cf;border-radius:18px;padding:22px;margin:26px 0}
+.summary h2{color:var(--success)}
+.practice-panel{background:#fff;border:2px solid #cbdaf2;border-radius:20px;padding:24px;text-align:center;margin:28px 0 18px;box-shadow:var(--shadow)}
+.practice-panel p{margin:0 auto 16px;color:var(--muted);max-width:620px}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.pager__link{display:flex;align-items:center;text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:12px;padding:11px 13px;color:var(--primary-dark);font-size:.84rem;font-weight:800}
+.pager__link--next{justify-content:flex-end;text-align:right}
+.footer{border-top:1px solid var(--border);background:#fff;color:var(--muted);text-align:center;padding:24px 18px;font-size:.8rem}
+@media(max-width:650px){
+  .topbar__inner{padding:8px 10px}
+  .hero__inner{padding:38px 16px 32px}
+  main{padding:20px 13px 38px}
+  .theory-card,.intro{padding:19px 17px}
+  .hero-actions{flex-direction:column}
+  .btn{width:100%}
+  .math-table{font-size:.82rem}
+  .math-table th,.math-table td{padding:7px}
+  .pager{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <nav class="topbar__inner" aria-label="Navegació">
+    <a class="crumb" href="../../../index.html">🏠 Mates Interactives</a>
+    <span class="sep">›</span>
+    <a class="crumb" href="../../index.html">📘 2n ESO</a>
+    <span class="sep">›</span>
+    <a class="crumb" href="../../sentit-numeric.html">🔢 Sentit Numèric</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero__inner">
+    <span class="eyebrow">Teoria · Sentit Numèric · 2n ESO</span>
+    <h1>Proporcionalitat directa</h1>
+    <p>Aprèn a reconèixer relacions proporcionals i a resoldre-les amb reducció a la unitat, factors, proporcions i repartiments</p>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=proporcionalitat&level=1&practice=1">🧩 Practica · Nivell 1</a>
+      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=proporcionalitat&level=2&practice=1">✏️ Practica · Nivell 2</a>
+      <a class="btn btn--ghost" href="../../sentit-numeric.html?topic=proporcionalitat">Veure el bloc →</a>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="intro"><p>La proporcionalitat directa apareix constantment en preus, receptes, escales, velocitats constants i moltes altres situacions. A 2n d'ESO és important <strong>reconèixer la relació abans de calcular</strong> i escollir l'estratègia més eficient.</p></div>
+
+  <nav class="toc" aria-label="Índex de la teoria">
+    <strong>En aquesta pàgina</strong>
+    <div class="toc__links">
+      <a href="#que-es">Quan dues magnituds són directament proporcionals?</a><a href="#constant">La constant de proporcionalitat</a><a href="#unitat">Reducció a la unitat</a><a href="#factor">Factor multiplicatiu</a><a href="#proporcio">Proporcions i terme desconegut</a><a href="#repartiment">Repartiments proporcionals</a><a href="#no-proporcional">Situacions que no són proporcionals</a>
+      <a href="#exemples">Exemples resolts</a>
+      <a href="#errors">Errors habituals</a>
+      <a href="#resum">Resum</a>
+    </div>
+  </nav>
+
+
+<section class="theory-card" id="que-es">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Quan dues magnituds són directament proporcionals?</h2>
+  <p>Dues magnituds són directament proporcionals quan, en multiplicar una per un factor, l'altra queda multiplicada pel mateix factor.</p>
+  <ul class="clean-list"><li>Si compres el doble d'unitats al mateix preu unitari, pagues el doble.</li><li>Si una recepta es duplica mantenint les proporcions, totes les quantitats es dupliquen.</li><li>No tota relació creixent és proporcional: primer cal comprovar que la relació manté una mateixa raó.</li></ul>
+
+  <div class="callout">Abans d'aplicar cap regla de tres, pregunta't si la situació és realment proporcional.</div>
+</section>
+<section class="theory-card" id="constant">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>La constant de proporcionalitat</h2>
+  <p>En una proporcionalitat directa, el quocient entre valors corresponents és constant. Aquesta constant sovint té un significat real.</p>
+  <ul class="clean-list"><li>Si el quocient es manté, hi ha proporcionalitat directa.</li><li>La constant pot expressar-se en unitats com €/kg, km/h, L/persona...</li><li>Conèixer la constant permet calcular qualsevol valor corresponent.</li></ul>
+  <table class="math-table">
+<thead><tr><th>Magnitud 1</th><th>Magnitud 2</th><th>Quocient</th></tr></thead>
+<tbody>
+<tr><td>2 kg</td><td>6 €</td><td>3 €/kg</td></tr>
+<tr><td>5 kg</td><td>15 €</td><td>3 €/kg</td></tr>
+<tr><td>8 kg</td><td>24 €</td><td>3 €/kg</td></tr>
+</tbody>
+</table>
+
+</section>
+<section class="theory-card" id="unitat">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Reducció a la unitat</h2>
+  <p>Una estratègia molt intuïtiva és calcular primer què correspon a una sola unitat i després escalar.</p>
+  <ul class="clean-list"><li>Si 4 quaderns costen 10 €, un quadern costa 10 ÷ 4.</li><li>Un cop conegut el valor unitari, multiplica per la nova quantitat.</li><li>És especialment útil quan la constant té un significat clar, com preu per unitat o litres per persona.</li></ul>
+
+
+</section>
+<section class="theory-card" id="factor">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Factor multiplicatiu</h2>
+  <p>De vegades no cal passar per la unitat. Si veiem per quin factor canvia una magnitud, podem aplicar el mateix factor a l'altra.</p>
+  <ul class="clean-list"><li>Si passem de 3 persones a 12 persones, hem multiplicat per 4.</li><li>En proporcionalitat directa, la quantitat corresponent també es multiplica per 4.</li><li>Aquesta estratègia és ràpida quan els nombres tenen una relació senzilla.</li></ul>
+
+
+</section>
+<section class="theory-card" id="proporcio">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Proporcions i terme desconegut</h2>
+  <p>Una proporció és una igualtat entre dues raons. Permet expressar formalment una proporcionalitat i trobar un valor desconegut.</p>
+  <ul class="clean-list"><li>Si a/b = c/x, podem buscar x mantenint l'equivalència entre les dues raons.</li><li>La multiplicació en creu és una tècnica possible, però cal entendre què representa abans d'aplicar-la.</li><li>És recomanable estimar el resultat per veure si el valor obtingut té sentit.</li></ul>
+
+  <div class="callout">La proporció és una eina, no el punt de partida: primer identifica la relació entre les magnituds.</div>
+</section>
+<section class="theory-card" id="repartiment">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Repartiments proporcionals</h2>
+  <p>En un repartiment proporcional, cada part rep una quantitat d'acord amb una raó establerta.</p>
+  <ul class="clean-list"><li>Si un repartiment segueix la raó 2:3, el total es divideix conceptualment en 5 parts iguals.</li><li>Una persona rep 2 d'aquestes parts i l'altra en rep 3.</li><li>La suma de totes les parts repartides ha de coincidir amb el total.</li></ul>
+
+
+</section>
+<section class="theory-card" id="no-proporcional">
+  <div class="section-kicker">Concepte clau</div>
+  <h2>Situacions que no són proporcionals</h2>
+  <p>Molts errors provenen d'aplicar proporcionalitat directa a situacions que no la compleixen.</p>
+  <ul class="clean-list"><li>Una tarifa amb quota fixa més consum no és proporcional directament al consum.</li><li>L'edat d'una persona i la seva alçada no són magnituds directament proporcionals.</li><li>Si el quocient entre valors corresponents no és constant, no hi ha proporcionalitat directa.</li><li>També existeix la proporcionalitat inversa, que es treballarà a l'ampliació.</li></ul>
+
+
+</section>
+
+  <section class="examples-wrap" id="exemples">
+    <h2>✏️ Exemples resolts</h2>
+
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Reducció a la unitat</h3>
+
+  <ol><li>4 quaderns costen 10 €.</li><li>Preu d'un quadern: 10 ÷ 4 = 2,5 €.</li><li>Per 7 quaderns: 7 · 2,5 = 17,5 €.</li></ol>
+  <div class="result">7 quaderns costen 17,50 €.</div>
+</article>
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Factor multiplicatiu</h3>
+
+  <ol><li>Per 3 persones calen 450 g d'arròs.</li><li>Volem preparar-ne per 12 persones.</li><li>12 és 4 vegades 3.</li><li>Multipliquem també 450 per 4.</li></ol>
+  <div class="result">Calen 1800 g d'arròs.</div>
+</article>
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Trobar un valor amb una proporció</h3>
+
+  <ol><li>5 kg costen 18 € i volem saber el cost de 8 kg.</li><li>La relació és directa perquè el preu per kg es manté.</li><li>Podem plantejar 5/18 = 8/x o reduir a la unitat.</li><li>18 ÷ 5 = 3,6 €/kg i 8 · 3,6 = 28,8 €.</li></ol>
+  <div class="result">8 kg costen 28,80 €.</div>
+</article>
+<article class="example-card">
+  <div class="example-card__tag">Exemple resolt</div>
+  <h3>Repartiment proporcional 2:3</h3>
+
+  <ol><li>Hem de repartir 150 € en la raó 2:3.</li><li>En total hi ha 2 + 3 = 5 parts.</li><li>Cada part val 150 ÷ 5 = 30 €.</li><li>Les quantitats són 2 · 30 i 3 · 30.</li></ol>
+  <div class="result">El repartiment és 60 € i 90 €.</div>
+</article>
+  </section>
+
+  <section class="mistakes-wrap" id="errors">
+    <h2>⚠️ Errors habituals que convé evitar</h2>
+
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Aplicar regla de tres sense comprovar la relació</h3><p>Que dues magnituds augmentin alhora no significa necessàriament que siguin directament proporcionals.</p></div>
+</article>
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Invertir una de les raons</h3><p>Si compares kg amb euros, mantén el mateix ordre a les dues parelles de valors.</p></div>
+</article>
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Confondre proporcionalitat directa amb inversa</h3><p>En la directa, si una magnitud es multiplica per un factor, l'altra també. En la inversa passa el contrari.</p></div>
+</article>
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>Oblidar la constant de proporcionalitat</h3><p>Calcular el valor per unitat és una manera molt segura de comprovar si la relació és coherent.</p></div>
+</article>
+<article class="mistake">
+  <div class="mistake__icon">⚠️</div>
+  <div><h3>No comprovar el resultat</h3><p>Si compres més quantitat al mateix preu unitari, el cost ha de ser més gran, no més petit.</p></div>
+</article>
+  </section>
+
+  <section class="summary" id="resum">
+    <h2>✅ Què hauries de tenir clar</h2>
+    <ul><li>Reconèixer quan dues magnituds són directament proporcionals.</li><li>Interpretar i calcular la constant de proporcionalitat.</li><li>Resoldre situacions mitjançant reducció a la unitat.</li><li>Utilitzar factors multiplicatius quan sigui més eficient.</li><li>Plantejar i interpretar proporcions.</li><li>Resoldre repartiments proporcionals senzills.</li><li>Detectar situacions que no són de proporcionalitat directa.</li></ul>
+  </section>
+
+  <section class="practice-panel">
+    <h2>Ara toca practicar</h2>
+    <p>Tria el nivell. Si has arribat aquí directament des d'un cercador, el tema s'obrirà automàticament perquè puguis començar.</p>
+    <div class="hero-actions">
+      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=proporcionalitat&level=1&practice=1">🧩 Nivell 1 · Guiat</a>
+      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=proporcionalitat&level=2&practice=1">✏️ Nivell 2 · Sol/a</a>
+    </div>
+  </section>
+
+  <nav class="pager" aria-label="Altres continguts de teoria">
+    <a class="pager__link" href="aproximacions-errors.html">← Aproximacions i errors</a>
+    <a class="pager__link pager__link--next" href="percentatges.html">Percentatges →</a>
+  </nav>
+</main>
+
+<footer class="footer">
+  © 2026 Mates Interactives · Creat per Salvador Rigual · 100 % gratuït · Sense anuncis · Sense cookies
+</footer>
+
+<script>
+const isLocal =
+  location.protocol === "file:" ||
+  ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+
+if (!isLocal) {
+  const s = document.createElement("script");
+  s.async = true;
+  s.dataset.goatcounter = "https://srigual.goatcounter.com/count";
+  s.src = "https://gc.zgo.at/count.js";
+  document.body.appendChild(s);
+}
+</script>
+</body>
+</html>
