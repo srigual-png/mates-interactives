@@ -216,6 +216,13 @@
 @media (max-width:520px){
     .progress-bar-wrap,.pbw{display:none!important;}
 }
+
+/* ── TECLAT D'UNITATS ─────────────────────────────────────── */
+.unit-pad{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px;padding:9px 10px;background:#f7fbf8;border:1px solid var(--border);border-radius:10px}
+.unit-pad-label{font-size:.75rem;color:var(--muted);margin-right:2px;font-weight:700}
+.unit-key{border:1px solid var(--border);background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer;font-weight:750;color:var(--primary-dark);font-family:inherit;min-width:44px}
+.unit-key:hover{border-color:var(--primary);background:#e9f7ef}
+
 </style>
 
 <meta content="Sentit de la mesura 1r ESO: exercicis interactius" property="og:title"/><meta content="Exercicis interactius de matemàtiques 1r ESO sobre unitats, temps, perímetres, àrees, escales, estimació i precisió. Sentit de la mesura amb problemes i pistes." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-mesura.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/></head>
@@ -1270,10 +1277,93 @@ function genEstimacio(){
 }
 
 // ── 7. PROBLEMES DE CONTEXT · BANC AMPLIAT ────────────────────────────────
+
+/* ── AJUDA D'ESCRIPTURA D'UNITATS ─────────────────────────── */
+function canonicalUnitText(value){
+  let s=String(value??'').toLowerCase()
+    .replace(/<sup>\s*2\s*<\/sup>/g,'²').replace(/<sup>\s*3\s*<\/sup>/g,'³')
+    .replace(/<[^>]*>/g,'')
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
+    .replace(/[’']/g,"'").replace(/·/g,'').replace(/\^2/g,'²').replace(/\^3/g,'³')
+    .replace(/\b(kilometres?|quilometres?)\s+quadrats?\b/g,'km²')
+    .replace(/\bhectometres?\s+quadrats?\b/g,'hm²')
+    .replace(/\bdecametres?\s+quadrats?\b/g,'dam²')
+    .replace(/\bmetres?\s+quadrats?\b/g,'m²')
+    .replace(/\bdecimetres?\s+quadrats?\b/g,'dm²')
+    .replace(/\bcentimetres?\s+quadrats?\b/g,'cm²')
+    .replace(/\bmilimetres?\s+quadrats?\b/g,'mm²')
+    .replace(/\b(kilometres?|quilometres?)\s+cubics?\b/g,'km³')
+    .replace(/\bhectometres?\s+cubics?\b/g,'hm³')
+    .replace(/\bdecametres?\s+cubics?\b/g,'dam³')
+    .replace(/\bmetres?\s+cubics?\b/g,'m³')
+    .replace(/\bdecimetres?\s+cubics?\b/g,'dm³')
+    .replace(/\bcentimetres?\s+cubics?\b/g,'cm³')
+    .replace(/\bmilimetres?\s+cubics?\b/g,'mm³')
+    .replace(/\b(kilometres?|quilometres?)\b/g,'km')
+    .replace(/\bhectometres?\b/g,'hm')
+    .replace(/\bdecametres?\b/g,'dam')
+    .replace(/\bmetres?\b/g,'m')
+    .replace(/\bdecimetres?\b/g,'dm')
+    .replace(/\bcentimetres?\b/g,'cm')
+    .replace(/\bmilimetres?\b/g,'mm')
+    .replace(/\bmililitres?\b/g,'ml')
+    .replace(/\bcentilitres?\b/g,'cl')
+    .replace(/\bdecilitres?\b/g,'dl')
+    .replace(/\blitres?\b/g,'l')
+    .replace(/\bquilograms?\b/g,'kg')
+    .replace(/\bmiligrams?\b/g,'mg')
+    .replace(/\bgrams?\b/g,'g')
+    .replace(/\btones?\b/g,'t')
+    .replace(/\bhores?\b/g,'h')
+    .replace(/\bminuts?\b/g,'min')
+    .replace(/\bsegons?\b/g,'s')
+    .replace(/\bgraus?\b/g,'°')
+    .replace(/km3/g,'km³').replace(/hm3/g,'hm³').replace(/dam3/g,'dam³').replace(/m3/g,'m³').replace(/dm3/g,'dm³').replace(/cm3/g,'cm³').replace(/mm3/g,'mm³')
+    .replace(/km2/g,'km²').replace(/hm2/g,'hm²').replace(/dam2/g,'dam²').replace(/m2/g,'m²').replace(/dm2/g,'dm²').replace(/cm2/g,'cm²').replace(/mm2/g,'mm²');
+  return s;
+}
+function unitPadKind(ex){
+  const raw=canonicalUnitText((ex&&ex.correct)||'').replace(/\s+/g,'');
+  if(/(?:km|hm|dam|m|dm|cm|mm)³/.test(raw))return 'volume';
+  if(/(?:km|hm|dam|m|dm|cm|mm)²/.test(raw))return 'area';
+  if(/(?:ml|cl|dl|l)$/.test(raw)||/[-+0-9.,](?:ml|cl|dl|l)$/.test(raw))return 'capacity';
+  if(/(?:mg|kg|g|t)$/.test(raw)||/[-+0-9.,](?:mg|kg|g|t)$/.test(raw))return 'mass';
+  if(/(?:km|hm|dam|m|dm|cm|mm)$/.test(raw)||/[-+0-9.,](?:km|hm|dam|m|dm|cm|mm)$/.test(raw))return 'length';
+  if(/(?:h|min|s)$/.test(raw)||/[-+0-9.,](?:h|min|s)$/.test(raw))return 'time';
+  if(raw.includes('°'))return 'angle';
+  return '';
+}
+function unitPadButtons(kind){
+  const groups={
+    length:['mm','cm','dm','m','dam','hm','km'],
+    area:['mm²','cm²','dm²','m²','dam²','hm²','km²'],
+    volume:['mm³','cm³','dm³','m³','dam³','hm³','km³'],
+    capacity:['mL','cL','dL','L'],
+    mass:['mg','g','kg','t'],
+    time:['s','min','h'],
+    angle:['°']
+  };
+  return groups[kind]||[];
+}
+function insertUnit(inputId,text){
+  const inp=document.getElementById(inputId);if(!inp||inp.disabled)return;
+  const a=typeof inp.selectionStart==='number'?inp.selectionStart:inp.value.length;
+  const b=typeof inp.selectionEnd==='number'?inp.selectionEnd:a;
+  const before=inp.value.slice(0,a),after=inp.value.slice(b);
+  const sep=before&&!/\s$/.test(before)?' ':'';
+  inp.value=before+sep+text+after;
+  const pos=(before+sep+text).length;inp.focus();try{inp.setSelectionRange(pos,pos)}catch(e){}
+}
+function unitPadHTML(ex,inputId){
+  const kind=unitPadKind(ex),buttons=unitPadButtons(kind);if(!buttons.length)return '';
+  return '<div class="unit-pad" aria-label="Teclat d\'unitats"><span class="unit-pad-label">Unitats ràpides:</span>'+buttons.map(u=>'<button type="button" class="unit-key" onclick="insertUnit(\''+inputId+'\',\''+u+'\')">'+u+'</button>').join('')+'</div>';
+}
+function updateUnitPad(containerId,ex,inputId){const box=document.getElementById(containerId);if(box)box.innerHTML=unitPadHTML(ex,inputId);}
+
 function normalizeOpenAnswer(s){
-  return String(s===undefined||s===null?'':s)
+  return canonicalUnitText(String(s===undefined||s===null?'':s))
     .trim().toLowerCase().replace(/,/g,'.').replace(/\s+/g,' ')
-    .replace(/€/g,' euros').replace(/²/g,'2').replace(/º/g,'°');
+    .replace(/€/g,' euros').replace(/º/g,'°');
 }
 function firstNumber(s){
   const m=normalizeOpenAnswer(s).match(/-?\d+(?:\.\d+)?/);
@@ -2166,7 +2256,7 @@ function renderOpenProblem(){
     <button class="sol-btn" style="width:100%;margin:0 0 12px" onclick="toggleOpenHint()" id="openHintBtn">💡 Veure pista</button>
     <div class="guide-steps" id="openGuide" style="display:none"><h4>💡 Pistes</h4>${ex.guide.map(g=>`<div>• ${escHtml(g)}</div>`).join('')}</div>
     <div class="app-card"><h3>✏️ Desenvolupament</h3><p>Pots escriure els càlculs aquí o fer-los en paper.</p><textarea id="openWork" style="width:100%;min-height:110px;border:2px solid var(--border);border-radius:10px;padding:10px;font-family:inherit" placeholder="Escriu els teus càlculs..."></textarea>
-      <label style="display:block;font-size:.82rem;font-weight:700;margin:12px 0 6px">Resposta final</label><input class="app-input" id="openFinal" style="width:100%" placeholder="Ex.: 24 m, 3 h 15 min, Transportador..." onkeydown="if(event.key==='Enter')checkOpenProblem()">
+      <label style="display:block;font-size:.82rem;font-weight:700;margin:12px 0 6px">Resposta final</label><input class="app-input" id="openFinal" style="width:100%" placeholder="Ex.: 24 m, 3 h 15 min, Transportador..." onkeydown="if(event.key==='Enter')checkOpenProblem()">${unitPadHTML(ex,'openFinal')}
       <button class="btn-primary" id="openCheck" onclick="checkOpenProblem()">Comprovar resposta</button></div>
     <div id="openFeedback"></div>
     <button class="btn-secondary" onclick="showOpenProblemsHome()">← Sortir de la sessió</button>`;
@@ -2225,7 +2315,7 @@ function showExamQ(){
   const kind=q.examOpen?' · ✍️ Problema':' ';
   document.getElementById('examContent').innerHTML=`<div class="ex-header"><div class="ex-num">Pregunta ${ST.examIdx+1}/${ST.examQs.length} · ${q.topicName}${kind} ${diffTag}</div></div><div class="ex-question"><span class="${q.examOpen?'ctx':'func'}">${q.question}</span></div>`;
   if(q.examOpen){
-    document.getElementById('examOptions').innerHTML=`<div style="grid-column:1/-1"><input class="app-input" id="examOpenAnswer" style="width:100%;padding:12px" placeholder="Escriu la resposta final" onkeydown="if(event.key==='Enter')checkExamOpenAnswer()"><button class="btn-primary" id="examOpenCheck" onclick="checkExamOpenAnswer()">Comprovar</button></div>`;
+    document.getElementById('examOptions').innerHTML=`<div style="grid-column:1/-1"><input class="app-input" id="examOpenAnswer" style="width:100%;padding:12px" placeholder="Escriu la resposta final" onkeydown="if(event.key==='Enter')checkExamOpenAnswer()">${unitPadHTML(q,'examOpenAnswer')}<button class="btn-primary" id="examOpenCheck" onclick="checkExamOpenAnswer()">Comprovar</button></div>`;
   }else{
     document.getElementById('examOptions').innerHTML=q.options.map((o,i)=>`<button class="opt-btn" onclick="selectExamAns(${i},this)">${o}</button>`).join('');
   }
