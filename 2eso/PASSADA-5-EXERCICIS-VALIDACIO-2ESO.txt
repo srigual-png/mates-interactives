@@ -1,0 +1,81 @@
+PASSADA 5 · EXERCICIS, DISTRACTORS I VALIDACIÓ · 2n ESO
+==========================================================
+
+Objectiu
+--------
+Auditar els exercicis dels cinc sentits: robustesa dels generadors, opcions úniques, distractors, respostes obertes equivalents, unitats, absència de NaN/undefined i gràfics que no revelin la resposta.
+
+Retocs aplicats
+---------------
+1. SENTIT ALGEBRAIC
+- Les expressions obertes del bloc Expressions algebraiques accepten formes algebraicament equivalents quan la forma no és l'objectiu de l'exercici.
+- Exemple: 4x + 12 també accepta 12 + 4*x.
+- Es mantenen estrictes les activitats on factoritzar o una forma concreta és part del que es demana.
+
+2. SENTIT NUMÈRIC
+- S'ha afegit equivalència racional flexible quan la pregunta no exigeix una representació concreta.
+- Exemple: 1/2, 2/4 i 0,5 es reconeixen com el mateix valor en una pregunta numèrica oberta.
+- No s'aplica quan l'enunciat exigeix explícitament percentatge, decimal, fracció irreductible, fracció generatriu o notació científica.
+
+3. SENTIT ESTOCÀSTIC
+- Mateix criteri d'equivalència racional per a probabilitats i valors numèrics oberts.
+- Es preserva la forma quan l'enunciat la demana explícitament.
+
+4. SENTIT DE LA MESURA
+- Les respostes obertes accepten valors equivalents en unitats coherents:
+  365 cm = 3,65 m
+  4 m² = 40.000 cm²
+  2.500 mL = 2,5 L
+  120 min = 2 h
+  48.000 L = 48 m³
+- Volum i capacitat es connecten correctament (1 dm³ = 1 L).
+- Corregida la lectura del punt de milers català: 48.000 L significa 48 mil litres, no 48 litres.
+- Corregits distractors de precisió que eren numèricament equivalents a la resposta correcta.
+
+5. SENTIT ESPACIAL
+- Eliminats noms visibles de cilindre, con, esfera, prisma i piràmide quan el dibuix forma part d'una pregunta de classificació.
+- Eliminades descripcions d'accessibilitat que revelaven el nombre de costats de la base.
+- Corregida l'orientació textual d'una vista lateral: COSTAT DRET en lloc de DAVANT.
+- Els gràfics mantenen només la informació necessària per resoldre la pregunta.
+
+Validació post-retocs
+----------------------
+- Algebraic: 30.000 exercicis.
+- Espacial: 33.000 exercicis.
+- Estocàstic: 44.000 exercicis.
+- Mesura: 33.000 exercicis.
+- Numèric: 36.000 exercicis.
+- Total: 176.000 exercicis generats i validats.
+
+Comprovacions per exercici
+--------------------------
+- generació sense excepcions;
+- exactament 4 opcions;
+- 4 opcions textualment úniques;
+- resposta correcta present;
+- cap NaN, undefined o Infinity;
+- pista/guia i solució presents;
+- el validador obert accepta la resposta correcta;
+- cap distractor és acceptat com a equivalent de la correcta.
+
+Proves dirigides
+----------------
+- Algebraic: equivalència 4x+12 = 12+4*x: OK.
+- Numèric: 1/2 = 0,5 en pregunta flexible: OK; rebutjat quan es demana fracció irreductible: OK.
+- Estocàstic: 1/2 = 0,5 en probabilitat oberta: OK.
+- Mesura: conversions de longitud, àrea, volum/capacitat i temps: OK.
+- Espacial: classificació de cossos sense nom/resposta escrita dins del dibuix: OK.
+- Sintaxi JavaScript final: 5/5 OK.
+
+Integritat de passades anteriors
+--------------------------------
+Comparació amb el ZIP P4 d'entrada:
+- només han canviat els cinc sentit-*.html;
+- 65 fitxers restants byte a byte iguals;
+- 60 fitxers de teoria intactes;
+- index.html intacte;
+- informes P1/P2/P3/P4 intactes.
+
+ESTAT
+-----
+PASSADA 5 · 2n ESO: COMPLETADA I VALIDADA.

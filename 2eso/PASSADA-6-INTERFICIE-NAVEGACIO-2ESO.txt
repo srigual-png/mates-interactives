@@ -1,0 +1,56 @@
+PASSADA 6 · INTERFÍCIE I NAVEGACIÓ · 2n ESO
+================================================
+
+Objectiu
+--------
+Homogeneïtzar la interfície i la navegació dels cinc sentits de 2n ESO sense alterar la lògica matemàtica ni les passades anteriors.
+
+Canvis aplicats
+---------------
+- Breadcrumb complet també a la portada del sentit: Mates Interactives → 2n ESO → Sentit.
+- Barra superior i comportament responsive homogenis als cinc sentits.
+- Portada amb jerarquia visual comuna:
+  1. Continguts de 2n ESO.
+  2. Pràctica complementària, quan existeix (Algebraic).
+  3. Ampliació · prepara 3r ESO.
+  4. Mode Examen.
+  5. Errors guardats.
+- Errors guardats sempre accessible, també quan el recompte és 0.
+- Mode Examen i Errors diferenciats visualment amb targetes especials.
+- Targetes a una columna, espaiats i amplades homogenis.
+- Botons de teoria i Gestionar temes adaptats a mòbil.
+- Opcions de resposta en una sola columna en pantalles estretes.
+- Modals de Gestió de temes i Mode Examen adaptats a l'alçada del dispositiu.
+- A l'Algebraic, l'antiga barra lateral queda definitivament oculta i l'Aplicació real s'ha mogut a Pràctica complementària, abans de l'Ampliació.
+- El breadcrumb de l'Algebraic incorpora també l'etiqueta curta "Sentit" per a mòbil.
+
+Validació
+---------
+- JavaScript: 5/5 fitxers sentit-*.html OK.
+- CSS P6 present: 5/5.
+- IDs duplicats: 0.
+- Ordre Tota la teoria → Gestionar temes → blocs: 5/5.
+- Ordre Continguts → Ampliació → Mode Examen → Errors: 5/5.
+- Breadcrumb complet a la portada: 5/5.
+- Errors guardats accessible amb 0 errors: 5/5.
+- Enllaços interns del curs comprovats: 673.
+- Enllaços interns trencats: 0.
+
+Integritat respecte de P5
+-------------------------
+- Fitxers modificats: només els cinc sentit-*.html i aquest informe P6 nou.
+- index.html: intacte.
+- Teoria: 60/60 fitxers HTML byte a byte intactes.
+- Generadors, validadors, Mode Examen P2, Gestió de temes/progrés P3, Errors/correccions P4 i retocs matemàtics P5 no s'han modificat fora de la capa d'interfície renderHome/showHome/CSS.
+
+Fitxers de sentit modificats
+----------------------------
+sentit-numeric.html
+sentit-algebraic.html
+sentit-mesura.html
+sentit-espacial.html
+sentit-estocastic.html
+
+ESTAT
+-----
+PASSADA 6 · 2n ESO: COMPLETADA I VALIDADA.

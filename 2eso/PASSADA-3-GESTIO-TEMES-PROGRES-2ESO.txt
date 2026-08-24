@@ -1,0 +1,50 @@
+PASSADA 3 · GESTIÓ DE TEMES I PROGRÉS · 2n ESO
+================================================
+
+Objectiu
+--------
+Homogeneïtzar la gestió de temes i el progrés dels cinc sentits de 2n ESO sense modificar la teoria de P1 ni el Mode Examen de P2.
+
+Estàndard aplicat
+-----------------
+- “Gestionar temes” situat sota “Tota la teoria” i abans de la llista de blocs.
+- El Bloc 1 és sempre la base i no es pot tancar.
+- Obrir/tancar un bloc només controla la seva disponibilitat per practicar.
+- Tancar un bloc NO elimina l’estat “✓ Fet”.
+- “Desbloquejar tots” només afecta els blocs principals de 2n.
+- Les ampliacions són sempre accessibles, però no apareixen com a blocs bloquejables al panell.
+- Completar un bloc principal desbloqueja el següent bloc principal, no una ampliació.
+- El progrés global només compta els blocs principals de 2n.
+- “Reiniciar progrés” requereix doble confirmació.
+- Reiniciar progrés deixa només el Bloc 1 obert i buida els blocs completats.
+- Reiniciar progrés NO elimina els errors guardats.
+- “Canviar de tema” manté el comportament existent durant la pràctica.
+
+Retocs específics
+-----------------
+- Sentit Algebraic: eliminada visualment la gestió lateral antiga i traslladat “Gestionar temes” sota “Tota la teoria”.
+- Sentit Espacial: panell normalitzat; Bloc 1 protegit; doble confirmació de reinici; el reinici ja no elimina errors.
+- Numèric, Mesura i Estocàstic: les ampliacions deixen de formar part de unlockedIds/“Desbloquejar tots” i passen a ser opcionals sempre accessibles.
+
+Validació funcional
+-------------------
+- 5/5 sentits: sintaxi de tots els scripts inline OK.
+- 36 blocs principals identificats i gestionats.
+- 19 ampliacions identificades: fora del panell de gestió i accessibles.
+- Bloc 1 protegit: 5/5.
+- Tancar/reobrir conserva “✓ Fet”: 5/5.
+- “Desbloquejar tots” no afegeix ampliacions: 5/5.
+- Completar l’últim bloc principal no desbloqueja cap ampliació: 5/5.
+- Reinici amb doble confirmació: 5/5.
+- Errors conservats després del reinici: 5/5.
+- Després del reinici queda només el Bloc 1 obert: 5/5.
+
+Protecció de passades anteriors
+------------------------------
+- Fitxers que no són sentit-*.html: 0 modificacions accidentals.
+- Teoria P1: intacta.
+- Estils, script i modal del selector Mode Examen P2: idèntics als originals en 5/5 sentits.
+
+Resultat
+--------
+PASSADA 3 · 2n ESO: OK.

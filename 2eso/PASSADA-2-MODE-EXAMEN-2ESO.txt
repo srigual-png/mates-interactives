@@ -1,0 +1,54 @@
+PASSADA 2 · MODE EXAMEN · 2n ESO
+=================================
+
+Objectiu
+--------
+Separar completament la selecció de continguts del Mode Examen del sistema de blocs desbloquejats per a la pràctica.
+
+Canvis aplicats als 5 sentits
+-----------------------------
+- Selector propi abans de començar l'examen.
+- Qualsevol bloc principal de 2n es pot seleccionar encara que estigui bloquejat a la pràctica.
+- Botons ràpids:
+  · Tots els blocs
+  · Només completats
+  · Desmarcar tots
+- Selecció de blocs persistent en localStorage, independent per sentit.
+- 20 preguntes per examen.
+- Repartiment tan equilibrat com permet el nombre de blocs seleccionats.
+- Ampliacions opcionals excloses del Mode Examen ordinari.
+- El resum final mostra els blocs seleccionats.
+- El Mode Examen deixa d'explicar que depèn dels blocs desbloquejats.
+
+Sentits modificats
+------------------
+- Sentit Numèric
+- Sentit Algebraic
+- Sentit de la Mesura
+- Sentit Espacial
+- Sentit Estocàstic
+
+Validació
+---------
+- Sintaxi JavaScript: 5/5 OK.
+- Cada bloc principal provat individualment com a únic bloc de l'examen: 36/36 OK.
+  · Numèric: 8 blocs
+  · Algebraic: 7 blocs
+  · Mesura: 7 blocs
+  · Espacial: 7 blocs
+  · Estocàstic: 7 blocs
+- Totes les proves individuals generen 20/20 preguntes.
+- Cap pregunta procedeix d'un bloc no seleccionat.
+- Configuració amb tots els blocs: 20 preguntes en els 5 sentits.
+- Equilibri amb tots els blocs: diferència màxima d'1 pregunta entre blocs.
+- "Només completats": OK.
+- Persistència de la selecció: OK.
+- Ampliacions dins de l'examen: 0.
+- 60 fitxers HTML de teoria: sense cap canvi respecte de P1.
+
+Estàndard resultant
+-------------------
+Gestionar temes = recorregut de pràctica.
+Seleccionar temes = continguts del Mode Examen.
+
+PASSADA 2 DE 2n ESO: COMPLETADA.

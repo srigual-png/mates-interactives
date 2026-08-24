@@ -1,0 +1,89 @@
+PASSADA 7 · AUDITORIA GLOBAL DE PRODUCTE ACABAT · 2n ESO
+==========================================================
+
+Objectiu
+--------
+Fer una revisió transversal final del curs complet de 2n ESO després de les passades P1–P6: teoria, navegació, gestió de temes i progrés, Mode Examen, errors, exercicis/validació, interfície, enllaços i SEO bàsic.
+
+Incidències detectades i corregides
+-----------------------------------
+
+1. SENTIT ESPACIAL · TARGETES BLOQUEJADES INCORRECTAMENT
+- La funció isUnlocked() del Sentit Espacial espera l'id del tema.
+- renderHome() li passava l'índex numèric del tema.
+- Conseqüència: les targetes de la portada del sentit podien aparèixer bloquejades encara que fossin accessibles.
+- Correcció: renderHome() passa ara t.id tant als blocs principals com a les ampliacions.
+
+2. ESPACIAL + ESTOCÀSTIC · COL·LISIÓ DE PROGRÉS I ERRORS
+- Tots dos sentits utilitzaven la mateixa clau de localStorage: se2eso_v1.
+- Això podia barrejar progrés, blocs desbloquejats i errors entre Sentit Espacial i Sentit Estocàstic.
+- Correcció:
+  · Espacial: nova clau sp2eso_v1.
+  · Estocàstic: nova clau st2eso_v1.
+  · La clau antiga se2eso_v1 es conserva només com a origen de migració.
+  · Si encara no existeix la nova clau, cada sentit recupera de la clau antiga únicament els blocs/errors que li corresponen i desa el resultat a la seva clau pròpia.
+  · Les ampliacions no es conserven dins unlockedIds durant aquesta migració.
+- Prova dirigida de migració: OK als dos sentits.
+
+3. SEO · TÍTOL DUPLICAT DE PITÀGORES
+- Les pàgines de teoria de Pitàgores de Mesura i Espacial tenien exactament el mateix <title>.
+- Correcció:
+  · Teorema de Pitàgores · Sentit de la Mesura | 2n ESO
+  · Teorema de Pitàgores · Sentit Espacial | 2n ESO
+- Després del retoc: 0 títols SEO duplicats dins del paquet de 2n ESO.
+
+Auditoria global final
+----------------------
+- HTML totals: 66.
+- Teoria: 55 pàgines de bloc + 5 índexs = 60 HTML.
+- Blocs principals de 2n: 36.
+- Ampliacions/pràctica extra: 19.
+- Referències internes del curs comprovades: 673.
+- Enllaços interns trencats: 0.
+- Pàgines HTML òrfenes: 0.
+- Enllaços directes teoria → pràctica amb topic=... comprovats: 275.
+- topic inexistents: 0.
+- THEORY_PAGES: 5/5 mapes complets i tots els fitxers existeixen.
+- Índexs de teoria: 5/5 inclouen totes les pàgines del sentit.
+- Navegació Tema anterior · Índex · Tema següent: present a 55/55 pàgines.
+- Exemple resolt: 55/55.
+- Errors freqüents/habituals: 55/55.
+- Resum: 55/55.
+- Retorn directe a pràctica: 55/55.
+- JavaScript: sintaxi correcta als 5 sentit-*.html.
+- IDs HTML duplicats: 0.
+- SEO bàsic: title, description, viewport, robots, canonical i un únic H1 presents als 66 HTML.
+- Títols duplicats després dels retocs: 0.
+- Canonicals incorrectes: 0.
+
+Claus de progrés finals
+-----------------------
+- Numèric: sn2eso_v1
+- Algebraic: sa2eso_v1
+- Mesura: sm2eso_v1
+- Espacial: sp2eso_v1
+- Estocàstic: st2eso_v1
+- Col·lisions: 0.
+
+Claus del Mode Examen
+---------------------
+- Numèric: mi_exam_2eso_numeric_v1
+- Algebraic: mi_exam_2eso_algebraic_v1
+- Mesura: mi_exam_2eso_mesura_v1
+- Espacial: mi_exam_2eso_espacial_v1
+- Estocàstic: mi_exam_2eso_estocastic_v1
+- Col·lisions: 0.
+
+Integritat de P1–P6
+-------------------
+- No s'han modificat generadors matemàtics ni validadors de respostes de P5.
+- No s'ha modificat la configuració del Mode Examen de P2.
+- No s'ha modificat la lògica pedagògica d'errors/correccions de P4.
+- No s'ha modificat l'estructura de la teoria de P1, excepte els dos <title> SEO indicats.
+- Les correccions funcionals de P7 es limiten a l'estat/navegació d'Espacial i Estocàstic i als dos títols SEO.
+
+Resultat
+--------
+PASSADA 7 · 2n ESO: COMPLETADA, CORREGIDA I VALIDADA.
+
+El paquet resultant és la nova base de 2n ESO per a qualsevol passada posterior.
