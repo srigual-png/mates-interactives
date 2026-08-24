@@ -1,0 +1,113 @@
+PASSADA 6 · INTERFÍCIE I NAVEGACIÓ · 3r ESO
+==============================================
+
+Objectiu
+--------
+Homogeneïtzar la interfície i la navegació dels cinc sentits de 3r ESO sense modificar els motors d'exercicis ni les capes funcionals tancades en P2–P5.
+
+ESTÀNDARD VISUAL APLICAT
+========================
+
+1. Barra superior i breadcrumb
+------------------------------
+- Mateix patró als 5 sentits:
+  Mates Interactives → 3r ESO → Sentit.
+- El breadcrumb del sentit és visible ja a la càrrega inicial de la portada.
+- En mòbil es compacten les etiquetes: portada amb icona, curs "3r" i "Sentit" abreujat.
+- Barra de progrés compacta i sense desbordaments en pantalles estretes.
+
+2. Ordre únic de la portada
+---------------------------
+Als cinc sentits la jerarquia queda:
+- 📘 Continguts de 3r ESO
+- 🧩 Pràctica complementària, només quan existeix (Algebraic i Mesura)
+- ⭐ Ampliació · prepara 4t ESO
+- 📝 Mode Examen
+- ❌ Errors guardats
+
+Errors guardats és sempre accessible, també quan encara hi ha 0 errors.
+
+3. Teoria i gestió de temes
+----------------------------
+Ordre homogeni:
+- introducció;
+- 📚 Tota la teoria del Sentit...
+- 🔓 Gestionar temes;
+- llista de blocs.
+
+S'ha eliminat la duplicació visual de "Gestionar temes" que encara existia a Algebraic i Mesura.
+Espacial s'ha normalitzat al mateix botó i classes visuals que la resta.
+Hi ha exactament un botó principal "Gestionar temes" a cada sentit.
+
+4. Targetes i seccions especials
+---------------------------------
+- Targetes a amplada completa i amb espaiats homogenis.
+- Capçaleres diferenciades per Continguts, Pràctica complementària, Ampliació, Examen i Errors.
+- Mode Examen separat visualment amb targeta discontínua.
+- Errors guardats separat visualment i ressaltat només quan hi ha errors.
+- Ampliacions diferenciades visualment però fora del progrés i examen principals, sense canviar la lògica P3/P2.
+
+5. Responsive / mòbil
+----------------------
+Capa P6 comuna als 5 sentits:
+- amplada màxima coherent de la pàgina;
+- targetes flexibles;
+- badges que baixen a una línia pròpia en pantalles molt estretes;
+- botons Teoria / Gestionar temes a amplada completa;
+- opcions d'exercici en una columna;
+- modals de Gestionar temes i Mode Examen adaptats a 92vh;
+- navegació compacta a 700 px i 430 px.
+
+6. Assets i favicons
+---------------------
+Els cinc sentits encara apuntaven a favicons locals inexistents dins de 3eso.
+S'han normalitzat als assets globals:
+- ../assets/images/favicon.ico
+- ../assets/images/favicon-32x32.png
+- ../assets/images/favicon-16x16.png
+- ../assets/images/apple-touch-icon.png
+
+VALIDACIÓ
+==========
+
+JavaScript
+----------
+- 5/5 sentit-*.html: sintaxi JavaScript OK amb node --check.
+
+CSS P6
+------
+- 5/5: bloc P6 present.
+- 5/5: claus CSS equilibrades.
+- 5/5: breakpoint mòbil identificat com "3r".
+
+DOM / interfície
+----------------
+- 0 IDs HTML estàtics duplicats.
+- 5/5: exactament un botó principal Gestionar temes abans de la llista de blocs.
+- 5/5: ordre Tota la teoria → Gestionar temes → blocs.
+- 5/5: breadcrumb complet visible també a la càrrega inicial.
+- 5/5: ordre de seccions P6 correcte.
+- Errors guardats accessible amb estat buit: 5/5.
+
+Enllaços
+--------
+- 696 referències internes que resolen dins del paquet de 3r comprovades.
+- 0 enllaços interns trencats.
+- Les referències al nivell superior (portada/assets globals) s'han contrastat amb el patró de l'index de 3r i no formen part del ZIP de curs.
+
+Integritat respecte de P5
+--------------------------
+- Únics fitxers existents modificats: els 5 sentit-*.html.
+- 72/72 fitxers restants del ZIP P5: byte a byte intactes.
+- index.html: intacte.
+- 66/66 HTML de teoria: intactes.
+- Totes les funcions JavaScript amb nom, excepte renderHome() i showHome(), són textualment idèntiques a P5.
+- No s'han modificat generadors, validadors, Mode Examen P2, gestió de temes/progrés P3 ni sistema d'errors P4/P5.
+
+Nota de validació
+-----------------
+Un detector textual inicial va marcar examSolBox com a possible ID duplicat a Algebraic i Mesura. La revisió DOM va confirmar que era un fals positiu: l'ID apareix en dues plantilles JavaScript alternatives d'un mateix contenidor de feedback i no existeix duplicat simultàniament al DOM. No s'ha modificat aquesta lògica d'examen.
+
+ESTAT
+=====
+PASSADA 6 · 3r ESO: COMPLETADA I VALIDADA.

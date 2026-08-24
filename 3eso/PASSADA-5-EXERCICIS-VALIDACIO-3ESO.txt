@@ -1,0 +1,193 @@
+PASSADA 5 · EXERCICIS, DISTRACTORS I VALIDACIÓ · 3r ESO
+==========================================================
+
+Objectiu
+--------
+Auditar i homogeneïtzar la qualitat matemàtica i tècnica dels exercicis dels cinc sentits de 3r ESO:
+- robustesa dels generadors;
+- exactament 4 opcions úniques;
+- resposta correcta present;
+- distractors no equivalents a la resposta correcta;
+- respostes obertes matemàticament equivalents;
+- unitats i percentatges;
+- absència de NaN / undefined / Infinity;
+- pistes i resolucions presents;
+- gràfics d'enunciat que no revelin la resposta.
+
+RET0CS APLICATS
+===============
+
+1. SENTIT ALGEBRAIC
+-------------------
+S'ha reforçat la validació de resposta oberta perquè accepti formes algebraicament equivalents quan la forma concreta NO és l'objectiu de l'exercici.
+
+Exemples que ara s'accepten:
+- x² + 3x − 4 = 3x + x² − 4
+- aₙ = 7n = 7 + (n − 1)·7
+- y = −3x + 2 = 2 − 3x
+- parelles de sistemes en formes equivalents com x=4,y=−3 o (4;−3)
+- conjunts de dues arrels independentment de l'ordre.
+
+Protecció pedagògica:
+- si l'enunciat diu "factoritza", una expressió desenvolupada equivalent NO s'accepta;
+- si es demana una inequació, interval, discriminant o una forma concreta, es conserva la representació exigida.
+
+2. SENTIT NUMÈRIC
+-----------------
+S'ha incorporat equivalència racional segura en resposta oberta:
+- 1/2 = 0,5 = 50% quan la representació no és part del que es pregunta.
+
+No s'aplica aquesta flexibilitat quan l'enunciat exigeix explícitament:
+- fracció generatriu;
+- fracció irreductible o resultat simplificat;
+- notació científica;
+- percentatge;
+- decimal;
+- una altra representació concreta.
+
+Això evita acceptar una resposta matemàticament equivalent però formalment inadequada a l'objectiu de l'exercici.
+
+3. SENTIT DE LA MESURA
+----------------------
+S'ha incorporat equivalència real de magnituds i unitats.
+
+Exemples acceptats:
+- 3.000.000 cm³ = 3 m³
+- 7.200 mL = 7,2 L
+- 40 m² = 400.000 cm²
+- 2 km = 2.000 m
+- cm³ ↔ mL
+- dm³ ↔ L
+
+S'ha reforçat també:
+- lectura de separadors decimals i de milers;
+- diferència entre 0.005 (decimal petit) i 5.000 (milers en format català);
+- tolerància numèrica relativa per evitar confondre ordres de magnitud en conversions molt petites, especialment mm³ / cm³.
+
+Prova específica d'unitats equivalents:
+- 17.210 respostes reexpressades en una altra unitat coherent.
+- Resultat: 17.210 / 17.210 correctes.
+
+4. SENTIT ESTOCÀSTIC
+--------------------
+S'ha incorporat equivalència racional segura quan la forma no és obligatòria:
+- fracció ↔ decimal ↔ percentatge.
+
+S'ha corregit una ambigüitat real al coeficient de variació:
+- abans podien aparèixer 5% i 0,05 com si fossin respostes diferents;
+- ara l'enunciat demana explícitament el coeficient de variació "expressat en percentatge";
+- el distractor decimal equivalent s'ha substituït per un percentatge realment incorrecte.
+
+5. SENTIT ESPACIAL
+------------------
+No ha necessitat modificacions de codi en aquesta passada.
+
+S'ha auditat específicament el principi:
+"el gràfic de l'enunciat no ha de revelar la resposta".
+
+Prova:
+- 60.000 exercicis espacials generats.
+- 15.500 enunciats amb SVG analitzats.
+- 0 casos on es dibuixi com a dada la imatge final, el centre, l'eix o el vector que s'està preguntant.
+
+VALIDACIÓ MASSIVA
+=================
+
+A) Estructura dels generadors
+-----------------------------
+61 generadors totals:
+- Algebraic: 13
+- Numèric: 12
+- Mesura: 12
+- Espacial: 12
+- Estocàstic: 12
+
+10.000 generacions per generador.
+
+Resultats:
+- Algebraic:   130.000 / 130.000 OK
+- Numèric:     120.000 / 120.000 OK
+- Mesura:      120.000 / 120.000 OK
+- Espacial:    120.000 / 120.000 OK
+- Estocàstic:  120.000 / 120.000 OK
+
+TOTAL ESTRUCTURAL:
+610.000 / 610.000 exercicis OK.
+
+Comprovacions:
+- 4 opcions exactes;
+- opcions úniques;
+- resposta correcta present;
+- pregunta no buida;
+- guide present;
+- solution present;
+- cap NaN;
+- cap undefined;
+- cap Infinity;
+- el validador accepta la resposta correcta.
+
+B) Validació semàntica de distractors
+-------------------------------------
+S'ha comprovat que cap distractor sigui acceptat com a equivalent de la resposta correcta pels nous validadors.
+
+- Algebraic:  26.000
+- Numèric:    36.000
+- Mesura:     60.000
+- Espacial:   36.000
+- Estocàstic: 24.000
+
+TOTAL:
+182.000 exercicis.
+Resultat: 0 ambigüitats.
+
+C) Equivalència d'unitats
+-------------------------
+17.210 conversions equivalents addicionals.
+Resultat: 0 errors.
+
+D) Gràfics espacials
+---------------------
+60.000 exercicis generats.
+15.500 enunciats amb SVG sotmesos a auditoria específica.
+Resultat: 0 respostes revelades.
+
+E) Proves dirigides
+-------------------
+Superades proves específiques de:
+- expressions algebraiques reordenades;
+- factorització estricta;
+- terme general equivalent;
+- parelles ordenades de sistemes;
+- ordre de les arrels;
+- fracció ↔ decimal;
+- probabilitat fracció ↔ percentatge;
+- representació obligatòria;
+- longitud, àrea, volum i capacitat equivalents.
+
+INTEGRITAT DE PASSADES ANTERIORS
+================================
+Comparació amb 3eso-P4-errors-correccions:
+
+Fitxers modificats:
+- sentit-algebraic.html
+- sentit-numeric.html
+- sentit-mesura.html
+- sentit-estocastic.html
+
+Fitxers no modificats:
+- sentit-espacial.html
+- index.html
+- 66/66 fitxers de teoria
+- informes previs
+
+Funcions clau comprovades byte a byte dins dels HTML:
+- selector i configuració del Mode Examen P2: intactes;
+- renderUnlockPanel / gestió de temes P3: intactes;
+- miReviewHtml / registerError / clearSavedErrors P4: intactes.
+
+Sintaxi JavaScript final:
+- 5/5 sentit-*.html: OK.
+
+ESTAT
+=====
+PASSADA 5 · 3r ESO: COMPLETADA I VALIDADA.

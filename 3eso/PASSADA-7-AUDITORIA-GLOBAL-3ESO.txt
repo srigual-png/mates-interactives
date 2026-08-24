@@ -1,0 +1,99 @@
+PASSADA 7 · AUDITORIA GLOBAL DE PRODUCTE ACABAT · 3r ESO
+==========================================================
+
+Objectiu
+--------
+Fer una revisió transversal final del curs complet de 3r ESO després de les passades P1–P6: teoria, navegació, gestió de temes i progrés, Mode Examen, errors, exercicis/validació, interfície, enllaços, estat local i SEO bàsic.
+
+Incidències detectades i corregides
+-----------------------------------
+
+1. ESPACIAL + ESTOCÀSTIC · CLAUS D'ESTAT NO HOMOGÈNIES
+- No hi havia col·lisió real, però les claus no seguien el patró final establert per curs i sentit:
+  · Espacial: se3eso_v1
+  · Estocàstic: se3eso_estocastic_v1
+- Correcció:
+  · Espacial: nova clau sp3eso_v1.
+  · Estocàstic: nova clau st3eso_v1.
+  · Les claus antigues es mantenen únicament com a origen de migració.
+  · Si la clau nova encara no existeix, es recuperen automàticament progrés, errors i desbloquejos vàlids des de la clau antiga i es desen a la nova.
+- Prova dirigida de migració: OK als dos sentits.
+
+2. ESPACIAL + ESTOCÀSTIC · NORMALITZACIÓ P3 NO APLICADA EN CARREGAR
+- Tots dos fitxers contenien normalizeP3State(), però loadState() no l'executava.
+- Això podia deixar identificadors d'ampliacions dins unlockedIds després de carregar estats antics o d'haver completat l'últim bloc principal.
+- Correcció: la normalització P3 s'aplica durant la càrrega i només conserva/desbloqueja blocs curriculars principals.
+- Les ampliacions A–D continuen accessibles com a contingut opcional, però fora de la gestió de temes, progrés principal i Mode Examen.
+
+3. TEORIA NUMÈRICA · ID HTML DUPLICAT A INTRODUCCIÓ ALS LOGARITMES
+- La pàgina teoria/numeric/introduccio-logaritmes.html contenia dues seccions amb id="exemples".
+- Això feia ambigu l'enllaç intern de l'índex de la pàgina.
+- Correcció: la secció "Casos exactes" passa a id="casos-exactes" i el seu enllaç intern s'ha actualitzat.
+- Després del retoc: 0 IDs HTML estàtics duplicats i 0 àncores internes trencades.
+
+4. TEORIA ESTOCÀSTICA · FALTAVA EL RESUM FINAL DEL BLOC 1
+- variables-poblacio-mostra.html era l'única de les 61 pàgines de teoria de bloc sense resum final.
+- Correcció: afegit "Resum essencial" amb població/mostra, tipus de variables, representativitat i límits de generalització.
+- Després del retoc: resum present a 61/61 pàgines de teoria de bloc.
+
+Auditoria global final
+----------------------
+- HTML totals: 72.
+- Teoria: 61 pàgines de bloc + 5 índexs = 66 HTML.
+- Blocs principals de 3r: 41.
+- Ampliacions: 20.
+- Referències internes del curs comprovades: 696.
+- Enllaços interns trencats: 0.
+- Referències amb àncora (#...) comprovades: 246.
+- Àncores internes trencades: 0.
+- Pàgines HTML òrfenes: 0.
+- Enllaços directes teoria → pràctica amb topic=... comprovats: 207.
+- topic inexistents: 0.
+- Mapes teoria/pràctica dels 5 sentits: complets; tots els fitxers referenciats existeixen.
+- Índexs de teoria: 5/5 inclouen totes les pàgines del sentit.
+- Navegació de teoria (paginador + índex): present a 61/61 pàgines.
+- Exemple/exemple resolt: 61/61.
+- Errors freqüents/habituals: 61/61.
+- Resum: 61/61.
+- Retorn directe a pràctica: 61/61.
+- JavaScript: sintaxi correcta als 5 sentit-*.html.
+- IDs HTML estàtics duplicats: 0.
+- SEO bàsic: title, description, viewport, robots, canonical i un únic H1 presents als 72 HTML.
+- Títols SEO duplicats: 0.
+- Canonicals incorrectes: 0.
+
+Claus de progrés finals
+-----------------------
+- Numèric: sn3eso_v1
+- Algebraic: sa3eso_v1
+- Mesura: sm3eso_v1
+- Espacial: sp3eso_v1
+- Estocàstic: st3eso_v1
+- Col·lisions finals: 0.
+
+Claus del Mode Examen
+---------------------
+- Numèric: mi_exam_3eso_numeric_v1
+- Algebraic: mi_exam_3eso_algebraic_v1
+- Mesura: mi_exam_3eso_mesura_v1
+- Espacial: mi_exam_3eso_espacial_v1
+- Estocàstic: mi_exam_3eso_estocastic_v1
+- Col·lisions: 0.
+
+Integritat de P1–P6
+-------------------
+- Fitxers existents modificats respecte del ZIP P6: 4.
+  · sentit-espacial.html: només càrrega/normalització/migració de l'estat.
+  · sentit-estocastic.html: només càrrega/normalització/migració de l'estat.
+  · teoria/numeric/introduccio-logaritmes.html: només correcció de l'àncora duplicada.
+  · teoria/estocastic/variables-poblacio-mostra.html: només afegit el resum que faltava.
+- No s'han modificat generadors matemàtics ni validadors de respostes de P5.
+- No s'ha modificat la configuració ni la lògica del Mode Examen de P2.
+- No s'ha modificat la lògica pedagògica d'errors/correccions de P4.
+- La resta de fitxers P1–P6 es mantenen intactes.
+
+Resultat
+--------
+PASSADA 7 · 3r ESO: COMPLETADA, CORREGIDA I VALIDADA.
+
+El paquet resultant és la nova base de 3r ESO per a qualsevol passada posterior.
