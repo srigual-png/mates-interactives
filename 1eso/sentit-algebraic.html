@@ -244,9 +244,124 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:poin
 .alg-open-summary .big{font-size:2.2rem;font-weight:800;color:var(--primary);margin:10px 0}
 .alg-open-solution{background:#f8f8ff;border:1px solid var(--border);border-radius:11px;padding:11px 13px;margin-top:10px;font-size:.85rem;line-height:1.8}
 
+
+/* ── P2 · CONFIGURACIÓ COMUNA DEL MODE EXAMEN ───────────── */
+.mi-exam-overlay{position:fixed;inset:0;background:rgba(22,28,36,.55);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px}
+.mi-exam-overlay.open{display:flex}.mi-exam-modal{width:min(680px,100%);max-height:min(86vh,780px);overflow:auto;background:var(--card,#fff);border:1px solid var(--border,#ddd);border-radius:18px;box-shadow:0 18px 60px rgba(0,0,0,.24);padding:20px}
+.mi-exam-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:10px}.mi-exam-head h2{font-size:1.25rem;margin:0}.mi-exam-head p{font-size:.84rem;color:var(--muted,#667085);margin:5px 0 0;line-height:1.45}.mi-exam-close{border:0;background:transparent;font-size:1.35rem;cursor:pointer;color:var(--muted,#667085);padding:2px 5px}
+.mi-exam-tools{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}.mi-exam-tool{border:1px solid var(--border,#ddd);background:var(--card,#fff);color:var(--text,#263238);border-radius:9px;padding:8px 11px;font-size:.78rem;font-weight:750;cursor:pointer}.mi-exam-tool:hover{border-color:var(--primary,#5b7cfa);color:var(--primary,#5b7cfa)}
+.mi-exam-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.mi-exam-row{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--border,#ddd);border-radius:11px;padding:10px 11px;cursor:pointer;background:var(--card,#fff)}.mi-exam-row:hover{border-color:var(--primary,#5b7cfa)}.mi-exam-row input{margin-top:3px;accent-color:var(--primary,#5b7cfa)}.mi-exam-row span{font-size:.82rem;line-height:1.35;font-weight:650}.mi-exam-row small{display:block;color:var(--muted,#667085);font-weight:500;margin-top:2px}.mi-exam-done{color:var(--success,#2f9e64);font-size:.72rem;font-weight:800}
+.mi-exam-foot{position:sticky;bottom:-20px;background:var(--card,#fff);border-top:1px solid var(--border,#ddd);margin:16px -20px -20px;padding:14px 20px 20px}.mi-exam-summary{font-size:.82rem;color:var(--muted,#667085);margin-bottom:10px}.mi-exam-start{width:100%;border:0;border-radius:11px;padding:12px 15px;background:var(--primary,#5b7cfa);color:#fff;font-weight:800;font-size:.92rem;cursor:pointer}.mi-exam-start:disabled{opacity:.45;cursor:not-allowed}.mi-exam-note{font-size:.76rem;color:var(--muted,#667085);line-height:1.45;margin-top:10px}
+@media(max-width:620px){.mi-exam-overlay{padding:9px}.mi-exam-modal{padding:16px;border-radius:14px;max-height:92vh}.mi-exam-list{grid-template-columns:1fr}.mi-exam-foot{margin:14px -16px -16px;padding:12px 16px 16px;bottom:-16px}}
+
+/* ── P3 · GESTIÓ DE TEMES I PROGRÉS ───────────────────── */
+.home-tools{display:flex;justify-content:center;margin:0 0 16px}.unlock-launch{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--card,#fff);color:var(--primary);border:1.5px solid var(--primary);border-radius:11px;padding:9px 14px;font-size:.84rem;font-weight:800;cursor:pointer;transition:.18s}.unlock-launch:hover{background:var(--primary-soft,#f4f6ff);transform:translateY(-1px)}
+.sidebar{display:none!important}
 </style>
 
-<meta content="Àlgebra 1r ESO: patrons, expressions i equacions" property="og:title"/><meta content="Exercicis interactius d’àlgebra de 1r ESO: llenguatge algebraic, patrons, expressions, simplificació i equacions senzilles, amb pistes, problemes i correcció immediata." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-algebraic.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/></head>
+<meta content="Àlgebra 1r ESO: patrons, expressions i equacions" property="og:title"/><meta content="Exercicis interactius d’àlgebra de 1r ESO: llenguatge algebraic, patrons, expressions, simplificació i equacions senzilles, amb pistes, problemes i correcció immediata." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-algebraic.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/><style id="p6-ui">
+
+/* =========================================================
+   P6 · INTERFÍCIE I NAVEGACIÓ · 1r ESO
+   Capa visual comuna. No altera generadors ni progrés.
+   ========================================================= */
+.top-nav{
+  display:flex;align-items:center;gap:8px;min-height:58px;
+  padding:9px 14px;background:var(--card,#fff);border-bottom:1px solid var(--border,#e6e8ee);
+}
+.top-nav .home-link,.top-nav .course-home-link,.top-nav .sense-home-btn{
+  display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:7px 9px;
+  border:1px solid var(--border,#e6e8ee);border-radius:10px;background:var(--card,#fff);
+  color:var(--primary);text-decoration:none;font:inherit;font-size:.78rem;font-weight:800;cursor:pointer;
+  white-space:nowrap;
+}
+.top-nav .home-link:hover,.top-nav .course-home-link:hover,.top-nav .sense-home-btn:hover{
+  border-color:var(--primary);background:var(--primary-soft,#f4f6ff);
+}
+.top-nav .course-home-short,.top-nav .sense-home-short{display:none}
+.top-nav h1{flex:1;min-width:120px;margin:0;font-size:.95rem;line-height:1.2;text-align:center}
+.top-nav .progress-bar-wrap,.top-nav .pbw{width:104px;min-width:76px;height:7px;margin:0;border-radius:999px;overflow:hidden}
+.top-nav .progress-bar-fill,.top-nav .pbf{height:100%;border-radius:999px}
+
+.layout{width:min(calc(100% - 24px),920px);margin:0 auto!important;display:block!important}
+.layout #screenHome,.layout #sHome{max-width:820px;margin:0 auto!important;padding:20px 0 34px!important}
+.sidebar{display:none!important}
+.home-header,.hh{text-align:center;margin-bottom:16px}
+.home-header h2,.hh h2{margin-bottom:5px}
+.intro-card{max-width:820px!important;width:100%;margin:0 0 18px!important;padding:18px 20px!important}
+.intro-card p{text-align:left!important;line-height:1.7}
+.all-theory-wrap{margin:0 0 12px!important}
+.theory-page-link{width:min(100%,520px)!important;margin:0 auto!important;min-height:44px}
+.home-tools{margin:0 0 20px!important}
+.unlock-launch{min-height:42px;padding:10px 16px!important}
+
+.p6-section-head{
+  margin:20px 0 8px;padding-top:16px;border-top:1px solid var(--border,#e6e8ee);
+}
+.p6-section-head.p6-first{margin-top:2px;padding-top:0;border-top:0}
+.p6-section-title{font-size:1rem;font-weight:850;color:var(--primary);line-height:1.25}
+.p6-section-title.p6-extension{color:#7c4dcc}
+.p6-section-title.p6-exam{color:var(--warn,#b7791f)}
+.p6-section-title.p6-errors{color:var(--error,var(--err,#a02020))}
+.p6-section-note{margin-top:3px;color:var(--muted,#68707e);font-size:.82rem;line-height:1.45}
+
+.topics-grid,.tg{display:flex!important;flex-direction:column!important;gap:10px!important;margin-top:0!important}
+.topic-card,.tc{
+  width:100%;min-height:74px;box-sizing:border-box;padding:14px 16px!important;
+  border-radius:14px!important;display:flex!important;align-items:center;gap:13px;
+}
+.topic-info,.tinfo{min-width:0;flex:1}
+.topic-info h3,.tinfo h3{line-height:1.25;margin-bottom:3px}
+.topic-info p,.tinfo p{line-height:1.4}
+.topic-badge,.tbadge{flex:0 0 auto;white-space:nowrap}
+.p6-special-card{border-width:2px!important;border-style:dashed!important}
+.p6-exam-card{border-color:var(--warn,#d49b32)!important}
+.p6-error-card{border-color:var(--error,var(--err,#c94a4a))!important}
+
+button,a,[onclick]{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,[onclick]:focus-visible{
+  outline:3px solid color-mix(in srgb,var(--primary) 35%,transparent);outline-offset:2px;
+}
+.unlock-panel,.mi-exam-modal{max-width:min(92vw,620px)!important}
+
+@media (max-width:700px){
+  .top-nav{gap:5px;padding:8px 7px;min-height:54px}
+  .top-nav .home-link,.top-nav .course-home-link,.top-nav .sense-home-btn{padding:6px 7px;font-size:.72rem;min-height:34px}
+  .top-nav .nav-main-label,.top-nav .course-home-label,.top-nav .sense-home-text{display:none!important}
+  .top-nav .course-home-short,.top-nav .sense-home-short{display:inline!important}
+  .top-nav h1{font-size:.82rem;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .top-nav .progress-bar-wrap,.top-nav .pbw{width:54px;min-width:46px}
+  .layout{width:min(calc(100% - 16px),920px)}
+  .layout #screenHome,.layout #sHome{padding:14px 0 26px!important}
+  .home-header h2,.hh h2{font-size:1.45rem}
+  .home-header p,.hh p{font-size:.88rem;line-height:1.45}
+  .intro-card{padding:15px 16px!important;font-size:.95rem}
+  .theory-page-link,.unlock-launch{width:100%!important;max-width:none!important}
+  .topic-card,.tc{align-items:flex-start!important;flex-wrap:wrap;padding:13px 14px!important;gap:10px}
+  .topic-icon,.ti{width:34px!important;flex:0 0 34px}
+  .topic-info,.tinfo{flex:1 1 calc(100% - 50px)}
+  .topic-badge,.tbadge{margin-left:44px}
+  .p6-section-head{margin-top:18px;padding-top:14px}
+  .p6-section-note{font-size:.79rem}
+  .btn-primary,.btn-secondary,.bp,.bs,.bw,.btn-danger{max-width:100%;}
+  .level-select,.mode-select{flex-wrap:wrap}
+  .level-btn,.mode-btn,.lvb{flex:1 1 145px}
+  .options-grid,.og{grid-template-columns:1fr!important}
+  .mi-exam-overlay,.unlock-panel-overlay{padding:10px!important}
+  .mi-exam-modal,.unlock-panel{max-height:92vh!important;border-radius:14px!important}
+}
+
+@media (max-width:430px){
+  .top-nav .home-link{width:34px;justify-content:center}
+  .top-nav .course-home-link,.top-nav .sense-home-btn{padding-inline:6px}
+  .top-nav h1{font-size:.76rem}
+  .top-nav .progress-bar-wrap,.top-nav .pbw{display:none!important}
+  .topic-card,.tc{min-height:70px}
+  .topic-badge,.tbadge{margin-left:0;width:100%;text-align:center}
+}
+
+</style>
+</head>
 <body>
 <nav class="top-nav">
 <button class="nb" id="navBack" onclick="goBack()" style="display:none">←</button>
@@ -278,6 +393,8 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:poin
     El bloc principal correspon a <strong>1r d'ESO</strong>. Al final trobaràs una zona d'<strong>⭐ Ampliació · prepara 2n d'ESO</strong> amb continguts opcionals per avançar. <strong>El Mode Examen només inclou continguts de 1r d'ESO.</strong>
 </p>
 </div>
+<div class="all-theory-wrap" style="text-align:center;margin:0 0 14px"><a class="theory-page-link" href="teoria/algebraic/index.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none">📚 Tota la teoria del Sentit Algebraic</a></div>
+<div class="home-tools"><button class="unlock-launch" onclick="toggleUnlockPanel()">🔓 Gestionar temes</button></div>
 <div class="topics-grid" id="topicsGrid"></div>
 </div>
 <div class="sidebar" id="sidebar">
@@ -404,7 +521,11 @@ function norm(s){
     .replace(/^x=/,'')
     .replace(/,/g,'.')
     .replace(/[−–—]/g,'-')
-    .replace(/\*/g,'·')
+    .replace(/[×*]/g,'·')
+    // Formes equivalents habituals en resposta oberta: 4·x = 4x, x·4 = 4x.
+    .replace(/^(-?\d+(?:\.\d+)?)·x$/,'$1x')
+    .replace(/^x·(-?\d+(?:\.\d+)?)$/,'$1x')
+    .replace(/^1x$/,'x').replace(/^-1x$/,'-x')
     .replace(/\^(\d)/g,(m,d)=>superDigits[+d]||m);
 }
 function openOk(correct, alts, input){
@@ -1849,6 +1970,15 @@ function saveState(){
   try{localStorage.setItem('sa1eso_v4',data);}catch(e){}
 }
 
+
+function miReviewPoints(ex){
+  const pts=(ex&&Array.isArray(ex.review)&&ex.review.length?ex.review:(ex&&Array.isArray(ex.guide)?ex.guide:[])).filter(x=>x!==undefined&&x!==null&&String(x).trim()!=='').slice(0,3);
+  return pts.length?pts:['Identifica exactament què demana l’enunciat i quines dades són útils.','Revisa el procediment abans de repetir el càlcul o escollir una resposta.'];
+}
+function miReviewHtml(ex){
+  return `<div style="margin-top:10px;padding:9px 11px;border-radius:9px;background:rgba(245,166,35,.10);border-left:3px solid var(--warn,#f5a623)"><b>🔎 Què convé revisar</b><div style="margin-top:5px">${miReviewPoints(ex).map(x=>'• '+x).join('<br>')}</div></div>`;
+}
+
 function registerError(ex,studentAnswer,source='practice'){
   if(!ex)return;
   if(!Array.isArray(state.errors))state.errors=[];
@@ -1867,6 +1997,7 @@ function registerError(ex,studentAnswer,source='practice'){
     answer:studentAnswer,
     options:Array.isArray(ex.options)?[...ex.options]:[],
     guide:Array.isArray(ex.guide)?[...ex.guide]:[],
+    review:miReviewPoints(ex),
     solution:Array.isArray(ex.solution)?[...ex.solution]:[],
     level:source==='exam'?0:state.level,
     source,
@@ -1898,68 +2029,44 @@ function showHome(){
 
 function renderHome(){
   const grid=document.getElementById('topicsGrid');
+  const coreIndexes=[],extensionIndexes=[];
+  TOPICS.forEach((t,i)=>{if(t.course==='1r')coreIndexes.push(i);else extensionIndexes.push(i);});
 
-  let html='<div style="grid-column:1/-1;margin:2px 0 6px">'
-    +'<div style="font-weight:800;color:var(--primary);font-size:1rem">📘 Continguts de 1r d\'ESO</div>'
-    +'<div style="font-size:.82rem;color:var(--muted);margin-top:3px">Aquests són els continguts que poden aparèixer al Mode Examen.</div>'
-    +'</div>';
-
-  const coreIndexes=[];
-  const extensionIndexes=[];
-  TOPICS.forEach((t,i)=>{
-    if(t.course==='1r')coreIndexes.push(i);
-    else extensionIndexes.push(i);
-  });
-
+  function head(icon,title,note,cls,first){
+    return '<div class="p6-section-head '+(first?'p6-first ':'')+'">'
+      +'<div class="p6-section-title '+(cls||'')+'">'+icon+' '+title+'</div>'
+      +'<div class="p6-section-note">'+note+'</div></div>';
+  }
   function topicCard(i,isExtension){
-    const t=TOPICS[i];
-    const unlocked=isExtension?true:isTopicUnlocked(i);
-    const done=state.done.includes(t.id);
+    const t=TOPICS[i],unlocked=isExtension?true:isTopicUnlocked(i),done=state.done.includes(t.id);
     return '<div class="topic-card '+(!unlocked?'locked ':'')+(done?'done':'')+'" '
       +'onclick="'+(unlocked?'selectTopic('+i+')':'')+'" '+(isExtension?'style="border-style:dashed"':'')+'>'
-      +'<div class="topic-icon">'+t.icon+'</div>'
-      +'<div class="topic-info"><h3>'+t.name+'</h3><p>'+t.short+'</p></div>'
+      +'<div class="topic-icon">'+t.icon+'</div><div class="topic-info"><h3>'+t.name+'</h3><p>'+t.short+'</p></div>'
       +'<span class="topic-badge '+(done?'badge-done':(isExtension?'badge-app':(unlocked?'badge-active':'badge-locked')))+'">'
       +(done?'✓ Fet':(isExtension?'Ampliació':(unlocked?'Practicar':'🔒')))+'</span></div>';
   }
 
+  let html=head('📘','Continguts de 1r d\'ESO','Compten per al progrés i poden aparèixer al Mode Examen.','',true);
   coreIndexes.forEach(i=>{html+=topicCard(i,false);});
 
   const coreUnlocked=coreIndexes.filter(i=>isTopicUnlocked(i)).length;
+  if(coreUnlocked>=1){
+    html+=head('🧩','Pràctica complementària','Activitats opcionals de 1r d\'ESO. No compten per al progrés principal.','');
+    html+='<div class="topic-card p6-special-card" onclick="startAlgebraProblems()" style="border-color:var(--primary)"><div class="topic-icon">✍️</div><div class="topic-info"><h3>Problemes oberts</h3><p>42 patrons · llenguatge, patrons, expressions, equacions i algorismes</p></div><span class="topic-badge badge-active">Problemes</span></div>';
+    if(coreUnlocked>=5)html+='<div class="topic-card p6-special-card" onclick="showApps()" style="border-color:#8b5cf6"><div class="topic-icon">🌍</div><div class="topic-info"><h3>Aplicacions Reals</h3><p>Calculadora d\'equacions, successió i valor numèric</p></div><span class="topic-badge badge-app">Eines</span></div>';
+  }
 
-  if(coreUnlocked>=1)
-    html+='<div class="topic-card" onclick="startAlgebraProblems()" style="border:2px dashed var(--primary)">'
-      +'<div class="topic-icon">✍️</div>'
-      +'<div class="topic-info"><h3>Problemes oberts</h3><p>42 patrons · llenguatge, patrons, expressions, equacions i algorismes</p></div>'
-      +'<span class="topic-badge badge-active">Problemes</span></div>';
-
-  if(coreUnlocked>=5)
-    html+='<div class="topic-card" onclick="showApps()" style="border:2px dashed #8b5cf6">'
-      +'<div class="topic-icon">🌍</div>'
-      +'<div class="topic-info"><h3>Aplicacions Reals</h3><p>Calculadora d\'equacions, successió i valor numèric</p></div>'
-      +'<span class="topic-badge badge-app">Eines</span></div>';
-
-  if(coreUnlocked>=3)
-    html+='<div class="topic-card" onclick="startExam()" style="border:2px dashed var(--warn)">'
-      +'<div class="topic-icon">📝</div>'
-      +'<div class="topic-info"><h3>Mode Examen · 1r ESO</h3><p>10 preguntes · 7 exercicis + 3 problemes oberts</p></div>'
-      +'<span class="topic-badge badge-exam">Examen 1r</span></div>';
-
-  html+='<div style="grid-column:1/-1;margin:18px 0 6px;padding-top:14px;border-top:1px solid var(--border)">'
-    +'<div style="font-weight:800;color:#8b5cf6;font-size:1rem">⭐ Ampliació · prepara 2n d\'ESO</div>'
-    +'<div style="font-size:.82rem;color:var(--muted);margin-top:3px">És material opcional. <b>No entra mai al Mode Examen de 1r ESO.</b></div>'
-    +'</div>';
-
+  html+=head('⭐','Ampliació · prepara 2n d\'ESO','Material opcional. No compta per al progrés ni entra al Mode Examen de 1r ESO.','p6-extension');
   extensionIndexes.forEach(i=>{html+=topicCard(i,true);});
 
+  html+=head('📝','Mode Examen','20 preguntes · tria els blocs curriculars de 1r que vols preparar.','p6-exam');
+  html+='<div class="topic-card p6-special-card p6-exam-card" onclick="miOpenExamConfig()"><div class="topic-icon">📝</div><div class="topic-info"><h3>Mode Examen · 1r ESO</h3><p>Selecció independent dels blocs desbloquejats per practicar</p></div><span class="topic-badge badge-exam">Examen 1r</span></div>';
+
   const errorCount=Array.isArray(state.errors)?state.errors.length:0;
-  html+='<div class="topic-card" onclick="showErrors()" style="border:2px dashed '+(errorCount?'var(--error)':'var(--border)')+';grid-column:1/-1">'
-    +'<div class="topic-icon">❌</div>'
-    +'<div class="topic-info"><h3>Errors guardats</h3><p>'+(errorCount?('Tens '+errorCount+' error'+(errorCount===1?'':'s')+' per repassar'):'Encara no tens errors guardats')+'</p></div>'
-    +'<span class="topic-badge '+(errorCount?'badge-exam':'badge-active')+'">'+(errorCount?'Repassar':'Veure')+'</span></div>';
+  html+=head('❌','Errors guardats','Repassa els exercicis fallats i consulta de nou la resolució.','p6-errors');
+  html+='<div class="topic-card p6-special-card '+(errorCount?'p6-error-card':'')+'" onclick="showErrors()"><div class="topic-icon">❌</div><div class="topic-info"><h3>Errors guardats</h3><p>'+(errorCount?('Tens '+errorCount+' error'+(errorCount===1?'':'s')+' per repassar'):'Encara no tens errors guardats')+'</p></div><span class="topic-badge '+(errorCount?'badge-exam':'badge-active')+'">'+(errorCount?'Repassar':'Veure')+'</span></div>';
 
   grid.innerHTML=html;
-
   const coreDone=coreIndexes.filter(i=>state.done.includes(TOPICS[i].id)).length;
   document.getElementById('globalProgress').style.width=(coreIndexes.length?(coreDone/coreIndexes.length)*100:0)+'%';
 }
@@ -1982,17 +2089,18 @@ function showErrors(){
       html+='<div class="app-card" style="border-left:4px solid var(--error);margin-bottom:12px">'
         +'<div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><h3 style="margin:0 0 6px">❌ '+(e.topicName||'Tema')+'</h3><span style="font-size:.72rem;color:var(--muted)">'+date+'</span></div>'
         +'<div style="margin:8px 0;line-height:1.5">'+(e.question||'Pregunta no disponible')+'</div>'
-        +'<div style="font-size:.86rem;margin-top:8px"><div>La teva resposta: <b style="color:var(--error)">'+(e.answer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+(e.correct??'—')+'</b></div><div style="color:var(--muted);margin-top:4px">'+modeTxt+typeTxt+'</div></div>';
+        +'<div style="font-size:.86rem;margin-top:8px"><div>La teva resposta: <b style="color:var(--error)">'+(e.answer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+(e.correct??'—')+'</b></div><div style="color:var(--muted);margin-top:4px">'+modeTxt+typeTxt+'</div></div>'
+        +miReviewHtml(e);
       if(Array.isArray(e.solution)&&e.solution.length){
         html+='<button class="sol-btn" style="margin-top:9px" onclick="toggleSavedSolution(\''+solId+'\',this)">📘 Veure explicació</button>'
           +'<div class="solution-box" id="'+solId+'">'+e.solution.map((x,j)=>'<div class="step"><b>Pas '+(j+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>';
       }else{
         html+='<div style="font-size:.78rem;color:var(--muted);margin-top:8px">Explicació no disponible: error desat amb una versió anterior.</div>';
       }
-      html+='<button class="btn-secondary" onclick="deleteSavedError('+realIndex+')" style="margin-top:10px;border-color:var(--error);color:var(--error)">🗑️ Esborrar aquest error</button></div>';
+      html+='<button class="btn-secondary" onclick="deleteSavedError('+realIndex+')" style="margin-top:10px;border-color:var(--error);color:var(--error)">🗑️ Esborra aquest error</button></div>';
     });
   }
-  if(errors.length) html+='<button class="btn-secondary" onclick="clearSavedErrors()" style="margin-top:8px;border-color:var(--error);color:var(--error)">🗑️ Esborrar tots els errors</button>';
+  if(errors.length) html+='<button class="btn-secondary" onclick="clearSavedErrors()" style="margin-top:8px;border-color:var(--error);color:var(--error)">🗑️ Esborra tots els errors</button>';
   html+='<button class="btn-secondary" onclick="showHome()" style="margin-top:8px">← Tornar al menú</button>';
   document.getElementById('appContent').innerHTML=html;document.getElementById('sidebar').style.display='none';showScreen('screenApp');
 }
@@ -2055,7 +2163,7 @@ function selectTopic(i){
     equacions2:'teoria/algebraic/equacions-avancades-ampliacio-2n-eso.html'
   };
   if(theoryPages[t.id]){
-    theoryHtml+=`<a class="theory-page-link" href="${theoryPages[t.id]}">📖 Teoria i exemples</a>`;
+    theoryHtml+=`<a class="theory-page-link" href="${theoryPages[t.id]}">📚 Teoria completa del bloc</a>`;
   }
 
   // Exemple resolt
@@ -2071,7 +2179,8 @@ function selectTopic(i){
       theoryHtml+='<div style="padding:9px 0;border-bottom:1px solid #fdeaea">'
         +'<div style="line-height:1.45">'+(e.question||'Pregunta no disponible')+'</div>'
         +'<div style="font-size:.82rem;margin-top:5px"><span style="color:var(--error)">La teva: <b>'+(e.answer??'—')+'</b></span> · '
-        +'<span style="color:var(--success)">Correcta: <b>'+(e.correct??'—')+'</b></span></div>';
+        +'<span style="color:var(--success)">Correcta: <b>'+(e.correct??'—')+'</b></span></div>'
+        +miReviewHtml(e);
       if(Array.isArray(e.solution)&&e.solution.length){
         theoryHtml+='<button class="sol-btn" style="margin-top:7px" onclick="toggleSavedSolution(\''+solId+'\',this)">📘 Veure explicació</button>'
           +'<div class="solution-box" id="'+solId+'">'+e.solution.map((s,j)=>'<div class="step"><b>Pas '+(j+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div>';
@@ -2156,6 +2265,7 @@ function processAnswer(ok,studentAnswer){
     registerError(currentEx,studentAnswer,'practice');
     document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4>'
       +'La resposta correcta és: <b>'+currentEx.correct+'</b><br>'
+      +miReviewHtml(currentEx)
       +'<button class="sol-btn" onclick="toggleSolution(this)">Veure solució pas a pas</button>'
       +'<div class="solution-box" id="solBox">'+currentEx.solution.map((s,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div></div>';
   }
@@ -2203,29 +2313,30 @@ function goBack(){
 /* ── EXAMEN · 7 EXERCICIS + 3 PROBLEMES OBERTS ───────────── */
 function startExam(){
   state.examQs=[];state.examLog=[];state.examIdx=0;state.examScore=0;
-  const avail=TOPICS.filter((t,i)=>t.course==='1r'&&t.exam1r!==false&&isTopicUnlocked(i));
+  const selected=miGetSelectedExamIds();
+  const avail=TOPICS.filter(t=>t.course==='1r'&&t.exam1r!==false&&selected.includes(t.id));
   if(!avail.length)return;
   avail.forEach(t=>resetVariationSession(t.id));
 
-  const normal=[];const used=new Set();let cursor=0,tries=0;
-  while(normal.length<7&&tries<1500){
+  const open=algGenerateExamProblems(6,avail.map(t=>t.id)).map(p=>Object.assign({},p,{isOpenProblem:true,topicName:algTopicName(p.topicId),correct:p.answer.val,guide:[...(p.hint||[])],options:[]}));
+  const normalTarget=20-open.length,normal=[],used=new Set();let cursor=0,tries=0;
+  while(normal.length<normalTarget&&tries<5000){
     tries++;const t=avail[cursor%avail.length];cursor++;
-    let ex;try{ex=t.gen();}catch(e){continue;}
-    if(!ex)continue;
-    const key=(t.id+'|'+String(ex.question).replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim());
+    let ex;try{ex=t.gen();}catch(e){continue;}if(!ex)continue;
+    const key=t.id+'|'+String(ex.question).replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
     if(used.has(key))continue;used.add(key);
     normal.push(Object.assign({},ex,{topicId:ex.topicId||t.id,topicName:t.name,isOpenProblem:false}));
   }
-  const open=algGenerateExamProblems(3,avail.map(t=>t.id)).map(p=>Object.assign({},p,{isOpenProblem:true,topicName:algTopicName(p.topicId),correct:p.answer.val,guide:[...(p.hint||[])],options:[]}));
-  const openPositions=new Set([2,6,9]);let ni=0,oi=0;
-  for(let i=0;i<10;i++){
-    if(openPositions.has(i)&&oi<open.length)state.examQs.push(open[oi++]);
+  const slots=new Set([2,5,8,11,14,17]);let ni=0,oi=0;
+  for(let i=0;i<20;i++){
+    if(slots.has(i)&&oi<open.length)state.examQs.push(open[oi++]);
     else if(ni<normal.length)state.examQs.push(normal[ni++]);
     else if(oi<open.length)state.examQs.push(open[oi++]);
   }
-  // Si alguna selecció molt restringida no permetés arribar a 10, completem amb exercicis normals.
-  while(state.examQs.length<10&&tries<3000){
-    tries++;const t=avail[rnd(0,avail.length-1)];const ex=t.gen();state.examQs.push(Object.assign({},ex,{topicId:ex.topicId||t.id,topicName:t.name,isOpenProblem:false}));
+  while(state.examQs.length<20&&tries<9000){
+    tries++;const t=avail[cursor%avail.length];cursor++;let ex;try{ex=t.gen();}catch(e){continue;}if(!ex)continue;
+    const key=t.id+'|'+String(ex.question).replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();if(used.has(key))continue;used.add(key);
+    state.examQs.push(Object.assign({},ex,{topicId:ex.topicId||t.id,topicName:t.name,isOpenProblem:false}));
   }
   document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
   renderExamQ();showScreen('screenExam');
@@ -2272,7 +2383,7 @@ function nextExamQ(){
   let topicHtml='<div style="margin:14px 0 8px;font-weight:600">Resultats per tema:</div>';Object.entries(byTopic).forEach(([name,v])=>{const col=v.ok===v.tot?'var(--success)':v.ok/v.tot>=.5?'var(--warn)':'var(--error)';topicHtml+='<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:.85rem"><span>'+name+'</span><span style="font-weight:700;color:'+col+'">'+v.ok+'/'+v.tot+'</span></div>';});
   const errs=state.examLog.filter(l=>!l.ok);let errsHtml='';if(errs.length){errsHtml='<div style="margin:16px 0 8px;font-weight:600">❌ Per repassar ('+errs.length+' errors):</div>';errs.forEach((e,i)=>{const rid='examReviewSol_'+i;errsHtml+='<div class="exam-review-item"><div class="rev-topic">'+e.topic+(e.isProblem?' · Problema':'')+'</div><div class="rev-q">'+String(e.q).replace(/<[^>]+>/g,'').slice(0,120)+'</div><div class="rev-ans"><span class="rev-wrong">La teva: '+e.given+'</span><span class="rev-correct">✓ '+e.correct+'</span></div>'+(e.solution&&e.solution.length?'<button class="sol-btn" onclick="toggleSavedSolution(\''+rid+'\',this)">📘 Veure explicació</button><div class="solution-box" id="'+rid+'">'+e.solution.map((s,j)=>'<div class="step"><b>Pas '+(j+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div>':'')+'</div>';});}
   document.getElementById('examContent').innerHTML='<div class="congrats" style="padding-bottom:8px"><div class="trophy">'+emoji+'</div><h2>Resultat de l\'examen</h2></div>';document.getElementById('examOptions').innerHTML='';document.getElementById('examOpenWrap').style.display='none';document.getElementById('examFeedback').innerHTML='';document.getElementById('btnNextExam').style.display='none';document.getElementById('examResult').style.display='block';
-  document.getElementById('examResult').innerHTML='<div class="exam-score">'+nota+'/10<span>'+state.examScore+'/'+state.examQs.length+' correctes ('+pct+'%)</span></div><p style="text-align:center;color:var(--muted);margin-bottom:14px">'+(pct>=90?'Excel·lent! Estàs preparat/da per a l\'examen real!':pct>=70?'Molt bé! Repassa els errors i estaràs llest/a.':pct>=50?'Continua practicant, vas per bon camí.':'Repassa els temes i torna a intentar-ho.')+'</p>'+topicHtml+errsHtml+'<button class="btn-primary" onclick="showHome()" style="margin-top:16px">Tornar al menú</button><button class="btn-secondary" onclick="startExam()">Repetir examen</button>';
+  document.getElementById('examResult').innerHTML='<div class="exam-score">'+nota+'/10<span>'+state.examScore+'/'+state.examQs.length+' correctes ('+pct+'%)</span></div><p style="text-align:center;color:var(--muted);margin-bottom:14px">'+(pct>=90?'Excel·lent! Estàs preparat/da per a l\'examen real!':pct>=70?'Molt bé! Repassa els errors i estaràs llest/a.':pct>=50?'Continua practicant, vas per bon camí.':'Repassa els temes i torna a intentar-ho.')+'</p>'+topicHtml+errsHtml+'<button class="btn-primary" onclick="showHome()" style="margin-top:16px">Tornar al menú</button><button class="btn-secondary" onclick="miOpenExamConfig()">Repetir examen</button>';
 }
 
 /* ── APLICACIONS REALS ──────────────────────────────────────── */
@@ -2530,30 +2641,30 @@ function closeUnlockPanel(){
 function renderUnlockPanel(){
   const list=document.getElementById('unlockTopicList');
   let html='';
-  TOPICS.forEach((t,i)=>{
-    if(t.course!=='1r')return;
+  const core=TOPICS.map((t,i)=>({t,i})).filter(o=>o.t.course==='1r');
+  const baseIndex=core.length?core[0].i:-1;
+  core.forEach(({t,i})=>{
     const isUnlocked=isTopicUnlocked(i);
     const isDone=state.done.includes(t.id);
-    const canToggle=i>0;
     html+=`<div class="unlock-topic-row">
-      <span class="unlock-topic-name ${isDone?'is-done':''}">${t.icon} ${t.name.split(' ')[0]}${isDone?' ✓':''}</span>
-      ${canToggle
-        ? `<button class="unlock-toggle ${isUnlocked?'active':''}" onclick="toggleTopicUnlock(${i})">${isUnlocked?'Obert':'Tancat'}</button>`
-        : `<span style="font-size:.75rem;color:var(--success);font-weight:600">Base</span>`
-      }
+      <span class="unlock-topic-name ${isDone?'is-done':''}">${t.icon} ${t.name}${isDone?' ✓':''}</span>
+      ${i===baseIndex
+        ? `<span style="font-size:.75rem;color:var(--success);font-weight:700">Base</span>`
+        : `<button class="unlock-toggle ${isUnlocked?'active':''}" onclick="toggleTopicUnlock(${i})">${isUnlocked?'Obert':'Tancat'}</button>`}
     </div>`;
   });
+  html+=`<div style="font-size:.75rem;color:var(--muted);margin-top:10px;line-height:1.5">⭐ Les ampliacions de preparació de 2n són sempre accessibles i no afecten el progrés de 1r.</div>`;
   list.innerHTML=html;
 }
 
 function toggleTopicUnlock(i){
   const t=TOPICS[i];
-  const isUnlocked=isTopicUnlocked(i);
-  if(isUnlocked){
+  const baseIndex=TOPICS.findIndex(x=>x.course==='1r');
+  if(!t||t.course!=='1r'||i===baseIndex)return;
+  if(isTopicUnlocked(i)){
     state.unlockedIds=state.unlockedIds.filter(id=>id!==t.id);
-    state.done=state.done.filter(id=>id!==t.id);
-  } else {
-    if(!state.unlockedIds.includes(t.id)) state.unlockedIds.push(t.id);
+  }else if(!state.unlockedIds.includes(t.id)){
+    state.unlockedIds.push(t.id);
   }
   saveState();
   renderUnlockPanel();
@@ -2572,7 +2683,7 @@ function resetProgress(){
   const btn=document.getElementById('btnResetProgress');
   if(!resetArmed){
     resetArmed=true;
-    btn.textContent='⚠ Prem per confirmar';
+    btn.textContent='⚠ Prem de nou per confirmar';
     btn.style.borderColor='var(--error)';btn.style.color='var(--error)';
     clearTimeout(resetArmTimer);
     resetArmTimer=setTimeout(()=>disarmReset(),3000);
@@ -2639,6 +2750,59 @@ if (!isLocal) {
 
 }
 
+
+/* ── P2 · SELECTOR INDEPENDENT DE TEMES D'EXAMEN ───────── */
+var MI_EXAM_STORAGE='mi_exam_1eso_algebraic_v1';
+var miExamSelectedTopics=[];
+function miExamCoreTopics(){return TOPICS.filter(function(t){return t.course==='1r'&&t.exam1r!==false;});}
+function miExamDoneIds(){try{return (state.done||[]).slice();}catch(e){return [];}}
+function miLoadExamSelection(){
+  var core=miExamCoreTopics(),valid=core.map(function(t){return t.id;}),raw=null;
+  try{raw=localStorage.getItem(MI_EXAM_STORAGE);}catch(e){}
+  if(raw===null){miExamSelectedTopics=valid.slice();return;}
+  try{var a=JSON.parse(raw);miExamSelectedTopics=Array.isArray(a)?a.filter(function(id){return valid.indexOf(id)>=0;}):valid.slice();}
+  catch(e){miExamSelectedTopics=valid.slice();}
+}
+function miSaveExamSelection(){try{localStorage.setItem(MI_EXAM_STORAGE,JSON.stringify(miExamSelectedTopics));}catch(e){}}
+function miGetSelectedExamIds(){return miExamSelectedTopics.slice();}
+function miEsc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function miOpenExamConfig(){
+  miLoadExamSelection();miRenderExamConfig();
+  var ov=document.getElementById('miExamOverlay');if(ov){ov.classList.add('open');ov.setAttribute('aria-hidden','false');}
+}
+function miCloseExamConfig(){miSaveExamSelection();var ov=document.getElementById('miExamOverlay');if(ov){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}}
+function miRenderExamConfig(){
+  var core=miExamCoreTopics(),done=miExamDoneIds(),box=document.getElementById('miExamTopicList');if(!box)return;
+  box.innerHTML=core.map(function(t){var checked=miExamSelectedTopics.indexOf(t.id)>=0,isDone=done.indexOf(t.id)>=0;return '<label class="mi-exam-row"><input type="checkbox" '+(checked?'checked':'')+' onchange="miToggleExamTopic(\''+miEsc(t.id)+'\',this.checked)"><span>'+miEsc(t.name)+(isDone?'<small class="mi-exam-done">✓ Bloc completat</small>':'<small>Disponible per a l’examen</small>')+'</span></label>';}).join('');
+  miUpdateExamSummary();
+}
+function miToggleExamTopic(id,on){if(on){if(miExamSelectedTopics.indexOf(id)<0)miExamSelectedTopics.push(id);}else miExamSelectedTopics=miExamSelectedTopics.filter(function(x){return x!==id;});miSaveExamSelection();miUpdateExamSummary();}
+function miExamSelectAll(){miExamSelectedTopics=miExamCoreTopics().map(function(t){return t.id;});miSaveExamSelection();miRenderExamConfig();}
+function miExamSelectDone(){var valid=miExamCoreTopics().map(function(t){return t.id;}),done=miExamDoneIds();miExamSelectedTopics=done.filter(function(id){return valid.indexOf(id)>=0;});miSaveExamSelection();miRenderExamConfig();}
+function miExamClearAll(){miExamSelectedTopics=[];miSaveExamSelection();miRenderExamConfig();}
+function miUpdateExamSummary(){var n=miExamSelectedTopics.length,s=document.getElementById('miExamSummary'),b=document.getElementById('miExamStartBtn');if(s)s.textContent=n+' bloc'+(n===1?'':'s')+' seleccionat'+(n===1?'':'s')+' · 20 preguntes';if(b){b.disabled=n===0;b.textContent=n?'Començar examen →':'Selecciona almenys un bloc';}}
+function miStartConfiguredExam(){if(!miExamSelectedTopics.length)return;miSaveExamSelection();miCloseExamConfig();startExam();}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamConfig();});
 </script>
+
+<div class="mi-exam-overlay" id="miExamOverlay" onclick="miCloseExamConfig()" aria-hidden="true">
+  <div class="mi-exam-modal" role="dialog" aria-modal="true" aria-labelledby="miExamTitle" onclick="event.stopPropagation()">
+    <div class="mi-exam-head">
+      <div><h2 id="miExamTitle">📝 Prepara el teu examen</h2><p>Selecciona exactament els blocs que vols repassar. Aquesta selecció és independent dels blocs desbloquejats per practicar.</p></div>
+      <button class="mi-exam-close" onclick="miCloseExamConfig()" aria-label="Tancar">✕</button>
+    </div>
+    <div class="mi-exam-tools">
+      <button class="mi-exam-tool" onclick="miExamSelectAll()">Tots els blocs</button>
+      <button class="mi-exam-tool" onclick="miExamSelectDone()">Només completats</button>
+      <button class="mi-exam-tool" onclick="miExamClearAll()">Desmarcar tots</button>
+    </div>
+    <div class="mi-exam-list" id="miExamTopicList"></div>
+    <div class="mi-exam-foot">
+      <div class="mi-exam-summary" id="miExamSummary"></div>
+      <button class="mi-exam-start" id="miExamStartBtn" onclick="miStartConfiguredExam()">Començar examen →</button>
+      <div class="mi-exam-note">L’examen té 20 preguntes, repartides tan equilibradament com permeten els blocs seleccionats. Les ampliacions de preparació de 2n no hi entren.</div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

@@ -240,10 +240,125 @@
 .sp-open-result{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;text-align:center;box-shadow:var(--shadow)}
 .sp-open-exam{grid-column:1/-1;width:100%}
 @media(max-width:560px){.sp-open-grid{grid-template-columns:1fr}}
+
+/* ── P2 · CONFIGURACIÓ COMUNA DEL MODE EXAMEN ───────────── */
+.mi-exam-overlay{position:fixed;inset:0;background:rgba(22,28,36,.55);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px}
+.mi-exam-overlay.open{display:flex}.mi-exam-modal{width:min(680px,100%);max-height:min(86vh,780px);overflow:auto;background:var(--card,#fff);border:1px solid var(--border,#ddd);border-radius:18px;box-shadow:0 18px 60px rgba(0,0,0,.24);padding:20px}
+.mi-exam-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:10px}.mi-exam-head h2{font-size:1.25rem;margin:0}.mi-exam-head p{font-size:.84rem;color:var(--muted,#667085);margin:5px 0 0;line-height:1.45}.mi-exam-close{border:0;background:transparent;font-size:1.35rem;cursor:pointer;color:var(--muted,#667085);padding:2px 5px}
+.mi-exam-tools{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}.mi-exam-tool{border:1px solid var(--border,#ddd);background:var(--card,#fff);color:var(--text,#263238);border-radius:9px;padding:8px 11px;font-size:.78rem;font-weight:750;cursor:pointer}.mi-exam-tool:hover{border-color:var(--primary,#5b7cfa);color:var(--primary,#5b7cfa)}
+.mi-exam-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.mi-exam-row{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--border,#ddd);border-radius:11px;padding:10px 11px;cursor:pointer;background:var(--card,#fff)}.mi-exam-row:hover{border-color:var(--primary,#5b7cfa)}.mi-exam-row input{margin-top:3px;accent-color:var(--primary,#5b7cfa)}.mi-exam-row span{font-size:.82rem;line-height:1.35;font-weight:650}.mi-exam-row small{display:block;color:var(--muted,#667085);font-weight:500;margin-top:2px}.mi-exam-done{color:var(--success,#2f9e64);font-size:.72rem;font-weight:800}
+.mi-exam-foot{position:sticky;bottom:-20px;background:var(--card,#fff);border-top:1px solid var(--border,#ddd);margin:16px -20px -20px;padding:14px 20px 20px}.mi-exam-summary{font-size:.82rem;color:var(--muted,#667085);margin-bottom:10px}.mi-exam-start{width:100%;border:0;border-radius:11px;padding:12px 15px;background:var(--primary,#5b7cfa);color:#fff;font-weight:800;font-size:.92rem;cursor:pointer}.mi-exam-start:disabled{opacity:.45;cursor:not-allowed}.mi-exam-note{font-size:.76rem;color:var(--muted,#667085);line-height:1.45;margin-top:10px}
+@media(max-width:620px){.mi-exam-overlay{padding:9px}.mi-exam-modal{padding:16px;border-radius:14px;max-height:92vh}.mi-exam-list{grid-template-columns:1fr}.mi-exam-foot{margin:14px -16px -16px;padding:12px 16px 16px;bottom:-16px}}
+
+/* ── P3 · GESTIÓ DE TEMES I PROGRÉS ───────────────────── */
+.home-tools{display:flex;justify-content:center;margin:0 0 16px}.unlock-launch{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--card,#fff);color:var(--primary);border:1.5px solid var(--primary);border-radius:11px;padding:9px 14px;font-size:.84rem;font-weight:800;cursor:pointer;transition:.18s}.unlock-launch:hover{background:var(--primary-soft,#f4f6ff);transform:translateY(-1px)}
+.sidebar{display:none!important}
 </style>
 
 <!-- Versió final revisada 12/08/2026: s'afegeixen Coordenades cartesianes com a ampliació de 2n, Pla Cartesià interactiu i registre d'errors -->
-<meta content="Geometria 1r ESO: angles, polígons i exercicis interactius" property="og:title"/><meta content="Exercicis interactius de geometria de 1r ESO: rectes, angles, polígons, triangles, quadrilàters i circumferència. Sentit espacial amb problemes, pistes i mode examen." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-espacial.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/></head>
+<meta content="Geometria 1r ESO: angles, polígons i exercicis interactius" property="og:title"/><meta content="Exercicis interactius de geometria de 1r ESO: rectes, angles, polígons, triangles, quadrilàters i circumferència. Sentit espacial amb problemes, pistes i mode examen." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-espacial.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/><style id="p6-ui">
+
+/* =========================================================
+   P6 · INTERFÍCIE I NAVEGACIÓ · 1r ESO
+   Capa visual comuna. No altera generadors ni progrés.
+   ========================================================= */
+.top-nav{
+  display:flex;align-items:center;gap:8px;min-height:58px;
+  padding:9px 14px;background:var(--card,#fff);border-bottom:1px solid var(--border,#e6e8ee);
+}
+.top-nav .home-link,.top-nav .course-home-link,.top-nav .sense-home-btn{
+  display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:7px 9px;
+  border:1px solid var(--border,#e6e8ee);border-radius:10px;background:var(--card,#fff);
+  color:var(--primary);text-decoration:none;font:inherit;font-size:.78rem;font-weight:800;cursor:pointer;
+  white-space:nowrap;
+}
+.top-nav .home-link:hover,.top-nav .course-home-link:hover,.top-nav .sense-home-btn:hover{
+  border-color:var(--primary);background:var(--primary-soft,#f4f6ff);
+}
+.top-nav .course-home-short,.top-nav .sense-home-short{display:none}
+.top-nav h1{flex:1;min-width:120px;margin:0;font-size:.95rem;line-height:1.2;text-align:center}
+.top-nav .progress-bar-wrap,.top-nav .pbw{width:104px;min-width:76px;height:7px;margin:0;border-radius:999px;overflow:hidden}
+.top-nav .progress-bar-fill,.top-nav .pbf{height:100%;border-radius:999px}
+
+.layout{width:min(calc(100% - 24px),920px);margin:0 auto!important;display:block!important}
+.layout #screenHome,.layout #sHome{max-width:820px;margin:0 auto!important;padding:20px 0 34px!important}
+.sidebar{display:none!important}
+.home-header,.hh{text-align:center;margin-bottom:16px}
+.home-header h2,.hh h2{margin-bottom:5px}
+.intro-card{max-width:820px!important;width:100%;margin:0 0 18px!important;padding:18px 20px!important}
+.intro-card p{text-align:left!important;line-height:1.7}
+.all-theory-wrap{margin:0 0 12px!important}
+.theory-page-link{width:min(100%,520px)!important;margin:0 auto!important;min-height:44px}
+.home-tools{margin:0 0 20px!important}
+.unlock-launch{min-height:42px;padding:10px 16px!important}
+
+.p6-section-head{
+  margin:20px 0 8px;padding-top:16px;border-top:1px solid var(--border,#e6e8ee);
+}
+.p6-section-head.p6-first{margin-top:2px;padding-top:0;border-top:0}
+.p6-section-title{font-size:1rem;font-weight:850;color:var(--primary);line-height:1.25}
+.p6-section-title.p6-extension{color:#7c4dcc}
+.p6-section-title.p6-exam{color:var(--warn,#b7791f)}
+.p6-section-title.p6-errors{color:var(--error,var(--err,#a02020))}
+.p6-section-note{margin-top:3px;color:var(--muted,#68707e);font-size:.82rem;line-height:1.45}
+
+.topics-grid,.tg{display:flex!important;flex-direction:column!important;gap:10px!important;margin-top:0!important}
+.topic-card,.tc{
+  width:100%;min-height:74px;box-sizing:border-box;padding:14px 16px!important;
+  border-radius:14px!important;display:flex!important;align-items:center;gap:13px;
+}
+.topic-info,.tinfo{min-width:0;flex:1}
+.topic-info h3,.tinfo h3{line-height:1.25;margin-bottom:3px}
+.topic-info p,.tinfo p{line-height:1.4}
+.topic-badge,.tbadge{flex:0 0 auto;white-space:nowrap}
+.p6-special-card{border-width:2px!important;border-style:dashed!important}
+.p6-exam-card{border-color:var(--warn,#d49b32)!important}
+.p6-error-card{border-color:var(--error,var(--err,#c94a4a))!important}
+
+button,a,[onclick]{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,[onclick]:focus-visible{
+  outline:3px solid color-mix(in srgb,var(--primary) 35%,transparent);outline-offset:2px;
+}
+.unlock-panel,.mi-exam-modal{max-width:min(92vw,620px)!important}
+
+@media (max-width:700px){
+  .top-nav{gap:5px;padding:8px 7px;min-height:54px}
+  .top-nav .home-link,.top-nav .course-home-link,.top-nav .sense-home-btn{padding:6px 7px;font-size:.72rem;min-height:34px}
+  .top-nav .nav-main-label,.top-nav .course-home-label,.top-nav .sense-home-text{display:none!important}
+  .top-nav .course-home-short,.top-nav .sense-home-short{display:inline!important}
+  .top-nav h1{font-size:.82rem;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .top-nav .progress-bar-wrap,.top-nav .pbw{width:54px;min-width:46px}
+  .layout{width:min(calc(100% - 16px),920px)}
+  .layout #screenHome,.layout #sHome{padding:14px 0 26px!important}
+  .home-header h2,.hh h2{font-size:1.45rem}
+  .home-header p,.hh p{font-size:.88rem;line-height:1.45}
+  .intro-card{padding:15px 16px!important;font-size:.95rem}
+  .theory-page-link,.unlock-launch{width:100%!important;max-width:none!important}
+  .topic-card,.tc{align-items:flex-start!important;flex-wrap:wrap;padding:13px 14px!important;gap:10px}
+  .topic-icon,.ti{width:34px!important;flex:0 0 34px}
+  .topic-info,.tinfo{flex:1 1 calc(100% - 50px)}
+  .topic-badge,.tbadge{margin-left:44px}
+  .p6-section-head{margin-top:18px;padding-top:14px}
+  .p6-section-note{font-size:.79rem}
+  .btn-primary,.btn-secondary,.bp,.bs,.bw,.btn-danger{max-width:100%;}
+  .level-select,.mode-select{flex-wrap:wrap}
+  .level-btn,.mode-btn,.lvb{flex:1 1 145px}
+  .options-grid,.og{grid-template-columns:1fr!important}
+  .mi-exam-overlay,.unlock-panel-overlay{padding:10px!important}
+  .mi-exam-modal,.unlock-panel{max-height:92vh!important;border-radius:14px!important}
+}
+
+@media (max-width:430px){
+  .top-nav .home-link{width:34px;justify-content:center}
+  .top-nav .course-home-link,.top-nav .sense-home-btn{padding-inline:6px}
+  .top-nav h1{font-size:.76rem}
+  .top-nav .progress-bar-wrap,.top-nav .pbw{display:none!important}
+  .topic-card,.tc{min-height:70px}
+  .topic-badge,.tbadge{margin-left:0;width:100%;text-align:center}
+}
+
+</style>
+</head>
 <body>
 <nav class="top-nav">
 <button class="nb" id="navBack" onclick="goBack()" style="display:none">←</button>
@@ -272,6 +387,8 @@
     El bloc principal correspon a <strong>1r d'ESO</strong>. Al final trobaràs una zona d'<strong>⭐ Ampliació · prepara 2n d'ESO</strong> amb continguts que pots practicar si vols avançar. <strong>El Mode Examen només inclou continguts de 1r d'ESO.</strong>
 </p>
 </div>
+<div class="all-theory-wrap" style="text-align:center;margin:0 0 14px"><a class="theory-page-link" href="teoria/espacial/index.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none">📚 Tota la teoria del Sentit Espacial</a></div>
+<div class="home-tools"><button class="unlock-launch" onclick="toggleUnlockPanel()">🔓 Gestionar temes</button></div>
 <div class="topics-grid" id="topicsGrid"></div>
 </div>
 <div class="sidebar" id="sidebar">
@@ -393,14 +510,14 @@ function svgTriangle(type='equilàter'){
   return `<svg width="100" height="80" viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
     <polygon points="${p}" fill="#a0b4ff" fill-opacity="0.3" stroke="#6c63d8" stroke-width="2"/>
     ${extra}
-    <text x="50" y="76" text-anchor="middle" font-size="9" fill="#555">${type}</text></svg>`;
+  </svg>`;
 }
 function svgPolygon(n,label=''){
   const cx=50,cy=40,r=30;let pts='';
   for(let i=0;i<n;i++){const a=(2*Math.PI*i/n)-Math.PI/2;pts+=`${Math.round(cx+r*Math.cos(a))},${Math.round(cy+r*Math.sin(a))} `;}
   return `<svg width="100" height="88" viewBox="0 0 100 88" xmlns="http://www.w3.org/2000/svg">
     <polygon points="${pts.trim()}" fill="#a0b4ff" fill-opacity="0.3" stroke="#6c63d8" stroke-width="2"/>
-    <text x="50" y="82" text-anchor="middle" font-size="9" fill="#555">${label||n+' costats'}</text></svg>`;
+  </svg>`;
 }
 function svgCircle(showArc){
   const base=`<svg width="110" height="100" viewBox="0 0 110 100" xmlns="http://www.w3.org/2000/svg">
@@ -429,47 +546,47 @@ function svgPrism(){
     <polygon points="30,70 80,70 95,50 45,50" fill="#a0b4ff" fill-opacity="0.2" stroke="#6c63d8" stroke-width="1.5"/>
     <polygon points="30,70 45,50 45,20 30,40" fill="#a0b4ff" fill-opacity="0.3" stroke="#6c63d8" stroke-width="1.5"/>
     <polygon points="45,50 95,50 95,20 45,20" fill="#a0b4ff" fill-opacity="0.15" stroke="#6c63d8" stroke-width="1.5"/>
-    <text x="55" y="85" text-anchor="middle" font-size="9" fill="#555">Prisma</text></svg>`;
+  </svg>`;
 }
 function svgPyramid(){
   return `<svg width="100" height="90" viewBox="0 0 100 90" xmlns="http://www.w3.org/2000/svg">
     <polygon points="50,10 15,70 85,70" fill="#a0b4ff" fill-opacity="0.25" stroke="#6c63d8" stroke-width="1.5"/>
     <polygon points="50,10 85,70 95,55" fill="#a0b4ff" fill-opacity="0.15" stroke="#6c63d8" stroke-width="1.5"/>
     <line x1="50" y1="10" x2="50" y2="70" stroke="#6c63d8" stroke-width="1" stroke-dasharray="3"/>
-    <text x="50" y="84" text-anchor="middle" font-size="9" fill="#555">Piràmide</text></svg>`;
+  </svg>`;
 }
 function svgCylinder(){
   return `<svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="25" rx="30" ry="10" fill="#a0b4ff" fill-opacity="0.3" stroke="#6c63d8" stroke-width="1.5"/>
     <rect x="15" y="25" width="60" height="45" fill="#a0b4ff" fill-opacity="0.15" stroke="#6c63d8" stroke-width="1.5"/>
     <ellipse cx="45" cy="70" rx="30" ry="10" fill="#a0b4ff" fill-opacity="0.3" stroke="#6c63d8" stroke-width="1.5"/>
-    <text x="45" y="86" text-anchor="middle" font-size="9" fill="#555">Cilindre</text></svg>`;
+  </svg>`;
 }
 function svgCone(){
   return `<svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
     <ellipse cx="45" cy="70" rx="30" ry="10" fill="#a0b4ff" fill-opacity="0.3" stroke="#6c63d8" stroke-width="1.5"/>
     <line x1="45" y1="10" x2="15" y2="70" stroke="#6c63d8" stroke-width="1.5"/>
     <line x1="45" y1="10" x2="75" y2="70" stroke="#6c63d8" stroke-width="1.5"/>
-    <text x="45" y="86" text-anchor="middle" font-size="9" fill="#555">Con</text></svg>`;
+  </svg>`;
 }
 function svgSphere(){
   return `<svg width="90" height="90" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
     <circle cx="45" cy="45" r="35" fill="#a0b4ff" fill-opacity="0.2" stroke="#6c63d8" stroke-width="2"/>
     <ellipse cx="45" cy="45" rx="35" ry="12" fill="none" stroke="#6c63d8" stroke-width="1" stroke-dasharray="4"/>
-    <text x="45" y="87" text-anchor="middle" font-size="9" fill="#555">Esfera</text></svg>`;
+  </svg>`;
 }
 function svgRhombus(){
   return `<svg width="100" height="80" viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg">
     <polygon points="50,5 90,40 50,75 10,40" fill="#a0b4ff" fill-opacity="0.25" stroke="#6c63d8" stroke-width="2"/>
     <line x1="10" y1="40" x2="90" y2="40" stroke="#e05c5c" stroke-width="1" stroke-dasharray="3"/>
     <line x1="50" y1="5" x2="50" y2="75" stroke="#34c97e" stroke-width="1" stroke-dasharray="3"/>
-    <text x="50" y="88" text-anchor="middle" font-size="8" fill="#555">Rombe</text></svg>`;
+  </svg>`;
 }
 function svgRect(){
   return `<svg width="110" height="80" viewBox="0 0 110 80" xmlns="http://www.w3.org/2000/svg">
     <rect x="10" y="15" width="90" height="50" fill="#a0b4ff" fill-opacity="0.25" stroke="#6c63d8" stroke-width="2"/>
     <polyline points="10,55 20,55 20,65" fill="none" stroke="#6c63d8" stroke-width="1.5"/>
-    <text x="55" y="78" text-anchor="middle" font-size="8" fill="#555">Rectangle</text></svg>`;
+  </svg>`;
 }
 
 // ── GENERADORS ─────────────────────────────────────────────────────────
@@ -921,7 +1038,7 @@ function genTriangles(){
     correct=it.name;opts=uniq4(correct,it.w);
     guide=['Compara les longituds dels tres costats.','Compta quants costats tenen la mateixa longitud.'];
     solution=[`Costats: ${it.s.join(', ')} cm.`,`✅ ${correct}`];
-    svg=svgTriangle(it.svg);
+    svg='';
 
   }else if(q===2){
     const kinds=[
@@ -934,7 +1051,7 @@ function genTriangles(){
     correct=it.name;opts=uniq4(correct,it.w);
     guide=['Observa especialment l’angle més gran.','Compara’l amb 90°.'];
     solution=[`Angles: ${it.a.join('°, ')}°.`,`✅ ${correct}`];
-    svg=it.name==='Rectangle'?svgTriangle('rectangle'):'';
+    svg='';
 
   }else if(q===3){
     const a=rnd(25,80),b=rnd(25,Math.min(90,150-a)),c=180-a-b;
@@ -1013,8 +1130,8 @@ function genQuadrilaters(){
   if(q===1){
     const items=[
       {q:`Quin quadrilàter té <b>4 costats iguals</b> i <b>4 angles rectes</b>?`,a:'Quadrat',w:['Rectangle','Rombe','Romboide'],svg:'',solution:['Té quatre costats iguals i quatre angles rectes.','✅ Quadrat']},
-      {q:`Quin quadrilàter té <b>4 angles rectes</b>, els costats oposats iguals i <b>no té els quatre costats iguals</b>?`,a:'Rectangle',w:['Quadrat','Rombe','Trapezi'],svg:svgRect(),solution:['Té quatre angles rectes i dos parells de costats oposats iguals.','Com que no té els quatre costats iguals, no és un quadrat.','✅ Rectangle']},
-      {q:`Quin quadrilàter té <b>4 costats iguals</b> però no té necessàriament angles rectes?`,a:'Rombe',w:['Quadrat','Rectangle','Romboide'],svg:svgRhombus(),solution:['Té els quatre costats iguals.','Els seus angles no han de ser necessàriament rectes.','✅ Rombe']},
+      {q:`Quin quadrilàter té <b>4 angles rectes</b>, els costats oposats iguals i <b>no té els quatre costats iguals</b>?`,a:'Rectangle',w:['Quadrat','Rombe','Trapezi'],svg:'',solution:['Té quatre angles rectes i dos parells de costats oposats iguals.','Com que no té els quatre costats iguals, no és un quadrat.','✅ Rectangle']},
+      {q:`Quin quadrilàter té <b>4 costats iguals</b> però no té necessàriament angles rectes?`,a:'Rombe',w:['Quadrat','Rectangle','Romboide'],svg:'',solution:['Té els quatre costats iguals.','Els seus angles no han de ser necessàriament rectes.','✅ Rombe']},
       {q:`Quin quadrilàter té <b>dos parells de costats oposats paral·lels</b>, sense tenir tots els costats iguals ni quatre angles rectes?`,a:'Romboide',w:['Quadrat','Rombe','Trapezi'],svg:'',solution:['Té dos parells de costats oposats paral·lels.','No és ni rectangle ni rombe ni quadrat.','✅ Romboide']},
       {q:`Quin quadrilàter té <b>exactament un parell de costats paral·lels</b>?`,a:'Trapezi',w:['Romboide','Rectangle','Trapezoide'],svg:'',solution:['Té exactament un parell de costats paral·lels.','✅ Trapezi']},
       {q:`Quin quadrilàter <b>no té cap parell de costats paral·lels</b>?`,a:'Trapezoide',w:['Trapezi','Romboide','Rectangle'],svg:'',solution:['No té cap parell de costats paral·lels.','✅ Trapezoide']}
@@ -1026,8 +1143,8 @@ function genQuadrilaters(){
   }else if(q===2){
     const items=[
       {q:`Com són les diagonals d'un <b>quadrat</b>?`,a:'Iguals i perpendiculars',w:['Iguals i no perpendiculars','Desiguals i perpendiculars','Desiguals i no perpendiculars'],svg:'',solution:['Les diagonals del quadrat tenen la mateixa longitud.','Quan es tallen formen angles rectes.','✅ Iguals i perpendiculars']},
-      {q:`Com són les diagonals d'un <b>rectangle</b> que no és un quadrat?`,a:'Iguals i no perpendiculars',w:['Iguals i perpendiculars','Desiguals i perpendiculars','Desiguals i no perpendiculars'],svg:svgRect(),solution:['Les diagonals d’un rectangle tenen la mateixa longitud.','En un rectangle que no és quadrat no són perpendiculars.','✅ Iguals i no perpendiculars']},
-      {q:`Com són les diagonals d'un <b>rombe</b> que no és un quadrat?`,a:'Desiguals i perpendiculars',w:['Iguals i perpendiculars','Iguals i no perpendiculars','Desiguals i no perpendiculars'],svg:svgRhombus(),solution:['En un rombe que no és quadrat, les diagonals tenen longituds diferents.','Les diagonals es tallen perpendicularment.','✅ Desiguals i perpendiculars']}
+      {q:`Com són les diagonals d'un <b>rectangle</b> que no és un quadrat?`,a:'Iguals i no perpendiculars',w:['Iguals i perpendiculars','Desiguals i perpendiculars','Desiguals i no perpendiculars'],svg:'',solution:['Les diagonals d’un rectangle tenen la mateixa longitud.','En un rectangle que no és quadrat no són perpendiculars.','✅ Iguals i no perpendiculars']},
+      {q:`Com són les diagonals d'un <b>rombe</b> que no és un quadrat?`,a:'Desiguals i perpendiculars',w:['Iguals i perpendiculars','Iguals i no perpendiculars','Desiguals i no perpendiculars'],svg:'',solution:['En un rombe que no és quadrat, les diagonals tenen longituds diferents.','Les diagonals es tallen perpendicularment.','✅ Desiguals i perpendiculars']}
     ];
     const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;svg=it.svg;opts=uniq4(correct,it.w);
     guide=['Pensa per separat en dues propietats de les diagonals.','Primer compara les seves longituds.','Després pensa en l’angle que formen quan es tallen.'];
@@ -1252,9 +1369,9 @@ function genCossos(){
 
   if(q===1){
     const items=[
-      {q:`Quin cos rodó està format per <b>dues bases circulars iguals i paral·leles</b> unides per una superfície lateral corba?`,a:'Cilindre',w:['Con','Esfera','Prisma'],sv:svgCylinder(),g:['Fixa’t primer en el nombre de bases planes.','Observa si les dues bases són iguals i paral·leles.','Comprova si la superfície lateral és plana o corba.']},
-      {q:`Quin cos rodó té <b>una base circular</b> i una superfície lateral que acaba en un <b>vèrtex</b>?`,a:'Con',w:['Cilindre','Esfera','Piràmide'],sv:svgCone(),g:['Fixa’t en el nombre de bases.','Observa si el cos acaba en un únic vèrtex.','Comprova si la superfície lateral és corba.']},
-      {q:`Quin cos rodó té tots els punts de la seva superfície a la mateixa distància del <b>centre</b>?`,a:'Esfera',w:['Cilindre','Con','Cercle'],sv:svgSphere(),g:['Fixa’t que l’enunciat parla d’un cos tridimensional.','Busca quin cos es defineix a partir d’un centre i una distància constant.']}
+      {q:`Quin cos rodó està format per <b>dues bases circulars iguals i paral·leles</b> unides per una superfície lateral corba?`,a:'Cilindre',w:['Con','Esfera','Prisma'],sv:'',g:['Fixa’t primer en el nombre de bases planes.','Observa si les dues bases són iguals i paral·leles.','Comprova si la superfície lateral és plana o corba.']},
+      {q:`Quin cos rodó té <b>una base circular</b> i una superfície lateral que acaba en un <b>vèrtex</b>?`,a:'Con',w:['Cilindre','Esfera','Piràmide'],sv:'',g:['Fixa’t en el nombre de bases.','Observa si el cos acaba en un únic vèrtex.','Comprova si la superfície lateral és corba.']},
+      {q:`Quin cos rodó té tots els punts de la seva superfície a la mateixa distància del <b>centre</b>?`,a:'Esfera',w:['Cilindre','Con','Cercle'],sv:'',g:['Fixa’t que l’enunciat parla d’un cos tridimensional.','Busca quin cos es defineix a partir d’un centre i una distància constant.']}
     ];
     const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;opts=uniq4(correct,it.w);guide=it.g;solution=[`✅ ${correct}`];svg=it.sv;
 
@@ -1349,7 +1466,7 @@ function genPoligons1r(){
       'Comprova que el nom triat correspon exactament al nombre de costats indicat.'
     ];
     solution=[`Un polígon de ${n} costats és un ${correct.toLowerCase()}.`,`✅ ${correct}`];
-    svg=svgPolygon(n,noms[n]);
+    svg=svgPolygon(n,'');
 
   }else if(q===2){
     const n=rnd(5,10),nom=noms[n];
@@ -1361,7 +1478,7 @@ function genPoligons1r(){
       'Relaciona el nom amb el nombre de segments que formen el seu contorn.'
     ];
     solution=[`${nom}: ${n} costats.`,`✅ ${correct}`];
-    svg=svgPolygon(n,nom);
+    svg='';
 
   }else if(q===3){
     const items=[
@@ -1894,7 +2011,7 @@ function genVisualitzacio1r(){
     question=`L'àrea d'un quadrat és <b>${a} unitats²</b>. Quant mesura el seu costat?`;
     correct=String(s); options=uniq4(correct,[String(Math.max(1,Math.floor(a/2))),String(2*s),String(a-s),String(s+1)]);
     guide=['Busca quin nombre multiplicat per ell mateix dona l’àrea','Interpreta l’arrel quadrada com el costat del quadrat'];
-    solution=[`√${a} = ${s}`,`✅ Costat = ${s}`]; svg=svgGridModel(s,s);
+    solution=[`√${a} = ${s}`,`✅ Costat = ${s}`]; svg=svgSquareAreaOnly(a);
   }else if(type===5){
     const n=rnd(3,8),sum=n*n;
     question=`Un patró quadrat es construeix afegint els primers <b>${n}</b> nombres senars: 1 + 3 + 5 + … Quants punts té el quadrat final?`;
@@ -1913,7 +2030,7 @@ function genVisualitzacio1r(){
     question=`Un rectangle de dues parts té àrea total <b>${total}</b>. La part esquerra té àrea <b>${left}</b>. Quina àrea té la part dreta?`;
     correct=String(right); options=uniq4(correct,[String(total+left),String(total-left+h),String(left),String(a+b)]);
     guide=['El rectangle total és la suma de les dues parts sense solapament','Troba la part que falta a partir del total'];
-    solution=[`${total} − ${left} = ${right}`,`✅ ${right}`]; svg=svgGridModel(a+b,h,a);
+    solution=[`${total} − ${left} = ${right}`,`✅ ${right}`]; svg='';
   }
   return {topicId:'visualitzacio',type,question,correct,options,guide,solution,svg};
 }
@@ -2240,6 +2357,15 @@ function isTopicUnlocked(i){
 
 // ── REGISTRE D'ERRORS ───────────────────────────────────────────────────
 
+
+function miReviewPoints(ex){
+  const pts=(ex&&Array.isArray(ex.review)&&ex.review.length?ex.review:(ex&&Array.isArray(ex.guide)?ex.guide:[])).filter(x=>x!==undefined&&x!==null&&String(x).trim()!=='').slice(0,3);
+  return pts.length?pts:['Identifica exactament què demana l’enunciat i quines dades són útils.','Revisa el procediment abans de repetir el càlcul o escollir una resposta.'];
+}
+function miReviewHtml(ex){
+  return `<div style="margin-top:10px;padding:9px 11px;border-radius:9px;background:rgba(245,166,35,.10);border-left:3px solid var(--warn,#f5a623)"><b>🔎 Què convé revisar</b><div style="margin-top:5px">${miReviewPoints(ex).map(x=>'• '+x).join('<br>')}</div></div>`;
+}
+
 function registerError(ex,studentAnswer,source='practice'){
   if(!ex)return;
 
@@ -2262,6 +2388,7 @@ function registerError(ex,studentAnswer,source='practice'){
     // després de recarregar la pàgina.
     options:Array.isArray(ex.options)?[...ex.options]:[],
     guide:Array.isArray(ex.guide)?[...ex.guide]:[],
+    review:miReviewPoints(ex),
     solution:Array.isArray(ex.solution)?[...ex.solution]:[],
     svg:ex.svg||'',
 
@@ -2333,140 +2460,34 @@ function showHome(){
 
 function renderHome(){
   const grid=document.getElementById('topicsGrid');
-
-  let html=`
-    <div style="grid-column:1/-1;margin:2px 0 6px">
-      <div style="font-weight:800;color:var(--primary);font-size:1rem">📘 Continguts de 1r d'ESO</div>
-      <div style="font-size:.82rem;color:var(--muted);margin-top:3px">
-        Aquests són els continguts que poden aparèixer al Mode Examen.
-      </div>
-    </div>`;
-
-  const coreIndexes=[];
-  const extensionIndexes=[];
-
-  TOPICS.forEach((t,i)=>{
-    if(t.course==='1r')coreIndexes.push(i);
-    else extensionIndexes.push(i);
-  });
-
+  const coreIndexes=[],extensionIndexes=[];
+  TOPICS.forEach((t,i)=>{if(t.course==='1r')coreIndexes.push(i);else extensionIndexes.push(i);});
+  function head(icon,title,note,cls,first){return `<div class="p6-section-head ${first?'p6-first ':''}"><div class="p6-section-title ${cls||''}">${icon} ${title}</div><div class="p6-section-note">${note}</div></div>`;}
   function topicCard(i,isExtension=false){
-    const t=TOPICS[i];
-    const unlocked=isExtension ? true : isTopicUnlocked(i);
-    const done=state.done.includes(t.id);
-
-    return `
-      <div class="topic-card ${!unlocked?'locked':''} ${done?'done':''}"
-           onclick="${unlocked?`selectTopic(${i})`:''}"
-           ${isExtension?'style="border-style:dashed"':''}>
-        <div class="topic-icon">${t.icon}</div>
-        <div class="topic-info">
-          <h3>${t.name}</h3>
-          <p>${t.short}</p>
-        </div>
-        <span class="topic-badge ${
-          done
-            ?'badge-done'
-            :(isExtension?'badge-app':(!unlocked?'badge-locked':'badge-active'))
-        }">
-          ${done?'✓ Fet':(isExtension?'Ampliació':(!unlocked?'🔒':'Practicar'))}
-        </span>
-      </div>`;
+    const t=TOPICS[i],unlocked=isExtension?true:isTopicUnlocked(i),done=state.done.includes(t.id);
+    return `<div class="topic-card ${!unlocked?'locked':''} ${done?'done':''}" onclick="${unlocked?`selectTopic(${i})`:''}" ${isExtension?'style="border-style:dashed"':''}><div class="topic-icon">${t.icon}</div><div class="topic-info"><h3>${t.name}</h3><p>${t.short}</p></div><span class="topic-badge ${done?'badge-done':(isExtension?'badge-app':(!unlocked?'badge-locked':'badge-active'))}">${done?'✓ Fet':(isExtension?'Ampliació':(!unlocked?'🔒':'Practicar'))}</span></div>`;
   }
-
+  let html=head('📘','Continguts de 1r d\'ESO','Compten per al progrés i poden aparèixer al Mode Examen.','',true);
   coreIndexes.forEach(i=>{html+=topicCard(i,false);});
-
   const coreUnlocked=coreIndexes.filter(i=>isTopicUnlocked(i)).length;
-
-  if(coreUnlocked>=5){
-    html+=`
-      <div class="topic-card"
-           onclick="showApps()"
-           style="border:2px dashed #8b5cf6">
-        <div class="topic-icon">🌍</div>
-        <div class="topic-info">
-          <h3>Aplicacions Reals</h3>
-          <p>Geometria en situacions quotidianes · 1r + ampliació indicada</p>
-        </div>
-        <span class="topic-badge badge-app">Aplicacions</span>
-      </div>`;
-  }
-
   if(coreUnlocked>=2){
-    html+=`
-      <div class="topic-card" onclick="startSpatialProblems()" style="border:2px dashed var(--primary)">
-        <div class="topic-icon">🧠</div>
-        <div class="topic-info"><h3>Problemes oberts · 1r ESO</h3><p>42 patrons de raonament geomètric · resposta escrita · sense opcions</p></div>
-        <span class="topic-badge badge-active">Problemes</span>
-      </div>`;
+    html+=head('🧩','Pràctica complementària','Activitats opcionals de 1r d\'ESO. No compten per al progrés principal.','');
+    html+=`<div class="topic-card p6-special-card" onclick="startSpatialProblems()" style="border-color:var(--primary)"><div class="topic-icon">🧠</div><div class="topic-info"><h3>Problemes oberts · 1r ESO</h3><p>42 patrons de raonament geomètric · resposta escrita · sense opcions</p></div><span class="topic-badge badge-active">Problemes</span></div>`;
+    if(coreUnlocked>=5)html+=`<div class="topic-card p6-special-card" onclick="showApps()" style="border-color:#8b5cf6"><div class="topic-icon">🌍</div><div class="topic-info"><h3>Aplicacions Reals</h3><p>Geometria en situacions quotidianes · 1r + ampliació indicada</p></div><span class="topic-badge badge-app">Aplicacions</span></div>`;
   }
-
-  if(coreUnlocked>=3){
-    html+=`
-      <div class="topic-card"
-           onclick="startExam()"
-           style="border:2px dashed var(--warn)">
-        <div class="topic-icon">📝</div>
-        <div class="topic-info">
-          <h3>Mode Examen · 1r ESO</h3>
-          <p>10 preguntes · exercicis curts + 3 problemes oberts de 1r</p>
-        </div>
-        <span class="topic-badge badge-exam">Examen 1r</span>
-      </div>`;
-  }
-
-  html+=`
-    <div style="grid-column:1/-1;margin:18px 0 6px;padding-top:14px;border-top:1px solid var(--border)">
-      <div style="font-weight:800;color:#8b5cf6;font-size:1rem">⭐ Ampliació · prepara 2n d'ESO</div>
-      <div style="font-size:.82rem;color:var(--muted);margin-top:3px">
-        És material opcional. <b>No entra mai al Mode Examen de 1r ESO.</b>
-      </div>
-    </div>`;
-
-  // Ordre pedagògic de l'ampliació, independent dels índexs interns.
+  html+=head('⭐','Ampliació · prepara 2n d\'ESO','Material opcional. No compta per al progrés ni entra al Mode Examen de 1r ESO.','p6-extension');
   ['coordenades','pitagores','cercle2','poliedres','cossos'].forEach(id=>{
-    const i=TOPICS.findIndex(t=>t.id===id);
-    if(i>=0)html+=topicCard(i,true);
-
-    if(id==='coordenades'){
-      html+=`
-        <div class="topic-card"
-             onclick="showPlaCartesia()"
-             style="border:2px dashed #2980b9">
-          <div class="topic-icon">📐</div>
-          <div class="topic-info">
-            <h3>Pla Cartesià Interactiu</h3>
-            <p>⭐ Ampliació · Col·loca punts i practica eixos i quadrants</p>
-          </div>
-          <span class="topic-badge badge-coords">Interactiu</span>
-        </div>`;
-    }
+    const i=TOPICS.findIndex(t=>t.id===id); if(i>=0)html+=topicCard(i,true);
+    if(id==='coordenades')html+=`<div class="topic-card p6-special-card" onclick="showPlaCartesia()" style="border-color:#2980b9"><div class="topic-icon">📐</div><div class="topic-info"><h3>Pla Cartesià Interactiu</h3><p>Col·loca punts i practica eixos i quadrants</p></div><span class="topic-badge badge-coords">Interactiu</span></div>`;
   });
-
-  // ── TARGETA D'ERRORS ────────────────────────────────────────────────
+  html+=head('📝','Mode Examen','20 preguntes · tria els blocs curriculars de 1r que vols preparar.','p6-exam');
+  html+=`<div class="topic-card p6-special-card p6-exam-card" onclick="miOpenExamConfig()"><div class="topic-icon">📝</div><div class="topic-info"><h3>Mode Examen · 1r ESO</h3><p>Selecció independent dels blocs desbloquejats per practicar</p></div><span class="topic-badge badge-exam">Examen 1r</span></div>`;
   const errorCount=Array.isArray(state.errors)?state.errors.length:0;
-  html+=`
-    <div class="topic-card"
-         onclick="showErrors()"
-         style="border:2px dashed ${errorCount?'var(--error)':'var(--border)'};grid-column:1/-1">
-      <div class="topic-icon">❌</div>
-      <div class="topic-info">
-        <h3>Errors guardats</h3>
-        <p>${errorCount
-          ? `Tens ${errorCount} error${errorCount===1?'':'s'} per repassar`
-          : 'Encara no tens errors guardats'}</p>
-      </div>
-      <span class="topic-badge ${errorCount?'badge-exam':'badge-active'}">
-        ${errorCount?'Repassar':'Veure'}
-      </span>
-    </div>`;
-
+  html+=head('❌','Errors guardats','Repassa els exercicis fallats i consulta de nou la resolució.','p6-errors');
+  html+=`<div class="topic-card p6-special-card ${errorCount?'p6-error-card':''}" onclick="showErrors()"><div class="topic-icon">❌</div><div class="topic-info"><h3>Errors guardats</h3><p>${errorCount?`Tens ${errorCount} error${errorCount===1?'':'s'} per repassar`:'Encara no tens errors guardats'}</p></div><span class="topic-badge ${errorCount?'badge-exam':'badge-active'}">${errorCount?'Repassar':'Veure'}</span></div>`;
   grid.innerHTML=html;
-
   const coreDone=coreIndexes.filter(i=>state.done.includes(TOPICS[i].id)).length;
-  const pct=coreIndexes.length?(coreDone/coreIndexes.length)*100:0;
-
-  document.getElementById('globalProgress').style.width=pct+'%';
+  document.getElementById('globalProgress').style.width=(coreIndexes.length?(coreDone/coreIndexes.length)*100:0)+'%';
 }
 
 
@@ -2546,6 +2567,7 @@ function showErrors(){
               ${e.type!==null&&e.type!==undefined?' · Tipus '+e.type:''}
             </div>
           </div>
+          ${miReviewHtml(e)}
 
           ${hasSolution
             ?`<button class="sol-btn" onclick="toggleSavedErrorSolution('${solId}',this)">📘 Veure explicació</button>
@@ -2555,7 +2577,7 @@ function showErrors(){
           <button class="btn-secondary"
                   onclick="deleteSavedError(${realIndex})"
                   style="margin-top:10px;border-color:var(--error);color:var(--error)">
-            🗑️ Esborrar aquest error
+            🗑️ Esborra aquest error
           </button>
         </div>`;
     });
@@ -2566,7 +2588,7 @@ function showErrors(){
       <button class="btn-secondary"
               onclick="clearSavedErrors()"
               style="margin-top:8px;border-color:var(--error);color:var(--error)">
-        🗑️ Esborrar tots els errors
+        🗑️ Esborra tots els errors
       </button>`;
   }
 
@@ -2649,7 +2671,7 @@ function selectTopic(i){
     cossos:'teoria/espacial/cossos-rodons-ampliacio-2n-eso.html'
   };
   if(theoryPages[t.id]){
-    html+=`<a class="theory-page-link" href="${theoryPages[t.id]}">📖 Teoria i exemples</a>`;
+    html+=`<a class="theory-page-link" href="${theoryPages[t.id]}">📚 Teoria completa del bloc</a>`;
   }
 
   const topicErrors=(Array.isArray(state.errors)?state.errors:[])
@@ -2670,6 +2692,7 @@ function selectTopic(i){
           <span style="color:var(--error)">La teva: <b>${e.answer??'—'}</b></span>
           <span style="margin-left:10px;color:var(--success)">Correcta: <b>${e.correct??'—'}</b></span>
         </div>
+        ${miReviewHtml(e)}
         ${hasSolution
           ?`<button class="sol-btn" onclick="toggleSavedErrorSolution('${solId}',this)">📘 Veure explicació</button>
              <div class="solution-box" id="${solId}">${errorSolutionStepsHTML(e)}</div>`
@@ -2677,7 +2700,7 @@ function selectTopic(i){
       </div>`;
     });
 
-    html+=`<button class="btn-secondary" onclick="clearTopicErrors('${t.id}')" style="margin-top:10px;border-color:var(--error);color:var(--error)">🗑️ Esborrar errors d'aquest tema</button></div>`;
+    html+=`<button class="btn-secondary" onclick="clearTopicErrors('${t.id}')" style="margin-top:10px;border-color:var(--error);color:var(--error)">🗑️ Esborra errors d'aquest tema</button></div>`;
   }
 
   document.getElementById('introContent').innerHTML=html;
@@ -3098,46 +3121,34 @@ function goBack(){
 
 function startExam(){
   state.examQs=[];state.examAnswers=[];state.examPerTopic={};
-  const available=TOPICS.filter((t,i)=>t.course==='1r'&&t.exam1r!==false&&isTopicUnlocked(i));
+  const selected=miGetSelectedExamIds();
+  const available=TOPICS.filter(t=>t.course==='1r'&&t.exam1r!==false&&selected.includes(t.id));
   if(!available.length)return;
   const availableIds=available.map(t=>t.id);
   available.forEach(t=>state.examPerTopic[t.id]={name:t.name,correct:0,total:0});
 
-  // 7 exercicis curts, repartits pels temes desbloquejats.
-  const normal=[];const used=new Set();let cursor=0,tries=0;
-  while(normal.length<7&&tries<2500){tries++;
-    const t=available[cursor%available.length];cursor++;
-    let ex=null,gt=0;
-    try{
-      do{ex=t.gen();gt++;}while(gt<80&&(!ex||!Array.isArray(ex.options)||ex.options.length!==4||!ex.options.includes(ex.correct)||(Array.isArray(t.examTypes)&&!t.examTypes.includes(ex.type))));
-    }catch(e){continue;}
+  const open=spGenerateExamProblems(6,availableIds);
+  const normalTarget=20-open.length,normal=[],used=new Set();let cursor=0,tries=0;
+  while(normal.length<normalTarget&&tries<6500){tries++;
+    const t=available[cursor%available.length];cursor++;let ex=null,gt=0;
+    try{do{ex=t.gen();gt++;}while(gt<80&&(!ex||!Array.isArray(ex.options)||ex.options.length!==4||!ex.options.includes(ex.correct)||(Array.isArray(t.examTypes)&&!t.examTypes.includes(ex.type))));}catch(e){continue;}
     if(!ex||!Array.isArray(ex.options)||ex.options.length!==4||!ex.options.includes(ex.correct))continue;
     const key=`${t.id}|${ex.type}|${String(ex.question).replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim()}`;
-    if(used.has(key))continue;used.add(key);
-    normal.push({...ex,topicId:t.id,topicName:t.name,isOpenProblem:false});
+    if(used.has(key))continue;used.add(key);normal.push({...ex,topicId:t.id,topicName:t.name,isOpenProblem:false});
   }
-
-  // 3 problemes oberts, de patrons i famílies diferents sempre que sigui possible.
-  const open=spGenerateExamProblems(3,availableIds);
-  const slots=new Set([2,6,9]);let ni=0,oi=0;
-  for(let pos=0;pos<10;pos++){
-    let q=null;
-    if(slots.has(pos)&&oi<open.length)q=open[oi++];
-    else if(ni<normal.length)q=normal[ni++];
-    else if(oi<open.length)q=open[oi++];
-    if(q)state.examQs.push(q);
+  const slots=new Set([2,5,8,11,14,17]);let ni=0,oi=0;
+  for(let pos=0;pos<20;pos++){
+    let q=null;if(slots.has(pos)&&oi<open.length)q=open[oi++];else if(ni<normal.length)q=normal[ni++];else if(oi<open.length)q=open[oi++];if(q)state.examQs.push(q);
   }
-  // Si algun filtre ha impedit arribar a 10, completem amb exercicis curts vàlids.
   tries=0;
-  while(state.examQs.length<10&&tries<1500){tries++;
-    const t=available[rnd(0,available.length-1)];let ex;
-    try{ex=t.gen();}catch(e){continue;}
+  while(state.examQs.length<20&&tries<4000){tries++;
+    const t=available[cursor%available.length];cursor++;let ex;try{ex=t.gen();}catch(e){continue;}
     if(!ex||!Array.isArray(ex.options)||ex.options.length!==4||!ex.options.includes(ex.correct)||(Array.isArray(t.examTypes)&&!t.examTypes.includes(ex.type)))continue;
+    const key=`${t.id}|${ex.type}|${String(ex.question).replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim()}`;if(used.has(key))continue;used.add(key);
     state.examQs.push({...ex,topicId:t.id,topicName:t.name,isOpenProblem:false});
   }
   state.examQs.forEach(q=>{if(!state.examPerTopic[q.topicId])state.examPerTopic[q.topicId]={name:q.topicName||q.topicId,correct:0,total:0};state.examPerTopic[q.topicId].total++;});
-  state.examIdx=0;state.examScore=0;
-  document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
+  state.examIdx=0;state.examScore=0;document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
   showExamQuestion();showScreen('screenExam');
 }
 
@@ -3167,14 +3178,14 @@ function selectExamAnswer(idx,btn){
   document.querySelectorAll('#examOptions .opt-btn').forEach(b=>{b.disabled=true;if(b.textContent.trim()===String(q.correct).trim())b.classList.add('correct');});
   if(!ok)btn.classList.add('wrong');
   const sol=(!ok&&Array.isArray(q.solution)&&q.solution.length)?`<div class="solution-box show" style="display:block;margin-top:10px">${q.solution.map((s,i)=>`<div class="step"><b>Pas ${i+1}:</b> <span class="highlight">${s}</span></div>`).join('')}</div>`:'';
-  document.getElementById('examFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':'Resposta correcta: <b>'+q.correct+'</b>'+sol}</div>`;
+  document.getElementById('examFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':'Resposta correcta: <b>'+q.correct+'</b>'+miReviewHtml(q)+sol}</div>`;
 }
 
 function submitSpatialExamProblem(){
   const q=state.examQs[state.examIdx];if(!q||!q.isOpenProblem)return;const input=document.getElementById('spExamAnswer');const ans=input?input.value:'';const ok=q.answer&&typeof q.answer.check==='function'?q.answer.check(ans):spNorm(ans)===spNorm(q.correct);
   finishExamAnswer(q,ans,ok);
   if(input)input.disabled=true;const sb=document.getElementById('spExamSubmit');if(sb)sb.disabled=true;
-  document.getElementById('examFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':`Resposta correcta: <b>${q.correct}</b>${spSolutionHTML(q)}`}</div>`;
+  document.getElementById('examFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':`Resposta correcta: <b>${q.correct}</b>${miReviewHtml(q)}${spSolutionHTML(q)}`}</div>`;
 }
 
 
@@ -3291,7 +3302,7 @@ function nextExamQ(){
     </button>
 
     <button class="btn-secondary"
-            onclick="startExam()">
+            onclick="miOpenExamConfig()">
       Repetir examen
     </button>`;
 }
@@ -4218,96 +4229,43 @@ function closeUnlockPanel(){
 
 
 function renderUnlockPanel(){
-
-  const list=
-    document.getElementById('unlockTopicList');
-
+  const list=document.getElementById('unlockTopicList');
   let html='';
-
-  TOPICS.forEach((t,i)=>{
-
-    const isUnlocked=
-      isTopicUnlocked(i);
-
-    const isDone=
-      state.done.includes(t.id);
-
-    const canToggle=i>0;
-
-    html+=`
-      <div class="unlock-topic-row">
-
-        <span class="unlock-topic-name ${isDone?'is-done':''}">
-          ${t.icon}
-          ${t.name.split(' ')[0]}
-          ${t.course==='2n'?' ⭐':''}
-          ${isDone?' ✓':''}
-        </span>
-
-        ${
-          canToggle
-            ?
-              `<button
-                 class="unlock-toggle ${isUnlocked?'active':''}"
-                 onclick="toggleTopicUnlock(${i})">
-                 ${isUnlocked?'Obert':'Tancat'}
-               </button>`
-            :
-              `<span style="
-                 font-size:.75rem;
-                 color:var(--success);
-                 font-weight:600">
-                 Base
-               </span>`
-        }
-
-      </div>`;
+  const core=TOPICS.map((t,i)=>({t,i})).filter(o=>o.t.course==='1r');
+  const baseIndex=core.length?core[0].i:-1;
+  core.forEach(({t,i})=>{
+    const isUnlocked=isTopicUnlocked(i);
+    const isDone=state.done.includes(t.id);
+    html+=`<div class="unlock-topic-row">
+      <span class="unlock-topic-name ${isDone?'is-done':''}">${t.icon} ${t.name}${isDone?' ✓':''}</span>
+      ${i===baseIndex
+        ? `<span style="font-size:.75rem;color:var(--success);font-weight:700">Base</span>`
+        : `<button class="unlock-toggle ${isUnlocked?'active':''}" onclick="toggleTopicUnlock(${i})">${isUnlocked?'Obert':'Tancat'}</button>`}
+    </div>`;
   });
-
+  html+=`<div style="font-size:.75rem;color:var(--muted);margin-top:10px;line-height:1.5">⭐ Les ampliacions de preparació de 2n són sempre accessibles i no afecten el progrés de 1r.</div>`;
   list.innerHTML=html;
 }
 
 
 function toggleTopicUnlock(i){
-
   const t=TOPICS[i];
-
-  const isUnlocked=
-    isTopicUnlocked(i);
-
-  if(isUnlocked){
-
-    state.unlockedIds=
-      state.unlockedIds.filter(
-        id=>id!==t.id
-      );
-
-    state.done=
-      state.done.filter(
-        id=>id!==t.id
-      );
-
-  }else{
-
-    if(!state.unlockedIds.includes(t.id)){
-      state.unlockedIds.push(t.id);
-    }
+  const baseIndex=TOPICS.findIndex(x=>x.course==='1r');
+  if(!t||t.course!=='1r'||i===baseIndex)return;
+  if(isTopicUnlocked(i)){
+    state.unlockedIds=state.unlockedIds.filter(id=>id!==t.id);
+  }else if(!state.unlockedIds.includes(t.id)){
+    state.unlockedIds.push(t.id);
   }
-
   saveState();
-
   renderUnlockPanel();
   renderHome();
 }
 
 
 function unlockAllTopics(){
-
-  state.unlockedIds=
-    TOPICS.map(t=>t.id);
-
+  state.unlockedIds=TOPICS.filter(t=>t.course==='1r').map(t=>t.id);
   saveState();
-
   renderUnlockPanel();
   renderHome();
 }
@@ -4320,56 +4278,26 @@ let resetArmTimer=null;
 
 
 function resetProgress(){
-
-  const btn=
-    document.getElementById('btnResetProgress');
-
+  const btn=document.getElementById('btnResetProgress');
   if(!resetArmed){
-
     resetArmed=true;
-
-    btn.textContent=
-      '⚠ Prem per confirmar';
-
-    btn.style.borderColor=
-      'var(--error)';
-
-    btn.style.color=
-      'var(--error)';
-
+    btn.textContent='⚠ Prem de nou per confirmar';
+    btn.style.borderColor='var(--error)';
+    btn.style.color='var(--error)';
     clearTimeout(resetArmTimer);
-
-    resetArmTimer=
-      setTimeout(
-        ()=>disarmReset(),
-        3000
-      );
-
+    resetArmTimer=setTimeout(()=>disarmReset(),3000);
     return;
   }
-
   disarmReset();
-
-  state.unlockedIds=
-    TOPICS.length
-      ?[TOPICS[0].id]
-      :[];
-
+  const firstCore=TOPICS.find(t=>t.course==='1r');
+  state.unlockedIds=firstCore?[firstCore.id]:[];
   state.done=[];
-
-  // ★ TAMBÉ ESBORREM ELS ERRORS
-  state.errors=[];
-
-  state.currentTopic=0;
-  state.level=1;
+  state.currentTopic=firstCore?TOPICS.indexOf(firstCore):0;
   state.exCount=0;
   state.correctStreak=0;
-
   saveState();
-
   renderUnlockPanel();
   renderHome();
-
   closeUnlockPanel();
 }
 
@@ -4446,6 +4374,59 @@ if (!isLocal) {
 
 }
 
+
+/* ── P2 · SELECTOR INDEPENDENT DE TEMES D'EXAMEN ───────── */
+var MI_EXAM_STORAGE='mi_exam_1eso_espacial_v1';
+var miExamSelectedTopics=[];
+function miExamCoreTopics(){return TOPICS.filter(function(t){return t.course==='1r'&&t.exam1r!==false;});}
+function miExamDoneIds(){try{return (state.done||[]).slice();}catch(e){return [];}}
+function miLoadExamSelection(){
+  var core=miExamCoreTopics(),valid=core.map(function(t){return t.id;}),raw=null;
+  try{raw=localStorage.getItem(MI_EXAM_STORAGE);}catch(e){}
+  if(raw===null){miExamSelectedTopics=valid.slice();return;}
+  try{var a=JSON.parse(raw);miExamSelectedTopics=Array.isArray(a)?a.filter(function(id){return valid.indexOf(id)>=0;}):valid.slice();}
+  catch(e){miExamSelectedTopics=valid.slice();}
+}
+function miSaveExamSelection(){try{localStorage.setItem(MI_EXAM_STORAGE,JSON.stringify(miExamSelectedTopics));}catch(e){}}
+function miGetSelectedExamIds(){return miExamSelectedTopics.slice();}
+function miEsc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function miOpenExamConfig(){
+  miLoadExamSelection();miRenderExamConfig();
+  var ov=document.getElementById('miExamOverlay');if(ov){ov.classList.add('open');ov.setAttribute('aria-hidden','false');}
+}
+function miCloseExamConfig(){miSaveExamSelection();var ov=document.getElementById('miExamOverlay');if(ov){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}}
+function miRenderExamConfig(){
+  var core=miExamCoreTopics(),done=miExamDoneIds(),box=document.getElementById('miExamTopicList');if(!box)return;
+  box.innerHTML=core.map(function(t){var checked=miExamSelectedTopics.indexOf(t.id)>=0,isDone=done.indexOf(t.id)>=0;return '<label class="mi-exam-row"><input type="checkbox" '+(checked?'checked':'')+' onchange="miToggleExamTopic(\''+miEsc(t.id)+'\',this.checked)"><span>'+miEsc(t.name)+(isDone?'<small class="mi-exam-done">✓ Bloc completat</small>':'<small>Disponible per a l’examen</small>')+'</span></label>';}).join('');
+  miUpdateExamSummary();
+}
+function miToggleExamTopic(id,on){if(on){if(miExamSelectedTopics.indexOf(id)<0)miExamSelectedTopics.push(id);}else miExamSelectedTopics=miExamSelectedTopics.filter(function(x){return x!==id;});miSaveExamSelection();miUpdateExamSummary();}
+function miExamSelectAll(){miExamSelectedTopics=miExamCoreTopics().map(function(t){return t.id;});miSaveExamSelection();miRenderExamConfig();}
+function miExamSelectDone(){var valid=miExamCoreTopics().map(function(t){return t.id;}),done=miExamDoneIds();miExamSelectedTopics=done.filter(function(id){return valid.indexOf(id)>=0;});miSaveExamSelection();miRenderExamConfig();}
+function miExamClearAll(){miExamSelectedTopics=[];miSaveExamSelection();miRenderExamConfig();}
+function miUpdateExamSummary(){var n=miExamSelectedTopics.length,s=document.getElementById('miExamSummary'),b=document.getElementById('miExamStartBtn');if(s)s.textContent=n+' bloc'+(n===1?'':'s')+' seleccionat'+(n===1?'':'s')+' · 20 preguntes';if(b){b.disabled=n===0;b.textContent=n?'Començar examen →':'Selecciona almenys un bloc';}}
+function miStartConfiguredExam(){if(!miExamSelectedTopics.length)return;miSaveExamSelection();miCloseExamConfig();startExam();}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamConfig();});
 </script>
+
+<div class="mi-exam-overlay" id="miExamOverlay" onclick="miCloseExamConfig()" aria-hidden="true">
+  <div class="mi-exam-modal" role="dialog" aria-modal="true" aria-labelledby="miExamTitle" onclick="event.stopPropagation()">
+    <div class="mi-exam-head">
+      <div><h2 id="miExamTitle">📝 Prepara el teu examen</h2><p>Selecciona exactament els blocs que vols repassar. Aquesta selecció és independent dels blocs desbloquejats per practicar.</p></div>
+      <button class="mi-exam-close" onclick="miCloseExamConfig()" aria-label="Tancar">✕</button>
+    </div>
+    <div class="mi-exam-tools">
+      <button class="mi-exam-tool" onclick="miExamSelectAll()">Tots els blocs</button>
+      <button class="mi-exam-tool" onclick="miExamSelectDone()">Només completats</button>
+      <button class="mi-exam-tool" onclick="miExamClearAll()">Desmarcar tots</button>
+    </div>
+    <div class="mi-exam-list" id="miExamTopicList"></div>
+    <div class="mi-exam-foot">
+      <div class="mi-exam-summary" id="miExamSummary"></div>
+      <button class="mi-exam-start" id="miExamStartBtn" onclick="miStartConfiguredExam()">Començar examen →</button>
+      <div class="mi-exam-note">L’examen té 20 preguntes, repartides tan equilibradament com permeten els blocs seleccionats. Les ampliacions de preparació de 2n no hi entren.</div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

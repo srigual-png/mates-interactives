@@ -1,0 +1,163 @@
+PASSADA 6 · INTERFÍCIE I NAVEGACIÓ · 1r ESO
+==============================================
+
+Objectiu
+--------
+Homogeneïtzar la interfície i la navegació dels cinc sentits de 1r ESO sense alterar la lògica matemàtica ni les passades P1–P5.
+
+ESTÀNDARD APLICAT
+=================
+
+1. BARRA SUPERIOR I NAVEGACIÓ
+-----------------------------
+Els cinc sentits mostren el mateix recorregut:
+Mates Interactives → 1r ESO → Sentit
+
+La barra superior conserva:
+- botó enrere quan cal;
+- accés directe a la portada general;
+- accés directe a l'índex de 1r ESO;
+- retorn directe a l'inici del sentit;
+- títol de la pantalla actual;
+- barra de progrés.
+
+Retoc específic del Sentit Numèric:
+- substituïda la barra antiga per la mateixa estructura dels altres quatre sentits;
+- normalitzats textos visibles: Numèric, Comença, Següent i Últims;
+- favicons normalitzats a ../assets/images/ com a la resta del curs.
+
+2. PORTADA DE CADA SENTIT
+-------------------------
+Es conserva l'ordre superior ja fixat:
+1. Títol i introducció.
+2. Tota la teoria del Sentit...
+3. Gestionar temes.
+4. Llista de continguts.
+
+Dins la llista, la jerarquia visual passa a ser homogènia:
+1. 📘 Continguts de 1r d'ESO.
+2. 🧩 Pràctica complementària, quan n'hi ha disponible.
+3. ⭐ Ampliació · prepara 2n d'ESO.
+4. 📝 Mode Examen.
+5. ❌ Errors guardats.
+
+Els continguts complementaris conserven exactament les seves condicions d'accés prèvies. P6 només n'ordena i n'homogeneïtza la presentació.
+
+3. MODE EXAMEN I ERRORS
+-----------------------
+- Mode Examen queda visualment separat de l'ampliació.
+- S'indica que la selecció d'examen és independent dels blocs desbloquejats per practicar.
+- Errors guardats és ara sempre visible, també quan el recompte és 0.
+- Amb 0 errors mostra: "Encara no tens errors guardats".
+- Amb errors conserva l'accés al sistema P4 de revisió i eliminació.
+
+4. TARGETES I JERARQUIA VISUAL
+------------------------------
+S'ha afegit una capa CSS P6 comuna als cinc sentits:
+- amplada i espaiat homogenis;
+- capçaleres de secció coherents;
+- targetes amb alineació comuna;
+- badges que no comprimeixen el text;
+- Mode Examen i Errors visualment distingibles;
+- identitat cromàtica de cada sentit preservada mitjançant les variables pròpies de cada pàgina.
+
+5. RESPONSIVE / MÒBIL
+---------------------
+Capa responsive comuna:
+- navegació compacta per sota de 700 px;
+- labels curts "1r" i "Sentit" en mòbil;
+- barra de progrés reduïda i ocultable en pantalles molt estretes;
+- teoria i Gestionar temes a amplada completa;
+- targetes reordenades sense desbordament;
+- badges adaptats a pantalles estretes;
+- opcions en una sola columna en mòbil;
+- modals de Gestionar temes i Mode Examen limitats a l'alçada/amplada de la pantalla;
+- focus visible en botons i enllaços.
+
+6. ÍNDEX DE 1r ESO
+------------------
+Auditat però no modificat.
+Ja disposa de:
+- marca/logotip amb retorn a la portada general;
+- accés als cinc sentits;
+- estructura responsive pròpia;
+- cap carreró sense sortida.
+
+VALIDACIÓ FINAL
+===============
+
+JavaScript
+----------
+- sentit-numeric.html: OK
+- sentit-algebraic.html: OK
+- sentit-mesura.html: OK
+- sentit-espacial.html: OK
+- sentit-estocastic.html: OK
+Resultat: 5/5.
+
+CSS P6
+------
+- 5/5 blocs CSS analitzats sense errors de sintaxi.
+- media queries comunes a 700 px i 430 px.
+
+Estructura HTML
+---------------
+- 0 IDs duplicats als cinc sentits.
+- meta viewport: 5/5.
+- Tota la teoria → Gestionar temes → blocs: 5/5.
+- barra superior Portada → Curs → Sentit: 5/5.
+
+Ordre dinàmic de portada
+------------------------
+Prova funcional de renderHome amb estat buit:
+- Continguts principals abans de l'ampliació: 5/5.
+- Ampliació abans del Mode Examen: 5/5.
+- Mode Examen abans d'Errors guardats: 5/5.
+- targeta Errors visible amb 0 errors: 5/5.
+
+Enllaços
+--------
+- 729 referències internes del paquet comprovades.
+- Enllaços interns trencats: 0.
+- Els enllaços intencionats cap als assets i portada globals queden fora del paquet de curs, com en les passades anteriors.
+
+Integritat de P1–P5
+-------------------
+Comparació amb 1eso-P5-exercicis-validats:
+- abans d'afegir aquest informe, només s'han modificat els cinc sentit-*.html;
+- index.html: byte a byte intacte;
+- teoria: 63/63 fitxers byte a byte intactes;
+- resta de fitxers previs: intactes.
+
+Verificació addicional de lògica:
+Després d'emmascarar exclusivament:
+- capa CSS P6;
+- barra superior;
+- renderHome;
+- correccions ortogràfiques visibles del Numèric;
+- rutes de favicon del Numèric;
+la resta del codi dels cinc sentits és byte a byte equivalent a P5.
+
+Per tant no s'han alterat:
+- generadors ni distractors P5;
+- validadors de resposta P5;
+- Mode Examen P2;
+- Gestió de temes/progrés P3;
+- Errors i correccions P4;
+- teoria P1.
+
+Fitxers modificats
+------------------
+sentit-numeric.html
+sentit-algebraic.html
+sentit-mesura.html
+sentit-espacial.html
+sentit-estocastic.html
+
+Fitxer nou
+----------
+PASSADA-6-INTERFICIE-NAVEGACIO-1ESO.txt
+
+ESTAT
+=====
+PASSADA 6 · 1r ESO: COMPLETADA I VALIDADA.

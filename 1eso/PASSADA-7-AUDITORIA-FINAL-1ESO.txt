@@ -1,0 +1,316 @@
+PASSADA 7 · AUDITORIA GLOBAL FINAL · 1r ESO
+================================================
+
+Objectiu
+--------
+Fer l'auditoria final del curs complet de 1r ESO després de les passades P1–P6 i deixar una base definitiva per a la futura auditoria global de tot Mates Interactives.
+
+ABAST
+=====
+S'han revisat conjuntament:
+- índex de 1r ESO;
+- cinc sentits;
+- teoria;
+- Mode Examen;
+- gestió de temes i progrés;
+- errors i correccions;
+- generadors i respostes obertes;
+- interfície i navegació;
+- SEO bàsic;
+- enllaços;
+- GoatCounter;
+- coherència entre totes les passades anteriors.
+
+ESTRUCTURA FINAL DEL CURS
+=========================
+Sentit Numèric:
+- 12 blocs principals.
+- 1 ampliació.
+- 13 pàgines de teoria de tema.
+
+Sentit Algebraic:
+- 6 blocs principals.
+- 4 ampliacions.
+- 10 pàgines de teoria de tema.
+
+Sentit de la Mesura:
+- 8 blocs principals.
+- 1 ampliació.
+- 9 pàgines de teoria de tema.
+
+Sentit Espacial:
+- 7 blocs principals.
+- 5 ampliacions.
+- 12 pàgines de teoria de tema.
+
+Sentit Estocàstic:
+- 9 blocs principals.
+- 2 ampliacions.
+- 11 pàgines de teoria de tema.
+
+TOTAL:
+- 42 blocs principals.
+- 13 ampliacions.
+- 55 generadors/blocs.
+- 55 pàgines de teoria de tema.
+- 5 índexs de teoria.
+- 60 HTML de teoria.
+- 66 HTML totals dins del curs: index + 5 sentits + 60 teoria.
+
+CORRECCIONS FETES A P7
+=======================
+
+1. ELIMINACIÓ DE TEORIA ÒRFENA
+------------------------------
+S'han eliminat tres pàgines antigues del Sentit Numèric que ja no estaven enllaçades ni des de l'índex ni des dels blocs:
+
+- teoria/numeric/nombres-naturals-1r-eso.html
+- teoria/numeric/divisibilitat-mcm-mcd-1r-eso.html
+- teoria/numeric/proporcionalitat-percentatges-1r-eso.html
+
+Les versions vigents ja existien i són les que utilitza el curs.
+
+Resultat final:
+- 0 pàgines HTML òrfenes.
+- 0 contingut teòric duplicat per aquesta causa.
+
+2. PATRÓ MESTRE DE TEORIA
+--------------------------
+L'auditoria va detectar tres pàgines actives que tenien teoria, errors i resum però no un exemple desenvolupat pas a pas clar:
+
+- Numèric · Operacions bàsiques.
+- Espacial · Poliedres.
+- Espacial · Cossos rodons.
+
+S'hi ha afegit un exemple resolt pas a pas coherent amb el nivell.
+
+Resultat final:
+- 55/55 pàgines de tema amb explicació desenvolupada.
+- 55/55 amb exemple/pas a pas.
+- 55/55 amb errors típics/freqüents.
+- 55/55 amb resum essencial.
+- 55/55 amb navegació anterior/índex/següent.
+- 55/55 amb accés directe a pràctica Guiat i Autònom.
+
+3. GOATCOUNTER
+--------------
+El Sentit Numèric encara carregava GoatCounter directament des del <head>, també en local.
+
+S'ha substituït per la càrrega condicionada comuna:
+- no carrega amb file:;
+- no carrega a localhost / 127.0.0.1 / ::1;
+- només carrega quan la web està publicada.
+
+Resultat:
+- 66/66 HTML amb GoatCounter absent o correctament protegit en local.
+
+AUDITORIA DE TEORIA
+===================
+- 5/5 índexs de teoria presents.
+- 55/55 blocs tenen una pàgina de teoria existent.
+- Mapa bloc → teoria: 55/55 correcte.
+- Índex teoria → pàgines: complet als cinc sentits.
+- 232 enllaços directes teoria → pràctica revisats.
+- 232/232 apunten a un sentit existent, un tema existent i un nivell vàlid.
+- 0 pàgines de teoria òrfenes.
+
+AUDITORIA MODE EXAMEN · P2
+==========================
+Es manté l'estàndard:
+- selector independent dels blocs desbloquejats de pràctica;
+- Tots els blocs;
+- Només completats;
+- Desmarcar tots;
+- selecció persistent;
+- 20 preguntes;
+- repartiment equilibrat;
+- ampliacions fora de l'examen ordinari.
+
+La P2 ja havia validat:
+- sintaxi JS 5/5;
+- cada bloc principal individual com a únic bloc seleccionat;
+- combinacions de blocs;
+- examen amb tots els blocs;
+- absència de contaminació de temes no seleccionats.
+
+Comprovació P7:
+- funcions P2 continuen presents als 5 sentits;
+- startExam utilitza la selecció independent;
+- cap canvi funcional de P2 a P7.
+
+AUDITORIA GESTIÓ DE TEMES I PROGRÉS · P3
+==========================================
+Es manté:
+- Gestionar temes sota Tota la teoria;
+- Bloc 1 sempre Base;
+- bloqueig separat del progrés;
+- tancar/reobrir conserva Fet;
+- Desbloquejar tots només afecta blocs principals;
+- ampliacions fora del progrés obligatori;
+- reinici amb confirmació;
+- reiniciar progrés conserva errors.
+
+La P3 havia validat:
+- 42 blocs principals.
+- 5/5 sentits.
+- Bloc 1 protegit.
+- reinici correcte.
+- errors conservats.
+
+Comprovació P7:
+- funcions P3 continuen presents i sense regressions.
+
+AUDITORIA ERRORS I CORRECCIONS · P4
+====================================
+Es manté el patró:
+La teva resposta
+→ Resposta correcta
+→ Què convé revisar
+→ Resolució pas a pas
+
+També:
+- error persistent;
+- errors recents al bloc;
+- eliminació individual;
+- esborrat global;
+- correcció també al Mode Examen.
+
+La P4 havia validat:
+- 5/5 sentits;
+- camp review;
+- revisió pedagògica;
+- resolució pas a pas;
+- eliminació individual/global.
+
+Comprovació P7:
+- registerError, miReviewHtml/miReviewPoints i eliminació d'errors continuen presents;
+- cap canvi funcional de P4.
+
+AUDITORIA EXERCICIS · P5
+=========================
+La P5 va validar:
+- 55 generadors.
+- 550.000 exercicis de bloc: 550.000/550.000 OK.
+- 191.000 casos de resposta oberta: 191.000/191.000 OK.
+- 17.000 equivalències d'unitats: 17.000/17.000 OK.
+- 60.000 comprovacions de gràfics espacials.
+- 0 respostes revelades als gràfics auditats.
+
+Comprovacions:
+- exactament 4 opcions quan correspon;
+- opcions úniques;
+- correcta present;
+- distractors robustos;
+- absència de NaN / undefined / Infinity;
+- equivalències matemàtiques coherents;
+- unitats equivalents;
+- gràfics espacials que no revelen la resposta.
+
+TOTAL DOCUMENTAT DE P5:
+més de 800.000 comprovacions automàtiques.
+
+Comprovació P7:
+- P7 no ha modificat cap generador ni validador;
+- la validació massiva P5 continua sent aplicable.
+
+AUDITORIA INTERFÍCIE I NAVEGACIÓ · P6
+======================================
+Es manté:
+- breadcrumb Portada → 1r ESO → Sentit;
+- Tota la teoria;
+- Gestionar temes;
+- continguts principals;
+- ampliació;
+- Mode Examen;
+- Errors guardats;
+- responsive comú;
+- Errors visible també amb 0 errors.
+
+Comprovació P7:
+- 5/5 sentits amb les seccions requerides.
+- index.html continua intacte.
+- identitats visuals:
+  Numèric blau;
+  Algebraic taronja;
+  Mesura verda;
+  Espacial violeta;
+  Estocàstic groc/daurat.
+
+AUDITORIA SEO I ENLLAÇOS · P7
+==============================
+HTML finals: 66.
+
+SEO:
+- title: 66/66.
+- meta description: 66/66.
+- canonical: 66/66.
+- canonicals exactes i únics: 66/66.
+- 0 IDs HTML duplicats.
+
+Enllaços:
+- 696 referències internes del curs comprovades.
+- 0 referències internes trencades.
+- 316 referències cap a portada/assets globals amb estructura relativa coherent.
+- Aquestes rutes globals es tornaran a validar sobre el ZIP complet de Mates Interactives a l'auditoria final de projecte.
+
+Orfandat:
+- 0 HTML òrfens.
+
+JavaScript:
+- sentit-numeric.html: OK.
+- sentit-algebraic.html: OK.
+- sentit-mesura.html: OK.
+- sentit-espacial.html: OK.
+- sentit-estocastic.html: OK.
+- Resultat: 5/5.
+
+MATRIU FINAL · 1r ESO
+=====================
+
+Sentit        Teoria   Examen   Temes/progrés   Errors   Exercicis   UI/nav   SEO
+-----------------------------------------------------------------------------------
+Numèric       OK       OK       OK               OK       OK          OK       OK
+Algebraic     OK       OK       OK               OK       OK          OK       OK
+Mesura        OK       OK       OK               OK       OK          OK       OK
+Espacial      OK       OK       OK               OK       OK          OK       OK
+Estocàstic    OK       OK       OK               OK       OK          OK       OK
+
+INTEGRITAT RESPECTE DE P6
+=========================
+Canvis P7 intencionats:
+
+Modificats:
+- sentit-numeric.html
+  · únicament per corregir la càrrega local de GoatCounter.
+- teoria/numeric/operacions-basiques-1r-eso.html
+  · exemple pas a pas.
+- teoria/espacial/poliedres-ampliacio-2n-eso.html
+  · exemple pas a pas.
+- teoria/espacial/cossos-rodons-ampliacio-2n-eso.html
+  · exemple pas a pas.
+
+Eliminats:
+- teoria/numeric/nombres-naturals-1r-eso.html
+- teoria/numeric/divisibilitat-mcm-mcd-1r-eso.html
+- teoria/numeric/proporcionalitat-percentatges-1r-eso.html
+
+La resta del curs provinent de P6 no s'ha modificat.
+
+ESTAT FINAL
+===========
+PASSADA 7 · 1r ESO: COMPLETADA I VALIDADA.
+
+1r ESO queda tancat com a versió definitiva auditada a nivell de curs.
+
+Pendent posterior:
+quan 1r–4t hagin completat P7, fer l'auditoria global del ZIP complet de Mates Interactives:
+- portada general;
+- 1eso–4eso;
+- assets;
+- sitemap;
+- robots.txt;
+- SEO global;
+- 404;
+- rutes entre cursos;
+- fitxers sobrants;
+- coherència final de publicació.

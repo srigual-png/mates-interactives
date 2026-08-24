@@ -1,0 +1,54 @@
+PASSADA 2 · MODE EXAMEN · 1r ESO
+================================
+
+Objectiu
+--------
+Separar completament la selecció de continguts de l'examen del sistema de blocs desbloquejats de la pràctica.
+
+Aplicat als 5 sentits
+---------------------
+- Sentit Numèric
+- Sentit Algebraic
+- Sentit de la Mesura
+- Sentit Espacial
+- Sentit Estocàstic
+
+Nou patró comú
+--------------
+1. El Mode Examen és visible des del principi.
+2. En obrir-lo apareix "Prepara el teu examen".
+3. Es pot seleccionar qualsevol bloc principal de 1r, encara que estigui bloquejat per practicar.
+4. Controls ràpids:
+   - Tots els blocs
+   - Només completats
+   - Desmarcar tots
+5. La selecció es guarda de manera independent a localStorage per a cada sentit.
+6. L'examen no es pot iniciar si no hi ha cap bloc seleccionat.
+7. Les ampliacions de preparació de 2n queden fora de l'examen ordinari.
+8. Cada examen conté 20 preguntes.
+9. Les preguntes es reparteixen tan equilibradament com permeten els generadors seleccionats.
+10. Es mantenen els problemes oberts ja existents: fins a 6 per examen quan els blocs seleccionats els admeten; la resta es completa amb exercicis normals.
+
+Decisió arquitectònica
+----------------------
+- Gestionar temes = recorregut i disponibilitat de la pràctica.
+- Seleccionar temes de l'examen = continguts que l'alumne vol preparar.
+- Els dos sistemes són independents.
+
+Validació tècnica
+-----------------
+- Sintaxi JavaScript: 5/5 sentits OK.
+- Selector comú present: 5/5.
+- Persistència de selecció: OK.
+- "Només completats": OK.
+- Examen independent de isUnlocked/isTopicUnlocked: 5/5.
+- Prova de cada bloc individual com a únic bloc seleccionat: OK en els 5 sentits.
+- Proves amb parelles de blocs i amb tots els blocs: OK.
+- Longitud d'examen: 20/20 preguntes en totes les configuracions provades.
+- Cap pregunta de bloc no seleccionat en les configuracions provades.
+- Teoria P1: 63 fitxers comprovats byte a byte, sense canvis.
+- index.html del curs: sense canvis.
+
+Nota
+----
+Els recursos compartits situats fora de la carpeta 1eso (assets, favicon, portada general) no formen part d'aquest ZIP per curs i no s'han modificat.

@@ -1,0 +1,71 @@
+PASSADA 3 · GESTIÓ DE TEMES I PROGRÉS · 1r ESO
+================================================
+
+ESTAT: COMPLETADA I VALIDADA
+
+OBJECTIU
+--------
+Homogeneïtzar la gestió de temes i el progrés dels cinc sentits de 1r ESO sense modificar la teoria de P1 ni el Mode Examen de P2.
+
+ESTÀNDARD APLICAT ALS 5 SENTITS
+-------------------------------
+1. "Gestionar temes" apareix sota "Tota la teoria del Sentit..." i abans de la llista de blocs.
+2. S'elimina visualment l'antic accés lateral/flotant.
+3. El Bloc 1 és sempre "Base" i no es pot bloquejar.
+4. Cada bloc principal posterior es pot obrir o tancar individualment.
+5. Tancar un bloc NO elimina el seu estat de "✓ Fet".
+6. "Desbloquejar tots" obre només els blocs principals de 1r.
+7. Les ampliacions de preparació de 2n són sempre accessibles, no són bloquejables i no compten en el progrés.
+8. Completar un bloc continua desbloquejant automàticament el següent bloc principal.
+9. El progrés global continua calculant-se només amb els blocs principals de 1r.
+10. "Reiniciar progrés" requereix doble confirmació durant 3 segons.
+11. Reiniciar progrés deixa només el Bloc 1 obert i elimina els blocs completats.
+12. Reiniciar progrés NO elimina els errors guardats.
+13. "Canviar de tema" es manté homogeni: apareix després de 3 exercicis de pràctica.
+
+CORRECCIONS ESPECÍFIQUES
+------------------------
+- Tots els sentits: separar definitivament disponibilitat del tema i progrés completat. Abans, tancar un tema podia esborrar el seu "Fet".
+- Espacial: "Desbloquejar tots" incloïa també ampliacions; ara només obre el nucli de 1r.
+- Espacial: reiniciar progrés també esborrava errors; ara els errors es conserven.
+- Espacial i Estocàstic: les ampliacions deixen d'aparèixer com a files gestionables dins del panell; s'hi mostra una nota comuna.
+- Algebraic: el panell mostra el nom complet dels blocs i una nota comuna sobre les ampliacions.
+
+VALIDACIÓ FUNCIONAL
+-------------------
+Blocs principals gestionats:
+- Algebraic: 6
+- Espacial: 7
+- Estocàstic: 9
+- Mesura: 8
+- Numèric: 12
+Total: 42 blocs principals
+
+Proves realitzades als 5 sentits:
+- Sintaxi JavaScript: 5/5 OK.
+- Posició Tota la teoria -> Gestionar temes -> blocs: 5/5 OK.
+- Panell mostra només blocs principals: 5/5 OK.
+- Bloc 1 no bloquejable, fins i tot per crida directa: 5/5 OK.
+- Desbloquejar tots: 5/5 OK.
+- Tancar un bloc completat conserva "Fet": 5/5 OK.
+- Reobrir-lo conserva "Fet": 5/5 OK.
+- Reinici deixa només Bloc 1 i cap bloc completat: 5/5 OK.
+- Reinici conserva errors: 5/5 OK.
+- Nota d'ampliacions sempre accessibles: 5/5 OK.
+
+CONTROL DE REGRESSIÓ
+--------------------
+- index.html + tota la teoria P1: 64/64 fitxers sense cap canvi.
+- Funcions del selector del Mode Examen P2: 6/6 funcions per sentit sense cap canvi (30/30).
+- Mode Examen continua configurat a 20 preguntes.
+- Canviar de tema després de 3 exercicis continua actiu als 5 sentits.
+
+FITXERS MODIFICATS
+------------------
+- sentit-numeric.html
+- sentit-algebraic.html
+- sentit-mesura.html
+- sentit-espacial.html
+- sentit-estocastic.html
+
+No s'ha modificat cap pàgina de teoria ni index.html.

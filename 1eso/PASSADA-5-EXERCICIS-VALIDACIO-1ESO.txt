@@ -1,0 +1,107 @@
+PASSADA 5 · EXERCICIS, DISTRACTORS I VALIDACIÓ · 1r ESO
+==========================================================
+
+Objectiu
+--------
+Auditar i homogeneïtzar la qualitat dels exercicis dels cinc sentits:
+- robustesa dels generadors;
+- 4 opcions úniques;
+- resposta correcta present;
+- distractors no equivalents a la correcta;
+- respostes obertes matemàticament equivalents;
+- unitats i percentatges;
+- absència de NaN/undefined;
+- gràfics d'enunciat que no revelin la resposta.
+
+Retocs aplicats
+---------------
+1. SENTIT ALGEBRAIC
+- La resposta oberta accepta ara formes equivalents habituals:
+  4x = 4·x = 4*x = x*4.
+- També normalitza 1x = x i -1x = -x.
+- Es manté el control perquè un distractor no sigui acceptat com a equivalent de la correcta.
+
+2. SENTIT DE LA MESURA
+- Les respostes obertes de magnitud accepten valors equivalents expressats en una altra unitat coherent.
+  Exemples:
+  365 cm = 3,65 m
+  4 m² = 40.000 cm²
+  2.500 ml = 2,5 l
+- Es valida la dimensió correcta: longitud amb longitud, àrea amb àrea, etc.
+- També s'ha reforçat la lectura coherent de €, %, graus i unitats escrites amb paraules.
+- Les unitats contextuals (bosses, pots, rajoles...) continuen validant el valor numèric sense imposar una unitat mètrica artificial.
+
+3. SENTIT ESPACIAL
+- Eliminades etiquetes de dibuixos que podien donar directament la resposta:
+  rectangle, rombe, cilindre, con, esfera, etc.
+- Les preguntes de classificació de triangles/quadrilàters ja no mostren una figura que reveli la classe demanada.
+- En visualització, quan es pregunta pel costat d'un quadrat a partir de l'àrea, el dibuix mostra "costat = ?" i només l'àrea coneguda.
+- Eliminat un esquema de rectangle dividit que permetia reconstruir directament la resposta preguntada.
+- Auditoria específica de gràfics: 0 casos amb la resposta mostrada al dibuix.
+
+4. SENTIT NUMÈRIC I SENTIT ESTOCÀSTIC
+- No han necessitat retocs en aquesta passada.
+- Han superat les proves massives de generació, opcions, correcció i resposta oberta.
+
+VALIDACIÓ MASSIVA FINAL
+------------------------
+A) Exercicis dels blocs
+- 55 generadors (42 principals + 13 ampliacions).
+- 10.000 exercicis per generador.
+- Total: 550.000 exercicis.
+
+Comprovacions:
+- cap excepció de generació;
+- exactament 4 opcions;
+- 4 opcions úniques;
+- resposta correcta present;
+- cap NaN, undefined o Infinity;
+- pistes i solució presents.
+
+Resultat: 550.000 / 550.000 OK.
+
+B) Bancs de resposta oberta
+- Algebraic: 42 patrons × 1.000 = 42.000.
+- Espacial: 42 patrons × 1.000 = 42.000.
+- Estocàstic: 49 patrons × 1.000 = 49.000.
+- Mesura: 38 patrons × 1.000 = 38.000.
+- Numèric: 10 famílies × 2.000 = 20.000.
+
+Total resposta oberta: 191.000 casos.
+Resultat: 191.000 / 191.000 OK.
+
+C) Equivalència d'unitats · Mesura
+- 17.000 respostes correctes reexpressades en una unitat coherent diferent.
+- Resultat: 17.000 / 17.000 OK.
+
+D) Gràfics · Sentit Espacial
+- 5.000 exercicis per cadascun dels 12 blocs/ampliacions espacials.
+- Total: 60.000 comprovacions.
+- Casos on la resposta apareix al gràfic: 0.
+
+E) Distractors algebraics
+- Comprovat massivament que cap opció incorrecta sigui acceptada pel validador de resposta oberta com a equivalent de la correcta.
+- Resultat: OK.
+
+TOTAL DE COMPROVACIONS MASSIVES POST-RETocs
+--------------------------------------------
+Més de 800.000 generacions/validacions automàtiques.
+
+INTEGRITAT DE LES PASSADES ANTERIORS
+-------------------------------------
+Comparació amb el ZIP P4 d'entrada:
+- Fitxers modificats:
+  sentit-algebraic.html
+  sentit-espacial.html
+  sentit-mesura.html
+- Sentit Numèric: intacte.
+- Sentit Estocàstic: intacte.
+- index.html: intacte.
+- teoria: intacta.
+- P2 Mode Examen: no modificat.
+- P3 Gestió de temes/progrés: no modificada.
+- Sintaxi JavaScript final: 5/5 OK.
+
+ESTAT
+-----
+PASSADA 5 · 1r ESO: COMPLETADA I VALIDADA.

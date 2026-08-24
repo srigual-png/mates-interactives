@@ -223,9 +223,124 @@
 .unit-key{border:1px solid var(--border);background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer;font-weight:750;color:var(--primary-dark);font-family:inherit;min-width:44px}
 .unit-key:hover{border-color:var(--primary);background:#e9f7ef}
 
+
+/* ── P2 · CONFIGURACIÓ COMUNA DEL MODE EXAMEN ───────────── */
+.mi-exam-overlay{position:fixed;inset:0;background:rgba(22,28,36,.55);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px}
+.mi-exam-overlay.open{display:flex}.mi-exam-modal{width:min(680px,100%);max-height:min(86vh,780px);overflow:auto;background:var(--card,#fff);border:1px solid var(--border,#ddd);border-radius:18px;box-shadow:0 18px 60px rgba(0,0,0,.24);padding:20px}
+.mi-exam-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:10px}.mi-exam-head h2{font-size:1.25rem;margin:0}.mi-exam-head p{font-size:.84rem;color:var(--muted,#667085);margin:5px 0 0;line-height:1.45}.mi-exam-close{border:0;background:transparent;font-size:1.35rem;cursor:pointer;color:var(--muted,#667085);padding:2px 5px}
+.mi-exam-tools{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}.mi-exam-tool{border:1px solid var(--border,#ddd);background:var(--card,#fff);color:var(--text,#263238);border-radius:9px;padding:8px 11px;font-size:.78rem;font-weight:750;cursor:pointer}.mi-exam-tool:hover{border-color:var(--primary,#5b7cfa);color:var(--primary,#5b7cfa)}
+.mi-exam-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.mi-exam-row{display:flex;align-items:flex-start;gap:9px;border:1px solid var(--border,#ddd);border-radius:11px;padding:10px 11px;cursor:pointer;background:var(--card,#fff)}.mi-exam-row:hover{border-color:var(--primary,#5b7cfa)}.mi-exam-row input{margin-top:3px;accent-color:var(--primary,#5b7cfa)}.mi-exam-row span{font-size:.82rem;line-height:1.35;font-weight:650}.mi-exam-row small{display:block;color:var(--muted,#667085);font-weight:500;margin-top:2px}.mi-exam-done{color:var(--success,#2f9e64);font-size:.72rem;font-weight:800}
+.mi-exam-foot{position:sticky;bottom:-20px;background:var(--card,#fff);border-top:1px solid var(--border,#ddd);margin:16px -20px -20px;padding:14px 20px 20px}.mi-exam-summary{font-size:.82rem;color:var(--muted,#667085);margin-bottom:10px}.mi-exam-start{width:100%;border:0;border-radius:11px;padding:12px 15px;background:var(--primary,#5b7cfa);color:#fff;font-weight:800;font-size:.92rem;cursor:pointer}.mi-exam-start:disabled{opacity:.45;cursor:not-allowed}.mi-exam-note{font-size:.76rem;color:var(--muted,#667085);line-height:1.45;margin-top:10px}
+@media(max-width:620px){.mi-exam-overlay{padding:9px}.mi-exam-modal{padding:16px;border-radius:14px;max-height:92vh}.mi-exam-list{grid-template-columns:1fr}.mi-exam-foot{margin:14px -16px -16px;padding:12px 16px 16px;bottom:-16px}}
+
+/* ── P3 · GESTIÓ DE TEMES I PROGRÉS ───────────────────── */
+.home-tools{display:flex;justify-content:center;margin:0 0 16px}.unlock-launch{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--card,#fff);color:var(--primary);border:1.5px solid var(--primary);border-radius:11px;padding:9px 14px;font-size:.84rem;font-weight:800;cursor:pointer;transition:.18s}.unlock-launch:hover{background:var(--primary-soft,#f4f6ff);transform:translateY(-1px)}
+.sidebar{display:none!important}
 </style>
 
-<meta content="Sentit de la mesura 1r ESO: exercicis interactius" property="og:title"/><meta content="Exercicis interactius de matemàtiques 1r ESO sobre unitats, temps, perímetres, àrees, escales, estimació i precisió. Sentit de la mesura amb problemes i pistes." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-mesura.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/></head>
+<meta content="Sentit de la mesura 1r ESO: exercicis interactius" property="og:title"/><meta content="Exercicis interactius de matemàtiques 1r ESO sobre unitats, temps, perímetres, àrees, escales, estimació i precisió. Sentit de la mesura amb problemes i pistes." property="og:description"/><meta content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png" property="og:image"/><meta content="https://srigual-png.github.io/mates-interactives/1eso/sentit-mesura.html" property="og:url"/><meta content="website" property="og:type"/><meta content="ca_ES" property="og:locale"/><meta content="summary_large_image" name="twitter:card"/><style id="p6-ui">
+
+/* =========================================================
+   P6 · INTERFÍCIE I NAVEGACIÓ · 1r ESO
+   Capa visual comuna. No altera generadors ni progrés.
+   ========================================================= */
+.top-nav{
+  display:flex;align-items:center;gap:8px;min-height:58px;
+  padding:9px 14px;background:var(--card,#fff);border-bottom:1px solid var(--border,#e6e8ee);
+}
+.top-nav .home-link,.top-nav .course-home-link,.top-nav .sense-home-btn{
+  display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:7px 9px;
+  border:1px solid var(--border,#e6e8ee);border-radius:10px;background:var(--card,#fff);
+  color:var(--primary);text-decoration:none;font:inherit;font-size:.78rem;font-weight:800;cursor:pointer;
+  white-space:nowrap;
+}
+.top-nav .home-link:hover,.top-nav .course-home-link:hover,.top-nav .sense-home-btn:hover{
+  border-color:var(--primary);background:var(--primary-soft,#f4f6ff);
+}
+.top-nav .course-home-short,.top-nav .sense-home-short{display:none}
+.top-nav h1{flex:1;min-width:120px;margin:0;font-size:.95rem;line-height:1.2;text-align:center}
+.top-nav .progress-bar-wrap,.top-nav .pbw{width:104px;min-width:76px;height:7px;margin:0;border-radius:999px;overflow:hidden}
+.top-nav .progress-bar-fill,.top-nav .pbf{height:100%;border-radius:999px}
+
+.layout{width:min(calc(100% - 24px),920px);margin:0 auto!important;display:block!important}
+.layout #screenHome,.layout #sHome{max-width:820px;margin:0 auto!important;padding:20px 0 34px!important}
+.sidebar{display:none!important}
+.home-header,.hh{text-align:center;margin-bottom:16px}
+.home-header h2,.hh h2{margin-bottom:5px}
+.intro-card{max-width:820px!important;width:100%;margin:0 0 18px!important;padding:18px 20px!important}
+.intro-card p{text-align:left!important;line-height:1.7}
+.all-theory-wrap{margin:0 0 12px!important}
+.theory-page-link{width:min(100%,520px)!important;margin:0 auto!important;min-height:44px}
+.home-tools{margin:0 0 20px!important}
+.unlock-launch{min-height:42px;padding:10px 16px!important}
+
+.p6-section-head{
+  margin:20px 0 8px;padding-top:16px;border-top:1px solid var(--border,#e6e8ee);
+}
+.p6-section-head.p6-first{margin-top:2px;padding-top:0;border-top:0}
+.p6-section-title{font-size:1rem;font-weight:850;color:var(--primary);line-height:1.25}
+.p6-section-title.p6-extension{color:#7c4dcc}
+.p6-section-title.p6-exam{color:var(--warn,#b7791f)}
+.p6-section-title.p6-errors{color:var(--error,var(--err,#a02020))}
+.p6-section-note{margin-top:3px;color:var(--muted,#68707e);font-size:.82rem;line-height:1.45}
+
+.topics-grid,.tg{display:flex!important;flex-direction:column!important;gap:10px!important;margin-top:0!important}
+.topic-card,.tc{
+  width:100%;min-height:74px;box-sizing:border-box;padding:14px 16px!important;
+  border-radius:14px!important;display:flex!important;align-items:center;gap:13px;
+}
+.topic-info,.tinfo{min-width:0;flex:1}
+.topic-info h3,.tinfo h3{line-height:1.25;margin-bottom:3px}
+.topic-info p,.tinfo p{line-height:1.4}
+.topic-badge,.tbadge{flex:0 0 auto;white-space:nowrap}
+.p6-special-card{border-width:2px!important;border-style:dashed!important}
+.p6-exam-card{border-color:var(--warn,#d49b32)!important}
+.p6-error-card{border-color:var(--error,var(--err,#c94a4a))!important}
+
+button,a,[onclick]{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,[onclick]:focus-visible{
+  outline:3px solid color-mix(in srgb,var(--primary) 35%,transparent);outline-offset:2px;
+}
+.unlock-panel,.mi-exam-modal{max-width:min(92vw,620px)!important}
+
+@media (max-width:700px){
+  .top-nav{gap:5px;padding:8px 7px;min-height:54px}
+  .top-nav .home-link,.top-nav .course-home-link,.top-nav .sense-home-btn{padding:6px 7px;font-size:.72rem;min-height:34px}
+  .top-nav .nav-main-label,.top-nav .course-home-label,.top-nav .sense-home-text{display:none!important}
+  .top-nav .course-home-short,.top-nav .sense-home-short{display:inline!important}
+  .top-nav h1{font-size:.82rem;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .top-nav .progress-bar-wrap,.top-nav .pbw{width:54px;min-width:46px}
+  .layout{width:min(calc(100% - 16px),920px)}
+  .layout #screenHome,.layout #sHome{padding:14px 0 26px!important}
+  .home-header h2,.hh h2{font-size:1.45rem}
+  .home-header p,.hh p{font-size:.88rem;line-height:1.45}
+  .intro-card{padding:15px 16px!important;font-size:.95rem}
+  .theory-page-link,.unlock-launch{width:100%!important;max-width:none!important}
+  .topic-card,.tc{align-items:flex-start!important;flex-wrap:wrap;padding:13px 14px!important;gap:10px}
+  .topic-icon,.ti{width:34px!important;flex:0 0 34px}
+  .topic-info,.tinfo{flex:1 1 calc(100% - 50px)}
+  .topic-badge,.tbadge{margin-left:44px}
+  .p6-section-head{margin-top:18px;padding-top:14px}
+  .p6-section-note{font-size:.79rem}
+  .btn-primary,.btn-secondary,.bp,.bs,.bw,.btn-danger{max-width:100%;}
+  .level-select,.mode-select{flex-wrap:wrap}
+  .level-btn,.mode-btn,.lvb{flex:1 1 145px}
+  .options-grid,.og{grid-template-columns:1fr!important}
+  .mi-exam-overlay,.unlock-panel-overlay{padding:10px!important}
+  .mi-exam-modal,.unlock-panel{max-height:92vh!important;border-radius:14px!important}
+}
+
+@media (max-width:430px){
+  .top-nav .home-link{width:34px;justify-content:center}
+  .top-nav .course-home-link,.top-nav .sense-home-btn{padding-inline:6px}
+  .top-nav h1{font-size:.76rem}
+  .top-nav .progress-bar-wrap,.top-nav .pbw{display:none!important}
+  .topic-card,.tc{min-height:70px}
+  .topic-badge,.tbadge{margin-left:0;width:100%;text-align:center}
+}
+
+</style>
+</head>
 <body>
 <nav class="top-nav">
 <button class="nb" id="navBack" onclick="goBack()" style="display:none">←</button>
@@ -255,6 +370,8 @@
       El sentit de la mesura t'ajudarà a treballar amb les unitats que fem servir cada dia: longitud, massa, capacitat, temps, perímetres, àrees i estimació. També practicaràs la tria d'instruments i unitats, les escales, els angles i la precisió de les mesures. Aprendràs a convertir unitats i a resoldre problemes de manera raonada, amb pistes guiades i correcció immediata. Escull el tema que necessitis i avança al teu ritme.
     </p>
 </div>
+<div class="all-theory-wrap" style="text-align:center;margin:0 0 14px"><a class="theory-page-link" href="teoria/mesura/index.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none">📚 Tota la teoria del Sentit de la Mesura</a></div>
+<div class="home-tools"><button class="unlock-launch" onclick="toggleUnlockPanel()">🔓 Gestionar temes</button></div>
 <div class="topics-grid" id="topicsGrid"></div>
 </div><div class="sidebar" id="sidebar">
 <button class="sidebar-btn" id="unlockFab" onclick="toggleUnlockPanel()" title="Gestionar temes">
@@ -1373,6 +1490,37 @@ function answerNumEq(input,val,tol=0.02){
   const n=firstNumber(input);
   return Number.isFinite(n)&&Math.abs(n-val)<=tol;
 }
+function measureUnitInfo(unit){
+  const u=canonicalUnitText(unit).trim().toLowerCase().replace(/\s+/g,'');
+  const tables={
+    length:{mm:.001,cm:.01,dm:.1,m:1,dam:10,hm:100,km:1000},
+    area:{'mm²':1e-6,'cm²':1e-4,'dm²':1e-2,'m²':1,'dam²':1e2,'hm²':1e4,'km²':1e6},
+    volume:{'mm³':1e-9,'cm³':1e-6,'dm³':1e-3,'m³':1,'dam³':1e3,'hm³':1e6,'km³':1e9},
+    capacity:{ml:.001,cl:.01,dl:.1,l:1},
+    mass:{mg:.001,g:1,kg:1000,t:1e6}
+  };
+  for(const [kind,map] of Object.entries(tables))if(Object.prototype.hasOwnProperty.call(map,u))return {kind,factor:map[u],unit:u};
+  if(u==='°'||u==='%'||u==='€')return {kind:u,factor:1,unit:u};
+  return null;
+}
+function measureInputInfo(input){
+  const raw=canonicalUnitText(input).trim().toLowerCase().replace(/,/g,'.').replace(/\s+/g,'');
+  const m=raw.match(/^(-?\d+(?:\.\d+)?)(mm³|cm³|dm³|m³|dam³|hm³|km³|mm²|cm²|dm²|m²|dam²|hm²|km²|mm|cm|dm|dam|hm|km|m|ml|cl|dl|l|mg|kg|g|t|°|%|€)$/);
+  if(!m)return null;
+  const info=measureUnitInfo(m[2]);
+  return info?{value:Number(m[1]),...info}:null;
+}
+function measureValueInExpectedUnit(input,expectedUnit){
+  const expected=measureUnitInfo(expectedUnit),got=measureInputInfo(input);
+  if(!expected||!got||expected.kind!==got.kind)return NaN;
+  return got.value*got.factor/expected.factor;
+}
+function expectedMeasureUnitOk(input,unit){
+  if(!unit)return true;
+  const expected=measureUnitInfo(unit);
+  if(!expected)return true; // unitats contextuals: bosses, pots, rajoles...
+  return !!measureInputInfo(input)&&measureInputInfo(input).kind===expected.kind;
+}
 function answerTextEq(input,accepted){
   const s=normalizeOpenAnswer(input);
   return accepted.some(a=>s===normalizeOpenAnswer(a)||s.includes(normalizeOpenAnswer(a)));
@@ -1399,7 +1547,7 @@ function numProblem(id,family,primaryTopic,difficulty,question,correctVal,unit,w
   const wrongStrings=wrongs.map(v=>typeof v==='string'?v:`${fmtNum(v)}${unit?` ${unit}`:''}`);
   return {type:id,patternId:id,family,primaryTopic,difficulty,question,correct,
     options:makeProblemOptions(correct,wrongStrings),guide,solution,data,examCompatible:true,
-    answerCheck:v=>answerNumEq(v,correctVal,Math.max(0.02,Math.abs(correctVal)*0.0005))};
+    answerCheck:v=>{const expected=measureUnitInfo(unit);if(!expected)return answerNumEq(v,correctVal,Math.max(0.02,Math.abs(correctVal)*0.0005));const converted=measureValueInExpectedUnit(v,unit);return Number.isFinite(converted)&&Math.abs(converted-correctVal)<=Math.max(0.02,Math.abs(correctVal)*0.0005);}};
 }
 function textProblem(id,family,primaryTopic,difficulty,question,correct,wrongs,accepted,guide,solution,data=''){
   return {type:id,patternId:id,family,primaryTopic,difficulty,question,correct,
@@ -1855,12 +2003,22 @@ function buildErrorRecord(ex,studentAnswer,source='practice'){
     answer:String(studentAnswer),
     options:Array.isArray(ex.options)?ex.options.slice():[],
     guide:Array.isArray(ex.guide)?ex.guide.slice():[],
+    review:miReviewPoints(ex),
     solution:Array.isArray(ex.solution)?ex.solution.slice():[],
     level:(source==='exam'||source==='open')?0:ST.level,
     source,
     difficulty:ex.difficulty!==undefined?ex.difficulty:null,
     timestamp:new Date().toISOString()
   };
+}
+
+
+function miReviewPoints(ex){
+  const pts=(ex&&Array.isArray(ex.review)&&ex.review.length?ex.review:(ex&&Array.isArray(ex.guide)?ex.guide:[])).filter(x=>x!==undefined&&x!==null&&String(x).trim()!=='').slice(0,3);
+  return pts.length?pts:['Identifica exactament què demana l’enunciat i quines dades són útils.','Revisa el procediment abans de repetir el càlcul o escollir una resposta.'];
+}
+function miReviewHtml(ex){
+  return `<div style="margin-top:10px;padding:9px 11px;border-radius:9px;background:rgba(245,166,35,.10);border-left:3px solid var(--warn,#f5a623)"><b>🔎 Què convé revisar</b><div style="margin-top:5px">${miReviewPoints(ex).map(x=>'• '+x).join('<br>')}</div></div>`;
 }
 
 function registerError(ex,studentAnswer,source='practice'){
@@ -1916,50 +2074,30 @@ function showHome(){
 
 function renderHome(){
   const grid=document.getElementById('topicsGrid');
-  let html='<div class="topics-section-title">📘 Continguts de 1r d\'ESO</div>';
-
-  coreTopicIndices().forEach(i=>{
-    const t=TOPICS[i],unlocked=isTopicUnlocked(i),done=ST.done.includes(t.id);
-    const errCount=(ST.errors[t.id]||[]).length;
+  function head(icon,title,note,cls,first){return `<div class="p6-section-head ${first?'p6-first ':''}"><div class="p6-section-title ${cls||''}">${icon} ${title}</div><div class="p6-section-note">${note}</div></div>`;}
+  function coreCard(i){
+    const t=TOPICS[i],unlocked=isTopicUnlocked(i),done=ST.done.includes(t.id),errCount=(ST.errors[t.id]||[]).length;
     const errTag=errCount>0&&unlocked?`<span class="error-tag">${errCount} error${errCount===1?'':'s'}</span>`:'';
-    html+=`<div class="topic-card ${!unlocked?'locked':''} ${done?'done':''}" onclick="${unlocked?`selectTopic(${i})`:''}">
-      <div class="topic-icon">${t.icon}</div>
-      <div class="topic-info"><h3>${t.name}${errTag}</h3><p>${t.short}</p></div>
-      <span class="topic-badge ${done?'badge-done':(!unlocked?'badge-locked':'badge-active')}">${done?'✓ Fet':(!unlocked?'🔒':'Practicar')}</span>
-    </div>`;
-  });
-
+    return `<div class="topic-card ${!unlocked?'locked':''} ${done?'done':''}" onclick="${unlocked?`selectTopic(${i})`:''}"><div class="topic-icon">${t.icon}</div><div class="topic-info"><h3>${t.name}${errTag}</h3><p>${t.short}</p></div><span class="topic-badge ${done?'badge-done':(!unlocked?'badge-locked':'badge-active')}">${done?'✓ Fet':(!unlocked?'🔒':'Practicar')}</span></div>`;
+  }
+  function extCard(i){const t=TOPICS[i],errCount=(ST.errors[t.id]||[]).length,errTag=errCount>0?`<span class="error-tag">${errCount} error${errCount===1?'':'s'}</span>`:'';return `<div class="topic-card extension" onclick="selectTopic(${i})"><div class="topic-icon">${t.icon}</div><div class="topic-info"><h3>${t.name}${errTag}</h3><p>${t.short}</p></div><span class="topic-badge badge-extension">Ampliació</span></div>`;}
+  let html=head('📘','Continguts de 1r d\'ESO','Compten per al progrés i poden aparèixer al Mode Examen.','',true);
+  coreTopicIndices().forEach(i=>{html+=coreCard(i);});
   const unlockedCore=unlockedCoreCount();
   if(unlockedCore>=4){
-    html+=`<div class="topic-card" onclick="showApps()" style="border:2px dashed #8b5cf6">
-      <div class="topic-icon">🌍</div><div class="topic-info"><h3>Aplicacions Reals</h3><p>Cuina, construcció i viatges</p></div><span class="topic-badge badge-app">Eines</span></div>`;
+    html+=head('🧩','Pràctica complementària','Activitats opcionals de 1r d\'ESO. No compten per al progrés principal.','');
+    html+=`<div class="topic-card p6-special-card" onclick="showApps()" style="border-color:#8b5cf6"><div class="topic-icon">🌍</div><div class="topic-info"><h3>Aplicacions Reals</h3><p>Cuina, construcció i viatges</p></div><span class="topic-badge badge-app">Eines</span></div>`;
+    html+=`<div class="topic-card p6-special-card" onclick="showOpenProblemsHome()" style="border-color:#5b8dee"><div class="topic-icon">✍️</div><div class="topic-info"><h3>Problemes oberts</h3><p>Resol sense opcions · 38 patrons diferents · correcció final</p></div><span class="topic-badge badge-active">Problemes</span></div>`;
   }
-  if(unlockedCore>=4){
-    html+=`<div class="topic-card" onclick="showOpenProblemsHome()" style="border:2px dashed #5b8dee">
-      <div class="topic-icon">✍️</div><div class="topic-info"><h3>Problemes oberts</h3><p>Resol sense opcions · 38 patrons diferents · correcció final</p></div><span class="topic-badge" style="background:#eaf1fd;color:#3a6fd8">Ampliació</span></div>`;
-  }
-  if(unlockedCore>=3){
-    html+=`<div class="topic-card" onclick="startExam()" style="border:2px dashed var(--warn)">
-      <div class="topic-icon">📝</div><div class="topic-info"><h3>Mode Examen · 1r ESO</h3><p>10 preguntes: exercicis + problemes oberts, segons els temes desbloquejats</p></div><span class="topic-badge badge-exam">Examen</span></div>`;
-  }
+  html+=head('⭐','Ampliació · prepara 2n d\'ESO','Material opcional. No compta per al progrés ni entra al Mode Examen de 1r ESO.','p6-extension');
+  extensionTopicIndices().forEach(i=>{html+=extCard(i);});
+  html+=head('📝','Mode Examen','20 preguntes · tria els blocs curriculars de 1r que vols preparar.','p6-exam');
+  html+=`<div class="topic-card p6-special-card p6-exam-card" onclick="miOpenExamConfig()"><div class="topic-icon">📝</div><div class="topic-info"><h3>Mode Examen · 1r ESO</h3><p>Selecció independent dels blocs desbloquejats per practicar</p></div><span class="topic-badge badge-exam">Examen 1r</span></div>`;
   const totalErr=Object.values(ST.errors||{}).reduce((sum,a)=>sum+(Array.isArray(a)?a.length:0),0);
-  if(totalErr>0){
-    html+=`<div class="topic-card" onclick="showErrorSummary()" style="border:2px dashed var(--error)">
-      <div class="topic-icon">❌</div><div class="topic-info"><h3>Errors guardats</h3><p>${totalErr} error${totalErr===1?'':'s'} · Repassa les explicacions</p></div><span class="topic-badge" style="background:#fdeaea;color:#a02020">Repassar</span></div>`;
-  }
-
-  html+='<div class="topics-section-title">⭐ Ampliació · prepara 2n d\'ESO</div>';
-  extensionTopicIndices().forEach(i=>{
-    const t=TOPICS[i];
-    const errCount=(ST.errors[t.id]||[]).length;
-    const errTag=errCount>0?`<span class="error-tag">${errCount} error${errCount===1?'':'s'}</span>`:'';
-    html+=`<div class="topic-card extension" onclick="selectTopic(${i})">
-      <div class="topic-icon">${t.icon}</div><div class="topic-info"><h3>${t.name}${errTag}</h3><p>${t.short}</p></div><span class="topic-badge badge-extension">Ampliació</span></div>`;
-  });
-
+  html+=head('❌','Errors guardats','Repassa els exercicis fallats i consulta de nou la resolució.','p6-errors');
+  html+=`<div class="topic-card p6-special-card ${totalErr?'p6-error-card':''}" onclick="showErrorSummary()"><div class="topic-icon">❌</div><div class="topic-info"><h3>Errors guardats</h3><p>${totalErr?`${totalErr} error${totalErr===1?'':'s'} · Repassa les explicacions`:'Encara no tens errors guardats'}</p></div><span class="topic-badge ${totalErr?'badge-exam':'badge-active'}">${totalErr?'Repassar':'Veure'}</span></div>`;
   grid.innerHTML=html;
-  const core=coreTopics();
-  const doneCore=core.filter(t=>ST.done.includes(t.id)).length;
+  const core=coreTopics(),doneCore=core.filter(t=>ST.done.includes(t.id)).length;
   document.getElementById('globalProgress').style.width=(core.length?doneCore/core.length*100:0)+'%';
 }
 
@@ -1983,7 +2121,7 @@ function selectTopic(i){
     volum:'teoria/mesura/volum-capacitat-ampliacio-2n-eso.html'
   };
   if(theoryPages[t.id]){
-    html+=`<a class="theory-page-link" href="${theoryPages[t.id]}">📖 Teoria i exemples</a>`;
+    html+=`<a class="theory-page-link" href="${theoryPages[t.id]}">📚 Teoria completa del bloc</a>`;
   }
   const errs=(ST.errors[t.id]||[]);
   if(errs.length>0){
@@ -1998,7 +2136,7 @@ function selectTopic(i){
         <div style="display:flex;gap:14px;flex-wrap:wrap;margin-top:6px;font-size:.8rem">
           <span>La teva resposta: <b style="color:var(--error)">${escHtml(e.answer||'—')}</b></span>
           <span>Correcta: <b style="color:var(--success)">${escHtml(e.correct||'—')}</b></span>
-        </div>`;
+        </div>${miReviewHtml(e)}`;
       if(Array.isArray(e.solution)&&e.solution.length){
         html+=`<button class="btn-secondary" onclick="toggleSavedSolution('${localSolId}',this)" style="margin-top:8px;padding:7px 10px">📘 Veure explicació</button>
           <div class="solution-box" id="${localSolId}" style="display:none">${e.solution.map((s,j)=>`<div class="step"><b>Pas ${j+1}:</b> <span class="highlight">${escHtml(s)}</span></div>`).join('')}</div>`;
@@ -2084,6 +2222,7 @@ function selectAnswer(idx,btn){
     renderStreakBar(needed);
     registerError(curEx,ans,'practice');
     fb.innerHTML=`<div class="feedback-box ko"><h4>❌ No és correcte</h4>La resposta correcta és: <b>${curEx.correct}</b><br>
+    ${miReviewHtml(curEx)}
     <button class="sol-btn" onclick="toggleSolution(this)">Veure solució pas a pas</button>
     <div class="solution-box" id="solBox">${curEx.solution.map((s,i)=>`<div class="step"><b>Pas ${i+1}:</b> <span class="highlight">${s}</span></div>`).join('')}</div></div>`;
   }
@@ -2163,18 +2302,18 @@ function showErrorSummary(){
           <div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><h3 style="margin:0">❌ ${escHtml(e.topicName||t.name)}</h3><span style="font-size:.72rem;color:var(--muted)">${escHtml(date)}</span></div>
           <div class="saved-error-question">${e.question||'Pregunta no disponible'}</div>
           <div class="saved-error-answer"><div>La teva resposta: <b style="color:var(--error)">${escHtml(e.answer||'—')}</b></div><div>Resposta correcta: <b style="color:var(--success)">${escHtml(e.correct||'—')}</b></div></div>
-          <div class="saved-error-meta">${modeTxt}${typeTxt}${diffTxt}</div>`;
+          <div class="saved-error-meta">${modeTxt}${typeTxt}${diffTxt}</div>${miReviewHtml(e)}`;
         if(Array.isArray(e.solution)&&e.solution.length){
           html+=`<button class="btn-secondary" onclick="toggleSavedSolution('${solId}',this)" style="margin-top:10px">📘 Veure explicació</button>
             <div class="solution-box" id="${solId}" style="display:none">${e.solution.map((s,i)=>`<div class="step"><b>Pas ${i+1}:</b> <span class="highlight">${s}</span></div>`).join('')}</div>`;
         }else{
           html+=`<div style="margin-top:10px;font-size:.8rem;color:var(--muted)">Aquest error és d'una versió anterior i no tenia l'explicació desada.</div>`;
         }
-        html+=`<button class="btn-danger" onclick="deleteSavedError('${t.id}','${escHtml(e.id)}')">🗑 Esborrar aquest error</button></div>`;
+        html+=`<button class="btn-danger" onclick="deleteSavedError('${t.id}','${escHtml(e.id)}')">🗑 Esborra aquest error</button></div>`;
       });
-      html+=`<button class="btn-secondary" style="margin-top:0;border-color:var(--error);color:var(--error)" onclick="clearTopicErrorsById('${t.id}')">🗑 Esborrar els errors de ${escHtml(t.name)}</button>`;
+      html+=`<button class="btn-secondary" style="margin-top:0;border-color:var(--error);color:var(--error)" onclick="clearTopicErrorsById('${t.id}')">🗑 Esborra els errors de ${escHtml(t.name)}</button>`;
     });
-    html+=`<button class="btn-danger" onclick="clearAllErrors()" style="margin-top:18px">🗑 Esborrar tots els errors</button>`;
+    html+=`<button class="btn-danger" onclick="clearAllErrors()" style="margin-top:18px">🗑 Esborra tots els errors</button>`;
   }
   html+=`<button class="btn-secondary" style="margin-top:8px" onclick="showHome()">← Tornar al menú</button>`;
   document.getElementById('appContent').innerHTML=html;
@@ -2272,7 +2411,7 @@ function checkOpenProblem(){
   OPENM.results.push({ok,hint:OPENM.hint,patternId:ex.patternId,family:ex.family});
   inp.disabled=true;document.getElementById('openCheck').disabled=true;
   const sol=`<div class="solution-box show" style="display:block">${ex.solution.map((s,i)=>`<div class="step"><b>Pas ${i+1}:</b> <span class="highlight">${s}</span></div>`).join('')}</div>`;
-  document.getElementById('openFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'Molt bé.':`Resposta correcta: <b>${escHtml(ex.correct)}</b>`}${sol}</div><button class="btn-primary" onclick="nextOpenProblem()">${OPENM.idx+1<OPENM.queue.length?'Següent problema →':'Veure resum'}</button>`;
+  document.getElementById('openFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'Molt bé.':`Resposta correcta: <b>${escHtml(ex.correct)}</b>${miReviewHtml(ex)}`}${sol}</div><button class="btn-primary" onclick="nextOpenProblem()">${OPENM.idx+1<OPENM.queue.length?'Següent problema →':'Veure resum'}</button>`;
 }
 function nextOpenProblem(){
   OPENM.idx++;
@@ -2282,31 +2421,39 @@ function nextOpenProblem(){
 }
 
 // ── EXAMEN ────────────────────────────────────
-function eligibleExamProblemPatternIndexes(){
-  const unlocked=new Set(coreTopicIndices().filter(i=>isTopicUnlocked(i)).map(i=>TOPICS[i].id));
-  return MEASURE_PROBLEM_PATTERNS.map((fn,i)=>({i,ex:fn()})).filter(x=>x.ex.examCompatible!==false&&unlocked.has(x.ex.primaryTopic));
+function eligibleExamProblemPatternIndexes(selectedIds){
+  const selected=new Set(Array.isArray(selectedIds)?selectedIds:miGetSelectedExamIds());
+  const allProblems=selected.has('problemes');
+  return MEASURE_PROBLEM_PATTERNS.map((fn,i)=>({i,ex:fn()})).filter(x=>x.ex.examCompatible!==false&&(allProblems||selected.has(x.ex.primaryTopic)));
 }
-function chooseExamProblems(maxCount){
-  const pool=shuffle(eligibleExamProblemPatternIndexes()),out=[],families=new Set();
+function chooseExamProblems(maxCount,selectedIds){
+  const selected=Array.isArray(selectedIds)?selectedIds:miGetSelectedExamIds();
+  const pool=shuffle(eligibleExamProblemPatternIndexes(selected)),out=[],families=new Set();
   for(const x of pool){if(out.length>=maxCount)break;if(families.has(x.ex.family))continue;out.push(decorateMeasureProblem(x.ex));families.add(x.ex.family);}
   for(const x of pool){if(out.length>=maxCount)break;if(out.some(e=>e.patternId===x.ex.patternId))continue;out.push(decorateMeasureProblem(x.ex));}
-  out.forEach(e=>e.examOpen=true);return out;
+  out.forEach(e=>{
+    e.examOpen=true;
+    const tid=e.topicId||e.primaryTopic;
+    if(selected.includes('problemes')&&!selected.includes(tid)){e.topicId='problemes';e.topicName='Problemes de context';}
+  });
+  return out;
 }
 function startExam(){
   ST.examQs=[];resetAllVariety();ST.examAnswers=[];
-  const avail=TOPICS.filter((t,i)=>t.course==='1r'&&t.exam1r!==false&&t.id!=='problemes'&&isTopicUnlocked(i));
+  const selected=miGetSelectedExamIds();
+  const avail=TOPICS.filter(t=>t.course==='1r'&&t.exam1r!==false&&selected.includes(t.id));
   if(!avail.length)return;
-  const problems=chooseExamProblems(3);
-  const pos=problems.length===3?[2,6,9]:problems.length===2?[3,8]:problems.length===1?[5]:[];
-  let pidx=0,topicBag=[];
-  function nextTopic(){if(!topicBag.length)topicBag=shuffle(avail.slice());return topicBag.pop();}
-  for(let i=0;i<10;i++){
-    if(pos.includes(i)){ST.examQs.push(problems[pidx++]);}
-    else{const t=nextTopic();ST.examQs.push(decorateExercise(t,t.gen()));}
+  const problems=chooseExamProblems(6,selected);
+  const problemSlots=new Set([2,5,8,11,14,17]);let pidx=0,topicCursor=0,used=new Set(),tries=0;
+  function nextTopic(){const t=avail[topicCursor%avail.length];topicCursor++;return t;}
+  for(let i=0;i<20;i++){
+    if(problemSlots.has(i)&&pidx<problems.length){ST.examQs.push(problems[pidx++]);continue;}
+    let added=false;
+    while(!added&&tries<7000){tries++;const t=nextTopic();let ex;try{ex=decorateExercise(t,t.gen());}catch(e){continue;}if(!ex)continue;
+      const key=t.id+'|'+String(ex.question||'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();if(used.has(key))continue;used.add(key);if(t.id==='problemes'){ex.topicId='problemes';ex.topicName=t.name;}ST.examQs.push(ex);added=true;}
   }
-  ST.examIdx=0;ST.examScore=0;
-  document.getElementById('navBack').style.display='block';
-  document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
+  while(ST.examQs.length<20&&pidx<problems.length)ST.examQs.push(problems[pidx++]);
+  ST.examIdx=0;ST.examScore=0;document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
   showExamQ();showScreen('screenExam');
 }
 function showExamQ(){
@@ -2352,7 +2499,7 @@ function nextExamQ(){
   document.getElementById('examOptions').innerHTML='';document.getElementById('examFeedback').innerHTML='';document.getElementById('btnNextExam').style.display='none';document.getElementById('examResult').style.display='block';
   const wrongOnes=(ST.examAnswers||[]).filter(a=>!a.ok);let detailHTML='';
   if(wrongOnes.length){detailHTML=`<div class="error-panel"><h4>❌ Preguntes fallades</h4>`;wrongOnes.forEach(a=>{detailHTML+=`<div class="error-row" style="flex-direction:column;align-items:flex-start"><span style="color:var(--muted);font-size:.8rem">${a.problem?'✍️ Problema · ':''}${escHtml(a.topicName)}</span><span>${String(a.question).replace(/<[^>]*>/g,'')}</span><span style="color:var(--success)">R correcta: ${escHtml(a.correct)}</span></div>`;});detailHTML+='</div>';}
-  document.getElementById('examResult').innerHTML=`<div class="exam-score">${ST.examScore}/${ST.examQs.length}<span>${pct}% · Nota orientativa: ${nota}</span></div><p style="text-align:center;color:var(--muted);margin-bottom:18px">${pct>=90?'Impressionant! Estàs preparat/da per l\'examen.':pct>=70?'Bé! Repassa els exercicis que has fallat.':pct>=50?'Anem bé, però cal practicar més. Torna a repassar tema per tema.':'Continua practicant tema per tema i torna-ho a provar.'}</p>${detailHTML}<button class="btn-primary" onclick="showHome()">Tornar al menú</button><button class="btn-secondary" onclick="startExam()">Repetir examen</button>`;
+  document.getElementById('examResult').innerHTML=`<div class="exam-score">${ST.examScore}/${ST.examQs.length}<span>${pct}% · Nota orientativa: ${nota}</span></div><p style="text-align:center;color:var(--muted);margin-bottom:18px">${pct>=90?'Impressionant! Estàs preparat/da per l\'examen.':pct>=70?'Bé! Repassa els exercicis que has fallat.':pct>=50?'Anem bé, però cal practicar més. Torna a repassar tema per tema.':'Continua practicant tema per tema i torna-ho a provar.'}</p>${detailHTML}<button class="btn-primary" onclick="showHome()">Tornar al menú</button><button class="btn-secondary" onclick="miOpenExamConfig()">Repetir examen</button>`;
 }
 
 // ── APLICACIONS REALS ────────────────────────────────────────────────────
@@ -2877,14 +3024,12 @@ function renderUnlockPanel(){
 
 function toggleTopicUnlock(i){
   const t=TOPICS[i];
-  const isUnlocked=isTopicUnlocked(i);
-  if(isUnlocked){
-    // Bloquejar només aquest tema (no afecta els altres)
+  const coreIdx=coreTopicIndices();
+  if(!t||t.course!=='1r'||i===coreIdx[0])return;
+  if(isTopicUnlocked(i)){
     ST.unlockedIds=ST.unlockedIds.filter(id=>id!==t.id);
-    ST.done=ST.done.filter(id=>id!==t.id);
-  } else {
-    // Desbloquejar només el tema seleccionat, sense afectar els anteriors o posteriors
-    if(!ST.unlockedIds.includes(t.id)) ST.unlockedIds.push(t.id);
+  }else if(!ST.unlockedIds.includes(t.id)){
+    ST.unlockedIds.push(t.id);
   }
   saveST();
   renderUnlockPanel();
@@ -2903,7 +3048,7 @@ function resetProgress(){
   const btn=document.getElementById('btnResetProgress');
   if(!resetArmed){
     resetArmed=true;
-    btn.textContent='⚠ Prem per confirmar';
+    btn.textContent='⚠ Prem de nou per confirmar';
     btn.style.borderColor='var(--error)';btn.style.color='var(--error)';
     clearTimeout(resetArmTimer);
     resetArmTimer=setTimeout(()=>disarmReset(),3000);
@@ -2981,6 +3126,59 @@ if (!isLocal) {
 
 }
 
+
+/* ── P2 · SELECTOR INDEPENDENT DE TEMES D'EXAMEN ───────── */
+var MI_EXAM_STORAGE='mi_exam_1eso_mesura_v1';
+var miExamSelectedTopics=[];
+function miExamCoreTopics(){return TOPICS.filter(function(t){return t.course==='1r'&&t.exam1r!==false;});}
+function miExamDoneIds(){try{return (ST.done||[]).slice();}catch(e){return [];}}
+function miLoadExamSelection(){
+  var core=miExamCoreTopics(),valid=core.map(function(t){return t.id;}),raw=null;
+  try{raw=localStorage.getItem(MI_EXAM_STORAGE);}catch(e){}
+  if(raw===null){miExamSelectedTopics=valid.slice();return;}
+  try{var a=JSON.parse(raw);miExamSelectedTopics=Array.isArray(a)?a.filter(function(id){return valid.indexOf(id)>=0;}):valid.slice();}
+  catch(e){miExamSelectedTopics=valid.slice();}
+}
+function miSaveExamSelection(){try{localStorage.setItem(MI_EXAM_STORAGE,JSON.stringify(miExamSelectedTopics));}catch(e){}}
+function miGetSelectedExamIds(){return miExamSelectedTopics.slice();}
+function miEsc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function miOpenExamConfig(){
+  miLoadExamSelection();miRenderExamConfig();
+  var ov=document.getElementById('miExamOverlay');if(ov){ov.classList.add('open');ov.setAttribute('aria-hidden','false');}
+}
+function miCloseExamConfig(){miSaveExamSelection();var ov=document.getElementById('miExamOverlay');if(ov){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}}
+function miRenderExamConfig(){
+  var core=miExamCoreTopics(),done=miExamDoneIds(),box=document.getElementById('miExamTopicList');if(!box)return;
+  box.innerHTML=core.map(function(t){var checked=miExamSelectedTopics.indexOf(t.id)>=0,isDone=done.indexOf(t.id)>=0;return '<label class="mi-exam-row"><input type="checkbox" '+(checked?'checked':'')+' onchange="miToggleExamTopic(\''+miEsc(t.id)+'\',this.checked)"><span>'+miEsc(t.name)+(isDone?'<small class="mi-exam-done">✓ Bloc completat</small>':'<small>Disponible per a l’examen</small>')+'</span></label>';}).join('');
+  miUpdateExamSummary();
+}
+function miToggleExamTopic(id,on){if(on){if(miExamSelectedTopics.indexOf(id)<0)miExamSelectedTopics.push(id);}else miExamSelectedTopics=miExamSelectedTopics.filter(function(x){return x!==id;});miSaveExamSelection();miUpdateExamSummary();}
+function miExamSelectAll(){miExamSelectedTopics=miExamCoreTopics().map(function(t){return t.id;});miSaveExamSelection();miRenderExamConfig();}
+function miExamSelectDone(){var valid=miExamCoreTopics().map(function(t){return t.id;}),done=miExamDoneIds();miExamSelectedTopics=done.filter(function(id){return valid.indexOf(id)>=0;});miSaveExamSelection();miRenderExamConfig();}
+function miExamClearAll(){miExamSelectedTopics=[];miSaveExamSelection();miRenderExamConfig();}
+function miUpdateExamSummary(){var n=miExamSelectedTopics.length,s=document.getElementById('miExamSummary'),b=document.getElementById('miExamStartBtn');if(s)s.textContent=n+' bloc'+(n===1?'':'s')+' seleccionat'+(n===1?'':'s')+' · 20 preguntes';if(b){b.disabled=n===0;b.textContent=n?'Començar examen →':'Selecciona almenys un bloc';}}
+function miStartConfiguredExam(){if(!miExamSelectedTopics.length)return;miSaveExamSelection();miCloseExamConfig();startExam();}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamConfig();});
 </script>
+
+<div class="mi-exam-overlay" id="miExamOverlay" onclick="miCloseExamConfig()" aria-hidden="true">
+  <div class="mi-exam-modal" role="dialog" aria-modal="true" aria-labelledby="miExamTitle" onclick="event.stopPropagation()">
+    <div class="mi-exam-head">
+      <div><h2 id="miExamTitle">📝 Prepara el teu examen</h2><p>Selecciona exactament els blocs que vols repassar. Aquesta selecció és independent dels blocs desbloquejats per practicar.</p></div>
+      <button class="mi-exam-close" onclick="miCloseExamConfig()" aria-label="Tancar">✕</button>
+    </div>
+    <div class="mi-exam-tools">
+      <button class="mi-exam-tool" onclick="miExamSelectAll()">Tots els blocs</button>
+      <button class="mi-exam-tool" onclick="miExamSelectDone()">Només completats</button>
+      <button class="mi-exam-tool" onclick="miExamClearAll()">Desmarcar tots</button>
+    </div>
+    <div class="mi-exam-list" id="miExamTopicList"></div>
+    <div class="mi-exam-foot">
+      <div class="mi-exam-summary" id="miExamSummary"></div>
+      <button class="mi-exam-start" id="miExamStartBtn" onclick="miStartConfiguredExam()">Començar examen →</button>
+      <div class="mi-exam-note">L’examen té 20 preguntes, repartides tan equilibradament com permeten els blocs seleccionats. Les ampliacions de preparació de 2n no hi entren.</div>
+    </div>
+  </div>
+</div>
 </body>
 </html>
