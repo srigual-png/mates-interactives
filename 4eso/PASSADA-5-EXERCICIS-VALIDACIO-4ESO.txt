@@ -1,0 +1,146 @@
+PASSADA 5 · EXERCICIS, DISTRACTORS I VALIDACIÓ · 4t ESO
+==========================================================
+
+Objectiu
+--------
+Auditar i homogeneïtzar la qualitat matemàtica i tècnica dels exercicis dels cinc sentits de 4t ESO, incloent Matemàtiques A/B i les ampliacions de Batxillerat:
+- robustesa dels generadors;
+- exactament 4 opcions úniques;
+- resposta correcta present;
+- distractors matemàticament no equivalents;
+- respostes obertes equivalents quan la forma no és l'objectiu;
+- unitats, decimals i percentatges;
+- absència de NaN / undefined / Infinity;
+- gràfics d'enunciat que no revelin la resposta.
+
+RET0CS APLICATS
+===============
+
+1. SENTIT ALGEBRAIC
+-------------------
+- S'ha reforçat la validació de formes algebraicament equivalents quan la representació concreta no és l'objectiu.
+- Els sistemes conserven les variables: y=3,x=2 és equivalent a x=2,y=3, però x=3,y=2 no ho és.
+- Les dues arrels d'una equació s'accepten independentment de l'ordre i en formes naturals equivalents: x=2 o x=3, x=3 i x=2, x=2;x=3, {2,3}, 3;2, etc.
+- La flexibilitat NO s'aplica quan l'enunciat exigeix una forma concreta, per exemple factoritzar, donar un interval, una inequació o el discriminant.
+- S'ha blindat un cas aleatori en càlcul de polinomis on diversos errors típics podien coincidir numèricament i deixar menys de tres distractors diferents.
+
+2. SENTIT NUMÈRIC
+-----------------
+- S'ha incorporat equivalència racional segura quan la representació no és part de la pregunta.
+- Exemples acceptables en context genèric: 1/2 = 0,5.
+- Si l'enunciat exigeix percentatge, fracció, decimal, notació científica o una altra forma concreta, es manté la forma exigida.
+
+3. SENTIT DE LA MESURA
+----------------------
+- Corregida una tolerància numèrica massa ampla que podia considerar equivalents valors diferents com 0,22 i 0,225.
+- Corregida també la comparació de valors molt petits, per exemple 0,005 i 0,01.
+- Millorada la lectura de coma/punt decimal i separadors de milers en format català.
+- Afegida equivalència coherent d'unitats per magnitud: 200 cm = 2 m; 4 m² = 40.000 cm²; 2 L = 2.000 mL.
+- Expressions com 9√2 cm ja no es redueixen erròniament a 9 cm en la lectura numèrica.
+- Corregida una ambigüitat real d'opcions entre formes com 0,005 i 0.005, que representen el mateix valor.
+
+4. SENTIT ESTOCÀSTIC
+--------------------
+- Afegida equivalència racional segura en probabilitats: 1/2 = 0,5 = 50% quan la forma no és part de l'objectiu.
+- Si l'enunciat demana explícitament percentatge, decimal o fracció, es conserva aquesta exigència formal.
+
+5. SENTIT ESPACIAL
+------------------
+- No ha necessitat modificacions de codi en aquesta passada.
+- S'ha fet una auditoria específica dels SVG dels enunciats per comprovar que no revelin P′, el vector resultant, components, interseccions o altres dades que són precisament la resposta demanada.
+
+COMPROVACIONS PENDENTS RESOLTES
+================================
+
+A) DUES ARRELS EN ORDRE INVERS
+-------------------------------
+S'ha confirmat que era una limitació real del validador i s'ha corregit.
+
+Proves superades per arrels 2 i 3:
+- x = 2 o x = 3
+- x = 3 o x = 2
+- x = 2 i x = 3
+- x = 3 i x = 2
+- x=2;x=3
+- x=3;x=2
+- {2,3}
+- {3,2}
+- 2;3
+- 3;2
+
+Control de seguretat:
+- en sistemes, x=2,y=3 accepta y=3,x=2;
+- x=3,y=2 continua sent incorrecte.
+
+B) AUDITORIA SVG · SENTIT ESPACIAL
+----------------------------------
+- 24.000 exercicis espacials generats.
+- 4.700 enunciats amb SVG analitzats.
+- 0 casos on el gràfic reveli la resposta demanada.
+
+S'han comprovat específicament components de vectors, operacions vectorials, homotècies, punts d'intersecció, angles, etiquetes P′, resultants i coordenades solució.
+
+VALIDACIÓ FINAL
+===============
+
+A) Generació + estructura + semàntica
+-------------------------------------
+- Algebraic:   24.000 / 24.000 OK
+- Numèric:     24.000 / 24.000 OK
+- Mesura:      36.000 / 36.000 OK
+- Espacial:    24.000 / 24.000 OK
+- Estocàstic:  24.000 / 24.000 OK
+
+TOTAL: 132.000 / 132.000 exercicis OK.
+
+Comprovacions:
+- 4 opcions exactes i úniques;
+- resposta correcta present;
+- una sola opció matemàticament acceptable;
+- pregunta, pista i solució presents;
+- absència de NaN, undefined i Infinity;
+- validador de resposta oberta compatible amb la resposta correcta.
+
+B) Proves dirigides
+-------------------
+Superades proves específiques de:
+- ordre invers i formats alternatius de dues arrels;
+- sistemes amb variables etiquetades;
+- equivalència algebraica amb protecció de formes exigides;
+- fracció ↔ decimal;
+- probabilitat fracció ↔ decimal ↔ percentatge;
+- unitats equivalents;
+- decimals petits i separadors de milers;
+- expressions amb radicals;
+- opcions numèricament equivalents amb coma/punt.
+
+C) JavaScript
+-------------
+- 5/5 sentit-*.html: sintaxi JavaScript OK.
+
+INTEGRITAT DE PASSADES ANTERIORS
+================================
+La P5 definitiva s'ha reconstruït directament sobre el ZIP P4 correcte.
+
+Respecte de 4eso-P4-errors-correccions:
+Fitxers modificats:
+- sentit-algebraic.html
+- sentit-numeric.html
+- sentit-mesura.html
+- sentit-estocastic.html
+
+Sense canvis:
+- sentit-espacial.html: byte a byte igual.
+- index.html: intacte.
+- 65/65 fitxers de teoria: byte a byte iguals.
+- resta de fitxers previs: intactes.
+
+Comprovació de capes anteriors:
+- script complet del selector/configuració Mode Examen P2: intacte als 5 sentits.
+- renderUnlockPanel / unlockAllTopics / resetProgress de P3: intactes.
+- miReviewHtml / registerError / clearSavedErrors de P4: intactes.
+
+ESTAT
+=====
+PASSADA 5 · 4t ESO: COMPLETADA I VALIDADA.
+PASSADA 5 · 1r–4t ESO: TANCADA.

@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+
+<html lang="ca">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
+
+<meta
+    name="google-site-verification"
+    content="O_If_iPpolcE8n372AXMIlp0nhoFxJwzdyUJ_RpdF5U">
+
+<title>Matemàtiques de 4t d'ESO | Mates Interactives</title>
+
+<meta
+    name="description"
+    content="Practica Matemàtiques A i Matemàtiques B de 4t d'ESO amb exercicis interactius gratuïts organitzats segons els cinc sentits matemàtics del currículum de Catalunya.">
+
+<meta
+    name="author"
+    content="Salvador Rigual Valls">
+
+<meta
+    name="robots"
+    content="index, follow">
+
+<meta
+    name="theme-color"
+    content="#2563eb">
+
+<link
+    rel="canonical"
+    href="https://srigual-png.github.io/mates-interactives/4eso/">
+
+
+<!-- Open Graph / xarxes socials -->
+<meta property="og:title" content="Matemàtiques de 4t d'ESO | Mates Interactives">
+<meta property="og:description" content="Practica Matemàtiques A o Matemàtiques B de 4t d'ESO amb teoria, exercicis interactius, repàs d'errors i mode examen.">
+<meta property="og:image" content="https://srigual-png.github.io/mates-interactives/assets/images/og-image.png">
+<meta property="og:url" content="https://srigual-png.github.io/mates-interactives/4eso/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ca_ES">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Favicons -->
+
+<link
+    rel="icon"
+    type="image/png"
+    sizes="32x32"
+    href="../assets/images/favicon-32x32.png">
+
+<link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="../assets/images/favicon-16x16.png">
+
+<link
+    rel="apple-touch-icon"
+    sizes="180x180"
+    href="../assets/images/apple-touch-icon.png">
+
+<!-- CSS -->
+
+<link
+    rel="stylesheet"
+    href="../assets/css/variables.css">
+
+<link
+    rel="stylesheet"
+    href="../assets/css/base.css">
+
+<link
+    rel="stylesheet"
+    href="../assets/css/layout.css">
+
+<link
+    rel="stylesheet"
+    href="../assets/css/components.css">
+
+<link
+    rel="stylesheet"
+    href="../assets/css/1eso.css">
+
+
+
+<style>
+/* =====================================================
+   4t ESO · Selector Matemàtiques A / B
+   ===================================================== */
+.option-section{
+    padding: 26px 0 10px;
+}
+.option-heading{
+    text-align:center;
+    max-width:820px;
+    margin:0 auto 22px;
+}
+.option-heading h2{
+    margin:0 0 8px;
+    font-size:clamp(1.55rem, 3vw, 2rem);
+}
+.option-heading p{
+    margin:0;
+    color:#64748b;
+    line-height:1.65;
+}
+.option-grid{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:18px;
+    max-width:900px;
+    margin:0 auto;
+}
+.option-card{
+    appearance:none;
+    width:100%;
+    border:2px solid #dbe4f0;
+    border-radius:20px;
+    background:#fff;
+    padding:24px;
+    text-align:left;
+    cursor:pointer;
+    box-shadow:0 8px 24px rgba(15,23,42,.06);
+    transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease,background .18s ease;
+    font:inherit;
+    color:inherit;
+}
+.option-card:hover{
+    transform:translateY(-2px);
+    border-color:#93b4f5;
+    box-shadow:0 12px 30px rgba(37,99,235,.10);
+}
+.option-card:focus-visible{
+    outline:3px solid rgba(37,99,235,.25);
+    outline-offset:3px;
+}
+.option-card.is-selected{
+    border-color:#2563eb;
+    background:#f5f9ff;
+    box-shadow:0 12px 30px rgba(37,99,235,.14);
+}
+.option-card__top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:12px;
+}
+.option-card__title{
+    margin:0;
+    font-size:1.35rem;
+    color:#172033;
+}
+.option-card__badge{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    min-width:42px;
+    height:42px;
+    padding:0 13px;
+    border-radius:999px;
+    background:#eaf2ff;
+    color:#1d4ed8;
+    font-weight:800;
+    font-size:1rem;
+}
+.option-card.is-selected .option-card__badge{
+    background:#2563eb;
+    color:#fff;
+}
+.option-card__text{
+    margin:0 0 12px;
+    color:#475569;
+    line-height:1.6;
+}
+.option-card__detail{
+    margin:0;
+    color:#64748b;
+    line-height:1.55;
+    font-size:.94rem;
+}
+.option-card__status{
+    display:block;
+    margin-top:14px;
+    min-height:22px;
+    color:#1d4ed8;
+    font-weight:750;
+    font-size:.92rem;
+}
+.option-note{
+    max-width:900px;
+    margin:16px auto 0;
+    padding:14px 16px;
+    border-radius:14px;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    color:#475569;
+    line-height:1.55;
+    text-align:center;
+    font-size:.94rem;
+}
+.option-current{
+    max-width:900px;
+    margin:18px auto 0;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    color:#334155;
+    font-size:.96rem;
+}
+.option-current.is-visible{display:flex;}
+.option-current strong{color:#1d4ed8;}
+.option-change{
+    border:0;
+    background:transparent;
+    color:#2563eb;
+    text-decoration:underline;
+    cursor:pointer;
+    font:inherit;
+    font-weight:700;
+    padding:2px 4px;
+}
+.course-map{
+    transition:opacity .2s ease;
+}
+.course-map.is-locked{
+    opacity:.43;
+}
+.course-map.is-locked .course-node{
+    pointer-events:none;
+    cursor:default;
+}
+.map-choice-message{
+    max-width:720px;
+    margin:0 auto 20px;
+    padding:12px 16px;
+    text-align:center;
+    border-radius:14px;
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    color:#9a3412;
+    font-weight:700;
+}
+.map-choice-message[hidden]{display:none;}
+.course-center__choice{
+    display:block;
+    margin-top:5px;
+    font-size:.82rem;
+    font-weight:800;
+    color:#2563eb;
+}
+@media(max-width:720px){
+    .option-grid{grid-template-columns:1fr;}
+    .option-card{padding:20px;}
+    .option-section{padding-top:18px;}
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+<div class="container site-header__inner">
+
+    <a
+        class="site-header__brand"
+        href="../index.html"
+        aria-label="Torna a la pàgina principal">
+
+        <img
+            class="site-header__logo"
+            src="../assets/images/logo-principal.webp"
+            alt="Logotip de Mates Interactives"
+            width="64"
+            height="64">
+
+        <div class="site-header__branding">
+
+            <span class="site-header__title">
+                Mates Interactives
+            </span>
+
+            <span class="site-header__subtitle">
+                Plataforma educativa gratuïta
+            </span>
+
+        </div>
+
+    </a>
+
+</div>
+
+</header>
+
+<main>
+
+<!-- ================================================= -->
+<!-- HERO DEL CURS -->
+<!-- ================================================= -->
+
+<section class="course-hero">
+
+    <div class="container">
+
+        <div class="course-hero__content">
+
+            <h1>
+                Matemàtiques de 4t d'ESO
+            </h1>
+
+            <p>
+                A 4t d'ESO pots cursar <strong>Matemàtiques A</strong> o <strong>Matemàtiques B</strong>.
+                Tria la teva opció i treballa els cinc sentits matemàtics amb teoria, pràctica interactiva, repàs d'errors i mode examen.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- SELECTOR MATEMÀTIQUES A / B -->
+<!-- ================================================= -->
+
+<section class="option-section" aria-labelledby="option-title">
+
+    <div class="container">
+
+        <div class="option-heading">
+            <h2 id="option-title">Quines matemàtiques curses?</h2>
+            <p>
+                Selecciona la teva opció. La recordarem mentre navegues per 4t d'ESO
+                i et mostrarem els continguts que et corresponen.
+            </p>
+        </div>
+
+        <div class="option-grid" role="group" aria-label="Opció de matemàtiques de 4t d'ESO">
+
+            <button
+                type="button"
+                class="option-card"
+                id="optionA"
+                data-option="A"
+                aria-pressed="false">
+
+                <div class="option-card__top">
+                    <h3 class="option-card__title">Matemàtiques A</h3>
+                    <span class="option-card__badge" aria-hidden="true">A</span>
+                </div>
+
+                <p class="option-card__text">
+                    Prioritza la resolució de problemes i l'ús de les matemàtiques
+                    en situacions quotidianes i aplicades.
+                </p>
+
+                <p class="option-card__detail">
+                    Comparteix les competències i la major part dels sabers amb Matemàtiques B.
+                </p>
+
+                <span class="option-card__status" aria-live="polite"></span>
+
+            </button>
+
+            <button
+                type="button"
+                class="option-card"
+                id="optionB"
+                data-option="B"
+                aria-pressed="false">
+
+                <div class="option-card__top">
+                    <h3 class="option-card__title">Matemàtiques B</h3>
+                    <span class="option-card__badge" aria-hidden="true">B</span>
+                </div>
+
+                <p class="option-card__text">
+                    Aprofundeix més en procediments algebraics, geomètrics,
+                    analítics i estadístics, també en contextos científics.
+                </p>
+
+                <p class="option-card__detail">
+                    Inclou, entre altres aprofundiments, trigonometria i continguts específics de geometria analítica.
+                </p>
+
+                <span class="option-card__status" aria-live="polite"></span>
+
+            </button>
+
+        </div>
+
+        <p class="option-note">
+            <strong>Important:</strong> A i B no són una versió “fàcil” i una de “difícil”.
+            Comparteixen un nucli curricular molt ampli, però tenen un enfocament i un grau d'aprofundiment diferents.
+        </p>
+
+        <div class="option-current" id="optionCurrent" aria-live="polite">
+            Opció seleccionada: <strong id="optionCurrentText"></strong>
+            <button type="button" class="option-change" id="optionChange">Canvia-la</button>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- MAPA DEL CURS -->
+<!-- ================================================= -->
+
+<section
+    class="course-map is-locked"
+    id="courseMap"
+    aria-labelledby="course-map-title">
+
+    <div class="container">
+
+        <div class="map-choice-message" id="mapChoiceMessage">
+            Tria Matemàtiques A o Matemàtiques B per accedir als cinc sentits.
+        </div>
+
+        <h2
+            id="course-map-title"
+            class="visually-hidden">
+
+            Els cinc sentits matemàtics
+
+        </h2>
+
+        <div class="course-map__wrapper">
+
+            <!-- ====================================== -->
+            <!-- SENTIT NUMÈRIC -->
+            <!-- ====================================== -->
+
+            <a
+                href="sentit-numeric.html"
+                data-sense-link
+                class="course-node course-node--numeric">
+
+                <img
+                    src="../assets/images/sentits/sentit-numeric.webp"
+                    alt="Sentit numèric"
+                    loading="lazy"
+                    width="240"
+                    height="240">
+
+                <span>
+                    Sentit numèric
+                </span>
+
+            </a>
+
+
+            <!-- ====================================== -->
+            <!-- SENTIT DE LA MESURA -->
+            <!-- ====================================== -->
+
+            <a
+                href="sentit-mesura.html"
+                data-sense-link
+                class="course-node course-node--mesura">
+
+                <img
+                    src="../assets/images/sentits/sentit-mesura.webp"
+                    alt="Sentit de la mesura"
+                    loading="lazy"
+                    width="240"
+                    height="240">
+
+                <span>
+                    Sentit de la mesura
+                </span>
+
+            </a>
+
+
+            <!-- ====================================== -->
+            <!-- CENTRE DEL MAPA -->
+            <!-- ====================================== -->
+
+            <div class="course-center">
+
+                <span class="course-center__title">
+                    4t d'ESO
+                    <span class="course-center__choice" id="courseCenterChoice">Tria A o B</span>
+                </span>
+
+            </div>
+
+
+            <!-- ====================================== -->
+            <!-- SENTIT ESPACIAL -->
+            <!-- ====================================== -->
+
+            <a
+                href="sentit-espacial.html"
+                data-sense-link
+                class="course-node course-node--espacial">
+
+                <img
+                    src="../assets/images/sentits/sentit-espacial.webp"
+                    alt="Sentit espacial"
+                    loading="lazy"
+                    width="240"
+                    height="240">
+
+                <span>
+                    Sentit espacial
+                </span>
+
+            </a>
+
+
+            <!-- ====================================== -->
+            <!-- SENTIT ALGEBRAIC -->
+            <!-- ====================================== -->
+
+            <a
+                href="sentit-algebraic.html"
+                data-sense-link
+                class="course-node course-node--algebraic">
+
+                <img
+                    src="../assets/images/sentits/sentit-algebraic.webp"
+                    alt="Sentit algebraic"
+                    loading="lazy"
+                    width="240"
+                    height="240">
+
+                <span>
+                    Sentit algebraic
+                </span>
+
+            </a>
+
+
+            <!-- ====================================== -->
+            <!-- SENTIT ESTOCÀSTIC -->
+            <!-- ====================================== -->
+
+            <a
+                href="sentit-estocastic.html"
+                data-sense-link
+                class="course-node course-node--estocastic">
+
+                <img
+                    src="../assets/images/sentits/sentit-estocastic.webp"
+                    alt="Sentit estocàstic"
+                    loading="lazy"
+                    width="240"
+                    height="240">
+
+                <span>
+                    Sentit estocàstic
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================================================= -->
+<!-- GUIA DEL CURS -->
+<!-- ================================================= -->
+
+<section class="course-guide">
+
+    <div class="container">
+
+        <h2>
+            Comença en només 3 passos
+        </h2>
+
+        <div class="guide-grid">
+
+            <article class="guide-step">
+
+                <div
+                    class="guide-step__number"
+                    aria-hidden="true">
+
+                    1
+
+                </div>
+
+                <h3>
+                    Tria la teva opció
+                </h3>
+
+                <p>
+                    Indica si curses Matemàtiques A o B.
+                    La selecció es mantindrà mentre navegues.
+                </p>
+
+            </article>
+
+
+            <article class="guide-step">
+
+                <div
+                    class="guide-step__number"
+                    aria-hidden="true">
+
+                    2
+
+                </div>
+
+                <h3>
+                    Escull un sentit
+                </h3>
+
+                <p>
+                    Entra al sentit numèric, de la mesura, espacial,
+                    algebraic o estocàstic segons què vulguis treballar.
+                </p>
+
+            </article>
+
+
+            <article class="guide-step">
+
+                <div
+                    class="guide-step__number"
+                    aria-hidden="true">
+
+                    3
+
+                </div>
+
+                <h3>
+                    Practica i consolida
+                </h3>
+
+                <p>
+                    Consulta la teoria, resol exercicis, revisa els errors
+                    i posa't a prova amb el mode examen.
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+<!-- ===================================================== -->
+
+<!-- FOOTER -->
+
+<!-- ===================================================== -->
+
+<footer class="site-footer">
+
+<div class="container">
+
+    <p>
+        © 2026 Mates Interactives · Creat per Salvador Rigual
+    </p>
+
+    <p>
+        100 % gratuït · Sense anuncis · Sense cookies · Fet amb ❤️ a Catalunya
+    </p>
+
+</div>
+
+</footer>
+
+
+<script>
+/* =====================================================
+   4t ESO · Persistència Matemàtiques A / B
+   ===================================================== */
+(function () {
+    const STORAGE_KEY = 'mi_4eso_opcio';
+    const validOptions = ['A', 'B'];
+
+    const cards = document.querySelectorAll('.option-card[data-option]');
+    const courseMap = document.getElementById('courseMap');
+    const mapMessage = document.getElementById('mapChoiceMessage');
+    const centerChoice = document.getElementById('courseCenterChoice');
+    const currentBox = document.getElementById('optionCurrent');
+    const currentText = document.getElementById('optionCurrentText');
+    const changeButton = document.getElementById('optionChange');
+    const senseLinks = document.querySelectorAll('[data-sense-link]');
+
+    function readOptionFromUrl() {
+        const value = new URLSearchParams(window.location.search).get('opcio');
+        return validOptions.includes(value) ? value : null;
+    }
+
+    function readSavedOption() {
+        try {
+            const value = localStorage.getItem(STORAGE_KEY);
+            return validOptions.includes(value) ? value : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function saveOption(option) {
+        try {
+            localStorage.setItem(STORAGE_KEY, option);
+        } catch (e) {
+            /* La navegació continuarà funcionant amb ?opcio= */
+        }
+    }
+
+    function clearOption() {
+        try {
+            localStorage.removeItem(STORAGE_KEY);
+        } catch (e) {}
+    }
+
+    function updateSenseLinks(option) {
+        senseLinks.forEach(link => {
+            const url = new URL(link.getAttribute('href'), window.location.href);
+            url.searchParams.set('opcio', option);
+            link.setAttribute('href', url.pathname.split('/').pop() + url.search);
+        });
+    }
+
+    function resetSenseLinks() {
+        senseLinks.forEach(link => {
+            const href = link.getAttribute('href');
+            link.setAttribute('href', href.split('?')[0]);
+        });
+    }
+
+    function setOption(option, persist = true) {
+        if (!validOptions.includes(option)) return;
+
+        cards.forEach(card => {
+            const selected = card.dataset.option === option;
+            card.classList.toggle('is-selected', selected);
+            card.setAttribute('aria-pressed', selected ? 'true' : 'false');
+            const status = card.querySelector('.option-card__status');
+            if (status) status.textContent = selected ? '✓ Opció seleccionada' : '';
+        });
+
+        if (persist) saveOption(option);
+        updateSenseLinks(option);
+
+        courseMap.classList.remove('is-locked');
+        mapMessage.hidden = true;
+        centerChoice.textContent = 'Matemàtiques ' + option;
+        currentText.textContent = 'Matemàtiques ' + option;
+        currentBox.classList.add('is-visible');
+    }
+
+    function unsetOption() {
+        clearOption();
+        resetSenseLinks();
+
+        cards.forEach(card => {
+            card.classList.remove('is-selected');
+            card.setAttribute('aria-pressed', 'false');
+            const status = card.querySelector('.option-card__status');
+            if (status) status.textContent = '';
+        });
+
+        courseMap.classList.add('is-locked');
+        mapMessage.hidden = false;
+        centerChoice.textContent = 'Tria A o B';
+        currentBox.classList.remove('is-visible');
+
+        document.getElementById('option-title').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    cards.forEach(card => {
+        card.addEventListener('click', () => setOption(card.dataset.option));
+    });
+
+    changeButton.addEventListener('click', unsetOption);
+
+    const initialOption = readOptionFromUrl() || readSavedOption();
+    if (initialOption) setOption(initialOption, true);
+})();
+</script>
+
+<!-- ===================================================== -->
+<!-- GOATCOUNTER -->
+<!-- Només quan la web està publicada -->
+<!-- ===================================================== -->
+<script>
+
+const isLocal =
+    location.protocol === "file:" ||
+    ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
+
+if (!isLocal) {
+
+    const s = document.createElement("script");
+
+    s.async = true;
+
+    s.dataset.goatcounter =
+        "https://srigual.goatcounter.com/count";
+
+    s.src = "https://gc.zgo.at/count.js";
+
+    document.body.appendChild(s);
+
+}
+
+</script>
+
+</body>
+
+</html>

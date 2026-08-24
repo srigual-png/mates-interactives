@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sentit Estocàstic · Matemàtiques 4t d'ESO | Mates Interactives</title>
+<meta name="description" content="Practica el sentit estocàstic de 4t d'ESO amb dades bivariants, comparació de distribucions, mostreig, núvols de punts i regressió lineal, amb pistes i correcció pas a pas.">
+<meta name="author" content="Salvador Rigual Valls">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://srigual-png.github.io/mates-interactives/4eso/sentit-estocastic.html">
+<link rel="icon" href="../assets/images/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
+<style>
+:root{--bg:#fffaf0;--card:#fff;--primary:#c78a00;--primary-dark:#8a5d00;--primary-soft:#fff3d6;--success:#34c97e;--error:#e05c5c;--warn:#f5a623;--info:#2980b9;--purple:#b7791f;--text:#2c3e50;--muted:#7f8c9a;--border:#e7dcc2;--locked:#c8bea6;--shadow:0 2px 12px rgba(0,0,0,.08)}
+*{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}button,input{font:inherit}
+nav{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20px;display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,auto) minmax(0,1fr);align-items:center;gap:14px;box-shadow:var(--shadow);position:sticky;top:0;z-index:100}.nav-left{display:flex;align-items:center;gap:8px;min-width:0;white-space:nowrap;overflow-x:auto;scrollbar-width:none}.nav-left::-webkit-scrollbar{display:none}.nb{background:none;border:1px solid var(--border);cursor:pointer;color:var(--muted);font-size:1rem;padding:4px 8px;border-radius:7px;line-height:1.2;flex:0 0 auto}.nb:hover{background:var(--bg);color:var(--primary);border-color:var(--primary)}.nav-crumb{display:inline-flex;align-items:center;gap:4px;text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:600;padding:5px 8px;border:1px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer;white-space:nowrap}.nav-crumb:hover{color:var(--primary);border-color:var(--primary);background:var(--primary-soft)}.nav-sep{color:var(--locked);font-size:.8rem;flex:0 0 auto}nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;justify-self:center;line-height:1.2}.nav-progress-slot{justify-self:end;display:flex;align-items:center}.progress-bar-wrap{height:6px;background:var(--border);border-radius:3px;width:110px}.progress-bar-fill{height:6px;background:var(--primary);border-radius:3px;transition:width .4s}
+.screen{display:none;padding:20px;max-width:720px;margin:0 auto}.screen.active{display:block}.home-header{text-align:center;padding:28px 0 18px}.home-header h2{font-size:1.7rem;color:var(--primary);margin-bottom:6px}.home-header p{color:var(--muted);font-size:.9rem}.intro-card,.info-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:17px 19px;line-height:1.65;box-shadow:var(--shadow);font-size:.9rem}.info-card{box-shadow:none;margin:12px 0;background:#fbfdfc}.all-theory-wrap{text-align:center;margin:16px 0 10px}.theory-page-link{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 14px;border:2px solid var(--primary);border-radius:12px;background:#fff;color:var(--primary-dark);text-decoration:none;font-size:.88rem;font-weight:750;transition:all .2s}.theory-page-link:hover{background:var(--primary-soft);transform:translateY(-1px)}.home-tools{display:flex;justify-content:center;margin:0 0 18px}.unlock-launch{border:1.5px solid var(--border);background:var(--card);color:var(--primary-dark);border-radius:11px;padding:9px 14px;font-weight:700;cursor:pointer}.unlock-launch:hover,.unlock-launch.active{border-color:var(--warn);color:#9a6a00;background:#fffbea}.unlock-base{font-size:.73rem;color:var(--success);font-weight:700}.badge-errors{background:#fdeaea;color:var(--error)}
+.topics-grid{display:flex;flex-direction:column;gap:10px}.topic-section{margin:10px 0 2px;padding:11px 13px;border-radius:10px;background:#fff5dc;border:1px solid #f0e0aa;font-size:.83rem;color:var(--muted);line-height:1.45}.topic-section strong{display:block;color:var(--primary-dark);font-size:.92rem;margin-bottom:2px}.topic-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s}.topic-card:hover:not(.locked){transform:translateY(-2px);box-shadow:0 6px 20px rgba(199,138,0,.16)}.topic-card.locked{opacity:.56;cursor:not-allowed}.topic-card.done{border-left:4px solid var(--success)}.topic-icon{font-size:1.5rem;width:38px;text-align:center;flex-shrink:0}.topic-info{flex:1;min-width:0}.topic-info h3{font-size:.97rem;font-weight:700;display:flex;gap:7px;align-items:center;flex-wrap:wrap}.topic-info p{font-size:.78rem;color:var(--muted);margin-top:3px;line-height:1.35}.topic-badge{font-size:.72rem;padding:3px 9px;border-radius:20px;font-weight:700;white-space:nowrap}.badge-done{background:#e6f9ef;color:var(--success)}.badge-active{background:var(--primary-soft);color:var(--primary)}.badge-locked{background:var(--border);color:#7a8794}.badge-exam{background:#fff3e0;color:#c27800}.badge-expansion{background:#fff0c2;color:#8a5d00;border:1px solid #f0d082}.course-chip{display:inline-flex;align-items:center;font-size:.66rem;padding:2px 7px;border-radius:999px;background:#fff3d6;color:var(--primary-dark);border:1px solid #f0d89a;font-weight:800}.course-chip.b{background:#fff0c2;color:#8a5d00;border-color:#f0d082}
+.unlock-panel{position:fixed;top:64px;right:18px;width:270px;max-height:calc(100dvh - 82px);overflow-y:auto;background:var(--card);border:1.5px solid var(--border);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.13);z-index:200;padding:16px;display:none}.unlock-panel.open{display:block}.unlock-panel h4{font-size:.86rem;font-weight:800;color:var(--primary-dark);margin-bottom:12px}.unlock-panel-overlay{position:fixed;inset:0;z-index:190;display:none}.unlock-panel-overlay.open{display:block}.unlock-topic-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)}.unlock-topic-name{font-size:.82rem;line-height:1.25;flex:1}.unlock-topic-name.future{color:var(--muted)}.unlock-toggle{background:none;border:1.5px solid var(--border);border-radius:8px;padding:4px 8px;font-size:.72rem;cursor:pointer;font-weight:700;color:var(--muted);white-space:nowrap}.unlock-toggle.active{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}.unlock-toggle:disabled{cursor:not-allowed;opacity:.55}.unlock-all-btn,.unlock-reset-btn{width:100%;margin-top:11px;border-radius:10px;padding:9px;font-size:.8rem;font-weight:750;cursor:pointer}.unlock-all-btn{background:var(--primary);color:white;border:none}.unlock-reset-btn{background:none;color:var(--muted);border:1.5px solid var(--border);margin-top:6px}.unlock-reset-btn:hover{border-color:var(--error);color:var(--error)}
+.theory-tabs{display:flex;gap:8px;margin-bottom:12px}.tab-btn{flex:1;padding:9px;border:1.5px solid var(--border);border-radius:10px;background:var(--card);cursor:pointer;font-size:.83rem;font-weight:650;color:var(--muted)}.tab-btn.active{border-color:var(--primary);color:var(--primary);background:var(--primary-soft)}.theory-box{background:var(--primary-soft);border-left:4px solid var(--primary);border-radius:10px;padding:16px 18px;margin-bottom:14px;font-size:.91rem;line-height:1.7}.theory-box h3{color:var(--primary-dark);margin-bottom:8px;font-size:1rem}.formula{background:#fff;border-radius:8px;padding:9px 13px;margin:6px 0;font-size:.89rem;border:1px solid var(--border)}.history-box{margin-top:10px;padding:10px 12px;border-radius:9px;background:#fffdf3;border:1px solid #f4e6ad}.example-box{background:#f0f7ff;border-left:4px solid var(--info);border-radius:10px;padding:15px 17px;margin-bottom:14px;font-size:.88rem;line-height:1.8}.example-box h3{color:var(--info);margin-bottom:8px;font-size:.95rem}.ex-step{padding:3px 0;border-bottom:1px solid #dde8f5}.ex-step:last-child{border:none}.topic-actions{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0 18px}.btn-primary,.btn-secondary,.btn-theory{border:none;border-radius:11px;padding:10px 14px;font-weight:750;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-dark)}.btn-secondary{background:#fff;border:1.5px solid var(--border);color:var(--text)}.btn-theory{background:#fff;border:1.5px solid var(--primary);color:var(--primary-dark)}
+.level-select,.mode-select{display:flex;gap:10px;margin-bottom:12px}.level-btn,.mode-btn{flex:1;padding:10px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.84rem;font-weight:650;color:var(--muted)}.level-btn.active,.mode-btn.active{border-color:var(--primary);color:var(--primary);background:var(--primary-soft)}.practice-note{font-size:.78rem;color:var(--muted);margin:-3px 0 12px;text-align:center}
+.streak-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}.streak-bar-wrap{flex:1;height:7px;background:var(--border);border-radius:4px}.streak-bar-fill{height:7px;background:linear-gradient(90deg,var(--primary),var(--warn));border-radius:4px;transition:width .4s}.streak-label{font-size:.78rem;color:var(--muted);white-space:nowrap}.ex-card{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:18px;box-shadow:var(--shadow)}.ex-num{font-size:.76rem;color:var(--muted);font-weight:700;margin-bottom:10px}.q-text{font-size:1.02rem;line-height:1.65;font-weight:600}.math{font-family:'Cambria Math','Times New Roman',serif;font-size:1.06em}.visual-wrap{margin:14px auto 4px;text-align:center}.angle-svg{width:min(100%,430px);height:auto;display:block;margin:auto;background:#fbfdfc;border:1px solid var(--border);border-radius:12px}.options{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}.opt-btn{border:1.5px solid var(--border);background:#fff;border-radius:11px;padding:11px 9px;cursor:pointer;font-size:.9rem;color:var(--text);min-height:46px}.opt-btn:hover:not(:disabled){border-color:var(--primary);background:var(--primary-soft)}.opt-btn.correct{border-color:var(--success);background:#eafaf2;color:#187a4a}.opt-btn.wrong{border-color:var(--error);background:#fff0f0;color:#b43f3f}.open-wrap{display:none;margin-top:15px}.open-row{display:flex;gap:8px}.open-input{flex:1;border:1.5px solid var(--border);border-radius:10px;padding:11px 12px;min-width:0}.open-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(199,138,0,.12)}.open-input.ok{border-color:var(--success);background:#effbf5}.open-input.ko{border-color:var(--error);background:#fff4f4}.open-hint{font-size:.75rem;color:var(--muted);margin-top:6px}.hint-area{margin-top:12px}.hint-btn,.sol-btn{border:none;background:#f5f7fa;color:var(--muted);padding:8px 11px;border-radius:9px;cursor:pointer;font-size:.78rem;font-weight:700}.hint-box{display:none;margin-top:8px;padding:10px 12px;background:#fffbea;border-left:3px solid var(--warn);border-radius:8px;font-size:.84rem;line-height:1.5}.hint-box.show{display:block}.feedback-box{margin-top:14px;padding:13px 15px;border-radius:11px;font-size:.88rem;line-height:1.55}.feedback-box.ok{background:#eafaf2;border:1px solid #bdebd2}.feedback-box.ko{background:#fff3f3;border:1px solid #f3c6c6}.feedback-box h4{margin-bottom:5px}.solution-box{display:none;margin-top:10px;background:#fff;border:1px solid #f0d0d0;border-radius:10px;padding:10px 12px}.solution-box.show{display:block}.step{padding:6px 0;border-bottom:1px solid #edf0f3}.step:last-child{border:none}.highlight{line-height:1.55}.next-row{display:flex;gap:8px;margin-top:13px}.next-row button{flex:1}.congrats{text-align:center;padding:24px 8px}.trophy{font-size:3rem}.congrats h2{color:var(--primary);margin:8px 0}.saved-errors-mini{margin-top:12px;padding:11px;border-radius:10px;background:#fff6f6;border:1px solid #f2cccc}.saved-errors-mini h4{color:var(--error);margin-bottom:7px}.saved-error-row{font-size:.8rem;line-height:1.45;padding:6px 0;border-bottom:1px solid #f0dddd}.saved-error-row:last-child{border:0}.error-card{background:#fff;border:1px solid var(--border);border-left:4px solid var(--error);border-radius:12px;padding:14px;margin-bottom:11px}.exam-score{font-size:2rem;font-weight:900;color:var(--primary);text-align:center;margin:15px}.exam-review{background:#fff;border:1px solid var(--border);border-radius:10px;padding:11px;margin:8px 0;font-size:.85rem;line-height:1.45}
+@media(max-width:760px){nav{grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;padding:9px 10px}.nav-left{grid-column:1;grid-row:1}.nav-progress-slot{grid-column:2;grid-row:1}nav h1{grid-column:1/-1;grid-row:2;width:100%;font-size:.98rem;padding:2px 0 1px}.nav-crumb{font-size:.75rem;padding:4px 6px}.progress-bar-wrap{width:74px}.screen{padding:14px}.options{grid-template-columns:1fr}.topic-card{padding:13px 14px;gap:10px}.topic-badge{font-size:.67rem}.unlock-panel{top:58px;right:10px;left:10px;width:auto}.level-select,.mode-select{gap:7px}.open-row{flex-direction:column}}
+</style>
+
+<style id="miExamP2Styles">
+.mi-exam-overlay{position:fixed;inset:0;background:rgba(22,28,36,.55);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px}
+.mi-exam-overlay.open{display:flex}.mi-exam-modal{width:min(680px,100%);max-height:min(86vh,780px);overflow:auto;background:var(--card,#fff);border:1px solid var(--border,#ddd);border-radius:18px;box-shadow:0 18px 60px rgba(0,0,0,.24);padding:20px}
+.mi-exam-head{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;margin-bottom:14px}.mi-exam-head h2{margin:0 0 5px;font-size:1.25rem}.mi-exam-head p{margin:0;color:var(--muted,#6b7280);font-size:.86rem;line-height:1.45}.mi-exam-close{border:0;background:transparent;font-size:1.25rem;cursor:pointer;padding:4px 7px;color:var(--muted,#6b7280)}
+.mi-exam-tools{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.mi-exam-tool{border:1px solid var(--border,#ddd);background:var(--card,#fff);color:var(--text,#222);border-radius:9px;padding:8px 11px;font-weight:700;cursor:pointer}.mi-exam-tool:hover{border-color:var(--primary,#777)}
+.mi-exam-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.mi-exam-row{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--border,#ddd);background:#fff;border-radius:11px;padding:11px 12px;cursor:pointer}.mi-exam-row input{margin-top:3px;accent-color:var(--primary,#777);transform:scale(1.08)}.mi-exam-row span{font-size:.88rem;font-weight:700;line-height:1.3}.mi-exam-row small{display:block;margin-top:3px;color:var(--muted,#6b7280);font-size:.72rem;font-weight:500}.mi-exam-row .mi-exam-done{color:var(--success,#278b58);font-weight:700}
+.mi-exam-foot{position:sticky;bottom:-20px;background:var(--card,#fff);border-top:1px solid var(--border,#ddd);margin:16px -20px -20px;padding:13px 20px 18px}.mi-exam-summary{text-align:center;font-weight:800;margin-bottom:10px}.mi-exam-start{width:100%;border:0;border-radius:11px;background:var(--primary,#777);color:#fff;padding:12px 14px;font-weight:800;font-size:.96rem;cursor:pointer}.mi-exam-start:disabled{opacity:.5;cursor:not-allowed}.mi-exam-note{text-align:center;color:var(--muted,#6b7280);font-size:.72rem;line-height:1.4;margin-top:8px}
+@media(max-width:620px){.mi-exam-overlay{padding:9px}.mi-exam-modal{padding:16px;border-radius:14px;max-height:92vh}.mi-exam-list{grid-template-columns:1fr}.mi-exam-foot{margin:14px -16px -16px;padding:12px 16px 16px;bottom:-16px}}
+</style>
+<style id="p6-ui">
+/* =========================================================
+   P6 · INTERFÍCIE I NAVEGACIÓ · 4t ESO
+   Capa visual comuna. No altera generadors ni progrés.
+   ========================================================= */
+.top-nav{
+  display:flex;align-items:center;gap:8px;min-height:58px;padding:9px 14px;
+  background:var(--card,#fff);border-bottom:1px solid var(--border,#e6e8ee);
+}
+.top-nav .nav-left{display:flex;align-items:center;gap:6px;min-width:0;flex:0 1 auto}
+.top-nav .nav-crumb,.top-nav .nb{
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:36px;padding:7px 9px;
+  border:1px solid var(--border,#e6e8ee);border-radius:10px;background:var(--card,#fff);
+  color:var(--primary);text-decoration:none;font:inherit;font-size:.78rem;font-weight:800;cursor:pointer;white-space:nowrap;
+}
+.top-nav .nav-crumb:hover,.top-nav .nb:hover{border-color:var(--primary);background:var(--primary-soft,#f4f6ff)}
+.top-nav .nav-sep{color:var(--muted,#68707e);font-size:.78rem}
+.top-nav .sense-short{display:none}
+.top-nav h1{flex:1;min-width:120px;margin:0;font-size:.95rem;line-height:1.2;text-align:center}
+.top-nav .nav-progress-slot{flex:0 0 auto}
+.top-nav .progress-bar-wrap{width:104px;min-width:76px;height:7px;margin:0;border-radius:999px;overflow:hidden}
+.top-nav .progress-bar-fill{height:100%;border-radius:999px}
+
+.layout{width:min(calc(100% - 24px),920px);margin:0 auto!important;display:block!important}
+.sidebar{display:none!important}
+#screenHome{max-width:820px;margin:0 auto!important;padding:20px 0 34px!important}
+.home-header{text-align:center;margin-bottom:16px}
+.home-header h2{margin-bottom:5px}
+.intro-card{max-width:820px!important;width:100%;margin:0 0 18px!important;padding:18px 20px!important}
+.intro-card p{text-align:left!important;line-height:1.7}
+.all-theory-wrap{margin:0 0 12px!important}
+.theory-page-link{width:min(100%,520px)!important;margin:0 auto!important;min-height:44px}
+.home-tools{margin:0 0 20px!important;text-align:center}
+.unlock-launch{min-height:42px;padding:10px 16px!important}
+
+.p6-section-head{grid-column:1/-1;margin:20px 0 8px;padding-top:16px;border-top:1px solid var(--border,#e6e8ee)}
+.p6-section-head.p6-first{margin-top:2px;padding-top:0;border-top:0}
+.p6-section-title{font-size:1rem;font-weight:850;color:var(--primary);line-height:1.25}
+.p6-section-title.p6-practice{color:#6b4fb3}
+.p6-section-title.p6-extension{color:#7c4dcc}
+.p6-section-title.p6-exam{color:var(--warn,#b7791f)}
+.p6-section-title.p6-errors{color:var(--error,var(--err,#a02020))}
+.p6-section-note{margin-top:3px;color:var(--muted,#68707e);font-size:.82rem;line-height:1.45}
+
+.topics-grid{display:flex!important;flex-direction:column!important;gap:10px!important;margin-top:0!important}
+.topic-card{width:100%;min-height:74px;box-sizing:border-box;padding:14px 16px!important;border-radius:14px!important;display:flex!important;align-items:center;gap:13px}
+.topic-info{min-width:0;flex:1}
+.topic-info h3{line-height:1.25;margin-bottom:3px}
+.topic-info p{line-height:1.4}
+.topic-badge{flex:0 0 auto;white-space:nowrap}
+.p6-special-card{border-width:2px!important;border-style:dashed!important}
+.p6-exam-card{border-color:var(--warn,#d49b32)!important}
+.p6-error-card{border-color:var(--error,var(--err,#c94a4a))!important}
+
+button,a,[onclick]{-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid color-mix(in srgb,var(--primary) 35%,transparent);outline-offset:2px}
+.unlock-panel,.mi-exam-modal{max-width:min(92vw,620px)!important}
+
+@media (max-width:700px){
+  .top-nav{gap:5px;padding:8px 7px;min-height:54px}
+  .top-nav .nav-left{gap:4px}
+  .top-nav .nav-crumb,.top-nav .nb{padding:6px 7px;font-size:.72rem;min-height:34px}
+  .top-nav .nav-crumb:first-of-type{width:34px;padding-inline:5px;font-size:0}
+  .top-nav .nav-crumb:first-of-type::before{content:'🏠';font-size:.9rem}
+  .top-nav .nav-left>a:nth-of-type(2){font-size:0}
+  .top-nav .nav-left>a:nth-of-type(2)::after{content:'4t';font-size:.72rem}
+  .top-nav .sense-full{display:none!important}.top-nav .sense-short{display:inline!important}
+  .top-nav .nav-sep{display:none!important}
+  .top-nav h1{font-size:.82rem;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .top-nav .progress-bar-wrap{width:54px;min-width:46px}
+  .layout{width:min(calc(100% - 16px),920px)}
+  #screenHome{padding:14px 0 26px!important}
+  .home-header h2{font-size:1.45rem}.home-header p{font-size:.88rem;line-height:1.45}
+  .intro-card{padding:15px 16px!important;font-size:.95rem}
+  .theory-page-link,.unlock-launch{width:100%!important;max-width:none!important}
+  .topic-card{align-items:flex-start!important;flex-wrap:wrap;padding:13px 14px!important;gap:10px}
+  .topic-icon{width:34px!important;flex:0 0 34px}.topic-info{flex:1 1 calc(100% - 50px)}
+  .topic-badge{margin-left:44px}.p6-section-head{margin-top:18px;padding-top:14px}.p6-section-note{font-size:.79rem}
+  .btn-primary,.btn-secondary,.btn-danger{max-width:100%}.level-select,.mode-select{flex-wrap:wrap}.level-btn,.mode-btn{flex:1 1 145px}
+  .options-grid{grid-template-columns:1fr!important}.mi-exam-overlay,.unlock-panel-overlay{padding:10px!important}
+  .mi-exam-modal,.unlock-panel{max-height:92vh!important;border-radius:14px!important}
+}
+@media (max-width:430px){
+  .top-nav h1{font-size:.76rem}.top-nav .progress-bar-wrap{display:none!important}
+  .topic-card{min-height:70px}.topic-badge{margin-left:0;width:100%;text-align:center}
+}
+</style>
+</head>
+<body>
+<nav class="top-nav">
+  <div class="nav-left">
+    <button class="nb" id="navBack" onclick="goBack()" style="display:none" aria-label="Tornar">←</button>
+    <a class="nav-crumb" href="../index.html">🏠 Mates Interactives</a>
+    <span class="nav-sep">›</span>
+    <a class="nav-crumb" href="index.html">📘 4t ESO</a>
+    <span class="nav-sep" id="senseSep" style="display:none">›</span>
+    <button class="nav-crumb" id="senseCrumb" onclick="showHome()" style="display:none"><span class="sense-full">⌂ Sentit Estocàstic</span><span class="sense-short">⌂ Sentit</span></button>
+  </div>
+  <h1 id="navTitle">Sentit Estocàstic · 4t ESO</h1>
+  <div class="nav-progress-slot"><div class="progress-bar-wrap"><div class="progress-bar-fill" id="globalProgress" style="width:0%"></div></div></div>
+</nav>
+
+<div class="unlock-panel-overlay" id="unlockOverlay" onclick="closeUnlockPanel()"></div>
+<div class="unlock-panel" id="unlockPanel">
+  <h4>🔓 Gestionar temes</h4>
+  <div id="unlockTopicList"></div>
+  <button class="unlock-all-btn" onclick="unlockAllTopics()">🔓 Desbloquejar blocs disponibles</button>
+  <button class="unlock-reset-btn" id="btnReset" onclick="resetProgress()">↻ Reiniciar progrés</button>
+</div>
+
+<section class="screen active" id="screenHome">
+  <div class="home-header"><h2>📊 Sentit Estocàstic</h2><p>4t d'ESO · Dades, estadística bivariant, mostreig, inferència i probabilitat</p></div>
+  <div class="intro-card">
+    A <strong>4t d'ESO</strong> l'estadística fa un pas important: ja no només descrivim una variable, sinó que comencem a <strong>estudiar dues variables alhora, comparar distribucions, interpretar possibles relacions i valorar la qualitat dels estudis</strong>. També aprendrem a decidir fins on arriben realment les conclusions i quan una mostra és representativa o esbiaixada.<br><br>
+    Ja estan actius els <strong>Blocs 1–8</strong>: des de l'organització i comparació de dades fins a la <strong>probabilitat en experiments simples i compostos</strong>, passant pels <strong>núvols de punts</strong>, la <strong>regressió lineal</strong>, l'<strong>espai mostral</strong> i les <strong>tècniques de recompte</strong>. El recorregut principal del Sentit Estocàstic de 4t queda així complet.<br><br>També pots treballar l’<strong>Ampliació · Prepara Batxillerat</strong>: <strong>A · Taules de contingència</strong>, <strong>B · Correlació i regressió avançada</strong>, <strong>C · Probabilitat condicionada i independència</strong> i <strong>D · Bayes i primers models probabilístics</strong>. Són blocs opcionals i no compten en el progrés obligatori ni en el Mode Examen de 4t.<br><br>
+    Les pistes orienten el procediment sense donar la resposta. Quan hi ha un error, la correcció mostra el <strong>raonament pas a pas</strong>, indica què convé revisar i l'error queda guardat per poder-lo repassar.
+  </div>
+  <div class="all-theory-wrap"><a class="theory-page-link" href="teoria/estocastic/index.html">📚 Tota la teoria del Sentit Estocàstic</a></div>
+  <div class="home-tools"><button class="unlock-launch" id="btnUnlock" onclick="toggleUnlockPanel()">🔓 Gestionar temes</button></div>
+  <div class="topics-grid" id="topicsGrid"></div>
+</section>
+
+<section class="screen" id="screenIntro">
+  <div class="theory-tabs">
+    <button class="tab-btn active" id="tabTheoryBtn" onclick="showTab('theory')">📖 Teoria</button>
+    <button class="tab-btn" id="tabExampleBtn" onclick="showTab('example')">✏️ Exemple</button>
+  </div>
+  <div id="theoryContent"></div>
+  <div id="exampleContent" style="display:none"></div>
+  <div class="topic-actions" id="topicActions"></div>
+  <div class="level-select">
+    <button class="level-btn active" id="level1" onclick="setLevel(1)">🟢 Guiat · 10 encerts</button>
+    <button class="level-btn" id="level2" onclick="setLevel(2)">🟠 Autònom · 20 encerts</button>
+  </div>
+  <div class="mode-select">
+    <button class="mode-btn active" id="modeMulti" onclick="setMode('multi')">4 opcions</button>
+    <button class="mode-btn" id="modeOpen" onclick="setMode('open')">Resposta oberta</button>
+  </div>
+  <div class="practice-note">La resposta oberta accepta formes equivalents quan és possible; en percentatges pots escriure el valor amb o sense el símbol %.</div>
+  <button class="btn-primary" style="width:100%" onclick="startPractice()">Començar a practicar →</button>
+</section>
+
+<section class="screen" id="screenExercise">
+  <div class="streak-row"><div class="streak-bar-wrap"><div class="streak-bar-fill" id="streakFill" style="width:0%"></div></div><div class="streak-label" id="streakLabel">0/10</div></div>
+  <div class="ex-card">
+    <div class="ex-num" id="exerciseNumber"></div>
+    <div class="q-text" id="questionText"></div>
+    <div class="options" id="optionsArea"></div>
+    <div class="open-wrap" id="openWrap"><div class="open-row"><input class="open-input" id="openInput" autocomplete="off" inputmode="text"><button class="btn-primary" onclick="checkOpenAnswer()">Comprovar</button></div><div class="open-hint" id="openHint"></div></div>
+    <div class="hint-area"><button class="hint-btn" id="hintBtn" onclick="showNextHint()">💡 Pista</button><div class="hint-box" id="hintBox"></div></div>
+    <div id="feedbackArea"></div>
+    <div class="next-row"><button class="btn-primary" id="btnNext" style="display:none" onclick="nextExercise()">Següent →</button><button class="btn-secondary" id="btnChangeTopic" style="display:none" onclick="showHome()">← Canviar de tema</button></div>
+  </div>
+</section>
+
+<section class="screen" id="screenExam">
+  <div class="home-header" style="padding-top:8px"><h2>📝 Mode Examen · 4t ESO</h2><p>20 preguntes dels blocs que seleccionis</p></div>
+  <div class="ex-card">
+    <div id="examContent"></div>
+    <div class="options" id="examOptions"></div>
+    <div class="open-wrap" id="examOpenWrap"><div class="open-row"><input class="open-input" id="examOpenInput"><button class="btn-primary" onclick="checkExamOpen()">Comprovar</button></div></div>
+    <div id="examFeedback"></div>
+    <button class="btn-primary" id="btnNextExam" style="display:none;width:100%;margin-top:12px" onclick="nextExamQ()">Següent →</button>
+  </div>
+</section>
+
+<section class="screen" id="screenErrors"><div id="errorsContent"></div></section>
+
+<script>
+'use strict';
+/* ── UTILITATS ───────────────────────────────────────────── */
+const rnd=(a,b)=>Math.floor(Math.random()*(b-a+1))+a;
+const choice=a=>a[rnd(0,a.length-1)];
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=rnd(0,i);[a[i],a[j]]=[a[j],a[i]]}return a}
+function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a||1}
+function fmt(n,d=2){const s=Number(n.toFixed(d)).toString();return s.replace('.',',')}
+function uniqOptions(correct,candidates){const out=[correct];for(const c of candidates){if(c!==correct&&!out.includes(c))out.push(c);if(out.length===4)break}let k=1;while(out.length<4){const x=String(Number(String(correct).replace(',','.').replace(/[^0-9.\-]/g,''))||0+k);if(!out.includes(x))out.push(x);k++}return shuffle(out)}
+function math(s){return '<span class="math">'+s+'</span>'}
+function degText(n){return fmt(n,4)+'°'}
+function totalSeconds(d,m,s){return d*3600+m*60+s}
+function secToDms(total){total=Math.round(total);const sign=total<0?-1:1;total=Math.abs(total);const d=Math.floor(total/3600),rest=total%3600,m=Math.floor(rest/60),s=rest%60;return {sign,d,m,s}}
+function dmsText(o){const pre=o.sign<0?'−':'';return pre+o.d+'° '+o.m+'′ '+o.s+'″'}
+function normalizeText(s){return String(s).trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/,/g,'.').replace(/−/g,'-').replace(/º/g,'°').replace(/\s+/g,' ')}
+function parseNumber(s){const m=normalizeText(s).match(/-?\d+(?:\.\d+)?/);return m?Number(m[0]):NaN}
+function statRationalValue(s){const n=normalizeText(s).replace(/\s+/g,'');let m=n.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/);if(m){const d=Number(m[2]);return d!==0?Number(m[1])/d:null}m=n.match(/^(-?\d+(?:\.\d+)?)%$/);if(m)return Number(m[1])/100;const v=Number(n);return Number.isFinite(v)?v:null}
+function statStrictRequestedForm(ex){if(!ex||!ex.question)return false;const q=String(ex.question).replace(/<[^>]*>/g,' ').toLowerCase().replace(/\s+/g,' ');return /percentatge|expressat en percentatge|en forma decimal|fracció|nombre decimal/.test(q)}
+
+function parseDMS(s){s=normalizeText(s);const nums=s.match(/-?\d+(?:\.\d+)?/g);if(!nums||!nums.length)return NaN;if(nums.length===1)return Number(nums[0]);const sign=String(nums[0]).startsWith('-')?-1:1;const d=Math.abs(Number(nums[0])),m=Math.abs(Number(nums[1]||0)),sec=Math.abs(Number(nums[2]||0));if(m>=60||sec>=60)return NaN;return sign*(d+m/60+sec/3600)}
+function parseRadians(s){s=normalizeText(s).replace(/radians?/g,'').replace(/rad/g,'').replace(/\s/g,'').replace(/π/g,'pi');if(!s)return NaN;if(!s.includes('pi'))return Number(s);let sign=1;if(s[0]==='-'){sign=-1;s=s.slice(1)}else if(s[0]==='+')s=s.slice(1);let [numPart,denPart]=s.split('/');let coeff=numPart.replace(/\*/g,'').replace('pi','');let num=coeff===''?1:Number(coeff);let den=denPart?Number(denPart):1;if(!Number.isFinite(num)||!Number.isFinite(den)||den===0)return NaN;return sign*num*Math.PI/den}
+function angleSVG(deg){const w=430,h=190,cx=78,cy=145,len=125,rad=deg*Math.PI/180,x2=cx+len*Math.cos(rad),y2=cy-len*Math.sin(rad);const ar=38,ax=cx+ar*Math.cos(rad),ay=cy-ar*Math.sin(rad);const large=deg>180?1:0;return `<div class="visual-wrap"><svg class="angle-svg" viewBox="0 0 ${w} ${h}" role="img" aria-label="Dibuix d'un angle sense indicar-ne la mesura"><line x1="${cx}" y1="${cy}" x2="${cx+150}" y2="${cy}" stroke="#506070" stroke-width="4" stroke-linecap="round"/><line x1="${cx}" y1="${cy}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="#2f9e63" stroke-width="4" stroke-linecap="round"/><path d="M ${cx+ar} ${cy} A ${ar} ${ar} 0 ${large} 0 ${ax.toFixed(1)} ${ay.toFixed(1)}" fill="none" stroke="#f5a623" stroke-width="3"/><circle cx="${cx}" cy="${cy}" r="5" fill="#2c3e50"/></svg></div>`}
+function degRad(a){return a*Math.PI/180}
+function radDeg(a){return a*180/Math.PI}
+function trigTriangleSVG(opp='a',adj='b',hyp='c',alpha='α'){
+  return `<div class="visual-wrap"><svg class="angle-svg" viewBox="0 0 430 220" role="img" aria-label="Triangle rectangle amb un angle alfa i els costats etiquetats"><line x1="75" y1="175" x2="335" y2="175" stroke="#506070" stroke-width="4"/><line x1="75" y1="175" x2="75" y2="40" stroke="#506070" stroke-width="4"/><line x1="75" y1="40" x2="335" y2="175" stroke="#2f9e63" stroke-width="4"/><path d="M75 155 L95 155 L95 175" fill="none" stroke="#f5a623" stroke-width="3"/><path d="M303 175 A32 32 0 0 1 307 160" fill="none" stroke="#f5a623" stroke-width="3"/><text x="310" y="157" font-size="17" font-weight="700" fill="#2c3e50">${alpha}</text><text x="48" y="112" font-size="17" font-weight="700" fill="#2c3e50">${opp}</text><text x="195" y="202" font-size="17" font-weight="700" fill="#2c3e50">${adj}</text><text x="198" y="92" font-size="17" font-weight="700" fill="#2c3e50">${hyp}</text></svg></div>`}
+function trigNumOptions(correct,unit='',digits=2,candidates=[]){
+  const c=fmt(correct,digits)+unit;
+  const defaults=[correct*1.15,correct*.85,correct+1,Math.max(0,correct-1),correct*2,correct/2];
+  const out=[c];
+  for(const v of [...candidates,...defaults]){if(!Number.isFinite(v))continue;const x=fmt(v,digits)+unit;if(!out.includes(x))out.push(x);if(out.length===4)break}
+  return shuffle(out);
+}
+function angleOptions(correct,candidates=[]){
+  const c=fmt(correct,1)+'°',out=[c];
+  for(const v of [...candidates,correct+10,Math.max(1,correct-10),90-correct,correct+20]){if(!Number.isFinite(v)||v<=0||v>=90)continue;const x=fmt(v,1)+'°';if(!out.includes(x))out.push(x);if(out.length===4)break}
+  while(out.length<4){const x=fmt(choice([15,20,25,30,35,40,45,50,55,60,65,70,75]),1)+'°';if(!out.includes(x))out.push(x)}
+  return shuffle(out);
+}
+function piFracText(n,d=1){if(n===0)return '0';const sign=n<0?'−':'';n=Math.abs(n);const g=gcd(n,d);n/=g;d/=g;const num=n===1?'π':n+'π';return sign+(d===1?num:num+'/'+d)}
+function angleClass(a){if(a===0)return 'Angle nul';if(a>0&&a<90)return 'Angle agut';if(a===90)return 'Angle recte';if(a>90&&a<180)return 'Angle obtús';if(a===180)return 'Angle pla';if(a>180&&a<360)return 'Angle còncau';if(a===360)return 'Angle complet';return 'Angle'}
+function numericOptions(correct,unit='',step=1,digits=2){const c=fmt(correct,digits)+unit;const cand=[correct+step,Math.max(0,correct-step),correct+2*step,Math.max(0,correct-2*step),correct+3*step].map(x=>fmt(x,digits)+unit);const out=[c];for(const x of cand){if(!out.includes(x))out.push(x);if(out.length===4)break}return shuffle(out)}
+function dmsOptions(obj){const c=dmsText(obj),cand=[dmsText(secToDms(totalSeconds(obj.d,obj.m,obj.s)+60)),dmsText(secToDms(Math.max(0,totalSeconds(obj.d,obj.m,obj.s)-60))),dmsText({sign:1,d:obj.d,m:obj.s,s:obj.m}),dmsText(secToDms(totalSeconds(obj.d,obj.m,obj.s)+3600)),dmsText(secToDms(totalSeconds(obj.d,obj.m,obj.s)+120))];const out=[c];for(const x of cand){if(!out.includes(x))out.push(x);if(out.length===4)break}return shuffle(out)}
+
+/* ── OPCIÓ DE 4t · A/B ─────────────────────────────────── */
+function getMathOption4(){try{const q=(new URLSearchParams(location.search).get('opcio')||'').toUpperCase();if(q==='A'||q==='B'){localStorage.setItem('mi_4eso_opcio',q);return q}const s=(localStorage.getItem('mi_4eso_opcio')||'').toUpperCase();return s==='A'||s==='B'?s:''}catch(e){return ''}}
+const MATH_OPTION=getMathOption4();
+function optionLabel(){return MATH_OPTION?' · Matemàtiques '+MATH_OPTION:' · A+B'}
+
+/* ── TEORIA ─────────────────────────────────────────────── */
+const TEORIA={
+  dadesVariables4t:{
+    title:'Bloc 1 · Dades i variables estadístiques',
+    text:'L’estadística parteix d’una <b>pregunta sobre un col·lectiu</b>. Per respondre-la cal decidir quina població volem estudiar, si observarem tota la població o una mostra i quines variables registrarem. A 4t fem un pas més: sovint estudiem <b>dues variables sobre els mateixos individus</b>, de manera que cada observació es pot escriure com una parella (x,y).',
+    formulas:[
+      '<b>Població:</b> conjunt complet sobre el qual volem obtenir informació. <b>Mostra:</b> part de la població que observem.',
+      '<b>Individu:</b> cada element de la població o de la mostra del qual recollim dades.',
+      '<b>Variable qualitativa:</b> descriu categories o qualitats, com el mitjà de transport habitual.',
+      '<b>Quantitativa discreta:</b> és numèrica i pren valors comptables, com el nombre de germans.',
+      '<b>Quantitativa contínua:</b> és una mesura i pot prendre qualsevol valor dins d’un interval, com l’alçada o el temps.',
+      'En dades bivariants, cada individu aporta una parella <b>(x,y)</b>. Per exemple, (3,7) pot significar 3 hores d’estudi i nota 7.',
+      'Una mateixa situació pot contenir variables de tipus diferent. Classifica <b>cada variable per separat</b>.'
+    ],
+    history:'📊 <b>Idea clau.</b> Una dada sense context diu poca cosa. Abans de calcular, pregunta sempre: qui s’estudia, què es mesura i què representa exactament cada valor.',
+    exampleTitle:'Exemple: identificar una parella de dades',
+    exampleSteps:['En un estudi es registra per a cada alumne <b>hores d’estudi setmanal (x)</b> i <b>nota de l’examen (y)</b>.','La parella <b>(4, 7,5)</b> correspon a un únic alumne.','La primera coordenada indica que estudia <b>4 hores</b>.','La segona indica que ha obtingut una <b>nota de 7,5</b>.','No són dos alumnes diferents: són <b>dues variables del mateix individu</b>.']
+  },
+  taulesRepresentacions4t:{
+    title:'Bloc 2 · Taules i representacions de dues variables',
+    text:'Quan estudiem dues variables, les dades es poden organitzar i representar de maneres diferents. La representació adequada depèn del <b>tipus de variables</b> i de la pregunta que volem respondre. Les taules de doble entrada són especialment útils amb variables qualitatives o discretes; els <b>núvols de punts</b> permeten representar parelles de variables quantitatives.',
+    formulas:[
+      '<b>Taula de doble entrada:</b> cada cel·la compta els individus que compleixen simultàniament la categoria de la fila i la de la columna.',
+      '<b>Total d’una fila:</b> suma totes les cel·les de la fila. <b>Total d’una columna:</b> suma totes les cel·les de la columna.',
+      '<b>Freqüència relativa:</b> freqüència / total. En percentatge: <b>100 · freqüència / total</b>.',
+      'Per a <b>dues variables quantitatives</b>, el diagrama de dispersió o <b>núvol de punts</b> representa cada parella (x,y) com un punt.',
+      'Per comparar categories es poden utilitzar taules, barres agrupades o altres representacions que mantinguin clara la comparació.',
+      'Un gràfic pot ser matemàticament correcte i, tot i així, <b>induir a una lectura exagerada</b> si retalla l’eix o utilitza escales inadequades.',
+      'Abans d’interpretar un gràfic, revisa <b>títol, eixos, unitats, escala i font de les dades</b>.',
+      'Amb un <b>full de càlcul o una eina gràfica digital</b> podem generar representacions, canviar escales i comprovar com aquestes decisions afecten la lectura de les dades.'
+    ],
+    history:'📈 <b>Lectura crítica.</b> Representar dades no és només dibuixar. L’escala, l’ordre de les categories i el tipus de gràfic poden facilitar una comparació o distorsionar-ne la percepció.',
+    exampleTitle:'Exemple: llegir una taula de doble entrada',
+    exampleSteps:['Una taula classifica 40 alumnes segons <b>curs</b> i <b>si practiquen esport</b>.','La cel·la 4t + Sí conté 12: hi ha <b>12 alumnes de 4t que practiquen esport</b>.','Si la fila de 4t té 20 alumnes, la proporció dins de 4t és 12/20 = <b>0,60</b>.','En percentatge: <b>60%</b>.','La clau és decidir primer quin total és el denominador adequat a la pregunta.']
+  },
+  comparacioDistribucions4t:{
+    title:'Bloc 3 · Comparació de distribucions',
+    text:'Comparar distribucions vol dir mirar <b>on se situen les dades</b> i <b>com de disperses</b> estan. No n’hi ha prou amb saber qui té més mitjana: també cal veure la mediana, el recorregut o rang i, si convé, el rang interquartílic. Això permet decidir quin grup rendeix més i quin és més <b>homogeni</b>.',
+    formulas:[
+      '<b>Mitjana:</b> suma de tots els valors dividida pel nombre de dades.',
+      '<b>Mediana:</b> valor central de les dades ordenades. Si hi ha un nombre parell de dades, és la mitjana dels dos valors centrals.',
+      '<b>Rang o recorregut:</b> valor màxim − valor mínim.',
+      '<b>Rang interquartílic (RIQ):</b> Q3 − Q1. Mesura la dispersió de la part central de les dades.',
+      'Un grup és més <b>homogeni</b> si les seves dades estan menys disperses; per exemple, si té rang o RIQ més petit.',
+      'La <b>mitjana</b> és sensible als valors atípics; la <b>mediana</b> acostuma a resistir millor la seva influència.',
+      'Quan comparis grups, especifica sempre <b>quina mesura de centralitat</b> i <b>quina mesura de dispersió</b> estàs utilitzant.'
+    ],
+    history:'⚖️ <b>No tot és l\'average.</b> Dos grups poden tenir la mateixa mitjana però ser molt diferents en regularitat. Per això la dispersió és imprescindible per interpretar dades reals.',
+    exampleTitle:'Exemple: mateixa mitjana, diferent homogeneïtat',
+    exampleSteps:['El grup A té notes amb mitjana 6,8 i rang 2.','El grup B també té mitjana 6,8 però rang 7.','Com que el rang del grup A és menor, les seves notes estan més concentrades.','Direm que el grup A és <b>més homogeni</b>.','La mateixa mitjana no implica el mateix comportament estadístic.']
+  },
+  estudisMostreig4t:{
+    title:'Bloc 4 · Estudis estadístics i mostreig',
+    text:'Perquè un estudi estadístic sigui fiable, no n’hi ha prou amb calcular bé: cal preguntar-se <b>com s’han obtingut les dades</b>. Qui forma la població? Com s’ha triat la mostra? Hi pot haver biaix? La pregunta està ben formulada? A 4t aprenem a jutjar si una conclusió és raonable o massa forta per a les dades disponibles.',
+    formulas:[
+      '<b>Mostra aleatòria:</b> els individus s’escullen a l’atzar; això ajuda a reduir biaixos.',
+      '<b>Mostra estratificada:</b> es divideix la població en grups rellevants i se n’escullen individus de cada grup.',
+      '<b>Mostra de conveniència:</b> es trien els individus més accessibles; és ràpida, però pot ser poc representativa.',
+      '<b>Biaix de selecció:</b> la mostra no representa bé la població per com s’ha triat.',
+      '<b>Pregunta esbiaixada:</b> una formulació que indueix la resposta pot distorsionar els resultats.',
+      '<b>Estudi observacional:</b> observa el que passa sense intervenir. <b>Experiment:</b> s’intervé per estudiar l’efecte d’un factor.',
+      'Una correlació observada <b>no prova per si sola una relació de causalitat</b>.',
+      'Les eines digitals faciliten la recollida, l’organització, la representació i l’anàlisi de dades en totes les etapes del procés estadístic.',
+      'L’estadística ha passat dels <b>censos i registres socials</b> a les enquestes, les bases de dades i l’anàlisi massiva d’informació en les ciències socials.'
+    ],
+    history:'🔎 <b>Pensament crític.</b> Les dades poden semblar convincents, però una mostra mal escollida o una pregunta tendenciosa poden conduir a conclusions poc fiables.',
+    exampleTitle:'Exemple: una mostra representativa',
+    exampleSteps:['Es vol estudiar l’ús del menjador a tot l’institut.','Enquestar només els alumnes que hi entren avui pot introduir biaix.','Una opció millor és seleccionar alumnes de diferents cursos i grups de manera aleatòria.','Això ajuda que la mostra s’assembli més a la població real.','Una mostra més representativa dona conclusions més fiables.']
+  },
+  nuvolsRelacio4t:{
+    title:'Bloc 5 · Núvols de punts i relació entre variables',
+    text:'Quan cada individu aporta dues variables quantitatives, les parelles <b>(x,y)</b> es poden representar en un <b>núvol de punts</b>. La forma del núvol permet descriure si les variables tendeixen a augmentar juntes, si una baixa quan l’altra puja, si la relació és forta o feble i si hi ha punts que s’allunyen molt del patró general.',
+    formulas:[
+      '<b>Associació positiva:</b> quan x augmenta, y tendeix també a augmentar.',
+      '<b>Associació negativa:</b> quan x augmenta, y tendeix a disminuir.',
+      '<b>Sense associació clara:</b> els punts no mostren una tendència definida.',
+      '<b>Associació forta:</b> els punts segueixen de prop un patró. <b>Associació feble:</b> estan més dispersos.',
+      '<b>Valor atípic:</b> punt que queda clarament allunyat del patró general del núvol.',
+      'Una associació pot ser <b>lineal</b> si el núvol segueix aproximadament una recta, però també pot existir una relació no lineal.',
+      'Descriure un núvol exigeix separar dues idees: <b>direcció</b> de la relació i <b>intensitat</b>.'
+    ],
+    history:'🔵 <b>Mirar abans de calcular.</b> Un núvol de punts permet detectar patrons que una sola mitjana no mostra: tendències, grups, dispersió i valors atípics.',
+    exampleTitle:'Exemple: interpretar un núvol',
+    exampleSteps:['Es representa el nombre d’hores d’estudi (x) i la nota (y) de diversos alumnes.','Els punts pugen d’esquerra a dreta: hi ha <b>associació positiva</b>.','Si els punts queden força a prop d’una recta imaginària, l’associació és <b>forta</b>.','Un punt molt separat de la resta pot ser un <b>valor atípic</b>.','Aquest patró descriu una relació, però per si sol no demostra causa-efecte.']
+  },
+  regressioPrediccions4t:{
+    title:'Bloc 6 · Regressió lineal, prediccions i causalitat',
+    text:'Quan un núvol de punts mostra una tendència aproximadament lineal, podem resumir-la amb una <b>recta d’ajust</b> de la forma y = ax + b. La recta serveix per descriure la tendència i fer estimacions, però cal valorar sempre si el model és adequat i si la predicció es fa dins del rang de dades observat.',
+    formulas:[
+      '<b>Recta d’ajust:</b> y = ax + b, on a és la pendent i b és l’ordenada a l’origen.',
+      '<b>Pendent a:</b> canvi estimat de y quan x augmenta una unitat.',
+      '<b>Ordenada b:</b> valor estimat de y quan x = 0; només s’ha d’interpretar si x = 0 té sentit en el context.',
+      '<b>Interpolació:</b> predicció dins del rang de valors observats. Acostuma a ser més fiable.',
+      '<b>Extrapolació:</b> predicció fora del rang observat. Com més lluny, més prudència cal.',
+      'Una recta és raonable si el núvol mostra una <b>tendència aproximadament lineal</b>; no s’ha de forçar quan els punts formen una corba o no mostren relació.',
+      '<b>Correlació no implica causalitat:</b> dues variables poden estar relacionades per altres factors o per una causa comuna.'
+    ],
+    history:'📈 <b>Model, no profecia.</b> Una recta d’ajust resumeix el comportament de les dades observades. Fora d’aquest context, una predicció pot deixar de ser realista.',
+    exampleTitle:'Exemple: usar una recta d’ajust',
+    exampleSteps:['Un model relaciona hores d’estudi x i nota y: <b>y = 0,8x + 4</b>.','Per x = 5: y = 0,8·5 + 4 = <b>8</b>.','La pendent 0,8 indica que una hora addicional s’associa, segons el model, amb <b>0,8 punts més</b> de nota.','Si les dades originals només van de 1 a 7 hores, predir per x = 30 seria una <b>extrapolació extrema</b>.','El model permet estimar; no garanteix que estudiar una hora més causi exactament 0,8 punts addicionals.']
+  },
+  espaiMostralRecompte4t:{
+    title:'Bloc 7 · Atzar, espai mostral i tècniques de recompte',
+    text:'En probabilitat, tot comença definint l’<b>experiment aleatori</b> i l’<b>espai mostral</b>, és a dir, el conjunt de tots els resultats possibles. Un cop l’espai mostral està clar, podem comptar casos favorables i casos possibles amb taules, diagrames d’arbre o el principi multiplicatiu.',
+    formulas:[
+      '<b>Experiment aleatori:</b> procés el resultat del qual no es pot predir amb certesa abans de realitzar-lo.',
+      '<b>Espai mostral:</b> conjunt de tots els resultats possibles d’un experiment.',
+      '<b>Succés:</b> conjunt de resultats que compleixen una propietat determinada.',
+      '<b>Casos favorables:</b> resultats de l’espai mostral que fan que el succés passi.',
+      '<b>Regla de Laplace:</b> P(A) = casos favorables / casos possibles, quan tots els resultats són equiprobables.',
+      '<b>Principi multiplicatiu:</b> si una decisió es pren en dues etapes independents amb m i n opcions, hi ha m·n resultats possibles.',
+      'Per comptar bé, convé ser <b>sistemàtic</b>: llistes ordenades, taules o diagrames d’arbre eviten repeticions i oblits.'
+    ],
+    history:'🎲 <b>Comptar abans de calcular.</b> Molts errors de probabilitat no són de càlcul, sinó de no veure bé quants resultats hi ha realment.',
+    exampleTitle:'Exemple: dues monedes',
+    exampleSteps:['Si llancem dues monedes, els resultats possibles són <b>CC, CX, XC, XX</b> (cara-creu segons l’ordre).','Aquests 4 resultats formen l’espai mostral.','Si volem “exactament una cara”, els casos favorables són <b>CX i XC</b>.','Per tant, P(exactament una cara) = 2/4 = <b>1/2</b>.','Veure primer l’espai mostral ajuda a no oblidar cap cas.']
+  },
+  experimentsCompostos4t:{
+    title:'Bloc 8 · Probabilitat en experiments compostos',
+    text:'En un <b>experiment compost</b> intervenen diversos passos: per exemple, fer dos llançaments o extreure dues boles successives. En aquests casos, convé seguir el procés en ordre i distingir si després de cada pas <b>la situació es manté igual</b> (amb reemplaçament) o <b>canvia</b> (sense reemplaçament).',
+    formulas:[
+      '<b>Experiment compost:</b> experiment format per diverses etapes o accions successives.',
+      '<b>Amb reemplaçament:</b> després d’una extracció, l’objecte es retorna. Les probabilitats del pas següent no canvien.',
+      '<b>Sense reemplaçament:</b> l’objecte no es retorna. El total d’elements i la composició canvien.',
+      'En un diagrama d’arbre, la probabilitat d’un camí s’obté <b>multiplicant</b> les probabilitats dels seus trams.',
+      'Si un succés es pot obtenir per diversos camins incompatibles, la seva probabilitat total s’obté <b>sumant</b> les probabilitats d’aquests camins.',
+      'El complement d’un succés A és “que A no passi”. Sovint és útil calcular <b>P(no A)</b> i després fer 1 − P(no A).',
+      'Les probabilitats es poden usar per <b>comparar riscos o jocs</b> i prendre decisions més fonamentades.'
+    ],
+    history:'🌳 <b>Pensar pas a pas.</b> En probabilitat composta, una bona estratègia és descriure primer el procés, després les probabilitats de cada pas i finalment el succés demanat.',
+    exampleTitle:'Exemple: urna sense reemplaçament',
+    exampleSteps:['Una urna té 3 boles vermelles i 2 blaves.','Si volem la probabilitat de treure primer vermella i després blava, el primer pas és P(V) = <b>3/5</b>.','Després de treure una vermella, queden 4 boles, de les quals 2 són blaves, així que P(B després de V) = <b>2/4</b>.','La probabilitat del camí és (3/5)·(2/4) = <b>3/10</b>.','Sense reemplaçament, les probabilitats canvien d’un pas al següent.']  },
+  contingenciaBatx4t:{
+    title:'Ampliació A · Taules de contingència',
+    text:'Les <b>taules de contingència</b> organitzen conjuntament dues variables categòriques. A més de llegir les freqüències de cada cel·la, podem estudiar els <b>totals marginals</b> i comparar percentatges calculats respecte d’una fila, una columna o el total general. És un pont directe cap a la probabilitat condicionada de Batxillerat.',
+    formulas:[
+      '<b>Freqüència conjunta:</b> nombre d’individus que compleixen simultàniament dues condicions.',
+      '<b>Freqüència marginal:</b> total d’una fila o d’una columna.',
+      '<b>Freqüència relativa conjunta:</b> freqüència de la cel·la / total general.',
+      '<b>Percentatge dins d’una fila:</b> cel·la / total de la fila · 100.',
+      '<b>Percentatge dins d’una columna:</b> cel·la / total de la columna · 100.',
+      'El <b>denominador</b> depèn de la pregunta: “entre els de 4t A” no usa el mateix total que “entre tots els alumnes”.',
+      'Comparar percentatges condicionats pot revelar diferències que els totals absoluts amaguen.'
+    ],
+    history:'🧮 <b>Canviar el denominador canvia la pregunta.</b> Una mateixa cel·la pot representar percentatges diferents segons si mirem una fila, una columna o el total general.',
+    exampleTitle:'Exemple: tres percentatges diferents',
+    exampleSteps:['En una taula hi ha 12 alumnes de 4t A que practiquen esport.','Si 4t A té 20 alumnes, dins de 4t A representen 12/20 = <b>60%</b>.','Si hi ha 30 esportistes en total, entre els esportistes representen 12/30 = <b>40%</b>.','Si l’estudi té 50 alumnes, sobre el total representen 12/50 = <b>24%</b>.','La cel·la és la mateixa; el que canvia és el <b>grup de referència</b>.']
+  },
+  correlacioBatx4t:{
+    title:'Ampliació B · Correlació i regressió avançada',
+    text:'El <b>coeficient de correlació lineal r</b> resumeix la direcció i la força d’una relació lineal. Pren valors entre −1 i 1. En aquesta ampliació l’objectiu és <b>interpretar</b> r i relacionar-lo amb el núvol de punts, no calcular-lo manualment amb fórmules llargues.',
+    formulas:[
+      '<b>−1 ≤ r ≤ 1</b>.',
+      '<b>r > 0:</b> associació lineal positiva. <b>r < 0:</b> associació lineal negativa.',
+      'Com més a prop és |r| de <b>1</b>, més forta és l’associació lineal. Com més a prop de <b>0</b>, més feble és la relació lineal.',
+      '<b>r = 0</b> no significa necessàriament que no hi hagi cap relació: pot existir una relació no lineal.',
+      'Un <b>valor atípic</b> pot modificar molt r i també la recta de regressió.',
+      'El signe de r coincideix amb el signe de la pendent de la recta de regressió quan hi ha variabilitat en les dades.',
+      '<b>Correlació forta no implica causalitat.</b>'
+    ],
+    history:'📉 <b>Un número resumeix, però no substitueix el gràfic.</b> Abans d’interpretar r convé mirar sempre el núvol de punts: corbes i valors atípics poden fer enganyós un únic resum numèric.',
+    exampleTitle:'Exemple: interpretar r',
+    exampleSteps:['Si r = <b>0,92</b>, la relació lineal és forta i positiva.','Si r = <b>−0,85</b>, és forta i negativa.','Si r = <b>0,08</b>, la relació lineal és molt feble.','Tot i així, r proper a 0 no descarta una relació corba.','Per això cal combinar <b>núvol de punts + coeficient r</b>.']
+  },
+  condicionadaBatx4t:{
+    title:'Ampliació C · Probabilitat condicionada i independència',
+    text:'La <b>probabilitat condicionada</b> respon preguntes del tipus “quina probabilitat té A <b>sabent que</b> ha passat B?”. Això vol dir que l’espai de referència canvia: ja no mirem tots els casos possibles, sinó només aquells en què B és certa. Aquesta idea és clau per entendre també la <b>independència</b> de successos.',
+    formulas:[
+      '<b>P(A|B)</b> es llegeix “probabilitat d’A sabent B”.',
+      '<b>P(A|B) = P(A ∩ B) / P(B)</b>, sempre que P(B) > 0.',
+      'En una taula o context de comptatge, P(A|B) = <b>casos d’A i B / casos de B</b>.',
+      'Condicionar vol dir <b>canviar el denominador</b>: ara només compten els casos en què B ha passat.',
+      '<b>Independència:</b> saber que B ha passat no canvia la probabilitat d’A. És a dir, <b>P(A|B) = P(A)</b>.',
+      'Equivalentment, si A i B són independents, <b>P(A ∩ B) = P(A)·P(B)</b>.',
+      'Sense reemplaçament, sovint els successos són <b>dependents</b> perquè el primer resultat modifica el segon.'
+    ],
+    history:'🔗 <b>El context canvia la probabilitat.</b> En moltes situacions reals, saber una informació prèvia redueix el conjunt de casos possibles. La probabilitat condicionada formalitza exactament aquest canvi de perspectiva.',
+    exampleTitle:'Exemple: dins d’un grup concret',
+    exampleSteps:['En una taula hi ha 12 alumnes de 4t A que practiquen esport i 20 alumnes a 4t A en total.','La probabilitat que un alumne practiqui esport <b>sabent que és de 4t A</b> és 12/20 = <b>0,6</b>.','Això és <b>P(esport | 4t A)</b>.','El denominador no és el total general, sinó només el grup “4t A”.','Condicionar vol dir mirar el fenomen <b>dins d’un subconjunt</b>.']
+  },
+  bayesBatx4t:{
+    title:'Ampliació D · Bayes i primers models probabilístics',
+    text:'Aquesta ampliació prepara dues idees importants de Batxillerat. La primera és el raonament de <b>Bayes</b>, que ajuda a invertir condicions i respondre preguntes del tipus “si ha passat B, quina probabilitat hi ha que en realitat passi A?”. La segona és la idea de <b>models de repetició</b>: repetir un mateix experiment independent moltes vegades i estudiar la probabilitat d’obtenir un cert nombre d’èxits.',
+    formulas:[
+      '<b>P(A|B)</b> i <b>P(B|A)</b> no són, en general, la mateixa probabilitat.',
+      'En problemes de Bayes, sovint és útil treballar amb <b>comptes absoluts</b> o un arbre abans que amb fórmules abstractes.',
+      'Un resultat positiu en un test no implica necessàriament una probabilitat alta de patir la condició: cal tenir en compte la <b>prevalença</b> i els <b>falsos positius</b>.',
+      'En repeticions independents amb la mateixa probabilitat d’èxit, podem parlar de <b>nombre d’èxits</b>.',
+      'Per calcular “<b>almenys un èxit</b>”, sovint convé usar el complement: <b>1 − P(cap èxit)</b>.',
+      '“<b>Exactament k èxits</b>” requereix comptar quants camins diferents produeixen k èxits.',
+      'Aquests models són la porta d’entrada a la <b>distribució binomial</b>, que es formalitzarà més endavant.'
+    ],
+    history:'🧠 <b>No confonguis la pregunta directa amb la inversa.</b> Moltes intuïcions fallen quan girem una probabilitat condicionada. Fer un esquema amb freqüències ajuda molt a entendre què s’està preguntant realment.',
+    exampleTitle:'Exemple: un test positiu',
+    exampleSteps:['En 1.000 persones, 20 tenen una malaltia. El test dona positiu en 18 de les 20 persones malaltes i també en 49 persones sanes.','En total hi ha 18 + 49 = <b>67 positius</b>.','D’aquests 67 positius, només 18 són realment malalts.','Per tant, P(malalt | positiu) = 18/67 ≈ <b>26,9%</b>.','Això mostra que <b>P(positiu | malalt)</b> i <b>P(malalt | positiu)</b> poden ser molt diferents.']
+  }
+};
+
+/* ── AJUDES ESTADÍSTIQUES ───────────────────────────────── */
+function table2x2Html(rowNames,colNames,a,b,c,d){
+  return `<div class="visual-wrap"><table style="border-collapse:collapse;margin:8px auto;background:#fff;font-size:.86rem"><tr><th style="border:1px solid var(--border);padding:7px 10px;background:var(--primary-soft)"></th><th style="border:1px solid var(--border);padding:7px 10px;background:var(--primary-soft)">${colNames[0]}</th><th style="border:1px solid var(--border);padding:7px 10px;background:var(--primary-soft)">${colNames[1]}</th><th style="border:1px solid var(--border);padding:7px 10px;background:#f7f7fa">Total</th></tr><tr><th style="border:1px solid var(--border);padding:7px 10px;background:var(--primary-soft)">${rowNames[0]}</th><td style="border:1px solid var(--border);padding:7px 12px">${a}</td><td style="border:1px solid var(--border);padding:7px 12px">${b}</td><td style="border:1px solid var(--border);padding:7px 12px;background:#fafafa">${a+b}</td></tr><tr><th style="border:1px solid var(--border);padding:7px 10px;background:var(--primary-soft)">${rowNames[1]}</th><td style="border:1px solid var(--border);padding:7px 12px">${c}</td><td style="border:1px solid var(--border);padding:7px 12px">${d}</td><td style="border:1px solid var(--border);padding:7px 12px;background:#fafafa">${c+d}</td></tr><tr><th style="border:1px solid var(--border);padding:7px 10px;background:#f7f7fa">Total</th><td style="border:1px solid var(--border);padding:7px 12px;background:#fafafa">${a+c}</td><td style="border:1px solid var(--border);padding:7px 12px;background:#fafafa">${b+d}</td><td style="border:1px solid var(--border);padding:7px 12px;background:#fafafa"><b>${a+b+c+d}</b></td></tr></table></div>`;
+}
+function miniBars(values,labels,axisMin=0){
+  const w=390,h=210,left=48,bottom=35,top=18,right=15,max=Math.max(...values),min=axisMin,span=Math.max(1,max-min),plotH=h-top-bottom,plotW=w-left-right,bw=Math.min(54,plotW/(values.length*1.7)),gap=plotW/values.length;
+  let bars='';values.forEach((v,i)=>{const bh=(v-min)/span*plotH,x=left+i*gap+(gap-bw)/2,y=top+plotH-bh;bars+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bw}" height="${Math.max(1,bh).toFixed(1)}" rx="3" fill="var(--primary)"/><text x="${(x+bw/2).toFixed(1)}" y="${h-12}" text-anchor="middle" font-size="12" fill="#53606d">${labels[i]}</text><text x="${(x+bw/2).toFixed(1)}" y="${Math.max(14,y-5).toFixed(1)}" text-anchor="middle" font-size="12" fill="#2c3e50">${v}</text>`});
+  return `<div class="visual-wrap"><svg viewBox="0 0 ${w} ${h}" style="width:min(100%,430px);height:auto;background:#fff;border:1px solid var(--border);border-radius:12px" role="img" aria-label="Gràfic de barres"><line x1="${left}" y1="${top}" x2="${left}" y2="${top+plotH}" stroke="#7f8c9a"/><line x1="${left}" y1="${top+plotH}" x2="${w-right}" y2="${top+plotH}" stroke="#7f8c9a"/><text x="8" y="${top+8}" font-size="11" fill="#7f8c9a">${max}</text><text x="8" y="${top+plotH}" font-size="11" fill="#7f8c9a">${min}</text>${bars}</svg></div>`;
+}
+
+function scatterPlotHtml(points,xLabel='x',yLabel='y',line=null){
+  const w=410,h=250,left=48,right=18,top=18,bottom=44,plotW=w-left-right,plotH=h-top-bottom;
+  const xs=points.map(p=>p[0]),ys=points.map(p=>p[1]);let xmin=Math.min(...xs),xmax=Math.max(...xs),ymin=Math.min(...ys),ymax=Math.max(...ys);
+  if(line){const ly1=line[0]*xmin+line[1],ly2=line[0]*xmax+line[1];ymin=Math.min(ymin,ly1,ly2);ymax=Math.max(ymax,ly1,ly2)}
+  const padx=Math.max(1,(xmax-xmin)*.1),pady=Math.max(1,(ymax-ymin)*.1);xmin-=padx;xmax+=padx;ymin-=pady;ymax+=pady;
+  const X=x=>left+(x-xmin)/(xmax-xmin)*plotW,Y=y=>top+plotH-(y-ymin)/(ymax-ymin)*plotH;
+  let dots=points.map((p,i)=>`<circle cx="${X(p[0]).toFixed(1)}" cy="${Y(p[1]).toFixed(1)}" r="5" fill="var(--primary)" opacity=".88"><title>Punt ${i+1}: (${p[0]}, ${p[1]})</title></circle>`).join('');
+  let ln='';if(line){const x1=xmin,x2=xmax,y1=line[0]*x1+line[1],y2=line[0]*x2+line[1];ln=`<line x1="${X(x1).toFixed(1)}" y1="${Y(y1).toFixed(1)}" x2="${X(x2).toFixed(1)}" y2="${Y(y2).toFixed(1)}" stroke="#e05c5c" stroke-width="2.5" stroke-dasharray="7 5"/>`}
+  return `<div class="visual-wrap"><svg viewBox="0 0 ${w} ${h}" style="width:min(100%,440px);height:auto;background:#fff;border:1px solid var(--border);border-radius:12px" role="img" aria-label="Núvol de punts"><line x1="${left}" y1="${top}" x2="${left}" y2="${top+plotH}" stroke="#7f8c9a"/><line x1="${left}" y1="${top+plotH}" x2="${w-right}" y2="${top+plotH}" stroke="#7f8c9a"/>${ln}${dots}<text x="${left+plotW/2}" y="${h-8}" text-anchor="middle" font-size="12" fill="#53606d">${xLabel}</text><text x="14" y="${top+plotH/2}" text-anchor="middle" font-size="12" fill="#53606d" transform="rotate(-90 14 ${top+plotH/2})">${yLabel}</text></svg></div>`;
+}
+
+function statOptions(correct,candidates){
+  const out=[String(correct)];
+  for(const c of candidates){const x=String(c);if(x!==out[0]&&!out.includes(x))out.push(x);if(out.length===4)break}
+  let k=1;while(out.length<4){const n=parseNumber(correct),pct=String(correct).includes('%');const x=Number.isFinite(n)?fmt(n+k,1)+(pct?' %':''):('Opció '+k);if(!out.includes(x))out.push(x);k++}
+  return shuffle(out);
+}
+
+function outcomesGridHtml(items,title='Resultats possibles'){
+  const cells=items.map(x=>`<span style="display:inline-block;padding:4px 8px;border:1px solid var(--border);border-radius:8px;background:#fff;margin:3px;font-size:.84rem">${x}</span>`).join('');
+  return `<div class="visual-wrap" style="text-align:left;max-width:440px;margin:auto;background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px 12px"><div style="font-size:.82rem;color:var(--muted);margin-bottom:6px"><b>${title}</b></div><div>${cells}</div></div>`;
+}
+function simpleTreeHtml(level1, level2Map){
+  let html='<div class="visual-wrap" style="text-align:left;max-width:460px;margin:auto;background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px 12px;font-size:.84rem;line-height:1.55"><div style="font-size:.82rem;color:var(--muted);margin-bottom:6px"><b>Esquema d’arbre</b></div>';
+  level1.forEach(a=>{html+=`<div style="margin:4px 0"><b>${a}</b>`; (level2Map[a]||[]).forEach(b=>{html+=`<div style="padding-left:16px">↳ ${b}</div>`}); html+='</div>';});
+  html+='</div>'; return html;
+}
+
+/* ── GENERADOR BLOC 1 ───────────────────────────────────── */
+let dadesTypeBag=[];function nextDadesType(){if(!dadesTypeBag.length)dadesTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return dadesTypeBag.pop()}
+function genDadesVariables4(forceType){
+  const type=forceType||nextDadesType();let question,correct,options,guide,solution,alts=[],allowOpen=true,validator='text',openHint='';
+  const allTypes=['Qualitativa','Quantitativa discreta','Quantitativa contínua'];
+  if(type===1){
+    const item=choice([{v:'color preferit',t:'Qualitativa'},{v:'tipus de transport per anar a l’institut',t:'Qualitativa'},{v:'marca de mòbil',t:'Qualitativa'},{v:'assignatura preferida',t:'Qualitativa'}]);correct=item.t;options=shuffle(allTypes.concat(['No és una variable']).filter((x,i,a)=>a.indexOf(x)===i));question=`En un estudi es registra el <b>${item.v}</b> de cada alumne. De quin tipus és aquesta variable?`;guide=['Pregunta’t si la dada és una categoria o un nombre.','Si descriu una categoria sense significat numèric, és qualitativa.'];solution=[`La variable és <b>${item.v}</b>.`,`Els seus valors són categories, no quantitats.`,`Per tant és una variable <b>qualitativa</b>.`];alts=['qualitativa'];openHint='Escriu el tipus de variable.';
+  }else if(type===2){
+    const item=choice([{v:'nombre de germans',t:'Quantitativa discreta'},{v:'nombre de llibres llegits aquest trimestre',t:'Quantitativa discreta'},{v:'gols marcats en una temporada',t:'Quantitativa discreta'},{v:'nombre de missatges rebuts en una hora',t:'Quantitativa discreta'}]);correct=item.t;options=shuffle(allTypes.concat(['No és una variable']).filter((x,i,a)=>a.indexOf(x)===i));question=`Classifica la variable <b>${item.v}</b>.`;guide=['És una dada numèrica.','Pregunta’t si pot prendre qualsevol valor decimal o si és un recompte.'];solution=[`<b>${item.v}</b> és un recompte.`,`No té sentit, en aquest context, tenir 2,37 germans o 5,4 llibres.`,`És <b>quantitativa discreta</b>.`];alts=['quantitativa discreta','discreta'];openHint='Escriu el tipus de variable.';
+  }else if(type===3){
+    const item=choice([{v:'alçada d’una persona',t:'Quantitativa contínua'},{v:'temps per recórrer 100 m',t:'Quantitativa contínua'},{v:'massa d’una motxilla',t:'Quantitativa contínua'},{v:'temperatura a les 12 h',t:'Quantitativa contínua'}]);correct=item.t;options=shuffle(allTypes.concat(['No és una variable']).filter((x,i,a)=>a.indexOf(x)===i));question=`Classifica la variable <b>${item.v}</b>.`;guide=['És una mesura numèrica.','Entre dos valors possibles en poden existir molts d’altres.'];solution=[`<b>${item.v}</b> és una mesura.`,`Pot prendre valors decimals dins d’un interval.`,`Per tant és <b>quantitativa contínua</b>.`];alts=['quantitativa contínua','quantitativa continua','continua','contínua'];openHint='Escriu el tipus de variable.';
+  }else if(type===4){
+    const sc=choice([{pop:'tots els alumnes de 4t d’un institut',sample:'60 alumnes de 4t escollits a l’atzar',q:'Es vol estimar quantes hores dormen els alumnes de 4t d’un institut.'},{pop:'totes les famílies d’un municipi',sample:'300 famílies seleccionades de diferents barris',q:'Es vol estudiar l’ús del transport públic al municipi.'},{pop:'tots els clients d’una botiga durant un mes',sample:'200 tiquets de compra seleccionats',q:'Es vol estimar la despesa per compra.'}]);correct=sc.sample;options=shuffle([sc.sample,sc.pop,'La variable estudiada','Cada valor numèric registrat']);question=`${sc.q}<br>Quina és la <b>mostra</b>?`;guide=['La població és el conjunt complet sobre el qual volem concloure.','La mostra és la part que realment observem o enquestem.'];solution=[`Població: <b>${sc.pop}</b>.`,`S’observen només <b>${sc.sample}</b>.`,`Per tant, aquesta és la <b>mostra</b>.`];allowOpen=false;
+  }else if(type===5){
+    const n=choice([80,100,120,150]),sample=choice([20,25,30,40]);correct=String(sample);options=statOptions(correct,[String(n),String(n-sample),String(Math.round(sample/n*100)),String(sample+10)]);question=`Un centre té <b>${n} alumnes de 4t</b>. Per estudiar el temps de pantalla s’enquesten <b>${sample}</b> alumnes. Quants individus té la mostra?`;guide=['No comptis tota la població.','La mida de la mostra és el nombre d’individus que realment s’han observat.'];solution=[`Població: ${n} alumnes.`,`Mostra: els ${sample} alumnes enquestats.`,`Mida de la mostra = <b>${sample}</b>.`];validator='number';alts=[String(sample)];openHint='Escriu només el nombre.';
+  }else if(type===6){
+    const x=choice([2,3,4,5,6]),y=choice([5.5,6,6.5,7,7.5,8,8.5]);correct=`Estudia ${x} hores i obté una nota de ${fmt(y,1)}`;options=shuffle([correct,`La primera dada (${x}) és la nota i la segona (${fmt(y,1)}) són les hores d’estudi`,`Hi ha ${x} alumnes amb nota ${fmt(y,1)}`,`Les dues dades corresponen a alumnes diferents`]);question=`En un estudi, <b>x = hores d’estudi setmanal</b> i <b>y = nota de l’examen</b>. Què significa la parella <b>(${x}, ${fmt(y,1)})</b>?`;guide=['En una parella (x,y), la primera dada correspon a x i la segona a y.','Les dues dades pertanyen al mateix individu.'];solution=[`Primera coordenada: x=${x} → <b>${x} hores d’estudi</b>.`,`Segona coordenada: y=${fmt(y,1)} → <b>nota ${fmt(y,1)}</b>.`,`La parella descriu <b>un sol alumne</b>.`];allowOpen=false;
+  }else if(type===7){
+    const sc=choice([{v1:'hores d’ús del mòbil',v2:'nota de matemàtiques',ans:'Bivariant'},{v1:'alçada',v2:'massa corporal',ans:'Bivariant'},{v1:'nombre d’hores de son',v2:'temps de reacció',ans:'Bivariant'}]);correct=sc.ans;options=shuffle(['Bivariant','Univariant','No és estadística','Només qualitativa']);question=`En un estudi, per a cada individu es registren <b>${sc.v1}</b> i <b>${sc.v2}</b>. Quin tipus d’estudi és?`;guide=['Compta quantes variables diferents es registren per individu.','Si n’hi ha dues, l’estudi és bivariant.'];solution=[`Per a cada individu es recullen <b>dues variables</b>.`,`Aquestes variables són ${sc.v1} i ${sc.v2}.`,`Per tant és un estudi <b>bivariant</b>.`];alts=['bivariant'];openHint='Escriu el tipus d’estudi.';
+  }else if(type===8){
+    const data=choice([{pairs:[[2,6],[3,7],[4,8],[5,8]],x:'hores d’estudi',y:'nota'},{pairs:[[15,48],[16,52],[17,56],[18,61]],x:'edat',y:'freqüència cardíaca'},{pairs:[[1,12],[2,15],[3,19],[4,25]],x:'hores d’entrenament',y:'cistelles'}]);correct=String(data.pairs.length);options=statOptions(correct,[String(data.pairs.length+1),String(data.pairs.length-1),String(data.pairs.length*2),String(data.pairs[0].length)]);question=`Es registren les parelles ${data.pairs.map(p=>'('+p[0]+'; '+p[1]+')').join(', ')} on x representa <b>${data.x}</b> i y representa <b>${data.y}</b>. Quants <b>individus</b> hi ha a la mostra?`;guide=['Cada parella (x,y) correspon a un únic individu.','Compta el nombre de parelles.'];solution=[`Hi ha <b>${data.pairs.length}</b> parelles de dades.`,`Cada parella representa <b>un individu</b>.`,`Per tant hi ha <b>${data.pairs.length} individus</b>.`];validator='number';alts=[String(data.pairs.length)];openHint='Escriu el nombre d’individus.';
+  }else if(type===9){
+    const sc=choice([{q:'conèixer l’opinió de tots els alumnes de 4t sobre l’horari',ind:'un alumne de 4t',pop:'tots els alumnes de 4t'},{q:'estudiar la durada de les bateries d’un model de telèfon',ind:'un telèfon del model estudiat',pop:'tots els telèfons d’aquell model'},{q:'estudiar el pes de les pomes d’una collita',ind:'una poma de la collita',pop:'totes les pomes de la collita'}]);correct=sc.ind;options=shuffle([sc.ind,sc.pop,'La mostra sencera','La variable estadística']);question=`En un estudi per <b>${sc.q}</b>, què és un <b>individu estadístic</b>?`;guide=['L’individu és la unitat elemental sobre la qual recollim dades.','No és el conjunt complet ni la mostra sencera.'];solution=[`La població seria <b>${sc.pop}</b>.`,`Cada element observat per separat és <b>${sc.ind}</b>.`,`Això és un <b>individu estadístic</b>.`];allowOpen=false;
+  }else{
+    const pairs=choice([{x:'temperatura exterior',y:'consum elèctric d’una casa',ans:'Sí, perquè cada dia aporta dues mesures relacionades'},{x:'hores de son',y:'temps de reacció',ans:'Sí, perquè cada persona aporta una dada de cada variable'},{x:'color preferit',y:'nombre de germans',ans:'Sí, perquè es registren dues variables per individu'}]);correct=pairs.ans;options=shuffle([correct,'No, perquè només les variables quantitatives poden formar dades bivariants','No, perquè cal estudiar dues poblacions diferents','Només seria bivariant si les dues variables tinguessin la mateixa unitat']);question=`Es registra per a cada individu <b>${pairs.x}</b> i <b>${pairs.y}</b>. És un estudi de <b>dues variables</b>?`;guide=['Un estudi bivariant registra dues característiques sobre els mateixos individus.','Les variables no han de tenir la mateixa unitat ni ser totes dues quantitatives.'];solution=[`Per a cada individu es recullen <b>dues dades</b>.`,`Aquestes dades corresponen a ${pairs.x} i ${pairs.y}.`,`Per tant: <b>${correct}</b>.`];allowOpen=false;
+  }
+  return {topicId:'dadesVariables4t',type,question,correct,options,guide,solution,alts,allowOpen,validator,openHint};
+}
+
+/* ── GENERADOR BLOC 2 ───────────────────────────────────── */
+let taulesTypeBag=[];function nextTaulesType(){if(!taulesTypeBag.length)taulesTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return taulesTypeBag.pop()}
+function genTaulesRepresentacions4(forceType){
+  const type=forceType||nextTaulesType();let question,correct,options,guide,solution,alts=[],allowOpen=true,validator='text',openHint='';
+  const a=rnd(6,18),b=rnd(5,16),c=rnd(5,17),d=rnd(6,19),tab=table2x2Html(['4t A','4t B'],['Esport: sí','Esport: no'],a,b,c,d),N=a+b+c+d;
+  if(type===1){
+    correct=String(a);options=statOptions(correct,[String(a+b),String(a+c),String(N),String(a+1)]);question=`Observa la taula.${tab}Quants alumnes de <b>4t A practiquen esport</b>?`;guide=['Busca la fila 4t A.','Creua-la amb la columna “Esport: sí”.'];solution=[`Fila: <b>4t A</b>.`,`Columna: <b>Esport: sí</b>.`,`A la intersecció hi ha <b>${a}</b> alumnes.`];validator='number';alts=[String(a)];openHint='Escriu el nombre d’alumnes.';
+  }else if(type===2){
+    const total=a+b;correct=String(total);options=statOptions(correct,[String(a),String(b),String(a+c),String(N)]);question=`Observa la taula.${tab}Quants alumnes hi ha en total a <b>4t A</b>?`;guide=['El total d’una fila s’obté sumant totes les seves cel·les.','Suma els que practiquen esport i els que no.'];solution=[`A 4t A hi ha ${a} que practiquen esport i ${b} que no.`,`Total = ${a}+${b}=<b>${total}</b>.`];validator='number';alts=[String(total)];openHint='Escriu el total de la fila.';
+  }else if(type===3){
+    const total=a+c;correct=String(total);options=statOptions(correct,[String(a),String(c),String(a+b),String(N)]);question=`Observa la taula.${tab}Quants alumnes <b>practiquen esport</b> entre els dos grups?`;guide=['Ara necessites el total de la columna “Esport: sí”.','Suma els valors dels dos grups.'];solution=[`4t A: ${a}.`,`4t B: ${c}.`,`Total = ${a}+${c}=<b>${total}</b>.`];validator='number';alts=[String(total)];openHint='Escriu el total de la columna.';
+  }else if(type===4){
+    const total=a+b,p=a/total*100;correct=fmt(p,1)+' %';options=statOptions(correct,[fmt(a/N*100,1)+' %',fmt(b/total*100,1)+' %',fmt(total/N*100,1)+' %',fmt(100-p,1)+' %']);question=`Observa la taula.${tab}Quin percentatge dels alumnes de <b>4t A</b> practica esport?`;guide=['La pregunta diu “dels alumnes de 4t A”: el denominador és el total de 4t A.','Calcula a/(a+b)·100.'];solution=[`Total de 4t A = ${a}+${b}=<b>${total}</b>.`,`D’aquests, ${a} practiquen esport.`,`Percentatge = ${a}/${total}·100 ≈ <b>${correct}</b>.`];validator='number';alts=[fmt(p,2),String(p)];openHint='Pots escriure el percentatge amb o sense %.';
+  }else if(type===5){
+    correct='Diagrama de dispersió (núvol de punts)';options=shuffle([correct,'Diagrama de sectors','Un únic diagrama de barres','Pictograma']);question='Per a cada alumne es registren <b>hores d’estudi setmanal</b> i <b>nota de l’examen</b>. Quina representació és especialment adequada per veure si hi ha una relació entre aquestes dues variables quantitatives?';guide=['Cada alumne aporta una parella (x,y).','Busca una representació que dibuixi cada parella com un punt.'];solution=['Les dues variables són <b>quantitatives</b>.','Cada individu aporta una parella (hores, nota).','La representació adequada és un <b>diagrama de dispersió o núvol de punts</b>.'];alts=['diagrama de dispersio','núvol de punts','nuvol de punts','diagrama de dispersió'];openHint='Escriu el nom de la representació.';
+  }else if(type===6){
+    correct='Barres agrupades';options=shuffle([correct,'Núvol de punts','Histograma d’una sola variable','Diagrama de sectors únic']);question='Volem comparar, per a <b>4t A i 4t B</b>, quants alumnes van a l’institut <b>a peu, en bicicleta o en transport públic</b>. Quina representació facilita especialment comparar els dos grups categoria per categoria?';guide=['Les categories són qualitatives.','Volem veure dues sèries de freqüències sobre les mateixes categories.'];solution=['Tenim categories de transport i dos grups per comparar.','Unes <b>barres agrupades</b> permeten posar costat per costat les freqüències de 4t A i 4t B per a cada categoria.'];alts=['barres agrupades','diagrama de barres agrupades'];openHint='Escriu el tipus de gràfic.';
+  }else if(type===7){
+    const vals=[82,86],g=miniBars(vals,['Any 1','Any 2'],80);correct='Exagera visualment la diferència perquè l’eix comença a 80';options=shuffle([correct,'És incorrecte perquè un gràfic de barres no pot representar percentatges','Demostra que el segon valor és més del doble del primer','No hi ha cap problema: l’escala no afecta la percepció']);question=`Un gràfic mostra dos percentatges, 82% i 86%, però l’eix vertical comença a 80.${g}Quina lectura crítica és més adequada?`;guide=['Compara la diferència numèrica real: només 4 punts percentuals.','Mira on comença l’eix vertical.','Retallar l’eix pot fer que una diferència petita sembli enorme.'];solution=['Diferència real: 86−82=<b>4 punts percentuals</b>.','L’eix vertical comença a <b>80</b>, no a 0.','Això fa que les barres tinguin alçades molt diferents visualment.','Conclusió: <b>el gràfic exagera la diferència</b>.'];allowOpen=false;
+  }else if(type===8){
+    const rowTotal=c+d,p=c/rowTotal*100;correct=fmt(p,1)+' %';options=statOptions(correct,[fmt(c/N*100,1)+' %',fmt((a+c)/N*100,1)+' %',fmt(d/rowTotal*100,1)+' %',fmt(100-p,1)+' %']);question=`Observa la taula.${tab}Quin percentatge dels alumnes de <b>4t B</b> practica esport?`;guide=['El denominador és el total de 4t B, perquè la pregunta restringeix el grup.','Suma primer la fila 4t B.'];solution=[`Total de 4t B = ${c}+${d}=<b>${rowTotal}</b>.`,`Practiquen esport: ${c}.`,`Percentatge = ${c}/${rowTotal}·100 ≈ <b>${correct}</b>.`];validator='number';alts=[fmt(p,2),String(p)];openHint='Pots escriure el percentatge amb o sense %.';
+  }else if(type===9){
+    const totalYes=a+c,totalNo=b+d;correct=totalYes>totalNo?'Hi ha més alumnes que practiquen esport':'Hi ha més alumnes que no practiquen esport';if(totalYes===totalNo)correct='Hi ha el mateix nombre en les dues categories';options=shuffle([correct,'4t A és necessàriament el grup més esportista','La taula no permet comparar totals','Tots els alumnes de 4t practiquen esport']);question=`Observa la taula.${tab}Quina conclusió sobre el <b>total dels dos grups</b> és correcta?`;guide=['Suma les dues files dins de cada categoria.','Compara el total de la columna “sí” amb el total de la columna “no”.'];solution=[`Practiquen esport: ${a}+${c}=<b>${totalYes}</b>.`,`No practiquen esport: ${b}+${d}=<b>${totalNo}</b>.`,`Per tant: <b>${correct}</b>.`];allowOpen=false;
+  }else{
+    const contexts=choice([{x:'temperatura diària',y:'consum elèctric',ans:'Núvol de punts'},{x:'alçada',y:'massa corporal',ans:'Núvol de punts'},{x:'hores de son',y:'temps de reacció',ans:'Núvol de punts'}]);correct=contexts.ans;options=shuffle(['Núvol de punts','Diagrama de sectors','Pictograma','Una sola barra']);question=`Volem representar conjuntament <b>${contexts.x}</b> i <b>${contexts.y}</b> per a molts individus o dies. Quin gràfic conserva explícitament cada parella de valors?`;guide=['Necessitem una coordenada horitzontal i una de vertical per a cada observació.','Cada parella es representa com un punt.'];solution=[`Cada observació aporta dos valors: (${contexts.x}, ${contexts.y}).`,`Un <b>núvol de punts</b> manté cada parella com una coordenada del pla.`,`Resposta: <b>${correct}</b>.`];alts=['nuvol de punts','núvol de punts','diagrama de dispersió','diagrama de dispersio'];openHint='Escriu el nom del gràfic.';
+  }
+  return {topicId:'taulesRepresentacions4t',type,question,correct,options,guide,solution,alts,allowOpen,validator,openHint};
+}
+
+/* ── GENERADOR BLOC 3 ───────────────────────────────────── */
+let comparacioTypeBag=[];function nextComparacioType(){if(!comparacioTypeBag.length)comparacioTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return comparacioTypeBag.pop()}
+function genComparacioDistribucions4(forceType){
+  const type=forceType||nextComparacioType();let question,correct,options,guide,solution,alts=[],allowOpen=true,validator='text',openHint='';
+  if(type===1){
+    const a=choice([6.1,6.3,6.5,6.7,6.9]),b=choice([6.8,7.0,7.2,7.4,7.6]);correct='Grup B';options=shuffle(['Grup B','Grup A','Tenen la mateixa mitjana','No es pot saber']);question=`Les notes de dos grups tenen les mitjanes següents: <b>Grup A = ${fmt(a,1)}</b> i <b>Grup B = ${fmt(b,1)}</b>. Quin grup té una <b>mitjana més alta</b>?`;guide=['Compara directament els dos valors de la mitjana.','El grup amb el valor més gran és el que té la mitjana més alta.'];solution=[`Mitjana del grup A: <b>${fmt(a,1)}</b>.`,`Mitjana del grup B: <b>${fmt(b,1)}</b>.`,`Com que ${fmt(b,1)} > ${fmt(a,1)}, la resposta és <b>Grup B</b>.`];alts=['b','grup b'];openHint='Escriu quin grup és.';
+  }else if(type===2){
+    const arr=choice([[4,5,6,7,8],[3,4,5,5,9],[5,6,6,7,10],[2,4,4,6,8]]),med=arr[2];correct=String(med);options=statOptions(correct,[String(arr[1]),String(arr[3]),String(arr[0]+arr[4]),String(med+1)]);question=`Les dades ordenades són <b>${arr.join(', ')}</b>. Quina és la <b>mediana</b>?`;guide=['Hi ha 5 dades ordenades.','La mediana és la dada central, la tercera.'];solution=[`Hi ha 5 dades.`,`La posició central és la <b>3a</b>.`,`La tercera dada és <b>${med}</b>, que és la mediana.`];validator='number';alts=[String(med)];openHint='Escriu el valor de la mediana.';
+  }else if(type===3){
+    const arr=choice([[2,4,6,7,9],[5,6,6,7,11],[8,9,10,11,14],[3,5,8,8,12]]),r=arr[arr.length-1]-arr[0];correct=String(r);options=statOptions(correct,[String(arr[arr.length-1]),String(arr[0]),String(r+1),String(r-1)]);question=`Considera les dades <b>${arr.join(', ')}</b>. Quin és el <b>rang o recorregut</b>?`;guide=['El rang és màxim − mínim.','Busca la dada més gran i la més petita.'];solution=[`Valor mínim: <b>${arr[0]}</b>.`,`Valor màxim: <b>${arr[arr.length-1]}</b>.`,`Rang = ${arr[arr.length-1]} − ${arr[0]} = <b>${r}</b>.`];validator='number';alts=[String(r)];openHint='Escriu el rang.';
+  }else if(type===4){
+    const ma=choice([6.4,6.6,6.8,7.0]),mb=ma,ra=choice([2,3]),rb=choice([5,6,7]);correct='Grup A';options=shuffle(['Grup A','Grup B','Tenen la mateixa homogeneïtat','No es pot saber']);question=`Dos grups tenen la mateixa mitjana <b>${fmt(ma,1)}</b>. Però els seus rangs són <b>Grup A = ${ra}</b> i <b>Grup B = ${rb}</b>. Quin grup és <b>més homogeni</b>?`;guide=['Més homogeni vol dir menys dispers.','Amb el rang, el grup més homogeni és el que té el rang més petit.'];solution=[`Els dos grups tenen la mateixa mitjana.`,`Comparem la dispersió: rang A = <b>${ra}</b>, rang B = <b>${rb}</b>.`,`Com que ${ra} < ${rb}, el grup <b>A</b> és més homogeni.`];alts=['a','grup a'];openHint='Escriu quin grup és.';
+  }else if(type===5){
+    const m=choice([6.2,6.5,6.8]),ra=choice([3,4]),rb=ra+choice([2,3]);correct='Grup B';options=shuffle(['Grup B','Grup A','Tenen la mateixa dispersió','No es pot deduir']);question=`Els dos grups tenen la mateixa mediana <b>${fmt(m,1)}</b>. El rang del grup A és <b>${ra}</b> i el del grup B és <b>${rb}</b>. Quin grup presenta <b>més dispersió</b>?`;guide=['Més dispersió implica valors més separats.','Compara els rangs: un rang més gran indica més dispersió.'];solution=[`Mediana igual, així que ens fixem en la dispersió.`,`Rang A = <b>${ra}</b> i rang B = <b>${rb}</b>.`,`Com que ${rb} > ${ra}, el grup <b>B</b> és més dispers.`];alts=['b','grup b'];openHint='Escriu quin grup és.';
+  }else if(type===6){
+    correct='La mediana';options=shuffle(['La mediana','La mitjana','El rang','La moda sempre']);question='Quan hi ha un <b>valor atípic molt alt</b>, quina mesura de centralitat acostuma a quedar <b>menys afectada</b>?';guide=['Una dada extrema arrossega la mitjana.','La mediana depèn de la posició central, no de la mida exacta del valor extrem.'];solution=['Un valor atípic pot fer pujar molt la <b>mitjana</b>.','La <b>mediana</b> sol variar molt menys, perquè només depèn de l’ordre de les dades.','Resposta: <b>la mediana</b>.'];alts=['mediana','la mediana'];openHint='Escriu la mesura.';
+  }else if(type===7){
+    const med=choice([6,7,8]),mean=med+choice([1,1.5,2]);correct='La mitjana és més gran que la mediana';options=shuffle(['La mitjana és més gran que la mediana','La mediana és més gran que la mitjana','Són iguals sempre','No es pot comparar']);question=`En un conjunt de dades hi ha un <b>valor extrem molt alt</b> que estira la distribució cap a la dreta. Quina afirmació és la més probable?`;guide=['Pensa en l’efecte del valor atípic sobre la mitjana.','La mediana acostuma a quedar més estable.'];solution=['Un valor extrem alt fa pujar la <b>mitjana</b> més que la mediana.','Per això, en aquest cas, és habitual que <b>mitjana > mediana</b>.'];allowOpen=false;
+  }else if(type===8){
+    const a=choice([6.2,6.4,6.6]),b=a+choice([0.6,0.8,1.0]),ra=choice([2,3]),rb=choice([2,3,4]);correct='Grup B';options=shuffle(['Grup B','Grup A','No es pot decidir','Tenen el mateix rendiment mitjà']);question=`Es comparen dos grups: <b>mitjana A = ${fmt(a,1)}</b>, <b>mitjana B = ${fmt(b,1)}</b>, <b>rang A = ${ra}</b> i <b>rang B = ${rb}</b>. Si la pregunta és <b>quin grup rendeix millor de mitjana</b>, quina resposta és correcta?`;guide=['La pregunta diu “de mitjana”, així que cal prioritzar la mitjana.','La dispersió aporta context, però no canvia quin valor mitjà és més alt.'];solution=[`Mitjana A = <b>${fmt(a,1)}</b>.`,`Mitjana B = <b>${fmt(b,1)}</b>.`,`Com que ${fmt(b,1)} > ${fmt(a,1)}, el grup que rendeix millor de mitjana és <b>Grup B</b>.`];alts=['b','grup b'];openHint='Escriu quin grup és.';
+  }else if(type===9){
+    const q1a=choice([4,5,6]),q3a=q1a+choice([2,3]),q1b=choice([4,5,6]),q3b=q1b+choice([4,5]);const iqa=q3a-q1a,iqb=q3b-q1b;correct='Grup A';options=shuffle(['Grup A','Grup B','Tenen el mateix RIQ','No es pot saber']);question=`El grup A té <b>Q1 = ${q1a}</b> i <b>Q3 = ${q3a}</b>. El grup B té <b>Q1 = ${q1b}</b> i <b>Q3 = ${q3b}</b>. Quin grup és <b>més homogeni segons el rang interquartílic</b>?`;guide=['Calcula el RIQ: Q3 − Q1 per a cada grup.','El grup amb RIQ més petit és més homogeni al centre de la distribució.'];solution=[`RIQ A = ${q3a} − ${q1a} = <b>${iqa}</b>.`,`RIQ B = ${q3b} − ${q1b} = <b>${iqb}</b>.`,`Com que ${iqa} < ${iqb}, el grup <b>A</b> és més homogeni segons el RIQ.`];alts=['a','grup a'];openHint='Escriu quin grup és.';
+  }else{
+    const arr=choice([[2,4,6,8],[5,6,8,10],[3,5,7,9],[4,6,7,11]]),med=(arr[1]+arr[2])/2;correct=fmt(med,1);options=statOptions(correct,[fmt(arr[1],1),fmt(arr[2],1),fmt(med+1,1),fmt(med-1,1)]);question=`Les dades ordenades són <b>${arr.join(', ')}</b>. Quina és la <b>mediana</b>?`;guide=['Hi ha 4 dades ordenades.','La mediana és la mitjana de les dues dades centrals.'];solution=[`Les dues dades centrals són <b>${arr[1]}</b> i <b>${arr[2]}</b>.`,`Mediana = (${arr[1]} + ${arr[2]}) / 2 = <b>${fmt(med,1)}</b>.`];validator='number';alts=[String(med),fmt(med,2)];openHint='Escriu la mediana.';
+  }
+  return {topicId:'comparacioDistribucions4t',type,question,correct,options,guide,solution,alts,allowOpen,validator,openHint};
+}
+
+/* ── GENERADOR BLOC 4 ───────────────────────────────────── */
+let mostreigTypeBag=[];function nextMostreigType(){if(!mostreigTypeBag.length)mostreigTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return mostreigTypeBag.pop()}
+function genEstudisMostreig4(forceType){
+  const type=forceType||nextMostreigType();let question,correct,options,guide,solution,alts=[],allowOpen=true,validator='text',openHint='';
+  if(type===1){
+    const sc=choice([{pop:'tots els alumnes del centre',sample:'80 alumnes escollits a l’atzar',goal:'saber quants utilitzen bicicleta per venir a classe'},{pop:'totes les famílies del barri',sample:'150 famílies enquestades',goal:'estudiar l’ús del bus urbà'},{pop:'tots els clients del supermercat durant una setmana',sample:'200 tiquets de compra',goal:'estimar la despesa mitjana'}]);correct=sc.pop;options=shuffle([sc.pop,sc.sample,'La variable estadística','Només els individus que responen més ràpid']);question=`Es fa un estudi per <b>${sc.goal}</b>. Si s’observen ${sc.sample}, quina és la <b>població</b>?`;guide=['La població és el conjunt complet sobre el qual es vol concloure.','La mostra és només la part observada.'];solution=[`La mostra és <b>${sc.sample}</b>.`,`El conjunt complet d’interès és <b>${sc.pop}</b>.`,`Per tant aquesta és la <b>població</b>.`];allowOpen=false;
+  }else if(type===2){
+    const total=choice([320,360,400]),sample=choice([40,60,80]);correct=String(sample);options=statOptions(correct,[String(total),String(total-sample),String(sample+20),String(sample+10)]);question=`En un institut amb <b>${total}</b> alumnes es tria una mostra de <b>${sample}</b> alumnes per fer una enquesta. Quina és la <b>mida de la mostra</b>?`;guide=['La mida de la mostra és el nombre d’individus triats.','No és el total de la població.'];solution=[`Població: ${total} alumnes.`,`Mostra: ${sample} alumnes.`,`La mida de la mostra és <b>${sample}</b>.`];validator='number';alts=[String(sample)];openHint='Escriu el nombre.';
+  }else if(type===3){
+    correct='La mostra aleatòria de diferents grups de 4t';options=shuffle(['La mostra aleatòria de diferents grups de 4t','Preguntar només als teus amics de classe','Fer una enquesta a qui vulgui respondre a Instagram','Enquestar només els primers 20 alumnes que surten del menjador']);question='Es vol saber quantes hores estudien els alumnes de 4t del centre. Quina opció dona una mostra <b>més representativa</b>?';guide=['Busca una selecció que no depengui només de la facilitat o de la voluntat de respondre.','Una mostra aleatòria i repartida entre grups tendeix a ser més representativa.'];solution=['Preguntar només amics o voluntaris introdueix <b>biaix de selecció</b>.','Una mostra <b>aleatòria</b> de diferents grups de 4t és més representativa del conjunt.'];alts=['mostra aleatòria de diferents grups de 4t','la mostra aleatòria de diferents grups de 4t'];openHint='Escriu l’opció correcta.';
+  }else if(type===4){
+    correct='Té biaix perquè només s’enquesta qui vol respondre';options=shuffle(['Té biaix perquè només s’enquesta qui vol respondre','És perfecta perquè hi pot respondre molta gent','Demostra una causalitat','No hi ha cap problema estadístic']);question='Una AMPA penja una enquesta a xarxes socials i només responen les famílies que decideixen fer clic. Quina lectura crítica és la més adequada?';guide=['Pregunta’t si tots els individus de la població tenen la mateixa probabilitat de participar.','Quan respon qui vol, pot aparèixer autoselecció o biaix de voluntariat.'];solution=['No respon una mostra aleatòria, sinó qui vol participar.','Això pot fer que la mostra no sigui representativa.','Conclusió: <b>té biaix perquè només s’enquesta qui vol respondre</b>.'];allowOpen=false;
+  }else if(type===5){
+    correct='Mostra estratificada';options=shuffle(['Mostra estratificada','Mostra de conveniència','Cens sempre obligatori','Mostra només dels delegats']);question='Es vol estudiar la satisfacció amb el menjador en un institut amb 1r, 2n, 3r i 4t. Si volem assegurar presència de tots els cursos, quin tipus de mostreig és especialment adequat?';guide=['Cal garantir representació de cada grup rellevant.','Això es pot fer dividint la població en estrats i triant individus de cada un.'];solution=['Els cursos són grups naturals importants.','Triar alumnes de cada curs ajuda a representar tota la població.','Aquest procediment és un <b>mostreig estratificat</b>.'];alts=['mostreig estratificat','estratificada','mostra estratificada'];openHint='Escriu el tipus de mostreig.';
+  }else if(type===6){
+    correct='Estudi observacional';options=shuffle(['Estudi observacional','Experiment','Mostra esbiaixada','Cens complet']);question='S’observen les hores de son i la nota final de molts alumnes, però <b>no es modifica res</b> ni s’assigna cap tractament. Quin tipus d’estudi és?';guide=['Pregunta’t si hi ha intervenció o només observació.','Si no es modifica res, no és un experiment.'];solution=['No s’assigna cap tractament ni es força cap canvi.','Només s’observen dades que ja existeixen.','Per tant és un <b>estudi observacional</b>.'];alts=['observacional','estudi observacional'];openHint='Escriu el tipus d’estudi.';
+  }else if(type===7){
+    correct='No; una correlació no prova causalitat';options=shuffle(['No; una correlació no prova causalitat','Sí; sempre que hi ha relació hi ha causa','Sí; perquè hi ha dues variables quantitatives','Només si la mostra és gran']);question='En un estudi observacional s’observa que els alumnes que dormen més hores solen tenir notes més altes. Es pot concloure directament que <b>dormir més causa</b> millors notes?';guide=['Una associació pot estar influïda per altres factors.','Observar relació no equival a demostrar causa-efecte.'];solution=['L’estudi només mostra una <b>associació</b> entre dues variables.','Poden existir altres factors explicatius.','Per tant: <b>no; una correlació no prova causalitat</b>.'];allowOpen=false;
+  }else if(type===8){
+    correct='La pregunta indueix la resposta';options=shuffle(['La pregunta indueix la resposta','És una mostra aleatòria simple','La població és massa petita','No hi ha cap problema']);question='En una enquesta es pregunta: <b>“No creus que seria una gran millora ampliar el pati?”</b>. Quin possible problema presenta aquesta pregunta?';guide=['Fixa’t en si la formulació és neutra o ja suggereix una resposta.','Les preguntes orientades poden esbiaixar els resultats.'];solution=['L’expressió “gran millora” suggereix una valoració positiva.','Això pot influir en la resposta de les persones enquestades.','La pregunta <b>indueix la resposta</b>.'];allowOpen=false;
+  }else if(type===9){
+    correct='Augmentar la mida de la mostra i triar-la aleatòriament';options=shuffle(['Augmentar la mida de la mostra i triar-la aleatòriament','Preguntar només als alumnes més accessibles','Quedar-se amb les 10 primeres respostes','Eliminar les respostes que no agraden']);question='Quina decisió acostuma a <b>millorar la fiabilitat</b> d’un estudi estadístic escolar?';guide=['Busquem una mostra més estable i menys esbiaixada.','Una mostra més gran i aleatòria sol millorar la fiabilitat.'];solution=['Una mostra molt petita o triada per comoditat pot ser poc fiable.','Triar més individus i fer-ho a l’atzar redueix l’efecte de l’atzar i del biaix.','La millor opció és <b>augmentar la mida de la mostra i triar-la aleatòriament</b>.'];allowOpen=false;
+  }else{
+    correct='Hi ha biaix de selecció';options=shuffle(['Hi ha biaix de selecció','És un experiment controlat','La correlació està demostrada','La mediana és incorrecta']);question='Es vol estudiar el temps de pantalles dels adolescents d’un municipi, però la mostra només inclou alumnes d’un <b>únic centre privat</b>. Quina crítica és més adequada?';guide=['Compara el grup enquestat amb tota la població d’interès.','Si falta diversitat de la població, la mostra pot no representar bé el conjunt.'];solution=['La població són tots els adolescents del municipi.','La mostra només recull un subgrup molt concret.','Per tant pot existir <b>biaix de selecció</b>.'];alts=['biaix de selecció','biaix de seleccio'];openHint='Escriu la crítica principal.';
+  }
+  return {topicId:'estudisMostreig4t',type,question,correct,options,guide,solution,alts,allowOpen,validator,openHint};
+}
+
+/* ── GENERADOR BLOC 5 ───────────────────────────────────── */
+let nuvolsTypeBag=[];function nextNuvolsType(){if(!nuvolsTypeBag.length)nuvolsTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return nuvolsTypeBag.pop()}
+function genNuvolsRelacio4(forceType){
+  const type=forceType||nextNuvolsType();let question,correct,options,guide,solution,alts=[],allowOpen=true,validator='text',openHint='';
+  if(type===1){
+    const pts=[[1,2],[2,3],[3,4],[4,5.2],[5,6],[6,7.1],[7,8]];correct='Associació positiva';options=shuffle(['Associació positiva','Associació negativa','Sense associació clara','Associació vertical']);question=`Observa el núvol de punts.${scatterPlotHtml(pts,'x','y')}Quina <b>direcció</b> presenta la relació?`;guide=['Mira què passa amb y quan x augmenta.','Els punts pugen d’esquerra a dreta.'];solution=['Quan x augmenta, y també tendeix a augmentar.','El núvol puja d’esquerra a dreta.','Per tant hi ha <b>associació positiva</b>.'];alts=['positiva','associació positiva','associacio positiva'];openHint='Escriu la direcció de l’associació.';
+  }else if(type===2){
+    const pts=[[1,9],[2,8.2],[3,7.4],[4,6.1],[5,5.2],[6,4.4],[7,3.1]];correct='Associació negativa';options=shuffle(['Associació negativa','Associació positiva','Sense associació clara','Associació constant']);question=`Observa el núvol de punts.${scatterPlotHtml(pts,'x','y')}Quina direcció descriu millor la relació?`;guide=['Mira si y tendeix a pujar o a baixar quan x augmenta.','Els punts baixen d’esquerra a dreta.'];solution=['A mesura que x augmenta, y tendeix a disminuir.','El núvol baixa d’esquerra a dreta.','La relació és <b>negativa</b>.'];alts=['negativa','associació negativa','associacio negativa'];openHint='Escriu la direcció de l’associació.';
+  }else if(type===3){
+    const pts=[[1,5],[2,8],[3,3],[4,7],[5,4],[6,8.5],[7,3.5],[8,6]];correct='No hi ha una associació clara';options=shuffle([correct,'Hi ha una associació positiva forta','Hi ha una associació negativa forta','Tots els punts formen una recta exacta']);question=`Observa el núvol.${scatterPlotHtml(pts,'x','y')}Quina descripció és més adequada?`;guide=['Busca si els punts segueixen una direcció general clara.','Aquí els valors pugen i baixen sense un patró estable.'];solution=['Els punts estan força dispersos.','No segueixen clarament una tendència creixent ni decreixent.','La millor conclusió és que <b>no hi ha una associació clara</b>.'];allowOpen=false;
+  }else if(type===4){
+    const pts=[[1,2.1],[2,3],[3,3.9],[4,5.1],[5,6],[6,6.8],[7,8.1]];correct='Forta i positiva';options=shuffle(['Forta i positiva','Feble i positiva','Forta i negativa','Sense associació']);question=`Observa el núvol.${scatterPlotHtml(pts,'x','y')}Com descriuries conjuntament la <b>direcció i intensitat</b>?`;guide=['Primer determina la direcció: puja o baixa?','Després mira si els punts queden molt a prop d’un patró lineal.'];solution=['El núvol puja d’esquerra a dreta: direcció <b>positiva</b>.','Els punts estan molt pròxims a una recta imaginària: associació <b>forta</b>.','Resposta: <b>forta i positiva</b>.'];alts=['forta i positiva','positiva forta'];openHint='Escriu intensitat i direcció.';
+  }else if(type===5){
+    const pts=[[1,2],[2,3],[3,4],[4,5],[5,6],[6,7],[9,1]],out='(9, 1)';correct=out;options=shuffle([out,'(1, 2)','(4, 5)','(6, 7)']);question=`Observa les dades.${scatterPlotHtml(pts,'x','y')}Quin punt és un <b>valor atípic</b> respecte del patró general?`;guide=['La majoria de punts segueixen una tendència creixent molt clara.','Busca el punt que queda molt separat d’aquesta tendència.'];solution=['Els sis primers punts segueixen aproximadament y ≈ x + 1.','El punt <b>(9, 1)</b> queda molt lluny d’aquest patró.','Per tant és el <b>valor atípic</b>.'];alts=['9,1','(9,1)','9 1'];openHint='Escriu les coordenades del punt.';
+  }else if(type===6){
+    correct='Les dues variables tendeixen a augmentar juntes';options=shuffle([correct,'Quan una puja, l’altra sempre baixa','Una variable causa necessàriament l’altra','No es pot parlar de cap relació']);question='Un núvol de punts mostra una <b>associació positiva</b>. Què significa això?';guide=['“Positiva” descriu la direcció general.','No vol dir causalitat ni que tots els punts compleixin exactament el mateix patró.'];solution=['En una associació positiva, valors grans d’una variable solen anar amb valors grans de l’altra.','Per tant <b>les dues variables tendeixen a augmentar juntes</b>.'];allowOpen=false;
+  }else if(type===7){
+    correct='Associació forta';options=shuffle(['Associació forta','Associació feble','Sense associació','No es pot representar amb punts']);question='En un núvol, els punts queden <b>molt a prop d’una recta</b>, tot i que no exactament sobre ella. Com descriuries la intensitat de la relació?';guide=['La intensitat indica com de clar és el patró.','Com menys dispersió al voltant de la tendència, més forta és l’associació.'];solution=['Els punts segueixen molt de prop el mateix patró.','La dispersió al voltant de la recta és petita.','Això correspon a una <b>associació forta</b>.'];alts=['forta','associació forta','associacio forta'];openHint='Escriu la intensitat.';
+  }else if(type===8){
+    const contexts=choice([{x:'temperatura exterior',y:'venda de gelats',ans:'Associació positiva'},{x:'velocitat constant',y:'temps necessari per recórrer una distància fixa',ans:'Associació negativa'},{x:'número de sabata',y:'nota d’un examen de llengua',ans:'No s’espera una associació clara'}]);correct=contexts.ans;options=shuffle(['Associació positiva','Associació negativa','No s’espera una associació clara','Relació causal segura']);question=`Sense veure encara les dades, quina relació seria més plausible entre <b>${contexts.x}</b> i <b>${contexts.y}</b>?`;guide=['Pensa en com podria canviar la segona variable quan augmenta la primera.','No confonguis una expectativa raonable amb una certesa causal.'];solution=[`Variables: ${contexts.x} i ${contexts.y}.`,`La descripció més plausible és <b>${correct}</b>.`,`Caldria observar les dades per confirmar si realment apareix aquest patró.`];allowOpen=false;
+  }else if(type===9){
+    const pts=[[1,3],[2,4.5],[3,3.8],[4,6],[5,5.2],[6,7.5],[7,6.6],[8,8.4]];correct='Positiva però més aviat feble/moderada';options=shuffle([correct,'Negativa i forta','Sense cap tendència','Perfectament lineal']);question=`Observa el núvol.${scatterPlotHtml(pts,'x','y')}Quina descripció és més raonable?`;guide=['La direcció general és ascendent.','Però els punts estan més dispersos que en una relació forta.'];solution=['El conjunt tendeix a pujar: associació <b>positiva</b>.','Els punts no queden enganxats a una recta, sinó força dispersos.','Per això la relació és <b>positiva però no gaire forta</b>.'];allowOpen=false;
+  }else{
+    const pts=[[1,2],[2,4],[3,6],[4,8],[5,10]];correct='Aproximadament lineal';options=shuffle(['Aproximadament lineal','Clarament circular','Sense cap patró','Necessàriament causal']);question=`Observa el núvol.${scatterPlotHtml(pts,'x','y')}Quina forma general presenta la relació?`;guide=['Mira si els punts poden aproximar-se bé per una recta.','No cal que la relació sigui exacta per considerar-la lineal.'];solution=['Els punts segueixen una direcció recta creixent.','Una recta descriu molt bé el patró.','La relació és <b>aproximadament lineal</b>.'];alts=['lineal','aproximadament lineal'];openHint='Escriu la forma de la relació.';
+  }
+  return {topicId:'nuvolsRelacio4t',type,question,correct,options,guide,solution,alts,allowOpen,validator,openHint};
+}
+
+/* ── GENERADOR BLOC 6 ───────────────────────────────────── */
+let regressioTypeBag=[];function nextRegressioType(){if(!regressioTypeBag.length)regressioTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return regressioTypeBag.pop()}
+function genRegressioPrediccions4(forceType){
+  const type=forceType||nextRegressioType();let question,correct,options,guide,solution,alts=[],allowOpen=true,validator='text',openHint='';
+  if(type===1){
+    const a=choice([0.5,0.6,0.8,1.2]),b=choice([2,3,4]),x=choice([4,5,6,7]),y=a*x+b;correct=fmt(y,1);options=statOptions(correct,[fmt(a+x+b,1),fmt(a*b+x,1),fmt(y+a,1),fmt(y-b,1)]);question=`Una recta d’ajust és <b>y = ${fmt(a,1)}x + ${b}</b>. Quina predicció dona per a <b>x = ${x}</b>?`;guide=['Substitueix x pel valor indicat.','Multiplica primer i després suma l’ordenada a l’origen.'];solution=[`Model: y = ${fmt(a,1)}x + ${b}.`,`Substituïm x = ${x}: y = ${fmt(a,1)}·${x} + ${b}.`,`y = ${fmt(a*x,1)} + ${b} = <b>${fmt(y,1)}</b>.`];validator='number';alts=[String(y),fmt(y,2)];openHint='Escriu el valor predit.';
+  }else if(type===2){
+    const a=choice([0.4,0.6,0.8,1.5]),b=choice([2,3,4]);correct=`Quan x augmenta 1 unitat, y augmenta aproximadament ${fmt(a,1)} unitats`;options=shuffle([correct,`Quan y augmenta 1, x augmenta exactament ${fmt(a,1)}`,`Quan x = 0, y val ${fmt(a,1)}`,`La relació és necessàriament causal`]);question=`En el model <b>y = ${fmt(a,1)}x + ${b}</b>, què interpreta la <b>pendent ${fmt(a,1)}</b>?`;guide=['La pendent mesura el canvi de y associat a un augment d’una unitat de x.','No confonguis la pendent amb l’ordenada a l’origen.'];solution=[`La pendent és a = <b>${fmt(a,1)}</b>.`,`Per cada augment d’1 unitat en x, el model estima un canvi de ${fmt(a,1)} unitats en y.`,`Per tant: <b>${correct}</b>.`];allowOpen=false;
+  }else if(type===3){
+    const a=choice([1.2,1.5,2]),b=choice([5,10,20]);correct=String(b);options=statOptions(correct,[fmt(a,1),String(b+5),String(b-a),String(a*b)]);question=`En la recta <b>y = ${fmt(a,1)}x + ${b}</b>, quin valor prediu el model quan <b>x = 0</b>?`;guide=['Substitueix x = 0.','El terme amb x desapareix.'];solution=[`y = ${fmt(a,1)}·0 + ${b}.`,`El producte és 0.`,`Per tant y = <b>${b}</b>.`];validator='number';alts=[String(b)];openHint='Escriu el valor.';
+  }else if(type===4){
+    const x=choice([4,5,6]),range='entre 2 i 8';correct='Interpolació';options=shuffle(['Interpolació','Extrapolació','Causalitat','Mostreig estratificat']);question=`El model s’ha ajustat amb dades de x <b>${range}</b>. Es fa una predicció per a <b>x = ${x}</b>. Com s’anomena aquesta predicció?`;guide=['Comprova si el valor està dins o fora del rang observat.','Predir dins del rang és interpolar.'];solution=[`Les dades observades cobreixen x entre 2 i 8.`,`x = ${x} està <b>dins</b> d’aquest interval.`,`La predicció és una <b>interpolació</b>.`];alts=['interpolació','interpolacio'];openHint='Escriu el tipus de predicció.';
+  }else if(type===5){
+    const x=choice([15,20,30]);correct='Extrapolació i cal interpretar-la amb prudència';options=shuffle([correct,'Interpolació molt fiable','No és una predicció perquè x és positiu','Demostra causalitat']);question=`Una recta s’ha ajustat amb dades de x entre <b>2 i 8</b>, però s’utilitza per predir y quan <b>x = ${x}</b>. Quina valoració és adequada?`;guide=['El nou valor queda molt fora del rang observat.','Fora del rang, el patró pot deixar de continuar igual.'];solution=[`Rang observat: 2 ≤ x ≤ 8.`,`El valor x = ${x} queda <b>fora</b> del rang.`,`És una <b>extrapolació</b> i la predicció s’ha de prendre amb prudència.`];allowOpen=false;
+  }else if(type===6){
+    const pts=[[1,2],[2,3],[3,4.2],[4,5],[5,6.2],[6,7]],line=[1,1];correct='Sí, perquè el núvol segueix aproximadament una tendència lineal';options=shuffle([correct,'No, perquè cap punt pot separar-se de la recta','No, perquè només es pot fer regressió si tots els punts coincideixen exactament','Sí, i això prova causalitat']);question=`Observa el núvol i la recta d’ajust dibuixada en discontinu.${scatterPlotHtml(pts,'x','y',line)}És raonable utilitzar un <b>model lineal</b>?`;guide=['No cal que tots els punts estiguin exactament sobre la recta.','Mira si el patró general és aproximadament rectilini.'];solution=['Els punts segueixen una tendència creixent aproximadament recta.','La desviació respecte de la recta és petita.','Per tant <b>sí que és raonable</b> considerar un model lineal.'];allowOpen=false;
+  }else if(type===7){
+    const pts=[[1,1],[2,4],[3,9],[4,16],[5,25],[6,36]];correct='No; el patró és clarament corbat';options=shuffle([correct,'Sí; qualsevol núvol es pot resumir igual de bé amb una recta','Sí; perquè x i y són quantitatives','No; perquè hi ha massa punts']);question=`Observa el núvol.${scatterPlotHtml(pts,'x','y')}Seria una recta un model especialment adequat?`;guide=['Mira la forma del patró, no només si puja.','Una relació creixent pot ser no lineal.'];solution=['Els punts formen una <b>corba</b> cada vegada més inclinada.','Una recta no seguiria bé tota la forma.','Per tant <b>no</b> és un model lineal especialment adequat.'];allowOpen=false;
+  }else if(type===8){
+    correct='No; associació o regressió no demostren causalitat';options=shuffle([correct,'Sí; la recta d’ajust sempre identifica la causa','Sí; si la pendent és positiva','Només depèn de l’ordenada a l’origen']);question='Un estudi troba una recta d’ajust molt bona entre <b>venda de gelats</b> i <b>nombre de rescats a la platja</b>. Podem concloure que vendre gelats causa rescats?';guide=['Una tercera variable pot influir en totes dues, com la temperatura o l’afluència de persones.','Una relació estadística no basta per demostrar causa-efecte.'];solution=['Les dues variables poden augmentar alhora perquè fa més calor i hi ha més gent a la platja.','La regressió descriu una <b>associació</b>, no una causa demostrada.','Resposta: <b>no; associació o regressió no demostren causalitat</b>.'];allowOpen=false;
+  }else if(type===9){
+    const a=choice([0.5,0.8,1.2]),b=choice([2,3]),x1=choice([2,3]),x2=x1+choice([3,4]),y1=a*x1+b,y2=a*x2+b,d=y2-y1;correct=fmt(d,1);options=statOptions(correct,[fmt(a,1),fmt(y2,1),fmt(y1,1),fmt(d+b,1)]);question=`El model és <b>y = ${fmt(a,1)}x + ${b}</b>. Quant augmenta la predicció de y quan x passa de <b>${x1}</b> a <b>${x2}</b>?`;guide=['Pots calcular les dues prediccions i restar-les.','També pots usar pendent × augment de x.'];solution=[`Augment de x = ${x2} − ${x1} = <b>${x2-x1}</b>.`,`La pendent és ${fmt(a,1)}.`,`Augment estimat de y = ${fmt(a,1)}·${x2-x1} = <b>${fmt(d,1)}</b>.`];validator='number';alts=[String(d),fmt(d,2)];openHint='Escriu l’augment estimat.';
+  }else{
+    const a=choice([1,1.5,2]),b=choice([1,2,3]),x=choice([3,4,5]),pred=a*x+b,actual=pred+choice([1,2]);correct='El valor observat és superior al que prediu la recta';options=shuffle([correct,'El valor observat és inferior al que prediu la recta','El punt està exactament sobre la recta','No es poden comparar valor observat i predit']);question=`Per a x = ${x}, la recta d’ajust prediu <b>y = ${fmt(pred,1)}</b>, però s’observa realment <b>y = ${fmt(actual,1)}</b>. Quina afirmació és correcta?`;guide=['Compara directament el valor observat amb el valor predit.','Si l’observat és més gran, el punt queda per sobre de la recta.'];solution=[`Valor predit: <b>${fmt(pred,1)}</b>.`,`Valor observat: <b>${fmt(actual,1)}</b>.`,`Com que ${fmt(actual,1)} > ${fmt(pred,1)}, l’observació és <b>superior a la predicció</b>.`];allowOpen=false;
+  }
+  return {topicId:'regressioPrediccions4t',type,question,correct,options,guide,solution,alts,allowOpen,validator,openHint};
+}
+
+
+/* ── GENERADOR BLOC 7 ───────────────────────────────────── */
+let espaiTypeBag=[];function nextEspaiType(){if(!espaiTypeBag.length)espaiTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return espaiTypeBag.pop()}
+function genEspaiMostralRecompte4(forceType){
+  const type=forceType||nextEspaiType();let question,correct,options,guide,solution,alts=[],allowOpen=true,validator='text',openHint='';
+  if(type===1){
+    const outcomes=['cara','creu'];correct='2';options=statOptions(correct,['1','3','4','0']);question='Es llança una <b>moneda</b>. Quants resultats diferents té l’<b>espai mostral</b>?';guide=['Escriu tots els resultats possibles.','Compta quants n’hi ha.'];solution=['En un llançament de moneda poden sortir <b>cara</b> o <b>creu</b>.','Aquests són els dos únics resultats possibles.','Per tant, l’espai mostral té <b>2</b> elements.'];validator='number';alts=['2'];openHint='Escriu el nombre de resultats.';
+  }else if(type===2){
+    const out=['CC','CX','XC','XX'];correct='4';options=statOptions(correct,['2','3','8','6']);question='Es llancen <b>dues monedes</b>. Quants resultats diferents té l’espai mostral si tenim en compte l’ordre?';guide=['L’ordre importa: cara-creu no és el mateix que creu-cara.','Compta les parelles possibles.'];solution=['Els resultats són <b>CC, CX, XC i XX</b>.','Com que l’ordre compta, hi ha quatre parelles diferents.','Per tant, la mida de l’espai mostral és <b>4</b>.'];validator='number';alts=['4'];openHint='Escriu el nombre.';
+  }else if(type===3){
+    const fav=3;correct='50 %';options=statOptions(correct,['33,3 %','66,7 %','25 %','75 %']);question='Es llança un dau equilibrat. Quina és la probabilitat d’obtenir un <b>nombre parell</b>?';guide=['En un dau, els nombres parells són 2, 4 i 6.','Aplica la regla de Laplace i passa el resultat a percentatge.'];solution=['Casos possibles: <b>6</b>.','Casos favorables: <b>3</b> (2, 4 i 6).','P(parell) = 3/6 = 1/2 = <b>50 %</b>.'];validator='number';alts=['50','50,0','50.0'];openHint='Escriu el percentatge amb o sense %.';
+  }else if(type===4){
+    const fav=2,total=6,p=100*fav/total;correct=fmt(p,1)+' %';options=statOptions(correct,['50 %','25 %','66,7 %','16,7 %']);question='Es llança un dau equilibrat. Quina és la probabilitat d’obtenir un nombre <b>més gran que 4</b>?';guide=['Els resultats favorables són 5 i 6.','Aplica la regla de Laplace.'];solution=['Casos favorables: <b>2</b> (5 i 6).','Casos possibles: <b>6</b>.',`P(>4) = 2/6 = 1/3 ≈ <b>${fmt(p,1)} %</b>.`];validator='number';alts=[fmt(p,2),'33,3'];openHint='Escriu el percentatge aproximat.';
+  }else if(type===5){
+    const s=choice([[3,2],[4,3],[5,2]]); const count=s[0]*s[1];correct=String(count);options=statOptions(correct,[String(s[0]+s[1]),String(s[0]*s[1]-1),String(s[0]*s[1]+1),String(Math.max(...s))]);question=`Per formar un menú hi ha <b>${s[0]}</b> primers plats i <b>${s[1]}</b> segons. Quants menús diferents es poden fer triant <b>un primer i un segon</b>?`;guide=['És una elecció en dues etapes.','Aplica el principi multiplicatiu.'];solution=[`Per a cada primer hi ha ${s[1]} segons possibles.`,`Nombre total de menús = ${s[0]} · ${s[1]} = <b>${count}</b>.`,`Per tant hi ha <b>${count}</b> menús diferents.`];validator='number';alts=[String(count)];openHint='Escriu el nombre de menús.';
+  }else if(type===6){
+    const colors=choice([[2,3],[3,4],[4,2]]), c1=colors[0], c2=colors[1], total=c1*c2;correct=String(total);options=statOptions(correct,[String(c1+c2),String(total-1),String(total+2),String(c1*c1)]);question=`Una botiga ven <b>${c1}</b> samarretes diferents i <b>${c2}</b> pantalons diferents. Quants conjunts es poden formar triant una samarreta i uns pantalons?`;guide=['La primera elecció és la samarreta i la segona els pantalons.','Multiplica les opcions de cada etapa.'];solution=[`Opcions de samarreta: <b>${c1}</b>.`,`Opcions de pantalons: <b>${c2}</b>.`,`Total de conjunts = ${c1}·${c2} = <b>${total}</b>.`];validator='number';alts=[String(total)];openHint='Escriu el total de conjunts.';
+  }else if(type===7){
+    correct='6';options=statOptions(correct,['5','7','12','36']);question='Es llancen <b>dos daus</b>. Quants resultats ordenats tenen suma <b>7</b>?';guide=['Compteu les parelles ordenades que sumen 7.','(1,6) i (6,1) són diferents perquè l’ordre compta.'];solution=['Les parelles ordenades que sumen 7 són <b>(1,6), (2,5), (3,4), (4,3), (5,2) i (6,1)</b>.','N’hi ha <b>6</b>.','Per tant, el nombre de casos favorables és <b>6</b>.'];validator='number';alts=['6'];openHint='Escriu el nombre de casos favorables.';
+  }else if(type===8){
+    correct='Successos';options=shuffle(['Successos','Variables contínues','Mostres estratificades','Correlacions']);question='En probabilitat, com s’anomenen els conjunts de resultats de l’espai mostral que compleixen una propietat determinada?';guide=['No es parla d’individus ni de mostres, sinó de resultats possibles.','El nom és específic del llenguatge de probabilitat.'];solution=['Un conjunt de resultats que compleix una condició és un <b>succés</b>.','Per exemple, “sortir un nombre parell” és un succés del dau.'];alts=['succés','successos'];openHint='Escriu el terme.';
+  }else if(type===9){
+    correct='Llançar el dau moltes vegades i usar la freqüència relativa dels 6';options=shuffle([correct,'Llançar el dau una sola vegada i prendre aquell resultat com a probabilitat','Escollir el valor 1/6 sense fer cap experiment i dir que és una freqüència experimental','Eliminar els llançaments en què no surt 6']);question='Volem <b>estimar experimentalment</b> la probabilitat d’obtenir un 6 amb un dau. Quin pla és més adequat?';guide=['Una probabilitat experimental necessita moltes repeticions.','La freqüència relativa és nombre d’èxits dividit pel nombre total de proves.'];solution=['Planifiquem un nombre prou gran de llançaments del dau.','Comptem quantes vegades surt 6.','Calculem la <b>freqüència relativa</b>: nombre de 6 / nombre total de llançaments.','Aquesta freqüència relativa és una estimació experimental de la probabilitat.'];allowOpen=false;
+  }else{
+    correct='Impossible';options=shuffle(['Impossible','Segur','Equiprobable amb els altres','No es pot saber']);question='En llançar un dau equilibrat, el succés <b>“obtenir un 8”</b> és...';guide=['Mira quins nombres poden sortir realment en un dau.','Si cap resultat el compleix, és impossible.'];solution=['En un dau només poden sortir els nombres <b>1, 2, 3, 4, 5 i 6</b>.','El nombre 8 no forma part de l’espai mostral.','Per tant és un succés <b>impossible</b>.'];alts=['impossible'];openHint='Escriu el tipus de succés.';
+  }
+  return {topicId:'espaiMostralRecompte4t',type,question,correct,options,guide,solution,alts,allowOpen,validator,openHint};
+}
+
+/* ── GENERADOR BLOC 8 ───────────────────────────────────── */
+let compostosTypeBag=[];function nextCompostosType(){if(!compostosTypeBag.length)compostosTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return compostosTypeBag.pop()}
+function genExperimentsCompostos4(forceType){
+  const type=forceType||nextCompostosType();let question,correct,options,guide,solution,alts=[],allowOpen=true,validator='text',openHint='';
+  if(type===1){
+    const p=50;correct='50 %';options=statOptions(correct,['25 %','75 %','33,3 %','66,7 %']);question=`Es llancen <b>dues monedes</b>. Quina és la probabilitat d’obtenir <b>exactament una cara</b>?${outcomesGridHtml(['CC','CX','XC','XX'],'Espai mostral')}`;guide=['Identifica els 4 resultats possibles.','Compta els que tenen exactament una cara.'];solution=['Espai mostral: <b>CC, CX, XC, XX</b>.','Exactament una cara passa a <b>CX</b> i <b>XC</b>.','Per tant P = 2/4 = 1/2 = <b>50 %</b>.'];validator='number';alts=['50','50,0'];openHint='Escriu el percentatge.';
+  }else if(type===2){
+    const p=75;correct='75 %';options=statOptions(correct,['25 %','50 %','66,7 %','100 %']);question='Es llancen dues monedes. Quina és la probabilitat d’obtenir <b>almenys una cara</b>?';guide=['Pots comptar directament o usar el complement “cap cara”.','Només hi ha un resultat sense cap cara.'];solution=['Només hi ha un resultat sense cap cara: <b>XX</b>.','Així, P(almenys una cara) = 1 − P(XX) = 1 − 1/4 = 3/4.','En percentatge, és <b>75 %</b>.'];validator='number';alts=['75','75,0'];openHint='Escriu el percentatge.';
+  }else if(type===3){
+    const p=25;correct='25 %';options=statOptions(correct,['50 %','16,7 %','33,3 %','75 %']);question='Es llancen dos daus equilibrats. Quina és la probabilitat que <b>tots dos siguin parells</b>?';guide=['En un dau, la probabilitat de parell és 3/6 = 1/2.','Com que són dos llançaments independents, multiplica.'];solution=['P(parell en un dau) = 3/6 = <b>1/2</b>.','Com que els daus són independents, P(tots dos parells) = 1/2 · 1/2 = <b>1/4</b>.','En percentatge, <b>25 %</b>.'];validator='number';alts=['25','25,0'];openHint='Escriu el percentatge.';
+  }else if(type===4){
+    const p=16.7;correct='16,7 %';options=statOptions(correct,['8,3 %','25 %','33,3 %','50 %']);question='Es llancen dos daus equilibrats. Quina és la probabilitat que la suma sigui <b>7</b>?';guide=['Recorda quantes parelles ordenades sumen 7.','L’espai mostral de dos daus té 36 resultats equiprobables.'];solution=['Casos favorables: <b>6</b> parelles ordenades sumen 7.','Casos possibles: <b>36</b>.','P(suma 7) = 6/36 = 1/6 ≈ <b>16,7 %</b>.'];validator='number';alts=['16,7','16.7','16,67'];openHint='Escriu el percentatge aproximat.';
+  }else if(type===5){
+    correct='Amb reemplaçament, perquè la composició es manté igual';options=shuffle([correct,'Sense reemplaçament, perquè el total baixa cada vegada','És igual en tots dos casos','Cap de les anteriors']);question='En extreure dues boles d’una urna, en quin cas la probabilitat del segon pas és la mateixa que al primer?';guide=['Pregunta’t si després de la primera extracció la bola torna o no torna a l’urna.','Si torna, la composició no canvia.'];solution=['Si es retorna la bola després de la primera extracció, la composició de l’urna es manté igual.','Així, les probabilitats del segon pas són les mateixes que al primer.','Això és el cas <b>amb reemplaçament</b>.'];allowOpen=false;
+  }else if(type===6){
+    const p=24;correct='24 %';options=statOptions(correct,['16 %','40 %','60 %','36 %']);question='Una urna conté <b>3 boles vermelles i 2 blaves</b>. Es fan dues extraccions <b>amb reemplaçament</b>. Quina és la probabilitat d’obtenir <b>vermella i després blava</b>?';guide=['Amb reemplaçament, les probabilitats del segon pas no canvien.','Multiplica P(V) i P(B).'];solution=['P(vermella) = 3/5.','Com que hi ha reemplaçament, P(blava després) = 2/5.','P(V i després B) = 3/5 · 2/5 = 6/25 = <b>24 %</b>.'];validator='number';alts=['24','24,0'];openHint='Escriu el percentatge.';
+  }else if(type===7){
+    const p=30;correct='30 %';options=statOptions(correct,['24 %','40 %','20 %','50 %']);question='Una urna conté <b>3 boles vermelles i 2 blaves</b>. Es fan dues extraccions <b>sense reemplaçament</b>. Quina és la probabilitat d’obtenir <b>vermella i després blava</b>?';guide=['Sense reemplaçament, després d’extreure una vermella canvia la composició.','Multiplica la probabilitat del primer pas per la del segon en el nou context.'];solution=['P(vermella primer) = 3/5.','Després queden 4 boles, de les quals 2 són blaves, així que P(blava després de V) = 2/4.','P(V i després B) = 3/5 · 2/4 = 3/10 = <b>30 %</b>.'];validator='number';alts=['30','30,0'];openHint='Escriu el percentatge.';
+  }else if(type===8){
+    const sc=choice([
+      {a:'en dues monedes guanyes si surt exactament una cara',pa:50,b:'en un dau guanyes si surt 5 o 6',pb:33.3},
+      {a:'en un dau guanyes si surt un nombre parell',pa:50,b:'d’una urna amb 4 vermelles i 6 blaves guanyes si surt vermella',pb:40},
+      {a:'en un dau guanyes si surt un nombre més gran que 2',pa:66.7,b:'en dues monedes guanyes si surten iguals',pb:50},
+      {a:'en dues monedes guanyes si surt almenys una cara',pa:75,b:'en un dau guanyes si surt un nombre diferent de 6',pb:83.3}
+    ]);correct=sc.pa>sc.pb?'Joc A':sc.pb>sc.pa?'Joc B':'Tenen la mateixa probabilitat de guanyar';options=shuffle(['Joc A','Joc B','Tenen la mateixa probabilitat de guanyar','No es pot comparar']);question=`Quin joc és <b>més favorable</b>? <b>Joc A:</b> ${sc.a}. <b>Joc B:</b> ${sc.b}.`;guide=['Calcula la probabilitat de guanyar en cada joc.','Compara els dos percentatges abans de decidir.'];solution=[`Probabilitat de guanyar al joc A: <b>${fmt(sc.pa,1)} %</b>.`,`Probabilitat de guanyar al joc B: <b>${fmt(sc.pb,1)} %</b>.`,`Com que comparem ${fmt(sc.pa,1)} % i ${fmt(sc.pb,1)} %, la decisió és <b>${correct}</b>.`];allowOpen=false;
+  }else if(type===9){
+    correct='La probabilitat canvia en el segon pas';options=shuffle(['La probabilitat canvia en el segon pas','La probabilitat és la mateixa en tots els passos','Sempre és 1/2','No es pot representar amb un arbre']);question='Quina diferència clau hi ha entre una extracció <b>sense reemplaçament</b> i una <b>amb reemplaçament</b>?';guide=['Fixa’t en si es modifica o no la composició del conjunt després del primer pas.','Aquesta diferència afecta la probabilitat del segon pas.'];solution=['Sense reemplaçament, després del primer pas hi ha un element menys i pot haver canviat la composició.','Per això les probabilitats del segon pas <b>canvien</b>.','Amb reemplaçament això no passa.'];allowOpen=false;
+  }else{
+    correct='50 %';options=statOptions(correct,['25 %','75 %','100 %','0 %']);question='Una urna conté <b>2 boles vermelles i 2 blaves</b>. Es fan dues extraccions sense reemplaçament. Quina és la probabilitat que la <b>primera</b> bola sigui vermella?';guide=['La pregunta només demana el primer pas.','Abans de cap extracció hi ha 2 vermelles de 4 boles.'];solution=['Al començament hi ha <b>2 vermelles</b> d’un total de <b>4</b> boles.','Per tant P(vermella a la primera) = 2/4 = 1/2.','En percentatge, <b>50 %</b>.'];validator='number';alts=['50','50,0'];openHint='Escriu el percentatge.';
+  }
+  return {topicId:'experimentsCompostos4t',type,question,correct,options,guide,solution,alts,allowOpen,validator,openHint};
+}
+
+
+/* ── AMPLIACIÓ A · TAULES DE CONTINGÈNCIA ─────────────── */
+let contingenciaTypeBag=[];function nextContingenciaType(){if(!contingenciaTypeBag.length)contingenciaTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return contingenciaTypeBag.pop()}
+function genContingenciaBatx4(forceType){
+  const type=forceType||nextContingenciaType();let question,correct,options,guide,solution,alts=[],allowOpen=true,validator='text',openHint='';
+  const a=rnd(8,20),b=rnd(6,18),c=rnd(7,19),d=rnd(5,17),N=a+b+c+d,tab=table2x2Html(['4t A','4t B'],['Esport: sí','Esport: no'],a,b,c,d);
+  if(type===1){
+    correct=String(a);options=statOptions(correct,[String(a+b),String(a+c),String(N),String(c)]);question=`Observa la taula.${tab}Quina és la <b>freqüència conjunta</b> de “4t A” i “practica esport”?`;guide=['Una freqüència conjunta és una cel·la interior.','Creua la fila 4t A amb la columna Esport: sí.'];solution=[`La fila és <b>4t A</b>.`,`La columna és <b>Esport: sí</b>.`,`La seva intersecció és <b>${a}</b>.`];validator='number';alts=[String(a)];openHint='Escriu la freqüència.';
+  }else if(type===2){
+    const t=a+b;correct=String(t);options=statOptions(correct,[String(a),String(b),String(a+c),String(N)]);question=`Observa la taula.${tab}Quina és la <b>freqüència marginal</b> corresponent a 4t A?`;guide=['Una freqüència marginal és un total de fila o columna.','Suma les dues cel·les de la fila 4t A.'];solution=[`A 4t A hi ha ${a} esportistes i ${b} no esportistes.`,`Total marginal = ${a}+${b}=<b>${t}</b>.`];validator='number';alts=[String(t)];openHint='Escriu el total de la fila.';
+  }else if(type===3){
+    const t=a+c;correct=String(t);options=statOptions(correct,[String(a),String(c),String(a+b),String(N)]);question=`Observa la taula.${tab}Quina és la freqüència marginal de la columna <b>“Esport: sí”</b>?`;guide=['Suma els valors de la columna “sí”.','És un total marginal de columna.'];solution=[`Esportistes de 4t A: ${a}.`,`Esportistes de 4t B: ${c}.`,`Total marginal = ${a}+${c}=<b>${t}</b>.`];validator='number';alts=[String(t)];openHint='Escriu el total de la columna.';
+  }else if(type===4){
+    const p=a/N*100;correct=fmt(p,1)+' %';options=statOptions(correct,[fmt(a/(a+b)*100,1)+' %',fmt(a/(a+c)*100,1)+' %',fmt((a+b)/N*100,1)+' %']);question=`Observa la taula.${tab}Quin percentatge del <b>total de l’estudi</b> representa la cel·la “4t A i esport sí”?`;guide=['El denominador és el total general N.','Calcula a/N·100.'];solution=[`Freqüència conjunta: <b>${a}</b>.`,`Total general: <b>${N}</b>.`,`Percentatge = ${a}/${N}·100 ≈ <b>${correct}</b>.`];validator='number';alts=[fmt(p,2),String(p)];openHint='Escriu el percentatge.';
+  }else if(type===5){
+    const row=a+b,p=a/row*100;correct=fmt(p,1)+' %';options=statOptions(correct,[fmt(a/N*100,1)+' %',fmt(a/(a+c)*100,1)+' %',fmt(b/row*100,1)+' %']);question=`Observa la taula.${tab}Entre els alumnes de <b>4t A</b>, quin percentatge practica esport?`;guide=['La frase “entre els de 4t A” fixa el denominador.','Divideix la cel·la esport sí pel total de la fila 4t A.'];solution=[`Total de 4t A = ${a}+${b}=<b>${row}</b>.`,`D’aquests, ${a} practiquen esport.`,`Percentatge = ${a}/${row}·100 ≈ <b>${correct}</b>.`];validator='number';alts=[fmt(p,2),String(p)];openHint='Escriu el percentatge.';
+  }else if(type===6){
+    const col=a+c,p=a/col*100;correct=fmt(p,1)+' %';options=statOptions(correct,[fmt(a/N*100,1)+' %',fmt(a/(a+b)*100,1)+' %',fmt(c/col*100,1)+' %']);question=`Observa la taula.${tab}Entre els alumnes que <b>practiquen esport</b>, quin percentatge pertany a 4t A?`;guide=['Ara el grup de referència és la columna Esport: sí.','Divideix la cel·la de 4t A pel total d’esportistes.'];solution=[`Total d’esportistes = ${a}+${c}=<b>${col}</b>.`,`D’aquests, ${a} són de 4t A.`,`Percentatge = ${a}/${col}·100 ≈ <b>${correct}</b>.`];validator='number';alts=[fmt(p,2),String(p)];openHint='Escriu el percentatge.';
+  }else if(type===7){
+    correct='Depèn del grup de referència o denominador';options=shuffle([correct,'Sempre és el mateix percentatge','Només depèn del numerador','Una taula de contingència no permet calcular percentatges']);question='Una mateixa cel·la d’una taula de contingència pot donar percentatges diferents segons si dividim pel total de la fila, de la columna o general. Per què?';guide=['La freqüència de la cel·la és la mateixa.','El que canvia és el conjunt respecte del qual comparem.'];solution=['La cel·la manté el mateix numerador.','Però fila, columna i total general tenen <b>denominadors diferents</b>.','Per això el percentatge <b>depèn del grup de referència</b>.'];allowOpen=false;
+  }else if(type===8){
+    const rowA=a+b,rowB=c+d,pA=a/rowA*100,pB=c/rowB*100;correct=pA>pB?'4t A':pB>pA?'4t B':'Tenen el mateix percentatge';options=shuffle([correct,...['4t A','4t B','Tenen el mateix percentatge','No es pot comparar'].filter(x=>x!==correct).slice(0,3)]);question=`Observa la taula.${tab}Quin grup té un <b>percentatge més alt d’alumnes esportistes dins del seu propi grup</b>?`;guide=['No comparis només els nombres absoluts.','Calcula a/(a+b) i c/(c+d).'];solution=[`4t A: ${a}/${rowA}·100 ≈ <b>${fmt(pA,1)} %</b>.`,`4t B: ${c}/${rowB}·100 ≈ <b>${fmt(pB,1)} %</b>.`,`Per tant: <b>${correct}</b>.`];allowOpen=false;
+  }else if(type===9){
+    const totalRow=choice([30,40,50]),known1=rnd(8,totalRow-10),known2=totalRow-known1;correct=String(known2);options=statOptions(correct,[String(known1),String(totalRow),String(totalRow+known1),String(Math.abs(known1-known2))]);question=`En una fila d’una taula de contingència hi ha un total de <b>${totalRow}</b> individus. Una de les dues cel·les val <b>${known1}</b>. Quin valor ha de tenir l’altra cel·la?`;guide=['El total de fila és la suma de les dues cel·les.','Resta la cel·la coneguda al total.'];solution=[`Total de fila: <b>${totalRow}</b>.`,`Cel·la coneguda: <b>${known1}</b>.`,`Cel·la desconeguda = ${totalRow}−${known1}=<b>${known2}</b>.`];validator='number';alts=[String(known2)];openHint='Escriu la freqüència que falta.';
+  }else{
+    correct='La freqüència relativa conjunta';options=shuffle([correct,'La freqüència marginal','La mitjana conjunta','El rang interquartílic']);question='Com s’anomena el quocient entre la freqüència d’una <b>cel·la interior</b> d’una taula de contingència i el <b>total general</b>?';guide=['És una proporció associada simultàniament a dues condicions.','No és un total de fila ni de columna.'];solution=['La cel·la és una <b>freqüència conjunta</b>.','En dividir-la pel total general obtenim una proporció.','Aquesta proporció és la <b>freqüència relativa conjunta</b>.'];alts=['freqüència relativa conjunta','frequencia relativa conjunta'];openHint='Escriu el nom.';
+  }
+  return {topicId:'contingenciaBatx4t',type,question,correct,options,guide,solution,alts,allowOpen,validator,openHint};
+}
+
+/* ── AMPLIACIÓ B · CORRELACIÓ I REGRESSIÓ ─────────────── */
+let correlacioTypeBag=[];function nextCorrelacioType(){if(!correlacioTypeBag.length)correlacioTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return correlacioTypeBag.pop()}
+function genCorrelacioBatx4(forceType){
+  const type=forceType||nextCorrelacioType();let question,correct,options,guide,solution,alts=[],allowOpen=true,validator='text',openHint='';
+  if(type===1){
+    const r=choice([0.82,0.91,0.95]);correct='Correlació lineal forta i positiva';options=shuffle([correct,'Correlació lineal forta i negativa','Correlació lineal molt feble','No hi ha cap relació possible']);question=`En un estudi s’obté <b>r = ${fmt(r,2)}</b>. Quina interpretació és la més adequada?`;guide=['Mira el signe de r.','Després mira com de prop està |r| d’1.'];solution=[`r és <b>positiu</b>, així que la direcció és positiva.`,`|r| = ${fmt(Math.abs(r),2)} és proper a 1, així que la relació lineal és forta.`,`Resposta: <b>correlació lineal forta i positiva</b>.`];allowOpen=false;
+  }else if(type===2){
+    const r=choice([-0.78,-0.86,-0.94]);correct='Correlació lineal forta i negativa';options=shuffle([correct,'Correlació lineal forta i positiva','Correlació lineal feble i positiva','Correlació nul·la']);question=`Un conjunt de dades té <b>r = ${fmt(r,2)}</b>. Com descriuries la correlació lineal?`;guide=['El signe indica la direcció.','El valor absolut indica la força.'];solution=[`r < 0: direcció <b>negativa</b>.`,`|r| = ${fmt(Math.abs(r),2)} és gran: relació lineal <b>forta</b>.`,`Per tant és <b>forta i negativa</b>.`];allowOpen=false;
+  }else if(type===3){
+    const r=choice([-0.12,-0.05,0.08,0.15]);correct='Correlació lineal molt feble';options=shuffle([correct,'Correlació lineal perfecta','Correlació lineal forta','Causalitat demostrada']);question=`Si <b>r = ${fmt(r,2)}</b>, quina descripció és més adequada?`;guide=['Fixa’t en |r|, no només en el signe.','Un valor molt proper a 0 indica poca associació lineal.'];solution=[`|r| = ${fmt(Math.abs(r),2)} és molt proper a 0.`,`Això indica una <b>correlació lineal molt feble</b>.`,`No permet afirmar que no existeixi cap relació no lineal.`];alts=['correlació lineal molt feble','molt feble'];openHint='Escriu la descripció.';
+  }else if(type===4){
+    const a=choice([0.35,0.42,0.58]),b=choice([0.75,0.83,0.91]);correct='El segon conjunt';options=shuffle(['El segon conjunt','El primer conjunt','Tenen la mateixa força','No es pot comparar']);question=`Dos estudis tenen <b>r₁ = ${fmt(a,2)}</b> i <b>r₂ = −${fmt(b,2)}</b>. Quin té una <b>relació lineal més forta</b>?`;guide=['La força depèn de |r|.','El signe només indica la direcció.'];solution=[`|r₁| = ${fmt(a,2)}.`,`|r₂| = ${fmt(b,2)}.`,`Com que ${fmt(b,2)} > ${fmt(a,2)}, <b>el segon conjunt</b> té correlació lineal més forta.`];alts=['segon','el segon conjunt'];openHint='Escriu quin conjunt.';
+  }else if(type===5){
+    correct='No necessàriament; pot existir una relació no lineal';options=shuffle([correct,'Sí; r=0 prova independència total','Sí; r=0 prova causalitat nul·la','No; perquè r només pot ser positiu']);question='Si un conjunt de dades té <b>r ≈ 0</b>, podem concloure que les variables no tenen cap mena de relació?';guide=['r mesura sobretot relació lineal.','Una corba simètrica pot donar r proper a 0.'];solution=['El coeficient r resumeix l’<b>associació lineal</b>.','Una relació corba pot ser clara però tenir r proper a 0.','Per tant: <b>no necessàriament</b>.'];allowOpen=false;
+  }else if(type===6){
+    const pts=[[1,1],[2,4],[3,9],[4,16],[5,25],[6,36]];correct='Pot haver-hi relació forta tot i que r no la resumeixi bé linealment';options=shuffle([correct,'Necessàriament r=1','Necessàriament no hi ha relació','La correlació lineal prova causalitat']);question=`Observa el patró.${scatterPlotHtml(pts,'x','y')}Quina conclusió és més adequada sobre usar només r per descriure aquestes dades?`;guide=['El patró és clar, però no és rectilini.','r està pensat per resumir associació lineal.'];solution=['Els punts segueixen una <b>corba molt clara</b>.','La relació és forta però <b>no lineal</b>.','Per això un únic r pot no resumir adequadament el patró.'];allowOpen=false;
+  }else if(type===7){
+    correct='Un valor atípic pot modificar molt r';options=shuffle([correct,'Els valors atípics mai afecten r','r només depèn del nombre de punts','Un valor atípic sempre fa r=0']);question='Quin efecte pot tenir un <b>valor atípic</b> sobre el coeficient de correlació?';guide=['r depèn de la posició de tots els punts.','Un punt molt allunyat pot canviar la direcció aparent del conjunt.'];solution=['El coeficient r utilitza totes les observacions.','Un punt molt separat pot tenir una influència gran.','Per això <b>un valor atípic pot modificar molt r</b>.'];allowOpen=false;
+  }else if(type===8){
+    const r=choice([0.7,0.82,0.93]);correct='Positiva';options=shuffle(['Positiva','Negativa','Nul·la','No es pot saber mai']);question=`Si el coeficient de correlació és <b>r = ${fmt(r,2)}</b>, quin signe esperem que tingui la <b>pendent de la recta de regressió</b>?`;guide=['El signe de r indica la direcció de la relació lineal.','La pendent segueix aquesta mateixa direcció.'];solution=[`r és <b>positiu</b>.`,`La recta de regressió tindrà pendent del mateix signe.`,`Per tant, la pendent és <b>positiva</b>.`];alts=['positiva'];openHint='Escriu el signe.';
+  }else if(type===9){
+    const r=choice([-0.92,-0.84,-0.76]);correct='Negativa';options=shuffle(['Negativa','Positiva','Zero obligatòriament','No existeix recta']);question=`Si <b>r = ${fmt(r,2)}</b>, quin signe tindrà la pendent de la recta de regressió?`;guide=['r és negatiu.','La recta seguirà una tendència descendent.'];solution=[`El coeficient és <b>negatiu</b>.`,`Això descriu una relació lineal descendent.`,`La pendent serà <b>negativa</b>.`];alts=['negativa'];openHint='Escriu el signe.';
+  }else{
+    correct='No; una correlació alta no demostra causa-efecte';options=shuffle([correct,'Sí; |r|>0,8 sempre demostra causalitat','Sí; si la pendent és positiva','Només si r és negatiu']);question='En un estudi observacional s’obté <b>r = 0,94</b> entre dues variables. Podem concloure que una causa l’altra?';guide=['Una associació molt forta continua sent una associació.','Poden existir variables de confusió o una causa comuna.'];solution=['r = 0,94 indica una <b>relació lineal molt forta</b>.','Però l’estudi és observacional.','Per tant <b>no es pot concloure causalitat</b> només a partir de r.'];allowOpen=false;
+  }
+  return {topicId:'correlacioBatx4t',type,question,correct,options,guide,solution,alts,allowOpen,validator,openHint};
+}
+
+
+/* ── AMPLIACIÓ C · PROBABILITAT CONDICIONADA ───────────── */
+let condicionadaTypeBag=[];function nextCondicionadaType(){if(!condicionadaTypeBag.length)condicionadaTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return condicionadaTypeBag.pop()}
+function genCondicionadaBatx4(forceType){
+  const type=forceType||nextCondicionadaType();let question,correct,options,guide,solution,alts=[],allowOpen=true,validator='text',openHint='';
+  const a=rnd(8,16),b=rnd(4,12),c=rnd(6,15),d=rnd(5,13),tab=table2x2Html(['4t A','4t B'],['Esport: sí','Esport: no'],a,b,c,d);
+  if(type===1){
+    const total=a+b,p=a/total*100;correct=fmt(p,1)+' %';options=statOptions(correct,[fmt(c/(c+d)*100,1)+' %',fmt(a/(a+c)*100,1)+' %',fmt(a/(a+b+c+d)*100,1)+' %',fmt((100-p),1)+' %']);question=`Observa la taula.${tab}Quin és el valor de <b>P(esport | 4t A)</b>?`;guide=['Condicionar a 4t A vol dir mirar només la fila 4t A.','Divideix els esportistes de 4t A pel total de 4t A.'];solution=[`Dins de 4t A hi ha <b>${a+b}</b> alumnes.`,`D’aquests, <b>${a}</b> practiquen esport.`,`P(esport | 4t A) = ${a}/${a+b} ≈ <b>${correct}</b>.`];validator='number';alts=[fmt(p,2),String(p)];openHint='Escriu el percentatge amb o sense %.';
+  }else if(type===2){
+    const total=a+c,p=a/total*100;correct=fmt(p,1)+' %';options=statOptions(correct,[fmt(a/(a+b)*100,1)+' %',fmt(c/(a+c)*100,1)+' %',fmt(a/(a+b+c+d)*100,1)+' %',fmt((100-p),1)+' %']);question=`Observa la taula.${tab}Quin és el valor de <b>P(4t A | esport)</b>?`;guide=['Ara el condicionant és “esport”, així que el denominador és la columna d’esport.','Mira quants esportistes hi ha en total i quants són de 4t A.'];solution=[`Entre els que practiquen esport hi ha <b>${a+c}</b> alumnes.`,`D’aquests, <b>${a}</b> són de 4t A.`,`P(4t A | esport) = ${a}/${a+c} ≈ <b>${correct}</b>.`];validator='number';alts=[fmt(p,2),String(p)];openHint='Escriu el percentatge.';
+  }else if(type===3){
+    correct='La probabilitat que l’alumne practiqui esport sabent que és de 4t A';options=shuffle([correct,'La probabilitat que sigui de 4t A sabent que practica esport','La probabilitat de 4t A o d’esport','La probabilitat que no practiqui esport']);question='Quina interpretació correspon a la notació <b>P(esport | 4t A)</b>?';guide=['Llegeix “A | B” com “A sabent B”.','La condició va darrere la barra vertical.'];solution=['P(esport | 4t A) es llegeix “probabilitat d’esport sabent 4t A”.','Això vol dir que primer restrinxim l’univers als alumnes de 4t A.','Després mirem quina proporció practica esport.'];allowOpen=false;
+  }else if(type===4){
+    correct='Són independents';options=shuffle(['Són independents','Són dependents','No es pot parlar d’independència','Són incompatibles']);question='Es llança una moneda i un dau. Considerem A = “surt cara” i B = “surt un nombre parell”. Quin tipus de relació tenen A i B?';guide=['El resultat de la moneda afecta el del dau?','Si no es condicionen mútuament, són independents.'];solution=['La moneda i el dau són experiments diferents.','Saber si ha sortit cara no canvia la probabilitat d’obtenir un nombre parell al dau.','Per tant, A i B <b>són independents</b>.'];alts=['independents','son independents'];openHint='Escriu la relació.';
+  }else if(type===5){
+    correct='Són dependents';options=shuffle(['Són dependents','Són independents','Són incompatibles','No es pot saber']);question='D’una urna amb 3 boles vermelles i 2 blaves s’extreuen dues boles <b>sense reemplaçament</b>. Considerem A = “la primera és vermella” i B = “la segona és vermella”. A i B són...';guide=['Sense reemplaçament, el primer resultat canvia la composició de l’urna.','Si una probabilitat canvia després de saber l’altra, els successos són dependents.'];solution=['Sense reemplaçament, després de la primera extracció la composició de l’urna canvia.','Per això la probabilitat que la segona sigui vermella depèn del resultat de la primera.','A i B <b>són dependents</b>.'];alts=['dependents','son dependents'];openHint='Escriu la relació.';
+  }else if(type===6){
+    const pA=choice([0.2,0.3,0.4]),pB=choice([0.5,0.6,0.7]),inter=pA*pB;correct=fmt(inter*100,1)+' %';options=statOptions(correct,[fmt(pA*100,1)+' %',fmt(pB*100,1)+' %',fmt((pA+pB)*100,1)+' %',fmt((1-inter)*100,1)+' %']);question=`Si dos successos <b>A</b> i <b>B</b> són independents, amb <b>P(A) = ${fmt(pA*100,0)} %</b> i <b>P(B) = ${fmt(pB*100,0)} %</b>, quant val <b>P(A ∩ B)</b>?`;guide=['En independència, la probabilitat conjunta és el producte.','Multiplica P(A) per P(B).'];solution=[`Si A i B són independents, P(A ∩ B) = P(A)·P(B).`,`Així, ${pA}·${pB} = <b>${inter.toFixed(3)}</b>.`,`En percentatge, això és <b>${correct}</b>.`];validator='number';alts=[fmt(inter*100,2),String(inter*100)];openHint='Escriu el percentatge.';
+  }else if(type===7){
+    const pA=choice([0.25,0.3,0.4]);correct='Sí, és compatible amb independència';options=shuffle([correct,'No, demostra dependència','Només seria compatible si P(B)=0','No es pot comparar']);question=`Si <b>P(A) = ${fmt(pA*100,0)} %</b> i també <b>P(A | B) = ${fmt(pA*100,0)} %</b>, quina conclusió és la més adequada?`;guide=['Compara P(A) amb P(A|B).','Si coincideixen, saber B no canvia la probabilitat d’A.'];solution=[`P(A) i P(A|B) tenen el mateix valor.`,`Això indica que saber B no modifica la probabilitat d’A.`,`Per tant és <b>compatible amb independència</b>.`];allowOpen=false;
+  }else if(type===8){
+    const pA=choice([0.4,0.5]),pB=choice([0.2,0.3]),prod=pA*pB,inter=choice([0.05,0.08,0.1,0.12,0.15].filter(x=>Math.abs(x-prod)>1e-9));correct='No';options=shuffle(['No','Sí','Només si A i B són incompatibles','Falta saber P(A∪B)']);question=`Tenim <b>P(A) = ${fmt(pA,2)}</b>, <b>P(B) = ${fmt(pB,2)}</b> i <b>P(A ∩ B) = ${fmt(inter,2)}</b>. Podem dir que A i B són independents?`;guide=['Comprova si P(A ∩ B) = P(A)·P(B).','Compara el producte amb el valor donat.'];solution=[`Si fossin independents, caldria que P(A ∩ B) = ${fmt(pA,2)}·${fmt(pB,2)} = <b>${fmt(pA*pB,2)}</b>.`,`Però el valor donat és <b>${fmt(inter,2)}</b>.`,`Com que no coincideixen, la resposta és <b>no</b>.`];alts=['no'];openHint='Escriu sí o no.';
+  }else if(type===9){
+    const p1='3/5',p2='2/4';correct='Perquè el primer resultat canvia el conjunt de casos possibles';options=shuffle([correct,'Perquè sempre s’han de sumar probabilitats','Perquè la segona extracció és impossible','Perquè en probabilitat condicionada el numerador desapareix']);question='En una extracció sense reemplaçament, després d’obtenir una vermella, la probabilitat que la següent sigui blava passa de 2/5 a 2/4. Per què?';guide=['Sense reemplaçament, el total d’elements disminueix.','La informació del primer pas condiciona el segon.'];solution=['Abans de la primera extracció hi ha 5 boles; després en queden 4.','La primera extracció canvia l’urna i, per tant, el conjunt de casos possibles.','Això és justament l’efecte de <b>condicionar</b> el segon pas.'];allowOpen=false;
+  }else{
+    const total=c+d,p=d/total*100;correct=fmt(p,1)+' %';options=statOptions(correct,[fmt(c/total*100,1)+' %',fmt(d/(b+d)*100,1)+' %',fmt(d/(a+b+c+d)*100,1)+' %',fmt((100-p),1)+' %']);question=`Observa la taula.${tab}Quin és el valor de <b>P(no esport | 4t B)</b>?`;guide=['Condicionar a 4t B vol dir treballar dins la fila 4t B.','Divideix els que no fan esport de 4t B pel total de 4t B.'];solution=[`A 4t B hi ha <b>${c+d}</b> alumnes.`,`D’aquests, <b>${d}</b> no practiquen esport.`,`P(no esport | 4t B) = ${d}/${c+d} ≈ <b>${correct}</b>.`];validator='number';alts=[fmt(p,2),String(p)];openHint='Escriu el percentatge.';
+  }
+  return {topicId:'condicionadaBatx4t',type,question,correct,options,guide,solution,alts,allowOpen,validator,openHint};
+}
+
+/* ── AMPLIACIÓ D · BAYES I PRIMERS MODELS ──────────────── */
+let bayesTypeBag=[];function nextBayesType(){if(!bayesTypeBag.length)bayesTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return bayesTypeBag.pop()}
+function genBayesBatx4(forceType){
+  const type=forceType||nextBayesType();let question,correct,options,guide,solution,alts=[],allowOpen=true,validator='text',openHint='';
+  if(type===1){
+    correct='No, en general són diferents';options=shuffle([correct,'Sí, sempre són iguals','Només si P(A)=P(B)=1/2','Només en experiments impossibles']);question='Les probabilitats <b>P(malalt | positiu)</b> i <b>P(positiu | malalt)</b> són la mateixa cosa?';guide=['L’ordre dins d’una probabilitat condicionada importa.','La pregunta directa i la inversa no solen coincidir.'];solution=['P(positiu | malalt) pregunta què passa entre els malalts.','P(malalt | positiu) pregunta què passa entre els positius.','En general, <b>són probabilitats diferents</b>.'];allowOpen=false;
+  }else if(type===2){
+    const ill=20,truePos=18,falsePos=49,totalPos=truePos+falsePos,p=truePos/totalPos*100;correct=fmt(p,1)+' %';options=statOptions(correct,[fmt(truePos/ill*100,1)+' %',fmt(falsePos/1000*100,1)+' %','2,0 %',fmt((100-p),1)+' %']);question=`En una població de 1.000 persones, <b>${ill}</b> tenen una malaltia. Un test dona positiu en <b>${truePos}</b> d’aquestes ${ill} persones i també en <b>${falsePos}</b> persones sanes. Si una persona ha donat <b>positiu</b>, quina és la probabilitat que estigui realment malalta?`;guide=['Entre els positius hi ha malalts reals i falsos positius.','Divideix els positius malalts entre tots els positius.'];solution=[`Positius totals = ${truePos} + ${falsePos} = <b>${totalPos}</b>.`,`D’aquests, <b>${truePos}</b> són realment malalts.`,`P(malalt | positiu) = ${truePos}/${totalPos} ≈ <b>${correct}</b>.`];validator='number';alts=[fmt(p,2),String(p)];openHint='Escriu el percentatge.';
+  }else if(type===3){
+    const ill=30,truePos=27,falsePos=63,totalPos=truePos+falsePos,p=truePos/totalPos*100;correct=fmt(p,1)+' %';options=statOptions(correct,[fmt(truePos/ill*100,1)+' %','3,0 %',fmt(falsePos/970*100,1)+' %',fmt((100-p),1)+' %']);question=`En una ciutat, 30 de cada 1.000 persones tenen una certa condició. Un test detecta 27 d’aquestes 30 persones, però també dona positiu a 63 persones sense la condició. Si el test surt positiu, quina és la probabilitat aproximada de tenir realment la condició?`;guide=['No et quedis només amb els 27 encerts.','Cal comparar els veritables positius amb tots els positius.'];solution=[`Positius totals = ${truePos}+${falsePos} = <b>${totalPos}</b>.`,`Positius reals = <b>${truePos}</b>.`,`P(condició | positiu) = ${truePos}/${totalPos} = <b>${correct}</b>.`];validator='number';alts=[fmt(p,2),String(p)];openHint='Escriu el percentatge.';
+  }else if(type===4){
+    correct='87,5 %';options=statOptions(correct,['75 %','62,5 %','50 %','12,5 %']);question=`Es llancen <b>3 monedes</b>. Quina és la probabilitat d’obtenir <b>almenys una cara</b>?${outcomesGridHtml(['CCC','CCX','CXC','XCC','CXX','XCX','XXC','XXX'],'Espai mostral')}`;guide=['És més ràpid calcular el complement “cap cara”.','Només hi ha un resultat sense cap cara.'];solution=['En 3 monedes hi ha 8 resultats equiprobables.','Només <b>XXX</b> no té cap cara, així que P(cap cara) = 1/8.','P(almenys una cara) = 1 − 1/8 = 7/8 = <b>87,5 %</b>.'];validator='number';alts=['87,5','87.5','87,50'];openHint='Escriu el percentatge.';
+  }else if(type===5){
+    correct='37,5 %';options=statOptions(correct,['25 %','50 %','62,5 %','12,5 %']);question='Es llancen 3 monedes equilibrades. Quina és la probabilitat d’obtenir <b>exactament 2 cares</b>?';guide=['Compta quants resultats tenen exactament dues cares.','Després divideix pel total de 8 resultats possibles.'];solution=['Els resultats amb exactament 2 cares són <b>CCX, CXC i XCC</b>.','Hi ha 3 casos favorables de 8 possibles.','P = 3/8 = <b>37,5 %</b>.'];validator='number';alts=['37,5','37.5','37,50'];openHint='Escriu el percentatge.';
+  }else if(type===6){
+    const p=11/36*100;correct=fmt(p,1)+' %';options=statOptions(correct,['16,7 %','25 %','33,3 %','69,4 %']);question='Es llança un dau equilibrat dues vegades. Quina és la probabilitat d’obtenir <b>almenys un 6</b>?';guide=['Calcula primer la probabilitat de no obtenir cap 6.','Fes servir el complement.'];solution=['P(no 6 en un llançament) = 5/6.','P(cap 6 en dos llançaments) = (5/6)·(5/6) = 25/36.',`P(almenys un 6) = 1 − 25/36 = 11/36 ≈ <b>${fmt(p,1)} %</b>.`];validator='number';alts=[fmt(p,2),String((11/36)*100)];openHint='Escriu el percentatge aproximat.';
+  }else if(type===7){
+    correct='Experiment de Bernoulli repetit';options=shuffle([correct,'Mostra esbiaixada','Regressió lineal','Taula de contingència']);question='Com s’anomena la situació en què repetim diverses vegades un mateix experiment independent amb només dos resultats possibles: èxit o fracàs?';guide=['Pensa en la idea de repetir el mateix assaig amb la mateixa probabilitat d’èxit.','Això és la base dels primers models binomials.'];solution=['Quan repetim assaigs independents amb dos resultats possibles, parlem de <b>proves de Bernoulli</b>.','Aquesta és la idea base d’un <b>experiment de Bernoulli repetit</b>.'];alts=['bernoulli','experiment de bernoulli repetit','prova de bernoulli'];openHint='Escriu el nom.';
+  }else if(type===8){
+    correct='4';options=statOptions(correct,['3','5','6','8']);question='En 4 assaigs independents, de quantes maneres diferents es poden col·locar <b>exactament 1 èxit</b>?';guide=['Pensa en quina posició pot aparèixer l’únic èxit.','Cada posició dona un camí diferent.'];solution=['L’èxit únic pot aparèixer a la 1a, 2a, 3a o 4a prova.','Això dona <b>4</b> camins diferents.','Per tant, hi ha <b>4</b> maneres d’obtenir exactament un èxit.'];validator='number';alts=['4'];openHint='Escriu el nombre de camins.';
+  }else if(type===9){
+    correct='No; encara cal conèixer quants falsos positius hi ha';options=shuffle([correct,'Sí; amb això ja n’hi ha prou','Sí; perquè són probabilitats inverses','Només si la malaltia és rara']);question='Un test mèdic té una sensibilitat del 95%, és a dir, <b>P(positiu | malalt)=95%</b>. Això és suficient per saber <b>P(malalt | positiu)</b>?';guide=['La probabilitat inversa depèn també de la prevalença i dels falsos positius.','No n’hi ha prou amb una sola dada.'];solution=['La sensibilitat només explica què passa entre les persones malaltes.','Per saber P(malalt | positiu) també cal saber quants sans donen positiu i quants malalts hi ha en total.','Per tant, <b>no n’hi ha prou</b>.'];allowOpen=false;
+  }else{
+    correct='Perquè, si la condició és rara, els falsos positius poden ser molts';options=shuffle([correct,'Perquè Bayes obliga sempre a sumar 1/2','Perquè els tests mai funcionen','Perquè la probabilitat condicionada només serveix amb monedes']);question='Per què un test força bo pot donar un percentatge relativament baix de persones realment malaltes entre tots els positius?';guide=['Pensa en què passa si la malaltia és molt poc freqüent.','Fins i tot un petit percentatge de falsos positius pot generar molts casos.'];solution=['Si la condició és rara, hi ha moltes més persones sanes que malaltes.','Un percentatge petit de falsos positius sobre un grup molt gran pot superar els positius reals.','Això fa baixar P(malalt | positiu).'];allowOpen=false;
+  }
+  return {topicId:'bayesBatx4t',type,question,correct,options,guide,solution,alts,allowOpen,validator,openHint};
+}
+
+/* ── ESTRUCTURA DE BLOCS ────────────────────────────────── */
+const TOPICS=[
+ {id:'dadesVariables4t',name:'1. Dades i variables estadístiques',icon:'🧩',short:'Població, mostra, individu, tipus de variable i parelles de dades (x,y).',theoryKey:'dadesVariables4t',theoryPage:'teoria/estocastic/dades-variables.html',gen:genDadesVariables4,scope:'AB',exam4t:true},
+ {id:'taulesRepresentacions4t',name:'2. Taules i representacions de dues variables',icon:'📊',short:'Taules de doble entrada, freqüències, percentatges, gràfics adequats i lectura crítica.',theoryKey:'taulesRepresentacions4t',theoryPage:'teoria/estocastic/taules-representacions.html',gen:genTaulesRepresentacions4,scope:'AB',exam4t:true},
+ {id:'comparacioDistribucions4t',name:'3. Comparació de distribucions',icon:'⚖️',short:'Mitjana, mediana, rang, rang interquartílic i homogeneïtat dels grups.',theoryKey:'comparacioDistribucions4t',theoryPage:'teoria/estocastic/comparacio-distribucions.html',gen:genComparacioDistribucions4,scope:'AB',exam4t:true},
+ {id:'estudisMostreig4t',name:'4. Estudis estadístics i mostreig',icon:'🔎',short:'Representativitat, biaixos, tipus de mostreig, estudis observacionals i lectura crítica.',theoryKey:'estudisMostreig4t',theoryPage:'teoria/estocastic/estudis-mostreig.html',gen:genEstudisMostreig4,scope:'AB',exam4t:true},
+ {id:'nuvolsRelacio4t',name:'5. Núvols de punts i relació entre variables',icon:'🔵',short:'Direcció i intensitat de l’associació, forma del patró i valors atípics.',theoryKey:'nuvolsRelacio4t',theoryPage:'teoria/estocastic/nuvols-relacio.html',gen:genNuvolsRelacio4,scope:'AB',exam4t:true},
+ {id:'regressioPrediccions4t',name:'6. Regressió lineal, prediccions i causalitat',icon:'📈',short:'Recta d’ajust, pendent, interpolació, extrapolació i límits de les prediccions.',theoryKey:'regressioPrediccions4t',theoryPage:'teoria/estocastic/regressio-lineal.html',gen:genRegressioPrediccions4,scope:'AB',exam4t:true},
+ {id:'espaiMostralRecompte4t',name:'7. Atzar, espai mostral i tècniques de recompte',icon:'🎲',short:'Successos, regla de Laplace, recompte sistemàtic i principi multiplicatiu.',theoryKey:'espaiMostralRecompte4t',theoryPage:'teoria/estocastic/espai-mostral.html',gen:genEspaiMostralRecompte4,scope:'AB',exam4t:true},
+ {id:'experimentsCompostos4t',name:'8. Probabilitat en experiments compostos',icon:'🌳',short:'Dos passos, arbres, amb i sense reemplaçament i comparació de probabilitats.',theoryKey:'experimentsCompostos4t',theoryPage:'teoria/estocastic/experiments-compostos.html',gen:genExperimentsCompostos4,scope:'AB',exam4t:true},
+ {id:'contingenciaBatx4t',name:'A. Taules de contingència',icon:'🧮',short:'Freqüències conjuntes i marginals, percentatges condicionats i grup de referència.',theoryKey:'contingenciaBatx4t',theoryPage:'teoria/estocastic/contingencia.html',gen:genContingenciaBatx4,scope:'AB',exam4t:false,isExpansion:true},
+ {id:'correlacioBatx4t',name:'B. Correlació i regressió avançada',icon:'📉',short:'Coeficient r, força i direcció de la correlació, no-linealitat i valors atípics.',theoryKey:'correlacioBatx4t',theoryPage:'teoria/estocastic/correlacio-regressio.html',gen:genCorrelacioBatx4,scope:'AB',exam4t:false,isExpansion:true},
+ {id:'condicionadaBatx4t',name:'C. Probabilitat condicionada i independència',icon:'🔗',short:'P(A|B), canvi de denominador, successos independents i dependents.',theoryKey:'condicionadaBatx4t',theoryPage:'teoria/estocastic/probabilitat-condicionada.html',gen:genCondicionadaBatx4,scope:'AB',exam4t:false,isExpansion:true},
+ {id:'bayesBatx4t',name:'D. Bayes i primers models probabilístics',icon:'🧠',short:'Probabilitats inverses, falsos positius, almenys un èxit i primers models binomials.',theoryKey:'bayesBatx4t',theoryPage:'teoria/estocastic/bayes-models.html',gen:genBayesBatx4,scope:'AB',exam4t:false,isExpansion:true}
+];
+const FUTURE_TOPICS=[];
+
+/* ── ESTAT I PERSISTÈNCIA ───────────────────────────────── */
+const STORAGE='st4eso_v1';
+const LEGACY_STORAGE='sm4eso_estocastic_v3';
+let state={unlockedIds:[],done:[],errors:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,hintIndex:0,examQs:[],examIdx:0,examScore:0,examLog:[]};let currentEx=null,currentScreen='screenHome';
+function loadState(){
+  let raw=null,migrating=false;
+  try{
+    raw=localStorage.getItem(STORAGE);
+    migrating=raw===null;
+    if(migrating)raw=localStorage.getItem(LEGACY_STORAGE);
+    const s=JSON.parse(raw||'{}');
+    if(Array.isArray(s.unlockedIds))state.unlockedIds=s.unlockedIds;
+    if(Array.isArray(s.done))state.done=s.done;
+    if(Array.isArray(s.errors))state.errors=s.errors;
+  }catch(e){}
+  const valid=new Set(TOPICS.map(t=>t.id));
+  state.unlockedIds=state.unlockedIds.filter(x=>valid.has(x));
+  state.done=state.done.filter(x=>valid.has(x));
+  if(!state.unlockedIds.includes(TOPICS[0].id))state.unlockedIds.unshift(TOPICS[0].id);
+  TOPICS.forEach((t,i)=>{if(state.done.includes(t.id)&&isRequiredTopic(t)){const ni=nextTopicIndex(i);if(ni>=0&&!state.unlockedIds.includes(TOPICS[ni].id))state.unlockedIds.push(TOPICS[ni].id)}});
+  state.unlockedIds=state.unlockedIds.filter(id=>{const t=TOPICS.find(x=>x.id===id);return t&&isManagedPracticeTopic(t)});
+  if(migrating&&raw!==null)saveState();
+}
+function saveState(){try{localStorage.setItem(STORAGE,JSON.stringify({unlockedIds:state.unlockedIds,done:state.done,errors:state.errors}))}catch(e){}}
+function isManagedPracticeTopic(t){return !!t&&!t.isExpansion}
+function isUnlocked(i){const t=TOPICS[i];return !!t&&(t.isExpansion||i===0||state.unlockedIds.includes(t.id))}
+function isAvailableTopic(t){return !(MATH_OPTION==='A'&&t.scope==='B')}
+function isRequiredTopic(t){return !t.isExpansion&&isAvailableTopic(t)}
+function isExamTopic(t){return t.exam4t!==false&&isRequiredTopic(t)}
+function nextTopicIndex(i){for(let j=i+1;j<TOPICS.length;j++){if(isRequiredTopic(TOPICS[j]))return j}return -1}
+
+/* ── P4 · AJUDES D'ERRORS I CORRECCIONS ───────────────────── */
+function miReviewPoints(ex){
+  let pts=[];
+  if(ex&&Array.isArray(ex.review)&&ex.review.length)pts=ex.review;
+  else if(ex&&Array.isArray(ex.guide)&&ex.guide.length)pts=ex.guide;
+  pts=pts.filter(x=>x!==undefined&&x!==null&&String(x).trim()!=='').slice(0,3);
+  if(!pts.length&&typeof errorFocus==='function'){
+    try{const focus=errorFocus(ex);if(focus&&String(focus).trim())pts=[String(focus)]}catch(err){}
+  }
+  return pts.length?pts:[
+    'Identifica exactament què demana l’enunciat i quines dades són útils.',
+    'Revisa el procediment abans de repetir el càlcul o escollir una resposta.'
+  ];
+}
+function miReviewHtml(ex){
+  return '<div style="margin-top:10px;padding:9px 11px;border-radius:9px;background:rgba(245,166,35,.10);border-left:3px solid var(--warn,#f5a623)">'
+    +'<b>🔎 Què convé revisar</b><div style="margin-top:5px">'
+    +miReviewPoints(ex).map(x=>'• '+x).join('<br>')
+    +'</div></div>';
+}
+function miSolutionHtml(ex){
+  return (Array.isArray(ex&&ex.solution)?ex.solution:[]).map((s,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>').join('');
+}
+function miToggleSaved(id,btn){
+  const box=document.getElementById(id);if(!box)return;
+  box.classList.toggle('show');
+  if(btn)btn.textContent=box.classList.contains('show')?'Amaga explicació':'📘 Veure explicació';
+}
+function miRecentErrorHtml(e,idx){
+  const solId='recentSol_'+String((e&&e.id)||idx).replace(/[^a-zA-Z0-9_-]/g,'_');
+  let html='<div class="saved-error-row">'+(e.question||'Pregunta no disponible')
+    +'<br><span style="color:var(--error)">La teva resposta: <b>'+String(e.answer??'—')+'</b></span>'
+    +' · <span style="color:var(--success)">Resposta correcta: <b>'+String(e.correct??'—')+'</b></span>'
+    +miReviewHtml(e);
+  if(Array.isArray(e.solution)&&e.solution.length){
+    html+='<button class="sol-btn" style="margin-top:7px" onclick="miToggleSaved(\''+solId+'\',this)">📘 Veure explicació</button>'
+      +'<div class="solution-box" id="'+solId+'">'+miSolutionHtml(e)+'</div>';
+  }
+  return html+'</div>';
+}
+
+function registerError(ex,studentAnswer,source='practice'){
+  if(!ex)return;
+  const topic=TOPICS.find(t=>t.id===ex.topicId)||TOPICS[state.currentTopic];
+  const err={
+    id:Date.now()+'_'+Math.random().toString(36).slice(2,8),
+    topicId:ex.topicId||(topic?topic.id:''),
+    topicName:topic?topic.name:'Tema',
+    type:ex.type,
+    question:ex.question,
+    visual:ex.visual||'',
+    correct:ex.correct,
+    answer:studentAnswer,
+    options:[...(ex.options||[])],
+    guide:[...(ex.guide||[])],
+    review:miReviewPoints(ex),
+    solution:[...(ex.solution||[])],
+    level:source==='exam'?0:state.level,
+    source,
+    timestamp:new Date().toISOString()
+  };
+  const last=state.errors[state.errors.length-1];
+  if(!(last&&last.topicId===err.topicId&&last.type===err.type&&last.question===err.question&&last.answer===err.answer&&last.source===err.source))state.errors.push(err);
+  if(state.errors.length>200)state.errors=state.errors.slice(-200);
+  saveState();
+}
+
+/* ── NAVEGACIÓ I HOME ───────────────────────────────────── */
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');currentScreen=id;window.scrollTo(0,0)}
+function setNavContext(title,back=false,sense=false){document.getElementById('navTitle').textContent=title;document.getElementById('navBack').style.display=back?'inline-flex':'none';document.getElementById('senseCrumb').style.display=sense?'inline-flex':'none';document.getElementById('senseSep').style.display=sense?'inline':'none'}
+function showHome(){closeUnlockPanel();setNavContext('Sentit Estocàstic · 4t ESO',false,true);renderHome();showScreen('screenHome')}
+function goBack(){if(currentScreen==='screenExercise'){selectTopic(state.currentTopic);return}if(currentScreen==='screenIntro'||currentScreen==='screenExam'||currentScreen==='screenErrors'){showHome();return}showHome()}
+function scopeChip(scope){return scope==='B'?'<span class="course-chip b">Matemàtiques B</span>':'<span class="course-chip">Comú A/B</span>'}
+function renderHome(){
+  const grid=document.getElementById('topicsGrid');
+  const mainTopics=TOPICS.filter(t=>!t.isExpansion);
+  const expansionTopics=TOPICS.filter(t=>t.isExpansion);
+  function head(icon,title,note,cls,first){return '<div class="p6-section-head '+(first?'p6-first ':'')+'"><div class="p6-section-title '+(cls||'')+'">'+icon+' '+title+'</div><div class="p6-section-note">'+note+'</div></div>';}
+  let html=head('📘','Continguts de 4t d\'ESO','Blocs 1–8: dades, relacions entre variables, mostreig, regressió, recompte i probabilitat composta.','',true);
+  mainTopics.forEach(t=>{
+    const i=TOPICS.indexOf(t),done=state.done.includes(t.id),unlocked=isUnlocked(i);
+    html+='<div class="topic-card '+(done?'done ':'')+(unlocked?'':'locked')+'" '+(unlocked?('onclick="selectTopic('+i+')"'):'aria-disabled="true"')+'>'
+      +'<div class="topic-icon">'+t.icon+'</div><div class="topic-info"><h3>'+t.name+' '+scopeChip(t.scope)+'</h3><p>'+t.short+'</p></div>'
+      +'<span class="topic-badge '+(done?'badge-done':unlocked?'badge-active':'badge-locked')+'">'+(done?'✓ Fet':unlocked?'Practicar':'🔒')+'</span></div>';
+  });
+  if(expansionTopics.length){
+    html+=head('⭐','Ampliació · prepara Batxillerat','A–D són blocs opcionals. No compten en el progrés obligatori ni entren al Mode Examen de 4t.','p6-extension');
+    expansionTopics.forEach(t=>{
+      const i=TOPICS.indexOf(t),done=state.done.includes(t.id),unlocked=isUnlocked(i);
+      html+='<div class="topic-card extension-card '+(done?'done ':'')+(unlocked?'':'locked')+'" '+(unlocked?('onclick="selectTopic('+i+')"'):'aria-disabled="true"')+'>'
+        +'<div class="topic-icon">'+t.icon+'</div><div class="topic-info"><h3>'+t.name+' <span class="topic-badge badge-expansion">Prepara Batxillerat</span></h3><p>'+t.short+'</p></div>'
+        +'<span class="topic-badge '+(done?'badge-done':unlocked?'badge-active':'badge-locked')+'">'+(done?'✓ Fet':unlocked?'Ampliació':'🔒')+'</span></div>';
+    });
+  }
+  if(FUTURE_TOPICS.length){
+    html+=head('🧭','Següents blocs','Continguts previstos en el recorregut, encara no activats.','p6-practice');
+    FUTURE_TOPICS.forEach(t=>{html+='<div class="topic-card locked" aria-disabled="true"><div class="topic-icon">'+t.icon+'</div><div class="topic-info"><h3>'+t.name+' '+scopeChip(t.scope)+'</h3><p>'+t.short+'</p></div><span class="topic-badge badge-locked">Properament</span></div>';});
+  }
+  html+=head('📝','Mode Examen','20 preguntes · selecciona de manera independent els blocs curriculars de 4t que vols preparar.','p6-exam');
+  html+='<div class="topic-card p6-special-card p6-exam-card" onclick="startExam()"><div class="topic-icon">📝</div><div class="topic-info"><h3>Mode Examen · 4t ESO</h3><p>Selecció independent dels blocs desbloquejats per practicar</p></div><span class="topic-badge badge-exam">Examen 4t</span></div>';
+  const ec=Array.isArray(state.errors)?state.errors.length:0;
+  html+=head('❌','Errors guardats','Repassa els exercicis fallats i consulta de nou la resolució.','p6-errors');
+  html+='<div class="topic-card p6-special-card '+(ec?'p6-error-card':'')+'" onclick="showErrors()"><div class="topic-icon">❌</div><div class="topic-info"><h3>Errors guardats</h3><p>'+(ec?('Tens '+ec+' error'+(ec===1?'':'s')+' per repassar'):'Encara no tens errors guardats')+'</p></div><span class="topic-badge '+(ec?'badge-errors':'badge-active')+'">'+(ec?'Repassar':'Veure')+'</span></div>';
+  grid.innerHTML=html;
+  const required=TOPICS.filter(isRequiredTopic),done=required.filter(t=>state.done.includes(t.id)).length;
+  document.getElementById('globalProgress').style.width=(required.length?done/required.length*100:0)+'%';
+}
+function toggleUnlockPanel(){const p=document.getElementById('unlockPanel'),o=document.getElementById('unlockOverlay'),b=document.getElementById('btnUnlock');const open=!p.classList.contains('open');p.classList.toggle('open',open);o.classList.toggle('open',open);b.classList.toggle('active',open);if(open)renderUnlockPanel()}
+function closeUnlockPanel(){document.getElementById('unlockPanel').classList.remove('open');document.getElementById('unlockOverlay').classList.remove('open');document.getElementById('btnUnlock').classList.remove('active')}
+function renderUnlockPanel(){let html='';TOPICS.forEach((t,i)=>{if(!isManagedPracticeTopic(t))return;const on=isUnlocked(i),done=state.done.includes(t.id);html+=`<div class="unlock-topic-row"><span class="unlock-topic-name ${done?'is-done':''}">${t.icon} ${t.name}${done?' ✓':''}</span>${i===0?'<span class="unlock-base">Base</span>':`<button class="unlock-toggle ${on?'active':''}" onclick="toggleTopic(${i})">${on?'Obert':'Tancat'}</button>`}</div>`});FUTURE_TOPICS.forEach(t=>{html+=`<div class="unlock-topic-row"><span class="unlock-topic-name future">${t.icon} ${t.name}</span><button class="unlock-toggle" disabled>Properament</button></div>`});document.getElementById('unlockTopicList').innerHTML=html}
+function toggleTopic(i){if(i<=0||!TOPICS[i]||!isManagedPracticeTopic(TOPICS[i]))return;const id=TOPICS[i].id;if(isUnlocked(i))state.unlockedIds=state.unlockedIds.filter(x=>x!==id);else state.unlockedIds.push(id);saveState();renderUnlockPanel();renderHome()}
+function unlockAllTopics(){state.unlockedIds=Array.from(new Set([...state.unlockedIds,...TOPICS.filter(isManagedPracticeTopic).map(t=>t.id)]));saveState();renderUnlockPanel();renderHome()}
+let resetArmed=false,resetTimer=null;
+function resetProgress(){const b=document.getElementById('btnReset');if(!resetArmed){resetArmed=true;b.textContent='⚠ Prem de nou per confirmar';clearTimeout(resetTimer);resetTimer=setTimeout(()=>{resetArmed=false;b.textContent='↻ Reiniciar progrés'},3000);return}resetArmed=false;clearTimeout(resetTimer);state.done=[];state.unlockedIds=TOPICS.length?[TOPICS[0].id]:[];saveState();renderUnlockPanel();renderHome();closeUnlockPanel();b.textContent='↻ Reiniciar progrés'}
+
+/* ── INTRO DE CADA BLOC ─────────────────────────────────── */
+function selectTopic(i){if(!isUnlocked(i))return;state.currentTopic=i;const t=TOPICS[i],th=TEORIA[t.theoryKey];setNavContext(t.name,true,true);let theory=`<div class="theory-box"><h3>${th.title} ${t.isExpansion?'<span class="topic-badge badge-expansion">Prepara Batxillerat</span>':scopeChip(t.scope)}</h3><div>${th.text}</div>${th.formulas.map(x=>`<div class="formula">${x}</div>`).join('')}<div class="history-box">${th.history}</div></div>`;const recent=state.errors.filter(e=>e.topicId===t.id).slice(-4).reverse();if(recent.length){theory+='<div class="saved-errors-mini"><h4>❌ Errors recents d’aquest bloc</h4>'+recent.map((e,idx)=>miRecentErrorHtml(e,idx)).join('')+'<button class="btn-secondary" style="border-color:var(--error);color:var(--error)" onclick="showErrors()">Repassa tots els errors →</button></div>'}document.getElementById('theoryContent').innerHTML=theory;document.getElementById('exampleContent').innerHTML=`<div class="example-box"><h3>${th.exampleTitle}</h3>${th.exampleSteps.map((x,i)=>`<div class="ex-step"><b>${i+1}.</b> ${x}</div>`).join('')}</div>`;document.getElementById('topicActions').innerHTML=`<a class="btn-theory" href="${t.theoryPage}">📚 Teoria completa del bloc</a>`;showTab('theory');syncSelectors();showScreen('screenIntro')}
+function showTab(which){document.getElementById('theoryContent').style.display=which==='theory'?'block':'none';document.getElementById('exampleContent').style.display=which==='example'?'block':'none';document.getElementById('tabTheoryBtn').classList.toggle('active',which==='theory');document.getElementById('tabExampleBtn').classList.toggle('active',which==='example')}
+function setLevel(n){state.level=n;syncSelectors()}
+function setMode(m){state.mode=m;syncSelectors()}
+function syncSelectors(){document.getElementById('level1').classList.toggle('active',state.level===1);document.getElementById('level2').classList.toggle('active',state.level===2);document.getElementById('modeMulti').classList.toggle('active',state.mode==='multi');document.getElementById('modeOpen').classList.toggle('active',state.mode==='open')}
+function startPractice(){state.exCount=0;state.correctStreak=0;showExercise();showScreen('screenExercise')}
+
+/* ── PRÀCTICA ───────────────────────────────────────────── */
+function showExercise(){const t=TOPICS[state.currentTopic];currentEx=t.gen();state.exCount++;state.answered=false;state.hintIndex=0;setNavContext(t.name,true,true);document.getElementById('exerciseNumber').textContent=`Exercici ${state.exCount} · ${state.level===1?'Nivell guiat':'Nivell autònom'}`;document.getElementById('questionText').innerHTML=currentEx.question;document.getElementById('feedbackArea').innerHTML='';document.getElementById('hintBox').className='hint-box';document.getElementById('hintBox').innerHTML='';document.getElementById('hintBtn').style.display='inline-block';document.getElementById('hintBtn').textContent='💡 Pista';document.getElementById('btnNext').style.display='none';document.getElementById('btnChangeTopic').style.display=state.exCount>=3?'block':'none';const useOpen=state.mode==='open'&&currentEx.allowOpen!==false;if(useOpen){document.getElementById('optionsArea').innerHTML='';document.getElementById('openWrap').style.display='block';const inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';document.getElementById('openHint').textContent=currentEx.openHint||'';setTimeout(()=>inp.focus(),40)}else{document.getElementById('openWrap').style.display='none';document.getElementById('optionsArea').innerHTML=currentEx.options.map((o,i)=>`<button class="opt-btn" onclick="selectOption(${i},this)">${o}</button>`).join('')}updateStreak()}
+function showNextHint(){if(state.answered)return;const guides=currentEx.guide||[];if(!guides.length)return;const box=document.getElementById('hintBox');state.hintIndex=Math.min(state.hintIndex,guides.length-1);box.innerHTML='<b>Pista '+(state.hintIndex+1)+'/'+guides.length+':</b> '+guides[state.hintIndex];box.classList.add('show');state.hintIndex++;document.getElementById('hintBtn').textContent=state.hintIndex<guides.length?'💡 Una altra pista':'💡 Pistes mostrades';if(state.hintIndex>=guides.length)document.getElementById('hintBtn').disabled=true}
+function selectOption(i,btn){if(state.answered)return;const ans=currentEx.options[i],ok=ans===currentEx.correct;document.querySelectorAll('#optionsArea .opt-btn').forEach((b,j)=>{b.disabled=true;if(currentEx.options[j]===currentEx.correct)b.classList.add('correct')});if(!ok)btn.classList.add('wrong');processAnswer(ok,ans)}
+function validateOpen(ex,val){const raw=normalizeText(val);if(!raw)return false;if(ex.validator==='text'){const clean=s=>normalizeText(s).replace(/[.,;:]/g,'');return [ex.correct,...(ex.alts||[])].some(x=>clean(x)===clean(raw))}if(ex.validator==='degree'){const got=parseNumber(raw),want=parseNumber(ex.correct);return Number.isFinite(got)&&Number.isFinite(want)&&Math.abs(got-want)<=0.011}if(ex.validator==='dms'){const got=parseDMS(raw),want=parseDMS(ex.correct);return Number.isFinite(got)&&Number.isFinite(want)&&Math.abs(got-want)<=1/3600+1e-7}if(ex.validator==='radian'){const got=parseRadians(raw);let want=parseRadians(String(ex.correct).replace(/rad/gi,''));return Number.isFinite(got)&&Number.isFinite(want)&&Math.abs(got-want)<=0.011}if(ex.validator==='number'){const targets=[ex.correct,...(ex.alts||[])];const got=parseNumber(raw),nums=targets.map(parseNumber).filter(Number.isFinite);if(Number.isFinite(got)&&nums.some(want=>Math.abs(got-want)<=Math.max(1e-12,Math.abs(want)*1e-9)))return true;if(!statStrictRequestedForm(ex)){const x=statRationalValue(val);if(x!==null&&Number.isFinite(x))for(const t of targets){const y=statRationalValue(t);if(y!==null&&Number.isFinite(y)&&Math.abs(x-y)<1e-9)return true}}return false}return false}
+function checkOpenAnswer(){if(state.answered)return;const inp=document.getElementById('openInput'),val=inp.value.trim();if(!val)return;const ok=validateOpen(currentEx,val);inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');processAnswer(ok,val)}
+function errorFocus(ex){if(ex.topicId==='dadesVariables4t')return 'Identifica primer què és la població o l’individu i després pregunta’t si la variable és una categoria, un recompte o una mesura. En dades bivariants, cada parella (x,y) pertany al mateix individu.';if(ex.topicId==='taulesRepresentacions4t')return 'Revisa quina fila, columna o total demana la pregunta. En percentatges, fixa especialment el denominador; en gràfics, comprova tipus de variable, eixos, escala i si la representació pot exagerar diferències.';if(ex.topicId==='comparacioDistribucions4t')return 'Revisa quina mesura demana l’enunciat: mitjana o mediana per al centre, rang o RIQ per a la dispersió. Recorda que més homogeneïtat vol dir menys dispersió.';if(ex.topicId==='estudisMostreig4t')return 'Revisa qui és la població, com s’ha escollit la mostra i si hi pot haver biaix. Diferencia també entre observació i experiment, i no confonguis correlació amb causalitat.';if(ex.topicId==='nuvolsRelacio4t')return 'Descriu primer la direcció del núvol (positiva, negativa o sense tendència clara) i després la intensitat. Busca també possibles valors atípics sense confondre associació amb causalitat.';if(ex.topicId==='regressioPrediccions4t')return 'Revisa l’equació y=ax+b: la pendent és el canvi estimat de y per unitat de x. Comprova també si la predicció és interpolació o extrapolació i si el model lineal és adequat al núvol.';if(ex.topicId==='espaiMostralRecompte4t')return 'Enumera primer els resultats possibles o calcula\'ls amb una taula, un arbre o el principi multiplicatiu. Després identifica els casos favorables i aplica la regla de Laplace només si tots els resultats són equiprobables.';if(ex.topicId==='experimentsCompostos4t')return 'Pensa el procés pas a pas. Mira si hi ha reemplaçament o no, calcula la probabilitat de cada tram i, si cal, multiplica o suma camins segons el succés demanat.';if(ex.topicId==='contingenciaBatx4t')return 'Identifica primer quin és el grup de referència: total general, fila o columna. El numerador pot ser la mateixa cel·la, però el denominador canvia segons la pregunta.';if(ex.topicId==='correlacioBatx4t')return 'Separa signe i força: el signe de r dona la direcció i |r| indica la intensitat lineal. Mira sempre el núvol: r proper a 0 no descarta una relació no lineal i els valors atípics poden alterar-lo.';if(ex.topicId==='condicionadaBatx4t')return 'Pregunta’t primer quin és el condicionant: això et diu quin és el nou grup de referència i, per tant, el denominador correcte. Si parles d\'independència, comprova si saber B canvia o no la probabilitat d\'A.';if(ex.topicId==='bayesBatx4t')return 'No confonguis P(A|B) amb P(B|A). En tests i problemes de Bayes, compta primer quants casos hi ha realment a cada grup. En repeticions, pensa si convé comptar directament els camins o usar el complement.';return 'Revisa què representa cada dada i quin total o representació respon exactament la pregunta.'}
+function processAnswer(ok,answer){state.answered=true;document.getElementById('hintBtn').disabled=false;const goal=state.level===1?10:20;if(ok){state.correctStreak++;document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ok"><h4>✅ Correcte!</h4>Molt bé. La resposta és correcta.</div>';if(state.correctStreak>=goal)markTopicDone()}else{state.correctStreak=Math.max(0,state.correctStreak-1);registerError(currentEx,answer,'practice');document.getElementById('feedbackArea').innerHTML=`<div class="feedback-box ko"><h4>❌ No és correcte</h4><div><b>La teva resposta:</b> ${answer??'—'}</div><div><b>Resposta correcta:</b> ${currentEx.correct}</div><div style="margin-top:8px"><b>🔎 Què convé revisar:</b> ${errorFocus(currentEx)}</div><div style="margin-top:9px;font-weight:800">📘 Resolució pas a pas</div><div class="solution-box show">${currentEx.solution.map((x,i)=>`<div class="step"><b>Pas ${i+1}:</b> <span class="highlight">${x}</span></div>`).join('')}</div></div>`}updateStreak();document.getElementById('btnNext').style.display='block'}
+function updateStreak(){const goal=state.level===1?10:20;document.getElementById('streakFill').style.width=Math.min(100,state.correctStreak/goal*100)+'%';document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal}
+function markTopicDone(){const current=TOPICS[state.currentTopic],id=current.id;if(!state.done.includes(id))state.done.push(id);if(isRequiredTopic(current)){const ni=nextTopicIndex(state.currentTopic);if(ni>=0&&!state.unlockedIds.includes(TOPICS[ni].id))state.unlockedIds.push(TOPICS[ni].id)}saveState()}
+function nextExercise(){const goal=state.level===1?10:20;if(state.correctStreak>=goal&&state.done.includes(TOPICS[state.currentTopic].id)){showCongrats()}else showExercise()}
+function showCongrats(){const ni=nextTopicIndex(state.currentTopic),next=ni>=0?TOPICS[ni]:null,current=TOPICS[state.currentTopic];document.getElementById('feedbackArea').innerHTML=`<div class="congrats"><div class="trophy">🏆</div><h2>Bloc superat!</h2><p>Has completat <b>${current.name}</b>.</p><div class="topic-actions" style="justify-content:center"><button class="btn-primary" onclick="showHome()">Tornar al Sentit Estocàstic</button>${next?`<button class="btn-secondary" onclick="selectTopic(${ni})">Següent: ${next.name} →</button>`:''}</div></div>`;document.getElementById('btnNext').style.display='none';document.getElementById('btnChangeTopic').style.display='none'}
+
+/* ── MODE EXAMEN ────────────────────────────────────────── */
+function signatureOf(ex){return String(ex.type)+'|'+String(ex.question).replace(/<[^>]+>/g,'').replace(/\s+/g,' ').slice(0,180)}
+function startExam(){state.examQs=[];state.examLog=[];state.examIdx=0;state.examScore=0;const selected=miGetSelectedExamIds();const pool=TOPICS.filter(t=>isExamTopic(t)&&selected.includes(t.id));if(!pool.length)return;const used=new Set();let tries=0;while(state.examQs.length<20&&tries<3000){tries++;const t=pool[state.examQs.length%pool.length];let ex;try{ex=t.gen()}catch(e){continue}const sig=t.id+'|'+signatureOf(ex);if(!used.has(sig)){used.add(sig);state.examQs.push({...ex,topicName:t.name})}}let fallback=0;while(state.examQs.length<20&&fallback<1000){fallback++;const t=pool[state.examQs.length%pool.length];let ex;try{ex=t.gen()}catch(e){continue}state.examQs.push({...ex,topicName:t.name})}state.examQs=shuffle(state.examQs);setNavContext('Mode Examen · 4t ESO'+optionLabel(),true,true);renderExamQ();showScreen('screenExam')}
+function renderExamQ(){const q=state.examQs[state.examIdx];if(!q){finishExam();return}document.getElementById('examContent').innerHTML=`<div class="ex-num">Pregunta ${state.examIdx+1}/${state.examQs.length} · ${q.topicName}</div><div class="q-text">${q.question}</div>`;const useOpen=q.allowOpen!==false&&rnd(1,10)<=3;q._examOpen=useOpen;if(useOpen){document.getElementById('examOptions').innerHTML='';document.getElementById('examOpenWrap').style.display='block';const inp=document.getElementById('examOpenInput');inp.value='';inp.disabled=false;inp.className='open-input'}else{document.getElementById('examOpenWrap').style.display='none';document.getElementById('examOptions').innerHTML=q.options.map((o,i)=>`<button class="opt-btn" onclick="selectExamAnswer(${i},this)">${o}</button>`).join('')}document.getElementById('examFeedback').innerHTML='';document.getElementById('btnNextExam').style.display='none'}
+function selectExamAnswer(i,btn){const q=state.examQs[state.examIdx],ans=q.options[i],ok=ans===q.correct;document.querySelectorAll('#examOptions .opt-btn').forEach((b,j)=>{b.disabled=true;if(q.options[j]===q.correct)b.classList.add('correct')});if(!ok)btn.classList.add('wrong');processExamAnswer(ok,ans)}
+function checkExamOpen(){const q=state.examQs[state.examIdx],inp=document.getElementById('examOpenInput'),val=inp.value.trim();if(!val||inp.disabled)return;const ok=validateOpen(q,val);inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');processExamAnswer(ok,val)}
+function processExamAnswer(ok,answer){
+  const q=state.examQs[state.examIdx];
+  if(ok)state.examScore++;else registerError(q,answer,'exam');
+  state.examLog.push({
+    question:q.question,correct:q.correct,given:answer,ok,type:q.type,
+    review:miReviewPoints(q),solution:[...(q.solution||[])]
+  });
+  document.getElementById('examFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'
+    +(ok?'':('<div><b>La teva resposta:</b> <span style="color:var(--error)"><b>'+String(answer??'—')+'</b></span></div>'
+      +'<div><b>Resposta correcta:</b> <span style="color:var(--success)"><b>'+String(q.correct??'—')+'</b></span></div>'
+      +miReviewHtml(q)
+      +'<div style="margin-top:9px;font-weight:800">📘 Resolució pas a pas</div>'
+      +'<div class="solution-box show">'+miSolutionHtml(q)+'</div>'))+'</div>';
+  document.getElementById('btnNextExam').style.display='block';
+  document.getElementById('btnNextExam').textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';
+}
+function nextExamQ(){state.examIdx++;if(state.examIdx>=state.examQs.length)finishExam();else renderExamQ()}
+function finishExam(){
+  const total=state.examQs.length,pct=total?Math.round(state.examScore/total*100):0;
+  const wrong=state.examLog.filter(x=>!x.ok);
+  let html='<div class="exam-summary"><div class="home-header" style="padding-top:0"><h2>📝 Resultat de l’examen</h2><p>Blocs seleccionats: '+miSelectedExamNames().join(' · ')+'</p></div><div class="exam-score">'+state.examScore+'/'+total+' · '+pct+'%</div>';
+  if(!wrong.length)html+='<div class="feedback-box ok"><h4>🏆 Excel·lent!</h4>No has comès cap error.</div>';
+  else{
+    html+='<h3 style="margin:12px 0 7px">Revisió dels errors</h3>';
+    wrong.forEach((x,i)=>{
+      html+='<div class="exam-review"><b>'+(i+1)+'.</b> '+x.question
+        +'<br><span style="color:var(--error)">La teva resposta: <b>'+String(x.given??'—')+'</b></span>'
+        +' · <span style="color:var(--success)">Resposta correcta: <b>'+String(x.correct??'—')+'</b></span>'
+        +miReviewHtml(x)+'</div>';
+    });
+  }
+  html+='<button class="btn-primary" style="width:100%;margin-top:12px" onclick="showHome()">Tornar al Sentit Estocàstic</button></div>';
+  document.getElementById('examContent').innerHTML=html;
+  document.getElementById('examOptions').innerHTML='';
+  document.getElementById('examOpenWrap').style.display='none';
+  document.getElementById('examFeedback').innerHTML='';
+  document.getElementById('btnNextExam').style.display='none';
+}
+
+/* ── ERRORS GUARDATS ────────────────────────────────────── */
+function showErrors(){
+  setNavContext('Errors guardats',true,true);
+  const errors=Array.isArray(state.errors)?state.errors:[];
+  let html='<div class="home-header" style="padding-top:10px"><h2>❌ Errors guardats</h2><p>Repassa la pregunta, la teva resposta, què convé revisar i la resolució generada.</p></div>';
+  if(!errors.length){
+    html+='<div class="info-card"><h3>✅ Cap error guardat</h3><p>Quan fallis un exercici o una pregunta d’examen, quedarà registrat aquí.</p></div>';
+  }else{
+    [...errors].reverse().forEach((e,rev)=>{
+      const idx=errors.length-1-rev,solId='savedSol_'+idx;
+      html+='<div class="error-card" style="border-left:4px solid var(--error);margin-bottom:12px">'
+        +'<h3 style="font-size:1rem;margin-bottom:6px;color:var(--primary)">❌ '+(e.topicName||'Tema')+(e.type!==undefined&&e.type!==null?' · Tipus '+e.type:'')+'</h3>'
+        +'<div style="line-height:1.55;margin:8px 0">'+(e.visual||'')+(e.question||'Pregunta no disponible')+'</div>'
+        +'<div style="font-size:.84rem"><div style="color:var(--error)">La teva resposta: <b>'+String(e.answer??'—')+'</b></div>'
+        +'<div style="color:var(--success)">Resposta correcta: <b>'+String(e.correct??'—')+'</b></div></div>'
+        +miReviewHtml(e);
+      if(Array.isArray(e.solution)&&e.solution.length){
+        html+='<button class="sol-btn" style="margin-top:8px" onclick="miToggleSaved(\''+solId+'\',this)">📘 Veure explicació</button>'
+          +'<div class="solution-box" id="'+solId+'">'+miSolutionHtml(e)+'</div>';
+      }
+      html+='<button class="btn-secondary" style="border-color:var(--error);color:var(--error);margin-top:8px" onclick="deleteSavedError('+idx+')">🗑️ Esborra aquest error</button></div>';
+    });
+    html+='<button class="btn-secondary" style="width:100%;border-color:var(--error);color:var(--error);margin-top:8px" onclick="clearSavedErrors()">🗑️ Esborra tots els errors</button>';
+  }
+  html+='<button class="btn-secondary" style="width:100%;margin-top:8px" onclick="showHome()">← Tornar al Sentit Estocàstic</button>';
+  document.getElementById('errorsContent').innerHTML=html;
+  showScreen('screenErrors');
+}
+function toggleSaved(id,btn){const box=document.getElementById(id);box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'Amaga explicació':'📘 Veure explicació'}
+function deleteSavedError(i){state.errors.splice(i,1);saveState();showErrors()}
+function clearSavedErrors(){if(!confirm('Vols esborrar tots els errors guardats?'))return;state.errors=[];saveState();showErrors()}
+
+/* ── INICI ──────────────────────────────────────────────── */
+loadState();showHome();renderUnlockPanel();
+function openFromTheoryLink(){
+  try{
+    const q=new URLSearchParams(location.search),id=q.get('topic')||q.get('tema');
+    if(!id)return;
+    const i=TOPICS.findIndex(t=>t.id===id);if(i<0)return;
+    if(!state.unlockedIds.includes(id)){state.unlockedIds.push(id);saveState();renderHome();renderUnlockPanel()}
+    state.currentTopic=i;
+    const nivell=Number(q.get('level')||q.get('nivell'));if(nivell===1||nivell===2)state.level=nivell;
+    const mode=q.get('mode');if(mode==='multi'||mode==='open')state.mode=mode;
+    if((q.get('practice')||q.get('practica'))==='1')startPractice();else selectTopic(i);
+  }catch(e){}
+}
+openFromTheoryLink();
+document.getElementById('openInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkOpenAnswer()});document.getElementById('examOpenInput').addEventListener('keydown',e=>{if(e.key==='Enter')checkExamOpen()});
+</script>
+<script>
+if(location.protocol!=="file:"){
+  const s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://srigual.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.body.appendChild(s);
+}
+</script>
+
+<script id="miExamP2Script">
+var MI_EXAM_STORAGE='mi_exam_4eso_estocastic_v1';
+var miExamSelectedTopics=[];
+function miExamCoreTopics(){return TOPICS.filter(function(t){return (typeof isExamTopic==='function')?isExamTopic(t):t.exam4t!==false;});}
+function miExamDoneIds(){try{return (state.done||[]).slice();}catch(e){return [];}}
+function miLoadExamSelection(){var core=miExamCoreTopics(),valid=core.map(function(t){return t.id;}),raw=null;try{raw=localStorage.getItem(MI_EXAM_STORAGE);}catch(e){}if(raw===null){miExamSelectedTopics=valid.slice();return;}try{var a=JSON.parse(raw);miExamSelectedTopics=Array.isArray(a)?a.filter(function(id){return valid.indexOf(id)>=0;}):valid.slice();}catch(e){miExamSelectedTopics=valid.slice();}}
+function miSaveExamSelection(){try{localStorage.setItem(MI_EXAM_STORAGE,JSON.stringify(miExamSelectedTopics));}catch(e){}}
+function miGetSelectedExamIds(){return miExamSelectedTopics.slice();}
+function miSelectedExamNames(){var ids=miGetSelectedExamIds();return miExamCoreTopics().filter(function(t){return ids.indexOf(t.id)>=0;}).map(function(t){return t.name;});}
+function miEsc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function miOpenExamConfig(){miLoadExamSelection();miRenderExamConfig();var ov=document.getElementById('miExamOverlay');if(ov){ov.classList.add('open');ov.setAttribute('aria-hidden','false');}}
+function miCloseExamConfig(){miSaveExamSelection();var ov=document.getElementById('miExamOverlay');if(ov){ov.classList.remove('open');ov.setAttribute('aria-hidden','true');}}
+function miRenderExamConfig(){var core=miExamCoreTopics(),done=miExamDoneIds(),box=document.getElementById('miExamTopicList');if(!box)return;box.innerHTML=core.map(function(t){var checked=miExamSelectedTopics.indexOf(t.id)>=0,isDone=done.indexOf(t.id)>=0;return '<label class="mi-exam-row"><input type="checkbox" '+(checked?'checked':'')+' onchange="miToggleExamTopic(&quot;'+miEsc(t.id)+'&quot;,this.checked)"><span>'+miEsc(t.name)+(isDone?'<small class="mi-exam-done">✓ Bloc completat</small>':'<small>Disponible per a l’examen</small>')+'</span></label>';}).join('');miUpdateExamSummary();}
+function miToggleExamTopic(id,on){if(on){if(miExamSelectedTopics.indexOf(id)<0)miExamSelectedTopics.push(id);}else miExamSelectedTopics=miExamSelectedTopics.filter(function(x){return x!==id;});miSaveExamSelection();miUpdateExamSummary();}
+function miExamSelectAll(){miExamSelectedTopics=miExamCoreTopics().map(function(t){return t.id;});miSaveExamSelection();miRenderExamConfig();}
+function miExamSelectDone(){var valid=miExamCoreTopics().map(function(t){return t.id;}),done=miExamDoneIds();miExamSelectedTopics=done.filter(function(id){return valid.indexOf(id)>=0;});miSaveExamSelection();miRenderExamConfig();}
+function miExamClearAll(){miExamSelectedTopics=[];miSaveExamSelection();miRenderExamConfig();}
+function miUpdateExamSummary(){var n=miExamSelectedTopics.length,s=document.getElementById('miExamSummary'),b=document.getElementById('miExamStartBtn');if(s)s.textContent=n+' bloc'+(n===1?'':'s')+' seleccionat'+(n===1?'':'s')+' · 20 preguntes';if(b){b.disabled=n===0;b.textContent=n?'Començar examen →':'Selecciona almenys un bloc';}}
+var miRunConfiguredExam=startExam;
+startExam=function(){miOpenExamConfig();};
+function miStartConfiguredExam(){if(!miExamSelectedTopics.length)return;miSaveExamSelection();miCloseExamConfig();miRunConfiguredExam();}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamConfig();});
+</script>
+
+<div class="mi-exam-overlay" id="miExamOverlay" onclick="miCloseExamConfig()" aria-hidden="true">
+  <div class="mi-exam-modal" role="dialog" aria-modal="true" aria-labelledby="miExamTitle" onclick="event.stopPropagation()">
+    <div class="mi-exam-head"><div><h2 id="miExamTitle">📝 Prepara el teu examen</h2><p>Selecciona exactament els blocs que vols repassar. Aquesta selecció és independent dels blocs desbloquejats per practicar.</p></div><button class="mi-exam-close" onclick="miCloseExamConfig()" aria-label="Tancar">✕</button></div>
+    <div class="mi-exam-tools"><button class="mi-exam-tool" onclick="miExamSelectAll()">Tots els blocs</button><button class="mi-exam-tool" onclick="miExamSelectDone()">Només completats</button><button class="mi-exam-tool" onclick="miExamClearAll()">Desmarcar tots</button></div>
+    <div class="mi-exam-list" id="miExamTopicList"></div>
+    <div class="mi-exam-foot"><div class="mi-exam-summary" id="miExamSummary"></div><button class="mi-exam-start" id="miExamStartBtn" onclick="miStartConfiguredExam()">Començar examen →</button><div class="mi-exam-note">L’examen té 20 preguntes, repartides tan equilibradament com permeten els blocs seleccionats. Només hi entren els continguts curriculars de l’opció activa; les ampliacions opcionals en queden fora.</div></div>
+  </div>
+</div>
+</body>
+</html>

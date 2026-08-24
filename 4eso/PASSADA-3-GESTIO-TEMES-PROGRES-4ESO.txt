@@ -1,0 +1,63 @@
+PASSADA 3 · GESTIÓ DE TEMES I PROGRÉS · 4t ESO
+================================================
+
+Objectiu
+--------
+Homogeneïtzar la gestió de temes i el progrés dels cinc sentits de 4t ESO sense modificar la teoria de P1 ni el Mode Examen de P2.
+
+Estàndard aplicat
+-----------------
+- "Gestionar temes" controla la disponibilitat de la pràctica, no l'estat de progrés.
+- El Bloc 1 és sempre Base i no es pot tancar.
+- Tancar i reobrir un bloc conserva el seu estat ✓ Fet.
+- "Desbloquejar tots" només actua sobre els continguts gestionables de pràctica.
+- Les ampliacions opcionals queden fora del panell de bloqueig i són accessibles directament.
+- Completar un bloc curricular només desbloqueja el següent bloc curricular corresponent.
+- Reiniciar progrés requereix doble confirmació.
+- Reiniciar progrés esborra done/unlockedIds, però conserva els errors guardats.
+- Reiniciar progrés no modifica la selecció persistent del Mode Examen P2.
+- Ordre de portada conservat: Tota la teoria → Gestionar temes → blocs.
+
+Particularitats de Matemàtiques A/B
+-----------------------------------
+Mesura:
+- Matemàtiques A: 5 blocs formen el progrés obligatori (1–4 i 8).
+- Els blocs 5–7 (Matemàtiques B) continuen disponibles com a aprofundiment manual en A, però no compten en el progrés ni en l'examen A.
+- Matemàtiques B: els 8 blocs formen el recorregut curricular.
+- Ampliacions A–D: sempre opcionals i fora del panell principal.
+
+Espacial:
+- Matemàtiques A: 8 blocs curriculars gestionats.
+- Matemàtiques B: 10 continguts curriculars gestionats: els 8 blocs comuns + Equacions de la recta + Geometria analítica.
+- En A, aquests dos continguts B són opcionals i accessibles sense formar part del panell/progrés.
+- Les altres ampliacions opcionals queden sempre fora del panell.
+
+Numèric, Algebraic i Estocàstic:
+- 8 blocs principals gestionats.
+- 4 ampliacions opcionals fora del panell i del progrés principal.
+
+Validacions
+-----------
+- Sintaxi JavaScript: 5/5 OK.
+- Prova funcional executada en opció A i B per als cinc sentits.
+- Bloc 1 protegit: OK.
+- Tancar/reobrir conserva ✓ Fet: OK.
+- Desbloquejar tots no incorpora ampliacions opcionals a unlockedIds: OK.
+- Ampliacions opcionals continuen accessibles: OK.
+- Reinici amb doble confirmació: OK.
+- Errors conservats després del reinici: OK.
+- Mode Examen P2: script idèntic abans/després als 5 sentits.
+- index.html + teoria P1: 66 HTML sense cap canvi.
+
+Comptatges comprovats
+---------------------
+- Numèric: 8 gestionats + 4 opcionals.
+- Algebraic: 8 gestionats + 4 opcionals.
+- Mesura: 8 gestionables de pràctica + 4 ampliacions; progrés A=5, B=8.
+- Espacial A: 8 gestionats + 4 opcionals.
+- Espacial B: 10 gestionats + 2 opcionals.
+- Estocàstic: 8 gestionats + 4 opcionals.
+
+Resultat
+--------
+PASSADA 3 · 4t ESO: OK.

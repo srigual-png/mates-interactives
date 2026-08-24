@@ -1,0 +1,114 @@
+PASSADA 7 · AUDITORIA GLOBAL DE PRODUCTE ACABAT · 4t ESO
+==========================================================
+
+Objectiu
+--------
+Fer una revisió transversal final del curs complet de 4t ESO després de les passades P1–P6: teoria, navegació, gestió de temes i progrés, Matemàtiques A/B, Mode Examen, errors, exercicis/validació, interfície, enllaços, estat local i SEO bàsic.
+
+Incidència detectada i corregida
+--------------------------------
+
+1. MESURA + ESPACIAL + ESTOCÀSTIC · CLAUS D'ESTAT NO HOMOGÈNIES
+- No hi havia una col·lisió activa entre els cinc sentits, però tres claus encara seguien nomenclatures antigues i no el patró final consolidat a P7:
+  · Mesura: sm4eso_mesura_v1
+  · Espacial: se4eso_v1
+  · Estocàstic: sm4eso_estocastic_v3
+- Correcció:
+  · Mesura: nova clau sm4eso_v1.
+  · Espacial: nova clau sp4eso_v1.
+  · Estocàstic: nova clau st4eso_v1.
+  · Les claus antigues es mantenen únicament com a origen de migració.
+  · Si la clau nova encara no existeix, es recuperen automàticament progrés, errors i desbloquejos des de la clau antiga, es normalitzen els IDs vàlids i l'estat es desa a la nova clau.
+  · Si ja existeix estat amb la clau nova, aquest té prioritat i no es torna a importar la clau antiga.
+- Prova dirigida de migració: 3/3 OK.
+- La clau mi_4eso_opcio es manté compartida intencionadament perquè l'elecció Matemàtiques A/B és una preferència del curs, no d'un sentit concret.
+
+Auditoria global final
+----------------------
+- HTML totals: 71.
+- Teoria: 60 pàgines de bloc + 5 índexs = 65 HTML.
+- Pàgina de curs: 1.
+- Pàgines principals de sentit: 5.
+- Blocs principals de 4t: 40.
+- Ampliacions: 20.
+- Referències relatives totals auditades: 983.
+  · Dins de 4eso: 634.
+  · Cap a recursos globals / nivell superior: 349.
+- Enllaços interns trencats: 0.
+- Referències amb àncora (#...) comprovades: 112.
+- Àncores internes trencades: 0.
+- Pàgines HTML òrfenes: 0.
+- Enllaços directes teoria → pràctica amb topic=... comprovats: 156.
+- topic inexistents: 0.
+- Mapes teoria/pràctica: 12/12 pàgines de teoria referenciades correctament a cadascun dels 5 sentits.
+- Índexs de teoria: 5/5 inclouen totes les pàgines del seu sentit.
+- Navegació de teoria (paginador + índex): present a 60/60 pàgines.
+- Exemple / exemple resolt: 60/60.
+- Errors freqüents / habituals: 60/60.
+- Resum: 60/60.
+- Retorn directe a pràctica: 60/60.
+- JavaScript: sintaxi correcta als 5 sentit-*.html.
+- IDs HTML estàtics duplicats: 0.
+- SEO bàsic: title, description, viewport, robots, canonical i un únic H1 presents als 71 HTML.
+- Títols SEO duplicats: 0.
+- Canonicals incorrectes: 0.
+- Tota la teoria → Gestionar temes → llista de blocs: ordre correcte 5/5.
+- Un únic botó Gestionar temes: 5/5.
+
+Validació Matemàtiques A/B
+--------------------------
+Recorregut curricular mantingut sense canvis:
+- Numèric: A = 8 blocs / B = 8 blocs.
+- Algebraic: A = 8 / B = 8.
+- Mesura: A = 5 / B = 8.
+- Espacial: A = 8 / B = 10.
+- Estocàstic: A = 8 / B = 8.
+
+Es manté la separació correcta entre:
+- blocs que compten en el progrés;
+- continguts opcionals / ampliacions;
+- blocs disponibles al Mode Examen;
+- particularitats curriculars de Matemàtiques A i B a Mesura i Espacial.
+
+Claus de progrés finals
+-----------------------
+- Numèric: sn4eso_v1
+- Algebraic: sa4eso_v1
+- Mesura: sm4eso_v1
+- Espacial: sp4eso_v1
+- Estocàstic: st4eso_v1
+- Col·lisions finals: 0.
+
+Claus antigues de migració
+---------------------------
+- Mesura: sm4eso_mesura_v1 → sm4eso_v1
+- Espacial: se4eso_v1 → sp4eso_v1
+- Estocàstic: sm4eso_estocastic_v3 → st4eso_v1
+
+Claus del Mode Examen
+---------------------
+- Numèric: mi_exam_4eso_numeric_v1
+- Algebraic: mi_exam_4eso_algebraic_v1
+- Mesura: mi_exam_4eso_mesura_v1
+- Espacial: mi_exam_4eso_espacial_v1
+- Estocàstic: mi_exam_4eso_estocastic_v1
+- Col·lisions: 0.
+
+Integritat de P1–P6
+-------------------
+- Fitxers existents modificats respecte del ZIP P6: 3.
+  · sentit-mesura.html: només clau d'estat i migració compatible.
+  · sentit-espacial.html: només clau d'estat i migració compatible.
+  · sentit-estocastic.html: només clau d'estat i migració compatible.
+- No s'ha modificat cap dels 65 HTML de teoria.
+- No s'han modificat generadors matemàtics ni validadors de respostes de P5.
+- No s'ha modificat la configuració ni la lògica del Mode Examen de P2.
+- No s'ha modificat la lògica pedagògica d'errors/correccions de P4.
+- No s'ha modificat la interfície P6 fora del mecanisme intern de persistència.
+- La resta de fitxers P1–P6 es mantenen intactes.
+
+Resultat
+--------
+PASSADA 7 · 4t ESO: COMPLETADA, CORREGIDA I VALIDADA.
+
+El paquet resultant és la nova base de 4t ESO per a qualsevol passada posterior.

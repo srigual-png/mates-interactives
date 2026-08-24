@@ -1,0 +1,177 @@
+PASSADA 6 · INTERFÍCIE I NAVEGACIÓ · 4t ESO
+================================================
+
+Objectiu
+--------
+Homogeneïtzar la interfície i la navegació dels cinc sentits de 4t ESO mantenint intactes:
+- teoria P1;
+- Mode Examen P2;
+- gestió de temes i progrés P3;
+- errors i correccions P4;
+- generadors i validadors P5.
+
+ESTÀNDARD VISUAL APLICAT
+========================
+
+1. BARRA SUPERIOR I BREADCRUMB
+------------------------------
+Els cinc sentits utilitzen el mateix patró:
+Mates Interactives → 4t ESO → Sentit
+
+- El breadcrumb del sentit és visible des de la pantalla inicial.
+- Mesura i Estocàstic han passat a utilitzar també la classe comuna top-nav.
+- S'ha afegit la versió curta "Sentit" per a pantalles estretes.
+- En mòbil, "Mates Interactives" es compacta a la icona de casa i "4t ESO" a "4t".
+- La barra de progrés es redueix i, en pantalles molt estretes, s'oculta per evitar desbordaments.
+
+2. PORTADA DEL SENTIT
+---------------------
+Ordre homogeni:
+1. Introducció.
+2. Tota la teoria del Sentit.
+3. Gestionar temes.
+4. Continguts curriculars.
+5. Ampliació / Prepara Batxillerat.
+6. Mode Examen.
+7. Errors guardats.
+
+Cada zona té ara una capçalera visual pròpia i coherent.
+
+3. GESTIONAR TEMES
+------------------
+- Un únic botó visible "Gestionar temes" als cinc sentits.
+- Situat just sota "Tota la teoria".
+- Panell adaptat a pantalles petites.
+- No s'ha modificat cap regla de bloqueig, desbloqueig o progrés.
+
+4. AMPLIACIONS
+--------------
+Les ampliacions queden visualment separades dels continguts principals.
+
+- Numèric: A–D opcionals, prepara Batxillerat.
+- Algebraic: A–D opcionals, prepara Batxillerat.
+- Estocàstic: A–D opcionals, prepara Batxillerat.
+- Mesura: A–D opcionals, prepara Batxillerat.
+- Espacial: es conserva la particularitat curricular:
+  · Matemàtiques A: 8 blocs obligatoris.
+  · Matemàtiques B: 8 blocs comuns + A (Rectes) + D (Geometria analítica).
+  · B i C continuen sent aprofundiment opcional [AMP].
+
+5. MATEMÀTIQUES A/B
+-------------------
+La P6 no altera la lògica curricular ni el progrés:
+
+- Numèric: A=8 / B=8 blocs curriculars.
+- Algebraic: A=8 / B=8.
+- Mesura: A=5 / B=8.
+- Espacial: A=8 / B=10.
+- Estocàstic: A=8 / B=8.
+
+A Mesura i Espacial, la portada explica ara visualment l'opció activa sense canviar el comportament intern.
+
+6. MODE EXAMEN
+--------------
+- Zona pròpia i separada de les ampliacions.
+- Text clar: la selecció d'examen és independent dels blocs desbloquejats per practicar.
+- En Mesura i Espacial s'indica que el selector respecta Matemàtiques A/B.
+- No s'ha modificat la lògica de P2.
+
+7. ERRORS GUARDATS
+------------------
+- Sempre accessibles, també quan hi ha 0 errors.
+- Zona pròpia després del Mode Examen.
+- Aparença diferenciada quan hi ha errors pendents.
+- No s'ha modificat la lògica P4.
+
+8. RESPONSIVE
+-------------
+Capa responsive comuna:
+- targetes a amplada completa;
+- badges adaptats a pantalles estretes;
+- botons de teoria i gestió a amplada completa en mòbil;
+- opcions d'exercici en una sola columna quan cal;
+- selectors de nivell/mode flexibles;
+- modals i panells limitats a l'alçada disponible;
+- breadcrumb compacte;
+- barra de progrés reduïda o amagada en amplades molt petites.
+
+9. FAVICONS
+-----------
+- Sentit Estocàstic no tenia els favicons globals declarats.
+- S'han afegit les referències a ../assets/images/.
+- La resta de sentits ja apuntaven correctament als assets globals.
+
+VALIDACIÓ
+=========
+
+A) JavaScript
+-------------
+- 5/5 sentit-*.html: sintaxi JavaScript OK.
+
+B) CSS
+------
+- 5/5 fulls P6 analitzats amb parser CSS.
+- 0 errors de sintaxi CSS.
+
+C) DOM / interfície
+-------------------
+- 0 IDs HTML duplicats.
+- 5/5 barres superiors amb top-nav.
+- 5/5 breadcrumbs amb versió completa i curta.
+- 5/5 amb un únic btnUnlock.
+- 5/5 amb ordre:
+  Tota la teoria → Gestionar temes → blocs.
+- 5/5 amb:
+  Continguts → Ampliació → Mode Examen → Errors.
+- Errors guardats continua disponible també amb 0 errors.
+
+D) Prova funcional de renderització de portada
+----------------------------------------------
+S'ha executat renderHome() amb DOM simulat per als cinc sentits i per a Matemàtiques A i B.
+
+Resultat:
+- 10/10 escenaris A/B: OK.
+- Cap excepció.
+- 8 blocs principals + 4 ampliacions + Examen + Errors.
+- Ordre visual correcte.
+- Progrés calculat amb els blocs curriculars corresponents.
+
+E) Navegació i enllaços
+-----------------------
+- 71 HTML totals dins del curs.
+- 634 referències relatives que resolen dins de 4eso: 0 trencades.
+- 349 referències cap a recursos globals/portada superior revisades i amb rutes coherents.
+- Total auditat: 983 referències relatives.
+
+F) Integritat de passades anteriors
+-----------------------------------
+Respecte de 4eso-P5-exercicis-validats:
+
+Fitxers modificats:
+- sentit-numeric.html
+- sentit-algebraic.html
+- sentit-mesura.html
+- sentit-espacial.html
+- sentit-estocastic.html
+
+Fitxers previs sense canvis:
+- index.html.
+- 65/65 fitxers HTML de teoria.
+- informes P1–P5.
+- 71/71 fitxers no afectats: byte a byte intactes.
+
+Funcions clau comprovades:
+- script complet de configuració del Mode Examen P2: intacte als 5 sentits.
+- renderUnlockPanel / unlockAllTopics / resetProgress P3: intactes.
+- miReviewHtml / registerError / clearSavedErrors P4: intactes.
+- startPractice i validadors/generadors P5: intactes.
+
+Les úniques funcions modificades són:
+- renderHome()
+- showHome()
+i la nova funció local visual head() dins de renderHome().
+
+ESTAT
+=====
+PASSADA 6 · 4t ESO: COMPLETADA I VALIDADA.
+PASSADA 6 · 1r–4t ESO: TANCADA.

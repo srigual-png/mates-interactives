@@ -1,0 +1,50 @@
+PASSADA 4 · ERRORS I CORRECCIONS · 4t ESO
+==========================================
+
+Objectiu
+--------
+Homogeneïtzar el sistema d'errors dels cinc sentits de 4t ESO sense modificar la teoria, el Mode Examen de P2 ni la gestió de temes/progrés de P3.
+
+Estàndard aplicat
+-----------------
+Quan una resposta és incorrecta:
+1. La teva resposta.
+2. Resposta correcta.
+3. 🔎 Què convé revisar.
+4. 📘 Resolució pas a pas.
+
+Gestió d'errors
+---------------
+- Els errors nous desen el camp review, derivat de la guia/pistes de l'exercici.
+- Si un error antic no té review, s'utilitza guide; si tampoc en té, s'utilitza errorFocus i, finalment, un recordatori pedagògic genèric.
+- Correcció immediata completa tant en pràctica com en Mode Examen.
+- El Mode Examen desa review i solution al registre intern de revisió.
+- La pantalla global d'Errors guardats mostra resposta donada, correcta, què convé revisar i resolució.
+- Els errors recents dins de cada bloc mostren també què convé revisar i permeten desplegar la resolució.
+- Eliminació individual i esborrat global conservats.
+- Compatibilitat amb blocs de Matemàtiques A/B i ampliacions de Prepara Batxillerat.
+
+Validació
+---------
+- 5/5 fitxers sentit-*.html: sintaxi JavaScript OK.
+- 5/5: helpers miReviewPoints / miReviewHtml operatius en execució simulada.
+- 5/5: camp review desat en errors nous.
+- 5/5: flux d'error del Mode Examen amb resposta donada, correcta, revisió i passos.
+- 5/5: Errors guardats amb revisió, explicació i esborrat individual/global.
+- 5/5: Errors recents dins del bloc amb revisió i explicació desplegable.
+- P2 Mode Examen: funcions clau, inclòs startExam(), intactes.
+- P3 Gestió de temes/progrés: funcions clau intactes.
+- Comparació amb P3: només s'han modificat els cinc sentit-*.html.
+- index.html i tota la teoria: intactes.
+
+Nota tècnica
+------------
+En una prova massiva auxiliar de generadors, Algebraic manté una incidència aleatòria preexistent de generació de distractors que ja estava blindada pel Mode Examen de P2 mitjançant reintents. No s'ha modificat en aquesta passada perquè correspon a l'auditoria d'exercicis/generadors, no al sistema d'errors.
+
+Fitxers modificats
+-------------------
+sentit-numeric.html
+sentit-algebraic.html
+sentit-mesura.html
+sentit-espacial.html
+sentit-estocastic.html

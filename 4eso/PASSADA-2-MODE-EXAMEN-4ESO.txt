@@ -1,0 +1,58 @@
+PASSADA 2 · MODE EXAMEN · 4t ESO
+=====================================
+
+Objectiu
+--------
+Separar completament el Mode Examen del sistema de desbloqueig de la pràctica i aplicar el mateix selector de continguts als cinc sentits de 4t ESO, respectant Matemàtiques A/B.
+
+Canvis aplicats als 5 sentits
+-----------------------------
+- Selector previ «Prepara el teu examen».
+- Selecció independent de «Gestionar temes».
+- Botons ràpids:
+  · Tots els blocs
+  · Només completats
+  · Desmarcar tots
+- Selecció persistent amb localStorage, separada per sentit.
+- 20 preguntes per examen.
+- Repartiment equilibrat entre els blocs seleccionats (diferència màxima d'1 quan se seleccionen diversos blocs).
+- Qualsevol bloc curricular elegible es pot seleccionar encara que estigui bloquejat per a la pràctica.
+- Les ampliacions purament opcionals queden fora del Mode Examen.
+- El resultat final mostra els blocs realment seleccionats.
+- S'ha mantingut el motor propi de preguntes, respostes obertes, correccions i registre d'errors de cada sentit.
+
+Matemàtiques A/B
+----------------
+- Sentit Numèric: 8 blocs curriculars comuns A/B.
+- Sentit Algebraic: 8 blocs curriculars comuns A/B.
+- Sentit de la Mesura:
+  · Opció A: 5 blocs curriculars seleccionables (1–4 i 8).
+  · Opció B: 8 blocs curriculars seleccionables.
+- Sentit Espacial:
+  · Opció A: 8 blocs comuns.
+  · Opció B: 10 continguts curriculars: els 8 blocs comuns + Ampliació A (Equacions de la recta) + Ampliació D (Geometria analítica), ja marcades al projecte com a curriculars B.
+  · Ampliacions B i C continuen fora de l'examen perquè són aprofundiment opcional.
+- Sentit Estocàstic: 8 blocs curriculars seleccionables tant en A com en B.
+
+Robustesa del motor d'examen
+----------------------------
+Durant la prova s'ha detectat una excepció aleatòria preexistent en un generador algebraic quan no podia construir quatre distractors únics. El Mode Examen queda blindat: si un intent puntual de generació falla, es descarta aquell intent i se'n genera un altre.
+
+En Estocàstic, alguns blocs tenen un nombre finit de signatures úniques inferior a 20 quan s'examinen completament sols. El motor prioritza preguntes úniques i, només quan s'esgota aquesta varietat, completa les 20 preguntes amb nous intents del mateix bloc. Això garanteix sempre l'examen complet sense contaminar-lo amb altres temes.
+
+Validació
+---------
+- 5/5 fitxers sentit-*.html: sintaxi JavaScript correcta.
+- Cada bloc curricular seleccionable provat individualment.
+- Cada bloc individual provat 5 vegades.
+- 20/20 preguntes en totes les proves.
+- Cap contaminació amb blocs no seleccionats.
+- Selecció de tots els blocs: repartiment equilibrat, diferència màxima d'1 pregunta.
+- «Només completats»: correcte.
+- Matemàtiques A/B: filtres curriculars correctes.
+- Teoria de P1: 65 HTML + index del curs verificats per hash, 0 modificacions.
+
+Resultat
+--------
+PASSADA 2 · MODE EXAMEN · 4t ESO: COMPLETADA.
+Amb aquesta passada, el nou Mode Examen queda implantat a 1r, 2n, 3r i 4t ESO.
