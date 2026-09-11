@@ -263,6 +263,90 @@
 }
 </style>
 
+<style>
+/* Invitació a l'enquesta de millora */
+.course-survey {
+    padding: 1rem 0 3.5rem;
+}
+
+.course-survey__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.75rem 2rem;
+    border: 1px solid #bfdbfe;
+    border-radius: 1.25rem;
+    background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+    box-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
+}
+
+.course-survey__content {
+    max-width: 46rem;
+}
+
+.course-survey__title {
+    margin: 0 0 0.45rem;
+    color: #1e3a8a;
+    font-size: clamp(1.3rem, 2.5vw, 1.65rem);
+    line-height: 1.25;
+}
+
+.course-survey__text {
+    margin: 0;
+    color: #334155;
+    font-size: 1rem;
+    line-height: 1.65;
+}
+
+.course-survey__button {
+    display: inline-flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.75rem;
+    background: #2563eb;
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.course-survey__button:hover {
+    background: #1d4ed8;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(37, 99, 235, 0.2);
+}
+
+.course-survey__button:focus-visible {
+    outline: 3px solid #f59e0b;
+    outline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+    .course-survey {
+        padding: 0.5rem 0 2.5rem;
+    }
+
+    .course-survey__card {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 1.25rem;
+        padding: 1.5rem;
+    }
+
+    .course-survey__button {
+        width: 100%;
+    }
+}
+</style>
+
 </head>
 
 <body>
@@ -652,6 +736,47 @@
                 </p>
 
             </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================================================= -->
+<!-- ENQUESTA DE MILLORA -->
+<!-- ================================================= -->
+
+<section
+    class="course-survey"
+    aria-labelledby="course-survey-title">
+
+    <div class="container">
+
+        <div class="course-survey__card">
+
+            <div class="course-survey__content">
+
+                <h2
+                    id="course-survey-title"
+                    class="course-survey__title">
+                    Ajuda’ns a millorar Mates Interactives
+                </h2>
+
+                <p class="course-survey__text">
+                    Explica’ns què t’agrada i què podríem millorar. L’enquesta és anònima i només són 2 minuts.
+                </p>
+
+            </div>
+
+            <a
+                class="course-survey__button"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSdC-zJ5Cx44amAnSVyRYprvtiMnnqquxCDL4OzGtuz92m3hlw/viewform?usp=pp_url&amp;entry.679184411=4t+d%E2%80%99ESO"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Respondre l’enquesta de Mates Interactives per a 4t d’ESO">
+                Respondre l’enquesta
+            </a>
 
         </div>
 
