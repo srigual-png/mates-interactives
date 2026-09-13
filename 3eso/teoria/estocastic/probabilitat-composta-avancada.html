@@ -10,4 +10,154 @@
 <nav class="top-nav"><a class="nav-link" href="../../../index.html">🏠 Mates Interactives</a><a class="nav-link" href="../../index.html">📘 3r ESO</a><a class="nav-link" href="../../sentit-estocastic.html">📊 Sentit Estocàstic</a><a class="nav-link" href="index.html">📚 Teoria</a><div class="nav-title">Ampliació C</div></nav>
 <main class="wrap"><header class="hero"><span class="eyebrow">Ampliació C · 3r ESO</span><h1>🌳 Probabilitat composta avançada <span class="tag">PREPARA 4t</span></h1><p>Arbres, dependència intuïtiva, complementari, exactament k resultats i recompte per preparar la probabilitat de 4t.</p><div class="hero-actions"><a class="btn btn-primary" href="../../sentit-estocastic.html?topic=ampC3r&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a><a class="btn btn-secondary" href="../../sentit-estocastic.html?topic=ampC3r&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a></div></header>
 <div class="course-switch"><span style="font-size:.78rem;color:var(--muted);align-self:center"><b>Altres nivells:</b></span><a href="../../../1eso/sentit-estocastic.html">1r ESO</a><a href="../../../2eso/sentit-estocastic.html">2n ESO</a><a class="current" href="../../sentit-estocastic.html">3r ESO</a></div>
-<section class="card"><h2>1. Arbres més exigents</h2><p>En problemes compostos, l’arbre no és un dibuix decoratiu: representa com canvia l’espai de possibilitats després de cada resultat. Les probabilitats de les branques que surten d’un mateix node han de sumar 1.</p><div class="formula">Suma de branques que surten d’un node = 1</div></section><section class="card"><h2>2. Reposició i dependència</h2><p>Amb reposició, cada extracció retorna al mateix model i moltes etapes resulten independents. Sense reposició, el que ha passat modifica el que queda i cal recalcular numerador i denominador.</p><div class="example"><h3>✏️ 4 vermelles i 3 blaves, dues extraccions sense reposició: V després de B</h3><ol class="steps"><li>P(B primera)=3/7.</li><li>Després d’una blava, queden 4 vermelles i 2 blaves: 6 boles.</li><li>P(V segona | ha sortit B)=4/6.</li><li>Probabilitat del camí BV=3/7·4/6=12/42=2/7.</li><li>No cal memoritzar encara la notació condicionada: la idea és <b>actualitzar la situació</b>.</li></ol></div></section><section class="card"><h2>3. “Almenys una” i complementari</h2><p>Quan hi ha molts camins favorables, el complementari pot reduir molt la feina. “Almenys una vermella” té com a contrari “cap vermella”.</p><div class="example"><h3>✏️ Tres llançaments d’una moneda: almenys una cara</h3><ol class="steps"><li>Contrari: tres creus.</li><li>P(XXX)=(1/2)³=1/8.</li><li>P(almenys una cara)=1−1/8=7/8.</li></ol></div></section><section class="card"><h2>4. Exactament k èxits</h2><p>Per “exactament k” cal identificar <b>tots els ordres possibles</b> que contenen k èxits. En tres llançaments, exactament dues cares pot passar com CCX, CXC o XCC. Si els llançaments són independents i equiprobables, els tres camins tenen la mateixa probabilitat; en altres situacions poden no tenir-la.</p></section><section class="card"><h2>5. Recompte i probabilitat</h2><p>El principi multiplicatiu ajuda a comptar l’espai mostral quan enumerar tots els resultats seria llarg. Després, si tots aquests resultats són equiprobables, podem combinar el recompte amb Laplace.</p><div class="example"><h3>✏️ Codis de 4 símbols triats entre 6, sense repetir</h3><ol class="steps"><li>Opcions successives: 6·5·4·3.</li><li>Total=360 codis.</li><li>Si volem codis que comencin amb un símbol fix, la primera posició ja està decidida i queden 5·4·3=60.</li></ol></div></section><section class="card"><h2>6. Estratègia de control</h2><ul class="checklist"><li>Què passa a cada etapa?</li><li>Canvia la composició o probabilitat després d’un resultat?</li><li>Quins camins formen l’esdeveniment?</li><li>Dins d’un camí: multiplica.</li><li>Entre camins incompatibles favorables: suma.</li><li>Si hi ha molts camins, prova el complementari.</li><li>Comprova que totes les branques d’un node sumen 1.</li></ul></section><div class="error-box"><h3>⚠️ Errors habituals</h3><ul class="error-list"><li>Copiar les probabilitats de la primera etapa a la segona en un problema sense reposició.</li><li>Oblidar un ordre possible en “exactament dues”.</li><li>Sumar branques al llarg del mateix camí.</li><li>No distingir un recompte amb repetició d’un sense repetició.</li><li>Aplicar el complementari però restar de 100 en lloc de 1 quan estem treballant amb probabilitats decimals/fraccionàries.</li></ul></div><section class="quiz"><h2>✅ Autocomprovació</h2><p>Respon sense mirar els exemples. L’objectiu és comprovar si entens la idea, no només si recordes una fórmula.</p><div class="q"><div class="q-title">1. Sense reposició, la segona probabilitat...</div><div class="q-options"><button onclick="answerQ('qf1',true,'La primera extracció modifica la composició disponible.')">pot canviar segons el primer resultat</button><button onclick="answerQ('qf1',false,'La primera extracció modifica la composició disponible.')">sempre és igual a la primera</button><button onclick="answerQ('qf1',false,'La primera extracció modifica la composició disponible.')">sempre val 1/2</button></div><div class="q-feedback" id="qf1"></div></div><div class="q"><div class="q-title">2. Per “almenys un èxit” sovint convé calcular...</div><div class="q-options"><button onclick="answerQ('qf2',true,'El complementari de “almenys un” és “cap”.')">P(cap èxit)</button><button onclick="answerQ('qf2',false,'El complementari de “almenys un” és “cap”.')">només el primer camí</button><button onclick="answerQ('qf2',false,'El complementari de “almenys un” és “cap”.')">el rang</button></div><div class="q-feedback" id="qf2"></div></div><div class="q"><div class="q-title">3. En un mateix camí d’un arbre, les probabilitats es...</div><div class="q-options"><button onclick="answerQ('qf3',true,'El camí exigeix que passin successivament totes les etapes.')">multipliquen</button><button onclick="answerQ('qf3',false,'El camí exigeix que passin successivament totes les etapes.')">sumen sempre</button><button onclick="answerQ('qf3',false,'El camí exigeix que passin successivament totes les etapes.')">ordenen</button></div><div class="q-feedback" id="qf3"></div></div></section><section class="mi-theory-summary" id="resum"><h2>✅ Resum essencial</h2><p>Teoria de probabilitat composta avançada per a Matemàtiques de 3r d'ESO: Arbres, dependència intuïtiva, complementari, exactament k resultats i recompte per preparar la probabilitat de 4t.</p><ul><li>Arbres més exigents</li><li>Reposició i dependència</li><li>vermelles i 3 blaves, dues extraccions sense reposició: V després de B</li><li>“Almenys una” i complementari</li><li>Tres llançaments d’una moneda: almenys una cara</li></ul></section><nav aria-label="Navegació entre temes de teoria" class="mi-theory-pager"><a href="percentils-posicio.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="dues-variables.html">Tema següent →</a></nav><div class="footer-note">Mates Interactives · Teoria de Matemàtiques de 3r d'ESO · Sentit Estocàstic</div></main><script>function answerQ(id,ok,why){const el=document.getElementById(id);el.textContent=(ok?'✅ Correcte. ':'❌ Revisa-ho. ')+why;el.style.color=ok?'#2f9e63':'#d9534f';}</script></body></html>
+<section class="card"><h2>1. Arbres més exigents</h2><p>En problemes compostos, l’arbre no és un dibuix decoratiu: representa com canvia l’espai de possibilitats després de cada resultat. Les probabilitats de les branques que surten d’un mateix node han de sumar 1.</p><div class="formula">Suma de branques que surten d’un node = 1</div></section><section class="card"><h2>2. Reposició i dependència</h2><p>Amb reposició, cada extracció retorna al mateix model i moltes etapes resulten independents. Sense reposició, el que ha passat modifica el que queda i cal recalcular numerador i denominador.</p><div class="example"><h3>✏️ 4 vermelles i 3 blaves, dues extraccions sense reposició: V després de B</h3><ol class="steps"><li>P(B primera)=3/7.</li><li>Després d’una blava, queden 4 vermelles i 2 blaves: 6 boles.</li><li>P(V segona | ha sortit B)=4/6.</li><li>Probabilitat del camí BV=3/7·4/6=12/42=2/7.</li><li>No cal memoritzar encara la notació condicionada: la idea és <b>actualitzar la situació</b>.</li></ol></div></section><section class="card"><h2>3. “Almenys una” i complementari</h2><p>Quan hi ha molts camins favorables, el complementari pot reduir molt la feina. “Almenys una vermella” té com a contrari “cap vermella”.</p><div class="example"><h3>✏️ Tres llançaments d’una moneda: almenys una cara</h3><ol class="steps"><li>Contrari: tres creus.</li><li>P(XXX)=(1/2)³=1/8.</li><li>P(almenys una cara)=1−1/8=7/8.</li></ol></div></section><section class="card"><h2>4. Exactament k èxits</h2><p>Per “exactament k” cal identificar <b>tots els ordres possibles</b> que contenen k èxits. En tres llançaments, exactament dues cares pot passar com CCX, CXC o XCC. Si els llançaments són independents i equiprobables, els tres camins tenen la mateixa probabilitat; en altres situacions poden no tenir-la.</p></section><section class="card"><h2>5. Recompte i probabilitat</h2><p>El principi multiplicatiu ajuda a comptar l’espai mostral quan enumerar tots els resultats seria llarg. Després, si tots aquests resultats són equiprobables, podem combinar el recompte amb Laplace.</p><div class="example"><h3>✏️ Codis de 4 símbols triats entre 6, sense repetir</h3><ol class="steps"><li>Opcions successives: 6·5·4·3.</li><li>Total=360 codis.</li><li>Si volem codis que comencin amb un símbol fix, la primera posició ja està decidida i queden 5·4·3=60.</li></ol></div></section><section class="card"><h2>6. Estratègia de control</h2><ul class="checklist"><li>Què passa a cada etapa?</li><li>Canvia la composició o probabilitat després d’un resultat?</li><li>Quins camins formen l’esdeveniment?</li><li>Dins d’un camí: multiplica.</li><li>Entre camins incompatibles favorables: suma.</li><li>Si hi ha molts camins, prova el complementari.</li><li>Comprova que totes les branques d’un node sumen 1.</li></ul></section><div class="error-box"><h3>⚠️ Errors habituals</h3><ul class="error-list"><li>Copiar les probabilitats de la primera etapa a la segona en un problema sense reposició.</li><li>Oblidar un ordre possible en “exactament dues”.</li><li>Sumar branques al llarg del mateix camí.</li><li>No distingir un recompte amb repetició d’un sense repetició.</li><li>Aplicar el complementari però restar de 100 en lloc de 1 quan estem treballant amb probabilitats decimals/fraccionàries.</li></ul></div><section class="quiz"><h2>✅ Autocomprovació</h2><p>Respon sense mirar els exemples. L’objectiu és comprovar si entens la idea, no només si recordes una fórmula.</p><div class="q"><div class="q-title">1. Sense reposició, la segona probabilitat...</div><div class="q-options"><button onclick="answerQ('qf1',true,'La primera extracció modifica la composició disponible.')">pot canviar segons el primer resultat</button><button onclick="answerQ('qf1',false,'La primera extracció modifica la composició disponible.')">sempre és igual a la primera</button><button onclick="answerQ('qf1',false,'La primera extracció modifica la composició disponible.')">sempre val 1/2</button></div><div class="q-feedback" id="qf1"></div></div><div class="q"><div class="q-title">2. Per “almenys un èxit” sovint convé calcular...</div><div class="q-options"><button onclick="answerQ('qf2',true,'El complementari de “almenys un” és “cap”.')">P(cap èxit)</button><button onclick="answerQ('qf2',false,'El complementari de “almenys un” és “cap”.')">només el primer camí</button><button onclick="answerQ('qf2',false,'El complementari de “almenys un” és “cap”.')">el rang</button></div><div class="q-feedback" id="qf2"></div></div><div class="q"><div class="q-title">3. En un mateix camí d’un arbre, les probabilitats es...</div><div class="q-options"><button onclick="answerQ('qf3',true,'El camí exigeix que passin successivament totes les etapes.')">multipliquen</button><button onclick="answerQ('qf3',false,'El camí exigeix que passin successivament totes les etapes.')">sumen sempre</button><button onclick="answerQ('qf3',false,'El camí exigeix que passin successivament totes les etapes.')">ordenen</button></div><div class="q-feedback" id="qf3"></div></div></section><section class="mi-theory-summary" id="resum"><h2>✅ Resum essencial</h2><p>Teoria de probabilitat composta avançada per a Matemàtiques de 3r d'ESO: Arbres, dependència intuïtiva, complementari, exactament k resultats i recompte per preparar la probabilitat de 4t.</p><ul><li>Arbres més exigents</li><li>Reposició i dependència</li><li>vermelles i 3 blaves, dues extraccions sense reposició: V després de B</li><li>“Almenys una” i complementari</li><li>Tres llançaments d’una moneda: almenys una cara</li></ul></section><nav aria-label="Navegació entre temes de teoria" class="mi-theory-pager"><a href="percentils-posicio.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="dues-variables.html">Tema següent →</a></nav><div class="footer-note">Mates Interactives · Teoria de Matemàtiques de 3r d'ESO · Sentit Estocàstic</div></main><script>function answerQ(id,ok,why){const el=document.getElementById(id);el.textContent=(ok?'✅ Correcte. ':'❌ Revisa-ho. ')+why;el.style.color=ok?'#2f9e63':'#d9534f';}</script><!-- MI_AVISOS_FORM_V1 -->
+<style id="mi-avisos-style">
+  .mi-avis-btn{
+    position:fixed;right:18px;bottom:18px;z-index:9999;
+    display:inline-flex;align-items:center;gap:7px;
+    padding:10px 14px;border:1px solid rgba(0,0,0,.16);border-radius:999px;
+    background:#fff;color:#333;text-decoration:none;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;
+    box-shadow:0 4px 18px rgba(0,0,0,.14);cursor:pointer;
+  }
+  .mi-avis-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .mi-avis-btn:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}
+  @media (max-width:640px){
+    .mi-avis-btn{right:12px;bottom:12px;padding:9px 11px;font-size:13px;max-width:calc(100vw - 24px)}
+    .mi-avis-btn .mi-avis-text{display:none}
+  }
+  @media print{.mi-avis-btn{display:none!important}}
+</style>
+<a id="miAvisBtn" class="mi-avis-btn" href="#" target="_blank" rel="noopener" aria-label="Informa d'un error o proposa una millora" title="Informa d'un error o proposa una millora">
+  <span aria-hidden="true">⚠️</span><span class="mi-avis-text">Informa d'un error o proposa una millora</span>
+</a>
+<script id="mi-avisos-script">
+(function(){
+  var FORM_URL='https://docs.google.com/forms/d/e/1FAIpQLSeAYrMywuihUJDN92G7ka_71A5wM3xk-ZdMsrNBDiv0vwO4WA/viewform';
+  var ENTRY_CURS='entry.484522864';
+  var ENTRY_PAGINA='entry.1901995668';
+  var ENTRY_URL='entry.1335258185';
+  var btn=document.getElementById('miAvisBtn');
+  if(!btn)return;
+
+  function textNet(el){return el ? (el.textContent || '').replace(/\s+/g,' ').trim() : '';}
+  function retalla(s,n){s=(s||'').trim();return s.length>n?s.slice(0,n-1).trim()+'…':s;}
+  function visible(el){
+    if(!el)return false;
+    if(el.classList && el.classList.contains('active'))return true;
+    var st=window.getComputedStyle?getComputedStyle(el):null;
+    return !st || (st.display!=='none' && st.visibility!=='hidden');
+  }
+  function sentitActual(){
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('numeric')>=0)return 'Sentit Numèric';
+    if(path.indexOf('mesura')>=0)return 'Sentit de la Mesura';
+    if(path.indexOf('espacial')>=0)return 'Sentit Espacial';
+    if(path.indexOf('algebraic')>=0)return 'Sentit Algebraic';
+    if(path.indexOf('estocastic')>=0)return 'Sentit Estocàstic';
+    var t=textNet(document.querySelector('#navTitle'))||textNet(document.querySelector('h1'));
+    var m=t.match(/Sentit[^·|–-]*/i);
+    return m?m[0].trim():'';
+  }
+  function primerText(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textNet(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function textEnunciat(el){
+    if(!el)return '';
+    var copia=el.cloneNode(true);
+    copia.querySelectorAll('svg,canvas,figure,.geo-svg-wrap,.ex-visual,.number-line-wrap,.diagram,.visual').forEach(function(n){n.remove();});
+    return (copia.textContent||'').replace(/\s+/g,' ').trim();
+  }
+  function primerEnunciat(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textEnunciat(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function pantallaActiva(){
+    var el=document.querySelector('.screen.active');
+    return el ? (el.id||'') : '';
+  }
+  function netejaTemaAvis(tema){
+    tema=(tema||'').replace(/\s+/g,' ').trim();
+    // Els noms interns de 3r poden començar per «Bloc 1 ·» o «1 ·».
+    // Aquesta numeració és útil a la interfície, però no aporta res al registre d'avisos.
+    tema=tema.replace(/^Bloc\s+\d+\s*[·.:-]\s*/i,'');
+    tema=tema.replace(/^\d+\s*[·.:-]\s*/,'');
+    return tema.trim();
+  }
+  function tipusExerciciActual(){
+    try{
+      if(typeof currentEx!=='undefined' && currentEx && currentEx.type!==undefined && currentEx.type!==null){
+        return 'Tipus '+String(currentEx.type);
+      }
+    }catch(e){}
+    return '';
+  }
+  function netejaMetaExercici(meta,afegeixTipusActual){
+    meta=(meta||'').replace(/\s+/g,' ').trim();
+    var ex=(meta.match(/Exercici\s+\d+/i)||[])[0]||'';
+    var tipus=(meta.match(/Tipus\s+[^·|]+/i)||[])[0]||'';
+    if(tipus)tipus=tipus.replace(/\s+/g,' ').trim();
+    if(!tipus && afegeixTipusActual)tipus=tipusExerciciActual();
+    var dif=(meta.match(/(?:Fàcil|Facil|Mitjà|Mitja|Mitjana|Difícil|Dificil)/i)||[])[0]||'';
+    return [ex,tipus,dif].filter(Boolean).join(' · ');
+  }
+  function contextPractica(){
+    var screen=pantallaActiva();
+    var sentit=sentitActual();
+    var tema=netejaTemaAvis(textNet(document.querySelector('#navTitle')));
+    if(/^Sentit\b/i.test(tema))tema='';
+
+    var isExercise=/Exercise|sEx$/i.test(screen);
+    var isExam=/Exam/i.test(screen) && !/Cfg|Config/i.test(screen);
+    var isOpen=/OpenProblem|AmpProb/i.test(screen);
+
+    if(isExercise){
+      var meta=netejaMetaExercici(primerText(['#exNum','#exN','.ex-num','.exn']),true);
+      var q=primerEnunciat(['#exQuestion .q-text','#exQ .q-text','.ex-question .q-text','.exq .q-text','#exQuestion','#exQ','.ex-question','.exq']);
+      return [sentit,tema,meta,q?('Enunciat: '+retalla(q,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isExam){
+      var qExam=primerEnunciat(['#examContent .q-text','#examC .q-text','.exam-question .q-text','#examQuestion .q-text','#examContent','#examC','.exam-question','#examQuestion']);
+      return [sentit,'Mode examen',tema,qExam?('Enunciat: '+retalla(qExam,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isOpen){
+      var metaOpen=primerText(['#spOpenMeta','#stOpenMeta','#ampMeta','.sp-open-meta']);
+      var qOpen=primerEnunciat(['#spOpenQuestion','#stOpenQuestion','#algOpenProblem','#stOpenProblem','#ampQuestion','#ampQ','.sp-open-question']);
+      return [sentit,'Problema obert',tema,netejaMetaExercici(metaOpen,false),qOpen?('Enunciat: '+retalla(qOpen,190)):''].filter(Boolean).join(' · ');
+    }
+    return [sentit,tema].filter(Boolean).join(' · ');
+  }
+  function contextTeoria(){
+    var sentit=sentitActual();
+    var h1=textNet(document.querySelector('h1')) || textNet(document.querySelector('title')) || 'Pàgina de 3r ESO';
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('/teoria/')>=0){
+      h1=h1.replace(/^\s*[^A-Za-zÀ-ÖØ-öø-ÿ0-9]+\s*/,'').trim();
+      return ['Teoria',sentit,h1].filter(Boolean).join(' · ');
+    }
+    if(/\/sentit-[^/]+\.html$/i.test(location.pathname||''))return contextPractica() || [sentit,h1].filter(Boolean).join(' · ');
+    return h1;
+  }
+  function paginaActual(){
+    var p=contextTeoria();
+    return retalla(p,450) || '3r ESO';
+  }
+  function creaUrl(){
+    var p=new URLSearchParams();
+    p.set(ENTRY_CURS,'3r ESO');
+    p.set(ENTRY_PAGINA,paginaActual());
+    p.set(ENTRY_URL,window.location.href);
+    return FORM_URL+'?usp=pp_url&'+p.toString();
+  }
+  btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
+})();
+</script>
+</body></html>

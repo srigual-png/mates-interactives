@@ -10,4 +10,154 @@
 <nav class="top-nav"><a class="nav-link" href="../../../index.html">🏠 Mates Interactives</a><a class="nav-link" href="../../index.html">📘 3r ESO</a><a class="nav-link" href="../../sentit-estocastic.html">📊 Sentit Estocàstic</a><a class="nav-link" href="index.html">📚 Teoria</a><div class="nav-title">Ampliació A</div></nav>
 <main class="wrap"><header class="hero"><span class="eyebrow">Ampliació A · 3r ESO</span><h1>📦 Comparació avançada i valors atípics <span class="tag">PREPARA 4t</span></h1><p>Centre, dispersió, mesures robustes i criteri 1,5·RIQ per detectar possibles valors atípics.</p><div class="hero-actions"><a class="btn btn-primary" href="../../sentit-estocastic.html?topic=ampA3r&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a><a class="btn btn-secondary" href="../../sentit-estocastic.html?topic=ampA3r&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a></div></header>
 <div class="course-switch"><span style="font-size:.78rem;color:var(--muted);align-self:center"><b>Altres nivells:</b></span><a href="../../../1eso/sentit-estocastic.html">1r ESO</a><a href="../../../2eso/sentit-estocastic.html">2n ESO</a><a class="current" href="../../sentit-estocastic.html">3r ESO</a></div>
-<section class="card"><h2>1. Comparar no és mirar una sola mesura</h2><p>Una comparació estadística completa combina <b>centre, dispersió i forma</b>. La mitjana o la mediana ens diuen on se situa la distribució; el RIQ i la desviació típica ens indiquen com d’escampada està.</p><div class="example"><h3>✏️ Dos grups amb mitjana 7</h3><ol class="steps"><li>Grup A: desviació típica 0,6.</li><li>Grup B: desviació típica 2,1.</li><li>Mateixa mitjana no significa mateix comportament. A és molt més homogeni al voltant del 7.</li></ol></div></section><section class="card"><h2>2. Valors atípics i criteri 1,5·RIQ</h2><p>Un valor molt allunyat pot ser real o pot ser un error. El criteri 1,5·RIQ dona una regla objectiva per marcar <b>possibles</b> atípics; no diu automàticament que siguin incorrectes.</p><div class="formula">RIQ = Q₃ − Q₁</div><div class="formula">Límit inferior = Q₁ − 1,5·RIQ</div><div class="formula">Límit superior = Q₃ + 1,5·RIQ</div><p>Una observació situada fora d’aquests límits es considera un possible valor atípic segons aquest criteri.</p><div class="example"><h3>✏️ Q₁=20, Q₃=28</h3><ol class="steps"><li>RIQ=28−20=8.</li><li>1,5·RIQ=12.</li><li>Límit inferior=20−12=8.</li><li>Límit superior=28+12=40.</li><li>Un valor 45 queda per sobre de 40 i és un possible atípic. Cal investigar-lo; no l’eliminem automàticament.</li></ol></div></section><section class="card"><h2>3. Mesures robustes</h2><p>La mediana i el RIQ són <b>robustos</b>: un valor extrem pot variar molt sense moure gaire aquestes mesures. La mitjana i la desviació típica són més sensibles perquè utilitzen directament les magnituds de totes les dades.</p></section><section class="card"><h2>4. Transformacions</h2><div class="table-wrap"><table class="theory-table"><thead><tr><th>Canvi a totes les dades</th><th>Centre</th><th>Dispersió</th></tr></thead><tbody><tr><td>x → x+c</td><td>Mitjana, mediana i quartils augmenten c</td><td>RIQ i desviació típica no canvien</td></tr><tr><td>x → kx</td><td>Mesures de posició es multipliquen per k</td><td>RIQ i desviació típica per |k|; variància per k²</td></tr></tbody></table></div></section><section class="card"><h2>5. Decidir amb dades</h2><p>En contextos reals, “millor” pot significar una mitjana més alta, una variabilitat menor o un equilibri entre totes dues. Cal explicar quin criteri s’està utilitzant.</p></section><div class="error-box"><h3>⚠️ Errors habituals</h3><ul class="error-list"><li>Eliminar qualsevol atípic sense comprovar el context.</li><li>Calcular 1,5·Q₃ en lloc de 1,5·RIQ.</li><li>Dir que sumar una constant augmenta la desviació típica.</li><li>Comparar grups només amb la mitjana quan la regularitat és rellevant.</li></ul></div><section class="quiz"><h2>✅ Autocomprovació</h2><p>Respon sense mirar els exemples. L’objectiu és comprovar si entens la idea, no només si recordes una fórmula.</p><div class="q"><div class="q-title">1. Si Q₁=10 i Q₃=18, RIQ és...</div><div class="q-options"><button onclick="answerQ('qf1',true,'RIQ=18−10=8.')">8</button><button onclick="answerQ('qf1',false,'RIQ=18−10=8.')">28</button><button onclick="answerQ('qf1',false,'RIQ=18−10=8.')">12</button></div><div class="q-feedback" id="qf1"></div></div><div class="q"><div class="q-title">2. Un valor fora dels límits 1,5·RIQ és...</div><div class="q-options"><button onclick="answerQ('qf2',false,'El criteri detecta valors inusuals, però no en determina la causa.')">necessàriament un error</button><button onclick="answerQ('qf2',true,'El criteri detecta valors inusuals, però no en determina la causa.')">un possible atípic que cal interpretar</button><button onclick="answerQ('qf2',false,'El criteri detecta valors inusuals, però no en determina la causa.')">la mediana</button></div><div class="q-feedback" id="qf2"></div></div><div class="q"><div class="q-title">3. Si sumem 5 a totes les dades, el RIQ...</div><div class="q-options"><button onclick="answerQ('qf3',false,'Q₁ i Q₃ augmenten tots dos 5; la diferència Q₃−Q₁ es manté.')">augmenta 5</button><button onclick="answerQ('qf3',true,'Q₁ i Q₃ augmenten tots dos 5; la diferència Q₃−Q₁ es manté.')">no canvia</button><button onclick="answerQ('qf3',false,'Q₁ i Q₃ augmenten tots dos 5; la diferència Q₃−Q₁ es manté.')">es multiplica per 25</button></div><div class="q-feedback" id="qf3"></div></div></section><section class="mi-theory-summary" id="resum"><h2>✅ Resum essencial</h2><p>Teoria de comparació avançada i valors atípics per a Matemàtiques de 3r d'ESO: Centre, dispersió, mesures robustes i criteri 1,5·RIQ per detectar possibles valors atípics.</p><ul><li>Comparar no és mirar una sola mesura</li><li>Dos grups amb mitjana 7</li><li>Valors atípics i criteri 1,5·RIQ</li><li>Q₁=20, Q₃=28</li><li>Mesures robustes</li></ul></section><nav aria-label="Navegació entre temes de teoria" class="mi-theory-pager"><a href="probabilitat-experiments-compostos.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="percentils-posicio.html">Tema següent →</a></nav><div class="footer-note">Mates Interactives · Teoria de Matemàtiques de 3r d'ESO · Sentit Estocàstic</div></main><script>function answerQ(id,ok,why){const el=document.getElementById(id);el.textContent=(ok?'✅ Correcte. ':'❌ Revisa-ho. ')+why;el.style.color=ok?'#2f9e63':'#d9534f';}</script></body></html>
+<section class="card"><h2>1. Comparar no és mirar una sola mesura</h2><p>Una comparació estadística completa combina <b>centre, dispersió i forma</b>. La mitjana o la mediana ens diuen on se situa la distribució; el RIQ i la desviació típica ens indiquen com d’escampada està.</p><div class="example"><h3>✏️ Dos grups amb mitjana 7</h3><ol class="steps"><li>Grup A: desviació típica 0,6.</li><li>Grup B: desviació típica 2,1.</li><li>Mateixa mitjana no significa mateix comportament. A és molt més homogeni al voltant del 7.</li></ol></div></section><section class="card"><h2>2. Valors atípics i criteri 1,5·RIQ</h2><p>Un valor molt allunyat pot ser real o pot ser un error. El criteri 1,5·RIQ dona una regla objectiva per marcar <b>possibles</b> atípics; no diu automàticament que siguin incorrectes.</p><div class="formula">RIQ = Q₃ − Q₁</div><div class="formula">Límit inferior = Q₁ − 1,5·RIQ</div><div class="formula">Límit superior = Q₃ + 1,5·RIQ</div><p>Una observació situada fora d’aquests límits es considera un possible valor atípic segons aquest criteri.</p><div class="example"><h3>✏️ Q₁=20, Q₃=28</h3><ol class="steps"><li>RIQ=28−20=8.</li><li>1,5·RIQ=12.</li><li>Límit inferior=20−12=8.</li><li>Límit superior=28+12=40.</li><li>Un valor 45 queda per sobre de 40 i és un possible atípic. Cal investigar-lo; no l’eliminem automàticament.</li></ol></div></section><section class="card"><h2>3. Mesures robustes</h2><p>La mediana i el RIQ són <b>robustos</b>: un valor extrem pot variar molt sense moure gaire aquestes mesures. La mitjana i la desviació típica són més sensibles perquè utilitzen directament les magnituds de totes les dades.</p></section><section class="card"><h2>4. Transformacions</h2><div class="table-wrap"><table class="theory-table"><thead><tr><th>Canvi a totes les dades</th><th>Centre</th><th>Dispersió</th></tr></thead><tbody><tr><td>x → x+c</td><td>Mitjana, mediana i quartils augmenten c</td><td>RIQ i desviació típica no canvien</td></tr><tr><td>x → kx</td><td>Mesures de posició es multipliquen per k</td><td>RIQ i desviació típica per |k|; variància per k²</td></tr></tbody></table></div></section><section class="card"><h2>5. Decidir amb dades</h2><p>En contextos reals, “millor” pot significar una mitjana més alta, una variabilitat menor o un equilibri entre totes dues. Cal explicar quin criteri s’està utilitzant.</p></section><div class="error-box"><h3>⚠️ Errors habituals</h3><ul class="error-list"><li>Eliminar qualsevol atípic sense comprovar el context.</li><li>Calcular 1,5·Q₃ en lloc de 1,5·RIQ.</li><li>Dir que sumar una constant augmenta la desviació típica.</li><li>Comparar grups només amb la mitjana quan la regularitat és rellevant.</li></ul></div><section class="quiz"><h2>✅ Autocomprovació</h2><p>Respon sense mirar els exemples. L’objectiu és comprovar si entens la idea, no només si recordes una fórmula.</p><div class="q"><div class="q-title">1. Si Q₁=10 i Q₃=18, RIQ és...</div><div class="q-options"><button onclick="answerQ('qf1',true,'RIQ=18−10=8.')">8</button><button onclick="answerQ('qf1',false,'RIQ=18−10=8.')">28</button><button onclick="answerQ('qf1',false,'RIQ=18−10=8.')">12</button></div><div class="q-feedback" id="qf1"></div></div><div class="q"><div class="q-title">2. Un valor fora dels límits 1,5·RIQ és...</div><div class="q-options"><button onclick="answerQ('qf2',false,'El criteri detecta valors inusuals, però no en determina la causa.')">necessàriament un error</button><button onclick="answerQ('qf2',true,'El criteri detecta valors inusuals, però no en determina la causa.')">un possible atípic que cal interpretar</button><button onclick="answerQ('qf2',false,'El criteri detecta valors inusuals, però no en determina la causa.')">la mediana</button></div><div class="q-feedback" id="qf2"></div></div><div class="q"><div class="q-title">3. Si sumem 5 a totes les dades, el RIQ...</div><div class="q-options"><button onclick="answerQ('qf3',false,'Q₁ i Q₃ augmenten tots dos 5; la diferència Q₃−Q₁ es manté.')">augmenta 5</button><button onclick="answerQ('qf3',true,'Q₁ i Q₃ augmenten tots dos 5; la diferència Q₃−Q₁ es manté.')">no canvia</button><button onclick="answerQ('qf3',false,'Q₁ i Q₃ augmenten tots dos 5; la diferència Q₃−Q₁ es manté.')">es multiplica per 25</button></div><div class="q-feedback" id="qf3"></div></div></section><section class="mi-theory-summary" id="resum"><h2>✅ Resum essencial</h2><p>Teoria de comparació avançada i valors atípics per a Matemàtiques de 3r d'ESO: Centre, dispersió, mesures robustes i criteri 1,5·RIQ per detectar possibles valors atípics.</p><ul><li>Comparar no és mirar una sola mesura</li><li>Dos grups amb mitjana 7</li><li>Valors atípics i criteri 1,5·RIQ</li><li>Q₁=20, Q₃=28</li><li>Mesures robustes</li></ul></section><nav aria-label="Navegació entre temes de teoria" class="mi-theory-pager"><a href="probabilitat-experiments-compostos.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="percentils-posicio.html">Tema següent →</a></nav><div class="footer-note">Mates Interactives · Teoria de Matemàtiques de 3r d'ESO · Sentit Estocàstic</div></main><script>function answerQ(id,ok,why){const el=document.getElementById(id);el.textContent=(ok?'✅ Correcte. ':'❌ Revisa-ho. ')+why;el.style.color=ok?'#2f9e63':'#d9534f';}</script><!-- MI_AVISOS_FORM_V1 -->
+<style id="mi-avisos-style">
+  .mi-avis-btn{
+    position:fixed;right:18px;bottom:18px;z-index:9999;
+    display:inline-flex;align-items:center;gap:7px;
+    padding:10px 14px;border:1px solid rgba(0,0,0,.16);border-radius:999px;
+    background:#fff;color:#333;text-decoration:none;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;
+    box-shadow:0 4px 18px rgba(0,0,0,.14);cursor:pointer;
+  }
+  .mi-avis-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .mi-avis-btn:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}
+  @media (max-width:640px){
+    .mi-avis-btn{right:12px;bottom:12px;padding:9px 11px;font-size:13px;max-width:calc(100vw - 24px)}
+    .mi-avis-btn .mi-avis-text{display:none}
+  }
+  @media print{.mi-avis-btn{display:none!important}}
+</style>
+<a id="miAvisBtn" class="mi-avis-btn" href="#" target="_blank" rel="noopener" aria-label="Informa d'un error o proposa una millora" title="Informa d'un error o proposa una millora">
+  <span aria-hidden="true">⚠️</span><span class="mi-avis-text">Informa d'un error o proposa una millora</span>
+</a>
+<script id="mi-avisos-script">
+(function(){
+  var FORM_URL='https://docs.google.com/forms/d/e/1FAIpQLSeAYrMywuihUJDN92G7ka_71A5wM3xk-ZdMsrNBDiv0vwO4WA/viewform';
+  var ENTRY_CURS='entry.484522864';
+  var ENTRY_PAGINA='entry.1901995668';
+  var ENTRY_URL='entry.1335258185';
+  var btn=document.getElementById('miAvisBtn');
+  if(!btn)return;
+
+  function textNet(el){return el ? (el.textContent || '').replace(/\s+/g,' ').trim() : '';}
+  function retalla(s,n){s=(s||'').trim();return s.length>n?s.slice(0,n-1).trim()+'…':s;}
+  function visible(el){
+    if(!el)return false;
+    if(el.classList && el.classList.contains('active'))return true;
+    var st=window.getComputedStyle?getComputedStyle(el):null;
+    return !st || (st.display!=='none' && st.visibility!=='hidden');
+  }
+  function sentitActual(){
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('numeric')>=0)return 'Sentit Numèric';
+    if(path.indexOf('mesura')>=0)return 'Sentit de la Mesura';
+    if(path.indexOf('espacial')>=0)return 'Sentit Espacial';
+    if(path.indexOf('algebraic')>=0)return 'Sentit Algebraic';
+    if(path.indexOf('estocastic')>=0)return 'Sentit Estocàstic';
+    var t=textNet(document.querySelector('#navTitle'))||textNet(document.querySelector('h1'));
+    var m=t.match(/Sentit[^·|–-]*/i);
+    return m?m[0].trim():'';
+  }
+  function primerText(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textNet(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function textEnunciat(el){
+    if(!el)return '';
+    var copia=el.cloneNode(true);
+    copia.querySelectorAll('svg,canvas,figure,.geo-svg-wrap,.ex-visual,.number-line-wrap,.diagram,.visual').forEach(function(n){n.remove();});
+    return (copia.textContent||'').replace(/\s+/g,' ').trim();
+  }
+  function primerEnunciat(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textEnunciat(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function pantallaActiva(){
+    var el=document.querySelector('.screen.active');
+    return el ? (el.id||'') : '';
+  }
+  function netejaTemaAvis(tema){
+    tema=(tema||'').replace(/\s+/g,' ').trim();
+    // Els noms interns de 3r poden començar per «Bloc 1 ·» o «1 ·».
+    // Aquesta numeració és útil a la interfície, però no aporta res al registre d'avisos.
+    tema=tema.replace(/^Bloc\s+\d+\s*[·.:-]\s*/i,'');
+    tema=tema.replace(/^\d+\s*[·.:-]\s*/,'');
+    return tema.trim();
+  }
+  function tipusExerciciActual(){
+    try{
+      if(typeof currentEx!=='undefined' && currentEx && currentEx.type!==undefined && currentEx.type!==null){
+        return 'Tipus '+String(currentEx.type);
+      }
+    }catch(e){}
+    return '';
+  }
+  function netejaMetaExercici(meta,afegeixTipusActual){
+    meta=(meta||'').replace(/\s+/g,' ').trim();
+    var ex=(meta.match(/Exercici\s+\d+/i)||[])[0]||'';
+    var tipus=(meta.match(/Tipus\s+[^·|]+/i)||[])[0]||'';
+    if(tipus)tipus=tipus.replace(/\s+/g,' ').trim();
+    if(!tipus && afegeixTipusActual)tipus=tipusExerciciActual();
+    var dif=(meta.match(/(?:Fàcil|Facil|Mitjà|Mitja|Mitjana|Difícil|Dificil)/i)||[])[0]||'';
+    return [ex,tipus,dif].filter(Boolean).join(' · ');
+  }
+  function contextPractica(){
+    var screen=pantallaActiva();
+    var sentit=sentitActual();
+    var tema=netejaTemaAvis(textNet(document.querySelector('#navTitle')));
+    if(/^Sentit\b/i.test(tema))tema='';
+
+    var isExercise=/Exercise|sEx$/i.test(screen);
+    var isExam=/Exam/i.test(screen) && !/Cfg|Config/i.test(screen);
+    var isOpen=/OpenProblem|AmpProb/i.test(screen);
+
+    if(isExercise){
+      var meta=netejaMetaExercici(primerText(['#exNum','#exN','.ex-num','.exn']),true);
+      var q=primerEnunciat(['#exQuestion .q-text','#exQ .q-text','.ex-question .q-text','.exq .q-text','#exQuestion','#exQ','.ex-question','.exq']);
+      return [sentit,tema,meta,q?('Enunciat: '+retalla(q,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isExam){
+      var qExam=primerEnunciat(['#examContent .q-text','#examC .q-text','.exam-question .q-text','#examQuestion .q-text','#examContent','#examC','.exam-question','#examQuestion']);
+      return [sentit,'Mode examen',tema,qExam?('Enunciat: '+retalla(qExam,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isOpen){
+      var metaOpen=primerText(['#spOpenMeta','#stOpenMeta','#ampMeta','.sp-open-meta']);
+      var qOpen=primerEnunciat(['#spOpenQuestion','#stOpenQuestion','#algOpenProblem','#stOpenProblem','#ampQuestion','#ampQ','.sp-open-question']);
+      return [sentit,'Problema obert',tema,netejaMetaExercici(metaOpen,false),qOpen?('Enunciat: '+retalla(qOpen,190)):''].filter(Boolean).join(' · ');
+    }
+    return [sentit,tema].filter(Boolean).join(' · ');
+  }
+  function contextTeoria(){
+    var sentit=sentitActual();
+    var h1=textNet(document.querySelector('h1')) || textNet(document.querySelector('title')) || 'Pàgina de 3r ESO';
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('/teoria/')>=0){
+      h1=h1.replace(/^\s*[^A-Za-zÀ-ÖØ-öø-ÿ0-9]+\s*/,'').trim();
+      return ['Teoria',sentit,h1].filter(Boolean).join(' · ');
+    }
+    if(/\/sentit-[^/]+\.html$/i.test(location.pathname||''))return contextPractica() || [sentit,h1].filter(Boolean).join(' · ');
+    return h1;
+  }
+  function paginaActual(){
+    var p=contextTeoria();
+    return retalla(p,450) || '3r ESO';
+  }
+  function creaUrl(){
+    var p=new URLSearchParams();
+    p.set(ENTRY_CURS,'3r ESO');
+    p.set(ENTRY_PAGINA,paginaActual());
+    p.set(ENTRY_URL,window.location.href);
+    return FORM_URL+'?usp=pp_url&'+p.toString();
+  }
+  btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
+})();
+</script>
+</body></html>

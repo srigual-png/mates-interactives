@@ -10,4 +10,154 @@
 <nav class="top-nav"><a class="nav-link" href="../../../index.html">🏠 Mates Interactives</a><a class="nav-link" href="../../index.html">📘 3r ESO</a><a class="nav-link" href="../../sentit-estocastic.html">📊 Sentit Estocàstic</a><a class="nav-link" href="index.html">📚 Teoria</a><div class="nav-title">Bloc 6</div></nav>
 <main class="wrap"><header class="hero"><span class="eyebrow">Bloc 6 · 3r ESO</span><h1>📏 Dispersió i comparació </h1><p>Rang, variància, desviació típica, coeficient de variació i comparació de distribucions amb dispersió absoluta i relativa.</p><div class="hero-actions"><a class="btn btn-primary" href="../../sentit-estocastic.html?topic=dispersio3r&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a><a class="btn btn-secondary" href="../../sentit-estocastic.html?topic=dispersio3r&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a></div></header>
 <div class="course-switch"><span style="font-size:.78rem;color:var(--muted);align-self:center"><b>Altres nivells:</b></span><a href="../../../1eso/sentit-estocastic.html">1r ESO</a><a href="../../../2eso/sentit-estocastic.html">2n ESO</a><a class="current" href="../../sentit-estocastic.html">3r ESO</a></div>
-<section class="card"><h2>1. Per què necessitem mesures de dispersió?</h2><p>Dues distribucions poden tenir la mateixa mitjana i comportar-se de manera molt diferent. Les mesures de dispersió indiquen <b>com d’escampades</b> estan les dades al voltant del centre.</p><div class="example"><h3>✏️ Mateixa mitjana, dispersió diferent</h3><ol class="steps"><li>A: 5,5,5,5,5 → mitjana 5.</li><li>B: 1,3,5,7,9 → mitjana 5.</li><li>A té totes les dades iguals; B s’estén de 1 a 9.</li><li>Per descriure-les bé necessitem alguna mesura de dispersió.</li></ol></div></section><section class="card"><h2>2. Rang</h2><div class="formula">Rang = màxim − mínim</div><p>És fàcil de calcular, però depèn només de dos valors. Un únic extrem pot canviar molt el rang encara que la majoria de dades no canviïn.</p></section><section class="card"><h2>3. Desviacions respecte de la mitjana</h2><p>Per mesurar com s’allunya cada dada del centre, calculem <b>xᵢ − x̄</b>. Algunes desviacions són positives i d’altres negatives. La suma de totes les desviacions respecte de la mitjana és 0, de manera que no podem sumar-les directament per mesurar la dispersió.</p><p>Una solució és elevar-les al quadrat: així totes aporten una quantitat no negativa i les desviacions grans tenen més pes.</p></section><section class="card"><h2>4. Variància</h2><div class="formula">Variància poblacional: σ² = Σ (xᵢ − x̄)² / N</div><p>A 3r ESO treballem aquesta forma quan considerem que les dades donades formen el conjunt que volem descriure. La variància és la mitjana dels <b>quadrats</b> de les desviacions.</p><p>Per això les seves unitats també queden al quadrat: si les dades són cm, la variància s’expressa en cm².</p></section><section class="card"><h2>5. Desviació típica</h2><div class="formula">Desviació típica: σ = √σ²</div><p>La desviació típica desfà el quadrat de la variància i recupera les mateixes unitats que les dades. Una desviació típica petita indica que les dades estan força concentrades al voltant de la mitjana; una de gran indica més variabilitat.</p><div class="example"><h3>✏️ Dades 2, 4, 6</h3><ol class="steps"><li>Mitjana: x̄=(2+4+6)/3=4.</li><li>Desviacions: −2, 0, 2.</li><li>Quadrats: 4, 0, 4.</li><li>Variància: (4+0+4)/3 = 8/3 ≈ 2,67.</li><li>Desviació típica: √2,67 ≈ 1,63.</li></ol></div></section><section class="card"><h2>6. Coeficient de variació: dispersió relativa</h2><p>La desviació típica mesura una dispersió <b>absoluta</b>. Però 5 unitats de desviació típica no signifiquen el mateix al voltant d’una mitjana 20 que al voltant d’una mitjana 200. Per comparar la variabilitat <b>en relació amb la mida del centre</b> utilitzem el coeficient de variació.</p><div class="formula">CV = (σ / |x̄|) · 100%</div><p>El CV és un <b>percentatge i no té unitats</b>. Un CV més gran indica més dispersió relativa. És especialment útil quan comparem distribucions amb mitjanes diferents. En aquest nivell treballarem amb mitjanes positives i allunyades de 0, perquè prop de 0 el quocient deixa de ser una mesura estable.</p><div class="example"><h3>✏️ Dos grups amb escales diferents</h3><ol class="steps"><li>Grup A: mitjana 50 i σ=5. CV(A)=5/50·100=10%.</li><li>Grup B: mitjana 20 i σ=3. CV(B)=3/20·100=15%.</li><li>Tot i que B té una desviació típica menor en valor absolut, la seva dispersió representa una part més gran de la seva mitjana.</li><li>Per tant, <b>B és més variable en termes relatius</b>.</li></ol></div></section><section class="card"><h2>7. Variància amb freqüències</h2><div class="formula">σ² = Σ nᵢ(xᵢ−x̄)² / N</div><p>Quan un valor es repeteix nᵢ vegades, el seu quadrat de desviació també s’ha de comptar nᵢ vegades.</p></section><section class="card"><h2>8. Transformacions de totes les dades</h2><p>Aquestes propietats permeten raonar sense repetir tots els càlculs:</p><div class="table-wrap"><table class="theory-table"><thead><tr><th>Transformació</th><th>Mitjana</th><th>Desviació típica</th><th>Variància</th></tr></thead><tbody><tr><td>Sumar c a totes les dades</td><td>suma c</td><td>no canvia</td><td>no canvia</td></tr><tr><td>Multiplicar totes les dades per k</td><td>es multiplica per k</td><td>es multiplica per |k|</td><td>es multiplica per k²</td></tr></tbody></table></div><p>Exemple: passar temperatures de °C a una escala que suma una constant canvia el centre però no les distàncies entre dades.</p></section><section class="card"><h2>9. Comparar distribucions amb criteri</h2><p>Per comparar dos grups convé combinar <b>centre + dispersió</b>. “Té una mitjana més alta” respon a una pregunta diferent de “és més homogeni”. Un grup pot tenir millor mitjana i, alhora, molta més variabilitat.</p></section><div class="error-box"><h3>⚠️ Errors habituals</h3><ul class="error-list"><li>Fer la mitjana de les desviacions xᵢ−x̄ i esperar una mesura de dispersió: la suma és 0.</li><li>Oblidar el quadrat en la variància.</li><li>Confondre variància i desviació típica: la desviació típica és l’arrel de la variància.</li><li>Dir que la desviació típica té unitats al quadrat. Les unitats al quadrat corresponen a la variància.</li><li>Dividir per nombre de valors diferents en una taula, en lloc de dividir pel total N.</li><li>Comparar només σ quan les mitjanes són molt diferents: en aquest cas pot ser més informatiu comparar el <b>coeficient de variació</b>.</li><li>Oblidar multiplicar per 100 en expressar el CV com a percentatge.</li></ul></div><section class="quiz"><h2>✅ Autocomprovació</h2><p>Respon sense mirar els exemples. L’objectiu és comprovar si entens la idea, no només si recordes una fórmula.</p><div class="q"><div class="q-title">1. Si totes les dades són iguals, la desviació típica és...</div><div class="q-options"><button onclick="answerQ('qf1',true,'No hi ha cap separació respecte de la mitjana.')">0</button><button onclick="answerQ('qf1',false,'No hi ha cap separació respecte de la mitjana.')">1</button><button onclick="answerQ('qf1',false,'No hi ha cap separació respecte de la mitjana.')">igual a la mitjana</button></div><div class="q-feedback" id="qf1"></div></div><div class="q"><div class="q-title">2. Si sumem 10 a totes les dades, la desviació típica...</div><div class="q-options"><button onclick="answerQ('qf2',false,'Les distàncies entre dades i respecte de la nova mitjana són les mateixes.')">augmenta 10</button><button onclick="answerQ('qf2',true,'Les distàncies entre dades i respecte de la nova mitjana són les mateixes.')">no canvia</button><button onclick="answerQ('qf2',false,'Les distàncies entre dades i respecte de la nova mitjana són les mateixes.')">es multiplica per 100</button></div><div class="q-feedback" id="qf2"></div></div><div class="q"><div class="q-title">3. Un grup té mitjana 40 i desviació típica 4. Quin és el seu coeficient de variació?</div><div class="q-options"><button onclick="answerQ('qf3',true,'CV = 4/40 · 100 = 10%.')">10%</button><button onclick="answerQ('qf3',false,'CV = 4/40 · 100 = 10%.')">0,1%</button><button onclick="answerQ('qf3',false,'CV = 4/40 · 100 = 10%.')">160%</button></div><div class="q-feedback" id="qf3"></div></div></section><section class="mi-theory-summary" id="resum"><h2>✅ Resum essencial</h2><p>Teoria de dispersió i comparació per a Matemàtiques de 3r d'ESO: Rang, variància, desviació típica, coeficient de variació i comparació de distribucions amb dispersió absoluta i relativa.</p><ul><li>Per què necessitem mesures de dispersió?</li><li>Mateixa mitjana, dispersió diferent</li><li>Rang</li><li>Desviacions respecte de la mitjana</li><li>Variància</li></ul></section><nav aria-label="Navegació entre temes de teoria" class="mi-theory-pager"><a href="quartils-diagrama-caixa.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="investigacio-lectura-critica.html">Tema següent →</a></nav><div class="footer-note">Mates Interactives · Teoria de Matemàtiques de 3r d'ESO · Sentit Estocàstic</div></main><script>function answerQ(id,ok,why){const el=document.getElementById(id);el.textContent=(ok?'✅ Correcte. ':'❌ Revisa-ho. ')+why;el.style.color=ok?'#2f9e63':'#d9534f';}</script></body></html>
+<section class="card"><h2>1. Per què necessitem mesures de dispersió?</h2><p>Dues distribucions poden tenir la mateixa mitjana i comportar-se de manera molt diferent. Les mesures de dispersió indiquen <b>com d’escampades</b> estan les dades al voltant del centre.</p><div class="example"><h3>✏️ Mateixa mitjana, dispersió diferent</h3><ol class="steps"><li>A: 5,5,5,5,5 → mitjana 5.</li><li>B: 1,3,5,7,9 → mitjana 5.</li><li>A té totes les dades iguals; B s’estén de 1 a 9.</li><li>Per descriure-les bé necessitem alguna mesura de dispersió.</li></ol></div></section><section class="card"><h2>2. Rang</h2><div class="formula">Rang = màxim − mínim</div><p>És fàcil de calcular, però depèn només de dos valors. Un únic extrem pot canviar molt el rang encara que la majoria de dades no canviïn.</p></section><section class="card"><h2>3. Desviacions respecte de la mitjana</h2><p>Per mesurar com s’allunya cada dada del centre, calculem <b>xᵢ − x̄</b>. Algunes desviacions són positives i d’altres negatives. La suma de totes les desviacions respecte de la mitjana és 0, de manera que no podem sumar-les directament per mesurar la dispersió.</p><p>Una solució és elevar-les al quadrat: així totes aporten una quantitat no negativa i les desviacions grans tenen més pes.</p></section><section class="card"><h2>4. Variància</h2><div class="formula">Variància poblacional: σ² = Σ (xᵢ − x̄)² / N</div><p>A 3r ESO treballem aquesta forma quan considerem que les dades donades formen el conjunt que volem descriure. La variància és la mitjana dels <b>quadrats</b> de les desviacions.</p><p>Per això les seves unitats també queden al quadrat: si les dades són cm, la variància s’expressa en cm².</p></section><section class="card"><h2>5. Desviació típica</h2><div class="formula">Desviació típica: σ = √σ²</div><p>La desviació típica desfà el quadrat de la variància i recupera les mateixes unitats que les dades. Una desviació típica petita indica que les dades estan força concentrades al voltant de la mitjana; una de gran indica més variabilitat.</p><div class="example"><h3>✏️ Dades 2, 4, 6</h3><ol class="steps"><li>Mitjana: x̄=(2+4+6)/3=4.</li><li>Desviacions: −2, 0, 2.</li><li>Quadrats: 4, 0, 4.</li><li>Variància: (4+0+4)/3 = 8/3 ≈ 2,67.</li><li>Desviació típica: √2,67 ≈ 1,63.</li></ol></div></section><section class="card"><h2>6. Coeficient de variació: dispersió relativa</h2><p>La desviació típica mesura una dispersió <b>absoluta</b>. Però 5 unitats de desviació típica no signifiquen el mateix al voltant d’una mitjana 20 que al voltant d’una mitjana 200. Per comparar la variabilitat <b>en relació amb la mida del centre</b> utilitzem el coeficient de variació.</p><div class="formula">CV = (σ / |x̄|) · 100%</div><p>El CV és un <b>percentatge i no té unitats</b>. Un CV més gran indica més dispersió relativa. És especialment útil quan comparem distribucions amb mitjanes diferents. En aquest nivell treballarem amb mitjanes positives i allunyades de 0, perquè prop de 0 el quocient deixa de ser una mesura estable.</p><div class="example"><h3>✏️ Dos grups amb escales diferents</h3><ol class="steps"><li>Grup A: mitjana 50 i σ=5. CV(A)=5/50·100=10%.</li><li>Grup B: mitjana 20 i σ=3. CV(B)=3/20·100=15%.</li><li>Tot i que B té una desviació típica menor en valor absolut, la seva dispersió representa una part més gran de la seva mitjana.</li><li>Per tant, <b>B és més variable en termes relatius</b>.</li></ol></div></section><section class="card"><h2>7. Variància amb freqüències</h2><div class="formula">σ² = Σ nᵢ(xᵢ−x̄)² / N</div><p>Quan un valor es repeteix nᵢ vegades, el seu quadrat de desviació també s’ha de comptar nᵢ vegades.</p></section><section class="card"><h2>8. Transformacions de totes les dades</h2><p>Aquestes propietats permeten raonar sense repetir tots els càlculs:</p><div class="table-wrap"><table class="theory-table"><thead><tr><th>Transformació</th><th>Mitjana</th><th>Desviació típica</th><th>Variància</th></tr></thead><tbody><tr><td>Sumar c a totes les dades</td><td>suma c</td><td>no canvia</td><td>no canvia</td></tr><tr><td>Multiplicar totes les dades per k</td><td>es multiplica per k</td><td>es multiplica per |k|</td><td>es multiplica per k²</td></tr></tbody></table></div><p>Exemple: passar temperatures de °C a una escala que suma una constant canvia el centre però no les distàncies entre dades.</p></section><section class="card"><h2>9. Comparar distribucions amb criteri</h2><p>Per comparar dos grups convé combinar <b>centre + dispersió</b>. “Té una mitjana més alta” respon a una pregunta diferent de “és més homogeni”. Un grup pot tenir millor mitjana i, alhora, molta més variabilitat.</p></section><div class="error-box"><h3>⚠️ Errors habituals</h3><ul class="error-list"><li>Fer la mitjana de les desviacions xᵢ−x̄ i esperar una mesura de dispersió: la suma és 0.</li><li>Oblidar el quadrat en la variància.</li><li>Confondre variància i desviació típica: la desviació típica és l’arrel de la variància.</li><li>Dir que la desviació típica té unitats al quadrat. Les unitats al quadrat corresponen a la variància.</li><li>Dividir per nombre de valors diferents en una taula, en lloc de dividir pel total N.</li><li>Comparar només σ quan les mitjanes són molt diferents: en aquest cas pot ser més informatiu comparar el <b>coeficient de variació</b>.</li><li>Oblidar multiplicar per 100 en expressar el CV com a percentatge.</li></ul></div><section class="quiz"><h2>✅ Autocomprovació</h2><p>Respon sense mirar els exemples. L’objectiu és comprovar si entens la idea, no només si recordes una fórmula.</p><div class="q"><div class="q-title">1. Si totes les dades són iguals, la desviació típica és...</div><div class="q-options"><button onclick="answerQ('qf1',true,'No hi ha cap separació respecte de la mitjana.')">0</button><button onclick="answerQ('qf1',false,'No hi ha cap separació respecte de la mitjana.')">1</button><button onclick="answerQ('qf1',false,'No hi ha cap separació respecte de la mitjana.')">igual a la mitjana</button></div><div class="q-feedback" id="qf1"></div></div><div class="q"><div class="q-title">2. Si sumem 10 a totes les dades, la desviació típica...</div><div class="q-options"><button onclick="answerQ('qf2',false,'Les distàncies entre dades i respecte de la nova mitjana són les mateixes.')">augmenta 10</button><button onclick="answerQ('qf2',true,'Les distàncies entre dades i respecte de la nova mitjana són les mateixes.')">no canvia</button><button onclick="answerQ('qf2',false,'Les distàncies entre dades i respecte de la nova mitjana són les mateixes.')">es multiplica per 100</button></div><div class="q-feedback" id="qf2"></div></div><div class="q"><div class="q-title">3. Un grup té mitjana 40 i desviació típica 4. Quin és el seu coeficient de variació?</div><div class="q-options"><button onclick="answerQ('qf3',true,'CV = 4/40 · 100 = 10%.')">10%</button><button onclick="answerQ('qf3',false,'CV = 4/40 · 100 = 10%.')">0,1%</button><button onclick="answerQ('qf3',false,'CV = 4/40 · 100 = 10%.')">160%</button></div><div class="q-feedback" id="qf3"></div></div></section><section class="mi-theory-summary" id="resum"><h2>✅ Resum essencial</h2><p>Teoria de dispersió i comparació per a Matemàtiques de 3r d'ESO: Rang, variància, desviació típica, coeficient de variació i comparació de distribucions amb dispersió absoluta i relativa.</p><ul><li>Per què necessitem mesures de dispersió?</li><li>Mateixa mitjana, dispersió diferent</li><li>Rang</li><li>Desviacions respecte de la mitjana</li><li>Variància</li></ul></section><nav aria-label="Navegació entre temes de teoria" class="mi-theory-pager"><a href="quartils-diagrama-caixa.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="investigacio-lectura-critica.html">Tema següent →</a></nav><div class="footer-note">Mates Interactives · Teoria de Matemàtiques de 3r d'ESO · Sentit Estocàstic</div></main><script>function answerQ(id,ok,why){const el=document.getElementById(id);el.textContent=(ok?'✅ Correcte. ':'❌ Revisa-ho. ')+why;el.style.color=ok?'#2f9e63':'#d9534f';}</script><!-- MI_AVISOS_FORM_V1 -->
+<style id="mi-avisos-style">
+  .mi-avis-btn{
+    position:fixed;right:18px;bottom:18px;z-index:9999;
+    display:inline-flex;align-items:center;gap:7px;
+    padding:10px 14px;border:1px solid rgba(0,0,0,.16);border-radius:999px;
+    background:#fff;color:#333;text-decoration:none;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;
+    box-shadow:0 4px 18px rgba(0,0,0,.14);cursor:pointer;
+  }
+  .mi-avis-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .mi-avis-btn:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}
+  @media (max-width:640px){
+    .mi-avis-btn{right:12px;bottom:12px;padding:9px 11px;font-size:13px;max-width:calc(100vw - 24px)}
+    .mi-avis-btn .mi-avis-text{display:none}
+  }
+  @media print{.mi-avis-btn{display:none!important}}
+</style>
+<a id="miAvisBtn" class="mi-avis-btn" href="#" target="_blank" rel="noopener" aria-label="Informa d'un error o proposa una millora" title="Informa d'un error o proposa una millora">
+  <span aria-hidden="true">⚠️</span><span class="mi-avis-text">Informa d'un error o proposa una millora</span>
+</a>
+<script id="mi-avisos-script">
+(function(){
+  var FORM_URL='https://docs.google.com/forms/d/e/1FAIpQLSeAYrMywuihUJDN92G7ka_71A5wM3xk-ZdMsrNBDiv0vwO4WA/viewform';
+  var ENTRY_CURS='entry.484522864';
+  var ENTRY_PAGINA='entry.1901995668';
+  var ENTRY_URL='entry.1335258185';
+  var btn=document.getElementById('miAvisBtn');
+  if(!btn)return;
+
+  function textNet(el){return el ? (el.textContent || '').replace(/\s+/g,' ').trim() : '';}
+  function retalla(s,n){s=(s||'').trim();return s.length>n?s.slice(0,n-1).trim()+'…':s;}
+  function visible(el){
+    if(!el)return false;
+    if(el.classList && el.classList.contains('active'))return true;
+    var st=window.getComputedStyle?getComputedStyle(el):null;
+    return !st || (st.display!=='none' && st.visibility!=='hidden');
+  }
+  function sentitActual(){
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('numeric')>=0)return 'Sentit Numèric';
+    if(path.indexOf('mesura')>=0)return 'Sentit de la Mesura';
+    if(path.indexOf('espacial')>=0)return 'Sentit Espacial';
+    if(path.indexOf('algebraic')>=0)return 'Sentit Algebraic';
+    if(path.indexOf('estocastic')>=0)return 'Sentit Estocàstic';
+    var t=textNet(document.querySelector('#navTitle'))||textNet(document.querySelector('h1'));
+    var m=t.match(/Sentit[^·|–-]*/i);
+    return m?m[0].trim():'';
+  }
+  function primerText(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textNet(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function textEnunciat(el){
+    if(!el)return '';
+    var copia=el.cloneNode(true);
+    copia.querySelectorAll('svg,canvas,figure,.geo-svg-wrap,.ex-visual,.number-line-wrap,.diagram,.visual').forEach(function(n){n.remove();});
+    return (copia.textContent||'').replace(/\s+/g,' ').trim();
+  }
+  function primerEnunciat(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textEnunciat(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function pantallaActiva(){
+    var el=document.querySelector('.screen.active');
+    return el ? (el.id||'') : '';
+  }
+  function netejaTemaAvis(tema){
+    tema=(tema||'').replace(/\s+/g,' ').trim();
+    // Els noms interns de 3r poden començar per «Bloc 1 ·» o «1 ·».
+    // Aquesta numeració és útil a la interfície, però no aporta res al registre d'avisos.
+    tema=tema.replace(/^Bloc\s+\d+\s*[·.:-]\s*/i,'');
+    tema=tema.replace(/^\d+\s*[·.:-]\s*/,'');
+    return tema.trim();
+  }
+  function tipusExerciciActual(){
+    try{
+      if(typeof currentEx!=='undefined' && currentEx && currentEx.type!==undefined && currentEx.type!==null){
+        return 'Tipus '+String(currentEx.type);
+      }
+    }catch(e){}
+    return '';
+  }
+  function netejaMetaExercici(meta,afegeixTipusActual){
+    meta=(meta||'').replace(/\s+/g,' ').trim();
+    var ex=(meta.match(/Exercici\s+\d+/i)||[])[0]||'';
+    var tipus=(meta.match(/Tipus\s+[^·|]+/i)||[])[0]||'';
+    if(tipus)tipus=tipus.replace(/\s+/g,' ').trim();
+    if(!tipus && afegeixTipusActual)tipus=tipusExerciciActual();
+    var dif=(meta.match(/(?:Fàcil|Facil|Mitjà|Mitja|Mitjana|Difícil|Dificil)/i)||[])[0]||'';
+    return [ex,tipus,dif].filter(Boolean).join(' · ');
+  }
+  function contextPractica(){
+    var screen=pantallaActiva();
+    var sentit=sentitActual();
+    var tema=netejaTemaAvis(textNet(document.querySelector('#navTitle')));
+    if(/^Sentit\b/i.test(tema))tema='';
+
+    var isExercise=/Exercise|sEx$/i.test(screen);
+    var isExam=/Exam/i.test(screen) && !/Cfg|Config/i.test(screen);
+    var isOpen=/OpenProblem|AmpProb/i.test(screen);
+
+    if(isExercise){
+      var meta=netejaMetaExercici(primerText(['#exNum','#exN','.ex-num','.exn']),true);
+      var q=primerEnunciat(['#exQuestion .q-text','#exQ .q-text','.ex-question .q-text','.exq .q-text','#exQuestion','#exQ','.ex-question','.exq']);
+      return [sentit,tema,meta,q?('Enunciat: '+retalla(q,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isExam){
+      var qExam=primerEnunciat(['#examContent .q-text','#examC .q-text','.exam-question .q-text','#examQuestion .q-text','#examContent','#examC','.exam-question','#examQuestion']);
+      return [sentit,'Mode examen',tema,qExam?('Enunciat: '+retalla(qExam,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isOpen){
+      var metaOpen=primerText(['#spOpenMeta','#stOpenMeta','#ampMeta','.sp-open-meta']);
+      var qOpen=primerEnunciat(['#spOpenQuestion','#stOpenQuestion','#algOpenProblem','#stOpenProblem','#ampQuestion','#ampQ','.sp-open-question']);
+      return [sentit,'Problema obert',tema,netejaMetaExercici(metaOpen,false),qOpen?('Enunciat: '+retalla(qOpen,190)):''].filter(Boolean).join(' · ');
+    }
+    return [sentit,tema].filter(Boolean).join(' · ');
+  }
+  function contextTeoria(){
+    var sentit=sentitActual();
+    var h1=textNet(document.querySelector('h1')) || textNet(document.querySelector('title')) || 'Pàgina de 3r ESO';
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('/teoria/')>=0){
+      h1=h1.replace(/^\s*[^A-Za-zÀ-ÖØ-öø-ÿ0-9]+\s*/,'').trim();
+      return ['Teoria',sentit,h1].filter(Boolean).join(' · ');
+    }
+    if(/\/sentit-[^/]+\.html$/i.test(location.pathname||''))return contextPractica() || [sentit,h1].filter(Boolean).join(' · ');
+    return h1;
+  }
+  function paginaActual(){
+    var p=contextTeoria();
+    return retalla(p,450) || '3r ESO';
+  }
+  function creaUrl(){
+    var p=new URLSearchParams();
+    p.set(ENTRY_CURS,'3r ESO');
+    p.set(ENTRY_PAGINA,paginaActual());
+    p.set(ENTRY_URL,window.location.href);
+    return FORM_URL+'?usp=pp_url&'+p.toString();
+  }
+  btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
+})();
+</script>
+</body></html>
