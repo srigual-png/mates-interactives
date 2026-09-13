@@ -5,4 +5,141 @@
 /* Mates Interactives · patró mestre de teoria */
 .pager{grid-template-columns:1fr auto 1fr!important}.pager__link--index{justify-content:center;text-align:center}.mi-theory-index{font-weight:800}.extension-standard{display:inline-block;margin:6px 0 0;background:#fff3d6;color:#8a5d00;border:1px solid #efd48b;border-radius:999px;padding:4px 9px;font-size:.72rem;font-weight:800}
 @media(max-width:650px){.pager{grid-template-columns:1fr 1fr!important}.pager__link--index{grid-column:1/-1;grid-row:2}.pager>span:empty{display:block}}
-</style></head><body><header class="topbar"><nav class="topbar__inner" aria-label="Navegació"><a class="crumb" href="../../../index.html">🏠 Mates Interactives</a><span class="sep">›</span><a class="crumb" href="../../index.html">📘 2n ESO</a><span class="sep">›</span><a class="crumb" href="../../sentit-estocastic.html">📊 Sentit Estocàstic</a><span class="sep">›</span><a class="crumb mi-theory-index" href="index.html">📚 Teoria</a></nav></header><section class="hero"><div class="hero__inner"><span class="eyebrow">Bloc 6 · 2n ESO</span><h1>Probabilitat teòrica i experimental</h1><p>Diferencia probabilitat teòrica i experimental, aplica Laplace quan hi ha equiprobabilitat i interpreta simulacions i la llei dels grans nombres.</p><div class="hero-actions"><a class="btn btn--primary" href="../../sentit-estocastic.html?topic=probabilitat&level=1&practice=1">🟢 Practicar · Guiat</a><a class="btn btn--secondary" href="../../sentit-estocastic.html?topic=probabilitat&level=2&practice=1">🟠 Practicar · Autònom</a><a class="btn btn--ghost" href="../../sentit-estocastic.html?topic=probabilitat">Veure el bloc →</a></div></div></section><main><div class="intro"><p>La probabilitat intenta quantificar la incertesa. A 2n és essencial diferenciar el que <strong>preveu el model</strong> del que <strong>observem en una sèrie concreta d’experiments</strong>.</p></div><nav class="toc" aria-label="Índex de la teoria"><strong>En aquesta pàgina</strong><div class="toc__links"><a href="#atzar">Experiment aleatori i espai mostral</a><a href="#laplace">Regla de Laplace</a><a href="#experimental">Probabilitat experimental</a><a href="#grans-nombres">Llei dels grans nombres</a><a href="#complementari">Succés complementari</a><a href="#exemples">Exemples resolts</a><a href="#errors">Errors habituals</a><a href="#resum">Resum</a></div></nav><section class="theory-card" id="atzar"><div class="section-kicker">Concepte clau</div><h2>Experiment aleatori i espai mostral</h2><p>En un experiment aleatori no sabem amb certesa quin resultat concret sortirà. L’<strong>espai mostral</strong> conté tots els resultats possibles.</p><ul><li>Una probabilitat sempre està entre 0 i 1.</li><li>0 significa impossible; 1 significa segur.</li></ul></section><section class="theory-card" id="laplace"><div class="section-kicker">Concepte clau</div><h2>Regla de Laplace</h2><p>Quan tots els resultats elementals són equiprobables, podem comptar casos.</p><ul><li><strong>P(A) = casos favorables / casos possibles</strong></li><li>No utilitzis Laplace si els casos no són equiprobables.</li></ul></section><section class="theory-card" id="experimental"><div class="section-kicker">Concepte clau</div><h2>Probabilitat experimental</h2><p>En un experiment, la freqüència relativa observada és èxits dividit per nombre de repeticions.</p><ul><li>Amb poques repeticions pot allunyar-se força del valor teòric.</li><li>L’experimental descriu el que ha passat, no canvia automàticament el model teòric.</li></ul></section><section class="theory-card" id="grans-nombres"><div class="section-kicker">Concepte clau</div><h2>Llei dels grans nombres</h2><p>Quan repetim moltes vegades un experiment sota les mateixes condicions, la freqüència relativa acostuma a estabilitzar-se prop de la probabilitat teòrica.</p><ul><li>No garanteix una aproximació perfecta a cada pas.</li><li>No significa que després d’una ratxa “toqui” necessàriament l’altre resultat.</li></ul></section><section class="theory-card" id="complementari"><div class="section-kicker">Concepte clau</div><h2>Succés complementari</h2><p>El complementari de A és que A no passi.</p><ul><li><strong>P(no A) = 1 − P(A)</strong></li><li>Sovint és més fàcil calcular el complementari d’un succés.</li></ul></section><section class="examples-wrap" id="exemples"><h2>✏️ Exemples resolts</h2><article class="example-card"><div class="example-card__tag">Exemple resolt</div><h3>Moneda: teoria i experiment</h3><ol><li>En una moneda equilibrada, P(cara)=1/2=50%.</li><li>En 20 llançaments surten 13 cares: freqüència experimental 13/20=65%.</li><li>Aquesta diferència és possible en una mostra petita.</li></ol><div class="result">Amb moltes més repeticions, el percentatge acostuma a estabilitzar-se prop del 50%.</div></article><article class="example-card"><div class="example-card__tag">Exemple resolt</div><h3>Complementari</h3><ol><li>Si P(pluja)=0,3, llavors P(no pluja)=1−0,3.</li></ol><div class="result">P(no pluja)=0,7 = 70%.</div></article></section><section class="mistakes-wrap" id="errors"><h2>⚠️ Errors habituals que convé evitar</h2><article class="mistake"><div class="mistake__icon">⚠️</div><div><h3>Aplicar Laplace sense equiprobabilitat</h3><p>Comptar casos només funciona directament quan els resultats elementals tenen la mateixa probabilitat.</p></div></article><article class="mistake"><div class="mistake__icon">⚠️</div><div><h3>Pensar que 50% implica exactament la meitat en cada sèrie</h3><p>La probabilitat és una tendència de llarg termini, no una quota obligatòria en una mostra curta.</p></div></article><article class="mistake"><div class="mistake__icon">⚠️</div><div><h3>Confondre experimental amb teòrica</h3><p>13 cares de 20 no converteixen la probabilitat teòrica de cara en 65%.</p></div></article></section><section class="summary" id="resum"><h2>✅ Què hauries de tenir clar</h2><ul><li>Descriure experiment aleatori i espai mostral.</li><li>Aplicar Laplace quan els casos són equiprobables.</li><li>Calcular freqüència relativa experimental.</li><li>Interpretar la llei dels grans nombres.</li><li>Utilitzar el complementari.</li></ul></section><section class="practice-panel"><h2>Ara toca practicar</h2><p>Tria el nivell. Si has arribat aquí directament des d’un cercador, el tema s’obrirà automàticament perquè puguis començar.</p><div class="hero-actions"><a class="btn btn--primary" href="../../sentit-estocastic.html?topic=probabilitat&level=1&practice=1">🟢 Practicar · Guiat</a><a class="btn btn--secondary" href="../../sentit-estocastic.html?topic=probabilitat&level=2&practice=1">🟠 Practicar · Autònom</a></div></section><nav class="pager" aria-label="Navegació entre temes de teoria"><a class="pager__link" href="investigacions-estadistiques.html">← Tema anterior</a><a class="pager__link pager__link--index" href="index.html">📚 Índex de teoria</a><a class="pager__link pager__link--next" href="experiments-compostos.html">Tema següent →</a></nav></main><footer class="footer">© 2026 Mates Interactives · Creat per Salvador Rigual · 100 % gratuït · Sense anuncis · Sense cookies</footer><script>const isLocal=location.protocol==='file:'||['localhost','127.0.0.1','::1','[::1]'].includes(location.hostname);if(!isLocal){const s=document.createElement('script');s.async=true;s.dataset.goatcounter='https://srigual.goatcounter.com/count';s.src='https://gc.zgo.at/count.js';document.body.appendChild(s);}</script></body></html>
+</style></head><body><header class="topbar"><nav class="topbar__inner" aria-label="Navegació"><a class="crumb" href="../../../index.html">🏠 Mates Interactives</a><span class="sep">›</span><a class="crumb" href="../../index.html">📘 2n ESO</a><span class="sep">›</span><a class="crumb" href="../../sentit-estocastic.html">📊 Sentit Estocàstic</a><span class="sep">›</span><a class="crumb mi-theory-index" href="index.html">📚 Teoria</a></nav></header><section class="hero"><div class="hero__inner"><span class="eyebrow">Bloc 6 · 2n ESO</span><h1>Probabilitat teòrica i experimental</h1><p>Diferencia probabilitat teòrica i experimental, aplica Laplace quan hi ha equiprobabilitat i interpreta simulacions i la llei dels grans nombres.</p><div class="hero-actions"><a class="btn btn--primary" href="../../sentit-estocastic.html?topic=probabilitat&level=1&practice=1">🟢 Practicar · Guiat</a><a class="btn btn--secondary" href="../../sentit-estocastic.html?topic=probabilitat&level=2&practice=1">🟠 Practicar · Autònom</a><a class="btn btn--ghost" href="../../sentit-estocastic.html?topic=probabilitat">Veure el bloc →</a></div></div></section><main><div class="intro"><p>La probabilitat intenta quantificar la incertesa. A 2n és essencial diferenciar el que <strong>preveu el model</strong> del que <strong>observem en una sèrie concreta d’experiments</strong>.</p></div><nav class="toc" aria-label="Índex de la teoria"><strong>En aquesta pàgina</strong><div class="toc__links"><a href="#atzar">Experiment aleatori i espai mostral</a><a href="#laplace">Regla de Laplace</a><a href="#experimental">Probabilitat experimental</a><a href="#grans-nombres">Llei dels grans nombres</a><a href="#complementari">Succés complementari</a><a href="#exemples">Exemples resolts</a><a href="#errors">Errors habituals</a><a href="#resum">Resum</a></div></nav><section class="theory-card" id="atzar"><div class="section-kicker">Concepte clau</div><h2>Experiment aleatori i espai mostral</h2><p>En un experiment aleatori no sabem amb certesa quin resultat concret sortirà. L’<strong>espai mostral</strong> conté tots els resultats possibles.</p><ul><li>Una probabilitat sempre està entre 0 i 1.</li><li>0 significa impossible; 1 significa segur.</li></ul></section><section class="theory-card" id="laplace"><div class="section-kicker">Concepte clau</div><h2>Regla de Laplace</h2><p>Quan tots els resultats elementals són equiprobables, podem comptar casos.</p><ul><li><strong>P(A) = casos favorables / casos possibles</strong></li><li>No utilitzis Laplace si els casos no són equiprobables.</li></ul></section><section class="theory-card" id="experimental"><div class="section-kicker">Concepte clau</div><h2>Probabilitat experimental</h2><p>En un experiment, la freqüència relativa observada és èxits dividit per nombre de repeticions.</p><ul><li>Amb poques repeticions pot allunyar-se força del valor teòric.</li><li>L’experimental descriu el que ha passat, no canvia automàticament el model teòric.</li></ul></section><section class="theory-card" id="grans-nombres"><div class="section-kicker">Concepte clau</div><h2>Llei dels grans nombres</h2><p>Quan repetim moltes vegades un experiment sota les mateixes condicions, la freqüència relativa acostuma a estabilitzar-se prop de la probabilitat teòrica.</p><ul><li>No garanteix una aproximació perfecta a cada pas.</li><li>No significa que després d’una ratxa “toqui” necessàriament l’altre resultat.</li></ul></section><section class="theory-card" id="complementari"><div class="section-kicker">Concepte clau</div><h2>Succés complementari</h2><p>El complementari de A és que A no passi.</p><ul><li><strong>P(no A) = 1 − P(A)</strong></li><li>Sovint és més fàcil calcular el complementari d’un succés.</li></ul></section><section class="examples-wrap" id="exemples"><h2>✏️ Exemples resolts</h2><article class="example-card"><div class="example-card__tag">Exemple resolt</div><h3>Moneda: teoria i experiment</h3><ol><li>En una moneda equilibrada, P(cara)=1/2=50%.</li><li>En 20 llançaments surten 13 cares: freqüència experimental 13/20=65%.</li><li>Aquesta diferència és possible en una mostra petita.</li></ol><div class="result">Amb moltes més repeticions, el percentatge acostuma a estabilitzar-se prop del 50%.</div></article><article class="example-card"><div class="example-card__tag">Exemple resolt</div><h3>Complementari</h3><ol><li>Si P(pluja)=0,3, llavors P(no pluja)=1−0,3.</li></ol><div class="result">P(no pluja)=0,7 = 70%.</div></article></section><section class="mistakes-wrap" id="errors"><h2>⚠️ Errors habituals que convé evitar</h2><article class="mistake"><div class="mistake__icon">⚠️</div><div><h3>Aplicar Laplace sense equiprobabilitat</h3><p>Comptar casos només funciona directament quan els resultats elementals tenen la mateixa probabilitat.</p></div></article><article class="mistake"><div class="mistake__icon">⚠️</div><div><h3>Pensar que 50% implica exactament la meitat en cada sèrie</h3><p>La probabilitat és una tendència de llarg termini, no una quota obligatòria en una mostra curta.</p></div></article><article class="mistake"><div class="mistake__icon">⚠️</div><div><h3>Confondre experimental amb teòrica</h3><p>13 cares de 20 no converteixen la probabilitat teòrica de cara en 65%.</p></div></article></section><section class="summary" id="resum"><h2>✅ Què hauries de tenir clar</h2><ul><li>Descriure experiment aleatori i espai mostral.</li><li>Aplicar Laplace quan els casos són equiprobables.</li><li>Calcular freqüència relativa experimental.</li><li>Interpretar la llei dels grans nombres.</li><li>Utilitzar el complementari.</li></ul></section><section class="practice-panel"><h2>Ara toca practicar</h2><p>Tria el nivell. Si has arribat aquí directament des d’un cercador, el tema s’obrirà automàticament perquè puguis començar.</p><div class="hero-actions"><a class="btn btn--primary" href="../../sentit-estocastic.html?topic=probabilitat&level=1&practice=1">🟢 Practicar · Guiat</a><a class="btn btn--secondary" href="../../sentit-estocastic.html?topic=probabilitat&level=2&practice=1">🟠 Practicar · Autònom</a></div></section><nav class="pager" aria-label="Navegació entre temes de teoria"><a class="pager__link" href="investigacions-estadistiques.html">← Tema anterior</a><a class="pager__link pager__link--index" href="index.html">📚 Índex de teoria</a><a class="pager__link pager__link--next" href="experiments-compostos.html">Tema següent →</a></nav></main><footer class="footer">© 2026 Mates Interactives · Creat per Salvador Rigual · 100 % gratuït · Sense anuncis · Sense cookies</footer><script>const isLocal=location.protocol==='file:'||['localhost','127.0.0.1','::1','[::1]'].includes(location.hostname);if(!isLocal){const s=document.createElement('script');s.async=true;s.dataset.goatcounter='https://srigual.goatcounter.com/count';s.src='https://gc.zgo.at/count.js';document.body.appendChild(s);}</script><!-- MI_AVISOS_FORM_V1 -->
+<style id="mi-avisos-style">
+  .mi-avis-btn{
+    position:fixed;right:18px;bottom:18px;z-index:9999;
+    display:inline-flex;align-items:center;gap:7px;
+    padding:10px 14px;border:1px solid rgba(0,0,0,.16);border-radius:999px;
+    background:#fff;color:#333;text-decoration:none;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;
+    box-shadow:0 4px 18px rgba(0,0,0,.14);cursor:pointer;
+  }
+  .mi-avis-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .mi-avis-btn:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}
+  @media (max-width:640px){
+    .mi-avis-btn{right:12px;bottom:12px;padding:9px 11px;font-size:13px;max-width:calc(100vw - 24px)}
+    .mi-avis-btn .mi-avis-text{display:none}
+  }
+  @media print{.mi-avis-btn{display:none!important}}
+</style>
+<a id="miAvisBtn" class="mi-avis-btn" href="#" target="_blank" rel="noopener" aria-label="Informa d'un error o proposa una millora" title="Informa d'un error o proposa una millora">
+  <span aria-hidden="true">⚠️</span><span class="mi-avis-text">Informa d'un error o proposa una millora</span>
+</a>
+<script id="mi-avisos-script">
+(function(){
+  var FORM_URL='https://docs.google.com/forms/d/e/1FAIpQLSeAYrMywuihUJDN92G7ka_71A5wM3xk-ZdMsrNBDiv0vwO4WA/viewform';
+  var ENTRY_CURS='entry.484522864';
+  var ENTRY_PAGINA='entry.1901995668';
+  var ENTRY_URL='entry.1335258185';
+  var btn=document.getElementById('miAvisBtn');
+  if(!btn)return;
+
+  function textNet(el){return el ? (el.textContent || '').replace(/\s+/g,' ').trim() : '';}
+  function retalla(s,n){s=(s||'').trim();return s.length>n?s.slice(0,n-1).trim()+'…':s;}
+  function visible(el){
+    if(!el)return false;
+    if(el.classList && el.classList.contains('active'))return true;
+    var st=window.getComputedStyle?getComputedStyle(el):null;
+    return !st || (st.display!=='none' && st.visibility!=='hidden');
+  }
+  function sentitActual(){
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('numeric')>=0)return 'Sentit Numèric';
+    if(path.indexOf('mesura')>=0)return 'Sentit de la Mesura';
+    if(path.indexOf('espacial')>=0)return 'Sentit Espacial';
+    if(path.indexOf('algebraic')>=0)return 'Sentit Algebraic';
+    if(path.indexOf('estocastic')>=0)return 'Sentit Estocàstic';
+    var t=textNet(document.querySelector('#navTitle'))||textNet(document.querySelector('h1'));
+    var m=t.match(/Sentit[^·|–-]*/i);
+    return m?m[0].trim():'';
+  }
+  function primerText(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textNet(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function textEnunciat(el){
+    if(!el)return '';
+    var copia=el.cloneNode(true);
+    copia.querySelectorAll('svg,canvas,figure,.geo-svg-wrap,.ex-visual,.number-line-wrap,.diagram,.visual').forEach(function(n){n.remove();});
+    return (copia.textContent||'').replace(/\s+/g,' ').trim();
+  }
+  function primerEnunciat(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textEnunciat(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function pantallaActiva(){
+    var el=document.querySelector('.screen.active');
+    return el ? (el.id||'') : '';
+  }
+  function netejaMetaExercici(meta){
+    meta=(meta||'').trim();
+    if(!meta)return '';
+    var ex=(meta.match(/Exercici\s+\d+/i)||[])[0]||'';
+    var dif=(meta.match(/(?:Fàcil|Facil|Mitjà|Mitja|Mitjana|Difícil|Dificil)/i)||[])[0]||'';
+    var tipus=meta;
+    if(ex)tipus=tipus.replace(ex,'');
+    if(dif)tipus=tipus.replace(dif,'');
+    tipus=tipus.replace(/[^A-Za-zÀ-ÖØ-öø-ÿ0-9]+/g,' ').replace(/\s+/g,' ').trim();
+    return [ex,tipus,dif].filter(Boolean).join(' · ');
+  }
+  function contextPractica(){
+    var screen=pantallaActiva();
+    var sentit=sentitActual();
+    var tema=textNet(document.querySelector('#navTitle'));
+    if(/^Sentit\b/i.test(tema))tema='';
+
+    var isExercise=/Exercise|sEx$/i.test(screen);
+    var isExam=/Exam/i.test(screen) && !/Cfg|Config/i.test(screen);
+    var isOpen=/OpenProblem|AmpProb/i.test(screen);
+
+    if(isExercise){
+      var meta=netejaMetaExercici(primerText(['#exNum','#exN','.ex-num','.exn']));
+      var q=primerEnunciat(['#exQuestion .q-text','#exQ .q-text','.ex-question .q-text','.exq .q-text','#exQuestion','#exQ','.ex-question','.exq']);
+      return [sentit,tema,meta,q?('Enunciat: '+retalla(q,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isExam){
+      var qExam=primerEnunciat(['#examContent .q-text','#examC .q-text','.exam-question .q-text','#examQuestion .q-text','#examContent','#examC','.exam-question','#examQuestion']);
+      return [sentit,'Mode examen',tema,qExam?('Enunciat: '+retalla(qExam,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isOpen){
+      var metaOpen=primerText(['#spOpenMeta','#stOpenMeta','#ampMeta','.sp-open-meta']);
+      var qOpen=primerEnunciat(['#spOpenQuestion','#stOpenQuestion','#algOpenProblem','#stOpenProblem','#ampQuestion','#ampQ','.sp-open-question']);
+      return [sentit,'Problema obert',tema,netejaMetaExercici(metaOpen),qOpen?('Enunciat: '+retalla(qOpen,190)):''].filter(Boolean).join(' · ');
+    }
+    return [sentit,tema].filter(Boolean).join(' · ');
+  }
+  function contextTeoria(){
+    var sentit=sentitActual();
+    var h1=textNet(document.querySelector('h1')) || textNet(document.querySelector('title')) || 'Pàgina de 2n ESO';
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('/teoria/')>=0){
+      h1=h1.replace(/^\s*[^A-Za-zÀ-ÖØ-öø-ÿ0-9]+\s*/,'').trim();
+      return ['Teoria',sentit,h1].filter(Boolean).join(' · ');
+    }
+    if(/\/sentit-[^/]+\.html$/i.test(location.pathname||''))return contextPractica() || [sentit,h1].filter(Boolean).join(' · ');
+    return h1;
+  }
+  function paginaActual(){
+    var p=contextTeoria();
+    return retalla(p,450) || '2n ESO';
+  }
+  function creaUrl(){
+    var p=new URLSearchParams();
+    p.set(ENTRY_CURS,'2n ESO');
+    p.set(ENTRY_PAGINA,paginaActual());
+    p.set(ENTRY_URL,window.location.href);
+    return FORM_URL+'?usp=pp_url&'+p.toString();
+  }
+  btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
+})();
+</script>
+
+</body></html>
