@@ -11,4 +11,157 @@ main{max-width:900px;margin:0 auto;padding:28px 18px 60px}.hero{text-align:cente
 @media(max-width:680px){main{padding:20px 13px 45px}.grid,.opts{grid-template-columns:1fr}.card,.section,.example,.mistakes,.summary,.selfcheck{padding:16px}.pager{grid-template-columns:1fr 1fr}.pager .idx{grid-column:1/-1;grid-row:2}.actions .btn{width:100%}}
 </style><script>const isLocal=location.protocol==="file:"||["localhost","127.0.0.1","::1","[::1]"].includes(location.hostname);if(!isLocal){const s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://srigual.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.head.appendChild(s);}</script></head><body><div class="top"><div class="crumbs"><a href="../../../index.html">🏠 Mates Interactives</a><span>›</span><a href="../../index.html">📘 4t ESO</a><span>›</span><a href="../../sentit-espacial.html">🧭 Sentit Espacial</a><span>›</span><a href="index.html">📚 Teoria</a></div></div><main><section class="hero"><span class="eyebrow">4t ESO · RECORREGUT PRINCIPAL</span><h1>🔎 Bloc 6 · Homotècies</h1><p>L’homotècia és una transformació que canvia l’escala d’una figura respecte d’un centre fix. No és simplement “fer-la gran”: la posició de cada imatge queda determinada per una recta que passa pel centre i per una mateixa raó k.</p></section><section class="section"><h2>1 · Idea fonamental</h2><p>Una <b>homotècia</b> transforma una figura des d’un centre C multiplicant totes les distàncies al centre per una raó k. Els punts C, P i P′ queden alineats i el signe de k determina a quin costat del centre queda la imatge. Les homotècies conserven angles i forma, però modifiquen longituds, perímetres i àrees segons la raó.</p>🔎 <b>Idea clau.</b> En una homotècia no n’hi ha prou amb “fer la figura més gran o més petita”. Tots els punts es mouen sobre rectes que passen pel mateix centre i tots ho fan amb la mateixa raó k.</section><section class="section"><h2>2 · Conceptes i relacions clau</h2><div class="formula">• Vectorialment: <b>CP′=k·CP</b>.</div><div class="formula">• En coordenades: <b>P′=C+k(P−C)</b>. Si C=(0,0), queda P′=kP.</div><div class="formula">• Si <b>k&gt;1</b>, és una ampliació; si <b>0&lt;k&lt;1</b>, una reducció.</div><div class="formula">• Si <b>k&lt;0</b>, P i P′ queden en costats oposats del centre; la mida es multiplica per |k|.</div><div class="formula">• Si <b>k=1</b>, la figura no canvia. Si <b>k=−1</b>, obtenim una simetria central respecte del centre.</div><div class="formula">• Les <b>longituds i perímetres</b> es multipliquen per |k|.</div><div class="formula">• Les <b>àrees</b> es multipliquen per k².</div><h3>Centre, punt i imatge</h3><p>Per a cada punt P, la seva imatge P′ està sobre la recta CP. La relació vectorial CP′=k·CP és la definició operativa més útil.</p><h3>Significat de la raó k</h3><p>|k| determina l’escala. Si |k|&gt;1 hi ha ampliació; si 0&lt;|k|&lt;1, reducció. El signe determina el costat del centre: k&gt;0 manté P i P′ al mateix costat; k&lt;0 els situa en costats oposats.</p><h3>Fórmula amb coordenades</h3><p>P′=C+k(P−C). La fórmula obliga a pensar primer el desplaçament des del centre, escalar-lo i tornar a afegir el centre. Si C és l’origen, se simplifica a P′=kP.</p><h3>Longituds i perímetres</h3><p>Totes les longituds es multipliquen per |k|. Per això els perímetres també es multipliquen per |k|.</p><h3>Àrees</h3><p>L’àrea depèn de dues dimensions lineals, i cadascuna es multiplica per |k|. Per tant, l’àrea es multiplica per k². Una ampliació de factor 3 multiplica l’àrea per 9, no per 3.</p><h3>Connexió amb semblança</h3><p>Una figura i la seva imatge homotètica són semblants: conserven angles i proporcions. L’homotècia dona, a més, una correspondència espacial concreta a partir d’un centre.</p></section><section class="section"><h2>3 · Procediment de treball</h2><p>Quan l’exercici no indica directament el mètode, aquesta seqüència ajuda a ordenar el raonament:</p><ol class="steps"><li>Identifica el centre C, el punt P i la raó k.</li><li>Calcula el vector CP=P−C.</li><li>Multiplica aquest vector per k.</li><li>Afegeix el centre per obtenir P′.</li><li>Comprova alineació C,P,P′ i que les distàncies compleixen CP′=|k|·CP.</li></ol></section><section class="example"><h2>✏️ Exemple resolt pas a pas</h2><ol class="steps"><li>Centre C=(1,1), punt P=(3,2) i raó k=2.</li><li>Primer calculem CP=P−C=(2,1).</li><li>Multipliquem pel factor: CP′=2·(2,1)=<b>(4,2)</b>.</li><li>Afegim el centre: P′=C+(4,2)=(1+4,1+2)=<b>(5,3)</b>.</li><li>La distància de C a P′ és el doble que de C a P i tots tres punts estan alineats.</li></ol></section><section class="mistakes"><h2>5 · Errors freqüents i com evitar-los</h2><ul><li>Multiplicar directament les coordenades de P per k quan el centre no és l’origen.</li><li>Ignorar el signe de k.</li><li>Multiplicar l’àrea per |k| en lloc de k².</li><li>Confondre k=−1 amb una reducció: és una simetria central i conserva mides.</li></ul><p class="muted">Quan cometis un error a la pràctica, torna a identificar exactament quina propietat o pas s’ha aplicat malament. Corregir el procediment és més útil que memoritzar la resposta concreta.</p></section><section class="summary"><h2>✅ Resum essencial</h2><p>En acabar aquest tema hauries de poder explicar els conceptes amb paraules pròpies, aplicar les relacions anteriors sense dependre d’un dibuix a escala i justificar els passos d’un problema. Si només recordes una fórmula però no saps quan ni per què s’utilitza, encara convé reforçar la teoria.</p></section><section class="selfcheck"><h2>7 · Autocomprovació</h2><p class="muted">Respon sense mirar els apartats anteriors. Pots canviar de resposta; cada pregunta explica el criteri correcte.</p><div class="q" id="q0"><p>1. Amb centre O=(0,0), P=(2,−1), k=3, P′ és...</p><div class="opts"><button class="opt" onclick="answer(this,0,0,0)">(6,−3)</button><button class="opt" onclick="answer(this,0,1,0)">(5,−2)</button><button class="opt" onclick="answer(this,0,2,0)">(−6,3)</button><button class="opt" onclick="answer(this,0,3,0)">(2,−3)</button></div><div class="feedback" id="fb0"></div><span class="explain" data-text="Amb centre a l’origen, multipliquem les coordenades per 3."></span></div><div class="q" id="q1"><p>2. Si k=−2, la longitud d’un segment...</p><div class="opts"><button class="opt" onclick="answer(this,1,0,0)">es duplica i canvia l’orientació respecte del centre</button><button class="opt" onclick="answer(this,1,1,0)">es redueix a la meitat</button><button class="opt" onclick="answer(this,1,2,0)">no canvia</button><button class="opt" onclick="answer(this,1,3,0)">es quadruplica</button></div><div class="feedback" id="fb1"></div><span class="explain" data-text="El factor lineal és |k|=2 i el signe inverteix el costat."></span></div><div class="q" id="q2"><p>3. Si k=3, l’àrea es multiplica per...</p><div class="opts"><button class="opt" onclick="answer(this,2,0,2)">3</button><button class="opt" onclick="answer(this,2,1,2)">6</button><button class="opt" onclick="answer(this,2,2,2)">9</button><button class="opt" onclick="answer(this,2,3,2)">27</button></div><div class="feedback" id="fb2"></div><span class="explain" data-text="Les àrees escalen amb k²=9."></span></div></section><div class="actions"><a class="btn" href="../../sentit-espacial.html?topic=homotecies4t&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a><a class="btn alt" href="../../sentit-espacial.html?topic=homotecies4t&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a></div><div class="pager"><a class="prev" href="coordenades-problemes-vectors.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="geometria-funcions.html">Tema següent →</a></div><div class="footer">100 % gratuït · Sense anuncis · Sense cookies · Mates Interactives</div></main><script>
 function answer(btn,q,chosen,correct){const box=document.getElementById('q'+q);box.querySelectorAll('.opt').forEach((b,i)=>{b.classList.remove('correct','wrong');if(i===correct)b.classList.add('correct')});const fb=document.getElementById('fb'+q);const txt=box.querySelector('.explain').dataset.text;if(chosen===correct){fb.className='feedback ok';fb.textContent='✓ Correcte. '+txt}else{btn.classList.add('wrong');fb.className='feedback bad';fb.textContent='✗ Revisa-ho. '+txt}}
-</script></body></html>
+</script><!-- MI_AVISOS_FORM_V1 -->
+<style id="mi-avisos-style">
+  .mi-avis-btn{
+    position:fixed;right:18px;bottom:18px;z-index:9999;
+    display:inline-flex;align-items:center;gap:7px;
+    padding:10px 14px;border:1px solid rgba(0,0,0,.16);border-radius:999px;
+    background:#fff;color:#333;text-decoration:none;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;
+    box-shadow:0 4px 18px rgba(0,0,0,.14);cursor:pointer;
+  }
+  .mi-avis-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .mi-avis-btn:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}
+  @media (max-width:640px){
+    .mi-avis-btn{right:12px;bottom:12px;padding:9px 11px;font-size:13px;max-width:calc(100vw - 24px)}
+    .mi-avis-btn .mi-avis-text{display:none}
+  }
+  @media print{.mi-avis-btn{display:none!important}}
+</style>
+<a id="miAvisBtn" class="mi-avis-btn" href="#" target="_blank" rel="noopener" aria-label="Informa d'un error o proposa una millora" title="Informa d'un error o proposa una millora">
+  <span aria-hidden="true">⚠️</span><span class="mi-avis-text">Informa d'un error o proposa una millora</span>
+</a>
+<script id="mi-avisos-script">
+(function(){
+  var FORM_URL='https://docs.google.com/forms/d/e/1FAIpQLSeAYrMywuihUJDN92G7ka_71A5wM3xk-ZdMsrNBDiv0vwO4WA/viewform';
+  var ENTRY_CURS='entry.484522864';
+  var ENTRY_PAGINA='entry.1901995668';
+  var ENTRY_URL='entry.1335258185';
+  var btn=document.getElementById('miAvisBtn');
+  if(!btn)return;
+
+  function textNet(el){return el ? (el.textContent || '').replace(/\s+/g,' ').trim() : '';}
+  function retalla(s,n){s=(s||'').trim();return s.length>n?s.slice(0,n-1).trim()+'…':s;}
+  function visible(el){
+    if(!el)return false;
+    if(el.classList && el.classList.contains('active'))return true;
+    var st=window.getComputedStyle?getComputedStyle(el):null;
+    return !st || (st.display!=='none' && st.visibility!=='hidden');
+  }
+  function sentitActual(){
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('numeric')>=0)return 'Sentit Numèric';
+    if(path.indexOf('mesura')>=0)return 'Sentit de la Mesura';
+    if(path.indexOf('espacial')>=0)return 'Sentit Espacial';
+    if(path.indexOf('algebraic')>=0)return 'Sentit Algebraic';
+    if(path.indexOf('estocastic')>=0)return 'Sentit Estocàstic';
+    var t=textNet(document.querySelector('#navTitle'))||textNet(document.querySelector('h1'));
+    var m=t.match(/Sentit[^·|–-]*/i);
+    return m?m[0].trim():'';
+  }
+  function primerText(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textNet(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function textEnunciat(el){
+    if(!el)return '';
+    var copia=el.cloneNode(true);
+    copia.querySelectorAll('svg,canvas,figure,.geo-svg-wrap,.ex-visual,.number-line-wrap,.diagram,.visual').forEach(function(n){n.remove();});
+    return (copia.textContent||'').replace(/\s+/g,' ').trim();
+  }
+  function primerEnunciat(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textEnunciat(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function pantallaActiva(){
+    var el=document.querySelector('.screen.active');
+    return el ? (el.id||'') : '';
+  }
+  function netejaTemaAvis(tema){
+    tema=(tema||'').replace(/\s+/g,' ').trim();
+    tema=tema.replace(/^Bloc\s+\d+\s*[·.:-]\s*/i,'');
+    tema=tema.replace(/^\d+\s*[·.:-]\s*/,'');
+    return tema.trim();
+  }
+  function tipusExerciciActual(){
+    try{
+      if(typeof currentEx!=='undefined' && currentEx && currentEx.type!==undefined && currentEx.type!==null){
+        return 'Tipus '+String(currentEx.type);
+      }
+    }catch(e){}
+    return '';
+  }
+  function netejaMetaExercici(meta,afegeixTipusActual){
+    meta=(meta||'').replace(/\s+/g,' ').trim();
+    var ex=(meta.match(/Exercici\s+\d+/i)||[])[0]||'';
+    var tipus=(meta.match(/Tipus\s+[^·|]+/i)||[])[0]||'';
+    if(tipus)tipus=tipus.replace(/\s+/g,' ').trim();
+    if(!tipus && afegeixTipusActual)tipus=tipusExerciciActual();
+    var dif=(meta.match(/(?:Fàcil|Facil|Mitjà|Mitja|Mitjana|Difícil|Dificil)/i)||[])[0]||'';
+    return [ex,tipus,dif].filter(Boolean).join(' · ');
+  }
+  function contextPractica(){
+    var screen=pantallaActiva();
+    var sentit=sentitActual();
+    var tema=netejaTemaAvis(textNet(document.querySelector('#navTitle')));
+    if(/^Sentit\b/i.test(tema))tema='';
+
+    var isExercise=/Exercise|sEx$/i.test(screen);
+    var isExam=/Exam/i.test(screen) && !/Cfg|Config/i.test(screen);
+    var isOpen=/OpenProblem|AmpProb/i.test(screen);
+
+    if(isExercise){
+      var meta=netejaMetaExercici(primerText(['#exNum','#exerciseNumber','#exN','.ex-num','.exn']),true);
+      var q=primerEnunciat(['#exQuestion .q-text','#questionText','#exQ .q-text','.ex-question .q-text','.exq .q-text','#exQuestion','#exQ','.ex-question','.exq']);
+      return [sentit,tema,meta,q?('Enunciat: '+retalla(q,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isExam){
+      var qExam=primerEnunciat(['#examContent .q-text','#examC .q-text','.exam-question .q-text','#examQuestion .q-text','#examContent','#examC','.exam-question','#examQuestion']);
+      return [sentit,'Mode examen',tema,qExam?('Enunciat: '+retalla(qExam,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isOpen){
+      var metaOpen=primerText(['#spOpenMeta','#stOpenMeta','#ampMeta','.sp-open-meta']);
+      var qOpen=primerEnunciat(['#spOpenQuestion','#stOpenQuestion','#algOpenProblem','#stOpenProblem','#ampQuestion','#ampQ','.sp-open-question']);
+      return [sentit,'Problema obert',tema,netejaMetaExercici(metaOpen,false),qOpen?('Enunciat: '+retalla(qOpen,190)):''].filter(Boolean).join(' · ');
+    }
+    var opcioAvis='';
+    try{
+      var opcioParam=(new URLSearchParams(location.search).get('opcio')||'').toUpperCase();
+      if(opcioParam==='A'||opcioParam==='B')opcioAvis='Opció '+opcioParam;
+    }catch(e){}
+    return [sentit,tema,opcioAvis].filter(Boolean).join(' · ');
+  }
+  function contextTeoria(){
+    var sentit=sentitActual();
+    var h1=textNet(document.querySelector('h1')) || textNet(document.querySelector('title')) || 'Pàgina de 4t ESO';
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('/teoria/')>=0){
+      h1=h1.replace(/^\s*[^A-Za-zÀ-ÖØ-öø-ÿ0-9]+\s*/,'').trim();
+      return ['Teoria',sentit,h1].filter(Boolean).join(' · ');
+    }
+    if(/\/sentit-[^/]+\.html$/i.test(location.pathname||''))return contextPractica() || [sentit,h1].filter(Boolean).join(' · ');
+    return h1;
+  }
+  function paginaActual(){
+    var p=contextTeoria();
+    return retalla(p,450) || '4t ESO';
+  }
+  function creaUrl(){
+    var p=new URLSearchParams();
+    p.set(ENTRY_CURS,'4t ESO');
+    p.set(ENTRY_PAGINA,paginaActual());
+    p.set(ENTRY_URL,window.location.href);
+    return FORM_URL+'?usp=pp_url&'+p.toString();
+  }
+  btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
+})();
+</script>
+</body></html>

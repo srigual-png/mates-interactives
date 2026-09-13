@@ -12,4 +12,157 @@ main{max-width:900px;margin:0 auto;padding:28px 18px 60px}.hero{text-align:cente
 @media(max-width:680px){main{padding:20px 13px 45px}.grid,.opts{grid-template-columns:1fr}.card,.section,.example,.mistakes,.summary,.selfcheck{padding:16px}.pager{grid-template-columns:1fr 1fr}.pager .idx{grid-column:1/-1;grid-row:2}.actions .btn{width:100%}}
 </style><script>const isLocal=location.protocol==="file:"||["localhost","127.0.0.1","::1","[::1]"].includes(location.hostname);if(!isLocal){const s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://srigual.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.head.appendChild(s);}</script></head><body><div class="top"><div class="crumbs"><a href="../../../index.html">🏠 Mates Interactives</a><span>›</span><a href="../../index.html">📘 4t ESO</a><span>›</span><a href="../../sentit-espacial.html">🧭 Sentit Espacial</a><span>›</span><a href="index.html">📚 Teoria</a></div></div><main><section class="hero"><span class="eyebrow">4t ESO · MATEMÀTIQUES B · APROFUNDIMENT</span><h1>📏 Ampliació A · Equacions de la recta</h1><p>Una recta no té una única equació “correcta”. Les diferents formes destaquen informació diferent. Saber canviar de llenguatge és més útil que memoritzar una forma de manera aïllada.</p></section><div class="note"><strong>Matemàtiques B: </strong>Aquest tema conté el saber addicional de Matemàtiques B sobre el reconeixement de diferents expressions algebraiques d’una recta i la selecció de la forma més adequada. En Matemàtiques A es pot treballar com a ampliació opcional.</div><section class="section"><h2>1 · Idea fonamental</h2><p>Aquesta ampliació introdueix la <b>geometria analítica de la recta</b> com a pont cap a Batxillerat. Una mateixa recta es pot descriure de formes diferents segons les dades disponibles: pendent i ordenada, un punt i una pendent, dos punts, un punt i un vector director o una equació general. L’objectiu és saber <b>passar d’una representació a una altra</b> i triar la forma més útil en cada problema.</p>📐 <b>Connexió amb Batxillerat.</b> Les diferents equacions no descriuen rectes diferents: són llenguatges equivalents per representar el mateix objecte geomètric. Saber canviar de forma facilita estudiar punts, direccions, paral·lelisme i interseccions.</section><section class="section"><h2>2 · Conceptes i relacions clau</h2><div class="formula">• <b>Forma reduïda:</b> y=mx+n. m és la pendent i n és l’ordenada a l’origen.</div><div class="formula">• <b>Forma punt-pendent:</b> y−y₀=m(x−x₀), útil quan coneixem un punt i la pendent.</div><div class="formula">• <b>Forma general:</b> Ax+By+C=0.</div><div class="formula">• <b>Forma vectorial:</b> (x,y)=(x₀,y₀)+t(a,b), on (a,b) és un vector director.</div><div class="formula">• Una recta <b>vertical</b> té equació x=a i no es pot escriure com y=mx+n amb pendent real.</div><div class="formula">• Una recta <b>horitzontal</b> té equació y=b i pendent 0.</div><div class="formula">• Amb dos punts A(x₁,y₁), B(x₂,y₂), si x₂≠x₁: m=(y₂−y₁)/(x₂−x₁). Després podem trobar n substituint un punt.</div><h3>Forma reduïda</h3><p>y=mx+n és ideal per llegir pendent i ordenada a l’origen. No serveix per representar rectes verticals, perquè aquestes no tenen una pendent real finita.</p><h3>Forma punt-pendent</h3><p>y−y₀=m(x−x₀) és la forma natural quan coneixem un punt i la pendent. Evita calcular n abans d’hora i redueix errors.</p><h3>Forma general</h3><p>Ax+By+C=0 tracta de manera uniforme rectes obliqües, horitzontals i verticals. Multiplicar tota l’equació per un nombre no nul no canvia la recta.</p><h3>Forma vectorial</h3><p>(x,y)=(x₀,y₀)+t(a,b) expressa que qualsevol punt de la recta s’obté desplaçant-se des d’un punt conegut en la direcció d’un vector director. El paràmetre t pot prendre qualsevol valor real.</p><h3>Recta per dos punts</h3><p>Si x₂≠x₁, primer podem calcular m=(y₂−y₁)/(x₂−x₁) i després usar punt-pendent. Si x₂=x₁, la recta és vertical: x=x₁.</p><h3>Equacions equivalents</h3><p>2x−y+3=0 i 4x−2y+6=0 descriuen la mateixa recta. Per comparar equacions generals cal tenir present que tots els coeficients poden estar multiplicats pel mateix factor.</p></section><section class="section"><h2>3 · Procediment de treball</h2><p>Quan l’exercici no indica directament el mètode, aquesta seqüència ajuda a ordenar el raonament:</p><ol class="steps"><li>Identifica quines dades tens: dos punts, punt+pendent o punt+vector.</li><li>Tria la forma que aprofita directament aquestes dades.</li><li>Calcula pendent o vector director només si cal.</li><li>Escriu l’equació i simplifica si convé.</li><li>Comprova que els punts donats compleixen l’equació.</li></ol></section><section class="example"><h2>✏️ Exemple resolt pas a pas</h2><ol class="steps"><li>Volem l’equació de la recta que passa per A(1,3) i B(4,9).</li><li>Calculem la pendent: m=(9−3)/(4−1)=6/3=<b>2</b>.</li><li>Escrivim y=2x+n i substituïm A: 3=2·1+n.</li><li>D’aquí obtenim n=1.</li><li>Per tant, la recta és <b>y=2x+1</b>.</li></ol></section><section class="mistakes"><h2>5 · Errors freqüents i com evitar-los</h2><ul><li>Intentar escriure una recta vertical com y=mx+n.</li><li>Calcular la pendent invertint Δx i Δy.</li><li>Oblidar parèntesis a la forma punt-pendent quan x₀ o y₀ són negatius.</li><li>Considerar diferents dues equacions generals que només difereixen per un factor comú.</li></ul><p class="muted">Quan cometis un error a la pràctica, torna a identificar exactament quina propietat o pas s’ha aplicat malament. Corregir el procediment és més útil que memoritzar la resposta concreta.</p></section><section class="summary"><h2>✅ Resum essencial</h2><p>En acabar aquest tema hauries de poder explicar els conceptes amb paraules pròpies, aplicar les relacions anteriors sense dependre d’un dibuix a escala i justificar els passos d’un problema. Si només recordes una fórmula però no saps quan ni per què s’utilitza, encara convé reforçar la teoria.</p></section><section class="selfcheck"><h2>7 · Autocomprovació</h2><p class="muted">Respon sense mirar els apartats anteriors. Pots canviar de resposta; cada pregunta explica el criteri correcte.</p><div class="q" id="q0"><p>1. La recta vertical que passa per (3,−2) és...</p><div class="opts"><button class="opt" onclick="answer(this,0,0,1)">y=3</button><button class="opt" onclick="answer(this,0,1,1)">x=3</button><button class="opt" onclick="answer(this,0,2,1)">y=−2</button><button class="opt" onclick="answer(this,0,3,1)">x=−2</button></div><div class="feedback" id="fb0"></div><span class="explain" data-text="En una vertical, x és constant."></span></div><div class="q" id="q1"><p>2. La pendent entre (1,2) i (4,8) és...</p><div class="opts"><button class="opt" onclick="answer(this,1,0,0)">2</button><button class="opt" onclick="answer(this,1,1,0)">1/2</button><button class="opt" onclick="answer(this,1,2,0)">6</button><button class="opt" onclick="answer(this,1,3,0)">3</button></div><div class="feedback" id="fb1"></div><span class="explain" data-text="(8−2)/(4−1)=6/3=2."></span></div><div class="q" id="q2"><p>3. Quina forma és especialment útil amb punt P i pendent m?</p><div class="opts"><button class="opt" onclick="answer(this,2,0,1)">general</button><button class="opt" onclick="answer(this,2,1,1)">punt-pendent</button><button class="opt" onclick="answer(this,2,2,1)">vectorial sense vector</button><button class="opt" onclick="answer(this,2,3,1)">x=a</button></div><div class="feedback" id="fb2"></div><span class="explain" data-text="y−y₀=m(x−x₀)."></span></div></section><div class="actions"><a class="btn" href="../../sentit-espacial.html?topic=rectesAmpA&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a><a class="btn alt" href="../../sentit-espacial.html?topic=rectesAmpA&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a></div><div class="pager"><a class="prev" href="zeros-interseccions-regions.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="elements-recta.html">Tema següent →</a></div><div class="footer">100 % gratuït · Sense anuncis · Sense cookies · Mates Interactives</div></main><script>
 function answer(btn,q,chosen,correct){const box=document.getElementById('q'+q);box.querySelectorAll('.opt').forEach((b,i)=>{b.classList.remove('correct','wrong');if(i===correct)b.classList.add('correct')});const fb=document.getElementById('fb'+q);const txt=box.querySelector('.explain').dataset.text;if(chosen===correct){fb.className='feedback ok';fb.textContent='✓ Correcte. '+txt}else{btn.classList.add('wrong');fb.className='feedback bad';fb.textContent='✗ Revisa-ho. '+txt}}
-</script></body></html>
+</script><!-- MI_AVISOS_FORM_V1 -->
+<style id="mi-avisos-style">
+  .mi-avis-btn{
+    position:fixed;right:18px;bottom:18px;z-index:9999;
+    display:inline-flex;align-items:center;gap:7px;
+    padding:10px 14px;border:1px solid rgba(0,0,0,.16);border-radius:999px;
+    background:#fff;color:#333;text-decoration:none;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;
+    box-shadow:0 4px 18px rgba(0,0,0,.14);cursor:pointer;
+  }
+  .mi-avis-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .mi-avis-btn:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}
+  @media (max-width:640px){
+    .mi-avis-btn{right:12px;bottom:12px;padding:9px 11px;font-size:13px;max-width:calc(100vw - 24px)}
+    .mi-avis-btn .mi-avis-text{display:none}
+  }
+  @media print{.mi-avis-btn{display:none!important}}
+</style>
+<a id="miAvisBtn" class="mi-avis-btn" href="#" target="_blank" rel="noopener" aria-label="Informa d'un error o proposa una millora" title="Informa d'un error o proposa una millora">
+  <span aria-hidden="true">⚠️</span><span class="mi-avis-text">Informa d'un error o proposa una millora</span>
+</a>
+<script id="mi-avisos-script">
+(function(){
+  var FORM_URL='https://docs.google.com/forms/d/e/1FAIpQLSeAYrMywuihUJDN92G7ka_71A5wM3xk-ZdMsrNBDiv0vwO4WA/viewform';
+  var ENTRY_CURS='entry.484522864';
+  var ENTRY_PAGINA='entry.1901995668';
+  var ENTRY_URL='entry.1335258185';
+  var btn=document.getElementById('miAvisBtn');
+  if(!btn)return;
+
+  function textNet(el){return el ? (el.textContent || '').replace(/\s+/g,' ').trim() : '';}
+  function retalla(s,n){s=(s||'').trim();return s.length>n?s.slice(0,n-1).trim()+'…':s;}
+  function visible(el){
+    if(!el)return false;
+    if(el.classList && el.classList.contains('active'))return true;
+    var st=window.getComputedStyle?getComputedStyle(el):null;
+    return !st || (st.display!=='none' && st.visibility!=='hidden');
+  }
+  function sentitActual(){
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('numeric')>=0)return 'Sentit Numèric';
+    if(path.indexOf('mesura')>=0)return 'Sentit de la Mesura';
+    if(path.indexOf('espacial')>=0)return 'Sentit Espacial';
+    if(path.indexOf('algebraic')>=0)return 'Sentit Algebraic';
+    if(path.indexOf('estocastic')>=0)return 'Sentit Estocàstic';
+    var t=textNet(document.querySelector('#navTitle'))||textNet(document.querySelector('h1'));
+    var m=t.match(/Sentit[^·|–-]*/i);
+    return m?m[0].trim():'';
+  }
+  function primerText(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textNet(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function textEnunciat(el){
+    if(!el)return '';
+    var copia=el.cloneNode(true);
+    copia.querySelectorAll('svg,canvas,figure,.geo-svg-wrap,.ex-visual,.number-line-wrap,.diagram,.visual').forEach(function(n){n.remove();});
+    return (copia.textContent||'').replace(/\s+/g,' ').trim();
+  }
+  function primerEnunciat(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textEnunciat(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function pantallaActiva(){
+    var el=document.querySelector('.screen.active');
+    return el ? (el.id||'') : '';
+  }
+  function netejaTemaAvis(tema){
+    tema=(tema||'').replace(/\s+/g,' ').trim();
+    tema=tema.replace(/^Bloc\s+\d+\s*[·.:-]\s*/i,'');
+    tema=tema.replace(/^\d+\s*[·.:-]\s*/,'');
+    return tema.trim();
+  }
+  function tipusExerciciActual(){
+    try{
+      if(typeof currentEx!=='undefined' && currentEx && currentEx.type!==undefined && currentEx.type!==null){
+        return 'Tipus '+String(currentEx.type);
+      }
+    }catch(e){}
+    return '';
+  }
+  function netejaMetaExercici(meta,afegeixTipusActual){
+    meta=(meta||'').replace(/\s+/g,' ').trim();
+    var ex=(meta.match(/Exercici\s+\d+/i)||[])[0]||'';
+    var tipus=(meta.match(/Tipus\s+[^·|]+/i)||[])[0]||'';
+    if(tipus)tipus=tipus.replace(/\s+/g,' ').trim();
+    if(!tipus && afegeixTipusActual)tipus=tipusExerciciActual();
+    var dif=(meta.match(/(?:Fàcil|Facil|Mitjà|Mitja|Mitjana|Difícil|Dificil)/i)||[])[0]||'';
+    return [ex,tipus,dif].filter(Boolean).join(' · ');
+  }
+  function contextPractica(){
+    var screen=pantallaActiva();
+    var sentit=sentitActual();
+    var tema=netejaTemaAvis(textNet(document.querySelector('#navTitle')));
+    if(/^Sentit\b/i.test(tema))tema='';
+
+    var isExercise=/Exercise|sEx$/i.test(screen);
+    var isExam=/Exam/i.test(screen) && !/Cfg|Config/i.test(screen);
+    var isOpen=/OpenProblem|AmpProb/i.test(screen);
+
+    if(isExercise){
+      var meta=netejaMetaExercici(primerText(['#exNum','#exerciseNumber','#exN','.ex-num','.exn']),true);
+      var q=primerEnunciat(['#exQuestion .q-text','#questionText','#exQ .q-text','.ex-question .q-text','.exq .q-text','#exQuestion','#exQ','.ex-question','.exq']);
+      return [sentit,tema,meta,q?('Enunciat: '+retalla(q,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isExam){
+      var qExam=primerEnunciat(['#examContent .q-text','#examC .q-text','.exam-question .q-text','#examQuestion .q-text','#examContent','#examC','.exam-question','#examQuestion']);
+      return [sentit,'Mode examen',tema,qExam?('Enunciat: '+retalla(qExam,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isOpen){
+      var metaOpen=primerText(['#spOpenMeta','#stOpenMeta','#ampMeta','.sp-open-meta']);
+      var qOpen=primerEnunciat(['#spOpenQuestion','#stOpenQuestion','#algOpenProblem','#stOpenProblem','#ampQuestion','#ampQ','.sp-open-question']);
+      return [sentit,'Problema obert',tema,netejaMetaExercici(metaOpen,false),qOpen?('Enunciat: '+retalla(qOpen,190)):''].filter(Boolean).join(' · ');
+    }
+    var opcioAvis='';
+    try{
+      var opcioParam=(new URLSearchParams(location.search).get('opcio')||'').toUpperCase();
+      if(opcioParam==='A'||opcioParam==='B')opcioAvis='Opció '+opcioParam;
+    }catch(e){}
+    return [sentit,tema,opcioAvis].filter(Boolean).join(' · ');
+  }
+  function contextTeoria(){
+    var sentit=sentitActual();
+    var h1=textNet(document.querySelector('h1')) || textNet(document.querySelector('title')) || 'Pàgina de 4t ESO';
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('/teoria/')>=0){
+      h1=h1.replace(/^\s*[^A-Za-zÀ-ÖØ-öø-ÿ0-9]+\s*/,'').trim();
+      return ['Teoria',sentit,h1].filter(Boolean).join(' · ');
+    }
+    if(/\/sentit-[^/]+\.html$/i.test(location.pathname||''))return contextPractica() || [sentit,h1].filter(Boolean).join(' · ');
+    return h1;
+  }
+  function paginaActual(){
+    var p=contextTeoria();
+    return retalla(p,450) || '4t ESO';
+  }
+  function creaUrl(){
+    var p=new URLSearchParams();
+    p.set(ENTRY_CURS,'4t ESO');
+    p.set(ENTRY_PAGINA,paginaActual());
+    p.set(ENTRY_URL,window.location.href);
+    return FORM_URL+'?usp=pp_url&'+p.toString();
+  }
+  btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
+})();
+</script>
+</body></html>

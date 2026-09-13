@@ -11,4 +11,157 @@ main{max-width:900px;margin:0 auto;padding:28px 18px 60px}.hero{text-align:cente
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.topic-card{display:block;text-decoration:none;color:inherit;background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px;box-shadow:var(--shadow);transition:.18s}.topic-card:hover{transform:translateY(-2px);border-color:var(--primary)}.topic-card strong{display:block;color:var(--primary-dark);margin-bottom:4px}.topic-card span{font-size:.84rem;color:var(--muted)}.section-title{margin-top:30px;border-bottom:2px solid var(--border);padding-bottom:6px}.extension-note{background:#fff8e6;border:1px solid #f0d38b;border-radius:12px;padding:12px 14px;margin:15px 0}.footer{text-align:center;color:var(--muted);font-size:.78rem;margin-top:35px}
 .table-wrap{overflow-x:auto;margin:12px 0}table{border-collapse:collapse;width:100%;background:#fff}th,td{border:1px solid var(--border);padding:9px 10px;text-align:center}th{background:var(--soft);color:var(--primary-dark)}
 @media(max-width:680px){main{padding:20px 13px 45px}.grid{grid-template-columns:1fr}.card,.section,.example,.mistakes,.summary{padding:16px}.pager{grid-template-columns:1fr 1fr}.pager .idx{grid-column:1/-1;grid-row:2}.actions .btn{width:100%}}
-</style><script>const isLocal=location.protocol==="file:"||["localhost","127.0.0.1","::1","[::1]"].includes(location.hostname);if(!isLocal){const s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://srigual.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.head.appendChild(s);}</script></head><body><div class="top"><div class="crumbs"><a href="../../../index.html">🏠 Mates Interactives</a><span>›</span><a href="../../index.html">📘 4t ESO</a><span>›</span><a href="../../sentit-estocastic.html">📊 Sentit Estocàstic</a><span>›</span><a href="index.html">📚 Teoria</a><span>›</span><span class="muted">Ampliació C</span></div></div><main><section class="hero"><span class="eyebrow">AMPLIACIÓ C · 4t ESO</span><h1>🔗 Probabilitat condicionada i independència</h1><p>La probabilitat condicionada formalitza què passa quan rebem informació nova. Saber que un succés B ha passat <strong>redueix el conjunt de casos possibles</strong> i obliga a recalcular la probabilitat d’A dins d’aquest nou univers.</p></section><div class="extension-note"><strong>Prepara Batxillerat.</strong> Aquest contingut és d’ampliació: serveix per anticipar idees posteriors sense exigir encara tot el formalisme de Batxillerat.</div><section class="card"><h2>Què has de saber fer</h2><p>P(A|B), canvi de referència, dependència i independència.</p><div class="tip"><strong>Objectiu:</strong> entendre què significa cada eina i saber justificar la decisió o el càlcul, no només obtenir un resultat.</div></section><section class="section"><h2>1. Què significa P(A|B)?</h2><p><span class="math">P(A|B)</span> es llegeix “probabilitat d’A <strong>sabent que</strong> B”. La barra vertical no vol dir divisió: introdueix la condició.</p><p>En una taula, ens quedem només amb la fila o columna que correspon a B i calculem la proporció d’A dins d’aquest subconjunt.</p></section><section class="section"><h2>2. Fórmula de probabilitat condicionada</h2><div class="formula"><span class="math">P(A|B) = P(A ∩ B) / P(B)</span>, si P(B) &gt; 0</div><p>El numerador correspon als casos que compleixen A i B. El denominador és la probabilitat de la condició B, perquè només treballem dins de B.</p></section><section class="section"><h2>3. Independència</h2><p>A i B són <strong>independents</strong> si saber que B ha passat no canvia la probabilitat d’A:</p><div class="formula"><span class="math">P(A|B)=P(A)</span></div><p>Una condició equivalent és:</p><div class="formula"><span class="math">P(A ∩ B)=P(A)·P(B)</span></div></section><section class="section"><h2>4. Dependència</h2><p>Si la informació B modifica la probabilitat d’A, els successos són dependents. En extraccions <strong>sense reemplaçament</strong> això és habitual, perquè el primer resultat canvia la composició disponible.</p></section><section class="section"><h2>5. No confondre independència i incompatibilitat</h2><p>Successos incompatibles no poden passar alhora. En canvi, successos independents poden passar simultàniament: simplement un no altera la probabilitat de l’altre.</p></section><section class="example"><h2>✏️ Exemple resolt pas a pas</h2><div class="step"><strong>Pas 1.</strong> Urna: 3 vermelles i 2 blaves. Sense reemplaçament.</div><div class="step"><strong>Pas 2.</strong> Abans d’extreure: P(B) = 2/5.</div><div class="step"><strong>Pas 3.</strong> Si sabem que la primera ha estat vermella, queden 2 blaves entre 4 boles.</div><div class="step"><strong>Pas 4.</strong> P(blava a la segona | vermella a la primera) = 2/4 = 1/2.</div><div class="step"><strong>Pas 5.</strong> Com que 1/2 ≠ 2/5, el primer resultat ha canviat la probabilitat del segon: hi ha dependència.</div></section><section class="mistakes"><h2>❌ Errors freqüents</h2><ul><li>Invertir P(A|B) i P(B|A).</li><li>Mantenir el denominador original després de condicionar.</li><li>Pensar que “independents” vol dir que no poden passar alhora.</li><li>Aplicar P(A∩B)=P(A)P(B) sense haver justificat la independència.</li></ul></section><section class="summary"><h2>✅ Resum essencial</h2><ul><li>Condicionar = canviar el grup de referència.</li><li>P(A|B)=P(A∩B)/P(B).</li><li>Independència significa que saber B no canvia P(A).</li><li>Sense reemplaçament, sovint hi ha dependència.</li></ul></section><div class="actions"><a class="btn" href="../../sentit-estocastic.html?topic=condicionadaBatx4t&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a><a class="btn" href="../../sentit-estocastic.html?topic=condicionadaBatx4t&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a><a class="btn alt" href="index.html">📚 Tota la teoria</a></div><div class="pager"><a class="prev" href="correlacio-regressio.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="bayes-models.html">Tema següent →</a></div><div class="footer">Sentit Estocàstic · 4t ESO · Mates Interactives</div></main></body></html>
+</style><script>const isLocal=location.protocol==="file:"||["localhost","127.0.0.1","::1","[::1]"].includes(location.hostname);if(!isLocal){const s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://srigual.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.head.appendChild(s);}</script></head><body><div class="top"><div class="crumbs"><a href="../../../index.html">🏠 Mates Interactives</a><span>›</span><a href="../../index.html">📘 4t ESO</a><span>›</span><a href="../../sentit-estocastic.html">📊 Sentit Estocàstic</a><span>›</span><a href="index.html">📚 Teoria</a><span>›</span><span class="muted">Ampliació C</span></div></div><main><section class="hero"><span class="eyebrow">AMPLIACIÓ C · 4t ESO</span><h1>🔗 Probabilitat condicionada i independència</h1><p>La probabilitat condicionada formalitza què passa quan rebem informació nova. Saber que un succés B ha passat <strong>redueix el conjunt de casos possibles</strong> i obliga a recalcular la probabilitat d’A dins d’aquest nou univers.</p></section><div class="extension-note"><strong>Prepara Batxillerat.</strong> Aquest contingut és d’ampliació: serveix per anticipar idees posteriors sense exigir encara tot el formalisme de Batxillerat.</div><section class="card"><h2>Què has de saber fer</h2><p>P(A|B), canvi de referència, dependència i independència.</p><div class="tip"><strong>Objectiu:</strong> entendre què significa cada eina i saber justificar la decisió o el càlcul, no només obtenir un resultat.</div></section><section class="section"><h2>1. Què significa P(A|B)?</h2><p><span class="math">P(A|B)</span> es llegeix “probabilitat d’A <strong>sabent que</strong> B”. La barra vertical no vol dir divisió: introdueix la condició.</p><p>En una taula, ens quedem només amb la fila o columna que correspon a B i calculem la proporció d’A dins d’aquest subconjunt.</p></section><section class="section"><h2>2. Fórmula de probabilitat condicionada</h2><div class="formula"><span class="math">P(A|B) = P(A ∩ B) / P(B)</span>, si P(B) &gt; 0</div><p>El numerador correspon als casos que compleixen A i B. El denominador és la probabilitat de la condició B, perquè només treballem dins de B.</p></section><section class="section"><h2>3. Independència</h2><p>A i B són <strong>independents</strong> si saber que B ha passat no canvia la probabilitat d’A:</p><div class="formula"><span class="math">P(A|B)=P(A)</span></div><p>Una condició equivalent és:</p><div class="formula"><span class="math">P(A ∩ B)=P(A)·P(B)</span></div></section><section class="section"><h2>4. Dependència</h2><p>Si la informació B modifica la probabilitat d’A, els successos són dependents. En extraccions <strong>sense reemplaçament</strong> això és habitual, perquè el primer resultat canvia la composició disponible.</p></section><section class="section"><h2>5. No confondre independència i incompatibilitat</h2><p>Successos incompatibles no poden passar alhora. En canvi, successos independents poden passar simultàniament: simplement un no altera la probabilitat de l’altre.</p></section><section class="example"><h2>✏️ Exemple resolt pas a pas</h2><div class="step"><strong>Pas 1.</strong> Urna: 3 vermelles i 2 blaves. Sense reemplaçament.</div><div class="step"><strong>Pas 2.</strong> Abans d’extreure: P(B) = 2/5.</div><div class="step"><strong>Pas 3.</strong> Si sabem que la primera ha estat vermella, queden 2 blaves entre 4 boles.</div><div class="step"><strong>Pas 4.</strong> P(blava a la segona | vermella a la primera) = 2/4 = 1/2.</div><div class="step"><strong>Pas 5.</strong> Com que 1/2 ≠ 2/5, el primer resultat ha canviat la probabilitat del segon: hi ha dependència.</div></section><section class="mistakes"><h2>❌ Errors freqüents</h2><ul><li>Invertir P(A|B) i P(B|A).</li><li>Mantenir el denominador original després de condicionar.</li><li>Pensar que “independents” vol dir que no poden passar alhora.</li><li>Aplicar P(A∩B)=P(A)P(B) sense haver justificat la independència.</li></ul></section><section class="summary"><h2>✅ Resum essencial</h2><ul><li>Condicionar = canviar el grup de referència.</li><li>P(A|B)=P(A∩B)/P(B).</li><li>Independència significa que saber B no canvia P(A).</li><li>Sense reemplaçament, sovint hi ha dependència.</li></ul></section><div class="actions"><a class="btn" href="../../sentit-estocastic.html?topic=condicionadaBatx4t&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a><a class="btn" href="../../sentit-estocastic.html?topic=condicionadaBatx4t&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a><a class="btn alt" href="index.html">📚 Tota la teoria</a></div><div class="pager"><a class="prev" href="correlacio-regressio.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="bayes-models.html">Tema següent →</a></div><div class="footer">Sentit Estocàstic · 4t ESO · Mates Interactives</div></main><!-- MI_AVISOS_FORM_V1 -->
+<style id="mi-avisos-style">
+  .mi-avis-btn{
+    position:fixed;right:18px;bottom:18px;z-index:9999;
+    display:inline-flex;align-items:center;gap:7px;
+    padding:10px 14px;border:1px solid rgba(0,0,0,.16);border-radius:999px;
+    background:#fff;color:#333;text-decoration:none;font:600 14px/1.2 system-ui,-apple-system,"Segoe UI",sans-serif;
+    box-shadow:0 4px 18px rgba(0,0,0,.14);cursor:pointer;
+  }
+  .mi-avis-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .mi-avis-btn:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}
+  @media (max-width:640px){
+    .mi-avis-btn{right:12px;bottom:12px;padding:9px 11px;font-size:13px;max-width:calc(100vw - 24px)}
+    .mi-avis-btn .mi-avis-text{display:none}
+  }
+  @media print{.mi-avis-btn{display:none!important}}
+</style>
+<a id="miAvisBtn" class="mi-avis-btn" href="#" target="_blank" rel="noopener" aria-label="Informa d'un error o proposa una millora" title="Informa d'un error o proposa una millora">
+  <span aria-hidden="true">⚠️</span><span class="mi-avis-text">Informa d'un error o proposa una millora</span>
+</a>
+<script id="mi-avisos-script">
+(function(){
+  var FORM_URL='https://docs.google.com/forms/d/e/1FAIpQLSeAYrMywuihUJDN92G7ka_71A5wM3xk-ZdMsrNBDiv0vwO4WA/viewform';
+  var ENTRY_CURS='entry.484522864';
+  var ENTRY_PAGINA='entry.1901995668';
+  var ENTRY_URL='entry.1335258185';
+  var btn=document.getElementById('miAvisBtn');
+  if(!btn)return;
+
+  function textNet(el){return el ? (el.textContent || '').replace(/\s+/g,' ').trim() : '';}
+  function retalla(s,n){s=(s||'').trim();return s.length>n?s.slice(0,n-1).trim()+'…':s;}
+  function visible(el){
+    if(!el)return false;
+    if(el.classList && el.classList.contains('active'))return true;
+    var st=window.getComputedStyle?getComputedStyle(el):null;
+    return !st || (st.display!=='none' && st.visibility!=='hidden');
+  }
+  function sentitActual(){
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('numeric')>=0)return 'Sentit Numèric';
+    if(path.indexOf('mesura')>=0)return 'Sentit de la Mesura';
+    if(path.indexOf('espacial')>=0)return 'Sentit Espacial';
+    if(path.indexOf('algebraic')>=0)return 'Sentit Algebraic';
+    if(path.indexOf('estocastic')>=0)return 'Sentit Estocàstic';
+    var t=textNet(document.querySelector('#navTitle'))||textNet(document.querySelector('h1'));
+    var m=t.match(/Sentit[^·|–-]*/i);
+    return m?m[0].trim():'';
+  }
+  function primerText(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textNet(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function textEnunciat(el){
+    if(!el)return '';
+    var copia=el.cloneNode(true);
+    copia.querySelectorAll('svg,canvas,figure,.geo-svg-wrap,.ex-visual,.number-line-wrap,.diagram,.visual').forEach(function(n){n.remove();});
+    return (copia.textContent||'').replace(/\s+/g,' ').trim();
+  }
+  function primerEnunciat(selectors){
+    for(var i=0;i<selectors.length;i++){
+      var el=document.querySelector(selectors[i]);
+      var tx=textEnunciat(el);
+      if(tx && visible(el))return tx;
+    }
+    return '';
+  }
+  function pantallaActiva(){
+    var el=document.querySelector('.screen.active');
+    return el ? (el.id||'') : '';
+  }
+  function netejaTemaAvis(tema){
+    tema=(tema||'').replace(/\s+/g,' ').trim();
+    tema=tema.replace(/^Bloc\s+\d+\s*[·.:-]\s*/i,'');
+    tema=tema.replace(/^\d+\s*[·.:-]\s*/,'');
+    return tema.trim();
+  }
+  function tipusExerciciActual(){
+    try{
+      if(typeof currentEx!=='undefined' && currentEx && currentEx.type!==undefined && currentEx.type!==null){
+        return 'Tipus '+String(currentEx.type);
+      }
+    }catch(e){}
+    return '';
+  }
+  function netejaMetaExercici(meta,afegeixTipusActual){
+    meta=(meta||'').replace(/\s+/g,' ').trim();
+    var ex=(meta.match(/Exercici\s+\d+/i)||[])[0]||'';
+    var tipus=(meta.match(/Tipus\s+[^·|]+/i)||[])[0]||'';
+    if(tipus)tipus=tipus.replace(/\s+/g,' ').trim();
+    if(!tipus && afegeixTipusActual)tipus=tipusExerciciActual();
+    var dif=(meta.match(/(?:Fàcil|Facil|Mitjà|Mitja|Mitjana|Difícil|Dificil)/i)||[])[0]||'';
+    return [ex,tipus,dif].filter(Boolean).join(' · ');
+  }
+  function contextPractica(){
+    var screen=pantallaActiva();
+    var sentit=sentitActual();
+    var tema=netejaTemaAvis(textNet(document.querySelector('#navTitle')));
+    if(/^Sentit\b/i.test(tema))tema='';
+
+    var isExercise=/Exercise|sEx$/i.test(screen);
+    var isExam=/Exam/i.test(screen) && !/Cfg|Config/i.test(screen);
+    var isOpen=/OpenProblem|AmpProb/i.test(screen);
+
+    if(isExercise){
+      var meta=netejaMetaExercici(primerText(['#exNum','#exerciseNumber','#exN','.ex-num','.exn']),true);
+      var q=primerEnunciat(['#exQuestion .q-text','#questionText','#exQ .q-text','.ex-question .q-text','.exq .q-text','#exQuestion','#exQ','.ex-question','.exq']);
+      return [sentit,tema,meta,q?('Enunciat: '+retalla(q,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isExam){
+      var qExam=primerEnunciat(['#examContent .q-text','#examC .q-text','.exam-question .q-text','#examQuestion .q-text','#examContent','#examC','.exam-question','#examQuestion']);
+      return [sentit,'Mode examen',tema,qExam?('Enunciat: '+retalla(qExam,190)):''].filter(Boolean).join(' · ');
+    }
+    if(isOpen){
+      var metaOpen=primerText(['#spOpenMeta','#stOpenMeta','#ampMeta','.sp-open-meta']);
+      var qOpen=primerEnunciat(['#spOpenQuestion','#stOpenQuestion','#algOpenProblem','#stOpenProblem','#ampQuestion','#ampQ','.sp-open-question']);
+      return [sentit,'Problema obert',tema,netejaMetaExercici(metaOpen,false),qOpen?('Enunciat: '+retalla(qOpen,190)):''].filter(Boolean).join(' · ');
+    }
+    var opcioAvis='';
+    try{
+      var opcioParam=(new URLSearchParams(location.search).get('opcio')||'').toUpperCase();
+      if(opcioParam==='A'||opcioParam==='B')opcioAvis='Opció '+opcioParam;
+    }catch(e){}
+    return [sentit,tema,opcioAvis].filter(Boolean).join(' · ');
+  }
+  function contextTeoria(){
+    var sentit=sentitActual();
+    var h1=textNet(document.querySelector('h1')) || textNet(document.querySelector('title')) || 'Pàgina de 4t ESO';
+    var path=(location.pathname||'').toLowerCase();
+    if(path.indexOf('/teoria/')>=0){
+      h1=h1.replace(/^\s*[^A-Za-zÀ-ÖØ-öø-ÿ0-9]+\s*/,'').trim();
+      return ['Teoria',sentit,h1].filter(Boolean).join(' · ');
+    }
+    if(/\/sentit-[^/]+\.html$/i.test(location.pathname||''))return contextPractica() || [sentit,h1].filter(Boolean).join(' · ');
+    return h1;
+  }
+  function paginaActual(){
+    var p=contextTeoria();
+    return retalla(p,450) || '4t ESO';
+  }
+  function creaUrl(){
+    var p=new URLSearchParams();
+    p.set(ENTRY_CURS,'4t ESO');
+    p.set(ENTRY_PAGINA,paginaActual());
+    p.set(ENTRY_URL,window.location.href);
+    return FORM_URL+'?usp=pp_url&'+p.toString();
+  }
+  btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
+})();
+</script>
+</body></html>
