@@ -125,4 +125,63 @@
 })();
 </script>
 
+
+<!-- MI_NAV_V3 · retorn reutilitzable de teoria → pràctica -->
+<script id="mi-nav-v3-teoria">
+(function(){
+  var NOM_PESTANYA_PRACTICA = 'MI_PRACTICA';
+
+  function esEnllacPracticaNumerica(url){
+    return /\/sentit-numeric\.html$/i.test(url.pathname);
+  }
+
+  document.addEventListener('click', function(e){
+    // Respecta clic dret, roda central i Ctrl/Cmd/Shift/Alt + clic.
+    if(e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a) return;
+
+    var href = a.getAttribute('href');
+    if(!href || href.charAt(0) === '#') return;
+
+    var url;
+    try { url = new URL(href, window.location.href); }
+    catch(err) { return; }
+
+    // Només interceptem els botons/enllaços que tornen a la pràctica del Sentit Numèric.
+    // La navegació entre pàgines de teoria continua normal dins MI_TEORIA.
+    if(!esEnllacPracticaNumerica(url)) return;
+
+    e.preventDefault();
+
+    // Obtenir la pestanya de pràctica existent sense navegar-la d'entrada.
+    // Si no existeix, el navegador crea about:blank i després hi carreguem la pràctica.
+    var practica = window.open('', NOM_PESTANYA_PRACTICA);
+    if(!practica) return;
+
+    var esNova = false;
+    try { esNova = practica.location.href === 'about:blank'; }
+    catch(err) { esNova = false; }
+
+    if(esNova){
+      practica.location.href = url.href;
+      try { practica.focus(); } catch(err) {}
+      return;
+    }
+
+    // Si la pràctica V3 ja existeix, ella mateixa decideix:
+    // - mateixa URL: només focus, sense recàrrega;
+    // - tema/nivell diferent: navega dins la mateixa pestanya.
+    try {
+      practica.postMessage({ type:'MI_PRACTICA_GOTO', url:url.href }, '*');
+      practica.focus();
+    } catch(err) {
+      // Fallback: reutilitzar la pestanya encara que calgui navegar-la.
+      try { practica.location.href = url.href; practica.focus(); } catch(err2) {}
+    }
+  });
+})();
+</script>
+
 </body></html>

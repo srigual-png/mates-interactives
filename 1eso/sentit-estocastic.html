@@ -2308,7 +2308,7 @@ function stRenderOpenProblem(){var p=stOpenSession.problems[stOpenSession.idx];s
   if(p.kind==='construct')stRenderConstruct(p,false);else if(p.kind==='pie')stRenderPieInputs(p);else document.getElementById('stOpenAnswer').innerHTML='<input class="st-open-input" id="stOpenInput" type="text" placeholder="Escriu la resposta final…" autocomplete="off" spellcheck="false">';
 }
 function stToggleHint(){var b=document.getElementById('stOpenHint'),btn=document.getElementById('stHintBtn');b.classList.toggle('show');btn.textContent=b.classList.contains('show')?'🙈 Amagar pista':'💡 Mostrar pista';}
-function stCheckOpen(){if(stOpenSession.answered)return;var p=stOpenSession.problems[stOpenSession.idx],val=stStudentOpenValue(p);if((p.kind==='input'||!p.kind)&&!val)return;var ok=stEvaluateOpen(p);stOpenSession.answered=true;if(ok)stOpenSession.correct++;var inp=document.getElementById('stOpenInput');if(inp){inp.disabled=true;inp.className='st-open-input '+(ok?'ok':'ko');}document.querySelectorAll('.st-pie-input').forEach(function(x){x.disabled=true;});var correct=p.answer?p.answer.val:stConstructCorrectText(p),errObj={topicId:p.topicId,topicName:stTopicName(p.topicId),type:p.patternId,question:p.question,visual:p.visual||'',correct:correct,options:[],guide:(p.hint||[]).slice(),solution:(p.solution||[]).slice()};if(!ok)registerError(errObj,val,'open');if((p.kind==='construct')&&!ok)stRenderConstruct(p,true);document.getElementById('stOpenFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'+(ok?'':'Resposta correcta: <b>'+correct+'</b>'+miReviewHtml(errObj))+'<div class="st-open-solution">'+(p.solution||[]).map(function(s,i){return '<div><b>Pas '+(i+1)+':</b> '+s+'</div>';}).join('')+'</div></div>';document.getElementById('stOpenCheck').style.display='none';document.getElementById('stOpenNext').style.display='block';document.getElementById('stOpenNext').textContent=stOpenSession.idx+1<stOpenSession.problems.length?'Següent problema →':'Veure resultat';}
+function stCheckOpen(){if(stOpenSession.answered)return;var p=stOpenSession.problems[stOpenSession.idx],val=stStudentOpenValue(p);if((p.kind==='input'||!p.kind)&&!val)return;var ok=stEvaluateOpen(p);stOpenSession.answered=true;if(ok)stOpenSession.correct++;var inp=document.getElementById('stOpenInput');if(inp){inp.disabled=true;inp.className='st-open-input '+(ok?'ok':'ko');}document.querySelectorAll('.st-pie-input').forEach(function(x){x.disabled=true;});var correct=p.answer?p.answer.val:stConstructCorrectText(p),errObj={topicId:p.topicId,topicName:stTopicName(p.topicId),type:p.patternId,question:p.question,visual:p.visual||'',correct:correct,options:[],guide:(p.hint||[]).slice(),solution:(p.solution||[]).slice()};if(!ok)registerError(errObj,val,'open');if((p.kind==='construct')&&!ok)stRenderConstruct(p,true);document.getElementById('stOpenFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'+(ok?'':'Resposta correcta: <b>'+correct+'</b>'+miReviewHtml(errObj))+'<div class="st-open-solution">'+(p.solution||[]).map(function(s,i){return '<div><b>Pas '+(i+1)+':</b> '+s+'</div>';}).join('')+'</div>'+(ok?'':miTheoryLinkHtml(p.topicId))+'</div>';document.getElementById('stOpenCheck').style.display='none';document.getElementById('stOpenNext').style.display='block';document.getElementById('stOpenNext').textContent=stOpenSession.idx+1<stOpenSession.problems.length?'Següent problema →':'Veure resultat';}
 function stNextOpen(){stOpenSession.idx++;if(stOpenSession.idx<stOpenSession.problems.length){stRenderOpenProblem();return;}stRenderOpenResult();}
 function stRenderOpenResult(){var total=stOpenSession.problems.length,pct=Math.round(stOpenSession.correct/total*100),emoji=pct>=90?'🏆':pct>=70?'👍':'💪';document.getElementById('stOpenResult').innerHTML='<div class="home-header"><h2>'+emoji+' Resultat</h2><p>Problemes oberts · Sentit Estocàstic</p></div><div class="st-open-summary"><div class="big">'+stOpenSession.correct+'/'+total+'</div><p>'+pct+'% d’encerts</p></div><button class="btn-primary" onclick="stStartOpenSession()">Repetir configuració</button><button class="btn-secondary" onclick="stRenderOpenHome()">Canviar configuració</button><button class="btn-secondary" onclick="stExitOpenProblems()">Tornar al menú</button>';showScreen('screenOpenResult');}
 function stGenerateExamProblems(n,topicIds){return stPickProblems(n,'mix',0,topicIds,true);}
@@ -2458,6 +2458,26 @@ function clearTopicErrors(topicId){
   if(idx>=0)selectTopic(idx);
 }
 
+// Mapa centralitzat de cada tema cap a la seva pàgina de teoria.
+var MI_THEORY_PAGES={
+  recollida:'teoria/estocastic/recollida-dades-inferencia-1r-eso.html',
+  taules:'teoria/estocastic/taules-frequencies-1r-eso.html',
+  barres:'teoria/estocastic/diagrames-barres-1r-eso.html',
+  sectors:'teoria/estocastic/diagrames-sectors-1r-eso.html',
+  poligons:'teoria/estocastic/poligons-frequencies-1r-eso.html',
+  mitjana:'teoria/estocastic/mitjana-aritmetica-1r-eso.html',
+  mediana:'teoria/estocastic/mediana-1r-eso.html',
+  moda:'teoria/estocastic/moda-1r-eso.html',
+  probabilitat:'teoria/estocastic/probabilitat-1r-eso.html',
+  acumulades2:'teoria/estocastic/frequencies-acumulades-ampliacio-2n-eso.html',
+  histograma:'teoria/estocastic/histogrames-ampliacio-2n-eso.html'
+};
+function miTheoryLinkHtml(topicId,label){
+  var href=MI_THEORY_PAGES[topicId];
+  if(!href)return '';
+  return '<a class="theory-page-link mi-review-theory-link" href="'+href+'" style="margin:12px 0 0">📚 '+(label||"Repassar la teoria d\'aquest tema")+'</a>';
+}
+
 function selectTopic(i){
   state.currentTopic=i;state.level=1;state.exCount=0;state.correctStreak=0;
   var t=TOPICS[i];
@@ -2466,21 +2486,8 @@ function selectTopic(i){
   var html='<div class="theory-box"><h3>📖 '+t.theory.title+'</h3><p>'+t.theory.text+'</p>';
   t.theory.formulas.forEach(f=>{html+='<div class="formula">'+f+'</div>';});
   html+='</div>';
-  const theoryPages={
-    recollida:'teoria/estocastic/recollida-dades-inferencia-1r-eso.html',
-    taules:'teoria/estocastic/taules-frequencies-1r-eso.html',
-    barres:'teoria/estocastic/diagrames-barres-1r-eso.html',
-    sectors:'teoria/estocastic/diagrames-sectors-1r-eso.html',
-    poligons:'teoria/estocastic/poligons-frequencies-1r-eso.html',
-    mitjana:'teoria/estocastic/mitjana-aritmetica-1r-eso.html',
-    mediana:'teoria/estocastic/mediana-1r-eso.html',
-    moda:'teoria/estocastic/moda-1r-eso.html',
-    probabilitat:'teoria/estocastic/probabilitat-1r-eso.html',
-    acumulades2:'teoria/estocastic/frequencies-acumulades-ampliacio-2n-eso.html',
-    histograma:'teoria/estocastic/histogrames-ampliacio-2n-eso.html'
-  };
-  if(theoryPages[t.id]){
-    html+='<a class="theory-page-link" href="'+theoryPages[t.id]+'">📚 Teoria completa del bloc</a>';
+  if(MI_THEORY_PAGES[t.id]){
+    html+=miTheoryLinkHtml(t.id,'Teoria completa del bloc');
   }
   var topicErrors=(Array.isArray(state.errors)?state.errors:[]).filter(function(e){return e.topicId===t.id;}).slice(-5).reverse();
   if(topicErrors.length){
@@ -2575,7 +2582,8 @@ function selectAnswer(idx,btn){
     fb.innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4>Resposta correcta: <b>'+currentEx.correct+'</b><br>'
       +miReviewHtml(currentEx)
       +'<button class="sol-btn" onclick="toggleSolution(this)">Veure solució pas a pas</button>'
-      +'<div class="solution-box" id="solBox">'+currentEx.solution.map((s,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div></div>';
+      +'<div class="solution-box" id="solBox">'+currentEx.solution.map((s,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div>'
+      +miTheoryLinkHtml(currentEx.topicId||(TOPICS[state.currentTopic]&&TOPICS[state.currentTopic].id))+'</div>';
   }
   document.getElementById('btnNext').style.display='block';
   if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
@@ -3115,6 +3123,80 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
     return FORM_URL+'?usp=pp_url&'+p.toString();
   }
   btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
+})();
+</script>
+
+
+
+<!-- MI_NAV_V7 · dues pestanyes reutilitzables: pràctica ↔ teoria · Sentit Estocàstic -->
+<script id="mi-nav-v7-practica-estocastic">
+(function(){
+  var NOM_PESTANYA_PRACTICA = 'MI_PRACTICA';
+  var NOM_PESTANYA_TEORIA = 'MI_TEORIA';
+
+  // Aquesta pàgina és la pestanya de pràctica reutilitzable.
+  try { window.name = NOM_PESTANYA_PRACTICA; } catch(err) {}
+
+  function normalitzaUrl(valor){
+    try {
+      var u = new URL(valor, window.location.href);
+      u.hash = '';
+      return u.href;
+    } catch(err) {
+      return String(valor || '');
+    }
+  }
+
+  // La teoria envia aquest missatge quan l'usuari prem "Practicar".
+  // Si ja som exactament a aquella pràctica, només recuperem el focus
+  // i no recarreguem: es conserva l'exercici i la correcció actual.
+  window.addEventListener('message', function(e){
+    var d = e.data;
+    if(!d || d.type !== 'MI_PRACTICA_GOTO' || !d.url) return;
+
+    var uDesti;
+    try { uDesti = new URL(d.url, window.location.href); }
+    catch(err) { return; }
+
+    var uPractica = new URL('sentit-estocastic.html', window.location.href);
+    if(uDesti.protocol !== uPractica.protocol || uDesti.host !== uPractica.host ||
+       uDesti.pathname !== uPractica.pathname) return;
+
+    var desti = normalitzaUrl(uDesti.href);
+    var actual = normalitzaUrl(window.location.href);
+
+    if(desti === actual){
+      try { window.focus(); } catch(err) {}
+      return;
+    }
+
+    // Tema o nivell diferent: reutilitzem aquesta mateixa pestanya de pràctica.
+    window.location.href = d.url;
+  });
+
+  document.addEventListener('click', function(e){
+    // Respecta clic dret, roda central i Ctrl/Cmd/Shift/Alt + clic.
+    if(e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a) return;
+
+    var href = a.getAttribute('href');
+    if(!href || href.charAt(0) === '#') return;
+
+    var url;
+    try { url = new URL(href, window.location.href); }
+    catch(err) { return; }
+
+    // Qualsevol enllaç cap a /teoria/ obre o reutilitza una única pestanya de teoria.
+    if(!/\/teoria\//i.test(url.pathname)) return;
+
+    e.preventDefault();
+    var pestanya = window.open(url.href, NOM_PESTANYA_TEORIA);
+    if(pestanya){
+      try { pestanya.focus(); } catch(err) {}
+    }
+  });
 })();
 </script>
 

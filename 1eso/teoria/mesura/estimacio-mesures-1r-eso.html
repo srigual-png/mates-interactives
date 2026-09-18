@@ -287,5 +287,59 @@ if(!isLocal){const s=document.createElement("script");s.async=true;s.dataset.goa
 })();
 </script>
 
+
+
+<!-- MI_NAV_V5 · retorn reutilitzable de teoria → pràctica · Sentit Mesura -->
+<script id="mi-nav-v5-teoria-mesura">
+(function(){
+  var NOM_PESTANYA_PRACTICA = 'MI_PRACTICA';
+
+  function esEnllacPracticaMesura(url){
+    return /\/sentit-mesura\.html$/i.test(url.pathname);
+  }
+
+  document.addEventListener('click', function(e){
+    // Respecta clic dret, roda central i Ctrl/Cmd/Shift/Alt + clic.
+    if(e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a) return;
+
+    var href = a.getAttribute('href');
+    if(!href || href.charAt(0) === '#') return;
+
+    var url;
+    try { url = new URL(href, window.location.href); }
+    catch(err) { return; }
+
+    // Només interceptem els enllaços que tornen a la pràctica de Mesura.
+    // La navegació entre pàgines de teoria continua normal dins MI_TEORIA.
+    if(!esEnllacPracticaMesura(url)) return;
+
+    e.preventDefault();
+
+    var practica = window.open('', NOM_PESTANYA_PRACTICA);
+    if(!practica) return;
+
+    var esNova = false;
+    try { esNova = practica.location.href === 'about:blank'; }
+    catch(err) { esNova = false; }
+
+    if(esNova){
+      practica.location.href = url.href;
+      try { practica.focus(); } catch(err) {}
+      return;
+    }
+
+    try {
+      practica.postMessage({ type:'MI_PRACTICA_GOTO', url:url.href }, '*');
+      practica.focus();
+    } catch(err) {
+      try { practica.location.href = url.href; practica.focus(); } catch(err2) {}
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
