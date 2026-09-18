@@ -2586,5 +2586,120 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
 })();
 </script>
+
+<!-- MI_REPASS_TEORIA · enllaç contextual després d'una resposta incorrecta -->
+<script id="mi-review-theory-helper">
+var MI_NAV_THEORY_PAGES = {
+  "figures4t": "teoria/espacial/figures-raonament-geometric.html",
+  "vectors4t": "teoria/espacial/vectors-concepte-representacio.html",
+  "components4t": "teoria/espacial/components-modul-vector.html",
+  "operacionsVectors4t": "teoria/espacial/operacions-vectors.html",
+  "coordenadesVectors4t": "teoria/espacial/coordenades-problemes-vectors.html",
+  "homotecies4t": "teoria/espacial/homotecies.html",
+  "geometriaFuncions4t": "teoria/espacial/geometria-funcions.html",
+  "regions4t": "teoria/espacial/zeros-interseccions-regions.html",
+  "rectesAmpA": "teoria/espacial/equacions-recta.html",
+  "elementsRectaAmpB": "teoria/espacial/elements-recta.html",
+  "posicioRectesAmpC": "teoria/espacial/posicio-relativa-rectes.html",
+  "geometriaAnaliticaAmpD": "teoria/espacial/geometria-analitica-batxillerat.html"
+};
+
+function miTheoryLinkHtml(topicId,label){
+  var href = MI_NAV_THEORY_PAGES[topicId];
+  if(!href) return '';
+  return '<a class="theory-page-link mi-review-theory-link" href="'+href+'" style="margin:12px 0 0">📚 '+(label||'Repassar la teoria d\'aquest tema')+'</a>';
+}
+
+(function(){
+  if(typeof processAnswer !== 'function') return;
+  var miProcessAnswerOriginal = processAnswer;
+  processAnswer = function(ok){
+    var resultat = miProcessAnswerOriginal.apply(this, arguments);
+    if(!ok){
+      try {
+        var area = document.getElementById('feedbackArea');
+        var caixa = area && area.querySelector('.feedback-box.ko');
+        if(caixa && !caixa.querySelector('.mi-review-theory-link') && typeof currentEx !== 'undefined' && currentEx){
+          caixa.insertAdjacentHTML('beforeend', miTheoryLinkHtml(currentEx.topicId));
+        }
+      } catch(err) {}
+    }
+    return resultat;
+  };
+})();
+</script>
+
+
+<!-- MI_NAV_BIDIR · dues pestanyes reutilitzables: pràctica ↔ teoria -->
+<script id="mi-nav-bidir-practica">
+(function(){
+  var NOM_PESTANYA_PRACTICA = 'MI_PRACTICA';
+  var NOM_PESTANYA_TEORIA = 'MI_TEORIA';
+
+  try { window.name = NOM_PESTANYA_PRACTICA; } catch(err) {}
+
+  function normalitzaUrl(valor){
+    try {
+      var u = new URL(valor, window.location.href);
+      u.hash = '';
+      return u.href;
+    } catch(err) {
+      return String(valor || '');
+    }
+  }
+
+  window.addEventListener('message', function(e){
+    var d = e.data;
+    if(!d || d.type !== 'MI_PRACTICA_GOTO' || !d.url) return;
+
+    var uDesti;
+    try { uDesti = new URL(d.url, window.location.href); }
+    catch(err) { return; }
+
+    var uPractica = new URL('sentit-espacial.html', window.location.href);
+    if(
+      uDesti.protocol !== uPractica.protocol ||
+      uDesti.host !== uPractica.host ||
+      uDesti.pathname !== uPractica.pathname
+    ) return;
+
+    var desti = normalitzaUrl(uDesti.href);
+    var actual = normalitzaUrl(window.location.href);
+
+    if(desti === actual){
+      try { window.focus(); } catch(err) {}
+      return;
+    }
+
+    window.location.href = d.url;
+  });
+
+  document.addEventListener('click', function(e){
+    if(
+      e.defaultPrevented || e.button !== 0 ||
+      e.ctrlKey || e.metaKey || e.shiftKey || e.altKey
+    ) return;
+
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a) return;
+
+    var href = a.getAttribute('href');
+    if(!href || href.charAt(0) === '#') return;
+
+    var url;
+    try { url = new URL(href, window.location.href); }
+    catch(err) { return; }
+
+    if(!/\/teoria\//i.test(url.pathname)) return;
+
+    e.preventDefault();
+    var pestanya = window.open(url.href, NOM_PESTANYA_TEORIA);
+    if(pestanya){
+      try { pestanya.focus(); } catch(err) {}
+    }
+  });
+})();
+</script>
+
 </body>
 </html>

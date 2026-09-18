@@ -164,4 +164,60 @@ main{max-width:900px;margin:0 auto;padding:28px 18px 60px}.hero{text-align:cente
   btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
 })();
 </script>
+
+<!-- MI_NAV_BIDIR · retorn reutilitzable de teoria → pràctica -->
+<script id="mi-nav-bidir-teoria">
+(function(){
+  var NOM_PESTANYA_PRACTICA = 'MI_PRACTICA';
+
+  function esEnllacPractica(url){
+    return /\/sentit-estocastic\.html$/i.test(url.pathname);
+  }
+
+  document.addEventListener('click', function(e){
+    if(
+      e.defaultPrevented || e.button !== 0 ||
+      e.ctrlKey || e.metaKey || e.shiftKey || e.altKey
+    ) return;
+
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a) return;
+
+    var href = a.getAttribute('href');
+    if(!href || href.charAt(0) === '#') return;
+
+    var url;
+    try { url = new URL(href, window.location.href); }
+    catch(err) { return; }
+
+    if(!esEnllacPractica(url)) return;
+
+    e.preventDefault();
+
+    var practica = window.open('', NOM_PESTANYA_PRACTICA);
+    if(!practica) return;
+
+    var esNova = false;
+    try { esNova = practica.location.href === 'about:blank'; }
+    catch(err) { esNova = false; }
+
+    if(esNova){
+      practica.location.href = url.href;
+      try { practica.focus(); } catch(err) {}
+      return;
+    }
+
+    try {
+      practica.postMessage({type:'MI_PRACTICA_GOTO', url:url.href}, '*');
+      practica.focus();
+    } catch(err) {
+      try {
+        practica.location.href = url.href;
+        practica.focus();
+      } catch(err2) {}
+    }
+  });
+})();
+</script>
+
 </body></html>
