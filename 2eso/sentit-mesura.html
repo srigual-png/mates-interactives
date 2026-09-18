@@ -2329,6 +2329,14 @@ const THEORY_PAGES={
   reptesMesura3r:'teoria/mesura/reptes-mesura.html'
 };
 
+// Enllaç contextual de repàs que apareix després d'una resposta incorrecta.
+function miTheoryLinkHtml(topicId,label){
+  var href=THEORY_PAGES[topicId];
+  if(!href)return '';
+  return '<a class="theory-page-link mi-review-theory-link" href="'+href+'" style="margin:12px 0 0">📚 '+(label||'Repassar la teoria d\'aquest tema')+'</a>';
+}
+
+
 /* ── ESTAT I ERRORS ────────────────────────────────────────── */
 const STORAGE_KEY='sm2eso_v1';
 let state={done:[],errors:[],unlockedIds:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
@@ -2546,7 +2554,7 @@ function processAnswer(ok,studentAnswer){
     if(state.correctStreak>=goal)markTopicDone();
   }else{
     state.correctStreak=Math.max(0,state.correctStreak-1);registerError(currentEx,studentAnswer,'practice');
-    document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4><div>La teva resposta: <b style="color:var(--error)">'+String(studentAnswer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+currentEx.correct+'</b></div>'+miReviewHtml(currentEx)+'<button class="sol-btn" onclick="toggleSolution(this)">📘 Veure explicació</button><div class="solution-box" id="solBox">'+currentEx.solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div></div>';
+    document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4><div>La teva resposta: <b style="color:var(--error)">'+String(studentAnswer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+currentEx.correct+'</b></div>'+miReviewHtml(currentEx)+'<button class="sol-btn" onclick="toggleSolution(this)">📘 Veure explicació</button><div class="solution-box" id="solBox">'+currentEx.solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>'+miTheoryLinkHtml(currentEx.topicId)+'</div>';
   }
   document.getElementById('streakFill').style.width=Math.min(100,state.correctStreak/goal*100)+'%';document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal;
   document.getElementById('btnNext').style.display='block';if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
@@ -2936,6 +2944,79 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
     return FORM_URL+'?usp=pp_url&'+p.toString();
   }
   btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
+})();
+</script>
+
+
+
+<!-- MI_NAV_BIDIR · dues pestanyes reutilitzables: pràctica ↔ teoria -->
+<script id="mi-nav-bidir-practica">
+(function(){
+  var NOM_PESTANYA_PRACTICA = 'MI_PRACTICA';
+  var NOM_PESTANYA_TEORIA = 'MI_TEORIA';
+
+  // Aquesta pàgina és la pestanya de pràctica reutilitzable.
+  try { window.name = NOM_PESTANYA_PRACTICA; } catch(err) {}
+
+  function normalitzaUrl(valor){
+    try {
+      var u = new URL(valor, window.location.href);
+      u.hash = '';
+      return u.href;
+    } catch(err) {
+      return String(valor || '');
+    }
+  }
+
+  // La teoria envia aquest missatge quan l'usuari prem "Practicar".
+  // Si ja som exactament a aquella pràctica, només recuperem el focus.
+  window.addEventListener('message', function(e){
+    var d = e.data;
+    if(!d || d.type !== 'MI_PRACTICA_GOTO' || !d.url) return;
+
+    var uDesti;
+    try { uDesti = new URL(d.url, window.location.href); }
+    catch(err) { return; }
+
+    var uPractica = new URL('sentit-mesura.html', window.location.href);
+    if(uDesti.protocol !== uPractica.protocol || uDesti.host !== uPractica.host ||
+       uDesti.pathname !== uPractica.pathname) return;
+
+    var desti = normalitzaUrl(uDesti.href);
+    var actual = normalitzaUrl(window.location.href);
+
+    if(desti === actual){
+      try { window.focus(); } catch(err) {}
+      return;
+    }
+
+    // Tema o nivell diferent: reutilitzem aquesta mateixa pestanya de pràctica.
+    window.location.href = d.url;
+  });
+
+  document.addEventListener('click', function(e){
+    // Respecta clic dret, roda central i Ctrl/Cmd/Shift/Alt + clic.
+    if(e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a) return;
+
+    var href = a.getAttribute('href');
+    if(!href || href.charAt(0) === '#') return;
+
+    var url;
+    try { url = new URL(href, window.location.href); }
+    catch(err) { return; }
+
+    // Qualsevol enllaç cap a /teoria/ obre o reutilitza una única pestanya de teoria.
+    if(!/\/teoria\//i.test(url.pathname)) return;
+
+    e.preventDefault();
+    var pestanya = window.open(url.href, NOM_PESTANYA_TEORIA);
+    if(pestanya){
+      try { pestanya.focus(); } catch(err) {}
+    }
+  });
 })();
 </script>
 
