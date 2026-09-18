@@ -3192,7 +3192,7 @@ function processAnswer(ok,studentAnswer){
       +'<div>Resposta correcta: <b style="color:var(--success)">'+currentEx.correct+'</b></div>'
       +miReviewHtml(currentEx)
       +'<button class="sol-btn" onclick="toggleSolution(this)">📘 Veure explicació</button>'
-      +'<div class="solution-box" id="solBox">'+miSolutionHtml(currentEx)+'</div></div>';
+      +'<div class="solution-box" id="solBox">'+miSolutionHtml(currentEx)+'</div>'+miTheoryLinkHtml(currentEx.topicId)+'</div>';
   }
   document.getElementById('streakFill').style.width=Math.min(100,(state.correctStreak/goal*100))+'%';
   document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal;
@@ -3928,5 +3928,67 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
 })();
 </script>
+
+<!-- MI_REPASS_TEORIA · enllaç contextual després d'una resposta incorrecta -->
+<script id="mi-review-theory-helper">
+var MI_NAV_THEORY_PAGES = {
+    "patrons": "teoria/algebraic/successions-patrons.html",
+    "expressions": "teoria/algebraic/expressions-algebraiques.html",
+    "identitats": "teoria/algebraic/identitats-notables.html",
+    "factoritzacio": "teoria/algebraic/factoritzacio.html",
+    "equacions2": "teoria/algebraic/equacions-segon-grau.html",
+    "sistemes": "teoria/algebraic/sistemes-equacions.html",
+    "funcions": "teoria/algebraic/concepte-funcio-representacions.html",
+    "funcions8": "teoria/algebraic/funcions-lineals-afins-inversa.html",
+    "quadratica": "teoria/algebraic/funcio-quadratica-parabola.html",
+    "inequacionsA": "teoria/algebraic/inequacions-intervals.html",
+    "discriminantB": "teoria/algebraic/discriminant-equacions-avancades.html",
+    "sistemesC": "teoria/algebraic/sistemes-modelitzacio-avancada.html",
+    "grafiquesD": "teoria/algebraic/analisi-grafiques-avancada.html"
+};
+function miTheoryLinkHtml(topicId,label){
+  var href = MI_NAV_THEORY_PAGES[topicId];
+  if(!href) return '';
+  return '<a class="theory-page-link mi-review-theory-link" href="'+href+'" style="margin:12px 0 0">📚 '+(label||'Repassar la teoria d\'aquest tema')+'</a>';
+}
+</script>
+
+<!-- MI_NAV_BIDIR · dues pestanyes reutilitzables: pràctica ↔ teoria -->
+<script id="mi-nav-bidir-practica">
+(function(){
+  var NOM_PESTANYA_PRACTICA = 'MI_PRACTICA';
+  var NOM_PESTANYA_TEORIA = 'MI_TEORIA';
+  try { window.name = NOM_PESTANYA_PRACTICA; } catch(err) {}
+  function normalitzaUrl(valor){
+    try { var u = new URL(valor, window.location.href); u.hash = ''; return u.href; }
+    catch(err) { return String(valor || ''); }
+  }
+  window.addEventListener('message', function(e){
+    var d = e.data;
+    if(!d || d.type !== 'MI_PRACTICA_GOTO' || !d.url) return;
+    var uDesti;
+    try { uDesti = new URL(d.url, window.location.href); } catch(err) { return; }
+    var uPractica = new URL('sentit-algebraic.html', window.location.href);
+    if(uDesti.protocol !== uPractica.protocol || uDesti.host !== uPractica.host || uDesti.pathname !== uPractica.pathname) return;
+    var desti = normalitzaUrl(uDesti.href), actual = normalitzaUrl(window.location.href);
+    if(desti === actual){ try { window.focus(); } catch(err) {} return; }
+    window.location.href = d.url;
+  });
+  document.addEventListener('click', function(e){
+    if(e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a) return;
+    var href = a.getAttribute('href');
+    if(!href || href.charAt(0) === '#') return;
+    var url;
+    try { url = new URL(href, window.location.href); } catch(err) { return; }
+    if(!/\/teoria\//i.test(url.pathname)) return;
+    e.preventDefault();
+    var pestanya = window.open(url.href, NOM_PESTANYA_TEORIA);
+    if(pestanya){ try { pestanya.focus(); } catch(err) {} }
+  });
+})();
+</script>
+
 </body>
 </html>

@@ -2408,7 +2408,7 @@ function processAnswer(ok,studentAnswer){
       +'<div>Resposta correcta: <b style="color:var(--success)">'+currentEx.correct+'</b></div>'
       +miReviewHtml(currentEx)
       +'<button class="sol-btn" onclick="toggleSolution(this)">📘 Veure explicació</button>'
-      +'<div class="solution-box" id="solBox">'+miSolutionHtml(currentEx)+'</div></div>';
+      +'<div class="solution-box" id="solBox">'+miSolutionHtml(currentEx)+'</div>'+miTheoryLinkHtml(currentEx.topicId)+'</div>';
   }
   document.getElementById('streakFill').style.width=Math.min(100,state.correctStreak/goal*100)+'%';document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal;
   document.getElementById('btnNext').style.display='block';if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
@@ -2774,5 +2774,66 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
 })();
 </script>
+
+<!-- MI_REPASS_TEORIA · enllaç contextual després d'una resposta incorrecta -->
+<script id="mi-review-theory-helper">
+var MI_NAV_THEORY_PAGES = {
+    "dades3r": "teoria/estocastic/variables-poblacio-mostra.html",
+    "taules3r": "teoria/estocastic/taules-frequencies-dades-agrupades.html",
+    "grafics3r": "teoria/estocastic/representacions-grafiques.html",
+    "centralitzacio3r": "teoria/estocastic/mesures-centralitzacio.html",
+    "quartils3r": "teoria/estocastic/quartils-diagrama-caixa.html",
+    "dispersio3r": "teoria/estocastic/dispersio-comparacio.html",
+    "investigacio3r": "teoria/estocastic/investigacio-lectura-critica.html",
+    "probabilitat3r": "teoria/estocastic/probabilitat-experiments-compostos.html",
+    "ampA3r": "teoria/estocastic/comparacio-valors-atipics.html",
+    "ampB3r": "teoria/estocastic/percentils-posicio.html",
+    "ampC3r": "teoria/estocastic/probabilitat-composta-avancada.html",
+    "ampD3r": "teoria/estocastic/dues-variables.html"
+};
+function miTheoryLinkHtml(topicId,label){
+  var href = MI_NAV_THEORY_PAGES[topicId];
+  if(!href) return '';
+  return '<a class="theory-page-link mi-review-theory-link" href="'+href+'" style="margin:12px 0 0">📚 '+(label||'Repassar la teoria d\'aquest tema')+'</a>';
+}
+</script>
+
+<!-- MI_NAV_BIDIR · dues pestanyes reutilitzables: pràctica ↔ teoria -->
+<script id="mi-nav-bidir-practica">
+(function(){
+  var NOM_PESTANYA_PRACTICA = 'MI_PRACTICA';
+  var NOM_PESTANYA_TEORIA = 'MI_TEORIA';
+  try { window.name = NOM_PESTANYA_PRACTICA; } catch(err) {}
+  function normalitzaUrl(valor){
+    try { var u = new URL(valor, window.location.href); u.hash = ''; return u.href; }
+    catch(err) { return String(valor || ''); }
+  }
+  window.addEventListener('message', function(e){
+    var d = e.data;
+    if(!d || d.type !== 'MI_PRACTICA_GOTO' || !d.url) return;
+    var uDesti;
+    try { uDesti = new URL(d.url, window.location.href); } catch(err) { return; }
+    var uPractica = new URL('sentit-estocastic.html', window.location.href);
+    if(uDesti.protocol !== uPractica.protocol || uDesti.host !== uPractica.host || uDesti.pathname !== uPractica.pathname) return;
+    var desti = normalitzaUrl(uDesti.href), actual = normalitzaUrl(window.location.href);
+    if(desti === actual){ try { window.focus(); } catch(err) {} return; }
+    window.location.href = d.url;
+  });
+  document.addEventListener('click', function(e){
+    if(e.defaultPrevented || e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest ? e.target.closest('a[href]') : null;
+    if(!a) return;
+    var href = a.getAttribute('href');
+    if(!href || href.charAt(0) === '#') return;
+    var url;
+    try { url = new URL(href, window.location.href); } catch(err) { return; }
+    if(!/\/teoria\//i.test(url.pathname)) return;
+    e.preventDefault();
+    var pestanya = window.open(url.href, NOM_PESTANYA_TEORIA);
+    if(pestanya){ try { pestanya.focus(); } catch(err) {} }
+  });
+})();
+</script>
+
 </body>
 </html>
