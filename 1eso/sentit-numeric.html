@@ -59,6 +59,21 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .lvb{flex:1;padding:11px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.88rem;font-weight:600;color:var(--muted);transition:all .2s;}
 .lvb.active{border-color:var(--primary);color:var(--primary);background:#eaf1fd;}
 .lvb:hover{border-color:var(--primary);}
+/* Selector del tipus de resposta, alineat amb 2n ESO */
+.mode-select{display:flex;gap:12px;margin-bottom:18px;}
+.mode-btn{flex:1;padding:10px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.85rem;font-weight:600;color:var(--muted);transition:all .2s;}
+.mode-btn.active{border-color:#8b5cf6;color:#8b5cf6;background:#f5f0ff;}
+.open-wrap{margin-bottom:14px;}
+.open-input{width:100%;border:2px solid var(--border);border-radius:12px;padding:13px 14px;font-size:1rem;font-family:inherit;outline:none;transition:border .2s;background:#fff;}
+.open-input:focus{border-color:var(--primary);}
+.open-input.ok{border-color:var(--ok);background:#f1fcf6;}
+.open-input.ko{border-color:var(--err);background:#fff6f6;}
+.open-hint{font-size:.78rem;color:var(--muted);margin:6px 2px 0;line-height:1.45;}
+.math-pad{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px;}
+.math-pad-label{font-size:.75rem;color:var(--muted);margin-right:2px;}
+.math-key{border:1px solid var(--border);background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer;font-weight:700;color:var(--pd);}
+.math-key:hover{border-color:var(--primary);background:#eaf1fd;}
+.btn-check{margin-top:10px;background:#8b5cf6;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:.9rem;font-weight:650;cursor:pointer;width:100%;}
 .exn{font-size:.78rem;color:var(--muted);margin-bottom:4px;}
 .sbw{height:8px;background:var(--border);border-radius:4px;margin-bottom:12px;}
 .sbf{height:8px;background:var(--ok);border-radius:4px;transition:width .4s;}
@@ -403,7 +418,7 @@ Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immed
   <button class="unlock-all-btn" onclick="unlockAllTopics()">&#128275; Desbloquejar tots</button>
   <button class="unlock-reset-btn" id="btnReset" onclick="resetProgress()">&#8630; Reiniciar progrés</button>
 </div>
-<div class="screen" id="sIntro"><div id="introC"></div><div class="lvs"><button class="lvb active" id="bL1" onclick="selLv(1)">&#129513; Nivell 1<br><small>Guiat &middot; 10 encerts</small></button><button class="lvb" id="bL2" onclick="selLv(2)">&#9999;&#65039; Nivell 2<br><small>Sol/a &middot; 20 encerts</small></button></div><button class="bp" onclick="startP()">Comença a practicar &rarr;</button></div>
+<div class="screen" id="sIntro"><div id="introC"></div><div class="lvs"><button class="lvb active" id="bL1" onclick="selLv(1)">&#129513; Nivell 1<br><small>Guiat &middot; 10 encerts</small></button><button class="lvb" id="bL2" onclick="selLv(2)">&#9999;&#65039; Nivell 2<br><small>Sol/a &middot; 20 encerts</small></button></div><div class="mode-select"><button class="mode-btn active" id="bModeMulti" onclick="selMode('multi')">🔘 Opció múltiple</button><button class="mode-btn" id="bModeOpen" onclick="selMode('open')">✍️ Resposta oberta</button></div><button class="bp" onclick="startP()">Comença a practicar &rarr;</button></div>
 <div class="screen" id="sEx">
   <div class="exn" id="exN"></div>
   <div class="slb" id="slb"></div>
@@ -411,6 +426,27 @@ Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immed
   <div class="exq" id="exQ"></div>
   <div class="gs" id="gst" style="display:none"></div>
   <div class="og" id="og"></div>
+  <div class="open-wrap" id="openWrap" style="display:none">
+    <input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();checkOpen();}">
+    <div class="math-pad" aria-label="Teclat matemàtic">
+      <span class="math-pad-label">Escriptura ràpida:</span>
+      <button type="button" class="math-key" onclick="insertMath('openInput','√')">√</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','^')">^</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','²')">²</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','³')">³</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','×')">×</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','÷')">÷</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','/')">/</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','%')">%</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput',',')">,</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','−')">−</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','<')">&lt;</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','>')">&gt;</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','=')">=</button>
+    </div>
+    <div class="open-hint" id="openHint"></div>
+    <button class="btn-check" onclick="checkOpen()">Comprova →</button>
+  </div>
   <div id="fbA"></div>
   <button class="bp" id="bNext" onclick="nextEx()" style="display:none">Següent exercici &rarr;</button>
   <button class="bs" id="bChg" onclick="showHome()" style="display:none">&#8592; Canviar de tema</button>
@@ -3490,7 +3526,7 @@ var TOPICS=[
 var NEEDED={1:10,2:20};
 var state={
   unlockedIds:[],done:[],
-  currentTopic:0,level:1,exCount:0,correctStreak:0,answered:false,
+  currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,
   examQs:[],examIdx:0,examScore:0,examAnswers:[],
   errors:{}
 };
@@ -3679,8 +3715,6 @@ function renderHome(){
   function card(i,isExt){var t=TOPICS[i],unlocked=isExt?true:isUnlocked(i),done=state.done.indexOf(t.id)>=0,errCount=(state.errors[t.id]||[]).length,errTag=errCount?'<span class="errtag">'+errCount+' errors</span>':'';return '<div class="tc '+(unlocked?'':'lk ')+(done?'dn':'')+'" onclick="'+(unlocked?'selTopic('+i+')':'')+'" '+(isExt?'style="border-style:dashed"':'')+'><div class="ti">'+t.icon+'</div><div class="tinfo"><h3>'+t.name+errTag+'</h3><p>'+t.short+'</p></div><span class="tbadge '+(done?'bd':isExt?'be':unlocked?'ba':'bl')+'">'+(done?'&#10003; Fet':isExt?'Ampliació':unlocked?'Practicar':'&#128274;')+'</span></div>';}
   html+=head('📘','Continguts de 1r d\'ESO','Compten per al progrés i poden aparèixer al Mode Examen.','',true);
   core.forEach(function(i){html+=card(i,false);});
-  html+=head('🧩','Pràctica complementària','Problemes oberts de 1r d\'ESO. No compten per al progrés principal.','');
-  html+='<div class="tc p6-special-card" onclick="showAmpHome()" style="border-color:var(--primary)"><div class="ti">🧠</div><div class="tinfo"><h3>Problemes oberts</h3><p>Resposta escrita · passos intermedis · dificultat configurable</p></div><span class="tbadge ba">Problemes</span></div>';
   html+=head('⭐','Ampliació · prepara 2n d\'ESO','Material opcional. No compta per al progrés ni entra al Mode Examen de 1r ESO.','p6-extension');
   extension.forEach(function(i){html+=card(i,true);});
   html+=head('📝','Mode Examen','20 preguntes · tria els blocs curriculars de 1r que vols preparar.','p6-exam');
@@ -3746,6 +3780,8 @@ function selTopic(i){
   document.getElementById('introC').innerHTML=html;
   document.getElementById('bL1').classList.add('active');
   document.getElementById('bL2').classList.remove('active');
+  document.getElementById('bModeMulti').classList.toggle('active',state.mode==='multi');
+  document.getElementById('bModeOpen').classList.toggle('active',state.mode==='open');
   showScreen('sIntro');
 }
 
@@ -3754,6 +3790,87 @@ function clearTopicErrors(i){
 }
 
 function selLv(l){state.level=l;document.getElementById('bL1').classList.toggle('active',l===1);document.getElementById('bL2').classList.toggle('active',l===2);}
+function selMode(m){
+  state.mode=m;
+  document.getElementById('bModeMulti').classList.toggle('active',m==='multi');
+  document.getElementById('bModeOpen').classList.toggle('active',m==='open');
+}
+function stripHtmlOpen(s){var d=document.createElement('div');d.innerHTML=String(s===undefined||s===null?'':s);return d.textContent||d.innerText||'';}
+function normOpenText(s){
+  var t=stripHtmlOpen(s).toLowerCase();
+
+  // Accents: en respostes textuals, «si» i «sí» (o «propia» i «pròpia»)
+  // no s'han de considerar respostes diferents.
+  if(t.normalize)t=t.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+
+  // Separadors i signes equivalents.
+  t=t.replace(/−|–|—/g,'-').replace(/,/g,'.').replace(/≈/g,'').replace(/\s+/g,'');
+
+  // Superíndexs <-> notació amb ^.
+  var supMap={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9'};
+  Object.keys(supMap).forEach(function(k){t=t.split(k).join('^'+supMap[k]);});
+
+  // Arrels: √25, √(25), sqrt(25) i arrel(25) es tracten igual.
+  t=t.replace(/sqrt\s*\(([^()]+)\)/g,'√$1').replace(/sqrt/g,'√');
+  t=t.replace(/arrelquadrada\s*\(([^()]+)\)/g,'√$1').replace(/arrel\s*\(([^()]+)\)/g,'√$1');
+  while(/√\([^()]+\)/.test(t))t=t.replace(/√\(([^()]+)\)/g,'√$1');
+
+  // Multiplicació: ×, ·, ⋅, *, x o X són equivalents quan fan d'operador.
+  // Ho limitem a contextos matemàtics per no tocar la x de paraules com «exacta».
+  t=t.replace(/([0-9)])[×·⋅*x](?=[0-9(])/g,'$1×');
+
+  // Divisió: /, : i ÷ són equivalents quan separen nombres/expressions.
+  // Això també permet, si s'escriu amb teclat, usar 8:2 en lloc de 8/2.
+  t=t.replace(/([0-9)])[:÷](?=[0-9(])/g,'$1/');
+
+  // Algunes unitats habituals: no penalitzem canvis purament tipogràfics.
+  t=t.replace(/€/g,'euros');
+  t=t.replace(/euro$/,'euros');
+  t=t.replace(/°c?$/,'graus');
+  t=t.replace(/grau$/,'graus');
+  t=t.replace(/grams?$/,'g');
+  t=t.replace(/kilometres?$/,'km').replace(/quilometres?$/,'km');
+
+  return t.trim();
+}
+function plainOpenNumber(s){var n=normOpenText(s);if(!/^-?\d+(?:\.\d+)?$/.test(n))return null;var v=Number(n);return Number.isFinite(v)?v:null;}
+function rationalOpenValue(s){
+  var n=normOpenText(s),m=n.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/);
+  if(m){var d=Number(m[2]);return d!==0?Number(m[1])/d:null;}
+  m=n.match(/^(-?\d+(?:\.\d+)?)%$/);if(m)return Number(m[1])/100;
+  return plainOpenNumber(s);
+}
+function strictOpenForm(ex){
+  if(!ex||!ex.question)return false;
+  var q=stripHtmlOpen(ex.question).toLowerCase().replace(/\s+/g,' ');
+  return /percentatge|fracci[oó]|decimal|arrodoneix|notaci[oó] cient[ií]fica|factoritza|descompon|quin signe|ordena/.test(q);
+}
+function openOk1(correct,value,ex){
+  var nv=normOpenText(value),nt=normOpenText(correct);
+  if(nv===nt)return true;
+  var a=plainOpenNumber(value),b=plainOpenNumber(correct);
+  if(a!==null&&b!==null&&Math.abs(a-b)<1e-9)return true;
+  if(!strictOpenForm(ex)){
+    var x=rationalOpenValue(value),y=rationalOpenValue(correct);
+    if(x!==null&&y!==null&&Number.isFinite(x)&&Number.isFinite(y)&&Math.abs(x-y)<1e-9)return true;
+  }
+  return false;
+}
+function openHint1(ex){
+  var q=stripHtmlOpen(ex&&ex.question||'').toLowerCase();
+  if(q.indexOf('percent')>=0)return 'Escriu el percentatge en la forma demanada. Pots utilitzar el símbol %.';
+  if(q.indexOf('fracci')>=0)return 'Si cal una fracció, escriu-la amb una barra, per exemple 3/4.';
+  if(q.indexOf('signe')>=0||q.indexOf('ordena')>=0)return 'Pots utilitzar els símbols <, > i =.';
+  if(q.indexOf('decimal')>=0)return 'Pots utilitzar coma o punt decimal.';
+  if(q.indexOf('arrel')>=0||q.indexOf('operació inversa')>=0)return 'Pots utilitzar el símbol √; per exemple, √25 = 5.';
+  if(q.indexOf('potència')>=0||q.indexOf('exponent')>=0)return 'Pots escriure la potència amb ^ o amb superíndexs, per exemple 6^2 o 6².';
+  return 'Escriu la resposta en la forma demanada. Per multiplicar pots usar ×, ·, * o x; per dividir, /, : o ÷.';
+}
+function insertMath(inputId,text){
+  var inp=document.getElementById(inputId);if(!inp||inp.disabled)return;
+  var a=typeof inp.selectionStart==='number'?inp.selectionStart:inp.value.length,b=typeof inp.selectionEnd==='number'?inp.selectionEnd:a;
+  inp.value=inp.value.slice(0,a)+text+inp.value.slice(b);var p=a+text.length;inp.focus();try{inp.setSelectionRange(p,p);}catch(e){}
+}
 function resetVariationBagForTopic(topicId){
   if(topicId==='divis'){divisibilitatBag=[];lastDivisibilitatType=null;}
   else if(topicId==='mcmmcd'){mcmMcdBag=[];lastMcmMcdType=null;}
@@ -3779,16 +3896,36 @@ function showEx(){
   var gs=document.getElementById('gst');
   if(state.level===1){gs.style.display='block';gs.innerHTML='<h4>&#128161; Pistes:</h4>'+(currentEx.guide||[]).map(function(s){return '&bull; '+s;}).join('<br>');}
   else{gs.style.display='none';}
-  document.getElementById('og').innerHTML=currentEx.options.map(function(o,i){return '<button class="ob" onclick="selAns('+i+',this)">'+o+'</button>';}).join('');
+  if(state.mode==='open'){
+    document.getElementById('og').innerHTML='';
+    document.getElementById('openWrap').style.display='block';
+    var inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';
+    document.getElementById('openHint').textContent=openHint1(currentEx);
+    setTimeout(function(){inp.focus();},60);
+  }else{
+    document.getElementById('openWrap').style.display='none';
+    document.getElementById('og').innerHTML=currentEx.options.map(function(o,i){return '<button class="ob" onclick="selAns('+i+',this)">'+o+'</button>';}).join('');
+  }
   document.getElementById('fbA').innerHTML='';
   document.getElementById('bNext').style.display='none';document.getElementById('bChg').style.display='none';
   showScreen('sEx');
 }
 function selAns(idx,btn){
-  if(state.answered)return;state.answered=true;
+  if(state.answered)return;
   var ans=currentEx.options[idx],isOk=String(ans)===String(currentEx.correct);
   document.querySelectorAll('.ob').forEach(function(b){b.disabled=true;if(String(b.textContent)===String(currentEx.correct))b.classList.add('correct');});
   if(!isOk)btn.classList.add('wrong');
+  processPracticeAnswer(isOk,ans);
+}
+function checkOpen(){
+  if(state.answered)return;
+  var inp=document.getElementById('openInput'),val=inp.value.trim();if(!val)return;
+  var ok=openOk1(currentEx.correct,val,currentEx);
+  inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');
+  processPracticeAnswer(ok,val);
+}
+function processPracticeAnswer(isOk,studentAnswer){
+  state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
   var fb=document.getElementById('fbA');
   if(isOk){
@@ -3798,11 +3935,18 @@ function selAns(idx,btn){
     if(state.correctStreak>=NEEDED[state.level])markDone();
   } else {
     state.correctStreak=0;updateSBar();
-    registerError(currentEx,ans,'practice');
-    fb.innerHTML='<div class="fb ko"><h4>&#10060; Incorrecte</h4>La resposta era: <b>'+currentEx.correct+'</b><br>'+miReviewHtml(currentEx)+'<b>📘 Resolució pas a pas:</b>'+solHTML+miTheoryLinkHtml(currentEx.topicId)+'</div>';
+    registerError(currentEx,studentAnswer,'practice');
+    fb.innerHTML='<div class="fb ko"><h4>&#10060; Incorrecte</h4>La teva resposta: <b>'+escHtml(studentAnswer||'—')+'</b><br>La resposta era: <b>'+currentEx.correct+'</b><br>'+miReviewHtml(currentEx)+'<b>📘 Resolució pas a pas:</b>'+solHTML+miTheoryLinkHtml(currentEx.topicId)+'</div>';
   }
-  document.getElementById('bNext').style.display='block';
+  var nextBtn=document.getElementById('bNext');
+  nextBtn.style.display='block';
   if(state.exCount>=3)document.getElementById('bChg').style.display='block';
+  // Usabilitat amb teclat: després de comprovar, el focus passa a «Següent exercici».
+  // Així Enter/Return avança sense necessitat d'utilitzar el ratolí.
+  setTimeout(function(){
+    try{nextBtn.focus({preventScroll:true});}
+    catch(e){nextBtn.focus();}
+  },40);
 }
 function markDone(){var t=TOPICS[state.currentTopic],tid=t.id;if(state.done.indexOf(tid)<0){state.done.push(tid);if(t.course==="1r"){var n=nextCoreIndex(state.currentTopic);if(n>=0&&!isUnlocked(n))state.unlockedIds.push(TOPICS[n].id);}saveState();}}
 function nextEx(){

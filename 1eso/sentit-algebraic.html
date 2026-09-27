@@ -115,6 +115,12 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:poin
 .btn-check{width:100%;margin-top:8px;background:#8b5cf6;color:white;border:none;border-radius:12px;padding:12px;font-size:0.93rem;font-weight:600;cursor:pointer;}
 .btn-check:hover{background:#7c3aed;}
 .open-hint{font-size:0.77rem;color:var(--muted);margin-top:5px;}
+.math-pad{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:8px 0 2px;}
+.math-pad-label{font-size:.75rem;color:var(--muted);margin-right:2px;}
+.math-key{min-width:40px;height:36px;padding:0 10px;border:1px solid var(--border);border-radius:9px;background:var(--card);color:var(--text);font-size:.95rem;font-weight:700;cursor:pointer;box-shadow:0 1px 3px rgba(0,0,0,.04);}
+.math-key:hover{border-color:var(--primary);color:var(--primary);background:#fff8f4;}
+.math-key:active{transform:translateY(1px);}
+@media(max-width:600px){.math-pad{gap:5px}.math-key{min-width:38px;height:38px;padding:0 9px;font-size:1rem}.math-pad-label{width:100%;margin-bottom:1px}}
 
 .feedback-box{border-radius:12px;padding:14px 16px;margin-bottom:14px;font-size:0.88rem;line-height:1.6;}
 .feedback-box.ok{background:#e6f9ef;border:1px solid #a0e6c0;color:#1a7a4a;}
@@ -434,7 +440,23 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 <div class="guide-steps" id="guideSteps" style="display:none"></div>
 <div class="options-grid" id="optionsGrid"></div>
 <div class="open-wrap" id="openWrap" style="display:none">
-<input autocomplete="off" autocorrect="off" class="open-input" id="openInput" placeholder="Escriu la teva resposta aquí…" spellcheck="false" type="text"/>
+<input autocomplete="off" autocorrect="off" class="open-input" id="openInput" placeholder="Escriu la teva resposta aquí…" spellcheck="false" type="text" onkeydown="if(event.key==='Enter'){event.preventDefault();checkOpen();}"/>
+<div class="math-pad" id="openMathPad" aria-label="Teclat algebraic">
+<span class="math-pad-label">Escriptura ràpida:</span>
+<button type="button" class="math-key" onclick="insertMath('openInput','x')">x</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','x²')">x²</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','x³')">x³</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','²')">²</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','³')">³</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','+')">+</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','−')">−</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','×')">×</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','÷')">÷</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','/')">/</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','=')">=</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','(')">(</button>
+<button type="button" class="math-key" onclick="insertMath('openInput',')')">)</button>
+</div>
 <div class="open-hint" id="openHint"></div>
 <button class="btn-check" onclick="checkOpen()">Comprova →</button>
 </div>
@@ -521,12 +543,22 @@ function norm(s){
     .replace(/^x=/,'')
     .replace(/,/g,'.')
     .replace(/[−–—]/g,'-')
-    .replace(/[×*]/g,'·')
-    // Formes equivalents habituals en resposta oberta: 4·x = 4x, x·4 = 4x.
+    .replace(/[×*⋅]/g,'·')
+    .replace(/[÷:]/g,'/')
+    // En context algebraic, X majúscula és la mateixa variable x.
+    .replace(/X/g,'x')
+    // Formes equivalents habituals: 4·x = 4x, x·4 = 4x.
     .replace(/^(-?\d+(?:\.\d+)?)·x$/,'$1x')
     .replace(/^x·(-?\d+(?:\.\d+)?)$/,'$1x')
     .replace(/^1x$/,'x').replace(/^-1x$/,'-x')
     .replace(/\^(\d)/g,(m,d)=>superDigits[+d]||m);
+}
+function insertMath(inputId,text){
+  const inp=document.getElementById(inputId);if(!inp||inp.disabled)return;
+  const a=typeof inp.selectionStart==='number'?inp.selectionStart:inp.value.length;
+  const b=typeof inp.selectionEnd==='number'?inp.selectionEnd:a;
+  inp.value=inp.value.slice(0,a)+text+inp.value.slice(b);
+  const p=a+text.length;inp.focus();try{inp.setSelectionRange(p,p);}catch(e){}
 }
 function openOk(correct, alts, input){
   const ni=norm(input);
@@ -1929,6 +1961,16 @@ function algRenderOpenResult(){
 }
 function algGenerateExamProblems(n,topicIds){return algPickProblems(n,'mix',0,topicIds);}
 
+function algIntegratedOpenExercise(topicId){
+  const picked=algPickProblems(1,'mix',0,[topicId]);
+  if(!picked.length)return null;
+  const p=picked[0];
+  return {
+    topicId:p.topicId,type:p.patternId,question:p.question,correct:p.answer.val,alts:[],options:[],
+    guide:[...(p.hint||[])],solution:[...(p.solution||[])],isProblem:true,
+    _openAnswerCheck:p.answer.check
+  };
+}
 
 /* ── ESTAT ──────────────────────────────────────────────────── */
 let state={unlockedIds:[],done:[],errors:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
@@ -2050,10 +2092,9 @@ function renderHome(){
   coreIndexes.forEach(i=>{html+=topicCard(i,false);});
 
   const coreUnlocked=coreIndexes.filter(i=>isTopicUnlocked(i)).length;
-  if(coreUnlocked>=1){
+  if(coreUnlocked>=5){
     html+=head('🧩','Pràctica complementària','Activitats opcionals de 1r d\'ESO. No compten per al progrés principal.','');
-    html+='<div class="topic-card p6-special-card" onclick="startAlgebraProblems()" style="border-color:var(--primary)"><div class="topic-icon">✍️</div><div class="topic-info"><h3>Problemes oberts</h3><p>42 patrons · llenguatge, patrons, expressions, equacions i algorismes</p></div><span class="topic-badge badge-active">Problemes</span></div>';
-    if(coreUnlocked>=5)html+='<div class="topic-card p6-special-card" onclick="showApps()" style="border-color:#8b5cf6"><div class="topic-icon">🌍</div><div class="topic-info"><h3>Aplicacions Reals</h3><p>Calculadora d\'equacions, successió i valor numèric</p></div><span class="topic-badge badge-app">Eines</span></div>';
+    html+='<div class="topic-card p6-special-card" onclick="showApps()" style="border-color:#8b5cf6"><div class="topic-icon">🌍</div><div class="topic-info"><h3>Aplicacions Reals</h3><p>Calculadora d\'equacions, successió i valor numèric</p></div><span class="topic-badge badge-app">Eines</span></div>';
   }
 
   html+=head('⭐','Ampliació · prepara 2n d\'ESO','Material opcional. No compta per al progrés ni entra al Mode Examen de 1r ESO.','p6-extension');
@@ -2214,7 +2255,8 @@ function startPractice(){state.exCount=0;state.correctStreak=0;showExercise();}
 
 function showExercise(){
   state.answered=false;
-  currentEx=TOPICS[state.currentTopic].gen();
+  const topic=TOPICS[state.currentTopic];
+  currentEx=(state.mode==='open'&&topic.course==='1r')?(algIntegratedOpenExercise(topic.id)||topic.gen()):topic.gen();
   state.exCount++;
   const goal=state.level===1?10:20;
   document.getElementById('streakFill').style.width=Math.min(100,(state.correctStreak/goal*100))+'%';
@@ -2228,7 +2270,7 @@ function showExercise(){
     document.getElementById('optionsGrid').innerHTML='';
     document.getElementById('openWrap').style.display='block';
     const inp=document.getElementById('openInput');inp.value='';inp.className='open-input';inp.disabled=false;
-    document.getElementById('openHint').textContent='Pots escriure el número o "x = ..."';
+    document.getElementById('openHint').textContent='Escriu la resposta final. S’accepten formes equivalents habituals d’escriptura.';
     setTimeout(()=>inp.focus(),80);
   } else {
     document.getElementById('openWrap').style.display='none';
@@ -2245,7 +2287,7 @@ function checkOpen(){
   const inp=document.getElementById('openInput');
   const val=inp.value.trim();
   if(!val)return;
-  const ok=openOk(currentEx.correct,currentEx.alts,val);
+  const ok=typeof currentEx._openAnswerCheck==='function'?currentEx._openAnswerCheck(val):openOk(currentEx.correct,currentEx.alts,val);
   inp.className='open-input '+(ok?'ok':'ko');
   inp.disabled=true;
   processAnswer(ok,val);
@@ -2281,6 +2323,7 @@ function processAnswer(ok,studentAnswer){
   document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal;
   document.getElementById('btnNext').style.display='block';
   if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
+  setTimeout(()=>{const b=document.getElementById('btnNext');if(b&&b.style.display!=='none')b.focus();},40);
 }
 
 function toggleSolution(btn){const box=document.getElementById('solBox');box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'Amagar solució':'Veure solució pas a pas';}

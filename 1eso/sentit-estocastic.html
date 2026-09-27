@@ -79,6 +79,20 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .level-btn{flex:1;padding:11px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:0.88rem;font-weight:600;color:var(--muted);transition:all 0.2s;}
 .level-btn.active{border-color:var(--primary);color:var(--primary);background:#fff6e5;}
 .level-btn:hover{border-color:var(--primary);}
+.mode-select{display:flex;gap:12px;margin-bottom:18px;}
+.mode-btn{flex:1;padding:10px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.85rem;font-weight:600;color:var(--muted);transition:all .2s;}
+.mode-btn.active{border-color:#8b5cf6;color:#8b5cf6;background:#f5f0ff;}
+.open-wrap{margin-bottom:14px;}
+.open-input{width:100%;border:2px solid var(--border);border-radius:12px;padding:13px 14px;font-size:1rem;font-family:inherit;outline:none;transition:border .2s;background:#fff;}
+.open-input:focus{border-color:var(--primary);}
+.open-input.ok{border-color:var(--success);background:#f1fcf6;}
+.open-input.ko{border-color:var(--error);background:#fff6f6;}
+.open-hint{font-size:.78rem;color:var(--muted);margin:6px 2px 0;line-height:1.45;}
+.math-pad{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px;}
+.math-pad-label{font-size:.75rem;color:var(--muted);margin-right:2px;}
+.math-key{border:1px solid var(--border);background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer;font-weight:700;color:var(--primary-dark);}
+.math-key:hover{border-color:var(--primary);background:#fff6e5;}
+.btn-check{margin-top:10px;background:#8b5cf6;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:.9rem;font-weight:650;cursor:pointer;width:100%;}
 .ex-header .ex-num{font-size:0.78rem;color:var(--muted);margin-bottom:4px;}
 .streak-bar-wrap{height:8px;background:var(--border);border-radius:4px;margin-bottom:12px;}
 .streak-bar-fill{height:8px;background:var(--success);border-radius:4px;transition:width 0.4s;}
@@ -382,6 +396,10 @@ El bloc principal correspon a <strong>1r d'ESO</strong>. Les freqüències acumu
 <button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Nivell 1<br/><small>Guiat · 10 encerts</small></button>
 <button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Nivell 2<br/><small>Sol/a · 20 encerts</small></button>
 </div>
+<div class="mode-select">
+<button class="mode-btn active" id="btnModeA" onclick="selectMode('multi')">🔘 Opció múltiple</button>
+<button class="mode-btn" id="btnModeB" onclick="selectMode('open')">✍️ Resposta oberta</button>
+</div>
 <button class="btn-primary" onclick="startPractice()">Comença a practicar →</button>
 </div>
 <div class="screen" id="screenExercise">
@@ -393,6 +411,21 @@ El bloc principal correspon a <strong>1r d'ESO</strong>. Les freqüències acumu
 <div class="ex-question" id="exQuestion"></div>
 <div class="guide-steps" id="guideSteps" style="display:none"></div>
 <div class="options-grid" id="optionsGrid"></div>
+<div class="open-wrap" id="openWrap" style="display:none">
+<input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();checkIntegratedOpen();}">
+<div class="math-pad" aria-label="Teclat matemàtic">
+<span class="math-pad-label">Escriptura ràpida:</span>
+<button type="button" class="math-key" onclick="insertMath('openInput','%')">%</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','/')">/</button>
+<button type="button" class="math-key" onclick="insertMath('openInput',':')">:</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','°')">°</button>
+<button type="button" class="math-key" onclick="insertMath('openInput',',')">,</button>
+<button type="button" class="math-key" onclick="insertMath('openInput',';')">;</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','=')">=</button>
+</div>
+<div class="open-hint" id="openHint"></div>
+<button class="btn-check" onclick="checkIntegratedOpen()">Comprova →</button>
+</div>
 <div id="feedbackArea"></div>
 <button class="btn-primary" id="btnNext" onclick="nextExercise()" style="display:none">Següent exercici →</button>
 <button class="btn-secondary" id="btnChangeTopic" onclick="showHome()" style="display:none">← Canviar de tema</button>
@@ -2012,8 +2045,9 @@ var TOPICS=[
 
 // ── STATE ────────────────────────────────────
 var NEEDED={1:10,2:20};
-var state={unlockedIds:[],done:[],errors:[],currentTopic:0,level:1,exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
+var state={unlockedIds:[],done:[],errors:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
 var currentEx=null;
+var stIntegratedOpenBag={};
 
 function isTopicUnlocked(i){return state.unlockedIds.indexOf(TOPICS[i].id)>=0;}
 
@@ -2302,13 +2336,19 @@ function stEligiblePatterns(family,diff,topicIds,examOnly){var allowed=new Set(t
 function stPickProblems(n,family,diff,topicIds,examOnly){family=family||'mix';diff=diff||0;var allowedIds=topicIds||stUnlockedCoreIds(),allowed=new Set(allowedIds);var pool=stEligiblePatterns(family,diff,allowedIds,!!examOnly);if(!pool.length)return [];var chosen=[],used=new Set(),lastFamily=null,tries=0;while(chosen.length<n&&used.size<pool.length&&tries<3000){tries++;var candidates=pool.filter(function(p){return !used.has(p.id)&&(p.family!==lastFamily||pool.filter(function(x){return !used.has(x.id)&&x.family!==lastFamily;}).length===0);});if(!candidates.length)break;var pat=candidates[rnd(0,candidates.length-1)],prob;try{prob=pat.gen();}catch(e){continue;}if(!prob||!allowed.has(prob.topicId))continue;used.add(pat.id);lastFamily=pat.family;chosen.push(prob);}while(chosen.length<n&&pool.length&&tries<5000){tries++;var pat2=pool[rnd(0,pool.length-1)],prob2;try{prob2=pat2.gen();}catch(e){continue;}if(prob2&&allowed.has(prob2.topicId))chosen.push(prob2);}return chosen;}
 function stRenderOpenHome(){stOpenSession.active=true;var unlocked=new Set(stUnlockedCoreIds()),families=ST_OPEN_FAMILIES.filter(function(f){if(f.id==='mix')return true;if(f.id==='construccio')return unlocked.has('barres')||unlocked.has('sectors')||unlocked.has('poligons');if(f.id==='grafics')return unlocked.has('barres')||unlocked.has('sectors')||unlocked.has('poligons');if(f.id==='central')return unlocked.has('mitjana')||unlocked.has('mediana')||unlocked.has('moda');return unlocked.has(f.id);});document.getElementById('stOpenHome').innerHTML='<div class="home-header"><h2>✍️ Problemes oberts i construcció</h2><p>Sentit Estocàstic · 1r ESO · Interpreta dades, decideix i justifica</p></div><div class="intro-card"><p>Aquí no tries entre quatre opcions: calcula o escriu la resposta final. També hi ha reptes per construir gràfics. Les pistes expliquen el mètode, però la solució completa només apareix després de comprovar. Els problemes numèrics i d’interpretació poden aparèixer al Mode Examen.</p></div><div class="st-open-toolbar"><select id="stOpenFamily">'+families.map(function(f){return '<option value="'+f.id+'" '+(stOpenCfg.family===f.id?'selected':'')+'>'+f.icon+' '+f.name+'</option>';}).join('')+'</select><select id="stOpenN"><option value="5" '+(stOpenCfg.nq===5?'selected':'')+'>5 problemes</option><option value="10" '+(stOpenCfg.nq===10?'selected':'')+'>10 problemes</option><option value="15" '+(stOpenCfg.nq===15?'selected':'')+'>15 problemes</option></select><select id="stOpenDiff"><option value="0">Totes les dificultats</option><option value="1">Bàsic</option><option value="2">Mitjà</option></select></div><button class="btn-primary" onclick="stStartOpenSession()">Comença →</button><button class="btn-secondary" onclick="stExitOpenProblems()">← Tornar al Sentit Estocàstic</button>';showScreen('screenOpenHome');}
 function startStochasticProblems(){document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Problemes oberts · Sentit Estocàstic';stRenderOpenHome();}
+function startStochasticConstruction(){
+  document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Construeix gràfics · Sentit Estocàstic';
+  var probs=stPickProblems(5,'construccio',0,null,false);
+  if(!probs.length){alert('Desbloqueja primer algun dels blocs de gràfics per utilitzar aquesta activitat.');return;}
+  stOpenSession={active:true,problems:probs,idx:0,correct:0,answered:false};stRenderOpenProblem();showScreen('screenOpenProblem');
+}
 function stExitOpenProblems(){stOpenSession.active=false;showHome();}
 function stStartOpenSession(){stOpenCfg.family=document.getElementById('stOpenFamily').value;stOpenCfg.nq=Number(document.getElementById('stOpenN').value);stOpenCfg.diff=Number(document.getElementById('stOpenDiff').value);var probs=stPickProblems(stOpenCfg.nq,stOpenCfg.family,stOpenCfg.diff,null,false);if(!probs.length){alert('No hi ha problemes amb aquesta selecció. Prova una altra família o dificultat.');return;}stOpenSession={active:true,problems:probs,idx:0,correct:0,answered:false};stRenderOpenProblem();showScreen('screenOpenProblem');}
 function stRenderOpenProblem(){var p=stOpenSession.problems[stOpenSession.idx];stOpenSession.answered=false;stConstructEx=p;stConstructCurrent=p.target?p.target.map(function(){return 0;}):[];document.getElementById('stOpenProblem').innerHTML='<div class="st-open-card"><div class="st-open-meta">Problema '+(stOpenSession.idx+1)+'/'+stOpenSession.problems.length+' · '+stTopicName(p.topicId)+' <span class="st-open-family">'+stFamilyName(p.family)+'</span><span class="st-open-diff">'+stDiffLabel(p.diff)+'</span></div><div class="st-open-q">'+p.question+'</div>'+(p.visual?'<div class="ex-visual">'+p.visual+'</div>':'')+'</div><button class="btn-secondary" id="stHintBtn" onclick="stToggleHint()" style="margin-bottom:8px">💡 Mostrar pista</button><div class="st-open-hint" id="stOpenHint">'+(p.hint||[]).map(function(h){return '• '+h;}).join('<br>')+'</div><div id="stOpenAnswer"></div><div id="stOpenFeedback"></div><button class="btn-primary" id="stOpenCheck" onclick="stCheckOpen()">Comprova ✓</button><button class="btn-primary" id="stOpenNext" onclick="stNextOpen()" style="display:none">Següent problema →</button><button class="btn-secondary" onclick="stRenderOpenHome()">← Canviar configuració</button>';
-  if(p.kind==='construct')stRenderConstruct(p,false);else if(p.kind==='pie')stRenderPieInputs(p);else document.getElementById('stOpenAnswer').innerHTML='<input class="st-open-input" id="stOpenInput" type="text" placeholder="Escriu la resposta final…" autocomplete="off" spellcheck="false">';
+  if(p.kind==='construct')stRenderConstruct(p,false);else if(p.kind==='pie')stRenderPieInputs(p);else document.getElementById('stOpenAnswer').innerHTML='<input class="st-open-input" id="stOpenInput" type="text" placeholder="Escriu la resposta final…" autocomplete="off" spellcheck="false" onkeydown="if(event.key===&quot;Enter&quot;){event.preventDefault();stCheckOpen();}">';
 }
 function stToggleHint(){var b=document.getElementById('stOpenHint'),btn=document.getElementById('stHintBtn');b.classList.toggle('show');btn.textContent=b.classList.contains('show')?'🙈 Amagar pista':'💡 Mostrar pista';}
-function stCheckOpen(){if(stOpenSession.answered)return;var p=stOpenSession.problems[stOpenSession.idx],val=stStudentOpenValue(p);if((p.kind==='input'||!p.kind)&&!val)return;var ok=stEvaluateOpen(p);stOpenSession.answered=true;if(ok)stOpenSession.correct++;var inp=document.getElementById('stOpenInput');if(inp){inp.disabled=true;inp.className='st-open-input '+(ok?'ok':'ko');}document.querySelectorAll('.st-pie-input').forEach(function(x){x.disabled=true;});var correct=p.answer?p.answer.val:stConstructCorrectText(p),errObj={topicId:p.topicId,topicName:stTopicName(p.topicId),type:p.patternId,question:p.question,visual:p.visual||'',correct:correct,options:[],guide:(p.hint||[]).slice(),solution:(p.solution||[]).slice()};if(!ok)registerError(errObj,val,'open');if((p.kind==='construct')&&!ok)stRenderConstruct(p,true);document.getElementById('stOpenFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'+(ok?'':'Resposta correcta: <b>'+correct+'</b>'+miReviewHtml(errObj))+'<div class="st-open-solution">'+(p.solution||[]).map(function(s,i){return '<div><b>Pas '+(i+1)+':</b> '+s+'</div>';}).join('')+'</div>'+(ok?'':miTheoryLinkHtml(p.topicId))+'</div>';document.getElementById('stOpenCheck').style.display='none';document.getElementById('stOpenNext').style.display='block';document.getElementById('stOpenNext').textContent=stOpenSession.idx+1<stOpenSession.problems.length?'Següent problema →':'Veure resultat';}
+function stCheckOpen(){if(stOpenSession.answered)return;var p=stOpenSession.problems[stOpenSession.idx],val=stStudentOpenValue(p);if((p.kind==='input'||!p.kind)&&!val)return;var ok=stEvaluateOpen(p);stOpenSession.answered=true;if(ok)stOpenSession.correct++;var inp=document.getElementById('stOpenInput');if(inp){inp.disabled=true;inp.className='st-open-input '+(ok?'ok':'ko');}document.querySelectorAll('.st-pie-input').forEach(function(x){x.disabled=true;});var correct=p.answer?p.answer.val:stConstructCorrectText(p),errObj={topicId:p.topicId,topicName:stTopicName(p.topicId),type:p.patternId,question:p.question,visual:p.visual||'',correct:correct,options:[],guide:(p.hint||[]).slice(),solution:(p.solution||[]).slice()};if(!ok)registerError(errObj,val,'open');if((p.kind==='construct')&&!ok)stRenderConstruct(p,true);document.getElementById('stOpenFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'+(ok?'':'Resposta correcta: <b>'+correct+'</b>'+miReviewHtml(errObj))+'<div class="st-open-solution">'+(p.solution||[]).map(function(s,i){return '<div><b>Pas '+(i+1)+':</b> '+s+'</div>';}).join('')+'</div>'+(ok?'':miTheoryLinkHtml(p.topicId))+'</div>';document.getElementById('stOpenCheck').style.display='none';document.getElementById('stOpenNext').style.display='block';document.getElementById('stOpenNext').textContent=stOpenSession.idx+1<stOpenSession.problems.length?'Següent problema →':'Veure resultat';setTimeout(function(){document.getElementById('stOpenNext').focus();},40);}
 function stNextOpen(){stOpenSession.idx++;if(stOpenSession.idx<stOpenSession.problems.length){stRenderOpenProblem();return;}stRenderOpenResult();}
 function stRenderOpenResult(){var total=stOpenSession.problems.length,pct=Math.round(stOpenSession.correct/total*100),emoji=pct>=90?'🏆':pct>=70?'👍':'💪';document.getElementById('stOpenResult').innerHTML='<div class="home-header"><h2>'+emoji+' Resultat</h2><p>Problemes oberts · Sentit Estocàstic</p></div><div class="st-open-summary"><div class="big">'+stOpenSession.correct+'/'+total+'</div><p>'+pct+'% d’encerts</p></div><button class="btn-primary" onclick="stStartOpenSession()">Repetir configuració</button><button class="btn-secondary" onclick="stRenderOpenHome()">Canviar configuració</button><button class="btn-secondary" onclick="stExitOpenProblems()">Tornar al menú</button>';showScreen('screenOpenResult');}
 function stGenerateExamProblems(n,topicIds){return stPickProblems(n,'mix',0,topicIds,true);}
@@ -2377,7 +2417,7 @@ function renderHome(){
   var coreUnlocked=coreIndexes.filter(function(i){return isTopicUnlocked(i);}).length;
   if(coreUnlocked>=1){
     html+=head('🧩','Pràctica complementària','Activitats opcionals de 1r d\'ESO. No compten per al progrés principal.','');
-    html+='<div class="topic-card p6-special-card" onclick="startStochasticProblems()" style="border-color:#7c5cbf"><div class="topic-icon">✍️</div><div class="topic-info"><h3>Problemes oberts i construcció</h3><p>49 patrons · inferència, taules, gràfics, centralització i probabilitat</p></div><span class="topic-badge badge-extension">Oberts</span></div>';
+    html+='<div class="topic-card p6-special-card" onclick="startStochasticConstruction()" style="border-color:#7c5cbf"><div class="topic-icon">📊</div><div class="topic-info"><h3>Construeix gràfics</h3><p>Reptes interactius per construir barres, polígons i sectors</p></div><span class="topic-badge badge-extension">Construcció</span></div>';
   }
   html+=head('⭐','Ampliació · prepara 2n d\'ESO','Material opcional. No compta per al progrés ni entra al Mode Examen de 1r ESO.','p6-extension');
   extensionIndexes.forEach(function(i){html+=topicCard(i,true);});
@@ -2479,7 +2519,7 @@ function miTheoryLinkHtml(topicId,label){
 }
 
 function selectTopic(i){
-  state.currentTopic=i;state.level=1;state.exCount=0;state.correctStreak=0;
+  state.currentTopic=i;state.level=1;state.mode='multi';state.exCount=0;state.correctStreak=0;
   var t=TOPICS[i];
   document.getElementById('navBack').style.display='block';
   document.getElementById('navTitle').textContent=t.name;
@@ -2508,6 +2548,8 @@ function selectTopic(i){
   document.getElementById('introContent').innerHTML=html;
   document.getElementById('btnLvl1').classList.add('active');
   document.getElementById('btnLvl2').classList.remove('active');
+  document.getElementById('btnModeA').classList.add('active');
+  document.getElementById('btnModeB').classList.remove('active');
   showScreen('screenIntro');
 }
 
@@ -2516,9 +2558,34 @@ function selectLevel(l){
   document.getElementById('btnLvl1').classList.toggle('active',l===1);
   document.getElementById('btnLvl2').classList.toggle('active',l===2);
 }
+function selectMode(m){
+  state.mode=m;
+  document.getElementById('btnModeA').classList.toggle('active',m==='multi');
+  document.getElementById('btnModeB').classList.toggle('active',m==='open');
+}
+function insertMath(inputId,text){
+  var inp=document.getElementById(inputId);if(!inp||inp.disabled)return;
+  var a=typeof inp.selectionStart==='number'?inp.selectionStart:inp.value.length,b=typeof inp.selectionEnd==='number'?inp.selectionEnd:a;
+  inp.value=inp.value.slice(0,a)+text+inp.value.slice(b);var pos=a+text.length;inp.focus();try{inp.setSelectionRange(pos,pos);}catch(e){}
+}
+function stNextIntegratedOpen(topicId){
+  var pool=ST_OPEN_PATTERNS.filter(function(p){return p.topicId===topicId&&p.family!=='construccio';});
+  if(!pool.length)return null;
+  if(!Array.isArray(stIntegratedOpenBag[topicId])||!stIntegratedOpenBag[topicId].length){stIntegratedOpenBag[topicId]=shuffle(pool.map(function(p){return p.id;}));}
+  var tries=0;
+  while(tries<pool.length+5){
+    tries++;if(!stIntegratedOpenBag[topicId].length)stIntegratedOpenBag[topicId]=shuffle(pool.map(function(p){return p.id;}));
+    var id=stIntegratedOpenBag[topicId].pop(),pat=pool.find(function(p){return p.id===id;}),prob=null;
+    try{prob=pat&&pat.gen?pat.gen():null;}catch(e){prob=null;}
+    if(prob&&(prob.kind==='input'||!prob.kind))return prob;
+  }
+  return null;
+}
 function startPractice(){
   state.exCount=0;
   state.correctStreak=0;
+  var currentTopicId=TOPICS[state.currentTopic]&&TOPICS[state.currentTopic].id;
+  if(state.mode==='open'&&currentTopicId)stIntegratedOpenBag[currentTopicId]=[];
   // Cada nova sessió de Recollida comença amb la bossa completa i barrejada.
   // Això garanteix que en 10 o 20 exercicis no es repeteixi cap pregunta.
   if(TOPICS[state.currentTopic]&&TOPICS[state.currentTopic].id==='recollida'){
@@ -2541,26 +2608,76 @@ function updateStreakBar(){
 function showExercise(){
   state.answered=false;
   var t=TOPICS[state.currentTopic];
-  currentEx=t.gen();state.exCount++;
+  if(state.mode==='open'){
+    currentEx=stNextIntegratedOpen(t.id);
+    if(!currentEx){
+      document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ko"><h4>No hi ha problemes oberts disponibles</h4>Aquest bloc encara no té exercicis oberts compatibles.</div>';
+      return;
+    }
+  }else{
+    currentEx=t.gen();
+  }
+  state.exCount++;
   document.getElementById('exNum').textContent='Exercici '+state.exCount;
   updateStreakBar();
   document.getElementById('exQuestion').innerHTML='<span class="func">'+currentEx.question+'</span>'+(currentEx.visual?'<div class="ex-visual">'+currentEx.visual+'</div>':'');
   var gs=document.getElementById('guideSteps');
+  var guides=state.mode==='open'?(currentEx.hint||[]):(currentEx.guide||[]);
   if(state.level===1){
     gs.style.display='block';
-    gs.innerHTML='<h4>💡 Pistes:</h4>'+currentEx.guide.map(s=>'• '+s).join('<br>');
+    gs.innerHTML='<h4>💡 Pistes:</h4>'+guides.map(function(s){return '• '+s;}).join('<br>');
   } else gs.style.display='none';
 
   var grid=document.getElementById('optionsGrid');
-  var longOpts=currentEx.options.some(o=>String(o).length>30);
-  grid.className='options-grid'+(longOpts?' single-col':'');
-  grid.innerHTML=currentEx.options.map((o,i)=>'<button class="opt-btn" onclick="selectAnswer('+i+',this)">'+o+'</button>').join('');
+  if(state.mode==='open'){
+    grid.innerHTML='';grid.className='options-grid';
+    document.getElementById('openWrap').style.display='block';
+    var inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';
+    document.getElementById('openHint').textContent=stIntegratedOpenHint(currentEx);
+    setTimeout(function(){inp.focus();},60);
+  }else{
+    document.getElementById('openWrap').style.display='none';
+    var longOpts=currentEx.options.some(function(o){return String(o).length>30;});
+    grid.className='options-grid'+(longOpts?' single-col':'');
+    grid.innerHTML=currentEx.options.map(function(o,i){return '<button class="opt-btn" onclick="selectAnswer('+i+',this)">'+o+'</button>';}).join('');
+  }
   document.getElementById('feedbackArea').innerHTML='';
   document.getElementById('btnNext').style.display='none';
   document.getElementById('btnChangeTopic').style.display='none';
   showScreen('screenExercise');
 }
-
+function stIntegratedOpenHint(ex){
+  if(!ex)return 'Escriu la resposta en la forma demanada.';
+  if(ex.family==='probabilitat')return 'Pots escriure la probabilitat com a fracció, decimal o percentatge quan siguin equivalents.';
+  if(ex.topicId==='sectors')return 'Pots utilitzar % o ° quan l’enunciat ho demani.';
+  if(ex.topicId==='mitjana'||ex.topicId==='mediana')return 'Pots utilitzar coma o punt decimal.';
+  return 'Escriu la resposta final. S’accepten variants equivalents habituals d’escriptura.';
+}
+function checkIntegratedOpen(){
+  if(state.answered||state.mode!=='open')return;
+  var inp=document.getElementById('openInput'),val=inp.value.trim();if(!val)return;
+  var ok=!!(currentEx&&currentEx.answer&&currentEx.answer.check(val));
+  inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');
+  processIntegratedOpenAnswer(ok,val);
+}
+function processIntegratedOpenAnswer(ok,studentAnswer){
+  state.answered=true;
+  var needed=NEEDED[state.level];
+  var correct=currentEx&&currentEx.answer?currentEx.answer.val:'—';
+  var errObj={topicId:currentEx.topicId,topicName:stTopicName(currentEx.topicId),type:currentEx.patternId,question:currentEx.question,visual:currentEx.visual||'',correct:correct,options:[],guide:(currentEx.hint||[]).slice(),solution:(currentEx.solution||[]).slice()};
+  if(ok){
+    state.correctStreak++;
+    document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ok"><h4>✅ Correcte!</h4>Molt bé. La resposta és correcta.</div>';
+    if(state.correctStreak>=needed)markTopicDone();
+  }else{
+    state.correctStreak=0;registerError(errObj,studentAnswer,'practice');
+    document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4>La teva resposta: <b>'+studentAnswer+'</b><br>Resposta correcta: <b>'+correct+'</b>'+miReviewHtml(errObj)+'<div class="st-open-solution">'+(currentEx.solution||[]).map(function(s,i){return '<div><b>Pas '+(i+1)+':</b> '+s+'</div>';}).join('')+'</div>'+miTheoryLinkHtml(currentEx.topicId)+'</div>';
+  }
+  updateStreakBar();
+  var next=document.getElementById('btnNext');next.style.display='block';
+  if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
+  setTimeout(function(){next.focus();},40);
+}
 function selectAnswer(idx,btn){
   if(state.answered)return;
   state.answered=true;

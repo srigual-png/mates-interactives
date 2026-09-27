@@ -65,6 +65,20 @@
   .level-btn{flex:1;padding:11px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.88rem;font-weight:600;color:var(--muted);transition:all .2s}
   .level-btn.active{border-color:var(--primary);color:var(--primary);background:#eef9ee}
   .level-btn:hover{border-color:var(--primary)}
+  .mode-select{display:flex;gap:12px;margin-bottom:18px}
+  .mode-btn{flex:1;padding:10px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.85rem;font-weight:600;color:var(--muted);transition:all .2s}
+  .mode-btn.active{border-color:#3aa76d;color:#3aa76d;background:#edf8f1}
+  .open-wrap{margin-bottom:14px}
+  .open-input{width:100%;border:2px solid var(--border);border-radius:12px;padding:13px 14px;font-size:1rem;font-family:inherit;outline:none;transition:border .2s;background:#fff}
+  .open-input:focus{border-color:var(--primary)}
+  .open-input.ok{border-color:var(--success);background:#f1fcf6}
+  .open-input.ko{border-color:var(--error);background:#fff6f6}
+  .open-hint{font-size:.78rem;color:var(--muted);margin:6px 2px 0;line-height:1.45}
+  .math-pad{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px}
+  .math-pad-label{font-size:.75rem;color:var(--muted);margin-right:2px}
+  .math-key{border:1px solid var(--border);background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer;font-weight:700;color:var(--primary-dark)}
+  .math-key:hover{border-color:var(--primary);background:#e9f7ef}
+  .btn-check{margin-top:10px;background:#3aa76d;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:.9rem;font-weight:650;cursor:pointer;width:100%}
   .ex-header .ex-num{font-size:.78rem;color:var(--muted);margin-bottom:4px}
   .ex-question{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;font-size:1.05rem;text-align:center;margin-bottom:16px;box-shadow:var(--shadow);min-height:68px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px}
   .ex-question .func{font-family:'Courier New',monospace;font-size:1.1rem;font-weight:700;color:var(--primary-dark)}
@@ -385,6 +399,10 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 <button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Nivell 1<br/><small>Guiat</small></button>
 <button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Nivell 2<br/><small>Sol/a</small></button>
 </div>
+<div class="mode-select">
+<button class="mode-btn active" id="btnModeA" onclick="selectMode('multi')">🔘 Opció múltiple</button>
+<button class="mode-btn" id="btnModeB" onclick="selectMode('open')">✍️ Resposta oberta</button>
+</div>
 <button class="btn-primary" onclick="startPractice()">Comença a practicar →</button>
 </div>
 <div class="screen" id="screenExercise">
@@ -395,6 +413,24 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 <div class="ex-question" id="exQuestion"></div>
 <div class="guide-steps" id="guideSteps" style="display:none"></div>
 <div class="options-grid" id="optionsGrid"></div>
+<div class="open-wrap" id="openWrap" style="display:none">
+<input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();checkOpen();}">
+<div class="math-pad" aria-label="Teclat matemàtic">
+<span class="math-pad-label">Escriptura ràpida:</span>
+<button type="button" class="math-key" onclick="insertMath('openInput','×')">×</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','÷')">÷</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','/')">/</button>
+<button type="button" class="math-key" onclick="insertMath('openInput',':')">:</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','²')">²</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','³')">³</button>
+<button type="button" class="math-key" onclick="insertMath('openInput',',')">,</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','−')">−</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','=')">=</button>
+</div>
+<div id="unitPadPractice"></div>
+<div class="open-hint" id="openHint"></div>
+<button class="btn-check" onclick="checkOpen()">Comprova →</button>
+</div>
 <div id="feedbackArea"></div>
 <button class="btn-primary" id="btnNext" onclick="nextExercise()" style="display:none">Següent exercici →</button>
 <button class="btn-secondary" id="btnChangeTopic" onclick="showHome()" style="display:none">← Canviar de tema</button>
@@ -1497,7 +1533,8 @@ function measureUnitInfo(unit){
     area:{'mm²':1e-6,'cm²':1e-4,'dm²':1e-2,'m²':1,'dam²':1e2,'hm²':1e4,'km²':1e6},
     volume:{'mm³':1e-9,'cm³':1e-6,'dm³':1e-3,'m³':1,'dam³':1e3,'hm³':1e6,'km³':1e9},
     capacity:{ml:.001,cl:.01,dl:.1,l:1},
-    mass:{mg:.001,g:1,kg:1000,t:1e6}
+    mass:{mg:.001,g:1,kg:1000,t:1e6},
+    time:{s:1,min:60,h:3600}
   };
   for(const [kind,map] of Object.entries(tables))if(Object.prototype.hasOwnProperty.call(map,u))return {kind,factor:map[u],unit:u};
   if(u==='°'||u==='%'||u==='€')return {kind:u,factor:1,unit:u};
@@ -1928,7 +1965,7 @@ function unlockedCoreCount(){return coreTopicIndices().filter(i=>isTopicUnlocked
 
 // ── STATE ─────────────────────────────────────
 let ST={
-  unlockedIds:[],done:[],currentTopic:0,level:1,exCount:0,streak:0,answered:false,
+  unlockedIds:[],done:[],currentTopic:0,level:1,mode:'multi',exCount:0,streak:0,answered:false,
   examQs:[],examIdx:0,examScore:0,examAnswers:[],errors:{}
 };
 
@@ -2157,6 +2194,8 @@ function selectTopic(i){
   document.getElementById('introContent').innerHTML=html;
   document.getElementById('btnLvl1').classList.add('active');
   document.getElementById('btnLvl2').classList.remove('active');
+  document.getElementById('btnModeA').classList.toggle('active',ST.mode==='multi');
+  document.getElementById('btnModeB').classList.toggle('active',ST.mode==='open');
   showScreen('screenIntro');
 }
 
@@ -2164,6 +2203,81 @@ function selectLevel(l){
   ST.level=l;
   document.getElementById('btnLvl1').classList.toggle('active',l===1);
   document.getElementById('btnLvl2').classList.toggle('active',l===2);
+}
+
+function selectMode(m){
+  ST.mode=m;
+  document.getElementById('btnModeA').classList.toggle('active',m==='multi');
+  document.getElementById('btnModeB').classList.toggle('active',m==='open');
+}
+
+function stripHtmlOpen(s){const d=document.createElement('div');d.innerHTML=String(s??'');return d.textContent||d.innerText||'';}
+function normOpenMeasure(s){
+  let raw=stripHtmlOpen(s).replace(/(\d)[×·⋅*xX](?=\d)/g,'$1×').replace(/(\d)[÷:](?=\d)/g,'$1/');
+  let t=canonicalUnitText(raw).toLowerCase().trim();
+  t=t.replace(/−|–/g,'-').replace(/≈/g,'').replace(/\s+/g,'');
+  // Operadors equivalents (segona passada després de normalitzar text)
+  t=t.replace(/(\d)[×*x](?=\d)/g,'$1×');
+  t=t.replace(/(\d)[÷:](?=\d)/g,'$1/');
+  // Exponents habituals
+  t=t.replace(/\^2/g,'²').replace(/\^3/g,'³');
+  // Decimal català/anglès. Si hi ha coma, és decimal; si hi ha punt únic, també l'admetem.
+  if(t.includes(','))t=t.replace(/\./g,'').replace(',','.');
+  return t;
+}
+function measureInputInfos1(input,targetMode=false){
+  const raw=canonicalUnitText(input).trim().toLowerCase().replace(/\s+/g,'');
+  const m=raw.match(/^(-?\d+(?:[.,]\d+)?(?:\.\d{3})*)(mm³|cm³|dm³|m³|dam³|hm³|km³|mm²|cm²|dm²|m²|dam²|hm²|km²|mm|cm|dm|dam|hm|km|m|ml|cl|dl|l|mg|kg|g|t|min|h|s|°|%|€)$/);
+  if(!m)return [];
+  function values(rawNum){
+    const out=[],add=v=>{v=Number(v);if(Number.isFinite(v)&&!out.some(x=>Math.abs(x-v)<1e-12))out.push(v)};
+    if(rawNum.includes(',')){add(rawNum.replace(/\./g,'').replace(',','.'));return out;}
+    if(/^[-+]?\d{1,3}(?:\.\d{3})+$/.test(rawNum)){add(rawNum.replace(/\./g,''));if(!targetMode)add(rawNum);return out;}
+    add(rawNum);return out;
+  }
+  const unit=m[2],vals=values(m[1]);
+  const cap={ml:1e-6,cl:1e-5,dl:1e-4,l:1e-3};
+  if(Object.prototype.hasOwnProperty.call(cap,unit))return vals.map(value=>({value,kind:'volume',factor:cap[unit],unit}));
+  const info=measureUnitInfo(unit);return info?vals.map(value=>({value,...info})):[];
+}
+function measureEquivalent1(a,b){
+  const xs=measureInputInfos1(a,false),ys=measureInputInfos1(b,true);
+  for(const x of xs)for(const y of ys){
+    if(x.kind!==y.kind)continue;
+    const vx=x.value*x.factor,vy=y.value*y.factor;
+    if(Math.abs(vx-vy)<=Math.max(1e-9,Math.abs(vy)*1e-8))return true;
+  }
+  return false;
+}
+function openOkMeasure(correct,value){
+  const nv=normOpenMeasure(value),nt=normOpenMeasure(correct);
+  if(nv===nt)return true;
+  const a=Number(nv),b=Number(nt);
+  if(Number.isFinite(a)&&Number.isFinite(b)&&Math.abs(a-b)<1e-9)return true;
+  if(measureEquivalent1(value,correct))return true;
+  // En respostes de text (instrument, unitat, etc.) ignorem accents i espais.
+  const tx=canonicalUnitText(stripHtmlOpen(value)).toLowerCase().replace(/\s+/g,'').replace(/[.,;:!?]/g,'');
+  const ty=canonicalUnitText(stripHtmlOpen(correct)).toLowerCase().replace(/\s+/g,'').replace(/[.,;:!?]/g,'');
+  return tx===ty;
+}
+function openHintMeasure(ex){
+  const kind=unitPadKind(ex);
+  if(kind==='area')return 'Pots escriure l’àrea amb ² (per exemple, 24 m²). També s’accepta m^2.';
+  if(kind==='volume')return 'Pots escriure el volum amb ³ (per exemple, 8 cm³). També s’accepta cm^3.';
+  if(kind==='length'||kind==='capacity'||kind==='mass'||kind==='time'||kind==='angle')return 'Escriu el valor i la unitat. Pots utilitzar els botons d’unitats ràpides.';
+  return 'Escriu la resposta en la forma demanada.';
+}
+function insertMath(inputId,text){
+  const inp=document.getElementById(inputId);if(!inp||inp.disabled)return;
+  const a=typeof inp.selectionStart==='number'?inp.selectionStart:inp.value.length,b=typeof inp.selectionEnd==='number'?inp.selectionEnd:a;
+  inp.value=inp.value.slice(0,a)+text+inp.value.slice(b);const p=a+text.length;inp.focus();try{inp.setSelectionRange(p,p)}catch(e){}
+}
+function checkOpen(){
+  if(ST.answered)return;
+  const inp=document.getElementById('openInput'),val=inp.value.trim();if(!val)return;
+  const ok=openOkMeasure(curEx.correct,val);
+  inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');
+  processPracticeAnswer(ok,val);
 }
 
 function startPractice(){
@@ -2196,10 +2310,19 @@ function showExercise(){
   if(ST.level===1){
     gs.style.display='block';
     gs.innerHTML=`<h4>💡 Pistes:</h4>`+curEx.guide.map(s=>`• ${s}`).join('<br>');
-  } else {
-    gs.style.display='none';
+  } else gs.style.display='none';
+
+  if(ST.mode==='open'){
+    document.getElementById('optionsGrid').innerHTML='';
+    document.getElementById('openWrap').style.display='block';
+    const inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';
+    document.getElementById('openHint').textContent=openHintMeasure(curEx);
+    updateUnitPad('unitPadPractice',curEx,'openInput');
+    setTimeout(()=>inp.focus(),60);
+  }else{
+    document.getElementById('openWrap').style.display='none';
+    document.getElementById('optionsGrid').innerHTML=curEx.options.map((o,i)=>`<button class="opt-btn" onclick="selectAnswer(${i},this)">${o}</button>`).join('');
   }
-  document.getElementById('optionsGrid').innerHTML=curEx.options.map((o,i)=>`<button class="opt-btn" onclick="selectAnswer(${i},this)">${o}</button>`).join('');
   document.getElementById('feedbackArea').innerHTML='';
   document.getElementById('btnNext').style.display='none';
   document.getElementById('btnChangeTopic').style.display='none';
@@ -2208,7 +2331,6 @@ function showExercise(){
 
 function selectAnswer(idx,btn){
   if(ST.answered) return;
-  ST.answered=true;
   const ans=curEx.options[idx];
   const isOk=ans===curEx.correct;
   document.querySelectorAll('.opt-btn').forEach(b=>{
@@ -2216,6 +2338,11 @@ function selectAnswer(idx,btn){
     if(b.textContent===curEx.correct) b.classList.add('correct');
   });
   if(!isOk) btn.classList.add('wrong');
+  processPracticeAnswer(isOk,ans);
+}
+
+function processPracticeAnswer(isOk,studentAnswer){
+  ST.answered=true;
   const needed=ST.level===1?NEEDED_LVL1:NEEDED_LVL2;
   const fb=document.getElementById('feedbackArea');
   if(isOk){
@@ -2227,8 +2354,8 @@ function selectAnswer(idx,btn){
   } else {
     ST.streak=0;
     renderStreakBar(needed);
-    registerError(curEx,ans,'practice');
-    fb.innerHTML=`<div class="feedback-box ko"><h4>❌ No és correcte</h4>La resposta correcta és: <b>${curEx.correct}</b><br>
+    registerError(curEx,studentAnswer,'practice');
+    fb.innerHTML=`<div class="feedback-box ko"><h4>❌ No és correcte</h4>La teva resposta: <b>${escHtml(studentAnswer||'—')}</b><br>La resposta correcta és: <b>${curEx.correct}</b><br>
     ${miReviewHtml(curEx)}
     <button class="sol-btn" onclick="toggleSolution(this)">Veure solució pas a pas</button>
     <div class="solution-box" id="solBox">${curEx.solution.map((s,i)=>`<div class="step"><b>Pas ${i+1}:</b> <span class="highlight">${s}</span></div>`).join('')}</div>
@@ -2236,6 +2363,8 @@ function selectAnswer(idx,btn){
   }
   document.getElementById('btnNext').style.display='block';
   if(ST.exCount>=3) document.getElementById('btnChangeTopic').style.display='block';
+  // Flux de teclat: després de comprovar, Enter torna a avançar.
+  setTimeout(()=>{const b=document.getElementById('btnNext');if(b&&b.style.display!=='none')b.focus();},40);
 }
 
 function toggleSolution(btn){

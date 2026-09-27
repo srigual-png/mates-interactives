@@ -84,6 +84,21 @@
   .level-btn{flex:1;padding:11px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:0.88rem;font-weight:600;color:var(--muted);transition:all 0.2s;}
   .level-btn.active{border-color:var(--primary);color:var(--primary);background:#f0eeff;}
   .level-btn:hover{border-color:var(--primary);}
+  .level-select,.mode-select{display:flex;gap:12px;margin-bottom:14px;}
+  .mode-select{margin-bottom:18px;}
+  .mode-btn{flex:1;padding:10px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.85rem;font-weight:600;color:var(--muted);transition:all .2s;}
+  .mode-btn.active{border-color:#8b5cf6;color:#8b5cf6;background:#f5f0ff;}
+  .open-wrap{margin-bottom:14px;}
+  .open-input{width:100%;border:2px solid var(--border);border-radius:12px;padding:13px 14px;font-size:1rem;font-family:inherit;outline:none;transition:border .2s;background:#fff;}
+  .open-input:focus{border-color:var(--primary);}
+  .open-input.ok{border-color:var(--success);background:#f1fcf6;}
+  .open-input.ko{border-color:var(--error);background:#fff6f6;}
+  .open-hint{font-size:.78rem;color:var(--muted);margin:6px 2px 0;line-height:1.45;}
+  .math-pad{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px;}
+  .math-pad-label{font-size:.75rem;color:var(--muted);margin-right:2px;}
+  .math-key{border:1px solid var(--border);background:#fff;border-radius:8px;padding:6px 10px;cursor:pointer;font-weight:700;color:var(--primary-dark);}
+  .math-key:hover{border-color:var(--primary);background:#f0eeff;}
+  .btn-check{margin-top:10px;background:#8b5cf6;color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:.9rem;font-weight:650;cursor:pointer;width:100%;}
 
   .ex-header .ex-num{font-size:0.78rem;color:var(--muted);margin-bottom:4px;}
   .ex-question{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;font-size:1.02rem;text-align:center;margin-bottom:16px;box-shadow:var(--shadow);min-height:80px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;}
@@ -403,6 +418,10 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 <button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Nivell 1<br/><small>Guiat</small></button>
 <button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Nivell 2<br/><small>Sol/a</small></button>
 </div>
+<div class="mode-select">
+<button class="mode-btn active" id="btnModeA" onclick="selectMode('multi')">🔘 Opció múltiple</button>
+<button class="mode-btn" id="btnModeB" onclick="selectMode('open')">✍️ Resposta oberta</button>
+</div>
 <button class="btn-primary" onclick="startPractice()">Comença a practicar →</button>
 </div>
 <div class="screen" id="screenExercise">
@@ -412,6 +431,23 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 <div class="ex-question" id="exQuestion"></div>
 <div class="guide-steps" id="guideSteps" style="display:none"></div>
 <div class="options-grid" id="optionsGrid"></div>
+<div class="open-wrap" id="openWrap" style="display:none">
+<input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();checkOpen();}">
+<div class="math-pad" aria-label="Teclat matemàtic">
+<span class="math-pad-label">Escriptura ràpida:</span>
+<button type="button" class="math-key" onclick="insertMath('openInput','°')">°</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','√')">√</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','²')">²</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','×')">×</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','÷')">÷</button>
+<button type="button" class="math-key" onclick="insertMath('openInput','/')">/</button>
+<button type="button" class="math-key" onclick="insertMath('openInput',':')">:</button>
+<button type="button" class="math-key" onclick="insertMath('openInput',',')">,</button>
+<button type="button" class="math-key" onclick="insertMath('openInput',';')">;</button>
+</div>
+<div class="open-hint" id="openHint"></div>
+<button class="btn-check" onclick="checkOpen()">Comprova →</button>
+</div>
 <div id="feedbackArea"></div>
 <button class="btn-primary" id="btnNext" onclick="nextExercise()" style="display:none">Següent exercici →</button>
 <button class="btn-secondary" id="btnChangeTopic" onclick="showHome()" style="display:none">← Canviar de tema</button>
@@ -2096,6 +2132,7 @@ let state={
   errors:[],
   currentTopic:0,
   level:1,
+  mode:'multi',
   exCount:0,
   correctStreak:0,
   answered:false,
@@ -2113,7 +2150,7 @@ let currentEx=null;
 let currentErrorIndex=-1;
 
 // ── PROBLEMES OBERTS · 1r ESO ──────────────────────────────────────────
-function spNorm(v){return String(v??'').trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[·×]/g,'x').replace(/\s+/g,' ');}
+function spNorm(v){return String(v??'').trim().toLowerCase().replace(/ŀl/g,'ll').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/l[.·•∙⋅]l/g,'ll').replace(/[×⋅*]/g,'x').replace(/[÷:]/g,'/').replace(/[−–—]/g,'-').replace(/\s+/g,' ');}
 function spFirstNum(v){const m=String(v??'').replace(',','.').match(/-?\d+(?:\.\d+)?/);return m?Number(m[0]):NaN;}
 function spNumAnswer(n,tol=0.01){return {val:String(Math.round(n*100)/100).replace('.',','),check:v=>Number.isFinite(spFirstNum(v))&&Math.abs(spFirstNum(v)-n)<=tol};}
 function spTextAnswer(val,alts=[]){const accepted=[val,...alts].map(spNorm);return {val,check:v=>{const s=spNorm(v);return accepted.some(a=>s===a||s.includes(a));}};}
@@ -2470,10 +2507,9 @@ function renderHome(){
   let html=head('📘','Continguts de 1r d\'ESO','Compten per al progrés i poden aparèixer al Mode Examen.','',true);
   coreIndexes.forEach(i=>{html+=topicCard(i,false);});
   const coreUnlocked=coreIndexes.filter(i=>isTopicUnlocked(i)).length;
-  if(coreUnlocked>=2){
+  if(coreUnlocked>=5){
     html+=head('🧩','Pràctica complementària','Activitats opcionals de 1r d\'ESO. No compten per al progrés principal.','');
-    html+=`<div class="topic-card p6-special-card" onclick="startSpatialProblems()" style="border-color:var(--primary)"><div class="topic-icon">🧠</div><div class="topic-info"><h3>Problemes oberts · 1r ESO</h3><p>42 patrons de raonament geomètric · resposta escrita · sense opcions</p></div><span class="topic-badge badge-active">Problemes</span></div>`;
-    if(coreUnlocked>=5)html+=`<div class="topic-card p6-special-card" onclick="showApps()" style="border-color:#8b5cf6"><div class="topic-icon">🌍</div><div class="topic-info"><h3>Aplicacions Reals</h3><p>Geometria en situacions quotidianes · 1r + ampliació indicada</p></div><span class="topic-badge badge-app">Aplicacions</span></div>`;
+    html+=`<div class="topic-card p6-special-card" onclick="showApps()" style="border-color:#8b5cf6"><div class="topic-icon">🌍</div><div class="topic-info"><h3>Aplicacions Reals</h3><p>Geometria en situacions quotidianes · 1r + ampliació indicada</p></div><span class="topic-badge badge-app">Aplicacions</span></div>`;
   }
   html+=head('⭐','Ampliació · prepara 2n d\'ESO','Material opcional. No compta per al progrés ni entra al Mode Examen de 1r ESO.','p6-extension');
   ['coordenades','pitagores','cercle2','poliedres','cossos'].forEach(id=>{
@@ -2657,6 +2693,7 @@ function miTheoryLinkHtml(topicId,label){
 function selectTopic(i){
   state.currentTopic=i;
   state.level=1;
+  state.mode='multi';
   state.exCount=0;
   state.correctStreak=0;
   state.answered=false;
@@ -2714,6 +2751,8 @@ function selectTopic(i){
 
   document.getElementById('btnLvl1').classList.add('active');
   document.getElementById('btnLvl2').classList.remove('active');
+  document.getElementById('btnModeA').classList.add('active');
+  document.getElementById('btnModeB').classList.remove('active');
 
   showScreen('screenIntro');
 }
@@ -2729,6 +2768,40 @@ function selectLevel(l){
     .classList.toggle('active',l===2);
 }
 
+function selectMode(m){
+  state.mode=m==='open'?'open':'multi';
+  document.getElementById('btnModeA').classList.toggle('active',state.mode==='multi');
+  document.getElementById('btnModeB').classList.toggle('active',state.mode==='open');
+}
+
+function insertMath(inputId,text){
+  const inp=document.getElementById(inputId);if(!inp||inp.disabled)return;
+  const a=typeof inp.selectionStart==='number'?inp.selectionStart:inp.value.length;
+  const b=typeof inp.selectionEnd==='number'?inp.selectionEnd:a;
+  inp.value=inp.value.slice(0,a)+text+inp.value.slice(b);
+  const pos=a+text.length;inp.focus();try{inp.setSelectionRange(pos,pos);}catch(e){}
+}
+
+function openHintSpatial(p){
+  const q=String(p&&p.question||'').replace(/<[^>]+>/g,'').toLowerCase();
+  if(q.includes('angle')||q.includes('grau'))return 'Pots escriure el resultat amb o sense el símbol °.';
+  if(q.includes('fracc'))return 'Pots escriure una fracció equivalent, per exemple 1/2 o 2/4.';
+  if(q.includes('arrel')||q.includes('quadrat'))return 'Pots utilitzar √ i ² si et facilita l’escriptura.';
+  return 'Escriu la resposta final. S’accepten variants equivalents habituals d’escriptura.';
+}
+
+let integratedOpenUsed=new Set(),integratedOpenLastPattern=null;
+function resetIntegratedOpenVariety(){integratedOpenUsed=new Set();integratedOpenLastPattern=null;}
+function generateIntegratedOpenExercise(topicId){
+  const pool=SP_OPEN_PATTERNS.filter(p=>p.topicId===topicId);
+  if(!pool.length)return null;
+  let candidates=pool.filter(p=>!integratedOpenUsed.has(p.id)&&p.id!==integratedOpenLastPattern);
+  if(!candidates.length)candidates=pool.filter(p=>!integratedOpenUsed.has(p.id));
+  if(!candidates.length){integratedOpenUsed.clear();candidates=pool.slice();}
+  const pat=candidates[rnd(0,candidates.length-1)];
+  integratedOpenUsed.add(pat.id);integratedOpenLastPattern=pat.id;
+  return pat.gen();
+}
 
 
 // ── BOSSA DE SESSIÓ · VARIETAT ─────────────────────────────────────────
@@ -2813,6 +2886,7 @@ function generateVariedPracticeExercise(t){
 function startPractice(){
   state.exCount=0;
   resetPracticeVariety(TOPICS[state.currentTopic].id);
+  resetIntegratedOpenVariety();
   state.correctStreak=0;
   state.answered=false;
 
@@ -2827,13 +2901,9 @@ function showExercise(){
 
   const t=TOPICS[state.currentTopic];
 
-  currentEx=generateVariedPracticeExercise(t);
+  currentEx=state.mode==='open'?generateIntegratedOpenExercise(t.id):generateVariedPracticeExercise(t);
 
-  if(
-    !currentEx ||
-    !Array.isArray(currentEx.options) ||
-    !currentEx.options.includes(currentEx.correct)
-  ){
+  if(!currentEx || (state.mode!=='open' && (!Array.isArray(currentEx.options)||!currentEx.options.includes(currentEx.correct)))){
     console.error('Exercici invàlid:',currentEx);
     return;
   }
@@ -2871,15 +2941,24 @@ function showExercise(){
     gs.style.display='none';
   }
 
-  document.getElementById('optionsGrid').innerHTML=
-    currentEx.options
-      .map((o,i)=>
-        `<button class="opt-btn"
-                 onclick="selectAnswer(${i},this)">
-          ${o}
-        </button>`
-      )
-      .join('');
+  if(state.mode==='open'){
+    document.getElementById('optionsGrid').innerHTML='';
+    document.getElementById('openWrap').style.display='block';
+    const inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';
+    document.getElementById('openHint').textContent=openHintSpatial(currentEx);
+    setTimeout(()=>inp.focus(),60);
+  }else{
+    document.getElementById('openWrap').style.display='none';
+    document.getElementById('optionsGrid').innerHTML=
+      currentEx.options
+        .map((o,i)=>
+          `<button class="opt-btn"
+                   onclick="selectAnswer(${i},this)">
+            ${o}
+          </button>`
+        )
+        .join('');
+  }
 
   document.getElementById('feedbackArea').innerHTML='';
 
@@ -2896,116 +2975,55 @@ function showExercise(){
 // ── CORRECCIÓ + REGISTRE ERROR ─────────────────────────────────────────
 
 function selectAnswer(idx,btn){
-
   if(state.answered)return;
-
-  state.answered=true;
-
   const ans=currentEx.options[idx];
+  const isCorrect=ans===currentEx.correct;
+  document.querySelectorAll('.opt-btn').forEach(b=>{
+    b.disabled=true;
+    if(b.textContent.trim()===String(currentEx.correct).trim())b.classList.add('correct');
+  });
+  if(!isCorrect)btn.classList.add('wrong');
+  processPracticeAnswer(isCorrect,ans);
+}
 
-  const isCorrect=
-    ans===currentEx.correct;
+function checkOpen(){
+  if(state.answered)return;
+  const inp=document.getElementById('openInput');
+  const ans=inp.value.trim();
+  if(!ans)return;
+  const isCorrect=!!(currentEx.answer&&typeof currentEx.answer.check==='function'&&currentEx.answer.check(ans));
+  inp.disabled=true;inp.className='open-input '+(isCorrect?'ok':'ko');
+  processPracticeAnswer(isCorrect,ans);
+}
 
-  document
-    .querySelectorAll('.opt-btn')
-    .forEach(b=>{
-      b.disabled=true;
-
-      if(b.textContent.trim()===String(currentEx.correct).trim()){
-        b.classList.add('correct');
-      }
-    });
-
-  if(!isCorrect){
-
-    btn.classList.add('wrong');
-
-    // ★ AQUÍ ES GUARDA L'ERROR
-    registerError(
-      currentEx,
-      ans,
-      'practice'
-    );
-  }
+function processPracticeAnswer(isCorrect,studentAnswer){
+  if(state.answered)return;
+  state.answered=true;
+  if(!isCorrect)registerError(currentEx,studentAnswer,state.mode==='open'?'open':'practice');
 
   const fb=document.getElementById('feedbackArea');
-
-  const needed=
-    state.level===1
-      ?NEEDED_LVL1
-      :NEEDED_LVL2;
+  const needed=state.level===1?NEEDED_LVL1:NEEDED_LVL2;
 
   if(isCorrect){
-
     state.correctStreak++;
-
-    const msg=
-      state.correctStreak>=needed
-        ?'🏆 Has completat el tema! Molt bé!'
-        :'✅ Correcte!';
-
-    fb.innerHTML=`
-      <div class="feedback-box ok">
-        <h4>${msg}</h4>
-        ${
-          state.correctStreak>=needed
-            ?'Clica "Següent" per veure el resum.'
-            :'Segueix així.'
-        }
-      </div>`;
-
-    if(state.correctStreak>=needed){
-      markTopicDone();
-    }
-
+    const msg=state.correctStreak>=needed?'🏆 Has completat el tema! Molt bé!':'✅ Correcte!';
+    const solutionOpen=state.mode==='open'&&Array.isArray(currentEx.solution)&&currentEx.solution.length
+      ?'<div class="solution-box show" style="margin-top:10px">'+currentEx.solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>'
+      :'';
+    fb.innerHTML='<div class="feedback-box ok"><h4>'+msg+'</h4>'+(state.correctStreak>=needed?'Clica "Següent" per veure el resum.':'Segueix així.')+solutionOpen+'</div>';
+    if(state.correctStreak>=needed)markTopicDone();
   }else{
-
     state.correctStreak=0;
-
-    const solution=
-      Array.isArray(currentEx.solution)
-        ?currentEx.solution
-        :[];
-
-    const solSteps=
-      solution
-        .map((s,i)=>
-          `<div class="step">
-             <b>Pas ${i+1}:</b>
-             <span class="highlight">${s}</span>
-           </div>`
-        )
-        .join('');
-
-    fb.innerHTML=`
-      <div class="feedback-box ko">
-        <h4>❌ No és correcte</h4>
-
-        La resposta és:
-        <b>${currentEx.correct}</b><br>
-
-        <button class="sol-btn"
-                onclick="toggleSolution(this)">
-          Veure solució pas a pas ▼
-        </button>
-
-        <div class="solution-box" id="solBox">
-          ${solSteps}
-        </div>
-
-        ${miTheoryLinkHtml(currentEx.topicId)}
-      </div>`;
+    const solution=Array.isArray(currentEx.solution)?currentEx.solution:[];
+    fb.innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4><div>La teva resposta: <b style="color:var(--error)">'+String(studentAnswer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+currentEx.correct+'</b></div>'+miReviewHtml(currentEx)+(solution.length?'<button class="sol-btn" onclick="toggleSolution(this)">📘 Veure explicació</button><div class="solution-box" id="solBox">'+solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>':'')+miTheoryLinkHtml(currentEx.topicId)+'</div>';
   }
 
   renderStreakBar();
-
-  document.getElementById('btnNext').style.display='block';
-
-  if(state.exCount>=3){
-    document.getElementById('btnChangeTopic').style.display='block';
-  }
+  const next=document.getElementById('btnNext');
+  next.style.display='block';
+  if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
+  setTimeout(()=>next.focus(),30);
 }
-
 
 function toggleSolution(btn){
 
