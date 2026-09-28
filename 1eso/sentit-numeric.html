@@ -1256,156 +1256,219 @@ function genOps(){
 }
 
 // ── GEN JERARQUIA ──────────────────────────────────────────────────────────
+// Revisió 28/09/2026: expressions una mica més llargues, amb més passos
+// abans d'arribar al resultat final, mantenint un nivell adequat per a 1r ESO.
 function genJerarquia(){
   var type=rnd(1,7),question,correct,opts,guide,solution,isProblem=false,diff=1;
 
   if(type===1){
     diff=1;
-    var a=rnd(1,10),b=rnd(2,9),c=rnd(2,9),res=a+b*c;
-    question='Calcula respectant la jerarquia:<br><span class="fc">'+a+' + '+b+' x '+c+'</span>';
+    var a=rnd(4,15),b=rnd(2,9),c=rnd(2,9),d=rnd(1,8);
+    var res=a+b*c-d;
+    while(res<=0){ d=rnd(1,4); res=a+b*c-d; }
+
+    question='Calcula respectant la jerarquia:<br><span class="fc">'+a+' + '+b+' x '+c+' - '+d+'</span>';
     correct=String(res);
-    opts=buildOpts(correct,[String((a+b)*c),String(a+b+c),String(a*b+c),String(a+b*c+c)]);
+    opts=buildOpts(correct,[
+      String((a+b)*c-d),
+      String(a+b*(c-d)),
+      String(a+b+c-d),
+      String(a+b*c+d)
+    ]);
 
     guide=[
       'Primer fes la multiplicació',
-      'Despres fes la suma'
+      'Després resol la suma i la resta d’esquerra a dreta'
     ];
 
     solution=[
       'Pas 1: '+b+'x'+c+'='+(b*c),
-      'Pas 2: '+a+'+'+(b*c)+'='+res
+      'Pas 2: '+a+'+'+(b*c)+'='+(a+b*c),
+      'Pas 3: '+(a+b*c)+'-'+d+'='+res
     ];
 
   } else if(type===2){
     diff=1;
-    var a2=rnd(2,10),b2=rnd(2,9),c2=rnd(2,10),d2=rnd(2,9),res2=a2*b2+c2*d2;
-    question='Calcula:<br><span class="fc">'+a2+' x '+b2+' + '+c2+' x '+d2+'</span>';
+    var a2=rnd(2,8),b2=rnd(2,9),c2=rnd(2,8),d2=rnd(2,9),e2=rnd(1,12);
+    var res2=a2*b2+c2*d2-e2;
+    while(res2<=0){ e2=rnd(1,5); res2=a2*b2+c2*d2-e2; }
+
+    question='Calcula:<br><span class="fc">'+a2+' x '+b2+' + '+c2+' x '+d2+' - '+e2+'</span>';
     correct=String(res2);
-    opts=buildOpts(correct,[String((a2*b2+c2)*d2),String(a2*(b2+c2)*d2),String(a2*b2+c2+d2),String((a2+c2)*(b2+d2))]);
+    opts=buildOpts(correct,[
+      String((a2*b2+c2)*d2-e2),
+      String(a2*(b2+c2)*d2-e2),
+      String(a2*b2+c2+d2-e2),
+      String(a2*b2+c2*d2+e2)
+    ]);
 
     guide=[
       'Primer resol les dues multiplicacions',
-      'Despres suma els dos resultats'
+      'Després suma els dos resultats',
+      'Finalment fes la resta'
     ];
 
     solution=[
       'Pas 1: '+a2+'x'+b2+'='+(a2*b2),
       'Pas 2: '+c2+'x'+d2+'='+(c2*d2),
-      'Pas 3: '+(a2*b2)+'+'+(c2*d2)+'='+res2
+      'Pas 3: '+(a2*b2)+'+'+(c2*d2)+'='+(a2*b2+c2*d2),
+      'Pas 4: '+(a2*b2+c2*d2)+'-'+e2+'='+res2
     ];
 
   } else if(type===3){
     diff=2;
-    var a3=rnd(2,8),b3=rnd(2,6),c3=rnd(1,10),res3=a3+b3*b3-c3;
+    var a3=rnd(2,10),b3=rnd(2,7),c3=rnd(2,6),d3=rnd(2,6);
+    var res3=a3+b3*b3-c3*d3;
     while(res3<=0){
-      c3=1;
-      res3=a3+b3*b3-c3;
+      a3=rnd(8,18);
+      b3=rnd(3,7);
+      c3=rnd(2,4);
+      d3=rnd(2,4);
+      res3=a3+b3*b3-c3*d3;
     }
 
-    question='Calcula:<br><span class="fc">'+a3+' + '+b3+'\u00b2 - '+c3+'</span>';
+    question='Calcula:<br><span class="fc">'+a3+' + '+b3+'\u00b2 - '+c3+' x '+d3+'</span>';
     correct=String(res3);
-    opts=buildOpts(correct,[String((a3+b3)*b3-c3),String(a3+b3*b3+c3),String(a3+b3*2-c3),String((a3+b3)*(b3-c3))]);
+    opts=buildOpts(correct,[
+      String((a3+b3)*b3-c3*d3),
+      String(a3+b3*2-c3*d3),
+      String(a3+b3*b3-c3-d3),
+      String(a3+b3*b3+c3*d3)
+    ]);
 
     guide=[
-      'Primer fes la potencia',
-      'Despres fes la suma i la resta d esquerra a dreta'
+      'Primer fes la potència i la multiplicació',
+      'Després resol la suma i la resta d’esquerra a dreta'
     ];
 
     solution=[
-      'Potencia: '+b3+'\u00b2='+(b3*b3),
-      'Resultat: '+a3+'+'+(b3*b3)+'-'+c3+'='+res3
+      'Potència: '+b3+'\u00b2='+(b3*b3),
+      'Multiplicació: '+c3+'x'+d3+'='+(c3*d3),
+      'Suma: '+a3+'+'+(b3*b3)+'='+(a3+b3*b3),
+      'Resta: '+(a3+b3*b3)+'-'+(c3*d3)+'='+res3
     ];
 
   } else if(type===4){
     diff=2;
-    var a4=rnd(2,6),b4=rnd(2,5),c4=rnd(2,5),d4=rnd(1,5),inner=b4+c4,res4=a4*inner-d4;
-    question='Calcula:<br><span class="fc">'+a4+' x ('+b4+' + '+c4+') - '+d4+'</span>';
+    var a4=rnd(2,6),b4=rnd(2,7),c4=rnd(2,7),d4=rnd(2,6),e4=rnd(2,6);
+    var inner=b4+c4,res4=a4*inner-d4*e4;
+    while(res4<=0){
+      a4=rnd(4,7); b4=rnd(3,8); c4=rnd(2,7); d4=rnd(2,4); e4=rnd(2,4);
+      inner=b4+c4; res4=a4*inner-d4*e4;
+    }
+
+    question='Calcula:<br><span class="fc">'+a4+' x ('+b4+' + '+c4+') - '+d4+' x '+e4+'</span>';
     correct=String(res4);
-    opts=buildOpts(correct,[String(a4*b4+c4-d4),String(a4*b4+a4*c4+d4),String(a4*(b4+c4-d4)),String((a4*b4+c4)*d4)]);
+    opts=buildOpts(correct,[
+      String(a4*b4+c4-d4*e4),
+      String(a4*(b4+c4-d4)*e4),
+      String(a4*inner-d4-e4),
+      String(a4*inner+d4*e4)
+    ]);
 
     guide=[
-      'Primer resol el parentesi',
-      'Despres fes la multiplicacio',
+      'Primer resol el parèntesi',
+      'Després fes les dues multiplicacions',
       'Finalment fes la resta'
     ];
 
     solution=[
-      'Parentesi: '+b4+'+'+c4+'='+inner,
-      'x: '+a4+'x'+inner+'='+(a4*inner),
-      '-: '+(a4*inner)+'-'+d4+'='+res4
+      'Parèntesi: '+b4+'+'+c4+'='+inner,
+      'Multiplicació 1: '+a4+'x'+inner+'='+(a4*inner),
+      'Multiplicació 2: '+d4+'x'+e4+'='+(d4*e4),
+      'Resta: '+(a4*inner)+'-'+(d4*e4)+'='+res4
     ];
 
   } else if(type===5){
     diff=2;
-    var a5=rnd(2,5),b5=rnd(2,4),c5=rnd(2,5),d5=rnd(2,4),res5=(a5+b5)*(c5-d5);
+    var a5=rnd(2,7),b5=rnd(2,6),c5=rnd(4,9),d5=rnd(1,3),e5=rnd(2,10);
+    while(c5<=d5){ c5=rnd(5,9); d5=rnd(1,4); }
+    var p1=a5+b5,p2=c5-d5,res5=p1*p2+e5;
 
-    while(c5<=d5){
-      c5=rnd(3,7);
-      d5=rnd(1,c5-1);
-      res5=(a5+b5)*(c5-d5);
-    }
-
-    question='Calcula:<br><span class="fc">('+a5+' + '+b5+') x ('+c5+' - '+d5+')</span>';
+    question='Calcula:<br><span class="fc">('+a5+' + '+b5+') x ('+c5+' - '+d5+') + '+e5+'</span>';
     correct=String(res5);
-    opts=buildOpts(correct,[String(a5*c5+b5*d5),String(a5+b5+c5-d5),String((a5+b5)*(c5+d5)),String(a5+b5*(c5-d5))]);
+    opts=buildOpts(correct,[
+      String(a5*c5+b5*d5+e5),
+      String(a5+b5+c5-d5+e5),
+      String(p1*(c5+d5)+e5),
+      String(p1*p2-e5)
+    ]);
 
     guide=[
-      'Primer resol els dos parentesis per separat',
-      'Despres multiplica els dos resultats'
+      'Primer resol els dos parèntesis per separat',
+      'Després multiplica els dos resultats',
+      'Finalment fes la suma'
     ];
 
     solution=[
-      'P1: '+a5+'+'+b5+'='+(a5+b5),
-      'P2: '+c5+'-'+d5+'='+(c5-d5),
-      'x: '+(a5+b5)+'x'+(c5-d5)+'='+res5
+      'Parèntesi 1: '+a5+'+'+b5+'='+p1,
+      'Parèntesi 2: '+c5+'-'+d5+'='+p2,
+      'Multiplicació: '+p1+'x'+p2+'='+(p1*p2),
+      'Suma: '+(p1*p2)+'+'+e5+'='+res5
     ];
 
   } else if(type===6){
     diff=3;
-    var a6=rnd(2,5),b6=rnd(2,4),c6=rnd(2,5),d6=rnd(2,4),e6=rnd(1,8),res6=a6*b6*b6-(c6+d6)+e6;
-    question='Calcula:<br><span class="fc">'+a6+' x '+b6+'\u00b2 - ('+c6+' + '+d6+') + '+e6+'</span>';
+    var a6=rnd(2,5),b6=rnd(2,5),c6=rnd(2,6),d6=rnd(2,6),e6=rnd(2,5),f6=rnd(1,9);
+    var pow6=b6*b6,par6=c6+d6,res6=a6*pow6-par6*e6+f6;
+    while(res6<=0){
+      a6=rnd(3,6); b6=rnd(3,5); c6=rnd(2,5); d6=rnd(2,5); e6=rnd(2,4); f6=rnd(1,9);
+      pow6=b6*b6; par6=c6+d6; res6=a6*pow6-par6*e6+f6;
+    }
+
+    question='Calcula:<br><span class="fc">'+a6+' x '+b6+'\u00b2 - ('+c6+' + '+d6+') x '+e6+' + '+f6+'</span>';
     correct=String(res6);
-    opts=buildOpts(correct,[String(a6*b6*b6-c6+d6+e6),String(a6*(b6*b6-(c6+d6))+e6),String(a6*b6*2-(c6+d6)+e6),String(a6*b6*b6-(c6+d6)-e6)]);
+    opts=buildOpts(correct,[
+      String(a6*b6*2-par6*e6+f6),
+      String(a6*pow6-par6+e6+f6),
+      String(a6*(pow6-par6)*e6+f6),
+      String(a6*pow6+par6*e6+f6)
+    ]);
 
     guide=[
-      'Primer fes la potencia',
-      'Despres resol el parentesi',
-      'Ara fes la multiplicacio',
-      'Finalment resol les sumes i restes d esquerra a dreta'
+      'Primer fes la potència',
+      'Resol també el parèntesi',
+      'Després fes les dues multiplicacions',
+      'Finalment resol la resta i la suma d’esquerra a dreta'
     ];
 
     solution=[
-      'Potencia='+(b6*b6),
-      'Parentesi='+(c6+d6),
-      'x='+(a6*b6*b6),
-      'Final='+res6
+      'Potència: '+b6+'\u00b2='+pow6,
+      'Parèntesi: '+c6+'+'+d6+'='+par6,
+      'Multiplicació 1: '+a6+'x'+pow6+'='+(a6*pow6),
+      'Multiplicació 2: '+par6+'x'+e6+'='+(par6*e6),
+      'Resta: '+(a6*pow6)+'-'+(par6*e6)+'='+(a6*pow6-par6*e6),
+      'Suma final: '+(a6*pow6-par6*e6)+'+'+f6+'='+res6
     ];
 
   } else {
     diff=3;
     isProblem=true;
 
-    var pU=rnd(3,15),q1=rnd(2,8),q2=rnd(2,8),desc=rnd(1,5),tot4=pU*(q1+q2)-desc;
+    var pU=rnd(4,14),q1=rnd(2,6),q2=rnd(2,6),desc=rnd(2,7),env=rnd(1,5);
+    var quant=q1+q2,cost=pU*quant,tot4=cost-desc+env;
 
-    question='<span class="pt">Una samarreta val <b>'+pU+' €</b>. La Laia en compra <b>'+q1+'</b> i el seu germa <b>'+q2+'</b>. Descompte de <b>'+desc+' €</b>. Total?</span>';
+    question='<span class="pt">Una samarreta val <b>'+pU+' €</b>. La Laia en compra <b>'+q1+'</b> i el seu germà <b>'+q2+'</b>. Apliquen un descompte de <b>'+desc+' €</b> i després afegeixen <b>'+env+' €</b> d’enviament. Quant paguen en total?</span>';
     correct=String(tot4)+' euros';
     opts=buildOpts(correct,[
-      (pU*(q1+q2))+' euros',
-      (pU*q1+q2-desc)+' euros',
-      (pU*(q1+q2)+desc)+' euros',
-      (pU*(q1+q2-desc))+' euros'
+      cost+' euros',
+      (cost-desc)+' euros',
+      (cost+desc+env)+' euros',
+      (pU*(q1+q2-desc)+env)+' euros'
     ]);
 
     guide=[
       'Primer calcula quantes samarretes compren en total',
-      'Despres calcula el cost de totes les samarretes',
-      'Finalment aplica el descompte'
+      'Després calcula el cost de totes les samarretes',
+      'Resta el descompte',
+      'Finalment suma les despeses d’enviament'
     ];
 
     solution=[
-      'Quantitat: '+(q1+q2),
-      'Cost: '+(pU*(q1+q2)),
-      'Descompte: '+tot4
+      'Quantitat: '+q1+'+'+q2+'='+quant,
+      'Cost: '+pU+'x'+quant+'='+cost,
+      'Amb descompte: '+cost+'-'+desc+'='+(cost-desc),
+      'Amb enviament: '+(cost-desc)+'+'+env+'='+tot4
     ];
   }
 
