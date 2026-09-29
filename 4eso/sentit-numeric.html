@@ -362,7 +362,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div class="guide-steps" id="guideSteps" style="display:none"></div>
   <div class="options-grid" id="optionsGrid"></div>
   <div class="open-wrap" id="openWrap" style="display:none">
-    <input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false">
+    <input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();checkOpen();}">
     <div class="math-pad" aria-label="Teclat matemàtic">
       <span class="math-pad-label">Escriptura ràpida:</span>
       <button type="button" class="math-key" onclick="insertMath('openInput','/')">/</button>
@@ -383,7 +383,10 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
       <button type="button" class="math-key" onclick="insertMath('openInput','²')">²</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','³')">³</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','^')">^</button>
-    </div>
+          <button type="button" class="math-key" onclick="insertMath('openInput','×')">×</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','÷')">÷</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput',':')">:</button>
+</div>
     <div class="open-hint" id="openHint"></div>
     <button class="btn-check" onclick="checkOpen()">Comprova →</button>
   </div>
@@ -397,7 +400,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div id="examContent"></div>
   <div class="options-grid" id="examOptions"></div>
   <div class="open-wrap" id="examOpenWrap" style="display:none">
-    <input class="open-input" id="examOpenInput" type="text" placeholder="Escriu la teva resposta…" autocomplete="off" spellcheck="false">
+    <input class="open-input" id="examOpenInput" type="text" placeholder="Escriu la teva resposta…" autocomplete="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();checkExamOpen();}">
     <div class="math-pad" aria-label="Teclat matemàtic">
       <span class="math-pad-label">Escriptura ràpida:</span>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','/')">/</button>
@@ -418,7 +421,10 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','²')">²</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','³')">³</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','^')">^</button>
-    </div>
+          <button type="button" class="math-key" onclick="insertMath('examOpenInput','×')">×</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','÷')">÷</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput',':')">:</button>
+</div>
     <button class="btn-check" onclick="checkExamOpen()">Comprova →</button>
   </div>
   <div id="examFeedback"></div>
@@ -443,7 +449,7 @@ function fmtNum(x,max=4){
 }
 function pctStr(x){return fmtNum(x,2)+'%'}
 function stripHtml(s){const d=document.createElement('div');d.innerHTML=String(s??'');return d.textContent||d.innerText||''}
-function normText(s){return stripHtml(String(s??'')).toLowerCase().replace(/−/g,'-').replace(/…/g,'...').replace(/,/g,'.').replace(/\s+/g,'').replace(/≈/g,'').trim()}
+function normText(s){return stripHtml(String(s??'')).toLowerCase().replace(/[−–—]/g,'-').replace(/[×*]/g,'·').replace(/[÷:]/g,'/').replace(/…/g,'...').replace(/,/g,'.').replace(/\s+/g,'').replace(/≈/g,'').trim()}
 function asPlainNumber(s){const n=normText(s);if(!/^-?\d+(?:\.\d+)?$/.test(n))return null;const v=Number(n);return Number.isFinite(v)?v:null}
 function normRichAnswer(s){
   let raw=String(s??'').replace(/<span\s+class=["']periodic["']>(.*?)<\/span>/gi,'{$1}');
@@ -845,6 +851,7 @@ function genReals4ESO(forceType){
   let question,correct,options,guide,solution,alts=[],openHint='',allowOpen=false;
 
   if(type===1){
+    allowOpen=true;
     const c=shuffle([
       {s:'7',k:'N',why:'7 és un enter positiu de recompte.'},
       {s:'−12',k:'Z',why:'−12 és enter però no natural.'},
@@ -853,12 +860,18 @@ function genReals4ESO(forceType){
       {s:'√2',k:'I',why:'√2 no és arrel d’un quadrat perfecte.'},
       {s:'π',k:'I',why:'π és un nombre irracional.'}
     ])[0];
-    correct=setLabel(c.k);options=shuffle([setLabel('N'),setLabel('Z'),setLabel('Q'),setLabel('I')]);
+    correct=setLabel(c.k);
+    alts=c.k==='N'?['N','ℕ','natural','naturals']:
+         c.k==='Z'?['Z','ℤ','enter','enters']:
+         c.k==='Q'?['Q','ℚ','racional','racionals']:
+                    ['I','irracional','irracionals'];
+    options=shuffle([setLabel('N'),setLabel('Z'),setLabel('Q'),setLabel('I')]);
     question=`Quin és el <b>conjunt més petit</b> al qual pertany ${mathSpan(c.s)}?`;
     guide=['No miris només el símbol: simplifica el nombre si cal.','Recorda la inclusió ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ.','Tria el conjunt més petit que el conté.'];
     solution=[c.why,`Per tant, el conjunt més petit és <b>${correct}</b>.`];
   }
   else if(type===2){
+    allowOpen=true;
     const c=shuffle([
       {stmt:'−6 ∈ ℚ',ok:true,why:'Tot enter es pot escriure com una fracció: −6 = −6/1.'},
       {stmt:'√3 ∈ ℚ',ok:false,why:'√3 és irracional perquè 3 no és un quadrat perfecte.'},
@@ -866,12 +879,13 @@ function genReals4ESO(forceType){
       {stmt:'9 ∈ ℝ',ok:true,why:'Tot natural és també enter, racional i real.'},
       {stmt:'π ∈ ℝ',ok:true,why:'π és irracional, i els irracionals formen part dels reals.'}
     ])[0];
-    correct=c.ok?'És certa':'És falsa';options=shuffle(['És certa','És falsa','Només és certa si s’arrodoneix','No es pot saber']);
+    correct=c.ok?'És certa':'És falsa';alts=c.ok?['certa','cert','sí','si']:['falsa','fals','no'];options=shuffle(['És certa','És falsa','Només és certa si s’arrodoneix','No es pot saber']);
     question=`Valora l’afirmació ${mathSpan(c.stmt)}.`;
     guide=['Identifica primer el tipus de nombre.','Recorda que un nombre pot pertànyer a diversos conjunts alhora.'];
     solution=[c.why,`Conclusió: <b>${correct}</b>.`];
   }
   else if(type===3){
+    allowOpen=false;
     const n=nonSquareBetween(2,30),sq=shuffle([4,9,16,25,36,49])[0];
     const irr=`√${n}`;correct=irr;
     options=uniq4(correct,[`√${sq}`,fracStr(rnd(1,8),rnd(2,9)),fmtNum(rnd(1,40)/10,1),String(rnd(-8,8)),fracStr(rnd(1,9),shuffle([2,3,4,5,6,7,8])[0])]);
@@ -880,25 +894,29 @@ function genReals4ESO(forceType){
     solution=[`${sq} és un quadrat perfecte, així que √${sq} és enter.`,`Les fraccions i els decimals exactes de les altres opcions són racionals.`,`${n} no és un quadrat perfecte: <b>√${n}</b> és irracional.`];
   }
   else if(type===4){
+    allowOpen=true;
     const r=shuffle([3,4,5,6,7,8,9,10])[0],sign=rnd(0,1)?1:-1,val=sign*r,expr=(sign<0?'−':'')+`√${r*r}`;
     const k=val>0?'N':'Z';correct=setLabel(k);
+    alts=k==='N'?['N','ℕ','natural','naturals']:k==='Z'?['Z','ℤ','enter','enters']:['Q','ℚ','racional','racionals'];
     options=shuffle([setLabel('N'),setLabel('Z'),setLabel('Q'),setLabel('I')]);
     question=`Simplifica ${mathSpan(expr)} i indica el <b>conjunt més petit</b> al qual pertany.`;
     guide=['Calcula primer l’arrel quadrada.','Aplica després el signe exterior.','Només llavors classifica el resultat.'];
     solution=[`√${r*r} = ${r}.`,sign<0?`Amb el signe exterior, ${expr} = ${val}.`:`Per tant, ${expr} = ${val}.`,`El conjunt més petit que conté ${val} és <b>${correct}</b>.`];
   }
   else if(type===5){
+    allowOpen=true;
     const c=shuffle([
       {dec:'0,375',kind:'decimal exacte',ans:'És racional',why:'0,375 = 375/1000, que es pot simplificar.'},
       {dec:'1,272727…',kind:'decimal periòdic',ans:'És racional',why:'Un decimal periòdic sempre es pot escriure com una fracció.'},
       {dec:'0,101001000100001…',kind:'decimal infinit no periòdic',ans:'És irracional',why:'No acaba i no presenta cap període repetitiu.'}
     ])[0];
-    correct=c.ans;options=shuffle(['És racional','És irracional','És enter','No és real']);
+    correct=c.ans;alts=c.ans==='És racional'?['racional','racionals']:['irracional','irracionals'];options=shuffle(['És racional','És irracional','És enter','No és real']);
     question=`El nombre ${mathSpan(c.dec)} és un ${c.kind}. Com el classifiques?`;
     guide=['Els decimals exactes són racionals.','Els decimals periòdics també són racionals.','Els decimals infinits no periòdics són irracionals.'];
     solution=[c.why,`Conclusió: <b>${correct}</b>.`];
   }
   else if(type===6){
+    allowOpen=false;
     const a=fracStr(rnd(1,9),shuffle([2,3,4,5,6,7,8])[0]);
     const qnotz=a.includes('/')?a:'3/2';correct=qnotz;
     options=shuffle([qnotz,String(-rnd(1,9)),String(rnd(1,9)),`√${nonSquareBetween(2,20)}`]);
@@ -907,6 +925,7 @@ function genReals4ESO(forceType){
     solution=[`${qnotz} és una fracció racional i no té valor enter.`,`Els nombres enters també són racionals, però pertanyen a ℤ.`,`L’arrel no exacta és irracional.`,`Resposta: <b>${correct}</b>.`];
   }
   else if(type===7){
+    allowOpen=false;
     const c=shuffle([
       {n:'4',ans:'4 ∈ ℕ, ℤ, ℚ i ℝ',why:'4 és natural; per inclusió també és enter, racional i real.'},
       {n:'−4',ans:'−4 ∈ ℤ, ℚ i ℝ',why:'−4 és enter, però no natural.'},
@@ -921,25 +940,29 @@ function genReals4ESO(forceType){
     solution=[c.why,`Per tant: <b>${correct}</b>.`];
   }
   else if(type===8){
+    allowOpen=true;
     const a=shuffle([4,9,16,25,36])[0],r=Math.sqrt(a),b=rnd(1,8),op=shuffle(['+','−'])[0],v=op==='+'?r+b:r-b;
     const expr=`√${a} ${op} ${b}`,k=v>0&&Number.isInteger(v)?'N':v<=0?'Z':'Q';correct=setLabel(k);
+    alts=k==='N'?['N','ℕ','natural','naturals']:k==='Z'?['Z','ℤ','enter','enters']:['Q','ℚ','racional','racionals'];
     options=shuffle([setLabel('N'),setLabel('Z'),setLabel('Q'),setLabel('I')]);
     question=`Calcula ${mathSpan(expr)} i indica el <b>conjunt més petit</b> del resultat.`;
     guide=['Resol primer l’arrel exacta.','Fes l’operació indicada.','Classifica el resultat final, no l’expressió inicial.'];
     solution=[`√${a} = ${r}.`,`${r} ${op} ${b} = ${v}.`,`El conjunt més petit és <b>${correct}</b>.`];
   }
   else if(type===9){
+    allowOpen=true;
     const c=shuffle([
       {stmt:'racional + irracional',ans:'Sempre és irracional',why:'Si la suma fos racional, en restar el racional obtindríem que l’irracional també seria racional, contradicció.'},
       {stmt:'racional × racional',ans:'Sempre és racional',why:'El producte de dues fraccions d’enters torna a ser una fracció d’enters.'},
       {stmt:'enter ÷ enter no nul',ans:'Sempre és racional',why:'El quocient d’enters amb divisor no nul és una fracció, per tant racional.'}
     ])[0];
-    correct=c.ans;options=shuffle([correct,'Sempre és enter','Sempre és natural','No pot ser real']);
+    correct=c.ans;alts=[correct.replace(/^Sempre és /,'')];options=shuffle([correct,'Sempre és enter','Sempre és natural','No pot ser real']);
     question=`Què podem afirmar sobre <b>${c.stmt}</b>?`;
     guide=['Pensa en la definició de racional com a fracció d’enters.','En la suma racional + irracional, usa una argumentació per contradicció.'];
     solution=[c.why,`Conclusió: <b>${correct}</b>.`];
   }
   else if(type===10){
+    allowOpen=false;
     const n=nonSquareBetween(2,35),a=rnd(1,5),irr=`${a} + √${n}`;correct=irr;
     const sq=shuffle([4,9,16,25])[0];
     options=uniq4(correct,[`${a} + √${sq}`,fracStr(rnd(2,9),rnd(2,9)),fmtNum(rnd(11,39)/10,1),String(rnd(-9,9)),fracStr(rnd(1,9),shuffle([2,3,4,5,6,7,8])[0])]);
@@ -2188,7 +2211,10 @@ function getExerciseForMode(){
   let ex=TOPICS[state.currentTopic].gen();
   if(state.mode==='open'){
     let tries=0;
-    while(ex.allowOpen===false&&tries<40){ex=TOPICS[state.currentTopic].gen();tries++}
+    while(ex.allowOpen===false&&tries<80){ex=TOPICS[state.currentTopic].gen();tries++}
+    if(ex.allowOpen===false){
+      console.warn('No s’ha trobat cap exercici compatible amb resposta oberta per al tema actual.');
+    }
   }
   return ex;
 }
@@ -2257,7 +2283,7 @@ function processAnswer(ok,studentAnswer){
     document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4><div><b>La teva resposta:</b> '+String(studentAnswer??'—')+'</div><div><b>Resposta correcta:</b> '+currentEx.correct+'</div><div style="margin-top:8px"><b>🔎 Què convé revisar:</b> '+errorFocus(currentEx)+'</div><div style="margin-top:8px;font-weight:700">📘 Resolució pas a pas</div><div class="solution-box show" id="solBox">'+currentEx.solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div></div>';
   }
   document.getElementById('streakFill').style.width=Math.min(100,state.correctStreak/goal*100)+'%';document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal;
-  document.getElementById('btnNext').style.display='block';if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
+  document.getElementById('btnNext').style.display='block';setTimeout(()=>{const b=document.getElementById('btnNext');if(b&&b.style.display!=='none')b.focus();},40);if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
 }
 function toggleSolution(btn){const box=document.getElementById('solBox');box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'Amaga explicació':'📘 Veure explicació'}
 function markTopicDone(){const current=TOPICS[state.currentTopic],id=current.id;if(!state.done.includes(id))state.done.push(id);if(isManagedPracticeTopic(current)){const n=nextTopicIndex(state.currentTopic);if(n>=0&&!state.unlockedIds.includes(TOPICS[n].id))state.unlockedIds.push(TOPICS[n].id)}saveState()}
@@ -2323,7 +2349,7 @@ function processExamAnswer(ok,answer){
       +miReviewHtml(q)
       +'<div style="margin-top:9px;font-weight:800">📘 Resolució pas a pas</div>'
       +'<div class="solution-box show">'+miSolutionHtml(q)+'</div>'))+'</div>';
-  document.getElementById('btnNextExam').style.display='block';
+  document.getElementById('btnNextExam').style.display='block';setTimeout(()=>{const b=document.getElementById('btnNextExam');if(b&&b.style.display!=='none')b.focus();},40);
   document.getElementById('btnNextExam').textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';
 }
 function nextExamQ(){state.examIdx++;if(state.examIdx>=state.examQs.length)finishExam();else renderExamQ()}

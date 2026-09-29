@@ -363,7 +363,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div class="guide-steps" id="guideSteps" style="display:none"></div>
   <div class="options-grid" id="optionsGrid"></div>
   <div class="open-wrap" id="openWrap" style="display:none">
-    <input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false">
+    <input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();checkOpen();}">
     <div class="math-pad" aria-label="Teclat matemàtic">
       <span class="math-pad-label">Escriptura ràpida:</span>
       <button type="button" class="math-key" onclick="insertMath('openInput','/')">/</button>
@@ -388,7 +388,10 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
       <button type="button" class="math-key" onclick="insertMath('openInput','n')">n</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','·')">·</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','+')">+</button>
-    </div>
+          <button type="button" class="math-key" onclick="insertMath('openInput','×')">×</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','÷')">÷</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput',':')">:</button>
+</div>
     <div class="open-hint" id="openHint"></div>
     <button class="btn-check" onclick="checkOpen()">Comprova →</button>
   </div>
@@ -402,7 +405,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div id="examContent"></div>
   <div class="options-grid" id="examOptions"></div>
   <div class="open-wrap" id="examOpenWrap" style="display:none">
-    <input class="open-input" id="examOpenInput" type="text" placeholder="Escriu la teva resposta…" autocomplete="off" spellcheck="false">
+    <input class="open-input" id="examOpenInput" type="text" placeholder="Escriu la teva resposta…" autocomplete="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();checkExamOpen();}">
     <div class="math-pad" aria-label="Teclat matemàtic">
       <span class="math-pad-label">Escriptura ràpida:</span>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','/')">/</button>
@@ -427,7 +430,10 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','n')">n</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','·')">·</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','+')">+</button>
-    </div>
+          <button type="button" class="math-key" onclick="insertMath('examOpenInput','×')">×</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','÷')">÷</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput',':')">:</button>
+</div>
     <button class="btn-check" onclick="checkExamOpen()">Comprova →</button>
   </div>
   <div id="examFeedback"></div>
@@ -452,7 +458,7 @@ function fmtNum(x,max=4){
 }
 function pctStr(x){return fmtNum(x,2)+'%'}
 function stripHtml(s){const d=document.createElement('div');d.innerHTML=String(s??'');return d.textContent||d.innerText||''}
-function normText(s){return stripHtml(String(s??'')).toLowerCase().replace(/−/g,'-').replace(/…/g,'...').replace(/,/g,'.').replace(/\s+/g,'').replace(/≈/g,'').trim()}
+function normText(s){return stripHtml(String(s??'')).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/l[·.]l/g,'ll').replace(/[−–—]/g,'-').replace(/[×*]/g,'·').replace(/[÷:]/g,'/').replace(/…/g,'...').replace(/,/g,'.').replace(/\s+/g,'').replace(/≈/g,'').trim()}
 function asPlainNumber(s){const n=normText(s);if(!/^-?\d+(?:\.\d+)?$/.test(n))return null;const v=Number(n);return Number.isFinite(v)?v:null}
 function normRichAnswer(s){
   let raw=String(s??'').replace(/<span\s+class=["']periodic["']>(.*?)<\/span>/gi,'{$1}');
@@ -2191,7 +2197,7 @@ function processAnswer(ok,studentAnswer){
     document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4><div><b>La teva resposta:</b> '+String(studentAnswer??'—')+'</div><div><b>Resposta correcta:</b> '+currentEx.correct+'</div><div style="margin-top:8px"><b>🔎 Què convé revisar:</b> '+errorFocus(currentEx)+'</div><div style="margin-top:8px;font-weight:700">📘 Resolució pas a pas</div><div class="solution-box show" id="solBox">'+currentEx.solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div></div>';
   }
   document.getElementById('streakFill').style.width=Math.min(100,state.correctStreak/goal*100)+'%';document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal;
-  document.getElementById('btnNext').style.display='block';if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
+  document.getElementById('btnNext').style.display='block';setTimeout(()=>{const b=document.getElementById('btnNext');if(b&&b.style.display!=='none')b.focus();},40);if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
 }
 function toggleSolution(btn){const box=document.getElementById('solBox');box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'Amaga explicació':'📘 Veure explicació'}
 function markTopicDone(){
@@ -2265,7 +2271,7 @@ function processExamAnswer(ok,answer){
       +miReviewHtml(q)
       +'<div style="margin-top:9px;font-weight:800">📘 Resolució pas a pas</div>'
       +'<div class="solution-box show">'+miSolutionHtml(q)+'</div>'))+'</div>';
-  document.getElementById('btnNextExam').style.display='block';
+  document.getElementById('btnNextExam').style.display='block';setTimeout(()=>{const b=document.getElementById('btnNextExam');if(b&&b.style.display!=='none')b.focus();},40);
   document.getElementById('btnNextExam').textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';
 }
 function nextExamQ(){state.examIdx++;if(state.examIdx>=state.examQs.length)finishExam();else renderExamQ()}
