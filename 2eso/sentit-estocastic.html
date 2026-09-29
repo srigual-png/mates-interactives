@@ -386,13 +386,14 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div class="guide-steps" id="guideSteps" style="display:none"></div>
   <div class="options-grid" id="optionsGrid"></div>
   <div class="open-wrap" id="openWrap" style="display:none">
-    <input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false">
+    <input class="open-input" id="openInput" type="text" onkeydown="if(event.key==='Enter'){event.preventDefault();checkOpen();}" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false">
     <div class="math-pad" aria-label="Teclat matemàtic">
       <span class="math-pad-label">Escriptura ràpida:</span>
+      <button type="button" class="math-key" onclick="insertMath('openInput','%')">%</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','/')">/</button>
-      <button type="button" class="math-key" onclick="insertMath('openInput','²')">²</button>
-      <button type="button" class="math-key" onclick="insertMath('openInput','³')">³</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','÷')">÷</button>
       <button type="button" class="math-key" onclick="insertMath('openInput',':')">:</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','×')">×</button>
       <button type="button" class="math-key" onclick="insertMath('openInput',',')">,</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','−')">−</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','<')">&lt;</button>
@@ -412,13 +413,14 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div id="examContent"></div>
   <div class="options-grid" id="examOptions"></div>
   <div class="open-wrap" id="examOpenWrap" style="display:none">
-    <input class="open-input" id="examOpenInput" type="text" placeholder="Escriu la teva resposta…" autocomplete="off" spellcheck="false">
+    <input class="open-input" id="examOpenInput" type="text" onkeydown="if(event.key==='Enter'){event.preventDefault();checkExamOpen();}" placeholder="Escriu la teva resposta…" autocomplete="off" spellcheck="false">
     <div class="math-pad" aria-label="Teclat matemàtic">
       <span class="math-pad-label">Escriptura ràpida:</span>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','%')">%</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','/')">/</button>
-      <button type="button" class="math-key" onclick="insertMath('examOpenInput','²')">²</button>
-      <button type="button" class="math-key" onclick="insertMath('examOpenInput','³')">³</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','÷')">÷</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput',':')">:</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','×')">×</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput',',')">,</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','−')">−</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','<')">&lt;</button>
@@ -449,7 +451,15 @@ function fmtNum(x,max=4){
 }
 function pctStr(x){return fmtNum(x,2)+'%'}
 function stripHtml(s){const d=document.createElement('div');d.innerHTML=String(s??'');return d.textContent||d.innerText||''}
-function normText(s){return stripHtml(String(s??'')).toLowerCase().replace(/−/g,'-').replace(/…/g,'...').replace(/,/g,'.').replace(/\s+/g,'').replace(/≈/g,'').trim()}
+function normText(s){
+  let t=stripHtml(String(s??'')).toLowerCase();
+  if(t.normalize)t=t.normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  t=t.replace(/[−–—]/g,'-').replace(/…/g,'...').replace(/,/g,'.').replace(/≈/g,'').replace(/\s+/g,'');
+  t=t.replace(/graus?/g,'°');
+  t=t.replace(/([0-9)])(?:×|·|⋅|\*)(?=[0-9(])/g,'$1×').replace(/([0-9)])x(?=[0-9(])/g,'$1×');
+  t=t.replace(/([0-9)])(?:÷|:)(?=[0-9(])/g,'$1/');
+  return t.trim();
+}
 function asPlainNumber(s){const n=normText(s);if(!/^-?\d+(?:\.\d+)?$/.test(n))return null;const v=Number(n);return Number.isFinite(v)?v:null}
 function rationalValue(s){
   const n=normText(s);
@@ -1798,7 +1808,7 @@ function processAnswer(ok,studentAnswer){
     document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4><div>La teva resposta: <b style="color:var(--error)">'+String(studentAnswer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+currentEx.correct+'</b></div>'+miReviewHtml(currentEx)+'<button class="sol-btn" onclick="toggleSolution(this)">📘 Veure explicació</button><div class="solution-box" id="solBox">'+currentEx.solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>'+miTheoryLinkHtml(currentEx.topicId)+'</div>';
   }
   document.getElementById('streakFill').style.width=Math.min(100,state.correctStreak/goal*100)+'%';document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal;
-  document.getElementById('btnNext').style.display='block';if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
+  const nextBtn=document.getElementById('btnNext');nextBtn.style.display='block';if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';setTimeout(function(){try{nextBtn.focus({preventScroll:true});}catch(e){nextBtn.focus();}},40);
 }
 function toggleSolution(btn){const box=document.getElementById('solBox');box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'Amaga explicació':'📘 Veure explicació'}
 function markTopicDone(){const t=TOPICS[state.currentTopic];if(!state.done.includes(t.id))state.done.push(t.id);if(t.course==='2n'){const n=TOPICS.findIndex((x,i)=>i>state.currentTopic&&x.course==='2n');if(n>=0&&!state.unlockedIds.includes(TOPICS[n].id))state.unlockedIds.push(TOPICS[n].id)}saveState()}
@@ -1855,7 +1865,7 @@ function processExamAnswer(ok,answer){
   const q=state.examQs[state.examIdx];if(ok)state.examScore++;else registerError(q,answer,'exam');
   state.examLog.push({question:q.question,correct:q.correct,given:answer,ok,type:q.type,review:miReviewPoints(q),solution:[...(q.solution||[])]});
   document.getElementById('examFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'+(ok?'':('<div>La teva resposta: <b style="color:var(--error)">'+String(answer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+q.correct+'</b></div>'+miReviewHtml(q)+'<button class="sol-btn" onclick="toggleExamSolution(this)">📘 Veure explicació</button><div class="solution-box" id="examSolBox">'+(Array.isArray(q.solution)?q.solution:[]).map((s,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div>'))+'</div>';
-  document.getElementById('btnNextExam').style.display='block';document.getElementById('btnNextExam').textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';
+  const nextExamBtn=document.getElementById('btnNextExam');nextExamBtn.style.display='block';nextExamBtn.textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';setTimeout(function(){try{nextExamBtn.focus({preventScroll:true});}catch(e){nextExamBtn.focus();}},40);
 }
 function toggleExamSolution(btn){const box=document.getElementById('examSolBox');if(!box)return;box.classList.toggle('show');if(btn)btn.textContent=box.classList.contains('show')?'Amaga explicació':'📘 Veure explicació'}
 function nextExamQ(){state.examIdx++;if(state.examIdx>=state.examQs.length)finishExam();else renderExamQ()}

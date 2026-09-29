@@ -395,17 +395,24 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div class="guide-steps" id="guideSteps" style="display:none"></div>
   <div class="options-grid" id="optionsGrid"></div>
   <div class="open-wrap" id="openWrap" style="display:none">
-    <input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false">
+    <input class="open-input" id="openInput" type="text" onkeydown="if(event.key==='Enter'){event.preventDefault();checkOpen();}" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false">
     <div class="math-pad" id="openMathPad" aria-label="Teclat matemàtic">
       <span class="math-pad-label">Escriptura ràpida:</span>
+      <button type="button" class="math-key" onclick="insertMath('openInput','x')">x</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','x²')">x²</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','x³')">x³</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','²')">²</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','³')">³</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','^')">^</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','+')">+</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','−')">−</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','×')">×</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','·')">·</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','÷')">÷</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','/')">/</button>
+      <button type="button" class="math-key" onclick="insertMath('openInput','=')">=</button>
       <button type="button" class="math-key" onclick="insertMath('openInput','(')">(</button>
       <button type="button" class="math-key" onclick="insertMath('openInput',')')">)</button>
-      <button type="button" class="math-key" onclick="insertMath('openInput','−')">−</button>
     </div>
     <div class="open-hint" id="openHint"></div>
     <button class="btn-check" onclick="checkOpen()">Comprova →</button>
@@ -420,17 +427,24 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div id="examContent"></div>
   <div class="options-grid" id="examOptions"></div>
   <div class="open-wrap" id="examOpenWrap" style="display:none">
-    <input class="open-input" id="examOpenInput" type="text" placeholder="Escriu la teva resposta…" autocomplete="off" spellcheck="false">
+    <input class="open-input" id="examOpenInput" type="text" onkeydown="if(event.key==='Enter'){event.preventDefault();checkExamOpen();}" placeholder="Escriu la teva resposta…" autocomplete="off" spellcheck="false">
     <div class="math-pad" id="examMathPad" aria-label="Teclat matemàtic">
       <span class="math-pad-label">Escriptura ràpida:</span>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','x')">x</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','x²')">x²</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','x³')">x³</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','²')">²</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','³')">³</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','^')">^</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','+')">+</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','−')">−</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','×')">×</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','·')">·</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','÷')">÷</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','/')">/</button>
+      <button type="button" class="math-key" onclick="insertMath('examOpenInput','=')">=</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput','(')">(</button>
       <button type="button" class="math-key" onclick="insertMath('examOpenInput',')')">)</button>
-      <button type="button" class="math-key" onclick="insertMath('examOpenInput','−')">−</button>
     </div>
     <button class="btn-check" onclick="checkExamOpen()" style="margin-top:8px">Comprova →</button>
   </div>
@@ -496,6 +510,7 @@ function norm(s){
   const superDigits=['⁰','¹','²','³','⁴','⁵','⁶','⁷','⁸','⁹'];
 
   return String(s).toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g,'')
     // Converteix potències HTML (x<sup>3</sup>) a superíndex Unicode (x³)
     .replace(/<sup>\s*(\d)\s*<\/sup>/g,(m,d)=>superDigits[+d]||m)
     // Elimina qualsevol altra etiqueta HTML que pugui arribar a la resposta
@@ -508,7 +523,9 @@ function norm(s){
     .replace(/^x=/,'')
     .replace(/,/g,'.')
     .replace(/[−–—]/g,'-')
+    .replace(/[×⋅]/g,'·')
     .replace(/\*/g,'·')
+    .replace(/[÷:]/g,'/')
     .replace(/\^(\d)/g,(m,d)=>superDigits[+d]||m);
 }
 /*
@@ -3279,8 +3296,9 @@ function processAnswer(ok,studentAnswer){
   }
   document.getElementById('streakFill').style.width=Math.min(100,(state.correctStreak/goal*100))+'%';
   document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal;
-  document.getElementById('btnNext').style.display='block';
+  const nextBtn=document.getElementById('btnNext');nextBtn.style.display='block';
   if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
+  setTimeout(function(){try{nextBtn.focus({preventScroll:true});}catch(e){nextBtn.focus();}},40);
 }
 
 function toggleSolution(btn){const box=document.getElementById('solBox');box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'Amagar solució':'Veure solució pas a pas';}
@@ -3362,8 +3380,9 @@ function checkExamOpen(){
   else registerError(q,val,'exam');
   state.examLog.push({q:q.question,correct:q.correct,given:val,ok,topic:q.topicName,review:miReviewPoints(q),solution:Array.isArray(q.solution)?[...q.solution]:[]});
   document.getElementById('examFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'+(ok?'':('<div>La teva resposta: <b style="color:var(--error)">'+String(val??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+q.correct+'</b></div>'+miReviewHtml(q)+'<button class="sol-btn" onclick="toggleExamSolution(this)">📘 Veure explicació</button><div class="solution-box" id="examSolBox">'+(Array.isArray(q.solution)?q.solution:[]).map((s,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div>'))+'</div>';
-  document.getElementById('btnNextExam').style.display='block';
-  document.getElementById('btnNextExam').textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';
+  const nextExamBtn=document.getElementById('btnNextExam');nextExamBtn.style.display='block';
+  nextExamBtn.textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';
+  setTimeout(function(){try{nextExamBtn.focus({preventScroll:true});}catch(e){nextExamBtn.focus();}},40);
 }
 
 function selectExamAnswer(idx,btn){
