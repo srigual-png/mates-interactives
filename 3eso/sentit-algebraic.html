@@ -127,6 +127,10 @@ nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;
 .btn-check{width:100%;margin-top:8px;background:#8b5cf6;color:white;border:none;border-radius:12px;padding:12px;font-size:0.93rem;font-weight:600;cursor:pointer;}
 .btn-check:hover{background:#7c3aed;}
 .open-hint{font-size:0.77rem;color:var(--muted);margin-top:5px;}
+.quick-symbols{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;margin-bottom:8px;align-items:center}
+.symbol-btn{display:inline-flex;align-items:center;justify-content:center;min-width:40px;min-height:36px;padding:7px 10px;border:1px solid var(--border);background:#fff;border-radius:8px;cursor:pointer;font-weight:700;color:var(--primary-dark);font-size:.92rem;line-height:1;white-space:nowrap}
+.symbol-btn:hover{border-color:var(--primary);background:#fff0eb}
+.symbol-btn:focus-visible{outline:3px solid color-mix(in srgb,var(--primary) 35%,transparent);outline-offset:2px}
 
 .feedback-box{border-radius:12px;padding:14px 16px;margin-bottom:14px;font-size:0.88rem;line-height:1.6;}
 .feedback-box.ok{background:#e6f9ef;border:1px solid #a0e6c0;color:#1a7a4a;}
@@ -209,6 +213,8 @@ nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;
 .home-link:hover{
     text-decoration:underline;
 }
+
+@media(max-width:560px){.quick-symbols{gap:6px}.symbol-btn{min-width:36px;min-height:34px;padding:6px 8px;font-size:.88rem}}
 </style>
 <script>
 const isLocal =
@@ -403,8 +409,8 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div class="guide-steps" id="guideSteps" style="display:none"></div>
   <div class="options-grid" id="optionsGrid"></div>
   <div class="open-wrap" id="openWrap" style="display:none">
-    <input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false">
-    <div class="quick-symbols"><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','²')">²</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','≤')">≤</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','≥')">≥</button></div>
+    <input class="open-input" id="openInput" type="text" onkeydown="if(event.key==='Enter'){event.preventDefault();checkOpen();}" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false">
+    <div class="quick-symbols"><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','x')">x</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','x²')">x²</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','x³')">x³</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','²')">²</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','³')">³</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','^')">^</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','+')">+</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','−')">−</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','×')">×</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','·')">·</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','÷')">÷</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','/')">/</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','=')">=</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','≤')">≤</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','≥')">≥</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput','(')">(</button><button class="symbol-btn" type="button" onclick="insertSymbol('openInput',')')">)</button></div>
     <div class="open-hint" id="openHint"></div>
     <button class="btn-check" onclick="checkOpen()">Comprova →</button>
   </div>
@@ -418,8 +424,8 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div id="examContent"></div>
   <div class="options-grid" id="examOptions"></div>
   <div class="open-wrap" id="examOpenWrap" style="display:none">
-    <input class="open-input" id="examOpenInput" type="text" placeholder="Escriu la teva resposta…" autocomplete="off" spellcheck="false">
-    <div class="quick-symbols"><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','²')">²</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','≤')">≤</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','≥')">≥</button></div>
+    <input class="open-input" id="examOpenInput" type="text" onkeydown="if(event.key==='Enter'){event.preventDefault();checkExamOpen();}" placeholder="Escriu la teva resposta…" autocomplete="off" spellcheck="false">
+    <div class="quick-symbols"><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','x')">x</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','x²')">x²</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','x³')">x³</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','²')">²</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','³')">³</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','^')">^</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','+')">+</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','−')">−</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','×')">×</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','·')">·</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','÷')">÷</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','/')">/</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','=')">=</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','≤')">≤</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','≥')">≥</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput','(')">(</button><button class="symbol-btn" type="button" onclick="insertSymbol('examOpenInput',')')">)</button></div>
     <button class="btn-check" onclick="checkExamOpen()" style="margin-top:8px">Comprova →</button>
   </div>
   <div id="examFeedback"></div>
@@ -3166,6 +3172,7 @@ function checkOpen(){
   inp.className='open-input '+(ok?'ok':'ko');
   inp.disabled=true;
   processAnswer(ok,val);
+  setTimeout(()=>{const b=document.getElementById('btnNext');if(b&&b.style.display!=='none'){try{b.focus({preventScroll:true})}catch(e){b.focus()}}},40);
 }
 
 function selectAnswer(idx,btn){
@@ -3273,6 +3280,7 @@ function checkExamOpen(){
   document.getElementById('examFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'
     +(ok?'':('<div>La teva resposta: <b style="color:var(--error)">'+String(val??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+q.correct+'</b></div>'+miReviewHtml(q)+'<button class="sol-btn" onclick="toggleExamSolution(this)">📘 Veure explicació</button><div class="solution-box" id="examSolBox">'+miSolutionHtml(q)+'</div>'))+'</div>';
   document.getElementById('btnNextExam').style.display='block';
+  setTimeout(()=>{const b=document.getElementById('btnNextExam');if(b){try{b.focus({preventScroll:true})}catch(e){b.focus()}}},40);
   document.getElementById('btnNextExam').textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';
 }
 
