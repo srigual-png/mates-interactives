@@ -88,6 +88,7 @@
   .mode-select{margin-bottom:18px;}
   .mode-btn{flex:1;padding:10px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.85rem;font-weight:600;color:var(--muted);transition:all .2s;}
   .mode-btn.active{border-color:#8b5cf6;color:#8b5cf6;background:#f5f0ff;}
+.mode-btn:disabled{opacity:.55;cursor:not-allowed;}
   .open-wrap{margin-bottom:14px;}
   .open-input{width:100%;border:2px solid var(--border);border-radius:12px;padding:13px 14px;font-size:1rem;font-family:inherit;outline:none;transition:border .2s;background:#fff;}
   .open-input:focus{border-color:var(--primary);}
@@ -2752,7 +2753,7 @@ function selectTopic(i){
   document.getElementById('btnLvl1').classList.add('active');
   document.getElementById('btnLvl2').classList.remove('active');
   document.getElementById('btnModeA').classList.add('active');
-  document.getElementById('btnModeB').classList.remove('active');
+  selectMode('multi');
 
   showScreen('screenIntro');
 }
@@ -2768,10 +2769,19 @@ function selectLevel(l){
     .classList.toggle('active',l===2);
 }
 
+function hasCompatibleOpenExercises(topicId){
+  return SP_OPEN_PATTERNS.some(p=>p.topicId===topicId&&typeof p.gen==='function');
+}
 function selectMode(m){
-  state.mode=m==='open'?'open':'multi';
+  const topic=TOPICS[state.currentTopic];
+  const available=!!topic&&hasCompatibleOpenExercises(topic.id);
+  state.mode=m==='open'&&available?'open':'multi';
   document.getElementById('btnModeA').classList.toggle('active',state.mode==='multi');
-  document.getElementById('btnModeB').classList.toggle('active',state.mode==='open');
+  const openButton=document.getElementById('btnModeB');
+  openButton.disabled=!available;
+  openButton.textContent=available?'✍️ Resposta oberta':'✍️ Resposta oberta · No disponible';
+  openButton.title=available?'':'Aquest tema encara no té exercicis de resposta oberta.';
+  openButton.classList.toggle('active',state.mode==='open');
 }
 
 function insertMath(inputId,text){
@@ -2897,6 +2907,7 @@ function startPractice(){
 // ── EXERCICIS ──────────────────────────────────────────────────────────
 
 function showExercise(){
+  selectMode(state.mode);
   state.answered=false;
 
   const t=TOPICS[state.currentTopic];

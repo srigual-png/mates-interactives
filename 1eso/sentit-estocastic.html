@@ -82,6 +82,7 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .mode-select{display:flex;gap:12px;margin-bottom:18px;}
 .mode-btn{flex:1;padding:10px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.85rem;font-weight:600;color:var(--muted);transition:all .2s;}
 .mode-btn.active{border-color:#8b5cf6;color:#8b5cf6;background:#f5f0ff;}
+.mode-btn:disabled{opacity:.55;cursor:not-allowed;}
 .open-wrap{margin-bottom:14px;}
 .open-input{width:100%;border:2px solid var(--border);border-radius:12px;padding:13px 14px;font-size:1rem;font-family:inherit;outline:none;transition:border .2s;background:#fff;}
 .open-input:focus{border-color:var(--primary);}
@@ -2549,7 +2550,7 @@ function selectTopic(i){
   document.getElementById('btnLvl1').classList.add('active');
   document.getElementById('btnLvl2').classList.remove('active');
   document.getElementById('btnModeA').classList.add('active');
-  document.getElementById('btnModeB').classList.remove('active');
+  selectMode('multi');
   showScreen('screenIntro');
 }
 
@@ -2558,10 +2559,19 @@ function selectLevel(l){
   document.getElementById('btnLvl1').classList.toggle('active',l===1);
   document.getElementById('btnLvl2').classList.toggle('active',l===2);
 }
+function hasCompatibleOpenExercises(topicId){
+  return ST_OPEN_PATTERNS.some(p=>p.topicId===topicId&&p.family!=='construccio'&&typeof p.gen==='function');
+}
 function selectMode(m){
-  state.mode=m;
-  document.getElementById('btnModeA').classList.toggle('active',m==='multi');
-  document.getElementById('btnModeB').classList.toggle('active',m==='open');
+  const topic=TOPICS[state.currentTopic];
+  const available=!!topic&&hasCompatibleOpenExercises(topic.id);
+  state.mode=m==='open'&&available?'open':'multi';
+  document.getElementById('btnModeA').classList.toggle('active',state.mode==='multi');
+  const openButton=document.getElementById('btnModeB');
+  openButton.disabled=!available;
+  openButton.textContent=available?'✍️ Resposta oberta':'✍️ Resposta oberta · No disponible';
+  openButton.title=available?'':'Aquest tema encara no té exercicis de resposta oberta.';
+  openButton.classList.toggle('active',state.mode==='open');
 }
 function insertMath(inputId,text){
   var inp=document.getElementById(inputId);if(!inp||inp.disabled)return;
@@ -2606,6 +2616,7 @@ function updateStreakBar(){
 }
 
 function showExercise(){
+  selectMode(state.mode);
   state.answered=false;
   var t=TOPICS[state.currentTopic];
   if(state.mode==='open'){

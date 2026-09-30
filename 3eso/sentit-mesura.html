@@ -2298,7 +2298,7 @@ function registerError(ex,studentAnswer,source='practice'){
 
 let currentEx=null;
 
-function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');document.getElementById('sidebar').style.display=(id==='screenHome')?'flex':'none';}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');const sidebar=document.getElementById('sidebar');if(sidebar)sidebar.style.display=(id==='screenHome')?'flex':'none';}
 
 function setNavContext(title,showBack=false,showSense=false){
   document.getElementById('navTitle').textContent=title;
@@ -2819,7 +2819,7 @@ function runAutoTest(){
     html+='</div>';
   });
   html+='<div style="text-align:center;padding:16px;background:'+(totalBad===0?'#e6f9ef':'#fdeaea')+';border-radius:12px;margin-bottom:10px"><b style="color:'+(totalBad===0?'var(--success)':'var(--error)')+'">'+(totalBad===0?'🏆 Tot correcte!':('⚠️ '+totalBad+' exercicis amb error · '+totalIssues+' incidències'))+'</b></div><button onclick="showHome()" style="width:100%;background:var(--primary);color:white;border:none;border-radius:12px;padding:13px;font-size:.93rem;font-weight:600;cursor:pointer">← Tornar al menú</button></div>';
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screenApp').classList.add('active');document.getElementById('sidebar').style.display='none';setNavContext('🧪 Test Automàtic',false,true);document.getElementById('appContent').innerHTML=html;
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screenApp').classList.add('active');const sidebar=document.getElementById('sidebar');if(sidebar)sidebar.style.display='none';setNavContext('🧪 Test Automàtic',false,true);document.getElementById('appContent').innerHTML=html;
 }
 let navClicks=0,navTimer=null;
 document.getElementById('navTitle').addEventListener('click',()=>{
