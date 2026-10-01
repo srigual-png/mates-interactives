@@ -1259,7 +1259,7 @@ function genOps(){
 // Revisió 28/09/2026: expressions una mica més llargues, amb més passos
 // abans d'arribar al resultat final, mantenint un nivell adequat per a 1r ESO.
 function genJerarquia(){
-  var type=rnd(1,7),question,correct,opts,guide,solution,isProblem=false,diff=1;
+  var type=rnd(1,9),question,correct,opts,guide,solution,isProblem=false,diff=1;
 
   if(type===1){
     diff=1;
@@ -1441,7 +1441,7 @@ function genJerarquia(){
       'Suma final: '+(a6*pow6-par6*e6)+'+'+f6+'='+res6
     ];
 
-  } else {
+  } else if(type===7){
     diff=3;
     isProblem=true;
 
@@ -1469,6 +1469,36 @@ function genJerarquia(){
       'Cost: '+pU+'x'+quant+'='+cost,
       'Amb descompte: '+cost+'-'+desc+'='+(cost-desc),
       'Amb enviament: '+(cost-desc)+'+'+env+'='+tot4
+    ];
+  } else if(type===8){
+    diff=3;
+    var a8=rnd(2,6),b8=rnd(2,9),c8=rnd(2,8),d8=rnd(1,5),e8=rnd(1,9);
+    var inner8=c8+d8,outer8=b8+inner8,res8=a8*outer8-e8;
+    question='Calcula amb parèntesis i claudàtors:<br><span class="fc">'+a8+' x ['+b8+' + ('+c8+' + '+d8+')] - '+e8+'</span>';
+    correct=String(res8);
+    opts=[String(a8*b8+inner8-e8),String(a8*outer8+e8),String(a8*(b8+c8-d8)-e8)];
+    guide=['Comença pel parèntesi interior ( )','Substitueix-lo pel resultat i resol el claudàtor exterior [ ]','Fes la multiplicació i, finalment, la resta'];
+    solution=[
+      'Parèntesi interior: '+c8+' + '+d8+' = '+inner8,
+      'Claudàtor exterior: '+b8+' + '+inner8+' = '+outer8,
+      'Multiplicació: '+a8+' x '+outer8+' = '+(a8*outer8),
+      'Resta final: '+(a8*outer8)+' - '+e8+' = '+res8
+    ];
+  } else {
+    diff=3;
+    var a9=rnd(2,5),b9=rnd(2,7),c9=rnd(2,6),d9=rnd(2,6),e9=rnd(2,5),f9=rnd(1,9);
+    var inner9=c9+d9,pow9=e9*e9,product9=b9*inner9,outer9=product9+pow9,res9=a9*outer9-f9;
+    question='Calcula amb parèntesis i claudàtors:<br><span class="fc">'+a9+' x ['+b9+' x ('+c9+' + '+d9+') + '+e9+'\u00b2] - '+f9+'</span>';
+    correct=String(res9);
+    opts=[String(a9*(product9+e9*2)-f9),String(a9*product9+pow9-f9),String(a9*outer9+f9)];
+    guide=['Resol primer el parèntesi interior ( )','Dins del claudàtor exterior [ ], calcula la potència i la multiplicació abans de sumar','Resol el claudàtor exterior i després la multiplicació i la resta finals'];
+    solution=[
+      'Parèntesi interior: '+c9+' + '+d9+' = '+inner9,
+      'Potència dins del claudàtor exterior: '+e9+'\u00b2 = '+pow9,
+      'Multiplicació dins del claudàtor exterior: '+b9+' x '+inner9+' = '+product9,
+      'Claudàtor exterior: '+product9+' + '+pow9+' = '+outer9,
+      'Multiplicació exterior: '+a9+' x '+outer9+' = '+(a9*outer9),
+      'Resta final: '+(a9*outer9)+' - '+f9+' = '+res9
     ];
   }
 
@@ -3574,7 +3604,7 @@ var TOPICS=[
   {id:"decimal_sys",course:"1r",exam1r:true,icon:"&#128315;",name:"Sistema de numeració decimal",short:"Valor posicional, descomposició i lectura",theory:{title:"Sistema de numeració decimal",text:`Cada xifra té un valor que depèn de la posició que ocupa.`,formulas:[`345.678 = 3×100000 + 4×10000 + 5×1000 + 6×100 + 7×10 + 8`,`Posicions: unitats, desenes, centenes, milers, desenes de miler i centenes de miler`,`El mateix dígit pot tenir valors diferents segons la posició`]},gen:genDecimalSys},
   {id:"ops",course:"1r",exam1r:true,icon:"&#10133;",name:"Operacions bàsiques",short:"Suma, resta, multiplicació i divisió",theory:{title:"Operacions bàsiques",text:`Les quatre operacions permeten combinar i repartir quantitats amb nombres naturals.`,formulas:[`Suma: alinea les xifres per posició`,`Resta: comprova si cal reagrupar`,`Multiplicació: productes parcials i suma`,`Divisió: dividend = divisor × quocient + residu`]},gen:genOps},
   {id:"potencies",course:"1r",exam1r:true,icon:"&#178;",name:"Potències i arrels",short:"Base, exponent, potències i arrels quadrades exactes",theory:{title:"Potències i arrels",text:`Una potència és una manera abreujada d'escriure un producte de factors iguals. L'arrel quadrada és l'operació inversa d'elevar al quadrat.`,formulas:[`a^n: a és la base i n és l'exponent`,`3^4 = 3 × 3 × 3 × 3`,`5² = 25 ↔ √25 = 5`,`Treballarem arrels quadrades exactes senzilles`]},gen:genPotenciesArrelsVariat},
-  {id:"jerarquia",course:"1r",exam1r:true,icon:"&#128208;",name:"Jerarquia d'operacions",short:"Parèntesis, potències, ×/÷, +/−",theory:{title:"Jerarquia de les operacions",text:`Quan hi ha diverses operacions, cal respectar un ordre de resolució.`,formulas:[`1r: parèntesis`,`2n: potències i arrels`,`3r: multiplicacions i divisions, d'esquerra a dreta`,`4t: sumes i restes, d'esquerra a dreta`]},gen:genJerarquia},
+  {id:"jerarquia",course:"1r",exam1r:true,icon:"&#128208;",name:"Jerarquia d'operacions",short:"Parèntesis, potències, ×/÷, +/−",theory:{title:"Jerarquia de les operacions",text:`Quan hi ha diverses operacions, cal respectar un ordre de resolució.`,formulas:[`1r: parèntesis i claudàtors, de dins cap enfora`,`2n: potències i arrels`,`3r: multiplicacions i divisions, d'esquerra a dreta`,`4t: sumes i restes, d'esquerra a dreta`]},gen:genJerarquia},
   {id:"divis",course:"1r",exam1r:true,icon:"&#128269;",name:"Divisibilitat",short:"Criteris, primers, múltiples i divisors",theory:{title:"Divisibilitat",text:`Els criteris de divisibilitat permeten saber si una divisió és exacta sense efectuar-la completament.`,formulas:[`Divisible per 2: acaba en xifra parella`,`Divisible per 3 o 9: usa la suma de les xifres`,`Divisible per 5: acaba en 0 o 5`,`Nombre primer: només té dos divisors, 1 i ell mateix`]},gen:genDivisibilitat},
   {id:"mcmmcd",course:"1r",exam1r:true,icon:"&#128279;",name:"mcm i MCD",short:"Mínim comú múltiple i màxim comú divisor",theory:{title:"mcm i MCD",text:`El MCD és el divisor comú més gran i el mcm és el múltiple comú més petit.`,formulas:[`MCD: factors comuns amb exponent menor`,`mcm: tots els factors amb exponent major`,`Són útils per agrupar quantitats i estudiar coincidències periòdiques`]},gen:genMcmMcd},
   {id:"enters",course:"1r",exam1r:true,icon:"&#177;",name:"Nombres enters",short:"Negatius, recta numèrica i operacions",theory:{title:"Nombres enters (Z)",text:`Els enters inclouen nombres positius, zero i nombres negatius i es poden representar a la recta numèrica.`,formulas:[`A la recta: més a la dreta = més gran`,`Suma i resta: interpreta el signe i el sentit del canvi`,`Multiplicació: signes iguals → positiu; diferents → negatiu`]},gen:genEnters},
