@@ -120,7 +120,7 @@ a{color:inherit}
 <h2>📐 1. L'ordre de les operacions</h2>
 <p>Quan en una expressió hi ha diverses operacions, <strong>no les podem fer en qualsevol ordre</strong>. Cal respectar la jerarquia.</p>
 <div class="steps">
-<div class="step"><strong>Parèntesis.</strong></div>
+<div class="step"><strong>Parèntesis i claudàtors</strong>, de dins cap enfora.</div>
 <div class="step"><strong>Potències i arrels.</strong></div>
 <div class="step"><strong>Multiplicacions i divisions</strong>, d'esquerra a dreta.</div>
 <div class="step"><strong>Sumes i restes</strong>, d'esquerra a dreta.</div>
@@ -160,6 +160,22 @@ a{color:inherit}
 <div class="math">(5 + 2) × (8 − 3)</div>
 <div class="math">7 × 5 = 35</div>
 </div>
+<h3>Parèntesis dins de claudàtors · nivell difícil</h3>
+<p>Els <strong>claudàtors [ ]</strong> agrupen operacions igual que els <strong>parèntesis ( )</strong>. Fem servir signes diferents per distingir els grups. Quan un grup és dins d'un altre, resolem <strong>de dins cap enfora</strong>. Dins de cada grup, respectem la mateixa jerarquia d'operacions.</p>
+<div class="example"><span class="example-label">EXEMPLE RESOLT · NIVELL DIFÍCIL</span>
+<div class="math">3 × [2 × (5 + 2) + 5²] − 5</div>
+<p>1. Resolem el parèntesi interior: 5 + 2 = 7.</p>
+<div class="math">3 × [2 × 7 + 5²] − 5</div>
+<p>2. Dins del claudàtor, calculem la potència: 5² = 25.</p>
+<div class="math">3 × [2 × 7 + 25] − 5</div>
+<p>3. Fem la multiplicació abans de sumar: 2 × 7 = 14.</p>
+<div class="math">3 × [14 + 25] − 5</div>
+<p>4. Acabem el claudàtor: 14 + 25 = 39.</p>
+<div class="math">3 × 39 − 5</div>
+<p>5. Fem la multiplicació exterior i la resta final.</p>
+<div class="math">117 − 5 = 112</div>
+</div>
+<div class="tip">💡 El que mana és quin grup és més interior, no la forma del signe. No multipliquis pel 3 exterior fins que hagis resolt tot el claudàtor.</div>
 </section>
 <section class="card" id="combinades">
 <h2>🧠 5. Operacions combinades completes</h2>
@@ -186,6 +202,7 @@ a{color:inherit}
 <li>Fer les operacions simplement d'esquerra a dreta sense mirar la prioritat.</li>
 <li>Sumar abans de multiplicar quan no hi ha parèntesis.</li>
 <li>Oblidar resoldre primer els parèntesis.</li>
+<li>Resoldre el claudàtor exterior abans del parèntesi interior, o sumar dins del claudàtor abans de fer les potències i multiplicacions.</li>
 <li>Interpretar una potència com una multiplicació per l'exponent.</li>
 <li>No respectar l'ordre d'esquerra a dreta entre operacions de la mateixa prioritat.</li>
 </ul>
@@ -195,6 +212,7 @@ a{color:inherit}
 <details><summary>1. Calcula 5 + 3 × 4.</summary><div class="answer"><strong>17</strong>. Primer 3×4=12 i després 5+12.</div></details>
 <details><summary>2. Calcula 2 + 3² − 4.</summary><div class="answer"><strong>7</strong>. Primer 3²=9; després 2+9−4=7.</div></details>
 <details><summary>3. Calcula 4 × (2 + 3) − 6.</summary><div class="answer"><strong>14</strong>. Primer 2+3=5; després 4×5−6=20−6.</div></details>
+<details><summary>4. Nivell difícil: calcula 2 × [3 × (4 + 2) + 2²] − 5.</summary><div class="answer"><strong>39</strong>. Parèntesi interior: 4+2=6. Dins del claudàtor: 2²=4, 3×6=18 i 18+4=22. Finalment: 2×22−5=44−5=39.</div></details>
 </section>
 <section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>L'ordre de les operacions</li><li>Multiplicacions abans que sumes i restes</li><li>Les potències van abans</li><li>Els parèntesis tenen prioritat</li><li>Operacions combinades completes</li></ul></section><section class="final-cta">
 <h2>Practica operacions combinades</h2>
