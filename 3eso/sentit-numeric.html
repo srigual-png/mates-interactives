@@ -499,7 +499,11 @@ function uniq4(correct,pool){
   }
   return shuffle(out)
 }
-function mathSpan(s){return '<span class="math">'+s+'</span>'}
+function mathSpan(s){
+  const superscripts={'⁻':'−','⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9'};
+  const html=String(s).replace(/[⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+/g,exp=>'<sup>'+Array.from(exp,c=>superscripts[c]).join('')+'</sup>');
+  return '<span class="math">'+html+'</span>';
+}
 function relationPhrase(a,b,leftName,rightName){
   if(Math.abs(a-b)<1e-10)return {text:'Són iguals',symbol:'='};
   return a>b?{text:leftName+' és més gran',symbol:'>'}:{text:rightName+' és més gran',symbol:'<'}
