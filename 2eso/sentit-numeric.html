@@ -2867,7 +2867,30 @@ function showTab(id,btn){
 }
 function selectLevel(l){state.level=l;document.getElementById('btnLvl1').classList.toggle('active',l===1);document.getElementById('btnLvl2').classList.toggle('active',l===2)}
 function selectMode(m){state.mode=m;document.getElementById('btnModeA').classList.toggle('active',m==='multi');document.getElementById('btnModeB').classList.toggle('active',m==='open')}
-function startPractice(){state.exCount=0;state.correctStreak=0;resetVariationSession();showExercise()}
+// Una entrada per inici de pràctica; els exercicis següents no generen esdeveniments.
+function miTrackBlockPractice(){
+  if(location.protocol==='file:'||['localhost','127.0.0.1','::1','[::1]'].indexOf(location.hostname)>=0)return;
+  var topic=TOPICS[state.currentTopic];
+  if(!topic)return;
+  var mode=state.level===1?'guiat':'autonom';
+  var event={
+    path:'2eso-numeric-'+topic.id+'-'+mode,
+    title:'2n ESO · Sentit numèric · '+topic.name+' · '+(mode==='guiat'?'Guiat':'Autònom')+(topic.course!=='2n'?' · Ampliació':''),
+    event:true
+  };
+  if(window.goatcounter&&typeof window.goatcounter.count==='function'){
+    try{window.goatcounter.count(event);}catch(e){} // Les estadístiques no han d'interrompre la pràctica.
+  }else{
+    var pending=miTrackBlockPractice.pending||(miTrackBlockPractice.pending=[]);
+    if(pending.length<20)pending.push(event);
+  }
+}
+function miFlushBlockPractice(){
+  var pending=miTrackBlockPractice.pending||[];
+  miTrackBlockPractice.pending=[];
+  pending.forEach(function(event){try{window.goatcounter.count(event);}catch(e){}});
+}
+function startPractice(){state.exCount=0;state.correctStreak=0;resetVariationSession();showExercise();miTrackBlockPractice();}
 
 /* ── PRÀCTICA ──────────────────────────────────────────────── */
 function getExerciseForMode(){
@@ -3126,6 +3149,8 @@ if (!isLocal) {
         "https://srigual.goatcounter.com/count";
 
     s.src = "https://gc.zgo.at/count.js";
+    s.onload=miFlushBlockPractice;
+    s.onerror=function(){miTrackBlockPractice.pending=[];};
 
     document.body.appendChild(s);
 
