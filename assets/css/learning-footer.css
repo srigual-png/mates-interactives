@@ -1,0 +1,51 @@
+/* Peu de les pàgines educatives que inclouen aquest CSS. */
+body:has(.mi-learning-footer) {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+body:has(.mi-learning-footer) > main,
+body:has(.mi-learning-footer) > .screen.active,
+body:has(.mi-learning-footer) > .layout:has(.screen.active) {
+  flex-grow: 1;
+}
+body:has(.mi-learning-footer) > main,
+body:has(.mi-learning-footer) > .screen {
+  width: 100%;
+  box-sizing: border-box;
+}
+.mi-learning-footer {
+  flex-shrink: 0;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 24px 0 0;
+  padding: 18px 16px;
+  background: #1f2937;
+  color: #e5e7eb;
+  text-align: center;
+  font-size: .85rem;
+  line-height: 1.6;
+}
+.mi-learning-footer p { margin: 0; }
+.mi-learning-footer p + p { margin-top: 6px; }
+.mi-learning-footer a {
+  color: #93c5fd;
+  text-decoration: none;
+  display: inline-block;
+}
+.mi-learning-footer a:hover,
+.mi-learning-footer a:focus-visible {
+  color: #bfdbfe;
+  text-decoration: underline;
+}
+.mi-learning-footer .mi-learning-footer__copyright { font-size: .75rem; }
+
+/* Alinea el botó amb la primera línia quan s'arriba al final. */
+body:has(.mi-learning-footer) .mi-avis-btn { bottom: 62px; }
+@media (min-width: 641px) and (max-width: 1199px) {
+  body:has(.mi-learning-footer) .mi-avis-btn .mi-avis-text { display: none; }
+}
+@media (max-width: 640px) {
+  .mi-learning-footer { padding-bottom: 60px; }
+  body:has(.mi-learning-footer) .mi-avis-btn { bottom: 12px; }
+}
