@@ -73,7 +73,8 @@ a{color:inherit}
 .pager-master{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:26px 0 8px}.pager-master a,.pager-master span{display:block;text-decoration:none;border:1px solid var(--border,#dce3ed);background:#fff;border-radius:10px;padding:9px 11px;font-size:.84rem;font-weight:700;color:var(--primary,#5b8dee)}.pager-master .prev{text-align:left}.pager-master .idx{text-align:center}.pager-master .next{text-align:right}.pager-master .disabled{color:var(--muted,#7f8c9a);opacity:.6}
 .extension-standard{display:inline-block;margin:6px 0 0;background:#fff3d6;color:#8a5d00;border:1px solid #efd48b;border-radius:999px;padding:4px 9px;font-size:.72rem;font-weight:800}
 @media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
-</style></head>
+</style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
+</head>
 <body>
 <nav aria-label="Navegació principal" class="top-nav">
 <a class="nav-link" href="../../../index.html" title="Inici de Mates Interactives">🏠 <span class="nav-main-label">Mates Interactives</span></a>
@@ -157,7 +158,11 @@ a{color:inherit}
 </div>
 </section>
 <nav aria-label="Navegació entre temes de teoria" class="pager-master"><a class="prev" href="estimacio-mesures-1r-eso.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="volum-capacitat-ampliacio-2n-eso.html">Tema següent →</a></nav></main>
-<footer class="footer">Mates Interactives · Matemàtiques de 1r d'ESO · Recurs gratuït</footer>
+<footer class="mi-learning-footer">
+  <p>Mates Interactives · Matemàtiques d’ESO · Teoria i exercicis gratuïts</p>
+  <p><a href="../../../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
+  <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
+</footer>
 <script>
 const isLocal=location.protocol==="file:"||["localhost","127.0.0.1","::1","[::1]"].includes(location.hostname);
 if(!isLocal){const s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://srigual.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.body.appendChild(s);}
