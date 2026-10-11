@@ -428,7 +428,28 @@ function pctStr(x){return fmtNum(x,2)+'%'}
 function stripHtml(s){const d=document.createElement('div');d.innerHTML=String(s??'');return d.textContent||d.innerText||''}
 function normText(s){return stripHtml(String(s??'')).toLowerCase().replace(/−/g,'-').replace(/…/g,'...').replace(/,/g,'.').replace(/\s+/g,'').replace(/≈/g,'').trim()}
 function asPlainNumber(s){const n=normText(s);if(!/^-?\d+(?:\.\d+)?$/.test(n))return null;const v=Number(n);return Number.isFinite(v)?v:null}
+function asCoordinatePair(value){
+  let s=stripHtml(String(value??'')).trim().replace(/−/g,'-');
+  if(s.startsWith('(')||s.endsWith(')')){
+    if(!s.startsWith('(')||!s.endsWith(')'))return null;
+    s=s.slice(1,-1).trim();
+  }
+  const parts=s.split(s.includes(';')?';':',');
+  if(parts.length!==2)return null;
+  const values=parts.map(p=>{
+    p=p.trim();
+    if(!/^[+-]?\d+(?:[.,]\d+)?$/.test(p))return null;
+    const n=Number(p.replace(',','.'));return Number.isFinite(n)?n:null;
+  });
+  return values.every(n=>n!==null)?values:null;
+}
 function openOk(correct,alts,value){
+  // Les parelles són dues components, mai un escalar amb coma decimal.
+  const expectedPair=stripHtml(String(correct??'')).trim().startsWith('(')?asCoordinatePair(correct):null;
+  if(expectedPair){
+    const pair=asCoordinatePair(value);
+    return pair!==null&&pair.every((n,i)=>Math.abs(n-expectedPair[i])<1e-9);
+  }
   const targets=[correct,...(Array.isArray(alts)?alts:[])];
   const nv=normText(value);
   for(const t of targets){

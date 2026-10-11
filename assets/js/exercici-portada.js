@@ -39,7 +39,8 @@
       const control = form.elements.answer, raw = control.value.trim();
       result.replaceChildren();
       if (!raw || (current.type === 'number' && bank.parseNumber(raw) === null)) {
-        result.textContent = !raw ? 'Escriu o selecciona una resposta abans de comprovar.' : 'Escriu un nombre o una fracció vàlida (com 3/4).';
+        result.textContent = !raw ? 'Escriu o selecciona una resposta abans de comprovar.' :
+          `La resposta no és vàlida. ${current.hint || 'Escriu un nombre, sense unitats. Pots usar coma o punt decimal.'}`;
         control.setAttribute('aria-invalid', 'true');
         control.focus();
         return;
