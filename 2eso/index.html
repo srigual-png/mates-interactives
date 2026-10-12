@@ -183,6 +183,8 @@
 @media print { .course-support { display: none; } }
 </style>
 
+<link rel="stylesheet" href="../assets/css/cercador-mi.css">
+<script defer src="../assets/js/cercador-mi.js"></script>
 </head>
 
 <body>
@@ -252,6 +254,20 @@
     </div>
 
 </section>
+<!-- MI_SEARCH_START -->
+<section class="mi-search" data-mi-search data-course="2" aria-labelledby="mi-search-title">
+<div class="mi-search__panel">
+<h2 id="mi-search-title">Què vols estudiar avui?</h2>
+<label for="mi-search-input">Busca un tema o un sentit matemàtic</label>
+<div class="mi-search__field"><span aria-hidden="true">⌕</span><input id="mi-search-input" type="search" placeholder="Busca un tema: fraccions, equacions, Pitàgores..." autocomplete="off" aria-controls="mi-search-results" aria-describedby="mi-search-status"></div>
+<p id="mi-search-status" class="mi-search__status" data-search-status role="status" aria-live="polite">Carregant el cercador…</p>
+<ul id="mi-search-results" data-search-results aria-label="Resultats de cerca"></ul>
+<button type="button" data-search-more hidden>Mostra més resultats</button>
+<noscript>Activa JavaScript per cercar. També pots utilitzar les targetes de la portada.</noscript>
+</div>
+</section>
+<!-- MI_SEARCH_END -->
+
 
 
 <!-- ================================================= -->
