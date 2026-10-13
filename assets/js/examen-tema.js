@@ -1,7 +1,7 @@
 /* Exàmens de tema: generadors de pràctica, correcció diferida i estat en memòria. */
 (function () {
   'use strict';
-  const ids = ['jerarquia', 'metric', 'potencies', 'ops', 'enters'];
+  const ids = ['jerarquia', 'metric', 'potencies', 'ops', 'enters', 'divis', 'mcmmcd'];
   const topics = TOPICS.filter(t => ids.includes(t.id));
   const numeric = !topics.some(t => t.id === 'metric');
   const primary = numeric ? 'bp' : 'btn-primary';
@@ -24,7 +24,10 @@
   function build(t) {
     const pool = [], seen = new Set();
     for (let i = 0; i < 700; i++) {
-      const q = decorateExercise(t, t.gen());
+      const q = decorateExercise(t, {...t.gen()});
+      if (t.id === 'divis' && q.type === 4) {
+        q.question += '<br><small>Agrupa els factors repetits com a potències.</small>';
+      }
       const key = plain(q.question);
       if (seen.has(key) || !q.solution || !q.solution.length || !Array.isArray(q.options)) continue;
       // El mode test de pràctica compara les opcions amb la resposta exacta.
