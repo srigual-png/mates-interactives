@@ -55,7 +55,7 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .tyb{display:inline-block;font-size:.72rem;padding:2px 9px;border-radius:20px;font-weight:700;margin-bottom:6px;}
 .tyc{background:#eaf1fd;color:var(--primary);}
 .typ{background:#fff3e0;color:#b85c00;}
-.lvs{display:flex;gap:12px;margin-bottom:22px;}
+.lvs{display:flex;gap:12px;margin-top:18px;margin-bottom:22px;}
 .lvb{flex:1;padding:11px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.88rem;font-weight:600;color:var(--muted);transition:all .2s;}
 .lvb.active{border-color:var(--primary);color:var(--primary);background:#eaf1fd;}
 .lvb:hover{border-color:var(--primary);}
@@ -419,7 +419,8 @@ Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immed
   <button class="unlock-all-btn" onclick="unlockAllTopics()">&#128275; Desbloquejar tots</button>
   <button class="unlock-reset-btn" id="btnReset" onclick="resetProgress()">&#8630; Reiniciar progrés</button>
 </div>
-<div class="screen" id="sIntro"><div id="introC"></div><div class="lvs"><button class="lvb active" id="bL1" onclick="selLv(1)">&#129513; Nivell 1<br><small>Guiat &middot; 10 encerts</small></button><button class="lvb" id="bL2" onclick="selLv(2)">&#9999;&#65039; Nivell 2<br><small>Sol/a &middot; 20 encerts</small></button></div><div class="mode-select"><button class="mode-btn active" id="bModeMulti" onclick="selMode('multi')">🔘 Opció múltiple</button><button class="mode-btn" id="bModeOpen" onclick="selMode('open')">✍️ Resposta oberta</button></div><button class="bp" onclick="startP()">Comença a practicar &rarr;</button></div>
+<div class="screen" id="sIntro"><div id="introC"></div><div class="lvs"><button class="lvb active" id="bL1" onclick="selLv(1)">&#129513; Nivell 1<br><small>Guiat &middot; 10 encerts</small></button><button class="lvb" id="bL2" onclick="selLv(2)">&#9999;&#65039; Nivell 2<br><small>Sol/a &middot; 20 encerts</small></button></div><div class="mode-select"><button class="mode-btn active" id="bModeMulti" onclick="selMode('multi')">🔘 Opció múltiple</button><button class="mode-btn" id="bModeOpen" onclick="selMode('open')">✍️ Resposta oberta</button></div><button class="bp" onclick="startP()">Comença a practicar &rarr;</button>
+<button type="button" id="miTopicExamLaunch" class="theory-page-link mi-topic-exam-launch" onclick="miTopicExam.start(this.dataset.topic)" hidden>📝 Examen del tema</button></div>
 <div class="screen" id="sEx">
   <div class="exn" id="exN"></div>
   <div class="slb" id="slb"></div>
@@ -3872,6 +3873,9 @@ function selTopic(i){
     html+='</div>';
   }
   document.getElementById('introC').innerHTML=html;
+  var examLaunch=document.getElementById('miTopicExamLaunch');
+  examLaunch.hidden=['jerarquia','metric','potencies','ops','enters'].indexOf(t.id)<0;
+  examLaunch.dataset.topic=t.id;
   document.getElementById('bL1').classList.add('active');
   document.getElementById('bL2').classList.remove('active');
   document.getElementById('bModeMulti').classList.toggle('active',state.mode==='multi');
@@ -4870,5 +4874,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   <p><a href="../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
+<link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script src="../assets/js/examen-tema.js"></script>
 </body>
 </html>

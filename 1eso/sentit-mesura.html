@@ -61,7 +61,7 @@
   .theory-box .formula{background:white;border-radius:8px;padding:9px 13px;margin:8px 0;font-family:'Courier New',monospace;font-size:.92rem;border:1px solid var(--border)}
   .theory-page-link{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--card);border:2px solid var(--primary);border-radius:12px;padding:11px 14px;margin:-6px 0 18px;color:var(--primary-dark);font-size:.9rem;font-weight:700;text-decoration:none;transition:all .15s}
   .theory-page-link:hover{background:#eef9ee;transform:translateY(-1px)}
-  .level-select{display:flex;gap:12px;margin-bottom:22px}
+  .level-select{display:flex;gap:12px;margin-top:18px;margin-bottom:22px}
   .level-btn{flex:1;padding:11px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.88rem;font-weight:600;color:var(--muted);transition:all .2s}
   .level-btn.active{border-color:var(--primary);color:var(--primary);background:#eef9ee}
   .level-btn:hover{border-color:var(--primary)}
@@ -405,6 +405,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 <button class="mode-btn" id="btnModeB" onclick="selectMode('open')">✍️ Resposta oberta</button>
 </div>
 <button class="btn-primary" onclick="startPractice()">Comença a practicar →</button>
+<button type="button" id="miTopicExamLaunch" class="theory-page-link mi-topic-exam-launch" onclick="miTopicExam.start(this.dataset.topic)" hidden>📝 Examen del tema</button>
 </div>
 <div class="screen" id="screenExercise">
 <div class="ex-header">
@@ -2193,6 +2194,9 @@ function selectTopic(i){
     html+=`<button class="btn-danger" style="padding:8px;margin-top:10px" onclick="clearTopicErrorsById('${t.id}');selectTopic(${i})">🗑 Esborra errors d'aquest tema</button></div>`;
   }
   document.getElementById('introContent').innerHTML=html;
+  var examLaunch=document.getElementById('miTopicExamLaunch');
+  examLaunch.hidden=['jerarquia','metric','potencies','ops','enters'].indexOf(t.id)<0;
+  examLaunch.dataset.topic=t.id;
   document.getElementById('btnLvl1').classList.add('active');
   document.getElementById('btnLvl2').classList.remove('active');
   document.getElementById('btnModeA').classList.toggle('active',ST.mode==='multi');
@@ -3521,5 +3525,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   <p><a href="../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
+<link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script src="../assets/js/examen-tema.js"></script>
 </body>
 </html>

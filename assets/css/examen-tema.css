@@ -1,0 +1,23 @@
+.mi-topic-exam{max-width:760px;margin:0 auto;padding:18px;color:var(--text)}
+.mi-topic-exam fieldset{min-width:0;margin:20px 0;padding:16px;border:1px solid var(--border);border-radius:12px;background:var(--card,#fff)}
+.mi-topic-exam legend{font-weight:700;padding:0 6px}
+.mi-topic-exam progress{width:100%;accent-color:var(--primary)}
+.mi-topic-option{display:flex;align-items:center;gap:12px;min-height:48px;padding:10px;margin:8px 0;border:1px solid var(--border);border-radius:10px;cursor:pointer;overflow-wrap:anywhere}
+.mi-topic-option:has(input:checked){border-color:var(--primary);background:var(--soft,#eef3fb)}
+.mi-topic-exam button,.mi-topic-exam-menu button{min-height:44px;white-space:normal}
+.mi-topic-exam-menu{margin:20px 0}.mi-topic-exam-menu h3{margin-bottom:10px}
+.mi-topic-exam :focus-visible,.mi-topic-exam-menu :focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+.mi-topic-exam .solution-box{display:block}.mi-topic-exam .ex-question,.mi-topic-exam .exq{overflow-wrap:anywhere}
+.mi-topic-exam-launch{margin:16px auto 0!important;width:min(100%,520px)!important;min-height:44px;font-family:inherit;cursor:pointer}
+.mi-topic-exam-launch[hidden]{display:none!important}
+.mi-topic-exam-launch:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+.mi-topic-exam-actions{display:flex;flex-direction:column;gap:12px;width:min(100%,520px);margin:24px auto 0}
+.mi-topic-exam-score{margin:18px 0;padding:16px;border:1px solid var(--border);border-radius:12px;background:var(--card,#fff)}
+.mi-topic-exam-score p{display:block;margin:0 0 8px;line-height:1.5}
+.mi-topic-exam-score p:last-child{margin-bottom:0}
+.mi-topic-exam-grade{font-size:1.3rem;color:var(--primary)}
+.mi-topic-exam-scoring{font-size:.85rem;color:var(--muted)}
+.mi-topic-exam-answer.mi-answer-correct{color:#16733b}
+.mi-topic-exam-answer.mi-answer-wrong{color:#b42318}
+.mi-topic-exam-actions>button,.mi-topic-exam-actions>a{display:flex;align-items:center;justify-content:center;width:100%!important;max-width:none!important;min-height:44px;margin:0!important;padding:11px 14px;box-sizing:border-box;font-family:inherit;font-size:.9rem;line-height:1.4;font-weight:700;border-radius:12px}
+@media(max-width:600px){.mi-topic-exam{padding:12px}.mi-topic-exam fieldset{padding:12px}.mi-topic-exam-menu button{width:100%}}
