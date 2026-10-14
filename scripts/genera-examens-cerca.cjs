@@ -36,7 +36,8 @@ async function generate() {
             q.options.filter(o=>String(o)===String(q.correct)).length === 1)) {
             throw Error('Invalid exam: '+topic.id);
           }
-          const theory = (typeof MI_THEORY_PAGES !== 'undefined' ? MI_THEORY_PAGES : THEORY_PAGES)[topic.id];
+          const theory = typeof MI_THEORY_PAGES !== 'undefined' ? MI_THEORY_PAGES[topic.id] :
+            typeof THEORY_PAGES !== 'undefined' ? THEORY_PAGES[topic.id] : topic.theoryPage;
           if (!theory) throw Error('Missing theory mapping: '+topic.id);
           return {id:topic.id, theory:new URL(theory, location.href).href};
         });

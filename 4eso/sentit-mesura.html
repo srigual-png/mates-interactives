@@ -185,6 +185,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   </div>
   <div class="practice-note">La resposta oberta accepta notacions equivalents quan és matemàticament possible.</div>
   <button class="btn-primary" style="width:100%" onclick="startPractice()">Començar a practicar →</button>
+<button type="button" id="miTopicExamLaunch" class="btn-theory mi-topic-exam-launch" onclick="miTopicExam.start(this.dataset.topic)" hidden>📝 Examen del tema</button>
 </section>
 
 <section class="screen" id="screenExercise">
@@ -1061,7 +1062,7 @@ let resetArmed=false,resetTimer=null;
 function resetProgress(){const b=document.getElementById('btnReset');if(!resetArmed){resetArmed=true;b.textContent='⚠ Prem de nou per confirmar';clearTimeout(resetTimer);resetTimer=setTimeout(()=>{resetArmed=false;b.textContent='↻ Reiniciar progrés'},3000);return}resetArmed=false;clearTimeout(resetTimer);state.done=[];state.unlockedIds=TOPICS.length?[TOPICS[0].id]:[];saveState();renderUnlockPanel();renderHome();closeUnlockPanel();b.textContent='↻ Reiniciar progrés'}
 
 /* ── INTRO DE CADA BLOC ─────────────────────────────────── */
-function selectTopic(i){if(!isUnlocked(i))return;state.currentTopic=i;const t=TOPICS[i],th=TEORIA[t.theoryKey];setNavContext(t.name,true,true);let theory=`<div class="theory-box"><h3>${th.title} ${topicChip(t)}</h3><div>${th.text}</div>${th.formulas.map(x=>`<div class="formula">${x}</div>`).join('')}<div class="history-box">${th.history}</div></div>`;const recent=state.errors.filter(e=>e.topicId===t.id).slice(-4).reverse();if(recent.length){theory+='<div class="saved-errors-mini"><h4>❌ Errors recents d’aquest bloc</h4>'+recent.map((e,idx)=>miRecentErrorHtml(e,idx)).join('')+'<button class="btn-secondary" style="border-color:var(--error);color:var(--error)" onclick="showErrors()">Repassa tots els errors →</button></div>'}document.getElementById('theoryContent').innerHTML=theory;document.getElementById('exampleContent').innerHTML=`<div class="example-box"><h3>${th.exampleTitle}</h3>${th.exampleSteps.map((x,i)=>`<div class="ex-step"><b>${i+1}.</b> ${x}</div>`).join('')}</div>`;document.getElementById('topicActions').innerHTML=`<a class="btn-theory" href="${t.theoryPage}">📚 Teoria completa del bloc</a>`;showTab('theory');syncSelectors();showScreen('screenIntro')}
+function selectTopic(i){if(!isUnlocked(i))return;state.currentTopic=i;const t=TOPICS[i],th=TEORIA[t.theoryKey];setNavContext(t.name,true,true);let theory=`<div class="theory-box"><h3>${th.title} ${topicChip(t)}</h3><div>${th.text}</div>${th.formulas.map(x=>`<div class="formula">${x}</div>`).join('')}<div class="history-box">${th.history}</div></div>`;const recent=state.errors.filter(e=>e.topicId===t.id).slice(-4).reverse();if(recent.length){theory+='<div class="saved-errors-mini"><h4>❌ Errors recents d’aquest bloc</h4>'+recent.map((e,idx)=>miRecentErrorHtml(e,idx)).join('')+'<button class="btn-secondary" style="border-color:var(--error);color:var(--error)" onclick="showErrors()">Repassa tots els errors →</button></div>'}document.getElementById('theoryContent').innerHTML=theory;document.getElementById('exampleContent').innerHTML=`<div class="example-box"><h3>${th.exampleTitle}</h3>${th.exampleSteps.map((x,i)=>`<div class="ex-step"><b>${i+1}.</b> ${x}</div>`).join('')}</div>`;document.getElementById('topicActions').innerHTML=`<a class="btn-theory" href="${t.theoryPage}">📚 Teoria completa del bloc</a>`;showTab('theory');syncSelectors();const examLaunch=document.getElementById('miTopicExamLaunch');examLaunch.hidden=!isExamTopic(t);examLaunch.dataset.topic=t.id;showScreen('screenIntro')}
 function showTab(which){document.getElementById('theoryContent').style.display=which==='theory'?'block':'none';document.getElementById('exampleContent').style.display=which==='example'?'block':'none';document.getElementById('tabTheoryBtn').classList.toggle('active',which==='theory');document.getElementById('tabExampleBtn').classList.toggle('active',which==='example')}
 function setLevel(n){state.level=n;syncSelectors()}
 function setMode(m){state.mode=m;syncSelectors()}
@@ -1488,5 +1489,7 @@ function miTheoryLinkHtml(topicId,label){
   <p><a href="../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
+<link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script src="../assets/js/examen-tema.js"></script>
 </body>
 </html>

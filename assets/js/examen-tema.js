@@ -3,13 +3,14 @@
   'use strict';
   const secondYear = TOPICS.some(t => t.course === '2n' && t.exam2n === true);
   const thirdYear = TOPICS.some(t => t.course === '3r' && t.exam3r === true);
-  const fourthYear = TOPICS.some(t => t.course === '4t' && t.exam4t === true);
+  const fourthYear = TOPICS.some(t => t.exam4t === true);
   const advanced = secondYear || thirdYear || fourthYear;
   const course = fourthYear ? '4eso' : thirdYear ? '3eso' : secondYear ? '2eso' : '1eso';
   const courseLabel = fourthYear ? '4t ESO' : thirdYear ? '3r ESO' : secondYear ? '2n ESO' : '1r ESO';
-  const theoryPages = advanced ? THEORY_PAGES : MI_THEORY_PAGES;
+  const theoryPages = advanced ? (typeof THEORY_PAGES !== 'undefined' ? THEORY_PAGES : Object.fromEntries(TOPICS.map(t=>[t.id,t.theoryPage]))) : MI_THEORY_PAGES;
+  const theoryClass = fourthYear && TOPICS.some(t=>t.id==='angles4t') ? 'btn-theory' : 'theory-page-link';
   const numeric = TOPICS.some(t => t.id === 'naturals');
-  const topics = TOPICS.filter(t => (fourthYear ? t.course === '4t' && t.exam4t === true : thirdYear ? t.course === '3r' && t.exam3r === true : secondYear ? t.course === '2n' && t.exam2n === true : t.course === '1r' && t.exam1r === true) &&
+  const topics = TOPICS.filter(t => (fourthYear ? t.exam4t === true && (typeof isExamTopic !== 'function' || isExamTopic(t)) : thirdYear ? t.course === '3r' && t.exam3r === true : secondYear ? t.course === '2n' && t.exam2n === true : t.course === '1r' && t.exam1r === true) &&
     typeof t.gen === 'function');
   const primary = numeric ? 'bp' : 'btn-primary';
   const secondary = numeric ? 'bs' : 'btn-secondary';
@@ -19,6 +20,14 @@
   function level(t, q) {
     if (fourthYear) {
       const levels = {
+        angles4t: [[1,6,7,10], [2,3,9], [4,5,8]],
+        radians4t: [[1,2,3], [4,5,6], [7,8,9,10]],
+        pitagores4t: [[1,2,3,4], [5,6,7], [8,9,10]],
+        semblancaRaons4t: [[1,2,3], [4,5,6], [7,8,9,10]],
+        trigRaons4t: [[1,2,3,4], [5,6,7], [8,9,10]],
+        resolTriangles4t: [[1,2,3,10], [4,5,6], [7,8,9]],
+        mesuresIndirectes4t: [[1,3,4,9], [2,5,6], [7,8,10]],
+        precisioError4t: [[1,2,6], [3,4,7,9], [5,8,10]],
         reals4t: [[1,2,3,6], [4,5,7], [8,9,10]],
         irracionals4t: [[1,2,5], [3,6,9], [4,7,8,10]],
         intervals4t: [[1,2,3,4], [5,6,7], [8,9,10]],
@@ -94,7 +103,8 @@
     for (let i = 0; i < 700; i++) {
       const q = {...t.gen(), topicId:t.id, topicName:t.name};
       if (advanced) {
-        q.options = q.options.filter(o => String(o) === String(q.correct) || !openOk(q.correct,q.alts,o,q));
+        q.options = q.options.filter(o => String(o) === String(q.correct) ||
+          !(typeof openOk === 'function' ? openOk(q.correct,q.alts,o,q) : validateOpen(q,o)));
       }
       if (!advanced && t.id === 'divis' && q.type === 4) {
         q.question += '<br><small>Agrupa els factors repetits com a potències.</small>';
@@ -139,7 +149,7 @@
     return '<button type="button" class="'+secondary+'" data-action="'+action+'" '+(disabled?'disabled':'')+'>'+label+'</button>';
   }
   function links() {
-    return '<a class="theory-page-link" href="'+theoryPages[session.topic.id]+'">📚 Repassar la teoria</a>' + button('← Tornar a la pràctica', 'practice');
+    return '<a class="'+theoryClass+'" href="'+theoryPages[session.topic.id]+'">📚 Repassar la teoria</a>' + button('← Tornar a la pràctica', 'practice');
   }
   function render() {
     const answered = session.answers.filter(a => a !== null).length;
