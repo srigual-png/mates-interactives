@@ -3,13 +3,15 @@
   'use strict';
   const numeric = TOPICS.some(t => t.id === 'naturals');
   const topics = TOPICS.filter(t => t.course === '1r' && t.exam1r === true &&
-    typeof t.gen === 'function' && (numeric || t.id === 'metric'));
+    typeof t.gen === 'function');
   const primary = numeric ? 'bp' : 'btn-primary';
   const secondary = numeric ? 'bs' : 'btn-secondary';
   let session;
   const plain = value => { const el = document.createElement('div'); el.innerHTML = String(value); return el.textContent.trim(); };
   const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function level(t, q) {
+    if (t.id === 'conversions') return q.type === 1 ? 1 : q.type === 3 ? 2 : 3;
+    if (t.id === 'temps') return q.type === 4 ? 3 : [2,3].includes(q.type) ? 2 : 1;
     if (t.id === 'proporcionalitat') {
       if ([3,4,7].includes(q.type)) return 3;
       if ([6,8].includes(q.type)) return 2;
@@ -24,7 +26,7 @@
       if (q.type === 5 && /\^3/.test(plain(q.question))) return 3;
       if (q.type === 7 && / = (100|121|144)/.test(plain(q.question))) return 3;
     }
-    return q.diff || 1;
+    return q.diff || ({easy:1,medium:2,hard:3}[q.difficulty]) || 1;
   }
   function build(t) {
     const pool = [], seen = new Set();
@@ -50,7 +52,8 @@
     }
     const result = [], counts = {};
     // Aquests blocs tenen més habilitats diferents concentrades en un mateix nivell.
-    const slots = t.id === 'fraccions' ? [6,4,2] : t.id === 'decimals' ? [2,6,4] : [4,4,4];
+    const slots = t.id === 'fraccions' ? [6,4,2] : t.id === 'decimals' ? [2,6,4] :
+      t.id === 'estimacio' ? [8,4,0] : t.id === 'mesurament' ? [4,6,2] : [4,4,4];
     for (let difficulty = 1; difficulty <= 3; difficulty++) {
       const candidates = pool.filter(q => level(t, q) === difficulty);
       for (let i = 0; i < slots[difficulty-1]; i++) {

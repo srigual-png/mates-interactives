@@ -2195,7 +2195,7 @@ function selectTopic(i){
   }
   document.getElementById('introContent').innerHTML=html;
   var examLaunch=document.getElementById('miTopicExamLaunch');
-  examLaunch.hidden=['jerarquia','metric','potencies','ops','enters'].indexOf(t.id)<0;
+  examLaunch.hidden=t.course!=='1r'||t.exam1r!==true||typeof t.gen!=='function';
   examLaunch.dataset.topic=t.id;
   document.getElementById('btnLvl1').classList.add('active');
   document.getElementById('btnLvl2').classList.remove('active');
