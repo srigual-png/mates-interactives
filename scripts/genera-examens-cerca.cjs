@@ -47,7 +47,7 @@ async function generate() {
         const matches = entries.filter(e => e.practice === practice &&
           pathToFileURL(path.join(root, e.theory)).href === exam.theory);
         if (matches.length !== 1) throw Error('Ambiguous/missing catalogue mapping: '+practice+' / '+exam.id);
-        const params = new URLSearchParams({[practice.startsWith('2eso/')?'topic':'tema']:exam.id, examen:'tema'});
+        const params = new URLSearchParams({[practice.startsWith('1eso/')?'tema':'topic']:exam.id, examen:'tema'});
         matches[0].exam = practice+'?'+params;
       }
     }

@@ -2,11 +2,13 @@
 (function () {
   'use strict';
   const secondYear = TOPICS.some(t => t.course === '2n' && t.exam2n === true);
-  const course = secondYear ? '2eso' : '1eso';
-  const courseLabel = secondYear ? '2n ESO' : '1r ESO';
-  const theoryPages = secondYear ? THEORY_PAGES : MI_THEORY_PAGES;
+  const thirdYear = TOPICS.some(t => t.course === '3r' && t.exam3r === true);
+  const advanced = secondYear || thirdYear;
+  const course = thirdYear ? '3eso' : secondYear ? '2eso' : '1eso';
+  const courseLabel = thirdYear ? '3r ESO' : secondYear ? '2n ESO' : '1r ESO';
+  const theoryPages = advanced ? THEORY_PAGES : MI_THEORY_PAGES;
   const numeric = TOPICS.some(t => t.id === 'naturals');
-  const topics = TOPICS.filter(t => (secondYear ? t.course === '2n' && t.exam2n === true : t.course === '1r' && t.exam1r === true) &&
+  const topics = TOPICS.filter(t => (thirdYear ? t.course === '3r' && t.exam3r === true : secondYear ? t.course === '2n' && t.exam2n === true : t.course === '1r' && t.exam1r === true) &&
     typeof t.gen === 'function');
   const primary = numeric ? 'bp' : 'btn-primary';
   const secondary = numeric ? 'bs' : 'btn-secondary';
@@ -14,7 +16,7 @@
   const plain = value => { const el = document.createElement('div'); el.innerHTML = String(value); return el.textContent.trim(); };
   const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function level(t, q) {
-    if (secondYear) {
+    if (advanced) {
       const levels = {
         racionals: [[1,2,3,4,9,11], [5,6,7,10,12], [8,13,14,15]],
         fraccionsSentit: [[1,2,3,5,6,14], [4,7,9,11], [8,10,12,13,15]],
@@ -24,6 +26,14 @@
         proporcionalitat: [[1,2,3,4,5,6], [7,8,9,13,16,18], [10,11,12,14,15,17]],
         percentatges: [[1,2,3,4,8,16], [5,6,7,11,12,17], [9,10,13,14,15,18]],
         recomptes: [[1,2,3,6,12], [4,5,8,9,11,15], [7,10,13,14]],
+        racionals3r: [[1,2,3,5], [4,6,7,9], [8,10,11,12]],
+        generatriu3r: [[1,2,3,9], [4,5,7,12], [6,8,10,11]],
+        reals3r: [[1,2,3,4], [5,6,7,8], [9,10,11,12]],
+        aproximacions3r: [[1,2,3,4], [5,6,8,9], [7,10,11,12]],
+        potencies3r: [[1,2,4,5,6], [3,7,8,9,12,14], [10,11,13,15,16]],
+        notacio3r: [[1,2,3,4,5,17,18], [6,7,8,9,15,16], [10,11,12,13,14]],
+        proporcionalitat3r: [[1,2,3,4,7,10], [5,6,9,11,12,14], [8,13,15]],
+        recomptes3r: [[1,2,6,11,14,15], [3,4,9,12], [5,7,8,10,13,16]],
         unitats: [[1,2,3,7,8], [4,5,6,9,11,12,14,16], [10,13,15,17,18]],
         escales: [[1,3,5,12,13], [2,4,8,9,10,11], [6,7,14,15,16,17,18]],
         pitagores: [[1,2,3,9], [4,5,6,7,8,12], [10,11,13,14,15,16]],
@@ -56,16 +66,16 @@
     const pool = [], seen = new Set();
     for (let i = 0; i < 700; i++) {
       const q = {...t.gen(), topicId:t.id, topicName:t.name};
-      if (secondYear) {
+      if (advanced) {
         q.options = q.options.filter(o => String(o) === String(q.correct) || !openOk(q.correct,q.alts,o,q));
       }
-      if (!secondYear && t.id === 'divis' && q.type === 4) {
+      if (!advanced && t.id === 'divis' && q.type === 4) {
         q.question += '<br><small>Agrupa els factors repetits com a potències.</small>';
       }
-      if (!secondYear && t.id === 'proporcionalitat' && q.type === 6) {
+      if (!advanced && t.id === 'proporcionalitat' && q.type === 6) {
         q.options = q.options.filter(o => o !== 'Només entre els dos primers valors');
       }
-      if (!secondYear && t.id === 'fraccions' && q.type === 11) {
+      if (!advanced && t.id === 'fraccions' && q.type === 11) {
         // El generador pot incloure l’equivalència correcta amb punt en lloc de coma.
         q.options = q.options.filter(o => String(o) === String(q.correct) ||
           normOpenText(o) !== normOpenText(q.correct));
@@ -79,7 +89,7 @@
     }
     const result = [], counts = {};
     // Aquests blocs tenen més habilitats diferents concentrades en un mateix nivell.
-    const slots = secondYear ? [4,4,4] : t.id === 'fraccions' ? [6,4,2] : t.id === 'decimals' ? [2,6,4] :
+    const slots = advanced ? [4,4,4] : t.id === 'fraccions' ? [6,4,2] : t.id === 'decimals' ? [2,6,4] :
       t.id === 'estimacio' ? [8,4,0] : t.id === 'mesurament' ? [4,6,2] : [4,4,4];
     for (let difficulty = 1; difficulty <= 3; difficulty++) {
       const candidates = pool.filter(q => level(t, q) === difficulty);
@@ -154,7 +164,7 @@
     if (action==='submit') finish();
     if (action==='restart') start(session.topic.id);
     if (action==='practice') {
-      if (secondYear) location.href='?topic='+encodeURIComponent(session.topic.id);
+      if (advanced) location.href='?topic='+encodeURIComponent(session.topic.id);
       else { const i=TOPICS.indexOf(session.topic); numeric?selTopic(i):selectTopic(i); }
     }
     if (action.startsWith('clear-') && !session.finished) {
@@ -167,5 +177,5 @@
   // The publication checker uses the same eligible topics and builder as start().
   window.miTopicExam = {start, build, getTopics:()=>topics.slice(), getSession:()=>session};
   const params=new URLSearchParams(location.search);
-  if(params.get('examen')==='tema')start(params.get(secondYear?'topic':'tema') || params.get('tema'));
+  if(params.get('examen')==='tema')start(params.get(advanced?'topic':'tema') || params.get('tema'));
 })();
