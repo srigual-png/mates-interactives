@@ -23,7 +23,14 @@
         aproximacions: [[1,2,3,4,5], [6,7,10,11,12], [8,9,13,14,15]],
         proporcionalitat: [[1,2,3,4,5,6], [7,8,9,13,16,18], [10,11,12,14,15,17]],
         percentatges: [[1,2,3,4,8,16], [5,6,7,11,12,17], [9,10,13,14,15,18]],
-        recomptes: [[1,2,3,6,12], [4,5,8,9,11,15], [7,10,13,14]]
+        recomptes: [[1,2,3,6,12], [4,5,8,9,11,15], [7,10,13,14]],
+        unitats: [[1,2,3,7,8], [4,5,6,9,11,12,14,16], [10,13,15,17,18]],
+        escales: [[1,3,5,12,13], [2,4,8,9,10,11], [6,7,14,15,16,17,18]],
+        pitagores: [[1,2,3,9], [4,5,6,7,8,12], [10,11,13,14,15,16]],
+        perimetres: [[1,2,3,4], [5,6,7,12,13,14], [8,9,10,11,15,16]],
+        superficies: [[1,5,6,10,11,14], [2,3,4,7,8,12,18,19], [9,13,15,16,17,20]],
+        estimacio: [[1,2,3,4,5,11], [6,10,14,15,16,18], [7,8,9,12,13,17]],
+        problemes: [[6,8,9,14,16,18], [1,3,4,5,7,10,15,17], [2,11,12,13,19,20]]
       };
       return levels[t.id].findIndex(types => types.includes(q.type)) + 1;
     }
@@ -72,7 +79,7 @@
     }
     const result = [], counts = {};
     // Aquests blocs tenen més habilitats diferents concentrades en un mateix nivell.
-    const slots = t.id === 'fraccions' ? [6,4,2] : t.id === 'decimals' ? [2,6,4] :
+    const slots = secondYear ? [4,4,4] : t.id === 'fraccions' ? [6,4,2] : t.id === 'decimals' ? [2,6,4] :
       t.id === 'estimacio' ? [8,4,0] : t.id === 'mesurament' ? [4,6,2] : [4,4,4];
     for (let difficulty = 1; difficulty <= 3; difficulty++) {
       const candidates = pool.filter(q => level(t, q) === difficulty);
