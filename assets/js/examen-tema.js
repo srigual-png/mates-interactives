@@ -1,15 +1,20 @@
 /* Exàmens de tema: generadors de pràctica, correcció diferida i estat en memòria. */
 (function () {
   'use strict';
-  const ids = ['jerarquia', 'metric', 'potencies', 'ops', 'enters', 'divis', 'mcmmcd'];
-  const topics = TOPICS.filter(t => ids.includes(t.id));
-  const numeric = !topics.some(t => t.id === 'metric');
+  const numeric = TOPICS.some(t => t.id === 'naturals');
+  const topics = TOPICS.filter(t => t.course === '1r' && t.exam1r === true &&
+    typeof t.gen === 'function' && (numeric || t.id === 'metric'));
   const primary = numeric ? 'bp' : 'btn-primary';
   const secondary = numeric ? 'bs' : 'btn-secondary';
   let session;
   const plain = value => { const el = document.createElement('div'); el.innerHTML = String(value); return el.textContent.trim(); };
   const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function level(t, q) {
+    if (t.id === 'proporcionalitat') {
+      if ([3,4,7].includes(q.type)) return 3;
+      if ([6,8].includes(q.type)) return 2;
+      return 1;
+    }
     if (t.id === 'metric') {
       const match = q.solution.join(' ').match(/hi ha (\d+) canvi/);
       return match ? Math.min(3, Number(match[1])) : 1;
@@ -28,6 +33,14 @@
       if (t.id === 'divis' && q.type === 4) {
         q.question += '<br><small>Agrupa els factors repetits com a potències.</small>';
       }
+      if (t.id === 'proporcionalitat' && q.type === 6) {
+        q.options = q.options.filter(o => o !== 'Només entre els dos primers valors');
+      }
+      if (t.id === 'fraccions' && q.type === 11) {
+        // El generador pot incloure l’equivalència correcta amb punt en lloc de coma.
+        q.options = q.options.filter(o => String(o) === String(q.correct) ||
+          normOpenText(o) !== normOpenText(q.correct));
+      }
       const key = plain(q.question);
       if (seen.has(key) || !q.solution || !q.solution.length || !Array.isArray(q.options)) continue;
       // El mode test de pràctica compara les opcions amb la resposta exacta.
@@ -36,9 +49,11 @@
       seen.add(key); pool.push(q);
     }
     const result = [], counts = {};
+    // Aquests blocs tenen més habilitats diferents concentrades en un mateix nivell.
+    const slots = t.id === 'fraccions' ? [6,4,2] : t.id === 'decimals' ? [2,6,4] : [4,4,4];
     for (let difficulty = 1; difficulty <= 3; difficulty++) {
       const candidates = pool.filter(q => level(t, q) === difficulty);
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < slots[difficulty-1]; i++) {
         candidates.sort((a,b) => (counts[a.type] || 0) - (counts[b.type] || 0));
         const q = candidates.shift();
         if (!q) throw new Error('No hi ha prou preguntes per preparar aquest examen.');
