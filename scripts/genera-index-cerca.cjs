@@ -5,7 +5,7 @@ const senses = {numeric:'Sentit numèric',mesura:'Sentit de la mesura',espacial:
 const decode = s => s.replace(/&(?:amp|lt|gt|quot|apos|nbsp);/g, x => ({'&amp;':'&','&lt;':'<','&gt;':'>','&quot;':'"','&apos;':"'",'&nbsp;':' '})[x]).replace(/&#(x[\da-f]+|\d+);/gi, (_, n) => String.fromCodePoint(n[0].toLowerCase()==='x'?parseInt(n.slice(1),16):Number(n)));
 const text = s => decode(s.replace(/<[^>]*>/g,' ')).replace(/\s+/g,' ').trim();
 const read = p => fs.readFileSync(path.join(root,p),'utf8');
-function generate() {
+function generate({write=true}={}) {
  const entries=[], verified=new Set();
  for(let course=1;course<=4;course++)for(const [sense,label] of Object.entries(senses)){
   const dir=`${course}eso/teoria/${sense}`,source=read(`${dir}/index.html`),seen=new Set();
@@ -42,10 +42,12 @@ function generate() {
   }
  }
  const dest=path.join(root,'assets/data/index-cerca.json');fs.mkdirSync(path.dirname(dest),{recursive:true});
- fs.writeFileSync(dest,JSON.stringify(entries)+'\n');
+ if(write)fs.writeFileSync(dest,JSON.stringify(entries)+'\n');
  // Local HTML files cannot fetch JSON. Generate the same catalogue as a classic script.
- fs.writeFileSync(path.join(root,'assets/data/index-cerca-local.js'),'window.MICercaLocal = '+JSON.stringify(entries)+';\n');
- const summary={topics:Object.fromEntries([1,2,3,4].map(c=>[c,entries.filter(e=>e.course===c).length])),verified_links:verified.size,bytes:fs.statSync(dest).size};
+ if(write)fs.writeFileSync(path.join(root,'assets/data/index-cerca-local.js'),'window.MICercaLocal = '+JSON.stringify(entries)+';\n');
+ const summary={topics:Object.fromEntries([1,2,3,4].map(c=>[c,entries.filter(e=>e.course===c).length])),verified_links:verified.size,bytes:Buffer.byteLength(JSON.stringify(entries)+'\n')};
  console.log(JSON.stringify(summary));return {entries,summary};
 }
-module.exports={generate};if(require.main===module)generate();
+module.exports={generate};
+// The usual publication command also verifies and includes functional exams.
+if(require.main===module)require('./genera-examens-cerca.cjs').generate().catch(error=>{console.error(error);process.exitCode=1;});

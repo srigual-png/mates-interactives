@@ -116,7 +116,8 @@
       body.querySelector('[role="status"]').textContent=n+' de 12 preguntes respostes'; body.querySelector('progress').value=n;
     }
   });
-  window.miTopicExam = {start, build, getSession:()=>session};
+  // The publication checker uses the same eligible topics and builder as start().
+  window.miTopicExam = {start, build, getTopics:()=>topics.slice(), getSession:()=>session};
   const params=new URLSearchParams(location.search);
   if(params.get('examen')==='tema')start(params.get('tema'));
 })();

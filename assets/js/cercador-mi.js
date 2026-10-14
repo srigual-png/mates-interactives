@@ -78,14 +78,15 @@
         li.append(title, meta);
         const modes = e.course === 4 ? (selected ? [selected] : e.modes) : [null];
         for (const mode of modes) {
-          for (const [key,label] of [['theory','Veure teoria'],['practice','Practicar']]) {
+          for (const [key,label] of [['theory','Veure teoria'],['practice','Practicar'],['exam','Examen']]) {
             if (!e[key]) continue;
             const a = document.createElement('a'); a.href = url(e[key], mode);
             a.textContent = label + (e.course === 4 && !selected ? ` · ${mode}` : '');
+            if (key === 'exam') a.className = 'mi-search__exam';
             a.setAttribute('aria-label', `${a.textContent}: ${e.title}, ${courses[e.course]}`);
             const recordClick = () => {
               recordSearch(); // Flush an unfinished search before its result click.
-              const action = key === 'theory' ? 'theory' : 'practice';
+              const action = key;
               track(`mi/search/${action}/${origin}/${topicId(e)}${mode ? '/' + mode : ''}`,
                 `MI cerca · ${label} · ${originTitle} → ${courses[e.course]} · ${e.sense} · ${e.title}${mode ? ' · Matemàtiques ' + mode : ''}`);
             };
