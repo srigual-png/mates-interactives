@@ -1,8 +1,12 @@
 /* Exàmens de tema: generadors de pràctica, correcció diferida i estat en memòria. */
 (function () {
   'use strict';
+  const secondYear = TOPICS.some(t => t.course === '2n' && t.exam2n === true);
+  const course = secondYear ? '2eso' : '1eso';
+  const courseLabel = secondYear ? '2n ESO' : '1r ESO';
+  const theoryPages = secondYear ? THEORY_PAGES : MI_THEORY_PAGES;
   const numeric = TOPICS.some(t => t.id === 'naturals');
-  const topics = TOPICS.filter(t => t.course === '1r' && t.exam1r === true &&
+  const topics = TOPICS.filter(t => (secondYear ? t.course === '2n' && t.exam2n === true : t.course === '1r' && t.exam1r === true) &&
     typeof t.gen === 'function');
   const primary = numeric ? 'bp' : 'btn-primary';
   const secondary = numeric ? 'bs' : 'btn-secondary';
@@ -10,6 +14,19 @@
   const plain = value => { const el = document.createElement('div'); el.innerHTML = String(value); return el.textContent.trim(); };
   const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function level(t, q) {
+    if (secondYear) {
+      const levels = {
+        racionals: [[1,2,3,4,9,11], [5,6,7,10,12], [8,13,14,15]],
+        fraccionsSentit: [[1,2,3,5,6,14], [4,7,9,11], [8,10,12,13,15]],
+        operacionsRacionals: [[1,2,7,13,17], [3,4,5,6,11,14,16], [8,9,10,12,15,18]],
+        potencies: [[1,2,3,4,5,8], [6,7,11,12,13,14], [9,10,15,16,17,18]],
+        aproximacions: [[1,2,3,4,5], [6,7,10,11,12], [8,9,13,14,15]],
+        proporcionalitat: [[1,2,3,4,5,6], [7,8,9,13,16,18], [10,11,12,14,15,17]],
+        percentatges: [[1,2,3,4,8,16], [5,6,7,11,12,17], [9,10,13,14,15,18]],
+        recomptes: [[1,2,3,6,12], [4,5,8,9,11,15], [7,10,13,14]]
+      };
+      return levels[t.id].findIndex(types => types.includes(q.type)) + 1;
+    }
     if (t.id === 'conversions') return q.type === 1 ? 1 : q.type === 3 ? 2 : 3;
     if (t.id === 'temps') return q.type === 4 ? 3 : [2,3].includes(q.type) ? 2 : 1;
     if (t.id === 'proporcionalitat') {
@@ -31,20 +48,23 @@
   function build(t) {
     const pool = [], seen = new Set();
     for (let i = 0; i < 700; i++) {
-      const q = decorateExercise(t, {...t.gen()});
-      if (t.id === 'divis' && q.type === 4) {
+      const q = {...t.gen(), topicId:t.id, topicName:t.name};
+      if (secondYear) {
+        q.options = q.options.filter(o => String(o) === String(q.correct) || !openOk(q.correct,q.alts,o,q));
+      }
+      if (!secondYear && t.id === 'divis' && q.type === 4) {
         q.question += '<br><small>Agrupa els factors repetits com a potències.</small>';
       }
-      if (t.id === 'proporcionalitat' && q.type === 6) {
+      if (!secondYear && t.id === 'proporcionalitat' && q.type === 6) {
         q.options = q.options.filter(o => o !== 'Només entre els dos primers valors');
       }
-      if (t.id === 'fraccions' && q.type === 11) {
+      if (!secondYear && t.id === 'fraccions' && q.type === 11) {
         // El generador pot incloure l’equivalència correcta amb punt en lloc de coma.
         q.options = q.options.filter(o => String(o) === String(q.correct) ||
           normOpenText(o) !== normOpenText(q.correct));
       }
       const key = plain(q.question);
-      if (seen.has(key) || !q.solution || !q.solution.length || !Array.isArray(q.options)) continue;
+      if (seen.has(key) || !q.solution || !q.solution.length || !Array.isArray(q.options) || q.options.length < 2) continue;
       // El mode test de pràctica compara les opcions amb la resposta exacta.
       if (q.options.filter(o => String(o) === String(q.correct)).length !== 1) continue;
       if (new Set(q.options.map(plain)).size !== q.options.length) continue;
@@ -75,7 +95,7 @@
     return '<button type="button" class="'+secondary+'" data-action="'+action+'" '+(disabled?'disabled':'')+'>'+label+'</button>';
   }
   function links() {
-    return '<a class="theory-page-link" href="'+MI_THEORY_PAGES[session.topic.id]+'">📚 Repassar la teoria</a>' + button('← Tornar a la pràctica', 'practice');
+    return '<a class="theory-page-link" href="'+theoryPages[session.topic.id]+'">📚 Repassar la teoria</a>' + button('← Tornar a la pràctica', 'practice');
   }
   function render() {
     const answered = session.answers.filter(a => a !== null).length;
@@ -89,8 +109,8 @@
       try {
         if (typeof window.goatcounter?.count === 'function') {
           window.goatcounter.count({
-            path: 'mi/exam/submitted/1eso/'+session.topic.id,
-            title: 'MI · Examen lliurat · 1r ESO · '+session.topic.name,
+            path: 'mi/exam/submitted/'+course+'/'+session.topic.id,
+            title: 'MI · Examen lliurat · '+courseLabel+' · '+session.topic.name,
             event: true,
             no_session: true,
             referrer: ''
@@ -126,7 +146,10 @@
     const action = btn.dataset.action;
     if (action==='submit') finish();
     if (action==='restart') start(session.topic.id);
-    if (action==='practice') { const i=TOPICS.indexOf(session.topic); numeric?selTopic(i):selectTopic(i); }
+    if (action==='practice') {
+      if (secondYear) location.href='?topic='+encodeURIComponent(session.topic.id);
+      else { const i=TOPICS.indexOf(session.topic); numeric?selTopic(i):selectTopic(i); }
+    }
     if (action.startsWith('clear-') && !session.finished) {
       const i=Number(action.slice(6)); session.answers[i]=null;
       body.querySelectorAll('[name="topicQ'+i+'"]').forEach(el=>el.checked=false);
@@ -137,5 +160,5 @@
   // The publication checker uses the same eligible topics and builder as start().
   window.miTopicExam = {start, build, getTopics:()=>topics.slice(), getSession:()=>session};
   const params=new URLSearchParams(location.search);
-  if(params.get('examen')==='tema')start(params.get('tema'));
+  if(params.get('examen')==='tema')start(params.get(secondYear?'topic':'tema') || params.get('tema'));
 })();
