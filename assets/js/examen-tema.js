@@ -3,12 +3,13 @@
   'use strict';
   const secondYear = TOPICS.some(t => t.course === '2n' && t.exam2n === true);
   const thirdYear = TOPICS.some(t => t.course === '3r' && t.exam3r === true);
-  const advanced = secondYear || thirdYear;
-  const course = thirdYear ? '3eso' : secondYear ? '2eso' : '1eso';
-  const courseLabel = thirdYear ? '3r ESO' : secondYear ? '2n ESO' : '1r ESO';
+  const fourthYear = TOPICS.some(t => t.course === '4t' && t.exam4t === true);
+  const advanced = secondYear || thirdYear || fourthYear;
+  const course = fourthYear ? '4eso' : thirdYear ? '3eso' : secondYear ? '2eso' : '1eso';
+  const courseLabel = fourthYear ? '4t ESO' : thirdYear ? '3r ESO' : secondYear ? '2n ESO' : '1r ESO';
   const theoryPages = advanced ? THEORY_PAGES : MI_THEORY_PAGES;
   const numeric = TOPICS.some(t => t.id === 'naturals');
-  const topics = TOPICS.filter(t => (thirdYear ? t.course === '3r' && t.exam3r === true : secondYear ? t.course === '2n' && t.exam2n === true : t.course === '1r' && t.exam1r === true) &&
+  const topics = TOPICS.filter(t => (fourthYear ? t.course === '4t' && t.exam4t === true : thirdYear ? t.course === '3r' && t.exam3r === true : secondYear ? t.course === '2n' && t.exam2n === true : t.course === '1r' && t.exam1r === true) &&
     typeof t.gen === 'function');
   const primary = numeric ? 'bp' : 'btn-primary';
   const secondary = numeric ? 'bs' : 'btn-secondary';
@@ -16,6 +17,19 @@
   const plain = value => { const el = document.createElement('div'); el.innerHTML = String(value); return el.textContent.trim(); };
   const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function level(t, q) {
+    if (fourthYear) {
+      const levels = {
+        reals4t: [[1,2,3,6], [4,5,7], [8,9,10]],
+        irracionals4t: [[1,2,5], [3,6,9], [4,7,8,10]],
+        intervals4t: [[1,2,3,4], [5,6,7], [8,9,10]],
+        errors4t: [[1,2,3,4], [5,9], [6,7,8,10]],
+        operacions4t: [[1,2,4], [3,5,7], [6,8,9,10]],
+        comptatge4t: [[1,4,5,7], [2,3,8,9], [6,10]],
+        pascal4t: [[1,2,6,8], [3,5,9], [4,7,10]],
+        financera4t: [[1,2,8], [4,6,7], [3,5,9,10]]
+      };
+      return levels[t.id].findIndex(types => types.includes(q.type)) + 1;
+    }
     if (thirdYear && TOPICS.some(topic => topic.id === 'precisio')) {
       const levels = {
         volum: [[1,2,3,5], [4,6,9], [7,8]],
@@ -177,7 +191,11 @@
     if (action==='submit') finish();
     if (action==='restart') start(session.topic.id);
     if (action==='practice') {
-      if (advanced) location.href='?topic='+encodeURIComponent(session.topic.id);
+      if (advanced) {
+        const params=new URLSearchParams({topic:session.topic.id});
+        if (fourthYear) { const option=new URLSearchParams(location.search).get('opcio'); if (option==='A'||option==='B') params.set('opcio',option); }
+        location.href='?'+params;
+      }
       else { const i=TOPICS.indexOf(session.topic); numeric?selTopic(i):selectTopic(i); }
     }
     if (action.startsWith('clear-') && !session.finished) {
