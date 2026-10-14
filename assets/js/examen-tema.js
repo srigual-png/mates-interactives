@@ -16,6 +16,19 @@
   const plain = value => { const el = document.createElement('div'); el.innerHTML = String(value); return el.textContent.trim(); };
   const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function level(t, q) {
+    if (thirdYear && TOPICS.some(topic => topic.id === 'precisio')) {
+      const levels = {
+        volum: [[1,2,3,5], [4,6,9], [7,8]],
+        precisio: [[1,2,3,9], [4,5,8], [6,7]],
+        arees: [[1,2,7], [3,4,6], [5,8,9]],
+        semblanca: [[1,2,3], [4,5,8], [6,7,9]],
+        tales: [[1,2,9], [3,4,7], [5,6,8]],
+        pitagores: [[1,2,3], [4,5,6], [7,8,9]],
+        piramides: [[1,2,7], [3,4,8], [5,6,9]],
+        errorMesura: [[1,2,9], [3,4,6], [5,7,8]]
+      };
+      return levels[t.id].findIndex(types => types.includes(q.type)) + 1;
+    }
     if (advanced) {
       const levels = {
         racionals: [[1,2,3,4,9,11], [5,6,7,10,12], [8,13,14,15]],
