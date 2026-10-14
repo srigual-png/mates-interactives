@@ -9,11 +9,33 @@
   // All outbound values come from the catalogue or a finite category, never the input.
   const topicId = e => e.theory.replace(/\.html$/, '');
   const senseId = e => e.theory.split('/')[2];
+  const pendingEvents = [];
+  let analyticsTimer, analyticsDeadline;
+  const flushEvents = () => {
+    analyticsTimer = undefined;
+    if (typeof window.goatcounter?.count === 'function') {
+      const events = pendingEvents.splice(0);
+      for (const event of events) {
+        try { window.goatcounter.count(event); } catch { /* Keep search usable. */ }
+      }
+    } else if (Date.now() < analyticsDeadline) {
+      analyticsTimer = setTimeout(flushEvents, 250);
+    } else {
+      pendingEvents.length = 0;
+    }
+  };
   const track = (path, title) => {
     if (location.protocol === 'file:' || ['localhost', '127.0.0.1', '::1', '[::1]'].includes(location.hostname)) return;
     try {
       if (typeof window.goatcounter?.count === 'function') {
         window.goatcounter.count({path, title, event: true, no_session: true, referrer: ''});
+      } else {
+        // The async client may still be loading. Keep fixed catalogue metadata only.
+        if (pendingEvents.length < 50) pendingEvents.push({path, title, event: true, no_session: true, referrer: ''});
+        if (analyticsTimer === undefined) {
+          analyticsDeadline = Date.now() + 30000;
+          analyticsTimer = setTimeout(flushEvents, 250);
+        }
       }
     } catch { /* Analytics must never interrupt search or navigation. */ }
   };
