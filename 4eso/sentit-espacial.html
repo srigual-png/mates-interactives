@@ -351,6 +351,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
     <button class="mode-btn" id="btnModeB" onclick="selectMode('open')">✍️ Resposta oberta</button>
   </div>
   <button class="btn-primary" onclick="startPractice()">Comença a practicar →</button>
+  <button type="button" id="miTopicExamLaunch" class="theory-page-link mi-topic-exam-launch" onclick="miTopicExam.start(this.dataset.topic)" hidden>📝 Examen del tema</button>
 </div>
 
 <!-- EXERCICI -->
@@ -1386,19 +1387,19 @@ function genGeometryFunctions4ESO(){
   let question,correct,alts=[],options,guide,solution,openHint='Escriu la resposta breument.',allowOpen=true;
   if(type===1){
     const m=[-2,-1,1,2][rnd(0,3)],b=rnd(-2,2);correct='Recta';alts=['recta','lineal','funció lineal','funcio lineal'];allowOpen=false;
-    question=`Quina forma geomètrica té la gràfica representada?${svgFunctionPlane([{fn:lineFn(m,b)}],[],'Gràfica d’una funció afí')}`;
+    question=`Quina forma geomètrica té la gràfica representada?${svgFunctionPlane([{fn:lineFn(m,b)}],[],'Gràfica per classificar')}`;
     options=shuffle(['Recta','Paràbola','Hipèrbola','Circumferència']);
     guide=['Observa si la direcció de la gràfica canvia o es manté constant.','Una funció afí té pendent constant.'];
     solution=['La gràfica no es corba i manté una direcció constant.','Això caracteritza una <b>recta</b>.','✅ Recta.'];
   }else if(type===2){
     const a=[-1,1][rnd(0,1)],h=rnd(-2,2),k=rnd(-2,1);correct='Paràbola';alts=['parabola','paràbola'];allowOpen=false;
-    question=`Identifica el tipus de corba.${svgFunctionPlane([{fn:parabolaFn(a,h,k)}],[],'Gràfica d’una funció quadràtica')}`;
+    question=`Identifica el tipus de corba.${svgFunctionPlane([{fn:parabolaFn(a,h,k)}],[],'Gràfica per classificar')}`;
     options=shuffle(['Paràbola','Recta','Hipèrbola','Segment']);
     guide=['Busca una corba amb un únic punt de gir: el vèrtex.','Les dues branques són simètriques respecte d’una recta vertical.'];
     solution=['La gràfica té un <b>vèrtex</b> i dues branques simètriques.','Aquesta és la forma d’una funció quadràtica.','✅ Paràbola.'];
   }else if(type===3){
     const k=[-4,-2,2,4][rnd(0,3)];correct='Hipèrbola';alts=['hiperbola','hipèrbola'];allowOpen=false;
-    question=`Quin tipus de corba és aquesta?${svgFunctionPlane([{fn:hyperbolaFn(k)}],[],'Gràfica d’una proporcionalitat inversa')}`;
+    question=`Quin tipus de corba és aquesta?${svgFunctionPlane([{fn:hyperbolaFn(k)}],[],'Gràfica per classificar')}`;
     options=shuffle(['Hipèrbola','Paràbola','Recta','Circumferència']);
     guide=['Observa que hi ha dues branques separades.','La gràfica s’acosta als eixos però no els talla.'];
     solution=['La gràfica té dues branques que s’aproximen als eixos.','És la forma característica de y=k/x.','✅ Hipèrbola.'];
@@ -1447,7 +1448,7 @@ function genGeometryFunctions4ESO(){
     solution=[`Pendents: ${a1} i ${a2}.`,`Com que ${a2}&gt;${a1}, la segona recta puja més per cada unitat horitzontal.`,`✅ <b>y=${a2}x</b>.`];
   }else{
     const increasing=rnd(0,1)===1,base=increasing?2:0.5,fn=x=>Math.pow(base,x/2);correct='Exponencial';alts=['exponencial','funció exponencial','funcio exponencial'];allowOpen=false;
-    question=`La gràfica següent és un exemple d’un altre tipus de corba funcional. Com la classificaries?${svgFunctionPlane([{fn}],[],'Corba exponencial')}`;
+    question=`La gràfica següent és un exemple d’un altre tipus de corba funcional. Com la classificaries?${svgFunctionPlane([{fn}],[],'Gràfica per classificar')}`;
     options=shuffle(['Exponencial','Recta','Paràbola','Hipèrbola']);
     guide=['Observa que la gràfica és corba i es manté positiva.','El canvi no és additiu i constant com en una recta: és multiplicatiu.','Aquest comportament és característic d’una funció exponencial.'];
     solution=[`La corba es manté per sobre de l’eix X i presenta un canvi ${increasing?'creixent':'decreixent'} multiplicatiu.`,`No té forma de recta, paràbola ni hipèrbola de proporcionalitat inversa.`,`✅ És una corba <b>exponencial</b>.`];
@@ -2113,6 +2114,9 @@ function selectTopic(i){
   document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',j===0));
   document.getElementById('btnLvl1').classList.toggle('active',state.level===1);document.getElementById('btnLvl2').classList.toggle('active',state.level===2);
   document.getElementById('btnModeA').classList.toggle('active',state.mode==='multi');document.getElementById('btnModeB').classList.toggle('active',state.mode==='open');
+  const examLaunch=document.getElementById('miTopicExamLaunch');
+  examLaunch.hidden=!isExamTopic(t);
+  examLaunch.dataset.topic=t.id;
   showScreen('screenIntro');
 }
 function showTab(id,btn){
@@ -2713,5 +2717,7 @@ function miTheoryLinkHtml(topicId,label){
   <p><a href="../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
+<link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script src="../assets/js/examen-tema.js"></script>
 </body>
 </html>

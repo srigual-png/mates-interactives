@@ -26,7 +26,10 @@ async function generate() {
       const errors = [];
       const onError = error => errors.push(error.message);
       page.on('pageerror', onError);
-      await page.goto(pathToFileURL(path.join(root, practice)).href);
+      const practiceUrl = pathToFileURL(path.join(root, practice));
+      // B inclou tots els blocs curriculars de quart; el cercador filtra A/B.
+      if (practice.startsWith('4eso/')) practiceUrl.searchParams.set('opcio','B');
+      await page.goto(practiceUrl.href);
       const exams = await page.evaluate(() => {
         if (!window.miTopicExam?.getTopics) throw Error('Exam discovery API missing');
         return miTopicExam.getTopics().map(topic => {
@@ -37,7 +40,8 @@ async function generate() {
             throw Error('Invalid exam: '+topic.id);
           }
           const theory = typeof MI_THEORY_PAGES !== 'undefined' ? MI_THEORY_PAGES[topic.id] :
-            typeof THEORY_PAGES !== 'undefined' ? THEORY_PAGES[topic.id] : topic.theoryPage;
+            typeof THEORY_PAGES !== 'undefined' ? THEORY_PAGES[topic.id] :
+            typeof MI_NAV_THEORY_PAGES !== 'undefined' ? MI_NAV_THEORY_PAGES[topic.id] : topic.theoryPage;
           if (!theory) throw Error('Missing theory mapping: '+topic.id);
           return {id:topic.id, theory:new URL(theory, location.href).href};
         });

@@ -415,7 +415,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 </div>
 </div>
 <div class="screen" id="screenIntro">
-<div id="introContent"></div>
+<div id="introContent" style="margin-bottom:16px"></div>
 <div class="level-select">
 <button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Nivell 1<br/><small>Guiat</small></button>
 <button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Nivell 2<br/><small>Sol/a</small></button>
@@ -425,6 +425,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 <button class="mode-btn" id="btnModeB" onclick="selectMode('open')">✍️ Resposta oberta</button>
 </div>
 <button class="btn-primary" onclick="startPractice()">Comença a practicar →</button>
+<button type="button" id="miTopicExamLaunch" class="theory-page-link mi-topic-exam-launch" onclick="miTopicExam.start(this.dataset.topic)" hidden>📝 Examen del tema</button>
 </div>
 <div class="screen" id="screenExercise">
 <div class="ex-header"><div class="ex-num" id="exNum"></div></div>
@@ -1610,7 +1611,7 @@ function genPoligons1r(){
 function genElementsVarietat(){
   const type=rnd(1,8);
   let question,correct,opts,guide,solution,svg='';
-  const letters='ABCDEFGHJKLMNPQRSTUVWXYZ';
+  const letters='ABDEFGHJKLNPQRSTUVWXYZ'; // C i M es reserven per al tercer punt i el punt mig.
   const A=letters[rnd(0,letters.length-1)];
   let B=letters[rnd(0,letters.length-1)];
   while(B===A)B=letters[rnd(0,letters.length-1)];
@@ -2756,6 +2757,9 @@ function selectTopic(i){
   document.getElementById('btnModeA').classList.add('active');
   selectMode('multi');
 
+  const examLaunch=document.getElementById('miTopicExamLaunch');
+  examLaunch.hidden=!(t.course==='1r' && t.exam1r===true);
+  examLaunch.dataset.topic=t.id;
   showScreen('screenIntro');
 }
 
@@ -4669,5 +4673,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   <p><a href="../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
+<link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script src="../assets/js/examen-tema.js"></script>
 </body>
 </html>

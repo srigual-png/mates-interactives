@@ -335,6 +335,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
     <button class="mode-btn" id="btnModeB" onclick="selectMode('open')">✍️ Resposta oberta</button>
   </div>
   <button class="btn-primary" onclick="startPractice()">Comença a practicar →</button>
+  <button type="button" id="miTopicExamLaunch" class="theory-page-link mi-topic-exam-launch" onclick="miTopicExam.start(this.dataset.topic)" hidden>📝 Examen del tema</button>
 </div>
 
 <!-- EXERCICI -->
@@ -1978,6 +1979,9 @@ function selectTopic(i){
   document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',j===0));
   document.getElementById('btnLvl1').classList.toggle('active',state.level===1);document.getElementById('btnLvl2').classList.toggle('active',state.level===2);
   document.getElementById('btnModeA').classList.toggle('active',state.mode==='multi');document.getElementById('btnModeB').classList.toggle('active',state.mode==='open');
+  const examLaunch=document.getElementById('miTopicExamLaunch');
+  examLaunch.hidden=!(t.course==='2n' && t.exam2n===true);
+  examLaunch.dataset.topic=t.id;
   showScreen('screenIntro');
 }
 function showTab(id,btn){
@@ -2504,5 +2508,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   <p><a href="../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
+<link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script src="../assets/js/examen-tema.js"></script>
 </body>
 </html>

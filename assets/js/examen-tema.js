@@ -4,10 +4,14 @@
   const secondYear = TOPICS.some(t => t.course === '2n' && t.exam2n === true);
   const thirdYear = TOPICS.some(t => t.course === '3r' && t.exam3r === true);
   const fourthYear = TOPICS.some(t => t.exam4t === true);
+  const spatialSecondYear = secondYear && TOPICS.some(t => t.id === 'visual3d');
+  const spatialFourthYear = fourthYear && TOPICS.some(t => t.id === 'figures4t');
+  const spatialThirdYear = thirdYear && TOPICS.some(t => t.id === 'translacions');
+  const spatialFirstYear = TOPICS.some(t => t.id === 'elements' && t.course === '1r');
   const advanced = secondYear || thirdYear || fourthYear;
   const course = fourthYear ? '4eso' : thirdYear ? '3eso' : secondYear ? '2eso' : '1eso';
   const courseLabel = fourthYear ? '4t ESO' : thirdYear ? '3r ESO' : secondYear ? '2n ESO' : '1r ESO';
-  const theoryPages = advanced ? (typeof THEORY_PAGES !== 'undefined' ? THEORY_PAGES : Object.fromEntries(TOPICS.map(t=>[t.id,t.theoryPage]))) : MI_THEORY_PAGES;
+  const theoryPages = advanced ? (typeof THEORY_PAGES !== 'undefined' ? THEORY_PAGES : typeof MI_NAV_THEORY_PAGES !== 'undefined' ? MI_NAV_THEORY_PAGES : Object.fromEntries(TOPICS.map(t=>[t.id,t.theoryPage]))) : MI_THEORY_PAGES;
   const theoryClass = fourthYear && TOPICS.some(t=>t.id==='angles4t') ? 'btn-theory' : 'theory-page-link';
   const numeric = TOPICS.some(t => t.id === 'naturals');
   const topics = TOPICS.filter(t => (fourthYear ? t.exam4t === true && (typeof isExamTopic !== 'function' || isExamTopic(t)) : thirdYear ? t.course === '3r' && t.exam3r === true : secondYear ? t.course === '2n' && t.exam2n === true : t.course === '1r' && t.exam1r === true) &&
@@ -18,6 +22,58 @@
   const plain = value => { const el = document.createElement('div'); el.innerHTML = String(value); return el.textContent.trim(); };
   const escape = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   function level(t, q) {
+    if (spatialThirdYear) {
+      const levels = {
+        translacions: [[1,2,5,8,9], [4,6,10], [3,7]],
+        girs: [[1,2,3,10], [4,5,6], [7,8,9]],
+        simetriaAxial: [[1,2,8,9,10], [5,6,7], [3,4]],
+        simetriaCentral: [[1,4], [2,3,5], [6,7,8,9,10]],
+        mosaics: [[1,3,4,8], [2,7,9], [5,6,10]],
+        transformacionsCoord: [[2,3,8,9], [1,4,5,7], [6,10]],
+        geoAlgebra: [[5,6,7,8], [1,2,9], [3,4,10]],
+        visualitzacio: [[2,3,5,10], [4,7,9], [1,6,8]]
+      };
+      return levels[t.id].findIndex(types => types.includes(q.type)) + 1;
+    }
+    if (spatialFirstYear) {
+      const levels = {
+        elements: [[1,2,6,7], [3,5], [4,8]],
+        angles: [[1,4], [2,3,5], [6,7]],
+        poligons: [[1,2,8], [3,4,5], [6,7]],
+        triangles: [[1,2], [3], [4,6]],
+        quadrilaters: [[1,6], [4,5], [2,3]],
+        cercle: [[1,7], [2], [3]],
+        visualitzacio: [[1,3,7], [2,4], [5,6]]
+      };
+      return levels[t.id].findIndex(types => types.includes(q.type)) + 1;
+    }
+    if (spatialSecondYear) {
+      const levels = {
+        semblanca: [[1,2,6,7], [4,5,8,10], [3,9,11]],
+        tales: [[3,4,6], [1,2,5,10], [7,8,9]],
+        pitagores: [[1,2,3], [4,5,6,10], [7,8,9]],
+        cossos: [[1,2,3,6], [7,8,9], [4,5,10]],
+        visual3d: [[3,6], [1,4,5,7,9], [2,8]],
+        coordenades: [[1,2,5,9], [4,6,8], [3,7,10]],
+        modelitzacio: [[6,9], [2,4,8], [1,3,5,7,10]]
+      };
+      return levels[t.id].findIndex(types => types.includes(q.type)) + 1;
+    }
+    if (spatialFourthYear) {
+      const levels = {
+        figures4t: [[1,3,7], [2,4,6], [5,8,9,10]],
+        vectors4t: [[1,2,3,4,10], [7,9], [5,6,8]],
+        components4t: [[1,2,4,10], [3,5,9], [6,7,8]],
+        operacionsVectors4t: [[1,3,4], [2,5,6], [7,8,9,10]],
+        coordenadesVectors4t: [[1,2,7], [3,5,6,8], [4,9,10]],
+        homotecies4t: [[1,5,6], [7,9,10], [2,3,4,8]],
+        geometriaFuncions4t: [[1,2,3,4,11], [5,6,9], [7,8,10]],
+        regions4t: [[1,2,6], [4,5,7,9], [3,8,10]],
+        rectesAmpA: [[1,4,5], [2,6,7,9], [3,8,10]],
+        geometriaAnaliticaAmpD: [[4,5,7,11], [1,3,6,12], [2,8,9,10]]
+      };
+      return levels[t.id].findIndex(types => types.includes(q.type)) + 1;
+    }
     if (fourthYear) {
       const levels = {
         angles4t: [[1,6,7,10], [2,3,9], [4,5,8]],
@@ -102,6 +158,16 @@
     const pool = [], seen = new Set();
     for (let i = 0; i < 700; i++) {
       const q = {...t.gen(), topicId:t.id, topicName:t.name};
+      if (Array.isArray(t.examTypes) && !t.examTypes.includes(q.type)) continue;
+      if (spatialFirstYear && t.id === 'visualitzacio' && q.type === 6) {
+        // No ofereixis una segona fracció equivalent a la resposta correcta.
+        const [n,d] = String(q.correct).split('/').map(Number);
+        q.options = q.options.filter(o => {
+          if (String(o) === String(q.correct)) return true;
+          const parts = String(o).match(/^(\d+)\/(\d+)$/);
+          return !parts || Number(parts[2]) === 0 || Number(parts[1])*d !== n*Number(parts[2]);
+        });
+      }
       if (advanced) {
         q.options = q.options.filter(o => String(o) === String(q.correct) ||
           !(typeof openOk === 'function' ? openOk(q.correct,q.alts,o,q) : validateOpen(q,o)));
@@ -117,12 +183,18 @@
         q.options = q.options.filter(o => String(o) === String(q.correct) ||
           normOpenText(o) !== normOpenText(q.correct));
       }
-      const key = plain(q.question);
+      // En els exercicis visuals, la geometria del dibuix també defineix la pregunta.
+      const key = spatialSecondYear || spatialThirdYear || spatialFourthYear ? q.question : plain(q.question);
       if (seen.has(key) || !q.solution || !q.solution.length || !Array.isArray(q.options) || q.options.length < 2) continue;
       // El mode test de pràctica compara les opcions amb la resposta exacta.
       if (q.options.filter(o => String(o) === String(q.correct)).length !== 1) continue;
       if (new Set(q.options.map(plain)).size !== q.options.length) continue;
       seen.add(key); pool.push(q);
+      // Els dibuixos de quart són costosos: atura el banc quan ja cobreix
+      // tots els tipus del generador i té prou preguntes de cada nivell.
+      if (spatialFourthYear && pool.length >= 40 &&
+          new Set(pool.map(item=>item.type)).size >= (t.id==='geometriaFuncions4t'?11:t.id==='geometriaAnaliticaAmpD'?12:10) &&
+          [1,2,3].every(d=>pool.filter(item=>level(t,item)===d).length>=4)) break;
     }
     const result = [], counts = {};
     // Aquests blocs tenen més habilitats diferents concentrades en un mateix nivell.
@@ -143,7 +215,8 @@
   screen.id = 'miTopicExam'; screen.className = 'screen';
   screen.setAttribute('aria-label', 'Examen del tema');
   screen.innerHTML = '<div class="mi-topic-exam" id="miTopicExamBody"></div>';
-  (document.querySelector('.screen').parentElement).appendChild(screen);
+  const screenParent = document.querySelector('.screen').parentElement;
+  screenParent.insertBefore(screen, spatialFirstYear || spatialSecondYear || spatialThirdYear || spatialFourthYear ? screenParent.querySelector(':scope > .mi-learning-footer') : null);
   const body = screen.firstElementChild;
   function button(label, action, disabled) {
     return '<button type="button" class="'+secondary+'" data-action="'+action+'" '+(disabled?'disabled':'')+'>'+label+'</button>';
@@ -153,7 +226,7 @@
   }
   function render() {
     const answered = session.answers.filter(a => a !== null).length;
-    body.innerHTML = '<h2 tabindex="-1">Examen del tema · '+escape(session.topic.name)+'</h2><p role="status">'+answered+' de '+session.questions.length+' preguntes respostes</p><progress max="'+session.questions.length+'" value="'+answered+'" aria-label="Preguntes respostes"></progress><p>Selecciona una resposta. Pots canviar-la i revisar totes les preguntes abans de lliurar. Les solucions es mostraran en acabar.</p>' + session.questions.map((q,i) => '<fieldset><legend>Pregunta '+(i+1)+' · '+['','Fàcil','Mitjana','Alta'][level(session.topic,q)]+'</legend><div class="'+(numeric?'exq':'ex-question')+'">'+q.question+'</div>'+q.options.map((o,j) => '<label class="mi-topic-option"><input type="radio" name="topicQ'+i+'" data-question="'+i+'" value="'+j+'" '+(session.answers[i]===j?'checked':'')+'><span>'+o+'</span></label>').join('')+button('Deixar sense resposta', 'clear-'+i)+'</fieldset>').join('')+'<div class="mi-topic-exam-actions"><button type="button" class="'+primary+'" data-action="submit">Lliurar l’examen</button>'+links()+'</div>';
+    body.innerHTML = '<h2 tabindex="-1">Examen del tema · '+escape(session.topic.name)+'</h2><p role="status">'+answered+' de '+session.questions.length+' preguntes respostes</p><progress max="'+session.questions.length+'" value="'+answered+'" aria-label="Preguntes respostes"></progress><p>Selecciona una resposta. Pots canviar-la i revisar totes les preguntes abans de lliurar. Les solucions es mostraran en acabar.</p>' + session.questions.map((q,i) => '<fieldset><legend>Pregunta '+(i+1)+' · '+['','Fàcil','Mitjana','Alta'][level(session.topic,q)]+'</legend><div class="'+(numeric?'exq':'ex-question')+'">'+(spatialFirstYear || spatialSecondYear || spatialThirdYear || spatialFourthYear?'<div class="q-text">'+q.question+'</div>':q.question)+'</div>'+q.options.map((o,j) => '<label class="mi-topic-option"><input type="radio" name="topicQ'+i+'" data-question="'+i+'" value="'+j+'" '+(session.answers[i]===j?'checked':'')+'><span>'+o+'</span></label>').join('')+button('Deixar sense resposta', 'clear-'+i)+'</fieldset>').join('')+'<div class="mi-topic-exam-actions"><button type="button" class="'+primary+'" data-action="submit">Lliurar l’examen</button>'+links()+'</div>';
   }
   function finish() {
     if (session.finished) return;

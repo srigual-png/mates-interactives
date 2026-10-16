@@ -203,6 +203,7 @@ if (location.protocol !== "file:") {
 .intro-card p{text-align:left!important;line-height:1.7}
 .all-theory-wrap{margin:0 0 12px!important}
 .theory-page-link{width:min(100%,520px)!important;margin:0 auto!important;min-height:44px}
+#screenIntro #tabTheory>.theory-page-link{display:flex}
 .home-tools{margin:0 0 20px!important;text-align:center}
 .unlock-launch{min-height:42px;padding:10px 16px!important}
 
@@ -324,6 +325,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
     <button class="mode-btn" id="btnModeB" onclick="selectMode('open')">✍️ Resposta oberta</button>
   </div>
   <button class="btn-primary" onclick="startPractice()">Comença a practicar →</button>
+  <button type="button" id="miTopicExamLaunch" class="theory-page-link mi-topic-exam-launch" onclick="miTopicExam.start(this.dataset.topic)" hidden>📝 Examen del tema</button>
 </div>
 
 <!-- EXERCICI -->
@@ -479,11 +481,11 @@ function fallbackDistractors(correct){
   if(/x/.test(c))return ['x² + x + 1','x² − x + 1','2x² + x','x(x + 1)','(x + 1)²'];
   return ['No es pot determinar','No hi ha prou informació','Cap de les anteriors','La transformació identitat'];
 }
-function uniq4(correct,pool){
+function uniq4(correct,pool,acceptDistractor=()=>true,includeFallback=true){
   const c=String(correct),out=[c],seen=new Set([c]);
-  for(const x of shuffle([...(pool||[]),...fallbackDistractors(c)])){
+  for(const x of shuffle([...(pool||[]),...(includeFallback?fallbackDistractors(c):[])])){
     const s=String(x);
-    if(s.trim()&&!seen.has(s)){seen.add(s);out.push(s)}
+    if(s.trim()&&!seen.has(s)&&acceptDistractor(s)){seen.add(s);out.push(s)}
     if(out.length===4)break;
   }
   return shuffle(out)
@@ -1301,66 +1303,68 @@ let geoAlgTypeBag=[];
 function nextGeoAlgType(){if(!geoAlgTypeBag.length)geoAlgTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return geoAlgTypeBag.pop()}
 function genGeoAlgebra3ESO(forceType){
   const type=forceType||nextGeoAlgType();
+  // Els distractors genèrics poden ser una altra escriptura del mateix polinomi.
+  const algebraOptions=(correct,pool)=>uniq4(correct,pool,()=>true,type===7);
   let question,correct,options,guide,solution,alts=[],openHint='',allowOpen=false,difficulty='medium';
   if(type===1){
     const a=rnd(1,9);correct=expandSquareStr(a);
     question=`El quadrat de costat <b>x + ${a}</b> es divideix en quatre peces com es veu al model. Quina és l'expressió de l'àrea total?`+svgAreaModelSquareQuestion(a);
-    options=uniq4(correct,[expandRectStr(a,a),`x²${signed(a)}x${signed(a*a)}`,`x²${signed(2*a)}x + ${a}`,`2x²${signed(2*a)}x${signed(a*a)}`,`x²${signed(3*a)}x${signed(a*a)}`,`x²${signed(2*a)}x${signed(2*a*a)}`]);
+    options=algebraOptions(correct,[expandRectStr(a,a),`x²${signed(a)}x${signed(a*a)}`,`x²${signed(2*a)}x + ${a}`,`2x²${signed(2*a)}x${signed(a*a)}`,`x²${signed(3*a)}x${signed(a*a)}`,`x²${signed(2*a)}x${signed(2*a*a)}`]);
     guide=['L’àrea total és la suma de les quatre peces.','Al model apareixen x², ax, ax i a².','Suma-les i agrupa termes semblants.'];
     solution=[svgAreaModelSquare(a),`Àrees de les peces: x², ${a}x, ${a}x i ${a*a}.`,`x² + ${a}x + ${a}x + ${a*a} = ${correct}.`,`✅ ${correct}`];
   }else if(type===2){
     const a=rnd(1,7),b=shuffle(Array.from({length:7},(_,i)=>i+2).filter(v=>v!==a))[0];correct=expandRectStr(a,b);
     question=`Un rectangle té costats <b>x + ${a}</b> i <b>x + ${b}</b>. Quin polinomi representa la seva àrea?`+svgAreaModelRectQuestion(a,b);
-    options=uniq4(correct,[expandSquareStr(a),`x²${signed(a*b)}x${signed(a+b)}`,`x²${signed(a+b)}x${signed(a+b)}`,`2x²${signed(a+b)}x${signed(a*b)}`,`x²${signed(a)}x${signed(a*b)}`,`x²${signed(b)}x${signed(a*b)}`]);
+    options=algebraOptions(correct,[expandSquareStr(a),`x²${signed(a*b)}x${signed(a+b)}`,`x²${signed(a+b)}x${signed(a+b)}`,`2x²${signed(a+b)}x${signed(a*b)}`,`x²${signed(a)}x${signed(a*b)}`,`x²${signed(b)}x${signed(a*b)}`]);
     guide=['L’àrea d’un rectangle és base × altura.','Al model apareixen x², bx, ax i ab.','La suma és x² + (a+b)x + ab.'];
     solution=[svgAreaModelRect(a,b),`Àrea = (x+${a})(x+${b}).`,`En desenvolupar: x² + ${a+b}x + ${a*b}.`,`✅ ${correct}`];
   }else if(type===3){
     const a=rnd(1,6),b=rnd(a+1,8),s=a+b,p=a*b;correct=factorPairStr(a,b);
     question=`Factoritza l'expressió <b>x² + ${s}x + ${p}</b>.`;
-    options=uniq4(correct,[`(${binomX(a+b)})(x + 1)`,`(${binomX(a)} )²`,`(${binomX(-a)} )(${binomX(-b)})`,`x(${binomX(s)})`]);
+    options=algebraOptions(correct,[`(${binomX(a+b)})(x + 1)`,`(${binomX(a)} )²`,`(${binomX(-a)} )(${binomX(-b)})`,`x(${binomX(s)})`]);
     guide=['Busquem dos nombres que sumin '+s+' i que multipliquin '+p+'.',`Aquests nombres són ${a} i ${b}.`,'Per tant, l’expressió es pot escriure com un producte de dos binomis.'];
     solution=[`Cal trobar u i v amb u+v=${s} i uv=${p}.`,`u=${a} i v=${b}.`,`Per tant, x² + ${s}x + ${p} = ${correct}.`,`✅ ${correct}`];
   }else if(type===4){
     const a=rnd(2,9);correct=`(x − ${a})(x + ${a})`;
     question=`Quina és la factorització de <b>x² − ${a*a}</b>?`;
-    options=uniq4(correct,[`(x − ${a})²`,`(x + ${a})²`,`x(x − ${a*a})`,`(x − ${a*a})(x + 1)`]);
+    options=algebraOptions(correct,[`(x − ${a})²`,`(x + ${a})²`,`x(x − ${a*a})`,`(x − ${a*a})(x + 1)`]);
     guide=['Reconstrueix la identitat de diferència de quadrats.','a² és el quadrat del nombre '+a+'.','Aplica x² − a² = (x−a)(x+a).'];
     solution=[`x² − ${a*a} = x² − ${a}².`,`Per diferència de quadrats: (x−${a})(x+${a}).`,`✅ ${correct}`];
   }else if(type===5){
     const a=rnd(2,8),b=rnd(2,9);correct=`${a}(x + ${b})`;
     question=`El model mostra dues peces d'àrea <b>${a}x</b> i <b>${a*b}</b>. Quina expressió factoritzada representa l'àrea total?`+svgCommonFactorQuestion(a,b);
-    options=uniq4(correct,[`${a+b}x`,`${a*b}(x + 1)`,`x(${a} + ${b})`,`(${a}x)(${b})`]);
+    options=algebraOptions(correct,[`${a+b}x`,`${a*b}(x + 1)`,`x(${a} + ${b})`,`(${a}x)(${b})`,`${a}(x + ${b+1})`]);
     guide=['Les dues peces comparteixen una mateixa altura.','Busca el factor comú de '+a+'x i '+(a*b)+'.','Agrupa l’àrea total com a factor comú per suma interior.'];
     solution=[svgCommonFactor(a,b),`Àrea total = ${a}x + ${a*b}.`,`Tots dos termes tenen factor comú ${a}.`,`${a}x + ${a*b} = ${a}(x + ${b}).`,`✅ ${correct}`];
   }else if(type===6){
     const a=rnd(1,8);correct=`${2*a}x`;
     question=`Completa el terme del mig perquè la identitat sigui correcta: <b>(x + ${a})² = x² + ? + ${a*a}</b>.`;
-    options=uniq4(correct,[`${a}x`,`${a*a}x`,`${2*a}`,`${a}²x`]);
+    options=algebraOptions(correct,[`${a}x`,`${a*a}x`,`${2*a}`,`${a}²x`,`${2*a+1}x`,`${2*a+2}x`].filter(o=>o!==`${a}²x`||a*a!==2*a));
     guide=['Recorda el desenvolupament d’un quadrat de binomi.','(x+a)² = x² + 2ax + a².','Substitueix a per '+a+'.'];
     solution=[`(x+${a})² = x² + 2·${a}·x + ${a*a}.`,`El terme central és ${2*a}x.`,`✅ ${correct}`];
   }else if(type===7){
     const a=rnd(1,6),b=rnd(2,7),xv=rnd(1,6);correct=String((xv+a)*(xv+b));allowOpen=true;openHint='Escriu només el valor numèric de l’àrea.';
     question=`Si un rectangle té costats <b>x + ${a}</b> i <b>x + ${b}</b>, quina àrea té quan <b>x = ${xv}</b>?`;
-    options=uniq4(correct,[String(xv*xv+(a+b)*xv),String((xv+a)+(xv+b)),String(xv*xv+a*b),String((xv+a)*(xv+b)+a+b)]);
+    options=algebraOptions(correct,[String(xv*xv+(a+b)*xv),String((xv+a)+(xv+b)),String(xv*xv+a*b),String((xv+a)*(xv+b)+a+b)]);
     alts=[correct];
     guide=['Substitueix x per '+xv+'.','Calcula els dos costats numèrics.','Multiplica base × altura.'];
     solution=[`Costats: ${xv}+${a} = ${xv+a} i ${xv}+${b} = ${xv+b}.`,`Àrea = ${xv+a} · ${xv+b} = ${correct}.`,`✅ ${correct}`];
   }else if(type===8){
     const a=rnd(1,5),b=rnd(2,8);correct=`4x + ${2*(a+b)}`;
     question=`Quin polinomi representa el <b>perímetre</b> d’un rectangle de costats <b>x + ${a}</b> i <b>x + ${b}</b>?`;
-    options=uniq4(correct,[`2x + ${a+b}`,`2x + ${2*(a+b)}`,`4x + ${a+b}`,`x² + ${a+b}x + ${a*b}`]);
+    options=algebraOptions(correct,[`2x + ${a+b}`,`2x + ${2*(a+b)}`,`4x + ${a+b}`,`x² + ${a+b}x + ${a*b}`]);
     guide=['El perímetre d’un rectangle és 2(base + altura).','Suma els dos costats: (x+'+a+') + (x+'+b+').','Multiplica per 2 i redueix.'];
     solution=[`P = 2[(x+${a}) + (x+${b})].`,`P = 2(2x + ${a+b}) = 4x + ${2*(a+b)}.`,`✅ ${correct}`];
   }else if(type===9){
     const a=rnd(2,7);correct=`(x + ${a})²`;
     question=`Quina expressió compacta és equivalent a <b>x² + ${2*a}x + ${a*a}</b>?`;
-    options=uniq4(correct,[`(x + ${2*a})²`,`(x − ${a})²`,`(x + ${a*a})²`,`(x + ${a})(x − ${a})`]);
+    options=algebraOptions(correct,[`(x + ${2*a})²`,`(x − ${a})²`,`(x + ${a*a})²`,`(x + ${a})(x − ${a})`]);
     guide=['Compara l’expressió amb la identitat x² + 2ax + a².','Aquí 2a = '+(2*a)+', així que a = '+a+'.','Substitueix dins del quadrat de binomi.'];
     solution=[`x² + ${2*a}x + ${a*a} té la forma x² + 2ax + a².`,`Amb a=${a}, obtenim (x+${a})².`,`✅ ${correct}`];
   }else{
     const a=rnd(1,5),b=rnd(2,7);correct=`x² + ${a+b}x + ${a*b}`;
     question=`Desenvolupa el producte <b>(x + ${a})(x + ${b})</b>.`;
-    options=uniq4(correct,[`x² + ${a*b}x + ${a+b}`,`x² + ${a+b}x + ${a+b}`,`2x² + ${a+b}x + ${a*b}`,`x² + ${a}x + ${b}`,`x² + ${a}x + ${a*b}`,`x² + ${b}x + ${a*b}`]);
+    options=algebraOptions(correct,[`x² + ${a*b}x + ${a+b}`,`x² + ${a+b}x + ${a+b}`,`2x² + ${a+b}x + ${a*b}`,`x² + ${a}x + ${b}`,`x² + ${a}x + ${a*b}`,`x² + ${b}x + ${a*b}`]);
     guide=['Aplica la distributiva o pensa en el model d’àrees.','x·x dona x².','Els termes lineals sumen (a+b)x i el terme constant és ab.'];
     solution=[`(x+${a})(x+${b}) = x² + ${a}x + ${b}x + ${a*b}.`,`Agrupant: x² + ${a+b}x + ${a*b}.`,`✅ ${correct}`];
   }
@@ -1435,19 +1439,19 @@ function genVisualitzacio3ESO(forceType){
     const xs=[-2,-1,0,1,2],good=shuffle(xs)[0];correct=pointStr(good,good*good);
     const wrongs=shuffle([[good+1,good*good],[good-1,good*good],[good,good*good+1],[good,good*good-1],[-good,good*good],[good,-good*good],[good+1,(good+1)*(good+1)+1]]).map(p=>pointStr(p[0],p[1]));
     question='Quin dels punts següents pertany segur a la paràbola <b>y = x²</b>?'+svgParabolaSimple();
-    options=uniq4(correct,wrongs); alts=pointAlts(good,good*good);
+    options=uniq4(correct,[...wrongs,...[1,2,3,4].map(d=>pointStr(good+d,(good+d)**2+1))],o=>{const [x,y]=asCoordinatePair(o);return y!==x*x;}); alts=pointAlts(good,good*good);
     guide=['En la paràbola y = x², la coordenada y és el quadrat de x.','Prova cada opció substituint x.','La correcta compleix exactament y = x².'];
     solution=[`Per x=${good}, tenim y=${good}²=${good*good}.`,`Per tant, el punt correcte és ${correct}.`,`✅ ${correct}`];
   }else if(type===7){
     const vx=rnd(-3,3);correct='x = '+vx;
-    question=`Una paràbola té vèrtex al punt <b>V${pointStr(vx,rnd(-2,2))}</b>. Quin és el seu <b>eix de simetria</b>?`;
+    question=`Una paràbola vertical té vèrtex al punt <b>V${pointStr(vx,rnd(-2,2))}</b>. Quin és el seu <b>eix de simetria</b>?`;
     options=uniq4(correct,['y = '+vx,'x = 0','y = 0','x = '+(-vx),'x = '+(vx+1),'x = '+(vx-1),'y = '+(vx+1)]);
     guide=['L’eix de simetria d’una paràbola vertical passa pel vèrtex.','És una recta vertical.','Té equació x = coordenada x del vèrtex.'];
     solution=[`El vèrtex té coordenada x = ${vx}.`,`L’eix de simetria és la recta vertical x = ${vx}.`,`✅ ${correct}`];
   }else if(type===8){
     const k=shuffle([2,3,4,6])[0],x=shuffle([1,2,-1,-2])[0];correct=pointStr(x,k/x);
     question=`Quin punt pertany a la hipèrbola <b>y = ${k}/x</b>?`+svgHyperbolaSimple(k);
-    options=uniq4(correct,[pointStr(x,k),pointStr(x,x/k),pointStr(x+1,k/x),pointStr(-x,k/x)]); alts=pointAlts(x,k/x);
+    options=uniq4(correct,[pointStr(x,k),pointStr(x,x/k),pointStr(x+1,k/x),pointStr(-x,k/x),pointStr(x,k/x+1),pointStr(x,k/x+2),pointStr(x,k/x+3),pointStr(x,k/x+4)],o=>{const [px,py]=asCoordinatePair(o);return px===0||Math.abs(py-k/px)>1e-9;}); alts=pointAlts(x,k/x);
     guide=['Substitueix la x de cada opció a la fórmula y = '+k+'/x.','La correcta compleix exactament aquesta relació.','Comprova especialment el signe de y.'];
     solution=[`Si x=${x}, llavors y=${k}/${x} = ${k/x}.`,`Així, el punt correcte és ${correct}.`,`✅ ${correct}`];
   }else if(type===9){
@@ -1933,6 +1937,9 @@ function selectTopic(i){
   document.querySelectorAll('.tab-btn').forEach((b,j)=>b.classList.toggle('active',j===0));
   document.getElementById('btnLvl1').classList.toggle('active',state.level===1);document.getElementById('btnLvl2').classList.toggle('active',state.level===2);
   document.getElementById('btnModeA').classList.toggle('active',state.mode==='multi');document.getElementById('btnModeB').classList.toggle('active',state.mode==='open');
+  const examLaunch=document.getElementById('miTopicExamLaunch');
+  examLaunch.hidden=!(t.course==='3r' && t.exam3r===true);
+  examLaunch.dataset.topic=t.id;
   showScreen('screenIntro');
 }
 function showTab(id,btn){
@@ -2424,5 +2431,7 @@ function miTheoryLinkHtml(topicId,label){
   <p><a href="../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
+<link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script src="../assets/js/examen-tema.js"></script>
 </body>
 </html>
