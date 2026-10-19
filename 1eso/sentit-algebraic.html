@@ -427,6 +427,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 <button class="mode-btn" id="btnModeB" onclick="selectMode('open')">✍️ Resposta oberta</button>
 </div>
 <button class="btn-primary" onclick="startPractice()">Comença a practicar →</button>
+<button type="button" id="miTopicExamLaunch" class="theory-page-link mi-topic-exam-launch" onclick="miTopicExam.start(this.dataset.topic)" hidden>📝 Examen del tema</button>
 </div>
 <!-- EXERCICI -->
 <div class="screen" id="screenExercise">
@@ -1681,6 +1682,18 @@ function genEquacionsAmpliacio(){
 
 /* ── PENSAMENT COMPUTACIONAL · 1r ESO ─────────────────────── */
 function genComputacional(){
+  function instructionOptions(initial,result,correct,wrong){
+    // Una resta i una divisió poden portar al mateix nombre: ofereix
+    // només instruccions que donin un resultat diferent com a distractors.
+    const candidates=[...wrong,'sumar '+(result+1),'restar '+(initial+1),
+      'multiplicar per '+(result+1),'dividir entre '+(initial+1)];
+    return uniq4(correct,candidates.filter(text=>{
+      const n=Number(text.match(/\d+$/)[0]);
+      const value=text.startsWith('sumar ')?initial+n:text.startsWith('restar ')?initial-n:
+        text.startsWith('multiplicar ')?initial*n:initial/n;
+      return value!==result;
+    }));
+  }
   const type=rnd(1,6);
   let question,correct,alts=[],opts,guide,solution;
 
@@ -1723,9 +1736,9 @@ function genComputacional(){
     if(op===1){k=rnd(2,9);res=a+k;label='sumar '+k;wrongs=['restar '+k,'multiplicar per '+k,'dividir entre '+k,'sumar '+(k+1)];}
     else if(op===2){k=rnd(2,Math.min(8,a-1));res=a-k;label='restar '+k;wrongs=['sumar '+k,'multiplicar per '+k,'dividir entre '+k,'restar '+(k+1)];}
     else if(op===3){k=rnd(2,5);res=a*k;label='multiplicar per '+k;wrongs=['sumar '+k,'restar '+k,'dividir entre '+k,'multiplicar per '+(k+1)];}
-    else {k=[2,3,4][rnd(0,2)];const base=rnd(2,8),a2=base*k;res=base;question=`Quina instrucció transforma <b>${a2}</b> en <b>${res}</b>?`;label='dividir entre '+k;correct=label;alts=[label];opts=uniq4(correct,['multiplicar per '+k,'sumar '+k,'restar '+k,'dividir entre '+(k+1)]);guide=['Compara el valor inicial amb el final','Decideix quina operació desfà la diferència o el factor entre tots dos'];solution=[`${a2} ÷ ${k} = ${res}`,`Instrucció: <b>${label}</b>.`];return {topicId:'computacional',type,question,correct,alts,options:opts,guide,solution};}
+    else {k=[2,3,4][rnd(0,2)];const base=rnd(2,8),a2=base*k;res=base;question=`Quina instrucció transforma <b>${a2}</b> en <b>${res}</b>?`;label='dividir entre '+k;correct=label;alts=[label];opts=instructionOptions(a2,res,correct,['multiplicar per '+k,'sumar '+k,'restar '+k,'dividir entre '+(k+1)]);guide=['Compara el valor inicial amb el final','Decideix quina operació desfà la diferència o el factor entre tots dos'];solution=[`${a2} ÷ ${k} = ${res}`,`Instrucció: <b>${label}</b>.`];return {topicId:'computacional',type,question,correct,alts,options:opts,guide,solution};}
     question=`Quina instrucció transforma <b>${a}</b> en <b>${res}</b>?`;
-    correct=label;alts=[label];opts=uniq4(correct,wrongs);
+    correct=label;alts=[label];opts=instructionOptions(a,res,correct,wrongs);
     guide=['Compara el valor inicial amb el final','Decideix si el canvi és additiu o multiplicatiu','Comprova la instrucció aplicant-la al valor inicial'];
     solution=[`La instrucció correcta és <b>${label}</b>.`];
   }else{
@@ -2247,6 +2260,9 @@ function selectTopic(i){
   document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===0));
   document.getElementById('btnLvl1').classList.add('active');document.getElementById('btnLvl2').classList.remove('active');
   document.getElementById('btnModeA').classList.add('active');document.getElementById('btnModeB').classList.remove('active');
+  const examLaunch=document.getElementById('miTopicExamLaunch');
+  examLaunch.hidden=!(t.course==='1r' && t.exam1r===true);
+  examLaunch.dataset.topic=t.id;
   showScreen('screenIntro');
 }
 
@@ -3059,5 +3075,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   <p><a href="../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
+<link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script src="../assets/js/examen-tema.js"></script>
 </body>
 </html>
