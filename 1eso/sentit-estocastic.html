@@ -349,6 +349,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 
 </style>
 <link rel="stylesheet" href="../assets/css/learning-footer.css"/>
+<style>#screenIntro #introContent{margin-bottom:18px}</style>
 </head>
 <body>
 <nav class="top-nav">
@@ -403,6 +404,7 @@ El bloc principal correspon a <strong>1r d'ESO</strong>. Les freqüències acumu
 <button class="mode-btn" id="btnModeB" onclick="selectMode('open')">✍️ Resposta oberta</button>
 </div>
 <button class="btn-primary" onclick="startPractice()">Comença a practicar →</button>
+<button type="button" id="miTopicExamLaunch" class="theory-page-link mi-topic-exam-launch" onclick="miTopicExam.start(this.dataset.topic)" hidden>📝 Examen del tema</button>
 </div>
 <div class="screen" id="screenExercise">
 <div class="ex-header">
@@ -2552,6 +2554,9 @@ function selectTopic(i){
   document.getElementById('btnLvl2').classList.remove('active');
   document.getElementById('btnModeA').classList.add('active');
   selectMode('multi');
+  var examLaunch=document.getElementById('miTopicExamLaunch');
+  examLaunch.hidden=!(t.course==='1r'&&t.exam1r===true);
+  examLaunch.dataset.topic=t.id;
   showScreen('screenIntro');
 }
 
@@ -3334,5 +3339,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   <p><a href="../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
+<link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script src="../assets/js/examen-tema.js"></script>
 </body>
 </html>
