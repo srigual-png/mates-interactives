@@ -35,7 +35,17 @@ function generate({write=true}={}) {
     const url=new URL(decode(raw),`https://mi.invalid/${theory}`);
     if(url.origin==='https://mi.invalid'&&decodeURIComponent(url.pathname.slice(1))===expected){
      if(!fs.existsSync(path.join(root,expected)))throw Error(`Pràctica absent: ${expected}`);
-     item.practice=expected;verified.add(expected);break;
+     // Use the destination's own theory mapping, never a title-derived slug.
+     const source=read(expected),matches=[];
+     for(const map of source.matchAll(/(?:MI_THEORY_PAGES|THEORY_PAGES|MI_NAV_THEORY_PAGES)\s*=\s*\{([^}]+)\}/g)){
+      for(const pair of map[1].matchAll(/["']?([\w]+)["']?\s*:\s*["']([^"']+)["']/g)){
+       if(new URL(pair[2],`https://mi.invalid/${expected}`).pathname===`/${theory}`)matches.push(pair[1]);
+      }
+     }
+     const ids=[...new Set(matches)];
+     if(ids.length!==1)throw Error(`Correspondència de pràctica absent o ambigua: ${theory}`);
+     const params=new URLSearchParams(course===1?{tema:ids[0],nivell:'1'}:{topic:ids[0],practice:'1'});
+     item.practice=expected+'?'+params;verified.add(expected);break;
     }
    }
    entries.push(item);verified.add(theory);

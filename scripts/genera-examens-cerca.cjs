@@ -20,7 +20,7 @@ async function generate() {
     const page = await browser.newPage();
     // Never send analytics or fetch external assets during publication checks.
     await page.route(/^https?:/, route => route.abort());
-    for (const practice of new Set(entries.map(e=>e.practice).filter(Boolean))) {
+    for (const practice of new Set(entries.map(e=>e.practice?.split('?')[0]).filter(Boolean))) {
       const html = fs.readFileSync(path.join(root, practice), 'utf8');
       if (!/<script\b[^>]*src=["'][^"']*examen-tema\.js["']/i.test(html)) continue;
       const errors = [];
@@ -49,7 +49,7 @@ async function generate() {
       page.off('pageerror', onError);
       if (errors.length) throw Error(practice+': '+errors.join('; '));
       for (const exam of exams) {
-        const matches = entries.filter(e => e.practice === practice &&
+        const matches = entries.filter(e => e.practice?.split('?')[0] === practice &&
           pathToFileURL(path.join(root, e.theory)).href === exam.theory);
         if (matches.length !== 1) throw Error('Ambiguous/missing catalogue mapping: '+practice+' / '+exam.id);
         const params = new URLSearchParams({[practice.startsWith('1eso/')?'tema':'topic']:exam.id, examen:'tema'});
