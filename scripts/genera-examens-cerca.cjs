@@ -9,6 +9,7 @@ function playwright() {
   }
 }
 function launchOptions() {
+  if (process.env.MI_BROWSER_EXECUTABLE) return {headless:true, executablePath:process.env.MI_BROWSER_EXECUTABLE};
   const edge = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
   return {headless:true, ...(fs.existsSync(edge) ? {executablePath:edge} : {})};
 }
@@ -18,6 +19,7 @@ async function generate() {
   const browser = await playwright().chromium.launch(launchOptions());
   try {
     const page = await browser.newPage();
+    page.setDefaultNavigationTimeout(120000);
     // Never send analytics or fetch external assets during publication checks.
     await page.route(/^https?:/, route => route.abort());
     for (const practice of new Set(entries.map(e=>e.practice?.split('?')[0]).filter(Boolean))) {

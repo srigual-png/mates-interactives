@@ -17,7 +17,7 @@
 :root{
   --bg:#f7f9fc;--card:#fff;--primary:#d29a1f;--primary-dark:#a87408;
   --success:#34c97e;--error:#e05c5c;--warn:#f5a623;--text:#2c3e50;
-  --muted:#7f8c9a;--border:#dce3ed;--locked:#c8d3e0;--shadow:0 2px 12px rgba(0,0,0,0.08);
+  --muted:#7f8c9a;--border:#dce3ed;--nav-separator:#c8d3e0;--shadow:0 2px 12px rgba(0,0,0,0.08);
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
@@ -35,30 +35,18 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .sidebar-btn{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:14px 10px;cursor:pointer;text-align:center;font-size:.78rem;font-weight:600;color:var(--muted);transition:all .2s;line-height:1.4;}
 .sidebar-btn:hover{border-color:var(--primary);color:var(--primary);background:#fff8ec;}
 .sidebar-btn .sb-icon{font-size:1.4rem;display:block;margin-bottom:4px;}
-.unlock-panel{position:fixed;top:60px;right:18px;width:230px;max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;background:var(--card);border:1.5px solid var(--border);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.13);z-index:200;padding:16px;display:none;animation:panelIn .2s ease;}
-.unlock-panel.open{display:block;}
+
+
 @keyframes panelIn{from{opacity:0;transform:translateY(-8px) scale(.97)}to{opacity:1;transform:none}}
-.unlock-panel h4{font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
-.unlock-topic-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);}
-.unlock-topic-row:last-of-type{border:none;}
-.unlock-topic-name{font-size:.83rem;color:var(--text);flex:1;margin-right:8px;}
-.unlock-topic-name.is-done{color:var(--success);}
-.unlock-toggle{background:none;border:1.5px solid var(--border);border-radius:8px;padding:3px 9px;font-size:.75rem;cursor:pointer;font-weight:600;color:var(--muted);transition:all .15s;white-space:nowrap;}
-.unlock-toggle.active{background:#fff8ec;border-color:var(--primary);color:var(--primary);}
-.unlock-toggle:hover{border-color:var(--primary);color:var(--primary);}
-.unlock-all-btn{width:100%;margin-top:12px;background:var(--primary);color:white;border:none;border-radius:10px;padding:9px;font-size:.82rem;font-weight:700;cursor:pointer;transition:background .2s;}
-.unlock-all-btn:hover{background:var(--primary-dark);}
-.unlock-reset-btn{width:100%;margin-top:6px;background:none;color:var(--muted);border:1.5px solid var(--border);border-radius:10px;padding:7px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;}
-.unlock-reset-btn:hover{border-color:var(--error);color:var(--error);}
-.unlock-panel-overlay{position:fixed;inset:0;z-index:190;display:none;}
-.unlock-panel-overlay.open{display:block;}
+
+
 .home-header{text-align:center;padding:28px 0 18px;}
 .home-header h2{font-size:1.7rem;color:var(--primary);margin-bottom:6px;}
 .home-header p{color:var(--muted);font-size:0.9rem;}
 .topics-grid{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
 .topic-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);transition:transform 0.15s,box-shadow 0.15s;}
-.topic-card:hover:not(.locked){transform:translateY(-2px);box-shadow:0 6px 20px rgba(124,92,191,0.15);}
-.topic-card.locked{opacity:0.5;cursor:not-allowed;}
+.topic-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(124,92,191,0.15);}
+
 .topic-card.done{border-left:4px solid var(--success);}
 .topic-icon{font-size:1.5rem;width:38px;text-align:center;flex-shrink:0;}
 .topic-info{flex:1;}
@@ -67,7 +55,7 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .topic-badge{font-size:0.73rem;padding:3px 10px;border-radius:20px;font-weight:600;white-space:nowrap;}
 .badge-done{background:#e6f9ef;color:var(--success);}
 .badge-active{background:#fff6e5;color:var(--primary);}
-.badge-locked{background:var(--border);color:var(--locked);}
+
 .badge-exam{background:#fff3e0;color:var(--warn);}
 .badge-extension{background:#f3e8ff;color:#8b5cf6;}
 .theory-box{background:#fff6e5;border-left:4px solid var(--primary);border-radius:10px;padding:15px 17px;margin-bottom:18px;font-size:0.91rem;line-height:1.7;}
@@ -242,7 +230,7 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 @media(max-width:620px){.mi-exam-overlay{padding:9px}.mi-exam-modal{padding:16px;border-radius:14px;max-height:92vh}.mi-exam-list{grid-template-columns:1fr}.mi-exam-foot{margin:14px -16px -16px;padding:12px 16px 16px;bottom:-16px}}
 
 /* ── P3 · GESTIÓ DE TEMES I PROGRÉS ───────────────────── */
-.home-tools{display:flex;justify-content:center;margin:0 0 16px}.unlock-launch{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--card,#fff);color:var(--primary);border:1.5px solid var(--primary);border-radius:11px;padding:9px 14px;font-size:.84rem;font-weight:800;cursor:pointer;transition:.18s}.unlock-launch:hover{background:var(--primary-soft,#f4f6ff);transform:translateY(-1px)}
+.home-tools{display:flex;justify-content:center;margin:0 0 16px}
 .sidebar{display:none!important}
 </style>
 
@@ -280,7 +268,7 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .all-theory-wrap{margin:0 0 12px!important}
 .theory-page-link{width:min(100%,520px)!important;margin:0 auto!important;min-height:44px}
 .home-tools{margin:0 0 20px!important}
-.unlock-launch{min-height:42px;padding:10px 16px!important}
+
 
 .p6-section-head{
   margin:20px 0 8px;padding-top:16px;border-top:1px solid var(--border,#e6e8ee);
@@ -309,7 +297,7 @@ button,a,[onclick]{-webkit-tap-highlight-color:transparent}
 button:focus-visible,a:focus-visible,[onclick]:focus-visible{
   outline:3px solid color-mix(in srgb,var(--primary) 35%,transparent);outline-offset:2px;
 }
-.unlock-panel,.mi-exam-modal{max-width:min(92vw,620px)!important}
+.mi-exam-modal{max-width:min(92vw,620px)!important}
 
 @media (max-width:700px){
   .top-nav{gap:5px;padding:8px 7px;min-height:54px}
@@ -323,7 +311,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
   .home-header h2,.hh h2{font-size:1.45rem}
   .home-header p,.hh p{font-size:.88rem;line-height:1.45}
   .intro-card{padding:15px 16px!important;font-size:.95rem}
-  .theory-page-link,.unlock-launch{width:100%!important;max-width:none!important}
+  .theory-page-link{width:100%!important;max-width:none!important}
   .topic-card,.tc{align-items:flex-start!important;flex-wrap:wrap;padding:13px 14px!important;gap:10px}
   .topic-icon,.ti{width:34px!important;flex:0 0 34px}
   .topic-info,.tinfo{flex:1 1 calc(100% - 50px)}
@@ -334,8 +322,8 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
   .level-select,.mode-select{flex-wrap:wrap}
   .level-btn,.mode-btn,.lvb{flex:1 1 145px}
   .options-grid,.og{grid-template-columns:1fr!important}
-  .mi-exam-overlay,.unlock-panel-overlay{padding:10px!important}
-  .mi-exam-modal,.unlock-panel{max-height:92vh!important;border-radius:14px!important}
+  .mi-exam-overlay{padding:10px!important}
+  .mi-exam-modal{max-height:92vh!important;border-radius:14px!important}
 }
 
 @media (max-width:430px){
@@ -350,6 +338,22 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 </style>
 <link rel="stylesheet" href="../assets/css/learning-footer.css"/>
 <style>#screenIntro #introContent{margin-bottom:18px}</style>
+<script>
+// Remove obsolete access fields while preserving completion, errors and other saved data.
+(function(){
+  const keys=["se1eso_progress"];
+  for(const storageName of ['localStorage','sessionStorage'])for(const key of keys){
+    try{
+      const store=window[storageName],raw=store.getItem(key);
+      if(!raw)continue;
+      const data=JSON.parse(raw);
+      if(data&&typeof data==='object'&&('unlockedIds' in data||'unlocked' in data)){
+        delete data.unlockedIds;delete data.unlocked;store.setItem(key,JSON.stringify(data));
+      }
+    }catch(e){}
+  }
+})();
+</script>
 </head>
 <body>
 <nav class="top-nav">
@@ -360,15 +364,8 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 <h1 id="navTitle">Sentit Estocàstic · 1r ESO</h1>
 <div class="progress-bar-wrap"><div class="progress-bar-fill" id="globalProgress" style="width:0%"></div></div>
 </nav>
-<!-- Overlay per tancar el panell -->
-<div class="unlock-panel-overlay" id="unlockOverlay" onclick="closeUnlockPanel()"></div>
-<!-- Panell de desbloqueig -->
-<div class="unlock-panel" id="unlockPanel">
-<h4>🔓 Gestionar temes</h4>
-<div id="unlockTopicList"></div>
-<button class="unlock-all-btn" onclick="unlockAllTopics()">🔓 Desbloquejar tots</button>
-<button class="unlock-reset-btn" id="btnResetProgress" onclick="resetProgress()">↺ Reiniciar progrés</button>
-</div>
+
+
 <div class="layout">
 <div class="screen active" id="screenHome">
 <div class="home-header"><h2>📊 Sentit Estocàstic</h2><p>1r d'ESO · Probabilitat i estadística · Exercicis interactius · Correcció immediata</p></div>
@@ -384,13 +381,12 @@ El bloc principal correspon a <strong>1r d'ESO</strong>. Les freqüències acumu
 </p>
 </div>
 <div class="all-theory-wrap" style="text-align:center;margin:0 0 14px"><a class="theory-page-link" href="teoria/estocastic/index.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none">📚 Tota la teoria del Sentit Estocàstic</a></div>
-<div class="home-tools"><button class="unlock-launch" onclick="toggleUnlockPanel()">🔓 Gestionar temes</button></div>
+
+
 <div class="topics-grid" id="topicsGrid"></div>
 </div>
 <div class="sidebar" id="sidebar">
-<button class="sidebar-btn" id="unlockFab" onclick="toggleUnlockPanel()" title="Gestionar temes">
-<span class="sb-icon">🔓</span>Desbloqueja temes
-  </button>
+
 </div>
 </div>
 <div class="screen" id="screenIntro">
@@ -852,7 +848,6 @@ function buildRecollidaPool(){
       ]
     });
   });
-
 
 
   // ── E. MOSTRES REPRESENTATIVES (8 situacions) ────────────────────────
@@ -2049,11 +2044,10 @@ var TOPICS=[
 
 // ── STATE ────────────────────────────────────
 var NEEDED={1:10,2:20};
-var state={unlockedIds:[],done:[],errors:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
+var state={done:[],errors:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
 var currentEx=null;
 var stIntegratedOpenBag={};
 
-function isTopicUnlocked(i){return state.unlockedIds.indexOf(TOPICS[i].id)>=0;}
 
 function hasCloudStorage(){
   return (typeof window.storage!=='undefined')&&window.storage&&typeof window.storage.get==='function';
@@ -2064,8 +2058,7 @@ async function loadState(){
       var r=await window.storage.get('progress',false);
       if(r&&r.value){
         var s=JSON.parse(r.value);
-        if(s.unlockedIds) state.unlockedIds=s.unlockedIds;
-        else if(s.unlocked) state.unlockedIds=TOPICS.slice(0,s.unlocked).map(t=>t.id);
+
         if(s.done)state.done=s.done;
         if(Array.isArray(s.errors))state.errors=s.errors;
       }
@@ -2073,18 +2066,17 @@ async function loadState(){
       var raw=localStorage.getItem('se1eso_progress');
       if(raw){
         var s2=JSON.parse(raw);
-        if(s2.unlockedIds) state.unlockedIds=s2.unlockedIds;
-        else if(s2.unlocked) state.unlockedIds=TOPICS.slice(0,s2.unlocked).map(t=>t.id);
+
         if(s2.done)state.done=s2.done;
         if(Array.isArray(s2.errors))state.errors=s2.errors;
       }
     }
   }catch(e){ /* encara no hi ha progrés desat */ }
-  if(state.unlockedIds.indexOf(TOPICS[0].id)<0) state.unlockedIds.unshift(TOPICS[0].id);
+
 }
 async function saveState(){
   try{
-    var data=JSON.stringify({unlockedIds:state.unlockedIds,done:state.done,errors:Array.isArray(state.errors)?state.errors:[]});
+    var data=JSON.stringify({done:state.done,errors:Array.isArray(state.errors)?state.errors:[]});
     if(hasCloudStorage()){
       await window.storage.set('progress',data,false);
     } else {
@@ -2335,15 +2327,15 @@ stAdd('K3','construccio','sectors',2,function(){var labels=['A','B','C','D'],p1=
 
 var stOpenCfg={family:'mix',nq:10,diff:0};
 var stOpenSession={active:false,problems:[],idx:0,correct:0,answered:false};
-function stUnlockedCoreIds(){return TOPICS.map(function(t,i){return {t:t,i:i};}).filter(function(o){return o.t.course==='1r'&&isTopicUnlocked(o.i);}).map(function(o){return o.t.id;});}
-function stEligiblePatterns(family,diff,topicIds,examOnly){var allowed=new Set(topicIds||stUnlockedCoreIds());return ST_OPEN_PATTERNS.filter(function(p){return allowed.has(p.topicId)&&(family==='mix'||p.family===family)&&(!diff||p.diff===diff)&&(!examOnly||p.examCompatible);});}
-function stPickProblems(n,family,diff,topicIds,examOnly){family=family||'mix';diff=diff||0;var allowedIds=topicIds||stUnlockedCoreIds(),allowed=new Set(allowedIds);var pool=stEligiblePatterns(family,diff,allowedIds,!!examOnly);if(!pool.length)return [];var chosen=[],used=new Set(),lastFamily=null,tries=0;while(chosen.length<n&&used.size<pool.length&&tries<3000){tries++;var candidates=pool.filter(function(p){return !used.has(p.id)&&(p.family!==lastFamily||pool.filter(function(x){return !used.has(x.id)&&x.family!==lastFamily;}).length===0);});if(!candidates.length)break;var pat=candidates[rnd(0,candidates.length-1)],prob;try{prob=pat.gen();}catch(e){continue;}if(!prob||!allowed.has(prob.topicId))continue;used.add(pat.id);lastFamily=pat.family;chosen.push(prob);}while(chosen.length<n&&pool.length&&tries<5000){tries++;var pat2=pool[rnd(0,pool.length-1)],prob2;try{prob2=pat2.gen();}catch(e){continue;}if(prob2&&allowed.has(prob2.topicId))chosen.push(prob2);}return chosen;}
-function stRenderOpenHome(){stOpenSession.active=true;var unlocked=new Set(stUnlockedCoreIds()),families=ST_OPEN_FAMILIES.filter(function(f){if(f.id==='mix')return true;if(f.id==='construccio')return unlocked.has('barres')||unlocked.has('sectors')||unlocked.has('poligons');if(f.id==='grafics')return unlocked.has('barres')||unlocked.has('sectors')||unlocked.has('poligons');if(f.id==='central')return unlocked.has('mitjana')||unlocked.has('mediana')||unlocked.has('moda');return unlocked.has(f.id);});document.getElementById('stOpenHome').innerHTML='<div class="home-header"><h2>✍️ Problemes oberts i construcció</h2><p>Sentit Estocàstic · 1r ESO · Interpreta dades, decideix i justifica</p></div><div class="intro-card"><p>Aquí no tries entre quatre opcions: calcula o escriu la resposta final. També hi ha reptes per construir gràfics. Les pistes expliquen el mètode, però la solució completa només apareix després de comprovar. Els problemes numèrics i d’interpretació poden aparèixer al Mode Examen.</p></div><div class="st-open-toolbar"><select id="stOpenFamily">'+families.map(function(f){return '<option value="'+f.id+'" '+(stOpenCfg.family===f.id?'selected':'')+'>'+f.icon+' '+f.name+'</option>';}).join('')+'</select><select id="stOpenN"><option value="5" '+(stOpenCfg.nq===5?'selected':'')+'>5 problemes</option><option value="10" '+(stOpenCfg.nq===10?'selected':'')+'>10 problemes</option><option value="15" '+(stOpenCfg.nq===15?'selected':'')+'>15 problemes</option></select><select id="stOpenDiff"><option value="0">Totes les dificultats</option><option value="1">Bàsic</option><option value="2">Mitjà</option></select></div><button class="btn-primary" onclick="stStartOpenSession()">Comença →</button><button class="btn-secondary" onclick="stExitOpenProblems()">← Tornar al Sentit Estocàstic</button>';showScreen('screenOpenHome');}
+function stCoreIds(){return TOPICS.map(function(t,i){return {t:t,i:i};}).filter(function(o){return o.t.course==='1r';}).map(function(o){return o.t.id;});}
+function stEligiblePatterns(family,diff,topicIds,examOnly){var allowed=new Set(topicIds||stCoreIds());return ST_OPEN_PATTERNS.filter(function(p){return allowed.has(p.topicId)&&(family==='mix'||p.family===family)&&(!diff||p.diff===diff)&&(!examOnly||p.examCompatible);});}
+function stPickProblems(n,family,diff,topicIds,examOnly){family=family||'mix';diff=diff||0;var allowedIds=topicIds||stCoreIds(),allowed=new Set(allowedIds);var pool=stEligiblePatterns(family,diff,allowedIds,!!examOnly);if(!pool.length)return [];var chosen=[],used=new Set(),lastFamily=null,tries=0;while(chosen.length<n&&used.size<pool.length&&tries<3000){tries++;var candidates=pool.filter(function(p){return !used.has(p.id)&&(p.family!==lastFamily||pool.filter(function(x){return !used.has(x.id)&&x.family!==lastFamily;}).length===0);});if(!candidates.length)break;var pat=candidates[rnd(0,candidates.length-1)],prob;try{prob=pat.gen();}catch(e){continue;}if(!prob||!allowed.has(prob.topicId))continue;used.add(pat.id);lastFamily=pat.family;chosen.push(prob);}while(chosen.length<n&&pool.length&&tries<5000){tries++;var pat2=pool[rnd(0,pool.length-1)],prob2;try{prob2=pat2.gen();}catch(e){continue;}if(prob2&&allowed.has(prob2.topicId))chosen.push(prob2);}return chosen;}
+function stRenderOpenHome(){stOpenSession.active=true;var available=new Set(stCoreIds()),families=ST_OPEN_FAMILIES.filter(function(f){if(f.id==='mix')return true;if(f.id==='construccio')return available.has('barres')||available.has('sectors')||available.has('poligons');if(f.id==='grafics')return available.has('barres')||available.has('sectors')||available.has('poligons');if(f.id==='central')return available.has('mitjana')||available.has('mediana')||available.has('moda');return available.has(f.id);});document.getElementById('stOpenHome').innerHTML='<div class="home-header"><h2>✍️ Problemes oberts i construcció</h2><p>Sentit Estocàstic · 1r ESO · Interpreta dades, decideix i justifica</p></div><div class="intro-card"><p>Aquí no tries entre quatre opcions: calcula o escriu la resposta final. També hi ha reptes per construir gràfics. Les pistes expliquen el mètode, però la solució completa només apareix després de comprovar. Els problemes numèrics i d’interpretació poden aparèixer al Mode Examen.</p></div><div class="st-open-toolbar"><select id="stOpenFamily">'+families.map(function(f){return '<option value="'+f.id+'" '+(stOpenCfg.family===f.id?'selected':'')+'>'+f.icon+' '+f.name+'</option>';}).join('')+'</select><select id="stOpenN"><option value="5" '+(stOpenCfg.nq===5?'selected':'')+'>5 problemes</option><option value="10" '+(stOpenCfg.nq===10?'selected':'')+'>10 problemes</option><option value="15" '+(stOpenCfg.nq===15?'selected':'')+'>15 problemes</option></select><select id="stOpenDiff"><option value="0">Totes les dificultats</option><option value="1">Bàsic</option><option value="2">Mitjà</option></select></div><button class="btn-primary" onclick="stStartOpenSession()">Comença →</button><button class="btn-secondary" onclick="stExitOpenProblems()">← Tornar al Sentit Estocàstic</button>';showScreen('screenOpenHome');}
 function startStochasticProblems(){document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Problemes oberts · Sentit Estocàstic';stRenderOpenHome();}
 function startStochasticConstruction(){
   document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Construeix gràfics · Sentit Estocàstic';
   var probs=stPickProblems(5,'construccio',0,null,false);
-  if(!probs.length){alert('Desbloqueja primer algun dels blocs de gràfics per utilitzar aquesta activitat.');return;}
+  if(!probs.length){alert('No hi ha problemes disponibles per a aquesta selecció.');return;}
   stOpenSession={active:true,problems:probs,idx:0,correct:0,answered:false};stRenderOpenProblem();showScreen('screenOpenProblem');
 }
 function stExitOpenProblems(){stOpenSession.active=false;showHome();}
@@ -2356,7 +2348,6 @@ function stCheckOpen(){if(stOpenSession.answered)return;var p=stOpenSession.prob
 function stNextOpen(){stOpenSession.idx++;if(stOpenSession.idx<stOpenSession.problems.length){stRenderOpenProblem();return;}stRenderOpenResult();}
 function stRenderOpenResult(){var total=stOpenSession.problems.length,pct=Math.round(stOpenSession.correct/total*100),emoji=pct>=90?'🏆':pct>=70?'👍':'💪';document.getElementById('stOpenResult').innerHTML='<div class="home-header"><h2>'+emoji+' Resultat</h2><p>Problemes oberts · Sentit Estocàstic</p></div><div class="st-open-summary"><div class="big">'+stOpenSession.correct+'/'+total+'</div><p>'+pct+'% d’encerts</p></div><button class="btn-primary" onclick="stStartOpenSession()">Repetir configuració</button><button class="btn-secondary" onclick="stRenderOpenHome()">Canviar configuració</button><button class="btn-secondary" onclick="stExitOpenProblems()">Tornar al menú</button>';showScreen('screenOpenResult');}
 function stGenerateExamProblems(n,topicIds){return stPickProblems(n,'mix',0,topicIds,true);}
-
 
 
 function miReviewPoints(ex){
@@ -2413,20 +2404,20 @@ function renderHome(){
   TOPICS.forEach(function(t,i){if(t.course==='1r')coreIndexes.push(i);else extensionIndexes.push(i);});
   function head(icon,title,note,cls,first){return '<div class="p6-section-head '+(first?'p6-first ':'')+'"><div class="p6-section-title '+(cls||'')+'">'+icon+' '+title+'</div><div class="p6-section-note">'+note+'</div></div>';}
   function topicCard(i,isExtension){
-    var t=TOPICS[i],unlocked=isExtension?true:isTopicUnlocked(i),done=state.done.indexOf(t.id)>=0;
-    return '<div class="topic-card '+(!unlocked?'locked ':'')+(done?'done':'')+'" onclick="'+(unlocked?'selectTopic('+i+')':'')+'" '+(isExtension?'style="border-style:dashed"':'')+'><div class="topic-icon">'+t.icon+'</div><div class="topic-info"><h3>'+t.name+'</h3><p>'+t.short+'</p></div><span class="topic-badge '+(done?'badge-done':isExtension?'badge-extension':unlocked?'badge-active':'badge-locked')+'">'+(done?'✓ Fet':isExtension?'Ampliació':unlocked?'Practicar':'🔒')+'</span></div>';
+    var t=TOPICS[i],done=state.done.indexOf(t.id)>=0;
+    return '<div class="topic-card '+('')+(done?'done':'')+'" onclick="'+('selectTopic('+i+')')+'" '+(isExtension?'style="border-style:dashed"':'')+'><div class="topic-icon">'+t.icon+'</div><div class="topic-info"><h3>'+t.name+'</h3><p>'+t.short+'</p></div><span class="topic-badge '+(done?'badge-done':isExtension?'badge-extension':'badge-active')+'">'+(done?'✓ Fet':isExtension?'Ampliació':'Practicar')+'</span></div>';
   }
   var html=head('📘','Continguts de 1r d\'ESO','Compten per al progrés i poden aparèixer al Mode Examen.','',true);
   coreIndexes.forEach(function(i){html+=topicCard(i,false);});
-  var coreUnlocked=coreIndexes.filter(function(i){return isTopicUnlocked(i);}).length;
-  if(coreUnlocked>=1){
+  var coreCount=coreIndexes.filter(function(i){return true;}).length;
+
     html+=head('🧩','Pràctica complementària','Activitats opcionals de 1r d\'ESO. No compten per al progrés principal.','');
     html+='<div class="topic-card p6-special-card" onclick="startStochasticConstruction()" style="border-color:#7c5cbf"><div class="topic-icon">📊</div><div class="topic-info"><h3>Construeix gràfics</h3><p>Reptes interactius per construir barres, polígons i sectors</p></div><span class="topic-badge badge-extension">Construcció</span></div>';
-  }
+
   html+=head('⭐','Ampliació · prepara 2n d\'ESO','Material opcional. No compta per al progrés ni entra al Mode Examen de 1r ESO.','p6-extension');
   extensionIndexes.forEach(function(i){html+=topicCard(i,true);});
   html+=head('📝','Mode Examen','20 preguntes · tria els blocs curriculars de 1r que vols preparar.','p6-exam');
-  html+='<div class="topic-card p6-special-card p6-exam-card" onclick="miOpenExamConfig()"><div class="topic-icon">📝</div><div class="topic-info"><h3>Mode Examen · 1r ESO</h3><p>Selecció independent dels blocs desbloquejats per practicar</p></div><span class="topic-badge badge-exam">Examen 1r</span></div>';
+  html+='<div class="topic-card p6-special-card p6-exam-card" onclick="miOpenExamConfig()"><div class="topic-icon">📝</div><div class="topic-info"><h3>Mode Examen · 1r ESO</h3><p>Tria els blocs que vols repassar</p></div><span class="topic-badge badge-exam">Examen 1r</span></div>';
   var errorCount=Array.isArray(state.errors)?state.errors.length:0;
   html+=head('❌','Errors guardats','Repassa els exercicis fallats i consulta de nou la resolució.','p6-errors');
   html+='<div class="topic-card p6-special-card '+(errorCount?'p6-error-card':'')+'" onclick="showErrors()"><div class="topic-icon">❌</div><div class="topic-info"><h3>Errors guardats</h3><p>'+(errorCount?('Tens '+errorCount+' error'+(errorCount===1?'':'s')+' per repassar'):'Encara no tens errors guardats')+'</p></div><span class="topic-badge '+(errorCount?'badge-exam':'badge-active')+'">'+(errorCount?'Repassar':'Veure')+'</span></div>';
@@ -2729,17 +2720,7 @@ function toggleSolution(btn){
   btn.textContent=box.classList.contains('show')?'Amagar solució':'Veure solució pas a pas';
 }
 
-function markTopicDone(){
-  var t=TOPICS[state.currentTopic];
-  if(state.done.indexOf(t.id)<0){
-    state.done.push(t.id);
-    if(t.course==='1r'){
-      var nextCore=TOPICS.findIndex(function(x,i){return i>state.currentTopic&&x.course==='1r';});
-      if(nextCore>=0&&!isTopicUnlocked(nextCore))state.unlockedIds.push(TOPICS[nextCore].id);
-    }
-    saveState();
-  }
-}
+function markTopicDone(){const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
 
 function nextExercise(){
   if(state.correctStreak>=NEEDED[state.level]&&state.done.indexOf(TOPICS[state.currentTopic].id)>=0){
@@ -2950,111 +2931,21 @@ document.getElementById('navTitle').addEventListener('click',function(){
   if(navClicks>=3){navClicks=0;runAutoTest();}
 });
 
-// ── PANELL DESBLOQUEIG ───────────────────────
-function toggleUnlockPanel(){
-  var panel=document.getElementById('unlockPanel');
-  var overlay=document.getElementById('unlockOverlay');
-  var isOpen=panel.classList.contains('open');
-  disarmReset();
-  if(isOpen){ closeUnlockPanel(); }
-  else {
-    renderUnlockPanel();
-    panel.classList.add('open');
-    overlay.classList.add('open');
-  }
-}
 
-function closeUnlockPanel(){
-  disarmReset();
-  document.getElementById('unlockPanel').classList.remove('open');
-  document.getElementById('unlockOverlay').classList.remove('open');
-}
 
-function renderUnlockPanel(){
-  var list=document.getElementById('unlockTopicList');
-  var html='';
-  var core=TOPICS.map(function(t,i){return {t:t,i:i};}).filter(function(o){return o.t.course==='1r';});
-  var baseIndex=core.length?core[0].i:-1;
-  core.forEach(function(o){
-    var t=o.t,i=o.i,isUnlocked=isTopicUnlocked(i),isDone=state.done.indexOf(t.id)>=0;
-    html+='<div class="unlock-topic-row">'
-      +'<span class="unlock-topic-name '+(isDone?'is-done':'')+'">'+t.icon+' '+t.name+(isDone?' ✓':'')+'</span>'
-      +(i===baseIndex
-        ? '<span style="font-size:.75rem;color:var(--success);font-weight:700">Base</span>'
-        : '<button class="unlock-toggle '+(isUnlocked?'active':'')+'" onclick="toggleTopicUnlock('+i+')">'+(isUnlocked?'Obert':'Tancat')+'</button>')
-      +'</div>';
-  });
-  html+='<div style="font-size:.75rem;color:var(--muted);margin-top:10px;line-height:1.5">⭐ Les ampliacions de preparació de 2n són sempre accessibles i no afecten el progrés de 1r.</div>';
-  list.innerHTML=html;
-}
 
-async function toggleTopicUnlock(i){
-  var t=TOPICS[i];
-  var baseIndex=TOPICS.findIndex(function(x){return x.course==='1r';});
-  if(!t||t.course!=='1r'||i===baseIndex)return;
-  if(isTopicUnlocked(i)){
-    state.unlockedIds=state.unlockedIds.filter(function(id){return id!==t.id;});
-  }else if(state.unlockedIds.indexOf(t.id)<0){
-    state.unlockedIds.push(t.id);
-  }
-  await saveState();
-  renderUnlockPanel();
-  renderHome();
-}
 
-async function unlockAllTopics(){
-  state.unlockedIds=TOPICS.filter(function(t){return t.course==='1r';}).map(function(t){return t.id;});
-  await saveState();
-  renderUnlockPanel();
-  renderHome();
-}
 
-var resetArmed=false,resetArmTimer=null;
-function resetProgress(){
-  var btn=document.getElementById('btnResetProgress');
-  if(!resetArmed){
-    resetArmed=true;
-    btn.textContent='⚠ Prem de nou per confirmar';
-    btn.style.borderColor='var(--error)';btn.style.color='var(--error)';
-    clearTimeout(resetArmTimer);
-    resetArmTimer=setTimeout(function(){disarmReset();},3000);
-    return;
-  }
-  disarmReset();
-  (async function(){
-    state.unlockedIds=[TOPICS.find(function(t){return t.course==='1r';}).id]; state.done=[];
-    await saveState();
-    renderUnlockPanel();
-    renderHome();
-    closeUnlockPanel();
-  })();
-}
-function disarmReset(){
-  resetArmed=false;clearTimeout(resetArmTimer);
-  var btn=document.getElementById('btnResetProgress');
-  if(btn){btn.innerHTML='↺ Reiniciar progrés';btn.style.borderColor='';btn.style.color='';}
-}
-
-(async function init(){
-  document.getElementById('topicsGrid').innerHTML='<p style="text-align:center;color:var(--muted);padding:24px;font-size:0.85rem">Carregant el teu progrés...</p>';
+// Restore saved results before choosing the requested topic.
+(async function initPage(){
   await loadState();
   const params=new URLSearchParams(window.location.search);
-  const topicId=params.get('tema');
-  const levelParam=parseInt(params.get('nivell'),10);
-  if(topicId){
-    const idx=TOPICS.findIndex(function(t){return t.id===topicId;});
-    if(idx>=0){
-      if(TOPICS[idx].course==='1r'&&!isTopicUnlocked(idx)){
-        if(state.unlockedIds.indexOf(TOPICS[idx].id)<0)state.unlockedIds.push(TOPICS[idx].id);
-        await saveState();
-      }
-      selectTopic(idx);
-      selectLevel(levelParam===2?2:1);
-      startPractice();
-      return;
-    }
-  }
-  showHome();
+  const idx=TOPICS.findIndex(t=>t.id===params.get('tema'));
+  if(idx>=0){
+    selectTopic(idx);
+    selectLevel(Number(params.get('nivell'))===2?2:1);
+    startPractice();
+  }else showHome();
 })();
 </script>
 <!-- ===================================================== -->
@@ -3120,7 +3011,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
 <div class="mi-exam-overlay" id="miExamOverlay" onclick="miCloseExamConfig()" aria-hidden="true">
   <div class="mi-exam-modal" role="dialog" aria-modal="true" aria-labelledby="miExamTitle" onclick="event.stopPropagation()">
     <div class="mi-exam-head">
-      <div><h2 id="miExamTitle">📝 Prepara el teu examen</h2><p>Selecciona exactament els blocs que vols repassar. Aquesta selecció és independent dels blocs desbloquejats per practicar.</p></div>
+      <div><h2 id="miExamTitle">📝 Prepara el teu examen</h2><p>Selecciona exactament els blocs que vols repassar. Tots els blocs estan disponibles des del primer moment.</p></div>
       <button class="mi-exam-close" onclick="miCloseExamConfig()" aria-label="Tancar">✕</button>
     </div>
     <div class="mi-exam-tools">
@@ -3259,7 +3150,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
 })();
 </script>
-
 
 
 <!-- MI_NAV_V7 · dues pestanyes reutilitzables: pràctica ↔ teoria · Sentit Estocàstic -->

@@ -22,7 +22,7 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
    if(q.type===4){const e=document.createElement('div');e.innerHTML=q.visual;const rows=[...e.querySelectorAll('tr')].map(r=>[...r.querySelectorAll('td')].map(x=>Number(x.textContent)));const a=rows[0],f=rows[1];ensure(Number(q.correct)===Math.round(a.reduce((s,x,j)=>s+x*f[j],0)/f.reduce((a,b)=>a+b,0)*100)/100,'Mitjana ponderada');}
    const m=genMediana();if([1,3,4].includes(m.type)){const a=m.question.split(': ')[1].split(/ \(n=|\. Quina/)[0].split(', ').map(Number).sort((a,b)=>a-b);const v=a.length%2?a[Math.floor(a.length/2)]:(a[a.length/2-1]+a[a.length/2])/2;ensure(Number(m.correct)===v,'Mediana');}
   }
-  unlockAllTopics();miExamSelectedTopics=miExamCoreTopics().map(t=>t.id);startExam();ensure(state.examQs.length===20,'Examen general');ensure(state.examQs.every(q=>q.solution.length),'Solucions general');
+  miExamSelectedTopics=miExamCoreTopics().map(t=>t.id);startExam();ensure(state.examQs.length===20,'Examen general');ensure(state.examQs.every(q=>q.solution.length),'Solucions general');
   return n;
  });
  await p.evaluate(()=>miTopicExam.start('barres'));

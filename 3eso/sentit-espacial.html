@@ -16,7 +16,7 @@
 :root{
   --bg:#f7f9fc;--card:#fff;--primary:#6c63d8;--primary-dark:#4e46b0;
   --success:#34c97e;--error:#e05c5c;--warn:#f5a623;--text:#2c3e50;
-  --muted:#7f8c9a;--border:#dce3ed;--locked:#c8d3e0;
+  --muted:#7f8c9a;--border:#dce3ed;--nav-separator:#c8d3e0;
   --shadow:0 2px 12px rgba(0,0,0,.08)
 }
 *{box-sizing:border-box;margin:0;padding:0}
@@ -28,7 +28,7 @@ nav{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20
 .nb:hover{background:var(--bg);color:var(--primary);border-color:var(--primary)}
 .nav-crumb{display:inline-flex;align-items:center;gap:4px;text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:600;padding:5px 8px;border:1px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer;font-family:inherit;white-space:nowrap}
 .nav-crumb:hover{color:var(--primary);border-color:var(--primary);background:#f0eeff}
-.nav-sep{color:var(--locked);font-size:.8rem;flex:0 0 auto}
+.nav-sep{color:var(--nav-separator);font-size:.8rem;flex:0 0 auto}
 nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;justify-self:center;cursor:default;line-height:1.2}
 .nav-progress-slot{justify-self:end;display:flex;align-items:center}
 .progress-bar-wrap{height:6px;background:var(--border);border-radius:3px;width:110px}
@@ -55,8 +55,8 @@ nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;
 .topic-section strong{color:var(--primary);font-size:1rem}
 .topic-section div{font-size:.82rem;color:var(--muted);margin-top:3px;line-height:1.45}
 .topic-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s}
-.topic-card:hover:not(.locked){transform:translateY(-2px);box-shadow:0 6px 20px rgba(91,141,238,.15)}
-.topic-card.locked{opacity:.55;cursor:not-allowed;background:#fbfcfe}
+.topic-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(108,99,216,.15)}
+
 .topic-card.done{border-left:4px solid var(--success)}
 .topic-icon{font-size:1.5rem;width:38px;text-align:center;flex-shrink:0}
 .topic-info{flex:1;min-width:0}
@@ -65,7 +65,7 @@ nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;
 .topic-badge{font-size:.73rem;padding:3px 10px;border-radius:20px;font-weight:600;white-space:nowrap}
 .badge-done{background:#e6f9ef;color:var(--success)}
 .badge-active{background:#f0eeff;color:var(--primary)}
-.badge-locked{background:var(--border);color:var(--muted)}
+
 .badge-exam{background:#fff3e0;color:#b85c00}
 .badge-errors{background:#fdeaea;color:var(--error)}
 .theory-tabs{display:flex;gap:8px;margin-bottom:12px}
@@ -144,7 +144,7 @@ nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;
 .exam-review:last-child{border-bottom:none}
 
 .manage-row{display:flex;justify-content:flex-end;margin:4px 0 2px}.manage-topics-btn{background:var(--card);border:1.5px solid var(--border);border-radius:10px;padding:8px 12px;color:var(--primary);font-weight:700;cursor:pointer}.manage-topics-btn:hover{border-color:var(--primary);background:#f0eeff}
-.unlock-panel{position:fixed;top:64px;right:18px;width:260px;max-height:calc(100vh - 84px);overflow-y:auto;background:var(--card);border:1.5px solid var(--border);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.13);z-index:220;padding:16px;display:none}.unlock-panel.open{display:block}.unlock-panel h4{font-size:.84rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px}.unlock-topic-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)}.unlock-topic-name{font-size:.82rem;line-height:1.3}.unlock-toggle{border:1.5px solid var(--border);background:#fff;border-radius:8px;padding:4px 8px;font-size:.74rem;font-weight:700;color:var(--muted);cursor:pointer;white-space:nowrap}.unlock-toggle.active{border-color:var(--primary);background:#f0eeff;color:var(--primary)}.unlock-all-btn,.unlock-reset-btn{width:100%;border-radius:10px;padding:8px;margin-top:9px;font-weight:700;cursor:pointer}.unlock-all-btn{background:var(--primary);border:none;color:white}.unlock-reset-btn{background:white;border:1.5px solid var(--border);color:var(--muted)}.unlock-reset-btn:hover{border-color:var(--error);color:var(--error)}.unlock-panel-overlay{position:fixed;inset:0;z-index:210;display:none}.unlock-panel-overlay.open{display:block}
+
 .geo-svg-wrap{width:100%;overflow-x:auto;padding:4px 0}.geo-svg{display:block;max-width:440px;width:100%;height:auto;margin:0 auto}.geo-label{font-size:13px;font-weight:700;fill:#2c3e50}.geo-note{font-size:11px;fill:#6b7785}.geo-shape{fill:#f0eeff;stroke:#6c63d8;stroke-width:2.2}.geo-line{stroke:#4e46b0;stroke-width:2.2;fill:none}.geo-parallel{stroke:#8d86e8;stroke-width:2.5}.geo-right{fill:none;stroke:#e05c5c;stroke-width:1.8}
 @media(max-width:560px){
   .screen{padding:14px}.options-grid{grid-template-columns:1fr}.topic-card{padding:13px 14px}.topic-badge{font-size:.68rem;padding:3px 7px}
@@ -205,7 +205,7 @@ if (location.protocol !== "file:") {
 .theory-page-link{width:min(100%,520px)!important;margin:0 auto!important;min-height:44px}
 #screenIntro #tabTheory>.theory-page-link{display:flex}
 .home-tools{margin:0 0 20px!important;text-align:center}
-.unlock-launch{min-height:42px;padding:10px 16px!important}
+
 
 .p6-section-head{grid-column:1/-1;margin:20px 0 8px;padding-top:16px;border-top:1px solid var(--border,#e6e8ee)}
 .p6-section-head.p6-first{margin-top:2px;padding-top:0;border-top:0}
@@ -228,7 +228,7 @@ if (location.protocol !== "file:") {
 
 button,a,[onclick]{-webkit-tap-highlight-color:transparent}
 button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid color-mix(in srgb,var(--primary) 35%,transparent);outline-offset:2px}
-.unlock-panel,.mi-exam-modal{max-width:min(92vw,620px)!important}
+.mi-exam-modal{max-width:min(92vw,620px)!important}
 
 @media (max-width:700px){
   .top-nav{gap:5px;padding:8px 7px;min-height:54px}
@@ -246,13 +246,13 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   #screenHome{padding:14px 0 26px!important}
   .home-header h2{font-size:1.45rem}.home-header p{font-size:.88rem;line-height:1.45}
   .intro-card{padding:15px 16px!important;font-size:.95rem}
-  .theory-page-link,.unlock-launch{width:100%!important;max-width:none!important}
+  .theory-page-link{width:100%!important;max-width:none!important}
   .topic-card{align-items:flex-start!important;flex-wrap:wrap;padding:13px 14px!important;gap:10px}
   .topic-icon{width:34px!important;flex:0 0 34px}.topic-info{flex:1 1 calc(100% - 50px)}
   .topic-badge{margin-left:44px}.p6-section-head{margin-top:18px;padding-top:14px}.p6-section-note{font-size:.79rem}
   .btn-primary,.btn-secondary,.btn-danger{max-width:100%}.level-select,.mode-select{flex-wrap:wrap}.level-btn,.mode-btn{flex:1 1 145px}
-  .options-grid{grid-template-columns:1fr!important}.mi-exam-overlay,.unlock-panel-overlay{padding:10px!important}
-  .mi-exam-modal,.unlock-panel{max-height:92vh!important;border-radius:14px!important}
+  .options-grid{grid-template-columns:1fr!important}.mi-exam-overlay{padding:10px!important}
+  .mi-exam-modal{max-height:92vh!important;border-radius:14px!important}
 }
 @media (max-width:430px){
   .top-nav h1{font-size:.76rem}.top-nav .progress-bar-wrap{display:none!important}
@@ -260,6 +260,22 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
 }
 </style>
 <link rel="stylesheet" href="../assets/css/learning-footer.css"/>
+<script>
+// Remove obsolete access fields while preserving completion, errors and other saved data.
+(function(){
+  const keys=["se3eso_v1", "sp3eso_v1"];
+  for(const storageName of ['localStorage','sessionStorage'])for(const key of keys){
+    try{
+      const store=window[storageName],raw=store.getItem(key);
+      if(!raw)continue;
+      const data=JSON.parse(raw);
+      if(data&&typeof data==='object'&&('unlockedIds' in data||'unlocked' in data)){
+        delete data.unlockedIds;delete data.unlocked;store.setItem(key,JSON.stringify(data));
+      }
+    }catch(e){}
+  }
+})();
+</script>
 </head>
 <body>
 <nav class="top-nav">
@@ -276,13 +292,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
 </nav>
 
 <!-- GESTIÓ DE TEMES -->
-<div class="unlock-panel-overlay" id="unlockOverlay" onclick="closeUnlockPanel()"></div>
-<div class="unlock-panel" id="unlockPanel">
-  <h4>🔓 Gestionar temes</h4>
-  <div id="unlockTopicList"></div>
-  <button class="unlock-all-btn" onclick="unlockAllTopics()">🔓 Desbloquejar disponibles</button>
-  <button class="unlock-reset-btn" onclick="resetProgress()">↺ Reiniciar progrés</button>
-</div>
+
 
 <!-- HOME -->
 <div class="screen active" id="screenHome">
@@ -300,12 +310,13 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
       <br><br>
       Els exercicis combinen <strong>representacions gràfiques i coordenades</strong>, pistes de procediment, correcció immediata, distractors basats en errors habituals, variació de sessió i un sistema que <strong>guarda els errors</strong>. Quan calen diversos passos, la correcció mostra el desenvolupament complet.
       <br><br>
-      El Bloc 1 és la base. La resta es desbloquegen progressivament en avançar o manualment amb <strong>Gestionar temes</strong>.
+      Tots els temes estan disponibles des del primer moment.
     </p>
   </div>
   <div class="all-theory-wrap" style="text-align:center;margin:0 0 14px"><a class="theory-page-link" href="teoria/espacial/index.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none">📚 Tota la teoria del Sentit Espacial</a></div>
-  <div class="home-tools"><button class="unlock-launch" onclick="toggleUnlockPanel()">🔓 Gestionar temes</button></div>
-  <div class="topics-grid" id="topicsGrid"></div>
+
+  
+<div class="topics-grid" id="topicsGrid"></div>
 </div>
 
 <!-- INTRO / TEORIA -->
@@ -1614,7 +1625,6 @@ function genAmpliacioB3ESO(forceType){
 }
 
 
-
 /* ── AMPLIACIÓ C · INVESTIGA I CONJECTURA ───────────────── */
 let ampCTypeBag=[];
 function nextAmpCType(){if(!ampCTypeBag.length)ampCTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return ampCTypeBag.pop()}
@@ -1801,7 +1811,7 @@ const FUTURE_TOPICS=[];
 /* ── ESTAT, BLOQUEIG I ERRORS ───────────────────────────── */
 const STORAGE_KEY='sp3eso_v1';
 const LEGACY_STORAGE_KEY='se3eso_v1';
-let state={done:[],errors:[],unlockedIds:['translacions'],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
+let state={done:[],errors:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
 let currentEx=null,currentScreen='screenHome';
 function loadState(){
   try{
@@ -1811,27 +1821,27 @@ function loadState(){
     const saved=JSON.parse(raw||'{}');
     state.done=Array.isArray(saved.done)?saved.done.filter(x=>TOPICS.some(t=>t.id===x)):[];
     state.errors=Array.isArray(saved.errors)?saved.errors.filter(e=>e&&TOPICS.some(t=>t.id===(e.topicId||''))):[];
-    state.unlockedIds=Array.isArray(saved.unlockedIds)?saved.unlockedIds.filter(x=>TOPICS.some(t=>t.id===x)):['translacions'];
-    if(!state.unlockedIds.length)state.unlockedIds=['translacions'];
+
+
     TOPICS.forEach((t,i)=>{if(t.exam3r===true&&state.done.includes(t.id))unlockNextAfter(t.id)});
     normalizeP3State();
     if(migrating&&raw!==null) saveState();
-  }catch(e){state.done=[];state.errors=[];state.unlockedIds=['translacions']}
+  }catch(e){state.done=[];state.errors=[];}
 }
 /* P3_NORMALIZE_UNLOCKS */
-function normalizeP3State(){state.unlockedIds=state.unlockedIds.filter(id=>{const t=TOPICS.find(x=>x.id===id);return !!(t&&t.exam3r===true)});const firstMain=TOPICS.find(t=>t.exam3r===true);if(firstMain&&!state.unlockedIds.includes(firstMain.id))state.unlockedIds.unshift(firstMain.id);TOPICS.forEach(t=>{if(t.exam3r===true&&state.done.includes(t.id))unlockNextAfter(t.id)})}
+function normalizeP3State(){const firstMain=TOPICS.find(t=>t.exam3r===true);TOPICS.forEach(t=>{if(t.exam3r===true&&state.done.includes(t.id))unlockNextAfter(t.id)})}
 
-function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({done:state.done,errors:state.errors,unlockedIds:state.unlockedIds}))}catch(e){}}
-function isUnlocked(id){const t=TOPICS.find(x=>x.id===id);return !!(t&&(t.exam3r===false||state.unlockedIds.includes(id)))}
-function unlockNextAfter(id){const i=TOPICS.findIndex(t=>t.id===id);if(i<0||TOPICS[i].exam3r!==true)return;for(let j=i+1;j<TOPICS.length;j++){if(TOPICS[j].exam3r===true){const nid=TOPICS[j].id;if(!state.unlockedIds.includes(nid))state.unlockedIds.push(nid);break}}}
-function toggleUnlockPanel(){const p=document.getElementById('unlockPanel'),o=document.getElementById('unlockOverlay'),open=!p.classList.contains('open');p.classList.toggle('open',open);o.classList.toggle('open',open);if(open)renderUnlockPanel()}
-function closeUnlockPanel(){document.getElementById('unlockPanel').classList.remove('open');document.getElementById('unlockOverlay').classList.remove('open')}
+function saveState(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify({done:state.done,errors:state.errors}))}catch(e){}}
+
+function unlockNextAfter(id){const i=TOPICS.findIndex(t=>t.id===id);if(i<0||TOPICS[i].exam3r!==true)return;for(let j=i+1;j<TOPICS.length;j++){if(TOPICS[j].exam3r===true){const nid=TOPICS[j].id;break}}}
+
+
 function coreTopicIndices(){return TOPICS.map((t,i)=>t.exam3r===true?i:-1).filter(i=>i>=0)}
 function coreTopicIds(){return TOPICS.filter(t=>t.exam3r===true).map(t=>t.id)}
-function renderUnlockPanel(){const box=document.getElementById('unlockTopicList'),core=coreTopicIds();box.innerHTML=core.map((id,pos)=>{const t=TOPICS.find(x=>x.id===id),u=isUnlocked(id),d=state.done.includes(id);return `<div class="unlock-topic-row"><span class="unlock-topic-name ${d?'is-done':''}">${t.icon} ${t.name}${d?' ✓':''}</span>${pos===0?'<span class="unlock-base">Base</span>':`<button class="unlock-toggle ${u?'active':''}" onclick="toggleTopicLock('${id}')">${u?'Obert':'Tancat'}</button>`}</div>`}).join('')}
-function toggleTopicLock(id){const core=coreTopicIds(),t=TOPICS.find(x=>x.id===id);if(!t||t.exam3r!==true||id===core[0])return;if(isUnlocked(id))state.unlockedIds=state.unlockedIds.filter(x=>x!==id);else if(!state.unlockedIds.includes(id))state.unlockedIds.push(id);saveState();renderUnlockPanel();renderHome()}
-function unlockAllTopics(){state.unlockedIds=coreTopicIds();saveState();renderUnlockPanel();renderHome()}
-let resetArmed=false,resetTimer=null;function resetProgress(){const b=document.getElementById('btnReset');if(!resetArmed){resetArmed=true;b.textContent='⚠ Prem de nou per confirmar';b.style.borderColor='var(--error)';b.style.color='var(--error)';clearTimeout(resetTimer);resetTimer=setTimeout(disarmReset,3000);return}disarmReset();const core=coreTopicIds();state.done=[];state.unlockedIds=core.length?[core[0]]:[];saveState();renderUnlockPanel();renderHome();closeUnlockPanel()}
+
+function toggleTopicLock(id){const core=coreTopicIds(),t=TOPICS.find(x=>x.id===id);if(!t||t.exam3r!==true||id===core[0])return;saveState();renderHome()}
+
+
 
 function miReviewPoints(ex){
   const pts=(ex&&Array.isArray(ex.review)&&ex.review.length?ex.review:(ex&&Array.isArray(ex.guide)?ex.guide:[]))
@@ -1875,7 +1885,7 @@ function setNavContext(title,showBack=false,showSense=false){
   document.getElementById('senseCrumb').style.display=showSense?'inline-flex':'none';
   document.getElementById('senseSep').style.display=showSense?'inline':'none';
 }
-function showHome(){closeUnlockPanel();setNavContext('Sentit Espacial · 3r ESO',false,true);renderHome();showScreen('screenHome')}
+function showHome(){setNavContext('Sentit Espacial · 3r ESO',false,true);renderHome();showScreen('screenHome')}
 function goBack(){
   if(currentScreen==='screenExercise'){selectTopic(state.currentTopic);return}
   if(currentScreen==='screenIntro'||currentScreen==='screenExam'||currentScreen==='screenApp'){showHome();return}
@@ -1883,7 +1893,7 @@ function goBack(){
 }
 
 /* ── HOME ──────────────────────────────────────────────────── */
-function disarmReset(){resetArmed=false;clearTimeout(resetTimer);const b=document.getElementById('btnReset');if(b){b.textContent='↻ Reiniciar progrés';b.style.borderColor='';b.style.color=''}}
+
 function renderHome(){
   const grid=document.getElementById('topicsGrid');
   const mainTopics=TOPICS.filter(t=>t.course==='3r');
@@ -1891,23 +1901,22 @@ function renderHome(){
   function head(icon,title,note,cls,first){return '<div class="p6-section-head '+(first?'p6-first ':'')+'"><div class="p6-section-title '+(cls||'')+'">'+icon+' '+title+'</div><div class="p6-section-note">'+note+'</div></div>';}
   let html=head('📘','Continguts de 3r d\'ESO','8 blocs curriculars: transformacions, mosaics, coordenades, connexió geometria-àlgebra i visualització/modelització.','',true);
   mainTopics.forEach(t=>{
-    const i=TOPICS.indexOf(t),done=state.done.includes(t.id),unlocked=isUnlocked(t.id);
-    html+='<div class="topic-card '+(done?'done ':'')+(!unlocked?'locked':'')+'" '+(unlocked?('onclick="selectTopic('+i+')"'):'aria-disabled="true"')+'>'
+    const i=TOPICS.indexOf(t),done=state.done.includes(t.id);
+    html+='<div class="topic-card '+(done?'done ':'')+('')+'" '+('onclick="selectTopic('+i+')"')+'>'
       +'<div class="topic-icon">'+t.icon+'</div><div class="topic-info"><h3>'+(i+1)+'. '+t.name+'</h3><p>'+t.short+'</p></div>'
-      +'<span class="topic-badge '+(done?'badge-done':unlocked?'badge-active':'badge-locked')+'">'+(done?'✓ Fet':unlocked?'Practicar':'🔒 Bloquejat')+'</span></div>';
+      +'<span class="topic-badge '+(done?'badge-done':'badge-active')+'">'+(done?'✓ Fet':'Practicar')+'</span></div>';
   });
   if(expansionTopics.length||FUTURE_TOPICS.length){
     html+=head('⭐','Ampliació · prepara 4t ESO','A–D són opcionals i no compten en el progrés ni en el Mode Examen de 3r.','p6-extension');
     expansionTopics.forEach(t=>{
-      const i=TOPICS.indexOf(t),done=state.done.includes(t.id),unlocked=isUnlocked(t.id);
-      html+='<div class="topic-card '+(done?'done ':'')+(!unlocked?'locked':'')+'" '+(unlocked?('onclick="selectTopic('+i+')"'):'aria-disabled="true"')+' style="border-color:#c4b5fd">'
+      const i=TOPICS.indexOf(t),done=state.done.includes(t.id);
+      html+='<div class="topic-card '+(done?'done ':'')+('')+'" '+('onclick="selectTopic('+i+')"')+' style="border-color:#c4b5fd">'
         +'<div class="topic-icon">'+t.icon+'</div><div class="topic-info"><h3>'+t.name+'</h3><p>'+t.short+'</p></div>'
-        +'<span class="topic-badge '+(done?'badge-done':unlocked?'badge-active':'badge-locked')+'">'+(done?'✓ Fet':unlocked?'Ampliació':'🔒')+'</span></div>';
+        +'<span class="topic-badge '+(done?'badge-done':'badge-active')+'">'+(done?'✓ Fet':'Ampliació')+'</span></div>';
     });
-    FUTURE_TOPICS.forEach(t=>{html+='<div class="topic-card locked" aria-disabled="true" style="border-color:#ddd6fe"><div class="topic-icon">'+t.icon+'</div><div class="topic-info"><h3>'+t.name+'</h3><p>'+t.short+'</p></div><span class="topic-badge badge-locked">Properament</span></div>';});
   }
   html+=head('📝','Mode Examen','20 preguntes · tria de manera independent els blocs curriculars de 3r que vols preparar.','p6-exam');
-  html+='<div class="topic-card p6-special-card p6-exam-card" onclick="startExam()"><div class="topic-icon">📝</div><div class="topic-info"><h3>Mode Examen · 3r ESO</h3><p>Selecció independent dels blocs desbloquejats per practicar</p></div><span class="topic-badge badge-exam">Examen 3r</span></div>';
+  html+='<div class="topic-card p6-special-card p6-exam-card" onclick="startExam()"><div class="topic-icon">📝</div><div class="topic-info"><h3>Mode Examen · 3r ESO</h3><p>Tria els blocs que vols repassar</p></div><span class="topic-badge badge-exam">Examen 3r</span></div>';
   const ec=Array.isArray(state.errors)?state.errors.length:0;
   html+=head('❌','Errors guardats','Repassa els exercicis fallats i consulta de nou la resolució.','p6-errors');
   html+='<div class="topic-card p6-special-card '+(ec?'p6-error-card':'')+'" onclick="showErrors()"><div class="topic-icon">❌</div><div class="topic-info"><h3>Errors guardats</h3><p>'+(ec?('Tens '+ec+' error'+(ec===1?'':'s')+' per repassar'):'Encara no tens errors guardats')+'</p></div><span class="topic-badge '+(ec?'badge-errors':'badge-active')+'">'+(ec?'Repassar':'Veure')+'</span></div>';
@@ -1918,7 +1927,7 @@ function renderHome(){
 
 /* ── INTRO / TEORIA ────────────────────────────────────────── */
 function selectTopic(i){
-  if(!TOPICS[i]||!isUnlocked(TOPICS[i].id))return;
+  if(!TOPICS[i])return;
   state.currentTopic=i;
   const t=TOPICS[i],th=TEORIA[t.theoryKey];
   setNavContext(t.name,true,true);
@@ -2016,7 +2025,7 @@ function processAnswer(ok,studentAnswer){
   document.getElementById('btnNext').style.display='block';if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
 }
 function toggleSolution(btn){const box=document.getElementById('solBox');box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'Amaga explicació':'📘 Veure explicació'}
-function markTopicDone(){const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id)){state.done.push(id);unlockNextAfter(id);saveState()}}
+function markTopicDone(){const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
 function nextExercise(){const goal=state.level===1?10:20;if(state.correctStreak>=goal&&state.done.includes(TOPICS[state.currentTopic].id)){showCongrats()}else showExercise()}
 function showCongrats(){
   document.getElementById('feedbackArea').innerHTML='<div class="congrats"><div class="trophy">🏆</div><h2>Bloc superat!</h2><p>Has completat <b>'+TOPICS[state.currentTopic].name+'</b>.</p><button class="btn-primary" onclick="showHome()">Tornar al Sentit Espacial</button></div>';
@@ -2170,7 +2179,7 @@ function applyDeepLink(){
   if(!topicId)return false;
   const idx=TOPICS.findIndex(t=>t.id===topicId);
   if(idx<0)return false;
-  if(!state.unlockedIds.includes(topicId)){state.unlockedIds.push(topicId);saveState();}
+
   state.currentTopic=idx;
   const level=Number(params.get('level')||params.get('nivell'));
   state.level=level===2?2:1;
@@ -2209,7 +2218,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
 </script>
 <div class="mi-exam-overlay" id="miExamOverlay" onclick="miCloseExamConfig()" aria-hidden="true">
   <div class="mi-exam-modal" role="dialog" aria-modal="true" aria-labelledby="miExamTitle" onclick="event.stopPropagation()">
-    <div class="mi-exam-head"><div><h2 id="miExamTitle">📝 Prepara el teu examen</h2><p>Selecciona exactament els blocs que vols repassar. Aquesta selecció és independent dels blocs desbloquejats per practicar.</p></div><button class="mi-exam-close" onclick="miCloseExamConfig()" aria-label="Tancar">✕</button></div>
+    <div class="mi-exam-head"><div><h2 id="miExamTitle">📝 Prepara el teu examen</h2><p>Selecciona exactament els blocs que vols repassar. Tots els blocs estan disponibles des del primer moment.</p></div><button class="mi-exam-close" onclick="miCloseExamConfig()" aria-label="Tancar">✕</button></div>
     <div class="mi-exam-tools"><button class="mi-exam-tool" onclick="miExamSelectAll()">Tots els blocs</button><button class="mi-exam-tool" onclick="miExamSelectDone()">Només completats</button><button class="mi-exam-tool" onclick="miExamClearAll()">Desmarcar tots</button></div>
     <div class="mi-exam-list" id="miExamTopicList"></div>
     <div class="mi-exam-foot"><div class="mi-exam-summary" id="miExamSummary"></div><button class="mi-exam-start" id="miExamStartBtn" onclick="miStartConfiguredExam()">Començar examen →</button><div class="mi-exam-note">L’examen té 20 preguntes, repartides tan equilibradament com permeten els blocs seleccionats. Les ampliacions opcionals no hi entren.</div></div>

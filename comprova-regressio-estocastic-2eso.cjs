@@ -26,7 +26,7 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
    }
   }
   check(openOk('1/2',[],' 0,5 ',{}),'Coma');check(openOk('1/2',[],'50%',{}),'Percentatge');check(!openOk('1/2',[],'1/0',{}),'Divisió zero');check(!openOk('1/2',[],'-1/2',{}),'Signe');check(!openOk('1/2',[],'0,51',{}),'Valor incorrecte');
-  unlockAllTopics();miExamSelectedTopics=miExamCoreTopics().map(t=>t.id);miRunConfiguredExam();check(state.examQs.length===20,'Examen general');check(state.examQs.every(q=>q.course!=='3r'&&!q.topicId.endsWith('3r')),'Ampliacions');return n;
+  miExamSelectedTopics=miExamCoreTopics().map(t=>t.id);miRunConfiguredExam();check(state.examQs.length===20,'Examen general');check(state.examQs.every(q=>q.course!=='3r'&&!q.topicId.endsWith('3r')),'Ampliacions');return n;
  });
  await p.evaluate(()=>miTopicExam.start('experiments'));assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.screenshot({path:'scripts/examens-estocastic-2eso-390.png',fullPage:true});
  console.log(checks+' comprovacions: bancs, opcions, gràfics, probabilitats independents, normalització, examen general i mòbil.');await b.close();

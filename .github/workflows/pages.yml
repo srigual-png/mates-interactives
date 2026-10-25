@@ -22,6 +22,11 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Generate catalogue and verify real topic exams
         run: node scripts/genera-examens-cerca.cjs
+      - name: Verify topic access, preserved progress and search links
+        run: |
+          node scripts/comprova-access-estatic.cjs
+          node scripts/comprova-access-lliure.cjs
+          node scripts/comprova-practica-cercador.cjs
       - uses: actions/configure-pages@v5
       - name: Prepare public files
         run: |

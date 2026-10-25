@@ -14,7 +14,7 @@ href="https://srigual-png.github.io/mates-interactives/1eso/sentit-numeric.html"
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
 <style>
-:root{--bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--pd:#3a6fd8;--ok:#34c97e;--err:#e05c5c;--warn:#f5a623;--text:#2c3e50;--muted:#7f8c9a;--border:#dce3ed;--locked:#c8d3e0;--sh:0 2px 12px rgba(0,0,0,0.08);}
+:root{--bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--pd:#3a6fd8;--ok:#34c97e;--err:#e05c5c;--warn:#f5a623;--text:#2c3e50;--muted:#7f8c9a;--border:#dce3ed;--nav-separator:#c8d3e0;--sh:0 2px 12px rgba(0,0,0,0.08);}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
 nav{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:12px;box-shadow:var(--sh);position:sticky;top:0;z-index:100;}
@@ -23,7 +23,7 @@ nav{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20
 .sidebar{width:160px;flex-shrink:0;padding:20px 0;display:flex;flex-direction:column;gap:10px;align-items:stretch;}
 .sidebar-btn{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:14px 10px;cursor:pointer;text-align:center;font-size:.82rem;font-weight:600;color:var(--muted);transition:all .2s;line-height:1.5;}
 .sidebar-btn:hover{border-color:var(--primary);color:var(--primary);background:#eaf1fd;}
-.sidebar-btn.active-unlock{border-color:var(--warn);color:var(--warn);background:#fff3e0;}
+
 .sidebar-btn .sb-icon{font-size:1.4rem;display:block;margin-bottom:4px;}
 nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:default;}
 .nb{background:none;border:none;cursor:pointer;color:var(--muted);font-size:1.2rem;padding:4px 8px;border-radius:6px;}
@@ -37,8 +37,8 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .hh p{color:var(--muted);font-size:.9rem;}
 .tg{display:flex;flex-direction:column;gap:10px;margin-top:18px;}
 .tc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:var(--sh);transition:transform .15s,box-shadow .15s;}
-.tc:hover:not(.lk){transform:translateY(-2px);box-shadow:0 6px 20px rgba(91,141,238,.15);}
-.tc.lk{opacity:.5;cursor:not-allowed;}
+.tc:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(91,141,238,.15);}
+
 .tc.dn{border-left:4px solid var(--ok);}
 .ti{font-size:1.5rem;width:38px;text-align:center;flex-shrink:0;}
 .tinfo{flex:1;}
@@ -47,7 +47,7 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .tbadge{font-size:.73rem;padding:3px 10px;border-radius:20px;font-weight:600;white-space:nowrap;}
 .bd{background:#e6f9ef;color:var(--ok);}
 .ba{background:#eaf1fd;color:var(--primary);}
-.bl{background:var(--border);color:var(--locked);}
+
 .be{background:#fff3e0;color:var(--warn);}
 .thbox{background:#eaf1fd;border-left:4px solid var(--primary);border-radius:10px;padding:15px 17px;margin-bottom:18px;font-size:.91rem;line-height:1.7;}
 .thbox h3{color:var(--primary);margin-bottom:8px;font-size:.97rem;}
@@ -146,22 +146,8 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .chkrow{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:.88rem;cursor:pointer;}
 .chkrow input{width:16px;height:16px;cursor:pointer;accent-color:var(--primary);}
 .selall{font-size:.8rem;color:var(--primary);cursor:pointer;text-decoration:underline;margin-bottom:8px;display:inline-block;}
-.unlock-panel-overlay{position:fixed;inset:0;z-index:190;display:none;}
-.unlock-panel-overlay.open{display:block;}
-.unlock-panel{position:fixed;top:60px;right:18px;width:230px;max-height:calc(100vh - 80px);max-height:calc(100dvh - 80px);overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;background:var(--card);border:1.5px solid var(--border);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.13);z-index:200;padding:16px;display:none;}
-.unlock-panel.open{display:block;}
-.unlock-panel h4{font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;display:flex;align-items:center;gap:6px;}
-.unlock-topic-row{display:flex;align-items:center;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);}
-.unlock-topic-row:last-of-type{border:none;}
-.unlock-topic-name{font-size:.83rem;color:var(--text);flex:1;margin-right:8px;}
-.unlock-topic-name.is-done{color:var(--ok);}
-.unlock-toggle{background:none;border:1.5px solid var(--border);border-radius:8px;padding:3px 9px;font-size:.75rem;cursor:pointer;font-weight:600;color:var(--muted);transition:all .15s;white-space:nowrap;}
-.unlock-toggle.active{background:#eaf1fd;border-color:var(--primary);color:var(--primary);}
-.unlock-toggle:hover{border-color:var(--primary);color:var(--primary);}
-.unlock-all-btn{width:100%;margin-top:12px;background:var(--primary);color:white;border:none;border-radius:10px;padding:9px;font-size:.82rem;font-weight:700;cursor:pointer;transition:background .2s;}
-.unlock-all-btn:hover{background:var(--pd);}
-.unlock-reset-btn{width:100%;margin-top:6px;background:none;color:var(--muted);border:1.5px solid var(--border);border-radius:10px;padding:7px;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;}
-.unlock-reset-btn:hover{border-color:var(--err);color:var(--err);}
+
+
 .intro-card{
     background: var(--card);
     border: 1px solid var(--border);
@@ -273,7 +259,7 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 @media(max-width:620px){.mi-exam-overlay{padding:9px}.mi-exam-modal{padding:16px;border-radius:14px;max-height:92vh}.mi-exam-list{grid-template-columns:1fr}.mi-exam-foot{margin:14px -16px -16px;padding:12px 16px 16px;bottom:-16px}}
 
 /* ── P3 · GESTIÓ DE TEMES I PROGRÉS ───────────────────── */
-.home-tools{display:flex;justify-content:center;margin:0 0 16px}.unlock-launch{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:var(--card,#fff);color:var(--primary);border:1.5px solid var(--primary);border-radius:11px;padding:9px 14px;font-size:.84rem;font-weight:800;cursor:pointer;transition:.18s}.unlock-launch:hover{background:var(--primary-soft,#f4f6ff);transform:translateY(-1px)}
+.home-tools{display:flex;justify-content:center;margin:0 0 16px}
 .sidebar{display:none!important}
 </style>
 <style id="p6-ui">
@@ -310,7 +296,7 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .all-theory-wrap{margin:0 0 12px!important}
 .theory-page-link{width:min(100%,520px)!important;margin:0 auto!important;min-height:44px}
 .home-tools{margin:0 0 20px!important}
-.unlock-launch{min-height:42px;padding:10px 16px!important}
+
 
 .p6-section-head{
   margin:20px 0 8px;padding-top:16px;border-top:1px solid var(--border,#e6e8ee);
@@ -339,7 +325,7 @@ button,a,[onclick]{-webkit-tap-highlight-color:transparent}
 button:focus-visible,a:focus-visible,[onclick]:focus-visible{
   outline:3px solid color-mix(in srgb,var(--primary) 35%,transparent);outline-offset:2px;
 }
-.unlock-panel,.mi-exam-modal{max-width:min(92vw,620px)!important}
+.mi-exam-modal{max-width:min(92vw,620px)!important}
 
 @media (max-width:700px){
   .top-nav{gap:5px;padding:8px 7px;min-height:54px}
@@ -353,7 +339,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
   .home-header h2,.hh h2{font-size:1.45rem}
   .home-header p,.hh p{font-size:.88rem;line-height:1.45}
   .intro-card{padding:15px 16px!important;font-size:.95rem}
-  .theory-page-link,.unlock-launch{width:100%!important;max-width:none!important}
+  .theory-page-link{width:100%!important;max-width:none!important}
   .topic-card,.tc{align-items:flex-start!important;flex-wrap:wrap;padding:13px 14px!important;gap:10px}
   .topic-icon,.ti{width:34px!important;flex:0 0 34px}
   .topic-info,.tinfo{flex:1 1 calc(100% - 50px)}
@@ -364,8 +350,8 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
   .level-select,.mode-select{flex-wrap:wrap}
   .level-btn,.mode-btn,.lvb{flex:1 1 145px}
   .options-grid,.og{grid-template-columns:1fr!important}
-  .mi-exam-overlay,.unlock-panel-overlay{padding:10px!important}
-  .mi-exam-modal,.unlock-panel{max-height:92vh!important;border-radius:14px!important}
+  .mi-exam-overlay{padding:10px!important}
+  .mi-exam-modal{max-height:92vh!important;border-radius:14px!important}
 }
 
 @media (max-width:430px){
@@ -379,6 +365,22 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 
 </style>
 <link rel="stylesheet" href="../assets/css/learning-footer.css"/>
+<script>
+// Remove obsolete access fields while preserving completion, errors and other saved data.
+(function(){
+  const keys=["sn1eso_v4"];
+  for(const storageName of ['localStorage','sessionStorage'])for(const key of keys){
+    try{
+      const store=window[storageName],raw=store.getItem(key);
+      if(!raw)continue;
+      const data=JSON.parse(raw);
+      if(data&&typeof data==='object'&&('unlockedIds' in data||'unlocked' in data)){
+        delete data.unlockedIds;delete data.unlocked;store.setItem(key,JSON.stringify(data));
+      }
+    }catch(e){}
+  }
+})();
+</script>
 </head>
 <body>
 <nav class="top-nav">
@@ -400,25 +402,19 @@ El <strong>sentit numèric</strong> és la base de les Matemàtiques de 1r d'ESO
 <br>
 
 <p>
-Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immediata</strong>, pistes i explicacions dels errors perquè puguis aprendre mentre practiques. Quan dominis un tema es desbloquejarà el següent i, al final, podràs posar-te a prova amb el <strong>Mode Examen</strong> i revisar els errors més freqüents.
+Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immediata</strong>, pistes i explicacions dels errors perquè puguis aprendre mentre practiques. Pots triar qualsevol tema des del primer moment i podràs posar-te a prova amb el <strong>Mode Examen</strong> i revisar els errors més freqüents.
 </p>
 </div>
 <div class="all-theory-wrap" style="text-align:center;margin:0 0 14px"><a class="theory-page-link" href="teoria/numeric/index.html" style="display:inline-flex;align-items:center;justify-content:center;text-decoration:none">📚 Tota la teoria del Sentit Numèric</a></div>
-<div class="home-tools"><button class="unlock-launch" onclick="toggleUnlockPanel()">🔓 Gestionar temes</button></div>
+
+
 <div class="tg" id="tGrid"></div></div>
 <div class="sidebar" id="sidebar">
-  <button class="sidebar-btn" id="btnUnlock" onclick="toggleUnlockPanel()">
-    <span class="sb-icon">&#128275;</span>Desbloqueja temes
-  </button>
+
 </div>
 </div>
-<div class="unlock-panel-overlay" id="unlockOverlay" onclick="closeUnlockPanel()"></div>
-<div class="unlock-panel" id="unlockPanel">
-  <h4>&#128275; Gestionar temes</h4>
-  <div id="unlockTopicList"></div>
-  <button class="unlock-all-btn" onclick="unlockAllTopics()">&#128275; Desbloquejar tots</button>
-  <button class="unlock-reset-btn" id="btnReset" onclick="resetProgress()">&#8630; Reiniciar progrés</button>
-</div>
+
+
 <div class="screen" id="sIntro"><div id="introC"></div><div class="lvs"><button class="lvb active" id="bL1" onclick="selLv(1)">&#129513; Nivell 1<br><small>Guiat &middot; 10 encerts</small></button><button class="lvb" id="bL2" onclick="selLv(2)">&#9999;&#65039; Nivell 2<br><small>Sol/a &middot; 20 encerts</small></button></div><div class="mode-select"><button class="mode-btn active" id="bModeMulti" onclick="selMode('multi')">🔘 Opció múltiple</button><button class="mode-btn" id="bModeOpen" onclick="selMode('open')">✍️ Resposta oberta</button></div><button class="bp" onclick="startP()">Comença a practicar &rarr;</button>
 <button type="button" id="miTopicExamLaunch" class="theory-page-link mi-topic-exam-launch" onclick="miTopicExam.start(this.dataset.topic)" hidden>📝 Examen del tema</button></div>
 <div class="screen" id="sEx">
@@ -463,7 +459,7 @@ Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immed
     <p>Problemes de 1r d'ESO amb resposta escrita i càlculs pas a pas</p>
   </div>
   <div class="intro-card">
-    <p>Aquest espai serveix per aplicar els continguts del sentit numèric en problemes més oberts, sense opcions per triar. És material opcional de 1r d'ESO: <strong>no compta per desbloquejar temes ni entra al Mode Examen</strong>.</p>
+    <p>Aquest espai serveix per aplicar els continguts del sentit numèric en problemes més oberts, sense opcions per triar. És material opcional de 1r d'ESO: <strong>no entra al Mode Examen</strong>.</p>
   </div>
   <div class="cats" id="ampCatGrid"></div>
   <div style="margin-top:20px;">
@@ -818,7 +814,7 @@ function genNaturals(){
 
     var distractors3=[];
     var seen3=new Set([correct]);
-  
+
     for(var i3=0;i3<candidates3.length&&distractors3.length<3;i3++){
       var candidate3=String(candidates3[i3]);
 
@@ -3620,75 +3616,35 @@ var TOPICS=[
 // ── STATE ──────────────────────────────────────────────────────────────────
 var NEEDED={1:10,2:20};
 var state={
-  unlockedIds:[],done:[],
+  done:[],
   currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,
   examQs:[],examIdx:0,examScore:0,examAnswers:[],
   errors:{}
 };
 
-function isUnlocked(i){var t=TOPICS[i];return t&&t.course==="2n"?true:state.unlockedIds.indexOf(t.id)>=0;}
+
 function coreTopicIndexes(){return TOPICS.map(function(t,i){return t.course==="1r"?i:-1;}).filter(function(i){return i>=0;});}
 function nextCoreIndex(i){for(var j=i+1;j<TOPICS.length;j++)if(TOPICS[j].course==="1r")return j;return -1;}
 
 function loadState(){
   try{
     var saved=JSON.parse(localStorage.getItem('sn1eso_v4')||'{}');
-    if(saved.unlockedIds)state.unlockedIds=saved.unlockedIds;
-    else if(saved.unlocked)state.unlockedIds=TOPICS.filter(function(t){return t.course==="1r";}).slice(0,saved.unlocked).map(function(t){return t.id;});
+
     if(saved.done)state.done=saved.done;
     if(saved.errors)state.errors=normalizeErrorStore(saved.errors);
   }catch(e){}
   var firstCore=TOPICS.find(function(t){return t.course==="1r";});
-  if(firstCore&&state.unlockedIds.indexOf(firstCore.id)<0)state.unlockedIds.unshift(firstCore.id);
-  if((state.done.indexOf('ops')>=0||state.unlockedIds.indexOf('jerarquia')>=0)&&state.unlockedIds.indexOf('potencies')<0)state.unlockedIds.push('potencies');
-  if((state.done.indexOf('fraccions')>=0||state.unlockedIds.indexOf('percentatges')>=0)&&state.unlockedIds.indexOf('proporcionalitat')<0)state.unlockedIds.push('proporcionalitat');
+
+
 }
 function saveState(){
-  try{localStorage.setItem('sn1eso_v4',JSON.stringify({unlockedIds:state.unlockedIds,done:state.done,errors:state.errors}));}catch(e){}
+  try{localStorage.setItem('sn1eso_v4',JSON.stringify({done:state.done,errors:state.errors}));}catch(e){}
 }
 
-// ── PANELL DESBLOQUEIG PER TEMES ────────────────────────────────────────────
-function toggleUnlockPanel(){
-  var panel=document.getElementById('unlockPanel'),overlay=document.getElementById('unlockOverlay');
-  var isOpen=panel.classList.contains('open');
-  disarmReset();
-  if(isOpen){closeUnlockPanel();}
-  else{renderUnlockPanel();panel.classList.add('open');overlay.classList.add('open');}
-}
-function closeUnlockPanel(){
-  disarmReset();
-  document.getElementById('unlockPanel').classList.remove('open');
-  document.getElementById('unlockOverlay').classList.remove('open');
-}
-function renderUnlockPanel(){
-  var list=document.getElementById('unlockTopicList'),html='';
-  coreTopicIndexes().forEach(function(i,pos){
-    var t=TOPICS[i],unlocked=isUnlocked(i),done=state.done.indexOf(t.id)>=0,canToggle=pos>0;
-    html+='<div class="unlock-topic-row"><span class="unlock-topic-name '+(done?'is-done':'')+'">'+t.icon+' '+t.name+(done?' &#10003;':'')+'</span>'+(canToggle?'<button class="unlock-toggle '+(unlocked?'active':'')+'" onclick="toggleTopicUnlock('+i+')">'+(unlocked?'Obert':'Tancat')+'</button>':'<span style="font-size:.75rem;color:var(--ok);font-weight:600">Base</span>')+'</div>';
-  });
-  html+='<div style="font-size:.75rem;color:var(--muted);margin-top:10px;line-height:1.5">⭐ L\'ampliació de 2n és sempre accessible i no forma part del bloqueig del curs.</div>';
-  list.innerHTML=html;
-}
-function toggleTopicUnlock(i){
-  var t=TOPICS[i],core=coreTopicIndexes();
-  if(!t||t.course!=="1r"||i===core[0])return;
-  if(isUnlocked(i)){
-    state.unlockedIds=state.unlockedIds.filter(function(id){return id!==t.id;});
-  }else if(state.unlockedIds.indexOf(t.id)<0){
-    state.unlockedIds.push(t.id);
-  }
-  saveState();
-  renderUnlockPanel();
-  renderHome();
-}
-function unlockAllTopics(){state.unlockedIds=TOPICS.filter(function(t){return t.course==="1r";}).map(function(t){return t.id;});saveState();renderUnlockPanel();renderHome();}
-var resetArmed=false,resetArmTimer=null;
-function resetProgress(){var btn=document.getElementById('btnReset');if(!resetArmed){resetArmed=true;btn.textContent='⚠ Prem de nou per confirmar';btn.style.borderColor='var(--err)';btn.style.color='var(--err)';clearTimeout(resetArmTimer);resetArmTimer=setTimeout(function(){disarmReset();},3000);return;}disarmReset();var firstCore=TOPICS.find(function(t){return t.course==="1r";});state.unlockedIds=firstCore?[firstCore.id]:[];state.done=[];saveState();renderUnlockPanel();renderHome();closeUnlockPanel();}
-function disarmReset(){
-  resetArmed=false;clearTimeout(resetArmTimer);
-  var btn=document.getElementById('btnReset');
-  if(btn){btn.innerHTML='&#8630; Reiniciar progrés';btn.style.borderColor='';btn.style.color='';}
-}
+
+
+
+
 function makeErrorId(){
   return Date.now()+'_'+Math.random().toString(36).slice(2,8);
 }
@@ -3807,13 +3763,13 @@ function showHome(){
 function renderHome(){
   var grid=document.getElementById('tGrid'),html='',core=coreTopicIndexes(),extension=TOPICS.map(function(t,i){return t.course==="2n"?i:-1;}).filter(function(i){return i>=0;});
   function head(icon,title,note,cls,first){return '<div class="p6-section-head '+(first?'p6-first ':'')+'"><div class="p6-section-title '+(cls||'')+'">'+icon+' '+title+'</div><div class="p6-section-note">'+note+'</div></div>';}
-  function card(i,isExt){var t=TOPICS[i],unlocked=isExt?true:isUnlocked(i),done=state.done.indexOf(t.id)>=0,errCount=(state.errors[t.id]||[]).length,errTag=errCount?'<span class="errtag">'+errCount+' errors</span>':'';return '<div class="tc '+(unlocked?'':'lk ')+(done?'dn':'')+'" onclick="'+(unlocked?'selTopic('+i+')':'')+'" '+(isExt?'style="border-style:dashed"':'')+'><div class="ti">'+t.icon+'</div><div class="tinfo"><h3>'+t.name+errTag+'</h3><p>'+t.short+'</p></div><span class="tbadge '+(done?'bd':isExt?'be':unlocked?'ba':'bl')+'">'+(done?'&#10003; Fet':isExt?'Ampliació':unlocked?'Practicar':'&#128274;')+'</span></div>';}
+  function card(i,isExt){var t=TOPICS[i],done=state.done.indexOf(t.id)>=0,errCount=(state.errors[t.id]||[]).length,errTag=errCount?'<span class="errtag">'+errCount+' errors</span>':'';return '<div class="tc '+('')+(done?'dn':'')+'" onclick="'+('selTopic('+i+')')+'" '+(isExt?'style="border-style:dashed"':'')+'><div class="ti">'+t.icon+'</div><div class="tinfo"><h3>'+t.name+errTag+'</h3><p>'+t.short+'</p></div><span class="tbadge '+(done?'bd':isExt?'be':'ba')+'">'+(done?'&#10003; Fet':isExt?'Ampliació':'Practicar')+'</span></div>';}
   html+=head('📘','Continguts de 1r d\'ESO','Compten per al progrés i poden aparèixer al Mode Examen.','',true);
   core.forEach(function(i){html+=card(i,false);});
   html+=head('⭐','Ampliació · prepara 2n d\'ESO','Material opcional. No compta per al progrés ni entra al Mode Examen de 1r ESO.','p6-extension');
   extension.forEach(function(i){html+=card(i,true);});
   html+=head('📝','Mode Examen','20 preguntes · tria els blocs curriculars de 1r que vols preparar.','p6-exam');
-  html+='<div class="tc p6-special-card p6-exam-card" onclick="miOpenExamConfig()"><div class="ti">&#128221;</div><div class="tinfo"><h3>Mode Examen · 1r ESO</h3><p>Selecció independent dels blocs desbloquejats per practicar</p></div><span class="tbadge be">Examen 1r</span></div>';
+  html+='<div class="tc p6-special-card p6-exam-card" onclick="miOpenExamConfig()"><div class="ti">&#128221;</div><div class="tinfo"><h3>Mode Examen · 1r ESO</h3><p>Tria els blocs que vols repassar</p></div><span class="tbadge be">Examen 1r</span></div>';
   var totalErr=Object.values(state.errors).reduce(function(sum,a){return sum+(Array.isArray(a)?a.length:0);},0);
   html+=head('❌','Errors guardats','Repassa els exercicis fallats i consulta de nou la resolució.','p6-errors');
   html+='<div class="tc p6-special-card '+(totalErr?'p6-error-card':'')+'" onclick="showErrorSummary()"><div class="ti">&#128203;</div><div class="tinfo"><h3>Errors guardats</h3><p>'+(totalErr?(totalErr+' error'+(totalErr===1?'':'s')+' guardat'+(totalErr===1?'':'s')+' · Repassa on falles'):'Encara no tens errors guardats')+'</p></div><span class="tbadge '+(totalErr?'be':'ba')+'">'+(totalErr?'Repassar':'Veure')+'</span></div>';
@@ -4069,7 +4025,7 @@ function processPracticeAnswer(isOk,studentAnswer){
     catch(e){nextBtn.focus();}
   },40);
 }
-function markDone(){var t=TOPICS[state.currentTopic],tid=t.id;if(state.done.indexOf(tid)<0){state.done.push(tid);if(t.course==="1r"){var n=nextCoreIndex(state.currentTopic);if(n>=0&&!isUnlocked(n))state.unlockedIds.push(TOPICS[n].id);}saveState();}}
+function markDone(){const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
 function nextEx(){
   if(state.correctStreak>=NEEDED[state.level]&&state.done.indexOf(TOPICS[state.currentTopic].id)>=0){showCongrats();return;}
   showEx();
@@ -4313,7 +4269,7 @@ var examSelectedTopics=[],examSelectedDiff=0;
 var EXAM_TOTAL_Q=20,EXAM_PROBLEM_Q=6;
 
 function showExamCfg(){miOpenExamConfig();}
-function selAllTopics(val){TOPICS.filter(function(t){return t.exam1r===true;}).forEach(function(t){var el=document.getElementById('chk_'+t.id);if(el)el.checked=val;});var eligible=TOPICS.filter(function(t,i){return t.exam1r===true&&isUnlocked(i);});examSelectedTopics=val?eligible.map(function(t){return t.id;}):(eligible.length?[eligible[0].id]:[]);}
+function selAllTopics(val){TOPICS.filter(function(t){return t.exam1r===true;}).forEach(function(t){var el=document.getElementById('chk_'+t.id);if(el)el.checked=val;});var eligible=TOPICS.filter(function(t,i){return t.exam1r===true;});examSelectedTopics=val?eligible.map(function(t){return t.id;}):(eligible.length?[eligible[0].id]:[]);}
 function togExamTopic(id){
   var el=document.getElementById('chk_'+id);
   if(el.checked&&examSelectedTopics.indexOf(id)<0)examSelectedTopics.push(id);
@@ -4578,11 +4534,7 @@ function initPage(){
     if(idx>=0){
       // Un enllaç directe des d'una pàgina de teoria expressa que
       // l'alumne vol treballar aquest tema. Si és de 1r i encara
-      // estava bloquejat, el fem accessible i conservem l'elecció.
-      if(TOPICS[idx].course==="1r" && !isUnlocked(idx)){
-        state.unlockedIds.push(TOPICS[idx].id);
-        saveState();
-      }
+
       selTopic(idx);
       selLv(levelParam===2 ? 2 : 1);
       startP();
@@ -4632,7 +4584,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
 <div class="mi-exam-overlay" id="miExamOverlay" onclick="miCloseExamConfig()" aria-hidden="true">
   <div class="mi-exam-modal" role="dialog" aria-modal="true" aria-labelledby="miExamTitle" onclick="event.stopPropagation()">
     <div class="mi-exam-head">
-      <div><h2 id="miExamTitle">📝 Prepara el teu examen</h2><p>Selecciona exactament els blocs que vols repassar. Aquesta selecció és independent dels blocs desbloquejats per practicar.</p></div>
+      <div><h2 id="miExamTitle">📝 Prepara el teu examen</h2><p>Selecciona exactament els blocs que vols repassar. Tots els blocs estan disponibles des del primer moment.</p></div>
       <button class="mi-exam-close" onclick="miCloseExamConfig()" aria-label="Tancar">✕</button>
     </div>
     <div class="mi-exam-tools">
@@ -4790,7 +4742,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   btn.addEventListener('click',function(e){e.preventDefault();window.open(creaUrl(),'_blank','noopener');});
 })();
 </script>
-
 
 
 <!-- MI_NAV_V3 · dues pestanyes reutilitzables: pràctica ↔ teoria -->

@@ -12,16 +12,16 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon-16x16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/apple-touch-icon.png">
 <style>
-:root{--bg:#f5faf7;--card:#fff;--primary:#2f9e63;--primary-dark:#237a4b;--primary-soft:#e9f7ef;--success:#34c97e;--error:#e05c5c;--warn:#f5a623;--info:#2980b9;--purple:#8b5cf6;--text:#2c3e50;--muted:#7f8c9a;--border:#dce3ed;--locked:#c8d3e0;--shadow:0 2px 12px rgba(0,0,0,.08)}
+:root{--bg:#f5faf7;--card:#fff;--primary:#2f9e63;--primary-dark:#237a4b;--primary-soft:#e9f7ef;--success:#34c97e;--error:#e05c5c;--warn:#f5a623;--info:#2980b9;--purple:#8b5cf6;--text:#2c3e50;--muted:#7f8c9a;--border:#dce3ed;--nav-separator:#c8d3e0;--shadow:0 2px 12px rgba(0,0,0,.08)}
 *{box-sizing:border-box;margin:0;padding:0}body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}button,input{font:inherit}
-nav{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20px;display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,auto) minmax(0,1fr);align-items:center;gap:14px;box-shadow:var(--shadow);position:sticky;top:0;z-index:100}.nav-left{display:flex;align-items:center;gap:8px;min-width:0;white-space:nowrap;overflow-x:auto;scrollbar-width:none}.nav-left::-webkit-scrollbar{display:none}.nb{background:none;border:1px solid var(--border);cursor:pointer;color:var(--muted);font-size:1rem;padding:4px 8px;border-radius:7px;line-height:1.2;flex:0 0 auto}.nb:hover{background:var(--bg);color:var(--primary);border-color:var(--primary)}.nav-crumb{display:inline-flex;align-items:center;gap:4px;text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:600;padding:5px 8px;border:1px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer;white-space:nowrap}.nav-crumb:hover{color:var(--primary);border-color:var(--primary);background:var(--primary-soft)}.nav-sep{color:var(--locked);font-size:.8rem;flex:0 0 auto}nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;justify-self:center;line-height:1.2}.nav-progress-slot{justify-self:end;display:flex;align-items:center}.progress-bar-wrap{height:6px;background:var(--border);border-radius:3px;width:110px}.progress-bar-fill{height:6px;background:var(--primary);border-radius:3px;transition:width .4s}
-.screen{display:none;padding:20px;max-width:720px;margin:0 auto}.screen.active{display:block}.home-header{text-align:center;padding:28px 0 18px}.home-header h2{font-size:1.7rem;color:var(--primary);margin-bottom:6px}.home-header p{color:var(--muted);font-size:.9rem}.intro-card,.info-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:17px 19px;line-height:1.65;box-shadow:var(--shadow);font-size:.9rem}.info-card{box-shadow:none;margin:12px 0;background:#fbfdfc}.all-theory-wrap{text-align:center;margin:16px 0 10px}.theory-page-link{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 14px;border:2px solid var(--primary);border-radius:12px;background:#fff;color:var(--primary-dark);text-decoration:none;font-size:.88rem;font-weight:750;transition:all .2s}.theory-page-link:hover{background:var(--primary-soft);transform:translateY(-1px)}.home-tools{display:flex;justify-content:center;margin:0 0 18px}.unlock-launch{border:1.5px solid var(--border);background:var(--card);color:var(--primary-dark);border-radius:11px;padding:9px 14px;font-weight:700;cursor:pointer}.unlock-launch:hover,.unlock-launch.active{border-color:var(--warn);color:#9a6a00;background:#fffbea}.unlock-base{font-size:.73rem;color:var(--success);font-weight:700}.badge-errors{background:#fdeaea;color:var(--error)}
-.topics-grid{display:flex;flex-direction:column;gap:10px}.topic-section{margin:10px 0 2px;padding:11px 13px;border-radius:10px;background:#eef8f2;border:1px solid #d8efe1;font-size:.83rem;color:var(--muted);line-height:1.45}.topic-section strong{display:block;color:var(--primary-dark);font-size:.92rem;margin-bottom:2px}.topic-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s}.topic-card:hover:not(.locked){transform:translateY(-2px);box-shadow:0 6px 20px rgba(47,158,99,.15)}.topic-card.locked{opacity:.56;cursor:not-allowed}.topic-card.done{border-left:4px solid var(--success)}.topic-icon{font-size:1.5rem;width:38px;text-align:center;flex-shrink:0}.topic-info{flex:1;min-width:0}.topic-info h3{font-size:.97rem;font-weight:700;display:flex;gap:7px;align-items:center;flex-wrap:wrap}.topic-info p{font-size:.78rem;color:var(--muted);margin-top:3px;line-height:1.35}.topic-badge{font-size:.72rem;padding:3px 9px;border-radius:20px;font-weight:700;white-space:nowrap}.badge-done{background:#e6f9ef;color:var(--success)}.badge-active{background:var(--primary-soft);color:var(--primary)}.badge-locked{background:var(--border);color:#7a8794}.badge-exam{background:#fff3e0;color:#c27800}.course-chip{display:inline-flex;align-items:center;font-size:.66rem;padding:2px 7px;border-radius:999px;background:#eaf7ef;color:var(--primary-dark);border:1px solid #cfe9d9;font-weight:800}.course-chip.b{background:#eee9ff;color:#6745c5;border-color:#ddd2ff}.extension-chip{display:inline-flex;align-items:center;font-size:.66rem;padding:2px 7px;border-radius:999px;background:#fff1df;color:#a96500;border:1px solid #f2d5a7;font-weight:800}.extension-card{border-left:4px solid var(--warn)}.extension-section{margin:18px 0 4px;padding:12px 14px;border-radius:11px;background:#fff8ed;border:1px solid #f2d7aa;font-size:.83rem;color:var(--muted);line-height:1.5}.extension-section strong{display:block;color:#9a6500;font-size:.93rem;margin-bottom:3px}
-.unlock-panel{position:fixed;top:64px;right:18px;width:270px;max-height:calc(100dvh - 82px);overflow-y:auto;background:var(--card);border:1.5px solid var(--border);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.13);z-index:200;padding:16px;display:none}.unlock-panel.open{display:block}.unlock-panel h4{font-size:.86rem;font-weight:800;color:var(--primary-dark);margin-bottom:12px}.unlock-panel-overlay{position:fixed;inset:0;z-index:190;display:none}.unlock-panel-overlay.open{display:block}.unlock-topic-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)}.unlock-topic-name{font-size:.82rem;line-height:1.25;flex:1}.unlock-topic-name.future{color:var(--muted)}.unlock-toggle{background:none;border:1.5px solid var(--border);border-radius:8px;padding:4px 8px;font-size:.72rem;cursor:pointer;font-weight:700;color:var(--muted);white-space:nowrap}.unlock-toggle.active{background:var(--primary-soft);border-color:var(--primary);color:var(--primary)}.unlock-toggle:disabled{cursor:not-allowed;opacity:.55}.unlock-all-btn,.unlock-reset-btn{width:100%;margin-top:11px;border-radius:10px;padding:9px;font-size:.8rem;font-weight:750;cursor:pointer}.unlock-all-btn{background:var(--primary);color:white;border:none}.unlock-reset-btn{background:none;color:var(--muted);border:1.5px solid var(--border);margin-top:6px}.unlock-reset-btn:hover{border-color:var(--error);color:var(--error)}
+nav{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20px;display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,auto) minmax(0,1fr);align-items:center;gap:14px;box-shadow:var(--shadow);position:sticky;top:0;z-index:100}.nav-left{display:flex;align-items:center;gap:8px;min-width:0;white-space:nowrap;overflow-x:auto;scrollbar-width:none}.nav-left::-webkit-scrollbar{display:none}.nb{background:none;border:1px solid var(--border);cursor:pointer;color:var(--muted);font-size:1rem;padding:4px 8px;border-radius:7px;line-height:1.2;flex:0 0 auto}.nb:hover{background:var(--bg);color:var(--primary);border-color:var(--primary)}.nav-crumb{display:inline-flex;align-items:center;gap:4px;text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:600;padding:5px 8px;border:1px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer;white-space:nowrap}.nav-crumb:hover{color:var(--primary);border-color:var(--primary);background:var(--primary-soft)}.nav-sep{color:var(--nav-separator);font-size:.8rem;flex:0 0 auto}nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;justify-self:center;line-height:1.2}.nav-progress-slot{justify-self:end;display:flex;align-items:center}.progress-bar-wrap{height:6px;background:var(--border);border-radius:3px;width:110px}.progress-bar-fill{height:6px;background:var(--primary);border-radius:3px;transition:width .4s}
+.screen{display:none;padding:20px;max-width:720px;margin:0 auto}.screen.active{display:block}.home-header{text-align:center;padding:28px 0 18px}.home-header h2{font-size:1.7rem;color:var(--primary);margin-bottom:6px}.home-header p{color:var(--muted);font-size:.9rem}.intro-card,.info-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:17px 19px;line-height:1.65;box-shadow:var(--shadow);font-size:.9rem}.info-card{box-shadow:none;margin:12px 0;background:#fbfdfc}.all-theory-wrap{text-align:center;margin:16px 0 10px}.theory-page-link{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 14px;border:2px solid var(--primary);border-radius:12px;background:#fff;color:var(--primary-dark);text-decoration:none;font-size:.88rem;font-weight:750;transition:all .2s}.theory-page-link:hover{background:var(--primary-soft);transform:translateY(-1px)}.home-tools{display:flex;justify-content:center;margin:0 0 18px}.badge-errors{background:#fdeaea;color:var(--error)}
+.topics-grid{display:flex;flex-direction:column;gap:10px}.topic-section{margin:10px 0 2px;padding:11px 13px;border-radius:10px;background:#eef8f2;border:1px solid #d8efe1;font-size:.83rem;color:var(--muted);line-height:1.45}.topic-section strong{display:block;color:var(--primary-dark);font-size:.92rem;margin-bottom:2px}.topic-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:15px 18px;cursor:pointer;display:flex;align-items:center;gap:14px;box-shadow:var(--shadow);transition:transform .15s,box-shadow .15s}.topic-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(47,158,99,.15)}.topic-card.done{border-left:4px solid var(--success)}.topic-icon{font-size:1.5rem;width:38px;text-align:center;flex-shrink:0}.topic-info{flex:1;min-width:0}.topic-info h3{font-size:.97rem;font-weight:700;display:flex;gap:7px;align-items:center;flex-wrap:wrap}.topic-info p{font-size:.78rem;color:var(--muted);margin-top:3px;line-height:1.35}.topic-badge{font-size:.72rem;padding:3px 9px;border-radius:20px;font-weight:700;white-space:nowrap}.badge-done{background:#e6f9ef;color:var(--success)}.badge-active{background:var(--primary-soft);color:var(--primary)}.badge-exam{background:#fff3e0;color:#c27800}.course-chip{display:inline-flex;align-items:center;font-size:.66rem;padding:2px 7px;border-radius:999px;background:#eaf7ef;color:var(--primary-dark);border:1px solid #cfe9d9;font-weight:800}.course-chip.b{background:#eee9ff;color:#6745c5;border-color:#ddd2ff}.extension-chip{display:inline-flex;align-items:center;font-size:.66rem;padding:2px 7px;border-radius:999px;background:#fff1df;color:#a96500;border:1px solid #f2d5a7;font-weight:800}.extension-card{border-left:4px solid var(--warn)}.extension-section{margin:18px 0 4px;padding:12px 14px;border-radius:11px;background:#fff8ed;border:1px solid #f2d7aa;font-size:.83rem;color:var(--muted);line-height:1.5}.extension-section strong{display:block;color:#9a6500;font-size:.93rem;margin-bottom:3px}
+
 .theory-tabs{display:flex;gap:8px;margin-bottom:12px}.tab-btn{flex:1;padding:9px;border:1.5px solid var(--border);border-radius:10px;background:var(--card);cursor:pointer;font-size:.83rem;font-weight:650;color:var(--muted)}.tab-btn.active{border-color:var(--primary);color:var(--primary);background:var(--primary-soft)}.theory-box{background:var(--primary-soft);border-left:4px solid var(--primary);border-radius:10px;padding:16px 18px;margin-bottom:14px;font-size:.91rem;line-height:1.7}.theory-box h3{color:var(--primary-dark);margin-bottom:8px;font-size:1rem}.formula{background:#fff;border-radius:8px;padding:9px 13px;margin:6px 0;font-size:.89rem;border:1px solid var(--border)}.history-box{margin-top:10px;padding:10px 12px;border-radius:9px;background:#fffdf3;border:1px solid #f4e6ad}.example-box{background:#f0f7ff;border-left:4px solid var(--info);border-radius:10px;padding:15px 17px;margin-bottom:14px;font-size:.88rem;line-height:1.8}.example-box h3{color:var(--info);margin-bottom:8px;font-size:.95rem}.ex-step{padding:3px 0;border-bottom:1px solid #dde8f5}.ex-step:last-child{border:none}.topic-actions{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0 18px}.btn-primary,.btn-secondary,.btn-theory{border:none;border-radius:11px;padding:10px 14px;font-weight:750;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-dark)}.btn-secondary{background:#fff;border:1.5px solid var(--border);color:var(--text)}.btn-theory{background:#fff;border:1.5px solid var(--primary);color:var(--primary-dark)}
 .level-select,.mode-select{display:flex;gap:10px;margin-bottom:12px}.level-btn,.mode-btn{flex:1;padding:10px;border:2px solid var(--border);border-radius:12px;background:var(--card);cursor:pointer;text-align:center;font-size:.84rem;font-weight:650;color:var(--muted)}.level-btn.active,.mode-btn.active{border-color:var(--primary);color:var(--primary);background:var(--primary-soft)}.practice-note{font-size:.78rem;color:var(--muted);margin:-3px 0 12px;text-align:center}
 .streak-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}.streak-bar-wrap{flex:1;height:7px;background:var(--border);border-radius:4px}.streak-bar-fill{height:7px;background:linear-gradient(90deg,var(--primary),var(--warn));border-radius:4px;transition:width .4s}.streak-label{font-size:.78rem;color:var(--muted);white-space:nowrap}.ex-card{background:var(--card);border:1px solid var(--border);border-radius:15px;padding:18px;box-shadow:var(--shadow)}.ex-num{font-size:.76rem;color:var(--muted);font-weight:700;margin-bottom:10px}.q-text{font-size:1.02rem;line-height:1.65;font-weight:600}.math{font-family:'Cambria Math','Times New Roman',serif;font-size:1.06em}.visual-wrap{margin:14px auto 4px;text-align:center}.angle-svg{width:min(100%,430px);height:auto;display:block;margin:auto;background:#fbfdfc;border:1px solid var(--border);border-radius:12px}.options{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:15px}.opt-btn{border:1.5px solid var(--border);background:#fff;border-radius:11px;padding:11px 9px;cursor:pointer;font-size:.9rem;color:var(--text);min-height:46px}.opt-btn:hover:not(:disabled){border-color:var(--primary);background:var(--primary-soft)}.opt-btn.correct{border-color:var(--success);background:#eafaf2;color:#187a4a}.opt-btn.wrong{border-color:var(--error);background:#fff0f0;color:#b43f3f}.open-wrap{display:none;margin-top:15px}.open-row{display:flex;gap:8px}.open-input{flex:1;border:1.5px solid var(--border);border-radius:10px;padding:11px 12px;min-width:0}.open-input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(47,158,99,.1)}.open-input.ok{border-color:var(--success);background:#effbf5}.open-input.ko{border-color:var(--error);background:#fff4f4}.open-hint{font-size:.75rem;color:var(--muted);margin-top:6px}.hint-area{margin-top:12px}.hint-btn,.sol-btn{border:none;background:#f5f7fa;color:var(--muted);padding:8px 11px;border-radius:9px;cursor:pointer;font-size:.78rem;font-weight:700}.hint-box{display:none;margin-top:8px;padding:10px 12px;background:#fffbea;border-left:3px solid var(--warn);border-radius:8px;font-size:.84rem;line-height:1.5}.hint-box.show{display:block}.feedback-box{margin-top:14px;padding:13px 15px;border-radius:11px;font-size:.88rem;line-height:1.55}.feedback-box.ok{background:#eafaf2;border:1px solid #bdebd2}.feedback-box.ko{background:#fff3f3;border:1px solid #f3c6c6}.feedback-box h4{margin-bottom:5px}.solution-box{display:none;margin-top:10px;background:#fff;border:1px solid #f0d0d0;border-radius:10px;padding:10px 12px}.solution-box.show{display:block}.step{padding:6px 0;border-bottom:1px solid #edf0f3}.step:last-child{border:none}.highlight{line-height:1.55}.next-row{display:flex;gap:8px;margin-top:13px}.next-row button{flex:1}.congrats{text-align:center;padding:24px 8px}.trophy{font-size:3rem}.congrats h2{color:var(--primary);margin:8px 0}.saved-errors-mini{margin-top:12px;padding:11px;border-radius:10px;background:#fff6f6;border:1px solid #f2cccc}.saved-errors-mini h4{color:var(--error);margin-bottom:7px}.saved-error-row{font-size:.8rem;line-height:1.45;padding:6px 0;border-bottom:1px solid #f0dddd}.saved-error-row:last-child{border:0}.error-card{background:#fff;border:1px solid var(--border);border-left:4px solid var(--error);border-radius:12px;padding:14px;margin-bottom:11px}.exam-score{font-size:2rem;font-weight:900;color:var(--primary);text-align:center;margin:15px}.exam-review{background:#fff;border:1px solid var(--border);border-radius:10px;padding:11px;margin:8px 0;font-size:.85rem;line-height:1.45}
-@media(max-width:760px){nav{grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;padding:9px 10px}.nav-left{grid-column:1;grid-row:1}.nav-progress-slot{grid-column:2;grid-row:1}nav h1{grid-column:1/-1;grid-row:2;width:100%;font-size:.98rem;padding:2px 0 1px}.nav-crumb{font-size:.75rem;padding:4px 6px}.progress-bar-wrap{width:74px}.screen{padding:14px}.options{grid-template-columns:1fr}.topic-card{padding:13px 14px;gap:10px}.topic-badge{font-size:.67rem}.unlock-panel{top:58px;right:10px;left:10px;width:auto}.level-select,.mode-select{gap:7px}.open-row{flex-direction:column}}
+@media(max-width:760px){nav{grid-template-columns:minmax(0,1fr) auto;gap:8px 10px;padding:9px 10px}.nav-left{grid-column:1;grid-row:1}.nav-progress-slot{grid-column:2;grid-row:1}nav h1{grid-column:1/-1;grid-row:2;width:100%;font-size:.98rem;padding:2px 0 1px}.nav-crumb{font-size:.75rem;padding:4px 6px}.progress-bar-wrap{width:74px}.screen{padding:14px}.options{grid-template-columns:1fr}.topic-card{padding:13px 14px;gap:10px}.topic-badge{font-size:.67rem}.level-select,.mode-select{gap:7px}.open-row{flex-direction:column}}
 
 .math-pad{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px}
 .math-pad-label{font-size:.75rem;color:var(--muted);margin-right:2px}
@@ -76,7 +76,7 @@ nav{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20
 .all-theory-wrap{margin:0 0 12px!important}
 .theory-page-link{width:min(100%,520px)!important;margin:0 auto!important;min-height:44px}
 .home-tools{margin:0 0 20px!important;text-align:center}
-.unlock-launch{min-height:42px;padding:10px 16px!important}
+
 
 .p6-section-head{grid-column:1/-1;margin:20px 0 8px;padding-top:16px;border-top:1px solid var(--border,#e6e8ee)}
 .p6-section-head.p6-first{margin-top:2px;padding-top:0;border-top:0}
@@ -99,7 +99,7 @@ nav{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20
 
 button,a,[onclick]{-webkit-tap-highlight-color:transparent}
 button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid color-mix(in srgb,var(--primary) 35%,transparent);outline-offset:2px}
-.unlock-panel,.mi-exam-modal{max-width:min(92vw,620px)!important}
+.mi-exam-modal{max-width:min(92vw,620px)!important}
 
 @media (max-width:700px){
   .top-nav{gap:5px;padding:8px 7px;min-height:54px}
@@ -117,13 +117,13 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   #screenHome{padding:14px 0 26px!important}
   .home-header h2{font-size:1.45rem}.home-header p{font-size:.88rem;line-height:1.45}
   .intro-card{padding:15px 16px!important;font-size:.95rem}
-  .theory-page-link,.unlock-launch{width:100%!important;max-width:none!important}
+  .theory-page-link{width:100%!important;max-width:none!important}
   .topic-card{align-items:flex-start!important;flex-wrap:wrap;padding:13px 14px!important;gap:10px}
   .topic-icon{width:34px!important;flex:0 0 34px}.topic-info{flex:1 1 calc(100% - 50px)}
   .topic-badge{margin-left:44px}.p6-section-head{margin-top:18px;padding-top:14px}.p6-section-note{font-size:.79rem}
   .btn-primary,.btn-secondary,.btn-danger{max-width:100%}.level-select,.mode-select{flex-wrap:wrap}.level-btn,.mode-btn{flex:1 1 145px}
-  .options-grid{grid-template-columns:1fr!important}.mi-exam-overlay,.unlock-panel-overlay{padding:10px!important}
-  .mi-exam-modal,.unlock-panel{max-height:92vh!important;border-radius:14px!important}
+  .options-grid{grid-template-columns:1fr!important}.mi-exam-overlay{padding:10px!important}
+  .mi-exam-modal{max-height:92vh!important;border-radius:14px!important}
 }
 @media (max-width:430px){
   .top-nav h1{font-size:.76rem}.top-nav .progress-bar-wrap{display:none!important}
@@ -131,6 +131,22 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
 }
 </style>
 <link rel="stylesheet" href="../assets/css/learning-footer.css"/>
+<script>
+// Remove obsolete access fields while preserving completion, errors and other saved data.
+(function(){
+  const keys=["sm4eso_v1","sm4eso_mesura_v1"];
+  for(const storageName of ['localStorage','sessionStorage'])for(const key of keys){
+    try{
+      const store=window[storageName],raw=store.getItem(key);
+      if(!raw)continue;
+      const data=JSON.parse(raw);
+      if(data&&typeof data==='object'&&('unlockedIds' in data||'unlocked' in data)){
+        delete data.unlockedIds;delete data.unlocked;store.setItem(key,JSON.stringify(data));
+      }
+    }catch(e){}
+  }
+})();
+</script>
 </head>
 <body>
 <nav class="top-nav">
@@ -146,13 +162,6 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div class="nav-progress-slot"><div class="progress-bar-wrap"><div class="progress-bar-fill" id="globalProgress" style="width:0%"></div></div></div>
 </nav>
 
-<div class="unlock-panel-overlay" id="unlockOverlay" onclick="closeUnlockPanel()"></div>
-<div class="unlock-panel" id="unlockPanel">
-  <h4>🔓 Gestionar temes</h4>
-  <div id="unlockTopicList"></div>
-  <button class="unlock-all-btn" onclick="unlockAllTopics()">🔓 Desbloquejar blocs disponibles</button>
-  <button class="unlock-reset-btn" id="btnReset" onclick="resetProgress()">↻ Reiniciar progrés</button>
-</div>
 
 <section class="screen active" id="screenHome">
   <div class="home-header"><h2>📏 Sentit de la Mesura</h2><p>4t d'ESO · Angles, trigonometria, mesures indirectes, estimació i precisió</p></div>
@@ -163,8 +172,9 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
     Les pistes orienten el procediment sense donar la resposta. Quan hi ha un error, la correcció mostra el <strong>desenvolupament pas a pas</strong> i l'error queda guardat per poder-lo repassar.
   </div>
   <div class="all-theory-wrap"><a class="theory-page-link" href="teoria/mesura/index.html">📚 Tota la teoria del Sentit de la Mesura</a></div>
-  <div class="home-tools"><button class="unlock-launch" id="btnUnlock" onclick="toggleUnlockPanel()">🔓 Gestionar temes</button></div>
-  <div class="topics-grid" id="topicsGrid"></div>
+
+  
+<div class="topics-grid" id="topicsGrid"></div>
 </section>
 
 <section class="screen" id="screenIntro">
@@ -912,7 +922,7 @@ const FUTURE_TOPICS=[];
 /* ── ESTAT I PERSISTÈNCIA ───────────────────────────────── */
 const STORAGE='sm4eso_v1';
 const LEGACY_STORAGE='sm4eso_mesura_v1';
-let state={unlockedIds:[],done:[],errors:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,hintIndex:0,examQs:[],examIdx:0,examScore:0,examLog:[]};let currentEx=null,currentScreen='screenHome';
+let state={done:[],errors:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,hintIndex:0,examQs:[],examIdx:0,examScore:0,examLog:[]};let currentEx=null,currentScreen='screenHome';
 function loadState(){
   let raw=null,migrating=false;
   try{
@@ -920,21 +930,20 @@ function loadState(){
     migrating=raw===null;
     if(migrating)raw=localStorage.getItem(LEGACY_STORAGE);
     const s=JSON.parse(raw||'{}');
-    if(Array.isArray(s.unlockedIds))state.unlockedIds=s.unlockedIds;
+
     if(Array.isArray(s.done))state.done=s.done;
     if(Array.isArray(s.errors))state.errors=s.errors;
   }catch(e){}
   const valid=new Set(TOPICS.map(t=>t.id));
-  state.unlockedIds=state.unlockedIds.filter(x=>valid.has(x));
+
   state.done=state.done.filter(x=>valid.has(x));
-  if(!state.unlockedIds.includes(TOPICS[0].id))state.unlockedIds.unshift(TOPICS[0].id);
-  TOPICS.forEach((t,i)=>{if(state.done.includes(t.id)&&isRequiredTopic(t)){const ni=nextTopicIndex(i);if(ni>=0&&!state.unlockedIds.includes(TOPICS[ni].id))state.unlockedIds.push(TOPICS[ni].id)}});
-  state.unlockedIds=state.unlockedIds.filter(id=>{const t=TOPICS.find(x=>x.id===id);return t&&isManagedPracticeTopic(t)});
+
+
   if(migrating&&raw!==null)saveState();
 }
-function saveState(){try{localStorage.setItem(STORAGE,JSON.stringify({unlockedIds:state.unlockedIds,done:state.done,errors:state.errors}))}catch(e){}}
+function saveState(){try{localStorage.setItem(STORAGE,JSON.stringify({done:state.done,errors:state.errors}))}catch(e){}}
 function isManagedPracticeTopic(t){return !!t&&!t.isExtension}
-function isUnlocked(i){const t=TOPICS[i];return !!t&&(t.isExtension||i===0||state.unlockedIds.includes(t.id))}
+
 function isRequiredTopic(t){return !t.isExtension&&!(MATH_OPTION==='A'&&t.scope==='B')}
 function isPathTopic(t){return isRequiredTopic(t)}
 function isExamTopic(t){return !t.isExtension&&t.exam4t!==false&&isRequiredTopic(t)}
@@ -1010,7 +1019,7 @@ function registerError(ex,studentAnswer,source='practice'){
 /* ── NAVEGACIÓ I HOME ───────────────────────────────────── */
 function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');currentScreen=id;window.scrollTo(0,0)}
 function setNavContext(title,back=false,sense=false){document.getElementById('navTitle').textContent=title;document.getElementById('navBack').style.display=back?'inline-flex':'none';document.getElementById('senseCrumb').style.display=sense?'inline-flex':'none';document.getElementById('senseSep').style.display=sense?'inline':'none'}
-function showHome(){closeUnlockPanel();setNavContext('Sentit de la Mesura · 4t ESO',false,true);renderHome();showScreen('screenHome')}
+function showHome(){setNavContext('Sentit de la Mesura · 4t ESO',false,true);renderHome();showScreen('screenHome')}
 function goBack(){if(currentScreen==='screenExercise'){selectTopic(state.currentTopic);return}if(currentScreen==='screenIntro'||currentScreen==='screenExam'||currentScreen==='screenErrors'){showHome();return}showHome()}
 function scopeChip(scope){return scope==='B'?'<span class="course-chip b">Matemàtiques B</span>':'<span class="course-chip">Comú A/B</span>'}
 function topicChip(t){return t.isExtension?'<span class="extension-chip">Opcional</span>':scopeChip(t.scope)}
@@ -1026,26 +1035,25 @@ function renderHome(){
       :'Els blocs 1–4 i 8 són comuns A/B; els blocs 5–7 són curriculars de Matemàtiques B.';
   let html=head('📘','Continguts de 4t d\'ESO',routeNote,'',true);
   mainTopics.forEach(t=>{
-    const i=TOPICS.indexOf(t),done=state.done.includes(t.id),unlocked=isUnlocked(i);
-    html+='<div class="topic-card '+(done?'done ':'')+(unlocked?'':'locked')+'" '+(unlocked?('onclick="selectTopic('+i+')"'):'aria-disabled="true"')+'>'
+    const i=TOPICS.indexOf(t),done=state.done.includes(t.id);
+    html+='<div class="topic-card '+(done?'done ':'')+('')+'" '+('onclick="selectTopic('+i+')"')+'>'
       +'<div class="topic-icon">'+t.icon+'</div><div class="topic-info"><h3>'+t.name+' '+topicChip(t)+'</h3><p>'+t.short+'</p></div>'
-      +'<span class="topic-badge '+(done?'badge-done':unlocked?'badge-active':'badge-locked')+'">'+(done?'✓ Fet':unlocked?'Practicar':'🔒')+'</span></div>';
+      +'<span class="topic-badge '+(done?'badge-done':'badge-active')+'">'+(done?'✓ Fet':'Practicar')+'</span></div>';
   });
   if(expansionTopics.length){
     html+=head('⭐','Ampliació · prepara Batxillerat','A–D són aprofundiments opcionals, disponibles en Matemàtiques A i B. No compten en el progrés obligatori ni entren al Mode Examen.','p6-extension');
     expansionTopics.forEach(t=>{
-      const i=TOPICS.indexOf(t),done=state.done.includes(t.id),unlocked=isUnlocked(i);
-      html+='<div class="topic-card extension-card '+(done?'done ':'')+(unlocked?'':'locked')+'" '+(unlocked?('onclick="selectTopic('+i+')"'):'aria-disabled="true"')+'>'
+      const i=TOPICS.indexOf(t),done=state.done.includes(t.id);
+      html+='<div class="topic-card extension-card '+(done?'done ':'')+('')+'" '+('onclick="selectTopic('+i+')"')+'>'
         +'<div class="topic-icon">'+t.icon+'</div><div class="topic-info"><h3>'+t.name+' '+topicChip(t)+'</h3><p>'+t.short+'</p></div>'
-        +'<span class="topic-badge '+(done?'badge-done':unlocked?'badge-active':'badge-locked')+'">'+(done?'✓ Fet':unlocked?'Ampliació':'🔒')+'</span></div>';
+        +'<span class="topic-badge '+(done?'badge-done':'badge-active')+'">'+(done?'✓ Fet':'Ampliació')+'</span></div>';
     });
   }
   if(FUTURE_TOPICS.length){
     html+=head('🧭','Següents blocs','Continguts encara no activats.','p6-practice');
-    FUTURE_TOPICS.forEach(t=>{html+='<div class="topic-card locked" aria-disabled="true"><div class="topic-icon">'+t.icon+'</div><div class="topic-info"><h3>'+t.name+' '+scopeChip(t.scope)+'</h3><p>'+t.short+'</p></div><span class="topic-badge badge-locked">Properament</span></div>';});
   }
   html+=head('📝','Mode Examen','20 preguntes · el selector respecta els blocs curriculars de l’opció Matemàtiques A/B activa.','p6-exam');
-  html+='<div class="topic-card p6-special-card p6-exam-card" onclick="startExam()"><div class="topic-icon">📝</div><div class="topic-info"><h3>Mode Examen · 4t ESO</h3><p>Selecció independent dels blocs desbloquejats per practicar</p></div><span class="topic-badge badge-exam">Examen 4t</span></div>';
+  html+='<div class="topic-card p6-special-card p6-exam-card" onclick="startExam()"><div class="topic-icon">📝</div><div class="topic-info"><h3>Mode Examen · 4t ESO</h3><p>Tria els blocs que vols repassar</p></div><span class="topic-badge badge-exam">Examen 4t</span></div>';
   const ec=Array.isArray(state.errors)?state.errors.length:0;
   html+=head('❌','Errors guardats','Repassa els exercicis fallats i consulta de nou la resolució.','p6-errors');
   html+='<div class="topic-card p6-special-card '+(ec?'p6-error-card':'')+'" onclick="showErrors()"><div class="topic-icon">❌</div><div class="topic-info"><h3>Errors guardats</h3><p>'+(ec?('Tens '+ec+' error'+(ec===1?'':'s')+' per repassar'):'Encara no tens errors guardats')+'</p></div><span class="topic-badge '+(ec?'badge-errors':'badge-active')+'">'+(ec?'Repassar':'Veure')+'</span></div>';
@@ -1053,16 +1061,15 @@ function renderHome(){
   const required=TOPICS.filter(isRequiredTopic),done=required.filter(t=>state.done.includes(t.id)).length;
   document.getElementById('globalProgress').style.width=(required.length?done/required.length*100:0)+'%';
 }
-function toggleUnlockPanel(){const p=document.getElementById('unlockPanel'),o=document.getElementById('unlockOverlay'),b=document.getElementById('btnUnlock');const open=!p.classList.contains('open');p.classList.toggle('open',open);o.classList.toggle('open',open);b.classList.toggle('active',open);if(open)renderUnlockPanel()}
-function closeUnlockPanel(){document.getElementById('unlockPanel').classList.remove('open');document.getElementById('unlockOverlay').classList.remove('open');document.getElementById('btnUnlock').classList.remove('active')}
-function renderUnlockPanel(){let html='';TOPICS.forEach((t,i)=>{if(!isManagedPracticeTopic(t))return;const on=isUnlocked(i),done=state.done.includes(t.id);html+=`<div class="unlock-topic-row"><span class="unlock-topic-name ${done?'is-done':''}">${t.icon} ${t.name}${done?' ✓':''}</span>${i===0?'<span class="unlock-base">Base</span>':`<button class="unlock-toggle ${on?'active':''}" onclick="toggleTopic(${i})">${on?'Obert':'Tancat'}</button>`}</div>`});FUTURE_TOPICS.forEach(t=>{html+=`<div class="unlock-topic-row"><span class="unlock-topic-name future">${t.icon} ${t.name}</span><button class="unlock-toggle" disabled>Properament</button></div>`});document.getElementById('unlockTopicList').innerHTML=html}
-function toggleTopic(i){if(i<=0||!TOPICS[i]||!isManagedPracticeTopic(TOPICS[i]))return;const id=TOPICS[i].id;if(isUnlocked(i))state.unlockedIds=state.unlockedIds.filter(x=>x!==id);else state.unlockedIds.push(id);saveState();renderUnlockPanel();renderHome()}
-function unlockAllTopics(){state.unlockedIds=Array.from(new Set([...state.unlockedIds,...TOPICS.filter(isManagedPracticeTopic).map(t=>t.id)]));saveState();renderUnlockPanel();renderHome()}
-let resetArmed=false,resetTimer=null;
-function resetProgress(){const b=document.getElementById('btnReset');if(!resetArmed){resetArmed=true;b.textContent='⚠ Prem de nou per confirmar';clearTimeout(resetTimer);resetTimer=setTimeout(()=>{resetArmed=false;b.textContent='↻ Reiniciar progrés'},3000);return}resetArmed=false;clearTimeout(resetTimer);state.done=[];state.unlockedIds=TOPICS.length?[TOPICS[0].id]:[];saveState();renderUnlockPanel();renderHome();closeUnlockPanel();b.textContent='↻ Reiniciar progrés'}
+
+
+function toggleTopic(i){if(i<=0||!TOPICS[i]||!isManagedPracticeTopic(TOPICS[i]))return;const id=TOPICS[i].id;saveState();renderHome()}
+
+
+
 
 /* ── INTRO DE CADA BLOC ─────────────────────────────────── */
-function selectTopic(i){if(!isUnlocked(i))return;state.currentTopic=i;const t=TOPICS[i],th=TEORIA[t.theoryKey];setNavContext(t.name,true,true);let theory=`<div class="theory-box"><h3>${th.title} ${topicChip(t)}</h3><div>${th.text}</div>${th.formulas.map(x=>`<div class="formula">${x}</div>`).join('')}<div class="history-box">${th.history}</div></div>`;const recent=state.errors.filter(e=>e.topicId===t.id).slice(-4).reverse();if(recent.length){theory+='<div class="saved-errors-mini"><h4>❌ Errors recents d’aquest bloc</h4>'+recent.map((e,idx)=>miRecentErrorHtml(e,idx)).join('')+'<button class="btn-secondary" style="border-color:var(--error);color:var(--error)" onclick="showErrors()">Repassa tots els errors →</button></div>'}document.getElementById('theoryContent').innerHTML=theory;document.getElementById('exampleContent').innerHTML=`<div class="example-box"><h3>${th.exampleTitle}</h3>${th.exampleSteps.map((x,i)=>`<div class="ex-step"><b>${i+1}.</b> ${x}</div>`).join('')}</div>`;document.getElementById('topicActions').innerHTML=`<a class="btn-theory" href="${t.theoryPage}">📚 Teoria completa del bloc</a>`;showTab('theory');syncSelectors();const examLaunch=document.getElementById('miTopicExamLaunch');examLaunch.hidden=!isExamTopic(t);examLaunch.dataset.topic=t.id;showScreen('screenIntro')}
+function selectTopic(i){state.currentTopic=i;const t=TOPICS[i],th=TEORIA[t.theoryKey];setNavContext(t.name,true,true);let theory=`<div class="theory-box"><h3>${th.title} ${topicChip(t)}</h3><div>${th.text}</div>${th.formulas.map(x=>`<div class="formula">${x}</div>`).join('')}<div class="history-box">${th.history}</div></div>`;const recent=state.errors.filter(e=>e.topicId===t.id).slice(-4).reverse();if(recent.length){theory+='<div class="saved-errors-mini"><h4>❌ Errors recents d’aquest bloc</h4>'+recent.map((e,idx)=>miRecentErrorHtml(e,idx)).join('')+'<button class="btn-secondary" style="border-color:var(--error);color:var(--error)" onclick="showErrors()">Repassa tots els errors →</button></div>'}document.getElementById('theoryContent').innerHTML=theory;document.getElementById('exampleContent').innerHTML=`<div class="example-box"><h3>${th.exampleTitle}</h3>${th.exampleSteps.map((x,i)=>`<div class="ex-step"><b>${i+1}.</b> ${x}</div>`).join('')}</div>`;document.getElementById('topicActions').innerHTML=`<a class="btn-theory" href="${t.theoryPage}">📚 Teoria completa del bloc</a>`;showTab('theory');syncSelectors();const examLaunch=document.getElementById('miTopicExamLaunch');examLaunch.hidden=!isExamTopic(t);examLaunch.dataset.topic=t.id;showScreen('screenIntro')}
 function showTab(which){document.getElementById('theoryContent').style.display=which==='theory'?'block':'none';document.getElementById('exampleContent').style.display=which==='example'?'block':'none';document.getElementById('tabTheoryBtn').classList.toggle('active',which==='theory');document.getElementById('tabExampleBtn').classList.toggle('active',which==='example')}
 function setLevel(n){state.level=n;syncSelectors()}
 function setMode(m){state.mode=m;syncSelectors()}
@@ -1079,7 +1086,7 @@ function checkOpenAnswer(){if(state.answered)return;const inp=document.getElemen
 function errorFocus(ex){if(ex.topicId==='angles4t'){if([2,3,4,5].includes(ex.type))return 'Revisa la conversió entre graus, minuts i segons: el sistema és sexagesimal, de manera que 60″=1′ i 60′=1°.';if(ex.type===6)return 'Revisa la definició d’angles complementaris: han de sumar 90°.';if(ex.type===7)return 'Revisa la definició d’angles suplementaris: han de sumar 180°.';if(ex.type===8)return 'Revisa que els angles al voltant d’un punt completen 360°.';if(ex.type===9)return 'Revisa que una volta de rellotge té 360° i 12 divisions, és a dir, 30° entre hores consecutives.';if(ex.type===10)return 'Compara visualment l’angle amb referències conegudes com 45°, 90°, 135° i 180° abans d’escollir l’estimació.';if(ex.type===11)return 'Identifica primer què vols mesurar: un angle o una longitud. Després tria un instrument adequat, com transportador, clinòmetre, cinta mètrica o distanciòmetre.';return 'Revisa la classificació dels angles segons la seva amplitud: agut, recte, obtús, pla, còncau o complet.';}if(ex.topicId==='radians4t')return 'Comprova primer la unitat angular. Per convertir usa 180° = π rad; per a arcs, L=r·θ només és directa quan θ està en radians.';if(ex.topicId==='pitagores4t')return 'Identifica abans de calcular quin costat és la hipotenusa. Si busques un catet, has de restar quadrats; si busques la hipotenusa, els has de sumar.';if(ex.topicId==='semblancaRaons4t')return 'Revisa la correspondència entre costats homòlegs. En triangles semblants, mantén sempre el mateix ordre en les proporcions i recorda que una raó entre dos costats no canvia si tots dos es multipliquen pel mateix factor.';if(ex.topicId==='trigRaons4t')return 'Fixa primer l’angle de referència i identifica hipotenusa, catet oposat i catet adjacent. Després escull sin, cos o tan segons els dos costats que intervenen i comprova que la calculadora està en DEG.';if(ex.topicId==='resolTriangles4t')return 'No comencis calculant sense decidir l’estratègia. Identifica les dades, tria Pitàgores o la raó trigonomètrica que les relaciona directament i conserva prou decimals fins al resultat final.';if(ex.topicId==='mesuresIndirectes4t')return 'Dibuixa o imagina primer el triangle rectangle real: identifica el desnivell, la distància horitzontal i l’angle. Revisa especialment si cal sumar l’altura dels ulls i si l’angle és d’elevació o de depressió.';if(ex.topicId==='precisioError4t')return 'Diferencia error absolut i relatiu, comprova respecte de quin valor es calcula l’error i no comuniquis més decimals dels que justifiquen les dades inicials.';if(ex.topicId==='anglesNotablesAmpA')return 'Revisa el triangle notable que correspon a 30°, 45° o 60° i treballa amb el valor exacte, sense passar prematurament a decimals. Recorda les equivalències π/6, π/4 i π/3.';if(ex.topicId==='identitatsAmpB')return 'Parteix de sin²α+cos²α=1 o tan α=sin α/cos α i justifica cada transformació. Si reconstrueixes un triangle, identifica oposat, adjacent i hipotenusa abans d’obtenir les altres raons.';if(ex.topicId==='circumferenciaAmpC')return 'Situa primer l’angle al quadrant correcte, determina el signe de cada raó i troba l’angle de referència. Només després aplica el valor notable o la simetria corresponent.';if(ex.topicId==='modelitzacioAmpD')return 'No busquis una fórmula abans d’haver construït el model. Identifica dades i incògnita, divideix el problema en passos, conserva decimals intermedis i comprova unitats, precisió i coherència física.';return 'Revisa el procediment i les unitats abans de repetir el càlcul.'}
 function processAnswer(ok,answer){state.answered=true;document.getElementById('hintBtn').disabled=false;const goal=state.level===1?10:20;if(ok){state.correctStreak++;document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ok"><h4>✅ Correcte!</h4>Molt bé. La resposta és correcta.</div>';if(state.correctStreak>=goal)markTopicDone()}else{state.correctStreak=Math.max(0,state.correctStreak-1);registerError(currentEx,answer,'practice');document.getElementById('feedbackArea').innerHTML=`<div class="feedback-box ko"><h4>❌ No és correcte</h4><div><b>La teva resposta:</b> ${answer??'—'}</div><div><b>Resposta correcta:</b> ${currentEx.correct}</div><div style="margin-top:8px"><b>🔎 Què convé revisar:</b> ${errorFocus(currentEx)}</div><div style="margin-top:9px;font-weight:800">📘 Resolució pas a pas</div><div class="solution-box show">${currentEx.solution.map((x,i)=>`<div class="step"><b>Pas ${i+1}:</b> <span class="highlight">${x}</span></div>`).join('')}</div></div>`}updateStreak();document.getElementById('btnNext').style.display='block'}
 function updateStreak(){const goal=state.level===1?10:20;document.getElementById('streakFill').style.width=Math.min(100,state.correctStreak/goal*100)+'%';document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal}
-function markTopicDone(){const current=TOPICS[state.currentTopic],id=current.id;if(!state.done.includes(id))state.done.push(id);if(isRequiredTopic(current)){const ni=nextTopicIndex(state.currentTopic);if(ni>=0&&!state.unlockedIds.includes(TOPICS[ni].id))state.unlockedIds.push(TOPICS[ni].id)}saveState()}
+function markTopicDone(){const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
 function nextExercise(){const goal=state.level===1?10:20;if(state.correctStreak>=goal&&state.done.includes(TOPICS[state.currentTopic].id)){showCongrats()}else showExercise()}
 function showCongrats(){const ni=nextTopicIndex(state.currentTopic),next=ni>=0?TOPICS[ni]:null,current=TOPICS[state.currentTopic],nextTxt=next&&next.isExtension?'Ampliació opcional: ':'Següent: ';document.getElementById('feedbackArea').innerHTML=`<div class="congrats"><div class="trophy">🏆</div><h2>Bloc superat!</h2><p>Has completat <b>${current.name}</b>.</p><div class="topic-actions" style="justify-content:center"><button class="btn-primary" onclick="showHome()">Tornar al Sentit de la Mesura</button>${next?`<button class="btn-secondary" onclick="selectTopic(${ni})">${nextTxt}${next.name} →</button>`:''}</div></div>`;document.getElementById('btnNext').style.display='none';document.getElementById('btnChangeTopic').style.display='none'}
 
@@ -1161,20 +1168,19 @@ function deleteSavedError(i){state.errors.splice(i,1);saveState();showErrors()}
 function clearSavedErrors(){if(!confirm('Vols esborrar tots els errors guardats?'))return;state.errors=[];saveState();showErrors()}
 
 /* ── INICI ──────────────────────────────────────────────── */
-loadState();showHome();renderUnlockPanel();
-(function handleTheoryDeepLink(){
+loadState();showHome();
+function openFromTheoryLink(){
   try{
-    const p=new URLSearchParams(location.search),tema=p.get('topic')||p.get('tema'),nivell=parseInt(p.get('level')||p.get('nivell')||'0',10),practica=(p.get('practice')||p.get('practica'))==='1';
-    if(!tema)return;
-    const i=TOPICS.findIndex(t=>t.id===tema);if(i<0)return;
-    if(!state.unlockedIds.includes(TOPICS[i].id)){state.unlockedIds.push(TOPICS[i].id);saveState()}
+    const q=new URLSearchParams(location.search),id=q.get('topic')||q.get('tema');
+    if(!id)return;
+    const i=TOPICS.findIndex(t=>t.id===id);if(i<0)return;
     state.currentTopic=i;
-    if(nivell===1||nivell===2)state.level=nivell;
-    state.mode='multi';
-    selectTopic(i);
-    if(practica||(p.has('nivell')&&!p.has('practica')&&!p.has('practice')))startPractice();
+    const nivell=Number(q.get('level')||q.get('nivell'));if(nivell===1||nivell===2)state.level=nivell;
+    const mode=q.get('mode');if(mode==='multi'||mode==='open')state.mode=mode;
+    if((q.get('practice')||q.get('practica'))==='1')startPractice();else selectTopic(i);
   }catch(e){}
-})();
+}
+openFromTheoryLink();
 
 </script>
 <script>
@@ -1210,7 +1216,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
 
 <div class="mi-exam-overlay" id="miExamOverlay" onclick="miCloseExamConfig()" aria-hidden="true">
   <div class="mi-exam-modal" role="dialog" aria-modal="true" aria-labelledby="miExamTitle" onclick="event.stopPropagation()">
-    <div class="mi-exam-head"><div><h2 id="miExamTitle">📝 Prepara el teu examen</h2><p>Selecciona exactament els blocs que vols repassar. Aquesta selecció és independent dels blocs desbloquejats per practicar.</p></div><button class="mi-exam-close" onclick="miCloseExamConfig()" aria-label="Tancar">✕</button></div>
+    <div class="mi-exam-head"><div><h2 id="miExamTitle">📝 Prepara el teu examen</h2><p>Selecciona exactament els blocs que vols repassar. Tots els blocs estan disponibles des del primer moment.</p></div><button class="mi-exam-close" onclick="miCloseExamConfig()" aria-label="Tancar">✕</button></div>
     <div class="mi-exam-tools"><button class="mi-exam-tool" onclick="miExamSelectAll()">Tots els blocs</button><button class="mi-exam-tool" onclick="miExamSelectDone()">Només completats</button><button class="mi-exam-tool" onclick="miExamClearAll()">Desmarcar tots</button></div>
     <div class="mi-exam-list" id="miExamTopicList"></div>
     <div class="mi-exam-foot"><div class="mi-exam-summary" id="miExamSummary"></div><button class="mi-exam-start" id="miExamStartBtn" onclick="miStartConfiguredExam()">Començar examen →</button><div class="mi-exam-note">L’examen té 20 preguntes, repartides tan equilibradament com permeten els blocs seleccionats. Només hi entren els continguts curriculars de l’opció activa; les ampliacions opcionals en queden fora.</div></div>

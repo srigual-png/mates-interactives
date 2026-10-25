@@ -11,11 +11,12 @@ const root=path.resolve(__dirname,'..');
  const browser=await playwright().chromium.launch(launchOptions());
  const results=[];
  try{
-  for(const width of [1280,390]){
+  await Promise.all([1280,390].map(async width=>{
    const context=await browser.newContext({viewport:{width,height:900},isMobile:width===390,hasTouch:width===390});
    await context.route(/^https?:/,r=>r.abort());
    const page=await context.newPage();
-   for(const e of entries)for(const mode of e.course===4?e.modes:[null]){
+   page.setDefaultNavigationTimeout(120000);
+   for(const e of entries.filter(e=>!process.env.MI_PRACTICE_PAGE||e.practice.startsWith(process.env.MI_PRACTICE_PAGE)))for(const mode of e.course===4?e.modes:[null]){
     const [file,query]=e.practice.split('?');
     const url=pathToFileURL(path.join(root,file));url.search=query;
     if(mode)url.searchParams.set('opcio',mode);
@@ -35,7 +36,7 @@ const root=path.resolve(__dirname,'..');
     results.push({width,theory:e.theory,mode,topic:id});
    }
    await context.close();console.log(`${width}px: totes les pràctiques verificades`);
-  }
+  }));
   fs.writeFileSync(path.join(__dirname,'resultats-practica-cercador.json'),JSON.stringify({topics:entries.length,checks:results.length,results},null,2)+'\n');
- }finally{await browser.close()}
-})().catch(e=>{console.error(e);process.exitCode=1});
+ }finally{await Promise.race([browser.close(),new Promise(resolve=>{const timer=setTimeout(resolve,15000);timer.unref();})]);}
+})().catch(e=>{console.error(e);process.exit(1)});

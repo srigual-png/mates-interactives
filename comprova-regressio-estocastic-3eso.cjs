@@ -17,7 +17,7 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
    for(const type of [18,19,20]){const q=genProbabilitatBloc8(type),texts=[...el(q.visual).querySelectorAll('svg text')].map(x=>x.textContent).filter(x=>/^[VB] \d+\/\d+$/.test(x)).map(x=>value(x.slice(2)));check(texts.length===6,'Arbre complet');let expected;if(type===20)expected=texts[0]*texts[2]+texts[3]*texts[4];else{const path=el(q.question).querySelector('b').textContent;const first=path[0]==='V'?0:3;expected=texts[first]*texts[first+1+(path[1]==='V'?0:1)];}check(Math.abs(value(q.correct)-expected)<1e-10,'Probabilitat arbre');}
   }
   check(openOk('1/2',[],' 0,5 ',{}),'Coma');check(!openOk('1/2',[],'1/0',{}),'Zero');check(!openOk('1/2',[],'-1/2',{}),'Signe');
-  unlockAllTopics();miExamSelectedTopics=miExamCoreTopics().map(t=>t.id);miRunConfiguredExam();check(state.examQs.length===20,'General');check(state.examQs.every(q=>!q.topicId.startsWith('amp')),'Ampliacions');return n;
+  miExamSelectedTopics=miExamCoreTopics().map(t=>t.id);miRunConfiguredExam();check(state.examQs.length===20,'General');check(state.examQs.every(q=>!q.topicId.startsWith('amp')),'Ampliacions');return n;
  });
  await p.evaluate(()=>miTopicExam.start('quartils3r'));assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.screenshot({path:'scripts/examens-estocastic-3eso-390.png',fullPage:true});console.log(checks+' comprovacions: bancs, visuals, quartils, dispersió, mitjana agrupada, arbres, corrector i examen general.');await b.close();
 })().catch(e=>{console.error(e);process.exit(1)});
