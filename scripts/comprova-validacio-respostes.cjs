@@ -6,7 +6,7 @@ for(const a of ['1/0','12abc','NaN','Infinity','1..2','0.5xyz','alert(1)','(()=>
 test('1/3','0.333',false);test('1/3','0.3333333333333333',false);
 test('1/2','2/4',false,{form:'irreducible'});test('1/2','1/2',true,{form:'irreducible'});test('1/2','0.5',false,{form:'fraction'});
 test('2x+6','2(x+3)',true);test('2x','x+x',true);for(const a of ['x²','x*x'])test('x^2',a,true);
-test('x+y','y+x',true);test('2xy','y*2*x',true);test('x','X',false);test('x^2','x+2',false);
+test('x+y','y+x',true);test('2xy','y*2*x',true);test('x','X',true);test('x','X',false,{caseSensitiveVariables:true});test('x^2','x+2',false);
 test('1','x/x',false);test('1','(x/x)^0',false);test('1','x/x',true,{nonzero:['x']});test('x+1','(x^2-1)/(x-1)',false);
 test('2(x+3)','2x+6',false,{form:'factorized'});test('2(x+3)','2(x+3)',true,{form:'factorized'});
 test('2x+6','2(x+3)',false,{form:'expanded'});test('2x+6','6+2x',true,{form:'expanded'});
@@ -34,4 +34,19 @@ test('(2, 3)','(2, 3)',true);test('5, 9, 13, 17','5, 9, 13, 17',true);test('1/0'
 for(const correct of ['Entre 36,5 i 37,5 g','[2,855, 2,865)','Estimar la puntuació per a 4,5 hores, perquè queda dins del rang observat'])test(correct,correct,true);
 test('100','1 m',false,{fieldUnit:'cm'});test('100','100 cm',true,{fieldUnit:'cm'});
 test('6 m','6 m',true,{},'Arrodoneix a dues xifres decimals si cal.');test('6 m','6 m',false,{},'Escriu el resultat amb dues xifres decimals.');
+// Keyboard X is accepted in x-polynomials, while genuinely different symbols stay distinct.
+test('2x^2+3x-1','2X²+3X-1',true,{},'Simplifica el polinomi.');
+test('2x+6','2(X+3)',true);test('2x','X+x',true);test('x^2','X*X',true);
+test('2x+6','2(X+3)',false,{form:'expanded'});test('2(x+3)','2X+6',false,{form:'factorized'});
+test('2x','X+x',false,{form:'simplified'});test('1','X/X',false);
+test('x+X','2x',false);test('x+X','x+X',true);test('x','X',false,{},'Les variables x i X són diferents.');
+test('x','X',false,{variableAliases:{}});test('x+y','x+Y',false);
+test('x','X',true,{variableAliases:{X:'x'}});test('2x','2X',false,{caseSensitiveVariables:true,variableAliases:{X:'x'}});
+assert.equal(V.symbolicEqual('x','X'),false);count++;
+for(const input of ['-x','-X','- x','- X',' − X ','-   x','−   X']){
+ test('-x',input,true,{},'Simplifica el polinomi.');
+ test('-x',input,true,{form:'simplified'});
+}
+test('-x','x',false);test('-x','+ X',false);test('12','1 2',false);
+test('-x','- X',false,{caseSensitiveVariables:true});test('-x','- x',true,{caseSensitiveVariables:true});
 console.log(`${count} validation regression cases passed`);

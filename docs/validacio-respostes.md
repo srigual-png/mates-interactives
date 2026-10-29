@@ -5,7 +5,7 @@ El mòdul `assets/js/validacio-respostes.js` es carrega abans dels generadors de
 ## Política
 
 - Nombres decimals i fraccions: racionals exactes amb `BigInt`; coma i punt decimals, signes Unicode, parèntesis en denominadors i notació científica. No s’accepten denominadors zero, entrades parcials, NaN o Infinity. `0,333` no equival a `1/3`.
-- Expressions: parser aritmètic limitat, sense `eval` ni `Function`. Es comparen polinomis amb coeficients racionals mitjançant identitats exactes; les divisions conserven les restriccions dels denominadors. No es demostra equivalència a partir d’una mostra numèrica. Les lletres distingeixen majúscules de minúscules.
+- Expressions: parser aritmètic limitat, sense `eval` ni `Function`. Es comparen polinomis amb coeficients racionals mitjançant identitats exactes; les divisions conserven les restriccions dels denominadors. No es demostra equivalència a partir d’una mostra numèrica. En els polinomis habituals en `x`, s’accepta `X` com a variant de teclat de `x`. Es manté la distinció si l’enunciat o la resposta utilitza explícitament `X`, o si l’exercici declara `caseSensitiveVariables:true`. Les altres lletres continuen distingint majúscules de minúscules.
 - Forma: fracció, fracció irreductible, decimal, percentatge, notació científica, desenvolupament, simplificació o factorització. Una igualtat de valor no evita aquestes comprovacions. Si es demana explícitament una fracció, un enter s’escriu `n/1`.
 - Col·leccions: conjunts de solucions sense ordre; parells, seqüències i coordenades amb ordre; sistemes etiquetats amb associació de variables. Per a decimals dins de col·leccions, utilitzeu `;` com a separador. Una coma sense altre context és decimal; no s’interpreten silenciosament separadors de milers.
 - Equacions polinòmiques: s’admeten diferències proporcionals per una constant no nul·la, amb les mateixes restriccions de domini. No és un solucionador general d’equacions.
@@ -32,6 +32,8 @@ Propietats disponibles de `validation`:
 
 | Propietat | Valors / ús |
 | --- | --- |
+| `caseSensitiveVariables` | `true` per distingir sempre majúscules de minúscules |
+| `variableAliases` | Àlies explícits, p. ex. `{X:'x'}`; `{}` desactiva els àlies automàtics |
 | `type` | `number`, `expression`, `equation`, `set`, `tuple`, `sequence`, `system` |
 | `form` | `fraction`, `irreducible`, `decimal`, `percent`, `scientific`, `expanded`, `simplified`, `factorized` |
 | `unit` | Unitat concreta exigida, p. ex. `cm`, `m^2` |
