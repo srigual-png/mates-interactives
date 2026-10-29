@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
+<script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sentit Estocàstic | Matemàtiques 3r d'ESO</title>
@@ -455,7 +456,8 @@ function strictRequestedForm(ex){
   const q=stripHtml(ex.question).toLowerCase().replace(/\s+/g,' ');
   return /expressa.+(?:en percentatge|com a percentatge|en forma decimal|com una fracció|com a fracció)|converteix.+(?:en percentatge|a decimal|en decimal)|quin percentatge|quina fracció|fracció irreductible/.test(q);
 }
-function openOk(correct,alts,value,ex){
+function openOk(correct,alts,value,ex,allowPairEquivalent=false){const context=ex&&typeof ex==="object"?ex:{allowPairEquivalent};return MIValidation.grade({...context,correct,alts},value,()=>openOkLegacy(correct,alts,value,ex,allowPairEquivalent));}
+function openOkLegacy(correct,alts,value,ex){
   const targets=[correct,...(Array.isArray(alts)?alts:[])];
   const nv=normText(value);
   for(const t of targets){
@@ -2453,6 +2455,7 @@ function selectExamAnswer(idx,btn){
   document.querySelectorAll('#examOptions .opt-btn').forEach((b,i)=>{b.disabled=true;if(q.options[i]===q.correct)b.classList.add('correct')});if(!ok)btn.classList.add('wrong');processExamAnswer(ok,ans);
 }
 function checkExamOpen(){
+  if(MIValidation.inputLocked(document, "checkExamOpen"))return;
   const q=state.examQs[state.examIdx],inp=document.getElementById('examOpenInput'),val=inp.value.trim();if(!val||inp.disabled)return;const ok=openOk(q.correct,q.alts,val,q);inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');processExamAnswer(ok,val);
   setTimeout(()=>{const b=document.getElementById('btnNextExam');if(b&&b.style.display!=='none'){try{b.focus({preventScroll:true})}catch(e){b.focus()}}},40);
 }
@@ -2834,5 +2837,6 @@ function miTheoryLinkHtml(topicId,label){
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
 <script src="../assets/js/examen-tema.js"></script>
+<script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

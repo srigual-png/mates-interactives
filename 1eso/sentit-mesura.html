@@ -2,6 +2,7 @@
 
 <html lang="ca">
 <head>
+<script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Exercicis de mesures, perímetres i àrees 1r ESO | Mates Interactives</title>
@@ -2242,7 +2243,8 @@ function measureEquivalent1(a,b){
   }
   return false;
 }
-function openOkMeasure(correct,value){
+function openOkMeasure(correct,value,ex){return MIValidation.grade({...ex,correct},value,()=>openOkMeasureLegacy(correct,value));}
+function openOkMeasureLegacy(correct,value){
   const nv=normOpenMeasure(value),nt=normOpenMeasure(correct);
   if(nv===nt)return true;
   const a=Number(nv),b=Number(nt);
@@ -2268,7 +2270,7 @@ function insertMath(inputId,text){
 function checkOpen(){
   if(ST.answered)return;
   const inp=document.getElementById('openInput'),val=inp.value.trim();if(!val)return;
-  const ok=openOkMeasure(curEx.correct,val);
+  const ok=openOkMeasure(curEx.correct,val,curEx);
   inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');
   processPracticeAnswer(ok,val);
 }
@@ -2522,8 +2524,9 @@ function toggleOpenHint(){
   const show=box.style.display==='none';box.style.display=show?'block':'none';if(show)window.MIAnalytics?.hint();btn.textContent=show?'🙈 Amagar pista':'💡 Veure pista';OPENM.hint=show||OPENM.hint;
 }
 function checkOpenProblem(){
+  if(MIValidation.inputLocked(document, "checkOpenProblem"))return;
   const ex=OPENM.queue[OPENM.idx],inp=document.getElementById('openFinal'),ans=inp.value.trim();if(!ans)return;
-  const ok=typeof ex.answerCheck==='function'?ex.answerCheck(ans):normalizeOpenAnswer(ans)===normalizeOpenAnswer(ex.correct);
+  const ok=typeof ex.answerCheck==='function'?MIValidation.grade(ex,ans,()=>ex.answerCheck(ans)):normalizeOpenAnswer(ans)===normalizeOpenAnswer(ex.correct);
   if(!ok)registerError(ex,ans,'open');
   window.MIAnalytics?.answer(ok,ex.topicId);OPENM.results.push({ok,hint:OPENM.hint,patternId:ex.patternId,family:ex.family});
   inp.disabled=true;document.getElementById('openCheck').disabled=true;
@@ -2602,8 +2605,9 @@ function selectExamAns(idx,btn){
   if(!ok)btn.classList.add('wrong');finishExamAnswer(q,ans,ok);
 }
 function checkExamOpenAnswer(){
+  if(MIValidation.inputLocked(document, "checkExamOpenAnswer"))return;
   const q=ST.examQs[ST.examIdx],input=document.getElementById('examOpenAnswer'),ans=input.value.trim();if(!ans)return;
-  const ok=typeof q.answerCheck==='function'?q.answerCheck(ans):normalizeOpenAnswer(ans)===normalizeOpenAnswer(q.correct);
+  const ok=typeof q.answerCheck==='function'?MIValidation.grade(q,ans,()=>q.answerCheck(ans)):normalizeOpenAnswer(ans)===normalizeOpenAnswer(q.correct);
   input.disabled=true;document.getElementById('examOpenCheck').disabled=true;finishExamAnswer(q,ans,ok);
 }
 function nextExamQ(){
@@ -3398,5 +3402,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
 <script src="../assets/js/examen-tema.js"></script>
+<script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

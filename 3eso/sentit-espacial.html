@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
+<script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sentit Espacial · Matemàtiques 3r d'ESO | Mates Interactives</title>
@@ -449,7 +450,8 @@ function asCoordinatePair(value){
   });
   return values.every(n=>n!==null)?values:null;
 }
-function openOk(correct,alts,value){
+function openOk(correct,alts,value,ex,allowPairEquivalent=false){const context=ex&&typeof ex==="object"?ex:{allowPairEquivalent};return MIValidation.grade({...context,correct,alts},value,()=>openOkLegacy(correct,alts,value,ex,allowPairEquivalent));}
+function openOkLegacy(correct,alts,value){
   // Les parelles són dues components, mai un escalar amb coma decimal.
   const expectedPair=stripHtml(String(correct??'')).trim().startsWith('(')?asCoordinatePair(correct):null;
   if(expectedPair){
@@ -1996,7 +1998,7 @@ function selectAnswer(idx,btn){
 }
 function checkOpen(){
   if(state.answered)return;const inp=document.getElementById('openInput'),val=inp.value.trim();if(!val)return;
-  const ok=openOk(currentEx.correct,currentEx.alts,val);inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');processAnswer(ok,val);
+  const ok=openOk(currentEx.correct,currentEx.alts,val,currentEx);inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');processAnswer(ok,val);
   setTimeout(()=>{const b=document.getElementById('btnNext');if(b&&b.style.display!=='none'){try{b.focus({preventScroll:true})}catch(e){b.focus()}}},40);
 }
 function processAnswer(ok,studentAnswer){
@@ -2056,7 +2058,8 @@ function selectExamAnswer(idx,btn){
   document.querySelectorAll('#examOptions .opt-btn').forEach((b,i)=>{b.disabled=true;if(q.options[i]===q.correct)b.classList.add('correct')});if(!ok)btn.classList.add('wrong');processExamAnswer(ok,ans);
 }
 function checkExamOpen(){
-  const q=state.examQs[state.examIdx],inp=document.getElementById('examOpenInput'),val=inp.value.trim();if(!val||inp.disabled)return;const ok=openOk(q.correct,q.alts,val);inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');processExamAnswer(ok,val);
+  if(MIValidation.inputLocked(document, "checkExamOpen"))return;
+  const q=state.examQs[state.examIdx],inp=document.getElementById('examOpenInput'),val=inp.value.trim();if(!val||inp.disabled)return;const ok=openOk(q.correct,q.alts,val,q);inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');processExamAnswer(ok,val);
   setTimeout(()=>{const b=document.getElementById('btnNextExam');if(b&&b.style.display!=='none'){try{b.focus({preventScroll:true})}catch(e){b.focus()}}},40);
 }
 function processExamAnswer(ok,answer){
@@ -2123,7 +2126,7 @@ function validateGeneratedExercise(ex){
   if(!ex.question)issues.push('pregunta buida');
   if(!Array.isArray(ex.guide)||!ex.guide.length)issues.push('guide buit');
   if(!Array.isArray(ex.solution)||!ex.solution.length)issues.push('solution buit');
-  const valid=opts.filter(o=>openOk(ex.correct,ex.alts,o));
+  const valid=opts.filter(o=>openOk(ex.correct,ex.alts,o,ex));
   if(valid.length!==1)issues.push(valid.length+' opcions acceptables com a correctes');
   return issues;
 }
@@ -2435,5 +2438,6 @@ function miTheoryLinkHtml(topicId,label){
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
 <script src="../assets/js/examen-tema.js"></script>
+<script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

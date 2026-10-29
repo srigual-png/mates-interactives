@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
+<script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sentit Algebraic | Matemàtiques 2n d'ESO</title>
@@ -530,68 +531,13 @@ function norm(s){
   7n+6 = 6+7n = 13+(n-1)·7 = (n-1)·7+13
   sense haver d'enumerar manualment tots els ordres possibles.
 */
-function nExprValue(expr,nValue){
-  let s=norm(expr);
+function nExprValue(expr,nValue){return MIValidation.numericValue(expr,{n:nValue});}
 
-  // Només intentem interpretar expressions algebraiques amb la variable n.
-  if(!s.includes('n')) return null;
+function nExprEquivalent(a,b){return MIValidation.symbolicEqual(a,b);}
 
-  // Multiplicació explícita i implícita: 7n, 7(n-1), (n-1)7, n(n+1)...
-  s=s.replace(/·/g,'*')
-     .replace(/(\d|\))(?=n|\()/g,'$1*')
-     .replace(/n(?=\d|\()/g,'n*')
-     .replace(/\)(?=\d)/g,')*');
+function xExprValue(expr,xValue){return MIValidation.numericValue(expr,{x:xValue});}
 
-  // Seguretat: només nombres, n, operadors aritmètics, punts i parèntesis.
-  if(!/^[0-9n+\-*/().]+$/.test(s)) return null;
-
-  try{
-    const numeric=s.replace(/n/g,'('+nValue+')');
-    const value=Function('"use strict"; return ('+numeric+');')();
-    return (typeof value==='number' && Number.isFinite(value)) ? value : null;
-  }catch(e){
-    return null;
-  }
-}
-
-function nExprEquivalent(a,b){
-  const tests=[1,2,3,5,11];
-  for(const n of tests){
-    const va=nExprValue(a,n), vb=nExprValue(b,n);
-    if(va===null || vb===null || Math.abs(va-vb)>1e-9) return false;
-  }
-  return true;
-}
-
-function xExprValue(expr,xValue){
-  let s=norm(expr);
-  if(!s.includes('x')) return null;
-
-  // Potències habituals de x i multiplicació explícita/implícita.
-  const powers={'²':'**2','³':'**3','⁴':'**4','⁵':'**5','⁶':'**6','⁷':'**7','⁸':'**8','⁹':'**9'};
-  Object.keys(powers).forEach(k=>{s=s.split(k).join(powers[k]);});
-  s=s.replace(/·/g,'*')
-     .replace(/(\d|x|\))(?=x|\()/g,'$1*')
-     .replace(/\)(?=\d)/g,')*');
-
-  if(!/^[0-9x+\-*/().]+$/.test(s)) return null;
-  try{
-    const numeric=s.replace(/x/g,'('+xValue+')');
-    const value=Function('"use strict"; return ('+numeric+');')();
-    return (typeof value==='number' && Number.isFinite(value)) ? value : null;
-  }catch(e){
-    return null;
-  }
-}
-
-function xExprEquivalent(a,b){
-  const tests=[-3,-1,0,2,5];
-  for(const x of tests){
-    const va=xExprValue(a,x), vb=xExprValue(b,x);
-    if(va===null || vb===null || Math.abs(va-vb)>1e-9) return false;
-  }
-  return true;
-}
+function xExprEquivalent(a,b){return MIValidation.symbolicEqual(a,b);}
 
 
 function parseXYPair(value){
@@ -621,7 +567,8 @@ function xyPairEquivalent(a,b){
   return !!(pa&&pb&&Math.abs(pa.x-pb.x)<1e-9&&Math.abs(pa.y-pb.y)<1e-9);
 }
 
-function openOk(correct, alts, input, allowXEquivalent=false, allowPairEquivalent=false){
+function openOk(correct,alts,value,ex,allowPairEquivalent=false){const context=ex&&typeof ex==="object"?ex:{allowPairEquivalent};return MIValidation.grade({...context,correct,alts},value,()=>openOkLegacy(correct,alts,value,ex,allowPairEquivalent));}
+function openOkLegacy(correct, alts, input, allowXEquivalent=false, allowPairEquivalent=false){
   const ni=norm(input);
   const all=[correct,...(alts||[])];
 
@@ -3255,7 +3202,7 @@ function checkOpen(){
   const inp=document.getElementById('openInput');
   const val=inp.value.trim();
   if(!val)return;
-  const ok=openOk(currentEx.correct,currentEx.alts,val,currentEx.allowXEquivalent===true,currentEx.allowPairEquivalent===true);
+  const ok=openOk(currentEx.correct,currentEx.alts,val,currentEx);
   inp.className='open-input '+(ok?'ok':'ko');
   inp.disabled=true;
   processAnswer(ok,val);
@@ -3354,10 +3301,11 @@ function renderExamQ(){
 }
 
 function checkExamOpen(){
+  if(MIValidation.inputLocked(document, "checkExamOpen"))return;
   const q=state.examQs[state.examIdx];
   const inp=document.getElementById('examOpenInput');
   const val=inp.value.trim();if(!val)return;
-  const ok=openOk(q.correct,q.alts,val,q.allowXEquivalent===true,q.allowPairEquivalent===true);
+  const ok=openOk(q.correct,q.alts,val,q);
   inp.className='open-input '+(ok?'ok':'ko');inp.disabled=true;
   if(ok)state.examScore++;
   else registerError(q,val,'exam');
@@ -3598,7 +3546,7 @@ function runAutoTest(){
           if(new Set(opts).size!==opts.length)issues.push('opcions duplicades');
           if(!opts.includes(cs))issues.push('correcta no inclosa');
           if(opts.some(o=>!o||o.trim()===''||/^Op\.|^Cap de les anteriors|^Incorrecte \(|^− − −/.test(o)))issues.push('opció buida/fallback');
-          const valid=opts.filter(o=>openOk(ex.correct,ex.alts,o,ex.allowXEquivalent===true,ex.allowPairEquivalent===true));
+          const valid=opts.filter(o=>openOk(ex.correct,ex.alts,o,ex));
           if(valid.length!==1)issues.push(valid.length+' opcions acceptables com a correctes');
         }
         if(!ex.topicId)issues.push('topicId absent');
@@ -3941,5 +3889,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
 <script src="../assets/js/examen-tema.js"></script>
+<script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

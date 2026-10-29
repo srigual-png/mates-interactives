@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
+<script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sentit Algebraic · Matemàtiques 3r d'ESO | Mates Interactives</title>
@@ -512,27 +513,8 @@ function algebraExprCore(value){
      .replace(/\)(?=\d)/g,')*');
   return x;
 }
-function algebraExprValue(expr,varName,varValue){
-  let x=algebraExprCore(expr);
-  if(!x.includes(varName))return null;
-  const other=varName==='x'?'n':'x';
-  if(x.includes(other))return null;
-  x=x.replace(/\^/g,'**');
-  if(!/^[0-9xn+\-*/().]+$/.test(x))return null;
-  try{
-    const numeric=x.replace(new RegExp(varName,'g'),'('+varValue+')');
-    const v=Function('"use strict";return ('+numeric+');')();
-    return Number.isFinite(v)?v:null;
-  }catch(e){return null;}
-}
-function algebraExprEquivalent(a,b,varName){
-  const tests=varName==='n'?[1,2,3,5,11]:[-3,-1,0,2,5];
-  for(const v of tests){
-    const av=algebraExprValue(a,varName,v),bv=algebraExprValue(b,varName,v);
-    if(av===null||bv===null||Math.abs(av-bv)>1e-8)return false;
-  }
-  return true;
-}
+function algebraExprValue(expr,varName,varValue){return MIValidation.numericValue(expr,{[varName]:varValue});}
+function algebraExprEquivalent(a,b,varName){return MIValidation.symbolicEqual(a,b);}
 function parseXYPair(value){
   let x=String(value??'').toLowerCase().replace(/<[^>]*>/g,'').replace(/[−–—]/g,'-').replace(/\s+/g,'').replace(/^\(|\)$/g,'');
   let m=x.match(/^x=?(-?\d+(?:[.,]\d+)?)[,;]?y=?(-?\d+(?:[.,]\d+)?)$/);
@@ -558,7 +540,8 @@ function rootSetEquivalent(a,b){
   const pa=parseRootSet(a),pb=parseRootSet(b);
   return !!(pa&&pb&&Math.abs(pa[0]-pb[0])<1e-9&&Math.abs(pa[1]-pb[1])<1e-9);
 }
-function openOk(correct, alts, input, ex){
+function openOk(correct,alts,value,ex,allowPairEquivalent=false){const context=ex&&typeof ex==="object"?ex:{allowPairEquivalent};return MIValidation.grade({...context,correct,alts},value,()=>openOkLegacy(correct,alts,value,ex,allowPairEquivalent));}
+function openOkLegacy(correct, alts, input, ex){
   const ni=norm(input),all=[correct,...(alts||[])];
   if(all.some(a=>norm(String(a))===ni))return true;
   if(all.some(a=>xyPairEquivalent(String(a),input)))return true;
@@ -3251,6 +3234,7 @@ function renderExamQ(){
 }
 
 function checkExamOpen(){
+  if(MIValidation.inputLocked(document, "checkExamOpen"))return;
   const q=state.examQs[state.examIdx];
   const inp=document.getElementById('examOpenInput');
   const val=inp.value.trim();if(!val)return;
@@ -3959,5 +3943,6 @@ function miTheoryLinkHtml(topicId,label){
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
 <script src="../assets/js/examen-tema.js"></script>
+<script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

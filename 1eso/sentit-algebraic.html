@@ -2,6 +2,7 @@
 
 <html lang="ca">
 <head>
+<script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Exercicis d’àlgebra 1r ESO: patrons i equacions | Mates Interactives</title>
@@ -558,7 +559,8 @@ function insertMath(inputId,text){
   inp.value=inp.value.slice(0,a)+text+inp.value.slice(b);
   const p=a+text.length;inp.focus();try{inp.setSelectionRange(p,p);}catch(e){}
 }
-function openOk(correct, alts, input){
+function openOk(correct,alts,value,ex,allowPairEquivalent=false){const context=ex&&typeof ex==="object"?ex:{allowPairEquivalent};return MIValidation.grade({...context,correct,alts},value,()=>openOkLegacy(correct,alts,value,ex,allowPairEquivalent));}
+function openOkLegacy(correct, alts, input){
   const ni=norm(input);
   const all=[correct,...(alts||[])];
   return all.some(a=>norm(String(a))===ni);
@@ -1823,8 +1825,7 @@ function algProblem(o){
 function algNumAnswer(v,tol=0.001,unit=''){
   const val=Number(v);
   return {val:String(Number.isInteger(val)?val:Math.round(val*100)/100)+(unit?(' '+unit):''),check(input){
-    const m=String(input).replace(',','.').match(/-?\d+(?:\.\d+)?/);if(!m)return false;
-    return Math.abs(Number(m[0])-val)<=tol;
+    return MIValidation.grade({correct:String(Math.round(val*100)/100)+(unit?' '+unit:'')},input);
   }};
 }
 function algExprAnswer(v,alts=[]){return {val:v,check(input){return openOk(v,alts,input);}};}
@@ -1957,7 +1958,7 @@ function algRenderOpenProblem(){
 function algToggleHint(){const b=document.getElementById('algOpenHint'),btn=document.getElementById('algHintBtn');b.classList.toggle('show');if(b.classList.contains('show'))window.MIAnalytics?.hint();btn.textContent=b.classList.contains('show')?'🙈 Amagar pista':'💡 Mostrar pista';}
 function algCheckOpen(){
   if(algOpenSession.answered)return;const p=algOpenSession.problems[algOpenSession.idx],inp=document.getElementById('algOpenInput'),val=inp.value.trim();if(!val)return;
-  const ok=p.answer.check(val);algOpenSession.answered=true;window.MIAnalytics?.answer(ok,p.topicId);inp.disabled=true;inp.className='alg-open-input '+(ok?'ok':'ko');if(ok)algOpenSession.correct++;
+  const ok=MIValidation.grade({...p,correct:p.answer.val},val,()=>p.answer.check(val));algOpenSession.answered=true;window.MIAnalytics?.answer(ok,p.topicId);inp.disabled=true;inp.className='alg-open-input '+(ok?'ok':'ko');if(ok)algOpenSession.correct++;
   const errObj={topicId:p.topicId,topicName:algTopicName(p.topicId),type:p.patternId,question:p.question,correct:p.answer.val,options:[],guide:[...(p.hint||[])],solution:[...(p.solution||[])]};if(!ok)registerError(errObj,val,'open');
   document.getElementById('algOpenFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':`Resposta correcta: <b>${p.answer.val}</b>`}<div class="alg-open-solution">${(p.solution||[]).map((s,i)=>`<div><b>Pas ${i+1}:</b> ${s}</div>`).join('')}</div>${ok?'':miTheoryLinkHtml(p.topicId)}</div>`;
   document.getElementById('algOpenCheck').style.display='none';document.getElementById('algOpenNext').style.display='block';document.getElementById('algOpenNext').textContent=algOpenSession.idx+1<algOpenSession.problems.length?'Següent problema →':'Veure resultat';
@@ -2296,7 +2297,7 @@ function checkOpen(){
   const inp=document.getElementById('openInput');
   const val=inp.value.trim();
   if(!val)return;
-  const ok=typeof currentEx._openAnswerCheck==='function'?currentEx._openAnswerCheck(val):openOk(currentEx.correct,currentEx.alts,val);
+  const ok=typeof currentEx._openAnswerCheck==='function'?MIValidation.grade(currentEx,val,()=>currentEx._openAnswerCheck(val)):openOk(currentEx.correct,currentEx.alts,val,currentEx);
   inp.className='open-input '+(ok?'ok':'ko');
   inp.disabled=true;
   processAnswer(ok,val);
@@ -2407,9 +2408,10 @@ function renderExamQ(){
 }
 
 function checkExamOpen(){
+  if(MIValidation.inputLocked(document, "checkExamOpen"))return;
   const q=state.examQs[state.examIdx];if(!q||!q.isOpenProblem)return;
   const inp=document.getElementById('examOpenInput'),val=inp.value.trim();if(!val)return;
-  const ok=q.answer.check(val);inp.className='open-input '+(ok?'ok':'ko');inp.disabled=true;if(ok)state.examScore++;
+  const ok=MIValidation.grade({...q,correct:q.answer.val},val,()=>q.answer.check(val));inp.className='open-input '+(ok?'ok':'ko');inp.disabled=true;if(ok)state.examScore++;
   const errObj={topicId:q.topicId,topicName:q.topicName,type:q.patternId,question:q.question,correct:q.answer.val,options:[],guide:[...(q.hint||[])],solution:[...(q.solution||[])]};
   if(!ok)registerError(errObj,val,'exam');
   state.examLog.push({q:q.question,correct:q.answer.val,given:val,ok,topic:q.topicName,solution:[...(q.solution||[])],isProblem:true});
@@ -2635,7 +2637,7 @@ function runAutoTest(){
           if(new Set(opts).size!==opts.length)issues.push('opcions duplicades');
           if(!opts.includes(cs))issues.push('correcta no inclosa');
           if(opts.some(o=>!o||o.trim()===''||/^Op\.|^Cap de les anteriors|^Incorrecte \(|^− − −/.test(o)))issues.push('opció buida/fallback');
-          const valid=opts.filter(o=>openOk(ex.correct,ex.alts,o));
+          const valid=opts.filter(o=>openOk(ex.correct,ex.alts,o,ex));
           if(valid.length!==1)issues.push(valid.length+' opcions acceptables com a correctes');
         }
         if(!ex.topicId)issues.push('topicId absent');
@@ -2955,5 +2957,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
 <script src="../assets/js/examen-tema.js"></script>
+<script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

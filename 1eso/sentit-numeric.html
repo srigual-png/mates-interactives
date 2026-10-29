@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
+<script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sentit numèric - Exercicis de Matemàtiques de 1r d'ESO</title>
@@ -3060,20 +3061,8 @@ function genNotacioCientifica(){if(!Array.isArray(notacioBag)||notacioBag.length
 
 // ── AMPLIACIÓ · GENERADORS DE PROBLEMES OBERTS ─────────────────────────────
 function norm(s){return String(s).trim().toLowerCase().replace(/\s+/g,' ').replace(/,/g,'.');}
-function numEq(a,b,tol){tol=tol||0.01;var na=parseFloat(norm(a)),nb=parseFloat(norm(b));if(isNaN(na)||isNaN(nb))return false;return Math.abs(na-nb)<=tol;}
-function fracEq(input,n,d){
-  var s=norm(input);
-  // Accept simplified or equivalent
-  var sp=simplify(n,d);
-  if(s===sp[0]+'/'+sp[1])return true;
-  if(s===n+'/'+d)return true;
-  // Accept decimal equivalent
-  if(numEq(s,n/d,0.001))return true;
-  // Accept "n/d" formats with spaces
-  var m=s.match(/^(-?\d+)\s*\/\s*(\d+)$/);
-  if(m){var mn=parseInt(m[1]),md=parseInt(m[2]);var g=gcd(Math.abs(mn),Math.abs(md));return mn/g===sp[0]&&md/g===sp[1];}
-  return false;
-}
+function numEq(a,b,tol){return MIValidation.grade({correct:String(b),validation:tol===undefined?{}:{tolerance:tol}},a);}
+function fracEq(input,n,d){return MIValidation.grade({correct:n+'/'+d},input);}
 function pctEq(input,val){var s=norm(input).replace('%','').trim();return numEq(s,val,0.1);}
 
 function ampIsPrime(n){
@@ -3900,7 +3889,8 @@ function strictOpenForm(ex){
   var q=stripHtmlOpen(ex.question).toLowerCase().replace(/\s+/g,' ');
   return /percentatge|fracci[oó]|decimal|arrodoneix|notaci[oó] cient[ií]fica|factoritza|descompon|quin signe|ordena/.test(q);
 }
-function openOk1(correct,value,ex){
+function openOk1(correct,value,ex){return MIValidation.grade({...ex,correct},value,()=>openOk1Legacy(correct,value,ex));}
+function openOk1Legacy(correct,value,ex){
   var nv=normOpenText(value),nt=normOpenText(correct);
   if(nv===nt)return true;
   var a=plainOpenNumber(value),b=plainOpenNumber(correct);
@@ -4131,14 +4121,14 @@ function ampRegisterError(p,given){
 }
 function ampCheckAnswer(){
   var p=ampSession.probs[ampSession.idx],finalInp=document.getElementById('ampFinalAns'),finalVal=finalInp.value;
-  if(!finalVal.trim())return;
+  if(finalInp.disabled||!finalVal.trim())return;
   var stepsOk=0,stepsTotal=(p.steps||[]).length;
   (p.steps||[]).forEach(function(s,i){
     var inp=document.getElementById('ampStep_'+i);if(!inp)return;
     var ok=false;try{ok=s.check(inp.value);}catch(e){}
     inp.classList.toggle('ok',ok);inp.classList.toggle('err',!ok&&inp.value.trim()!=='');if(ok)stepsOk++;
   });
-  var finalOk=false;try{finalOk=p.answer.check(finalVal);}catch(e){}
+  var finalOk=false;try{finalOk=MIValidation.grade({...p,question:p.question||p.text,correct:p.answer.val},finalVal,()=>p.answer.check(finalVal));}catch(e){}
   window.MIAnalytics?.answer(finalOk,p.topicId);finalInp.classList.toggle('ok',finalOk);finalInp.classList.toggle('err',!finalOk);
   document.querySelectorAll('#sAmpProb .step-input,#sAmpProb .final-input').forEach(function(el){el.disabled=true;});
   var cb=document.querySelector('#sAmpProb .check-btn');if(cb)cb.disabled=true;
@@ -4360,10 +4350,11 @@ function selEA(idx,btn){
   document.getElementById('bNExam').textContent=state.examIdx+1<state.examQs.length?'Seguent ->':'Veure resultat';
 }
 function checkExamOpenAnswer(){
+  if(MIValidation.inputLocked(document, "checkExamOpenAnswer"))return;
   var q=state.examQs[state.examIdx],inp=document.getElementById('examOpenAns');
   if(!q||!q.examProblem||!inp)return;
   var val=inp.value;if(!String(val).trim())return;
-  var ok=false;try{ok=!!q.answerCheck(val);}catch(e){ok=false;}
+  var ok=false;try{ok=MIValidation.grade(q,val,()=>q.answerCheck(val));}catch(e){ok=false;}
   if(ok)state.examScore++;
   state.examAnswers.push({ok:ok,q:stripTags(q.question).slice(0,90),correct:q.correct,given:val,topicId:q.topicId,topicName:q.topicName,isProblem:true,examProblem:true});
   if(!ok)registerError(q,val,'exam');
@@ -4792,5 +4783,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
 <script src="../assets/js/examen-tema.js"></script>
+<script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

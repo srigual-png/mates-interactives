@@ -2,6 +2,7 @@
 
 <html lang="ca">
 <head>
+<script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Exercicis de geometria 1r ESO: angles i polígons | Mates Interactives</title>
@@ -2148,9 +2149,9 @@ let currentErrorIndex=-1;
 
 // ── PROBLEMES OBERTS · 1r ESO ──────────────────────────────────────────
 function spNorm(v){return String(v??'').trim().toLowerCase().replace(/ŀl/g,'ll').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/l[.·•∙⋅]l/g,'ll').replace(/[×⋅*]/g,'x').replace(/[÷:]/g,'/').replace(/[−–—]/g,'-').replace(/\s+/g,' ');}
-function spFirstNum(v){const m=String(v??'').replace(',','.').match(/-?\d+(?:\.\d+)?/);return m?Number(m[0]):NaN;}
+function spFirstNum(v){return MIValidation.numericValue(v)??NaN;}
 function spNumAnswer(n,tol=0.01){return {val:String(Math.round(n*100)/100).replace('.',','),check:v=>Number.isFinite(spFirstNum(v))&&Math.abs(spFirstNum(v)-n)<=tol};}
-function spTextAnswer(val,alts=[]){const accepted=[val,...alts].map(spNorm);return {val,check:v=>{const s=spNorm(v);return accepted.some(a=>s===a||s.includes(a));}};}
+function spTextAnswer(val,alts=[]){const accepted=[val,...alts].map(spNorm);return {val,check:v=>{const s=spNorm(v);return accepted.some(a=>s===a);}};}
 function spFracAnswer(n,d){const gcd=(a,b)=>b?gcd(b,a%b):Math.abs(a);const g=gcd(n,d),sn=n/g,sd=d/g;return {val:`${sn}/${sd}`,check:v=>{const m=String(v??'').replace(/\s/g,'').match(/^(-?\d+)\/(\d+)$/);return !!m&&Number(m[1])*sd===sn*Number(m[2]);}};}
 function spProblem(o){o.options=[];o.correct=o.answer.val;o.guide=Array.isArray(o.hint)?o.hint:[];o.solution=Array.isArray(o.solution)?o.solution:[];o.svg=o.svg||'';o.type=o.patternId;return o;}
 
@@ -2280,7 +2281,7 @@ function spShowProblem(){
 function spToggleHint(){const b=document.getElementById('spOpenHint');const on=!b.classList.contains('show');b.classList.toggle('show',on);if(on)window.MIAnalytics?.hint();document.getElementById('spOpenHintBtn').textContent=on?'🙈 Amagar pista':'💡 Mostrar pista';}
 function spSolutionHTML(p){return `<div class="sp-open-solution"><b>Solució:</b><br>${(p.solution||[]).map((s,i)=>`${i+1}. ${s}`).join('<br>')}<div style="margin-top:7px;color:var(--success);font-weight:700">Resposta final: ${p.correct}</div></div>`;}
 function spCheckAnswer(){
-  if(spSession.answered)return;const p=spSession.problems[spSession.idx];const ans=document.getElementById('spOpenAnswer').value;const ok=p.answer.check(ans);spSession.answered=true;window.MIAnalytics?.answer(ok,p.topicId);
+  if(spSession.answered)return;const p=spSession.problems[spSession.idx];const ans=document.getElementById('spOpenAnswer').value;const ok=MIValidation.grade({...p,correct:p.answer.val},ans,()=>p.answer.check(ans));spSession.answered=true;window.MIAnalytics?.answer(ok,p.topicId);
   if(ok)spSession.correct++;else registerError({...p,topicName:(TOPICS.find(t=>t.id===p.topicId)||{}).name},ans,'open');
   document.getElementById('spOpenAnswer').disabled=true;document.getElementById('spOpenCheck').style.display='none';document.getElementById('spOpenNext').style.display='block';
   document.getElementById('spOpenFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':`La resposta correcta és <b>${p.correct}</b>.`}${spSolutionHTML(p)}${ok?'':miTheoryLinkHtml(p.topicId)}</div>`;
@@ -2974,7 +2975,7 @@ function checkOpen(){
   const inp=document.getElementById('openInput');
   const ans=inp.value.trim();
   if(!ans)return;
-  const isCorrect=!!(currentEx.answer&&typeof currentEx.answer.check==='function'&&currentEx.answer.check(ans));
+  const isCorrect=!!(currentEx.answer&&typeof currentEx.answer.check==='function'&&MIValidation.grade({...currentEx,correct:currentEx.answer.val},ans,()=>currentEx.answer.check(ans)));
   inp.disabled=true;inp.className='open-input '+(isCorrect?'ok':'ko');
   processPracticeAnswer(isCorrect,ans);
 }
@@ -3176,7 +3177,7 @@ function selectExamAnswer(idx,btn){
 }
 
 function submitSpatialExamProblem(){
-  const q=state.examQs[state.examIdx];if(!q||!q.isOpenProblem)return;const input=document.getElementById('spExamAnswer');const ans=input?input.value:'';const ok=q.answer&&typeof q.answer.check==='function'?q.answer.check(ans):spNorm(ans)===spNorm(q.correct);
+  const q=state.examQs[state.examIdx];if(!q||!q.isOpenProblem)return;const input=document.getElementById('spExamAnswer');const ans=input?input.value:'';if(!input||input.disabled||!ans.trim())return;const ok=q.answer&&typeof q.answer.check==='function'?MIValidation.grade({...q,correct:q.answer.val},ans,()=>q.answer.check(ans)):spNorm(ans)===spNorm(q.correct);
   finishExamAnswer(q,ans,ok);
   if(input)input.disabled=true;const sb=document.getElementById('spExamSubmit');if(sb)sb.disabled=true;
   document.getElementById('examFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':`Resposta correcta: <b>${q.correct}</b>${miReviewHtml(q)}${spSolutionHTML(q)}`}</div>`;
@@ -4475,5 +4476,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
 <script src="../assets/js/examen-tema.js"></script>
+<script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

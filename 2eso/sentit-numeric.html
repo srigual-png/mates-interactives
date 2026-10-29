@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
+<script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sentit Numèric | Matemàtiques 2n d'ESO</title>
@@ -447,7 +448,8 @@ function strictRequestedForm(ex){
   const q=stripHtml(ex.question).toLowerCase().replace(/\s+/g,' ');
   return /converteix.+(?:en percentatge|en nombre decimal|a decimal)|expressa.+(?:en forma decimal|en percentatge|com a percentatge|en forma de fracció|com a fracció)|fracció generatriu|fracció irreductible|com una fracció|notació científica|quina fracció|quin percentatge/.test(q);
 }
-function openOk(correct,alts,value,ex){
+function openOk(correct,alts,value,ex,allowPairEquivalent=false){const context=ex&&typeof ex==="object"?ex:{allowPairEquivalent};return MIValidation.grade({...context,correct,alts},value,()=>openOkLegacy(correct,alts,value,ex,allowPairEquivalent));}
+function openOkLegacy(correct,alts,value,ex){
   const targets=[correct,...(Array.isArray(alts)?alts:[])];
   const nv=normText(value);
   for(const t of targets){
@@ -1069,7 +1071,7 @@ function genFraccionsSentit2ESO(forceType){
 
   else if(type===7){
     const a=rnd(4,18),b=rnd(4,18);
-    correct=ratioStr(a,b);
+    {const reduced=simplifyFrac(a,b);correct=reduced[0]+'/'+reduced[1];}
     options=uniq4(correct,[fracStr(a,a+b),fracStr(b,a),fracStr(b,a+b),fracStr(a+b,b),fracStr(a,b+1)]);
     question=`En una capsa hi ha <b>${a} peces vermelles</b> i <b>${b} peces blaves</b>. Quina és la <b>raó vermelles/blaves</b>, expressada com a fracció simplificada?`;
     guide=['Una raó compara dos grups, no necessàriament una part amb el total.','Respecta l’ordre indicat: vermelles/blaves.','Posa el nombre de vermelles al numerador i el de blaves al denominador.','Simplifica la raó si és possible.'];
@@ -2950,6 +2952,7 @@ function selectExamAnswer(idx,btn){
   document.querySelectorAll('#examOptions .opt-btn').forEach((b,i)=>{b.disabled=true;if(q.options[i]===q.correct)b.classList.add('correct')});if(!ok)btn.classList.add('wrong');processExamAnswer(ok,ans);
 }
 function checkExamOpen(){
+  if(MIValidation.inputLocked(document, "checkExamOpen"))return;
   const q=state.examQs[state.examIdx],inp=document.getElementById('examOpenInput'),val=inp.value.trim();if(!val||inp.disabled)return;const ok=openOk(q.correct,q.alts,val,q);inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');processExamAnswer(ok,val);
 }
 function processExamAnswer(ok,answer){
@@ -3006,7 +3009,7 @@ function validateGeneratedExercise(ex){
   if(!ex.question)issues.push('pregunta buida');
   if(!Array.isArray(ex.guide)||!ex.guide.length)issues.push('guide buit');
   if(!Array.isArray(ex.solution)||!ex.solution.length)issues.push('solution buit');
-  const valid=opts.filter(o=>openOk(ex.correct,ex.alts,o));
+  const valid=opts.filter(o=>openOk(ex.correct,ex.alts,o,ex));
   if(valid.length!==1)issues.push(valid.length+' opcions acceptables com a correctes');
   return issues;
 }
@@ -3353,5 +3356,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
 <script src="../assets/js/examen-tema.js"></script>
+<script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 <html lang="ca">
 <head>
+<script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Exercicis d’estadística i probabilitat 1r ESO | Mates Interactives</title>
@@ -2110,19 +2111,10 @@ function stNorm(s){
 function stNumAnswer(v,tol,suffix){
   tol=tol===undefined?0.011:tol;suffix=suffix||'';var val=Number(v);
   return {val:(Number.isInteger(val)?String(val):String(round2(val)).replace('.',','))+(suffix?(' '+suffix):''),check:function(input){
-    var m=String(input).replace(',','.').match(/-?\d+(?:\.\d+)?/);if(!m)return false;
-    return Math.abs(Number(m[0])-val)<=tol;
+    return MIValidation.grade({correct:String(round2(val))+(suffix?' '+suffix:''),validation:suffix==='%'?{fieldUnit:'%'}:{}},input);
   }};
 }
-function stProbAnswer(num,den){
-  var val=num/den,fr=frac(num,den);return {val:fr,check:function(input){
-    var s=String(input||'').trim().replace(',','.').replace(/%/g,'');
-    var v;
-    if(s.indexOf('/')>=0){var p=s.split('/');if(p.length!==2)return false;var a=Number(p[0]),b=Number(p[1]);if(!Number.isFinite(a)||!Number.isFinite(b)||b===0)return false;v=a/b;}
-    else {v=Number(s);if(!Number.isFinite(v))return false;if(String(input).indexOf('%')>=0)v=v/100;}
-    return Math.abs(v-val)<0.011;
-  }};
-}
+function stProbAnswer(num,den){const fr=frac(num,den);return {val:fr,check:input=>MIValidation.grade({correct:fr},input)};}
 function stTextAnswer(v,alts){
   var canon=[v].concat(alts||[]).map(stNorm);return {val:v,check:function(input){return canon.indexOf(stNorm(input))>=0;}};
 }
@@ -2318,7 +2310,7 @@ function stConstructCorrectText(p){if(p.kind==='pie')return p.labels.map(functio
 function stEvaluateOpen(p){
   if(p.kind==='construct')return p.target.every(function(v,i){return (stConstructCurrent[i]||0)===v;});
   if(p.kind==='pie'){var els=document.querySelectorAll('.st-pie-input');if(els.length!==p.target.length)return false;for(var i=0;i<p.target.length;i++){var v=Number(String(els[i].value).replace(',','.'));if(!Number.isFinite(v)||Math.abs(v-p.target[i])>1)return false;}return true;}
-  var inp=document.getElementById('stOpenInput'),val=inp?inp.value.trim():'';return !!(p.answer&&p.answer.check(val));
+  var inp=document.getElementById('stOpenInput'),val=inp?inp.value.trim():'';return !!(p.answer&&MIValidation.grade({...p,correct:p.answer.val},val,()=>p.answer.check(val)));
 }
 function stStudentOpenValue(p){if(p.kind==='construct')return stConstructCurrent.join(', ');if(p.kind==='pie')return Array.from(document.querySelectorAll('.st-pie-input')).map(function(x){return x.value;}).join(', ');var inp=document.getElementById('stOpenInput');return inp?inp.value.trim():'';}
 
@@ -2665,7 +2657,7 @@ function stIntegratedOpenHint(ex){
 function checkIntegratedOpen(){
   if(state.answered||state.mode!=='open')return;
   var inp=document.getElementById('openInput'),val=inp.value.trim();if(!val)return;
-  var ok=!!(currentEx&&currentEx.answer&&currentEx.answer.check(val));
+  var ok=!!(currentEx&&currentEx.answer&&MIValidation.grade({...currentEx,correct:currentEx.answer.val},val,()=>currentEx.answer.check(val)));
   inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');
   processIntegratedOpenAnswer(ok,val);
 }
@@ -2810,8 +2802,9 @@ function selectExamAnswer(idx,btn){
 }
 
 function checkExamOpenProblem(){
+  if(MIValidation.inputLocked(document, "checkExamOpenProblem"))return;
   var q=state.examQs[state.examIdx],inp=document.getElementById('examOpenInput'),val=inp.value.trim();if(!val)return;
-  var ok=q.answer&&typeof q.answer.check==='function'?q.answer.check(val):false;
+  var ok=q.answer&&typeof q.answer.check==='function'?MIValidation.grade({...q,correct:q.answer.val},val,()=>q.answer.check(val)):false;
   inp.disabled=true;inp.className='st-open-input '+(ok?'ok':'ko');document.getElementById('examOpenCheck').style.display='none';
   if(ok)state.examScore++;else registerError({topicId:q.topicId,topicName:q.topicName,type:q.patternId,question:q.question,visual:q.visual||'',correct:q.correct,options:[],guide:q.guide||[],solution:q.solution||[]},val,'exam');
   state.examLog.push({q:q.question,correct:q.correct,given:val,ok:ok,topic:q.topicName,solution:Array.isArray(q.solution)?q.solution.slice():[]});
@@ -3211,5 +3204,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
 <script src="../assets/js/examen-tema.js"></script>
+<script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

@@ -1,0 +1,602 @@
+[
+  {
+    "file": "1eso/sentit-numeric.html",
+    "before": {
+      "validators": [
+        "norm",
+        "normalizeErrorEntry",
+        "normalizeErrorStore",
+        "normOpenText",
+        "checkOpen",
+        "ampCheckAnswer",
+        "generateNormalExamQuestions",
+        "checkExamOpenAnswer",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 5
+    },
+    "after": {
+      "validators": [
+        "norm",
+        "normalizeErrorEntry",
+        "normalizeErrorStore",
+        "normOpenText",
+        "checkOpen",
+        "ampCheckAnswer",
+        "generateNormalExamQuestions",
+        "checkExamOpenAnswer",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 5
+    }
+  },
+  {
+    "file": "1eso/sentit-mesura.html",
+    "before": {
+      "validators": [
+        "normalizeOpenAnswer",
+        "parseTime",
+        "normalizeErrorEntry",
+        "normalizeErrorStore",
+        "normOpenMeasure",
+        "measureEquivalent1",
+        "checkOpen",
+        "checkOpenProblem",
+        "checkExamOpenAnswer",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 7
+    },
+    "after": {
+      "validators": [
+        "normalizeOpenAnswer",
+        "parseTime",
+        "normalizeErrorEntry",
+        "normalizeErrorStore",
+        "normOpenMeasure",
+        "measureEquivalent1",
+        "checkOpen",
+        "checkOpenProblem",
+        "checkExamOpenAnswer",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 3
+    }
+  },
+  {
+    "file": "1eso/sentit-algebraic.html",
+    "before": {
+      "validators": [
+        "norm",
+        "algCheckOpen",
+        "checkOpen",
+        "checkExamOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "norm",
+        "algCheckOpen",
+        "checkOpen",
+        "checkExamOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 5
+    }
+  },
+  {
+    "file": "1eso/sentit-espacial.html",
+    "before": {
+      "validators": [
+        "spNorm",
+        "spCheckAnswer",
+        "validGeneratedExercise",
+        "checkOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 7
+    },
+    "after": {
+      "validators": [
+        "spNorm",
+        "spCheckAnswer",
+        "validGeneratedExercise",
+        "checkOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 3
+    }
+  },
+  {
+    "file": "1eso/sentit-estocastic.html",
+    "before": {
+      "validators": [
+        "stNorm",
+        "stCheckOpen",
+        "checkIntegratedOpen",
+        "checkExamOpenProblem",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "stNorm",
+        "stCheckOpen",
+        "checkIntegratedOpen",
+        "checkExamOpenProblem",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 5
+    }
+  },
+  {
+    "file": "2eso/sentit-numeric.html",
+    "before": {
+      "validators": [
+        "normText",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "normText",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "2eso/sentit-mesura.html",
+    "before": {
+      "validators": [
+        "normText",
+        "measureEquivalent",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "normText",
+        "measureEquivalent",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "2eso/sentit-algebraic.html",
+    "before": {
+      "validators": [
+        "norm",
+        "nExprEquivalent",
+        "xExprEquivalent",
+        "parseXYPair",
+        "xyPairEquivalent",
+        "checkOpen",
+        "checkExamOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 2,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "norm",
+        "nExprEquivalent",
+        "xExprEquivalent",
+        "parseXYPair",
+        "xyPairEquivalent",
+        "checkOpen",
+        "checkExamOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "2eso/sentit-espacial.html",
+    "before": {
+      "validators": [
+        "normText",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "normText",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "2eso/sentit-estocastic.html",
+    "before": {
+      "validators": [
+        "normText",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "normText",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "3eso/sentit-numeric.html",
+    "before": {
+      "validators": [
+        "normText",
+        "normRichAnswer",
+        "sciNormalize",
+        "normalizeP3State",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "normText",
+        "normRichAnswer",
+        "sciNormalize",
+        "normalizeP3State",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "3eso/sentit-mesura.html",
+    "before": {
+      "validators": [
+        "norm",
+        "measureEquivalent",
+        "parseOpenMeasurement",
+        "checkOpen",
+        "checkExamOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "norm",
+        "measureEquivalent",
+        "parseOpenMeasurement",
+        "checkOpen",
+        "checkExamOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 3
+    }
+  },
+  {
+    "file": "3eso/sentit-algebraic.html",
+    "before": {
+      "validators": [
+        "norm",
+        "algebraExprEquivalent",
+        "parseXYPair",
+        "xyPairEquivalent",
+        "parseRootSet",
+        "rootSetEquivalent",
+        "checkOpen",
+        "checkExamOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 1,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "norm",
+        "algebraExprEquivalent",
+        "parseXYPair",
+        "xyPairEquivalent",
+        "parseRootSet",
+        "rootSetEquivalent",
+        "checkOpen",
+        "checkExamOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "3eso/sentit-espacial.html",
+    "before": {
+      "validators": [
+        "normText",
+        "normalizeP3State",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "normText",
+        "normalizeP3State",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "3eso/sentit-estocastic.html",
+    "before": {
+      "validators": [
+        "normText",
+        "normalizeP3State",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "normText",
+        "normalizeP3State",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "4eso/sentit-numeric.html",
+    "before": {
+      "validators": [
+        "normText",
+        "normRichAnswer",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "normText",
+        "normRichAnswer",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "4eso/sentit-mesura.html",
+    "before": {
+      "validators": [
+        "normalizeText",
+        "parseNumber",
+        "measureEquivalent",
+        "numericEquivalent",
+        "parseDMS",
+        "parseRadians",
+        "validateOpen",
+        "checkOpenAnswer",
+        "checkExamOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "normalizeText",
+        "parseNumber",
+        "measureEquivalent",
+        "numericEquivalent",
+        "parseDMS",
+        "parseRadians",
+        "validateOpen",
+        "validateOpenLegacy",
+        "checkOpenAnswer",
+        "checkExamOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "4eso/sentit-algebraic.html",
+    "before": {
+      "validators": [
+        "normText",
+        "normRichAnswer",
+        "algebraExprEquivalent",
+        "parseXYPair",
+        "xyPairEquivalent",
+        "parseRootSet",
+        "rootSetEquivalent",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 1,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "normText",
+        "normRichAnswer",
+        "algebraExprEquivalent",
+        "parseXYPair",
+        "xyPairEquivalent",
+        "parseRootSet",
+        "rootSetEquivalent",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "4eso/sentit-espacial.html",
+    "before": {
+      "validators": [
+        "normText",
+        "normRichAnswer",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "normText",
+        "normRichAnswer",
+        "checkOpen",
+        "checkExamOpen",
+        "validateGeneratedExercise",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  },
+  {
+    "file": "4eso/sentit-estocastic.html",
+    "before": {
+      "validators": [
+        "normalizeText",
+        "parseNumber",
+        "parseDMS",
+        "parseRadians",
+        "validateOpen",
+        "checkOpenAnswer",
+        "checkExamOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "parseFloatCalls": 0
+    },
+    "after": {
+      "validators": [
+        "normalizeText",
+        "parseNumber",
+        "parseDMS",
+        "parseRadians",
+        "validateOpen",
+        "validateOpenLegacy",
+        "checkOpenAnswer",
+        "checkExamOpen",
+        "normalitzaUrl"
+      ],
+      "dynamicCodeCalls": 0,
+      "sharedValidator": true,
+      "commonGradeCalls": 1
+    }
+  }
+]
