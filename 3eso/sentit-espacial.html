@@ -153,15 +153,7 @@ nav h1{font-size:1.05rem;font-weight:800;color:var(--primary);text-align:center;
 
 .all-theory-wrap{display:flex;justify-content:center;margin:0 0 18px}.theory-page-link{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:var(--primary);background:#f0eeff;border:1px solid #d9d5ff;border-radius:11px;padding:10px 14px;font-weight:800;font-size:.86rem}.theory-page-link:hover{background:#e7e3ff;border-color:var(--primary)}
 </style>
-<script>
-if (location.protocol !== "file:") {
-  const s = document.createElement("script");
-  s.async = true;
-  s.dataset.goatcounter = "https://srigual.goatcounter.com/count";
-  s.src = "https://gc.zgo.at/count.js";
-  document.head.appendChild(s);
-}
-</script>
+
 <style id="miExamP2Styles">
 .mi-exam-overlay{position:fixed;inset:0;background:rgba(22,28,36,.55);z-index:10000;display:none;align-items:center;justify-content:center;padding:18px}
 .mi-exam-overlay.open{display:flex}.mi-exam-modal{width:min(680px,100%);max-height:min(86vh,780px);overflow:auto;background:var(--card,#fff);border:1px solid var(--border,#ddd);border-radius:18px;box-shadow:0 18px 60px rgba(0,0,0,.24);padding:20px}
@@ -276,6 +268,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   }
 })();
 </script>
+<script src="../assets/js/analitica-mi.js"></script>
 </head>
 <body>
 <nav class="top-nav">
@@ -1958,7 +1951,7 @@ function showTab(id,btn){
 }
 function selectLevel(l){state.level=l;document.getElementById('btnLvl1').classList.toggle('active',l===1);document.getElementById('btnLvl2').classList.toggle('active',l===2)}
 function selectMode(m){state.mode=m;document.getElementById('btnModeA').classList.toggle('active',m==='multi');document.getElementById('btnModeB').classList.toggle('active',m==='open')}
-function startPractice(){state.exCount=0;state.correctStreak=0;resetVariationSession();showExercise()}
+function startPractice(){window.MIAnalytics?.start();state.exCount=0;state.correctStreak=0;resetVariationSession();showExercise()}
 
 /* ── PRÀCTICA ──────────────────────────────────────────────── */
 function getExerciseForMode(){
@@ -1970,7 +1963,7 @@ function getExerciseForMode(){
   return ex;
 }
 function showExercise(){
-  state.answered=false;currentEx=getExerciseForMode();state.exCount++;
+  state.answered=false;window.MIAnalytics?.shown();currentEx=getExerciseForMode();state.exCount++;
   const goal=state.level===1?10:20;
   document.getElementById('streakFill').style.width=Math.min(100,state.correctStreak/goal*100)+'%';
   document.getElementById('streakLabel').textContent=state.correctStreak+'/'+goal;
@@ -2007,7 +2000,7 @@ function checkOpen(){
   setTimeout(()=>{const b=document.getElementById('btnNext');if(b&&b.style.display!=='none'){try{b.focus({preventScroll:true})}catch(e){b.focus()}}},40);
 }
 function processAnswer(ok,studentAnswer){
-  state.answered=true;const goal=state.level===1?10:20;
+  window.MIAnalytics?.answer(ok);state.answered=true;const goal=state.level===1?10:20;
   if(ok){
     state.correctStreak++;
     document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ok"><h4>✅ Correcte!</h4>Molt bé. La resposta és correcta.</div>';
@@ -2025,7 +2018,7 @@ function processAnswer(ok,studentAnswer){
   document.getElementById('btnNext').style.display='block';if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';
 }
 function toggleSolution(btn){const box=document.getElementById('solBox');box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'Amaga explicació':'📘 Veure explicació'}
-function markTopicDone(){const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
+function markTopicDone(){window.MIAnalytics?.complete();const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
 function nextExercise(){const goal=state.level===1?10:20;if(state.correctStreak>=goal&&state.done.includes(TOPICS[state.currentTopic].id)){showCongrats()}else showExercise()}
 function showCongrats(){
   document.getElementById('feedbackArea').innerHTML='<div class="congrats"><div class="trophy">🏆</div><h2>Bloc superat!</h2><p>Has completat <b>'+TOPICS[state.currentTopic].name+'</b>.</p><button class="btn-primary" onclick="showHome()">Tornar al Sentit Espacial</button></div>';
@@ -2044,7 +2037,7 @@ function startExam(){
     const ex=t.gen(),sig=t.id+'|'+signatureOf(ex);
     if(!used.has(sig)){used.add(sig);state.examQs.push({...ex,topicName:t.name})}
   }
-  state.examQs=shuffle(state.examQs);setNavContext('Mode Examen · 3r ESO',true,true);renderExamQ();showScreen('screenExam');
+  state.examQs=shuffle(state.examQs);setNavContext('Mode Examen · 3r ESO',true,true);renderExamQ();window.MIAnalytics?.examStart();showScreen('screenExam');
 }
 function renderExamQ(){
   const q=state.examQs[state.examIdx];if(!q){finishExam();return}
@@ -2077,7 +2070,7 @@ function processExamAnswer(ok,answer){
   document.getElementById('btnNextExam').style.display='block';document.getElementById('btnNextExam').textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';
 }
 function nextExamQ(){state.examIdx++;if(state.examIdx>=state.examQs.length)finishExam();else renderExamQ()}
-function finishExam(){
+function finishExam(){window.MIAnalytics?.examSubmit();
   const total=state.examQs.length,pct=total?Math.round(state.examScore/total*100):0;
   let html='<div class="exam-summary"><div class="home-header" style="padding-top:0"><h2>📝 Resultat de l’examen</h2><p>Blocs seleccionats: '+miSelectedExamNames().join(' · ')+'</p></div><div class="exam-score">'+state.examScore+'/'+total+' · '+pct+'%</div>';
   const wrong=state.examLog.filter(x=>!x.ok);

@@ -367,20 +367,7 @@
   function finish() {
     if (session.finished) return;
     session.finished = true;
-    // Un esdeveniment per lliurament; només metadades fixes del tema.
-    if (location.protocol !== 'file:' && !['localhost', '127.0.0.1', '::1', '[::1]'].includes(location.hostname)) {
-      try {
-        if (typeof window.goatcounter?.count === 'function') {
-          window.goatcounter.count({
-            path: 'mi/exam/submitted/'+course+'/'+session.topic.id,
-            title: 'MI · Examen lliurat · '+courseLabel+' · '+session.topic.name,
-            event: true,
-            no_session: true,
-            referrer: ''
-          });
-        }
-      } catch { /* L’analítica no ha d’interrompre la correcció. */ }
-    }
+    window.MIAnalytics?.topicExam('submitted', session.topic.id);
     const correct = session.questions.filter((q,i) => session.answers[i] !== null && String(q.options[session.answers[i]]) === String(q.correct)).length;
     const empty = session.answers.filter(a => a === null).length;
     const total = session.questions.length;
@@ -392,6 +379,7 @@
     const t = topics.find(t => t.id === id); if (!t) return;
     try { session = {topic:t, questions:build(t), answers:Array(12).fill(null), finished:false}; }
     catch (error) { body.textContent = error.message; showScreen(screen.id); return; }
+    window.MIAnalytics?.topicExam('started', t.id);
     document.getElementById('navTitle').textContent = 'Examen · '+t.name;
     const sidebar = document.getElementById('sidebar'); if (sidebar) sidebar.style.display='none';
     render(); showScreen(screen.id); body.querySelector('h2').focus();

@@ -354,6 +354,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
   }
 })();
 </script>
+<script src="../assets/js/analitica-mi.js"></script>
 </head>
 <body>
 <nav class="top-nav">
@@ -2272,7 +2273,7 @@ function checkOpen(){
   processPracticeAnswer(ok,val);
 }
 
-function startPractice(){
+function startPractice(){window.MIAnalytics?.start();
   ST.exCount=0;ST.streak=0;
   const t=TOPICS[ST.currentTopic];
   resetVarietyKey(t.id);
@@ -2290,7 +2291,7 @@ function renderStreakBar(needed){
 }
 
 function showExercise(){
-  ST.answered=false;
+  ST.answered=false;window.MIAnalytics?.shown();
   const t=TOPICS[ST.currentTopic];
   curEx=decorateExercise(t,t.gen()); ST.exCount++;
   const needed=ST.level===1?NEEDED_LVL1:NEEDED_LVL2;
@@ -2334,7 +2335,7 @@ function selectAnswer(idx,btn){
 }
 
 function processPracticeAnswer(isOk,studentAnswer){
-  ST.answered=true;
+  window.MIAnalytics?.answer(isOk);ST.answered=true;
   const needed=ST.level===1?NEEDED_LVL1:NEEDED_LVL2;
   const fb=document.getElementById('feedbackArea');
   if(isOk){
@@ -2365,7 +2366,7 @@ function toggleSolution(btn){
   btn.textContent=box.classList.contains('show')?'Amagar solució':'Veure solució pas a pas';
 }
 
-function markTopicDone(){const id=TOPICS[ST.currentTopic].id;if(!ST.done.includes(id))ST.done.push(id);saveST();}
+function markTopicDone(){window.MIAnalytics?.complete();const id=TOPICS[ST.currentTopic].id;if(!ST.done.includes(id))ST.done.push(id);saveST();}
 
 function nextExercise(){
   const needed=ST.level===1?NEEDED_LVL1:NEEDED_LVL2;
@@ -2498,11 +2499,11 @@ function showOpenProblemsHome(){
     <button class="btn-secondary" onclick="showHome()">← Tornar al menú</button>`;
   showScreen('screenApp');
 }
-function startOpenProblems(n){
+function startOpenProblems(n){window.MIAnalytics?.start('open');
   OPENM={queue:buildOpenProblemSet(Math.min(n,MEASURE_PROBLEM_PATTERNS.length)),idx:0,results:[],nq:n,hint:false};
   renderOpenProblem();showScreen('screenApp');
 }
-function renderOpenProblem(){
+function renderOpenProblem(){window.MIAnalytics?.shown(OPENM.queue[OPENM.idx].topicId);
   const ex=OPENM.queue[OPENM.idx];OPENM.hint=false;
   document.getElementById('navTitle').textContent='Problemes oberts · Mesura';
   document.getElementById('appContent').innerHTML=`
@@ -2518,13 +2519,13 @@ function renderOpenProblem(){
 }
 function toggleOpenHint(){
   const box=document.getElementById('openGuide'),btn=document.getElementById('openHintBtn');
-  const show=box.style.display==='none';box.style.display=show?'block':'none';btn.textContent=show?'🙈 Amagar pista':'💡 Veure pista';OPENM.hint=show||OPENM.hint;
+  const show=box.style.display==='none';box.style.display=show?'block':'none';if(show)window.MIAnalytics?.hint();btn.textContent=show?'🙈 Amagar pista':'💡 Veure pista';OPENM.hint=show||OPENM.hint;
 }
 function checkOpenProblem(){
   const ex=OPENM.queue[OPENM.idx],inp=document.getElementById('openFinal'),ans=inp.value.trim();if(!ans)return;
   const ok=typeof ex.answerCheck==='function'?ex.answerCheck(ans):normalizeOpenAnswer(ans)===normalizeOpenAnswer(ex.correct);
   if(!ok)registerError(ex,ans,'open');
-  OPENM.results.push({ok,hint:OPENM.hint,patternId:ex.patternId,family:ex.family});
+  window.MIAnalytics?.answer(ok,ex.topicId);OPENM.results.push({ok,hint:OPENM.hint,patternId:ex.patternId,family:ex.family});
   inp.disabled=true;document.getElementById('openCheck').disabled=true;
   const sol=`<div class="solution-box show" style="display:block">${ex.solution.map((s,i)=>`<div class="step"><b>Pas ${i+1}:</b> <span class="highlight">${s}</span></div>`).join('')}</div>`;
   document.getElementById('openFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'Molt bé.':`Resposta correcta: <b>${escHtml(ex.correct)}</b>${miReviewHtml(ex)}`}${sol}${ok?'':miTheoryLinkHtml(ex.topicId)}</div><button class="btn-primary" onclick="nextOpenProblem()">${OPENM.idx+1<OPENM.queue.length?'Següent problema →':'Veure resum'}</button>`;
@@ -2532,7 +2533,7 @@ function checkOpenProblem(){
 function nextOpenProblem(){
   OPENM.idx++;
   if(OPENM.idx<OPENM.queue.length){renderOpenProblem();return;}
-  const total=OPENM.results.length,ok=OPENM.results.filter(r=>r.ok).length,pct=total?Math.round(ok/total*100):0;
+  window.MIAnalytics?.complete();const total=OPENM.results.length,ok=OPENM.results.filter(r=>r.ok).length,pct=total?Math.round(ok/total*100):0;
   document.getElementById('appContent').innerHTML=`<div class="congrats"><div class="trophy">${pct>=80?'🏆':pct>=60?'👍':'💪'}</div><h2>Sessió completada</h2><p>${ok}/${total} problemes correctes · ${pct}%</p></div><div class="app-card"><h3>Varietat treballada</h3><p>${new Set(OPENM.results.map(r=>r.patternId)).size} patrons diferents · ${new Set(OPENM.results.map(r=>r.family)).size} famílies.</p></div><button class="btn-primary" onclick="startOpenProblems(${Math.max(5,total)})">Repetir amb problemes nous</button><button class="btn-secondary" onclick="showHome()">← Tornar al menú</button>`;
 }
 
@@ -2570,7 +2571,7 @@ function startExam(){
   }
   while(ST.examQs.length<20&&pidx<problems.length)ST.examQs.push(problems[pidx++]);
   ST.examIdx=0;ST.examScore=0;document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
-  showExamQ();showScreen('screenExam');
+  showExamQ();window.MIAnalytics?.examStart();showScreen('screenExam');
 }
 function showExamQ(){
   const q=ST.examQs[ST.examIdx];
@@ -2607,7 +2608,7 @@ function checkExamOpenAnswer(){
 }
 function nextExamQ(){
   ST.examIdx++;
-  if(ST.examIdx<ST.examQs.length){showExamQ();return;}
+  if(ST.examIdx<ST.examQs.length){showExamQ();return;}window.MIAnalytics?.examSubmit();
   const pct=Math.round((ST.examScore/ST.examQs.length)*100);
   const emoji=pct>=90?'🏆':pct>=70?'👍':'💪';
   const nota=pct>=90?'9–10':pct>=70?'7–8':pct>=50?'5–6':'Cal repassar';
@@ -3140,27 +3141,6 @@ document.getElementById('navTitle').addEventListener('click',()=>{
 <!-- Només quan la web està publicada -->
 <!-- ===================================================== -->
 <script>
-
-const isLocal =
-    location.protocol === "file:" ||
-    ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
-
-if (!isLocal) {
-
-    const s = document.createElement("script");
-
-    s.async = true;
-
-    s.dataset.goatcounter =
-        "https://srigual.goatcounter.com/count";
-
-    s.src = "https://gc.zgo.at/count.js";
-
-    document.body.appendChild(s);
-
-}
-
-
 /* ── P2 · SELECTOR INDEPENDENT DE TEMES D'EXAMEN ───────── */
 var MI_EXAM_STORAGE='mi_exam_1eso_mesura_v1';
 var miExamSelectedTopics=[];

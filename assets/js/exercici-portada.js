@@ -4,8 +4,9 @@
   document.querySelectorAll('[data-mi-demo]').forEach(host => {
     const find = name => host.querySelector(`[data-demo-${name}]`);
     const form = find('form'), response = find('response'), result = find('result');
-    let current;
+    let current, lastCorrected;
     function newExercise(focus) {
+      lastCorrected = undefined;
       current = bank.generate(host.dataset.courses.split(','), current);
       find('meta').textContent = `${current.courseLabel} · ${current.sense}`;
       find('topic').textContent = current.topic;
@@ -47,6 +48,8 @@
       }
       control.removeAttribute('aria-invalid');
       const correct = bank.validate(current, raw);
+      if (raw !== lastCorrected) window.MIAnalytics?.demo('answered', current.theoryPath, correct);
+      lastCorrected = raw;
       const status = document.createElement('p');
       status.className = `exercise-demo__status exercise-demo__status--${correct ? 'correct' : 'incorrect'}`;
       status.textContent = correct ? '✅ Correcte!' : `❌ Incorrecte. Resposta correcta: ${current.answerLabel}.`;
@@ -59,6 +62,7 @@
         theory.target = 'MI_TEORIA';
         theory.textContent = '📚 Repassar la teoria d’aquest tema';
         theory.addEventListener('click', event => {
+          window.MIAnalytics?.demo('theory-error', current.theoryPath);
           if (event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
           event.preventDefault();
           const tab = window.open(theory.href, 'MI_TEORIA');

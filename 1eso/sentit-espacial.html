@@ -377,6 +377,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
   }
 })();
 </script>
+<script src="../assets/js/analitica-mi.js"></script>
 </head>
 <body>
 <nav class="top-nav">
@@ -2260,11 +2261,11 @@ function spBuildProblems(n,family='mix',diff=0,topicIds=null){
 function spStartSession(){
   const probs=spBuildProblems(spCfg.nq,spCfg.family,spCfg.diff,null);
   if(!probs.length){alert('No hi ha problemes amb aquesta combinació. Tria una altra dificultat o categoria.');return;}
-  spSession={active:true,problems:probs,idx:0,correct:0,answered:false};
+  window.MIAnalytics?.start('open');spSession={active:true,problems:probs,idx:0,correct:0,answered:false};
   spShowProblem();showScreen('screenOpenProblem');
 }
 function spShowProblem(){
-  const p=spSession.problems[spSession.idx];spSession.answered=false;
+  const p=spSession.problems[spSession.idx];spSession.answered=false;window.MIAnalytics?.shown(p.topicId);
   const fam=SP_OPEN_FAMILIES.find(x=>x.id===p.family);
   document.getElementById('spOpenMeta').innerHTML=`<span>Problema ${spSession.idx+1}/${spSession.problems.length}</span><span>· ${fam?fam.name:p.family}</span><span>· ${p.diff===1?'Bàsic':p.diff===2?'Mitjà':'Difícil'}</span>`;
   document.getElementById('spOpenQuestion').innerHTML=`${p.question}${p.svg||''}`;
@@ -2276,17 +2277,17 @@ function spShowProblem(){
   document.getElementById('spOpenCheck').style.display='block';document.getElementById('spOpenNext').style.display='none';
   setTimeout(()=>document.getElementById('spOpenAnswer')?.focus(),0);
 }
-function spToggleHint(){const b=document.getElementById('spOpenHint');const on=!b.classList.contains('show');b.classList.toggle('show',on);document.getElementById('spOpenHintBtn').textContent=on?'🙈 Amagar pista':'💡 Mostrar pista';}
+function spToggleHint(){const b=document.getElementById('spOpenHint');const on=!b.classList.contains('show');b.classList.toggle('show',on);if(on)window.MIAnalytics?.hint();document.getElementById('spOpenHintBtn').textContent=on?'🙈 Amagar pista':'💡 Mostrar pista';}
 function spSolutionHTML(p){return `<div class="sp-open-solution"><b>Solució:</b><br>${(p.solution||[]).map((s,i)=>`${i+1}. ${s}`).join('<br>')}<div style="margin-top:7px;color:var(--success);font-weight:700">Resposta final: ${p.correct}</div></div>`;}
 function spCheckAnswer(){
-  if(spSession.answered)return;const p=spSession.problems[spSession.idx];const ans=document.getElementById('spOpenAnswer').value;const ok=p.answer.check(ans);spSession.answered=true;
+  if(spSession.answered)return;const p=spSession.problems[spSession.idx];const ans=document.getElementById('spOpenAnswer').value;const ok=p.answer.check(ans);spSession.answered=true;window.MIAnalytics?.answer(ok,p.topicId);
   if(ok)spSession.correct++;else registerError({...p,topicName:(TOPICS.find(t=>t.id===p.topicId)||{}).name},ans,'open');
   document.getElementById('spOpenAnswer').disabled=true;document.getElementById('spOpenCheck').style.display='none';document.getElementById('spOpenNext').style.display='block';
   document.getElementById('spOpenFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':`La resposta correcta és <b>${p.correct}</b>.`}${spSolutionHTML(p)}${ok?'':miTheoryLinkHtml(p.topicId)}</div>`;
   document.getElementById('spOpenNext').textContent=spSession.idx+1<spSession.problems.length?'Següent problema →':'Veure resultat';
 }
 function spNextProblem(){spSession.idx++;if(spSession.idx<spSession.problems.length){spShowProblem();return;}spShowResult();}
-function spShowResult(){const total=spSession.problems.length,pct=Math.round(spSession.correct/total*100);document.getElementById('spOpenResult').innerHTML=`<div class="home-header"><h2>📊 Resultat</h2></div><div class="sp-open-result"><div class="exam-score">${spSession.correct}/${total}<span>${pct}% d'encerts</span></div><p style="color:var(--muted);margin-bottom:16px">${pct>=80?'Molt bé: el raonament espacial és sòlid.':pct>=60?'Bona feina. Repassa els problemes fallats.':'Convé tornar a practicar les famílies que han costat més.'}</p><button class="btn-primary" onclick="spStartSession()">Repetir configuració</button><button class="btn-secondary" onclick="startSpatialProblems()">Canviar configuració</button><button class="btn-secondary" onclick="spExitOpen()">← Menú principal</button></div>`;showScreen('screenOpenResult');}
+function spShowResult(){window.MIAnalytics?.complete();const total=spSession.problems.length,pct=Math.round(spSession.correct/total*100);document.getElementById('spOpenResult').innerHTML=`<div class="home-header"><h2>📊 Resultat</h2></div><div class="sp-open-result"><div class="exam-score">${spSession.correct}/${total}<span>${pct}% d'encerts</span></div><p style="color:var(--muted);margin-bottom:16px">${pct>=80?'Molt bé: el raonament espacial és sòlid.':pct>=60?'Bona feina. Repassa els problemes fallats.':'Convé tornar a practicar les famílies que han costat més.'}</p><button class="btn-primary" onclick="spStartSession()">Repetir configuració</button><button class="btn-secondary" onclick="startSpatialProblems()">Canviar configuració</button><button class="btn-secondary" onclick="spExitOpen()">← Menú principal</button></div>`;showScreen('screenOpenResult');}
 function spGenerateExamProblems(n,topicIds){
   const pool=spCandidates('mix',0,topicIds);const chosen=[];const usedPatterns=new Set();const usedFamilies=new Set();let tries=0;
   while(chosen.length<n&&tries<1000){tries++;
@@ -2665,7 +2666,7 @@ function selectTopic(i){
   state.mode='multi';
   state.exCount=0;
   state.correctStreak=0;
-  state.answered=false;
+  state.answered=false;window.MIAnalytics?.shown();
 
   const t=TOPICS[i];
 
@@ -2864,12 +2865,12 @@ function generateVariedPracticeExercise(t){
   return ex;
 }
 
-function startPractice(){
+function startPractice(){window.MIAnalytics?.start();
   state.exCount=0;
   resetPracticeVariety(TOPICS[state.currentTopic].id);
   resetIntegratedOpenVariety();
   state.correctStreak=0;
-  state.answered=false;
+  state.answered=false;window.MIAnalytics?.shown();
 
   showExercise();
 }
@@ -2879,7 +2880,7 @@ function startPractice(){
 
 function showExercise(){
   selectMode(state.mode);
-  state.answered=false;
+  state.answered=false;window.MIAnalytics?.shown();
 
   const t=TOPICS[state.currentTopic];
 
@@ -2980,7 +2981,7 @@ function checkOpen(){
 
 function processPracticeAnswer(isCorrect,studentAnswer){
   if(state.answered)return;
-  state.answered=true;
+  window.MIAnalytics?.answer(isCorrect);state.answered=true;
   if(!isCorrect)registerError(currentEx,studentAnswer,state.mode==='open'?'open':'practice');
 
   const fb=document.getElementById('feedbackArea');
@@ -3031,7 +3032,7 @@ function nextCoreIndex(i){
   return -1;
 }
 
-function markTopicDone(){const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
+function markTopicDone(){window.MIAnalytics?.complete();const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
 
 
 function nextExercise(){
@@ -3142,7 +3143,7 @@ function startExam(){
   }
   state.examQs.forEach(q=>{if(!state.examPerTopic[q.topicId])state.examPerTopic[q.topicId]={name:q.topicName||q.topicId,correct:0,total:0};state.examPerTopic[q.topicId].total++;});
   state.examIdx=0;state.examScore=0;document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
-  showExamQuestion();showScreen('screenExam');
+  showExamQuestion();window.MIAnalytics?.examStart();showScreen('screenExam');
 }
 
 function showExamQuestion(){
@@ -3189,7 +3190,7 @@ function nextExamQ(){
   if(state.examIdx<state.examQs.length){
     showExamQuestion();
     return;
-  }
+  }window.MIAnalytics?.examSubmit();
 
   const pct=
     Math.round(
@@ -4217,27 +4218,6 @@ initPage();
 <!-- Només quan la web està publicada -->
 <!-- ===================================================== -->
 <script>
-
-const isLocal =
-    location.protocol === "file:" ||
-    ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
-
-if (!isLocal) {
-
-    const s = document.createElement("script");
-
-    s.async = true;
-
-    s.dataset.goatcounter =
-        "https://srigual.goatcounter.com/count";
-
-    s.src = "https://gc.zgo.at/count.js";
-
-    document.body.appendChild(s);
-
-}
-
-
 /* ── P2 · SELECTOR INDEPENDENT DE TEMES D'EXAMEN ───────── */
 var MI_EXAM_STORAGE='mi_exam_1eso_espacial_v1';
 var miExamSelectedTopics=[];

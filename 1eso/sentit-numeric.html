@@ -381,6 +381,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
   }
 })();
 </script>
+<script src="../assets/js/analitica-mi.js"></script>
 </head>
 <body>
 <nav class="top-nav">
@@ -3936,36 +3937,14 @@ function resetVariationBagForTopic(topicId){
   else if(topicId==='notacio2'){notacioBag=[];lastNotacioType=null;}
 }
 // Una entrada per inici de pràctica; els exercicis següents no generen esdeveniments.
-function miTrackBlockPractice(){
-  if(location.protocol==='file:'||['localhost','127.0.0.1','::1','[::1]'].indexOf(location.hostname)>=0)return;
-  var topic=TOPICS[state.currentTopic];
-  if(!topic)return;
-  var mode=state.level===1?'guiat':'autonom';
-  var event={
-    path:'1eso-numeric-'+topic.id+'-'+mode,
-    title:'1r ESO · Sentit numèric · '+topic.name+' · '+(mode==='guiat'?'Guiat':'Autònom')+(topic.course==='2n'?' · Ampliació':''),
-    event:true
-  };
-  if(window.goatcounter&&typeof window.goatcounter.count==='function'){
-    try{window.goatcounter.count(event);}catch(e){} // Les estadístiques no han d'interrompre la pràctica.
-  }else{
-    var pending=miTrackBlockPractice.pending||(miTrackBlockPractice.pending=[]);
-    if(pending.length<20)pending.push(event);
-  }
-}
-function miFlushBlockPractice(){
-  var pending=miTrackBlockPractice.pending||[];
-  miTrackBlockPractice.pending=[];
-  pending.forEach(function(event){try{window.goatcounter.count(event);}catch(e){}});
-}
-function startP(){state.exCount=0;state.correctStreak=0;resetVariationBagForTopic(TOPICS[state.currentTopic].id);showEx();miTrackBlockPractice();}
+function startP(){window.MIAnalytics?.start();state.exCount=0;state.correctStreak=0;resetVariationBagForTopic(TOPICS[state.currentTopic].id);showEx();}
 function updateSBar(){
   var needed=NEEDED[state.level],pct=Math.min(100,Math.round(state.correctStreak/needed*100));
   document.getElementById('sb').style.width=pct+'%';
   document.getElementById('slb').textContent='Encerts seguits: '+state.correctStreak+' / '+needed;
 }
 function showEx(){
-  state.answered=false;var t=TOPICS[state.currentTopic];currentEx=decorateExercise(t,t.gen());state.exCount++;
+  state.answered=false;window.MIAnalytics?.shown();var t=TOPICS[state.currentTopic];currentEx=decorateExercise(t,t.gen());state.exCount++;
   var typeLabel=currentEx.isProblem?'<span class="tyb typ">&#128203; Problema</span>':'<span class="tyb tyc">&#128290; Calcul</span>';
   var dLabel=currentEx.diff?diffBadge(currentEx.diff):'';
   document.getElementById('exN').innerHTML='Exercici '+state.exCount+' '+typeLabel+' '+dLabel;
@@ -4002,7 +3981,7 @@ function checkOpen(){
   processPracticeAnswer(ok,val);
 }
 function processPracticeAnswer(isOk,studentAnswer){
-  state.answered=true;
+  window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
   var fb=document.getElementById('fbA');
   if(isOk){
@@ -4025,7 +4004,7 @@ function processPracticeAnswer(isOk,studentAnswer){
     catch(e){nextBtn.focus();}
   },40);
 }
-function markDone(){const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
+function markDone(){window.MIAnalytics?.complete();const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
 function nextEx(){
   if(state.correctStreak>=NEEDED[state.level]&&state.done.indexOf(TOPICS[state.currentTopic].id)>=0){showCongrats();return;}
   showEx();
@@ -4076,7 +4055,7 @@ function ampSelNQ(n,btn){
 function ampSelDiff(d,btn){
   ampCfg.diff=d;document.querySelectorAll('#ampDiffRow .cfg-btn').forEach(function(b){b.classList.remove('sel');});btn.classList.add('sel');
 }
-function ampStartSession(){
+function ampStartSession(){window.MIAnalytics?.start('extension');
   ampSession.probs=[];ampSession.idx=0;ampSession.results=[];ampSession.hintUsed=false;
   var gens=[];
   ampCfg.cats.forEach(function(cid){
@@ -4112,7 +4091,7 @@ function ampStartSession(){
   }
   ampShowProb();
 }
-function ampShowProb(){
+function ampShowProb(){window.MIAnalytics?.shown(ampSession.probs[ampSession.idx].topicId);
   ampSession.hintUsed=false;
   var p=ampSession.probs[ampSession.idx],pct=Math.round(ampSession.idx/ampSession.probs.length*100);
   document.getElementById('ampProgBar').style.width=pct+'%';
@@ -4136,7 +4115,7 @@ function ampShowProb(){
   setTimeout(function(){var el=document.getElementById('ampStep_0')||document.getElementById('ampFinalAns');if(el)el.focus();},50);
 }
 function ampFocusNext(i){var next=document.getElementById('ampStep_'+(i+1))||document.getElementById('ampFinalAns');if(next)next.focus();}
-function ampShowHint(){
+function ampShowHint(){window.MIAnalytics?.hint();
   var p=ampSession.probs[ampSession.idx];ampSession.hintUsed=true;
   var hints=(p.steps||[]).map(function(s){return s.hint;}).filter(function(h){return h&&String(h).trim();});
   if(!hints.length)hints=['Identifica quina operació toca fer a cada pas abans de calcular.'];
@@ -4160,7 +4139,7 @@ function ampCheckAnswer(){
     inp.classList.toggle('ok',ok);inp.classList.toggle('err',!ok&&inp.value.trim()!=='');if(ok)stepsOk++;
   });
   var finalOk=false;try{finalOk=p.answer.check(finalVal);}catch(e){}
-  finalInp.classList.toggle('ok',finalOk);finalInp.classList.toggle('err',!finalOk);
+  window.MIAnalytics?.answer(finalOk,p.topicId);finalInp.classList.toggle('ok',finalOk);finalInp.classList.toggle('err',!finalOk);
   document.querySelectorAll('#sAmpProb .step-input,#sAmpProb .final-input').forEach(function(el){el.disabled=true;});
   var cb=document.querySelector('#sAmpProb .check-btn');if(cb)cb.disabled=true;
   if(!finalOk)ampRegisterError(p,finalVal);
@@ -4179,7 +4158,7 @@ function ampCheckAnswer(){
   btn.textContent=isLast?'Veure resultat 📊':'Següent ▶';btn.onclick=isLast?ampShowResults:ampNextProb;
 }
 function ampNextProb(){ampSession.idx++;ampShowProb();}
-function ampShowResults(){
+function ampShowResults(){window.MIAnalytics?.complete();
   var total=ampSession.results.length,ok=ampSession.results.filter(function(r){return r.ok&&!r.hintUsed;}).length,part=ampSession.results.filter(function(r){return r.ok&&r.hintUsed;}).length;
   var pct=total?Math.round((ok+part*0.5)/total*100):0;
   document.getElementById('ampResEmoji').textContent=pct>=85?'🏆':pct>=65?'👍':pct>=40?'💪':'📚';
@@ -4354,7 +4333,7 @@ function startExam(){
   }
   state.examQs=arrangeExamQuestions(normals,problems);
   if(state.examQs.length===0&&available.length){var t2=available[0];try{state.examQs.push(decorateExercise(t2,t2.gen()));}catch(e){}}
-  state.examIdx=0;state.examScore=0;var cfg=document.getElementById('examCfgArea');if(cfg)cfg.innerHTML='';showEQ();showScreen('sExam');
+  state.examIdx=0;state.examScore=0;var cfg=document.getElementById('examCfgArea');if(cfg)cfg.innerHTML='';showEQ();window.MIAnalytics?.examStart();showScreen('sExam');
 }
 function showEQ(){
   var q=state.examQs[state.examIdx];
@@ -4397,7 +4376,7 @@ function checkExamOpenAnswer(){
 }
 function nextEQ(){
   state.examIdx++;
-  if(state.examIdx<state.examQs.length){showEQ();return;}
+  if(state.examIdx<state.examQs.length){showEQ();return;}window.MIAnalytics?.examSubmit();
   var pct=Math.round((state.examScore/state.examQs.length)*100);
   var em=pct>=90?'&#127942;':pct>=70?'&#128077;':pct>=50?'&#128170;':'&#128218;';
   var problemCount=state.examQs.filter(function(q){return q.examProblem;}).length;
@@ -4604,21 +4583,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
 <!-- ===================================================== -->
 <!-- GOATCOUNTER · només quan la web està publicada -->
 <!-- ===================================================== -->
-<script>
-(function(){
-  const isLocal = location.protocol === "file:" ||
-    ["localhost","127.0.0.1","::1","[::1]"].includes(location.hostname);
-  if(!isLocal){
-    const s=document.createElement("script");
-    s.async=true;
-    s.dataset.goatcounter="https://srigual.goatcounter.com/count";
-    s.src="https://gc.zgo.at/count.js";
-    s.onload=miFlushBlockPractice;
-    s.onerror=function(){miTrackBlockPractice.pending=[];};
-    document.body.appendChild(s);
-  }
-})();
-</script>
+
 
 <!-- MI_AVISOS_FORM_V1 -->
 <style id="mi-avisos-style">

@@ -25,6 +25,8 @@ jobs:
       - name: Verify topic access, preserved progress and search links
         run: |
           node scripts/comprova-access-estatic.cjs
+          node scripts/comprova-analitica-guardes.cjs
+          node scripts/comprova-analitica-uniforme.cjs
           node scripts/comprova-access-lliure.cjs
           node scripts/comprova-practica-cercador.cjs
       - uses: actions/configure-pages@v5

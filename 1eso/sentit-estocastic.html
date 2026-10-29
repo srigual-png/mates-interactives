@@ -354,6 +354,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
   }
 })();
 </script>
+<script src="../assets/js/analitica-mi.js"></script>
 </head>
 <body>
 <nav class="top-nav">
@@ -2336,17 +2337,17 @@ function startStochasticConstruction(){
   document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Construeix gràfics · Sentit Estocàstic';
   var probs=stPickProblems(5,'construccio',0,null,false);
   if(!probs.length){alert('No hi ha problemes disponibles per a aquesta selecció.');return;}
-  stOpenSession={active:true,problems:probs,idx:0,correct:0,answered:false};stRenderOpenProblem();showScreen('screenOpenProblem');
+  window.MIAnalytics?.start('open');stOpenSession={active:true,problems:probs,idx:0,correct:0,answered:false};stRenderOpenProblem();showScreen('screenOpenProblem');
 }
 function stExitOpenProblems(){stOpenSession.active=false;showHome();}
-function stStartOpenSession(){stOpenCfg.family=document.getElementById('stOpenFamily').value;stOpenCfg.nq=Number(document.getElementById('stOpenN').value);stOpenCfg.diff=Number(document.getElementById('stOpenDiff').value);var probs=stPickProblems(stOpenCfg.nq,stOpenCfg.family,stOpenCfg.diff,null,false);if(!probs.length){alert('No hi ha problemes amb aquesta selecció. Prova una altra família o dificultat.');return;}stOpenSession={active:true,problems:probs,idx:0,correct:0,answered:false};stRenderOpenProblem();showScreen('screenOpenProblem');}
-function stRenderOpenProblem(){var p=stOpenSession.problems[stOpenSession.idx];stOpenSession.answered=false;stConstructEx=p;stConstructCurrent=p.target?p.target.map(function(){return 0;}):[];document.getElementById('stOpenProblem').innerHTML='<div class="st-open-card"><div class="st-open-meta">Problema '+(stOpenSession.idx+1)+'/'+stOpenSession.problems.length+' · '+stTopicName(p.topicId)+' <span class="st-open-family">'+stFamilyName(p.family)+'</span><span class="st-open-diff">'+stDiffLabel(p.diff)+'</span></div><div class="st-open-q">'+p.question+'</div>'+(p.visual?'<div class="ex-visual">'+p.visual+'</div>':'')+'</div><button class="btn-secondary" id="stHintBtn" onclick="stToggleHint()" style="margin-bottom:8px">💡 Mostrar pista</button><div class="st-open-hint" id="stOpenHint">'+(p.hint||[]).map(function(h){return '• '+h;}).join('<br>')+'</div><div id="stOpenAnswer"></div><div id="stOpenFeedback"></div><button class="btn-primary" id="stOpenCheck" onclick="stCheckOpen()">Comprova ✓</button><button class="btn-primary" id="stOpenNext" onclick="stNextOpen()" style="display:none">Següent problema →</button><button class="btn-secondary" onclick="stRenderOpenHome()">← Canviar configuració</button>';
+function stStartOpenSession(){stOpenCfg.family=document.getElementById('stOpenFamily').value;stOpenCfg.nq=Number(document.getElementById('stOpenN').value);stOpenCfg.diff=Number(document.getElementById('stOpenDiff').value);var probs=stPickProblems(stOpenCfg.nq,stOpenCfg.family,stOpenCfg.diff,null,false);if(!probs.length){alert('No hi ha problemes amb aquesta selecció. Prova una altra família o dificultat.');return;}window.MIAnalytics?.start('open');stOpenSession={active:true,problems:probs,idx:0,correct:0,answered:false};stRenderOpenProblem();showScreen('screenOpenProblem');}
+function stRenderOpenProblem(){var p=stOpenSession.problems[stOpenSession.idx];stOpenSession.answered=false;window.MIAnalytics?.shown(p.topicId);stConstructEx=p;stConstructCurrent=p.target?p.target.map(function(){return 0;}):[];document.getElementById('stOpenProblem').innerHTML='<div class="st-open-card"><div class="st-open-meta">Problema '+(stOpenSession.idx+1)+'/'+stOpenSession.problems.length+' · '+stTopicName(p.topicId)+' <span class="st-open-family">'+stFamilyName(p.family)+'</span><span class="st-open-diff">'+stDiffLabel(p.diff)+'</span></div><div class="st-open-q">'+p.question+'</div>'+(p.visual?'<div class="ex-visual">'+p.visual+'</div>':'')+'</div><button class="btn-secondary" id="stHintBtn" onclick="stToggleHint()" style="margin-bottom:8px">💡 Mostrar pista</button><div class="st-open-hint" id="stOpenHint">'+(p.hint||[]).map(function(h){return '• '+h;}).join('<br>')+'</div><div id="stOpenAnswer"></div><div id="stOpenFeedback"></div><button class="btn-primary" id="stOpenCheck" onclick="stCheckOpen()">Comprova ✓</button><button class="btn-primary" id="stOpenNext" onclick="stNextOpen()" style="display:none">Següent problema →</button><button class="btn-secondary" onclick="stRenderOpenHome()">← Canviar configuració</button>';
   if(p.kind==='construct')stRenderConstruct(p,false);else if(p.kind==='pie')stRenderPieInputs(p);else document.getElementById('stOpenAnswer').innerHTML='<input class="st-open-input" id="stOpenInput" type="text" placeholder="Escriu la resposta final…" autocomplete="off" spellcheck="false" onkeydown="if(event.key===&quot;Enter&quot;){event.preventDefault();stCheckOpen();}">';
 }
-function stToggleHint(){var b=document.getElementById('stOpenHint'),btn=document.getElementById('stHintBtn');b.classList.toggle('show');btn.textContent=b.classList.contains('show')?'🙈 Amagar pista':'💡 Mostrar pista';}
-function stCheckOpen(){if(stOpenSession.answered)return;var p=stOpenSession.problems[stOpenSession.idx],val=stStudentOpenValue(p);if((p.kind==='input'||!p.kind)&&!val)return;var ok=stEvaluateOpen(p);stOpenSession.answered=true;if(ok)stOpenSession.correct++;var inp=document.getElementById('stOpenInput');if(inp){inp.disabled=true;inp.className='st-open-input '+(ok?'ok':'ko');}document.querySelectorAll('.st-pie-input').forEach(function(x){x.disabled=true;});var correct=p.answer?p.answer.val:stConstructCorrectText(p),errObj={topicId:p.topicId,topicName:stTopicName(p.topicId),type:p.patternId,question:p.question,visual:p.visual||'',correct:correct,options:[],guide:(p.hint||[]).slice(),solution:(p.solution||[]).slice()};if(!ok)registerError(errObj,val,'open');if((p.kind==='construct')&&!ok)stRenderConstruct(p,true);document.getElementById('stOpenFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'+(ok?'':'Resposta correcta: <b>'+correct+'</b>'+miReviewHtml(errObj))+'<div class="st-open-solution">'+(p.solution||[]).map(function(s,i){return '<div><b>Pas '+(i+1)+':</b> '+s+'</div>';}).join('')+'</div>'+(ok?'':miTheoryLinkHtml(p.topicId))+'</div>';document.getElementById('stOpenCheck').style.display='none';document.getElementById('stOpenNext').style.display='block';document.getElementById('stOpenNext').textContent=stOpenSession.idx+1<stOpenSession.problems.length?'Següent problema →':'Veure resultat';setTimeout(function(){document.getElementById('stOpenNext').focus();},40);}
+function stToggleHint(){var b=document.getElementById('stOpenHint'),btn=document.getElementById('stHintBtn');b.classList.toggle('show');if(b.classList.contains('show'))window.MIAnalytics?.hint();btn.textContent=b.classList.contains('show')?'🙈 Amagar pista':'💡 Mostrar pista';}
+function stCheckOpen(){if(stOpenSession.answered)return;var p=stOpenSession.problems[stOpenSession.idx],val=stStudentOpenValue(p);if((p.kind==='input'||!p.kind)&&!val)return;var ok=stEvaluateOpen(p);stOpenSession.answered=true;window.MIAnalytics?.answer(ok,p.topicId);if(ok)stOpenSession.correct++;var inp=document.getElementById('stOpenInput');if(inp){inp.disabled=true;inp.className='st-open-input '+(ok?'ok':'ko');}document.querySelectorAll('.st-pie-input').forEach(function(x){x.disabled=true;});var correct=p.answer?p.answer.val:stConstructCorrectText(p),errObj={topicId:p.topicId,topicName:stTopicName(p.topicId),type:p.patternId,question:p.question,visual:p.visual||'',correct:correct,options:[],guide:(p.hint||[]).slice(),solution:(p.solution||[]).slice()};if(!ok)registerError(errObj,val,'open');if((p.kind==='construct')&&!ok)stRenderConstruct(p,true);document.getElementById('stOpenFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'+(ok?'':'Resposta correcta: <b>'+correct+'</b>'+miReviewHtml(errObj))+'<div class="st-open-solution">'+(p.solution||[]).map(function(s,i){return '<div><b>Pas '+(i+1)+':</b> '+s+'</div>';}).join('')+'</div>'+(ok?'':miTheoryLinkHtml(p.topicId))+'</div>';document.getElementById('stOpenCheck').style.display='none';document.getElementById('stOpenNext').style.display='block';document.getElementById('stOpenNext').textContent=stOpenSession.idx+1<stOpenSession.problems.length?'Següent problema →':'Veure resultat';setTimeout(function(){document.getElementById('stOpenNext').focus();},40);}
 function stNextOpen(){stOpenSession.idx++;if(stOpenSession.idx<stOpenSession.problems.length){stRenderOpenProblem();return;}stRenderOpenResult();}
-function stRenderOpenResult(){var total=stOpenSession.problems.length,pct=Math.round(stOpenSession.correct/total*100),emoji=pct>=90?'🏆':pct>=70?'👍':'💪';document.getElementById('stOpenResult').innerHTML='<div class="home-header"><h2>'+emoji+' Resultat</h2><p>Problemes oberts · Sentit Estocàstic</p></div><div class="st-open-summary"><div class="big">'+stOpenSession.correct+'/'+total+'</div><p>'+pct+'% d’encerts</p></div><button class="btn-primary" onclick="stStartOpenSession()">Repetir configuració</button><button class="btn-secondary" onclick="stRenderOpenHome()">Canviar configuració</button><button class="btn-secondary" onclick="stExitOpenProblems()">Tornar al menú</button>';showScreen('screenOpenResult');}
+function stRenderOpenResult(){window.MIAnalytics?.complete();var total=stOpenSession.problems.length,pct=Math.round(stOpenSession.correct/total*100),emoji=pct>=90?'🏆':pct>=70?'👍':'💪';document.getElementById('stOpenResult').innerHTML='<div class="home-header"><h2>'+emoji+' Resultat</h2><p>Problemes oberts · Sentit Estocàstic</p></div><div class="st-open-summary"><div class="big">'+stOpenSession.correct+'/'+total+'</div><p>'+pct+'% d’encerts</p></div><button class="btn-primary" onclick="stStartOpenSession()">Repetir configuració</button><button class="btn-secondary" onclick="stRenderOpenHome()">Canviar configuració</button><button class="btn-secondary" onclick="stExitOpenProblems()">Tornar al menú</button>';showScreen('screenOpenResult');}
 function stGenerateExamProblems(n,topicIds){return stPickProblems(n,'mix',0,topicIds,true);}
 
 
@@ -2588,7 +2589,7 @@ function stNextIntegratedOpen(topicId){
   }
   return null;
 }
-function startPractice(){
+function startPractice(){window.MIAnalytics?.start();
   state.exCount=0;
   state.correctStreak=0;
   var currentTopicId=TOPICS[state.currentTopic]&&TOPICS[state.currentTopic].id;
@@ -2614,7 +2615,7 @@ function updateStreakBar(){
 
 function showExercise(){
   selectMode(state.mode);
-  state.answered=false;
+  state.answered=false;window.MIAnalytics?.shown();
   var t=TOPICS[state.currentTopic];
   if(state.mode==='open'){
     currentEx=stNextIntegratedOpen(t.id);
@@ -2669,7 +2670,7 @@ function checkIntegratedOpen(){
   processIntegratedOpenAnswer(ok,val);
 }
 function processIntegratedOpenAnswer(ok,studentAnswer){
-  state.answered=true;
+  window.MIAnalytics?.answer(ok);state.answered=true;
   var needed=NEEDED[state.level];
   var correct=currentEx&&currentEx.answer?currentEx.answer.val:'—';
   var errObj={topicId:currentEx.topicId,topicName:stTopicName(currentEx.topicId),type:currentEx.patternId,question:currentEx.question,visual:currentEx.visual||'',correct:correct,options:[],guide:(currentEx.hint||[]).slice(),solution:(currentEx.solution||[]).slice()};
@@ -2690,7 +2691,7 @@ function selectAnswer(idx,btn){
   if(state.answered)return;
   state.answered=true;
   var ans=currentEx.options[idx];
-  var isCorrect=ans===currentEx.correct;
+  var isCorrect=ans===currentEx.correct;window.MIAnalytics?.answer(isCorrect);
   document.querySelectorAll('.opt-btn').forEach(b=>{
     b.disabled=true;
     if(b.textContent.trim()===String(currentEx.correct).trim())b.classList.add('correct');
@@ -2720,7 +2721,7 @@ function toggleSolution(btn){
   btn.textContent=box.classList.contains('show')?'Amagar solució':'Veure solució pas a pas';
 }
 
-function markTopicDone(){const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
+function markTopicDone(){window.MIAnalytics?.complete();const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
 
 function nextExercise(){
   if(state.correctStreak>=NEEDED[state.level]&&state.done.indexOf(TOPICS[state.currentTopic].id)>=0){
@@ -2769,7 +2770,7 @@ function startExam(){
     ef.topicId=ef.topicId||tf.id;ef.topicName=tf.name;ef.isOpenProblem=false;state.examQs.push(ef);
   }
   state.examIdx=0;state.examScore=0;document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
-  showExamQuestion();showScreen('screenExam');
+  showExamQuestion();window.MIAnalytics?.examStart();showScreen('screenExam');
 }
 
 function showExamQuestion(){
@@ -2824,7 +2825,7 @@ function toggleExamSolution(btn){var box=document.getElementById('examSolBox');i
 
 function nextExamQ(){
   state.examIdx++;
-  if(state.examIdx<state.examQs.length){showExamQuestion();return;}
+  if(state.examIdx<state.examQs.length){showExamQuestion();return;}window.MIAnalytics?.examSubmit();
   var pct=Math.round((state.examScore/state.examQs.length)*100),emoji=pct>=80?'🏆':pct>=60?'👍':'💪';
   var byTopic={};state.examLog.forEach(function(l){if(!byTopic[l.topic])byTopic[l.topic]={ok:0,tot:0};byTopic[l.topic].tot++;if(l.ok)byTopic[l.topic].ok++;});
   var topicHtml='<div style="margin:14px 0 8px;font-weight:600">Resultats per tema:</div>';
@@ -2953,27 +2954,6 @@ document.getElementById('navTitle').addEventListener('click',function(){
 <!-- Només quan la web està publicada -->
 <!-- ===================================================== -->
 <script>
-
-const isLocal =
-    location.protocol === "file:" ||
-    ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
-
-if (!isLocal) {
-
-    const s = document.createElement("script");
-
-    s.async = true;
-
-    s.dataset.goatcounter =
-        "https://srigual.goatcounter.com/count";
-
-    s.src = "https://gc.zgo.at/count.js";
-
-    document.body.appendChild(s);
-
-}
-
-
 /* ── P2 · SELECTOR INDEPENDENT DE TEMES D'EXAMEN ───────── */
 var MI_EXAM_STORAGE='mi_exam_1eso_estocastic_v1';
 var miExamSelectedTopics=[];

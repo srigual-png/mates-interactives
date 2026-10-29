@@ -102,6 +102,7 @@
 
 <link rel="stylesheet" href="assets/css/cercador-mi.css">
 <script defer src="assets/js/cercador-mi.js"></script>
+<script src="assets/js/analitica-mi.js"></script>
 </head>
 
 <body>
@@ -541,28 +542,7 @@
 <!-- GOATCOUNTER -->
 <!-- Només quan la web està publicada -->
 <!-- ===================================================== -->
-<script>
 
-const isLocal =
-    location.protocol === "file:" ||
-    ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
-
-if (!isLocal) {
-
-    const s = document.createElement("script");
-
-    s.async = true;
-
-    s.dataset.goatcounter =
-        "https://srigual.goatcounter.com/count";
-
-    s.src = "https://gc.zgo.at/count.js";
-
-    document.body.appendChild(s);
-
-}
-
-</script>
 
 </body>
 

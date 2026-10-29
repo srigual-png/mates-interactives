@@ -371,6 +371,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
   }
 })();
 </script>
+<script src="../assets/js/analitica-mi.js"></script>
 </head>
 <body>
 <nav class="top-nav">
@@ -1938,10 +1939,10 @@ function algStartOpenSession(){
   algOpenCfg.family=document.getElementById('algOpenFamily').value;algOpenCfg.nq=Number(document.getElementById('algOpenN').value);algOpenCfg.diff=Number(document.getElementById('algOpenDiff').value);
   const probs=algPickProblems(algOpenCfg.nq,algOpenCfg.family,algOpenCfg.diff);
   if(!probs.length){alert('No hi ha prou problemes amb aquesta selecció. Prova una altra dificultat o família.');return;}
-  algOpenSession={active:true,problems:probs,idx:0,correct:0,answered:false};algRenderOpenProblem();showScreen('screenOpenProblem');
+  window.MIAnalytics?.start('open');algOpenSession={active:true,problems:probs,idx:0,correct:0,answered:false};algRenderOpenProblem();showScreen('screenOpenProblem');
 }
 function algRenderOpenProblem(){
-  const p=algOpenSession.problems[algOpenSession.idx];algOpenSession.answered=false;
+  const p=algOpenSession.problems[algOpenSession.idx];algOpenSession.answered=false;window.MIAnalytics?.shown(p.topicId);
   const family=ALG_OPEN_FAMILIES.find(f=>f.id===p.family);
   document.getElementById('algOpenProblem').innerHTML=`
     <div class="alg-open-card"><div class="alg-open-meta">Problema ${algOpenSession.idx+1}/${algOpenSession.problems.length} · ${algTopicName(p.topicId)} <span class="alg-open-family">${family?family.name:p.family}</span><span class="alg-open-diff">${algDiffLabel(p.diff)}</span></div><div class="alg-open-q">${p.question}</div></div>
@@ -1953,16 +1954,17 @@ function algRenderOpenProblem(){
     <button class="btn-primary" id="algOpenNext" onclick="algNextOpen()" style="display:none">Següent problema →</button>
     <button class="btn-secondary" onclick="algRenderOpenHome()">← Canviar configuració</button>`;
 }
-function algToggleHint(){const b=document.getElementById('algOpenHint'),btn=document.getElementById('algHintBtn');b.classList.toggle('show');btn.textContent=b.classList.contains('show')?'🙈 Amagar pista':'💡 Mostrar pista';}
+function algToggleHint(){const b=document.getElementById('algOpenHint'),btn=document.getElementById('algHintBtn');b.classList.toggle('show');if(b.classList.contains('show'))window.MIAnalytics?.hint();btn.textContent=b.classList.contains('show')?'🙈 Amagar pista':'💡 Mostrar pista';}
 function algCheckOpen(){
   if(algOpenSession.answered)return;const p=algOpenSession.problems[algOpenSession.idx],inp=document.getElementById('algOpenInput'),val=inp.value.trim();if(!val)return;
-  const ok=p.answer.check(val);algOpenSession.answered=true;inp.disabled=true;inp.className='alg-open-input '+(ok?'ok':'ko');if(ok)algOpenSession.correct++;
+  const ok=p.answer.check(val);algOpenSession.answered=true;window.MIAnalytics?.answer(ok,p.topicId);inp.disabled=true;inp.className='alg-open-input '+(ok?'ok':'ko');if(ok)algOpenSession.correct++;
   const errObj={topicId:p.topicId,topicName:algTopicName(p.topicId),type:p.patternId,question:p.question,correct:p.answer.val,options:[],guide:[...(p.hint||[])],solution:[...(p.solution||[])]};if(!ok)registerError(errObj,val,'open');
   document.getElementById('algOpenFeedback').innerHTML=`<div class="feedback-box ${ok?'ok':'ko'}"><h4>${ok?'✅ Correcte!':'❌ Incorrecte'}</h4>${ok?'':`Resposta correcta: <b>${p.answer.val}</b>`}<div class="alg-open-solution">${(p.solution||[]).map((s,i)=>`<div><b>Pas ${i+1}:</b> ${s}</div>`).join('')}</div>${ok?'':miTheoryLinkHtml(p.topicId)}</div>`;
   document.getElementById('algOpenCheck').style.display='none';document.getElementById('algOpenNext').style.display='block';document.getElementById('algOpenNext').textContent=algOpenSession.idx+1<algOpenSession.problems.length?'Següent problema →':'Veure resultat';
 }
 function algNextOpen(){algOpenSession.idx++;if(algOpenSession.idx<algOpenSession.problems.length){algRenderOpenProblem();return;}algRenderOpenResult();}
 function algRenderOpenResult(){
+  window.MIAnalytics?.complete();
   const total=algOpenSession.problems.length,pct=Math.round(algOpenSession.correct/total*100),emoji=pct>=90?'🏆':pct>=70?'👍':'💪';
   document.getElementById('algOpenResult').innerHTML=`<div class="home-header"><h2>${emoji} Resultat</h2><p>Problemes oberts · Sentit Algebraic</p></div><div class="alg-open-summary"><div class="big">${algOpenSession.correct}/${total}</div><p>${pct}% d'encerts</p></div><button class="btn-primary" onclick="algStartOpenSession()">Repetir configuració</button><button class="btn-secondary" onclick="algRenderOpenHome()">Canviar configuració</button><button class="btn-secondary" onclick="algExitOpenProblems()">Tornar al menú</button>`;
   showScreen('screenOpenResult');
@@ -2258,10 +2260,10 @@ function selectTopic(i){
 
 function selectLevel(l){state.level=l;document.getElementById('btnLvl1').classList.toggle('active',l===1);document.getElementById('btnLvl2').classList.toggle('active',l===2);}
 function selectMode(m){state.mode=m;document.getElementById('btnModeA').classList.toggle('active',m==='multi');document.getElementById('btnModeB').classList.toggle('active',m==='open');}
-function startPractice(){state.exCount=0;state.correctStreak=0;showExercise();}
+function startPractice(){window.MIAnalytics?.start();state.exCount=0;state.correctStreak=0;showExercise();}
 
 function showExercise(){
-  state.answered=false;
+  state.answered=false;window.MIAnalytics?.shown();
   const topic=TOPICS[state.currentTopic];
   currentEx=(state.mode==='open'&&topic.course==='1r')?(algIntegratedOpenExercise(topic.id)||topic.gen()):topic.gen();
   state.exCount++;
@@ -2310,7 +2312,7 @@ function selectAnswer(idx,btn){
 }
 
 function processAnswer(ok,studentAnswer){
-  state.answered=true;
+  window.MIAnalytics?.answer(ok);state.answered=true;
   const goal=state.level===1?10:20;
   if(ok){
     state.correctStreak++;
@@ -2334,7 +2336,7 @@ function processAnswer(ok,studentAnswer){
 }
 
 function toggleSolution(btn){const box=document.getElementById('solBox');box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'Amagar solució':'Veure solució pas a pas';}
-function markTopicDone(){const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
+function markTopicDone(){window.MIAnalytics?.complete();const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
 function nextExercise(){
   const goal=state.level===1?10:20;
   if(state.correctStreak>=goal&&state.done.includes(TOPICS[state.currentTopic].id)){showCongrats();return;}
@@ -2387,7 +2389,7 @@ function startExam(){
     state.examQs.push(Object.assign({},ex,{topicId:ex.topicId||t.id,topicName:t.name,isOpenProblem:false}));
   }
   document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Mode Examen · 1r ESO';
-  renderExamQ();showScreen('screenExam');
+  renderExamQ();window.MIAnalytics?.examStart();showScreen('screenExam');
 }
 
 function renderExamQ(){
@@ -2425,7 +2427,7 @@ function selectExamAnswer(idx,btn){
 }
 function toggleExamSolution(btn){const box=document.getElementById('examSolBox');if(!box)return;box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'📕 Amaga explicació':'📘 Veure explicació';}
 function nextExamQ(){
-  state.examIdx++;if(state.examIdx<state.examQs.length){renderExamQ();return;}
+  state.examIdx++;if(state.examIdx<state.examQs.length){renderExamQ();return;}window.MIAnalytics?.examSubmit();
   const pct=Math.round((state.examScore/state.examQs.length)*100),nota=(state.examScore/state.examQs.length*10).toFixed(1),emoji=pct>=90?'🏆':pct>=70?'👍':'💪';
   const byTopic={};state.examLog.forEach(l=>{if(!byTopic[l.topic])byTopic[l.topic]={ok:0,tot:0};byTopic[l.topic].tot++;if(l.ok)byTopic[l.topic].ok++;});
   let topicHtml='<div style="margin:14px 0 8px;font-weight:600">Resultats per tema:</div>';Object.entries(byTopic).forEach(([name,v])=>{const col=v.ok===v.tot?'var(--success)':v.ok/v.tot>=.5?'var(--warn)':'var(--error)';topicHtml+='<div style="display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:.85rem"><span>'+name+'</span><span style="font-weight:700;color:'+col+'">'+v.ok+'/'+v.tot+'</span></div>';});
@@ -2696,27 +2698,6 @@ loadState();initPage();
 <!-- Només quan la web està publicada -->
 <!-- ===================================================== -->
 <script>
-
-const isLocal =
-    location.protocol === "file:" ||
-    ["localhost", "127.0.0.1", "::1", "[::1]"].includes(location.hostname);
-
-if (!isLocal) {
-
-    const s = document.createElement("script");
-
-    s.async = true;
-
-    s.dataset.goatcounter =
-        "https://srigual.goatcounter.com/count";
-
-    s.src = "https://gc.zgo.at/count.js";
-
-    document.body.appendChild(s);
-
-}
-
-
 /* ── P2 · SELECTOR INDEPENDENT DE TEMES D'EXAMEN ───────── */
 var MI_EXAM_STORAGE='mi_exam_1eso_algebraic_v1';
 var miExamSelectedTopics=[];
