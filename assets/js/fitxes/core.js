@@ -24,10 +24,11 @@
   function allocate(c,catalog) {
     const error=validate(c,catalog); if(error) throw new Error(error);
     const topics=c.topics.map(id=>catalog.find(t=>t.id===id)), quotas=counts(c.count,c.percentages);
+    quotas.forEach((n,i)=>{const available=topics.reduce((s,t)=>s+(t.levels.includes(i+1)?(t.capacities?.[i]??c.count):0),0);if(n>available)throw new Error(`No hi ha prou exercicis diferents de dificultat ${['baixa','mitjana','alta'][i]} en els temes seleccionats: se’n demanen ${n} i n’hi ha ${available}. Redueix-ne la quantitat o selecciona més temes.`);});
     const sink=4+topics.length, graph=Array.from({length:sink+1},()=>[]);
     function edge(a,b,cap,cost){const x={to:b,cap,cost,rev:graph[b].length,initial:cap};graph[a].push(x);graph[b].push({to:a,cap:0,cost:-cost,rev:graph[a].length-1});return x;}
     quotas.forEach((v,i)=>edge(0,i+1,v,0));
-    const matrix=topics.map((t,i)=>[1,2,3].map(l=>edge(l,4+i,t.levels.includes(l)?c.count:0,0)));
+    const matrix=topics.map((t,i)=>[1,2,3].map(l=>edge(l,4+i,t.levels.includes(l)?Math.min(c.count,t.capacities?.[l-1]??c.count):0,0)));
     const base=Math.floor(c.count/topics.length);
     topics.forEach((t,i)=>{edge(4+i,sink,base,0);edge(4+i,sink,1,100);});
     let flow=0;
@@ -47,7 +48,7 @@
       for(let l=1;l<=3;l++){
         let obtained=0;
         for(let attempt=0;obtained<quota[l-1]&&attempt<1200;attempt++){
-          const q=topic.generate(l); if(!q||q.level!==l)continue;
+          const q=await topic.generate(l); if(!q||q.level!==l)continue;
           const key=JSON.stringify([topic.id,q.fingerprint||q.question.replace(/\s+/g,' ').trim(),(q.options||[]).slice().sort()]);
           if(used.has(key))continue;
           used.add(key);questions.push({...q,key,topicId:topic.id,topicName:topic.name});obtained++;

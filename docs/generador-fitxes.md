@@ -1,6 +1,6 @@
 # Generador de fitxes de Mates Interactives
 
-Implementat el 30 d’octubre de 2026, exclusivament a la portada del sentit numèric de 1r d’ESO. La resta de cursos i sentits no s’han activat.
+Primera implementació el 30 d’octubre de 2026 a la portada del sentit numèric de 1r d’ESO. Posteriorment s’ha incorporat el sentit numèric de 2n reutilitzant aquest motor: vegeu [la documentació de 2n](generador-fitxes-2eso.md). Les altres portades no s’han activat.
 
 ## Fitxers
 
