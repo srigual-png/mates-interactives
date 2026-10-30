@@ -877,7 +877,7 @@ function genReals4ESO(forceType){
     allowOpen=false;
     const n=nonSquareBetween(2,30),sq=shuffle([4,9,16,25,36,49])[0];
     const irr=`√${n}`;correct=irr;
-    options=uniq4(correct,[`√${sq}`,fracStr(rnd(1,8),rnd(2,9)),fmtNum(rnd(1,40)/10,1),String(rnd(-8,8)),fracStr(rnd(1,9),shuffle([2,3,4,5,6,7,8])[0])]);
+    options=uniq4(correct,[`√${sq}`,fracStr(rnd(1,8),rnd(2,9)),fmtNum(rnd(1,40)/10,1),String(rnd(-8,8)),fracStr(rnd(1,9),shuffle([2,3,4,5,6,7,8])[0]),'0','1','−1']);
     question='Quin d’aquests nombres és <b>irracional</b>?';
     guide=['Una fracció d’enters és racional.','Un decimal exacte és racional.','Una arrel quadrada només és enter quan el radicand és un quadrat perfecte.'];
     solution=[`${sq} és un quadrat perfecte, així que √${sq} és enter.`,`Les fraccions i els decimals exactes de les altres opcions són racionals.`,`${n} no és un quadrat perfecte: <b>√${n}</b> és irracional.`];
@@ -954,7 +954,7 @@ function genReals4ESO(forceType){
     allowOpen=false;
     const n=nonSquareBetween(2,35),a=rnd(1,5),irr=`${a} + √${n}`;correct=irr;
     const sq=shuffle([4,9,16,25])[0];
-    options=uniq4(correct,[`${a} + √${sq}`,fracStr(rnd(2,9),rnd(2,9)),fmtNum(rnd(11,39)/10,1),String(rnd(-9,9)),fracStr(rnd(1,9),shuffle([2,3,4,5,6,7,8])[0])]);
+    options=uniq4(correct,[`${a} + √${sq}`,fracStr(rnd(2,9),rnd(2,9)),fmtNum(rnd(11,39)/10,1),String(rnd(-9,9)),fracStr(rnd(1,9),shuffle([2,3,4,5,6,7,8])[0]),'0','1','−1']);
     question='Quina expressió representa un nombre <b>real però no racional</b>?';
     guide=['“Real però no racional” vol dir irracional.','Una arrel de quadrat perfecte és enter.','Sumar un racional a un irracional continua donant un irracional.'];
     solution=[`${n} no és quadrat perfecte, de manera que √${n} és irracional.`,`Com ${a} és racional, ${a} + √${n} continua sent irracional.`,`Per tant, la resposta és <b>${correct}</b>.`];

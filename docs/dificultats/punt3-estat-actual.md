@@ -1,6 +1,6 @@
 # Punt 3 — estat de la continuació
 
-**Estat: parcial. 7 blocs amb classificació revisada; 13 blocs pendents. Instantània preparada per a la publicació autoritzada; la verificació pública queda al registre publicacio-punt3.json.**
+**Estat: parcial. 7 blocs amb classificació revisada; 13 blocs pendents. Publicació verificada: d01d71a.**
 
 El registre anterior de 1r numèric es conserva. Aquesta continuació reclassifica 1r mesura, algebraic, espacial i estocàstic, i 2n numèric i mesura. Les decisions explícites són als fitxers `revisio-*-punt3.json`; el compilador `scripts/compila-revisions-punt3.cjs` les aplica al contracte compartit. No s’ha aplicat una regla automàtica de paraules clau per decidir els nivells.
 
@@ -52,4 +52,4 @@ La font de les quotes dels temes revisats és la cobertura real. Un examen pot d
 
 ## Efecte sobre fitxes i publicació
 
-No s’han modificat formularis ni exportacions Word/PDF. La classificació nova s’aplica als generadors web embolcallats. Els camps de variant no alteren el càlcul dels generadors numèrics compartits amb les fitxes; els seus mapes propis continuen pendents de migració. Les correccions de dades geomètriques actuen al generador base de mesura de 2n i afectaran qualsevol consumidor que el reutilitzi. Les famílies noves de mesura de 1r s’afegeixen als temes i al banc web, sense substituir els generadors base de conversions i àrees. El 30 d’octubre de 2026 s’ha autoritzat publicar aquesta continuació parcial i prosseguir la revisió dels blocs pendents.
+No s’han modificat formularis ni exportacions Word/PDF. La classificació nova s’aplica als generadors web embolcallats. Els camps de variant no alteren el càlcul dels generadors numèrics compartits amb les fitxes; els seus mapes propis continuen pendents de migració. Les correccions de dades geomètriques actuen al generador base de mesura de 2n i afectaran qualsevol consumidor que el reutilitzi. Les famílies noves de mesura de 1r s’afegeixen als temes i al banc web, sense substituir els generadors base de conversions i àrees. La publicació verificada consta a `publicacio-punt3.json`. La revisió dels 13 blocs restants continua pendent; el detall de la passada posterior és a `pendents-despres-publicacio-punt3.md`.
