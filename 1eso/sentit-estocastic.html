@@ -2,6 +2,8 @@
 
 <html lang="ca">
 <head>
+<script src="../assets/js/dificultat-mi.js"></script>
+<link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -394,8 +396,8 @@ El bloc principal correspon a <strong>1r d'ESO</strong>. Les freqüències acumu
 <div class="screen" id="screenIntro">
 <div id="introContent"></div>
 <div class="level-select">
-<button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Nivell 1<br/><small>Guiat · 10 encerts</small></button>
-<button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Nivell 2<br/><small>Sol/a · 20 encerts</small></button>
+<button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Amb pistes<br/><small>Guiat · 10 encerts</small></button>
+<button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Sense pistes<br/><small>Sol/a · 20 encerts</small></button>
 </div>
 <div class="mode-select">
 <button class="mode-btn active" id="btnModeA" onclick="selectMode('multi')">🔘 Opció múltiple</button>
@@ -2043,6 +2045,8 @@ var TOPICS=[
    theory:{title:'Histogrames',text:'L\'histograma representa dades contínues agrupades en intervals. Les barres estan juntes perquè els intervals són consecutius.',
    formulas:['Amplada de l\'interval = extrem superior − extrem inferior','Barres JUNTES: representen intervals continus','[a, b) vol dir a ≤ x < b','Un valor que coincideix amb una frontera pertany a l\'interval que comença en aquell valor']},gen:genHistograma}
 ];
+window.miTaskDifficulty=MIDifficulty.attach({course:'1eso',sense:'estocastic',topics:TOPICS,option:()=>typeof MATH_OPTION!=='undefined'?MATH_OPTION:null,examFilter:t=>typeof isExamTopic==='function'?isExamTopic(t):true});
+
 
 // ── STATE ────────────────────────────────────
 var NEEDED={1:10,2:20};
@@ -2250,7 +2254,8 @@ stAdd('C8','central','mediana',2,function(){
   return stProblem({patternId:'C8',family:'central',topicId:'mediana',diff:2,question:'Dades ordenades: <b>3, 4, 5, 6, 7</b>. Si afegim el valor <b>100</b>, la mediana nova és 5, 5,5 o 100?',answer:stNumAnswer(5.5,.011),hint:['Torna a considerar el nombre total de dades després d’afegir el nou valor','Amb sis dades, la mediana és la mitjana dels dos valors centrals'],solution:['Queden 3, 4, 5, 6, 7, 100.','Mediana = (5+6)/2 = <b>5,5</b>.']});
 });
 stAdd('C9','central','moda',1,function(){
-  var mode=rnd(2,8),d=[mode,mode,mode,rnd(1,9),rnd(1,9),rnd(1,9)];return stProblem({patternId:'C9',family:'central',topicId:'moda',diff:1,question:'Quina és la moda de <b>'+shuffle(d).join(', ')+'</b>?',answer:stNumAnswer(mode),hint:['Compta quantes vegades apareix cada valor','La moda és el que té la freqüència més alta'],solution:['El valor més repetit és <b>'+mode+'</b>.']});
+  // La pregunta i el validador demanen una sola moda: evita empats entre les dades addicionals.
+  var mode=rnd(2,8),others=shuffle(Array.from({length:9},(_,i)=>i+1).filter(v=>v!==mode)).slice(0,3),d=[mode,mode,mode].concat(others);return stProblem({patternId:'C9',family:'central',topicId:'moda',diff:1,question:'Quina és la moda de <b>'+shuffle(d).join(', ')+'</b>?',answer:stNumAnswer(mode),hint:['Compta quantes vegades apareix cada valor','La moda és el que té la freqüència més alta'],solution:['El valor més repetit és <b>'+mode+'</b>.']});
 });
 stAdd('C10','central','moda',1,function(){
   var cats=['blau','verd','vermell','groc'],mode=cats[rnd(0,3)],d=[mode,mode,mode].concat(shuffle(cats).slice(0,3));return stProblem({patternId:'C10',family:'central',topicId:'moda',diff:1,question:'Colors preferits: <b>'+shuffle(d).join(', ')+'</b>. Quina és la moda?',answer:stTextAnswer(mode),hint:['La moda també es pot calcular amb dades qualitatives','Busca la categoria que apareix més vegades'],solution:['La categoria més freqüent és <b>'+mode+'</b>.']});
@@ -2436,7 +2441,7 @@ function showErrors(){
       var realIndex=errors.length-1-revIndex;
       var date=e.timestamp?new Date(e.timestamp).toLocaleString('ca-ES',{dateStyle:'short',timeStyle:'short'}):'';
       var typeTxt=(e.type!==null&&e.type!==undefined)?' · Tipus '+e.type:'';
-      var modeTxt=e.source==='exam'?'📝 Examen':(e.source==='open'?'✍️ Problemes oberts':('🧩 Pràctica · '+(e.level===2?'Nivell 2':'Nivell 1')));
+      var modeTxt=e.source==='exam'?'📝 Examen':(e.source==='open'?'✍️ Problemes oberts':('🧩 Pràctica · '+(e.level===2?'Pràctica autònoma':'Suport guiat')));
       html+='<div class="saved-error-card">'
         +'<div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><h3 style="margin:0">❌ '+(e.topicName||'Tema')+'</h3><span style="font-size:.72rem;color:var(--muted)">'+date+'</span></div>'
         +'<div style="margin:10px 0;line-height:1.5">'+(e.visual||'')+'<div>'+(e.question||'Pregunta no disponible')+'</div></div>'
@@ -2931,6 +2936,8 @@ document.getElementById('navTitle').addEventListener('click',function(){
 
 
 // Restore saved results before choosing the requested topic.
+miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
+miTaskDifficulty.bindDisplay({showName:'showExercise',current:()=>typeof curEx!=='undefined'?curEx:currentEx,state:()=>typeof ST!=='undefined'?ST:state});
 (async function initPage(){
   await loadState();
   const params=new URLSearchParams(window.location.search);
@@ -3203,7 +3210,10 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script>miTaskDifficulty.bindExam({state:()=>typeof ST!=='undefined'?ST:state});</script>
 <script src="../assets/js/examen-tema.js"></script>
+<script src="../assets/js/dificultat-quotes.js"></script>
+<script src="../assets/js/dificultat-modes.js"></script>
 <script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

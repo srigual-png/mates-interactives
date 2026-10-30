@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
+<script src="../assets/js/dificultat-mi.js"></script>
+<script src="../assets/js/raonament-numeric-1eso.js"></script>
+<link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -417,7 +420,7 @@ Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immed
 </div>
 
 
-<div class="screen" id="sIntro"><div id="introC"></div><div class="lvs"><button class="lvb active" id="bL1" onclick="selLv(1)">&#129513; Nivell 1<br><small>Guiat &middot; 10 encerts</small></button><button class="lvb" id="bL2" onclick="selLv(2)">&#9999;&#65039; Nivell 2<br><small>Sol/a &middot; 20 encerts</small></button></div><div class="mode-select"><button class="mode-btn active" id="bModeMulti" onclick="selMode('multi')">🔘 Opció múltiple</button><button class="mode-btn" id="bModeOpen" onclick="selMode('open')">✍️ Resposta oberta</button></div><button class="bp" onclick="startP()">Comença a practicar &rarr;</button>
+<div class="screen" id="sIntro"><div id="introC"></div><div class="lvs"><button class="lvb active" id="bL1" onclick="selLv(1)">&#129513; Amb pistes<br><small>Guiat &middot; 10 encerts</small></button><button class="lvb" id="bL2" onclick="selLv(2)">&#9999;&#65039; Sense pistes<br><small>Sol/a &middot; 20 encerts</small></button></div><div class="mode-select"><button class="mode-btn active" id="bModeMulti" onclick="selMode('multi')">🔘 Opció múltiple</button><button class="mode-btn" id="bModeOpen" onclick="selMode('open')">✍️ Resposta oberta</button></div><button class="bp" onclick="startP()">Comença a practicar &rarr;</button>
 <button type="button" id="miTopicExamLaunch" class="theory-page-link mi-topic-exam-launch" onclick="miTopicExam.start(this.dataset.topic)" hidden>📝 Examen del tema</button></div>
 <div class="screen" id="sEx">
   <div class="exn" id="exN"></div>
@@ -2832,7 +2835,7 @@ function genPercentatgesBase(){
 
     var pcts4=[10,20,25,50],
         pct6=pcts4[rnd(0,3)],
-        total6=rnd(5,20)*pct6,
+        total6=rnd(5,20)*100,
         part6=total6*pct6/100;
 
     var surveyCtx=['diuen que els agrada l\'esport','prefereixen anar a peu','trien fruita per esmorzar','participen en una activitat extraescolar','han llegit el llibre proposat','prefereixen el color blau','utilitzen transport públic','han visitat la biblioteca aquesta setmana'][rnd(0,7)];
@@ -3602,6 +3605,9 @@ var TOPICS=[
   {id:"percentatges",course:"1r",exam1r:true,icon:"%",name:"Percentatges",short:"Càlcul, augments, disminucions i conversions",theory:{title:"Percentatges",text:`Un percentatge expressa una quantitat per cada 100 i és una forma habitual de proporcionalitat.`,formulas:[`a% de b = b × a/100`,`Percentatge que representa una part = part/total × 100`,`Augment: suma el percentatge al valor inicial`,`Disminució: resta el percentatge al valor inicial`,`Fracció ↔ decimal ↔ percentatge`]},gen:genPercentatges},
   {id:"notacio2",course:"2n",exam1r:false,icon:"&#128300;",name:"Notació científica",short:"⭐ Ampliació · prepara 2n d'ESO",theory:{title:"Notació científica",text:`La notació científica escriu nombres molt grans o molt petits com el producte d'un nombre entre 1 i 10 per una potència de 10.`,formulas:[`a × 10^n amb 1 ≤ a < 10`,`Exponent positiu: nombre gran`,`Exponent negatiu: nombre entre 0 i 1`,`La coma es desplaça tantes posicions com indica l'exponent`]},gen:genNotacioCientifica}
 ];
+MIFirstNumericTasks.extend(TOPICS,AMP_CATS);
+window.miTaskDifficulty=MIDifficulty.attach({course:'1eso',sense:'numeric',topics:TOPICS,option:()=>typeof MATH_OPTION!=='undefined'?MATH_OPTION:null,examFilter:t=>typeof isExamTopic==='function'?isExamTopic(t):true});
+
 
 // ── STATE ──────────────────────────────────────────────────────────────────
 var NEEDED={1:10,2:20};
@@ -3660,6 +3666,7 @@ function normalizeErrorEntry(e,topicId){
     solution:Array.isArray(e.solution)?e.solution.slice():[],
     level:e.level!==undefined?e.level:null,
     source:e.source||'legacy',
+    taskDifficulty:e.taskDifficulty??null,taskDifficultyStatus:e.taskDifficultyStatus||'legacy',difficultyBank:e.difficultyBank||null,difficultyKey:e.difficultyKey||null,variantId:e.variantId||null,
     diff:e.diff!==undefined?e.diff:null,
     isProblem:!!e.isProblem,
     timestamp:timestamp||new Date().toISOString()
@@ -3710,6 +3717,7 @@ function buildErrorRecord(ex,studentAnswer,source){
     solution:Array.isArray(ex.solution)?ex.solution.slice():[],
     level:source==='exam'?0:state.level,
     source:source,
+    taskDifficulty:ex.taskDifficulty??null,taskDifficultyStatus:ex.taskDifficultyStatus||'legacy',difficultyBank:ex.difficultyBank||null,difficultyKey:ex.difficultyKey||null,variantId:ex.variantId||null,
     diff:ex.diff!==undefined?ex.diff:null,
     isProblem:!!ex.isProblem,
     timestamp:new Date().toISOString()
@@ -3936,8 +3944,7 @@ function updateSBar(){
 function showEx(){
   state.answered=false;window.MIAnalytics?.shown();var t=TOPICS[state.currentTopic];currentEx=decorateExercise(t,t.gen());state.exCount++;
   var typeLabel=currentEx.isProblem?'<span class="tyb typ">&#128203; Problema</span>':'<span class="tyb tyc">&#128290; Calcul</span>';
-  var dLabel=currentEx.diff?diffBadge(currentEx.diff):'';
-  document.getElementById('exN').innerHTML='Exercici '+state.exCount+' '+typeLabel+' '+dLabel;
+  document.getElementById('exN').innerHTML='Exercici '+state.exCount+' '+typeLabel;
   updateSBar();document.getElementById('exQ').innerHTML=currentEx.question;
   var gs=document.getElementById('gst');
   if(state.level===1){gs.style.display='block';gs.innerHTML='<h4>&#128161; Pistes:</h4>'+(currentEx.guide||[]).map(function(s){return '&bull; '+s;}).join('<br>');}
@@ -4062,9 +4069,9 @@ function ampStartSession(){window.MIAnalytics?.start('extension');
   });
   if(!selectedCats.length)selectedCats=AMP_CATS.filter(function(x){return x.id!=='mix'&&x.gen;});
   var variantCapacity=selectedCats.reduce(function(sum,c){return sum+(ampCfg.diff>0?((c.diffCounts&&c.diffCounts[ampCfg.diff])||0):(c.variants||0));},0);
-  var uniqueTarget=Math.min(ampCfg.nq,variantCapacity||ampCfg.nq);
+  var uniqueTarget=Math.min(ampCfg.nq,variantCapacity);
   var attempts=0,seen={},seenVariants={};
-  while(ampSession.probs.length<ampCfg.nq&&attempts<2400){
+  while(variantCapacity>0&&ampSession.probs.length<ampCfg.nq&&attempts<2400){
     attempts++;
     var g=gens[rnd(0,gens.length-1)],p;
     try{p=g();}catch(e){continue;}
@@ -4088,11 +4095,12 @@ function ampShowProb(){window.MIAnalytics?.shown(ampSession.probs[ampSession.idx
   document.getElementById('navAmpScore').textContent=(ampSession.idx+1)+'/'+ampSession.probs.length;
   var diffLabel=['','🟢 Bàsica','🟡 Mitja','🔴 Difícil'][p.diff]||'';
   document.getElementById('ampProbMeta').innerHTML='<span class="badge b-cat">'+p.cat+'</span><span class="badge b-d'+p.diff+'">'+diffLabel+'</span>';
+  if(p.reasoningFamily&&p.diff===3)document.getElementById('ampProbMeta').innerHTML+='<small role="note">Cobertura alta limitada: una família en aquesta categoria.</small>';
   var phtml='<h3>📋 Problema</h3><div class="prob-text">'+p.text+'</div>';
   if(p.dataBox)phtml+='<div class="data-box">'+p.dataBox+'</div>';
   document.getElementById('ampProbCard').innerHTML=phtml;
   document.getElementById('ampHintArea').innerHTML='<button class="hint-btn" onclick="ampShowHint()">💡 Veure pista</button>';
-  var sh='<h4>✏️ Escriu els teus passos:</h4>';
+  var sh=(p.steps||[]).length?'<h4>✏️ Escriu els teus passos:</h4>':'';
   (p.steps||[]).forEach(function(s,i){
     sh+='<div class="step-row"><span class="step-label">'+s.label+'</span><input class="step-input" id="ampStep_'+i+'" placeholder="Escriu aquí..." onkeydown="if(event.key===\'Enter\')ampFocusNext('+i+')" autocomplete="off"></div>';
   });
@@ -4107,14 +4115,14 @@ function ampShowProb(){window.MIAnalytics?.shown(ampSession.probs[ampSession.idx
 function ampFocusNext(i){var next=document.getElementById('ampStep_'+(i+1))||document.getElementById('ampFinalAns');if(next)next.focus();}
 function ampShowHint(){window.MIAnalytics?.hint();
   var p=ampSession.probs[ampSession.idx];ampSession.hintUsed=true;
-  var hints=(p.steps||[]).map(function(s){return s.hint;}).filter(function(h){return h&&String(h).trim();});
+  var hints=p.practiceHints||(p.steps||[]).map(function(s){return s.hint;}).filter(function(h){return h&&String(h).trim();});
   if(!hints.length)hints=['Identifica quina operació toca fer a cada pas abans de calcular.'];
   document.getElementById('ampHintArea').innerHTML='<div class="hint-box"><b>💡 Pistes:</b><br>'+hints.map(function(h){return '• '+h;}).join('<br>')+'</div>';
 }
 function ampRegisterError(p,given){
   var tid=p.topicId||'ops',t=TOPICS.find(function(x){return x.id===tid;});
   if(!state.errors[tid])state.errors[tid]=[];
-  var rec={id:makeErrorId(),topicId:tid,topicName:p.topicName||(t?t.name:p.cat),type:p.type===undefined?null:p.type,question:p.text||'',answer:given,correct:p.answer&&p.answer.val!==undefined?String(p.answer.val):'',options:[],guide:(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),solution:Array.isArray(p.hints)?p.hints.slice():[],level:null,diff:p.diff||null,source:'ampliacio',timestamp:new Date().toISOString()};
+  var rec={id:makeErrorId(),topicId:tid,topicName:p.topicName||(t?t.name:p.cat),type:p.type===undefined?null:p.type,question:p.text||'',answer:given,correct:p.answer&&p.answer.val!==undefined?String(p.answer.val):'',options:[],guide:p.practiceHints||(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),solution:Array.isArray(p.hints)?p.hints.slice():[],level:null,taskDifficulty:p.taskDifficulty??null,taskDifficultyStatus:p.taskDifficultyStatus||'legacy',difficultyBank:p.difficultyBank||null,difficultyKey:p.difficultyKey||null,variantId:p.variantId||null,diff:p.diff??null,source:'ampliacio',timestamp:new Date().toISOString()};
   var bucket=state.errors[tid],last=bucket.length?bucket[bucket.length-1]:null;
   var same=last&&last.type===rec.type&&last.question===rec.question&&last.answer===rec.answer&&last.correct===rec.correct&&last.source===rec.source;
   if(!same)bucket.push(rec);saveState();
@@ -4182,7 +4190,7 @@ function showErrorSummary(){
       errs.slice().reverse().forEach(function(e){
         var date='';
         try{date=e.timestamp?new Date(e.timestamp).toLocaleString('ca-ES',{dateStyle:'short',timeStyle:'short'}):'';}catch(_e){}
-        var modeTxt=e.source==='exam'?'&#128221; Examen':e.source==='ampliacio'?'&#128221; Problemes oberts':e.source==='legacy'?'&#128230; Error antic':('&#129513; Pràctica · '+(e.level===2?'Nivell 2':'Nivell 1'));
+        var modeTxt=e.source==='exam'?'&#128221; Examen':e.source==='ampliacio'?'&#128221; Problemes oberts':e.source==='legacy'?'&#128230; Error antic':('&#129513; Pràctica · '+(e.level===2?'Pràctica autònoma':'Suport guiat'));
         var typeTxt=(e.type!==null&&e.type!==undefined)?' · Tipus '+e.type:'';
         var diffTxt=e.diff?' · Dificultat '+e.diff:'';
         var solId='savedSol_'+String(e.id||makeErrorId()).replace(/[^a-zA-Z0-9_]/g,'');
@@ -4515,6 +4523,8 @@ function initPage(){
   showHome();
 }
 
+miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
+miTaskDifficulty.bindDisplay({showName:'showEx',current:()=>typeof curEx!=='undefined'?curEx:currentEx,state:()=>typeof ST!=='undefined'?ST:state});
 loadState();initPage();
 
 /* ── P2 · SELECTOR INDEPENDENT DE TEMES D'EXAMEN ───────── */
@@ -4782,7 +4792,10 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script>miTaskDifficulty.bindExam({state:()=>typeof ST!=='undefined'?ST:state});</script>
 <script src="../assets/js/examen-tema.js"></script>
+<script src="../assets/js/dificultat-quotes.js"></script>
+<script src="../assets/js/dificultat-modes.js"></script>
 <script>MIValidation.installPracticeFeedback();</script>
 <link rel="stylesheet" href="../assets/css/fitxes.css">
 <script src="../assets/js/fitxes/core.js"></script>

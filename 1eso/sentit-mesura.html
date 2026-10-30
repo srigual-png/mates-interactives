@@ -2,6 +2,8 @@
 
 <html lang="ca">
 <head>
+<script src="../assets/js/dificultat-mi.js"></script>
+<link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -390,8 +392,8 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 <div class="screen" id="screenIntro">
 <div id="introContent"></div>
 <div class="level-select">
-<button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Nivell 1<br/><small>Guiat</small></button>
-<button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Nivell 2<br/><small>Sol/a</small></button>
+<button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Amb pistes<br/><small>Guiat</small></button>
+<button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Sense pistes<br/><small>Sol/a</small></button>
 </div>
 <div class="mode-select">
 <button class="mode-btn active" id="btnModeA" onclick="selectMode('multi')">🔘 Opció múltiple</button>
@@ -1952,6 +1954,8 @@ const TOPICS=[
     },gen:genVolumCapacitat
   }
 ];
+window.miTaskDifficulty=MIDifficulty.attach({course:'1eso',sense:'mesura',topics:TOPICS,option:()=>typeof MATH_OPTION!=='undefined'?MATH_OPTION:null,examFilter:t=>typeof isExamTopic==='function'?isExamTopic(t):true});
+
 
 function coreTopicIndices(){return TOPICS.map((t,i)=>t.course==='1r'?i:-1).filter(i=>i>=0);}
 function extensionTopicIndices(){return TOPICS.map((t,i)=>t.course!=='1r'?i:-1).filter(i=>i>=0);}
@@ -2297,8 +2301,7 @@ function showExercise(){
   const t=TOPICS[ST.currentTopic];
   curEx=decorateExercise(t,t.gen()); ST.exCount++;
   const needed=ST.level===1?NEEDED_LVL1:NEEDED_LVL2;
-  const diffTag=curEx.difficulty?`<span class="tag-difficulty tag-${curEx.difficulty}">${curEx.difficulty==='easy'?'Fàcil':curEx.difficulty==='medium'?'Mitjà':'Difícil'}</span>`:'';
-  document.getElementById('exNum').innerHTML=`Exercici ${ST.exCount} ${diffTag}`;
+  document.getElementById('exNum').textContent='Exercici '+ST.exCount;
   renderStreakBar(needed);
   document.getElementById('exQuestion').innerHTML=`<span class="func">${curEx.question}</span>`;
   const gs=document.getElementById('guideSteps');
@@ -2413,7 +2416,7 @@ function showErrorSummary(){
       errs.slice().reverse().forEach(e=>{
         let date='';
         try{date=e.timestamp?new Date(e.timestamp).toLocaleString('ca-ES',{dateStyle:'short',timeStyle:'short'}):'';}catch(_e){}
-        const modeTxt=e.source==='exam'?'📝 Examen':e.source==='open'?'✍️ Problema obert':e.source==='legacy'?'📦 Error antic':(`🧩 Pràctica · ${e.level===2?'Nivell 2':'Nivell 1'}`);
+        const modeTxt=e.source==='exam'?'📝 Examen':e.source==='open'?'✍️ Problema obert':e.source==='legacy'?'📦 Error antic':(`🧩 Pràctica · ${e.level===2?'Pràctica autònoma':'Suport guiat'}`);
         const typeTxt=(e.type!==null&&e.type!==undefined)?` · Tipus ${e.type}`:'';
         const diffTxt=e.difficulty?` · ${e.difficulty==='easy'?'Fàcil':e.difficulty==='medium'?'Mitjà':'Difícil'}`:'';
         const solId='savedSol_'+String(e.id||makeErrorId()).replace(/[^a-zA-Z0-9_]/g,'');
@@ -3128,6 +3131,8 @@ function initPage(){
   showHome();
 }
 
+miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
+miTaskDifficulty.bindDisplay({showName:'showExercise',current:()=>typeof curEx!=='undefined'?curEx:currentEx,state:()=>typeof ST!=='undefined'?ST:state});
 loadST(); initPage();
 
 // Triple clic al títol → test automàtic
@@ -3401,7 +3406,10 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script>miTaskDifficulty.bindExam({state:()=>typeof ST!=='undefined'?ST:state});</script>
 <script src="../assets/js/examen-tema.js"></script>
+<script src="../assets/js/dificultat-quotes.js"></script>
+<script src="../assets/js/dificultat-modes.js"></script>
 <script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

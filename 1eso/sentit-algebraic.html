@@ -2,6 +2,8 @@
 
 <html lang="ca">
 <head>
+<script src="../assets/js/dificultat-mi.js"></script>
+<link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
@@ -416,8 +418,8 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
 <div id="tabTheory"></div>
 <div id="tabExample" style="display:none"></div>
 <div class="level-select" style="margin-top:16px;">
-<button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Nivell 1<br/><small>Guiat</small></button>
-<button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Nivell 2<br/><small>Sol/a</small></button>
+<button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Amb pistes<br/><small>Guiat</small></button>
+<button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Sense pistes<br/><small>Sol/a</small></button>
 </div>
 <div class="mode-select">
 <button class="mode-btn active" id="btnModeA" onclick="selectMode('multi')">🔘 Opció múltiple</button>
@@ -1766,6 +1768,8 @@ const TOPICS=[
   {id:'equacions2',course:'2n',exam1r:false,icon:'⚖️',name:'Equacions avançades',short:'⭐ Ampliació · x als dos membres i parèntesis',theoryKey:'equacions2',gen:genEquacionsAmpliacio},
 
 ];
+window.miTaskDifficulty=MIDifficulty.attach({course:'1eso',sense:'algebraic',topics:TOPICS,option:()=>typeof MATH_OPTION!=='undefined'?MATH_OPTION:null,examFilter:t=>typeof isExamTopic==='function'?isExamTopic(t):true});
+
 
 /* ── VARIETAT DE SESSIÓ ─────────────────────────────────────────────── */
 const variationMemory={};
@@ -2132,7 +2136,7 @@ function showErrors(){
       const realIndex=errors.length-1-revIndex;
       const date=e.timestamp?new Date(e.timestamp).toLocaleString('ca-ES',{dateStyle:'short',timeStyle:'short'}):'';
       const typeTxt=(e.type!==null&&e.type!==undefined)?' · Tipus '+e.type:'';
-      const modeTxt=e.source==='exam'?'📝 Examen':('🧩 Pràctica · '+(e.level===2?'Nivell 2':'Nivell 1'));
+      const modeTxt=e.source==='exam'?'📝 Examen':('🧩 Pràctica · '+(e.level===2?'Pràctica autònoma':'Suport guiat'));
       const solId='savedSol_'+realIndex;
       html+='<div class="app-card" style="border-left:4px solid var(--error);margin-bottom:12px">'
         +'<div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><h3 style="margin:0 0 6px">❌ '+(e.topicName||'Tema')+'</h3><span style="font-size:.72rem;color:var(--muted)">'+date+'</span></div>'
@@ -2693,6 +2697,8 @@ function initPage(){
   showHome();
 }
 
+miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
+miTaskDifficulty.bindDisplay({showName:'showExercise',current:()=>typeof curEx!=='undefined'?curEx:currentEx,state:()=>typeof ST!=='undefined'?ST:state});
 loadState();initPage();
 </script>
 <!-- ===================================================== -->
@@ -2956,7 +2962,10 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script>miTaskDifficulty.bindExam({state:()=>typeof ST!=='undefined'?ST:state});</script>
 <script src="../assets/js/examen-tema.js"></script>
+<script src="../assets/js/dificultat-quotes.js"></script>
+<script src="../assets/js/dificultat-modes.js"></script>
 <script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

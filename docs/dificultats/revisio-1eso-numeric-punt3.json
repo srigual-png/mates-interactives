@@ -1,0 +1,1778 @@
+{
+  "date": "2026-10-30",
+  "status": "partial",
+  "note": "105 tipus web: 91 heretats revisats i 14 famílies noves. 61 entrades contextuals: 51 originals i 10 reutilitzacions noves. Alta limitada a una família per tema ordinari; ampliació científica sense alta. Pendent revisió independent exhaustiva dels validadors heretats.",
+  "topics": [
+    {
+      "topic": "naturals",
+      "type": 1,
+      "level": 1,
+      "reason": "Ordenar naturals: comparació posicional directa.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Ordena de major a menor:12143 — 84133 — 23556 — 58404",
+        "Ordena de menor a major:35856 — 25590 — 98181 — 82383",
+        "Ordena de major a menor:7945 — 94054 — 1707 — 40559"
+      ]
+    },
+    {
+      "topic": "naturals",
+      "type": 2,
+      "level": 1,
+      "reason": "Comparar dos naturals: una decisió directa.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Quin signe va entre:41332 ___ 60199",
+        "Quin signe va entre:74413 ___ 20079",
+        "Quin signe va entre:10175 ___ 46761"
+      ]
+    },
+    {
+      "topic": "naturals",
+      "type": 3,
+      "level": 1,
+      "reason": "Arrodonir a una posició indicada: procediment directe.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Arrodoneix 59844 a les milers",
+        "Arrodoneix 89698 a les milers",
+        "Arrodoneix 62521 a les desenes"
+      ]
+    },
+    {
+      "topic": "naturals",
+      "type": 4,
+      "level": 1,
+      "reason": "Repartiment equitatiu: triar una divisió explícita.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Un magatzem rep 279 paquets per distribuir entre 3 botigues. Quants paquets rep cada botiga?",
+        "Una escola te 295 llibres per repartir en 5 aules iguals. Quants llibres hi ha a cada aula?",
+        "Una escola te 240 llibres per repartir en 4 aules iguals. Quants llibres hi ha a cada aula?"
+      ]
+    },
+    {
+      "topic": "naturals",
+      "type": 5,
+      "level": 2,
+      "reason": "Relacionar producció de diverses màquines i reserva: producte i suma contextuals.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Una fabrica te 4 maquines que produeixen 26 peces cadascuna. A mes, hi ha 30 peces de reserva. Quantes peces hi ha en total?",
+        "Una fabrica te 3 maquines que produeixen 20 peces cadascuna. A mes, hi ha 16 peces de reserva. Quantes peces hi ha en total?",
+        "Una fabrica te 8 maquines que produeixen 16 peces cadascuna. A mes, hi ha 22 peces de reserva. Quantes peces hi ha en total?"
+      ]
+    },
+    {
+      "topic": "decimal_sys",
+      "type": 1,
+      "level": 1,
+      "reason": "Valor posicional directe.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Quin es el valor posicional de la xifra 7 al nombre 71906?",
+        "Quin es el valor posicional de la xifra 6 al nombre 103065?",
+        "Quin es el valor posicional de la xifra 3 al nombre 644103?"
+      ]
+    },
+    {
+      "topic": "decimal_sys",
+      "type": 2,
+      "level": 1,
+      "reason": "Descomposició decimal habitual; repetir xifres no crea estratègia.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Descompon el nombre 34951",
+        "Descompon el nombre 51359",
+        "Descompon el nombre 53659"
+      ]
+    },
+    {
+      "topic": "decimal_sys",
+      "type": 3,
+      "level": 1,
+      "reason": "Reconstruir el nombre a partir de posicions donades.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Quin nombre correspon a:6 cm, 2 dm, 5 m, 0 c, 9 d, 8 u",
+        "Quin nombre correspon a:4 cm, 9 dm, 1 m, 2 c, 1 d, 9 u",
+        "Quin nombre correspon a:7 cm, 0 dm, 4 m, 1 c, 5 d, 2 u"
+      ]
+    },
+    {
+      "topic": "decimal_sys",
+      "type": 4,
+      "level": 1,
+      "reason": "La matrícula només contextualitza una lectura posicional.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "El número de matrícula és 3819. Quin valor representa la xifra de les unitats segons la posició que ocupa?",
+        "El número de matrícula és 9315. Quin valor representa la xifra de les desenes segons la posició que ocupa?",
+        "El número de matrícula és 9471. Quin valor representa la xifra de les desenes segons la posició que ocupa?"
+      ]
+    },
+    {
+      "topic": "ops",
+      "type": 1,
+      "level": 1,
+      "reason": "Suma directa.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Calcula: 8072 + 3381",
+        "Calcula: 1896 + 9587",
+        "Calcula: 3587 + 5207"
+      ]
+    },
+    {
+      "topic": "ops",
+      "type": 2,
+      "level": 1,
+      "reason": "Resta directa.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Calcula: 5024 - 2857",
+        "Calcula: 6891 - 2273",
+        "Calcula: 3347 - 2239"
+      ]
+    },
+    {
+      "topic": "ops",
+      "type": 3,
+      "level": 1,
+      "reason": "Producte directe: la mida dels operands no crea nivell mitjà.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula: 82 x 234",
+        "Calcula: 92 x 873",
+        "Calcula: 38 x 693"
+      ]
+    },
+    {
+      "topic": "ops",
+      "type": 4,
+      "level": 1,
+      "reason": "Divisió directa.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula: 238 / 6",
+        "Calcula: 412 / 5",
+        "Calcula: 582 / 9"
+      ]
+    },
+    {
+      "topic": "ops",
+      "type": 5,
+      "level": 2,
+      "reason": "Calcular cost i canvi: dos passos contextuals.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "La Maria compra 10 quaderns a 18 euros. Paga 180 euros. Quant de canvi rep?",
+        "La Maria compra 6 quaderns a 23 euros. Paga 170 euros. Quant de canvi rep?",
+        "La Maria compra 12 quaderns a 13 euros. Paga 190 euros. Quant de canvi rep?"
+      ]
+    },
+    {
+      "topic": "ops",
+      "type": 6,
+      "level": 2,
+      "reason": "Relacionar dies, torns i unitats: cadena multiplicativa explícita, sense planificació alta.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Una fabrica treballa 6 dies, 2 torns/dia, 207 unitats/torn. Total?",
+        "Una fabrica treballa 26 dies, 3 torns/dia, 174 unitats/torn. Total?",
+        "Una fabrica treballa 30 dies, 4 torns/dia, 496 unitats/torn. Total?"
+      ]
+    },
+    {
+      "topic": "potencies",
+      "type": 1,
+      "level": 1,
+      "reason": "Identificar la base.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "A la potència 5^4, quina és la base?",
+        "A la potència 7^3, quina és la base?",
+        "A la potència 5^2, quina és la base?"
+      ]
+    },
+    {
+      "topic": "potencies",
+      "type": 2,
+      "level": 1,
+      "reason": "Identificar l’exponent.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "A la potència 9^4, quin és l'exponent?",
+        "A la potència 2^4, quin és l'exponent?",
+        "A la potència 7^4, quin és l'exponent?"
+      ]
+    },
+    {
+      "topic": "potencies",
+      "type": 3,
+      "level": 1,
+      "reason": "Codificar factors iguals com a potència.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Escriu com a potència: 2 × 2 × 2",
+        "Escriu com a potència: 3 × 3",
+        "Escriu com a potència: 5 × 5 × 5 × 5"
+      ]
+    },
+    {
+      "topic": "potencies",
+      "type": 4,
+      "level": 1,
+      "reason": "Desplegar una potència com a producte.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Quin producte representa 5^3?",
+        "Quin producte representa 5^4?",
+        "Quin producte representa 4^3?"
+      ]
+    },
+    {
+      "topic": "potencies",
+      "type": 5,
+      "level": 1,
+      "reason": "Calcular quadrat o cub: exponent 3 no implica estratègia alta.",
+      "previous": [
+        2,
+        3
+      ],
+      "samples": [
+        "Calcula 9^2.",
+        "Calcula 2^2.",
+        "Calcula 3^3."
+      ]
+    },
+    {
+      "topic": "potencies",
+      "type": 6,
+      "level": 1,
+      "reason": "Arrel quadrada exacta directa; 121 o 144 no afegeixen decisions.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula √121.",
+        "Calcula √36.",
+        "Calcula √81."
+      ]
+    },
+    {
+      "topic": "potencies",
+      "type": 7,
+      "level": 1,
+      "reason": "Relacionar quadrat i arrel amb la igualtat ja donada.",
+      "previous": [
+        2,
+        3
+      ],
+      "samples": [
+        "Si 8² = 64, quina igualtat expressa l'operació inversa?",
+        "Si 3² = 9, quina igualtat expressa l'operació inversa?",
+        "Si 10² = 100, quina igualtat expressa l'operació inversa?"
+      ]
+    },
+    {
+      "topic": "jerarquia",
+      "type": 1,
+      "level": 1,
+      "reason": "Jerarquia directa amb producte i suma/resta.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Calcula respectant la jerarquia:15 + 5 x 2 - 8",
+        "Calcula respectant la jerarquia:13 + 4 x 5 - 7",
+        "Calcula respectant la jerarquia:13 + 6 x 8 - 2"
+      ]
+    },
+    {
+      "topic": "jerarquia",
+      "type": 2,
+      "level": 1,
+      "reason": "Jerarquia directa; repetir productes no crea una estratègia nova.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Calcula:8 x 4 + 6 x 4 - 7",
+        "Calcula:5 x 7 + 6 x 5 - 7",
+        "Calcula:2 x 4 + 4 x 3 - 6"
+      ]
+    },
+    {
+      "topic": "jerarquia",
+      "type": 3,
+      "level": 2,
+      "reason": "Connectar potència, producte i suma/resta.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula:8 + 4² - 4 x 4",
+        "Calcula:10 + 2² - 5 x 2",
+        "Calcula:10 + 6² - 4 x 3"
+      ]
+    },
+    {
+      "topic": "jerarquia",
+      "type": 4,
+      "level": 2,
+      "reason": "Coordinar parèntesi i productes.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula:4 x (7 + 3) - 6 x 3",
+        "Calcula:6 x (7 + 7) - 3 x 2",
+        "Calcula:3 x (4 + 3) - 3 x 2"
+      ]
+    },
+    {
+      "topic": "jerarquia",
+      "type": 5,
+      "level": 2,
+      "reason": "Coordinar dues agrupacions i suma.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula:(3 + 3) x (4 - 2) + 9",
+        "Calcula:(5 + 6) x (5 - 1) + 4",
+        "Calcula:(4 + 5) x (6 - 1) + 5"
+      ]
+    },
+    {
+      "topic": "jerarquia",
+      "type": 6,
+      "level": 2,
+      "reason": "Coordinar potència i agrupacions: procediment explícit, sense alta automàtica.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Calcula:3 x 4² - (6 + 2) x 2 + 6",
+        "Calcula:3 x 4² - (5 + 2) x 2 + 5",
+        "Calcula:5 x 3² - (2 + 6) x 4 + 4"
+      ]
+    },
+    {
+      "topic": "jerarquia",
+      "type": 7,
+      "level": 2,
+      "reason": "Modelitzar compra conjunta, descompte i enviament. Encara que es cancel·lin imports, cal interpretar el model.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Una samarreta val 9 €. La Laia en compra 4 i el seu germà 2. Apliquen un descompte de 6 € i després afegeixen 2 € d’enviament. Quant paguen en total?",
+        "Una samarreta val 5 €. La Laia en compra 2 i el seu germà 3. Apliquen un descompte de 5 € i després afegeixen 5 € d’enviament. Quant paguen en total?",
+        "Una samarreta val 5 €. La Laia en compra 2 i el seu germà 6. Apliquen un descompte de 5 € i després afegeixen 5 € d’enviament. Quant paguen en total?"
+      ]
+    },
+    {
+      "topic": "jerarquia",
+      "type": 8,
+      "level": 2,
+      "reason": "Agrupacions niades: diversos passos explícits, no planificació alta.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Calcula amb parèntesis i claudàtors:4 x [5 + (6 + 2)] - 8",
+        "Calcula amb parèntesis i claudàtors:5 x [5 + (7 + 3)] - 3",
+        "Calcula amb parèntesis i claudàtors:6 x [6 + (6 + 1)] - 4"
+      ]
+    },
+    {
+      "topic": "jerarquia",
+      "type": 9,
+      "level": 2,
+      "reason": "Agrupacions niades i potència: diversos passos relacionats.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Calcula amb parèntesis i claudàtors:4 x [5 x (2 + 6) + 2²] - 3",
+        "Calcula amb parèntesis i claudàtors:2 x [2 x (2 + 6) + 4²] - 1",
+        "Calcula amb parèntesis i claudàtors:4 x [7 x (4 + 3) + 4²] - 9"
+      ]
+    },
+    {
+      "topic": "divis",
+      "type": 1,
+      "level": 1,
+      "reason": "Criteri de divisibilitat directe.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Quin nombre compleix el criteri de divisibilitat del 3?",
+        "Quina opció es pot dividir exactament entre 5?",
+        "Identifica un múltiple de 3 entre les opcions."
+      ]
+    },
+    {
+      "topic": "divis",
+      "type": 2,
+      "level": 1,
+      "reason": "Comprovar un criteri indicat.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "El nombre 560 és divisible per 5?",
+        "El nombre 457 és divisible per 9?",
+        "El nombre 497 és divisible per 2?"
+      ]
+    },
+    {
+      "topic": "divis",
+      "type": 3,
+      "level": 1,
+      "reason": "Reconèixer primer/compost entre nombres petits.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Entre les opcions, quin nombre compleix la definició de nombre primer?",
+        "Selecciona el nombre que només és divisible per 1 i per ell mateix.",
+        "Quin dels nombres següents no és compost?"
+      ]
+    },
+    {
+      "topic": "divis",
+      "type": 4,
+      "level": 1,
+      "reason": "Factorització prima habitual.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Factoritza 70 en factors primers",
+        "Factoritza 12 en factors primers",
+        "Factoritza 32 en factors primers"
+      ]
+    },
+    {
+      "topic": "divis",
+      "type": 5,
+      "level": 1,
+      "reason": "Reconèixer un múltiple/divisor.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Identifica un múltiple de 4.",
+        "Quina opció es pot escriure com 6 × un nombre enter?",
+        "Quin nombre té 5 com a divisor?"
+      ]
+    },
+    {
+      "topic": "divis",
+      "type": 6,
+      "level": 1,
+      "reason": "Comprovar quina opció no és divisor.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Quin d'aquests nombres NO es divisor de 55?",
+        "Quin d'aquests nombres NO es divisor de 78?",
+        "Quin d'aquests nombres NO es divisor de 40?"
+      ]
+    },
+    {
+      "topic": "divis",
+      "type": 7,
+      "level": 2,
+      "reason": "Comprovar dues condicions de divisibilitat en context, amb resposta interpretada.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Tenim 74 cromos. Es poden agrupar en grups de 3 o de 4 sense que en sobri cap?",
+        "Tenim 79 cadires. Es poden ordenar en grups de 4 o de 3 sense que en sobri cap?",
+        "Tenim 65 caixes. Es poden repartir en grups de 3 o de 5 sense que en sobri cap?"
+      ]
+    },
+    {
+      "topic": "mcmmcd",
+      "type": 1,
+      "level": 1,
+      "reason": "MCD directe amb procediment treballat.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Calcula MCD(36, 54)",
+        "Calcula MCD(20, 30)",
+        "Calcula MCD(40, 60)"
+      ]
+    },
+    {
+      "topic": "mcmmcd",
+      "type": 2,
+      "level": 1,
+      "reason": "mcm directe amb procediment treballat.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Calcula mcm(50, 75)",
+        "Calcula mcm(48, 72)",
+        "Calcula mcm(27, 36)"
+      ]
+    },
+    {
+      "topic": "mcmmcd",
+      "type": 3,
+      "level": 1,
+      "reason": "mcm de tres operands: més execució del mateix procediment.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula mcm(9, 15, 18)",
+        "Calcula mcm(4, 6, 10)",
+        "Calcula mcm(10, 12, 15)"
+      ]
+    },
+    {
+      "topic": "mcmmcd",
+      "type": 4,
+      "level": 2,
+      "reason": "Interpretar coincidència periòdica i escollir mcm.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Dos llums parpellegen cada 8 i 12 segons. D'aquí a quants segons tornaran a coincidir?",
+        "Dues línies d'autobús surten cada 8 i 12 minuts. Si ara surten juntes, d'aquí a quants minuts coincidiran?",
+        "Dos aspersors s'activen cada 6 i 8 minuts. Quan tornaran a activar-se alhora?"
+      ]
+    },
+    {
+      "topic": "mcmmcd",
+      "type": 5,
+      "level": 2,
+      "reason": "Interpretar agrupació màxima sense residus i escollir MCD; problema estàndard.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Tenim 30 fitxes rodones i 42 fitxes quadrades. Volem fer el màxim nombre de jocs idèntics, amb la mateixa quantitat de cada tipus i sense que sobri res. Quants jocs podem fer?",
+        "Tenim 8 cromos de futbol i 12 cromos de bàsquet. Volem fer el màxim nombre de paquets idèntics, amb la mateixa quantitat de cada tipus i sense que sobri res. Quants paquets podem fer?",
+        "Tenim 30 peces vermelles i 36 peces verdes. Volem fer el màxim nombre de lots idèntics, amb la mateixa quantitat de cada tipus i sense que sobri res. Quants lots podem fer?"
+      ]
+    },
+    {
+      "topic": "enters",
+      "type": 1,
+      "level": 1,
+      "reason": "Ordenació directa d’enters.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Ordena de major a menor:-1 — -15 — -8 — 15",
+        "Ordena de menor a major:0 — -8 — -1 — 10",
+        "Ordena de major a menor:4 — -8 — 10 — -1"
+      ]
+    },
+    {
+      "topic": "enters",
+      "type": 2,
+      "level": 1,
+      "reason": "Suma directa amb signes.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Calcula: (8) + (1)",
+        "Calcula: (1) + (-8)",
+        "Calcula: (-4) + (-6)"
+      ]
+    },
+    {
+      "topic": "enters",
+      "type": 3,
+      "level": 1,
+      "reason": "Resta directa amb signes.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula: (11) - (-12)",
+        "Calcula: (-2) - (3)",
+        "Calcula: (11) - (10)"
+      ]
+    },
+    {
+      "topic": "enters",
+      "type": 4,
+      "level": 1,
+      "reason": "Producte directe amb signes.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula: (-4) × (-3)",
+        "Calcula: (6) × (-6)",
+        "Calcula: (5) × (6)"
+      ]
+    },
+    {
+      "topic": "enters",
+      "type": 5,
+      "level": 1,
+      "reason": "Una variació de temperatura: una suma contextual directa.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "La temperatura és de 5 graus. Puja 8 graus. Quina temperatura fa després?",
+        "La temperatura és de 0 graus. Puja 11 graus. Quina temperatura fa després?",
+        "La temperatura és de -12 graus. Puja 6 graus. Quina temperatura fa després?"
+      ]
+    },
+    {
+      "topic": "enters",
+      "type": 7,
+      "level": 1,
+      "reason": "Una translació sobre la recta indicada explícitament.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "A la recta numèrica, parteixes de 2 i avances 6 unitats cap a la dreta. A quin nombre arribes?",
+        "A la recta numèrica, parteixes de -3 i avances 3 unitats cap a la dreta. A quin nombre arribes?",
+        "A la recta numèrica, parteixes de 6 i avances 2 unitats cap a l'esquerra. A quin nombre arribes?"
+      ]
+    },
+    {
+      "topic": "enters",
+      "type": 6,
+      "level": 2,
+      "reason": "Modelitzar saldo i dos moviments, relacionant signes.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Saldo: -24 euros. Ingrés 21, retirada 176. Saldo final?",
+        "Saldo: 57 euros. Ingrés 83, retirada 120. Saldo final?",
+        "Saldo: 95 euros. Ingrés 14, retirada 196. Saldo final?"
+      ]
+    },
+    {
+      "topic": "decimals",
+      "type": 1,
+      "level": 1,
+      "reason": "Suma directa.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Calcula: 7.9 + 8.1",
+        "Calcula: 5.4 + 2.8",
+        "Calcula: 5.2 + 8.4"
+      ]
+    },
+    {
+      "topic": "decimals",
+      "type": 2,
+      "level": 1,
+      "reason": "Producte directe; decimals no impliquen per si sols mitjana.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula: 1.6 x 3.2",
+        "Calcula: 3.2 x 4.8",
+        "Calcula: 1.2 x 1.6"
+      ]
+    },
+    {
+      "topic": "decimals",
+      "type": 3,
+      "level": 1,
+      "reason": "Arrodoniment directe.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Arrodoneix 40.414 a les centèsimes",
+        "Arrodoneix 40.200 a les centèsimes",
+        "Arrodoneix 94.449 a les centèsimes"
+      ]
+    },
+    {
+      "topic": "decimals",
+      "type": 4,
+      "level": 1,
+      "reason": "Fracció finita a decimal: divisió directa.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Converteix la fracció 3/10 a decimal",
+        "Converteix la fracció 3/8 a decimal",
+        "Converteix la fracció 9/10 a decimal"
+      ]
+    },
+    {
+      "topic": "decimals",
+      "type": 7,
+      "level": 1,
+      "reason": "Taxa donada per temps: producte directe.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Una cinta transportadora funciona a 1.9 m/min durant 6 min. Quina quantitat recorre o produeix?",
+        "Una bomba d'aigua funciona a 6.3 L/min durant 6 min. Quina quantitat recorre o produeix?",
+        "Una màquina funciona a 2.7 kg/h durant 7 h. Quina quantitat recorre o produeix?"
+      ]
+    },
+    {
+      "topic": "decimals",
+      "type": 8,
+      "level": 1,
+      "reason": "Error absolut: diferència directa entre dos valors donats.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "El valor exacte és 5.56 i l'aproximació a les dècimes és 5.6. Quin és l'error absolut?",
+        "El valor exacte és 8.30 i l'aproximació a les dècimes és 8.3. Quin és l'error absolut?",
+        "El valor exacte és 7.41 i l'aproximació a les dècimes és 7.4. Quin és l'error absolut?"
+      ]
+    },
+    {
+      "topic": "decimals",
+      "type": 5,
+      "level": 2,
+      "reason": "Connectar representació decimal, denominador decimal i simplificació.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Converteix 0.1 a fracció simplificada",
+        "Converteix 0.8 a fracció simplificada",
+        "Converteix 0.625 a fracció simplificada"
+      ]
+    },
+    {
+      "topic": "decimals",
+      "type": 6,
+      "level": 2,
+      "reason": "Suma de compra i càlcul del canvi.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "A una papereria compres tres productes de 3.5 €, 2.4 € i 2.1 €. Pagues amb 8 €. Quin canvi reps?",
+        "En una cafeteria demanes tres coses que costen 1.3 €, 4.0 € i 1.1 €. Pagues amb 7 €. Quin canvi reps?",
+        "En una cafeteria demanes tres coses que costen 1.2 €, 4.3 € i 5.0 €. Pagues amb 11 €. Quin canvi reps?"
+      ]
+    },
+    {
+      "topic": "decimals",
+      "type": 9,
+      "level": 2,
+      "reason": "Error relatiu percentual: diferència, referència al valor exacte i percentatge.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Un valor exacte és 30 i s'ha aproximat per 27. Quin és l'error relatiu expressat en percentatge?",
+        "Un valor exacte és 60 i s'ha aproximat per 54. Quin és l'error relatiu expressat en percentatge?",
+        "Un valor exacte és 150 i s'ha aproximat per 120. Quin és l'error relatiu expressat en percentatge?"
+      ]
+    },
+    {
+      "topic": "fraccions",
+      "type": 1,
+      "level": 1,
+      "reason": "Simplificació directa.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Simplifica: 8/36",
+        "Simplifica: 8/12",
+        "Simplifica: 30/35"
+      ]
+    },
+    {
+      "topic": "fraccions",
+      "type": 2,
+      "level": 1,
+      "reason": "Suma amb denominador comú.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Calcula: 2/6 + 1/6",
+        "Calcula: 6/9 + 2/9",
+        "Calcula: 2/5 + 2/5"
+      ]
+    },
+    {
+      "topic": "fraccions",
+      "type": 4,
+      "level": 1,
+      "reason": "Producte de fraccions amb regla treballada.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula: 4/8 x 2/4",
+        "Calcula: 1/4 x 2/4",
+        "Calcula: 5/6 x 5/3"
+      ]
+    },
+    {
+      "topic": "fraccions",
+      "type": 5,
+      "level": 1,
+      "reason": "Divisió de fraccions amb regla treballada.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula: 5/7 / 5/6",
+        "Calcula: 3/3 / 5/3",
+        "Calcula: 2/6 / 3/6"
+      ]
+    },
+    {
+      "topic": "fraccions",
+      "type": 7,
+      "level": 1,
+      "reason": "Reconèixer equivalència directa.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Quina fraccio es equivalent a 2/3?",
+        "Quina fraccio es equivalent a 3/4?",
+        "Quina fraccio es equivalent a 2/6?"
+      ]
+    },
+    {
+      "topic": "fraccions",
+      "type": 9,
+      "level": 1,
+      "reason": "Identificar pròpia/impròpia.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Classifica la fracció 4/5.",
+        "Classifica la fracció 11/10.",
+        "Classifica la fracció 6/5."
+      ]
+    },
+    {
+      "topic": "fraccions",
+      "type": 10,
+      "level": 1,
+      "reason": "Fracció directa d’una quantitat.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Quantes galetes representen 2/6 de 90 galetes?",
+        "Quantes galetes representen 2/7 de 56 galetes?",
+        "Quants llibres representen 1/8 de 80 llibres?"
+      ]
+    },
+    {
+      "topic": "fraccions",
+      "type": 11,
+      "level": 1,
+      "reason": "Equivalències habituals entre fracció, decimal i percentatge.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Quina equivalència és correcta per a 4/5?",
+        "Quina equivalència és correcta per a 3/5?",
+        "Quina equivalència és correcta per a 1/5?"
+      ]
+    },
+    {
+      "topic": "fraccions",
+      "type": 3,
+      "level": 2,
+      "reason": "Coordinar denominadors diferents abans de sumar.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Calcula: 2/6 + 3/3",
+        "Calcula: 4/4 + 2/2",
+        "Calcula: 2/4 + 2/3"
+      ]
+    },
+    {
+      "topic": "fraccions",
+      "type": 6,
+      "level": 2,
+      "reason": "Comparar representacions fraccionàries amb procediment escollit.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Compara les fraccions:4/6 ___ 3/7",
+        "Compara les fraccions:2/4 ___ 6/8",
+        "Compara les fraccions:1/3 ___ 1/7"
+      ]
+    },
+    {
+      "topic": "fraccions",
+      "type": 8,
+      "level": 2,
+      "reason": "Calcular una part i el complement contextual.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Hi ha 72 galetes. En reparteix 3/6 del total. Quantes en queden?",
+        "Hi ha 24 pizzes. En ven 3/4 del total. Quantes en queden?",
+        "Hi ha 16 quaderns. En ven 1/4 del total. Quantes en queden?"
+      ]
+    },
+    {
+      "topic": "proporcionalitat",
+      "type": 1,
+      "level": 1,
+      "reason": "Reconèixer contextos habituals de proporcionalitat directa.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Classifica la relació: \"El nombre d'alumnes d'una classe i la nota mitjana\".",
+        "Classifica la relació: \"El costat d'un quadrat i el seu perímetre\".",
+        "Classifica la relació: \"El número de sabata i l'edat d'una persona\"."
+      ]
+    },
+    {
+      "topic": "proporcionalitat",
+      "type": 2,
+      "level": 1,
+      "reason": "Taula directa: obtenir constant i aplicar-la sense canvi de model.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Completa la taula proporcional: 5 → 35 4 → ?",
+        "Completa la taula proporcional: 5 → 40 8 → ?",
+        "Completa la taula proporcional: 4 → 8 8 → ?"
+      ]
+    },
+    {
+      "topic": "proporcionalitat",
+      "type": 5,
+      "level": 1,
+      "reason": "Constant definida explícitament com y/x.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "En una proporcionalitat directa, x=5 correspon a y=20. Quina és la constant k=y/x?",
+        "En una proporcionalitat directa, x=3 correspon a y=12. Quina és la constant k=y/x?",
+        "En una proporcionalitat directa, x=3 correspon a y=9. Quina és la constant k=y/x?"
+      ]
+    },
+    {
+      "topic": "proporcionalitat",
+      "type": 8,
+      "level": 1,
+      "reason": "Factor de canvi donat indirectament: aplicar el mateix factor.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Si dues magnituds són directament proporcionals i la primera passa de 3 a 12, què ha de passar amb el valor corresponent 6?",
+        "Si dues magnituds són directament proporcionals i la primera passa de 5 a 15, què ha de passar amb el valor corresponent 7?",
+        "Si dues magnituds són directament proporcionals i la primera passa de 2 a 8, què ha de passar amb el valor corresponent 6?"
+      ]
+    },
+    {
+      "topic": "proporcionalitat",
+      "type": 3,
+      "level": 2,
+      "reason": "Trobar preu unitari i nou cost: dos passos contextuals.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "5 entrades iguals costen 35 €. Quant costen 10 entrades al mateix preu?",
+        "6 entrades iguals costen 36 €. Quant costen 11 entrades al mateix preu?",
+        "2 entrades iguals costen 4 €. Quant costen 11 entrades al mateix preu?"
+      ]
+    },
+    {
+      "topic": "proporcionalitat",
+      "type": 4,
+      "level": 2,
+      "reason": "Trobar quantitat per persona i reescalar recepta.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "Una recepta per a 3 persones necessita 183 g de farina. Quants grams calen per a 10 persones mantenint la proporció?",
+        "Una recepta per a 4 persones necessita 220 g de farina. Quants grams calen per a 7 persones mantenint la proporció?",
+        "Una recepta per a 3 persones necessita 249 g de farina. Quants grams calen per a 9 persones mantenint la proporció?"
+      ]
+    },
+    {
+      "topic": "proporcionalitat",
+      "type": 6,
+      "level": 2,
+      "reason": "Comparar quocients de diverses parelles per validar un model.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "La taula x: 3, 5, 12 | y: 9, 15, 37 representa una proporcionalitat directa?",
+        "La taula x: 2, 8, 11 | y: 12, 48, 66 representa una proporcionalitat directa?",
+        "La taula x: 1, 7, 13 | y: 5, 35, 65 representa una proporcionalitat directa?"
+      ]
+    },
+    {
+      "topic": "proporcionalitat",
+      "type": 7,
+      "level": 2,
+      "reason": "Obtenir velocitat i distància en un altre temps.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "A velocitat constant, en 4 h es recorren 16 km. Quina distància es recorre en 7 h?",
+        "A velocitat constant, en 2 h es recorren 10 km. Quina distància es recorre en 10 h?",
+        "A velocitat constant, en 3 h es recorren 18 km. Quina distància es recorre en 6 h?"
+      ]
+    },
+    {
+      "topic": "percentatges",
+      "type": 1,
+      "level": 1,
+      "reason": "Percentatge directe d’una quantitat.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Calcula el 50% de 220",
+        "Calcula el 25% de 220",
+        "Calcula el 20% de 320"
+      ]
+    },
+    {
+      "topic": "percentatges",
+      "type": 2,
+      "level": 1,
+      "reason": "Percentatge part/total directe.",
+      "previous": [
+        1
+      ],
+      "samples": [
+        "Quin percentatge representa 72 de 360?",
+        "Quin percentatge representa 16 de 160?",
+        "Quin percentatge representa 28 de 280?"
+      ]
+    },
+    {
+      "topic": "percentatges",
+      "type": 6,
+      "level": 1,
+      "reason": "Equivalències directes fracció/percentatge/decimal.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Quin decimal correspon a 20%?",
+        "Quin decimal correspon a 75%?",
+        "Quin decimal correspon a 50%?"
+      ]
+    },
+    {
+      "topic": "percentatges",
+      "type": 3,
+      "level": 2,
+      "reason": "Reconstruir total a partir de part i percentatge.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Si 140 es el 20%, quin es el total?",
+        "Si 350 es el 25%, quin es el total?",
+        "Si 300 es el 20%, quin es el total?"
+      ]
+    },
+    {
+      "topic": "percentatges",
+      "type": 4,
+      "level": 2,
+      "reason": "Calcular percentatge i sumar-lo a la base.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Una entrada costava 600 € i el preu ha augmentat un 5%. Quin és el nou preu?",
+        "Una bicicleta costava 360 € i el preu ha augmentat un 5%. Quin és el nou preu?",
+        "Una activitat tenia un preu de 160 € i el preu ha augmentat un 30%. Quin és el nou preu?"
+      ]
+    },
+    {
+      "topic": "percentatges",
+      "type": 5,
+      "level": 2,
+      "reason": "Calcular percentatge i restar-lo de la base.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Una tauleta costa 240 € i té un descompte del 10%. Quin és el preu final?",
+        "Un ordinador costa 500 € i té un descompte del 25%. Quin és el preu final?",
+        "Un rellotge costa 360 € i té un descompte del 10%. Quin és el preu final?"
+      ]
+    },
+    {
+      "topic": "percentatges",
+      "type": 7,
+      "level": 2,
+      "reason": "Reconstruir total contextual: mateixa demanda que tipus 3, no alta.",
+      "previous": [
+        3
+      ],
+      "samples": [
+        "18 persones representen el 10% i trien fruita per esmorzar. Quantes persones formaven el grup total?",
+        "10 persones representen el 10% i prefereixen el color blau. Quantes persones formaven el grup total?",
+        "93.75 persones representen el 25% i han visitat la biblioteca aquesta setmana. Quantes persones formaven el grup total?"
+      ]
+    },
+    {
+      "topic": "notacio2",
+      "type": 4,
+      "level": 1,
+      "reason": "Interpretar el significat d’un exponent positiu indicat.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "A 5 × 10^4, què indica l'exponent 4?",
+        "A 7 × 10^3, què indica l'exponent 3?",
+        "A 9 × 10^6, què indica l'exponent 6?"
+      ]
+    },
+    {
+      "topic": "notacio2",
+      "type": 5,
+      "level": 1,
+      "reason": "Reconèixer la forma normalitzada amb regla explícita.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Quina expressió està escrita correctament en notació científica?",
+        "Quina opció té una mantissa vàlida i una potència de 10?",
+        "Quina expressió segueix les regles de la notació científica?"
+      ]
+    },
+    {
+      "topic": "notacio2",
+      "type": 6,
+      "level": 1,
+      "reason": "Comparar mantisses amb exponent idèntic; no cal convertir.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Quin és més gran: 3,5 × 10^3 o 7,5 × 10^3?",
+        "Quin és més gran: 3,5 × 10^5 o 7,5 × 10^5?",
+        "Quin és més gran: 1,5 × 10^7 o 8,5 × 10^7?"
+      ]
+    },
+    {
+      "topic": "notacio2",
+      "type": 1,
+      "level": 2,
+      "reason": "Connectar escriptura ordinària i científica: ampliació de contingut de 2n.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Escriu 7500 en notació científica.",
+        "Escriu 6200 en notació científica.",
+        "Escriu 120000 en notació científica."
+      ]
+    },
+    {
+      "topic": "notacio2",
+      "type": 2,
+      "level": 2,
+      "reason": "Interpretar mantissa i exponent per reconstruir nombre: ampliació.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Quin nombre representa 4,5 × 10^4?",
+        "Quin nombre representa 7,2 × 10^4?",
+        "Quin nombre representa 1,5 × 10^4?"
+      ]
+    },
+    {
+      "topic": "notacio2",
+      "type": 3,
+      "level": 2,
+      "reason": "Connectar decimal petit i exponent negatiu: ampliació.",
+      "previous": [
+        2
+      ],
+      "samples": [
+        "Escriu 0,091 en notació científica.",
+        "Escriu 0,00012 en notació científica.",
+        "Escriu 0,075 en notació científica."
+      ]
+    },
+    {
+      "topic": "naturals",
+      "type": 1001,
+      "level": 3,
+      "reason": "Planificar una combinació exacta de dos formats i demostrar que minimitza el nombre de paquets.",
+      "previous": [],
+      "samples": [
+        "Cal repartir exactament 197 adhesius. Hi ha paquets de 7 i de 11 adhesius. Has d'utilitzar almenys un paquet de cada format i no pot sobrar cap adhesiu. Quin és el nombre mínim de paquets?"
+      ],
+      "added": true,
+      "family": "paquets-exactes"
+    },
+    {
+      "topic": "decimal_sys",
+      "type": 1001,
+      "level": 3,
+      "reason": "Coordinar valor posicional, paritat i ús únic de les xifres per construir el màxim.",
+      "previous": [],
+      "samples": [
+        "Amb les xifres 2, 8, 1, 9, forma el nombre parell de quatre xifres més gran possible. Has de fer servir cada xifra exactament una vegada. Quin nombre obtens?"
+      ],
+      "added": true,
+      "family": "xifres-amb-condicions"
+    },
+    {
+      "topic": "decimal_sys",
+      "type": 1002,
+      "level": 2,
+      "reason": "Relacionar dos valors posicionals i calcular el canvi de contribució al nombre.",
+      "previous": [],
+      "samples": [
+        "La contribució d'una xifra 5 passa de 5 × 1 a 5 × 100. Les altres contribucions no canvien. En quant augmenta el nombre?"
+      ],
+      "added": true,
+      "family": "canvi-posicional"
+    },
+    {
+      "topic": "ops",
+      "type": 1001,
+      "level": 3,
+      "reason": "Comparar compres mixtes, excés d’unitats i cost mínim; el preu unitari sol no resol el problema.",
+      "previous": [],
+      "samples": [
+        "Necessites almenys 20 llapis. Els paquets A tenen 4 llapis i costen 5 €; els B tenen 6 llapis i costen 7 €. Pots combinar formats i poden sobrar llapis. Quin és el cost mínim, en euros?"
+      ],
+      "added": true,
+      "family": "compra-combinada"
+    },
+    {
+      "topic": "potencies",
+      "type": 1001,
+      "level": 3,
+      "reason": "Reconstruir dues disposicions quadrades amb una relació entre costats i un total conjunt, sense equacions de segon grau.",
+      "previous": [],
+      "samples": [
+        "Dos mosaics quadrats utilitzen en total 340 rajoles. El costat del gran té 2 rajoles més que el del petit. No se superposen. Quantes rajoles té el mosaic gran?"
+      ],
+      "added": true,
+      "family": "dos-quadrats-invers"
+    },
+    {
+      "topic": "potencies",
+      "type": 1002,
+      "level": 2,
+      "reason": "Relacionar una potència amb dos conjunts de rajoles i evitar comptar dues vegades la cantonada.",
+      "previous": [],
+      "samples": [
+        "Un mosaic quadrat té 9 files de 9 rajoles. Es retira tota la fila superior i tota la columna de l'esquerra. Quantes rajoles queden?"
+      ],
+      "added": true,
+      "family": "fila-columna"
+    },
+    {
+      "topic": "jerarquia",
+      "type": 1001,
+      "level": 3,
+      "reason": "Explorar agrupacions admissibles, respectar l’ordre i discriminar el mínim estrictament positiu.",
+      "previous": [],
+      "samples": [
+        "A l'expressió 13 + 5 × 8 − 4, pots afegir parèntesis sense canviar l'ordre dels nombres ni els signes. Quin és el resultat estrictament positiu més petit que pots obtenir?"
+      ],
+      "added": true,
+      "family": "parentesis-resultat-positiu"
+    },
+    {
+      "topic": "divis",
+      "type": 1001,
+      "level": 3,
+      "reason": "Combinar criteris de divisibilitat i restriccions posicionals, cercant i contrastant candidats.",
+      "previous": [],
+      "samples": [
+        "Completa 2□□2 amb dues xifres (poden ser zero o repetir-se). El nombre ha de ser divisible per 9 i per 4, però no per 8. Quin és el nombre més petit que compleix totes les condicions?"
+      ],
+      "added": true,
+      "family": "divisibilitat-condicions"
+    },
+    {
+      "topic": "mcmmcd",
+      "type": 1001,
+      "level": 3,
+      "reason": "Coordinar progressions periòdiques amb inicis diferents i un llindar; aplicar només mcm als intervals no determina la primera coincidència.",
+      "previous": [],
+      "samples": [
+        "El servei A surt per primer cop al minut 0 i després cada 8 minuts. El B surt per primer cop al minut 8 i després cada 12 minuts. Quin és el primer minut estrictament posterior al 48 en què surten alhora?"
+      ],
+      "added": true,
+      "family": "coincidencies-desfasades"
+    },
+    {
+      "topic": "enters",
+      "type": 1001,
+      "level": 3,
+      "reason": "Explorar ordres de moviments amb signes i validar tots els estats intermedis contra dos límits.",
+      "previous": [],
+      "samples": [
+        "Comences a 5 en una recta numèrica. Has d'aplicar els tres moviments +7, +10 i -14, una vegada cadascun, en l'ordre que triïs. Després de CADA moviment, la posició ha de quedar entre -3 i 17, inclosos. Quants ordres diferents són possibles?"
+      ],
+      "added": true,
+      "family": "moviments-amb-limits"
+    },
+    {
+      "topic": "decimals",
+      "type": 1001,
+      "level": 3,
+      "reason": "Escollir el pitjor cas en dues direccions i comprovar simultàniament suficiència i capacitat abans de decidir un enter.",
+      "previous": [],
+      "samples": [
+        "Cada ampolla conté 0,50 L, amb error absolut com a màxim 0,02 L. El contingut de cada ampolla pot ser qualsevol valor dins d'aquest marge. Vols abocar-les SENCERES en un dipòsit de 3,10 L i garantir almenys 2,33 L sense que mai vessi. Quin és el nombre mínim d'ampolles que ho garanteix? Respon 0 si no n'hi ha cap."
+      ],
+      "added": true,
+      "family": "volum-amb-error"
+    },
+    {
+      "topic": "fraccions",
+      "type": 1001,
+      "level": 3,
+      "reason": "Reconstruir el total desfent en ordre invers dues fraccions sobre bases diferents i una retirada fixa.",
+      "previous": [],
+      "samples": [
+        "Una botiga ven 1/4 de les unitats que tenia. Després regala 3/6 de les que quedaven i finalment en retira 3 per a una exposició. Al final en queden 96. Quantes unitats tenia inicialment?"
+      ],
+      "added": true,
+      "family": "fraccions-reconstruccio"
+    },
+    {
+      "topic": "proporcionalitat",
+      "type": 1001,
+      "level": 3,
+      "reason": "Deducció de dos ritmes proporcionals i elecció d’hores enteres amb pressupost i límits de disponibilitat.",
+      "previous": [],
+      "samples": [
+        "A ritme constant, la màquina A fabrica 16 peces en 2 hores i la B, 42 peces en 3 hores. Fer funcionar A costa 8 €/h i B costa 12 €/h. Pots utilitzar A fins a 3 hores i B fins a 4, sempre hores senceres (també 0). Amb 42 € de pressupost total, quantes peces pots fabricar com a màxim?"
+      ],
+      "added": true,
+      "family": "produccio-amb-pressupost"
+    },
+    {
+      "topic": "percentatges",
+      "type": 1001,
+      "level": 3,
+      "reason": "Cercar un llindar enter desconegut, comparar models de descompte i distingir igualtat de millora estricta.",
+      "previous": [],
+      "samples": [
+        "Un article té un preu inicial enter d'euros, igual a totes dues botigues. A aplica un descompte del 20%. B aplica un descompte del 5% i després resta un val de 11 €. Quin és el preu inicial enter més petit perquè A sigui ESTRICTAMENT més barata que B? No arrodoneixis els preus intermedis."
+      ],
+      "added": true,
+      "family": "llindar-ofertes"
+    }
+  ],
+  "banks": [
+    {
+      "key": "naturals-1",
+      "level": 2,
+      "reason": "Suma recollides i resta enviament."
+    },
+    {
+      "key": "naturals-2",
+      "level": 2,
+      "reason": "Cost de samarretes i val."
+    },
+    {
+      "key": "naturals-3",
+      "level": 2,
+      "reason": "Files de seients i places addicionals."
+    },
+    {
+      "key": "naturals-4",
+      "level": 2,
+      "reason": "Cadena producció/hora/torn/dia explícita: repetició de productes."
+    },
+    {
+      "key": "naturals-5",
+      "level": 2,
+      "reason": "Interpretar quocient enter i residu."
+    },
+    {
+      "key": "naturals-6",
+      "level": 2,
+      "reason": "Reconstruir dividend amb divisor, quocient i residu."
+    },
+    {
+      "key": "naturals-7",
+      "level": 2,
+      "reason": "Interpretar arrodoniment superior i càrrega de l’última capsa."
+    },
+    {
+      "key": "potencies-1",
+      "level": 1,
+      "reason": "Quadrat explícit de files iguals."
+    },
+    {
+      "key": "potencies-2",
+      "level": 2,
+      "reason": "Modelitzar seqüències independents amb potència."
+    },
+    {
+      "key": "potencies-3",
+      "level": 2,
+      "reason": "Inferir costat de disposició quadrada amb arrel."
+    },
+    {
+      "key": "jerarquia-1",
+      "level": 2,
+      "reason": "Potència d’una suma i producte/resta."
+    },
+    {
+      "key": "jerarquia-2",
+      "level": 2,
+      "reason": "Coordinar potència i dues branques de càlcul."
+    },
+    {
+      "key": "jerarquia-3",
+      "level": 2,
+      "reason": "Coordinar agrupació, potència i productes."
+    },
+    {
+      "key": "jerarquia-4",
+      "level": 2,
+      "reason": "Modelitzar expressió a partir de lots i penalització: no és alta només per incloure un quadrat."
+    },
+    {
+      "key": "divis-1",
+      "level": 2,
+      "reason": "Factorització i enumeració de divisors."
+    },
+    {
+      "key": "divis-2",
+      "level": 2,
+      "reason": "Usar residu per obtenir increment mínim, inclòs increment zero."
+    },
+    {
+      "key": "divis-3",
+      "level": 2,
+      "reason": "Deducció de totes les xifres admissibles amb criteri del 3."
+    },
+    {
+      "key": "divis-4",
+      "level": 2,
+      "reason": "Justificar primer/compost comptant divisors; justificació rutinària no és alta."
+    },
+    {
+      "key": "mcmmcd-1",
+      "level": 2,
+      "reason": "Factoritzar i calcular dos resultats relacionats."
+    },
+    {
+      "key": "mcmmcd-2",
+      "level": 2,
+      "reason": "Escollir mcm per coincidència periòdica."
+    },
+    {
+      "key": "mcmmcd-3",
+      "level": 2,
+      "reason": "Escollir MCD i interpretar composició de grups."
+    },
+    {
+      "key": "mcmmcd-4",
+      "level": 2,
+      "reason": "Escollir MCD i deduir quantitats de trossos."
+    },
+    {
+      "key": "enters-1",
+      "level": 2,
+      "reason": "Modelitzar dos canvis de temperatura."
+    },
+    {
+      "key": "enters-2",
+      "level": 2,
+      "reason": "Relacionar ingrés i dos pagaments."
+    },
+    {
+      "key": "enters-3",
+      "level": 2,
+      "reason": "Interpretar distància entre altitud positiva i negativa."
+    },
+    {
+      "key": "enters-4",
+      "level": 2,
+      "reason": "Relacionar tres desplaçaments d’ascensor."
+    },
+    {
+      "key": "enters-5",
+      "level": 2,
+      "reason": "Distingir posició final i desplaçament net, inclòs canvi zero."
+    },
+    {
+      "key": "decimals-1",
+      "level": 2,
+      "reason": "Cost de compra i canvi."
+    },
+    {
+      "key": "decimals-2",
+      "level": 1,
+      "reason": "Producte directe massa per quantitat."
+    },
+    {
+      "key": "decimals-3",
+      "level": 1,
+      "reason": "Divisió directa cost per quantitat."
+    },
+    {
+      "key": "decimals-4",
+      "level": 2,
+      "reason": "Interpretar quocient enter i residu amb longituds decimals."
+    },
+    {
+      "key": "decimals-5",
+      "level": 2,
+      "reason": "Calcular suma i mitjana de dades."
+    },
+    {
+      "key": "decimals-6",
+      "level": 1,
+      "reason": "Error absolut com a diferència directa."
+    },
+    {
+      "key": "fraccions-1",
+      "level": 2,
+      "reason": "Sumar parts i aplicar-les al total."
+    },
+    {
+      "key": "fraccions-2",
+      "level": 2,
+      "reason": "Suma amb denominadors diferents i quantitat contextual."
+    },
+    {
+      "key": "fraccions-3",
+      "level": 2,
+      "reason": "Interpretar fracció d’una fracció i quantitat."
+    },
+    {
+      "key": "fraccions-4",
+      "level": 2,
+      "reason": "Dues etapes explícites amb canvi de base; cadena guiada per l’enunciat."
+    },
+    {
+      "key": "fraccions-5",
+      "level": 2,
+      "reason": "Reconstrucció del total a partir de part."
+    },
+    {
+      "key": "fraccions-6",
+      "level": 2,
+      "reason": "Sumar despeses i calcular complement i quantitat."
+    },
+    {
+      "key": "fraccions-7",
+      "level": 2,
+      "reason": "Comparar, identificar persona i calcular diferència."
+    },
+    {
+      "key": "proporcionalitat-1",
+      "level": 2,
+      "reason": "Preu unitari i nou cost."
+    },
+    {
+      "key": "proporcionalitat-2",
+      "level": 2,
+      "reason": "Reescalar recepta passant per unitat."
+    },
+    {
+      "key": "proporcionalitat-3",
+      "level": 2,
+      "reason": "Ritme unitari i nova producció."
+    },
+    {
+      "key": "proporcionalitat-4",
+      "level": 2,
+      "reason": "Consum unitari i distància disponible."
+    },
+    {
+      "key": "proporcionalitat-5",
+      "level": 2,
+      "reason": "Reconèixer que quota fixa trenca proporcionalitat; dada explícita, no estratègia alta."
+    },
+    {
+      "key": "percentatges-1",
+      "level": 2,
+      "reason": "Descompte i preu final."
+    },
+    {
+      "key": "percentatges-2",
+      "level": 2,
+      "reason": "Comparar increment amb base inicial."
+    },
+    {
+      "key": "percentatges-3",
+      "level": 2,
+      "reason": "Dos canvis percentuals explícits: adaptar base, procediment de dos passos."
+    },
+    {
+      "key": "percentatges-4",
+      "level": 2,
+      "reason": "Complement de percentatges i quantitat."
+    },
+    {
+      "key": "percentatges-5",
+      "level": 2,
+      "reason": "Reconstruir total amb part i percentatge."
+    },
+    {
+      "key": "percentatges-6",
+      "level": 1,
+      "reason": "Percentatge directe part/total."
+    },
+    {
+      "key": "naturals-raonament",
+      "level": 3,
+      "reason": "Comparar compres mixtes, excés d’unitats i cost mínim; el preu unitari sol no resol el problema.",
+      "family": "compra-combinada",
+      "reusesTopic": true
+    },
+    {
+      "key": "potencies-raonament",
+      "level": 3,
+      "reason": "Reconstruir dues disposicions quadrades amb una relació entre costats i un total conjunt, sense equacions de segon grau.",
+      "family": "dos-quadrats-invers",
+      "reusesTopic": true
+    },
+    {
+      "key": "jerarquia-raonament",
+      "level": 3,
+      "reason": "Explorar agrupacions admissibles, respectar l’ordre i discriminar el mínim estrictament positiu.",
+      "family": "parentesis-resultat-positiu",
+      "reusesTopic": true
+    },
+    {
+      "key": "divis-raonament",
+      "level": 3,
+      "reason": "Combinar criteris de divisibilitat i restriccions posicionals, cercant i contrastant candidats.",
+      "family": "divisibilitat-condicions",
+      "reusesTopic": true
+    },
+    {
+      "key": "mcmmcd-raonament",
+      "level": 3,
+      "reason": "Coordinar progressions periòdiques amb inicis diferents i un llindar; aplicar només mcm als intervals no determina la primera coincidència.",
+      "family": "coincidencies-desfasades",
+      "reusesTopic": true
+    },
+    {
+      "key": "enters-raonament",
+      "level": 3,
+      "reason": "Explorar ordres de moviments amb signes i validar tots els estats intermedis contra dos límits.",
+      "family": "moviments-amb-limits",
+      "reusesTopic": true
+    },
+    {
+      "key": "decimals-raonament",
+      "level": 3,
+      "reason": "Escollir el pitjor cas en dues direccions i comprovar simultàniament suficiència i capacitat abans de decidir un enter.",
+      "family": "volum-amb-error",
+      "reusesTopic": true
+    },
+    {
+      "key": "fraccions-raonament",
+      "level": 3,
+      "reason": "Reconstruir el total desfent en ordre invers dues fraccions sobre bases diferents i una retirada fixa.",
+      "family": "fraccions-reconstruccio",
+      "reusesTopic": true
+    },
+    {
+      "key": "proporcionalitat-raonament",
+      "level": 3,
+      "reason": "Deducció de dos ritmes proporcionals i elecció d’hores enteres amb pressupost i límits de disponibilitat.",
+      "family": "produccio-amb-pressupost",
+      "reusesTopic": true
+    },
+    {
+      "key": "percentatges-raonament",
+      "level": 3,
+      "reason": "Cercar un llindar enter desconegut, comparar models de descompte i distingir igualtat de millora estricta.",
+      "family": "llindar-ofertes",
+      "reusesTopic": true
+    }
+  ]
+}

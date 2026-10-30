@@ -78,20 +78,21 @@
     const value = parseNumber(raw);
     return value !== null && Math.abs(value - ex.answer) <= 1e-9;
   }
+  function independent(q){return root.MIDifficulty?root.MIDifficulty.independent(q):{...q,taskDifficulty:null,taskDifficultyStatus:'pending',diff:null,difficulty:null};}
   function generate(courses, previous) {
     const generators = courses.flatMap(course => banks[course] || []);
     if (!generators.length) throw new Error('No hi ha exercicis per al curs configurat.');
     let next;
     for (let attempt = 0; attempt < 20; attempt++) {
       next = generators[integer(0, generators.length - 1)]();
-      if (!previous || next.question !== previous.question || next.topic !== previous.topic) return next;
+      if (!previous || next.question !== previous.question || next.topic !== previous.topic) return independent(next);
     }
     // També evita la repetició amb fonts aleatòries constants o simulades.
     for (const generator of generators) {
       next = generator();
-      if (next.question !== previous.question || next.topic !== previous.topic) return next;
+      if (next.question !== previous.question || next.topic !== previous.topic) return independent(next);
     }
-    return next;
+    return independent(next);
   }
   root.MIPortadaBank = { generate, validate, parseNumber, banks,
     theoryUrl: ex => new URL(`../../${ex.theoryPath}`, baseUrl).href };

@@ -1,0 +1,772 @@
+{
+  "seed": 79191,
+  "total": 1442,
+  "families": [
+    {
+      "family": "paquets-exactes",
+      "topic": "naturals",
+      "level": 3,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "Cal repartir exactament 67 adhesius. Hi ha paquets de 4 i de 7 adhesius. Has d'utilitzar almenys un paquet de cada format i no pot sobrar cap adhesiu. Quin és el nombre mínim de paquets?",
+          "correct": "10",
+          "solution": [
+            "Les combinacions exactes (paquets petits, grans) són: (1, 9); (8, 5); (15, 1).",
+            "La millor és 1 × 4 + 9 × 7 = 67.",
+            "Utilitza 10 paquets; cap combinació admissible en necessita menys."
+          ],
+          "data": {
+            "a": 4,
+            "b": 7,
+            "total": 67
+          }
+        },
+        {
+          "question": "Cal repartir exactament 168 adhesius. Hi ha paquets de 6 i de 10 adhesius. Has d'utilitzar almenys un paquet de cada format i no pot sobrar cap adhesiu. Quin és el nombre mínim de paquets?",
+          "correct": "18",
+          "solution": [
+            "Les combinacions exactes (paquets petits, grans) són: (3, 15); (8, 12); (13, 9); (18, 6); (23, 3).",
+            "La millor és 3 × 6 + 15 × 10 = 168.",
+            "Utilitza 18 paquets; cap combinació admissible en necessita menys."
+          ],
+          "data": {
+            "a": 6,
+            "b": 10,
+            "total": 168
+          }
+        },
+        {
+          "question": "Cal repartir exactament 226 adhesius. Hi ha paquets de 7 i de 11 adhesius. Has d'utilitzar almenys un paquet de cada format i no pot sobrar cap adhesiu. Quin és el nombre mínim de paquets?",
+          "correct": "22",
+          "solution": [
+            "Les combinacions exactes (paquets petits, grans) són: (4, 18); (15, 11); (26, 4).",
+            "La millor és 4 × 7 + 18 × 11 = 226.",
+            "Utilitza 22 paquets; cap combinació admissible en necessita menys."
+          ],
+          "data": {
+            "a": 7,
+            "b": 11,
+            "total": 226
+          }
+        }
+      ]
+    },
+    {
+      "family": "xifres-amb-condicions",
+      "topic": "decimal_sys",
+      "level": 3,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "Amb les xifres 2, 4, 1, 3, forma el nombre parell de quatre xifres més gran possible. Has de fer servir cada xifra exactament una vegada. Quin nombre obtens?",
+          "correct": "4312",
+          "solution": [
+            "Si la unitat és 2, el màxim és 4312.",
+            "Si la unitat és 4, el màxim és 3214.",
+            "El més gran és 4312."
+          ],
+          "data": {
+            "digits": [
+              2,
+              4,
+              1,
+              3
+            ]
+          }
+        },
+        {
+          "question": "Amb les xifres 4, 6, 3, 7, forma el nombre parell de quatre xifres més gran possible. Has de fer servir cada xifra exactament una vegada. Quin nombre obtens?",
+          "correct": "7634",
+          "solution": [
+            "Si la unitat és 4, el màxim és 7634.",
+            "Si la unitat és 6, el màxim és 7436.",
+            "El més gran és 7634."
+          ],
+          "data": {
+            "digits": [
+              4,
+              6,
+              3,
+              7
+            ]
+          }
+        },
+        {
+          "question": "Amb les xifres 6, 8, 7, 9, forma el nombre parell de quatre xifres més gran possible. Has de fer servir cada xifra exactament una vegada. Quin nombre obtens?",
+          "correct": "9876",
+          "solution": [
+            "Si la unitat és 6, el màxim és 9876.",
+            "Si la unitat és 8, el màxim és 9768.",
+            "El més gran és 9876."
+          ],
+          "data": {
+            "digits": [
+              6,
+              8,
+              7,
+              9
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "family": "canvi-posicional",
+      "topic": "decimal_sys",
+      "level": 2,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "La contribució d'una xifra 2 passa de 2 × 10 a 2 × 1000. Les altres contribucions no canvien. En quant augmenta el nombre?",
+          "correct": "1980",
+          "solution": [
+            "Valor antic: 20. Valor nou: 2000.",
+            "Augment: 2000 − 20 = 1980."
+          ],
+          "data": {
+            "digit": 2,
+            "from": 10,
+            "to": 1000
+          }
+        },
+        {
+          "question": "La contribució d'una xifra 6 passa de 6 × 1 a 6 × 100. Les altres contribucions no canvien. En quant augmenta el nombre?",
+          "correct": "594",
+          "solution": [
+            "Valor antic: 6. Valor nou: 600.",
+            "Augment: 600 − 6 = 594."
+          ],
+          "data": {
+            "digit": 6,
+            "from": 1,
+            "to": 100
+          }
+        },
+        {
+          "question": "La contribució d'una xifra 9 passa de 9 × 100 a 9 × 10000. Les altres contribucions no canvien. En quant augmenta el nombre?",
+          "correct": "89100",
+          "solution": [
+            "Valor antic: 900. Valor nou: 90000.",
+            "Augment: 90000 − 900 = 89100."
+          ],
+          "data": {
+            "digit": 9,
+            "from": 100,
+            "to": 10000
+          }
+        }
+      ]
+    },
+    {
+      "family": "compra-combinada",
+      "topic": "ops",
+      "level": 3,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "Necessites almenys 8 llapis. Els paquets A tenen 3 llapis i costen 4 €; els B tenen 5 llapis i costen 5 €. Pots combinar formats i poden sobrar llapis. Quin és el cost mínim, en euros?",
+          "correct": "9",
+          "solution": [
+            "Per cada y de 0 a 2, calen com a mínim max(0, arrodoniment superior de (8 − 5y)/3) paquets A.",
+            "Comparant-ne els costos, una compra òptima és 1 paquets A i 1 B: 8 llapis.",
+            "Cost mínim: 1 × 4 + 1 × 5 = 9 €."
+          ],
+          "data": {
+            "a": 3,
+            "b": 5,
+            "pa": 4,
+            "pb": 5,
+            "need": 8
+          }
+        },
+        {
+          "question": "Necessites almenys 19 llapis. Els paquets A tenen 5 llapis i costen 7 €; els B tenen 8 llapis i costen 9 €. Pots combinar formats i poden sobrar llapis. Quin és el cost mínim, en euros?",
+          "correct": "25",
+          "solution": [
+            "Per cada y de 0 a 3, calen com a mínim max(0, arrodoniment superior de (19 − 8y)/5) paquets A.",
+            "Comparant-ne els costos, una compra òptima és 1 paquets A i 2 B: 21 llapis.",
+            "Cost mínim: 1 × 7 + 2 × 9 = 25 €."
+          ],
+          "data": {
+            "a": 5,
+            "b": 8,
+            "pa": 7,
+            "pb": 9,
+            "need": 19
+          }
+        },
+        {
+          "question": "Necessites almenys 11 llapis. Els paquets A tenen 4 llapis i costen 5 €; els B tenen 7 llapis i costen 8 €. Pots combinar formats i poden sobrar llapis. Quin és el cost mínim, en euros?",
+          "correct": "13",
+          "solution": [
+            "Per cada y de 0 a 2, calen com a mínim max(0, arrodoniment superior de (11 − 7y)/4) paquets A.",
+            "Comparant-ne els costos, una compra òptima és 1 paquets A i 1 B: 11 llapis.",
+            "Cost mínim: 1 × 5 + 1 × 8 = 13 €."
+          ],
+          "data": {
+            "a": 4,
+            "b": 7,
+            "pa": 5,
+            "pb": 8,
+            "need": 11
+          }
+        }
+      ]
+    },
+    {
+      "family": "dos-quadrats-invers",
+      "topic": "potencies",
+      "level": 3,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "Dos mosaics quadrats utilitzen en total 52 rajoles. El costat del gran té 2 rajoles més que el del petit. No se superposen. Quantes rajoles té el mosaic gran?",
+          "correct": "36",
+          "solution": [
+            "Cal cercar dos quadrats de costats n i n + 2 amb àrees que sumin 52.",
+            "4² + 6² = 16 + 36 = 52.",
+            "La suma creix amb n, per tant no hi ha una altra parella de costats positius.",
+            "El mosaic gran té 36 rajoles."
+          ],
+          "data": {
+            "gap": 2,
+            "total": 52
+          }
+        },
+        {
+          "question": "Dos mosaics quadrats utilitzen en total 185 rajoles. El costat del gran té 3 rajoles més que el del petit. No se superposen. Quantes rajoles té el mosaic gran?",
+          "correct": "121",
+          "solution": [
+            "Cal cercar dos quadrats de costats n i n + 3 amb àrees que sumin 185.",
+            "8² + 11² = 64 + 121 = 185.",
+            "La suma creix amb n, per tant no hi ha una altra parella de costats positius.",
+            "El mosaic gran té 121 rajoles."
+          ],
+          "data": {
+            "gap": 3,
+            "total": 185
+          }
+        },
+        {
+          "question": "Dos mosaics quadrats utilitzen en total 400 rajoles. El costat del gran té 4 rajoles més que el del petit. No se superposen. Quantes rajoles té el mosaic gran?",
+          "correct": "256",
+          "solution": [
+            "Cal cercar dos quadrats de costats n i n + 4 amb àrees que sumin 400.",
+            "12² + 16² = 144 + 256 = 400.",
+            "La suma creix amb n, per tant no hi ha una altra parella de costats positius.",
+            "El mosaic gran té 256 rajoles."
+          ],
+          "data": {
+            "gap": 4,
+            "total": 400
+          }
+        }
+      ]
+    },
+    {
+      "family": "fila-columna",
+      "topic": "potencies",
+      "level": 2,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "Un mosaic quadrat té 4 files de 4 rajoles. Es retira tota la fila superior i tota la columna de l'esquerra. Quantes rajoles queden?",
+          "correct": "9",
+          "solution": [
+            "Inicialment hi ha 4² = 16 rajoles.",
+            "Es retiren 4 + 4 − 1 = 7, perquè la cantonada només es retira una vegada.",
+            "Queden 16 − 7 = 9, també (4 − 1)²."
+          ],
+          "data": {
+            "side": 4
+          }
+        },
+        {
+          "question": "Un mosaic quadrat té 10 files de 10 rajoles. Es retira tota la fila superior i tota la columna de l'esquerra. Quantes rajoles queden?",
+          "correct": "81",
+          "solution": [
+            "Inicialment hi ha 10² = 100 rajoles.",
+            "Es retiren 10 + 10 − 1 = 19, perquè la cantonada només es retira una vegada.",
+            "Queden 100 − 19 = 81, també (10 − 1)²."
+          ],
+          "data": {
+            "side": 10
+          }
+        },
+        {
+          "question": "Un mosaic quadrat té 15 files de 15 rajoles. Es retira tota la fila superior i tota la columna de l'esquerra. Quantes rajoles queden?",
+          "correct": "196",
+          "solution": [
+            "Inicialment hi ha 15² = 225 rajoles.",
+            "Es retiren 15 + 15 − 1 = 29, perquè la cantonada només es retira una vegada.",
+            "Queden 225 − 29 = 196, també (15 − 1)²."
+          ],
+          "data": {
+            "side": 15
+          }
+        }
+      ]
+    },
+    {
+      "family": "parentesis-resultat-positiu",
+      "topic": "jerarquia",
+      "level": 3,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "A l'expressió 2 + 2 × 2 − 2, pots afegir parèntesis sense canviar l'ordre dels nombres ni els signes. Quin és el resultat estrictament positiu més petit que pots obtenir?",
+          "correct": "2",
+          "solution": [
+            "Les cinc agrupacions completes donen: ((2+2)×2)−2 = 6; (2+(2×2))−2 = 4; (2+2)×(2−2) = 0; 2+((2×2)−2) = 4; 2+(2×(2−2)) = 2.",
+            "El mínim estrictament positiu és 2."
+          ],
+          "data": {
+            "a": 2,
+            "b": 2,
+            "c": 2,
+            "d": 2
+          }
+        },
+        {
+          "question": "A l'expressió 10 + 3 × 5 − 2, pots afegir parèntesis sense canviar l'ordre dels nombres ni els signes. Quin és el resultat estrictament positiu més petit que pots obtenir?",
+          "correct": "19",
+          "solution": [
+            "Les cinc agrupacions completes donen: ((10+3)×5)−2 = 63; (10+(3×5))−2 = 23; (10+3)×(5−2) = 39; 10+((3×5)−2) = 23; 10+(3×(5−2)) = 19.",
+            "El mínim estrictament positiu és 19."
+          ],
+          "data": {
+            "a": 10,
+            "b": 3,
+            "c": 5,
+            "d": 2
+          }
+        },
+        {
+          "question": "A l'expressió 10 + 3 × 5 − 2, pots afegir parèntesis sense canviar l'ordre dels nombres ni els signes. Quin és el resultat estrictament positiu més petit que pots obtenir?",
+          "correct": "19",
+          "solution": [
+            "Les cinc agrupacions completes donen: ((10+3)×5)−2 = 63; (10+(3×5))−2 = 23; (10+3)×(5−2) = 39; 10+((3×5)−2) = 23; 10+(3×(5−2)) = 19.",
+            "El mínim estrictament positiu és 19."
+          ],
+          "data": {
+            "a": 10,
+            "b": 3,
+            "c": 5,
+            "d": 2
+          }
+        }
+      ]
+    },
+    {
+      "family": "divisibilitat-condicions",
+      "topic": "divis",
+      "level": 3,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "Completa 1□□4 amb dues xifres (poden ser zero o repetir-se). El nombre ha de ser divisible per 9 i per 4, però no per 8. Quin és el nombre més petit que compleix totes les condicions?",
+          "correct": "1044",
+          "solution": [
+            "Els candidats que compleixen totes tres condicions són 1044, 1404, 1764.",
+            "S'han comprovat les dues xifres desconegudes de 00 a 99, mantenint les posicions fixes.",
+            "El més petit és 1044: és múltiple de 9 i de 4, però no de 8."
+          ],
+          "data": {
+            "first": 1,
+            "last": 4
+          }
+        },
+        {
+          "question": "Completa 5□□6 amb dues xifres (poden ser zero o repetir-se). El nombre ha de ser divisible per 9 i per 4, però no per 8. Quin és el nombre més petit que compleix totes les condicions?",
+          "correct": "5076",
+          "solution": [
+            "Els candidats que compleixen totes tres condicions són 5076, 5436, 5796.",
+            "S'han comprovat les dues xifres desconegudes de 00 a 99, mantenint les posicions fixes.",
+            "El més petit és 5076: és múltiple de 9 i de 4, però no de 8."
+          ],
+          "data": {
+            "first": 5,
+            "last": 6
+          }
+        },
+        {
+          "question": "Completa 9□□8 amb dues xifres (poden ser zero o repetir-se). El nombre ha de ser divisible per 9 i per 4, però no per 8. Quin és el nombre més petit que compleix totes les condicions?",
+          "correct": "9108",
+          "solution": [
+            "Els candidats que compleixen totes tres condicions són 9108, 9468, 9828.",
+            "S'han comprovat les dues xifres desconegudes de 00 a 99, mantenint les posicions fixes.",
+            "El més petit és 9108: és múltiple de 9 i de 4, però no de 8."
+          ],
+          "data": {
+            "first": 9,
+            "last": 8
+          }
+        }
+      ]
+    },
+    {
+      "family": "coincidencies-desfasades",
+      "topic": "mcmmcd",
+      "level": 3,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "El servei A surt per primer cop al minut 2 i després cada 4 minuts. El B surt per primer cop al minut 4 i després cada 6 minuts. Quin és el primer minut estrictament posterior al 0 en què surten alhora?",
+          "correct": "10",
+          "solution": [
+            "A: 2, 6, 10.",
+            "B: 4, 10.",
+            "La primera coincidència posterior al minut 0 és al minut 10."
+          ],
+          "data": {
+            "a": 4,
+            "b": 6,
+            "oa": 2,
+            "ob": 4,
+            "after": 0
+          }
+        },
+        {
+          "question": "El servei A surt per primer cop al minut 1 i després cada 6 minuts. El B surt per primer cop al minut 7 i després cada 9 minuts. Quin és el primer minut estrictament posterior al 25 en què surten alhora?",
+          "correct": "43",
+          "solution": [
+            "A: 1, 7, 13, 19, 25, 31, 37, 43.",
+            "B: 7, 16, 25, 34, 43.",
+            "La primera coincidència posterior al minut 25 és al minut 43."
+          ],
+          "data": {
+            "a": 6,
+            "b": 9,
+            "oa": 1,
+            "ob": 7,
+            "after": 25
+          }
+        },
+        {
+          "question": "El servei A surt per primer cop al minut 6 i després cada 8 minuts. El B surt per primer cop al minut 10 i després cada 12 minuts. Quin és el primer minut estrictament posterior al 50 en què surten alhora?",
+          "correct": "70",
+          "solution": [
+            "A: 6, 14, 22, 30, 38, 46, 54, 62, 70.",
+            "B: 10, 22, 34, 46, 58, 70.",
+            "La primera coincidència posterior al minut 50 és al minut 70."
+          ],
+          "data": {
+            "a": 8,
+            "b": 12,
+            "oa": 6,
+            "ob": 10,
+            "after": 50
+          }
+        }
+      ]
+    },
+    {
+      "family": "moviments-amb-limits",
+      "topic": "enters",
+      "level": 3,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "Comences a 0 en una recta numèrica. Has d'aplicar els tres moviments +3, +9 i -5, una vegada cadascun, en l'ordre que triïs. Després de CADA moviment, la posició ha de quedar entre 0 i 10, inclosos. Quants ordres diferents són possibles?",
+          "correct": "1",
+          "solution": [
+            "Els ordres admissibles són: +9, -5, +3.",
+            "S'han descartat els altres ordres perquè alguna posició intermèdia queda fora de [0, 10].",
+            "Hi ha 1 ordres possibles."
+          ],
+          "data": {
+            "start": 0,
+            "moves": [
+              3,
+              9,
+              -5
+            ],
+            "lower": 0,
+            "upper": 10
+          }
+        },
+        {
+          "question": "Comences a 3 en una recta numèrica. Has d'aplicar els tres moviments +6, +11 i -10, una vegada cadascun, en l'ordre que triïs. Després de CADA moviment, la posició ha de quedar entre -3 i 14, inclosos. Quants ordres diferents són possibles?",
+          "correct": "2",
+          "solution": [
+            "Els ordres admissibles són: +6, -10, +11; +11, -10, +6.",
+            "S'han descartat els altres ordres perquè alguna posició intermèdia queda fora de [-3, 14].",
+            "Hi ha 2 ordres possibles."
+          ],
+          "data": {
+            "start": 3,
+            "moves": [
+              6,
+              11,
+              -10
+            ],
+            "lower": -3,
+            "upper": 14
+          }
+        },
+        {
+          "question": "Comences a 5 en una recta numèrica. Has d'aplicar els tres moviments +8, +13 i -14, una vegada cadascun, en l'ordre que triïs. Després de CADA moviment, la posició ha de quedar entre -5 i 18, inclosos. Quants ordres diferents són possibles?",
+          "correct": "2",
+          "solution": [
+            "Els ordres admissibles són: +8, -14, +13; +13, -14, +8.",
+            "S'han descartat els altres ordres perquè alguna posició intermèdia queda fora de [-5, 18].",
+            "Hi ha 2 ordres possibles."
+          ],
+          "data": {
+            "start": 5,
+            "moves": [
+              8,
+              13,
+              -14
+            ],
+            "lower": -5,
+            "upper": 18
+          }
+        }
+      ]
+    },
+    {
+      "family": "volum-amb-error",
+      "topic": "decimals",
+      "level": 3,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "Cada ampolla conté 0,40 L, amb error absolut com a màxim 0,01 L. El contingut de cada ampolla pot ser qualsevol valor dins d'aquest marge. Vols abocar-les SENCERES en un dipòsit de 1,23 L i garantir almenys 1,18 L sense que mai vessi. Quin és el nombre mínim d'ampolles que ho garanteix? Respon 0 si no n'hi ha cap.",
+          "correct": "0",
+          "solution": [
+            "Cada ampolla pot contenir entre 0,39 i 0,41 L.",
+            "Per garantir la quantitat calen com a mínim 4 ampolles.",
+            "Per no vessar se'n poden abocar com a màxim 3.",
+            "Els límits són incompatibles: cap nombre d’ampolles ho garanteix; resposta 0."
+          ],
+          "data": {
+            "nominal": 40,
+            "error": 1,
+            "needed": 118,
+            "capacity": 123
+          }
+        },
+        {
+          "question": "Cada ampolla conté 0,65 L, amb error absolut com a màxim 0,03 L. El contingut de cada ampolla pot ser qualsevol valor dins d'aquest marge. Vols abocar-les SENCERES en un dipòsit de 5,10 L i garantir almenys 4,03 L sense que mai vessi. Quin és el nombre mínim d'ampolles que ho garanteix? Respon 0 si no n'hi ha cap.",
+          "correct": "7",
+          "solution": [
+            "Cada ampolla pot contenir entre 0,62 i 0,68 L.",
+            "Per garantir la quantitat calen com a mínim 7 ampolles.",
+            "Per no vessar se'n poden abocar com a màxim 7.",
+            "El mínim compatible és 7."
+          ],
+          "data": {
+            "nominal": 65,
+            "error": 3,
+            "needed": 403,
+            "capacity": 510
+          }
+        },
+        {
+          "question": "Cada ampolla conté 0,90 L, amb error absolut com a màxim 0,04 L. El contingut de cada ampolla pot ser qualsevol valor dins d'aquest marge. Vols abocar-les SENCERES en un dipòsit de 10,33 L i garantir almenys 7,75 L sense que mai vessi. Quin és el nombre mínim d'ampolles que ho garanteix? Respon 0 si no n'hi ha cap.",
+          "correct": "10",
+          "solution": [
+            "Cada ampolla pot contenir entre 0,86 i 0,94 L.",
+            "Per garantir la quantitat calen com a mínim 10 ampolles.",
+            "Per no vessar se'n poden abocar com a màxim 10.",
+            "El mínim compatible és 10."
+          ],
+          "data": {
+            "nominal": 90,
+            "error": 4,
+            "needed": 775,
+            "capacity": 1033
+          }
+        }
+      ]
+    },
+    {
+      "family": "fraccions-reconstruccio",
+      "topic": "fraccions",
+      "level": 3,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "Una botiga ven 1/3 de les unitats que tenia. Després regala 1/3 de les que quedaven i finalment en retira 1 per a una exposició. Al final en queden 15. Quantes unitats tenia inicialment?",
+          "correct": "36",
+          "solution": [
+            "Abans de retirar-ne 1, quedaven 15 + 1 = 16.",
+            "Aquesta quantitat és 2/3 de la que hi havia abans de regalar: 16 ÷ 2 × 3 = 24.",
+            "Això és 2/3 del total inicial: 24 ÷ 2 × 3 = 36.",
+            "Comprovació: es venen 12, es regalen 8 i se'n retiren 1; queden 15."
+          ],
+          "data": {
+            "a": 1,
+            "b": 3,
+            "c": 1,
+            "d": 3,
+            "reserve": 1,
+            "left": 15
+          }
+        },
+        {
+          "question": "Una botiga ven 2/5 de les unitats que tenia. Després regala 2/5 de les que quedaven i finalment en retira 19 per a una exposició. Al final en queden 53. Quantes unitats tenia inicialment?",
+          "correct": "200",
+          "solution": [
+            "Abans de retirar-ne 19, quedaven 53 + 19 = 72.",
+            "Aquesta quantitat és 3/5 de la que hi havia abans de regalar: 72 ÷ 3 × 5 = 120.",
+            "Això és 3/5 del total inicial: 120 ÷ 3 × 5 = 200.",
+            "Comprovació: es venen 80, es regalen 48 i se'n retiren 19; queden 53."
+          ],
+          "data": {
+            "a": 2,
+            "b": 5,
+            "c": 2,
+            "d": 5,
+            "reserve": 19,
+            "left": 53
+          }
+        },
+        {
+          "question": "Una botiga ven 5/7 de les unitats que tenia. Després regala 5/7 de les que quedaven i finalment en retira 24 per a una exposició. Al final en queden 24. Quantes unitats tenia inicialment?",
+          "correct": "588",
+          "solution": [
+            "Abans de retirar-ne 24, quedaven 24 + 24 = 48.",
+            "Aquesta quantitat és 2/7 de la que hi havia abans de regalar: 48 ÷ 2 × 7 = 168.",
+            "Això és 2/7 del total inicial: 168 ÷ 2 × 7 = 588.",
+            "Comprovació: es venen 420, es regalen 120 i se'n retiren 24; queden 24."
+          ],
+          "data": {
+            "a": 5,
+            "b": 7,
+            "c": 5,
+            "d": 7,
+            "reserve": 24,
+            "left": 24
+          }
+        }
+      ]
+    },
+    {
+      "family": "produccio-amb-pressupost",
+      "topic": "proporcionalitat",
+      "level": 3,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "A ritme constant, la màquina A fabrica 18 peces en 2 hores i la B, 42 peces en 3 hores. Fer funcionar A costa 7 €/h i B costa 9 €/h. Pots utilitzar A fins a 4 hores i B fins a 4, sempre hores senceres (també 0). Amb 34 € de pressupost total, quantes peces pots fabricar com a màxim?",
+          "correct": "51",
+          "solution": [
+            "Ritmes: A = 18 ÷ 2 = 9 peces/h; B = 42 ÷ 3 = 14 peces/h.",
+            "Per a cada nombre d'hores B entre 0 i 4, prova les hores A entre 0 i 4 que no superin 34 €.",
+            "Una combinació òptima és A: 1 h i B: 3 h, amb cost 34 €.",
+            "Producció màxima: 1 × 9 + 3 × 14 = 51 peces."
+          ],
+          "data": {
+            "madeA": 18,
+            "timeA": 2,
+            "madeB": 42,
+            "timeB": 3,
+            "costA": 7,
+            "costB": 9,
+            "hoursA": 4,
+            "hoursB": 4,
+            "budget": 34
+          }
+        },
+        {
+          "question": "A ritme constant, la màquina A fabrica 18 peces en 2 hores i la B, 51 peces en 3 hores. Fer funcionar A costa 7 €/h i B costa 11 €/h. Pots utilitzar A fins a 3 hores i B fins a 3, sempre hores senceres (també 0). Amb 32 € de pressupost total, quantes peces pots fabricar com a màxim?",
+          "correct": "44",
+          "solution": [
+            "Ritmes: A = 18 ÷ 2 = 9 peces/h; B = 51 ÷ 3 = 17 peces/h.",
+            "Per a cada nombre d'hores B entre 0 i 3, prova les hores A entre 0 i 3 que no superin 32 €.",
+            "Una combinació òptima és A: 3 h i B: 1 h, amb cost 32 €.",
+            "Producció màxima: 3 × 9 + 1 × 17 = 44 peces."
+          ],
+          "data": {
+            "madeA": 18,
+            "timeA": 2,
+            "madeB": 51,
+            "timeB": 3,
+            "costA": 7,
+            "costB": 11,
+            "hoursA": 3,
+            "hoursB": 3,
+            "budget": 32
+          }
+        },
+        {
+          "question": "A ritme constant, la màquina A fabrica 24 peces en 2 hores i la B, 60 peces en 3 hores. Fer funcionar A costa 8 €/h i B costa 12 €/h. Pots utilitzar A fins a 4 hores i B fins a 4, sempre hores senceres (també 0). Amb 42 € de pressupost total, quantes peces pots fabricar com a màxim?",
+          "correct": "64",
+          "solution": [
+            "Ritmes: A = 24 ÷ 2 = 12 peces/h; B = 60 ÷ 3 = 20 peces/h.",
+            "Per a cada nombre d'hores B entre 0 i 4, prova les hores A entre 0 i 4 que no superin 42 €.",
+            "Una combinació òptima és A: 2 h i B: 2 h, amb cost 40 €.",
+            "Producció màxima: 2 × 12 + 2 × 20 = 64 peces."
+          ],
+          "data": {
+            "madeA": 24,
+            "timeA": 2,
+            "madeB": 60,
+            "timeB": 3,
+            "costA": 8,
+            "costB": 12,
+            "hoursA": 4,
+            "hoursB": 4,
+            "budget": 42
+          }
+        }
+      ]
+    },
+    {
+      "family": "llindar-ofertes",
+      "topic": "percentatges",
+      "level": 3,
+      "cases": 103,
+      "samples": [
+        {
+          "question": "Un article té un preu inicial enter d'euros, igual a totes dues botigues. A aplica un descompte del 20%. B aplica un descompte del 5% i després resta un val de 3 €. Quin és el preu inicial enter més petit perquè A sigui ESTRICTAMENT més barata que B? No arrodoneixis els preus intermedis.",
+          "correct": "21",
+          "solution": [
+            "A estalvia 15 punts percentuals més que B, mentre B afegeix un val de 3 €.",
+            "A és més barata quan el 15% del preu inicial supera 3 €, és a dir, quan el preu supera 300/15 €.",
+            "El menor enter és 21. En aquest preu, A costa 16.80 € i B 16.95 €.",
+            "Amb 20 €, A encara no és estrictament més barata. Els preus dels candidats són positius."
+          ],
+          "data": {
+            "p": 20,
+            "q": 5,
+            "coupon": 3
+          }
+        },
+        {
+          "question": "Un article té un preu inicial enter d'euros, igual a totes dues botigues. A aplica un descompte del 25%. B aplica un descompte del 10% i després resta un val de 8 €. Quin és el preu inicial enter més petit perquè A sigui ESTRICTAMENT més barata que B? No arrodoneixis els preus intermedis.",
+          "correct": "54",
+          "solution": [
+            "A estalvia 15 punts percentuals més que B, mentre B afegeix un val de 8 €.",
+            "A és més barata quan el 15% del preu inicial supera 8 €, és a dir, quan el preu supera 800/15 €.",
+            "El menor enter és 54. En aquest preu, A costa 40.50 € i B 40.60 €.",
+            "Amb 53 €, A encara no és estrictament més barata. Els preus dels candidats són positius."
+          ],
+          "data": {
+            "p": 25,
+            "q": 10,
+            "coupon": 8
+          }
+        },
+        {
+          "question": "Un article té un preu inicial enter d'euros, igual a totes dues botigues. A aplica un descompte del 30%. B aplica un descompte del 15% i després resta un val de 12 €. Quin és el preu inicial enter més petit perquè A sigui ESTRICTAMENT més barata que B? No arrodoneixis els preus intermedis.",
+          "correct": "81",
+          "solution": [
+            "A estalvia 15 punts percentuals més que B, mentre B afegeix un val de 12 €.",
+            "A és més barata quan el 15% del preu inicial supera 12 €, és a dir, quan el preu supera 1200/15 €.",
+            "El menor enter és 81. En aquest preu, A costa 56.70 € i B 56.85 €.",
+            "Amb 80 €, A encara no és estrictament més barata. Els preus dels candidats són positius."
+          ],
+          "data": {
+            "p": 30,
+            "q": 15,
+            "coupon": 12
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
+<script src="../assets/js/dificultat-mi.js"></script>
+<link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -367,8 +369,8 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div id="tabTheory"></div>
   <div id="tabExample" style="display:none"></div>
   <div class="level-select" style="margin-top:16px;">
-    <button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Nivell 1<br><small>Guiat</small></button>
-    <button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Nivell 2<br><small>Sol/a</small></button>
+    <button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Amb pistes<br><small>Guiat</small></button>
+    <button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Sense pistes<br><small>Sol/a</small></button>
   </div>
   <div class="mode-select">
     <button class="mode-btn active" id="btnModeA" onclick="selectMode('multi')">🔘 Opció múltiple</button>
@@ -2127,6 +2129,8 @@ const TOPICS=[
   {id:'trigC',course:'4t',exam3r:false,ampliacio:true,icon:'📐',name:'C · Introducció a la trigonometria',short:'⭐ Ampliació · Sinus, cosinus, tangent, angles d’elevació i mesures indirectes',theoryKey:'trigC',gen:genTrigonometriaC},
   {id:'problemesD',course:'4t',exam3r:false,ampliacio:true,icon:'🧠',name:'D · Problemes avançats de mesura',short:'⭐ Ampliació · Reptes integradors on cal decidir i combinar l’estratègia',theoryKey:'problemesD',gen:genProblemesAvancatsD}
 ];
+window.miTaskDifficulty=MIDifficulty.attach({course:'3eso',sense:'mesura',topics:TOPICS,option:()=>typeof MATH_OPTION!=='undefined'?MATH_OPTION:null,examFilter:t=>typeof isExamTopic==='function'?isExamTopic(t):true});
+
 const FUTURE_TOPICS=[];
 const THEORY_PAGES={
   volum:'teoria/mesura/volum-capacitat.html',
@@ -2835,6 +2839,8 @@ function applyDeepLink(){
 }
 
 /* ── INICI ─────────────────────────────────────────────────── */
+miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
+miTaskDifficulty.bindDisplay({showName:'showExercise',current:()=>typeof curEx!=='undefined'?curEx:currentEx,state:()=>typeof ST!=='undefined'?ST:state});
 loadState();
 if(!applyDeepLink())showHome();
 </script>
@@ -3086,7 +3092,10 @@ function miTheoryLinkHtml(topicId,label){
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script>miTaskDifficulty.bindExam({state:()=>typeof ST!=='undefined'?ST:state});</script>
 <script src="../assets/js/examen-tema.js"></script>
+<script src="../assets/js/dificultat-quotes.js"></script>
+<script src="../assets/js/dificultat-modes.js"></script>
 <script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

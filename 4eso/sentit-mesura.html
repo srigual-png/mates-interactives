@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
+<script src="../assets/js/dificultat-mi.js"></script>
+<link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -919,6 +921,8 @@ const TOPICS=[
  {id:'circumferenciaAmpC',name:'Ampliació C · Circumferència trigonomètrica i angles generals',icon:'⭕',short:'Quadrants · signes · angles de referència · coterminals · valors exactes fora del primer quadrant.',theoryKey:'circumferenciaAmpC',theoryPage:'teoria/mesura/ampliacio-circumferencia-trigonometrica.html',gen:genCircumferenciaAmpC,scope:'AB',exam4t:false,isExtension:true},
  {id:'modelitzacioAmpD',name:'Ampliació D · Modelització i problemes avançats',icon:'🧩',short:'Problemes de diversos passos · tria d’estratègia · mesures indirectes · precisió · validació del model.',theoryKey:'modelitzacioAmpD',theoryPage:'teoria/mesura/ampliacio-modelitzacio.html',gen:genModelitzacioAmpD,scope:'AB',exam4t:false,isExtension:true}
 ];
+window.miTaskDifficulty=MIDifficulty.attach({course:'4eso',sense:'mesura',topics:TOPICS,option:()=>typeof MATH_OPTION!=='undefined'?MATH_OPTION:null,examFilter:t=>typeof isExamTopic==='function'?isExamTopic(t):true});
+
 const FUTURE_TOPICS=[];
 
 /* ── ESTAT I PERSISTÈNCIA ───────────────────────────────── */
@@ -1080,7 +1084,7 @@ function startPractice(){window.MIAnalytics?.start();state.exCount=0;state.corre
 
 /* ── PRÀCTICA ───────────────────────────────────────────── */
 function insertMath(inputId,text){const inp=document.getElementById(inputId);if(!inp)return;const start=inp.selectionStart??inp.value.length,end=inp.selectionEnd??start;inp.value=inp.value.slice(0,start)+text+inp.value.slice(end);const pos=start+text.length;inp.focus();try{inp.setSelectionRange(pos,pos)}catch(e){}}
-function showExercise(){const t=TOPICS[state.currentTopic];currentEx=t.gen();state.exCount++;state.answered=false;window.MIAnalytics?.shown();state.hintIndex=0;setNavContext(t.name,true,true);document.getElementById('exerciseNumber').textContent=`Exercici ${state.exCount} · ${state.level===1?'Nivell guiat':'Nivell autònom'}`;document.getElementById('questionText').innerHTML=currentEx.question;document.getElementById('feedbackArea').innerHTML='';document.getElementById('hintBox').className='hint-box';document.getElementById('hintBox').innerHTML='';document.getElementById('hintBtn').style.display='inline-block';document.getElementById('hintBtn').textContent='💡 Pista';document.getElementById('btnNext').style.display='none';document.getElementById('btnChangeTopic').style.display=state.exCount>=3?'block':'none';const useOpen=state.mode==='open'&&currentEx.allowOpen!==false;if(useOpen){document.getElementById('optionsArea').innerHTML='';document.getElementById('openWrap').style.display='block';const inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';document.getElementById('openHint').textContent=currentEx.openHint||'';setTimeout(()=>inp.focus(),40)}else{document.getElementById('openWrap').style.display='none';document.getElementById('optionsArea').innerHTML=currentEx.options.map((o,i)=>`<button class="opt-btn" onclick="selectOption(${i},this)">${o}</button>`).join('')}updateStreak()}
+function showExercise(){const t=TOPICS[state.currentTopic];currentEx=t.gen();state.exCount++;state.answered=false;window.MIAnalytics?.shown();state.hintIndex=0;setNavContext(t.name,true,true);document.getElementById('exerciseNumber').textContent=`Exercici ${state.exCount}`;document.getElementById('questionText').innerHTML=currentEx.question;document.getElementById('feedbackArea').innerHTML='';document.getElementById('hintBox').className='hint-box';document.getElementById('hintBox').innerHTML='';document.getElementById('hintBtn').style.display='inline-block';document.getElementById('hintBtn').textContent='💡 Pista';document.getElementById('btnNext').style.display='none';document.getElementById('btnChangeTopic').style.display=state.exCount>=3?'block':'none';const useOpen=state.mode==='open'&&currentEx.allowOpen!==false;if(useOpen){document.getElementById('optionsArea').innerHTML='';document.getElementById('openWrap').style.display='block';const inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';document.getElementById('openHint').textContent=currentEx.openHint||'';setTimeout(()=>inp.focus(),40)}else{document.getElementById('openWrap').style.display='none';document.getElementById('optionsArea').innerHTML=currentEx.options.map((o,i)=>`<button class="opt-btn" onclick="selectOption(${i},this)">${o}</button>`).join('')}updateStreak()}
 function showNextHint(){if(state.answered)return;const guides=currentEx.guide||[];if(!guides.length)return;window.MIAnalytics?.hint();const box=document.getElementById('hintBox');state.hintIndex=Math.min(state.hintIndex,guides.length-1);box.innerHTML='<b>Pista '+(state.hintIndex+1)+'/'+guides.length+':</b> '+guides[state.hintIndex];box.classList.add('show');state.hintIndex++;document.getElementById('hintBtn').textContent=state.hintIndex<guides.length?'💡 Una altra pista':'💡 Pistes mostrades';if(state.hintIndex>=guides.length)document.getElementById('hintBtn').disabled=true}
 function selectOption(i,btn){if(state.answered)return;const ans=currentEx.options[i],ok=ans===currentEx.correct;document.querySelectorAll('#optionsArea .opt-btn').forEach((b,j)=>{b.disabled=true;if(currentEx.options[j]===currentEx.correct)b.classList.add('correct')});if(!ok)btn.classList.add('wrong');processAnswer(ok,ans)}
 function validateOpen(ex,val){return MIValidation.grade(ex,val,()=>validateOpenLegacy(ex,val));}
@@ -1172,6 +1176,8 @@ function deleteSavedError(i){state.errors.splice(i,1);saveState();showErrors()}
 function clearSavedErrors(){if(!confirm('Vols esborrar tots els errors guardats?'))return;state.errors=[];saveState();showErrors()}
 
 /* ── INICI ──────────────────────────────────────────────── */
+miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
+miTaskDifficulty.bindDisplay({showName:'showExercise',current:()=>typeof curEx!=='undefined'?curEx:currentEx,state:()=>typeof ST!=='undefined'?ST:state});
 loadState();showHome();
 function openFromTheoryLink(){
   try{
@@ -1495,7 +1501,10 @@ function miTheoryLinkHtml(topicId,label){
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script>miTaskDifficulty.bindExam({state:()=>typeof ST!=='undefined'?ST:state});</script>
 <script src="../assets/js/examen-tema.js"></script>
+<script src="../assets/js/dificultat-quotes.js"></script>
+<script src="../assets/js/dificultat-modes.js"></script>
 <script>MIValidation.installPracticeFeedback();</script>
 </body>
 </html>

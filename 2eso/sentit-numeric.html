@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="ca">
 <head>
+<script src="../assets/js/dificultat-mi.js"></script>
+<link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -326,9 +328,13 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div id="tabTheory"></div>
   <div id="tabExample" style="display:none"></div>
   <div id="externalTheoryLink"></div>
+  <div id="rationalDifficultyControl" hidden><label for="rationalTaskDifficulty">Dificultat matemàtica (independent de les pistes):</label>
+    <select id="rationalTaskDifficulty"><option value="0">Totes</option><option value="1">Baixa</option><option value="2">Mitjana</option><option value="3">Alta</option></select>
+    <p><small>Alta: una família de problemes inversos de proporcions. Cobertura encara limitada.</small></p>
+  </div>
   <div class="level-select" style="margin-top:16px">
-    <button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Nivell 1<br><small>Guiat</small></button>
-    <button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Nivell 2<br><small>Sol/a</small></button>
+    <button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Amb pistes<br><small>Guiat</small></button>
+    <button class="level-btn" id="btnLvl2" onclick="selectLevel(2)">✏️ Sense pistes<br><small>Sol/a</small></button>
   </div>
   <div class="mode-select">
     <button class="mode-btn active" id="btnModeA" onclick="selectMode('multi')">🔘 Opció múltiple</button>
@@ -754,10 +760,15 @@ const TEORIA={
 /* ── GENERADOR · BLOC 1: NOMBRES RACIONALS ───────────────── */
 let rationalTypeBag=[];
 function nextRationalType(){
-  if(!rationalTypeBag.length)rationalTypeBag=shuffle(Array.from({length:15},(_,i)=>i+1));
+  if(!rationalTypeBag.length)rationalTypeBag=shuffle(Array.from({length:16},(_,i)=>i+1));
   return rationalTypeBag.pop();
 }
 
+// Dificultat de la tasca, independent del suport guiat.
+const RATIONAL_DIFFICULTY_2ESO=MIDifficulty.rationalLevels2ESO;
+function rationalDifficulty2ESO(type){
+  return MIDifficulty.rationalDifficulty2ESO(type);
+}
 function genRacionals2ESO(forceType){
   const type=forceType||nextRationalType();
   let question,correct,options,guide,solution,alts=[],openHint='',allowOpen=true;
@@ -991,7 +1002,20 @@ function genRacionals2ESO(forceType){
     allowOpen=false;
   }
 
-  return {topicId:'racionals',type,course:'2n',question,correct,alts,options,guide,solution,openHint,allowOpen};
+  else if(type===16){
+    // Invers: cada incorporació modifica tant el numerador com el denominador.
+    // S'eviten objectius ja assolits i respostes 0 o 1.
+    const total=rnd(20,40), initial=rnd(4,9), target=shuffle([50,60,75])[0];
+    let needed=0;
+    while(100*(initial+needed)<=target*(total+needed))needed++;
+    correct=String(needed);
+    options=uniq4(correct,[String(needed-1),String(needed+1),String(Math.ceil(total*target/100-initial)),String(needed+2)]);
+    question=`En un club, ${initial} dels ${total} membres van a l'institut amb bicicleta. S'hi inscriuen nous membres, tots ciclistes. Quin és el <b>nombre mínim</b> d'inscripcions perquè la proporció de ciclistes sigui <b>estrictament superior al ${target}%</b>? Tingues en compte que també augmenta el total de membres.`;
+    guide=['Escriu la nova proporció després d’afegir alguns membres.','Canvien tant el nombre de ciclistes com el total.','Busca el primer nombre enter que supera el percentatge i comprova el nombre anterior.'];
+    solution=[`Amb k nous membres, la proporció és (${initial} + k)/(${total} + k).`,`Per superar ${target}/100 cal que 100 × (${initial} + k) > ${target} × (${total} + k).`,`Això equival a ${100-target} × k > ${target*total-100*initial}. El primer enter que ho compleix és ${needed}.`,`Comprovació: amb ${needed}, ${100*(initial+needed)} > ${target*(total+needed)}; amb ${needed-1}, ${100*(initial+needed-1)} ≤ ${target*(total+needed-1)}. Com que cada incorporació augmenta la proporció, ${needed} és el mínim.`];
+    openHint='Escriu el nombre mínim de nous membres.';
+  }
+  return {topicId:'racionals',type,diff:rationalDifficulty2ESO(type),course:'2n',question,correct,alts,options,guide,solution,openHint,allowOpen};
 }
 
 /* ── GENERADOR · BLOC 2: FRACCIONS AMB SENTIT ─────────────── */
@@ -2677,6 +2701,8 @@ const TOPICS=[
   {id:'notacio3r',course:'3r',exam2n:false,icon:'🔬',name:'Notació científica i ordre de magnitud',short:'Prepara 3r · nombres grans i petits · potències de 10 · comparació · operacions senzilles',theoryKey:'notacio3r',gen:genNotacio3rVariat},
   {id:'inversa3r',course:'3r',exam2n:false,icon:'🔄',name:'Proporcionalitat inversa',short:'Prepara 3r · directa/inversa/no proporcional · producte constant · problemes contextualitzats',theoryKey:'inversa3r',gen:genInversa3rVariat}
 ];
+window.miTaskDifficulty=MIDifficulty.attach({course:'2eso',sense:'numeric',topics:TOPICS,option:()=>typeof MATH_OPTION!=='undefined'?MATH_OPTION:null,examFilter:t=>typeof isExamTopic==='function'?isExamTopic(t):true});
+
 const FUTURE_TOPICS=[];
 
 /* ── PÀGINES DE TEORIA EXTERNA ─────────────────────────────── */
@@ -2833,6 +2859,7 @@ function selectTopic(i){
   const examLaunch=document.getElementById('miTopicExamLaunch');
   examLaunch.hidden=t.course!=='2n'||t.exam2n!==true;
   examLaunch.dataset.topic=t.id;
+  document.getElementById('rationalDifficultyControl').hidden=t.id!=='racionals';
   showScreen('screenIntro');
 }
 function showTab(id,btn){
@@ -2847,10 +2874,15 @@ function startPractice(){window.MIAnalytics?.start();state.exCount=0;state.corre
 
 /* ── PRÀCTICA ──────────────────────────────────────────────── */
 function getExerciseForMode(){
-  let ex=TOPICS[state.currentTopic].gen();
+  const topic=TOPICS[state.currentTopic];
+  const difficulty=Number(document.getElementById('rationalTaskDifficulty').value);
+  const generate=topic.id==='racionals'&&difficulty
+    ? ()=>{const types=RATIONAL_DIFFICULTY_2ESO[difficulty];return miTaskDifficulty.annotate(topic,genRacionals2ESO(types[rnd(0,types.length-1)]));}
+    : ()=>topic.gen();
+  let ex=generate();
   if(state.mode==='open'){
     let tries=0;
-    while(ex.allowOpen===false&&tries<40){ex=TOPICS[state.currentTopic].gen();tries++}
+    while(ex.allowOpen===false&&tries<40){ex=generate();tries++}
   }
   return ex;
 }
@@ -3062,6 +3094,10 @@ function applyDeepLink(){
 
 
   state.currentTopic=idx;
+  if(topicId==='racionals'){
+    const difficulty=Number(params.get('difficulty'));
+    document.getElementById('rationalTaskDifficulty').value=[1,2,3].includes(difficulty)?String(difficulty):'0';
+  }
   const level=Number(params.get('level'));
   state.level=level===2?2:1;
   state.mode='multi';
@@ -3076,6 +3112,8 @@ function applyDeepLink(){
 }
 
 /* ── INICI ─────────────────────────────────────────────────── */
+miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
+miTaskDifficulty.bindDisplay({showName:'showExercise',current:()=>typeof curEx!=='undefined'?curEx:currentEx,state:()=>typeof ST!=='undefined'?ST:state});
 loadState();
 if(!applyDeepLink())renderHome();
 </script>
@@ -3355,7 +3393,10 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   <p class="mi-learning-footer__copyright">© 2026 Mates Interactives</p>
 </footer>
 <link rel="stylesheet" href="../assets/css/examen-tema.css">
+<script>miTaskDifficulty.bindExam({state:()=>typeof ST!=='undefined'?ST:state});</script>
 <script src="../assets/js/examen-tema.js"></script>
+<script src="../assets/js/dificultat-quotes.js"></script>
+<script src="../assets/js/dificultat-modes.js"></script>
 <script>MIValidation.installPracticeFeedback();</script>
 <link rel="stylesheet" href="../assets/css/fitxes.css">
 <script src="../assets/js/fitxes/core.js"></script>
