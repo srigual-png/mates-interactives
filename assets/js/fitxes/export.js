@@ -10,12 +10,12 @@
   let fontBytes;
   async function fontData(){if(!fontBytes){const r=await fetch(new URL('LiberationSans-Regular.ttf',base));if(!r.ok)throw new Error('No s’ha pogut carregar la font del document.');fontBytes=await r.arrayBuffer();}return fontBytes;}
   const superscripts={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-','⁺':'+'};
-  const normalize=s=>String(s).replace(/−/g,'-').replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+/g,s=>'^'+[...s].map(c=>superscripts[c]).join('')).replace(/([0-9)])\s*x\s*(?=[0-9([])/g,'$1 × ').replace(/\s*\/\s*(?=\d+\/\d+)/g,' ÷ ');
+  const normalize=s=>String(s).replace(/−/g,'-').replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+/g,s=>'^'+[...s].map(c=>superscripts[c]).join('')).replace(/([0-9)])\s*x\s*(?=[0-9([])/g,'$1 × ').replace(/\s*\/\s*(?=\d+(?:[.,]\d+)?\/\d+(?:[.,]\d+)?)/g,' ÷ ');
   function tokens(text){
     // Reconeix primer una base entre parèntesis sencers, també amb potències
     // interiors: (2/3)^-2 i (5^2)^4 mantenen l'abast de l'exponent.
-    const parts=normalize(text).split(/(\([^()\n]+\)\^(?:[-+]?\d+|[nm]|□)|\d+\^(?:[-+]?\d+|[nm]|□)|\d+\/\d+|√\d+|\s+)/).filter(Boolean);
-    return parts.map(s=>{if(/\^(?:[-+]?\d+|[nm]|□)$/.test(s)){const i=s.lastIndexOf('^');return {kind:'power',parts:[s.slice(0,i),s.slice(i+1)]};}if(/^\d+\/\d+$/.test(s))return {kind:'fraction',parts:s.split('/')};if(/^√\d+$/.test(s))return {kind:'root',parts:[s.slice(1)]};return {kind:'text',text:s};});
+    const parts=normalize(text).split(/(\([^()\n]+\)\^(?:[-+]?\d+|[nm]|□)|\d+\^(?:[-+]?\d+|[nm]|□)|\d+(?:[.,]\d+)?\/\d+(?:[.,]\d+)?|√\d+|\s+)/).filter(Boolean);
+    return parts.map(s=>{if(/\^(?:[-+]?\d+|[nm]|□)$/.test(s)){const i=s.lastIndexOf('^');return {kind:'power',parts:[s.slice(0,i),s.slice(i+1)]};}if(/^\d+(?:[.,]\d+)?\/\d+(?:[.,]\d+)?$/.test(s))return {kind:'fraction',parts:s.split('/')};if(/^√\d+$/.test(s))return {kind:'root',parts:[s.slice(1)]};return {kind:'text',text:s};});
   }
   function blocks(sheet,scope,solution){
     let last='';return sheet.questions.map(q=>{
