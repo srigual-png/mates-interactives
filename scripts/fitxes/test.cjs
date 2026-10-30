@@ -12,6 +12,17 @@ const server=http.createServer((req,res)=>{const f=path.join(root,decodeURICompo
     assert(!requests.some(s=>s.includes('/vendor/fitxes/')),'Les dependències han de ser diferides');
     const report=await page.evaluate(async()=>{
       const E=MIWorksheets,T=MIWorksheetConfig.topics,check=(v,msg)=>{if(!v)throw new Error(msg);};
+      const wording=MIWorksheetConfig.paperQuestion;
+      const bus=wording('mcmmcd',{type:4,question:'Dues línies d’autobús surten cada 30 i 45 minuts. Si ara surten juntes, d’aquí a quants minuts coincidiran?'});
+      check(bus.includes('línia A cada 30 minuts')&&bus.includes('línia B cada 45 minuts')&&bus.endsWith('sortides de les dues línies?'),'intervals de cada línia i pregunta temporal explícits');
+      for(const item of ['ampolles','cromos','entrades']){
+        const text=wording('fraccions',{type:8,question:`Hi ha 30 ${item}. En utilitza 1/3 del total. Quantes en queden?`,correct:`20 ${item}`});
+        check(text.includes(`La Júlia té 30 ${item}`)&&text.includes('utilitza 1/3 del total')&&text.includes(item==='cromos'?'Quants cromos':'Quantes '+item),'subjecte, fracció i unitat explícits');
+      }
+      for(const name of ['Un ciclista','Una persona caminant','Una aixeta','Una màquina','Una cinta transportadora','Una bomba d’aigua']){
+        const text=wording('decimals',{type:7,question:`${name} funciona a 3.5 km/h durant 4 h. Quina quantitat recorre o produeix?`});
+        check(!text.includes('recorre o produeix')&&!text.includes('funciona a')&&text.includes('3,5'),'context i magnitud concrets');
+      }
       const base={count:15,topics:T.map(t=>t.id),percentages:[40,40,20],order:'grouped',space:'normal',format:'both',solutions:'steps'};
       for(const n of [5,15,25]){const v=E.counts(n,[30,30,40]);check(v.reduce((a,b)=>a+b,0)===n,'arrodoniment');check(v[0]>=v[1],'desempat estable');}
       for(let a=0;a<=100;a+=10)for(let b=0;b<=100-a;b+=10)for(let c=0;c<=100-a-b;c+=10){const p=[a,b,c];p.forEach((v,i)=>check(E.maximum(p,i)+p.reduce((s,x,j)=>s+(i===j?0:x),0)<=100,'màxim percentatge'));}
