@@ -10,12 +10,12 @@
   let fontBytes;
   async function fontData(){if(!fontBytes){const r=await fetch(new URL('LiberationSans-Regular.ttf',base));if(!r.ok)throw new Error('No s’ha pogut carregar la font del document.');fontBytes=await r.arrayBuffer();}return fontBytes;}
   const superscripts={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-','⁺':'+'};
-  const normalize=s=>String(s).replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+/g,s=>'^'+[...s].map(c=>superscripts[c]).join('')).replace(/([0-9)])\s*x\s*(?=[0-9([])/g,'$1 × ').replace(/\s*\/\s*(?=\d+\/\d+)/g,' ÷ ');
+  const normalize=s=>String(s).replace(/−/g,'-').replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻⁺]+/g,s=>'^'+[...s].map(c=>superscripts[c]).join('')).replace(/([0-9)])\s*x\s*(?=[0-9([])/g,'$1 × ').replace(/\s*\/\s*(?=\d+\/\d+)/g,' ÷ ');
   function tokens(text){
     // Reconeix primer una base entre parèntesis sencers, també amb potències
     // interiors: (2/3)^-2 i (5^2)^4 mantenen l'abast de l'exponent.
-    const parts=normalize(text).split(/(\([^()\n]+\)\^(?:[-+]?\d+|□)|\d+\^(?:[-+]?\d+|□)|\d+\/\d+|√\d+|\s+)/).filter(Boolean);
-    return parts.map(s=>{if(/\^(?:[-+]?\d+|□)$/.test(s)){const i=s.lastIndexOf('^');return {kind:'power',parts:[s.slice(0,i),s.slice(i+1)]};}if(/^\d+\/\d+$/.test(s))return {kind:'fraction',parts:s.split('/')};if(/^√\d+$/.test(s))return {kind:'root',parts:[s.slice(1)]};return {kind:'text',text:s};});
+    const parts=normalize(text).split(/(\([^()\n]+\)\^(?:[-+]?\d+|[nm]|□)|\d+\^(?:[-+]?\d+|[nm]|□)|\d+\/\d+|√\d+|\s+)/).filter(Boolean);
+    return parts.map(s=>{if(/\^(?:[-+]?\d+|[nm]|□)$/.test(s)){const i=s.lastIndexOf('^');return {kind:'power',parts:[s.slice(0,i),s.slice(i+1)]};}if(/^\d+\/\d+$/.test(s))return {kind:'fraction',parts:s.split('/')};if(/^√\d+$/.test(s))return {kind:'root',parts:[s.slice(1)]};return {kind:'text',text:s};});
   }
   function blocks(sheet,scope,solution){
     let last='';return sheet.questions.map(q=>{
@@ -62,7 +62,7 @@
       const p=doc.addPage([595.28,841.89]);
       p.drawText('Mates Interactives',{x:60,y:800,size:12,font});
       p.drawText(solution?scope.title.replace('Fitxa d’exercicis','Solucionari'):scope.title,{x:60,y:777,size:14,font});
-      p.drawText('Versió '+sheet.version+(solution?' · '+(sheet.config.solutions==='steps'?'Resolució pas a pas':'Només respostes'):' · Nom: ____________________  Grup: ______  Data: __________'),{x:60,y:755,size:9,font});
+      p.drawText(solution?(sheet.config.solutions==='steps'?'Resolució pas a pas':'Només respostes'):'Nom: ____________________  Grup: ______  Data: __________',{x:60,y:755,size:9,font});
       let y=716;
       for(const b of items){if(b.title){p.drawText(b.title,{x:60,y,size:12,font});y-=30;}
         b.wrapped.forEach(line=>{let x=60;line.forEach(t=>x+=drawToken(p,t,x,y,font));y-=25;});
@@ -93,12 +93,12 @@
       if(i)children.push(new d.Paragraph({children:[new d.PageBreak()],spacing:{after:0,before:0}}));
       items.forEach(b=>{
         if(b.title)children.push(para(b.title,{heading:d.HeadingLevel.HEADING_2,keepNext:true}));
-        b.lines.forEach(s=>children.push(para(s,{keepNext:true,keepLines:true})));
+        b.lines.flatMap(s=>s.split("\n")).forEach(s=>children.push(para(s,{keepNext:true,keepLines:true})));
         if(b.figure)children.push(new d.Paragraph({children:[new d.ImageRun({type:'png',data:Uint8Array.from(atob(b.figure.data.split(',')[1]),c=>c.charCodeAt(0)),transformation:{width:b.figure.width*96/72,height:b.figure.height*96/72},altText:{title:b.figure.alt,description:b.figure.alt,name:'Recta numèrica'}})],keepNext:true,keepLines:true}));
         children.push(new d.Paragraph({children:[new d.TextRun(' ')],spacing:{after:0,line:Math.max(240,b.space*20)},keepLines:true}));
       });
     });
-    const header=new d.Header({children:[para('Mates Interactives',{spacing:{after:70}}),para(solution?scope.title.replace('Fitxa d’exercicis','Solucionari'):scope.title,{style:'Title',spacing:{after:90}}),para('Versió '+sheet.version+(solution?' · '+(sheet.config.solutions==='steps'?'Resolució pas a pas':'Només respostes'):' · Nom: __________________  Grup: _____  Data: __________'),{spacing:{after:0}})]});
+    const header=new d.Header({children:[para('Mates Interactives',{spacing:{after:70}}),para(solution?scope.title.replace('Fitxa d’exercicis','Solucionari'):scope.title,{style:'Title',spacing:{after:90}}),para(solution?(sheet.config.solutions==='steps'?'Resolució pas a pas':'Només respostes'):'Nom: __________________  Grup: _____  Data: __________',{spacing:{after:0}})]});
     const footer=new d.Footer({children:[new d.Paragraph({children:[new d.TextRun({text:scope.web+'     ',size:16}),new d.TextRun({children:[d.PageNumber.CURRENT,' / ',d.PageNumber.TOTAL_PAGES],size:16})]})]});
     const document=new d.Document({creator:'Mates Interactives',title:(solution?'Solucionari — ':'')+scope.title,description:'Versió '+sheet.version,styles:{default:{document:{run:{font:'Arial',size:22},paragraph:{spacing:{after:100}}}}},sections:[{properties:{page:{size:{width:11906,height:16838},margin:{top:2400,right:1200,bottom:1000,left:1200,header:500,footer:450}}},headers:{default:header},footers:{default:footer},children}]});
     return d.Packer.toBlob(document);
