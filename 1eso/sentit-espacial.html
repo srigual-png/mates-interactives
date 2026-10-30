@@ -1395,7 +1395,7 @@ function genPoliedres(){
     }
   }
 
-  return {topicId:'poliedres',type:q,question,correct,options:opts,guide,solution,svg};
+  return {topicId:'poliedres',type:q,difficultyVariant:q===6&&question.includes('prisma triangular')?'triangle':undefined,question,correct,options:opts,guide,solution,svg};
 }
 
 // 8. COSSOS RODONS
@@ -1479,7 +1479,7 @@ function genCossos(){
     const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;opts=uniq4(correct,it.w);guide=it.g;solution=[`✅ ${correct}`];svg=it.sv;
   }
 
-  return {topicId:'cossos',type:q,question,correct,options:opts,guide,solution,svg};
+  return {topicId:'cossos',type:q,difficultyVariant:q===6&&question.includes('dupliquem')?'scale':undefined,question,correct,options:opts,guide,solution,svg};
 }
 
 // 6. POLÍGONS · 1r ESO
@@ -2393,6 +2393,7 @@ function registerError(ex,studentAnswer,source='practice'){
     topicName:ex.topicName||topic.name,
     type:(ex.type!==undefined?ex.type:null),
 
+    difficultyVariant:ex.difficultyVariant,
     question:ex.question||'',
     correct:ex.correct,
     answer:studentAnswer,

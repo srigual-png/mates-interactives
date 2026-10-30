@@ -5,6 +5,7 @@
 <script src="../assets/js/dificultat-mi.js"></script>
 <link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
+<script src="../assets/js/raonament-mesura-1eso.js"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Exercicis de mesures, perímetres i àrees 1r ESO | Mates Interactives</title>
@@ -1938,7 +1939,7 @@ const TOPICS=[
     },gen:genEstimacio
   },
   {
-    id:'problemes',icon:'🧩',name:'Problemes de context',short:'38 patrons: conversions, temps, àrees, escales, precisió...',course:'1r',exam1r:true,
+    id:'problemes',icon:'🧩',name:'Problemes de context',short:`${MEASURE_PROBLEM_PATTERNS.length} patrons: conversions, temps, àrees, escales, precisió...`,course:'1r',exam1r:true,
     theory:{
       title:'Problemes de context',
       text:'Els problemes de context combinen conversions, temps, àrees, perímetres i estimació. Cal interpretar les dades, decidir les operacions i comprovar si el resultat és raonable.',
@@ -1954,6 +1955,7 @@ const TOPICS=[
     },gen:genVolumCapacitat
   }
 ];
+MIFirstMeasureTasks.extend(TOPICS,MEASURE_PROBLEM_PATTERNS);
 window.miTaskDifficulty=MIDifficulty.attach({course:'1eso',sense:'mesura',topics:TOPICS,option:()=>typeof MATH_OPTION!=='undefined'?MATH_OPTION:null,examFilter:t=>typeof isExamTopic==='function'?isExamTopic(t):true});
 
 

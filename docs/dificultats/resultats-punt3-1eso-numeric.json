@@ -1,0 +1,1596 @@
+{
+  "topics": [
+    {
+      "topic": "naturals",
+      "types": 6,
+      "samples": 600,
+      "coverage": [
+        4,
+        1,
+        1
+      ],
+      "exam": [
+        4,
+        4,
+        4
+      ],
+      "variants": [
+        {
+          "type": 1001,
+          "n": 100,
+          "question": "Cal repartir exactament 124 adhesius. Hi ha paquets de 5 i de 8 adhesius. Has d'utilitzar almenys un paquet de cada format i no pot sobrar cap adhesiu. Quin és el nombre mínim de paquets?",
+          "solution": [
+            "Les combinacions exactes (paquets petits, grans) són: (4, 13); (12, 8); (20, 3).",
+            "La millor és 4 × 5 + 13 × 8 = 124.",
+            "Utilitza 17 paquets; cap combinació admissible en necessita menys."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 96,
+          "question": "Arrodoneix 56472 a les milers",
+          "solution": [
+            "Nombre: 56472",
+            "Arrodonit a les milers: 56000"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 94,
+          "question": "Ordena de menor a major:82687&nbsp;&mdash;&nbsp;49873&nbsp;&mdash;&nbsp;35316&nbsp;&mdash;&nbsp;46512",
+          "solution": [
+            "Nombres: 82687, 49873, 35316, 46512",
+            "Ordenats: 35316 < 46512 < 49873 < 82687"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 106,
+          "question": "Quin signe va entre:60251 ___ 29958",
+          "solution": [
+            "Compara 60251 i 29958 des de l'esquerra.",
+            "La primera xifra diferent indica quin nombre és més gran.",
+            "Resultat: 60251 > 29958"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 96,
+          "question": "Una fabrica te 5 maquines que produeixen 32 peces cadascuna. A mes, hi ha 28 peces de reserva. Quantes peces hi ha en total?",
+          "solution": [
+            "Producció: 5 x 32 = 160",
+            "Total: 160 + 28 = 188",
+            "Resultat: 188 peces"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 108,
+          "question": "Una escola te 128 llibres per repartir en 4 aules iguals. Quants llibres hi ha a cada aula?",
+          "solution": [
+            "Operació: 128 / 4 = 32",
+            "Resultat: 32 unitats"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "decimal_sys",
+      "types": 6,
+      "samples": 600,
+      "coverage": [
+        4,
+        1,
+        1
+      ],
+      "exam": [
+        4,
+        4,
+        4
+      ],
+      "variants": [
+        {
+          "type": 1001,
+          "n": 100,
+          "question": "Amb les xifres 2, 4, 1, 3, forma el nombre parell de quatre xifres més gran possible. Has de fer servir cada xifra exactament una vegada. Quin nombre obtens?",
+          "solution": [
+            "Si la unitat és 2, el màxim és 4312.",
+            "Si la unitat és 4, el màxim és 3214.",
+            "El més gran és 4312."
+          ]
+        },
+        {
+          "type": 1002,
+          "n": 100,
+          "question": "La contribució d'una xifra 2 passa de 2 × 1 a 2 × 100. Les altres contribucions no canvien. En quant augmenta el nombre?",
+          "solution": [
+            "Valor antic: 2. Valor nou: 200.",
+            "Augment: 200 − 2 = 198."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 101,
+          "question": "Quin nombre correspon a:8 cm, 4 dm, 7 m, 3 c, 1 d, 8 u",
+          "solution": [
+            "Suma de posicions = 847318"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 106,
+          "question": "El número de matrícula és 6985. Quin valor representa la xifra de les milers segons la posició que ocupa?",
+          "solution": [
+            "Xifra de les milers: 6",
+            "Valor: 6x1000=6000"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 101,
+          "question": "Descompon el nombre 35623",
+          "solution": [
+            "35623 = 3x10000+5x1000+6x100+2x10+3x1"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 92,
+          "question": "Quin es el valor posicional de la xifra 8 al nombre 452849?",
+          "solution": [
+            "Posicio: centenes",
+            "Valor: 8x100=800"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "ops",
+      "types": 7,
+      "samples": 600,
+      "coverage": [
+        4,
+        2,
+        1
+      ],
+      "exam": [
+        4,
+        4,
+        4
+      ],
+      "variants": [
+        {
+          "type": 1001,
+          "n": 86,
+          "question": "Necessites almenys 21 llapis. Els paquets A tenen 4 llapis i costen 5 €; els B tenen 6 llapis i costen 7 €. Pots combinar formats i poden sobrar llapis. Quin és el cost mínim, en euros?",
+          "solution": [
+            "Per cada y de 0 a 4, calen com a mínim max(0, arrodoniment superior de (21 − 6y)/4) paquets A.",
+            "Comparant-ne els costos, una compra òptima és 1 paquets A i 3 B: 22 llapis.",
+            "Cost mínim: 1 × 5 + 3 × 7 = 26 €."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 97,
+          "question": "Calcula: 7548 - 2909",
+          "solution": [
+            "7548-2909=4639"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 77,
+          "question": "La Maria compra 17 quaderns a 17 euros. Paga 300 euros. Quant de canvi rep?",
+          "solution": [
+            "Cost: 289 euros",
+            "Canvi: 300-289=11"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 76,
+          "question": "Calcula: 27 x 160",
+          "solution": [
+            "27x160=4320"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 99,
+          "question": "Calcula: 2700 + 1661",
+          "solution": [
+            "2700+1661=4361"
+          ]
+        },
+        {
+          "type": 6,
+          "n": 78,
+          "question": "Una fabrica treballa 8 dies, 3 torns/dia, 387 unitats/torn. Total?",
+          "solution": [
+            "u/dia: 1161",
+            "Total: 1161x8=9288"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 87,
+          "question": "Calcula: 512 / 9",
+          "solution": [
+            "512/9",
+            "Cocient: 56, Residu: 8"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "potencies",
+      "types": 9,
+      "samples": 600,
+      "coverage": [
+        7,
+        1,
+        1
+      ],
+      "exam": [
+        7,
+        3,
+        2
+      ],
+      "variants": [
+        {
+          "type": 1001,
+          "n": 67,
+          "question": "Dos mosaics quadrats utilitzen en total 250 rajoles. El costat del gran té 4 rajoles més que el del petit. No se superposen. Quantes rajoles té el mosaic gran?",
+          "solution": [
+            "Cal cercar dos quadrats de costats n i n + 4 amb àrees que sumin 250.",
+            "9² + 13² = 81 + 169 = 250.",
+            "La suma creix amb n, per tant no hi ha una altra parella de costats positius.",
+            "El mosaic gran té 169 rajoles."
+          ]
+        },
+        {
+          "type": 1002,
+          "n": 67,
+          "question": "Un mosaic quadrat té 15 files de 15 rajoles. Es retira tota la fila superior i tota la columna de l'esquerra. Quantes rajoles queden?",
+          "solution": [
+            "Inicialment hi ha 15² = 225 rajoles.",
+            "Es retiren 15 + 15 − 1 = 29, perquè la cantonada només es retira una vegada.",
+            "Queden 225 − 29 = 196, també (15 − 1)²."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 92,
+          "question": "A la potència 9^3, quin és l'exponent?",
+          "solution": [
+            "A 9^3, l'exponent és 3.",
+            "✅ Exponent = 3"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 64,
+          "question": "Quin producte representa 4^3?",
+          "solution": [
+            "4^3 = 4 × 4 × 4",
+            "✅ 4 × 4 × 4"
+          ]
+        },
+        {
+          "type": 7,
+          "n": 41,
+          "question": "Si 8² = 64, quina igualtat expressa l'operació inversa?",
+          "solution": [
+            "8² = 64",
+            "✅ Operació inversa: √64 = 8"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 74,
+          "question": "Escriu com a potència: 5 × 5 × 5 × 5",
+          "solution": [
+            "Factor repetit: 5",
+            "Nombre de factors: 4",
+            "✅ 5 × 5 × 5 × 5 = 5^4"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 76,
+          "question": "A la potència 9^2, quina és la base?",
+          "solution": [
+            "A 9^2, la base és 9 i l'exponent és 2.",
+            "✅ Base = 9"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 70,
+          "question": "Calcula 2^2.",
+          "solution": [
+            "2^2 = 2 × 2",
+            "✅ Resultat = 4"
+          ]
+        },
+        {
+          "type": 6,
+          "n": 49,
+          "question": "Calcula √25.",
+          "solution": [
+            "5² = 25",
+            "✅ √25 = 5"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "jerarquia",
+      "types": 10,
+      "samples": 600,
+      "coverage": [
+        2,
+        7,
+        1
+      ],
+      "exam": [
+        3,
+        7,
+        2
+      ],
+      "variants": [
+        {
+          "type": 1001,
+          "n": 60,
+          "question": "A l'expressió 9 + 2 × 4 − 6, pots afegir parèntesis sense canviar l'ordre dels nombres ni els signes. Quin és el resultat estrictament positiu més petit que pots obtenir?",
+          "solution": [
+            "Les cinc agrupacions completes donen: ((9+2)×4)−6 = 38; (9+(2×4))−6 = 11; (9+2)×(4−6) = -22; 9+((2×4)−6) = 11; 9+(2×(4−6)) = 5.",
+            "El mínim estrictament positiu és 5."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 52,
+          "question": "Calcula amb parèntesis i claudàtors:4 x [6 x (5 + 6) + 2²] - 6",
+          "solution": [
+            "Parèntesi interior: 5 + 6 = 11",
+            "Potència dins del claudàtor exterior: 2² = 4",
+            "Multiplicació dins del claudàtor exterior: 6 x 11 = 66",
+            "Claudàtor exterior: 66 + 4 = 70",
+            "Multiplicació exterior: 4 x 70 = 280",
+            "Resta final: 280 - 6 = 274"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 53,
+          "question": "Calcula:6 x (6 + 2) - 3 x 3",
+          "solution": [
+            "Parèntesi: 6+2=8",
+            "Multiplicació 1: 6x8=48",
+            "Multiplicació 2: 3x3=9",
+            "Resta: 48-9=39"
+          ]
+        },
+        {
+          "type": 8,
+          "n": 68,
+          "question": "Calcula amb parèntesis i claudàtors:6 x [3 + (6 + 4)] - 6",
+          "solution": [
+            "Parèntesi interior: 6 + 4 = 10",
+            "Claudàtor exterior: 3 + 10 = 13",
+            "Multiplicació: 6 x 13 = 78",
+            "Resta final: 78 - 6 = 72"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 55,
+          "question": "Calcula respectant la jerarquia:12 + 5 x 2 - 5",
+          "solution": [
+            "Pas 1: 5x2=10",
+            "Pas 2: 12+10=22",
+            "Pas 3: 22-5=17"
+          ]
+        },
+        {
+          "type": 7,
+          "n": 65,
+          "question": "Una samarreta val 8 €. La Laia en compra 5 i el seu germà 4. Apliquen un descompte de 5 € i després afegeixen 5 € d’enviament. Quant paguen en total?",
+          "solution": [
+            "Quantitat: 5+4=9",
+            "Cost: 8x9=72",
+            "Amb descompte: 72-5=67",
+            "Amb enviament: 67+5=72"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 60,
+          "question": "Calcula:(4 + 2) x (4 - 1) + 10",
+          "solution": [
+            "Parèntesi 1: 4+2=6",
+            "Parèntesi 2: 4-1=3",
+            "Multiplicació: 6x3=18",
+            "Suma: 18+10=28"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 70,
+          "question": "Calcula:2 + 5² - 6 x 3",
+          "solution": [
+            "Potència: 5²=25",
+            "Multiplicació: 6x3=18",
+            "Suma: 2+25=27",
+            "Resta: 27-18=9"
+          ]
+        },
+        {
+          "type": 6,
+          "n": 54,
+          "question": "Calcula:6 x 4² - (4 + 3) x 4 + 8",
+          "solution": [
+            "Potència: 4²=16",
+            "Parèntesi: 4+3=7",
+            "Multiplicació 1: 6x16=96",
+            "Multiplicació 2: 7x4=28",
+            "Resta: 96-28=68",
+            "Suma final: 68+8=76"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 63,
+          "question": "Calcula:5 x 3 + 8 x 5 - 12",
+          "solution": [
+            "Pas 1: 5x3=15",
+            "Pas 2: 8x5=40",
+            "Pas 3: 15+40=55",
+            "Pas 4: 55-12=43"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "divis",
+      "types": 8,
+      "samples": 600,
+      "coverage": [
+        6,
+        1,
+        1
+      ],
+      "exam": [
+        6,
+        3,
+        3
+      ],
+      "variants": [
+        {
+          "type": 1001,
+          "n": 75,
+          "question": "Completa 5□□4 amb dues xifres (poden ser zero o repetir-se). El nombre ha de ser divisible per 9 i per 4, però no per 8. Quin és el nombre més petit que compleix totes les condicions?",
+          "solution": [
+            "Els candidats que compleixen totes tres condicions són 5004, 5364, 5724.",
+            "S'han comprovat les dues xifres desconegudes de 00 a 99, mantenint les posicions fixes.",
+            "El més petit és 5004: és múltiple de 9 i de 4, però no de 8."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 84,
+          "question": "Quin d'aquests nombres NO es divisor de 33?",
+          "solution": [
+            "Divisors: 1, 3, 11, 33",
+            "2 NO es divisor: 33÷2 no es exacte"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 96,
+          "question": "El nombre 908 és divisible per 6?",
+          "solution": [
+            "Criteri del 6: compleix alhora els criteris del 2 i del 3",
+            "908 no compleix el criteri.",
+            "✅ No, no és divisible per 6"
+          ]
+        },
+        {
+          "type": 7,
+          "n": 87,
+          "question": "Tenim 47 ampolles. Es poden col·locar en grups de 3 o de 4 sense que en sobri cap?",
+          "solution": [
+            "47/3 → residu 2 → no divisible",
+            "47/4 → residu 3 → no divisible",
+            "Resposta: No (3) i No (4)"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 66,
+          "question": "Quina opció es pot dividir exactament entre 6?",
+          "solution": [
+            "Criteri: és divisible per 2 i per 3 alhora",
+            "126 el compleix"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 76,
+          "question": "Factoritza 56 en factors primers",
+          "solution": [
+            "56 / 2 = 28",
+            "28 / 2 = 14",
+            "14 / 2 = 7",
+            "7 / 7 = 1",
+            "56 = 2³ x 7"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 80,
+          "question": "Quin d'aquests nombres és múltiple de 5?",
+          "solution": [
+            "35 = 5 x 7",
+            "OK: multiple de 5"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 36,
+          "question": "Identifica el nombre primer entre les opcions.",
+          "solution": [
+            "Comprova divisors fins a sqrt(89)",
+            "Cap altre divisor: 89 es primer"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "mcmmcd",
+      "types": 6,
+      "samples": 600,
+      "coverage": [
+        3,
+        2,
+        1
+      ],
+      "exam": [
+        4,
+        4,
+        4
+      ],
+      "variants": [
+        {
+          "type": 1001,
+          "n": 100,
+          "question": "El servei A surt per primer cop al minut 0 i després cada 8 minuts. El B surt per primer cop al minut 4 i després cada 12 minuts. Quin és el primer minut estrictament posterior al 50 en què surten alhora?",
+          "solution": [
+            "A: 0, 8, 16, 24, 32, 40, 48, 56, 64.",
+            "B: 4, 16, 28, 40, 52, 64.",
+            "La primera coincidència posterior al minut 50 és al minut 64."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 81,
+          "question": "Calcula MCD(56, 84)",
+          "solution": [
+            "56=2³ x 7",
+            "84=2² x 3 x 7",
+            "MCD=28"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 146,
+          "question": "Dos aspersors s'activen cada 6 i 9 minuts. Quan tornaran a activar-se alhora?",
+          "solution": [
+            "mcm(6,9)=18",
+            "OK 18 minuts"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 89,
+          "question": "Calcula mcm(32, 48)",
+          "solution": [
+            "32=2^5",
+            "48=2^4 x 3",
+            "mcm=96",
+            "Comprov: 96x16=1536"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 127,
+          "question": "Tenim 40 boles blaves i 50 boles grogues. Volem fer el màxim nombre de bosses idèntics, amb la mateixa quantitat de cada tipus i sense que sobri res. Quants bosses podem fer?",
+          "solution": [
+            "MCD(40,50) = 10",
+            "✅ Es poden fer 10 bosses."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 57,
+          "question": "Calcula mcm(6, 10, 15)",
+          "solution": [
+            "mcm(6,10)=30",
+            "mcm(30,15)=30"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "enters",
+      "types": 8,
+      "samples": 600,
+      "coverage": [
+        6,
+        1,
+        1
+      ],
+      "exam": [
+        6,
+        3,
+        3
+      ],
+      "variants": [
+        {
+          "type": 1001,
+          "n": 75,
+          "question": "Comences a 5 en una recta numèrica. Has d'aplicar els tres moviments +5, +11 i -10, una vegada cadascun, en l'ordre que triïs. Després de CADA moviment, la posició ha de quedar entre -5 i 17, inclosos. Quants ordres diferents són possibles?",
+          "solution": [
+            "Els ordres admissibles són: +5, -10, +11; +11, -10, +5; -10, +5, +11; -10, +11, +5.",
+            "S'han descartat els altres ordres perquè alguna posició intermèdia queda fora de [-5, 17].",
+            "Hi ha 4 ordres possibles."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 74,
+          "question": "Ordena de menor a major:4&nbsp;&mdash;&nbsp;-20&nbsp;&mdash;&nbsp;10&nbsp;&mdash;&nbsp;-15",
+          "solution": [
+            "Ordenats: -20 < -15 < 4 < 10"
+          ]
+        },
+        {
+          "type": 6,
+          "n": 70,
+          "question": "Saldo: -36 euros. Ingrés 88, retirada 196. Saldo final?",
+          "solution": [
+            "-36+88=52",
+            "52-196=-144"
+          ]
+        },
+        {
+          "type": 7,
+          "n": 76,
+          "question": "A la recta numèrica, parteixes de 3 i avances 6 unitats cap a la dreta. A quin nombre arribes?",
+          "solution": [
+            "Inici: 3",
+            "Desplaçament: +6",
+            "✅ Arribada: 9"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 67,
+          "question": "Calcula: (-8) + (12)",
+          "solution": [
+            "(-8)+(12)=4"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 89,
+          "question": "La temperatura és de 5 graus. Puja 18 graus. Quina temperatura fa després?",
+          "solution": [
+            "Temperatura final: 5+18=23"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 71,
+          "question": "Calcula: (-9) - (7)",
+          "solution": [
+            "Canvia a suma: -9+(-7)=-16"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 78,
+          "question": "Calcula: (-5) × (-3)",
+          "solution": [
+            "Valor absolut del producte = 15",
+            "Signe = +",
+            "✅ 15"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "decimals",
+      "types": 10,
+      "samples": 600,
+      "coverage": [
+        6,
+        3,
+        1
+      ],
+      "exam": [
+        6,
+        3,
+        3
+      ],
+      "variants": [
+        {
+          "type": 1001,
+          "n": 60,
+          "question": "Cada ampolla conté 0,64 L, amb error absolut com a màxim 0,03 L. El contingut de cada ampolla pot ser qualsevol valor dins d'aquest marge. Vols abocar-les SENCERES en un dipòsit de 5,34 L i garantir almenys 3,77 L sense que mai vessi. Quin és el nombre mínim d'ampolles que ho garanteix? Respon 0 si no n'hi ha cap.",
+          "solution": [
+            "Cada ampolla pot contenir entre 0,61 i 0,67 L.",
+            "Per garantir la quantitat calen com a mínim 7 ampolles.",
+            "Per no vessar se'n poden abocar com a màxim 7.",
+            "El mínim compatible és 7."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 59,
+          "question": "Al mercat compres tres productes que costen 2.3 €, 1.8 € i 2.0 €. Pagues amb 7 €. Quin canvi reps?",
+          "solution": [
+            "Calcula el total dels productes",
+            "Resta el total de l’import pagat",
+            "Canvi: 0.9 euros"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 66,
+          "question": "Calcula: 1.5 x 4.7",
+          "solution": [
+            "Multiplica els factors",
+            "Tingues en compte les xifres decimals",
+            "Resultat: 7.05"
+          ]
+        },
+        {
+          "type": 7,
+          "n": 71,
+          "question": "Una bomba d'aigua funciona a 4.5 L/min durant 6 min. Quina quantitat recorre o produeix?",
+          "solution": [
+            "Quantitat = taxa × temps",
+            "4.5 × 6 = 27.0",
+            "✅ 27.0 L"
+          ]
+        },
+        {
+          "type": 8,
+          "n": 76,
+          "question": "El valor exacte és 9.72 i l'aproximació a les dècimes és 9.7. Quin és l'error absolut?",
+          "solution": [
+            "Error absolut = |valor exacte − valor aproximat|",
+            "|9.72 − 9.7| = 0.02",
+            "✅ Error absolut = 0.02"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 60,
+          "question": "Calcula: 3.3 + 2.4",
+          "solution": [
+            "3.3 + 2.4 = 5.7"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 58,
+          "question": "Converteix la fracció 7/10 a decimal",
+          "solution": [
+            "7/10 = 0.7"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 40,
+          "question": "Converteix 0.15 a fracció simplificada",
+          "solution": [
+            "0.15 = 3/20"
+          ]
+        },
+        {
+          "type": 9,
+          "n": 42,
+          "question": "Un valor exacte és 40 i s'ha aproximat per 36. Quin és l'error relatiu expressat en percentatge?",
+          "solution": [
+            "Error absolut = |40 − 36| = 4",
+            "Error relatiu = 4/40",
+            "✅ Error relatiu = 10%"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 68,
+          "question": "Arrodoneix 12.213 a les centèsimes",
+          "solution": [
+            "Mira la xifra de les mil·lèsimes",
+            "Aplica la regla d’arrodoniment",
+            "Resultat: 12.21"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "fraccions",
+      "types": 12,
+      "samples": 600,
+      "coverage": [
+        8,
+        3,
+        1
+      ],
+      "exam": [
+        8,
+        3,
+        1
+      ],
+      "variants": [
+        {
+          "type": 1001,
+          "n": 50,
+          "question": "Una botiga ven 3/5 de les unitats que tenia. Després regala 1/4 de les que quedaven i finalment en retira 17 per a una exposició. Al final en queden 25. Quantes unitats tenia inicialment?",
+          "solution": [
+            "Abans de retirar-ne 17, quedaven 25 + 17 = 42.",
+            "Aquesta quantitat és 3/4 de la que hi havia abans de regalar: 42 ÷ 3 × 4 = 56.",
+            "Això és 2/5 del total inicial: 56 ÷ 2 × 5 = 140.",
+            "Comprovació: es venen 84, es regalen 14 i se'n retiren 17; queden 25."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 47,
+          "question": "Simplifica: 4/16",
+          "solution": [
+            "MCD(4,16) = 4",
+            "Divideix numerador i denominador per 4",
+            "✅ 1/4"
+          ]
+        },
+        {
+          "type": 7,
+          "n": 32,
+          "question": "Quina fraccio es equivalent a 2/6?",
+          "solution": [
+            "2/6 = 10/30 (x5)",
+            "OK 10/30"
+          ]
+        },
+        {
+          "type": 11,
+          "n": 37,
+          "question": "Quina equivalència és correcta per a 1/8?",
+          "solution": [
+            "1/8 = 0,125",
+            "0,125 = 12,5%",
+            "✅ 0,125 = 12,5%"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 51,
+          "question": "Calcula: 3/6 + 2/6",
+          "solution": [
+            "3/6+2/6=5/6",
+            "Simplif: 5/6"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 60,
+          "question": "Calcula: 1/2 + 3/6",
+          "solution": [
+            "mcm=6",
+            "1/2=3/6",
+            "3/6=3/6",
+            "Suma: 6/6",
+            "Simplif: 1/1"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 54,
+          "question": "Calcula: 2/3 x 1/8",
+          "solution": [
+            "2x1=2 / 3x8=24",
+            "Simplif: 1/12"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 51,
+          "question": "Calcula: 5/8 / 2/5",
+          "solution": [
+            "5/8x5/2=25/16",
+            "Simplif: 25/16"
+          ]
+        },
+        {
+          "type": 10,
+          "n": 64,
+          "question": "Quantes entrades representen 1/2 de 8 entrades?",
+          "solution": [
+            "Una part = 8/2 = 4",
+            "1 parts = 1 × 4 = 4",
+            "✅ 4 entrades"
+          ]
+        },
+        {
+          "type": 6,
+          "n": 65,
+          "question": "Compara les fraccions:4/8 ___ 2/4",
+          "solution": [
+            "Creuats: 16 vs 16",
+            "4/8 = 2/4"
+          ]
+        },
+        {
+          "type": 9,
+          "n": 45,
+          "question": "Classifica la fracció 6/9.",
+          "solution": [
+            "6 < 9",
+            "✅ Fracció pròpia"
+          ]
+        },
+        {
+          "type": 8,
+          "n": 44,
+          "question": "Hi ha 21 cromos. En regala 2/3 del total. Quantes en queden?",
+          "solution": [
+            "Quantitat corresponent a 2/3: 14 cromos",
+            "Quantitat que queda: 21 − 14 = 7",
+            "✅ 7 cromos"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "proporcionalitat",
+      "types": 9,
+      "samples": 600,
+      "coverage": [
+        4,
+        4,
+        1
+      ],
+      "exam": [
+        4,
+        4,
+        4
+      ],
+      "variants": [
+        {
+          "type": 1001,
+          "n": 67,
+          "question": "A ritme constant, la màquina A fabrica 16 peces en 2 hores i la B, 42 peces en 3 hores. Fer funcionar A costa 5 €/h i B costa 9 €/h. Pots utilitzar A fins a 3 hores i B fins a 2, sempre hores senceres (també 0). Amb 32 € de pressupost total, quantes peces pots fabricar com a màxim?",
+          "solution": [
+            "Ritmes: A = 16 ÷ 2 = 8 peces/h; B = 42 ÷ 3 = 14 peces/h.",
+            "Per a cada nombre d'hores B entre 0 i 2, prova les hores A entre 0 i 3 que no superin 32 €.",
+            "Una combinació òptima és A: 2 h i B: 2 h, amb cost 28 €.",
+            "Producció màxima: 2 × 8 + 2 × 14 = 44 peces."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 59,
+          "question": "Si dues magnituds són directament proporcionals i la primera passa de 3 a 12, què ha de passar amb el valor corresponent 7?",
+          "solution": [
+            "Factor = 12/3 = 4",
+            "7 × 4 = 28",
+            "✅ Passa a 28"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 79,
+          "question": "6 entrades iguals costen 48 €. Quant costen 7 entrades al mateix preu?",
+          "solution": [
+            "Preu d'una entrada = 48/6 = 8 €",
+            "7 entrades = 7 × 8 = 56 €",
+            "✅ 56 euros"
+          ]
+        },
+        {
+          "type": 6,
+          "n": 69,
+          "question": "La taula x: 3, 6, 10 &nbsp; | &nbsp; y: 9, 18, 32 representa una proporcionalitat directa?",
+          "solution": [
+            "Quocients: 3, 3, 3.2",
+            "✅ No"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 55,
+          "question": "Classifica la relació: \"L'edat d'un cotxe i el nombre de quilòmetres que ha recorregut\".",
+          "solution": [
+            "En una proporcionalitat directa, el quocient entre les magnituds corresponents es manté constant.",
+            "✅ No proporcional"
+          ]
+        },
+        {
+          "type": 7,
+          "n": 70,
+          "question": "A velocitat constant, en 3 h es recorren 24 km. Quina distància es recorre en 8 h?",
+          "solution": [
+            "Distància per hora = 24/3 = 8 km",
+            "8 h = 8 × 8 = 64 km",
+            "✅ 64 km"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 78,
+          "question": "Completa la taula proporcional: 3 → 27 &nbsp;&nbsp; 11 → ?",
+          "solution": [
+            "Constant = 27/3 = 9",
+            "11 × 9 = 99",
+            "✅ 99"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 62,
+          "question": "En una proporcionalitat directa, x=3 correspon a y=18. Quina és la constant k=y/x?",
+          "solution": [
+            "k = 18/3 = 6",
+            "✅ k = 6"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 61,
+          "question": "Una recepta per a 2 persones necessita 112 g de farina. Quants grams calen per a 6 persones mantenint la proporció?",
+          "solution": [
+            "Per persona = 112/2 = 56 g",
+            "6 persones = 6 × 56 = 336 g",
+            "✅ 336 g"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "percentatges",
+      "types": 8,
+      "samples": 600,
+      "coverage": [
+        3,
+        4,
+        1
+      ],
+      "exam": [
+        4,
+        4,
+        4
+      ],
+      "variants": [
+        {
+          "type": 1001,
+          "n": 75,
+          "question": "Un article té un preu inicial enter d'euros, igual a totes dues botigues. A aplica un descompte del 30%. B aplica un descompte del 10% i després resta un val de 6 €. Quin és el preu inicial enter més petit perquè A sigui ESTRICTAMENT més barata que B? No arrodoneixis els preus intermedis.",
+          "solution": [
+            "A estalvia 20 punts percentuals més que B, mentre B afegeix un val de 6 €.",
+            "A és més barata quan el 20% del preu inicial supera 6 €, és a dir, quan el preu supera 600/20 €.",
+            "El menor enter és 31. En aquest preu, A costa 21.70 € i B 21.90 €.",
+            "Amb 30 €, A encara no és estrictament més barata. Els preus dels candidats són positius."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 43,
+          "question": "Quin decimal correspon a 50%?",
+          "solution": [
+            "50% = 1/2 = 0.5",
+            "OK 0.5"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 74,
+          "question": "Si 120 es el 20%, quin es el total?",
+          "solution": [
+            "total=600"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 68,
+          "question": "Quin percentatge representa 15 de 100?",
+          "solution": [
+            "(15/100)x100=15%"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 71,
+          "question": "Calcula el 20% de 480",
+          "solution": [
+            "20% de 480=96"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 87,
+          "question": "Un abonament valia 500 € i el preu ha augmentat un 5%. Quin és el nou preu?",
+          "solution": [
+            "Augment: 25",
+            "Nou preu: 525"
+          ]
+        },
+        {
+          "type": 7,
+          "n": 92,
+          "question": "175 persones representen el 25% i utilitzen transport públic. Quantes persones formaven el grup total?",
+          "solution": [
+            "total=700"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 90,
+          "question": "Una jaqueta costa 240 € i té un descompte del 25%. Quin és el preu final?",
+          "solution": [
+            "Descompte: 60",
+            "Preu: 180"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "notacio2",
+      "types": 6,
+      "samples": 600,
+      "coverage": [
+        3,
+        3,
+        0
+      ],
+      "exam": null,
+      "variants": [
+        {
+          "type": 6,
+          "n": 119,
+          "question": "Quin és més gran: 4,5 × 10^4 o 6,5 × 10^4?",
+          "solution": [
+            "6,5 > 4,5",
+            "✅ 6,5 × 10^4"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 106,
+          "question": "Escriu 0,000012 en notació científica.",
+          "solution": [
+            "0,000012 = 1,2 × 10^-5",
+            "✅ 1,2 × 10^-5"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 100,
+          "question": "Escriu 81000 en notació científica.",
+          "solution": [
+            "81000 = 8,1 × 10^4",
+            "✅ 8,1 × 10^4"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 112,
+          "question": "Quin nombre representa 7,2 × 10^4?",
+          "solution": [
+            "7,2 × 10^4 = 72000",
+            "✅ 72000"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 113,
+          "question": "A 8 × 10^4, què indica l'exponent 4?",
+          "solution": [
+            "10^4 és una potència de deu positiva.",
+            "✅ Que la coma es desplaça 4 posicions cap a la dreta"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 50,
+          "question": "Identifica l'expressió que compleix la forma normalitzada de la notació científica.",
+          "solution": [
+            "La mantissa 4,5 compleix 1 ≤ mantissa < 10.",
+            "✅ 4,5 × 10^4"
+          ]
+        }
+      ]
+    }
+  ],
+  "banks": [
+    {
+      "key": "naturals-raonament",
+      "n": 25,
+      "text": "Necessites almenys 20 llapis. Els paquets A tenen 3 llapis i costen 5 €; els B tenen 6 llapis i costen 7 €. Pots combinar formats i poden sobrar llapis. Quin és el cost mínim, en euros?",
+      "answer": "26"
+    },
+    {
+      "key": "naturals-5",
+      "n": 25,
+      "text": "En una excursió hi participen 222 persones. Es volen formar grups de 9 persones. Quants grups complets es poden formar i quantes persones quedaran sense grup complet?",
+      "answer": "24 grups i sobren 6 persones"
+    },
+    {
+      "key": "naturals-2",
+      "n": 25,
+      "text": "Una associació compra 36 samarretes a 18 € cadascuna i disposa d'un val de 30 €. Quant haurà de pagar?",
+      "answer": "618 €"
+    },
+    {
+      "key": "naturals-7",
+      "n": 25,
+      "text": "Una biblioteca ha de guardar 79 llibres en capses on caben com a màxim 21 llibres. Quin és el nombre mínim de capses que necessita? Quants llibres hi haurà a l'última capsa?",
+      "answer": "4 capses; 16 llibres a l'última"
+    },
+    {
+      "key": "naturals-6",
+      "n": 25,
+      "text": "En dividir una quantitat de cromos en paquets de 5, s'obtenen 37 paquets complets i en sobren 4 cromos. Quants cromos hi havia inicialment?",
+      "answer": "189 cromos"
+    },
+    {
+      "key": "naturals-1",
+      "n": 25,
+      "text": "En una campanya solidària es recullen 16.020 kg d'aliments la primera setmana i 5.497 kg la segona. Se n'envien 6.452 kg a diversos centres. Quants quilograms queden al magatzem?",
+      "answer": "15065 kg"
+    },
+    {
+      "key": "naturals-3",
+      "n": 25,
+      "text": "En un teatre hi ha 6 files de 27 seients i, a més, 6 places accessibles. Quina capacitat total té el teatre?",
+      "answer": "168 seients"
+    },
+    {
+      "key": "naturals-4",
+      "n": 25,
+      "text": "Una màquina produeix 30 peces cada hora. Funciona 6 hores per torn, durant 3 torns diaris, al llarg de 9 dies. Quantes peces fabrica en total?",
+      "answer": "4860 peces"
+    },
+    {
+      "key": "potencies-raonament",
+      "n": 25,
+      "text": "Dos mosaics quadrats utilitzen en total 244 rajoles. El costat del gran té 2 rajoles més que el del petit. No se superposen. Quantes rajoles té el mosaic gran?",
+      "answer": "144"
+    },
+    {
+      "key": "potencies-3",
+      "n": 25,
+      "text": "En una exposició es col·loquen 144 fotografies formant un quadrat perfecte, amb el mateix nombre de files que de columnes. Quantes fotografies hi ha a cada fila?",
+      "answer": "12 fotografies per fila"
+    },
+    {
+      "key": "potencies-1",
+      "n": 25,
+      "text": "Una plaça quadrada està formada per 6 files de 6 rajoles. Expressa el nombre total de rajoles com una potència i calcula'l.",
+      "answer": "36 rajoles"
+    },
+    {
+      "key": "potencies-2",
+      "n": 25,
+      "text": "Un joc té 3 opcions possibles a cada pantalla i s'han de superar 4 pantalles. Si totes les combinacions són possibles, quantes seqüències diferents hi ha? Escriu també el càlcul com una potència.",
+      "answer": "81 seqüències"
+    },
+    {
+      "key": "jerarquia-raonament",
+      "n": 25,
+      "text": "A l'expressió 6 + 9 × 3 − 3, pots afegir parèntesis sense canviar l'ordre dels nombres ni els signes. Quin és el resultat estrictament positiu més petit que pots obtenir?",
+      "answer": "6"
+    },
+    {
+      "key": "jerarquia-3",
+      "n": 25,
+      "text": "Calcula pas a pas:2 × (2² + 4 × 3) − 5 × 4",
+      "answer": "12"
+    },
+    {
+      "key": "jerarquia-4",
+      "n": 25,
+      "text": "En un joc s'aconsegueixen 5 lots, cadascun amb 4 punts bàsics i 4 punts extra. Després es resta una penalització igual al quadrat de 3. Escriu l'expressió amb parèntesis i potència i calcula la puntuació final.",
+      "answer": "31 punts"
+    },
+    {
+      "key": "jerarquia-1",
+      "n": 25,
+      "text": "Calcula respectant la jerarquia:3 × (5 + 4)² − 4",
+      "answer": "239"
+    },
+    {
+      "key": "jerarquia-2",
+      "n": 25,
+      "text": "Calcula pas a pas:6 × 2² + (8 − 3) × 2",
+      "answer": "34"
+    },
+    {
+      "key": "divis-raonament",
+      "n": 25,
+      "text": "Completa 6□□4 amb dues xifres (poden ser zero o repetir-se). El nombre ha de ser divisible per 9 i per 4, però no per 8. Quin és el nombre més petit que compleix totes les condicions?",
+      "answer": "6084"
+    },
+    {
+      "key": "divis-2",
+      "n": 25,
+      "text": "Quin és el nombre més petit que cal sumar a 813 perquè el resultat sigui divisible per 10?",
+      "answer": "7"
+    },
+    {
+      "key": "divis-3",
+      "n": 25,
+      "text": "Completa el nombre 76□ perquè sigui divisible per 3. Escriu totes les xifres possibles per substituir □.",
+      "answer": "2, 5, 8"
+    },
+    {
+      "key": "divis-1",
+      "n": 25,
+      "text": "Descompon 26 en factors primers i escriu tots els seus divisors.",
+      "answer": "1, 2, 13, 26"
+    },
+    {
+      "key": "divis-4",
+      "n": 25,
+      "text": "El nombre 41 és primer o compost? Justifica-ho indicant quants divisors té.",
+      "answer": "Primer"
+    },
+    {
+      "key": "mcmmcd-raonament",
+      "n": 25,
+      "text": "El servei A surt per primer cop al minut 5 i després cada 8 minuts. El B surt per primer cop al minut 1 i després cada 12 minuts. Quin és el primer minut estrictament posterior al 7 en què surten alhora?",
+      "answer": "13"
+    },
+    {
+      "key": "mcmmcd-1",
+      "n": 25,
+      "text": "Calcula el MCD i el mcm de 37 i 50 utilitzant la factorització en nombres primers.",
+      "answer": "MCD = 1; mcm = 1850"
+    },
+    {
+      "key": "mcmmcd-2",
+      "n": 25,
+      "text": "Dues llums s'encenen alhora ara. Una s'encén cada 5 segons i l'altra cada 4 segons. Al cap de quants segons tornaran a coincidir?",
+      "answer": "20 segons"
+    },
+    {
+      "key": "mcmmcd-4",
+      "n": 25,
+      "text": "Tenim dues cintes de 72 cm i 90 cm. Les volem tallar en trossos iguals, tan llargs com sigui possible, sense que sobri cinta. Quina longitud tindrà cada tros i quants trossos obtindrem de cada cinta?",
+      "answer": "18 cm; 4 i 5 trossos"
+    },
+    {
+      "key": "mcmmcd-3",
+      "n": 25,
+      "text": "En una activitat hi ha 24 nois i 36 noies. Es vol formar el màxim nombre possible de grups iguals, sense que sobri ningú i amb el mateix nombre de nois i noies a cada grup. Quants grups es poden fer? Quants nois i noies hi haurà a cada grup?",
+      "answer": "12 grups; 2 nois i 3 noies per grup"
+    },
+    {
+      "key": "enters-raonament",
+      "n": 25,
+      "text": "Comences a 3 en una recta numèrica. Has d'aplicar els tres moviments +5, +11 i -5, una vegada cadascun, en l'ordre que triïs. Després de CADA moviment, la posició ha de quedar entre -4 i 16, inclosos. Quants ordres diferents són possibles?",
+      "answer": "4"
+    },
+    {
+      "key": "enters-3",
+      "n": 25,
+      "text": "Un mirador és a +164 m respecte del nivell del mar i una cova submarina és a −164 m. Quina diferència d'altitud hi ha entre tots dos punts?",
+      "answer": "328 m"
+    },
+    {
+      "key": "enters-4",
+      "n": 25,
+      "text": "Un ascensor és a la planta -3. Puja 6 plantes, baixa 5 plantes i finalment puja 1 plantes. A quina planta acaba?",
+      "answer": "Planta -1"
+    },
+    {
+      "key": "enters-5",
+      "n": 25,
+      "text": "Un submarinista és a -11 m. Puja 5 m i després baixa 5 m. A quina profunditat acaba? Quin desplaçament net ha fet respecte del punt inicial?",
+      "answer": "-11 m; desplaçament net 0 m"
+    },
+    {
+      "key": "enters-1",
+      "n": 25,
+      "text": "A primera hora la temperatura és de 1 °C. Al migdia puja 4 °C i al vespre baixa 6 °C. Quina temperatura fa al vespre?",
+      "answer": "-1 °C"
+    },
+    {
+      "key": "enters-2",
+      "n": 25,
+      "text": "Un compte té un saldo inicial de 54 €. Rep un ingrés de 162 € i després es fan dos pagaments de 61 € i 60 €. Quin és el saldo final?",
+      "answer": "95 €"
+    },
+    {
+      "key": "decimals-raonament",
+      "n": 25,
+      "text": "Cada ampolla conté 0,86 L, amb error absolut com a màxim 0,02 L. El contingut de cada ampolla pot ser qualsevol valor dins d'aquest marge. Vols abocar-les SENCERES en un dipòsit de 8,04 L i garantir almenys 6,98 L sense que mai vessi. Quin és el nombre mínim d'ampolles que ho garanteix? Respon 0 si no n'hi ha cap.",
+      "answer": "9"
+    },
+    {
+      "key": "decimals-3",
+      "n": 25,
+      "text": "Una compra de 5 llibretes iguals costa 10,45 €. Quin és el preu d'una llibreta?",
+      "answer": "2,09 €"
+    },
+    {
+      "key": "decimals-5",
+      "n": 25,
+      "text": "Les quatre notes d'un alumne són 4,5, 4,7, 5,1 i 7. Quina és la mitjana?",
+      "answer": "5,32"
+    },
+    {
+      "key": "decimals-2",
+      "n": 25,
+      "text": "Un paquet pesa 3,43 kg. Quina massa total tenen 4 paquets iguals?",
+      "answer": "13,72 kg"
+    },
+    {
+      "key": "decimals-6",
+      "n": 25,
+      "text": "Una longitud real és de 6,99 m, però es registra arrodonida a les dècimes com 7 m. Quin és l'error absolut de l'aproximació?",
+      "answer": "0,01 m"
+    },
+    {
+      "key": "decimals-1",
+      "n": 25,
+      "text": "En una botiga compres tres productes de 0,96 €, 1,53 € i 2,91 €. Pagues amb 10 €. Quin canvi has de rebre?",
+      "answer": "4,6 €"
+    },
+    {
+      "key": "decimals-4",
+      "n": 25,
+      "text": "Una corda de 12,5 m es talla en trossos de 1,7 m. Quants trossos complets es poden obtenir i quants metres sobraran?",
+      "answer": "7 trossos i 0,6 m de sobra"
+    },
+    {
+      "key": "fraccions-raonament",
+      "n": 25,
+      "text": "Una botiga ven 3/5 de les unitats que tenia. Després regala 5/7 de les que quedaven i finalment en retira 8 per a una exposició. Al final en queden 16. Quantes unitats tenia inicialment?",
+      "answer": "210"
+    },
+    {
+      "key": "fraccions-2",
+      "n": 25,
+      "text": "En un grup, 2/4 practica futbol i 2/5 practica bàsquet; ningú practica tots dos esports. Si hi ha 140 alumnes, quants practiquen algun dels dos esports?",
+      "answer": "126 alumnes"
+    },
+    {
+      "key": "fraccions-4",
+      "n": 25,
+      "text": "Una botiga té 60 unitats. En ven 2/4 del total i, de les que queden, en regala 4/5. Quantes unitats queden finalment?",
+      "answer": "6 unitats"
+    },
+    {
+      "key": "fraccions-5",
+      "n": 25,
+      "text": "En una escola, 1/8 de l'alumnat són 5 alumnes. Quants alumnes hi ha en total?",
+      "answer": "40 alumnes"
+    },
+    {
+      "key": "fraccions-6",
+      "n": 25,
+      "text": "D'un pressupost es gasta 3/7 en material i 3/6 en transport. Quina fracció queda sense gastar? Si el pressupost era de 336 €, quants euros queden?",
+      "answer": "24 € (1/14)"
+    },
+    {
+      "key": "fraccions-3",
+      "n": 25,
+      "text": "D'un dipòsit s'utilitza 4/6 del contingut. D'aquesta quantitat utilitzada, 3/6 es destina a regar. Quina fracció del dipòsit inicial s'ha destinat a regar? Si inicialment hi havia 144 litres, quants litres són?",
+      "answer": "48 litres (1/3)"
+    },
+    {
+      "key": "fraccions-7",
+      "n": 25,
+      "text": "La Laia ha completat 1/5 d'un llibre i en Marc 1/6 del seu. Qui n'ha completat una fracció més gran? Quina és la diferència entre les dues fraccions?",
+      "answer": "Laia; diferència 1/30"
+    },
+    {
+      "key": "fraccions-1",
+      "n": 25,
+      "text": "En una biblioteca, 2/4 dels llibres prestats són novel·les i 1/4 són còmics. Si s'han prestat 44 llibres i les dues categories no se superposen, quina fracció representen juntes i quants llibres són?",
+      "answer": "33 llibres (3/4)"
+    },
+    {
+      "key": "proporcionalitat-raonament",
+      "n": 25,
+      "text": "A ritme constant, la màquina A fabrica 12 peces en 2 hores i la B, 54 peces en 3 hores. Fer funcionar A costa 7 €/h i B costa 10 €/h. Pots utilitzar A fins a 4 hores i B fins a 2, sempre hores senceres (també 0). Amb 31 € de pressupost total, quantes peces pots fabricar com a màxim?",
+      "answer": "42"
+    },
+    {
+      "key": "proporcionalitat-4",
+      "n": 25,
+      "text": "Per recórrer 6 km, un vehicle de joguina consumeix 18 unitats de bateria. Si el consum és directament proporcional a la distància, quants quilòmetres podrà recórrer amb 33 unitats?",
+      "answer": "11 km"
+    },
+    {
+      "key": "proporcionalitat-3",
+      "n": 25,
+      "text": "Una màquina fabrica 46 peces en 2 hores a ritme constant. Quantes peces fabricarà en 9 hores?",
+      "answer": "207 peces"
+    },
+    {
+      "key": "proporcionalitat-5",
+      "n": 25,
+      "text": "Un servei cobra 3 € fixos més 3 € per quilòmetre. Per 3 km costa 12 € i per 10 km costa 33 €. El cost és directament proporcional als quilòmetres?",
+      "answer": "No"
+    },
+    {
+      "key": "proporcionalitat-2",
+      "n": 25,
+      "text": "Una recepta per a 4 persones necessita 320 g de farina. Quanta farina cal per a 9 persones mantenint la mateixa proporció?",
+      "answer": "720 g"
+    },
+    {
+      "key": "proporcionalitat-1",
+      "n": 25,
+      "text": "5 entrades per a una activitat costen 40 €. Si totes tenen el mateix preu, quant costaran 10 entrades?",
+      "answer": "80 €"
+    },
+    {
+      "key": "percentatges-raonament",
+      "n": 25,
+      "text": "Un article té un preu inicial enter d'euros, igual a totes dues botigues. A aplica un descompte del 30%. B aplica un descompte del 15% i després resta un val de 5 €. Quin és el preu inicial enter més petit perquè A sigui ESTRICTAMENT més barata que B? No arrodoneixis els preus intermedis.",
+      "answer": "34"
+    },
+    {
+      "key": "percentatges-4",
+      "n": 25,
+      "text": "En una enquesta de 800 persones, el 20% tria l'opció A, el 20% l'opció B i la resta l'opció C. Quantes persones trien l'opció C?",
+      "answer": "480 persones"
+    },
+    {
+      "key": "percentatges-6",
+      "n": 25,
+      "text": "En una activitat hi participen 600 alumnes i 360 han acabat la primera fase. Quin percentatge del total representa aquesta quantitat?",
+      "answer": "60%"
+    },
+    {
+      "key": "percentatges-3",
+      "n": 25,
+      "text": "Un preu de 260 € augmenta un 10% i després, sobre el nou preu, s'aplica un descompte del 20%. Quin és el preu final?",
+      "answer": "228,8 €"
+    },
+    {
+      "key": "percentatges-5",
+      "n": 25,
+      "text": "El 20% d'un grup són 340 persones. Quantes persones formen el grup complet?",
+      "answer": "1700 persones"
+    },
+    {
+      "key": "percentatges-1",
+      "n": 25,
+      "text": "Una jaqueta costa 120 € i té un descompte del 30%. Quin és el preu final?",
+      "answer": "84 €"
+    },
+    {
+      "key": "percentatges-2",
+      "n": 25,
+      "text": "El nombre de socis d'un club passa de 425 a 637.5. Quin percentatge ha augmentat?",
+      "answer": "50%"
+    }
+  ],
+  "oracleChecks": 150,
+  "integerPeople": 64,
+  "highAvailable": true,
+  "filtersVerified": [
+    1,
+    2,
+    3
+  ],
+  "globalExam": 20
+}

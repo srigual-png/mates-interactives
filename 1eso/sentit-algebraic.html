@@ -776,7 +776,7 @@ function genTraduccio(){
   // 6 = context real → expressió
   const type=shuffle([1,1,2,3,4,5,6])[0];
 
-  let question,correct,alts=[],opts,guide,solution;
+  let question,correct,alts=[],opts,guide,solution,difficultyVariant;
 
   if(type===1){
     const frases=[
@@ -796,6 +796,7 @@ function genTraduccio(){
     ];
 
     const f=frases[rnd(0,frases.length-1)];
+    if(f.al)difficultyVariant='grouped';
 
     question='Tradueix: <b>"'+f.n+'"</b>';
     correct=f.a;
@@ -963,6 +964,7 @@ function genTraduccio(){
 
   return {
     topicId:'traduccio',
+    difficultyVariant,
     type,
     question,
     correct,
@@ -1434,7 +1436,7 @@ function genEquacions(forceType){
   // ⭐ Ampliació 2n: tipus 5 i 6
   const coreTypes=[1,2,3,4,7,8];
   const type=forceType || coreTypes[rnd(0,coreTypes.length-1)];
-  let question,correct,alts=[],opts,guide,solution;
+  let question,correct,alts=[],opts,guide,solution,difficultyVariant;
 
   // Formata nombres per als distractors sense decimals innecessaris.
   function fmtEqNum(n){
@@ -1637,11 +1639,12 @@ function genEquacions(forceType){
       {txt:'Cinc vegades un nombre menys 3 és igual a 17.',eq:'5x − 3 = 17',x:4,w:[20,14,5,3]},
       {txt:'Un nombre multiplicat per 4 dóna 36.',eq:'4x = 36',x:9,w:[32,40,4,36]},
       {txt:'Un nombre menys 11 és igual a 7.',eq:'x − 11 = 7',x:18,w:[4,11,7,16]},
-      {txt:'El triple d’un nombre augmentat en 2 és 14.',eq:'3x + 2 = 14',x:4,w:[12,16,6,3]}
+      {txt:'El triple d’un nombre, més 2, és igual a 14.',eq:'3x + 2 = 14',x:4,w:[12,16,6,3]}
     ];
     const pr=probs[rnd(0,probs.length-1)];
 
     question='🌍 <b>'+pr.txt+'</b><br><small>Planteja l’equació i troba x.</small>';
+    if(['4x = 36','x − 11 = 7'].includes(pr.eq))difficultyVariant='single';
     correct='x = '+pr.x;
     alts=[String(pr.x),'x='+pr.x];
     opts=uniq4(correct,pr.w.map(xOpt));
@@ -1662,6 +1665,7 @@ function genEquacions(forceType){
 
   return {
     topicId:type===5||type===6?'equacions2':'equacions',
+    difficultyVariant,
     type,
     course:type===5||type===6?'2n':'1r',
     question,
@@ -1883,7 +1887,7 @@ algAdd('E5','equacions','equacions',2,()=>{const a=rnd(2,7),x=rnd(3,12),b=rnd(1,
 algAdd('E6','equacions','equacions',2,()=>{const x=rnd(8,16),k=rnd(3,12),known=x+k;return algProblem({patternId:'E6',family:'equacions',topicId:'equacions',diff:2,question:`La Júlia té <b>${k} anys més</b> que en Pau. La Júlia té <b>${known} anys</b>. Quants anys té en Pau?`,answer:algNumAnswer(x,.001,'anys'),hint:['Representa l’edat d’en Pau amb x','Expressa l’edat de la Júlia sumant la diferència','Forma una equació senzilla i aïlla x'],solution:[`x+${k}=${known}`,`x=<b>${x} anys</b>.`]});});
 algAdd('E7','equacions','equacions',3,()=>{const x=rnd(3,10),a=rnd(5,15),saved=rnd(10,40),target=saved+a*x;return algProblem({patternId:'E7',family:'equacions',topicId:'equacions',diff:3,question:`Tens <b>${saved} €</b> estalviats i afegeixes <b>${a} € cada setmana</b>. Quantes setmanes necessites per arribar exactament a <b>${target} €</b>?`,answer:algNumAnswer(x,.001,'setmanes'),hint:['Representa les setmanes amb x','Suma els diners inicials i l’estalvi acumulat','Iguala l’expressió al total objectiu'],solution:[`${saved}+${a}x=${target}`,`${a}x=${target-saved}`,`x=<b>${x} setmanes</b>.`]});});
 algAdd('E8','equacions','equacions',3,()=>{const x=rnd(4,14),w=rnd(2,9),p=2*(x+w);return algProblem({patternId:'E8',family:'equacions',topicId:'equacions',diff:3,question:`Un rectangle té amplada <b>${w} cm</b> i llargada desconeguda. El perímetre és <b>${p} cm</b>. Quina és la llargada?`,answer:algNumAnswer(x,.001,'cm'),hint:['Representa la llargada amb x','Escriu el perímetre com dues llargades més dues amplades','Resol l’equació resultant'],solution:[`2x+2·${w}=${p}`,`2x=${p-2*w}`,`x=<b>${x} cm</b>.`]});});
-algAdd('E9','equacions','equacions',3,()=>{const x=rnd(4,15),base=rnd(3,12),p=2*x+base;return algProblem({patternId:'E9',family:'equacions',topicId:'equacions',diff:3,question:`Un triangle isòsceles té dos costats iguals de longitud desconeguda i una base de <b>${base} cm</b>. El perímetre és <b>${p} cm</b>. Quant mesura cadascun dels costats iguals?`,answer:algNumAnswer(x,.001,'cm'),hint:['Representa cada costat igual amb x','Suma els tres costats per formar el perímetre','Aïlla x'],solution:[`2x+${base}=${p}`,`2x=${p-base}`,`x=<b>${x} cm</b>.`]});});
+algAdd('E9','equacions','equacions',3,()=>{const x=rnd(4,15),base=rnd(3,Math.min(12,2*x-1)),p=2*x+base;return algProblem({patternId:'E9',family:'equacions',topicId:'equacions',diff:3,question:`Un triangle isòsceles té dos costats iguals de longitud desconeguda i una base de <b>${base} cm</b>. El perímetre és <b>${p} cm</b>. Quant mesura cadascun dels costats iguals?`,answer:algNumAnswer(x,.001,'cm'),hint:['Representa cada costat igual amb x','Suma els tres costats per formar el perímetre','Aïlla x'],solution:[`2x+${base}=${p}`,`2x=${p-base}`,`x=<b>${x} cm</b>.`]});});
 algAdd('E10','equacions','equacions',3,()=>{const n=rnd(3,9),price=rnd(3,12),fixed=rnd(1,6),total=price*n+fixed;return algProblem({patternId:'E10',family:'equacions',topicId:'equacions',diff:3,question:`Una activitat costa <b>${price} € per persona</b> i hi ha una taxa fixa de <b>${fixed} €</b>. El grup paga <b>${total} €</b>. Quantes persones hi ha?`,answer:algNumAnswer(n),hint:['Representa el nombre de persones amb x','El cost variable és preu per persona multiplicat per x','Afegeix la taxa fixa i iguala al total'],solution:[`${price}x+${fixed}=${total}`,`${price}x=${total-fixed}`,`x=<b>${n}</b>.`]});});
 
 // PENSAMENT COMPUTACIONAL (6)
@@ -2046,6 +2050,7 @@ function registerError(ex,studentAnswer,source='practice'){
     topicId:ex.topicId||(topic?topic.id:null),
     topicName:ex.topicName||(topic?topic.name:'Tema'),
     type:(ex.type!==undefined?ex.type:null),
+    difficultyVariant:ex.difficultyVariant,
     question:ex.question||'',
     correct:ex.correct,
     answer:studentAnswer,

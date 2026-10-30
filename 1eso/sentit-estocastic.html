@@ -1630,7 +1630,7 @@ function genMediana(){
     guide=['Com que les dades ja estan ordenades, no cal tornar-les a ordenar.','Hi ha un nombre senar de dades: localitza directament el valor que queda al centre.'];
     solution=['Hi ha '+n4+' dades, així que el valor central ocupa la posició '+(pos4+1)+'.','✅ Mediana = '+med4];
   }
-  return {topicId:'mediana',type:type,question:q,correct:String(correct),options:opts,guide:guide,solution:solution,visual:visual};
+  return {topicId:'mediana',type:type,difficultyVariant:type===1&&!isOdd?'even':undefined,question:q,correct:String(correct),options:opts,guide:guide,solution:solution,visual:visual};
 }
 
 // 9. Moda — bossa de 50 exercicis variats (1r ESO)
@@ -2367,6 +2367,7 @@ function registerError(ex,studentAnswer,source){
     topicId:ex.topicId||(topic?topic.id:null),
     topicName:ex.topicName||(topic?topic.name:'Tema'),
     type:ex.type!==undefined?ex.type:null,
+    difficultyVariant:ex.difficultyVariant,
     question:ex.question||'',
     visual:ex.visual||'',
     correct:String(ex.correct),

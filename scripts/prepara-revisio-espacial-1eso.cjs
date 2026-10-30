@@ -1,0 +1,21 @@
+const fs=require('fs');const topics=[],banks=[];
+function rows(topic,level,types,reason){for(const type of types)topics.push({topic,type,level,reason});}
+rows('elements',1,[1,2,3,4,5,6,7,8],'Definició, propietat coneguda o meitat d’una mesura; reconèixer una construcció no exigeix planificar-la.');
+rows('angles',1,[1,2,3,4,5,6,7],'Classificació, relació coneguda o fórmula directa; no es demana una cadena de relacions desconeguda.');
+rows('poligons',1,[1,2,3,4,5,6,7,8],'Identificar propietats o aplicar directament les relacions de costats, diagonals i angles.');
+rows('triangles',1,[1,2,3,4,6],'Classificació, desigualtat triangular, suma d’angles o definició de rectes notables.');
+rows('quadrilaters',1,[1,2,3,4,5,6],'Identificar propietats o completar la suma interior. El nombre de propietats recordades no crea alta.');
+rows('cercle',1,[1,2,3,7],'Definició, radi-diàmetre o fórmula directa de circumferència.');
+rows('visualitzacio',1,[1,3,4,7],'Producte rectangular, quadrat/arrel coneguda o part que falta per resta.');
+rows('visualitzacio',2,[2,5,6],'Connectar descomposició i àrea, capes de senars i quadrat o intersecció i producte de fraccions.');
+rows('poliedres',1,[1,2,3,4,5,6],'Comptar, reconèixer elements o aplicar directament Euler o la fórmula del volum.');
+topics.find(r=>r.topic==='poliedres'&&r.type===6).variants={triangle:{level:2,reason:'Cal obtenir primer l’àrea triangular de la base i després relacionar-la amb l’alçada del prisma.'}};
+rows('cossos',1,[1,2,3,4,5,6],'Definició, recompte de bases o aplicació de fórmula amb totes les dades donades.');
+topics.find(r=>r.topic==='cossos'&&r.type===6).variants={scale:{level:2,reason:'Relacionar el canvi d’una dimensió amb el volum i conservar l’alçada.'}};
+rows('pitagores',1,[1,2,6],'Aplicació directa de Pitàgores o reconeixement de la hipotenusa i la condició d’angle recte.');
+rows('pitagores',2,[3,4,5],'Identificar en el context el triangle rectangle i el costat desconegut abans d’aplicar el teorema.');
+rows('cercle2',1,[4,5,6],'Fórmula directa de cercle, arc o sector amb radi i angle donats; ampliació valorada segons el curs de contingut.');
+rows('coordenades',1,[1,2,3,4,5,6],'Lectura de coordenades, signes, eixos o distància sobre una mateixa recta.');
+const groups=[['E',5,[],{}],['A',7,[],{}],['P',6,[],{}],['T',7,[5],{5:'Suma interior i igualtat dels dos angles de la base.'}],['Q',6,[],{}],['C',6,[],{}],['V',5,[2,4,5],{2:'Compondre dues superfícies amb alçada comuna.',4:'Connectar capes senars i construcció quadrada.',5:'Interpretar una intersecció com a fracció d’una fracció.'}]];
+for(const [prefix,count,medium,reasons] of groups)for(let i=1;i<=count;i++)banks.push({bank:'spatialOpen',key:prefix+i,level:medium.includes(i)?2:1,reason:reasons[i]||'Identificació, propietat o operació directa. El format obert no eleva el nivell.'});
+fs.writeFileSync('docs/dificultats/revisio-1eso-espacial-punt3.json',JSON.stringify({course:'1eso',sense:'espacial',status:'reclassified-with-gaps',topics,banks,note:'Sense altes pedagògiques en les famílies existents; buits declarats. Funcions base no accessibles des de TOPICS o bancs no es compten com a famílies web.'},null,2)+'\n');

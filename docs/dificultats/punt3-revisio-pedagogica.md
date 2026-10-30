@@ -1,3 +1,5 @@
+**Continuació actual:** [estat del punt 3 i matriu actualitzada](punt3-estat-actual.md). Els apartats següents conserven la primera entrega de 1r numèric i la matriu històrica.
+
 Integració posterior: [punt 4, modes i quotes](punt4-modes-i-quotes.md), validat als 20 blocs. La revisió pedagògica del punt 3 continua amb l’abast indicat a continuació.
 
 Estat actual: [famílies altes incorporades a 1r numèric](punt3-raonament-1eso-numeric.md). Els apartats de la primera entrega següents conserven el diagnòstic anterior a aquesta ampliació.

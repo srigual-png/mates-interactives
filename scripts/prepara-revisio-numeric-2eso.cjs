@@ -1,0 +1,31 @@
+const fs=require('fs'),topics=[];const source=JSON.parse(fs.readFileSync('docs/dificultats/auditoria-global-mostres-punt2.json')).blocks.find(b=>b.course==='2eso'&&b.sense==='numeric');
+function rows(topic,level,types,reason){for(const type of types){const old=source.topics.find(t=>t.id===topic)?.types.find(t=>t.type===String(type));topics.push({topic,type,level,reason,previous:old?.levels||[],samples:old?.variants.map(v=>v.question)||[]});}}
+rows('racionals',1,[1,2,3,4,9,11,15],'Conversió directa, lectura de la recta o identificació de representació.');
+rows('racionals',2,[5,6,7,8,10,12,13,14],'Connectar o comparar representacions; ordenar o comprovar equivalències no justifica alta.');
+rows('racionals',3,[16],'Reconstruir el mínim enter amb numerador i denominador variables i comprovar el llindar estricte.');
+rows('fraccionsSentit',1,[1,2,3,5,6,7,9,14],'Divisió, fracció d’una quantitat, complement, raó o significat directe.');
+rows('fraccionsSentit',2,[4,8,10,11,12,13,15],'Reconstruir el total, comparar bases, connectar raó i fracció del total, repartir proporcionalment o aplicar fraccions a bases successives.');
+rows('operacionsRacionals',1,[1,2,3,4,5,6,7,8,11,12,13,16,17,18],'Operació directa o inversa, signe, jerarquia, temperatura o diagnòstic d’un error elemental. Fraccions i signes no creen alta.');
+rows('operacionsRacionals',2,[9,10,14,15],'Coordinar operacions relacionades, estimar un producte o establir límits d’una suma sense calcular-la exactament.');
+topics.find(r=>r.topic==='operacionsRacionals'&&r.type===10).variants={cancelled:{level:1,reason:'Els dos termes del parèntesi coincideixen: zero per qualsevol factor no requereix la cadena general.'}};
+rows('potencies',1,[1,2,3,4,5,7,8,9,10,11,12,13,14,15,18],'Notació, potència o llei de potències aplicada directament; exponent negatiu i fraccionari no justifica alta.');
+rows('potencies',2,[6,16,17],'Contrastar abast del signe/parèntesis, comprovar igualtats o combinar potència i jerarquia.');
+topics.find(r=>r.topic==='potencies'&&r.type===18).variants={growth:{level:2,reason:'Relacionar el nombre de duplicacions amb una potència i combinar-la amb la població inicial.'}};
+rows('aproximacions',1,[1,2,3,4,5,6,7,13,14],'Arrodoniment, precisió usual, error absolut o reconeixement directe de la seva definició.');
+rows('aproximacions',2,[8,9,10,11,12,15],'Relacionar error i base, reconstruir un interval d’arrodoniment o contrastar una estimació de producte.');
+rows('proporcionalitat',1,[1,2,4,5,6,7,9,13,14,18],'Identificació, constant o factor directe, operació inversa estàndard o reconeixement de l’estratègia unitària.');
+rows('proporcionalitat',2,[3,8,10,11,12,15,16,17],'Obtenir valor unitari i reescalar, comparar ofertes, repartir una raó o contrastar diverses parelles.');
+rows('percentatges',1,[1,2,3,4,6,7,8,16,17],'Significat o càlcul directe de percentatge i valor final. Una disminució percentual coneguda no és alta.');
+rows('percentatges',2,[5,9,10,11,12,13,14,15,18],'Reconstruir base, calcular variació, coordinar percentatges successius o comparar dos models d’oferta amb preu conegut.');
+rows('recomptes',1,[1,2,3,4,6,9,11,12,15],'Principi multiplicatiu directe, repetició, inversió d’un producte o reconèixer duplicació/suma indeguda.');
+rows('recomptes',2,[5,7,8,10,13,14],'Organitzar una enumeració, evitar doble recompte o incorporar restriccions sobre les decisions.');
+rows('financeraAmp',1,[1,2,4,6,11,13,14],'Percentatge, preu final o retenció directa. Es fan servir els tipus fiscals que dona l’enunciat.');
+rows('financeraAmp',2,[3,5,7,8,9,10,12],'Reconstruir base, encadenar bases percentuals, comparar ofertes o formar subtotal i impost.');
+rows('generatriu3r',1,[1,2,3,4,5,6,7,8,9,11,12,15],'Classificar desenvolupament decimal, identificar quadrats i aplicar conversió periòdica pura o definició racional.');
+rows('generatriu3r',2,[10,13,14],'Coordinar parts no periòdica/periòdica o delimitar i comparar una arrel per aproximacions.');
+rows('notacio3r',1,[1,2,3,4,5,6,7,8,9,12,13,14,15],'Conversió, ordre de magnitud i normalització directa, també dins un context.');
+rows('notacio3r',2,[10,11],'Combinar operació amb coeficients, lleis de potències i normalització del resultat.');
+rows('inversa3r',1,[1,3,4,5,10,11,15],'Identificar el model, constant o valor d’una fórmula inversa donada.');
+rows('inversa3r',2,[2,6,7,8,9,12,13,14],'Relacionar model invers i context, contrastar una taula o explicar un canvi simultani incorrecte.');
+for(const t of source.topics){const ids=topics.filter(r=>r.topic===t.id).map(r=>String(r.type)).sort();const observed=t.types.map(r=>r.type).sort();if(JSON.stringify(ids)!==JSON.stringify(observed))throw Error('Cens no coincideix: '+t.id);}
+fs.writeFileSync('docs/dificultats/revisio-2eso-numeric-punt3.json',JSON.stringify({course:'2eso',sense:'numeric',status:'reclassified-with-gaps',topics,banks:[],note:'192 tipus incloses les quatre ampliacions. Racionals conserva una sola família alta. Els altres temes no reben altes artificials; cal ampliar-ne la cobertura.'},null,2)+'\n');

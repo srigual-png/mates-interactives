@@ -1298,7 +1298,7 @@ function genPitagores2ESO(forceType){
     guide=['Recorda què relaciona el teorema de Pitàgores.','La longitud de la hipotenusa no s’obté sumant directament els catets.'];
     solution=[`Cal treballar amb els quadrats dels costats: ${a}²+${b}²=${c*c}.`,`La hipotenusa correcta seria ${c} cm.`];allowOpen=false;
   }
-  return {topicId:'pitagores',type,course:'2n',question,correct,alts,options,guide,solution,openHint,allowOpen};
+  return {topicId:'pitagores',type,course:'2n',difficultyVariant:type===15&&question.includes('diagonal')?'diagonal':undefined,question,correct,alts,options,guide,solution,openHint,allowOpen};
 }
 
 /* ── GENERADOR · BLOC 4: PERÍMETRES I ÀREES ─────────────── */
@@ -1393,8 +1393,8 @@ function genPerimetresArees2ESO(forceType){
     solution=[`L = 2·π·r.`,`r = ${fmtNum(L,2)}/(2·3,14).`,`Resultat: ${correct}.`];openHint='Escriu el valor i la unitat cm.';
   }
   else if(type===15){
-    const n=shuffle([5,6,8])[0],side=shuffle([4,6,8])[0],apothem=shuffle([3,4,5])[0],per=n*side,area=per*apothem/2;correct=answerUnit(area,'cm²');alts=unitAlternatives(area,'cm²');options=uniq4(correct,[answerUnit(per*apothem,'cm²'),answerUnit(n*apothem/2,'cm²'),answerUnit(side*apothem,'cm²'),answerUnit(area+per,'cm²')]);
-    question=`Un polígon regular té <b>${n} costats de ${side} cm</b> i apotema de <b>${apothem} cm</b>. Quina és la seva àrea?`;
+    const n=shuffle([5,6,8])[0],side=shuffle([4,6,8])[0],apothem=roundTo(side/(2*Math.tan(Math.PI/n)),2),per=n*side,area=roundTo(per*apothem/2,2);correct=answerUnit(area,'cm²');alts=unitAlternatives(area,'cm²');options=uniq4(correct,[answerUnit(per*apothem,'cm²'),answerUnit(n*apothem/2,'cm²'),answerUnit(side*apothem,'cm²'),answerUnit(area+per,'cm²')]);
+    question=`Un polígon regular té <b>${n} costats de ${side} cm</b> i apotema aproximada de <b>${fmtNum(apothem,2)} cm</b>. Calcula l’àrea amb l’apotema indicada.`;
     guide=['Calcula primer el perímetre del polígon regular.','Multiplica el perímetre per l’apotema.','Divideix el producte entre dos.'];
     solution=[`Perímetre = ${n}·${side} = ${per} cm.`,`Àrea = ${per}·${apothem}/2.`,`Resultat: ${correct}.`];openHint='Escriu el valor i la unitat cm².';
   }
@@ -1425,7 +1425,7 @@ let volumeTypeBag=[];
 function nextVolumeType(){if(!volumeTypeBag.length)volumeTypeBag=shuffle(Array.from({length:20},(_,i)=>i+1));return volumeTypeBag.pop()}
 function genSuperficiesVolums2ESO(forceType){
   const type=forceType||nextVolumeType();
-  let question,correct,options,guide,solution,alts=[],openHint='',allowOpen=true;
+  let question,correct,options,guide,solution,alts=[],openHint='',allowOpen=true,difficultyVariant;
   const PI=3.14;
   if(type===1){
     const l=shuffle([4,5,6,8,10])[0],w=shuffle([3,4,5,6])[0],h=shuffle([2,3,4,5,7])[0],v=l*w*h;
@@ -1542,6 +1542,7 @@ function genSuperficiesVolums2ESO(forceType){
   else if(type===17){
     const a=[shuffle([4,5,6])[0],shuffle([3,4,5])[0],shuffle([2,3,4])[0]],b=[shuffle([3,4,5])[0],shuffle([3,4,6])[0],shuffle([3,4,5])[0]];
     const va=a[0]*a[1]*a[2],vb=b[0]*b[1]*b[2];if(va===vb)return genSuperficiesVolums2ESO(17);
+    if(a[0]===b[0]&&a[1]===b[1])difficultyVariant='sameBase';
     correct=va>vb?'El recipient A':'El recipient B';options=shuffle([correct,va>vb?'El recipient B':'El recipient A','Tenen el mateix volum','No es pot saber sense calcular l’àrea total']);
     question=`El recipient A mesura <b>${a[0]}×${a[1]}×${a[2]} dm</b> i el B <b>${b[0]}×${b[1]}×${b[2]} dm</b>. Quin té més capacitat?`;
     guide=['Compara capacitats a partir del volum interior.','Calcula els dos volums amb les mateixes unitats.','No utilitzis l’àrea exterior per decidir la capacitat.'];
@@ -1570,7 +1571,7 @@ function genSuperficiesVolums2ESO(forceType){
     guide=['Un ortoedre té sis cares rectangulars.','Les cares oposades són iguals.','Identifica les tres parelles formades per llargada, amplada i altura.'];
     solution=[`Hi ha dues cares ${l}×${w}, dues cares ${l}×${h} i dues cares ${w}×${h}.`,`Aquest conjunt de sis rectangles forma un desenvolupament pla possible de la capsa.`];allowOpen=false;
   }
-  return {topicId:'superficies',type,course:'2n',question,correct,alts,options,guide,solution,openHint,allowOpen};
+  return {topicId:'superficies',type,course:'2n',difficultyVariant,question,correct,alts,options,guide,solution,openHint,allowOpen};
 }
 
 /* ── GENERADOR · BLOC 6: ESTIMACIÓ, PRECISIÓ I ERROR ────── */
@@ -1666,7 +1667,7 @@ function genEstimacioError2ESO(forceType){
   }
   else if(type===12){
     const measured=shuffle([12.3,18.7,25.4,40.6])[0],step=0.1,lo=roundTo(measured-step/2,2),hi=roundTo(measured+step/2,2);
-    correct=`entre ${fmtNum(lo,2)} cm i ${fmtNum(hi,2)} cm`;options=shuffle([correct,`entre ${fmtNum(measured-step,2)} cm i ${fmtNum(measured+step,2)} cm`,`entre ${fmtNum(measured,2)} cm i ${fmtNum(measured+step,2)} cm`,`exactament ${fmtNum(measured,2)} cm`]);
+    correct=`des de ${fmtNum(lo,2)} cm (inclòs) fins a ${fmtNum(hi,2)} cm (exclòs)`;options=shuffle([correct,`entre ${fmtNum(measured-step,2)} cm i ${fmtNum(measured+step,2)} cm`,`entre ${fmtNum(measured,2)} cm i ${fmtNum(measured+step,2)} cm`,`exactament ${fmtNum(measured,2)} cm`]);
     question=`Una longitud s’ha registrat com <b>${fmtNum(measured,1)} cm</b> arrodonida a la dècima. Quin interval és compatible amb aquest arrodoniment?`;
     guide=['Una mesura arrodonida a la dècima pot diferir fins a mitja dècima del valor registrat.','Resta i suma aquest marge al valor indicat.'];solution=[`El marge és de 0,05 cm.`,`L’interval compatible és ${correct}.`];allowOpen=false;
   }
@@ -1689,7 +1690,7 @@ function genEstimacioError2ESO(forceType){
   else if(type===15){
     const readings=shuffle([[10.2,10.3,10.2],[5.8,5.9,5.8],[25.1,25.2,25.1],[7.4,7.5,7.4]])[0],mean=roundTo((readings[0]+readings[1]+readings[2])/3,2);
     correct=answerUnit(mean,'cm',2);alts=unitAlternatives(mean,'cm',2);options=uniq4(correct,[answerUnit(Math.max(...readings),'cm',1),answerUnit(Math.min(...readings),'cm',1),answerUnit(roundTo(readings[0]+readings[1]+readings[2],2),'cm',2),answerUnit(roundTo(mean+0.1,2),'cm',2),answerUnit(roundTo(mean-0.1,2),'cm',2)]);
-    question=`S’han fet tres mesures d’una longitud: <b>${readings.map(x=>fmtNum(x,1)).join(' cm, ')} cm</b>. Quina mitjana dona una estimació millor del valor mesurat?`;
+    question=`S’han fet tres mesures d’una longitud: <b>${readings.map(x=>fmtNum(x,1)).join(' cm, ')} cm</b>. Quina és la mitjana de les tres mesures, usada com a estimació de la longitud?`;
     guide=['Suma les tres mesures.','Divideix la suma pel nombre de mesures.','Mantén una precisió coherent amb les dades originals.'];solution=[`Mitjana = (${readings.map(x=>fmtNum(x,1)).join(' + ')})/3.`,`Resultat: ${correct}.`];openHint='Escriu el valor i la unitat cm.';
   }
   else if(type===16){
@@ -2121,13 +2122,13 @@ function genPiramidesCons3r(forceType){
     guide=['Parteix de V = A_base·h/3.','Aïlla l’àrea de la base abans de substituir les dades.','La resposta és una superfície.'];
     solution=[`A_base = 3V/h = 3·${fmtNum(V)}/${h}.`,`Resultat: ${correct}.`];openHint='Escriu el valor i la unitat cm².';
   } else if(type===5){
-    const a=shuffle([4,6,8,10])[0],g=shuffle([5,7,9,11])[0],lat=4*a*g/2,tot=a*a+lat;
+    const a=shuffle([4,6,8,10])[0],g=shuffle([5,7,9,11].filter(v=>v>a/2))[0],lat=4*a*g/2,tot=a*a+lat;
     correct=answerUnit(tot,'cm²');alts=unitAlternatives(tot,'cm²');options=uniq4(correct,[answerUnit(lat,'cm²'),answerUnit(a*a,'cm²'),answerUnit(4*a*g,'cm²'),answerUnit(a*a+4*a*g,'cm²'),answerUnit(tot-a,'cm²')]);
     question=`Una piràmide regular de base quadrada té costat <b>${a} cm</b> i apotema lateral <b>${g} cm</b>. Quina és l’àrea total?`;
     guide=['Calcula l’àrea de la base quadrada.','La superfície lateral està formada per quatre triangles iguals.','Suma l’àrea de la base i l’àrea lateral.'];
     solution=[`A_base = ${a*a} cm².`,`A_lateral = 4·(${a}·${g}/2) = ${lat} cm².`,`A_total = ${a*a}+${lat} = ${tot} cm².`];openHint='Escriu el valor i la unitat cm².';
   } else if(type===6){
-    const n=shuffle([3,4,5,6])[0],a=shuffle([4,6,8])[0],g=shuffle([5,7,9])[0],P=n*a,lat=P*g/2;
+    const n=shuffle([3,4,5,6])[0],a=shuffle([4,6,8])[0],g=shuffle([5,7,9].filter(v=>v>a/(2*Math.tan(Math.PI/n))))[0],P=n*a,lat=P*g/2;
     correct=answerUnit(lat,'cm²');alts=unitAlternatives(lat,'cm²');options=uniq4(correct,[answerUnit(P*g,'cm²'),answerUnit(P+g,'cm²'),answerUnit(n*a*g/3,'cm²',2),answerUnit(lat*2,'cm²'),answerUnit(lat/2,'cm²')]);
     question=`Una piràmide regular té una base de <b>${n} costats</b>, cadascun de <b>${a} cm</b>, i apotema lateral <b>${g} cm</b>. Quina és l’àrea lateral?`;
     guide=['Calcula el perímetre de la base.','Utilitza el perímetre i l’apotema lateral.','Recorda que la suma dels triangles laterals incorpora una divisió entre 2.'];
@@ -2139,13 +2140,13 @@ function genPiramidesCons3r(forceType){
     guide=['Calcula l’àrea de la base circular.','Multiplica per l’altura.','Aplica el factor 1/3 propi del con.'];
     solution=[`V = π·r²·h/3.`,`V = 3,14·${r}²·${h}/3 = ${correct}.`];openHint='Escriu el valor i la unitat cm³.';
   } else if(type===8){
-    const r=shuffle([2,3,4,5])[0],g=shuffle([5,6,8,10,12])[0],A=roundTo(pi*r*g,2);
+    const r=shuffle([2,3,4,5])[0],g=shuffle([5,6,8,10,12].filter(v=>v>r))[0],A=roundTo(pi*r*g,2);
     correct=answerUnit(A,'cm²',2);alts=unitAlternatives(A,'cm²',2);options=uniq4(correct,[answerUnit(2*pi*r*g,'cm²',2),answerUnit(pi*r*r,'cm²',2),answerUnit(pi*r*g/2,'cm²',2),answerUnit(pi*(r+g),'cm²',2),answerUnit(A+pi*r*r,'cm²',2)]);
     question=`Un con té radi <b>${r} cm</b> i generatriu <b>${g} cm</b>. Quina és l’àrea lateral? Utilitza <b>π ≈ 3,14</b>.`;
     guide=['Identifica que es demana només la superfície lateral.','Utilitza el radi i la generatriu, no l’altura.','Comprova que la resposta estigui en unitats quadrades.'];
     solution=[`A_lateral = π·r·g.`,`A_lateral = 3,14·${r}·${g} = ${correct}.`];openHint='Escriu el valor i la unitat cm².';
   } else if(type===9){
-    const r=shuffle([2,3,4,5])[0],g=shuffle([5,7,9,11])[0],base=roundTo(pi*r*r,2),lat=roundTo(pi*r*g,2),tot=roundTo(base+lat,2);
+    const r=shuffle([2,3,4,5])[0],g=shuffle([5,7,9,11].filter(v=>v>r))[0],base=roundTo(pi*r*r,2),lat=roundTo(pi*r*g,2),tot=roundTo(base+lat,2);
     correct=answerUnit(tot,'cm²',2);alts=unitAlternatives(tot,'cm²',2);options=uniq4(correct,[answerUnit(lat,'cm²',2),answerUnit(base,'cm²',2),answerUnit(2*base+lat,'cm²',2),answerUnit(pi*r*(r+g)*2,'cm²',2),answerUnit(tot-base,'cm²',2)]);
     question=`Un con té radi <b>${r} cm</b> i generatriu <b>${g} cm</b>. Calcula l’àrea total amb <b>π ≈ 3,14</b>.`;
     guide=['Calcula l’àrea de la base circular.','Calcula l’àrea lateral amb la generatriu.','Suma una sola base i la superfície lateral.'];
@@ -2241,7 +2242,7 @@ function genReptesMesura3r(forceType){
     guide=['Calcula o relaciona els volums dels dos cossos.','Recorda que el con equivalent és una tercera part del cilindre.','El problema demana una diferència, no un dels volums per separat.'];
     solution=[`V_cilindre = ${fmtNum(cyl,2)} cm³; V_con = ${fmtNum(cone,2)} cm³.`,`Diferència = ${fmtNum(cyl,2)}-${fmtNum(cone,2)} = ${correct}.`];openHint='Escriu el valor i la unitat cm³.';
   } else if(type===9){
-    const a=shuffle([6,8,10])[0],g=shuffle([5,7,9])[0],price=shuffle([8,10,12])[0],lat=4*a*g/2,cost=lat*price;
+    const a=shuffle([6,8,10])[0],g=shuffle([5,7,9].filter(v=>v>a/2))[0],price=shuffle([8,10,12])[0],lat=4*a*g/2,cost=lat*price;
     correct=answerUnit(cost,'€',2);alts=[fmtNum(cost,2)+'€',fmtNum(cost,2)];options=uniq4(correct,[answerUnit((a*a+lat)*price,'€',2),answerUnit(lat,'€',2),answerUnit(cost/2,'€',2),answerUnit(4*a*g*price,'€',2),answerUnit(cost+price,'€',2)]);
     question=`Es vol recobrir <b>només les quatre cares laterals</b> d’una piràmide de base quadrada de costat <b>${a} m</b> i apotema lateral <b>${g} m</b>. El recobriment costa <b>${price} €/m²</b>. Quin és el cost?`;
     guide=['Calcula només l’àrea lateral; la base no es recobreix.','La superfície lateral són quatre triangles.','Multiplica l’àrea que cal recobrir pel preu per metre quadrat.'];
@@ -2258,7 +2259,7 @@ function genReptesMesura3r(forceType){
     guide=['Una fórmula geomètrica només és coherent si totes les longituds compatibles s’expressen en la mateixa unitat.','Evita calcular amb unitats barrejades.'];
     solution=['Expressa totes les longituds necessàries en una mateixa unitat.','Després aplica la fórmula i indica la unitat final segons la magnitud.'];
   } else if(type===12){
-    const big=shuffle([27,64,125,216])[0],ratio=shuffle([8,27])[0],small=big/ratio,k=Math.round(Math.cbrt(ratio));
+    const small=shuffle([2,3,4,5,6,8])[0],k=shuffle([2,3])[0],ratio=k*k*k,big=small*ratio;
     correct=factorText(k);alts=[fmtNum(k),String(k)];options=uniq4(correct,[factorText(ratio),factorText(Math.sqrt(ratio)),factorText(1/k),factorText(k*k),factorText(k*k*k)]);
     question=`Dues figures semblants tenen volums de <b>${fmtNum(small)} cm³</b> i <b>${big} cm³</b>. Quin és el factor lineal de la petita a la gran?`;
     guide=['Calcula la relació entre els volums.','El factor de volum és el cub del factor lineal.','Calcula l’arrel cúbica de la relació de volums.'];

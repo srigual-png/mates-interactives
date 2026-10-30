@@ -1,0 +1,23 @@
+const fs=require('fs');const topics=[],banks=[];
+function rows(topic,level,types,reason){for(const type of types)topics.push({topic,type,level,reason});}
+rows('traduccio',1,[1,2,3,4,5],'Traducció directa, identificació d’operació o substitució de valors coneguts.');
+topics.find(r=>r.topic==='traduccio'&&r.type===1).variants={grouped:{level:2,reason:'Distingir l’abast d’un factor sobre una suma i connectar expressió composta i llenguatge.'}};
+rows('traduccio',2,[6],'Distingir part variable i cost fix per construir el model.');
+rows('patrons',1,[1,2,3,6],'Reconèixer una regularitat immediata i avançar un pas; el context no n’altera la demanda.');
+rows('patrons',2,[4,5],'Relacionar posició i construcció de quadrats compartits o creixement triangular.');
+rows('monomis',1,[1,2,3,4],'Identificar termes o reduir coeficients; signes i coeficient implícit no creen alta.');
+rows('simplificacio',1,[1,5],'Reducció directa de termes semblants.');
+rows('simplificacio',2,[3,6],'Connectar reducció i substitució o separar dos grups de termes.');
+rows('equacions',1,[1,2],'Desfer una sola operació.');
+rows('equacions',2,[3,4,7,8],'Desfer dos passos o formular i resoldre l’equació del context.');
+for(const r of topics.filter(r=>r.topic==='equacions'&&[7,8].includes(r.type)))r.variants={single:{level:1,reason:'El context només reformula una operació inversa evident.'}};
+rows('computacional',1,[1,2,4,5],'Executar una seqüència indicada, repetir una suma o detectar un error aritmètic del primer pas.');
+rows('computacional',2,[3,6],'Interpretar una condició i seleccionar la branca abans de calcular.');
+rows('patrons2',2,[1],'Construir el terme general coordinant inici i índex.');
+rows('patrons2',1,[2,3],'Aplicar el terme d’una progressió coneguda; dues posicions repeteixen el procediment.');
+rows('monomis2',1,[1,2,3,4],'Grau, semblança i producte estàndard de monomis del curs de contingut.');
+rows('simplificacio2',2,[2,4],'Classificar termes de diverses parts literals i reduir cada grup.');
+rows('equacions2',2,[5,6],'Equació rutinària amb agrupació de membres o dues operacions inverses.');
+const groups=[['T',7,[1,3,5,6],{2:'Model amb part variable i fixa.',4:'Formar i simplificar un perímetre algebraic.',7:'Agrupar una suma afectada per un factor.'}],['P',7,[1,2,3,4,6,7],{5:'Construcció compartida; connectar figura i increments.'}],['M',6,[1,2,3,4,5,6],{}],['S',6,[1,2,4,5,6],{3:'Separar termes literals i independents i reduir tots dos grups.'}],['E',10,[1,2,3,6],{4:'Dues operacions inverses.',5:'Dues operacions inverses.',7:'Model d’estalvi amb inici i aportació periòdica.',8:'Perímetre invers estàndard.',9:'Perímetre invers amb dos costats iguals.',10:'Model de cost variable més taxa fixa.'}],['C',6,[1,2,4,5],{3:'Escollir branca per paritat i executar-la.',6:'Interpretar condició i escollir l’operació.'}]];
+for(const [prefix,count,low,reasons] of groups)for(let i=1;i<=count;i++)banks.push({bank:'algebraOpen',key:prefix+i,level:low.includes(i)?1:2,reason:reasons[i]||'Identificació, operació o traducció directa; la presentació oberta no augmenta la dificultat.'});
+fs.writeFileSync('docs/dificultats/revisio-1eso-algebraic-punt3.json',JSON.stringify({course:'1eso',sense:'algebraic',status:'reclassified-with-gaps',topics,banks,examPlans:{traduccio:[7,5,0]},note:'Les famílies existents no justifiquen alta. Buit declarat; no es força una etiqueta per satisfer quotes. Traducció només té cinc enunciats mitjans diferents: quota explícita 7/5/0.'},null,2)+'\n');

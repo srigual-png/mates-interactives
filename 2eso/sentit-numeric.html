@@ -1220,7 +1220,7 @@ function nextRationalOpsType(){
 }
 function genOperacionsRacionals2ESO(forceType){
   const type=forceType||nextRationalOpsType();
-  let question,correct,options,guide,solution,alts=[],openHint='',allowOpen=true;
+  let question,correct,options,guide,solution,alts=[],openHint='',allowOpen=true,difficultyVariant;
 
   if(type===1){
     let a=rnd(-15,15),b=rnd(-12,12);if(a===0)a=7;if(b===0)b=-5;
@@ -1313,6 +1313,7 @@ function genOperacionsRacionals2ESO(forceType){
   else if(type===10){
     const A=rat(rnd(-5,5)||3,shuffle([2,3,4,5])[0]),B=rat(rnd(-5,5)||1,shuffle([2,3,4,5])[0]),k=shuffle([-3,-2,2,3])[0];
     const inside=ratSub(A,B),R=ratMul(inside,rat(k,1)),wrong=ratSub(A,ratMul(B,rat(k,1)));
+    if(inside.n===0)difficultyVariant='cancelled';
     correct=ratText(R);
     options=uniq4(correct,[ratText(wrong),ratText(ratNeg(R)),ratText(inside),ratText(ratMul(A,rat(k,1))),ratText(ratAdd(A,B)),ratText(ratAdd(R,rat(1,1))),ratText(ratSub(R,rat(1,1)))]);
     question=`Calcula ${mathSpan('('+ratText(A)+' − '+ratText(B)+') · '+(k<0?'('+k+')':k))}.`;
@@ -1417,7 +1418,7 @@ function genOperacionsRacionals2ESO(forceType){
     openHint='Escriu només el valor numèric; si cal, usa una fracció simplificada.';
   }
 
-  return {topicId:'operacionsRacionals',type,course:'2n',question,correct,alts,options,guide,solution,openHint,allowOpen};
+  return {topicId:'operacionsRacionals',type,course:'2n',difficultyVariant,question,correct,alts,options,guide,solution,openHint,allowOpen};
 }
 
 /* ── GENERADOR · BLOC 4: POTÈNCIES ─────────────────────────── */
@@ -1615,7 +1616,7 @@ function genPotencies2ESO(forceType){
     openHint='Escriu només el valor numèric.';
   }
 
-  return {topicId:'potencies',type,course:'2n',question,correct,alts,options,guide,solution,openHint,allowOpen};
+  return {topicId:'potencies',type,course:'2n',difficultyVariant:type===18&&question.includes('microorganismes')?'growth':undefined,question,correct,alts,options,guide,solution,openHint,allowOpen};
 }
 
 
@@ -2775,7 +2776,7 @@ function registerError(ex,studentAnswer,source='practice'){
   const topic=TOPICS.find(t=>t.id===ex.topicId)||TOPICS[state.currentTopic];
   const err={
     id:Date.now()+'_'+Math.random().toString(36).slice(2,8),
-    topicId:ex.topicId||topic.id,topicName:topic.name,type:ex.type,
+    topicId:ex.topicId||topic.id,topicName:topic.name,type:ex.type,difficultyVariant:ex.difficultyVariant,
     question:ex.question,correct:ex.correct,answer:studentAnswer,
     options:[...(ex.options||[])],guide:[...(ex.guide||[])],review:miReviewPoints(ex),solution:[...(ex.solution||[])],
     level:source==='exam'?0:state.level,source,timestamp:new Date().toISOString()

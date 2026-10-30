@@ -1,0 +1,751 @@
+{
+  "exhaustiveCases": 127,
+  "cases": [
+    {
+      "family": "regular-polygon",
+      "n": 5,
+      "side": 4,
+      "apothem": 2.75,
+      "answer": 27.5
+    },
+    {
+      "family": "regular-polygon",
+      "n": 5,
+      "side": 6,
+      "apothem": 4.13,
+      "answer": 61.95
+    },
+    {
+      "family": "regular-polygon",
+      "n": 5,
+      "side": 8,
+      "apothem": 5.51,
+      "answer": 110.2
+    },
+    {
+      "family": "regular-polygon",
+      "n": 6,
+      "side": 4,
+      "apothem": 3.46,
+      "answer": 41.52
+    },
+    {
+      "family": "regular-polygon",
+      "n": 6,
+      "side": 6,
+      "apothem": 5.2,
+      "answer": 93.6
+    },
+    {
+      "family": "regular-polygon",
+      "n": 6,
+      "side": 8,
+      "apothem": 6.93,
+      "answer": 166.32
+    },
+    {
+      "family": "regular-polygon",
+      "n": 8,
+      "side": 4,
+      "apothem": 4.83,
+      "answer": 77.28
+    },
+    {
+      "family": "regular-polygon",
+      "n": 8,
+      "side": 6,
+      "apothem": 7.24,
+      "answer": 173.76
+    },
+    {
+      "family": "regular-polygon",
+      "n": 8,
+      "side": 8,
+      "apothem": 9.66,
+      "answer": 309.12
+    },
+    {
+      "family": "square-pyramid",
+      "side": 4,
+      "g": 5
+    },
+    {
+      "family": "square-pyramid",
+      "side": 4,
+      "g": 7
+    },
+    {
+      "family": "square-pyramid",
+      "side": 4,
+      "g": 9
+    },
+    {
+      "family": "square-pyramid",
+      "side": 4,
+      "g": 11
+    },
+    {
+      "family": "square-pyramid",
+      "side": 6,
+      "g": 5
+    },
+    {
+      "family": "square-pyramid",
+      "side": 6,
+      "g": 7
+    },
+    {
+      "family": "square-pyramid",
+      "side": 6,
+      "g": 9
+    },
+    {
+      "family": "square-pyramid",
+      "side": 6,
+      "g": 11
+    },
+    {
+      "family": "square-pyramid",
+      "side": 8,
+      "g": 5
+    },
+    {
+      "family": "square-pyramid",
+      "side": 8,
+      "g": 7
+    },
+    {
+      "family": "square-pyramid",
+      "side": 8,
+      "g": 9
+    },
+    {
+      "family": "square-pyramid",
+      "side": 8,
+      "g": 11
+    },
+    {
+      "family": "square-pyramid",
+      "side": 10,
+      "g": 7
+    },
+    {
+      "family": "square-pyramid",
+      "side": 10,
+      "g": 9
+    },
+    {
+      "family": "square-pyramid",
+      "side": 10,
+      "g": 11
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 3,
+      "side": 4,
+      "g": 5
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 3,
+      "side": 4,
+      "g": 7
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 3,
+      "side": 4,
+      "g": 9
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 3,
+      "side": 6,
+      "g": 5
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 3,
+      "side": 6,
+      "g": 7
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 3,
+      "side": 6,
+      "g": 9
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 3,
+      "side": 8,
+      "g": 5
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 3,
+      "side": 8,
+      "g": 7
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 3,
+      "side": 8,
+      "g": 9
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 4,
+      "side": 4,
+      "g": 5
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 4,
+      "side": 4,
+      "g": 7
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 4,
+      "side": 4,
+      "g": 9
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 4,
+      "side": 6,
+      "g": 5
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 4,
+      "side": 6,
+      "g": 7
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 4,
+      "side": 6,
+      "g": 9
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 4,
+      "side": 8,
+      "g": 5
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 4,
+      "side": 8,
+      "g": 7
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 4,
+      "side": 8,
+      "g": 9
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 5,
+      "side": 4,
+      "g": 5
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 5,
+      "side": 4,
+      "g": 7
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 5,
+      "side": 4,
+      "g": 9
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 5,
+      "side": 6,
+      "g": 5
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 5,
+      "side": 6,
+      "g": 7
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 5,
+      "side": 6,
+      "g": 9
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 5,
+      "side": 8,
+      "g": 7
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 5,
+      "side": 8,
+      "g": 9
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 6,
+      "side": 4,
+      "g": 5
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 6,
+      "side": 4,
+      "g": 7
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 6,
+      "side": 4,
+      "g": 9
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 6,
+      "side": 6,
+      "g": 7
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 6,
+      "side": 6,
+      "g": 9
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 6,
+      "side": 8,
+      "g": 7
+    },
+    {
+      "family": "regular-pyramid",
+      "n": 6,
+      "side": 8,
+      "g": 9
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 2,
+      "g": 5
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 2,
+      "g": 6
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 2,
+      "g": 8
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 2,
+      "g": 10
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 2,
+      "g": 12
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 3,
+      "g": 5
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 3,
+      "g": 6
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 3,
+      "g": 8
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 3,
+      "g": 10
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 3,
+      "g": 12
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 4,
+      "g": 5
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 4,
+      "g": 6
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 4,
+      "g": 8
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 4,
+      "g": 10
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 4,
+      "g": 12
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 5,
+      "g": 6
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 5,
+      "g": 8
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 5,
+      "g": 10
+    },
+    {
+      "family": "cone",
+      "type": 8,
+      "r": 5,
+      "g": 12
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 2,
+      "g": 5
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 2,
+      "g": 7
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 2,
+      "g": 9
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 2,
+      "g": 11
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 3,
+      "g": 5
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 3,
+      "g": 7
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 3,
+      "g": 9
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 3,
+      "g": 11
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 4,
+      "g": 5
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 4,
+      "g": 7
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 4,
+      "g": 9
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 4,
+      "g": 11
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 5,
+      "g": 7
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 5,
+      "g": 9
+    },
+    {
+      "family": "cone",
+      "type": 9,
+      "r": 5,
+      "g": 11
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 6,
+      "g": 5,
+      "price": 8
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 6,
+      "g": 5,
+      "price": 10
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 6,
+      "g": 5,
+      "price": 12
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 6,
+      "g": 7,
+      "price": 8
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 6,
+      "g": 7,
+      "price": 10
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 6,
+      "g": 7,
+      "price": 12
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 6,
+      "g": 9,
+      "price": 8
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 6,
+      "g": 9,
+      "price": 10
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 6,
+      "g": 9,
+      "price": 12
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 8,
+      "g": 5,
+      "price": 8
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 8,
+      "g": 5,
+      "price": 10
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 8,
+      "g": 5,
+      "price": 12
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 8,
+      "g": 7,
+      "price": 8
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 8,
+      "g": 7,
+      "price": 10
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 8,
+      "g": 7,
+      "price": 12
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 8,
+      "g": 9,
+      "price": 8
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 8,
+      "g": 9,
+      "price": 10
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 8,
+      "g": 9,
+      "price": 12
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 10,
+      "g": 7,
+      "price": 8
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 10,
+      "g": 7,
+      "price": 10
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 10,
+      "g": 7,
+      "price": 12
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 10,
+      "g": 9,
+      "price": 8
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 10,
+      "g": 9,
+      "price": 10
+    },
+    {
+      "family": "pyramid-covering",
+      "side": 10,
+      "g": 9,
+      "price": 12
+    },
+    {
+      "family": "exact-volume-ratio",
+      "small": 2,
+      "k": 2
+    },
+    {
+      "family": "exact-volume-ratio",
+      "small": 2,
+      "k": 3
+    },
+    {
+      "family": "exact-volume-ratio",
+      "small": 3,
+      "k": 2
+    },
+    {
+      "family": "exact-volume-ratio",
+      "small": 3,
+      "k": 3
+    },
+    {
+      "family": "exact-volume-ratio",
+      "small": 4,
+      "k": 2
+    },
+    {
+      "family": "exact-volume-ratio",
+      "small": 4,
+      "k": 3
+    },
+    {
+      "family": "exact-volume-ratio",
+      "small": 5,
+      "k": 2
+    },
+    {
+      "family": "exact-volume-ratio",
+      "small": 5,
+      "k": 3
+    },
+    {
+      "family": "exact-volume-ratio",
+      "small": 6,
+      "k": 2
+    },
+    {
+      "family": "exact-volume-ratio",
+      "small": 6,
+      "k": 3
+    },
+    {
+      "family": "exact-volume-ratio",
+      "small": 8,
+      "k": 2
+    },
+    {
+      "family": "exact-volume-ratio",
+      "small": 8,
+      "k": 3
+    }
+  ],
+  "degenerateBoundariesExcluded": 5,
+  "roundingEndpoints": true
+}

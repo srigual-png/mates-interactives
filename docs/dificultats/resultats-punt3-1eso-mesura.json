@@ -1,0 +1,2026 @@
+{
+  "topics": [
+    {
+      "topic": "metric",
+      "types": 5,
+      "coverage": [
+        3,
+        1,
+        1
+      ],
+      "generated": 3000,
+      "exam": [
+        4,
+        4,
+        4
+      ],
+      "variants": [
+        {
+          "type": 2,
+          "n": 779,
+          "question": "Converteix 15 t a kg",
+          "correct": "15000 kg",
+          "solution": [
+            "En l'escala t ↔ kg ↔ g ↔ mg, t i kg són unitats consecutives",
+            "Multiplica 15 per 1000",
+            "✅ 15 t = 15000 kg"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 801,
+          "question": "Converteix 45 ml a dl",
+          "correct": "0,45 dl",
+          "solution": [
+            "Entre ml i dl hi ha 2 canvis d'unitat",
+            "Divideix 45 per 100",
+            "✅ 45 ml = 0,45 dl"
+          ]
+        },
+        {
+          "type": 1001,
+          "n": 300,
+          "question": "Tens barres de 2 m. Cal obtenir 4 peces de 120 cm, 4 peces de 1100 mm i 5 peces de 90 cm. Pots combinar talls en una barra; el tall no consumeix material i els retalls no es poden unir. Quin és el nombre mínim de barres?",
+          "correct": "9",
+          "solution": [
+            "Cada barra té 200 cm. Les peces de 120 cm no poden compartir barra amb cap altra peça: calen 4 barres.",
+            "Una peça de 110 cm i una de 90 cm omplen una barra: 4 barres. Sobra una peça de 90 cm: una barra més.",
+            "Les 4 peces de 110 cm requereixen barres diferents i no poden compartir amb les de 120 cm. Si només hi hagués 8 barres, només hi cabrien 4 peces curtes, però en calen 5.",
+            "Mínim: 4+4+1=9 barres."
+          ]
+        },
+        {
+          "type": 1002,
+          "n": 300,
+          "question": "Una corda fa 7 m i 69 cm. Se’n gasten 900 mm. Quants centímetres en queden?",
+          "correct": "679",
+          "solution": [
+            "Longitud inicial: 769 cm. Tros gastat: 90 cm.",
+            "Queden 679 cm."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 820,
+          "question": "Converteix 24 dam a cm",
+          "correct": "24000 cm",
+          "solution": [
+            "Entre dam i cm hi ha 3 canvis d'unitat",
+            "Multiplica 24 per 1000",
+            "✅ 24 dam = 24000 cm"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "conversions",
+      "types": 5,
+      "coverage": [
+        2,
+        2,
+        1
+      ],
+      "generated": 3000,
+      "exam": [
+        4,
+        4,
+        4
+      ],
+      "variants": [
+        {
+          "type": 1,
+          "n": 723,
+          "question": "Converteix 8000000 m² a km²",
+          "correct": "8 km²",
+          "solution": [
+            "Factor de conversió entre m² i km²: 0",
+            "8000000 × 0 = 8",
+            "✅ 8 km²"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 372,
+          "question": "Una gerra conté 15 dl. Quants ml són?",
+          "correct": "1500 ml",
+          "solution": [
+            "15 dl = 1500 ml",
+            "✅ 1500 ml"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 819,
+          "question": "Una excursió combina 5 km i 275 m. Quants m són en total?",
+          "correct": "5275 m",
+          "solution": [
+            "5 km = 5000 m",
+            "5000 + 275 = 5275 m",
+            "✅ 5275 m"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 786,
+          "question": "Són iguals 8 m i 800 cm?",
+          "correct": "Sí, són iguals",
+          "solution": [
+            "8 m = 800 cm",
+            "Coincideix amb 800 cm",
+            "✅ Sí, són iguals"
+          ]
+        },
+        {
+          "type": 1001,
+          "n": 300,
+          "question": "Una caixa A conté 5 L i pesa 4000 g. Una B conté 7000 mL i pesa 5 kg. Pots transportar com a màxim 5 caixes i 23000 g en total. Quants litres pots transportar com a màxim combinant els dos tipus?",
+          "correct": "31",
+          "solution": [
+            "En kg i L: A (4; 5), B (5; 7).",
+            "Cal a+b ≤ 5 i 4a+5b ≤ 23.",
+            "Compara 19 combinacions admissibles. Una òptima és 2 A i 3 B: 31 L."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "temps",
+      "types": 6,
+      "coverage": [
+        3,
+        2,
+        1
+      ],
+      "generated": 3000,
+      "exam": [
+        4,
+        4,
+        4
+      ],
+      "variants": [
+        {
+          "type": 4,
+          "n": 578,
+          "question": "Expressa 160 segons en minuts i segons",
+          "correct": "2 min 40 s",
+          "solution": [
+            "160 ÷ 60 = 2 minuts complets i sobren 40 segons",
+            "✅ 2 min 40 s"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 552,
+          "question": "Converteix 6 anys a mesos",
+          "correct": "72 mesos",
+          "solution": [
+            "Factor entre les unitats: 12",
+            "6 × 12 = 72",
+            "✅ 72 mesos"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 631,
+          "question": "Una pel·lícula comença a les 14:50 h i dura 2 h 30 min. A quina hora acaba?",
+          "correct": "17:20 h",
+          "solution": [
+            "Inici: 14:50 h",
+            "Durada: 2 h 30 min",
+            "Hora final: 17:20 h",
+            "✅ 17:20 h"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 611,
+          "question": "Quant dura un viatge que comença a les 11:10 h i acaba a les 12:30 h?",
+          "correct": "1 h 20 min",
+          "solution": [
+            "Inici: 11:10 h",
+            "Final: 12:30 h",
+            "Diferència total: 80 min",
+            "✅ Durada = 1 h 20 min"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 328,
+          "question": "Quantes hores tenen 2 dies?",
+          "correct": "48 h",
+          "solution": [
+            "Cada dia té 24 hores",
+            "2 × 24 = 48 hores",
+            "✅ 48 h"
+          ]
+        },
+        {
+          "type": 1001,
+          "n": 300,
+          "question": "L’autobús A surt a les 8:00 i cada 12 min; triga 20 min fins al transbordament. Cal caminar 3 min. B surt d’allà a les 8:07 i cada 15 min; el segon trajecte dura 13 min. Has d’arribar com a molt a les 9:49. Quants minuts després de les 8:00 surt l’últim A que et serveix? Es pot pujar a B just a l’hora de sortida.",
+          "correct": "48",
+          "solution": [
+            "Per a cada A comprova la primera sortida de B posterior o igual a l’hora d’arribar-hi caminant.",
+            "L’últim itinerari vàlid és A 8:48, B 9:22, arribada 9:35.",
+            "El següent A no arriba a temps amb cap B. Resposta: 48 min."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "perimetres",
+      "types": 7,
+      "coverage": [
+        5,
+        1,
+        1
+      ],
+      "generated": 3000,
+      "exam": [
+        5,
+        4,
+        3
+      ],
+      "variants": [
+        {
+          "type": 2,
+          "n": 474,
+          "question": "Perímetre d'un rectangle de 26 m × 15 m",
+          "correct": "82 m",
+          "solution": [
+            "P = 26+15+26+15 = 82 m",
+            "✅ P = 82 m"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 425,
+          "question": "Una pista circular té radi 14 m. Quina longitud té una volta? (π ≈ 3,14)",
+          "correct": "87,9 m",
+          "solution": [
+            "Diàmetre = 2 × 14 = 28 m",
+            "C = π × d ≈ 3,14 × 28 = 87,9 m",
+            "✅ C = 87,9 m"
+          ]
+        },
+        {
+          "type": 6,
+          "n": 504,
+          "question": "Un hexàgon regular té costat 9 cm. Quin és el seu perímetre?",
+          "correct": "54 cm",
+          "solution": [
+            "P = 6 × 9 = 54 cm",
+            "✅ P = 54 cm"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 419,
+          "question": "D’un rectangle de 18×6 cm es retira un racó de 15×3 cm. Quin perímetre té la figura en L resultant?",
+          "correct": "48 cm",
+          "solution": [
+            "Rectangle inicial: perímetre = 2 × (18+6) = 48 cm",
+            "Els trams retirats es substitueixen per trams interiors de la mateixa longitud total",
+            "✅ P = 48 cm"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 440,
+          "question": "Perímetre d'un quadrat de costat 10 m",
+          "correct": "40 m",
+          "solution": [
+            "P = 10+10+10+10 = 40 m",
+            "✅ P = 40 m"
+          ]
+        },
+        {
+          "type": 1001,
+          "n": 300,
+          "question": "Disposes de 41 m de tanca i d’una porta de 3 m. Has de fer un recinte rectangular, usant tota la tanca i la porta una sola vegada al contorn. Els costats són metres enters positius i l’amplada no pot superar 10 m. Quina és l’àrea màxima, en m²?",
+          "correct": "120",
+          "solution": [
+            "Perímetre total: 41+3=44 m; llargada+amplada=22.",
+            "Àrees admissibles: 1×21=21; 2×20=40; 3×19=57; 4×18=72; 5×17=85; 6×16=96; 7×15=105; 8×14=112; 9×13=117; 10×12=120.",
+            "Màxim: 10×12=120 m²."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 438,
+          "question": "Un triangle té costats de 19 cm, 14 cm i 15 cm. Quant mesura el contorn?",
+          "correct": "48 cm",
+          "solution": [
+            "P = 19+14+15 = 48 cm",
+            "✅ P = 48 cm"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "arees",
+      "types": 7,
+      "coverage": [
+        5,
+        1,
+        1
+      ],
+      "generated": 3000,
+      "exam": [
+        5,
+        4,
+        3
+      ],
+      "variants": [
+        {
+          "type": 3,
+          "n": 452,
+          "question": "Una peça triangular té base 28 cm i alçada perpendicular 9 cm. Calcula'n l'àrea.",
+          "correct": "126 cm²",
+          "solution": [
+            "A = (base × alçada) / 2",
+            "(28 × 9) / 2 = 126 cm²",
+            "✅ A = 126 cm²"
+          ]
+        },
+        {
+          "type": 6,
+          "n": 454,
+          "question": "Àrea d'una figura en L: rectangle gran 9×8 m menys rectangle petit 8×5 m",
+          "correct": "32 m²",
+          "solution": [
+            "Àrea gran: 9 × 8 = 72 m²",
+            "Àrea retirada: 8 × 5 = 40 m²",
+            "Àrea final = 72 − 40 = 32 m²",
+            "✅ A = 32 m²"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 447,
+          "question": "Una habitació rectangular fa 30 m per 13 m. Quina superfície té?",
+          "correct": "390 m²",
+          "solution": [
+            "A = base × alçada",
+            "30 × 13 = 390 m²",
+            "✅ A = 390 m²"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 434,
+          "question": "Una parcel·la quadrada té costat 23 m. Quina és la seva àrea?",
+          "correct": "529 m²",
+          "solution": [
+            "A = costat²",
+            "23² = 23 × 23 = 529 m²",
+            "✅ A = 529 m²"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 453,
+          "question": "Àrea d'un rombe de diagonals 22 m i 8 m",
+          "correct": "88 m²",
+          "solution": [
+            "A = (diagonal major × diagonal menor) / 2",
+            "(22 × 8) / 2 = 88 m²",
+            "✅ A = 88 m²"
+          ]
+        },
+        {
+          "type": 1001,
+          "n": 300,
+          "question": "Un rectangle té 136 m² d’àrea. Els costats són metres enters i tots dos mesuren almenys 2 m. Quin és el perímetre mínim possible, en metres?",
+          "correct": "50",
+          "solution": [
+            "Parelles (sense repetir l’ordre): 2×68, P=140; 4×34, P=76; 8×17, P=50.",
+            "La parella 8 i 17 dona el perímetre mínim: 50 m."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 460,
+          "question": "Àrea d'un trapezi de bases 17 cm i 3 cm, alçada 18 cm",
+          "correct": "180 cm²",
+          "solution": [
+            "A = (base major + base menor) × alçada / 2",
+            "(17 + 3) × 18 / 2 = 180 cm²",
+            "✅ A = 180 cm²"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "mesurament",
+      "types": 9,
+      "coverage": [
+        7,
+        1,
+        1
+      ],
+      "generated": 3000,
+      "exam": [
+        7,
+        3,
+        2
+      ],
+      "variants": [
+        {
+          "type": 4,
+          "n": 396,
+          "question": "El valor de referència és 25 cm i una mesura dona 27 cm. Quin és l'error absolut?",
+          "correct": "2 cm",
+          "solution": [
+            "Error absolut = |27 − 25|",
+            "= 2 cm",
+            "✅ 2 cm"
+          ]
+        },
+        {
+          "type": 8,
+          "n": 269,
+          "question": "Volem enrajolar tota una terrassa. Quina magnitud de la terrassa és rellevant?",
+          "correct": "Àrea",
+          "solution": [
+            "Magnitud adequada: Àrea",
+            "✅ Àrea"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 326,
+          "question": "Quina unitat és més adequada per expressar la capacitat d’una tassa?",
+          "correct": "ml",
+          "solution": [
+            "Unitat adequada: ml",
+            "✅ ml"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 425,
+          "question": "En un plànol, 1 cm representa 20 m reals. Una paret hi mesura 3 cm. Quina longitud real té?",
+          "correct": "60 m",
+          "solution": [
+            "1 cm del plànol ↔ 20 m reals",
+            "3 cm ↔ 3 × 20 = 60 m",
+            "✅ 60 m"
+          ]
+        },
+        {
+          "type": 6,
+          "n": 451,
+          "question": "En un quadrilàter, tres angles mesuren 78°, 100° i 71°. Quant mesura el quart angle?",
+          "correct": "111°",
+          "solution": [
+            "78° + 100° + 71° = 249°",
+            "360° − 249° = 111°",
+            "✅ 111°"
+          ]
+        },
+        {
+          "type": 1001,
+          "n": 300,
+          "question": "Una obertura mesura 31 cm amb error absolut màxim 1 cm. Fabriquem una peça amb amplada nominal entera en cm i error màxim 1 cm. Entre l’obertura i la peça ha de quedar una diferència total d’almenys 1 cm, fins i tot amb els errors més desfavorables. Quina amplada nominal màxima podem encarregar?",
+          "correct": "28",
+          "solution": [
+            "Obertura mínima: 30 cm. Peça màxima: nominal+1.",
+            "Per garantir el marge: nominal+1+1 ≤ 30.",
+            "Màxim enter: 28 cm; amb 29 cm el marge podria quedar en 0 cm."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 306,
+          "question": "Quin instrument és més adequat per mesurar el volum d’un líquid al laboratori?",
+          "correct": "Proveta graduada",
+          "solution": [
+            "Magnitud: capacitat",
+            "Instrument adequat: Proveta graduada",
+            "✅ Proveta graduada"
+          ]
+        },
+        {
+          "type": 7,
+          "n": 169,
+          "question": "Una circumferència mesura aproximadament 15,7 cm i el seu diàmetre és 5 cm. Quin valor aproximat s'obté en dividir la longitud de la circumferència pel diàmetre?",
+          "correct": "3,14",
+          "solution": [
+            "15,7 ÷ 5 ≈ 3,14",
+            "Aquesta raó és π",
+            "✅ 3,14"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 358,
+          "question": "El valor de referència és 100 cm i la mesura és 102 cm. Quin és l'error relatiu percentual?",
+          "correct": "2%",
+          "solution": [
+            "Error absolut = |102 − 100| = 2 cm",
+            "Error relatiu = 2 ÷ 100 = 0,02",
+            "En percentatge: 2%",
+            "✅ 2%"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "estimacio",
+      "types": 6,
+      "coverage": [
+        4,
+        1,
+        1
+      ],
+      "generated": 3000,
+      "exam": [
+        4,
+        4,
+        4
+      ],
+      "variants": [
+        {
+          "type": 2,
+          "n": 600,
+          "question": "Quina capacitat aproximada té una banyera?",
+          "correct": "150 l",
+          "solution": [
+            "Una estimació raonable per a una banyera és aproximadament 150 l.",
+            "Les altres opcions tenen una escala poc coherent amb la mida o la magnitud de l'objecte.",
+            "✅ 150 l"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 600,
+          "question": "Quina mesura aproximada té un autobús?",
+          "correct": "12 m",
+          "solution": [
+            "Una estimació raonable per a un autobús és aproximadament 12 m.",
+            "Les altres opcions tenen una escala poc coherent amb la mida o la magnitud de l'objecte.",
+            "✅ 12 m"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 600,
+          "question": "Quina massa aproximada té un gat adult?",
+          "correct": "4 kg",
+          "solution": [
+            "Una estimació raonable per a un gat adult és aproximadament 4 kg.",
+            "Les altres opcions tenen una escala poc coherent amb la mida o la magnitud de l'objecte.",
+            "✅ 4 kg"
+          ]
+        },
+        {
+          "type": 4,
+          "n": 600,
+          "question": "Quina àrea aproximada té una catifa (2×3 m)?",
+          "correct": "6 m²",
+          "solution": [
+            "Una estimació raonable per a una catifa (2×3 m) és aproximadament 6 m².",
+            "Les altres opcions tenen una escala poc coherent amb la mida o la magnitud de l'objecte.",
+            "✅ 6 m²"
+          ]
+        },
+        {
+          "type": 1001,
+          "n": 300,
+          "question": "Una sala rectangular té llargada estimada 9 m i amplada estimada 3 m. Cada dimensió pot diferir com a màxim 0,1 m de l’estimació. Cada paquet cobreix exactament 6 m² i es poden aprofitar tots els retalls. Quants paquets cal comprar com a mínim per garantir que n’hi haurà prou en qualsevol mida possible?",
+          "correct": "5",
+          "solution": [
+            "Màxims: 9,1 m i 3,1 m.",
+            "Àrea màxima: 28,21 m².",
+            "Cal el menor enter amb paquets×6 ≥ 28,21: 5. Amb 4 no n’hi ha prou."
+          ]
+        },
+        {
+          "type": 1002,
+          "n": 300,
+          "question": "L’amplada d’una sala és 7 m i la llargada està entre 8 i 9 m. Per calcular una compra suficient s’ha decidit usar l’àrea més gran. Si un paquet cobreix 5 m², quants paquets sencers cal comprar?",
+          "correct": "13",
+          "solution": [
+            "Àrea màxima: 9×7=63 m².",
+            "Compra suficient: 13 paquets."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "problemes",
+      "types": 46,
+      "coverage": [
+        9,
+        29,
+        8
+      ],
+      "generated": 3220,
+      "exam": [
+        4,
+        4,
+        4
+      ],
+      "variants": [
+        {
+          "type": "R05",
+          "n": 71,
+          "question": "Un rectangle té 102 m² d’àrea. Els costats són metres enters i tots dos mesuren almenys 2 m. Quin és el perímetre mínim possible, en metres?",
+          "correct": "46",
+          "solution": [
+            "Parelles (sense repetir l’ordre): 2×51, P=106; 3×34, P=74; 6×17, P=46.",
+            "La parella 6 i 17 dona el perímetre mínim: 46 m."
+          ]
+        },
+        {
+          "type": "R04",
+          "n": 71,
+          "question": "Disposes de 28 m de tanca i d’una porta de 2 m. Has de fer un recinte rectangular, usant tota la tanca i la porta una sola vegada al contorn. Els costats són metres enters positius i l’amplada no pot superar 4 m. Quina és l’àrea màxima, en m²?",
+          "correct": "44",
+          "solution": [
+            "Perímetre total: 28+2=30 m; llargada+amplada=15.",
+            "Àrees admissibles: 1×14=14; 2×13=26; 3×12=36; 4×11=44.",
+            "Màxim: 4×11=44 m²."
+          ]
+        },
+        {
+          "type": "M01",
+          "n": 67,
+          "question": "Quin instrument és més adequat per mesurar la temperatura de l’aigua?",
+          "correct": "Termòmetre",
+          "solution": [
+            "Instrument adequat: Termòmetre",
+            "✅ Termòmetre"
+          ]
+        },
+        {
+          "type": "A07",
+          "n": 69,
+          "question": "Un rectangle de 6×4 m té el mateix perímetre que un quadrat. Quants m² de diferència hi ha entre les seves àrees?",
+          "correct": "1 m²",
+          "solution": [
+            "Perímetre rectangle = 20 m",
+            "Costat quadrat = 5 m",
+            "Àrees: 24 m² i 25 m²",
+            "Diferència = 1 m²",
+            "✅ 1 m²"
+          ]
+        },
+        {
+          "type": "T01",
+          "n": 71,
+          "question": "Un viatge comença a les 7:30 h i acaba a les 9:45 h. Durant el trajecte hi ha una parada de 45 min. Quant temps s'ha conduït realment?",
+          "correct": "1 h 30 min",
+          "solution": [
+            "Temps total = 2 h 15 min",
+            "Temps conduït = 135 − 45 = 90 min",
+            "✅ 1 h 30 min"
+          ]
+        },
+        {
+          "type": "T03",
+          "n": 71,
+          "question": "En un entrenament es fan tres blocs de 35 min, 75 min i 30 min. Quina és la durada total en hores i minuts?",
+          "correct": "2 h 20 min",
+          "solution": [
+            "35+75+30=140 min",
+            "140 min = 2 h 20 min",
+            "✅ 2 h 20 min"
+          ]
+        },
+        {
+          "type": "I06",
+          "n": 71,
+          "question": "Un jardí rectangular de 11×9 m s'ha de tancar a 12 €/m i cobrir de gespa a 6 €/m². Quin és el cost total?",
+          "correct": "1074 €",
+          "solution": [
+            "Tanca: 40×12=480 €",
+            "Gespa: 99×6=594 €",
+            "Total = 1074 €",
+            "✅ 1074 €"
+          ]
+        },
+        {
+          "type": "C01",
+          "n": 71,
+          "question": "Una ruta té un primer tram de 3 km i un segon tram de 150 m. Quants metres té la ruta en total?",
+          "correct": "3150 m",
+          "solution": [
+            "3 km = 3000 m",
+            "3000 + 150 = 3150 m",
+            "✅ 3150 m"
+          ]
+        },
+        {
+          "type": "R02",
+          "n": 71,
+          "question": "Una caixa A conté 4 L i pesa 3000 g. Una B conté 6000 mL i pesa 4 kg. Pots transportar com a màxim 6 caixes i 22000 g en total. Quants litres pots transportar com a màxim combinant els dos tipus?",
+          "correct": "32",
+          "solution": [
+            "En kg i L: A (3; 4), B (4; 6).",
+            "Cal a+b ≤ 6 i 3a+4b ≤ 22.",
+            "Compara 26 combinacions admissibles. Una òptima és 2 A i 4 B: 32 L."
+          ]
+        },
+        {
+          "type": "M02",
+          "n": 69,
+          "question": "Quina unitat és més adequada per expressar la superfície d’una aula?",
+          "correct": "m²",
+          "solution": [
+            "Unitat adequada: m²",
+            "✅ m²"
+          ]
+        },
+        {
+          "type": "S01",
+          "n": 71,
+          "question": "En un plànol, 1 cm representa 20 m reals. Una paret hi mesura 6 cm. Quina longitud real té?",
+          "correct": "120 m",
+          "solution": [
+            "1 cm ↔ 20 m",
+            "6 cm ↔ 6×20=120 m",
+            "✅ 120 m"
+          ]
+        },
+        {
+          "type": "R08",
+          "n": 71,
+          "question": "Una paret de 8×2 m té 5 m² d’obertures que no es pinten. Un pot A cobreix 4 m² i costa 6 €; un B cobreix 7 m² i costa 9 €. Pots combinar formats i pot sobrar pintura. Quin és el cost mínim, en euros, per pintar la paret?",
+          "correct": "15",
+          "solution": [
+            "Àrea neta: 16−5=11 m².",
+            "Per cada nombre de pots B de 0 a 2, calcula quants A falten i compara el cost.",
+            "Una compra òptima: 1 A i 1 B, cobreix 11 m² i costa 15 €."
+          ]
+        },
+        {
+          "type": "R07",
+          "n": 71,
+          "question": "Una sala rectangular té llargada estimada 5 m i amplada estimada 3 m. Cada dimensió pot diferir com a màxim 0,1 m de l’estimació. Cada paquet cobreix exactament 3 m² i es poden aprofitar tots els retalls. Quants paquets cal comprar com a mínim per garantir que n’hi haurà prou en qualsevol mida possible?",
+          "correct": "6",
+          "solution": [
+            "Màxims: 5,1 m i 3,1 m.",
+            "Àrea màxima: 15,81 m².",
+            "Cal el menor enter amb paquets×3 ≥ 15,81: 6. Amb 5 no n’hi ha prou."
+          ]
+        },
+        {
+          "type": "P01",
+          "n": 71,
+          "question": "Un jardí rectangular de 8 m per 10 m s'ha de tancar, però es deixa una porta de 1 m sense tanca. Quants metres de tanca calen?",
+          "correct": "35 m",
+          "solution": [
+            "Perímetre = 2×(8+10) = 36 m",
+            "36 − 1 = 35 m",
+            "✅ 35 m"
+          ]
+        },
+        {
+          "type": "T02",
+          "n": 71,
+          "question": "Una activitat comença a les 10:20 h i dura 2 h 15 min. A quina hora acaba?",
+          "correct": "12:35 h",
+          "solution": [
+            "Durada total = 135 min",
+            "Hora final = 12:35 h",
+            "✅ 12:35 h"
+          ]
+        },
+        {
+          "type": "M04",
+          "n": 70,
+          "question": "Una longitud real és 20 cm i es mesura com 20,4 cm. Quin és l'error relatiu percentual?",
+          "correct": "2 %",
+          "solution": [
+            "Error absolut = 0,4 cm",
+            "Error relatiu = 0,4÷20=0,02",
+            "Percentatge = 2%",
+            "✅ 2%"
+          ]
+        },
+        {
+          "type": "A02",
+          "n": 71,
+          "question": "Una paret fa 6 m d'ample i 4 m d'alt. Té una porta d'1×2 m i una finestra de 2×1 m. Un pot pinta 6 m². Quants pots cal comprar?",
+          "correct": "4 pots",
+          "solution": [
+            "Paret = 24 m²",
+            "Obertures = 4 m²",
+            "A pintar = 20 m²",
+            "Pots = 3,3333 → 4",
+            "✅ 4 pots"
+          ]
+        },
+        {
+          "type": "R06",
+          "n": 71,
+          "question": "Una obertura mesura 44 cm amb error absolut màxim 3 cm. Fabriquem una peça amb amplada nominal entera en cm i error màxim 3 cm. Entre l’obertura i la peça ha de quedar una diferència total d’almenys 1 cm, fins i tot amb els errors més desfavorables. Quina amplada nominal màxima podem encarregar?",
+          "correct": "37",
+          "solution": [
+            "Obertura mínima: 41 cm. Peça màxima: nominal+3.",
+            "Per garantir el marge: nominal+3+1 ≤ 41.",
+            "Màxim enter: 37 cm; amb 38 cm el marge podria quedar en 0 cm."
+          ]
+        },
+        {
+          "type": "A04",
+          "n": 72,
+          "question": "Un rectangle té una àrea de 49 m² i una base de 7 m. Quina alçada té?",
+          "correct": "7 m",
+          "solution": [
+            "A = b·h",
+            "49 ÷ 7 = 7 m",
+            "✅ 7 m"
+          ]
+        },
+        {
+          "type": "M05",
+          "n": 54,
+          "question": "Es mesura una barra de 100 cm com 98 cm (error del 2%) i una peça de 20 cm com 19,8 cm (error de l'1%). Quina mesura és relativament més precisa?",
+          "correct": "La peça de 20 cm",
+          "solution": [
+            "Barra: 2% d'error relatiu",
+            "Peça: 1% d'error relatiu",
+            "1% < 2%",
+            "✅ La peça de 20 cm"
+          ]
+        },
+        {
+          "type": "T04",
+          "n": 71,
+          "question": "Una pel·lícula comença a les 23:30 h i acaba a la 1:40 h de l'endemà. Quant dura?",
+          "correct": "2 h 10 min",
+          "solution": [
+            "De 23:30 a 24:00 = 30 min",
+            "De 00:00 a 1:40 = 100 min",
+            "Total = 130 min = 2 h 10 min",
+            "✅ 2 h 10 min"
+          ]
+        },
+        {
+          "type": "C02",
+          "n": 71,
+          "question": "Hi ha 4 kg d'arròs i es volen fer bosses de 100 g. Quantes bosses completes es poden omplir?",
+          "correct": "40 bosses",
+          "solution": [
+            "4 kg = 4000 g",
+            "4000 ÷ 100 = 40",
+            "✅ 40 bosses"
+          ]
+        },
+        {
+          "type": "A03",
+          "n": 71,
+          "question": "Un jardí rectangular de 8×12 m té una zona pavimentada de 4×2 m. Quants metres quadrats de gespa queden?",
+          "correct": "88 m²",
+          "solution": [
+            "8×12=96 m²",
+            "4×2=8 m²",
+            "96−8=88 m²",
+            "✅ 88 m²"
+          ]
+        },
+        {
+          "type": "S04",
+          "n": 71,
+          "question": "En un plànol, 1 cm representa 5 m. Una habitació hi fa 5 cm per 2 cm. Quina és la seva àrea real?",
+          "correct": "250 m²",
+          "solution": [
+            "Dimensions reals: 25 m × 10 m",
+            "Àrea = 250 m²",
+            "✅ 250 m²"
+          ]
+        },
+        {
+          "type": "I02",
+          "n": 71,
+          "question": "Una habitació de 8×5 m i 3 m d'alçada té 4 m² de portes i finestres. Un pot cobreix 6 m². Quants pots calen per pintar les quatre parets?",
+          "correct": "13 pots",
+          "solution": [
+            "Parets = 2×(8+5)×3 = 78 m²",
+            "A pintar = 74 m²",
+            "Pots = 12,3333 → 13",
+            "✅ 13 pots"
+          ]
+        },
+        {
+          "type": "S02",
+          "n": 71,
+          "question": "En un plànol, 1 cm representa 5 m reals. Una sala fa 45 m de llarg. Quants centímetres ha de mesurar al plànol?",
+          "correct": "9 cm",
+          "solution": [
+            "45 ÷ 5 = 9 cm",
+            "✅ 9 cm"
+          ]
+        },
+        {
+          "type": "P04",
+          "n": 70,
+          "question": "Una roda de diàmetre 50 cm fa 25 voltes completes. Quina distància aproximada recorre en metres? Usa π≈3,14.",
+          "correct": "39,25 m",
+          "solution": [
+            "Una volta: 3,14×50 = 157 cm",
+            "25 voltes: 3925 cm",
+            "En metres: 39,25 m",
+            "✅ 39,25 m"
+          ]
+        },
+        {
+          "type": "P03",
+          "n": 64,
+          "question": "Una taula rodona té un diàmetre de 8 m. Quina longitud aproximada té la seva vora? Usa π≈3,14.",
+          "correct": "25,12 m",
+          "solution": [
+            "C = π·d = 3,14×8",
+            "C = 25,12 m",
+            "✅ 25,12 m"
+          ]
+        },
+        {
+          "type": "S03",
+          "n": 70,
+          "question": "En un mapa a escala 1:100.000, dues poblacions estan separades 2 cm. Quina distància real hi ha en quilòmetres?",
+          "correct": "2 km",
+          "solution": [
+            "2×100000=200000 cm",
+            "1 km = 100.000 cm",
+            "200000÷100.000=2 km",
+            "✅ 2 km"
+          ]
+        },
+        {
+          "type": "C03",
+          "n": 71,
+          "question": "Un dipòsit conté 12 l de beguda. Si s'omplen ampolles de 250 ml, quantes ampolles completes s'obtenen?",
+          "correct": "48 ampolles",
+          "solution": [
+            "12 l = 12000 ml",
+            "12000 ÷ 250 = 48",
+            "✅ 48 ampolles"
+          ]
+        },
+        {
+          "type": "A05",
+          "n": 71,
+          "question": "Un terreny triangular té base 12 m i alçada 6 m. Posar-hi gespa costa 6 €/m². Quin és el cost total?",
+          "correct": "216 €",
+          "solution": [
+            "Àrea = (12×6)÷2 = 36 m²",
+            "Cost = 36×6 = 216 €",
+            "✅ 216 €"
+          ]
+        },
+        {
+          "type": "A06",
+          "n": 71,
+          "question": "Una sala en forma de L es pot veure com un rectangle de 11×6 m al qual s'ha tret un rectangle de 2×3 m d'una cantonada. Quina és l'àrea de la sala?",
+          "correct": "60 m²",
+          "solution": [
+            "Rectangle gran = 66 m²",
+            "Part retirada = 6 m²",
+            "Àrea L = 60 m²",
+            "✅ 60 m²"
+          ]
+        },
+        {
+          "type": "A01",
+          "n": 71,
+          "question": "Una habitació de 6 m × 5 m s'ha de cobrir amb rajoles quadrades de 30 cm de costat. Suposant que es poden aprofitar els retalls, quantes rajoles calen com a mínim?",
+          "correct": "334 rajoles",
+          "solution": [
+            "Àrea habitació = 30 m²",
+            "Àrea rajola = 0,3² = 0,09 m²",
+            "Rajoles = 333,3333 → 334",
+            "✅ 334 rajoles"
+          ]
+        },
+        {
+          "type": "I03",
+          "n": 71,
+          "question": "Una tela rectangular de 2×1 m costa 8 €/m² i posar una cinta a tot el voltant costa 2 €/m. Quin és el cost total de tela i cinta?",
+          "correct": "28 €",
+          "solution": [
+            "Tela: 2×8=16 €",
+            "Cinta: 6×2=12 €",
+            "Total = 28 €",
+            "✅ 28 €"
+          ]
+        },
+        {
+          "type": "I05",
+          "n": 70,
+          "question": "Hi ha 3 l de suc i es serveix en gots de 350 ml. Quants gots complets es poden omplir?",
+          "correct": "8 gots",
+          "solution": [
+            "3 l = 3000 ml",
+            "3000 ÷ 350 = 8,5714",
+            "✅ 8 gots complets"
+          ]
+        },
+        {
+          "type": "C06",
+          "n": 69,
+          "question": "Una corda de 12 m es talla en trossos de 45 cm. Quants trossos complets es poden obtenir?",
+          "correct": "26 trossos",
+          "solution": [
+            "12 m = 1200 cm",
+            "1200 ÷ 45 = 26,6667",
+            "✅ 26 trossos complets"
+          ]
+        },
+        {
+          "type": "I04",
+          "n": 71,
+          "question": "Una pista rectangular fa 71 m per 46 m. Una persona hi fa 10 voltes completes. Quants quilòmetres recorre?",
+          "correct": "2,34 km",
+          "solution": [
+            "Una volta = 234 m",
+            "10 voltes = 2340 m",
+            "= 2,34 km",
+            "✅ 2,34 km"
+          ]
+        },
+        {
+          "type": "R01",
+          "n": 70,
+          "question": "Tens barres de 3 m. Cal obtenir 3 peces de 180 cm, 3 peces de 1650 mm i 4 peces de 135 cm. Pots combinar talls en una barra; el tall no consumeix material i els retalls no es poden unir. Quin és el nombre mínim de barres?",
+          "correct": "7",
+          "solution": [
+            "Cada barra té 300 cm. Les peces de 180 cm no poden compartir barra amb cap altra peça: calen 3 barres.",
+            "Una peça de 165 cm i una de 135 cm omplen una barra: 3 barres. Sobra una peça de 135 cm: una barra més.",
+            "Les 3 peces de 165 cm requereixen barres diferents i no poden compartir amb les de 180 cm. Si només hi hagués 6 barres, només hi cabrien 3 peces curtes, però en calen 4.",
+            "Mínim: 3+3+1=7 barres."
+          ]
+        },
+        {
+          "type": "T05",
+          "n": 68,
+          "question": "L'agulla dels minuts d'un rellotge avança 5 minuts. Quin angle ha girat?",
+          "correct": "30 °",
+          "solution": [
+            "360° ÷ 60 = 6° per minut",
+            "5 × 6 = 30°",
+            "✅ 30°"
+          ]
+        },
+        {
+          "type": "C05",
+          "n": 71,
+          "question": "Una cinta fa 625 cm. Se'n gasten 80 cm. Quants centímetres en queden?",
+          "correct": "545 cm",
+          "solution": [
+            "625 − 80 = 545 cm",
+            "✅ 545 cm"
+          ]
+        },
+        {
+          "type": "C04",
+          "n": 68,
+          "question": "En una recepta s'utilitzen 3 l, 25 cl i 100 ml de líquid. Quants mil·lilitres són en total?",
+          "correct": "3350 ml",
+          "solution": [
+            "3 l = 3000 ml",
+            "25 cl = 250 ml",
+            "3000+250+100=3350 ml",
+            "✅ 3350 ml"
+          ]
+        },
+        {
+          "type": "P02",
+          "n": 72,
+          "question": "Una fotografia rectangular fa 60 cm per 30 cm. El marc costa 5 €/m. Quant costa la fusta necessària per envoltar-la?",
+          "correct": "9 €",
+          "solution": [
+            "Perímetre = 180 cm = 1,8 m",
+            "Cost = 1,8×5 = 9 €",
+            "✅ 9 €"
+          ]
+        },
+        {
+          "type": "I01",
+          "n": 70,
+          "question": "Una habitació de 8×5 m necessita sòcol a tot el perímetre excepte en una porta d'1 m. El sòcol costa 3 €/m. Quin és el cost total?",
+          "correct": "75 €",
+          "solution": [
+            "Perímetre = 26 m",
+            "Sòcol = 25 m",
+            "Cost = 25×3=75 €",
+            "✅ 75 €"
+          ]
+        },
+        {
+          "type": "P05",
+          "n": 71,
+          "question": "Un rectangle té un perímetre de 30 m i una llargada de 11 m. Quina amplada té?",
+          "correct": "4 m",
+          "solution": [
+            "30 ÷ 2 = 15",
+            "15 − 11 = 4 m",
+            "✅ 4 m"
+          ]
+        },
+        {
+          "type": "M03",
+          "n": 69,
+          "question": "El valor de referència és 20 cm i una mesura dona 22 cm. Quin és l'error absolut?",
+          "correct": "2 cm",
+          "solution": [
+            "|22−20|=2 cm",
+            "✅ 2 cm"
+          ]
+        },
+        {
+          "type": "R03",
+          "n": 71,
+          "question": "L’autobús A surt a les 8:00 i cada 12 min; triga 16 min fins al transbordament. Cal caminar 4 min. B surt d’allà a les 8:08 i cada 25 min; el segon trajecte dura 16 min. Has d’arribar com a molt a les 10:28. Quants minuts després de les 8:00 surt l’últim A que et serveix? Es pot pujar a B just a l’hora de sortida.",
+          "correct": "84",
+          "solution": [
+            "Per a cada A comprova la primera sortida de B posterior o igual a l’hora d’arribar-hi caminant.",
+            "L’últim itinerari vàlid és A 9:24, B 9:48, arribada 10:04.",
+            "El següent A no arriba a temps amb cap B. Resposta: 84 min."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "volum",
+      "types": 6,
+      "coverage": [
+        5,
+        1,
+        0
+      ],
+      "generated": 3000,
+      "exam": null,
+      "variants": [
+        {
+          "type": 4,
+          "n": 377,
+          "question": "Quants cm³ corresponen a 6 l?",
+          "correct": "6000 cm³",
+          "solution": [
+            "6 l = 6 dm³",
+            "1 dm³ = 1000 cm³",
+            "6 l = 6000 cm³",
+            "✅ 6000 cm³"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 503,
+          "question": "Quants dm³ corresponen a 11 l?",
+          "correct": "11 dm³",
+          "solution": [
+            "1 l = 1 dm³",
+            "11 l = 11 dm³",
+            "✅ 11 dm³"
+          ]
+        },
+        {
+          "type": 1,
+          "n": 834,
+          "question": "Volum d'un ortoedre de 2 cm × 5 cm × 3 cm",
+          "correct": "30 cm³",
+          "solution": [
+            "V = 2 × 5 × 3 = 30 cm³",
+            "✅ 30 cm³"
+          ]
+        },
+        {
+          "type": 5,
+          "n": 754,
+          "question": "Un aquari rectangular fa 40×30×20 cm. Quina capacitat té en litres?",
+          "correct": "24 l",
+          "solution": [
+            "V = 40 × 30 × 20 = 24000 cm³",
+            "24000 cm³ = 24 l",
+            "✅ 24 l"
+          ]
+        },
+        {
+          "type": 6,
+          "n": 150,
+          "question": "Quina unitat és adequada per expressar la capacitat d’una ampolla?",
+          "correct": "l",
+          "solution": [
+            "Unitat adequada: l",
+            "✅ l"
+          ]
+        },
+        {
+          "type": 2,
+          "n": 382,
+          "question": "Volum d'un cub d'aresta 9 cm",
+          "correct": "729 cm³",
+          "solution": [
+            "V = 9 × 9 × 9 = 729 cm³",
+            "✅ 729 cm³"
+          ]
+        }
+      ]
+    }
+  ],
+  "practice": [
+    {
+      "topic": "metric",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "metric",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "metric",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "metric",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "metric",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "metric",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "metric",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "metric",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "metric",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "metric",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "metric",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "metric",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "conversions",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "conversions",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "conversions",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "conversions",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "conversions",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "conversions",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "conversions",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "conversions",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "conversions",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "conversions",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "conversions",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "conversions",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "temps",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "temps",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "temps",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "temps",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "temps",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "temps",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "temps",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "temps",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "temps",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "temps",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "temps",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "temps",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "perimetres",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "perimetres",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "perimetres",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "perimetres",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "perimetres",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "perimetres",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "perimetres",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "perimetres",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "perimetres",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "perimetres",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "perimetres",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "perimetres",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "arees",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "arees",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "arees",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "arees",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "arees",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "arees",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "arees",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "arees",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "arees",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "arees",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "arees",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "arees",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "mesurament",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "mesurament",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "mesurament",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "mesurament",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "mesurament",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "mesurament",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "mesurament",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "mesurament",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "mesurament",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "mesurament",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "mesurament",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "mesurament",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "estimacio",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "estimacio",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "estimacio",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "estimacio",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "estimacio",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "estimacio",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "estimacio",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "estimacio",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "estimacio",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "estimacio",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "estimacio",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "estimacio",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "problemes",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "problemes",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "problemes",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "problemes",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "problemes",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "problemes",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "problemes",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "problemes",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "problemes",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "problemes",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "problemes",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "problemes",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    }
+  ],
+  "globals": [
+    {
+      "policy": "free",
+      "requested": null,
+      "counts": [
+        8,
+        11,
+        1
+      ],
+      "topics": {
+        "metric": 3,
+        "conversions": 2,
+        "temps": 3,
+        "perimetres": 3,
+        "arees": 4,
+        "mesurament": 3,
+        "estimacio": 1,
+        "problemes": 1
+      },
+      "contextual": 6
+    },
+    {
+      "policy": "balanced",
+      "requested": [
+        7,
+        7,
+        6
+      ],
+      "counts": [
+        7,
+        7,
+        6
+      ],
+      "topics": {
+        "metric": 3,
+        "conversions": 3,
+        "temps": 3,
+        "perimetres": 2,
+        "arees": 2,
+        "mesurament": 3,
+        "estimacio": 2,
+        "problemes": 2
+      },
+      "contextual": 6
+    },
+    {
+      "policy": "1",
+      "requested": [
+        20,
+        0,
+        0
+      ],
+      "counts": [
+        20,
+        0,
+        0
+      ],
+      "topics": {
+        "metric": 3,
+        "conversions": 2,
+        "temps": 3,
+        "perimetres": 3,
+        "arees": 2,
+        "mesurament": 3,
+        "estimacio": 2,
+        "problemes": 2
+      },
+      "contextual": 1
+    },
+    {
+      "policy": "2",
+      "requested": [
+        0,
+        20,
+        0
+      ],
+      "counts": [
+        0,
+        20,
+        0
+      ],
+      "topics": {
+        "metric": 3,
+        "conversions": 3,
+        "temps": 3,
+        "perimetres": 2,
+        "arees": 2,
+        "mesurament": 2,
+        "estimacio": 2,
+        "problemes": 3
+      },
+      "contextual": 4
+    },
+    {
+      "policy": "3",
+      "requested": [
+        0,
+        0,
+        20
+      ],
+      "counts": [
+        0,
+        0,
+        20
+      ],
+      "topics": {
+        "metric": 3,
+        "conversions": 3,
+        "temps": 3,
+        "perimetres": 2,
+        "arees": 2,
+        "mesurament": 2,
+        "estimacio": 2,
+        "problemes": 3
+      },
+      "contextual": 1
+    }
+  ],
+  "bankChecks": [
+    {
+      "bank": "measureProblems",
+      "templates": 46,
+      "cases": 1840
+    }
+  ],
+  "banksReviewed": 46,
+  "pageErrors": []
+}

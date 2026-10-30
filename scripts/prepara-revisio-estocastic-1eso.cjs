@@ -1,0 +1,26 @@
+const fs=require('fs');const topics=[],banks=[];
+function rows(topic,level,types,reason){for(const type of types)topics.push({topic,type,level,reason});}
+rows('recollida',1,[1,2,3,4],'Identificar variable, població/mostra, cens/mostreig o mètode de recollida.');
+rows('recollida',2,[5,6,7],'Interpretar representativitat, neutralitat o abast d’una conclusió; els contrastos són explícits, sense estratègia alta.');
+rows('taules',1,[1,2,4,5,6,7,9,10,11,12],'Lectura, suma, equivalència directa o definició de freqüència.');
+rows('taules',2,[3,8],'Reconstruir el total de la taula abans de calcular una proporció o un complement.');
+rows('barres',1,[1,2,3,7,8,9,10,11,12],'Llegir o comparar alçades, reconèixer eixos i ús del diagrama.');
+rows('barres',2,[4,5,6],'Llegir diverses freqüències del gràfic i operar-hi per trobar diferència, suma conjunta o total.');
+rows('sectors',1,[1,2,3,4,5,7,8,9,10,11,12,13],'Lectura, relació directa percentatge/angle/freqüència o completar el total.');
+rows('sectors',2,[6],'Connectar dues lectures del diagrama i calcular-ne la diferència percentual.');
+rows('poligons',1,[1,2,3,4,8,9,10,11,12],'Llegir punts, comparar-los o reconèixer elements del gràfic.');
+rows('poligons',2,[5,6,7],'Coordinar lectures de diverses freqüències i operar amb elles.');
+rows('mitjana',1,[1,3],'Mitjana directa d’una llista o suma a partir de mitjana i nombre de dades.');
+rows('mitjana',2,[2,4],'Reconstruir una dada que falta o ponderar valors amb les freqüències de la taula.');
+rows('mediana',1,[1,2,4],'Aplicar el procediment de posició central o distingir definicions.');
+topics.find(r=>r.topic==='mediana'&&r.type===1).variants={even:{level:2,reason:'Ordenar, localitzar dos valors centrals i calcular-ne la mitjana.'}};
+rows('mediana',2,[3],'Ordenar quatre dades i relacionar els dos valors centrals.');
+rows('moda',1,[1,2,3,5,6,7,8,9,10],'Comptar freqüències o aplicar la definició, inclosos empats; bimodal no vol dir alta.');
+rows('moda',2,[4],'Actualitzar les freqüències després d’afegir dades i tornar a comparar el màxim.');
+rows('probabilitat',1,[1,2,3,4,5,6,7,8,9,10,11],'Espai mostral simple, casos favorables/possibles, freqüència experimental o comparació dins la mateixa bossa.');
+rows('acumulades2',1,[1,2,3,4],'Suma acumulada, diferència consecutiva o definició directa.');
+rows('histograma',1,[1,2,3,4,6],'Definició, lectura, amplitud d’interval o completar recomptes.');
+rows('histograma',2,[5],'Passar de dades en brut a una agrupació per intervals respectant els extrems.');
+const groups=[['R',9,[3,4,5,7,8],{3:'Escollir una mostra representativa.',4:'Analitzar una formulació suggeridora.',5:'Distingir neutralitat i biaix.',7:'Inferir una quantitat poblacional a partir d’una proporció mostral.',8:'Valorar el biaix d’una generalització.'}],['T',7,[7],{7:'Localitzar extrems de freqüència i calcular-ne la diferència.'}],['G',9,[2,3,6,8],{2:'Lectura de màxim i mínim i diferència.',3:'Reunir totes les freqüències del diagrama.',6:'Passar de freqüència absoluta a proporció i angle.',8:'Interpretar l’efecte d’un eix truncat.'}],['C',11,[2,3,4,5,7,8],{2:'Mitjana inversa amb dada que falta.',3:'Mitjana ponderada de taula.',4:'Calcular dues mitjanes i comparar-les.',5:'Interpretar l’efecte d’un valor extrem sobre la mitjana.',7:'Ordenar i promitjar els dos centres.',8:'Actualitzar nombre de dades i posicions centrals.'}],['P',10,[8,9],{8:'Distingir freqüència de mostra petita i estabilització esperada.',9:'Comparar probabilitats de dos jocs.'}],['K',3,[3],{3:'Convertir proporcions a angles i construir-ne la representació.'}]];
+for(const [prefix,count,medium,reasons] of groups)for(let i=1;i<=count;i++)banks.push({bank:'stochasticOpen',key:prefix+i,level:medium.includes(i)?2:1,reason:reasons[i]||'Identificació, lectura, recompte, fórmula o translació directa de taula a gràfic amb escala indicada.'});
+fs.writeFileSync('docs/dificultats/revisio-1eso-estocastic-punt3.json',JSON.stringify({course:'1eso',sense:'estocastic',status:'reclassified-with-gaps',topics,banks,note:'No es justifica alta en les famílies originals. K1/K2/K3 són tasques de construcció, fora dels exàmens i incloses en el cens del banc.'},null,2)+'\n');
