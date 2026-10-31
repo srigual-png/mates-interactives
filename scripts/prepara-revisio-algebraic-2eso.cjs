@@ -1,0 +1,26 @@
+const fs=require('fs'),assert=require('assert/strict'),topics=[];
+const source=JSON.parse(fs.readFileSync('docs/dificultats/auditoria-global-mostres-punt2.json')).blocks.find(b=>b.course==='2eso'&&b.sense==='algebraic');
+function rows(topic,level,types,reason){for(const type of types){const old=source.topics.find(t=>t.id===topic)?.types.find(t=>t.type===String(type));assert(old,topic+':'+type);topics.push({topic,type,level,reason,previous:old.levels||[],samples:old.variants.map(v=>v.question)});}}
+rows('patrons',1,[1,3,5,6],'Continuar un patró additiu, llegir-ne la diferència o substituir en una regla donada.');
+rows('patrons',2,[2,4,7,8],'Inferir la regla des de termes, taula o context i aplicar-la a una posició o expressar-la simbòlicament.');
+rows('expressions',1,[1,2,3,4,5,6,7,10],'Reconèixer termes semblants o aplicar directament reducció, producte de monomis o distributiva; el signe i els exponents no creen alta.');
+rows('expressions',2,[8,9],'Encadenar distributiva i reducció per obtenir una expressió equivalent.');
+rows('equacions',1,[11,12],'Fer la transformació concreta indicada o identificar un error elemental local en una resolució proporcionada.');
+rows('equacions',2,[1,2,3,4,5,6,7,8,9,10],'Connectar operacions inverses, traslladar termes o distribuir i reduir per aïllar la incògnita. És un procediment estàndard, també amb signes.');
+topics.find(r=>r.topic==='equacions'&&r.type===11).variants={distribute:{level:2,reason:'La branca demana distribuir i sumar el terme independent, dues transformacions connectades; les altres branques resten un únic terme indicat.'}};
+rows('problemes',1,[1,11],'Llegir què representa la incògnita definida o reconèixer directament si un valor donat és admissible al context.');
+rows('problemes',2,[2,3,4,5,6,7,8,9,10,12],'Traduir dades a un model estàndard, resoldre’l o contrastar-lo amb el plantejament proposat. El context no justifica alta.');
+rows('relacions',1,[1,2,3,4,5,6,7,8,11,12],'Identificar variables, aplicar la definició de funció, llegir una taula, ordenar una parella o substituir una dada en la fórmula.');
+rows('relacions',2,[9,10],'Reconstruir la regla afí d’una taula o invertir la relació per recuperar l’entrada.');
+rows('funcionslineals',1,[1,2,3,4,5,8,10,11,12,15,17],'Reconèixer tipus, signe, paràmetres o significat contextual, substituir un punt o llegir directament el gràfic.');
+rows('funcionslineals',2,[6,7,9,13,14,16],'Connectar taula, punts, gràfic o context amb fórmula; invertir-la o calcular i comparar dos costos.');
+rows('computacional',1,[5,6,7,9,10,11,12,15,17],'Aplicar una repetició de recompte conegut, condició o instrucció explícita; identificar un element o substituir en una fórmula donada.');
+rows('computacional',2,[1,2,3,4,8,13,14,16],'Seguir instruccions successives o condicional i actualització, comptar fins al llindar, detectar el desfasament d’índex o traduir model/algorisme a fórmula.');
+rows('productes3r',1,[1,2,3,4,5,6,7,8,9,10,11,13,14,16],'Producte, distributiva o extracció explícita del factor comú màxim; detectar l’error local de la mateixa propietat. Contingut de 3r.');
+rows('productes3r',2,[12,15],'Relacionar àrea i producte algebraic o combinar distributiva i reducció. Contingut de 3r.');
+rows('identitats3r',1,[1,2,3,4,5,6,7,8,9,11,13,14,15,16],'Aplicar o reconèixer explícitament una identitat notable, completar-ne un terme o detectar-ne una aplicació incorrecta. Contingut de 3r.');
+rows('identitats3r',2,[10,12],'Relacionar àrea amb identitat o aplicar-la a un càlcul mental amb passos connectats. Contingut de 3r.');
+rows('sistemes3r',1,[1,6,11,12,13,14,16],'Comprovar una parella, interpretar-la o reconèixer compatibilitat i definició de solució. Contingut de 3r.');
+rows('sistemes3r',2,[2,3,4,5,7,8,9,10,15],'Coordinar dues equacions, construir un sistema estàndard o trobar una intersecció. Contingut de 3r; no hi ha planificació no immediata.');
+for(const t of source.topics)assert.deepEqual(topics.filter(r=>r.topic===t.id).map(r=>String(r.type)).sort(),t.types.map(r=>r.type).sort(),'Cens '+t.id);
+fs.writeFileSync('docs/dificultats/revisio-2eso-algebraic-punt3.json',JSON.stringify({course:'2eso',sense:'algebraic',status:'reclassified-with-gaps',topics,banks:[],note:'136 tipus, set temes ordinaris i tres ampliacions de 3r. No hi ha famílies altes legítimes al material revisat. Cal completar cobertura i varietat sense inflar etiquetes.'},null,2)+'\n');

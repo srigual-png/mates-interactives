@@ -781,15 +781,15 @@ function svgPythSquares(a,b,c,unknown='c'){
   const ca=center(sqA),cb=center(sqB),cc=center(sqC),lab=(k,v)=>unknown===k?'?':v;
   return `<div class="geo-svg-wrap"><svg class="geo-svg" viewBox="0 0 430 285" role="img" aria-label="Triangle rectangle amb un quadrat construït sobre cada costat"><polygon points="${pts(sqA)}" fill="#fff5df" stroke="#f5a623" stroke-width="2"/><polygon points="${pts(sqB)}" fill="#e9f8f1" stroke="#34c97e" stroke-width="2"/><polygon points="${pts(sqC)}" fill="#f0eeff" stroke="#6c63d8" stroke-width="2"/><path class="geo-line" d="M${ox} ${oy} L${A[0]} ${A[1]} L${B[0]} ${B[1]} Z"/><path class="geo-right" d="M${ox} ${oy-12} h12 v12"/><text class="geo-label" x="${ca[0]}" y="${ca[1]+4}" text-anchor="middle">${lab('a',a*a)} cm²</text><text class="geo-label" x="${cb[0]}" y="${cb[1]+4}" text-anchor="middle">${lab('b',b*b)} cm²</text><text class="geo-label" x="${cc[0]}" y="${cc[1]+4}" text-anchor="middle">${lab('c',c*c)} cm²</text></svg></div>`;
 }
-function svgRightTriangle(a,b,c,hide='c',vertexLabels=null){
+function svgRightTriangle(a,b,c,hide='c',vertexLabels=null,unit='cm'){
   const sc=Math.min(12,125/Math.max(a,b)),ox=95,oy=175,A=[ox+a*sc,oy],B=[ox,oy-b*sc];
   const side=(k,v)=>hide===k?'?':fmtNum(v);
   const labels=vertexLabels||['A','B','C'];
-  return `<div class="geo-svg-wrap"><svg class="geo-svg" viewBox="0 0 390 205" role="img" aria-label="Triangle rectangle"><path class="geo-shape" d="M${ox} ${oy} L${A[0]} ${A[1]} L${B[0]} ${B[1]} Z"/><path class="geo-right" d="M${ox} ${oy-13} h13 v13"/><text class="geo-label" x="${(ox+A[0])/2}" y="197" text-anchor="middle">${vertexLabels?'':side('a',a)+' cm'}</text><text class="geo-label" x="${ox-13}" y="${(oy+B[1])/2}">${vertexLabels?'':side('b',b)+' cm'}</text><text class="geo-label" x="${(A[0]+B[0])/2+12}" y="${(A[1]+B[1])/2-6}">${vertexLabels?'':side('c',c)+' cm'}</text><text class="geo-label" x="${ox-17}" y="${oy+5}">${labels[0]}</text><text class="geo-label" x="${A[0]+7}" y="${A[1]+5}">${labels[1]}</text><text class="geo-label" x="${B[0]-17}" y="${B[1]-2}">${labels[2]}</text></svg></div>`;
+  return `<div class="geo-svg-wrap"><svg class="geo-svg" viewBox="0 0 390 205" role="img" aria-label="Triangle rectangle"><path class="geo-shape" d="M${ox} ${oy} L${A[0]} ${A[1]} L${B[0]} ${B[1]} Z"/><path class="geo-right" d="M${ox} ${oy-13} h13 v13"/><text class="geo-label" x="${(ox+A[0])/2}" y="197" text-anchor="middle">${vertexLabels?'':side('a',a)+' '+unit}</text><text class="geo-label" x="${ox-13}" y="${(oy+B[1])/2}">${vertexLabels?'':side('b',b)+' '+unit}</text><text class="geo-label" x="${(A[0]+B[0])/2+12}" y="${(A[1]+B[1])/2-6}">${vertexLabels?'':side('c',c)+' '+unit}</text><text class="geo-label" x="${ox-17}" y="${oy+5}">${labels[0]}</text><text class="geo-label" x="${A[0]+7}" y="${A[1]+5}">${labels[1]}</text><text class="geo-label" x="${B[0]-17}" y="${B[1]-2}">${labels[2]}</text></svg></div>`;
 }
-function svgRectangleDiagonal(a,b,c){
+function svgRectangleDiagonal(a,b,c,hide='c'){
   const sc=Math.min(17,180/Math.max(a,b)),x=75,y=40,w=a*sc,h=b*sc;
-  return `<div class="geo-svg-wrap"><svg class="geo-svg" viewBox="0 0 390 225" role="img" aria-label="Rectangle amb diagonal"><rect class="geo-shape" x="${x}" y="${y}" width="${w}" height="${h}"/><line class="geo-line" x1="${x}" y1="${y+h}" x2="${x+w}" y2="${y}"/><text class="geo-label" x="${x+w/2}" y="${y+h+22}" text-anchor="middle">${a} cm</text><text class="geo-label" x="${x+w+9}" y="${y+h/2}">${b} cm</text><text class="geo-label" x="${x+w/2}" y="${y+h/2-8}" text-anchor="middle">? cm</text></svg></div>`;
+  return `<div class="geo-svg-wrap"><svg class="geo-svg" viewBox="0 0 390 225" role="img" aria-label="Rectangle amb diagonal"><rect class="geo-shape" x="${x}" y="${y}" width="${w}" height="${h}"/><line class="geo-line" x1="${x}" y1="${y+h}" x2="${x+w}" y2="${y}"/><text class="geo-label" x="${x+w/2}" y="${y+h+22}" text-anchor="middle">${a} cm</text><text class="geo-label" x="${x+w+9}" y="${y+h/2}">${hide==='b'?'?':fmtNum(b)} cm</text><text class="geo-label" x="${x+w/2}" y="${y+h/2-8}" text-anchor="middle">${hide==='c'?'?':fmtNum(c)} cm</text></svg></div>`;
 }
 function svgIsoscelesAltitude(base,side,height){
   const sc=Math.min(13,190/base,120/height),x=200,y=35,half=base*sc/2,h=height*sc,by=y+h;
@@ -1301,8 +1301,12 @@ function genVisual3D2ESO(forceType){
     options=uniq4(correct,[String(missing+1),String(Math.max(1,missing-1)),String(rows*cols*H),String(gridTotal(g)),String(missing+2)]);
     guide=['Calcula quants cubs tindria el prisma complet.','Compta quants cubs ja hi ha a la construcció.','La diferència dona els cubs que falten.'];solution=[`Prisma complet: ${rows} × ${cols} × ${H} = ${rows*cols*H} cubs.`,`Construcció actual: ${gridTotal(g)} cubs.`,`✅ En falten ${missing}.`];
   }else if(type===8){
-    const base=randomHeightGrid(2,3,3),front=gridFront(base),side=gridSide(base),top=gridTop(base),altsG=[];let tries=0;
-    while(altsG.length<3&&tries<500){tries++;const g=randomHeightGrid(2,3,3);if(!same3Views(g,base)&&!altsG.some(x=>JSON.stringify(x)===JSON.stringify(g)))altsG.push(g)}
+    // Cada distractor coincideix en dues projeccions i falla en una de diferent.
+    // Cap vista sola permet triar la resposta: cal contrastar totes tres.
+    const columns=shuffle([0,1,2]),flip=rnd(0,1)===1;
+    const transform=g=>(flip?g.slice().reverse():g).map(r=>columns.map(c=>r[c]));
+    const base=transform([[1,3,2],[3,1,1]]),front=gridFront(base),side=gridSide(base),top=gridTop(base);
+    const altsG=[[[1,3,1],[3,1,1]],[[3,3,2],[2,1,1]],[[1,3,2],[3,0,1]]].map(transform);
     const arr=shuffle([{ok:true,g:base},...altsG.map(g=>({ok:false,g}))]),letters=['A','B','C','D'];correct=letters[arr.findIndex(x=>x.ok)];allowOpen=false;difficulty='hard';
     const targetViews='<div class="visual-choice-grid"><div class="mini-visual"><strong>Vista frontal</strong>'+svgBarView(front,'FRONTAL')+'</div><div class="mini-visual"><strong>Vista lateral</strong>'+svgBarView(side,'LATERAL')+'</div><div class="mini-visual"><strong>Vista superior</strong>'+svgTopView(base)+'</div><div class="mini-visual"><strong>Dades</strong><div style="font-size:.76rem;line-height:1.5;padding:8px">Les tres vistes corresponen a la mateixa construcció.</div></div></div>';
     question='Quina construcció correspon a <b>totes tres vistes</b>?'+targetViews+visualChoiceGrid(arr.map((x,i)=>({label:letters[i],html:svgCubeConstruction(x.g,'').replace('class="geo-svg-wrap"','')})));
@@ -1462,7 +1466,7 @@ function genModelitzacio2ESO(forceType){
     const variant=rnd(1,3);allowOpen=false;
     if(variant===1){
       const h=8,c=10;correct='x² + 8² = 10²';
-      question='Una escala de <b>10 m</b> arriba a una finestra situada a <b>8 m</b> d’altura. Si x és la distància de la base de l’escala a la paret, quina equació modelitza correctament la situació?'+svgRightTriangle(6,8,10,'a');
+      question='Una escala de <b>10 m</b> arriba a una finestra situada a <b>8 m</b> d’altura. Si x és la distància de la base de l’escala a la paret, quina equació modelitza correctament la situació?'+svgRightTriangle(6,8,10,'a',null,'m');
       options=uniq4(correct,['x² = 10² + 8²','x + 8 = 10','x² + 10² = 8²','x = 10² − 8²']);
       guide=['Identifica la hipotenusa abans d’escriure l’equació.','La relació de Pitàgores suma els quadrats dels dos catets i els iguala al quadrat de la hipotenusa.'];
       solution=['La hipotenusa és l’escala de 10 m; els catets són 8 m i x.',`Per tant, ${correct}.`,`✅ ${correct}`];
@@ -1480,7 +1484,7 @@ function genModelitzacio2ESO(forceType){
       solution=['A escala 1:200, cada unitat del plànol representa 200 unitats a la realitat.',`✅ ${correct}`];
     }
   }
-  return {topicId:'modelitzacio',type,course:'2n',difficulty,question,correct,alts,options,guide,solution,openHint,allowOpen};
+  return {topicId:'modelitzacio',type,course:'2n',difficultyVariant:type===10&&question.startsWith('Un plànol')?'scale':undefined,difficulty,question,correct,alts,options,guide,solution,openHint,allowOpen};
 }
 
 
@@ -1500,7 +1504,7 @@ function genPitagores3r(forceType){
   }else if(type===2){
     const triples=[[3,4,5],[5,12,13],[8,15,17],[7,24,25]],t=triples[rnd(0,triples.length-1)],k=rnd(1,3),a=t[0]*k,b=t[1]*k,d=t[2]*k;
     correct=answerNum(b,'cm');alts=numericAlts(b,'cm');
-    question=`La diagonal d’un rectangle mesura <b>${d} cm</b> i un dels costats mesura <b>${a} cm</b>. Quant mesura l’altre costat?`+svgRectangleDiagonal(a,b,d);
+    question=`La diagonal d’un rectangle mesura <b>${d} cm</b> i un dels costats mesura <b>${a} cm</b>. Quant mesura l’altre costat?`+svgRectangleDiagonal(a,b,d,'b');
     options=uniq4(correct,[answerNum(d-a,'cm'),answerNum(Math.sqrt(d*d+a*a),'cm',2),answerNum(d,'cm'),answerNum(a,'cm')]);
     guide=['La diagonal és la hipotenusa del triangle rectangle que forma amb els dos costats.','Com que busques un catet, resta el quadrat del catet conegut al quadrat de la hipotenusa.','Calcula l’arrel quadrada al final.'];
     solution=[`b² = ${d}² − ${a}².`,`b² = ${d*d-a*a}.`,`b = ${b} cm.`,`✅ ${correct}`];
@@ -1535,7 +1539,7 @@ function genPitagores3r(forceType){
   }else if(type===7){
     const triples=[[6,8,10],[5,12,13],[7,24,25]],t=triples[rnd(0,triples.length-1)],base=t[0],height=t[1],cable=t[2],irrelevant=rnd(2,5);
     correct=answerNum(base,'m');alts=numericAlts(base,'m');
-    question=`Un cable de <b>${cable} m</b> uneix la part superior d’un pal de <b>${height} m</b> amb el terra. Al costat hi ha una tanca de <b>${irrelevant} m</b> que no intervé en el triangle. A quina distància horitzontal del pal està ancorat el cable?`+svgRightTriangle(base,height,cable,'a');
+    question=`Un cable de <b>${cable} m</b> uneix la part superior d’un pal de <b>${height} m</b> amb el terra. Al costat hi ha una tanca de <b>${irrelevant} m</b> que no intervé en el triangle. A quina distància horitzontal del pal està ancorat el cable?`+svgRightTriangle(base,height,cable,'a',null,'m');
     options=uniq4(correct,[answerNum(cable-height,'m'),answerNum(height,'m'),answerNum(Math.sqrt(cable*cable+height*height),'m',2),answerNum(base+irrelevant,'m')]);
     guide=['Descarta la dada que no forma part del triangle rectangle.','El cable és la hipotenusa i l’altura del pal és un catet.','Busca l’altre catet amb Pitàgores.'];
     solution=[`x² = ${cable}² − ${height}².`,`x² = ${cable*cable-height*height}.`,`x = ${base} m.`,`✅ ${correct}`];
@@ -1559,7 +1563,7 @@ function genSemblanca3r(forceType){
   if(type===1){
     const pairs=[[8,12],[10,25],[12,18],[16,24]],p=pairs[rnd(0,pairs.length-1)],orig=p[0],copy=p[1],k=orig/copy;
     correct=fmtNum(k,3);alts=[String(k),fmtNum(k,3)];
-    question=`Una figura té un costat de <b>${orig} cm</b> i la seva ampliació té el costat corresponent de <b>${copy} cm</b>. Quina és la <b>raó de semblança de l’original respecte de l’ampliació</b>?`+svgRectPair(orig,orig*0.6,copy,copy*0.6,'Original','Ampliació');
+    question=`Una figura té un costat de <b>${orig} cm</b> i la seva ampliació té el costat corresponent de <b>${copy} cm</b>. Quina és la <b>raó de semblança de l’original respecte de l’ampliació</b>?`+svgRectPair(orig,fmtNum(orig*0.6),copy,fmtNum(copy*0.6),'Original','Ampliació');
     options=uniq4(correct,[fmtNum(copy/orig,3),fmtNum((copy-orig)/orig,3),fmtNum(orig/copy+0.5,3),fmtNum((orig+copy)/copy,3)]);
     guide=['Fixa’t en el sentit de la raó que demana l’enunciat.','Compara longitud de la figura original amb la longitud corresponent de l’ampliació.'];
     solution=[`k = ${orig}/${copy}.`,`k = ${fmtNum(k,3)}.`,`✅ ${correct}`];
@@ -1646,7 +1650,7 @@ function rotatedOrigin(x,y,deg){
 function shiftPhrase(dx,dy){
   const a=dx===0?'':Math.abs(dx)+' '+(dx>0?'a la dreta':'a l’esquerra');
   const b=dy===0?'':Math.abs(dy)+' '+(dy>0?'amunt':'avall');
-  return [a,b].filter(Boolean).join(' i ');
+  return [a,b].filter(Boolean).join(' i ')||'Cap desplaçament (identitat)';
 }
 let transformacions3rTypeBag=[];
 function nextTransformacions3rType(){if(!transformacions3rTypeBag.length)transformacions3rTypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return transformacions3rTypeBag.pop()}
@@ -1714,7 +1718,7 @@ function genTransformacions3r(forceType){
     guide=['Observa si les coordenades canvien de signe, s’intercanvien o s’hi suma una quantitat.','Compara el patró amb els moviments bàsics respecte de l’origen i dels eixos.'];
     solution=[`La regla ${it.r} correspon a <b>${correct}</b>.`,`✅ ${correct}`];difficulty='hard';
   }else{
-    const x=shuffle([-3,-2,-1,1,2,3])[0],y=shuffle([-3,-2,-1,1,2,3])[0],kind=shuffle(['X','Y','180'])[0],B=kind==='180'?rotatedOrigin(x,y,180):reflectedPoint(x,y,kind);correct=kind==='X'?'Simetria respecte de l’eix X':kind==='Y'?'Simetria respecte de l’eix Y':'Gir de 180°';allowOpen=false;
+    const x=shuffle([-3,-2,-1,1,2,3])[0],y=shuffle([-3,-2,-1,1,2,3].filter(v=>Math.abs(v)!==Math.abs(x)))[0],kind=shuffle(['X','Y','180'])[0],B=kind==='180'?rotatedOrigin(x,y,180):reflectedPoint(x,y,kind);correct=kind==='X'?'Simetria respecte de l’eix X':kind==='Y'?'Simetria respecte de l’eix Y':'Gir de 180°';allowOpen=false;
     question=`Observa A${coordStr(x,y)} i la seva imatge A′${coordStr(B.x,B.y)}. Quin moviment respecte dels eixos o de l’origen explica la transformació?`+svgCoordPlane({points:[{x,y,label:'A'},{x:B.x,y:B.y,label:'A′'}]});
     options=uniq4(correct,['Simetria respecte de l’eix X','Simetria respecte de l’eix Y','Gir de 180°','Gir de 90° antihorari','Translació']);
     guide=['Compara primer els signes de x i y entre A i A′.','Mira si canvia un sol signe o tots dos.'];
@@ -1920,7 +1924,7 @@ function miReviewHtml(ex){
 
 function registerError(ex,studentAnswer,source='practice'){
   if(!ex)return;const topic=TOPICS.find(t=>t.id===ex.topicId)||TOPICS[state.currentTopic];
-  const err={id:Date.now()+'_'+Math.random().toString(36).slice(2,8),topicId:ex.topicId||topic.id,topicName:topic.name,type:ex.type,question:ex.question,correct:ex.correct,answer:studentAnswer,options:[...(ex.options||[])],guide:[...(ex.guide||[])],review:miReviewPoints(ex),solution:[...(ex.solution||[])],level:source==='exam'?0:state.level,source,timestamp:new Date().toISOString()};
+  const err={id:Date.now()+'_'+Math.random().toString(36).slice(2,8),topicId:ex.topicId||topic.id,topicName:topic.name,type:ex.type,difficultyVariant:ex.difficultyVariant,question:ex.question,correct:ex.correct,answer:studentAnswer,options:[...(ex.options||[])],guide:[...(ex.guide||[])],review:miReviewPoints(ex),solution:[...(ex.solution||[])],level:source==='exam'?0:state.level,source,timestamp:new Date().toISOString()};
   const last=state.errors[state.errors.length-1];
   if(!(last&&last.topicId===err.topicId&&last.type===err.type&&last.question===err.question&&last.answer===err.answer&&last.source===err.source))state.errors.push(err);
   if(state.errors.length>200)state.errors=state.errors.slice(-200);saveState();

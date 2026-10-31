@@ -1,0 +1,27 @@
+const fs=require('fs'),assert=require('assert/strict'),topics=[];
+const source=JSON.parse(fs.readFileSync('docs/dificultats/auditoria-global-mostres-punt2.json')).blocks.find(b=>b.course==='2eso'&&b.sense==='espacial');
+function rows(topic,level,types,reason){for(const type of types){const old=source.topics.find(t=>t.id===topic)?.types.find(t=>t.type===String(type));assert(old,topic+':'+type);topics.push({topic,type,level,reason,previous:old.levels||[],samples:old.variants.map(v=>v.question)});}}
+rows('semblanca',1,[2,3,6,7,8,10],'Raó directa o inversa, angles corresponents, congruència per moviment o escala lineal del perímetre.');
+rows('semblanca',2,[1,4,5,9,11],'Contrastar proporcionalitat de diverses dimensions o obtenir la raó i aplicar-la al costat desconegut.');
+rows('tales',1,[3,4,5,6,10],'Aplicar l’escala donada i la conversió d’unitats indicada; procediment explícit estàndard.');
+rows('tales',2,[1,2,7,8,9],'Relacionar costats homòlegs o alçades i ombres per reconstruir la longitud desconeguda.');
+rows('pitagores',1,[1,2,3,4,5],'Identificar hipotenusa, usar l’àrea dels quadrats o aplicar directament el teorema i la seva comprovació.');
+rows('pitagores',2,[6,7,8,9,10],'Identificar el triangle rectangle dins una figura o context; la isòsceles exigeix reconstruir la semibase.');
+rows('cossos',1,[1,2,3,4,5,6,7,8,9,10],'Reconèixer un cos i les seves parts o aplicar/invertir el recompte estàndard de cares, arestes i vèrtexs.');
+rows('visual3d',1,[6,9],'Llegir les posicions ocupades de la base o reconèixer una secció paral·lela estàndard.');
+rows('visual3d',2,[1,2,3,4,5,7],'Plegar mentalment, coordinar columnes ocultes i visibles, construir una vista o comparar construcció i prisma complet.');
+rows('visual3d',3,[8],'Seleccionar una construcció per tres restriccions: cada distractor coincideix en dues projeccions i falla en una de diferent. Cap vista sola resol la tria.');
+rows('coordenades',1,[1,2,3,5,8,9,10],'Llegir coordenades, quadrant, figura, distància axial, tipus/tendència d’una recta o pertinença directa d’un punt.');
+rows('coordenades',2,[4,6,7],'Reconstruir el vèrtex o punt mig, o connectar diferències de coordenades amb Pitàgores.');
+rows('modelitzacio',1,[6,9],'Reconèixer l’eina geomètrica o el tipus de relació d’un context explícit.');
+rows('modelitzacio',2,[1,2,4,5,7,8,10],'Connectar representacions i passos estàndard: escala/diagonal, perímetre, trajectes, cubs o equació del context.');
+topics.find(r=>r.topic==='modelitzacio'&&r.type===10).variants={scale:{level:1,reason:'La branca d’escala només reconeix la multiplicació pel factor donat; no exigeix formular el triangle o la proporció d’ombres.'}};
+rows('modelitzacio',3,[3],'Reconstruir primer l’alçada amb ombres i després triar un altre triangle per calcular el cable; la cadena de dos models no és explicitada.');
+rows('pitagores3r',2,[1,2,3,4,5,6,7,8],'Reconstruir triangles plans o espacials i aplicar un o dos passos de Pitàgores, inclosos semidiagonals i coordenades. Contingut de 3r; no alta per ser ampliació.');
+rows('semblanca3r',1,[1,2,3,4,9],'Raó de longituds, perímetres, àrees o volums i operació inversa directa de la potència. Contingut de 3r.');
+rows('semblanca3r',2,[5,6,7,8],'Coordinar canvi d’impressió/escala, segments parcials de Tales, ombres i maqueta o semblança i Pitàgores. Contingut de 3r.');
+rows('transformacions3r',1,[1,2,3,4,5,6,7,8,9,10],'Identificar o aplicar directament una isometria, fins i tot a un vèrtex indicat. Gir de 270° i signes no creen alta. Contingut de 3r.');
+rows('transformacionsAv3r',1,[10],'Dividir 360° per l’angle donat i comprovar si el nombre de peces és enter. Contingut de 3r.');
+rows('transformacionsAv3r',2,[1,2,3,4,5,6,7,8,9],'Compondre, comparar l’ordre o invertir transformacions explícites; seguir un punt o deduir el moviment equivalent. Contingut de 3r.');
+for(const t of source.topics)assert.deepEqual(topics.filter(r=>r.topic===t.id).map(r=>String(r.type)).sort(),t.types.map(r=>r.type).sort(),'Cens '+t.id);
+fs.writeFileSync('docs/dificultats/revisio-2eso-espacial-punt3.json',JSON.stringify({course:'2eso',sense:'espacial',status:'reclassified-with-gaps',topics,banks:[],note:'107 tipus, set temes ordinaris i quatre ampliacions de 3r. Dues famílies altes ordinàries; cobertura alta absent als altres temes.'},null,2)+'\n');

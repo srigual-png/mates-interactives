@@ -1,13 +1,18 @@
 {
   "status": "partial",
-  "reviewedBlocks": 7,
-  "pendingBlocks": 13,
-  "nextBlock": "2eso/algebraic",
-  "published": true,
+  "reviewedBlocks": 10,
+  "pendingBlocks": 10,
+  "nextBlock": "3eso/numeric",
+  "batchSize": 2,
+  "nextBlocks": [
+    "3eso/numeric",
+    "3eso/mesura"
+  ],
+  "published": false,
   "publication": {
-    "commit": "d01d71ac4c6456ed19f51bb03e229e83dbf464ba",
+    "commit": "8e9417549290216e4f5a07e14ec28b68fc550d5d",
     "url": "https://srigual-png.github.io/mates-interactives/",
-    "verifiedAt": "2026-10-30T21:44:52.118Z"
+    "verifiedAt": "2026-10-30T21:53:20.306Z"
   },
   "blocks": [
     {
@@ -1224,17 +1229,511 @@
     {
       "course": "2eso",
       "sense": "algebraic",
-      "status": "pending"
+      "status": "classification-reviewed",
+      "identifiers": 136,
+      "bankEntries": 0,
+      "baseLevels": [
+        81,
+        55,
+        0
+      ],
+      "bankLevels": [
+        0,
+        0,
+        0
+      ],
+      "variants": [
+        {
+          "topic": "equacions",
+          "type": 11,
+          "key": "distribute",
+          "level": 2,
+          "reason": "La branca demana distribuir i sumar el terme independent, dues transformacions connectades; les altres branques resten un únic terme indicat."
+        }
+      ],
+      "coverage": [
+        {
+          "topic": "patrons",
+          "levels": [
+            4,
+            4,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "expressions",
+          "levels": [
+            8,
+            2,
+            0
+          ],
+          "exam": [
+            8,
+            4,
+            0
+          ]
+        },
+        {
+          "topic": "equacions",
+          "levels": [
+            2,
+            11,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "problemes",
+          "levels": [
+            2,
+            10,
+            0
+          ],
+          "exam": [
+            2,
+            10,
+            0
+          ]
+        },
+        {
+          "topic": "relacions",
+          "levels": [
+            10,
+            2,
+            0
+          ],
+          "exam": [
+            10,
+            2,
+            0
+          ]
+        },
+        {
+          "topic": "funcionslineals",
+          "levels": [
+            11,
+            6,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "computacional",
+          "levels": [
+            9,
+            8,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "productes3r",
+          "levels": [
+            14,
+            2,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "identitats3r",
+          "levels": [
+            14,
+            2,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "sistemes3r",
+          "levels": [
+            7,
+            9,
+            0
+          ],
+          "exam": null
+        }
+      ],
+      "sampling": {
+        "generated": 30000,
+        "practiceConfigurations": 84,
+        "bankChecks": [],
+        "pageErrors": []
+      }
     },
     {
       "course": "2eso",
       "sense": "espacial",
-      "status": "pending"
+      "status": "classification-reviewed",
+      "identifiers": 107,
+      "bankEntries": 0,
+      "baseLevels": [
+        53,
+        52,
+        2
+      ],
+      "bankLevels": [
+        0,
+        0,
+        0
+      ],
+      "variants": [
+        {
+          "topic": "modelitzacio",
+          "type": 10,
+          "key": "scale",
+          "level": 1,
+          "reason": "La branca d’escala només reconeix la multiplicació pel factor donat; no exigeix formular el triangle o la proporció d’ombres."
+        }
+      ],
+      "coverage": [
+        {
+          "topic": "semblanca",
+          "levels": [
+            6,
+            5,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "tales",
+          "levels": [
+            5,
+            5,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "pitagores",
+          "levels": [
+            5,
+            5,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "cossos",
+          "levels": [
+            10,
+            0,
+            0
+          ],
+          "exam": [
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "topic": "visual3d",
+          "levels": [
+            2,
+            6,
+            1
+          ],
+          "exam": [
+            3,
+            6,
+            3
+          ]
+        },
+        {
+          "topic": "coordenades",
+          "levels": [
+            7,
+            3,
+            0
+          ],
+          "exam": [
+            7,
+            5,
+            0
+          ]
+        },
+        {
+          "topic": "modelitzacio",
+          "levels": [
+            3,
+            7,
+            1
+          ],
+          "exam": [
+            3,
+            7,
+            2
+          ]
+        },
+        {
+          "topic": "pitagores3r",
+          "levels": [
+            0,
+            8,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "semblanca3r",
+          "levels": [
+            5,
+            4,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "transformacions3r",
+          "levels": [
+            10,
+            0,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "transformacionsAv3r",
+          "levels": [
+            1,
+            9,
+            0
+          ],
+          "exam": null
+        }
+      ],
+      "sampling": {
+        "generated": 34498,
+        "practiceConfigurations": 84,
+        "bankChecks": [],
+        "pageErrors": []
+      }
     },
     {
       "course": "2eso",
       "sense": "estocastic",
-      "status": "pending"
+      "status": "classification-reviewed",
+      "identifiers": 133,
+      "bankEntries": 0,
+      "baseLevels": [
+        95,
+        38,
+        0
+      ],
+      "bankLevels": [
+        0,
+        0,
+        0
+      ],
+      "variants": [
+        {
+          "topic": "frequencias",
+          "type": 6,
+          "key": "all",
+          "level": 1,
+          "reason": "El llindar és el valor màxim de la taula: inclou tota la mostra i el percentatge és directament 100%."
+        },
+        {
+          "topic": "centralitzacio",
+          "type": 12,
+          "key": "outlier",
+          "level": 2,
+          "reason": "Triar un centre representatiu relacionant l’extrem amb la sensibilitat de les mesures, en lloc de reconèixer una afirmació directa."
+        },
+        {
+          "topic": "investigacions",
+          "type": 12,
+          "key": "headline",
+          "level": 2,
+          "reason": "Contrastar titular i abast de la mostra; no és la lectura de l’ordre de l’informe."
+        },
+        {
+          "topic": "investigacions",
+          "type": 8,
+          "key": "validCount",
+          "level": 1,
+          "reason": "La branca només resta les respostes en blanc del total indicat."
+        },
+        {
+          "topic": "probabilitat3r",
+          "type": 6,
+          "key": "replacement",
+          "level": 1,
+          "reason": "Amb reposició i primera extracció ja donada, la composició es conserva; només es llegeix la proporció original."
+        },
+        {
+          "topic": "probabilitat3r",
+          "type": 12,
+          "key": "repetition",
+          "level": 1,
+          "reason": "Amb repetició permesa s’aplica directament la potència del nombre de símbols al nombre de posicions."
+        }
+      ],
+      "coverage": [
+        {
+          "topic": "dades",
+          "levels": [
+            6,
+            2,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "frequencias",
+          "levels": [
+            11,
+            2,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "grafics",
+          "levels": [
+            10,
+            2,
+            0
+          ],
+          "exam": [
+            10,
+            2,
+            0
+          ]
+        },
+        {
+          "topic": "centralitzacio",
+          "levels": [
+            8,
+            5,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "investigacions",
+          "levels": [
+            5,
+            9,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "probabilitat",
+          "levels": [
+            13,
+            2,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "experiments",
+          "levels": [
+            7,
+            6,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "intervals3r",
+          "levels": [
+            12,
+            1,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "grafics3r",
+          "levels": [
+            11,
+            1,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "dispersio3r",
+          "levels": [
+            8,
+            4,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "probabilitat3r",
+          "levels": [
+            8,
+            6,
+            0
+          ],
+          "exam": null
+        }
+      ],
+      "sampling": {
+        "generated": 38550,
+        "practiceConfigurations": 84,
+        "bankChecks": [],
+        "pageErrors": []
+      }
     },
     {
       "course": "3eso",
@@ -1289,9 +1788,9 @@
   ],
   "note": "Reclassificat no equival a certificació exhaustiva de totes les solucions i dibuixos. Els nivells poden continuar amb buits. La publicació validada es documenta al camp publication; les revisions posteriors requereixen una nova publicació.",
   "validation": {
-    "newBlocks": 6,
-    "generated": 197504,
-    "practiceConfigurations": 540,
+    "newBlocks": 9,
+    "generated": 300552,
+    "practiceConfigurations": 792,
     "bankCases": 7160,
     "examSuites": {
       "passed": 19,
@@ -1310,6 +1809,34 @@
         "localhost and skipgc exclusions",
         "no free text; no additional pageviews"
       ]
-    }
+    },
+    "targetedSuites": [
+      {
+        "file": "comprova-examens-algebraic-2eso.cjs",
+        "exitCode": 0,
+        "checks": "Set temes: correcció, nota, reinici i retorn a pràctica."
+      },
+      {
+        "file": "comprova-regressio-algebraic-2eso.cjs",
+        "exitCode": 0,
+        "checks": "500 generacions: matemàtiques, signes, equivalències, funcions i iteracions; set exàmens, mòbil, general de vint i cercador."
+      },
+      {
+        "file": "comprova-examens-espacial-2eso.cjs",
+        "exitCode": 0
+      },
+      {
+        "file": "comprova-regressio-espacial-2eso.cjs",
+        "exitCode": 0
+      },
+      {
+        "file": "comprova-examens-estocastic-2eso.cjs",
+        "exitCode": 0
+      },
+      {
+        "file": "comprova-regressio-estocastic-2eso.cjs",
+        "exitCode": 0
+      }
+    ]
   }
 }

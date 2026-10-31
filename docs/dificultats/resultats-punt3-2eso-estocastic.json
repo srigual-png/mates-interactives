@@ -1,0 +1,2185 @@
+{
+  "topics": [
+    {
+      "topic": "dades",
+      "types": 8,
+      "coverage": [
+        6,
+        2,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        6,
+        6,
+        0
+      ],
+      "variants": [
+        {
+          "type": 5,
+          "n": 166,
+          "question": "La variable <b>“gols marcats”</b> és...",
+          "correct": "Quantitativa discreta",
+          "solution": [
+            "“gols marcats” s’obté mitjançant un recompte numèric.",
+            "Per tant, és una variable quantitativa discreta."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 727,
+          "question": "En un estudi de <b>un institut</b>, la població és de <b>720 alumnes</b> i es pregunta a <b>60</b> d'ells sobre el/la <b>mitjà de transport per arribar a classe</b>. Quina és la <b>mostra</b>?",
+          "correct": "Els 60 alumnes enquestats",
+          "solution": [
+            "La població té 720 alumnes.",
+            "Només 60 participen directament en l’estudi: aquests formen la mostra."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 72,
+          "question": "En un club esportiu, s’estudia el/la <b>esport principal practicat</b>. Què és un <b>individu</b>?",
+          "correct": "Un esportista",
+          "solution": [
+            "La població està formada per esportistes.",
+            "Cada esportista és un individu."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 60,
+          "question": "Volem <b>valorar el menjador escolar entre els seus usuaris</b>. Quina mostra sembla <b>més representativa</b>?",
+          "correct": "Usuaris del menjador de dies i cursos diferents escollits a l’atzar",
+          "solution": [
+            "L’objectiu és valorar el menjador escolar entre els seus usuaris.",
+            "La millor opció inclou persones de parts diferents de la població i no les selecciona pel resultat que volem estudiar."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 722,
+          "question": "En <b>un club esportiu</b> hi ha <b>360 esportistes</b>. Per estudiar el/la <b>esport principal practicat</b>, se'n seleccionen <b>75</b>. Quina és la <b>població</b>?",
+          "correct": "Els 360 esportistes",
+          "solution": [
+            "L’estudi vol descriure tots els esportistes de un club esportiu.",
+            "Per tant, la població està formada pels 360 esportistes."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 60,
+          "question": "Valora aquesta afirmació:<br><b>“Una mostra representativa hauria d’evitar seleccionar només persones d’un grup molt específic relacionat amb l’estudi.”</b>",
+          "correct": "Correcta",
+          "solution": [
+            "Seleccionar un únic grup relacionat amb el resultat pot esbiaixar la mostra.",
+            "Per tant, l’afirmació és correcta."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 1121,
+          "question": "S’han recollit aquestes dades sobre <b>gols marcats</b>: <div class=\"raw-data\">3 · 4 · 0 · 3 · 1 · 4 · 2 · 3 · 2 · 0 · 1 · 3 · 1 · 0</div><br>Quantes vegades apareix el valor <b>2</b>?",
+          "correct": "2",
+          "solution": [
+            "Busquem totes les aparicions del valor 2.",
+            "Apareix 2 vegadas."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 72,
+          "question": "En <b>un institut</b>, es pregunta a una mostra de alumnes pel/per la <b>mitjà de transport per arribar a classe</b>. Quina és la <b>variable estadística</b>?",
+          "correct": "Mitjà de transport per arribar a classe",
+          "solution": [
+            "De cada individu s’anota mitjà de transport per arribar a classe.",
+            "Aquesta característica és la variable estadística."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "frequencias",
+      "types": 12,
+      "coverage": [
+        11,
+        2,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        6,
+        6,
+        0
+      ],
+      "variants": [
+        {
+          "type": 5,
+          "n": 306,
+          "question": "Observa la taula sobre <b>llibres llegits</b>:<div class=\"stat-table-wrap\"><table class=\"stat-table\"><thead><tr><th>Llibres</th><th>nᵢ</th><th>Nᵢ</th></tr></thead><tbody><tr><td>0</td><td>5</td><td>5</td></tr><tr><td>1</td><td>6</td><td>11</td></tr><tr><td>2</td><td>5</td><td>16</td></tr><tr><td>3</td><td>7</td><td><span class=\"unknown\">?</span></td></tr><tr><td>4</td><td>7</td><td>30</td></tr></tbody></table></div><br>Quina <b>freqüència absoluta acumulada</b> falta?",
+          "correct": "23",
+          "solution": [
+            "Acumulem les freqüències fins al valor 3.",
+            "Nᵢ = 5 + 6 + 5 + 7 = 23."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 307,
+          "question": "Aquesta taula conté <b>un error</b>:<div class=\"stat-table-wrap\"><table class=\"stat-table\"><thead><tr><th>Dies</th><th>nᵢ</th><th>Nᵢ</th></tr></thead><tbody><tr><td>0</td><td>4</td><td>4</td></tr><tr><td>1</td><td>6</td><td>10</td></tr><tr><td>2</td><td>6</td><td><b>17</b></td></tr><tr><td>3</td><td>12</td><td>28</td></tr></tbody></table></div><br>Quina afirmació identifica l’error?",
+          "correct": "L’acumulada del valor 2 hauria de ser 16",
+          "solution": [
+            "Fins al valor 2 cal sumar 4 + 6 + 6.",
+            "El resultat correcte és 16, no 17."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 143,
+          "question": "En una mostra de <b>25</b> alumnes, <b>15</b> han triat una determinada opció. Quina és la <b>freqüència relativa</b> en forma decimal?",
+          "correct": "0,6",
+          "solution": [
+            "Part = 15; total = 25.",
+            "fᵢ = 15/25 = 0,6."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 307,
+          "question": "Observa la taula:<div class=\"stat-table-wrap\"><table class=\"stat-table\"><thead><tr><th>Mascotes</th><th>nᵢ</th></tr></thead><tbody><tr><td>0</td><td>4</td></tr><tr><td>1</td><td>6</td></tr><tr><td>2</td><td>7</td></tr><tr><td>3</td><td>5</td></tr><tr><td>4</td><td>8</td></tr></tbody></table></div><br>Quants individus tenen <b>més de 3</b>?",
+          "correct": "8",
+          "solution": [
+            "Fins a 3 hi ha 22 dades.",
+            "Per tant, 30 − 22 = 8."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 190,
+          "question": "Quina llista de dades, ordenada de menor a major, representa aquesta taula?<div class=\"stat-table-wrap\"><table class=\"stat-table\"><thead><tr><th>Valor</th><th>nᵢ</th></tr></thead><tbody><tr><td>0</td><td>3</td></tr><tr><td>1</td><td>3</td></tr><tr><td>2</td><td>1</td></tr></tbody></table></div>",
+          "correct": "0, 0, 0, 1, 1, 1, 2",
+          "solution": [
+            "Repetim 0 3 vegadas, 1 3 vegadas i 2 1 vegada.",
+            "La llista ordenada és 0, 0, 0, 1, 1, 1, 2."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 307,
+          "question": "Interpreta aquesta taula:<div class=\"stat-table-wrap\"><table class=\"stat-table\"><thead><tr><th>Llibres</th><th>nᵢ</th></tr></thead><tbody><tr><td>0</td><td>6</td></tr><tr><td>1</td><td>5</td></tr><tr><td>2</td><td>3</td></tr><tr><td>3</td><td>5</td></tr><tr><td>4</td><td>11</td></tr></tbody></table></div><br>Quina diferència de freqüència hi ha entre els valors <b>3</b> i <b>0</b>?",
+          "correct": "1",
+          "solution": [
+            "Les freqüències són 5 i 6.",
+            "La diferència és 1."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 307,
+          "question": "A partir d’aquesta taula:<div class=\"stat-table-wrap\"><table class=\"stat-table\"><thead><tr><th>Llibres</th><th>nᵢ</th></tr></thead><tbody><tr><td>0</td><td>12</td></tr><tr><td>1</td><td>3</td></tr><tr><td>2</td><td>8</td></tr><tr><td>3</td><td>2</td></tr></tbody></table></div><br>Quin percentatge representa tenir <b>com a màxim 3</b>?",
+          "correct": "100%",
+          "solution": [
+            "Fins a 3 hi ha 25 dades de 25.",
+            "La freqüència relativa acumulada és 1, és a dir, 100%."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 307,
+          "question": "Aquestes dades representen el/la <b>gols marcats</b>: <div class=\"raw-data\">0 · 4 · 4 · 4 · 0 · 3 · 3 · 2 · 3 · 3 · 4 · 1 · 2 · 2</div><br>Quina és la <b>freqüència absoluta</b> de <b>4</b>?",
+          "correct": "4",
+          "solution": [
+            "Comptem les aparicions de 4.",
+            "La freqüència absoluta és 4."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 178,
+          "question": "En un grup de <b>100</b> persones, una categoria té freqüència relativa <b>20%</b>. Quina és la seva <b>freqüència absoluta</b>?",
+          "correct": "20",
+          "solution": [
+            "20% del total correspon a la categoria.",
+            "La freqüència absoluta és 20."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 306,
+          "question": "Completa la cel·la marcada:<div class=\"stat-table-wrap\"><table class=\"stat-table\"><thead><tr><th>Mascotes</th><th>nᵢ</th><th>fᵢ</th></tr></thead><tbody><tr><td>0</td><td>8</td><td>0,286</td></tr><tr><td>1</td><td>10</td><td><span class=\"unknown\">?</span></td></tr><tr><td>2</td><td>3</td><td>0,107</td></tr><tr><td>3</td><td>7</td><td>0,25</td></tr></tbody></table></div><br>Quina freqüència relativa falta?",
+          "correct": "0,357",
+          "solution": [
+            "La fila marcada té nᵢ = 10 i el total és 28.",
+            "fᵢ = 10/28 = 0,357."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 302,
+          "question": "En total hi ha <b>24 dades</b>. Completa la freqüència que falta:<div class=\"stat-table-wrap\"><table class=\"stat-table\"><thead><tr><th>Valor</th><th>nᵢ</th></tr></thead><tbody><tr><td>0</td><td>6</td></tr><tr><td>1</td><td>5</td></tr><tr><td>2</td><td>2</td></tr><tr><td>3</td><td><span class=\"unknown\">?</span></td></tr></tbody></table></div>",
+          "correct": "11",
+          "solution": [
+            "El total és 24.",
+            "Les freqüències conegudes sumen 13.",
+            "La freqüència que falta és 11."
+          ]
+        },
+        {
+          "type": 12,
+          "n": 40,
+          "question": "Decideix si aquesta informació pot correspondre a una taula de freqüències correcta:<br><b>Les freqüències relatives són 0,20; 0,35; 0,15 i 0,30.</b>",
+          "correct": "És possible",
+          "solution": [
+            "Totes són no negatives i sumen exactament 1.",
+            "Per tant: És possible."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "grafics",
+      "types": 12,
+      "coverage": [
+        10,
+        2,
+        0
+      ],
+      "generated": 3862,
+      "exam": [
+        10,
+        2,
+        0
+      ],
+      "variants": [
+        {
+          "type": 6,
+          "n": 787,
+          "question": "Segons el pictograma, quants individus representa <b>Futbol</b>?",
+          "correct": "14",
+          "solution": [
+            "Cada ★ representa 4 individus.",
+            "La fila de Futbol correspon a 14 individus."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 105,
+          "question": "Quin valor és el més freqüent al gràfic de punts?",
+          "correct": "6",
+          "solution": [
+            "El valor 6 és el que té més punts apilats.",
+            "Per tant, és el valor més freqüent."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 15,
+          "question": "El gràfic representa correctament la taula?",
+          "correct": "No, hi ha una barra que no coincideix amb la taula",
+          "solution": [
+            "A la taula, Bàsquet té freqüència 11.",
+            "Al gràfic s’ha representat amb 14; per tant, no coincideix."
+          ]
+        },
+        {
+          "type": 12,
+          "n": 16,
+          "question": "Quina informació imprescindible permet comprovar que aquest gràfic representa bé la taula?",
+          "correct": "Les categories, l’escala i les freqüències representades",
+          "solution": [
+            "Cal poder identificar les categories, llegir l’escala i comparar les altures amb les freqüències de la taula.",
+            "Aquests elements permeten verificar la representació."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 732,
+          "question": "Quants individus hi ha en total entre <b>Fruita</b> i <b>Cereals</b>?",
+          "correct": "11",
+          "solution": [
+            "Fruita té freqüència 7 i Cereals en té 4.",
+            "El total conjunt és 11."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 15,
+          "question": "Per què aquest gràfic pot exagerar visualment la diferència entre A i B?",
+          "correct": "Perquè l’eix vertical està truncat i no comença a zero",
+          "solution": [
+            "Els valors són 97 i 100: la diferència real és 3.",
+            "Com que l’eix comença a 95 i no a 0, aquesta diferència ocupa una gran part de l’altura disponible."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 778,
+          "question": "Observa el gràfic de barres sobre <b>activitat extraescolar</b>. Quina freqüència té <b>Robòtica</b>?",
+          "correct": "10",
+          "solution": [
+            "La barra de Robòtica arriba fins al valor 10.",
+            "Per tant, la freqüència és 10."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 53,
+          "question": "Quin tipus de gràfic és especialment adequat per <b>mostrar quina part del 100% correspon a cada mitjà de transport</b>?",
+          "correct": "Diagrama de sectors",
+          "solution": [
+            "L’objectiu és mostrar quina part del 100% correspon a cada mitjà de transport.",
+            "La representació especialment adequada és: Diagrama de sectors."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 156,
+          "question": "En un grup de <b>40</b> alumnes, un sector representa el <b>20%</b>. Quants alumnes representa?",
+          "correct": "8",
+          "solution": [
+            "Cal trobar el 20% d’un total de 40 alumnes.",
+            "Aquesta part correspon a 8 alumnes."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 209,
+          "question": "Quina afirmació és correcta segons el gràfic?",
+          "correct": "Fruita és la categoria més freqüent",
+          "solution": [
+            "Fruita té la freqüència màxima, 15.",
+            "Per tant, aquesta és l’afirmació correcta."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 786,
+          "question": "Quin percentatge del total correspon a <b>Bus</b>?",
+          "correct": "40%",
+          "solution": [
+            "La llegenda associa Bus amb el 40%.",
+            "Per tant, representa el 40% del total."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 210,
+          "question": "En aquest diagrama de Pareto, quina categoria apareix en primer lloc?",
+          "correct": "Música",
+          "solution": [
+            "Música té la freqüència més alta: 14.",
+            "Per això apareix en primer lloc."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "centralitzacio",
+      "types": 12,
+      "coverage": [
+        8,
+        5,
+        0
+      ],
+      "generated": 4786,
+      "exam": [
+        6,
+        6,
+        0
+      ],
+      "variants": [
+        {
+          "type": 8,
+          "n": 58,
+          "question": "Quina és la <b>moda</b> de la variable qualitativa?",
+          "correct": "Cotxe",
+          "solution": [
+            "Cotxe té la freqüència més alta: 11.",
+            "Per tant, aquesta categoria és la moda."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 856,
+          "question": "Calcula la <b>mitjana</b> de: <div class=\"raw-data\">10 · 8 · 4 · 6 · 9 · 7 · 5</div>",
+          "correct": "7",
+          "solution": [
+            "La suma de les dades és 49 i hi ha 7 dades.",
+            "La mitjana és 7."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 860,
+          "question": "Quina és la <b>moda</b> de: <div class=\"raw-data\">5 · 8 · 1 · 5 · 5 · 6 · 7</div>",
+          "correct": "5",
+          "solution": [
+            "La freqüència màxima correspon a 5.",
+            "Per tant, la moda és 5."
+          ]
+        },
+        {
+          "type": 12,
+          "n": 29,
+          "question": "Sous mensuals: <div class=\"raw-data\">1500 · 1600 · 1650 · 1700 · 12000</div><br>Quina mesura descriu millor un sou central típic sense quedar tan afectada pel valor de 12.000 €?",
+          "correct": "Mediana",
+          "solution": [
+            "El valor de 12.000 € fa pujar molt la mitjana.",
+            "La mediana depèn de la posició central i representa millor el centre d’aquest conjunt."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 15,
+          "question": "Els dos grups tenen la mateixa mitjana. Quin és <b>més homogeni</b> segons el rang?",
+          "correct": "Grup A",
+          "solution": [
+            "Tots dos tenen mitjana 7.",
+            "El grup A té rang 2 i el B rang 8; A és més homogeni segons aquesta mesura."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 863,
+          "question": "Troba la <b>mediana</b> de les dades: <div class=\"raw-data\">7 · 13 · 11 · 4 · 5 · 2 · 9</div>",
+          "correct": "7",
+          "solution": [
+            "Ordenades: 2, 4, 5, 7, 9, 11, 13.",
+            "La dada central és 7."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 264,
+          "question": "Calcula la <b>mitjana</b> de les dades de la taula.",
+          "correct": "1,85",
+          "solution": [
+            "El total de dades és 20 i la suma ponderada Σ(xᵢ·nᵢ) és 37.",
+            "Mitjana = 37/20 = 1,85."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 865,
+          "question": "Dades: <div class=\"raw-data\">4 · 9 · 8 · 5 · 2</div><br>Quin és el <b>mínim</b>?",
+          "correct": "2",
+          "solution": [
+            "El valor més petit del conjunt és 2."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 57,
+          "question": "La mitjana de <b>5</b> valors és <b>5</b>. Quatre valors són 3, 4, 6, 7. Quin és el cinquè valor?",
+          "correct": "5",
+          "solution": [
+            "Cinc valors amb mitjana 5 han de sumar 25.",
+            "Els quatre valors coneguts sumen 20; el valor que falta és 5."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 58,
+          "question": "Quina mesura és més adequada per <b>saber quin color preferit és el més habitual</b>?",
+          "correct": "Moda",
+          "solution": [
+            "Per saber quin color preferit és el més habitual, la mesura adequada és Moda."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 28,
+          "question": "Quina és la <b>mediana</b> de les dades representades a la taula?",
+          "correct": "2",
+          "solution": [
+            "La taula representa 10 dades.",
+            "Les posicions centrals corresponen al valor 2; aquesta és la mediana."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 833,
+          "question": "Troba la <b>mediana</b> de les dades: <div class=\"raw-data\">6 · 2 · 9 · 14 · 4 · 11</div>",
+          "correct": "7,5",
+          "solution": [
+            "Ordenades: 2, 4, 6, 9, 11, 14.",
+            "Les dues dades centrals són 6 i 9; la mediana és 7,5."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "investigacions",
+      "types": 12,
+      "coverage": [
+        5,
+        9,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        6,
+        6,
+        0
+      ],
+      "variants": [
+        {
+          "type": 7,
+          "n": 103,
+          "question": "Quin problema té aquesta pregunta o les seves opcions?<br><b>Quantes vegades llegeixes? A) mai B) 1–3 cops C) 3–5 cops D) més de 5</b>",
+          "correct": "Les opcions 1–3 i 3–5 se solapen en el valor 3.",
+          "solution": [
+            "Les opcions 1–3 i 3–5 se solapen en el valor 3.",
+            "✅ Cal reformular la pregunta o les opcions perquè cada resposta sigui inequívoca."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 39,
+          "question": "Quin ordre descriu millor les fases d’una investigació estadística?",
+          "correct": "Pregunta → mostra/recollida → organització i anàlisi → conclusions → informe",
+          "solution": [
+            "L’objectiu guia la selecció de dades i el mètode.",
+            "Després de recollir i analitzar, podem concloure i comunicar els resultats en un informe."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 633,
+          "question": "En una mostra de <b>200 alumnes</b>, <b>130</b> prefereixen començar les classes una mica més tard (65%). Quina conclusió està justificada?",
+          "correct": "En aquesta mostra, aproximadament el 65% prefereix començar més tard",
+          "solution": [
+            "Les dades descriuen directament la mostra de 200 alumnes.",
+            "✅ La conclusió segura és limitar-se a aquesta mostra."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 138,
+          "question": "Volem estudiar quants llibres llegeixen els habitants del barri cada mes. Quina mostra sembla <b>més representativa</b>?",
+          "correct": "habitants de diferents edats i zones seleccionats a l’atzar",
+          "solution": [
+            "La mostra «habitants de diferents edats i zones seleccionats a l’atzar» dona oportunitat de participar a perfils diferents.",
+            "Les altres opcions seleccionen grups relacionats amb l’hàbit que es vol estudiar."
+          ]
+        },
+        {
+          "type": 12,
+          "n": 172,
+          "question": "Quin ordre és més adequat per a un informe estadístic breu?",
+          "correct": "Objectiu → mostra i mètode → resultats → conclusions",
+          "solution": [
+            "Primer expliquem l’objectiu i la metodologia.",
+            "Després presentem els resultats i, finalment, les conclusions justificades."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 207,
+          "question": "La pregunta <b>«Quants llibres llegeixen els alumnes durant un trimestre?»</b> és una pregunta estadística?",
+          "correct": "Sí, perquè esperem variabilitat en les respostes",
+          "solution": [
+            "Podem obtenir respostes diferents segons l’individu.",
+            "✅ Sí, perquè esperem variabilitat en les respostes."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 410,
+          "question": "Per estudiar quants llibres llegeixen els habitants del barri cada mes, s’enquesta <b>només els usuaris de la biblioteca</b>. Quin és el principal problema?",
+          "correct": "La mostra pot estar esbiaixada i no representar tota la població",
+          "solution": [
+            "Seleccionar només els usuaris de la biblioteca afavoreix un perfil concret.",
+            "✅ Això pot introduir biaix i dificultar la generalització."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 138,
+          "question": "Quina pregunta és <b>més neutral</b> per a una enquesta?",
+          "correct": "Com valores la mida actual del pati?",
+          "solution": [
+            "«Com valores la mida actual del pati?» permet respondre sense empènyer cap a una opinió concreta.",
+            "✅ És la formulació més neutral."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 524,
+          "question": "Un centre té <b>900 alumnes</b>. Per conèixer l’opinió de tot l’alumnat sobre el pati, es pregunta només a <b>3 alumnes</b>. Quina valoració és més raonable?",
+          "correct": "La mostra és massa petita per donar gaire confiança sobre tota la població",
+          "solution": [
+            "Només 3 respostes representen una població de 900.",
+            "✅ És una base massa feble per generalitzar amb confiança."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 143,
+          "question": "Volem <b>valorar l’ús dels espais del pati</b>. Quina és la població de l’estudi?",
+          "correct": "tots els alumnes del centre",
+          "solution": [
+            "L’objectiu parla de tots els alumnes del centre.",
+            "✅ Població: tots els alumnes del centre."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 103,
+          "question": "Volem <b>saber quin mitjà de transport utilitzen habitualment els alumnes</b>. Quin mètode de recollida és més adequat?",
+          "correct": "Fer una enquesta a una mostra representativa d’alumnes",
+          "solution": [
+            "«Fer una enquesta a una mostra representativa d’alumnes» recull informació directament relacionada amb l’objectiu.",
+            "✅ És l’opció més adequada entre les proposades."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 390,
+          "question": "En una enquesta sobre hores de son al dia apareixen aquestes dades:<div class=\"raw-data\">7 · 8 · 6 · 7 · 35 · 8 · 9</div>Què convé fer amb el valor <b>35</b> abans d’analitzar?",
+          "correct": "Comprovar si és un error i corregir-lo o eliminar-lo només si es confirma",
+          "solution": [
+            "35 hores de son en un dia és impossible.",
+            "Cal revisar l’origen de la dada; només si es confirma l’error s’ha de corregir o excloure."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "probabilitat",
+      "types": 15,
+      "coverage": [
+        13,
+        2,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        6,
+        6,
+        0
+      ],
+      "variants": [
+        {
+          "type": 3,
+          "n": 32,
+          "question": "Classifica l’esdeveniment: <b>obtenir cara amb una moneda equilibrada</b>.",
+          "correct": "Possible però no segur",
+          "solution": [
+            "Analitzem els resultats possibles de l’experiment.",
+            "✅ L’esdeveniment és: Possible però no segur."
+          ]
+        },
+        {
+          "type": 13,
+          "n": 144,
+          "question": "Un esdeveniment té probabilitat teòrica <b>0,5</b>. Si repetim l’experiment <b>200</b> vegades, quantes vegades esperaríem que passés <b>aproximadament</b>?",
+          "correct": "100",
+          "solution": [
+            "Nombre esperat aproximat = probabilitat × repeticions.",
+            "✅ Aproximadament 100 vegades."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 606,
+          "question": "Una ruleta té <b>12 sectors iguals</b> i <b>11</b> són vermells. Quina probabilitat hi ha d’aturar-se en un sector vermell?",
+          "correct": "11/12",
+          "solution": [
+            "Favorables = 11; possibles = 12.",
+            "P = 11/12 = 11/12."
+          ]
+        },
+        {
+          "type": 12,
+          "n": 312,
+          "question": "Una moneda equilibrada té probabilitat teòrica de cara <b>0,5</b>. En 100 llançaments han sortit <b>63 cares</b>, és a dir, freqüència experimental <b>0,63</b>. Quina afirmació és correcta?",
+          "correct": "La diferència és possible en una mostra finita i no demostra per si sola que la moneda estigui trucada",
+          "solution": [
+            "La probabilitat teòrica continua sent 0,5 si la moneda és equilibrada.",
+            "La freqüència experimental pot variar d’una sèrie a una altra."
+          ]
+        },
+        {
+          "type": 14,
+          "n": 38,
+          "question": "En una simulació d’una moneda equilibrada, després de <b>10000</b> llançaments la freqüència relativa de cara és <b>0,501</b>. Quina idea descriu millor què passa quan augmentem molt el nombre de llançaments?",
+          "correct": "La freqüència relativa tendeix a estabilitzar-se prop de la probabilitat teòrica 0,5",
+          "solution": [
+            "Amb moltes repeticions, les fluctuacions relatives acostumen a reduir-se.",
+            "Aquesta estabilització és la idea intuïtiva de la llei dels grans nombres."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 46,
+          "question": "L’experiment <b>«convertir 2 metres a centímetres»</b> és aleatori o determinista?",
+          "correct": "Determinista",
+          "solution": [
+            "El resultat queda determinat per les dades o regles del problema.",
+            "✅ És determinista."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 89,
+          "question": "Expressa <b>40%</b> com a nombre decimal.",
+          "correct": "0,4",
+          "solution": [
+            "40% significa 40/100.",
+            "✅ En decimal és 0,4."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 38,
+          "question": "Llancem un dau equilibrat. Quina és la probabilitat d’obtenir <b>un nombre menor que 5</b>?",
+          "correct": "2/3",
+          "solution": [
+            "Casos possibles: 6. Casos favorables: 4.",
+            "P = 4/6 = 2/3."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 712,
+          "question": "En una simulació es fan <b>50 repeticions</b> i l’esdeveniment passa <b>22 vegades</b>. Quina és la probabilitat experimental (freqüència relativa)?",
+          "correct": "0,44",
+          "solution": [
+            "Èxits = 22; repeticions = 50.",
+            "Freqüència relativa = 22/50 = 0,44."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 23,
+          "question": "Quin és l’<b>espai mostral</b> de un dau de sis cares?",
+          "correct": "{1, 2, 3, 4, 5, 6}",
+          "solution": [
+            "Els resultats possibles són {1, 2, 3, 4, 5, 6}.",
+            "✅ Aquest és l’espai mostral."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 45,
+          "question": "La probabilitat d’un esdeveniment és <b>0,3</b>. Quina és la probabilitat que <b>no</b> passi?",
+          "correct": "0,7",
+          "solution": [
+            "P(no A) = 1 − P(A).",
+            "P(no A) = 1 − 0,3 = 0,7."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 45,
+          "question": "El valor <b>75%</b> pot ser una probabilitat?",
+          "correct": "Sí",
+          "solution": [
+            "Tota probabilitat compleix 0 ≤ P ≤ 1.",
+            "✅ 75% és un valor possible."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 801,
+          "question": "Una bossa conté <b>3 boles vermelles, 3 blaves i 2 verdes</b>. Si en traiem una a l’atzar, quina és la probabilitat que sigui <b>blava</b>?",
+          "correct": "3/8",
+          "solution": [
+            "Total de boles = 8. Favorables = 3.",
+            "P(blava) = 3/8 = 3/8."
+          ]
+        },
+        {
+          "type": 15,
+          "n": 38,
+          "question": "Per què els jocs d’atzar van ser importants en el desenvolupament històric de la probabilitat?",
+          "correct": "Van plantejar problemes sobre daus, cartes i repartiments que van impulsar l’estudi matemàtic de l’atzar",
+          "solution": [
+            "Els problemes de jocs van motivar preguntes sobre quins resultats eren més probables i com repartir guanys de manera justa.",
+            "Això va contribuir al desenvolupament de la teoria de la probabilitat."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 31,
+          "question": "Els resultats descrits en <b>una ruleta amb un sector que ocupa mitja circumferència i dos sectors petits iguals</b> són equiprobables?",
+          "correct": "No",
+          "solution": [
+            "Els sectors no tenen la mateixa mida.",
+            "✅ Resposta: No."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "experiments",
+      "types": 13,
+      "coverage": [
+        7,
+        6,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        6,
+        6,
+        0
+      ],
+      "variants": [
+        {
+          "type": 5,
+          "n": 612,
+          "question": "En l’arbre, quin és el valor de la probabilitat del camí ressaltat <b>C3</b>, si tots els resultats finals són equiprobables?",
+          "correct": "1/8",
+          "solution": [
+            "Hi ha 8 camins finals equiprobables.",
+            "Un camí concret té probabilitat 1/8 = 1/8."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 195,
+          "question": "Fem un experiment amb <b>una moneda i una ruleta de 3 sectors iguals</b>. Si totes les combinacions són possibles, quants resultats finals diferents hi ha?",
+          "correct": "6",
+          "solution": [
+            "La primera etapa té 2 opcions i la segona 3.",
+            "Resultats finals = 2 · 3 = 6."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 100,
+          "question": "Llancem <b>2 monedes</b>. Quina és la probabilitat que no surti <b>cap cara</b>?",
+          "correct": "1/4",
+          "solution": [
+            "L’únic resultat favorable és XX.",
+            "Hi ha 4 resultats equiprobables.",
+            "P = 1/4 = 1/4."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 53,
+          "question": "Llancem dues monedes consecutivament. Quin és l’espai mostral correcte si <b>C = cara</b> i <b>X = creu</b>?",
+          "correct": "{CC, CX, XC, XX}",
+          "solution": [
+            "Les quatre combinacions són CC, CX, XC, XX.",
+            "✅ Espai mostral: {CC, CX, XC, XX}."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 147,
+          "question": "Llancem una moneda i un dau equilibrats. Quina és la probabilitat d’obtenir <b>cara i un múltiple de 3</b>?",
+          "correct": "1/6",
+          "solution": [
+            "Hi ha 12 resultats finals equiprobables.",
+            "Camins favorables amb cara: C3, C6.",
+            "P = 2/12 = 1/6."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 427,
+          "question": "Amb dos daus equilibrats de <b>4 cares</b>, quina és la probabilitat que la suma sigui <b>4</b>?",
+          "correct": "3/16",
+          "solution": [
+            "Casos possibles = 4 · 4 = 16.",
+            "La suma 4 apareix en 3 parelles.",
+            "P = 3/16 = 3/16."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 149,
+          "question": "Observa l’arbre d’una moneda seguida d’un experiment amb <b>4 resultats equiprobables</b>. Quants camins complets té l’arbre?",
+          "correct": "8",
+          "solution": [
+            "Hi ha 2 branques inicials i 4 finals des de cadascuna.",
+            "Total = 2 · 4 = 8 camins."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 384,
+          "question": "Observa la taula de contingència de dos daus de <b>4 cares</b>. Quantes parelles ordenades donen suma <b>5</b>?",
+          "correct": "4",
+          "solution": [
+            "Comptem les cel·les amb suma 5.",
+            "Hi ha 4 casos favorables."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 99,
+          "question": "Llancem <b>3 monedes</b>. Quina és la probabilitat d’obtenir <b>almenys una cara</b>?",
+          "correct": "7/8",
+          "solution": [
+            "Resultats possibles: CCC, CCX, CXC, CXX, XCC, XCX, XXC, XXX.",
+            "Favorables: 7 de 8.",
+            "P = 7/8 = 7/8."
+          ]
+        },
+        {
+          "type": 12,
+          "n": 150,
+          "question": "Llancem una moneda i un dau. Quina és la probabilitat d’obtenir <b>cara o nombre superior a 4</b> (o totes dues coses)?",
+          "correct": "2/3",
+          "solution": [
+            "La taula marca 8 casos favorables dels 12 possibles.",
+            "P = 8/12 = 2/3."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 291,
+          "question": "L’experiment <b>«extreure una sola carta d’una baralla»</b> és simple o compost?",
+          "correct": "Simple",
+          "solution": [
+            "Només hi ha una etapa aleatòria.",
+            "✅ És un experiment simple."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 198,
+          "question": "Llancem <b>2 monedes</b>. Quina és la probabilitat d’obtenir <b>exactament 2 cares</b>?",
+          "correct": "1/4",
+          "solution": [
+            "Favorables: CC.",
+            "Hi ha 1 favorables de 4 possibles.",
+            "P = 1/4 = 1/4."
+          ]
+        },
+        {
+          "type": 13,
+          "n": 195,
+          "question": "Quina representació és especialment adequada per <b>veure totes les sumes possibles de dos daus</b>?",
+          "correct": "Taula de doble entrada",
+          "solution": [
+            "La taula permet creuar directament el resultat del primer dau amb el del segon.",
+            "✅ Una bona opció és: Taula de doble entrada."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "intervals3r",
+      "types": 13,
+      "coverage": [
+        12,
+        1,
+        0
+      ],
+      "generated": 3000,
+      "exam": null,
+      "variants": [
+        {
+          "type": 3,
+          "n": 521,
+          "question": "A quin interval pertany el valor <b>104</b>?",
+          "correct": "[100, 110)",
+          "solution": [
+            "100 ≤ 104 < 110.",
+            "✅ Pertany a [100, 110)."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 30,
+          "question": "En l’interval [50, 60), la marca de classe és <b>55</b>. Què significa aquest 55?",
+          "correct": "És el punt central que representa l’interval",
+          "solution": [
+            "El 55 és el punt mig entre 50 i 60.",
+            "Serveix com a valor representatiu de l’interval, però les dades poden tenir altres valors.",
+            "✅ És el punt central que representa l’interval."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 163,
+          "question": "Tenim intervals consecutius [160, 170), [170, 180), ... On pertany exactament el valor <b>170</b>?",
+          "correct": "[170, 180)",
+          "solution": [
+            "[160, 170) no inclou 170, perquè és el seu límit dret.",
+            "[170, 180) sí que comença en 170.",
+            "✅ [170, 180)."
+          ]
+        },
+        {
+          "type": 12,
+          "n": 247,
+          "question": "La taula indica que hi ha <b>12 dades</b> dins de [100, 110). Podem saber quins són exactament aquests 12 valors individuals?",
+          "correct": "No, només sabem que són dins de l’interval",
+          "solution": [
+            "L’agrupació conserva la freqüència de l’interval, però no els valors individuals.",
+            "✅ No, només sabem que són dins de l’interval."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 88,
+          "question": "Per obtenir la variable <b>«nombre de missatges rebuts»</b>, l’acció principal és <b>comptar</b> o <b>mesurar</b>?",
+          "correct": "Comptar",
+          "solution": [
+            "La dada indica quants elements o successos hi ha.",
+            "✅ Cal comptar."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 23,
+          "question": "Observa l’agrupació <b>[0,10), [10,20), [20,30)</b>. Quina valoració és correcta?",
+          "correct": "És una agrupació coherent",
+          "solution": [
+            "Els intervals són consecutius: no deixen buits ni se solapen.",
+            "✅ És una agrupació coherent."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 171,
+          "question": "La taula correspon a <b>24 dades</b>. Quina freqüència absoluta falta?",
+          "correct": "5",
+          "solution": [
+            "El total de totes les freqüències ha de ser 24.",
+            "La freqüència que falta completa aquest total.",
+            "✅ Falta 5."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 449,
+          "question": "Agrupem aquestes dades en intervals d’amplitud 10. Quantes dades cauen a <b>[120, 130)</b>?",
+          "correct": "6",
+          "solution": [
+            "Revisem les dades amb 120 ≤ x < 130.",
+            "✅ Freqüència = 6."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 293,
+          "question": "Quina és la <b>marca de classe</b> de l’interval [0, 5)?",
+          "correct": "2,5",
+          "solution": [
+            "Marca = (límit inferior + límit superior) / 2.",
+            "✅ (0 + 5) / 2 = 2,5."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 457,
+          "question": "Quantes dades són <b>menors que 30</b>?",
+          "correct": "7",
+          "solution": [
+            "S’inclouen els 1 primers intervals.",
+            "✅ Total = 7."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 88,
+          "question": "La variable <b>«nombre de mascotes»</b> és quantitativa discreta o quantitativa contínua?",
+          "correct": "Quantitativa discreta",
+          "solution": [
+            "És una quantitat que habitualment s’obté comptant valors separats.",
+            "✅ Quantitativa discreta."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 217,
+          "question": "Quina és l’<b>amplitud</b> de l’interval [120, 140)?",
+          "correct": "20",
+          "solution": [
+            "Amplitud = límit superior − límit inferior.",
+            "✅ 140 − 120 = 20."
+          ]
+        },
+        {
+          "type": 13,
+          "n": 253,
+          "question": "Volem cobrir les dades des de <b>100</b> fins a menys de <b>150</b> amb intervals d’amplitud <b>10</b>. Quants intervals consecutius necessitem?",
+          "correct": "5",
+          "solution": [
+            "Amplitud total = 150 − 100 = 50.",
+            "Nombre d’intervals = 50 / 10 = 5.",
+            "✅ Necessitem 5 intervals."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "grafics3r",
+      "types": 12,
+      "coverage": [
+        11,
+        1,
+        0
+      ],
+      "generated": 5902,
+      "exam": null,
+      "variants": [
+        {
+          "type": 8,
+          "n": 1365,
+          "question": "Quina freqüència correspon a la marca de classe <b>155</b>?",
+          "correct": "10",
+          "solution": [
+            "El punt sobre 155 està a l’altura 10.",
+            "✅ Freqüència = 10."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 29,
+          "question": "Volem comparar el <b>nombre d’alumnes de cada esport</b>. Quin gràfic és especialment adequat?",
+          "correct": "Gràfic de barres",
+          "solution": [
+            "Els esports són categories separades.",
+            "✅ Gràfic de barres."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 15,
+          "question": "Quantes dades hi ha <b>en total</b> representades en aquest histograma?",
+          "correct": "34",
+          "solution": [
+            "Total = 7 + 10 + 4 + 13.",
+            "✅ 34 dades."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 15,
+          "question": "Quin és el principal problema d’aquesta representació si vol ser un <b>histograma</b>?",
+          "correct": "Les barres apareixen separades",
+          "solution": [
+            "En un histograma d’intervals consecutius d’igual amplitud, les barres són contigües.",
+            "✅ Les barres apareixen separades."
+          ]
+        },
+        {
+          "type": 12,
+          "n": 15,
+          "question": "Quina informació <b>NO</b> podem saber només amb aquest diagrama de caixa?",
+          "correct": "Quantes dades tenen exactament un valor concret",
+          "solution": [
+            "Podem llegir mínim, màxim, quartils i mediana.",
+            "No podem reconstruir quantes dades tenen exactament cada valor.",
+            "✅ Quantes dades tenen exactament un valor concret."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 420,
+          "question": "Quin interval té la <b>freqüència més alta</b> en aquest polígon?",
+          "correct": "[110, 120)",
+          "solution": [
+            "El punt més alt té freqüència 13 i està sobre la marca 115.",
+            "Aquesta marca correspon a [110, 120)."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 1365,
+          "question": "Segons l’histograma, quina és la freqüència de l’interval <b>[20, 30)</b>?",
+          "correct": "4",
+          "solution": [
+            "La barra de [20, 30) arriba a la freqüència 4.",
+            "✅ 4."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 15,
+          "question": "Aproximadament quin percentatge de les dades queda <b>dins de la caixa</b>, entre Q₁ i Q₃?",
+          "correct": "50%",
+          "solution": [
+            "Entre Q₁ i Q₃ hi ha els dos quartils centrals de la distribució.",
+            "✅ Aproximadament el 50% de les dades."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 420,
+          "question": "Per construir el polígon de freqüències, sobre quin valor de l’eix horitzontal situarem el punt de l’interval <b>[110, 115)</b>?",
+          "correct": "112,5",
+          "solution": [
+            "La marca de classe de [110, 115) és el punt mig dels dos límits.",
+            "✅ x = 112,5."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 975,
+          "question": "Quin valor representa <b>mediana</b> en aquest diagrama de caixa?",
+          "correct": "8",
+          "solution": [
+            "Localitzem mediana en la posició corresponent del diagrama.",
+            "✅ mediana = 8."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 1240,
+          "question": "Quantes dades són <b>menors que 35</b>?",
+          "correct": "24",
+          "solution": [
+            "S’inclouen els 3 primers intervals.",
+            "✅ Total = 24."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 28,
+          "question": "Quin grup té el <b>50% central més concentrat</b>?",
+          "correct": "Grup A",
+          "solution": [
+            "Amplada de la caixa A: 4; amplada de la caixa B: 8.",
+            "✅ Grup A té el 50% central més concentrat."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "dispersio3r",
+      "types": 12,
+      "coverage": [
+        8,
+        4,
+        0
+      ],
+      "generated": 3000,
+      "exam": null,
+      "variants": [
+        {
+          "type": 5,
+          "n": 31,
+          "question": "Quina mesura queda <b>més afectada</b> pel valor extrem del conjunt B?",
+          "correct": "El rang",
+          "solution": [
+            "El màxim de B és molt més gran i fa créixer molt el rang (4 → 25).",
+            "El RIQ canvia molt menys perquè no depèn directament dels extrems.",
+            "✅ La mesura més sensible aquí és el rang."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 90,
+          "question": "Quina és la <b>variància poblacional</b> d’aquest conjunt?",
+          "correct": "1",
+          "solution": [
+            "La mitjana és 7. Totes les desviacions tenen magnitud 1.",
+            "Els quadrats de les desviacions valen 1.",
+            "✅ Variància = 1."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 1177,
+          "question": "Ordena mentalment les dades i calcula <b>Q₃</b>.",
+          "correct": "15,5",
+          "solution": [
+            "Dades ordenades: 10, 11, 12, 13, 14, 15, 16, 17.",
+            "Q₁ = 11,5, Q₂ = 13,5, Q₃ = 15,5.",
+            "✅ Q₃ = 15,5."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 30,
+          "question": "Per què, en calcular la variància, <b>elevem al quadrat</b> les desviacions respecte de la mitjana?",
+          "correct": "Per evitar que desviacions positives i negatives es cancel·lin",
+          "solution": [
+            "Les desviacions negatives i positives poden sumar 0 encara que les dades estiguin disperses.",
+            "Quadrar-les les fa no negatives i permet mesurar-ne la magnitud."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 114,
+          "question": "Si <b>Q₁ = 15</b>, quina interpretació és correcta?",
+          "correct": "Aproximadament el 25% de les dades és 15 o inferior",
+          "solution": [
+            "Q₁ marca aproximadament el final del primer quart de la distribució.",
+            "✅ Aproximadament el 25% queda a 15 o per sota."
+          ]
+        },
+        {
+          "type": 12,
+          "n": 450,
+          "question": "Una distribució té mitjana <b>10</b> i desviació típica <b>5</b>. Quin és el <b>coeficient de variació</b>?",
+          "correct": "50%",
+          "solution": [
+            "CV = desviació típica / mitjana · 100%.",
+            "✅ CV = 5/10 · 100% = 50%."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 253,
+          "question": "A partir de la taula de freqüències acumulades, quin és <b>Q₁</b>?",
+          "correct": "4",
+          "solution": [
+            "Hi ha 12 dades. Les freqüències acumulades permeten localitzar les posicions centrals de cada quart.",
+            "✅ Q₁ = 4."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 32,
+          "question": "Quina relació és sempre certa entre <b>Q₂</b> i les mesures de centralització?",
+          "correct": "Q₂ és la mediana",
+          "solution": [
+            "El punt que separa el 50% inferior del 50% superior és la mediana.",
+            "✅ Q₂ és la mediana."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 60,
+          "question": "Pot una desviació típica ser <b>−2</b>?",
+          "correct": "No",
+          "solution": [
+            "La desviació típica sempre és ≥ 0.",
+            "✅ No."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 32,
+          "question": "Quin grup presenta dades <b>més homogènies</b>?",
+          "correct": "Grup A",
+          "solution": [
+            "σA = 0,63 i σB = 2,61.",
+            "✅ Grup A és més homogeni."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 173,
+          "question": "Una distribució té variància <b>1</b>. Quina és la desviació típica?",
+          "correct": "1",
+          "solution": [
+            "σ = √variància.",
+            "✅ √1 = 1."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 558,
+          "question": "En una distribució, <b>Q₁ = 4</b> i <b>Q₃ = 8</b>. Quin és el recorregut interquartílic?",
+          "correct": "4",
+          "solution": [
+            "RIQ = Q₃ − Q₁.",
+            "✅ 8 − 4 = 4."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "probabilitat3r",
+      "types": 12,
+      "coverage": [
+        8,
+        6,
+        0
+      ],
+      "generated": 3000,
+      "exam": null,
+      "variants": [
+        {
+          "type": 7,
+          "n": 254,
+          "question": "Una bossa té 6 boles vermelles, 3 blaves i 1 verda. Com que hi ha tres colors, tenen cadascun probabilitat 1/3?",
+          "correct": "No, les probabilitats depenen de quantes boles hi ha de cada color",
+          "solution": [
+            "Hi ha 10 boles i, per exemple, P(vermella) = 6/10.",
+            "✅ Els colors no són equiprobables si no tenen la mateixa quantitat de boles."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 295,
+          "question": "Si P(A) = <b>3/4</b>, quina és P(no A)?",
+          "correct": "1/4",
+          "solution": [
+            "P(no A) = 1 − 3/4.",
+            "✅ 1/4."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 60,
+          "question": "En un dau, A = {2, 4, 6} i B = {4, 5, 6}. Quin conjunt representa <b>A i B</b>?",
+          "correct": "{4, 6}",
+          "solution": [
+            "A ∩ B = {4, 6}.",
+            "✅ {4, 6}."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 58,
+          "question": "Traiem dues boles d’una bossa <b>sense reposició</b>. El resultat de la primera extracció pot modificar la probabilitat de la segona?",
+          "correct": "Sí, són dependents",
+          "solution": [
+            "La primera extracció canvia el nombre i el tipus de boles que queden.",
+            "✅ Sí, són dependents."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 167,
+          "question": "Traiem dues boles sense reposició. Quina és la probabilitat d’obtenir <b>una vermella i una blava, en qualsevol ordre</b>?",
+          "correct": "5/9",
+          "solution": [
+            "P(VB) = 5/9 · 4/8; P(BV) = 4/9 · 5/8.",
+            "Suma dels dos camins = 5/9."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 554,
+          "question": "Sense reposició, quina és la probabilitat del camí ressaltat <b>BV</b>?",
+          "correct": "3/10",
+          "solution": [
+            "Primera branca: 2/5; segona: 3/4.",
+            "✅ P = 3/10."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 114,
+          "question": "Llancem una moneda i un dau de 4 cares, independents. Quina és la probabilitat d’obtenir <b>cara i un dels 2 resultats favorables indicats del dau</b>?",
+          "correct": "1/4",
+          "solution": [
+            "P(cara) = 1/2 i P(resultat favorable del dau) = 2/4.",
+            "Producte = 1/2 · 2/4 = 1/4."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 85,
+          "question": "Quantes combinacions diferents es poden formar amb <b>4 samarretes i 3 pantalons</b>, si qualsevol opció de la primera etapa es pot combinar amb qualsevol de la segona?",
+          "correct": "12",
+          "solution": [
+            "Nombre de combinacions = 4 · 3.",
+            "✅ 12."
+          ]
+        },
+        {
+          "type": 12,
+          "n": 229,
+          "question": "Formem codis de <b>3 dígits</b> amb 5 símbols possibles <b>permetent repeticions</b>. Quants codis diferents hi ha?",
+          "correct": "125",
+          "solution": [
+            "Cada una de les 3 posicions té 5 opcions.",
+            "✅ Total = 125."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 114,
+          "question": "En un únic llançament d’un dau, A = «treure 1» i B = «treure 6». Són successos compatibles o incompatibles?",
+          "correct": "Incompatibles",
+          "solution": [
+            "No tenen cap resultat comú.",
+            "✅ Són incompatibles."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 466,
+          "question": "Amb reposició, quina és la probabilitat del camí ressaltat <b>VV</b>?",
+          "correct": "4/9",
+          "solution": [
+            "Camí: 2/3 · 2/3.",
+            "✅ P = 4/9."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 604,
+          "question": "La bossa té 4 vermelles i 2 blaves. Després d’una primera extracció blava, no la tornem a posar. Quina és la probabilitat que la segona sigui <b>vermella</b>?",
+          "correct": "4/5",
+          "solution": [
+            "Abans de la segona extracció hi ha 4 vermelles de 5 boles.",
+            "✅ P(V a la segona) = 4/5."
+          ]
+        }
+      ]
+    }
+  ],
+  "practice": [
+    {
+      "topic": "dades",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "dades",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "dades",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "dades",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "dades",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "dades",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "dades",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "dades",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "dades",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "dades",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "dades",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "dades",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "frequencias",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "frequencias",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "frequencias",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "frequencias",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "frequencias",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "frequencias",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "frequencias",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "frequencias",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "frequencias",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "frequencias",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "frequencias",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "frequencias",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "grafics",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "grafics",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "grafics",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "grafics",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "grafics",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "grafics",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "grafics",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "grafics",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "grafics",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "grafics",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "grafics",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "grafics",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "centralitzacio",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "centralitzacio",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "centralitzacio",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "centralitzacio",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "centralitzacio",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "centralitzacio",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "centralitzacio",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "centralitzacio",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "centralitzacio",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "centralitzacio",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "centralitzacio",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "centralitzacio",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "investigacions",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "investigacions",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "investigacions",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "investigacions",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "investigacions",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "investigacions",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "investigacions",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "investigacions",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "investigacions",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "investigacions",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "investigacions",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "investigacions",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "probabilitat",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "probabilitat",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "probabilitat",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "probabilitat",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "probabilitat",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "probabilitat",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "probabilitat",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "probabilitat",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "probabilitat",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "probabilitat",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "probabilitat",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "probabilitat",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "experiments",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "experiments",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "experiments",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "experiments",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "experiments",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "experiments",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "experiments",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "experiments",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "experiments",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "experiments",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "experiments",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "experiments",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    }
+  ],
+  "globals": [
+    {
+      "policy": "free",
+      "requested": null,
+      "counts": [
+        12,
+        8,
+        0
+      ],
+      "topics": {
+        "dades": 3,
+        "frequencias": 3,
+        "grafics": 3,
+        "centralitzacio": 3,
+        "investigacions": 2,
+        "probabilitat": 3,
+        "experiments": 3
+      },
+      "contextual": 0
+    },
+    {
+      "policy": "balanced",
+      "blocked": true
+    },
+    {
+      "policy": "1",
+      "requested": [
+        20,
+        0,
+        0
+      ],
+      "counts": [
+        20,
+        0,
+        0
+      ],
+      "topics": {
+        "dades": 3,
+        "frequencias": 3,
+        "grafics": 3,
+        "centralitzacio": 3,
+        "investigacions": 3,
+        "probabilitat": 3,
+        "experiments": 2
+      },
+      "contextual": 0
+    },
+    {
+      "policy": "2",
+      "requested": [
+        0,
+        20,
+        0
+      ],
+      "counts": [
+        0,
+        20,
+        0
+      ],
+      "topics": {
+        "dades": 3,
+        "frequencias": 3,
+        "grafics": 2,
+        "centralitzacio": 3,
+        "investigacions": 3,
+        "probabilitat": 3,
+        "experiments": 3
+      },
+      "contextual": 0
+    },
+    {
+      "policy": "3",
+      "blocked": true
+    }
+  ],
+  "bankChecks": [],
+  "banksReviewed": 0,
+  "pageErrors": []
+}

@@ -1,0 +1,41 @@
+{
+  "courses": [
+    "2eso"
+  ],
+  "senses": [
+    "espacial",
+    "estocastic"
+  ],
+  "published": false,
+  "suites": [
+    {
+      "file": "comprova-examens-espacial-2eso.cjs",
+      "exitCode": 0
+    },
+    {
+      "file": "comprova-regressio-espacial-2eso.cjs",
+      "exitCode": 0
+    },
+    {
+      "file": "comprova-examens-estocastic-2eso.cjs",
+      "exitCode": 0
+    },
+    {
+      "file": "comprova-regressio-estocastic-2eso.cjs",
+      "exitCode": 0
+    }
+  ],
+  "notes": [
+    "Les primeres execucions de les suites d’exàmens van arribar al límit local de navegació de 30 segons. La passada seqüencial amb 120 segons ha superat totes quatre suites.",
+    "La regressió espacial tenia un cens obsolet que esperava zero exàmens de 1r al cercador; actualitzat als set publicats."
+  ],
+  "stochasticRegressionChecks": 1405,
+  "blockResults": [
+    "resultats-punt3-2eso-espacial.json",
+    "resultats-punt3-2eso-estocastic.json"
+  ],
+  "independentOracles": [
+    "oracles-parella-2eso-punt3.json",
+    "oracles-xarxes-cub-2eso-punt3.json"
+  ]
+}

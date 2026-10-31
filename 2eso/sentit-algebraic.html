@@ -1452,7 +1452,7 @@ function genEquacions2ESO(){
     solution=[c.why,'Resposta: <b>'+correct+'</b>'];
   }
 
-  return {topicId:'equacions',type,course:'2n',question,correct,alts,options:opts,guide,solution};
+  return {topicId:'equacions',type,course:'2n',difficultyVariant:type===11&&question.startsWith('Aplica la distributiva')?'distribute':undefined,question,correct,alts,options:opts,guide,solution};
 }
 
 
@@ -2481,7 +2481,7 @@ function genIdentitatsNotables3r(){
   if(type===1){
     const a=rnd(2,9),B=2*a,C=sq(a);
     question='Desenvolupa la identitat notable: <b>'+plusSquare(a)+'</b>';
-    correct=poly(1,B,C);alts=[correct,poly(1,C,B)];
+    correct=poly(1,B,C);alts=[correct];
     opts=uniq4(correct,[poly(1,a,C),poly(1,B,a),poly(1,0,C),poly(1,-B,C)]);
     guide=['Recorda el patró (a + b)² = a² + 2ab + b²','El terme central conté el doble del producte','El darrer terme és el quadrat del nombre del parèntesi'];
     solution=['Primer terme: x².','Terme central: 2 · x · '+a+' = '+B+'x.','Darrer terme: '+a+'² = '+C+'.','Resultat: <b>'+correct+'</b>.'];
@@ -2955,7 +2955,7 @@ function registerError(ex,studentAnswer,source='practice'){
     id:Date.now()+'_'+Math.random().toString(36).slice(2,8),
     topicId:ex.topicId||(topic?topic.id:null),
     topicName:ex.topicName||(topic?topic.name:'Tema'),
-    type:(ex.type!==undefined?ex.type:null),
+    type:(ex.type!==undefined?ex.type:null),difficultyVariant:ex.difficultyVariant,
     question:ex.question||'',
     correct:ex.correct,
     answer:studentAnswer,

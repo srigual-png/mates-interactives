@@ -1,0 +1,25 @@
+{
+  "course": "2eso",
+  "sense": "algebraic",
+  "classificationReviewed": true,
+  "block": {
+    "types": 136,
+    "generated": 30000,
+    "practiceConfigurations": 84,
+    "pageErrors": []
+  },
+  "suites": [
+    {
+      "file": "comprova-examens-algebraic-2eso.cjs",
+      "exitCode": 0,
+      "checks": "Set temes: correcció, nota, reinici i retorn a pràctica."
+    },
+    {
+      "file": "comprova-regressio-algebraic-2eso.cjs",
+      "exitCode": 0,
+      "checks": "500 generacions: matemàtiques, signes, equivalències, funcions i iteracions; set exàmens, mòbil, general de vint i cercador."
+    }
+  ],
+  "oracles": "oracles-algebraic-2eso-punt3.json",
+  "published": false
+}

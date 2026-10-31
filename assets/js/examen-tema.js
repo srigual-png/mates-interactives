@@ -48,7 +48,7 @@
         // Tant un arbre com una taula poden representar dues etapes: evita
         // exigir una preferència de representació com si fos una resposta única.
         if (t.id === 'experiments' && q.type === 13) continue;
-        if (t.id === 'frequencias' && q.type === 11) q.question += '<br>Tria la llista ordenada de menor a major.';
+        if (t.id === 'frequencias' && q.type === 11 && !q.question.includes('ordenada de menor a major')) q.question += '<br>Tria la llista ordenada de menor a major.';
         // Les dades visuals són part de l’enunciat; no incloguis pistes de pràctica.
         let visual=q.visual || '';
         if (t.id === 'grafics' && q.type === 11) visual=visual.replace('Atenció: l’eix vertical no comença a zero.','');
