@@ -23,7 +23,7 @@
       const lines=solution?(sheet.config.solutions==='steps'?[`${q.number}. ${q.question}`,...q.options.map((s,i)=>String.fromCharCode(97+i)+') '+s),...q.steps,`Resposta: ${q.answer}`]:[`${q.number}. ${q.answer}`]):[`${q.number}. ${q.question}`,...q.options.map((s,i)=>String.fromCharCode(97+i)+') '+s)];
       return {title,lines,figure:(!solution||sheet.config.solutions==='steps')?q.figure:undefined,space:solution?14:{compact:28,normal:65,wide:115}[sheet.config.space]};
     });
-    if(sheet.config.profile)result.unshift({title:'Perfil de dificultat: '+window.MIWorksheets.profiles[sheet.config.profile],lines:[],space:0});
+    if(sheet.config.worksheetType)result.unshift({title:'Tipus de fitxa: '+window.MIWorksheets.worksheetTypes[sheet.config.worksheetType],lines:[],space:0});
     return result;
   }
   function width(t,font,size=11){if(t.kind==='text')return font.widthOfTextAtSize(t.text.replace(/\n/g,''),size);if(t.kind==='fraction')return Math.max(...t.parts.map(s=>font.widthOfTextAtSize(s,9)))+6;if(t.kind==='power')return tokens(t.parts[0]).reduce((s,t)=>s+width(t,font,size),0)+font.widthOfTextAtSize(t.parts[1],8)+1;return font.widthOfTextAtSize('√'+t.parts[0],size)+3;}

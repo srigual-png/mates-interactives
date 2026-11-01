@@ -1,52 +1,80 @@
-# Generador de fitxes: pilot de perfils de 1r d’ESO, sentit numèric
+# Generador de fitxes: Estàndard i Ampliació
 
-El pilot substitueix les quotes percentuals exclusivament a `1eso-numeric`. Els adaptadors de 2n, 3r i 4t conserven la selecció percentual anterior. La resta de sentits no s’activa.
+Pilot exclusiu de **1r d’ESO → sentit numèric**, revisat l’1 de novembre de 2026. Substitueix el selector anterior per «Tipus de fitxa»: Estàndard (inicial) i Ampliació. Els altres cursos mantenen la interfície i el motor percentuals existents. No s’activen altres sentits.
 
-## Formulari
+## Formulari i documents
 
-Perfil Bàsic, Equilibrat (inicial) o Difícil, amb una explicació accessible. El resum i els quatre documents possibles mostren el perfil. La configuració inicial té 15 exercicis i els primers 10 temes: cobreix també els continguts compostos. Al pilot es poden escollir quantitats d’1 a 30 per poder ajustar-se al mínim i a una quantitat viable exacta; es conserven les quantitats anteriors. El formulari bloqueja una quantitat inferior al mínim, indicant aquest mínim.
+- Estàndard: «Per practicar i consolidar els continguts del curs.»
+- Ampliació: «Inclou reptes de raonament per aprofundir en els continguts.»
 
-## Metadades revisades
+Es mantenen quantitat (1–30), temes, ordre, espai, Word/PDF/ambdós i solucionari separat. La configuració inicial continua amb 15 exercicis i els primers 10 temes. El resum i tots els documents indiquen «Tipus de fitxa: Estàndard» o «Tipus de fitxa: Ampliació». El pilot no mostra selectors ni validacions dels perfils antics o dels percentatges.
 
-`numeric-1eso.js` declara les famílies de cada branca `type`, dificultat real i continguts treballats. No s’infereixen de les paraules del títol. Les variacions de context i de nombres pertanyen a la mateixa família. Les dues expressions senzilles amb productes i sumes de jerarquia comparteixen família; també les dues expressions amb parèntesis. Entrades, receptes i distàncies de proporcionalitat comparteixen el procediment de valor unitari. Les activitats especials de potències combinades i intercanvi posicional tenen família pròpia. No es modifiquen les dificultats dels generadors.
+Si no hi ha cap repte adequat, el formulari ho explica, bloqueja la descàrrega d’Ampliació i ofereix el botó **Genera una fitxa Estàndard**. El botó canvia explícitament el tipus i genera amb les altres opcions seleccionades. Si les metadades indiquen reptes però el banc de candidats no en proporciona cap d’utilitzable, el motor retorna `NO_CHALLENGES` i la interfície ofereix la mateixa alternativa. No es genera mai Ampliació sense reptes. No hi ha avisos rutinaris per tenir-ne pocs.
 
-Temes compostos identificats:
+## Metadades i revisió dels reptes
 
-- **mcm i MCD**: continguts `mcd` i `mcm`; càlcul MCD i repartiments cobreixen exclusivament MCD; càlcul mcm de dos/tres nombres i periodicitat cobreixen exclusivament mcm. Repartiment amb diferència màxima d’un, fins i tot combinant temes.
-- **Potències i arrels**: continguts `potencies` i `arrels`; només l’expressió avançada combinada cobreix tots dos. Amb Bàsic calen almenys dues activitats.
+`numeric-1eso.js` conserva les famílies revisades de les branques `type`, el contingut treballat i la dificultat real. Afegeix explícitament:
 
-La resta de temes curriculars del catàleg s’han revisat: naturals, sistema decimal, operacions bàsiques, jerarquia, divisibilitat, enters, decimals, fraccions, proporcionalitat i percentatges. Són unitats de contingut per a la cobertura mínima; els procediments interns es representen com a famílies per afavorir-ne la varietat, sense exigir tots els procediments en cada fitxa.
+- `standard`: activitat de pràctica bàsica o mitjana revisada.
+- `challenge`: adequació com a repte, independent del nivell.
+- `challengeReason`: què exigeix el repte i per què s’admet.
 
-## Selecció
+Cada variant té una clau d’enunciat/opcions i una signatura de família, dades i resposta. Canviar dades o contextos no crea una família. Les expressions senzilles amb productes i sumes comparteixen família, com les expressions amb parèntesis; entrades, receptes i distàncies de proporcionalitat comparteixen el valor unitari.
 
-1. Comprovar àmbit i configuració. Calcular per tema la cobertura mínima mitjançant conjunts de continguts; una activitat pot cobrir més d’un contingut.
-2. Reservar aquest mínim i distribuir la resta entre els temes amb menys exercicis.
-3. Construir un banc finit de candidats (320 intents per nivell i tema). Excloure les preguntes de la versió anterior. No es consumeixen les bosses de pràctica.
-4. Escollir garantint que les places restants permetin completar la cobertura. Equilibrar els continguts de MCD/mcm, afavorir famílies poc utilitzades i aproximar el perfil amb preferències flexibles.
-5. Cada família difícil admet un màxim de dues variants. Unicitat d’enunciat/opcions i signatura de família/dades/resposta; també es rebutgen variants de la mateixa família que comparteixen almenys el 80 % dels valors numèrics diferents. És una heurística conservadora, no una prova d’equivalència semàntica.
-6. Bàsic només usa baixa/mitjana; Equilibrat afavoreix mitjana amb alternança orientativa; Difícil afavoreix alta i completa amb mitjana. La cobertura té prioritat sobre aquestes preferències.
-7. Si no es pot completar, no s’exporta res: es comunica una quantitat viable amb cobertura o el contingut que no es pot cobrir. Mai s’exporta una fitxa retallada silenciosament.
+Famílies admeses com a reptes, després de revisar enunciat i solucionari:
 
-Barrejar només permuta la selecció acabada. Una sola selecció amb numeració alimenta Word, PDF i solucionaris; el reintent d’exportació conserva el model pendent. L’avís d’ajust apareix quan s’utilitza mitjana per completar Bàsic/Difícil; també s’explica l’ús de baixa per cobrir continguts en Difícil.
+| Tema | Família | Exigència |
+| --- | --- | --- |
+| Naturals | Producció i reserva | Relacionar producció per màquina, total i reserva |
+| Sistema decimal | Intercanvi posicional | Connectar posició, nombre resultant i variació de valor |
+| Jerarquia | Compra | Construir el cost amb quantitats, descompte i enviament |
+| Divisibilitat | Agrupacions | Decidir dos agrupaments i justificar-los amb residus |
+| MCD/mcm | Repartiment màxim | Identificar el MCD i interpretar els grups |
+| Enters | Saldo | Connectar saldo inicial, ingrés i retirada |
+| Decimals | Error relatiu | Relacionar error absolut, valor exacte i percentatge |
+| Fraccions | Romanent | Calcular la part utilitzada i la quantitat restant |
+| Proporcionalitat | Comprovar taula | Comparar totes les raons i decidir la proporcionalitat |
 
-## Mancances del banc
+La comprovació de taules és de nivell mitjà i s’admet com a repte. En canvi, les expressions avançades de potències/arrels, les expressions llargues amb claudàtors, el producte encadenat de producció, les taxes decimals, els problemes proporcionals rutinaris i l’enquesta percentual no es converteixen automàticament en reptes. Els seus nivells originals es conserven; les activitats altes no admeses com a repte queden fora dels dos tipus de fitxa d’aquest pilot. No s’han afegit preguntes obertes ni s’han canviat càlculs o solucions dels generadors de pràctica.
 
-MCD només té càlcul directe baix i una família de repartiment alta; no té família mitjana. Això obliga a completar amb MCD senzills quan s’exigeix equilibri MCD/mcm. Potències/arrels no té arrels de nivell baix: Bàsic necessita activitats mitjanes per cobrir-les. Naturals, sistema decimal, operacions, divisibilitat, enters i fraccions només tenen una família alta cadascun en aquest adaptador. Diversos temes tenen poques famílies mitjanes; fitxes llargues poden repetir aquestes famílies amb dades prou diferents. L’existència de dades noves no s’utilitza per anunciar tipologies noves.
+## Cobertura i selecció
 
-## Proves
+1. Calcular la cobertura mínima de cada tema amb els continguts explícits i les activitats estàndard disponibles. L’algoritme de conjunts permet que una activitat cobreixi diversos continguts. Reservar el mínim i repartir les places restants entre els temes amb menys exercicis.
+2. Construir bancs finits de candidats: com a màxim 240 intents per nivell disponible i tema. Excloure enunciats de la versió anterior i activitats repetides. No es consumeixen les bosses de pràctica.
+3. Generar la base Estàndard: només activitats `standard`, prioritzant cobertura, famílies menys utilitzades i una preferència flexible alternada de nivells mitjà/bàsic. No hi ha quotes obligatòries de dificultat.
+4. A Ampliació, substituir activitats de la base per reptes revisats, comprovant després de cada substitució que es conserva tota la cobertura i l’equilibri intern del tema. Com a orientació interna s’explora aproximadament un repte per cada tres exercicis; si només hi ha un o dos reptes adequats, es conserva aquesta quantitat. Si el banc estàndard és limitat, es poden completar les places amb reptes vàlids disponibles.
+5. Prioritzar temes amb menys reptes i després famílies noves. Cada família de reptes admet com a màxim dues variants; les variants massa semblants es rebutgen. Les activitats estàndard repetides es reparteixen entre famílies segons l’ús acumulat.
+6. No exportar seleccions incompletes. Oferir una quantitat menor que també respecti una nova assignació equilibrada entre temes. Si no hi ha cobertura viable, indicar que cal reduir la selecció.
 
-`node scripts/fitxes/test.cjs`: vuit llavors, tres perfils, tema MCD/mcm sol, combinat i catàleg complet, dos ordres; tots els temes individualment; família difícil única, una sola variant difícil, quantitat inviable i mínim exacte. Verifica unicitat, cobertura i equilibri, absència de percentatges, perfil inicial, exports, descàrregues, formats individuals, reintent amb el mateix model, mòbil, teclat, pràctica i examen.
+La semblança de dades rebutja variants de la mateixa família que comparteixen almenys el 80 % dels valors numèrics diferents, a més de la signatura família/dades/resposta. És una heurística conservadora, no una certificació d’equivalència semàntica de qualsevol enunciat.
 
-`verify-documents.py` compara tots els enunciats, opcions, passos i respostes dels DOCX i PDF amb el model, en el mateix ordre, i comprova A4, perfil i equacions natives. Executar amb el Python del runtime que inclou pypdf.
+**Temes agrupats identificats:**
 
-Regressions: `test-2eso.cjs`, `test-3eso.cjs` i `test-4eso.cjs` comproven catàlegs, quotes antigues, figures, formats i solucionaris.
+- **MCD i mcm**: continguts obligatoris `mcd` i `mcm`. Càlcul MCD i repartiment màxim només cobreixen MCD; mcm de dos/tres nombres i periodicitat només cobreixen mcm. Tant sol com combinat amb altres temes, hi ha cobertura de tots dos i diferència màxima d’un exercici entre activitats separades. Mínim actual: dues activitats en tots dos tipus.
+- **Potències i arrels**: continguts obligatoris `potencies` i `arrels`. La combinada alta cobreix tots dos però no s’ha admès com a repte perquè només combina càlculs. El banc seleccionable actual necessita dues activitats en tots dos tipus.
 
-Fitxers d’implementació: `assets/js/fitxes/core.js`, `numeric-1eso.js`, `ui.js`, `export.js`. Proves: `scripts/fitxes/test.cjs` i `verify-documents.py`. No s’han modificat els generadors matemàtics de pràctica ni el corrector.
+S’han revisat els altres deu temes: naturals, sistema decimal, operacions bàsiques, jerarquia, divisibilitat, enters, decimals, fraccions, proporcionalitat i percentatges. Es consideren unitats de cobertura; els procediments interns es representen com a famílies per afavorir varietat. Aquesta estructura no es dedueix de la conjunció del títol.
 
-### Resultats de la validació (1 de novembre de 2026)
+L’ordre barrejat només permuta el resultat final. Una sola selecció numerada alimenta Word, PDF i solucionaris. Un reintent d’exportació reutilitza el model pendent. Es conserven les equacions natives de Word i la composició matemàtica del PDF.
 
-- Pilot: 108 generacions de la matriu principal, més els casos sintètics de variant única i banc insuficient; tots correctes. UI, reintents, mòbil, teclat, pràctica i examen: correctes.
-- Comparació documental final: quatre parelles Word/PDF (fitxa i solucionari, mostra general i mostra matemàtica), 13 pàgines PDF en total; contingut i ordre correctes.
-- Regressions de 2n/3r/4t: 132/113/80 tipus i 24 combinacions individuals per curs; correctes.
-- Comprovació sintàctica dels quatre fitxers JavaScript: correcta.
-- Quatre DOCX d’una execució del mateix pilot oberts en lectura i renderitzats amb Word. Revisió visual de la primera pàgina de la fitxa en PDF i Word, i del formulari: correcta. No s’ha repetit una revisió visual exhaustiva de totes les pàgines.
+## Mancances reals del banc
+
+- No s’han admès reptes en **operacions bàsiques, potències/arrels ni percentatges**: les famílies altes actuals no aporten prou raonament addicional respecte del procediment rutinari. Ampliació d’aquests temes sols ofereix explícitament Estàndard.
+- Els altres nou temes només tenen una família admesa com a repte cadascun: mai s’hi utilitzen més de dues variants.
+- En MCD/mcm, l’únic repte és de MCD; no hi ha repte de mcm revisat ni família mitjana de MCD. La resta d’activitats conserva la cobertura equilibrada.
+- No hi ha arrels de nivell baix; Estàndard les cobreix amb activitats mitjanes.
+- Les fitxes llargues poden repetir famílies estàndard amb dades prou diferents. No es presenta aquesta repetició com a tipologies noves.
+
+## Validació
+
+- `node scripts/fitxes/test.cjs`: matriu de 93 configuracions amb vuit llavors per a cobertura de MCD/mcm sol, combinat i catàleg complet; tots els temes individualment, tots dos tipus, dos ordres i quantitats màximes de 30 exercicis. Casos addicionals: una variant de repte, dues variants, banc estàndard limitat completat amb reptes, quantitat inviable, proposta viable equilibrada, mínims, absència de controls antics i distinció entre nivell i repte. Proves de UI, alternativa Estàndard, formats, solucionaris, reintent, mòbil, teclat, pràctica i examen.
+- `scripts/fitxes/verify-documents.py`: comparació del contingut i ordre complets de Word/PDF/solucionari amb el model, etiqueta del tipus, A4 i OMML. Mostra Estàndard, mostra matemàtica i mostra Ampliació sense modificar els reptes.
+- `test-2eso.cjs`, `test-3eso.cjs`, `test-4eso.cjs`: regressions dels cursos no activats; 132, 113 i 80 tipus, respectivament, i 24 combinacions individuals per curs.
+
+Fitxers modificats: `assets/js/fitxes/core.js`, `numeric-1eso.js`, `ui.js`, `export.js`, `scripts/fitxes/test.cjs`, `verify-documents.py` i aquest document. El generador matemàtic de pràctica i el corrector no es modifiquen.
+
+### Resultats de l’execució
+
+93 configuracions de la matriu principal i els casos sintètics addicionals: correctes. Els tres casos de temes sense reptes retornen explícitament l’alternativa Estàndard. UI, formats individuals, solucionaris, reintent, mòbil, teclat, pràctica i examen: correctes. Les tres regressions dels cursos no activats també han passat.
+
+Comparació final de sis parelles Word/PDF (fitxa i solucionari de tres models): tot el text, respostes, dades i ordre coincideixen amb el model. Les mostres PDF sumen 17 pàgines. Sis DOCX oberts en lectura i renderitzats amb Microsoft Word. Revisió visual del formulari i de la primera pàgina de la fitxa Ampliació en PDF i Word: correcta; no s’ha fet una revisió visual exhaustiva de totes les pàgines. Comprovacions sintàctiques dels quatre JavaScript d’implementació i de la prova: correctes.

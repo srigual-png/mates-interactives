@@ -11,7 +11,7 @@ def canonical(s):
     return re.sub(r'[\s/^√]','',s)
 
 checked=[]
-for model,prefix in [('sheet.json',''),('math-sheet.json','math-')]:
+for model,prefix in [('sheet.json',''),('math-sheet.json','math-'),('extension-sheet.json','extension-')]:
     sheet=json.loads((folder/model).read_text(encoding='utf-8'))
     for kind in ['fitxa','solucionari']:
         stem=f'{prefix}{kind}-1eso-numeric-{sheet["version"]}'
@@ -21,13 +21,17 @@ for model,prefix in [('sheet.json',''),('math-sheet.json','math-')]:
             meta=z.read('word/header1.xml').decode()
             assert sheet['version'] not in meta
             assert b'w:w="11906"' in z.read('word/document.xml')
-            if prefix:
+            if prefix=='math-':
                 xml=z.read('word/document.xml')
                 assert all(x in xml for x in [b'<m:f>',b'<m:sSup>',b'<m:rad>'])
-        if sheet['config'].get('profile'):
-            assert 'Perfil de dificultat:' in word
+        if sheet['config'].get('worksheetType'):
+            assert 'Tipus de fitxa: ' + {'standard':'Estàndard','extension':'Ampliació'}[sheet['config']['worksheetType']] in word
+            assert 'Perfil de dificultat' not in word
         pdf=PdfReader(folder/(stem+'.pdf'))
         text=''.join(p.extract_text() for p in pdf.pages)
+        if sheet['config'].get('worksheetType'):
+            assert 'Tipus de fitxa: ' + {'standard':'Estàndard','extension':'Ampliació'}[sheet['config']['worksheetType']] in text
+            assert 'Perfil de dificultat' not in text
         assert sheet['version'] not in text
         assert all(abs(float(p.mediabox.width)-595.28)<1 for p in pdf.pages)
         expected=[]

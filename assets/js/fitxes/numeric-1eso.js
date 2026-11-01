@@ -101,12 +101,29 @@
     proporcionalitat:[[1,'classificar'],[1,'completar-taula'],[3,'valor-unitari'],[3,'valor-unitari'],[1,'constant'],[2,'comprovar-taula'],[3,'valor-unitari'],[2,'factor']],
     percentatges:[[1,'part'],[1,'percentatge'],[2,'total'],[2,'augment'],[2,'descompte'],[2,'conversio'],[3,'enquesta']]
   };
+  // A rationale is required for every challenge. High difficulty alone is
+  // insufficient: longer products, powers and routine conversions are excluded.
+  const challenges={
+    naturals:{produccio:'Relacionar la producció per màquina amb el total i incorporar la reserva.'},
+    decimal_sys:{intercanvi:'Relacionar posició, intercanvi de xifres i variació del valor.'},
+    jerarquia:{compra:'Construir i resoldre el cost total amb quantitats, descompte i enviament.'},
+    divis:{agrupacions:'Decidir i justificar si dos agrupaments deixen residu.'},
+    mcmmcd:{repartiment:'Identificar el MCD com a procediment per obtenir el màxim nombre de grups.'},
+    enters:{saldo:'Connectar saldo inicial, ingrés i retirada per determinar el saldo final.'},
+    decimals:{'error-relatiu':'Relacionar error absolut i valor exacte per obtenir l’error percentual.'},
+    fraccions:{romanent:'Calcular la part utilitzada i relacionar-la amb la quantitat que queda.'},
+    proporcionalitat:{'comprovar-taula':'Comparar totes les raons i decidir si una taula és proporcional.'}
+  };
+  function classify(id,row){
+    const reason=challenges[id]?.[row.family.slice(id.length+1)]||'';
+    return {...row,challenge:!!reason,challengeReason:reason,standard:row.level<=2&&!reason};
+  }
   function families(id){
     const rows=definitions[id].map(([level,family,content])=>({level,family:id+':'+family,contents:[content||id]}));
     if(id==='potencies')rows.push({level:3,family:id+':combinada',contents:['potencies','arrels']});
     if(id==='decimal_sys')rows.push({level:3,family:id+':intercanvi',contents:[id]});
-    return rows;
+    return rows.map(row=>classify(id,row));
   }
-  window.MIWorksheetConfig={id:'1eso-numeric',profiles:true,title:'Fitxa d’exercicis — 1r d’ESO — Sentit numèric',web:'srigual-png.github.io/mates-interactives',paperQuestion,
+  window.MIWorksheetConfig={id:'1eso-numeric',worksheetTypes:true,title:'Fitxa d’exercicis — 1r d’ESO — Sentit numèric',web:'srigual-png.github.io/mates-interactives',paperQuestion,
     topics:TOPICS.filter(t=>t.course==='1r').map(t=>({id:t.id,name:t.name,balanceContents:t.id==='mcmmcd',requiredContents:t.id==='mcmmcd'?['mcd','mcm']:t.id==='potencies'?['potencies','arrels']:[t.id],families:generators[t.id]?families(t.id):[],levels:generators[t.id]?[1,2,3]:[],generate(l){if(t.id==='potencies'&&l===3)return advancedPowers();if(t.id==='decimal_sys'&&l===3)return advancedPlaceValue();return adapt(t.id,generators[t.id]());},metadata(q){return families(t.id)[q.type===undefined?families(t.id).length-1:q.type-1];}}))};
 })();
