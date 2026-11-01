@@ -13,7 +13,7 @@ if(!seen.has(q.type))seen.set(q.type,{type:q.type,n:0,question:q.question,correc
 }
 for(const row of expected)check(seen.get(row.type)?.n>=15,'cens no cobert '+t.id+':'+row.type);
 const coverage=miTaskDifficulty.coverage(t);check(coverage.reviewed,'cobertura absent');let exam=null;
-if(miTopicExam.getTopics().includes(t)){const qs=miTopicExam.build(t),plan=miTopicExam.getPlan(t);check(qs.length===12,'examen incomplet');const counts=[1,2,3].map(n=>qs.filter(q=>q.taskDifficulty===n).length);check(JSON.stringify(counts)===JSON.stringify(plan.slots),'quotes tema');exam=counts;}
+if(miTopicExam.getTopics().includes(t)){let qs;try{qs=miTopicExam.build(t);}catch(e){throw Error(t.id+': '+e.message);}const plan=miTopicExam.getPlan(t);check(qs.length===12,'examen incomplet');const counts=[1,2,3].map(n=>qs.filter(q=>q.taskDifficulty===n).length);check(JSON.stringify(counts)===JSON.stringify(plan.slots),'quotes tema');exam=counts;}
 summary.push({topic:t.id,types:expected.length,coverage:coverage.types,generated:count,exam,variants:[...seen.values()]});
 }
 const bankChecks=[];const collections={measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null};

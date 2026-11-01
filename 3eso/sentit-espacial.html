@@ -954,8 +954,8 @@ function genGirs3ESO(forceType){
   }else if(type===5){
     const [xp,yp]=rot90ccw(x,y);correct='90° antihorari';
     question=`P${pointStr(x,y)} es transforma en P′${pointStr(xp,yp)} mitjançant un gir amb centre a l’origen. Quin gir és?`+svgLabeledPoints([{x:0,y:0,label:'O',fill:'#e05c5c'},{x,y,label:'P'},{x:xp,y:yp,label:'P′',fill:'#34c97e'}],'Només es mostren els punts donats a l’enunciat.');
-    options=uniq4(correct,['90° horari','180°','270° horari','360°']);
-    guide=['Observa l’arc i la posició final del punt.','Compara la posició inicial i la final respecte dels eixos.','Comprova la regla (x, y) → (−y, x).'];
+    options=uniq4(correct,['90° horari','180°','270° antihorari','360°']);
+    guide=['Observa la posició final del punt respecte del centre.','Compara la posició inicial i la final respecte dels eixos.','Comprova la regla (x, y) → (−y, x).'];
     solution=[svgRotationDiagram(x,y,xp,yp,'90° antihorari',90,false,true),`P${pointStr(x,y)} → ${pointStr(-y,x)}.`,`Això correspon a la regla de 90° antihorari.`,`✅ ${correct}`];allowOpen=false;
   }else if(type===6){
     const [xp,yp]=rot180(x,y);correct=pointStr(x,y);
@@ -1043,7 +1043,7 @@ function genSimetriaAxial3ESO(forceType){
   }else if(type===8){
     const k=rnd(-2,2),y=rnd(-4,4);correct=pointStr(k,y);
     question=`Quin punt queda <b>fix</b> en una simetria respecte de la recta x = ${k}?`;
-    options=uniq4(correct,[pointStr(k+1,y),pointStr(-k,y),pointStr(k,y+1),pointStr(y,k),pointStr(k-2,y)]);alts=pointAlts(k,y);openHint='Un punt de l’eix no es mou.';
+    options=uniq4(correct,[pointStr(k+1,y),pointStr(k-1,y),pointStr(k+2,y+1),pointStr(k-2,y),pointStr(k+3,y-1)],o=>asCoordinatePair(o)[0]!==k);alts=pointAlts(k,y);openHint='Un punt de l’eix no es mou.';
     guide=['Busca la característica dels punts que pertanyen a l’eix.','En x = k, qualsevol punt de l’eix té coordenada x igual a k.','La seva imatge coincideix amb ell mateix.'];
     solution=[svgPlaneWithAxis([{x:k,y,label:'Q',fill:'#e05c5c'}],{kind:'x',value:k}),`Els punts de l’eix x = ${k} queden invariants.`,`${pointStr(k,y)} té x = ${k}.`,`✅ ${correct}`];difficulty='easy';
   }else if(type===9){
@@ -1530,7 +1530,7 @@ function genAmpliacioA3ESO(forceType){
   }else if(type===8){
     const x=nonZero(-4,4),y=nonZero(-4,4),a=nonZero(-3,3),b=nonZero(-3,3); let p=[x+a,y+b]; p=reflectY(...p); correct='Translació '+vecStr(a,b)+' i després simetria respecte de l’eix Y';
     question=`Partim de P${pointStr(x,y)} i obtenim el punt final ${pointStr(p[0],p[1])}. Quina seqüència de moviments ho explica?`;
-    options=uniq4(correct,[`Simetria respecte de l’eix Y i després translació ${vecStr(a,b)}`,`Translació ${vecStr(a,b)} i després simetria respecte de l’eix X`,`Gir de 180° i després translació ${vecStr(a,b)}`,`Només una translació ${vecStr(a,b)}`]); allowOpen=false;
+    options=uniq4(correct,[`Simetria respecte de l’eix Y i després translació ${vecStr(a,b)}`,`Translació ${vecStr(a,b)} i després simetria respecte de l’eix X`,`Gir de 180° i després translació ${vecStr(a,b)}`,`Només una translació ${vecStr(a,b)}`],o=>!((o.startsWith('Només una translació')&&x+a===0)||(o.startsWith('Translació')&&o.includes('eix X')&&x+a===0&&y+b===0))); allowOpen=false;
     guide=['Prova primer la translació.','Compara després què fa cada simetria.','Recorda que l’ordre de moviments pot canviar el resultat.'];
     solution=[`Translació: P₁ = ${pointStr(x+a,y+b)}.`,`Simetria respecte de Y: P₂ = ${pointStr(...reflectY(x+a,y+b))}.`,`Això coincideix amb el punt final donat.`,`✅ ${correct}`];
   }else if(type===9){
@@ -1638,7 +1638,7 @@ function genAmpliacioC3ESO(forceType){
   }else if(type===2){
     const cx=rnd(-2,2),cy=rnd(-2,2),dx=nonZero(-3,3),dy=nonZero(-3,3),px=cx+dx,py=cy+dy;correct='La distància al centre es conserva';
     question=`Girem P${pointStr(px,py)} al voltant de C${pointStr(cx,cy)} qualsevol angle. Quina propietat permet predir on pot quedar P′?`;
-    options=uniq4(correct,['P′ ha de quedar sobre l’eix X','P′ sempre té les mateixes coordenades que P','La distància de P′ a l’origen es conserva']);
+    options=uniq4(correct,['P′ ha de quedar sobre l’eix X','P′ sempre té les mateixes coordenades que P','La distància de P′ al centre sempre es duplica']);
     guide=['En un gir, el centre no es mou.','P i P′ recorren una circumferència amb centre al centre de gir.','El radi d’aquesta circumferència és constant.'];
     solution=[`CP = √(${dx}² + ${dy}²).`,`Durant el gir, P es mou sobre una circumferència de centre C i radi CP.`,`Així, CP′ = CP.`,`✅ ${correct}`];
   }else if(type===3){
@@ -1865,7 +1865,7 @@ function miSolutionHtml(ex){
 
 function registerError(ex,studentAnswer,source='practice'){
   if(!ex)return;const topic=TOPICS.find(t=>t.id===ex.topicId)||TOPICS[state.currentTopic];
-  const err={id:Date.now()+'_'+Math.random().toString(36).slice(2,8),topicId:ex.topicId||topic.id,topicName:topic.name,type:ex.type,question:ex.question,correct:ex.correct,answer:studentAnswer,options:[...(ex.options||[])],guide:[...(ex.guide||[])],review:miReviewPoints(ex),solution:[...(ex.solution||[])],level:source==='exam'?0:state.level,source,timestamp:new Date().toISOString()};
+  const err={id:Date.now()+'_'+Math.random().toString(36).slice(2,8),topicId:ex.topicId||topic.id,topicName:topic.name,type:ex.type,difficultyVariant:ex.difficultyVariant,question:ex.question,correct:ex.correct,answer:studentAnswer,options:[...(ex.options||[])],guide:[...(ex.guide||[])],review:miReviewPoints(ex),solution:[...(ex.solution||[])],level:source==='exam'?0:state.level,source,timestamp:new Date().toISOString()};
   const last=state.errors[state.errors.length-1];
   if(!(last&&last.topicId===err.topicId&&last.type===err.type&&last.question===err.question&&last.answer===err.answer&&last.source===err.source))state.errors.push(err);
   if(state.errors.length>200)state.errors=state.errors.slice(-200);saveState();

@@ -1,18 +1,18 @@
 {
   "status": "partial",
-  "reviewedBlocks": 12,
-  "pendingBlocks": 8,
-  "nextBlock": "3eso/algebraic",
+  "reviewedBlocks": 15,
+  "pendingBlocks": 5,
+  "nextBlock": "4eso/numeric",
   "batchSize": 2,
   "nextBlocks": [
-    "3eso/algebraic",
-    "3eso/espacial"
+    "4eso/numeric",
+    "4eso/mesura"
   ],
   "published": false,
   "publication": {
-    "commit": "5b31a4126474049ac9aeadbdec1a2487426b3235",
+    "commit": "ce0fda911af351207d1c788ca3a7f0136d05a9ce",
     "url": "https://srigual-png.github.io/mates-interactives/",
-    "verifiedAt": "2026-10-31T22:34:45.605Z"
+    "verifiedAt": "2026-11-01T09:06:20.776Z"
   },
   "blocks": [
     {
@@ -2099,17 +2099,592 @@
     {
       "course": "3eso",
       "sense": "algebraic",
-      "status": "pending"
+      "status": "classification-reviewed",
+      "identifiers": 104,
+      "bankEntries": 0,
+      "baseLevels": [
+        68,
+        36,
+        0
+      ],
+      "bankLevels": [
+        0,
+        0,
+        0
+      ],
+      "variants": [
+        {
+          "topic": "patrons",
+          "type": 2,
+          "key": "difference",
+          "level": 1,
+          "reason": "Només es demana una resta entre termes consecutius."
+        },
+        {
+          "topic": "patrons",
+          "type": 5,
+          "key": "ratio",
+          "level": 1,
+          "reason": "Només es demana el quocient constant entre dos termes."
+        },
+        {
+          "topic": "patrons",
+          "type": 7,
+          "key": "recursive",
+          "level": 1,
+          "reason": "Continuar la suma dels dos termes anteriors és una pauta immediata."
+        },
+        {
+          "topic": "expressions",
+          "type": 8,
+          "key": "tariff",
+          "level": 1,
+          "reason": "Traducció directa de quota fixa més cost unitari, sense reconstruir magnituds."
+        },
+        {
+          "topic": "equacions2",
+          "type": 3,
+          "key": "incomplete",
+          "level": 1,
+          "reason": "Els coeficients aleatoris donen una equació incompleta: extracció directa d’arrel o factor x."
+        },
+        {
+          "topic": "equacions2",
+          "type": 4,
+          "key": "incomplete",
+          "level": 1,
+          "reason": "Malgrat el nom del tipus, falta el terme lineal o independent: procediment directe d’equació incompleta."
+        }
+      ],
+      "coverage": [
+        {
+          "topic": "patrons",
+          "levels": [
+            6,
+            5,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "expressions",
+          "levels": [
+            8,
+            1,
+            0
+          ],
+          "exam": [
+            8,
+            4,
+            0
+          ]
+        },
+        {
+          "topic": "identitats",
+          "levels": [
+            8,
+            0,
+            0
+          ],
+          "exam": [
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "topic": "factoritzacio",
+          "levels": [
+            8,
+            0,
+            0
+          ],
+          "exam": [
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "topic": "equacions2",
+          "levels": [
+            5,
+            5,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "sistemes",
+          "levels": [
+            2,
+            6,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "funcions",
+          "levels": [
+            7,
+            1,
+            0
+          ],
+          "exam": [
+            7,
+            5,
+            0
+          ]
+        },
+        {
+          "topic": "funcions8",
+          "levels": [
+            6,
+            2,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "quadratica",
+          "levels": [
+            8,
+            0,
+            0
+          ],
+          "exam": [
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "topic": "inequacionsA",
+          "levels": [
+            6,
+            2,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "discriminantB",
+          "levels": [
+            5,
+            3,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "sistemesC",
+          "levels": [
+            0,
+            8,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "grafiquesD",
+          "levels": [
+            5,
+            3,
+            0
+          ],
+          "exam": null
+        }
+      ],
+      "sampling": {
+        "generated": 39000,
+        "practiceConfigurations": 108,
+        "bankChecks": [],
+        "pageErrors": []
+      }
     },
     {
       "course": "3eso",
       "sense": "espacial",
-      "status": "pending"
+      "status": "classification-reviewed",
+      "identifiers": 120,
+      "bankEntries": 0,
+      "baseLevels": [
+        85,
+        35,
+        0
+      ],
+      "bankLevels": [
+        0,
+        0,
+        0
+      ],
+      "variants": [],
+      "coverage": [
+        {
+          "topic": "translacions",
+          "levels": [
+            8,
+            2,
+            0
+          ],
+          "exam": [
+            8,
+            4,
+            0
+          ]
+        },
+        {
+          "topic": "girs",
+          "levels": [
+            8,
+            2,
+            0
+          ],
+          "exam": [
+            8,
+            4,
+            0
+          ]
+        },
+        {
+          "topic": "simetriaAxial",
+          "levels": [
+            6,
+            4,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "simetriaCentral",
+          "levels": [
+            3,
+            7,
+            0
+          ],
+          "exam": [
+            5,
+            7,
+            0
+          ]
+        },
+        {
+          "topic": "mosaics",
+          "levels": [
+            9,
+            1,
+            0
+          ],
+          "exam": [
+            11,
+            1,
+            0
+          ]
+        },
+        {
+          "topic": "transformacionsCoord",
+          "levels": [
+            8,
+            2,
+            0
+          ],
+          "exam": [
+            8,
+            4,
+            0
+          ]
+        },
+        {
+          "topic": "geoAlgebra",
+          "levels": [
+            10,
+            0,
+            0
+          ],
+          "exam": [
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "topic": "visualitzacio",
+          "levels": [
+            10,
+            0,
+            0
+          ],
+          "exam": [
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "topic": "ampliacioA",
+          "levels": [
+            2,
+            8,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "ampliacioB",
+          "levels": [
+            7,
+            3,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "ampliacioC",
+          "levels": [
+            6,
+            4,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "ampliacioD",
+          "levels": [
+            8,
+            2,
+            0
+          ],
+          "exam": null
+        }
+      ],
+      "sampling": {
+        "generated": 41356,
+        "practiceConfigurations": 96,
+        "bankChecks": [],
+        "pageErrors": []
+      }
     },
     {
       "course": "3eso",
       "sense": "estocastic",
-      "status": "pending"
+      "status": "classification-reviewed",
+      "identifiers": 194,
+      "bankEntries": 0,
+      "baseLevels": [
+        115,
+        79,
+        0
+      ],
+      "bankLevels": [
+        0,
+        0,
+        0
+      ],
+      "variants": [
+        {
+          "topic": "dades3r",
+          "type": 14,
+          "key": "sampling",
+          "level": 2,
+          "reason": "La branca valora evitar un grup específic relacionat amb l’estudi."
+        },
+        {
+          "topic": "investigacio3r",
+          "type": 8,
+          "key": "validCount",
+          "level": 1,
+          "reason": "Només resta les respostes en blanc del total."
+        },
+        {
+          "topic": "probabilitat3r",
+          "type": 16,
+          "key": "replacement",
+          "level": 1,
+          "reason": "Amb reposició, la segona proporció és la composició inicial."
+        },
+        {
+          "topic": "probabilitat3r",
+          "type": 22,
+          "key": "repetition",
+          "level": 1,
+          "reason": "Amb repetició s’aplica directament la potència."
+        },
+        {
+          "topic": "ampC3r",
+          "type": 9,
+          "key": "repetition",
+          "level": 1,
+          "reason": "Nombre fix d’opcions a totes les posicions: potència directa."
+        }
+      ],
+      "coverage": [
+        {
+          "topic": "dades3r",
+          "levels": [
+            9,
+            6,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "taules3r",
+          "levels": [
+            19,
+            3,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "grafics3r",
+          "levels": [
+            11,
+            1,
+            0
+          ],
+          "exam": [
+            11,
+            1,
+            0
+          ]
+        },
+        {
+          "topic": "centralitzacio3r",
+          "levels": [
+            6,
+            10,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "quartils3r",
+          "levels": [
+            9,
+            5,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "dispersio3r",
+          "levels": [
+            14,
+            3,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "investigacio3r",
+          "levels": [
+            8,
+            14,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "probabilitat3r",
+          "levels": [
+            13,
+            11,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "ampA3r",
+          "levels": [
+            7,
+            7,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "ampB3r",
+          "levels": [
+            11,
+            3,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "ampC3r",
+          "levels": [
+            4,
+            11,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "ampD3r",
+          "levels": [
+            8,
+            6,
+            0
+          ],
+          "exam": null
+        }
+      ],
+      "sampling": {
+        "generated": 48513,
+        "practiceConfigurations": 96,
+        "bankChecks": [],
+        "pageErrors": []
+      }
     },
     {
       "course": "4eso",
@@ -2139,9 +2714,9 @@
   ],
   "note": "Reclassificat no equival a certificació exhaustiva de totes les solucions i dibuixos. Els nivells poden continuar amb buits. La publicació validada es documenta al camp publication; les revisions posteriors requereixen una nova publicació.",
   "validation": {
-    "newBlocks": 11,
-    "generated": 374055,
-    "practiceConfigurations": 984,
+    "newBlocks": 14,
+    "generated": 502924,
+    "practiceConfigurations": 1284,
     "bankCases": 7160,
     "examSuites": {
       "passed": 19,
@@ -2197,6 +2772,24 @@
         "file": "comprova-examens-mesura-3eso.cjs",
         "exitCode": 0,
         "checks": "Vuit exàmens: lliurament, notes, encerts/errors/buits, reinici i retorn a pràctica."
+      },
+      {
+        "file": "comprova-examens-algebraic-3eso.cjs",
+        "exitCode": 0,
+        "topics": 9,
+        "checks": "Exàmens de 12 preguntes, 6 encerts/2 errors/4 buits i nota 5; tot correcte/incorrecte/buit; colors, solucions, reinici i retorn a pràctica."
+      },
+      {
+        "file": "comprova-examens-espacial-3eso.cjs",
+        "exitCode": 0,
+        "topics": 8,
+        "checks": "Exàmens de 12 preguntes, 6 encerts/2 errors/4 buits i nota 5; tot correcte/incorrecte/buit; colors, solucions, reinici i retorn a pràctica."
+      },
+      {
+        "file": "comprova-examens-estocastic-3eso.cjs",
+        "exitCode": 0,
+        "topics": 8,
+        "checks": "Exàmens de 12 preguntes, 6 encerts/2 errors/4 buits i nota 5; tot correcte/incorrecte/buit; colors, solucions, reinici i retorn a pràctica."
       }
     ]
   }

@@ -1,6 +1,6 @@
 # Punt 3 — estat de la continuació
 
-**Estat: parcial. 12 blocs amb classificació revisada; 8 blocs pendents. Canvis locals posteriors a la darrera publicació verificada.**
+**Estat: parcial. 15 blocs amb classificació revisada; 5 blocs pendents. Canvis locals posteriors a la darrera publicació verificada.**
 
 El registre anterior de 1r numèric es conserva. Aquesta continuació reclassifica 1r mesura, algebraic, espacial i estocàstic, i els cinc sentits de 2n; després revisa numèric i mesura de 3r. Les decisions explícites són als fitxers `revisio-*-punt3.json`; el compilador `scripts/compila-revisions-punt3.cjs` les aplica al contracte compartit. No s’ha aplicat una regla automàtica de paraules clau per decidir els nivells.
 
@@ -22,9 +22,9 @@ Els totals són identificadors de tema/tipus i entrades de banc; no són un reco
 | 2eso | estocastic | 133/133 | 0/0 | 95 / 38 / 0 | Reclassificat; veure buits i límits |
 | 3eso | numeric | 171/171 | 0/0 | 132 / 39 / 0 | Reclassificat; veure buits i límits |
 | 3eso | mesura | 120/120 | 0/0 | 49 / 71 / 0 | Reclassificat; veure buits i límits |
-| 3eso | algebraic | Cens pendent | Pendent | Pendent | Pendent |
-| 3eso | espacial | Cens pendent | Pendent | Pendent | Pendent |
-| 3eso | estocastic | Cens pendent | Pendent | Pendent | Pendent |
+| 3eso | algebraic | 104/104 | 0/0 | 68 / 36 / 0 | Reclassificat; veure buits i límits |
+| 3eso | espacial | 120/120 | 0/0 | 85 / 35 / 0 | Reclassificat; veure buits i límits |
+| 3eso | estocastic | 194/194 | 0/0 | 115 / 79 / 0 | Reclassificat; veure buits i límits |
 | 4eso | numeric | Cens pendent | Pendent | Pendent | Pendent |
 | 4eso | mesura | Cens pendent | Pendent | Pendent | Pendent |
 | 4eso | algebraic | Cens pendent | Pendent | Pendent | Pendent |
@@ -48,6 +48,8 @@ Els totals són identificadors de tema/tipus i entrades de banc; no són un reco
 - **Numèric de 3r:** 171 tipus amb quatre ampliacions de 4t. Criteris per demanda, variants de cancel·lació, interval enter, transport i repetició. Eliminades opcions fraccionàries equivalents i aclarits els intervals de racionals.
 - **Mesura de 3r:** 120 tipus amb quatre ampliacions de 4t. Procediments directes o passos connectats estàndard, sense altes artificials. Interval d’arrodoniment semiobert explícit i guia d’àrees sense reconstrucció innecessària de l’altura.
 
+- **Resta de 3r:** 104 tipus algebraics, 120 espacials i 194 estocàstics, amb les ampliacions. Corregides opcions equivalents de girs, punts fixos, composicions i quartils; quota de mosaics 11/1/0 per la varietat real. Registres, oracles i proves a `continuacio-tres-blocs-3eso-punt3.md`. Sense altes artificials.
+
 ## Validació i límits
 
 Les mostres per identificador, els filtres reals en suport guiat/autònom i test/obert, les quotes dels exàmens de tema i globals i els bancs oberts consten a `resultats-punt3-*.json`. Els oracles nous són `oracles-raonament-1eso-mesura.json`, `casos-pedagogics-punt3.json` i `oracles-geometria-2eso-mesura.json`. Les suites existents queden a `regressions-punt3.json`. Que passin els filtres no demostra per si sol la dificultat: la justificació és la demanda de les tasques registrada per tipus.
@@ -56,8 +58,8 @@ La font de les quotes dels temes revisats és la cobertura real. Un examen pot d
 
 Passada històrica de suites existents (anterior a aquesta nova revisió de 2n algebraic): **19/19 superades**. Les passades noves de bloc consten als JSON anteriors. Les famílies noves de mesura de 1r tenen 1.530 casos d’oracle independent, 80 sessions de correcció real i vuit exàmens d’un sol tema amb 20 preguntes altes. Les dades geomètriques corregides de 2n tenen 127 casos exhaustius.
 
-**Pendents:** revisar els altres 8 blocs (següent parella: 3r algebraic i espacial), completar cobertura alta i varietat dels bancs on manca, i aprofundir la validació independent de respostes i dibuixos heretats. Àlgebra, espacial i estocàstic de 1r han quedat sense famílies altes legítimes en el material original. Les altes noves de mesura de 1r tenen una sola família per tema ordinari (el tema de problemes en reutilitza vuit); el volum d’ampliació no té alta. Les portades autònomes pendents i els exercicis antics desats també requereixen una passada específica. No es dóna per complet el punt 3 ni tota la web.
+**Pendents:** revisar els altres 5 blocs (següent parella: 4t numèric i mesura), completar cobertura alta i varietat dels bancs on manca, i aprofundir la validació independent de respostes i dibuixos heretats. Àlgebra, espacial i estocàstic de 1r han quedat sense famílies altes legítimes en el material original. Les altes noves de mesura de 1r tenen una sola família per tema ordinari (el tema de problemes en reutilitza vuit); el volum d’ampliació no té alta. Les portades autònomes pendents i els exercicis antics desats també requereixen una passada específica. No es dóna per complet el punt 3 ni tota la web.
 
 ## Efecte sobre fitxes i publicació
 
-No s’han modificat formularis ni exportacions Word/PDF. La classificació nova s’aplica als generadors web embolcallats. Els camps de variant no alteren el càlcul dels generadors numèrics compartits amb les fitxes; els seus mapes propis continuen pendents de migració. Les correccions de dades geomètriques actuen al generador base de mesura de 2n i afectaran qualsevol consumidor que el reutilitzi. Les famílies noves de mesura de 1r s’afegeixen als temes i al banc web, sense substituir els generadors base de conversions i àrees. La publicació verificada consta a `publicacio-punt3.json`. La revisió dels 8 blocs restants continua pendent; el detall de la passada posterior és a `pendents-despres-publicacio-punt3.md`.
+No s’han modificat formularis ni exportacions Word/PDF. La classificació nova s’aplica als generadors web embolcallats. Els camps de variant no alteren el càlcul dels generadors numèrics compartits amb les fitxes; els seus mapes propis continuen pendents de migració. Les correccions de dades geomètriques actuen al generador base de mesura de 2n i afectaran qualsevol consumidor que el reutilitzi. Les famílies noves de mesura de 1r s’afegeixen als temes i al banc web, sense substituir els generadors base de conversions i àrees. La publicació verificada consta a `publicacio-punt3.json`. La revisió dels 5 blocs restants continua pendent; el detall de la passada posterior és a `pendents-despres-publicacio-punt3.md`.

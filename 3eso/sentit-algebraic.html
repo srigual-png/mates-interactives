@@ -1588,7 +1588,7 @@ function genFactoritzacio3ESO(){
 /* ── GENERADOR: EQUACIONS DE SEGON GRAU · 3r ESO ───────────── */
 function genEquacions2Grau3ESO(){
   const type=rnd(1,8);
-  let question,correct,alts=[],opts,guide,solution,openHint='Escriu la solució o les solucions.';
+  let question,correct,alts=[],opts,guide,solution,openHint='Escriu la solució o les solucions.',difficultyVariant;
 
   function signed(n){return n===0?'':(n>0?' + '+n:' − '+Math.abs(n));}
   function termX(b){
@@ -1694,6 +1694,7 @@ function genEquacions2Grau3ESO(){
     // General a != 1, integer roots
     let [r1,r2]=chooseRoots();
     const a=rnd(2,5),B=-a*(r1+r2),C=a*r1*r2;
+    if(B===0||C===0)difficultyVariant='incomplete';
     question='Resol l’equació completa:<br><b>'+quad(a,B,C)+' = 0</b>';
     correct=solText(r1,r2);alts=solAlts(r1,r2);opts=pairOpts(r1,r2);
     guide=['Identifica els coeficients a, b i c de l’equació escrita igual a zero','Pots simplificar o factoritzar si hi veus una estructura clara; si no, utilitza la fórmula general','Calcula amb cura els dos signes de ± i comprova cada solució'];
@@ -1783,7 +1784,7 @@ function genEquacions2Grau3ESO(){
     openHint='Escriu només el nombre més petit.';
   }
 
-  return {topicId:'equacions2',type,course:'3r',question,correct,alts,options:opts,guide,solution,openHint};
+  return {topicId:'equacions2',type,course:'3r',question,correct,alts,options:opts,guide,solution,openHint,difficultyVariant};
 }
 
 
@@ -2874,7 +2875,7 @@ function registerError(ex,studentAnswer,source='practice'){
     id:Date.now()+'_'+Math.random().toString(36).slice(2,8),
     topicId:ex.topicId||(topic?topic.id:null),
     topicName:ex.topicName||(topic?topic.name:'Tema'),
-    type:(ex.type!==undefined?ex.type:null),
+    type:(ex.type!==undefined?ex.type:null),difficultyVariant:ex.difficultyVariant,
     question:ex.question||'',
     correct:ex.correct,
     answer:studentAnswer,
