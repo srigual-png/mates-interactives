@@ -18,11 +18,13 @@
     return parts.map(s=>{if(/\^(?:[-+]?\d+|[nm]|□)$/.test(s)){const i=s.lastIndexOf('^');return {kind:'power',parts:[s.slice(0,i),s.slice(i+1)]};}if(/^\d+(?:[.,]\d+)?\/\d+(?:[.,]\d+)?$/.test(s))return {kind:'fraction',parts:s.split('/')};if(/^√\d+$/.test(s))return {kind:'root',parts:[s.slice(1)]};return {kind:'text',text:s};});
   }
   function blocks(sheet,scope,solution){
-    let last='';return sheet.questions.map(q=>{
+    let last='';const result=sheet.questions.map(q=>{
       const title=sheet.config.order==='grouped'&&last!==q.topicId?q.topicName:'';last=q.topicId;
       const lines=solution?(sheet.config.solutions==='steps'?[`${q.number}. ${q.question}`,...q.options.map((s,i)=>String.fromCharCode(97+i)+') '+s),...q.steps,`Resposta: ${q.answer}`]:[`${q.number}. ${q.answer}`]):[`${q.number}. ${q.question}`,...q.options.map((s,i)=>String.fromCharCode(97+i)+') '+s)];
       return {title,lines,figure:(!solution||sheet.config.solutions==='steps')?q.figure:undefined,space:solution?14:{compact:28,normal:65,wide:115}[sheet.config.space]};
     });
+    if(sheet.config.profile)result.unshift({title:'Perfil de dificultat: '+window.MIWorksheets.profiles[sheet.config.profile],lines:[],space:0});
+    return result;
   }
   function width(t,font,size=11){if(t.kind==='text')return font.widthOfTextAtSize(t.text.replace(/\n/g,''),size);if(t.kind==='fraction')return Math.max(...t.parts.map(s=>font.widthOfTextAtSize(s,9)))+6;if(t.kind==='power')return tokens(t.parts[0]).reduce((s,t)=>s+width(t,font,size),0)+font.widthOfTextAtSize(t.parts[1],8)+1;return font.widthOfTextAtSize('√'+t.parts[0],size)+3;}
   function wrap(text,font){

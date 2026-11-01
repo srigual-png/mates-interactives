@@ -86,6 +86,27 @@
     const fingerprint=id==='divis'&&options.length?JSON.stringify([q.type,question.match(/\d+/g),options.slice().sort()]):undefined;
     return {level:level(id,q),question,answer:plain(q.correct),steps,options,type:q.type,fingerprint};
   }
-  window.MIWorksheetConfig={id:'1eso-numeric',title:'Fitxa d’exercicis — 1r d’ESO — Sentit numèric',web:'srigual-png.github.io/mates-interactives',paperQuestion,
-    topics:TOPICS.filter(t=>t.course==='1r').map(t=>({id:t.id,name:t.name,levels:generators[t.id]?[1,2,3]:[],generate(l){if(t.id==='potencies'&&l===3)return advancedPowers();if(t.id==='decimal_sys'&&l===3)return advancedPlaceValue();return adapt(t.id,generators[t.id]());}}))};
+  // Revisió manual de les branques type: dades i contextos nous no creen famílies.
+  const definitions={
+    naturals:[[1,'ordenar'],[1,'comparar'],[2,'arrodonir'],[2,'problema-suma'],[3,'produccio']],
+    decimal_sys:[[1,'valor'],[2,'descompondre'],[2,'reconstruir'],[2,'valor-context']],
+    ops:[[1,'suma'],[1,'resta'],[2,'producte'],[2,'divisio'],[2,'compra'],[3,'produccio']],
+    potencies:[[1,'base','potencies'],[1,'exponent','potencies'],[1,'escriure-potencia','potencies'],[1,'producte-factors','potencies'],[2,'calcular-potencia','potencies'],[2,'arrel','arrels'],[2,'inversa','arrels']],
+    jerarquia:[[1,'productes-sumes'],[1,'productes-sumes'],[2,'potencia'],[2,'parentesis'],[2,'parentesis'],[3,'potencia-parentesis'],[3,'compra'],[3,'claudators'],[3,'claudators-potencia']],
+    divis:[[1,'triar-multiple'],[1,'comprovar-divisibilitat'],[2,'primer'],[2,'factoritzar'],[1,'triar-divisor'],[2,'excloure-divisor'],[3,'agrupacions']],
+    mcmmcd:[[1,'calcul-mcd','mcd'],[1,'calcul-mcm','mcm'],[2,'mcm-tres','mcm'],[2,'periodicitat','mcm'],[3,'repartiment','mcd']],
+    enters:[[1,'ordenar'],[1,'suma'],[2,'resta'],[2,'producte'],[2,'temperatura'],[3,'saldo'],[1,'recta']],
+    decimals:[[1,'suma'],[2,'producte'],[2,'arrodonir'],[2,'fraccio-decimal'],[2,'decimal-fraccio'],[2,'canvi'],[3,'taxa'],[2,'error-absolut'],[3,'error-relatiu']],
+    fraccions:[[1,'simplificar'],[1,'suma-igual'],[2,'suma-diferent'],[2,'producte'],[2,'divisio'],[2,'comparar'],[1,'equivalent'],[3,'romanent'],[1,'classificar'],[1,'part'],[1,'conversio']],
+    proporcionalitat:[[1,'classificar'],[1,'completar-taula'],[3,'valor-unitari'],[3,'valor-unitari'],[1,'constant'],[2,'comprovar-taula'],[3,'valor-unitari'],[2,'factor']],
+    percentatges:[[1,'part'],[1,'percentatge'],[2,'total'],[2,'augment'],[2,'descompte'],[2,'conversio'],[3,'enquesta']]
+  };
+  function families(id){
+    const rows=definitions[id].map(([level,family,content])=>({level,family:id+':'+family,contents:[content||id]}));
+    if(id==='potencies')rows.push({level:3,family:id+':combinada',contents:['potencies','arrels']});
+    if(id==='decimal_sys')rows.push({level:3,family:id+':intercanvi',contents:[id]});
+    return rows;
+  }
+  window.MIWorksheetConfig={id:'1eso-numeric',profiles:true,title:'Fitxa d’exercicis — 1r d’ESO — Sentit numèric',web:'srigual-png.github.io/mates-interactives',paperQuestion,
+    topics:TOPICS.filter(t=>t.course==='1r').map(t=>({id:t.id,name:t.name,balanceContents:t.id==='mcmmcd',requiredContents:t.id==='mcmmcd'?['mcd','mcm']:t.id==='potencies'?['potencies','arrels']:[t.id],families:generators[t.id]?families(t.id):[],levels:generators[t.id]?[1,2,3]:[],generate(l){if(t.id==='potencies'&&l===3)return advancedPowers();if(t.id==='decimal_sys'&&l===3)return advancedPlaceValue();return adapt(t.id,generators[t.id]());},metadata(q){return families(t.id)[q.type===undefined?families(t.id).length-1:q.type-1];}}))};
 })();

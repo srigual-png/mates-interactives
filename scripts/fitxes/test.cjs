@@ -23,32 +23,46 @@ const server=http.createServer((req,res)=>{const f=path.join(root,decodeURICompo
         const text=wording('decimals',{type:7,question:`${name} funciona a 3.5 km/h durant 4 h. Quina quantitat recorre o produeix?`});
         check(!text.includes('recorre o produeix')&&!text.includes('funciona a')&&text.includes('3,5'),'context i magnitud concrets');
       }
-      const base={count:15,topics:T.map(t=>t.id),percentages:[40,40,20],order:'grouped',space:'normal',format:'both',solutions:'steps'};
-      for(const n of [5,15,25]){const v=E.counts(n,[30,30,40]);check(v.reduce((a,b)=>a+b,0)===n,'arrodoniment');check(v[0]>=v[1],'desempat estable');}
-      for(let a=0;a<=100;a+=10)for(let b=0;b<=100-a;b+=10)for(let c=0;c<=100-a-b;c+=10){const p=[a,b,c];p.forEach((v,i)=>check(E.maximum(p,i)+p.reduce((s,x,j)=>s+(i===j?0:x),0)<=100,'màxim percentatge'));}
-      check(!!E.validate({...base,percentages:[40,40,10]},T),'total incomplet');check(!!E.validate({...base,count:5},T),'més temes que preguntes');
-      const limited=[{id:'only',name:'Només baixa',levels:[1]}];let rejected=false;try{E.allocate({...base,count:5,topics:['only'],percentages:[0,0,100]},limited);}catch{rejected=true;}check(rejected,'combinació impossible');
-      const one={id:'one',name:'Repetit',levels:[1],generate:()=>({question:'Sempre igual',answer:'1',steps:['1'],level:1,options:[]})};rejected=false;try{await E.generate({...base,count:5,topics:['one'],percentages:[100,0,0]},[one]);}catch{rejected=true;}check(rejected,'límit de duplicats');
-      const stats=[];
-      for(const t of T)for(let l=1;l<=3;l++){
-        const c={...base,count:5,topics:[t.id],percentages:[1,2,3].map(k=>k===l?100:0)};
-        const s=await E.generate(c,T);check(s.questions.length===5&&s.questions.every(q=>q.level===l),'nivell '+t.id);stats.push(t.id+':'+l);
+      const base={count:15,topics:T.map(t=>t.id),profile:'balanced',order:'grouped',space:'normal',format:'both',solutions:'steps'};
+      check(MIWorksheetUI.getConfig().profile==='balanced','perfil inicial');
+      check(!document.querySelector('[id^="ws-level-"]'),'sense percentatges');
+      check(!!E.validate({...base,count:5},T),'mínim insuficient');
+      let runs=0;
+      const originalRandom=Math.random;
+      try{for(let seed=1;seed<=8;seed++){
+        let state=seed;Math.random=()=>((state=(state*1664525+1013904223)>>>0)/4294967296);
+        for(const profile of ['basic','balanced','hard'])for(const topics of [['mcmmcd'],['mcmmcd','potencies','naturals'],T.map(t=>t.id)]){
+          const c={...base,profile,topics,count:topics.length===12?30:10,order:seed%2?'grouped':'mixed'};
+          const sheet=await E.generate(c,T),qs=sheet.questions;
+          check(qs.length===c.count,'quantitat');check(new Set(qs.map(q=>q.key)).size===qs.length,'duplicats');
+          for(const id of topics){
+            const t=T.find(t=>t.id===id),items=qs.filter(q=>q.topicId===id);
+            check(t.requiredContents.every(x=>items.some(q=>q.contents.includes(x))),'cobertura '+id);
+            const families={};for(const q of items)if(q.level===3)families[q.family]=(families[q.family]||0)+1;
+            check(Object.values(families).every(n=>n<=2),'màxim dos difícils');
+            if(id==='mcmmcd')check(Math.abs(items.filter(q=>q.contents.includes('mcd')).length-items.filter(q=>q.contents.includes('mcm')).length)<=1,'equilibri MCD/mcm');
+          }
+          check(profile!=='basic'||qs.every(q=>q.level<3),'bàsic sense alta');runs++;
+        }
+        const sheet=await E.generate({...base,count:10,topics:['naturals'],profile:'hard'},T);
+        check(sheet.questions.filter(q=>q.level===3).length<=2,'família difícil única');
+        check(sheet.questions.filter(q=>q.level===2).length>=8,'completar amb mitjans');
+      }}finally{Math.random=originalRandom;}
+      for(const t of T)for(const profile of ['basic','balanced','hard']){
+        const s=await E.generate({...base,count:10,topics:[t.id],profile},T);
+        check(t.requiredContents.every(x=>s.questions.some(q=>q.contents.includes(x))),'tema individual '+t.id);runs++;
       }
-      for(const n of [15,25,30])for(const p of [[40,40,20],[100,0,0],[0,100,0],[0,0,100]]){
-        const s=await E.generate({...base,count:n,percentages:p},T),qs=s.questions;
-        check(qs.length===n&&new Set(qs.map(q=>q.key)).size===n,'total i unicitat');
-        const totals=T.map(t=>qs.filter(q=>q.topicId===t.id).length);check(Math.max(...totals)-Math.min(...totals)<=1&&Math.min(...totals)>0,'equilibri');
-        check(JSON.stringify([1,2,3].map(l=>qs.filter(q=>q.level===l).length))===JSON.stringify(E.counts(n,p)),'quotes');
-        T.forEach(t=>{const q=qs.filter(q=>q.topicId===t.id);check(q.every((x,i)=>!i||x.level>=q[i-1].level),'ordre agrupat');});
-      }
-      const a=await E.generate({...base,order:'mixed'},T),b=await E.generate({...base,order:'mixed'},T,a.questions.map(q=>q.key));
-      check(a.questions[0].level===1&&b.questions[0].level===1,'començament fàcil');check(a.version!==b.version,'versió');check(b.questions.every(q=>!a.questions.some(x=>x.key===q.key)),'nova versió diferent');
-      return {combinations:stats.length,topics:T.length};
+      let serial=0;
+      const one={id:'one',name:'Una família difícil',levels:[2,3],requiredContents:['one'],families:[{level:2,family:'medium',contents:['one']},{level:3,family:'high',contents:['one']}],generate:l=>({level:l,family:l===3?'high':'medium',contents:['one'],question:l===3?'Problema 999':`Calcula ${++serial}`,answer:'0',options:[],steps:['0']})};
+      const single=await E.generate({...base,count:10,topics:['one'],profile:'hard'},[one]);
+      check(single.questions.filter(q=>q.level===3).length===1&&single.questions.filter(q=>q.level===2).length===9,'una única variant adequada');
+      const scarce={...one,levels:[2],families:[one.families[0]],generate:()=>({level:2,family:'medium',contents:['one'],question:'Calcula 1',answer:'1',options:[],steps:['1']})};
+      let shortage='';try{await E.generate({...base,count:5,topics:['one']},[scarce]);}catch(e){shortage=e.message;}
+      check(shortage.includes('Pots demanar 1 exercicis'),'quantitat viable explícita');
+      check(E.validate({...base,count:1,topics:['mcmmcd']},T).includes('2 exercicis'),'mínim exacte MCD/mcm');
+      return {runs,topics:T.length};
     });
     console.log('Motor:',report);
-    await page.selectOption('#ws-level-0','20');assert(await page.locator('#ws-generate').isDisabled());assert((await page.locator('#ws-total').innerText()).includes('80 %'));
-    await page.selectOption('#ws-level-1','60');assert(await page.locator('#ws-generate').isEnabled());assert(await page.locator('#ws-level-0 option[value="30"]').evaluate(e=>e.disabled));
-    await page.selectOption('#ws-level-1','40');await page.selectOption('#ws-level-0','40');
     await page.selectOption('#ws-count','15');await page.locator('#ws-topic-summary').click();await page.locator('#ws-all').check();
     await page.locator('#ws-all').press('Escape');assert(!await page.locator('#ws-topics').getAttribute('open'));
     await page.locator('#ws-generate').click();await page.waitForFunction(()=>!document.querySelector('.mi-worksheet').hasAttribute('aria-busy'),{},{timeout:60000});
@@ -65,7 +79,7 @@ const server=http.createServer((req,res)=>{const f=path.join(root,decodeURICompo
     await page.setViewportSize({width:1280,height:1000});await page.locator('.mi-worksheet').screenshot({path:'tmp/fitxes/form.png'});
     // Exportacions deterministes dels casos amb notació i text llarg.
     const extra=await page.evaluate(async()=>{
-      const s=await MIWorksheets.generate({count:5,topics:['fraccions','potencies','jerarquia'],percentages:[20,40,40],order:'mixed',space:'wide',format:'both',solutions:'steps'},MIWorksheetConfig.topics);
+      const s=await MIWorksheets.generate({count:5,topics:['fraccions','potencies','jerarquia'],profile:'balanced',order:'mixed',space:'wide',format:'both',solutions:'steps'},MIWorksheetConfig.topics);
       s.questions[0]={...s.questions[0],question:'Calcula: 2/3 + 1/6.',answer:'5/6',steps:['2/3 = 4/6','4/6 + 1/6 = 5/6']};
       s.questions[1]={...s.questions[1],question:'Calcula: 3^3 + √144.',answer:'39',steps:['3^3 = 3 × 3 × 3 = 27','√144 = 12','27 + 12 = 39']};
       const files=await MIWorksheetExport.create(s,MIWorksheetConfig);return {s,files:await Promise.all(files.map(async f=>({name:'math-'+f.name,data:Array.from(new Uint8Array(await f.blob.arrayBuffer()))})))};
@@ -75,12 +89,12 @@ const server=http.createServer((req,res)=>{const f=path.join(root,decodeURICompo
     assert(await page.evaluate(()=>MIValidation.grade({correct:'1/2'},'2/4')));
     // Formats individuals, solucionari absent o només respostes.
     const modes=await page.evaluate(async()=>{
-      const model=MIWorksheetUI.getCurrent()||await MIWorksheets.generate({count:5,topics:['fraccions'],percentages:[40,40,20],order:'mixed',space:'compact',format:'pdf',solutions:'none'},MIWorksheetConfig.topics);
+      const model=MIWorksheetUI.getCurrent()||await MIWorksheets.generate({count:5,topics:['fraccions'],profile:'balanced',order:'mixed',space:'compact',format:'pdf',solutions:'none'},MIWorksheetConfig.topics);
       const results=[];
       for(const format of ['pdf','docx'])for(const solutions of ['none','answers']){
         const sheet={...model,config:{...model.config,format,solutions}};
         const f=await MIWorksheetExport.create(sheet,MIWorksheetConfig);
-        if(solutions==='answers'&&MIWorksheetExport.blocks(sheet,MIWorksheetConfig,true).some(b=>b.lines.length!==1))throw new Error('Solucionari només respostes');
+        if(solutions==='answers'&&MIWorksheetExport.blocks(sheet,MIWorksheetConfig,true).filter(b=>b.lines.length).some(b=>b.lines.length!==1))throw new Error('Solucionari només respostes');
         results.push([format,solutions,f.length,f.every(x=>x.blob.size>1000)]);
       }return results;
     });modes.forEach(([,s,n,ok])=>{assert.equal(n,s==='none'?1:2);assert(ok);});
