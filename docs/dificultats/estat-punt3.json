@@ -1,18 +1,18 @@
 {
   "status": "partial",
-  "reviewedBlocks": 10,
-  "pendingBlocks": 10,
-  "nextBlock": "3eso/numeric",
+  "reviewedBlocks": 12,
+  "pendingBlocks": 8,
+  "nextBlock": "3eso/algebraic",
   "batchSize": 2,
   "nextBlocks": [
-    "3eso/numeric",
-    "3eso/mesura"
+    "3eso/algebraic",
+    "3eso/espacial"
   ],
   "published": false,
   "publication": {
-    "commit": "8e9417549290216e4f5a07e14ec28b68fc550d5d",
+    "commit": "5b31a4126474049ac9aeadbdec1a2487426b3235",
     "url": "https://srigual-png.github.io/mates-interactives/",
-    "verifiedAt": "2026-10-30T21:53:20.306Z"
+    "verifiedAt": "2026-10-31T22:34:45.605Z"
   },
   "blocks": [
     {
@@ -1738,12 +1738,363 @@
     {
       "course": "3eso",
       "sense": "numeric",
-      "status": "pending"
+      "status": "classification-reviewed",
+      "identifiers": 171,
+      "bankEntries": 0,
+      "baseLevels": [
+        132,
+        39,
+        0
+      ],
+      "bankLevels": [
+        0,
+        0,
+        0
+      ],
+      "variants": [
+        {
+          "topic": "racionals3r",
+          "type": 8,
+          "key": "cancelled",
+          "level": 1,
+          "reason": "El parèntesi es cancel·la: zero multiplicat per qualsevol racional no requereix la cadena general."
+        },
+        {
+          "topic": "racionals3r",
+          "type": 10,
+          "key": "integer",
+          "level": 1,
+          "reason": "La diferència és un enter; es localitza directament a l’extrem inclòs de l’interval."
+        },
+        {
+          "topic": "aproximacions3r",
+          "type": 11,
+          "key": "transport",
+          "level": 2,
+          "reason": "Interpretar el quocient i la necessitat d’arrodonir cap amunt per no deixar persones sense plaça."
+        },
+        {
+          "topic": "recomptes3r",
+          "type": 12,
+          "key": "repetition",
+          "level": 1,
+          "reason": "Si es permet repetir, cada posició manté el mateix nombre d’opcions: producte directe."
+        }
+      ],
+      "coverage": [
+        {
+          "topic": "racionals3r",
+          "levels": [
+            9,
+            5,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "generatriu3r",
+          "levels": [
+            8,
+            4,
+            0
+          ],
+          "exam": [
+            8,
+            4,
+            0
+          ]
+        },
+        {
+          "topic": "reals3r",
+          "levels": [
+            12,
+            0,
+            0
+          ],
+          "exam": [
+            12,
+            0,
+            0
+          ]
+        },
+        {
+          "topic": "aproximacions3r",
+          "levels": [
+            9,
+            4,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "potencies3r",
+          "levels": [
+            13,
+            3,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "notacio3r",
+          "levels": [
+            15,
+            3,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "proporcionalitat3r",
+          "levels": [
+            10,
+            6,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "recomptes3r",
+          "levels": [
+            10,
+            8,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "radicalsA",
+          "levels": [
+            13,
+            1,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "exponentFraccionariB",
+          "levels": [
+            14,
+            0,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "logaritmesC",
+          "levels": [
+            14,
+            0,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "pascalD",
+          "levels": [
+            8,
+            6,
+            0
+          ],
+          "exam": null
+        }
+      ],
+      "sampling": {
+        "generated": 37503,
+        "practiceConfigurations": 96,
+        "bankChecks": [],
+        "pageErrors": []
+      }
     },
     {
       "course": "3eso",
       "sense": "mesura",
-      "status": "pending"
+      "status": "classification-reviewed",
+      "identifiers": 120,
+      "bankEntries": 0,
+      "baseLevels": [
+        49,
+        71,
+        0
+      ],
+      "bankLevels": [
+        0,
+        0,
+        0
+      ],
+      "variants": [],
+      "coverage": [
+        {
+          "topic": "volum",
+          "levels": [
+            7,
+            3,
+            0
+          ],
+          "exam": [
+            7,
+            5,
+            0
+          ]
+        },
+        {
+          "topic": "precisio",
+          "levels": [
+            7,
+            3,
+            0
+          ],
+          "exam": [
+            7,
+            5,
+            0
+          ]
+        },
+        {
+          "topic": "arees",
+          "levels": [
+            1,
+            9,
+            0
+          ],
+          "exam": [
+            3,
+            9,
+            0
+          ]
+        },
+        {
+          "topic": "semblanca",
+          "levels": [
+            9,
+            1,
+            0
+          ],
+          "exam": [
+            9,
+            3,
+            0
+          ]
+        },
+        {
+          "topic": "tales",
+          "levels": [
+            0,
+            10,
+            0
+          ],
+          "exam": [
+            0,
+            12,
+            0
+          ]
+        },
+        {
+          "topic": "pitagores",
+          "levels": [
+            0,
+            10,
+            0
+          ],
+          "exam": [
+            0,
+            12,
+            0
+          ]
+        },
+        {
+          "topic": "piramides",
+          "levels": [
+            5,
+            5,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "errorMesura",
+          "levels": [
+            5,
+            5,
+            0
+          ],
+          "exam": [
+            6,
+            6,
+            0
+          ]
+        },
+        {
+          "topic": "escalesA",
+          "levels": [
+            3,
+            7,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "cossosB",
+          "levels": [
+            6,
+            4,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "trigC",
+          "levels": [
+            5,
+            5,
+            0
+          ],
+          "exam": null
+        },
+        {
+          "topic": "problemesD",
+          "levels": [
+            1,
+            9,
+            0
+          ],
+          "exam": null
+        }
+      ],
+      "sampling": {
+        "generated": 36000,
+        "practiceConfigurations": 96,
+        "bankChecks": [],
+        "pageErrors": []
+      }
     },
     {
       "course": "3eso",
@@ -1788,9 +2139,9 @@
   ],
   "note": "Reclassificat no equival a certificació exhaustiva de totes les solucions i dibuixos. Els nivells poden continuar amb buits. La publicació validada es documenta al camp publication; les revisions posteriors requereixen una nova publicació.",
   "validation": {
-    "newBlocks": 9,
-    "generated": 300552,
-    "practiceConfigurations": 792,
+    "newBlocks": 11,
+    "generated": 374055,
+    "practiceConfigurations": 984,
     "bankCases": 7160,
     "examSuites": {
       "passed": 19,
@@ -1836,6 +2187,16 @@
       {
         "file": "comprova-regressio-estocastic-2eso.cjs",
         "exitCode": 0
+      },
+      {
+        "file": "comprova-examens-tema-3eso.cjs",
+        "exitCode": 0,
+        "checks": "Vuit exàmens: lliurament, notes, encerts/errors/buits, reinici i retorn a pràctica."
+      },
+      {
+        "file": "comprova-examens-mesura-3eso.cjs",
+        "exitCode": 0,
+        "checks": "Vuit exàmens: lliurament, notes, encerts/errors/buits, reinici i retorn a pràctica."
       }
     ]
   }

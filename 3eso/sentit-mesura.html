@@ -1184,10 +1184,10 @@ function genMesuraPrecisio3ESO(){
   }
   else if(type===7){
     const whole=shuffle([12,18,25,37,64,82])[0],unit=shuffle(['cm','mm','mL','g'])[0];
-    correct=`Entre ${fmtM(whole-0.5)} i ${fmtM(whole+0.5)} ${unit}`;
+    correct=`[${fmtM(whole-0.5)}; ${fmtM(whole+0.5)}) ${unit}`;
     options=uniq4(correct,[`Entre ${fmtM(whole-1)} i ${fmtM(whole+1)} ${unit}`,`Entre ${fmtM(whole-0.1)} i ${fmtM(whole+0.1)} ${unit}`,`Exactament ${whole} ${unit}`,`Entre 0 i ${whole} ${unit}`]);alts=[correct];
     question=`Una mesura s’ha arrodonit a la unitat més propera i s’ha escrit <b>${whole} ${unit}</b>. En quin interval es troba el valor abans d’arrodonir?`;
-    guide=['Arrodonir a la unitat més propera divideix els valors als punts mitjans entre enters consecutius.','Calcula mig unitat per sota i mig unitat per sobre del valor escrit.','No confonguis aquest interval amb un error de ±1 unitat.'];
+    guide=['Arrodonir a la unitat més propera divideix els valors als punts mitjans entre enters consecutius.','Calcula mig unitat per sota i mig unitat per sobre del valor escrit.','Amb l’arrodoniment habitual de valors positius, el límit inferior entra i el superior queda fora.'];
     solution=[`La meitat d’una unitat és 0,5 ${unit}.`,`Límit inferior: ${whole} − 0,5 = ${fmtM(whole-0.5)} ${unit}.`,`Límit superior: ${whole} + 0,5 = ${fmtM(whole+0.5)} ${unit}.`,`Interval: <b>${correct}</b>.`];
     openHint='Escriu l’interval complet tal com apareixeria entre les opcions.';
   }
@@ -1326,7 +1326,7 @@ function genAreesCompostes3ESO(){
     const h=area/w,triH=shuffle([3,4,5])[0],tri=w*triH/2,res=area+tri;
     ({correct,alts,options}=measureOptions(res,'cm²',[area,tri,w*(h+triH),area+w*triH,res*2]));
     question=`Un rectangle té àrea <b>${area} cm²</b> i base <b>${w} cm</b>. Sobre aquesta mateixa base hi ha un triangle d’altura <b>${triH} cm</b>. Quina és l’àrea total de la figura?`;
-    guide=['Primer troba l’altura del rectangle a partir de la seva àrea i la base.','Calcula després l’àrea del triangle.','Suma les dues superfícies.'];
+    guide=['L’àrea del rectangle ja està donada: no cal calcular-ne l’altura.','Calcula l’àrea del triangle amb la base compartida i l’altura indicada.','Suma les dues superfícies.'];
     solution=[`Altura del rectangle: ${area} ÷ ${w} = ${h} cm.`,`Triangle: ${w} · ${triH} ÷ 2 = ${fmtM(tri)} cm².`,`Total: ${area} + ${fmtM(tri)} = <b>${correct}</b>.`];
   }
   else if(type===9){
@@ -1498,7 +1498,7 @@ function genTalesMesures3ESO(){
   else if(type===9){
     const a=shuffle([2,3,4,5])[0],A=a*shuffle([2,3,4])[0]; let b=shuffle([3,5,6,8])[0]; while(b===A)b=shuffle([3,5,6,8])[0];
     correct=`${a}/${A} = ${b}/x`;alts=[correct,`${b}/x = ${a}/${A}`];
-    options=shuffle([correct,`${a}/${b} = ${A}/x`,`${A}/${a} = ${b}/x`,`${a}/${A} = x/${b}`]);
+    options=shuffle([correct,`${a}/${A} = ${b}·x`,`${A}/${a} = ${b}/x`,`${a}/${A} = x/${b}`]);
     question=`En dos triangles semblants, <b>${a} m</b> correspon a <b>${A} m</b> i <b>${b} m</b> correspon a <b>x</b>. Quina proporció manté correctament l’ordre dels costats homòlegs?`;
     guide=['Decideix quin triangle poses sempre al numerador i quin al denominador.','Mantén aquest mateix ordre en els dos parells de costats.','No barregis un quocient petit/gran amb un altre gran/petit.'];
     solution=[`Primer parell homòleg: petit/gran = ${a}/${A}.`,`Segon parell ha de seguir el mateix ordre: ${b}/x.`,`Per tant: <b>${correct}</b>.`];
@@ -2258,7 +2258,7 @@ function registerError(ex,studentAnswer,source='practice'){
     id:Date.now()+'_'+Math.random().toString(36).slice(2,8),
     topicId:ex.topicId||(topic?topic.id:null),
     topicName:ex.topicName||(topic?topic.name:'Tema'),
-    type:(ex.type!==undefined?ex.type:null),
+    type:(ex.type!==undefined?ex.type:null),difficultyVariant:ex.difficultyVariant,
     question:ex.question||'',
     correct:ex.correct,
     answer:studentAnswer,

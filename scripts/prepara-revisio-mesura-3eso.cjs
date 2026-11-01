@@ -1,0 +1,27 @@
+const fs=require('fs'),assert=require('assert/strict'),topics=[];
+const source=JSON.parse(fs.readFileSync('docs/dificultats/auditoria-global-mostres-punt2.json')).blocks.find(b=>b.course==='3eso'&&b.sense==='mesura');
+function rows(topic,level,types,reason){for(const type of types){const old=source.topics.find(t=>t.id===topic)?.types.find(t=>t.type===String(type));assert(old,topic+':'+type);topics.push({topic,type,level,reason,previous:old.levels||[],samples:old.variants.map(v=>v.question)});}}
+rows('volum',1,[1,2,3,4,5,6,9],'Conversió directa o fórmula de volum i equivalència immediata cm³/mL o dm³/L.');
+rows('volum',2,[7,8,10],'Coordinar volum i canvi d’unitat, completar capacitat o convertir per comparar.');
+rows('precisio',1,[1,2,3,4,6,9,10],'Reconèixer magnitud, instrument, resolució o expressió coherent d’una lectura.');
+rows('precisio',2,[5,7,8],'Comparar resolucions en unitats diferents, reconstruir interval o coordinar abast i precisió.');
+rows('arees',1,[7],'Les àrees completa i retirada ja estan donades: una resta directa.');
+rows('arees',2,[1,2,3,4,5,6,8,9,10],'Descompondre o completar figures, connectar àrees de parts, amplada de vora o conversió d’unitats. Les descomposicions són estàndard.');
+rows('semblanca',1,[1,2,3,4,5,6,7,8,9],'Aplicar o invertir la raó lineal, quadràtica o cúbica i identificar la propietat corresponent.');
+rows('semblanca',2,[10],'Passar de dimensions d’un cub i escala al volum de la reproducció.');
+rows('tales',2,[1,2,3,4,5,6,7,8,9,10],'Establir correspondències i proporció, incloent ombres, mirall, unitats o antena que cal separar. Model estàndard sense planificació no immediata.');
+rows('pitagores',2,[1,2,3,4,5,6,7,8,9,10],'Identificar el triangle dins un context o figura, recuperar catet/semibase, diagonal espacial o afegir una longitud extra.');
+rows('piramides',1,[1,2,3,7,8],'Fórmula explícita de volum o àrea lateral amb les magnituds necessàries donades.');
+rows('piramides',2,[4,5,6,9,10],'Coordinar base i lateral, reconstruir apotema/generatriu amb Pitàgores o invertir la fórmula de volum.');
+rows('errorMesura',1,[1,2,3,4,6],'Estimació usual, error absolut/relatiu o meitat de la unitat d’arrodoniment directes.');
+rows('errorMesura',2,[5,7,8,9,10],'Comparar bases d’error, combinar volum/percentatge/unitats, àrea pintable/cobertura o Pitàgores i reserva.');
+rows('escalesA',1,[1,2,8],'Aplicar factor i unitats de longitud o reconèixer el factor quadràtic. Contingut de 4t.');
+rows('escalesA',2,[3,4,5,6,7,9,10],'Reconstruir escala, combinar longitud/àrea/unitats, comparar mapes o sumar trams. Contingut de 4t.');
+rows('cossosB',1,[1,2,3,5,6,7],'Raó lineal, superficial o de volum, inclosa inversió directa. Contingut de 4t.');
+rows('cossosB',2,[4,8,9,10],'Relacionar massa i volum d’un material o passar entre raons de superfície i volum. Contingut de 4t.');
+rows('trigC',1,[1,2,3,4,10],'Reconèixer o aplicar la definició de sin, cos o tan amb costats explícits. Contingut de 4t.');
+rows('trigC',2,[5,6,7,8,9],'Triar i aplicar la relació en un context, aïllar longitud o recuperar angle. Contingut de 4t.');
+rows('problemesD',1,[8],'Calcular desviació i contrastar-la amb la tolerància donada. Contingut de 4t.');
+rows('problemesD',2,[1,2,3,4,5,6,7,9,10],'Coordinar models estàndard, conversions, superfície útil i compra de caixes senceres o càrrec extra. Contingut de 4t; no alta només per tenir molts passos.');
+for(const t of source.topics)assert.deepEqual(topics.filter(r=>r.topic===t.id).map(r=>String(r.type)).sort(),t.types.map(r=>r.type).sort(),'Cens '+t.id);
+fs.writeFileSync('docs/dificultats/revisio-3eso-mesura-punt3.json',JSON.stringify({course:'3eso',sense:'mesura',status:'reclassified-with-gaps',topics,banks:[],note:'120 tipus, vuit temes ordinaris i quatre ampliacions de 4t. Les tasques connectades són estàndard; no hi ha famílies altes legítimes. Cal completar cobertura.'},null,2)+'\n');
