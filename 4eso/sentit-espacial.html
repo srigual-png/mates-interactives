@@ -1236,7 +1236,7 @@ function genCoordinatesVectors4ESO(){
     guide=['Si M és el punt mitjà, P i P′ són simètrics respecte de M.','P′=2M−P.','Aplica la relació a cada coordenada.'];
     solution=[`xP′=2·${mx}−(${px})=<b>${qx}</b>.`,`yP′=2·${my}−(${py})=<b>${qy}</b>.`,`P′=<b>${correct}</b>.`];
   }else if(type===4){
-    const ax=rnd(-4,1),ay=rnd(-4,1),ux=rnd(1,4),uy=rnd(-3,3),vx=rnd(-3,3),vy=rnd(1,4),bx=ax+ux,by=ay+uy,cx=bx+vx,cy=by+vy,dx=ax+vx,dy=ay+vy;
+    const ax=rnd(-4,1),ay=rnd(-4,1),ux=rnd(1,4),uy=rnd(-3,3),vx=rnd(-3,3),vy=(()=>{let v=rnd(1,4);while(ux*v===uy*vx)v=rnd(1,4);return v})(),bx=ax+ux,by=ay+uy,cx=bx+vx,cy=by+vy,dx=ax+vx,dy=ay+vy;
     correct=pointLabel(dx,dy);alts=pointPairAlts(dx,dy);
     question=`A=${pointLabel(ax,ay)}, B=${pointLabel(bx,by)} i C=${pointLabel(cx,cy)} són tres vèrtexs <b>consecutius</b> del paral·lelogram A-B-C-D. Troba D.`;
     options=pointOptions(dx,dy,[pointLabel(ax+cx,ay+cy),pointLabel(bx+cx-ax,by+cy-ay),pointLabel(ax+bx-cx,ay+by-cy)]);
@@ -1278,7 +1278,7 @@ function genCoordinatesVectors4ESO(){
     guide=['Calcula AB² i AC² per evitar arrels.','Compara les sumes dels quadrats de les diferències.'];
     solution=[`AB²=${t[0]*t[0]}+${t[1]*t[1]}=<b>${t[2]*t[2]}</b>.`,`AC²=${t[1]*t[1]}+${t[0]*t[0]}=<b>${t[2]*t[2]}</b>.`,`Per tant, <b>tenen la mateixa longitud</b>.`];
   }else{
-    const ax=rnd(-4,1),ay=rnd(-4,1),ux=rnd(1,4),uy=rnd(-2,2),vx=rnd(-2,2),vy=rnd(1,4),bx=ax+ux,by=ay+uy,cx=ax+ux+vx,cy=ay+uy+vy,dx=ax+vx,dy=ay+vy;
+    const ax=rnd(-4,1),ay=rnd(-4,1),ux=rnd(1,4),uy=rnd(-2,2),vx=rnd(-2,2),vy=(()=>{let v=rnd(1,4);while(ux*v===uy*vx)v=rnd(1,4);return v})(),bx=ax+ux,by=ay+uy,cx=ax+ux+vx,cy=ay+uy+vy,dx=ax+vx,dy=ay+vy;
     correct='AB = DC i AD = BC';allowOpen=false;
     question=`Per justificar amb vectors que A=${pointLabel(ax,ay)}, B=${pointLabel(bx,by)}, C=${pointLabel(cx,cy)} i D=${pointLabel(dx,dy)} formen un paral·lelogram, quina comprovació és suficient?`;
     options=shuffle([correct,'AB = BC i CD = DA','Totes quatre diagonals tenen el mateix mòdul','Els quatre punts tenen la mateixa ordenada']);
@@ -1727,7 +1727,7 @@ function genPosicioRectesAmpC(){
     options=relationOptions(correct);guide=['Totes dues rectes són verticals.','Comprova si tenen la mateixa abscissa o abscisses diferents.'];
     solution=[`r i s tenen direcció vertical.`,`Com que ${a}≠${b}, no són la mateixa recta.`,`✅ Són <b>paral·leles</b>.`];
   }else if(type===8){
-    let m=0;while(m===0)m=rnd(-5,5);const n1=rnd(-4,4),n2=rnd(-4,4);correct=String(m);alts=[];allowOpen=true;
+    let m=0;while(m===0)m=rnd(-5,5);const n1=rnd(-4,4);let n2=rnd(-4,4);while(n2===n1)n2=rnd(-4,4);correct=String(m);alts=[];allowOpen=true;
     question=`Per quin valor de <b>k</b> les rectes <b>r: ${lineEquation(m,n1)}</b> i <b>s: y=kx${n2===0?'':eqSignedTerm(n2)}</b> són paral·leles?`;
     options=uniq4(correct,[String(-m),String(m+1),String(m-1),String(n1),String(n2)]);guide=['Per ser paral·leles han de tenir la mateixa pendent.','La pendent de s és k.'];
     solution=[`La pendent de r és <b>${m}</b>.`,`Per paral·lelisme cal k=${m}.`,`✅ <b>k=${m}</b>.`];
@@ -1759,7 +1759,7 @@ function genGeometriaAnaliticaAmpD(){
   const type=nextGeometriaAnaliticaAmpDType();
   let question,correct,alts=[],options,guide,solution,openHint='Escriu la resposta final.',allowOpen=false;
   if(type===1){
-    let m=0;while(m===0)m=rnd(-3,3);const bg=rnd(-4,4),x0=rnd(-4,4),y0=rnd(-5,5),n=y0-m*x0;correct=lineEquation(m,n);alts=equationAlts(correct);
+    let m=0;while(m===0)m=rnd(-3,3);const bg=rnd(-4,4),x0=rnd(-4,4);let y0=rnd(-5,5);while(y0===m*x0+bg)y0=rnd(-5,5);const n=y0-m*x0;correct=lineEquation(m,n);alts=equationAlts(correct);
     question=`Troba la recta que passa per <b>P${pointTextCompact(x0,y0)}</b> i és paral·lela a <b>r: ${lineEquation(m,bg)}</b>.`;
     options=uniq4(correct,[lineEquation(-m,n),lineEquation(m,bg),lineEquation(m,n+1),lineEquation(m,n-1),lineEquation(m+1,n)]);guide=['Una paral·lela conserva la pendent.','Escriu y=mx+n.','Substitueix P per trobar n.'];
     solution=[`La pendent de r és m=<b>${m}</b>.`,`La nova recta és y=${m}x+n.`,`Amb P: ${y0}=${m}·${x0}+n ⇒ n=<b>${n}</b>.`,`✅ <b>${correct}</b>.`];
@@ -1774,7 +1774,7 @@ function genGeometriaAnaliticaAmpD(){
     options=uniq4(correct,[lineEquation(m,n+1),lineEquation(m,n-1),lineEquation(-m,n),lineEquation(m,y1-m*x1),lineEquation(m,y2-m*x2)]);guide=['Primer calcula el punt mitjà M d’AB.','Després escriu y=mx+n.','Substitueix M per trobar n.'];
     solution=[`M=((${x1}+${x2})/2,(${y1}+${y2})/2)=<b>${pointTextCompact(mx,my)}</b>.`,`La recta és y=${m}x+n.`,`Amb M: ${my}=${m}·${mx}+n ⇒ n=${n}.`,`✅ <b>${correct}</b>.`];
   }else if(type===4){
-    const ax=rnd(-4,0),ay=rnd(-4,2),bx=ax+rnd(1,4),by=ay+rnd(-2,3),cx=bx+rnd(1,3),cy=by+rnd(-2,3),dx=ax+cx-bx,dy=ay+cy-by;const mx=(ax+cx)/2,my=(ay+cy)/2;correct=pointCoordLabel(mx,my);alts=pointCoordAlts(mx,my);allowOpen=true;
+    const ax=rnd(-4,0),ay=rnd(-4,2),bx=ax+rnd(1,4),by=ay+rnd(-2,3),cx=bx+rnd(1,3),cy=(()=>{let y=by+rnd(-2,3);while((bx-ax)*(y-by)===(by-ay)*(cx-bx))y=by+rnd(-2,3);return y})(),dx=ax+cx-bx,dy=ay+cy-by;const mx=(ax+cx)/2,my=(ay+cy)/2;correct=pointCoordLabel(mx,my);alts=pointCoordAlts(mx,my);allowOpen=true;
     question=`A${pointTextCompact(ax,ay)}, B${pointTextCompact(bx,by)}, C${pointTextCompact(cx,cy)} i D${pointTextCompact(dx,dy)} formen un paral·lelogram. On es tallen les diagonals?`;
     options=pointOptions(mx,my,[pointCoordLabel((ax+bx)/2,(ay+by)/2),pointCoordLabel((bx+cx)/2,(by+cy)/2),pointCoordLabel(dx,dy)]);guide=['Les diagonals d’un paral·lelogram es bisecten.','Calcula el punt mitjà d’AC.','Pots comprovar que és també el punt mitjà de BD.'];
     solution=[`Punt mitjà d’AC: ((${ax}+${cx})/2,(${ay}+${cy})/2).`,`Això dona <b>${correct}</b>.`,`En un paral·lelogram, aquest mateix punt és el punt mitjà de BD.`,`✅ Intersecció: <b>${correct}</b>.`];
@@ -1987,6 +1987,7 @@ function registerError(ex,studentAnswer,source='practice'){
     topicId:ex.topicId||(topic?topic.id:''),
     topicName:topic?topic.name:'Tema',
     type:ex.type,
+    difficultyVariant:ex.difficultyVariant,
     question:ex.question,
     visual:ex.visual||'',
     correct:ex.correct,

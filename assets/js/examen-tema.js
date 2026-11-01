@@ -33,6 +33,8 @@
   function topicPlan(t){const revisedPlan=miTaskDifficulty.examPlan(t);if(revisedPlan)return revisedPlan;return {slots:advanced ? [4,4,4] : t.id === 'fraccions' ? [6,4,2] : t.id === 'decimals' ? [2,6,4] :
       t.id === 'estimacio' ? [8,4,0] : t.id === 'mesurament' ? [4,6,2] : [4,4,4],reviewed:false};}
   function build(t) {
+    if ((spatialFourthYear || algebraFourthYear) && typeof resetVariationSession === 'function') resetVariationSession();
+    const requestedPlan = topicPlan(t), reviewed = !!miTaskDifficulty.coverage(t)?.reviewed;
     const pool = [], seen = new Set();
     for (let i = 0; i < 700; i++) {
       const q = {...t.gen(), topicId:t.id, topicName:t.name};
@@ -101,7 +103,7 @@
       // tots els tipus del generador i té prou preguntes de cada nivell.
       if ((spatialFourthYear || algebraFourthYear) && pool.length >= 40 &&
           new Set(pool.map(item=>item.type)).size >= (algebraFourthYear ? ({equacions2g4t:11,funcionsRep4t:12,linealsQuad4t:12,inversaExp4t:12,analisiFunc4t:12}[t.id] || 10) : t.id==='geometriaFuncions4t'?11:t.id==='geometriaAnaliticaAmpD'?12:10) &&
-          [1,2,3].every(d=>pool.filter(item=>level(t,item)===d).length>=4)) break;
+          [1,2,3].every(d=>pool.filter(item=>level(t,item)===d).length >= (reviewed ? requestedPlan.slots[d-1] : 4))) break;
     }
     const result = [], counts = {};
     const slots=topicPlan(t).slots;

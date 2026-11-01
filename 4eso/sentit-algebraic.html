@@ -1092,7 +1092,7 @@ function genEquacions2Grau4ESO(){
   }
   else if(type===5){
     const kind=rnd(1,3),a=rnd(1,4),r=rnd(-7,7)||3;let b,c,disc,answer;
-    if(kind===1){const s=rnd(1,6);b=-a*(r+s);c=a*r*s;disc=b*b-4*a*c;answer='Dues solucions reals diferents';}
+    if(kind===1){let s=rnd(1,6);while(s===r)s=rnd(1,6);b=-a*(r+s);c=a*r*s;disc=b*b-4*a*c;answer='Dues solucions reals diferents';}
     else if(kind===2){b=-2*a*r;c=a*r*r;disc=0;answer='Una solució real doble';}
     else{const k=rnd(1,6);b=2*a*r;c=a*r*r+k;disc=b*b-4*a*c;answer='Cap solució real';}
     correct=answer;allowOpen=false;
@@ -1702,7 +1702,7 @@ function genAnalisiFunc4ESO(){
   }else if(type===5){
     const h=rnd(-5,5),k=rnd(-4,5),a=shuffle([-2,-1,1,2])[0],d=rnd(1,4),x1=h-d,x2=h+d,v=a*d*d+k;correct=`f(${x1}) = f(${x2}) = ${v}`;allowOpen=false;
     question=`La funció és <b>${vertexFormText(a,h,k,'f(x)')}</b>. Què podem afirmar dels valors situats a la mateixa distància de l’eix de simetria? Concretament, compara x=${x1} i x=${x2}.`;
-    options=uniq4(correct,[`f(${x1}) > f(${x2})`,`f(${x1}) < f(${x2})`,`f(${x1}) = −f(${x2})`]);
+    options=uniq4(correct,[`f(${x1}) > f(${x2})`,`f(${x1}) < f(${x2})`,`f(${x1}) = f(${x2}) + 1`]);
     guide=[`L’eix de simetria és x=${h}.`,`Els valors ${x1} i ${x2} són equidistants d’aquest eix.`];
     solution=[`Distàncies a x=${h}: |${x1}−${h}|=|${x2}−${h}|=${d}.`,'En una paràbola, punts simètrics tenen la mateixa ordenada.',`El valor comú és ${a}·${d}² ${k>=0?'+ '+k:'− '+Math.abs(k)}=${v}. Per tant, <b>${correct}</b>.`];
   }else if(type===6){
@@ -1850,14 +1850,14 @@ function genPolinomisAmpA(){
   }else if(type===6){
     const a=rnd(2,10),sign=rnd(0,1)?1:-1,b=2*a*sign,c=a*a;correct=sign>0?`(x + ${a})²`:`(x − ${a})²`;allowOpen=false;
     question=`Factoritza el trinomi <b>${polyExprCoeffs([1,b,c])}</b>.`;
-    options=uniq4(correct,[sign>0?`(x − ${a})²`:`(x + ${a})²`,`(x ${sign>0?'+':'−'} ${2*a})²`,`(x − ${a})(x + ${a})`,`x(x ${sign>0?'+':'−'} ${2*a}) + ${c}`,`(x ${sign>0?'+':'−'} ${a*a})²`]);
+    options=uniq4(correct,[sign>0?`(x − ${a})²`:`(x + ${a})²`,`(x ${sign>0?'+':'−'} ${2*a})²`,`(x − ${a})(x + ${a})`,`x(x ${sign>0?'+':'−'} ${2*a}) + ${c+1}`,`(x ${sign>0?'+':'−'} ${a*a})²`]);
     guide=['Comprova si el primer i l’últim terme són quadrats perfectes.','El terme central ha de ser ±2·x·a.','Relaciona-ho amb (x±a)².'];
     solution=[`El primer terme és x² i l’últim és ${a}².`,`El terme central és ${b}x = ${sign>0?'+':'−'}2·${a}·x.`,`És un quadrat perfecte: <b>${correct}</b>.`];
   }else if(type===7){
     let r1=rnd(-8,8),r2=rnd(-8,8);while(r1===0||r2===0||r1===r2){r1=rnd(-8,8);r2=rnd(-8,8)}const B=-(r1+r2),C=r1*r2;
     correct=`${rootFactor(r1)}${rootFactor(r2)}`;allowOpen=false;
     question=`Factoritza completament <b>${quadExpr(1,B,C)}</b>.`;
-    options=uniq4(correct,[`${rootFactor(-r1)}${rootFactor(-r2)}`,`${rootFactor(r1)}${rootFactor(-r2)}`,`${rootFactor(-r1)}${rootFactor(r2)}`,`${rootFactor(r1+1)}${rootFactor(r2)}`,`${rootFactor(r1)}${rootFactor(r2+1)}`]);
+    options=uniq4(correct,[...(r1+r2===0?[]:[`${rootFactor(-r1)}${rootFactor(-r2)}`]),`${rootFactor(r1)}${rootFactor(-r2)}`,`${rootFactor(-r1)}${rootFactor(r2)}`,`${rootFactor(r1+1)}${rootFactor(r2)}`,`${rootFactor(r1)}${rootFactor(r2+1)}`]);
     guide=['Busca dos nombres que sumin el coeficient de x i multipliquin el terme independent.','Si r és una arrel, el factor és (x−r).','Comprova desenvolupant els factors.'];
     solution=[`Per a x²+Bx+C, les arrels r₁ i r₂ compleixen r₁+r₂=−B i r₁·r₂=C.`,`Aquí ${r1}+(${r2})=${-B} i ${r1}·${r2}=${C}, així que les arrels són <b>${r1}</b> i <b>${r2}</b>.`,`Cada arrel r dona el factor (x−r). Per tant, la factorització és <b>${correct}</b>.`];
   }else if(type===8){
@@ -2233,6 +2233,7 @@ function registerError(ex,studentAnswer,source='practice'){
     topicId:ex.topicId||(topic?topic.id:''),
     topicName:topic?topic.name:'Tema',
     type:ex.type,
+    difficultyVariant:ex.difficultyVariant,
     question:ex.question,
     visual:ex.visual||'',
     correct:ex.correct,

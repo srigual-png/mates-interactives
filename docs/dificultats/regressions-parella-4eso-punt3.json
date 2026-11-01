@@ -1,0 +1,193 @@
+{
+  "course": "4eso",
+  "senses": [
+    "numeric",
+    "mesura"
+  ],
+  "published": false,
+  "suites": [
+    {
+      "file": "comprova-examens-tema-4eso.cjs",
+      "option": "A/B",
+      "topics": 8,
+      "exitCode": 0,
+      "checks": "Lliurament de 12 preguntes; 6 encerts/2 errors/4 buits i nota 5; tot correcte/incorrecte/buit; colors, explicacions, reinici i retorn a pràctica."
+    },
+    {
+      "file": "comprova-examens-mesura-4eso.cjs",
+      "option": "B",
+      "topics": 8,
+      "exitCode": 0,
+      "checks": "Lliurament de 12 preguntes; 6 encerts/2 errors/4 buits i nota 5; tot correcte/incorrecte/buit; colors, explicacions, reinici i retorn a pràctica."
+    },
+    {
+      "file": "comprova-examens-mesura-4eso.cjs",
+      "option": "A",
+      "topics": 5,
+      "exitCode": 0,
+      "checks": "Lliurament de 12 preguntes; 6 encerts/2 errors/4 buits i nota 5; tot correcte/incorrecte/buit; colors, explicacions, reinici i retorn a pràctica."
+    }
+  ],
+  "runs": [
+    {
+      "key": "numeric",
+      "types": 120,
+      "generated": 36000,
+      "practice": 96,
+      "globals": [
+        {
+          "policy": "free",
+          "blocked": false,
+          "counts": [
+            18,
+            2,
+            0
+          ]
+        },
+        {
+          "policy": "balanced",
+          "blocked": true
+        },
+        {
+          "policy": "1",
+          "blocked": false,
+          "counts": [
+            20,
+            0,
+            0
+          ]
+        },
+        {
+          "policy": "2",
+          "blocked": true
+        },
+        {
+          "policy": "3",
+          "blocked": true
+        }
+      ]
+    },
+    {
+      "key": "numeric-A",
+      "types": 120,
+      "generated": 36000,
+      "practice": 96,
+      "globals": [
+        {
+          "policy": "free",
+          "blocked": false,
+          "counts": [
+            19,
+            1,
+            0
+          ]
+        },
+        {
+          "policy": "balanced",
+          "blocked": true
+        },
+        {
+          "policy": "1",
+          "blocked": false,
+          "counts": [
+            20,
+            0,
+            0
+          ]
+        },
+        {
+          "policy": "2",
+          "blocked": true
+        },
+        {
+          "policy": "3",
+          "blocked": true
+        }
+      ]
+    },
+    {
+      "key": "mesura",
+      "types": 132,
+      "generated": 36000,
+      "practice": 96,
+      "globals": [
+        {
+          "policy": "free",
+          "blocked": false,
+          "counts": [
+            15,
+            5,
+            0
+          ]
+        },
+        {
+          "policy": "balanced",
+          "blocked": false,
+          "counts": [
+            7,
+            7,
+            6
+          ]
+        },
+        {
+          "policy": "1",
+          "blocked": false,
+          "counts": [
+            20,
+            0,
+            0
+          ]
+        },
+        {
+          "policy": "2",
+          "blocked": true
+        },
+        {
+          "policy": "3",
+          "blocked": true
+        }
+      ]
+    },
+    {
+      "key": "mesura-A",
+      "types": 132,
+      "generated": 36000,
+      "practice": 60,
+      "globals": [
+        {
+          "policy": "free",
+          "blocked": false,
+          "counts": [
+            16,
+            4,
+            0
+          ]
+        },
+        {
+          "policy": "balanced",
+          "blocked": true
+        },
+        {
+          "policy": "1",
+          "blocked": false,
+          "counts": [
+            20,
+            0,
+            0
+          ]
+        },
+        {
+          "policy": "2",
+          "blocked": true
+        },
+        {
+          "policy": "3",
+          "blocked": true
+        }
+      ]
+    }
+  ],
+  "oracles": "oracles-parella-4eso-punt3.json",
+  "syntax": true,
+  "staticAccess": true
+}

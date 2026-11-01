@@ -1,0 +1,12 @@
+const fs=require('fs'),path=require('path'),assert=require('assert/strict'),{pathToFileURL}=require('url');
+const {playwright,launchOptions}=require('./genera-examens-cerca.cjs');
+(async()=>{const browser=await playwright().chromium.launch(launchOptions()),checks=[];try{
+for(const sense of ['numeric','mesura','algebraic','espacial','estocastic'])for(const option of ['A','B']){
+const p=await browser.newPage();await p.route(/^https?:/,r=>r.abort());await p.goto(pathToFileURL(path.resolve(`4eso/sentit-${sense}.html`)).href+'?opcio='+option);
+const row=await p.evaluate(()=>{const S=typeof ST!=='undefined'?ST:state,t=miTopicExam.getTopics()[0],index=TOPICS.indexOf(t);if(typeof selTopic==='function')selTopic(index);else selectTopic(index);
+const generate=t.gen;let calls=0;t.gen=function(...args){calls++;return generate.apply(this,args);};MIDifficultyModes.setPracticeLevel(3);if(typeof startP==='function')startP();else startPractice();const missing={blocked:!!MIDifficultyModes.getLastPractice()?.blocked,calls,empty:(typeof curEx!=='undefined'?curEx:currentEx)===null};t.gen=generate;
+MIDifficultyModes.setPracticeLevel(0);miOpenExamConfig();miExamSelectAll();const policies=[];for(const policy of ['free','balanced','1','2','3']){MIDifficultyModes.setGlobalPolicy(policy);miStartConfiguredExam();const plan=MIDifficultyModes.getLastGlobal();policies.push({policy,blocked:!plan,counts:plan?.counts??null,questions:S.examQs.length,topics:plan?.topics??null});}return {missing,policies,selected:miGetSelectedExamIds().length};});
+assert(row.missing.blocked&&row.missing.empty&&row.missing.calls<=1,'nivell absent ha de bloquejar sense cerca');
+for(const r of row.policies){const expectedBlocked=r.policy==='3'||(r.policy==='balanced'&&!(sense==='mesura'&&option==='B'))||(r.policy==='2'&&sense!=='algebraic');assert.equal(r.blocked,expectedBlocked,sense+' '+option+' '+r.policy);assert.equal(r.questions,r.blocked?0:20);if(r.topics)assert(Object.values(r.topics).every(n=>n>0));if(r.policy==='balanced'&&!r.blocked)assert.deepEqual(r.counts,[7,7,6]);}
+checks.push({sense,option,...row});console.log(sense+' '+option+': cobertura, cinc polítiques i bloqueig immediat OK');await p.close();}
+}finally{await browser.close();}const f='docs/dificultats/regressions-tres-blocs-4eso-punt3.json',r=JSON.parse(fs.readFileSync(f));r.coverageQuotas=checks;fs.writeFileSync(f,JSON.stringify(r,null,2)+'\n');})().catch(e=>{console.error(e);process.exitCode=1;});

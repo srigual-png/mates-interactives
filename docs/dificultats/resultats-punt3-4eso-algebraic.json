@@ -1,0 +1,2372 @@
+{
+  "topics": [
+    {
+      "topic": "patrons4t",
+      "types": 10,
+      "coverage": [
+        7,
+        3,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        7,
+        5,
+        0
+      ],
+      "variants": [
+        {
+          "type": 6,
+          "n": 353,
+          "question": "Quina forma factoritzada és equivalent a <b>3x + 21</b>?",
+          "correct": "3(x + 7)",
+          "solution": [
+            "Els dos termes 3x i 21 són múltiples de <b>3</b>.",
+            "Dividim: 3x÷3=x i 21÷3=7.",
+            "Factoritzem: <b>3(x + 7)</b>.",
+            "Comprovació: 3(x+7)=3x+21."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 195,
+          "question": "Quina expressió representa aquesta taula?<table style=\"margin:8px auto;border-collapse:collapse\"><tr><th style=\"border:1px solid #ccd6e3;padding:5px 10px\">x=0</th><th style=\"border:1px solid #ccd6e3;padding:5px 10px\">x=1</th><th style=\"border:1px solid #ccd6e3;padding:5px 10px\">x=2</th><th style=\"border:1px solid #ccd6e3;padding:5px 10px\">x=3</th></tr><tr><td style=\"border:1px solid #ccd6e3;padding:5px 10px;text-align:center\">12</td><td style=\"border:1px solid #ccd6e3;padding:5px 10px;text-align:center\">14</td><td style=\"border:1px solid #ccd6e3;padding:5px 10px;text-align:center\">16</td><td style=\"border:1px solid #ccd6e3;padding:5px 10px;text-align:center\">18</td></tr></table>",
+          "correct": "y = 2x + 12",
+          "solution": [
+            "Quan x augmenta 1, y augmenta sempre <b>2</b>: aquest és el pendent.",
+            "Quan x=0, y=12: aquest és el terme independent.",
+            "Per tant, <b>y = 2x + 12</b>."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 572,
+          "question": "Un model té la forma <b>y = mx + 10</b>. Sabem que passa pels punts (3, 25) i (8, 50). Quin és el valor de m?",
+          "correct": "5",
+          "solution": [
+            "Δy = 50−25 = 25.",
+            "Δx = 8−3 = 5.",
+            "m = Δy/Δx = 25/5 = <b>5</b>."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 187,
+          "question": "En el model <b>y = 6x + 11</b>, què representen els nombres 6 i 11 en una situació contextual?",
+          "correct": "El 6 és la variació per cada unitat de x i el 11 és el valor inicial.",
+          "solution": [
+            "Si x=0, y=11; per tant, <b>11</b> és el valor inicial.",
+            "Si x augmenta 1, el terme 6x augmenta 6; per tant, <b>6</b> és la variació per unitat.",
+            "Resposta: <b>El 6 és la variació per cada unitat de x i el 11 és el valor inicial.</b>"
+          ]
+        },
+        {
+          "type": 10,
+          "n": 190,
+          "question": "Una empresa cobra <b>13 € de quota fixa</b> i <b>5 € per unitat</b>. Quin dels models següents és correcte?",
+          "correct": "C(x) = 5x + 13",
+          "solution": [
+            "Quan x=0, el cost ha de ser 13 €, així que el terme independent és 13.",
+            "Cada unitat afegeix 5 €, així que el coeficient de x és 5.",
+            "Model correcte: <b>C(x) = 5x + 13</b>."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 545,
+          "question": "Troba una expressió per al terme general de la successió:<br><b>8, 13, 18, 23, 28, …</b>",
+          "correct": "aₙ = 5n + 3",
+          "solution": [
+            "La diferència és constant: 13 − 8 = <b>5</b>.",
+            "Usem aₙ = a₁ + (n−1)d = 8 + (n−1)·(5).",
+            "Simplificant obtenim <b>aₙ = 5n + 3</b>.",
+            "Comprovació amb n=3: la fórmula dona 18, que coincideix amb el tercer terme."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 189,
+          "question": "Un servei cobra una <b>quota fixa de 11 €</b> i <b>2 € per cada ús</b>. Si x és el nombre d’usos, quina funció modelitza el cost C(x)?",
+          "correct": "C(x) = 2x + 11",
+          "solution": [
+            "La quota fixa aporta <b>11</b> encara que x=0.",
+            "La part variable és <b>2x</b>.",
+            "Sumem les dues parts: <b>C(x) = 2x + 11</b>.",
+            "Per exemple, amb x=7, el model dona C(7)=2·7+11=25 €."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 385,
+          "question": "Simplifica l’expressió <b>4(x + 8) + 1</b>.",
+          "correct": "4x + 33",
+          "solution": [
+            "4(x+8) = 4x + 32.",
+            "Afegim 1: 4x + 32 + 1.",
+            "Agrupem constants: <b>4x + 33</b>."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 194,
+          "question": "El cost d’una activitat és <b>C(x) = 2x + 6</b>, on x és el nombre de sessions. Quin cost correspon a <b>5 sessions</b>?",
+          "correct": "16",
+          "solution": [
+            "Substituïm x=5: C(5)=2·5+6.",
+            "Producte: 2·5=10.",
+            "Sumem la quota fixa: 10+6=<b>16 €</b>."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 190,
+          "question": "Què significa la igualtat <b>5(x + 5) = 5x + 25</b>?",
+          "correct": "Les dues expressions tenen el mateix valor per a qualsevol x.",
+          "solution": [
+            "Desenvolupem: 5(x+5) = 5x + 25.",
+            "Arribem exactament al membre dret.",
+            "Per tant, <b>Les dues expressions tenen el mateix valor per a qualsevol x.</b>"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "equacions2g4t",
+      "types": 11,
+      "coverage": [
+        7,
+        6,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        6,
+        6,
+        0
+      ],
+      "variants": [
+        {
+          "type": 7,
+          "n": 166,
+          "question": "És <b>x=-8</b> una solució de <b>x² + 14x + 48 = 0</b>?",
+          "correct": "Sí",
+          "solution": [
+            "Substituïm x=-8: (-8)² + 14·(-8) + 48.",
+            "El resultat és <b>0</b>.",
+            "Com que dona 0, sí que és solució.",
+            "Resposta: <b>Sí</b>."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 466,
+          "question": "Quina equació mònica de segon grau té com a arrels <b>7</b> i <b>-4</b>?",
+          "correct": "x² − 3x − 28 = 0",
+          "solution": [
+            "Factors: <b>(x − 7)</b> i <b>(x + 4)</b>.",
+            "Producte: (x − 7)(x + 4)=0.",
+            "Desenvolupant obtenim <b>x² − 3x − 28 = 0</b>."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 490,
+          "question": "Considera el polinomi <b>P(x) = 7x<sup>5</sup> − 7x<sup>2</sup> − 8x − 7</b>. Quin és el seu grau i quin és el terme independent?",
+          "correct": "Grau 5 i terme independent −7",
+          "solution": [
+            "El terme de grau més alt és <b>7x<sup>5</sup></b>, així que el grau és <b>5</b>.",
+            "El terme sense x és <b>−7</b>.",
+            "Per tant: <b>Grau 5 i terme independent −7</b>."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 158,
+          "question": "Resol l’equació incompleta:<br><b>3x² = 12</b>",
+          "correct": "x = -2 o x = 2",
+          "solution": [
+            "Dividim entre 3: x² = 12/3 = <b>4</b>.",
+            "Prenem arrel quadrada: x = ±√4.",
+            "Per tant, <b>x = -2 o x = 2</b>.",
+            "Tant 2 com -2 tenen quadrat 4."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 476,
+          "question": "Resol amb el mètode que consideris més adequat:<br><b>3x² + 12x + 9 = 0</b>",
+          "correct": "x = -3 o x = -1",
+          "solution": [
+            "a=3, b=12, c=9.",
+            "Δ = (12)² − 4·3·(9) = <b>36</b>.",
+            "√Δ = 6. Apliquem x = (−b ± √Δ)/(2a).",
+            "x = (-12 ± 6)/6.",
+            "Les dues solucions són <b>x = -3 o x = -1</b>."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 471,
+          "question": "Sense resoldre completament, quantes solucions reals té <b>3x² − 18x + 27 = 0</b>?",
+          "correct": "Una solució real doble",
+          "solution": [
+            "Δ = (-18)² − 4·3·(27) = <b>0</b>.",
+            "Δ=0, per tant hi ha una arrel real doble.",
+            "Resposta: <b>Una solució real doble</b>."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 135,
+          "question": "El producte de dos nombres naturals consecutius és <b>20</b>. Quin és el més petit?",
+          "correct": "4",
+          "solution": [
+            "Model: x(x+1)=20.",
+            "Equació: x²+x−20=0.",
+            "Factoritzem: (x − 4)(x + 5)=0.",
+            "Arrels: 4 i -5.",
+            "El nombre natural demanat és <b>4</b>."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 161,
+          "question": "Dos nombres positius sumen <b>21</b> i el seu producte és <b>38</b>. Quins són?",
+          "correct": "x = 2 o x = 19",
+          "solution": [
+            "Definim un nombre x; l’altre és 21−x.",
+            "Producte: x(21−x)=38.",
+            "Passem a forma estàndard: x²−21x+38=0.",
+            "Les arrels són 2 i 19.",
+            "Per tant, els dos nombres són <b>2 i 19</b>."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 158,
+          "question": "Un rectangle té amplada <b>x</b> metres i llargada <b>x+7</b> metres. Si l’àrea és <b>98 m²</b>, quina amplada té?",
+          "correct": "7",
+          "solution": [
+            "Model: <b>x(x+7)=98</b>.",
+            "Equació: <b>x²+7x−98=0</b>.",
+            "Factorització: <b>(x − 7)(x + 14)=0</b>.",
+            "Arrels: x=7 i x=-14.",
+            "Descartem la negativa: amplada = <b>7 m</b>."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 161,
+          "question": "Resol factoritzant:<br><b>2x² + 2x = 0</b>",
+          "correct": "x = -1 o x = 0",
+          "solution": [
+            "Traiem factor comú x: <b>x(2x + 2) = 0</b>.",
+            "Producte nul: x=0 o 2x + 2=0.",
+            "De 2x + 2=0 obtenim x=-1.",
+            "Solucions: <b>x = -1 o x = 0</b>."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 158,
+          "question": "Resol l’equació:<br><b>x² − 9 = 0</b>",
+          "correct": "x = -3 o x = 3",
+          "solution": [
+            "Busquem dos nombres amb suma 0 i producte -9: <b>3</b> i <b>-3</b>.",
+            "Factoritzem: <b>(x − 3)(x + 3) = 0</b>.",
+            "Cada factor pot ser zero.",
+            "Obtenim <b>x = -3 o x = 3</b>."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "sistemes4t",
+      "types": 10,
+      "coverage": [
+        2,
+        8,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        4,
+        8,
+        0
+      ],
+      "variants": [
+        {
+          "type": 2,
+          "n": 477,
+          "question": "Resol per <b>reducció</b>:<div class=\"system-box\" style=\"margin:8px auto;display:table;text-align:left;font-size:1.02rem;line-height:1.7\"><span style=\"font-size:2.5rem;vertical-align:middle\">{</span><span style=\"display:inline-block;vertical-align:middle\">3x + 4y = 32<br>−3x + 5y = 40</span></div>",
+          "correct": "x = 0, y = 8",
+          "solution": [
+            "Sumem les equacions: (4+5)y = 72.",
+            "Per tant, <b>y=8</b>.",
+            "Substituïm a 3x + 4y = 32 i obtenim <b>x=0</b>.",
+            "Solució comprovada: <b>x = 0, y = 8</b>."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 90,
+          "question": "Quin mètode és especialment eficient si el sistema és <b>y = 2x + 1</b> i <b>y = −x + 7</b>?",
+          "correct": "Igualació",
+          "solution": [
+            "Podem igualar directament 2x+1 i −x+7. Per tant, el mètode natural és <b>igualació</b>."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 238,
+          "question": "En una activitat es venen <b>10 entrades</b>. L’entrada adulta val 16 € i la jove 4 €. La recaptació és <b>76 €</b>. Si x és el nombre d’adults i y el de joves, quantes entrades de cada tipus s’han venut?",
+          "correct": "x = 3, y = 7",
+          "solution": [
+            "Sistema: <b>x+y=10</b> i <b>16x + 4y = 76</b>.",
+            "Per reducció o substitució obtenim <b>x=3</b> i <b>y=7</b>.",
+            "Comprovació: 3+7=10 i 16·3+4·7=76.",
+            "Resposta: <b>x = 3, y = 7</b>."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 474,
+          "question": "Classifica el sistema:<div class=\"system-box\" style=\"margin:8px auto;display:table;text-align:left;font-size:1.02rem;line-height:1.7\"><span style=\"font-size:2.5rem;vertical-align:middle\">{</span><span style=\"display:inline-block;vertical-align:middle\">2x + y = 4<br>4x + 5y = 20</span></div>",
+          "correct": "Compatible determinat",
+          "solution": [
+            "Els coeficients no són proporcionals: les rectes tenen pendents diferents i es tallen una vegada.",
+            "Classificació: <b>Compatible determinat</b>."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 232,
+          "question": "Dos nombres tenen suma <b>17</b> i diferència <b>11</b>. Si x és el més gran i y el més petit, quins són?",
+          "correct": "x = 14, y = 3",
+          "solution": [
+            "Sistema: <b>x+y=17</b> i <b>x−y=11</b>.",
+            "Sumant: 2x=28, així que <b>x=14</b>.",
+            "Llavors y=17−14=<b>3</b>.",
+            "Resposta: <b>x = 14, y = 3</b>."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 476,
+          "question": "Resol per <b>igualació</b>:<div class=\"system-box\" style=\"margin:8px auto;display:table;text-align:left;font-size:1.02rem;line-height:1.7\"><span style=\"font-size:2.5rem;vertical-align:middle\">{</span><span style=\"display:inline-block;vertical-align:middle\">y = 2x<br>y = −3x − 5</span></div>",
+          "correct": "x = -1, y = -2",
+          "solution": [
+            "Igualem: 2x = −3x − 5.",
+            "Resolent obtenim <b>x=-1</b>.",
+            "Substituïm: y=2·(-1)+0=<b>-2</b>.",
+            "Solució: <b>x = -1, y = -2</b>."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 237,
+          "question": "Comprova si el parell <b>(-2, -4)</b> és solució del sistema:<div class=\"system-box\" style=\"margin:8px auto;display:table;text-align:left;font-size:1.02rem;line-height:1.7\"><span style=\"font-size:2.5rem;vertical-align:middle\">{</span><span style=\"display:inline-block;vertical-align:middle\">x + y = -6<br>−3x + 5y = -14</span></div>",
+          "correct": "Sí",
+          "solution": [
+            "Primera: -6 = -6.",
+            "Segona: -14 = -14.",
+            "Compleix totes dues equacions.",
+            "Resposta: <b>Sí</b>."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 477,
+          "question": "Resol per <b>substitució</b>:<div class=\"system-box\" style=\"margin:8px auto;display:table;text-align:left;font-size:1.02rem;line-height:1.7\"><span style=\"font-size:2.5rem;vertical-align:middle\">{</span><span style=\"display:inline-block;vertical-align:middle\">x + 2y = 15<br>4x + y = 32</span></div>",
+          "correct": "x = 7, y = 4",
+          "solution": [
+            "De x+2y=15, obtenim <b>x=15−2y</b>.",
+            "Substituïm: 4(15−2y)+1y=32.",
+            "Resolem i obtenim <b>y=4</b>.",
+            "Aleshores x=15−2·(4)=<b>7</b>.",
+            "Comprovació final: <b>x = 7, y = 4</b>."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 239,
+          "question": "En una compra hi ha 18 articles de dos tipus. El tipus X costa 3 € i el tipus Y 6 €. El total és 87 €. Quin sistema modelitza la situació?",
+          "correct": "x + y = 18; 3x + 6y = 87",
+          "solution": [
+            "Recompte d’articles: <b>x+y=18</b>.",
+            "Recompte de cost: <b>3x+6y=87</b>.",
+            "Sistema correcte: <b>x + y = 18; 3x + 6y = 87</b>."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 60,
+          "question": "Observa les dues rectes. <b>No hi ha cap punt d’intersecció marcat.</b> Com es classifica el sistema?<div class=\"number-line-wrap\"><svg style=\"max-width:420px;width:100%;height:auto;display:block;margin:auto\" viewBox=\"0 0 420 260\" role=\"img\" aria-label=\"Gràfic de dues rectes, sense marcar cap punt solució\"><line x1=\"64.4\" y1=\"28\" x2=\"64.4\" y2=\"232\" stroke=\"#e6ebf1\"/><line x1=\"28\" y1=\"181\" x2=\"392\" y2=\"181\" stroke=\"#e6ebf1\"/><line x1=\"137.2\" y1=\"28\" x2=\"137.2\" y2=\"232\" stroke=\"#e6ebf1\"/><line x1=\"28\" y1=\"155.5\" x2=\"392\" y2=\"155.5\" stroke=\"#e6ebf1\"/><line x1=\"210\" y1=\"28\" x2=\"210\" y2=\"232\" stroke=\"#e6ebf1\"/><line x1=\"28\" y1=\"130\" x2=\"392\" y2=\"130\" stroke=\"#e6ebf1\"/><line x1=\"282.79999999999995\" y1=\"28\" x2=\"282.79999999999995\" y2=\"232\" stroke=\"#e6ebf1\"/><line x1=\"28\" y1=\"104.5\" x2=\"392\" y2=\"104.5\" stroke=\"#e6ebf1\"/><line x1=\"355.6\" y1=\"28\" x2=\"355.6\" y2=\"232\" stroke=\"#e6ebf1\"/><line x1=\"28\" y1=\"79\" x2=\"392\" y2=\"79\" stroke=\"#e6ebf1\"/><line x1=\"210\" y1=\"28\" x2=\"210\" y2=\"232\" stroke=\"#607080\" stroke-width=\"1.8\"/><line x1=\"28\" y1=\"130\" x2=\"392\" y2=\"130\" stroke=\"#607080\" stroke-width=\"1.8\"/><path d=\"M 28 206.5 L 392 -48.5\" stroke=\"#e8622a\" stroke-width=\"3\" fill=\"none\"/><path d=\"M 28 155.5 L 392 -99.5\" stroke=\"#3867d6\" stroke-width=\"3\" fill=\"none\" stroke-dasharray=\"8 5\"/></svg></div>",
+          "correct": "Incompatible",
+          "solution": [
+            "Les dues rectes tenen el mateix pendent però diferents ordenades a l’origen: són paral·leles.",
+            "Per tant, el sistema és <b>Incompatible</b>."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "inequacions4t",
+      "types": 10,
+      "coverage": [
+        8,
+        2,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        8,
+        4,
+        0
+      ],
+      "variants": [
+        {
+          "type": 7,
+          "n": 119,
+          "question": "Per representar la frontera de <b>2x + 3y ≥ 12</b>, com s’ha de dibuixar la recta 2x+3y=12?",
+          "correct": "Línia contínua",
+          "solution": [
+            "Amb ≥, els punts de la recta sí formen part de la solució.",
+            "Per tant, la frontera és una <b>línia contínua</b>."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 210,
+          "question": "La recta dibuixada és només la <b>frontera</b>; no hi ha cap regió pintada. Quina banda és solució de <b>3x + 3y > 2</b>?<div class=\"number-line-wrap\"><svg style=\"max-width:420px;width:100%;height:auto;display:block;margin:auto\" viewBox=\"0 0 420 260\" role=\"img\" aria-label=\"Recta frontera sense cap regió pintada\"><line x1=\"64.4\" y1=\"28\" x2=\"64.4\" y2=\"232\" stroke=\"#e6ebf1\"/><line x1=\"28\" y1=\"181\" x2=\"392\" y2=\"181\" stroke=\"#e6ebf1\"/><line x1=\"137.2\" y1=\"28\" x2=\"137.2\" y2=\"232\" stroke=\"#e6ebf1\"/><line x1=\"28\" y1=\"155.5\" x2=\"392\" y2=\"155.5\" stroke=\"#e6ebf1\"/><line x1=\"210\" y1=\"28\" x2=\"210\" y2=\"232\" stroke=\"#e6ebf1\"/><line x1=\"28\" y1=\"130\" x2=\"392\" y2=\"130\" stroke=\"#e6ebf1\"/><line x1=\"282.79999999999995\" y1=\"28\" x2=\"282.79999999999995\" y2=\"232\" stroke=\"#e6ebf1\"/><line x1=\"28\" y1=\"104.5\" x2=\"392\" y2=\"104.5\" stroke=\"#e6ebf1\"/><line x1=\"355.6\" y1=\"28\" x2=\"355.6\" y2=\"232\" stroke=\"#e6ebf1\"/><line x1=\"28\" y1=\"79\" x2=\"392\" y2=\"79\" stroke=\"#e6ebf1\"/><line x1=\"210\" y1=\"28\" x2=\"210\" y2=\"232\" stroke=\"#607080\" stroke-width=\"1.8\"/><line x1=\"28\" y1=\"130\" x2=\"392\" y2=\"130\" stroke=\"#607080\" stroke-width=\"1.8\"/><line x1=\"28\" y1=\"57.74999999999997\" x2=\"392\" y2=\"185.25\" stroke=\"#e8622a\" stroke-width=\"3\" stroke-dasharray=\"8 5\"/><circle cx=\"210\" cy=\"130\" r=\"4\" fill=\"#3867d6\"/><text x=\"218\" y=\"122\" font-size=\"12\" fill=\"#3867d6\">(0,0)</text></svg></div>",
+          "correct": "El semiplà oposat a l’origen (0,0)",
+          "solution": [
+            "Amb (0,0), el membre esquerre val 0.",
+            "Comprovem 0 > 2: fals.",
+            "Per tant: <b>El semiplà oposat a l’origen (0,0)</b>."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 213,
+          "question": "Tens com a màxim <b>49 €</b>. Cada producte X costa 8 € i cada producte Y costa 9 €. Si x i y són les quantitats comprades, quina inequació modelitza el pressupost?",
+          "correct": "8x + 9y ≤ 49",
+          "solution": [
+            "Cost de X: 8x. Cost de Y: 9y.",
+            "Cost total: 8x+9y.",
+            "Com que no pot superar 49, <b>8x + 9y ≤ 49</b>."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 420,
+          "question": "Resol <b>2x + 6 < 0</b>.",
+          "correct": "x < -3",
+          "solution": [
+            "Aïllem el terme amb x: 2x < -6.",
+            "Dividim entre 2>0: <b>x < -3</b>."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 391,
+          "question": "Escriu com a desigualtat l’interval <b>(-5, +∞)</b>.",
+          "correct": "x > -5",
+          "solution": [
+            "L’interval s’estén cap a la dreta.",
+            "L’extrem -5 no s’inclou.",
+            "Desigualtat: <b>x > -5</b>."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 423,
+          "question": "Resol <b>−8x + 6 ≥ 14</b>.",
+          "correct": "x ≤ -1",
+          "solution": [
+            "Restem el terme independent: −8x ≥ 8.",
+            "Dividim entre -8. Com que és negatiu, ≥ passa a ≤.",
+            "Resultat: <b>x ≤ -1</b>."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 210,
+          "question": "El punt <b>(4, 5)</b> pertany a la regió solució de <b>3x + 4y < 14</b>?",
+          "correct": "No",
+          "solution": [
+            "Substitució: 3·4+4·5=<b>32</b>.",
+            "Comprovem 32 < 14: fals.",
+            "Resposta: <b>No</b>."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 209,
+          "question": "El valor <b>x=-2</b> pertany a la solució de <b>x > -2</b>?",
+          "correct": "No",
+          "solution": [
+            "Comprovem -2 > -2.",
+            "La desigualtat és falsa.",
+            "Resposta: <b>No</b>."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 421,
+          "question": "Resol <b>5x + 1 < 41</b> i indica la solució.",
+          "correct": "x < 8",
+          "solution": [
+            "5x < 40.",
+            "Dividim entre 5: <b>x < 8</b>."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 384,
+          "question": "Expressa en forma d’interval la solució <b>x < 8</b>.",
+          "correct": "(−∞, 8)",
+          "solution": [
+            "La desigualtat s’estén cap a −∞.",
+            "L’extrem 8 no està inclòs.",
+            "Interval: <b>(−∞, 8)</b>."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "funcionsRep4t",
+      "types": 12,
+      "coverage": [
+        10,
+        2,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        10,
+        2,
+        0
+      ],
+      "variants": [
+        {
+          "type": 4,
+          "n": 538,
+          "question": "Per a <b>f(x)=3x − 10</b>, troba una preimatge de <b>8</b>.",
+          "correct": "6",
+          "solution": [
+            "Plantegem 3x − 10 = 8.",
+            "Aïllem el terme amb x: 3x = 18.",
+            "Dividim entre 3: <b>x=6</b>."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 276,
+          "question": "Quin tipus de model és compatible amb aquesta taula?<table style=\"margin:10px auto;border-collapse:collapse\"><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">x</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">0</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">1</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">2</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">3</th></tr><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">f(x)</th><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">1</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">2</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">4</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">8</td></tr></table>",
+          "correct": "Model exponencial",
+          "solution": [
+            "Cada valor de y s’obté multiplicant l’anterior pel mateix factor.",
+            "Això correspon a un <b>model exponencial</b>."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 320,
+          "question": "Quina taula correspon a la funció <b>f(x)=4x − 1</b>?",
+          "correct": "<table style=\"margin:10px auto;border-collapse:collapse\"><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">x</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">-1</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">0</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">1</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">2</th></tr><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">f(x)</th><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">-5</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">-1</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">3</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">7</td></tr></table>",
+          "solution": [
+            "f(0)=-1. Això elimina les taules que no tenen -1 quan x=0.",
+            "També f(1)=3.",
+            "La taula correcta és la que compleix tots aquests valors."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 170,
+          "question": "Aquesta relació ve donada pels parells ordenats següents:<div style=\"text-align:center;margin:9px 0;font-weight:700\">(0, 6) · (1, 9) · (2, 12) · (1, 15)</div>És una funció de x?",
+          "correct": "No, no és una funció",
+          "solution": [
+            "El valor x=1 apareix associat a dues imatges diferents.",
+            "Per tant, <b>No, no és una funció</b>."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 170,
+          "question": "Observa la taula:<table style=\"margin:10px auto;border-collapse:collapse\"><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">x</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">0</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">1</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">2</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">3</th></tr><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">f(x)</th><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">4</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">7</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">10</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">13</td></tr></table>Quin és el recorregut dels valors mostrats?",
+          "correct": "{4, 7, 10, 13}",
+          "solution": [
+            "Els valors de sortida són 4, 7, 10, 13.",
+            "Per tant, el recorregut mostrat és <b>{4, 7, 10, 13}</b>."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 536,
+          "question": "Sigui <b>f(x)=−x² + x + 2</b>. Calcula <b>f(1)</b>.",
+          "correct": "2",
+          "solution": [
+            "f(1)=-1·(1)² + 1·(1) + 2.",
+            "(1)²=1.",
+            "El resultat és <b>f(1)=2</b>."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 329,
+          "question": "Llegeix al gràfic el valor de <b>f(1)</b>. La gràfica és la dada; no hi ha cap punt resposta marcat.<div class=\"number-line-wrap\"><svg style=\"max-width:430px;width:100%;height:auto;display:block;margin:auto\" viewBox=\"0 0 430 280\" role=\"img\" aria-label=\"Gràfic d’una recta per llegir una imatge, sense cap punt destacat\"><defs><clipPath id=\"clipF4\"><rect x=\"30\" y=\"30\" width=\"370\" height=\"220\"/></clipPath></defs><line x1=\"67\" y1=\"30\" x2=\"67\" y2=\"250\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"195\" x2=\"400\" y2=\"195\" stroke=\"#e7ebf1\"/><text x=\"67\" y=\"157\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">-4</text><text x=\"206\" y=\"199\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">-4</text><line x1=\"141\" y1=\"30\" x2=\"141\" y2=\"250\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"167.5\" x2=\"400\" y2=\"167.5\" stroke=\"#e7ebf1\"/><text x=\"141\" y=\"157\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">-2</text><text x=\"206\" y=\"171.5\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">-2</text><line x1=\"215\" y1=\"30\" x2=\"215\" y2=\"250\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"140\" x2=\"400\" y2=\"140\" stroke=\"#e7ebf1\"/><text x=\"215\" y=\"157\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">0</text><text x=\"206\" y=\"144\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">0</text><line x1=\"289\" y1=\"30\" x2=\"289\" y2=\"250\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"112.5\" x2=\"400\" y2=\"112.5\" stroke=\"#e7ebf1\"/><text x=\"289\" y=\"157\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">2</text><text x=\"206\" y=\"116.5\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">2</text><line x1=\"363\" y1=\"30\" x2=\"363\" y2=\"250\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"85\" x2=\"400\" y2=\"85\" stroke=\"#e7ebf1\"/><text x=\"363\" y=\"157\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">4</text><text x=\"206\" y=\"89\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">4</text><line x1=\"215\" y1=\"30\" x2=\"215\" y2=\"250\" stroke=\"#607080\" stroke-width=\"1.8\"/><line x1=\"30\" y1=\"140\" x2=\"400\" y2=\"140\" stroke=\"#607080\" stroke-width=\"1.8\"/><text x=\"404\" y=\"135\" font-size=\"12\" fill=\"#506070\">x</text><text x=\"221\" y=\"40\" font-size=\"12\" fill=\"#506070\">y</text><path d=\"M 30 30 L 400 305\" stroke=\"#e8622a\" stroke-width=\"3\" fill=\"none\" clip-path=\"url(#clipF4)\"/></svg></div>",
+          "correct": "-4",
+          "solution": [
+            "La vertical x=1 talla la recta a l’altura y=-4.",
+            "Per tant, <b>f(1)=-4</b>."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 106,
+          "question": "Una sala té capacitat per a <b>50 persones</b>. Si x és el nombre d’entrades venudes, quin és el domini coherent amb la situació?",
+          "correct": "0 ≤ x ≤ 50, amb x enter",
+          "solution": [
+            "Mínim possible: 0 entrades.",
+            "Màxim possible: 50 entrades.",
+            "Com que comptem entrades, x és enter. Domini: <b>0 ≤ x ≤ 50, amb x enter</b>."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 177,
+          "question": "Una activitat té una quota inicial de <b>11 €</b> i costa <b>7 € per sessió</b>. Quina de les representacions següents descriu correctament el cost C segons el nombre n de sessions?",
+          "correct": "C(n) = 7n + 11",
+          "solution": [
+            "Quan n=0, el cost és 11: és el terme independent.",
+            "Cada sessió afegeix 7: és el coeficient de n.",
+            "Representació correcta: <b>C(n) = 7n + 11</b>."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 97,
+          "question": "En aquesta situació: <b>La temperatura d’un líquid depèn dels minuts que fa que es refreda.</b> Quina identificació és correcta?",
+          "correct": "Variable independent: els minuts. Variable dependent: la temperatura.",
+          "solution": [
+            "La quantitat de partida és <b>els minuts</b>.",
+            "La quantitat que canvia en funció d’aquesta és <b>la temperatura</b>.",
+            "Per tant: <b>Variable independent: els minuts. Variable dependent: la temperatura.</b>"
+          ]
+        },
+        {
+          "type": 12,
+          "n": 101,
+          "question": "Quina família de funcions descriu millor aquesta taula?<table style=\"margin:10px auto;border-collapse:collapse\"><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">x</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">1</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">2</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">4</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">8</th></tr><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">f(x)</th><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">24</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">12</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">6</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">3</td></tr></table>",
+          "correct": "Proporcionalitat inversa",
+          "solution": [
+            "Productes: 1·24=24, 2·12=24, 4·6=24, 8·3=24.",
+            "El producte x·y és constant.",
+            "Per tant, és una <b>proporcionalitat inversa</b>."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 180,
+          "question": "En un servei, <b>C(h)=12h+ 2</b>. Quina interpretació contextual té <b>C(3)=38</b>?",
+          "correct": "Quan passen 3 hores, el cost és 38 €.",
+          "solution": [
+            "L’entrada h=3 representa 3 hores.",
+            "La sortida C(3)=38 és el cost associat.",
+            "Interpretació: <b>Quan passen 3 hores, el cost és 38 €.</b>"
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "linealsQuad4t",
+      "types": 12,
+      "coverage": [
+        8,
+        4,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        8,
+        4,
+        0
+      ],
+      "variants": [
+        {
+          "type": 12,
+          "n": 153,
+          "question": "Una magnitud es modelitza per <b>f(x)=−(x − 8)² + 59</b>. Quin màxim prediu el model?",
+          "correct": "Màxim 59 quan x = 8",
+          "solution": [
+            "El vèrtex és (8,59).",
+            "Com que a=-1<0, la paràbola obre cap avall.",
+            "Per tant, el model té <b>màxim 59 quan x = 8</b>."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 140,
+          "question": "Quina equació correspon al gràfic següent? El dibuix no marca cap punt resposta.<div class=\"number-line-wrap\"><svg style=\"max-width:430px;width:100%;height:auto;display:block;margin:auto\" viewBox=\"0 0 430 280\" role=\"img\" aria-label=\"Gràfic d’una recta per identificar la seva equació, sense punts destacats\"><defs><clipPath id=\"clipF4\"><rect x=\"30\" y=\"30\" width=\"370\" height=\"220\"/></clipPath></defs><line x1=\"67\" y1=\"30\" x2=\"67\" y2=\"250\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"195\" x2=\"400\" y2=\"195\" stroke=\"#e7ebf1\"/><text x=\"67\" y=\"157\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">-4</text><text x=\"206\" y=\"199\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">-4</text><line x1=\"141\" y1=\"30\" x2=\"141\" y2=\"250\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"167.5\" x2=\"400\" y2=\"167.5\" stroke=\"#e7ebf1\"/><text x=\"141\" y=\"157\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">-2</text><text x=\"206\" y=\"171.5\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">-2</text><line x1=\"215\" y1=\"30\" x2=\"215\" y2=\"250\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"140\" x2=\"400\" y2=\"140\" stroke=\"#e7ebf1\"/><text x=\"215\" y=\"157\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">0</text><text x=\"206\" y=\"144\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">0</text><line x1=\"289\" y1=\"30\" x2=\"289\" y2=\"250\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"112.5\" x2=\"400\" y2=\"112.5\" stroke=\"#e7ebf1\"/><text x=\"289\" y=\"157\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">2</text><text x=\"206\" y=\"116.5\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">2</text><line x1=\"363\" y1=\"30\" x2=\"363\" y2=\"250\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"85\" x2=\"400\" y2=\"85\" stroke=\"#e7ebf1\"/><text x=\"363\" y=\"157\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">4</text><text x=\"206\" y=\"89\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">4</text><line x1=\"215\" y1=\"30\" x2=\"215\" y2=\"250\" stroke=\"#607080\" stroke-width=\"1.8\"/><line x1=\"30\" y1=\"140\" x2=\"400\" y2=\"140\" stroke=\"#607080\" stroke-width=\"1.8\"/><text x=\"404\" y=\"135\" font-size=\"12\" fill=\"#506070\">x</text><text x=\"221\" y=\"40\" font-size=\"12\" fill=\"#506070\">y</text><path d=\"M 30 236.25 L 400 98.75\" stroke=\"#e8622a\" stroke-width=\"3\" fill=\"none\" clip-path=\"url(#clipF4)\"/></svg></div>",
+          "correct": "y = x − 2",
+          "solution": [
+            "La recta té pendent positiu i variació de 1 unitat verticals per cada unitat horitzontal.",
+            "Talla l’eix y a -2.",
+            "Equació: <b>y = x − 2</b>."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 455,
+          "question": "Troba el vèrtex de <b>f(x)=(x − 1)² + 2</b>.",
+          "correct": "(1, 2)",
+          "solution": [
+            "La forma de vèrtex és a(x−h)²+k.",
+            "Aquí h=1 i k=2.",
+            "Per tant, el vèrtex és <b>(1, 2)</b>."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 303,
+          "question": "Quina evidència de la taula indica que el model pot ser quadràtic?<table style=\"margin:10px auto;border-collapse:collapse\"><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">x</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">-1</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">0</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">1</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">2</th></tr><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">f(x)</th><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">7</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">2</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">1</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">4</td></tr></table>",
+          "correct": "Segones diferències constants: 4",
+          "solution": [
+            "Primeres diferències: -5, -1, 3.",
+            "Segones diferències: 4, 4.",
+            "Són constants i valen 4; això és característic d’un model quadràtic."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 305,
+          "question": "Calcula el pendent de la recta que passa pels punts <b>(2, -4)</b> i <b>(4, 0)</b>.",
+          "correct": "2",
+          "solution": [
+            "Δy=0−-4=4.",
+            "Δx=4−2=2.",
+            "m=4/2=<b>2</b>."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 152,
+          "question": "Dues tarifes són <b>A(x)=6x+15</b> i <b>B(x)=3x+26</b>. Per a <b>x=8</b>, quina és més econòmica?",
+          "correct": "Opció B",
+          "solution": [
+            "A(8)=6·8+15=<b>63</b>.",
+            "B(8)=3·8+26=<b>50</b>.",
+            "Per tant, <b>Opció B</b> és més econòmica."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 136,
+          "question": "Classifica <b>y = 2x + 3</b>.",
+          "correct": "Funció afí no proporcional",
+          "solution": [
+            "El terme independent és 3≠0, així que no passa per l’origen.",
+            "Classificació: <b>Funció afí no proporcional</b>."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 297,
+          "question": "Quins són els zeros de la funció <b>f(x)=-2(x + 2)(x − 5)</b>?",
+          "correct": "x = -2 o x = 5",
+          "solution": [
+            "f(x)=0 implica -2(x + 2)(x − 5)=0.",
+            "Els factors s’anul·len quan x=-2 o x=5.",
+            "Zeros: <b>x = -2 o x = 5</b>."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 453,
+          "question": "Troba l’equació de la recta que passa per <b>(-1, 7)</b> i <b>(0, 5)</b>.",
+          "correct": "y = −2x + 5",
+          "solution": [
+            "m=(5−7)/(0−-1)=-2/1=<b>-2</b>.",
+            "Usem (-1,7): 7=-2·-1+b.",
+            "D’aquí b=5.",
+            "Equació: <b>y = −2x + 5</b>."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 146,
+          "question": "Escriu l’equació de la recta que té <b>pendent 2</b> i <b>ordenada a l’origen -6</b>.",
+          "correct": "y = 2x − 6",
+          "solution": [
+            "Partim de y=mx+b.",
+            "Substituïm m=2 i b=-6.",
+            "Resultat: <b>y = 2x − 6</b>."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 150,
+          "question": "En la funció <b>y = −2x − 6</b>, quina és l’ordenada a l’origen?",
+          "correct": "-6",
+          "solution": [
+            "Si x=0, y=-2·0 − 6=-6.",
+            "Per tant, l’ordenada a l’origen és <b>-6</b>."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 310,
+          "question": "Quin és l’eix de simetria de la paràbola <b>y=3(x − 1)² + 1</b>?",
+          "correct": "x = 1",
+          "solution": [
+            "El vèrtex té coordenada x=1.",
+            "L’eix de simetria és la recta vertical que passa pel vèrtex.",
+            "Per tant, <b>x = 1</b>."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "inversaExp4t",
+      "types": 12,
+      "coverage": [
+        5,
+        7,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        5,
+        7,
+        0
+      ],
+      "variants": [
+        {
+          "type": 7,
+          "n": 399,
+          "question": "Una funció té forma <b>f(x)=a·b<sup>x</sup></b> i dona aquesta taula:<table style=\"margin:10px auto;border-collapse:collapse\"><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">x</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">0</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">1</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">2</th></tr><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">f(x)</th><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">1</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">3</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">9</td></tr></table>Quins són a i b?",
+          "correct": "a = 1, b = 3",
+          "solution": [
+            "f(0)=a·b⁰=a, per tant <b>a=1</b>.",
+            "Factor: 3/1=<b>3</b>.",
+            "Així, <b>a = 1, b = 3</b>."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 524,
+          "question": "Resol <b>3·2<sup>x</sup> = 12</b>. Quin valor té x?",
+          "correct": "2",
+          "solution": [
+            "3·2<sup>x</sup>=12 ⇒ 2<sup>x</sup>=4.",
+            "4=2<sup>2</sup>.",
+            "Per tant, <b>x=2</b>."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 30,
+          "question": "Quina família de funcions representa aquest gràfic? No hi ha cap punt resposta marcat.<div class=\"number-line-wrap\"><svg style=\"max-width:430px;width:100%;height:auto;display:block;margin:auto\" viewBox=\"0 0 430 270\" role=\"img\" aria-label=\"Gràfic sense punts destacats per identificar la família funcional\"><defs><clipPath id=\"clipModel4\"><rect x=\"30\" y=\"30\" width=\"370\" height=\"210\"/></clipPath></defs><line x1=\"67\" y1=\"30\" x2=\"67\" y2=\"240\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"193.33333333333334\" x2=\"400\" y2=\"193.33333333333334\" stroke=\"#e7ebf1\"/><text x=\"67\" y=\"163.66666666666669\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">-4</text><text x=\"206\" y=\"197.33333333333334\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">-4</text><line x1=\"141\" y1=\"30\" x2=\"141\" y2=\"240\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"170\" x2=\"400\" y2=\"170\" stroke=\"#e7ebf1\"/><text x=\"141\" y=\"163.66666666666669\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">-2</text><text x=\"206\" y=\"174\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">-2</text><line x1=\"215\" y1=\"30\" x2=\"215\" y2=\"240\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"146.66666666666669\" x2=\"400\" y2=\"146.66666666666669\" stroke=\"#e7ebf1\"/><text x=\"215\" y=\"163.66666666666669\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">0</text><text x=\"206\" y=\"150.66666666666669\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">0</text><line x1=\"289\" y1=\"30\" x2=\"289\" y2=\"240\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"123.33333333333333\" x2=\"400\" y2=\"123.33333333333333\" stroke=\"#e7ebf1\"/><text x=\"289\" y=\"163.66666666666669\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">2</text><text x=\"206\" y=\"127.33333333333333\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">2</text><line x1=\"363\" y1=\"30\" x2=\"363\" y2=\"240\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"100\" x2=\"400\" y2=\"100\" stroke=\"#e7ebf1\"/><text x=\"363\" y=\"163.66666666666669\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">4</text><text x=\"206\" y=\"104\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">4</text><line x1=\"215\" y1=\"30\" x2=\"215\" y2=\"240\" stroke=\"#607080\" stroke-width=\"1.8\"/><line x1=\"30\" y1=\"146.66666666666669\" x2=\"400\" y2=\"146.66666666666669\" stroke=\"#607080\" stroke-width=\"1.8\"/><path d=\"M 30 174.66666666666669 L 32.219999999999985 175.00674763832657 L 34.43999999999997 175.3551912568306 L 36.659999999999954 175.71230982019364 L 38.87999999999994 176.078431372549 L 41.09999999999992 176.45390070921985 L 43.319999999999915 176.8390804597701 L 45.5399999999999 177.2343522561863 L 47.759999999999884 177.64011799410028 L 49.97999999999987 178.05680119581461 L 52.199999999999854 178.48484848484847 L 54.419999999999845 178.92473118279568 L 56.63999999999983 179.3769470404984 L 58.859999999999815 179.8420221169036 L 61.0799999999998 180.3205128205128 L 63.299999999999784 180.81300813008124 L 65.51999999999977 181.32013201320126 L 67.73999999999978 181.84254606365153 L 69.95999999999978 182.38095238095232 L 72.17999999999978 182.9360967184801 L 74.39999999999978 183.5087719298245 L 76.61999999999978 184.0998217468805 L 78.83999999999978 184.71014492753616 L 81.05999999999977 185.34069981583787 L 83.27999999999977 185.99250936329582 L 85.49999999999977 186.66666666666663 L 87.71999999999979 187.36434108527123 L 89.93999999999978 188.08678500986187 L 92.1599999999998 188.83534136546177 L 94.3799999999998 189.61145194274022 L 96.5999999999998 190.41666666666657 L 98.8199999999998 191.25265392781307 L 101.0399999999998 192.12121212121207 L 103.25999999999979 193.02428256070633 L 105.4799999999998 193.96396396396386 L 107.6999999999998 194.9425287356321 L 109.9199999999998 195.9624413145539 L 112.1399999999998 197.0263788968824 L 114.35999999999981 198.1372549019607 L 116.57999999999981 199.29824561403498 L 118.79999999999981 200.5128205128204 L 121.01999999999981 201.78477690288702 L 123.23999999999981 203.11827956989237 L 125.45999999999982 204.51790633608803 L 127.67999999999982 205.98870056497162 L 129.8999999999998 207.53623188405786 L 132.11999999999983 209.16666666666654 L 134.3399999999998 210.88685015290505 L 136.55999999999983 212.70440251572313 L 138.77999999999983 214.62783171521022 L 140.99999999999983 216.66666666666652 L 143.21999999999983 218.83161512027476 L 145.43999999999983 221.1347517730495 L 147.65999999999985 223.58974358974342 L 149.87999999999982 226.21212121212102 L 152.09999999999985 229.01960784313707 L 154.31999999999982 232.03252032520305 L 156.53999999999985 235.2742616033753 L 158.75999999999985 238.77192982456117 L 160.97999999999985 242.5570776255705 L 163.19999999999985 246.6666666666664 L 165.41999999999985 251.14427860696486 L 167.63999999999984 256.04166666666634 L 169.85999999999984 261.42076502732203 L 172.07999999999987 267.35632183908007 L 174.29999999999987 273.93939393939354 L 176.51999999999987 281.2820512820508\" stroke=\"#e8622a\" stroke-width=\"3\" fill=\"none\" clip-path=\"url(#clipModel4)\"/><path d=\"M 248.30000000000004 -8.888888888888829 L 250.52000000000004 0.8333333333334281 L 252.74000000000004 9.411764705882433 L 254.96 17.037037037037067 L 257.18000000000006 23.85964912280707 L 259.40000000000003 30.000000000000085 L 261.62 35.5555555555556 L 263.84000000000003 40.60606060606065 L 266.06000000000006 45.21739130434787 L 268.2800000000001 49.444444444444514 L 270.50000000000006 53.33333333333337 L 272.72 56.92307692307696 L 274.94000000000005 60.24691358024697 L 277.1600000000001 63.33333333333337 L 279.38000000000005 66.20689655172418 L 281.6 68.88888888888894 L 283.82000000000005 71.39784946236563 L 286.0400000000001 73.75000000000003 L 288.26000000000005 75.95959595959602 L 290.48 78.03921568627456 L 292.70000000000005 80.00000000000003 L 294.9200000000001 81.8518518518519 L 297.1400000000001 83.60360360360366 L 299.36 85.26315789473688 L 301.5800000000001 86.83760683760687 L 303.80000000000007 88.33333333333337 L 306.0200000000001 89.75609756097563 L 308.24000000000007 91.11111111111114 L 310.4600000000001 92.40310077519382 L 312.68000000000006 93.63636363636368 L 314.9000000000001 94.81481481481484 L 317.12000000000006 95.94202898550725 L 319.3400000000001 97.02127659574472 L 321.5600000000001 98.05555555555557 L 323.7800000000001 99.0476190476191 L 326.00000000000006 100.00000000000003 L 328.2200000000001 100.9150326797386 L 330.4400000000001 101.79487179487182 L 332.6600000000001 102.64150943396228 L 334.88000000000005 103.45679012345684 L 337.10000000000014 104.24242424242428 L 339.3200000000001 105 L 341.5400000000001 105.7309941520468 L 343.76000000000005 106.43678160919544 L 345.98000000000013 107.11864406779662 L 348.2000000000001 107.77777777777783 L 350.42000000000013 108.41530054644812 L 352.6400000000001 109.03225806451616 L 354.8600000000001 109.62962962962965 L 357.08000000000015 110.20833333333334 L 359.30000000000007 110.76923076923077 L 361.5200000000001 111.31313131313135 L 363.7400000000001 111.84079601990052 L 365.96000000000004 112.3529411764706 L 368.1800000000001 112.85024154589374 L 370.4000000000001 113.33333333333334 L 372.62000000000006 113.80281690140845 L 374.84000000000003 114.25925925925927 L 377.06 114.70319634703198 L 379.2800000000001 115.13513513513516 L 381.5 115.55555555555556 L 383.71999999999997 115.96491228070175 L 385.94 116.36363636363636 L 388.15999999999997 116.75213675213674 L 390.37999999999994 117.1308016877637 L 392.5999999999999 117.49999999999999 L 394.81999999999994 117.86008230452676 L 397.0399999999999 118.2113821138211 L 399.2599999999999 118.55421686746986\" stroke=\"#e8622a\" stroke-width=\"3\" fill=\"none\" clip-path=\"url(#clipModel4)\"/></svg></div>",
+          "correct": "y = k/x (proporcionalitat inversa)",
+          "solution": [
+            "La gràfica no és una recta ni una paràbola.",
+            "Té dues branques i x=0 actua com a valor exclòs del domini.",
+            "Correspon a <b>y=k/x</b>, una proporcionalitat inversa."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 206,
+          "question": "Una quantitat inicial de <b>200</b> augmenta un <b>25% cada període</b>. Si el percentatge s’aplica sempre sobre el valor actual, quin valor tindrà després de <b>2 períodes</b>?",
+          "correct": "312,5",
+          "solution": [
+            "Factor: 1+25/100=1,25.",
+            "Model: 200·1,25<sup>2</sup>.",
+            "Resultat: <b>312,5</b>."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 408,
+          "question": "Sigui <b>f(x) = 2·2<sup>x</sup></b>. Calcula <b>f(3)</b>.",
+          "correct": "16",
+          "solution": [
+            "2<sup>3</sup> = 8.",
+            "f(3)=2·8.",
+            "Per tant, <b>f(3)=16</b>."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 104,
+          "question": "Per a una funció <b>f(x)=4·2<sup>x</sup></b>, quin comportament té quan x augmenta?",
+          "correct": "Creixement exponencial",
+          "solution": [
+            "La base és b=2.",
+            "Com que b>1, cada pas multiplica per un factor superior a 1.",
+            "Per tant hi ha <b>creixement exponencial</b>."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 218,
+          "question": "Compara <b>L(x)=5x + 8</b> i <b>E(x)=2·2<sup>x</sup></b>. Quin model dona el valor més gran quan <b>x=4</b>?",
+          "correct": "Model exponencial",
+          "solution": [
+            "L(4)=5·4+ 8=<b>28</b>.",
+            "E(4)=2·2<sup>4</sup>=<b>32</b>.",
+            "Per tant: <b>Model exponencial</b>."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 82,
+          "question": "Quin tipus de model descriu millor aquesta taula?<table style=\"margin:10px auto;border-collapse:collapse\"><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">x</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">2</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">3</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">4</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">6</th></tr><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">f(x)</th><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">18</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">12</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">9</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">6</td></tr></table>",
+          "correct": "Proporcionalitat inversa",
+          "solution": [
+            "Productes: 2·18=36, 3·12=36, 4·9=36, 6·6=36.",
+            "Tots donen el mateix valor.",
+            "Per tant és <b>proporcionalitat inversa</b>."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 208,
+          "question": "En un model idealitzat, <b>3 treballadors</b> fan una feina en <b>10 hores</b>. Si el producte treballadors·temps es manté constant, quantes hores necessitarien <b>6 treballadors</b>?",
+          "correct": "5",
+          "solution": [
+            "Constant: 3·10=30.",
+            "Nou temps: 30/6=5.",
+            "Segons el model idealitzat, necessitarien <b>5 hores</b>."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 210,
+          "question": "Quin model és compatible amb aquesta taula?<table style=\"margin:10px auto;border-collapse:collapse\"><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">x</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">0</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">1</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">2</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">3</th></tr><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">f(x)</th><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">2</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">6</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">18</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">54</td></tr></table>",
+          "correct": "Model exponencial",
+          "solution": [
+            "Raons consecutives: 6/2=3, 18/6=3, 54/18=3.",
+            "El factor multiplicatiu és constant i val 3.",
+            "Per tant és un <b>model exponencial</b>."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 507,
+          "question": "En una proporcionalitat inversa <b>y=48/x</b>. Quin valor pren y quan <b>x=6</b>?",
+          "correct": "8",
+          "solution": [
+            "y=48/6.",
+            "Fem la divisió: 48÷6=8.",
+            "Per tant, <b>y=8</b>."
+          ]
+        },
+        {
+          "type": 12,
+          "n": 104,
+          "question": "Quin model és més coherent? <b>L’àrea d’un quadrat depèn del quadrat del costat.</b>",
+          "correct": "Model quadràtic",
+          "solution": [
+            "La frase descriu una dependència amb el quadrat.",
+            "El model coherent és <b>Model quadràtic</b>."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "analisiFunc4t",
+      "types": 12,
+      "coverage": [
+        7,
+        5,
+        0
+      ],
+      "generated": 3000,
+      "exam": [
+        7,
+        5,
+        0
+      ],
+      "variants": [
+        {
+          "type": 5,
+          "n": 357,
+          "question": "La funció és <b>f(x)=(x + 5)² + 1</b>. Què podem afirmar dels valors situats a la mateixa distància de l’eix de simetria? Concretament, compara x=-8 i x=-2.",
+          "correct": "f(-8) = f(-2) = 10",
+          "solution": [
+            "Distàncies a x=-5: |-8−-5|=|-2−-5|=3.",
+            "En una paràbola, punts simètrics tenen la mateixa ordenada.",
+            "El valor comú és 1·3² + 1=10. Per tant, <b>f(-8) = f(-2) = 10</b>."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 535,
+          "question": "En quin valor de x coincideixen els models <b>A(x)=5x − 4</b> i <b>B(x)=−2x + 52</b>?",
+          "correct": "8",
+          "solution": [
+            "5x − 4 = −2x + 52.",
+            "(7)x = 56.",
+            "x = 56/7 = <b>8</b>."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 182,
+          "question": "Per a x=8, compara <b>A(x)=2x + 5</b> i <b>B(x)=5x + 6</b>. Quin dona el valor més petit?",
+          "correct": "Model A",
+          "solution": [
+            "A(8)=21.",
+            "B(8)=46.",
+            "Per tant: <b>Model A</b>."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 173,
+          "question": "Un model s’ha ajustat amb dades observades per a <b>0 ≤ x ≤ 50</b>. Estimar el valor quan <b>x=56</b> és una interpolació o una extrapolació?",
+          "correct": "Extrapolació",
+          "solution": [
+            "Les dades observades arriben fins a x=50.",
+            "x=56 queda fora d’aquest interval.",
+            "Per tant és una <b>extrapolació</b>."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 277,
+          "question": "Quin model explica millor aquestes dades?<table style=\"margin:10px auto;border-collapse:collapse\"><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">x</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">0</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">1</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">2</th><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">3</th></tr><tr><th style=\"border:1px solid #ccd6e3;padding:6px 10px\">f(x)</th><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">2</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">4</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">8</td><td style=\"border:1px solid #ccd6e3;padding:6px 10px;text-align:center\">16</td></tr></table>",
+          "correct": "Model exponencial",
+          "solution": [
+            "L’estructura de les dades correspon a <b>model exponencial</b>.",
+            "La raó entre termes consecutius és constant."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 359,
+          "question": "Analitza <b>f(x)=(x − 3)² + 3</b>. Quin extrem global té?",
+          "correct": "Mínim 3 quan x = 3",
+          "solution": [
+            "Vèrtex: (3,3).",
+            "Com que a=1, la paràbola obre cap amunt.",
+            "Per tant té <b>mínim 3 quan x = 3</b>."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 186,
+          "question": "Analitza el gràfic següent. No hi ha cap vèrtex ni interval resposta etiquetat.<div class=\"number-line-wrap\"><svg style=\"max-width:430px;width:100%;height:auto;display:block;margin:auto\" viewBox=\"0 0 430 270\" role=\"img\" aria-label=\"Paràbola sense punts destacats per analitzar creixement i decreixement\"><defs><clipPath id=\"clipModel4\"><rect x=\"30\" y=\"30\" width=\"370\" height=\"210\"/></clipPath></defs><line x1=\"67\" y1=\"30\" x2=\"67\" y2=\"240\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"193.33333333333334\" x2=\"400\" y2=\"193.33333333333334\" stroke=\"#e7ebf1\"/><text x=\"67\" y=\"163.66666666666669\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">-4</text><text x=\"206\" y=\"197.33333333333334\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">-4</text><line x1=\"141\" y1=\"30\" x2=\"141\" y2=\"240\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"170\" x2=\"400\" y2=\"170\" stroke=\"#e7ebf1\"/><text x=\"141\" y=\"163.66666666666669\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">-2</text><text x=\"206\" y=\"174\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">-2</text><line x1=\"215\" y1=\"30\" x2=\"215\" y2=\"240\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"146.66666666666669\" x2=\"400\" y2=\"146.66666666666669\" stroke=\"#e7ebf1\"/><text x=\"215\" y=\"163.66666666666669\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">0</text><text x=\"206\" y=\"150.66666666666669\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">0</text><line x1=\"289\" y1=\"30\" x2=\"289\" y2=\"240\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"123.33333333333333\" x2=\"400\" y2=\"123.33333333333333\" stroke=\"#e7ebf1\"/><text x=\"289\" y=\"163.66666666666669\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">2</text><text x=\"206\" y=\"127.33333333333333\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">2</text><line x1=\"363\" y1=\"30\" x2=\"363\" y2=\"240\" stroke=\"#e7ebf1\"/><line x1=\"30\" y1=\"100\" x2=\"400\" y2=\"100\" stroke=\"#e7ebf1\"/><text x=\"363\" y=\"163.66666666666669\" text-anchor=\"middle\" font-size=\"10\" fill=\"#8693a0\">4</text><text x=\"206\" y=\"104\" text-anchor=\"end\" font-size=\"10\" fill=\"#8693a0\">4</text><line x1=\"215\" y1=\"30\" x2=\"215\" y2=\"240\" stroke=\"#607080\" stroke-width=\"1.8\"/><line x1=\"30\" y1=\"146.66666666666669\" x2=\"400\" y2=\"146.66666666666669\" stroke=\"#607080\" stroke-width=\"1.8\"/><path d=\"M 30 18.333333333333314 L 32.219999999999985 23.849333333333277 L 34.43999999999997 29.197333333333262 L 36.659999999999954 34.37733333333324 L 38.87999999999994 39.38933333333321 L 41.09999999999992 44.23333333333315 L 43.319999999999915 48.909333333333166 L 45.5399999999999 53.41733333333315 L 47.759999999999884 57.75733333333312 L 49.97999999999987 61.92933333333309 L 52.199999999999854 65.93333333333308 L 54.419999999999845 69.76933333333304 L 56.63999999999983 73.43733333333304 L 58.859999999999815 76.93733333333302 L 61.0799999999998 80.26933333333304 L 63.299999999999784 83.43333333333302 L 65.51999999999977 86.42933333333303 L 67.73999999999978 89.25733333333304 L 69.95999999999978 91.91733333333306 L 72.17999999999978 94.40933333333311 L 74.39999999999978 96.73333333333312 L 76.61999999999978 98.88933333333313 L 78.83999999999978 100.87733333333315 L 81.05999999999977 102.69733333333315 L 83.27999999999977 104.34933333333319 L 85.49999999999977 105.8333333333332 L 87.71999999999979 107.1493333333332 L 89.93999999999978 108.29733333333323 L 92.1599999999998 109.27733333333325 L 94.3799999999998 110.08933333333326 L 96.5999999999998 110.73333333333326 L 98.8199999999998 111.20933333333332 L 101.0399999999998 111.51733333333331 L 103.25999999999979 111.65733333333333 L 105.4799999999998 111.62933333333334 L 107.6999999999998 111.43333333333337 L 109.9199999999998 111.06933333333336 L 112.1399999999998 110.53733333333338 L 114.35999999999981 109.83733333333342 L 116.57999999999981 108.9693333333334 L 118.79999999999981 107.93333333333342 L 121.01999999999981 106.72933333333344 L 123.23999999999981 105.35733333333343 L 125.45999999999982 103.81733333333347 L 127.67999999999982 102.10933333333347 L 129.8999999999998 100.23333333333349 L 132.11999999999983 98.18933333333348 L 134.3399999999998 95.97733333333349 L 136.55999999999983 93.59733333333352 L 138.77999999999983 91.04933333333352 L 140.99999999999983 88.33333333333354 L 143.21999999999983 85.44933333333353 L 145.43999999999983 82.39733333333356 L 147.65999999999985 79.17733333333356 L 149.87999999999982 75.78933333333359 L 152.09999999999985 72.2333333333336 L 154.31999999999982 68.50933333333359 L 156.53999999999985 64.61733333333359 L 158.75999999999985 60.55733333333362 L 160.97999999999985 56.32933333333361 L 163.19999999999985 51.93333333333362 L 165.41999999999985 47.36933333333363 L 167.63999999999984 42.63733333333363 L 169.85999999999984 37.73733333333362 L 172.07999999999987 32.66933333333367 L 174.29999999999987 27.433333333333678 L 176.51999999999987 22.029333333333653 L 178.73999999999984 16.457333333333622 L 180.95999999999987 10.717333333333642 L 183.1799999999999 4.809333333333711 L 185.39999999999986 -1.2666666666663389 L 187.61999999999986 -7.51066666666631 L 189.83999999999986 -13.922666666666288\" stroke=\"#e8622a\" stroke-width=\"3\" fill=\"none\" clip-path=\"url(#clipModel4)\"/></svg></div>Quina descripció és correcta?",
+          "correct": "Decreix per x < -3 i creix per x > -3",
+          "solution": [
+            "La paràbola obre cap amunt i té l’eix de simetria a x=-3.",
+            "Fins a x=-3 decreix; després creix.",
+            "Resposta: <b>Decreix per x < -3 i creix per x > -3</b>."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 525,
+          "question": "Quin és el recorregut de <b>f(x)=−(x − 3)² + 2</b> si el domini és ℝ?",
+          "correct": "y ≤ 2",
+          "solution": [
+            "El vèrtex té ordenada 2.",
+            "Com que a=-1, aquest valor és un màxim.",
+            "Per tant, <b>y ≤ 2</b>."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 95,
+          "question": "En modelitzar <b>la temperatura d’un forn al llarg del temps</b>, quina descripció és més adequada per a la variable de sortida?",
+          "correct": "Variable contínua",
+          "solution": [
+            "La situació correspon a una <b>variable contínua</b>.",
+            "Això condiciona com interpretem el gràfic i el domini del model."
+          ]
+        },
+        {
+          "type": 12,
+          "n": 99,
+          "question": "Valora la modelització següent: <b>Una tarifa té 12 € de quota fixa i augmenta 3 € per cada unitat consumida.</b> Quina justificació és correcta?",
+          "correct": "Un model afí és coherent perquè combina valor inicial i increment constant.",
+          "solution": [
+            "La situació descriu un patró específic de canvi.",
+            "La justificació matemàticament coherent és: <b>Un model afí és coherent perquè combina valor inicial i increment constant.</b>",
+            "Després de triar el model, encara cal validar-lo amb més dades i amb el domini del context."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 100,
+          "question": "Quin comportament té <b>f(x)=2·2ˣ</b> quan x augmenta?",
+          "correct": "Creixent",
+          "solution": [
+            "En aquesta funció, la base és superior a 1.",
+            "Per tant és <b>creixent</b>."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 112,
+          "question": "En un recinte es poden vendre com a màxim <b>50 entrades</b>. Si x és el nombre d’entrades venudes, quin domini és coherent?",
+          "correct": "0 ≤ x ≤ 50, amb x enter",
+          "solution": [
+            "x va de 0 a 50.",
+            "Com que compta entrades, només pren valors enters.",
+            "Domini: <b>0 ≤ x ≤ 50, amb x enter</b>."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "polinomisAmpA",
+      "types": 10,
+      "coverage": [
+        10,
+        0,
+        0
+      ],
+      "generated": 3000,
+      "exam": null,
+      "variants": [
+        {
+          "type": 1,
+          "n": 206,
+          "question": "Sigui <b>P(x)=2x³ + x² − 2x − 7</b>. Calcula <b>P(-3)</b>.",
+          "correct": "-46",
+          "solution": [
+            "Substituïm x=-3: P(-3)=2·(-3)³ + 1·(-3)² − 2·(-3) − 7.",
+            "Respectem la jerarquia d’operacions i obtenim <b>-46</b>.",
+            "Per tant, <b>P(-3)=-46</b>."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 203,
+          "question": "Sigui <b>P(x)=x² − 8x + 7</b>. És <b>3</b> una arrel de P?",
+          "correct": "No, perquè P(3) = -8, que no és 0.",
+          "solution": [
+            "Calculem P(3) i obtenim <b>-8</b>.",
+            "Com que el resultat no és 0, el valor no és una arrel.",
+            "Resposta: <b>No, perquè P(3) = -8, que no és 0.</b>"
+          ]
+        },
+        {
+          "type": 3,
+          "n": 420,
+          "question": "Si <b>P(x)=x² − 2x + 4</b> i <b>Q(x)=2x² + 2x − 1</b>, calcula <b>P(x)+Q(x)</b>.",
+          "correct": "3x² + 3",
+          "solution": [
+            "Coeficient de x²: 1+(2)=<b>3</b>.",
+            "Coeficient de x: -2+(2)=<b>0</b>.",
+            "Terme independent: 4+(-1)=<b>3</b>.",
+            "Resultat: <b>3x² + 3</b>."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 285,
+          "question": "Si <b>r=4</b> és una arrel d’un polinomi P(x), quin factor sabem que divideix P(x)?",
+          "correct": "(x − 4)",
+          "solution": [
+            "Com que 4 és arrel, P(4)=0.",
+            "Pel teorema del factor, <b>(x−r)</b> divideix P(x).",
+            "Substituint r=4, el factor és <b>(x − 4)</b>."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 202,
+          "question": "Quin és el <b>grau</b> del polinomi <b>P(x)=2x + 6</b>?",
+          "correct": "1",
+          "solution": [
+            "El terme de major exponent és el que conté x.",
+            "Aquest exponent és <b>1</b>.",
+            "Per tant, el grau és <b>1</b>."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 290,
+          "question": "Factoritza el trinomi <b>x² − 12x + 36</b>.",
+          "correct": "(x − 6)²",
+          "solution": [
+            "El primer terme és x² i l’últim és 6².",
+            "El terme central és -12x = −2·6·x.",
+            "És un quadrat perfecte: <b>(x − 6)²</b>."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 230,
+          "question": "Factoritza <b>x² − 16</b>.",
+          "correct": "(x − 4)(x + 4)",
+          "solution": [
+            "16=4², així que tenim x²−4².",
+            "Apliquem la identitat de diferència de quadrats.",
+            "Resultat: <b>(x − 4)(x + 4)</b>."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 204,
+          "question": "Resol l’equació polinòmica ja factoritzada:<br><b>(x − 3)(x + 1) = 0</b>",
+          "correct": "x = -1 o x = 3",
+          "solution": [
+            "Producte nul: (x − 3)=0 o (x + 1)=0.",
+            "Del primer factor obtenim x=3; del segon, x=-1.",
+            "Solucions: <b>x = -1 o x = 3</b>."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 367,
+          "question": "Factoritza traient el <b>factor comú màxim visible</b>: <b>8x² + 40x</b>.",
+          "correct": "8x(x + 5)",
+          "solution": [
+            "Els termes 8x² i 40x comparteixen <b>8x</b>.",
+            "Dividim: 8x²÷(8x)=x i 40x÷(8x)=5.",
+            "Per tant, <b>8x(x + 5)</b>.",
+            "Comprovació: 8x·x + 8x·5 = 8x²+40x."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 593,
+          "question": "Factoritza completament <b>x² − 9</b>.",
+          "correct": "(x + 3)(x − 3)",
+          "solution": [
+            "Per a x²+Bx+C, les arrels r₁ i r₂ compleixen r₁+r₂=−B i r₁·r₂=C.",
+            "Aquí -3+(3)=0 i -3·3=-9, així que les arrels són <b>-3</b> i <b>3</b>.",
+            "Cada arrel r dona el factor (x−r). Per tant, la factorització és <b>(x + 3)(x − 3)</b>."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "equacionsAdvAmpB",
+      "types": 10,
+      "coverage": [
+        5,
+        5,
+        0
+      ],
+      "generated": 3000,
+      "exam": null,
+      "variants": [
+        {
+          "type": 7,
+          "n": 339,
+          "question": "Resol <b>7<sup>x</sup> = 7<sup>-3</sup></b>.",
+          "correct": "-3",
+          "solution": [
+            "Les bases són iguals: 7.",
+            "Igualem exponents: x=-3.",
+            "Solució: <b>x=-3</b>."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 184,
+          "question": "Resol l’equació racional <b>42/(x + 2) = 6</b>.",
+          "correct": "5",
+          "solution": [
+            "Restricció: <b>x ≠ -2</b>.",
+            "Multipliquem per (x + 2): 42 = 6(x + 2).",
+            "Dividim entre 6: 7 = x + 2.",
+            "Obtenim <b>x=5</b>, que compleix la restricció."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 551,
+          "question": "Resol <b>7/(x + 2) = 8/(x + 3)</b>.",
+          "correct": "5",
+          "solution": [
+            "Restriccions: <b>x≠-2</b> i <b>x≠-3</b>.",
+            "Multiplicació en creu: 7(x + 3) = 8(x + 2).",
+            "Desenvolupant i agrupant termes s’obté <b>x=5</b>.",
+            "El valor 5 no anul·la cap denominador, així que és vàlid."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 350,
+          "question": "Resol <b>(x + 19)/(x + 3) = 3</b>.",
+          "correct": "5",
+          "solution": [
+            "Restricció: x ≠ -3.",
+            "Multipliquem per (x + 3): x + 19 = 3(x + 3).",
+            "Desenvolupem i aïllem x; obtenim <b>x=5</b>.",
+            "Com que 5≠-3, la solució és vàlida."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 356,
+          "question": "Resol <b>√(3x + 34) = 7</b>.",
+          "correct": "5",
+          "solution": [
+            "Elevem al quadrat: 3x + 34 = 49.",
+            "Aïllem: 3x = 15.",
+            "x = (15)/3 = <b>5</b>.",
+            "Comprovació: el radicand val 49 i la seva arrel és 7."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 364,
+          "question": "Resol <b>3<sup>x+5</sup> = 3<sup>5</sup></b>.",
+          "correct": "0",
+          "solution": [
+            "Mateixa base ⇒ x+5=5.",
+            "Restem 5: x=5-5.",
+            "Per tant, <b>x=0</b>."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 148,
+          "question": "Resol i <b>comprova</b> l’equació <b>√(x − 2) = x − 4</b>.",
+          "correct": "6",
+          "solution": [
+            "Elevem al quadrat: x − 2 = (x − 4)².",
+            "L’equació de segon grau resultant té els candidats <b>x=6</b> i <b>x=3</b>.",
+            "Per x=3, el membre dret és -1, que és negatiu; no pot ser igual a una arrel quadrada.",
+            "Per x=6, tots dos membres valen 2. Per tant, la solució és <b>x=6</b>."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 350,
+          "question": "Resol <b>2·2<sup>x</sup> = 32</b>.",
+          "correct": "4",
+          "solution": [
+            "Dividim entre 2: 2<sup>x</sup> = 32/2 = 16.",
+            "Com que 16=2<sup>4</sup>, igualem exponents.",
+            "Solució: <b>x=4</b>."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 180,
+          "question": "Una quantitat comença en <b>50</b> i es multiplica per <b>2</b> a cada període. Després de quants períodes arriba exactament a <b>800</b>?",
+          "correct": "4",
+          "solution": [
+            "Plantegem 50·2<sup>t</sup> = 800.",
+            "Dividim entre 50: 2<sup>t</sup> = 16.",
+            "Com que 16=2<sup>4</sup>, tenim <b>t=4</b> períodes."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 178,
+          "question": "Resol l’equació irracional <b>√(x + 6) = 3</b>.",
+          "correct": "3",
+          "solution": [
+            "Elevem al quadrat: x + 6 = 9.",
+            "Aïllem x: x = 9 − 6 = <b>3</b>.",
+            "Comprovació: √(9)=√9=3."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "parametresAmpC",
+      "types": 10,
+      "coverage": [
+        6,
+        4,
+        0
+      ],
+      "generated": 3000,
+      "exam": null,
+      "variants": [
+        {
+          "type": 10,
+          "n": 112,
+          "question": "En y=mx+b, quin paràmetre mou verticalment totes les rectes sense canviar el pendent?",
+          "correct": "b",
+          "solution": [
+            "b és l’ordenada a l’origen.",
+            "Resposta: <b>b</b>."
+          ]
+        },
+        {
+          "type": 3,
+          "n": 326,
+          "question": "En la família <b>f(x)=-2(x−h)² + 8</b>, volem que el vèrtex tingui abscissa <b>5</b>. Quin valor ha de tenir h?",
+          "correct": "5",
+          "solution": [
+            "En a(x−h)²+k el vèrtex és (h,k).",
+            "Perquè l’abscissa sigui 5, cal <b>h=5</b>."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 329,
+          "question": "Calcula <b>f(-5)</b> per a la funció:<div class=\"system-box\" style=\"margin:8px auto;display:table;text-align:left;font-size:1.02rem;line-height:1.7\"><span style=\"font-size:2.5rem;vertical-align:middle\">{</span><span style=\"display:inline-block;vertical-align:middle\"><b>f(x) =</b> 3x − 1, si x &lt; 2<br><span style=\"visibility:hidden\"><b>f(x) =</b></span> −2x − 2, si x ≥ 2</span></div>",
+          "correct": "-16",
+          "solution": [
+            "-5 < 2; per tant usem el primer tram.",
+            "f(-5)=3(-5) − 1=<b>-16</b>."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 314,
+          "question": "Un aparcament cobra <b>2 €/h</b> durant les primeres 2 hores. A partir d’aquí, cada hora addicional costa <b>5 €/h</b>. Si h>2, quina expressió dona el cost total mantenint el que ja s’ha pagat les primeres 2 hores?",
+          "correct": "C(h) = 5h − 6",
+          "solution": [
+            "Cost inicial: 2·2=4 €.",
+            "Cost addicional: 5(h−2).",
+            "C(h)=4+5(h−2)=<b>5h − 6</b>."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 301,
+          "question": "La paràbola <b>f(x)=ax²</b> passa pel punt <b>(-2,-8)</b>. Determina a.",
+          "correct": "-2",
+          "solution": [
+            "-8=a·(-2)²=a·4.",
+            "a=-8/4=<b>-2</b>."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 315,
+          "question": "Sabem que <b>x=4</b> és una arrel de <b>P(x)=x²+kx − 4</b>. Quin valor té k?",
+          "correct": "-3",
+          "solution": [
+            "0=(4)²+k·(4) − 4.",
+            "Això dona 12+(4)k=0.",
+            "Per tant, <b>k=-3</b>."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 324,
+          "question": "Determina k perquè la funció s’uneixi <b>sense salt</b> en x=1:<div class=\"system-box\" style=\"margin:8px auto;display:table;text-align:left;font-size:1.02rem;line-height:1.7\"><span style=\"font-size:2.5rem;vertical-align:middle\">{</span><span style=\"display:inline-block;vertical-align:middle\"><b>f(x) =</b> 4x + 2, si x ≤ 1<br><span style=\"visibility:hidden\"><b>f(x) =</b></span> 3x + k, si x &gt; 1</span></div>",
+          "correct": "3",
+          "solution": [
+            "Primer tram en 1: 4·1+ 2=<b>6</b>.",
+            "Per unir sense salt: 3·1+k=6.",
+            "Aïllem: <b>k=3</b>."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 326,
+          "question": "Quin és <b>f(-1)</b>?<div class=\"system-box\" style=\"margin:8px auto;display:table;text-align:left;font-size:1.02rem;line-height:1.7\"><span style=\"font-size:2.5rem;vertical-align:middle\">{</span><span style=\"display:inline-block;vertical-align:middle\"><b>f(x) =</b> 3x, si x &lt; -1<br><span style=\"visibility:hidden\"><b>f(x) =</b></span> 3x + 5, si x ≥ -1</span></div>",
+          "correct": "2",
+          "solution": [
+            "Per x=-1, la condició x<-1 és falsa i x≥-1 és certa.",
+            "Usem el segon tram: f(-1)=3·-1+ 5=<b>2</b>."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 328,
+          "question": "La funció <b>f(x)=mx + 5</b> passa pel punt <b>(-1,0)</b>. Quin és el valor de m?",
+          "correct": "5",
+          "solution": [
+            "Substituïm: 0=m·(-1) + 5.",
+            "Restem el terme independent: -5=m·(-1).",
+            "Dividim per -1: <b>m=5</b>."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 325,
+          "question": "Determina b perquè <b>f(x)=2x+b</b> passi pel punt <b>(-1,5)</b>.",
+          "correct": "7",
+          "solution": [
+            "5=2·(-1)+b.",
+            "Per tant b=5−(-2)=<b>7</b>."
+          ]
+        }
+      ]
+    },
+    {
+      "topic": "inequacionsCompAmpD",
+      "types": 10,
+      "coverage": [
+        5,
+        5,
+        0
+      ],
+      "generated": 3000,
+      "exam": null,
+      "variants": [
+        {
+          "type": 3,
+          "n": 319,
+          "question": "Resol el sistema d’inequacions d’una variable: <b>x ≥ -3</b> i <b>x ≤ 4</b>. Escriu la solució com a interval.",
+          "correct": "[-3, 4]",
+          "solution": [
+            "Cal complir alhora x ≥ -3 i x ≤ 4.",
+            "La intersecció és <b>[-3, 4]</b>."
+          ]
+        },
+        {
+          "type": 6,
+          "n": 326,
+          "question": "Segueix l’algoritme: <b>x←8</b>. Repeteix <b>5</b> vegades: <b>x←x + 4</b>. Quin valor final té x?",
+          "correct": "28",
+          "solution": [
+            "Increment total: 5·(4)=20.",
+            "Valor final: 8+(20)=<b>28</b>."
+          ]
+        },
+        {
+          "type": 9,
+          "n": 328,
+          "question": "En un graf amb arestes <b>B–C, B–E, C–E, A–B, C–D, A–D, D–E</b>, quin és el grau del vèrtex <b>E</b>?",
+          "correct": "3",
+          "solution": [
+            "Arestes incidents a E: B–E, C–E, D–E.",
+            "N’hi ha <b>3</b>; aquest és el grau."
+          ]
+        },
+        {
+          "type": 5,
+          "n": 325,
+          "question": "Quin punt pertany a la regió factible del sistema?<div class=\"system-box\" style=\"margin:8px auto;display:table;text-align:left;font-size:1.02rem;line-height:1.7\"><span style=\"font-size:2.5rem;vertical-align:middle\">{</span><span style=\"display:inline-block;vertical-align:middle\">x ≥ 2<br>y ≥ 1<br>x + y ≤ 8</span></div>",
+          "correct": "(2, 2)",
+          "solution": [
+            "El punt (2, 2) compleix x≥2, y≥1 i x+y≤8.",
+            "Els altres candidats violen almenys una restricció.",
+            "Resposta: <b>(2, 2)</b>."
+          ]
+        },
+        {
+          "type": 8,
+          "n": 317,
+          "question": "Successió recursiva: <b>a₁=7</b> i <b>aₙ=aₙ₋₁ + 4</b>. Calcula <b>a₅</b>.",
+          "correct": "23",
+          "solution": [
+            "Partim de a₁=7.",
+            "Apliquem la regla 4 vegades.",
+            "S’obté <b>a5=23</b>."
+          ]
+        },
+        {
+          "type": 4,
+          "n": 322,
+          "question": "Per representar <b>4x + 4y ≤ 5</b>, com s’ha de dibuixar la recta frontera 4x+4y=5?",
+          "correct": "Frontera inclosa: línia contínua",
+          "solution": [
+            "≤ inclou la igualtat.",
+            "Per tant: <b>Frontera inclosa: línia contínua</b>."
+          ]
+        },
+        {
+          "type": 1,
+          "n": 328,
+          "question": "El punt <b>(5,12)</b> és solució del sistema?<div class=\"system-box\" style=\"margin:8px auto;display:table;text-align:left;font-size:1.02rem;line-height:1.7\"><span style=\"font-size:2.5rem;vertical-align:middle\">{</span><span style=\"display:inline-block;vertical-align:middle\">x ≥ 2<br>y ≥ 4<br>x + y ≤ 14</span></div>",
+          "correct": "No: falla x + y ≤ 14",
+          "solution": [
+            "5≥2: cert.",
+            "12≥4: cert.",
+            "5+12=17≤14: fals.",
+            "Conclusió: <b>No: falla x + y ≤ 14</b>."
+          ]
+        },
+        {
+          "type": 2,
+          "n": 320,
+          "question": "Una activitat necessita com a mínim <b>1</b> unitats del tipus x i <b>1</b> del tipus y, però en total no en pot utilitzar més de <b>10</b>. Quin sistema ho modelitza?",
+          "correct": "x ≥ 1; y ≥ 1; x + y ≤ 10",
+          "solution": [
+            "Com a mínim 1: x≥1.",
+            "Com a mínim 1: y≥1.",
+            "Com a màxim 10 en total: x+y≤10.",
+            "Sistema: <b>x ≥ 1; y ≥ 1; x + y ≤ 10</b>."
+          ]
+        },
+        {
+          "type": 7,
+          "n": 89,
+          "question": "Volem generar la successió <b>1, 3, 9, 27, …</b>, però l’algoritme fa: “comença amb a=1 i repeteix a←a+3”. Quin és l’error principal?",
+          "correct": "S’ha d’utilitzar multiplicació en lloc de suma",
+          "solution": [
+            "Els termes objectiu es multipliquen per 3: 1→3→9→27.",
+            "L’algoritme proposat suma 3 i genera una successió aritmètica.",
+            "Per tant, <b>s’ha d’utilitzar multiplicació en lloc de suma</b>."
+          ]
+        },
+        {
+          "type": 10,
+          "n": 326,
+          "question": "En un graf ponderat: A–B pesa 5, B–D pesa 6, A–C pesa 6, C–D pesa 4 i A–D pesa 9. Quina de les tres rutes dona el cost total més petit d’A fins a D?",
+          "correct": "A–D",
+          "solution": [
+            "A–B–D: 5+6=<b>11</b>.",
+            "A–C–D: 6+4=<b>10</b>.",
+            "A–D: <b>9</b>.",
+            "La ruta de menor cost és <b>A–D</b>."
+          ]
+        }
+      ]
+    }
+  ],
+  "practice": [
+    {
+      "topic": "patrons4t",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "patrons4t",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "patrons4t",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "patrons4t",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "patrons4t",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "patrons4t",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "patrons4t",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "patrons4t",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "patrons4t",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "patrons4t",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "patrons4t",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "patrons4t",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "equacions2g4t",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "equacions2g4t",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "equacions2g4t",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "equacions2g4t",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "equacions2g4t",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "equacions2g4t",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "equacions2g4t",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "equacions2g4t",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "equacions2g4t",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "equacions2g4t",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "equacions2g4t",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "equacions2g4t",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "sistemes4t",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "sistemes4t",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "sistemes4t",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "sistemes4t",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "sistemes4t",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "sistemes4t",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "sistemes4t",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "sistemes4t",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "sistemes4t",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "sistemes4t",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "sistemes4t",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "sistemes4t",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "inequacions4t",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "inequacions4t",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "inequacions4t",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "inequacions4t",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "inequacions4t",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "inequacions4t",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "inequacions4t",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "inequacions4t",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "inequacions4t",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "inequacions4t",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "inequacions4t",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "inequacions4t",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "funcionsRep4t",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "funcionsRep4t",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "funcionsRep4t",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "funcionsRep4t",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "funcionsRep4t",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "funcionsRep4t",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "funcionsRep4t",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "funcionsRep4t",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "funcionsRep4t",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "funcionsRep4t",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "funcionsRep4t",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "funcionsRep4t",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "linealsQuad4t",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "linealsQuad4t",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "linealsQuad4t",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "linealsQuad4t",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "linealsQuad4t",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "linealsQuad4t",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "linealsQuad4t",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "linealsQuad4t",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "linealsQuad4t",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "linealsQuad4t",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "linealsQuad4t",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "linealsQuad4t",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "inversaExp4t",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "inversaExp4t",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "inversaExp4t",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "inversaExp4t",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "inversaExp4t",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "inversaExp4t",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "inversaExp4t",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "inversaExp4t",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "inversaExp4t",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "inversaExp4t",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "inversaExp4t",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "inversaExp4t",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "analisiFunc4t",
+      "level": 1,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "analisiFunc4t",
+      "level": 1,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "analisiFunc4t",
+      "level": 1,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "analisiFunc4t",
+      "level": 1,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "analisiFunc4t",
+      "level": 2,
+      "support": 1,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "analisiFunc4t",
+      "level": 2,
+      "support": 1,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "analisiFunc4t",
+      "level": 2,
+      "support": 2,
+      "format": "multi",
+      "blocked": false
+    },
+    {
+      "topic": "analisiFunc4t",
+      "level": 2,
+      "support": 2,
+      "format": "open",
+      "blocked": false
+    },
+    {
+      "topic": "analisiFunc4t",
+      "level": 3,
+      "support": 1,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "analisiFunc4t",
+      "level": 3,
+      "support": 1,
+      "format": "open",
+      "blocked": true
+    },
+    {
+      "topic": "analisiFunc4t",
+      "level": 3,
+      "support": 2,
+      "format": "multi",
+      "blocked": true
+    },
+    {
+      "topic": "analisiFunc4t",
+      "level": 3,
+      "support": 2,
+      "format": "open",
+      "blocked": true
+    }
+  ],
+  "globals": [
+    {
+      "policy": "free",
+      "requested": null,
+      "counts": [
+        15,
+        5,
+        0
+      ],
+      "topics": {
+        "patrons4t": 3,
+        "equacions2g4t": 3,
+        "sistemes4t": 2,
+        "inequacions4t": 2,
+        "funcionsRep4t": 3,
+        "linealsQuad4t": 3,
+        "inversaExp4t": 2,
+        "analisiFunc4t": 2
+      },
+      "contextual": 0
+    },
+    {
+      "policy": "balanced",
+      "blocked": true
+    },
+    {
+      "policy": "1",
+      "requested": [
+        20,
+        0,
+        0
+      ],
+      "counts": [
+        20,
+        0,
+        0
+      ],
+      "topics": {
+        "patrons4t": 3,
+        "equacions2g4t": 3,
+        "sistemes4t": 2,
+        "inequacions4t": 3,
+        "funcionsRep4t": 3,
+        "linealsQuad4t": 2,
+        "inversaExp4t": 2,
+        "analisiFunc4t": 2
+      },
+      "contextual": 0
+    },
+    {
+      "policy": "2",
+      "requested": [
+        0,
+        20,
+        0
+      ],
+      "counts": [
+        0,
+        20,
+        0
+      ],
+      "topics": {
+        "patrons4t": 3,
+        "equacions2g4t": 3,
+        "sistemes4t": 3,
+        "inequacions4t": 2,
+        "funcionsRep4t": 2,
+        "linealsQuad4t": 3,
+        "inversaExp4t": 2,
+        "analisiFunc4t": 2
+      },
+      "contextual": 0
+    },
+    {
+      "policy": "3",
+      "blocked": true
+    }
+  ],
+  "bankChecks": [],
+  "banksReviewed": 0,
+  "pageErrors": []
+}

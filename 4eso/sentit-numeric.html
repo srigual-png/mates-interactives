@@ -931,6 +931,7 @@ function genReals4ESO(forceType){
   else if(type===8){
     allowOpen=true;
     const a=shuffle([4,9,16,25,36])[0],r=Math.sqrt(a),b=rnd(1,8),op=shuffle(['+','−'])[0],v=op==='+'?r+b:r-b;
+    if(v===0)return genReals4ESO(8);
     const expr=`√${a} ${op} ${b}`,k=v>0&&Number.isInteger(v)?'N':v<=0?'Z':'Q';correct=setLabel(k);
     alts=k==='N'?['N','ℕ','natural','naturals']:k==='Z'?['Z','ℤ','enter','enters']:['Q','ℚ','racional','racionals'];
     options=shuffle([setLabel('N'),setLabel('Z'),setLabel('Q'),setLabel('I')]);
@@ -1282,8 +1283,8 @@ function genOperacions4ESO(forceType){
     const exact=x*y,est=Math.round(x)*Math.round(y*10)/10;correct=fmtNum(est,1);
     const pool=[fmtNum(exact,1),fmtNum(est*10,1),fmtNum(est/10,2),fmtNum(Math.round(x)+Math.round(y),1),fmtNum(Math.round(exact/10)*10,1)];
     options=uniq4(correct,pool);
-    question=`Sense fer el càlcul exacte, quina és una <b>bona estimació</b> de ${mathSpan(fmtNum(x,1)+' · '+fmtNum(y,2))}?`;
-    guide=['Arrodoneix cada factor a un nombre còmode.','Multiplica els valors arrodonits.','L’objectiu és anticipar l’ordre de magnitud, no obtenir moltes xifres.'];
+    question=`Estima ${mathSpan(fmtNum(x,1)+' · '+fmtNum(y,2))} <b>arrodonint primer el primer factor a les unitats i el segon a les dècimes</b>. Quin producte obtenim?`;
+    guide=['Arrodoneix el primer factor a les unitats i el segon a les dècimes, tal com demana l’enunciat.','Multiplica els valors arrodonits.','L’objectiu és anticipar l’ordre de magnitud, no obtenir moltes xifres.'];
     solution=[`${fmtNum(x,1)} ≈ ${Math.round(x)}.`,`${fmtNum(y,2)} ≈ ${fmtNum(Math.round(y*10)/10,1)}.`,`Estimació: ${Math.round(x)} · ${fmtNum(Math.round(y*10)/10,1)} ≈ <b>${correct}</b>.`,`El valor exacte és aproximadament ${fmtNum(exact,3)}, coherent amb l’estimació.`];
     openHint='Escriu una estimació numèrica.';
   }
@@ -1296,8 +1297,8 @@ function genOperacions4ESO(forceType){
   }
   else if(type===6){
     const P=shuffle([600,800,1000,1200,1500,2000])[0],p=shuffle([2,3,4,5,8,10])[0],years=shuffle([2,3,4])[0];
-    const q=1+p/100,vals=[P];for(let i=1;i<=years;i++)vals.push(roundTo(vals[i-1]*q,2));
-    const final=vals[years];correct=fmtNum(final,2);alts=[correct.replace(',','.')];
+    const q=1+p/100,vals=[P];for(let i=1;i<=years;i++)vals.push(vals[i-1]*q);
+    const final=roundTo(vals[years],2);correct=fmtNum(final,2);alts=[correct.replace(',','.')];
     const additive=roundTo(P+years*(P*p/100),2);
     options=uniq4(correct,[fmtNum(additive,2),fmtNum(P*q,2),fmtNum(P+years*p,2),fmtNum(P*Math.pow(1+p,years),2),fmtNum(roundTo(final+P*p/100,2),2)]);
     question=`Una població de <b>${P}</b> habitants segueix una regularitat de creixement del <b>${p}% anual</b>: cada any el percentatge s’aplica sobre la població de l’any anterior. Si el patró es manté, quina població aproximada hi haurà al cap de <b>${years} anys</b>?`;
@@ -1677,7 +1678,8 @@ function genRadicalsAmpA(forceType){
   } else if(type===7){
     const n=shuffle([2,3,4])[0],m=shuffle([2,3])[0];
     correct=`${rootSymbol(n)}(a^${m})`;
-    options=uniq4(correct,[`${rootSymbol(m)}(a^${n})`,`a^(${n}/${m})`,`a^(${m*n})`,`${rootSymbol(n)}a^${m*n}`,`${m}${rootSymbol(n)}a`]);
+    const wrongExponent=m===n?`${m+1}/${n}`:`${n}/${m}`,wrongRootPower=m===n?n+1:n;
+    options=uniq4(correct,[`${rootSymbol(m)}(a^${wrongRootPower})`,`a^(${wrongExponent})`,`a^(${m*n})`,`${rootSymbol(n)}a^${m*n}`,`${m}${rootSymbol(n)}a`]);
     question=`Per a ${mathSpan('a > 0')}, quina expressió correspon a ${mathSpan(`a^(${m}/${n})`)} segons la definició d’exponent fraccionari?`;
     guide=['El denominador n dona l’índex de l’arrel.','El numerador m dona la potència.'];
     solution=[`a^(m/n) = ⁿ√(a^m).`,`Aquí m=${m} i n=${n}.`,`Per tant: <b>${correct}</b>.`];
@@ -1744,7 +1746,7 @@ function genRadicalsAmpB(forceType){
     solution=[`${n} = ${sp.c*sp.c} · ${sp.r}.`,`√${n} = √(${sp.c*sp.c}·${sp.r}) = ${sp.c}√${sp.r}.`,`Per tant, <b>${c.ans}</b>.`];
   } else if(type===3){
     const m=shuffle([2,3,5,7,11])[0],a=rnd(2,8),b=rnd(2,8);correct=`${a+b}√${m}`;alts=[`${a+b}*√${m}`];
-    options=uniq4(correct,[`${a+b}√${m*2}`,`${a*b}√${m}`,`${a+b+1}√${m}`,`${a}√${m+b}`,`${a+b}`]);
+    options=uniq4(correct,[`${a+b}√${m*2}`,`${a*b}√${m}`,`${a+b+1}√${m}`,`${a+b+2}√${m}`,`${a+b}`]);
     question=`Calcula ${mathSpan(`${a}√${m} + ${b}√${m}`)}.`;
     guide=['Els dos radicals tenen el mateix radicand: són semblants.','Suma només els coeficients i conserva √m.'];
     solution=[`Coeficients: ${a}+${b}=${a+b}.`,`El radical √${m} es manté.`,`Resultat: <b>${correct}</b>.`];allowOpen=true;openHint='Escriu el coeficient seguit del radical, per exemple 5√3.';
@@ -2078,7 +2080,7 @@ function registerError(ex,studentAnswer,source='practice'){
     id:Date.now()+'_'+Math.random().toString(36).slice(2,8),
     topicId:ex.topicId||(topic?topic.id:''),
     topicName:topic?topic.name:'Tema',
-    type:ex.type,
+    type:ex.type,difficultyVariant:ex.difficultyVariant,
     question:ex.question,
     visual:ex.visual||'',
     correct:ex.correct,

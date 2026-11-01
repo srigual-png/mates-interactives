@@ -1,12 +1,14 @@
 const fs=require('fs'),path=require('path'),assert=require('assert/strict');
 const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-const course=process.argv[2]||'1eso',sense=process.argv[3]||'mesura';
+const course=process.argv[2]||'1eso',sense=process.argv[3]||'mesura',option=process.argv[4]||'B';
 (async()=>{const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});try{
-const p=await browser.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));await p.route(/^https?:/,r=>r.abort());await p.goto('file:///'+path.resolve(`${course}/sentit-${sense}.html`).replace(/\\/g,'/')+(course==='4eso'?'?opcio=B':''));await p.waitForFunction(()=>typeof MIDifficultyModes!=='undefined');
+const p=await browser.newPage(),errors=[];p.on('console',m=>{if(m.text().startsWith('Cens '))console.log(m.text());});p.on('pageerror',e=>errors.push(e.message));await p.route(/^https?:/,r=>r.abort());await p.goto('file:///'+path.resolve(`${course}/sentit-${sense}.html`).replace(/\\/g,'/')+(course==='4eso'?'?opcio='+option:''));await p.waitForFunction(()=>typeof MIDifficultyModes!=='undefined');
 const manifest=JSON.parse(fs.readFileSync(`docs/dificultats/revisio-${course}-${sense}-punt3.json`));
-const results=await p.evaluate(({rows,banks})=>{
+const results=await p.evaluate(({rows,banks,minimumSamples})=>{
 const check=(v,m)=>{if(!v)throw Error(m);},summary=[],M=MIDifficultyModes,S=typeof ST!=='undefined'?ST:state;
-for(const t of TOPICS){const expected=rows.filter(x=>x.topic===t.id),seen=new Map();check(expected.length,'tema fora cens '+t.id);const minimum=Math.max(3000,expected.length*70);let count=0;for(let i=0;i<20000&&(i<minimum||expected.some(row=>(seen.get(row.type)?.n||0)<15));i++){count++;
+for(const t of TOPICS){console.log('Cens '+t.id);const expected=rows.filter(x=>x.topic===t.id),seen=new Map();check(expected.length,'tema fora cens '+t.id);const minimum=Math.max(minimumSamples,expected.length*70);let count=0;for(let i=0;i<20000&&(i<minimum||expected.some(row=>(seen.get(row.type)?.n||0)<15));i++){count++;
+// El cens contrasta mostres independents; els exàmens i reinicis proven la memòria real de varietat.
+if(typeof resetVariationSession==='function')resetVariationSession();
 const q=t.gen(),row=expected.find(x=>x.type===q.type);check(row,'tipus fora cens '+t.id+':'+q.type);const expectedLevel=q.difficultyVariant?row.variants?.[q.difficultyVariant]?.level:row.level;check(q.taskDifficulty===expectedLevel,'dificultat '+t.id+':'+q.type);check(q.options.filter(o=>String(o)===String(q.correct)).length===1,'correcta no única '+t.id+':'+q.type);check(q.solution?.length&&q.guide?.length,'resolució/pistes absents '+t.id+':'+q.type);check(!/NaN|undefined|Infinity/.test(JSON.stringify(q)),'dades no finites');
 if(q.reasoningFamily){check(q.answerCheck(q.correct),'resposta rebutjada '+q.reasoningFamily);check(!q.answerCheck(String(Number(q.correct)+1)),'incorrecta acceptada');check(q.answerCheck(q.correct+',0'),'decimal equivalent rebutjat');}
 if(!seen.has(q.type))seen.set(q.type,{type:q.type,n:0,question:q.question,correct:q.correct,solution:q.solution});seen.get(q.type).n++;
@@ -27,7 +29,7 @@ practice.push({topic:t.id,level,support,format,blocked:!!status?.blocked});
 }}
 M.setPracticeLevel(0);miOpenExamConfig();miExamSelectAll();const globals=[];for(const policy of ['free','balanced','1','2','3']){M.setGlobalPolicy(policy);miStartConfiguredExam();const plan=M.getLastGlobal();if(!plan){check(S.examQs.length===0,'examen antic');globals.push({policy,blocked:true});continue;}check(S.examQs.length===20,'global incomplet');check(JSON.stringify(plan.counts)===JSON.stringify([1,2,3].map(n=>S.examQs.filter(q=>q.taskDifficulty===n).length)),'quotes globals');if(plan.requested)check(JSON.stringify(plan.counts)===JSON.stringify(plan.requested),'quotes demanades');globals.push(plan);}
 return {topics:summary,practice,globals,bankChecks,banksReviewed:banks.length};
-},{rows:manifest.topics,banks:manifest.banks||[]});assert.deepEqual(errors,[]);
+},{rows:manifest.topics,banks:manifest.banks||[],minimumSamples:Number(process.env.MI_CENSUS_MINIMUM||3000)});assert.deepEqual(errors,[]);
 await p.setViewportSize({width:390,height:844});await p.evaluate(()=>miTopicExam.start(miTopicExam.getTopics()[0].id));assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.screenshot({path:`tmp/punt3-${course}-${sense}-mobil.png`});
-fs.writeFileSync(`docs/dificultats/resultats-punt3-${course}-${sense}.json`,JSON.stringify({...results,pageErrors:errors},null,2));console.log(JSON.stringify({course,sense,topics:results.topics.length,types:results.topics.reduce((n,t)=>n+t.types,0),generated:results.topics.reduce((n,t)=>n+t.generated,0),practice:results.practice.length,globals:results.globals.map(g=>({policy:g.policy,blocked:!!g.blocked,counts:g.counts})),errors}));
+fs.writeFileSync(`docs/dificultats/resultats-punt3-${course}-${sense}${course==='4eso'&&option==='A'?'-A':''}.json`,JSON.stringify({...results,pageErrors:errors},null,2));console.log(JSON.stringify({course,sense,topics:results.topics.length,types:results.topics.reduce((n,t)=>n+t.types,0),generated:results.topics.reduce((n,t)=>n+t.generated,0),practice:results.practice.length,globals:results.globals.map(g=>({policy:g.policy,blocked:!!g.blocked,counts:g.counts})),errors}));
 }finally{await browser.close();}})().catch(e=>{console.error(e);process.exitCode=1;});
