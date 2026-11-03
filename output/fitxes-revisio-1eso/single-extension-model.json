@@ -1,0 +1,369 @@
+{
+  "version": "3c976f40",
+  "config": {
+    "count": 10,
+    "topics": [
+      "mcmmcd"
+    ],
+    "worksheetType": "extension",
+    "order": "grouped",
+    "space": "compact",
+    "format": "both",
+    "solutions": "steps"
+  },
+  "questions": [
+    {
+      "level": 1,
+      "question": "Calcula MCD(8; 12)",
+      "answer": "4",
+      "steps": [
+        "8 = 2³",
+        "12 = 2² × 3",
+        "Prenem els factors comuns amb l’exponent menor.",
+        "MCD(8; 12) = 2² = 4",
+        "4"
+      ],
+      "options": [],
+      "type": 1,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 1
+      },
+      "family": "mcmmcd:calcul-mcd",
+      "contents": [
+        "mcd"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:calcul-mcd@1",
+      "types": [
+        1
+      ],
+      "variant": "[\"Calcula MCD(8; 12)\",\"4\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Calcula MCD(8; 12)\",[]]",
+      "number": 1
+    },
+    {
+      "level": 2,
+      "question": "Calcula mcm(10; 12; 15)",
+      "answer": "60",
+      "steps": [
+        "10 = 2 × 5",
+        "12 = 2² × 3",
+        "15 = 3 × 5",
+        "Prenem tots els factors amb l’exponent major.",
+        "mcm(10; 12; 15) = 2² × 3 × 5 = 60",
+        "60"
+      ],
+      "options": [],
+      "type": 3,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 3
+      },
+      "family": "mcmmcd:mcm-tres",
+      "contents": [
+        "mcm"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:mcm-tres@2",
+      "types": [
+        3
+      ],
+      "variant": "[\"Calcula mcm(10; 12; 15)\",\"60\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Calcula mcm(10; 12; 15)\",[]]",
+      "number": 2
+    },
+    {
+      "level": 2,
+      "question": "D’una mateixa parada surt un autobús de la línia A cada 14 minuts i un de la línia B cada 21 minuts. Ara surt un autobús de cada línia alhora. Quants minuts passaran fins que tornin a coincidir les sortides de les dues línies?",
+      "answer": "42 minuts",
+      "steps": [
+        "14 = 2 × 7",
+        "21 = 3 × 7",
+        "Prenem tots els factors amb l’exponent major.",
+        "mcm(14; 21) = 2 × 3 × 7 = 42",
+        "42 minuts"
+      ],
+      "options": [],
+      "type": 4,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 4
+      },
+      "family": "mcmmcd:periodicitat",
+      "contents": [
+        "mcm"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:periodicitat@2",
+      "types": [
+        4
+      ],
+      "variant": "[\"D’una mateixa parada surt un autobús de la línia A cada 14 minuts i un de la línia B cada 21 minuts. Ara surt un autobús de cada línia alhora. Quants minuts passaran fins que tornin a coincidir les sortides de les dues línies?\",\"42 minuts\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"D’una mateixa parada surt un autobús de la línia A cada 14 minuts i un de la línia B cada 21 minuts. Ara surt un autobús de cada línia alhora. Quants minuts passaran fins que tornin a coincidir les sortides de les dues línies?\",[]]",
+      "number": 3
+    },
+    {
+      "question": "Troba quin valor de b entre 44; 66; 88 compleix mcm(66; b) = 132. Justifica la tria comprovant els tres candidats.",
+      "answer": "44",
+      "steps": [
+        "mcm(66; 44) = 132",
+        "mcm(66; 66) = 66",
+        "mcm(66; 88) = 264",
+        "Només 44 compleix la condició."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "k": 22
+        },
+        "result": 44,
+        "topic": "mcmmcd",
+        "id": "mcm-invers"
+      },
+      "family": "mcmmcd:ext-mcm-invers",
+      "extensionId": "mcm-invers",
+      "contents": [
+        "mcm"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "inverse-constraints",
+      "challengeReason": "Cal interpretar i justificar relacions entre dades.",
+      "variant": "{\"k\":22}",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Troba quin valor de b entre 44; 66; 88 compleix mcm(66; b) = 132. Justifica la tria comprovant els tres candidats.\",[]]",
+      "number": 4
+    },
+    {
+      "question": "Troba quin valor de b entre 20; 32; 36 compleix MCD(24; b) = 4. Justifica la tria comprovant els tres candidats.",
+      "answer": "20",
+      "steps": [
+        "MCD(24; 20) = 4",
+        "MCD(24; 32) = 8",
+        "MCD(24; 36) = 12",
+        "Només 20 compleix la condició."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "k": 4
+        },
+        "result": 20,
+        "topic": "mcmmcd",
+        "id": "mcd-invers"
+      },
+      "family": "mcmmcd:ext-mcd-invers",
+      "extensionId": "mcd-invers",
+      "contents": [
+        "mcd"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "inverse-constraints",
+      "challengeReason": "Cal interpretar i justificar relacions entre dades.",
+      "variant": "{\"k\":4}",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Troba quin valor de b entre 20; 32; 36 compleix MCD(24; b) = 4. Justifica la tria comprovant els tres candidats.\",[]]",
+      "number": 5
+    },
+    {
+      "question": "Dues alarmes sonen cada 36 i 60 minuts. Ara sonen alhora. En quins minuts després d’ara, fins al minut 728 inclòs, tornaran a sonar juntes? No comptis la coincidència inicial.",
+      "answer": "180; 360; 540; 720 minuts",
+      "steps": [
+        "El període de coincidència és mcm(36; 60) = 180 minuts.",
+        "Prenem els múltiples positius de 180 que no superen 728.",
+        "Coincidències: 180; 360; 540; 720 minuts; en total, 4."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "k": 6,
+          "cycles": 4,
+          "end": 728
+        },
+        "result": [
+          180,
+          360,
+          540,
+          720
+        ],
+        "topic": "mcmmcd",
+        "id": "coincidencies-interval"
+      },
+      "family": "mcmmcd:ext-coincidencies-interval",
+      "extensionId": "coincidencies-interval",
+      "contents": [
+        "mcm"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "connected-steps",
+      "challengeReason": "Cal interpretar i justificar relacions entre dades.",
+      "variant": "{\"k\":6,\"cycles\":4,\"end\":728}",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Dues alarmes sonen cada 36 i 60 minuts. Ara sonen alhora. En quins minuts després d’ara, fins al minut 728 inclòs, tornaran a sonar juntes? No comptis la coincidència inicial.\",[]]",
+      "number": 6
+    },
+    {
+      "question": "Un alumne proposa MCD(54; 90) = 54. Comprova si el valor proposat divideix tots dos nombres i troba el MCD correcte.",
+      "answer": "18",
+      "steps": [
+        "90 no és múltiple de 54; la proposta no pot ser un divisor comú.",
+        "MCD(6; 10) = 2",
+        "54 = 9 × 6 i 90 = 9 × 10; el MCD és 9 × 2 = 18."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "k": 9
+        },
+        "result": 18,
+        "topic": "mcmmcd",
+        "id": "mcd-error"
+      },
+      "family": "mcmmcd:ext-mcd-error",
+      "extensionId": "mcd-error",
+      "contents": [
+        "mcd"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "error-analysis",
+      "challengeReason": "Cal localitzar i explicar un error.",
+      "variant": "{\"k\":9}",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Un alumne proposa MCD(54; 90) = 54. Comprova si el valor proposat divideix tots dos nombres i troba el MCD correcte.\",[]]",
+      "number": 7
+    },
+    {
+      "question": "Dues alarmes sonen cada 24 i 40 minuts. Ara sonen alhora. En quins minuts després d’ara, fins al minut 458 inclòs, tornaran a sonar juntes? No comptis la coincidència inicial.",
+      "answer": "120; 240; 360 minuts",
+      "steps": [
+        "El període de coincidència és mcm(24; 40) = 120 minuts.",
+        "Prenem els múltiples positius de 120 que no superen 458.",
+        "Coincidències: 120; 240; 360 minuts; en total, 3."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "k": 4,
+          "cycles": 3,
+          "end": 458
+        },
+        "result": [
+          120,
+          240,
+          360
+        ],
+        "topic": "mcmmcd",
+        "id": "coincidencies-interval"
+      },
+      "family": "mcmmcd:ext-coincidencies-interval",
+      "extensionId": "coincidencies-interval",
+      "contents": [
+        "mcm"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "connected-steps",
+      "challengeReason": "Cal interpretar i justificar relacions entre dades.",
+      "variant": "{\"k\":4,\"cycles\":3,\"end\":458}",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Dues alarmes sonen cada 24 i 40 minuts. Ara sonen alhora. En quins minuts després d’ara, fins al minut 458 inclòs, tornaran a sonar juntes? No comptis la coincidència inicial.\",[]]",
+      "number": 8
+    },
+    {
+      "question": "Un alumne proposa MCD(204; 340) = 204. Comprova si el valor proposat divideix tots dos nombres i troba el MCD correcte.",
+      "answer": "68",
+      "steps": [
+        "340 no és múltiple de 204; la proposta no pot ser un divisor comú.",
+        "MCD(6; 10) = 2",
+        "204 = 34 × 6 i 340 = 34 × 10; el MCD és 34 × 2 = 68."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "k": 34
+        },
+        "result": 68,
+        "topic": "mcmmcd",
+        "id": "mcd-error"
+      },
+      "family": "mcmmcd:ext-mcd-error",
+      "extensionId": "mcd-error",
+      "contents": [
+        "mcd"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "error-analysis",
+      "challengeReason": "Cal localitzar i explicar un error.",
+      "variant": "{\"k\":34}",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Un alumne proposa MCD(204; 340) = 204. Comprova si el valor proposat divideix tots dos nombres i troba el MCD correcte.\",[]]",
+      "number": 9
+    },
+    {
+      "question": "Troba quin valor de b entre 170; 272; 306 compleix MCD(204; b) = 34. Justifica la tria comprovant els tres candidats.",
+      "answer": "170",
+      "steps": [
+        "MCD(204; 170) = 34",
+        "MCD(204; 272) = 68",
+        "MCD(204; 306) = 102",
+        "Només 170 compleix la condició."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "k": 34
+        },
+        "result": 170,
+        "topic": "mcmmcd",
+        "id": "mcd-invers"
+      },
+      "family": "mcmmcd:ext-mcd-invers",
+      "extensionId": "mcd-invers",
+      "contents": [
+        "mcd"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "inverse-constraints",
+      "challengeReason": "Cal interpretar i justificar relacions entre dades.",
+      "variant": "{\"k\":34}",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Troba quin valor de b entre 170; 272; 306 compleix MCD(204; b) = 34. Justifica la tria comprovant els tres candidats.\",[]]",
+      "number": 10
+    }
+  ]
+}

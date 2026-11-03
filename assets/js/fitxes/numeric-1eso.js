@@ -50,12 +50,13 @@
       if(/autobús/.test(text))text=`D’una mateixa parada surt un autobús de la línia A cada ${a} minuts i un de la línia B cada ${b} minuts. Ara surt un autobús de cada línia alhora. Quants minuts passaran fins que tornin a coincidir les sortides de les dues línies?`;
       else {
         const context=/llums/.test(text)?['Un llum parpelleja','un altre llum parpelleja','segons','parpellejar']: /semàfors/.test(text)?['Un semàfor canvia de fase','un altre semàfor canvia de fase','segons','canviar de fase']: /alarmes/.test(text)?['Una alarma sona','una altra alarma sona','minuts','sonar']: /aspersors/.test(text)?['Un aspersor s’activa','un altre aspersor s’activa','minuts','activar-se']: /màquines/.test(text)?['Una màquina emet un senyal','una altra màquina emet un senyal','segons','emetre un senyal']: /activitats/.test(text)?['Una activitat comença','una altra activitat comença','minuts','començar']:['Un indicador fa un flaix','un altre indicador fa un flaix','segons','fer un flaix'];
-        text=`${context[0]} cada ${a} ${context[2]} i ${context[1]} cada ${b} ${context[2]}. Ara tots dos esdeveniments tenen lloc alhora. Quants ${context[2]} passaran fins que tornin a ${context[3]} alhora?`;
+        const action=/llums/.test(text)?'els dos llums parpellegen':/semàfors/.test(text)?'els dos semàfors canvien de fase':/alarmes/.test(text)?'les dues alarmes sonen':/aspersors/.test(text)?'els dos aspersors s’activen':/màquines/.test(text)?'les dues màquines emeten un senyal':/activitats/.test(text)?'les dues activitats comencen':'els dos indicadors fan un flaix';
+        text=`${context[0]} cada ${a} ${context[2]} i ${context[1]} cada ${b} ${context[2]}. Ara ${action} alhora. Quants ${context[2]} passaran fins que tornin a ${context[3]} alhora?`;
       }
     }
     return text;
   }
-  function adapt(id,q){
+  function adaptLegacy(id,q){
     let question=paperQuestion(id,q),steps=q.solution.map(plain);
     // Aquestes preguntes demanen escollir entre nombres; les opcions són dades.
     const options=(id==='divis'&&[1,3,5,6].includes(q.type))||(id==='fraccions'&&q.type===7)?q.options.map(plain):[];
@@ -86,14 +87,130 @@
     const fingerprint=id==='divis'&&options.length?JSON.stringify([q.type,question.match(/\d+/g),options.slice().sort()]):undefined;
     return {level:level(id,q),question,answer:plain(q.correct),steps,options,type:q.type,fingerprint};
   }
+  const display=s=>String(s)
+    .replace(/\b(MCD|mcm)\(([\d,; ]+)\)/g,(_,name,args)=>name+'('+args.replace(/,\s*/g,'; ')+')')
+    .replace(/(\d)\.(?=\d)/g,'$1,')
+    .replace(/([0-9)\]⁰¹²³⁴⁵⁶⁷⁸⁹])\s*x\s*(?=[0-9(\[])/g,'$1 × ')
+    .replace(/\(x(?=\d)/g,'(×')
+    .replace(/(^|[\s(=+×÷:^])-(?=\d)/g,'$1−')
+    .replace(/([0-9)\]⁰¹²³⁴⁵⁶⁷⁸⁹])\s*-\s*(?=[0-9(\[])/g,'$1 − ');
+  function finish(q){return {...q,question:display(q.question),answer:display(q.answer),steps:q.steps.map(display),options:(q.options||[]).map(display)};}
+  const groupGrammar={estoigs:['idèntics','Quants'],cistelles:['idèntiques','Quantes'],paquets:['idèntics','Quants'],lots:['idèntics','Quants'],safates:['idèntiques','Quantes'],bosses:['idèntiques','Quantes'],capses:['idèntiques','Quantes'],jocs:['idèntics','Quants']};
+  function adapt(id,raw){
+    const q=adaptLegacy(id,raw),t=raw.type;
+    const source=plain(raw.question),ns=(source.match(/-?\d+(?:[.]\d+)?/g)||[]).map(Number);
+    if(id==='potencies'&&[6,7].includes(t))q.factKey='root:'+ns[t===6?0:1];
+    if((id==='naturals'||id==='enters')&&t===1){
+      const values=ns; q.question=`Ordena de ${/menor a major/.test(source)?'menor a major':'major a menor'}: ${values.join('; ')}.`;
+      q.steps=[`Nombres donats: ${values.join('; ')}.`,`Ordenació: ${q.answer}`];
+    }
+    if(id==='naturals'&&t===3){
+      const unit=/milers/.test(source)?1000:/centenes/.test(source)?100:10;
+      let n=ns[0];if(n%unit===0)n+=rnd(1,unit-1);
+      const result=Math.floor((n+unit/2)/unit)*unit;
+      q.question=`Arrodoneix ${n} a les ${unit===1000?'unitats de miler':unit===100?'centenes':'desenes'}.`;
+      q.answer=String(result);q.steps=[`La unitat d’arrodoniment és ${unit}.`,`${n} queda entre ${Math.floor(n/unit)*unit} i ${(Math.floor(n/unit)+1)*unit}.`,`El múltiple més proper és ${result}; en cas d’empat triem el superior.`];
+    }
+    if(id==='decimal_sys'&&t===2){
+      const n=ns[0],terms=String(n).split('').map((d,i,ds)=>Number(d)*10**(ds.length-i-1)).filter(Boolean);
+      q.question=`Descompon el nombre ${n} com a suma segons el valor posicional de les xifres.`;
+      q.answer=terms.join(' + ');q.steps=[`Cada xifra aporta el seu valor posicional.`,`${n} = ${q.answer}`];
+    }
+    if(id==='decimal_sys'&&t===1){
+      const n=ns[1],digits=String(n),digit=ns[0]||Number(digits[0]),index=ns[0]?digits.indexOf(String(digit)):0,value=digit*10**(digits.length-index-1);
+      const names=['unitats','desenes','centenes','milers','desenes de miler','centenes de miler'];
+      q.question=`En el nombre ${n}, quin valor representa la xifra ${digit} ${digits.length-index-1===3?'dels':'de les'} ${names[digits.length-index-1]}? Escriu el valor en unitats.`;
+      q.answer=String(value);q.steps=[`${digit} × ${10**(digits.length-index-1)} = ${value}`];
+    }
+    if(id==='decimal_sys'&&t===4){
+      const pos=['unitats','desenes','centenes','milers'].findIndex(x=>source.includes('de les '+x)),unit=10**pos;
+      let n=ns[0];if(Math.floor(n/unit)%10===0)n+=unit;
+      const digit=Math.floor(n/unit)%10;
+      q.question=`En el nombre ${n}, quin valor representa la xifra ${pos===3?'dels':'de les'} ${['unitats','desenes','centenes','milers'][pos]}?`;
+      q.answer=String(digit*unit);q.steps=[`La xifra indicada és ${digit}.`,`${digit} × ${unit} = ${digit*unit}`];
+    }
+    if(id==='ops'&&t===4){
+      const [n,d]=ns,quotient=Math.floor(n/d),remainder=n%d;
+      q.divisionMode=remainder?'remainder':'exact';
+      q.question=remainder?`Calcula el quocient enter i el residu de ${n} ÷ ${d}.`:`Calcula la divisió exacta ${n} ÷ ${d}.`;
+      q.answer=`Quocient: ${quotient}; residu: ${remainder}.`;
+      q.steps=[`${n} = ${d} × ${quotient} + ${remainder}`,`Es compleix 0 ≤ ${remainder} < ${d}.`,remainder?'La divisió no és exacta.':'La divisió és exacta perquè el residu és zero.'];
+    }
+    if(id==='ops'&&t===5){
+      const [quantity,price,paid]=ns,cost=quantity*price,payment=paid===cost?paid+10:paid;
+      q.question=`La Maria compra ${quantity} quaderns a ${price} € cadascun. Paga ${payment} €. Quin canvi rep?`;
+      q.answer=`${payment-cost} €`;q.steps=[`${quantity} × ${price} = ${cost} €`,`${payment} − ${cost} = ${payment-cost} €`];
+    }
+    if(id==='naturals'&&t===4){const [total,groups]=ns,unit=/llibres/.test(source)?'llibres':'paquets';q.question=unit==='llibres'?`Una escola reparteix ${total} llibres a parts iguals entre ${groups} aules. Quants llibres rep cada aula?`:`Un magatzem distribueix ${total} paquets a parts iguals entre ${groups} botigues. Quants paquets rep cada botiga?`;q.answer=`${total/groups} ${unit}`;q.steps=[`${total} ÷ ${groups} = ${total/groups}`,`Cada ${unit==='llibres'?'aula':'botiga'} rep ${q.answer}.`];}
+    if(id==='decimals'&&t===1){const a=ns[0],b=Number.isInteger(ns[0])&&Number.isInteger(ns[1])?ns[1]+0.1:ns[1],result=(Math.round(a*10)+Math.round(b*10))/10;q.question=`Calcula: ${a.toFixed(1)} + ${b.toFixed(1)}.`;q.answer=result.toFixed(1);q.steps=[`${a.toFixed(1)} + ${b.toFixed(1)} = ${q.answer}`];}
+    if(id==='decimals'&&t===3){
+      let scaled=Math.round(ns[0]*1000);if(scaled%10===0)scaled+=rnd(1,9);
+      const result=Math.floor((scaled+5)/10)/100;
+      q.question=`Arrodoneix ${(scaled/1000).toFixed(3)} a les centèsimes.`;q.answer=result.toFixed(2);
+      q.steps=[`La xifra de les mil·lèsimes és ${scaled%10}.`,scaled%10>=5?'Cal augmentar una centèsima.':'Es manté la xifra de les centèsimes.',`Resultat: ${q.answer}`];
+    }
+    if(id==='decimals'&&t===8){
+      let cents=Math.round(ns[0]*100);if(cents%10===0)cents+=rnd(1,9);
+      const tenths=Math.floor((cents+5)/10),error=Math.abs(cents-tenths*10)/100;
+      q.question=`El valor exacte és ${(cents/100).toFixed(2)} i s’ha arrodonit a les dècimes: ${(tenths/10).toFixed(1)}. Calcula l’error absolut.`;
+      q.answer=error.toFixed(2);q.steps=[`Error absolut = |valor exacte − valor aproximat|`,`|${(cents/100).toFixed(2)} − ${(tenths/10).toFixed(1)}| = ${q.answer}`];
+    }
+    if(id==='decimals'&&t===6){
+      const [a,b,c,paid]=ns,total=Math.round((a+b+c)*10)/10,payment=paid===total?paid+1:paid;
+      q.question=`Compres tres articles de ${a.toFixed(1)} €, ${b.toFixed(1)} € i ${c.toFixed(1)} €. Pagues ${payment} €. Quin canvi reps?`;
+      q.answer=`${(payment-total).toFixed(1)} €`;q.steps=[`${a} + ${b} + ${c} = ${total} €`,`${payment} − ${total} = ${(payment-total).toFixed(1)} €`];
+    }
+    if(id==='fraccions'&&[3,4,5].includes(t)){
+      let [a,b,c,d]=ns;if(a===b)a=b-1;if(c===d)c=d-1;
+      if(t===5&&a*d===b*c||t===4&&a*c===b*d)a=a===1?2:a-1;
+      const numerator=t===3?a*d+c*b:t===4?a*c:a*d,denominator=t===5?b*c:b*d,g=gcd(numerator,denominator);
+      const op=t===3?'+':t===4?'×':'÷';q.question=`Calcula i simplifica: ${a}/${b} ${op} ${c}/${d}.`;
+      q.answer=`${numerator/g}/${denominator/g}`;
+      q.steps=[t===3?`${a}/${b} + ${c}/${d} = ${a*d}/${b*d} + ${c*b}/${b*d}`:t===4?`Multipliquem numeradors i denominadors.`:`Dividim multiplicant per la fracció inversa: ${a}/${b} × ${d}/${c}.`,`${numerator}/${denominator} = ${q.answer}`];
+    }
+    if(id==='fraccions'&&t===11)q.question=q.question.replace(/\?$/,'.');
+    if(id==='divis'&&t===7)q.question+=' Comprova per separat les dues possibilitats.';
+    if(id==='fraccions'&&t===7){
+      q.question=q.question.replace(' es equivalent',' és equivalent');
+      const [a,b]=ns,value=a/b,correct=q.answer;
+      const isEquivalent=v=>{const m=v.match(/^(\d+)\/(\d+)$/);return m&&Math.abs(Number(m[1])/Number(m[2])-value)<1e-12;};
+      q.options=[correct,...q.options.filter(v=>v!==correct&&!isEquivalent(v))];
+      for(let k=1;q.options.length<4&&k<=8;k++){const v=`${a+k}/${b}`;if(!isEquivalent(v)&&!q.options.includes(v))q.options.push(v);}
+      q.options=shuffle(q.options.slice(0,4));
+    }
+    if(id==='divis'&&t===2){const [n,d]=ns;q.answer=n%d===0?`Sí, és divisible per ${d}.`:`No, no és divisible per ${d}.`;q.steps=[`${n} = ${d} × ${Math.floor(n/d)} + ${n%d}`,q.answer];}
+    if(id==='divis'&&[1,3,5,6].includes(t)){
+      const isPrime=n=>{if(n<2)return false;for(let d=2;d*d<=n;d++)if(n%d===0)return false;return true;};
+      let correct=Number(q.answer),valid;
+      if(t===6){const n=ns[0];if(!Number.isInteger(correct)||n%correct===0)correct=Array.from({length:n-2},(_,i)=>i+2).find(d=>n%d!==0);valid=v=>n%v!==0;q.steps=[`${n} = ${correct} × ${Math.floor(n/correct)} + ${n%correct}`,`El residu no és zero; ${correct} no és divisor de ${n}.`];}
+      else valid=t===3?isPrime:v=>v%ns[0]===0;
+      const options=[correct,...q.options.map(Number).filter(v=>v!==correct&&!valid(v))];
+      for(let candidate=2;options.length<4&&candidate<=1000;candidate++)if(!valid(candidate)&&!options.includes(candidate))options.push(candidate);
+      q.answer=String(correct);q.options=shuffle(options.slice(0,4).map(String));
+    }
+    if(id==='mcmmcd'&&t===5){
+      const group=Object.keys(groupGrammar).find(g=>source.includes(g)),[adjective,quantifier]=groupGrammar[group];
+      q.question=`${source.split('. Volem')[0]}. Volem fer el màxim nombre de ${group} ${adjective}, amb la mateixa quantitat de cada tipus i sense que sobri res. ${quantifier} ${group} podem fer?`;
+    }
+    if(id==='percentatges'&&t===3){q.question=q.question.replace(' es el ',' és el ').replace('quin es el','quin és el');q.answer=String(ns[0]*100/ns[1]);q.steps=[`El total és la part dividida pel percentatge expressat com a fracció.`,`${ns[0]} × 100 ÷ ${ns[1]} = ${q.answer}`];}
+    if(id==='percentatges'&&t===5&&/Unes sabatilles/.test(q.question))q.question=q.question.replace('i té un descompte','i tenen un descompte');
+    if(id==='proporcionalitat'&&t===6){const xs=ns.slice(0,3),ys=ns.slice(3,6),same=ys.every((y,i)=>y*xs[0]===ys[0]*xs[i]);q.answer=same?'Sí':'No';q.steps=ys.map((y,i)=>{const g=gcd(y,xs[i]);return `${y}/${xs[i]} = ${y/g}/${xs[i]/g}`;}).concat(same?'Les tres raons són iguals; la relació és directament proporcional.':'Les raons no són totes iguals; la relació no és directament proporcional.');}
+    if(id==='proporcionalitat'&&t===2&&ns[0]===ns[2]){const [x,y]=ns,k=y/x,next=x+1;q.question=`Completa la taula proporcional: ${x} → ${y}; ${next} → ?`;q.answer=String(next*k);q.steps=[`Constant: ${y} ÷ ${x} = ${k}`,`${next} × ${k} = ${next*k}`];}
+    q.steps=q.steps.map(s=>s.replace(/^Simplif:/,'Simplificació:').replace(/^Creuats:/,'Productes creuats:'));
+    return finish({...q,fingerprint:JSON.stringify([id,t,q.question,q.answer,q.options]),audit:{topic:id,type:t}});
+  }
+  function generateBranch(id,type){
+    const original=rnd;let first=true;
+    try{rnd=(a,b)=>{if(first){first=false;return type;}return original(a,b);};return adapt(id,generators[id]());}finally{rnd=original;}
+  }
   // Revisió manual de les branques type: dades i contextos nous no creen famílies.
   const definitions={
     naturals:[[1,'ordenar'],[1,'comparar'],[2,'arrodonir'],[2,'problema-suma'],[3,'produccio']],
-    decimal_sys:[[1,'valor'],[2,'descompondre'],[2,'reconstruir'],[2,'valor-context']],
+    decimal_sys:[[1,'valor'],[2,'descompondre'],[2,'reconstruir'],[2,'valor']],
     ops:[[1,'suma'],[1,'resta'],[2,'producte'],[2,'divisio'],[2,'compra'],[3,'produccio']],
-    potencies:[[1,'base','potencies'],[1,'exponent','potencies'],[1,'escriure-potencia','potencies'],[1,'producte-factors','potencies'],[2,'calcular-potencia','potencies'],[2,'arrel','arrels'],[2,'inversa','arrels']],
+    potencies:[[1,'components','potencies'],[1,'components','potencies'],[1,'escriure-potencia','potencies'],[1,'producte-factors','potencies'],[2,'calcular-potencia','potencies'],[2,'arrel','arrels'],[2,'arrel','arrels']],
     jerarquia:[[1,'productes-sumes'],[1,'productes-sumes'],[2,'potencia'],[2,'parentesis'],[2,'parentesis'],[3,'potencia-parentesis'],[3,'compra'],[3,'claudators'],[3,'claudators-potencia']],
-    divis:[[1,'triar-multiple'],[1,'comprovar-divisibilitat'],[2,'primer'],[2,'factoritzar'],[1,'triar-divisor'],[2,'excloure-divisor'],[3,'agrupacions']],
+    divis:[[1,'triar-multiple'],[1,'comprovar-divisibilitat'],[2,'primer'],[2,'factoritzar'],[1,'triar-multiple'],[2,'excloure-divisor'],[3,'agrupacions']],
     mcmmcd:[[1,'calcul-mcd','mcd'],[1,'calcul-mcm','mcm'],[2,'mcm-tres','mcm'],[2,'periodicitat','mcm'],[3,'repartiment','mcd']],
     enters:[[1,'ordenar'],[1,'suma'],[2,'resta'],[2,'producte'],[2,'temperatura'],[3,'saldo'],[1,'recta']],
     decimals:[[1,'suma'],[2,'producte'],[2,'arrodonir'],[2,'fraccio-decimal'],[2,'decimal-fraccio'],[2,'canvi'],[3,'taxa'],[2,'error-absolut'],[3,'error-relatiu']],
@@ -103,20 +220,10 @@
   };
   // A rationale is required for every challenge. High difficulty alone is
   // insufficient: longer products, powers and routine conversions are excluded.
-  const challenges={
-    naturals:{produccio:'Relacionar la producció per màquina amb el total i incorporar la reserva.'},
-    decimal_sys:{intercanvi:'Relacionar posició, intercanvi de xifres i variació del valor.'},
-    jerarquia:{compra:'Construir i resoldre el cost total amb quantitats, descompte i enviament.'},
-    divis:{agrupacions:'Decidir i justificar si dos agrupaments deixen residu.'},
-    mcmmcd:{repartiment:'Identificar el MCD com a procediment per obtenir el màxim nombre de grups.'},
-    enters:{saldo:'Connectar saldo inicial, ingrés i retirada per determinar el saldo final.'},
-    decimals:{'error-relatiu':'Relacionar error absolut i valor exacte per obtenir l’error percentual.'},
-    fraccions:{romanent:'Calcular la part utilitzada i relacionar-la amb la quantitat que queda.'},
-    proporcionalitat:{'comprovar-taula':'Comparar totes les raons i decidir si una taula és proporcional.'}
-  };
+  const challenges={decimal_sys:{intercanvi:'Relacionar la variació de valor amb la posició de dues xifres.'}};
   function classify(id,row){
     const reason=challenges[id]?.[row.family.slice(id.length+1)]||'';
-    return {...row,challenge:!!reason,challengeReason:reason,standard:row.level<=2&&!reason};
+    return {...row,challenge:!!reason,challengeReason:reason,standard:row.level<=2&&!reason,cognitiveDemand:reason?'reasoning-analysis':'routine-procedure'};
   }
   function families(id){
     const rows=definitions[id].map(([level,family,content])=>({level,family:id+':'+family,contents:[content||id]}));
@@ -124,6 +231,24 @@
     if(id==='decimal_sys')rows.push({level:3,family:id+':intercanvi',contents:[id]});
     return rows.map(row=>classify(id,row));
   }
-  window.MIWorksheetConfig={id:'1eso-numeric',worksheetTypes:true,title:'Fitxa d’exercicis — 1r d’ESO — Sentit numèric',web:'srigual-png.github.io/mates-interactives',paperQuestion,
-    topics:TOPICS.filter(t=>t.course==='1r').map(t=>({id:t.id,name:t.name,balanceContents:t.id==='mcmmcd',requiredContents:t.id==='mcmmcd'?['mcd','mcm']:t.id==='potencies'?['potencies','arrels']:[t.id],families:generators[t.id]?families(t.id):[],levels:generators[t.id]?[1,2,3]:[],generate(l){if(t.id==='potencies'&&l===3)return advancedPowers();if(t.id==='decimal_sys'&&l===3)return advancedPlaceValue();return adapt(t.id,generators[t.id]());},metadata(q){return families(t.id)[q.type===undefined?families(t.id).length-1:q.type-1];}}))};
+  const legacyFamilies=families;
+  function topicFamilies(id){
+    const rows=[];
+    legacyFamilies(id).forEach((f,index)=>{const prior=rows.find(x=>x.family===f.family&&x.level===f.level);if(prior)prior.types.push(index+1);else rows.push({...f,generatorId:f.family+'@'+f.level,types:index<definitions[id].length?[index+1]:[]});});
+    return rows.concat(window.MIWorksheetReasoning.families(id));
+  }
+  window.MIWorksheetConfig={id:'1eso-numeric',worksheetTypes:true,title:'Fitxa d’exercicis — 1r d’ESO — Sentit numèric',web:'srigual-png.github.io/mates-interactives',paperQuestion,display,adapt,generateBranch,groupGrammar,
+    inventory:Object.fromEntries(Object.entries(definitions).map(([id,rows])=>[id,rows.map((r,i)=>({type:i+1,family:r[1],level:r[0]}))])),
+    topics:TOPICS.filter(t=>t.course==='1r').map(t=>{
+      const bank=generators[t.id]?topicFamilies(t.id):[];
+      function generateFamily(id){
+        const f=bank.find(f=>(f.generatorId||f.family)===id)||bank.find(f=>f.family===id);if(!f)throw new Error('Família desconeguda: '+id);
+        let q;
+        if(f.extensionId)q=window.MIWorksheetReasoning.generate(t.id,f.extensionId);
+        else if(f.types.length)q=generateBranch(t.id,f.types[rnd(0,f.types.length-1)]);
+        else q=t.id==='potencies'?advancedPowers():advancedPlaceValue();
+        return finish({...q,...f,variant:JSON.stringify(q.audit?.data||[q.question,q.answer])});
+      }
+      return {id:t.id,name:t.name,balanceContents:t.id==='mcmmcd',requiredContents:t.id==='mcmmcd'?['mcd','mcm']:t.id==='potencies'?['potencies','arrels']:[t.id],families:bank,levels:generators[t.id]?[1,2,3]:[],generateFamily,generate(l){const choices=bank.filter(f=>f.level===l);const choice=choices[rnd(0,choices.length-1)];return generateFamily(choice.generatorId||choice.family);},metadata(q){return bank.find(f=>q.generatorId?f.generatorId===q.generatorId:f.family===q.family);}};
+    })};
 })();

@@ -1,0 +1,368 @@
+{
+  "version": "b1cc5cd2",
+  "config": {
+    "count": 10,
+    "topics": [
+      "mcmmcd"
+    ],
+    "worksheetType": "standard",
+    "order": "grouped",
+    "space": "compact",
+    "format": "both",
+    "solutions": "steps"
+  },
+  "questions": [
+    {
+      "level": 1,
+      "question": "Calcula MCD(16; 24)",
+      "answer": "8",
+      "steps": [
+        "16 = 2^4",
+        "24 = 2³ × 3",
+        "Prenem els factors comuns amb l’exponent menor.",
+        "MCD(16; 24) = 2³ = 8",
+        "8"
+      ],
+      "options": [],
+      "type": 1,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 1
+      },
+      "family": "mcmmcd:calcul-mcd",
+      "contents": [
+        "mcd"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:calcul-mcd@1",
+      "types": [
+        1
+      ],
+      "variant": "[\"Calcula MCD(16; 24)\",\"8\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Calcula MCD(16; 24)\",[]]",
+      "number": 1
+    },
+    {
+      "level": 1,
+      "question": "Calcula MCD(54; 81)",
+      "answer": "27",
+      "steps": [
+        "54 = 2 × 3³",
+        "81 = 3^4",
+        "Prenem els factors comuns amb l’exponent menor.",
+        "MCD(54; 81) = 3³ = 27",
+        "27"
+      ],
+      "options": [],
+      "type": 1,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 1
+      },
+      "family": "mcmmcd:calcul-mcd",
+      "contents": [
+        "mcd"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:calcul-mcd@1",
+      "types": [
+        1
+      ],
+      "variant": "[\"Calcula MCD(54; 81)\",\"27\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Calcula MCD(54; 81)\",[]]",
+      "number": 2
+    },
+    {
+      "level": 1,
+      "question": "Calcula mcm(45; 60)",
+      "answer": "180",
+      "steps": [
+        "45 = 3² × 5",
+        "60 = 2² × 3 × 5",
+        "Prenem tots els factors amb l’exponent major.",
+        "mcm(45; 60) = 2² × 3² × 5 = 180",
+        "180"
+      ],
+      "options": [],
+      "type": 2,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 2
+      },
+      "family": "mcmmcd:calcul-mcm",
+      "contents": [
+        "mcm"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:calcul-mcm@1",
+      "types": [
+        2
+      ],
+      "variant": "[\"Calcula mcm(45; 60)\",\"180\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Calcula mcm(45; 60)\",[]]",
+      "number": 3
+    },
+    {
+      "level": 1,
+      "question": "Calcula MCD(10; 15)",
+      "answer": "5",
+      "steps": [
+        "10 = 2 × 5",
+        "15 = 3 × 5",
+        "Prenem els factors comuns amb l’exponent menor.",
+        "MCD(10; 15) = 5 = 5",
+        "5"
+      ],
+      "options": [],
+      "type": 1,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 1
+      },
+      "family": "mcmmcd:calcul-mcd",
+      "contents": [
+        "mcd"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:calcul-mcd@1",
+      "types": [
+        1
+      ],
+      "variant": "[\"Calcula MCD(10; 15)\",\"5\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Calcula MCD(10; 15)\",[]]",
+      "number": 4
+    },
+    {
+      "level": 1,
+      "question": "Calcula MCD(48; 72)",
+      "answer": "24",
+      "steps": [
+        "48 = 2^4 × 3",
+        "72 = 2³ × 3²",
+        "Prenem els factors comuns amb l’exponent menor.",
+        "MCD(48; 72) = 2³ × 3 = 24",
+        "24"
+      ],
+      "options": [],
+      "type": 1,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 1
+      },
+      "family": "mcmmcd:calcul-mcd",
+      "contents": [
+        "mcd"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:calcul-mcd@1",
+      "types": [
+        1
+      ],
+      "variant": "[\"Calcula MCD(48; 72)\",\"24\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Calcula MCD(48; 72)\",[]]",
+      "number": 5
+    },
+    {
+      "level": 1,
+      "question": "Calcula MCD(32; 48)",
+      "answer": "16",
+      "steps": [
+        "32 = 2^5",
+        "48 = 2^4 × 3",
+        "Prenem els factors comuns amb l’exponent menor.",
+        "MCD(32; 48) = 2^4 = 16",
+        "16"
+      ],
+      "options": [],
+      "type": 1,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 1
+      },
+      "family": "mcmmcd:calcul-mcd",
+      "contents": [
+        "mcd"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:calcul-mcd@1",
+      "types": [
+        1
+      ],
+      "variant": "[\"Calcula MCD(32; 48)\",\"16\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Calcula MCD(32; 48)\",[]]",
+      "number": 6
+    },
+    {
+      "level": 2,
+      "question": "D’una mateixa parada surt un autobús de la línia A cada 6 minuts i un de la línia B cada 9 minuts. Ara surt un autobús de cada línia alhora. Quants minuts passaran fins que tornin a coincidir les sortides de les dues línies?",
+      "answer": "18 minuts",
+      "steps": [
+        "6 = 2 × 3",
+        "9 = 3²",
+        "Prenem tots els factors amb l’exponent major.",
+        "mcm(6; 9) = 2 × 3² = 18",
+        "18 minuts"
+      ],
+      "options": [],
+      "type": 4,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 4
+      },
+      "family": "mcmmcd:periodicitat",
+      "contents": [
+        "mcm"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:periodicitat@2",
+      "types": [
+        4
+      ],
+      "variant": "[\"D’una mateixa parada surt un autobús de la línia A cada 6 minuts i un de la línia B cada 9 minuts. Ara surt un autobús de cada línia alhora. Quants minuts passaran fins que tornin a coincidir les sortides de les dues línies?\",\"18 minuts\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"D’una mateixa parada surt un autobús de la línia A cada 6 minuts i un de la línia B cada 9 minuts. Ara surt un autobús de cada línia alhora. Quants minuts passaran fins que tornin a coincidir les sortides de les dues línies?\",[]]",
+      "number": 7
+    },
+    {
+      "level": 2,
+      "question": "Calcula mcm(6; 9; 12)",
+      "answer": "36",
+      "steps": [
+        "6 = 2 × 3",
+        "9 = 3²",
+        "12 = 2² × 3",
+        "Prenem tots els factors amb l’exponent major.",
+        "mcm(6; 9; 12) = 2² × 3² = 36",
+        "36"
+      ],
+      "options": [],
+      "type": 3,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 3
+      },
+      "family": "mcmmcd:mcm-tres",
+      "contents": [
+        "mcm"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:mcm-tres@2",
+      "types": [
+        3
+      ],
+      "variant": "[\"Calcula mcm(6; 9; 12)\",\"36\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Calcula mcm(6; 9; 12)\",[]]",
+      "number": 8
+    },
+    {
+      "level": 2,
+      "question": "Calcula mcm(4; 6; 10)",
+      "answer": "60",
+      "steps": [
+        "4 = 2²",
+        "6 = 2 × 3",
+        "10 = 2 × 5",
+        "Prenem tots els factors amb l’exponent major.",
+        "mcm(4; 6; 10) = 2² × 3 × 5 = 60",
+        "60"
+      ],
+      "options": [],
+      "type": 3,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 3
+      },
+      "family": "mcmmcd:mcm-tres",
+      "contents": [
+        "mcm"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:mcm-tres@2",
+      "types": [
+        3
+      ],
+      "variant": "[\"Calcula mcm(4; 6; 10)\",\"60\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Calcula mcm(4; 6; 10)\",[]]",
+      "number": 9
+    },
+    {
+      "level": 2,
+      "question": "Un aspersor s’activa cada 50 minuts i un altre aspersor s’activa cada 75 minuts. Ara els dos aspersors s’activen alhora. Quants minuts passaran fins que tornin a activar-se alhora?",
+      "answer": "150 minuts",
+      "steps": [
+        "50 = 2 × 5²",
+        "75 = 3 × 5²",
+        "Prenem tots els factors amb l’exponent major.",
+        "mcm(50; 75) = 2 × 3 × 5² = 150",
+        "150 minuts"
+      ],
+      "options": [],
+      "type": 4,
+      "audit": {
+        "topic": "mcmmcd",
+        "type": 4
+      },
+      "family": "mcmmcd:periodicitat",
+      "contents": [
+        "mcm"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "mcmmcd:periodicitat@2",
+      "types": [
+        4
+      ],
+      "variant": "[\"Un aspersor s’activa cada 50 minuts i un altre aspersor s’activa cada 75 minuts. Ara els dos aspersors s’activen alhora. Quants minuts passaran fins que tornin a activar-se alhora?\",\"150 minuts\"]",
+      "topicId": "mcmmcd",
+      "topicName": "mcm i MCD",
+      "key": "[\"Un aspersor s’activa cada 50 minuts i un altre aspersor s’activa cada 75 minuts. Ara els dos aspersors s’activen alhora. Quants minuts passaran fins que tornin a activar-se alhora?\",[]]",
+      "number": 10
+    }
+  ]
+}

@@ -37,6 +37,7 @@ const server=http.createServer((req,res)=>{const f=path.join(root,decodeURICompo
         for(const id of topics){
           const t=T.find(t=>t.id===id),items=qs.filter(q=>q.topicId===id);
           check(t.requiredContents.every(x=>items.some(q=>q.contents.includes(x))),'cobertura '+id);
+          const facts=items.filter(q=>q.factKey).map(q=>q.factKey);check(new Set(facts).size===facts.length,'no repetir la mateixa arrel amb dues formulacions');
           const families={};for(const q of items)if(q.challenge){families[q.family]=(families[q.family]||0)+1;check(q.challengeReason&&q.answer&&q.steps.length,'repte amb solucionari');}
           check(Object.values(families).every(n=>n<=2),'màxim dos reptes per família');
           if(id==='mcmmcd')check(Math.abs(items.filter(q=>q.contents.includes('mcd')).length-items.filter(q=>q.contents.includes('mcm')).length)<=1,'equilibri MCD/mcm');
@@ -44,7 +45,7 @@ const server=http.createServer((req,res)=>{const f=path.join(root,decodeURICompo
         const totals=topics.map(id=>qs.filter(q=>q.topicId===id).length);
         check(Math.max(...totals)-Math.min(...totals)<=1,'equilibri entre temes');
         if(sheet.config.worksheetType==='standard')check(qs.every(q=>q.standard&&!q.challenge&&q.level<=2),'estàndard amb pràctica bàsica/mitjana');
-        else check(qs.some(q=>q.challenge)&&qs.some(q=>!q.challenge),'ampliació amb pràctica i reptes');
+        else check(qs.filter(q=>q.challenge).length>=Math.max(Math.floor(qs.length/2)+1,Math.round(qs.length*0.7)),'ampliació majoritària amb raonament');
         check(!sheet.notice,'sense avís rutinari');
       }
       try{
@@ -62,24 +63,24 @@ const server=http.createServer((req,res)=>{const f=path.join(root,decodeURICompo
         }
         for(const t of T)for(const worksheetType of ['standard','extension']){
           if(worksheetType==='extension'&&!t.families.some(f=>f.challenge))continue;
-          seedRandom(501);const sheet=await E.generate({...base,count:30,topics:[t.id],worksheetType},T);inspect(sheet,[t.id]);runs++;
+          seedRandom(501);if(worksheetType==='extension'){let code;try{await E.generate({...base,count:30,topics:[t.id],worksheetType},T);}catch(e){code=e.code;}check(code==='INSUFFICIENT_EXTENSION','límit de varietat informat abans d’exportar '+t.id);}else{const sheet=await E.generate({...base,count:30,topics:[t.id],worksheetType},T);inspect(sheet,[t.id]);}runs++;
         }
         const c={...base,count:10,topics:['mcmmcd','naturals'],worksheetType:'extension'};
         seedRandom(123);const grouped=await E.generate(c,T);seedRandom(123);const mixed=await E.generate({...c,order:'mixed'},T);
         check(JSON.stringify(grouped.questions.map(q=>q.key).sort())===JSON.stringify(mixed.questions.map(q=>q.key).sort()),'barrejar només permuta la selecció');
         for(const type of ['standard','extension'])check(E.validate({...base,count:1,topics:['mcmmcd'],worksheetType:type},T).includes('2 exercicis'),'mínim exacte MCD/mcm');
         check(T.find(t=>t.id==='potencies').families.some(f=>f.level===3&&!f.challenge),'alta no implica repte');
-        check(T.find(t=>t.id==='proporcionalitat').families.some(f=>f.level===2&&f.challenge),'repte independent del nivell alt');
+        check(T.some(t=>t.families.some(f=>f.level===2&&f.challenge)),'repte independent del nivell alt');
       }finally{Math.random=originalRandom;}
       let serial=0;
       const standard={level:2,family:'practice',contents:['one'],standard:true,challenge:false};
       const challenge={level:3,family:'reasoning',contents:['one'],standard:false,challenge:true,challengeReason:'Decidir el procediment i connectar dos passos.'};
       const one={id:'one',name:'Una família de reptes',levels:[2,3],requiredContents:['one'],families:[standard,challenge],generate:l=>({...(l===3?challenge:standard),question:l===3?'Troba la dada 999':`Calcula ${++serial}`,answer:'0',options:[],steps:['Dada inicial.','Relació i resultat: 0.']})};
-      const single=await E.generate({...base,count:10,topics:['one'],worksheetType:'extension'},[one]);
-      check(single.questions.filter(q=>q.challenge).length===1,'una única variant adequada');
+      let singleCode;try{await E.generate({...base,count:10,topics:['one'],worksheetType:'extension'},[one]);}catch(e){singleCode=e.code;}check(singleCode==='INSUFFICIENT_EXTENSION','una sola variant no es presenta com a ampliació majoritària');
       let variant=0;const two={...one,generate:l=>l===3?{...challenge,question:`Troba la dada ${++variant%2?999:888}`,answer:'0',options:[],steps:['Relació i resultat: 0.']}:one.generate(l)};
-      const pair=await E.generate({...base,count:10,topics:['one'],worksheetType:'extension'},[two]);
-      check(pair.questions.filter(q=>q.challenge).length===2,'màxim dues variants diferents');
+      let pairCode;try{await E.generate({...base,count:10,topics:['one'],worksheetType:'extension'},[two]);}catch(e){pairCode=e.code;}check(pairCode==='INSUFFICIENT_EXTENSION','dues variants no dominen ni es repeteixen per assolir el nivell');
+      let actualSingleCode;try{await E.generate({...base,count:3,topics:['one'],worksheetType:'extension'},[one]);}catch(e){actualSingleCode=e.code;}check(actualSingleCode==='INSUFFICIENT_EXTENSION','variant única detectada després de generar candidats');
+      const shortPair=await E.generate({...base,count:3,topics:['one'],worksheetType:'extension'},[two]);check(shortPair.questions.filter(q=>q.challenge).length===2,'dues variants prou diferents, mai més de dues');
       const fill={...two,generate:l=>l===3?two.generate(l):({...standard,question:'Calcula 1',answer:'1',options:[],steps:['1']})};
       const filled=await E.generate({...base,count:3,topics:['one'],worksheetType:'extension'},[fill]);
       check(filled.questions.length===3&&filled.questions.filter(q=>q.challenge).length===2,'completar un banc estàndard limitat amb reptes disponibles');
@@ -107,13 +108,19 @@ const server=http.createServer((req,res)=>{const f=path.join(root,decodeURICompo
     await page.selectOption('#ws-space','wide');assert(await page.locator('#ws-results').isHidden());
     await page.setViewportSize({width:390,height:844});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await page.locator('#ws-generate').scrollIntoViewIfNeeded();await page.screenshot({path:'tmp/fitxes/mobile.png'});
     await page.setViewportSize({width:1280,height:1000});await page.locator('.mi-worksheet').screenshot({path:'tmp/fitxes/form.png'});
-    await page.evaluate(()=>{document.querySelectorAll('[name="ws-topic"]').forEach(e=>e.checked=e.value==='potencies');document.querySelector('#ws-type').value='extension';document.querySelector('#ws-type').dispatchEvent(new Event('change',{bubbles:true}));});
+    await page.evaluate(()=>{document.querySelectorAll('[name="ws-topic"]').forEach(e=>e.checked=e.value==='mcmmcd');document.querySelector('#ws-count').value='30';document.querySelector('#ws-type').value='extension';document.querySelector('#ws-type').dispatchEvent(new Event('change',{bubbles:true}));});
+    await page.locator('#ws-generate').click();await page.waitForFunction(()=>!document.querySelector('#ws-standard').hidden);
+    assert((await page.locator('#ws-validation').innerText()).includes('No hi ha prou activitats'));
+    assert(!(await page.locator('#ws-validation').innerText()).includes('cap repte adequat'));
+    assert(await page.locator('#ws-results').isHidden());
+    await page.evaluate(()=>{document.querySelector('#ws-count').value='15';window.savedPowerFamilies=MIWorksheetConfig.topics.find(t=>t.id==='potencies').families;MIWorksheetConfig.topics.find(t=>t.id==='potencies').families=savedPowerFamilies.filter(f=>!f.challenge);document.querySelectorAll('[name="ws-topic"]').forEach(e=>e.checked=e.value==='potencies');document.querySelector('#ws-type').value='extension';document.querySelector('#ws-type').dispatchEvent(new Event('change',{bubbles:true}));});
     assert(await page.locator('#ws-standard').isVisible());assert(await page.locator('#ws-generate').isDisabled());
     assert((await page.locator('#ws-validation').innerText()).includes('cap repte adequat'));
     assert(await page.locator('#ws-results').isHidden());
     await page.locator('#ws-standard').click();await page.waitForSelector('#ws-results:not([hidden])');
     assert.equal(await page.locator('#ws-type').inputValue(),'standard');
     assert.equal(await page.evaluate(()=>MIWorksheetUI.getCurrent().config.worksheetType),'standard');
+    await page.evaluate(()=>MIWorksheetConfig.topics.find(t=>t.id==='potencies').families=savedPowerFamilies);
     // Exportacions deterministes dels casos amb notació i text llarg.
     const extra=await page.evaluate(async()=>{
       const s=await MIWorksheets.generate({count:5,topics:['fraccions','potencies','jerarquia'],worksheetType:'extension',order:'mixed',space:'wide',format:'both',solutions:'steps'},MIWorksheetConfig.topics);

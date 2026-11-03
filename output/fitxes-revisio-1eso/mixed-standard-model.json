@@ -1,0 +1,339 @@
+{
+  "version": "fe7e8f8e",
+  "config": {
+    "count": 10,
+    "topics": [
+      "ops",
+      "potencies",
+      "decimals"
+    ],
+    "worksheetType": "standard",
+    "order": "grouped",
+    "space": "compact",
+    "format": "both",
+    "solutions": "steps"
+  },
+  "questions": [
+    {
+      "level": 1,
+      "question": "Calcula: 7485 + 9730",
+      "answer": "17215",
+      "steps": [
+        "7485+9730=17215"
+      ],
+      "options": [],
+      "type": 1,
+      "audit": {
+        "topic": "ops",
+        "type": 1
+      },
+      "family": "ops:suma",
+      "contents": [
+        "ops"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "ops:suma@1",
+      "types": [
+        1
+      ],
+      "variant": "[\"Calcula: 7485 + 9730\",\"17215\"]",
+      "topicId": "ops",
+      "topicName": "Operacions bàsiques",
+      "key": "[\"Calcula: 7485 + 9730\",[]]",
+      "number": 1
+    },
+    {
+      "level": 2,
+      "question": "La Maria compra 4 quaderns a 17 € cadascun. Paga 80 €. Quin canvi rep?",
+      "answer": "12 €",
+      "steps": [
+        "4 × 17 = 68 €",
+        "80 − 68 = 12 €"
+      ],
+      "options": [],
+      "type": 5,
+      "audit": {
+        "topic": "ops",
+        "type": 5
+      },
+      "family": "ops:compra",
+      "contents": [
+        "ops"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "ops:compra@2",
+      "types": [
+        5
+      ],
+      "variant": "[\"La Maria compra 4 quaderns a 17 € cadascun. Paga 80 €. Quin canvi rep?\",\"12 €\"]",
+      "topicId": "ops",
+      "topicName": "Operacions bàsiques",
+      "key": "[\"La Maria compra 4 quaderns a 17 € cadascun. Paga 80 €. Quin canvi rep?\",[]]",
+      "number": 2
+    },
+    {
+      "level": 2,
+      "question": "Calcula: 63 × 281",
+      "answer": "17703",
+      "steps": [
+        "63 × 281=17703"
+      ],
+      "options": [],
+      "type": 3,
+      "audit": {
+        "topic": "ops",
+        "type": 3
+      },
+      "family": "ops:producte",
+      "contents": [
+        "ops"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "ops:producte@2",
+      "types": [
+        3
+      ],
+      "variant": "[\"Calcula: 63 × 281\",\"17703\"]",
+      "topicId": "ops",
+      "topicName": "Operacions bàsiques",
+      "key": "[\"Calcula: 63 × 281\",[]]",
+      "number": 3
+    },
+    {
+      "level": 2,
+      "question": "Calcula el quocient enter i el residu de 469 ÷ 6.",
+      "answer": "Quocient: 78; residu: 1.",
+      "steps": [
+        "469 = 6 × 78 + 1",
+        "Es compleix 0 ≤ 1 < 6.",
+        "La divisió no és exacta."
+      ],
+      "options": [],
+      "type": 4,
+      "divisionMode": "remainder",
+      "audit": {
+        "topic": "ops",
+        "type": 4
+      },
+      "family": "ops:divisio",
+      "contents": [
+        "ops"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "ops:divisio@2",
+      "types": [
+        4
+      ],
+      "variant": "[\"Calcula el quocient enter i el residu de 469 ÷ 6.\",\"Quocient: 78; residu: 1.\"]",
+      "topicId": "ops",
+      "topicName": "Operacions bàsiques",
+      "key": "[\"Calcula el quocient enter i el residu de 469 ÷ 6.\",[]]",
+      "number": 4
+    },
+    {
+      "level": 1,
+      "question": "Escriu la potència 2^2 com un producte de factors iguals.",
+      "answer": "2 × 2",
+      "steps": [
+        "2^2 = 2 × 2",
+        "2 × 2"
+      ],
+      "options": [],
+      "type": 4,
+      "audit": {
+        "topic": "potencies",
+        "type": 4
+      },
+      "family": "potencies:producte-factors",
+      "contents": [
+        "potencies"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "potencies:producte-factors@1",
+      "types": [
+        4
+      ],
+      "variant": "[\"Escriu la potència 2^2 com un producte de factors iguals.\",\"2 × 2\"]",
+      "topicId": "potencies",
+      "topicName": "Potències i arrels",
+      "key": "[\"Escriu la potència 2^2 com un producte de factors iguals.\",[]]",
+      "number": 5
+    },
+    {
+      "level": 2,
+      "question": "Si 6² = 36, quina igualtat expressa l'operació inversa?",
+      "answer": "√36 = 6",
+      "steps": [
+        "6² = 36",
+        "Operació inversa: √36 = 6"
+      ],
+      "options": [],
+      "type": 7,
+      "factKey": "root:36",
+      "audit": {
+        "topic": "potencies",
+        "type": 7
+      },
+      "family": "potencies:arrel",
+      "contents": [
+        "arrels"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "potencies:arrel@2",
+      "types": [
+        6,
+        7
+      ],
+      "variant": "[\"Si 6² = 36, quina igualtat expressa l'operació inversa?\",\"√36 = 6\"]",
+      "topicId": "potencies",
+      "topicName": "Potències i arrels",
+      "key": "[\"Si 6² = 36, quina igualtat expressa l'operació inversa?\",[]]",
+      "number": 6
+    },
+    {
+      "level": 2,
+      "question": "Calcula 10^2.",
+      "answer": "100",
+      "steps": [
+        "10^2 = 10 × 10",
+        "Resultat = 100"
+      ],
+      "options": [],
+      "type": 5,
+      "audit": {
+        "topic": "potencies",
+        "type": 5
+      },
+      "family": "potencies:calcular-potencia",
+      "contents": [
+        "potencies"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "potencies:calcular-potencia@2",
+      "types": [
+        5
+      ],
+      "variant": "[\"Calcula 10^2.\",\"100\"]",
+      "topicId": "potencies",
+      "topicName": "Potències i arrels",
+      "key": "[\"Calcula 10^2.\",[]]",
+      "number": 7
+    },
+    {
+      "level": 1,
+      "question": "Calcula: 4,7 + 8,7.",
+      "answer": "13,4",
+      "steps": [
+        "4,7 + 8,7 = 13,4"
+      ],
+      "options": [],
+      "type": 1,
+      "audit": {
+        "topic": "decimals",
+        "type": 1
+      },
+      "family": "decimals:suma",
+      "contents": [
+        "decimals"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "decimals:suma@1",
+      "types": [
+        1
+      ],
+      "variant": "[\"Calcula: 4,7 + 8,7.\",\"13,4\"]",
+      "topicId": "decimals",
+      "topicName": "Nombres decimals",
+      "key": "[\"Calcula: 4,7 + 8,7.\",[]]",
+      "number": 8
+    },
+    {
+      "level": 2,
+      "question": "El valor exacte és 3,14 i s’ha arrodonit a les dècimes: 3,1. Calcula l’error absolut.",
+      "answer": "0,04",
+      "steps": [
+        "Error absolut = |valor exacte − valor aproximat|",
+        "|3,14 − 3,1| = 0,04"
+      ],
+      "options": [],
+      "type": 8,
+      "audit": {
+        "topic": "decimals",
+        "type": 8
+      },
+      "family": "decimals:error-absolut",
+      "contents": [
+        "decimals"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "decimals:error-absolut@2",
+      "types": [
+        8
+      ],
+      "variant": "[\"El valor exacte és 3,14 i s’ha arrodonit a les dècimes: 3,1. Calcula l’error absolut.\",\"0,04\"]",
+      "topicId": "decimals",
+      "topicName": "Nombres decimals",
+      "key": "[\"El valor exacte és 3,14 i s’ha arrodonit a les dècimes: 3,1. Calcula l’error absolut.\",[]]",
+      "number": 9
+    },
+    {
+      "level": 2,
+      "question": "Compres tres articles de 4,5 €, 3,1 € i 3,3 €. Pagues 11 €. Quin canvi reps?",
+      "answer": "0,1 €",
+      "steps": [
+        "4,5 + 3,1 + 3,3 = 10,9 €",
+        "11 − 10,9 = 0,1 €"
+      ],
+      "options": [],
+      "type": 6,
+      "audit": {
+        "topic": "decimals",
+        "type": 6
+      },
+      "family": "decimals:canvi",
+      "contents": [
+        "decimals"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "decimals:canvi@2",
+      "types": [
+        6
+      ],
+      "variant": "[\"Compres tres articles de 4,5 €, 3,1 € i 3,3 €. Pagues 11 €. Quin canvi reps?\",\"0,1 €\"]",
+      "topicId": "decimals",
+      "topicName": "Nombres decimals",
+      "key": "[\"Compres tres articles de 4,5 €, 3,1 € i 3,3 €. Pagues 11 €. Quin canvi reps?\",[]]",
+      "number": 10
+    }
+  ]
+}

@@ -5,7 +5,8 @@ from pypdf import PdfReader
 
 folder=Path('tmp/fitxes')
 def canonical(s):
-    s=s.replace('−','-').replace('²','^2').replace('³','^3')
+    s=s.replace('−','-')
+    s=re.sub('[⁰¹²³⁴⁵⁶⁷⁸⁹]+',lambda m:'^'+''.join(str('⁰¹²³⁴⁵⁶⁷⁸⁹'.index(c)) for c in m[0]),s)
     s=re.sub(r'([0-9)])\s*x\s*(?=[0-9(\[])',r'\1 × ',s)
     s=re.sub(r'\s*/\s*(?=\d+/\d+)',' ÷ ',s)
     return re.sub(r'[\s/^√]','',s)

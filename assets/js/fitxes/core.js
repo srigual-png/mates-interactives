@@ -42,20 +42,28 @@
     const x=new Set(a.numbers),y=new Set(b.numbers),overlap=[...x].filter(n=>y.has(n)).length;
     return a.variantKey&&a.variantKey===b.variantKey||x.size+y.size>0&&overlap/Math.max(x.size,y.size)>=0.8;
   }
+  const extensionTarget=n=>Math.min(n,Math.max(Math.floor(n/2)+1,Math.round(n*0.7)));
+  function extensionLimit(c,catalog,capacity){
+    let viable=0;
+    for(let n=c.count-1;n>0;n--){try{const plan=typePlan({...c,count:n},catalog);if(plan.reduce((sum,{topic,count})=>sum+Math.min(count,capacity(topic)),0)>=extensionTarget(n)){viable=n;break;}}catch{}}
+    const e=new Error(`No hi ha prou activitats d’ampliació prou diferents per a ${c.count} exercicis amb aquesta selecció. ${viable?'Pots demanar '+viable+' exercicis, seleccionar més temes o generar una fitxa Estàndard.':'Selecciona més temes o genera una fitxa Estàndard.'} No s’ha exportat cap document.`);e.code='INSUFFICIENT_EXTENSION';return e;
+  }
   async function generateType(c,catalog,previousKeys){
     const error=validate(c,catalog);if(error)throw new Error(error);
     const plan=typePlan(c,catalog),used=new Set(previousKeys),questions=[],banks=[];
+    if(c.worksheetType==='extension'){const capacity=t=>2*new Set(t.families.filter(f=>f.challenge).map(f=>f.family)).size;const total=plan.reduce((sum,{topic,count})=>sum+Math.min(count,capacity(topic)),0);if(!total)throw noChallenges();if(total<extensionTarget(c.count))throw extensionLimit(c,catalog,capacity);}
     for(const {topic,count} of plan){
       const pool=[],seen=new Set();
       const available=topic.families.filter(f=>isStandard(f)||c.worksheetType==='extension'&&f.challenge);
-      for(const l of [...new Set(available.map(f=>f.level))])for(let attempt=0;attempt<240;attempt++){
-        const raw=await topic.generate(l);if(!raw||raw.level!==l)continue;
+      const sources=topic.generateFamily?available.map(f=>({level:f.level,family:f.generatorId||f.family})): [...new Set(available.map(f=>f.level))].map(level=>({level}));
+      for(const source of sources)for(let attempt=0;attempt<(source.family?Math.min(60,Math.max(12,count*3)):240);attempt++){
+        const raw=source.family?await topic.generateFamily(source.family):await topic.generate(source.level);if(!raw||raw.level!==source.level)continue;
         const meta=topic.metadata?topic.metadata(raw):raw;
         if(!meta||meta.level!==raw.level||!meta.family||!meta.contents||!isStandard(meta)&&!(c.worksheetType==='extension'&&meta.challenge))continue;
         const q={...raw,...meta,topicId:topic.id,topicName:topic.name};
         if(q.challenge&&(!q.answer||!q.steps?.length||!q.challengeReason))continue;
-        const numbers=q.question.match(/-?\d+(?:[.,]\d+)?/g)||[];
-        const variantKey=JSON.stringify([q.family,numbers,q.answer]);
+        const numbers=q.audit?.data?Object.values(q.audit.data).filter(x=>typeof x==='number').map(String):(q.question.match(/[−-]?\d+(?:[.,]\d+)?/g)||[]);
+        const variantKey=q.factKey||JSON.stringify([q.family,numbers,q.answer]);
         const key=JSON.stringify([q.question.replace(/\s+/g,' ').trim(),(q.options||[]).slice().sort()]);
         if(seen.has(variantKey)||used.has(key))continue;
         seen.add(variantKey);pool.push({...q,key,numbers,variantKey});
@@ -83,7 +91,7 @@
     if(c.worksheetType==='extension'){
       // A soft ceiling, never a required quota. Every replacement is checked
       // against the complete standard selection before it becomes final.
-      const target=Math.max(1,Math.round(c.count*0.3)),familyUse={},topicUse={};let added=0;
+      const target=extensionTarget(c.count),familyUse={},topicUse={};let added=0;
       while(added<target||banks.some(({topic,count})=>questions.filter(q=>q.topicId===topic.id).length<count)){
         const replacements=[];
         for(const {topic,pool,count} of banks){
@@ -103,6 +111,7 @@
         const {q,index}=next;questions[index]=q;used.add(q.key);familyUse[q.family]=(familyUse[q.family]||0)+1;topicUse[q.topicId]=(topicUse[q.topicId]||0)+1;added++;
       }
       if(!added)throw noChallenges();
+      if(added<target)throw extensionLimit(c,catalog,t=>topicUse[t.id]||0);
     }
     for(const {topic} of banks)if(!covers(topic,questions.filter(q=>q.topicId===topic.id)))throw new Error(`No hi ha prou activitats diferents per cobrir «${topic.name}». Redueix la selecció de temes i torna-ho a provar.`);
     if(questions.length<c.count){

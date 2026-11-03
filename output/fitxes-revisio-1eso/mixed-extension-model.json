@@ -1,0 +1,365 @@
+{
+  "version": "98f712dc",
+  "config": {
+    "count": 10,
+    "topics": [
+      "ops",
+      "potencies",
+      "decimals"
+    ],
+    "worksheetType": "extension",
+    "order": "grouped",
+    "space": "compact",
+    "format": "both",
+    "solutions": "steps"
+  },
+  "questions": [
+    {
+      "level": 2,
+      "question": "La Maria compra 13 quaderns a 18 € cadascun. Paga 260 €. Quin canvi rep?",
+      "answer": "26 €",
+      "steps": [
+        "13 × 18 = 234 €",
+        "260 − 234 = 26 €"
+      ],
+      "options": [],
+      "type": 5,
+      "audit": {
+        "topic": "ops",
+        "type": 5
+      },
+      "family": "ops:compra",
+      "contents": [
+        "ops"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "ops:compra@2",
+      "types": [
+        5
+      ],
+      "variant": "[\"La Maria compra 13 quaderns a 18 € cadascun. Paga 260 €. Quin canvi rep?\",\"26 €\"]",
+      "topicId": "ops",
+      "topicName": "Operacions bàsiques",
+      "key": "[\"La Maria compra 13 quaderns a 18 € cadascun. Paga 260 €. Quin canvi rep?\",[]]",
+      "number": 1
+    },
+    {
+      "question": "És correcte escriure 10 × (6 + 9) = 10 × 6 + 9? Detecta l’error i corregeix el segon membre perquè sigui equivalent al primer.",
+      "answer": "10 × 6 + 10 × 9 = 150",
+      "steps": [
+        "El factor 10 ha de multiplicar tots dos sumands.",
+        "El segon membre proposat val 69, però el primer val 150.",
+        "La forma correcta és 10 × 6 + 10 × 9 = 150."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "a": 10,
+          "b": 6,
+          "c": 9
+        },
+        "result": 150,
+        "topic": "ops",
+        "id": "distributiva-error"
+      },
+      "family": "ops:ext-distributiva-error",
+      "extensionId": "distributiva-error",
+      "contents": [
+        "ops"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "error-analysis",
+      "challengeReason": "Cal localitzar i explicar un error.",
+      "variant": "{\"a\":10,\"b\":6,\"c\":9}",
+      "topicId": "ops",
+      "topicName": "Operacions bàsiques",
+      "key": "[\"És correcte escriure 10 × (6 + 9) = 10 × 6 + 9? Detecta l’error i corregeix el segon membre perquè sigui equivalent al primer.\",[]]",
+      "number": 2
+    },
+    {
+      "question": "Per comprar 9 articles, l’opció A cobra 7 € per article i 4 € de transport per tota la compra. L’opció B cobra 8 € per article sense transport. Compara els totals i decideix quina convé.",
+      "answer": "A: 67 €; B: 72 €; convé A.",
+      "steps": [
+        "A: 9 × 7 + 4 = 67 €",
+        "B: 9 × 8 = 72 €",
+        "Cal comparar el cost complet, inclòs el transport; una igualtat significa que totes dues opcions costen el mateix."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "n": 9,
+          "p": 7,
+          "fee": 4
+        },
+        "result": [
+          67,
+          72
+        ],
+        "topic": "ops",
+        "id": "comparar-ofertes"
+      },
+      "family": "ops:ext-comparar-ofertes",
+      "extensionId": "comparar-ofertes",
+      "contents": [
+        "ops"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "decision",
+      "challengeReason": "Cal triar un procediment i justificar-lo.",
+      "variant": "{\"n\":9,\"p\":7,\"fee\":4}",
+      "topicId": "ops",
+      "topicName": "Operacions bàsiques",
+      "key": "[\"Per comprar 9 articles, l’opció A cobra 7 € per article i 4 € de transport per tota la compra. L’opció B cobra 8 € per article sense transport. Compara els totals i decideix quina convé.\",[]]",
+      "number": 3
+    },
+    {
+      "question": "Troba □ en 11 × □ − 7 = 191. Explica en quin ordre desfàs les operacions.",
+      "answer": "18",
+      "steps": [
+        "Primer desfem la resta: 191 + 7 = 198.",
+        "Després desfem el producte: 198 ÷ 11 = 18.",
+        "Comprovació: 11 × 18 − 7 = 191."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "a": 11,
+          "x": 18,
+          "b": 7
+        },
+        "result": 18,
+        "topic": "ops",
+        "id": "operand-invers"
+      },
+      "family": "ops:ext-operand-invers",
+      "extensionId": "operand-invers",
+      "contents": [
+        "ops"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "inverse",
+      "challengeReason": "Cal desfer una relació i comprovar-la.",
+      "variant": "{\"a\":11,\"x\":18,\"b\":7}",
+      "topicId": "ops",
+      "topicName": "Operacions bàsiques",
+      "key": "[\"Troba □ en 11 × □ − 7 = 191. Explica en quin ordre desfàs les operacions.\",[]]",
+      "number": 4
+    },
+    {
+      "level": 2,
+      "question": "Calcula √49.",
+      "answer": "7",
+      "steps": [
+        "7² = 49",
+        "√49 = 7"
+      ],
+      "options": [],
+      "type": 6,
+      "factKey": "root:49",
+      "audit": {
+        "topic": "potencies",
+        "type": 6
+      },
+      "family": "potencies:arrel",
+      "contents": [
+        "arrels"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "potencies:arrel@2",
+      "types": [
+        6,
+        7
+      ],
+      "variant": "[\"Calcula √49.\",\"7\"]",
+      "topicId": "potencies",
+      "topicName": "Potències i arrels",
+      "key": "[\"Calcula √49.\",[]]",
+      "number": 5
+    },
+    {
+      "question": "Un alumne diu que 12^2 = 12 × 2. Explica què representa l’exponent i corregeix el resultat.",
+      "answer": "144",
+      "steps": [
+        "L’exponent indica quants factors iguals a la base es multipliquen.",
+        "12^2 = 12 × 12 = 144",
+        "12 × 2 = 24 és una altra operació."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "a": 12
+        },
+        "result": 144,
+        "topic": "potencies",
+        "id": "error-potencia"
+      },
+      "family": "potencies:ext-error-potencia",
+      "extensionId": "error-potencia",
+      "contents": [
+        "potencies"
+      ],
+      "level": 2,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "error-analysis",
+      "challengeReason": "Cal localitzar i explicar un error.",
+      "variant": "{\"a\":12}",
+      "topicId": "potencies",
+      "topicName": "Potències i arrels",
+      "key": "[\"Un alumne diu que 12^2 = 12 × 2. Explica què representa l’exponent i corregeix el resultat.\",[]]",
+      "number": 6
+    },
+    {
+      "question": "Troba l’exponent natural □ perquè 9^□ = 81. Justifica’l i explica per què no n’hi ha cap altre.",
+      "answer": "2",
+      "steps": [
+        "Les potències successives de 9 creixen estrictament perquè 9 > 1.",
+        "9^2 = 81",
+        "L’exponent és 2; el creixement garanteix la unicitat."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "a": 9,
+          "e": 2
+        },
+        "result": 2,
+        "topic": "potencies",
+        "id": "exponent-invers"
+      },
+      "family": "potencies:ext-exponent-invers",
+      "extensionId": "exponent-invers",
+      "contents": [
+        "potencies"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "inverse",
+      "challengeReason": "Cal desfer una relació i comprovar-la.",
+      "variant": "{\"a\":9,\"e\":2}",
+      "topicId": "potencies",
+      "topicName": "Potències i arrels",
+      "key": "[\"Troba l’exponent natural □ perquè 9^□ = 81. Justifica’l i explica per què no n’hi ha cap altre.\",[]]",
+      "number": 7
+    },
+    {
+      "level": 2,
+      "question": "El valor exacte és 8,32 i s’ha arrodonit a les dècimes: 8,3. Calcula l’error absolut.",
+      "answer": "0,02",
+      "steps": [
+        "Error absolut = |valor exacte − valor aproximat|",
+        "|8,32 − 8,3| = 0,02"
+      ],
+      "options": [],
+      "type": 8,
+      "audit": {
+        "topic": "decimals",
+        "type": 8
+      },
+      "family": "decimals:error-absolut",
+      "contents": [
+        "decimals"
+      ],
+      "challenge": false,
+      "challengeReason": "",
+      "standard": true,
+      "cognitiveDemand": "routine-procedure",
+      "generatorId": "decimals:error-absolut@2",
+      "types": [
+        8
+      ],
+      "variant": "[\"El valor exacte és 8,32 i s’ha arrodonit a les dècimes: 8,3. Calcula l’error absolut.\",\"0,02\"]",
+      "topicId": "decimals",
+      "topicName": "Nombres decimals",
+      "key": "[\"El valor exacte és 8,32 i s’ha arrodonit a les dècimes: 8,3. Calcula l’error absolut.\",[]]",
+      "number": 8
+    },
+    {
+      "question": "Compra de 4 articles: A cobra 1,49 € per article i 0,69 € per tota la comanda; B cobra 1,79 € per article sense recàrrec. Calcula els dos totals exactes i decideix quina opció convé.",
+      "answer": "A: 6,65 €; B: 7,16 €; convé A.",
+      "steps": [
+        "A: 4 × 1,49 + 0,69 = 6,65 €",
+        "B: 4 × 1,79 = 7,16 €",
+        "Comparem els totals sense arrodonir abans d’acabar."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "n": 4,
+          "p": 149,
+          "fee": 69
+        },
+        "result": [
+          6.65,
+          7.16
+        ],
+        "topic": "decimals",
+        "id": "comparar-costos"
+      },
+      "family": "decimals:ext-comparar-costos",
+      "extensionId": "comparar-costos",
+      "contents": [
+        "decimals"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "decision",
+      "challengeReason": "Cal triar un procediment i justificar-lo.",
+      "variant": "{\"n\":4,\"p\":149,\"fee\":69}",
+      "topicId": "decimals",
+      "topicName": "Nombres decimals",
+      "key": "[\"Compra de 4 articles: A cobra 1,49 € per article i 0,69 € per tota la comanda; B cobra 1,79 € per article sense recàrrec. Calcula els dos totals exactes i decideix quina opció convé.\",[]]",
+      "number": 9
+    },
+    {
+      "question": "Entre els decimals positius escrits amb tres xifres decimals, troba el menor i el major que s’arrodoneixen a 7,30 a les centèsimes. En els empats s’arrodoneix cap amunt.",
+      "answer": "7,295; 7,304",
+      "steps": [
+        "El límit inferior inclòs és 7,295.",
+        "El nombre 7,305 ja s’arrodoneix a la centèsima següent.",
+        "Amb tres decimals, el major admissible és 7,304."
+      ],
+      "options": [],
+      "audit": {
+        "data": {
+          "cents": 730
+        },
+        "result": [
+          7.295,
+          7.304
+        ],
+        "topic": "decimals",
+        "id": "interval-decimal"
+      },
+      "family": "decimals:ext-interval-decimal",
+      "extensionId": "interval-decimal",
+      "contents": [
+        "decimals"
+      ],
+      "level": 3,
+      "standard": false,
+      "challenge": true,
+      "cognitiveDemand": "constraints",
+      "challengeReason": "Cal combinar condicions i justificar tots els casos.",
+      "variant": "{\"cents\":730}",
+      "topicId": "decimals",
+      "topicName": "Nombres decimals",
+      "key": "[\"Entre els decimals positius escrits amb tres xifres decimals, troba el menor i el major que s’arrodoneixen a 7,30 a les centèsimes. En els empats s’arrodoneix cap amunt.\",[]]",
+      "number": 10
+    }
+  ]
+}
