@@ -9,10 +9,7 @@
   // Generadors base: reutilitzem els càlculs sense consumir les bosses de pràctica.
   const generators={naturals:genNaturals,decimal_sys:genDecimalSys,ops:genOps,potencies:genPotenciesArrels,jerarquia:genJerarquia,divis:genDivisibilitatBase,mcmmcd:genMcmMcdBase,enters:genEnters,decimals:genDecimalsBase,fraccions:genFraccionsBase,proporcionalitat:genProporcionalitatBase,percentatges:genPercentatgesBase};
   function level(id,q){
-    if(id==='decimal_sys'&&q.type===4)return 2;
-    if(id==='proporcionalitat')return [3,4,7].includes(q.type)?3:[6,8].includes(q.type)?2:1;
-    if(id==='potencies')return [5,6,7].includes(q.type)?2:1;
-    return q.diff;
+    return definitions[id]?.[q.type-1]?.[0]??q.diff;
   }
   function advancedPowers(){
     const a=rnd(2,12),b=rnd(2,12),c=rnd(2,9),n=rnd(2,3),power=a**n,square=b*b,result=power+square-c;
@@ -204,37 +201,40 @@
     try{rnd=(a,b)=>{if(first){first=false;return type;}return original(a,b);};return adapt(id,generators[id]());}finally{rnd=original;}
   }
   // Revisió manual de les branques type: dades i contextos nous no creen famílies.
+  // Tuples: nivell vigent, família, contingut opcional, nivell original del generatorId.
+  // Els identificadors es mantenen encara que canviï la classificació pedagògica.
   const definitions={
-    naturals:[[1,'ordenar'],[1,'comparar'],[2,'arrodonir'],[2,'problema-suma'],[3,'produccio']],
-    decimal_sys:[[1,'valor'],[2,'descompondre'],[2,'reconstruir'],[2,'valor']],
-    ops:[[1,'suma'],[1,'resta'],[2,'producte'],[2,'divisio'],[2,'compra'],[3,'produccio']],
-    potencies:[[1,'components','potencies'],[1,'components','potencies'],[1,'escriure-potencia','potencies'],[1,'producte-factors','potencies'],[2,'calcular-potencia','potencies'],[2,'arrel','arrels'],[2,'arrel','arrels']],
-    jerarquia:[[1,'productes-sumes'],[1,'productes-sumes'],[2,'potencia'],[2,'parentesis'],[2,'parentesis'],[3,'potencia-parentesis'],[3,'compra'],[3,'claudators'],[3,'claudators-potencia']],
-    divis:[[1,'triar-multiple'],[1,'comprovar-divisibilitat'],[2,'primer'],[2,'factoritzar'],[1,'triar-multiple'],[2,'excloure-divisor'],[3,'agrupacions']],
-    mcmmcd:[[1,'calcul-mcd','mcd'],[1,'calcul-mcm','mcm'],[2,'mcm-tres','mcm'],[2,'periodicitat','mcm'],[3,'repartiment','mcd']],
-    enters:[[1,'ordenar'],[1,'suma'],[2,'resta'],[2,'producte'],[2,'temperatura'],[3,'saldo'],[1,'recta']],
-    decimals:[[1,'suma'],[2,'producte'],[2,'arrodonir'],[2,'fraccio-decimal'],[2,'decimal-fraccio'],[2,'canvi'],[3,'taxa'],[2,'error-absolut'],[3,'error-relatiu']],
-    fraccions:[[1,'simplificar'],[1,'suma-igual'],[2,'suma-diferent'],[2,'producte'],[2,'divisio'],[2,'comparar'],[1,'equivalent'],[3,'romanent'],[1,'classificar'],[1,'part'],[1,'conversio']],
-    proporcionalitat:[[1,'classificar'],[1,'completar-taula'],[3,'valor-unitari'],[3,'valor-unitari'],[1,'constant'],[2,'comprovar-taula'],[3,'valor-unitari'],[2,'factor']],
-    percentatges:[[1,'part'],[1,'percentatge'],[2,'total'],[2,'augment'],[2,'descompte'],[2,'conversio'],[3,'enquesta']]
+    naturals:[[1,'ordenar'],[1,'comparar'],[1,'arrodonir',undefined,2],[1,'problema-suma',undefined,2],[2,'produccio',undefined,3]],
+    decimal_sys:[[1,'valor'],[1,'descompondre',undefined,2],[1,'reconstruir',undefined,2],[1,'valor',undefined,2]],
+    ops:[[1,'suma'],[1,'resta'],[1,'producte',undefined,2],[1,'divisio',undefined,2],[2,'compra'],[2,'produccio',undefined,3]],
+    potencies:[[1,'components','potencies'],[1,'components','potencies'],[1,'escriure-potencia','potencies'],[1,'producte-factors','potencies'],[1,'calcular-potencia','potencies',2],[1,'arrel','arrels',2],[1,'arrel','arrels',2]],
+    jerarquia:[[1,'productes-sumes'],[1,'productes-sumes'],[2,'potencia'],[2,'parentesis'],[2,'parentesis'],[2,'potencia-parentesis',undefined,3],[2,'compra',undefined,3],[2,'claudators',undefined,3],[2,'claudators-potencia',undefined,3]],
+    divis:[[1,'triar-multiple'],[1,'comprovar-divisibilitat'],[1,'primer',undefined,2],[1,'factoritzar',undefined,2],[1,'triar-multiple'],[1,'excloure-divisor',undefined,2],[2,'agrupacions',undefined,3]],
+    mcmmcd:[[1,'calcul-mcd','mcd'],[1,'calcul-mcm','mcm'],[1,'mcm-tres','mcm',2],[2,'periodicitat','mcm'],[2,'repartiment','mcd',3]],
+    enters:[[1,'ordenar'],[1,'suma'],[1,'resta',undefined,2],[1,'producte',undefined,2],[1,'temperatura',undefined,2],[2,'saldo',undefined,3],[1,'recta']],
+    decimals:[[1,'suma'],[1,'producte',undefined,2],[1,'arrodonir',undefined,2],[1,'fraccio-decimal',undefined,2],[2,'decimal-fraccio'],[2,'canvi'],[1,'taxa',undefined,3],[1,'error-absolut',undefined,2],[2,'error-relatiu',undefined,3]],
+    fraccions:[[1,'simplificar'],[1,'suma-igual'],[2,'suma-diferent'],[1,'producte',undefined,2],[1,'divisio',undefined,2],[2,'comparar'],[1,'equivalent'],[2,'romanent',undefined,3],[1,'classificar'],[1,'part'],[1,'conversio']],
+    proporcionalitat:[[1,'classificar'],[1,'completar-taula'],[2,'valor-unitari',undefined,3],[2,'valor-unitari',undefined,3],[1,'constant'],[2,'comprovar-taula'],[2,'valor-unitari',undefined,3],[1,'factor',undefined,2]],
+    percentatges:[[1,'part'],[1,'percentatge'],[2,'total'],[2,'augment'],[2,'descompte'],[1,'conversio',undefined,2],[2,'enquesta',undefined,3]]
   };
   // A rationale is required for every challenge. High difficulty alone is
   // insufficient: longer products, powers and routine conversions are excluded.
-  const challenges={decimal_sys:{intercanvi:'Relacionar la variació de valor amb la posició de dues xifres.'}};
+  // L’intercanvi directe de xifres és un procediment combinat N2, no un repte.
+  const challenges={};
   function classify(id,row){
     const reason=challenges[id]?.[row.family.slice(id.length+1)]||'';
     return {...row,challenge:!!reason,challengeReason:reason,standard:row.level<=2&&!reason,cognitiveDemand:reason?'reasoning-analysis':'routine-procedure'};
   }
   function families(id){
-    const rows=definitions[id].map(([level,family,content])=>({level,family:id+':'+family,contents:[content||id]}));
-    if(id==='potencies')rows.push({level:3,family:id+':combinada',contents:['potencies','arrels']});
-    if(id==='decimal_sys')rows.push({level:3,family:id+':intercanvi',contents:[id]});
+    const rows=definitions[id].map(([level,family,content,previousLevel])=>({level,family:id+':'+family,contents:[content||id],generatorId:id+':'+family+'@'+(previousLevel||level)}));
+    if(id==='potencies')rows.push({level:2,generatorId:'potencies:combinada@3',family:id+':combinada',contents:['potencies','arrels']});
+    if(id==='decimal_sys')rows.push({level:2,generatorId:'decimal_sys:intercanvi@3',family:id+':intercanvi',contents:[id]});
     return rows.map(row=>classify(id,row));
   }
   const legacyFamilies=families;
   function topicFamilies(id){
     const rows=[];
-    legacyFamilies(id).forEach((f,index)=>{const prior=rows.find(x=>x.family===f.family&&x.level===f.level);if(prior)prior.types.push(index+1);else rows.push({...f,generatorId:f.family+'@'+f.level,types:index<definitions[id].length?[index+1]:[]});});
+    legacyFamilies(id).forEach((f,index)=>{const prior=rows.find(x=>x.generatorId===(f.generatorId||f.family+'@'+f.level));if(prior)prior.types.push(index+1);else rows.push({...f,generatorId:f.generatorId||f.family+'@'+f.level,types:index<definitions[id].length?[index+1]:[]});});
     return rows.concat(window.MIWorksheetReasoning.families(id));
   }
   window.MIWorksheetConfig={id:'1eso-numeric',worksheetTypes:true,title:'Fitxa d’exercicis — 1r d’ESO — Sentit numèric',web:'srigual-png.github.io/mates-interactives',paperQuestion,display,adapt,generateBranch,groupGrammar,
