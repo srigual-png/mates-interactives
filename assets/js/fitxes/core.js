@@ -13,6 +13,90 @@
   const worksheetTypes={standard:'Estàndard',extension:'Ampliació'};
   const pilot=(c,catalog)=>catalog.length>0&&catalog.every(t=>Array.isArray(t.families));
   const isStandard=q=>q.standard===true;
+  const firstNumeric=c=>(window.MIWorksheetConfig?.id||c.contextId)==='1eso-numeric';
+  const fixedCounts=Object.freeze([5,8,10,15,20,25,30]);
+  function difficultyQuotas(c){
+    if(!fixedCounts.includes(c.count)||!worksheetTypes[c.worksheetType])throw new Error('Selecciona una quantitat i un tipus de fitxa vàlids.');
+    return counts(c.count,c.worksheetType==='standard'?[40,60,0]:[0,20,80]);
+  }
+  function quotaIssue(c,expected,questions,detail=''){
+    const achieved=[1,2,3].map(l=>questions.filter(q=>q.level===l).length);
+    const missing=expected.map((n,i)=>achieved[i]<n?'N'+(i+1):'').filter(Boolean);
+    const e=new Error(`${c.count} exercicis · ${worksheetTypes[c.worksheetType]}. Quotes esperades N1/N2/N3: ${expected.join('/')}; aconseguides: ${achieved.join('/')}. Nivells insuficients: ${missing.join(', ')||'cap; manca cobertura compatible'}.${detail?' '+detail:''} No s’ha exportat cap document.`);
+    e.code='INSUFFICIENT_QUOTAS';e.requested=c.count;e.worksheetType=c.worksheetType;e.expected=expected;e.achieved=achieved;e.insufficientLevels=missing;return e;
+  }
+  // Selecció global només per a 1r numèric. Les metadades i els generadors no canvien.
+  async function generateFirstNumeric(c,catalog,previousKeys){
+    const error=validate(c,catalog);if(error)throw new Error(error);
+    const expected=difficultyQuotas(c),topics=c.topics.map(id=>catalog.find(t=>t.id===id));
+    const accepts=f=>expected[f.level-1]>0&&(isStandard(f)||c.worksheetType==='extension'&&f.challenge);
+    const coveringMinimum=topics.reduce((n,t)=>n+minimum(t,c,t.families.filter(accepts).map(f=>({...f,standard:true}))),0);
+    if(coveringMinimum>c.count)throw quotaIssue(c,expected,[],'La selecció no permet cobrir tots els continguts amb aquesta quantitat.');
+    const previous=new Set(previousKeys),pool=[],seen=new Set();
+    for(const topic of topics){
+      const available=topic.families.filter(accepts);
+      const sources=topic.generateFamily?available.map(f=>({level:f.level,family:f.generatorId||f.family})):[...new Set(available.map(f=>f.level))].map(level=>({level}));
+      for(const source of sources)for(let attempt=0;attempt<Math.min(60,Math.max(12,c.count*3));attempt++){
+        const raw=source.family?await topic.generateFamily(source.family):await topic.generate(source.level);
+        if(!raw||raw.level!==source.level)continue;
+        const meta=topic.metadata?topic.metadata(raw):raw;
+        if(!meta||meta.level!==raw.level||!meta.family||!meta.contents||!available.some(f=>f.family===meta.family&&f.level===meta.level))continue;
+        const q={...raw,...meta,topicId:topic.id,topicName:topic.name};
+        if(q.challenge&&(!q.answer||!q.steps?.length||!q.challengeReason))continue;
+        const numbers=q.audit?.data?Object.values(q.audit.data).filter(x=>typeof x==='number').map(String):(q.question.match(/[−-]?\d+(?:[.,]\d+)?/g)||[]);
+        const variantKey=q.factKey||JSON.stringify([q.family,numbers,q.answer]);
+        const key=JSON.stringify([q.question.replace(/\s+/g,' ').trim(),(q.options||[]).slice().sort()]);
+        if(seen.has(variantKey)||previous.has(key))continue;
+        seen.add(variantKey);pool.push({...q,key,numbers,variantKey});
+      }
+      await new Promise(resolve=>setTimeout(resolve,0));
+    }
+    const chosen=[],used=new Set(previous),remaining=expected.slice(),familyUse=new Map();let best=[],visits=0;
+    const eligible=q=>remaining[q.level-1]>0&&!used.has(q.key)&&(!q.challenge||(familyUse.get(q.family)||0)<2)&&!chosen.some(x=>similar(x,q));
+    function search(){
+      if(chosen.length>best.length)best=chosen.slice();
+      if(++visits>20000)return false;
+      if(chosen.length===c.count)return topics.every(t=>covers(t,chosen.filter(q=>q.topicId===t.id)));
+      const candidates=pool.filter(eligible),needs=[];
+      for(let l=1;l<=3;l++)if(remaining[l-1]){
+        const rows=candidates.filter(q=>q.level===l);
+        const capacity=new Map();
+        for(const q of rows){const value=capacity.get(q.family)||0;capacity.set(q.family,q.challenge?Math.min(value+1,2-(familyUse.get(q.family)||0)):value+1);}
+        if([...capacity.values()].reduce((a,b)=>a+b,0)<remaining[l-1])return false;
+        needs.push({rows,priority:1,slack:rows.length/remaining[l-1]});
+      }
+      let uncoveredMinimum=0;
+      for(const topic of topics){
+        const local=chosen.filter(q=>q.topicId===topic.id);
+        const totals=topic.requiredContents.map(x=>local.filter(q=>q.contents.includes(x)).length);
+        if(totals.some(n=>!n))uncoveredMinimum+=minimum(topic,c,candidates.filter(q=>q.topicId===topic.id).map(q=>({...q,standard:true})),topic.requiredContents.filter((x,i)=>totals[i]));
+        for(let i=0;i<totals.length;i++)if(!totals[i]||topic.balanceContents&&totals[i]<Math.max(...totals)-1){
+          const rows=candidates.filter(q=>q.topicId===topic.id&&q.contents.includes(topic.requiredContents[i]));
+          if(!rows.length)return false;
+          needs.push({rows,priority:0,slack:rows.length});
+        }
+      }
+      if(uncoveredMinimum>c.count-chosen.length)return false;
+      const need=needs.sort((a,b)=>a.priority-b.priority||a.slack-b.slack)[0];
+      const ranked=copyShuffle(need.rows).map(q=>({q,score:-(familyUse.get(q.family)||0)*100-chosen.filter(x=>x.topicId===q.topicId).length*1000+topics.find(t=>t.id===q.topicId).requiredContents.filter(x=>q.contents.includes(x)&&!chosen.some(v=>v.topicId===q.topicId&&v.contents.includes(x))).length*10000})).sort((a,b)=>b.score-a.score);
+      for(const {q} of ranked){
+        chosen.push(q);used.add(q.key);remaining[q.level-1]--;familyUse.set(q.family,(familyUse.get(q.family)||0)+1);
+        if(search())return true;
+        familyUse.set(q.family,familyUse.get(q.family)-1);remaining[q.level-1]++;used.delete(q.key);chosen.pop();
+        if(visits>20000)break;
+      }
+      return false;
+    }
+    if(!search()){
+      // Si el filtre de capacitat falla abans de triar, mostrem una selecció parcial real.
+      if(!best.length)for(const q of pool)if(eligible(q)){chosen.push(q);used.add(q.key);remaining[q.level-1]--;familyUse.set(q.family,(familyUse.get(q.family)||0)+1);best=chosen.slice();}
+      throw quotaIssue(c,expected,best,visits>20000?'S’ha assolit el límit de cerca sense trobar una selecció compatible.':'No s’ha pogut completar la selecció amb la cobertura i varietat requerides.');
+    }
+    if(remaining.some(Boolean)||topics.some(t=>!covers(t,chosen.filter(q=>q.topicId===t.id))))throw quotaIssue(c,expected,chosen);
+    const grouped=topics.flatMap(t=>chosen.filter(q=>q.topicId===t.id).sort((a,b)=>a.level-b.level));
+    const ordered=c.order==='mixed'?copyShuffle(grouped):grouped;
+    return {version:crypto.randomUUID().slice(0,8),config:JSON.parse(JSON.stringify(c)),questions:ordered.map(({numbers,variantKey,...q},i)=>({...q,number:i+1}))};
+  }
   const noChallengesMessage='No hi ha cap repte adequat disponible per a aquesta selecció. Pots generar una fitxa Estàndard.';
   function minimum(topic,c,items=topic.families,covered=[]){
     const required=topic.requiredContents,full=(1<<required.length)-1;
@@ -128,6 +212,7 @@
     return {version:crypto.randomUUID().slice(0,8),config:JSON.parse(JSON.stringify(c)),questions:ordered.map(({numbers,variantKey,...q},i)=>({...q,number:i+1}))};
   }
   function validate(c, catalog) {
+    if(firstNumeric(c)&&!fixedCounts.includes(c.count))return 'Selecciona 5, 8, 10, 15, 20, 25 o 30 exercicis.';
     if(!(pilot(c,catalog)?Number.isInteger(c.count)&&c.count>=1&&c.count<=30:[5,10,15,20,25,30].includes(c.count))) return 'Selecciona un nombre d’exercicis vàlid.';
     if(!pilot(c,catalog)&&(!Array.isArray(c.percentages)||c.percentages.length!==3||c.percentages.some(p=>!Number.isInteger(p)||p<0||p>100||p%10)||c.percentages.reduce((a,b)=>a+b,0)!==100)) return 'Els percentatges han de sumar exactament el 100 %.';
     if(pilot(c,catalog)&&!worksheetTypes[c.worksheetType])return 'Selecciona un tipus de fitxa vàlid.';
@@ -135,13 +220,14 @@
     if(new Set(c.topics).size!==c.topics.length||c.topics.some(id=>!catalog.some(t=>t.id===id&&t.levels.length))) return 'Hi ha un tema que no està disponible en paper.';
     if(!pilot(c,catalog)&&c.topics.length>c.count) return 'Hi ha més temes que exercicis. Augmenta el nombre d’exercicis o redueix els temes.';
     if(!['grouped','mixed'].includes(c.order)||!['compact','normal','wide'].includes(c.space)||!['docx','pdf','both'].includes(c.format)||!['none','answers','steps'].includes(c.solutions)) return 'Revisa les opcions de la fitxa.';
-    if(pilot(c,catalog))try{typePlan(c,catalog);}catch(e){return e.message;}
+    if(pilot(c,catalog)&&!firstNumeric(c))try{typePlan(c,catalog);}catch(e){return e.message;}
     return '';
   }
   // Flux de cost mínim: el cost de la plaça extra prioritza cobrir el mínim
   // de cada tema. Les arestes residuals permeten corregir assignacions prèvies.
   function allocate(c,catalog) {
     const error=validate(c,catalog); if(error) throw new Error(error);
+    if(firstNumeric(c))return {topics:c.topics.slice(),quotas:difficultyQuotas(c)};
     if(pilot(c,catalog))return typePlan(c,catalog);
     const topics=c.topics.map(id=>catalog.find(t=>t.id===id)), quotas=counts(c.count,c.percentages);
     quotas.forEach((n,i)=>{const available=topics.reduce((s,t)=>s+(t.levels.includes(i+1)?(t.capacities?.[i]??c.count):0),0);if(n>available)throw new Error(`No hi ha prou exercicis diferents de dificultat ${['baixa','mitjana','alta'][i]} en els temes seleccionats: se’n demanen ${n} i n’hi ha ${available}. Redueix-ne la quantitat o selecciona més temes.`);});
@@ -163,6 +249,7 @@
     return topics.map((t,i)=>({topic:t,counts:rows[i]}));
   }
   async function generate(c,catalog,previousKeys=[]) {
+    if(firstNumeric(c))return generateFirstNumeric(c,catalog,previousKeys);
     if(pilot(c,catalog))return generateType(c,catalog,previousKeys);
     const plan=allocate(c,catalog),used=new Set(previousKeys),questions=[];
     for(const {topic,counts:quota} of plan){
@@ -188,5 +275,5 @@
     const version=crypto.randomUUID?crypto.randomUUID().slice(0,8):Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,6);
     return {version,config:JSON.parse(JSON.stringify(c)),questions:ordered.map((q,i)=>({...q,number:i+1}))};
   }
-  window.MIWorksheets={counts,maximum,validate,allocate,generate,worksheetTypes,minimum,noChallengesMessage};
+  window.MIWorksheets={counts,maximum,validate,allocate,generate,worksheetTypes,minimum,noChallengesMessage,fixedCounts,difficultyQuotas};
 })();
