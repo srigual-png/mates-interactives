@@ -1,5 +1,7 @@
 .mi-worksheet{background:var(--card,#fff);border:1px solid var(--border,#dce3ed);border-radius:16px;padding:24px;margin:24px 0;text-align:left}
 .mi-worksheet h2{font-size:1.35rem;margin-bottom:8px}.mi-worksheet p{line-height:1.5;margin:8px 0}
+.mi-worksheet .mi-worksheet-note{background:var(--bg,#f2f6fb);border:1px solid var(--border,#dce3ed);border-left:4px solid var(--primary,#255db2);border-radius:10px;padding:14px 16px;margin:12px 0;color:var(--text,#17263c);overflow-wrap:anywhere}
+.mi-worksheet-note h3{font-size:1.05rem;margin:0 0 8px}.mi-variety-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;margin-top:16px}.mi-variety-actions>div{flex:1 1 240px;min-width:0}.mi-variety-actions button{max-width:100%;white-space:normal}.mi-variety-actions small{margin:6px 0}
 .mi-worksheet-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:20px 0}
 .mi-worksheet label,.mi-worksheet legend{font-weight:600;font-size:.9rem}.mi-worksheet select{display:block;width:100%;margin-top:6px;padding:10px;border:1px solid #8796ad;border-radius:8px;background:var(--card,#fff);color:var(--text,#17263c);font:inherit;min-height:44px}
 .mi-worksheet details{border:1px solid #8796ad;border-radius:8px;padding:10px;margin-top:6px}.mi-worksheet summary{cursor:pointer;min-height:24px}.mi-worksheet .mi-topic-list{max-height:260px;overflow:auto;padding:8px 0}.mi-topic-list label{display:flex;gap:10px;align-items:center;min-height:44px;font-weight:400}.mi-topic-list input{width:19px;height:19px;flex:none}

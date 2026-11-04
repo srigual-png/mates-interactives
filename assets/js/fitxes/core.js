@@ -28,11 +28,11 @@
   // Selecció global només per a 1r numèric. Les metadades i els generadors no canvien.
   async function generateFirstNumeric(c,catalog,previousKeys){
     const error=validate(c,catalog);if(error)throw new Error(error);
-    const expected=difficultyQuotas(c),topics=c.topics.map(id=>catalog.find(t=>t.id===id));
+    const expected=difficultyQuotas(c),topics=c.topics.map(id=>catalog.find(t=>t.id===id)),allowSimilar=c.allowSimilar===true;
     const accepts=f=>expected[f.level-1]>0&&(isStandard(f)||c.worksheetType==='extension'&&f.challenge);
     const coveringMinimum=topics.reduce((n,t)=>n+minimum(t,c,t.families.filter(accepts).map(f=>({...f,standard:true}))),0);
     if(coveringMinimum>c.count)throw quotaIssue(c,expected,[],'La selecció no permet cobrir tots els continguts amb aquesta quantitat.');
-    const previous=new Set(previousKeys),pool=[],seen=new Set();
+    const previous=new Set(previousKeys),pool=[],seen=new Set(),exactSeen=new Set();
     for(const topic of topics){
       const available=topic.families.filter(accepts);
       const sources=topic.generateFamily?available.map(f=>({level:f.level,family:f.generatorId||f.family})):[...new Set(available.map(f=>f.level))].map(level=>({level}));
@@ -44,15 +44,16 @@
         const q={...raw,...meta,topicId:topic.id,topicName:topic.name};
         if(q.challenge&&(!q.answer||!q.steps?.length||!q.challengeReason))continue;
         const numbers=q.audit?.data?Object.values(q.audit.data).filter(x=>typeof x==='number').map(String):(q.question.match(/[−-]?\d+(?:[.,]\d+)?/g)||[]);
-        const variantKey=q.factKey||JSON.stringify([q.family,numbers,q.answer]);
-        const key=JSON.stringify([q.question.replace(/\s+/g,' ').trim(),(q.options||[]).slice().sort()]);
-        if(seen.has(variantKey)||previous.has(key))continue;
-        seen.add(variantKey);pool.push({...q,key,numbers,variantKey});
+        const variantKey=(!allowSimilar&&q.factKey)||JSON.stringify([q.family,numbers,q.answer]);
+        const exactKey=q.question.replace(/\s+/g,' ').trim();
+        const key=JSON.stringify([exactKey,(q.options||[]).slice().sort()]);
+        if(!allowSimilar&&seen.has(variantKey)||previous.has(key)||allowSimilar&&exactSeen.has(exactKey))continue;
+        seen.add(variantKey);exactSeen.add(exactKey);pool.push({...q,key,numbers,variantKey});
       }
       await new Promise(resolve=>setTimeout(resolve,0));
     }
     const chosen=[],used=new Set(previous),remaining=expected.slice(),familyUse=new Map();let best=[],visits=0;
-    const eligible=q=>remaining[q.level-1]>0&&!used.has(q.key)&&(!q.challenge||(familyUse.get(q.family)||0)<2)&&!chosen.some(x=>similar(x,q));
+    const eligible=q=>remaining[q.level-1]>0&&!used.has(q.key)&&(allowSimilar||(!q.challenge||(familyUse.get(q.family)||0)<2)&&!chosen.some(x=>similar(x,q)));
     function search(){
       if(chosen.length>best.length)best=chosen.slice();
       if(++visits>20000)return false;
@@ -61,7 +62,7 @@
       for(let l=1;l<=3;l++)if(remaining[l-1]){
         const rows=candidates.filter(q=>q.level===l);
         const capacity=new Map();
-        for(const q of rows){const value=capacity.get(q.family)||0;capacity.set(q.family,q.challenge?Math.min(value+1,2-(familyUse.get(q.family)||0)):value+1);}
+        for(const q of rows){const value=capacity.get(q.family)||0;capacity.set(q.family,q.challenge&&!allowSimilar?Math.min(value+1,2-(familyUse.get(q.family)||0)):value+1);}
         if([...capacity.values()].reduce((a,b)=>a+b,0)<remaining[l-1])return false;
         needs.push({rows,priority:1,slack:rows.length/remaining[l-1]});
       }

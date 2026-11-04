@@ -32,7 +32,7 @@ function uiState(id,worksheetTypes){
   const host={setAttribute(){},append(){},querySelector(selector){return selector==='form'?form:node(selector.slice(1));},querySelectorAll(selector){return selector.includes('ws-topic')?[checkbox]:[];},
     set innerHTML(html){markup=html;
       for(const match of html.matchAll(/<select id="([^"]+)"[^>]*>([\s\S]*?)<\/select>/g)){
-        const options=[...match[2].matchAll(/<option value="([^"]+)"([^>]*)>([^<]*)<\/option>/g)].map(m=>({value:m[1],selected:m[2].includes('selected'),text:m[3]}));
+        const options=[...match[2].matchAll(/<option value="([^"]*)"([^>]*)>([^<]*)<\/option>/g)].map(m=>({value:m[1],selected:m[2].includes('selected'),text:m[3]}));
         const el=node(match[1]);el.options=options;let value=(options.find(o=>o.selected)||options[0]).value;
         Object.defineProperty(el,'value',{get:()=>value,set:v=>value=options.some(o=>o.value===String(v))?String(v):''});
         Object.defineProperty(el,'selectedOptions',{get:()=>options.filter(o=>o.value===value)});
