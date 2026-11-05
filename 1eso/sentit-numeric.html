@@ -84,6 +84,10 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .slb{font-size:.75rem;color:var(--muted);margin-bottom:6px;}
 .exq{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;font-size:1rem;text-align:center;margin-bottom:16px;box-shadow:var(--sh);min-height:68px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;}
 .exq .fc{font-family:'Courier New',monospace;font-size:1.05rem;font-weight:700;color:var(--pd);}
+.natural-product{width:100%;line-height:1.5;}
+.natural-product p{margin:0;}
+.natural-product p+p{margin-top:.5em;}
+.natural-product .fc span{display:inline-block;}
 .exq .pt{font-size:.93rem;line-height:1.6;text-align:left;width:100%;}
 .gs{background:#fffbea;border:1px solid #f5e0a0;border-radius:12px;padding:13px 15px;margin-bottom:14px;font-size:.86rem;line-height:1.8;}
 .gs h4{color:var(--warn);margin-bottom:5px;font-size:.83rem;}
@@ -762,19 +766,28 @@ function genNaturalPracticeFamily(type){
     var factor=rnd(12,99),base=rnd(2,10)*10,offset=rnd(1,9),add=rnd(0,1)===0;
     var sign=add?'+':'−',other=base+(add?offset:-offset);
     var first=factor*base,second=factor*offset,total=factor*other;
-    if(rnd(0,2)===0){
-      question=`En descompondre ${other} com ${base} ${sign} ${offset}, obtenim ${factor} × ${other} = ${first} ${sign} □. Quin producte parcial falta?`;
+    var partial=rnd(0,2)===0;
+    var originalProduct=`${factor} × ${other}`,baseProduct=`${factor} × ${base}`,offsetProduct=`${factor} × ${offset}`;
+    question=`<div class="natural-product"><p>Volem calcular ${originalProduct}.</p>
+      <p>Descomponem ${other} en ${base} ${sign} ${offset}.</p>
+      <p class="fc"><span>${originalProduct}</span> = <span>${baseProduct}</span> ${sign} <span>${offsetProduct}</span></p>`;
+    if(partial){
+      question+=`<p>Sabem que ${baseProduct} = ${first}.</p><p>Quant val ${offsetProduct}?</p>`;
       correct=String(second);
       wrongs=[first,total,offset].map(String);
     }else{
-      question=`Descompon ${other} com ${base} ${sign} ${offset}. Quin resultat obtens si apliques la propietat distributiva a ${factor} × ${other}?`;
+      question+='<p>Quin és el resultat de la multiplicació inicial?</p>';
       correct=String(total);
       wrongs=[first,second,add?first-second:first+second].map(String);
     }
-    guide=[`Multiplica ${factor} per cadascun dels dos termes de la descomposició.`, `Combina els productes parcials amb el signe ${sign}.`];
-    solution=[`Per la propietat distributiva, ${factor} × (${base} ${sign} ${offset}) = ${factor} × ${base} ${sign} ${factor} × ${offset}.`,
-      `Els productes parcials són ${factor} × ${base} = ${first} i ${factor} × ${offset} = ${second}.`,
-      `Combina els productes: ${first} ${sign} ${second} = ${total}.`];
+    question+='</div>';
+    guide=['La propietat distributiva permet multiplicar cada terme de la descomposició per separat.',
+      partial?`El segon producte és el factor ${factor} multiplicat per ${offset}.`:`Calcula ${baseProduct} i ${offsetProduct}. Després, ${add?'suma':'resta'} els resultats.`];
+    solution=[`Descomponem el factor: ${other} = ${base} ${sign} ${offset}.`,
+      `Apliquem la propietat distributiva: ${originalProduct} = ${baseProduct} ${sign} ${offsetProduct}.`];
+    if(partial)solution.push(`El producte que ens demanen és ${offsetProduct} = ${second}.`);
+    else solution.push(`Calculem els productes: ${baseProduct} = ${first} i ${offsetProduct} = ${second}.`,
+      `Combinem els resultats: ${first} ${sign} ${second} = ${total}.`);
   }else{
     var scale=rnd(1,3),unit=10**scale,target=rnd(1,90)*unit,half=unit/2;
     var lower=target-half,upper=target+half-1;
@@ -4012,7 +4025,15 @@ function resetVariationBagForTopic(topicId){
   else if(topicId==='notacio2'){notacioBag=[];lastNotacioType=null;}
 }
 // Una entrada per inici de pràctica; els exercicis següents no generen esdeveniments.
-function startP(){window.MIAnalytics?.start();state.exCount=0;state.correctStreak=0;resetVariationBagForTopic(TOPICS[state.currentTopic].id);showEx();}
+function startP(){
+  window.MIAnalytics?.start();state.exCount=0;state.correctStreak=0;
+  var topicId=TOPICS[state.currentTopic].id;
+  if(topicId==='naturals'){
+    naturalPracticeLevel=1;naturalPracticeStreak=0;
+    naturalPracticeSeen.clear();lastNaturalPracticeFamily=null;
+  }
+  resetVariationBagForTopic(topicId);showEx();
+}
 function updateSBar(){
   var needed=NEEDED[state.level],pct=Math.min(100,Math.round(state.correctStreak/needed*100));
   document.getElementById('sb').style.width=pct+'%';
@@ -4021,15 +4042,33 @@ function updateSBar(){
 // Ordenar i comparar són variants d’una mateixa família.
 var naturalPracticeFamilies=[[1,2],[3],[4],[5],['recta-graduada'],['dividend-desconegut'],['producte-descomposicio'],['interval-arrodoniment'],[1001]];
 var naturalPracticeSeen=new Set(),lastNaturalPracticeFamily=null;
-function nextNaturalPractice(t){
-  if(state.exCount===0){naturalPracticeSeen.clear();lastNaturalPracticeFamily=null;}
+var naturalPracticeLevel=1,naturalPracticeStreak=0;
+function naturalPracticeGroups(t){
   var groups=[[],[],[]];
   naturalPracticeFamilies.forEach(family=>groups[miTaskDifficulty.getDifficulty(t,{type:family[0]})-1].push(family));
-  var available=groups.filter(group=>group.length);
-  var requested=window.MIDifficultyModes?.getPracticeLevel()??Number(new URLSearchParams(location.search).get('difficulty'));
-  // Les etapes ocupen terços de l’objectiu d’encerts; els intents fan avançar l’etapa.
-  var stage=Math.min(available.length-1,Math.floor(state.exCount*available.length/NEEDED[state.level]));
-  var pool=groups[requested-1]?.length?groups[requested-1]:available[stage];
+  return groups;
+}
+function requestedNaturalPracticeLevel(){
+  return window.MIDifficultyModes?.getPracticeLevel()??Number(new URLSearchParams(location.search).get('difficulty'));
+}
+function updateNaturalPractice(t,isOk){
+  if(requestedNaturalPracticeLevel())return;
+  if(isOk&&++naturalPracticeStreak!==3)return;
+  var groups=naturalPracticeGroups(t),step=isOk?1:-1;
+  // Saltem un nivell buit en la direcció de la transició, sense reetiquetar exercicis.
+  for(var level=naturalPracticeLevel+step;level>=1&&level<=groups.length;level+=step){
+    if(groups[level-1].length){naturalPracticeLevel=level;naturalPracticeStreak=0;return;}
+  }
+  if(!isOk)naturalPracticeStreak=0;
+}
+function nextNaturalPractice(t){
+  var groups=naturalPracticeGroups(t),requested=requestedNaturalPracticeLevel();
+  if(!groups[naturalPracticeLevel-1].length){
+    var first=groups.findIndex(group=>group.length);
+    if(first<0)throw Error('No hi ha famílies disponibles per practicar Nombres naturals.');
+    naturalPracticeLevel=first+1;
+  }
+  var pool=groups[requested-1]?.length?groups[requested-1]:groups[naturalPracticeLevel-1];
   var alternatives=pool.filter(family=>family!==lastNaturalPracticeFamily);
   var candidates=alternatives.length?alternatives:pool;
   var unseen=candidates.filter(family=>!naturalPracticeSeen.has(family));
@@ -4082,6 +4121,10 @@ function checkOpen(){
   processPracticeAnswer(ok,val);
 }
 function processPracticeAnswer(isOk,studentAnswer){
+  if(currentEx.topicId==='naturals'){
+    if(state.answered)return;
+    updateNaturalPractice(TOPICS[state.currentTopic],isOk);
+  }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
   var fb=document.getElementById('fbA');
