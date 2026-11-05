@@ -10,7 +10,11 @@
   const support=document.getElementById('bL1')||document.getElementById('btnLvl1')||document.getElementById('level1');
   if(support)support.parentElement.before(holder);
   const legacyControl=document.getElementById('rationalDifficultyControl');if(legacyControl){legacyControl.style.setProperty('display','none','important');}
-  function getPracticeLevel(){return Number(legacy&&currentTopic()?.id==='racionals'?legacy.value:practice.value);}
+  function getPracticeLevel(){
+    const topic=currentTopic();
+    if(topic?.adaptivePractice)return 0;
+    return Number(legacy&&topic?.id==='racionals'?legacy.value:practice.value);
+  }
   function setPracticeLevel(n){if(![0,1,2,3].includes(n))throw Error('Dificultat invàlida.');practice.value=String(n);if(legacy)legacy.value=String(n);}
   practice.addEventListener('change',()=>setPracticeLevel(Number(practice.value)));
   const initial=Number(new URLSearchParams(location.search).get('difficulty')||legacy?.value||0);setPracticeLevel([1,2,3].includes(initial)?initial:0);
