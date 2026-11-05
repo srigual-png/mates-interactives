@@ -780,7 +780,7 @@ function genNaturalPracticeFamily(type){
       `Apliquem la propietat distributiva: ${originalProduct} = ${baseProduct} ${sign} ${offsetProduct}.`,
       `Calculem els productes: ${baseProduct} = ${first} i ${offsetProduct} = ${second}.`,
       `Combinem els resultats: ${first} ${sign} ${second} = ${total}.`];
-  }else{
+  }else if(type==='interval-arrodoniment'){
     var scale=rnd(1,3),unit=10**scale,target=rnd(1,90)*unit,half=unit/2;
     var lower=target-half,upper=target+half-1;
     var position=['','a la desena més propera','a la centena més propera','al miler més proper'][scale];
@@ -793,8 +793,71 @@ function genNaturalPracticeFamily(type){
     solution=[`La meitat de ${unit} és ${half}. L’empat inferior és ${target} − ${half} = ${lower} i puja a ${target}.`,
       `L’empat superior és ${target} + ${half} = ${upper+1} i puja a ${target+unit}. Per això el major valor admès és ${upper}.`,
       `Tots els naturals de ${lower} a ${upper}, inclosos, donen ${target}. Just a fora, ${lower-1} s’arrodoneix a ${target-unit} i ${upper+1} a ${target+unit}.`];
-  }
+  }else return drawNaturalReasoningPractice(type);
   return {type,question,correct,options:buildOpts(correct,wrongs),guide,solution,validation};
+}
+
+function genNaturalReasoningPractice(type){
+  let answer,wrongs,question,guide,solution;
+  if(type==='operacions-valor-desconegut'){
+    const variant=rnd(0,2),a=rnd(2,9),value=rnd(3,12);
+    const divide=variant===2,subtract=variant===1;
+    // A la variant de suma, el segon terme no pot ser un residu de la divisió per a.
+    const b=variant===0?rnd(a,a+6):rnd(1,Math.min(9,a*value-1));
+    const intermediate=divide?value:a*value;
+    const c=intermediate+(subtract?-b:b),sign=subtract?'−':'+';
+    answer=divide?a*value:value;
+    const expression=x=>divide?`${x} ÷ ${a}`:`${a} × ${x}`;
+    question=`Quin nombre falta perquè aquesta igualtat sigui correcta?<br><span class="fc">${expression('□')} ${sign} ${b} = ${c}</span>`;
+    guide=['Desfés primer l’operació que es fa al final de la igualtat.', `Després, desfés ${divide?'la divisió':'la multiplicació'}.`];
+    solution=[`${subtract?`Sumem ${b} al resultat`:`Restem ${b} del resultat`}: ${c} ${subtract?'+':'−'} ${b} = ${intermediate}.`,
+      `${divide?'Multipliquem per':'Dividim entre'} ${a}: ${intermediate} ${divide?'×':'÷'} ${a} = ${answer}.`,
+      `Comprovem: ${expression(answer)} ${sign} ${b} = ${intermediate} ${sign} ${b} = ${c}.`];
+    wrongs=[intermediate,divide?c*a:c/a,divide?intermediate/a:intermediate*a,answer-1,answer+1,answer+2]
+      .filter(n=>Number.isInteger(n)&&n>0);
+  }else if(type==='nombres-amb-condicions'){
+    const thousands=rnd(1,9),fixed=rnd(1,9),ratioVariant=rnd(0,1)===0;
+    const relation=ratioVariant?rnd(2,3):rnd(1,4);
+    const digit=rnd(1,ratioVariant?Math.floor(9/relation):9-relation);
+    const related=x=>ratioVariant?x*relation:x+relation;
+    const makeNumber=(x,y)=>ratioVariant?1000*thousands+100*fixed+10*x+y:1000*thousands+100*y+10*x+fixed;
+    const firstPlace='desenes',secondPlace=ratioVariant?'unitats':'centenes';
+    const fixedPlace=ratioVariant?'centenes':'unitats';
+    const rule=ratioVariant?`La xifra de les unitats és ${relation===2?'el doble':'el triple'} de la de les desenes.`
+      :`La xifra de les centenes és ${relation} ${relation===1?'unitat més gran':'unitats més gran'} que la de les desenes.`;
+    const remaining=digit+related(digit),digitSum=thousands+fixed+remaining;
+    const possible=Array.from({length:10},(_,x)=>[x,related(x)]).filter(([,y])=>y<=9);
+    const matches=possible.filter(([x,y])=>x+y===remaining);
+    if(matches.length!==1)throw Error('Les condicions del nombre han de donar una única solució.');
+    const [x,y]=matches[0];
+    answer=makeNumber(x,y);
+    question=`Quin nombre de quatre xifres compleix totes aquestes pistes?<br>La xifra dels milers és ${thousands}.<br>La xifra de les ${fixedPlace} és ${fixed}.<br>${rule}<br>La suma de les quatre xifres és ${digitSum}.`;
+    guide=['Resta de la suma total les dues xifres que ja coneixes.', 'Prova valors per a les desenes i calcula l’altra xifra amb la relació donada.'];
+    solution=[`Les xifres conegudes sumen ${thousands} + ${fixed} = ${thousands+fixed}.`,
+      `Les ${firstPlace} i les ${secondPlace} han de sumar ${digitSum} − ${thousands+fixed} = ${remaining}.`,
+      `Amb la relació donada, els parells de xifres possibles donen aquestes sumes: ${possible.map(([a,b])=>`${a} + ${b} = ${a+b}`).join('; ')}. Només ${x} + ${y} dona ${remaining}.`,
+      `Col·loquem ${x} a les ${firstPlace} i ${y} a les ${secondPlace}. El nombre és ${answer} i les seves xifres sumen ${digitSum}.`];
+    wrongs=[makeNumber(y,x),...possible.filter(([a])=>a!==x).sort(([a],[b])=>Math.abs(a-x)-Math.abs(b-x)).map(([a,b])=>makeNumber(a,b))];
+  }else if(type==='patrons-numerics'){
+    const variant=rnd(0,2),start=rnd(2,12);
+    const change=variant===2?0:rnd(1,3)*(variant===1?-1:1);
+    const first=rnd(2,6)+(change<0?-4*change:0),other=variant===2?first+rnd(2,6):null;
+    const jumps=Array.from({length:variant===2?6:5},(_,i)=>variant===2?(i%2===0?first:other):first+i*change);
+    const terms=[start];
+    jumps.forEach(jump=>terms.push(terms.at(-1)+jump));
+    const shown=terms.slice(0,-1),last=shown.at(-1),nextJump=jumps.at(-1);
+    answer=terms.at(-1);
+    const clue=variant===2?'Els salts entre termes alternen dos valors.':'Els salts entre termes canvien sempre en la mateixa quantitat.';
+    question=`Observa la successió i continua la pauta indicada.<br><span class="fc">${shown.join(', ')}, …</span><br>${clue} Quin nombre ve després?`;
+    guide=['Resta cada terme del següent per trobar els salts.', variant===2?'Separa els salts de les posicions senars i parelles.':'Compara els salts consecutius.'];
+    const pattern=variant===2?`Els salts alternen ${first} i ${other}. Després del salt de ${first} toca el de ${other}.`
+      :`Els salts ${change>0?'augmenten':'disminueixen'} de ${Math.abs(change)} en ${Math.abs(change)}. El següent és ${jumps.at(-2)} ${change>0?'+':'−'} ${Math.abs(change)} = ${nextJump}.`;
+    solution=[`Calculem els salts: ${shown.slice(1).map((n,i)=>`${n} − ${shown[i]} = ${jumps[i]}`).join('; ')}.`,
+      pattern,`Sumem el salt següent a l’últim terme: ${last} + ${nextJump} = ${answer}.`];
+    wrongs=[last+jumps.at(-2),last+jumps.at(-3),answer-1,answer+1,answer+2];
+  }else throw Error('Família de pràctica desconeguda: '+type);
+  const correct=String(answer);
+  return {type,question,correct,options:buildOpts(correct,wrongs.map(String)),guide,solution};
 }
 
 function explainNaturalOrder(a,b){
@@ -4022,7 +4085,7 @@ function startP(){
   var topicId=TOPICS[state.currentTopic].id;
   if(topicId==='naturals'){
     naturalPracticeLevel=1;naturalPracticeStreak=0;
-    naturalPracticeSeen.clear();lastNaturalPracticeFamily=null;
+    naturalPracticeSeen.clear();naturalReasoningRecent.clear();lastNaturalPracticeFamily=null;
   }
   resetVariationBagForTopic(topicId);showEx();
 }
@@ -4032,8 +4095,16 @@ function updateSBar(){
   document.getElementById('slb').textContent='Encerts seguits: '+state.correctStreak+' / '+needed;
 }
 // Ordenar i comparar són variants d’una mateixa família.
-var naturalPracticeFamilies=[[1,2],[3],[4],[5],['recta-graduada'],['dividend-desconegut'],['producte-descomposicio'],['interval-arrodoniment'],[1001]];
+var naturalPracticeFamilies=[[1,2],[3],[4],[5],['recta-graduada'],['dividend-desconegut'],['producte-descomposicio'],['operacions-valor-desconegut'],['interval-arrodoniment'],[1001],['nombres-amb-condicions'],['patrons-numerics']];
 var naturalPracticeSeen=new Set(),lastNaturalPracticeFamily=null;
+var naturalReasoningRecent=new Map();
+function drawNaturalReasoningPractice(type){
+  const recent=naturalReasoningRecent.get(type)||[];
+  let exercise=genNaturalReasoningPractice(type);
+  for(let retry=0;retry<4&&recent.includes(exercise.question);retry++)exercise=genNaturalReasoningPractice(type);
+  naturalReasoningRecent.set(type,[recent.at(-1),exercise.question].filter(Boolean));
+  return exercise;
+}
 var naturalPracticeLevel=1,naturalPracticeStreak=0;
 function naturalPracticeGroups(t){
   var groups=[[],[],[]];
