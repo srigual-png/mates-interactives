@@ -106,9 +106,32 @@
     return [Number(digits.slice(0,-2)+digits.slice(-2).split('').reverse().join('')),Math.floor(n/10),n%1000,n+10,n+100,n+1,n-1,n-10,n-100]
       .filter(v=>v>=0&&v<=999999);
   }
-  function regroupExplanation(coefficient,place){
-    const order=Math.log10(place);
-    return `${coefficient} ${orders[order]} es poden reagrupar en 1 ${singularOrders[order+1]} i ${coefficient%10} ${orderName(order,coefficient%10)}.`;
+  function regroupSteps(terms){
+    const counts=orders.map((_,i)=>terms.find(([,p])=>p===10**i)?.[0]??0),steps=[];
+    for(let order=0;order<orders.length-1;order++){
+      const count=counts[order];
+      if(count<10)continue;
+      const carry=Math.floor(count/10),left=count%10,upper=counts[order+1];
+      counts[order]=left;counts[order+1]+=carry;
+      steps.push(`${count} ${orders[order]} equivalen a ${carry} ${orderName(order+1,carry)}${left?' i '+left+' '+orderName(order,left):''}.`);
+      if(upper)steps.push(`Sumem el que hem reagrupat: ${upper} ${orderName(order+1,upper)} + ${carry} ${orderName(order+1,carry)} = ${counts[order+1]} ${orders[order+1]}.`);
+    }
+    return steps;
+  }
+  function positionalChange(q,rnd,buildOpts){
+    const {digit,from,to}=q.reasoningData;
+    const oldValue=digit*from,newValue=digit*to,rest=rnd(2,9)*to*10;
+    const initial=rest+oldValue,changed=rest+newValue,increase=changed-initial;
+    const source=orderName(Math.log10(from),digit),target=orderName(Math.log10(to),digit);
+    return {...q,
+      question:`En el nombre ${fmt(initial)}, substituïm ${digit} ${source} per ${digit} ${target}. La resta de xifres conserva el seu valor. Quantes unitats augmenta el nombre?`,
+      correct:fmt(increase),options:buildOpts(fmt(increase),[oldValue,newValue,newValue+oldValue].map(fmt)),decimalAnswer:'integer',
+      guide:['Calcula el valor de la xifra a la posició inicial i a la nova.', 'Resta el valor inicial del nou valor.'],
+      solution:[`El nombre inicial és ${fmt(initial)}.`,
+        `A la posició inicial, ${digit} × ${fmt(from)} = ${fmt(oldValue)}.`,
+        `A la nova posició, ${digit} × ${fmt(to)} = ${fmt(newValue)}. El nombre nou és ${fmt(changed)}.`,
+        `L’augment és ${fmt(newValue)} − ${fmt(oldValue)} = ${fmt(increase)} unitats.`,
+        `Comprovació: ${fmt(initial)} + ${fmt(increase)} = ${fmt(changed)}.`]};
   }
   function generate(type,rnd,buildOpts){
     let question,correct,wrongs,guide,solution,decimalAnswer,unit;
@@ -141,15 +164,18 @@
       const extra=places.filter((_,i)=>i!==pivot);
       const terms=[[rnd(10,19),places[pivot]]];
       for(let i=1;i<count;i++)terms.push([rnd(i===1?1:0,8),extra.splice(rnd(0,extra.length-1),1)[0]]);
+      const visible=terms.filter(([d])=>d!==0);
       terms.sort((a,b)=>b[1]-a[1]);
+      visible.sort((a,b)=>b[1]-a[1]);
       const total=terms.reduce((sum,[digit,place])=>sum+digit*place,0);
       const [coefficient,place]=terms.find(([digit])=>digit>9);
-      question=`Quin nombre representa aquesta descomposició?<br><span class="fc">${terms.map(([d,p])=>d+' × '+fmt(p)).join(' + ')}</span>`;
+      question=rnd(0,1)===0?`Un nombre està format per ${visible.map(([d,p])=>d+' '+orderName(Math.log10(p),d)).join(', ').replace(/, ([^,]+)$/,' i $1')}. Quin nombre és?`:
+        `Quin nombre representa aquesta descomposició?<br><span class="fc">${visible.map(([d,p])=>d+' × '+fmt(p)).join(' + ')}</span>`;
       correct=fmt(total);
       wrongs=[total-10*place,total-coefficient*place+coefficient,total-coefficient*place,
         ...terms.map(([d,p])=>total-d*p),total-place,total-1,total-2,total-3].map(fmt);
       guide=['Calcula el valor de cada terme.', 'Recorda que deu unitats d’un ordre equivalen a una de l’ordre immediatament superior.'];
-      solution=terms.map(([d,p])=>`${d} × ${fmt(p)} = ${fmt(d*p)}.`).concat(regroupExplanation(coefficient,place),`Sumem els valors: ${terms.map(([d,p])=>fmt(d*p)).join(' + ')} = ${correct}.`);
+      solution=regroupSteps(visible).concat(`Sumem els valors: ${visible.map(([d,p])=>fmt(d*p)).join(' + ')} = ${correct}.`);
       decimalAnswer='integer';
     }else if(type==='equivalencia-ordres-posicionals'){
       const target=rnd(0,3),upper=rnd(target+2,5),lower=rnd(target+1,upper-1),a=rnd(1,9),b=rnd(0,9);
@@ -171,11 +197,14 @@
       const expression=digits.map((d,i)=>d?d+' × '+fmt(10**i):'').filter(Boolean).reverse().join(' + ');
       const option=(value,delta)=>`(${fmt(value)}; ${fmt(delta)})`;
       correct=option(actual,gap);wrongs=[option(gap,actual),option(target,gap),option(actual,digit*10**from)];
-      question=`El nombre és ${fmt(target)}. En Pol escriu:<br><span class="fc">${expression}</span><br>Quin valor representa l’expressió i quant hi falta per arribar al nombre correcte? Escriu primer el valor i després la diferència, separats per un punt i coma.`;
+      question=`En Pol ha escrit una descomposició incorrecta del nombre ${fmt(target)}.<br><span class="fc">${expression}</span><div><p>1. Quin nombre representa realment la seva expressió?</p><p>2. Quantes unitats falten per arribar a ${fmt(target)}?</p><p>Indica primer el valor representat i després la diferència, separats per un punt i coma.</p></div>`;
       guide=['Calcula el valor real de cada terme escrit per en Pol.','Resta aquest resultat del nombre objectiu.'];
-      solution=[`Calculem els termes: ${digits.map((d,i)=>d?fmt(d*10**i):'').filter(Boolean).reverse().join(' + ')} = ${fmt(actual)}.`,
-        `En Pol ha col·locat la xifra ${digit} a les ${orders[to]} en lloc de les ${orders[from]}.`,
-        `Calculem què hi falta: ${fmt(target)} − ${fmt(actual)} = ${fmt(gap)}. La parella és ${correct}.`];
+      const contributions=digits.map((d,i)=>d?[d,10**i]:null).filter(Boolean).reverse();
+      solution=[`Calculem cada terme: ${contributions.map(([d,p])=>`${d} × ${fmt(p)} = ${fmt(d*p)}`).join('; ')}.`,
+        `Sumem els valors: ${contributions.map(([d,p])=>fmt(d*p)).join(' + ')} = ${fmt(actual)}.`,
+        `L’objectiu és ${fmt(target)}. En Pol ha col·locat la xifra ${digit} a les ${orders[to]} en lloc de les ${orders[from]}.`,
+        `Restem el valor representat del nombre objectiu: ${fmt(target)} − ${fmt(actual)} = ${fmt(gap)}.`,
+        `La resposta, en l’ordre demanat, és ${correct}.`];
       decimalAnswer='pair';
     }else throw Error('Família decimal desconeguda: '+type);
     const openOnly=type==='escriure-xifres-a-paraules';
@@ -217,5 +246,5 @@
     q.solution.push(`Sumem les aportacions: ${nonzero.map(fmt).join(' + ')} = ${fmt(n)}.`);
     return q;
   }
-  root.MIDecimalPractice={words,spelling,grade,generate,base};
+  root.MIDecimalPractice={words,spelling,grade,generate,base,positionalChange};
 })(globalThis);

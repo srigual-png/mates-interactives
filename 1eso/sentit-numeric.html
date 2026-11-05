@@ -459,7 +459,7 @@ Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immed
   </div>
   <div id="fbA"></div>
   <button class="bp" id="bNext" onclick="nextEx()" style="display:none">Següent exercici &rarr;</button>
-  <button class="bs" id="bChg" onclick="showHome()" style="display:none">&#8592; Canviar de tema</button>
+  <button class="bs" id="bChg" onclick="leavePractice()" style="display:none">&#8592; Canviar de tema</button>
 </div>
 <div class="screen" id="sExam"><div id="examCfgArea"></div><div id="examC"></div><div class="og" id="examO"></div><div id="examF"></div><button class="bp" id="bNExam" onclick="nextEQ()" style="display:none">Seguent &rarr;</button><div id="examR" style="display:none"></div></div>
 <div class="screen" id="sTest"><div id="testC"></div></div>
@@ -3982,7 +3982,7 @@ function selTopic(i){
   examLaunch.dataset.topic=t.id;
   document.getElementById('sIntro').toggleAttribute('data-adaptive-practice',!!t.adaptivePractice);
   var objective=t.adaptivePractice?'preguntes':'encerts';
-  document.querySelector('#bL1 small').textContent='Guiat · '+NEEDED[1]+' '+objective;
+  document.querySelector('#bL1 small').textContent='Guiat · '+NEEDED[1]+' '+(t.id==='decimal_sys'?'punts':objective);
   document.querySelector('#bL2 small').textContent='Sol/a · '+NEEDED[2]+' '+objective;
   document.getElementById('bL1').classList.add('active');
   document.getElementById('bL2').classList.remove('active');
@@ -4099,7 +4099,12 @@ function startP(){
   window.MIAnalytics?.start();state.exCount=0;state.correctStreak=0;
   var topic=TOPICS[state.currentTopic];
   if(topic.adaptivePractice)adaptivePracticeSessions[topic.id]={points:0,seen:new Set(),questions:new Set(),lastFamily:null};
+  if(isGuidedDecimalPractice())Object.assign(adaptivePracticeSessions.decimal_sys,{correct:0,incorrect:0,ended:false});
   resetVariationBagForTopic(topic.id);showEx();
+}
+function isGuidedDecimalPractice(){return TOPICS[state.currentTopic]?.id==='decimal_sys'&&state.level===1;}
+function adaptiveGoalReached(){
+  return (isGuidedDecimalPractice()?adaptivePracticeSessions.decimal_sys.points:state.exCount)>=NEEDED[state.level];
 }
 function updateSBar(){
   var topic=TOPICS[state.currentTopic],needed=NEEDED[state.level];
@@ -4120,9 +4125,10 @@ function adaptivePracticeGroups(t){
   adaptivePracticeFamilies[t.id].forEach(family=>groups[miTaskDifficulty.getDifficulty(t,{type:family[0]})-1].push(family));
   return groups;
 }
+function adaptiveLevel(points){return 1+ADAPTIVE_PRACTICE_THRESHOLDS[state.level].filter(threshold=>points>=threshold).length;}
 function nextAdaptivePractice(t){
   var session=adaptivePracticeSessions[t.id],groups=adaptivePracticeGroups(t);
-  var level=1+ADAPTIVE_PRACTICE_THRESHOLDS[state.level].filter(points=>session.points>=points).length;
+  var level=adaptiveLevel(session.points);
   var pool=groups.slice(0,level).filter(group=>group.length).at(-1)||groups.find(group=>group.length);
   if(!pool)throw Error('No hi ha famílies disponibles per practicar «'+t.name+'».');
   var alternatives=pool.filter(family=>family!==session.lastFamily);
@@ -4134,22 +4140,24 @@ function nextAdaptivePractice(t){
   }
   var ordered=shuffle(unseen.slice()).concat(shuffle(candidates.filter(family=>!unseen.includes(family))));
   if(!ordered.includes(session.lastFamily)&&pool.includes(session.lastFamily))ordered.push(session.lastFamily);
-  for(const family of ordered){
+  let selected;
+  search: for(const family of ordered){
     for(let attempt=0;attempt<5;attempt++){
       const type=family[rnd(0,family.length-1)];
       const exercise=t.id==='naturals'?(type===1001?MIFirstNumericTasks.generate('paquets-exactes'):
         typeof type==='number'?genNaturalType(type):genNaturalPracticeFamily(type)):
         type===1001?MIFirstNumericTasks.generate('xifres-amb-condicions'):
-        type===1002?MIFirstNumericTasks.generate('canvi-posicional'):
+        type===1002?MIDecimalPractice.positionalChange(MIFirstNumericTasks.generate('canvi-posicional'),rnd,buildOpts):
         typeof type==='number'?genDecimalSysType(type,true):MIDecimalPractice.generate(type,rnd,buildOpts);
-      if(session.questions.has(exercise.question))continue;
-      session.questions.add(exercise.question);
-      session.seen.add(family);
-      session.lastFamily=family;
-      return miTaskDifficulty.annotate(t,exercise);
+      if(!session.questions.has(exercise.question)){selected={exercise,family};break search;}
+      if(isGuidedDecimalPractice())selected??={exercise,family};
     }
   }
-  throw Error('No s’ha pogut trobar cap pregunta nova per a aquesta pràctica.');
+  if(!selected)throw Error('No s’ha pogut trobar cap pregunta nova per a aquesta pràctica.');
+  session.questions.add(selected.exercise.question);
+  session.seen.add(selected.family);
+  session.lastFamily=selected.family;
+  return miTaskDifficulty.annotate(t,selected.exercise);
 }
 function showEx(){
   state.answered=false;window.MIAnalytics?.shown();var t=TOPICS[state.currentTopic];
@@ -4175,7 +4183,10 @@ function showEx(){
     document.getElementById('og').innerHTML=currentEx.options.map(function(o,i){return '<button class="ob" onclick="selAns('+i+',this)">'+o+'</button>';}).join('');
   }
   document.getElementById('fbA').innerHTML='';
-  document.getElementById('bNext').style.display='none';document.getElementById('bChg').style.display='none';
+  document.getElementById('bNext').style.display='none';
+  var leave=document.getElementById('bChg'),guidedDecimal=isGuidedDecimalPractice();
+  leave.style.display=guidedDecimal?'block':'none';
+  leave.textContent=guidedDecimal?'Finalitza la pràctica':'← Canviar de tema';
   showScreen('sEx');
 }
 function selAns(idx,btn){
@@ -4199,6 +4210,7 @@ function processPracticeAnswer(isOk,studentAnswer,message){
     if(state.answered)return;
     var session=adaptivePracticeSessions[topic.id];
     session.points=Math.max(0,Math.min(needed,session.points+(isOk?1:-1)));
+    if(isGuidedDecimalPractice())session[isOk?'correct':'incorrect']++;
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
@@ -4214,7 +4226,13 @@ function processPracticeAnswer(isOk,studentAnswer,message){
     fb.innerHTML='<div class="fb ko"><h4>&#10060; Incorrecte</h4>La teva resposta: <b>'+escHtml(studentAnswer||'—')+'</b><br>'+(message?'<p>'+escHtml(message)+'</p>':'')+'La resposta era: <b>'+currentEx.correct+'</b><br>'+miReviewHtml(currentEx)+'<b>📘 Resolució pas a pas:</b>'+solHTML+miTheoryLinkHtml(currentEx.topicId)+'</div>';
   }
   var nextBtn=document.getElementById('bNext');
-  var finished=adaptive&&state.exCount>=needed;
+  var finished=adaptive&&adaptiveGoalReached();
+  if(topic.id==='decimal_sys'&&!finished){
+    var nextLevel=adaptiveLevel(session.points);
+    if(nextLevel!==currentEx.taskDifficulty){
+      fb.insertAdjacentHTML('beforeend','<p>Amb el progrés actual, el següent exercici serà de nivell N'+nextLevel+'.</p>');
+    }
+  }
   if(finished)markDone();
   nextBtn.textContent=finished?'Veure el resum →':'Següent exercici →';
   nextBtn.style.display='block';
@@ -4231,7 +4249,8 @@ function nextEx(){
   var topic=TOPICS[state.currentTopic],needed=NEEDED[state.level];
   if(topic.adaptivePractice){
     if(!state.answered)return;
-    if(state.exCount>=needed){showCongrats();return;}
+    if(isGuidedDecimalPractice()&&adaptivePracticeSessions.decimal_sys.ended)return;
+    if(adaptiveGoalReached()){showCongrats();return;}
   }else if(state.correctStreak>=needed&&state.done.includes(topic.id)){showCongrats();return;}
   showEx();
 }
@@ -4239,10 +4258,22 @@ function showCongrats(){
   var t=TOPICS[state.currentTopic],ni=t.course==="1r"?nextCoreIndex(state.currentTopic):-1,next=ni>=0?TOPICS[ni]:null;
   var message=t.adaptivePractice?'<h2>Pràctica completada</h2><p>Has respost '+state.exCount+' preguntes de <b>'+t.name+'</b>.</p>':
     '<div class="tr">&#127942;</div><h2>Excel·lent!</h2><p>Has dominat <b>'+t.name+'</b>!</p>';
+  if(isGuidedDecimalPractice()){
+    var session=adaptivePracticeSessions.decimal_sys;
+    session.ended=true;state.answered=true;
+    message='<h2>'+(adaptiveGoalReached()?'Objectiu assolit':'Pràctica finalitzada voluntàriament')+'</h2>'+
+      '<p>Preguntes contestades: '+(session.correct+session.incorrect)+' · Encerts: '+session.correct+' · Errors: '+session.incorrect+'</p>'+
+      '<p>Puntuació neta final: '+session.points+'/'+NEEDED[state.level]+' punts.</p>';
+    document.getElementById('bChg').style.display='none';
+    document.getElementById('openWrap').style.display='none';
+    document.getElementById('og').innerHTML='';
+  }
   document.getElementById('fbA').innerHTML='<div class="cg">'+message+'<button class="bp" onclick="showHome()">Tornar al menú</button>'+(next?'<button class="bs" onclick="selTopic('+ni+')">Següent: '+next.name+' &rarr;</button>':'')+'</div>';
   document.getElementById('bNext').style.display='none';
 }
+function leavePractice(){if(isGuidedDecimalPractice())showCongrats();else showHome();}
 function goBack(){
+  if(document.getElementById('sEx').classList.contains('active')&&isGuidedDecimalPractice()&&!adaptivePracticeSessions.decimal_sys.ended){showCongrats();return;}
   var ampProb=document.getElementById('sAmpProb'),ampResults=document.getElementById('sAmpResults'),ampHome=document.getElementById('sAmpHome');
   if((ampProb&&ampProb.classList.contains('active'))||(ampResults&&ampResults.classList.contains('active'))){showAmpHome();return;}
   if(ampHome&&ampHome.classList.contains('active')){showHome();return;}
