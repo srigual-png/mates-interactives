@@ -766,28 +766,20 @@ function genNaturalPracticeFamily(type){
     var factor=rnd(12,99),base=rnd(2,10)*10,offset=rnd(1,9),add=rnd(0,1)===0;
     var sign=add?'+':'−',other=base+(add?offset:-offset);
     var first=factor*base,second=factor*offset,total=factor*other;
-    var partial=rnd(0,2)===0;
     var originalProduct=`${factor} × ${other}`,baseProduct=`${factor} × ${base}`,offsetProduct=`${factor} × ${offset}`;
     question=`<div class="natural-product"><p>Volem calcular ${originalProduct}.</p>
       <p>Descomponem ${other} en ${base} ${sign} ${offset}.</p>
-      <p class="fc"><span>${originalProduct}</span> = <span>${baseProduct}</span> ${sign} <span>${offsetProduct}</span></p>`;
-    if(partial){
-      question+=`<p>Sabem que ${baseProduct} = ${first}.</p><p>Quant val ${offsetProduct}?</p>`;
-      correct=String(second);
-      wrongs=[first,total,offset].map(String);
-    }else{
-      question+='<p>Quin és el resultat de la multiplicació inicial?</p>';
-      correct=String(total);
-      wrongs=[first,second,add?first-second:first+second].map(String);
-    }
-    question+='</div>';
+      <p class="fc"><span>${originalProduct}</span> = <span>${baseProduct}</span> ${sign} <span>${offsetProduct}</span></p>
+      <p>Quant val cadascuna de les dues multiplicacions de la dreta? Escriu els resultats d’esquerra a dreta, separats per un punt i coma.</p></div>`;
+    correct=`${first}; ${second}`;
+    wrongs=[`${second}; ${first}`,`${first}; ${offset}`,`${total}; ${second}`];
+    validation={type:'tuple'};
     guide=['La propietat distributiva permet multiplicar cada terme de la descomposició per separat.',
-      partial?`El segon producte és el factor ${factor} multiplicat per ${offset}.`:`Calcula ${baseProduct} i ${offsetProduct}. Després, ${add?'suma':'resta'} els resultats.`];
+      `Calcula primer ${baseProduct} i després ${offsetProduct}.`];
     solution=[`Descomponem el factor: ${other} = ${base} ${sign} ${offset}.`,
-      `Apliquem la propietat distributiva: ${originalProduct} = ${baseProduct} ${sign} ${offsetProduct}.`];
-    if(partial)solution.push(`El producte que ens demanen és ${offsetProduct} = ${second}.`);
-    else solution.push(`Calculem els productes: ${baseProduct} = ${first} i ${offsetProduct} = ${second}.`,
-      `Combinem els resultats: ${first} ${sign} ${second} = ${total}.`);
+      `Apliquem la propietat distributiva: ${originalProduct} = ${baseProduct} ${sign} ${offsetProduct}.`,
+      `Calculem els productes: ${baseProduct} = ${first} i ${offsetProduct} = ${second}.`,
+      `Combinem els resultats: ${first} ${sign} ${second} = ${total}.`];
   }else{
     var scale=rnd(1,3),unit=10**scale,target=rnd(1,90)*unit,half=unit/2;
     var lower=target-half,upper=target+half-1;
@@ -3999,7 +3991,7 @@ function openOk1Legacy(correct,value,ex){
   return false;
 }
 function openHint1(ex){
-  if(ex?.topicId==='naturals'&&ex.type==='interval-arrodoniment')return 'Escriu els dos valors separats per un punt i coma.';
+  if(ex?.topicId==='naturals'&&['interval-arrodoniment','producte-descomposicio'].includes(ex.type))return 'Escriu els dos valors en l’ordre demanat, separats per un punt i coma.';
   var q=stripHtmlOpen(ex&&ex.question||'').toLowerCase();
   if(q.indexOf('percent')>=0)return 'Escriu el percentatge en la forma demanada. Pots utilitzar el símbol %.';
   if(q.indexOf('fracci')>=0)return 'Si cal una fracció, escriu-la amb una barra, per exemple 3/4.';

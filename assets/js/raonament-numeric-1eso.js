@@ -13,10 +13,27 @@
   }
   const catalog=[
     {id:'paquets-exactes',topic:'naturals',level:3,reason:'Planificar una combinació exacta de dos formats i demostrar que minimitza el nombre de paquets.',build(r){
-      const [a,b]=pick(r,[[4,7],[5,8],[6,10],[7,11]]),x=b+integer(r,1,4),y=a+integer(r,1,4),total=a*x+b*y;
-      const candidates=[];for(let i=1;i*a<total;i++)if((total-i*a)%b===0&&total-i*a>=b)candidates.push([i,(total-i*a)/b]);
-      const best=candidates.reduce((v,p)=>p[0]+p[1]<v[0]+v[1]?p:v);
-      return task(this,{a,b,total},`Cal repartir exactament ${total} adhesius. Hi ha paquets de ${a} i de ${b} adhesius. Has d'utilitzar almenys un paquet de cada format i no pot sobrar cap adhesiu. Quin és el nombre mínim de paquets?`,best[0]+best[1],['Organitza les combinacions que donen el total exacte.','Compara el nombre de paquets; utilitzar només el format gran no està permès.'],[`Les combinacions exactes (paquets petits, grans) són: ${candidates.map(p=>'('+p.join(', ')+')').join('; ')}.`,`La millor és ${best[0]} × ${a} + ${best[1]} × ${b} = ${total}.`,`Utilitza ${best[0]+best[1]} paquets; cap combinació admissible en necessita menys.`]);
+      const [a,b]=pick(r,[[3,7],[4,7],[4,9],[5,8]]);
+      // Construïm el total amb els dos formats i deixem prou paquets petits per fer un intercanvi.
+      const total=a*(b+integer(r,1,3))+b*integer(r,2,3);
+      const maxLarge=Math.floor((total-a)/b),candidates=[];
+      for(let large=maxLarge;large>=1;large--){
+        const remaining=total-large*b;
+        if(remaining%a===0)candidates.push({small:remaining/a,large,count:remaining/a+large});
+      }
+      const best=candidates.reduce((v,p)=>p.count<v.count?p:v);
+      const minCount=1+Math.ceil((total-a)/b),maxCount=1+Math.floor((total-b)/a);
+      const nearby=Array.from({length:maxCount-minCount+1},(_,i)=>minCount+i)
+        .sort((x,y)=>Math.abs(x-best.count)-Math.abs(y-best.count));
+      const wrong=[...new Set([...candidates.map(p=>p.count),...nearby])].filter(n=>n!==best.count).slice(0,3);
+      const exercise=task(this,{a,b,total},`Cal repartir exactament ${total} adhesius en paquets de ${a} i de ${b}. Has d’utilitzar almenys un paquet de cada format i no pot sobrar cap adhesiu. Quin és el nombre mínim de paquets?`,best.count,
+        [`Comença amb tants paquets de ${b} com puguis, reservant almenys ${a} adhesius per a un paquet petit. Comprova si els adhesius que queden es poden agrupar de ${a} en ${a}.`,
+          `Si no es poden agrupar exactament, treu un paquet gran i prova-ho de nou. Fes servir els dos formats i compara el nombre total de paquets de les combinacions exactes.`],
+        [`Deixem almenys ${a} adhesius per al format petit. Així podem provar de ${maxLarge} a 1 paquets grans. A cada prova restem els adhesius dels paquets grans i mirem si la resta és múltiple de ${a}.`,
+          `Les úniques combinacions exactes són: ${candidates.map(p=>`${p.small} de petits i ${p.large} de grans (${p.count} en total)`).join('; ')}.`,
+          `Amb ${best.small} paquets petits i ${best.large} de grans repartim exactament ${best.small} × ${a} + ${best.large} × ${b} = ${total} adhesius.`,
+          `El mínim és ${best.small} + ${best.large} = ${best.count} paquets perquè hem provat tots els nombres possibles de paquets grans i cap combinació exacta en fa servir menys.`]);
+      return {...exercise,options:[best.count,...wrong].map(String)};
     }},
     {id:'xifres-amb-condicions',topic:'decimal_sys',level:3,reason:'Coordinar valor posicional, paritat i ús únic de les xifres per construir el màxim.',build(r){
       const evens=pick(r,[[2,4],[2,6],[2,8],[4,6],[4,8],[6,8]]),odds=pick(r,[[1,3],[1,5],[1,7],[1,9],[3,5],[3,7],[3,9],[5,7],[5,9],[7,9]]),digits=[...evens,...odds];
