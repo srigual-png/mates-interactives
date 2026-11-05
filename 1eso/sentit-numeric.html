@@ -3,6 +3,7 @@
 <head>
 <script src="../assets/js/dificultat-mi.js"></script>
 <script src="../assets/js/raonament-numeric-1eso.js"></script>
+<script src="../assets/js/practica-sistema-decimal-1eso.js"></script>
 <link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="UTF-8">
@@ -84,7 +85,8 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .slb{font-size:.75rem;color:var(--muted);margin-bottom:6px;}
 .exq{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;font-size:1rem;text-align:center;margin-bottom:16px;box-shadow:var(--sh);min-height:68px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:6px;}
 .exq .fc{font-family:'Courier New',monospace;font-size:1.05rem;font-weight:700;color:var(--pd);}
-#sIntro:has(#miTopicExamLaunch[data-topic="naturals"]) .mi-difficulty-control{display:none;}
+.exq[data-decimal-practice] .fc{max-width:100%;overflow-wrap:anywhere;}
+#sIntro[data-adaptive-practice] .mi-difficulty-control{display:none;}
 .natural-product{width:100%;line-height:1.5;}
 .natural-product p{margin:0;}
 .natural-product p+p{margin-top:.5em;}
@@ -1045,8 +1047,9 @@ function genNaturalType(type){
 }
 
 // ── GEN SISTEMA DECIMAL ────────────────────────────────────────────────────
-function genDecimalSys(){
-  var type=rnd(1,4),question,correct,opts,guide,solution,isProblem=false,diff=1;
+function genDecimalSys(){return genDecimalSysType(rnd(1,4));}
+function genDecimalSysType(type,practice=false){
+  var question,correct,opts,guide,solution,isProblem=false,diff=1,practiceData;
 
   if(type===1){
     diff=1;
@@ -1095,6 +1098,7 @@ function genDecimalSys(){
       '100000':'centenes de miler'
     };
     var posName=posNames[String(posVal)]||('x'+posVal);
+    practiceData={n,digit,position:s.length-1-pos};
 
     question='Quin es el valor posicional de la xifra <b>'+digit+'</b> al nombre <span class="fc">'+n+'</span>?';
     correct=String(realVal);
@@ -1120,7 +1124,8 @@ function genDecimalSys(){
   } else if(type===2){
     diff=2;
 
-    var a=rnd(1,9),b=rnd(0,9),c=rnd(0,9),d=rnd(1,9),e=rnd(0,9),n2=a*10000+b*1000+c*100+d*10+e;
+    var a=rnd(1,9),b=rnd(0,9),c=rnd(0,9),d=rnd(practice?0:1,9),e=rnd(0,9),n2=a*10000+b*1000+c*100+d*10+e;
+    practiceData={n:n2};
 
     question='Descompon el nombre <span class="fc">'+n2+'</span>';
 
@@ -1145,6 +1150,7 @@ function genDecimalSys(){
     diff=2;
 
     var n3=rnd(100000,999999);
+    practiceData={n:n3};
     var u3=n3%10,
         de3=Math.floor(n3/10)%10,
         ce3=Math.floor(n3/100)%10,
@@ -1201,6 +1207,7 @@ function genDecimalSys(){
     var posName=posData[pos].name;
     var posValue=posData[pos].value;
     var digitPos=posData[pos].digit;
+    practiceData={n:num,digit:digitPos,position:pos};
 
     question='<span class="pt">El número de matrícula és <b>'+num+
       '</b>. Quin valor representa la xifra de les '+posName+
@@ -1227,7 +1234,7 @@ function genDecimalSys(){
     ];
   }
 
-  return{
+  var exercise={
     type:type,
     question:question,
     correct:correct,
@@ -1237,6 +1244,7 @@ function genDecimalSys(){
     isProblem:isProblem,
     diff:diff
   };
+  return practice?MIDecimalPractice.base(exercise,practiceData,buildOpts):exercise;
 }
 
 // ── GEN OPERACIONS ─────────────────────────────────────────────────────────
@@ -3734,7 +3742,7 @@ var AMP_CATS=[
 // ── TOPICS ─────────────────────────────────────────────────────────────────
 var TOPICS=[
   {id:"naturals",course:"1r",exam1r:true,adaptivePractice:true,icon:"1&#65039;&#8419;",name:"Nombres naturals",short:"Ordre, comparació, arrodoniment i problemes",theory:{title:"Nombres naturals",text:`Els nombres naturals serveixen per comptar, ordenar i resoldre situacions quotidianes.`,formulas:[`Comparació: primer compta xifres; després compara des de l'esquerra`,`Arrodoniment: mira la xifra immediatament inferior`,`Problemes: identifica les dades i l'operació abans de calcular`]},gen:genNaturals},
-  {id:"decimal_sys",course:"1r",exam1r:true,icon:"&#128315;",name:"Sistema de numeració decimal",short:"Valor posicional, descomposició i lectura",theory:{title:"Sistema de numeració decimal",text:`Cada xifra té un valor que depèn de la posició que ocupa.`,formulas:[`345.678 = 3×100000 + 4×10000 + 5×1000 + 6×100 + 7×10 + 8`,`Posicions: unitats, desenes, centenes, milers, desenes de miler i centenes de miler`,`El mateix dígit pot tenir valors diferents segons la posició`]},gen:genDecimalSys},
+  {id:"decimal_sys",course:"1r",exam1r:true,adaptivePractice:true,icon:"&#128315;",name:"Sistema de numeració decimal",short:"Valor posicional, descomposició i lectura",theory:{title:"Sistema de numeració decimal",text:`Cada xifra té un valor que depèn de la posició que ocupa.`,formulas:[`345.678 = 3×100000 + 4×10000 + 5×1000 + 6×100 + 7×10 + 8`,`Posicions: unitats, desenes, centenes, milers, desenes de miler i centenes de miler`,`El mateix dígit pot tenir valors diferents segons la posició`]},gen:genDecimalSys},
   {id:"ops",course:"1r",exam1r:true,icon:"&#10133;",name:"Operacions bàsiques",short:"Suma, resta, multiplicació i divisió",theory:{title:"Operacions bàsiques",text:`Les quatre operacions permeten combinar i repartir quantitats amb nombres naturals.`,formulas:[`Suma: alinea les xifres per posició`,`Resta: comprova si cal reagrupar`,`Multiplicació: productes parcials i suma`,`Divisió: dividend = divisor × quocient + residu`]},gen:genOps},
   {id:"potencies",course:"1r",exam1r:true,icon:"&#178;",name:"Potències i arrels",short:"Base, exponent, potències i arrels quadrades exactes",theory:{title:"Potències i arrels",text:`Una potència és una manera abreujada d'escriure un producte de factors iguals. L'arrel quadrada és l'operació inversa d'elevar al quadrat.`,formulas:[`a^n: a és la base i n és l'exponent`,`3^4 = 3 × 3 × 3 × 3`,`5² = 25 ↔ √25 = 5`,`Treballarem arrels quadrades exactes senzilles`]},gen:genPotenciesArrelsVariat},
   {id:"jerarquia",course:"1r",exam1r:true,icon:"&#128208;",name:"Jerarquia d'operacions",short:"Parèntesis, potències, ×/÷, +/−",theory:{title:"Jerarquia de les operacions",text:`Quan hi ha diverses operacions, cal respectar un ordre de resolució.`,formulas:[`1r: parèntesis i claudàtors, de dins cap enfora`,`2n: potències i arrels`,`3r: multiplicacions i divisions, d'esquerra a dreta`,`4t: sumes i restes, d'esquerra a dreta`]},gen:genJerarquia},
@@ -3972,7 +3980,8 @@ function selTopic(i){
   var examLaunch=document.getElementById('miTopicExamLaunch');
   examLaunch.hidden=t.course!=='1r'||t.exam1r!==true||typeof t.gen!=='function';
   examLaunch.dataset.topic=t.id;
-  var objective=t.id==='naturals'?'preguntes':'encerts';
+  document.getElementById('sIntro').toggleAttribute('data-adaptive-practice',!!t.adaptivePractice);
+  var objective=t.adaptivePractice?'preguntes':'encerts';
   document.querySelector('#bL1 small').textContent='Guiat · '+NEEDED[1]+' '+objective;
   document.querySelector('#bL2 small').textContent='Sol/a · '+NEEDED[2]+' '+objective;
   document.getElementById('bL1').classList.add('active');
@@ -4058,6 +4067,8 @@ function openOk1Legacy(correct,value,ex){
   return false;
 }
 function openHint1(ex){
+  if(ex?.decimalAnswer==='spelling')return 'Escriu el nombre en català amb l’ortografia i els guionets corresponents.';
+  if(ex?.decimalAnswer==='pair')return 'Escriu primer el valor i després la diferència, separats per un punt i coma.';
   if(ex?.topicId==='naturals'&&['interval-arrodoniment','producte-descomposicio'].includes(ex.type))return 'Escriu els dos valors en l’ordre demanat, separats per un punt i coma.';
   var q=stripHtmlOpen(ex&&ex.question||'').toLowerCase();
   if(q.indexOf('percent')>=0)return 'Escriu el percentatge en la forma demanada. Pots utilitzar el símbol %.';
@@ -4086,53 +4097,55 @@ function resetVariationBagForTopic(topicId){
 // Una entrada per inici de pràctica; els exercicis següents no generen esdeveniments.
 function startP(){
   window.MIAnalytics?.start();state.exCount=0;state.correctStreak=0;
-  var topicId=TOPICS[state.currentTopic].id;
-  if(topicId==='naturals'){
-    naturalPracticePoints=0;
-    naturalPracticeSeen.clear();naturalPracticeQuestions.clear();lastNaturalPracticeFamily=null;
-  }
-  resetVariationBagForTopic(topicId);showEx();
+  var topic=TOPICS[state.currentTopic];
+  if(topic.adaptivePractice)adaptivePracticeSessions[topic.id]={points:0,seen:new Set(),questions:new Set(),lastFamily:null};
+  resetVariationBagForTopic(topic.id);showEx();
 }
 function updateSBar(){
-  var natural=TOPICS[state.currentTopic].id==='naturals',needed=NEEDED[state.level];
-  var points=natural?naturalPracticePoints:state.correctStreak;
+  var topic=TOPICS[state.currentTopic],needed=NEEDED[state.level];
+  var points=topic.adaptivePractice?adaptivePracticeSessions[topic.id].points:state.correctStreak;
   var pct=Math.min(100,Math.round(points/needed*100));
   document.getElementById('sb').style.width=pct+'%';
-  document.getElementById('slb').textContent=natural?'Progrés de dificultat: '+points+'/'+needed:'Encerts seguits: '+points+' / '+needed;
+  document.getElementById('slb').textContent=topic.adaptivePractice?'Progrés de dificultat: '+points+'/'+needed:'Encerts seguits: '+points+' / '+needed;
 }
 // Ordenar i comparar són variants d’una mateixa família.
-var naturalPracticeFamilies=[[1,2],[3],[4],[5],['recta-graduada'],['dividend-desconegut'],['producte-descomposicio'],['operacions-valor-desconegut'],['interval-arrodoniment'],[1001],['nombres-amb-condicions'],['patrons-numerics']];
-var naturalPracticeSeen=new Set(),naturalPracticeQuestions=new Set(),lastNaturalPracticeFamily=null;
-var naturalPracticePoints=0;
-var NATURAL_PRACTICE_THRESHOLDS={1:[3,6],2:[6,12]};
-function naturalPracticeGroups(t){
+var adaptivePracticeFamilies={
+  naturals:[[1,2],[3],[4],[5],['recta-graduada'],['dividend-desconegut'],['producte-descomposicio'],['operacions-valor-desconegut'],['interval-arrodoniment'],[1001],['nombres-amb-condicions'],['patrons-numerics']],
+  decimal_sys:[[1,4],[2],[3],['lectura-paraules-a-xifres'],[1002],['guionets-numerals-du-c'],['descomposicio-equivalent-reagrupament'],['equivalencia-ordres-posicionals'],[1001],['escriure-xifres-a-paraules'],['auditar-error-de-posicio']]
+};
+var adaptivePracticeSessions={};
+var ADAPTIVE_PRACTICE_THRESHOLDS={1:[3,6],2:[6,12]};
+function adaptivePracticeGroups(t){
   var groups=[[],[],[]];
-  naturalPracticeFamilies.forEach(family=>groups[miTaskDifficulty.getDifficulty(t,{type:family[0]})-1].push(family));
+  adaptivePracticeFamilies[t.id].forEach(family=>groups[miTaskDifficulty.getDifficulty(t,{type:family[0]})-1].push(family));
   return groups;
 }
-function nextNaturalPractice(t){
-  var groups=naturalPracticeGroups(t);
-  var level=1+NATURAL_PRACTICE_THRESHOLDS[state.level].filter(points=>naturalPracticePoints>=points).length;
+function nextAdaptivePractice(t){
+  var session=adaptivePracticeSessions[t.id],groups=adaptivePracticeGroups(t);
+  var level=1+ADAPTIVE_PRACTICE_THRESHOLDS[state.level].filter(points=>session.points>=points).length;
   var pool=groups.slice(0,level).filter(group=>group.length).at(-1)||groups.find(group=>group.length);
-  if(!pool)throw Error('No hi ha famílies disponibles per practicar Nombres naturals.');
-  var alternatives=pool.filter(family=>family!==lastNaturalPracticeFamily);
+  if(!pool)throw Error('No hi ha famílies disponibles per practicar «'+t.name+'».');
+  var alternatives=pool.filter(family=>family!==session.lastFamily);
   var candidates=alternatives.length?alternatives:pool;
-  var unseen=candidates.filter(family=>!naturalPracticeSeen.has(family));
+  var unseen=candidates.filter(family=>!session.seen.has(family));
   if(!unseen.length){
-    pool.forEach(family=>naturalPracticeSeen.delete(family));
+    pool.forEach(family=>session.seen.delete(family));
     unseen=candidates;
   }
   var ordered=shuffle(unseen.slice()).concat(shuffle(candidates.filter(family=>!unseen.includes(family))));
-  if(!ordered.includes(lastNaturalPracticeFamily)&&pool.includes(lastNaturalPracticeFamily))ordered.push(lastNaturalPracticeFamily);
+  if(!ordered.includes(session.lastFamily)&&pool.includes(session.lastFamily))ordered.push(session.lastFamily);
   for(const family of ordered){
     for(let attempt=0;attempt<5;attempt++){
       const type=family[rnd(0,family.length-1)];
-      const exercise=type===1001?MIFirstNumericTasks.generate('paquets-exactes'):
-        typeof type==='number'?genNaturalType(type):genNaturalPracticeFamily(type);
-      if(naturalPracticeQuestions.has(exercise.question))continue;
-      naturalPracticeQuestions.add(exercise.question);
-      naturalPracticeSeen.add(family);
-      lastNaturalPracticeFamily=family;
+      const exercise=t.id==='naturals'?(type===1001?MIFirstNumericTasks.generate('paquets-exactes'):
+        typeof type==='number'?genNaturalType(type):genNaturalPracticeFamily(type)):
+        type===1001?MIFirstNumericTasks.generate('xifres-amb-condicions'):
+        type===1002?MIFirstNumericTasks.generate('canvi-posicional'):
+        typeof type==='number'?genDecimalSysType(type,true):MIDecimalPractice.generate(type,rnd,buildOpts);
+      if(session.questions.has(exercise.question))continue;
+      session.questions.add(exercise.question);
+      session.seen.add(family);
+      session.lastFamily=family;
       return miTaskDifficulty.annotate(t,exercise);
     }
   }
@@ -4140,17 +4153,21 @@ function nextNaturalPractice(t){
 }
 function showEx(){
   state.answered=false;window.MIAnalytics?.shown();var t=TOPICS[state.currentTopic];
-  currentEx=decorateExercise(t,t.id==='naturals'?nextNaturalPractice(t):t.gen());state.exCount++;
+  currentEx=decorateExercise(t,t.adaptivePractice?nextAdaptivePractice(t):t.gen());state.exCount++;
   var typeLabel=currentEx.isProblem?'<span class="tyb typ">&#128203; Problema</span>':'<span class="tyb tyc">&#128290; Calcul</span>';
   document.getElementById('exN').innerHTML='Exercici '+state.exCount+' '+typeLabel;
-  updateSBar();document.getElementById('exQ').innerHTML=currentEx.question;
+  updateSBar();
+  var question=document.getElementById('exQ');
+  question.toggleAttribute('data-decimal-practice',t.id==='decimal_sys');
+  question.innerHTML=currentEx.question;
   var gs=document.getElementById('gst');
   if(state.level===1){gs.style.display='block';gs.innerHTML='<h4>&#128161; Pistes:</h4>'+(currentEx.guide||[]).map(function(s){return '&bull; '+s;}).join('<br>');}
   else{gs.style.display='none';}
-  if(state.mode==='open'){
+  if(state.mode==='open'||currentEx.openOnly){
     document.getElementById('og').innerHTML='';
     document.getElementById('openWrap').style.display='block';
     var inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';
+    document.querySelector('#openWrap .math-pad').style.display=currentEx.decimalAnswer==='spelling'?'none':'';
     document.getElementById('openHint').textContent=openHint1(currentEx);
     setTimeout(function(){inp.focus();},60);
   }else{
@@ -4171,31 +4188,33 @@ function selAns(idx,btn){
 function checkOpen(){
   if(state.answered)return;
   var inp=document.getElementById('openInput'),val=inp.value.trim();if(!val)return;
-  var ok=openOk1(currentEx.correct,val,currentEx);
+  var result=currentEx.decimalAnswer?MIDecimalPractice.grade(currentEx,val):null;
+  var ok=result?.ok??openOk1(currentEx.correct,val,currentEx);
   inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');
-  processPracticeAnswer(ok,val);
+  processPracticeAnswer(ok,val,result?.message);
 }
-function processPracticeAnswer(isOk,studentAnswer){
-  var natural=currentEx.topicId==='naturals',needed=NEEDED[state.level];
-  if(natural){
+function processPracticeAnswer(isOk,studentAnswer,message){
+  var topic=TOPICS[state.currentTopic],adaptive=topic.adaptivePractice,needed=NEEDED[state.level];
+  if(adaptive){
     if(state.answered)return;
-    naturalPracticePoints=isOk?Math.min(needed,naturalPracticePoints+1):Math.max(0,naturalPracticePoints-1);
+    var session=adaptivePracticeSessions[topic.id];
+    session.points=Math.max(0,Math.min(needed,session.points+(isOk?1:-1)));
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
   var fb=document.getElementById('fbA');
   if(isOk){
     state.correctStreak++;updateSBar();
-    var extra=currentEx.topicId==='naturals'?'<br><b>Resolució:</b>'+solHTML+miTheoryLinkHtml(currentEx.topicId):currentEx.isProblem?'<br><b>Resolucio:</b>'+solHTML:'';
+    var extra=adaptive?'<br><b>Resolució:</b>'+solHTML+miTheoryLinkHtml(currentEx.topicId):currentEx.isProblem?'<br><b>Resolucio:</b>'+solHTML:'';
     fb.innerHTML='<div class="fb ok"><h4>&#9989; Correcte!</h4>'+extra+'</div>';
-    if(!natural&&state.correctStreak>=needed)markDone();
+    if(!adaptive&&state.correctStreak>=needed)markDone();
   } else {
     state.correctStreak=0;updateSBar();
     registerError(currentEx,studentAnswer,'practice');
-    fb.innerHTML='<div class="fb ko"><h4>&#10060; Incorrecte</h4>La teva resposta: <b>'+escHtml(studentAnswer||'—')+'</b><br>La resposta era: <b>'+currentEx.correct+'</b><br>'+miReviewHtml(currentEx)+'<b>📘 Resolució pas a pas:</b>'+solHTML+miTheoryLinkHtml(currentEx.topicId)+'</div>';
+    fb.innerHTML='<div class="fb ko"><h4>&#10060; Incorrecte</h4>La teva resposta: <b>'+escHtml(studentAnswer||'—')+'</b><br>'+(message?'<p>'+escHtml(message)+'</p>':'')+'La resposta era: <b>'+currentEx.correct+'</b><br>'+miReviewHtml(currentEx)+'<b>📘 Resolució pas a pas:</b>'+solHTML+miTheoryLinkHtml(currentEx.topicId)+'</div>';
   }
   var nextBtn=document.getElementById('bNext');
-  var finished=natural&&state.exCount>=needed;
+  var finished=adaptive&&state.exCount>=needed;
   if(finished)markDone();
   nextBtn.textContent=finished?'Veure el resum →':'Següent exercici →';
   nextBtn.style.display='block';
@@ -4209,16 +4228,16 @@ function processPracticeAnswer(isOk,studentAnswer){
 }
 function markDone(){window.MIAnalytics?.complete();const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
 function nextEx(){
-  var topicId=TOPICS[state.currentTopic].id,needed=NEEDED[state.level];
-  if(topicId==='naturals'){
+  var topic=TOPICS[state.currentTopic],needed=NEEDED[state.level];
+  if(topic.adaptivePractice){
     if(!state.answered)return;
     if(state.exCount>=needed){showCongrats();return;}
-  }else if(state.correctStreak>=needed&&state.done.includes(topicId)){showCongrats();return;}
+  }else if(state.correctStreak>=needed&&state.done.includes(topic.id)){showCongrats();return;}
   showEx();
 }
 function showCongrats(){
   var t=TOPICS[state.currentTopic],ni=t.course==="1r"?nextCoreIndex(state.currentTopic):-1,next=ni>=0?TOPICS[ni]:null;
-  var message=t.id==='naturals'?'<h2>Pràctica completada</h2><p>Has respost '+state.exCount+' preguntes de <b>'+t.name+'</b>.</p>':
+  var message=t.adaptivePractice?'<h2>Pràctica completada</h2><p>Has respost '+state.exCount+' preguntes de <b>'+t.name+'</b>.</p>':
     '<div class="tr">&#127942;</div><h2>Excel·lent!</h2><p>Has dominat <b>'+t.name+'</b>!</p>';
   document.getElementById('fbA').innerHTML='<div class="cg">'+message+'<button class="bp" onclick="showHome()">Tornar al menú</button>'+(next?'<button class="bs" onclick="selTopic('+ni+')">Següent: '+next.name+' &rarr;</button>':'')+'</div>';
   document.getElementById('bNext').style.display='none';
