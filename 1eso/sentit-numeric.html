@@ -710,17 +710,17 @@ function buildOpts(correct,wrongs){
   return shuffle(result);
 }
 
-function wrongOrders(nums,correct){
+function wrongOrders(nums,correct,sep=' < '){
   var seen=new Set([correct]);
   var res=[];
   var perms=[[nums[1],nums[0],nums[2],nums[3]],[nums[2],nums[3],nums[0],nums[1]],[nums[0],nums[2],nums[1],nums[3]],[nums[3],nums[0],nums[1],nums[2]],[nums.slice().sort(function(a,b){return b-a;})],[nums[3],nums[2],nums[1],nums[0]]];
   for(var i=0;i<perms.length;i++){
-    var s=perms[i].join(' < ');
+    var s=perms[i].join(sep);
     if(!seen.has(s)){seen.add(s);res.push(s);}
     if(res.length>=3)break;
   }
   var att=0;
-  while(res.length<3&&att<200){att++;var s2=shuffle(nums.slice()).join(' < ');if(!seen.has(s2)){seen.add(s2);res.push(s2);}}
+  while(res.length<3&&att<200){att++;var s2=shuffle(nums.slice()).join(sep);if(!seen.has(s2)){seen.add(s2);res.push(s2);}}
   return res;
 }
 
@@ -729,8 +729,83 @@ function solSteps(steps){
 }
 
 // ── GEN NATURALS ───────────────────────────────────────────────────────────
-function genNaturals(){
-  var type=rnd(1,5),question,correct,opts,guide,solution,isProblem=false,diff=1;
+function genNaturalPracticeFamily(type){
+  var question,correct,wrongs,guide,solution,validation;
+  if(type==='recta-graduada'){
+    var start=rnd(0,80)*100,step=rnd(1,2)*100,end=start+5*step;
+    var letters=['A','B','C','D'],index=rnd(1,4),value=start+index*step;
+    var locate=rnd(0,1)===0;
+    var marks=[String(start),...letters,String(end)];
+    var ticks=marks.map((label,i)=>{
+      var x=32+64*i;
+      return `<path d="M${x} 15v14" stroke="currentColor"/><text x="${x}" y="51" text-anchor="middle">${label}</text>`;
+    }).join('');
+    question=(locate?`Quina marca correspon al nombre ${value}?`:`Quin nombre correspon a la marca ${letters[index-1]}?`)
+      +`<br><svg viewBox="0 0 384 60" style="width:100%;max-width:384px" role="img" aria-label="Recta de ${start} a ${end} amb cinc intervals iguals i les marques A, B, C i D d’esquerra a dreta."><path d="M16 22h352" stroke="currentColor"/>${ticks}</svg>`;
+    var choices=locate?letters:letters.map((_,i)=>String(start+(i+1)*step));
+    correct=choices[index-1];
+    wrongs=choices.filter(choice=>choice!==correct);
+    guide=['Resta els extrems i divideix la diferència entre cinc.', 'Compta els intervals a partir de l’extrem esquerre.'];
+    solution=[`Cada interval val (${end} − ${start}) ÷ 5 = ${step}.`,
+      `La marca ${letters[index-1]} és a ${index} intervals de l’extrem esquerre: ${start} + ${index} × ${step} = ${value}.`];
+  }else if(type==='dividend-desconegut'){
+    var divisor=rnd(2,12),quotient=rnd(2,45),remainder=rnd(0,divisor-1);
+    var product=divisor*quotient,dividend=product+remainder;
+    question=`En una divisió entera, el divisor és ${divisor}, el quocient és ${quotient} i el residu és ${remainder}. Quin és el dividend?`;
+    correct=String(dividend);
+    wrongs=[dividend-1,dividend+1,dividend+divisor].map(String);
+    guide=['Multiplica el divisor pel quocient i suma-hi el residu.'];
+    solution=[`Multiplica el divisor pel quocient: ${divisor} × ${quotient} = ${product}.`,
+      `Suma-hi el residu: ${product} + ${remainder} = ${dividend}.`,
+      `Comprova que el residu és vàlid: 0 ≤ ${remainder} &lt; ${divisor}.`];
+  }else if(type==='producte-descomposicio'){
+    var factor=rnd(12,99),base=rnd(2,10)*10,offset=rnd(1,9),add=rnd(0,1)===0;
+    var sign=add?'+':'−',other=base+(add?offset:-offset);
+    var first=factor*base,second=factor*offset,total=factor*other;
+    if(rnd(0,2)===0){
+      question=`En descompondre ${other} com ${base} ${sign} ${offset}, obtenim ${factor} × ${other} = ${first} ${sign} □. Quin producte parcial falta?`;
+      correct=String(second);
+      wrongs=[first,total,offset].map(String);
+    }else{
+      question=`Descompon ${other} com ${base} ${sign} ${offset}. Quin resultat obtens si apliques la propietat distributiva a ${factor} × ${other}?`;
+      correct=String(total);
+      wrongs=[first,second,add?first-second:first+second].map(String);
+    }
+    guide=[`Multiplica ${factor} per cadascun dels dos termes de la descomposició.`, `Combina els productes parcials amb el signe ${sign}.`];
+    solution=[`Per la propietat distributiva, ${factor} × (${base} ${sign} ${offset}) = ${factor} × ${base} ${sign} ${factor} × ${offset}.`,
+      `Els productes parcials són ${factor} × ${base} = ${first} i ${factor} × ${offset} = ${second}.`,
+      `Combina els productes: ${first} ${sign} ${second} = ${total}.`];
+  }else{
+    var scale=rnd(1,3),unit=10**scale,target=rnd(1,90)*unit,half=unit/2;
+    var lower=target-half,upper=target+half-1;
+    var position=['','a la desena més propera','a la centena més propera','al miler més proper'][scale];
+    var pair=(min,max)=>`(${min}; ${max})`;
+    question=`En arrodonir ${position}, el resultat és ${target}. Quins són el menor i el major nombre natural que poden donar aquest resultat? En cas d’empat, arrodoneix cap amunt. Indica primer el menor i després el major, separats per un punt i coma.`;
+    correct=pair(lower,upper);
+    wrongs=[pair(lower-1,upper),pair(lower,upper+1),pair(lower+1,upper-1)];
+    validation={type:'tuple'};
+    guide=[`Troba els punts mitjans entre ${target} i els dos múltiples veïns de ${unit}.`, 'Aplica la regla dels empats a cada extrem.'];
+    solution=[`La meitat de ${unit} és ${half}. L’empat inferior és ${target} − ${half} = ${lower} i puja a ${target}.`,
+      `L’empat superior és ${target} + ${half} = ${upper+1} i puja a ${target+unit}. Per això el major valor admès és ${upper}.`,
+      `Tots els naturals de ${lower} a ${upper}, inclosos, donen ${target}. Just a fora, ${lower-1} s’arrodoneix a ${target-unit} i ${upper+1} a ${target+unit}.`];
+  }
+  return {type,question,correct,options:buildOpts(correct,wrongs),guide,solution,validation};
+}
+
+function explainNaturalOrder(a,b){
+  var left=String(a),right=String(b),relation=a<b?'és menor que':'és més gran que';
+  if(left.length!==right.length){
+    return `${a} ${relation} ${b} perquè tenen ${left.length} i ${right.length} xifres, respectivament.`;
+  }
+  var i=0;
+  while(left[i]===right[i])i++;
+  var place=['unitats','desenes','centenes','milers','desenes de miler'][left.length-i-1];
+  return `${a} ${relation} ${b} perquè, a la primera posició diferent (${place}), les xifres són ${left[i]} i ${right[i]}, respectivament.`;
+}
+
+function genNaturals(){return genNaturalType(rnd(1,5));}
+function genNaturalType(type){
+  var question,correct,opts,guide,solution,isProblem=false,diff=1;
   if(type===1){
     diff=1;var pool=[];
     while(pool.length<4){var v=rnd(1000,99999);if(pool.indexOf(v)<0)pool.push(v);}
@@ -739,15 +814,13 @@ function genNaturals(){
     var sep=ascending?' < ':' > ';
     question='Ordena de '+(ascending?'menor a major':'major a menor')+':<br><span class="fc">'+pool.join('&nbsp;&mdash;&nbsp;')+'</span>';
     correct=sorted.join(sep);
-    opts=buildOpts(correct,wrongOrders(pool,correct));
+    opts=buildOpts(correct,wrongOrders(pool,correct,sep));
     guide=[
-      'Conta les xifres: menys xifres = nombre menor',
-      'Amb mateixes xifres, compara des de l\'esquerra'
+      'Compta les xifres: el nombre amb menys xifres és el més petit.',
+      'Si tenen el mateix nombre de xifres, compara-les des de l\'esquerra.'
     ];
-    solution=[
-      'Nombres: '+pool.join(', '),
-      'Ordenats: '+correct
-    ];
+    solution=sorted.slice(1).map((value,i)=>explainNaturalOrder(sorted[i],value));
+    solution.push('Ordre correcte: '+correct);
 
   } else if(type===2){
     diff=1;
@@ -757,7 +830,7 @@ function genNaturals(){
 
     var sign=a>b?'>':'<';
 
-    question='Quin signe va entre:<br><span class="fc">'+a+' ___ '+b+'</span>';
+    question='Quin signe cal posar entre aquests dos nombres?<br><span class="fc">'+a+' ___ '+b+'</span>';
 
     correct=a+' '+sign+' '+b;
 
@@ -775,21 +848,21 @@ function genNaturals(){
     ];
     solution=[
       'Compara '+a+' i '+b+' des de l\'esquerra.',
-      'La primera xifra diferent indica quin nombre és més gran.',
+      explainNaturalOrder(a,b),
       'Resultat: '+correct
     ];
 
   } else if(type===3){
     diff=2;
 
-    var n=rnd(10000,99999);
     var t=rnd(1,3);
     var div=t===1?1000:t===2?100:10;
+    var n=rnd(10000/div,100000/div-1)*div+rnd(1,div-1);
     var nomPos=t===1?'milers':t===2?'centenes':'desenes';
 
     var rounded=Math.round(n/div)*div;
 
-    question='Arrodoneix <span class="fc">'+n+'</span> a les '+nomPos;
+    question='Arrodoneix <span class="fc">'+n+'</span> '+(t===1?'als ':'a les ')+nomPos+'.';
     correct=String(rounded);
 
     // ── DISTRACTORS PEDAGÒGICS ─────────────────────────────────────────
@@ -832,18 +905,18 @@ function genNaturals(){
     opts=buildOpts(correct,shuffle(distractors3));
 
     guide=[
-      'Mira la xifra inferior a '+nomPos+': >=5 puja, <5 baixa'
+      'Mira la xifra de la posició immediatament inferior. Si és 5 o més, arrodoneix cap amunt; si és menys de 5, cap avall.'
     ];
     solution=[
       'Nombre: '+n,
-      'Arrodonit a les '+nomPos+': '+correct
+      'Arrodonit '+(t===1?'als ':'a les ')+nomPos+': '+correct
     ];
 
   } else if(type===4){
     diff=2;isProblem=true;
     var nP=rnd(3,8),res=rnd(20,150),total=nP*res;
     var txts=[
-      'Una escola te <b>'+total+'</b> llibres per repartir en <b>'+nP+'</b> aules iguals. Quants llibres hi ha a cada aula?',
+      'Una escola té <b>'+total+'</b> llibres per repartir a parts iguals entre <b>'+nP+'</b> aules. Quants llibres rep cada aula?',
       'Un magatzem rep <b>'+total+'</b> paquets per distribuir entre <b>'+nP+'</b> botigues. Quants paquets rep cada botiga?'
     ];
     question='<span class="pt">'+txts[rnd(0,1)]+'</span>';
@@ -867,7 +940,7 @@ function genNaturals(){
   } else {
     diff=3;isProblem=true;
     var p=rnd(3,8),q=rnd(10,50),extra=rnd(5,30),tot2=p*q+extra;
-    question='<span class="pt">Una fabrica te <b>'+p+'</b> maquines que produeixen <b>'+q+'</b> peces cadascuna. A mes, hi ha <b>'+extra+'</b> peces de reserva. Quantes peces hi ha en total?</span>';
+    question='<span class="pt">Una fàbrica té <b>'+p+'</b> màquines que produeixen <b>'+q+'</b> peces cadascuna. A més, hi ha <b>'+extra+'</b> peces de reserva. Quantes peces hi ha en total?</span>';
     correct=String(tot2)+' peces';
 
     var distractors5=shuffle([
@@ -880,7 +953,7 @@ function genNaturals(){
     opts=buildOpts(correct,distractors5.slice(0,3));
 
     guide=[
-      'Primer, calcula quantes peces produeixen totes les maquines.',
+      'Primer, calcula quantes peces produeixen totes les màquines.',
       'Després, suma les peces de reserva.'
     ];
     solution=[
@@ -3897,7 +3970,10 @@ function strictOpenForm(ex){
   var q=stripHtmlOpen(ex.question).toLowerCase().replace(/\s+/g,' ');
   return /percentatge|fracci[oó]|decimal|arrodoneix|notaci[oó] cient[ií]fica|factoritza|descompon|quin signe|ordena/.test(q);
 }
-function openOk1(correct,value,ex){return MIValidation.grade({...ex,correct},value,()=>openOk1Legacy(correct,value,ex));}
+function openOk1(correct,value,ex){
+  if(ex?.type==='recta-graduada'&&/^[A-D]$/.test(correct))return String(value).trim().toUpperCase()===correct;
+  return MIValidation.grade({...ex,correct},value,()=>openOk1Legacy(correct,value,ex));
+}
 function openOk1Legacy(correct,value,ex){
   var nv=normOpenText(value),nt=normOpenText(correct);
   if(nv===nt)return true;
@@ -3910,6 +3986,7 @@ function openOk1Legacy(correct,value,ex){
   return false;
 }
 function openHint1(ex){
+  if(ex?.topicId==='naturals'&&ex.type==='interval-arrodoniment')return 'Escriu els dos valors separats per un punt i coma.';
   var q=stripHtmlOpen(ex&&ex.question||'').toLowerCase();
   if(q.indexOf('percent')>=0)return 'Escriu el percentatge en la forma demanada. Pots utilitzar el símbol %.';
   if(q.indexOf('fracci')>=0)return 'Si cal una fracció, escriu-la amb una barra, per exemple 3/4.';
@@ -3941,8 +4018,35 @@ function updateSBar(){
   document.getElementById('sb').style.width=pct+'%';
   document.getElementById('slb').textContent='Encerts seguits: '+state.correctStreak+' / '+needed;
 }
+// Ordenar i comparar són variants d’una mateixa família.
+var naturalPracticeFamilies=[[1,2],[3],[4],[5],['recta-graduada'],['dividend-desconegut'],['producte-descomposicio'],['interval-arrodoniment'],[1001]];
+var naturalPracticeSeen=new Set(),lastNaturalPracticeFamily=null;
+function nextNaturalPractice(t){
+  if(state.exCount===0){naturalPracticeSeen.clear();lastNaturalPracticeFamily=null;}
+  var groups=[[],[],[]];
+  naturalPracticeFamilies.forEach(family=>groups[miTaskDifficulty.getDifficulty(t,{type:family[0]})-1].push(family));
+  var available=groups.filter(group=>group.length);
+  var requested=window.MIDifficultyModes?.getPracticeLevel()??Number(new URLSearchParams(location.search).get('difficulty'));
+  // Les etapes ocupen terços de l’objectiu d’encerts; els intents fan avançar l’etapa.
+  var stage=Math.min(available.length-1,Math.floor(state.exCount*available.length/NEEDED[state.level]));
+  var pool=groups[requested-1]?.length?groups[requested-1]:available[stage];
+  var alternatives=pool.filter(family=>family!==lastNaturalPracticeFamily);
+  var candidates=alternatives.length?alternatives:pool;
+  var unseen=candidates.filter(family=>!naturalPracticeSeen.has(family));
+  if(!unseen.length){
+    pool.forEach(family=>naturalPracticeSeen.delete(family));
+    unseen=candidates;
+  }
+  var family=unseen[rnd(0,unseen.length-1)],type=family[rnd(0,family.length-1)];
+  naturalPracticeSeen.add(family);
+  lastNaturalPracticeFamily=family;
+  var question=type===1001?MIFirstNumericTasks.generate('paquets-exactes'):
+    typeof type==='number'?genNaturalType(type):genNaturalPracticeFamily(type);
+  return miTaskDifficulty.annotate(t,question);
+}
 function showEx(){
-  state.answered=false;window.MIAnalytics?.shown();var t=TOPICS[state.currentTopic];currentEx=decorateExercise(t,t.gen());state.exCount++;
+  state.answered=false;window.MIAnalytics?.shown();var t=TOPICS[state.currentTopic];
+  currentEx=decorateExercise(t,t.id==='naturals'?nextNaturalPractice(t):t.gen());state.exCount++;
   var typeLabel=currentEx.isProblem?'<span class="tyb typ">&#128203; Problema</span>':'<span class="tyb tyc">&#128290; Calcul</span>';
   document.getElementById('exN').innerHTML='Exercici '+state.exCount+' '+typeLabel;
   updateSBar();document.getElementById('exQ').innerHTML=currentEx.question;
@@ -3983,7 +4087,7 @@ function processPracticeAnswer(isOk,studentAnswer){
   var fb=document.getElementById('fbA');
   if(isOk){
     state.correctStreak++;updateSBar();
-    var extra=currentEx.isProblem?'<br><b>Resolucio:</b>'+solHTML:'';
+    var extra=currentEx.topicId==='naturals'?'<br><b>Resolució:</b>'+solHTML+miTheoryLinkHtml(currentEx.topicId):currentEx.isProblem?'<br><b>Resolucio:</b>'+solHTML:'';
     fb.innerHTML='<div class="fb ok"><h4>&#9989; Correcte!</h4>'+extra+'</div>';
     if(state.correctStreak>=NEEDED[state.level])markDone();
   } else {
