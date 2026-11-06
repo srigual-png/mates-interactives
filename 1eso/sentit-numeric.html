@@ -449,6 +449,7 @@ Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immed
   <div class="gs" id="gst" style="display:none"></div>
   <div class="og" id="og"></div>
   <div class="open-wrap" id="openWrap" style="display:none">
+    <label id="opsReasonLabel" hidden>Motiu de l’error <select id="opsReason" required><option value="">Tria el motiu</option><option value="A">A · La igualtat no reconstrueix el dividend</option><option value="B">B · El residu és igual o superior al divisor</option></select></label>
     <input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();checkOpen();}">
     <div class="math-pad" aria-label="Teclat matemàtic">
       <span class="math-pad-label">Escriptura ràpida:</span>
@@ -479,7 +480,7 @@ Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immed
     <h2 id="decimalResultTitle" tabindex="-1"></h2>
     <p id="decimalResultSubtitle"></p>
     <strong class="decimal-result-score" id="decimalResultScore"></strong>
-    <p>Punts de progrés</p>
+    <p id="practiceResultMetric">Punts de progrés</p>
     <dl class="decimal-result-stats">
       <div><dt>Preguntes contestades</dt><dd id="decimalResultCount"></dd></div>
       <div><dt>Respostes correctes</dt><dd id="decimalResultCorrect"></dd></div>
@@ -1296,16 +1297,28 @@ function readOpsAnswer(answer,value){
   }
 
   if(text.startsWith('(')&&text.endsWith(')'))text=text.slice(1,-1);
+  if(answer.type==='operation'){
+    const match=text.match(/^(.+?)\s*([+−\-×xX·*÷/:])\s*(.+)$/);
+    if(!match)return null;
+    const left=readOpsInteger(match[1]),right=readOpsInteger(match[3]);
+    if(left===null||right===null)return null;
+    const op=match[2].replace(/[xX·*]/,'×').replace(/[/:]/,'÷').replace('−','-');
+    return (op==='+'||op==='×')&&left>right?[right,op,left]:[left,op,right];
+  }
   const parts=text.split(';');
-  if(parts.length!==2)return null;
+  const reason=answer.type==='diagnosis'?parts.shift().trim().toUpperCase():null;
+  if(parts.length!==2||(reason!==null&&!/^[AB]$/.test(reason)))return null;
   const pair=parts.map(readOpsInteger);
-  return pair.includes(null)?null:pair;
+  if(pair.includes(null))return null;
+  return reason===null?pair:[reason,...pair];
 }
 
 function opsAnswerMatches(answer,input){
   const value=readOpsAnswer(answer,input);
   if(value===null)return false;
   if(answer.type==='integer')return value===answer.value;
+  if(answer.type==='operation')return String(value)===String(answer.value);
+  if(answer.type==='diagnosis'&&value.shift()!==answer.value[0])return false;
   if(answer.division){
     const [dividend,divisor]=answer.division;
     const [quotient,remainder]=value;
@@ -1323,14 +1336,15 @@ function buildOpsOptions(answer,correct,wrongs){
     if(value===null||seen.has(String(value)))continue;
     seen.add(String(value));
     // Fem servir el mateix format que buildOpts per als distractors de reserva.
-    const label=answer.type==='pair'?value.join('; '):String(value);
+    const label=answer.type==='integer'?String(value):wrong;
     distractors.push(label+(answer.unit?' '+answer.unit:''));
   }
   return buildOpts(correct,distractors);
 }
 
-function genOps(){
-  var type=rnd(1,6),question,correct,wrongs,guide,solution,isProblem=false,diff=1;
+function genOps(){return genOpsType(rnd(1,6));}
+function genOpsType(type,practice=false){
+  var question,correct,wrongs,guide,solution,isProblem=false,diff=1;
   var opsAnswer={type:'integer'};
 
   if(type===1){
@@ -1415,10 +1429,12 @@ function genOps(){
     var preu=rnd(5,30),quant=rnd(4,20),total=preu*quant,
         pagat=Math.ceil(total/10)*10+(rnd(0,3)*10),
         canvi=pagat-total;
+    if(practice&&canvi===0){pagat+=10;canvi=10;}
 
     question='<span class="pt">La Maria compra <b>'+quant+
       '</b> quaderns a <b>'+preu+' euros</b>. Paga <b>'+pagat+
       ' euros</b>. Quant de canvi rep?</span>';
+    if(practice)question=question.replace('euros</b>. Paga','euros</b> cadascun. Paga');
 
     opsAnswer.unit='euros';
     correct=String(canvi)+' euros';
@@ -1472,8 +1488,14 @@ function genOps(){
       'u/dia: '+(torn*perTorn),
       'Total: '+(torn*perTorn)+'x'+dies+'='+tot3
     ];
+    if(practice){
+      question=question.replace('fabrica','fàbrica').replace('Total?','Quantes unitats produeix en total?');
+      solution=[torn+' torns/dia × '+perTorn+' unitats/torn = '+(torn*perTorn)+' unitats/dia.',
+        (torn*perTorn)+' unitats/dia × '+dies+' dies = '+tot3+' unitats.'];
+    }
   }
 
+  if(practice)solution=opsBaseSolution(type,solution,a,b,a2,b2,a3,b3);
   if(opsAnswer.type==='integer')opsAnswer.value=readOpsAnswer(opsAnswer,correct);
   return{
     type:type,
@@ -1486,6 +1508,148 @@ function genOps(){
     isProblem:isProblem,
     diff:diff
   };
+}
+
+
+const OPS_PRACTICE_FAMILIES=[
+  [[1],[2],[3],[5],['triar-operacio']],
+  [[4],[6],['capses'],['compensacio']],
+  [[1001],['diagnosticar-divisio'],['reconstruir-total']]
+];
+const OPS_THEORY_SECTIONS={
+  1:'operacions',2:'operacions',3:'operacions',4:'comprovar-divisio',5:'problemes',6:'exemple-resolt',
+  1001:'compra-minima',capses:'problemes','triar-operacio':'problemes',compensacio:'compensacio',
+  'diagnosticar-divisio':'comprovar-divisio','reconstruir-total':'reconstruir-total'
+};
+const OPS_DIVISION_REASONS={
+  A:'La igualtat no reconstrueix el dividend.',
+  B:'El residu és igual o superior al divisor.'
+};
+
+function opsBaseSolution(type,solution,a,b,a2,b2,a3,b3){
+  if(type===1||type===2){
+    let left=type===1?a:a2,right=type===1?b:b2,transfer=0;
+    const steps=[];
+    for(let position=1;left||right;position*=10){
+      const x=left%10,y=right%10;
+      const raw=type===1?x+y+transfer:x-y-transfer;
+      const digit=(raw+10)%10;
+      const next=type===1?Number(raw>=10):Number(raw<0);
+      const adjustment=transfer?(type===1?' + 1 (portada)':' − 1 (préstec anterior)'):'';
+      steps.push('Posició '+position+': '+x+(type===1?' + ':' − ')+y+adjustment+
+        '. Escriu '+digit+(next?(type===1?' i porta 1 a l’ordre següent':' i demana 1 a l’ordre següent'):'')+'.');
+      transfer=next;
+      left=Math.floor(left/10);right=Math.floor(right/10);
+    }
+    return steps.concat(solution);
+  }
+  if(type===3){
+    const partials=[b3%10,Math.floor(b3/10)%10,Math.floor(b3/100)].map((digit,i)=>digit*10**i);
+    return partials.map(part=>a3+' × '+part+' = '+a3*part+'.').concat(
+      partials.map(part=>a3*part).join(' + ')+' = '+a3*b3+'.');
+  }
+  if(type===4)return solution.concat('El residu és no negatiu i més petit que el divisor.');
+  return solution;
+}
+
+function genOpsPractice(type,level){
+  let exercise;
+  if(typeof type==='number'){
+    if(type===1001){
+      exercise=MIFirstNumericTasks.generate('compra-combinada');
+      const {a,b,pa,pb,need}=exercise.reasoningData;
+      const cost=Number(exercise.correct);
+      const tied=[];
+      for(let y=0;y<=Math.ceil(need/b);y++){
+        const x=Math.max(0,Math.ceil((need-b*y)/a));
+        if(pa*x+pb*y===cost)tied.push('('+x+' A, '+y+' B)');
+      }
+      exercise.solution.push(tied.length>1?'Empaten aquestes compres: '+tied.join(', ')+'.':
+        'Si diverses compres empaten, totes són òptimes i el cost mínim és el mateix.');
+      exercise.opsAnswer={type:'integer',unit:'euros',value:cost};
+      exercise.correct+=' euros';
+      exercise.options=buildOpsOptions(exercise.opsAnswer,exercise.correct,exercise.options);
+    }else exercise=genOpsType(type,true);
+  }else exercise=genOpsPracticeFamily(type);
+  return Object.assign(exercise,{taskDifficulty:level,diff:level,opsTheory:OPS_THEORY_SECTIONS[type]});
+}
+
+function genOpsPracticeFamily(type){
+  let question,correct,answer,wrongs,guide,solution;
+  if(type==='capses'){
+    const capacity=rnd(8,22),q=rnd(5,15),r=rnd(0,capacity-1),total=capacity*q+r;
+    const boxes=q+Number(r>0),last=r||capacity;
+    question='Una biblioteca ha de guardar '+total+' llibres en capses de fins a '+capacity+
+      ' llibres. Omple al màxim totes les capses menys, si cal, l’última. Quantes capses necessita i quants llibres hi haurà a l’última? Escriu els valors en aquest ordre, separats per un punt i coma.';
+    answer={type:'pair',value:[boxes,last]};
+    correct=answer.value.join('; ');
+    wrongs=[(boxes-1)+'; '+last,boxes+'; '+(last-1),(boxes+1)+'; '+last];
+    guide=['Calcula quantes capses s’omplen i quants llibres sobren.'];
+    solution=[total+' = '+capacity+' × '+q+' + '+r+'.',r?
+      'Cal una capsa més per als '+r+' llibres sobrants: '+q+' + 1 = '+boxes+' capses.':
+      'S’omplen exactament '+q+' capses. L’última també és plena i conté '+capacity+' llibres.'];
+  }else if(type==='triar-operacio'){
+    const operators=['+','-','×','÷'],op=operators[rnd(0,3)],b=rnd(5,18);
+    const a=op==='÷'?b*rnd(4,20):rnd(20,90);
+    const contexts={
+      '+':'Tens '+a+' targetes i en reps '+b+' més. Quantes en tindràs?',
+      '-':'Tens '+a+' targetes i en regales '+b+'. Quantes te’n queden?',
+      '×':'Tens '+a+' sobres amb '+b+' targetes a cadascun. Quantes targetes tens?',
+      '÷':'Tens '+a+' targetes i en poses '+b+' a cada sobre. Quants sobres necessites?'
+    };
+    const reasons={'+':'Sumes les targetes inicials i les que reps.','-':'Restes les targetes que regales de les inicials.',
+      '×':'Multipliques el nombre de sobres per les targetes de cada sobre.','÷':'Divideixes el total de targetes per les que caben en un sobre.'};
+    question=contexts[op]+' Escriu l’operació sense calcular-la.';
+    correct=a+' '+op+' '+b;
+    answer={type:'operation'};
+    answer.value=readOpsAnswer(answer,correct);
+    wrongs=operators.filter(other=>other!==op).map(other=>a+' '+other+' '+b);
+    guide=['Identifica què representa cada quantitat.'];
+    solution=[reasons[op],'L’operació és '+correct+'.'];
+  }else if(type==='compensacio'){
+    const round=100*rnd(2,9),delta=rnd(1,9)*(rnd(0,1)?1:-1),a=round-delta,b=rnd(10,900),value=b-delta;
+    question='Per sumar '+a+' + '+b+', substitueixes '+a+' per '+round+'. Quin segon sumand manté la mateixa suma?';
+    answer={type:'integer',value};
+    correct=String(value);
+    wrongs=[b,b+delta,value+10];
+    guide=['El canvi d’un sumand s’ha de compensar amb un canvi en sentit contrari.'];
+    solution=[delta>0?'El primer sumand augmenta en '+delta+'; el segon ha de disminuir en '+delta+'.':
+      'El primer sumand disminueix en '+(-delta)+'; el segon ha d’augmentar en '+(-delta)+'.',
+      a+' + '+b+' = '+round+' + '+value+' = '+(a+b)+'.'];
+  }else if(type==='diagnosticar-divisio'){
+    const d=rnd(4,15),q=rnd(5,30),r=rnd(0,d-1),total=d*q+r;
+    const reason=rnd(0,1)?'A':'B',shownQ=reason==='A'?q+1:q-1,shownR=reason==='A'?r:r+d;
+    question='Algú escriu '+total+' = '+d+' × '+shownQ+' + '+shownR+' i diu que el quocient és '+shownQ+
+      '. Identifica el motiu i dona el quocient i el residu correctes.<br>A. '+OPS_DIVISION_REASONS.A+'<br>B. '+OPS_DIVISION_REASONS.B;
+    answer={type:'diagnosis',value:[reason,q,r],division:[total,d]};
+    correct=answer.value.join('; ');
+    const other=reason==='A'?'B':'A';
+    wrongs=[other+'; '+q+'; '+r,reason+'; '+shownQ+'; '+shownR,other+'; '+shownQ+'; '+shownR];
+    guide=['Comprova la igualtat i, per separat, compara el residu amb el divisor.'];
+    solution=[reason==='A'?d+' × '+shownQ+' + '+shownR+' = '+(d*shownQ+shownR)+', diferent de '+total+'.':
+      'La igualtat dona '+total+', però '+shownR+' ≥ '+d+'.',
+      total+' = '+d+' × '+q+' + '+r+' i 0 ≤ '+r+' < '+d+'.'];
+  }else{
+    const d1=rnd(4,15),divisors=[];
+    // El primer interval comença on acaba el segon. Busquem aquest punt comú.
+    for(let d=4;d<=15;d++){
+      for(let q=1;q<d;q++){
+        if(d1*q%d===d-1){divisors.push([d,q]);break;}
+      }
+    }
+    const [d2,firstQ]=divisors[rnd(0,divisors.length-1)],q1=firstQ+d2*rnd(1,10),total=d1*q1,q2=Math.floor(total/d2);
+    question='Agrupant totes les peces de '+d1+' en '+d1+' es formen '+q1+
+      ' grups complets. Agrupant-les de '+d2+' en '+d2+' se’n formen '+q2+
+      '. En tots dos casos es fan tots els grups complets possibles. Quantes peces hi ha?';
+    answer={type:'integer',value:total};
+    correct=String(total);
+    wrongs=[total-1,total+1,total+2];
+    guide=['Troba els intervals dels dos agrupaments i busca els nombres comuns.'];
+    solution=['Amb '+d1+' peces per grup, el total va de '+total+' a '+(total+d1-1)+'.',
+      'Amb '+d2+' peces per grup, el total va de '+(d2*q2)+' a '+(d2*q2+d2-1)+'.',
+      'L’únic total comú és '+total+' peces.'];
+  }
+  return {type,question,correct,options:buildOpsOptions(answer,correct,wrongs),guide,solution,opsAnswer:answer,isProblem:true};
 }
 
 // ── GEN JERARQUIA ──────────────────────────────────────────────────────────
@@ -3827,7 +3991,7 @@ var AMP_CATS=[
 var TOPICS=[
   {id:"naturals",course:"1r",exam1r:true,adaptivePractice:true,icon:"1&#65039;&#8419;",name:"Nombres naturals",short:"Ordre, comparació, arrodoniment i problemes",theory:{title:"Nombres naturals",text:`Els nombres naturals serveixen per comptar, ordenar i resoldre situacions quotidianes.`,formulas:[`Comparació: primer compta xifres; després compara des de l'esquerra`,`Arrodoniment: mira la xifra immediatament inferior`,`Problemes: identifica les dades i l'operació abans de calcular`]},gen:genNaturals},
   {id:"decimal_sys",course:"1r",exam1r:true,adaptivePractice:true,icon:"&#128315;",name:"Sistema de numeració decimal",short:"Valor posicional, descomposició i lectura",theory:{title:"Sistema de numeració decimal",text:`Cada xifra té un valor que depèn de la posició que ocupa.`,formulas:[`345.678 = 3×100000 + 4×10000 + 5×1000 + 6×100 + 7×10 + 8`,`Posicions: unitats, desenes, centenes, milers, desenes de miler i centenes de miler`,`El mateix dígit pot tenir valors diferents segons la posició`]},gen:genDecimalSys},
-  {id:"ops",course:"1r",exam1r:true,icon:"&#10133;",name:"Operacions bàsiques",short:"Suma, resta, multiplicació i divisió",theory:{title:"Operacions bàsiques",text:`Les quatre operacions permeten combinar i repartir quantitats amb nombres naturals.`,formulas:[`Suma: alinea les xifres per posició`,`Resta: comprova si cal reagrupar`,`Multiplicació: productes parcials i suma`,`Divisió: dividend = divisor × quocient + residu`]},gen:genOps},
+  {id:"ops",course:"1r",exam1r:true,adaptivePractice:true,icon:"&#10133;",name:"Operacions bàsiques",short:"Suma, resta, multiplicació i divisió",theory:{title:"Operacions bàsiques",text:`Les quatre operacions permeten combinar i repartir quantitats amb nombres naturals.`,formulas:[`Suma: alinea les xifres per posició`,`Resta: comprova si cal reagrupar`,`Multiplicació: productes parcials i suma`,`Divisió: dividend = divisor × quocient + residu`]},gen:genOps},
   {id:"potencies",course:"1r",exam1r:true,icon:"&#178;",name:"Potències i arrels",short:"Base, exponent, potències i arrels quadrades exactes",theory:{title:"Potències i arrels",text:`Una potència és una manera abreujada d'escriure un producte de factors iguals. L'arrel quadrada és l'operació inversa d'elevar al quadrat.`,formulas:[`a^n: a és la base i n és l'exponent`,`3^4 = 3 × 3 × 3 × 3`,`5² = 25 ↔ √25 = 5`,`Treballarem arrels quadrades exactes senzilles`]},gen:genPotenciesArrelsVariat},
   {id:"jerarquia",course:"1r",exam1r:true,icon:"&#128208;",name:"Jerarquia d'operacions",short:"Parèntesis, potències, ×/÷, +/−",theory:{title:"Jerarquia de les operacions",text:`Quan hi ha diverses operacions, cal respectar un ordre de resolució.`,formulas:[`1r: parèntesis i claudàtors, de dins cap enfora`,`2n: potències i arrels`,`3r: multiplicacions i divisions, d'esquerra a dreta`,`4t: sumes i restes, d'esquerra a dreta`]},gen:genJerarquia},
   {id:"divis",course:"1r",exam1r:true,icon:"&#128269;",name:"Divisibilitat",short:"Criteris, primers, múltiples i divisors",theory:{title:"Divisibilitat",text:`Els criteris de divisibilitat permeten saber si una divisió és exacta sense efectuar-la completament.`,formulas:[`Divisible per 2: acaba en xifra parella`,`Divisible per 3 o 9: usa la suma de les xifres`,`Divisible per 5: acaba en 0 o 5`,`Nombre primer: només té dos divisors, 1 i ell mateix`]},gen:genDivisibilitat},
@@ -4024,8 +4188,9 @@ var MI_THEORY_PAGES={
   percentatges:'teoria/numeric/percentatges-1r-eso.html',
   notacio2:'teoria/numeric/notacio-cientifica-ampliacio-2n-eso.html'
 };
-function miTheoryLinkHtml(topicId,label){
+function miTheoryLinkHtml(topicId,label,section){
   var href=MI_THEORY_PAGES[topicId];
+  if(href&&section)href+='#'+section;
   if(!href)return '';
   return '<a class="theory-page-link mi-review-theory-link" href="'+href+'" style="margin:12px 0 0">📚 '+(label||'Repassar la teoria d\'aquest tema')+'</a>';
 }
@@ -4066,7 +4231,7 @@ function selTopic(i){
   examLaunch.dataset.topic=t.id;
   document.getElementById('sIntro').toggleAttribute('data-adaptive-practice',!!t.adaptivePractice);
   var objective=t.adaptivePractice?'preguntes':'encerts';
-  document.querySelector('#bL1 small').textContent='Guiat · '+NEEDED[1]+' '+(t.id==='decimal_sys'?'punts':objective);
+  document.querySelector('#bL1 small').textContent='Guiat · '+NEEDED[1]+' '+(t.id==='decimal_sys'?'punts':t.id==='ops'?'encerts':objective);
   document.querySelector('#bL2 small').textContent='Sol/a · '+NEEDED[2]+' '+objective;
   document.getElementById('bL1').classList.add('active');
   document.getElementById('bL2').classList.remove('active');
@@ -4152,6 +4317,8 @@ function openOk1Legacy(correct,value,ex){
   return false;
 }
 function openHint1(ex){
+  if(ex?.opsAnswer?.type==='operation')return 'Escriu els dos nombres i el signe de l’operació, sense calcular el resultat.';
+  if(ex?.opsAnswer?.type==='diagnosis')return 'Tria el motiu i escriu quocient i residu separats per un punt i coma.';
   if(ex?.opsAnswer?.type==='pair')return 'Format: 25; 2';
   if(ex?.opsAnswer?.type==='integer')return 'Escriu el resultat com un enter. Pots agrupar els milers amb punts o espais.';
   if(ex?.decimalAnswer==='spelling')return 'Escriu el nombre en català amb l’ortografia i els guionets corresponents.';
@@ -4186,16 +4353,28 @@ function startP(){
   window.MIAnalytics?.start();state.exCount=0;state.correctStreak=0;
   var topic=TOPICS[state.currentTopic];
   if(topic.adaptivePractice)adaptivePracticeSessions[topic.id]={points:0,seen:new Set(),questions:new Set(),lastFamily:null};
-  if(isGuidedDecimalPractice())Object.assign(adaptivePracticeSessions.decimal_sys,{correct:0,incorrect:0,ended:false});
+  if(isGuidedDecimalPractice()||topic.id==='ops')Object.assign(adaptivePracticeSessions[topic.id],{correct:0,incorrect:0,ended:false});
   resetVariationBagForTopic(topic.id);showEx();
 }
 function isGuidedDecimalPractice(){return TOPICS[state.currentTopic]?.id==='decimal_sys'&&state.level===1;}
 function adaptiveGoalReached(){
+  if(TOPICS[state.currentTopic].id==='ops'){
+    const session=adaptivePracticeSessions.ops;
+    return state.level===1?session.correct>=NEEDED[1]:session.correct+session.incorrect>=NEEDED[2];
+  }
   return (isGuidedDecimalPractice()?adaptivePracticeSessions.decimal_sys.points:state.exCount)>=NEEDED[state.level];
 }
 function updateSBar(){
   var topic=TOPICS[state.currentTopic],needed=NEEDED[state.level];
   var points=topic.adaptivePractice?adaptivePracticeSessions[topic.id].points:state.correctStreak;
+  if(topic.id==='ops'){
+    const session=adaptivePracticeSessions.ops,guided=state.level===1;
+    const count=guided?session.correct:session.correct+session.incorrect;
+    document.getElementById('sb').style.width=Math.min(100,count/needed*100)+'%';
+    document.getElementById('slb').textContent=(guided?'Encerts: ':'Preguntes contestades: ')+count+'/'+needed+
+      ' · Punts de dificultat: '+points+(guided?'':' · Ratxa: '+state.correctStreak);
+    return;
+  }
   var pct=Math.min(100,Math.round(points/needed*100));
   document.getElementById('sb').style.width=pct+'%';
   document.getElementById('slb').textContent=topic.adaptivePractice?'Progrés de dificultat: '+points+'/'+needed:'Encerts seguits: '+points+' / '+needed;
@@ -4208,6 +4387,7 @@ var adaptivePracticeFamilies={
 var adaptivePracticeSessions={};
 var ADAPTIVE_PRACTICE_THRESHOLDS={1:[3,6],2:[6,12]};
 function adaptivePracticeGroups(t){
+  if(t.id==='ops')return OPS_PRACTICE_FAMILIES;
   var groups=[[],[],[]];
   adaptivePracticeFamilies[t.id].forEach(family=>groups[miTaskDifficulty.getDifficulty(t,{type:family[0]})-1].push(family));
   return groups;
@@ -4215,7 +4395,8 @@ function adaptivePracticeGroups(t){
 function adaptiveLevel(points){return 1+ADAPTIVE_PRACTICE_THRESHOLDS[state.level].filter(threshold=>points>=threshold).length;}
 function nextAdaptivePractice(t){
   var session=adaptivePracticeSessions[t.id],groups=adaptivePracticeGroups(t);
-  var level=adaptiveLevel(session.points);
+  var level=session.nextLevel??adaptiveLevel(session.points);
+  session.nextLevel=null;
   var pool=groups.slice(0,level).filter(group=>group.length).at(-1)||groups.find(group=>group.length);
   if(!pool)throw Error('No hi ha famílies disponibles per practicar «'+t.name+'».');
   var alternatives=pool.filter(family=>family!==session.lastFamily);
@@ -4231,7 +4412,7 @@ function nextAdaptivePractice(t){
   search: for(const family of ordered){
     for(let attempt=0;attempt<5;attempt++){
       const type=family[rnd(0,family.length-1)];
-      const exercise=t.id==='naturals'?(type===1001?MIFirstNumericTasks.generate('paquets-exactes'):
+      const exercise=t.id==='ops'?genOpsPractice(type,level):t.id==='naturals'?(type===1001?MIFirstNumericTasks.generate('paquets-exactes'):
         typeof type==='number'?genNaturalType(type):genNaturalPracticeFamily(type)):
         type===1001?MIFirstNumericTasks.generate('xifres-amb-condicions'):
         type===1002?MIDecimalPractice.positionalChange(MIFirstNumericTasks.generate('canvi-posicional'),rnd,buildOpts):
@@ -4244,13 +4425,15 @@ function nextAdaptivePractice(t){
   session.questions.add(selected.exercise.question);
   session.seen.add(selected.family);
   session.lastFamily=selected.family;
-  return miTaskDifficulty.annotate(t,selected.exercise);
+  return t.id==='ops'?selected.exercise:miTaskDifficulty.annotate(t,selected.exercise);
 }
 function showEx(){
   state.answered=false;window.MIAnalytics?.shown();var t=TOPICS[state.currentTopic];
   currentEx=decorateExercise(t,t.adaptivePractice?nextAdaptivePractice(t):t.gen());state.exCount++;
   var typeLabel=currentEx.isProblem?'<span class="tyb typ">&#128203; Problema</span>':'<span class="tyb tyc">&#128290; Calcul</span>';
-  document.getElementById('exN').innerHTML='Exercici '+state.exCount+' '+typeLabel;
+  if(t.id==='ops')document.getElementById('miTaskContext')?.remove();
+  const category=t.id==='ops'?'<span class="tyb '+(currentEx.taskDifficulty===3?'typ':'tyc')+'">'+(currentEx.taskDifficulty===3?'Ampliació':'Normal')+'</span> ':'';
+  document.getElementById('exN').innerHTML='Exercici '+state.exCount+' '+category+typeLabel;
   updateSBar();
   var question=document.getElementById('exQ');
   question.toggleAttribute('data-decimal-practice',t.id==='decimal_sys');
@@ -4258,11 +4441,16 @@ function showEx(){
   var gs=document.getElementById('gst');
   if(state.level===1){gs.style.display='block';gs.innerHTML='<h4>&#128161; Pistes:</h4>'+(currentEx.guide||[]).map(function(s){return '&bull; '+s;}).join('<br>');}
   else{gs.style.display='none';}
+  const diagnosis=currentEx.opsAnswer?.type==='diagnosis';
+  document.getElementById('opsReasonLabel').hidden=!diagnosis;
+  const reason=document.getElementById('opsReason');reason.value='';reason.disabled=!diagnosis;
   if(state.mode==='open'||currentEx.openOnly){
     document.getElementById('og').innerHTML='';
     document.getElementById('openWrap').style.display='block';
     var inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';
     document.querySelector('#openWrap .math-pad').style.display=currentEx.decimalAnswer==='spelling'?'none':'';
+    if(diagnosis)inp.setAttribute('aria-label','Quocient i residu, separats per un punt i coma');
+    else inp.removeAttribute('aria-label');
     document.getElementById('openHint').textContent=openHint1(currentEx);
     setTimeout(function(){inp.focus();},60);
   }else{
@@ -4272,13 +4460,13 @@ function showEx(){
   document.getElementById('fbA').innerHTML='';
   document.getElementById('bNext').style.display='none';
   var leave=document.getElementById('bChg'),guidedDecimal=isGuidedDecimalPractice();
-  leave.style.display=guidedDecimal?'block':'none';
-  leave.textContent=guidedDecimal?'Finalitza la pràctica':'← Canviar de tema';
+  leave.style.display=guidedDecimal||t.id==='ops'?'block':'none';
+  leave.textContent=guidedDecimal||t.id==='ops'?'Finalitza la pràctica':'← Canviar de tema';
   showScreen('sEx');
 }
 function selAns(idx,btn){
   if(state.answered)return;
-  var ans=currentEx.options[idx],isOk=String(ans)===String(currentEx.correct);
+  var ans=currentEx.options[idx],isOk=currentEx.opsAnswer?opsAnswerMatches(currentEx.opsAnswer,ans):String(ans)===String(currentEx.correct);
   document.querySelectorAll('.ob').forEach(function(b){b.disabled=true;if(String(b.textContent)===String(currentEx.correct))b.classList.add('correct');});
   if(!isOk)btn.classList.add('wrong');
   processPracticeAnswer(isOk,ans);
@@ -4286,6 +4474,12 @@ function selAns(idx,btn){
 function checkOpen(){
   if(state.answered)return;
   var inp=document.getElementById('openInput'),val=inp.value.trim();if(!val)return;
+  if(currentEx.opsAnswer?.type==='diagnosis'){
+    const reason=document.getElementById('opsReason');
+    if(!reason.reportValidity())return;
+    val=reason.value+'; '+val;
+    reason.disabled=true;
+  }
   var result=currentEx.decimalAnswer?MIDecimalPractice.grade(currentEx,val):null;
   var ok=result?.ok??openOk1(currentEx.correct,val,currentEx);
   inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');
@@ -4297,27 +4491,33 @@ function processPracticeAnswer(isOk,studentAnswer,message){
     if(state.answered)return;
     var session=adaptivePracticeSessions[topic.id];
     session.points=Math.max(0,Math.min(needed,session.points+(isOk?1:-1)));
-    if(isGuidedDecimalPractice())session[isOk?'correct':'incorrect']++;
+    if(isGuidedDecimalPractice()||topic.id==='ops')session[isOk?'correct':'incorrect']++;
+    if(topic.id==='ops'&&state.level===1&&!isOk){
+      session.nextLevel=Math.min(adaptiveLevel(session.points),Math.max(1,currentEx.taskDifficulty-1));
+    }
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
+  var theoryLink=miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.opsTheory);
   var fb=document.getElementById('fbA');
   if(isOk){
     state.correctStreak++;updateSBar();
-    var extra=adaptive?'<br><b>Resolució:</b>'+solHTML+miTheoryLinkHtml(currentEx.topicId):currentEx.isProblem?'<br><b>Resolucio:</b>'+solHTML:'';
+    var extra=adaptive?'<br><b>Resolució:</b>'+solHTML+theoryLink:currentEx.isProblem?'<br><b>Resolucio:</b>'+solHTML:'';
     fb.innerHTML='<div class="fb ok"><h4>&#9989; Correcte!</h4>'+extra+'</div>';
     if(!adaptive&&state.correctStreak>=needed)markDone();
   } else {
     state.correctStreak=0;updateSBar();
     registerError(currentEx,studentAnswer,'practice');
-    fb.innerHTML='<div class="fb ko"><h4>&#10060; Incorrecte</h4>La teva resposta: <b>'+escHtml(studentAnswer||'—')+'</b><br>'+(message?'<p>'+escHtml(message)+'</p>':'')+'La resposta era: <b>'+currentEx.correct+'</b><br>'+miReviewHtml(currentEx)+'<b>📘 Resolució pas a pas:</b>'+solHTML+miTheoryLinkHtml(currentEx.topicId)+'</div>';
+    fb.innerHTML='<div class="fb ko"><h4>&#10060; Incorrecte</h4>La teva resposta: <b>'+escHtml(studentAnswer||'—')+'</b><br>'+(message?'<p>'+escHtml(message)+'</p>':'')+'La resposta era: <b>'+currentEx.correct+'</b><br>'+miReviewHtml(currentEx)+'<b>📘 Resolució pas a pas:</b>'+solHTML+theoryLink+'</div>';
   }
   var nextBtn=document.getElementById('bNext');
   var finished=adaptive&&adaptiveGoalReached();
-  if(topic.id==='decimal_sys'&&!finished){
-    var nextLevel=adaptiveLevel(session.points);
+  if((topic.id==='decimal_sys'||topic.id==='ops')&&!finished){
+    var nextLevel=session.nextLevel??adaptiveLevel(session.points);
     if(nextLevel!==currentEx.taskDifficulty){
-      fb.insertAdjacentHTML('beforeend','<p>Amb el progrés actual, el següent exercici serà de nivell N'+nextLevel+'.</p>');
+      const change=topic.id==='ops'?(nextLevel<currentEx.taskDifficulty?'El següent exercici serà de dificultat més baixa.':
+        'El següent exercici serà de dificultat més alta.'):'Amb el progrés actual, el següent exercici serà de nivell N'+nextLevel+'.';
+      fb.insertAdjacentHTML('beforeend','<p>'+change+'</p>');
     }
   }
   if(finished){
@@ -4340,7 +4540,10 @@ function nextEx(){
   if(topic.adaptivePractice){
     if(!state.answered)return;
     if(isGuidedDecimalPractice()&&adaptivePracticeSessions.decimal_sys.ended)return;
-    if(adaptiveGoalReached()){showCongrats();return;}
+    if(adaptiveGoalReached()){
+      if(topic.id==='ops')showAdaptivePracticeResult('ops');else showCongrats();
+      return;
+    }
   }else if(state.correctStreak>=needed&&state.done.includes(topic.id)){showCongrats();return;}
   showEx();
 }
@@ -4351,20 +4554,25 @@ function showCongrats(){
   document.getElementById('fbA').innerHTML='<div class="cg">'+message+'<button class="bp" onclick="showHome()">Tornar al menú</button>'+(next?'<button class="bs" onclick="selTopic('+ni+')">Següent: '+next.name+' &rarr;</button>':'')+'</div>';
   document.getElementById('bNext').style.display='none';
 }
-function showGuidedDecimalResult(){
-  const session=adaptivePracticeSessions.decimal_sys,limit=NEEDED[1],achieved=session.points>=limit;
+function showGuidedDecimalResult(){showAdaptivePracticeResult('decimal_sys');}
+function showAdaptivePracticeResult(topicId){
+  const ops=topicId==='ops',guided=state.level===1,session=adaptivePracticeSessions[topicId];
+  const limit=NEEDED[state.level],answered=session.correct+session.incorrect;
+  const count=ops?(guided?session.correct:answered):session.points,achieved=count>=limit;
+  const metric=ops?(guided?'Encerts acumulats':'Preguntes contestades'):'Punts de progrés';
   session.ended=true;state.answered=true;
   const title=document.getElementById('decimalResultTitle');
   title.textContent=achieved?'Objectiu assolit!':'Pràctica finalitzada';
   document.getElementById('decimalResultIcon').hidden=!achieved;
-  document.getElementById('decimalResultSubtitle').textContent=achieved?
-    'Has completat la pràctica guiada de Sistema de numeració decimal.':'Has decidit acabar la pràctica guiada de Sistema de numeració decimal.';
-  document.getElementById('decimalResultScore').textContent=session.points+'/'+limit+' punts';
+  const practice=ops?'pràctica '+(guided?'guiada':'autònoma')+' d’Operacions bàsiques':'pràctica guiada de Sistema de numeració decimal';
+  document.getElementById('decimalResultSubtitle').textContent=(achieved?'Has completat la ':'Has decidit acabar la ')+practice+'.';
+  document.getElementById('decimalResultScore').textContent=count+'/'+limit+(ops?'':' punts');
+  document.getElementById('practiceResultMetric').textContent=metric;
   document.getElementById('decimalResultCount').textContent=session.correct+session.incorrect;
   document.getElementById('decimalResultCorrect').textContent=session.correct;
   document.getElementById('decimalResultIncorrect').textContent=session.incorrect;
   const progress=document.getElementById('decimalResultProgress');
-  progress.max=limit;progress.value=session.points;
+  progress.max=limit;progress.value=count;progress.setAttribute('aria-label',metric);
   document.getElementById('decimalResultStatus').textContent=achieved?'Has arribat a la puntuació objectiu.':'Aquest és el progrés acumulat durant la sessió.';
   const nextIndex=nextCoreIndex(state.currentTopic),nextButton=document.getElementById('decimalResultNext');
   nextButton.style.display=nextIndex>=0?'':'none';
@@ -4376,8 +4584,12 @@ function showGuidedDecimalResult(){
   window.scrollTo(0,0);
   title.focus({preventScroll:true});
 }
-function leavePractice(){if(isGuidedDecimalPractice())showGuidedDecimalResult();else showHome();}
+function leavePractice(){
+  if(TOPICS[state.currentTopic].id==='ops')showAdaptivePracticeResult('ops');
+  else if(isGuidedDecimalPractice())showGuidedDecimalResult();else showHome();
+}
 function goBack(){
+  if(document.getElementById('sEx').classList.contains('active')&&TOPICS[state.currentTopic].id==='ops'){leavePractice();return;}
   if(document.getElementById('sEx').classList.contains('active')&&isGuidedDecimalPractice()&&!adaptivePracticeSessions.decimal_sys.ended){showGuidedDecimalResult();return;}
   var ampProb=document.getElementById('sAmpProb'),ampResults=document.getElementById('sAmpResults'),ampHome=document.getElementById('sAmpHome');
   if((ampProb&&ampProb.classList.contains('active'))||(ampResults&&ampResults.classList.contains('active'))){showAmpHome();return;}
@@ -4896,7 +5108,10 @@ function initPage(){
 }
 
 miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
-miTaskDifficulty.bindDisplay({showName:'showEx',current:()=>typeof curEx!=='undefined'?curEx:currentEx,state:()=>typeof ST!=='undefined'?ST:state});
+miTaskDifficulty.bindDisplay({showName:'showEx',current:()=>{
+  const exercise=typeof curEx!=='undefined'?curEx:currentEx;
+  return exercise?.opsTheory?null:exercise;
+},state:()=>typeof ST!=='undefined'?ST:state});
 loadState();initPage();
 
 /* ── P2 · SELECTOR INDEPENDENT DE TEMES D'EXAMEN ───────── */
