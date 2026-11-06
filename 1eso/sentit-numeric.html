@@ -4367,14 +4367,6 @@ function adaptiveGoalReached(){
 function updateSBar(){
   var topic=TOPICS[state.currentTopic],needed=NEEDED[state.level];
   var points=topic.adaptivePractice?adaptivePracticeSessions[topic.id].points:state.correctStreak;
-  if(topic.id==='ops'){
-    const session=adaptivePracticeSessions.ops,guided=state.level===1;
-    const count=guided?session.correct:session.correct+session.incorrect;
-    document.getElementById('sb').style.width=Math.min(100,count/needed*100)+'%';
-    document.getElementById('slb').textContent=(guided?'Encerts: ':'Preguntes contestades: ')+count+'/'+needed+
-      ' · Punts de dificultat: '+points+(guided?'':' · Ratxa: '+state.correctStreak);
-    return;
-  }
   var pct=Math.min(100,Math.round(points/needed*100));
   document.getElementById('sb').style.width=pct+'%';
   document.getElementById('slb').textContent=topic.adaptivePractice?'Progrés de dificultat: '+points+'/'+needed:'Encerts seguits: '+points+' / '+needed;
@@ -4395,8 +4387,7 @@ function adaptivePracticeGroups(t){
 function adaptiveLevel(points){return 1+ADAPTIVE_PRACTICE_THRESHOLDS[state.level].filter(threshold=>points>=threshold).length;}
 function nextAdaptivePractice(t){
   var session=adaptivePracticeSessions[t.id],groups=adaptivePracticeGroups(t);
-  var level=session.nextLevel??adaptiveLevel(session.points);
-  session.nextLevel=null;
+  var level=adaptiveLevel(session.points);
   var pool=groups.slice(0,level).filter(group=>group.length).at(-1)||groups.find(group=>group.length);
   if(!pool)throw Error('No hi ha famílies disponibles per practicar «'+t.name+'».');
   var alternatives=pool.filter(family=>family!==session.lastFamily);
@@ -4431,9 +4422,7 @@ function showEx(){
   state.answered=false;window.MIAnalytics?.shown();var t=TOPICS[state.currentTopic];
   currentEx=decorateExercise(t,t.adaptivePractice?nextAdaptivePractice(t):t.gen());state.exCount++;
   var typeLabel=currentEx.isProblem?'<span class="tyb typ">&#128203; Problema</span>':'<span class="tyb tyc">&#128290; Calcul</span>';
-  if(t.id==='ops')document.getElementById('miTaskContext')?.remove();
-  const category=t.id==='ops'?'<span class="tyb '+(currentEx.taskDifficulty===3?'typ':'tyc')+'">'+(currentEx.taskDifficulty===3?'Ampliació':'Normal')+'</span> ':'';
-  document.getElementById('exN').innerHTML='Exercici '+state.exCount+' '+category+typeLabel;
+  document.getElementById('exN').innerHTML='Exercici '+state.exCount+' '+typeLabel;
   updateSBar();
   var question=document.getElementById('exQ');
   question.toggleAttribute('data-decimal-practice',t.id==='decimal_sys');
@@ -4492,9 +4481,6 @@ function processPracticeAnswer(isOk,studentAnswer,message){
     var session=adaptivePracticeSessions[topic.id];
     session.points=Math.max(0,Math.min(needed,session.points+(isOk?1:-1)));
     if(isGuidedDecimalPractice()||topic.id==='ops')session[isOk?'correct':'incorrect']++;
-    if(topic.id==='ops'&&state.level===1&&!isOk){
-      session.nextLevel=Math.min(adaptiveLevel(session.points),Math.max(1,currentEx.taskDifficulty-1));
-    }
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
@@ -4513,11 +4499,9 @@ function processPracticeAnswer(isOk,studentAnswer,message){
   var nextBtn=document.getElementById('bNext');
   var finished=adaptive&&adaptiveGoalReached();
   if((topic.id==='decimal_sys'||topic.id==='ops')&&!finished){
-    var nextLevel=session.nextLevel??adaptiveLevel(session.points);
+    var nextLevel=adaptiveLevel(session.points);
     if(nextLevel!==currentEx.taskDifficulty){
-      const change=topic.id==='ops'?(nextLevel<currentEx.taskDifficulty?'El següent exercici serà de dificultat més baixa.':
-        'El següent exercici serà de dificultat més alta.'):'Amb el progrés actual, el següent exercici serà de nivell N'+nextLevel+'.';
-      fb.insertAdjacentHTML('beforeend','<p>'+change+'</p>');
+      fb.insertAdjacentHTML('beforeend','<p>Amb el progrés actual, el següent exercici serà de nivell N'+nextLevel+'.</p>');
     }
   }
   if(finished){
@@ -5108,10 +5092,10 @@ function initPage(){
 }
 
 miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
-miTaskDifficulty.bindDisplay({showName:'showEx',current:()=>{
-  const exercise=typeof curEx!=='undefined'?curEx:currentEx;
-  return exercise?.opsTheory?null:exercise;
-},state:()=>typeof ST!=='undefined'?ST:state});
+miTaskDifficulty.bindDisplay({
+  showName:'showEx',current:()=>typeof curEx!=='undefined'?curEx:currentEx,
+  useAssignedDifficulty:exercise=>!!exercise.opsTheory,state:()=>typeof ST!=='undefined'?ST:state
+});
 loadState();initPage();
 
 /* ── P2 · SELECTOR INDEPENDENT DE TEMES D'EXAMEN ───────── */
