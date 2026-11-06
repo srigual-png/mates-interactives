@@ -45,11 +45,18 @@ async function main() {
       const composite = make('F05',7,13);
       check(accept(composite,'13 × 7') && accept(composite,'7*13') && rejects(composite,['1 × 91','7','91','7 × 12']) &&
         accept(make('F05',7,12),'4 × 21'), 'Qualsevol testimoni de compost');
-      check(accept(make('F03',0,234),'F; S') && accept(make('F03',0,232),'C; S') &&
-        rejects(make('F03',0,234),['C; S','F; U','S']), 'Diagnòstic');
-      const proof = make('F08',6,0), counter = make('F08',6,2);
-      check(accept(proof,'P; 3') && rejects(proof,['C; 6','P; 6']) &&
-        accept(counter,'C; 6') && accept(counter,'C; 18') && rejects(counter,['C; 12','C; 66','C; 0','P; 1']), 'Prova i contraexemple');
+      const diagnosis = make('F03',0,234,0), trueConclusion = make('F03',0,232,0);
+      const answer = (q,verdict,reason=q.divisAnswer.reason) => ({verdict,reason});
+      check(accept(diagnosis,answer(diagnosis,'No')) && accept(trueConclusion,answer(trueConclusion,'Sí')) &&
+        rejects(diagnosis,[answer(diagnosis,'Sí'),answer(diagnosis,'No',diagnosis.divisReasoning.reasons[1]),'F; S']), 'Diagnòstic');
+      check(make('F03',1,234,1).question.includes('múltiple de 3') &&
+        make('F03',2,234).divisAnswer.reason.includes('0 o 5'), 'Confusions amb 9 i 5');
+      const proof = make('F08',6,0), counter = make('F08',3,9);
+      check(accept(proof,answer(proof,'Sí')) && rejects(proof,[answer(proof,'Sí',proof.divisReasoning.reasons[1]),'P; 3']) &&
+        ['3','6'].every(value=>accept(counter,{verdict:'No',counterexample:value})) &&
+        rejects(counter,['12','1','0','63'].map(value=>({verdict:'No',counterexample:value}))), 'Prova i contraexemple');
+      check(proof.correct.includes('qualsevol enter') && [diagnosis,trueConclusion,proof,counter].every(q=>
+        !/[CFPU];\s*[SUNk\d]/.test([q.question,...q.options,...q.solution].join(' '))), 'Llenguatge natural');
       const interval = make('F02',3,22,14), a = interval.divisAnswer;
       check(interval.correct === '30' && Array.from({length:a.max-a.min+1},(_,i)=>a.min+i).filter(n=>accept(interval,n)).join() === '30', 'Unicitat F02');
       check(accept(make(3,1),'ni primer ni compost') && accept(make(3,2),'primer') &&
@@ -74,7 +81,15 @@ async function main() {
       }
       function respond(correct) {
         if (state.mode === 'open') {
-          document.getElementById('openInput').value = correct ? currentEx.correct : 'incorrecte';
+          if (currentEx.divisReasoning) {
+            const form=document.getElementById('divisReasoning'), expected=currentEx.divisAnswer;
+            form.elements.verdict.value=expected.truth?'Sí':'No';
+            form.elements.verdict.dispatchEvent(new Event('change'));
+            checkOpen();
+            check(!state.answered,'Un intent incomplet no es registra');
+            if(expected.counterexample) form.elements.counterexample.value=correct?expected.counterexample.m:1;
+            else form.elements.reason.value=correct?expected.reason:currentEx.divisReasoning.reasons[1];
+          } else document.getElementById('openInput').value = correct ? currentEx.correct : 'incorrecte';
           checkOpen(); checkOpen();
         } else {
           const i = currentEx.options.findIndex(o => (String(o) === String(currentEx.correct)) === correct);
@@ -109,6 +124,16 @@ async function main() {
       session(1,'open',[true,true,true,false,true,true,true,true,false,true,true,true],[1,1,1,2,1,2,2,2,3,2,3,3]);
       session(2,'multi',Array(20).fill(false),Array(20).fill(1),true);
       session(2,'multi',Array(20).fill(true),[...Array(6).fill(1),...Array(6).fill(2),...Array(8).fill(3)]);
+      for(const q of [diagnosis,proof,counter]){
+        for(const correct of [false,true]){
+          start('divis',1,'open');
+          const t=topic('divis'), generate=t.practiceGen;
+          adaptivePracticeSessions.divis.points=6;
+          try{t.practiceGen=()=>({...q,taskDifficulty:3});showEx();}finally{t.practiceGen=generate;}
+          respond(correct);
+          check(document.querySelector('#fbA a').hash==='#'+q.divisTheory,'Enllaç de repàs directe');
+        }
+      }
       start('divis',2,'multi');
       const stats=adaptivePracticeSessions.divis;
       stats.points=6;
@@ -158,10 +183,13 @@ async function main() {
         check(!submit('',p.answer.val)&&!submit('no és '+first,p.answer.val)&&!submit(first,'0')&&
           submit(first,p.answer.val),'Passos obligatoris a '+variant);
       }
-      state.errors.divis.push({id:'divis-antic',type:5,topicId:'divis',question:'Múltiple d’un registre antic',correct:'21'});
+      state.errors.divis.push({id:'divis-antic',type:5,topicId:'divis',question:'Múltiple d’un registre antic',correct:'21'},
+        {id:'divis-f08-antic',type:'F08',topicId:'divis',question:'«Tots els múltiples de 3 són múltiples de 12.» Si és cert, escriu P; k.',answer:'C; 12',correct:'C; 3'});
       state.errors=normalizeErrorStore(state.errors);showErrorSummary();
       check(document.body.textContent.includes('Múltiple d’un registre antic')&&
         document.querySelector('.saved-error-card a[href$="#primers"]'),'Repàs d’errors');
+      check(document.querySelector('.saved-error-card a[href$="#prova-contraexemple"]') &&
+        !document.getElementById('testC').textContent.includes('C; 12'),'Repàs de F08 en llenguatge natural');
       return {families:groups.map(x=>x.length),guided:12,autonomous:[20,20],exams:[12,20],bank:bankProblems.length};
     });
 
@@ -177,6 +205,21 @@ async function main() {
     assert.equal(await page.evaluate(()=>state.exCount),2);
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     const output=process.env.MI_DIVIS_SCREENSHOTS;
+    await page.evaluate(()=>{
+      const t=TOPICS.find(t=>t.id==='divis'),generate=t.practiceGen;
+      const draws=[3,9];
+      const task=genDivisPractice('F08',3,()=>draws.shift());
+      adaptivePracticeSessions.divis.points=6;
+      try{t.practiceGen=()=>task;showEx();}finally{t.practiceGen=generate;}
+    });
+    const form=page.locator('#divisReasoning');
+    await form.locator('#divisVerdict').selectOption('No');
+    await form.locator('button').click();
+    assert.equal(await page.evaluate(()=>state.answered),false);
+    await form.locator('#divisCounterexample').fill('6');
+    await form.locator('#divisCounterexample').press('Enter');
+    await page.locator('#fbA .ok').waitFor();
+    assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
     if(output){
       await page.screenshot({fullPage:true,path:resolve(output,'divis-mobil.png')});
       await page.setViewportSize({width:900,height:920});
@@ -197,7 +240,8 @@ async function main() {
       }
     }
     await page.goto(pathToFileURL(resolve('1eso/teoria/numeric/divisibilitat-1r-eso.html')).href);
-    for(const id of ['divisibilitat','criteris','primers','factoritzacio','errors-frequents']) assert.equal(await page.locator('#'+id).count(),1);
+    for(const id of ['divisibilitat','criteris','primers','factoritzacio','errors-frequents','criteri-incorrecte','prova-contraexemple']) assert.equal(await page.locator('#'+id).count(),1);
+    assert.match(await page.locator('#errors-frequents').innerText(),/234[\s\S]*232[\s\S]*6 són parells[\s\S]*3 també són múltiples de 12|234[\s\S]*232[\s\S]*6 són parells[\s\S]*3 són múltiples de 12/);
     assert.deepEqual(errors,[]);
     console.log(JSON.stringify({...details,keyboard:true,mobile:true}));
   } finally {

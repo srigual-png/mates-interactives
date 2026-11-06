@@ -75,6 +75,10 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .open-input:focus{border-color:var(--primary);}
 .open-input.ok{border-color:var(--ok);background:#f1fcf6;}
 .open-input.ko{border-color:var(--err);background:#fff6f6;}
+#divisReasoning label{display:block;margin-bottom:8px;}
+#divisReasoning select{margin-bottom:12px;}
+#divisReasoning fieldset{min-width:0;border:1px solid var(--border);border-radius:12px;padding:12px;margin:0 0 12px;}
+#divisReasoning fieldset label{display:flex;align-items:baseline;gap:8px;}
 .open-hint{font-size:.78rem;color:var(--muted);margin:6px 2px 0;line-height:1.45;}
 .math-pad{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-top:8px;}
 .math-pad-label{font-size:.75rem;color:var(--muted);margin-right:2px;}
@@ -452,6 +456,7 @@ Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immed
   <div class="gs" id="gst" style="display:none"></div>
   <div class="og" id="og"></div>
   <div class="open-wrap" id="openWrap" style="display:none">
+    <form id="divisReasoning" hidden onsubmit="event.preventDefault();checkOpen()"></form>
     <label id="opsReasonLabel" hidden>Motiu de l’error <select id="opsReason" required><option value="">Tria el motiu</option><option value="A">A · La igualtat no reconstrueix el dividend</option><option value="B">B · El residu és igual o superior al divisor</option></select></label>
     <input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();checkOpen();}">
     <div class="math-pad" aria-label="Teclat matemàtic">
@@ -3912,7 +3917,7 @@ function normalizeErrorEntry(e,topicId){
     options:Array.isArray(e.options)?e.options.slice():[],
     guide:Array.isArray(e.guide)?e.guide.slice():[],
     solution:Array.isArray(e.solution)?e.solution.slice():[],
-    divisTheory:tid==='divis'&&['divisibilitat','criteris','primers','factoritzacio','errors-frequents'].includes(e.divisTheory)?e.divisTheory:undefined,
+    divisTheory:tid==='divis'&&['divisibilitat','criteris','primers','factoritzacio','errors-frequents','criteri-incorrecte','prova-contraexemple'].includes(e.divisTheory)?e.divisTheory:undefined,
     jerarquiaTheory:tid==='jerarquia'&&['ordre','potencies','parentesis','combinades','problemes','errors-tipics'].includes(e.jerarquiaTheory)?e.jerarquiaTheory:undefined,
     level:e.level!==undefined?e.level:null,
     source:e.source||'legacy',
@@ -4180,8 +4185,6 @@ function openHint1(ex){
       product:'Escriu els dos factors separats per × o *.',
       list:'Separa els enters amb un punt i coma. L’ordre és lliure.',
       class:'Escriu primer, compost o cap dels dos.',
-      diagnosis:'Escriu el veredicte i el codi del criteri. Per exemple, F; S.',
-      certificate:'Escriu P; k per a la prova o C; n per al contraexemple.'
     };
     return hints[ex.divisAnswer.kind]||'Escriu un enter.';
   }
@@ -4410,11 +4413,15 @@ function showEx(){
     document.getElementById('og').innerHTML='';
     document.getElementById('openWrap').style.display='block';
     var inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';
-    document.querySelector('#openWrap .math-pad').style.display=currentEx.decimalAnswer==='spelling'?'none':'';
+    const structured=renderDivisReasoning(currentEx.divisReasoning);
+    inp.hidden=structured;
+    document.querySelector('#openWrap .math-pad').style.display=structured||currentEx.decimalAnswer==='spelling'?'none':'';
+    document.querySelector('#openWrap > .btn-check').style.display=structured?'none':'';
+    document.getElementById('openHint').hidden=structured;
     if(diagnosis)inp.setAttribute('aria-label','Quocient i residu, separats per un punt i coma');
     else inp.removeAttribute('aria-label');
     document.getElementById('openHint').textContent=openHint1(currentEx);
-    setTimeout(function(){inp.focus();},60);
+    setTimeout(function(){(structured?document.getElementById('divisVerdict'):inp)?.focus();},60);
   }else{
     document.getElementById('openWrap').style.display='none';
     document.getElementById('og').innerHTML=currentEx.options.map(function(o,i){return '<button class="ob" onclick="selAns('+i+',this)">'+o+'</button>';}).join('');
@@ -4435,6 +4442,17 @@ function selAns(idx,btn){
 }
 function checkOpen(){
   if(state.answered)return;
+  if(currentEx.divisReasoning){
+    const form=document.getElementById('divisReasoning');
+    if(!form.reportValidity())return;
+    const fields=new FormData(form);
+    const verdict=fields.get('verdict'),reason=fields.get('reason'),counterexample=fields.get('counterexample');
+    const ok=openOk1(currentEx.correct,{verdict,reason,counterexample},currentEx);
+    const given=verdict+'. '+(reason||'Nombre proposat: '+counterexample+'.');
+    form.querySelectorAll('input,select,button').forEach(control=>control.disabled=true);
+    processPracticeAnswer(ok,given);
+    return;
+  }
   var inp=document.getElementById('openInput'),val=inp.value.trim();if(!val)return;
   if(currentEx.opsAnswer?.type==='diagnosis'){
     const reason=document.getElementById('opsReason');
@@ -4446,6 +4464,30 @@ function checkOpen(){
   var ok=result?.ok??openOk1(currentEx.correct,val,currentEx);
   inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');
   processPracticeAnswer(ok,val,result?.message);
+}
+function renderDivisReasoning(model){
+  const form=document.getElementById('divisReasoning');
+  form.hidden=!model;
+  if(!model){form.replaceChildren();return false;}
+  const reasons=shuffle(model.reasons.slice());
+  const reasonControl=model.conditional?
+    '<fieldset hidden disabled><legend>'+escHtml(model.reasonPrompt)+'</legend>'+
+      reasons.map(reason=>'<label><input type="radio" name="reason" required value="'+escHtml(reason)+'"> '+escHtml(reason)+'</label>').join('')+'</fieldset>':
+    '<label for="divisCriterion">'+escHtml(model.reasonPrompt)+'</label><select class="open-input" id="divisCriterion" name="reason" required>'+
+      '<option value="">Tria un criteri</option>'+reasons.map(reason=>'<option>'+escHtml(reason)+'</option>').join('')+'</select>';
+  form.innerHTML='<label for="divisVerdict">'+escHtml(model.prompt)+'</label>'+
+    '<select class="open-input" id="divisVerdict" name="verdict" required><option value="">Tria una resposta</option><option>Sí</option><option>No</option></select>'+
+    reasonControl+(model.conditional?'<div hidden><label for="divisCounterexample">Escriu un nombre de l’1 al 60 que demostri que és falsa.</label>'+
+      '<input class="open-input" id="divisCounterexample" name="counterexample" type="number" inputmode="numeric" min="1" max="60" step="1" required disabled></div>':'')+
+    '<button class="btn-check" type="submit">Comprova →</button>';
+  if(model.conditional){
+    const proof=form.querySelector('fieldset'),example=form.elements.counterexample;
+    form.elements.verdict.addEventListener('change',event=>{
+      proof.hidden=proof.disabled=event.target.value!=='Sí';
+      example.parentElement.hidden=example.disabled=event.target.value!=='No';
+    });
+  }
+  return true;
 }
 function processPracticeAnswer(isOk,studentAnswer,message){
   var topic=TOPICS[state.currentTopic],adaptive=topic.adaptivePractice,needed=NEEDED[state.level];
@@ -4737,6 +4779,7 @@ function showErrorSummary(){
       if(!errs.length)return;
       html+='<div style="font-weight:800;color:var(--primary);margin:18px 0 8px">'+t.icon+' '+t.name+' · '+errs.length+'</div>';
       errs.slice().reverse().forEach(function(e){
+        if(t.id==='divis')e=MIDivisibilitat.reasoningReview(e);
         var date='';
         try{date=e.timestamp?new Date(e.timestamp).toLocaleString('ca-ES',{dateStyle:'short',timeStyle:'short'}):'';}catch(_e){}
         var modeTxt=e.source==='exam'?'&#128221; Examen':e.source==='ampliacio'?'&#128221; Problemes oberts':e.source==='legacy'?'&#128230; Error antic':('&#129513; Pràctica · '+(e.level===2?'Pràctica autònoma':'Suport guiat'));

@@ -100,17 +100,13 @@ window.MIDivisibilitat = (() => {
         const separator = text.indexOf(';');
         return separator >= 0 && matches(answer.first, text.slice(0, separator)) && matches(answer.second, text.slice(separator + 1));
       }
-      case 'diagnosis': {
-        if (fields.length !== 2) return false;
-        const verdict = normal(fields[0]);
-        return (answer.truth ? ['c', 'certa'] : ['f', 'falsa']).includes(verdict) && normal(fields[1]) === answer.reason;
-      }
-      case 'certificate': {
-        if (fields.length !== 2) return false;
-        const code = normal(fields[0]), value = integer(fields[1]);
-        if (answer.m % answer.d === 0) return code === 'p' && value === answer.m/answer.d;
-        return code === 'c' && value !== null && value > 0 && value <= 60 &&
-          value % answer.m === 0 && value % answer.d !== 0;
+      case 'reasoning': {
+        if (typeof input !== 'object' || !input) return text === answer.option;
+        if (readYes(input.verdict) !== answer.truth) return false;
+        if (!answer.counterexample) return input.reason === answer.reason;
+        const value = integer(input.counterexample);
+        const {m,d} = answer.counterexample;
+        return value !== null && value >= 1 && value <= 60 && value % m === 0 && value % d !== 0;
       }
       default: return false;
     }
@@ -267,27 +263,45 @@ window.MIDivisibilitat = (() => {
     if (type === 'F03') {
       const d = pick([3,9,5],rnd), n = rnd(100,999), usesLastDigit = d !== 5;
       const last = n%10, sum = digitSum(n);
-      const claimed = usesLastDigit ? last%d === 0 : sum%d === 0;
-      const truth = claimed === (n%d === 0), reason = usesLastDigit ? 's' : 'u';
-      const evidence = usesLastDigit ? `l’última xifra és ${last}` : `la suma de les xifres és ${sum}`;
-      const correct = list([truth ? 'C' : 'F',reason.toUpperCase()]);
-      const options = ['C','F'].flatMap(v => ['S','U'].map(m => list([v,m])));
-      return task(`«${n} ${claimed ? 'és' : 'no és'} divisible per ${d} perquè ${evidence}.» Jutja la conclusió (C: certa, F: falsa) i tria el criteri adequat (S: suma de xifres, U: última xifra). Escriu el parell, per exemple F; S.`,
-        correct, options.filter(option => option !== correct), {kind:'diagnosis',truth,reason},
-        'Una conclusió certa també pot venir d’un criteri incorrecte.',
-        [`El criteri emprat és inadequat. Per al ${d}, ${criteria[d]}.`, criterionWork(n,d),
-          `${n} ${n%d === 0 ? 'és' : 'no és'} divisible per ${d}. La conclusió era ${truth ? 'certa' : 'falsa'}.`],
-        'errors-frequents', buildOpts, {practiceKey:`F03:${n}:${d}`});
+      const confusedDivisor = d === 3 ? 9 : 3;
+      const confuseSum = d !== 5 && rnd(0,1) === 1;
+      const claimed = confuseSum ? sum%confusedDivisor === 0 : usesLastDigit ? last%d === 0 : sum%5 === 0;
+      const truth = claimed === (n%d === 0);
+      const evidence = confuseSum ? `la suma de les xifres és ${sum} i ${sum%confusedDivisor === 0 ? 'és' : 'no és'} múltiple de ${confusedDivisor}` :
+        usesLastDigit ? `acaba en ${last}` : `la suma de les xifres és ${sum}`;
+      const rule = base => base === 5 ? 'Comprovar si l’última xifra és 0 o 5.' :
+        `Comprovar si la suma de xifres és múltiple de ${base}.`;
+      const reason = rule(d), reasons = [reason,rule(confusedDivisor),d === 5 ? rule(9) : rule(5)];
+      const verdict = yes => yes ? 'La conclusió és certa.' : 'La conclusió és falsa.';
+      const explanation = `La justificació és incorrecta. ${reason} ${criterionWork(n,d)} ${n} ${n%d === 0 ? 'és' : 'no és'} divisible per ${d}.`;
+      const correct = `${verdict(truth)} ${explanation}`;
+      const statement = `Un alumne afirma:<br>«${n} ${claimed ? 'és' : 'no és'} divisible per ${d} perquè ${evidence}.»`;
+      return task(statement+'<br>Quina resposta explica millor l’error?', correct,
+        [`${verdict(!truth)} ${reason}`, `${verdict(truth)} ${reasons[1]}`, `${verdict(!truth)} ${reasons[2]}`],
+        {kind:'reasoning',option:correct,truth,reason},
+        'Comprova el nombre amb el criteri correcte i després valora la conclusió i la justificació per separat.',
+        [reason, criterionWork(n,d), `${n} ${n%d === 0 ? 'és' : 'no és'} divisible per ${d}.`,
+          `La conclusió era ${truth ? 'certa' : 'falsa'}, però la justificació aplicava un criteri inadequat.`],
+        'criteri-incorrecte', buildOpts, {practiceKey:`F03:${n}:${d}`,divisOpenQuestion:statement,
+          divisReasoning:{prompt:'És certa la conclusió de l’alumne?',reasonPrompt:'Quin és el criteri correcte per comprovar-ho?',reasons}});
     }
     if (type === 'F08') {
       const m = rnd(2,12), d = pick(range(2,12).filter(value => value !== m),rnd), truth = m%d === 0;
-      const k = m/d, correct = truth ? `P; ${k}` : `C; ${m}`;
-      const wrongs = truth ? [`P; ${k+1}`,`C; ${m}`,`C; ${d}`] : [`P; 1`,`C; 1`,`C; ${d}`];
-      return task(`«Tots els múltiples de ${m} són múltiples de ${d}.» Si és cert, escriu P; k per completar ${m}·t = ${d}·(k·t) per a tot enter t. Si és fals, escriu C; n amb un contraexemple positiu fins a 60.`,
-        correct, wrongs, {kind:'certificate',m,d}, 'Una prova val per a qualsevol múltiple; un contraexemple ha de refutar l’afirmació.',
-        truth ? [`${m} = ${d} × ${k}.`, `Per a qualsevol enter t, ${m}·t = ${d}·(${k}·t).`] :
-          [`Un contraexemple és ${m}: és múltiple de ${m}.`, `${m} ÷ ${d} té residu ${m%d}.`],
-        'errors-frequents', buildOpts, {practiceKey:`F08:${m}:${d}`});
+      const reason = `${m} és divisible per ${d}. Si multipliquem ${m} per qualsevol enter, el resultat continua sent divisible per ${d}.`;
+      const example = `${m*d} és múltiple de ${m} i de ${d}, i amb aquest exemple n’hi ha prou.`;
+      const reverse = `Qualsevol múltiple de ${d} és també múltiple de ${m}.`;
+      const correct = truth ? `Sí. ${reason}` : `No, perquè ${m} és múltiple de ${m} però no de ${d}.`;
+      const wrongs = [`Sí, perquè ${example}`, `Sí, perquè ${reverse.toLowerCase()}`,
+        `No, perquè ${m*d} és múltiple de ${m} però no de ${d}.`];
+      const statement = `Un alumne afirma:<br>«Tots els múltiples de ${m} també són múltiples de ${d}.»`;
+      return task(statement+'<br>És correcta aquesta afirmació? Tria la resposta que ho justifica millor.',
+        correct, wrongs, {kind:'reasoning',option:correct,truth,reason,counterexample:truth ? null : {m,d}},
+        'Un exemple que compleix la regla només comprova un cas. Busca un motiu que valgui per a tots o un cas que la contradigui.',
+        truth ? ['L’afirmació és certa.',reason] :
+          [`L’afirmació és falsa. ${m} és múltiple de ${m}, però deixa residu ${m%d} en dividir-lo per ${d}.`,
+            'Un contraexemple és un cas que compleix la primera condició i falla la segona. Un de sol basta per demostrar que la regla és falsa.'],
+        'prova-contraexemple', buildOpts, {practiceKey:`F08:${m}:${d}`,divisOpenQuestion:statement,
+          divisReasoning:{prompt:'És certa l’afirmació?',reasonPrompt:'Per què és certa?',reasons:[reason,example,reverse],conditional:true}});
     }
     throw Error('Tipus de divisibilitat desconegut: ' + type);
   }
@@ -298,5 +312,31 @@ window.MIDivisibilitat = (() => {
     return range(1,8).map(i => [6,[i+1,i,i%2,1]]);
   }
 
-  return {families, generate, matches, divisors, classify, digitBases, reserves};
+  function reasoningReview(record) {
+    const question = record.question || '';
+    const answer = String(record.answer || '');
+    let draws, given;
+    if (record.type === 'F03') {
+      const old = question.match(/^«(\d{3}) (?:no )?és divisible per ([359]) perquè/);
+      if (!old) return record;
+      draws = [[3,9,5].indexOf(Number(old[2])),Number(old[1]),0];
+      const coded = normal(answer).match(/^(c|certa|f|falsa)\s*;\s*([su])$/);
+      if (coded) given = (coded[1].startsWith('c') ? 'Conclusió certa.' : 'Conclusió falsa.')+
+        (coded[2] === 's' ? ' Sumar les xifres.' : ' Comprovar l’última xifra.');
+    } else if (record.type === 'F08') {
+      const old = question.match(/^«Tots els múltiples de (\d+) són múltiples de (\d+)\.» Si és cert,/);
+      if (!old) return record;
+      const m = Number(old[1]), d = Number(old[2]);
+      if (m < 2 || m > 12 || d < 2 || d > 12 || m === d) return record;
+      draws = [m,range(2,12).filter(value => value !== m).indexOf(d)];
+      const coded = normal(answer).match(/^([pc])\s*;\s*(\d+)$/);
+      if (coded) given = coded[1] === 'c' ? `No. Nombre proposat: ${coded[2]}.` :
+        `Sí. Proposta: ${m} és ${coded[2]} vegades ${d}.`;
+    } else return record;
+    const exercise = generate(record.type,()=>draws.shift(),(correct,wrongs)=>[correct,...wrongs]);
+    return {...record,question:exercise.divisOpenQuestion,correct:exercise.correct,answer:given ?? answer,
+      guide:exercise.guide,review:exercise.guide,solution:exercise.solution,divisTheory:exercise.divisTheory};
+  }
+
+  return {families, generate, matches, divisors, classify, digitBases, reserves, reasoningReview};
 })();
