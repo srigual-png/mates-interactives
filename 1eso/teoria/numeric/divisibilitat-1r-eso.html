@@ -117,10 +117,15 @@ a{color:inherit}
 <nav aria-label="Continguts de la teoria" class="quick-nav"><a href="#divisibilitat">🔍 1. Múltiples, divisors i divisibilitat</a><a href="#criteris">✅ 2. Criteris de divisibilitat</a><a href="#primers">🧩 3. Nombres primers i compostos</a><a href="#factoritzacio">🌳 4. Factorització en nombres primers</a></nav>
 <section class="card major" id="divisibilitat">
 <h2>🔍 1. Múltiples, divisors i divisibilitat</h2>
-<p>Un nombre <strong>a</strong> és divisible per un nombre <strong>b</strong> quan la divisió <strong>a ÷ b</strong> és exacta, és a dir, té residu 0.</p>
+<p>Un nombre <strong>a</strong> és divisible per un enter positiu <strong>b</strong> quan <strong>a ÷ b</strong> té residu 0. Aleshores, <strong>b</strong> és divisor d’<strong>a</strong> i <strong>a</strong> és múltiple de <strong>b</strong>.</p>
 <div class="rule-grid">
 <div class="rule"><strong>Múltiple</strong>24 és múltiple de 6 perquè<div class="math">24 = 6 × 4</div></div>
 <div class="rule"><strong>Divisor</strong>6 és divisor de 24 perquè<div class="math">24 ÷ 6 = 4</div></div>
+</div>
+<p>En dividir 25 entre 6 queda residu 1, així que 6 no és divisor de 25. Qualsevol enter positiu divideix 0, ja que el seu producte per 0 és 0. Dividir entre 0 no està definit. El nombre 1 divideix tots els naturals i té un únic divisor positiu.</p>
+<div class="example"><span class="example-label">DIVISORS PER PARELLES</span>
+<p>Per a 36, les parelles són 1 × 36, 2 × 18, 3 × 12, 4 × 9 i 6 × 6. Cada parella dona dos divisors, excepte 6 × 6, que només aporta el 6 una vegada.</p>
+<div class="math">1, 2, 3, 4, 6, 9, 12, 18, 36</div>
 </div>
 <div class="topic-actions">
 <a class="btn btn-primary" href="../../sentit-numeric.html?tema=divis&amp;nivell=1">🟢 Practicar · Guiat</a>
@@ -145,14 +150,20 @@ a{color:inherit}
 <div class="example"><span class="example-label">EXEMPLE</span>
 <p>El nombre <strong>378</strong> és divisible per 3 perquè 3+7+8=18 i 18 és divisible per 3.</p>
 </div>
+<div class="example"><span class="example-label">XIFRA DESCONEGUDA I DOBLE CONDICIÓ</span>
+<p>A <strong>43□</strong>, les xifres 0 i 5 donen múltiples de 5. Per 3, cal que 4 + 3 + □ sigui múltiple de 3, de manera que les xifres possibles són 2, 5 i 8.</p>
+<p>Entre 22 i 36, els múltiples de 5 són 25, 30 i 35. Les seves sumes de xifres són 7, 3 i 8. Només <strong>30</strong> és també múltiple de 3.</p>
+<p>En els reptes amb el 8, comprova si el nombre format per les tres últimes xifres és múltiple de 8.</p>
+</div>
 </section>
 <section class="card" id="primers">
 <h2>🧩 3. Nombres primers i compostos</h2>
-<p>Un <strong>nombre primer</strong> té exactament dos divisors: 1 i ell mateix. Un nombre compost en té més de dos.</p>
+<p>Entre els naturals més grans que 1, un <strong>nombre primer</strong> té exactament dos divisors positius, 1 i ell mateix, i un <strong>nombre compost</strong> en té més de dos. El 0 i l’1 no són primers ni compostos. El 2 és l’únic primer parell perquè els altres parells positius són divisibles per 2 i tenen més de dos divisors.</p>
 <div class="rule-grid">
 <div class="rule"><strong>Primer</strong><div class="math">13 → divisors: 1 i 13</div></div>
 <div class="rule"><strong>Compost</strong><div class="math">12 → 1, 2, 3, 4, 6, 12</div></div>
 </div>
+<p>El producte 91 = 7 × 13 demostra que 91 és compost, perquè 7 és un divisor entre 1 i 91.</p>
 </section>
 <section class="card" id="factoritzacio">
 <h2>🌳 4. Factorització en nombres primers</h2>
@@ -165,14 +176,16 @@ a{color:inherit}
 </div>
 <div class="example"><span class="example-label">EXEMPLE RESOLT</span>
 <div class="math">72 = 2 × 2 × 2 × 3 × 3 = 2³ × 3²</div>
+<p>8 × 3 × 3 també dona 72, però 8 és compost. Per arribar als factors primers cal substituir el 8 per 2 × 2 × 2. Pots deixar els factors repetits o agrupar-los amb potències.</p>
 </div>
 </section>
-<section class="card mistakes"><h2>⚠️ Errors freqüents</h2><ul><li>Confondre múltiple amb divisor.</li><li>Aplicar un criteri de divisibilitat incorrecte.</li><li>Considerar l’1 com a nombre primer.</li><li>Aturar una factorització abans d’arribar a factors primers.</li></ul></section><section class="card check"><h2>✅ Comprova si ho has entès</h2><details><summary>És 1 un nombre primer?</summary><div class="answer">No. Un primer té exactament dos divisors positius: 1 i ell mateix.</div></details><details><summary>Quan un nombre és divisible per 3?</summary><div class="answer">Quan la suma de les seves xifres és múltiple de 3.</div></details></section><section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Múltiples, divisors i divisibilitat</li><li>Criteris de divisibilitat</li><li>Nombres primers i compostos</li><li>Factorització en nombres primers</li></ul></section><section class="final-cta">
+<section class="card mistakes" id="errors-frequents"><h2>⚠️ Errors freqüents</h2><ul><li>Confondre múltiple amb divisor.</li><li>Aplicar un criteri de divisibilitat incorrecte.</li><li>Considerar l’1 com a nombre primer.</li><li>Aturar una factorització abans d’arribar a factors primers.</li></ul>
+<p>Mirar l’última xifra per decidir si 234 és divisible per 3 és un error. La suma 2 + 3 + 4 dona 9 i 234 és divisible per 3. Per a 232 la conclusió que no és divisible és certa, però la comprovació correcta és que la suma dona 7.</p>
+<p>Tots els múltiples de 6 són parells perquè 6t = 2 × (3t) per a qualsevol enter t. En canvi, 6 és un contraexemple a l’afirmació que tots els múltiples de 6 són múltiples de 4, perquè deixa residu 2.</p>
+</section><section class="card check"><h2>✅ Comprova si ho has entès</h2><details><summary>És 1 un nombre primer?</summary><div class="answer">No. Un primer té exactament dos divisors positius: 1 i ell mateix.</div></details><details><summary>Quan un nombre és divisible per 3?</summary><div class="answer">Quan la suma de les seves xifres és múltiple de 3.</div></details></section><section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Múltiples, divisors i divisibilitat</li><li>Criteris de divisibilitat</li><li>Nombres primers i compostos</li><li>Factorització en nombres primers</li></ul></section><section class="final-cta">
 <h2>Tria què vols practicar</h2>
-<p>Pots treballar els criteris i la factorització o passar directament als exercicis de mcm i MCD.</p>
+<p>Practica els criteris, els divisors, els nombres primers i la factorització.</p>
 <div class="topic-actions">
-<a class="btn btn-primary" href="../../sentit-numeric.html?tema=divis&amp;nivell=1">🟢 Practicar · Guiat</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html?tema=divis&amp;nivell=2">🟠 Practicar · Autònom</a>
 <a class="btn btn-primary" href="../../sentit-numeric.html?tema=divis&amp;nivell=1">🟢 Practicar · Guiat</a>
 <a class="btn btn-secondary" href="../../sentit-numeric.html?tema=divis&amp;nivell=2">🟠 Practicar · Autònom</a>
 <a class="btn btn-secondary" href="../../sentit-numeric.html">← Sentit Numèric</a>
