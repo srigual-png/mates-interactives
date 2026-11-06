@@ -5,6 +5,7 @@
 <script src="../assets/js/raonament-numeric-1eso.js"></script>
 <script src="../assets/js/jerarquia-1eso.js"></script>
 <script src="../assets/js/divisibilitat-1eso.js"></script>
+<script src="../assets/js/mcd-mcm-1eso.js"></script>
 <script src="../assets/js/practica-sistema-decimal-1eso.js"></script>
 <link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
@@ -77,6 +78,7 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 .open-input.ko{border-color:var(--err);background:#fff6f6;}
 #divisReasoning label{display:block;margin-bottom:8px;}
 #divisReasoning select{margin-bottom:12px;}
+#divisReasoning input[id^="mcmField"]{margin-bottom:12px;}
 #divisReasoning fieldset{min-width:0;border:1px solid var(--border);border-radius:12px;padding:12px;margin:0 0 12px;}
 #divisReasoning fieldset label{display:flex;align-items:baseline;gap:8px;}
 .open-hint{font-size:.78rem;color:var(--muted);margin:6px 2px 0;line-height:1.45;}
@@ -2048,18 +2050,16 @@ function genMcmMcdBase(){
         b4=pr4[1],
         res4=lcm(a4,b4);
 
-    var contexts4=[
-      {unit:'segons',q:'Dos llums parpellegen cada <b>{a}</b> i <b>{b}</b> segons. D\'aquí a quants segons tornaran a coincidir?'},
-      {unit:'minuts',q:'Dues línies d\'autobús surten cada <b>{a}</b> i <b>{b}</b> minuts. Si ara surten juntes, d\'aquí a quants minuts coincidiran?'},
-      {unit:'segons',q:'Dos semàfors canvien de fase cada <b>{a}</b> i <b>{b}</b> segons. Quan tornaran a canviar alhora?'},
-      {unit:'minuts',q:'Dues alarmes sonen cada <b>{a}</b> i <b>{b}</b> minuts. D\'aquí a quants minuts sonaran juntes?'},
-      {unit:'minuts',q:'Dos aspersors s\'activen cada <b>{a}</b> i <b>{b}</b> minuts. Quan tornaran a activar-se alhora?'},
-      {unit:'segons',q:'Dues màquines emeten un senyal cada <b>{a}</b> i <b>{b}</b> segons. Quan coincidiran de nou els dos senyals?'},
-      {unit:'minuts',q:'Dues activitats comencen cada <b>{a}</b> i <b>{b}</b> minuts. Si ara coincideixen, quan ho tornaran a fer?'},
-      {unit:'segons',q:'Dos indicadors fan un flaix cada <b>{a}</b> i <b>{b}</b> segons. Quants segons passaran fins al pròxim flaix simultani?'}
+    const contexts4=[
+      ['Dos llums parpellegen alhora ara','segons'],['Dues línies d’autobús surten juntes ara','minuts'],
+      ['Dos semàfors canvien alhora ara','segons'],['Dues alarmes sonen alhora ara','minuts'],
+      ['Dos aspersors s’activen alhora ara','minuts'],['Dues màquines emeten un senyal alhora ara','segons'],
+      ['Dues activitats comencen alhora ara','minuts'],['Dos indicadors fan un flaix alhora ara','segons']
     ];
-    var c4=contexts4[rnd(0,contexts4.length-1)],unit4=c4.unit;
-    question='<span class="pt">'+c4.q.replace('{a}',a4).replace('{b}',b4)+'</span>';
+    const [initial,unit4]=contexts4[rnd(0,contexts4.length-1)];
+    var timeUnit=unit4;
+    question='<span class="pt">'+initial+'. El primer procés es repeteix cada '+a4+' '+unit4+
+      ' i el segon cada '+b4+' '+unit4+'. Al cap de quants '+unit4+' tornaran a coincidir per primera vegada?</span>';
 
     correct=String(res4)+' '+unit4;
 
@@ -2084,9 +2084,9 @@ function genMcmMcdBase(){
   } else {
     diff=3;
     isProblem=true;
-    var common=rnd(2,12),x5=rnd(2,8),y5=rnd(2,8),tries5=0;
-    while((x5===y5||gcd(x5,y5)!==1)&&tries5<200){x5=rnd(2,8);y5=rnd(2,8);tries5++;}
-    if(gcd(x5,y5)!==1){x5=5;y5=7;}
+    var common=rnd(2,12);
+    const ratios=[[2,3],[2,5],[3,4],[3,5],[4,5],[4,7],[5,6],[5,7],[5,8],[7,8]];
+    const [x5,y5]=ratios[rnd(0,ratios.length-1)];
     var a5=common*x5,b5=common*y5,res5=gcd(a5,b5);
     var contexts5=[
       {a:'llapis vermells',b:'llapis blaus',groups:'estoigs'},{a:'pomes',b:'taronges',groups:'cistelles'},
@@ -2094,7 +2094,7 @@ function genMcmMcdBase(){
       {a:'galetes de xocolata',b:'galetes de vainilla',groups:'safates'},{a:'boles blaves',b:'boles grogues',groups:'bosses'},
       {a:'retoladors negres',b:'retoladors vermells',groups:'capses'},{a:'fitxes rodones',b:'fitxes quadrades',groups:'jocs'}
     ],c5=contexts5[rnd(0,contexts5.length-1)];
-    question='<span class="pt">Tenim <b>'+a5+' '+c5.a+'</b> i <b>'+b5+' '+c5.b+'</b>. Volem fer el màxim nombre de <b>'+c5.groups+' idèntics</b>, amb la mateixa quantitat de cada tipus i sense que sobri res. Quants '+c5.groups+' podem fer?</span>';
+    question='<span class="pt">Tenim <b>'+a5+' '+c5.a+'</b> i <b>'+b5+' '+c5.b+'</b>. Volem fer el màxim nombre de <b>'+c5.groups+' idèntics</b>, sense que sobri res. Cada grup ha de tenir la mateixa quantitat del primer tipus que els altres grups, i el mateix nombre del segon tipus que els altres. Quants '+c5.groups+' podem fer?</span>';
     correct=String(res5)+' '+c5.groups;
     opts=buildOpts(correct,[
       lcm(a5,b5)+' '+c5.groups,
@@ -2115,6 +2115,9 @@ function genMcmMcdBase(){
     })),
     guide:guide,
     solution:solution,
+    mcmTheory:MIMcdMcm.anchors[['','A1','A2','A2','A3','A4'][type]],
+    mcmFields:[MIMcdMcm.number('Resultat',parseInt(correct,10),
+      type===4?MIMcdMcm.units[timeUnit]:type===5?[c5.groups]:undefined)],
     isProblem:isProblem,
     diff:diff
   };
@@ -3551,38 +3554,7 @@ function genDivisProb(){
 
 // --- mcm I MCD (4 tipus) ---------------------------------------------------
 function genMcmMcdProb(){
-  var type=ampNextType('mcmmcd',4),diff,text,steps,answer,hints;
-  if(type===1){
-    diff=2;
-    var a=rnd(18,72),b=rnd(18,72);while(a===b)b=rnd(18,72);var g=gcd(a,b),l=lcm(a,b);
-    text='Calcula el <b>MCD</b> i el <b>mcm</b> de <b>'+a+'</b> i <b>'+b+'</b> utilitzant la factorització en nombres primers.';
-    steps=[{label:'Factoritza 1',hint:'Descompon el primer nombre en factors primers',check:function(v){return ampFactorizationEq(v,a);}},{label:'Factoritza 2',hint:'Descompon el segon nombre en factors primers',check:function(v){return ampFactorizationEq(v,b);}},{label:'MCD',hint:'Pren només els factors comuns amb l\'exponent menor',check:function(v){return numEq(v,g);}},{label:'mcm',hint:'Pren tots els factors necessaris amb l\'exponent major',check:function(v){return numEq(v,l);}}];
-    answer={check:function(v){return ampPairEq(v,g,l);},val:'MCD = '+g+'; mcm = '+l};
-    hints=['Factoritzacions: '+a+' = '+factStr(a).replace(/ x /g,' × ')+'; '+b+' = '+factStr(b).replace(/ x /g,' × '),'MCD = '+g,'mcm = '+l];
-  }else if(type===2){
-    diff=2;
-    var t1=rnd(3,9),t2=rnd(4,12);while(t1===t2)t2=rnd(4,12);var meet=lcm(t1,t2);
-    text='Dues llums s\'encenen alhora ara. Una s\'encén cada <b>'+t1+' segons</b> i l\'altra cada <b>'+t2+' segons</b>. Al cap de quants segons tornaran a coincidir?';
-    steps=[{label:'Operació',hint:'Busca el primer múltiple que tenen en comú els dos períodes',check:function(v){return numEq(v,meet);}}];
-    answer={check:function(v){return numEq(v,meet);},val:meet+' segons'};
-    hints=['Cal calcular mcm('+t1+', '+t2+')','mcm('+t1+', '+t2+') = '+meet+'; tornaran a coincidir al cap de '+meet+' segons'];
-  }else if(type===3){
-    diff=2;
-    var nois=rnd(18,60),noies=rnd(18,60),groups=gcd(nois,noies),bn=nois/groups,bg=noies/groups;
-    if(groups===1){nois=24;noies=36;groups=12;bn=2;bg=3;}
-    text='En una activitat hi ha <b>'+nois+' nois</b> i <b>'+noies+' noies</b>. Es vol formar el màxim nombre possible de grups iguals, sense que sobri ningú i amb el mateix nombre de nois i noies a cada grup. Quants grups es poden fer? Quants nois i noies hi haurà a cada grup?';
-    steps=[{label:'Grups',hint:'Busca el divisor comú més gran de les dues quantitats',check:function(v){return numEq(v,groups);}},{label:'Nois/grup',hint:'Divideix el nombre de nois entre els grups',check:function(v){return numEq(v,bn);}},{label:'Noies/grup',hint:'Divideix el nombre de noies entre els grups',check:function(v){return numEq(v,bg);}}];
-    answer={check:function(v){var ns=ampListNums(v);return ns.length>=3&&numEq(ns[0],groups)&&numEq(ns[1],bn)&&numEq(ns[2],bg);},val:groups+' grups; '+bn+' nois i '+bg+' noies per grup'};
-    hints=['MCD('+nois+', '+noies+') = '+groups,'Cada grup: '+nois+' ÷ '+groups+' = '+bn+' nois i '+noies+' ÷ '+groups+' = '+bg+' noies'];
-  }else{
-    diff=3;
-    var L1=rnd(36,96),L2=rnd(30,90),piece=gcd(L1,L2);if(piece===1){L1=72;L2=90;piece=18;}var n1=L1/piece,n2=L2/piece;
-    text='Tenim dues cintes de <b>'+L1+' cm</b> i <b>'+L2+' cm</b>. Les volem tallar en trossos iguals, tan llargs com sigui possible, sense que sobri cinta. Quina longitud tindrà cada tros i quants trossos obtindrem de cada cinta?';
-    steps=[{label:'Longitud',hint:'Busca el divisor comú més gran de les dues longituds',check:function(v){return numEq(v,piece);}},{label:'Cinta 1',hint:'Divideix la primera longitud per la longitud d\'un tros',check:function(v){return numEq(v,n1);}},{label:'Cinta 2',hint:'Divideix la segona longitud per la longitud d\'un tros',check:function(v){return numEq(v,n2);}}];
-    answer={check:function(v){var ns=ampListNums(v);return ns.length>=3&&numEq(ns[0],piece)&&numEq(ns[1],n1)&&numEq(ns[2],n2);},val:piece+' cm; '+n1+' i '+n2+' trossos'};
-    hints=['MCD('+L1+', '+L2+') = '+piece+' cm','Trossos: '+L1+' ÷ '+piece+' = '+n1+' i '+L2+' ÷ '+piece+' = '+n2];
-  }
-  return{topicId:'mcmmcd',topicName:'mcm i MCD',type:type,variantId:'mcmmcd-'+type,cat:'mcm i MCD',diff:diff,text:text,dataBox:null,steps:steps,answer:answer,hints:hints};
+  return MIMcdMcm.bank(ampNextType('mcmmcd',4),rnd);
 }
 
 // --- NOMBRES ENTERS (5 tipus) ---------------------------------------------
@@ -3832,7 +3804,7 @@ var AMP_CATS=[
   {id:'potencies',icon:'²',name:'Potències i arrels',desc:'Quadrats, potències i arrels en situacions contextuals',variants:3,diffCounts:{1:1,2:2,3:0},gen:genPotenciesProb},
   {id:'jerarquia',icon:'📐',name:'Jerarquia d\'operacions',desc:'Expressions i contextos amb parèntesis i potències',variants:4,diffCounts:{1:0,2:2,3:2},gen:genJerProb},
   {id:'divis',icon:'🔍',name:'Divisibilitat',desc:'Divisors, nombres primers i criteris de divisibilitat',variants:4,diffCounts:{1:1,2:3,3:0},gen:genDivisProb},
-  {id:'mcmmcd',icon:'🔗',name:'mcm i MCD',desc:'Coincidències, agrupaments i talls màxims',variants:4,diffCounts:{1:0,2:3,3:1},gen:genMcmMcdProb},
+  {id:'mcmmcd',icon:'🔗',name:'MCD i mcm',desc:'Coincidències, agrupaments i talls màxims',variants:4,diffCounts:{1:0,2:3,3:1},gen:genMcmMcdProb},
   {id:'enters',icon:'±',name:'Nombres enters',desc:'Temperatures, saldos, plantes, altituds i profunditats',variants:5,diffCounts:{1:1,2:3,3:1},gen:genEntersProb},
   {id:'decimals',icon:'💰',name:'Nombres decimals',desc:'Preus, repartiments, unitats, mitjanes i aproximacions',variants:6,diffCounts:{1:1,2:3,3:2},gen:genDecimalsProb},
   {id:'fraccions',icon:'½',name:'Fraccions',desc:'Parts, restes, comparacions i problemes inversos',variants:7,diffCounts:{1:1,2:4,3:2},gen:genFraccionsProb},
@@ -3850,7 +3822,7 @@ var TOPICS=[
   {id:"potencies",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,icon:"&#178;",name:"Potències i arrels",short:"Base, exponent, potències i arrels quadrades exactes",theory:{title:"Potències i arrels",text:`Una potència és una manera abreujada d'escriure un producte de factors iguals. L'arrel quadrada és l'operació inversa d'elevar al quadrat.`,formulas:[`a^n: a és la base i n és l'exponent`,`3^4 = 3 × 3 × 3 × 3`,`5² = 25 ↔ √25 = 5`,`Pots acotar una arrel entre dos enters consecutius amb els seus quadrats`]},gen:genPotenciesArrelsVariat},
   {id:"jerarquia",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,practiceGen:genJerarquiaPractice,icon:"&#128208;",name:"Jerarquia d'operacions",short:"Parèntesis, potències, ×/÷, +/−",theory:{title:"Jerarquia de les operacions",text:`Quan hi ha diverses operacions, cal respectar un ordre de resolució.`,formulas:[`1r: parèntesis i claudàtors, de dins cap enfora`,`2n: potències i arrels`,`3r: multiplicacions i divisions, d'esquerra a dreta`,`4t: sumes i restes, d'esquerra a dreta`]},gen:genJerarquia},
   {id:"divis",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,practiceGen:genDivisPractice,practiceReserve:divisPracticeReserve,icon:"&#128269;",name:"Divisibilitat",short:"Criteris, primers, múltiples i divisors",theory:{title:"Divisibilitat",text:`Els criteris de divisibilitat permeten saber si una divisió és exacta sense efectuar-la completament.`,formulas:[`Divisible per 2: acaba en xifra parella`,`Divisible per 3 o 9: usa la suma de les xifres`,`Divisible per 5: acaba en 0 o 5`,`Nombre primer: només té dos divisors, 1 i ell mateix`]},gen:genDivisibilitat},
-  {id:"mcmmcd",course:"1r",exam1r:true,icon:"&#128279;",name:"mcm i MCD",short:"Mínim comú múltiple i màxim comú divisor",theory:{title:"mcm i MCD",text:`El MCD és el divisor comú més gran i el mcm és el múltiple comú més petit.`,formulas:[`MCD: factors comuns amb exponent menor`,`mcm: tots els factors amb exponent major`,`Són útils per agrupar quantitats i estudiar coincidències periòdiques`]},gen:genMcmMcd},
+  {id:"mcmmcd",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,practiceGen:genMcdPractice,practiceReserve:MIMcdMcm.reserve,icon:"&#128279;",name:"MCD i mcm",short:"Mínim comú múltiple i màxim comú divisor",theory:{title:"MCD i mcm",text:`El MCD és el divisor comú més gran i el mcm és el múltiple comú més petit.`,formulas:[`MCD: factors comuns amb exponent menor`,`mcm: tots els factors amb exponent major`,`Són útils per agrupar quantitats i estudiar coincidències periòdiques`]},gen:genMcmMcd},
   {id:"enters",course:"1r",exam1r:true,icon:"&#177;",name:"Nombres enters",short:"Negatius, recta numèrica i operacions",theory:{title:"Nombres enters (Z)",text:`Els enters inclouen nombres positius, zero i nombres negatius i es poden representar a la recta numèrica.`,formulas:[`A la recta: més a la dreta = més gran`,`Suma i resta: interpreta el signe i el sentit del canvi`,`Multiplicació: signes iguals → positiu; diferents → negatiu`]},gen:genEnters},
   {id:"decimals",course:"1r",exam1r:true,icon:"&#128312;",name:"Nombres decimals",short:"Operacions, conversions, aproximacions i error",theory:{title:"Nombres decimals",text:`Els decimals expressen parts d'una unitat i permeten mesurar i aproximar quantitats.`,formulas:[`Suma/resta: alinea les comes`,`Multiplicació: controla les xifres decimals`,`Fracció → decimal: divideix numerador entre denominador`,`Error absolut = |valor exacte − valor aproximat|`,`Error relatiu = error absolut / valor exacte`]},gen:genDecimals},
   {id:"fraccions",course:"1r",exam1r:true,icon:"&#189;",name:"Fraccions",short:"Equivalència, comparació, operacions i fracció d'una quantitat",theory:{title:"Fraccions",text:`Una fracció a/b representa a parts d'un tot dividit en b parts iguals.`,formulas:[`Pròpia: numerador < denominador`,`Impròpia: numerador > denominador`,`Equivalents: multiplica o divideix numerador i denominador pel mateix nombre`,`Fracció d'una quantitat: divideix pel denominador i multiplica pel numerador`]},gen:genFraccions},
@@ -3917,6 +3889,7 @@ function normalizeErrorEntry(e,topicId){
     options:Array.isArray(e.options)?e.options.slice():[],
     guide:Array.isArray(e.guide)?e.guide.slice():[],
     solution:Array.isArray(e.solution)?e.solution.slice():[],
+    mcmTheory:tid==='mcmmcd'&&MIMcdMcm.isAnchor(e.mcmTheory)?e.mcmTheory:undefined,
     divisTheory:tid==='divis'&&['divisibilitat','criteris','primers','factoritzacio','errors-frequents','criteri-incorrecte','prova-contraexemple'].includes(e.divisTheory)?e.divisTheory:undefined,
     jerarquiaTheory:tid==='jerarquia'&&['ordre','potencies','parentesis','combinades','problemes','errors-tipics'].includes(e.jerarquiaTheory)?e.jerarquiaTheory:undefined,
     level:e.level!==undefined?e.level:null,
@@ -3970,7 +3943,7 @@ function buildErrorRecord(ex,studentAnswer,source){
     guide:Array.isArray(ex.guide)?ex.guide.slice():[],
     review:miReviewPoints(ex),
     solution:Array.isArray(ex.solution)?ex.solution.slice():[],
-    jerarquiaTheory:ex.jerarquiaTheory,divisTheory:ex.divisTheory,
+    jerarquiaTheory:ex.jerarquiaTheory,divisTheory:ex.divisTheory,mcmTheory:ex.mcmTheory,
     level:source==='exam'?0:state.level,
     source:source,
     taskDifficulty:ex.taskDifficulty??null,taskDifficultyStatus:ex.taskDifficultyStatus||'legacy',difficultyBank:ex.difficultyBank||null,difficultyKey:ex.difficultyKey||null,variantId:ex.variantId||null,
@@ -4159,6 +4132,7 @@ function strictOpenForm(ex){
   return /percentatge|fracci[oó]|decimal|arrodoneix|notaci[oó] cient[ií]fica|factoritza|descompon|quin signe|ordena/.test(q);
 }
 function openOk1(correct,value,ex){
+  if(ex?.mcmFields)return MIMcdMcm.matches(ex.mcmFields,value);
   if(ex?.divisAnswer)return MIDivisibilitat.matches(ex.divisAnswer,value);
   if(ex?.jerarquiaAnswer)return MIJerarquia.matches(ex.jerarquiaAnswer,value);
   if(ex?.potenciesAnswer)return potenciesAnswerMatches(ex.potenciesAnswer,value);
@@ -4178,6 +4152,7 @@ function openOk1Legacy(correct,value,ex){
   return false;
 }
 function openHint1(ex){
+  if(ex?.mcmFields)return ex.mcmFields[0].unit?'Escriu el nombre. Pots incloure la unitat demanada.':'Escriu un enter.';
   if(ex?.divisAnswer){
     const hints={
       boolean:'Escriu sí o no.',pair:'Separa les dues respostes amb un punt i coma. Per exemple, sí; no.',
@@ -4236,6 +4211,7 @@ function startP(){
   if(topic.adaptivePractice)adaptivePracticeSessions[topic.id]={points:0,seen:new Set(),questions:new Set(),lastFamily:null,correct:0,incorrect:0,ended:false};
   if(topic.id==='potencies')Object.assign(adaptivePracticeSessions.potencies,{baseDeuInverse:Boolean(rnd(0,1)),lastFamilyByLevel:[]});
   if(topic.practiceGen)adaptivePracticeSessions[topic.id].lastFamilyByLevel=[];
+  if(topic.id==='mcmmcd')adaptivePracticeSessions.mcmmcd.firstP4=rnd(0,1);
   resetVariationBagForTopic(topic.id);showEx();
 }
 function isGuidedDecimalPractice(){return TOPICS[state.currentTopic]?.id==='decimal_sys'&&state.level===1;}
@@ -4254,7 +4230,7 @@ function updateSBar(){
   document.getElementById('sb').style.width=pct+'%';
   document.getElementById('slb').textContent=topic.adaptivePractice?'Progrés de dificultat: '+points+'/'+needed:'Encerts seguits: '+points+' / '+needed;
   const completion=document.getElementById('jerarquiaCompletion');
-  completion.hidden=topic.id!=='jerarquia'&&topic.id!=='divis';
+  completion.hidden=!['jerarquia','divis','mcmmcd'].includes(topic.id);
   if(!completion.hidden){
     const {correct,incorrect}=adaptivePracticeSessions[topic.id];
     completion.textContent=state.level===1?'Encerts acumulats: '+correct+'/'+needed:
@@ -4307,7 +4283,31 @@ function divisPracticeReserve(family,level){
   });
 }
 
+function genMcdPractice(type,level,random=rnd){
+  let exercise;
+  if(type==='A6'){
+    exercise=MIFirstNumericTasks.generate('coincidencies-desfasades',()=>random(0,999999)/1000000);
+    const {a,b,oa,ob,after}=exercise.reasoningData;
+    exercise.practiceKey='A6:'+a+':'+b+':'+oa+':'+ob+':'+after;
+  }else{
+    const session=adaptivePracticeSessions.mcmmcd;
+    if(type==='P4'&&session){
+      const draw=random;
+      const index=[...session.questions].filter(key=>key.startsWith('P4:')).length;
+      let first=true;
+      random=(min,max)=>{
+        if(!first)return draw(min,max);
+        first=false;
+        return (session.firstP4+index)%2;
+      };
+    }
+    exercise=MIMcdMcm.generate(type,random);
+  }
+  return {...exercise,taskDifficulty:level,diff:level};
+}
+
 function adaptivePracticeGroups(t){
+  if(t.id==='mcmmcd')return MIMcdMcm.families;
   if(t.id==='divis')return MIDivisibilitat.families;
   if(t.id==='jerarquia')return MIJerarquia.families;
   if(t.id==='ops')return OPS_PRACTICE_FAMILIES;
@@ -4412,7 +4412,8 @@ function showEx(){
     document.getElementById('og').innerHTML='';
     document.getElementById('openWrap').style.display='block';
     var inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';
-    const structured=renderDivisReasoning(currentEx.divisReasoning);
+    const structured=currentEx.mcmFields?.length>1?
+      renderMcdFields(currentEx.mcmFields):renderDivisReasoning(currentEx.divisReasoning);
     inp.hidden=structured;
     document.querySelector('#openWrap .math-pad').style.display=structured||currentEx.decimalAnswer==='spelling'?'none':'';
     document.querySelector('#openWrap > .btn-check').style.display=structured?'none':'';
@@ -4420,7 +4421,7 @@ function showEx(){
     if(diagnosis)inp.setAttribute('aria-label','Quocient i residu, separats per un punt i coma');
     else inp.removeAttribute('aria-label');
     document.getElementById('openHint').textContent=openHint1(currentEx);
-    setTimeout(function(){(structured?document.getElementById('divisVerdict'):inp)?.focus();},60);
+    setTimeout(function(){(structured?document.querySelector('#divisReasoning select,#divisReasoning input'):inp)?.focus();},60);
   }else{
     document.getElementById('openWrap').style.display='none';
     document.getElementById('og').innerHTML=currentEx.options.map(function(o,i){return '<button class="ob" onclick="selAns('+i+',this)">'+o+'</button>';}).join('');
@@ -4441,6 +4442,16 @@ function selAns(idx,btn){
 }
 function checkOpen(){
   if(state.answered)return;
+  if(currentEx.mcmFields?.length>1){
+    const form=document.getElementById('divisReasoning');
+    if(!form.reportValidity())return;
+    const values=[...new FormData(form).values()].map(value=>value.trim());
+    if(values.some(value=>!value))return;
+    const given=values.join('; ');
+    form.querySelectorAll('input,select,button').forEach(control=>control.disabled=true);
+    processPracticeAnswer(openOk1(currentEx.correct,given,currentEx),given);
+    return;
+  }
   if(currentEx.divisReasoning){
     const form=document.getElementById('divisReasoning');
     if(!form.reportValidity())return;
@@ -4464,6 +4475,20 @@ function checkOpen(){
   inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');
   processPracticeAnswer(ok,val,result?.message);
 }
+function renderMcdFields(fields){
+  const form=document.getElementById('divisReasoning');
+  form.hidden=false;
+  form.innerHTML=fields.map((field,i)=>{
+    const id='mcmField'+i,attributes=' class="open-input" id="'+id+'" name="'+id+'" required';
+    const label='<label for="'+id+'">'+escHtml(field.label)+'</label>';
+    if(field.options)return label+'<select'+attributes+'><option value="">Tria una resposta</option>'+
+      shuffle(field.options).map(option=>'<option>'+escHtml(option)+'</option>').join('')+'</select>';
+    const placeholder=field.list?'Separa els nombres amb comes o espais':field.factor?'Per exemple, 2² × 3':'Escriu un nombre';
+    return label+'<input'+attributes+' placeholder="'+placeholder+'" autocomplete="off">';
+  }).join('')+'<button class="btn-check" type="submit">Comprova →</button>';
+  return true;
+}
+
 function renderDivisReasoning(model){
   const form=document.getElementById('divisReasoning');
   form.hidden=!model;
@@ -4498,7 +4523,7 @@ function processPracticeAnswer(isOk,studentAnswer,message){
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
-  var theoryLink=miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
+  var theoryLink=miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
   var fb=document.getElementById('fbA');
   if(isOk){
     state.correctStreak++;updateSBar();
@@ -4565,7 +4590,7 @@ function showAdaptivePracticeResult(topicId,reason){
   const title=document.getElementById('decimalResultTitle');
   title.textContent=achieved?'Objectiu assolit!':'Pràctica finalitzada';
   document.getElementById('decimalResultIcon').hidden=!achieved;
-  const name=topic.name.toLocaleLowerCase('ca');
+  const name=topicId==='mcmmcd'?topic.name:topic.name.toLocaleLowerCase('ca');
   const practice='pràctica '+(guided?'guiada':'autònoma')+(topicId==='ops'?' d’':' de ')+name;
   document.getElementById('decimalResultSubtitle').textContent=reason||((achieved?'Has completat la ':'Has decidit acabar la ')+practice+'.');
   document.getElementById('decimalResultScore').textContent=correct+'/'+answered;
@@ -4710,7 +4735,7 @@ function ampRegisterError(p,given){
   var tid=p.topicId||'ops',t=TOPICS.find(function(x){return x.id===tid;});
   if(!state.errors[tid])state.errors[tid]=[];
   const answer=p.examAnswer||p.answer;
-  var rec={id:makeErrorId(),topicId:tid,topicName:p.topicName||(t?t.name:p.cat),type:p.type===undefined?null:p.type,question:p.text||'',answer:given,correct:answer&&answer.val!==undefined?String(answer.val):'',options:[],guide:p.practiceHints||(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),solution:Array.isArray(p.hints)?p.hints.slice():[],jerarquiaTheory:p.examAnswer&&!p.divisTheory?'problemes':undefined,divisTheory:p.divisTheory,level:null,taskDifficulty:p.taskDifficulty??null,taskDifficultyStatus:p.taskDifficultyStatus||'legacy',difficultyBank:p.difficultyBank||null,difficultyKey:p.difficultyKey||null,variantId:p.variantId||null,diff:p.diff??null,source:'ampliacio',timestamp:new Date().toISOString()};
+  var rec={id:makeErrorId(),topicId:tid,topicName:p.topicName||(t?t.name:p.cat),type:p.type===undefined?null:p.type,question:p.text||'',answer:given,correct:p.bankAnswerText||(answer&&answer.val!==undefined?String(answer.val):''),options:[],guide:p.practiceHints||(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),solution:Array.isArray(p.hints)?p.hints.slice():[],jerarquiaTheory:p.examAnswer&&!p.divisTheory&&!p.mcmTheory?'problemes':undefined,divisTheory:p.divisTheory,mcmTheory:p.mcmTheory,level:null,taskDifficulty:p.taskDifficulty??null,taskDifficultyStatus:p.taskDifficultyStatus||'legacy',difficultyBank:p.difficultyBank||null,difficultyKey:p.difficultyKey||null,variantId:p.variantId||null,diff:p.diff??null,source:'ampliacio',timestamp:new Date().toISOString()};
   var bucket=state.errors[tid],last=bucket.length?bucket[bucket.length-1]:null;
   var same=last&&last.type===rec.type&&last.question===rec.question&&last.answer===rec.answer&&last.correct===rec.correct&&last.source===rec.source;
   if(!same)bucket.push(rec);saveState();
@@ -4725,12 +4750,16 @@ function ampCheckAnswer(){
     if(s.required&&!ok)requiredStepsOk=false;
     inp.classList.toggle('ok',ok);inp.classList.toggle('err',!ok&&(s.required||inp.value.trim()!==''));if(ok)stepsOk++;
   });
-  var finalOk=false;try{finalOk=p.answer.opsAnswer||p.answer.potenciesAnswer||p.answer.jerarquiaAnswer||p.answer.divisAnswer?p.answer.check(finalVal):MIValidation.grade({...p,question:p.question||p.text,correct:p.answer.val},finalVal,()=>p.answer.check(finalVal));}catch(e){}
+  var finalOk=false;try{finalOk=p.answer.opsAnswer||p.answer.potenciesAnswer||p.answer.jerarquiaAnswer||p.answer.divisAnswer||p.answer.mcmFields?p.answer.check(finalVal):MIValidation.grade({...p,question:p.question||p.text,correct:p.answer.val},finalVal,()=>p.answer.check(finalVal));}catch(e){}
   var completeOk=finalOk&&requiredStepsOk;
   window.MIAnalytics?.answer(completeOk,p.topicId);finalInp.classList.toggle('ok',finalOk);finalInp.classList.toggle('err',!finalOk);
   document.querySelectorAll('#sAmpProb .step-input,#sAmpProb .final-input').forEach(function(el){el.disabled=true;});
   var cb=document.querySelector('#sAmpProb .check-btn');if(cb)cb.disabled=true;
-  if(!completeOk)ampRegisterError(p,p.examAnswer?document.getElementById('ampStep_0').value+' = '+finalVal:finalVal);
+  if(!completeOk){
+    const given=p.bankAnswerText?[...p.steps.map((_,i)=>document.getElementById('ampStep_'+i).value),finalVal].join('; '):
+      p.examAnswer?document.getElementById('ampStep_0').value+' = '+finalVal:finalVal;
+    ampRegisterError(p,given);
+  }
   ampSession.results.push({ok:completeOk,hintUsed:ampSession.hintUsed,stepsOk:stepsOk,stepsTotal:stepsTotal,prob:p,given:finalVal});
   var quality=completeOk?(ampSession.hintUsed?'part':'ok'):'ko',fb='';
   if(quality==='ok'){
@@ -4738,9 +4767,9 @@ function ampCheckAnswer(){
   }else if(quality==='part'){
     fb='<div class="fb-box fb-part"><h4>⚠️ Correcte, però has utilitzat la pista.</h4></div>';
   }else{
-    fb='<div class="fb-box fb-err"><h4>❌ Resposta incorrecta</h4>La resposta correcta és: <b>'+(p.examAnswer||p.answer).val+'</b><div class="sol-steps"><b>Solució pas a pas:</b><br>'+(p.hints||[]).map(function(h,i){return '<div class="sol-step">Pas '+(i+1)+': '+h+'</div>';}).join('')+'</div>'+miTheoryLinkHtml(p.topicId,undefined,p.divisTheory||(p.examAnswer?'problemes':undefined))+'</div>';
+    fb='<div class="fb-box fb-err"><h4>❌ Resposta incorrecta</h4>La resposta correcta és: <b>'+(p.bankAnswerText||(p.examAnswer||p.answer).val)+'</b><div class="sol-steps"><b>Solució pas a pas:</b><br>'+(p.hints||[]).map(function(h,i){return '<div class="sol-step">Pas '+(i+1)+': '+h+'</div>';}).join('')+'</div>'+miTheoryLinkHtml(p.topicId,undefined,p.mcmTheory||p.divisTheory||(p.examAnswer?'problemes':undefined))+'</div>';
   }
-  if(completeOk&&p.divisTheory)fb+=miTheoryLinkHtml(p.topicId,undefined,p.divisTheory);
+  if(completeOk&&(p.mcmTheory||p.divisTheory))fb+=miTheoryLinkHtml(p.topicId,undefined,p.mcmTheory||p.divisTheory);
   document.getElementById('ampFbArea').innerHTML=fb;
   document.getElementById('ampActionRow').style.display='flex';
   var isLast=ampSession.idx>=ampSession.probs.length-1,btn=document.getElementById('ampBtnNext');
@@ -4795,9 +4824,10 @@ function showErrorSummary(){
           +miReviewHtml(e);
         if(Array.isArray(e.solution)&&e.solution.length){
           html+='<button class="bs" onclick="toggleSavedSolution(&quot;'+solId+'&quot;,this)" style="margin-top:10px">&#128214; Veure explicació</button>'
-            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.divisTheory||e.jerarquiaTheory?miTheoryLinkHtml(t.id,undefined,e.divisTheory||e.jerarquiaTheory):'')+'</div>';
+            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.mcmTheory||e.divisTheory||e.jerarquiaTheory||t.id==='mcmmcd'?miTheoryLinkHtml(t.id,undefined,e.mcmTheory||e.divisTheory||e.jerarquiaTheory):'')+'</div>';
         }else{
           html+='<div style="margin-top:10px;font-size:.8rem;color:var(--muted)">Aquest error és d\'una versió anterior i no tenia l\'explicació desada.</div>';
+          if(t.id==='mcmmcd')html+=miTheoryLinkHtml(t.id,undefined,e.mcmTheory);
         }
         html+='<button class="bw" onclick="deleteSavedError(&quot;'+t.id+'&quot;,&quot;'+escHtml(e.id)+'&quot;)" style="margin-top:8px">&#128465; Esborra aquest error</button>'
           +'</div>';
@@ -4873,6 +4903,7 @@ function wrapExamProblem(p){
     opsAnswer:answer?.opsAnswer,
     potenciesAnswer:answer?.potenciesAnswer,
     jerarquiaAnswer:answer?.jerarquiaAnswer,divisAnswer:answer?.divisAnswer,divisTheory:p.divisTheory,
+    mcmFields:answer?.mcmFields,mcmTheory:p.mcmTheory,
     jerarquiaTheory:answer?.jerarquiaAnswer?'problemes':undefined,
     answerCheck:answer&&typeof answer.check==='function'?answer.check:function(v){return norm(v)===norm(this.correct);}
   };
@@ -4950,7 +4981,7 @@ function selEA(idx,btn){
   document.querySelectorAll('#examO .ob').forEach(function(b){b.disabled=true;if(String(b.textContent)===String(q.correct))b.classList.add('correct');});
   if(!ok)btn.classList.add('wrong');
   var solHTML='<div class="solbox">'+solSteps(q.solution)+'</div>';
-  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+q.correct+'</b>')+'</h4>'+solHTML+'</div>';
+  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+q.correct+'</b>')+'</h4>'+solHTML+(q.mcmTheory?miTheoryLinkHtml(q.topicId,undefined,q.mcmTheory):'')+'</div>';
   document.getElementById('bNExam').style.display='block';
   document.getElementById('bNExam').textContent=state.examIdx+1<state.examQs.length?'Seguent ->':'Veure resultat';
 }
@@ -4959,14 +4990,14 @@ function checkExamOpenAnswer(){
   var q=state.examQs[state.examIdx],inp=document.getElementById('examOpenAns');
   if(!q||!q.examProblem||!inp)return;
   var val=inp.value;if(!String(val).trim())return;
-  var ok=false;try{ok=q.divisAnswer?MIDivisibilitat.matches(q.divisAnswer,val):q.jerarquiaAnswer?MIJerarquia.matches(q.jerarquiaAnswer,val):q.opsAnswer||q.potenciesAnswer?q.answerCheck(val):MIValidation.grade(q,val,()=>q.answerCheck(val));}catch(e){ok=false;}
+  var ok=false;try{ok=q.mcmFields?MIMcdMcm.matches(q.mcmFields,val):q.divisAnswer?MIDivisibilitat.matches(q.divisAnswer,val):q.jerarquiaAnswer?MIJerarquia.matches(q.jerarquiaAnswer,val):q.opsAnswer||q.potenciesAnswer?q.answerCheck(val):MIValidation.grade(q,val,()=>q.answerCheck(val));}catch(e){ok=false;}
   if(ok)state.examScore++;
   state.examAnswers.push({ok:ok,q:stripTags(q.question).slice(0,90),correct:q.correct,given:val,topicId:q.topicId,topicName:q.topicName,isProblem:true,examProblem:true});
   if(!ok)registerError(q,val,'exam');
   inp.disabled=true;inp.classList.toggle('ok',ok);inp.classList.toggle('err',!ok);
   var cb=document.getElementById('examOpenCheck');if(cb)cb.disabled=true;
   var solHTML=q.solution&&q.solution.length?'<div class="solbox">'+solSteps(q.solution)+'</div>':'';
-  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+escHtml(q.correct)+'</b>')+'</h4>'+solHTML+(q.divisTheory||q.jerarquiaTheory?miTheoryLinkHtml(q.topicId,undefined,q.divisTheory||q.jerarquiaTheory):'')+'</div>';
+  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+escHtml(q.correct)+'</b>')+'</h4>'+solHTML+(q.mcmTheory||q.divisTheory||q.jerarquiaTheory?miTheoryLinkHtml(q.topicId,undefined,q.mcmTheory||q.divisTheory||q.jerarquiaTheory):'')+'</div>';
   document.getElementById('bNExam').style.display='block';
   document.getElementById('bNExam').textContent=state.examIdx+1<state.examQs.length?'Seguent ->':'Veure resultat';
 }
@@ -5123,7 +5154,7 @@ function initPage(){
 miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
 miTaskDifficulty.bindDisplay({
   showName:'showEx',current:()=>typeof curEx!=='undefined'?curEx:currentEx,
-  useAssignedDifficulty:exercise=>!!exercise.opsTheory||!!(exercise.potenciesTheory||exercise.jerarquiaTheory||exercise.divisTheory)&&Number.isInteger(exercise.taskDifficulty),state:()=>typeof ST!=='undefined'?ST:state
+  useAssignedDifficulty:exercise=>!!exercise.opsTheory||!!(exercise.potenciesTheory||exercise.jerarquiaTheory||exercise.divisTheory||exercise.mcmTheory)&&Number.isInteger(exercise.taskDifficulty),state:()=>typeof ST!=='undefined'?ST:state
 });
 loadState();initPage();
 

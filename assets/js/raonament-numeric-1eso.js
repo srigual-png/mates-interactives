@@ -77,7 +77,12 @@
     {id:'coincidencies-desfasades',topic:'mcmmcd',bankKey:'mcmmcd-raonament',level:3,reason:'Coordinar progressions periòdiques amb inicis diferents i un llindar; aplicar només mcm als intervals no determina la primera coincidència.',build(r){
       const [a,b]=pick(r,[[4,6],[6,8],[6,9],[8,12]]);const seed=pick(r,Array.from({length:61},(_,i)=>i+10).filter(n=>n%a!==n%b)),oa=seed%a,ob=seed%b;
       const after=integer(r,0,50);let answer=after+1;while(answer<oa||answer<ob||(answer-oa)%a||(answer-ob)%b)answer++;
-      return task(this,{a,b,oa,ob,after},`El servei A surt per primer cop al minut ${oa} i després cada ${a} minuts. El B surt per primer cop al minut ${ob} i després cada ${b} minuts. Quin és el primer minut estrictament posterior al ${after} en què surten alhora?`,answer,['Els serveis no han començat alhora: conserva els dos inicis.','Cerca un temps que pertanyi a totes dues llistes i superi estrictament el llindar.'],[`A: ${Array.from({length:Math.floor((answer-oa)/a)+1},(_,i)=>oa+i*a).join(', ')}.`,`B: ${Array.from({length:Math.floor((answer-ob)/b)+1},(_,i)=>ob+i*b).join(', ')}.`,`La primera coincidència posterior al minut ${after} és al minut ${answer}.`]);
+      const q=task(this,{a,b,oa,ob,after},`El servei A surt per primer cop al minut ${oa} i després cada ${a} minuts. El B surt per primer cop al minut ${ob} i després cada ${b} minuts. Quin és el primer minut estrictament posterior al ${after} en què surten alhora?`,answer,['Els serveis no han començat alhora: conserva els dos inicis.','Cerca un temps que pertanyi a totes dues llistes i superi estrictament el llindar.'],[`A: ${Array.from({length:Math.floor((answer-oa)/a)+1},(_,i)=>oa+i*a).join(', ')}.`,`B: ${Array.from({length:Math.floor((answer-ob)/b)+1},(_,i)=>ob+i*b).join(', ')}.`,`La primera coincidència posterior al minut ${after} és al minut ${answer}.`]);
+      q.solution.push(`Si el minut ${after} és una coincidència, també el descartem perquè el límit és estricte.`);
+      const previous=Array.from({length:after+1},(_,i)=>i).filter(i=>i>=oa&&i>=ob&&(i-oa)%a===0&&(i-ob)%b===0).at(-1);
+      const later=answer+Array.from({length:a},(_,i)=>(i+1)*b).find(n=>n%a===0);
+      return {...q,options:[answer,previous??answer-1,later,answer+a].map(String),mcmTheory:'coincidencies-desfasades',
+        mcmFields:[{label:'Minut de la coincidència',value:answer,unit:['min','minut','minuts']}]};
     }},
     {id:'moviments-amb-limits',topic:'enters',bankKey:'enters-raonament',level:3,reason:'Explorar ordres de moviments amb signes i validar tots els estats intermedis contra dos límits.',build(r){
       let start,a,b,c,lower,upper,valid;for(let i=0;i<100;i++){start=integer(r,0,5);a=integer(r,3,8);b=integer(r,9,13);c=-integer(r,5,14);lower=-integer(r,0,5);upper=integer(r,10,18);valid=permutations([a,b,c]).filter(order=>{let pos=start;return order.every(v=>{pos+=v;return pos>=lower&&pos<=upper;});});if(valid.length>=1&&valid.length<=5)break;}
@@ -116,7 +121,7 @@
       t.gen=function(...args){const slot=cursor++%period;return slot<ds.length?generate(ds[slot].id):original.apply(this,args);};
     });
     banks.filter(c=>c.gen).forEach(c=>{const prefix=c.id==='pct'?'percentatges':c.id,ds=catalog.filter(d=>d.bankKey?.startsWith(prefix+'-'));if(!ds.length)return;const original=c.gen,oldCount=c.variants;let cursor=ds.length;c.variants+=ds.length;
-      c.gen=function(...args){const slot=cursor++%(oldCount+ds.length);if(slot>=ds.length)return original.apply(this,args);const d=ds[slot],q=generate(d.id),t=topics.find(t=>t.id===d.topic);return {...q,variantId:d.bankKey,topicId:t.id,topicName:t.name,cat:c.name,text:q.question,dataBox:null,steps:[],answer:{val:q.correct,check:v=>numEq(v,Number(q.correct))},practiceHints:q.guide,hints:q.solution};};
+      c.gen=function(...args){const slot=cursor++%(oldCount+ds.length);if(slot>=ds.length)return original.apply(this,args);const d=ds[slot],q=generate(d.id),t=topics.find(t=>t.id===d.topic);return {...q,variantId:d.bankKey,topicId:t.id,topicName:t.name,cat:c.name,text:q.question,dataBox:null,steps:[],answer:q.mcmFields&&root.MIMcdMcm?{val:q.correct,mcmFields:q.mcmFields,check:v=>root.MIMcdMcm.matches(q.mcmFields,v)}:{val:q.correct,check:v=>numEq(v,Number(q.correct))},practiceHints:q.guide,hints:q.solution};};
     });
   }
   catalog.forEach(d=>Object.freeze(d));Object.freeze(catalog);
