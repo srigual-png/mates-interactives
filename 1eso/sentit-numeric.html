@@ -1280,8 +1280,58 @@ function genDecimalSysType(type,practice=false){
 }
 
 // ── GEN OPERACIONS ─────────────────────────────────────────────────────────
+function readOpsInteger(value){
+  const text=String(value).trim().replace(/^−/,'-');
+  if(!/^[+-]?(?:\d+|\d{1,3}([. \u00a0\u202f])\d{3}(?:\1\d{3})*)$/.test(text))return null;
+  const number=Number(text.replace(/[. \u00a0\u202f]/g,''));
+  return Number.isSafeInteger(number)?number:null;
+}
+
+function readOpsAnswer(answer,value){
+  let text=String(value).trim();
+  if(answer.type==='integer'){
+    if(answer.unit==='euros')text=text.replace(/\s*(?:€|euros?)$/i,'');
+    if(answer.unit==='unitats')text=text.replace(/\s*unitats?$/i,'');
+    return readOpsInteger(text);
+  }
+
+  if(text.startsWith('(')&&text.endsWith(')'))text=text.slice(1,-1);
+  const parts=text.split(';');
+  if(parts.length!==2)return null;
+  const pair=parts.map(readOpsInteger);
+  return pair.includes(null)?null:pair;
+}
+
+function opsAnswerMatches(answer,input){
+  const value=readOpsAnswer(answer,input);
+  if(value===null)return false;
+  if(answer.type==='integer')return value===answer.value;
+  if(answer.division){
+    const [dividend,divisor]=answer.division;
+    const [quotient,remainder]=value;
+    return divisor>0&&quotient>=0&&remainder>=0&&remainder<divisor&&
+      dividend===divisor*quotient+remainder;
+  }
+  return value[0]===answer.value[0]&&value[1]===answer.value[1];
+}
+
+function buildOpsOptions(answer,correct,wrongs){
+  const seen=new Set([String(answer.value)]);
+  const distractors=[];
+  for(const wrong of wrongs){
+    const value=readOpsAnswer(answer,wrong);
+    if(value===null||seen.has(String(value)))continue;
+    seen.add(String(value));
+    // Fem servir el mateix format que buildOpts per als distractors de reserva.
+    const label=answer.type==='pair'?value.join('; '):String(value);
+    distractors.push(label+(answer.unit?' '+answer.unit:''));
+  }
+  return buildOpts(correct,distractors);
+}
+
 function genOps(){
-  var type=rnd(1,6),question,correct,opts,guide,solution,isProblem=false,diff=1;
+  var type=rnd(1,6),question,correct,wrongs,guide,solution,isProblem=false,diff=1;
+  var opsAnswer={type:'integer'};
 
   if(type===1){
     diff=1;
@@ -1290,7 +1340,7 @@ function genOps(){
 
     question='Calcula: <span class="fc">'+a+' + '+b+'</span>';
 
-    opts=buildOpts(correct,sumDistractors(a,b).map(String));
+    wrongs=sumDistractors(a,b);
 
     guide=[
       'Suma columna per columna, començant per les unitats',
@@ -1308,7 +1358,7 @@ function genOps(){
 
     question='Calcula: <span class="fc">'+a2+' - '+b2+'</span>';
 
-    opts=buildOpts(correct,subDistractors(a2,b2).map(String));
+    wrongs=subDistractors(a2,b2);
 
     guide=[
       'Resta columna per columna, començant per les unitats',
@@ -1326,7 +1376,7 @@ function genOps(){
 
     question='Calcula: <span class="fc">'+a3+' x '+b3+'</span>';
 
-    opts=buildOpts(correct,multDistractors(a3,b3).map(String));
+    wrongs=multDistractors(a3,b3);
 
     guide=[
       'Multiplica cada xifra del segon factor pel primer',
@@ -1341,25 +1391,21 @@ function genOps(){
     diff=2;
     var b4=rnd(3,15),q=rnd(10,99),r=rnd(0,b4-1),a4=b4*q+r;
 
-    correct=r===0?String(q)+' exacta':'Cocient '+q+', residu '+r;
-
-    question='Calcula: <span class="fc">'+a4+' / '+b4+'</span>';
-
-    var a1x=r===0?String(q+1)+' exacta':'Cocient '+(q+1)+', residu '+r;
-    var a2x='Cocient '+(q-1)+', residu '+(b4-1);
-    var a3x=r===0?'Cocient '+q+', residu 1':'Cocient '+q+', residu '+(r>0?r-1:1);
-
-    opts=buildOpts(correct,[a1x,a2x,a3x]);
+    opsAnswer={type:'pair',value:[q,r],division:[a4,b4]};
+    correct=opsAnswer.value.join('; ');
+    question='Calcula: <span class="fc">'+a4+' ÷ '+b4+'</span><br>'+
+      'Escriu el quocient i el residu, separats per un punt i coma. Exemple: 25; 2.';
+    wrongs=[(q+1)+'; '+r,(q-1)+'; '+(b4-1),q+'; '+(r===0?1:r-1)];
 
     guide=[
       'Busca quantes vegades cap el divisor dins del dividend',
-      'Si no és una divisió exacta, indica també el residu',
+      'Escriu el residu, que és zero si la divisió és exacta',
       'Comprova que el residu sigui menor que el divisor'
     ];
 
     solution=[
-      a4+'/'+b4,
-      'Cocient: '+q+', Residu: '+r
+      a4+' = '+b4+' × '+q+' + '+r,
+      'Quocient: '+q+', residu: '+r
     ];
 
   } else if(type===5){
@@ -1374,14 +1420,15 @@ function genOps(){
       '</b> quaderns a <b>'+preu+' euros</b>. Paga <b>'+pagat+
       ' euros</b>. Quant de canvi rep?</span>';
 
+    opsAnswer.unit='euros';
     correct=String(canvi)+' euros';
 
-    opts=buildOpts(correct,[
+    wrongs=[
       total+' euros',
       (pagat+total)+' euros',
       Math.max(0,pagat-preu)+' euros',
       Math.max(0,pagat-(preu+quant))+' euros'
-    ]);
+    ];
 
     guide=[
       'Primer calcula quant costen tots els quaderns',
@@ -1405,14 +1452,15 @@ function genOps(){
       '</b> torns/dia, <b>'+perTorn+
       '</b> unitats/torn. Total?</span>';
 
+    opsAnswer.unit='unitats';
     correct=String(tot3)+' unitats';
 
-    opts=buildOpts(correct,[
+    wrongs=[
       (torn*perTorn)+' unitats',
       (dies*perTorn)+' unitats',
       (dies*torn)+' unitats',
       (dies+torn+perTorn)+' unitats'
-    ]);
+    ];
 
     guide=[
       'Primer calcula quantes unitats es fabriquen en un dia',
@@ -1426,13 +1474,13 @@ function genOps(){
     ];
   }
 
+  if(opsAnswer.type==='integer')opsAnswer.value=readOpsAnswer(opsAnswer,correct);
   return{
     type:type,
     question:question,
     correct:correct,
-    options:buildOpts(correct,opts.filter(function(o){
-      return o!==correct;
-    })),
+    options:buildOpsOptions(opsAnswer,correct,wrongs),
+    opsAnswer:opsAnswer,
     guide:guide,
     solution:solution,
     isProblem:isProblem,
@@ -3321,6 +3369,10 @@ function ampMakeProperPair(){
 }
 
 // --- NATURALS I OPERACIONS (7 tipus) --------------------------------------
+function opsPairAnswer(first,second,division){
+  const opsAnswer={type:'pair',value:[first,second],division};
+  return {opsAnswer,val:opsAnswer.value.join('; '),check:v=>opsAnswerMatches(opsAnswer,v)};
+}
 function genNaturalProb(){
   var type=ampNextType('naturals',7),diff,text,steps,answer,hints;
   if(type===1){
@@ -3355,9 +3407,9 @@ function genNaturalProb(){
     diff=2;
     var persones=rnd(95,380),cap=rnd(6,18),quo=Math.floor(persones/cap),rem=persones%cap;
     if(rem===0){persones++;quo=Math.floor(persones/cap);rem=persones%cap;}
-    text='En una excursió hi participen <b>'+persones+' persones</b>. Es volen formar grups de <b>'+cap+'</b> persones. Quants grups complets es poden formar i quantes persones quedaran sense grup complet?';
+    text='En una excursió hi participen <b>'+persones+' persones</b>. Es volen formar grups de <b>'+cap+'</b> persones. Quants grups complets es poden formar i quantes persones quedaran sense grup complet? Escriu el nombre de grups i el de persones sense grup, separats per un punt i coma.';
     steps=[{label:'Grups',hint:'Divideix el total entre les persones de cada grup i pren el quocient enter',check:function(v){return numEq(v,quo);}},{label:'Sobra',hint:'Calcula el residu de la divisió',check:function(v){return numEq(v,rem);}}];
-    answer={check:function(v){return ampPairEq(v,quo,rem);},val:quo+' grups i sobren '+rem+' persones'};
+    answer=opsPairAnswer(quo,rem,[persones,cap]);
     hints=[persones+' ÷ '+cap+' = '+quo+' i residu '+rem,'Es formen '+quo+' grups complets i sobren '+rem+' persones'];
   }else if(type===6){
     diff=2;
@@ -3370,9 +3422,9 @@ function genNaturalProb(){
     diff=3;
     var llibres=rnd(73,240),perCapsa=rnd(8,22),capses=Math.ceil(llibres/perCapsa),completes=Math.floor(llibres/perCapsa),ultima=llibres-completes*perCapsa;
     if(ultima===0){llibres++;capses=Math.ceil(llibres/perCapsa);completes=Math.floor(llibres/perCapsa);ultima=llibres-completes*perCapsa;}
-    text='Una biblioteca ha de guardar <b>'+llibres+' llibres</b> en capses on caben com a màxim <b>'+perCapsa+' llibres</b>. Quin és el nombre mínim de capses que necessita? Quants llibres hi haurà a l\'última capsa?';
+    text='Una biblioteca ha de guardar <b>'+llibres+' llibres</b> en capses on caben com a màxim <b>'+perCapsa+' llibres</b>. Quin és el nombre mínim de capses que necessita? Quants llibres hi haurà a l\'última capsa? Escriu el nombre de capses i el de llibres a l\'última, separats per un punt i coma.';
     steps=[{label:'Completes',hint:'Calcula quantes capses es poden omplir completament',check:function(v){return numEq(v,completes);}},{label:'Última',hint:'Calcula quants llibres queden després de les capses completes',check:function(v){return numEq(v,ultima);}},{label:'Capses',hint:'Recorda que els llibres sobrants necessiten una capsa més',check:function(v){return numEq(v,capses);}}];
-    answer={check:function(v){return ampPairEq(v,capses,ultima);},val:capses+' capses; '+ultima+' llibres a l\'última'};
+    answer=opsPairAnswer(capses,ultima);
     hints=[llibres+' ÷ '+perCapsa+' = '+completes+' i residu '+ultima,'Com que sobren llibres, cal una capsa addicional: '+capses+' capses'];
   }
   return{topicId:'ops',topicName:'Operacions bàsiques',type:type,variantId:'naturals-'+type,cat:'Naturals i operacions',diff:diff,text:text,dataBox:null,steps:steps,answer:answer,hints:hints};
@@ -4084,6 +4136,7 @@ function strictOpenForm(ex){
   return /percentatge|fracci[oó]|decimal|arrodoneix|notaci[oó] cient[ií]fica|factoritza|descompon|quin signe|ordena/.test(q);
 }
 function openOk1(correct,value,ex){
+  if(ex?.opsAnswer)return opsAnswerMatches(ex.opsAnswer,value);
   if(ex?.type==='recta-graduada'&&/^[A-D]$/.test(correct))return String(value).trim().toUpperCase()===correct;
   return MIValidation.grade({...ex,correct},value,()=>openOk1Legacy(correct,value,ex));
 }
@@ -4099,6 +4152,8 @@ function openOk1Legacy(correct,value,ex){
   return false;
 }
 function openHint1(ex){
+  if(ex?.opsAnswer?.type==='pair')return 'Format: 25; 2';
+  if(ex?.opsAnswer?.type==='integer')return 'Escriu el resultat com un enter. Pots agrupar els milers amb punts o espais.';
   if(ex?.decimalAnswer==='spelling')return 'Escriu el nombre en català amb l’ortografia i els guionets corresponents.';
   if(ex?.decimalAnswer==='pair')return 'Escriu primer el valor i després la diferència, separats per un punt i coma.';
   if(ex?.topicId==='naturals'&&['interval-arrodoniment','producte-descomposicio'].includes(ex.type))return 'Escriu els dos valors en l’ordre demanat, separats per un punt i coma.';
@@ -4452,7 +4507,7 @@ function ampCheckAnswer(){
     var ok=false;try{ok=s.check(inp.value);}catch(e){}
     inp.classList.toggle('ok',ok);inp.classList.toggle('err',!ok&&inp.value.trim()!=='');if(ok)stepsOk++;
   });
-  var finalOk=false;try{finalOk=MIValidation.grade({...p,question:p.question||p.text,correct:p.answer.val},finalVal,()=>p.answer.check(finalVal));}catch(e){}
+  var finalOk=false;try{finalOk=p.answer.opsAnswer?p.answer.check(finalVal):MIValidation.grade({...p,question:p.question||p.text,correct:p.answer.val},finalVal,()=>p.answer.check(finalVal));}catch(e){}
   window.MIAnalytics?.answer(finalOk,p.topicId);finalInp.classList.toggle('ok',finalOk);finalInp.classList.toggle('err',!finalOk);
   document.querySelectorAll('#sAmpProb .step-input,#sAmpProb .final-input').forEach(function(el){el.disabled=true;});
   var cb=document.querySelector('#sAmpProb .check-btn');if(cb)cb.disabled=true;
@@ -4593,6 +4648,7 @@ function wrapExamProblem(p){
     question:p.text||'',correct:p.answer&&p.answer.val!==undefined?String(p.answer.val):'',
     options:[],guide:(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),
     solution:Array.isArray(p.hints)?p.hints.slice():[],
+    opsAnswer:p.answer?.opsAnswer,
     answerCheck:p.answer&&typeof p.answer.check==='function'?p.answer.check:function(v){return norm(v)===norm(this.correct);}
   };
 }
@@ -4678,7 +4734,7 @@ function checkExamOpenAnswer(){
   var q=state.examQs[state.examIdx],inp=document.getElementById('examOpenAns');
   if(!q||!q.examProblem||!inp)return;
   var val=inp.value;if(!String(val).trim())return;
-  var ok=false;try{ok=MIValidation.grade(q,val,()=>q.answerCheck(val));}catch(e){ok=false;}
+  var ok=false;try{ok=q.opsAnswer?q.answerCheck(val):MIValidation.grade(q,val,()=>q.answerCheck(val));}catch(e){ok=false;}
   if(ok)state.examScore++;
   state.examAnswers.push({ok:ok,q:stripTags(q.question).slice(0,90),correct:q.correct,given:val,topicId:q.topicId,topicName:q.topicName,isProblem:true,examProblem:true});
   if(!ok)registerError(q,val,'exam');
