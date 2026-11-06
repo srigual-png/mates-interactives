@@ -117,6 +117,7 @@ a{color:inherit}
 <a href="#parentesis">4. Parèntesis</a>
 <a href="#combinades">5. Combinades</a>
 <a href="#problemes">6. Problemes</a>
+<a href="#errors-tipics">Errors típics</a>
 </nav>
 <section class="card major" id="ordre">
 <h2>📐 1. L'ordre de les operacions</h2>
@@ -128,6 +129,13 @@ a{color:inherit}
 <div class="step"><strong>Sumes i restes</strong>, d'esquerra a dreta.</div>
 </div>
 <div class="tip">💡 Si dues operacions tenen la mateixa prioritat, es resolen <strong>d'esquerra a dreta</strong>.</div>
+<p>Multiplicar i dividir tenen la mateixa prioritat. Sumar i restar també en tenen la mateixa entre elles. Els parèntesis poden canviar l'ordre.</p>
+<div class="example">
+<div class="math">24 ÷ 6 × 2 = 4 × 2 = 8</div>
+<div class="math">24 ÷ (6 × 2) = 24 ÷ 12 = 2</div>
+<div class="math">18 − 6 + 2 = 12 + 2 = 14</div>
+<div class="math">18 − (6 + 2) = 18 − 8 = 10</div>
+</div>
 </section>
 <section class="card" id="multiplicacions">
 <h2>✖️ 2. Multiplicacions abans que sumes i restes</h2>
@@ -178,6 +186,13 @@ a{color:inherit}
 <div class="math">117 − 5 = 112</div>
 </div>
 <div class="tip">💡 El que mana és quin grup és més interior, no la forma del signe. No multipliquis pel 3 exterior fins que hagis resolt tot el claudàtor.</div>
+<div class="example"><span class="example-label">COMPARA ELS PARÈNTESIS</span>
+<p>4 + 3 × 5 i 4 + (3 × 5) donen 19 perquè el producte ja tenia prioritat. En canvi, (4 + 3) × 5 dona 35 perquè ara la suma es fa primer.</p>
+</div>
+<div class="example"><span class="example-label">RECONSTRUEIX UNA EXPRESSIÓ</span>
+<p>Amb 2, 3, 4 i 5 en aquest ordre i els signes +, − i × una vegada cadascun, volem obtenir 15. Si reservem el 5 per restar-lo al final, necessitem 20. Agrupem 2 + 3 perquè es calculi abans de multiplicar per 4.</p>
+<div class="math">(2 + 3) × 4 − 5 = 5 × 4 − 5 = 20 − 5 = 15</div>
+</div>
 </section>
 <section class="card" id="combinades">
 <h2>🧠 5. Operacions combinades completes</h2>
@@ -188,6 +203,10 @@ a{color:inherit}
 <div class="math">18 − 5 + 6</div>
 <div class="math">13 + 6 = 19</div>
 </div>
+<div class="example"><span class="example-label">UN SOL PAS</span>
+<div class="math">18 ÷ (5 − 2) + 4 → 18 ÷ 3 + 4</div>
+<p>Substituïm només 5 − 2 pel seu resultat. La divisió i el + 4 es conserven. El pas següent ja seria 6 + 4.</p>
+</div>
 </section>
 <section class="card" id="problemes">
 <h2>🛍️ 6. Del problema a l'operació combinada</h2>
@@ -197,8 +216,12 @@ a{color:inherit}
 <div class="math">8 × (3 + 2) − 4</div>
 <div class="math">8 × 5 − 4 = 36 €</div>
 </div>
+<div class="example"><span class="example-label">LOTS I PENALITZACIÓ</span>
+<p>Hi ha 7 lots de 4 punts bàsics i 2 punts extra cadascun. La suma 4 + 2 correspon a un lot, així que tot el parèntesi es multiplica per 7. La penalització de 2² es resta una vegada al final.</p>
+<div class="math">7 × (4 + 2) − 2² = 42 − 4 = 38</div>
+</div>
 </section>
-<section class="card mistakes">
+<section class="card mistakes" id="errors-tipics">
 <h2>⚠️ Errors típics</h2>
 <ul>
 <li>Fer les operacions simplement d'esquerra a dreta sense mirar la prioritat.</li>
@@ -208,6 +231,17 @@ a{color:inherit}
 <li>Interpretar una potència com una multiplicació per l'exponent.</li>
 <li>No respectar l'ordre d'esquerra a dreta entre operacions de la mateixa prioritat.</li>
 </ul>
+<div class="example"><span class="example-label">TROBA I REPARA EL PRIMER ERROR</span>
+<div class="math">24 ÷ (2 + 4) × 2 + 3²</div>
+<ol>
+<li>24 ÷ 6 × 2 + 3²</li>
+<li>24 ÷ 6 × 2 + 9</li>
+<li>24 ÷ 12 + 9</li>
+<li>2 + 9</li>
+<li>11</li>
+</ol>
+<p>La primera línia incorrecta és la 3. Cal fer 24 ÷ 6 abans de multiplicar per 2. La línia corregida és 4 × 2 + 9 i el resultat final és 17.</p>
+</div>
 </section>
 <section class="card check">
 <h2>✅ Comprova si ho has entès</h2>

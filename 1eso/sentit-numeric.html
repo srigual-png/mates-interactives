@@ -3,6 +3,7 @@
 <head>
 <script src="../assets/js/dificultat-mi.js"></script>
 <script src="../assets/js/raonament-numeric-1eso.js"></script>
+<script src="../assets/js/jerarquia-1eso.js"></script>
 <script src="../assets/js/practica-sistema-decimal-1eso.js"></script>
 <link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
@@ -445,6 +446,7 @@ Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immed
   <div class="exn" id="exN"></div>
   <div class="slb" id="slb"></div>
   <div class="sbw"><div class="sbf" id="sb" style="width:0%"></div></div>
+  <div class="slb" id="jerarquiaCompletion" hidden></div>
   <div class="exq" id="exQ"></div>
   <div class="gs" id="gst" style="display:none"></div>
   <div class="og" id="og"></div>
@@ -1655,18 +1657,24 @@ function genOpsPracticeFamily(type){
 // ── GEN JERARQUIA ──────────────────────────────────────────────────────────
 // Revisió 28/09/2026: expressions una mica més llargues, amb més passos
 // abans d'arribar al resultat final, mantenint un nivell adequat per a 1r ESO.
-function genJerarquia(){
-  var type=rnd(1,9),question,correct,opts,guide,solution,isProblem=false,diff=1;
+function buildJerOptions(correct,wrongs){
+  const [,number,unit]=String(correct).match(/^(\d+)(.*)$/);
+  const candidates=wrongs.filter(value=>!String(value).startsWith('-'));
+  for(let offset=1;offset<=3;offset++)candidates.push((Number(number)+offset)+unit);
+  return buildOpts(correct,candidates);
+}
+function genJerarquia(type=rnd(1,9),random=rnd){
+  var question,correct,opts,guide,solution,isProblem=false,diff=1;
 
   if(type===1){
     diff=1;
-    var a=rnd(4,15),b=rnd(2,9),c=rnd(2,9),d=rnd(1,8);
+    var a=random(4,15),b=random(2,9),c=random(2,9),d=random(1,8);
     var res=a+b*c-d;
-    while(res<=0){ d=rnd(1,4); res=a+b*c-d; }
+    if(res<=0){ d=a+b*c-1; res=1; }
 
     question='Calcula respectant la jerarquia:<br><span class="fc">'+a+' + '+b+' x '+c+' - '+d+'</span>';
     correct=String(res);
-    opts=buildOpts(correct,[
+    opts=buildJerOptions(correct,[
       String((a+b)*c-d),
       String(a+b*(c-d)),
       String(a+b+c-d),
@@ -1686,13 +1694,13 @@ function genJerarquia(){
 
   } else if(type===2){
     diff=1;
-    var a2=rnd(2,8),b2=rnd(2,9),c2=rnd(2,8),d2=rnd(2,9),e2=rnd(1,12);
+    var a2=random(2,8),b2=random(2,9),c2=random(2,8),d2=random(2,9),e2=random(1,12);
     var res2=a2*b2+c2*d2-e2;
-    while(res2<=0){ e2=rnd(1,5); res2=a2*b2+c2*d2-e2; }
+    if(res2<=0){ e2=a2*b2+c2*d2-1; res2=1; }
 
     question='Calcula:<br><span class="fc">'+a2+' x '+b2+' + '+c2+' x '+d2+' - '+e2+'</span>';
     correct=String(res2);
-    opts=buildOpts(correct,[
+    opts=buildJerOptions(correct,[
       String((a2*b2+c2)*d2-e2),
       String(a2*(b2+c2)*d2-e2),
       String(a2*b2+c2+d2-e2),
@@ -1714,19 +1722,16 @@ function genJerarquia(){
 
   } else if(type===3){
     diff=2;
-    var a3=rnd(2,10),b3=rnd(2,7),c3=rnd(2,6),d3=rnd(2,6);
+    var a3=random(2,10),b3=random(3,7),c3=random(2,6),d3=random(2,6);
     var res3=a3+b3*b3-c3*d3;
-    while(res3<=0){
-      a3=rnd(8,18);
-      b3=rnd(3,7);
-      c3=rnd(2,4);
-      d3=rnd(2,4);
-      res3=a3+b3*b3-c3*d3;
+    if(res3<=0){
+      a3=c3*d3-b3*b3+1;
+      res3=1;
     }
 
     question='Calcula:<br><span class="fc">'+a3+' + '+b3+'\u00b2 - '+c3+' x '+d3+'</span>';
     correct=String(res3);
-    opts=buildOpts(correct,[
+    opts=buildJerOptions(correct,[
       String((a3+b3)*b3-c3*d3),
       String(a3+b3*2-c3*d3),
       String(a3+b3*b3-c3-d3),
@@ -1747,16 +1752,16 @@ function genJerarquia(){
 
   } else if(type===4){
     diff=2;
-    var a4=rnd(2,6),b4=rnd(2,7),c4=rnd(2,7),d4=rnd(2,6),e4=rnd(2,6);
+    var a4=random(2,6),b4=random(2,7),c4=random(2,7),d4=random(2,6),e4=random(2,6);
     var inner=b4+c4,res4=a4*inner-d4*e4;
-    while(res4<=0){
-      a4=rnd(4,7); b4=rnd(3,8); c4=rnd(2,7); d4=rnd(2,4); e4=rnd(2,4);
-      inner=b4+c4; res4=a4*inner-d4*e4;
+    if(res4<=0){
+      a4=Math.floor(d4*e4/inner)+1;
+      res4=a4*inner-d4*e4;
     }
 
     question='Calcula:<br><span class="fc">'+a4+' x ('+b4+' + '+c4+') - '+d4+' x '+e4+'</span>';
     correct=String(res4);
-    opts=buildOpts(correct,[
+    opts=buildJerOptions(correct,[
       String(a4*b4+c4-d4*e4),
       String(a4*(b4+c4-d4)*e4),
       String(a4*inner-d4-e4),
@@ -1778,13 +1783,12 @@ function genJerarquia(){
 
   } else if(type===5){
     diff=2;
-    var a5=rnd(2,7),b5=rnd(2,6),c5=rnd(4,9),d5=rnd(1,3),e5=rnd(2,10);
-    while(c5<=d5){ c5=rnd(5,9); d5=rnd(1,4); }
+    var a5=random(2,7),b5=random(2,6),c5=random(4,9),d5=random(1,3),e5=random(2,10);
     var p1=a5+b5,p2=c5-d5,res5=p1*p2+e5;
 
     question='Calcula:<br><span class="fc">('+a5+' + '+b5+') x ('+c5+' - '+d5+') + '+e5+'</span>';
     correct=String(res5);
-    opts=buildOpts(correct,[
+    opts=buildJerOptions(correct,[
       String(a5*c5+b5*d5+e5),
       String(a5+b5+c5-d5+e5),
       String(p1*(c5+d5)+e5),
@@ -1806,16 +1810,16 @@ function genJerarquia(){
 
   } else if(type===6){
     diff=3;
-    var a6=rnd(2,5),b6=rnd(2,5),c6=rnd(2,6),d6=rnd(2,6),e6=rnd(2,5),f6=rnd(1,9);
+    var a6=random(2,5),b6=random(3,5),c6=random(2,6),d6=random(2,6),e6=random(2,5),f6=random(1,9);
     var pow6=b6*b6,par6=c6+d6,res6=a6*pow6-par6*e6+f6;
-    while(res6<=0){
-      a6=rnd(3,6); b6=rnd(3,5); c6=rnd(2,5); d6=rnd(2,5); e6=rnd(2,4); f6=rnd(1,9);
+    if(res6<f6){
+      a6=Math.ceil(par6*e6/pow6);
       pow6=b6*b6; par6=c6+d6; res6=a6*pow6-par6*e6+f6;
     }
 
     question='Calcula:<br><span class="fc">'+a6+' x '+b6+'\u00b2 - ('+c6+' + '+d6+') x '+e6+' + '+f6+'</span>';
     correct=String(res6);
-    opts=buildOpts(correct,[
+    opts=buildJerOptions(correct,[
       String(a6*b6*2-par6*e6+f6),
       String(a6*pow6-par6+e6+f6),
       String(a6*(pow6-par6)*e6+f6),
@@ -1842,12 +1846,12 @@ function genJerarquia(){
     diff=3;
     isProblem=true;
 
-    var pU=rnd(4,14),q1=rnd(2,6),q2=rnd(2,6),desc=rnd(2,7),env=rnd(1,5);
+    var pU=random(4,14),q1=random(2,6),q2=random(2,6),desc=random(2,7),env=random(1,5);
     var quant=q1+q2,cost=pU*quant,tot4=cost-desc+env;
 
     question='<span class="pt">Una samarreta val <b>'+pU+' €</b>. La Laia en compra <b>'+q1+'</b> i el seu germà <b>'+q2+'</b>. Apliquen un descompte de <b>'+desc+' €</b> i després afegeixen <b>'+env+' €</b> d’enviament. Quant paguen en total?</span>';
     correct=String(tot4)+' euros';
-    opts=buildOpts(correct,[
+    opts=buildJerOptions(correct,[
       cost+' euros',
       (cost-desc)+' euros',
       (cost+desc+env)+' euros',
@@ -1869,7 +1873,7 @@ function genJerarquia(){
     ];
   } else if(type===8){
     diff=3;
-    var a8=rnd(2,6),b8=rnd(2,9),c8=rnd(2,8),d8=rnd(1,5),e8=rnd(1,9);
+    var a8=random(2,6),b8=random(2,9),c8=random(2,8),d8=random(1,5),e8=random(1,9);
     var inner8=c8+d8,outer8=b8+inner8,res8=a8*outer8-e8;
     question='Calcula amb parèntesis i claudàtors:<br><span class="fc">'+a8+' x ['+b8+' + ('+c8+' + '+d8+')] - '+e8+'</span>';
     correct=String(res8);
@@ -1883,7 +1887,7 @@ function genJerarquia(){
     ];
   } else {
     diff=3;
-    var a9=rnd(2,5),b9=rnd(2,7),c9=rnd(2,6),d9=rnd(2,6),e9=rnd(2,5),f9=rnd(1,9);
+    var a9=random(2,5),b9=random(2,7),c9=random(2,6),d9=random(2,6),e9=random(3,5),f9=random(1,9);
     var inner9=c9+d9,pow9=e9*e9,product9=b9*inner9,outer9=product9+pow9,res9=a9*outer9-f9;
     question='Calcula amb parèntesis i claudàtors:<br><span class="fc">'+a9+' x ['+b9+' x ('+c9+' + '+d9+') + '+e9+'\u00b2] - '+f9+'</span>';
     correct=String(res9);
@@ -1903,7 +1907,7 @@ function genJerarquia(){
     type:type,
     question:question,
     correct:correct,
-    options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),
+    options:buildJerOptions(correct,opts.filter(function(o){return o!==correct;})),
     guide:guide,
     solution:solution,
     isProblem:isProblem,
@@ -3775,39 +3779,47 @@ function genPotenciesProb(){
 }
 
 // --- JERARQUIA D'OPERACIONS (4 tipus) -------------------------------------
-function genJerProb(){
-  var type=ampNextType('jerarquia',4),diff,text,steps,answer,hints;
+function genJerProb(type=ampNextType('jerarquia',4),random=rnd){
+  var diff,text,steps,answer,hints,examText,examAnswer;
   if(type===1){
     diff=2;
-    var a=rnd(2,8),b=rnd(2,5),c=rnd(2,6),d=rnd(1,8),inner=b+c,res=a*inner*inner-d;
+    var a=random(2,8),b=random(2,5),c=random(2,6),d=random(1,8),inner=b+c,res=a*inner*inner-d;
     text='Calcula respectant la jerarquia:<br><b style="font-family:\'Courier New\',monospace">'+a+' × ('+b+' + '+c+')² − '+d+'</b>';
     steps=[{label:'Parèntesi',hint:'Resol primer el parèntesi',check:function(v){return numEq(v,inner);}},{label:'Potència',hint:'Calcula després la potència',check:function(v){return numEq(v,inner*inner);}},{label:'Producte',hint:'Fes la multiplicació abans de la resta',check:function(v){return numEq(v,a*inner*inner);}},{label:'Resultat',hint:'Acaba amb la resta',check:function(v){return numEq(v,res);}}];
     answer={check:function(v){return numEq(v,res);},val:String(res)};
     hints=['Parèntesi: '+b+' + '+c+' = '+inner,'Potència: '+inner+'² = '+(inner*inner),'Producte: '+a+' × '+(inner*inner)+' = '+(a*inner*inner),'Final: '+(a*inner*inner)+' − '+d+' = '+res];
   }else if(type===2){
     diff=2;
-    var a2=rnd(2,6),b2=rnd(2,5),c2=rnd(4,9),d2=rnd(1,3),e2=rnd(2,7),p=b2*b2,par=c2-d2,res2=a2*p+par*e2;
+    var a2=random(2,6),b2=random(2,5),c2=random(4,9),d2=random(1,3),e2=random(2,7),p=b2*b2,par=c2-d2,res2=a2*p+par*e2;
     text='Calcula pas a pas:<br><b style="font-family:\'Courier New\',monospace">'+a2+' × '+b2+'² + ('+c2+' − '+d2+') × '+e2+'</b>';
     steps=[{label:'Potència',hint:'Calcula la potència',check:function(v){return numEq(v,p);}},{label:'Parèntesi',hint:'Resol el parèntesi',check:function(v){return numEq(v,par);}},{label:'Producte 1',hint:'Calcula el primer producte',check:function(v){return numEq(v,a2*p);}},{label:'Producte 2',hint:'Calcula el segon producte',check:function(v){return numEq(v,par*e2);}},{label:'Resultat',hint:'Suma els dos productes',check:function(v){return numEq(v,res2);}}];
     answer={check:function(v){return numEq(v,res2);},val:String(res2)};
     hints=['Potència: '+b2+'² = '+p,'Parèntesi: '+c2+' − '+d2+' = '+par,'Productes: '+a2+' × '+p+' = '+(a2*p)+' i '+par+' × '+e2+' = '+(par*e2),'Suma final: '+(a2*p)+' + '+(par*e2)+' = '+res2];
   }else if(type===3){
     diff=3;
-    var a3=rnd(2,5),b3=rnd(2,4),c3=rnd(2,5),d3=rnd(2,4),e3=rnd(2,5),f3=rnd(1,6),inside=b3*b3+c3*d3,res3=a3*inside-f3*e3;
+    var a3=random(2,5),b3=random(2,4),c3=random(2,5),d3=random(2,4),e3=random(2,5),f3=random(1,6),inside=b3*b3+c3*d3;
+    f3=Math.min(f3,Math.floor((a3*inside-1)/e3));
+    var res3=a3*inside-f3*e3;
     text='Calcula pas a pas:<br><b style="font-family:\'Courier New\',monospace">'+a3+' × ('+b3+'² + '+c3+' × '+d3+') − '+f3+' × '+e3+'</b>';
     steps=[{label:'Potència',hint:'Dins del parèntesi, calcula primer la potència',check:function(v){return numEq(v,b3*b3);}},{label:'Producte',hint:'Dins del parèntesi, calcula també la multiplicació',check:function(v){return numEq(v,c3*d3);}},{label:'Parèntesi',hint:'Suma els resultats de dins del parèntesi',check:function(v){return numEq(v,inside);}},{label:'Fora 1',hint:'Multiplica el valor del parèntesi pel factor exterior',check:function(v){return numEq(v,a3*inside);}},{label:'Fora 2',hint:'Calcula l\'altre producte exterior',check:function(v){return numEq(v,f3*e3);}},{label:'Resultat',hint:'Fes la resta final',check:function(v){return numEq(v,res3);}}];
     answer={check:function(v){return numEq(v,res3);},val:String(res3)};
     hints=['Dins: '+b3+'² = '+(b3*b3)+' i '+c3+' × '+d3+' = '+(c3*d3),'Parèntesi: '+(b3*b3)+' + '+(c3*d3)+' = '+inside,'Fora: '+a3+' × '+inside+' = '+(a3*inside)+' i '+f3+' × '+e3+' = '+(f3*e3),'Final: '+(a3*inside)+' − '+(f3*e3)+' = '+res3];
   }else{
     diff=3;
-    var packs=rnd(3,7),perPack=rnd(4,9),bonus=rnd(2,5),cost=rnd(2,6),exprRes=packs*(perPack+bonus)-cost*cost;
-    while(exprRes<=0){cost=2;exprRes=packs*(perPack+bonus)-cost*cost;}
-    text='En un joc s\'aconsegueixen <b>'+packs+' lots</b>, cadascun amb <b>'+perPack+' punts bàsics</b> i <b>'+bonus+' punts extra</b>. Després es resta una penalització igual al quadrat de <b>'+cost+'</b>. Escriu l\'expressió amb parèntesis i potència i calcula la puntuació final.';
-    steps=[{label:'Expressió',hint:'Agrupa dins d\'un parèntesi els punts de cada lot i representa la penalització com una potència',check:function(v){var s=norm(v).replace(/\s/g,'').replace(/²/g,'^2').replace(/[x·]/g,'×');return s.indexOf('(')>=0&&s.indexOf('^2')>=0;}},{label:'Punts lots',hint:'Calcula primer els punts d\'un lot i després multiplica pels lots',check:function(v){return numEq(v,packs*(perPack+bonus));}},{label:'Penalització',hint:'Calcula el quadrat que representa la penalització',check:function(v){return numEq(v,cost*cost);}},{label:'Final',hint:'Resta la penalització als punts obtinguts',check:function(v){return numEq(v,exprRes);}}];
-    answer={check:function(v){return numEq(v,exprRes);},val:exprRes+' punts'};
-    hints=['Expressió: '+packs+' × ('+perPack+' + '+bonus+') − '+cost+'²','Lots: '+packs+' × '+(perPack+bonus)+' = '+(packs*(perPack+bonus)),'Penalització: '+cost+'² = '+(cost*cost),'Final: '+(packs*(perPack+bonus))+' − '+(cost*cost)+' = '+exprRes];
+    const model=MIJerarquia.lots(random);
+    const resultAnswer={kind:'integer',result:model.result};
+    text=model.text+' Escriu l’expressió amb parèntesis i potència i calcula la puntuació final.';
+    examText=model.text+' Escriu una igualtat amb l’expressió i el resultat.';
+    steps=[
+      {label:'Expressió',required:true,hint:'Agrupa els punts de cada lot i representa la penalització com un quadrat',check:v=>MIJerarquia.matches(model.expressionAnswer,v)},
+      {label:'Punts lots',hint:'Multiplica els punts de cada lot pel nombre de lots',check:v=>numEq(v,model.total)},
+      {label:'Penalització',hint:'Calcula el quadrat de la penalització',check:v=>numEq(v,model.cost**2)}
+    ];
+    answer={check:v=>MIJerarquia.matches(resultAnswer,v),val:model.result+' punts',jerarquiaAnswer:resultAnswer};
+    examAnswer={check:v=>MIJerarquia.matches(model.equalityAnswer,v),val:model.expression+' = '+model.result,jerarquiaAnswer:model.equalityAnswer};
+    hints=model.solution;
   }
-  return{topicId:'jerarquia',topicName:'Jerarquia d\'operacions',type:type,variantId:'jerarquia-'+type,cat:'Jerarquia d\'operacions',diff:diff,text:text,dataBox:null,steps:steps,answer:answer,hints:hints};
+  return{examText,examAnswer,topicId:'jerarquia',topicName:'Jerarquia d\'operacions',type:type,variantId:'jerarquia-'+type,cat:'Jerarquia d\'operacions',diff:diff,text:text,dataBox:null,steps:steps,answer:answer,hints:hints};
 }
 
 // --- DIVISIBILITAT (4 tipus) ----------------------------------------------
@@ -4145,7 +4157,7 @@ var TOPICS=[
   {id:"decimal_sys",course:"1r",exam1r:true,adaptivePractice:true,icon:"&#128315;",name:"Sistema de numeració decimal",short:"Valor posicional, descomposició i lectura",theory:{title:"Sistema de numeració decimal",text:`Cada xifra té un valor que depèn de la posició que ocupa.`,formulas:[`345.678 = 3×100000 + 4×10000 + 5×1000 + 6×100 + 7×10 + 8`,`Posicions: unitats, desenes, centenes, milers, desenes de miler i centenes de miler`,`El mateix dígit pot tenir valors diferents segons la posició`]},gen:genDecimalSys},
   {id:"ops",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,icon:"&#10133;",name:"Operacions bàsiques",short:"Suma, resta, multiplicació i divisió",theory:{title:"Operacions bàsiques",text:`Les quatre operacions permeten combinar i repartir quantitats amb nombres naturals.`,formulas:[`Suma: alinea les xifres per posició`,`Resta: comprova si cal reagrupar`,`Multiplicació: productes parcials i suma`,`Divisió: dividend = divisor × quocient + residu`]},gen:genOps},
   {id:"potencies",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,icon:"&#178;",name:"Potències i arrels",short:"Base, exponent, potències i arrels quadrades exactes",theory:{title:"Potències i arrels",text:`Una potència és una manera abreujada d'escriure un producte de factors iguals. L'arrel quadrada és l'operació inversa d'elevar al quadrat.`,formulas:[`a^n: a és la base i n és l'exponent`,`3^4 = 3 × 3 × 3 × 3`,`5² = 25 ↔ √25 = 5`,`Pots acotar una arrel entre dos enters consecutius amb els seus quadrats`]},gen:genPotenciesArrelsVariat},
-  {id:"jerarquia",course:"1r",exam1r:true,icon:"&#128208;",name:"Jerarquia d'operacions",short:"Parèntesis, potències, ×/÷, +/−",theory:{title:"Jerarquia de les operacions",text:`Quan hi ha diverses operacions, cal respectar un ordre de resolució.`,formulas:[`1r: parèntesis i claudàtors, de dins cap enfora`,`2n: potències i arrels`,`3r: multiplicacions i divisions, d'esquerra a dreta`,`4t: sumes i restes, d'esquerra a dreta`]},gen:genJerarquia},
+  {id:"jerarquia",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,practiceGen:genJerarquiaPractice,icon:"&#128208;",name:"Jerarquia d'operacions",short:"Parèntesis, potències, ×/÷, +/−",theory:{title:"Jerarquia de les operacions",text:`Quan hi ha diverses operacions, cal respectar un ordre de resolució.`,formulas:[`1r: parèntesis i claudàtors, de dins cap enfora`,`2n: potències i arrels`,`3r: multiplicacions i divisions, d'esquerra a dreta`,`4t: sumes i restes, d'esquerra a dreta`]},gen:genJerarquia},
   {id:"divis",course:"1r",exam1r:true,icon:"&#128269;",name:"Divisibilitat",short:"Criteris, primers, múltiples i divisors",theory:{title:"Divisibilitat",text:`Els criteris de divisibilitat permeten saber si una divisió és exacta sense efectuar-la completament.`,formulas:[`Divisible per 2: acaba en xifra parella`,`Divisible per 3 o 9: usa la suma de les xifres`,`Divisible per 5: acaba en 0 o 5`,`Nombre primer: només té dos divisors, 1 i ell mateix`]},gen:genDivisibilitat},
   {id:"mcmmcd",course:"1r",exam1r:true,icon:"&#128279;",name:"mcm i MCD",short:"Mínim comú múltiple i màxim comú divisor",theory:{title:"mcm i MCD",text:`El MCD és el divisor comú més gran i el mcm és el múltiple comú més petit.`,formulas:[`MCD: factors comuns amb exponent menor`,`mcm: tots els factors amb exponent major`,`Són útils per agrupar quantitats i estudiar coincidències periòdiques`]},gen:genMcmMcd},
   {id:"enters",course:"1r",exam1r:true,icon:"&#177;",name:"Nombres enters",short:"Negatius, recta numèrica i operacions",theory:{title:"Nombres enters (Z)",text:`Els enters inclouen nombres positius, zero i nombres negatius i es poden representar a la recta numèrica.`,formulas:[`A la recta: més a la dreta = més gran`,`Suma i resta: interpreta el signe i el sentit del canvi`,`Multiplicació: signes iguals → positiu; diferents → negatiu`]},gen:genEnters},
@@ -4214,6 +4226,7 @@ function normalizeErrorEntry(e,topicId){
     options:Array.isArray(e.options)?e.options.slice():[],
     guide:Array.isArray(e.guide)?e.guide.slice():[],
     solution:Array.isArray(e.solution)?e.solution.slice():[],
+    jerarquiaTheory:tid==='jerarquia'&&['ordre','potencies','parentesis','combinades','problemes','errors-tipics'].includes(e.jerarquiaTheory)?e.jerarquiaTheory:undefined,
     level:e.level!==undefined?e.level:null,
     source:e.source||'legacy',
     taskDifficulty:e.taskDifficulty??null,taskDifficultyStatus:e.taskDifficultyStatus||'legacy',difficultyBank:e.difficultyBank||null,difficultyKey:e.difficultyKey||null,variantId:e.variantId||null,
@@ -4265,6 +4278,7 @@ function buildErrorRecord(ex,studentAnswer,source){
     guide:Array.isArray(ex.guide)?ex.guide.slice():[],
     review:miReviewPoints(ex),
     solution:Array.isArray(ex.solution)?ex.solution.slice():[],
+    jerarquiaTheory:ex.jerarquiaTheory,
     level:source==='exam'?0:state.level,
     source:source,
     taskDifficulty:ex.taskDifficulty??null,taskDifficultyStatus:ex.taskDifficultyStatus||'legacy',difficultyBank:ex.difficultyBank||null,difficultyKey:ex.difficultyKey||null,variantId:ex.variantId||null,
@@ -4453,6 +4467,7 @@ function strictOpenForm(ex){
   return /percentatge|fracci[oó]|decimal|arrodoneix|notaci[oó] cient[ií]fica|factoritza|descompon|quin signe|ordena/.test(q);
 }
 function openOk1(correct,value,ex){
+  if(ex?.jerarquiaAnswer)return MIJerarquia.matches(ex.jerarquiaAnswer,value);
   if(ex?.potenciesAnswer)return potenciesAnswerMatches(ex.potenciesAnswer,value);
   if(ex?.opsAnswer)return opsAnswerMatches(ex.opsAnswer,value);
   if(ex?.type==='recta-graduada'&&/^[A-D]$/.test(correct))return String(value).trim().toUpperCase()===correct;
@@ -4470,6 +4485,7 @@ function openOk1Legacy(correct,value,ex){
   return false;
 }
 function openHint1(ex){
+  if(ex?.jerarquiaHint)return ex.jerarquiaHint;
   if(ex?.potenciesAnswer)return {
     integer:'Escriu un enter. Pots agrupar els milers amb punts o espais.',
     power:'Escriu la base i l’exponent, per exemple 2^4 o 2⁴.',
@@ -4517,6 +4533,7 @@ function startP(){
   if(topic.adaptivePractice)adaptivePracticeSessions[topic.id]={points:0,seen:new Set(),questions:new Set(),lastFamily:null};
   if(isGuidedDecimalPractice()||topic.practiceCountsAnswers)Object.assign(adaptivePracticeSessions[topic.id],{correct:0,incorrect:0,ended:false});
   if(topic.id==='potencies')Object.assign(adaptivePracticeSessions.potencies,{baseDeuInverse:Boolean(rnd(0,1)),lastFamilyByLevel:[]});
+  if(topic.practiceGen)adaptivePracticeSessions[topic.id].lastFamilyByLevel=[];
   resetVariationBagForTopic(topic.id);showEx();
 }
 function isGuidedDecimalPractice(){return TOPICS[state.currentTopic]?.id==='decimal_sys'&&state.level===1;}
@@ -4534,6 +4551,13 @@ function updateSBar(){
   var pct=Math.min(100,Math.round(points/needed*100));
   document.getElementById('sb').style.width=pct+'%';
   document.getElementById('slb').textContent=topic.adaptivePractice?'Progrés de dificultat: '+points+'/'+needed:'Encerts seguits: '+points+' / '+needed;
+  const completion=document.getElementById('jerarquiaCompletion');
+  completion.hidden=topic.id!=='jerarquia';
+  if(!completion.hidden){
+    const {correct,incorrect}=adaptivePracticeSessions.jerarquia;
+    completion.textContent=state.level===1?'Encerts acumulats: '+correct+'/'+needed:
+      'Preguntes contestades: '+(correct+incorrect)+'/'+needed;
+  }
 }
 // Ordenar i comparar són variants d’una mateixa família.
 var adaptivePracticeFamilies={
@@ -4542,7 +4566,28 @@ var adaptivePracticeFamilies={
 };
 var adaptivePracticeSessions={};
 var ADAPTIVE_PRACTICE_THRESHOLDS={1:[3,6],2:[6,12]};
+function genJerarquiaPractice(type,level,random=rnd){
+  let exercise,section;
+  if(typeof type==='number'){
+    exercise=genJerarquia(type,random);
+    section=type<=2?'ordre':type===3?'potencies':type===6?'combinades':'parentesis';
+  }else if(/^B[1-3]$/.test(type)){
+    const problem=genJerProb(Number(type[1]),random),correct=problem.answer.val;
+    exercise={type,question:problem.text,correct,options:buildJerOptions(correct,[]),
+      guide:problem.steps.map(step=>step.hint),solution:problem.hints};
+    section='combinades';
+  }else if(type==='parentesis-resultat-positiu'){
+    exercise=MIFirstNumericTasks.generate(type,()=>random(0,999999)/1000000);
+    section='parentesis';
+  }else{
+    exercise=MIJerarquia.generate(type,random,buildOpts);
+    section=exercise.jerarquiaTheory;
+  }
+  return {...exercise,jerarquiaTheory:section,taskDifficulty:level,diff:level};
+}
+
 function adaptivePracticeGroups(t){
+  if(t.id==='jerarquia')return MIJerarquia.families;
   if(t.id==='ops')return OPS_PRACTICE_FAMILIES;
   if(t.id==='potencies')return POTENCIES_PRACTICE_FAMILIES;
   var groups=[[],[],[]];
@@ -4570,18 +4615,35 @@ function nextAdaptivePractice(t){
     for(let attempt=0;attempt<(session.lastFamilyByLevel?12:5);attempt++){
       const type=family[rnd(0,family.length-1)];
       const exercise=t.id==='potencies'?genPotenciesPractice(type,level,session):
+        t.practiceGen?t.practiceGen(type,level):
         t.id==='ops'?genOpsPractice(type,level):t.id==='naturals'?(type===1001?MIFirstNumericTasks.generate('paquets-exactes'):
         typeof type==='number'?genNaturalType(type):genNaturalPracticeFamily(type)):
         type===1001?MIFirstNumericTasks.generate('xifres-amb-condicions'):
         type===1002?MIDecimalPractice.positionalChange(MIFirstNumericTasks.generate('canvi-posicional'),rnd,buildOpts):
         typeof type==='number'?genDecimalSysType(type,true):MIDecimalPractice.generate(type,rnd,buildOpts);
-      if(!session.questions.has(exercise.question)){selected={exercise,family};break search;}
+      if(!session.questions.has(exercise.practiceKey||exercise.question)){selected={exercise,family};break search;}
       if(isGuidedDecimalPractice())selected??={exercise,family};
     }
   }
-  if(!selected&&t.id==='potencies')return null;
+  if(!selected&&t.practiceGen){
+    // Deterministic reserve within the active level if random draws collide.
+    reserve: for(const family of ordered){
+      for(let seed=1;seed<=64;seed++){
+        let value=Math.imul(seed,0x9e3779b9);
+        const random=(min,max)=>{
+          value=(Math.imul(value,1664525)+1013904223)>>>0;
+          return min+Math.floor(value/4294967296*(max-min+1));
+        };
+        const exercise=t.practiceGen(family[(seed-1)%family.length],level,random);
+        if(!session.questions.has(exercise.practiceKey||exercise.question)){
+          selected={exercise,family};break reserve;
+        }
+      }
+    }
+  }
+  if(!selected&&(t.id==='potencies'||t.practiceGen))return null;
   if(!selected)throw Error('No s’ha pogut trobar cap pregunta nova per a aquesta pràctica.');
-  session.questions.add(selected.exercise.question);
+  session.questions.add(selected.exercise.practiceKey||selected.exercise.question);
   session.seen.add(selected.family);
   session.lastFamily=selected.family;
   if(session.lastFamilyByLevel)session.lastFamilyByLevel[level]=selected.family;
@@ -4592,15 +4654,16 @@ function nextAdaptivePractice(t){
 }
 function showEx(){
   var t=TOPICS[state.currentTopic];
-  const powerExercise=t.id==='potencies'?nextAdaptivePractice(t):null;
-  if(t.id==='potencies'&&!powerExercise){
+  const leveled=t.id==='potencies'||t.practiceGen;
+  const leveledExercise=leveled?nextAdaptivePractice(t):null;
+  if(leveled&&!leveledExercise){
     showAdaptivePracticeResult(t.id,'No s’ha pogut generar cap altra pregunta diferent.');
     return;
   }
   state.answered=false;window.MIAnalytics?.shown();
-  currentEx=decorateExercise(t,powerExercise||(t.adaptivePractice?nextAdaptivePractice(t):t.gen()));state.exCount++;
+  currentEx=decorateExercise(t,leveledExercise||(t.adaptivePractice?nextAdaptivePractice(t):t.gen()));state.exCount++;
   var typeLabel=currentEx.isProblem?'<span class="tyb typ">&#128203; Problema</span>':'<span class="tyb tyc">&#128290; Calcul</span>';
-  if(t.id==='potencies'){
+  if(leveled){
     const level=currentEx.taskDifficulty;
     typeLabel+=' <span class="tyb '+(level===3?'typ':'tyc')+'">N'+level+' · '+(level===3?'Ampliació':'Normal')+'</span>';
   }
@@ -4666,7 +4729,7 @@ function processPracticeAnswer(isOk,studentAnswer,message){
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
-  var theoryLink=miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.potenciesTheory||currentEx.opsTheory);
+  var theoryLink=miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
   var fb=document.getElementById('fbA');
   if(isOk){
     state.correctStreak++;updateSBar();
@@ -4732,7 +4795,8 @@ function showAdaptivePracticeResult(topicId,reason){
   title.textContent=achieved?'Objectiu assolit!':'Pràctica finalitzada';
   document.getElementById('decimalResultIcon').hidden=!achieved;
   const practice=countAnswers?'pràctica '+(guided?'guiada':'autònoma')+' de '+topic.name:'pràctica guiada de Sistema de numeració decimal';
-  const practiceLabel=topicId==='ops'?practice.replace('de Operacions','d’Operacions'):practice;
+  const practiceLabel=topicId==='ops'?practice.replace('de Operacions','d’Operacions'):
+    topicId==='jerarquia'?practice.replace('de Jerarquia','de jerarquia'):practice;
   document.getElementById('decimalResultSubtitle').textContent=reason||((achieved?'Has completat la ':'Has decidit acabar la ')+practiceLabel+'.');
   document.getElementById('decimalResultScore').textContent=count+'/'+limit+(countAnswers?'':' punts');
   document.getElementById('practiceResultMetric').textContent=metric;
@@ -4874,7 +4938,8 @@ function ampShowHint(){window.MIAnalytics?.hint();
 function ampRegisterError(p,given){
   var tid=p.topicId||'ops',t=TOPICS.find(function(x){return x.id===tid;});
   if(!state.errors[tid])state.errors[tid]=[];
-  var rec={id:makeErrorId(),topicId:tid,topicName:p.topicName||(t?t.name:p.cat),type:p.type===undefined?null:p.type,question:p.text||'',answer:given,correct:p.answer&&p.answer.val!==undefined?String(p.answer.val):'',options:[],guide:p.practiceHints||(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),solution:Array.isArray(p.hints)?p.hints.slice():[],level:null,taskDifficulty:p.taskDifficulty??null,taskDifficultyStatus:p.taskDifficultyStatus||'legacy',difficultyBank:p.difficultyBank||null,difficultyKey:p.difficultyKey||null,variantId:p.variantId||null,diff:p.diff??null,source:'ampliacio',timestamp:new Date().toISOString()};
+  const answer=p.examAnswer||p.answer;
+  var rec={id:makeErrorId(),topicId:tid,topicName:p.topicName||(t?t.name:p.cat),type:p.type===undefined?null:p.type,question:p.text||'',answer:given,correct:answer&&answer.val!==undefined?String(answer.val):'',options:[],guide:p.practiceHints||(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),solution:Array.isArray(p.hints)?p.hints.slice():[],jerarquiaTheory:p.examAnswer?'problemes':undefined,level:null,taskDifficulty:p.taskDifficulty??null,taskDifficultyStatus:p.taskDifficultyStatus||'legacy',difficultyBank:p.difficultyBank||null,difficultyKey:p.difficultyKey||null,variantId:p.variantId||null,diff:p.diff??null,source:'ampliacio',timestamp:new Date().toISOString()};
   var bucket=state.errors[tid],last=bucket.length?bucket[bucket.length-1]:null;
   var same=last&&last.type===rec.type&&last.question===rec.question&&last.answer===rec.answer&&last.correct===rec.correct&&last.source===rec.source;
   if(!same)bucket.push(rec);saveState();
@@ -4882,25 +4947,27 @@ function ampRegisterError(p,given){
 function ampCheckAnswer(){
   var p=ampSession.probs[ampSession.idx],finalInp=document.getElementById('ampFinalAns'),finalVal=finalInp.value;
   if(finalInp.disabled||!finalVal.trim())return;
-  var stepsOk=0,stepsTotal=(p.steps||[]).length;
+  var stepsOk=0,stepsTotal=(p.steps||[]).length,requiredStepsOk=true;
   (p.steps||[]).forEach(function(s,i){
     var inp=document.getElementById('ampStep_'+i);if(!inp)return;
     var ok=false;try{ok=s.check(inp.value);}catch(e){}
-    inp.classList.toggle('ok',ok);inp.classList.toggle('err',!ok&&inp.value.trim()!=='');if(ok)stepsOk++;
+    if(s.required&&!ok)requiredStepsOk=false;
+    inp.classList.toggle('ok',ok);inp.classList.toggle('err',!ok&&(s.required||inp.value.trim()!==''));if(ok)stepsOk++;
   });
-  var finalOk=false;try{finalOk=p.answer.opsAnswer||p.answer.potenciesAnswer?p.answer.check(finalVal):MIValidation.grade({...p,question:p.question||p.text,correct:p.answer.val},finalVal,()=>p.answer.check(finalVal));}catch(e){}
-  window.MIAnalytics?.answer(finalOk,p.topicId);finalInp.classList.toggle('ok',finalOk);finalInp.classList.toggle('err',!finalOk);
+  var finalOk=false;try{finalOk=p.answer.opsAnswer||p.answer.potenciesAnswer||p.answer.jerarquiaAnswer?p.answer.check(finalVal):MIValidation.grade({...p,question:p.question||p.text,correct:p.answer.val},finalVal,()=>p.answer.check(finalVal));}catch(e){}
+  var completeOk=finalOk&&requiredStepsOk;
+  window.MIAnalytics?.answer(completeOk,p.topicId);finalInp.classList.toggle('ok',finalOk);finalInp.classList.toggle('err',!finalOk);
   document.querySelectorAll('#sAmpProb .step-input,#sAmpProb .final-input').forEach(function(el){el.disabled=true;});
   var cb=document.querySelector('#sAmpProb .check-btn');if(cb)cb.disabled=true;
-  if(!finalOk)ampRegisterError(p,finalVal);
-  ampSession.results.push({ok:finalOk,hintUsed:ampSession.hintUsed,stepsOk:stepsOk,stepsTotal:stepsTotal,prob:p,given:finalVal});
-  var quality=finalOk?(ampSession.hintUsed?'part':'ok'):'ko',fb='';
+  if(!completeOk)ampRegisterError(p,p.examAnswer?document.getElementById('ampStep_0').value+' = '+finalVal:finalVal);
+  ampSession.results.push({ok:completeOk,hintUsed:ampSession.hintUsed,stepsOk:stepsOk,stepsTotal:stepsTotal,prob:p,given:finalVal});
+  var quality=completeOk?(ampSession.hintUsed?'part':'ok'):'ko',fb='';
   if(quality==='ok'){
     fb='<div class="fb-box fb-ok"><h4>✅ Resposta correcta.</h4>'+(stepsTotal>0&&stepsOk<stepsTotal?'<small>La resposta final és correcta, però revisa algun pas intermedi marcat en vermell.</small>':'')+'</div>';
   }else if(quality==='part'){
     fb='<div class="fb-box fb-part"><h4>⚠️ Correcte, però has utilitzat la pista.</h4></div>';
   }else{
-    fb='<div class="fb-box fb-err"><h4>❌ Resposta incorrecta</h4>La resposta correcta és: <b>'+p.answer.val+'</b><div class="sol-steps"><b>Solució pas a pas:</b><br>'+(p.hints||[]).map(function(h,i){return '<div class="sol-step">Pas '+(i+1)+': '+h+'</div>';}).join('')+'</div>'+miTheoryLinkHtml(p.topicId)+'</div>';
+    fb='<div class="fb-box fb-err"><h4>❌ Resposta incorrecta</h4>La resposta correcta és: <b>'+(p.examAnswer||p.answer).val+'</b><div class="sol-steps"><b>Solució pas a pas:</b><br>'+(p.hints||[]).map(function(h,i){return '<div class="sol-step">Pas '+(i+1)+': '+h+'</div>';}).join('')+'</div>'+miTheoryLinkHtml(p.topicId,undefined,p.examAnswer?'problemes':undefined)+'</div>';
   }
   document.getElementById('ampFbArea').innerHTML=fb;
   document.getElementById('ampActionRow').style.display='flex';
@@ -4955,7 +5022,7 @@ function showErrorSummary(){
           +miReviewHtml(e);
         if(Array.isArray(e.solution)&&e.solution.length){
           html+='<button class="bs" onclick="toggleSavedSolution(&quot;'+solId+'&quot;,this)" style="margin-top:10px">&#128214; Veure explicació</button>'
-            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+'</div>';
+            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.jerarquiaTheory?miTheoryLinkHtml(t.id,undefined,e.jerarquiaTheory):'')+'</div>';
         }else{
           html+='<div style="margin-top:10px;font-size:.8rem;color:var(--muted)">Aquest error és d\'una versió anterior i no tenia l\'explicació desada.</div>';
         }
@@ -5022,16 +5089,19 @@ function examCompatibleProblemCats(selectedIds){
   });
 }
 function wrapExamProblem(p){
+  const answer=p.examAnswer||p.answer;
   return {
     examProblem:true,isProblem:true,
     topicId:p.topicId,topicName:p.topicName||p.cat||'Problema',
     type:p.type,variantId:p.variantId||null,diff:p.diff||2,
-    question:p.examText||p.text||'',correct:p.answer&&p.answer.val!==undefined?String(p.answer.val):'',
+    question:p.examText||p.text||'',correct:answer&&answer.val!==undefined?String(answer.val):'',
     options:[],guide:(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),
     solution:Array.isArray(p.hints)?p.hints.slice():[],
-    opsAnswer:p.answer?.opsAnswer,
-    potenciesAnswer:p.answer?.potenciesAnswer,
-    answerCheck:p.answer&&typeof p.answer.check==='function'?p.answer.check:function(v){return norm(v)===norm(this.correct);}
+    opsAnswer:answer?.opsAnswer,
+    potenciesAnswer:answer?.potenciesAnswer,
+    jerarquiaAnswer:answer?.jerarquiaAnswer,
+    jerarquiaTheory:answer?.jerarquiaAnswer?'problemes':undefined,
+    answerCheck:answer&&typeof answer.check==='function'?answer.check:function(v){return norm(v)===norm(this.correct);}
   };
 }
 function generateExamProblems(problemCats,target){
@@ -5092,7 +5162,7 @@ function showEQ(){
   var kind=q.examProblem?' &middot; <b style="color:var(--warn)">&#128221; Problema obert</b>':(q.isProblem?' &#128203;':'');
   document.getElementById('examC').innerHTML='<div class="exn">Pregunta '+(state.examIdx+1)+'/'+state.examQs.length+' &middot; '+q.topicName+kind+' '+diffBadge(q.diff)+'</div><div class="exq">'+q.question+'</div>';
   if(q.examProblem){
-    document.getElementById('examO').innerHTML='<div style="display:flex;gap:10px;align-items:center;margin-bottom:14px"><input class="final-input" id="examOpenAns" style="min-width:0" placeholder="Escriu la resposta final..." autocomplete="off" onkeydown="if(event.key===\'Enter\')checkExamOpenAnswer()"><button class="check-btn" id="examOpenCheck" onclick="checkExamOpenAnswer()">Comprovar &#10003;</button></div>';
+    document.getElementById('examO').innerHTML='<div style="display:flex;gap:10px;align-items:center;margin-bottom:14px"><input class="final-input" id="examOpenAns" style="min-width:0" placeholder="'+(q.jerarquiaAnswer?'Expressió = resultat':'Escriu la resposta final...')+'" autocomplete="off" onkeydown="if(event.key===\'Enter\')checkExamOpenAnswer()"><button class="check-btn" id="examOpenCheck" onclick="checkExamOpenAnswer()">Comprovar &#10003;</button></div>';
     setTimeout(function(){var el=document.getElementById('examOpenAns');if(el)el.focus();},40);
   }else{
     document.getElementById('examO').innerHTML=q.options.map(function(o,i){return '<button class="ob" onclick="selEA('+i+',this)">'+o+'</button>';}).join('');
@@ -5116,14 +5186,14 @@ function checkExamOpenAnswer(){
   var q=state.examQs[state.examIdx],inp=document.getElementById('examOpenAns');
   if(!q||!q.examProblem||!inp)return;
   var val=inp.value;if(!String(val).trim())return;
-  var ok=false;try{ok=q.opsAnswer||q.potenciesAnswer?q.answerCheck(val):MIValidation.grade(q,val,()=>q.answerCheck(val));}catch(e){ok=false;}
+  var ok=false;try{ok=q.jerarquiaAnswer?MIJerarquia.matches(q.jerarquiaAnswer,val):q.opsAnswer||q.potenciesAnswer?q.answerCheck(val):MIValidation.grade(q,val,()=>q.answerCheck(val));}catch(e){ok=false;}
   if(ok)state.examScore++;
   state.examAnswers.push({ok:ok,q:stripTags(q.question).slice(0,90),correct:q.correct,given:val,topicId:q.topicId,topicName:q.topicName,isProblem:true,examProblem:true});
   if(!ok)registerError(q,val,'exam');
   inp.disabled=true;inp.classList.toggle('ok',ok);inp.classList.toggle('err',!ok);
   var cb=document.getElementById('examOpenCheck');if(cb)cb.disabled=true;
   var solHTML=q.solution&&q.solution.length?'<div class="solbox">'+solSteps(q.solution)+'</div>':'';
-  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+escHtml(q.correct)+'</b>')+'</h4>'+solHTML+'</div>';
+  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+escHtml(q.correct)+'</b>')+'</h4>'+solHTML+(q.jerarquiaTheory?miTheoryLinkHtml(q.topicId,undefined,q.jerarquiaTheory):'')+'</div>';
   document.getElementById('bNExam').style.display='block';
   document.getElementById('bNExam').textContent=state.examIdx+1<state.examQs.length?'Seguent ->':'Veure resultat';
 }
@@ -5280,7 +5350,7 @@ function initPage(){
 miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
 miTaskDifficulty.bindDisplay({
   showName:'showEx',current:()=>typeof curEx!=='undefined'?curEx:currentEx,
-  useAssignedDifficulty:exercise=>!!exercise.opsTheory||!!exercise.potenciesTheory&&Number.isInteger(exercise.taskDifficulty),state:()=>typeof ST!=='undefined'?ST:state
+  useAssignedDifficulty:exercise=>!!exercise.opsTheory||!!(exercise.potenciesTheory||exercise.jerarquiaTheory)&&Number.isInteger(exercise.taskDifficulty),state:()=>typeof ST!=='undefined'?ST:state
 });
 loadState();initPage();
 
