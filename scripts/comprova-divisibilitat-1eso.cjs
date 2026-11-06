@@ -144,7 +144,7 @@ async function main() {
       }
       check(visited.size===7,'Rotació completa N2 amb baixada i retorn');
       document.getElementById('bChg').click();
-      check(document.getElementById('decimalResultScore').textContent==='0/20','Sortida anticipada');
+      check(document.getElementById('decimalResultScore').textContent==='0/0','Sortida anticipada');
 
       for(const id of ['naturals','decimal_sys','ops','potencies','jerarquia']){
         start(id,1,'multi');respond(true);nextEx();

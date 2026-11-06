@@ -488,13 +488,13 @@ Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immed
     <h2 id="decimalResultTitle" tabindex="-1"></h2>
     <p id="decimalResultSubtitle"></p>
     <strong class="decimal-result-score" id="decimalResultScore"></strong>
-    <p id="practiceResultMetric">Punts de progrés</p>
+    <p id="practiceResultMetric"></p>
     <dl class="decimal-result-stats">
       <div><dt>Preguntes contestades</dt><dd id="decimalResultCount"></dd></div>
       <div><dt>Respostes correctes</dt><dd id="decimalResultCorrect"></dd></div>
       <div><dt>Respostes incorrectes</dt><dd id="decimalResultIncorrect"></dd></div>
     </dl>
-    <progress id="decimalResultProgress" aria-label="Punts de progrés"></progress>
+    <progress id="decimalResultProgress" aria-label="Percentatge d’encerts"></progress>
     <p id="decimalResultStatus"></p>
     <div class="decimal-result-actions">
       <button class="bp" type="button" id="decimalResultNext"></button>
@@ -4233,8 +4233,7 @@ function resetVariationBagForTopic(topicId){
 function startP(){
   window.MIAnalytics?.start();state.exCount=0;state.correctStreak=0;
   var topic=TOPICS[state.currentTopic];
-  if(topic.adaptivePractice)adaptivePracticeSessions[topic.id]={points:0,seen:new Set(),questions:new Set(),lastFamily:null};
-  if(isGuidedDecimalPractice()||topic.practiceCountsAnswers)Object.assign(adaptivePracticeSessions[topic.id],{correct:0,incorrect:0,ended:false});
+  if(topic.adaptivePractice)adaptivePracticeSessions[topic.id]={points:0,seen:new Set(),questions:new Set(),lastFamily:null,correct:0,incorrect:0,ended:false};
   if(topic.id==='potencies')Object.assign(adaptivePracticeSessions.potencies,{baseDeuInverse:Boolean(rnd(0,1)),lastFamilyByLevel:[]});
   if(topic.practiceGen)adaptivePracticeSessions[topic.id].lastFamilyByLevel=[];
   resetVariationBagForTopic(topic.id);showEx();
@@ -4428,9 +4427,9 @@ function showEx(){
   }
   document.getElementById('fbA').innerHTML='';
   document.getElementById('bNext').style.display='none';
-  var leave=document.getElementById('bChg'),guidedDecimal=isGuidedDecimalPractice();
-  leave.style.display=guidedDecimal||t.practiceCountsAnswers?'block':'none';
-  leave.textContent=guidedDecimal||t.practiceCountsAnswers?'Finalitza la pràctica':'← Canviar de tema';
+  var leave=document.getElementById('bChg');
+  leave.style.display=t.adaptivePractice?'block':'none';
+  leave.textContent=t.adaptivePractice?'Finalitza la pràctica':'← Canviar de tema';
   showScreen('sEx');
 }
 function selAns(idx,btn){
@@ -4495,7 +4494,7 @@ function processPracticeAnswer(isOk,studentAnswer,message){
     if(state.answered)return;
     var session=adaptivePracticeSessions[topic.id];
     session.points=Math.max(0,Math.min(needed,session.points+(isOk?1:-1)));
-    if(isGuidedDecimalPractice()||topic.practiceCountsAnswers)session[isOk?'correct':'incorrect']++;
+    session[isOk?'correct':'incorrect']++;
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
@@ -4538,9 +4537,9 @@ function nextEx(){
   var topic=TOPICS[state.currentTopic],needed=NEEDED[state.level];
   if(topic.adaptivePractice){
     if(!state.answered)return;
-    if(isGuidedDecimalPractice()&&adaptivePracticeSessions.decimal_sys.ended)return;
+    if(adaptivePracticeSessions[topic.id].ended)return;
     if(adaptiveGoalReached()){
-      if(topic.practiceCountsAnswers)showAdaptivePracticeResult(topic.id);else showCongrats();
+      showAdaptivePracticeResult(topic.id);
       return;
     }
   }else if(state.correctStreak>=needed&&state.done.includes(topic.id)){showCongrats();return;}
@@ -4548,35 +4547,37 @@ function nextEx(){
 }
 function showCongrats(){
   var t=TOPICS[state.currentTopic],ni=t.course==="1r"?nextCoreIndex(state.currentTopic):-1,next=ni>=0?TOPICS[ni]:null;
-  var message=t.adaptivePractice?'<h2>Pràctica completada</h2><p>Has respost '+state.exCount+' preguntes de <b>'+t.name+'</b>.</p>':
-    '<div class="tr">&#127942;</div><h2>Excel·lent!</h2><p>Has dominat <b>'+t.name+'</b>!</p>';
+  var message='<div class="tr">&#127942;</div><h2>Excel·lent!</h2><p>Has dominat <b>'+t.name+'</b>!</p>';
   document.getElementById('fbA').innerHTML='<div class="cg">'+message+'<button class="bp" onclick="showHome()">Tornar al menú</button>'+(next?'<button class="bs" onclick="selTopic('+ni+')">Següent: '+next.name+' &rarr;</button>':'')+'</div>';
   document.getElementById('bNext').style.display='none';
 }
 function showGuidedDecimalResult(){showAdaptivePracticeResult('decimal_sys');}
 function showAdaptivePracticeResult(topicId,reason){
-  const topic=TOPICS.find(t=>t.id===topicId),countAnswers=topic.practiceCountsAnswers;
-  const guided=state.level===1,session=adaptivePracticeSessions[topicId];
-  const limit=NEEDED[state.level],answered=session.correct+session.incorrect;
-  const count=countAnswers?(guided?session.correct:answered):session.points,achieved=count>=limit;
-  const metric=countAnswers?(guided?'Encerts acumulats':'Preguntes contestades'):'Punts de progrés';
+  const topic=TOPICS.find(t=>t.id===topicId),session=adaptivePracticeSessions[topicId];
+  if(session.ended)return;
+  const guided=state.level===1,limit=NEEDED[state.level];
+  const {correct,incorrect}=session,answered=correct+incorrect;
+  // A displayed question only satisfies the legacy count after it is answered.
+  const achieved=state.answered&&adaptiveGoalReached();
+  const objective=isGuidedDecimalPractice()?'punts de progrés':
+    guided&&topic.practiceCountsAnswers?'encerts acumulats':'preguntes contestades';
   session.ended=true;state.answered=true;
   const title=document.getElementById('decimalResultTitle');
   title.textContent=achieved?'Objectiu assolit!':'Pràctica finalitzada';
   document.getElementById('decimalResultIcon').hidden=!achieved;
-  const practice=countAnswers?'pràctica '+(guided?'guiada':'autònoma')+' de '+topic.name:'pràctica guiada de Sistema de numeració decimal';
-  const practiceLabel=topicId==='divis'?practice.replace('de Divisibilitat','de divisibilitat'):
-    topicId==='ops'?practice.replace('de Operacions','d’Operacions'):
-    topicId==='jerarquia'?practice.replace('de Jerarquia','de jerarquia'):practice;
-  document.getElementById('decimalResultSubtitle').textContent=reason||((achieved?'Has completat la ':'Has decidit acabar la ')+practiceLabel+'.');
-  document.getElementById('decimalResultScore').textContent=count+'/'+limit+(countAnswers?'':' punts');
-  document.getElementById('practiceResultMetric').textContent=metric;
-  document.getElementById('decimalResultCount').textContent=session.correct+session.incorrect;
-  document.getElementById('decimalResultCorrect').textContent=session.correct;
-  document.getElementById('decimalResultIncorrect').textContent=session.incorrect;
+  const name=topic.name.toLocaleLowerCase('ca');
+  const practice='pràctica '+(guided?'guiada':'autònoma')+(topicId==='ops'?' d’':' de ')+name;
+  document.getElementById('decimalResultSubtitle').textContent=reason||((achieved?'Has completat la ':'Has decidit acabar la ')+practice+'.');
+  document.getElementById('decimalResultScore').textContent=correct+'/'+answered;
+  const accuracy=answered?100*correct/answered:0;
+  document.getElementById('practiceResultMetric').textContent=answered?
+    accuracy.toLocaleString('ca',{maximumFractionDigits:1})+'% d’encerts':'Encara no hi ha respostes.';
+  document.getElementById('decimalResultCount').textContent=answered;
+  document.getElementById('decimalResultCorrect').textContent=correct;
+  document.getElementById('decimalResultIncorrect').textContent=incorrect;
   const progress=document.getElementById('decimalResultProgress');
-  progress.max=limit;progress.value=count;progress.setAttribute('aria-label',metric);
-  document.getElementById('decimalResultStatus').textContent=achieved?'Has arribat a la puntuació objectiu.':'Aquest és el progrés acumulat durant la sessió.';
+  progress.max=100;progress.value=accuracy;progress.style.display=answered?'':'none';
+  document.getElementById('decimalResultStatus').textContent=achieved?'Objectiu completat: '+limit+' '+objective+'.':'';
   const nextIndex=nextCoreIndex(state.currentTopic),nextButton=document.getElementById('decimalResultNext');
   nextButton.style.display=nextIndex>=0?'':'none';
   if(nextIndex>=0){
@@ -4589,12 +4590,11 @@ function showAdaptivePracticeResult(topicId,reason){
 }
 function leavePractice(){
   const topic=TOPICS[state.currentTopic];
-  if(topic.practiceCountsAnswers)showAdaptivePracticeResult(topic.id);
-  else if(isGuidedDecimalPractice())showGuidedDecimalResult();else showHome();
+  if(topic.adaptivePractice)showAdaptivePracticeResult(topic.id);
+  else showHome();
 }
 function goBack(){
-  if(document.getElementById('sEx').classList.contains('active')&&TOPICS[state.currentTopic].practiceCountsAnswers){leavePractice();return;}
-  if(document.getElementById('sEx').classList.contains('active')&&isGuidedDecimalPractice()&&!adaptivePracticeSessions.decimal_sys.ended){showGuidedDecimalResult();return;}
+  if(document.getElementById('sEx').classList.contains('active')&&TOPICS[state.currentTopic].adaptivePractice){leavePractice();return;}
   var ampProb=document.getElementById('sAmpProb'),ampResults=document.getElementById('sAmpResults'),ampHome=document.getElementById('sAmpHome');
   if((ampProb&&ampProb.classList.contains('active'))||(ampResults&&ampResults.classList.contains('active'))){showAmpHome();return;}
   if(ampHome&&ampHome.classList.contains('active')){showHome();return;}

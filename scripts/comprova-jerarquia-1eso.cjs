@@ -127,7 +127,8 @@ async function main() {
           });
           check(document.getElementById('sDecimalResult').classList.contains('active'), 'Pantalla final');
           check(document.getElementById('decimalResultCount').textContent === String(answers.length), 'Comptador del resum');
-          check(document.getElementById('decimalResultScore').textContent === (level === 1 ? '10/10' : '20/20'), 'Objectiu assolit');
+          check(document.getElementById('decimalResultScore').textContent === answers.filter(Boolean).length+'/'+answers.length, 'Resultat real');
+          check(document.getElementById('decimalResultTitle').textContent === 'Objectiu assolit!', 'Objectiu assolit');
         } finally { Math.random = random; }
       }
       session(1, [true,true,true,false,true,true,true,true,false,true,true,true],
@@ -136,7 +137,7 @@ async function main() {
       session(2, Array(20).fill(true), 'multi', [...Array(6).fill(1), ...Array(6).fill(2), ...Array(8).fill(3)]);
       start('jerarquia', 1, 'multi');
       document.getElementById('bChg').click();
-      check(document.getElementById('decimalResultScore').textContent === '0/10', 'Sortida anticipada');
+      check(document.getElementById('decimalResultScore').textContent === '0/0', 'Sortida anticipada');
 
       for (const id of ['naturals', 'decimal_sys', 'ops', 'potencies']) {
         start(id, 1, 'multi');
