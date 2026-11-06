@@ -123,6 +123,12 @@ a{color:inherit}
 <a href="#calcular">4. Calcular</a>
 <a href="#arrels">5. Arrels</a>
 <a href="#inverses">6. Inverses</a>
+<a href="#base-deu">7. Base 10</a>
+<a href="#exponent-desconegut">8. Trobar l’exponent</a>
+<a href="#acotar-arrels">9. Acotar arrels</a>
+<a href="#recompte-multiplicatiu">10. Recompte multiplicatiu</a>
+<a href="#quadrats-en-context">11. Quadrats en context</a>
+<a href="#errors-tipics">Errors típics</a>
 </nav>
 <section class="card major" id="potencia">
 <h2>² 1. Què és una potència?</h2>
@@ -215,7 +221,34 @@ a{color:inherit}
 </div>
 <p>Aquesta relació és la millor manera de comprovar una arrel quadrada exacta.</p>
 </section>
-<section class="card mistakes">
+<section class="card" id="base-deu">
+<h2>7. Potències de base 10</h2>
+<p>En el sistema decimal, multiplicar per 10 desplaça totes les xifres una posició cap a l’esquerra. Si comencem amb 1 i multipliquem cinc vegades per 10, obtenim un 1 seguit de cinc zeros.</p>
+<div class="callout"><div class="math">10⁵ = 100.000</div></div>
+<p>A l’inrevés, si una potència de base 10 val 100.000, comptem cinc zeros i trobem l’exponent 5.</p>
+</section>
+<section class="card" id="exponent-desconegut">
+<h2>8. Trobar l’exponent</h2>
+<p>Quin exponent fa que una potència de base 3 valgui 81? Comencem amb 3 i anem multiplicant per 3.</p>
+<div class="callout"><div class="math">3 × 3 = 9 · 9 × 3 = 27 · 27 × 3 = 81</div></div>
+<p>Hem multiplicat quatre factors iguals a 3, de manera que 3⁴ = 81. Com que la base és més gran que 1, cada potència supera l’anterior. L’exponent és únic.</p>
+</section>
+<section class="card" id="acotar-arrels">
+<h2>9. Acotar una arrel quadrada</h2>
+<p>Per acotar √50, busca els dos quadrats perfectes consecutius que envolten 50. Com que 7² = 49 i 8² = 64, tenim:</p>
+<div class="callout"><div class="math">49 &lt; 50 &lt; 64, per tant 7 &lt; √50 &lt; 8</div></div>
+<p>Els enters consecutius que es demanen són 7 i 8.</p>
+</section>
+<section class="card" id="recompte-multiplicatiu">
+<h2>10. Recompte i creixement multiplicatiu</h2>
+<p>En un codi de quatre posicions, si cada posició admet tres lletres, amb repetició i tries independents, hi ha 3 × 3 × 3 × 3 = 3⁴ = 81 codis.</p>
+<p>També obtenim 3⁴ = 81 brots si comencem amb un brot i, durant quatre rondes, cada brot actiu es reemplaça per tres brots nous. Cada ronda multiplica per tres el total anterior.</p>
+</section>
+<section class="card" id="quadrats-en-context">
+<h2>11. Quadrats en context</h2>
+<p>Dos mosaics quadrats sumen 100 rajoles i el costat del gran té dues rajoles més. Prova parelles de costats que es diferenciïn en 2. La parella 6 i 8 funciona perquè 6² + 8² = 36 + 64 = 100. Les sumes creixen quan augmenten els dos costats, així que el mosaic gran té 64 rajoles.</p>
+</section>
+<section class="card mistakes" id="errors-tipics">
 <h2>⚠️ Errors típics</h2>
 <ul>
 <li>Confondre la base amb l'exponent.</li>
@@ -223,6 +256,13 @@ a{color:inherit}
 <li>Escriure 3×3×3×3 com 4³ en lloc de 3⁴.</li>
 <li>Pensar que √36 és 18 perquè es divideix entre 2.</li>
 <li>Oblidar que √64 busca el nombre que multiplicat per ell mateix dona 64.</li>
+</ul>
+<h3>Com trobar un contraexemple mínim</h3>
+<p>Comprova els valors del rang de menor a major i atura’t en el primer que fa falsa l’afirmació.</p>
+<ul>
+<li>Entre 2 i 9, 2² = 2 × 2, però 3² = 9 i 3 × 2 = 6. El primer contraexemple és 3.</li>
+<li>Entre els quadrats perfectes del 4 al 20, √4 = 4 ÷ 2, però √9 = 3 i 9 ÷ 2 = 4,5. El primer contraexemple és 9.</li>
+<li>Tot i que 2⁴ = 4², intercanviar base i exponent pot canviar els factors. Entre 2 i 9, 2² = 2², però 2³ = 8 i 3² = 9. El primer contraexemple és 3.</li>
 </ul>
 </section>
 <section class="card check">
