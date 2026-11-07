@@ -462,6 +462,7 @@ Els exercicis estan organitzats per nivells i ofereixen <strong>correcció immed
   <div class="open-wrap" id="openWrap" style="display:none">
     <form id="divisReasoning" hidden onsubmit="event.preventDefault();checkOpen()"></form>
     <label id="opsReasonLabel" hidden>Motiu de l’error <select id="opsReason" required><option value="">Tria el motiu</option><option value="A">A · La igualtat no reconstrueix el dividend</option><option value="B">B · El residu és igual o superior al divisor</option></select></label>
+    <label id="mcdListLabel" for="openInput" hidden></label>
     <input class="open-input" id="openInput" type="text" placeholder="Escriu la teva resposta aquí…" autocomplete="off" autocorrect="off" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault();checkOpen();}">
     <div class="math-pad" aria-label="Teclat matemàtic">
       <span class="math-pad-label">Escriptura ràpida:</span>
@@ -4154,6 +4155,7 @@ function openOk1Legacy(correct,value,ex){
   return false;
 }
 function openHint1(ex){
+  if(ex?.mcmFields?.length===1&&ex.mcmFields[0].list)return 'Separa els enters amb comes, punts i coma o espais. Escriu la llista completa, sense duplicats i en qualsevol ordre.';
   if(ex?.mcmFields)return ex.mcmFields[0].unit?'Escriu el nombre. Pots incloure la unitat demanada.':'Escriu un enter.';
   if(ex?.divisAnswer){
     const hints={
@@ -4416,8 +4418,12 @@ function showEx(){
     var inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';
     const structured=currentEx.mcmFields?.length>1?
       renderMcdFields(currentEx.mcmFields):renderDivisReasoning(currentEx.divisReasoning);
+    const singleList=currentEx.mcmFields?.length===1&&currentEx.mcmFields[0].list;
+    const listLabel=document.getElementById('mcdListLabel');
+    listLabel.hidden=!singleList;
+    listLabel.textContent=singleList?currentEx.mcmFields[0].label:'';
     inp.hidden=structured;
-    document.querySelector('#openWrap .math-pad').style.display=structured||currentEx.decimalAnswer==='spelling'?'none':'';
+    document.querySelector('#openWrap .math-pad').style.display=structured||singleList||currentEx.decimalAnswer==='spelling'?'none':'';
     document.querySelector('#openWrap > .btn-check').style.display=structured?'none':'';
     document.getElementById('openHint').hidden=structured;
     if(diagnosis)inp.setAttribute('aria-label','Quocient i residu, separats per un punt i coma');

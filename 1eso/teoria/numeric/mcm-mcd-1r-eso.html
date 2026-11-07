@@ -154,15 +154,16 @@ a{color:inherit}
 </section>
 <section class="card" id="divisors-comuns">
 <h2>Divisors comuns</h2>
-<p>Escriu els divisors positius de cada nombre. Conserva els que apareixen a totes dues llistes, una vegada cadascun. El més gran és el MCD.</p>
+<p>Escriu els divisors positius de cada nombre. L’1 sempre hi apareix perquè qualsevol enter positiu dividit per 1 dona aquest mateix enter i residu 0. Conserva els nombres que apareixen a totes dues llistes, una vegada cadascun.</p>
 <div class="example"><p>Els divisors de 12 són 1, 2, 3, 4, 6 i 12. Els de 18 són 1, 2, 3, 6, 9 i 18. Conservem els que apareixen a totes dues llistes.</p>
-<p><strong>Divisors comuns positius:</strong> 1, 2, 3, 6.</p><p><strong>El més gran (MCD):</strong> 6. Per tant, MCD(12, 18) = 6.</p></div>
+<p><strong>Resposta. Divisors comuns positius:</strong> 1, 2, 3, 6.</p><p>Com a observació, el més gran d’aquests divisors és el MCD.</p></div>
 </section>
 <section class="card" id="multiples-comuns">
 <h2>Múltiples comuns positius</h2>
-<p>Comença pel primer múltiple positiu i conserva els nombres que són múltiples de tots dos. Si hi ha un límit, inclou-lo quan també compleixi la condició. El primer de la llista és el mcm.</p>
+<p>Construeix les dues llistes multiplicant cada nombre per 1, per 2, per 3 i així successivament fins al límit. Conserva els nombres que apareixen a totes dues llistes. Comença pels múltiples positius, que deixen fora el zero. Si el límit compleix les condicions, inclou-lo.</p>
 <div class="example"><p>Busquem els múltiples comuns positius de 6 i 10 fins a 60. Els múltiples de 10 són 10, 20, 30, 40, 50 i 60. Conservem els que també són divisibles per 6. El 0 queda fora perquè es demanen múltiples positius, i el 60 s’inclou perquè és el límit.</p>
-<p><strong>Múltiples comuns positius:</strong> 30, 60.</p><p><strong>El més petit (mcm):</strong> 30. Per tant, mcm(6, 10) = 30.</p></div>
+<p>Els múltiples de 6 fins a 60 són 6, 12, 18, 24, 30, 36, 42, 48, 54 i 60.</p>
+<p><strong>Resposta. Múltiples comuns positius:</strong> 30, 60.</p><p>Com a observació, el primer múltiple positiu comú és el mcm.</p></div>
 </section>
 <section class="card" id="casos-especials">
 <h2>Casos especials</h2>

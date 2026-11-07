@@ -31,10 +31,17 @@ async function main(){
       check(gcd(12,18)===6&&lcm(12,18)===36&&gcd(8,9)===1&&lcm(8,9)===72&&
         gcd(6,18)===6&&lcm(6,18)===18&&lcm(12,30)===60&&lcm(lcm(4,6),8)===24,'Exemples matemàtics');
       const p1=make('P1',12,13),p2=make('P2',4,3,2);
-      check(accepts(p1,'6, 2, 1, 3; 6')&&rejects(p1,['1 2 3; 6','1 2 3 6 6; 6','1 2 3 6; 3','1 2 3 6; 6; 999']),'P1 conjunt i màxim');
-      check(accepts(p2,'24 12; 12')&&rejects(p2,['0 12 24; 12','12; 12','12 24; 24']),'P2 positius i límit inclusiu');
-      check(accepts(p1,['6; 2; 1; 3','6'])&&accepts(make('P2',6,7,2),['60; 30','30'])&&
-        !accepts(p1,['1; 2; 3; 6; 6','6']),'Separadors dins del camp de llista');
+      check(['1, 2, 3, 6','6, 3, 2, 1','1; 2; 3; 6','1 2 3 6'].every(v=>accepts(p1,v))&&
+        rejects(p1,['1 2 3','1 2 3 6 6','1 2 3 6 9','-1 2 3 6','1 2 3 6;','1 2 3 6 text']),'P1 conjunt únic');
+      check(accepts(make('P1',5,0),'1')&&accepts(make('P1',4,3),'1 2 4'),'P1 coprimers i operand divisor');
+      check(accepts(p2,'24 12')&&rejects(p2,['0 12 24','12','12 24 24']),'P2 positius i límit inclusiu');
+      const multiples=make('P2',5,2,2);
+      check(['20, 40','40, 20','20; 40'].every(v=>accepts(multiples,v))&&
+        rejects(multiples,['20','0 20 40','20 30 40','20 40 60']),'P2 de 5 i 4');
+      check(accepts(make('P2',6,7,2),'60; 30'),'P2 de 6 i 10');
+      const nonExactLimit=Array.from({length:45},(_,i)=>i+1).filter(n=>n%5===0&&n%4===0);
+      check(nonExactLimit.join()==='20,40'&&M.matches([{list:true,value:nonExactLimit}],'40; 20')&&
+        !M.matches([{list:true,value:nonExactLimit}],'20; 40; 60'),'Límit no múltiple commun');
       check(accepts(make('P3',6,0,3),'6; 18')&&accepts(make('P3',8,1,0),'1; 72'),'P3 casos especials');
       const a1=make('A1',12,11),a2=make('A2',12,23,1),a3=make('A3',12,12),a4=make('A4',12,0);
       check(accepts(a1,'3*2; 6')&&rejects(a1,['6; 6','2 × 3; 12','6'])&&accepts(a2,'5 × 3 × 2 × 2; 60'),'Factors seleccionats');
@@ -74,6 +81,11 @@ async function main(){
         for(const random of [(min,max)=>min,(min,max)=>max,rnd,rnd]){
           const q=genMcdPractice(type,level+1,random);
           check(q.options.length===4&&new Set(q.options).size===4&&q.options.filter(v=>accepts(q,v)).length===1,'Opcions de '+type);
+          if(type==='P1'||type==='P2'){
+            check(q.mcmFields.length===1&&!q.mcmOptionLabels&&!/més (gran|petit)|MCD|mcm/.test(q.question),'Una única demanda');
+            const sets=q.options.map(option=>option.split(',').map(Number).sort((a,b)=>a-b).join());
+            check(new Set(sets).size===4&&q.options.every(option=>/^\d+(, \d+)*$/.test(option)),'Quatre conjunts diferents');
+          }
         }
       }
       for(const family of groups[0])check(new Set(M.reserve(family,1).map(q=>q.practiceKey)).size===8,'Reserva N1');
@@ -191,10 +203,13 @@ async function main(){
     for(const [type,draws] of [['P1',[12,13]],['P2',[6,7,2]],['A1',[30,27]],['A2',[12,23,1]]]){
       await showCase(type,draws,'multi');
       assert.equal(await page.locator('#og .ob').count(),4);
-      assert(await page.locator('#og .ob').evaluateAll(buttons=>buttons.every(button=>
+      if(type==='P1'||type==='P2'){
+        assert(await page.locator('#og .ob').evaluateAll(buttons=>buttons.every(button=>
+          !button.querySelector('.mcm-option-line')&&/^\d+(, \d+)*$/.test(button.textContent))));
+      }else assert(await page.locator('#og .ob').evaluateAll(buttons=>buttons.every(button=>
         button.querySelectorAll('.mcm-option-line').length===2&&button.dataset.answer.includes(';'))));
       const correct=await page.evaluate(()=>currentEx.correct);
-      const button=page.locator('#og .ob').filter({has:page.locator('strong')});
+      const button=page.locator('#og .ob');
       const index=await page.evaluate(()=>currentEx.options.indexOf(currentEx.correct));
       await button.nth(index).focus();
       await page.keyboard.press('Enter');
@@ -203,16 +218,15 @@ async function main(){
       assert.equal(await page.evaluate(()=>currentEx.correct),correct);
     }
     await showCase('P2',[6,7,2],'open');
-    await page.locator('#divisReasoning button').click();
+    assert.equal(await page.locator('#openWrap input:visible').count(),1);
+    assert.match(await page.locator('#mcdListLabel').innerText(),/tots els múltiples comuns positius/);
+    await page.locator('#openWrap > .btn-check').click();
     assert.equal(await page.evaluate(()=>state.answered),false);
-    await page.locator('#mcmField0').fill('60; 30');
-    await page.locator('#divisReasoning button').click();
-    assert.equal(await page.evaluate(()=>state.answered),false);
-    await page.locator('#mcmField1').fill('30');
-    await page.locator('#mcmField1').press('Enter');
+    await page.locator('#openInput').fill('60; 30');
+    await page.locator('#openInput').press('Enter');
     await page.locator('#fbA .ok').waitFor();
     assert.match(await page.locator('#fbA').innerText(),/Múltiples comuns positius: 30, 60/);
-    assert.match(await page.locator('#fbA').innerText(),/El més petit és 30/);
+    assert.doesNotMatch(await page.locator('#fbA').innerText(),/El més petit|30; 60;/);
     const theory=await browser.newPage();
     await theory.route(/^https?:/,route=>route.abort());
     for(const [family,link] of Object.entries(result.feedbackLinks)){

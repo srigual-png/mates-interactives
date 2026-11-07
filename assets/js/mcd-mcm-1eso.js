@@ -11,8 +11,6 @@ window.MIMcdMcm = (() => {
   const pick = (items,rnd) => items[rnd(0,items.length-1)];
   function optionLabels(type){
     return {
-      P1:['Divisors comuns positius','El més gran (MCD)'],
-      P2:['Múltiples comuns positius','El més petit (mcm)'],
       A1:['Producte dels factors primers comuns','Resultat del MCD'],
       A2:['Producte dels factors primers seleccionats','Resultat del mcm']
     }[type];
@@ -39,6 +37,7 @@ window.MIMcdMcm = (() => {
   }
   function matches(fields,input){
     if(String(input).length>600)return false;
+    if(fields.length===1&&fields[0].list&&!Array.isArray(input))return fieldMatches(fields[0],input);
     const parts=Array.isArray(input)?input:String(input).split(';');
     return parts.length===fields.length&&fields.every((field,i)=>fieldMatches(field,parts[i]));
   }
@@ -111,18 +110,28 @@ window.MIMcdMcm = (() => {
       const b=divisors?pick(range(4,36).filter(n=>n!==a),rnd):pick(range(2,12).filter(n=>n!==a&&lcm(a,n)<=60),rnd);
       const n=divisors?gcd(a,b):lcm(a,b),limit=divisors?0:n*rnd(2,3);
       const items=divisors?MIDivisibilitat.divisors(n):range(1,limit/n).map(k=>k*n);
-      const labels=optionLabels(type);
-      const field={label:labels[0],value:items,list:true};
-      const extremum=number(labels[1],n);
-      const question=divisors?`Escriu tots els divisors positius comuns de ${a} i ${b}. Quin és el més gran?`:
-        `Escriu tots els múltiples comuns positius de ${a} i ${b} fins a ${limit}, inclòs. Quin és el més petit?`;
-      const wrong=[values([{...field,value:items.length>1?items.slice(0,-1):[2]},extremum]),
-        values([{...field,value:[...items,divisors?n+1:0]},extremum]),values([field,{...extremum,value:n+1}])];
-      return task(question,[field,extremum],wrong,divisors?'Comprova quins divisors apareixen a les dues llistes.':'Comença pels múltiples positius i arriba fins al límit.',
-        [divisors?`Divisors de ${a}: ${MIDivisibilitat.divisors(a).join(', ')}. Divisors de ${b}: ${MIDivisibilitat.divisors(b).join(', ')}.`:
-          `Múltiples positius de ${Math.max(a,b)} fins a ${limit}: ${range(1,Math.floor(limit/Math.max(a,b))).map(k=>k*Math.max(a,b)).join(', ')}. Conservem els divisibles per ${Math.min(a,b)}.`,
-          `${labels[0]}: ${items.join(', ')}.`,`El més ${divisors?'gran':'petit'} és ${n}.`,
-          `Per tant, ${divisors?'MCD':'mcm'}(${a}, ${b}) = ${n}.`],[a,b].sort((x,y)=>x-y).join(':')+':'+limit);
+      const label=divisors?'Divisors comuns positius':'Múltiples comuns positius';
+      const field={label:divisors?'Escriu tots els divisors comuns positius.':'Escriu tots els múltiples comuns positius fins al límit indicat.',value:items,list:true};
+      const lists=[a,b].map(v=>divisors?MIDivisibilitat.divisors(v):range(1,Math.floor(limit/v)).map(k=>k*v));
+      const intruder=lists.flat().find(v=>!items.includes(v));
+      const candidates=[...(divisors?[items.slice(1),items.slice(0,-1)]:[items.slice(0,-1),[...items,0]]),
+        [...items,intruder??Math.max(a,b)+1],
+        ...lists, [...new Set(lists.flat())],
+        [...items,divisors?Math.max(a,b)+1:limit+n]];
+      const seen=new Set([items.join(', ')]),wrong=[];
+      for(const candidate of candidates){
+        if(!candidate.length)continue;
+        const canonical=[...new Set(candidate)].sort((x,y)=>x-y).join(', ');
+        if(seen.has(canonical)||fieldMatches(field,canonical))continue;
+        seen.add(canonical);wrong.push(canonical);
+        if(wrong.length===3)break;
+      }
+      const question=divisors?`Quins són tots els divisors comuns positius de ${a} i ${b}?`:
+        `Quins són tots els múltiples comuns positius de ${a} i ${b} fins a ${limit}, inclòs?`;
+      return task(question,[field],wrong,divisors?'Comprova quins divisors apareixen a les dues llistes.':'Comença pels múltiples positius i arriba fins al límit.',
+        lists.map((list,i)=>`${divisors?'Divisors':'Múltiples positius'} de ${[a,b][i]}${divisors?'':' fins a '+limit}: ${list.join(', ')}.`).concat([
+          'Conservem els nombres que apareixen a totes dues llistes.',
+          `${label}: ${items.join(', ')}.`]),[a,b].sort((x,y)=>x-y).join(':')+':'+limit);
     }
     if(type==='P3'){
       const a=rnd(4,12),nested=rnd(0,1)===0;
