@@ -86,7 +86,7 @@
     }},
     {id:'moviments-amb-limits',topic:'enters',bankKey:'enters-raonament',level:3,reason:'Explorar ordres de moviments amb signes i validar tots els estats intermedis contra dos límits.',build(r){
       let start,a,b,c,lower,upper,valid;for(let i=0;i<100;i++){start=integer(r,0,5);a=integer(r,3,8);b=integer(r,9,13);c=-integer(r,5,14);lower=-integer(r,0,5);upper=integer(r,10,18);valid=permutations([a,b,c]).filter(order=>{let pos=start;return order.every(v=>{pos+=v;return pos>=lower&&pos<=upper;});});if(valid.length>=1&&valid.length<=5)break;}
-      if(!valid.length||valid.length===6){start=0;a=6;b=9;c=-8;lower=0;upper=12;valid=[[9,-8,6]];}
+      if(!valid.length||valid.length===6){start=0;a=6;b=9;c=-8;lower=0;upper=12;valid=permutations([a,b,c]).filter(order=>{let pos=start;return order.every(v=>{pos+=v;return pos>=lower&&pos<=upper;});});}
       const sign=n=>n>0?'+'+n:String(n);
       return task(this,{start,moves:[a,b,c],lower,upper},`Comences a ${start} en una recta numèrica. Has d'aplicar els tres moviments ${sign(a)}, ${sign(b)} i ${sign(c)}, una vegada cadascun, en l'ordre que triïs. Després de CADA moviment, la posició ha de quedar entre ${lower} i ${upper}, inclosos. Quants ordres diferents són possibles?`,valid.length,['Amb tres moviments diferents hi ha sis ordres que pots llistar.','El saldo final és el mateix, però les posicions intermèdies poden incomplir els límits.'],[`Els ordres admissibles són: ${valid.map(p=>p.map(sign).join(', ')).join('; ')}.`,`S'han descartat els altres ordres perquè alguna posició intermèdia queda fora de [${lower}, ${upper}].`,`Hi ha ${valid.length} ordres possibles.`]);
     }},

@@ -119,6 +119,18 @@ a{color:inherit}
 <a href="#restar">4. Restar</a>
 <a href="#multiplicar">5. Multiplicar</a>
 <a href="#problemes">6. Problemes</a>
+<a href="#moviments">Moviments</a>
+<a href="#distancia-enters">Distància entre enters</a>
+<a href="#posicio-canvi">Posició final i desplaçament net</a>
+<a href="#valor-absolut">Valor absolut i distància al zero</a>
+<a href="#oposat">Oposat d’un enter</a>
+<a href="#recta-graduada">Llegir una recta graduada</a>
+<a href="#valor-inicial">Reconstruir la quantitat inicial</a>
+<a href="#operacio-incompleta">Completar una operació amb signe</a>
+<a href="#errors-signes">Diagnosticar un error de signe</a>
+<a href="#simetria">Simetria respecte d’un punt</a>
+<a href="#combinades">Operacions combinades amb enters</a>
+<a href="#moviments-limits">Moviments amb límits</a>
 </nav>
 <section class="card" id="que-son">
 <h2>± 1. Què són els nombres enters?</h2>
@@ -136,13 +148,13 @@ a{color:inherit}
 <p>A la recta numèrica, els nombres augmenten quan avancem cap a la <strong>dreta</strong> i disminueixen quan avancem cap a l'<strong>esquerra</strong>.</p>
 <div class="callout"><div class="math">−6 &lt; −2 &lt; 0 &lt; 3 &lt; 8</div></div>
 <div class="tip">💡 Entre dos nombres negatius, és més gran el que queda més a la dreta. Per exemple, <strong>−2 &gt; −7</strong>.</div>
-<h3>Valor absolut</h3>
+<div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Per ordenar −7, 3, −2 i 0, busca primer el més a l’esquerra: −7. Després −2, 0 i 3. Ordre ascendent: −7 &lt; −2 &lt; 0 &lt; 3. Descendent: 3 &gt; 0 &gt; −2 &gt; −7. En particular, −7 &lt; −2.</p></div><h3>Valor absolut</h3>
 <p>El <strong>valor absolut</strong> indica la distància d'un nombre fins al zero, sense tenir en compte el signe.</p>
 <div class="math">|−7| = 7    i    |5| = 5</div>
 </section>
 <section class="card" id="sumar">
 <h2>➕ 3. Sumar nombres enters</h2>
-<h3>Mateix signe</h3>
+<p>El zero no modifica una suma: 0 + 0 = 0 i 7 + 0 = 7. Els oposats s’anul·len: −4 + 4 = 0.</p><h3>Mateix signe</h3>
 <p>Suma els valors absoluts i conserva el signe.</p>
 <div class="math">(−4) + (−7) = −11</div>
 <h3>Signes diferents</h3>
@@ -163,16 +175,18 @@ a{color:inherit}
 </div>
 <div class="example"><span class="example-label">EXEMPLE RESOLT</span>
 <div class="math">(+3) − (−5)</div>
-<div class="math">(+3) + (+5) = +8</div>
+<div class="math">(+3) + (+5) = +8</div><p>Conservem el primer nombre, +3, i sumem l’oposat de −5, que és +5. Com que tots dos són positius, sumem 3 + 5 = 8.</p>
 </div>
+<div class="example"><p>Restar zero no canvia el nombre: 7 − 0 = 7. En canvi, 0 − (−5) = 0 + 5 = 5.</p></div>
 </section>
 <section class="card" id="multiplicar">
 <h2>✖️ 5. Multiplicar nombres enters</h2>
-<p>Primer calcula el producte dels valors absoluts i després determina el signe.</p>
+<p>Primer calcula el producte dels valors absoluts i després determina el signe. Si un factor és zero, el producte és zero: −3 × 0 = 0.</p>
 <div class="rule-grid">
 <div class="rule"><strong>Signes iguals → positiu</strong><div class="math">(+4)×(+3)=+12</div><div class="math">(−4)×(−3)=+12</div></div>
 <div class="rule"><strong>Signes diferents → negatiu</strong><div class="math">(−4)×(+3)=−12</div><div class="math">(+4)×(−3)=−12</div></div>
 </div>
+<div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>(−4) × (−3): primer 4 × 3 = 12. Com que els signes són iguals, el resultat és positiu: +12. Si un factor és zero, per exemple (−3) × 0, el resultat és 0.</p></div>
 </section>
 <section class="card" id="moviments">
 <h2>↔️ 6. Desplaçaments a la recta</h2>
@@ -181,6 +195,7 @@ a{color:inherit}
 <div class="rule"><strong>Cap a la dreta</strong>El valor augmenta.<div class="math">−3 + 5 = 2</div></div>
 <div class="rule"><strong>Cap a l'esquerra</strong>El valor disminueix.<div class="math">4 − 7 = −3</div></div>
 </div>
+<div class="example"><p>A la recta, surts de −3 i avances 5 unitats a la dreta: −3 + 5 = 2. Si després retrocedeixes 4: 2 − 4 = −2.</p></div>
 </section>
 <section class="card" id="problemes">
 <h2>🌡️ 7. Problemes amb nombres enters</h2>
@@ -191,7 +206,19 @@ a{color:inherit}
 <div class="rule"><strong>Altituds</strong>Per sobre del nivell del mar: positiu. Per sota: negatiu.</div>
 <div class="rule"><strong>Plantes o profunditats</strong>El zero pot representar la planta baixa o el nivell del mar.</div>
 </div>
+<div class="example"><p>Saldo inicial −20 €. Ingrés de 50 €: −20 + 50 = 30 €. Pagament de 15 €: 30 − 15 = 15 €. Conserva el saldo intermedi per aplicar el canvi següent.</p></div>
 </section>
+<section class="card" id="distancia-enters"><h2>Distància entre enters</h2><p>Resta les dues posicions i pren el valor absolut. La distància compta unitats i sempre és positiva o zero; una posició, en canvi, pot ser negativa.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Entre −7 i −2: |−2 − (−7)| = |5| = 5 unitats. Entre −3 i 4: |4 − (−3)| = 7. Entre 0 i 0: 0 unitats.</p></div></section>
+<section class="card" id="posicio-canvi"><h2>Posició final i desplaçament net</h2><p>Aplica cada moviment a la posició inicial per saber on acabes. Després resta la posició inicial de la final per calcular el canvi net. Conserva el signe: una baixada dona un canvi negatiu.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Un submarinista comença a −18 m, puja 7 m i baixa 5 m. Posició intermèdia: −18 + 7 = −11 m. Posició final: −11 − 5 = −16 m. Desplaçament net: −16 − (−18) = +2 m. Acaba a −16 m, però ha pujat 2 m respecte de l’inici.</p></div></section>
+<section class="card" id="valor-absolut"><h2>Valor absolut i distància al zero</h2><p>Compta les unitats del nombre al zero. El resultat no porta signe negatiu. Si la pregunta inversa fixa el costat negatiu, situa el nombre a l’esquerra del zero.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>|−7| = 7, perquè de −7 a 0 hi ha 7 unitats. |0| = 0. L’enter negatiu a 7 unitats del zero és −7; el positiu seria +7.</p></div></section>
+<section class="card" id="oposat"><h2>Oposat d’un enter</h2><p>Canvia el signe del nombre. Els oposats són a la mateixa distància del zero i en costats contraris. Comprova que sumen zero. El zero és el seu propi oposat.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>L’oposat de −6 és +6. Comprovació: −6 + 6 = 0. L’oposat de 5 és −5. L’oposat de 0 és 0.</p></div></section>
+<section class="card" id="recta-graduada"><h2>Llegir una recta graduada</h2><p>Mira dues referències numèriques. Divideix la diferència pel nombre d’intervals per trobar l’escala. Cada interval igual representa el mateix canvi. Compta intervals, no marques.</p><svg viewBox="0 0 360 90" style="width:100%;height:auto" role="img" aria-label="Recta amb tres marques equidistants: menys sis, A, menys dos"><line x1="25" y1="32" x2="335" y2="32" stroke="currentColor"/><line x1="50" y1="24" x2="50" y2="40" stroke="currentColor"/><text x="50" y="67" text-anchor="middle" fill="currentColor">−6</text><line x1="180" y1="24" x2="180" y2="40" stroke="currentColor"/><text x="180" y="67" text-anchor="middle" fill="currentColor">A</text><line x1="310" y1="24" x2="310" y2="40" stroke="currentColor"/><text x="310" y="67" text-anchor="middle" fill="currentColor">−2</text></svg><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Les referències −6 i −2 estan separades per dos intervals. Cada interval val (−2 − (−6)) : 2 = 2. A és una marca a la dreta de −6: −6 + 2 = −4.</p></div></section>
+<section class="card" id="valor-inicial"><h2>Reconstruir la quantitat inicial</h2><p>Comença pel resultat final. Desfés l’últim canvi amb l’operació contrària; després desfés el primer canvi. Finalment aplica els canvis originals per comprovar-ho.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>La temperatura puja 7 °C i baixa 3 °C; acaba a −2 °C. Desfem la baixada: −2 + 3 = 1. Desfem la pujada: 1 − 7 = −6 °C. Comprovació: −6 + 7 − 3 = −2 °C.</p></div></section>
+<section class="card" id="operacio-incompleta"><h2>Completar una operació amb signe</h2><p>Si falta un sumand, resta l’altre sumand del resultat. Si falta el nombre que es resta, resta el resultat del primer nombre. Si falta el primer nombre d’una resta, suma el resultat i el segon nombre. Comprova sempre l’operació sencera.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>−4 − □ = 3. La quantitat restada és −4 − 3 = −7. Comprovació: −4 − (−7) = −4 + 7 = 3. En □ + (−2) = 5, falta 5 − (−2) = 7. En □ − 3 = −5, falta −5 + 3 = −2.</p></div></section>
+<section class="card" id="errors-signes"><h2>Diagnosticar un error de signe</h2><p>Comprova quina regla s’ha utilitzat. Restar un negatiu és sumar el seu oposat; no és restar el valor absolut. En convertir la resta en suma, el primer nombre conserva el signe. La regla de signes d’un producte no serveix per sumar.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>3 − (−5) = −2 és incorrecte: s’ha restat 5 en lloc de sumar l’oposat de −5. Correcció: 3 − (−5) = 3 + 5 = 8. El primer nombre continua sent +3.</p></div></section>
+<section class="card" id="simetria"><h2>Simetria respecte d’un punt</h2><p>Calcula el desplaçament del punt inicial fins al centre. Repeteix aquest desplaçament des del centre, en el mateix sentit. Així arribes a l’altra banda, a la mateixa distància. El centre pot ser qualsevol enter.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>El punt és −5 i el centre és −1. De −5 a −1 avancem 4 unitats. Des de −1 avancem 4 més: −1 + 4 = 3. Comprovació: |−5 − (−1)| = 4 i |3 − (−1)| = 4.</p></div></section>
+<section class="card" id="combinades"><h2>Operacions combinades amb enters</h2><p>Resol primer els parèntesis. Després fes les multiplicacions amb la regla dels signes. Finalment resol sumes i restes d’esquerra a dreta. Escriu un resultat intermedi a cada pas.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>−3 × (2 − 5) + 4. Primer: 2 − 5 = −3. Després: −3 × (−3) = 9, perquè dos signes negatius donen un producte positiu. Finalment: 9 + 4 = 13.</p></div></section>
+<section class="card" id="moviments-limits"><h2>Moviments amb límits</h2><p>Amb tres moviments diferents hi ha sis ordres possibles. Escriu-los tots i calcula la posició després de cadascun dels tres moviments. Un recorregut només és vàlid si totes les posicions intermèdies i la final respecten els dos límits, inclosos. No n’hi ha prou amb mirar el final.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Inici: 3. Moviments: +6, +11 i −10. Límits: −3 i 14.</p><div style="overflow-x:auto"><table style="width:100%;text-align:left"><thead><tr><th>Ordre</th><th>Posicions</th><th>Vàlid?</th></tr></thead><tbody><tr><td>+6, +11, -10</td><td>3 → 9 → 20 → 10</td><td>No</td></tr><tr><td>+6, -10, +11</td><td>3 → 9 → -1 → 10</td><td>Sí</td></tr><tr><td>+11, +6, -10</td><td>3 → 14 → 20 → 10</td><td>No</td></tr><tr><td>+11, -10, +6</td><td>3 → 14 → 4 → 10</td><td>Sí</td></tr><tr><td>-10, +6, +11</td><td>3 → -7 → -1 → 10</td><td>No</td></tr><tr><td>-10, +11, +6</td><td>3 → -7 → 4 → 10</td><td>No</td></tr></tbody></table></div><p>Només 2 ordenacions són vàlides: +6, −10, +11 i +11, −10, +6.</p></div></section>
 <section class="card mistakes">
 <h2>⚠️ Errors típics</h2>
 <ul>

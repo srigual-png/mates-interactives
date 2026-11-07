@@ -551,6 +551,7 @@
       if(options.sense==='mesura'&&t.id==='modelitzacioAmpD'&&q.type===10&&text.includes('altura dels ulls'))return 'eyeHeight';
     }
     function classify(t,q){
+      if(number===1&&options.sense==='numeric'&&t.id==='enters'&&/^E(?:0[1-9]|1[0-7])$/.test(String(q.type))){const n=Number(q.type.slice(1));return [1,2,3,4,5,10,11,12].includes(n)?1:[6,7,8,14,17].includes(n)?2:3;}
       if(number===1&&options.sense==='numeric'&&t.id==='naturals'&&Object.hasOwn(NATURAL_PRACTICE_LEVELS,q.type))return NATURAL_PRACTICE_LEVELS[q.type];
       if(number===1&&options.sense==='numeric'&&t.id==='decimal_sys'&&Object.hasOwn(DECIMAL_PRACTICE_LEVELS,q.type))return DECIMAL_PRACTICE_LEVELS[q.type];
       const identity=bankIdentity(q);

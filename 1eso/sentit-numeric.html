@@ -6,6 +6,7 @@
 <script src="../assets/js/jerarquia-1eso.js"></script>
 <script src="../assets/js/divisibilitat-1eso.js"></script>
 <script src="../assets/js/mcd-mcm-1eso.js"></script>
+<script src="../assets/js/enters-1eso.js"></script>
 <script src="../assets/js/practica-sistema-decimal-1eso.js"></script>
 <link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
@@ -2147,19 +2148,19 @@ function genEnters(){
     guide=[`Situa mentalment els nombres a la recta numèrica.`,`Els nombres més a l'esquerra són més petits i els de la dreta són més grans.`];
     solution=[`Ordenats: ${correct}`];
   } else if(type===2){
-    diff=1;var a=rndNZ(-15,15),b=rndNZ(-15,15),res=a+b;
+    diff=1;var a=rnd(-15,15),b=rnd(-15,15),res=a+b;
     question=`Calcula: <span class="fc">(${a}) + (${b})</span>`;correct=String(res);
     opts=buildOpts(correct,[String(Math.abs(a)+Math.abs(b)),String(-res),String(res+1),String(res-1)]);
     guide=[`Si tenen el mateix signe, suma els valors absoluts i conserva el signe.`,`Si tenen signes diferents, compara els valors absoluts i fes la diferència.`];
     solution=[`(${a})+(${b})=${res}`];
   } else if(type===3){
-    diff=2;var a2=rndNZ(-12,12),b2=rndNZ(-12,12),res2=a2-b2;
+    diff=2;var a2=rnd(-12,12),b2=rnd(-12,12),res2=a2-b2;
     question=`Calcula: <span class="fc">(${a2}) - (${b2})</span>`;correct=String(res2);
     opts=buildOpts(correct,[String(a2+b2),String(-res2),String(res2+2),String(res2-2)]);
     guide=[`Transforma la resta en una suma.`,`Canvia el signe del segon nombre i aplica després la regla de la suma d'enters.`];
     solution=[`Canvia a suma: ${a2}+(${-b2})=${res2}`];
   } else if(type===4){
-    diff=2;var a3=rndNZ(-8,8),b3=rndNZ(-8,8),res3=a3*b3;
+    diff=2;var a3=rnd(-8,8),b3=rnd(-8,8),res3=a3*b3;
     question=`Calcula: <span class="fc">(${a3}) × (${b3})</span>`;correct=String(res3);
     opts=buildOpts(correct,[String(-res3),String(Math.abs(res3)+1),String(Math.abs(res3))]);
     guide=[`Calcula primer el producte dels valors absoluts.`,`Determina després el signe aplicant la regla dels signes.`];
@@ -2188,7 +2189,9 @@ function genEnters(){
     guide=[`Situa el nombre inicial a la recta numèrica.`,`Cap a la dreta els nombres augmenten; cap a l'esquerra disminueixen.`,`Desplaça't el nombre d'unitats indicat.`];
     solution=[`Inici: ${inici}`,`Desplaçament: ${dreta?'+':'-'}${mov}`,`✅ Arribada: ${fi}`];
   }
-  return{type:type,question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+  const unit=type===5?'graus':type===6?'euros':'';
+  const entersAnswer=type===1?{kind:'order',values:sorted,separator:ascending?'<':'>'}:{kind:'fields',fields:[MIEnters.number('Resultat',parseInt(correct,10),unit)]};
+  return{entersAnswer,entersTheory:MIEnters.anchors[(type===7?5:type)-1],type:type,question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
 }
 
 // ── GEN DECIMALS ───────────────────────────────────────────────────────────
@@ -3589,17 +3592,19 @@ function genEntersProb(){
     var start=rnd(-4,3),m1=rnd(2,7),m2=-rnd(3,8),m3=rnd(1,5),end=start+m1+m2+m3;
     text='Un ascensor és a la planta <b>'+start+'</b>. Puja <b>'+m1+' plantes</b>, baixa <b>'+Math.abs(m2)+' plantes</b> i finalment puja <b>'+m3+' plantes</b>. A quina planta acaba?';
     steps=[{label:'Moviment 1',hint:'Suma el primer desplaçament',check:function(v){return numEq(v,start+m1);}},{label:'Moviment 2',hint:'Aplica la baixada com un desplaçament negatiu',check:function(v){return numEq(v,start+m1+m2);}},{label:'Final',hint:'Afegeix l\'última pujada',check:function(v){return numEq(v,end);}}];
-    answer={check:function(v){var ns=ampListNums(v);return numEq(v,end)||(ns.length&&numEq(ns[0],end));},val:'Planta '+end};
+    answer={check:function(v){return MIEnters.integer(v,'plantes')===end;},val:'Planta '+end};
     hints=['Primer: '+start+' + '+m1+' = '+(start+m1),'Després: '+(start+m1)+' − '+Math.abs(m2)+' = '+(start+m1+m2),'Final: '+(start+m1+m2)+' + '+m3+' = '+end];
   }else{
     diff=3;
-    var depth=-rnd(8,25),up=rnd(3,12),down=rnd(4,15),final5=depth+up-down,change=final5-depth;
+    var depth=-rnd(8,25),up=rnd(3,Math.min(12,-depth-1)),down=rnd(4,15),final5=depth+up-down,change=final5-depth;
     text='Un submarinista és a <b>'+depth+' m</b>. Puja <b>'+up+' m</b> i després baixa <b>'+down+' m</b>. A quina profunditat acaba? Quin desplaçament net ha fet respecte del punt inicial?';
     steps=[{label:'Després pujar',hint:'Suma la pujada a la posició inicial',check:function(v){return numEq(v,depth+up);}},{label:'Profunditat final',hint:'Resta la baixada a la posició anterior',check:function(v){return numEq(v,final5);}},{label:'Canvi net',hint:'Resta la posició inicial a la posició final',check:function(v){return numEq(v,change);}}];
-    answer={check:function(v){return ampPairEq(v,final5,change);},val:final5+' m; desplaçament net '+change+' m'};
+    answer={check:function(v){return MIEnters.matches({kind:'fields',fields:[MIEnters.number('Posició final (m)',final5,'m'),MIEnters.number('Desplaçament net (m)',change,'m')]},v);},val:final5+' m; desplaçament net '+change+' m'};
     hints=['Després de pujar: '+depth+' + '+up+' = '+(depth+up),'Final: '+(depth+up)+' − '+down+' = '+final5,'Canvi net: '+final5+' − ('+depth+') = '+change+' m'];
   }
-  return{topicId:'enters',topicName:'Nombres enters',type:type,variantId:'enters-'+type,cat:'Nombres enters',diff:diff,text:text,dataBox:null,steps:steps,answer:answer,hints:hints};
+  if(type!==5){const value=[null,tn,fin,dif,end][type],unit=['','°C','€','m','plantes'][type];answer.entersAnswer={kind:'fields',fields:[MIEnters.number('Resultat',value,unit)]};answer.check=v=>MIEnters.matches(answer.entersAnswer,v);if(type===4)answer.val=end+' plantes';}
+  if(type===5){answer.entersAnswer={kind:'fields',fields:[MIEnters.number('Posició final (m)',final5,'m'),MIEnters.number('Desplaçament net (m)',change,'m')]};answer.val=final5+' m; '+change+' m';}
+  return{entersTheory:type===3?'distancia-enters':type===5?'posicio-canvi':'problemes',topicId:'enters',topicName:'Nombres enters',type:type,variantId:'enters-'+type,cat:'Nombres enters',diff:diff,text:text,dataBox:null,steps:steps,answer:answer,hints:hints};
 }
 
 // --- NOMBRES DECIMALS (6 tipus) -------------------------------------------
@@ -3826,7 +3831,7 @@ var TOPICS=[
   {id:"jerarquia",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,practiceGen:genJerarquiaPractice,icon:"&#128208;",name:"Jerarquia d'operacions",short:"Parèntesis, potències, ×/÷, +/−",theory:{title:"Jerarquia de les operacions",text:`Quan hi ha diverses operacions, cal respectar un ordre de resolució.`,formulas:[`1r: parèntesis i claudàtors, de dins cap enfora`,`2n: potències i arrels`,`3r: multiplicacions i divisions, d'esquerra a dreta`,`4t: sumes i restes, d'esquerra a dreta`]},gen:genJerarquia},
   {id:"divis",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,practiceGen:genDivisPractice,practiceReserve:divisPracticeReserve,icon:"&#128269;",name:"Divisibilitat",short:"Criteris, primers, múltiples i divisors",theory:{title:"Divisibilitat",text:`Els criteris de divisibilitat permeten saber si una divisió és exacta sense efectuar-la completament.`,formulas:[`Divisible per 2: acaba en xifra parella`,`Divisible per 3 o 9: usa la suma de les xifres`,`Divisible per 5: acaba en 0 o 5`,`Nombre primer: només té dos divisors, 1 i ell mateix`]},gen:genDivisibilitat},
   {id:"mcmmcd",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,practiceGen:genMcdPractice,practiceReserve:MIMcdMcm.reserve,icon:"&#128279;",name:"MCD i mcm",short:"Mínim comú múltiple i màxim comú divisor",theory:{title:"MCD i mcm",text:`El MCD és el divisor comú més gran i el mcm és el múltiple comú més petit.`,formulas:[`MCD: factors comuns amb exponent menor`,`mcm: tots els factors amb exponent major`,`Són útils per agrupar quantitats i estudiar coincidències periòdiques`]},gen:genMcmMcd},
-  {id:"enters",course:"1r",exam1r:true,icon:"&#177;",name:"Nombres enters",short:"Negatius, recta numèrica i operacions",theory:{title:"Nombres enters (Z)",text:`Els enters inclouen nombres positius, zero i nombres negatius i es poden representar a la recta numèrica.`,formulas:[`A la recta: més a la dreta = més gran`,`Suma i resta: interpreta el signe i el sentit del canvi`,`Multiplicació: signes iguals → positiu; diferents → negatiu`]},gen:genEnters},
+  {id:"enters",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,practiceGen:genEntersPractice,icon:"&#177;",name:"Nombres enters",short:"Negatius, recta numèrica i operacions",theory:{title:"Nombres enters (Z)",text:`Els enters inclouen nombres positius, zero i nombres negatius i es poden representar a la recta numèrica.`,formulas:[`A la recta: més a la dreta = més gran`,`Suma i resta: interpreta el signe i el sentit del canvi`,`Multiplicació: signes iguals → positiu; diferents → negatiu`]},gen:genEnters},
   {id:"decimals",course:"1r",exam1r:true,icon:"&#128312;",name:"Nombres decimals",short:"Operacions, conversions, aproximacions i error",theory:{title:"Nombres decimals",text:`Els decimals expressen parts d'una unitat i permeten mesurar i aproximar quantitats.`,formulas:[`Suma/resta: alinea les comes`,`Multiplicació: controla les xifres decimals`,`Fracció → decimal: divideix numerador entre denominador`,`Error absolut = |valor exacte − valor aproximat|`,`Error relatiu = error absolut / valor exacte`]},gen:genDecimals},
   {id:"fraccions",course:"1r",exam1r:true,icon:"&#189;",name:"Fraccions",short:"Equivalència, comparació, operacions i fracció d'una quantitat",theory:{title:"Fraccions",text:`Una fracció a/b representa a parts d'un tot dividit en b parts iguals.`,formulas:[`Pròpia: numerador < denominador`,`Impròpia: numerador > denominador`,`Equivalents: multiplica o divideix numerador i denominador pel mateix nombre`,`Fracció d'una quantitat: divideix pel denominador i multiplica pel numerador`]},gen:genFraccions},
   {id:"proporcionalitat",course:"1r",exam1r:true,icon:"&#9878;&#65039;",name:"Proporcionalitat directa",short:"Taules, valor unitari i problemes proporcionals",theory:{title:"Proporcionalitat directa",text:`Dues magnituds són directament proporcionals quan es multipliquen o divideixen pel mateix factor.`,formulas:[`y/x = constant de proporcionalitat`,`Si una magnitud es duplica, l'altra també es duplica`,`Mètode unitari: troba primer el valor que correspon a 1`,`Cal distingir situacions proporcionals de les que no ho són`]},gen:genProporcionalitat},
@@ -3892,6 +3897,8 @@ function normalizeErrorEntry(e,topicId){
     options:Array.isArray(e.options)?e.options.slice():[],
     guide:Array.isArray(e.guide)?e.guide.slice():[],
     solution:Array.isArray(e.solution)?e.solution.slice():[],
+    entersTheory:tid==='enters'&&MIEnters.anchors.includes(e.entersTheory)?e.entersTheory:undefined,
+    entersAnswer:tid==='enters'?e.entersAnswer:undefined,entersFields:tid==='enters'?e.entersFields:undefined,entersOptionLabels:tid==='enters'?e.entersOptionLabels:undefined,
     mcmTheory:tid==='mcmmcd'&&MIMcdMcm.isAnchor(e.mcmTheory)?e.mcmTheory:undefined,
     divisTheory:tid==='divis'&&['divisibilitat','criteris','primers','factoritzacio','errors-frequents','criteri-incorrecte','prova-contraexemple'].includes(e.divisTheory)?e.divisTheory:undefined,
     jerarquiaTheory:tid==='jerarquia'&&['ordre','potencies','parentesis','combinades','problemes','errors-tipics'].includes(e.jerarquiaTheory)?e.jerarquiaTheory:undefined,
@@ -3946,6 +3953,7 @@ function buildErrorRecord(ex,studentAnswer,source){
     guide:Array.isArray(ex.guide)?ex.guide.slice():[],
     review:miReviewPoints(ex),
     solution:Array.isArray(ex.solution)?ex.solution.slice():[],
+    entersTheory:ex.entersTheory,entersAnswer:ex.entersAnswer,entersFields:ex.entersFields,entersOptionLabels:ex.entersOptionLabels,
     jerarquiaTheory:ex.jerarquiaTheory,divisTheory:ex.divisTheory,mcmTheory:ex.mcmTheory,
     level:source==='exam'?0:state.level,
     source:source,
@@ -4135,6 +4143,7 @@ function strictOpenForm(ex){
   return /percentatge|fracci[oó]|decimal|arrodoneix|notaci[oó] cient[ií]fica|factoritza|descompon|quin signe|ordena/.test(q);
 }
 function openOk1(correct,value,ex){
+  if(ex?.entersAnswer)return MIEnters.matches(ex.entersAnswer,value);
   if(ex?.mcmFields)return MIMcdMcm.matches(ex.mcmFields,value);
   if(ex?.divisAnswer)return MIDivisibilitat.matches(ex.divisAnswer,value);
   if(ex?.jerarquiaAnswer)return MIJerarquia.matches(ex.jerarquiaAnswer,value);
@@ -4234,7 +4243,7 @@ function updateSBar(){
   document.getElementById('sb').style.width=pct+'%';
   document.getElementById('slb').textContent=topic.adaptivePractice?'Progrés de dificultat: '+points+'/'+needed:'Encerts seguits: '+points+' / '+needed;
   const completion=document.getElementById('jerarquiaCompletion');
-  completion.hidden=!['jerarquia','divis','mcmmcd'].includes(topic.id);
+  completion.hidden=!['jerarquia','divis','mcmmcd','enters'].includes(topic.id);
   if(!completion.hidden){
     const {correct,incorrect}=adaptivePracticeSessions[topic.id];
     completion.textContent=state.level===1?'Encerts acumulats: '+correct+'/'+needed:
@@ -4310,7 +4319,9 @@ function genMcdPractice(type,level,random=rnd){
   return {...exercise,taskDifficulty:level,diff:level};
 }
 
+function genEntersPractice(type,level,random=rnd){return MIEnters.generate(type,random);}
 function adaptivePracticeGroups(t){
+  if(t.id==='enters')return MIEnters.families;
   if(t.id==='mcmmcd')return MIMcdMcm.families;
   if(t.id==='divis')return MIDivisibilitat.families;
   if(t.id==='jerarquia')return MIJerarquia.families;
@@ -4416,7 +4427,7 @@ function showEx(){
     document.getElementById('og').innerHTML='';
     document.getElementById('openWrap').style.display='block';
     var inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';
-    const structured=currentEx.mcmFields?.length>1?
+    const structured=currentEx.entersFields?renderMcdFields(currentEx.entersFields):currentEx.mcmFields?.length>1?
       renderMcdFields(currentEx.mcmFields):renderDivisReasoning(currentEx.divisReasoning);
     const singleList=currentEx.mcmFields?.length===1&&currentEx.mcmFields[0].list;
     const listLabel=document.getElementById('mcdListLabel');
@@ -4426,6 +4437,7 @@ function showEx(){
     document.querySelector('#openWrap .math-pad').style.display=structured||singleList||currentEx.decimalAnswer==='spelling'?'none':'';
     document.querySelector('#openWrap > .btn-check').style.display=structured?'none':'';
     document.getElementById('openHint').hidden=structured;
+    if(currentEx.entersAnswer)inp.setAttribute('inputmode','numeric');else inp.removeAttribute('inputmode');
     if(diagnosis)inp.setAttribute('aria-label','Quocient i residu, separats per un punt i coma');
     else inp.removeAttribute('aria-label');
     document.getElementById('openHint').textContent=openHint1(currentEx);
@@ -4433,7 +4445,7 @@ function showEx(){
   }else{
     document.getElementById('openWrap').style.display='none';
     document.getElementById('og').innerHTML=currentEx.options.map(function(o,i){return '<button class="ob"'+
-      (currentEx.mcmOptionLabels?' data-answer="'+escHtml(o)+'"':'')+' onclick="selAns('+i+',this)">'+formatMcdOption(currentEx,o)+'</button>';}).join('');
+      (currentEx.entersAnswer||currentEx.mcmOptionLabels?' data-answer="'+escHtml(o)+'"':'')+' onclick="selAns('+i+',this)">'+formatMcdOption(currentEx,o)+'</button>';}).join('');
   }
   document.getElementById('fbA').innerHTML='';
   document.getElementById('bNext').style.display='none';
@@ -4451,12 +4463,13 @@ function selAns(idx,btn){
 }
 function checkOpen(){
   if(state.answered)return;
-  if(currentEx.mcmFields?.length>1){
+  if(currentEx.entersFields||currentEx.mcmFields?.length>1){
     const form=document.getElementById('divisReasoning');
     if(!form.reportValidity())return;
     const values=[...new FormData(form).values()].map(value=>value.trim());
     if(values.some(value=>!value))return;
-    const given=currentEx.mcmOptionLabels?currentEx.mcmFields.map((field,i)=>field.label+': '+values[i]).join(' / '):values.join('; ');
+    const responseFields=currentEx.entersFields||currentEx.mcmFields;
+    const given=currentEx.entersOptionLabels||currentEx.mcmOptionLabels?responseFields.map((field,i)=>field.label+': '+values[i]).join(' / '):values.join('; ');
     form.querySelectorAll('input,select,button').forEach(control=>control.disabled=true);
     processPracticeAnswer(openOk1(currentEx.correct,values,currentEx),given);
     return;
@@ -4485,8 +4498,8 @@ function checkOpen(){
   processPracticeAnswer(ok,val,result?.message);
 }
 function formatMcdOption(ex,value){
-  const labels=ex.mcmOptionLabels||(ex.topicId==='mcmmcd'?MIMcdMcm.optionLabels(ex.type):null);
-  if(!labels)return String(value);
+  const labels=ex.entersOptionLabels||ex.mcmOptionLabels||(ex.topicId==='mcmmcd'?MIMcdMcm.optionLabels(ex.type):null);
+  if(!labels)return ex.entersAnswer?escHtml(value):String(value);
   const parts=String(value).split(';');
   if(parts.length!==labels.length)return escHtml(value);
   return labels.map((label,i)=>'<span class="mcm-option-line"><strong>'+escHtml(label)+':</strong> '+escHtml(parts[i].trim())+'</span>').join('');
@@ -4495,7 +4508,7 @@ function renderMcdFields(fields){
   const form=document.getElementById('divisReasoning');
   form.hidden=false;
   form.innerHTML=fields.map((field,i)=>{
-    const id='mcmField'+i,attributes=' class="open-input" id="'+id+'" name="'+id+'" required';
+    const id='mcmField'+i,attributes=' class="open-input" id="'+id+'" name="'+id+'" required'+(field.integer?' inputmode="numeric"':'');
     const label='<label for="'+id+'">'+escHtml(field.label)+'</label>';
     if(field.options)return label+'<select'+attributes+'><option value="">Tria una resposta</option>'+
       shuffle(field.options).map(option=>'<option>'+escHtml(option)+'</option>').join('')+'</select>';
@@ -4542,7 +4555,7 @@ function processPracticeAnswer(isOk,studentAnswer,message){
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
-  var theoryLink=miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
+  var theoryLink=miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
   var fb=document.getElementById('fbA');
   if(isOk){
     state.correctStreak++;updateSBar();
@@ -4719,6 +4732,11 @@ function ampStartSession(){window.MIAnalytics?.start('extension');
   }
   ampShowProb();
 }
+function entersPairControls(model,prefix,handler){
+  return model.fields.map((field,i)=>'<label style="display:block" for="'+prefix+(i||'')+'">'+escHtml(field.label)+
+    '<input class="final-input" inputmode="numeric" style="width:100%;min-width:0;margin:6px 0 12px" id="'+prefix+(i||'')+'" autocomplete="off" onkeydown="if(event.key===\'Enter\'){event.preventDefault();'+handler+'();}"></label>').join('')+
+    '<button class="check-btn" id="'+prefix+'Check" onclick="'+handler+'()">Comprovar ✓</button>';
+}
 function ampShowProb(){window.MIAnalytics?.shown(ampSession.probs[ampSession.idx].topicId);
   ampSession.hintUsed=false;
   var p=ampSession.probs[ampSession.idx],pct=Math.round(ampSession.idx/ampSession.probs.length*100);
@@ -4737,6 +4755,7 @@ function ampShowProb(){window.MIAnalytics?.shown(ampSession.probs[ampSession.idx
   });
   document.getElementById('ampStepsSection').innerHTML=sh;
   document.getElementById('ampFinalRow').innerHTML='<input class="final-input" id="ampFinalAns" placeholder="'+escHtml(p.finalLabel||'✏️ Resposta final...')+'" autocomplete="off" onkeydown="if(event.key===\'Enter\')ampCheckAnswer()"><button class="check-btn" onclick="ampCheckAnswer()">Comprovar ✓</button>';
+  if(p.answer.entersAnswer?.fields.length===2)document.getElementById('ampFinalRow').innerHTML=entersPairControls(p.answer.entersAnswer,'ampFinalAns','ampCheckAnswer');
   document.getElementById('ampFbArea').innerHTML='';
   document.getElementById('ampActionRow').style.display='none';
   document.getElementById('navTitle').textContent='Problemes oberts · Sentit Numèric';
@@ -4754,7 +4773,7 @@ function ampRegisterError(p,given){
   var tid=p.topicId||'ops',t=TOPICS.find(function(x){return x.id===tid;});
   if(!state.errors[tid])state.errors[tid]=[];
   const answer=p.examAnswer||p.answer;
-  var rec={id:makeErrorId(),topicId:tid,topicName:p.topicName||(t?t.name:p.cat),type:p.type===undefined?null:p.type,question:p.text||'',answer:given,correct:p.bankAnswerText||(answer&&answer.val!==undefined?String(answer.val):''),options:[],guide:p.practiceHints||(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),solution:Array.isArray(p.hints)?p.hints.slice():[],jerarquiaTheory:p.examAnswer&&!p.divisTheory&&!p.mcmTheory?'problemes':undefined,divisTheory:p.divisTheory,mcmTheory:p.mcmTheory,level:null,taskDifficulty:p.taskDifficulty??null,taskDifficultyStatus:p.taskDifficultyStatus||'legacy',difficultyBank:p.difficultyBank||null,difficultyKey:p.difficultyKey||null,variantId:p.variantId||null,diff:p.diff??null,source:'ampliacio',timestamp:new Date().toISOString()};
+  var rec={id:makeErrorId(),topicId:tid,topicName:p.topicName||(t?t.name:p.cat),type:p.type===undefined?null:p.type,question:p.text||'',answer:given,correct:p.bankAnswerText||(answer&&answer.val!==undefined?String(answer.val):''),options:[],guide:p.practiceHints||(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),solution:Array.isArray(p.hints)?p.hints.slice():[],jerarquiaTheory:p.examAnswer&&!p.divisTheory&&!p.mcmTheory?'problemes':undefined,entersTheory:p.entersTheory,entersAnswer:answer?.entersAnswer,divisTheory:p.divisTheory,mcmTheory:p.mcmTheory,level:null,taskDifficulty:p.taskDifficulty??null,taskDifficultyStatus:p.taskDifficultyStatus||'legacy',difficultyBank:p.difficultyBank||null,difficultyKey:p.difficultyKey||null,variantId:p.variantId||null,diff:p.diff??null,source:'ampliacio',timestamp:new Date().toISOString()};
   var bucket=state.errors[tid],last=bucket.length?bucket[bucket.length-1]:null;
   var same=last&&last.type===rec.type&&last.question===rec.question&&last.answer===rec.answer&&last.correct===rec.correct&&last.source===rec.source;
   if(!same)bucket.push(rec);saveState();
@@ -4762,6 +4781,7 @@ function ampRegisterError(p,given){
 function ampCheckAnswer(){
   var p=ampSession.probs[ampSession.idx],finalInp=document.getElementById('ampFinalAns'),finalVal=finalInp.value;
   if(finalInp.disabled||!finalVal.trim())return;
+  if(p.answer.entersAnswer?.fields.length===2){const second=document.getElementById('ampFinalAns1');if(!second.value.trim())return;finalVal+='; '+second.value.trim();}
   var stepsOk=0,stepsTotal=(p.steps||[]).length,requiredStepsOk=true;
   (p.steps||[]).forEach(function(s,i){
     var inp=document.getElementById('ampStep_'+i);if(!inp)return;
@@ -4769,7 +4789,7 @@ function ampCheckAnswer(){
     if(s.required&&!ok)requiredStepsOk=false;
     inp.classList.toggle('ok',ok);inp.classList.toggle('err',!ok&&(s.required||inp.value.trim()!==''));if(ok)stepsOk++;
   });
-  var finalOk=false;try{finalOk=p.answer.opsAnswer||p.answer.potenciesAnswer||p.answer.jerarquiaAnswer||p.answer.divisAnswer||p.answer.mcmFields?p.answer.check(finalVal):MIValidation.grade({...p,question:p.question||p.text,correct:p.answer.val},finalVal,()=>p.answer.check(finalVal));}catch(e){}
+  var finalOk=false;try{finalOk=p.answer.entersAnswer||p.answer.opsAnswer||p.answer.potenciesAnswer||p.answer.jerarquiaAnswer||p.answer.divisAnswer||p.answer.mcmFields?p.answer.check(finalVal):MIValidation.grade({...p,question:p.question||p.text,correct:p.answer.val},finalVal,()=>p.answer.check(finalVal));}catch(e){}
   var completeOk=finalOk&&requiredStepsOk;
   window.MIAnalytics?.answer(completeOk,p.topicId);finalInp.classList.toggle('ok',finalOk);finalInp.classList.toggle('err',!finalOk);
   document.querySelectorAll('#sAmpProb .step-input,#sAmpProb .final-input').forEach(function(el){el.disabled=true;});
@@ -4786,9 +4806,9 @@ function ampCheckAnswer(){
   }else if(quality==='part'){
     fb='<div class="fb-box fb-part"><h4>⚠️ Correcte, però has utilitzat la pista.</h4></div>';
   }else{
-    fb='<div class="fb-box fb-err"><h4>❌ Resposta incorrecta</h4>La resposta correcta és: <b>'+(p.bankAnswerText||(p.examAnswer||p.answer).val)+'</b><div class="sol-steps"><b>Solució pas a pas:</b><br>'+(p.hints||[]).map(function(h,i){return '<div class="sol-step">Pas '+(i+1)+': '+h+'</div>';}).join('')+'</div>'+miTheoryLinkHtml(p.topicId,undefined,p.mcmTheory||p.divisTheory||(p.examAnswer?'problemes':undefined))+'</div>';
+    fb='<div class="fb-box fb-err"><h4>❌ Resposta incorrecta</h4>La resposta correcta és: <b>'+(p.bankAnswerText||(p.examAnswer||p.answer).val)+'</b><div class="sol-steps"><b>Solució pas a pas:</b><br>'+(p.hints||[]).map(function(h,i){return '<div class="sol-step">Pas '+(i+1)+': '+h+'</div>';}).join('')+'</div>'+miTheoryLinkHtml(p.topicId,undefined,p.entersTheory||p.mcmTheory||p.divisTheory||(p.examAnswer?'problemes':undefined))+'</div>';
   }
-  if(completeOk&&(p.mcmTheory||p.divisTheory))fb+=miTheoryLinkHtml(p.topicId,undefined,p.mcmTheory||p.divisTheory);
+  if(completeOk&&(p.entersTheory||p.mcmTheory||p.divisTheory))fb+=miTheoryLinkHtml(p.topicId,undefined,p.entersTheory||p.mcmTheory||p.divisTheory);
   document.getElementById('ampFbArea').innerHTML=fb;
   document.getElementById('ampActionRow').style.display='flex';
   var isLast=ampSession.idx>=ampSession.probs.length-1,btn=document.getElementById('ampBtnNext');
@@ -4843,10 +4863,10 @@ function showErrorSummary(){
           +miReviewHtml(e);
         if(Array.isArray(e.solution)&&e.solution.length){
           html+='<button class="bs" onclick="toggleSavedSolution(&quot;'+solId+'&quot;,this)" style="margin-top:10px">&#128214; Veure explicació</button>'
-            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.mcmTheory||e.divisTheory||e.jerarquiaTheory||t.id==='mcmmcd'?miTheoryLinkHtml(t.id,undefined,e.mcmTheory||e.divisTheory||e.jerarquiaTheory):'')+'</div>';
+            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory||t.id==='mcmmcd'?miTheoryLinkHtml(t.id,undefined,e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory):'')+'</div>';
         }else{
           html+='<div style="margin-top:10px;font-size:.8rem;color:var(--muted)">Aquest error és d\'una versió anterior i no tenia l\'explicació desada.</div>';
-          if(t.id==='mcmmcd')html+=miTheoryLinkHtml(t.id,undefined,e.mcmTheory);
+          if(t.id==='mcmmcd'||t.id==='enters')html+=miTheoryLinkHtml(t.id,undefined,e.entersTheory||e.mcmTheory);
         }
         html+='<button class="bw" onclick="deleteSavedError(&quot;'+t.id+'&quot;,&quot;'+escHtml(e.id)+'&quot;)" style="margin-top:8px">&#128465; Esborra aquest error</button>'
           +'</div>';
@@ -4919,6 +4939,7 @@ function wrapExamProblem(p){
     question:p.examText||p.text||'',correct:answer&&answer.val!==undefined?String(answer.val):'',
     options:[],guide:(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),
     solution:Array.isArray(p.hints)?p.hints.slice():[],
+    entersAnswer:answer?.entersAnswer,entersTheory:p.entersTheory,
     opsAnswer:answer?.opsAnswer,
     potenciesAnswer:answer?.potenciesAnswer,
     jerarquiaAnswer:answer?.jerarquiaAnswer,divisAnswer:answer?.divisAnswer,divisTheory:p.divisTheory,
@@ -4986,6 +5007,7 @@ function showEQ(){
   document.getElementById('examC').innerHTML='<div class="exn">Pregunta '+(state.examIdx+1)+'/'+state.examQs.length+' &middot; '+q.topicName+kind+' '+diffBadge(q.diff)+'</div><div class="exq">'+q.question+'</div>';
   if(q.examProblem){
     document.getElementById('examO').innerHTML='<div style="display:flex;gap:10px;align-items:center;margin-bottom:14px"><input class="final-input" id="examOpenAns" style="min-width:0" placeholder="'+(q.jerarquiaAnswer?'Expressió = resultat':'Escriu la resposta final...')+'" autocomplete="off" onkeydown="if(event.key===\'Enter\')checkExamOpenAnswer()"><button class="check-btn" id="examOpenCheck" onclick="checkExamOpenAnswer()">Comprovar &#10003;</button></div>';
+    if(q.entersAnswer?.fields.length===2)document.getElementById('examO').innerHTML=entersPairControls(q.entersAnswer,'examOpenAns','checkExamOpenAnswer');
     setTimeout(function(){var el=document.getElementById('examOpenAns');if(el)el.focus();},40);
   }else{
     document.getElementById('examO').innerHTML=q.options.map(function(o,i){return '<button class="ob" onclick="selEA('+i+',this)">'+o+'</button>';}).join('');
@@ -5009,7 +5031,8 @@ function checkExamOpenAnswer(){
   var q=state.examQs[state.examIdx],inp=document.getElementById('examOpenAns');
   if(!q||!q.examProblem||!inp)return;
   var val=inp.value;if(!String(val).trim())return;
-  var ok=false;try{ok=q.mcmFields?MIMcdMcm.matches(q.mcmFields,val):q.divisAnswer?MIDivisibilitat.matches(q.divisAnswer,val):q.jerarquiaAnswer?MIJerarquia.matches(q.jerarquiaAnswer,val):q.opsAnswer||q.potenciesAnswer?q.answerCheck(val):MIValidation.grade(q,val,()=>q.answerCheck(val));}catch(e){ok=false;}
+  if(q.entersAnswer?.fields.length===2){const second=document.getElementById('examOpenAns1');if(!second.value.trim())return;val+='; '+second.value.trim();second.disabled=true;}
+  var ok=false;try{ok=q.entersAnswer?MIEnters.matches(q.entersAnswer,val):q.mcmFields?MIMcdMcm.matches(q.mcmFields,val):q.divisAnswer?MIDivisibilitat.matches(q.divisAnswer,val):q.jerarquiaAnswer?MIJerarquia.matches(q.jerarquiaAnswer,val):q.opsAnswer||q.potenciesAnswer?q.answerCheck(val):MIValidation.grade(q,val,()=>q.answerCheck(val));}catch(e){ok=false;}
   if(ok)state.examScore++;
   state.examAnswers.push({ok:ok,q:stripTags(q.question).slice(0,90),correct:q.correct,given:val,topicId:q.topicId,topicName:q.topicName,isProblem:true,examProblem:true});
   if(!ok)registerError(q,val,'exam');
@@ -5173,7 +5196,7 @@ function initPage(){
 miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
 miTaskDifficulty.bindDisplay({
   showName:'showEx',current:()=>typeof curEx!=='undefined'?curEx:currentEx,
-  useAssignedDifficulty:exercise=>!!exercise.opsTheory||!!(exercise.potenciesTheory||exercise.jerarquiaTheory||exercise.divisTheory||exercise.mcmTheory)&&Number.isInteger(exercise.taskDifficulty),state:()=>typeof ST!=='undefined'?ST:state
+  useAssignedDifficulty:exercise=>!!exercise.opsTheory||!!(exercise.entersTheory||exercise.potenciesTheory||exercise.jerarquiaTheory||exercise.divisTheory||exercise.mcmTheory)&&Number.isInteger(exercise.taskDifficulty),state:()=>typeof ST!=='undefined'?ST:state
 });
 loadState();initPage();
 
