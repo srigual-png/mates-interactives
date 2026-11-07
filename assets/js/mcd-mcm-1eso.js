@@ -9,6 +9,14 @@ window.MIMcdMcm = (() => {
   const range = (lo,hi) => Array.from({length:hi-lo+1},(_,i)=>lo+i);
   const number = (label,value,unit) => ({label,value,unit});
   const pick = (items,rnd) => items[rnd(0,items.length-1)];
+  function optionLabels(type){
+    return {
+      P1:['Divisors comuns positius','El més gran (MCD)'],
+      P2:['Múltiples comuns positius','El més petit (mcm)'],
+      A1:['Producte dels factors primers comuns','Resultat del MCD'],
+      A2:['Producte dels factors primers seleccionats','Resultat del mcm']
+    }[type];
+  }
   function factorText(n){
     const factors=[];
     for(let d=2;d*d<=n;d++){
@@ -31,7 +39,7 @@ window.MIMcdMcm = (() => {
   }
   function matches(fields,input){
     if(String(input).length>600)return false;
-    const parts=String(input).split(';');
+    const parts=Array.isArray(input)?input:String(input).split(';');
     return parts.length===fields.length&&fields.every((field,i)=>fieldMatches(field,parts[i]));
   }
   function display(field){
@@ -45,7 +53,7 @@ window.MIMcdMcm = (() => {
     if(new Set(options).size!==4||options.length!==4||options.filter(v=>matches(fields,v)).length!==1){
       throw Error('Opcions incoherents de '+type);
     }
-    return {type,question,correct,options:shuffle(options),mcmFields:fields,mcmTheory:anchors[type],
+    return {type,question,correct,options:shuffle(options),mcmFields:fields,mcmTheory:anchors[type],mcmOptionLabels:optionLabels(type),
       guide:[guide],solution,practiceKey:type+':'+key};
   }
   const factors = (label,value) => ({label,value,factor:true});
@@ -77,12 +85,18 @@ window.MIMcdMcm = (() => {
       const a=rnd(6,36),b=pick(range(6,36).filter(n=>n!==a),rnd);
       const isMcd=type==='A1',operands=!isMcd&&rnd(0,2)===0?[a,b,pick(range(4,16).filter(n=>n!==a&&n!==b),rnd)]:[a,b];
       const op=isMcd?'MCD':'mcm',n=operands.reduce(isMcd?gcd:lcm);
-      const fields=[factors('Factors primers seleccionats',n),number('Resultat',n)];
-      return task(`Calcula el ${op} de ${operands.join(', ')}. Escriu el producte dels factors primers seleccionats i el resultat.`+
+      const labels=optionLabels(type),fields=[factors(labels[0],n),number(labels[1],n)];
+      const names=operands.slice(0,-1).join(', ')+' i '+operands.at(-1);
+      const decompositions=operands.map(v=>`<span class="fc">${v} = ${factorText(v)}</span>`).join('<br>');
+      return task(`Calcula el ${op} de ${names} a partir de les seves descomposicions en factors primers.<br>${decompositions}<br>`+
+        (isMcd?'Quin producte de factors primers comuns has de seleccionar? Quin és el MCD?':
+          'Quin producte de factors primers has de seleccionar amb els exponents més grans? Quin és el mcm?')+
         (isMcd?' Si no hi ha factors comuns, escriu 1 al camp dels factors.':''),
         fields,[n+1,n+2,n+3].map(w=>values([factors('',w),number('',w)])),
         isMcd?'Pren els factors comuns amb l’exponent més petit.':'Pren tots els factors necessaris amb l’exponent més gran.',
-        [...operands.map(v=>v+' = '+factorText(v)),n===1?'No hi ha factors primers comuns. El MCD és 1.':`${op} = ${factorText(n)} = ${n}.`],
+        [...operands.map(v=>v+' = '+factorText(v)),n===1?'No hi ha factors primers comuns. Escrivim 1 com a producte buit.':
+          `${isMcd?'Factors comuns amb els exponents més petits':'Tots els factors amb els exponents més grans'}: ${factorText(n)}.`,
+          `${labels[0]}: ${factorText(n)}.`,`${labels[1]}: ${n}.`],
         operands.sort((x,y)=>x-y).join(':'));
     }
     if(['A3','A4','A5'].includes(type)){
@@ -97,16 +111,18 @@ window.MIMcdMcm = (() => {
       const b=divisors?pick(range(4,36).filter(n=>n!==a),rnd):pick(range(2,12).filter(n=>n!==a&&lcm(a,n)<=60),rnd);
       const n=divisors?gcd(a,b):lcm(a,b),limit=divisors?0:n*rnd(2,3);
       const items=divisors?MIDivisibilitat.divisors(n):range(1,limit/n).map(k=>k*n);
-      const field={label:divisors?'Divisors comuns':'Múltiples comuns positius',value:items,list:true};
-      const extremum=number(divisors?'MCD':'mcm',n);
+      const labels=optionLabels(type);
+      const field={label:labels[0],value:items,list:true};
+      const extremum=number(labels[1],n);
       const question=divisors?`Escriu tots els divisors positius comuns de ${a} i ${b}. Quin és el més gran?`:
         `Escriu tots els múltiples comuns positius de ${a} i ${b} fins a ${limit}, inclòs. Quin és el més petit?`;
       const wrong=[values([{...field,value:items.length>1?items.slice(0,-1):[2]},extremum]),
         values([{...field,value:[...items,divisors?n+1:0]},extremum]),values([field,{...extremum,value:n+1}])];
       return task(question,[field,extremum],wrong,divisors?'Comprova quins divisors apareixen a les dues llistes.':'Comença pels múltiples positius i arriba fins al límit.',
         [divisors?`Divisors de ${a}: ${MIDivisibilitat.divisors(a).join(', ')}. Divisors de ${b}: ${MIDivisibilitat.divisors(b).join(', ')}.`:
-          `Escrivim els múltiples positius de ${Math.max(a,b)} fins a ${limit} i conservem els divisibles per ${Math.min(a,b)}.`,
-          `Comuns: ${items.join(', ')}. ${extremum.label} = ${n}.`],[a,b].sort((x,y)=>x-y).join(':')+':'+limit);
+          `Múltiples positius de ${Math.max(a,b)} fins a ${limit}: ${range(1,Math.floor(limit/Math.max(a,b))).map(k=>k*Math.max(a,b)).join(', ')}. Conservem els divisibles per ${Math.min(a,b)}.`,
+          `${labels[0]}: ${items.join(', ')}.`,`El més ${divisors?'gran':'petit'} és ${n}.`,
+          `Per tant, ${divisors?'MCD':'mcm'}(${a}, ${b}) = ${n}.`],[a,b].sort((x,y)=>x-y).join(':')+':'+limit);
     }
     if(type==='P3'){
       const a=rnd(4,12),nested=rnd(0,1)===0;
@@ -196,5 +212,5 @@ window.MIMcdMcm = (() => {
     });
   }
   const isAnchor = value => Object.values(anchors).includes(value);
-  return {families,anchors,units,number,matches,generate,bank,reserve,isAnchor};
+  return {families,anchors,units,number,matches,generate,bank,reserve,isAnchor,optionLabels};
 })();

@@ -33,9 +33,20 @@ async function main(){
       const p1=make('P1',12,13),p2=make('P2',4,3,2);
       check(accepts(p1,'6, 2, 1, 3; 6')&&rejects(p1,['1 2 3; 6','1 2 3 6 6; 6','1 2 3 6; 3','1 2 3 6; 6; 999']),'P1 conjunt i màxim');
       check(accepts(p2,'24 12; 12')&&rejects(p2,['0 12 24; 12','12; 12','12 24; 24']),'P2 positius i límit inclusiu');
+      check(accepts(p1,['6; 2; 1; 3','6'])&&accepts(make('P2',6,7,2),['60; 30','30'])&&
+        !accepts(p1,['1; 2; 3; 6; 6','6']),'Separadors dins del camp de llista');
       check(accepts(make('P3',6,0,3),'6; 18')&&accepts(make('P3',8,1,0),'1; 72'),'P3 casos especials');
       const a1=make('A1',12,11),a2=make('A2',12,23,1),a3=make('A3',12,12),a4=make('A4',12,0);
       check(accepts(a1,'3*2; 6')&&rejects(a1,['6; 6','2 × 3; 12','6'])&&accepts(a2,'5 × 3 × 2 × 2; 60'),'Factors seleccionats');
+      const factorCases=[
+        [make('A1',30,27),'2','2'],
+        [make('A1',24,29),'3 × 2 × 2','12'],
+        [make('A1',8,2),'1','1'],
+        [make('A2',12,11,1),'3² · 2^2','36']
+      ];
+      check(factorCases.every(([q,factors,value])=>accepts(q,[factors,value]))&&
+        rejects(make('A1',24,29),['2³ × 3; 12','4 × 3; 12','2² × 3 × 5; 12']),'Exponents, factors comuns i productes equivalents');
+      check([a1,a2,...factorCases.map(([q])=>q)].every(q=>q.question.includes(' = ')),'Descomposicions visibles');
       check(a3.question.includes('alhora ara')&&['36','36 s','36 segons'].every(v=>accepts(a3,v))&&rejects(a3,['36 minuts','36 metres']),'Sincronització i unitats');
       check(accepts(a4,'12 lots; 2 llapis vermells; 3 blaus')&&
         rejects(a4,['12; 2; 3; 999','12; 3; 2','12 metres; 2; 3','12; 2 text; 3']),'Lots i camps exactes');
@@ -167,6 +178,41 @@ async function main(){
       }
       return {families:groups.map(level=>level.length),feedbackLinks};
     });
+    async function showCase(type,draws,mode){
+      await page.evaluate(({type,draws,mode})=>{
+        const t=TOPICS.find(t=>t.id==='mcmmcd'),generate=t.practiceGen;
+        selTopic(TOPICS.indexOf(t));selLv(1);selMode(mode);startP();
+        const level=type.startsWith('P')?1:2;
+        const q={...MIMcdMcm.generate(type,()=>draws.shift()),taskDifficulty:level,diff:level};
+        adaptivePracticeSessions.mcmmcd.points=level===1?0:3;
+        try{t.practiceGen=()=>q;showEx();}finally{t.practiceGen=generate;}
+      },{type,draws,mode});
+    }
+    for(const [type,draws] of [['P1',[12,13]],['P2',[6,7,2]],['A1',[30,27]],['A2',[12,23,1]]]){
+      await showCase(type,draws,'multi');
+      assert.equal(await page.locator('#og .ob').count(),4);
+      assert(await page.locator('#og .ob').evaluateAll(buttons=>buttons.every(button=>
+        button.querySelectorAll('.mcm-option-line').length===2&&button.dataset.answer.includes(';'))));
+      const correct=await page.evaluate(()=>currentEx.correct);
+      const button=page.locator('#og .ob').filter({has:page.locator('strong')});
+      const index=await page.evaluate(()=>currentEx.options.indexOf(currentEx.correct));
+      await button.nth(index).focus();
+      await page.keyboard.press('Enter');
+      assert(await button.nth(index).evaluate(el=>el.classList.contains('correct')));
+      assert.equal(await page.evaluate(()=>adaptivePracticeSessions.mcmmcd.correct),1);
+      assert.equal(await page.evaluate(()=>currentEx.correct),correct);
+    }
+    await showCase('P2',[6,7,2],'open');
+    await page.locator('#divisReasoning button').click();
+    assert.equal(await page.evaluate(()=>state.answered),false);
+    await page.locator('#mcmField0').fill('60; 30');
+    await page.locator('#divisReasoning button').click();
+    assert.equal(await page.evaluate(()=>state.answered),false);
+    await page.locator('#mcmField1').fill('30');
+    await page.locator('#mcmField1').press('Enter');
+    await page.locator('#fbA .ok').waitFor();
+    assert.match(await page.locator('#fbA').innerText(),/Múltiples comuns positius: 30, 60/);
+    assert.match(await page.locator('#fbA').innerText(),/El més petit és 30/);
     const theory=await browser.newPage();
     await theory.route(/^https?:/,route=>route.abort());
     for(const [family,link] of Object.entries(result.feedbackLinks)){
@@ -179,17 +225,16 @@ async function main(){
     }
     await theory.close();
     if(process.env.MI_MCD_SCREENSHOTS){
-      await page.evaluate(()=>{
-        const t=TOPICS.find(t=>t.id==='mcmmcd'),generate=t.practiceGen;
-        selTopic(TOPICS.indexOf(t));selLv(1);selMode('open');startP();
-        adaptivePracticeSessions.mcmmcd.points=3;
-        try{t.practiceGen=()=>genMcdPractice('P4',2);showEx();}finally{t.practiceGen=generate;}
-      });
       const output=process.env.MI_MCD_SCREENSHOTS;
-      await page.screenshot({fullPage:true,path:resolve(output,'p4-oberta.png')});
+      await showCase('A1',[30,27],'multi');
+      await page.screenshot({fullPage:true,path:resolve(output,'mcd-factors-tria.png')});
       await page.setViewportSize({width:390,height:844});
       assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));
-      await page.screenshot({fullPage:true,path:resolve(output,'p4-mobil.png')});
+      await page.screenshot({fullPage:true,path:resolve(output,'mcd-factors-mobil.png')});
+      await showCase('P2',[6,7,2],'open');
+      await page.screenshot({fullPage:true,path:resolve(output,'multiples-oberta-mobil.png')});
+      await showCase('P1',[12,13],'multi');
+      await page.screenshot({fullPage:true,path:resolve(output,'divisors-tria-mobil.png')});
     }
     assert.deepEqual(errors,[]);
     console.log(JSON.stringify({families:result.families,theory:Object.keys(result.feedbackLinks).length,exams:[12,20]}));

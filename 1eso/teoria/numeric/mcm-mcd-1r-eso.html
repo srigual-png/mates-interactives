@@ -155,12 +155,14 @@ a{color:inherit}
 <section class="card" id="divisors-comuns">
 <h2>Divisors comuns</h2>
 <p>Escriu els divisors positius de cada nombre. Conserva els que apareixen a totes dues llistes, una vegada cadascun. El més gran és el MCD.</p>
-<div class="example"><p>Els divisors de 12 són 1, 2, 3, 4, 6 i 12. Els de 18 són 1, 2, 3, 6, 9 i 18. Els comuns són <strong>1, 2, 3 i 6</strong>, així que el MCD és <strong>6</strong>.</p></div>
+<div class="example"><p>Els divisors de 12 són 1, 2, 3, 4, 6 i 12. Els de 18 són 1, 2, 3, 6, 9 i 18. Conservem els que apareixen a totes dues llistes.</p>
+<p><strong>Divisors comuns positius:</strong> 1, 2, 3, 6.</p><p><strong>El més gran (MCD):</strong> 6. Per tant, MCD(12, 18) = 6.</p></div>
 </section>
 <section class="card" id="multiples-comuns">
 <h2>Múltiples comuns positius</h2>
 <p>Comença pel primer múltiple positiu i conserva els nombres que són múltiples de tots dos. Si hi ha un límit, inclou-lo quan també compleixi la condició. El primer de la llista és el mcm.</p>
-<div class="example"><p>Els múltiples positius de 6 fins a 24 són 6, 12, 18 i 24. Els divisibles per 4 són <strong>12 i 24</strong>. El mcm és <strong>12</strong>.</p></div>
+<div class="example"><p>Busquem els múltiples comuns positius de 6 i 10 fins a 60. Els múltiples de 10 són 10, 20, 30, 40, 50 i 60. Conservem els que també són divisibles per 6. El 0 queda fora perquè es demanen múltiples positius, i el 60 s’inclou perquè és el límit.</p>
+<p><strong>Múltiples comuns positius:</strong> 30, 60.</p><p><strong>El més petit (mcm):</strong> 30. Per tant, mcm(6, 10) = 30.</p></div>
 </section>
 <section class="card" id="casos-especials">
 <h2>Casos especials</h2>
@@ -170,12 +172,18 @@ a{color:inherit}
 <section class="card" id="mcd-factors">
 <h2>MCD per factors primers</h2>
 <p>Factoritza els nombres. Conserva els factors primers presents en tots dos i, per a cadascun, tria l’exponent més petit perquè el producte divideixi tots dos nombres.</p>
-<div class="example"><p>12 = 2² × 3 i 18 = 2 × 3². Conservem un 2 i un 3, de manera que el MCD és <strong>2 × 3 = 6</strong>. En 8 = 2³ i 9 = 3² no hi ha factors primers comuns i el MCD és <strong>1</strong>.</p></div>
+<div class="example"><p>30 = 2 × 3 × 5 i 34 = 2 × 17. Només el factor primer 2 apareix en tots dos.</p>
+<p><strong>Producte dels factors primers comuns:</strong> 2.</p><p><strong>Resultat del MCD:</strong> 2.</p>
+<p>12 = 2² × 3 i 18 = 2 × 3². Conservem un 2 i un 3, amb els exponents més petits.</p>
+<p><strong>Producte dels factors primers comuns:</strong> 2 × 3.</p><p><strong>Resultat del MCD:</strong> 6.</p>
+<p>24 = 2³ × 3 i 36 = 2² × 3². El producte seleccionat és <strong>2² × 3</strong> i el MCD és <strong>12</strong>. En 8 = 2³ i 9 = 3² no hi ha factors primers comuns. Escrivim <strong>1</strong> al camp del producte i el MCD és <strong>1</strong>.</p></div>
 </section>
 <section class="card" id="mcm-factors">
 <h2>mcm per factors primers</h2>
 <p>Reuneix tots els factors primers presents i tria l’exponent més gran de cadascun. Així el producte conté prou factors perquè tots els nombres el divideixin.</p>
-<div class="example"><p>12 = 2² × 3 i 30 = 2 × 3 × 5. El mcm és <strong>2² × 3 × 5 = 60</strong>. Amb 4 = 2², 6 = 2 × 3 i 8 = 2³, el mateix criteri dona <strong>2³ × 3 = 24</strong>.</p></div>
+<div class="example"><p>12 = 2² × 3 i 30 = 2 × 3 × 5. Conservem el 2 amb exponent 2, el 3 i també el 5, que només apareix en un dels nombres.</p>
+<p><strong>Producte dels factors primers seleccionats:</strong> 2² × 3 × 5.</p><p><strong>Resultat del mcm:</strong> 60.</p>
+<p>Amb 12 = 2² × 3 i 18 = 2 × 3², seleccionem <strong>2² × 3²</strong> i obtenim <strong>36</strong>. Amb 4 = 2², 6 = 2 × 3 i 8 = 2³, el mateix criteri dona <strong>2³ × 3 = 24</strong>.</p></div>
 </section>
 <section class="card" id="coincidencies">
 <h2>Coincidències amb inici simultani</h2>

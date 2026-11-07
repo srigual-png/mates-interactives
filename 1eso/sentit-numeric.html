@@ -79,6 +79,8 @@ nav h1{font-size:1.05rem;font-weight:700;color:var(--primary);flex:1;cursor:defa
 #divisReasoning label{display:block;margin-bottom:8px;}
 #divisReasoning select{margin-bottom:12px;}
 #divisReasoning input[id^="mcmField"]{margin-bottom:12px;}
+.mcm-option-line{display:block;text-align:left;}
+.mcm-option-line+.mcm-option-line{margin-top:6px;}
 #divisReasoning fieldset{min-width:0;border:1px solid var(--border);border-radius:12px;padding:12px;margin:0 0 12px;}
 #divisReasoning fieldset label{display:flex;align-items:baseline;gap:8px;}
 .open-hint{font-size:.78rem;color:var(--muted);margin:6px 2px 0;line-height:1.45;}
@@ -4424,7 +4426,8 @@ function showEx(){
     setTimeout(function(){(structured?document.querySelector('#divisReasoning select,#divisReasoning input'):inp)?.focus();},60);
   }else{
     document.getElementById('openWrap').style.display='none';
-    document.getElementById('og').innerHTML=currentEx.options.map(function(o,i){return '<button class="ob" onclick="selAns('+i+',this)">'+o+'</button>';}).join('');
+    document.getElementById('og').innerHTML=currentEx.options.map(function(o,i){return '<button class="ob"'+
+      (currentEx.mcmOptionLabels?' data-answer="'+escHtml(o)+'"':'')+' onclick="selAns('+i+',this)">'+formatMcdOption(currentEx,o)+'</button>';}).join('');
   }
   document.getElementById('fbA').innerHTML='';
   document.getElementById('bNext').style.display='none';
@@ -4436,7 +4439,7 @@ function showEx(){
 function selAns(idx,btn){
   if(state.answered)return;
   var ans=currentEx.options[idx],isOk=currentEx.opsAnswer?opsAnswerMatches(currentEx.opsAnswer,ans):String(ans)===String(currentEx.correct);
-  document.querySelectorAll('.ob').forEach(function(b){b.disabled=true;if(String(b.textContent)===String(currentEx.correct))b.classList.add('correct');});
+  document.querySelectorAll('.ob').forEach(function(b){b.disabled=true;if(String(b.dataset.answer??b.textContent)===String(currentEx.correct))b.classList.add('correct');});
   if(!isOk)btn.classList.add('wrong');
   processPracticeAnswer(isOk,ans);
 }
@@ -4447,9 +4450,9 @@ function checkOpen(){
     if(!form.reportValidity())return;
     const values=[...new FormData(form).values()].map(value=>value.trim());
     if(values.some(value=>!value))return;
-    const given=values.join('; ');
+    const given=currentEx.mcmOptionLabels?currentEx.mcmFields.map((field,i)=>field.label+': '+values[i]).join(' / '):values.join('; ');
     form.querySelectorAll('input,select,button').forEach(control=>control.disabled=true);
-    processPracticeAnswer(openOk1(currentEx.correct,given,currentEx),given);
+    processPracticeAnswer(openOk1(currentEx.correct,values,currentEx),given);
     return;
   }
   if(currentEx.divisReasoning){
@@ -4475,6 +4478,13 @@ function checkOpen(){
   inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');
   processPracticeAnswer(ok,val,result?.message);
 }
+function formatMcdOption(ex,value){
+  const labels=ex.mcmOptionLabels||(ex.topicId==='mcmmcd'?MIMcdMcm.optionLabels(ex.type):null);
+  if(!labels)return String(value);
+  const parts=String(value).split(';');
+  if(parts.length!==labels.length)return escHtml(value);
+  return labels.map((label,i)=>'<span class="mcm-option-line"><strong>'+escHtml(label)+':</strong> '+escHtml(parts[i].trim())+'</span>').join('');
+}
 function renderMcdFields(fields){
   const form=document.getElementById('divisReasoning');
   form.hidden=false;
@@ -4483,8 +4493,11 @@ function renderMcdFields(fields){
     const label='<label for="'+id+'">'+escHtml(field.label)+'</label>';
     if(field.options)return label+'<select'+attributes+'><option value="">Tria una resposta</option>'+
       shuffle(field.options).map(option=>'<option>'+escHtml(option)+'</option>').join('')+'</select>';
-    const placeholder=field.list?'Separa els nombres amb comes o espais':field.factor?'Per exemple, 2² × 3':'Escriu un nombre';
-    return label+'<input'+attributes+' placeholder="'+placeholder+'" autocomplete="off">';
+    const hint=field.list?'Separa els enters amb comes, punts i coma o espais. Pots escriure’ls en qualsevol ordre.':
+      field.factor?'Escriu un producte de factors primers amb ×, ·, * o x. Pots usar potències.':'';
+    const placeholder=field.list?'Llista d’enters':field.factor?'Per exemple, 2² × 3':'Escriu un nombre';
+    return label+'<input'+attributes+' placeholder="'+placeholder+'"'+(hint?' aria-describedby="'+id+'Hint"':'')+' autocomplete="off">'+
+      (hint?'<p class="open-hint" id="'+id+'Hint">'+hint+'</p>':'');
   }).join('')+'<button class="btn-check" type="submit">Comprova →</button>';
   return true;
 }
@@ -4533,7 +4546,7 @@ function processPracticeAnswer(isOk,studentAnswer,message){
   } else {
     state.correctStreak=0;updateSBar();
     registerError(currentEx,studentAnswer,'practice');
-    fb.innerHTML='<div class="fb ko"><h4>&#10060; Incorrecte</h4>La teva resposta: <b>'+escHtml(studentAnswer||'—')+'</b><br>'+(message?'<p>'+escHtml(message)+'</p>':'')+'La resposta era: <b>'+currentEx.correct+'</b><br>'+miReviewHtml(currentEx)+'<b>📘 Resolució pas a pas:</b>'+solHTML+theoryLink+'</div>';
+    fb.innerHTML='<div class="fb ko"><h4>&#10060; Incorrecte</h4>La teva resposta: <b>'+escHtml(studentAnswer||'—')+'</b><br>'+(message?'<p>'+escHtml(message)+'</p>':'')+'La resposta era: <b>'+formatMcdOption(currentEx,currentEx.correct)+'</b><br>'+miReviewHtml(currentEx)+'<b>📘 Resolució pas a pas:</b>'+solHTML+theoryLink+'</div>';
   }
   var nextBtn=document.getElementById('bNext');
   var finished=adaptive&&adaptiveGoalReached();
@@ -4819,7 +4832,7 @@ function showErrorSummary(){
           +'<div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><h3 style="margin:0">&#10060; '+escHtml(e.topicName||t.name)+'</h3><span style="font-size:.72rem;color:var(--muted)">'+escHtml(date)+'</span></div>'
           +'<div class="saved-error-question">'+(e.question||'Pregunta no disponible')+'</div>'
           +'<div class="saved-error-answer"><div>La teva resposta: <b style="color:var(--err)">'+escHtml(e.answer||'—')+'</b></div>'
-          +'<div>Resposta correcta: <b style="color:var(--ok)">'+escHtml(e.correct||'—')+'</b></div></div>'
+          +'<div>Resposta correcta: <b style="color:var(--ok)">'+(t.id==='mcmmcd'&&MIMcdMcm.optionLabels(e.type)?formatMcdOption({...e,topicId:t.id},e.correct||'—'):escHtml(e.correct||'—'))+'</b></div></div>'
           +'<div class="saved-error-meta">'+modeTxt+typeTxt+diffTxt+'</div>'
           +miReviewHtml(e);
         if(Array.isArray(e.solution)&&e.solution.length){
