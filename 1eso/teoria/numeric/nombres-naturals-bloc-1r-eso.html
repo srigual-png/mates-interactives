@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
-<html lang="ca">
-<head>
+<html lang="ca"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Nombres naturals 1r ESO | Mates Interactives</title>
@@ -31,304 +29,12 @@
   "learningResourceType": "lesson",
   "url": "https://srigual-png.github.io/mates-interactives/1eso/teoria/numeric/nombres-naturals-bloc-1r-eso.html"
 }</script>
-<style>
-:root{
-  --bg:#f7f9fc;
-  --card:#fff;
-  --primary:#5b8dee;
-  --pd:#3a6fd8;
-  --ok:#34c97e;
-  --err:#e05c5c;
-  --warn:#f5a623;
-  --text:#2c3e50;
-  --muted:#7f8c9a;
-  --border:#dce3ed;
-  --sh:0 2px 12px rgba(0,0,0,.08);
-  --soft:#eaf1fd;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  line-height:1.6;
-}
-a{color:inherit}
-.top-nav{
-  background:var(--card);
-  border-bottom:1px solid var(--border);
-  padding:12px 20px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  box-shadow:var(--sh);
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-.nav-link{
-  color:var(--muted);
-  text-decoration:none;
-  font-size:.83rem;
-  font-weight:650;
-  padding:5px 8px;
-  border-radius:8px;
-  white-space:nowrap;
-}
-.nav-link:hover{background:var(--soft);color:var(--primary)}
-.nav-title{
-  flex:1;
-  min-width:0;
-  font-size:1rem;
-  font-weight:750;
-  color:var(--primary);
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-.wrap{
-  width:min(760px,calc(100% - 32px));
-  margin:0 auto;
-  padding:30px 0 54px;
-}
-.hero{text-align:center;padding:10px 8px 22px}
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  background:var(--soft);
-  color:var(--primary);
-  border-radius:999px;
-  padding:5px 11px;
-  font-size:.75rem;
-  font-weight:750;
-  margin-bottom:12px;
-}
-.hero h1{
-  font-size:clamp(1.7rem,4vw,2.25rem);
-  color:var(--primary);
-  line-height:1.15;
-  margin-bottom:9px;
-}
-.hero p{color:var(--muted);font-size:.96rem;max-width:620px;margin:0 auto}
-.hero-actions{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  margin-top:18px;
-  flex-wrap:wrap;
-}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  border-radius:12px;
-  padding:12px 20px;
-  text-decoration:none;
-  font-size:.91rem;
-  font-weight:700;
-  transition:.18s ease;
-}
-.btn-primary{background:var(--primary);color:#fff}
-.btn-primary:hover{background:var(--pd);transform:translateY(-1px)}
-.btn-secondary{background:var(--card);color:var(--primary);border:2px solid var(--primary)}
-.btn-secondary:hover{background:var(--soft)}
-.quick-nav{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin:4px 0 22px;
-}
-.quick-nav a{
-  text-decoration:none;
-  text-align:center;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:10px 7px;
-  color:var(--muted);
-  font-size:.78rem;
-  font-weight:700;
-  box-shadow:0 1px 5px rgba(0,0,0,.04);
-}
-.quick-nav a:hover{border-color:var(--primary);color:var(--primary);background:var(--soft)}
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:22px;
-  margin-bottom:16px;
-  box-shadow:var(--sh);
-}
-.card h2{
-  font-size:1.18rem;
-  color:var(--primary);
-  margin-bottom:10px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.card h3{font-size:.96rem;margin:18px 0 7px}
-.card p + p{margin-top:9px}
-.callout{
-  background:var(--soft);
-  border-left:4px solid var(--primary);
-  border-radius:10px;
-  padding:13px 15px;
-  margin:13px 0;
-  font-size:.91rem;
-}
-.example{
-  background:#fbfcfe;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:14px 16px;
-  margin:12px 0;
-}
-.example-label{
-  display:inline-block;
-  font-size:.72rem;
-  font-weight:800;
-  color:var(--primary);
-  background:var(--soft);
-  border-radius:999px;
-  padding:2px 9px;
-  margin-bottom:7px;
-}
-.math{
-  font-family:'Courier New',monospace;
-  font-weight:700;
-  color:var(--pd);
-  line-height:1.8;
-}
-.steps{
-  counter-reset:pas;
-  display:grid;
-  gap:8px;
-  margin-top:12px;
-}
-.step{
-  position:relative;
-  padding:10px 12px 10px 42px;
-  background:#fbfcfe;
-  border:1px solid var(--border);
-  border-radius:10px;
-  font-size:.9rem;
-}
-.step:before{
-  counter-increment:pas;
-  content:counter(pas);
-  position:absolute;
-  left:11px;
-  top:9px;
-  width:22px;
-  height:22px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:var(--primary);
-  color:#fff;
-  font-size:.72rem;
-  font-weight:800;
-}
-.symbols{
-  width:100%;
-  border-collapse:separate;
-  border-spacing:0;
-  overflow:hidden;
-  border:1px solid var(--border);
-  border-radius:10px;
-  margin-top:12px;
-  font-size:.88rem;
-}
-.symbols th,.symbols td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left}
-.symbols tr:last-child td{border-bottom:0}
-.symbols th{background:var(--soft);color:var(--primary);font-weight:750}
-.symbols td:first-child{width:70px;text-align:center;font-size:1.1rem;font-weight:800;color:var(--pd)}
-.tip{
-  background:#fffbea;
-  border:1px solid #f5e0a0;
-  border-radius:11px;
-  padding:12px 14px;
-  margin-top:13px;
-  font-size:.88rem;
-  color:#785800;
-}
-.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.problem{
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:13px;
-  background:#fbfcfe;
-  font-size:.88rem;
-}
-.problem strong{display:block;color:var(--primary);margin-bottom:5px}
-.mistakes{
-  background:#fff8f8;
-  border:1px solid #f0b0b0;
-}
-.mistakes h2{color:var(--err)}
-.mistakes ul{padding-left:20px}
-.mistakes li+li{margin-top:6px}
-.check details{
-  border:1px solid var(--border);
-  border-radius:11px;
-  background:#fbfcfe;
-  padding:12px 14px;
-  margin-top:9px;
-}
-.check summary{cursor:pointer;font-weight:650;color:var(--text)}
-.answer{
-  margin-top:9px;
-  padding-top:9px;
-  border-top:1px solid var(--border);
-  color:#1a7a4a;
-  font-size:.9rem;
-}
-.final-cta{
-  background:linear-gradient(135deg,#edf3ff,#fff);
-  border:1px solid #cad9f7;
-  border-radius:18px;
-  padding:24px;
-  text-align:center;
-  margin-top:20px;
-}
-.final-cta h2{color:var(--primary);font-size:1.25rem;margin-bottom:6px}
-.final-cta p{color:var(--muted);font-size:.9rem;margin-bottom:15px}
-.final-cta .hero-actions{margin-top:0}
-.footer{
-  text-align:center;
-  color:var(--muted);
-  font-size:.76rem;
-  padding:4px 0 25px;
-}
-@media(max-width:650px){
-  .top-nav{padding:10px 10px;gap:4px}
-  .nav-link{padding:5px 5px;font-size:.75rem}
-  .nav-main-label,.sense-label{display:none}
-  .nav-title{font-size:.86rem}
-  .wrap{width:min(100% - 20px,760px);padding-top:20px}
-  .quick-nav{grid-template-columns:1fr 1fr}
-  .card{padding:17px}
-  .problem-grid{grid-template-columns:1fr}
-  .hero-actions{flex-direction:column}
-  .btn{width:100%}
-}
-</style>
-<style id="mi-theory-standard">
-/* Mates Interactives · patró mestre de teoria */
-.mi-theory-index{display:inline-flex!important;align-items:center;justify-content:center;gap:6px;text-decoration:none;font-weight:750}
-.summary-master{background:var(--card,#fff);border:1px solid var(--border,#dce3ed);border-left:5px solid var(--primary,#5b8dee);border-radius:15px;padding:18px 20px;margin:16px 0;box-shadow:var(--sh,0 2px 12px rgba(0,0,0,.08))}.summary-master h2{margin:0 0 8px;color:var(--primary,#5b8dee);font-size:1.15rem}.summary-master ul{padding-left:21px}.summary-master li{margin:5px 0}
-.pager-master{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:26px 0 8px}.pager-master a,.pager-master span{display:block;text-decoration:none;border:1px solid var(--border,#dce3ed);background:#fff;border-radius:10px;padding:9px 11px;font-size:.84rem;font-weight:700;color:var(--primary,#5b8dee)}.pager-master .prev{text-align:left}.pager-master .idx{text-align:center}.pager-master .next{text-align:right}.pager-master .disabled{color:var(--muted,#7f8c9a);opacity:.6}
-.extension-standard{display:inline-block;margin:6px 0 0;background:#fff3d6;color:#8a5d00;border:1px solid #efd48b;border-radius:999px;padding:4px 9px;font-size:.72rem;font-weight:800}
-@media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
-</style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
+
+<link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
+<link rel="stylesheet" href="../../../assets/css/teoria-numeric-1eso.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
 </head>
-<body>
+<body class="mi-theory-numeric-1eso">
 <nav aria-label="Navegació principal" class="top-nav">
 <a class="nav-link" href="../../../index.html" title="Inici de Mates Interactives">🏠 <span class="nav-main-label">Mates Interactives</span></a>
 <a class="nav-link" href="../../index.html" title="Matemàtiques de 1r ESO">📘 1r ESO</a>
@@ -340,15 +46,17 @@ a{color:inherit}
 <div class="eyebrow">1r ESO · Sentit numèric</div>
 <h1>🔢 Nombres naturals</h1>
 <p>Comprèn els nombres naturals, compara’ls, ordena’ls, arrodoneix-los i aplica’ls en problemes.</p>
-<div class="hero-actions">
-<a class="btn btn-primary" href="../../sentit-numeric.html?tema=naturals&amp;nivell=1">🟢 Practicar · Guiat</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html?tema=naturals&amp;nivell=2">🟠 Practicar · Autònom</a>
-<a class="btn btn-secondary" href="#que-son">📘 Comença la teoria</a>
-</div>
+<div class="hero-actions"><a class="btn btn-primary" href="../../sentit-numeric.html?tema=naturals&amp;nivell=1">Pràctica guiada</a><a class="btn btn-secondary" href="../../sentit-numeric.html?tema=naturals&amp;nivell=2">Pràctica autònoma</a><a class="btn btn-secondary" href="#que-son">Comença la teoria</a></div>
 </header>
-<nav aria-label="Continguts de la teoria" class="quick-nav"><a href="#que-son">🔢 1. Què són els nombres naturals?</a><a href="#comparar">⚖️ 2. Comparar i ordenar nombres naturals</a><a href="#arrodonir">🎯 3. Arrodonir nombres naturals</a><a href="#problemes">🧠 6. Problemes amb nombres naturals</a></nav>
+<nav class="quick-nav family-grid" aria-label="Continguts de la teoria"><a class="family-card" href="#que-son"><span class="family-card-title">Què són els nombres naturals?</span><span class="family-card-caption">Fonaments i consulta complementària</span></a><a class="family-card" href="#comparar"><span class="family-card-title">Comparar i ordenar nombres naturals</span><span class="family-card-caption">Fonaments i consulta complementària</span></a><a class="family-card" href="#arrodonir"><span class="family-card-title">Arrodonir nombres naturals</span><span class="family-card-caption">Fonaments i consulta complementària</span></a><a class="family-card" href="#problemes"><span class="family-card-title">Problemes amb nombres naturals</span><span class="family-card-caption">Fonaments i consulta complementària</span></a><a class="family-card" href="#familia-naturals-1" data-family="1|2|naturals:ext-error-ordenacio"><span class="family-card-title">Comparar i ordenar naturals</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-naturals-3" data-family="3"><span class="family-card-title">Arrodonir un natural</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-naturals-4" data-family="4"><span class="family-card-title">Repartir en grups iguals</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-naturals-recta-graduada" data-family="recta-graduada"><span class="family-card-title">Llegir una recta graduada</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-naturals-5" data-family="5"><span class="family-card-title">Producció i reserva</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-naturals-dividend-desconegut" data-family="dividend-desconegut|naturals:ext-inversa-divisio"><span class="family-card-title">Reconstruir el dividend</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-naturals-producte-descomposicio" data-family="producte-descomposicio|naturals:ext-estrategia-producte"><span class="family-card-title">Multiplicar amb la distributiva</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-naturals-operacions-valor-desconegut" data-family="operacions-valor-desconegut"><span class="family-card-title">Trobar un valor desconegut</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-naturals-interval-arrodoniment" data-family="interval-arrodoniment|naturals:ext-interval-arrodoniment"><span class="family-card-title">Reconstruir l’interval d’arrodoniment</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-naturals-1001" data-family="1001"><span class="family-card-title">Minimitzar paquets exactes</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-naturals-nombres-amb-condicions" data-family="nombres-amb-condicions"><span class="family-card-title">Construir un nombre amb pistes</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-naturals-patrons-numerics" data-family="patrons-numerics"><span class="family-card-title">Continuar una pauta de salts</span><span class="family-card-caption">Procediment i exemple resolt</span></a></nav>
+
+
+
+
+
+
 <section class="card" id="que-son">
-<h2>🔢 1. Què són els nombres naturals?</h2>
+<h2>1. Què són els nombres naturals?</h2>
 <p>Els <strong>nombres naturals</strong> són els que fem servir habitualment per <strong>comptar</strong> i <strong>ordenar</strong>.</p>
 <div class="callout">
       En aquesta web considerarem que el <strong>0 també és un nombre natural</strong>:
@@ -362,16 +70,16 @@ a{color:inherit}
 <div class="tip">💡 <strong>Recorda:</strong> els naturals no tenen part decimal i, en aquest nivell, no inclouen nombres negatius.</div>
 </section>
 <section class="card" id="comparar">
-<h2>⚖️ 2. Comparar i ordenar nombres naturals</h2>
+<h2>2. Comparar i ordenar nombres naturals</h2>
 <p>Comparar dos nombres vol dir decidir quin és més gran, quin és més petit o si són iguals.</p>
-<table aria-label="Símbols de comparació" class="symbols">
+<div class="table-scroll" tabindex="0" role="region" aria-label="Taula 1 de 🔢 Nombres naturals"><table aria-label="Símbols de comparació" class="symbols">
 <thead><tr><th>Símbol</th><th>Significat</th><th>Exemple</th></tr></thead>
 <tbody>
 <tr><td>&gt;</td><td>més gran que</td><td>8.420 &gt; 7.999</td></tr>
 <tr><td>&lt;</td><td>més petit que</td><td>3.508 &lt; 3.580</td></tr>
 <tr><td>=</td><td>igual que</td><td>12.006 = 12.006</td></tr>
 </tbody>
-</table>
+</table></div>
 <h3>Com els comparem?</h3>
 <div class="steps">
 <div class="step">Primer mira <strong>quantes xifres</strong> té cada nombre. Si un en té més, és el més gran.</div>
@@ -387,7 +95,7 @@ a{color:inherit}
 <div class="tip">💡 No cal comparar totes les xifres: quan trobes la primera que és diferent, ja pots decidir.</div>
 </section>
 <section class="card" id="arrodonir">
-<h2>🎯 3. Arrodonir nombres naturals</h2>
+<h2>3. Arrodonir nombres naturals</h2>
 <p>Arrodonir serveix per obtenir un nombre més senzill i proper a l'original. És molt útil per fer <strong>estimacions</strong>.</p>
 <h3>Regla d'arrodoniment</h3>
 <div class="steps">
@@ -411,7 +119,7 @@ a{color:inherit}
 <div class="tip">💡 <strong>Pregunta clau:</strong> «A quina posició arrodoneixo?» Després mira només la xifra immediatament de la dreta.</div>
 </section>
 <section class="card" id="problemes">
-<h2>🧠 6. Problemes amb nombres naturals</h2>
+<h2>4. Problemes amb nombres naturals</h2>
 <p>En un problema, el més important no és calcular de seguida. Primer cal entendre <strong>què sabem</strong> i <strong>què ens demanen</strong>.</p>
 <div class="steps">
 <div class="step">Llegeix el problema sencer i identifica la pregunta.</div>
@@ -443,16 +151,18 @@ a{color:inherit}
 </div>
 <div class="tip">💡 En els problemes, el <strong>residu</strong> també pot tenir significat. Si sobren persones, pot caldre un grup o vehicle més.</div>
 </section>
-<section class="card mistakes"><h2>⚠️ Errors freqüents</h2><ul><li>Comparar només les últimes xifres en lloc de començar per l’esquerra.</li><li>Arrodonir mirant una xifra que no és la immediatament següent.</li><li>Calcular sense interpretar què demana el problema.</li></ul></section><section class="card check"><h2>✅ Comprova si ho has entès</h2><details><summary>Què mires primer per comparar dos naturals?</summary><div class="answer">Primer el nombre de xifres i, si coincideix, compares des de l’esquerra.</div></details><details><summary>Quina xifra decideix un arrodoniment?</summary><div class="answer">La xifra immediatament situada a la dreta de la posició on arrodoneixes.</div></details></section><section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Què són els nombres naturals?</li><li>Comparar i ordenar nombres naturals</li><li>Arrodonir nombres naturals</li><li>Problemes amb nombres naturals</li></ul></section><section class="final-cta">
+<section class="card" id="familia-naturals-1"><h2>Comparar i ordenar naturals</h2><p>Compara primer el nombre de xifres i després cada posició, d’esquerra a dreta. Ordena aplicant la mateixa comparació a totes les parelles.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Ordena de major a menor:<br><span class="fc">60985&nbsp;—&nbsp;94422&nbsp;—&nbsp;33997&nbsp;—&nbsp;36786</span></div><ol class="steps"><li class="step">94422 és més gran que 60985 perquè, a la primera posició diferent (desenes de miler), les xifres són 9 i 6, respectivament.</li><li class="step">60985 és més gran que 36786 perquè, a la primera posició diferent (desenes de miler), les xifres són 6 i 3, respectivament.</li><li class="step">36786 és més gran que 33997 perquè, a la primera posició diferent (milers), les xifres són 6 i 3, respectivament.</li><li class="step">Ordre correcte: 94422 &gt; 60985 &gt; 36786 &gt; 33997</li></ol></div><p class="tip">Error habitual i comprovació: En ordre decreixent, el primer ha de ser el més gran.</p></section><section class="card" id="familia-naturals-3"><h2>Arrodonir un natural</h2><p>Localitza l’ordre demanat i mira només la xifra immediatament a la dreta: de 0 a 4 conserva’l; de 5 a 9 augmenta’l. Substitueix per zeros les posicions inferiors.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Arrodoneix <span class="fc">54495</span> a les centenes.</div><ol class="steps"><li class="step">Nombre: 54495</li><li class="step">Arrodonit a les centenes: 54500</li></ol></div><p class="tip">Error habitual i comprovació: No arrodoneixis successivament les xifres: pot canviar el resultat.</p></section><section class="card" id="familia-naturals-4"><h2>Repartir en grups iguals</h2><p>Divideix la quantitat total pel nombre de grups. Interpreta el quocient com la quantitat que rep cada grup.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question"><span class="pt">Un magatzem rep <b>656</b> paquets per distribuir entre <b>8</b> botigues. Quants paquets rep cada botiga?</span></div><ol class="steps"><li class="step">Operació: 656 / 8 = 82</li><li class="step">Resultat: 82 unitats</li></ol></div><p class="tip">Error habitual i comprovació: Comprova multiplicant el que rep cada grup pel nombre de grups.</p></section><section class="card" id="familia-naturals-recta-graduada"><h2>Llegir una recta graduada</h2><p>Resta els valors dels extrems i divideix pel nombre d’intervals iguals. Afegeix aquest pas tantes vegades com intervals separin el punt de l’extrem esquerre.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Quina marca correspon al nombre 6700?<br><svg viewBox="0 0 384 60" style="width:100%;max-width:384px" role="img" aria-label="Recta de 6400 a 6900 amb cinc intervals iguals i les marques A, B, C i D d’esquerra a dreta."><path d="M16 22h352" stroke="currentColor"></path><path d="M32 15v14" stroke="currentColor"></path><text x="32" y="51" text-anchor="middle">6400</text><path d="M96 15v14" stroke="currentColor"></path><text x="96" y="51" text-anchor="middle">A</text><path d="M160 15v14" stroke="currentColor"></path><text x="160" y="51" text-anchor="middle">B</text><path d="M224 15v14" stroke="currentColor"></path><text x="224" y="51" text-anchor="middle">C</text><path d="M288 15v14" stroke="currentColor"></path><text x="288" y="51" text-anchor="middle">D</text><path d="M352 15v14" stroke="currentColor"></path><text x="352" y="51" text-anchor="middle">6900</text></svg></div><ol class="steps"><li class="step">Cada interval val (6900 − 6400) ÷ 5 = 100.</li><li class="step">La marca C és a 3 intervals de l’extrem esquerre: 6400 + 3 × 100 = 6700.</li></ol></div><p class="tip">Error habitual i comprovació: Compta espais entre marques, no el nombre de marques.</p></section><section class="card" id="familia-naturals-5"><h2>Producció i reserva</h2><p>Calcula primer el producte del nombre de màquines per la producció de cadascuna. Suma la reserva una sola vegada.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question"><span class="pt">Una fàbrica té <b>8</b> màquines que produeixen <b>46</b> peces cadascuna. A més, hi ha <b>10</b> peces de reserva. Quantes peces hi ha en total?</span></div><ol class="steps"><li class="step">Producció: 8 x 46 = 368</li><li class="step">Total: 368 + 10 = 378</li><li class="step">Resultat: 378 peces</li></ol></div><p class="tip">Error habitual i comprovació: La reserva no forma part de la producció de cada màquina.</p></section><section class="card" id="familia-naturals-dividend-desconegut"><h2>Reconstruir el dividend</h2><p>En una divisió entera, dividend = divisor × quocient + residu. Multiplica i després suma el residu.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">En una divisió entera, el divisor és 5, el quocient és 23 i el residu és 0. Quin és el dividend?</div><ol class="steps"><li class="step">Multiplica el divisor pel quocient: 5 × 23 = 115.</li><li class="step">Suma-hi el residu: 115 + 0 = 115.</li><li class="step">Comprova que el residu és vàlid: 0 ≤ 0 &lt; 5.</li></ol></div><p class="tip">Error habitual i comprovació: El residu ha de ser no negatiu i estrictament menor que el divisor.</p></section><section class="card" id="familia-naturals-producte-descomposicio"><h2>Multiplicar amb la distributiva</h2><p>Descompon un factor en una suma o una diferència. Multiplica l’altre factor per cada terme i conserva el signe en combinar els productes.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question"><div class="natural-product"><p>Volem calcular 27 × 74.</p>
+      <p>Descomponem 74 en 80 − 6.</p>
+      <p class="fc"><span>27 × 74</span> = <span>27 × 80</span> − <span>27 × 6</span></p>
+      <p>Quant val cadascuna de les dues multiplicacions de la dreta? Escriu els resultats d’esquerra a dreta, separats per un punt i coma.</p></div></div><ol class="steps"><li class="step">Descomponem el factor: 74 = 80 − 6.</li><li class="step">Apliquem la propietat distributiva: 27 × 74 = 27 × 80 − 27 × 6.</li><li class="step">Calculem els productes: 27 × 80 = 2160 i 27 × 6 = 162.</li><li class="step">Combinem els resultats: 2160 − 162 = 1998.</li></ol></div><p class="tip">Error habitual i comprovació: Si es demanen dos productes parcials, escriu-los en l’ordre indicat; no els substitueixis pel producte total.</p></section><section class="card" id="familia-naturals-operacions-valor-desconegut"><h2>Trobar un valor desconegut</h2><p>Desfés les operacions en ordre invers. Si al nombre multiplicat li resten una quantitat, suma-la al resultat abans de dividir pel factor.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Quin nombre falta perquè aquesta igualtat sigui correcta?<br><span class="fc">4 × □ − 9 = 11</span></div><ol class="steps"><li class="step">Sumem 9 al resultat: 11 + 9 = 20.</li><li class="step">Dividim entre 4: 20 ÷ 4 = 5.</li><li class="step">Comprovem: 4 × 5 − 9 = 20 − 9 = 11.</li></ol></div><p class="tip">Error habitual i comprovació: Substitueix el valor trobat a la igualtat original.</p></section><section class="card" id="familia-naturals-interval-arrodoniment"><h2>Reconstruir l’interval d’arrodoniment</h2><p>Per a un múltiple T de l’ordre u, el primer natural que hi arrodoneix és T − u/2 i l’últim és T + u/2 − 1. L’empat inferior puja a T; el superior puja al múltiple següent.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">En arrodonir a la centena més propera, el resultat és 1500. Quins són el menor i el major nombre natural que poden donar aquest resultat? En cas d’empat, arrodoneix cap amunt. Indica primer el menor i després el major, separats per un punt i coma.</div><ol class="steps"><li class="step">La meitat de 100 és 50. L’empat inferior és 1500 − 50 = 1450 i puja a 1500.</li><li class="step">L’empat superior és 1500 + 50 = 1550 i puja a 1600. Per això el major valor admès és 1549.</li><li class="step">Tots els naturals de 1450 a 1549, inclosos, donen 1500. Just a fora, 1449 s’arrodoneix a 1400 i 1550 a 1600.</li></ol></div><p class="tip">Error habitual i comprovació: Comprova els dos extrems i els naturals immediatament exteriors.</p></section><section class="card" id="familia-naturals-1001"><h2>Minimitzar paquets exactes</h2><p>Prova tots els nombres possibles de paquets grans, reservant almenys un paquet petit. Accepta només restes positives divisibles per la mida petita. Compara el nombre total de paquets de totes les combinacions vàlides.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Cal repartir exactament 48 adhesius en paquets de 3 i de 7. Has d’utilitzar almenys un paquet de cada format i no pot sobrar cap adhesiu. Quin és el nombre mínim de paquets?</div><ol class="steps"><li class="step">Deixem almenys 3 adhesius per al format petit. Així podem provar de 6 a 1 paquets grans. A cada prova restem els adhesius dels paquets grans i mirem si la resta és múltiple de 3.</li><li class="step">Les úniques combinacions exactes són: 2 de petits i 6 de grans (8 en total); 9 de petits i 3 de grans (12 en total).</li><li class="step">Amb 2 paquets petits i 6 de grans repartim exactament 2 × 3 + 6 × 7 = 48 adhesius.</li><li class="step">El mínim és 2 + 6 = 8 paquets perquè hem provat tots els nombres possibles de paquets grans i cap combinació exacta en fa servir menys.</li></ol></div><p class="tip">Error habitual i comprovació: Fer més paquets grans només és vàlid si el repartiment continua sent exacte i usa tots dos formats.</p></section><section class="card" id="familia-naturals-nombres-amb-condicions"><h2>Construir un nombre amb pistes</h2><p>Assigna primer les xifres conegudes a les seves posicions. Tradueix les relacions entre xifres i la suma de xifres per trobar les que falten.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Quin nombre de quatre xifres compleix totes aquestes pistes?<br>La xifra dels milers és 6.<br>La xifra de les centenes és 5.<br>La xifra de les unitats és el doble de la de les desenes.<br>La suma de les quatre xifres és 17.</div><ol class="steps"><li class="step">Les xifres conegudes sumen 6 + 5 = 11.</li><li class="step">Les desenes i les unitats han de sumar 17 − 11 = 6.</li><li class="step">Amb la relació donada, els parells de xifres possibles donen aquestes sumes: 0 + 0 = 0; 1 + 2 = 3; 2 + 4 = 6; 3 + 6 = 9; 4 + 8 = 12. Només 2 + 4 dona 6.</li><li class="step">Col·loquem 2 a les desenes i 4 a les unitats. El nombre és 6524 i les seves xifres sumen 17.</li></ol></div><p class="tip">Error habitual i comprovació: Una xifra ha de ser entre 0 i 9; verifica totes les pistes, no només la suma.</p></section><section class="card" id="familia-naturals-patrons-numerics"><h2>Continuar una pauta de salts</h2><p>Calcula les diferències entre termes consecutius. Si els salts augmenten en una quantitat fixa, suma aquesta quantitat a l’últim salt i aplica el nou salt a l’últim terme.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Observa la successió i continua la pauta indicada.<br><span class="fc">11, 16, 23, 32, 43, …</span><br>Els salts entre termes canvien sempre en la mateixa quantitat. Quin nombre ve després?</div><ol class="steps"><li class="step">Calculem els salts: 16 − 11 = 5; 23 − 16 = 7; 32 − 23 = 9; 43 − 32 = 11.</li><li class="step">Els salts augmenten de 2 en 2. El següent és 11 + 2 = 13.</li><li class="step">Sumem el salt següent a l’últim terme: 43 + 13 = 56.</li></ol></div><p class="tip">Error habitual i comprovació: No repeteixis l’últim salt quan la pauta diu que els salts canvien.</p></section><section class="card mistakes"><h2>⚠️ Errors freqüents</h2><ul><li>Comparar només les últimes xifres en lloc de començar per l’esquerra.</li><li>Arrodonir mirant una xifra que no és la immediatament següent.</li><li>Calcular sense interpretar què demana el problema.</li></ul></section>
+<section class="card check"><h2>✅ Comprova si ho has entès</h2><details><summary>Què mires primer per comparar dos naturals?</summary><div class="answer">Primer el nombre de xifres i, si coincideix, compares des de l’esquerra.</div></details><details><summary>Quina xifra decideix un arrodoniment?</summary><div class="answer">La xifra immediatament situada a la dreta de la posició on arrodoneixes.</div></details></section>
+<section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Els naturals serveixen per comptar, ordenar i expressar quantitats enteres no negatives.</li><li>Compara primer el nombre de xifres i després les xifres d’esquerra a dreta.</li><li>Per arrodonir, mira la xifra de la dreta de la posició demanada.</li><li>En un problema, identifica les dades, tria les operacions i comprova el resultat.</li></ul></section>
+<section class="final-cta">
 <h2>Ja tens la teoria. Ara toca practicar.</h2>
 <p>Fes exercicis guiats, passa després al nivell autònom i repassa els errors que vagis cometent.</p>
-<div class="hero-actions">
-<a class="btn btn-primary" href="../../sentit-numeric.html?tema=naturals&amp;nivell=1">🟢 Practicar · Guiat</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html?tema=naturals&amp;nivell=2">🟠 Practicar · Autònom</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html">← Sentit Numèric</a>
-</div>
-</section>
-<nav aria-label="Navegació entre temes de teoria" class="pager-master"><span class="prev disabled">← Tema anterior</span><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="sistema-numeracio-decimal-1r-eso.html">Tema següent →</a></nav></main>
+
+<div class="topic-actions"><a class="btn btn-primary" href="../../sentit-numeric.html?tema=naturals&amp;nivell=1">Pràctica guiada</a><a class="btn btn-secondary" href="../../sentit-numeric.html?tema=naturals&amp;nivell=2">Pràctica autònoma</a></div><a class="return-link" href="../../sentit-numeric.html">Torna al sentit numèric</a></section>
+<nav aria-label="Navegació entre temes de teoria" class="pager-master"><span class="prev disabled" aria-disabled="true">← Tema anterior</span><a class="idx" href="index.html">Índex de teoria</a><a class="next" href="sistema-numeracio-decimal-1r-eso.html">Tema següent →</a></nav></main>
 <footer class="mi-learning-footer">
   <p>Mates Interactives · Matemàtiques d’ESO · Teoria i exercicis gratuïts</p>
   <p><a href="../../../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
@@ -642,5 +352,6 @@ a{color:inherit}
 })();
 </script>
 
-</body>
-</html>
+
+
+</body></html>

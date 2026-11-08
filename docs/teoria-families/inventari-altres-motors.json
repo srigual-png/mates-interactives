@@ -1,0 +1,1613 @@
+[
+  {
+    "source": "problemes",
+    "topic": "ops",
+    "category": "naturals",
+    "id": "naturals-1",
+    "type": 1,
+    "anchor": "",
+    "question": "En una campanya solidària es recullen <b>18.173 kg</b> d'aliments la primera setmana i <b>5.638 kg</b> la segona. Se n'envien <b>2.893 kg</b> a diversos centres. Quants quilograms queden al magatzem?",
+    "guide": [
+      "Suma les dues quantitats recollides",
+      "Resta del total la quantitat enviada"
+    ],
+    "solution": [
+      "Total recollit: 18173 + 5638 = 23811 kg",
+      "Quantitat final: 23811 − 2893 = 20918 kg"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "ops",
+    "category": "naturals",
+    "id": "naturals-2",
+    "type": 2,
+    "anchor": "",
+    "question": "Una associació compra <b>50 samarretes</b> a <b>7 €</b> cadascuna i disposa d'un val de <b>20 €</b>. Quant haurà de pagar?",
+    "guide": [
+      "Multiplica el nombre de samarretes pel preu unitari",
+      "Resta el valor del val al subtotal"
+    ],
+    "solution": [
+      "Subtotal: 50 × 7 = 350 €",
+      "Pagament: 350 − 20 = 330 €"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "ops",
+    "category": "naturals",
+    "id": "naturals-3",
+    "type": 3,
+    "anchor": "",
+    "question": "En un teatre hi ha <b>8 files</b> de <b>17 seients</b> i, a més, <b>20 places</b> accessibles. Quina capacitat total té el teatre?",
+    "guide": [
+      "Calcula els seients de totes les files",
+      "Afegeix les places accessibles"
+    ],
+    "solution": [
+      "Seients de les files: 8 × 17 = 136",
+      "Capacitat: 136 + 20 = 156 seients"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "ops",
+    "category": "naturals",
+    "id": "naturals-4",
+    "type": 4,
+    "anchor": "",
+    "question": "Una màquina produeix <b>55 peces cada hora</b>. Funciona <b>5 hores per torn</b>, durant <b>2 torns diaris</b>, al llarg de <b>7 dies</b>. Quantes peces fabrica en total?",
+    "guide": [
+      "Calcula la producció d'un torn",
+      "Calcula la producció diària",
+      "Multiplica la producció diària pels dies"
+    ],
+    "solution": [
+      "Per torn: 55 × 5 = 275",
+      "Per dia: 275 × 2 = 550",
+      "Total: 550 × 7 = 3850 peces"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "ops",
+    "category": "naturals",
+    "id": "naturals-5",
+    "type": 5,
+    "anchor": "",
+    "question": "En una excursió hi participen <b>302 persones</b>. Es volen formar grups de <b>16</b> persones. Quants grups complets es poden formar i quantes persones quedaran sense grup complet? Escriu el nombre de grups i el de persones sense grup, separats per un punt i coma.",
+    "guide": [
+      "Divideix el total entre les persones de cada grup i pren el quocient enter",
+      "Calcula el residu de la divisió"
+    ],
+    "solution": [
+      "302 ÷ 16 = 18 i residu 14",
+      "Es formen 18 grups complets i sobren 14 persones"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "ops",
+    "category": "naturals",
+    "id": "naturals-6",
+    "type": 6,
+    "anchor": "",
+    "question": "En dividir una quantitat de cromos en paquets de <b>10</b>, s'obtenen <b>16 paquets complets</b> i en sobren <b>4 cromos</b>. Quants cromos hi havia inicialment?",
+    "guide": [
+      "Multiplica la mida de cada paquet pel nombre de paquets complets",
+      "Afegeix els cromos que sobren"
+    ],
+    "solution": [
+      "Cromos empaquetats: 10 × 16 = 160",
+      "Total inicial: 160 + 4 = 164 cromos"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "ops",
+    "category": "naturals",
+    "id": "naturals-7",
+    "type": 7,
+    "anchor": "",
+    "question": "Una biblioteca ha de guardar <b>199 llibres</b> en capses on caben com a màxim <b>15 llibres</b>. Quin és el nombre mínim de capses que necessita? Quants llibres hi haurà a l'última capsa? Escriu el nombre de capses i el de llibres a l'última, separats per un punt i coma.",
+    "guide": [
+      "Calcula quantes capses es poden omplir completament",
+      "Calcula quants llibres queden després de les capses completes",
+      "Recorda que els llibres sobrants necessiten una capsa més"
+    ],
+    "solution": [
+      "199 ÷ 15 = 13 i residu 4",
+      "Com que sobren llibres, cal una capsa addicional: 14 capses"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "ops",
+    "category": "naturals",
+    "id": "naturals-raonament",
+    "type": 1001,
+    "anchor": "",
+    "question": "Necessites almenys 19 llapis. Els paquets A tenen 6 llapis i costen 7 €; els B tenen 9 llapis i costen 9 €. Pots combinar formats i poden sobrar llapis. Quin és el cost mínim, en euros?",
+    "guide": [],
+    "solution": [
+      "Per cada y de 0 a 3, calen com a mínim max(0, arrodoniment superior de (19 − 9y)/6) paquets A.",
+      "Comparant-ne els costos, una compra òptima és 2 paquets A i 1 B: 21 llapis.",
+      "Cost mínim: 2 × 7 + 1 × 9 = 23 €."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "potencies",
+    "category": "potencies",
+    "id": "potencies-1",
+    "type": 1,
+    "anchor": "",
+    "question": "Una plaça quadrada està formada per <b>13 files</b> de <b>13 rajoles</b>. Expressa el nombre total de rajoles com una potència i calcula'l.",
+    "guide": [
+      "Escriu el producte de dos factors iguals com una potència de 2",
+      "Calcula el quadrat del nombre de rajoles d'un costat"
+    ],
+    "solution": [
+      "Potència: 13²",
+      "Total: 13 × 13 = 169 rajoles"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "potencies",
+    "category": "potencies",
+    "id": "potencies-2",
+    "type": 2,
+    "anchor": "",
+    "question": "Un joc té <b>4 opcions</b> possibles a cada pantalla i s'han de superar <b>5 pantalles</b>. Si totes les combinacions són possibles, quantes seqüències diferents hi ha? Escriu també el càlcul com una potència.",
+    "guide": [
+      "Repeteix el mateix factor tantes vegades com pantalles hi ha",
+      "Calcula el valor de la potència"
+    ],
+    "solution": [
+      "Expressió: 4^5",
+      "Valor: 4^5 = 1024"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "potencies",
+    "category": "potencies",
+    "id": "potencies-3",
+    "type": 3,
+    "anchor": "",
+    "question": "En una exposició es col·loquen <b>196 fotografies</b> formant un quadrat perfecte, amb el mateix nombre de files que de columnes. Quantes fotografies hi ha a cada fila?",
+    "guide": [
+      "Busca quin nombre multiplicat per ell mateix dona el total"
+    ],
+    "solution": [
+      "Cal calcular √196",
+      "√196 = 14 perquè 14 × 14 = 196"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "potencies",
+    "category": "potencies",
+    "id": "potencies-raonament",
+    "type": 1001,
+    "anchor": "",
+    "question": "Dos mosaics quadrats utilitzen en total 65 rajoles. El costat del gran té 3 rajoles més que el del petit. No se superposen. Quantes rajoles té el mosaic gran?",
+    "guide": [],
+    "solution": [
+      "Cal cercar dos quadrats de costats n i n + 3 amb àrees que sumin 65.",
+      "4² + 7² = 16 + 49 = 65.",
+      "La suma creix amb n, per tant no hi ha una altra parella de costats positius.",
+      "El mosaic gran té 49 rajoles."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "jerarquia",
+    "category": "jerarquia",
+    "id": "jerarquia-1",
+    "type": 1,
+    "anchor": "",
+    "question": "Calcula respectant la jerarquia:<br><b style=\"font-family:'Courier New',monospace\">8 × (5 + 2)² − 2</b>",
+    "guide": [
+      "Resol primer el parèntesi",
+      "Calcula després la potència",
+      "Fes la multiplicació abans de la resta",
+      "Acaba amb la resta"
+    ],
+    "solution": [
+      "Parèntesi: 5 + 2 = 7",
+      "Potència: 7² = 49",
+      "Producte: 8 × 49 = 392",
+      "Final: 392 − 2 = 390"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "jerarquia",
+    "category": "jerarquia",
+    "id": "jerarquia-2",
+    "type": 2,
+    "anchor": "",
+    "question": "Calcula pas a pas:<br><b style=\"font-family:'Courier New',monospace\">6 × 4² + (9 − 2) × 5</b>",
+    "guide": [
+      "Calcula la potència",
+      "Resol el parèntesi",
+      "Calcula el primer producte",
+      "Calcula el segon producte",
+      "Suma els dos productes"
+    ],
+    "solution": [
+      "Potència: 4² = 16",
+      "Parèntesi: 9 − 2 = 7",
+      "Productes: 6 × 16 = 96 i 7 × 5 = 35",
+      "Suma final: 96 + 35 = 131"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "jerarquia",
+    "category": "jerarquia",
+    "id": "jerarquia-3",
+    "type": 3,
+    "anchor": "",
+    "question": "Calcula pas a pas:<br><b style=\"font-family:'Courier New',monospace\">3 × (4² + 3 × 4) − 1 × 3</b>",
+    "guide": [
+      "Dins del parèntesi, calcula primer la potència",
+      "Dins del parèntesi, calcula també la multiplicació",
+      "Suma els resultats de dins del parèntesi",
+      "Multiplica el valor del parèntesi pel factor exterior",
+      "Calcula l'altre producte exterior",
+      "Fes la resta final"
+    ],
+    "solution": [
+      "Dins: 4² = 16 i 3 × 4 = 12",
+      "Parèntesi: 16 + 12 = 28",
+      "Fora: 3 × 28 = 84 i 1 × 3 = 3",
+      "Final: 84 − 3 = 81"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "jerarquia",
+    "category": "jerarquia",
+    "id": "jerarquia-4",
+    "type": 4,
+    "anchor": "",
+    "question": "En un joc s’aconsegueixen <b>6 lots</b>, cadascun amb <b>7 punts bàsics</b> i <b>2 punts extra</b>. Després es resta una penalització igual al quadrat de <b>6</b>. Escriu l’expressió amb parèntesis i potència i calcula la puntuació final.",
+    "guide": [
+      "Agrupa els punts de cada lot i representa la penalització com un quadrat",
+      "Multiplica els punts de cada lot pel nombre de lots",
+      "Calcula el quadrat de la penalització"
+    ],
+    "solution": [
+      "Punts per lot: 7 + 2 = 9.",
+      "Punts dels lots: 6 × 9 = 54.",
+      "Penalització: 6² = 36.",
+      "6 × (7 + 2) − 6² = 18."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "jerarquia",
+    "category": "jerarquia",
+    "id": "jerarquia-raonament",
+    "type": 1001,
+    "anchor": "",
+    "question": "A l'expressió 3 + 3 × 7 − 2, pots afegir parèntesis sense canviar l'ordre dels nombres ni els signes. Quin és el resultat estrictament positiu més petit que pots obtenir?",
+    "guide": [],
+    "solution": [
+      "Les cinc agrupacions completes donen: ((3+3)×7)−2 = 40; (3+(3×7))−2 = 22; (3+3)×(7−2) = 30; 3+((3×7)−2) = 22; 3+(3×(7−2)) = 18.",
+      "El mínim estrictament positiu és 18."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "divis",
+    "category": "divis",
+    "id": "divis-1",
+    "type": 1,
+    "anchor": "factoritzacio",
+    "question": "Descompon <b>86</b> en factors primers i escriu tots els seus divisors positius.",
+    "guide": [
+      "Divideix successivament per nombres primers"
+    ],
+    "solution": [
+      "86 / 2 = 43",
+      "43 (primer)",
+      "86 = 2 x 43",
+      "Divisors positius: 1, 2, 43, 86"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "divis",
+    "category": "divis",
+    "id": "divis-2",
+    "type": 2,
+    "anchor": "criteris",
+    "question": "Quin és el mínim enter no negatiu que cal sumar a <b>591</b> perquè sigui divisible per <b>10</b>?",
+    "guide": [
+      "Calcula el residu de la divisió"
+    ],
+    "solution": [
+      "Residu: 1",
+      "Cal sumar 10 − 1 = 9 per arribar a 600."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "divis",
+    "category": "divis",
+    "id": "divis-3",
+    "type": 3,
+    "anchor": "criteris",
+    "question": "Escriu totes les xifres que poden completar <b>33□</b> perquè sigui divisible per <b>3</b>.",
+    "guide": [
+      "Suma les dues xifres que ja coneixes"
+    ],
+    "solution": [
+      "Suma de les xifres fixes: 6",
+      "Provem les xifres de 0 a 9. La suma ha de ser múltiple de 3.",
+      "Xifres possibles: 0, 3, 6, 9"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "divis",
+    "category": "divis",
+    "id": "divis-4",
+    "type": 4,
+    "anchor": "primers",
+    "question": "El nombre <b>69</b> és primer o compost? Justifica-ho indicant quants divisors positius té.",
+    "guide": [
+      "Classifica el nombre a partir dels divisors positius"
+    ],
+    "solution": [
+      "Divisors positius de 69: 1, 3, 23, 69",
+      "69 té 4 divisors. És compost."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "divis",
+    "category": "divis",
+    "id": "divis-raonament",
+    "type": 1001,
+    "anchor": "",
+    "question": "Completa 7□□4 amb dues xifres (poden ser zero o repetir-se). El nombre ha de ser divisible per 9 i per 4, però no per 8. Quin és el nombre més petit que compleix totes les condicions?",
+    "guide": [],
+    "solution": [
+      "Els candidats que compleixen totes tres condicions són 7164, 7524, 7884.",
+      "S'han comprovat les dues xifres desconegudes de 00 a 99, mantenint les posicions fixes.",
+      "El més petit és 7164: és múltiple de 9 i de 4, però no de 8."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "mcmmcd",
+    "category": "mcmmcd",
+    "id": "mcmmcd-1",
+    "type": 1,
+    "anchor": "mcd-factors",
+    "question": "Calcula el MCD i el mcm de 16 i 32 utilitzant la factorització en nombres primers. A la resposta final escriu MCD; mcm, en aquest ordre.",
+    "guide": [
+      "Descompon el nombre en factors primers.",
+      "Descompon el nombre en factors primers."
+    ],
+    "solution": [
+      "16 = 2^4. 32 = 2^5.",
+      "MCD = 16. mcm = 32."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "mcmmcd",
+    "category": "mcmmcd",
+    "id": "mcmmcd-2",
+    "type": 2,
+    "anchor": "coincidencies",
+    "question": "Dues alarmes sonen alhora ara. Una sona cada 16 segons i l’altra cada 5 segons. Al cap de quants segons tornaran a sonar juntes per primera vegada?",
+    "guide": [
+      "Revisa la quantitat que es demana en aquest camp."
+    ],
+    "solution": [
+      "Els temps han de ser múltiples positius de 16 i de 5 perquè les alarmes han començat alhora.",
+      "mcm(16, 5) = 80 segons."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "mcmmcd",
+    "category": "mcmmcd",
+    "id": "mcmmcd-3",
+    "type": 3,
+    "anchor": "lots",
+    "question": "Tenim 90 llapis vermells i 108 de blaus. Volem fer el màxim nombre de lots idèntics sense sobrants. Cada lot ha de tenir tants vermells com qualsevol altre lot i tants blaus com qualsevol altre lot. Quants lots, quants vermells per lot i quants blaus per lot? Escriu els tres valors en aquest ordre i separats per punt i coma.",
+    "guide": [
+      "Revisa la quantitat que es demana en aquest camp.",
+      "Revisa la quantitat que es demana en aquest camp.",
+      "Revisa la quantitat que es demana en aquest camp."
+    ],
+    "solution": [
+      "El divisor comú més gran és MCD(90, 108) = 18.",
+      "Fem 18 lots. Cada lot té 90 ÷ 18 = 5 vermells i 108 ÷ 18 = 6 blaus."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "mcmmcd",
+    "category": "mcmmcd",
+    "id": "mcmmcd-4",
+    "type": 4,
+    "anchor": "talls",
+    "question": "Tenim una corda de 42 cm i una de 56 cm. Les tallem en trossos tan llargs com sigui possible, tots de la mateixa longitud i sense sobrants. Quants centímetres fa cada tros, quants trossos surten de la primera corda i quants de la segona? Escriu els tres valors en aquest ordre i separats per punt i coma.",
+    "guide": [
+      "Revisa la quantitat que es demana en aquest camp.",
+      "Revisa la quantitat que es demana en aquest camp.",
+      "Revisa la quantitat que es demana en aquest camp."
+    ],
+    "solution": [
+      "El divisor comú més gran és MCD(42, 56) = 14.",
+      "Cada tros fa 14 cm. Obtenim 42 ÷ 14 = 3 trossos de la primera corda i 56 ÷ 14 = 4 de la segona."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "mcmmcd",
+    "category": "mcmmcd",
+    "id": "mcmmcd-raonament",
+    "type": 1001,
+    "anchor": "coincidencies-desfasades",
+    "question": "El servei A surt per primer cop al minut 3 i després cada 6 minuts. El B surt per primer cop al minut 7 i després cada 8 minuts. Quin és el primer minut estrictament posterior al 44 en què surten alhora?",
+    "guide": [],
+    "solution": [
+      "A: 3, 9, 15, 21, 27, 33, 39, 45, 51, 57, 63.",
+      "B: 7, 15, 23, 31, 39, 47, 55, 63.",
+      "La primera coincidència posterior al minut 44 és al minut 63.",
+      "Si el minut 44 és una coincidència, també el descartem perquè el límit és estricte."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "enters",
+    "category": "enters",
+    "id": "enters-1",
+    "type": 1,
+    "anchor": "problemes",
+    "question": "A primera hora la temperatura és de <b>3 °C</b>. Al migdia puja <b>13 °C</b> i al vespre baixa <b>7 °C</b>. Quina temperatura fa al vespre?",
+    "guide": [
+      "Suma la pujada a la temperatura inicial",
+      "Resta la baixada a la temperatura del migdia"
+    ],
+    "solution": [
+      "Migdia: 3 + 13 = 16 °C",
+      "Vespre: 16 − 7 = 9 °C"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "enters",
+    "category": "enters",
+    "id": "enters-2",
+    "type": 2,
+    "anchor": "problemes",
+    "question": "Un compte té un saldo inicial de <b>14 €</b>. Rep un ingrés de <b>230 €</b> i després es fan dos pagaments de <b>84 €</b> i <b>30 €</b>. Quin és el saldo final?",
+    "guide": [
+      "Suma l'ingrés al saldo inicial",
+      "Resta el primer pagament",
+      "Resta també el segon pagament"
+    ],
+    "solution": [
+      "Després de l'ingrés: 14 + 230 = 244",
+      "Després del primer pagament: 244 − 84 = 160",
+      "Saldo final: 160 − 30 = 130 €"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "enters",
+    "category": "enters",
+    "id": "enters-3",
+    "type": 3,
+    "anchor": "distancia-enters",
+    "question": "Un mirador és a <b>+380 m</b> respecte del nivell del mar i una cova submarina és a <b>−142 m</b>. Quina diferència d'altitud hi ha entre tots dos punts?",
+    "guide": [
+      "Resta l'altitud negativa de l'altitud positiva"
+    ],
+    "solution": [
+      "Diferència: 380 − (−142) = 380 + 142 = 522 m"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "enters",
+    "category": "enters",
+    "id": "enters-4",
+    "type": 4,
+    "anchor": "problemes",
+    "question": "Un ascensor és a la planta <b>-2</b>. Puja <b>7 plantes</b>, baixa <b>3 plantes</b> i finalment puja <b>1 plantes</b>. A quina planta acaba?",
+    "guide": [
+      "Suma el primer desplaçament",
+      "Aplica la baixada com un desplaçament negatiu",
+      "Afegeix l'última pujada"
+    ],
+    "solution": [
+      "Primer: -2 + 7 = 5",
+      "Després: 5 − 3 = 2",
+      "Final: 2 + 1 = 3"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "enters",
+    "category": "enters",
+    "id": "enters-5",
+    "type": 5,
+    "anchor": "posicio-canvi",
+    "question": "Un submarinista és a <b>-23 m</b>. Puja <b>3 m</b> i després baixa <b>8 m</b>. A quina profunditat acaba? Quin desplaçament net ha fet respecte del punt inicial?",
+    "guide": [
+      "Suma la pujada a la posició inicial",
+      "Resta la baixada a la posició anterior",
+      "Resta la posició inicial a la posició final"
+    ],
+    "solution": [
+      "Després de pujar: -23 + 3 = -20",
+      "Final: -20 − 8 = -28",
+      "Canvi net: -28 − (-23) = -5 m"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "enters",
+    "category": "enters",
+    "id": "enters-raonament",
+    "type": 1001,
+    "anchor": "",
+    "question": "Comences a 2 en una recta numèrica. Has d'aplicar els tres moviments +3, +12 i -12, una vegada cadascun, en l'ordre que triïs. Després de CADA moviment, la posició ha de quedar entre -4 i 17, inclosos. Quants ordres diferents són possibles?",
+    "guide": [],
+    "solution": [
+      "Els ordres admissibles són: +3, +12, -12; +12, +3, -12; +12, -12, +3.",
+      "S'han descartat els altres ordres perquè alguna posició intermèdia queda fora de [-4, 17].",
+      "Hi ha 3 ordres possibles."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "decimals",
+    "category": "decimals",
+    "id": "decimals-1",
+    "type": 1,
+    "anchor": "compra-canvi",
+    "question": "Compres productes de 1,26 €, 1,13 € i 1,58 €. Pagues 5,00 €. Quin canvi reps?",
+    "guide": [
+      "Suma els preus i resta el total de l’import lliurat."
+    ],
+    "solution": [
+      "Total: 1,26 + 1,13 + 1,58 = 3,97 €.",
+      "Canvi: 5,00 − 3,97 = 1,03 €."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "decimals",
+    "category": "decimals",
+    "id": "decimals-2",
+    "type": 2,
+    "anchor": "problemes",
+    "question": "Cada paquet pesa 4,64 kg. Quina massa tenen 9 paquets?",
+    "guide": [
+      "Multiplica la quantitat per unitat pel nombre d’unitats."
+    ],
+    "solution": [
+      "Multiplica la quantitat per unitat pel nombre d’unitats: 4,64 × 9 = 41,76."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "decimals",
+    "category": "decimals",
+    "id": "decimals-3",
+    "type": 3,
+    "anchor": "divisio-unitaria",
+    "question": "10 llibretes iguals costen 20,30 €. Quant val cada llibreta?",
+    "guide": [
+      "Divideix el preu total pel nombre de llibretes."
+    ],
+    "solution": [
+      "Divideix el total pel nombre de llibretes: 20,30 ÷ 10 = 2,03 €.",
+      "Comprova: 2,03 × 10 = 20,30 €."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "decimals",
+    "category": "decimals",
+    "id": "decimals-4",
+    "type": 4,
+    "anchor": "repartiment-residu",
+    "question": "Una corda de 17,6 m es talla en trossos de 1,6 m. Quants trossos complets obtens i quants metres sobren?",
+    "guide": [
+      "Passa les longituds a dècimes de metre; calcula el quocient enter i el residu.",
+      "Passa les longituds a dècimes de metre; calcula el quocient enter i el residu."
+    ],
+    "solution": [
+      "Treballa en dècimes de metre: 176 = 16 × 11 + 0.",
+      "Obtens 11 trossos i sobren 0,0 m.",
+      "Comprovació: 17,6 = 11 × 1,6 + 0,0; 0 ≤ 0,0 < 1,6."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "decimals",
+    "category": "decimals",
+    "id": "decimals-5",
+    "type": 5,
+    "anchor": "mitjana-decimal",
+    "question": "Les notes són 4,1; 6,3; 9,7; 7,8. Calcula la mitjana exacta.",
+    "guide": [
+      "Suma les quatre notes i divideix per quatre. Arrodoneix només si es demana."
+    ],
+    "solution": [
+      "Suma: 27,9.",
+      "Mitjana exacta: 27,9 ÷ 4 = 6,975.",
+      "Conserva el valor exacte, sense arrodonir."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "decimals",
+    "category": "decimals",
+    "id": "decimals-6",
+    "type": 6,
+    "anchor": "error-absolut",
+    "question": "El valor exacte és 5,16 m i l’aproximació és 5,20 m. Quin és l’error absolut en metres?",
+    "guide": [
+      "Calcula la distància entre el valor exacte i l’aproximat."
+    ],
+    "solution": [
+      "Error absolut = |5,16 − 5,20| = 0,04 m.",
+      "Si els valors coincideixen, l’error és zero."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "decimals",
+    "category": "decimals",
+    "id": "decimals-raonament",
+    "type": 1001,
+    "anchor": "garanties-volum",
+    "question": "Cada ampolla conté 0,40 L, amb error absolut com a màxim 0,04 L. El contingut de cada ampolla pot ser qualsevol valor dins d'aquest marge. Vols abocar-les SENCERES en un dipòsit de 2,92 L i garantir almenys 1,99 L sense que mai vessi. Quin és el nombre mínim d'ampolles que ho garanteix? Respon 0 si no n'hi ha cap.",
+    "guide": [],
+    "solution": [
+      "Cada ampolla pot contenir entre 0,36 i 0,44 L.",
+      "Per garantir la quantitat calen com a mínim 6 ampolles.",
+      "Per no vessar se'n poden abocar com a màxim 6.",
+      "El mínim compatible és 6."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "fraccions",
+    "category": "fraccions",
+    "id": "fraccions-1",
+    "type": 1,
+    "anchor": "parts-disjuntes",
+    "question": "De 720 llibres, 7/8 són novel·les i 1/8 són còmics, sense superposició. Quina fracció representen junts i quants llibres són?",
+    "guide": [
+      "Suma les parts i aplica la fracció al total.",
+      "Suma les parts i aplica la fracció al total."
+    ],
+    "solution": [
+      "Les parts són disjuntes: 7/8 + 1/8 = 56/64 + 8/64 = 1/1.",
+      "Quantitat: 720 × 64/64 = 720."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "fraccions",
+    "category": "fraccions",
+    "id": "fraccions-2",
+    "type": 2,
+    "anchor": "parts-disjuntes",
+    "question": "De 784 alumnes, 1/7 practiquen futbol i 5/8 bàsquet; ningú practica tots dos esports. Quina fracció i quants alumnes practiquen algun esport?",
+    "guide": [
+      "Suma les parts i aplica la fracció al total.",
+      "Suma les parts i aplica la fracció al total."
+    ],
+    "solution": [
+      "Les parts són disjuntes: 1/7 + 5/8 = 8/56 + 35/56 = 43/56.",
+      "Quantitat: 784 × 43/56 = 602."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "fraccions",
+    "category": "fraccions",
+    "id": "fraccions-3",
+    "type": 3,
+    "anchor": "fraccio-fraccio",
+    "question": "Es destina a regar 4/5 de 4/9 d'un dipòsit de 180 litres. Quina fracció del dipòsit inicial i quants litres es destinen a regar?",
+    "guide": [
+      "Multiplica les fraccions abans d’aplicar-les al total.",
+      "Multiplica les fraccions abans d’aplicar-les al total."
+    ],
+    "solution": [
+      "Una fracció d'una fracció és un producte: 4/5 × 4/9 = 16/45.",
+      "Litres: 180 × 16/45 = 64."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "fraccions",
+    "category": "fraccions",
+    "id": "fraccions-4",
+    "type": 4,
+    "anchor": "retirades-successives",
+    "question": "Hi ha 90 unitats. Se'n ven 3/5 i després es regala 5/6 de les que queden. Quantes en resten?",
+    "guide": [],
+    "solution": [
+      "Després de vendre: 90 × 2/5 = 36.",
+      "La segona fracció s'aplica a aquest restant: regalem 30.",
+      "Queden 36 − 30 = 6."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "fraccions",
+    "category": "fraccions",
+    "id": "fraccions-5",
+    "type": 5,
+    "anchor": "reconstruir-total",
+    "question": "1/3 del total són 8 alumnes. Quants alumnes hi ha en total?",
+    "guide": [],
+    "solution": [
+      "Una part val 8 ÷ 1 = 8.",
+      "El total conté 3 parts: 8 × 3 = 24."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "fraccions",
+    "category": "fraccions",
+    "id": "fraccions-6",
+    "type": 6,
+    "anchor": "complement-divers",
+    "question": "D'un pressupost de 336 € es gasta 3/8 en material i 1/8 en transport. Quina fracció i quants euros queden?",
+    "guide": [
+      "Suma les parts gastades, resta-les de la unitat i calcula la quantitat.",
+      "Suma les parts gastades, resta-les de la unitat i calcula la quantitat."
+    ],
+    "solution": [
+      "Gastat: 3/8 + 1/8 = 1/2.",
+      "Restant: 1 − 4/8 = 1/2.",
+      "Euros: 336 × 4/8 = 168."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "fraccions",
+    "category": "fraccions",
+    "id": "fraccions-7",
+    "type": 7,
+    "anchor": "comparacio-diferencia",
+    "question": "La Laia ha llegit 3/9 del seu llibre i en Marc 3/4. Qui n'ha llegit una fracció més gran? Quina és la diferència entre fraccions?",
+    "guide": [
+      "Compara primer; després resta la fracció menor de la major.",
+      "Compara primer; després resta la fracció menor de la major."
+    ],
+    "solution": [
+      "Productes creuats: 12 i 27; la fracció més gran és la de Marc.",
+      "Resta la menor de la major: 15/36 = 5/12."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "fraccions",
+    "category": "fraccions",
+    "id": "fraccions-raonament",
+    "type": 1001,
+    "anchor": "reconstruccio-successiva",
+    "question": "Una botiga ven 2/4 de les unitats que tenia. Després regala 3/6 de les que quedaven i finalment en retira 17 per a una exposició. Al final en queden 19. Quantes unitats tenia inicialment?",
+    "guide": [],
+    "solution": [
+      "Abans de retirar-ne 17, quedaven 19 + 17 = 36.",
+      "Aquesta quantitat és 3/6 de la que hi havia abans de regalar: 36 ÷ 3 × 6 = 72.",
+      "Això és 2/4 del total inicial: 72 ÷ 2 × 4 = 144.",
+      "Comprovació: es venen 72, es regalen 36 i se'n retiren 17; queden 19."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "proporcionalitat",
+    "category": "proporcionalitat",
+    "id": "proporcionalitat-1",
+    "type": 1,
+    "anchor": "unitari",
+    "question": "<b>3 entrades</b> per a una activitat costen <b>21 €</b>. Si totes tenen el mateix preu, quant costaran <b>11 entrades</b>?",
+    "guide": [
+      "Troba primer el preu d'una entrada",
+      "Multiplica el preu unitari pel nou nombre d'entrades"
+    ],
+    "solution": [
+      "Preu unitari: 21 ÷ 3 = 7 €",
+      "Nou cost: 7 × 11 = 77 €"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "proporcionalitat",
+    "category": "proporcionalitat",
+    "id": "proporcionalitat-2",
+    "type": 2,
+    "anchor": "unitari",
+    "question": "Una recepta per a <b>3 persones</b> necessita <b>240 g de farina</b>. Quanta farina cal per a <b>6 persones</b> mantenint la mateixa proporció?",
+    "guide": [
+      "Divideix la quantitat inicial entre el nombre inicial de persones",
+      "Multiplica la quantitat per persona pel nou nombre de persones"
+    ],
+    "solution": [
+      "Per persona: 240 ÷ 3 = 80 g",
+      "Per 6 persones: 80 × 6 = 480 g"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "proporcionalitat",
+    "category": "proporcionalitat",
+    "id": "proporcionalitat-3",
+    "type": 3,
+    "anchor": "unitari",
+    "question": "Una màquina fabrica <b>87 peces en 3 hores</b> a ritme constant. Quantes peces fabricarà en <b>9 hores</b>?",
+    "guide": [
+      "Calcula quantes peces fabrica en una hora",
+      "Multiplica el ritme per les hores noves"
+    ],
+    "solution": [
+      "Ritme: 87 ÷ 3 = 29 peces/h",
+      "Producció: 29 × 9 = 261 peces"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "proporcionalitat",
+    "category": "proporcionalitat",
+    "id": "proporcionalitat-4",
+    "type": 4,
+    "anchor": "unitari",
+    "question": "Per recórrer <b>6 km</b>, un vehicle de joguina consumeix <b>30 unitats de bateria</b>. Si el consum és directament proporcional a la distància, quants quilòmetres podrà recórrer amb <b>50 unitats</b>?",
+    "guide": [
+      "Calcula el consum corresponent a un quilòmetre",
+      "Divideix la bateria disponible pel consum per quilòmetre"
+    ],
+    "solution": [
+      "Consum per km: 30 ÷ 6 = 5",
+      "Distància: 50 ÷ 5 = 10 km"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "proporcionalitat",
+    "category": "proporcionalitat",
+    "id": "proporcionalitat-5",
+    "type": 5,
+    "anchor": "tarifes-i-constant",
+    "question": "Un servei cobra <b>5 € fixos</b> més <b>1 € per quilòmetre</b>. Per 5 km costa 10 € i per 6 km costa 11 €. El cost és directament proporcional als quilòmetres?",
+    "guide": [
+      "En una proporcionalitat directa, el quocient cost/distància ha de ser constant i, si la distància és 0, el cost també ha de ser 0"
+    ],
+    "solution": [
+      "No és proporcionalitat directa perquè hi ha una quota fixa de 5 €",
+      "Amb 0 km el cost seria 5 €, no 0 €"
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "proporcionalitat",
+    "category": "proporcionalitat",
+    "id": "proporcionalitat-raonament",
+    "type": 1001,
+    "anchor": "produccio-pressupost",
+    "question": "A ritme constant, la màquina A fabrica 22 peces en 2 hores i la B, 54 peces en 3 hores. Fer funcionar A costa 6 €/h i B costa 12 €/h. Pots utilitzar A fins a 2 hores i B fins a 2, sempre hores senceres (també 0). Amb 34 € de pressupost total, quantes peces pots fabricar com a màxim?",
+    "guide": [],
+    "solution": [
+      "Ritmes: A = 22 ÷ 2 = 11 peces/h; B = 54 ÷ 3 = 18 peces/h.",
+      "Per a cada nombre d'hores B entre 0 i 2, prova les hores A entre 0 i 2 que no superin 34 €.",
+      "Combinacions admissibles (hores A, hores B → cost; peces): (0, 0) → 0 €; 0 peces | (0, 1) → 12 €; 18 peces | (0, 2) → 24 €; 36 peces | (1, 0) → 6 €; 11 peces | (1, 1) → 18 €; 29 peces | (1, 2) → 30 €; 47 peces | (2, 0) → 12 €; 22 peces | (2, 1) → 24 €; 40 peces. S’han recorregut tots els enters dins dels límits; la resta supera el pressupost.",
+      "Una combinació òptima és A: 1 h i B: 2 h, amb cost 30 €.",
+      "Producció màxima: 1 × 11 + 2 × 18 = 47 peces."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "percentatges",
+    "category": "pct",
+    "id": "percentatges-1",
+    "type": 1,
+    "anchor": "augments",
+    "question": "Un article costa 300 € i té un descompte del 25%. Quin és el preu final?",
+    "guide": [],
+    "solution": [
+      "La base és el preu inicial: 300 €.",
+      "Descompte: 300 × 0,25 = 75,00 €.",
+      "Preu final: 300 − 75,00 = 225,00 €."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "percentatges",
+    "category": "pct",
+    "id": "percentatges-2",
+    "type": 2,
+    "anchor": "variacio-i-complement",
+    "question": "Un club passa de 160 a 192 socis. Quin percentatge ha augmentat?",
+    "guide": [],
+    "solution": [
+      "La base és el nombre INICIAL de socis: 160.",
+      "Augment: 192 − 160 = 32.",
+      "32 ÷ 160 × 100 = 20% de creixement."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "percentatges",
+    "category": "pct",
+    "id": "percentatges-3",
+    "type": 3,
+    "anchor": "percentatges-successius",
+    "question": "Un preu de 300 € baixa un 10% i després baixa un 25%. Quin és el preu final?",
+    "guide": [],
+    "solution": [
+      "Base inicial: 300 €.",
+      "300 × 0,9 = 270,00 €.",
+      "La segona base és 270,00 €, no 300 €.",
+      "Descompte: 270,00 × 0,25 = 67,50 €.",
+      "Preu final: 270,00 − 67,50 = 202,50 €."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "percentatges",
+    "category": "pct",
+    "id": "percentatges-4",
+    "type": 4,
+    "anchor": "variacio-i-complement",
+    "question": "En una enquesta de 800 persones, cadascuna tria exactament una opció: A (40%), B (20%) o C (la resta). Quantes trien C?",
+    "guide": [],
+    "solution": [
+      "Les categories són excloents i cobreixen tot el grup, base 800 persones.",
+      "Percentatge C: 100 − 40 − 20 = 40%.",
+      "800 × 0,4 = 320 persones."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "percentatges",
+    "category": "pct",
+    "id": "percentatges-5",
+    "type": 5,
+    "anchor": "calcular-pct",
+    "question": "El 5% d'un grup són 125 persones. Quantes persones hi ha en total?",
+    "guide": [],
+    "solution": [
+      "La part coneguda és 125; el percentatge conegut és 5%; el total és desconegut.",
+      "5% = 0,05.",
+      "Valor de l'1%: 125 ÷ 5 = 25. El 100% és 25 × 100 = 2500.",
+      "Total = 125 ÷ 0,05 = 2500 persones.",
+      "Comprovació: 5% de 2500 = 125."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "percentatges",
+    "category": "pct",
+    "id": "percentatges-6",
+    "type": 6,
+    "anchor": "calcular-pct",
+    "question": "En un grup de 540 persones, 27 han triat teatre. Quin percentatge del total representen?",
+    "guide": [],
+    "solution": [
+      "El total, 540 persones, és la base del 100%.",
+      "27 ÷ 540 × 100 = 5%.",
+      "La quantitat absoluta és 27 persones; el percentatge és 5%."
+    ]
+  },
+  {
+    "source": "problemes",
+    "topic": "percentatges",
+    "category": "pct",
+    "id": "percentatges-raonament",
+    "type": 1001,
+    "anchor": "llindar-ofertes",
+    "question": "Un article té un preu inicial enter d'euros, igual a totes dues botigues. A aplica un descompte del 30%. B aplica un descompte del 5% i després resta un val de 12 €. Quin és el preu inicial enter més petit perquè A sigui ESTRICTAMENT més barata que B? No arrodoneixis els preus intermedis.",
+    "guide": [],
+    "solution": [
+      "La base comuna és el preu inicial desconegut x.",
+      "La diferència de descomptes és 25% de x. A guanya quan 25% de x > 12 €.",
+      "Llindar d'igualtat: 12 ÷ 0,25 = 48 €.",
+      "El menor enter estrictament superior és 49.",
+      "Amb 49 €: A = 34,30 €, B = 34,55 €; A < B.",
+      "Amb 48 €: A = 33,60 €, B = 33,60 €; A ≥ B. No s'han arrodonit imports intermedis."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "naturals",
+    "id": "naturals:ext-inversa-divisio",
+    "type": "inversa-divisio",
+    "question": "En una divisió de nombres naturals, el divisor és 13, el quocient és 52 i el residu és 4. Troba el dividend i comprova que el residu és admissible.",
+    "solution": [
+      "Dividend = divisor × quocient + residu.",
+      "13 × 52 + 4 = 680",
+      "0 < 4 < 13; les dades són compatibles."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "naturals",
+    "id": "naturals:ext-interval-arrodoniment",
+    "type": "interval-arrodoniment",
+    "question": "Quins són el menor i el major nombre natural que, arrodonits a la unitat 100, donen 3200? En els empats s’arrodoneix cap amunt. Justifica els dos límits.",
+    "solution": [
+      "3150 és el primer enter que arriba a 3200 per arrodoniment.",
+      "3250 ja s’arrodoneix al múltiple superior.",
+      "Per tant, l’interval enter és de 3150 a 3249, inclosos."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "naturals",
+    "id": "naturals:ext-error-ordenacio",
+    "type": "error-ordenacio",
+    "question": "Un alumne escriu 2300 < 2381 < 2338. Identifica la comparació incorrecta i escriu l’ordenació correcta.",
+    "solution": [
+      "2381 és més gran que 2338; la segona comparació és falsa.",
+      "L’ordenació correcta és 2300 < 2338 < 2381."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "naturals",
+    "id": "naturals:ext-estrategia-producte",
+    "type": "estrategia-producte",
+    "question": "Explica per què 22 × 12 es pot calcular com 22 × 10 + 22 × 2, i utilitza aquesta estratègia per trobar el resultat.",
+    "solution": [
+      "12 = 10 + 2.",
+      "La propietat distributiva permet repartir el producte entre els dos sumands.",
+      "220 + 44 = 264"
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "decimal_sys",
+    "id": "decimal_sys:ext-xifra-desconeguda",
+    "type": "xifra-desconeguda",
+    "question": "Troba la xifra □: 3 × 1000 + □ × 100 + 7 = 3507. Explica com l’has identificada.",
+    "solution": [
+      "La part coneguda val 3007.",
+      "3507 − 3007 = 500",
+      "500 ÷ 100 = 5; és una xifra vàlida."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "decimal_sys",
+    "id": "decimal_sys:ext-intercanvi-invers",
+    "type": "intercanvi-invers",
+    "question": "Un nombre té dues xifres que sumen 10. En intercanviar-les, el nombre augmenta 36. Troba el nombre inicial i justifica que és únic.",
+    "solution": [
+      "L’augment és nou vegades la diferència entre la xifra de les unitats i la de les desenes.",
+      "La diferència de les xifres és 36 ÷ 9 = 4.",
+      "Amb suma 10 i diferència 4, les xifres són 3 i 7.",
+      "Nombre inicial: 37; comprovació: 73 − 37 = 36."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "decimal_sys",
+    "id": "decimal_sys:ext-error-zero-posicional",
+    "type": "error-zero-posicional",
+    "question": "Algú descompon 6041 com 6000 + 400 + 1. Explica l’error i escriu la suma posicional correcta.",
+    "solution": [
+      "El zero ocupa les centenes; la xifra 4 ocupa les desenes.",
+      "El terme 400 s’ha de substituir per 40.",
+      "6041 = 6000 + 40 + 1"
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "decimal_sys",
+    "id": "decimal_sys:ext-reagrupament",
+    "type": "reagrupament",
+    "question": "És certa la igualtat 7 centenes i 1 desenes = 6 centenes i 11 desenes? Justifica-ho mitjançant el valor posicional, sense limitar-te a dir sí o no.",
+    "solution": [
+      "Una centena equival a deu desenes.",
+      "7 × 100 + 1 × 10 = 710",
+      "6 × 100 + 11 × 10 = 710",
+      "S’ha canviat una centena per deu desenes; el valor es conserva."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "ops",
+    "id": "ops:ext-operand-invers",
+    "type": "operand-invers",
+    "question": "Troba □ en 15 × □ − 16 = 329. Explica en quin ordre desfàs les operacions.",
+    "solution": [
+      "Primer desfem la resta: 329 + 16 = 345.",
+      "Després desfem el producte: 345 ÷ 15 = 23.",
+      "Comprovació: 15 × 23 − 16 = 329."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "ops",
+    "id": "ops:ext-diagnostic-divisio",
+    "type": "diagnostic-divisio",
+    "question": "Un alumne afirma que 187 ÷ 4 és una divisió exacta de quocient 46. Comprova-ho, explica l’error i dona el quocient enter i el residu correctes.",
+    "solution": [
+      "4 × 46 = 184",
+      "187 − 184 = 3",
+      "El residu és positiu i menor que 4; la divisió no és exacta."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "ops",
+    "id": "ops:ext-comparar-ofertes",
+    "type": "comparar-ofertes",
+    "question": "Per comprar 4 articles, l’opció A cobra 9 € per article i 5 € de transport per tota la compra. L’opció B cobra 10 € per article sense transport. Compara els totals i decideix quina convé.",
+    "solution": [
+      "A: 4 × 9 + 5 = 41 €",
+      "B: 4 × 10 = 40 €",
+      "Cal comparar el cost complet, inclòs el transport; una igualtat significa que totes dues opcions costen el mateix."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "ops",
+    "id": "ops:ext-distributiva-error",
+    "type": "distributiva-error",
+    "question": "És correcte escriure 8 × (8 + 8) = 8 × 8 + 8? Detecta l’error i corregeix el segon membre perquè sigui equivalent al primer.",
+    "solution": [
+      "El factor 8 ha de multiplicar tots dos sumands.",
+      "El segon membre proposat val 72, però el primer val 128.",
+      "La forma correcta és 8 × 8 + 8 × 8 = 128."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "potencies",
+    "id": "potencies:ext-exponent-invers",
+    "type": "exponent-invers",
+    "question": "Troba l’exponent natural □ perquè 7^□ = 49. Justifica’l i explica per què no n’hi ha cap altre.",
+    "solution": [
+      "Les potències successives de 7 creixen estrictament perquè 7 > 1.",
+      "7^2 = 49",
+      "L’exponent és 2; el creixement garanteix la unicitat."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "potencies",
+    "id": "potencies:ext-error-potencia",
+    "type": "error-potencia",
+    "question": "Un alumne diu que 8^2 = 8 × 2. Explica què representa l’exponent i corregeix el resultat.",
+    "solution": [
+      "L’exponent indica quants factors iguals a la base es multipliquen.",
+      "8^2 = 8 × 8 = 64",
+      "8 × 2 = 16 és una altra operació."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "potencies",
+    "id": "potencies:ext-arrel-acotada",
+    "type": "arrel-acotada",
+    "question": "Sense calculadora, troba dos enters consecutius entre els quals es troba √22. Justifica també si l’arrel és exacta.",
+    "solution": [
+      "4^2 = 16",
+      "5^2 = 25",
+      "16 < 22 < 25; per tant, l’arrel queda estrictament entre 4 i 5."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "potencies",
+    "id": "potencies:ext-comparar-inverses",
+    "type": "comparar-inverses",
+    "question": "És certa la igualtat √(25 + 7) = 5 + √7? Justifica la resposta sense limitar-te a donar una aproximació decimal.",
+    "solution": [
+      "25 < 32 < 36; per tant, 5 < √32 < 6.",
+      "Com que 7 > 1, també √7 > 1 i 5 + √7 > 6.",
+      "El primer membre és menor que 6 i el segon és més gran; no poden ser iguals."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "jerarquia",
+    "id": "jerarquia:ext-escollir-parentesis",
+    "type": "escollir-parentesis",
+    "question": "Quina expressió dona 144: 12 × 3 + 9 o 12 × (3 + 9)? Explica el paper del parèntesi.",
+    "solution": [
+      "Sense parèntesi: 12 × 3 + 9 = 45",
+      "Amb parèntesi: 12 × (3 + 9) = 144",
+      "El parèntesi fa sumar abans de multiplicar."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "jerarquia",
+    "id": "jerarquia:ext-primer-error",
+    "type": "primer-error",
+    "question": "En calcular 2 + 4 × 9, algú suma primer 2 + 4 i obté finalment 54. Identifica el primer error i resol l’expressió correctament.",
+    "solution": [
+      "La multiplicació té prioritat sobre la suma.",
+      "4 × 9 = 36",
+      "2 + 36 = 38"
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "jerarquia",
+    "id": "jerarquia:ext-casella-inversa",
+    "type": "casella-inversa",
+    "question": "Troba □ en 4 × (□ + 6) = 44. Desfés les operacions i comprova la resposta.",
+    "solution": [
+      "44 ÷ 4 = 11",
+      "11 − 6 = 5",
+      "Comprovació: 4 × (5 + 6) = 44."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "jerarquia",
+    "id": "jerarquia:ext-equivalencia",
+    "type": "equivalencia",
+    "question": "Sense calcular separadament tots dos resultats, justifica si 6 × (2 + 6) i 6 × 2 + 6 × 6 són equivalents.",
+    "solution": [
+      "Per la propietat distributiva, el factor 6 multiplica tots dos sumands.",
+      "Totes dues expressions representen 6 grups de 8.",
+      "El valor comú és 48."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "divis",
+    "id": "divis:ext-xifra-divisible",
+    "type": "xifra-divisible",
+    "question": "Troba la xifra □ perquè el nombre 19□ sigui divisible per 3 i per 5 alhora. Explica per què no hi ha cap altra xifra possible.",
+    "solution": [
+      "La divisibilitat per 5 obliga que l’última xifra sigui 0 o 5.",
+      "Només la xifra 5 també fa que el nombre sigui divisible per 3.",
+      "195 ÷ 3 = 65; 195 ÷ 5 = 39."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "divis",
+    "id": "divis:ext-factor-compost",
+    "type": "factor-compost",
+    "question": "S’afirma que 196 = 28 × 7 ja és una descomposició en factors primers. Explica l’error i completa la factorització.",
+    "solution": [
+      "28 no és primer perquè 28 = 7 × 4, amb tots dos factors més grans que 1.",
+      "Cal continuar descomponent els factors compostos.",
+      "196 = 2² x 7²"
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "divis",
+    "id": "divis:ext-multiples-condicionats",
+    "type": "multiples-condicionats",
+    "question": "Troba tots els múltiples de 12 entre 192 i 216, inclosos, que no siguin divisibles per 13. Justifica que no en falta cap.",
+    "solution": [
+      "Els únics múltiples de 12 dins l’interval són 192; 204; 216.",
+      "En comprovem la divisibilitat per 13 i descartem els que tenen residu zero.",
+      "Resultat: 192; 204; 216."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "divis",
+    "id": "divis:ext-primer-contraexemple",
+    "type": "primer-contraexemple",
+    "question": "Algú afirma: «25 és primer perquè és senar». És suficient aquest argument? Dona una prova que decideixi aquest cas.",
+    "solution": [
+      "Ser senar no implica ser primer.",
+      "25 = 5 × 5",
+      "Com que 5 i 5 són més grans que 1, aquesta factorització demostra que és compost."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "mcmmcd",
+    "id": "mcmmcd:ext-mcd-error",
+    "type": "mcd-error",
+    "question": "Un alumne proposa MCD(114; 190) = 114. Comprova si el valor proposat divideix tots dos nombres i troba el MCD correcte.",
+    "solution": [
+      "190 no és múltiple de 114; la proposta no pot ser un divisor comú.",
+      "MCD(6; 10) = 2",
+      "114 = 19 × 6 i 190 = 19 × 10; el MCD és 19 × 2 = 38."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "mcmmcd",
+    "id": "mcmmcd:ext-mcd-invers",
+    "type": "mcd-invers",
+    "question": "Troba quin valor de b entre 75; 120; 135 compleix MCD(90; b) = 15. Justifica la tria comprovant els tres candidats.",
+    "solution": [
+      "MCD(90; 75) = 15",
+      "MCD(90; 120) = 30",
+      "MCD(90; 135) = 45",
+      "Només 75 compleix la condició."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "mcmmcd",
+    "id": "mcmmcd:ext-mcm-invers",
+    "type": "mcm-invers",
+    "question": "Troba quin valor de b entre 48; 72; 96 compleix mcm(72; b) = 144. Justifica la tria comprovant els tres candidats.",
+    "solution": [
+      "mcm(72; 48) = 144",
+      "mcm(72; 72) = 72",
+      "mcm(72; 96) = 288",
+      "Només 48 compleix la condició."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "mcmmcd",
+    "id": "mcmmcd:ext-coincidencies-interval",
+    "type": "coincidencies-interval",
+    "question": "Dues alarmes sonen cada 36 i 60 minuts. Ara sonen alhora. En quins minuts després d’ara, fins al minut 797 inclòs, tornaran a sonar juntes? No comptis la coincidència inicial.",
+    "solution": [
+      "El període de coincidència és mcm(36; 60) = 180 minuts.",
+      "Prenem els múltiples positius de 180 que no superen 797.",
+      "Coincidències: 180; 360; 540; 720 minuts; en total, 4."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "enters",
+    "id": "enters:ext-saldo-invers",
+    "type": "saldo-invers",
+    "question": "Després d’un ingrés de 16 € i d’una retirada de 29 €, el saldo és -20 €. Quin saldo hi havia inicialment? Explica com desfàs els dos moviments.",
+    "solution": [
+      "Desfem primer la retirada: -20 + 29 = 9.",
+      "Desfem l’ingrés: 9 − 16 = -7.",
+      "El saldo inicial era -7 €."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "enters",
+    "id": "enters:ext-error-resta-negatiu",
+    "type": "error-resta-negatiu",
+    "question": "Un alumne transforma 6 − (−12) en 6 − 12. Explica l’error i calcula el valor correcte.",
+    "solution": [
+      "Restar un nombre negatiu equival a sumar-ne l’oposat.",
+      "6 − (−12) = 6 + 12 = 18",
+      "La transformació proposada canviava el signe incorrectament."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "enters",
+    "id": "enters:ext-distancia-desplacament",
+    "type": "distancia-desplacament",
+    "question": "A la recta numèrica et desplaces de 22 a -9. Calcula la distància recorreguda i el desplaçament amb signe. Explica per què tenen signes diferents.",
+    "solution": [
+      "Distància = 22 − (-9) = 31; una distància no és negativa.",
+      "Desplaçament = -9 − 22 = -31.",
+      "El signe negatiu indica que el moviment és cap a l’esquerra."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "enters",
+    "id": "enters:ext-valor-absolut-condicio",
+    "type": "valor-absolut-condicio",
+    "question": "Troba tots els enters x que compleixen |x| = 17 i x < 9. Explica per què l’altra possibilitat queda descartada.",
+    "solution": [
+      "L’equació de valor absolut té les possibilitats 17 i -17.",
+      "17 no és menor que 9, però -17 sí.",
+      "L’única solució és -17."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "decimals",
+    "id": "decimals:ext-factor-invers",
+    "type": "factor-invers",
+    "question": "Troba el nombre decimal □ en 2.5 × □ = 7.5. Dona el valor exacte i comprova’l.",
+    "solution": [
+      "7.5 ÷ 2.5 = 3",
+      "Comprovació: 2.5 × 3 = 7.5.",
+      "No cal arrodonir: el quocient és decimal exacte."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "decimals",
+    "id": "decimals:ext-error-coma",
+    "type": "error-coma",
+    "question": "Un alumne obté 30.8 en multiplicar 2.2 × 1.4. Explica l’error de posició de la coma i corregeix el producte.",
+    "solution": [
+      "Cada factor s’ha dividit per 10 respecte de 22 i 14.",
+      "Per tant, el producte enter 308 s’ha de dividir per 100.",
+      "308 ÷ 100 = 3.08; el resultat proposat era deu vegades massa gran."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "decimals",
+    "id": "decimals:ext-interval-decimal",
+    "type": "interval-decimal",
+    "question": "Entre els decimals positius escrits amb tres xifres decimals, troba el menor i el major que s’arrodoneixen a 4.48 a les centèsimes. En els empats s’arrodoneix cap amunt.",
+    "solution": [
+      "El límit inferior inclòs és 4.475.",
+      "El nombre 4.485 ja s’arrodoneix a la centèsima següent.",
+      "Amb tres decimals, el major admissible és 4.484."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "decimals",
+    "id": "decimals:ext-comparar-costos",
+    "type": "comparar-costos",
+    "question": "Compra de 10 articles: A cobra 2.83 € per article i 1.47 € per tota la comanda; B cobra 3.13 € per article sense recàrrec. Calcula els dos totals exactes i decideix quina opció convé.",
+    "solution": [
+      "A: 10 × 2.83 + 1.47 = 29.77 €",
+      "B: 10 × 3.13 = 31.30 €",
+      "Comparem els totals sense arrodonir abans d’acabar."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "fraccions",
+    "id": "fraccions:ext-error-suma",
+    "type": "error-suma",
+    "question": "Algú escriu 3/7 + 2/10 = 5/17. Explica per què no es poden sumar així els denominadors i calcula la suma correcta.",
+    "solution": [
+      "Cal expressar les fraccions en parts de la mateixa mida.",
+      "3/7 = 30/70; 2/10 = 14/70",
+      "Sumem numeradors: 44/70 = 22/35."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "fraccions",
+    "id": "fraccions:ext-complement-invers",
+    "type": "complement-invers",
+    "question": "Troba la fracció □ en □ + 2/8 = 1. Dona-la simplificada i comprova la igualtat.",
+    "solution": [
+      "Escrivim 1 com 8/8.",
+      "La part desconeguda és 8/8 − 2/8 = 6/8.",
+      "Simplificant: 3/4; la suma amb 2/8 dona 1."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "fraccions",
+    "id": "fraccions:ext-comparar-creuats",
+    "type": "comparar-creuats",
+    "question": "Sense convertir a decimals, compara 3/5 i 4/6. Justifica si augmentar numerador i denominador en una unitat fa créixer aquesta fracció.",
+    "solution": [
+      "Productes creuats: 3 × 6 = 18 i 4 × 5 = 20.",
+      "El segon producte supera el primer en 2 > 0.",
+      "Per tant, en aquest cas la fracció augmenta."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "fraccions",
+    "id": "fraccions:ext-total-desconegut",
+    "type": "total-desconegut",
+    "question": "Després de gastar 3/7 d’una quantitat inicial, en queden 96 unitats. Troba la quantitat inicial i comprova-la.",
+    "solution": [
+      "La part que queda és 4/7 del total.",
+      "Una de les 7 parts val 96 ÷ 4 = 24 unitats.",
+      "El total és 24 × 7 = 168 unitats; se’n gasten 72 i en queden 96."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "proporcionalitat",
+    "id": "proporcionalitat:ext-comparar-models",
+    "type": "comparar-models",
+    "question": "Dos models relacionen una quantitat x amb el cost: A cobra 4 € per unitat; B cobra 4 € per unitat i una quota fixa de 11 €. Quin model és de proporcionalitat directa? Justifica-ho i compara els costos quan x = 6.",
+    "solution": [
+      "A conserva la raó cost/quantitat igual a 4.",
+      "En B, la quota fixa fa variar aquesta raó; duplicar la quantitat no duplica la quota.",
+      "Per x = 6: A = 24 € i B = 35 €."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "proporcionalitat",
+    "id": "proporcionalitat:ext-corregir-taula",
+    "type": "corregir-taula",
+    "question": "En una taula directament proporcional, les parelles 5 → 10 i 7 → 14 són correctes. La tercera és 14 → 35. Detecta i corregeix l’error justificant la constant.",
+    "solution": [
+      "10 ÷ 5 = 2; 14 ÷ 7 = 2.",
+      "La tercera imatge ha de ser 14 × 2 = 28.",
+      "El valor 35 no manté la mateixa raó."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "proporcionalitat",
+    "id": "proporcionalitat:ext-antecedent-invers",
+    "type": "antecedent-invers",
+    "question": "En una proporcionalitat directa, 3 correspon a 27. A quin valor inicial correspon 198? Explica com utilitzes la constant i comprova la resposta.",
+    "solution": [
+      "Constant: 27 ÷ 3 = 9.",
+      "Busquem l’antecedent: 198 ÷ 9 = 22.",
+      "Comprovació: 22 × 9 = 198."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "proporcionalitat",
+    "id": "proporcionalitat:ext-escollir-estrategia",
+    "type": "escollir-estrategia",
+    "question": "Una proporcionalitat directa associa 9 → 90. Per trobar la imatge de 36, l’Aina multiplica 90 per 4 i en Pau hi suma 27. Qui conserva la proporcionalitat? Justifica-ho i dona la imatge correcta.",
+    "solution": [
+      "El valor inicial s’ha multiplicat per 4; la imatge també s’ha de multiplicar per 4.",
+      "El procediment de l’Aina és correcte: 90 × 4 = 360.",
+      "El procediment d’en Pau donaria 117, que no conserva la raó 10."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "percentatges",
+    "id": "percentatges:ext-preu-invers",
+    "type": "preu-invers",
+    "question": "Després d’un descompte del 25 %, un article costa 225 €. Troba el preu inicial i comprova’l.",
+    "solution": [
+      "Es paga el 75 % del preu inicial.",
+      "225 ÷ 0.75 = 300 €",
+      "Comprovació: 300 − 75 = 225 €."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "percentatges",
+    "id": "percentatges:ext-canvis-successius",
+    "type": "canvis-successius",
+    "question": "Un preu de 1300 € augmenta un 10 % i després baixa un 10 %. Algú diu que torna al preu inicial. És cert? Calcula el resultat i explica sobre quina base s’aplica cada canvi.",
+    "solution": [
+      "Primer canvi: 1300 × 1.1 = 1430 €",
+      "La baixada es calcula sobre 1430, no sobre 1300.",
+      "Segon canvi: 1430 × 0.9 = 1287 €; les bases són diferents."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "percentatges",
+    "id": "percentatges:ext-comparar-bases",
+    "type": "comparar-bases",
+    "question": "Compara el 20 % de 380 amb el 20 % de 140. Pots decidir només comparant 20 i 20? Justifica la resposta utilitzant també les bases.",
+    "solution": [
+      "Primera quantitat: 380 × 20/100 = 76.",
+      "Segona quantitat: 140 × 20/100 = 28.",
+      "Cal tenir en compte tant els percentatges com les bases; la comparació és 76 > 28."
+    ]
+  },
+  {
+    "source": "fitxes",
+    "topic": "percentatges",
+    "id": "percentatges:ext-error-increment",
+    "type": "error-increment",
+    "question": "Per augmentar 400 € un 10 %, un alumne hi suma 10 € i obté 410 €. Explica l’error i calcula el nou import correcte.",
+    "solution": [
+      "El 10 % significa 10 de cada 100, no 10 euros fixos.",
+      "L’augment és 400 × 10/100 = 40 €.",
+      "Nou import: 400 + 40 = 440 €."
+    ]
+  }
+]

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
-<html lang="ca">
-<head>
+<html lang="ca"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Jerarquia i operacions combinades 1r ESO: teoria, exemples i exercicis | Mates Interactives</title>
@@ -25,78 +23,16 @@
  "inLanguage":"ca","isAccessibleForFree":true,"learningResourceType":"lesson","url":"https://srigual-png.github.io/mates-interactives/1eso/teoria/numeric/jerarquia-operacions-1r-eso.html"
 }
 </script>
-<style>
-:root{
-  --bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--pd:#3a6fd8;--ok:#34c97e;
-  --err:#e05c5c;--warn:#f5a623;--text:#2c3e50;--muted:#7f8c9a;
-  --border:#dce3ed;--sh:0 2px 12px rgba(0,0,0,.08);--soft:#eaf1fd;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:75px}
-body{font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
-a{color:inherit}
-.top-nav{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh);position:sticky;top:0;z-index:100}
-.nav-link{color:var(--muted);text-decoration:none;font-size:.83rem;font-weight:650;padding:5px 8px;border-radius:8px;white-space:nowrap}
-.nav-link:hover{background:var(--soft);color:var(--primary)}
-.nav-title{flex:1;min-width:0;font-size:1rem;font-weight:750;color:var(--primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.wrap{width:min(790px,calc(100% - 32px));margin:0 auto;padding:30px 0 54px}
-.hero{text-align:center;padding:10px 8px 22px}
-.eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:var(--primary);border-radius:999px;padding:5px 11px;font-size:.75rem;font-weight:750;margin-bottom:12px}
-.hero h1{font-size:clamp(1.7rem,4vw,2.25rem);color:var(--primary);line-height:1.15;margin-bottom:9px}
-.hero p{color:var(--muted);font-size:.96rem;max-width:660px;margin:0 auto}
-.hero-actions,.topic-actions{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:12px;padding:12px 20px;text-decoration:none;font-size:.91rem;font-weight:700;transition:.18s ease}
-.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--pd);transform:translateY(-1px)}
-.btn-secondary{background:var(--card);color:var(--primary);border:2px solid var(--primary)}.btn-secondary:hover{background:var(--soft)}
-.quick-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:4px 0 22px}
-.quick-nav a{text-decoration:none;text-align:center;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:10px 7px;color:var(--muted);font-size:.78rem;font-weight:700;box-shadow:0 1px 5px rgba(0,0,0,.04)}
-.quick-nav a:hover{border-color:var(--primary);color:var(--primary);background:var(--soft)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px;box-shadow:var(--sh)}
-.card h2{font-size:1.18rem;color:var(--primary);margin-bottom:10px;display:flex;align-items:center;gap:8px}
-.card h3{font-size:.96rem;margin:18px 0 7px}.card p+p{margin-top:9px}
-.major{border-top:4px solid var(--primary)}
-.callout{background:var(--soft);border-left:4px solid var(--primary);border-radius:10px;padding:13px 15px;margin:13px 0;font-size:.91rem}
-.example{background:#fbfcfe;border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:12px 0}
-.example-label{display:inline-block;font-size:.72rem;font-weight:800;color:var(--primary);background:var(--soft);border-radius:999px;padding:2px 9px;margin-bottom:7px}
-.math{font-family:'Courier New',monospace;font-weight:700;color:var(--pd);line-height:1.9;overflow-wrap:anywhere}
-.steps{counter-reset:pas;display:grid;gap:8px;margin-top:12px}
-.step{position:relative;padding:10px 12px 10px 42px;background:#fbfcfe;border:1px solid var(--border);border-radius:10px;font-size:.9rem}
-.step:before{counter-increment:pas;content:counter(pas);position:absolute;left:11px;top:9px;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--primary);color:#fff;font-size:.72rem;font-weight:800}
-.tip{background:#fffbea;border:1px solid #f5e0a0;border-radius:11px;padding:12px 14px;margin-top:13px;font-size:.88rem;color:#785800}
-.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.rule{border:1px solid var(--border);border-radius:12px;padding:13px;background:#fbfcfe;font-size:.88rem}
-.rule strong{display:block;color:var(--primary);margin-bottom:4px}
-.criteria{width:100%;border-collapse:separate;border-spacing:0;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:12px;font-size:.88rem}
-.criteria th,.criteria td{padding:9px 11px;border-bottom:1px solid var(--border);text-align:left}
-.criteria tr:last-child td{border-bottom:0}.criteria th{background:var(--soft);color:var(--primary)}
-.mistakes{background:#fff8f8;border:1px solid #f0b0b0}.mistakes h2{color:var(--err)}.mistakes ul{padding-left:20px}.mistakes li+li{margin-top:6px}
-.check details{border:1px solid var(--border);border-radius:11px;background:#fbfcfe;padding:12px 14px;margin-top:9px}
-.check summary{cursor:pointer;font-weight:650;color:var(--text)}
-.answer{margin-top:9px;padding-top:9px;border-top:1px solid var(--border);color:#1a7a4a;font-size:.9rem}
-.final-cta{background:linear-gradient(135deg,#edf3ff,#fff);border:1px solid #cad9f7;border-radius:18px;padding:24px;text-align:center;margin-top:20px}
-.final-cta h2{color:var(--primary);font-size:1.25rem;margin-bottom:6px}.final-cta p{color:var(--muted);font-size:.9rem;margin-bottom:15px}
-.footer{text-align:center;color:var(--muted);font-size:.76rem;padding:4px 0 25px}
-@media(max-width:650px){
-  .top-nav{padding:10px 10px;gap:4px}.nav-link{padding:5px 5px;font-size:.75rem}.nav-main-label,.sense-label{display:none}.nav-title{font-size:.86rem}
-  .wrap{width:min(100% - 20px,790px);padding-top:20px}.quick-nav{grid-template-columns:1fr 1fr}.card{padding:17px}.rule-grid{grid-template-columns:1fr}
-  .hero-actions,.topic-actions{flex-direction:column}.btn{width:100%}
-}
-</style>
-<style id="mi-theory-standard">
-/* Mates Interactives · patró mestre de teoria */
-.mi-theory-index{display:inline-flex!important;align-items:center;justify-content:center;gap:6px;text-decoration:none;font-weight:750}
-.summary-master{background:var(--card,#fff);border:1px solid var(--border,#dce3ed);border-left:5px solid var(--primary,#5b8dee);border-radius:15px;padding:18px 20px;margin:16px 0;box-shadow:var(--sh,0 2px 12px rgba(0,0,0,.08))}.summary-master h2{margin:0 0 8px;color:var(--primary,#5b8dee);font-size:1.15rem}.summary-master ul{padding-left:21px}.summary-master li{margin:5px 0}
-.pager-master{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:26px 0 8px}.pager-master a,.pager-master span{display:block;text-decoration:none;border:1px solid var(--border,#dce3ed);background:#fff;border-radius:10px;padding:9px 11px;font-size:.84rem;font-weight:700;color:var(--primary,#5b8dee)}.pager-master .prev{text-align:left}.pager-master .idx{text-align:center}.pager-master .next{text-align:right}.pager-master .disabled{color:var(--muted,#7f8c9a);opacity:.6}
-.extension-standard{display:inline-block;margin:6px 0 0;background:#fff3d6;color:#8a5d00;border:1px solid #efd48b;border-radius:999px;padding:4px 9px;font-size:.72rem;font-weight:800}
-@media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
-</style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
+
+<link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
+<link rel="stylesheet" href="../../../assets/css/teoria-numeric-1eso.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
 </head>
-<body>
+<body class="mi-theory-numeric-1eso">
 <nav aria-label="Navegació principal" class="top-nav">
-<a class="nav-link" href="../../../index.html">🏠 <span class="nav-main-label">Mates Interactives</span></a>
+<a class="nav-link" href="../../../index.html" aria-label="Portada de Mates Interactives">🏠 <span class="nav-main-label">Mates Interactives</span></a>
 <a class="nav-link" href="../../index.html">📘 1r ESO</a>
-<a class="nav-link" href="../../sentit-numeric.html">🔢 <span class="sense-label">Sentit Numèric</span></a>
+<a class="nav-link" href="../../sentit-numeric.html" aria-label="Sentit numèric">🔢 <span class="sense-label">Sentit Numèric</span></a>
 <a class="nav-link mi-theory-index" href="index.html">📚 Teoria</a><div class="nav-title">📐 Jerarquia de les operacions</div>
 </nav>
 <main class="wrap">
@@ -104,23 +40,21 @@ a{color:inherit}
 <div class="eyebrow">1r ESO · Sentit numèric</div>
 <h1>📐 Jerarquia de les operacions</h1>
 <p>Aprèn l'ordre de les operacions de 1r d'ESO: parèntesis, potències, multiplicacions, divisions, sumes i restes, amb exemples resolts i pràctica.</p>
-<div class="hero-actions">
-<a class="btn btn-primary" href="../../sentit-numeric.html?tema=jerarquia&amp;nivell=1">🟢 Practicar · Guiat</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html?tema=jerarquia&amp;nivell=2">🟠 Practicar · Autònom</a>
-<a class="btn btn-secondary" href="#ordre">📘 Comença la teoria</a>
-</div>
+<div class="hero-actions"><a class="btn btn-primary" href="../../sentit-numeric.html?tema=jerarquia&amp;nivell=1">Pràctica guiada</a><a class="btn btn-secondary" href="../../sentit-numeric.html?tema=jerarquia&amp;nivell=2">Pràctica autònoma</a><a class="btn btn-secondary" href="#ordre">Comença la teoria</a></div>
 </header>
-<nav aria-label="Continguts de la teoria" class="quick-nav">
-<a href="#ordre">1. Ordre</a>
-<a href="#multiplicacions">2. × i ÷</a>
-<a href="#potencies">3. Potències</a>
-<a href="#parentesis">4. Parèntesis</a>
-<a href="#combinades">5. Combinades</a>
-<a href="#problemes">6. Problemes</a>
-<a href="#errors-tipics">Errors típics</a>
-</nav>
+<nav class="quick-nav family-grid" aria-label="Continguts de la teoria"><a class="family-card" href="#ordre"><span class="family-card-title">L'ordre de les operacions</span><span class="family-card-caption">Fonaments i consulta complementària</span></a><a class="family-card" href="#multiplicacions"><span class="family-card-title">Multiplicacions abans que sumes i restes</span><span class="family-card-caption">Fonaments i consulta complementària</span></a><a class="family-card" href="#potencies" data-family="3"><span class="family-card-title">Potències dins d’una expressió</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#parentesis"><span class="family-card-title">Els parèntesis tenen prioritat</span><span class="family-card-caption">Fonaments i consulta complementària</span></a><a class="family-card" href="#combinades"><span class="family-card-title">Operacions combinades completes</span><span class="family-card-caption">Fonaments i consulta complementària</span></a><a class="family-card" href="#problemes" data-family="B4|jerarquia-4"><span class="family-card-title">Traduir un problema a una expressió</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-1" data-family="1|2"><span class="family-card-title">Combinar productes, sumes i restes</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-l01" data-family="L01"><span class="family-card-title">Operacions de la mateixa prioritat</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-f01" data-family="F01"><span class="family-card-title">Identificar la primera operació</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-4" data-family="4|5"><span class="family-card-title">Resoldre expressions amb parèntesis</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-6" data-family="6|B1|B2|B3|jerarquia-1|jerarquia-2|jerarquia-3"><span class="family-card-title">Combinar potències i agrupacions</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-8" data-family="8|9"><span class="family-card-title">Parèntesis dins de claudàtors</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-f02" data-family="F02"><span class="family-card-title">Escriure exactament el primer pas</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-f03" data-family="F03|jerarquia:ext-escollir-parentesis"><span class="family-card-title">Comparar l’efecte dels parèntesis</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-f07" data-family="F07"><span class="family-card-title">Trobar un signe desconegut</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-parentesis-resultat-positiu" data-family="parentesis-resultat-positiu|jerarquia-raonament"><span class="family-card-title">Minimitzar amb agrupacions</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-f06" data-family="F06"><span class="family-card-title">Construir una expressió amb restriccions</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-casella-inversa" data-family="jerarquia:ext-casella-inversa"><span class="family-card-title">Trobar un valor dins d’un parèntesi</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-jerarquia-equivalencia" data-family="jerarquia:ext-equivalencia"><span class="family-card-title">Justificar expressions equivalents</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#errors-tipics" data-family="F05|jerarquia:ext-primer-error"><span class="family-card-title">Localitzar el primer pas incorrecte</span><span class="family-card-caption">Procediment i exemple resolt</span></a></nav>
+
+
+
+
+
+
+
+
+
+
 <section class="card major" id="ordre">
-<h2>📐 1. L'ordre de les operacions</h2>
+<h2>1. L'ordre de les operacions</h2>
 <p>Quan en una expressió hi ha diverses operacions, <strong>no les podem fer en qualsevol ordre</strong>. Cal respectar la jerarquia.</p>
 <div class="steps">
 <div class="step"><strong>Parèntesis i claudàtors</strong>, de dins cap enfora.</div>
@@ -138,7 +72,7 @@ a{color:inherit}
 </div>
 </section>
 <section class="card" id="multiplicacions">
-<h2>✖️ 2. Multiplicacions abans que sumes i restes</h2>
+<h2>2. Multiplicacions abans que sumes i restes</h2>
 <div class="example"><span class="example-label">EXEMPLE RESOLT</span>
 <div class="math">4 + 3 × 5</div>
 <div class="math">4 + 15 = 19</div>
@@ -150,16 +84,16 @@ a{color:inherit}
 </div>
 </section>
 <section class="card" id="potencies">
-<h2>² 3. Les potències van abans</h2>
+<h2>3. Les potències van abans</h2>
 <p>Les potències es calculen abans que les multiplicacions, divisions, sumes i restes.</p>
 <div class="example"><span class="example-label">EXEMPLE</span>
 <div class="math">3 + 4² − 5</div>
 <div class="math">3 + 16 − 5 = 14</div>
 </div>
 <div class="tip">💡 <strong>4²</strong> vol dir 4×4, no 4×2.</div>
-</section>
+<p>Calcula primer les potències, després productes i divisions i finalment sumes i restes. Copia els altres termes a cada línia.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Calcula:<br><span class="fc">3 + 7² - 3 x 3</span></div><ol class="steps"><li class="step">Potència: 7²=49</li><li class="step">Multiplicació: 3x3=9</li><li class="step">Suma: 3+49=52</li><li class="step">Resta: 52-9=43</li></ol></div><p class="tip">Error habitual i comprovació: Elevar al quadrat no és multiplicar per dos.</p></section>
 <section class="card" id="parentesis">
-<h2>🟦 4. Els parèntesis tenen prioritat</h2>
+<h2>4. Els parèntesis tenen prioritat</h2>
 <p>Primer resol tot el que hi ha dins dels parèntesis. Després continua amb la resta de la jerarquia.</p>
 <div class="example"><span class="example-label">EXEMPLE</span>
 <div class="math">3 × (4 + 2) − 5</div>
@@ -195,7 +129,7 @@ a{color:inherit}
 </div>
 </section>
 <section class="card" id="combinades">
-<h2>🧠 5. Operacions combinades completes</h2>
+<h2>5. Operacions combinades completes</h2>
 <p>Quan hi apareix tot alhora, segueix la jerarquia sense saltar cap pas.</p>
 <div class="example"><span class="example-label">EXEMPLE RESOLT</span>
 <div class="math">2 × 3² − (4 + 1) + 6</div>
@@ -209,7 +143,7 @@ a{color:inherit}
 </div>
 </section>
 <section class="card" id="problemes">
-<h2>🛍️ 6. Del problema a l'operació combinada</h2>
+<h2>6. Del problema a l'operació combinada</h2>
 <p>En alguns problemes, els parèntesis permeten representar una quantitat que primer s'ha d'agrupar.</p>
 <div class="example"><span class="example-label">EXEMPLE</span>
 <p>Una entrada costa 8 €. En compren 3 persones d'un grup i 2 d'un altre. Fan un descompte final de 4 €.</p>
@@ -221,8 +155,8 @@ a{color:inherit}
 <div class="math">7 × (4 + 2) − 2² = 42 − 4 = 38</div>
 </div>
 </section>
-<section class="card mistakes" id="errors-tipics">
-<h2>⚠️ Errors típics</h2>
+<section class="card" id="familia-jerarquia-1"><h2>Combinar productes, sumes i restes</h2><p>Resol primer les multiplicacions i divisions. Després fes les sumes i restes d’esquerra a dreta, conservant els termes que encara no has calculat.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Calcula respectant la jerarquia:<br><span class="fc">8 + 9 x 5 - 3</span></div><ol class="steps"><li class="step">Pas 1: 9x5=45</li><li class="step">Pas 2: 8+45=53</li><li class="step">Pas 3: 53-3=50</li></ol></div><p class="tip">Error habitual i comprovació: No facis una suma abans d’un producte perquè apareix més a l’esquerra.</p></section><section class="card" id="familia-jerarquia-l01"><h2>Operacions de la mateixa prioritat</h2><p>Multiplicacions i divisions comparteixen prioritat: resol-les d’esquerra a dreta. Aplica la mateixa regla a sumes i restes.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Calcula d’esquerra a dreta.<br><span class="fc">54 ÷ 2 × 9</span></div><ol class="steps"><li class="step">54 ÷ 2 = 27.</li><li class="step">27 × 9 = 243.</li><li class="step">Amb una agrupació diferent, 54 ÷ (2 × 9) = 3.</li></ol></div><p class="tip">Error habitual i comprovació: No facis totes les multiplicacions abans de les divisions.</p></section><section class="card" id="familia-jerarquia-f01"><h2>Identificar la primera operació</h2><p>Busca primer l’agrupació més interior. Dins seu, o si no hi ha agrupacions, busca potències i després productes i divisions. Escriu només l’operació seleccionada.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Quina operació cal fer primer? Escriu-la sense resoldre-la.<br><span class="fc">5 + 7 × 6²</span></div><ol class="steps"><li class="step">Primer: 6² = 36.</li><li class="step">L’expressió queda 5 + 7 × 36.</li></ol></div><p class="tip">Error habitual i comprovació: Respecta la petició d’escriure una operació sense resoldre-la.</p></section><section class="card" id="familia-jerarquia-4"><h2>Resoldre expressions amb parèntesis</h2><p>Calcula tot l’interior de cada parèntesi segons la jerarquia. Substitueix-lo pel seu valor i continua amb les operacions exteriors.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Calcula:<br><span class="fc">2 x (2 + 5) - 3 x 3</span></div><ol class="steps"><li class="step">Parèntesi: 2+5=7</li><li class="step">Multiplicació 1: 2x7=14</li><li class="step">Multiplicació 2: 3x3=9</li><li class="step">Resta: 14-9=5</li></ol></div><p class="tip">Error habitual i comprovació: No eliminis parèntesis abans de resoldre’n el contingut.</p></section><section class="card" id="familia-jerarquia-6"><h2>Combinar potències i agrupacions</h2><p>Resol agrupacions interiors, potències, productes i divisions, i finalment sumes i restes. Escriu una expressió equivalent a cada línia.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Calcula:<br><span class="fc">2 x 4² - (5 + 5) x 2 + 3</span></div><ol class="steps"><li class="step">Potència: 4²=16</li><li class="step">Parèntesi: 5+5=10</li><li class="step">Multiplicació 1: 2x16=32</li><li class="step">Multiplicació 2: 10x2=20</li><li class="step">Resta: 32-20=12</li><li class="step">Suma final: 12+3=15</li></ol></div><p class="tip">Error habitual i comprovació: Cada línia ha de conservar tots els termes pendents i el mateix valor.</p></section><section class="card" id="familia-jerarquia-8"><h2>Parèntesis dins de claudàtors</h2><p>Comença pels parèntesis interiors; després resol la resta del claudàtor i, finalment, les operacions exteriors.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Calcula amb parèntesis i claudàtors:<br><span class="fc">6 x [6 + (2 + 2)] - 1</span></div><ol class="steps"><li class="step">Parèntesi interior: 2 + 2 = 4</li><li class="step">Claudàtor exterior: 6 + 4 = 10</li><li class="step">Multiplicació: 6 x 10 = 60</li><li class="step">Resta final: 60 - 1 = 59</li></ol></div><p class="tip">Error habitual i comprovació: Els claudàtors també agrupen; no es poden ignorar.</p></section><section class="card" id="familia-jerarquia-f02"><h2>Escriure exactament el primer pas</h2><p>Identifica l’operació prioritària i substitueix només aquesta pel seu resultat. Copia sense canvis totes les altres operacions.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Escriu l’expressió que queda després de fer exactament el primer pas.<br><span class="fc">4 + 2 × 5 − 4</span></div><ol class="steps"><li class="step">Primer: 2 × 5 = 10.</li><li class="step">L’expressió queda 4 + 10 − 4.</li></ol></div><p class="tip">Error habitual i comprovació: No resolguis l’expressió sencera si només es demana una transformació.</p></section><section class="card" id="familia-jerarquia-f03"><h2>Comparar l’efecte dels parèntesis</h2><p>Resol les dues expressions per separat i identifica quina operació passa a tenir prioritat per l’agrupació. Justifica el canvi encara que els resultats coincideixin accidentalment.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Compara les expressions i tria el motiu.<br><span class="fc">A: (4 + 3) × 8</span><br><span class="fc">B: 4 + 3 × 8</span><br><b>Motiu A:</b> Els parèntesis fan que es calculi una suma abans d’un producte.<br><b>Motiu B:</b> Els parèntesis mantenen el producte que ja tenia prioritat.</div><ol class="steps"><li class="step">A = 56. B = 28.</li><li class="step">Per tant, A &gt; B; A.</li></ol></div><p class="tip">Error habitual i comprovació: Uns parèntesis que només agrupen un producte prioritari poden no alterar el resultat.</p></section><section class="card" id="familia-jerarquia-f07"><h2>Trobar un signe desconegut</h2><p>Prova cada signe admès, resol tota l’expressió respectant la jerarquia i conserva els que donin el resultat indicat.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Quin signe falta? Escriu només el signe.<br><span class="fc">90 □ 5 × 2 = 900</span></div><ol class="steps"><li class="step">90 + 5 × 2 = 100.</li><li class="step">90 − 5 × 2 = 80.</li><li class="step">90 × 5 × 2 = 900.</li><li class="step">90 ÷ 5 × 2 = 36.</li></ol></div><p class="tip">Error habitual i comprovació: No calculis estrictament d’esquerra a dreta quan hi ha prioritats diferents.</p></section><section class="card" id="familia-jerarquia-parentesis-resultat-positiu"><h2>Minimitzar amb agrupacions</h2><p>Explora les agrupacions possibles sense canviar l’ordre de nombres ni signes. Calcula els resultats, descarta zero i negatius i compara els positius.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">A l'expressió 4 + 6 × 7 − 3, pots afegir parèntesis sense canviar l'ordre dels nombres ni els signes. Quin és el resultat estrictament positiu més petit que pots obtenir?</div><ol class="steps"><li class="step">Les cinc agrupacions completes donen: ((4+6)×7)−3 = 67; (4+(6×7))−3 = 43; (4+6)×(7−3) = 40; 4+((6×7)−3) = 43; 4+(6×(7−3)) = 28.</li><li class="step">El mínim estrictament positiu és 28.</li></ol></div><p class="tip">Error habitual i comprovació: Una agrupació vàlida no demostra el mínim: cal comparar totes les possibilitats.</p></section><section class="card" id="familia-jerarquia-f06"><h2>Construir una expressió amb restriccions</h2><p>Mantén l’ordre dels nombres, prova els ordres dels signes permesos i les agrupacions. Revisa els valors intermedis i descarta els que incompleixen les restriccions.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Usa els nombres <b>8, 4, 5, 4</b> una vegada cadascun i en aquest ordre. Usa +, − i × una vegada cadascun, en qualsevol ordre. Pots afegir parèntesis. Escriu una expressió que doni <b>68</b> sense resultats intermedis negatius.</div><ol class="steps"><li class="step">(8 × (4 + 5)) - 4 = 68.</li></ol></div><p class="tip">Error habitual i comprovació: Cada nombre i cada signe s’han d’utilitzar les vegades indicades.</p></section><section class="card" id="familia-jerarquia-casella-inversa"><h2>Trobar un valor dins d’un parèntesi</h2><p>Desfés primer l’operació exterior: divideix el resultat pel factor. Després desfés la suma interior restant el terme conegut.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Troba □ en 4 × (□ + 6) = 44. Desfés les operacions i comprova la resposta.</div><ol class="steps"><li class="step">44 ÷ 4 = 11</li><li class="step">11 − 6 = 5</li><li class="step">Comprovació: 4 × (5 + 6) = 44.</li></ol></div><p class="tip">Error habitual i comprovació: Verifica la resposta respectant els parèntesis de l’expressió original.</p></section><section class="card" id="familia-jerarquia-equivalencia"><h2>Justificar expressions equivalents</h2><p>Utilitza la distributiva per transformar a × (b + c) en a × b + a × c. Tots dos membres representen els mateixos grups.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Sense calcular separadament tots dos resultats, justifica si 6 × (2 + 6) i 6 × 2 + 6 × 6 són equivalents.</div><ol class="steps"><li class="step">Per la propietat distributiva, el factor 6 multiplica tots dos sumands.</li><li class="step">Totes dues expressions representen 6 grups de 8.</li><li class="step">El valor comú és 48.</li></ol></div><p class="tip">Error habitual i comprovació: Una coincidència numèrica aïllada no substitueix la justificació de la propietat.</p></section><section class="card mistakes" id="errors-tipics">
+<h2>Errors típics</h2>
 <ul>
 <li>Fer les operacions simplement d'esquerra a dreta sense mirar la prioritat.</li>
 <li>Sumar abans de multiplicar quan no hi ha parèntesis.</li>
@@ -250,16 +184,13 @@ a{color:inherit}
 <details><summary>3. Calcula 4 × (2 + 3) − 6.</summary><div class="answer"><strong>14</strong>. Primer 2+3=5; després 4×5−6=20−6.</div></details>
 <details><summary>4. Nivell difícil: calcula 2 × [3 × (4 + 2) + 2²] − 5.</summary><div class="answer"><strong>39</strong>. Parèntesi interior: 4+2=6. Dins del claudàtor: 2²=4, 3×6=18 i 18+4=22. Finalment: 2×22−5=44−5=39.</div></details>
 </section>
-<section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>L'ordre de les operacions</li><li>Multiplicacions abans que sumes i restes</li><li>Les potències van abans</li><li>Els parèntesis tenen prioritat</li><li>Operacions combinades completes</li></ul></section><section class="final-cta">
+<section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Resol primer parèntesis i claudàtors, de dins cap enfora; després, les potències.</li><li>Continua amb multiplicacions i divisions i acaba amb sumes i restes.</li><li>Les operacions del mateix nivell es fan d’esquerra a dreta.</li><li>Escriu un pas cada vegada i utilitza parèntesis per representar les agrupacions d’un problema.</li><li>Per reparar un càlcul, localitza el primer pas que incompleix la jerarquia.</li></ul></section>
+<section class="final-cta">
 <h2>Practica operacions combinades</h2>
 <p>Tria el nivell i aplica sempre el mateix ordre de resolució.</p>
-<div class="topic-actions">
-<a class="btn btn-primary" href="../../sentit-numeric.html?tema=jerarquia&amp;nivell=1">🟢 Practicar · Guiat</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html?tema=jerarquia&amp;nivell=2">🟠 Practicar · Autònom</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html">← Sentit Numèric</a>
-</div>
-</section>
-<nav aria-label="Navegació entre temes de teoria" class="pager-master"><a class="prev" href="potencies-arrels-1r-eso.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="divisibilitat-1r-eso.html">Tema següent →</a></nav></main>
+
+<div class="topic-actions"><a class="btn btn-primary" href="../../sentit-numeric.html?tema=jerarquia&amp;nivell=1">Pràctica guiada</a><a class="btn btn-secondary" href="../../sentit-numeric.html?tema=jerarquia&amp;nivell=2">Pràctica autònoma</a></div><a class="return-link" href="../../sentit-numeric.html">Torna al sentit numèric</a></section>
+<nav aria-label="Navegació entre temes de teoria" class="pager-master"><a class="prev" href="potencies-arrels-1r-eso.html">← Tema anterior</a><a class="idx" href="index.html">Índex de teoria</a><a class="next" href="divisibilitat-1r-eso.html">Tema següent →</a></nav></main>
 <footer class="mi-learning-footer">
   <p>Mates Interactives · Matemàtiques d’ESO · Teoria i exercicis gratuïts</p>
   <p><a href="../../../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
@@ -448,5 +379,6 @@ a{color:inherit}
   });
 })();
 </script>
+
 
 </body></html>

@@ -1,7 +1,5 @@
 <!DOCTYPE html>
-
-<html lang="ca">
-<head>
+<html lang="ca"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Sistema de numeració decimal 1r ESO | Mates Interactives</title>
@@ -31,304 +29,12 @@
   "learningResourceType": "lesson",
   "url": "https://srigual-png.github.io/mates-interactives/1eso/teoria/numeric/sistema-numeracio-decimal-1r-eso.html"
 }</script>
-<style>
-:root{
-  --bg:#f7f9fc;
-  --card:#fff;
-  --primary:#5b8dee;
-  --pd:#3a6fd8;
-  --ok:#34c97e;
-  --err:#e05c5c;
-  --warn:#f5a623;
-  --text:#2c3e50;
-  --muted:#7f8c9a;
-  --border:#dce3ed;
-  --sh:0 2px 12px rgba(0,0,0,.08);
-  --soft:#eaf1fd;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  min-height:100vh;
-  line-height:1.6;
-}
-a{color:inherit}
-.top-nav{
-  background:var(--card);
-  border-bottom:1px solid var(--border);
-  padding:12px 20px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  box-shadow:var(--sh);
-  position:sticky;
-  top:0;
-  z-index:100;
-}
-.nav-link{
-  color:var(--muted);
-  text-decoration:none;
-  font-size:.83rem;
-  font-weight:650;
-  padding:5px 8px;
-  border-radius:8px;
-  white-space:nowrap;
-}
-.nav-link:hover{background:var(--soft);color:var(--primary)}
-.nav-title{
-  flex:1;
-  min-width:0;
-  font-size:1rem;
-  font-weight:750;
-  color:var(--primary);
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-.wrap{
-  width:min(760px,calc(100% - 32px));
-  margin:0 auto;
-  padding:30px 0 54px;
-}
-.hero{text-align:center;padding:10px 8px 22px}
-.eyebrow{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  background:var(--soft);
-  color:var(--primary);
-  border-radius:999px;
-  padding:5px 11px;
-  font-size:.75rem;
-  font-weight:750;
-  margin-bottom:12px;
-}
-.hero h1{
-  font-size:clamp(1.7rem,4vw,2.25rem);
-  color:var(--primary);
-  line-height:1.15;
-  margin-bottom:9px;
-}
-.hero p{color:var(--muted);font-size:.96rem;max-width:620px;margin:0 auto}
-.hero-actions{
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  margin-top:18px;
-  flex-wrap:wrap;
-}
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  border-radius:12px;
-  padding:12px 20px;
-  text-decoration:none;
-  font-size:.91rem;
-  font-weight:700;
-  transition:.18s ease;
-}
-.btn-primary{background:var(--primary);color:#fff}
-.btn-primary:hover{background:var(--pd);transform:translateY(-1px)}
-.btn-secondary{background:var(--card);color:var(--primary);border:2px solid var(--primary)}
-.btn-secondary:hover{background:var(--soft)}
-.quick-nav{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:8px;
-  margin:4px 0 22px;
-}
-.quick-nav a{
-  text-decoration:none;
-  text-align:center;
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:11px;
-  padding:10px 7px;
-  color:var(--muted);
-  font-size:.78rem;
-  font-weight:700;
-  box-shadow:0 1px 5px rgba(0,0,0,.04);
-}
-.quick-nav a:hover{border-color:var(--primary);color:var(--primary);background:var(--soft)}
-.card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:22px;
-  margin-bottom:16px;
-  box-shadow:var(--sh);
-}
-.card h2{
-  font-size:1.18rem;
-  color:var(--primary);
-  margin-bottom:10px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.card h3{font-size:.96rem;margin:18px 0 7px}
-.card p + p{margin-top:9px}
-.callout{
-  background:var(--soft);
-  border-left:4px solid var(--primary);
-  border-radius:10px;
-  padding:13px 15px;
-  margin:13px 0;
-  font-size:.91rem;
-}
-.example{
-  background:#fbfcfe;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:14px 16px;
-  margin:12px 0;
-}
-.example-label{
-  display:inline-block;
-  font-size:.72rem;
-  font-weight:800;
-  color:var(--primary);
-  background:var(--soft);
-  border-radius:999px;
-  padding:2px 9px;
-  margin-bottom:7px;
-}
-.math{
-  font-family:'Courier New',monospace;
-  font-weight:700;
-  color:var(--pd);
-  line-height:1.8;
-}
-.steps{
-  counter-reset:pas;
-  display:grid;
-  gap:8px;
-  margin-top:12px;
-}
-.step{
-  position:relative;
-  padding:10px 12px 10px 42px;
-  background:#fbfcfe;
-  border:1px solid var(--border);
-  border-radius:10px;
-  font-size:.9rem;
-}
-.step:before{
-  counter-increment:pas;
-  content:counter(pas);
-  position:absolute;
-  left:11px;
-  top:9px;
-  width:22px;
-  height:22px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:var(--primary);
-  color:#fff;
-  font-size:.72rem;
-  font-weight:800;
-}
-.symbols{
-  width:100%;
-  border-collapse:separate;
-  border-spacing:0;
-  overflow:hidden;
-  border:1px solid var(--border);
-  border-radius:10px;
-  margin-top:12px;
-  font-size:.88rem;
-}
-.symbols th,.symbols td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left}
-.symbols tr:last-child td{border-bottom:0}
-.symbols th{background:var(--soft);color:var(--primary);font-weight:750}
-.symbols td:first-child{width:70px;text-align:center;font-size:1.1rem;font-weight:800;color:var(--pd)}
-.tip{
-  background:#fffbea;
-  border:1px solid #f5e0a0;
-  border-radius:11px;
-  padding:12px 14px;
-  margin-top:13px;
-  font-size:.88rem;
-  color:#785800;
-}
-.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.problem{
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:13px;
-  background:#fbfcfe;
-  font-size:.88rem;
-}
-.problem strong{display:block;color:var(--primary);margin-bottom:5px}
-.mistakes{
-  background:#fff8f8;
-  border:1px solid #f0b0b0;
-}
-.mistakes h2{color:var(--err)}
-.mistakes ul{padding-left:20px}
-.mistakes li+li{margin-top:6px}
-.check details{
-  border:1px solid var(--border);
-  border-radius:11px;
-  background:#fbfcfe;
-  padding:12px 14px;
-  margin-top:9px;
-}
-.check summary{cursor:pointer;font-weight:650;color:var(--text)}
-.answer{
-  margin-top:9px;
-  padding-top:9px;
-  border-top:1px solid var(--border);
-  color:#1a7a4a;
-  font-size:.9rem;
-}
-.final-cta{
-  background:linear-gradient(135deg,#edf3ff,#fff);
-  border:1px solid #cad9f7;
-  border-radius:18px;
-  padding:24px;
-  text-align:center;
-  margin-top:20px;
-}
-.final-cta h2{color:var(--primary);font-size:1.25rem;margin-bottom:6px}
-.final-cta p{color:var(--muted);font-size:.9rem;margin-bottom:15px}
-.final-cta .hero-actions{margin-top:0}
-.footer{
-  text-align:center;
-  color:var(--muted);
-  font-size:.76rem;
-  padding:4px 0 25px;
-}
-@media(max-width:650px){
-  .top-nav{padding:10px 10px;gap:4px}
-  .nav-link{padding:5px 5px;font-size:.75rem}
-  .nav-main-label,.sense-label{display:none}
-  .nav-title{font-size:.86rem}
-  .wrap{width:min(100% - 20px,760px);padding-top:20px}
-  .quick-nav{grid-template-columns:1fr 1fr}
-  .card{padding:17px}
-  .problem-grid{grid-template-columns:1fr}
-  .hero-actions{flex-direction:column}
-  .btn{width:100%}
-}
-</style>
-<style id="mi-theory-standard">
-/* Mates Interactives · patró mestre de teoria */
-.mi-theory-index{display:inline-flex!important;align-items:center;justify-content:center;gap:6px;text-decoration:none;font-weight:750}
-.summary-master{background:var(--card,#fff);border:1px solid var(--border,#dce3ed);border-left:5px solid var(--primary,#5b8dee);border-radius:15px;padding:18px 20px;margin:16px 0;box-shadow:var(--sh,0 2px 12px rgba(0,0,0,.08))}.summary-master h2{margin:0 0 8px;color:var(--primary,#5b8dee);font-size:1.15rem}.summary-master ul{padding-left:21px}.summary-master li{margin:5px 0}
-.pager-master{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:26px 0 8px}.pager-master a,.pager-master span{display:block;text-decoration:none;border:1px solid var(--border,#dce3ed);background:#fff;border-radius:10px;padding:9px 11px;font-size:.84rem;font-weight:700;color:var(--primary,#5b8dee)}.pager-master .prev{text-align:left}.pager-master .idx{text-align:center}.pager-master .next{text-align:right}.pager-master .disabled{color:var(--muted,#7f8c9a);opacity:.6}
-.extension-standard{display:inline-block;margin:6px 0 0;background:#fff3d6;color:#8a5d00;border:1px solid #efd48b;border-radius:999px;padding:4px 9px;font-size:.72rem;font-weight:800}
-@media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
-</style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
+
+<link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
+<link rel="stylesheet" href="../../../assets/css/teoria-numeric-1eso.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
 </head>
-<body>
+<body class="mi-theory-numeric-1eso">
 <nav aria-label="Navegació principal" class="top-nav">
 <a class="nav-link" href="../../../index.html" title="Inici de Mates Interactives">🏠 <span class="nav-main-label">Mates Interactives</span></a>
 <a class="nav-link" href="../../index.html" title="Matemàtiques de 1r ESO">📘 1r ESO</a>
@@ -340,21 +46,20 @@ a{color:inherit}
 <div class="eyebrow">1r ESO · Sentit numèric</div>
 <h1>🔻 Sistema de numeració decimal</h1>
 <p>Aprèn el valor posicional de les xifres, la lectura i la descomposició de nombres naturals.</p>
-<div class="hero-actions">
-<a class="btn btn-primary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=1">🟢 Practicar · Guiat</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=2">🟠 Practicar · Autònom</a>
-<a class="btn btn-secondary" href="#que-son">📘 Comença la teoria</a>
-</div>
+<div class="hero-actions"><a class="btn btn-primary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=1">Pràctica guiada</a><a class="btn btn-secondary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=2">Pràctica autònoma</a><a class="btn btn-secondary" href="#sistema-decimal">Comença la teoria</a></div>
 </header>
-<nav aria-label="Continguts de la teoria" class="quick-nav"><a href="#sistema-decimal">🔻 4. Sistema de numeració decimal</a></nav>
+<nav class="quick-nav family-grid" aria-label="Continguts de la teoria"><a class="family-card" href="#sistema-decimal"><span class="family-card-title">Sistema de numeració decimal</span><span class="family-card-caption">Fonaments i consulta complementària</span></a><a class="family-card" href="#exemple-sistema-decimal"><span class="family-card-title">Exemple resolt pas a pas</span><span class="family-card-caption">Fonaments i consulta complementària</span></a><a class="family-card" href="#familia-decimal_sys-1" data-family="1|4"><span class="family-card-title">Valor d’una xifra segons la posició</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-decimal_sys-2" data-family="2"><span class="family-card-title">Descompondre per ordres</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-decimal_sys-3" data-family="3"><span class="family-card-title">Reconstruir a partir de les posicions</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-decimal_sys-lectura-paraules-a-xifres" data-family="lectura-paraules-a-xifres"><span class="family-card-title">Passar de paraules a xifres</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-decimal_sys-1002" data-family="1002"><span class="family-card-title">Calcular un canvi posicional</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-decimal_sys-guionets-numerals-du-c" data-family="guionets-numerals-du-c"><span class="family-card-title">Escriure els guionets dels numerals</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-decimal_sys-descomposicio-equivalent-reagrupament" data-family="descomposicio-equivalent-reagrupament|decimal_sys:ext-reagrupament"><span class="family-card-title">Reagrupar ordres no canònics</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-decimal_sys-equivalencia-ordres-posicionals" data-family="equivalencia-ordres-posicionals"><span class="family-card-title">Convertir entre ordres</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-decimal_sys-1001" data-family="1001"><span class="family-card-title">Maximitzar un nombre parell amb xifres</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-decimal_sys-escriure-xifres-a-paraules" data-family="escriure-xifres-a-paraules"><span class="family-card-title">Escriure un nombre en català</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-decimal_sys-auditar-error-de-posicio" data-family="auditar-error-de-posicio|decimal_sys:ext-error-zero-posicional"><span class="family-card-title">Diagnosticar una descomposició incorrecta</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-decimal_sys-xifra-desconeguda" data-family="decimal_sys:ext-xifra-desconeguda"><span class="family-card-title">Reconstruir una xifra amb un valor posicional</span><span class="family-card-caption">Procediment i exemple resolt</span></a><a class="family-card" href="#familia-decimal_sys-intercanvi-invers" data-family="decimal_sys:ext-intercanvi-invers"><span class="family-card-title">Reconstruir un nombre amb xifres intercanviades</span><span class="family-card-caption">Procediment i exemple resolt</span></a></nav>
+
+
+
 <section class="card" id="sistema-decimal">
-<h2>🔻 4. Sistema de numeració decimal</h2>
+<h2>1. Sistema de numeració decimal</h2>
 <p>En el nostre sistema de numeració, el valor d'una xifra depèn de la <strong>posició</strong> que ocupa. Cada posició val deu vegades més que la que té a la seva dreta.</p>
 <div class="callout">
 <div class="math">345.678 = 3×100.000 + 4×10.000 + 5×1.000 + 6×100 + 7×10 + 8</div>
 </div>
 <h3>Posicions de les xifres</h3>
-<table aria-label="Valor posicional de les xifres" class="symbols">
+<div class="table-scroll" tabindex="0" role="region" aria-label="Taula 1 de 🔻 Sistema de numeració decimal"><table aria-label="Valor posicional de les xifres" class="symbols">
 <thead><tr><th>Posició</th><th>Valor</th><th>Exemple al nombre 345.678</th></tr></thead>
 <tbody>
 <tr><td>u</td><td>unitats</td><td>8 → 8</td></tr>
@@ -364,7 +69,7 @@ a{color:inherit}
 <tr><td>dm</td><td>desenes de miler</td><td>4 → 40.000</td></tr>
 <tr><td>cm</td><td>centenes de miler</td><td>3 → 300.000</td></tr>
 </tbody>
-</table>
+</table></div>
 <div class="example">
 <span class="example-label">EXEMPLE · VALOR POSICIONAL</span>
 <p>Al nombre <strong>72.541</strong>, la xifra 5 ocupa la posició de les centenes.</p>
@@ -380,16 +85,16 @@ a{color:inherit}
 <a class="btn btn-secondary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=2">🟠 Practicar · Autònom</a>
 </div>
 </section>
-<section class="card example master-example"><h2>✏️ Exemple resolt pas a pas</h2><div class="steps"><div class="step">Volem descompondre <strong>472.305</strong>.</div><div class="step">Identifiquem el valor posicional de cada xifra: 4 centenes de miler, 7 desenes de miler, 2 milers, 3 centenes, 0 desenes i 5 unitats.</div><div class="step">Escrivim: <strong>472.305 = 400.000 + 70.000 + 2.000 + 300 + 5</strong>.</div><div class="step">Comprovem que la suma torna a donar el nombre inicial.</div></div></section><section class="card mistakes"><h2>⚠️ Errors freqüents</h2><ul><li>Confondre la xifra amb el seu valor posicional.</li><li>Oblidar els zeros interiors en una descomposició.</li><li>Llegir les posicions sense tenir en compte unitats, desenes, centenes i milers.</li></ul></section><section class="card check"><h2>✅ Comprova si ho has entès</h2><details><summary>Quin valor té el 4 a 45.000?</summary><div class="answer">40.000.</div></details><details><summary>Canvia el valor d’una xifra segons la posició?</summary><div class="answer">Sí. La mateixa xifra pot representar unitats, desenes, centenes, etc.</div></details></section><section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Sistema de numeració decimal</li></ul></section><section class="final-cta">
+<section class="card example master-example" id="exemple-sistema-decimal"><h2>2. Exemple resolt pas a pas</h2><div class="steps"><div class="step">Volem descompondre <strong>472.305</strong>.</div><div class="step">Identifiquem el valor posicional de cada xifra: 4 centenes de miler, 7 desenes de miler, 2 milers, 3 centenes, 0 desenes i 5 unitats.</div><div class="step">Escrivim: <strong>472.305 = 400.000 + 70.000 + 2.000 + 300 + 5</strong>.</div><div class="step">Comprovem que la suma torna a donar el nombre inicial.</div></div></section>
+<section class="card" id="familia-decimal_sys-1"><h2>Valor d’una xifra segons la posició</h2><p>Compta les posicions des de les unitats. El valor aportat és xifra × valor de l’ordre; un zero aporta zero però conserva la posició.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Quin valor representa la xifra 0 de les desenes en el nombre <span class="fc">432.804</span>?</div><ol class="steps"><li class="step">La xifra 0 ocupa el lloc de les desenes.</li><li class="step">El seu valor és 0 × 10 = 0.</li></ol></div><p class="tip">Error habitual i comprovació: Distingeix el dígit del seu valor: un 4 a les desenes val 40.</p></section><section class="card" id="familia-decimal_sys-2"><h2>Descompondre per ordres</h2><p>Escriu cada xifra multiplicada pel valor de la seva posició i suma les aportacions. Pots ometre termes nuls sense moure cap altra xifra.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Descompon el nombre <span class="fc">61.621</span> segons el valor de cada posició.</div><ol class="steps"><li class="step">Multipliquem cada xifra pel valor de la seva posició: 6 × 10.000 + 1 × 1.000 + 6 × 100 + 2 × 10 + 1 × 1.</li><li class="step">Sumem les aportacions: 60.000 + 1.000 + 600 + 20 + 1 = 61.621.</li></ol></div><p class="tip">Error habitual i comprovació: La suma de les aportacions ha de reconstruir el nombre original.</p></section><section class="card" id="familia-decimal_sys-3"><h2>Reconstruir a partir de les posicions</h2><p>Col·loca cada xifra a l’ordre indicat, completa amb zeros els ordres absents i llegeix el nombre d’esquerra a dreta.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Quin nombre correspon a aquestes xifres?<br>6 a les centenes de miler, 4 a les desenes de miler, 5 a les unitats de miler, 4 a les centenes, 7 a les desenes, 6 a les unitats?</div><ol class="steps"><li class="step">Multipliquem cada xifra pel valor de la seva posició: 6 × 100.000 + 4 × 10.000 + 5 × 1.000 + 4 × 100 + 7 × 10 + 6 × 1.</li><li class="step">Sumem les aportacions: 600.000 + 40.000 + 5.000 + 400 + 70 + 6 = 645.476.</li></ol></div><p class="tip">Error habitual i comprovació: No concatenis les aportacions: suma-les segons el seu valor posicional.</p></section><section class="card" id="familia-decimal_sys-lectura-paraules-a-xifres"><h2>Passar de paraules a xifres</h2><p>Separa el grup anterior a «mil» del grup posterior. El primer indica milers i el segon ocupa exactament tres posicions, amb zeros si cal.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Quin nombre representa «cent noranta-nou mil setanta-sis»?</div><ol class="steps"><li class="step">El grup dels milers val 199.000. Les tres posicions finals són 076.</li><li class="step">En xifres, el nombre és 199.076.</li></ol></div><p class="tip">Error habitual i comprovació: «Cent dos mil cinc» és 102.005; el cinc ocupa les unitats.</p></section><section class="card" id="familia-decimal_sys-1002"><h2>Calcular un canvi posicional</h2><p>Calcula la contribució inicial i la nova. L’augment és valor nou menys valor antic, perquè les altres contribucions es mantenen.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">En el nombre 20.020, substituïm 2 desenes per 2 unitats de miler. La resta de xifres conserva el seu valor. Quantes unitats augmenta el nombre?</div><ol class="steps"><li class="step">El nombre inicial és 20.020.</li><li class="step">A la posició inicial, 2 × 10 = 20.</li><li class="step">A la nova posició, 2 × 1.000 = 2.000. El nombre nou és 22.000.</li><li class="step">L’augment és 2.000 − 20 = 1.980 unitats.</li><li class="step">Comprovació: 20.020 + 1.980 = 22.000.</li></ol></div><p class="tip">Error habitual i comprovació: No sumis les dues contribucions ni moguis altres xifres.</p></section><section class="card" id="familia-decimal_sys-guionets-numerals-du-c"><h2>Escriure els guionets dels numerals</h2><p>Aplica D-U-C: guionet entre desenes i unitats, i entre unitats i centenes. Entre vint i una unitat s’escriu «-i-».</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Quina escriptura és correcta per al nombre <span class="fc">671</span>?</div><ol class="steps"><li class="step">Escrivim «sis-cents» amb guionet entre la unitat i «cents».</li><li class="step">A «setanta-u», la desena i la unitat van unides amb un guionet.</li><li class="step">La centena i la desena queden separades amb un espai. Si hi ha milers, «mil» també va separat.</li></ol></div><p class="tip">Error habitual i comprovació: Exemples: trenta-dos, dos-cents, dos-cents vint-i-tres. No posis guionets al voltant de mil.</p></section><section class="card" id="familia-decimal_sys-descomposicio-equivalent-reagrupament"><h2>Reagrupar ordres no canònics</h2><p>Multiplica cada quantitat pel valor del seu ordre i suma. Cada deu unitats d’un ordre equivalen a una del següent.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Un nombre està format per 4 centenes de miler, 14 desenes de miler, 2 desenes i 3 unitats. Quin nombre és?</div><ol class="steps"><li class="step">14 desenes de miler equivalen a 1 centena de miler i 4 desenes de miler.</li><li class="step">Sumem el que hem reagrupat: 4 centenes de miler + 1 centena de miler = 5 centenes de miler.</li><li class="step">Sumem els valors: 400.000 + 140.000 + 20 + 3 = 540.023.</li></ol></div><p class="tip">Error habitual i comprovació: Catorze desenes de miler són 140.000, no 14.000.</p></section><section class="card" id="familia-decimal_sys-equivalencia-ordres-posicionals"><h2>Convertir entre ordres</h2><p>Expressa totes les aportacions en l’ordre demanat abans de sumar-les. Cada pas cap a un ordre inferior multiplica per deu.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Quantes unitats de miler equivalen a 6 centenes de miler i 8 desenes de miler?</div><ol class="steps"><li class="step">6 centenes de miler = 600 unitats de miler.</li><li class="step">8 desenes de miler = 80 unitats de miler.</li><li class="step">En total: 600 + 80 = 680 unitats de miler.</li><li class="step">Comprovació en unitats: 680 × 1.000 = 680.000.</li></ol></div><p class="tip">Error habitual i comprovació: Una centena de miler són cent unitats de miler.</p></section><section class="card" id="familia-decimal_sys-1001"><h2>Maximitzar un nombre parell amb xifres</h2><p>Reserva una xifra parella per a les unitats. Ordena de major a menor les xifres restants. Repeteix-ho per cada unitat parella possible i compara els nombres.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Amb les xifres 2, 6, 1, 7, forma el nombre parell de quatre xifres més gran possible. Has de fer servir cada xifra exactament una vegada. Quin nombre obtens?</div><ol class="steps"><li class="step">Si la unitat és 2, el màxim és 7612.</li><li class="step">Si la unitat és 6, el màxim és 7216.</li><li class="step">El més gran és 7612.</li></ol></div><p class="tip">Error habitual i comprovació: Usa cada xifra exactament una vegada i comprova que les unitats són parelles.</p></section><section class="card" id="familia-decimal_sys-escriure-xifres-a-paraules"><h2>Escriure un nombre en català</h2><p>Separa milers i unitats. Escriu cada grup de tres xifres amb centenes, desenes i unitats, i uneix-los amb «mil». Aplica els guionets D-U-C.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Escriu amb paraules, en català, el nombre <span class="fc">990.081</span>.</div><ol class="steps"><li class="step">El grup dels milers val 990.000. Les tres posicions finals són 081.</li><li class="step">En paraules, s’escriu «nou-cents noranta mil vuitanta-u». Les posicions buides dins del nombre no es llegeixen com a zeros.</li></ol></div><p class="tip">Error habitual i comprovació: Els zeros no es llegeixen com a xifres aïllades: 203.004 és dos-cents tres mil quatre.</p></section><section class="card" id="familia-decimal_sys-auditar-error-de-posicio"><h2>Diagnosticar una descomposició incorrecta</h2><p>Avalua l’expressió escrita tal com és. Després resta el valor representat del nombre objectiu. Localitza quina aportació posicional falta o està desplaçada.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">En Pol ha escrit una descomposició incorrecta del nombre 376.370.<br><span class="fc">3 × 100.000 + 7 × 10.000 + 6 × 1.000 + 7 × 10 + 3 × 1</span><div><p>1. Quin nombre representa realment la seva expressió?</p><p>2. Quantes unitats falten per arribar a 376.370?</p><p>Indica primer el valor representat i després la diferència, separats per un punt i coma.</p></div></div><ol class="steps"><li class="step">Calculem cada terme: 3 × 100.000 = 300.000; 7 × 10.000 = 70.000; 6 × 1.000 = 6.000; 7 × 10 = 70; 3 × 1 = 3.</li><li class="step">Sumem els valors: 300.000 + 70.000 + 6.000 + 70 + 3 = 376.073.</li><li class="step">L’objectiu és 376.370. En Pol ha col·locat la xifra 3 a les unitats en lloc de les centenes.</li><li class="step">Restem el valor representat del nombre objectiu: 376.370 − 376.073 = 297.</li><li class="step">La resposta, en l’ordre demanat, és (376.073; 297).</li></ol></div><p class="tip">Error habitual i comprovació: Respon primer el nombre representat i després la diferència, sense corregir mentalment l’expressió abans d’avaluar-la.</p></section><section class="card" id="familia-decimal_sys-xifra-desconeguda"><h2>Reconstruir una xifra amb un valor posicional</h2><p>Resta del total totes les aportacions conegudes. Divideix la part que falta pel valor de l’ordre de la xifra desconeguda.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Troba la xifra □: 3 × 1000 + □ × 100 + 7 = 3507. Explica com l’has identificada.</div><ol class="steps"><li class="step">La part coneguda val 3007.</li><li class="step">3507 − 3007 = 500</li><li class="step">500 ÷ 100 = 5; és una xifra vàlida.</li></ol></div><p class="tip">Error habitual i comprovació: El quocient ha de ser una xifra de 0 a 9; comprova la descomposició completa.</p></section><section class="card" id="familia-decimal_sys-intercanvi-invers"><h2>Reconstruir un nombre amb xifres intercanviades</h2><p>Per a un nombre 10a + b, intercanviar les xifres dona 10b + a. L’augment és 9 × (b − a). Divideix l’augment per 9 i combina la diferència obtinguda amb la suma de les xifres.</p><div class="example"><h3>Exemple resolt pas a pas</h3><div class="example-question">Un nombre té dues xifres que sumen 10. En intercanviar-les, el nombre augmenta 36. Troba el nombre inicial i justifica que és únic.</div><ol class="steps"><li class="step">L’augment és nou vegades la diferència entre la xifra de les unitats i la de les desenes.</li><li class="step">La diferència de les xifres és 36 ÷ 9 = 4.</li><li class="step">Amb suma 10 i diferència 4, les xifres són 3 i 7.</li><li class="step">Nombre inicial: 37; comprovació: 73 − 37 = 36.</li></ol></div><p class="tip">Error habitual i comprovació: La xifra de les desenes no pot ser zero. Verifica la suma i l’augment.</p></section><section class="card mistakes"><h2>⚠️ Errors freqüents</h2><ul><li>Confondre la xifra amb el seu valor posicional.</li><li>Oblidar els zeros interiors en una descomposició.</li><li>Llegir les posicions sense tenir en compte unitats, desenes, centenes i milers.</li></ul></section>
+<section class="card check"><h2>✅ Comprova si ho has entès</h2><details><summary>Quin valor té el 4 a 45.000?</summary><div class="answer">40.000.</div></details><details><summary>Canvia el valor d’una xifra segons la posició?</summary><div class="answer">Sí. La mateixa xifra pot representar unitats, desenes, centenes, etc.</div></details></section>
+<section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>El valor d’una xifra depèn de la posició que ocupa; cada ordre val deu vegades l’anterior.</li><li>Descompon el nombre segons el valor de cada xifra, incloent-hi les posicions amb zero.</li><li>Comprova la descomposició sumant els valors posicionals.</li></ul></section>
+<section class="final-cta">
 <h2>Ja tens la teoria. Ara toca practicar.</h2>
 <p>Fes exercicis guiats, passa després al nivell autònom i repassa els errors que vagis cometent.</p>
-<div class="hero-actions">
-<a class="btn btn-primary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=1">🟢 Practicar · Guiat</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=2">🟠 Practicar · Autònom</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html">← Sentit Numèric</a>
-</div>
-</section>
-<nav aria-label="Navegació entre temes de teoria" class="pager-master"><a class="prev" href="nombres-naturals-bloc-1r-eso.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="operacions-basiques-1r-eso.html">Tema següent →</a></nav></main>
+
+<div class="topic-actions"><a class="btn btn-primary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=1">Pràctica guiada</a><a class="btn btn-secondary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=2">Pràctica autònoma</a></div><a class="return-link" href="../../sentit-numeric.html">Torna al sentit numèric</a></section>
+<nav aria-label="Navegació entre temes de teoria" class="pager-master"><a class="prev" href="nombres-naturals-bloc-1r-eso.html">← Tema anterior</a><a class="idx" href="index.html">Índex de teoria</a><a class="next" href="operacions-basiques-1r-eso.html">Tema següent →</a></nav></main>
 <footer class="mi-learning-footer">
   <p>Mates Interactives · Matemàtiques d’ESO · Teoria i exercicis gratuïts</p>
   <p><a href="../../../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
@@ -579,5 +284,6 @@ a{color:inherit}
 })();
 </script>
 
-</body>
-</html>
+
+
+</body></html>
