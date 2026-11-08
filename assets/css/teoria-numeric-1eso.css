@@ -1,0 +1,213 @@
+/* Shared lesson components: only the thirteen numeric theory pages opt in. */
+body.mi-theory-numeric-1eso { --bg: #f7f9fc; --card: #fff; --primary: #5b8dee; --pd: #3a6fd8; --ok: #34c97e; --err: #e05c5c; --warn: #f5a623; --text: #2c3e50; --muted: #526276; --border: #dce3ed; --sh: 0 2px 12px rgba(0,0,0,.08); --soft: #eaf1fd; }
+:where(body.mi-theory-numeric-1eso) * { box-sizing: border-box; margin: 0px; padding: 0px; }
+html:has(> body.mi-theory-numeric-1eso) { scroll-behavior: smooth; scroll-padding-top: 75px; }
+body.mi-theory-numeric-1eso { margin: 0; padding: 0; box-sizing: border-box; font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
+:where(body.mi-theory-numeric-1eso) a { color: inherit; }
+body.mi-theory-numeric-1eso .top-nav { background: var(--card); border-bottom: 1px solid var(--border); padding: 12px 20px; display: flex; align-items: center; gap: 10px; box-shadow: var(--sh); position: sticky; top: 0px; z-index: 100; }
+body.mi-theory-numeric-1eso .nav-link { color: var(--muted); text-decoration: none; font-size: 0.83rem; font-weight: 650; padding: 5px 8px; border-radius: 8px; white-space: nowrap; }
+body.mi-theory-numeric-1eso .nav-link:hover { background: var(--soft); color: var(--primary); }
+body.mi-theory-numeric-1eso .nav-title { flex: 1 1 0%; min-width: 0px; font-size: 1rem; font-weight: 750; color: var(--primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+body.mi-theory-numeric-1eso .wrap { width: min(790px, 100% - 32px); margin: 0px auto; padding: 30px 0px 54px; }
+body.mi-theory-numeric-1eso .hero { text-align: center; padding: 10px 8px 22px; }
+body.mi-theory-numeric-1eso .eyebrow { display: inline-flex; align-items: center; gap: 6px; background: var(--soft); color: var(--primary); border-radius: 999px; padding: 5px 11px; font-size: 0.75rem; font-weight: 750; margin-bottom: 12px; }
+body.mi-theory-numeric-1eso .hero h1 { font-size: clamp(1.7rem, 4vw, 2.25rem); color: var(--primary); line-height: 1.15; margin-bottom: 9px; }
+body.mi-theory-numeric-1eso .hero p { color: var(--muted); font-size: 0.96rem; max-width: 660px; margin: 0px auto; }
+body.mi-theory-numeric-1eso .hero-actions,
+body.mi-theory-numeric-1eso .topic-actions { display: flex; gap: 10px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
+body.mi-theory-numeric-1eso .btn { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border-radius: 12px; padding: 12px 20px; text-decoration: none; font-size: 0.91rem; font-weight: 700; transition: 0.18s; }
+body.mi-theory-numeric-1eso .btn-primary { background: var(--primary); color: rgb(255, 255, 255); }
+body.mi-theory-numeric-1eso .btn-primary:hover { background: var(--pd); transform: translateY(-1px); }
+body.mi-theory-numeric-1eso .btn-secondary { background: var(--card); color: var(--primary); border: 2px solid var(--primary); }
+body.mi-theory-numeric-1eso .btn-secondary:hover { background: var(--soft); }
+body.mi-theory-numeric-1eso .quick-nav { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 4px 0px 22px; }
+body.mi-theory-numeric-1eso .quick-nav a { text-decoration: none; text-align: center; background: var(--card); border: 1px solid var(--border); border-radius: 11px; padding: 10px 7px; color: var(--muted); font-size: 0.78rem; font-weight: 700; box-shadow: rgba(0, 0, 0, 0.04) 0px 1px 5px; }
+body.mi-theory-numeric-1eso .quick-nav a:hover { border-color: var(--primary); color: var(--primary); background: var(--soft); }
+body.mi-theory-numeric-1eso .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 22px; margin-bottom: 16px; box-shadow: var(--sh); }
+body.mi-theory-numeric-1eso .card h2 { font-size: 1.18rem; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+body.mi-theory-numeric-1eso .card h3 { font-size: 0.96rem; margin: 18px 0px 7px; }
+body.mi-theory-numeric-1eso .card p + p { margin-top: 9px; }
+body.mi-theory-numeric-1eso .major { border-top: 4px solid var(--primary); }
+body.mi-theory-numeric-1eso .callout { background: var(--soft); border-left: 4px solid var(--primary); border-radius: 10px; padding: 13px 15px; margin: 13px 0px; font-size: 0.91rem; }
+body.mi-theory-numeric-1eso .example { background: rgb(251, 252, 254); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; margin: 12px 0px; }
+body.mi-theory-numeric-1eso .example-label { display: inline-block; font-size: 0.72rem; font-weight: 800; color: var(--primary); background: var(--soft); border-radius: 999px; padding: 2px 9px; margin-bottom: 7px; }
+body.mi-theory-numeric-1eso .math { font-family: "Courier New", monospace; font-weight: 700; color: var(--pd); line-height: 1.9; overflow-wrap: anywhere; }
+body.mi-theory-numeric-1eso .steps { counter-reset: pas 0; display: grid; gap: 8px; margin-top: 12px; }
+body.mi-theory-numeric-1eso .step { position: relative; padding: 10px 12px 10px 42px; background: rgb(251, 252, 254); border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; }
+body.mi-theory-numeric-1eso .step::before { counter-increment: pas 1; content: counter(pas); position: absolute; left: 11px; top: 9px; width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: var(--primary); color: rgb(255, 255, 255); font-size: 0.72rem; font-weight: 800; }
+body.mi-theory-numeric-1eso .tip { background: rgb(255, 251, 234); border: 1px solid rgb(245, 224, 160); border-radius: 11px; padding: 12px 14px; margin-top: 13px; font-size: 0.88rem; color: rgb(120, 88, 0); }
+body.mi-theory-numeric-1eso .rule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+body.mi-theory-numeric-1eso .rule { border: 1px solid var(--border); border-radius: 12px; padding: 13px; background: rgb(251, 252, 254); font-size: 0.88rem; }
+body.mi-theory-numeric-1eso .rule strong { display: block; color: var(--primary); margin-bottom: 4px; }
+body.mi-theory-numeric-1eso .simple-table { width: 100%; border-collapse: separate; border-spacing: 0px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 12px; font-size: 0.88rem; }
+body.mi-theory-numeric-1eso .simple-table th,
+body.mi-theory-numeric-1eso .simple-table td { padding: 9px 11px; border-bottom: 1px solid var(--border); text-align: left; }
+body.mi-theory-numeric-1eso .simple-table tr:last-child td { border-bottom: 0px; }
+body.mi-theory-numeric-1eso .simple-table th { background: var(--soft); color: var(--primary); }
+body.mi-theory-numeric-1eso .mistakes { background: rgb(255, 248, 248); border: 1px solid rgb(240, 176, 176); }
+body.mi-theory-numeric-1eso .mistakes h2 { color: var(--err); }
+body.mi-theory-numeric-1eso .mistakes ul { padding-left: 20px; }
+body.mi-theory-numeric-1eso .mistakes li + li { margin-top: 6px; }
+body.mi-theory-numeric-1eso .check details { border: 1px solid var(--border); border-radius: 11px; background: rgb(251, 252, 254); padding: 12px 14px; margin-top: 9px; }
+body.mi-theory-numeric-1eso .check summary { cursor: pointer; font-weight: 650; color: var(--text); }
+body.mi-theory-numeric-1eso .answer { margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--border); color: rgb(26, 122, 74); font-size: 0.9rem; }
+body.mi-theory-numeric-1eso .final-cta { background: linear-gradient(135deg, rgb(237, 243, 255), rgb(255, 255, 255)); border: 1px solid rgb(202, 217, 247); border-radius: 18px; padding: 24px; text-align: center; margin-top: 20px; }
+body.mi-theory-numeric-1eso .final-cta h2 { color: var(--primary); font-size: 1.25rem; margin-bottom: 6px; }
+body.mi-theory-numeric-1eso .final-cta p { color: var(--muted); font-size: 0.9rem; margin-bottom: 15px; }
+body.mi-theory-numeric-1eso .footer { text-align: center; color: var(--muted); font-size: 0.76rem; padding: 4px 0px 25px; }
+body.mi-theory-numeric-1eso .mi-theory-index { align-items: center; justify-content: center; gap: 6px; text-decoration: none; font-weight: 750; display: inline-flex; }
+body.mi-theory-numeric-1eso .summary-master { background: var(--card,#fff); border: 1px solid var(--border); border-left: 5px solid var(--primary,#5b8dee); border-radius: 15px; padding: 18px 20px; margin: 16px 0px; box-shadow: var(--sh,0 2px 12px rgba(0,0,0,.08)); }
+body.mi-theory-numeric-1eso .summary-master h2 { margin: 0px 0px 8px; color: var(--primary,#5b8dee); font-size: 1.15rem; }
+body.mi-theory-numeric-1eso .summary-master ul { padding-left: 21px; }
+body.mi-theory-numeric-1eso .summary-master li { margin: 5px 0px; }
+body.mi-theory-numeric-1eso .pager-master { display: grid; grid-template-columns: 1fr auto 1fr; gap: 8px; align-items: center; margin: 26px 0px 8px; }
+body.mi-theory-numeric-1eso .pager-master a,
+body.mi-theory-numeric-1eso .pager-master span { display: block; text-decoration: none; border: 1px solid var(--border,#dce3ed); background: rgb(255, 255, 255); border-radius: 10px; padding: 9px 11px; font-size: 0.84rem; font-weight: 700; color: var(--primary,#5b8dee); }
+body.mi-theory-numeric-1eso .pager-master .prev { text-align: left; }
+body.mi-theory-numeric-1eso .pager-master .idx { text-align: center; }
+body.mi-theory-numeric-1eso .pager-master .next { text-align: right; }
+body.mi-theory-numeric-1eso .pager-master .disabled { color: var(--muted,#7f8c9a); opacity: 0.6; }
+body.mi-theory-numeric-1eso .extension-standard { display: inline-block; margin: 6px 0px 0px; background: rgb(255, 243, 214); color: rgb(138, 93, 0); border: 1px solid rgb(239, 212, 139); border-radius: 999px; padding: 4px 9px; font-size: 0.72rem; font-weight: 800; }
+body.mi-theory-numeric-1eso .hero-actions { display: flex; gap: 10px; justify-content: center; margin-top: 18px; flex-wrap: wrap; }
+body.mi-theory-numeric-1eso .symbols { width: 100%; border-collapse: separate; border-spacing: 0px; overflow: hidden; border: 1px solid var(--border); border-radius: 10px; margin-top: 12px; font-size: 0.88rem; }
+body.mi-theory-numeric-1eso .symbols th,
+body.mi-theory-numeric-1eso .symbols td { padding: 10px 12px; border-bottom: 1px solid var(--border); text-align: left; }
+body.mi-theory-numeric-1eso .symbols tr:last-child td { border-bottom: 0px; }
+body.mi-theory-numeric-1eso .symbols th { background: var(--soft); color: var(--primary); font-weight: 750; }
+body.mi-theory-numeric-1eso .symbols td:first-child { width: 70px; text-align: center; font-size: 1.1rem; font-weight: 800; color: var(--pd); }
+body.mi-theory-numeric-1eso .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+body.mi-theory-numeric-1eso .problem { border: 1px solid var(--border); border-radius: 12px; padding: 13px; background: rgb(251, 252, 254); font-size: 0.88rem; }
+body.mi-theory-numeric-1eso .problem strong { display: block; color: var(--primary); margin-bottom: 5px; }
+body.mi-theory-numeric-1eso .final-cta .hero-actions { margin-top: 0px; }
+body.mi-theory-numeric-1eso .criteria { width: 100%; border-collapse: separate; border-spacing: 0px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-top: 12px; font-size: 0.88rem; }
+body.mi-theory-numeric-1eso .criteria th,
+body.mi-theory-numeric-1eso .criteria td { padding: 9px 11px; border-bottom: 1px solid var(--border); text-align: left; }
+body.mi-theory-numeric-1eso .criteria tr:last-child td { border-bottom: 0px; }
+body.mi-theory-numeric-1eso .criteria th { background: var(--soft); color: var(--primary); }
+body.mi-theory-numeric-1eso .mi-proportion-table { width: 100%; border-collapse: collapse; margin: 12px 0px; font-size: 0.85rem; }
+body.mi-theory-numeric-1eso .mi-proportion-table caption { padding: 8px; font-weight: 600; }
+body.mi-theory-numeric-1eso .mi-proportion-table th,
+body.mi-theory-numeric-1eso .mi-proportion-table td { border: 1px solid rgb(184, 198, 218); padding: 8px 4px; text-align: center; }
+body.mi-theory-numeric-1eso .mi-proportion-table th { background: rgb(237, 242, 250); color: rgb(36, 52, 75); }
+body.mi-theory-numeric-1eso .formula { background: var(--soft); border-left: 4px solid var(--primary); padding: 11px 13px; border-radius: 9px; margin: 10px 0px; font-weight: 700; }
+
+/* More specific than learning-footer.css's body:has(...) > main. */
+body.mi-theory-numeric-1eso > main.wrap {
+  width: min(790px, calc(100% - 32px));
+  max-width: 790px;
+  min-width: 0;
+  margin-inline: auto;
+  padding-block: 30px 70px;
+}
+body.mi-theory-numeric-1eso .top-nav { flex-wrap: wrap; }
+body.mi-theory-numeric-1eso .nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+body.mi-theory-numeric-1eso .nav-title { color: var(--pd); }
+body.mi-theory-numeric-1eso .hero h1,
+body.mi-theory-numeric-1eso .card h2,
+body.mi-theory-numeric-1eso .summary-master h2,
+body.mi-theory-numeric-1eso .final-cta h2 { color: var(--pd); }
+body.mi-theory-numeric-1eso .btn-primary { background: var(--pd); }
+body.mi-theory-numeric-1eso .btn-secondary { color: #275db3; }
+body.mi-theory-numeric-1eso :is(.eyebrow, .example-label, .rule strong, .problem strong, .simple-table th, .criteria th, .symbols th),
+body.mi-theory-numeric-1eso :is(.nav-link, .quick-nav a):hover { color: #275db3; }
+body.mi-theory-numeric-1eso .quick-nav {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-block: 12px 24px;
+}
+body.mi-theory-numeric-1eso .quick-nav a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 54px;
+  padding: 12px 10px;
+  color: #46576b;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  line-height: 1.35;
+}
+body.mi-theory-numeric-1eso :is(a, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--pd);
+  outline-offset: 3px;
+}
+body.mi-theory-numeric-1eso main [id] { scroll-margin-top: 7rem; }
+html:has(> body.mi-theory-numeric-1eso) { scroll-padding-top: 0; }
+body.mi-theory-numeric-1eso :is(.card, .example, .rule, .problem, .step) {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+body.mi-theory-numeric-1eso .card h2 { display: block; }
+body.mi-theory-numeric-1eso main :is(ul, ol) { padding-left: 22px; }
+body.mi-theory-numeric-1eso .summary-master { border: 1px solid var(--border); border-left: 5px solid var(--primary); }
+body.mi-theory-numeric-1eso .summary-master li { font-size: .9rem; }
+body.mi-theory-numeric-1eso .table-scroll {
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  margin-block: 12px;
+}
+body.mi-theory-numeric-1eso .table-scroll table { margin-block: 0; }
+body.mi-theory-numeric-1eso .return-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-top: 12px;
+  color: #275db3;
+}
+body.mi-theory-numeric-1eso .pager-master :is(a, span) {
+  min-height: 44px;
+  color: #275db3;
+  overflow-wrap: anywhere;
+}
+body.mi-theory-numeric-1eso .pager-master .disabled { color: var(--muted); opacity: 1; }
+@media (max-width: 1000px) {
+  body.mi-theory-numeric-1eso .quick-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  body.mi-theory-numeric-1eso .quick-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 650px) {
+  body.mi-theory-numeric-1eso > main.wrap { width: calc(100% - 20px); padding-top: 20px; }
+  body.mi-theory-numeric-1eso .top-nav { padding: 6px 10px; gap: 4px; }
+  body.mi-theory-numeric-1eso .nav-link { padding: 5px; font-size: .75rem; }
+  body.mi-theory-numeric-1eso :is(.nav-main-label, .sense-label) { display: none; }
+  body.mi-theory-numeric-1eso .nav-title { flex-basis: 100%; font-size: .86rem; white-space: normal; overflow: visible; }
+  body.mi-theory-numeric-1eso :is(.hero-actions, .topic-actions) { flex-direction: column; }
+  body.mi-theory-numeric-1eso .btn { width: 100%; }
+  body.mi-theory-numeric-1eso .card { padding: 17px; }
+  body.mi-theory-numeric-1eso :is(.rule-grid, .problem-grid) { grid-template-columns: minmax(0, 1fr); }
+  body.mi-theory-numeric-1eso .pager-master { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  body.mi-theory-numeric-1eso .pager-master .idx { grid-column: 1 / -1; grid-row: 2; }
+  body.mi-theory-numeric-1eso .pager-master :is(a, span) { font-size: .78rem; }
+  body.mi-theory-numeric-1eso main [id] { scroll-margin-top: 8rem; }
+}
+@media (max-width: 420px) {
+  body.mi-theory-numeric-1eso .quick-nav { grid-template-columns: minmax(0, 1fr); }
+}
+/* Keep small indexes compact after all responsive column overrides. */
+body.mi-theory-numeric-1eso .quick-nav--compact {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr));
+}
+/* Reserve a place in the sticky bar for the existing fixed report button.
+   It must never cover a table cell, practice action or pager while reading. */
+body.mi-theory-numeric-1eso .top-nav { padding-inline-end: 70px; }
+body.mi-theory-numeric-1eso .mi-avis-btn {
+  top: 12px;
+  right: 12px;
+  bottom: auto;
+  width: 44px;
+  min-height: 44px;
+  padding: 10px;
+  justify-content: center;
+}
+body.mi-theory-numeric-1eso .mi-avis-btn .mi-avis-text { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  html:has(> body.mi-theory-numeric-1eso) { scroll-behavior: auto; }
+  body.mi-theory-numeric-1eso .btn { transition: none; }
+  body.mi-theory-numeric-1eso :is(.btn-primary, .mi-avis-btn):hover { transform: none; }
+}
