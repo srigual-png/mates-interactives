@@ -10,6 +10,7 @@
 <script src="../assets/js/decimals-1eso.js"></script>
 <script src="../assets/js/fraccions-1eso.js"></script>
 <script src="../assets/js/proporcionalitat-1eso.js"></script>
+<script src="../assets/js/percentatges-1eso.js"></script>
 <script src="../assets/js/practica-sistema-decimal-1eso.js"></script>
 <link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
@@ -2221,223 +2222,9 @@ function genFraccions(){if(!Array.isArray(fraccionsBag)||fraccionsBag.length===0
 
 // ── GEN PERCENTATGES ───────────────────────────────────────────────────────
 function genPercentatgesBase(){
-  var type=rnd(1,7),question,correct,opts,guide,solution,isProblem=false,diff=1;
-
-  if(type===1){
-    diff=1;
-    var pcts=[5,10,15,20,25,30,40,50],
-        pct=pcts[rnd(0,pcts.length-1)],
-        base=rnd(4,25)*20,
-        res=base*pct/100;
-
-    question='Calcula el <span class="fc">'+pct+'%</span> de <span class="fc">'+base+'</span>';
-    correct=String(res);
-    opts=buildOpts(correct,[
-      String(base*pct/10),
-      String(base*pct/1000),
-      String(base*(100-pct)/100),
-      String(base-pct),
-      String(base+pct)
-    ]);
-
-    // Només indica el procediment, sense calcular.
-    guide=[
-      'Escriu el percentatge com una fracció sobre 100.',
-      'Multiplica la quantitat pel percentatge expressat com a fracció.'
-    ];
-    solution=[pct+'% de '+base+'='+res];
-
-  } else if(type===2){
-    diff=1;
-    var pcts2=[10,20,25,50,75,15,30],
-        pct2=pcts2[rnd(0,pcts2.length-1)],
-        total2=rnd(5,20)*20,
-        part2=total2*pct2/100;
-
-    question='Quin percentatge representa <span class="fc">'+part2+'</span> de <span class="fc">'+total2+'</span>?';
-    correct=pct2+'%';
-    opts=buildOpts(correct,[
-      part2+'%',
-      total2+'%',
-      (100-pct2)+'%',
-      (pct2/10)+'%',
-      Math.round(total2/part2*100)+'%'
-    ]);
-
-    guide=[
-      'Divideix la part entre el total.',
-      'Multiplica el resultat per 100.'
-    ];
-    solution=['('+part2+'/'+total2+')x100='+pct2+'%'];
-
-  } else if(type===3){
-    diff=2;
-    var pcts3=[10,20,25,50],
-        pct3=pcts3[rnd(0,3)],
-        part3=rnd(2,15)*pct3,
-        total3=part3/(pct3/100);
-
-    question='Si <span class="fc">'+part3+'</span> es el <span class="fc">'+pct3+'%</span>, quin es el total?';
-    correct=String(total3);
-    opts=buildOpts(correct,[
-      String(part3*pct3/100),
-      String(part3/pct3),
-      String(part3*100/(100-pct3)),
-      String(part3),
-      String(part3+pct3)
-    ]);
-
-    guide=[
-      'Expressa el percentatge com un decimal.',
-      'Divideix la part entre el percentatge expressat com a decimal.'
-    ];
-    solution=['total='+total3];
-
-  } else if(type===4){
-    diff=2;
-    isProblem=true;
-
-    var base4=rnd(5,30)*20,
-        pct4=[5,10,15,20,25,30][rnd(0,5)],
-        aug4=base4*pct4/100,
-        total4=base4+aug4;
-
-    var incCtx=['Una bicicleta costava','Una quota mensual era de','Una entrada costava','Un abonament valia','Un llibre costava','Una activitat tenia un preu de'][rnd(0,5)];
-    question='<span class="pt">'+incCtx+' <b>'+base4+' €</b> i el preu ha augmentat un <b>'+pct4+'%</b>. Quin és el nou preu?</span>';
-    correct=String(total4)+' euros';
-    opts=buildOpts(correct,[
-      aug4+' euros',
-      (base4-aug4)+' euros',
-      (base4+pct4)+' euros',
-      base4+' euros'
-    ]);
-
-    guide=[
-      'Calcula primer l\'augment aplicant el percentatge al preu inicial.',
-      'Suma l\'augment al preu inicial.'
-    ];
-    solution=['Augment: '+aug4,'Nou preu: '+total4];
-
-  } else if(type===5){
-    diff=2;
-    isProblem=true;
-
-    var base5=rnd(5,30)*20,
-        pct5=[10,15,20,25,30,40,50][rnd(0,6)],
-        disc=base5*pct5/100,
-        total5=base5-disc;
-
-    var discCtx=['Un ordinador costa','Una jaqueta costa','Una motxilla costa','Un joc costa','Una cadira costa','Una tauleta costa','Unes sabatilles costen','Un rellotge costa'][rnd(0,7)];
-    question='<span class="pt">'+discCtx+' <b>'+base5+' €</b> i té un descompte del <b>'+pct5+'%</b>. Quin és el preu final?</span>';
-    correct=String(total5)+' euros';
-    opts=buildOpts(correct,[
-      disc+' euros',
-      (base5+disc)+' euros',
-      (base5-pct5)+' euros',
-      base5+' euros'
-    ]);
-
-    guide=[
-      'Calcula primer l\'import del descompte aplicant el percentatge al preu inicial.',
-      'Resta el descompte al preu inicial.'
-    ];
-    solution=['Descompte: '+disc,'Preu: '+total5];
-
-  } else if(type===6){
-    diff=2;
-
-    var pctFracs=[
-      [10,'1/10',0.1],
-      [20,'1/5',0.2],
-      [25,'1/4',0.25],
-      [50,'1/2',0.5],
-      [75,'3/4',0.75],
-      [40,'2/5',0.4]
-    ];
-
-    var pf=pctFracs[rnd(0,pctFracs.length-1)];
-    var askType=rnd(0,1);
-
-    if(askType===0){
-      question='Quin percentatge correspon a la fraccio <span class="fc">'+pf[1]+'</span>?';
-      correct=pf[0]+'%';
-
-      opts=buildOpts(correct,[
-        (pf[0]+10)+'%',
-        (pf[0]+5)+'%',
-        Math.max(pf[0]-10,5)+'%',
-        (100-pf[0])+'%'
-      ]);
-
-      guide=[
-        'Converteix la fracció en un nombre decimal.',
-        'Multiplica el nombre decimal per 100.'
-      ];
-
-    } else {
-      question='Quin decimal correspon a <span class="fc">'+pf[0]+'%</span>?';
-      correct=String(pf[2]);
-
-      opts=buildOpts(correct,[
-        String(pf[2]*10),
-        String(pf[2]/10),
-        String(pf[0]),
-        String(1-pf[2])
-      ]);
-
-      guide=[
-        'Escriu el percentatge com una fracció sobre 100.',
-        'Converteix la fracció en un nombre decimal.'
-      ];
-    }
-
-    solution=[
-      pf[0]+'% = '+pf[1]+' = '+pf[2],
-      'OK '+correct
-    ];
-    guide=guide||[];
-
-  } else {
-    diff=3;
-    isProblem=true;
-
-    var pcts4=[10,20,25,50],
-        pct6=pcts4[rnd(0,3)],
-        total6=rnd(5,20)*100,
-        part6=total6*pct6/100;
-
-    var surveyCtx=['diuen que els agrada l\'esport','prefereixen anar a peu','trien fruita per esmorzar','participen en una activitat extraescolar','han llegit el llibre proposat','prefereixen el color blau','utilitzen transport públic','han visitat la biblioteca aquesta setmana'][rnd(0,7)];
-    question='<span class="pt"><b>'+part6+' persones</b> representen el <b>'+pct6+'%</b> i '+surveyCtx+'. Quantes persones formaven el grup total?</span>';
-    correct=String(total6)+' persones';
-
-    opts=buildOpts(correct,[
-      (part6*pct6/100)+' persones',
-      (part6*(100-pct6)/100)+' persones',
-      (part6+pct6)+' persones',
-      part6+' persones'
-    ]);
-
-    guide=[
-      'Expressa el percentatge com un nombre decimal.',
-      'Divideix la part entre el percentatge expressat com a decimal.'
-    ];
-    solution=['total='+total6];
-  }
-
-  return{
-    type:type,
-    question:question,
-    correct:correct,
-    options:buildOpts(correct,opts.filter(function(o){
-      return o!==correct;
-    })),
-    guide:guide||[],
-    solution:solution,
-    isProblem:isProblem,
-    diff:diff
-  };
+  const type=rnd(1,7),ids=['Q01','Q02','Q03-total','Q04-augment','Q04-descompte','Q05-fraccio-pct','Q02'];
+  return {...MIPercentatges.generate(ids[type-1],rnd),type};
 }
-
 
 var percentatgesBag=[],lastPercentatgesType=null;
 function buildPercentatgesBag(){return buildUniqueSessionBag(genPercentatgesBase,120);}
@@ -3139,53 +2926,11 @@ function genProporcionalitatProb(){
 
 // --- PERCENTATGES (6 tipus) ------------------------------------------------
 function genPctProb(){
-  var type=ampNextType('percentatges',6),diff,text,steps,answer,hints;
-  if(type===1){
-    diff=1;
-    var pct=[10,15,20,25,30,40][rnd(0,5)],base=rnd(4,20)*20,desc=base*pct/100,final=base-desc;
-    text='Una jaqueta costa <b>'+base+' €</b> i té un descompte del <b>'+pct+'%</b>. Quin és el preu final?';
-    steps=[{label:'Descompte',hint:'Calcula el percentatge del preu inicial',check:function(v){return numEq(v,desc);}},{label:'Preu final',hint:'Resta el descompte al preu inicial',check:function(v){return numEq(v,final);}}];
-    answer={check:function(v){return numEq(v,final);},val:final+' €'};
-    hints=['Descompte: '+pct+'% de '+base+' = '+desc+' €','Preu final: '+base+' − '+desc+' = '+final+' €'];
-  }else if(type===2){
-    diff=2;
-    var ini=rnd(4,20)*25,pct2=[10,20,25,50][rnd(0,3)],inc=ini*pct2/100,fin=ini+inc;
-    text='El nombre de socis d\'un club passa de <b>'+ini+'</b> a <b>'+fin+'</b>. Quin percentatge ha augmentat?';
-    steps=[{label:'Augment',hint:'Resta el valor inicial al valor final',check:function(v){return numEq(v,inc);}},{label:'Percentatge',hint:'Divideix l\'augment pel valor inicial i multiplica per 100',check:function(v){return numEq(v,pct2,0.1);}}];
-    answer={check:function(v){return pctEq(v,pct2)||numEq(v,pct2);},val:pct2+'%'};
-    hints=['Augment: '+fin+' − '+ini+' = '+inc,'Percentatge: '+inc+'/'+ini+' × 100 = '+pct2+'%'];
-  }else if(type===3){
-    diff=3;
-    var base3=rnd(10,40)*20,pUp=[10,20,25][rnd(0,2)],after=base3*(1+pUp/100),pDown=[10,20][rnd(0,1)],final3=+(after*(1-pDown/100)).toFixed(2);
-    text='Un preu de <b>'+base3+' €</b> augmenta un <b>'+pUp+'%</b> i després, sobre el nou preu, s\'aplica un descompte del <b>'+pDown+'%</b>. Quin és el preu final?';
-    steps=[{label:'Augment',hint:'Calcula l\'augment sobre el preu inicial',check:function(v){return numEq(v,base3*pUp/100);}},{label:'Nou preu',hint:'Afegeix l\'augment al preu inicial',check:function(v){return numEq(v,after);}},{label:'Descompte',hint:'Calcula el descompte sobre el nou preu, no sobre l\'inicial',check:function(v){return numEq(v,after*pDown/100,0.05);}},{label:'Final',hint:'Resta el descompte al nou preu',check:function(v){return numEq(v,final3,0.05);}}];
-    answer={check:function(v){return numEq(v,final3,0.05);},val:ampFmt(final3)+' €'};
-    hints=['Augment: '+pUp+'% de '+base3+' = '+ampFmt(base3*pUp/100)+' €','Nou preu: '+ampFmt(after)+' €','Descompte: '+pDown+'% de '+ampFmt(after)+' = '+ampFmt(after*pDown/100)+' €','Final: '+ampFmt(final3)+' €'];
-  }else if(type===4){
-    diff=2;
-    var total4=rnd(5,15)*100,pa=[20,30,40][rnd(0,2)],pb=[10,20,30][rnd(0,2)];if(pa+pb>=80)pb=10;var pc=100-pa-pb,a4=total4*pa/100,b4=total4*pb/100,c4=total4*pc/100;
-    text='En una enquesta de <b>'+total4+' persones</b>, el <b>'+pa+'%</b> tria l\'opció A, el <b>'+pb+'%</b> l\'opció B i la resta l\'opció C. Quantes persones trien l\'opció C?';
-    steps=[{label:'Percentatge C',hint:'Resta de 100% els percentatges de les opcions A i B',check:function(v){return numEq(v,pc);}},{label:'Persones C',hint:'Calcula aquest percentatge del total',check:function(v){return numEq(v,c4);}}];
-    answer={check:function(v){return numEq(v,c4);},val:c4+' persones'};
-    hints=['Percentatge C: 100 − '+pa+' − '+pb+' = '+pc+'%','Persones C: '+pc+'% de '+total4+' = '+c4];
-  }else if(type===5){
-    diff=2;
-    var pct5=[20,25,40,50][rnd(0,3)],unit5=rnd(4,20),part5=unit5*pct5/100*100,total5=part5*100/pct5;
-    text='El <b>'+pct5+'%</b> d\'un grup són <b>'+part5+' persones</b>. Quantes persones formen el grup complet?';
-    steps=[{label:'1%',hint:'Troba quant correspon a l\'1% dividint la part coneguda pel percentatge',check:function(v){return numEq(v,part5/pct5);}},{label:'100%',hint:'Multiplica el valor de l\'1% per 100',check:function(v){return numEq(v,total5);}}];
-    answer={check:function(v){return numEq(v,total5);},val:total5+' persones'};
-    hints=['1%: '+part5+' ÷ '+pct5+' = '+ampFmt(part5/pct5),'100%: '+ampFmt(part5/pct5)+' × 100 = '+total5+' persones'];
-  }else{
-    diff=2;
-    var total6=rnd(8,30)*20,pct6=[10,20,25,30,40,50,60,75][rnd(0,7)],part6=total6*pct6/100;
-    text='En una activitat hi participen <b>'+total6+' alumnes</b> i <b>'+part6+'</b> han acabat la primera fase. Quin percentatge del total representa aquesta quantitat?';
-    steps=[{label:'Fracció',hint:'Compara la part amb el total mitjançant una fracció',check:function(v){return fracEq(v,part6,total6);}},{label:'Percentatge',hint:'Divideix la part pel total i multiplica per 100',check:function(v){return numEq(v,pct6,0.1);}}];
-    answer={check:function(v){return pctEq(v,pct6)||numEq(v,pct6);},val:pct6+'%'};
-    hints=['Part/total: '+part6+'/'+total6,'Percentatge: '+part6+'/'+total6+' × 100 = '+pct6+'%'];
-  }
-  return{topicId:'percentatges',topicName:'Percentatges',type:type,variantId:'percentatges-'+type,cat:'Percentatges',diff:diff,text:text,dataBox:null,steps:steps,answer:answer,hints:hints};
+  const type=ampNextType('percentatges',6),ids=['Q04-descompte','Q06','Q07','Q08','Q03-unitari','Q02'];
+  const q=MIPercentatges.generate(ids[type-1],rnd);
+  return {...q,topicName:'Percentatges',type,variantId:'percentatges-'+type,cat:'Percentatges',text:q.question,
+    steps:[],practiceHints:q.guide,answer:{val:q.correct,percentAnswer:q.percentAnswer,check:v=>MIPercentatges.matches(q.percentAnswer,v)},hints:q.solution};
 }
-
 
 // ─── CATEGORIES SETUP ────────────────────────────────────────────────────
 var AMP_CATS=[
@@ -3216,7 +2961,7 @@ var TOPICS=[
   {id:"decimals",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,practiceGen:genDecimalsPractice,icon:"&#128312;",name:"Nombres decimals",short:"Operacions, conversions, aproximacions i error",theory:{title:"Nombres decimals",text:`Els decimals expressen parts d'una unitat i permeten mesurar i aproximar quantitats.`,formulas:[`Suma/resta: alinea les comes`,`Multiplicació: controla les xifres decimals`,`Fracció → decimal: divideix numerador entre denominador`,`Error absolut = |valor exacte − valor aproximat|`,`Error relatiu = error absolut / valor exacte`]},gen:genDecimals},
   {id:"fraccions",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,practiceGen:genFraccionsPractice,icon:"&#189;",name:"Fraccions",short:"Equivalència, comparació, operacions i fracció d'una quantitat",theory:{title:"Fraccions",text:`Una fracció a/b representa a parts d'un tot dividit en b parts iguals.`,formulas:[`Pròpia: numerador < denominador`,`Impròpia: numerador > denominador`,`Equivalents: multiplica o divideix numerador i denominador pel mateix nombre`,`Fracció d'una quantitat: divideix pel denominador i multiplica pel numerador`]},gen:genFraccions},
   {id:"proporcionalitat",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,practiceGen:genProporcionalitatPractice,icon:"&#9878;&#65039;",name:"Proporcionalitat directa",short:"Taules, valor unitari i problemes proporcionals",theory:{title:"Proporcionalitat directa",text:`Dues magnituds són directament proporcionals quan es multipliquen o divideixen pel mateix factor.`,formulas:[`y/x = constant de proporcionalitat`,`Si una magnitud es duplica, l'altra també es duplica`,`Mètode unitari: troba primer el valor que correspon a 1`,`Cal distingir situacions proporcionals de les que no ho són`]},gen:genProporcionalitat},
-  {id:"percentatges",course:"1r",exam1r:true,icon:"%",name:"Percentatges",short:"Càlcul, augments, disminucions i conversions",theory:{title:"Percentatges",text:`Un percentatge expressa una quantitat per cada 100 i és una forma habitual de proporcionalitat.`,formulas:[`a% de b = b × a/100`,`Percentatge que representa una part = part/total × 100`,`Augment: suma el percentatge al valor inicial`,`Disminució: resta el percentatge al valor inicial`,`Fracció ↔ decimal ↔ percentatge`]},gen:genPercentatges},
+  {id:"percentatges",course:"1r",exam1r:true,adaptivePractice:true,practiceCountsAnswers:true,practiceGen:genPercentatgesPractice,icon:"%",name:"Percentatges",short:"Càlcul, augments, disminucions i conversions",theory:{title:"Percentatges",text:`Un percentatge expressa una quantitat per cada 100 i és una forma habitual de proporcionalitat.`,formulas:[`a% de b = b × a/100`,`Percentatge que representa una part = part/total × 100`,`Augment: suma el percentatge al valor inicial`,`Disminució: resta el percentatge al valor inicial`,`Fracció ↔ decimal ↔ percentatge`]},gen:genPercentatges},
   {id:"notacio2",course:"2n",exam1r:false,icon:"&#128300;",name:"Notació científica",short:"⭐ Ampliació · prepara 2n d'ESO",theory:{title:"Notació científica",text:`La notació científica escriu nombres molt grans o molt petits com el producte d'un nombre entre 1 i 10 per una potència de 10.`,formulas:[`a × 10^n amb 1 ≤ a < 10`,`Exponent positiu: nombre gran`,`Exponent negatiu: nombre entre 0 i 1`,`La coma es desplaça tantes posicions com indica l'exponent`]},gen:genNotacioCientifica}
 ];
 MIFirstNumericTasks.extend(TOPICS,AMP_CATS);
@@ -3305,7 +3050,7 @@ function normalizeErrorEntry(e,topicId){
     options:Array.isArray(e.options)?e.options.slice():[],
     guide:Array.isArray(e.guide)?e.guide.slice():[],
     solution:Array.isArray(e.solution)?e.solution.slice():[],
-    familyId:e.familyId,theorySection:e.theorySection,proportionTheory:tid==='proporcionalitat'&&MIProporcionalitat.anchors.includes(e.proportionTheory)?e.proportionTheory:undefined,proportionAnswer:tid==='proporcionalitat'?e.proportionAnswer:undefined,proportionFields:tid==='proporcionalitat'?e.proportionFields:undefined,
+    familyId:e.familyId,theorySection:e.theorySection,percentTheory:tid==='percentatges'&&MIPercentatges.anchors.includes(e.percentTheory)?e.percentTheory:undefined,percentAnswer:tid==='percentatges'?e.percentAnswer:undefined,percentFields:tid==='percentatges'?e.percentFields:undefined,proportionTheory:tid==='proporcionalitat'&&MIProporcionalitat.anchors.includes(e.proportionTheory)?e.proportionTheory:undefined,proportionAnswer:tid==='proporcionalitat'?e.proportionAnswer:undefined,proportionFields:tid==='proporcionalitat'?e.proportionFields:undefined,
     fractionsTheory:tid==='fraccions'&&MIFraccions.anchors.includes(e.fractionsTheory)?e.fractionsTheory:undefined,
     fractionsAnswer:tid==='fraccions'?e.fractionsAnswer:undefined,fractionsFields:tid==='fraccions'?e.fractionsFields:undefined,fractionsOptionLabels:tid==='fraccions'?e.fractionsOptionLabels:undefined,
     decimalsTheory:tid==='decimals'&&MIDecimals.anchors.includes(e.decimalsTheory)?e.decimalsTheory:undefined,
@@ -3366,7 +3111,7 @@ function buildErrorRecord(ex,studentAnswer,source){
     guide:Array.isArray(ex.guide)?ex.guide.slice():[],
     review:miReviewPoints(ex),
     solution:Array.isArray(ex.solution)?ex.solution.slice():[],
-    familyId:ex.familyId,theorySection:ex.theorySection,proportionTheory:ex.proportionTheory,proportionAnswer:ex.proportionAnswer,proportionFields:ex.proportionFields,fractionsTheory:ex.fractionsTheory,fractionsAnswer:ex.fractionsAnswer,fractionsFields:ex.fractionsFields,fractionsOptionLabels:ex.fractionsOptionLabels,
+    familyId:ex.familyId,theorySection:ex.theorySection,percentTheory:ex.percentTheory,percentAnswer:ex.percentAnswer,percentFields:ex.percentFields,proportionTheory:ex.proportionTheory,proportionAnswer:ex.proportionAnswer,proportionFields:ex.proportionFields,fractionsTheory:ex.fractionsTheory,fractionsAnswer:ex.fractionsAnswer,fractionsFields:ex.fractionsFields,fractionsOptionLabels:ex.fractionsOptionLabels,
     decimalsTheory:ex.decimalsTheory,decimalsAnswer:ex.decimalsAnswer,decimalsFields:ex.decimalsFields,decimalsOptionLabels:ex.decimalsOptionLabels,
     entersTheory:ex.entersTheory,entersAnswer:ex.entersAnswer,entersFields:ex.entersFields,entersOptionLabels:ex.entersOptionLabels,
     jerarquiaTheory:ex.jerarquiaTheory,divisTheory:ex.divisTheory,mcmTheory:ex.mcmTheory,
@@ -3558,6 +3303,7 @@ function strictOpenForm(ex){
   return /percentatge|fracci[oó]|decimal|arrodoneix|notaci[oó] cient[ií]fica|factoritza|descompon|quin signe|ordena/.test(q);
 }
 function openOk1(correct,value,ex){
+  if(ex?.percentAnswer)return MIPercentatges.matches(ex.percentAnswer,value);
   if(ex?.proportionAnswer)return MIProporcionalitat.matches(ex.proportionAnswer,value);
   if(ex?.fractionsAnswer)return MIFraccions.matches(ex.fractionsAnswer,value);
   if(ex?.decimalsAnswer)return MIDecimals.matches(ex.decimalsAnswer,value);
@@ -3737,11 +3483,13 @@ function genMcdPractice(type,level,random=rnd){
   return {...exercise,taskDifficulty:level,diff:level};
 }
 
+function genPercentatgesPractice(type,level,random=rnd){return MIPercentatges.generate(type,random);}
 function genProporcionalitatPractice(type,level,random=rnd){return MIProporcionalitat.generate(type,random);}
 function genFraccionsPractice(type,level,random=rnd){return MIFraccions.generate(type,random);}
 function genDecimalsPractice(type,level,random=rnd){return MIDecimals.generate(type,random);}
 function genEntersPractice(type,level,random=rnd){return MIEnters.generate(type,random);}
 function adaptivePracticeGroups(t){
+  if(t.id==='percentatges')return MIPercentatges.families;
   if(t.id==='proporcionalitat')return MIProporcionalitat.families;
   if(t.id==='fraccions')return MIFraccions.families;
   if(t.id==='decimals')return MIDecimals.families;
@@ -3851,7 +3599,7 @@ function showEx(){
     document.getElementById('og').innerHTML='';
     document.getElementById('openWrap').style.display='block';
     var inp=document.getElementById('openInput');inp.value='';inp.disabled=false;inp.className='open-input';
-    const structured=currentEx.proportionFields?renderMcdFields(currentEx.proportionFields):currentEx.fractionsFields?renderMcdFields(currentEx.fractionsFields):currentEx.decimalsFields?renderMcdFields(currentEx.decimalsFields):currentEx.entersFields?renderMcdFields(currentEx.entersFields):currentEx.mcmFields?.length>1?
+    const structured=currentEx.percentFields?renderMcdFields(currentEx.percentFields):currentEx.proportionFields?renderMcdFields(currentEx.proportionFields):currentEx.fractionsFields?renderMcdFields(currentEx.fractionsFields):currentEx.decimalsFields?renderMcdFields(currentEx.decimalsFields):currentEx.entersFields?renderMcdFields(currentEx.entersFields):currentEx.mcmFields?.length>1?
       renderMcdFields(currentEx.mcmFields):renderDivisReasoning(currentEx.divisReasoning);
     const singleList=currentEx.mcmFields?.length===1&&currentEx.mcmFields[0].list;
     const listLabel=document.getElementById('mcdListLabel');
@@ -3887,12 +3635,12 @@ function selAns(idx,btn){
 }
 function checkOpen(){
   if(state.answered)return;
-  if(currentEx.proportionFields||currentEx.fractionsFields||currentEx.decimalsFields||currentEx.entersFields||currentEx.mcmFields?.length>1){
+  if(currentEx.percentFields||currentEx.proportionFields||currentEx.fractionsFields||currentEx.decimalsFields||currentEx.entersFields||currentEx.mcmFields?.length>1){
     const form=document.getElementById('divisReasoning');
     if(!form.reportValidity())return;
     const values=[...new FormData(form).values()].map(value=>value.trim());
     if(values.some(value=>!value))return;
-    const responseFields=currentEx.proportionFields||currentEx.fractionsFields||currentEx.decimalsFields||currentEx.entersFields||currentEx.mcmFields;
+    const responseFields=currentEx.percentFields||currentEx.proportionFields||currentEx.fractionsFields||currentEx.decimalsFields||currentEx.entersFields||currentEx.mcmFields;
     const given=currentEx.fractionsOptionLabels||currentEx.decimalsOptionLabels||currentEx.entersOptionLabels||currentEx.mcmOptionLabels?responseFields.map((field,i)=>field.label+': '+values[i]).join(' / '):values.join('; ');
     form.querySelectorAll('input,select,button').forEach(control=>control.disabled=true);
     processPracticeAnswer(openOk1(currentEx.correct,values,currentEx),given);
@@ -3938,7 +3686,7 @@ function renderMcdFields(fields){
       shuffle(field.options).map(option=>'<option>'+escHtml(option)+'</option>').join('')+'</select>';
     const hint=field.list?'Separa els enters amb comes, punts i coma o espais. Pots escriure’ls en qualsevol ordre.':
       field.factor?'Escriu un producte de factors primers amb ×, ·, * o x. Pots usar potències.':'';
-    const placeholder=field.list?'Llista d’enters':field.factor?'Per exemple, 2² × 3':'Escriu un nombre';
+    const placeholder=field.placeholder|| (field.list?'Llista d’enters':field.factor?'Per exemple, 2² × 3':'Escriu un nombre');
     return label+'<input'+attributes+' placeholder="'+placeholder+'"'+(hint?' aria-describedby="'+id+'Hint"':'')+' autocomplete="off">'+
       (hint?'<p class="open-hint" id="'+id+'Hint">'+hint+'</p>':'');
   }).join('')+'<button class="btn-check" type="submit">Comprova →</button>';
@@ -3979,7 +3727,7 @@ function processPracticeAnswer(isOk,studentAnswer,message){
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
-  var theoryLink=miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.proportionTheory||currentEx.fractionsTheory||currentEx.decimalsTheory||currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
+  var theoryLink=miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.percentTheory||currentEx.proportionTheory||currentEx.fractionsTheory||currentEx.decimalsTheory||currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
   var fb=document.getElementById('fbA');
   if(isOk){
     state.correctStreak++;updateSBar();
@@ -4199,7 +3947,7 @@ function ampRegisterError(p,given){
   var tid=p.topicId||'ops',t=TOPICS.find(function(x){return x.id===tid;});
   if(!state.errors[tid])state.errors[tid]=[];
   const answer=p.examAnswer||p.answer;
-  var rec={id:makeErrorId(),topicId:tid,topicName:p.topicName||(t?t.name:p.cat),type:p.type===undefined?null:p.type,question:p.text||'',answer:given,correct:p.bankAnswerText||(answer&&answer.val!==undefined?String(answer.val):''),options:[],guide:p.practiceHints||(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),solution:Array.isArray(p.hints)?p.hints.slice():[],familyId:p.familyId,theorySection:p.theorySection,proportionTheory:p.proportionTheory,familyId:p.familyId,theorySection:p.theorySection,proportionTheory:p.proportionTheory,jerarquiaTheory:p.examAnswer&&!p.divisTheory&&!p.mcmTheory?'problemes':undefined,fractionsTheory:p.fractionsTheory,fractionsAnswer:answer?.fractionsAnswer,decimalsTheory:p.decimalsTheory,decimalsAnswer:answer?.decimalsAnswer,entersTheory:p.entersTheory,entersAnswer:answer?.entersAnswer,divisTheory:p.divisTheory,mcmTheory:p.mcmTheory,level:null,taskDifficulty:p.taskDifficulty??null,taskDifficultyStatus:p.taskDifficultyStatus||'legacy',difficultyBank:p.difficultyBank||null,difficultyKey:p.difficultyKey||null,variantId:p.variantId||null,diff:p.diff??null,source:'ampliacio',timestamp:new Date().toISOString()};
+  var rec={id:makeErrorId(),topicId:tid,topicName:p.topicName||(t?t.name:p.cat),type:p.type===undefined?null:p.type,question:p.text||'',answer:given,correct:p.bankAnswerText||(answer&&answer.val!==undefined?String(answer.val):''),options:[],guide:p.practiceHints||(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),solution:Array.isArray(p.hints)?p.hints.slice():[],familyId:p.familyId,theorySection:p.theorySection,percentTheory:p.percentTheory,percentAnswer:p.percentAnswer,percentFields:p.percentFields,proportionTheory:p.proportionTheory,familyId:p.familyId,theorySection:p.theorySection,percentTheory:p.percentTheory,percentAnswer:p.percentAnswer,percentFields:p.percentFields,proportionTheory:p.proportionTheory,jerarquiaTheory:p.examAnswer&&!p.divisTheory&&!p.mcmTheory?'problemes':undefined,fractionsTheory:p.fractionsTheory,fractionsAnswer:answer?.fractionsAnswer,decimalsTheory:p.decimalsTheory,decimalsAnswer:answer?.decimalsAnswer,entersTheory:p.entersTheory,entersAnswer:answer?.entersAnswer,divisTheory:p.divisTheory,mcmTheory:p.mcmTheory,level:null,taskDifficulty:p.taskDifficulty??null,taskDifficultyStatus:p.taskDifficultyStatus||'legacy',difficultyBank:p.difficultyBank||null,difficultyKey:p.difficultyKey||null,variantId:p.variantId||null,diff:p.diff??null,source:'ampliacio',timestamp:new Date().toISOString()};
   var bucket=state.errors[tid],last=bucket.length?bucket[bucket.length-1]:null;
   var same=last&&last.type===rec.type&&last.question===rec.question&&last.answer===rec.answer&&last.correct===rec.correct&&last.source===rec.source;
   if(!same)bucket.push(rec);saveState();
@@ -4215,7 +3963,7 @@ function ampCheckAnswer(){
     if(s.required&&!ok)requiredStepsOk=false;
     inp.classList.toggle('ok',ok);inp.classList.toggle('err',!ok&&(s.required||inp.value.trim()!==''));if(ok)stepsOk++;
   });
-  var finalOk=false;try{finalOk=p.answer.fractionsAnswer||p.answer.decimalsAnswer||p.answer.entersAnswer||p.answer.opsAnswer||p.answer.potenciesAnswer||p.answer.jerarquiaAnswer||p.answer.divisAnswer||p.answer.mcmFields?p.answer.check(finalVal):MIValidation.grade({...p,question:p.question||p.text,correct:p.answer.val},finalVal,()=>p.answer.check(finalVal));}catch(e){}
+  var finalOk=false;try{finalOk=p.answer.percentAnswer||p.answer.fractionsAnswer||p.answer.decimalsAnswer||p.answer.entersAnswer||p.answer.opsAnswer||p.answer.potenciesAnswer||p.answer.jerarquiaAnswer||p.answer.divisAnswer||p.answer.mcmFields?p.answer.check(finalVal):MIValidation.grade({...p,question:p.question||p.text,correct:p.answer.val},finalVal,()=>p.answer.check(finalVal));}catch(e){}
   var completeOk=finalOk&&requiredStepsOk;
   window.MIAnalytics?.answer(completeOk,p.topicId);finalInp.classList.toggle('ok',finalOk);finalInp.classList.toggle('err',!finalOk);
   document.querySelectorAll('#sAmpProb .step-input,#sAmpProb .final-input').forEach(function(el){el.disabled=true;});
@@ -4232,9 +3980,9 @@ function ampCheckAnswer(){
   }else if(quality==='part'){
     fb='<div class="fb-box fb-part"><h4>⚠️ Correcte, però has utilitzat la pista.</h4></div>';
   }else{
-    fb='<div class="fb-box fb-err"><h4>❌ Resposta incorrecta</h4>La resposta correcta és: <b>'+(p.bankAnswerText||(p.examAnswer||p.answer).val)+'</b><div class="sol-steps"><b>Solució pas a pas:</b><br>'+(p.hints||[]).map(function(h,i){return '<div class="sol-step">Pas '+(i+1)+': '+h+'</div>';}).join('')+'</div>'+miTheoryLinkHtml(p.topicId,undefined,p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory||(p.examAnswer?'problemes':undefined))+'</div>';
+    fb='<div class="fb-box fb-err"><h4>❌ Resposta incorrecta</h4>La resposta correcta és: <b>'+(p.bankAnswerText||(p.examAnswer||p.answer).val)+'</b><div class="sol-steps"><b>Solució pas a pas:</b><br>'+(p.hints||[]).map(function(h,i){return '<div class="sol-step">Pas '+(i+1)+': '+h+'</div>';}).join('')+'</div>'+miTheoryLinkHtml(p.topicId,undefined,p.percentTheory||p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory||(p.examAnswer?'problemes':undefined))+'</div>';
   }
-  if(completeOk&&(p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory))fb+=miTheoryLinkHtml(p.topicId,undefined,p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory);
+  if(completeOk&&(p.percentTheory||p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory))fb+=miTheoryLinkHtml(p.topicId,undefined,p.percentTheory||p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory);
   document.getElementById('ampFbArea').innerHTML=fb;
   document.getElementById('ampActionRow').style.display='flex';
   var isLast=ampSession.idx>=ampSession.probs.length-1,btn=document.getElementById('ampBtnNext');
@@ -4289,10 +4037,10 @@ function showErrorSummary(){
           +miReviewHtml(e);
         if(Array.isArray(e.solution)&&e.solution.length){
           html+='<button class="bs" onclick="toggleSavedSolution(&quot;'+solId+'&quot;,this)" style="margin-top:10px">&#128214; Veure explicació</button>'
-            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory||t.id==='proporcionalitat'||t.id==='mcmmcd'?miTheoryLinkHtml(t.id,undefined,e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory):'')+'</div>';
+            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory||t.id==='percentatges'||t.id==='proporcionalitat'||t.id==='mcmmcd'?miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory):'')+'</div>';
         }else{
           html+='<div style="margin-top:10px;font-size:.8rem;color:var(--muted)">Aquest error és d\'una versió anterior i no tenia l\'explicació desada.</div>';
-          if(t.id==='proporcionalitat'||t.id==='fraccions'||t.id==='mcmmcd'||t.id==='enters'||t.id==='decimals')html+=miTheoryLinkHtml(t.id,undefined,e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory);
+          if(t.id==='percentatges'||t.id==='proporcionalitat'||t.id==='fraccions'||t.id==='mcmmcd'||t.id==='enters'||t.id==='decimals')html+=miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory);
         }
         html+='<button class="bw" onclick="deleteSavedError(&quot;'+t.id+'&quot;,&quot;'+escHtml(e.id)+'&quot;)" style="margin-top:8px">&#128465; Esborra aquest error</button>'
           +'</div>';
@@ -4364,7 +4112,7 @@ function wrapExamProblem(p){
     type:p.type,variantId:p.variantId||null,diff:p.diff||2,
     question:p.examText||p.text||'',correct:answer&&answer.val!==undefined?String(answer.val):'',
     options:[],guide:(p.steps||[]).map(function(s){return s.hint;}).filter(Boolean),
-    solution:Array.isArray(p.hints)?p.hints.slice():[],familyId:p.familyId,theorySection:p.theorySection,proportionTheory:p.proportionTheory,
+    solution:Array.isArray(p.hints)?p.hints.slice():[],familyId:p.familyId,theorySection:p.theorySection,percentTheory:p.percentTheory,percentAnswer:p.percentAnswer,percentFields:p.percentFields,proportionTheory:p.proportionTheory,
     decimalsAnswer:answer?.decimalsAnswer,fractionsTheory:p.fractionsTheory,fractionsAnswer:answer?.fractionsAnswer,decimalsTheory:p.decimalsTheory,
     entersAnswer:answer?.entersAnswer,entersTheory:p.entersTheory,
     opsAnswer:answer?.opsAnswer,
@@ -4436,6 +4184,7 @@ function showEQ(){
     document.getElementById('examO').innerHTML='<div style="display:flex;gap:10px;align-items:center;margin-bottom:14px"><input class="final-input" id="examOpenAns" style="min-width:0" placeholder="'+(q.jerarquiaAnswer?'Expressió = resultat':'Escriu la resposta final...')+'" autocomplete="off" onkeydown="if(event.key===\'Enter\')checkExamOpenAnswer()"><button class="check-btn" id="examOpenCheck" onclick="checkExamOpenAnswer()">Comprovar &#10003;</button></div>';
     if(q.fractionsAnswer?.fields?.length===2||q.decimalsAnswer?.fields?.length===2)document.getElementById('examO').innerHTML=entersPairControls(q.fractionsAnswer||q.decimalsAnswer,'examOpenAns','checkExamOpenAnswer');
     if(q.entersAnswer?.fields.length===2)document.getElementById('examO').innerHTML=entersPairControls(q.entersAnswer,'examOpenAns','checkExamOpenAnswer');
+    if(q.percentAnswer?.kind==='choice'){const old=document.getElementById('examOpenAns'),select=document.createElement('select');select.id=old.id;select.className=old.className;select.innerHTML='<option value="">Tria una resposta</option>'+q.percentFields[0].options.map(x=>'<option>'+escHtml(x)+'</option>').join('');old.replaceWith(select);}
     if(q.topicId==='proporcionalitat'&&q.familyId==='P01'){const old=document.getElementById('examOpenAns'),select=document.createElement('select');select.id=old.id;select.className=old.className;select.innerHTML='<option value="">Tria una resposta</option><option>Sí</option><option>No</option>';old.replaceWith(select);}
     setTimeout(function(){var el=document.getElementById('examOpenAns');if(el)el.focus();},40);
   }else{
@@ -4451,7 +4200,7 @@ function selEA(idx,btn){
   document.querySelectorAll('#examO .ob').forEach(function(b){b.disabled=true;if(String(b.dataset.answer??b.textContent)===String(q.correct))b.classList.add('correct');});
   if(!ok)btn.classList.add('wrong');
   var solHTML='<div class="solbox">'+solSteps(q.solution)+'</div>';
-  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+q.correct+'</b>')+'</h4>'+solHTML+(q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory?miTheoryLinkHtml(q.topicId,undefined,q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory):'')+'</div>';
+  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+q.correct+'</b>')+'</h4>'+solHTML+(q.percentTheory||q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory?miTheoryLinkHtml(q.topicId,undefined,q.percentTheory||q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory):'')+'</div>';
   document.getElementById('bNExam').style.display='block';
   document.getElementById('bNExam').textContent=state.examIdx+1<state.examQs.length?'Seguent ->':'Veure resultat';
 }
@@ -4461,14 +4210,14 @@ function checkExamOpenAnswer(){
   if(!q||!q.examProblem||!inp)return;
   var val=inp.value;if(!String(val).trim())return;
   if(q.fractionsAnswer?.fields?.length===2||q.decimalsAnswer?.fields?.length===2||q.entersAnswer?.fields.length===2){const second=document.getElementById('examOpenAns1');if(!second.value.trim())return;val+='; '+second.value.trim();second.disabled=true;}
-  var ok=false;try{ok=q.fractionsAnswer?MIFraccions.matches(q.fractionsAnswer,val):q.decimalsAnswer?MIDecimals.matches(q.decimalsAnswer,val):q.entersAnswer?MIEnters.matches(q.entersAnswer,val):q.mcmFields?MIMcdMcm.matches(q.mcmFields,val):q.divisAnswer?MIDivisibilitat.matches(q.divisAnswer,val):q.jerarquiaAnswer?MIJerarquia.matches(q.jerarquiaAnswer,val):q.opsAnswer||q.potenciesAnswer?q.answerCheck(val):MIValidation.grade(q,val,()=>q.answerCheck(val));}catch(e){ok=false;}
+  var ok=false;try{ok=q.percentAnswer?MIPercentatges.matches(q.percentAnswer,val):q.fractionsAnswer?MIFraccions.matches(q.fractionsAnswer,val):q.decimalsAnswer?MIDecimals.matches(q.decimalsAnswer,val):q.entersAnswer?MIEnters.matches(q.entersAnswer,val):q.mcmFields?MIMcdMcm.matches(q.mcmFields,val):q.divisAnswer?MIDivisibilitat.matches(q.divisAnswer,val):q.jerarquiaAnswer?MIJerarquia.matches(q.jerarquiaAnswer,val):q.opsAnswer||q.potenciesAnswer?q.answerCheck(val):MIValidation.grade(q,val,()=>q.answerCheck(val));}catch(e){ok=false;}
   if(ok)state.examScore++;
   state.examAnswers.push({ok:ok,q:stripTags(q.question).slice(0,90),correct:q.correct,given:val,topicId:q.topicId,topicName:q.topicName,isProblem:true,examProblem:true});
   if(!ok)registerError(q,val,'exam');
   inp.disabled=true;inp.classList.toggle('ok',ok);inp.classList.toggle('err',!ok);
   var cb=document.getElementById('examOpenCheck');if(cb)cb.disabled=true;
   var solHTML=q.solution&&q.solution.length?'<div class="solbox">'+solSteps(q.solution)+'</div>':'';
-  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+escHtml(q.correct)+'</b>')+'</h4>'+solHTML+(q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory||q.divisTheory||q.jerarquiaTheory?miTheoryLinkHtml(q.topicId,undefined,q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory||q.divisTheory||q.jerarquiaTheory):'')+'</div>';
+  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+escHtml(q.correct)+'</b>')+'</h4>'+solHTML+(q.percentTheory||q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory||q.divisTheory||q.jerarquiaTheory?miTheoryLinkHtml(q.topicId,undefined,q.percentTheory||q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory||q.divisTheory||q.jerarquiaTheory):'')+'</div>';
   document.getElementById('bNExam').style.display='block';
   document.getElementById('bNExam').textContent=state.examIdx+1<state.examQs.length?'Seguent ->':'Veure resultat';
 }
@@ -4625,7 +4374,7 @@ function initPage(){
 miTaskDifficulty.bindBanks({algebraOpen:typeof ALG_OPEN_PATTERNS!=='undefined'?ALG_OPEN_PATTERNS:null,numericProblems:typeof AMP_CATS!=='undefined'?AMP_CATS:null,measureProblems:typeof MEASURE_PROBLEM_PATTERNS!=='undefined'?MEASURE_PROBLEM_PATTERNS:null,spatialOpen:typeof SP_OPEN_PATTERNS!=='undefined'?SP_OPEN_PATTERNS:null,stochasticOpen:typeof ST_OPEN_PATTERNS!=='undefined'?ST_OPEN_PATTERNS:null});
 miTaskDifficulty.bindDisplay({
   showName:'showEx',current:()=>typeof curEx!=='undefined'?curEx:currentEx,
-  useAssignedDifficulty:exercise=>!!exercise.proportionTheory&&Number.isInteger(exercise.taskDifficulty)||!!exercise.fractionsTheory&&Number.isInteger(exercise.taskDifficulty)||!!exercise.decimalsTheory&&Number.isInteger(exercise.taskDifficulty)||!!exercise.opsTheory||!!(exercise.entersTheory||exercise.potenciesTheory||exercise.jerarquiaTheory||exercise.divisTheory||exercise.mcmTheory)&&Number.isInteger(exercise.taskDifficulty),state:()=>typeof ST!=='undefined'?ST:state
+  useAssignedDifficulty:exercise=>!!exercise.percentTheory&&Number.isInteger(exercise.taskDifficulty)||!!exercise.proportionTheory&&Number.isInteger(exercise.taskDifficulty)||!!exercise.fractionsTheory&&Number.isInteger(exercise.taskDifficulty)||!!exercise.decimalsTheory&&Number.isInteger(exercise.taskDifficulty)||!!exercise.opsTheory||!!(exercise.entersTheory||exercise.potenciesTheory||exercise.jerarquiaTheory||exercise.divisTheory||exercise.mcmTheory)&&Number.isInteger(exercise.taskDifficulty),state:()=>typeof ST!=='undefined'?ST:state
 });
 loadState();initPage();
 
