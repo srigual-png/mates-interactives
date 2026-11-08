@@ -419,6 +419,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{
   }
 })();
 </script>
+<script src="../assets/js/teoria-families-1eso.js"></script>
 <script src="../assets/js/analitica-mi.js"></script>
 <style>.mi-proportion-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:0.9rem}.mi-proportion-table caption{padding:8px;font-weight:600}.mi-proportion-table th,.mi-proportion-table td{border:1px solid #b8c6da;padding:8px 5px;text-align:center}.mi-proportion-table th{background:#edf2fa;color:#24344b}.mi-proportion-table td{background:#fff;color:#24344b}</style>
 </head>
@@ -3190,7 +3191,9 @@ var MI_THEORY_PAGES={
   percentatges:'teoria/numeric/percentatges-1r-eso.html',
   notacio2:'teoria/numeric/notacio-cientifica-ampliacio-2n-eso.html'
 };
-function miTheoryLinkHtml(topicId,label,section){
+function miTheoryLinkHtml(topicId,label,section,exercise){
+  var familySection=exercise&&(window.MITheoryVariants?.[topicId]?.[exercise.variantId]||window.MITheoryFamilies?.[topicId]?.[exercise.reasoningFamily]||window.MITheoryFamilies?.[topicId]?.[exercise.type]);
+  if(familySection)section=familySection;
   var href=MI_THEORY_PAGES[topicId];
   if(href&&section)href+='#'+section;
   if(!href)return '';
@@ -3727,7 +3730,7 @@ function processPracticeAnswer(isOk,studentAnswer,message){
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
-  var theoryLink=miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.percentTheory||currentEx.proportionTheory||currentEx.fractionsTheory||currentEx.decimalsTheory||currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
+  var theoryLink=miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.percentTheory||currentEx.proportionTheory||currentEx.fractionsTheory||currentEx.decimalsTheory||currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory,currentEx);
   var fb=document.getElementById('fbA');
   if(isOk){
     state.correctStreak++;updateSBar();
@@ -3980,9 +3983,10 @@ function ampCheckAnswer(){
   }else if(quality==='part'){
     fb='<div class="fb-box fb-part"><h4>⚠️ Correcte, però has utilitzat la pista.</h4></div>';
   }else{
-    fb='<div class="fb-box fb-err"><h4>❌ Resposta incorrecta</h4>La resposta correcta és: <b>'+(p.bankAnswerText||(p.examAnswer||p.answer).val)+'</b><div class="sol-steps"><b>Solució pas a pas:</b><br>'+(p.hints||[]).map(function(h,i){return '<div class="sol-step">Pas '+(i+1)+': '+h+'</div>';}).join('')+'</div>'+miTheoryLinkHtml(p.topicId,undefined,p.percentTheory||p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory||(p.examAnswer?'problemes':undefined))+'</div>';
+    fb='<div class="fb-box fb-err"><h4>❌ Resposta incorrecta</h4>La resposta correcta és: <b>'+(p.bankAnswerText||(p.examAnswer||p.answer).val)+'</b><div class="sol-steps"><b>Solució pas a pas:</b><br>'+(p.hints||[]).map(function(h,i){return '<div class="sol-step">Pas '+(i+1)+': '+h+'</div>';}).join('')+'</div>'+miTheoryLinkHtml(p.topicId,undefined,p.percentTheory||p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory||(p.examAnswer?'problemes':undefined),p)+'</div>';
   }
-  if(completeOk&&(p.percentTheory||p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory))fb+=miTheoryLinkHtml(p.topicId,undefined,p.percentTheory||p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory);
+  if(completeOk&&(p.percentTheory||p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory))fb+=miTheoryLinkHtml(p.topicId,undefined,p.percentTheory||p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory,p);
+  if(!fb.includes('mi-review-theory-link'))fb+=miTheoryLinkHtml(p.topicId,undefined,p.percentTheory||p.proportionTheory||p.fractionsTheory||p.decimalsTheory||p.entersTheory||p.mcmTheory||p.divisTheory,p);
   document.getElementById('ampFbArea').innerHTML=fb;
   document.getElementById('ampActionRow').style.display='flex';
   var isLast=ampSession.idx>=ampSession.probs.length-1,btn=document.getElementById('ampBtnNext');
@@ -4037,10 +4041,10 @@ function showErrorSummary(){
           +miReviewHtml(e);
         if(Array.isArray(e.solution)&&e.solution.length){
           html+='<button class="bs" onclick="toggleSavedSolution(&quot;'+solId+'&quot;,this)" style="margin-top:10px">&#128214; Veure explicació</button>'
-            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory||t.id==='percentatges'||t.id==='proporcionalitat'||t.id==='mcmmcd'?miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory):'')+'</div>';
+            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(MI_THEORY_PAGES[t.id]?miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory,e):'')+'</div>';
         }else{
           html+='<div style="margin-top:10px;font-size:.8rem;color:var(--muted)">Aquest error és d\'una versió anterior i no tenia l\'explicació desada.</div>';
-          if(t.id==='percentatges'||t.id==='proporcionalitat'||t.id==='fraccions'||t.id==='mcmmcd'||t.id==='enters'||t.id==='decimals')html+=miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory);
+          if(MI_THEORY_PAGES[t.id])html+=miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory,e);
         }
         html+='<button class="bw" onclick="deleteSavedError(&quot;'+t.id+'&quot;,&quot;'+escHtml(e.id)+'&quot;)" style="margin-top:8px">&#128465; Esborra aquest error</button>'
           +'</div>';
@@ -4200,7 +4204,7 @@ function selEA(idx,btn){
   document.querySelectorAll('#examO .ob').forEach(function(b){b.disabled=true;if(String(b.dataset.answer??b.textContent)===String(q.correct))b.classList.add('correct');});
   if(!ok)btn.classList.add('wrong');
   var solHTML='<div class="solbox">'+solSteps(q.solution)+'</div>';
-  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+q.correct+'</b>')+'</h4>'+solHTML+(q.percentTheory||q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory?miTheoryLinkHtml(q.topicId,undefined,q.percentTheory||q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory):'')+'</div>';
+  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+q.correct+'</b>')+'</h4>'+solHTML+(MI_THEORY_PAGES[q.topicId]?miTheoryLinkHtml(q.topicId,undefined,q.percentTheory||q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory,q):'')+'</div>';
   document.getElementById('bNExam').style.display='block';
   document.getElementById('bNExam').textContent=state.examIdx+1<state.examQs.length?'Seguent ->':'Veure resultat';
 }
@@ -4217,7 +4221,7 @@ function checkExamOpenAnswer(){
   inp.disabled=true;inp.classList.toggle('ok',ok);inp.classList.toggle('err',!ok);
   var cb=document.getElementById('examOpenCheck');if(cb)cb.disabled=true;
   var solHTML=q.solution&&q.solution.length?'<div class="solbox">'+solSteps(q.solution)+'</div>':'';
-  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+escHtml(q.correct)+'</b>')+'</h4>'+solHTML+(q.percentTheory||q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory||q.divisTheory||q.jerarquiaTheory?miTheoryLinkHtml(q.topicId,undefined,q.percentTheory||q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory||q.divisTheory||q.jerarquiaTheory):'')+'</div>';
+  document.getElementById('examF').innerHTML='<div class="fb '+(ok?'ok':'ko')+'"><h4>'+(ok?'&#9989; Correcte!':'&#10060; Incorrecte &mdash; R: <b>'+escHtml(q.correct)+'</b>')+'</h4>'+solHTML+(MI_THEORY_PAGES[q.topicId]?miTheoryLinkHtml(q.topicId,undefined,q.percentTheory||q.proportionTheory||q.fractionsTheory||q.decimalsTheory||q.mcmTheory||q.divisTheory||q.jerarquiaTheory,q):'')+'</div>';
   document.getElementById('bNExam').style.display='block';
   document.getElementById('bNExam').textContent=state.examIdx+1<state.examQs.length?'Seguent ->':'Veure resultat';
 }

@@ -211,3 +211,10 @@ body.mi-theory-numeric-1eso .mi-avis-btn .mi-avis-text { display: none; }
   body.mi-theory-numeric-1eso .btn { transition: none; }
   body.mi-theory-numeric-1eso :is(.btn-primary, .mi-avis-btn):hover { transform: none; }
 }
+
+/* Main procedure cards: one visible entry for every generator family. */
+body.mi-theory-numeric-1eso .family-grid a { text-align:left; padding:16px; display:flex; flex-direction:column; gap:8px; min-height:96px; justify-content:center; color:var(--pd); }
+body.mi-theory-numeric-1eso .family-card-title { font-size:.94rem; line-height:1.4; }
+body.mi-theory-numeric-1eso .family-card-caption { font-size:.76rem; font-weight:400; line-height:1.4; color:var(--muted); }
+body.mi-theory-numeric-1eso .example-question { margin-block:12px; }
+body.mi-theory-numeric-1eso ol.steps { padding-left:28px; }
