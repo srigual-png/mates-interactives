@@ -345,4 +345,3 @@ Inventari extret dels catàlegs i de les sortides reals dels generadors, abans d
 | Percentatges | fitxes: percentatges:ext-canvis-successius | Detectar un error de base percentual | Detectar un error de base percentual | `error-base` | [Sí](../../1eso/teoria/numeric/percentatges-1r-eso.html#error-base) |
 | Percentatges | fitxes: percentatges:ext-comparar-bases | Comparar percentatges amb bases diferents | Comparar percentatges amb bases diferents | `familia-percentatges-comparar-bases` | [Sí](../../1eso/teoria/numeric/percentatges-1r-eso.html#familia-percentatges-comparar-bases) |
 | Percentatges | fitxes: percentatges:ext-error-increment | Preu final amb augment o descompte | Preu final amb augment o descompte | `augments` | [Sí](../../1eso/teoria/numeric/percentatges-1r-eso.html#augments) |
-
