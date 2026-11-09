@@ -38,7 +38,7 @@
   --border:#dce3ed;--sh:0 2px 12px rgba(0,0,0,.08);--soft:#eaf1fd;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:75px}
 body{font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.6}
 a{color:inherit}
 .top-nav{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:var(--sh);position:sticky;top:0;z-index:100}
@@ -119,7 +119,14 @@ a{color:inherit}
 <a href="#restar">4. Restar</a>
 <a href="#multiplicar">5. Multiplicar</a>
 <a href="#problemes">6. Problemes</a>
-<a href="#moviments">Moviments</a>
+</nav>
+<nav aria-label="Procediments de les 17 famílies" class="quick-nav">
+<a href="#recta">Comparar i ordenar enters</a>
+<a href="#sumar">Sumar enters</a>
+<a href="#restar">Restar enters</a>
+<a href="#multiplicar">Multiplicar enters</a>
+<a href="#moviments">Desplaçar-se a la recta</a>
+<a href="#problemes">Resoldre problemes amb enters</a>
 <a href="#distancia-enters">Distància entre enters</a>
 <a href="#posicio-canvi">Posició final i desplaçament net</a>
 <a href="#valor-absolut">Valor absolut i distància al zero</a>
@@ -159,7 +166,7 @@ a{color:inherit}
 <div class="math">(−4) + (−7) = −11</div>
 <h3>Signes diferents</h3>
 <p>Compara els valors absoluts, calcula la diferència i conserva el signe del nombre que té més valor absolut.</p>
-<div class="example"><span class="example-label">EXEMPLE</span>
+<div class="example"><span class="example-label">EXEMPLE RESOLT</span>
 <div class="math">(−9) + (+5) = −4</div>
 <p>Com que |−9| és més gran que |5|, el resultat és negatiu.</p>
 </div>
@@ -195,7 +202,7 @@ a{color:inherit}
 <div class="rule"><strong>Cap a la dreta</strong>El valor augmenta.<div class="math">−3 + 5 = 2</div></div>
 <div class="rule"><strong>Cap a l'esquerra</strong>El valor disminueix.<div class="math">4 − 7 = −3</div></div>
 </div>
-<div class="example"><p>A la recta, surts de −3 i avances 5 unitats a la dreta: −3 + 5 = 2. Si després retrocedeixes 4: 2 − 4 = −2.</p></div>
+<div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>A la recta, surts de −3 i avances 5 unitats a la dreta: −3 + 5 = 2. Si després retrocedeixes 4: 2 − 4 = −2.</p></div>
 </section>
 <section class="card" id="problemes">
 <h2>🌡️ 7. Problemes amb nombres enters</h2>
@@ -206,7 +213,7 @@ a{color:inherit}
 <div class="rule"><strong>Altituds</strong>Per sobre del nivell del mar: positiu. Per sota: negatiu.</div>
 <div class="rule"><strong>Plantes o profunditats</strong>El zero pot representar la planta baixa o el nivell del mar.</div>
 </div>
-<div class="example"><p>Saldo inicial −20 €. Ingrés de 50 €: −20 + 50 = 30 €. Pagament de 15 €: 30 − 15 = 15 €. Conserva el saldo intermedi per aplicar el canvi següent.</p></div>
+<div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Saldo inicial −20 €. Ingrés de 50 €: −20 + 50 = 30 €. Pagament de 15 €: 30 − 15 = 15 €. Conserva el saldo intermedi per aplicar el canvi següent.</p></div>
 </section>
 <section class="card" id="distancia-enters"><h2>Distància entre enters</h2><p>Resta les dues posicions i pren el valor absolut. La distància compta unitats i sempre és positiva o zero; una posició, en canvi, pot ser negativa.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Entre −7 i −2: |−2 − (−7)| = |5| = 5 unitats. Entre −3 i 4: |4 − (−3)| = 7. Entre 0 i 0: 0 unitats.</p></div></section>
 <section class="card" id="posicio-canvi"><h2>Posició final i desplaçament net</h2><p>Aplica cada moviment a la posició inicial per saber on acabes. Després resta la posició inicial de la final per calcular el canvi net. Conserva el signe: una baixada dona un canvi negatiu.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Un submarinista comença a −18 m, puja 7 m i baixa 5 m. Posició intermèdia: −18 + 7 = −11 m. Posició final: −11 − 5 = −16 m. Desplaçament net: −16 − (−18) = +2 m. Acaba a −16 m, però ha pujat 2 m respecte de l’inici.</p></div></section>
