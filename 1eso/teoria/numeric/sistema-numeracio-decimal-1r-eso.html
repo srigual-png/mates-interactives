@@ -89,7 +89,7 @@ a{color:inherit}
   white-space:nowrap;
 }
 .wrap{
-  width:min(760px,calc(100% - 32px));
+  width:min(780px,calc(100% - 32px));
   margin:0 auto;
   padding:30px 0 54px;
 }
@@ -112,7 +112,7 @@ a{color:inherit}
   line-height:1.15;
   margin-bottom:9px;
 }
-.hero p{color:var(--muted);font-size:.96rem;max-width:620px;margin:0 auto}
+.hero p{color:var(--muted);font-size:.96rem;max-width:650px;margin:0 auto}
 .hero-actions{
   display:flex;
   gap:10px;
@@ -173,6 +173,7 @@ a{color:inherit}
 }
 .card h3{font-size:.96rem;margin:18px 0 7px}
 .card p + p{margin-top:9px}
+.card[id]{scroll-margin-top:70px}
 .callout{
   background:var(--soft);
   border-left:4px solid var(--primary);
@@ -310,7 +311,7 @@ a{color:inherit}
   .nav-link{padding:5px 5px;font-size:.75rem}
   .nav-main-label,.sense-label{display:none}
   .nav-title{font-size:.86rem}
-  .wrap{width:min(100% - 20px,760px);padding-top:20px}
+  .wrap{width:min(100% - 20px,780px);padding-top:20px}
   .quick-nav{grid-template-columns:1fr 1fr}
   .card{padding:17px}
   .problem-grid{grid-template-columns:1fr}
@@ -343,12 +344,30 @@ a{color:inherit}
 <div class="hero-actions">
 <a class="btn btn-primary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=1">🟢 Practicar · Guiat</a>
 <a class="btn btn-secondary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=2">🟠 Practicar · Autònom</a>
-<a class="btn btn-secondary" href="#que-son">📘 Comença la teoria</a>
+<a class="btn btn-secondary" href="#sistema-decimal">📘 Comença la teoria</a>
 </div>
 </header>
-<nav aria-label="Continguts de la teoria" class="quick-nav"><a href="#sistema-decimal">🔻 4. Sistema de numeració decimal</a></nav>
+<nav aria-label="Continguts de la teoria" class="quick-nav">
+<a href="#sistema-decimal">1. Valor posicional</a>
+<a href="#descompondre">2. Descomposició</a>
+<a href="#lectura-paraules-a-xifres">3. Llegir i escriure</a>
+<a href="#equivalencia-ordres-posicionals">4. Equivalències</a>
+</nav>
+<nav class="quick-nav" aria-label="Procediments de les 11 famílies">
+<a href="#sistema-decimal">Trobar el valor d’una xifra</a>
+<a href="#descompondre">Descompondre un nombre</a>
+<a href="#reconstruir-nombre">Reconstruir el nombre per posicions</a>
+<a href="#lectura-paraules-a-xifres">Passar de paraules a xifres</a>
+<a href="#escriure-xifres-a-paraules">Passar de xifres a paraules</a>
+<a href="#guionets-numerals-du-c">Posar els guionets</a>
+<a href="#canvi-posicional">Calcular un canvi de posició</a>
+<a href="#descomposicio-equivalent-reagrupament">Descompondre i reagrupar</a>
+<a href="#equivalencia-ordres-posicionals">Convertir entre ordres</a>
+<a href="#xifres-amb-condicions">Formar el nombre parell més gran</a>
+<a href="#auditar-error-de-posicio">Detectar un error de posició</a>
+</nav>
 <section class="card" id="sistema-decimal">
-<h2>🔻 4. Sistema de numeració decimal</h2>
+<h2>🔻 Trobar el valor d’una xifra</h2>
 <p>En el nostre sistema de numeració, el valor d'una xifra depèn de la <strong>posició</strong> que ocupa. Cada posició val deu vegades més que la que té a la seva dreta.</p>
 <div class="callout">
 <div class="math">345.678 = 3×100.000 + 4×10.000 + 5×1.000 + 6×100 + 7×10 + 8</div>
@@ -366,21 +385,118 @@ a{color:inherit}
 </tbody>
 </table>
 <div class="example">
-<span class="example-label">EXEMPLE · VALOR POSICIONAL</span>
+<span class="example-label">Exemple resolt</span>
 <p>Al nombre <strong>72.541</strong>, la xifra 5 ocupa la posició de les centenes.</p>
 <div class="math">5 × 100 = 500</div>
 </div>
-<div class="example">
-<span class="example-label">EXEMPLE · DESCOMPOSICIÓ</span>
-<div class="math">48.306 = 4×10.000 + 8×1.000 + 3×100 + 0×10 + 6×1</div>
-</div>
 <div class="tip">💡 El mateix dígit pot tenir valors molt diferents segons la posició: el 4 de 4.000 val 4.000, però el 4 de 40 val 40.</div>
-<div class="hero-actions">
-<a class="btn btn-primary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=1">🟢 Practicar · Guiat</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html?tema=decimal_sys&amp;nivell=2">🟠 Practicar · Autònom</a>
+</section>
+<section class="card" id="descompondre">
+<h2>Descompondre un nombre</h2>
+<p>Multiplica cada xifra pel valor de la posició que ocupa. Suma les aportacions. En la suma pots ometre els termes que valen zero.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Descomponem 48.306. Hi ha 4 desenes de miler, 8 milers, 3 centenes, 0 desenes i 6 unitats.</p>
+<div class="math">4 × 10.000 + 8 × 1.000 + 3 × 100 + 0 × 10 + 6 × 1</div>
+<p>La suma de les aportacions és 40.000 + 8.000 + 300 + 6 = <strong>48.306</strong>.</p>
 </div>
 </section>
-<section class="card example master-example"><h2>✏️ Exemple resolt pas a pas</h2><div class="steps"><div class="step">Volem descompondre <strong>472.305</strong>.</div><div class="step">Identifiquem el valor posicional de cada xifra: 4 centenes de miler, 7 desenes de miler, 2 milers, 3 centenes, 0 desenes i 5 unitats.</div><div class="step">Escrivim: <strong>472.305 = 400.000 + 70.000 + 2.000 + 300 + 5</strong>.</div><div class="step">Comprovem que la suma torna a donar el nombre inicial.</div></div></section><section class="card mistakes"><h2>⚠️ Errors freqüents</h2><ul><li>Confondre la xifra amb el seu valor posicional.</li><li>Oblidar els zeros interiors en una descomposició.</li><li>Llegir les posicions sense tenir en compte unitats, desenes, centenes i milers.</li></ul></section><section class="card check"><h2>✅ Comprova si ho has entès</h2><details><summary>Quin valor té el 4 a 45.000?</summary><div class="answer">40.000.</div></details><details><summary>Canvia el valor d’una xifra segons la posició?</summary><div class="answer">Sí. La mateixa xifra pot representar unitats, desenes, centenes, etc.</div></details></section><section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Sistema de numeració decimal</li></ul></section><section class="final-cta">
+<section class="card" id="reconstruir-nombre">
+<h2>Reconstruir el nombre per posicions</h2>
+<p>Col·loca les xifres de l’ordre més gran al més petit. Escriu un zero a cada posició buida entre la primera xifra i les unitats.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Tenim 4 desenes de miler, 7 centenes i 2 unitats. Falta la xifra dels milers i la de les desenes. Hi posem zeros.</p>
+<p>En ordre, les xifres són 4, 0, 7, 0 i 2. Obtenim <strong>40.702</strong>, que és 40.000 + 700 + 2.</p>
+</div>
+</section>
+<section class="card" id="lectura-paraules-a-xifres">
+<h2>Passar de paraules a xifres</h2>
+<p>Separa el nombre per la paraula <em>mil</em>. El grup de davant indica quants milers hi ha. El de darrere ha d’ocupar tres posicions: centenes, desenes i unitats. Completa amb zeros a l’esquerra d’aquest segon grup si cal.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>«Quaranta-dos mil trenta-cinc» són 42 milers i 35 unitats més. Escriu 42 per als milers i 035 per a les tres posicions finals.</p>
+<p>El nombre és <strong>42.035</strong>. Si després de <em>mil</em> no hi ha cap paraula, les tres posicions finals són 000.</p>
+</div>
+</section>
+<section class="card" id="escriure-xifres-a-paraules">
+<h2>Passar de xifres a paraules</h2>
+<p>Separa les tres últimes xifres. Llegeix el grup de l’esquerra seguit de <em>mil</em> i després llegeix l’últim grup. Els zeros que indiquen posicions buides no es pronuncien.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>A 305.071, el grup dels milers és 305 i el final és 071. Llegim «tres-cents cinc mil» i després «setanta-u».</p>
+<p>Escrivim <strong>tres-cents cinc mil setanta-u</strong>. Si només hi ha un miler, escrivim <em>mil</em>.</p>
+</div>
+</section>
+<section class="card" id="guionets-numerals-du-c">
+<h2>Posar els guionets</h2>
+<p>La regla D-U-C posa un guionet entre la desena i la unitat, i entre la unitat i <em>cents</em> quan formen una centena. Del 21 al 29, la <em>i</em> porta un guionet a cada costat. Escriu <em>mil</em> separat.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>2.324 s’escriu <strong>dos mil tres-cents vint-i-quatre</strong>. Unim «tres» i «cents», i a «vint-i-quatre» posem els dos guionets.</p>
+<p>A 347, escrivim <strong>tres-cents quaranta-set</strong>, amb un sol guionet entre «quaranta» i «set».</p>
+</div>
+</section>
+<section class="card" id="canvi-posicional">
+<h2>Calcular un canvi de posició</h2>
+<p>Calcula la contribució de la xifra a la posició inicial i a la nova. Com que les altres aportacions es mantenen, resta el valor inicial del nou per trobar l’augment.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>A 20.050 canviem 5 desenes per 5 milers. Les 5 desenes valen 50 i els 5 milers valen 5.000.</p>
+<p>El nombre augmenta <strong>5.000 − 50 = 4.950 unitats</strong>. Ho comprovem: 20.050 + 4.950 = 25.000.</p>
+</div>
+</section>
+<section class="card" id="descomposicio-equivalent-reagrupament">
+<h2>Descompondre i reagrupar</h2>
+<p>Quan hi ha deu unitats o més d’un ordre, canvia cada grup de deu per una unitat de l’ordre superior. El valor total es conserva. També pots multiplicar cada quantitat pel valor del seu ordre i sumar.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Tenim 14 centenes, 7 desenes i 3 unitats. Reagrupem 10 centenes en 1 miler i ens queden 4 centenes.</p>
+<p>El nombre és <strong>1.473</strong>. Ho comprovem: 14 × 100 + 7 × 10 + 3 × 1 = 1.400 + 70 + 3.</p>
+</div>
+</section>
+<section class="card" id="equivalencia-ordres-posicionals">
+<h2>Convertir entre ordres</h2>
+<p>Converteix totes les quantitats al mateix ordre abans de sumar-les. Cada pas cap a un ordre inferior multiplica el recompte per deu.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Quantes desenes són 3 milers i 4 centenes? Un miler són 100 desenes, així que 3 milers són 300 desenes. Una centena són 10 desenes, així que 4 centenes són 40 desenes.</p>
+<p>En total són <strong>340 desenes</strong>, que equivalen a 3.400 unitats.</p>
+</div>
+</section>
+<section class="card" id="xifres-amb-condicions">
+<h2>Formar el nombre parell més gran</h2>
+<p>Reserva una xifra parella per a les unitats. Per a cada unitat possible, ordena les altres xifres de major a menor. Compara els nombres obtinguts i tria el més gran que compleixi les condicions.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Amb 9, 7, 6 i 4, fent servir cada xifra una sola vegada, les unitats poden ser 4 o 6.</p>
+<p>Amb el 4 al final, el més gran és 9.764. Amb el 6 al final, és 9.746. El resultat és <strong>9.764</strong>.</p>
+</div>
+</section>
+<section class="card" id="auditar-error-de-posicio">
+<h2>Detectar un error de posició</h2>
+<p>Calcula el valor de l’expressió tal com està escrita. Resta aquest valor del nombre que es volia representar. Indica primer el valor representat i després les unitats que falten.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Per descompondre 372.406, algú ha escrit 300.000 + 70.000 + 2.000 + 4 × 10 + 6. L’expressió suma 372.046 perquè el 4 és a les desenes.</p>
+<p>Falten 372.406 − 372.046 = 360 unitats. La resposta, en l’ordre demanat, és <strong>372.046; 360</strong>.</p>
+</div>
+</section>
+<section class="card mistakes">
+<h2>⚠️ Errors freqüents</h2>
+<ul>
+<li>Confondre la xifra amb el valor que representa.</li>
+<li>Oblidar els zeros interiors quan es reconstrueix el nombre.</li>
+<li>Escriure «vint-i tres» en comptes de «vint-i-tres».</li>
+<li>Sumar recomptes d’ordres diferents abans de convertir-los al mateix ordre.</li>
+</ul>
+</section>
+<section class="card check">
+<h2>✅ Comprova si ho has entès</h2>
+<details><summary>1. Quin valor té el 4 a 45.000?</summary><div class="answer"><strong>40.000.</strong> El 4 és a les desenes de miler.</div></details>
+<details><summary>2. Com s’escriuen en xifres «divuit mil set»?</summary><div class="answer"><strong>18.007.</strong> El grup final ha de tenir tres xifres.</div></details>
+<details><summary>3. Quantes desenes són 2 milers i 3 centenes?</summary><div class="answer"><strong>230 desenes.</strong> Són 200 desenes dels milers i 30 de les centenes.</div></details>
+</section>
+<section class="summary-master" id="resum-master">
+<h2>🧠 Resum essencial</h2>
+<ul>
+<li>El valor d’una xifra és la xifra multiplicada pel valor de la seva posició.</li>
+<li>Deu unitats d’un ordre equivalen a una unitat del següent.</li>
+<li>Per llegir o escriure un nombre, separa el grup dels milers de les tres posicions finals.</li>
+<li>Per comparar dues descomposicions, calcula què val cadascuna.</li>
+</ul>
+</section>
+<section class="final-cta">
 <h2>Ja tens la teoria. Ara toca practicar.</h2>
 <p>Fes exercicis guiats, passa després al nivell autònom i repassa els errors que vagis cometent.</p>
 <div class="hero-actions">

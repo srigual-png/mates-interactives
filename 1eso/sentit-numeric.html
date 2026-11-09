@@ -3212,9 +3212,28 @@ const MI_NATURAL_THEORY_SECTIONS = Object.freeze({
   'nombres-amb-condicions':'nombres-amb-condicions',
   'patrons-numerics':'patrons-numerics'
 });
-function miNaturalTheoryLink(type){
-  const section = Object.hasOwn(MI_NATURAL_THEORY_SECTIONS,type) ? MI_NATURAL_THEORY_SECTIONS[type] : undefined;
-  return miTheoryLinkHtml('naturals',undefined,section);
+const MI_DECIMAL_SYSTEM_THEORY_SECTIONS = Object.freeze({
+  1:'sistema-decimal',
+  2:'descompondre',
+  3:'reconstruir-nombre',
+  4:'sistema-decimal',
+  'lectura-paraules-a-xifres':'lectura-paraules-a-xifres',
+  1002:'canvi-posicional',
+  'guionets-numerals-du-c':'guionets-numerals-du-c',
+  'descomposicio-equivalent-reagrupament':'descomposicio-equivalent-reagrupament',
+  'equivalencia-ordres-posicionals':'equivalencia-ordres-posicionals',
+  1001:'xifres-amb-condicions',
+  'escriure-xifres-a-paraules':'escriure-xifres-a-paraules',
+  'auditar-error-de-posicio':'auditar-error-de-posicio'
+});
+const MI_FAMILY_THEORY_SECTIONS = Object.freeze({
+  naturals:MI_NATURAL_THEORY_SECTIONS,
+  decimal_sys:MI_DECIMAL_SYSTEM_THEORY_SECTIONS
+});
+function miFamilyTheoryLink(topicId,type){
+  const sections=MI_FAMILY_THEORY_SECTIONS[topicId];
+  const section=Object.hasOwn(sections,type) ? sections[type] : undefined;
+  return miTheoryLinkHtml(topicId,undefined,section);
 }
 
 function selTopic(i){
@@ -3238,7 +3257,7 @@ function selTopic(i){
         +'<div style="line-height:1.45">'+escHtml(stripTags(e.question||e.q||''))+'</div>'
         +'<div style="font-size:.82rem;margin-top:5px"><span style="color:var(--err)">La teva: <b>'+escHtml(e.answer||'—')+'</b></span> · <span style="color:var(--ok)">Correcta: <b>'+escHtml(e.correct!==undefined?e.correct:e.c)+'</b></span></div>'
         +miReviewHtml(e);
-      if(t.id==='naturals')html+=miNaturalTheoryLink(e.type);
+      if(Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,t.id))html+=miFamilyTheoryLink(t.id,e.type);
       if(Array.isArray(e.solution)&&e.solution.length){
         html+='<button class="bs" style="margin-top:7px" onclick="toggleSavedSolution(&quot;'+localSolId+'&quot;,this)">&#128214; Veure explicació</button>'
           +'<div class="solbox" id="'+localSolId+'" style="display:none">'+solSteps(e.solution)+'</div>';
@@ -3748,7 +3767,7 @@ function processPracticeAnswer(isOk,studentAnswer,message){
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
-  var theoryLink=topic.id==='naturals' ? miNaturalTheoryLink(currentEx.type) : miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.percentTheory||currentEx.proportionTheory||currentEx.fractionsTheory||currentEx.decimalsTheory||currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
+  var theoryLink=Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,topic.id) ? miFamilyTheoryLink(topic.id,currentEx.type) : miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.percentTheory||currentEx.proportionTheory||currentEx.fractionsTheory||currentEx.decimalsTheory||currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
   var fb=document.getElementById('fbA');
   if(isOk){
     state.correctStreak++;updateSBar();
@@ -4056,7 +4075,7 @@ function showErrorSummary(){
           +'<div>Resposta correcta: <b style="color:var(--ok)">'+(t.id==='mcmmcd'&&MIMcdMcm.optionLabels(e.type)?formatMcdOption({...e,topicId:t.id},e.correct||'—'):escHtml(e.correct||'—'))+'</b></div></div>'
           +'<div class="saved-error-meta">'+modeTxt+typeTxt+diffTxt+'</div>'
           +miReviewHtml(e);
-        if(t.id==='naturals')html+=miNaturalTheoryLink(e.type);
+        if(Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,t.id))html+=miFamilyTheoryLink(t.id,e.type);
         if(Array.isArray(e.solution)&&e.solution.length){
           html+='<button class="bs" onclick="toggleSavedSolution(&quot;'+solId+'&quot;,this)" style="margin-top:10px">&#128214; Veure explicació</button>'
             +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory||t.id==='percentatges'||t.id==='proporcionalitat'||t.id==='mcmmcd'?miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory):'')+'</div>';
