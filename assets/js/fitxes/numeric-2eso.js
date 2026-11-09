@@ -2,7 +2,7 @@
 (function () {
   'use strict';
   const levels={
-    racionals:[[1,2,3,4,9,11],[5,6,7,10,12],[8,13,14,15]],
+    racionals:[[1,2,3,4,9,11,15],[5,6,7,8,10,12,13,14],[16,17,18]],
     fraccionsSentit:[[1,2,3,5,6,14],[4,7,9,11],[8,10,12,13,15]],
     operacionsRacionals:[[1,2,7,13,17],[3,4,5,6,11,14,16],[8,9,10,12,15,18]],
     potencies:[[1,2,3,4,5,8],[6,7,11,12,13,14],[9,10,15,16,17,18]],
@@ -22,8 +22,8 @@
     let text=plain(q.question);const nums=text.match(/-?\d+(?:[.,]\d+)?/g)||[];
     if(id==='racionals'){
       if(q.type===9)text+=' La recta va de 0 a 1 i està dividida en cinc parts iguals. Escriu la lletra del punt.';
-      if(q.type===10)text=text.replace('Quin nombre','Quin dels nombres proposats');
-      if(q.type===11)text+=' Indica si és una fracció, un nombre decimal o un percentatge.';
+      if(q.type===10)text=text.replace('Quin dels valors proposats','Tria entre els valors proposats');
+      if(q.type===11)text+=' Tria entre les categories enter, fracció, decimal i percentatge.';
       if(q.type===12)text=text.replace('compleixen una condició','han escollit una activitat de teatre');
       if([6,7].includes(q.type))text+=' Indica quin dels dos valors és més gran o si són iguals.';
     }
@@ -93,7 +93,7 @@
     const el=document.createElement('div');el.innerHTML=q.question;const svg=el.querySelector('svg');
     const question=paperQuestion(id,q),options=(q.allowOpen===false||(id==='racionals'&&q.type===10))?q.options.map(plain):[];
     let answer=plain(q.correct),steps=q.solution.map(plain);
-    if(id==='racionals'&&q.type===11)steps=[`La quantitat està escrita amb el símbol %.`,`Per tant, la representació ${plain(q.question).match(/\d+%/)?.[0]||''} és un percentatge.`];
+    if(id==='racionals'&&q.type===11)steps=q.solution.map(plain);
     if(id==='fraccionsSentit'){
       if([1,11].includes(q.type))answer+=' L';
       if([4,5,9,12].includes(q.type)&&/persones|alumnes/.test(question)&&/^\d+$/.test(answer))answer+=' persones';

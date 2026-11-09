@@ -14,6 +14,7 @@
   const pilot=(c,catalog)=>catalog.length>0&&catalog.every(t=>Array.isArray(t.families));
   const isStandard=q=>q.standard===true;
   const firstNumeric=c=>(window.MIWorksheetConfig?.id||c.contextId)==='1eso-numeric';
+  const secondNumeric=c=>(window.MIWorksheetConfig?.id||c.contextId)==='2eso-numeric';
   const fixedCounts=Object.freeze([5,8,10,15,20,25,30]);
   function difficultyQuotas(c){
     if(!fixedCounts.includes(c.count)||!worksheetTypes[c.worksheetType])throw new Error('Selecciona una quantitat i un tipus de fitxa vàlids.');
@@ -214,7 +215,7 @@
   }
   function validate(c, catalog) {
     if(firstNumeric(c)&&!fixedCounts.includes(c.count))return 'Selecciona 5, 8, 10, 15, 20, 25 o 30 exercicis.';
-    if(!(pilot(c,catalog)?Number.isInteger(c.count)&&c.count>=1&&c.count<=30:[5,10,15,20,25,30].includes(c.count))) return 'Selecciona un nombre d’exercicis vàlid.';
+    if(!(pilot(c,catalog)?Number.isInteger(c.count)&&c.count>=1&&c.count<=30:firstNumeric(c)?fixedCounts.includes(c.count):secondNumeric(c)?[5,8,10,15,20,25,30].includes(c.count):[5,10,15,20,25,30].includes(c.count))) return 'Selecciona un nombre d’exercicis vàlid.';
     if(!pilot(c,catalog)&&(!Array.isArray(c.percentages)||c.percentages.length!==3||c.percentages.some(p=>!Number.isInteger(p)||p<0||p>100||p%10)||c.percentages.reduce((a,b)=>a+b,0)!==100)) return 'Els percentatges han de sumar exactament el 100 %.';
     if(pilot(c,catalog)&&!worksheetTypes[c.worksheetType])return 'Selecciona un tipus de fitxa vàlid.';
     if(!c.topics.length) return 'Selecciona almenys un tema.';
