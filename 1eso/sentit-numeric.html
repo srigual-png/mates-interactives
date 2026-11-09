@@ -2237,7 +2237,17 @@ const POTENCIES_PRACTICE_FAMILIES=[
   [[7],['exponent-desconegut'],['acotar-arrel'],['recompte-multiplicatiu']],
   [['dos-quadrats-invers'],['diagnosticar-potencia-arrel']]
 ];
-const POTENCIES_THEORY=[null,'base-exponent','base-exponent','producte','producte','calcular','arrels','inverses'];
+const POTENCIES_THEORY=Object.freeze({
+  1:'base-exponent',2:'base-exponent',3:'producte',4:'producte',5:'calcular',6:'arrels',7:'inverses',
+  'base-deu-regularitat':'base-deu',
+  'exponent-desconegut':'exponent-desconegut',
+  'acotar-arrel':'acotar-arrels',
+  'recompte-multiplicatiu':'recompte-multiplicatiu',
+  'dos-quadrats-invers':'quadrats-en-context',
+  // The reasoning generator saves this family as numeric type 1001.
+  1001:'quadrats-en-context',
+  'diagnosticar-potencia-arrel':'errors-tipics'
+});
 const POWER_DIGITS='⁰¹²³⁴⁵⁶⁷⁸⁹';
 
 function powerParts(input){
@@ -2312,7 +2322,7 @@ function genPotenciesPractice(type,level,session){
   if(typeof type==='number'){
     return Object.assign(genPotenciesArrels(type),{taskDifficulty:level,diff:level});
   }
-  let question,correct,wrongs,guide,solution,answer,section,isProblem=false;
+  let question,correct,wrongs,guide,solution,answer,isProblem=false;
   if(type==='base-deu-regularitat'){
     const inverse=session.baseDeuInverse,exp=rnd(2,6),value=10**exp;
     question=inverse?`Quin exponent fa que una potència de base 10 valgui ${powerInteger(value)}?`
@@ -2322,7 +2332,6 @@ function genPotenciesPractice(type,level,session){
     guide=['Cada factor 10 desplaça totes les xifres una posició cap a l’esquerra.'];
     solution=[`${powerDisplay(10,exp)} = ${powerInteger(value)}. En el sistema decimal, multiplicar 1 per 10 ${exp} vegades escriu un 1 seguit de ${exp} zeros.`];
     answer={form:'integer',values:[inverse?exp:value]};
-    section='base-deu';
   }else if(type==='exponent-desconegut'){
     const base=rnd(2,6),exp=rnd(3,6),value=base**exp;
     question=`Quin exponent natural positiu fa que una potència de base ${base} valgui ${powerInteger(value)}?`;
@@ -2331,7 +2340,6 @@ function genPotenciesPractice(type,level,session){
     solution=Array.from({length:exp-1},(_,i)=>`${powerInteger(base**(i+1))} × ${base} = ${powerInteger(base**(i+2))}`);
     solution.push(`L’exponent és ${exp}. Com que la base és més gran que 1, els resultats creixen estrictament.`);
     answer={form:'integer',values:[exp]};
-    section=type;
   }else if(type==='acotar-arrel'){
     const lower=rnd(3,15),upper=lower+1,value=lower**2+rnd(1,2*lower);
     question=`Entre quins dos enters consecutius es troba √${value}? Escriu primer el més petit.`;
@@ -2340,7 +2348,6 @@ function genPotenciesPractice(type,level,session){
     guide=['Busca els quadrats perfectes immediatament inferior i superior al radicand.'];
     solution=[`${lower**2} &lt; ${value} &lt; ${upper**2}. Prenent arrels, ${lower} &lt; √${value} &lt; ${upper}.`];
     answer={form:'pair',values:[lower,upper]};
-    section='acotar-arrels';
   }else if(type==='recompte-multiplicatiu'){
     const base=rnd(2,5),exp=rnd(3,5),value=base**exp;
     const context=rnd(0,1)
@@ -2352,7 +2359,7 @@ function genPotenciesPractice(type,level,session){
     guide=['Hi ha un factor per cada posició o ronda.'];
     solution=[`${powerProduct(base,exp)} = ${correct}.`];
     answer={form:'power-equality',values:[base,exp,value]};
-    section=type;isProblem=true;
+    isProblem=true;
   }else if(type==='diagnosticar-potencia-arrel'){
     const model=POWER_DIAGNOSIS[rnd(0,POWER_DIAGNOSIS.length-1)];
     const end=model.eligible?rnd(17,35):rnd(6,12);
@@ -2365,15 +2372,15 @@ function genPotenciesPractice(type,level,session){
     guide=['Comprova els candidats de menor a major i compara els dos resultats.'];
     solution=[POWER_DIAGNOSIS_REASONS.find(reason=>reason.startsWith(model.reason)),`En ordre creixent, ${candidates.slice(0,first).join(' i ')} encara compleix la igualtat.`,`Amb ${counterexample}, ${model.show(counterexample)}. És el primer valor que la contradiu.`];
     answer={form:'diagnosis',values:[model.reason,counterexample]};
-    section='errors-tipics';isProblem=true;
+    isProblem=true;
   }else{
     const exercise=MIFirstNumericTasks.generate(type);
     const {gap,total}=exercise.reasoningData,large=Math.sqrt(Number(exercise.correct));
     const options=powerOptions(exercise.correct,[(large-gap)**2,total,large]);
-    return {...exercise,options,potenciesAnswer:{form:'integer',values:[large**2]},potenciesTheory:'quadrats-en-context',taskDifficulty:level};
+    return {...exercise,options,potenciesAnswer:{form:'integer',values:[large**2]},potenciesTheory:POTENCIES_THEORY[type],taskDifficulty:level};
   }
   return {type,question,correct,options:powerOptions(correct,wrongs),guide,solution,isProblem,
-    potenciesAnswer:answer,potenciesTheory:section,taskDifficulty:level,diff:level};
+    potenciesAnswer:answer,potenciesTheory:POTENCIES_THEORY[type],taskDifficulty:level,diff:level};
 }
 
 function genPotenciesArrels(type=rnd(1,7)){
@@ -3229,11 +3236,12 @@ const MI_DECIMAL_SYSTEM_THEORY_SECTIONS = Object.freeze({
 const MI_FAMILY_THEORY_SECTIONS = Object.freeze({
   naturals:MI_NATURAL_THEORY_SECTIONS,
   decimal_sys:MI_DECIMAL_SYSTEM_THEORY_SECTIONS,
-  ops:OPS_THEORY_SECTIONS
+  ops:OPS_THEORY_SECTIONS,
+  potencies:POTENCIES_THEORY
 });
 function miFamilyTheoryLink(topicId,type,source='practice'){
-  // Open problems and exams reuse operation type numbers with a different meaning.
-  if(topicId==='ops'&&source!=='practice')return miTheoryLinkHtml(topicId);
+  // Open problems and exams reuse practice type numbers with a different meaning.
+  if((topicId==='ops'||topicId==='potencies')&&source!=='practice')return miTheoryLinkHtml(topicId);
   const sections=MI_FAMILY_THEORY_SECTIONS[topicId];
   const section=Object.hasOwn(sections,type) ? sections[type] : undefined;
   return miTheoryLinkHtml(topicId,undefined,section);
@@ -3770,7 +3778,7 @@ function processPracticeAnswer(isOk,studentAnswer,message){
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
-  var theoryLink=Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,topic.id) ? miFamilyTheoryLink(topic.id,currentEx.type) : miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.percentTheory||currentEx.proportionTheory||currentEx.fractionsTheory||currentEx.decimalsTheory||currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
+  var theoryLink=Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,topic.id) ? miFamilyTheoryLink(topic.id,currentEx.type) : miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.percentTheory||currentEx.proportionTheory||currentEx.fractionsTheory||currentEx.decimalsTheory||currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.opsTheory);
   var fb=document.getElementById('fbA');
   if(isOk){
     state.correctStreak++;updateSBar();
