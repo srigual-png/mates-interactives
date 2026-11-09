@@ -1535,11 +1535,11 @@ const OPS_PRACTICE_FAMILIES=[
   [[4],[6],['capses'],['compensacio']],
   [[1001],['diagnosticar-divisio'],['reconstruir-total']]
 ];
-const OPS_THEORY_SECTIONS={
-  1:'operacions',2:'operacions',3:'operacions',4:'comprovar-divisio',5:'problemes',6:'exemple-resolt',
-  1001:'compra-minima',capses:'problemes','triar-operacio':'problemes',compensacio:'compensacio',
+const OPS_THEORY_SECTIONS=Object.freeze({
+  1:'sumar',2:'restar',3:'multiplicar',4:'divisio-entera',5:'cost-i-canvi',6:'produccio-per-torns',
+  1001:'compra-minima',capses:'capses','triar-operacio':'problemes',compensacio:'compensacio',
   'diagnosticar-divisio':'comprovar-divisio','reconstruir-total':'reconstruir-total'
-};
+});
 const OPS_DIVISION_REASONS={
   A:'La igualtat no reconstrueix el dividend.',
   B:'El residu és igual o superior al divisor.'
@@ -3228,9 +3228,12 @@ const MI_DECIMAL_SYSTEM_THEORY_SECTIONS = Object.freeze({
 });
 const MI_FAMILY_THEORY_SECTIONS = Object.freeze({
   naturals:MI_NATURAL_THEORY_SECTIONS,
-  decimal_sys:MI_DECIMAL_SYSTEM_THEORY_SECTIONS
+  decimal_sys:MI_DECIMAL_SYSTEM_THEORY_SECTIONS,
+  ops:OPS_THEORY_SECTIONS
 });
-function miFamilyTheoryLink(topicId,type){
+function miFamilyTheoryLink(topicId,type,source='practice'){
+  // Open problems and exams reuse operation type numbers with a different meaning.
+  if(topicId==='ops'&&source!=='practice')return miTheoryLinkHtml(topicId);
   const sections=MI_FAMILY_THEORY_SECTIONS[topicId];
   const section=Object.hasOwn(sections,type) ? sections[type] : undefined;
   return miTheoryLinkHtml(topicId,undefined,section);
@@ -3257,7 +3260,7 @@ function selTopic(i){
         +'<div style="line-height:1.45">'+escHtml(stripTags(e.question||e.q||''))+'</div>'
         +'<div style="font-size:.82rem;margin-top:5px"><span style="color:var(--err)">La teva: <b>'+escHtml(e.answer||'—')+'</b></span> · <span style="color:var(--ok)">Correcta: <b>'+escHtml(e.correct!==undefined?e.correct:e.c)+'</b></span></div>'
         +miReviewHtml(e);
-      if(Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,t.id))html+=miFamilyTheoryLink(t.id,e.type);
+      if(Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,t.id))html+=miFamilyTheoryLink(t.id,e.type,e.source);
       if(Array.isArray(e.solution)&&e.solution.length){
         html+='<button class="bs" style="margin-top:7px" onclick="toggleSavedSolution(&quot;'+localSolId+'&quot;,this)">&#128214; Veure explicació</button>'
           +'<div class="solbox" id="'+localSolId+'" style="display:none">'+solSteps(e.solution)+'</div>';
@@ -4075,7 +4078,7 @@ function showErrorSummary(){
           +'<div>Resposta correcta: <b style="color:var(--ok)">'+(t.id==='mcmmcd'&&MIMcdMcm.optionLabels(e.type)?formatMcdOption({...e,topicId:t.id},e.correct||'—'):escHtml(e.correct||'—'))+'</b></div></div>'
           +'<div class="saved-error-meta">'+modeTxt+typeTxt+diffTxt+'</div>'
           +miReviewHtml(e);
-        if(Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,t.id))html+=miFamilyTheoryLink(t.id,e.type);
+        if(Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,t.id))html+=miFamilyTheoryLink(t.id,e.type,e.source);
         if(Array.isArray(e.solution)&&e.solution.length){
           html+='<button class="bs" onclick="toggleSavedSolution(&quot;'+solId+'&quot;,this)" style="margin-top:10px">&#128214; Veure explicació</button>'
             +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory||t.id==='percentatges'||t.id==='proporcionalitat'||t.id==='mcmmcd'?miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory):'')+'</div>';
