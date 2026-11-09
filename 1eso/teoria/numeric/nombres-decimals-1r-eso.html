@@ -45,7 +45,7 @@ a{color:inherit}
 .nav-link{color:var(--muted);text-decoration:none;font-size:.83rem;font-weight:650;padding:5px 8px;border-radius:8px;white-space:nowrap}
 .nav-link:hover{background:var(--soft);color:var(--primary)}
 .nav-title{flex:1;min-width:0;font-size:1rem;font-weight:750;color:var(--primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.wrap{width:min(790px,calc(100% - 32px));margin:0 auto;padding:30px 0 54px}
+.wrap{width:min(780px,calc(100% - 32px));margin:0 auto;padding:30px 0 54px}
 .hero{text-align:center;padding:10px 8px 22px}
 .eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:var(--primary);border-radius:999px;padding:5px 11px;font-size:.75rem;font-weight:750;margin-bottom:12px}
 .hero h1{font-size:clamp(1.7rem,4vw,2.25rem);color:var(--primary);line-height:1.15;margin-bottom:9px}
@@ -55,7 +55,7 @@ a{color:inherit}
 .btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--pd);transform:translateY(-1px)}
 .btn-secondary{background:var(--card);color:var(--primary);border:2px solid var(--primary)}.btn-secondary:hover{background:var(--soft)}
 .quick-nav{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:4px 0 22px}
-.quick-nav a{text-decoration:none;text-align:center;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:10px 7px;color:var(--muted);font-size:.78rem;font-weight:700}
+.quick-nav a{text-decoration:none;text-align:center;background:var(--card);border:1px solid var(--border);border-radius:11px;padding:10px 7px;color:var(--muted);font-size:.78rem;font-weight:700;box-shadow:0 1px 5px rgba(0,0,0,.04)}
 .quick-nav a:hover{border-color:var(--primary);color:var(--primary);background:var(--soft)}
 .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px;box-shadow:var(--sh)}
 .card h2{font-size:1.18rem;color:var(--primary);margin-bottom:10px;display:flex;align-items:center;gap:8px}
@@ -67,9 +67,6 @@ a{color:inherit}
 .steps{counter-reset:pas;display:grid;gap:8px;margin-top:12px}
 .step{position:relative;padding:10px 12px 10px 42px;background:#fbfcfe;border:1px solid var(--border);border-radius:10px;font-size:.9rem}
 .step:before{counter-increment:pas;content:counter(pas);position:absolute;left:11px;top:9px;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--primary);color:#fff;font-size:.72rem;font-weight:800}
-.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.rule{border:1px solid var(--border);border-radius:12px;padding:13px;background:#fbfcfe;font-size:.88rem}
-.rule strong{display:block;color:var(--primary);margin-bottom:4px}
 .tip{background:#fffbea;border:1px solid #f5e0a0;border-radius:11px;padding:12px 14px;margin-top:13px;font-size:.88rem;color:#785800}
 .mistakes{background:#fff8f8;border:1px solid #f0b0b0}.mistakes h2{color:var(--err)}.mistakes ul{padding-left:20px}.mistakes li+li{margin-top:6px}
 .check details{border:1px solid var(--border);border-radius:11px;background:#fbfcfe;padding:12px 14px;margin-top:9px}
@@ -80,7 +77,7 @@ a{color:inherit}
 .footer{text-align:center;color:var(--muted);font-size:.76rem;padding:4px 0 25px}
 @media(max-width:650px){
   .top-nav{padding:10px 10px;gap:4px}.nav-link{padding:5px 5px;font-size:.75rem}.nav-main-label,.sense-label{display:none}.nav-title{font-size:.86rem}
-  .wrap{width:min(100% - 20px,790px);padding-top:20px}.quick-nav{grid-template-columns:1fr 1fr}.card{padding:17px}.rule-grid{grid-template-columns:1fr}
+  .wrap{width:min(100% - 20px,780px);padding-top:20px}.quick-nav{grid-template-columns:1fr 1fr}.card{padding:17px}
   .hero-actions{flex-direction:column}.btn{width:100%}
 }
 </style>
@@ -120,22 +117,59 @@ a{color:inherit}
 <a href="#error-absolut">5. Error absolut</a>
 <a href="#error-relatiu">6. Error relatiu</a>
 </nav>
+<nav aria-label="Procediments de les 23 famílies" class="quick-nav">
+<a href="#valor-posicional">Valor posicional</a>
+<a href="#comparar">Comparar i ordenar</a>
+<a href="#recta-decimal">Llegir la recta decimal</a>
+<a href="#entre-decimals">Trobar un decimal entre dos nombres</a>
+<a href="#sumar-decimals">Sumar decimals</a>
+<a href="#restar-decimals">Restar decimals</a>
+<a href="#multiplicar-decimals">Multiplicar decimals</a>
+<a href="#dividir">Dividir per un decimal</a>
+<a href="#potencies-deu">Multiplicar i dividir per 10, 100 i 1.000</a>
+<a href="#arrodonir">Arrodonir decimals</a>
+<a href="#fraccio-a-decimal">Passar de fracció a decimal</a>
+<a href="#decimal-a-fraccio">Passar de decimal a fracció</a>
+<a href="#compra-canvi">Calcular el canvi d’una compra</a>
+<a href="#problemes">Calcular una quantitat a partir d’una taxa</a>
+<a href="#divisio-unitaria">Calcular el preu unitari</a>
+<a href="#repartiment-residu">Trobar els trossos complets i el residu</a>
+<a href="#mitjana-decimal">Calcular una mitjana</a>
+<a href="#error-absolut">Calcular l’error absolut</a>
+<a href="#error-relatiu">Calcular l’error relatiu</a>
+<a href="#garanties-volum">Garantir una quantitat i una capacitat</a>
+<a href="#reconstruir">Reconstruir una xifra</a>
+<a href="#errors-decimals">Diagnosticar errors</a>
+<a href="#estimar">Estimar i acotar un producte</a>
+</nav>
 <section class="card" id="operacions">
 <h2>➕✖️ 1. Operacions amb nombres decimals</h2>
-<h3>Suma i resta</h3>
-<p>Per sumar o restar decimals, col·loca els nombres de manera que les <strong>comes quedin alineades</strong>. Així també quedaran alineades les unitats, dècimes, centèsimes...</p>
+<p>Alinea les comes per <a href="#sumar-decimals">sumar</a> o <a href="#restar-decimals">restar</a>. Per <a href="#multiplicar-decimals">multiplicar</a>, compta les xifres decimals dels factors. Per <a href="#dividir">dividir per un decimal</a>, transforma el divisor en un enter.</p>
+</section>
+<section class="card" id="sumar-decimals">
+<h2>Sumar decimals</h2>
+<p>Alinea les comes i afegeix zeros a la dreta fins que els dos nombres tinguin el mateix nombre de decimals. Suma per columnes, començant per la dreta.</p>
 <div class="example">
-<span class="example-label">EXEMPLE</span>
-<div class="math">12,7 + 3,45 = 16,15</div>
+<span class="example-label">EXEMPLE RESOLT</span>
+<p>Escriu 12,7 com 12,70. Alinea unitats, dècimes i centèsimes i suma.</p>
+<div class="math">12,70 + 3,45 = 16,15</div>
 </div>
-<div class="example"><p>Per restar 5,02 − 1,7, escriu 1,70. Reagrupa: 5 unitats i 2 centèsimes són 4 unitats, 9 dècimes i 12 centèsimes. Resta per columnes: 5,02 − 1,70 = <strong>3,32</strong>.</p></div><h3>Multiplicació</h3>
-<div class="steps">
-<div class="step">Multiplica primer com si no hi hagués comes.</div>
-<div class="step">Compta quantes xifres decimals tenen, en total, els dos factors.</div>
-<div class="step">Col·loca la coma al resultat deixant aquest mateix nombre de xifres decimals.</div>
-</div>
+</section>
+<section class="card" id="restar-decimals">
+<h2>Restar decimals</h2>
+<p>Alinea les comes i completa amb zeros. Resta per columnes, començant per la dreta. Quan una columna no arriba, reagrupa una unitat de la posició immediatament superior en deu de la posició actual.</p>
 <div class="example">
-<span class="example-label">EXEMPLE</span>
+<span class="example-label">EXEMPLE RESOLT</span>
+<p>Per restar 5,02 − 1,7, escriu 1,70. Quan arribis a les dècimes, canvia una unitat de 5,02 per deu dècimes. Així pots restar 7 dècimes de 10.</p>
+<div class="math">5,02 − 1,70 = 3,32</div>
+</div>
+</section>
+<section class="card" id="multiplicar-decimals">
+<h2>Multiplicar decimals</h2>
+<p>Multiplica els factors com si fossin enters. Compta quantes xifres decimals tenen entre tots dos i deixa aquest mateix nombre de xifres a la dreta de la coma del resultat.</p>
+<div class="example">
+<span class="example-label">EXEMPLE RESOLT</span>
+<p>Els factors tenen una xifra decimal cadascun. El producte ha de tenir dues xifres decimals abans de treure el zero final.</p>
 <div class="math">2,4 × 1,5 → 24 × 15 = 360 → 3,60 = 3,6</div>
 </div>
 </section>
@@ -151,51 +185,46 @@ a{color:inherit}
 <div class="example">
 <span class="example-label">EXEMPLE · A LES CENTÈSIMES</span>
 <div class="math">7,386 → 7,39</div>
-<p>La xifra de les mil·lèsimes és 6, així que la centèsima puja d'8 a 9.</p>
+<p>La xifra de les mil·lèsimes és 6, així que la centèsima puja de 8 a 9. Si arrodoneixes a unitats, obtens 7. Si ho fas a dècimes, obtens 7,4.</p>
+</div>
+<h3>Arrodoniments amb canvi d’unitat</h3>
+<p>A centèsimes, 1,005 dona <strong>1,01</strong> perquè la mil·lèsima és 5. En 9,995 i 9,999, els increments es propaguen i tots dos nombres donen <strong>10,00</strong>. Conserva els zeros per indicar la precisió demanada.</p>
+</section>
+<section class="card" id="fraccions">
+<h2>½ ↔ 0,5 · 3. Fraccions i decimals</h2>
+<p>Tria el procediment per <a href="#fraccio-a-decimal">passar de fracció a decimal</a> o per <a href="#decimal-a-fraccio">passar de decimal a fracció</a>.</p>
+<div class="callout">
+Algunes equivalències útils
+<div class="math">1/2 = 0,5 · 1/4 = 0,25 · 3/4 = 0,75 · 1/5 = 0,2</div>
 </div>
 </section>
-<section class="card"><h3>Arrodoniments amb canvi d’unitat</h3><p>A centèsimes, 1,005 → <strong>1,01</strong>: la mil·lèsima és 5. En 9,995 i 9,999, els increments es propaguen: totes dues donen <strong>10,00</strong>. Conserva els zeros per indicar la precisió. A unitats, 7,386 → 7; a dècimes → 7,4; a centèsimes → 7,39.</p></section><section class="card" id="fraccions">
-<h2>½ ↔ 0,5 · 3. Fraccions i decimals</h2>
-<h3>Fracció → decimal</h3>
-<p>Divideix el numerador pel denominador.</p>
+<section class="card" id="fraccio-a-decimal">
+<h2>Passar de fracció a decimal</h2>
+<p>Divideix el numerador pel denominador. Si el numerador és més petit, el quocient comença per 0 i continua amb les xifres decimals.</p>
 <div class="example">
-<span class="example-label">EXEMPLE</span>
+<span class="example-label">EXEMPLE RESOLT</span>
 <div class="math">3/4 = 3 ÷ 4 = 0,75</div>
+<p>Pots comprovar-ho multiplicant el quocient pel denominador. 0,75 × 4 = 3.</p>
 </div>
-<h3>Decimal → fracció</h3>
-<div class="steps">
-<div class="step">Escriu el decimal com una fracció amb 10, 100, 1.000... al denominador.</div>
-<div class="step">Simplifica la fracció.</div>
-</div>
+</section>
+<section class="card" id="decimal-a-fraccio">
+<h2>Passar de decimal a fracció</h2>
+<p>Escriu al numerador el nombre sense la coma. Al denominador, posa 10 si hi ha una xifra decimal, 100 si n’hi ha dues, 1.000 si n’hi ha tres, i així successivament. Simplifica dividint numerador i denominador pel seu màxim comú divisor.</p>
 <div class="example">
-<span class="example-label">EXEMPLE</span>
+<span class="example-label">EXEMPLE RESOLT</span>
 <div class="math">0,25 = 25/100 = 1/4</div>
-</div>
-<div class="callout">
-      Algunes equivalències útils:
-      <div class="math">1/2 = 0,5 · 1/4 = 0,25 · 3/4 = 0,75 · 1/5 = 0,2</div>
+<p>Com que 0,25 té dues xifres decimals, el denominador inicial és 100. Divideix el numerador i el denominador per 25.</p>
 </div>
 </section>
 <section class="card" id="problemes">
-<h2>💶⏱️ 4. Decimals en problemes reals</h2>
-<p>Els decimals apareixen constantment en preus, mesures i taxes.</p>
-<div class="rule-grid">
-<div class="rule">
-<strong>Compra i canvi</strong>
-        Suma els preus i resta el total de la quantitat pagada.
-        <div class="math">canvi = pagat − total</div>
-</div>
-<div class="rule">
-<strong>Taxa × temps</strong>
-        Si una quantitat es dona per unitat de temps, multiplica-la pel temps total.
-        <div class="math">quantitat = taxa × temps</div>
-</div>
-</div>
+<h2>💶⏱️ 4. Calcular una quantitat a partir d’una taxa</h2>
+<p>Multiplica la quantitat per unitat pel nombre d’unitats. Si la taxa s’expressa en litres per minut, multiplica-la pels minuts per obtenir el total en litres. Si tens el total i busques la quantitat per unitat, consulta la <a href="#divisio-unitaria">divisió per trobar el valor unitari</a>.</p>
 <div class="example">
 <span class="example-label">EXEMPLE · TAXA</span>
 <p>Una aixeta omple 3,5 L/min durant 8 minuts.</p>
 <div class="math">3,5 × 8 = 28 L</div>
 </div>
+<p>Per treballar amb preus, consulta com <a href="#compra-canvi">calcular el total i el canvi d’una compra</a>.</p>
 </section>
 <section class="card" id="error-absolut">
 <h2>📏 5. Error absolut</h2>
@@ -225,7 +254,6 @@ a{color:inherit}
 </div>
 </section>
 
-<nav class="card" aria-label="Procediments decimals"><a href="#compra-canvi">Total i canvi d’una compra</a> · <a href="#divisio-unitaria">Quantitat unitària per divisió</a> · <a href="#repartiment-residu">Trossos complets i residu</a> · <a href="#mitjana-decimal">Mitjana exacta i aproximada</a> · <a href="#garanties-volum">Garantir quantitat i capacitat</a> · <a href="#valor-posicional">Valor posicional</a> · <a href="#comparar">Comparar i ordenar</a> · <a href="#recta-decimal">Recta numèrica decimal</a> · <a href="#dividir">Divisió per un decimal</a> · <a href="#potencies-deu">Multiplicar i dividir per 10, 100 i 1.000</a> · <a href="#entre-decimals">Trobar un decimal dins d’un interval</a> · <a href="#reconstruir">Reconstruir una xifra</a> · <a href="#errors-decimals">Diagnosticar errors</a> · <a href="#estimar">Estimar i acotar</a></nav>
 <section class="card" id="compra-canvi"><h2>Total i canvi d’una compra</h2><p>Suma primer tots els preus. Compara el total amb els diners lliurats i resta total a pagat. Expressa els imports amb dos decimals.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Una compra de 1,25 €, 2,10 € i 3,40 € suma 6,75 €. Si pagues 10,00 €, el canvi és 10,00 − 6,75 = <strong>3,25 €</strong>.</p></div></section>
 <section class="card" id="divisio-unitaria"><h2>Quantitat unitària per divisió</h2><p>Si les unitats són iguals, divideix la quantitat total pel nombre d’unitats. Pots convertir euros en cèntims per treballar amb enters.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Quatre llibretes costen 8,40 €. En cèntims: 840 ÷ 4 = 210. Cada llibreta costa <strong>2,10 €</strong>. Comprovació: 4 × 2,10 = 8,40 €.</p></div></section>
 <section class="card" id="repartiment-residu"><h2>Trossos complets i residu</h2><p>Expressa les dues longituds en la mateixa unitat petita. El quocient enter compta els trossos complets. El residu és la longitud que queda: no pot ser negatiu ni arribar a la longitud d’un tros.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>13,2 m en trossos de 2,2 m: 132 ÷ 22 = 6, residu 0. Són <strong>6 trossos i 0 m</strong>. Amb 21,7 m i trossos de 2,7 m: 217 = 27 × 8 + 1. Són <strong>8 trossos i 0,1 m</strong>. Comprova 21,7 = 2,7 × 8 + 0,1 i 0 ≤ 0,1 &lt; 2,7.</p></div></section>
@@ -258,7 +286,7 @@ a{color:inherit}
 <details><summary>3. Converteix 3/5 a decimal.</summary><div class="answer"><strong>0,6</strong>.</div></details>
 <details><summary>4. El valor exacte és 20 i l'aproximat és 18. Quin és l'error absolut i el relatiu?</summary><div class="answer">Error absolut = <strong>2</strong>. Error relatiu = 2/20 = 0,1 = <strong>10%</strong>.</div></details>
 </section>
-<section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Operacions amb nombres decimals</li><li>Arrodonir nombres decimals</li><li>0,5 · 3. Fraccions i decimals</li><li>Decimals en problemes reals</li></ul></section><section class="final-cta">
+<section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Operacions amb nombres decimals</li><li>Arrodonir nombres decimals</li><li>Conversions entre fraccions i decimals</li><li>Decimals en problemes reals</li><li>Error absolut i error relatiu</li></ul></section><section class="final-cta">
 <h2>Ja tens la teoria. Ara toca practicar.</h2>
 <p>Practica operacions, aproximacions, conversions i errors amb exercicis interactius.</p>
 <div class="hero-actions">

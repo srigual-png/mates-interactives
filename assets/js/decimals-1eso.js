@@ -1,7 +1,7 @@
 /* Nombres decimals: enters escalats i models serialitzables compartits amb el repàs. */
 (function(root){
 'use strict';
-const anchors=['operacions','operacions','arrodonir','fraccions','fraccions','compra-canvi','problemes','error-absolut','error-relatiu','divisio-unitaria','repartiment-residu','mitjana-decimal','garanties-volum','valor-posicional','comparar','recta-decimal','operacions','dividir','potencies-deu','entre-decimals','reconstruir','errors-decimals','estimar'];
+const anchors=['sumar-decimals','multiplicar-decimals','arrodonir','fraccio-a-decimal','decimal-a-fraccio','compra-canvi','problemes','error-absolut','error-relatiu','divisio-unitaria','repartiment-residu','mitjana-decimal','garanties-volum','valor-posicional','comparar','recta-decimal','restar-decimals','dividir','potencies-deu','entre-decimals','reconstruir','errors-decimals','estimar'];
 const families=[[1,2,3,4,5,8,14,15,16,17,19],[6,7,9,10,11,12,18,20],[13,21,22,23]].map(g=>g.map(n=>['D'+String(n).padStart(2,'0')]));
 const fmt=(n,p=0)=>{if(!Number.isSafeInteger(n))throw Error('Escala no entera');const sign=n<0?'-':'';const s=String(Math.abs(n)).padStart(p+1,'0');return sign+(p?s.slice(0,-p)+','+s.slice(-p):s);};
 function parse(s){const m=String(s??'').trim().match(/^([+-]?)(\d+)(?:[.,](\d+))?$/);if(!m||m[2].length+(m[3]||'').length>14)return null;return {n:Number((m[1]==='-'?'-':'')+m[2]+(m[3]||'')),p:(m[3]||'').length};}
