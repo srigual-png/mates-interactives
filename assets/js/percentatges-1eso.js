@@ -1,7 +1,7 @@
 /* Percentatges de 1r ESO: tretze famílies; diners en cèntims enters. */
 (function(root){
 'use strict';
-const anchors=['calcular-pct','calcular-pct','calcular-pct','augments','conversions','variacio-i-complement','percentatges-successius','variacio-i-complement','llindar-ofertes','representacio-percentual','comparar-ofertes','error-base','punts-percentuals'];
+const anchors=['calcular-part','percentatge-part','reconstruir-total','augments','conversions','taxa-variacio','percentatges-successius','complement-percentual','llindar-ofertes','representacio-percentual','comparar-ofertes','error-base','punts-percentuals'];
 const families=[[['Q01'],['Q02'],['Q05-fraccio-pct','Q05-decimal-pct','Q05-pct-decimal','Q05-pct-fraccio'],['Q10']],[['Q04-augment','Q04-descompte'],['Q06'],['Q07'],['Q08'],['Q11'],['Q13']],[['Q03-total','Q03-unitari','Q03-descompte','Q03-augment'],['Q09'],['Q12']]];
 const fmt=n=>String(n).replace('.',','),money=c=>fmt((c/100).toFixed(2));
 const gcd=(a,b)=>b?gcd(b,a%b):a;
