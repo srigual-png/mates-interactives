@@ -6,11 +6,13 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
  const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('file:///'+path.resolve('2eso/sentit-numeric.html').replace(/\\/g,'/')+'?topic=racionals');
  const result=await page.evaluate(()=>{
-  const check=(ok,msg)=>{if(!ok)throw Error(msg);};let variants=0;
-  for(let type=1;type<=16;type++)for(let i=0;i<50;i++){
+  const check=(ok,msg)=>{if(!ok)throw Error(msg);};let variants=0;const forms=new Set();
+  for(let type=1;type<=18;type++)for(let i=0;i<50;i++){
    const q=genRacionals2ESO(type);check(q.diff>=1&&q.diff<=3,'classificació');
    check(q.options.filter(o=>o===q.correct).length===1,'resposta exacta única '+type);
    check(q.solution.length>0&&!/undefined|NaN|Infinity/.test(JSON.stringify(q)),'solució '+type);
+   if(type===10){check(q.allowOpen&&q.rationalInterval,'T10 obert');check(q.options.filter(o=>rationalBetween(o,q.rationalInterval)).length===1,'T10 una única opció interior');check(rationalBetween(q.correct,q.rationalInterval),'T10 clau interior');}
+   if(type===11){forms.add(q.correct);check(['Enter','Fracció','Decimal','Percentatge'].includes(q.correct)&&q.solution.join(' ').includes(q.correct),'T11 forma i solucionari');}
    if(type===16){
     const [a,b,p]=q.question.match(/\d+/g).map(Number),k=Number(q.correct);
     check(k>1,'variant trivial');
@@ -22,6 +24,7 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
    }
    variants++;
   }
+  check(forms.size===4,'T11 cobreix les quatre formes');
   // Extrems de l'espai de dades: mínim, màxim, igualtat al llindar.
   for(let b=20;b<=40;b++)for(let a=4;a<=9;a++)for(const p of [50,60,75]){
    const k=Math.floor((p*b-100*a)/(100-p))+1;
@@ -39,8 +42,8 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
  assert(await page.evaluate(()=>currentEx.diff===3&&state.level===2&&document.getElementById('guideSteps').style.display==='none'));
  await page.goto('file:///'+path.resolve('2eso/sentit-numeric.html').replace(/\\/g,'/')+'?topic=racionals&examen=tema');
  await page.waitForSelector('#miTopicExam.active');
- const exam=await page.evaluate(()=>{const qs=miTopicExam.getSession().questions;return {counts:[1,2,3].map(d=>qs.filter(q=>q.diff===d).length),highTypes:[...new Set(qs.filter(q=>q.diff===3).map(q=>q.type))]};});
- assert.deepEqual(exam.counts,[4,4,4]);assert.deepEqual(exam.highTypes,[16]);assert.deepEqual(errors,[]);
+ const exam=await page.evaluate(()=>{const qs=miTopicExam.getSession().questions;return {counts:[1,2,3].map(d=>qs.filter(q=>q.diff===d).length),highTypes:[...new Set(qs.filter(q=>q.diff===3).map(q=>q.type))].sort((a,b)=>a-b)};});
+ assert.deepEqual(exam.counts,[4,4,4]);assert.deepEqual(exam.highTypes,[16,17,18]);assert.deepEqual(errors,[]);
  const out={...result,exam,pageErrors:errors};fs.mkdirSync('docs/dificultats',{recursive:true});fs.writeFileSync('docs/dificultats/resultats-racionals-2eso.json',JSON.stringify(out,null,2));console.log(out);
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
