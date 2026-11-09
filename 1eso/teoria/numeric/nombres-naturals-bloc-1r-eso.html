@@ -89,7 +89,7 @@ a{color:inherit}
   white-space:nowrap;
 }
 .wrap{
-  width:min(760px,calc(100% - 32px));
+  width:min(780px,calc(100% - 32px));
   margin:0 auto;
   padding:30px 0 54px;
 }
@@ -112,7 +112,7 @@ a{color:inherit}
   line-height:1.15;
   margin-bottom:9px;
 }
-.hero p{color:var(--muted);font-size:.96rem;max-width:620px;margin:0 auto}
+.hero p{color:var(--muted);font-size:.96rem;max-width:650px;margin:0 auto}
 .hero-actions{
   display:flex;
   gap:10px;
@@ -173,6 +173,7 @@ a{color:inherit}
 }
 .card h3{font-size:.96rem;margin:18px 0 7px}
 .card p + p{margin-top:9px}
+.card[id]{scroll-margin-top:70px}
 .callout{
   background:var(--soft);
   border-left:4px solid var(--primary);
@@ -310,7 +311,7 @@ a{color:inherit}
   .nav-link{padding:5px 5px;font-size:.75rem}
   .nav-main-label,.sense-label{display:none}
   .nav-title{font-size:.86rem}
-  .wrap{width:min(100% - 20px,760px);padding-top:20px}
+  .wrap{width:min(100% - 20px,780px);padding-top:20px}
   .quick-nav{grid-template-columns:1fr 1fr}
   .card{padding:17px}
   .problem-grid{grid-template-columns:1fr}
@@ -346,7 +347,26 @@ a{color:inherit}
 <a class="btn btn-secondary" href="#que-son">📘 Comença la teoria</a>
 </div>
 </header>
-<nav aria-label="Continguts de la teoria" class="quick-nav"><a href="#que-son">🔢 1. Què són els nombres naturals?</a><a href="#comparar">⚖️ 2. Comparar i ordenar nombres naturals</a><a href="#arrodonir">🎯 3. Arrodonir nombres naturals</a><a href="#problemes">🧠 6. Problemes amb nombres naturals</a></nav>
+<nav aria-label="Continguts de la teoria" class="quick-nav">
+<a href="#que-son">1. Què són?</a>
+<a href="#comparar">2. Comparar</a>
+<a href="#arrodonir">3. Arrodonir</a>
+<a href="#problemes">4. Problemes</a>
+</nav>
+<nav class="quick-nav" aria-label="Procediments de les 12 famílies">
+<a href="#comparar">Comparar i ordenar</a>
+<a href="#arrodonir">Arrodonir un nombre</a>
+<a href="#repartiment-equitatiu">Repartir a parts iguals</a>
+<a href="#producte-i-suma">Multiplicar i sumar en un problema</a>
+<a href="#recta-graduada">Llegir una recta graduada</a>
+<a href="#dividend-desconegut">Trobar el dividend</a>
+<a href="#producte-descomposicio">Multiplicar per descomposició</a>
+<a href="#operacions-valor-desconegut">Trobar el nombre que falta</a>
+<a href="#interval-arrodoniment">Trobar els extrems d’un arrodoniment</a>
+<a href="#paquets-exactes">Minimitzar el nombre de paquets</a>
+<a href="#nombres-amb-condicions">Construir un nombre amb pistes</a>
+<a href="#patrons-numerics">Continuar un patró numèric</a>
+</nav>
 <section class="card" id="que-son">
 <h2>🔢 1. Què són els nombres naturals?</h2>
 <p>Els <strong>nombres naturals</strong> són els que fem servir habitualment per <strong>comptar</strong> i <strong>ordenar</strong>.</p>
@@ -383,6 +403,8 @@ a{color:inherit}
 <p>Compara <strong>48.205</strong> i <strong>47.999</strong>.</p>
 <div class="math">48.205 &gt; 47.999</div>
 <p>Tenen cinc xifres. La primera és igual (4), però a la segona comparem 8 i 7. Com que 8 &gt; 7, ja sabem que 48.205 és més gran.</p>
+<p>Per ordenar <strong>48.205, 7.999 i 47.999</strong> de menor a major, primer posem 7.999 perquè té menys xifres. Després apliquem la comparació anterior.</p>
+<div class="math">7.999 &lt; 47.999 &lt; 48.205</div>
 </div>
 <div class="tip">💡 No cal comparar totes les xifres: quan trobes la primera que és diferent, ja pots decidir.</div>
 </section>
@@ -411,7 +433,7 @@ a{color:inherit}
 <div class="tip">💡 <strong>Pregunta clau:</strong> «A quina posició arrodoneixo?» Després mira només la xifra immediatament de la dreta.</div>
 </section>
 <section class="card" id="problemes">
-<h2>🧠 6. Problemes amb nombres naturals</h2>
+<h2>🧠 4. Problemes amb nombres naturals</h2>
 <p>En un problema, el més important no és calcular de seguida. Primer cal entendre <strong>què sabem</strong> i <strong>què ens demanen</strong>.</p>
 <div class="steps">
 <div class="step">Llegeix el problema sencer i identifica la pregunta.</div>
@@ -443,7 +465,117 @@ a{color:inherit}
 </div>
 <div class="tip">💡 En els problemes, el <strong>residu</strong> també pot tenir significat. Si sobren persones, pot caldre un grup o vehicle més.</div>
 </section>
-<section class="card mistakes"><h2>⚠️ Errors freqüents</h2><ul><li>Comparar només les últimes xifres en lloc de començar per l’esquerra.</li><li>Arrodonir mirant una xifra que no és la immediatament següent.</li><li>Calcular sense interpretar què demana el problema.</li></ul></section><section class="card check"><h2>✅ Comprova si ho has entès</h2><details><summary>Què mires primer per comparar dos naturals?</summary><div class="answer">Primer el nombre de xifres i, si coincideix, compares des de l’esquerra.</div></details><details><summary>Quina xifra decideix un arrodoniment?</summary><div class="answer">La xifra immediatament situada a la dreta de la posició on arrodoneixes.</div></details></section><section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Què són els nombres naturals?</li><li>Comparar i ordenar nombres naturals</li><li>Arrodonir nombres naturals</li><li>Problemes amb nombres naturals</li></ul></section><section class="final-cta">
+<section class="card" id="repartiment-equitatiu">
+<h2>Repartir a parts iguals</h2>
+<p>Divideix la quantitat total pel nombre de grups. El quocient indica quantes unitats rep cadascun. En un repartiment exacte, el residu és zero.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Una escola reparteix 216 llibres entre 6 aules a parts iguals.</p>
+<p>Cada aula rep <strong>216 ÷ 6 = 36 llibres</strong>. Ho comprovem: 6 × 36 = 216.</p>
+</div>
+</section>
+<section class="card" id="producte-i-suma">
+<h2>Multiplicar i sumar en un problema</h2>
+<p>Multiplica el nombre de grups per la quantitat de cada grup. Després suma-hi la quantitat extra una sola vegada, perquè és una reserva del conjunt.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Cinc màquines produeixen 18 peces cadascuna i hi ha 12 peces de reserva.</p>
+<p>Les màquines fan 5 × 18 = 90 peces. Amb la reserva hi ha <strong>90 + 12 = 102 peces</strong>.</p>
+</div>
+</section>
+<section class="card" id="recta-graduada">
+<h2>Llegir una recta graduada</h2>
+<p>Resta els valors dels extrems i divideix la diferència pel nombre d’espais iguals. A partir de l’extrem esquerre, suma el valor d’un espai cada vegada que avances una marca.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<svg viewBox="0 0 384 60" style="width:100%;max-width:384px;display:block" role="img" aria-label="Recta del 200 al 700 amb cinc intervals iguals i quatre marques A, B, C i D d’esquerra a dreta">
+<path d="M32 22h320 M32 15v14 M96 15v14 M160 15v14 M224 15v14 M288 15v14 M352 15v14" stroke="currentColor"/>
+<text y="51" text-anchor="middle" fill="currentColor"><tspan x="32">200</tspan><tspan x="96">A</tspan><tspan x="160">B</tspan><tspan x="224">C</tspan><tspan x="288">D</tspan><tspan x="352">700</tspan></text>
+</svg>
+<p>Hi ha cinc espais. Cada salt val (700 − 200) ÷ 5 = 100.</p>
+<p>La marca C és a tres salts del 200. Per tant, <strong>C correspon a 500</strong>: 200 + 3 × 100 = 500.</p>
+</div>
+</section>
+<section class="card" id="dividend-desconegut">
+<h2>Trobar el dividend</h2>
+<p>Multiplica el divisor pel quocient i suma-hi el residu. El residu ha de ser més petit que el divisor i pot ser zero.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>El divisor és 8, el quocient és 11 i el residu és 7.</p>
+<p>Els grups complets donen 8 × 11 = 88. Hi afegim les 7 unitats que sobren: <strong>88 + 7 = 95</strong>. Si dividim 95 entre 8, surten 11 grups complets i en sobren 7.</p>
+</div>
+</section>
+<section class="card" id="producte-descomposicio">
+<h2>Multiplicar per descomposició</h2>
+<p>Escriu un factor com una suma o una resta amb un nombre rodó. Multiplica cadascuna de les dues parts per l’altre factor. Conserva el signe de la descomposició quan combinis els productes.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Com que 37 = 40 − 3, escrivim 24 × 37 = 24 × 40 − 24 × 3.</p>
+<p>Els productes parcials són <strong>960 i 72</strong>, en aquest ordre. Si et demanen el producte final, calcula 960 − 72 = 888.</p>
+</div>
+</section>
+<section class="card" id="operacions-valor-desconegut">
+<h2>Trobar el nombre que falta</h2>
+<p>Comença pel resultat i desfés les operacions en ordre invers. Per desfer una suma, resta. Per desfer una resta, suma. La multiplicació i la divisió també es desfan l’una amb l’altra.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Completa 4 × □ + 6 = 34. Primer desfem la suma: 34 − 6 = 28. Després desfem la multiplicació: 28 ÷ 4 = <strong>7</strong>.</p>
+<p>Ho comprovem: 4 × 7 + 6 = 34. Si l’expressió fos □ ÷ 4 − 6 = 1, faríem 1 + 6 = 7 i després 7 × 4 = <strong>28</strong>.</p>
+</div>
+</section>
+<section class="card" id="interval-arrodoniment">
+<h2>Trobar els extrems d’un arrodoniment</h2>
+<p>Busca els punts mitjans entre el resultat i els dos múltiples veïns. Si els empats s’arrodoneixen cap amunt, el punt mitjà inferior hi entra. El superior ja s’arrodoneix al múltiple següent, així que el màxim admès és una unitat menys.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Quins naturals donen 3.800 quan els arrodonim a les centenes? La meitat d’una centena és 50. L’extrem inferior és 3.800 − 50 = <strong>3.750</strong>.</p>
+<p>3.800 + 50 = 3.850 ja dona 3.900. L’extrem superior és <strong>3.849</strong>. Hi entren tots els nombres des de 3.750 fins a 3.849, inclosos.</p>
+</div>
+</section>
+<section class="card" id="paquets-exactes">
+<h2>Minimitzar el nombre de paquets</h2>
+<p>Reserva prou unitats per fer almenys un paquet petit. Prova els nombres possibles de paquets grans i divideix el que queda per la mida del paquet petit. Conserva només les combinacions exactes que facin servir els dos formats i compara el nombre total de paquets.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Volem empaquetar 41 adhesius en paquets de 3 i de 7. Reservant 3 adhesius, hi caben com a màxim 5 paquets de 7.</p>
+<p>En provar de 5 a 1 paquets grans, les restes són 6, 13, 20, 27 i 34. Només 6 i 27 són múltiples de 3.</p>
+<p>Amb 5 grans i 2 petits fem 7 paquets. Amb 2 grans i 9 petits en fem 11. El mínim és <strong>7 paquets</strong> i 5 × 7 + 2 × 3 = 41.</p>
+</div>
+</section>
+<section class="card" id="nombres-amb-condicions">
+<h2>Construir un nombre amb pistes</h2>
+<p>Escriu les xifres conegudes a la seva posició i resta-les de la suma total de xifres. Busca el parell que compleixi alhora la suma que falta i la relació de l’enunciat. Comprova totes les pistes amb el nombre obtingut.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>El miler és 3, la centena és 2, les unitats són el doble de les desenes i les quatre xifres sumen 14.</p>
+<p>Les desenes i les unitats sumen 14 − 3 − 2 = 9. Com que les unitats valen dues vegades les desenes, tres vegades les desenes fan 9. Les desenes són 3 i les unitats són 6.</p>
+<p>El nombre és <strong>3.236</strong>. Comprovem que 6 = 2 × 3 i que 3 + 2 + 3 + 6 = 14.</p>
+</div>
+</section>
+<section class="card" id="patrons-numerics">
+<h2>Continuar un patró numèric</h2>
+<p>Resta cada terme del següent per trobar els salts. Mira si els salts augmenten, disminueixen o alternen dos valors. Aplica el salt següent a l’últim terme.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>A 8, 10, 13, 17, 22 els salts són +2, +3, +4 i +5. El salt següent és +6, així que el terme següent és <strong>28</strong>.</p>
+<p>A 10, 12, 17, 19, 24 els salts alternen +2 i +5. Ara toca +2 i el terme següent és <strong>26</strong>.</p>
+</div>
+</section>
+<section class="card mistakes">
+<h2>⚠️ Errors freqüents</h2>
+<ul>
+<li>Comparar les últimes xifres abans de mirar les de l’esquerra.</li>
+<li>Comptar marques en comptes d’espais en una recta graduada.</li>
+<li>Incloure el punt mitjà superior en un interval d’arrodoniment amb empats cap amunt.</li>
+<li>Multiplicar les peces de reserva per cada grup, o oblidar el residu en reconstruir el dividend.</li>
+</ul>
+</section>
+<section class="card check">
+<h2>✅ Comprova si ho has entès</h2>
+<details><summary>1. Quin és més gran, 53.809 o 53.890?</summary><div class="answer"><strong>53.890.</strong> La primera xifra diferent és la de les desenes: 8 és més gran que 0.</div></details>
+<details><summary>2. Quin és el dividend si el divisor és 7, el quocient és 9 i el residu és 2?</summary><div class="answer"><strong>65</strong>, perquè 7 × 9 + 2 = 65.</div></details>
+<details><summary>3. Quin és el natural més gran que s’arrodoneix a 700 a les centenes?</summary><div class="answer"><strong>749.</strong> El punt mitjà superior és 750 i ja s’arrodoneix a 800.</div></details>
+</section>
+<section class="summary-master" id="resum-master">
+<h2>🧠 Resum essencial</h2>
+<ul>
+<li>Compara les xifres des de l’esquerra i compta els espais quan llegeixis una recta.</li>
+<li>Per arrodonir, mira la xifra de la dreta. Per trobar els extrems, busca els punts mitjans.</li>
+<li>Tria l’operació segons el problema i comprova què representa el resultat.</li>
+<li>Per trobar un valor desconegut, desfés els passos o comprova quina combinació compleix totes les condicions.</li>
+</ul>
+</section>
+<section class="final-cta">
 <h2>Ja tens la teoria. Ara toca practicar.</h2>
 <p>Fes exercicis guiats, passa després al nivell autònom i repassa els errors que vagis cometent.</p>
 <div class="hero-actions">

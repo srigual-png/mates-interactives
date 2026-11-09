@@ -3197,6 +3197,26 @@ function miTheoryLinkHtml(topicId,label,section){
   return '<a class="theory-page-link mi-review-theory-link" href="'+href+'" style="margin:12px 0 0">📚 '+(label||'Repassar la teoria d\'aquest tema')+'</a>';
 }
 
+const MI_NATURAL_THEORY_SECTIONS = Object.freeze({
+  1:'comparar',
+  2:'comparar',
+  3:'arrodonir',
+  4:'repartiment-equitatiu',
+  5:'producte-i-suma',
+  'recta-graduada':'recta-graduada',
+  'dividend-desconegut':'dividend-desconegut',
+  'producte-descomposicio':'producte-descomposicio',
+  'operacions-valor-desconegut':'operacions-valor-desconegut',
+  'interval-arrodoniment':'interval-arrodoniment',
+  1001:'paquets-exactes',
+  'nombres-amb-condicions':'nombres-amb-condicions',
+  'patrons-numerics':'patrons-numerics'
+});
+function miNaturalTheoryLink(type){
+  const section = Object.hasOwn(MI_NATURAL_THEORY_SECTIONS,type) ? MI_NATURAL_THEORY_SECTIONS[type] : undefined;
+  return miTheoryLinkHtml('naturals',undefined,section);
+}
+
 function selTopic(i){
   document.getElementById('sidebar').style.display='none';
   state.currentTopic=i;state.level=1;state.exCount=0;state.correctStreak=0;
@@ -3218,6 +3238,7 @@ function selTopic(i){
         +'<div style="line-height:1.45">'+escHtml(stripTags(e.question||e.q||''))+'</div>'
         +'<div style="font-size:.82rem;margin-top:5px"><span style="color:var(--err)">La teva: <b>'+escHtml(e.answer||'—')+'</b></span> · <span style="color:var(--ok)">Correcta: <b>'+escHtml(e.correct!==undefined?e.correct:e.c)+'</b></span></div>'
         +miReviewHtml(e);
+      if(t.id==='naturals')html+=miNaturalTheoryLink(e.type);
       if(Array.isArray(e.solution)&&e.solution.length){
         html+='<button class="bs" style="margin-top:7px" onclick="toggleSavedSolution(&quot;'+localSolId+'&quot;,this)">&#128214; Veure explicació</button>'
           +'<div class="solbox" id="'+localSolId+'" style="display:none">'+solSteps(e.solution)+'</div>';
@@ -3727,7 +3748,7 @@ function processPracticeAnswer(isOk,studentAnswer,message){
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
-  var theoryLink=miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.percentTheory||currentEx.proportionTheory||currentEx.fractionsTheory||currentEx.decimalsTheory||currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
+  var theoryLink=topic.id==='naturals' ? miNaturalTheoryLink(currentEx.type) : miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.percentTheory||currentEx.proportionTheory||currentEx.fractionsTheory||currentEx.decimalsTheory||currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.potenciesTheory||currentEx.opsTheory);
   var fb=document.getElementById('fbA');
   if(isOk){
     state.correctStreak++;updateSBar();
@@ -4035,6 +4056,7 @@ function showErrorSummary(){
           +'<div>Resposta correcta: <b style="color:var(--ok)">'+(t.id==='mcmmcd'&&MIMcdMcm.optionLabels(e.type)?formatMcdOption({...e,topicId:t.id},e.correct||'—'):escHtml(e.correct||'—'))+'</b></div></div>'
           +'<div class="saved-error-meta">'+modeTxt+typeTxt+diffTxt+'</div>'
           +miReviewHtml(e);
+        if(t.id==='naturals')html+=miNaturalTheoryLink(e.type);
         if(Array.isArray(e.solution)&&e.solution.length){
           html+='<button class="bs" onclick="toggleSavedSolution(&quot;'+solId+'&quot;,this)" style="margin-top:10px">&#128214; Veure explicació</button>'
             +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory||t.id==='percentatges'||t.id==='proporcionalitat'||t.id==='mcmmcd'?miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory):'')+'</div>';
