@@ -43,12 +43,12 @@ a{color:inherit}
 .nav-link{color:var(--muted);text-decoration:none;font-size:.83rem;font-weight:650;padding:5px 8px;border-radius:8px;white-space:nowrap}
 .nav-link:hover{background:var(--soft);color:var(--primary)}
 .nav-title{flex:1;min-width:0;font-size:1rem;font-weight:750;color:var(--primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.wrap{width:min(790px,calc(100% - 32px));margin:0 auto;padding:30px 0 54px}
+.wrap{width:min(780px,calc(100% - 32px));margin:0 auto;padding:30px 0 54px}
 .hero{text-align:center;padding:10px 8px 22px}
 .eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:var(--primary);border-radius:999px;padding:5px 11px;font-size:.75rem;font-weight:750;margin-bottom:12px}
 .hero h1{font-size:clamp(1.7rem,4vw,2.25rem);color:var(--primary);line-height:1.15;margin-bottom:9px}
 .hero p{color:var(--muted);font-size:.96rem;max-width:660px;margin:0 auto}
-.hero-actions,.topic-actions{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
+.hero-actions{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:12px;padding:12px 20px;text-decoration:none;font-size:.91rem;font-weight:700;transition:.18s ease}
 .btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--pd);transform:translateY(-1px)}
 .btn-secondary{background:var(--card);color:var(--primary);border:2px solid var(--primary)}.btn-secondary:hover{background:var(--soft)}
@@ -58,7 +58,6 @@ a{color:inherit}
 .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px;box-shadow:var(--sh)}
 .card h2{font-size:1.18rem;color:var(--primary);margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .card h3{font-size:.96rem;margin:18px 0 7px}.card p+p{margin-top:9px}
-.major{border-top:4px solid var(--primary)}
 .callout{background:var(--soft);border-left:4px solid var(--primary);border-radius:10px;padding:13px 15px;margin:13px 0;font-size:.91rem}
 .example{background:#fbfcfe;border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:12px 0}
 .example-label{display:inline-block;font-size:.72rem;font-weight:800;color:var(--primary);background:var(--soft);border-radius:999px;padding:2px 9px;margin-bottom:7px}
@@ -82,8 +81,8 @@ a{color:inherit}
 .footer{text-align:center;color:var(--muted);font-size:.76rem;padding:4px 0 25px}
 @media(max-width:650px){
   .top-nav{padding:10px 10px;gap:4px}.nav-link{padding:5px 5px;font-size:.75rem}.nav-main-label,.sense-label{display:none}.nav-title{font-size:.86rem}
-  .wrap{width:min(100% - 20px,790px);padding-top:20px}.quick-nav{grid-template-columns:1fr 1fr}.card{padding:17px}.rule-grid{grid-template-columns:1fr}
-  .hero-actions,.topic-actions{flex-direction:column}.btn{width:100%}
+  .wrap{width:min(100% - 20px,780px);padding-top:20px}.quick-nav{grid-template-columns:1fr 1fr}.card{padding:17px}.rule-grid{grid-template-columns:1fr}
+  .hero-actions{flex-direction:column}.btn{width:100%}
 }
 </style>
 <style id="mi-theory-standard">
@@ -110,21 +109,39 @@ a{color:inherit}
 <h1>⚖️ Proporcionalitat directa</h1>
 <p>Reconèixer situacions proporcionals, trobar la constant i utilitzar el mètode del valor unitari.</p>
 <div class="hero-actions">
-<a class="btn btn-primary" href="#proporcionalitat">⚖️ Proporcionalitat</a>
-<a class="btn btn-secondary" href="#percentatges">% Percentatges</a>
+<a class="btn btn-primary" href="../../sentit-numeric.html?tema=proporcionalitat&amp;nivell=1">🟢 Practicar · Guiat</a>
+<a class="btn btn-secondary" href="../../sentit-numeric.html?tema=proporcionalitat&amp;nivell=2">🟠 Practicar · Autònom</a>
 <a class="btn btn-secondary" href="#proporcionalitat">📘 Comença la teoria</a>
 </div>
 </header>
-<nav aria-label="Continguts de la teoria" class="quick-nav"><a href="#proporcionalitat">⚖️ 1. Què és la proporcionalitat directa?</a><a href="#constant">🔢 2. Constant de proporcionalitat</a><a href="#unitari">️⃣ 3. Mètode del valor unitari</a></nav>
-<nav class="card" aria-label="Apartats de proporcionalitat"><h2>Consulta per procediment</h2><ul><li><a href="#proporcionalitat">Proporcionalitat</a></li><li><a href="#constant">Constant</a></li><li><a href="#unitari">Unitari</a></li><li><a href="#factor-i-taules">Factor i taules</a></li><li><a href="#tarifes-i-constant">Tarifes i constant</a></li><li><a href="#produccio-pressupost">Produccio pressupost</a></li><li><a href="#significat-constant">Significat constant</a></li><li><a href="#comparar-preus">Comparar preus</a></li><li><a href="#taula-erronia">Taula erronia</a></li><li><a href="#reconstruir-taula">Reconstruir taula</a></li><li><a href="#error-additiu">Error additiu</a></li><li><a href="#dades-suficients">Dades suficients</a></li></ul></nav>
-<section class="card major" id="proporcionalitat">
+<nav aria-label="Continguts de la teoria" class="quick-nav">
+<a href="#proporcionalitat">1. Què és la proporcionalitat?</a>
+<a href="#constant">2. Constant de proporcionalitat</a>
+<a href="#unitari">3. Mètode del valor unitari</a>
+<a href="#factor-i-taules">4. Factor i taules</a>
+</nav>
+<nav aria-label="Procediments de les 11 famílies" class="quick-nav">
+<a href="#proporcionalitat">Reconèixer una relació proporcional</a>
+<a href="#constant">Calcular la constant</a>
+<a href="#significat-constant">Interpretar la constant i les unitats</a>
+<a href="#unitari">Calcular amb el valor unitari o un factor</a>
+<a href="#factor-i-taules">Comprovar si una taula és proporcional</a>
+<a href="#comparar-preus">Comparar preus unitaris</a>
+<a href="#dades-suficients">Decidir si hi ha prou dades</a>
+<a href="#taula-erronia">Corregir una dada de la taula</a>
+<a href="#reconstruir-taula">Reconstruir una taula a partir d’una suma</a>
+<a href="#error-additiu">Detectar un error additiu</a>
+<a href="#produccio-pressupost">Maximitzar la producció amb pressupost</a>
+</nav>
+<section class="card" id="proporcionalitat">
 <h2>⚖️ 1. Què és la proporcionalitat directa?</h2>
 <p>Dues magnituds són <strong>directament proporcionals</strong> quan, si una es multiplica o divideix per un factor, l'altra canvia pel <strong>mateix factor</strong>.</p>
 <div class="example">
-<span class="example-label">EXEMPLE</span>
-<p>Si una entrada costa 4 €:</p>
+<span class="example-label">EXEMPLE RESOLT</span>
+<p>Si cada entrada costa 4 € i no hi ha cap quota fixa, passar de 2 a 4 entrades duplica el preu.</p>
 <div class="math">2 entrades → 8 €</div>
-<div class="math">5 entrades → 20 €</div>
+<div class="math">4 entrades → 16 €</div>
+<p>Amb una quota fixa de 3 € per comanda, 2 entrades costen 11 € i 4 en costen 19 €. El preu no es duplica, així que la relació no és proporcional.</p>
 </div>
 <div class="rule-grid">
 <div class="rule">
@@ -136,25 +153,21 @@ a{color:inherit}
       Edat d'una persona i alçada.
     </div>
 </div>
-<div class="tip">💡 Que dues quantitats augmentin alhora <strong>no és suficient</strong>. Han de mantenir sempre la mateixa relació.</div>
-<div class="topic-actions">
-<a class="btn btn-primary" href="../../sentit-numeric.html?tema=proporcionalitat&amp;nivell=1">🟢 Practicar · Guiat</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html?tema=proporcionalitat&amp;nivell=2">🟠 Practicar · Autònom</a>
-</div>
+<div class="tip">💡 Que dues quantitats augmentin alhora <strong>no és suficient</strong>. Han de mantenir sempre el mateix factor. <a href="#tarifes-i-constant">Més exemples amb tarifes i quotes fixes</a>.</div>
 </section>
 <section class="card" id="constant">
 <h2>🔢 2. Constant de proporcionalitat</h2><p>Definim l’orientació: valor de y per unitat de x. Si x són quilograms i y euros, k té unitats €/kg. Per x = 3 i y = 9, k = 9 ÷ 3 = 3 €/kg.</p>
-<p>Si <strong>x</strong> i <strong>y</strong> són directament proporcionals, el quocient <strong>y/x</strong> es manté constant.</p>
+<p>Si <strong>x</strong> i <strong>y</strong> són directament proporcionals, el quocient <strong>y/x</strong> es manté constant per a tots els valors de <strong>x</strong> diferents de zero.</p>
 <div class="callout">
 <div class="math">k = y / x</div>
 </div>
 <div class="example">
-<span class="example-label">EXEMPLE</span>
-<div class="math">3 → 12</div>
+<span class="example-label">EXEMPLE RESOLT</span>
+<p>Si x = 3 correspon a y = 12, divideix y per x per obtenir la constant.</p>
 <div class="math">k = 12 ÷ 3 = 4</div>
 <div class="math">7 → 7 × 4 = 28</div>
 </div>
-<p>En una taula proporcional, totes les parelles han de tenir la mateixa constant.</p>
+<p>En una taula proporcional, el quocient és el mateix a totes les columnes amb x diferent de zero. A x = 0 li correspon y = 0.</p>
 </section>
 <section class="card" id="unitari">
 <h2>1️⃣ 3. Mètode del valor unitari</h2>
@@ -169,32 +182,38 @@ a{color:inherit}
 <div class="math">1 entrada: 28 ÷ 4 = 7 €</div>
 <div class="math">7 entrades: 7 × 7 = 49 €</div>
 </div>
-<p>El mateix procediment serveix per a receptes, ritmes de producció, distàncies a velocitat constant o preus per quilogram.</p>
+<p>Si per a 3 persones calen 219 g de farina, divideix 219 ÷ 3 = 73 g per persona. Per a 10 persones, calen 730 g. A velocitat constant, 8 km en 2 h són 4 km/h. En 10 h es recorren 40 km.</p>
+<div class="example">
+<span class="example-label">EXEMPLE RESOLT · DISTÀNCIA PER LITRE</span>
+<p>Amb 6 L es recorren 90 km. Divideix 90 ÷ 6 = 15 km/L. Amb 8 L es recorren <strong>8 × 15 = 120 km</strong>.</p>
+</div>
+<h3>També pots aplicar el factor directament</h3>
+<p>Si x passa de 3 a 12, s’ha multiplicat per 4. El valor corresponent de y també es multiplica per 4. Si y era 5, passa a <strong>20</strong>.</p>
 </section>
+<section class="card" id="factor-i-taules"><h2>Factors i comprovació de taules</h2><p>Per passar d’una columna a una altra, multiplica les dues magnituds pel mateix factor. Per comprovar tota la taula, calcula y ÷ x a les columnes amb x diferent de zero. Una sola discrepància descarta la proporcionalitat. Si hi ha una columna amb x = 0, comprova que y també sigui zero.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Si a x = 6 li correspon y = 2 i x passa a 18, el factor és 18 ÷ 6 = 3. Per tant, y passa a 2 × 3 = 6.</p><table class="mi-proportion-table"><caption>Comprovació de totes les columnes</caption><tbody><tr><th scope="row">x</th><td>3</td><td>5</td><td>11</td></tr><tr><th scope="row">y</th><td>12</td><td>20</td><td>47</td></tr></tbody></table><p>12 ÷ 3 = 4 i 20 ÷ 5 = 4, però 47 ÷ 11 és diferent de 4. La taula no és proporcional.</p></div></section>
+<section class="card" id="tarifes-i-constant"><h2>Tarifes i unitats de la constant</h2><p>Defineix sempre l’orientació: k = y/x és la quantitat de y per unitat de x. Una quota fixa impedeix que el preu total sigui proporcional a la quantitat.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>A 3 €/km sense quota fixa, 2 km costen 6 € i 4 km costen 12 €. Amb 6 € fixos més 3 €/km, costen 12 € i 18 €: duplicar la distància no duplica el preu.</p></div></section>
+<section class="card" id="significat-constant"><h2>Interpretar la constant</h2><p>Llegeix les unitats com «per cada unitat». La constant no és el total de qualsevol compra.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>3 €/kg significa que cada quilogram costa 3 euros. Per 4 kg, el total és 4 × 3 = 12 €. A 6 peces/h, cada hora es fabriquen 6 peces; 5 €/entrada és el preu de cada entrada.</p></div></section>
+<section class="card" id="comparar-preus"><h2>Comparar preus unitaris</h2><p>Divideix el preu de cada paquet per la seva massa. Compara els preus per kg, encara que els paquets tinguin mides diferents.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>A: 3 kg per 6 € → 6 ÷ 3 = 2 €/kg. B: 4 kg per 10 € → 10 ÷ 4 = 2,50 €/kg. A és més barata per kg. Si B costés 8 €, serien 2 €/kg i hi hauria empat.</p></div></section>
+<section class="card" id="taula-erronia"><h2>Reparar una taula</h2><p>Identifica almenys dues parelles fiables que donin la mateixa constant. Multiplica el valor de x de la columna errònia per aquesta constant. No dedueixis la constant d’una parella que ja sabem que falla.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Taula (1,4), (2,8), (3,13), amb error només a l’última parella: 4 ÷ 1 = 4 i 8 ÷ 2 = 4. Per x = 3, y = 3 × 4 = 12. Substituïm 13 per 12.</p></div></section>
+<section class="card" id="reconstruir-taula"><h2>Reconstruir amb una suma</h2><p>Si tots els valors de y són els x multiplicats per la mateixa constant, la suma de y també és la suma de x multiplicada per aquesta constant. Divideix les sumes i reconstrueix cada valor.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>x: 1, 2, 3; suma de y: 24. Suma de x = 6. Constant = 24 ÷ 6 = 4. Per x = 2, y = 2 × 4 = 8. Comprovació: 4 + 8 + 12 = 24.</p></div></section>
+<section class="card" id="error-additiu"><h2>Diagnosticar un error additiu</h2><p>En proporcionalitat es manté un factor multiplicatiu, no la mateixa suma. Troba el valor unitari per comprovar una proposta.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>2 quaderns costen 6 €. Passar de 2 a 5 quaderns sumant 3 no permet sumar només 3 euros. Cada quadern costa 6 ÷ 2 = 3 €. Cinc costen 5 × 3 = 15 €, no 9 €.</p></div></section>
+<section class="card" id="dades-suficients"><h2>Decidir si hi ha prou dades</h2><p>Una sola parella no determina una tarifa desconeguda. Busca dos models compatibles amb la dada inicial que donin resultats diferents. Si coneixem explícitament que el preu és proporcional i no hi ha quota fixa, sí que podem passar per la unitat.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>2 km costen 10 €. Model A: 5 €/km, de manera que 5 km costen 25 €. Model B: 4 € fixos més 3 €/km; 2 km també costen 10 €, però 5 km costen 19 €. Sense conèixer la tarifa, falten dades. Si s’especifica proporcionalitat sense quota fixa, el resultat és 25 €.</p></div></section>
+<section class="card" id="produccio-pressupost"><h2>Producció màxima amb pressupost</h2>
+<p>Calcula les peces i el cost per hora de cada màquina. Enumera les combinacions d’hores enteres que permet l’enunciat. Descarta les que superin el pressupost i, de les restants, tria la que fabriqui més peces.</p>
+<div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>A fabrica 24 peces en 2 h: 24 ÷ 2 = 12 peces/h. B fabrica 60 en 3 h: 60 ÷ 3 = 20 peces/h. A costa 5 €/h (4 h costen 20 €) i B costa 9 €/h (2 h costen 18 €). A pot funcionar com a màxim 4 h i B com a màxim 2 h. El pressupost és 30 €. Les hores són enteres, inclòs zero.</p><p>Provem totes les hores A de 0 a 4 i totes les hores B de 0 a 2. Per cada parella, cost = hores A × 5 + hores B × 9; producció = hores A × 12 + hores B × 20. Descartem els costos superiors a 30 €.</p><div style="overflow-x:auto"><table class="mi-proportion-table"><caption>Totes les 5 × 3 = 15 combinacions dins dels límits</caption><thead><tr><th>A (h)</th><th>B (h)</th><th>Cost</th><th>Peces</th><th>Decisió</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0 €</td><td>0</td><td>Admissible</td></tr><tr><td>0</td><td>1</td><td>9 €</td><td>20</td><td>Admissible</td></tr><tr><td>0</td><td>2</td><td>18 €</td><td>40</td><td>Admissible</td></tr><tr><td>1</td><td>0</td><td>5 €</td><td>12</td><td>Admissible</td></tr><tr><td>1</td><td>1</td><td>14 €</td><td>32</td><td>Admissible</td></tr><tr><td>1</td><td>2</td><td>23 €</td><td>52</td><td>Admissible</td></tr><tr><td>2</td><td>0</td><td>10 €</td><td>24</td><td>Admissible</td></tr><tr><td>2</td><td>1</td><td>19 €</td><td>44</td><td>Admissible</td></tr><tr><td>2</td><td>2</td><td>28 €</td><td>64</td><td>Admissible</td></tr><tr><td>3</td><td>0</td><td>15 €</td><td>36</td><td>Admissible</td></tr><tr><td>3</td><td>1</td><td>24 €</td><td>56</td><td>Admissible</td></tr><tr><td>3</td><td>2</td><td>33 €</td><td>76</td><td>Supera 30 €</td></tr><tr><td>4</td><td>0</td><td>20 €</td><td>48</td><td>Admissible</td></tr><tr><td>4</td><td>1</td><td>29 €</td><td>68</td><td>Admissible</td></tr><tr><td>4</td><td>2</td><td>38 €</td><td>88</td><td>Supera 30 €</td></tr></tbody></table></div><p>El màxim admissible és <strong>68 peces</strong>: A durant 4 h i B durant 1 h, cost 4 × 5 + 1 × 9 = 29 €. Producció: 4 × 12 + 1 × 20 = 68. La taula recorre totes les combinacions enteres dins dels límits; no n’hem omès cap. Triar sempre la millor relació peces/euro no garanteix l’òptim amb límits i hores enteres.</p></div></section>
 <section class="card mistakes"><h2>⚠️ Errors freqüents</h2><ul><li>Pensar que qualsevol relació creixent és proporcional.</li><li>Sumar la mateixa quantitat en comptes de multiplicar pel mateix factor.</li><li>Calcular la constant dividint en l’ordre contrari sense interpretar les magnituds.</li></ul></section>
 <section class="card check"><h2>✅ Comprova si ho has entès</h2><details><summary>Què es manté constant en una proporcionalitat directa?</summary><div class="answer">El quocient entre magnituds corresponents, si es manté el mateix ordre.</div></details><details><summary>Què és el mètode unitari?</summary><div class="answer">Trobar primer el valor corresponent a 1 i després escalar-lo.</div></details></section>
-<section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Què és la proporcionalitat directa?</li><li>Constant de proporcionalitat</li><li>1️⃣ 3. Mètode del valor unitari</li></ul></section>
+<section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>En una relació proporcional, el mateix factor transforma totes dues magnituds.</li><li>La constant k = y ÷ x indica quantes unitats de y corresponen a una unitat de x.</li><li>Per trobar un valor nou, multiplica la constant per la quantitat demanada.</li></ul></section>
 <section class="final-cta">
-<h2>Tria què vols practicar</h2>
-<p>Pots treballar proporcionalitat directa o passar als percentatges.</p>
-<div class="topic-actions">
-<a class="btn btn-primary" href="../../sentit-numeric.html?tema=proporcionalitat&amp;nivell=1">🟢 Practicar · Guiat</a>
-<a class="btn btn-secondary" href="../../sentit-numeric.html?tema=proporcionalitat&amp;nivell=2">🟠 Practicar · Autònom</a>
+<h2>Ja tens la teoria. Ara toca practicar.</h2>
+<p>Posa a prova la proporcionalitat, el valor unitari i la lectura de taules.</p>
+<div class="hero-actions">
 <a class="btn btn-primary" href="../../sentit-numeric.html?tema=proporcionalitat&amp;nivell=1">🟢 Practicar · Guiat</a>
 <a class="btn btn-secondary" href="../../sentit-numeric.html?tema=proporcionalitat&amp;nivell=2">🟠 Practicar · Autònom</a>
 <a class="btn btn-secondary" href="../../sentit-numeric.html">← Sentit Numèric</a>
 </div>
 </section>
-<nav aria-label="Navegació entre temes de teoria" class="pager-master"><a class="prev" href="fraccions-1r-eso.html">← Tema anterior</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="percentatges-1r-eso.html">Tema següent →</a></nav><section class="card" id="factor-i-taules"><h2>Factors i comprovació de taules</h2><p>Per passar d’una columna a una altra, multiplica les dues magnituds pel mateix factor. Per comprovar tota la taula, calcula y ÷ x a cada columna; una sola discrepància descarta la proporcionalitat.</p><div class="example"><h3>Exemple resolt</h3><p>Si 6 correspon a 2 i x passa a 18, el factor és 18 ÷ 6 = 3: y passa a 2 × 3 = 6. A la taula x: 3, 5, 11; y: 12, 20, 47, els quocients són 4, 4 i 47 ÷ 11: no són tots iguals.</p></div></section>
-<section class="card" id="tarifes-i-constant"><h2>Tarifes i unitats de la constant</h2><p>Defineix sempre l’orientació: k = y/x és la quantitat de y per unitat de x. Una quota fixa impedeix que el preu total sigui proporcional a la quantitat.</p><div class="example"><h3>Exemple resolt</h3><p>A 3 €/km sense quota fixa, 2 km costen 6 € i 4 km costen 12 €. Amb 6 € fixos més 3 €/km, costen 12 € i 18 €: duplicar la distància no duplica el preu.</p></div></section>
-<section class="card" id="significat-constant"><h2>Interpretar la constant</h2><p>Llegeix les unitats com «per cada unitat». La constant no és el total de qualsevol compra.</p><div class="example"><h3>Exemple resolt</h3><p>3 €/kg significa que cada quilogram costa 3 euros. Per 4 kg, el total és 4 × 3 = 12 €. A 6 peces/h, cada hora es fabriquen 6 peces; 5 €/entrada és el preu de cada entrada.</p></div></section>
-<section class="card" id="comparar-preus"><h2>Comparar preus unitaris</h2><p>Divideix el preu de cada paquet per la seva massa. Compara els preus per kg, encara que els paquets tinguin mides diferents.</p><div class="example"><h3>Exemple resolt</h3><p>A: 3 kg per 6 € → 6 ÷ 3 = 2 €/kg. B: 4 kg per 10 € → 10 ÷ 4 = 2,50 €/kg. A és més barata per kg. Si B costés 8 €, serien 2 €/kg i hi hauria empat.</p></div></section>
-<section class="card" id="taula-erronia"><h2>Reparar una taula</h2><p>Identifica almenys dues parelles fiables que donin la mateixa constant. Multiplica el valor de x de la columna errònia per aquesta constant. No dedueixis la constant d’una parella que ja sabem que falla.</p><div class="example"><h3>Exemple resolt</h3><p>Taula (1,4), (2,8), (3,13), amb error només a l’última parella: 4 ÷ 1 = 4 i 8 ÷ 2 = 4. Per x = 3, y = 3 × 4 = 12. Substituïm 13 per 12.</p></div></section>
-<section class="card" id="reconstruir-taula"><h2>Reconstruir amb una suma</h2><p>Si tots els valors de y són els x multiplicats per la mateixa constant, la suma de y també és la suma de x multiplicada per aquesta constant. Divideix les sumes i reconstrueix cada valor.</p><div class="example"><h3>Exemple resolt</h3><p>x: 1, 2, 3; suma de y: 24. Suma de x = 6. Constant = 24 ÷ 6 = 4. Per x = 2, y = 2 × 4 = 8. Comprovació: 4 + 8 + 12 = 24.</p></div></section>
-<section class="card" id="error-additiu"><h2>Diagnosticar un error additiu</h2><p>En proporcionalitat es manté un factor multiplicatiu, no la mateixa suma. Troba el valor unitari per comprovar una proposta.</p><div class="example"><h3>Exemple resolt</h3><p>2 quaderns costen 6 €. Passar de 2 a 5 quaderns sumant 3 no permet sumar només 3 euros. Cada quadern costa 6 ÷ 2 = 3 €. Cinc costen 5 × 3 = 15 €, no 9 €.</p></div></section>
-<section class="card" id="dades-suficients"><h2>Decidir si hi ha prou dades</h2><p>Una sola parella no determina una tarifa desconeguda. Busca dos models compatibles amb la dada inicial que donin resultats diferents. Si coneixem explícitament que el preu és proporcional i no hi ha quota fixa, sí que podem passar per la unitat.</p><div class="example"><h3>Exemple resolt</h3><p>2 km costen 10 €. Model A: 5 €/km, de manera que 5 km costen 25 €. Model B: 4 € fixos més 3 €/km; 2 km també costen 10 €, però 5 km costen 19 €. Sense conèixer la tarifa, falten dades. Si s’especifica proporcionalitat sense quota fixa, el resultat és 25 €.</p></div></section>
-<section class="card" id="produccio-pressupost"><h2>Producció màxima amb pressupost</h2><p>A fabrica 24 peces en 2 h: 24 ÷ 2 = 12 peces/h. B fabrica 60 en 3 h: 60 ÷ 3 = 20 peces/h. A costa 5 €/h (4 h costen 20 €) i B costa 9 €/h (2 h costen 18 €). A pot funcionar com a màxim 4 h i B com a màxim 2 h. El pressupost és 30 €. Les hores són enteres, inclòs zero.</p><p>Provem totes les hores A de 0 a 4 i totes les hores B de 0 a 2. Per cada parella, cost = hores A × 5 + hores B × 9; producció = hores A × 12 + hores B × 20. Descartem els costos superiors a 30 €.</p><div style="overflow-x:auto"><table class="mi-proportion-table"><caption>Totes les 5 × 3 = 15 combinacions dins dels límits</caption><thead><tr><th>A (h)</th><th>B (h)</th><th>Cost</th><th>Peces</th><th>Decisió</th></tr></thead><tbody><tr><td>0</td><td>0</td><td>0 €</td><td>0</td><td>Admissible</td></tr><tr><td>0</td><td>1</td><td>9 €</td><td>20</td><td>Admissible</td></tr><tr><td>0</td><td>2</td><td>18 €</td><td>40</td><td>Admissible</td></tr><tr><td>1</td><td>0</td><td>5 €</td><td>12</td><td>Admissible</td></tr><tr><td>1</td><td>1</td><td>14 €</td><td>32</td><td>Admissible</td></tr><tr><td>1</td><td>2</td><td>23 €</td><td>52</td><td>Admissible</td></tr><tr><td>2</td><td>0</td><td>10 €</td><td>24</td><td>Admissible</td></tr><tr><td>2</td><td>1</td><td>19 €</td><td>44</td><td>Admissible</td></tr><tr><td>2</td><td>2</td><td>28 €</td><td>64</td><td>Admissible</td></tr><tr><td>3</td><td>0</td><td>15 €</td><td>36</td><td>Admissible</td></tr><tr><td>3</td><td>1</td><td>24 €</td><td>56</td><td>Admissible</td></tr><tr><td>3</td><td>2</td><td>33 €</td><td>76</td><td>Supera 30 €</td></tr><tr><td>4</td><td>0</td><td>20 €</td><td>48</td><td>Admissible</td></tr><tr><td>4</td><td>1</td><td>29 €</td><td>68</td><td>Admissible</td></tr><tr><td>4</td><td>2</td><td>38 €</td><td>88</td><td>Supera 30 €</td></tr></tbody></table></div><p>El màxim admissible és <strong>68 peces</strong>: A durant 4 h i B durant 1 h, cost 4 × 5 + 1 × 9 = 29 €. Producció: 4 × 12 + 1 × 20 = 68. La taula recorre totes les combinacions enteres dins dels límits; no n’hem omès cap. Triar sempre la millor relació peces/euro no garanteix l’òptim amb límits i hores enteres.</p></section>
-<section class="card"><h2>Passar per la unitat en tots dos sentits</h2><p>5 entrades costen 25 €: 25 ÷ 5 = 5 €/entrada; 7 entrades costen 7 × 5 = 35 €. Per a 3 persones calen 219 g: 219 ÷ 3 = 73 g/persona; per a 10 persones, 730 g.</p><p>A velocitat constant, 8 km en 2 h són 4 km/h; en 10 h es recorren 40 km. Si un vehicle consumeix 6 L en 90 km, recorre 90 ÷ 6 = 15 km/L; amb 8 L recorre 8 × 15 = 120 km. Cal definir quina magnitud es calcula per unitat de l’altra.</p></section>
+<nav aria-label="Navegació entre temes de teoria" class="pager-master"><a class="prev" href="fraccions-1r-eso.html">← Fraccions</a><a class="idx" href="index.html">📚 Índex de teoria</a><a class="next" href="percentatges-1r-eso.html">Percentatges →</a></nav>
 </main>
 <footer class="mi-learning-footer">
   <p>Mates Interactives · Matemàtiques d’ESO · Teoria i exercicis gratuïts</p>

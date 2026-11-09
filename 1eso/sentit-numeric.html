@@ -3043,6 +3043,7 @@ function normalizeErrorEntry(e,topicId){
   var tid=e.topicId||topicId||null;
   var topic=TOPICS.find(function(t){return t.id===tid;})||null;
   var timestamp=e.timestamp;
+  var proportionSection=e.proportionTheory??e.theorySection;
   if(!timestamp&&e.ts){
     try{timestamp=new Date(e.ts).toISOString();}catch(_e){timestamp='';}
   }
@@ -3057,7 +3058,7 @@ function normalizeErrorEntry(e,topicId){
     options:Array.isArray(e.options)?e.options.slice():[],
     guide:Array.isArray(e.guide)?e.guide.slice():[],
     solution:Array.isArray(e.solution)?e.solution.slice():[],
-    familyId:e.familyId,theorySection:e.theorySection,percentTheory:tid==='percentatges'&&MIPercentatges.anchors.includes(e.percentTheory)?e.percentTheory:undefined,percentAnswer:tid==='percentatges'?e.percentAnswer:undefined,percentFields:tid==='percentatges'?e.percentFields:undefined,proportionTheory:tid==='proporcionalitat'&&MIProporcionalitat.anchors.includes(e.proportionTheory)?e.proportionTheory:undefined,proportionAnswer:tid==='proporcionalitat'?e.proportionAnswer:undefined,proportionFields:tid==='proporcionalitat'?e.proportionFields:undefined,
+    familyId:e.familyId,theorySection:e.theorySection,percentTheory:tid==='percentatges'&&MIPercentatges.anchors.includes(e.percentTheory)?e.percentTheory:undefined,percentAnswer:tid==='percentatges'?e.percentAnswer:undefined,percentFields:tid==='percentatges'?e.percentFields:undefined,proportionTheory:tid==='proporcionalitat'&&(MIProporcionalitat.anchors.includes(proportionSection)||proportionSection==='tarifes-i-constant')?proportionSection:undefined,proportionAnswer:tid==='proporcionalitat'?e.proportionAnswer:undefined,proportionFields:tid==='proporcionalitat'?e.proportionFields:undefined,
     fractionsTheory:tid==='fraccions'&&MIFraccions.anchors.includes(e.fractionsTheory)?e.fractionsTheory:undefined,
     fractionsAnswer:tid==='fraccions'?e.fractionsAnswer:undefined,fractionsFields:tid==='fraccions'?e.fractionsFields:undefined,fractionsOptionLabels:tid==='fraccions'?e.fractionsOptionLabels:undefined,
     decimalsTheory:tid==='decimals'&&(MIDecimals.anchors.includes(e.decimalsTheory)||e.decimalsTheory==='operacions'||e.decimalsTheory==='fraccions')?e.decimalsTheory:undefined,
@@ -3279,6 +3280,7 @@ function selTopic(i){
         +'<div style="font-size:.82rem;margin-top:5px"><span style="color:var(--err)">La teva: <b>'+escHtml(e.answer||'—')+'</b></span> · <span style="color:var(--ok)">Correcta: <b>'+escHtml(e.correct!==undefined?e.correct:e.c)+'</b></span></div>'
         +miReviewHtml(e);
       if(Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,t.id))html+=miFamilyTheoryLink(t.id,e.type,e.source,e.jerarquiaTheory||e.divisTheory||e.mcmTheory||e.entersTheory||e.decimalsTheory);
+      else if(t.id==='proporcionalitat')html+=miTheoryLinkHtml(t.id,undefined,e.proportionTheory);
       if(Array.isArray(e.solution)&&e.solution.length){
         html+='<button class="bs" style="margin-top:7px" onclick="toggleSavedSolution(&quot;'+localSolId+'&quot;,this)">&#128214; Veure explicació</button>'
           +'<div class="solbox" id="'+localSolId+'" style="display:none">'+solSteps(e.solution)+'</div>';
@@ -4093,12 +4095,13 @@ function showErrorSummary(){
           +'<div class="saved-error-meta">'+modeTxt+typeTxt+diffTxt+'</div>'
           +miReviewHtml(e);
         if(Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,t.id))html+=miFamilyTheoryLink(t.id,e.type,e.source,e.jerarquiaTheory||e.divisTheory||e.mcmTheory||e.entersTheory||e.decimalsTheory);
+        else if(t.id==='proporcionalitat')html+=miTheoryLinkHtml(t.id,undefined,e.proportionTheory);
         if(Array.isArray(e.solution)&&e.solution.length){
           html+='<button class="bs" onclick="toggleSavedSolution(&quot;'+solId+'&quot;,this)" style="margin-top:10px">&#128214; Veure explicació</button>'
-            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.percentTheory||e.proportionTheory||e.fractionsTheory||t.id==='percentatges'||t.id==='proporcionalitat'?miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory):'')+'</div>';
+            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.percentTheory||e.fractionsTheory||t.id==='percentatges'?miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.fractionsTheory):'')+'</div>';
         }else{
           html+='<div style="margin-top:10px;font-size:.8rem;color:var(--muted)">Aquest error és d\'una versió anterior i no tenia l\'explicació desada.</div>';
-          if(t.id==='percentatges'||t.id==='proporcionalitat'||t.id==='fraccions')html+=miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory);
+          if(t.id==='percentatges'||t.id==='fraccions')html+=miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.fractionsTheory);
         }
         html+='<button class="bw" onclick="deleteSavedError(&quot;'+t.id+'&quot;,&quot;'+escHtml(e.id)+'&quot;)" style="margin-top:8px">&#128465; Esborra aquest error</button>'
           +'</div>';
