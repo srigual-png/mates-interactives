@@ -13,6 +13,11 @@ async function main(){
    const check=(v,m)=>{if(!v)throw Error(m);},M=MIFraccions,el=id=>document.getElementById(id),topic=TOPICS.find(t=>t.id==='fraccions');
    const accepts=(q,v)=>openOk1(q.correct,v,q),groups=M.families,links={};
    for(const group of groups)for(const [id] of group){const q=M.generate(id);links[id]=miTheoryLinkHtml('fraccions',undefined,q.fractionsTheory).match(/href="([^"]+)/)[1];check(accepts(q,q.correct),'Canonical '+id);}
+   // Els exàmens han de funcionar abans que la pràctica inicialitzi cap estat.
+   miTopicExam.start('fraccions');const exam=miTopicExam.getSession();check(exam.questions.length===12,'Topic exam length');check([1,2,3].map(l=>exam.questions.filter(q=>miTaskDifficulty.getDifficulty(topic,q)===l).length).join()==='8,3,1','Exam quotas');
+   check(exam.questions.every(q=>!/^F\d/.test(String(q.type))),'Legacy exam generators');check(document.querySelector('#miTopicExamBody .mcm-option-line'),'Labelled fraction components in topic exam');
+   check(exam.questions.every(q=>q.options.length===4&&new Set(q.options).size===4&&q.options.filter(v=>accepts(q,v)).length===1),'Legacy exam unique options');
+   miExamSelectedTopics=['fraccions'];miStartConfiguredExam();check(state.examQs.length===20,'Global exam');
    function start(level,mode='open'){selTopic(TOPICS.indexOf(topic));selLv(level);selMode(mode);startP();return adaptivePracticeSessions.fraccions;}
    const scenarios=[];
    for(const [level,answers] of [[1,Array(10).fill(true)],[1,[true,true,false,false,...Array(10).fill(true)]],[2,Array(20).fill(true)],[2,Array(20).fill(false)]]){
@@ -54,10 +59,6 @@ async function main(){
    start(2);adaptivePracticeSessions.fraccions.questions={has:()=>true};showEx();check(adaptivePracticeSessions.fraccions.ended&&el('decimalResultSubtitle').textContent.includes('cap altra pregunta'),'Exhaustion summary');
    start(1);processPracticeAnswer(true,currentEx.correct);leavePractice();check(el('decimalResultScore').textContent==='1/1','Voluntary finish');
    start(1);const history=adaptivePracticeSessions.fraccions;history.points=3;nextAdaptivePractice(topic);const visitedN2=[...history.seen].filter(f=>groups[1].includes(f));history.points=0;nextAdaptivePractice(topic);history.points=3;nextAdaptivePractice(topic);check(visitedN2.every(f=>history.seen.has(f)),'Retained history');
-   miTopicExam.start('fraccions');const exam=miTopicExam.getSession();check(exam.questions.length===12,'Topic exam length');check([1,2,3].map(l=>exam.questions.filter(q=>miTaskDifficulty.getDifficulty(topic,q)===l).length).join()==='8,3,1','Exam quotas');
-   check(exam.questions.every(q=>!/^F\d/.test(String(q.type))),'Legacy exam generators');check(document.querySelector('#miTopicExamBody .mcm-option-line'),'Labelled fraction components in topic exam');
-   check(exam.questions.every(q=>q.options.length===4&&new Set(q.options).size===4&&q.options.filter(v=>accepts(q,v)).length===1),'Legacy exam unique options');
-   miExamSelectedTopics=['fraccions'];miStartConfiguredExam();check(state.examQs.length===20,'Global exam');
    let bank;
    for(let i=0;i<20;i++){const p=genFraccionsProb();if(p.type===7){bank=p;break;}}
    check(bank&&bank.answer.check(bank.answer.val)&&!bank.answer.check(bank.answer.val+';999'),'Bank tuple');const fields=bank.answer.fractionsAnswer.fields;check(!bank.answer.check((fields[0].value==='Laia'?'Marc':'Laia')+'; '+fields[1].value),'Wrong person');check(!bank.answer.check(fields[0].value+'; 0'),'Wrong difference');check(!bank.answer.check(fields[1].value),'Incomplete pair');
