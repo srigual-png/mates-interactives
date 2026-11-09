@@ -124,13 +124,18 @@ window.MIJerarquia = (() => {
     return operators.filter(sign => evaluate(parse(`${a} ${sign} ${b} × ${c}`), false) === target);
   }
 
-  const sections = {L01:'ordre', F01:'ordre', F02:'combinades', F03:'parentesis',
-    F07:'ordre', B4:'problemes', F05:'errors-tipics', F06:'parentesis'};
+  const theorySections = Object.freeze({
+    1:'multiplicacions',2:'multiplicacions',3:'potencies',4:'parentesis',5:'parentesis',6:'combinades',
+    8:'claudators',9:'claudators',B1:'combinades',B2:'combinades',B3:'combinades',B4:'problemes',
+    L01:'esquerra-dreta',F01:'primer-pas',F02:'un-sol-pas',F03:'comparar-parentesis',F07:'signe-desconegut',
+    'parentesis-resultat-positiu':'resultat-positiu',1001:'resultat-positiu',
+    F05:'reparar-error',F06:'reconstruir-expressio'
+  });
 
   function generate(type, rnd, buildOpts) {
     function exercise(question, correct, distractors, answer, hint, guide, solution) {
       return {type, question, correct: String(correct), options: buildOpts(String(correct), distractors.map(String)),
-        jerarquiaAnswer: answer, jerarquiaHint: hint, guide: [guide], solution, jerarquiaTheory: sections[type]};
+        jerarquiaAnswer: answer, jerarquiaHint: hint, guide: [guide], solution, jerarquiaTheory: theorySections[type]};
     }
     const a = rnd(2, 9), b = rnd(2, 9), c = rnd(2, 9), d = rnd(2, 9);
     const math = expression => `<br><span class="fc">${expression}</span>`;
@@ -166,7 +171,7 @@ window.MIJerarquia = (() => {
         isFirst ? 'Busca l’operació amb més prioritat. Si n’hi ha més d’una, mira l’ordre.' :
           'Calcula una sola operació i conserva la resta de l’expressió.',
         [`Primer: ${first} = ${evaluate(parse(first))}.`, `L’expressió queda ${next}.`]);
-      return {...task, practiceKey: original, jerarquiaTheory: isFirst && variant === 0 ? 'parentesis' : sections[type]};
+      return {...task, practiceKey: original};
     }
 
     if (type === 'F03') {
@@ -250,5 +255,5 @@ window.MIJerarquia = (() => {
     throw Error('Família de jerarquia desconeguda: ' + type);
   }
 
-  return {families, generate, matches, lots, parse, evaluate, operatorSolutions, reconstructions};
+  return {families, theorySections, generate, matches, lots, parse, evaluate, operatorSolutions, reconstructions};
 })();

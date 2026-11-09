@@ -39,11 +39,11 @@ a{color:inherit}
 .nav-link{color:var(--muted);text-decoration:none;font-size:.83rem;font-weight:650;padding:5px 8px;border-radius:8px;white-space:nowrap}
 .nav-link:hover{background:var(--soft);color:var(--primary)}
 .nav-title{flex:1;min-width:0;font-size:1rem;font-weight:750;color:var(--primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.wrap{width:min(790px,calc(100% - 32px));margin:0 auto;padding:30px 0 54px}
+.wrap{width:min(780px,calc(100% - 32px));margin:0 auto;padding:30px 0 54px}
 .hero{text-align:center;padding:10px 8px 22px}
 .eyebrow{display:inline-flex;align-items:center;gap:6px;background:var(--soft);color:var(--primary);border-radius:999px;padding:5px 11px;font-size:.75rem;font-weight:750;margin-bottom:12px}
 .hero h1{font-size:clamp(1.7rem,4vw,2.25rem);color:var(--primary);line-height:1.15;margin-bottom:9px}
-.hero p{color:var(--muted);font-size:.96rem;max-width:660px;margin:0 auto}
+.hero p{color:var(--muted);font-size:.96rem;max-width:650px;margin:0 auto}
 .hero-actions,.topic-actions{display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border-radius:12px;padding:12px 20px;text-decoration:none;font-size:.91rem;font-weight:700;transition:.18s ease}
 .btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--pd);transform:translateY(-1px)}
@@ -78,7 +78,7 @@ a{color:inherit}
 .footer{text-align:center;color:var(--muted);font-size:.76rem;padding:4px 0 25px}
 @media(max-width:650px){
   .top-nav{padding:10px 10px;gap:4px}.nav-link{padding:5px 5px;font-size:.75rem}.nav-main-label,.sense-label{display:none}.nav-title{font-size:.86rem}
-  .wrap{width:min(100% - 20px,790px);padding-top:20px}.quick-nav{grid-template-columns:1fr 1fr}.card{padding:17px}.rule-grid{grid-template-columns:1fr}
+  .wrap{width:min(100% - 20px,780px);padding-top:20px}.quick-nav{grid-template-columns:1fr 1fr}.card{padding:17px}.rule-grid{grid-template-columns:1fr}
   .hero-actions,.topic-actions{flex-direction:column}.btn{width:100%}
 }
 </style>
@@ -119,6 +119,22 @@ a{color:inherit}
 <a href="#problemes">6. Problemes</a>
 <a href="#errors-tipics">Errors típics</a>
 </nav>
+<nav class="quick-nav" aria-label="Procediments de les 14 famílies">
+<a href="#multiplicacions">Multiplicar abans de sumar i restar</a>
+<a href="#esquerra-dreta">Calcular d’esquerra a dreta</a>
+<a href="#primer-pas">Identificar la primera operació</a>
+<a href="#potencies">Calcular amb potències</a>
+<a href="#parentesis">Resoldre parèntesis</a>
+<a href="#claudators">Resoldre parèntesis i claudàtors</a>
+<a href="#combinades">Resoldre una expressió completa</a>
+<a href="#un-sol-pas">Reescriure després d’un pas</a>
+<a href="#comparar-parentesis">Comparar expressions amb parèntesis</a>
+<a href="#signe-desconegut">Trobar el signe que falta</a>
+<a href="#problemes">Resoldre un problema de lots</a>
+<a href="#resultat-positiu">Trobar el mínim positiu amb parèntesis</a>
+<a href="#reparar-error">Detectar i corregir el primer error</a>
+<a href="#reconstruir-expressio">Reconstruir una expressió</a>
+</nav>
 <section class="card major" id="ordre">
 <h2>📐 1. L'ordre de les operacions</h2>
 <p>Quan en una expressió hi ha diverses operacions, <strong>no les podem fer en qualsevol ordre</strong>. Cal respectar la jerarquia.</p>
@@ -130,15 +146,27 @@ a{color:inherit}
 </div>
 <div class="tip">💡 Si dues operacions tenen la mateixa prioritat, es resolen <strong>d'esquerra a dreta</strong>.</div>
 <p>Multiplicar i dividir tenen la mateixa prioritat. Sumar i restar també en tenen la mateixa entre elles. Els parèntesis poden canviar l'ordre.</p>
-<div class="example">
+</section>
+<section class="card" id="esquerra-dreta">
+<h2>Calcular d’esquerra a dreta</h2>
+<p>Quan queden multiplicacions i divisions del mateix grup, fes primer la de més a l’esquerra. Amb sumes i restes passa el mateix. Els parèntesis poden canviar l’ordre i el resultat.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
 <div class="math">24 ÷ 6 × 2 = 4 × 2 = 8</div>
 <div class="math">24 ÷ (6 × 2) = 24 ÷ 12 = 2</div>
 <div class="math">18 − 6 + 2 = 12 + 2 = 14</div>
 <div class="math">18 − (6 + 2) = 18 − 8 = 10</div>
 </div>
 </section>
+<section class="card" id="primer-pas">
+<h2>Identificar la primera operació</h2>
+<p>Busca l’operació amb més prioritat. Si n’hi ha diverses amb la mateixa prioritat dins del mateix grup, comença per la de més a l’esquerra. Escriu només l’operació que es fa primer, sense calcular-la.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>A 4 + 3 × (8 − 2), la primera operació és <strong>8 − 2</strong>, perquè és dins del parèntesi. A 4 + 3 × 2², és <strong>2²</strong>. A 4 + 3 × 2 − 1, és <strong>3 × 2</strong>.</p>
+</div>
+</section>
 <section class="card" id="multiplicacions">
 <h2>✖️ 2. Multiplicacions abans que sumes i restes</h2>
+<p>Calcula tots els productes i després fes les sumes i restes d’esquerra a dreta.</p>
 <div class="example"><span class="example-label">EXEMPLE RESOLT</span>
 <div class="math">4 + 3 × 5</div>
 <div class="math">4 + 15 = 19</div>
@@ -170,7 +198,9 @@ a{color:inherit}
 <div class="math">(5 + 2) × (8 − 3)</div>
 <div class="math">7 × 5 = 35</div>
 </div>
-<h3>Parèntesis dins de claudàtors · nivell difícil</h3>
+</section>
+<section class="card" id="claudators">
+<h2>Resoldre parèntesis i claudàtors</h2>
 <p>Els <strong>claudàtors [ ]</strong> agrupen operacions igual que els <strong>parèntesis ( )</strong>. Fem servir signes diferents per distingir els grups. Quan un grup és dins d'un altre, resolem <strong>de dins cap enfora</strong>. Dins de cada grup, respectem la mateixa jerarquia d'operacions.</p>
 <div class="example"><span class="example-label">EXEMPLE RESOLT · NIVELL DIFÍCIL</span>
 <div class="math">3 × [2 × (5 + 2) + 5²] − 5</div>
@@ -186,12 +216,12 @@ a{color:inherit}
 <div class="math">117 − 5 = 112</div>
 </div>
 <div class="tip">💡 El que mana és quin grup és més interior, no la forma del signe. No multipliquis pel 3 exterior fins que hagis resolt tot el claudàtor.</div>
-<div class="example"><span class="example-label">COMPARA ELS PARÈNTESIS</span>
+</section>
+<section class="card" id="comparar-parentesis">
+<h2>Comparar expressions amb parèntesis</h2>
+<p>Resol les dues expressions per separat. Compara els resultats i comprova si els parèntesis canvien l’operació que es fa primer.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
 <p>4 + 3 × 5 i 4 + (3 × 5) donen 19 perquè el producte ja tenia prioritat. En canvi, (4 + 3) × 5 dona 35 perquè ara la suma es fa primer.</p>
-</div>
-<div class="example"><span class="example-label">RECONSTRUEIX UNA EXPRESSIÓ</span>
-<p>Amb 2, 3, 4 i 5 en aquest ordre i els signes +, − i × una vegada cadascun, volem obtenir 15. Si reservem el 5 per restar-lo al final, necessitem 20. Agrupem 2 + 3 perquè es calculi abans de multiplicar per 4.</p>
-<div class="math">(2 + 3) × 4 − 5 = 5 × 4 − 5 = 20 − 5 = 15</div>
 </div>
 </section>
 <section class="card" id="combinades">
@@ -199,13 +229,26 @@ a{color:inherit}
 <p>Quan hi apareix tot alhora, segueix la jerarquia sense saltar cap pas.</p>
 <div class="example"><span class="example-label">EXEMPLE RESOLT</span>
 <div class="math">2 × 3² − (4 + 1) + 6</div>
+<div class="math">2 × 3² − 5 + 6</div>
 <div class="math">2 × 9 − 5 + 6</div>
 <div class="math">18 − 5 + 6</div>
 <div class="math">13 + 6 = 19</div>
 </div>
-<div class="example"><span class="example-label">UN SOL PAS</span>
+</section>
+<section class="card" id="un-sol-pas">
+<h2>Reescriure després d’un pas</h2>
+<p>Identifica i calcula la primera operació. Substitueix-la pel resultat i copia la resta de l’expressió tal com estava. Atura’t aquí.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
 <div class="math">18 ÷ (5 − 2) + 4 → 18 ÷ 3 + 4</div>
 <p>Substituïm només 5 − 2 pel seu resultat. La divisió i el + 4 es conserven. El pas següent ja seria 6 + 4.</p>
+</div>
+</section>
+<section class="card" id="signe-desconegut">
+<h2>Trobar el signe que falta</h2>
+<p>Prova +, −, × i ÷ a la casella. Recalcula l’expressió amb la jerarquia que correspon a cada signe. Tria el que dona el resultat demanat.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>A 24 □ 2 × 3 = 36, amb + obtens 30 i amb − obtens 18. Amb × obtens 144. Amb ÷ fas primer 24 ÷ 2 = 12 i després 12 × 3 = 36.</p>
+<p>El signe que falta és <strong>÷</strong>.</p>
 </div>
 </section>
 <section class="card" id="problemes">
@@ -221,6 +264,42 @@ a{color:inherit}
 <div class="math">7 × (4 + 2) − 2² = 42 − 4 = 38</div>
 </div>
 </section>
+<section class="card" id="resultat-positiu">
+<h2>Trobar el mínim positiu amb parèntesis</h2>
+<p>Prova les agrupacions que conserven l’ordre dels nombres i dels signes. Calcula cada resultat i descarta els negatius i el zero. Dels que queden, tria el més petit.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>A 6 + 3 × 4 − 2, les cinc agrupacions completes donen:</p>
+<div class="math">((6 + 3) × 4) − 2 = 34</div>
+<div class="math">(6 + (3 × 4)) − 2 = 16</div>
+<div class="math">(6 + 3) × (4 − 2) = 18</div>
+<div class="math">6 + ((3 × 4) − 2) = 16</div>
+<div class="math">6 + (3 × (4 − 2)) = 12</div>
+<p>El resultat estrictament positiu més petit és <strong>12</strong>.</p>
+</div>
+</section>
+<section class="card" id="reparar-error">
+<h2>Detectar i corregir el primer error</h2>
+<p>Compara cada línia amb l’anterior. Revisa que s’hagi triat una operació amb la prioritat correcta i que el càlcul sigui correcte. Atura’t a la primera línia errònia i torna-la a escriure.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<div class="math">24 ÷ (2 + 4) × 2 + 3²</div>
+<ol>
+<li>24 ÷ 6 × 2 + 3²</li>
+<li>24 ÷ 6 × 2 + 9</li>
+<li>24 ÷ 12 + 9</li>
+<li>2 + 9</li>
+<li>11</li>
+</ol>
+<p>La primera línia incorrecta és la 3. Cal fer 24 ÷ 6 abans de multiplicar per 2. La línia corregida és 4 × 2 + 9. Escriu <strong>3; 4 × 2 + 9</strong>. Si continues calculant, el resultat final és 17.</p>
+</div>
+</section>
+<section class="card" id="reconstruir-expressio">
+<h2>Reconstruir una expressió</h2>
+<p>Mantén els nombres en l’ordre donat i fes servir cada signe una vegada. Prova agrupacions que t’acostin al resultat i comprova que cap pas intermedi sigui negatiu.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Amb 2, 3, 4 i 5 en aquest ordre i els signes +, − i × una vegada cadascun, volem obtenir 15. Si reservem el 5 per restar-lo al final, necessitem 20. Agrupem 2 + 3 perquè es calculi abans de multiplicar per 4.</p>
+<div class="math">(2 + 3) × 4 − 5 = 5 × 4 − 5 = 20 − 5 = 15</div>
+</div>
+</section>
 <section class="card mistakes" id="errors-tipics">
 <h2>⚠️ Errors típics</h2>
 <ul>
@@ -231,17 +310,6 @@ a{color:inherit}
 <li>Interpretar una potència com una multiplicació per l'exponent.</li>
 <li>No respectar l'ordre d'esquerra a dreta entre operacions de la mateixa prioritat.</li>
 </ul>
-<div class="example"><span class="example-label">TROBA I REPARA EL PRIMER ERROR</span>
-<div class="math">24 ÷ (2 + 4) × 2 + 3²</div>
-<ol>
-<li>24 ÷ 6 × 2 + 3²</li>
-<li>24 ÷ 6 × 2 + 9</li>
-<li>24 ÷ 12 + 9</li>
-<li>2 + 9</li>
-<li>11</li>
-</ol>
-<p>La primera línia incorrecta és la 3. Cal fer 24 ÷ 6 abans de multiplicar per 2. La línia corregida és 4 × 2 + 9 i el resultat final és 17.</p>
-</div>
 </section>
 <section class="card check">
 <h2>✅ Comprova si ho has entès</h2>

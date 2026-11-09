@@ -3066,7 +3066,7 @@ function normalizeErrorEntry(e,topicId){
     entersAnswer:tid==='enters'?e.entersAnswer:undefined,entersFields:tid==='enters'?e.entersFields:undefined,entersOptionLabels:tid==='enters'?e.entersOptionLabels:undefined,
     mcmTheory:tid==='mcmmcd'&&MIMcdMcm.isAnchor(e.mcmTheory)?e.mcmTheory:undefined,
     divisTheory:tid==='divis'&&['divisibilitat','criteris','primers','factoritzacio','errors-frequents','criteri-incorrecte','prova-contraexemple'].includes(e.divisTheory)?e.divisTheory:undefined,
-    jerarquiaTheory:tid==='jerarquia'&&['ordre','potencies','parentesis','combinades','problemes','errors-tipics'].includes(e.jerarquiaTheory)?e.jerarquiaTheory:undefined,
+    jerarquiaTheory:tid==='jerarquia'&&(['ordre','errors-tipics'].includes(e.jerarquiaTheory)||Object.values(MIJerarquia.theorySections).includes(e.jerarquiaTheory))?e.jerarquiaTheory:undefined,
     level:e.level!==undefined?e.level:null,
     source:e.source||'legacy',
     taskDifficulty:e.taskDifficulty??null,taskDifficultyStatus:e.taskDifficultyStatus||'legacy',difficultyBank:e.difficultyBank||null,difficultyKey:e.difficultyKey||null,variantId:e.variantId||null,
@@ -3237,9 +3237,11 @@ const MI_FAMILY_THEORY_SECTIONS = Object.freeze({
   naturals:MI_NATURAL_THEORY_SECTIONS,
   decimal_sys:MI_DECIMAL_SYSTEM_THEORY_SECTIONS,
   ops:OPS_THEORY_SECTIONS,
-  potencies:POTENCIES_THEORY
+  potencies:POTENCIES_THEORY,
+  jerarquia:MIJerarquia.theorySections
 });
-function miFamilyTheoryLink(topicId,type,source='practice'){
+function miFamilyTheoryLink(topicId,type,source='practice',savedSection){
+  if(topicId==='jerarquia'&&source!=='practice')return miTheoryLinkHtml(topicId,undefined,savedSection);
   // Open problems and exams reuse practice type numbers with a different meaning.
   if((topicId==='ops'||topicId==='potencies')&&source!=='practice')return miTheoryLinkHtml(topicId);
   const sections=MI_FAMILY_THEORY_SECTIONS[topicId];
@@ -3268,7 +3270,7 @@ function selTopic(i){
         +'<div style="line-height:1.45">'+escHtml(stripTags(e.question||e.q||''))+'</div>'
         +'<div style="font-size:.82rem;margin-top:5px"><span style="color:var(--err)">La teva: <b>'+escHtml(e.answer||'—')+'</b></span> · <span style="color:var(--ok)">Correcta: <b>'+escHtml(e.correct!==undefined?e.correct:e.c)+'</b></span></div>'
         +miReviewHtml(e);
-      if(Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,t.id))html+=miFamilyTheoryLink(t.id,e.type,e.source);
+      if(Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,t.id))html+=miFamilyTheoryLink(t.id,e.type,e.source,e.jerarquiaTheory);
       if(Array.isArray(e.solution)&&e.solution.length){
         html+='<button class="bs" style="margin-top:7px" onclick="toggleSavedSolution(&quot;'+localSolId+'&quot;,this)">&#128214; Veure explicació</button>'
           +'<div class="solbox" id="'+localSolId+'" style="display:none">'+solSteps(e.solution)+'</div>';
@@ -3473,23 +3475,19 @@ var adaptivePracticeFamilies={
 var adaptivePracticeSessions={};
 var ADAPTIVE_PRACTICE_THRESHOLDS={1:[3,6],2:[6,12]};
 function genJerarquiaPractice(type,level,random=rnd){
-  let exercise,section;
+  let exercise;
   if(typeof type==='number'){
     exercise=genJerarquia(type,random);
-    section=type<=2?'ordre':type===3?'potencies':type===6?'combinades':'parentesis';
   }else if(/^B[1-3]$/.test(type)){
     const problem=genJerProb(Number(type[1]),random),correct=problem.answer.val;
     exercise={type,question:problem.text,correct,options:buildJerOptions(correct,[]),
       guide:problem.steps.map(step=>step.hint),solution:problem.hints};
-    section='combinades';
   }else if(type==='parentesis-resultat-positiu'){
     exercise=MIFirstNumericTasks.generate(type,()=>random(0,999999)/1000000);
-    section='parentesis';
   }else{
     exercise=MIJerarquia.generate(type,random,buildOpts);
-    section=exercise.jerarquiaTheory;
   }
-  return {...exercise,jerarquiaTheory:section,taskDifficulty:level,diff:level};
+  return {...exercise,jerarquiaTheory:MIJerarquia.theorySections[type],taskDifficulty:level,diff:level};
 }
 
 function genDivisPractice(type,level,random=rnd){
@@ -3778,7 +3776,7 @@ function processPracticeAnswer(isOk,studentAnswer,message){
   }
   window.MIAnalytics?.answer(isOk);state.answered=true;
   var solHTML='<div class="solbox">'+solSteps(currentEx.solution)+'</div>';
-  var theoryLink=Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,topic.id) ? miFamilyTheoryLink(topic.id,currentEx.type) : miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.percentTheory||currentEx.proportionTheory||currentEx.fractionsTheory||currentEx.decimalsTheory||currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.jerarquiaTheory||currentEx.opsTheory);
+  var theoryLink=Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,topic.id) ? miFamilyTheoryLink(topic.id,currentEx.type) : miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.percentTheory||currentEx.proportionTheory||currentEx.fractionsTheory||currentEx.decimalsTheory||currentEx.entersTheory||currentEx.mcmTheory||currentEx.divisTheory||currentEx.opsTheory);
   var fb=document.getElementById('fbA');
   if(isOk){
     state.correctStreak++;updateSBar();
@@ -4086,10 +4084,10 @@ function showErrorSummary(){
           +'<div>Resposta correcta: <b style="color:var(--ok)">'+(t.id==='mcmmcd'&&MIMcdMcm.optionLabels(e.type)?formatMcdOption({...e,topicId:t.id},e.correct||'—'):escHtml(e.correct||'—'))+'</b></div></div>'
           +'<div class="saved-error-meta">'+modeTxt+typeTxt+diffTxt+'</div>'
           +miReviewHtml(e);
-        if(Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,t.id))html+=miFamilyTheoryLink(t.id,e.type,e.source);
+        if(Object.hasOwn(MI_FAMILY_THEORY_SECTIONS,t.id))html+=miFamilyTheoryLink(t.id,e.type,e.source,e.jerarquiaTheory);
         if(Array.isArray(e.solution)&&e.solution.length){
           html+='<button class="bs" onclick="toggleSavedSolution(&quot;'+solId+'&quot;,this)" style="margin-top:10px">&#128214; Veure explicació</button>'
-            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory||t.id==='percentatges'||t.id==='proporcionalitat'||t.id==='mcmmcd'?miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory):'')+'</div>';
+            +'<div class="solbox" id="'+solId+'" style="display:none">'+solSteps(e.solution)+(e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||t.id==='percentatges'||t.id==='proporcionalitat'||t.id==='mcmmcd'?miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory):'')+'</div>';
         }else{
           html+='<div style="margin-top:10px;font-size:.8rem;color:var(--muted)">Aquest error és d\'una versió anterior i no tenia l\'explicació desada.</div>';
           if(t.id==='percentatges'||t.id==='proporcionalitat'||t.id==='fraccions'||t.id==='mcmmcd'||t.id==='enters'||t.id==='decimals')html+=miTheoryLinkHtml(t.id,undefined,e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory);
