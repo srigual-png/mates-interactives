@@ -93,10 +93,19 @@
     } catch {}
   });
   if (!excluded() && !document.querySelector('script[data-goatcounter]')) {
-    // Strip unreviewed URL query/hash and incoming referrer from automatic pageviews.
+    // Keep only the external HTTP(S) origin actually supplied by the browser.
+    // Never send referrer paths, credentials, query/hash or internal navigation.
+    let referrer = '';
+    try {
+      const incoming = new URL(document.referrer);
+      if ((incoming.protocol === 'https:' || incoming.protocol === 'http:') && incoming.origin !== location.origin) {
+        referrer = incoming.origin;
+      }
+    } catch { /* Direct/private navigation has no usable referrer. */ }
+    // Strip unreviewed URL query/hash from automatic pageviews.
     window.goatcounter = window.goatcounter || {};
     window.goatcounter.path = location.pathname;
-    window.goatcounter.referrer = '';
+    window.goatcounter.referrer = referrer;
     window.goatcounter.no_onload = true;
     window.goatcounter.no_events = true;
     const script = document.createElement('script');
