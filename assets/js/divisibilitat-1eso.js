@@ -4,6 +4,13 @@ window.MIDivisibilitat = (() => {
     [[4, 'factor-error'], [7], ['G'], ['H'], ['I'], ['F02'], ['F05']],
     [[1001], ['F03'], ['F08']]
   ];
+  const theorySections = Object.freeze({
+    1:'criteris',2:'criteris',5:'criteris',3:'primers',6:'comprovar-divisor',
+    4:'factoritzacio','factor-error':'factoritzacio',7:'repartiment-exacte',
+    G:'llistar-divisors',H:'seguent-multiple',I:'xifra-desconeguda',
+    F02:'doble-divisibilitat',F05:'demostrar-compost',1001:'divisibilitat-condicions',
+    F03:'criteri-incorrecte',F08:'prova-contraexemple'
+  });
   const criteria = {
     2: 'l’última xifra és parella',
     3: 'la suma de les xifres és múltiple de 3',
@@ -338,5 +345,5 @@ window.MIDivisibilitat = (() => {
       guide:exercise.guide,review:exercise.guide,solution:exercise.solution,divisTheory:exercise.divisTheory};
   }
 
-  return {families, generate, matches, divisors, classify, digitBases, reserves, reasoningReview};
+  return {families, theorySections, generate, matches, divisors, classify, digitBases, reserves, reasoningReview};
 })();
