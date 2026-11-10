@@ -95,6 +95,33 @@ a{color:inherit}
 @media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
 </style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
+<style id="mi-practica-teoria-support">
+/* Els procediments són ajuda opcional, no la teoria principal. */
+.procedure-support{border:1px solid var(--border);border-radius:16px;background:var(--card);box-shadow:var(--sh);margin:18px 0;padding:0;scroll-margin-top:76px}
+.procedure-support>summary{cursor:pointer;list-style:none;padding:19px 22px;display:flex;flex-direction:column;gap:3px;position:relative;padding-right:50px}
+.procedure-support>summary::-webkit-details-marker,.procedure-item>summary::-webkit-details-marker{display:none}
+.procedure-support>summary:after{content:"＋";position:absolute;right:21px;top:19px;font-size:1.35rem;color:var(--primary)}
+.procedure-support[open]>summary:after{content:"−"}
+.support-heading{font-size:1.1rem;font-weight:800;color:var(--primary)}
+.support-caption,.support-intro{font-size:.87rem;color:var(--muted)}
+.support-intro{margin:0 22px 12px;line-height:1.6}
+.procedure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 20px 20px;align-items:start}
+.procedure-item{border:1px solid var(--border);border-radius:11px;background:#fbfcfe;scroll-margin-top:90px;min-width:0}
+.procedure-item>summary{cursor:pointer;padding:12px 33px 12px 13px;font-weight:700;font-size:.86rem;position:relative;line-height:1.35}
+.procedure-item>summary:after{content:"＋";position:absolute;right:11px;top:10px;color:var(--primary)}
+.procedure-item[open]>summary:after{content:"−"}
+.procedure-item[open]{grid-column:1/-1;background:#fff;border-color:var(--primary)}
+.procedure-item[open]>summary{color:var(--primary);border-bottom:1px solid var(--border)}
+.procedure-item>p,.procedure-item>.example{margin:12px 15px}
+.procedure-item>p.tip{margin:12px 15px 15px}
+.optional-challenge-heading{grid-column:1/-1;border-top:1px solid var(--border);padding:14px 2px 2px;margin-top:7px;display:flex;flex-direction:column;gap:3px}
+.optional-challenge-heading strong{color:#8a5d00;font-size:.95rem}
+.optional-challenge-heading span{color:var(--muted);font-size:.83rem}
+.optional-challenge{border-color:#efd48b;background:#fffdf7}
+.procedure-item:target{outline:2px solid var(--primary);outline-offset:2px}
+.procedure-item>summary:focus-visible,.procedure-support>summary:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+@media(max-width:650px){.procedure-grid{grid-template-columns:1fr;padding:0 12px 14px}.procedure-support>summary{padding:16px 45px 16px 15px}.support-intro{margin:0 15px 12px}}
+</style>
 </head>
 <body>
 <nav aria-label="Navegació principal" class="top-nav">
@@ -114,22 +141,8 @@ a{color:inherit}
 <a class="btn btn-secondary" href="#divisibilitat">📘 Comença la teoria</a>
 </div>
 </header>
-<nav aria-label="Continguts de la teoria" class="quick-nav"><a href="#divisibilitat">🔍 1. Múltiples, divisors i divisibilitat</a><a href="#criteris">✅ 2. Criteris de divisibilitat</a><a href="#primers">🧩 3. Nombres primers i compostos</a><a href="#factoritzacio">🌳 4. Factorització en nombres primers</a></nav>
-<nav class="quick-nav" aria-label="Procediments de les 13 famílies">
-<a href="#criteris">Identificar múltiples i aplicar criteris</a>
-<a href="#primers">Classificar nombres primers i compostos</a>
-<a href="#comprovar-divisor">Comprovar si un nombre és divisor</a>
-<a href="#factoritzacio">Factoritzar i comprovar els factors</a>
-<a href="#repartiment-exacte">Comparar dos repartiments</a>
-<a href="#llistar-divisors">Llistar i filtrar divisors</a>
-<a href="#seguent-multiple">Arribar al múltiple següent</a>
-<a href="#xifra-desconeguda">Completar una xifra</a>
-<a href="#doble-divisibilitat">Combinar dos criteris en un interval</a>
-<a href="#demostrar-compost">Demostrar que un nombre és compost</a>
-<a href="#divisibilitat-condicions">Completar dues xifres amb condicions</a>
-<a href="#criteri-incorrecte">Detectar un criteri incorrecte</a>
-<a href="#prova-contraexemple">Justificar o refutar una regla</a>
-</nav>
+<nav aria-label="Continguts de la teoria" class="quick-nav"><a href="#divisibilitat">🔍 1. Múltiples, divisors i divisibilitat</a><a href="#criteris">✅ 2. Criteris de divisibilitat</a><a href="#primers">🧩 3. Nombres primers i compostos</a><a href="#factoritzacio">🌳 4. Factorització en nombres primers</a><a href="#ajuda-exercicis">🧩 Ajuda per exercici</a></nav>
+
 <section class="card major" id="divisibilitat">
 <h2>🔍 1. Múltiples, divisors i divisibilitat</h2>
 <p>Un nombre <strong>a</strong> és divisible per un enter positiu <strong>b</strong> quan <strong>a ÷ b</strong> té residu 0. Aleshores, <strong>b</strong> és divisor d’<strong>a</strong> i <strong>a</strong> és múltiple de <strong>b</strong>.</p>
@@ -143,6 +156,7 @@ a{color:inherit}
 <a class="btn btn-secondary" href="../../sentit-numeric.html?tema=divis&amp;nivell=2">🟠 Practicar · Autònom</a>
 </div>
 </section>
+
 <section class="card" id="criteris">
 <h2>✅ 2. Identificar múltiples i aplicar criteris</h2>
 <p>Els criteris permeten saber si un nombre és divisible per un altre sense haver de fer tota la divisió.</p>
@@ -163,6 +177,7 @@ a{color:inherit}
 <p>Si busques un múltiple de 7, pots formar-ne un multiplicant: 7 × 8 = <strong>56</strong>. Entre 54, 55, 56 i 57, només 56 dona residu zero en dividir per 7.</p>
 </div>
 </section>
+
 <section class="card" id="primers">
 <h2>🧩 3. Nombres primers i compostos</h2>
 <p>Entre els naturals més grans que 1, un <strong>nombre primer</strong> té exactament dos divisors positius, 1 i ell mateix, i un <strong>nombre compost</strong> en té més de dos. El 0 i l’1 no són primers ni compostos. El 2 és l’únic primer parell perquè els altres parells positius són divisibles per 2 i tenen més de dos divisors.</p>
@@ -174,13 +189,7 @@ a{color:inherit}
 <p>13 és <strong>primer</strong> perquè només té els divisors 1 i 13. 12 és <strong>compost</strong> perquè, a més d’1 i 12, té altres divisors. El 0 i l’1 <strong>no són ni primers ni compostos</strong>.</p>
 </div>
 </section>
-<section class="card" id="comprovar-divisor">
-<h2>Comprovar si un nombre és divisor</h2>
-<p>Divideix el nombre pel possible divisor i mira el residu. Si és zero, la divisió és exacta. Si queda residu, aquest nombre no és divisor.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>6 és divisor de 42 perquè 42 = 6 × 7. En canvi, 5 no n’és divisor: 42 = 5 × 8 + 2. Si et demanen un nombre que <strong>no</strong> sigui divisor de 42, pots escriure 5.</p>
-</div>
-</section>
+
 <section class="card" id="factoritzacio">
 <h2>🌳 4. Factorització en nombres primers</h2>
 <p>Factoritzar és escriure un nombre com un producte de nombres primers.</p>
@@ -196,75 +205,99 @@ a{color:inherit}
 <p>Per a 2 × 3 × 11, la resposta és <strong>no; sí</strong>: tots tres factors són primers, però el producte és 66.</p>
 </div>
 </section>
-<section class="card" id="repartiment-exacte">
-<h2>Comparar dos repartiments</h2>
+
+<details class="procedure-support" id="ajuda-exercicis">
+<summary><span class="support-heading">🧩 Ajuda per a exercicis concrets</span><span class="support-caption">10 procediments amb exemples resolts · Obre només el que necessitis</span></summary>
+<p class="support-intro">Repassa primer múltiples, divisors, criteris, nombres primers i factorització. Quan necessitis ajuda amb un exercici específic, obre només el procediment corresponent.</p>
+<div id="procediments-detall" class="procedure-grid">
+<details class="procedure-item" id="comprovar-divisor">
+<summary>Comprovar si un nombre és divisor</summary>
+<p>Divideix el nombre pel possible divisor i mira el residu. Si és zero, la divisió és exacta. Si queda residu, aquest nombre no és divisor.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>6 és divisor de 42 perquè 42 = 6 × 7. En canvi, 5 no n’és divisor: 42 = 5 × 8 + 2. Si et demanen un nombre que <strong>no</strong> sigui divisor de 42, pots escriure 5.</p>
+</div>
+</details>
+
+<details class="procedure-item" id="repartiment-exacte">
+<summary>Comparar dos repartiments</summary>
 <p>Divideix el total per cada mida de grup per separat. Un repartiment és exacte si el residu és zero. Respon en l’ordre en què et demanen les dues mides.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Hi ha 36 fitxes. En grups de 4, obtenim 36 ÷ 4 = 9 sense residu. En grups de 5, tenim 36 = 5 × 7 + 1 i en sobra una. La resposta és <strong>sí; no</strong>.</p>
 </div>
-</section>
-<section class="card" id="llistar-divisors">
-<h2>Llistar i filtrar divisors</h2>
+</details>
+
+<details class="procedure-item" id="llistar-divisors">
+<summary>Llistar i filtrar divisors</summary>
 <p>Busca parelles de factors començant per 1. Atura’t quan es repeteixin en ordre invers. Si els dos factors són iguals, escriu-lo una sola vegada. Si et demanen una condició, aplica-la a la llista completa.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Per a 36, les parelles són 1 × 36, 2 × 18, 3 × 12, 4 × 9 i 6 × 6. Cada parella dona dos divisors, excepte 6 × 6, que només aporta el 6 una vegada.</p>
 <div class="math">1, 2, 3, 4, 6, 9, 12, 18, 36</div>
 <p>Si només et demanen els divisors parells més grans que 2, queden <strong>4, 6, 12, 18 i 36</strong>.</p>
 </div>
-</section>
-<section class="card" id="seguent-multiple">
-<h2>Arribar al múltiple següent</h2>
+</details>
+
+<details class="procedure-item" id="seguent-multiple">
+<summary>Arribar al múltiple següent</summary>
 <p>Divideix el nombre pel divisor. Si el residu és zero, ja és un múltiple i cal sumar 0. Si no, resta el residu del divisor per saber quant falta fins al següent múltiple.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Per fer que 127 sigui divisible per 5, calculem el residu: 127 = 5 × 25 + 2. Cal sumar <strong>5 − 2 = 3</strong>. Així arribem a 130.</p>
 </div>
-</section>
-<section class="card" id="xifra-desconeguda">
-<h2>Completar una xifra</h2>
+</details>
+
+<details class="procedure-item" id="xifra-desconeguda">
+<summary>Completar una xifra</summary>
 <p>Aplica el criteri corresponent a cadascuna de les xifres de 0 a 9. Escriu totes les que compleixen la condició. Per al 3 o el 9, pots sumar primer les xifres que ja coneixes.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>A 43□, la suma de les xifres fixes és 7. Perquè sigui divisible per 3, la suma final ha de ser 9, 12 o 15. Les xifres possibles són <strong>2, 5 i 8</strong>. Si el divisor fos 5, només valdrien <strong>0 i 5</strong>.</p>
 </div>
-</section>
-<section class="card" id="doble-divisibilitat">
-<h2>Combinar dos criteris en un interval</h2>
+</details>
+
+<details class="procedure-item" id="doble-divisibilitat">
+<summary>Combinar dos criteris en un interval</summary>
 <p>Llista els múltiples d’un dels divisors dins l’interval, incloent els extrems si són múltiples. Conserva només els que també compleixen el segon criteri.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Entre 22 i 36, els múltiples de 5 són 25, 30 i 35. Les seves sumes de xifres són 7, 3 i 8, respectivament. Només <strong>30</strong> és també múltiple de 3.</p>
 </div>
-</section>
-<section class="card" id="demostrar-compost">
-<h2>Demostrar que un nombre és compost</h2>
+</details>
+
+<details class="procedure-item" id="demostrar-compost">
+<summary>Demostrar que un nombre és compost</summary>
 <p>Busca una divisió exacta per un divisor diferent d’1 i del nombre mateix. Escriu el divisor multiplicat pel quocient. Tots dos factors han de ser més grans que 1.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>91 ÷ 7 = 13 sense residu. Per tant, <strong>91 = 7 × 13</strong> demostra que és compost. Escriure 1 × 91 només dona els factors que té qualsevol nombre positiu.</p>
 </div>
-</section>
-<section class="card" id="divisibilitat-condicions">
-<h2>Completar dues xifres amb condicions</h2>
+</details>
+
+<details class="procedure-item" id="divisibilitat-condicions">
+<summary>Completar dues xifres amb condicions</summary>
 <p>Prova les parelles de xifres per ordre, de 00 a 99. Per al 9, suma totes les xifres. Per al 4, mira les dues últimes xifres. Per al 8, comprova les tres últimes. Atura’t en el primer nombre que compleixi totes les condicions.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Completa 2□□4 per obtenir el nombre més petit divisible per 9 i per 4, però no per 8. Les xifres fixes sumen 6. La primera suma possible per a les dues xifres buides és 3. Els primers candidats per ordre són 2.034 i 2.124.</p>
 <p>2.034 falla el criteri del 4 perquè 34 no n’és múltiple. A 2.124, la suma de xifres és 9 i 24 és múltiple de 4. Com que 124 no és múltiple de 8, <strong>2.124</strong> és el primer que compleix totes les condicions.</p>
 </div>
-</section>
-<section class="card" id="criteri-incorrecte">
-<h2>Detectar un criteri incorrecte</h2>
+</details>
+
+<details class="procedure-item" id="criteri-incorrecte">
+<summary>Detectar un criteri incorrecte</summary>
 <p>La <strong>conclusió</strong> diu si el nombre és divisible. La <strong>justificació</strong> explica com ho sabem. Tria el criteri del divisor i aplica’l. Després comprova per separat si la conclusió coincideix amb el resultat i si el criteri que s’ha fet servir és adequat.</p>
 <p>Per al 3 i el 9, suma les xifres i comprova si la suma és múltiple del divisor corresponent. Una suma de 6 és múltiple de 3, però no de 9. Per al 5, comprova si l’última xifra és 0 o 5. <a href="#criteris">Consulta la taula de criteris</a>.</p>
 <div class="example"><span class="example-label">CONCLUSIÓ I JUSTIFICACIÓ</span>
 <p>«234 no és divisible per 3 perquè acaba en 4.» La justificació és incorrecta perquè cal sumar les xifres. La suma és 2 + 3 + 4 = 9 i 9 és múltiple de 3. Per tant, 234 és divisible per 3 i la conclusió de l’alumne és falsa.</p>
 <p>«232 no és divisible per 3 perquè acaba en 2.» La suma és 2 + 3 + 2 = 7, que no és múltiple de 3. La conclusió és certa, però mirar l’última xifra continua sent un criteri inadequat.</p>
 </div>
-</section>
-<section class="card" id="prova-contraexemple">
-<h2>Justificar o refutar una afirmació general</h2>
+</details>
+
+<details class="procedure-item" id="prova-contraexemple">
+<summary>Justificar o refutar una afirmació general</summary>
 <p>Quan diem <strong>tots</strong>, afirmem que la regla es compleix en cada cas. Un exemple que la compleix només comprova aquell cas. Per justificar una regla general, cal explicar per què funciona per a qualsevol cas. Per refutar-la, n’hi ha prou amb un <strong>contraexemple</strong>, un cas que compleix la primera condició però falla la segona.</p>
 <div class="example"><span class="example-label">UNA REGLA CERTA I UNA DE FALSA</span>
 <p>«Tots els múltiples de 6 són parells.» Qualsevol múltiple de 6 es forma multiplicant 6 per un enter. Com que cada 6 conté tres grups de 2, el resultat sempre es pot agrupar de dos en dos. Això explica per què tots són parells.</p>
 <p>«Tots els múltiples de 3 són múltiples de 12.» El 12 és múltiple de tots dos, però això només comprova un cas. El 3 és múltiple de 3 i no de 12. Aquest contraexemple demostra que l’afirmació és falsa.</p>
 </div>
-</section>
+</details>
+</div>
+</details>
+
 <section class="card mistakes" id="errors-frequents"><h2>⚠️ Errors freqüents</h2><ul><li>Confondre múltiple amb divisor.</li><li>Aplicar un criteri de divisibilitat incorrecte.</li><li>Considerar l’1 com a nombre primer.</li><li>Aturar una factorització abans d’arribar a factors primers.</li></ul>
 </section>
 <section class="card check"><h2>✅ Comprova si ho has entès</h2><details><summary>És 1 un nombre primer?</summary><div class="answer">No. Un primer té exactament dos divisors positius: 1 i ell mateix.</div></details><details><summary>Quan un nombre és divisible per 3?</summary><div class="answer">Quan la suma de les seves xifres és múltiple de 3.</div></details></section><section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Múltiples, divisors i divisibilitat</li><li>Criteris de divisibilitat</li><li>Nombres primers i compostos</li><li>Factorització en nombres primers</li></ul></section><section class="final-cta">
@@ -466,4 +499,27 @@ a{color:inherit}
 })();
 </script>
 
+<script id="mi-theory-contextual-support">
+(function(){
+  var panel=document.getElementById('ajuda-exercicis');
+  if(!panel)return;
+  function obreAjudaEnllacada(){
+    var id;
+    try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}
+    if(!id)return;
+    var item=document.getElementById(id);
+    if(item && panel.contains(item)){
+      panel.open=true;
+      if(item.tagName==='DETAILS')item.open=true;
+      requestAnimationFrame(function(){item.scrollIntoView({block:'start'});});
+    }
+  }
+  window.addEventListener('hashchange',obreAjudaEnllacada);
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',obreAjudaEnllacada,{once:true});
+  }else{
+    obreAjudaEnllacada();
+  }
+})();
+</script>
 </body></html>
