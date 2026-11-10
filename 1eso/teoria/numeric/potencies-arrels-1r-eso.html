@@ -97,6 +97,52 @@ a{color:inherit}
 @media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
 </style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
+<style id="mi-practica-teoria-support">
+/* Els procediments són ajuda opcional, no la teoria principal. */
+.procedure-support{border:1px solid var(--border);border-radius:16px;background:var(--card);box-shadow:var(--sh);margin:18px 0;padding:0;scroll-margin-top:76px}
+.procedure-support>summary{cursor:pointer;list-style:none;padding:19px 22px;display:flex;flex-direction:column;gap:3px;position:relative;padding-right:50px}
+.procedure-support>summary::-webkit-details-marker,.procedure-item>summary::-webkit-details-marker{display:none}
+.procedure-support>summary:after{content:"＋";position:absolute;right:21px;top:19px;font-size:1.35rem;color:var(--primary)}
+.procedure-support[open]>summary:after{content:"−"}
+.support-heading{font-size:1.1rem;font-weight:800;color:var(--primary)}
+.support-caption,.support-intro{font-size:.87rem;color:var(--muted)}
+.support-intro{margin:0 22px 12px;line-height:1.6}
+.procedure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 20px 20px;align-items:start}
+.procedure-item{border:1px solid var(--border);border-radius:11px;background:#fbfcfe;scroll-margin-top:90px;min-width:0}
+.procedure-item>summary{cursor:pointer;padding:12px 33px 12px 13px;font-weight:700;font-size:.86rem;position:relative;line-height:1.35}
+.procedure-item>summary:after{content:"＋";position:absolute;right:11px;top:10px;color:var(--primary)}
+.procedure-item[open]>summary:after{content:"−"}
+.procedure-item[open]{grid-column:1/-1;background:#fff;border-color:var(--primary)}
+.procedure-item[open]>summary{color:var(--primary);border-bottom:1px solid var(--border)}
+.procedure-item>p,.procedure-item>.example{margin:12px 15px}
+.procedure-item>p.tip{margin:12px 15px 15px}
+.optional-challenge-heading{grid-column:1/-1;border-top:1px solid var(--border);padding:14px 2px 2px;margin-top:7px;display:flex;flex-direction:column;gap:3px}
+.optional-challenge-heading strong{color:#8a5d00;font-size:.95rem}
+.optional-challenge-heading span{color:var(--muted);font-size:.83rem}
+.optional-challenge{border-color:#efd48b;background:#fffdf7}
+.procedure-item:target{outline:2px solid var(--primary);outline-offset:2px}
+.procedure-item>summary:focus-visible,.procedure-support>summary:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+@media(max-width:650px){.procedure-grid{grid-template-columns:1fr;padding:0 12px 14px}.procedure-support>summary{padding:16px 45px 16px 15px}.support-intro{margin:0 15px 12px}}
+</style>
+<script id="mi-theory-contextual-support">
+(function(){
+  var panel=document.getElementById('ajuda-exercicis');
+  if(!panel)return;
+  function obreAjudaEnllacada(){
+    var id;
+    try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}
+    if(!id)return;
+    var item=document.getElementById(id);
+    if(item && panel.contains(item)){
+      panel.open=true;
+      if(item.tagName==='DETAILS')item.open=true;
+      requestAnimationFrame(function(){item.scrollIntoView({block:'start'});});
+    }
+  }
+  window.addEventListener('hashchange',obreAjudaEnllacada);
+  obreAjudaEnllacada();
+})();
+</script>
 </head>
 <body>
 <nav aria-label="Navegació principal" class="top-nav">
@@ -124,10 +170,7 @@ a{color:inherit}
 <a href="#arrels">5. Arrels</a>
 <a href="#inverses">6. Inverses</a>
 <a href="#base-deu">7. Base 10</a>
-<a href="#exponent-desconegut">8. Trobar l’exponent</a>
-<a href="#acotar-arrels">9. Acotar arrels</a>
-<a href="#recompte-multiplicatiu">10. Recompte multiplicatiu</a>
-<a href="#quadrats-en-context">11. Quadrats en context</a>
+<a href="#ajuda-exercicis">🧩 Ajuda per exercici</a>
 <a href="#errors-tipics">Errors típics</a>
 </nav>
 <section class="card major" id="potencia">
@@ -227,27 +270,33 @@ a{color:inherit}
 <div class="callout"><div class="math">10⁵ = 100.000</div></div>
 <p>A l’inrevés, si una potència de base 10 val 100.000, comptem cinc zeros i trobem l’exponent 5.</p>
 </section>
-<section class="card" id="exponent-desconegut">
-<h2>8. Trobar l’exponent</h2>
+<details class="procedure-support" id="ajuda-exercicis">
+<summary><span class="support-heading">🧩 Ajuda per a exercicis concrets</span><span class="support-caption">4 procediments amb exemples · Obre només el que necessitis</span></summary>
+<p class="support-intro">Primer repassa els conceptes de potències i arrels. Si t'encalles en un exercici, obre només l'ajuda que necessites. Els enllaços directes dels exercicis també obren el procediment corresponent.</p>
+<div id="procediments-detall" class="procedure-grid">
+<details class="procedure-item" id="exponent-desconegut">
+<summary>8. Trobar l’exponent</summary>
 <p>Quin exponent fa que una potència de base 3 valgui 81? Comencem amb 3 i anem multiplicant per 3.</p>
 <div class="callout"><div class="math">3 × 3 = 9 · 9 × 3 = 27 · 27 × 3 = 81</div></div>
 <p>Hem multiplicat quatre factors iguals a 3, de manera que 3⁴ = 81. Com que la base és més gran que 1, cada potència supera l’anterior. L’exponent és únic.</p>
-</section>
-<section class="card" id="acotar-arrels">
-<h2>9. Acotar una arrel quadrada</h2>
+</details>
+<details class="procedure-item" id="acotar-arrels">
+<summary>9. Acotar una arrel quadrada</summary>
 <p>Per acotar √50, busca els dos quadrats perfectes consecutius que envolten 50. Com que 7² = 49 i 8² = 64, tenim:</p>
 <div class="callout"><div class="math">49 &lt; 50 &lt; 64, per tant 7 &lt; √50 &lt; 8</div></div>
 <p>Els enters consecutius que es demanen són 7 i 8.</p>
-</section>
-<section class="card" id="recompte-multiplicatiu">
-<h2>10. Recompte i creixement multiplicatiu</h2>
+</details>
+<details class="procedure-item" id="recompte-multiplicatiu">
+<summary>10. Recompte i creixement multiplicatiu</summary>
 <p>En un codi de quatre posicions, si cada posició admet tres lletres, amb repetició i tries independents, hi ha 3 × 3 × 3 × 3 = 3⁴ = 81 codis.</p>
 <p>També obtenim 3⁴ = 81 brots si comencem amb un brot i, durant quatre rondes, cada brot actiu es reemplaça per tres brots nous. Cada ronda multiplica per tres el total anterior.</p>
-</section>
-<section class="card" id="quadrats-en-context">
-<h2>11. Quadrats en context</h2>
+</details>
+<details class="procedure-item" id="quadrats-en-context">
+<summary>11. Quadrats en context</summary>
 <p>Dos mosaics quadrats sumen 100 rajoles i el costat del gran té dues rajoles més. Prova parelles de costats que es diferenciïn en 2. La parella 6 i 8 funciona perquè 6² + 8² = 36 + 64 = 100. Les sumes creixen quan augmenten els dos costats, així que el mosaic gran té 64 rajoles.</p>
-</section>
+</details>
+</div>
+</details>
 <section class="card mistakes" id="errors-tipics">
 <h2>⚠️ Errors típics</h2>
 <ul>
