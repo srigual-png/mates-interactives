@@ -95,6 +95,33 @@ a{color:inherit}
 @media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
 </style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
+<style id="mi-practica-teoria-support">
+/* Els procediments són ajuda opcional, no la teoria principal. */
+.procedure-support{border:1px solid var(--border);border-radius:16px;background:var(--card);box-shadow:var(--sh);margin:18px 0;padding:0;scroll-margin-top:76px}
+.procedure-support>summary{cursor:pointer;list-style:none;padding:19px 22px;display:flex;flex-direction:column;gap:3px;position:relative;padding-right:50px}
+.procedure-support>summary::-webkit-details-marker,.procedure-item>summary::-webkit-details-marker{display:none}
+.procedure-support>summary:after{content:"＋";position:absolute;right:21px;top:19px;font-size:1.35rem;color:var(--primary)}
+.procedure-support[open]>summary:after{content:"−"}
+.support-heading{font-size:1.1rem;font-weight:800;color:var(--primary)}
+.support-caption,.support-intro{font-size:.87rem;color:var(--muted)}
+.support-intro{margin:0 22px 12px;line-height:1.6}
+.procedure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 20px 20px;align-items:start}
+.procedure-item{border:1px solid var(--border);border-radius:11px;background:#fbfcfe;scroll-margin-top:90px;min-width:0}
+.procedure-item>summary{cursor:pointer;padding:12px 33px 12px 13px;font-weight:700;font-size:.86rem;position:relative;line-height:1.35}
+.procedure-item>summary:after{content:"＋";position:absolute;right:11px;top:10px;color:var(--primary)}
+.procedure-item[open]>summary:after{content:"−"}
+.procedure-item[open]{grid-column:1/-1;background:#fff;border-color:var(--primary)}
+.procedure-item[open]>summary{color:var(--primary);border-bottom:1px solid var(--border)}
+.procedure-item>p,.procedure-item>.example{margin:12px 15px}
+.procedure-item>p.tip{margin:12px 15px 15px}
+.optional-challenge-heading{grid-column:1/-1;border-top:1px solid var(--border);padding:14px 2px 2px;margin-top:7px;display:flex;flex-direction:column;gap:3px}
+.optional-challenge-heading strong{color:#8a5d00;font-size:.95rem}
+.optional-challenge-heading span{color:var(--muted);font-size:.83rem}
+.optional-challenge{border-color:#efd48b;background:#fffdf7}
+.procedure-item:target{outline:2px solid var(--primary);outline-offset:2px}
+.procedure-item>summary:focus-visible,.procedure-support>summary:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+@media(max-width:650px){.procedure-grid{grid-template-columns:1fr;padding:0 12px 14px}.procedure-support>summary{padding:16px 45px 16px 15px}.support-intro{margin:0 15px 12px}}
+</style>
 </head>
 <body>
 <nav aria-label="Navegació principal" class="top-nav">
@@ -119,55 +146,73 @@ a{color:inherit}
 <a href="#calcular-pct">Tres càlculs bàsics</a>
 <a href="#augments">Augments i descomptes</a>
 <a href="#variacio-i-complement">Variació i complement</a>
+<a href="#ajuda-exercicis">🧩 Ajuda per exercici</a>
 </nav>
-<nav aria-label="Procediments de les 13 famílies" class="quick-nav">
-<a href="#calcular-part">Calcular una part</a>
-<a href="#percentatge-part">Trobar el percentatge d’una part</a>
-<a href="#reconstruir-total">Recuperar el total o el preu inicial</a>
-<a href="#augments">Calcular el preu final</a>
-<a href="#conversions">Convertir entre fracció, decimal i percentatge</a>
-<a href="#taxa-variacio">Calcular la variació percentual</a>
-<a href="#percentatges-successius">Aplicar percentatges successius</a>
-<a href="#complement-percentual">Calcular el complement fins al 100%</a>
-<a href="#llindar-ofertes">Trobar el llindar de dues ofertes</a>
-<a href="#representacio-percentual">Llegir una representació percentual</a>
-<a href="#comparar-ofertes">Comparar ofertes amb preu conegut</a>
-<a href="#error-base">Detectar un error de base percentual</a>
-<a href="#punts-percentuals">Calcular punts percentuals</a>
-</nav>
+
 <section class="card" id="percentatges"><h2>Què és un percentatge?</h2><p>Un percentatge expressa una part per cada 100. La <strong>base</strong> és la quantitat completa, que representa el 100%. Cal identificar-la abans de calcular.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>25% = 25/100 = 0,25 = 1/4. Si el grup és de 80 persones, el 25% són 80 ÷ 4 = 20 persones.</p></div><p class="tip">10% és una desena part; 25%, una quarta part; 50%, la meitat; 75%, tres quartes parts. Un 25% no vol dir sempre 25 persones: depèn de la base.</p></section>
+
 <section class="card" id="calcular-pct"><h2>Tres càlculs bàsics de percentatges</h2>
 <p>Segons la dada que et falti, consulta com <a href="#calcular-part">calcular una part</a>, <a href="#percentatge-part">trobar-ne el percentatge</a> o <a href="#reconstruir-total">recuperar el total</a>.</p>
 </section>
-<section class="card" id="calcular-part">
-<h2>Calcular una part</h2>
-<p>La base és el total conegut. Divideix el percentatge per 100 i multiplica pel total.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><div class="steps"><div class="step">5% de 400: el 100% és 400.</div><div class="step">5% = 0,05.</div><div class="step">400 × 0,05 = 20.</div></div></div><p>Per calcular mentalment el 75% de 400: 400 ÷ 4 × 3 = 300.</p></section>
-<section class="card" id="percentatge-part">
-<h2>Calcular el percentatge d’una part</h2>
-<p>Divideix la part pel total i multiplica per 100. El denominador és el total del grup.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>35 de 140 persones han triat teatre: 35 ÷ 140 = 0,25; 0,25 × 100 = 25%. La part són 35 persones; el percentatge és el 25%.</p></div></section>
-<section class="card" id="reconstruir-total">
-<h2>Reconstruir el total</h2>
-<p>La part i el percentatge són coneguts; la base (100%) és desconeguda. Divideix la part pel percentatge expressat com a decimal.</p><div class="steps"><div class="step">40 és el 20% d'una quantitat. 20% = 0,20.</div><div class="step">Total = 40 ÷ 0,20 = 200.</div><div class="step">Comprovació: 200 × 0,20 = 40.</div></div><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Variant amb l'1%: el 20% són 320 persones. L'1% són 320 ÷ 20 = 16 persones. El 100% són 16 × 100 = 1.600 persones. Comprovació: 1.600 × 0,20 = 320.</p></div><p class="tip">Error habitual: intercanviar part i total, o multiplicar la part per 0,20 quan volem recuperar la base. El total ha de ser més gran que la part si el percentatge és inferior al 100%.</p>
-<p>Si coneixes l’import després d’un augment o un descompte, consulta com <a href="#preu-inicial">recuperar el preu inicial</a>.</p>
-</section>
+
 <section class="card" id="augments"><h2>Preu final amb augment o descompte</h2><p>La base és el preu <strong>inicial</strong>. Calcula el canvi i suma'l en un augment o resta'l en un descompte. També pots multiplicar pel factor (100 ± percentatge)/100.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Un article costa 440 € i té un descompte del 30%.</p><div class="steps"><div class="step">30% = 0,30. Descompte: 440 × 0,30 = 132 €.</div><div class="step">Preu final: 440 − 132 = 308 €.</div><div class="step">Factor alternatiu: queda el 70%; 440 × 0,70 = 308 €.</div></div></div><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Augment: 80 € amb un 10% més. Augment = 80 × 0,10 = 8 €; preu final = 80 + 8 = 88 €. Factor: 80 × 1,10 = 88 €.</p></div><p class="tip">El descompte de 132 € no és el preu final. Tampoc no podem restar 30 € quan l'enunciat diu 30%.</p></section>
-<section class="card" id="conversions"><h2>Fracció, decimal i percentatge</h2><p>Totes tres formes descriuen la mateixa part de la unitat. El percentatge sempre pren 100 com a referència.</p><ul><li>Fracció → decimal: divideix el numerador pel denominador.</li><li>Decimal → percentatge: multiplica per 100 i escriu %.</li><li>Percentatge → decimal: divideix per 100.</li><li>Percentatge → fracció: escriu el nombre sobre 100, elimina els decimals si cal i simplifica dividint numerador i denominador pel mateix divisor.</li></ul><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>3/8 → 3 ÷ 8 = 0,375 → 0,375 × 100 = 37,5%.</p><p>En sentit invers: 37,5% → 37,5 ÷ 100 = 0,375.</p><p>40% = 40/100 = (40 ÷ 20)/(100 ÷ 20) = 2/5.</p><p>37,5% = 37,5/100 = 375/1000 = 3/8.</p></div><p class="tip">0,2 és el 20%, no el 2%. Si es demana una fracció irreductible, 40/100 encara s'ha de simplificar. A la resposta decimal fem servir coma.</p></section>
-<section class="card" id="preu-inicial"><h2>Recuperar el preu inicial</h2><p>La base desconeguda és el preu abans del canvi. El preu final representa el (100 − descompte)% o el (100 + augment)% del preu inicial. <strong>Divideix el preu final pel factor.</strong></p><div class="steps"><div class="step">Un article costa 72 € després d'un descompte del 20%. Queda el 80% del preu inicial: factor 0,80.</div><div class="step">Preu inicial = 72 ÷ 0,80 = 90 €.</div><div class="step">Comprovació: 90 × 0,80 = 72 €.</div></div><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Després d'un increment del 20%, un preu és 108 €. El factor és 1,20. Inicial = 108 ÷ 1,20 = 90 €. Comprovació: 90 × 1,20 = 108 €.</p></div><p class="tip">Sumar el 20% del preu rebaixat no desfà un descompte del 20%: canviaria la base. </p></section>
+
 <section class="card" id="variacio-i-complement"><h2>Variació percentual i percentatge complementari</h2>
 <p>Per comparar un valor inicial i un de final, calcula la <a href="#taxa-variacio">taxa de variació</a>. Per trobar què falta fins a completar el grup, calcula el <a href="#complement-percentual">complement fins al 100%</a>.</p>
 </section>
-<section class="card" id="taxa-variacio">
-<h2>Calcular la taxa de variació</h2>
-<p>Calcula primer la diferència. Per expressar-la en percentatge, divideix pel valor <strong>inicial</strong> i multiplica per 100. Indica si és augment o reducció.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>De 500 a 625 socis: augment = 625 − 500 = 125. Taxa = 125 ÷ 500 × 100 = 25% d'augment.</p><p>De 500 a 400 socis: reducció = 500 − 400 = 100; 100 ÷ 500 × 100 = 20% de reducció.</p><p>Comprovació d'un augment: 120 socis amb un 10% més → 120 × 0,10 = 12; 120 + 12 = 132 socis.</p></div><p class="tip">No divideixis pel valor final. En contextos de persones les dades han de produir nombres enters; no arrodonim mitja persona.</p></section>
-<section class="card" id="complement-percentual">
-<h2>Calcular el complement fins al 100%</h2>
-<p>Només podem restar percentatges quan les categories són excloents (cada persona pertany a una sola categoria) i exhaustives (cobreixen tot el grup).</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><div class="steps"><div class="step">800 persones trien exactament una opció: A (20%), B (30%) o C (la resta).</div><div class="step">C: 100 − 20 − 30 = 50%.</div><div class="step">La base és tot el grup: 800 × 0,50 = 400 persones.</div></div></div><p class="tip">Si es pot triar A i B alhora, aquesta resta no permet calcular directament la resta del grup.</p></section>
-<section class="card" id="percentatges-successius"><h2>Percentatges successius</h2><p>Aplica cada canvi al preu obtingut en el pas anterior. El segon percentatge té una <strong>nova base</strong>.</p><div class="steps"><div class="step">500 € augmenten un 20%: 500 × 1,20 = 600 €.</div><div class="step">Després baixen un 10%: 600 × 0,90 = 540 €.</div><div class="step">Factor conjunt: 1,20 × 0,90 = 1,08; el canvi global és un augment del 8%.</div></div><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Dos descomptes: 200 € amb −20% i després −10%. Primer: 200 × 0,80 = 160 €. Després: 160 × 0,90 = 144 €. El descompte global és (200 − 144) ÷ 200 × 100 = 28%.</p></div><p class="tip">No sumis els percentatges: −20% i −10% successius no equivalen a −30%. No arrodoneixis imports intermedis si no s'ha indicat.</p></section>
-<section class="card" id="llindar-ofertes"><h2>Trobar el llindar de dues ofertes</h2><p>El preu inicial és desconegut i és la mateixa base a les dues botigues. A descompta el 25%; B, el 10% i un val de 3 €. Busquem el menor preu enter perquè A sigui <strong>estrictament</strong> més barata.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><div class="steps"><div class="step">A: 0,75 × preu. B: 0,90 × preu − 3.</div><div class="step">A guanya si el 15% del preu supera 3 €: 0,15 × preu &gt; 3.</div><div class="step">Igualtat: 3 ÷ 0,15 = 20 €. Necessitem un enter &gt; 20: el mínim és 21 €.</div><div class="step">Amb 21 €: A = 15,75 € i B = 15,90 €; A és més barata.</div><div class="step">Amb 20 €: A = 15 € i B = 15 €; hi ha empat i no compleix la condició estricta.</div></div></div><p class="tip">&gt; exclou la igualtat; ≥ la inclou. No n'hi ha prou amb arrodonir el llindar: cal prendre el menor enter estrictament superior i comprovar també l'enter anterior. No arrodonim els preus intermedis.</p></section>
-<section class="card" id="representacio-percentual"><h2>Llegir una representació percentual</h2><p>Identifica primer la unitat sencera i comprova que totes les parts tenen la mateixa mida. Divideix les parts pintades pel total de parts i multiplica per 100.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><svg role="img" aria-label="Una unitat dividida en quatre quadrats iguals, un de pintat: 25%" viewBox="0 0 200 50" style="width:100%;max-width:300px;height:auto"><rect width="50" height="50" fill="#275db3"/><path d="M0 0H200V50H0ZM50 0V50M100 0V50M150 0V50" stroke="#60718b" fill="none"/></svg><p>Un quadrat de quatre iguals està pintat: 1 ÷ 4 × 100 = 25% de la unitat.</p><p>En una graella de 100 cel·les iguals amb 25 pintades: 25 ÷ 100 × 100 = 25%. Cada cel·la és l'1% de la graella sencera.</p></div><p class="tip">No comptis la part blanca quan es pregunta la pintada. Comptar parts de mides diferents no permet calcular així el percentatge.</p></section>
-<section class="card" id="comparar-ofertes"><h2>Comparar ofertes amb preu conegut</h2><p>El preu inicial conegut és la base comuna. Calcula el preu final de cada oferta, respectant l'ordre del descompte i el val, i compara els imports.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><div class="steps"><div class="step">Preu inicial: 80 €. A descompta el 25%; B descompta el 10% i després resta un val de 10 €.</div><div class="step">A: 80 × 0,75 = 60 €.</div><div class="step">B: 80 × 0,90 − 10 = 72 − 10 = 62 €.</div><div class="step">A és 62 − 60 = 2 € més barata.</div></div></div><p>Si els imports finals coincideixen, la resposta és «Empat». Aquí comparem un preu conegut; en el <a href="#llindar-ofertes">problema del llindar</a> busquem un preu desconegut.</p><p class="tip">Un val no garanteix la millor oferta. No comparis només el percentatge ni apliquis el percentatge després del val si l'ordre indicat és l'invers.</p></section>
-<section class="card" id="error-base"><h2>Detectar un error de base percentual</h2><p>Augmentar i disminuir el mateix percentatge fa servir bases diferents. Cal identificar sobre quin import s'aplica cada operació.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><div class="steps"><div class="step">Preu inicial: 100 €. Augment del 20%: 100 × 0,20 = 20 €.</div><div class="step">Preu intermedi: 100 + 20 = 120 €.</div><div class="step">Descompte del 20% sobre la nova base: 120 × 0,20 = 24 €.</div><div class="step">Preu final: 120 − 24 = 96 €.</div></div></div><p>L'error de dir que torna a 100 € és aplicar mentalment el descompte sobre 100 € en lloc de 120 €. Els factors confirmen el resultat: 1,20 × 0,80 = 0,96.</p><p class="tip">Només un canvi del 0% deixa exactament igual el preu després d'augmentar i disminuir el mateix percentatge. Per a un percentatge positiu, el descompte recau sobre una base més gran.</p></section>
-<section class="card" id="punts-percentuals"><h2>Percentatges i punts percentuals</h2><p>Quan comparem dues taxes ja expressades en %, la seva diferència es mesura en <strong>punts percentuals</strong>. És una resta de taxes; no s'ha de confondre amb el canvi relatiu respecte de la taxa inicial.</p><div class="steps"><div class="step">Una taxa passa del 20% al 25%.</div><div class="step">Diferència entre taxes: 25 − 20 = 5 punts percentuals.</div><div class="step">Augment relatiu: la base ara és la taxa inicial, 20. Per tant, 5 ÷ 20 × 100 = 25%.</div></div><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>De 25% a 20%: disminució de 5 punts percentuals. Reducció relativa: 5 ÷ 25 × 100 = 20%.</p></div><p class="tip">5 punts percentuals i un augment relatiu del 5% són respostes diferents. Si es demanen punts percentuals, resta les taxes i escriu aquesta unitat.</p></section>
+
+<details class="procedure-support" id="ajuda-exercicis">
+<summary><span class="support-heading">🧩 Ajuda per a exercicis concrets</span><span class="support-caption">13 procediments amb exemples resolts · Obre només el que necessitis</span></summary>
+<p class="support-intro">Repassa primer el significat dels percentatges, els càlculs bàsics i els augments o descomptes. Si et costa un exercici, obre el procediment corresponent; els enllaços de la teoria i de la pràctica també t'hi porten directament.</p>
+<div id="procediments-detall" class="procedure-grid">
+<details class="procedure-item" id="calcular-part">
+<summary>Calcular una part</summary>
+<p>La base és el total conegut. Divideix el percentatge per 100 i multiplica pel total.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><div class="steps"><div class="step">5% de 400: el 100% és 400.</div><div class="step">5% = 0,05.</div><div class="step">400 × 0,05 = 20.</div></div></div><p>Per calcular mentalment el 75% de 400: 400 ÷ 4 × 3 = 300.</p></details>
+
+<details class="procedure-item" id="percentatge-part">
+<summary>Calcular el percentatge d’una part</summary>
+<p>Divideix la part pel total i multiplica per 100. El denominador és el total del grup.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>35 de 140 persones han triat teatre: 35 ÷ 140 = 0,25; 0,25 × 100 = 25%. La part són 35 persones; el percentatge és el 25%.</p></div></details>
+
+<details class="procedure-item" id="reconstruir-total">
+<summary>Reconstruir el total</summary>
+<p>La part i el percentatge són coneguts; la base (100%) és desconeguda. Divideix la part pel percentatge expressat com a decimal.</p><div class="steps"><div class="step">40 és el 20% d'una quantitat. 20% = 0,20.</div><div class="step">Total = 40 ÷ 0,20 = 200.</div><div class="step">Comprovació: 200 × 0,20 = 40.</div></div><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Variant amb l'1%: el 20% són 320 persones. L'1% són 320 ÷ 20 = 16 persones. El 100% són 16 × 100 = 1.600 persones. Comprovació: 1.600 × 0,20 = 320.</p></div><p class="tip">Error habitual: intercanviar part i total, o multiplicar la part per 0,20 quan volem recuperar la base. El total ha de ser més gran que la part si el percentatge és inferior al 100%.</p>
+<p>Si coneixes l’import després d’un augment o un descompte, consulta com <a href="#preu-inicial">recuperar el preu inicial</a>.</p>
+</details>
+
+<details class="procedure-item" id="conversions">
+<summary>Fracció, decimal i percentatge</summary><p>Totes tres formes descriuen la mateixa part de la unitat. El percentatge sempre pren 100 com a referència.</p><ul><li>Fracció → decimal: divideix el numerador pel denominador.</li><li>Decimal → percentatge: multiplica per 100 i escriu %.</li><li>Percentatge → decimal: divideix per 100.</li><li>Percentatge → fracció: escriu el nombre sobre 100, elimina els decimals si cal i simplifica dividint numerador i denominador pel mateix divisor.</li></ul><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>3/8 → 3 ÷ 8 = 0,375 → 0,375 × 100 = 37,5%.</p><p>En sentit invers: 37,5% → 37,5 ÷ 100 = 0,375.</p><p>40% = 40/100 = (40 ÷ 20)/(100 ÷ 20) = 2/5.</p><p>37,5% = 37,5/100 = 375/1000 = 3/8.</p></div><p class="tip">0,2 és el 20%, no el 2%. Si es demana una fracció irreductible, 40/100 encara s'ha de simplificar. A la resposta decimal fem servir coma.</p></details>
+
+<details class="procedure-item" id="preu-inicial">
+<summary>Recuperar el preu inicial</summary><p>La base desconeguda és el preu abans del canvi. El preu final representa el (100 − descompte)% o el (100 + augment)% del preu inicial. <strong>Divideix el preu final pel factor.</strong></p><div class="steps"><div class="step">Un article costa 72 € després d'un descompte del 20%. Queda el 80% del preu inicial: factor 0,80.</div><div class="step">Preu inicial = 72 ÷ 0,80 = 90 €.</div><div class="step">Comprovació: 90 × 0,80 = 72 €.</div></div><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Després d'un increment del 20%, un preu és 108 €. El factor és 1,20. Inicial = 108 ÷ 1,20 = 90 €. Comprovació: 90 × 1,20 = 108 €.</p></div><p class="tip">Sumar el 20% del preu rebaixat no desfà un descompte del 20%: canviaria la base. </p></details>
+
+<details class="procedure-item" id="taxa-variacio">
+<summary>Calcular la taxa de variació</summary>
+<p>Calcula primer la diferència. Per expressar-la en percentatge, divideix pel valor <strong>inicial</strong> i multiplica per 100. Indica si és augment o reducció.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>De 500 a 625 socis: augment = 625 − 500 = 125. Taxa = 125 ÷ 500 × 100 = 25% d'augment.</p><p>De 500 a 400 socis: reducció = 500 − 400 = 100; 100 ÷ 500 × 100 = 20% de reducció.</p><p>Comprovació d'un augment: 120 socis amb un 10% més → 120 × 0,10 = 12; 120 + 12 = 132 socis.</p></div><p class="tip">No divideixis pel valor final. En contextos de persones les dades han de produir nombres enters; no arrodonim mitja persona.</p></details>
+
+<details class="procedure-item" id="complement-percentual">
+<summary>Calcular el complement fins al 100%</summary>
+<p>Només podem restar percentatges quan les categories són excloents (cada persona pertany a una sola categoria) i exhaustives (cobreixen tot el grup).</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><div class="steps"><div class="step">800 persones trien exactament una opció: A (20%), B (30%) o C (la resta).</div><div class="step">C: 100 − 20 − 30 = 50%.</div><div class="step">La base és tot el grup: 800 × 0,50 = 400 persones.</div></div></div><p class="tip">Si es pot triar A i B alhora, aquesta resta no permet calcular directament la resta del grup.</p></details>
+
+<details class="procedure-item" id="percentatges-successius">
+<summary>Percentatges successius</summary><p>Aplica cada canvi al preu obtingut en el pas anterior. El segon percentatge té una <strong>nova base</strong>.</p><div class="steps"><div class="step">500 € augmenten un 20%: 500 × 1,20 = 600 €.</div><div class="step">Després baixen un 10%: 600 × 0,90 = 540 €.</div><div class="step">Factor conjunt: 1,20 × 0,90 = 1,08; el canvi global és un augment del 8%.</div></div><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>Dos descomptes: 200 € amb −20% i després −10%. Primer: 200 × 0,80 = 160 €. Després: 160 × 0,90 = 144 €. El descompte global és (200 − 144) ÷ 200 × 100 = 28%.</p></div><p class="tip">No sumis els percentatges: −20% i −10% successius no equivalen a −30%. No arrodoneixis imports intermedis si no s'ha indicat.</p></details>
+
+<details class="procedure-item" id="llindar-ofertes">
+<summary>Trobar el llindar de dues ofertes</summary><p>El preu inicial és desconegut i és la mateixa base a les dues botigues. A descompta el 25%; B, el 10% i un val de 3 €. Busquem el menor preu enter perquè A sigui <strong>estrictament</strong> més barata.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><div class="steps"><div class="step">A: 0,75 × preu. B: 0,90 × preu − 3.</div><div class="step">A guanya si el 15% del preu supera 3 €: 0,15 × preu &gt; 3.</div><div class="step">Igualtat: 3 ÷ 0,15 = 20 €. Necessitem un enter &gt; 20: el mínim és 21 €.</div><div class="step">Amb 21 €: A = 15,75 € i B = 15,90 €; A és més barata.</div><div class="step">Amb 20 €: A = 15 € i B = 15 €; hi ha empat i no compleix la condició estricta.</div></div></div><p class="tip">&gt; exclou la igualtat; ≥ la inclou. No n'hi ha prou amb arrodonir el llindar: cal prendre el menor enter estrictament superior i comprovar també l'enter anterior. No arrodonim els preus intermedis.</p></details>
+
+<details class="procedure-item" id="representacio-percentual">
+<summary>Llegir una representació percentual</summary><p>Identifica primer la unitat sencera i comprova que totes les parts tenen la mateixa mida. Divideix les parts pintades pel total de parts i multiplica per 100.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><svg role="img" aria-label="Una unitat dividida en quatre quadrats iguals, un de pintat: 25%" viewBox="0 0 200 50" style="width:100%;max-width:300px;height:auto"><rect width="50" height="50" fill="#275db3"/><path d="M0 0H200V50H0ZM50 0V50M100 0V50M150 0V50" stroke="#60718b" fill="none"/></svg><p>Un quadrat de quatre iguals està pintat: 1 ÷ 4 × 100 = 25% de la unitat.</p><p>En una graella de 100 cel·les iguals amb 25 pintades: 25 ÷ 100 × 100 = 25%. Cada cel·la és l'1% de la graella sencera.</p></div><p class="tip">No comptis la part blanca quan es pregunta la pintada. Comptar parts de mides diferents no permet calcular així el percentatge.</p></details>
+
+<details class="procedure-item" id="comparar-ofertes">
+<summary>Comparar ofertes amb preu conegut</summary><p>El preu inicial conegut és la base comuna. Calcula el preu final de cada oferta, respectant l'ordre del descompte i el val, i compara els imports.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><div class="steps"><div class="step">Preu inicial: 80 €. A descompta el 25%; B descompta el 10% i després resta un val de 10 €.</div><div class="step">A: 80 × 0,75 = 60 €.</div><div class="step">B: 80 × 0,90 − 10 = 72 − 10 = 62 €.</div><div class="step">A és 62 − 60 = 2 € més barata.</div></div></div><p>Si els imports finals coincideixen, la resposta és «Empat». Aquí comparem un preu conegut; en el <a href="#llindar-ofertes">problema del llindar</a> busquem un preu desconegut.</p><p class="tip">Un val no garanteix la millor oferta. No comparis només el percentatge ni apliquis el percentatge després del val si l'ordre indicat és l'invers.</p></details>
+
+<details class="procedure-item" id="error-base">
+<summary>Detectar un error de base percentual</summary><p>Augmentar i disminuir el mateix percentatge fa servir bases diferents. Cal identificar sobre quin import s'aplica cada operació.</p><div class="example"><span class="example-label">EXEMPLE RESOLT</span><div class="steps"><div class="step">Preu inicial: 100 €. Augment del 20%: 100 × 0,20 = 20 €.</div><div class="step">Preu intermedi: 100 + 20 = 120 €.</div><div class="step">Descompte del 20% sobre la nova base: 120 × 0,20 = 24 €.</div><div class="step">Preu final: 120 − 24 = 96 €.</div></div></div><p>L'error de dir que torna a 100 € és aplicar mentalment el descompte sobre 100 € en lloc de 120 €. Els factors confirmen el resultat: 1,20 × 0,80 = 0,96.</p><p class="tip">Només un canvi del 0% deixa exactament igual el preu després d'augmentar i disminuir el mateix percentatge. Per a un percentatge positiu, el descompte recau sobre una base més gran.</p></details>
+
+<details class="procedure-item" id="punts-percentuals">
+<summary>Percentatges i punts percentuals</summary><p>Quan comparem dues taxes ja expressades en %, la seva diferència es mesura en <strong>punts percentuals</strong>. És una resta de taxes; no s'ha de confondre amb el canvi relatiu respecte de la taxa inicial.</p><div class="steps"><div class="step">Una taxa passa del 20% al 25%.</div><div class="step">Diferència entre taxes: 25 − 20 = 5 punts percentuals.</div><div class="step">Augment relatiu: la base ara és la taxa inicial, 20. Per tant, 5 ÷ 20 × 100 = 25%.</div></div><div class="example"><span class="example-label">EXEMPLE RESOLT</span><p>De 25% a 20%: disminució de 5 punts percentuals. Reducció relativa: 5 ÷ 25 × 100 = 20%.</p></div><p class="tip">5 punts percentuals i un augment relatiu del 5% són respostes diferents. Si es demanen punts percentuals, resta les taxes i escriu aquesta unitat.</p></details>
+</div>
+</details>
+
 <section class="summary-master" id="resum-master"><h2>Resum essencial</h2><ul><li>Identifica sempre la base que representa el 100%.</li><li>Per trobar una part, multiplica; per recuperar el total, divideix pel factor decimal.</li><li>Els canvis successius poden tenir bases diferents.</li><li>Compara imports finals i distingeix percentatge de punts percentuals.</li></ul></section>
 <section class="final-cta"><h2>Practica percentatges</h2><div class="hero-actions">
 <a class="btn btn-primary" href="../../sentit-numeric.html?tema=percentatges&amp;nivell=1">🟢 Practicar · Guiat</a>
@@ -363,5 +408,28 @@ a{color:inherit}
 })();
 </script>
 
+<script id="mi-theory-contextual-support">
+(function(){
+  var panel=document.getElementById('ajuda-exercicis');
+  if(!panel)return;
+  function obreAjudaEnllacada(){
+    var id;
+    try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}
+    if(!id)return;
+    var item=document.getElementById(id);
+    if(item && panel.contains(item)){
+      panel.open=true;
+      if(item.tagName==='DETAILS')item.open=true;
+      requestAnimationFrame(function(){item.scrollIntoView({block:'start'});});
+    }
+  }
+  window.addEventListener('hashchange',obreAjudaEnllacada);
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',obreAjudaEnllacada,{once:true});
+  }else{
+    obreAjudaEnllacada();
+  }
+})();
+</script>
 </body>
 </html>
