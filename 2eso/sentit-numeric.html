@@ -329,8 +329,8 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div id="tabExample" style="display:none"></div>
   <div id="externalTheoryLink"></div>
   <div id="rationalDifficultyControl" hidden><label for="rationalTaskDifficulty">Dificultat matemàtica (independent de les pistes):</label>
-    <select id="rationalTaskDifficulty"><option value="0">Totes</option><option value="1">Baixa</option><option value="2">Mitjana</option><option value="3">Alta</option></select>
-    <p><small>Alta: una família de problemes inversos de proporcions. Cobertura encara limitada.</small></p>
+    <select id="rationalTaskDifficulty"><option value="0">Progressiva (sense reptes)</option><option value="1">Baixa</option><option value="2">Mitjana</option><option value="3">Alta</option><option value="4">⭐ Reptes opcionals</option></select>
+    <p><small>Els reptes són d’ampliació i només apareixen si tries expressament «Reptes opcionals». La pràctica normal i els exàmens no els inclouen.</small></p>
   </div>
   <div class="level-select" style="margin-top:16px">
     <button class="level-btn active" id="btnLvl1" onclick="selectLevel(1)">🧩 Amb pistes<br><small>Guiat</small></button>
@@ -759,8 +759,10 @@ const TEORIA={
 
 /* ── GENERADOR · BLOC 1: NOMBRES RACIONALS ───────────────── */
 let rationalTypeBag=[];
+const RATIONAL_STANDARD_TYPES=Array.from({length:15},(_,i)=>i+1);
+const RATIONAL_OPTIONAL_CHALLENGES=[16,17,18];
 function nextRationalType(){
-  if(!rationalTypeBag.length)rationalTypeBag=shuffle(Array.from({length:18},(_,i)=>i+1));
+  if(!rationalTypeBag.length)rationalTypeBag=shuffle(RATIONAL_STANDARD_TYPES.slice());
   return rationalTypeBag.pop();
 }
 
@@ -2917,7 +2919,14 @@ function getExerciseForMode(){
   const requiredPoints=state.level===1?[0,3,6]:[0,6,12];
   const difficulty=selectedDifficulty|| (topic.id==='racionals'?(state.rationalDifficultyPoints>=requiredPoints[2]?3:state.rationalDifficultyPoints>=requiredPoints[1]?2:1):0);
   const generate=topic.id==='racionals'&&difficulty
-    ? ()=>{const types=RATIONAL_DIFFICULTY_2ESO[difficulty];return miTaskDifficulty.annotate(topic,genRacionals2ESO(types[rnd(0,types.length-1)]));}
+    ? ()=>{
+        // Els tipus 16-18 són només per a la selecció explícita de reptes.
+        const types=difficulty===4
+          ? RATIONAL_OPTIONAL_CHALLENGES
+          : (RATIONAL_DIFFICULTY_2ESO[difficulty]||[]).filter(type=>RATIONAL_STANDARD_TYPES.includes(type));
+        const pool=types.length?types:RATIONAL_STANDARD_TYPES;
+        return miTaskDifficulty.annotate(topic,genRacionals2ESO(pool[rnd(0,pool.length-1)]));
+      }
     : ()=>topic.gen();
   let ex=generate();
   if(state.mode==='open'){
@@ -3157,7 +3166,7 @@ function applyDeepLink(){
   state.currentTopic=idx;
   if(topicId==='racionals'){
     const difficulty=Number(params.get('difficulty'));
-    document.getElementById('rationalTaskDifficulty').value=[1,2,3].includes(difficulty)?String(difficulty):'0';
+    document.getElementById('rationalTaskDifficulty').value=[1,2,3,4].includes(difficulty)?String(difficulty):'0';
   }
   const level=Number(params.get('level'));
   state.level=level===2?2:1;
