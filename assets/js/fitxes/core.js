@@ -255,13 +255,15 @@
     if(pilot(c,catalog))return generateType(c,catalog,previousKeys);
     const plan=allocate(c,catalog),used=new Set(previousKeys),questions=[];
     for(const {topic,counts:quota} of plan){
+      const familyCounts={};
       for(let l=1;l<=3;l++){
         let obtained=0;
         for(let attempt=0;obtained<quota[l-1]&&attempt<1200;attempt++){
-          const q=await topic.generate(l); if(!q||q.level!==l)continue;
+          const familyId=topic.generateFamily?topic.pickFamily?.(l,familyCounts):null;
+          const q=await (familyId?topic.generateFamily(familyId):topic.generate(l)); if(!q||q.level!==l)continue;
           const key=JSON.stringify([topic.id,q.fingerprint||q.question.replace(/\s+/g,' ').trim(),(q.options||[]).slice().sort()]);
           if(used.has(key))continue;
-          used.add(key);questions.push({...q,key,topicId:topic.id,topicName:topic.name});obtained++;
+          used.add(key);questions.push({...q,key,topicId:topic.id,topicName:topic.name});obtained++;if(q.familyId)familyCounts[q.familyId]=(familyCounts[q.familyId]||0)+1;
         }
         if(obtained!==quota[l-1])throw new Error('No s’han pogut obtenir prou exercicis diferents de «'+topic.name+'» amb dificultat '+['baixa','mitjana','alta'][l-1]+'. Redueix-ne la quantitat o modifica la configuració i torna-ho a provar.');
       }

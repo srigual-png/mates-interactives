@@ -4,7 +4,7 @@
   const levels={
     racionals:[[1,2,3,4,9,11,15],[5,6,7,8,10,12,13,14],[16,17,18]],
     fraccionsSentit:Object.values(MIDifficulty.fractionsMeaningLevels),
-    operacionsRacionals:[[1,2,7,13,17],[3,4,5,6,11,14,16],[8,9,10,12,15,18]],
+    operacionsRacionals:window.MIDifficulty.operationsRationalFamilies.reduce((a,f)=>(a[f.level-1].push(...f.types),a),[[],[],[]]),
     potencies:[[1,2,3,4,5,8],[6,7,11,12,13,14],[9,10,15,16,17,18]],
     aproximacions:[[1,2,3,4,5],[6,7,10,11,12],[8,9,13,14,15]],
     proporcionalitat:[[1,2,3,4,5,6],[7,8,9,13,16,18],[10,11,12,14,15,17]],
@@ -51,10 +51,6 @@
     if(id==='operacionsRacionals'){
       text=text.replace(/−\s*-(\d+(?:\/\d+)?)/g,'− (−$1)');
       if([11,12].includes(q.type))text+=' Escriu el valor que ha de substituir el quadrat □ perquè la igualtat sigui certa.';
-      if(q.type===16){
-        const fractions=[...text.matchAll(/(-?\d+)\/(\d+)/g)];
-        if(fractions.length>=2){const [[,a,b],[,c,d]]=fractions;const wrong=`${+a+(+c)}/${+b+(+d)}`;text=`Un alumne suma directament els numeradors i els denominadors i escriu: ${a}/${b} + ${c}/${d} = ${wrong}. Quin és l’error d’aquest procediment?`;}
-      }
     }
     if(id==='potencies'){
       if(q.type===2)text=text.replace('Quin producte representa','Quina de les opcions escriu com a producte de factors iguals la potència');
@@ -101,7 +97,7 @@
   }
   async function adapt(id,q){
     const el=document.createElement('div');el.innerHTML=q.question;const svg=el.querySelector('svg');
-    const question=paperQuestion(id,q),options=(q.allowOpen===false||(id==='racionals'&&q.type===10))?q.options.map(plain):[];
+    const question=paperQuestion(id,q),options=(q.allowOpen===false||(id==='racionals'&&q.type===10)||(id==='operacionsRacionals'&&[20,21].includes(q.type)))?q.options.map(plain):[];
     let answer=plain(q.correct),steps=q.solution.map(plain);
     if(id==='racionals'&&q.type===11)steps=q.solution.map(plain);
     if(id==='fraccionsSentit'){
@@ -120,9 +116,10 @@
       }
     }
     if(id==='operacionsRacionals'&&q.type===18){if(/°C/.test(question))answer+=' °C';else if(/€/.test(question))answer+=' €';else if(/km/.test(question))answer+=' km';else if(/\bm\b/.test(question))answer+=' m';}
+    if(id==='operacionsRacionals'&&q.type===19)answer+=' L';
     if(id==='operacionsRacionals'&&[3,4,5,16].includes(q.type)){
       const fractions=[...question.matchAll(/(-?\d+)\/(\d+)/g)];
-      if(fractions.length>=2){const [[,aa,bb],[,cc,dd]]=fractions,[a,b,c,d]=[aa,bb,cc,dd].map(Number);
+      if(fractions.length>=2){const [[,aa,bb],[,cc,dd]]=(q.type===16?fractions.slice(-2):fractions),[a,b,c,d]=[aa,bb,cc,dd].map(Number);
         if([3,16].includes(q.type)){const minus=q.type===3&&/−/.test(question),common=b*d/gcd(b,d),n1=a*common/b,n2=c*common/d,result=ratText(rat(minus?n1-n2:n1+n2,common));steps=[`Denominador comú: mcm(${b}, ${d}) = ${common}.`,`${a}/${b} = ${n1}/${common} i ${c}/${d} = ${n2}/${common}.`,`${n1}/${common} ${minus?'−':'+'} ${n2}/${common} = ${result}.`,...(q.type===16?['No es poden sumar directament els denominadors: les parts han de tenir la mateixa mida.']:[])];}
         else if(q.type===4)steps=[`Multipliquem els numeradors: ${a} × ${c} = ${a*c}.`,`Multipliquem els denominadors: ${b} × ${d} = ${b*d}.`,`Simplifiquem ${a*c}/${b*d} i obtenim ${answer}.`];
         else {const rn=d*Math.sign(c),rd=Math.abs(c);steps=[`Dividir per ${c}/${d} equival a multiplicar per ${rn}/${rd}.`,`(${a}/${b}) × (${rn}/${rd}) = ${a*rn}/${b*rd}.`,`Simplifiquem i obtenim ${answer}.`];}
@@ -134,8 +131,13 @@
     if(id==='percentatges'&&q.type===18)answer+=' noies';
     // Una línia final sempre relaciona el procediment amb les dades concretes.
     if(!steps.some(s=>s.includes(answer)))steps.push('Resultat: '+answer);
-    return {type:q.type,level:levels[id].findIndex(types=>types.includes(q.type))+1,question,options,answer,steps,figure:svg?await figure(svg):undefined};
+    const family=id==='operacionsRacionals'?window.MIDifficulty.operationsRationalInfo(q):null;
+    return {type:q.type,level:family?.level||levels[id].findIndex(types=>types.includes(q.type))+1,familyId:family?.id||q.familyId||null,question,options,answer,steps,figure:svg?await figure(svg):undefined};
   }
   window.MIWorksheetConfig={id:'2eso-numeric',homeId:'screenHome',label:'2n d’ESO · Sentit numèric',title:'Fitxa d’exercicis — 2n d’ESO — Sentit numèric',web:'srigual-png.github.io/mates-interactives',paperQuestion,adapt,levels,
-    topics:TOPICS.filter(t=>t.course==='2n'&&t.exam2n).map(t=>({id:t.id,name:t.name,levels:[1,2,3],capacities:t.id==='recomptes'?[38,49,11]:undefined,generate(l){const types=typesForWorksheet(t.id,l),type=types[Math.floor(Math.random()*types.length)];return adapt(t.id,generators[t.id](type));}}))};
+    topics:TOPICS.filter(t=>t.course==='2n'&&t.exam2n).map(t=>({id:t.id,name:t.name,levels:[1,2,3],capacities:t.id==='recomptes'?[38,49,11]:undefined,
+      families:t.id==='operacionsRacionals'?window.MIDifficulty.operationsRationalFamilies.map(f=>({family:f.id,level:f.level,generatorId:f.id,contents:[f.id]})):undefined,
+      pickFamily:t.id==='operacionsRacionals'?function(l,counts){const rows=window.MIDifficulty.operationsRationalFamilies.filter(f=>f.level===l),min=Math.min(...rows.map(f=>counts[f.id]||0));const options=rows.filter(f=>(counts[f.id]||0)===min);return options[Math.floor(Math.random()*options.length)]?.id;}:undefined,
+      generateFamily:t.id==='operacionsRacionals'?function(familyId){const family=window.MIDifficulty.operationsRationalFamilies.find(f=>f.id===familyId),types=family?.types||[],type=types[Math.floor(Math.random()*types.length)],variant=type===18?family.variants[Math.floor(Math.random()*family.variants.length)]:undefined;return adapt(t.id,generators[t.id](type,variant));}:undefined,
+      generate(l){const types=typesForWorksheet(t.id,l),type=types[Math.floor(Math.random()*types.length)];return adapt(t.id,generators[t.id](type));}}))};
 })();

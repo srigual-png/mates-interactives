@@ -138,6 +138,7 @@ h3{line-height:1.3}
       <a href="#exemples">Exemples resolts</a>
       <a href="#errors">Errors habituals</a>
       <a href="#resum">Resum</a>
+      <a href="#ajuda-exercicis">Ajuda per famílies</a>
     </div>
   </nav>
 
@@ -237,30 +238,64 @@ h3{line-height:1.3}
 
 <article class="mistake">
   <div class="mistake__icon">⚠️</div>
-  <div><h3>Sumar numeradors i denominadors</h3><p>2/3 + 1/4 no és 3/7. En una suma cal treballar amb un denominador comú.</p></div>
+  <div><h3>Sumar numeradors i denominadors</h3><p><b>Incorrecte:</b> 2/3 + 1/4 = 3/7. <b>Per què falla:</b> els setens no són la mida de les parts de les fraccions originals. <b>Correcte:</b> 2/3 = 8/12 i 1/4 = 3/12; per tant, 2/3 + 1/4 = 11/12.</p></div>
 </article>
 <article class="mistake">
   <div class="mistake__icon">⚠️</div>
-  <div><h3>Oblidar la jerarquia</h3><p>En 5 − 2 · 3, primer es fa 2 · 3. No s'ha de començar automàticament per 5 − 2.</p></div>
+  <div><h3>Oblidar la jerarquia</h3><p><b>Incorrecte:</b> (5 − 2) · 3 = 9. <b>Per què falla:</b> s'han afegit uns parèntesis que no hi eren. <b>Correcte:</b> primer 2 · 3 = 6 i després 5 − 6 = −1.</p></div>
 </article>
 <article class="mistake">
   <div class="mistake__icon">⚠️</div>
-  <div><h3>Perdre el signe d'un nombre negatiu</h3><p>Els parèntesis ajuden a veure que −3 és un únic nombre quan participa en una operació.</p></div>
+  <div><h3>Perdre el signe d'un nombre negatiu</h3><p><b>Incorrecte:</b> 4 − (−3) = 4 − 3 = 1. <b>Per què falla:</b> s'ha ignorat que restar un nombre negatiu equival a sumar-lo. <b>Correcte:</b> 4 − (−3) = 4 + 3 = 7.</p></div>
 </article>
 <article class="mistake">
   <div class="mistake__icon">⚠️</div>
-  <div><h3>Dividir fraccions com si fossin multiplicacions</h3><p>Per dividir per una fracció, multiplica per la seva inversa.</p></div>
+  <div><h3>Dividir fraccions com si fossin multiplicacions</h3><p><b>Incorrecte:</b> 2/3 ÷ 4/5 = 8/15. <b>Per què falla:</b> això calcula el producte. <b>Correcte:</b> 2/3 ÷ 4/5 = 2/3 · 5/4 = 10/12 = 5/6.</p></div>
 </article>
 <article class="mistake">
   <div class="mistake__icon">⚠️</div>
-  <div><h3>Acceptar un resultat sense comprovar-lo</h3><p>Una estimació ràpida pot detectar errors de signe, de coma decimal o de magnitud.</p></div>
+  <div><h3>Acceptar un resultat sense comprovar-lo</h3><p><b>Incorrecte:</b> afirmar que 19,8 · 5,1 = 1,0098 perquè s'han ajuntat les xifres. <b>Per què falla:</b> el resultat no té l'ordre de magnitud esperat. <b>Correcte:</b> 20 · 5 ≈ 100; el producte exacte és 100,98, proper a 100.</p></div>
 </article>
+<article class="mistake"><div class="mistake__icon">⚠️</div><div><h3>Aplicar malament els signes en un producte</h3><p><b>Incorrecte:</b> (−2) · (−3) = −6. <b>Per què falla:</b> dos factors negatius donen producte positiu. <b>Correcte:</b> (−2) · (−3) = 6.</p></div></article>
+<article class="mistake"><div class="mistake__icon">⚠️</div><div><h3>Simplificar només una part de la fracció</h3><p><b>Incorrecte:</b> 6/8 = 3/8. <b>Per què falla:</b> dividir només el numerador canvia el valor. <b>Correcte:</b> dividim numerador i denominador pel mateix factor: 6/8 = 3/4.</p></div></article>
+<article class="mistake"><div class="mistake__icon">⚠️</div><div><h3>Interpretar malament un canvi negatiu</h3><p><b>Incorrecte:</b> un saldo de −12 € després d'un ingrés de 5 € es converteix en −17 €. <b>Per què falla:</b> l'ingrés és un canvi positiu. <b>Correcte:</b> −12 + 5 = −7 €.</p></div></article>
   </section>
 
   <section class="summary" id="resum">
     <h2>✅ Què hauries de tenir clar</h2>
     <ul><li>Escollir una representació útil quan es barregen enters, decimals i fraccions.</li><li>Controlar els signes en sumes, restes, productes i divisions.</li><li>Operar correctament amb fraccions i simplificar els resultats.</li><li>Respectar la jerarquia d'operacions en expressions combinades.</li><li>Utilitzar operacions inverses per trobar valors desconeguts.</li><li>Estimar i validar resultats abans d'acceptar-los.</li></ul>
   </section>
+
+  <details class="theory-card" id="ajuda-exercicis">
+    <summary><strong>Ajuda per a exercicis concrets · 16 procediments</strong></summary>
+    <p>Obre el procediment que necessitis. Cada ajuda inclou la idea, els passos, un exemple resolt i un error que pots comprovar.</p>
+    <details id="ajuda-or01"><summary>OR01 · Suma i resta d’enters amb signe</summary><p><b>Idea:</b> sumar un canvi positiu o negatiu modifica el valor inicial; per restar un negatiu, sumem l’oposat.</p><ol><li>Escriu el signe de cada quantitat.</li><li>Si els signes són diferents, compara els valors absoluts.</li><li>Conserva el signe de la quantitat amb valor absolut més gran.</li><li>Comprova el resultat al context.</li></ol><p><b>Exemple:</b> saldo −12 € i ingrés 5 €: −12 + 5 = −7 €.</p><p><b>Error:</b> −12 + 5 = −17; l’ingrés és positiu i acosta el saldo a zero. Correcte: −7 €.</p></details>
+    <details id="ajuda-or02"><summary>OR02 · Suma i resta de decimals amb signe</summary><p><b>Idea:</b> els decimals amb signe s’operen com els enters, alineant les comes per controlar les unitats.</p><ol><li>Reescriu l’operació amb els signes visibles.</li><li>Alinea les comes.</li><li>Opera i estima la mida del resultat.</li></ol><p><b>Exemple:</b> −3,5 + 1,2 = −2,3; les magnituds es resten i queda el signe del nombre més gran en valor absolut.</p><p><b>Error:</b> −3,5 + 1,2 = −4,7; s’ha tractat l’ingrés com una disminució.</p></details>
+    <details id="ajuda-or03"><summary>OR03 · Suma i resta de fraccions</summary><p><b>Idea:</b> només sumem o restem fraccions quan les parts tenen la mateixa mida.</p><ol><li>Troba un denominador comú.</li><li>Converteix les fraccions en equivalents.</li><li>Opera els numeradors.</li><li>Simplifica.</li></ol><p><b>Exemple:</b> 3/4 − 1/6 = 9/12 − 2/12 = 7/12.</p><p><b>Error:</b> 3/4 − 1/6 = 2/−2; els denominadors no es resten.</p></details>
+    <details id="ajuda-or04"><summary>OR04 · Producte de fraccions</summary><p><b>Idea:</b> multiplica numerador per numerador i denominador per denominador; el signe es determina per la regla del producte.</p><ol><li>Anticipa el signe.</li><li>Multiplica les parts corresponents.</li><li>Simplifica el resultat.</li></ol><p><b>Exemple:</b> (−2/3) · (3/5) = −6/15 = −2/5.</p><p><b>Error:</b> sumar numeradors i denominadors; aquesta regla no és un producte.</p></details>
+    <details id="ajuda-or05"><summary>OR05 · Divisió de fraccions</summary><p><b>Idea:</b> dividir per una fracció no nul·la equival a multiplicar pel seu recíproc.</p><ol><li>Conserva la primera fracció.</li><li>Canvia ÷ per ·.</li><li>Inverteix només la segona fracció.</li><li>Multiplica i simplifica.</li></ol><p><b>Exemple:</b> 2/3 ÷ 4/5 = 2/3 · 5/4 = 10/12 = 5/6.</p><p><b>Error:</b> invertir les dues fraccions; només s’inverteix la divisora.</p></details>
+    <details id="ajuda-or06"><summary>OR06 · Unificar fracció i decimal</summary><p><b>Idea:</b> transforma les quantitats a una representació comuna que permeti operar sense aproximacions innecessàries.</p><ol><li>Identifica si el decimal es pot convertir exactament en fracció.</li><li>Tria decimals o fraccions segons la simplicitat.</li><li>Opera i torna a la forma que demana la pregunta.</li></ol><p><b>Exemple:</b> 1/2 + 0,25 = 0,5 + 0,25 = 0,75 = 3/4.</p><p><b>Error:</b> arrodonir abans d’operar quan les representacions exactes són senzilles.</p></details>
+    <details id="ajuda-or07"><summary>OR07 · Anticipar el signe d’un producte</summary><p><b>Idea:</b> el nombre de factors negatius decideix el signe, no cal calcular-ne el valor absolut.</p><ol><li>Compta els factors negatius.</li><li>Si n’hi ha un nombre parell, el producte és positiu.</li><li>Si n’hi ha un nombre senar, és negatiu.</li></ol><p><b>Exemple:</b> (−1/2) · (−3/4) · (2/5): hi ha dos negatius, així que el signe és positiu.</p><p><b>Error:</b> concloure que qualsevol producte amb un nombre negatiu és negatiu; cal comptar-los tots.</p></details>
+    <details id="ajuda-or08"><summary>OR08 · Jerarquia directa d’operacions</summary><p><b>Idea:</b> primer parèntesis, després productes i divisions, i finalment sumes i restes.</p><ol><li>Marca l’operació prioritària.</li><li>Calcula-la respectant els signes.</li><li>Continua amb les operacions restants d’esquerra a dreta.</li></ol><p><b>Exemple:</b> 5 − 2 · 3 = 5 − 6 = −1.</p><p><b>Error:</b> (5 − 2) · 3 = 9; s’han afegit parèntesis que alteren l’enunciat.</p></details>
+    <details id="ajuda-or09"><summary>OR09 · Parèntesis abans del producte</summary><p><b>Idea:</b> resol primer tota l’operació tancada entre parèntesis; després aplica el factor exterior.</p><ol><li>Calcula el valor del parèntesi.</li><li>Multiplica pel factor que queda fora.</li><li>Revisa el signe del resultat.</li></ol><p><b>Exemple:</b> (3/4 − 1/2) · 6 = (3/4 − 2/4) · 6 = 1/4 · 6 = 3/2.</p><p><b>Error:</b> multiplicar només el segon terme per 6; el factor afecta tot el parèntesi.</p></details>
+    <details id="ajuda-or10"><summary>OR10 · Reconstruir un sumand</summary><p><b>Idea:</b> per trobar el sumand que falta, resta el sumand conegut de la suma total.</p><ol><li>Escriu la suma com una igualtat.</li><li>Resta el terme conegut a la suma final.</li><li>Substitueix la resposta per comprovar.</li></ol><p><b>Exemple:</b> 3/4 + □ = 5/6; □ = 5/6 − 3/4 = 10/12 − 9/12 = 1/12.</p><p><b>Error:</b> sumar 3/4 i 5/6; l’operació inversa és la resta.</p></details>
+    <details id="ajuda-or11"><summary>OR11 · Reconstruir un factor</summary><p><b>Idea:</b> desfés la multiplicació dividint el producte pel factor conegut.</p><ol><li>Identifica el factor conegut i el producte.</li><li>Divideix el producte pel factor conegut.</li><li>Comprova multiplicant de nou.</li></ol><p><b>Exemple:</b> □ · 2/3 = 5/6; □ = 5/6 ÷ 2/3 = 5/6 · 3/2 = 5/4.</p><p><b>Error:</b> multiplicar 5/6 per 2/3 en lloc de desfer la multiplicació.</p></details>
+    <details id="ajuda-or12"><summary>OR12 · Estimar el producte decimal</summary><p><b>Idea:</b> arrodoneix cada factor a un valor senzill per anticipar l’ordre de magnitud.</p><ol><li>Aproxima els factors.</li><li>Multiplica les aproximacions.</li><li>Tria l’ordre de magnitud més coherent.</li></ol><p><b>Exemple:</b> 19,8 · 5,1 ≈ 20 · 5 = 100; el valor exacte és 100,98.</p><p><b>Error:</b> triar 1 000; l’estimació 100 descarta una resposta deu vegades més gran.</p></details>
+    <details id="ajuda-or13"><summary>OR13 · Acotar una suma</summary><p><b>Idea:</b> compara cada sumand i la suma amb valors de referència com 0, 1 i 2.</p><ol><li>Decideix si cada fracció és menor o major que 1/2 o que 1.</li><li>Combina les cotes.</li><li>Comprova a quin interval pertany la suma, incloent els extrems indicats.</li></ol><p><b>Exemple:</b> 3/4 + 5/4 = 8/4 = 2, per tant pertany a x ≥ 2.</p><p><b>Error:</b> dir 1 ≤ x &lt; 2 quan el resultat és exactament 2; aquest interval exclou 2.</p></details>
+    <details id="ajuda-or14"><summary>OR14 · Desfer dos canvis consecutius</summary><p><b>Idea:</b> desfés les transformacions en ordre invers i amb l’operació inversa corresponent.</p><ol><li>Desfés el darrer factor dividint.</li><li>Desfés l’última suma o resta.</li><li>Reprodueix els canvis per verificar l’inici.</li></ol><p><b>Exemple:</b> a una quantitat se li afegeix 2 L i després es pren 1/2; el resultat és 7 L. Primer 7 ÷ 1/2 = 14 L; després 14 − 2 = 12 L inicials.</p><p><b>Error:</b> desfer els canvis en el mateix ordre: les operacions inverses s’apliquen de darrere cap endavant.</p></details>
+    <details id="ajuda-or15"><summary>OR15 · Agrupar operacions per assolir un objectiu</summary><p><b>Idea:</b> els parèntesis poden canviar quines sumes i diferències es fan abans del producte.</p><ol><li>Llegeix cada agrupació literalment.</li><li>Resol parèntesis i prioritats.</li><li>Calcula totes les alternatives i compara-les amb l’objectiu.</li></ol><p><b>Exemple:</b> amb 2, 3, 4 i 1: (2 + 3) · 4 − 1 = 19; 2 + 3 · (4 − 1) = 11; (2 + 3) · (4 − 1) = 15.</p><p><b>Error:</b> assumir que qualsevol parell de parèntesis dona el mateix resultat; aquí les tres agrupacions produeixen valors diferents.</p></details>
+    <details id="ajuda-or16"><summary>OR16 · Raonar amb intervals i cotes</summary><p><b>Idea:</b> calcula el mínim i el màxim possibles respectant si els extrems estan inclosos.</p><ol><li>Transforma l’interval inicial en un interval de quantitats finals.</li><li>Compara el llindar amb el mínim i el màxim.</li><li>Decideix si es compleix sempre, de vegades o mai.</li></ol><p><b>Exemple:</b> 8 ≤ x ≤ 12 i es gasten 3: la quantitat final és entre 5 i 9, inclosos. Arribar a 5 és possible, però no garantit.</p><p><b>Error:</b> tractar 8 o 12 com a valors prohibits; els extrems inclosos també són possibles.</p></details>
+    <p><a href="../../sentit-numeric.html?topic=operacionsRacionals">← Torna a la pràctica d’operacions amb racionals</a></p>
+  </details>
+
+  <script>
+  (function(){
+    const help=document.getElementById('ajuda-exercicis');
+    function openFamily(){const id=decodeURIComponent(location.hash.slice(1));if(!id.startsWith('ajuda-or'))return;const item=document.getElementById(id);if(!item||!help)return;help.open=true;item.open=true;requestAnimationFrame(()=>item.scrollIntoView({block:'start',behavior:'smooth'}));}
+    addEventListener('DOMContentLoaded',openFamily,{once:true});addEventListener('hashchange',openFamily);
+    if(document.readyState!=='loading')openFamily();
+  })();
+  </script>
 
   <section class="practice-panel">
     <h2>Ara toca practicar</h2>

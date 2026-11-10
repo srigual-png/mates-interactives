@@ -1288,10 +1288,10 @@ function genFraccionsSentit2ESO(forceType){
 /* ── GENERADOR · BLOC 3: OPERACIONS AMB RACIONALS ─────────── */
 let rationalOpsTypeBag=[];
 function nextRationalOpsType(){
-  if(!rationalOpsTypeBag.length)rationalOpsTypeBag=shuffle(Array.from({length:18},(_,i)=>i+1));
+  if(!rationalOpsTypeBag.length)rationalOpsTypeBag=shuffle(Array.from({length:21},(_,i)=>i+1));
   return rationalOpsTypeBag.pop();
 }
-function genOperacionsRacionals2ESO(forceType){
+function genOperacionsRacionals2ESO(forceType,forceVariant){
   const type=forceType||nextRationalOpsType();
   let question,correct,options,guide,solution,alts=[],openHint='',allowOpen=true,difficultyVariant;
 
@@ -1374,7 +1374,7 @@ function genOperacionsRacionals2ESO(forceType){
     openHint='Escriu només el resultat.';
   }
   else if(type===9){
-    const A=rat(rnd(-4,5)||1,shuffle([2,3,4,5])[0]),B=rat(rnd(-4,5)||2,shuffle([2,3,4,5])[0]),k=shuffle([-3,-2,2,3])[0];
+    const den=shuffle([2,3,4,5])[0],A=rat(rnd(-4,5)||1,den),B=rat(rnd(-4,5)||2,den),k=shuffle([-3,-2,2,3])[0];
     const R=ratAdd(A,ratMul(B,rat(k,1))),wrong=ratMul(ratAdd(A,B),rat(k,1));
     correct=ratText(R);
     options=uniq4(correct,[ratText(wrong),ratText(ratSub(A,ratMul(B,rat(k,1)))),ratText(ratNeg(R)),ratText(ratAdd(A,B)),ratText(ratMul(B,rat(k,1)))]);
@@ -1384,9 +1384,9 @@ function genOperacionsRacionals2ESO(forceType){
     openHint='Escriu una fracció simplificada o un enter.';
   }
   else if(type===10){
-    const A=rat(rnd(-5,5)||3,shuffle([2,3,4,5])[0]),B=rat(rnd(-5,5)||1,shuffle([2,3,4,5])[0]),k=shuffle([-3,-2,2,3])[0];
+    const A=rat(rnd(-5,5)||3,shuffle([2,3,4,5])[0]),k=shuffle([-3,-2,2,3])[0];let B=rat(rnd(-5,5)||1,shuffle([2,3,4,5])[0]);
+    if(ratSub(A,B).n===0)B=ratAdd(B,rat(1,B.d));
     const inside=ratSub(A,B),R=ratMul(inside,rat(k,1)),wrong=ratSub(A,ratMul(B,rat(k,1)));
-    if(inside.n===0)difficultyVariant='cancelled';
     correct=ratText(R);
     options=uniq4(correct,[ratText(wrong),ratText(ratNeg(R)),ratText(inside),ratText(ratMul(A,rat(k,1))),ratText(ratAdd(A,B)),ratText(ratAdd(R,rat(1,1))),ratText(ratSub(R,rat(1,1)))]);
     question=`Calcula ${mathSpan('('+ratText(A)+' − '+ratText(B)+') · '+(k<0?'('+k+')':k))}.`;
@@ -1413,47 +1413,44 @@ function genOperacionsRacionals2ESO(forceType){
     openHint='Escriu una fracció simplificada o un enter.';
   }
   else if(type===13){
-    const f=shuffle(['2/3','3/5','5/4','7/2'])[0];
-    correct='Dividir per '+f;
-    options=shuffle([correct,'Multiplicar per '+f,'Sumar '+f,'Restar '+f]);
-    question=`Quina operació <b>desfà</b> l’acció de ${mathSpan('multiplicar per '+f)}?`;
-    guide=['Busca l’operació inversa de la multiplicació.','L’objectiu és tornar exactament al nombre inicial.'];
-    solution=[`La divisió desfà una multiplicació pel mateix nombre no nul.`,`Per tant, cal ${correct.toLowerCase()}.`];
-    allowOpen=false;
+    const A=rat(rnd(2,9),shuffle([2,3,4,5])[0]),X=rat(rnd(2,8),shuffle([2,3,4,5])[0]),B=ratMul(A,X);
+    correct=ratText(A);alts=[ratText(ratNeg(A))];
+    options=uniq4(correct,[ratText(ratAdd(A,rat(1,1))),ratText(ratSub(A,rat(1,1))),ratText(B),ratText(ratDiv(B,ratMul(A,A)))]);
+    question=`La igualtat ${mathSpan('□ · '+ratText(X)+' = '+ratText(B))} és certa. Quin nombre racional hi falta?`;
+    guide=['La multiplicació és l’operació que apareix a la igualtat.','Desfés-la dividint el producte conegut pel factor conegut.','Substitueix el resultat per comprovar la igualtat.'];
+    solution=[`${ratText(B)} ÷ ${ratText(X)} = ${ratText(A)}.`,`Comprovació: ${ratText(A)} · ${ratText(X)} = ${ratText(B)}.`,`El factor desconegut és ${correct}.`];
+    openHint='Escriu una fracció equivalent, un enter o un decimal exacte.';
   }
   else if(type===14){
-    const set=shuffle([
-      {a:rnd(18,22)+rnd(0,9)/10,b:rnd(45,55)/10,c:'100'},
-      {a:rnd(45,55)/10,b:rnd(18,22)/10,c:'10'},
-      {a:rnd(180,220)+rnd(0,9)/10,b:rnd(45,55)/10,c:'1000'}
+    const scale=shuffle([
+      {a:rnd(28,32)/10,b:rnd(28,32)/10,c:'1'},
+      {a:rnd(18,22)/10,b:rnd(45,55)/10,c:'10'},
+      {a:rnd(45,55)/10,b:rnd(18,22),c:'100'},
+      {a:rnd(18,22),b:rnd(45,55),c:'1000'}
     ])[0];
-    correct=set.c;options=['1','10','100','1000'];
+    const set=scale;correct=set.c;options=shuffle(['1','10','100','1000']);
     question=`Sense calcular exactament, a quin valor és més proper ${mathSpan(fmtNum(set.a,1)+' · '+fmtNum(set.b,1))}?`;
     guide=['Arrodoneix cada factor a un nombre senzill.','Multiplica mentalment els valors aproximats.','Escull l’ordre de magnitud coherent amb aquesta estimació.'];
     solution=[`Arrodonint els factors obtenim una multiplicació senzilla.`,`L’ordre de magnitud correcte és aproximadament ${correct}.`];
     allowOpen=false;
   }
   else if(type===15){
-    const mode=rnd(1,3);let A,B,val;
-    if(mode===1){A=rat(rnd(1,3),5);B=rat(rnd(1,2),6);val=ratValue(ratAdd(A,B));}
-    else if(mode===2){A=rat(rnd(3,5),4);B=rat(rnd(3,5),5);val=ratValue(ratAdd(A,B));}
-    else{A=rat(-rnd(2,5),4);B=rat(rnd(1,2),5);val=ratValue(ratAdd(A,B));}
-    correct=val<0?'Menor que 0':val<1?'Entre 0 i 1':val<2?'Entre 1 i 2':'2 o més';
-    options=shuffle(['Menor que 0','Entre 0 i 1','Entre 1 i 2','2 o més']);
+    const pairs=[[rat(-1,4),rat(1,4)],[rat(2,5),rat(3,5)],[rat(3,4),rat(5,4)],[rat(5,4),rat(3,4)],[rat(1,3),rat(1,4)],[rat(5,6),rat(7,8)],[rat(-3,4),rat(1,2)]];
+    const [A,B]=pairs[rnd(0,pairs.length-1)],R=ratAdd(A,B);
+    correct=R.n<0?'x<0':R.n<R.d?'0≤x<1':R.n<2*R.d?'1≤x<2':'x≥2';
+    options=shuffle(['x<0','0≤x<1','1≤x<2','x≥2']);
     question=`Sense calcular exactament, en quin interval està ${mathSpan(ratText(A)+' + '+ratText(B))}?`;
     guide=['Estima cada fracció comparant-la amb 0, 1/2, 1 o altres referències senzilles.','Combina aquestes estimacions.','No necessites trobar el resultat exacte.'];
-    solution=[`Estimant les dues fraccions podem situar la suma.`,`El resultat queda a l’interval: ${correct}.`];
+    solution=[`Compare la suma amb nombres de referència: 0, 1 i 2.`,`La suma exacta és ${ratText(R)}, que pertany a ${correct}.`,`La resposta és ${correct}.`];
     allowOpen=false;
   }
   else if(type===16){
     const d1=shuffle([3,4,5,6])[0],d2=shuffle([4,5,7,8])[0],n1=rnd(1,d1-1),n2=rnd(1,d2-1);
-    const wrong=fracStr(n1+n2,d1+d2);
-    correct='Ha sumat els denominadors, cosa que no es pot fer directament';
-    options=shuffle([correct,'Hauria d’haver multiplicat les dues fraccions','Ha canviat el signe d’una fracció','L’únic error és que no ha passat el resultat a decimal']);
-    question=`Un alumne escriu ${mathSpan(fracStr(n1,d1)+' + '+fracStr(n2,d2)+' = '+wrong)}. Quin és l’error principal?`;
-    guide=['Recorda què ha de passar amb els denominadors abans de sumar fraccions.','Pregunta’t si numeradors i denominadors es poden sumar de la mateixa manera.'];
-    solution=[`Per sumar fraccions cal treballar amb un denominador comú.`,`L’error és sumar directament els denominadors.`];
-    allowOpen=false;
+    const wrong=fracStr(n1+n2,d1+d2),R=ratAdd(rat(n1,d1),rat(n2,d2));correct=ratText(R);
+    options=uniq4(correct,[wrong,ratText(ratAdd(rat(n1,d1),rat(n2,d1))),ratText(rat(1,1)),ratText(ratSub(rat(n1,d1),rat(n2,d2)))]);
+    question=`Un alumne proposa ${mathSpan(wrong)} per a ${mathSpan(fracStr(n1,d1)+' + '+fracStr(n2,d2))}. Calcula la suma i tria el valor correcte.`;
+    guide=['Abans d’operar, fixa’t si les parts de les dues fraccions tenen la mateixa mida.','Busca un denominador comú i reescriu les dues quantitats.','Comprova si el valor proposat és coherent amb la suma.'];
+    solution=[`Les fraccions tenen denominadors diferents, així que les expressem amb denominador comú.`,`${fracStr(n1,d1)} + ${fracStr(n2,d2)} = ${ratText(R)}.`,`El valor proposat ${wrong} no és equivalent perquè s’han sumat denominadors sense fer fraccions equivalents.`];
   }
   else if(type===17){
     const a=rnd(2,9),b=rnd(2,6),c=rnd(2,7);
@@ -1465,23 +1462,28 @@ function genOperacionsRacionals2ESO(forceType){
     allowOpen=false;
   }
   else if(type===18){
-    const kind=rnd(1,4);
+    const forcedKinds={temperature:1,balance:2,depth:3,route:4};
+    const kind=Object.hasOwn(forcedKinds,forceVariant)?forcedKinds[forceVariant]:rnd(1,4);
     if(kind===1){
+      difficultyVariant='temperature';
       const start=-rnd(15,45)/2,rise=rnd(8,30)/2,res=start+rise;correct=fmtNum(res,1);
       options=uniq4(correct,[fmtNum(start-rise,1),fmtNum(Math.abs(start)+rise,1),fmtNum(-res,1),fmtNum(rise,1)]);
       question=`A primera hora hi havia <b>${fmtNum(start,1)} °C</b>. La temperatura augmenta <b>${fmtNum(rise,1)} °C</b>. Quina temperatura hi ha després?`;
       solution=[`Representem la temperatura inicial amb signe i hi sumem l’augment.`,`La temperatura final és ${correct} °C.`];
     }else if(kind===2){
+      difficultyVariant='balance';
       const debt=rnd(10,50),income=rnd(15,70),res=-debt+income;correct=String(res);
       options=uniq4(correct,[String(-(debt+income)),String(debt+income),String(debt-income),String(income)]);
       question=`Un compte té un saldo de <b>−${debt} €</b> i rep un ingrés de <b>${income} €</b>. Quin és el nou saldo?`;
       solution=[`Partim d’un saldo negatiu i hi afegim l’ingrés.`,`El nou saldo és ${correct} €.`];
     }else if(kind===3){
+      difficultyVariant='depth';
       const depth=-rnd(20,60),rise=rnd(8,35),res=depth+rise;correct=String(res);
       options=uniq4(correct,[String(depth-rise),String(Math.abs(depth)+rise),String(-res),String(rise)]);
       question=`Un submarí és a <b>${depth} m</b> respecte del nivell del mar i ascendeix <b>${rise} m</b>. A quina cota queda?`;
       solution=[`La profunditat és negativa i l’ascens és una variació positiva.`,`La cota final és ${correct} m.`];
     }else{
+      difficultyVariant='route';
       const den=shuffle([2,4,5])[0],num=rnd(1,den-1),whole=rnd(2,6),A=rat(whole,1),B=rat(num,den),R=ratSub(A,B);correct=ratText(R);
       options=uniq4(correct,[ratText(ratAdd(A,B)),ratText(B),fracStr(whole-num,den),ratText(ratNeg(R))]);
       question=`Una ruta prevista és de <b>${whole} km</b> i ja s’han recorregut <b>${fracStr(num,den)} km</b>. Quants quilòmetres falten?`;
@@ -1490,8 +1492,36 @@ function genOperacionsRacionals2ESO(forceType){
     guide=['Identifica la quantitat inicial i el canvi que s’hi aplica.','Traduïx la situació a una operació amb nombres racionals.','Comprova que el signe i la mida del resultat tinguin sentit en el context.'];
     openHint='Escriu només el valor numèric; si cal, usa una fracció simplificada.';
   }
+  else if(type===19){
+    const start=rnd(8,24),delta=rat(rnd(1,5),shuffle([2,3,4])[0]),subtract=rnd(0,1)===1,after=subtract?ratSub(rat(start,1),delta):ratAdd(rat(start,1),delta),factor=shuffle([rat(1,2),rat(2,3),rat(3,2)])[0],final=ratMul(after,factor);
+    correct=String(start);options=uniq4(correct,[String(start-2),String(start+2),ratText(ratDiv(final,factor)),ratText(ratAdd(ratDiv(final,factor),delta))]);
+    question=`Un dipòsit contenia una quantitat inicial desconeguda. ${subtract?'Se’n treuen':'S’hi afegeixen'} ${ratText(delta)} L i, després, queda ${ratText(factor)} de la quantitat que hi havia en aquell moment. Al final hi ha ${ratText(final)} L. Quina quantitat hi havia al començament?`;
+    guide=['Desfés primer el canvi que s’ha fet en segon lloc.','Després desfés la suma o la resta de litres.','Substitueix la quantitat inicial a la història i comprova el resultat final.'];
+    solution=[`Desfem primer la multiplicació per ${ratText(factor)}: ${ratText(final)} ÷ ${ratText(factor)} = ${ratText(after)} L.`,`Ara desfem el canvi de ${ratText(delta)} L: ${ratText(after)} ${subtract?'+':'−'} ${ratText(delta)} = ${start} L.`,`Comprovació: ${start} ${subtract?'−':'+'} ${ratText(delta)} = ${ratText(after)}; ${ratText(after)} · ${ratText(factor)} = ${ratText(final)} L.`];
+    openHint='Escriu la quantitat inicial en litres; es pot donar com enter o fracció.';
+  }
+  else if(type===20){
+    const a=rnd(1,5),b=rnd(2,6),d=rnd(1,4);let c=rnd(3,7);const forms=[`(${a} + ${b}) · ${c} − ${d}`,`${a} + ${b} · (${c} − ${d})`,`(${a} + ${b}) · (${c} − ${d})`],values=[(a+b)*c-d,a+b*(c-d),(a+b)*(c-d)];
+    while(new Set(values).size<3){c++;forms[0]=`(${a} + ${b}) · ${c} − ${d}`;forms[1]=`${a} + ${b} · (${c} − ${d})`;forms[2]=`(${a} + ${b}) · (${c} − ${d})`;values[0]=(a+b)*c-d;values[1]=a+b*(c-d);values[2]=(a+b)*(c-d);}
+    const target=rnd(0,2);correct=['A','B','C'][target];const results=values.map((v,i)=>`${String.fromCharCode(65+i)}: ${forms[i]} = ${v}`);
+    options=shuffle(['A','B','C','Cap d’aquestes']);
+    question=`Quina agrupació dona ${values[target]}? Tria A, B, C o «Cap d’aquestes».<ol><li>A: ${forms[0]}</li><li>B: ${forms[1]}</li><li>C: ${forms[2]}</li></ol>`;
+    guide=['Calcula sempre primer el que queda dins de cada parèntesi.','Respecta la prioritat del producte respecte de la suma i la resta.','Avalua les tres agrupacions i compara els resultats amb l’objectiu.'];
+    solution=[...results,`Només l’opció ${correct} dona l’objectiu ${values[target]}.`,`Els parèntesis canvien l’ordre d’algunes operacions; el producte es fa abans que la suma o la resta quan no hi ha parèntesis que indiquin una altra agrupació.`];
+    openHint='Escriu A, B o C.';
+  }
+  else if(type===21){
+    const L=rnd(8,14),U=L+rnd(4,10),used=rnd(1,4),target=rnd(L-used-1,U-used+2),min=L-used,max=U-used;
+    correct=target<=min?'Garantida':target>max?'Impossible':'Possible, però no garantida';
+    options=shuffle(['Garantida','Possible, però no garantida','Impossible','No es pot determinar']);
+    question=`Una quantitat inicial x és entre ${L} i ${U}, ambdós extrems inclosos (${L} ≤ x ≤ ${U}). Se’n gasten exactament ${used}. La quantitat final ha de ser com a mínim ${target}. La condició és garantida, possible però no garantida, impossible o no es pot determinar?`;
+    guide=['Calcula la quantitat final mínima i màxima possibles.','Comprova si l’objectiu es compleix per a tots els valors, per a alguns o per a cap.','Recorda que els extrems de l’interval inicial sí que estan inclosos.'];
+    solution=[`Quantitat final mínima: ${L} − ${used} = ${min}. Quantitat final màxima: ${U} − ${used} = ${max}.`,`L’objectiu és arribar com a mínim a ${target}. ${target<=min?'Fins i tot el mínim hi arriba.':target>max?'Ni el màxim hi arriba.':'Algunes quantitats hi arriben i d’altres no.'}`,`Conclusió: ${correct.toLowerCase()}.`];
+    openHint='Escriu garantida, possible però no garantida, o impossible.';
+  }
 
-  return {topicId:'operacionsRacionals',type,course:'2n',difficultyVariant,question,correct,alts,options,guide,solution,openHint,allowOpen};
+  const familyInfo=window.MIDifficulty?.operationsRationalInfo?.({topicId:'operacionsRacionals',type,variantId:difficultyVariant});
+  return {topicId:'operacionsRacionals',type,course:'2n',difficultyVariant,variantId:difficultyVariant,familyId:familyInfo?.id,familyName:familyInfo?.name,familyAnchor:familyInfo?.anchor,question,correct,alts,options,guide,solution,openHint,allowOpen};
 }
 
 /* ── GENERADOR · BLOC 4: POTÈNCIES ─────────────────────────── */
@@ -2798,17 +2828,19 @@ const THEORY_PAGES={
 // Enllaç contextual de repàs que apareix després d'una resposta incorrecta.
 const RATIONAL_THEORY_ANCHORS={1:'fraccio-a-decimal',2:'decimal-a-fraccio',3:'fraccio-a-percentatge',4:'percentatge-a-decimal',5:'tres-representacions',6:'comparar-fraccio-decimal',7:'comparar-percentatge-fraccio',8:'ordenar-representacions',9:'llegir-recta',10:'valor-intermedi',11:'identificar-la-forma',12:'proporcio-de-cada',13:'detectar-equivalencia-falsa',14:'comparar-proporcions',15:'decimal-periodic-exacte',16:'llindar-minim',17:'composicio-amb-traspassos',18:'interval-amb-condicions'};
 const FRACTIONS_MEANING_THEORY_ANCHORS={1:'divisio-repartiment',2:'divisio-repartiment',3:'operador-ajuda',4:'reconstruir-total',5:'part-total',6:'complement',7:'rao-entre-grups',8:'rao-i-part-total',9:'escala-part-total',10:'comparar-proporcions',11:'escala-rao',12:'repartiment-proporcional',13:'fraccions-successives',14:'significat-contextual',15:'reconstruir-total',16:'rao-i-diferencia',17:'inversa-successives'};
+function operationsRationalTheoryAnchor(ex){return ex?.familyAnchor||window.MIDifficulty?.operationsRationalInfo?.(ex)?.anchor||'ajuda-or01';}
 function miTheoryLinkHtml(topicId,label,type){
   var href=THEORY_PAGES[topicId];if(!href)return '';
   if(topicId==='racionals'&&Number.isFinite(Number(type))&&RATIONAL_THEORY_ANCHORS[Number(type)])href+='#'+RATIONAL_THEORY_ANCHORS[Number(type)];
   if(topicId==='fraccionsSentit'&&FRACTIONS_MEANING_THEORY_ANCHORS[Number(type)])href+='#'+FRACTIONS_MEANING_THEORY_ANCHORS[Number(type)];
+  if(topicId==='operacionsRacionals')href+='#'+operationsRationalTheoryAnchor(type&&typeof type==='object'?type:{type:Number(type),topicId});
   return '<a class="theory-page-link mi-review-theory-link" href="'+href+'" style="margin:12px 0 0">📚 '+(label||'Repassar el procediment')+'</a>';
 }
 
 
 /* ── ESTAT I ERRORS ────────────────────────────────────────── */
 const STORAGE_KEY='sn2eso_v1';
-let state={done:[],errors:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,rationalSolved:0,rationalAnswered:0,rationalDifficultyPoints:0,fractionsSolved:0,fractionsAnswered:0,fractionsDifficultyPoints:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
+let state={done:[],errors:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,rationalSolved:0,rationalAnswered:0,rationalDifficultyPoints:0,fractionsSolved:0,fractionsAnswered:0,fractionsDifficultyPoints:0,operationsSolved:0,operationsAnswered:0,operationsDifficultyPoints:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
 let currentEx=null,currentScreen='screenHome';
 function loadState(){
   try{
@@ -2855,7 +2887,7 @@ function registerError(ex,studentAnswer,source='practice'){
     topicId:ex.topicId||topic.id,topicName:topic.name,type:ex.type,difficultyVariant:ex.difficultyVariant,
     question:ex.question,correct:ex.type===10&&ex.topicId==='racionals'?'Una resposta possible: '+ex.correct:ex.correct,answer:studentAnswer,
     options:[...(ex.options||[])],guide:[...(ex.guide||[])],review:miReviewPoints(ex),solution:[...(ex.solution||[])],
-    level:source==='exam'?0:state.level,source,timestamp:new Date().toISOString()
+    level:source==='exam'?0:state.level,source,timestamp:new Date().toISOString(),familyId:ex.familyId||null,taskDifficulty:ex.taskDifficulty||window.MIDifficulty?.operationsRationalInfo?.(ex)?.level||null,variantId:ex.variantId||null
   };
   const last=state.errors[state.errors.length-1];
   if(!(last&&last.topicId===err.topicId&&last.type===err.type&&last.question===err.question&&last.answer===err.answer&&last.source===err.source))state.errors.push(err);
@@ -2878,7 +2910,7 @@ function setNavContext(title,showBack=false,showSense=false){
 }
 function showHome(){setNavContext('Sentit Numèric · 2n ESO',false,true);renderHome();showScreen('screenHome')}
 function goBack(){
-  if(currentScreen==='screenExercise'){if(['racionals','fraccionsSentit'].includes(TOPICS[state.currentTopic]?.id))showCongrats();else selectTopic(state.currentTopic);return}
+  if(currentScreen==='screenExercise'){if(['racionals','fraccionsSentit','operacionsRacionals'].includes(TOPICS[state.currentTopic]?.id))showCongrats();else selectTopic(state.currentTopic);return}
   if(currentScreen==='screenIntro'||currentScreen==='screenExam'||currentScreen==='screenApp'){showHome();return}
   showHome();
 }
@@ -2920,7 +2952,7 @@ function selectTopic(i){
   const topicErrors=state.errors.filter(e=>e.topicId===t.id).slice(-4).reverse();
   if(topicErrors.length){
     theory+='<div class="saved-errors-mini"><h4>❌ Errors recents d’aquest bloc</h4>';
-    topicErrors.forEach(e=>{const solId='topicSol_'+String(e.id||Math.random()).replace(/[^a-zA-Z0-9_]/g,'');theory+='<div class="saved-error-row">'+e.question+'<br><span style="color:var(--error)">La teva: <b>'+String(e.answer??'—')+'</b></span> · <span style="color:var(--success)">Correcta: <b>'+String(e.correct??'—')+'</b></span>'+miReviewHtml(e)+(['racionals','fraccionsSentit'].includes(e.topicId)?miTheoryLinkHtml(e.topicId,undefined,e.type):'')+(Array.isArray(e.solution)&&e.solution.length?'<button class="sol-btn" style="margin-top:7px" onclick="toggleSavedSolution(\''+solId+'\',this)">📘 Veure explicació</button><div class="solution-box" id="'+solId+'">'+e.solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>':'')+'</div>'});
+    topicErrors.forEach(e=>{const solId='topicSol_'+String(e.id||Math.random()).replace(/[^a-zA-Z0-9_]/g,'');theory+='<div class="saved-error-row">'+e.question+'<br><span style="color:var(--error)">La teva: <b>'+String(e.answer??'—')+'</b></span> · <span style="color:var(--success)">Correcta: <b>'+String(e.correct??'—')+'</b></span>'+miReviewHtml(e)+(['racionals','fraccionsSentit','operacionsRacionals'].includes(e.topicId)?miTheoryLinkHtml(e.topicId,undefined,e):'')+(Array.isArray(e.solution)&&e.solution.length?'<button class="sol-btn" style="margin-top:7px" onclick="toggleSavedSolution(\''+solId+'\',this)">📘 Veure explicació</button><div class="solution-box" id="'+solId+'">'+e.solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>':'')+'</div>'});
     theory+='<button class="btn-secondary" style="border-color:var(--error);color:var(--error)" onclick="showErrors()">Repassa tots els errors →</button></div>';
   }
   document.getElementById('tabTheory').innerHTML=theory;
@@ -2947,15 +2979,23 @@ function showTab(id,btn){
 function selectLevel(l){state.level=l;document.getElementById('btnLvl1').classList.toggle('active',l===1);document.getElementById('btnLvl2').classList.toggle('active',l===2)}
 function selectMode(m){state.mode=m;document.getElementById('btnModeA').classList.toggle('active',m==='multi');document.getElementById('btnModeB').classList.toggle('active',m==='open')}
 // Una entrada per inici de pràctica; els exercicis següents no generen esdeveniments.
-function startPractice(){window.MIAnalytics?.start();state.exCount=0;state.correctStreak=0;state.rationalSolved=0;state.rationalAnswered=0;state.rationalDifficultyPoints=0;state.fractionsSolved=0;state.fractionsAnswered=0;state.fractionsDifficultyPoints=0;fractionsMeaningFamilyBag=[];resetVariationSession();showExercise();}
+function startPractice(){window.MIAnalytics?.start();state.exCount=0;state.correctStreak=0;state.rationalSolved=0;state.rationalAnswered=0;state.rationalDifficultyPoints=0;state.fractionsSolved=0;state.fractionsAnswered=0;state.fractionsDifficultyPoints=0;state.operationsSolved=0;state.operationsAnswered=0;state.operationsDifficultyPoints=0;fractionsMeaningFamilyBag=[];operationsRationalFamilyBags={};operationsRationalLastFamily=null;resetVariationSession();showExercise();}
 
 /* ── PRÀCTICA ──────────────────────────────────────────────── */
+let operationsRationalFamilyBags={},operationsRationalLastFamily=null;
+function nextOperationsRationalFamily(level,allowOpen){
+  const families=window.MIDifficulty.operationsRationalFamilies.filter(f=>f.level===level&&(!allowOpen||f.types.some(t=>![14,15,17].includes(t))));
+  let bag=(operationsRationalFamilyBags[level]||[]).filter(id=>families.some(f=>f.id===id));
+  if(!bag.length)bag=shuffle(families.map(f=>f.id));
+  if(bag.length>1&&bag[bag.length-1]===operationsRationalLastFamily){const i=bag.findIndex(x=>x!==operationsRationalLastFamily);[bag[i],bag[bag.length-1]]=[bag[bag.length-1],bag[i]];}
+  const familyId=bag.pop();operationsRationalFamilyBags[level]=bag;operationsRationalLastFamily=familyId;return families.find(f=>f.id===familyId);
+}
 function getExerciseForMode(){
   const topic=TOPICS[state.currentTopic];
-  const selectedDifficulty=topic.id==='racionals'?Number(document.getElementById('rationalTaskDifficulty').value):0;
+  const selectedDifficulty=topic.id==='racionals'?Number(document.getElementById('rationalTaskDifficulty').value):topic.id==='operacionsRacionals'?Number(window.MIDifficultyModes?.getPracticeLevel?.()||0):0;
   const requiredPoints=state.level===1?[0,3,6]:[0,6,12];
-  const progressive=['racionals','fraccionsSentit'].includes(topic.id);
-  const points=topic.id==='racionals'?state.rationalDifficultyPoints:state.fractionsDifficultyPoints;
+  const progressive=['racionals','fraccionsSentit','operacionsRacionals'].includes(topic.id);
+  const points=topic.id==='racionals'?state.rationalDifficultyPoints:topic.id==='fraccionsSentit'?state.fractionsDifficultyPoints:state.operationsDifficultyPoints;
   const difficulty=selectedDifficulty|| (progressive?(points>=requiredPoints[2]?3:points>=requiredPoints[1]?2:1):0);
   const generate=topic.id==='racionals'&&difficulty
     ? ()=>{
@@ -2975,6 +3015,8 @@ function getExerciseForMode(){
           if(!pool.length)throw new Error('No hi ha cap generador compatible amb la resposta oberta en aquest nivell.');
           return miTaskDifficulty.annotate(topic,genFraccionsSentit2ESO(pool[rnd(0,pool.length-1)]));
         }
+    : topic.id==='operacionsRacionals'&&difficulty
+      ? ()=>{const family=nextOperationsRationalFamily(difficulty,state.mode==='open'),types=family.types.filter(type=>state.mode!=='open'||![14,15,17].includes(type));if(!types.length)throw new Error('No hi ha cap exercici compatible amb aquesta família.');const type=types[rnd(0,types.length-1)],variants=type===18?family.variants||[]:[],variant=variants.length?variants[rnd(0,variants.length-1)]:undefined;return miTaskDifficulty.annotate(topic,genOperacionsRacionals2ESO(type,variant));}
     : ()=>topic.gen();
   let ex=generate();
   if(state.mode==='open'){
@@ -2985,12 +3027,12 @@ function getExerciseForMode(){
 }
 function showExercise(){
   state.answered=false;window.MIAnalytics?.shown();currentEx=getExerciseForMode();state.exCount++;
-  const topicId=TOPICS[state.currentTopic].id,rational=topicId==='racionals',fractions=topicId==='fraccionsSentit',progressive=rational||fractions,goal=state.level===1?10:20;
-  const solved=rational?state.rationalSolved:state.fractionsSolved,answered=rational?state.rationalAnswered:state.fractionsAnswered,points=rational?state.rationalDifficultyPoints:state.fractionsDifficultyPoints;
+  const topicId=TOPICS[state.currentTopic].id,rational=topicId==='racionals',fractions=topicId==='fraccionsSentit',operations=topicId==='operacionsRacionals',progressive=rational||fractions||operations,goal=state.level===1?10:20;
+  const solved=rational?state.rationalSolved:fractions?state.fractionsSolved:state.operationsSolved,answered=rational?state.rationalAnswered:fractions?state.fractionsAnswered:state.operationsAnswered,points=rational?state.rationalDifficultyPoints:fractions?state.fractionsDifficultyPoints:state.operationsDifficultyPoints;
   const progress=progressive?(state.level===1?solved:answered):state.correctStreak;
   document.getElementById('streakFill').style.width=Math.min(100,progress/goal*100)+'%';
   document.getElementById('streakLabel').textContent=progressive?`${progress}/${goal} ${state.level===1?'encerts acumulats':'respostes'} · dificultat ${points} punts`:state.correctStreak+'/'+goal;
-  document.getElementById('exNum').textContent='Exercici '+state.exCount+' · '+TOPICS[state.currentTopic].name+' · Tipus '+currentEx.type;
+  document.getElementById('exNum').textContent='Exercici '+state.exCount+' · '+TOPICS[state.currentTopic].name+' · '+(currentEx.familyName||('Tipus '+currentEx.type));
   document.getElementById('exQuestion').innerHTML='<div class="q-text">'+currentEx.question+'</div>';
   const gs=document.getElementById('guideSteps');
   if(state.level===1){gs.style.display='block';gs.innerHTML='<h4>💡 Pistes:</h4>'+currentEx.guide.map(x=>'• '+x).join('<br>')}else gs.style.display='none';
@@ -3033,6 +3075,12 @@ function rationalOpenOk(ex,value){
     if(ex.type===17){const input=String(value??'').trim().replace(/\s*(?:L|litres?)$/i,'').trim(),v=exactRational(input),target=exactRational(ex.correct);return !!v&&!!target&&v[0]*target[1]===target[0]*v[1]&&!input.includes('%');}
     return ok;
   }
+  if(ex.topicId==='operacionsRacionals'){
+    if(ex.type===20)return /^[abc]$/i.test(String(value).trim())&&String(value).trim().toUpperCase()===String(ex.correct).toUpperCase();
+    if(ex.type===21){const label=String(value).trim().toLowerCase().replace(/\s+/g,' ');return label===String(ex.correct).toLowerCase().replace(/\s+/g,' ');}
+    if([3,4,5,6,11,12,13,19].includes(ex.type)){const input=String(value).trim().replace(/\s*(?:L|litres?)$/i,'').trim(),v=exactRational(input),target=exactRational(ex.correct);return !!v&&!!target&&v[0]*target[1]===target[0]*v[1]&&!input.includes('%');}
+    return ok;
+  }
   if(ex.topicId!=='racionals')return ok;
   if(ex.type===10&&ex.rationalInterval)return rationalBetween(value,ex.rationalInterval);
   if(ex.type===8&&ex.orderValues)return orderedRationalList(value,ex.orderValues);
@@ -3043,28 +3091,29 @@ function rationalOpenOk(ex,value){
 }
 function checkOpen(){if(state.answered)return;const inp=document.getElementById('openInput'),val=inp.value.trim();if(!val)return;const ok=rationalOpenOk(currentEx,val);inp.disabled=true;inp.className='open-input '+(ok?'ok':'ko');processAnswer(ok,val);}
 function processAnswer(ok,studentAnswer){
-  window.MIAnalytics?.answer(ok);state.answered=true;const goal=state.level===1?10:20,topicId=TOPICS[state.currentTopic].id,rational=topicId==='racionals',fractions=topicId==='fraccionsSentit',progressive=rational||fractions;
+  window.MIAnalytics?.answer(ok);state.answered=true;const goal=state.level===1?10:20,topicId=TOPICS[state.currentTopic].id,rational=topicId==='racionals',fractions=topicId==='fraccionsSentit',operations=topicId==='operacionsRacionals',progressive=rational||fractions||operations;
   if(rational){state.rationalAnswered++;if(ok)state.rationalSolved++;state.rationalDifficultyPoints=Math.max(0,state.rationalDifficultyPoints+(ok?1:-1));}
   if(fractions){state.fractionsAnswered++;if(ok)state.fractionsSolved++;state.fractionsDifficultyPoints=Math.max(0,state.fractionsDifficultyPoints+(ok?1:-1));}
+  if(operations){state.operationsAnswered++;if(ok)state.operationsSolved++;state.operationsDifficultyPoints=Math.max(0,state.operationsDifficultyPoints+(ok?1:-1));}
   if(ok){
     state.correctStreak++;
-    document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ok"><h4>✅ Correcte!</h4>Molt bé. La resposta és correcta.</div>'+(progressive?miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.type):'');
+    document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ok"><h4>✅ Correcte!</h4>Molt bé. La resposta és correcta.</div>'+(progressive?miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.topicId==='operacionsRacionals'?currentEx:currentEx.type):'');
     if(!progressive&&state.correctStreak>=goal)markTopicDone();
   }else{
     state.correctStreak=Math.max(0,state.correctStreak-1);registerError(currentEx,studentAnswer,'practice');
-    document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4><div>La teva resposta: <b style="color:var(--error)">'+String(studentAnswer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+(currentEx.topicId==='racionals'&&currentEx.type===10?'Una resposta possible: ':'')+currentEx.correct+'</b></div>'+miReviewHtml(currentEx)+'<button class="sol-btn" onclick="toggleSolution(this)">📘 Veure explicació</button><div class="solution-box" id="solBox">'+currentEx.solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>'+miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.type)+'</div>';
+    document.getElementById('feedbackArea').innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4><div>La teva resposta: <b style="color:var(--error)">'+String(studentAnswer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+(currentEx.topicId==='racionals'&&currentEx.type===10?'Una resposta possible: ':'')+currentEx.correct+'</b></div>'+miReviewHtml(currentEx)+'<button class="sol-btn" onclick="toggleSolution(this)">📘 Veure explicació</button><div class="solution-box" id="solBox">'+currentEx.solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>'+miTheoryLinkHtml(currentEx.topicId,undefined,currentEx.topicId==='operacionsRacionals'?currentEx:currentEx.type)+'</div>';
   }
   if(progressive&&(state.level===1?solvedCount(topicId)>=goal:answeredCount(topicId)>=goal))markTopicDone();
-  const progress=progressive?(state.level===1?solvedCount(topicId):answeredCount(topicId)):state.correctStreak;document.getElementById('streakFill').style.width=Math.min(100,progress/goal*100)+'%';document.getElementById('streakLabel').textContent=progressive?`${progress}/${goal} ${state.level===1?'encerts acumulats':'respostes'} · dificultat ${rational?state.rationalDifficultyPoints:state.fractionsDifficultyPoints} punts`:state.correctStreak+'/'+goal;
-  const nextBtn=document.getElementById('btnNext');nextBtn.style.display='block';if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';document.getElementById('btnChangeTopic').onclick=()=>['racionals','fraccionsSentit'].includes(topicId)?showCongrats():showHome();setTimeout(function(){try{nextBtn.focus({preventScroll:true});}catch(e){nextBtn.focus();}},40);
+  const progress=progressive?(state.level===1?solvedCount(topicId):answeredCount(topicId)):state.correctStreak;document.getElementById('streakFill').style.width=Math.min(100,progress/goal*100)+'%';document.getElementById('streakLabel').textContent=progressive?`${progress}/${goal} ${state.level===1?'encerts acumulats':'respostes'} · dificultat ${rational?state.rationalDifficultyPoints:fractions?state.fractionsDifficultyPoints:state.operationsDifficultyPoints} punts`:state.correctStreak+'/'+goal;
+  const nextBtn=document.getElementById('btnNext');nextBtn.style.display='block';if(state.exCount>=3)document.getElementById('btnChangeTopic').style.display='block';document.getElementById('btnChangeTopic').onclick=()=>['racionals','fraccionsSentit','operacionsRacionals'].includes(topicId)?showCongrats():showHome();setTimeout(function(){try{nextBtn.focus({preventScroll:true});}catch(e){nextBtn.focus();}},40);
 }
 function toggleSolution(btn){const box=document.getElementById('solBox');box.classList.toggle('show');btn.textContent=box.classList.contains('show')?'Amaga explicació':'📘 Veure explicació'}
 function markTopicDone(){window.MIAnalytics?.complete();const id=TOPICS[state.currentTopic].id;if(!state.done.includes(id))state.done.push(id);saveState();}
-function solvedCount(topicId){return topicId==='racionals'?state.rationalSolved:state.fractionsSolved}
-function answeredCount(topicId){return topicId==='racionals'?state.rationalAnswered:state.fractionsAnswered}
-function nextExercise(){const goal=state.level===1?10:20,topicId=TOPICS[state.currentTopic].id,progressive=['racionals','fraccionsSentit'].includes(topicId),progress=progressive?(state.level===1?solvedCount(topicId):answeredCount(topicId)):state.correctStreak;if(progress>=goal&&state.done.includes(topicId)){showCongrats()}else showExercise()}
+function solvedCount(topicId){return topicId==='racionals'?state.rationalSolved:topicId==='fraccionsSentit'?state.fractionsSolved:state.operationsSolved}
+function answeredCount(topicId){return topicId==='racionals'?state.rationalAnswered:topicId==='fraccionsSentit'?state.fractionsAnswered:state.operationsAnswered}
+function nextExercise(){const goal=state.level===1?10:20,topicId=TOPICS[state.currentTopic].id,progressive=['racionals','fraccionsSentit','operacionsRacionals'].includes(topicId),progress=progressive?(state.level===1?solvedCount(topicId):answeredCount(topicId)):state.correctStreak;if(progress>=goal&&state.done.includes(topicId)){showCongrats()}else showExercise()}
 function showCongrats(){
-  if(['racionals','fraccionsSentit'].includes(TOPICS[state.currentTopic]?.id)){const topicId=TOPICS[state.currentTopic].id,goal=state.level===1?10:20,solved=solvedCount(topicId),answered=answeredCount(topicId),points=topicId==='racionals'?state.rationalDifficultyPoints:state.fractionsDifficultyPoints,progress=state.level===1?solved:answered,met=progress>=goal;document.getElementById('feedbackArea').innerHTML='<div class="congrats"><div class="trophy">'+(met?'🏆':'📊')+'</div><h2>'+(met?'Bloc superat!':'Resum de la pràctica')+'</h2><p>Encerts: <b>'+solved+'</b> · Errors: <b>'+(answered-solved)+'</b> · Respostes: <b>'+answered+'</b></p><p>Objectiu: '+(state.level===1?'10 encerts acumulats':'20 respostes')+' · '+(met?'Assolit':'No assolit')+'</p><p>Punts de dificultat: <b>'+points+'</b></p><button class="btn-primary" onclick="showHome()">Tornar al Sentit Numèric</button>'+(met?'<button class="btn-secondary" onclick="startPractice()">Una altra pràctica</button>':'<button class="btn-secondary" onclick="startPractice()">Continua practicant</button>')+'</div>';document.getElementById('btnNext').style.display='none';document.getElementById('btnChangeTopic').style.display='none';return}
+  if(['racionals','fraccionsSentit','operacionsRacionals'].includes(TOPICS[state.currentTopic]?.id)){const topicId=TOPICS[state.currentTopic].id,goal=state.level===1?10:20,solved=solvedCount(topicId),answered=answeredCount(topicId),points=topicId==='racionals'?state.rationalDifficultyPoints:topicId==='fraccionsSentit'?state.fractionsDifficultyPoints:state.operationsDifficultyPoints,progress=state.level===1?solved:answered,met=progress>=goal;document.getElementById('feedbackArea').innerHTML='<div class="congrats"><div class="trophy">'+(met?'🏆':'📊')+'</div><h2>'+(met?'Bloc superat!':'Resum de la pràctica')+'</h2><p>Encerts: <b>'+solved+'</b> · Errors: <b>'+(answered-solved)+'</b> · Respostes: <b>'+answered+'</b></p><p>Objectiu: '+(state.level===1?'10 encerts acumulats':'20 respostes')+' · '+(met?'Assolit':'No assolit')+'</p><p>Punts de dificultat: <b>'+points+'</b></p><button class="btn-primary" onclick="showHome()">Tornar al Sentit Numèric</button>'+(met?'<button class="btn-secondary" onclick="startPractice()">Una altra pràctica</button>':'<button class="btn-secondary" onclick="startPractice()">Continua practicant</button>')+'</div>';document.getElementById('btnNext').style.display='none';document.getElementById('btnChangeTopic').style.display='none';return}
   const ni=nextTopicIndex(state.currentTopic),next=ni>=0?TOPICS[ni]:null,current=TOPICS[state.currentTopic];const nextTxt=next?((current.course==='2n'&&next.course!=='2n')?'Ampliació opcional: ':'Següent: '):'';document.getElementById('feedbackArea').innerHTML='<div class="congrats"><div class="trophy">🏆</div><h2>Bloc superat!</h2><p>Has completat <b>'+current.name+'</b>.</p><button class="btn-primary" onclick="showHome()">Tornar al Sentit Numèric</button>'+(next?'<button class="btn-secondary" onclick="selectTopic('+ni+')">'+nextTxt+next.name+' →</button>':'')+'</div>';
   document.getElementById('btnNext').style.display='none';document.getElementById('btnChangeTopic').style.display='none';
 }
@@ -3074,21 +3123,22 @@ function startExam(){
   state.examQs=[];state.examLog=[];state.examIdx=0;state.examScore=0;resetVariationSession();
   const selected=miGetSelectedExamIds();
   const examTopics=shuffle(TOPICS.filter(t=>t.course==='2n'&&t.exam2n!==false&&selected.includes(t.id)));
-  const used=new Set(),target=20;
+  const used=new Set(),operationFamilies={},target=20;
   if(examTopics.length){
     const base=Math.floor(target/examTopics.length),extra=target%examTopics.length;
     examTopics.forEach((t,idx)=>{
       const need=base+(idx<extra?1:0);let got=0,tries=0;
       while(got<need&&tries<1000){
         tries++;
-        const ex=t.gen(),sig=t.id+'|'+signatureOf(ex);
-        if(!used.has(sig)){used.add(sig);state.examQs.push({...ex,topicName:t.name});got++}
+        const ex=t.gen(),sig=t.id+'|'+signatureOf(ex),family=ex.familyId;
+        if(t.id==='operacionsRacionals'&&family){const min=Math.min(...window.MIDifficulty.operationsRationalFamilies.map(f=>operationFamilies[f.id]||0));if((operationFamilies[family]||0)>min)continue;}
+        if(!used.has(sig)){used.add(sig);state.examQs.push({...ex,topicName:t.name});if(t.id==='operacionsRacionals'&&family)operationFamilies[family]=(operationFamilies[family]||0)+1;got++}
       }
     });
     let fill=0;
     while(state.examQs.length<target&&fill<3000){
-      const t=examTopics[fill%examTopics.length],ex=t.gen(),sig=t.id+'|'+signatureOf(ex);fill++;
-      if(!used.has(sig)){used.add(sig);state.examQs.push({...ex,topicName:t.name})}
+      const t=examTopics[fill%examTopics.length],ex=t.gen(),sig=t.id+'|'+signatureOf(ex),family=ex.familyId;fill++;
+      if(!used.has(sig)){used.add(sig);state.examQs.push({...ex,topicName:t.name});if(t.id==='operacionsRacionals'&&family)operationFamilies[family]=(operationFamilies[family]||0)+1}
     }
   }
   state.examQs=shuffle(state.examQs);setNavContext('Mode Examen · 2n ESO',true,true);renderExamQ();window.MIAnalytics?.examStart();showScreen('screenExam');
@@ -3116,7 +3166,7 @@ function checkExamOpen(){
 function processExamAnswer(ok,answer){
   const q=state.examQs[state.examIdx];if(ok)state.examScore++;else registerError(q,answer,'exam');
   state.examLog.push({topicId:q.topicId,question:q.question,correct:q.correct,given:answer,ok,type:q.type,review:miReviewPoints(q),solution:[...(q.solution||[])]});
-  document.getElementById('examFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'+(ok?'':('<div>La teva resposta: <b style="color:var(--error)">'+String(answer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+(q.topicId==='racionals'&&q.type===10?'Una resposta possible: ':'')+q.correct+'</b></div>'+miReviewHtml(q)+(['racionals','fraccionsSentit'].includes(q.topicId)?miTheoryLinkHtml(q.topicId,undefined,q.type):'')+'<button class="sol-btn" onclick="toggleExamSolution(this)">📘 Veure explicació</button><div class="solution-box" id="examSolBox">'+(Array.isArray(q.solution)?q.solution:[]).map((s,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div>'))+'</div>';
+  document.getElementById('examFeedback').innerHTML='<div class="feedback-box '+(ok?'ok':'ko')+'"><h4>'+(ok?'✅ Correcte!':'❌ Incorrecte')+'</h4>'+(ok?'':('<div>La teva resposta: <b style="color:var(--error)">'+String(answer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+(q.topicId==='racionals'&&q.type===10?'Una resposta possible: ':'')+q.correct+'</b></div>'+miReviewHtml(q)+(['racionals','fraccionsSentit','operacionsRacionals'].includes(q.topicId)?miTheoryLinkHtml(q.topicId,undefined,q.topicId==='operacionsRacionals'?q:q.type):'')+'<button class="sol-btn" onclick="toggleExamSolution(this)">📘 Veure explicació</button><div class="solution-box" id="examSolBox">'+(Array.isArray(q.solution)?q.solution:[]).map((s,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+s+'</span></div>').join('')+'</div>'))+'</div>';
   const nextExamBtn=document.getElementById('btnNextExam');nextExamBtn.style.display='block';nextExamBtn.textContent=state.examIdx+1<state.examQs.length?'Següent →':'Veure resultat';setTimeout(function(){try{nextExamBtn.focus({preventScroll:true});}catch(e){nextExamBtn.focus();}},40);
 }
 function toggleExamSolution(btn){const box=document.getElementById('examSolBox');if(!box)return;box.classList.toggle('show');if(btn)btn.textContent=box.classList.contains('show')?'Amaga explicació':'📘 Veure explicació'}
@@ -3126,7 +3176,7 @@ function finishExam(){window.MIAnalytics?.examSubmit();
   let html='<div class="exam-summary"><div class="home-header" style="padding-top:0"><h2>📝 Resultat de l’examen</h2><p>Blocs seleccionats: '+TOPICS.filter(t=>miGetSelectedExamIds().includes(t.id)).map(t=>t.name).join(' · ')+'</p></div><div class="exam-score">'+state.examScore+'/'+total+' · '+pct+'%</div>';
   const wrong=state.examLog.filter(x=>!x.ok);
   if(!wrong.length)html+='<div class="feedback-box ok"><h4>🏆 Excel·lent!</h4>No has comès cap error.</div>';
-  else{html+='<h3 style="margin-bottom:8px">Revisió dels errors</h3>';wrong.forEach((x,i)=>{html+='<div class="exam-review"><b>'+(i+1)+'.</b> '+x.question+'<br><span style="color:var(--error)">La teva: <b>'+x.given+'</b></span> · <span style="color:var(--success)">Correcta: <b>'+(x.topicId==='racionals'&&x.type===10?'Una resposta possible: ':'')+x.correct+'</b></span>'+miReviewHtml(x)+(['racionals','fraccionsSentit'].includes(x.topicId)?miTheoryLinkHtml(x.topicId,undefined,x.type):'')+'</div>'})}
+  else{html+='<h3 style="margin-bottom:8px">Revisió dels errors</h3>';wrong.forEach((x,i)=>{html+='<div class="exam-review"><b>'+(i+1)+'.</b> '+x.question+'<br><span style="color:var(--error)">La teva: <b>'+x.given+'</b></span> · <span style="color:var(--success)">Correcta: <b>'+(x.topicId==='racionals'&&x.type===10?'Una resposta possible: ':'')+x.correct+'</b></span>'+miReviewHtml(x)+(['racionals','fraccionsSentit','operacionsRacionals'].includes(x.topicId)?miTheoryLinkHtml(x.topicId,undefined,x):'')+'</div>'})}
   html+='<button class="btn-primary" onclick="showHome()">Tornar al Sentit Numèric</button></div>';
   document.getElementById('examContent').innerHTML=html;document.getElementById('examOptions').innerHTML='';document.getElementById('examOpenWrap').style.display='none';document.getElementById('examFeedback').innerHTML='';document.getElementById('btnNextExam').style.display='none';
 }
@@ -3142,7 +3192,7 @@ function showErrors(){
       const idx=errors.length-1-rev,solId='savedSol_'+idx;
       html+='<div class="app-card" style="border-left:4px solid var(--error)"><h3>❌ '+e.topicName+' · Tipus '+e.type+'</h3><div style="line-height:1.55;margin:8px 0">'+e.question+'</div><div style="font-size:.84rem"><span style="color:var(--error)">La teva: <b>'+String(e.answer??'—')+'</b></span><br><span style="color:var(--success)">Correcta: <b>'+String(e.correct??'—')+'</b></span></div>'+miReviewHtml(e);
       if(e.solution&&e.solution.length)html+='<button class="sol-btn" onclick="toggleSavedSolution(\''+solId+'\',this)">📘 Veure explicació</button><div class="solution-box" id="'+solId+'">'+e.solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>';
-      if(['racionals','fraccionsSentit'].includes(e.topicId))html+=miTheoryLinkHtml(e.topicId,undefined,e.type);
+      if(['racionals','fraccionsSentit','operacionsRacionals'].includes(e.topicId))html+=miTheoryLinkHtml(e.topicId,undefined,e);
       html+='<button class="btn-secondary" style="border-color:var(--error);color:var(--error)" onclick="deleteSavedError('+idx+')">🗑️ Esborra aquest error</button></div>';
     });
     html+='<button class="btn-secondary" style="border-color:var(--error);color:var(--error)" onclick="clearSavedErrors()">🗑️ Esborra tots els errors</button>';
