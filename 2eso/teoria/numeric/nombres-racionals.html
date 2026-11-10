@@ -14,253 +14,783 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/images/apple-touch-icon.png">
 <style>
 :root{
-  --bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--primary-dark:#3a6fd8;
-  --text:#2c3e50;--muted:#718096;--border:#dce3ed;--soft:#eaf1fd;
-  --success:#248a58;--warn:#a96a00;--shadow:0 4px 18px rgba(33,52,78,.08);
+  --bg:#f7f9fc;
+  --card:#fff;
+  --primary:#5b8dee;
+  --pd:#3a6fd8;
+  --ok:#34c97e;
+  --err:#e05c5c;
+  --warn:#f5a623;
+  --text:#2c3e50;
+  --muted:#7f8c9a;
+  --border:#dce3ed;
+  --sh:0 2px 12px rgba(0,0,0,.08);
+  --soft:#eaf1fd;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  line-height:1.6;
+}
 a{color:inherit}
-.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-.topbar__inner{max-width:1050px;margin:auto;padding:10px 20px;display:flex;align-items:center;gap:8px;overflow-x:auto;white-space:nowrap}
-.crumb{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:700;padding:5px 8px;border:1px solid var(--border);border-radius:8px;background:#fff}
-.crumb:hover{color:var(--primary-dark);border-color:var(--primary)}
-.sep{color:#b8c3d1;font-size:.8rem}
-.hero{background:linear-gradient(180deg,#eef4ff 0%,#f7f9fc 100%);border-bottom:1px solid #e3eaf5}
-.hero__inner{max-width:900px;margin:auto;padding:54px 22px 42px;text-align:center}
-.eyebrow{display:inline-block;padding:5px 11px;border-radius:999px;background:#fff;border:1px solid #ccdaf3;color:var(--primary-dark);font-size:.78rem;font-weight:800;margin-bottom:12px}
-h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin:0;color:var(--primary-dark)}
-.hero p{max-width:720px;margin:16px auto 0;color:#536477;font-size:1.02rem}
-.hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;border-radius:12px;padding:11px 16px;font-weight:800;font-size:.9rem;transition:.18s}
-.btn--primary{background:var(--primary);color:white;border:2px solid var(--primary)}
-.btn--primary:hover{background:var(--primary-dark);border-color:var(--primary-dark);transform:translateY(-1px)}
-.btn--secondary{background:#fff;color:var(--primary-dark);border:2px solid var(--primary)}
-.btn--secondary:hover{background:var(--soft);transform:translateY(-1px)}
-.btn--ghost{background:#fff;color:var(--muted);border:1px solid var(--border)}
-main{max-width:900px;margin:auto;padding:28px 20px 48px}
-.intro{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);margin-bottom:18px}
-.intro p{margin:0}
-.toc{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin:18px 0 24px}
-.toc strong{display:block;color:var(--primary-dark);margin-bottom:8px}
-.toc__links{display:flex;flex-wrap:wrap;gap:8px}
-.toc a{text-decoration:none;color:#52667e;background:#f8fafc;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
-.toc a:hover{color:var(--primary-dark);border-color:var(--primary)}
-.theory-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;margin:16px 0;box-shadow:var(--shadow)}
-.section-kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--primary);font-weight:900;margin-bottom:3px}
-h2{font-size:1.4rem;line-height:1.25;color:var(--primary-dark);margin:0 0 10px}
-h3{line-height:1.3}
-.theory-card p{margin:0 0 12px}
-.clean-list{padding-left:1.2rem;margin:10px 0 0}
-.clean-list li{margin:6px 0}
-.callout{background:var(--soft);border-left:4px solid var(--primary);border-radius:10px;padding:12px 14px;margin-top:14px;font-weight:650}
-.math-table{width:100%;border-collapse:collapse;margin:14px 0 4px;font-size:.92rem}
-.math-table th,.math-table td{border:1px solid var(--border);padding:9px 10px;text-align:left}
-.math-table th{background:#f4f7fb;color:var(--primary-dark)}
-.examples-wrap{margin:28px 0}
-.examples-wrap>h2{margin-bottom:12px}
-.example-card{background:#f0f7ff;border:1px solid #cee0f5;border-left:5px solid #2980b9;border-radius:16px;padding:20px 22px;margin:14px 0}
-.example-card__tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#2473a5;font-weight:900}
-.example-card h3{margin:3px 0 8px;color:#245f89}
-.example-card p{margin:0 0 8px}
-.example-card ol{margin:8px 0 10px;padding-left:1.4rem}
-.example-card li{margin:5px 0}
-.result{background:#fff;border:1px solid #c5daef;border-radius:10px;padding:10px 12px;color:var(--primary-dark);font-weight:800}
-.mistakes-wrap{background:#fffaf0;border:1px solid #efd6a6;border-radius:18px;padding:22px;margin:26px 0}
-.mistakes-wrap>h2{color:#946015}
-.mistake{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #f0dfbd}
-.mistake:last-child{border-bottom:0;padding-bottom:0}
-.mistake__icon{font-size:1.2rem}
-.mistake h3{font-size:.98rem;margin:0 0 3px;color:#7f571a}
-.mistake p{margin:0;font-size:.9rem}
-.summary{background:#f0fbf5;border:1px solid #bfe5cf;border-radius:18px;padding:22px;margin:26px 0}
-.summary h2{color:var(--success)}
-.summary ul{margin:8px 0 0;padding-left:1.2rem}
-.practice-panel{background:#fff;border:2px solid #cbdaf2;border-radius:20px;padding:24px;text-align:center;margin:28px 0 18px;box-shadow:var(--shadow)}
-.practice-panel h2{margin-bottom:6px}
-.practice-panel p{margin:0 auto 16px;color:var(--muted);max-width:620px}
-.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
-.pager__link{display:flex;align-items:center;text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:12px;padding:11px 13px;color:var(--primary-dark);font-size:.84rem;font-weight:800}
-.pager__link--next{justify-content:flex-end;text-align:right}
-.footer{border-top:1px solid var(--border);background:#fff;color:var(--muted);text-align:center;padding:24px 18px;font-size:.8rem}
+.top-nav{
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  box-shadow:var(--sh);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.nav-link{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:.83rem;
+  font-weight:650;
+  padding:5px 8px;
+  border-radius:8px;
+  white-space:nowrap;
+}
+.nav-link:hover{background:var(--soft);color:var(--primary)}
+.nav-title{
+  flex:1;
+  min-width:0;
+  font-size:1rem;
+  font-weight:750;
+  color:var(--primary);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.wrap{
+  width:min(780px,calc(100% - 32px));
+  margin:0 auto;
+  padding:30px 0 54px;
+}
+.hero{text-align:center;padding:10px 8px 22px}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:var(--soft);
+  color:var(--primary);
+  border-radius:999px;
+  padding:5px 11px;
+  font-size:.75rem;
+  font-weight:750;
+  margin-bottom:12px;
+}
+.hero h1{
+  font-size:clamp(1.7rem,4vw,2.25rem);
+  color:var(--primary);
+  line-height:1.15;
+  margin-bottom:9px;
+}
+.hero p{color:var(--muted);font-size:.96rem;max-width:650px;margin:0 auto}
+.hero-actions{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border-radius:12px;
+  padding:12px 20px;
+  text-decoration:none;
+  font-size:.91rem;
+  font-weight:700;
+  transition:.18s ease;
+}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--pd);transform:translateY(-1px)}
+.btn-secondary{background:var(--card);color:var(--primary);border:2px solid var(--primary)}
+.btn-secondary:hover{background:var(--soft)}
+.quick-nav{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin:4px 0 22px;
+}
+.quick-nav a{
+  text-decoration:none;
+  text-align:center;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:10px 7px;
+  color:var(--muted);
+  font-size:.78rem;
+  font-weight:700;
+  box-shadow:0 1px 5px rgba(0,0,0,.04);
+}
+.quick-nav a:hover{border-color:var(--primary);color:var(--primary);background:var(--soft)}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:16px;
+  box-shadow:var(--sh);
+}
+.card h2{
+  font-size:1.18rem;
+  color:var(--primary);
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.card h3{font-size:.96rem;margin:18px 0 7px}
+.card p + p{margin-top:9px}
+.card ul{padding-left:20px}
+.card p + ul{margin-top:9px}
+.example ol{padding-left:22px;margin:8px 0}
+.example li + li{margin-top:5px}
+.example + .tip{margin-top:0}
+.btn[hidden]{display:none}
+main [id]{scroll-margin-top:70px}
+.callout{
+  background:var(--soft);
+  border-left:4px solid var(--primary);
+  border-radius:10px;
+  padding:13px 15px;
+  margin:13px 0;
+  font-size:.91rem;
+}
+.example{
+  background:#fbfcfe;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px 16px;
+  margin:12px 0;
+}
+.example-label{
+  display:inline-block;
+  font-size:.72rem;
+  font-weight:800;
+  color:var(--primary);
+  background:var(--soft);
+  border-radius:999px;
+  padding:2px 9px;
+  margin-bottom:7px;
+}
+.math{
+  font-family:'Courier New',monospace;
+  font-weight:700;
+  color:var(--pd);
+  line-height:1.8;
+}
+.steps{
+  counter-reset:pas;
+  display:grid;
+  gap:8px;
+  margin-top:12px;
+}
+.step{
+  position:relative;
+  padding:10px 12px 10px 42px;
+  background:#fbfcfe;
+  border:1px solid var(--border);
+  border-radius:10px;
+  font-size:.9rem;
+}
+.step:before{
+  counter-increment:pas;
+  content:counter(pas);
+  position:absolute;
+  left:11px;
+  top:9px;
+  width:22px;
+  height:22px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-size:.72rem;
+  font-weight:800;
+}
+.symbols{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin-top:12px;
+  font-size:.88rem;
+}
+.symbols th,.symbols td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left}
+.symbols tr:last-child td{border-bottom:0}
+.symbols th{background:var(--soft);color:var(--primary);font-weight:750}
+.tip{
+  background:#fffbea;
+  border:1px solid #f5e0a0;
+  border-radius:11px;
+  padding:12px 14px;
+  margin-top:13px;
+  font-size:.88rem;
+  color:#785800;
+}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.problem{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:13px;
+  background:#fbfcfe;
+  font-size:.88rem;
+}
+.problem strong{display:block;color:var(--primary);margin-bottom:5px}
+.mistakes{
+  background:#fff8f8;
+  border:1px solid #f0b0b0;
+}
+.mistakes h2{color:var(--err)}
+.mistakes li+li{margin-top:6px}
+.check details{
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:#fbfcfe;
+  padding:12px 14px;
+  margin-top:9px;
+}
+.check summary{cursor:pointer;font-weight:650;color:var(--text)}
+.answer{
+  margin-top:9px;
+  padding-top:9px;
+  border-top:1px solid var(--border);
+  color:#1a7a4a;
+  font-size:.9rem;
+}
+.final-cta{
+  background:linear-gradient(135deg,#edf3ff,#fff);
+  border:1px solid #cad9f7;
+  border-radius:18px;
+  padding:24px;
+  text-align:center;
+  margin-top:20px;
+}
+.final-cta h2{color:var(--primary);font-size:1.25rem;margin-bottom:6px}
+.final-cta p{color:var(--muted);font-size:.9rem;margin-bottom:15px}
+.final-cta .hero-actions{margin-top:0}
+.footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:.76rem;
+  padding:4px 0 25px;
+}
 @media(max-width:650px){
-  .topbar__inner{padding:8px 10px}
-  .hero__inner{padding:38px 16px 32px}
-  main{padding:20px 13px 38px}
-  .theory-card,.intro{padding:19px 17px}
+  .top-nav{padding:10px 10px;gap:4px}
+  .nav-link{padding:5px 5px;font-size:.75rem}
+  .nav-main-label,.sense-label{display:none}
+  .nav-title{font-size:.86rem}
+  .wrap{width:min(100% - 20px,780px);padding-top:20px}
+  .quick-nav{grid-template-columns:1fr 1fr}
+  .card{padding:17px}
+  .problem-grid{grid-template-columns:1fr}
   .hero-actions{flex-direction:column}
   .btn{width:100%}
-  .math-table{font-size:.82rem}
-  .math-table th,.math-table td{padding:7px}
-  .pager{grid-template-columns:1fr}
 }
 </style>
 <style id="mi-theory-standard">
 /* Mates Interactives · patró mestre de teoria */
-.pager{grid-template-columns:1fr auto 1fr!important}.pager__link--index{justify-content:center;text-align:center}.mi-theory-index{font-weight:800}.extension-standard{display:inline-block;margin:6px 0 0;background:#fff3d6;color:#8a5d00;border:1px solid #efd48b;border-radius:999px;padding:4px 9px;font-size:.72rem;font-weight:800}
-@media(max-width:650px){.pager{grid-template-columns:1fr 1fr!important}.pager__link--index{grid-column:1/-1;grid-row:2}.pager>span:empty{display:block}}
+.mi-theory-index{display:inline-flex!important;align-items:center;justify-content:center;gap:6px;text-decoration:none;font-weight:750}
+.summary-master{background:var(--card,#fff);border:1px solid var(--border,#dce3ed);border-left:5px solid var(--primary,#5b8dee);border-radius:15px;padding:18px 20px;margin:16px 0;box-shadow:var(--sh,0 2px 12px rgba(0,0,0,.08))}.summary-master h2{margin:0 0 8px;color:var(--primary,#5b8dee);font-size:1.15rem}.summary-master ul{padding-left:21px}.summary-master li{margin:5px 0}
+.pager-master{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:26px 0 8px}.pager-master a,.pager-master span{display:block;text-decoration:none;border:1px solid var(--border,#dce3ed);background:#fff;border-radius:10px;padding:9px 11px;font-size:.84rem;font-weight:700;color:var(--primary,#5b8dee)}.pager-master .prev{text-align:left}.pager-master .idx{text-align:center}.pager-master .next{text-align:right}.pager-master .disabled{color:var(--muted,#7f8c9a);opacity:.6}
+.extension-standard{display:inline-block;margin:6px 0 0;background:#fff3d6;color:#8a5d00;border:1px solid #efd48b;border-radius:999px;padding:4px 9px;font-size:.72rem;font-weight:800}
+@media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
 </style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
 </head>
 <body>
-<header class="topbar">
-  <nav class="topbar__inner" aria-label="Navegació">
-    <a class="crumb" href="../../../index.html">🏠 Mates Interactives</a>
-    <span class="sep">›</span>
-    <a class="crumb" href="../../index.html">📘 2n ESO</a>
-    <span class="sep">›</span>
-    <a class="crumb" href="../../sentit-numeric.html">🔢 Sentit Numèric</a>
-  </nav>
+<nav aria-label="Navegació principal" class="top-nav">
+<a class="nav-link" href="../../../index.html" title="Inici de Mates Interactives">🏠 <span class="nav-main-label">Mates Interactives</span></a>
+<a class="nav-link" href="../../index.html" title="Matemàtiques de 2n ESO">📘 2n ESO</a>
+<a class="nav-link" href="../../sentit-numeric.html" title="Sentit Numèric de 2n ESO">🔢 <span class="sense-label">Sentit Numèric</span></a>
+<a class="nav-link mi-theory-index" href="index.html">📚 Teoria</a>
+<div class="nav-title">🔢 Nombres racionals</div>
+</nav>
+<main class="wrap">
+<header class="hero">
+<div class="eyebrow">2n ESO · Sentit numèric</div>
+<h1>🔢 Nombres racionals</h1>
+<p>Fraccions, decimals i percentatges són diferents maneres d'expressar nombres racionals. Aprèn a transformar-los, comparar-los i situar-los a la recta numèrica.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="../../sentit-numeric.html?topic=racionals&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a>
+<a class="btn btn-secondary" href="../../sentit-numeric.html?topic=racionals&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a>
+<a class="btn btn-secondary" href="#que-son">📘 Comença la teoria</a>
+<a id="returnPractice" class="btn btn-secondary" href="../../sentit-numeric.html" hidden>← Tornar a l’exercici</a>
+</div>
 </header>
+<nav class="quick-nav" aria-label="Continguts de la teoria">
+<a href="#que-son">1. Què són?</a>
+<a href="#representacions">2. Representacions</a>
+<a href="#decimals">3. Decimals</a>
+<a href="#comparar">4. Comparar</a>
+<a href="#recta">5. Recta numèrica</a>
+<a href="#exemples">Exemples resolts</a>
+<a href="#errors">Errors freqüents</a>
+<a href="#resum">Resum</a>
+</nav>
 
-<section class="hero">
-  <div class="hero__inner">
-    <span class="eyebrow">Teoria · Sentit Numèric · 2n ESO</span>
-    <h1>Nombres racionals</h1>
-    <p>Fraccions, decimals i percentatges són diferents maneres d'expressar nombres racionals. Aprèn a transformar-los, comparar-los i situar-los a la recta numèrica</p>
-    <div class="hero-actions">
-      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=racionals&level=1&practice=1">🟢 Practicar · Guiat</a>
-      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=racionals&level=2&practice=1">🟠 Practicar · Autònom</a>
-      <a class="btn btn--ghost" href="../../sentit-numeric.html?topic=racionals">Veure el bloc →</a><a id="returnPractice" class="btn btn--ghost" href="../../sentit-numeric.html" hidden>← Tornar a l’exercici</a>
-    </div>
-  </div>
+<nav class="quick-nav" id="procediments-racionals" aria-label="Procediments dels 18 tipus d’exercici">
+<a href="#fraccio-a-decimal">Fracció a decimal</a>
+<a href="#decimal-a-fraccio">Decimal a fracció irreductible</a>
+<a href="#fraccio-a-percentatge">Fracció a percentatge</a>
+<a href="#percentatge-a-decimal">Percentatge a decimal</a>
+<a href="#tres-representacions">Comprovar una cadena equivalent</a>
+<a href="#comparar-fraccio-decimal">Comparar fracció i decimal</a>
+<a href="#comparar-percentatge-fraccio">Comparar percentatge i fracció</a>
+<a href="#ordenar-representacions">Ordenar quatre representacions</a>
+<a href="#llegir-recta">Llegir una recta graduada</a>
+<a href="#valor-intermedi">Trobar un racional estrictament intermedi</a>
+<a href="#identificar-la-forma">Identificar la forma escrita</a>
+<a href="#proporcio-de-cada">Interpretar “de cada”</a>
+<a href="#detectar-equivalencia-falsa">Detectar una equivalència incorrecta</a>
+<a href="#comparar-proporcions">Comparar proporcions de grups</a>
+<a href="#decimal-periodic-exacte">Reconèixer un decimal periòdic</a>
+<a href="#llindar-minim">Calcular incorporacions mínimes</a>
+<a href="#composicio-amb-traspassos">Reconstruir una composició després de traspassos</a>
+<a href="#interval-amb-condicions">Construir una fracció amb dues restriccions</a>
+</nav>
+
+<section class="card" id="que-son">
+<h2>🔢 1. Què és un nombre racional?</h2>
+<p>A 2n d'ESO el treball amb nombres fa un pas endavant: ja no n'hi ha prou amb saber operar. Has de ser capaç d'<strong>interpretar una quantitat en diferents formes</strong>, escollir la representació més útil i comprovar que el resultat tingui sentit.</p>
+<p>Un <strong>nombre racional</strong> és qualsevol nombre que es pot escriure com una fracció <strong>a/b</strong>, amb <strong>b ≠ 0</strong>. Això inclou els enters, les fraccions, els decimals exactes i els decimals periòdics.</p>
+<ul>
+<li><strong>5</strong> és racional perquè es pot escriure com 5/1.</li>
+<li><strong>−3/4</strong> és racional perquè ja està escrit com una fracció.</li>
+<li><strong>0,25</strong> és racional perquè 0,25 = 25/100 = 1/4.</li>
+<li><strong>0,333…</strong> és racional perquè és un decimal periòdic i equival a 1/3.</li>
+</ul>
+<div class="callout">Idea clau: un mateix nombre racional pot tenir moltes representacions diferents, però totes indiquen la mateixa quantitat.</div>
 </section>
 
-<main>
-  <div class="intro">
-    <p>A 2n d'ESO el treball amb nombres fa un pas endavant: ja no n'hi ha prou amb saber operar. Has de ser capaç d'<strong>interpretar una quantitat en diferents formes</strong>, escollir la representació més útil i comprovar que el resultat tingui sentit.</p>
-  </div>
+<section class="card" id="representacions">
+<h2>🔄 2. Fracció, decimal i percentatge</h2>
+<p>A 2n d'ESO és important passar amb flexibilitat d'una representació a una altra. L'objectiu no és només aplicar una regla, sinó escollir la forma que faci més fàcil interpretar o comparar la quantitat.</p>
+<ul>
+<li><strong>Fracció → decimal:</strong> divideix el numerador entre el denominador.</li>
+<li><strong>Decimal → fracció:</strong> escriu-lo sobre 10, 100, 1000… segons les xifres decimals i simplifica.</li>
+<li><strong>Decimal → percentatge:</strong> pensa quantes centèsimes representa o multiplica per 100.</li>
+<li><strong>Percentatge → decimal:</strong> divideix entre 100.</li>
+</ul>
+<table class="symbols">
+  <thead><tr><th>Representació</th><th>Exemple</th><th>Com interpretar-la</th></tr></thead>
+  <tbody>
+    <tr><td>Fracció</td><td>3/5</td><td>3 ÷ 5</td></tr>
+    <tr><td>Decimal</td><td>0,6</td><td>sis dècimes</td></tr>
+    <tr><td>Percentatge</td><td>60%</td><td>60 de cada 100</td></tr>
+  </tbody>
+</table>
+</section>
 
-  <nav class="toc" aria-label="Índex de la teoria">
-    <strong>En aquesta pàgina</strong>
-    <div class="toc__links">
-      <a href="#que-son">Què és un nombre racional?</a><a href="#representacions">Fracció, decimal i percentatge</a><a href="#decimals">Decimals exactes i periòdics</a><a href="#comparar">Comparar i ordenar racionals</a><a href="#recta">La recta numèrica</a>
-      <a href="#exemples">Exemples resolts</a><a href="#procediments-racionals">Procediments T1–T18</a>
-      <a href="#errors">Errors habituals</a>
-      <a href="#resum">Resum</a>
-    </div>
-  </nav>
+<section class="card" id="decimals">
+<h2>🔁 3. Decimals exactes i periòdics</h2>
+<p>Quan dividim el numerador pel denominador, el decimal pot acabar o pot repetir una seqüència de xifres indefinidament. Tots dos casos continuen sent nombres racionals.</p>
+<ul>
+<li><strong>Decimal exacte:</strong> acaba, com 3/8 = 0,375.</li>
+<li><strong>Decimal periòdic:</strong> té una part que es repeteix, com 2/3 = 0,666…</li>
+<li>Un decimal infinit que no és periòdic ja no és racional; això s'estudiarà amb més profunditat més endavant.</li>
+</ul>
+<div class="callout">No confonguis «té moltes xifres decimals» amb «és irracional». Si les xifres es repeteixen periòdicament, el nombre és racional.</div>
+</section>
 
+<section class="card" id="comparar">
+<h2>⚖️ 4. Comparar i ordenar racionals</h2>
+<p>Per comparar nombres escrits de maneres diferents, porta'ls temporalment a una representació comuna. Sovint el decimal o el percentatge permeten veure ràpidament quin és més gran.</p>
+<ul>
+<li>Compara primer el <strong>signe</strong>: qualsevol nombre positiu és més gran que qualsevol nombre negatiu.</li>
+<li>Si tots són positius, pots convertir-los a decimals o a fraccions equivalents.</li>
+<li>Amb nombres negatius, el que està <strong>més a l'esquerra</strong> a la recta numèrica és el més petit.</li>
+<li>No comparis només numeradors o denominadors si les fraccions tenen denominadors diferents.</li>
+</ul>
+</section>
 
-        <section class="theory-card" id="que-son">
-          <div class="section-kicker">Concepte clau</div>
-          <h2>Què és un nombre racional?</h2>
-          <p>Un <strong>nombre racional</strong> és qualsevol nombre que es pot escriure com una fracció <strong>a/b</strong>, amb <strong>b ≠ 0</strong>. Això inclou els enters, les fraccions, els decimals exactes i els decimals periòdics.</p>
-          <ul class="clean-list"><li><strong>5</strong> és racional perquè es pot escriure com 5/1.</li><li><strong>−3/4</strong> és racional perquè ja està escrit com una fracció.</li><li><strong>0,25</strong> és racional perquè 0,25 = 25/100 = 1/4.</li><li><strong>0,333…</strong> és racional perquè és un decimal periòdic i equival a 1/3.</li></ul>
+<section class="card" id="recta">
+<h2>📏 5. La recta numèrica</h2>
+<p>La recta numèrica ajuda a interpretar l'ordre i la distància entre nombres. Un nombre és més gran com més a la dreta està. Entre dos nombres racionals sempre podem trobar altres nombres racionals.</p>
+<ul>
+<li>0 separa els nombres positius dels negatius.</li>
+<li>1/2, 0,5 i 50% ocupen exactament el mateix punt.</li>
+<li>−0,4 està a l'esquerra de −0,2; per tant −0,4 &lt; −0,2.</li>
+<li>La distància fins al zero correspon al valor absolut del nombre.</li>
+</ul>
+</section>
 
-          <div class="callout">Idea clau: un mateix nombre racional pot tenir moltes representacions diferents, però totes indiquen la mateixa quantitat.</div>
-        </section>
+<div id="procediments-detall">
+<section class="card" id="fraccio-a-decimal">
+<h2>Fracció a decimal</h2>
+<p>Divideix el numerador pel denominador. El quocient conserva el valor de la fracció.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>Interpreta −7/8 com −7 ÷ 8.</li>
+<li>Calcula el quocient: −7 ÷ 8 = −0,875.</li>
+<li>Mantén el signe negatiu.</li>
+</ol>
+<p><strong>Comprovació:</strong> Multiplica 0,875 × 8 = 7 i recupera el valor absolut del numerador.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Canviar el signe o invertir la divisió.</p>
+</section>
 
-        <section class="theory-card" id="representacions">
-          <div class="section-kicker">Concepte clau</div>
-          <h2>Fracció, decimal i percentatge</h2>
-          <p>A 2n d'ESO és important passar amb flexibilitat d'una representació a una altra. L'objectiu no és només aplicar una regla, sinó escollir la forma que faci més fàcil interpretar o comparar la quantitat.</p>
-          <ul class="clean-list"><li><strong>Fracció → decimal:</strong> divideix el numerador entre el denominador.</li><li><strong>Decimal → fracció:</strong> escriu-lo sobre 10, 100, 1000… segons les xifres decimals i simplifica.</li><li><strong>Decimal → percentatge:</strong> pensa quantes centèsimes representa o multiplica per 100.</li><li><strong>Percentatge → decimal:</strong> divideix entre 100.</li></ul>
-          <table class="math-table">
-          <thead><tr><th>Representació</th><th>Exemple</th><th>Com interpretar-la</th></tr></thead>
-          <tbody>
-            <tr><td>Fracció</td><td>3/5</td><td>3 ÷ 5</td></tr>
-            <tr><td>Decimal</td><td>0,6</td><td>sis dècimes</td></tr>
-            <tr><td>Percentatge</td><td>60%</td><td>60 de cada 100</td></tr>
-          </tbody>
-        </table>
+<section class="card" id="decimal-a-fraccio">
+<h2>Decimal a fracció irreductible</h2>
+<p>Escriu un decimal exacte sobre una potència de deu i redueix-lo.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>0,375 té tres xifres decimals: 375/1000.</li>
+<li>Calcula MCD(375,1000)=125.</li>
+<li>Divideix tots dos termes per 125: 3/8.</li>
+</ol>
+<p><strong>Comprovació:</strong> Comprova 3 ÷ 8 = 0,375 i que MCD(3,8)=1.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Aturar-se a 375/1000 sense simplificar, o dividir només un terme.</p>
+</section>
 
-        </section>
+<section class="card" id="fraccio-a-percentatge">
+<h2>Fracció a percentatge</h2>
+<p>Converteix a decimal i multiplica per cent, o busca centèsimes equivalents.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>5/4 = 1,25.</li>
+<li>1,25 × 100 = 125.</li>
+<li>Afegeix el símbol de percentatge: 125%.</li>
+</ol>
+<p><strong>Comprovació:</strong> 125% és més que 100%, com correspon a una fracció superior a 1.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Escriure 1,25% sense multiplicar per 100.</p>
+</section>
 
-        <section class="theory-card" id="decimals">
-          <div class="section-kicker">Concepte clau</div>
-          <h2>Decimals exactes i periòdics</h2>
-          <p>Quan dividim el numerador pel denominador, el decimal pot acabar o pot repetir una seqüència de xifres indefinidament. Tots dos casos continuen sent nombres racionals.</p>
-          <ul class="clean-list"><li><strong>Decimal exacte:</strong> acaba, com 3/8 = 0,375.</li><li><strong>Decimal periòdic:</strong> té una part que es repeteix, com 2/3 = 0,666…</li><li>Un decimal infinit que no és periòdic ja no és racional; això s'estudiarà amb més profunditat més endavant.</li></ul>
+<section class="card" id="percentatge-a-decimal">
+<h2>Percentatge a decimal</h2>
+<p>Un percentatge és una quantitat referida a 100: divideix per 100.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>Escriu 12,5% com 12,5/100.</li>
+<li>Divideix: 12,5 ÷ 100 = 0,125.</li>
+</ol>
+<p><strong>Comprovació:</strong> El decimal és menor que 1 perquè el percentatge és menor que 100%.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Desplaçar la coma cap a la dreta.</p>
+</section>
 
-          <div class="callout">No confonguis «té moltes xifres decimals» amb «és irracional». Si les xifres es repeteixen periòdicament, el nombre és racional.</div>
-        </section>
+<section class="card" id="tres-representacions">
+<h2>Comprovar una cadena equivalent</h2>
+<p>Comprova per parelles que les tres expressions tenen el mateix valor.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>3/5 = 0,6 perquè 3 ÷ 5 = 0,6.</li>
+<li>0,6 = 60% perquè 0,6 × 100 = 60.</li>
+<li>La cadena 3/5 = 0,6 = 60% és correcta.</li>
+</ol>
+<p><strong>Comprovació:</strong> Si un únic terme no coincideix, la cadena sencera és falsa.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Donar per bona una cadena quan només coincideixen dues formes.</p>
+</section>
 
-        <section class="theory-card" id="comparar">
-          <div class="section-kicker">Concepte clau</div>
-          <h2>Comparar i ordenar racionals</h2>
-          <p>Per comparar nombres escrits de maneres diferents, porta'ls temporalment a una representació comuna. Sovint el decimal o el percentatge permeten veure ràpidament quin és més gran.</p>
-          <ul class="clean-list"><li>Compara primer el <strong>signe</strong>: qualsevol nombre positiu és més gran que qualsevol nombre negatiu.</li><li>Si tots són positius, pots convertir-los a decimals o a fraccions equivalents.</li><li>Amb nombres negatius, el que està <strong>més a l'esquerra</strong> a la recta numèrica és el més petit.</li><li>No comparis només numeradors o denominadors si les fraccions tenen denominadors diferents.</li></ul>
+<section class="card" id="comparar-fraccio-decimal">
+<h2>Comparar fracció i decimal</h2>
+<p>Expressa el decimal com a fracció amb denominador positiu i compara per productes creuats.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>0,67 = 67/100.</li>
+<li>Compara 2/3 amb 67/100: 2×100=200 i 67×3=201.</li>
+<li>Com que 200&lt;201, 2/3&lt;0,67.</li>
+</ol>
+<p><strong>Comprovació:</strong> Els productes creuats preserven l’ordre perquè els denominadors són positius.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Arrodonir 2/3 a 0,67 i declarar empat.</p>
+</section>
 
+<section class="card" id="comparar-percentatge-fraccio">
+<h2>Comparar percentatge i fracció</h2>
+<p>Converteix el percentatge a fracció i compara exactament amb la raó donada.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>Per a 58%, escriu 58/100.</li>
+<li>Per comparar amb 3/5, calcula 58×5=290 i 3×100=300.</li>
+<li>Com que 290&lt;300, 58%&lt;3/5.</li>
+</ol>
+<p><strong>Comprovació:</strong> Si els productes són iguals, les proporcions són iguals.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Comparar 58 amb 3 sense tenir en compte les unitats i els denominadors.</p>
+</section>
 
-        </section>
+<section class="card" id="ordenar-representacions">
+<h2>Ordenar quatre representacions</h2>
+<p>Converteix cada valor a una forma comuna, després ordena els valors exactes.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>Per a 1/4, 0,3, 45% i 1/2, escriu 0,25; 0,30; 0,45; 0,50.</li>
+<li>Ordena els decimals de menor a major.</li>
+<li>Recupera les escriptures inicials: 1/4 &lt; 0,3 &lt; 45% &lt; 1/2.</li>
+</ol>
+<p><strong>Comprovació:</strong> Substitueix cada forma per un valor equivalent abans de comparar.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Ordenar pel numerador, pel denominador o pel nombre de xifres.</p>
+</section>
 
-        <section class="theory-card" id="recta">
-          <div class="section-kicker">Concepte clau</div>
-          <h2>La recta numèrica</h2>
-          <p>La recta numèrica ajuda a interpretar l'ordre i la distància entre nombres. Un nombre és més gran com més a la dreta està. Entre dos nombres racionals sempre podem trobar altres nombres racionals.</p>
-          <ul class="clean-list"><li>0 separa els nombres positius dels negatius.</li><li>1/2, 0,5 i 50% ocupen exactament el mateix punt.</li><li>−0,4 està a l'esquerra de −0,2; per tant −0,4 &lt; −0,2.</li><li>La distància fins al zero correspon al valor absolut del nombre.</li></ul>
+<section class="card" id="llegir-recta">
+<h2>Llegir una recta graduada</h2>
+<p>Identifica el valor dels extrems i compta divisions iguals des del zero.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>La recta va de 0 a 1 i té cinc intervals iguals.</li>
+<li>Cada interval val 1/5.</li>
+<li>El punt C, tercer des de zero, representa 3/5.</li>
+</ol>
+<p><strong>Comprovació:</strong> Comprova que el punt està entre 0 i 1 i que cada marca avança una cinquena part.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Comptar les marques en lloc dels intervals.</p>
+</section>
 
+<section class="card" id="valor-intermedi">
+<h2>Trobar un racional estrictament intermedi</h2>
+<p>Qualsevol nombre racional que compleixi les dues desigualtats estrictes és correcte.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>Per a (0,2; 0,4), cal que 0,2 &lt; x &lt; 0,4.</li>
+<li>0,25 compleix les dues cotes. També ho fan 25% i 1/4.</li>
+<li>Els extrems 0,2 i 0,4 queden exclosos.</li>
+</ol>
+<p><strong>Comprovació:</strong> 0,2 &lt; 1/4 &lt; 0,4. No hi ha una única resposta possible.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Rebutjar una representació equivalent o acceptar un extrem.</p>
+</section>
 
-        </section>
+<section class="card" id="identificar-la-forma">
+<h2>Identificar la forma escrita</h2>
+<p>La pregunta classifica la notació amb què està escrit el valor, no totes les categories a què pertany.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>7 és un enter.</li>
+<li>3/8 és una fracció; 0,625 és un decimal.</li>
+<li>72% és un percentatge perquè porta el símbol %.</li>
+</ol>
+<p><strong>Comprovació:</strong> Les quatre categories són enter, fracció, decimal i percentatge.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Dir que 7 és “racional” quan es pregunta per la forma escrita.</p>
+</section>
 
+<section class="card" id="proporcio-de-cada">
+<h2>Interpretar “de cada”</h2>
+<p>El primer nombre és la part i el segon és el total de referència.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>7 de cada 20 s’escriu 7/20.</li>
+<li>7/20 = 0,35.</li>
+<li>En percentatge, 0,35 = 35%.</li>
+</ol>
+<p><strong>Comprovació:</strong> La fracció és menor que 1 perquè la part és menor que el total.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Invertir part i total i escriure 20/7.</p>
+</section>
 
+<section class="card" id="detectar-equivalencia-falsa">
+<h2>Detectar una equivalència incorrecta</h2>
+<p>Comprova cada terme de la cadena i identifica quin valor trenca la igualtat.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>A 1/4 = 0,25 = 40%, compara cada expressió amb 1/4.</li>
+<li>1/4 = 0,25, però 40% = 0,4.</li>
+<li>El terme 40% és el que no és equivalent.</li>
+</ol>
+<p><strong>Comprovació:</strong> 0,4 ≠ 0,25; la discrepància és exacta.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Dir només que “la cadena és falsa” sense indicar quin terme falla.</p>
+</section>
 
-<section class="theory-card" id="procediments-racionals"><div class="section-kicker">Índex per procediments · T1–T18</div><h2>Què necessites resoldre?</h2><p>Tria el procediment que s’assembla a l’exercici. Cada apartat enllaça amb la seva explicació i un exemple breu.</p><div class="toc__links"><a href="#fraccio-a-decimal">T1 · Fracció a decimal</a><a href="#decimal-a-fraccio">T2 · Decimal a fracció irreductible</a><a href="#fraccio-a-percentatge">T3 · Fracció a percentatge</a><a href="#percentatge-a-decimal">T4 · Percentatge a decimal</a><a href="#tres-representacions">T5 · Comprovar una cadena equivalent</a><a href="#comparar-fraccio-decimal">T6 · Comparar fracció i decimal</a><a href="#comparar-percentatge-fraccio">T7 · Comparar percentatge i fracció</a><a href="#ordenar-representacions">T8 · Ordenar quatre representacions</a><a href="#llegir-recta">T9 · Llegir una recta graduada</a><a href="#valor-intermedi">T10 · Trobar un racional estrictament intermedi</a><a href="#identificar-la-forma">T11 · Identificar la forma escrita</a><a href="#proporcio-de-cada">T12 · Interpretar “de cada”</a><a href="#detectar-equivalencia-falsa">T13 · Detectar una equivalència incorrecta</a><a href="#comparar-proporcions">T14 · Comparar proporcions de grups</a><a href="#decimal-periodic-exacte">T15 · Reconèixer un decimal periòdic</a><a href="#llindar-minim">T16 · Calcular incorporacions mínimes</a><a href="#composicio-amb-traspassos">T17 · Reconstruir una composició després de traspassos</a><a href="#interval-amb-condicions">T18 · Construir una fracció amb dues restriccions</a></div></section><section class="examples-wrap" id="procediments-detall"><h2>📚 Procediments pas a pas</h2><p>Cada exemple mostra les dades, les operacions i una comprovació per detectar errors.</p><article class="example-card" id="fraccio-a-decimal"><div class="example-card__tag">Procediment T1</div><h3>Fracció a decimal</h3><p>Divideix el numerador pel denominador. El quocient conserva el valor de la fracció.</p><ol><li>Interpreta −7/8 com −7 ÷ 8.</li><li>Calcula el quocient: −7 ÷ 8 = −0,875.</li><li>Mantén el signe negatiu.</li></ol><div class="result"><strong>Comprovació:</strong> Multiplica 0,875 × 8 = 7 i recupera el valor absolut del numerador.</div><p><strong>Error típic:</strong> Canviar el signe o invertir la divisió.</p></article><article class="example-card" id="decimal-a-fraccio"><div class="example-card__tag">Procediment T2</div><h3>Decimal a fracció irreductible</h3><p>Escriu un decimal exacte sobre una potència de deu i redueix-lo.</p><ol><li>0,375 té tres xifres decimals: 375/1000.</li><li>Calcula MCD(375,1000)=125.</li><li>Divideix tots dos termes per 125: 3/8.</li></ol><div class="result"><strong>Comprovació:</strong> Comprova 3 ÷ 8 = 0,375 i que MCD(3,8)=1.</div><p><strong>Error típic:</strong> Aturar-se a 375/1000 sense simplificar, o dividir només un terme.</p></article><article class="example-card" id="fraccio-a-percentatge"><div class="example-card__tag">Procediment T3</div><h3>Fracció a percentatge</h3><p>Converteix a decimal i multiplica per cent, o busca centèsimes equivalents.</p><ol><li>5/4 = 1,25.</li><li>1,25 × 100 = 125.</li><li>Afegeix el símbol de percentatge: 125%.</li></ol><div class="result"><strong>Comprovació:</strong> 125% és més que 100%, com correspon a una fracció superior a 1.</div><p><strong>Error típic:</strong> Escriure 1,25% sense multiplicar per 100.</p></article><article class="example-card" id="percentatge-a-decimal"><div class="example-card__tag">Procediment T4</div><h3>Percentatge a decimal</h3><p>Un percentatge és una quantitat referida a 100: divideix per 100.</p><ol><li>Escriu 12,5% com 12,5/100.</li><li>Divideix: 12,5 ÷ 100 = 0,125.</li></ol><div class="result"><strong>Comprovació:</strong> El decimal és menor que 1 perquè el percentatge és menor que 100%.</div><p><strong>Error típic:</strong> Desplaçar la coma cap a la dreta.</p></article><article class="example-card" id="tres-representacions"><div class="example-card__tag">Procediment T5</div><h3>Comprovar una cadena equivalent</h3><p>Comprova per parelles que les tres expressions tenen el mateix valor.</p><ol><li>3/5 = 0,6 perquè 3 ÷ 5 = 0,6.</li><li>0,6 = 60% perquè 0,6 × 100 = 60.</li><li>La cadena 3/5 = 0,6 = 60% és correcta.</li></ol><div class="result"><strong>Comprovació:</strong> Si un únic terme no coincideix, la cadena sencera és falsa.</div><p><strong>Error típic:</strong> Donar per bona una cadena quan només coincideixen dues formes.</p></article><article class="example-card" id="comparar-fraccio-decimal"><div class="example-card__tag">Procediment T6</div><h3>Comparar fracció i decimal</h3><p>Expressa el decimal com a fracció amb denominador positiu i compara per productes creuats.</p><ol><li>0,67 = 67/100.</li><li>Compara 2/3 amb 67/100: 2×100=200 i 67×3=201.</li><li>Com que 200<201, 2/3<0,67.</li></ol><div class="result"><strong>Comprovació:</strong> Els productes creuats preserven l’ordre perquè els denominadors són positius.</div><p><strong>Error típic:</strong> Arrodonir 2/3 a 0,67 i declarar empat.</p></article><article class="example-card" id="comparar-percentatge-fraccio"><div class="example-card__tag">Procediment T7</div><h3>Comparar percentatge i fracció</h3><p>Converteix el percentatge a fracció i compara exactament amb la raó donada.</p><ol><li>Per a 58%, escriu 58/100.</li><li>Per comparar amb 3/5, calcula 58×5=290 i 3×100=300.</li><li>Com que 290<300, 58%<3/5.</li></ol><div class="result"><strong>Comprovació:</strong> Si els productes són iguals, les proporcions són iguals.</div><p><strong>Error típic:</strong> Comparar 58 amb 3 sense tenir en compte les unitats i els denominadors.</p></article><article class="example-card" id="ordenar-representacions"><div class="example-card__tag">Procediment T8</div><h3>Ordenar quatre representacions</h3><p>Converteix cada valor a una forma comuna, després ordena els valors exactes.</p><ol><li>Per a 1/4, 0,3, 45% i 1/2, escriu 0,25; 0,30; 0,45; 0,50.</li><li>Ordena els decimals de menor a major.</li><li>Recupera les escriptures inicials: 1/4 < 0,3 < 45% < 1/2.</li></ol><div class="result"><strong>Comprovació:</strong> Substitueix cada forma per un valor equivalent abans de comparar.</div><p><strong>Error típic:</strong> Ordenar pel numerador, pel denominador o pel nombre de xifres.</p></article><article class="example-card" id="llegir-recta"><div class="example-card__tag">Procediment T9</div><h3>Llegir una recta graduada</h3><p>Identifica el valor dels extrems i compta divisions iguals des del zero.</p><ol><li>La recta va de 0 a 1 i té cinc intervals iguals.</li><li>Cada interval val 1/5.</li><li>El punt C, tercer des de zero, representa 3/5.</li></ol><div class="result"><strong>Comprovació:</strong> Comprova que el punt està entre 0 i 1 i que cada marca avança una cinquena part.</div><p><strong>Error típic:</strong> Comptar les marques en lloc dels intervals.</p></article><article class="example-card" id="valor-intermedi"><div class="example-card__tag">Procediment T10</div><h3>Trobar un racional estrictament intermedi</h3><p>Qualsevol nombre racional que compleixi les dues desigualtats estrictes és correcte.</p><ol><li>Per a (0,2; 0,4), cal que 0,2 < x < 0,4.</li><li>0,25 compleix les dues cotes. També ho fan 25% i 1/4.</li><li>Els extrems 0,2 i 0,4 queden exclosos.</li></ol><div class="result"><strong>Comprovació:</strong> 0,2 < 1/4 < 0,4. No hi ha una única resposta possible.</div><p><strong>Error típic:</strong> Rebutjar una representació equivalent o acceptar un extrem.</p></article><article class="example-card" id="identificar-la-forma"><div class="example-card__tag">Procediment T11</div><h3>Identificar la forma escrita</h3><p>La pregunta classifica la notació amb què està escrit el valor, no totes les categories a què pertany.</p><ol><li>7 és un enter.</li><li>3/8 és una fracció; 0,625 és un decimal.</li><li>72% és un percentatge perquè porta el símbol %.</li></ol><div class="result"><strong>Comprovació:</strong> Les quatre categories són enter, fracció, decimal i percentatge.</div><p><strong>Error típic:</strong> Dir que 7 és “racional” quan es pregunta per la forma escrita.</p></article><article class="example-card" id="proporcio-de-cada"><div class="example-card__tag">Procediment T12</div><h3>Interpretar “de cada”</h3><p>El primer nombre és la part i el segon és el total de referència.</p><ol><li>7 de cada 20 s’escriu 7/20.</li><li>7/20 = 0,35.</li><li>En percentatge, 0,35 = 35%.</li></ol><div class="result"><strong>Comprovació:</strong> La fracció és menor que 1 perquè la part és menor que el total.</div><p><strong>Error típic:</strong> Invertir part i total i escriure 20/7.</p></article><article class="example-card" id="detectar-equivalencia-falsa"><div class="example-card__tag">Procediment T13</div><h3>Detectar una equivalència incorrecta</h3><p>Comprova cada terme de la cadena i identifica quin valor trenca la igualtat.</p><ol><li>A 1/4 = 0,25 = 40%, compara cada expressió amb 1/4.</li><li>1/4 = 0,25, però 40% = 0,4.</li><li>El terme 40% és el que no és equivalent.</li></ol><div class="result"><strong>Comprovació:</strong> 0,4 ≠ 0,25; la discrepància és exacta.</div><p><strong>Error típic:</strong> Dir només que “la cadena és falsa” sense indicar quin terme falla.</p></article><article class="example-card" id="comparar-proporcions"><div class="example-card__tag">Procediment T14</div><h3>Comparar proporcions de grups</h3><p>Posa les proporcions en fraccions i compara amb productes creuats.</p><ol><li>El grup A té 2/3; el grup B té 65%=65/100.</li><li>Compara 2×100=200 amb 65×3=195.</li><li>Com que 200>195, el grup A té una proporció més alta.</li></ol><div class="result"><strong>Comprovació:</strong> 200 i 195 són enters; no cal arrodonir 2/3.</div><p><strong>Error típic:</strong> Comparar 65% amb 2/3 com si 65 i 2 fossin directament comparables.</p></article><article class="example-card" id="decimal-periodic-exacte"><div class="example-card__tag">Procediment T15</div><h3>Reconèixer un decimal periòdic</h3><p>Els punts suspensius indiquen que el bloc repetit continua indefinidament.</p><ol><li>1/3 = 0,333… perquè en dividir 1 entre 3 es repeteix el 3.</li><li>La repetició és exacta, no una aproximació a 0,33.</li><li>La fracció és una representació exacta del període.</li></ol><div class="result"><strong>Comprovació:</strong> 3×0,333… = 0,999… = 1.</div><p><strong>Error típic:</strong> Confondre 0,333… amb el decimal finit 0,333.</p></article><article class="example-card" id="llindar-minim"><div class="example-card__tag">Procediment T16</div><h3>Calcular incorporacions mínimes</h3><p>Planteja la proporció després de k incorporacions i resol una desigualtat estricta.</p><ol><li>Amb 5 ciclistes de 20 i un objectiu superior al 50%, planteja (5+k)/(20+k)>1/2.</li><li>Multiplica en creu: 2(5+k)>20+k; per tant k>10.</li><li>El mínim enter és 11; comprova k=10 i k=11.</li></ol><div class="result"><strong>Comprovació:</strong> Amb 10 s’arriba exactament al 50%; amb 11 se supera.</div><p><strong>Error típic:</strong> Acceptar igualtat quan es demana estrictament superar el llindar.</p></article><article class="example-card" id="composicio-amb-traspassos"><div class="example-card__tag">Procediment T17</div><h3>Reconstruir composició després de traspassos</h3><p>Conserva el total de persones i de ciclistes, recupera la mida final de cada grup i desfés després els moviments.</p><ol><li>Hi ha 50 persones i 22 ciclistes en total. Si A acaba amb x persones: x/3+(50−x)/2=22; d’aquí x=18.</li><li>A acaba amb 18 membres i 6 ciclistes. Abans dels traspassos tenia 18+4−2=20 membres i 6+4=10 ciclistes.</li><li>La proporció inicial d’A era 10/20=1/2, és a dir, 1/2 irreductible.</li></ol><div class="result"><strong>Comprovació:</strong> B abans tenia 30 membres i 12 ciclistes; els totals sumen 50 i 22. La mitjana simple de 1/3 i 1/2 no és la proporció conjunta.</div><p><strong>Error típic:</strong> Fer la mitjana simple de les dues taxes o desfer només el canvi del numerador.</p></article><article class="example-card" id="interval-amb-condicions"><div class="example-card__tag">Procediment T18</div><h3>Construir una fracció amb dues restriccions</h3><p>Escala les cotes pel denominador fix, enumera enters i filtra per múltiple i MCD.</p><ol><li>1/3<n/15<3/4 implica 5<n<11,25; els numeradors enters són 6, 7, 8, 9, 10 i 11.</li><li>Els parells són 6, 8 i 10.</li><li>MCD(6,15)=3, MCD(8,15)=1 i MCD(10,15)=5; només 8/15 és irreductible.</li></ol><div class="result"><strong>Comprovació:</strong> Els extrems són estrictes i queden fora. Només 8/15 conserva denominador 15 i compleix la paritat.</div><p><strong>Error típic:</strong> Acceptar 6/15 després de reduir-la, o oblidar la condició del numerador parell.</p></article></section>
-  <section class="examples-wrap" id="exemples">
-    <h2>✏️ Exemples resolts</h2>
+<section class="card" id="comparar-proporcions">
+<h2>Comparar proporcions de grups</h2>
+<p>Posa les proporcions en fraccions i compara amb productes creuats.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>El grup A té 2/3; el grup B té 65%=65/100.</li>
+<li>Compara 2×100=200 amb 65×3=195.</li>
+<li>Com que 200>195, el grup A té una proporció més alta.</li>
+</ol>
+<p><strong>Comprovació:</strong> 200 i 195 són enters; no cal arrodonir 2/3.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Comparar 65% amb 2/3 com si 65 i 2 fossin directament comparables.</p>
+</section>
 
-        <article class="example-card">
-          <div class="example-card__tag">Exemple resolt</div>
-          <h3>Comparar 3/5 i 58%</h3>
-          <p></p>
-          <ol><li>Converteix 3/5 a decimal: 3 ÷ 5 = 0,6.</li><li>Converteix 58% a decimal: 58% = 0,58.</li><li>Compara 0,60 i 0,58.</li><li>0,60 és més gran que 0,58.</li></ol>
-          <div class="result">Per tant, 3/5 &gt; 58%.</div>
-        </article>
+<section class="card" id="decimal-periodic-exacte">
+<h2>Reconèixer un decimal periòdic</h2>
+<p>Els punts suspensius indiquen que el bloc repetit continua indefinidament.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>1/3 = 0,333… perquè en dividir 1 entre 3 es repeteix el 3.</li>
+<li>La repetició és exacta, no una aproximació a 0,33.</li>
+<li>La fracció és una representació exacta del període.</li>
+</ol>
+<p><strong>Comprovació:</strong> 3×0,333… = 0,999… = 1.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Confondre 0,333… amb el decimal finit 0,333.</p>
+</section>
 
-        <article class="example-card">
-          <div class="example-card__tag">Exemple resolt</div>
-          <h3>Passar 0,375 a fracció irreductible</h3>
-          <p></p>
-          <ol><li>Hi ha tres xifres decimals, així que escrivim 375/1000.</li><li>Simplifiquem numerador i denominador pel mateix divisor.</li><li>375/1000 = 3/8.</li></ol>
-          <div class="result">0,375 = 3/8.</div>
-        </article>
+<section class="card" id="llindar-minim">
+<h2>Calcular incorporacions mínimes</h2>
+<p>Planteja la proporció després de k incorporacions i resol una desigualtat estricta.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>Amb 5 ciclistes de 20 i un objectiu superior al 50%, planteja (5+k)/(20+k)>1/2.</li>
+<li>Multiplica en creu: 2(5+k)>20+k; per tant k>10.</li>
+<li>El mínim enter és 11; comprova k=10 i k=11.</li>
+</ol>
+<p><strong>Comprovació:</strong> Amb 10 s’arriba exactament al 50%; amb 11 se supera.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Acceptar igualtat quan es demana estrictament superar el llindar.</p>
+</section>
 
-        <article class="example-card">
-          <div class="example-card__tag">Exemple resolt</div>
-          <h3>Ordenar −0,75, −2/3 i −70%</h3>
-          <p></p>
-          <ol><li>Escriu-los en una representació comuna: −0,75; −0,666…; −0,70.</li><li>En nombres negatius, el més allunyat cap a l'esquerra és el més petit.</li><li>Així, −0,75 &lt; −0,70 &lt; −0,666….</li></ol>
-          <div class="result">Ordre de menor a major: −0,75 &lt; −70% &lt; −2/3.</div>
-        </article>
+<section class="card" id="composicio-amb-traspassos">
+<h2>Reconstruir composició després de traspassos</h2>
+<p>Conserva el total de persones i de ciclistes, recupera la mida final de cada grup i desfés després els moviments.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>Hi ha 50 persones i 22 ciclistes en total. Si A acaba amb x persones: x/3+(50−x)/2=22; d’aquí x=18.</li>
+<li>A acaba amb 18 membres i 6 ciclistes. Abans dels traspassos tenia 18+4−2=20 membres i 6+4=10 ciclistes.</li>
+<li>La proporció inicial d’A era 10/20=1/2, és a dir, 1/2 irreductible.</li>
+</ol>
+<p><strong>Comprovació:</strong> B abans tenia 30 membres i 12 ciclistes; els totals sumen 50 i 22. La mitjana simple de 1/3 i 1/2 no és la proporció conjunta.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Fer la mitjana simple de les dues taxes o desfer només el canvi del numerador.</p>
+</section>
 
-  </section>
+<section class="card" id="interval-amb-condicions">
+<h2>Construir una fracció amb dues restriccions</h2>
+<p>Escala les cotes pel denominador fix, enumera enters i filtra per múltiple i MCD.</p>
+<div class="example">
+<span class="example-label">Exemple resolt</span>
+<ol>
+<li>1/3&lt;n/15&lt;3/4 implica 5&lt;n&lt;11,25; els numeradors enters són 6, 7, 8, 9, 10 i 11.</li>
+<li>Els parells són 6, 8 i 10.</li>
+<li>MCD(6,15)=3, MCD(8,15)=1 i MCD(10,15)=5; només 8/15 és irreductible.</li>
+</ol>
+<p><strong>Comprovació:</strong> Els extrems són estrictes i queden fora. Només 8/15 conserva denominador 15 i compleix la paritat.</p>
+</div>
+<p class="tip"><strong>Error típic:</strong> Acceptar 6/15 després de reduir-la, o oblidar la condició del numerador parell.</p>
+</section>
+</div>
 
-  <section class="mistakes-wrap" id="errors">
-    <h2>⚠️ Errors habituals que convé evitar</h2>
-    <article class="mistake">
-          <div class="mistake__icon">⚠️</div>
-          <div><h3>Comparar només numeradors o denominadors</h3><p>2/3 i 3/5 no es poden ordenar mirant només el 2 i el 3 o només el 3 i el 5. Converteix-les a una forma comuna o usa fraccions equivalents.</p></div>
-        </article><article class="mistake">
-          <div class="mistake__icon">⚠️</div>
-          <div><h3>Oblidar que el percentatge és «sobre 100»</h3><p>35% no és 0,35% ni 35; equival a 35/100 = 0,35.</p></div>
-        </article><article class="mistake">
-          <div class="mistake__icon">⚠️</div>
-          <div><h3>Confondre l'ordre dels nombres negatius</h3><p>−8 és més petit que −3 perquè està més a l'esquerra a la recta numèrica.</p></div>
-        </article><article class="mistake">
-          <div class="mistake__icon">⚠️</div>
-          <div><h3>Pensar que un decimal periòdic no és racional</h3><p>Un decimal periòdic sí que és racional: es pot expressar com una fracció.</p></div>
-        </article>
-  </section>
+<section class="card" id="exemples">
+  <h2>✏️ Exemples resolts</h2>
 
-  <section class="summary" id="resum">
-    <h2>✅ Què hauries de tenir clar</h2>
-    <ul><li>Reconèixer un nombre racional i diferents representacions de la mateixa quantitat.</li><li>Passar de fracció a decimal i de decimal exacte a fracció irreductible.</li><li>Relacionar fraccions, decimals i percentatges.</li><li>Comparar i ordenar racionals, també quan són negatius.</li><li>Interpretar decimals exactes i periòdics i situar nombres a la recta numèrica.</li></ul>
-  </section>
+  <article class="example">
+    <span class="example-label">Exemple resolt</span>
+    <h3>Comparar 3/5 i 58%</h3>
+    <ol>
+      <li>Converteix 3/5 a decimal: 3 ÷ 5 = 0,6.</li>
+      <li>Converteix 58% a decimal: 58% = 0,58.</li>
+      <li>Compara 0,60 i 0,58.</li>
+      <li>0,60 és més gran que 0,58.</li>
+    </ol>
+    <p class="math">Per tant, 3/5 &gt; 58%.</p>
+  </article>
 
-  <section class="practice-panel">
-    <h2>Ara toca practicar</h2>
-    <p>Tria el nivell. Si has arribat aquí directament des d'un cercador, el tema s'obrirà automàticament perquè puguis començar.</p>
-    <div class="hero-actions">
-      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=racionals&level=1&practice=1">🟢 Practicar · Guiat</a>
-      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=racionals&level=2&practice=1">🟠 Practicar · Autònom</a>
-    </div>
-  </section>
+  <article class="example">
+    <span class="example-label">Exemple resolt</span>
+    <h3>Passar 0,375 a fracció irreductible</h3>
+    <ol>
+      <li>Hi ha tres xifres decimals, així que escrivim 375/1000.</li>
+      <li>Simplifiquem numerador i denominador pel mateix divisor.</li>
+      <li>375/1000 = 3/8.</li>
+    </ol>
+    <p class="math">0,375 = 3/8.</p>
+  </article>
 
-  <nav class="pager" aria-label="Navegació entre temes de teoria"><span></span><a class="pager__link pager__link--index" href="index.html">📚 Índex de teoria</a><a class="pager__link pager__link--next" href="fraccions-amb-sentit.html">Tema següent →</a></nav>
+  <article class="example">
+    <span class="example-label">Exemple resolt</span>
+    <h3>Ordenar −0,75, −2/3 i −70%</h3>
+    <ol>
+      <li>Escriu-los en una representació comuna: −0,75; −0,666…; −0,70.</li>
+      <li>En nombres negatius, el més allunyat cap a l'esquerra és el més petit.</li>
+      <li>Així, −0,75 &lt; −0,70 &lt; −0,666….</li>
+    </ol>
+    <p class="math">Ordre de menor a major: −0,75 &lt; −70% &lt; −2/3.</p>
+  </article>
+</section>
+
+<section class="card mistakes" id="errors">
+<h2>⚠️ Errors freqüents</h2>
+<ul>
+<li><strong>Comparar només numeradors o denominadors.</strong> 2/3 i 3/5 no es poden ordenar mirant només el 2 i el 3 o només el 3 i el 5. Converteix-les a una forma comuna o usa fraccions equivalents.</li>
+<li><strong>Oblidar que el percentatge és «sobre 100».</strong> 35% no és 0,35% ni 35; equival a 35/100 = 0,35.</li>
+<li><strong>Confondre l'ordre dels nombres negatius.</strong> −8 és més petit que −3 perquè està més a l'esquerra a la recta numèrica.</li>
+<li><strong>Pensar que un decimal periòdic no és racional.</strong> Un decimal periòdic sí que és racional: es pot expressar com una fracció.</li>
+</ul>
+</section>
+
+<section class="card check">
+<h2>✅ Comprova si ho has entès</h2>
+<details>
+  <summary>1. Quin percentatge equival a 3/4?</summary>
+  <div class="answer"><strong>75 %.</strong> 3 ÷ 4 = 0,75 i 0,75 × 100 = 75.</div>
+</details>
+<details>
+  <summary>2. Quin nombre és més petit, −0,6 o −1/2?</summary>
+  <div class="answer"><strong>−0,6.</strong> −1/2 = −0,5, que és més a la dreta a la recta.</div>
+</details>
+<details>
+  <summary>3. Quin decimal representa 1/3?</summary>
+  <div class="answer"><strong>0,333…</strong> El 3 es repeteix indefinidament.</div>
+</details>
+</section>
+
+<section class="summary-master" id="resum">
+  <h2>🧠 Resum essencial</h2>
+  <ul>
+  <li>Reconèixer un nombre racional i diferents representacions de la mateixa quantitat.</li>
+  <li>Passar de fracció a decimal i de decimal exacte a fracció irreductible.</li>
+  <li>Relacionar fraccions, decimals i percentatges.</li>
+  <li>Comparar i ordenar racionals, també quan són negatius.</li>
+  <li>Interpretar decimals exactes i periòdics i situar nombres a la recta numèrica.</li>
+  </ul>
+</section>
+
+<section class="final-cta">
+<h2>Ja tens la teoria. Ara toca practicar.</h2>
+<p>Fes exercicis guiats, passa després al nivell autònom i repassa els errors que vagis cometent.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="../../sentit-numeric.html?topic=racionals&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a>
+<a class="btn btn-secondary" href="../../sentit-numeric.html?topic=racionals&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a>
+<a class="btn btn-secondary" href="../../sentit-numeric.html?topic=racionals">← Veure el bloc</a>
+</div>
+</section>
+<nav aria-label="Navegació entre temes de teoria" class="pager-master"><span class="prev disabled">← Tema anterior</span>
+<a class="idx" href="index.html">📚 Índex de teoria</a>
+<a class="next" href="fraccions-amb-sentit.html">Tema següent →</a>
+</nav>
 </main>
-
 <footer class="mi-learning-footer">
   <p>Mates Interactives · Matemàtiques d’ESO · Teoria i exercicis gratuïts</p>
   <p><a href="../../../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
