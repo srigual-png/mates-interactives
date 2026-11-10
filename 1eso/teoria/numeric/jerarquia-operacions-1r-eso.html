@@ -118,29 +118,7 @@ a{color:inherit}
 .procedure-item>summary:focus-visible,.procedure-support>summary:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
 @media(max-width:650px){.procedure-grid{grid-template-columns:1fr;padding:0 12px 14px}.procedure-support>summary{padding:16px 45px 16px 15px}.support-intro{margin:0 15px 12px}}
 </style>
-<script id="mi-theory-contextual-support">
-(function(){
-  var panel=document.getElementById('ajuda-exercicis');
-  if(!panel)return;
-  function obreAjudaEnllacada(){
-    var id;
-    try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}
-    if(!id)return;
-    var item=document.getElementById(id);
-    if(item && panel.contains(item)){
-      panel.open=true;
-      if(item.tagName==='DETAILS')item.open=true;
-      requestAnimationFrame(function(){item.scrollIntoView({block:'start'});});
-    }
-  }
-  window.addEventListener('hashchange',obreAjudaEnllacada);
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',obreAjudaEnllacada,{once:true});
-  }else{
-    obreAjudaEnllacada();
-  }
-})();
-</script>
+
 </head>
 <body>
 <nav aria-label="Navegació principal" class="top-nav">
@@ -574,4 +552,27 @@ a{color:inherit}
 })();
 </script>
 
+<script id="mi-theory-contextual-support">
+(function(){
+  var panel=document.getElementById('ajuda-exercicis');
+  if(!panel)return;
+  function obreAjudaEnllacada(){
+    var id;
+    try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}
+    if(!id)return;
+    var item=document.getElementById(id);
+    if(item && panel.contains(item)){
+      panel.open=true;
+      if(item.tagName==='DETAILS')item.open=true;
+      requestAnimationFrame(function(){item.scrollIntoView({block:'start'});});
+    }
+  }
+  window.addEventListener('hashchange',obreAjudaEnllacada);
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',obreAjudaEnllacada,{once:true});
+  }else{
+    obreAjudaEnllacada();
+  }
+})();
+</script>
 </body></html>
