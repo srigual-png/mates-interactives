@@ -313,6 +313,48 @@ main [id]{scroll-margin-top:70px}
 @media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
 </style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
+<style id="mi-practica-teoria-support">
+/* Els procediments són ajuda opcional, no la teoria principal. */
+.procedure-support{border:1px solid var(--border);border-radius:16px;background:var(--card);box-shadow:var(--sh);margin:18px 0;padding:0;scroll-margin-top:76px}
+.procedure-support>summary{cursor:pointer;list-style:none;padding:19px 22px;display:flex;flex-direction:column;gap:3px;position:relative;padding-right:50px}
+.procedure-support>summary::-webkit-details-marker,.procedure-item>summary::-webkit-details-marker{display:none}
+.procedure-support>summary:after{content:"＋";position:absolute;right:21px;top:19px;font-size:1.35rem;color:var(--primary)}
+.procedure-support[open]>summary:after{content:"−"}
+.support-heading{font-size:1.1rem;font-weight:800;color:var(--primary)}
+.support-caption,.support-intro{font-size:.87rem;color:var(--muted)}
+.support-intro{margin:0 22px 12px;line-height:1.6}
+.procedure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 20px 20px;align-items:start}
+.procedure-item{border:1px solid var(--border);border-radius:11px;background:#fbfcfe;scroll-margin-top:90px;min-width:0}
+.procedure-item>summary{cursor:pointer;padding:12px 33px 12px 13px;font-weight:700;font-size:.86rem;position:relative;line-height:1.35}
+.procedure-item>summary:after{content:"＋";position:absolute;right:11px;top:10px;color:var(--primary)}
+.procedure-item[open]>summary:after{content:"−"}
+.procedure-item[open]{grid-column:1/-1;background:#fff;border-color:var(--primary)}
+.procedure-item[open]>summary{color:var(--primary);border-bottom:1px solid var(--border)}
+.procedure-item>p,.procedure-item>.example{margin:12px 15px}
+.procedure-item>p.tip{margin:12px 15px 15px}
+.procedure-item:target{outline:2px solid var(--primary);outline-offset:2px}
+.procedure-item>summary:focus-visible,.procedure-support>summary:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+@media(max-width:650px){.procedure-grid{grid-template-columns:1fr;padding:0 12px 14px}.procedure-support>summary{padding:16px 45px 16px 15px}.support-intro{margin:0 15px 12px}}
+</style>
+<script id="mi-theory-contextual-support">
+(function(){
+  var panel=document.getElementById('ajuda-exercicis');
+  if(!panel)return;
+  function obreAjudaEnllacada(){
+    var id;
+    try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}
+    if(!id)return;
+    var item=document.getElementById(id);
+    if(item && panel.contains(item)){
+      panel.open=true;
+      if(item.tagName==='DETAILS')item.open=true;
+      requestAnimationFrame(function(){item.scrollIntoView({block:'start'});});
+    }
+  }
+  window.addEventListener('hashchange',obreAjudaEnllacada);
+  obreAjudaEnllacada();
+})();
+</script>
 </head>
 <body>
 <nav aria-label="Navegació principal" class="top-nav">
@@ -340,31 +382,13 @@ main [id]{scroll-margin-top:70px}
 <a href="#decimals">3. Decimals</a>
 <a href="#comparar">4. Comparar</a>
 <a href="#recta">5. Recta numèrica</a>
+<a href="#ajuda-exercicis">🧩 Ajuda per exercici</a>
 <a href="#exemples">Exemples resolts</a>
 <a href="#errors">Errors freqüents</a>
 <a href="#resum">Resum</a>
 </nav>
 
-<nav class="quick-nav" id="procediments-racionals" aria-label="Procediments dels 18 tipus d’exercici">
-<a href="#fraccio-a-decimal">Fracció a decimal</a>
-<a href="#decimal-a-fraccio">Decimal a fracció irreductible</a>
-<a href="#fraccio-a-percentatge">Fracció a percentatge</a>
-<a href="#percentatge-a-decimal">Percentatge a decimal</a>
-<a href="#tres-representacions">Comprovar una cadena equivalent</a>
-<a href="#comparar-fraccio-decimal">Comparar fracció i decimal</a>
-<a href="#comparar-percentatge-fraccio">Comparar percentatge i fracció</a>
-<a href="#ordenar-representacions">Ordenar quatre representacions</a>
-<a href="#llegir-recta">Llegir una recta graduada</a>
-<a href="#valor-intermedi">Trobar un racional estrictament intermedi</a>
-<a href="#identificar-la-forma">Identificar la forma escrita</a>
-<a href="#proporcio-de-cada">Interpretar “de cada”</a>
-<a href="#detectar-equivalencia-falsa">Detectar una equivalència incorrecta</a>
-<a href="#comparar-proporcions">Comparar proporcions de grups</a>
-<a href="#decimal-periodic-exacte">Reconèixer un decimal periòdic</a>
-<a href="#llindar-minim">Calcular incorporacions mínimes</a>
-<a href="#composicio-amb-traspassos">Reconstruir una composició després de traspassos</a>
-<a href="#interval-amb-condicions">Construir una fracció amb dues restriccions</a>
-</nav>
+
 
 <section class="card" id="que-son">
 <h2>🔢 1. Què és un nombre racional?</h2>
@@ -431,9 +455,12 @@ main [id]{scroll-margin-top:70px}
 </ul>
 </section>
 
-<div id="procediments-detall">
-<section class="card" id="fraccio-a-decimal">
-<h2>Fracció a decimal</h2>
+<details class="procedure-support" id="ajuda-exercicis">
+<summary><span class="support-heading">🧩 Ajuda per a exercicis concrets</span><span class="support-caption">18 procediments amb exemples pas a pas · Obre només el que necessitis</span></summary>
+<p class="support-intro">La teoria essencial és als cinc apartats anteriors. Si un exercici se't resisteix, busca'n el tipus i consulta els passos, la comprovació i l'error habitual.</p>
+<div id="procediments-detall" class="procedure-grid">
+<details class="procedure-item" id="fraccio-a-decimal">
+<summary>Fracció a decimal</summary>
 <p>Divideix el numerador pel denominador. El quocient conserva el valor de la fracció.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -445,10 +472,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> Multiplica 0,875 × 8 = 7 i recupera el valor absolut del numerador.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Canviar el signe o invertir la divisió.</p>
-</section>
+</details>
 
-<section class="card" id="decimal-a-fraccio">
-<h2>Decimal a fracció irreductible</h2>
+<details class="procedure-item" id="decimal-a-fraccio">
+<summary>Decimal a fracció irreductible</summary>
 <p>Escriu un decimal exacte sobre una potència de deu i redueix-lo.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -460,10 +487,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> Comprova 3 ÷ 8 = 0,375 i que MCD(3,8)=1.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Aturar-se a 375/1000 sense simplificar, o dividir només un terme.</p>
-</section>
+</details>
 
-<section class="card" id="fraccio-a-percentatge">
-<h2>Fracció a percentatge</h2>
+<details class="procedure-item" id="fraccio-a-percentatge">
+<summary>Fracció a percentatge</summary>
 <p>Converteix a decimal i multiplica per cent, o busca centèsimes equivalents.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -475,10 +502,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> 125% és més que 100%, com correspon a una fracció superior a 1.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Escriure 1,25% sense multiplicar per 100.</p>
-</section>
+</details>
 
-<section class="card" id="percentatge-a-decimal">
-<h2>Percentatge a decimal</h2>
+<details class="procedure-item" id="percentatge-a-decimal">
+<summary>Percentatge a decimal</summary>
 <p>Un percentatge és una quantitat referida a 100: divideix per 100.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -489,10 +516,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> El decimal és menor que 1 perquè el percentatge és menor que 100%.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Desplaçar la coma cap a la dreta.</p>
-</section>
+</details>
 
-<section class="card" id="tres-representacions">
-<h2>Comprovar una cadena equivalent</h2>
+<details class="procedure-item" id="tres-representacions">
+<summary>Comprovar una cadena equivalent</summary>
 <p>Comprova per parelles que les tres expressions tenen el mateix valor.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -504,10 +531,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> Si un únic terme no coincideix, la cadena sencera és falsa.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Donar per bona una cadena quan només coincideixen dues formes.</p>
-</section>
+</details>
 
-<section class="card" id="comparar-fraccio-decimal">
-<h2>Comparar fracció i decimal</h2>
+<details class="procedure-item" id="comparar-fraccio-decimal">
+<summary>Comparar fracció i decimal</summary>
 <p>Expressa el decimal com a fracció amb denominador positiu i compara per productes creuats.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -519,10 +546,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> Els productes creuats preserven l’ordre perquè els denominadors són positius.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Arrodonir 2/3 a 0,67 i declarar empat.</p>
-</section>
+</details>
 
-<section class="card" id="comparar-percentatge-fraccio">
-<h2>Comparar percentatge i fracció</h2>
+<details class="procedure-item" id="comparar-percentatge-fraccio">
+<summary>Comparar percentatge i fracció</summary>
 <p>Converteix el percentatge a fracció i compara exactament amb la raó donada.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -534,10 +561,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> Si els productes són iguals, les proporcions són iguals.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Comparar 58 amb 3 sense tenir en compte les unitats i els denominadors.</p>
-</section>
+</details>
 
-<section class="card" id="ordenar-representacions">
-<h2>Ordenar quatre representacions</h2>
+<details class="procedure-item" id="ordenar-representacions">
+<summary>Ordenar quatre representacions</summary>
 <p>Converteix cada valor a una forma comuna, després ordena els valors exactes.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -549,10 +576,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> Substitueix cada forma per un valor equivalent abans de comparar.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Ordenar pel numerador, pel denominador o pel nombre de xifres.</p>
-</section>
+</details>
 
-<section class="card" id="llegir-recta">
-<h2>Llegir una recta graduada</h2>
+<details class="procedure-item" id="llegir-recta">
+<summary>Llegir una recta graduada</summary>
 <p>Identifica el valor dels extrems i compta divisions iguals des del zero.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -564,10 +591,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> Comprova que el punt està entre 0 i 1 i que cada marca avança una cinquena part.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Comptar les marques en lloc dels intervals.</p>
-</section>
+</details>
 
-<section class="card" id="valor-intermedi">
-<h2>Trobar un racional estrictament intermedi</h2>
+<details class="procedure-item" id="valor-intermedi">
+<summary>Trobar un racional estrictament intermedi</summary>
 <p>Qualsevol nombre racional que compleixi les dues desigualtats estrictes és correcte.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -579,10 +606,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> 0,2 &lt; 1/4 &lt; 0,4. No hi ha una única resposta possible.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Rebutjar una representació equivalent o acceptar un extrem.</p>
-</section>
+</details>
 
-<section class="card" id="identificar-la-forma">
-<h2>Identificar la forma escrita</h2>
+<details class="procedure-item" id="identificar-la-forma">
+<summary>Identificar la forma escrita</summary>
 <p>La pregunta classifica la notació amb què està escrit el valor, no totes les categories a què pertany.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -594,10 +621,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> Les quatre categories són enter, fracció, decimal i percentatge.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Dir que 7 és “racional” quan es pregunta per la forma escrita.</p>
-</section>
+</details>
 
-<section class="card" id="proporcio-de-cada">
-<h2>Interpretar “de cada”</h2>
+<details class="procedure-item" id="proporcio-de-cada">
+<summary>Interpretar “de cada”</summary>
 <p>El primer nombre és la part i el segon és el total de referència.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -609,10 +636,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> La fracció és menor que 1 perquè la part és menor que el total.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Invertir part i total i escriure 20/7.</p>
-</section>
+</details>
 
-<section class="card" id="detectar-equivalencia-falsa">
-<h2>Detectar una equivalència incorrecta</h2>
+<details class="procedure-item" id="detectar-equivalencia-falsa">
+<summary>Detectar una equivalència incorrecta</summary>
 <p>Comprova cada terme de la cadena i identifica quin valor trenca la igualtat.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -624,10 +651,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> 0,4 ≠ 0,25; la discrepància és exacta.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Dir només que “la cadena és falsa” sense indicar quin terme falla.</p>
-</section>
+</details>
 
-<section class="card" id="comparar-proporcions">
-<h2>Comparar proporcions de grups</h2>
+<details class="procedure-item" id="comparar-proporcions">
+<summary>Comparar proporcions de grups</summary>
 <p>Posa les proporcions en fraccions i compara amb productes creuats.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -639,10 +666,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> 200 i 195 són enters; no cal arrodonir 2/3.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Comparar 65% amb 2/3 com si 65 i 2 fossin directament comparables.</p>
-</section>
+</details>
 
-<section class="card" id="decimal-periodic-exacte">
-<h2>Reconèixer un decimal periòdic</h2>
+<details class="procedure-item" id="decimal-periodic-exacte">
+<summary>Reconèixer un decimal periòdic</summary>
 <p>Els punts suspensius indiquen que el bloc repetit continua indefinidament.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -654,10 +681,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> 3×0,333… = 0,999… = 1.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Confondre 0,333… amb el decimal finit 0,333.</p>
-</section>
+</details>
 
-<section class="card" id="llindar-minim">
-<h2>Calcular incorporacions mínimes</h2>
+<details class="procedure-item" id="llindar-minim">
+<summary>Calcular incorporacions mínimes</summary>
 <p>Planteja la proporció després de k incorporacions i resol una desigualtat estricta.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -669,10 +696,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> Amb 10 s’arriba exactament al 50%; amb 11 se supera.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Acceptar igualtat quan es demana estrictament superar el llindar.</p>
-</section>
+</details>
 
-<section class="card" id="composicio-amb-traspassos">
-<h2>Reconstruir composició després de traspassos</h2>
+<details class="procedure-item" id="composicio-amb-traspassos">
+<summary>Reconstruir composició després de traspassos</summary>
 <p>Conserva el total de persones i de ciclistes, recupera la mida final de cada grup i desfés després els moviments.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -684,10 +711,10 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> B abans tenia 30 membres i 12 ciclistes; els totals sumen 50 i 22. La mitjana simple de 1/3 i 1/2 no és la proporció conjunta.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Fer la mitjana simple de les dues taxes o desfer només el canvi del numerador.</p>
-</section>
+</details>
 
-<section class="card" id="interval-amb-condicions">
-<h2>Construir una fracció amb dues restriccions</h2>
+<details class="procedure-item" id="interval-amb-condicions">
+<summary>Construir una fracció amb dues restriccions</summary>
 <p>Escala les cotes pel denominador fix, enumera enters i filtra per múltiple i MCD.</p>
 <div class="example">
 <span class="example-label">Exemple resolt</span>
@@ -699,8 +726,9 @@ main [id]{scroll-margin-top:70px}
 <p><strong>Comprovació:</strong> Els extrems són estrictes i queden fora. Només 8/15 conserva denominador 15 i compleix la paritat.</p>
 </div>
 <p class="tip"><strong>Error típic:</strong> Acceptar 6/15 després de reduir-la, o oblidar la condició del numerador parell.</p>
-</section>
+</details>
 </div>
+</details>
 
 <section class="card" id="exemples">
   <h2>✏️ Exemples resolts</h2>
