@@ -95,6 +95,33 @@ a{color:inherit}
 @media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
 </style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
+<style id="mi-practica-teoria-support">
+/* Els procediments són ajuda opcional, no la teoria principal. */
+.procedure-support{border:1px solid var(--border);border-radius:16px;background:var(--card);box-shadow:var(--sh);margin:18px 0;padding:0;scroll-margin-top:76px}
+.procedure-support>summary{cursor:pointer;list-style:none;padding:19px 22px;display:flex;flex-direction:column;gap:3px;position:relative;padding-right:50px}
+.procedure-support>summary::-webkit-details-marker,.procedure-item>summary::-webkit-details-marker{display:none}
+.procedure-support>summary:after{content:"＋";position:absolute;right:21px;top:19px;font-size:1.35rem;color:var(--primary)}
+.procedure-support[open]>summary:after{content:"−"}
+.support-heading{font-size:1.1rem;font-weight:800;color:var(--primary)}
+.support-caption,.support-intro{font-size:.87rem;color:var(--muted)}
+.support-intro{margin:0 22px 12px;line-height:1.6}
+.procedure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 20px 20px;align-items:start}
+.procedure-item{border:1px solid var(--border);border-radius:11px;background:#fbfcfe;scroll-margin-top:90px;min-width:0}
+.procedure-item>summary{cursor:pointer;padding:12px 33px 12px 13px;font-weight:700;font-size:.86rem;position:relative;line-height:1.35}
+.procedure-item>summary:after{content:"＋";position:absolute;right:11px;top:10px;color:var(--primary)}
+.procedure-item[open]>summary:after{content:"−"}
+.procedure-item[open]{grid-column:1/-1;background:#fff;border-color:var(--primary)}
+.procedure-item[open]>summary{color:var(--primary);border-bottom:1px solid var(--border)}
+.procedure-item>p,.procedure-item>.example{margin:12px 15px}
+.procedure-item>p.tip{margin:12px 15px 15px}
+.optional-challenge-heading{grid-column:1/-1;border-top:1px solid var(--border);padding:14px 2px 2px;margin-top:7px;display:flex;flex-direction:column;gap:3px}
+.optional-challenge-heading strong{color:#8a5d00;font-size:.95rem}
+.optional-challenge-heading span{color:var(--muted);font-size:.83rem}
+.optional-challenge{border-color:#efd48b;background:#fffdf7}
+.procedure-item:target{outline:2px solid var(--primary);outline-offset:2px}
+.procedure-item>summary:focus-visible,.procedure-support>summary:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+@media(max-width:650px){.procedure-grid{grid-template-columns:1fr;padding:0 12px 14px}.procedure-support>summary{padding:16px 45px 16px 15px}.support-intro{margin:0 15px 12px}}
+</style>
 </head>
 <body>
 <nav aria-label="Navegació principal" class="top-nav">
@@ -119,8 +146,9 @@ a{color:inherit}
 <a href="#problemes">2. Quan en fem servir un o l’altre?</a>
 <a href="#mcd-factors">3. MCD per factors</a>
 <a href="#mcm-factors">4. mcm per factors</a>
+<a href="#ajuda-exercicis">🧩 Ajuda per exercici</a>
 </nav>
-<nav aria-label="Procediments de les 12 famílies" class="quick-nav"><a href="#divisors-comuns">Divisors comuns</a><a href="#multiples-comuns">Múltiples comuns</a><a href="#casos-especials">Casos especials</a><a href="#mcd-factors">MCD per factors</a><a href="#mcm-factors">mcm per factors</a><a href="#coincidencies">Coincidències</a><a href="#lots">Lots</a><a href="#talls">Talls</a><a href="#triar-mcd-mcm">Triar MCD o mcm</a><a href="#coincidencies-desfasades">Inicis diferents</a><a href="#operand-desconegut">Operand desconegut</a><a href="#errors-factors">Errors de factors</a></nav>
+
 <section class="card major" id="mcm-mcd">
 <h2>🔗 MCD i mcm</h2>
 <p>Després de factoritzar els nombres, podem calcular el <strong>MCD</strong> i el <strong>mcm</strong>.</p>
@@ -139,6 +167,7 @@ a{color:inherit}
 <div class="math">mcm × MCD = primer nombre × segon nombre</div>
 </div>
 </section>
+
 <section class="card" id="problemes">
 <h2>🧠 Quan faig servir mcm i quan MCD?</h2>
 <div class="rule-grid">
@@ -155,27 +184,7 @@ a{color:inherit}
 </div>
 <div class="tip">💡 Pista lingüística: «quan tornaran a coincidir?» sol indicar <strong>mcm</strong>; «màxim nombre de grups iguals sense sobrants» sol indicar <strong>MCD</strong>.</div>
 </section>
-<section class="card" id="divisors-comuns">
-<h2>Divisors comuns</h2>
-<p>Escriu els divisors positius de cada nombre. L’1 sempre hi apareix perquè qualsevol enter positiu dividit per 1 dona aquest mateix enter i residu 0. Conserva els nombres que apareixen a totes dues llistes, una vegada cadascun.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>Els divisors de 12 són 1, 2, 3, 4, 6 i 12. Els de 18 són 1, 2, 3, 6, 9 i 18. Conservem els que apareixen a totes dues llistes.</p>
-<p><strong>Resposta. Divisors comuns positius:</strong> 1, 2, 3, 6.</p><p>Com a observació, el més gran d’aquests divisors és el MCD.</p></div>
-</section>
-<section class="card" id="multiples-comuns">
-<h2>Múltiples comuns positius</h2>
-<p>Construeix les dues llistes multiplicant cada nombre per 1, per 2, per 3 i així successivament fins al límit. Conserva els nombres que apareixen a totes dues llistes. Comença pels múltiples positius, que deixen fora el zero. Si el límit compleix les condicions, inclou-lo.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>Busquem els múltiples comuns positius de 6 i 10 fins a 60. Els múltiples de 10 són 10, 20, 30, 40, 50 i 60. Conservem els que també són divisibles per 6. El 0 queda fora perquè es demanen múltiples positius, i el 60 s’inclou perquè és el límit.</p>
-<p>Els múltiples de 6 fins a 60 són 6, 12, 18, 24, 30, 36, 42, 48, 54 i 60.</p>
-<p><strong>Resposta. Múltiples comuns positius:</strong> 30, 60.</p><p>Com a observació, el primer múltiple positiu comú és el mcm.</p></div>
-</section>
-<section class="card" id="casos-especials">
-<h2>Casos especials</h2>
-<p>Si el nombre petit divideix el gran, el petit ja és el divisor comú més gran i el gran és el primer múltiple positiu comú. Si només comparteixen l’1, el MCD és 1 i el mcm és el producte, perquè cal incloure tots els factors de tots dos nombres.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>6 divideix 18. El MCD és <strong>6</strong> i el mcm és <strong>18</strong>. En canvi, 8 i 9 només comparteixen l’1. El MCD és <strong>1</strong> i el mcm és <strong>8 × 9 = 72</strong>.</p></div>
-</section>
+
 <section class="card" id="mcd-factors">
 <h2>MCD per factors primers</h2>
 <p>Factoritza els nombres. Conserva els factors primers presents en tots dos i, per a cadascun, tria l’exponent més petit perquè el producte divideixi tots dos nombres.</p>
@@ -186,6 +195,7 @@ a{color:inherit}
 <p><strong>Producte dels factors primers comuns:</strong> 2 × 3.</p><p><strong>Resultat del MCD:</strong> 6.</p>
 <p>24 = 2³ × 3 i 36 = 2² × 3². El producte seleccionat és <strong>2² × 3</strong> i el MCD és <strong>12</strong>. En 8 = 2³ i 9 = 3² no hi ha factors primers comuns. Escrivim <strong>1</strong> al camp del producte i el MCD és <strong>1</strong>.</p></div>
 </section>
+
 <section class="card" id="mcm-factors">
 <h2>mcm per factors primers</h2>
 <p>Reuneix tots els factors primers presents i tria l’exponent més gran de cadascun. Així el producte conté prou factors perquè tots els nombres el divideixin.</p>
@@ -194,48 +204,86 @@ a{color:inherit}
 <p><strong>Producte dels factors primers seleccionats:</strong> 2² × 3 × 5.</p><p><strong>Resultat del mcm:</strong> 60.</p>
 <p>Amb 12 = 2² × 3 i 18 = 2 × 3², seleccionem <strong>2² × 3²</strong> i obtenim <strong>36</strong>. Amb 4 = 2², 6 = 2 × 3 i 8 = 2³, el mateix criteri dona <strong>2³ × 3 = 24</strong>.</p></div>
 </section>
-<section class="card" id="coincidencies">
-<h2>Coincidències amb inici simultani</h2>
+
+<details class="procedure-support" id="ajuda-exercicis">
+<summary><span class="support-heading">🧩 Ajuda per a exercicis concrets</span><span class="support-caption">10 procediments amb exemples resolts · Obre només el que necessitis</span></summary>
+<p class="support-intro">Primer repassa què són el MCD i el mcm, quan s'utilitzen i com es calculen per factors primers. Si et costa un exercici, desplega només el procediment que necessitis; també hi pots arribar amb un enllaç directe des de la pràctica.</p>
+<div id="procediments-detall" class="procedure-grid">
+<details class="procedure-item" id="divisors-comuns">
+<summary>Divisors comuns</summary>
+<p>Escriu els divisors positius de cada nombre. L’1 sempre hi apareix perquè qualsevol enter positiu dividit per 1 dona aquest mateix enter i residu 0. Conserva els nombres que apareixen a totes dues llistes, una vegada cadascun.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Els divisors de 12 són 1, 2, 3, 4, 6 i 12. Els de 18 són 1, 2, 3, 6, 9 i 18. Conservem els que apareixen a totes dues llistes.</p>
+<p><strong>Resposta. Divisors comuns positius:</strong> 1, 2, 3, 6.</p><p>Com a observació, el més gran d’aquests divisors és el MCD.</p></div>
+</details>
+
+<details class="procedure-item" id="multiples-comuns">
+<summary>Múltiples comuns positius</summary>
+<p>Construeix les dues llistes multiplicant cada nombre per 1, per 2, per 3 i així successivament fins al límit. Conserva els nombres que apareixen a totes dues llistes. Comença pels múltiples positius, que deixen fora el zero. Si el límit compleix les condicions, inclou-lo.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Busquem els múltiples comuns positius de 6 i 10 fins a 60. Els múltiples de 10 són 10, 20, 30, 40, 50 i 60. Conservem els que també són divisibles per 6. El 0 queda fora perquè es demanen múltiples positius, i el 60 s’inclou perquè és el límit.</p>
+<p>Els múltiples de 6 fins a 60 són 6, 12, 18, 24, 30, 36, 42, 48, 54 i 60.</p>
+<p><strong>Resposta. Múltiples comuns positius:</strong> 30, 60.</p><p>Com a observació, el primer múltiple positiu comú és el mcm.</p></div>
+</details>
+
+<details class="procedure-item" id="casos-especials">
+<summary>Casos especials</summary>
+<p>Si el nombre petit divideix el gran, el petit ja és el divisor comú més gran i el gran és el primer múltiple positiu comú. Si només comparteixen l’1, el MCD és 1 i el mcm és el producte, perquè cal incloure tots els factors de tots dos nombres.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>6 divideix 18. El MCD és <strong>6</strong> i el mcm és <strong>18</strong>. En canvi, 8 i 9 només comparteixen l’1. El MCD és <strong>1</strong> i el mcm és <strong>8 × 9 = 72</strong>.</p></div>
+</details>
+
+<details class="procedure-item" id="coincidencies">
+<summary>Coincidències amb inici simultani</summary>
 <p>Si dos processos coincideixen ara, el temps que passa fins a una nova coincidència ha de ser un múltiple positiu de tots dos períodes. Busca el més petit i expressa’l en la unitat dels períodes.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Dues alarmes sonen juntes ara i es repeteixen cada 12 i 18 segons. Una sona als 12, 24 i 36 segons i l’altra als 18 i 36 segons. La primera coincidència és al cap de <strong>36 segons</strong>.</p></div>
-</section>
-<section class="card" id="lots">
-<h2>Màxim nombre de lots idèntics</h2>
+</details>
+
+<details class="procedure-item" id="lots">
+<summary>Màxim nombre de lots idèntics</summary>
 <p>El nombre de lots ha de dividir cada quantitat sense residu. Busca el divisor comú més gran. Després divideix cada quantitat pel nombre de lots. Cada color té la mateixa quantitat en tots els lots.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Amb 24 llapis vermells i 36 de blaus, el MCD és 12. Podem fer <strong>12 lots</strong> de <strong>2 vermells i 3 blaus</strong> cadascun.</p></div>
-</section>
-<section class="card" id="talls">
-<h2>Talls de longitud màxima</h2>
+</details>
+
+<details class="procedure-item" id="talls">
+<summary>Talls de longitud màxima</summary>
 <p>La longitud d’un tros ha de dividir cada corda sense residu. Aquí maximitzem la longitud del tros. Per comptar trossos, divideix la longitud de cada corda per la longitud comuna.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Per a 72 cm i 90 cm, el MCD és <strong>18 cm</strong>. Surten <strong>4 trossos</strong> de la primera corda i <strong>5</strong> de la segona.</p></div>
-</section>
-<section class="card" id="triar-mcd-mcm">
-<h2>Com triar entre MCD i mcm</h2>
+</details>
+
+<details class="procedure-item" id="triar-mcd-mcm">
+<summary>Com triar entre MCD i mcm</summary>
 <p>Pregunta’t si el resultat ha de dividir les quantitats o si ha de ser divisible pels períodes. En el primer cas busquem el divisor comú més gran. En el segon, amb inici simultani, busquem el primer múltiple positiu comú.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>El nombre de lots ha de dividir 24 i 36. Triem el <strong>MCD</strong> i obtenim 12 lots. Si dos autobusos surten junts i passen cada 12 i 18 minuts, el temps ha de ser múltiple dels dos períodes. Triem el <strong>mcm</strong> i obtenim 36 minuts.</p></div>
-</section>
-<section class="card" id="coincidencies-desfasades">
-<h2>Coincidències amb inicis diferents</h2>
+</details>
+
+<details class="procedure-item" id="coincidencies-desfasades">
+<summary>Coincidències amb inicis diferents</summary>
 <p>Comença cada llista al seu minut inicial i suma el període corresponent. Busca el primer minut compartit que superi el límit. Si la condició diu «estrictament posterior», el minut del límit queda descartat.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Des del minut 3 cada 4 minuts tenim 3, 7, 11, 15, 19 i 23. Des del minut 5 cada 6 minuts tenim 5, 11, 17 i 23. El minut 11 coincideix amb el límit i queda descartat. La primera coincidència posterior és el minut <strong>23</strong>.</p></div>
-</section>
-<section class="card" id="operand-desconegut">
-<h2>Trobar un operand desconegut</h2>
+</details>
+
+<details class="procedure-item" id="operand-desconegut">
+<summary>Trobar un operand desconegut</summary>
 <p>Considera tots els enters de l’interval, inclosos els extrems. Si coneixes el MCD, conserva només els múltiples d’aquest MCD. Si coneixes el mcm, conserva només els seus divisors. Calcula el MCD o el mcm amb l’operand conegut per a cada candidat i comprova que només un dona el valor demanat.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Entre 13 i 25, els múltiples de 6 són 18 i 24. Amb 12, els MCD són 6 i 12 respectivament. Per obtenir 6 cal triar <strong>18</strong>. Entre 10 i 20, els divisors de 36 són 12 i 18. Els seus mcm amb 12 són 12 i 36, de manera que només <strong>18</strong> dona 36.</p></div>
-</section>
-<section class="card" id="errors-factors">
-<h2>Detectar i reparar errors de factors</h2>
+</details>
+
+<details class="procedure-item" id="errors-factors">
+<summary>Detectar i reparar errors de factors</summary>
 <p>Compara les dues factoritzacions amb el producte proposat. Per al mcm comprova que hi siguin tots els primers necessaris amb l’exponent més gran. Per al MCD comprova que cada primer sigui comú i que l’exponent sigui el més petit. Recalcula el producte després de corregir el factor o l’exponent.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Per a 12 i 30, la proposta 2² × 3 oblida el 5 de 30. El mcm és <strong>2² × 3 × 5 = 60</strong>. Per a 12 i 18, triar 2² per al MCD agafa un 2 de més. Corregim el producte a <strong>2 × 3 = 6</strong>.</p></div>
-</section>
+</details>
+</div>
+</details>
+
 <section class="card mistakes"><h2>⚠️ Errors freqüents</h2><ul><li>Confondre MCD i mcm.</li><li>En factorització, usar els exponents més grans per al MCD o els més petits per al mcm.</li><li>No interpretar si el problema demana agrupar o trobar una coincidència periòdica.</li></ul></section><section class="card check"><h2>✅ Comprova si ho has entès</h2><details><summary>Quan acostuma a aparèixer el mcm?</summary><div class="answer">Quan busques la primera coincidència de processos que es repeteixen.</div></details><details><summary>Quan acostuma a aparèixer el MCD?</summary><div class="answer">Quan vols fer el màxim nombre de lots idèntics o els trossos iguals més llargs possibles, sense sobrants.</div></details></section><section class="summary-master" id="resum-master"><h2>🧠 Resum essencial</h2><ul><li>Per al MCD, pren els factors primers comuns amb l’exponent menor.</li><li>Per al mcm, pren tots els factors primers amb l’exponent major.</li><li>El MCD serveix per agrupar o tallar sense sobrants. El mcm dona la primera coincidència quan els processos comencen alhora.</li></ul></section><section class="final-cta">
 <h2>Tria què vols practicar</h2>
 <p>Pots treballar els criteris i la factorització o passar directament als exercicis de MCD i mcm.</p>
@@ -435,4 +483,27 @@ a{color:inherit}
 })();
 </script>
 
+<script id="mi-theory-contextual-support">
+(function(){
+  var panel=document.getElementById('ajuda-exercicis');
+  if(!panel)return;
+  function obreAjudaEnllacada(){
+    var id;
+    try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}
+    if(!id)return;
+    var item=document.getElementById(id);
+    if(item && panel.contains(item)){
+      panel.open=true;
+      if(item.tagName==='DETAILS')item.open=true;
+      requestAnimationFrame(function(){item.scrollIntoView({block:'start'});});
+    }
+  }
+  window.addEventListener('hashchange',obreAjudaEnllacada);
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',obreAjudaEnllacada,{once:true});
+  }else{
+    obreAjudaEnllacada();
+  }
+})();
+</script>
 </body></html>
