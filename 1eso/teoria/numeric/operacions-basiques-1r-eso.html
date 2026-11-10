@@ -328,6 +328,52 @@ a{color:inherit}
 @media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
 </style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
+<style id="mi-practica-teoria-support">
+/* Els procediments són ajuda opcional, no la teoria principal. */
+.procedure-support{border:1px solid var(--border);border-radius:16px;background:var(--card);box-shadow:var(--sh);margin:18px 0;padding:0;scroll-margin-top:76px}
+.procedure-support>summary{cursor:pointer;list-style:none;padding:19px 22px;display:flex;flex-direction:column;gap:3px;position:relative;padding-right:50px}
+.procedure-support>summary::-webkit-details-marker,.procedure-item>summary::-webkit-details-marker{display:none}
+.procedure-support>summary:after{content:"＋";position:absolute;right:21px;top:19px;font-size:1.35rem;color:var(--primary)}
+.procedure-support[open]>summary:after{content:"−"}
+.support-heading{font-size:1.1rem;font-weight:800;color:var(--primary)}
+.support-caption,.support-intro{font-size:.87rem;color:var(--muted)}
+.support-intro{margin:0 22px 12px;line-height:1.6}
+.procedure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 20px 20px;align-items:start}
+.procedure-item{border:1px solid var(--border);border-radius:11px;background:#fbfcfe;scroll-margin-top:90px;min-width:0}
+.procedure-item>summary{cursor:pointer;padding:12px 33px 12px 13px;font-weight:700;font-size:.86rem;position:relative;line-height:1.35}
+.procedure-item>summary:after{content:"＋";position:absolute;right:11px;top:10px;color:var(--primary)}
+.procedure-item[open]>summary:after{content:"−"}
+.procedure-item[open]{grid-column:1/-1;background:#fff;border-color:var(--primary)}
+.procedure-item[open]>summary{color:var(--primary);border-bottom:1px solid var(--border)}
+.procedure-item>p,.procedure-item>.example{margin:12px 15px}
+.procedure-item>p.tip{margin:12px 15px 15px}
+.optional-challenge-heading{grid-column:1/-1;border-top:1px solid var(--border);padding:14px 2px 2px;margin-top:7px;display:flex;flex-direction:column;gap:3px}
+.optional-challenge-heading strong{color:#8a5d00;font-size:.95rem}
+.optional-challenge-heading span{color:var(--muted);font-size:.83rem}
+.optional-challenge{border-color:#efd48b;background:#fffdf7}
+.procedure-item:target{outline:2px solid var(--primary);outline-offset:2px}
+.procedure-item>summary:focus-visible,.procedure-support>summary:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+@media(max-width:650px){.procedure-grid{grid-template-columns:1fr;padding:0 12px 14px}.procedure-support>summary{padding:16px 45px 16px 15px}.support-intro{margin:0 15px 12px}}
+</style>
+<script id="mi-theory-contextual-support">
+(function(){
+  var panel=document.getElementById('ajuda-exercicis');
+  if(!panel)return;
+  function obreAjudaEnllacada(){
+    var id;
+    try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}
+    if(!id)return;
+    var item=document.getElementById(id);
+    if(item && panel.contains(item)){
+      panel.open=true;
+      if(item.tagName==='DETAILS')item.open=true;
+      requestAnimationFrame(function(){item.scrollIntoView({block:'start'});});
+    }
+  }
+  window.addEventListener('hashchange',obreAjudaEnllacada);
+  obreAjudaEnllacada();
+})();
+</script>
 </head>
 <body>
 <nav aria-label="Navegació principal" class="top-nav">
@@ -352,26 +398,15 @@ a{color:inherit}
 <a href="#sumar">2. Càlcul escrit</a>
 <a href="#problemes">3. Triar l’operació</a>
 <a href="#comprovar-divisio">4. Comprovacions</a>
+<a href="#ajuda-exercicis">🧩 Ajuda per exercici</a>
 </nav>
-<nav class="quick-nav" aria-label="Procediments de les 12 famílies">
-<a href="#sumar">Sumar amb portades</a>
-<a href="#restar">Restar amb reagrupaments</a>
-<a href="#multiplicar">Multiplicar amb productes parcials</a>
-<a href="#divisio-entera">Calcular quocient i residu</a>
-<a href="#problemes">Triar l’operació</a>
-<a href="#cost-i-canvi">Calcular el cost i el canvi</a>
-<a href="#produccio-per-torns">Calcular la producció total</a>
-<a href="#capses">Calcular capses i última capsa</a>
-<a href="#compensacio">Sumar per compensació</a>
-<a href="#comprovar-divisio">Detectar un error en una divisió</a>
-<a href="#reconstruir-total">Reconstruir un total amb dos quocients</a>
-<a href="#compra-minima">Trobar la compra més barata</a>
-</nav>
+
 <section class="card" id="operacions">
 <h2>➕ Les quatre operacions bàsiques</h2>
 <p>Amb els nombres naturals, sumem per ajuntar quantitats i restem per trobar una diferència o saber què queda. Multipliquem quan es repeteix la mateixa quantitat i dividim per repartir o agrupar.</p>
 <div class="callout">En una divisió entera, el dividend és igual al divisor multiplicat pel quocient, més el residu.</div>
 </section>
+
 <section class="card" id="sumar">
 <h2>Sumar amb portades</h2>
 <p>Alinea unitats amb unitats, desenes amb desenes i així successivament. Comença per la dreta. Si una columna suma deu o més, hi escrius la xifra de les unitats i portes una unitat a l’ordre següent.</p>
@@ -381,6 +416,7 @@ a{color:inherit}
 <p>Als milers, 2 + 1 + 1 = 4. El resultat és <strong>4.203</strong>.</p>
 </div>
 </section>
+
 <section class="card" id="restar">
 <h2>Restar amb reagrupaments</h2>
 <p>Alinea les xifres i resta de dreta a esquerra. Si en una columna no en tens prou, converteix una unitat de l’ordre superior en deu de l’ordre actual. Si la xifra de l’ordre superior és zero, continua buscant cap a l’esquerra.</p>
@@ -390,6 +426,7 @@ a{color:inherit}
 <p>El resultat és <strong>3.325</strong>. Ho comprovem sumant 3.325 + 1.879 = 5.204.</p>
 </div>
 </section>
+
 <section class="card" id="multiplicar">
 <h2>Multiplicar amb productes parcials</h2>
 <p>Descompon un factor segons el valor de les seves xifres. Multiplica l’altre factor per les unitats, les desenes i les centenes de la descomposició. Suma els productes parcials.</p>
@@ -398,6 +435,7 @@ a{color:inherit}
 <p>Els productes parcials són 24 × 100 = 2.400, 24 × 30 = 720 i 24 × 6 = 144. El resultat és <strong>2.400 + 720 + 144 = 3.264</strong>.</p>
 </div>
 </section>
+
 <section class="card" id="divisio-entera">
 <h2>Calcular quocient i residu</h2>
 <p>Busca quantes vegades cap el divisor a les primeres xifres del dividend. Escriu la xifra del quocient, resta el producte corresponent i baixa la xifra següent. Repeteix-ho fins al final. El residu ha de ser més petit que el divisor.</p>
@@ -406,6 +444,7 @@ a{color:inherit}
 <p>El quocient és 11 i el residu és 7. Ho comprovem: 8 × 11 + 7 = 95 i 7 &lt; 8. Escriu <strong>11; 7</strong> si et demanen els dos valors.</p>
 </div>
 </section>
+
 <section class="card" id="problemes">
 <h2>Triar l’operació</h2>
 <p>Fixa’t en què representa cada quantitat i què et demanen. Ajuntar correspon a sumar. Treure o trobar la diferència correspon a restar. Si saps quants grups hi ha i què conté cadascun, multiplica. Si saps el total i vols saber quants grups iguals es poden fer, divideix.</p>
@@ -414,41 +453,7 @@ a{color:inherit}
 <p>Si tinguessis 48 sobres de 6 targetes i et demanessin el total de targetes, l’operació seria <strong>48 × 6</strong>. Quan et demanen només l’operació, deixa-la escrita sense calcular.</p>
 </div>
 </section>
-<section class="card" id="cost-i-canvi">
-<h2>Calcular el cost i el canvi</h2>
-<p>Multiplica el nombre d’articles pel preu de cadascun. Resta el cost total a la quantitat entregada. El resultat és el canvi.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>Comprem 7 quaderns a 4 € cadascun i paguem amb 50 €. El cost total és 7 × 4 = 28 €.</p>
-<p>Ens tornen <strong>50 − 28 = 22 €</strong>. Ho comprovem: 28 + 22 = 50 €.</p>
-</div>
-<div class="example" id="exemple-resolt"><span class="example-label">Un altre exemple</span>
-<p>Una biblioteca rep 8 caixes de 36 llibres i en presta 57. Primer calculem els llibres rebuts, 8 × 36 = 288. Després restem els que ha prestat: <strong>288 − 57 = 231 llibres</strong>.</p>
-</div>
-</section>
-<section class="card" id="produccio-per-torns">
-<h2>Calcular la producció total</h2>
-<p>Multiplica les unitats per torn pels torns que es fan cada dia. Després multiplica la producció diària pel nombre de dies. Escriu què representa cada resultat intermedi.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>Una fàbrica produeix 125 peces per torn. Fa 3 torns al dia durant 8 dies.</p>
-<p>En un dia produeix 3 × 125 = 375 peces. En 8 dies produeix <strong>8 × 375 = 3.000 peces</strong>.</p>
-</div>
-</section>
-<section class="card" id="capses">
-<h2>Calcular capses i última capsa</h2>
-<p>Divideix el total per la capacitat d’una capsa. El quocient dona les capses plenes. Si en sobren, cal una capsa més i el residu indica què hi ha a l’última. Si el residu és zero, l’última capsa també és plena.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>Posem 97 llibres en capses de fins a 12. Com que 97 = 12 × 8 + 1, omplim 8 capses i ens en cal una més per a l’últim llibre. Resposta: <strong>9; 1</strong>.</p>
-<p>Si fossin 96 llibres, el repartiment seria exacte. Resposta: <strong>8; 12</strong>, perquè a l’última capsa hi caben 12 llibres i queda plena.</p>
-</div>
-</section>
-<section class="card" id="compensacio">
-<h2>Sumar per compensació</h2>
-<p>Canvia un sumand per un nombre rodó. Si l’augmentes, redueix l’altre en la mateixa quantitat. Si el disminueixes, augmenta l’altre. Així mantens la suma.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>A 398 + 267 afegim 2 a 398 per arribar a 400. Traiem aquests 2 de 267 i queda <strong>400 + 265 = 665</strong>.</p>
-<p>Si el primer sumand fos 403, el reduiríem en 3 i els afegiríem al segon: 403 + 267 = 400 + 270 = 670.</p>
-</div>
-</section>
+
 <section class="card" id="comprovar-divisio">
 <h2>Detectar un error en una divisió</h2>
 <p>Fes dues comprovacions. El producte del divisor pel quocient més el residu ha de donar el dividend. A més, el residu ha de ser zero o positiu i més petit que el divisor.</p>
@@ -457,23 +462,71 @@ a{color:inherit}
 <p>A «95 = 8 × 12 + 7», en canvi, el residu és vàlid però l’expressió suma 103. El motiu és A i la resposta és <strong>A; 11; 7</strong>.</p>
 </div>
 </section>
-<section class="card" id="reconstruir-total">
-<h2>Reconstruir un total amb dos quocients</h2>
+
+<details class="procedure-support" id="ajuda-exercicis">
+<summary><span class="support-heading">🧩 Ajuda per a exercicis concrets</span><span class="support-caption">6 procediments amb exemples resolts · Obre només el que necessitis</span></summary>
+<p class="support-intro">Primer repassa les quatre operacions i com triar-les. Si t'encalles en un problema, desplega només l'exemple que necessitis; els enllaços des dels exercicis també t'hi porten directament.</p>
+<div id="procediments-detall" class="procedure-grid">
+<details class="procedure-item" id="cost-i-canvi">
+<summary>Calcular el cost i el canvi</summary>
+<p>Multiplica el nombre d’articles pel preu de cadascun. Resta el cost total a la quantitat entregada. El resultat és el canvi.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Comprem 7 quaderns a 4 € cadascun i paguem amb 50 €. El cost total és 7 × 4 = 28 €.</p>
+<p>Ens tornen <strong>50 − 28 = 22 €</strong>. Ho comprovem: 28 + 22 = 50 €.</p>
+</div>
+<div class="example" id="exemple-resolt"><span class="example-label">Un altre exemple</span>
+<p>Una biblioteca rep 8 caixes de 36 llibres i en presta 57. Primer calculem els llibres rebuts, 8 × 36 = 288. Després restem els que ha prestat: <strong>288 − 57 = 231 llibres</strong>.</p>
+</div>
+</details>
+
+<details class="procedure-item" id="produccio-per-torns">
+<summary>Calcular la producció total</summary>
+<p>Multiplica les unitats per torn pels torns que es fan cada dia. Després multiplica la producció diària pel nombre de dies. Escriu què representa cada resultat intermedi.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Una fàbrica produeix 125 peces per torn. Fa 3 torns al dia durant 8 dies.</p>
+<p>En un dia produeix 3 × 125 = 375 peces. En 8 dies produeix <strong>8 × 375 = 3.000 peces</strong>.</p>
+</div>
+</details>
+
+<details class="procedure-item" id="capses">
+<summary>Calcular capses i última capsa</summary>
+<p>Divideix el total per la capacitat d’una capsa. El quocient dona les capses plenes. Si en sobren, cal una capsa més i el residu indica què hi ha a l’última. Si el residu és zero, l’última capsa també és plena.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Posem 97 llibres en capses de fins a 12. Com que 97 = 12 × 8 + 1, omplim 8 capses i ens en cal una més per a l’últim llibre. Resposta: <strong>9; 1</strong>.</p>
+<p>Si fossin 96 llibres, el repartiment seria exacte. Resposta: <strong>8; 12</strong>, perquè a l’última capsa hi caben 12 llibres i queda plena.</p>
+</div>
+</details>
+
+<details class="procedure-item" id="compensacio">
+<summary>Sumar per compensació</summary>
+<p>Canvia un sumand per un nombre rodó. Si l’augmentes, redueix l’altre en la mateixa quantitat. Si el disminueixes, augmenta l’altre. Així mantens la suma.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>A 398 + 267 afegim 2 a 398 per arribar a 400. Traiem aquests 2 de 267 i queda <strong>400 + 265 = 665</strong>.</p>
+<p>Si el primer sumand fos 403, el reduiríem en 3 i els afegiríem al segon: 403 + 267 = 400 + 270 = 670.</p>
+</div>
+</details>
+
+<details class="procedure-item" id="reconstruir-total">
+<summary>Reconstruir un total amb dos quocients</summary>
 <p>Per a cada mida de grup, calcula el mínim multiplicant la mida pel nombre de grups complets. Per al màxim, suma-hi el residu més gran possible, que és la mida del grup menys un. Busca quins valors coincideixen als dos intervals.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>17 grups complets de 8 situen el total entre 17 × 8 = 136 i 136 + 7 = 143.</p>
 <p>13 grups complets d’11 situen el total entre 13 × 11 = 143 i 143 + 10 = 153. El valor comú és <strong>143</strong>. Amb grups de 8 en sobren 7, i amb grups d’11 no en sobra cap.</p>
 </div>
-</section>
-<section class="card" id="compra-minima">
-<h2>Trobar la compra més barata</h2>
+</details>
+
+<details class="procedure-item" id="compra-minima">
+<summary>Trobar la compra més barata</summary>
 <p>Prova les quantitats possibles de paquets grans, incloent-hi zero. A cada prova, afegeix només els paquets petits necessaris per arribar al mínim. Compara el cost total. Si dues combinacions tenen el mateix cost mínim, totes dues són òptimes.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Calen almenys 11 llapis. El paquet A té 4 llapis i costa 5 €. El B en té 7 i costa 8 €.</p>
 <p>Amb 0 paquets B calen 3 A i el cost és 15 €. Amb 1 B cal 1 A i el cost és 13 €. Amb 2 B ja n’hi ha prou i el cost és 16 €. Més paquets B només encareixen la compra.</p>
 <p>El cost mínim és <strong>13 €</strong> amb un paquet de cada tipus.</p>
 </div>
-</section>
+</details>
+</div>
+</details>
+
 <section class="card mistakes">
 <h2>⚠️ Errors freqüents</h2>
 <ul>
