@@ -328,6 +328,52 @@ a{color:inherit}
 @media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
 </style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
+<style id="mi-practica-teoria-support">
+/* Els procediments són ajuda opcional, no la teoria principal. */
+.procedure-support{border:1px solid var(--border);border-radius:16px;background:var(--card);box-shadow:var(--sh);margin:18px 0;padding:0;scroll-margin-top:76px}
+.procedure-support>summary{cursor:pointer;list-style:none;padding:19px 22px;display:flex;flex-direction:column;gap:3px;position:relative;padding-right:50px}
+.procedure-support>summary::-webkit-details-marker,.procedure-item>summary::-webkit-details-marker{display:none}
+.procedure-support>summary:after{content:"＋";position:absolute;right:21px;top:19px;font-size:1.35rem;color:var(--primary)}
+.procedure-support[open]>summary:after{content:"−"}
+.support-heading{font-size:1.1rem;font-weight:800;color:var(--primary)}
+.support-caption,.support-intro{font-size:.87rem;color:var(--muted)}
+.support-intro{margin:0 22px 12px;line-height:1.6}
+.procedure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 20px 20px;align-items:start}
+.procedure-item{border:1px solid var(--border);border-radius:11px;background:#fbfcfe;scroll-margin-top:90px;min-width:0}
+.procedure-item>summary{cursor:pointer;padding:12px 33px 12px 13px;font-weight:700;font-size:.86rem;position:relative;line-height:1.35}
+.procedure-item>summary:after{content:"＋";position:absolute;right:11px;top:10px;color:var(--primary)}
+.procedure-item[open]>summary:after{content:"−"}
+.procedure-item[open]{grid-column:1/-1;background:#fff;border-color:var(--primary)}
+.procedure-item[open]>summary{color:var(--primary);border-bottom:1px solid var(--border)}
+.procedure-item>p,.procedure-item>.example{margin:12px 15px}
+.procedure-item>p.tip{margin:12px 15px 15px}
+.optional-challenge-heading{grid-column:1/-1;border-top:1px solid var(--border);padding:14px 2px 2px;margin-top:7px;display:flex;flex-direction:column;gap:3px}
+.optional-challenge-heading strong{color:#8a5d00;font-size:.95rem}
+.optional-challenge-heading span{color:var(--muted);font-size:.83rem}
+.optional-challenge{border-color:#efd48b;background:#fffdf7}
+.procedure-item:target{outline:2px solid var(--primary);outline-offset:2px}
+.procedure-item>summary:focus-visible,.procedure-support>summary:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+@media(max-width:650px){.procedure-grid{grid-template-columns:1fr;padding:0 12px 14px}.procedure-support>summary{padding:16px 45px 16px 15px}.support-intro{margin:0 15px 12px}}
+</style>
+<script id="mi-theory-contextual-support">
+(function(){
+  var panel=document.getElementById('ajuda-exercicis');
+  if(!panel)return;
+  function obreAjudaEnllacada(){
+    var id;
+    try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}
+    if(!id)return;
+    var item=document.getElementById(id);
+    if(item && panel.contains(item)){
+      panel.open=true;
+      if(item.tagName==='DETAILS')item.open=true;
+      requestAnimationFrame(function(){item.scrollIntoView({block:'start'});});
+    }
+  }
+  window.addEventListener('hashchange',obreAjudaEnllacada);
+  obreAjudaEnllacada();
+})();
+</script>
 </head>
 <body>
 <nav aria-label="Navegació principal" class="top-nav">
@@ -352,21 +398,9 @@ a{color:inherit}
 <a href="#comparar">2. Comparar</a>
 <a href="#arrodonir">3. Arrodonir</a>
 <a href="#problemes">4. Problemes</a>
+<a href="#ajuda-exercicis">🧩 Ajuda per exercici</a>
 </nav>
-<nav class="quick-nav" aria-label="Procediments de les 12 famílies">
-<a href="#comparar">Comparar i ordenar</a>
-<a href="#arrodonir">Arrodonir un nombre</a>
-<a href="#repartiment-equitatiu">Repartir a parts iguals</a>
-<a href="#producte-i-suma">Multiplicar i sumar en un problema</a>
-<a href="#recta-graduada">Llegir una recta graduada</a>
-<a href="#dividend-desconegut">Trobar el dividend</a>
-<a href="#producte-descomposicio">Multiplicar per descomposició</a>
-<a href="#operacions-valor-desconegut">Trobar el nombre que falta</a>
-<a href="#interval-arrodoniment">Trobar els extrems d’un arrodoniment</a>
-<a href="#paquets-exactes">Minimitzar el nombre de paquets</a>
-<a href="#nombres-amb-condicions">Construir un nombre amb pistes</a>
-<a href="#patrons-numerics">Continuar un patró numèric</a>
-</nav>
+
 <section class="card" id="que-son">
 <h2>🔢 1. Què són els nombres naturals?</h2>
 <p>Els <strong>nombres naturals</strong> són els que fem servir habitualment per <strong>comptar</strong> i <strong>ordenar</strong>.</p>
@@ -465,24 +499,28 @@ a{color:inherit}
 </div>
 <div class="tip">💡 En els problemes, el <strong>residu</strong> també pot tenir significat. Si sobren persones, pot caldre un grup o vehicle més.</div>
 </section>
-<section class="card" id="repartiment-equitatiu">
-<h2>Repartir a parts iguals</h2>
+<details class="procedure-support" id="ajuda-exercicis">
+<summary><span class="support-heading">🧩 Ajuda per a exercicis concrets</span><span class="support-caption">10 procediments amb exemples resolts · Obre només el que necessitis</span></summary>
+<p class="support-intro">Primer repassa els quatre apartats de teoria. Si un exercici et costa, obre aquí només el procediment que necessites. Per comparar i arrodonir, consulta els apartats 2 i 3 de la teoria.</p>
+<div id="procediments-detall" class="procedure-grid">
+<details class="procedure-item" id="repartiment-equitatiu">
+<summary>Repartir a parts iguals</summary>
 <p>Divideix la quantitat total pel nombre de grups. El quocient indica quantes unitats rep cadascun. En un repartiment exacte, el residu és zero.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Una escola reparteix 216 llibres entre 6 aules a parts iguals.</p>
 <p>Cada aula rep <strong>216 ÷ 6 = 36 llibres</strong>. Ho comprovem: 6 × 36 = 216.</p>
 </div>
-</section>
-<section class="card" id="producte-i-suma">
-<h2>Multiplicar i sumar en un problema</h2>
+</details>
+<details class="procedure-item" id="producte-i-suma">
+<summary>Multiplicar i sumar en un problema</summary>
 <p>Multiplica el nombre de grups per la quantitat de cada grup. Després suma-hi la quantitat extra una sola vegada, perquè és una reserva del conjunt.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Cinc màquines produeixen 18 peces cadascuna i hi ha 12 peces de reserva.</p>
 <p>Les màquines fan 5 × 18 = 90 peces. Amb la reserva hi ha <strong>90 + 12 = 102 peces</strong>.</p>
 </div>
-</section>
-<section class="card" id="recta-graduada">
-<h2>Llegir una recta graduada</h2>
+</details>
+<details class="procedure-item" id="recta-graduada">
+<summary>Llegir una recta graduada</summary>
 <p>Resta els valors dels extrems i divideix la diferència pel nombre d’espais iguals. A partir de l’extrem esquerre, suma el valor d’un espai cada vegada que avances una marca.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <svg viewBox="0 0 384 60" style="width:100%;max-width:384px;display:block" role="img" aria-label="Recta del 200 al 700 amb cinc intervals iguals i quatre marques A, B, C i D d’esquerra a dreta">
@@ -492,65 +530,67 @@ a{color:inherit}
 <p>Hi ha cinc espais. Cada salt val (700 − 200) ÷ 5 = 100.</p>
 <p>La marca C és a tres salts del 200. Per tant, <strong>C correspon a 500</strong>: 200 + 3 × 100 = 500.</p>
 </div>
-</section>
-<section class="card" id="dividend-desconegut">
-<h2>Trobar el dividend</h2>
+</details>
+<details class="procedure-item" id="dividend-desconegut">
+<summary>Trobar el dividend</summary>
 <p>Multiplica el divisor pel quocient i suma-hi el residu. El residu ha de ser més petit que el divisor i pot ser zero.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>El divisor és 8, el quocient és 11 i el residu és 7.</p>
 <p>Els grups complets donen 8 × 11 = 88. Hi afegim les 7 unitats que sobren: <strong>88 + 7 = 95</strong>. Si dividim 95 entre 8, surten 11 grups complets i en sobren 7.</p>
 </div>
-</section>
-<section class="card" id="producte-descomposicio">
-<h2>Multiplicar per descomposició</h2>
+</details>
+<details class="procedure-item" id="producte-descomposicio">
+<summary>Multiplicar per descomposició</summary>
 <p>Escriu un factor com una suma o una resta amb un nombre rodó. Multiplica cadascuna de les dues parts per l’altre factor. Conserva el signe de la descomposició quan combinis els productes.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Com que 37 = 40 − 3, escrivim 24 × 37 = 24 × 40 − 24 × 3.</p>
 <p>Els productes parcials són <strong>960 i 72</strong>, en aquest ordre. Si et demanen el producte final, calcula 960 − 72 = 888.</p>
 </div>
-</section>
-<section class="card" id="operacions-valor-desconegut">
-<h2>Trobar el nombre que falta</h2>
+</details>
+<details class="procedure-item" id="operacions-valor-desconegut">
+<summary>Trobar el nombre que falta</summary>
 <p>Comença pel resultat i desfés les operacions en ordre invers. Per desfer una suma, resta. Per desfer una resta, suma. La multiplicació i la divisió també es desfan l’una amb l’altra.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Completa 4 × □ + 6 = 34. Primer desfem la suma: 34 − 6 = 28. Després desfem la multiplicació: 28 ÷ 4 = <strong>7</strong>.</p>
 <p>Ho comprovem: 4 × 7 + 6 = 34. Si l’expressió fos □ ÷ 4 − 6 = 1, faríem 1 + 6 = 7 i després 7 × 4 = <strong>28</strong>.</p>
 </div>
-</section>
-<section class="card" id="interval-arrodoniment">
-<h2>Trobar els extrems d’un arrodoniment</h2>
+</details>
+<details class="procedure-item" id="interval-arrodoniment">
+<summary>Trobar els extrems d’un arrodoniment</summary>
 <p>Busca els punts mitjans entre el resultat i els dos múltiples veïns. Si els empats s’arrodoneixen cap amunt, el punt mitjà inferior hi entra. El superior ja s’arrodoneix al múltiple següent, així que el màxim admès és una unitat menys.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Quins naturals donen 3.800 quan els arrodonim a les centenes? La meitat d’una centena és 50. L’extrem inferior és 3.800 − 50 = <strong>3.750</strong>.</p>
 <p>3.800 + 50 = 3.850 ja dona 3.900. L’extrem superior és <strong>3.849</strong>. Hi entren tots els nombres des de 3.750 fins a 3.849, inclosos.</p>
 </div>
-</section>
-<section class="card" id="paquets-exactes">
-<h2>Minimitzar el nombre de paquets</h2>
+</details>
+<details class="procedure-item" id="paquets-exactes">
+<summary>Minimitzar el nombre de paquets</summary>
 <p>Reserva prou unitats per fer almenys un paquet petit. Prova els nombres possibles de paquets grans i divideix el que queda per la mida del paquet petit. Conserva només les combinacions exactes que facin servir els dos formats i compara el nombre total de paquets.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Volem empaquetar 41 adhesius en paquets de 3 i de 7. Reservant 3 adhesius, hi caben com a màxim 5 paquets de 7.</p>
 <p>En provar de 5 a 1 paquets grans, les restes són 6, 13, 20, 27 i 34. Només 6 i 27 són múltiples de 3.</p>
 <p>Amb 5 grans i 2 petits fem 7 paquets. Amb 2 grans i 9 petits en fem 11. El mínim és <strong>7 paquets</strong> i 5 × 7 + 2 × 3 = 41.</p>
 </div>
-</section>
-<section class="card" id="nombres-amb-condicions">
-<h2>Construir un nombre amb pistes</h2>
+</details>
+<details class="procedure-item" id="nombres-amb-condicions">
+<summary>Construir un nombre amb pistes</summary>
 <p>Escriu les xifres conegudes a la seva posició i resta-les de la suma total de xifres. Busca el parell que compleixi alhora la suma que falta i la relació de l’enunciat. Comprova totes les pistes amb el nombre obtingut.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>El miler és 3, la centena és 2, les unitats són el doble de les desenes i les quatre xifres sumen 14.</p>
 <p>Les desenes i les unitats sumen 14 − 3 − 2 = 9. Com que les unitats valen dues vegades les desenes, tres vegades les desenes fan 9. Les desenes són 3 i les unitats són 6.</p>
 <p>El nombre és <strong>3.236</strong>. Comprovem que 6 = 2 × 3 i que 3 + 2 + 3 + 6 = 14.</p>
 </div>
-</section>
-<section class="card" id="patrons-numerics">
-<h2>Continuar un patró numèric</h2>
+</details>
+<details class="procedure-item" id="patrons-numerics">
+<summary>Continuar un patró numèric</summary>
 <p>Resta cada terme del següent per trobar els salts. Mira si els salts augmenten, disminueixen o alternen dos valors. Aplica el salt següent a l’últim terme.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>A 8, 10, 13, 17, 22 els salts són +2, +3, +4 i +5. El salt següent és +6, així que el terme següent és <strong>28</strong>.</p>
 <p>A 10, 12, 17, 19, 24 els salts alternen +2 i +5. Ara toca +2 i el terme següent és <strong>26</strong>.</p>
 </div>
-</section>
+</details>
+</div>
+</details>
 <section class="card mistakes">
 <h2>⚠️ Errors freqüents</h2>
 <ul>
