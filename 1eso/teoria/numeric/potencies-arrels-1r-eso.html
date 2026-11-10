@@ -140,7 +140,11 @@ a{color:inherit}
     }
   }
   window.addEventListener('hashchange',obreAjudaEnllacada);
-  obreAjudaEnllacada();
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded',obreAjudaEnllacada,{once:true});
+  }else{
+    obreAjudaEnllacada();
+  }
 })();
 </script>
 </head>
