@@ -53,11 +53,13 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
       state.fractionsSolved=9;state.fractionsAnswered=9;state.done=state.done.filter(x=>x!=='fraccionsSentit');state.answered=false;processAnswer(true,currentEx.correct);nextExercise();
       const completed=document.querySelector('#feedbackArea .congrats')?.textContent||'';
       state.level=2;state.mode='open';startPractice();const reset={solved:state.fractionsSolved,answered:state.fractionsAnswered,points:state.fractionsDifficultyPoints,correctStreak:state.correctStreak};
-      state.mode='multi';state.done=state.done.filter(x=>x!=='fraccionsSentit');startPractice();for(let n=0;n<20;n++){state.answered=false;processAnswer(n%2===0,currentEx.correct)}nextExercise();
+      state.level=1;state.mode='multi';startPractice();state.answered=false;processAnswer(true,currentEx.correct);goBack();
+      const voluntaryExit=document.querySelector('#feedbackArea .congrats')?.textContent||'';
+      state.level=2;state.mode='multi';state.done=state.done.filter(x=>x!=='fraccionsSentit');startPractice();for(let n=0;n<20;n++){state.answered=false;processAnswer(n%2===0,currentEx.correct)}nextExercise();
       const autonomous={answered:state.fractionsAnswered,solved:state.fractionsSolved,completed:document.querySelector('#feedbackArea .congrats')?.textContent.includes('20 respostes')||false};
-      return {samples:samples.length,familyCoverage,before,errorProgress,completed:completed.includes('Bloc superat'),reset,autonomous};
+      return {samples:samples.length,familyCoverage,before,errorProgress,completed:completed.includes('Bloc superat'),reset,voluntaryExit:voluntaryExit.includes('Resum de la pràctica')&&voluntaryExit.includes('Encerts: 1'),autonomous};
     });
-    assert.equal(practice.samples,360);assert.deepEqual(practice.errorProgress,{solved:9,answered:10,points:8});assert(practice.completed);assert.deepEqual(practice.reset,{solved:0,answered:0,points:0,correctStreak:0});assert.deepEqual(practice.autonomous,{answered:20,solved:10,completed:true});
+    assert.equal(practice.samples,360);assert.deepEqual(practice.errorProgress,{solved:9,answered:10,points:8});assert(practice.completed);assert.deepEqual(practice.reset,{solved:0,answered:0,points:0,correctStreak:0});assert(practice.voluntaryExit);assert.deepEqual(practice.autonomous,{answered:20,solved:10,completed:true});
     for(const f of practice.familyCoverage){const expected=({1:6,2:5,3:4})[f.level]-(f.mode==='open'&&f.level!==3?1:0);assert.equal(f.count,expected,`diversitat familiar ${f.support}/${f.mode}/N${f.level}`)}
     await page.goto(url+'&examen=tema');await page.waitForSelector('#miTopicExam.active');
     const exam=await page.evaluate(()=>{const qs=miTopicExam.getSession().questions;const fams=d=>qs.filter(q=>q.diff===d).map(q=>MIDifficulty.fractionsMeaningFamily(q.type));return {total:qs.length,levels:[1,2,3].map(d=>qs.filter(q=>q.diff===d).length),families:[1,2,3].map(d=>fams(d).length),uniqueFamilies:[1,2,3].map(d=>new Set(fams(d)).size)};});
