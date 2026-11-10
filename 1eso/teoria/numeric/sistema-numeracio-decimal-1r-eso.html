@@ -328,6 +328,52 @@ a{color:inherit}
 @media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
 </style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
+<style id="mi-practica-teoria-support">
+/* Els procediments són ajuda opcional, no la teoria principal. */
+.procedure-support{border:1px solid var(--border);border-radius:16px;background:var(--card);box-shadow:var(--sh);margin:18px 0;padding:0;scroll-margin-top:76px}
+.procedure-support>summary{cursor:pointer;list-style:none;padding:19px 22px;display:flex;flex-direction:column;gap:3px;position:relative;padding-right:50px}
+.procedure-support>summary::-webkit-details-marker,.procedure-item>summary::-webkit-details-marker{display:none}
+.procedure-support>summary:after{content:"＋";position:absolute;right:21px;top:19px;font-size:1.35rem;color:var(--primary)}
+.procedure-support[open]>summary:after{content:"−"}
+.support-heading{font-size:1.1rem;font-weight:800;color:var(--primary)}
+.support-caption,.support-intro{font-size:.87rem;color:var(--muted)}
+.support-intro{margin:0 22px 12px;line-height:1.6}
+.procedure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 20px 20px;align-items:start}
+.procedure-item{border:1px solid var(--border);border-radius:11px;background:#fbfcfe;scroll-margin-top:90px;min-width:0}
+.procedure-item>summary{cursor:pointer;padding:12px 33px 12px 13px;font-weight:700;font-size:.86rem;position:relative;line-height:1.35}
+.procedure-item>summary:after{content:"＋";position:absolute;right:11px;top:10px;color:var(--primary)}
+.procedure-item[open]>summary:after{content:"−"}
+.procedure-item[open]{grid-column:1/-1;background:#fff;border-color:var(--primary)}
+.procedure-item[open]>summary{color:var(--primary);border-bottom:1px solid var(--border)}
+.procedure-item>p,.procedure-item>.example{margin:12px 15px}
+.procedure-item>p.tip{margin:12px 15px 15px}
+.optional-challenge-heading{grid-column:1/-1;border-top:1px solid var(--border);padding:14px 2px 2px;margin-top:7px;display:flex;flex-direction:column;gap:3px}
+.optional-challenge-heading strong{color:#8a5d00;font-size:.95rem}
+.optional-challenge-heading span{color:var(--muted);font-size:.83rem}
+.optional-challenge{border-color:#efd48b;background:#fffdf7}
+.procedure-item:target{outline:2px solid var(--primary);outline-offset:2px}
+.procedure-item>summary:focus-visible,.procedure-support>summary:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+@media(max-width:650px){.procedure-grid{grid-template-columns:1fr;padding:0 12px 14px}.procedure-support>summary{padding:16px 45px 16px 15px}.support-intro{margin:0 15px 12px}}
+</style>
+<script id="mi-theory-contextual-support">
+(function(){
+  var panel=document.getElementById('ajuda-exercicis');
+  if(!panel)return;
+  function obreAjudaEnllacada(){
+    var id;
+    try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}
+    if(!id)return;
+    var item=document.getElementById(id);
+    if(item && panel.contains(item)){
+      panel.open=true;
+      if(item.tagName==='DETAILS')item.open=true;
+      requestAnimationFrame(function(){item.scrollIntoView({block:'start'});});
+    }
+  }
+  window.addEventListener('hashchange',obreAjudaEnllacada);
+  obreAjudaEnllacada();
+})();
+</script>
 </head>
 <body>
 <nav aria-label="Navegació principal" class="top-nav">
@@ -352,20 +398,9 @@ a{color:inherit}
 <a href="#descompondre">2. Descomposició</a>
 <a href="#lectura-paraules-a-xifres">3. Llegir i escriure</a>
 <a href="#equivalencia-ordres-posicionals">4. Equivalències</a>
+<a href="#ajuda-exercicis">🧩 Ajuda per exercici</a>
 </nav>
-<nav class="quick-nav" aria-label="Procediments de les 11 famílies">
-<a href="#sistema-decimal">Trobar el valor d’una xifra</a>
-<a href="#descompondre">Descompondre un nombre</a>
-<a href="#reconstruir-nombre">Reconstruir el nombre per posicions</a>
-<a href="#lectura-paraules-a-xifres">Passar de paraules a xifres</a>
-<a href="#escriure-xifres-a-paraules">Passar de xifres a paraules</a>
-<a href="#guionets-numerals-du-c">Posar els guionets</a>
-<a href="#canvi-posicional">Calcular un canvi de posició</a>
-<a href="#descomposicio-equivalent-reagrupament">Descompondre i reagrupar</a>
-<a href="#equivalencia-ordres-posicionals">Convertir entre ordres</a>
-<a href="#xifres-amb-condicions">Formar el nombre parell més gran</a>
-<a href="#auditar-error-de-posicio">Detectar un error de posició</a>
-</nav>
+
 <section class="card" id="sistema-decimal">
 <h2>🔻 Trobar el valor d’una xifra</h2>
 <p>En el nostre sistema de numeració, el valor d'una xifra depèn de la <strong>posició</strong> que ocupa. Cada posició val deu vegades més que la que té a la seva dreta.</p>
@@ -391,6 +426,7 @@ a{color:inherit}
 </div>
 <div class="tip">💡 El mateix dígit pot tenir valors molt diferents segons la posició: el 4 de 4.000 val 4.000, però el 4 de 40 val 40.</div>
 </section>
+
 <section class="card" id="descompondre">
 <h2>Descompondre un nombre</h2>
 <p>Multiplica cada xifra pel valor de la posició que ocupa. Suma les aportacions. En la suma pots ometre els termes que valen zero.</p>
@@ -400,14 +436,7 @@ a{color:inherit}
 <p>La suma de les aportacions és 40.000 + 8.000 + 300 + 6 = <strong>48.306</strong>.</p>
 </div>
 </section>
-<section class="card" id="reconstruir-nombre">
-<h2>Reconstruir el nombre per posicions</h2>
-<p>Col·loca les xifres de l’ordre més gran al més petit. Escriu un zero a cada posició buida entre la primera xifra i les unitats.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>Tenim 4 desenes de miler, 7 centenes i 2 unitats. Falta la xifra dels milers i la de les desenes. Hi posem zeros.</p>
-<p>En ordre, les xifres són 4, 0, 7, 0 i 2. Obtenim <strong>40.702</strong>, que és 40.000 + 700 + 2.</p>
-</div>
-</section>
+
 <section class="card" id="lectura-paraules-a-xifres">
 <h2>Passar de paraules a xifres</h2>
 <p>Separa el nombre per la paraula <em>mil</em>. El grup de davant indica quants milers hi ha. El de darrere ha d’ocupar tres posicions: centenes, desenes i unitats. Completa amb zeros a l’esquerra d’aquest segon grup si cal.</p>
@@ -416,38 +445,7 @@ a{color:inherit}
 <p>El nombre és <strong>42.035</strong>. Si després de <em>mil</em> no hi ha cap paraula, les tres posicions finals són 000.</p>
 </div>
 </section>
-<section class="card" id="escriure-xifres-a-paraules">
-<h2>Passar de xifres a paraules</h2>
-<p>Separa les tres últimes xifres. Llegeix el grup de l’esquerra seguit de <em>mil</em> i després llegeix l’últim grup. Els zeros que indiquen posicions buides no es pronuncien.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>A 305.071, el grup dels milers és 305 i el final és 071. Llegim «tres-cents cinc mil» i després «setanta-u».</p>
-<p>Escrivim <strong>tres-cents cinc mil setanta-u</strong>. Si només hi ha un miler, escrivim <em>mil</em>.</p>
-</div>
-</section>
-<section class="card" id="guionets-numerals-du-c">
-<h2>Posar els guionets</h2>
-<p>La regla D-U-C posa un guionet entre la desena i la unitat, i entre la unitat i <em>cents</em> quan formen una centena. Del 21 al 29, la <em>i</em> porta un guionet a cada costat. Escriu <em>mil</em> separat.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>2.324 s’escriu <strong>dos mil tres-cents vint-i-quatre</strong>. Unim «tres» i «cents», i a «vint-i-quatre» posem els dos guionets.</p>
-<p>A 347, escrivim <strong>tres-cents quaranta-set</strong>, amb un sol guionet entre «quaranta» i «set».</p>
-</div>
-</section>
-<section class="card" id="canvi-posicional">
-<h2>Calcular un canvi de posició</h2>
-<p>Calcula la contribució de la xifra a la posició inicial i a la nova. Com que les altres aportacions es mantenen, resta el valor inicial del nou per trobar l’augment.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>A 20.050 canviem 5 desenes per 5 milers. Les 5 desenes valen 50 i els 5 milers valen 5.000.</p>
-<p>El nombre augmenta <strong>5.000 − 50 = 4.950 unitats</strong>. Ho comprovem: 20.050 + 4.950 = 25.000.</p>
-</div>
-</section>
-<section class="card" id="descomposicio-equivalent-reagrupament">
-<h2>Descompondre i reagrupar</h2>
-<p>Quan hi ha deu unitats o més d’un ordre, canvia cada grup de deu per una unitat de l’ordre superior. El valor total es conserva. També pots multiplicar cada quantitat pel valor del seu ordre i sumar.</p>
-<div class="example"><span class="example-label">Exemple resolt</span>
-<p>Tenim 14 centenes, 7 desenes i 3 unitats. Reagrupem 10 centenes en 1 miler i ens queden 4 centenes.</p>
-<p>El nombre és <strong>1.473</strong>. Ho comprovem: 14 × 100 + 7 × 10 + 3 × 1 = 1.400 + 70 + 3.</p>
-</div>
-</section>
+
 <section class="card" id="equivalencia-ordres-posicionals">
 <h2>Convertir entre ordres</h2>
 <p>Converteix totes les quantitats al mateix ordre abans de sumar-les. Cada pas cap a un ordre inferior multiplica el recompte per deu.</p>
@@ -456,22 +454,76 @@ a{color:inherit}
 <p>En total són <strong>340 desenes</strong>, que equivalen a 3.400 unitats.</p>
 </div>
 </section>
-<section class="card" id="xifres-amb-condicions">
-<h2>Formar el nombre parell més gran</h2>
+
+<details class="procedure-support" id="ajuda-exercicis">
+<summary><span class="support-heading">🧩 Ajuda per a exercicis concrets</span><span class="support-caption">7 procediments amb exemples resolts · Obre només el que necessitis</span></summary>
+<p class="support-intro">Consulta primer els quatre apartats de teoria. Si un exercici et costa, obre només el procediment que necessitis. També pots arribar-hi directament des de l'exercici.</p>
+<div id="procediments-detall" class="procedure-grid">
+<details class="procedure-item" id="reconstruir-nombre">
+<summary>Reconstruir el nombre per posicions</summary>
+<p>Col·loca les xifres de l’ordre més gran al més petit. Escriu un zero a cada posició buida entre la primera xifra i les unitats.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Tenim 4 desenes de miler, 7 centenes i 2 unitats. Falta la xifra dels milers i la de les desenes. Hi posem zeros.</p>
+<p>En ordre, les xifres són 4, 0, 7, 0 i 2. Obtenim <strong>40.702</strong>, que és 40.000 + 700 + 2.</p>
+</div>
+</details>
+
+<details class="procedure-item" id="escriure-xifres-a-paraules">
+<summary>Passar de xifres a paraules</summary>
+<p>Separa les tres últimes xifres. Llegeix el grup de l’esquerra seguit de <em>mil</em> i després llegeix l’últim grup. Els zeros que indiquen posicions buides no es pronuncien.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>A 305.071, el grup dels milers és 305 i el final és 071. Llegim «tres-cents cinc mil» i després «setanta-u».</p>
+<p>Escrivim <strong>tres-cents cinc mil setanta-u</strong>. Si només hi ha un miler, escrivim <em>mil</em>.</p>
+</div>
+</details>
+
+<details class="procedure-item" id="guionets-numerals-du-c">
+<summary>Posar els guionets</summary>
+<p>La regla D-U-C posa un guionet entre la desena i la unitat, i entre la unitat i <em>cents</em> quan formen una centena. Del 21 al 29, la <em>i</em> porta un guionet a cada costat. Escriu <em>mil</em> separat.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>2.324 s’escriu <strong>dos mil tres-cents vint-i-quatre</strong>. Unim «tres» i «cents», i a «vint-i-quatre» posem els dos guionets.</p>
+<p>A 347, escrivim <strong>tres-cents quaranta-set</strong>, amb un sol guionet entre «quaranta» i «set».</p>
+</div>
+</details>
+
+<details class="procedure-item" id="canvi-posicional">
+<summary>Calcular un canvi de posició</summary>
+<p>Calcula la contribució de la xifra a la posició inicial i a la nova. Com que les altres aportacions es mantenen, resta el valor inicial del nou per trobar l’augment.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>A 20.050 canviem 5 desenes per 5 milers. Les 5 desenes valen 50 i els 5 milers valen 5.000.</p>
+<p>El nombre augmenta <strong>5.000 − 50 = 4.950 unitats</strong>. Ho comprovem: 20.050 + 4.950 = 25.000.</p>
+</div>
+</details>
+
+<details class="procedure-item" id="descomposicio-equivalent-reagrupament">
+<summary>Descompondre i reagrupar</summary>
+<p>Quan hi ha deu unitats o més d’un ordre, canvia cada grup de deu per una unitat de l’ordre superior. El valor total es conserva. També pots multiplicar cada quantitat pel valor del seu ordre i sumar.</p>
+<div class="example"><span class="example-label">Exemple resolt</span>
+<p>Tenim 14 centenes, 7 desenes i 3 unitats. Reagrupem 10 centenes en 1 miler i ens queden 4 centenes.</p>
+<p>El nombre és <strong>1.473</strong>. Ho comprovem: 14 × 100 + 7 × 10 + 3 × 1 = 1.400 + 70 + 3.</p>
+</div>
+</details>
+
+<details class="procedure-item" id="xifres-amb-condicions">
+<summary>Formar el nombre parell més gran</summary>
 <p>Reserva una xifra parella per a les unitats. Per a cada unitat possible, ordena les altres xifres de major a menor. Compara els nombres obtinguts i tria el més gran que compleixi les condicions.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Amb 9, 7, 6 i 4, fent servir cada xifra una sola vegada, les unitats poden ser 4 o 6.</p>
 <p>Amb el 4 al final, el més gran és 9.764. Amb el 6 al final, és 9.746. El resultat és <strong>9.764</strong>.</p>
 </div>
-</section>
-<section class="card" id="auditar-error-de-posicio">
-<h2>Detectar un error de posició</h2>
+</details>
+
+<details class="procedure-item" id="auditar-error-de-posicio">
+<summary>Detectar un error de posició</summary>
 <p>Calcula el valor de l’expressió tal com està escrita. Resta aquest valor del nombre que es volia representar. Indica primer el valor representat i després les unitats que falten.</p>
 <div class="example"><span class="example-label">Exemple resolt</span>
 <p>Per descompondre 372.406, algú ha escrit 300.000 + 70.000 + 2.000 + 4 × 10 + 6. L’expressió suma 372.046 perquè el 4 és a les desenes.</p>
 <p>Falten 372.406 − 372.046 = 360 unitats. La resposta, en l’ordre demanat, és <strong>372.046; 360</strong>.</p>
 </div>
-</section>
+</details>
+</div>
+</details>
+
 <section class="card mistakes">
 <h2>⚠️ Errors freqüents</h2>
 <ul>
