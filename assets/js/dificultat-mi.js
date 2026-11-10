@@ -12,6 +12,8 @@
   const REVIEWED_PLANS=freeze({"1eso/numeric":{"percentatges":[4,4,4]},"1eso/algebraic":{"traduccio":[7,5,0]},"3eso/espacial":{"mosaics":[11,1,0]},"4eso/estocastic":{"espaiMostralRecompte4t":[10,2,0],"experimentsCompostos4t":[3,9,0]}});
   /* END COMPILED PEDAGOGICAL REVIEW */
   const RATIONAL_LEVELS=freeze([[1,2,3,4,9,11,15],[5,6,7,12,13],[8,10,14]]); // Els tipus 16-18 són reptes opcionals, fora dels nivells ordinaris.
+  const FRACTIONS_MEANING_LEVELS=freeze([[1,2,3,5,6,7,14],[4,8,9,11,15,16],[10,12,13,17]]);
+  const FRACTIONS_MEANING_FAMILIES=freeze({1:'F01',2:'F01',3:'F02',4:'F03',5:'F04',6:'F05',7:'F06',8:'F07',9:'F08',10:'F09',11:'F10',12:'F11',13:'F12',14:'F13',15:'F03',16:'F14',17:'F15'});
   // Punt 3: revisió de les tasques de 1r numèric. Justificacions a docs/dificultats/revisio-1eso-numeric-punt3.json.
   const FIRST_NUMERIC_LEVELS=freeze({"naturals":[[1,2,3,4],[5],[]],"decimal_sys":[[1,2,3,4],[],[]],"ops":[[1,2,3,4],[5,6],[]],"potencies":[[1,2,3,4,5,6,7],[],[]],"jerarquia":[[1,2],[3,4,5,6,7,8,9],[]],"divis":[[1,2,3,4,5,6],[7],[]],"mcmmcd":[[1,2,3],[4,5],[]],"enters":[[1,2,3,4,5,7],[6],[]],"decimals":[[1,2,3,4,7,8],[5,6,9],[]],"fraccions":[[1,2,4,5,7,9,10,11],[3,6,8],[]],"proporcionalitat":[[1,2,5,8],[3,4,6,7],[]],"percentatges":[[1,2,6,7],[4,5],[3]],"notacio2":[[4,5,6],[1,2,3],[]]});
   const NATURAL_PRACTICE_LEVELS=freeze({'recta-graduada':1,'dividend-desconegut':2,'producte-descomposicio':2,'operacions-valor-desconegut':2,'interval-arrodoniment':3,'nombres-amb-condicions':3,'patrons-numerics':3});
@@ -252,6 +254,8 @@
 });
   function legacyLevel(q){const n=q.diff??({easy:1,medium:2,hard:3}[q.difficulty]);return [1,2,3].includes(n)?n:null;}
   function rationalDifficulty2ESO(type){const i=RATIONAL_LEVELS.findIndex(a=>a.includes(type));return i<0?0:i+1;}
+  function fractionsMeaningDifficulty2ESO(type){const i=FRACTIONS_MEANING_LEVELS.findIndex(a=>a.includes(type));return i<0?0:i+1;}
+  function fractionsMeaningFamily(type){return FRACTIONS_MEANING_FAMILIES[type]||null;}
   function attach(options){
     const plain=value=>{const el=document.createElement('div');el.innerHTML=String(value);return el.textContent.trim();};
     const TOPICS=options.topics,number=Number(options.course[0]),courseName=['','1r','2n','3r','4t'][number];
@@ -267,6 +271,9 @@
   function level(t, q) {
     if (secondYear && t.id === 'racionals') {
       return mappedLevel({racionals:RATIONAL_LEVELS},t,q);
+    }
+    if (secondYear && t.id === 'fraccionsSentit') {
+      return mappedLevel({fraccionsSentit:FRACTIONS_MEANING_LEVELS},t,q);
     }
     if (stochasticFourthYear) {
       const levels = {
@@ -457,7 +464,7 @@
     }
     if (advanced) {
       const levels = {
-        fraccionsSentit: [[1,2,3,5,6,14], [4,7,9,11], [8,10,12,13,15]],
+        fraccionsSentit: FRACTIONS_MEANING_LEVELS,
         operacionsRacionals: [[1,2,7,13,17], [3,4,5,6,11,14,16], [8,9,10,12,15,18]],
         potencies: [[1,2,3,4,5,8], [6,7,11,12,13,14], [9,10,15,16,17,18]],
         aproximacions: [[1,2,3,4,5], [6,7,10,11,12], [8,9,13,14,15]],
@@ -524,7 +531,7 @@
     function numericBankEntries(){return Object.entries(BANK_LEVELS.numericProblems).concat(newNumericTasks().filter(d=>d.bankKey).map(d=>[d.bankKey,d.level]));}
     function bankLevel(bank,key){return REVIEWED_BANKS[bank]?.[key]??(bank==='numericProblems'?numericBankEntries().find(([k])=>k===key)?.[1]:BANK_LEVELS[bank]?.[key]);}
     function reviewedLevels(t){const compiled=REVIEWED_LEVELS[options.course+'/'+options.sense]?.[t.id];if(compiled)return compiled;const old=number===1&&options.sense==='numeric'?FIRST_NUMERIC_LEVELS[t.id]:null;return old?old.map((types,i)=>types.concat(newNumericTasks().filter(d=>d.topic===t.id&&d.level===i+1).map(d=>d.level===3?1001:1002))):null;}
-    function coverage(t){const groups=reviewedLevels(t);if(!groups)return null;const types=groups.map(a=>a.length),variants=REVIEWED_VARIANTS[options.course+'/'+options.sense]?.[t.id]||{};for(const [type,values] of Object.entries(variants))for(const n of new Set(Object.values(values).map(v=>v.level)))if(!groups[n-1].some(v=>String(v)===type))types[n-1]++;return {reviewed:true,types,missing:types.flatMap((n,i)=>n?[]:[i+1])};}
+    function coverage(t){const groups=options.course==='2eso'&&options.sense==='numeric'&&t.id==='fraccionsSentit'?FRACTIONS_MEANING_LEVELS:reviewedLevels(t);if(!groups)return null;const types=groups.map(a=>a.length),variants=REVIEWED_VARIANTS[options.course+'/'+options.sense]?.[t.id]||{};for(const [type,values] of Object.entries(variants))for(const n of new Set(Object.values(values).map(v=>v.level)))if(!groups[n-1].some(v=>String(v)===type))types[n-1]++;return {reviewed:true,types,missing:types.flatMap((n,i)=>n?[]:[i+1])};}
     function examPlan(t){const c=coverage(t);if(!c)return null;const explicit=REVIEWED_PLANS[options.course+'/'+options.sense]?.[t.id];if(explicit)return {slots:explicit.slice(),types:c.types,missing:c.missing};const total=c.types.reduce((a,b)=>a+b,0),slots=total<=12?c.types.slice():[0,0,0];while(slots.reduce((a,b)=>a+b,0)<12){const available=slots.map((n,i)=>c.types[i]?i:-1).filter(i=>i>=0).sort((a,b)=>slots[a]-slots[b]);if(!available.length)throw new Error('Tema sense cobertura revisada.');slots[available[0]]++;}return {slots,types:c.types,missing:c.missing};}
     function thirdReviewedVariant(t,q){
       if(options.course!=='3eso')return;
@@ -557,6 +564,7 @@
       if(number===1&&options.sense==='numeric'&&t.id==='decimal_sys'&&Object.hasOwn(DECIMAL_PRACTICE_LEVELS,q.type))return DECIMAL_PRACTICE_LEVELS[q.type];
       const identity=bankIdentity(q);
       if(identity){const [bank,key]=identity,n=bankLevel(bank,key);if(![1,2,3].includes(n))throw new Error('Falta la dificultat d’una plantilla del banc «'+bank+'».');return n;}
+      if(options.course==='2eso'&&options.sense==='numeric'&&t.id==='fraccionsSentit')return level(t,q);
       const reviewed=reviewedLevels(t);
       let variantKey=q.difficultyVariant||thirdReviewedVariant(t,q)||fourthReviewedVariant(t,q);
       // Els errors desats abans d’aquesta revisió no portaven la clau de variant.
@@ -650,5 +658,5 @@
     return Object.freeze({getDifficulty:classify,coverage,examPlan,annotate,curriculum,context,bindBanks,bindDisplay,bindExam,refreshErrors,course:options.course,sense:options.sense});
   }
   function independent(q){return {...q,taskDifficulty:null,taskDifficultyStatus:'pending',diff:null,difficulty:null,curriculum:{pageCourse:q.course||null,contentCourse:null,option:null,scope:'standalone',examEligible:false}};}
-  root.MIDifficulty=Object.freeze({attach,independent,rationalDifficulty2ESO,rationalLevels2ESO:Object.freeze(Object.fromEntries(RATIONAL_LEVELS.map((types,i)=>[i+1,types])))});
+  root.MIDifficulty=Object.freeze({attach,independent,rationalDifficulty2ESO,rationalLevels2ESO:Object.freeze(Object.fromEntries(RATIONAL_LEVELS.map((types,i)=>[i+1,types]))),fractionsMeaningDifficulty2ESO,fractionsMeaningFamily,fractionsMeaningLevels:Object.freeze(Object.fromEntries(FRACTIONS_MEANING_LEVELS.map((types,i)=>[i+1,types]))),fractionsMeaningFamilies:FRACTIONS_MEANING_FAMILIES});
 })(typeof window==='undefined'?globalThis:window);

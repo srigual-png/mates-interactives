@@ -106,14 +106,15 @@
           [1,2,3].every(d=>pool.filter(item=>level(t,item)===d).length >= (reviewed ? requestedPlan.slots[d-1] : 4))) break;
     }
     const result = [], counts = {};
+    const diversityKey=q=>t.id==='fraccionsSentit'?(typeof MIDifficulty?.fractionsMeaningFamily==='function'?MIDifficulty.fractionsMeaningFamily(q.type):String(q.type)):String(q.type);
     const slots=topicPlan(t).slots;
     for (let difficulty = 1; difficulty <= 3; difficulty++) {
       const candidates = pool.filter(q => level(t, q) === difficulty);
       for (let i = 0; i < slots[difficulty-1]; i++) {
-        candidates.sort((a,b) => (counts[a.type] || 0) - (counts[b.type] || 0));
+        candidates.sort((a,b) => (counts[diversityKey(a)] || 0) - (counts[diversityKey(b)] || 0));
         const q = candidates.shift();
         if (!q) throw new Error('No hi ha prou preguntes per preparar aquest examen.');
-        counts[q.type] = (counts[q.type] || 0) + 1; result.push(q);
+        const key=diversityKey(q);counts[key] = (counts[key] || 0) + 1; result.push(q);
       }
     }
     return result;
@@ -134,7 +135,7 @@
   function render() {
     const revisedPlan=miTaskDifficulty.examPlan(session.topic);
     const revisedNote=revisedPlan?'<p role="note">Cobertura revisada: '+revisedPlan.types.map((n,i)=>['baixa','mitjana','alta'][i]+': '+n+' tipus').join(' · ')+'. Aquest examen conté '+revisedPlan.slots.map((n,i)=>n+' de dificultat '+['baixa','mitjana','alta'][i]).join(', ')+'. '+(revisedPlan.types[2]===1?'Cobertura alta limitada: les preguntes altes són variants d’una sola família. ':'')+'Els nivells sense cobertura no se substitueixen ni es presenten com a coberts.</p>':'';
-    const coverageNote=revisedNote || '<p role="note">Quotes d’examen: '+topicPlan(session.topic).slots.map((n,i)=>n+' de dificultat '+['baixa','mitjana','alta'][i]).join(', ')+'.</p>'+(secondYear&&session.topic.id==='racionals'&&typeof rationalDifficulty2ESO==='function' ? '<p role="note">Les quatre preguntes d’alta dificultat es reparteixen entre les tres famílies d’ampliació abans de repetir-ne cap.</p>' : '');
+    const coverageNote=revisedNote || '<p role="note">Quotes d’examen: '+topicPlan(session.topic).slots.map((n,i)=>n+' de dificultat '+['baixa','mitjana','alta'][i]).join(', ')+'.</p>'+(secondYear&&session.topic.id==='racionals'&&typeof rationalDifficulty2ESO==='function' ? '<p role="note">Les quatre preguntes d’alta dificultat es reparteixen entre les tres famílies d’ampliació abans de repetir-ne cap.</p>' : secondYear&&session.topic.id==='fraccionsSentit'?'<p role="note">L’examen reparteix les preguntes entre famílies diferents sempre que n’hi ha prou candidats del mateix nivell.</p>':'');
     const answered = session.answers.filter(a => a !== null).length;
     body.innerHTML = '<h2 tabindex="-1">Examen del tema · '+escape(session.topic.name)+'</h2><p role="status">'+answered+' de '+session.questions.length+' preguntes respostes</p><progress max="'+session.questions.length+'" value="'+answered+'" aria-label="Preguntes respostes"></progress><p>Selecciona una resposta. Pots canviar-la i revisar totes les preguntes abans de lliurar. Les solucions es mostraran en acabar.</p>' + coverageNote + session.questions.map((q,i) => '<fieldset><legend>Pregunta '+(i+1)+' · '+['','Fàcil','Mitjana','Alta'][level(session.topic,q)]+'</legend><div class="'+(numeric?'exq':'ex-question')+'">'+(stochasticFourthYear || stochasticThirdYear || stochasticSecondYear || stochasticFirstYear || algebraFourthYear || algebraThirdYear || algebraSecondYear || algebraFirstYear || spatialFirstYear || spatialSecondYear || spatialThirdYear || spatialFourthYear?'<div class="q-text">'+q.question+'</div>':q.question)+'</div>'+q.options.map((o,j) => '<label class="mi-topic-option"><input type="radio" name="topicQ'+i+'" data-question="'+i+'" value="'+j+'" '+(session.answers[i]===j?'checked':'')+'><span>'+(q.fractionsAnswer?formatMcdOption(q,o):o)+'</span></label>').join('')+button('Deixar sense resposta', 'clear-'+i)+'</fieldset>').join('')+'<div class="mi-topic-exam-actions"><button type="button" class="'+primary+'" data-action="submit">Lliurar l’examen</button>'+links()+'</div>';
   }

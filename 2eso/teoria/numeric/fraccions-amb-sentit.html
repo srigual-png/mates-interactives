@@ -52,6 +52,14 @@ main{max-width:900px;margin:auto;padding:28px 20px 48px}
 h2{font-size:1.4rem;line-height:1.25;color:var(--primary-dark);margin:0 0 10px}
 h3{line-height:1.3}
 .theory-card p{margin:0 0 12px}
+.procedure-help{padding:0;overflow:hidden}
+.procedure-help>summary{list-style:none;cursor:pointer;padding:19px 22px;color:var(--primary-dark);font-size:1.12rem;font-weight:850;background:#f1f6ff}
+.procedure-help>summary::-webkit-details-marker{display:none}
+.procedure-help>summary:after{content:'＋';float:right;color:var(--primary);font-size:1.3rem}
+.procedure-help[open]>summary:after{content:'−'}
+.procedure-list{padding:0 22px 20px}
+.procedure-list .theory-card{box-shadow:none;margin:16px 0;padding:20px}
+.family-tag{display:inline-block;font-size:.72rem;font-weight:850;color:var(--primary-dark);background:var(--soft);border-radius:999px;padding:3px 9px;margin-bottom:6px}
 .clean-list{padding-left:1.2rem;margin:10px 0 0}
 .clean-list li{margin:6px 0}
 .callout{background:var(--soft);border-left:4px solid var(--primary);border-radius:10px;padding:12px 14px;margin-top:14px;font-weight:650}
@@ -128,137 +136,49 @@ h3{line-height:1.3}
 </section>
 
 <main>
-  <div class="intro">
-    <p>A 2n d'ESO una fracció deixa de ser només «numerador i denominador». El repte és entendre <strong>què està comparant o sobre quina quantitat està actuant</strong>. Aquesta interpretació és la clau per resoldre problemes sense aplicar fórmules de manera mecànica.</p>
-  </div>
-
-  <nav class="toc" aria-label="Índex de la teoria">
-    <strong>En aquesta pàgina</strong>
-    <div class="toc__links">
-      <a href="#significats">Una fracció pot tenir significats diferents</a><a href="#operador">Fracció com a operador</a><a href="#invers">Problemes inversos: reconstruir el total</a><a href="#rao">Fracció com a raó</a><a href="#resta">La fracció que queda i les fraccions successives</a>
-      <a href="#exemples">Exemples resolts</a>
-      <a href="#errors">Errors habituals</a>
-      <a href="#resum">Resum</a>
-    </div>
-  </nav>
-
-
-        <section class="theory-card" id="significats">
-          <div class="section-kicker">Concepte clau</div>
-          <h2>Una fracció pot tenir significats diferents</h2>
-          <p>Una fracció <strong>a/b</strong> no és només una operació. Segons el context pot representar una divisió, una part d'un total, un operador aplicat a una quantitat o una raó entre dos grups.</p>
-
-          <table class="math-table">
-          <thead><tr><th>Significat</th><th>Exemple</th><th>Què indica?</th></tr></thead>
-          <tbody>
-            <tr><td>Divisió</td><td>3/4</td><td>3 ÷ 4</td></tr>
-            <tr><td>Part d'un total</td><td>3/4 de la classe</td><td>3 de cada 4 parts iguals</td></tr>
-            <tr><td>Operador</td><td>3/4 de 20</td><td>aplicar la fracció sobre 20</td></tr>
-            <tr><td>Raó</td><td>3/4</td><td>comparar 3 elements d'un tipus amb 4 d'un altre</td></tr>
-          </tbody>
-        </table>
-          <div class="callout">Abans de calcular, pregunta't: «Què representa aquesta fracció en aquest problema?»</div>
-        </section>
-
-        <section class="theory-card" id="operador">
-          <div class="section-kicker">Concepte clau</div>
-          <h2>Fracció com a operador</h2>
-          <p>Quan busquem una fracció d'una quantitat, la fracció actua com un operador. El denominador indica en quantes parts iguals pensem el total i el numerador quantes d'aquestes parts prenem.</p>
-          <ul class="clean-list"><li>Per trobar <strong>a/b d'una quantitat</strong>, pots dividir primer entre b i multiplicar després per a.</li><li>També pots multiplicar directament la quantitat per a/b si entens què representa.</li><li>Si la fracció és menor que 1 i la quantitat és positiva, el resultat ha de ser menor que el total.</li></ul>
-
-
-        </section>
-
-        <section class="theory-card" id="invers">
-          <div class="section-kicker">Concepte clau</div>
-          <h2>Problemes inversos: reconstruir el total</h2>
-          <p>De vegades coneixem una part i sabem quina fracció del total representa. Llavors hem de fer el camí invers: trobar quant val una sola part i reconstruir totes les parts del total.</p>
-          <ul class="clean-list"><li>Si 3/5 del total són 24, els 24 corresponen a <strong>3 parts</strong>.</li><li>Troba el valor d'<strong>1 part</strong> dividint entre 3.</li><li>Multiplica després pel nombre total de parts, 5.</li><li>Comprova que el total sigui coherent: si 3/5 són 24, el total ha de ser més gran que 24.</li></ul>
-
-
-        </section>
-
-        <section class="theory-card" id="rao">
-          <div class="section-kicker">Concepte clau</div>
-          <h2>Fracció com a raó</h2>
-          <p>Una raó compara dues quantitats. Cal llegir amb molta atenció què hi ha al numerador i què hi ha al denominador, perquè «vermells/blau» no significa el mateix que «vermells/total».</p>
-          <ul class="clean-list"><li>En una raó 3/2 entre nois i noies, el 3 i el 2 comparen <strong>dos grups diferents</strong>.</li><li>La fracció del total seria diferent: si hi ha 3 nois i 2 noies, els nois són 3/5 del grup.</li><li>Mantén sempre el mateix ordre quan comparis dues raons.</li></ul>
-
-
-        </section>
-
-        <section class="theory-card" id="resta">
-          <div class="section-kicker">Concepte clau</div>
-          <h2>La fracció que queda i les fraccions successives</h2>
-          <p>Si utilitzem una fracció del total, la part que queda és la diferència fins a la unitat. En problemes successius, la segona fracció pot aplicar-se al que queda i no al total inicial.</p>
-          <ul class="clean-list"><li>Si gastes 3/8 del total, queda <strong>1 − 3/8 = 5/8</strong>.</li><li>Si després gastes 1/2 del que queda, aquesta meitat s'aplica sobre 5/8 del total inicial.</li><li>No sumis automàticament fraccions que s'apliquen sobre totals diferents.</li><li>Dibuixar una barra o un esquema pot ajudar molt a veure sobre quina quantitat actua cada fracció.</li></ul>
-
-          <div class="callout">En problemes successius, identifica sempre la «base» de cada fracció: total inicial, part restant o un altre grup.</div>
-        </section>
-
-
-  <section class="examples-wrap" id="exemples">
-    <h2>✏️ Exemples resolts</h2>
-
-        <article class="example-card">
-          <div class="example-card__tag">Exemple resolt</div>
-          <h3>Trobar 3/5 de 40</h3>
-          <p></p>
-          <ol><li>El denominador 5 indica cinc parts iguals.</li><li>40 ÷ 5 = 8, així que una part val 8.</li><li>Prenem 3 parts: 3 · 8 = 24.</li></ol>
-          <div class="result">3/5 de 40 = 24.</div>
-        </article>
-
-        <article class="example-card">
-          <div class="example-card__tag">Exemple resolt</div>
-          <h3>Trobar el total si 3/5 són 24</h3>
-          <p></p>
-          <ol><li>Els 24 corresponen a 3 parts iguals.</li><li>Una part val 24 ÷ 3 = 8.</li><li>El total té 5 parts: 5 · 8 = 40.</li><li>Comprovació: 3/5 de 40 és 24.</li></ol>
-          <div class="result">El total és 40.</div>
-        </article>
-
-        <article class="example-card">
-          <div class="example-card__tag">Exemple resolt</div>
-          <h3>Fracció de la resta</h3>
-          <p></p>
-          <ol><li>Una persona gasta 1/4 dels diners; per tant queda 3/4 del total.</li><li>Després gasta 2/3 del que queda.</li><li>La segona fracció s'aplica sobre 3/4, no sobre el total inicial.</li><li>La quantitat gastada en el segon pas és 2/3 de 3/4 = 1/2 del total inicial.</li></ol>
-          <div class="result">Cal distingir sempre el total inicial de la quantitat que queda.</div>
-        </article>
-
-  </section>
-
-  <section class="mistakes-wrap" id="errors">
-    <h2>⚠️ Errors habituals que convé evitar</h2>
-    <article class="mistake">
-          <div class="mistake__icon">⚠️</div>
-          <div><h3>Confondre part/total amb una raó entre grups</h3><p>Si hi ha 6 vermells i 4 blaus, vermells/blau és 6/4, però vermells/total és 6/10.</p></div>
-        </article><article class="mistake">
-          <div class="mistake__icon">⚠️</div>
-          <div><h3>Aplicar la fracció inversa</h3><p>Per trobar 3/5 de 20 no cal multiplicar per 5/3. La fracció indicada és l'operador que s'aplica sobre el total.</p></div>
-        </article><article class="mistake">
-          <div class="mistake__icon">⚠️</div>
-          <div><h3>Fer el problema invers com si fos directe</h3><p>Si 3/5 són 24, calcular 3/5 de 24 no reconstrueix el total. Primer has d'identificar el valor d'una part.</p></div>
-        </article><article class="mistake">
-          <div class="mistake__icon">⚠️</div>
-          <div><h3>Aplicar totes les fraccions al total inicial</h3><p>Quan l'enunciat diu «del que queda», la nova fracció té una base diferent.</p></div>
-        </article>
-  </section>
-
-  <section class="summary" id="resum">
-    <h2>✅ Què hauries de tenir clar</h2>
-    <ul><li>Interpretar una fracció com a divisió, operador, part d'un total o raó.</li><li>Calcular una fracció d'una quantitat.</li><li>Reconstruir el total quan coneixes una fracció i el valor d'aquesta part.</li><li>Distingir una raó entre dos grups d'una fracció respecte del total.</li><li>Calcular la fracció que queda i interpretar correctament fraccions successives.</li></ul>
-  </section>
-
-  <section class="practice-panel">
-    <h2>Ara toca practicar</h2>
-    <p>Tria el nivell. Si has arribat aquí directament des d'un cercador, el tema s'obrirà automàticament perquè puguis començar.</p>
-    <div class="hero-actions">
-      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=fraccionsSentit&level=1&practice=1">🟢 Practicar · Guiat</a>
-      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=fraccionsSentit&level=2&practice=1">🟠 Practicar · Autònom</a>
-    </div>
-  </section>
-
-  <nav class="pager" aria-label="Navegació entre temes de teoria"><a class="pager__link" href="nombres-racionals.html">← Tema anterior</a><a class="pager__link pager__link--index" href="index.html">📚 Índex de teoria</a><a class="pager__link pager__link--next" href="operacions-racionals.html">Tema següent →</a></nav>
+<section class="intro" id="significats"><p>Una fracció no diu només quants nombres hi ha a dalt i a baix. Abans de calcular, identifica si representa una <strong>divisió</strong>, una part d’un total, un operador o una raó entre grups. «Del total», «per cada» i «del que queda» indiquen bases diferents.</p></section>
+<nav class="toc" aria-label="Índex de la teoria"><strong>Teoria essencial</strong><div class="toc__links"><a href="#operador">Operador</a><a href="#invers">Reconstruir el total</a><a href="#rao">Raó</a><a href="#resta">Complements i successives</a><a href="#ajuda-exercicis">Ajuda per a exercicis concrets</a></div></nav>
+<section class="theory-card" id="operador"><div class="section-kicker">Essencial</div><h2>Fracció com a operador</h2><p>Per calcular a/b d’una quantitat, divideix-la en b parts iguals i pren-ne a. Exemple: 3/5 de 40 és 40 ÷ 5 × 3 = 24.</p></section>
+<section class="theory-card" id="invers"><div class="section-kicker">Essencial</div><h2>Part i total: el camí invers</h2><p>Si a/b d’un total són coneguts, divideix la quantitat per a i multiplica per b. Si 3/5 són 24, el total és (24 ÷ 3) × 5 = 40. Comprova calculant 3/5 de 40.</p></section>
+<section class="theory-card" id="rao"><div class="section-kicker">Essencial</div><h2>Part/part no és part/total</h2><p>Amb 6 peces vermelles i 4 de blaves, vermelles/blaves és 6/4; vermelles/total és 6/10. Respecta l’ordre dels grups i identifica la base.</p></section>
+<section class="theory-card" id="resta"><div class="section-kicker">Essencial</div><h2>Complement i fraccions successives</h2><p>Si es gasta 3/8, en queda 5/8. Si després es gasta 1/2 del que queda, al final resta 5/8 × 1/2 = 5/16 del total inicial.</p></section>
+<details class="theory-card procedure-help" id="ajuda-exercicis"><summary>Ajuda per a exercicis concrets · procediments i exemples resolts</summary><div class="procedure-list">
+<section class="theory-card" id="divisio-repartiment"><span class="family-tag">F01 · N1 · Tipus 1 i 2</span><h2>Divisió i repartiment</h2><p>Repartir a parts iguals és una divisió que també s’escriu com una fracció.</p><ol><li>Identifica el total i el nombre de persones.</li><li>Escriu total ÷ persones com una fracció i simplifica.</li></ol><p><strong>Exemple:</strong> 5 L entre 4 persones = 5/4 L per persona. Comprovació: 4 × 5/4 = 5.</p></section>
+<section class="theory-card" id="operador-ajuda"><span class="family-tag">F02 · N1 · Tipus 3</span><h2>Calcular una fracció d’una quantitat</h2><p>Divideix la quantitat pel denominador i multiplica pel numerador.</p><ol><li>Troba una part igual: total ÷ denominador.</li><li>Pren tantes parts com indica el numerador.</li><li>Comprova si el resultat té sentit.</li></ol><p><strong>Exemple:</strong> 3/4 de 28: 28 ÷ 4 = 7; 7 × 3 = 21.</p></section>
+<section class="theory-card" id="reconstruir-total"><span class="family-tag">F03 · N2 · Tipus 4 i 15</span><h2>Reconstruir el total des d’una part</h2><p>La quantitat coneguda és el nombre de parts indicat pel numerador.</p><ol><li>Divideix la part coneguda pel numerador.</li><li>Multiplica una part pel denominador.</li><li>Verifica calculant la fracció del total.</li></ol><p><strong>Exemple:</strong> 3/5 són 24: 24 ÷ 3 = 8; 8 × 5 = 40. Comprovació: 3/5 de 40 = 24.</p></section>
+<section class="theory-card" id="part-total"><span class="family-tag">F04 · N1 · Tipus 5</span><h2>Expressar una part del total</h2><p>Posa la part al numerador i el conjunt complet al denominador.</p><ol><li>Identifica la part i el total.</li><li>Escriu part/total.</li><li>Simplifica tots dos termes pel mateix divisor.</li></ol><p><strong>Exemple:</strong> 12 de 30 alumnes: 12/30 = 2/5 del grup.</p></section>
+<section class="theory-card" id="complement"><span class="family-tag">F05 · N1 · Tipus 6</span><h2>Trobar la fracció complementària</h2><p>La part gastada i la que queda completen la unitat.</p><ol><li>Escriu la unitat amb el mateix denominador.</li><li>Resta la part gastada i simplifica.</li></ol><p><strong>Exemple:</strong> si es gasta 3/8, queda 8/8 − 3/8 = 5/8.</p></section>
+<section class="theory-card" id="rao-entre-grups"><span class="family-tag">F06 · N1 · Tipus 7</span><h2>Raó entre dos grups</h2><p>La raó compara dues quantitats; l’ordre demanat fixa numerador i denominador.</p><ol><li>Identifica el primer grup.</li><li>Escriu primer grup/segon grup.</li><li>Simplifica sense canviar l’ordre.</li></ol><p><strong>Exemple:</strong> 12 vermelles i 8 blaves: vermelles/blaves = 12/8 = 3/2.</p></section>
+<section class="theory-card" id="rao-i-part-total"><span class="family-tag">F07 · N2 · Tipus 8</span><h2>Distingir raó i fracció del total</h2><p>Calcula per separat les dues relacions que demana l’enunciat.</p><ol><li>Raó entre grups: divideix les quantitats dels dos grups.</li><li>Part/total: suma els grups per al denominador.</li><li>Simplifica cada resultat.</li></ol><p><strong>Exemple:</strong> 6 primer i 4 segon: raó 6/4 = 3/2; fracció de primer any 6/10 = 3/5.</p></section>
+<section class="theory-card" id="escala-part-total"><span class="family-tag">F08 · N2 · Tipus 9</span><h2>Escalar una part del total</h2><p>Multiplica part i total pel mateix factor per conservar la proporció.</p><ol><li>Calcula el factor entre els totals.</li><li>Aplica el factor a la part coneguda.</li><li>Comprova l’equivalència.</li></ol><p><strong>Exemple:</strong> 3 de cada 5 en un grup de 20: factor 4, així que 3 × 4 = 12.</p></section>
+<section class="theory-card" id="comparar-proporcions"><span class="family-tag">F09 · N3 · Tipus 10</span><h2>Comparar dues proporcions</h2><p>Posa les fraccions en una forma comuna o compara productes creuats.</p><ol><li>Escriu totes dues proporcions.</li><li>Multiplica en creu.</li><li>Compara els productes; si són iguals, les proporcions són iguals.</li></ol><p><strong>Exemple:</strong> 3/5 vs 5/8: 3 × 8 = 24 i 5 × 5 = 25; per tant 5/8 és més gran.</p></section>
+<section class="theory-card" id="escala-rao"><span class="family-tag">F10 · N2 · Tipus 11</span><h2>Escalar una raó amb un terme conegut</h2><p>Els dos termes de la raó es multipliquen pel mateix factor.</p><ol><li>Divideix el terme conegut pel terme corresponent de la raó.</li><li>Multiplica l’altre terme pel mateix factor.</li><li>Verifica la raó final.</li></ol><p><strong>Exemple:</strong> suc/aigua = 2/3 i fem servir 10 de suc: factor 5; calen 15 d’aigua.</p></section>
+<section class="theory-card" id="repartiment-proporcional"><span class="family-tag">F11 · N3 · Tipus 12</span><h2>Repartir un total segons una raó</h2><p>Divideix el total en totes les parts de la raó i reconstrueix cada grup.</p><ol><li>Suma els termes de la raó.</li><li>Divideix el total per aquesta suma.</li><li>Multiplica el valor d’una part pels termes de la raó.</li><li>Comprova que els imports sumin el total.</li></ol><p><strong>Exemple:</strong> 70 segons 2:5: una part val 10; el repartiment és 20 i 50.</p></section>
+<section class="theory-card" id="fraccions-successives"><span class="family-tag">F12 · N3 · Tipus 13</span><h2>Fraccions successives sobre el que queda</h2><p>La segona fracció actua sobre el resultat del primer pas.</p><ol><li>Troba la part conservada després de cada acció.</li><li>Multiplica els factors successius.</li><li>Interpreta el producte respecte del total inicial.</li></ol><p><strong>Exemple:</strong> es gasta 1/4 i després 2/3 del que queda: es conserva 3/4 × 1/3 = 1/4 del total.</p></section>
+<section class="theory-card" id="significat-contextual"><span class="family-tag">F13 · N1 · Tipus 14</span><h2>Classificar el significat contextual</h2><p>El context indica si la fracció és divisió, operador, part/total o raó.</p><ol><li>«Repartir entre» indica divisió.</li><li>«a/b de x» indica operador.</li><li>«a per cada b de l’altre grup» indica raó.</li></ol><p><strong>Exemple:</strong> 3 pizzes entre 4 persones és divisió; 3/4 de 28 és operador; suc per aigua és una raó.</p></section>
+<section class="theory-card" id="rao-i-diferencia"><span class="family-tag">F14 · N2 · Tipus 16</span><h2>Reconstruir quantitats amb raó i diferència</h2><p>La diferència entre quantitats correspon a la diferència entre les parts de la raó.</p><ol><li>Calcula |a − b|.</li><li>Divideix la diferència de quantitats per |a − b|.</li><li>Multiplica cada terme de la raó pel valor d’una part.</li><li>Comprova raó i diferència.</li></ol><p><strong>Exemple:</strong> A:B = 3:2 i A supera B per 8: una part val 8; A = 24 i B = 16.</p></section>
+<section class="theory-card" id="inversa-successives"><span class="family-tag">F15 · N3 · Tipus 17</span><h2>Reconstruir el total després de dues fraccions</h2><p>Calcula la part que queda i desfés l’operador final.</p><ol><li>Identifica la base de cada fracció.</li><li>Multiplica els factors conservats.</li><li>Divideix la quantitat final pel factor resultant.</li><li>Comprova cap endavant.</li></ol><p><strong>Exemple:</strong> queda 3/4 i després 2/3 del que queda; factor 1/2. Si al final hi ha 12 L, inicial = 12 ÷ 1/2 = 24 L. Comprovació: 24 → 18 → 12.</p></section>
+</div></details>
+<section class="summary" id="resum"><h2>✅ Resum essencial</h2><ul><li>Identifica la base de cada fracció.</li><li>Part/part i part/total són relacions diferents.</li><li>Per reconstruir, desfés l’operació i comprova cap endavant.</li><li>En una raó, conserva l’ordre dels grups.</li><li>En successives, la segona fracció pot aplicar-se al que queda.</li></ul></section>
+<section class="practice-panel" id="exemples"><h2>Continua amb la pràctica</h2><p>El mode guiat mostra pistes; l’autònom les amaga i demana més respostes.</p><div class="hero-actions"><a class="btn btn--primary" href="../../sentit-numeric.html?topic=fraccionsSentit&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a><a class="btn btn--secondary" href="../../sentit-numeric.html?topic=fraccionsSentit&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a></div></section>
+<section class="mistakes-wrap" id="errors"><h2>⚠️ Comprova sempre</h2><p>No confonguis el grup de referència, no inverteixis l’ordre d’una raó i no apliquis dues fraccions sobre el mateix total si l’enunciat diu «del que queda».</p></section>
+<nav class="pager" aria-label="Navegació entre temes de teoria"><a class="pager__link" href="nombres-racionals.html">← Tema anterior</a><a class="pager__link pager__link--index" href="index.html">📚 Índex de teoria</a><a class="pager__link pager__link--next" href="operacions-racionals.html">Tema següent →</a></nav>
 </main>
+
+<script id="mi-open-family-help">
+(function(){
+  function openHashHelp(){
+    var raw=location.hash.slice(1),id;
+    try{id=decodeURIComponent(raw)}catch(e){id=raw}
+    if(!id)return;
+    var target=document.getElementById(id);if(!target)return;
+    var parent=target.closest('details');if(parent)parent.open=true;
+    if(target!==parent)requestAnimationFrame(function(){target.scrollIntoView({block:'start'});});
+  }
+  window.addEventListener('hashchange',openHashHelp);
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',openHashHelp);else openHashHelp();
+})();
+</script>
 
 <footer class="mi-learning-footer">
   <p>Mates Interactives · Matemàtiques d’ESO · Teoria i exercicis gratuïts</p>

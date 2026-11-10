@@ -3,7 +3,7 @@
   'use strict';
   const levels={
     racionals:[[1,2,3,4,9,11,15],[5,6,7,8,10,12,13,14],[16,17,18]],
-    fraccionsSentit:[[1,2,3,5,6,14],[4,7,9,11],[8,10,12,13,15]],
+    fraccionsSentit:Object.values(MIDifficulty.fractionsMeaningLevels),
     operacionsRacionals:[[1,2,7,13,17],[3,4,5,6,11,14,16],[8,9,10,12,15,18]],
     potencies:[[1,2,3,4,5,8],[6,7,11,12,13,14],[9,10,15,16,17,18]],
     aproximacions:[[1,2,3,4,5],[6,7,10,11,12],[8,9,13,14,15]],
@@ -11,6 +11,16 @@
     percentatges:[[1,2,3,4,8,16],[5,6,7,11,12,17],[9,10,13,14,15,18]],
     recomptes:[[1,2,3,6,12],[4,5,8,9,11,15],[7,10,13,14]]
   };
+  const worksheetFamilyBags={};
+  function typesForWorksheet(id,level){
+    const types=levels[id][level-1]||[];
+    if(id!=='fraccionsSentit')return types;
+    const families=[...new Set(types.map(type=>MIDifficulty.fractionsMeaningFamily(type)))];
+    let bag=worksheetFamilyBags[level]||[];bag=bag.filter(f=>families.includes(f));
+    if(!bag.length)bag=families.slice().sort(()=>Math.random()-0.5);
+    const family=bag.pop();worksheetFamilyBags[level]=bag;
+    return types.filter(type=>MIDifficulty.fractionsMeaningFamily(type)===family);
+  }
   const generators={racionals:genRacionals2ESO,fraccionsSentit:genFraccionsSentit2ESO,operacionsRacionals:genOperacionsRacionals2ESO,potencies:genPotencies2ESO,aproximacions:genAproximacions2ESO,proporcionalitat:genProporcionalitat2ESO,percentatges:genPercentatges2ESO,recomptes:genRecomptes2ESO};
   const supers={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-','⁺':'+'};
   function plain(html){
@@ -98,6 +108,8 @@
       if([1,11].includes(q.type))answer+=' L';
       if([4,5,9,12].includes(q.type)&&/persones|alumnes/.test(question)&&/^\d+$/.test(answer))answer+=' persones';
       if(q.type===13){const f=[...question.matchAll(/(\d+)\/(\d+)/g)];if(f.length>=2){const [[,a,b],[,c,d]]=f;steps=[`Després de la primera despesa queda 1 − ${a}/${b} = ${b-a}/${b} del total inicial.`,`De la quantitat restant conserva 1 − ${c}/${d} = ${d-c}/${d}.`,`La fracció conservada del total inicial és (${b-a}/${b}) × (${d-c}/${d}) = ${plain(q.correct)}.`];}}
+      if(q.type===16)answer=answer.replace(/A=(\d+);\s*B=(\d+)/,'A = $1 unitats; B = $2 unitats');
+      if(q.type===17&&/^\d+$/.test(answer))answer+=' L';
     }
     if(id==='potencies'){
       const match=question.match(/(\([^()]+\)|\d+)\^(-?\d+)/);
@@ -125,5 +137,5 @@
     return {type:q.type,level:levels[id].findIndex(types=>types.includes(q.type))+1,question,options,answer,steps,figure:svg?await figure(svg):undefined};
   }
   window.MIWorksheetConfig={id:'2eso-numeric',homeId:'screenHome',label:'2n d’ESO · Sentit numèric',title:'Fitxa d’exercicis — 2n d’ESO — Sentit numèric',web:'srigual-png.github.io/mates-interactives',paperQuestion,adapt,levels,
-    topics:TOPICS.filter(t=>t.course==='2n'&&t.exam2n).map(t=>({id:t.id,name:t.name,levels:[1,2,3],capacities:t.id==='recomptes'?[38,49,11]:undefined,generate(l){const types=levels[t.id][l-1],type=types[Math.floor(Math.random()*types.length)];return adapt(t.id,generators[t.id](type));}}))};
+    topics:TOPICS.filter(t=>t.course==='2n'&&t.exam2n).map(t=>({id:t.id,name:t.name,levels:[1,2,3],capacities:t.id==='recomptes'?[38,49,11]:undefined,generate(l){const types=typesForWorksheet(t.id,l),type=types[Math.floor(Math.random()*types.length)];return adapt(t.id,generators[t.id](type));}}))};
 })();
