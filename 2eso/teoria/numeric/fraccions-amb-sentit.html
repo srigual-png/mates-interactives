@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fraccions amb sentit | Teoria de Matemàtiques 2n ESO</title>
-<meta name="description" content="Aprèn a interpretar les fraccions com a divisió, operador, part d'un total i raó, i a resoldre problemes directes, inversos i successius. Teoria clara, exemples resolts i accés directe a exercicis interactius de 2n d'ESO.">
+<meta name="description" content="Interpreta les fraccions com a repartiment, operador, part d'un total i raó; resol problemes inversos, proporcionals i successius amb exemples de 2n d'ESO.">
 <meta name="author" content="Salvador Rigual Valls">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://srigual-png.github.io/mates-interactives/2eso/teoria/numeric/fraccions-amb-sentit.html">
@@ -14,181 +14,409 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../../../assets/images/apple-touch-icon.png">
 <style>
 :root{
-  --bg:#f7f9fc;--card:#fff;--primary:#5b8dee;--primary-dark:#3a6fd8;
-  --text:#2c3e50;--muted:#718096;--border:#dce3ed;--soft:#eaf1fd;
-  --success:#248a58;--warn:#a96a00;--shadow:0 4px 18px rgba(33,52,78,.08);
+  --bg:#f7f9fc;
+  --card:#fff;
+  --primary:#5b8dee;
+  --pd:#3a6fd8;
+  --ok:#34c97e;
+  --err:#e05c5c;
+  --warn:#f5a623;
+  --text:#2c3e50;
+  --muted:#7f8c9a;
+  --border:#dce3ed;
+  --sh:0 2px 12px rgba(0,0,0,.08);
+  --soft:#eaf1fd;
 }
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{margin:0;font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+body{
+  font-family:'Segoe UI',system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  line-height:1.6;
+}
 a{color:inherit}
-.topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--border)}
-.topbar__inner{max-width:1050px;margin:auto;padding:10px 20px;display:flex;align-items:center;gap:8px;overflow-x:auto;white-space:nowrap}
-.crumb{text-decoration:none;color:var(--muted);font-size:.82rem;font-weight:700;padding:5px 8px;border:1px solid var(--border);border-radius:8px;background:#fff}
-.crumb:hover{color:var(--primary-dark);border-color:var(--primary)}
-.sep{color:#b8c3d1;font-size:.8rem}
-.hero{background:linear-gradient(180deg,#eef4ff 0%,#f7f9fc 100%);border-bottom:1px solid #e3eaf5}
-.hero__inner{max-width:900px;margin:auto;padding:54px 22px 42px;text-align:center}
-.eyebrow{display:inline-block;padding:5px 11px;border-radius:999px;background:#fff;border:1px solid #ccdaf3;color:var(--primary-dark);font-size:.78rem;font-weight:800;margin-bottom:12px}
-h1{font-size:clamp(2rem,5vw,3.1rem);line-height:1.1;margin:0;color:var(--primary-dark)}
-.hero p{max-width:720px;margin:16px auto 0;color:#536477;font-size:1.02rem}
-.hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:24px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;text-decoration:none;border-radius:12px;padding:11px 16px;font-weight:800;font-size:.9rem;transition:.18s}
-.btn--primary{background:var(--primary);color:white;border:2px solid var(--primary)}
-.btn--primary:hover{background:var(--primary-dark);border-color:var(--primary-dark);transform:translateY(-1px)}
-.btn--secondary{background:#fff;color:var(--primary-dark);border:2px solid var(--primary)}
-.btn--secondary:hover{background:var(--soft);transform:translateY(-1px)}
-.btn--ghost{background:#fff;color:var(--muted);border:1px solid var(--border)}
-main{max-width:900px;margin:auto;padding:28px 20px 48px}
-.intro{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px 24px;box-shadow:var(--shadow);margin-bottom:18px}
-.intro p{margin:0}
-.toc{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px 20px;margin:18px 0 24px}
-.toc strong{display:block;color:var(--primary-dark);margin-bottom:8px}
-.toc__links{display:flex;flex-wrap:wrap;gap:8px}
-.toc a{text-decoration:none;color:#52667e;background:#f8fafc;border:1px solid var(--border);padding:6px 10px;border-radius:999px;font-size:.8rem;font-weight:700}
-.toc a:hover{color:var(--primary-dark);border-color:var(--primary)}
-.theory-card{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;margin:16px 0;box-shadow:var(--shadow)}
-.section-kicker{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--primary);font-weight:900;margin-bottom:3px}
-h2{font-size:1.4rem;line-height:1.25;color:var(--primary-dark);margin:0 0 10px}
-h3{line-height:1.3}
-.theory-card p{margin:0 0 12px}
-.procedure-help{padding:0;overflow:hidden}
-.procedure-help>summary{list-style:none;cursor:pointer;padding:19px 22px;color:var(--primary-dark);font-size:1.12rem;font-weight:850;background:#f1f6ff}
-.procedure-help>summary::-webkit-details-marker{display:none}
-.procedure-help>summary:after{content:'＋';float:right;color:var(--primary);font-size:1.3rem}
-.procedure-help[open]>summary:after{content:'−'}
-.procedure-list{padding:0 22px 20px}
-.procedure-list .theory-card{box-shadow:none;margin:16px 0;padding:20px}
-.family-tag{display:inline-block;font-size:.72rem;font-weight:850;color:var(--primary-dark);background:var(--soft);border-radius:999px;padding:3px 9px;margin-bottom:6px}
-.clean-list{padding-left:1.2rem;margin:10px 0 0}
-.clean-list li{margin:6px 0}
-.callout{background:var(--soft);border-left:4px solid var(--primary);border-radius:10px;padding:12px 14px;margin-top:14px;font-weight:650}
-.math-table{width:100%;border-collapse:collapse;margin:14px 0 4px;font-size:.92rem}
-.math-table th,.math-table td{border:1px solid var(--border);padding:9px 10px;text-align:left}
-.math-table th{background:#f4f7fb;color:var(--primary-dark)}
-.examples-wrap{margin:28px 0}
-.examples-wrap>h2{margin-bottom:12px}
-.example-card{background:#f0f7ff;border:1px solid #cee0f5;border-left:5px solid #2980b9;border-radius:16px;padding:20px 22px;margin:14px 0}
-.example-card__tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:#2473a5;font-weight:900}
-.example-card h3{margin:3px 0 8px;color:#245f89}
-.example-card p{margin:0 0 8px}
-.example-card ol{margin:8px 0 10px;padding-left:1.4rem}
-.example-card li{margin:5px 0}
-.result{background:#fff;border:1px solid #c5daef;border-radius:10px;padding:10px 12px;color:var(--primary-dark);font-weight:800}
-.mistakes-wrap{background:#fffaf0;border:1px solid #efd6a6;border-radius:18px;padding:22px;margin:26px 0}
-.mistakes-wrap>h2{color:#946015}
-.mistake{display:flex;gap:12px;padding:13px 0;border-bottom:1px solid #f0dfbd}
-.mistake:last-child{border-bottom:0;padding-bottom:0}
-.mistake__icon{font-size:1.2rem}
-.mistake h3{font-size:.98rem;margin:0 0 3px;color:#7f571a}
-.mistake p{margin:0;font-size:.9rem}
-.summary{background:#f0fbf5;border:1px solid #bfe5cf;border-radius:18px;padding:22px;margin:26px 0}
-.summary h2{color:var(--success)}
-.summary ul{margin:8px 0 0;padding-left:1.2rem}
-.practice-panel{background:#fff;border:2px solid #cbdaf2;border-radius:20px;padding:24px;text-align:center;margin:28px 0 18px;box-shadow:var(--shadow)}
-.practice-panel h2{margin-bottom:6px}
-.practice-panel p{margin:0 auto 16px;color:var(--muted);max-width:620px}
-.pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
-.pager__link{display:flex;align-items:center;text-decoration:none;background:#fff;border:1px solid var(--border);border-radius:12px;padding:11px 13px;color:var(--primary-dark);font-size:.84rem;font-weight:800}
-.pager__link--next{justify-content:flex-end;text-align:right}
-.footer{border-top:1px solid var(--border);background:#fff;color:var(--muted);text-align:center;padding:24px 18px;font-size:.8rem}
+.top-nav{
+  background:var(--card);
+  border-bottom:1px solid var(--border);
+  padding:12px 20px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  box-shadow:var(--sh);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.nav-link{
+  color:var(--muted);
+  text-decoration:none;
+  font-size:.83rem;
+  font-weight:650;
+  padding:5px 8px;
+  border-radius:8px;
+  white-space:nowrap;
+}
+.nav-link:hover{background:var(--soft);color:var(--primary)}
+.nav-title{
+  flex:1;
+  min-width:0;
+  font-size:1rem;
+  font-weight:750;
+  color:var(--primary);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.wrap{
+  width:min(780px,calc(100% - 32px));
+  margin:0 auto;
+  padding:30px 0 54px;
+}
+.hero{text-align:center;padding:10px 8px 22px}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:var(--soft);
+  color:var(--primary);
+  border-radius:999px;
+  padding:5px 11px;
+  font-size:.75rem;
+  font-weight:750;
+  margin-bottom:12px;
+}
+.hero h1{
+  font-size:clamp(1.7rem,4vw,2.25rem);
+  color:var(--primary);
+  line-height:1.15;
+  margin-bottom:9px;
+}
+.hero p{color:var(--muted);font-size:.96rem;max-width:650px;margin:0 auto}
+.hero-actions{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  border-radius:12px;
+  padding:12px 20px;
+  text-decoration:none;
+  font-size:.91rem;
+  font-weight:700;
+  transition:.18s ease;
+}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--pd);transform:translateY(-1px)}
+.btn-secondary{background:var(--card);color:var(--primary);border:2px solid var(--primary)}
+.btn-secondary:hover{background:var(--soft)}
+.quick-nav{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin:4px 0 22px;
+}
+.quick-nav a{
+  text-decoration:none;
+  text-align:center;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:10px 7px;
+  color:var(--muted);
+  font-size:.78rem;
+  font-weight:700;
+  box-shadow:0 1px 5px rgba(0,0,0,.04);
+}
+.quick-nav a:hover{border-color:var(--primary);color:var(--primary);background:var(--soft)}
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:16px;
+  box-shadow:var(--sh);
+}
+.card h2{
+  font-size:1.18rem;
+  color:var(--primary);
+  margin-bottom:10px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.card h3{font-size:.96rem;margin:18px 0 7px}
+.card p + p{margin-top:9px}
+.card ul{padding-left:20px}
+.card p + ul{margin-top:9px}
+.example ol{padding-left:22px;margin:8px 0}
+.example li + li{margin-top:5px}
+.example + .tip{margin-top:0}
+.btn[hidden]{display:none}
+main [id]{scroll-margin-top:70px}
+.callout{
+  background:var(--soft);
+  border-left:4px solid var(--primary);
+  border-radius:10px;
+  padding:13px 15px;
+  margin:13px 0;
+  font-size:.91rem;
+}
+.example{
+  background:#fbfcfe;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:14px 16px;
+  margin:12px 0;
+}
+.example-label{
+  display:inline-block;
+  font-size:.72rem;
+  font-weight:800;
+  color:var(--primary);
+  background:var(--soft);
+  border-radius:999px;
+  padding:2px 9px;
+  margin-bottom:7px;
+}
+.math{
+  font-family:'Courier New',monospace;
+  font-weight:700;
+  color:var(--pd);
+  line-height:1.8;
+}
+.steps{
+  counter-reset:pas;
+  display:grid;
+  gap:8px;
+  margin-top:12px;
+}
+.step{
+  position:relative;
+  padding:10px 12px 10px 42px;
+  background:#fbfcfe;
+  border:1px solid var(--border);
+  border-radius:10px;
+  font-size:.9rem;
+}
+.step:before{
+  counter-increment:pas;
+  content:counter(pas);
+  position:absolute;
+  left:11px;
+  top:9px;
+  width:22px;
+  height:22px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--primary);
+  color:#fff;
+  font-size:.72rem;
+  font-weight:800;
+}
+.symbols{
+  width:100%;
+  border-collapse:separate;
+  border-spacing:0;
+  overflow:hidden;
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin-top:12px;
+  font-size:.88rem;
+}
+.symbols th,.symbols td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left}
+.symbols tr:last-child td{border-bottom:0}
+.symbols th{background:var(--soft);color:var(--primary);font-weight:750}
+.tip{
+  background:#fffbea;
+  border:1px solid #f5e0a0;
+  border-radius:11px;
+  padding:12px 14px;
+  margin-top:13px;
+  font-size:.88rem;
+  color:#785800;
+}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.problem{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:13px;
+  background:#fbfcfe;
+  font-size:.88rem;
+}
+.problem strong{display:block;color:var(--primary);margin-bottom:5px}
+.mistakes{
+  background:#fff8f8;
+  border:1px solid #f0b0b0;
+}
+.mistakes h2{color:var(--err)}
+.mistakes li+li{margin-top:6px}
+.check details{
+  border:1px solid var(--border);
+  border-radius:11px;
+  background:#fbfcfe;
+  padding:12px 14px;
+  margin-top:9px;
+}
+.check summary{cursor:pointer;font-weight:650;color:var(--text)}
+.answer{
+  margin-top:9px;
+  padding-top:9px;
+  border-top:1px solid var(--border);
+  color:#1a7a4a;
+  font-size:.9rem;
+}
+.final-cta{
+  background:linear-gradient(135deg,#edf3ff,#fff);
+  border:1px solid #cad9f7;
+  border-radius:18px;
+  padding:24px;
+  text-align:center;
+  margin-top:20px;
+}
+.final-cta h2{color:var(--primary);font-size:1.25rem;margin-bottom:6px}
+.final-cta p{color:var(--muted);font-size:.9rem;margin-bottom:15px}
+.final-cta .hero-actions{margin-top:0}
+.footer{
+  text-align:center;
+  color:var(--muted);
+  font-size:.76rem;
+  padding:4px 0 25px;
+}
 @media(max-width:650px){
-  .topbar__inner{padding:8px 10px}
-  .hero__inner{padding:38px 16px 32px}
-  main{padding:20px 13px 38px}
-  .theory-card,.intro{padding:19px 17px}
+  .top-nav{padding:10px 10px;gap:4px}
+  .nav-link{padding:5px 5px;font-size:.75rem}
+  .nav-main-label,.sense-label{display:none}
+  .nav-title{font-size:.86rem}
+  .wrap{width:min(100% - 20px,780px);padding-top:20px}
+  .quick-nav{grid-template-columns:1fr 1fr}
+  .card{padding:17px}
+  .problem-grid{grid-template-columns:1fr}
   .hero-actions{flex-direction:column}
   .btn{width:100%}
-  .math-table{font-size:.82rem}
-  .math-table th,.math-table td{padding:7px}
-  .pager{grid-template-columns:1fr}
 }
 </style>
 <style id="mi-theory-standard">
 /* Mates Interactives · patró mestre de teoria */
-.pager{grid-template-columns:1fr auto 1fr!important}.pager__link--index{justify-content:center;text-align:center}.mi-theory-index{font-weight:800}.extension-standard{display:inline-block;margin:6px 0 0;background:#fff3d6;color:#8a5d00;border:1px solid #efd48b;border-radius:999px;padding:4px 9px;font-size:.72rem;font-weight:800}
-@media(max-width:650px){.pager{grid-template-columns:1fr 1fr!important}.pager__link--index{grid-column:1/-1;grid-row:2}.pager>span:empty{display:block}}
+.mi-theory-index{display:inline-flex!important;align-items:center;justify-content:center;gap:6px;text-decoration:none;font-weight:750}
+.summary-master{background:var(--card,#fff);border:1px solid var(--border,#dce3ed);border-left:5px solid var(--primary,#5b8dee);border-radius:15px;padding:18px 20px;margin:16px 0;box-shadow:var(--sh,0 2px 12px rgba(0,0,0,.08))}.summary-master h2{margin:0 0 8px;color:var(--primary,#5b8dee);font-size:1.15rem}.summary-master ul{padding-left:21px}.summary-master li{margin:5px 0}
+.pager-master{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;margin:26px 0 8px}.pager-master a,.pager-master span{display:block;text-decoration:none;border:1px solid var(--border,#dce3ed);background:#fff;border-radius:10px;padding:9px 11px;font-size:.84rem;font-weight:700;color:var(--primary,#5b8dee)}.pager-master .prev{text-align:left}.pager-master .idx{text-align:center}.pager-master .next{text-align:right}.pager-master .disabled{color:var(--muted,#7f8c9a);opacity:.6}
+.extension-standard{display:inline-block;margin:6px 0 0;background:#fff3d6;color:#8a5d00;border:1px solid #efd48b;border-radius:999px;padding:4px 9px;font-size:.72rem;font-weight:800}
+@media(max-width:650px){.pager-master{grid-template-columns:1fr 1fr}.pager-master .idx{grid-column:1/-1;grid-row:2}.pager-master a,.pager-master span{font-size:.78rem}}
 </style><link rel="stylesheet" href="../../../assets/css/learning-footer.css"/>
 <script src="../../../assets/js/analitica-mi.js"></script>
+<style id="mi-practica-teoria-support">
+/* Els procediments són ajuda opcional, no la teoria principal. */
+.procedure-support{border:1px solid var(--border);border-radius:16px;background:var(--card);box-shadow:var(--sh);margin:18px 0;padding:0;scroll-margin-top:76px}
+.procedure-support>summary{cursor:pointer;list-style:none;padding:19px 22px;display:flex;flex-direction:column;gap:3px;position:relative;padding-right:50px}
+.procedure-support>summary::-webkit-details-marker,.procedure-item>summary::-webkit-details-marker{display:none}
+.procedure-support>summary:after{content:"＋";position:absolute;right:21px;top:19px;font-size:1.35rem;color:var(--primary)}
+.procedure-support[open]>summary:after{content:"−"}
+.support-heading{font-size:1.1rem;font-weight:800;color:var(--primary)}
+.support-caption,.support-intro{font-size:.87rem;color:var(--muted)}
+.support-intro{margin:0 22px 12px;line-height:1.6}
+.procedure-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;padding:0 20px 20px;align-items:start}
+.procedure-item{border:1px solid var(--border);border-radius:11px;background:#fbfcfe;scroll-margin-top:90px;min-width:0}
+.procedure-item>summary{cursor:pointer;padding:12px 33px 12px 13px;font-weight:700;font-size:.86rem;position:relative;line-height:1.35}
+.procedure-item>summary:after{content:"＋";position:absolute;right:11px;top:10px;color:var(--primary)}
+.procedure-item[open]>summary:after{content:"−"}
+.procedure-item[open]{grid-column:1/-1;background:#fff;border-color:var(--primary)}
+.procedure-item[open]>summary{color:var(--primary);border-bottom:1px solid var(--border)}
+.procedure-item>p,.procedure-item>.example{margin:12px 15px}
+.procedure-item>p.tip{margin:12px 15px 15px}
+.optional-challenge-heading{grid-column:1/-1;border-top:1px solid var(--border);padding:14px 2px 2px;margin-top:7px;display:flex;flex-direction:column;gap:3px}
+.optional-challenge-heading strong{color:#8a5d00;font-size:.95rem}
+.optional-challenge-heading span{color:var(--muted);font-size:.83rem}
+.optional-challenge{border-color:#efd48b;background:#fffdf7}
+.procedure-item:target{outline:2px solid var(--primary);outline-offset:2px}
+.procedure-item>summary:focus-visible,.procedure-support>summary:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
+@media(max-width:650px){.procedure-grid{grid-template-columns:1fr;padding:0 12px 14px}.procedure-support>summary{padding:16px 45px 16px 15px}.support-intro{margin:0 15px 12px}}
+</style>
+<script id="mi-theory-contextual-support">
+(function(){function openHelp(){var panel=document.getElementById('ajuda-exercicis'),id;if(!panel)return;try{id=decodeURIComponent(location.hash.slice(1));}catch(e){return;}if(!id)return;var item=document.getElementById(id);if(item&&panel.contains(item)){panel.open=true;var node=item;while(node&&node!==panel){if(node.tagName==='DETAILS')node.open=true;node=node.parentElement;}requestAnimationFrame(function(){item.scrollIntoView({block:'start'});});}}window.addEventListener('hashchange',openHelp);if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',openHelp,{once:true});else openHelp();})();
+</script>
 </head>
 <body>
-<header class="topbar">
-  <nav class="topbar__inner" aria-label="Navegació">
-    <a class="crumb" href="../../../index.html">🏠 Mates Interactives</a>
-    <span class="sep">›</span>
-    <a class="crumb" href="../../index.html">📘 2n ESO</a>
-    <span class="sep">›</span>
-    <a class="crumb" href="../../sentit-numeric.html">🔢 Sentit Numèric</a>
-  </nav>
+<nav aria-label="Navegació principal" class="top-nav">
+<a class="nav-link" href="../../../index.html" title="Inici de Mates Interactives">🏠 <span class="nav-main-label">Mates Interactives</span></a>
+<a class="nav-link" href="../../index.html" title="Matemàtiques de 2n ESO">📘 2n ESO</a>
+<a class="nav-link" href="../../sentit-numeric.html" title="Sentit Numèric de 2n ESO">🔢 <span class="sense-label">Sentit Numèric</span></a>
+<a class="nav-link mi-theory-index" href="index.html">📚 Teoria</a>
+<div class="nav-title">🍰 Fraccions amb sentit</div>
+</nav>
+<main class="wrap">
+<header class="hero">
+<div class="eyebrow">2n ESO · Sentit numèric</div>
+<h1>🍰 Fraccions amb sentit</h1>
+<p>Aprèn a interpretar les fraccions com a divisió, repartiment, operador, part d’un total i raó, i resol problemes proporcionals, inversos i successius.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="../../sentit-numeric.html?topic=fraccionsSentit&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a>
+<a class="btn btn-secondary" href="../../sentit-numeric.html?topic=fraccionsSentit&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a>
+<a class="btn btn-secondary" href="#significats">📘 Comença la teoria</a>
+<a id="returnPractice" class="btn btn-secondary" href="../../sentit-numeric.html" hidden>← Tornar a l’exercici</a>
+</div>
 </header>
+<nav class="quick-nav" aria-label="Continguts de la teoria"><a href="#significats">1. Significat</a><a href="#significat-divisio">2. Repartiment</a><a href="#operador">3. Operador</a><a href="#invers">4. Reconstruir</a><a href="#part-total-concepte">5. Part i total</a><a href="#rao">6. Raons</a><a href="#comparacions-repartiments">7. Comparar/repartir</a><a href="#resta">8. Complement</a><a href="#successives">9. Successives</a><a href="#problemes-combinats">10. Combinats</a><a href="#ajuda-exercicis">🧩 Ajuda</a><a href="#exemples">✏️ Exemples</a><a href="#errors">⚠️ Errors</a><a href="#comprova">✅ Comprova</a><a href="#resum">🧠 Resum</a></nav></nav>
 
-<section class="hero">
-  <div class="hero__inner">
-    <span class="eyebrow">Teoria · Sentit Numèric · 2n ESO</span>
-    <h1>Fraccions amb sentit</h1>
-    <p>Aprèn a interpretar les fraccions com a divisió, operador, part d'un total i raó, i a resoldre problemes directes, inversos i successius</p>
-    <div class="hero-actions">
-      <a class="btn btn--primary" href="../../sentit-numeric.html?topic=fraccionsSentit&level=1&practice=1">🟢 Practicar · Guiat</a>
-      <a class="btn btn--secondary" href="../../sentit-numeric.html?topic=fraccionsSentit&level=2&practice=1">🟠 Practicar · Autònom</a>
-      <a class="btn btn--ghost" href="../../sentit-numeric.html?topic=fraccionsSentit">Veure el bloc →</a>
-    </div>
-  </div>
-</section>
 
-<main>
-<section class="intro" id="significats"><p>Una fracció no diu només quants nombres hi ha a dalt i a baix. Abans de calcular, identifica si representa una <strong>divisió</strong>, una part d’un total, un operador o una raó entre grups. «Del total», «per cada» i «del que queda» indiquen bases diferents.</p></section>
-<nav class="toc" aria-label="Índex de la teoria"><strong>Teoria essencial</strong><div class="toc__links"><a href="#operador">Operador</a><a href="#invers">Reconstruir el total</a><a href="#rao">Raó</a><a href="#resta">Complements i successives</a><a href="#ajuda-exercicis">Ajuda per a exercicis concrets</a></div></nav>
-<section class="theory-card" id="operador"><div class="section-kicker">Essencial</div><h2>Fracció com a operador</h2><p>Per calcular a/b d’una quantitat, divideix-la en b parts iguals i pren-ne a. Exemple: 3/5 de 40 és 40 ÷ 5 × 3 = 24.</p></section>
-<section class="theory-card" id="invers"><div class="section-kicker">Essencial</div><h2>Part i total: el camí invers</h2><p>Si a/b d’un total són coneguts, divideix la quantitat per a i multiplica per b. Si 3/5 són 24, el total és (24 ÷ 3) × 5 = 40. Comprova calculant 3/5 de 40.</p></section>
-<section class="theory-card" id="rao"><div class="section-kicker">Essencial</div><h2>Part/part no és part/total</h2><p>Amb 6 peces vermelles i 4 de blaves, vermelles/blaves és 6/4; vermelles/total és 6/10. Respecta l’ordre dels grups i identifica la base.</p></section>
-<section class="theory-card" id="resta"><div class="section-kicker">Essencial</div><h2>Complement i fraccions successives</h2><p>Si es gasta 3/8, en queda 5/8. Si després es gasta 1/2 del que queda, al final resta 5/8 × 1/2 = 5/16 del total inicial.</p></section>
-<details class="theory-card procedure-help" id="ajuda-exercicis"><summary>Ajuda per a exercicis concrets · procediments i exemples resolts</summary><div class="procedure-list">
-<section class="theory-card" id="divisio-repartiment"><span class="family-tag">F01 · N1 · Tipus 1 i 2</span><h2>Divisió i repartiment</h2><p>Repartir a parts iguals és una divisió que també s’escriu com una fracció.</p><ol><li>Identifica el total i el nombre de persones.</li><li>Escriu total ÷ persones com una fracció i simplifica.</li></ol><p><strong>Exemple:</strong> 5 L entre 4 persones = 5/4 L per persona. Comprovació: 4 × 5/4 = 5.</p></section>
-<section class="theory-card" id="operador-ajuda"><span class="family-tag">F02 · N1 · Tipus 3</span><h2>Calcular una fracció d’una quantitat</h2><p>Divideix la quantitat pel denominador i multiplica pel numerador.</p><ol><li>Troba una part igual: total ÷ denominador.</li><li>Pren tantes parts com indica el numerador.</li><li>Comprova si el resultat té sentit.</li></ol><p><strong>Exemple:</strong> 3/4 de 28: 28 ÷ 4 = 7; 7 × 3 = 21.</p></section>
-<section class="theory-card" id="reconstruir-total"><span class="family-tag">F03 · N2 · Tipus 4 i 15</span><h2>Reconstruir el total des d’una part</h2><p>La quantitat coneguda és el nombre de parts indicat pel numerador.</p><ol><li>Divideix la part coneguda pel numerador.</li><li>Multiplica una part pel denominador.</li><li>Verifica calculant la fracció del total.</li></ol><p><strong>Exemple:</strong> 3/5 són 24: 24 ÷ 3 = 8; 8 × 5 = 40. Comprovació: 3/5 de 40 = 24.</p></section>
-<section class="theory-card" id="part-total"><span class="family-tag">F04 · N1 · Tipus 5</span><h2>Expressar una part del total</h2><p>Posa la part al numerador i el conjunt complet al denominador.</p><ol><li>Identifica la part i el total.</li><li>Escriu part/total.</li><li>Simplifica tots dos termes pel mateix divisor.</li></ol><p><strong>Exemple:</strong> 12 de 30 alumnes: 12/30 = 2/5 del grup.</p></section>
-<section class="theory-card" id="complement"><span class="family-tag">F05 · N1 · Tipus 6</span><h2>Trobar la fracció complementària</h2><p>La part gastada i la que queda completen la unitat.</p><ol><li>Escriu la unitat amb el mateix denominador.</li><li>Resta la part gastada i simplifica.</li></ol><p><strong>Exemple:</strong> si es gasta 3/8, queda 8/8 − 3/8 = 5/8.</p></section>
-<section class="theory-card" id="rao-entre-grups"><span class="family-tag">F06 · N1 · Tipus 7</span><h2>Raó entre dos grups</h2><p>La raó compara dues quantitats; l’ordre demanat fixa numerador i denominador.</p><ol><li>Identifica el primer grup.</li><li>Escriu primer grup/segon grup.</li><li>Simplifica sense canviar l’ordre.</li></ol><p><strong>Exemple:</strong> 12 vermelles i 8 blaves: vermelles/blaves = 12/8 = 3/2.</p></section>
-<section class="theory-card" id="rao-i-part-total"><span class="family-tag">F07 · N2 · Tipus 8</span><h2>Distingir raó i fracció del total</h2><p>Calcula per separat les dues relacions que demana l’enunciat.</p><ol><li>Raó entre grups: divideix les quantitats dels dos grups.</li><li>Part/total: suma els grups per al denominador.</li><li>Simplifica cada resultat.</li></ol><p><strong>Exemple:</strong> 6 primer i 4 segon: raó 6/4 = 3/2; fracció de primer any 6/10 = 3/5.</p></section>
-<section class="theory-card" id="escala-part-total"><span class="family-tag">F08 · N2 · Tipus 9</span><h2>Escalar una part del total</h2><p>Multiplica part i total pel mateix factor per conservar la proporció.</p><ol><li>Calcula el factor entre els totals.</li><li>Aplica el factor a la part coneguda.</li><li>Comprova l’equivalència.</li></ol><p><strong>Exemple:</strong> 3 de cada 5 en un grup de 20: factor 4, així que 3 × 4 = 12.</p></section>
-<section class="theory-card" id="comparar-proporcions"><span class="family-tag">F09 · N3 · Tipus 10</span><h2>Comparar dues proporcions</h2><p>Posa les fraccions en una forma comuna o compara productes creuats.</p><ol><li>Escriu totes dues proporcions.</li><li>Multiplica en creu.</li><li>Compara els productes; si són iguals, les proporcions són iguals.</li></ol><p><strong>Exemple:</strong> 3/5 vs 5/8: 3 × 8 = 24 i 5 × 5 = 25; per tant 5/8 és més gran.</p></section>
-<section class="theory-card" id="escala-rao"><span class="family-tag">F10 · N2 · Tipus 11</span><h2>Escalar una raó amb un terme conegut</h2><p>Els dos termes de la raó es multipliquen pel mateix factor.</p><ol><li>Divideix el terme conegut pel terme corresponent de la raó.</li><li>Multiplica l’altre terme pel mateix factor.</li><li>Verifica la raó final.</li></ol><p><strong>Exemple:</strong> suc/aigua = 2/3 i fem servir 10 de suc: factor 5; calen 15 d’aigua.</p></section>
-<section class="theory-card" id="repartiment-proporcional"><span class="family-tag">F11 · N3 · Tipus 12</span><h2>Repartir un total segons una raó</h2><p>Divideix el total en totes les parts de la raó i reconstrueix cada grup.</p><ol><li>Suma els termes de la raó.</li><li>Divideix el total per aquesta suma.</li><li>Multiplica el valor d’una part pels termes de la raó.</li><li>Comprova que els imports sumin el total.</li></ol><p><strong>Exemple:</strong> 70 segons 2:5: una part val 10; el repartiment és 20 i 50.</p></section>
-<section class="theory-card" id="fraccions-successives"><span class="family-tag">F12 · N3 · Tipus 13</span><h2>Fraccions successives sobre el que queda</h2><p>La segona fracció actua sobre el resultat del primer pas.</p><ol><li>Troba la part conservada després de cada acció.</li><li>Multiplica els factors successius.</li><li>Interpreta el producte respecte del total inicial.</li></ol><p><strong>Exemple:</strong> es gasta 1/4 i després 2/3 del que queda: es conserva 3/4 × 1/3 = 1/4 del total.</p></section>
-<section class="theory-card" id="significat-contextual"><span class="family-tag">F13 · N1 · Tipus 14</span><h2>Classificar el significat contextual</h2><p>El context indica si la fracció és divisió, operador, part/total o raó.</p><ol><li>«Repartir entre» indica divisió.</li><li>«a/b de x» indica operador.</li><li>«a per cada b de l’altre grup» indica raó.</li></ol><p><strong>Exemple:</strong> 3 pizzes entre 4 persones és divisió; 3/4 de 28 és operador; suc per aigua és una raó.</p></section>
-<section class="theory-card" id="rao-i-diferencia"><span class="family-tag">F14 · N2 · Tipus 16</span><h2>Reconstruir quantitats amb raó i diferència</h2><p>La diferència entre quantitats correspon a la diferència entre les parts de la raó.</p><ol><li>Calcula |a − b|.</li><li>Divideix la diferència de quantitats per |a − b|.</li><li>Multiplica cada terme de la raó pel valor d’una part.</li><li>Comprova raó i diferència.</li></ol><p><strong>Exemple:</strong> A:B = 3:2 i A supera B per 8: una part val 8; A = 24 i B = 16.</p></section>
-<section class="theory-card" id="inversa-successives"><span class="family-tag">F15 · N3 · Tipus 17</span><h2>Reconstruir el total després de dues fraccions</h2><p>Calcula la part que queda i desfés l’operador final.</p><ol><li>Identifica la base de cada fracció.</li><li>Multiplica els factors conservats.</li><li>Divideix la quantitat final pel factor resultant.</li><li>Comprova cap endavant.</li></ol><p><strong>Exemple:</strong> queda 3/4 i després 2/3 del que queda; factor 1/2. Si al final hi ha 12 L, inicial = 12 ÷ 1/2 = 24 L. Comprovació: 24 → 18 → 12.</p></section>
-</div></details>
-<section class="summary" id="resum"><h2>✅ Resum essencial</h2><ul><li>Identifica la base de cada fracció.</li><li>Part/part i part/total són relacions diferents.</li><li>Per reconstruir, desfés l’operació i comprova cap endavant.</li><li>En una raó, conserva l’ordre dels grups.</li><li>En successives, la segona fracció pot aplicar-se al que queda.</li></ul></section>
-<section class="practice-panel" id="exemples"><h2>Continua amb la pràctica</h2><p>El mode guiat mostra pistes; l’autònom les amaga i demana més respostes.</p><div class="hero-actions"><a class="btn btn--primary" href="../../sentit-numeric.html?topic=fraccionsSentit&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a><a class="btn btn--secondary" href="../../sentit-numeric.html?topic=fraccionsSentit&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a></div></section>
-<section class="mistakes-wrap" id="errors"><h2>⚠️ Errors freqüents i com evitar-los</h2><p>Abans de donar una resposta, torna a l’enunciat i comprova què representa cada nombre i sobre quina quantitat s’aplica la fracció.</p>
-<article class="mistake"><div class="mistake__icon">↔️</div><div><h3>Invertir la fracció quan calcules una part</h3><p><strong>Incorrecte:</strong> calcular 3/5 de 40 fent 40 × 5/3. <strong>Correcte:</strong> aplica 3/5: 40 ÷ 5 × 3 = 24. El denominador divideix el total i el numerador indica quantes parts prens.</p></div></article>
-<article class="mistake"><div class="mistake__icon">🔁</div><div><h3>Resoldre un problema invers com si fos directe</h3><p><strong>Enunciat:</strong> 3/5 d’una quantitat són 24. <strong>Error:</strong> tornar a calcular 3/5 de 24. <strong>Comprovació correcta:</strong> 24 ÷ 3 × 5 = 40; després 3/5 de 40 torna a donar 24.</p></div></article>
-<article class="mistake"><div class="mistake__icon">🧮</div><div><h3>Confondre una raó entre grups amb una part del total</h3><p>Si hi ha 6 peces vermelles i 4 de blaves, vermelles/blaves és 6/4 = 3/2. Les vermelles respecte del total són 6/(6 + 4) = 3/5. Mira si l’enunciat diu «per cada» o «del total».</p></div></article>
-<article class="mistake"><div class="mistake__icon">↕️</div><div><h3>Canviar l’ordre dels termes d’una raó</h3><p>Si es demana nois/noies i hi ha 12 nois i 8 noies, la raó és 12/8 = 3/2. La raó noies/nois és 8/12 = 2/3. Escriu els grups en el mateix ordre que apareixen a la pregunta.</p></div></article>
-<article class="mistake"><div class="mistake__icon">➖</div><div><h3>Oblidar la part que queda</h3><p>Si es gasten 3/8 dels diners, no queden 3/8: queda 1 − 3/8 = 5/8. Comprova que la part gastada i la restant sumin 1.</p></div></article>
-<article class="mistake"><div class="mistake__icon">🎯</div><div><h3>Aplicar dues fraccions al total inicial quan la segona és «del que queda»</h3><p>Es gasta 1/4 del total i després 2/3 del que queda. Després del primer pas queda 3/4; del que queda se’n conserva 1/3. Al final queda 3/4 × 1/3 = 1/4 del total inicial, no 1 − 1/4 − 2/3.</p></div></article>
-<article class="mistake"><div class="mistake__icon">⚖️</div><div><h3>Fer servir la diferència com si fos el valor d’una part</h3><p>Amb raó A:B = 3:2 i una diferència de 8, la diferència són 3 − 2 = 1 part. Per tant, una part val 8: A = 3 × 8 = 24 i B = 2 × 8 = 16. Verifica que A − B = 8.</p></div></article>
-<article class="mistake"><div class="mistake__icon">⏪</div><div><h3>Desfer dues fraccions successives multiplicant pel factor final</h3><p>Si al final queda la meitat de la quantitat inicial i això són 12 L, no calculis 12 × 1/2. Per desfer l’operador, divideix: 12 ÷ 1/2 = 24 L. Comprova fent el camí cap endavant.</p></div></article>
+
+<section class="card" id="significats"><h2>🧩 1. Què significa una fracció?</h2><p>Una fracció a/b representa una divisió a ÷ b, però el context explica què comparem o repartim. Pot expressar una divisió (3 ÷ 4 = 3/4), un repartiment (3 pizzes entre 4 persones: 3/4 de pizza per persona), una part d’un total (3 peces blaves de 4: 3/4), un operador (3/4 de 28 = 21) o una raó entre grups (3 gots de suc per cada 4 d’aigua: suc/aigua = 3/4).</p><div class="callout"><strong>La mateixa escriptura pot tenir usos diferents.</strong> «de 28» sol indicar un operador; «de cada» pot indicar una raó; «entre persones» indica un repartiment. El context marca la interpretació.</div></section>
+<section class="card" id="significat-divisio"><h2>➗ 2. Fracció com a divisió i repartiment</h2><p>En repartir a parts iguals, el total és el dividend i el nombre de receptors és el divisor. La fracció expressa exactament el que rep cadascú encara que no sigui un nombre enter.</p><div class="steps"><div class="step">Identifica el total i el nombre de persones o parts iguals.</div><div class="step">Divideix el total pels receptors i escriu el resultat com una fracció.</div><div class="step">Simplifica si es pot i conserva les unitats.</div></div><div class="example"><span class="example-label">Exemple resolt</span><p>7 L entre 4 persones: cada persona rep 7 ÷ 4 = 7/4 L = 1 3/4 L.</p><p><strong>Comprovació:</strong> 4 × 7/4 = 7 L; les parts reconstrueixen el total.</p></div><div class="tip"><strong>Error:</strong> invertir la divisió i escriure 4/7. El càlcul és total/receptors: 7/4.</div></section>
+<section class="card" id="operador"><h2>🍰 3. Fracció com a operador</h2><p>Calcular a/b d’una quantitat és dividir-la en b parts iguals i prendre’n a. El denominador indica quantes parts hi ha; el numerador, quantes n’agafem.</p><div class="steps"><div class="step">Divideix la quantitat pel denominador.</div><div class="step">Multiplica el valor d’una part pel numerador.</div><div class="step">Comprova si el resultat té sentit respecte del total.</div></div><div class="example"><span class="example-label">Exemple resolt</span><p>3/5 de 40: 40 ÷ 5 = 8; 8 × 3 = 24.</p><p><strong>Resultat:</strong> 24. <strong>Comprovació:</strong> 24/40 = 3/5.</p></div><div class="tip"><strong>Error:</strong> multiplicar per 5/3. No inverteixis la fracció.</div></section>
+<section class="card" id="invers"><h2>🔎 4. Reconstruir el total a partir d’una part</h2><p>Si a/b d’una quantitat són coneguts, la quantitat coneguda representa a parts iguals. Troba una part i després completa les b parts del total.</p><div class="steps"><div class="step">Divideix la part coneguda pel numerador.</div><div class="step">Multiplica el valor d’una part pel denominador.</div><div class="step">Comprova calculant la fracció del total que diu l’enunciat.</div></div><div class="example"><span class="example-label">Exemple resolt</span><p>Si 3/5 són 24, una part val 24 ÷ 3 = 8. El total és 8 × 5 = 40.</p><p><strong>Comprovació:</strong> 3/5 de 40 = 40 ÷ 5 × 3 = 24.</p></div><div class="tip"><strong>Directe:</strong> tens el total i trobes una part. <strong>Invers:</strong> tens la part i reconstrueixes el total.</div></section>
+<section class="card" id="part-total-concepte"><h2>🧮 5. Relació entre part i total</h2><p>Per expressar quina fracció del conjunt representa una part, posa la quantitat que compleix la condició al numerador i el conjunt sencer al denominador. Simplifica dividint tots dos termes pel mateix factor.</p><div class="example"><span class="example-label">Exemple resolt</span><p>En una classe de 30 alumnes, 12 han triat bàsquet: 12/30 = 2/5.</p><p><strong>Comprovació:</strong> 2/5 de 30 = 12 alumnes.</p></div><p>Part/part compara dos grups; part/total compara un grup amb el conjunt sencer. Si 12 han triat bàsquet i 18 una altra activitat, bàsquet/altres = 12/18 = 2/3; bàsquet/total = 12/30 = 2/5.</p><div class="callout">El denominador és el total descrit a l’enunciat, no sempre l’altre grup.</div></section>
+<section class="card" id="rao"><h2>⚖️ 6. Raons i proporcions entre grups</h2><p>Una raó compara dues quantitats en un ordre concret: A/B o A:B. Una proporció diu que dues raons són equivalents. Per conservar una raó, multiplica o divideix tots dos termes pel mateix factor.</p><div class="example"><span class="example-label">Exemple resolt</span><p>Hi ha 6 peces vermelles i 4 blaves. Vermelles/blaves = 6/4 = 3/2; la part del total que són vermelles és 6/(6+4) = 3/5.</p><p><strong>Comprovació:</strong> 3/2 compara grups; 3/5 és una part del conjunt de 10.</p></div><p>Una mescla 2:3 ampliada per 5 esdevé 10:15 i conserva la proporció: 10/15 = 2/3.</p><div class="tip"><strong>Compte:</strong> suc/aigua = 2/3, però aigua/suc = 3/2. Canviar l’ordre canvia la raó.</div></section>
+<section class="card" id="comparacions-repartiments"><h2>📊 7. Comparacions i repartiments proporcionals</h2><p>Per comparar proporcions, passa-les a una forma comuna o compara els productes en creu. Per repartir un total segons una raó, interpreta els termes com parts iguals.</p><div class="problem-grid"><div class="problem"><strong>Comparar</strong>A encerta 3 de cada 5: 3/5 = 0,6. B encerta 5 de cada 8: 5/8 = 0,625. B té una proporció més gran.</div><div class="problem"><strong>Repartir</strong>84 € segons 2:5 són 7 parts. Cada part val 84 ÷ 7 = 12 €; el repartiment és 24 € i 60 €.</div></div><p>Si coneixes la diferència entre grups, relaciona-la amb la diferència entre les parts de la raó abans de calcular les quantitats.</p><div class="callout"><strong>Comprovació:</strong> 24 + 60 = 84 i 24:60 = 2:5.</div></section>
+<section class="card" id="resta"><h2>➖ 8. Fracció complementària</h2><p>El total és la unitat: 1 = 8/8, per exemple. La fracció que falta o que queda és 1 menys la fracció utilitzada.</p><div class="example"><span class="example-label">Exemple resolt</span><p>La Júlia gasta 3/8 dels 80 € que tenia. Li queda 1 − 3/8 = 5/8; 5/8 de 80 = 80 ÷ 8 × 5 = 50 €.</p><p><strong>Comprovació:</strong> ha gastat 30 € i en queden 50 €; 30 + 50 = 80 €.</p></div><div class="tip"><strong>Comprova:</strong> fracció gastada + fracció restant = 1.</div></section>
+<section class="card" id="successives"><h2>🔁 9. Fraccions successives</h2><p>En cada pas, la quantitat obtinguda es converteix en la base del pas següent. «Del que queda» vol dir que la segona fracció no s’aplica al total inicial.</p><div class="example"><span class="example-label">Exemple resolt</span><p>En Marc té 120 €. Gasta 1/4 i després 2/3 del que queda.</p><ol><li>Gasta 30 €; queden 90 € = 3/4 del total.</li><li>Gasta 2/3 de 90 = 60 €; en queda 1/3 de 90 = 30 €.</li><li>La part final és 30/120 = 1/4 del total inicial.</li></ol><p><strong>Comprovació:</strong> 3/4 × 1/3 = 1/4; 1/4 de 120 = 30 €.</p></div><p>Si la segona fracció fos «del total inicial», actuaria sobre 120 €. Identifica la base de cada frase.</p></section>
+<section class="card" id="problemes-combinats"><h2>🧠 10. Problemes inversos i combinats</h2><p>Separa les dades, resol cada relació i comprova totes les condicions. Per desfer un procés, aplica les operacions inverses en ordre invers.</p><div class="steps"><div class="step">Representa A:B com parts iguals.</div><div class="step">Relaciona la diferència donada amb la diferència entre parts.</div><div class="step">Troba una part i reconstrueix les quantitats.</div><div class="step">Aplica o desfés cada fracció sobre la base que indica el text.</div></div><div class="example"><span class="example-label">Exemple combinat resolt</span><p>A:B = 3:2 i A té 8 elements més. A utilitza 1/4 i després 1/3 dels que queden. Quants li queden?</p><ol><li>3 − 2 = 1 part; una part val 8.</li><li>A = 24; B = 16.</li><li>A utilitza 1/4 de 24 = 6; en queden 18.</li><li>Utilitza 1/3 de 18 = 6; en queden 12.</li></ol><p><strong>Comprovació:</strong> 24:16 = 3:2, la diferència és 8 i 24 → 18 → 12 segueix les bases correctes.</p></div><div class="example"><span class="example-label">Exemple invers resolt</span><p>Al final queden 12 L després de dues accions: primer es gasta 1/4 de la quantitat i després 2/3 del que queda. Troba el valor inicial.</p><ol><li>Després de gastar 1/4, en queda 3/4.</li><li>Després es gasta 2/3 del que queda; en queda 1/3 de la quantitat restant.</li><li>La fracció final és 3/4 × 1/3 = 1/4 del total inicial.</li><li>Si 1/4 són 12 L, el total és 12 ÷ 1/4 = 48 L.</li></ol><p><strong>Comprovació cap endavant:</strong> de 48 L en queden 36; després de gastar 2/3 de 36, en queden 12 L.</p></div><div class="callout">Per reconstruir un total després de fraccions successives, calcula la fracció final conservada i divideix-hi la quantitat coneguda.</div></section><details class="procedure-support" id="ajuda-exercicis"><summary><span class="support-heading">🧩 Ajuda per a exercicis concrets</span><span class="support-caption">15 procediments · Obre només l’ajuda que necessitis</span></summary><p class="support-intro">La teoria essencial s’entén sense desplegar aquest apartat. Cada família inclou procediment, exemple resolt, comprovació i error freqüent.</p><div id="procediments-detall" class="procedure-grid">
+<details class="procedure-item" id="divisio-repartiment"><summary>F01 · Divisió i repartiment · Tipus 1 i 2</summary><p>El total és el dividend i el nombre de receptors, el divisor. Expressa el resultat com una fracció exacta si cal.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>5 L entre 4 persones.</li><li>5 ÷ 4 = 5/4 L per persona.</li></ol><p><strong>Comprovació:</strong> 4 × 5/4 = 5 L.</p></div><p class="tip"><strong>Error:</strong> invertir i respondre 4/5. Divideix total entre receptors.</p></details>
+<details class="procedure-item" id="operador-ajuda"><summary>F02 · Fracció d’una quantitat · Tipus 3</summary><p>Divideix pel denominador i multiplica pel numerador.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>3/4 de 28.</li><li>28 ÷ 4 = 7; 7 × 3 = 21.</li></ol><p><strong>Comprovació:</strong> 21/28 = 3/4.</p></div><p class="tip"><strong>Error:</strong> multiplicar pel denominador o invertir la fracció.</p></details>
+<details class="procedure-item" id="reconstruir-total"><summary>F03 · Reconstruir el total · Tipus 4 i 15</summary><p>La part coneguda representa les parts del numerador; troba’n una i completa les del denominador. El tipus 15 també detecta un plantejament invers erroni.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>3/5 són 24; una part val 24 ÷ 3 = 8.</li><li>El total és 8 × 5 = 40.</li></ol><p><strong>Comprovació:</strong> 3/5 de 40 = 24.</p></div><p class="tip"><strong>Error:</strong> calcular 3/5 de 24 com si 24 fos el total.</p></details>
+<details class="procedure-item" id="part-total"><summary>F04 · Part com a fracció del total · Tipus 5</summary><p>Posa la part al numerador i el conjunt sencer al denominador, després simplifica.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>12 de 30: 12/30.</li><li>Simplifica per 6: 2/5.</li></ol><p><strong>Comprovació:</strong> 2/5 de 30 = 12.</p></div><p class="tip"><strong>Error:</strong> posar només l’altre grup al denominador; això és part/part.</p></details>
+<details class="procedure-item" id="complement"><summary>F05 · Fracció complementària · Tipus 6</summary><p>Escriu la unitat amb el denominador donat i resta la fracció utilitzada.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>Es gasten 3/8; la unitat és 8/8.</li><li>Queda 8/8 − 3/8 = 5/8.</li></ol><p><strong>Comprovació:</strong> 3/8 + 5/8 = 1.</p></div><p class="tip"><strong>Error:</strong> repetir la fracció gastada com si fos la que queda.</p></details>
+<details class="procedure-item" id="rao-entre-grups"><summary>F06 · Raó entre grups · Tipus 7</summary><p>L’ordre dels grups fixa numerador i denominador. Simplifica sense invertir-los.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>12 vermelles i 8 blaves.</li><li>Vermelles/blaves = 12/8 = 3/2.</li></ol><p><strong>Comprovació:</strong> 3/2 = 12/8.</p></div><p class="tip"><strong>Error:</strong> assumir que una raó sempre és menor que 1.</p></details>
+<details class="procedure-item" id="rao-i-part-total"><summary>F07 · Distingir raó i part/total · Tipus 8</summary><p>Calcula per separat la relació entre grups i la part respecte del conjunt sencer.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>6 de primer any i 4 de segon.</li><li>Raó: 6/4 = 3/2.</li><li>Part del total: 6/(6+4) = 3/5.</li></ol><p><strong>Comprovació:</strong> 3/5 de 10 = 6.</p></div><p class="tip"><strong>Error:</strong> intercanviar 6/4 i 6/10 segons què demana el problema.</p></details>
+<details class="procedure-item" id="escala-part-total"><summary>F08 · Escalar part i total · Tipus 9</summary><p>Si el total es multiplica per un factor, la part equivalent es multiplica pel mateix factor.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>3 de cada 5; el total nou és 20 = 4 × 5.</li><li>La part nova és 4 × 3 = 12.</li></ol><p><strong>Comprovació:</strong> 3/5 = 12/20.</p></div><p class="tip"><strong>Error:</strong> sumar el mateix nombre a part i total.</p></details>
+<details class="procedure-item" id="comparar-proporcions"><summary>F09 · Comparar proporcions · Tipus 10</summary><p>Compara fraccions en decimals o amb productes creuats; no comparis només els numeradors.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>A: 3/5; B: 5/8.</li><li>En creu: 3×8 = 24 i 5×5 = 25.</li><li>B té la proporció més gran.</li></ol><p><strong>Comprovació:</strong> 0,6 &lt; 0,625.</p></div><p class="tip"><strong>Error:</strong> ignorar que els totals són diferents.</p></details>
+<details class="procedure-item" id="escala-rao"><summary>F10 · Escalar una raó · Tipus 11</summary><p>Troba el factor del terme conegut i aplica’l a l’altre terme.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>Suc/aigua = 2/3; suc nou = 10.</li><li>Factor 10 ÷ 2 = 5; aigua = 3 × 5 = 15.</li></ol><p><strong>Comprovació:</strong> 10/15 = 2/3.</p></div><p class="tip"><strong>Error:</strong> sumar la mateixa diferència als termes; cal escalar amb un factor.</p></details>
+<details class="procedure-item" id="repartiment-proporcional"><summary>F11 · Repartir segons una raó · Tipus 12</summary><p>Suma els termes, divideix el total pel nombre de parts i multiplica cada grup pel valor d’una part.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>70 € segons 2:5; hi ha 7 parts.</li><li>Una part val 10 €; repartiment 20 € i 50 €.</li></ol><p><strong>Comprovació:</strong> 20 + 50 = 70 i 20:50 = 2:5.</p></div><p class="tip"><strong>Error:</strong> dividir només pel primer terme.</p></details>
+<details class="procedure-item" id="fraccions-successives"><summary>F12 · Fraccions successives · Tipus 13</summary><p>Calcula la part que queda després de cada acció; «del que queda» introdueix una base nova.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>Es gasta 1/4: en queda 3/4.</li><li>Es gasta 2/3 d’aquesta part; en queda 1/3.</li><li>Factor final: 3/4 × 1/3 = 1/4.</li></ol><p><strong>Comprovació:</strong> de 120 € en queden 90 € i després 30 €.</p></div><p class="tip"><strong>Error:</strong> restar 1/4 + 2/3 del total inicial.</p></details>
+<details class="procedure-item" id="significat-contextual"><summary>F13 · Significat contextual · Tipus 14</summary><p>«Entre» indica repartiment; «a/b de» és operador; «per cada» compara grups.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>3 pizzes entre 4: repartiment.</li><li>3/4 de 28: operador.</li><li>3 gots per cada 4: raó.</li></ol><p><strong>Comprovació:</strong> explica què relaciona cada situació.</p></div><p class="tip"><strong>Error:</strong> donar sempre el mateix significat a una mateixa escriptura.</p></details>
+<details class="procedure-item" id="rao-i-diferencia"><summary>F14 · Raó i diferència · Tipus 16</summary><p>Divideix la diferència coneguda pel nombre de parts que separa la raó.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>A:B = 3:2 i A supera B per 8.</li><li>La diferència és una part, que val 8.</li><li>A = 24 i B = 16.</li></ol><p><strong>Comprovació:</strong> 24:16 = 3:2 i 24 − 16 = 8.</p></div><p class="tip"><strong>Error:</strong> prendre sempre la diferència com una part; comprova quantes parts separen els grups.</p></details>
+<details class="procedure-item" id="inversa-successives"><summary>F15 · Reconstruir el total després de dues fraccions · Tipus 17</summary><p>Multiplica els factors conservats i divideix la quantitat final per obtenir el total inicial.</p><div class="example"><span class="example-label">Exemple resolt</span><ol><li>Queda 3/4 i després 2/3 del que queda: factor 1/2.</li><li>Si al final hi ha 12 L, inicialment hi havia 12 ÷ 1/2 = 24 L.</li></ol><p><strong>Comprovació:</strong> de 24 L en queden 18; 2/3 de 18 = 12.</p></div><p class="tip"><strong>Error:</strong> multiplicar pel factor final; per desfer l’operador cal dividir.</p></details>
+</div></details><section class="card" id="exemples"><h2>✏️ Exemples resolts</h2><p>Segueix cada interpretació i comprova el resultat amb les dades.</p>
+<article class="example"><span class="example-label">Nivell 1 · Operador</span><h3>Calcula 3/5 de 40</h3><p><strong>Interpretació:</strong> 40 és el total; agafem 3 de les 5 parts.</p><ol><li>40 ÷ 5 = 8 per part.</li><li>8 × 3 = 24.</li></ol><p class="math">Resultat: 24.</p><p><strong>Comprovació:</strong> 24/40 = 3/5.</p></article>
+<article class="example"><span class="example-label">Nivell 1–2 · Problema invers</span><h3>Si 2/7 del total són 14, troba el total</h3><p><strong>Interpretació:</strong> 14 representa dues parts.</p><ol><li>Una part val 14 ÷ 2 = 7.</li><li>Set parts valen 7 × 7 = 49.</li></ol><p class="math">Resultat: 49.</p><p><strong>Comprovació:</strong> 2/7 de 49 = 14.</p></article>
+<article class="example"><span class="example-label">Nivell 2 · Repartiment proporcional</span><h3>Reparteix 84 € en la raó 2:5</h3><p><strong>Interpretació:</strong> el repartiment conté set parts.</p><ol><li>84 ÷ (2 + 5) = 12 € per part.</li><li>Els grups reben 24 € i 60 €.</li></ol><p class="math">Resultat: 24 € i 60 €.</p><p><strong>Comprovació:</strong> sumen 84 € i 24:60 = 2:5.</p></article>
+<article class="example"><span class="example-label">Nivell 3 · Problema combinat</span><h3>Reconstrueix la raó i aplica canvis successius</h3><p>A:B = 3:2 i A té 8 elements més. A utilitza 1/4 dels seus elements i després 1/3 dels que queden. Quants li queden?</p><ol><li>3 − 2 = 1 part; una part val 8.</li><li>A = 24 i B = 16.</li><li>A utilitza 1/4 de 24 = 6; en queden 18.</li><li>Utilitza 1/3 de 18 = 6; en queden 12.</li></ol><p class="math">Resultat: 12 elements.</p><p><strong>Comprovació:</strong> 24:16 = 3:2, la diferència és 8 i 24 → 18 → 12.</p></article></section><section class="card mistakes" id="errors"><h2>⚠️ Errors freqüents</h2><p>Compara cada raonament incorrecte amb el procediment correcte.</p><ul>
+<li><strong>Invertir una fracció.</strong> Incorrecte: 3/5 de 40 = 40 × 5/3. Correcte: 40 ÷ 5 × 3 = 24.</li><li><strong>Confondre directe i invers.</strong> Incorrecte: si 3/5 són 24, calcular 3/5 de 24. Correcte: 24 ÷ 3 × 5 = 40; comprova 3/5 de 40 = 24.</li><li><strong>Confondre part/part i part/total.</strong> Incorrecte: amb 6 vermelles i 4 blaves, vermelles del total = 6/4. Correcte: vermelles/blaves = 6/4; vermelles/total = 6/10.</li><li><strong>Canviar l’ordre d’una raó.</strong> Incorrecte: nois/noies amb 12 i 8 = 8/12. Correcte: 12/8 = 3/2.</li><li><strong>Oblidar la complementària.</strong> Incorrecte: si es gasten 3/8, en queda 3/8. Correcte: 1 − 3/8 = 5/8; les parts sumen 1.</li><li><strong>Aplicar malament successives.</strong> Incorrecte: restar 1/4 + 2/3 del total quan la segona fracció és «del que queda». Correcte: 3/4 × 1/3 = 1/4 del total.</li><li><strong>Interpretar malament una diferència.</strong> Incorrecte: raó 5:3 i diferència 8 vol dir una part de 8. Correcte: hi ha dues parts de diferència; una val 4 i les quantitats són 20 i 12.</li><li><strong>Desfer operacions en ordre incorrecte.</strong> Incorrecte: si queda la meitat i són 12, fer 12 × 1/2. Correcte: 12 ÷ 1/2 = 24; comprova cap endavant.</li></ul></section><section class="card check" id="comprova"><h2>✅ Comprova si ho has entès</h2><p>Intenta respondre abans d’obrir cada solució.</p>
+<details><summary>1. Quant és 3/5 de 45?</summary><div class="answer"><strong>27.</strong> 45 ÷ 5 = 9; 9 × 3 = 27. Comprovació: 27/45 = 3/5.</div></details>
+<details><summary>2. Si 2/7 d’una quantitat són 14, quin és el total?</summary><div class="answer"><strong>49.</strong> 14 ÷ 2 = 7 per part; 7 × 7 = 49. Comprovació: 2/7 de 49 = 14.</div></details>
+<details><summary>3. Amb 8 peces vermelles i 12 blaves, quina és vermelles/blaves i quina part del total són vermelles?</summary><div class="answer"><strong>Raó = 8/12 = 2/3; part del total = 8/20 = 2/5.</strong> El conjunt té 20 peces.</div></details>
+<details><summary>4. Es gasten 2/5 i després la meitat del que queda. Quina fracció queda?</summary><div class="answer"><strong>3/10.</strong> Primer queda 3/5; després la meitat: 3/5 × 1/2 = 3/10.</div></details>
+<details><summary>5. A:B = 4:3 i A supera B per 7. Quines quantitats són?</summary><div class="answer"><strong>A = 28 i B = 21.</strong> Una part val 7. Comprovació: 28:21 = 4:3 i 28 − 21 = 7.</div></details></section><section class="summary-master" id="resum"><h2>🧠 Resum essencial</h2><ul><li>Una fracció és una divisió; el context n’indica el significat: repartiment, part/total, operador o raó.</li><li>Per calcular a/b d’una quantitat, divideix pel denominador i multiplica pel numerador.</li><li>Si coneixes a/b del total, divideix la part pel numerador i multiplica pel denominador.</li><li>Part/part compara grups; part/total usa el conjunt sencer com a denominador.</li><li>En una raó conserva l’ordre i escala els termes amb el mateix factor.</li><li>Per repartir segons una raó, suma les parts, troba una part i comprova total i proporció.</li><li>La complementària és 1 menys la fracció utilitzada.</li><li>En fraccions successives identifica la base de cada pas, sobretot «del que queda».</li><li>Per reconstruir, desfés les operacions en ordre invers i comprova cap endavant.</li></ul></section><section class="final-cta">
+<h2>Ja tens la teoria. Ara toca practicar.</h2>
+<p>Fes exercicis guiats, passa després al nivell autònom i repassa els errors que vagis cometent.</p>
+<div class="hero-actions">
+<a class="btn btn-primary" href="../../sentit-numeric.html?topic=fraccionsSentit&amp;level=1&amp;practice=1">🟢 Practicar · Guiat</a>
+<a class="btn btn-secondary" href="../../sentit-numeric.html?topic=fraccionsSentit&amp;level=2&amp;practice=1">🟠 Practicar · Autònom</a>
+<a class="btn btn-secondary" href="../../sentit-numeric.html?topic=fraccionsSentit">← Veure el bloc</a>
+</div>
 </section>
-<nav class="pager" aria-label="Navegació entre temes de teoria"><a class="pager__link" href="nombres-racionals.html">← Tema anterior</a><a class="pager__link pager__link--index" href="index.html">📚 Índex de teoria</a><a class="pager__link pager__link--next" href="operacions-racionals.html">Tema següent →</a></nav>
+<nav aria-label="Navegació entre temes de teoria" class="pager-master"><a class="prev" href="nombres-racionals.html">← Nombres racionals</a>
+<a class="idx" href="index.html">📚 Índex de teoria</a>
+<a class="next" href="operacions-racionals.html">Tema següent →</a>
+</nav>
 </main>
-
-<script id="mi-open-family-help">
-(function(){
-  function openHashHelp(){
-    var raw=location.hash.slice(1),id;
-    try{id=decodeURIComponent(raw)}catch(e){id=raw}
-    if(!id)return;
-    var target=document.getElementById(id);if(!target)return;
-    var parent=target.closest('details');if(parent)parent.open=true;
-    if(target!==parent)requestAnimationFrame(function(){target.scrollIntoView({block:'start'});});
-  }
-  window.addEventListener('hashchange',openHashHelp);
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',openHashHelp);else openHashHelp();
-})();
-</script>
-
 <footer class="mi-learning-footer">
   <p>Mates Interactives · Matemàtiques d’ESO · Teoria i exercicis gratuïts</p>
   <p><a href="../../../index.html">🏠 Portada</a> · <a href="https://buymeacoffee.com/srigual" target="_blank" rel="noopener noreferrer">☕ Dona suport al projecte</a></p>
@@ -387,5 +615,8 @@ h3{line-height:1.3}
 })();
 </script>
 
+<script>
+(function(){var b=document.getElementById("returnPractice");if(!b)return;var ref=document.referrer;try{var u=new URL(ref);if(u.origin===location.origin&&/\/2eso\/sentit-numeric\.html$/.test(u.pathname)){b.hidden=false;b.addEventListener("click",function(e){e.preventDefault();history.back();});}}catch(e){}})();
+</script>
 </body>
 </html>
