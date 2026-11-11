@@ -6,7 +6,7 @@ Aquest repositori conté exercicis interactius i teoria de matemàtiques de l'ES
 
 **Llegiu primer [docs/protocol-auditoria-temes.md](docs/protocol-auditoria-temes.md)** abans d'auditar, ampliar o modificar substancialment un tema. Inclou les vuit fases, criteris pedagògics, entregables i comprovacions.
 
-- **Àmbit dels mínims acordats:** per a **2n d'ESO · Sentit numèric**, almenys **15 famílies matemàtiques reals**, **5 N1**, **5 N2** i **3 N3**. Aquestes quantitats no s'apliquen automàticament a altres cursos o sentits.
+- **Àmbit dels mínims acordats (protocol v1.2):** a **tots els cursos (1r–4t ESO), els cinc sentits i els temes d'ampliació**, almenys **15 famílies matemàtiques reals**, amb **5 N1**, **5 N2** i **3 N3**. Adaptar sempre els procediments al nivell curricular del tema; aquests són mínims per família, no simples recomptes de tipus de generador.
 - **Família ≠ generador:** no recompteu variants o contextos cosmètics com a famílies noves. La dificultat és matemàtica; guiat/autònom només indica el suport.
 - **Canvis de tema complets:** seguiu el protocol; primer inventari i auditoria, després especificació, implementació i validació, segons l'encàrrec.
 - **Correccions puntuals:** feu un canvi mínim i les comprovacions pertinents. No reconstruïu pàgines, generadors ni progressió sense que es demani.
