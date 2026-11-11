@@ -1,8 +1,9 @@
 # Mates Interactives — Protocol d'auditoria i ampliació de temes
 
-**Versió:** 1.0 · **Acordat:** 10/11/2026  
+**Versió:** 1.1 · **Acordat:** 10/11/2026 · **Actualitzat:** 11/11/2026  
 **Àmbit inicial:** 2n d'ESO · Sentit numèric.  
 **Referència funcional:** tema «Nombres racionals» de `2eso/sentit-numeric.html`, amb comprovació del codi real abans de reproduir-ne el comportament.  
+**Referència visual i pedagògica de teoria (2n ESO · Sentit numèric):** `2eso/teoria/numeric/nombres-racionals.html`. La referència funcional de pràctica i la visual de teoria són diferents.  
 **Estat:** criteri de projecte aprovat. L'aprovació d'aquest protocol **no** implica que els temes actuals ja compleixin els requisits.
 
 ## 0. Quan cal aplicar-lo
@@ -63,13 +64,19 @@ Una **família** és un procediment o objectiu matemàtic genuïnament diferenci
 - Verificar comportament quan s'equivoca, quan surt voluntàriament, quan es reinicia i quan s'arriba al final. Separar els reptes opcionals de la progressió ordinària quan correspongui.
 
 ### Fase 5 — Teoria de cada família
+- Abans d'implementar, crear una **matriu de cobertura** família → generador(s) → apartat visible de teoria → ID d'ajuda contextual → exemple resolt → error freqüent. Si hi ha famílies sense cobertura, la fase no està completa.
 - Cada família compta amb explicació del **procediment**, passos ordenats, mínim un exemple resolt correcte i errors freqüents quan aportin valor.
 - Utilitzar identificadors d'ancoratge **estables i únics**; cada generador ha de conèixer la família/ajuda corresponent.
 - Les explicacions han de coincidir amb la resposta admesa pel corrector; contemplar formats alternatius i casos límit.
 - No generar només títols: verificar contingut, exemples i correspondència entre família i procediment.
 
 ### Fase 6 — Pàgina de teoria i navegació
-- Aplicar el patró visual consensuat a 1r d'ESO: **teoria essencial visible** i bloc **«Ajuda per a exercicis concrets»** desplegable, amb un apartat per procediment/família.
+- Per a **2n d'ESO · Sentit numèric**, emprar com a **model visual i pedagògic obligatori** `2eso/teoria/numeric/nombres-racionals.html` (a més del patró consensuat a 1r d'ESO). Analitzar el model actual abans de tocar el fitxer de destinació; adaptar-ne l'estructura i l'aspecte, no copiar-ne els continguts matemàtics.
+- La **teoria principal ha de ser completa i visible sense obrir desplegables**: organitzar els procediments de totes les famílies en apartats conceptuals numerats, amb explicacions suficients. No reduir-la a quatre o cinc resums si això deixa procediments només dins l'ajuda contextual. El nombre d'apartats l'estableix la cobertura pedagògica de cada tema, **no és fix ni ha de coincidir amb el nombre de famílies**.
+- Mantenir un bloc **«Ajuda per a exercicis concrets»** desplegable com a suport complementari, amb un procediment per família i enllaços contextuals. No és un substitut de la teoria principal.
+- Reproduir el patró de presentació del model: capçalera i botons, índex navegable, targetes numerades, exemples resolts **visibles en una secció pròpia**, errors freqüents amb explicació de l'error i la correcció, autoavaluació desplegable amb solucions, resum, pràctica final i navegació anterior/índex/següent. No amagar tots els exemples dins les ajudes.
+- Validar la correspondència **de cada família amb la teoria principal, l'ajuda i els exemples**; les agrupacions temàtiques són acceptables sempre que no suprimeixin explicacions necessàries.
+- Reutilitzar estils i components del model, conservar accessibilitat i visualització responsive. La semblança ha de ser estructural i visual, no només de colors.
 - Incorporar els nous continguts sense eliminar teoria útil, exemples o IDs externament enllaçats; si s'ha de canviar un ID, proporcionar compatibilitat d'enllaços.
 - Enllaç contextual exercici → ajuda concreta; l'enllaç directe ha d'obrir tant el contenidor com el procediment.
 - **Important:** inicialitzar el JavaScript d'obertura quan el DOM ja existeix (script al final de `body` o `DOMContentLoaded`), i provar també `hashchange`.
@@ -82,6 +89,9 @@ Una **família** és un procediment o objectiu matemàtic genuïnament diferenci
 - Comprovar que els nous tipus no queden exclosos per llistes fixes, codis d'identificació o classificacions obsoletes.
 
 ### Fase 8 — Verificació, documentació i publicació
+- Comparar explícitament la teoria resultant amb la **referència visual**: capçalera, índex, targetes, apartats visibles, ajuda contextual, exemples resolts visibles, errors, autoavaluació, resum, botons i navegació. Verificar també que cap contingut preexistent útil s'ha perdut.
+- Comprovar la **matriu de cobertura 100%** per família; provar cada `#ancora` des de pràctica i navegació directa, l'obertura del desplegable i `hashchange`.
+- Si es poden executar captures o proves de navegador, contrastar escriptori i mòbil amb el model; si no, fer comprovacions estàtiques i declarar que la verificació visual real queda pendent. **No afirmar equivalència visual sense haver-la comprovat.**
 - Provar tots els tipus i variants amb dades repetides, casos límit, correcció, alternatives, pistes i solucions.
 - Validar els recomptes de famílies (15 / 5 / 5 / 3), l'assignació exacta i sense contradiccions, i la selecció efectiva N1→N2→N3.
 - Provar sessions guiades i autònomes completes, sortida/reinici, exàmens, fitxes i enllaços teoria ↔ pràctica.
@@ -93,7 +103,7 @@ Una **família** és un procediment o objectiu matemàtic genuïnament diferenci
 **Auditoria (només lectura):** lliurar un ZIP amb **tres fitxers**:
 1. `MI_2ESO_<tema>_families.xlsx` (o taula de dades equivalent si no es pot crear Excel): inventari tipus→família, nivell, descripció, variants, cobertura i enllaços.
 2. `MI_2ESO_<tema>_incidencies.md`: mancances pedagògiques, contradiccions de nivell, errors, riscos i verificacions pendents, prioritzades.
-3. `MI_2ESO_<tema>_especificacio_codex.md`: canvis exactes, fitxers afectats, nous procediments, progressió, teoria, proves i criteris d'acceptació.
+3. `MI_2ESO_<tema>_especificacio_codex.md`: canvis exactes, fitxers afectats, nous procediments, progressió, teoria, proves i criteris d'acceptació. Cal incloure la matriu de cobertura i una especificació explícita de les seccions/estructura visual segons el model, diferenciant teoria principal visible i ajuda desplegable.
 
 **Implementació:** registrar commit(s), resum dels canvis, taula de cobertura final i resultat de proves, separant validat de pendent.
 
@@ -105,7 +115,11 @@ Una **família** és un procediment o objectiu matemàtic genuïnament diferenci
 - [ ] Generadors i correctors correctes, diversos i amb pistes/solucions.
 - [ ] Progressió matemàtica efectiva com al tema de referència.
 - [ ] Modes guiat i autònom diferenciats **només pel suport**.
+- [ ] Matriu completa família → generadors → teoria principal visible → ajuda contextual → exemple → error habitual; cap família sense cobertura.
+- [ ] Teoria principal suficient i **visible**; ajuda desplegable complementària, no substitutiva.
+- [ ] Estructura segons model de Nombres racionals: índex, targetes, **exemples resolts visibles**, errors freqüents, autoavaluació, resum i navegació.
 - [ ] Una ajuda teòrica per família, amb enllaços contextuals funcionals.
+- [ ] Comparativa visual d'escriptori i mòbil realitzada, o limitació i proves estàtiques documentades expressament.
 - [ ] Exàmens, fitxes i solucionaris revisats si existeixen per al tema.
 - [ ] Proves de regressió documentades; mòbil i escriptori verificats o marcats pendents.
 - [ ] Canvis publicats amb commit i incidències residuals documentades.
