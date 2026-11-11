@@ -1,7 +1,7 @@
 # Mates Interactives — Protocol d'auditoria i ampliació de temes
 
-**Versió:** 1.2 · **Acordat:** 10/11/2026 · **Actualitzat:** 11/11/2026  
-**Àmbit:** tots els cursos (1r–4t ESO) i els cinc sentits matemàtics. Els mínims de famílies i nivells són comuns a tots els temes ordinaris; les ampliacions també es revisen amb els mateixos objectius, adequats al seu nivell curricular.  
+**Versió:** 1.3 · **Acordat:** 10/11/2026 · **Actualitzat:** 11/11/2026  
+**Àmbit:** tots els cursos (1r–4t ESO) i els cinc sentits matemàtics. Els objectius orientatius de famílies i nivells són comuns a tots els temes; sempre preval l'adequació curricular i la diversitat matemàtica real.  
 **Referència funcional:** tema «Nombres racionals» de `2eso/sentit-numeric.html`, amb comprovació del codi real abans de reproduir-ne el comportament.  
 **Referència visual i pedagògica inicial de teoria (adaptable a tots els cursos):** `2eso/teoria/numeric/nombres-racionals.html`. La referència funcional de pràctica i la visual de teoria són diferents.  
 **Estat:** criteri de projecte aprovat. L'aprovació d'aquest protocol **no** implica que els temes actuals ja compleixin els requisits.
@@ -10,19 +10,19 @@
 
 - **Auditoria o ampliació completa d'un tema:** executar les vuit fases i comprovar els criteris de tancament.
 - **Correcció puntual:** aplicar únicament les fases afectades i proves de regressió proporcionals; no reconstruir el tema sense necessitat.
-- **Tots els cursos i sentits matemàtics:** aplicar els mateixos mínims quantitatius (15 famílies, ≥5 N1, ≥5 N2 i ≥3 N3), amb procediments i dificultat adaptats al currículum específic de cada tema. Les ampliacions es registren separadament dels temes ordinaris.
+- **Tots els cursos i sentits matemàtics:** aspirar orientativament a 15 famílies (≥5 N1, ≥5 N2, ≥3 N3), **sense obligació d'assolir cap quota**. És admissible tancar un tema amb menys famílies o sense N3 quan el contingut curricular no justifiqui ampliar-lo. Les ampliacions es registren separadament.
 - Per defecte, començar amb **auditoria de només lectura**, lliurar especificació i separar clarament la proposta de la implementació. No publicar canvis funcionals sense l'encàrrec corresponent.
 
-## 1. Requisits pedagògics comuns a tots els temes (1r–4t ESO, cinc sentits)
+## 1. Objectius pedagògics orientatius comuns a tots els temes (1r–4t ESO, cinc sentits)
 
-| Indicador | Mínim |
+| Indicador | Objectiu orientatiu, no obligatori |
 |---|---:|
 | Famílies matemàtiques diferents, totals | **15** |
 | Famílies N1 (bàsiques) | **5** |
 | Famílies N2 (intermèdies) | **5** |
 | Famílies N3 (avançades) | **3** |
 
-Distribucions vàlides: 6-6-3, 5-5-5, 7-5-3, 5-7-3 i d'altres que compleixin **simultàniament** tots quatre mínims. No hi ha màxim fixat.
+Exemples de distribució desitjada: 6-6-3, 5-5-5, 7-5-3 o 5-7-3, **només quan el contingut ho permeti**. Els dèficits numèrics són indicadors de revisió, mai errors automàtics ni motius per inventar famílies. És preferible una distribució inferior ben justificada.
 
 ### Què és una família?
 
@@ -39,13 +39,14 @@ Una **família** és un procediment o objectiu matemàtic genuïnament diferenci
 ## 2. Les vuit fases obligatòries en una ampliació completa
 
 ### Fase 1 — Inventari i auditoria
+- **Subfase A actual (prioritària):** auditar únicament famílies matemàtiques reals, exemples representatius, nivell actual versus recomanat i adequació estricta al curs. No revisar teoria, estil visual ni progressió en aquesta subfase. La resta de fases s'executaran posteriorment i de manera separada.
 - Localitzar a `main` el tema, generadors, classificadors, teoria, navegació, correcció, exàmens i fitxes relacionades. Registrar el **commit consultat**.
 - Inventariar **tots** els generadors accessibles: tipus, variants, rang de dades, modes, restriccions, solució, pistes i tipus de resposta.
 - Agrupar-los per **procediment real**, assignar N1/N2/N3 amb justificació, detectar duplicitats i revisar adequació curricular.
-- Comparar l'estat real amb els mínims 15 / 5 / 5 / 3 per a qualsevol curs i sentit. Identificar contradiccions entre mapes de dificultat i prioritat efectiva del codi. No donar una distribució proposada per implementada.
+- Comparar l'estat real amb els **objectius orientatius** 15 / 5 / 5 / 3 per a qualsevol curs i sentit, i justificar per què és o no recomanable ampliar. Identificar contradiccions entre mapes de dificultat i prioritat efectiva del codi. No donar una distribució proposada per implementada.
 
 ### Fase 2 — Ampliar les famílies insuficients
-- Dissenyar les famílies realment noves que calguin per superar **tots** els mínims. Especificar primer l'objectiu matemàtic; després crear-ne els generadors.
+- Proposar famílies noves **només si aporten un procediment matemàtic genuí, útil i curricularment adequat**. No crear famílies per completar quotes ni forçar N3 si el tema no ho justifica. Especificar primer l'objectiu matemàtic; després, si s'aprova, crear-ne els generadors.
 - Per cada generador: paràmetres diversos i vàlids, enunciat inequívoc, solució correcta, passos de resolució, pistes graduades, alternatives i toleràncies si escau.
 - Evitar recursions sense límit, casos degenerats, respostes ambigües, repetició cosmètica i procediments fora del nivell curricular.
 - Si una família proposada coincideix substancialment amb una existent, fusionar-les i proposar-ne una altra.
@@ -84,7 +85,7 @@ Una **família** és un procediment o objectiu matemàtic genuïnament diferenci
 
 ### Fase 7 — Exàmens, fitxes i solucionaris
 - Revisar distribució real N1/N2/N3 en els exàmens per tema, compatibilitat amb els nous generadors i filtres del curs.
-- Evitar saturar l'examen amb duplicats d'una mateixa família; preservar diversitat i coherència amb els mínims.
+- Evitar saturar l'examen amb duplicats d'una mateixa família; preservar diversitat i coherència amb les famílies justificades.
 - Si hi ha fitxes imprimibles, actualitzar selecció, enunciats i solucionaris; validar que cada pregunta i resposta corresponen al mateix generador i procediment.
 - Comprovar que els nous tipus no queden exclosos per llistes fixes, codis d'identificació o classificacions obsoletes.
 
@@ -93,24 +94,24 @@ Una **família** és un procediment o objectiu matemàtic genuïnament diferenci
 - Comprovar la **matriu de cobertura 100%** per família; provar cada `#ancora` des de pràctica i navegació directa, l'obertura del desplegable i `hashchange`.
 - Si es poden executar captures o proves de navegador, contrastar escriptori i mòbil amb el model; si no, fer comprovacions estàtiques i declarar que la verificació visual real queda pendent. **No afirmar equivalència visual sense haver-la comprovat.**
 - Provar tots els tipus i variants amb dades repetides, casos límit, correcció, alternatives, pistes i solucions.
-- Validar els recomptes de famílies (15 / 5 / 5 / 3), l'assignació exacta i sense contradiccions, i la selecció efectiva N1→N2→N3.
+- Documentar els recomptes reals i la diferència respecte als objectius orientatius (15 / 5 / 5 / 3), l'assignació exacta i sense contradiccions, i la selecció efectiva N1→N2→N3.
 - Provar sessions guiades i autònomes completes, sortida/reinici, exàmens, fitxes i enllaços teoria ↔ pràctica.
 - Revisar consola/HTML, ancoratges i vistes **mòbil i escriptori**; si no es poden provar navegadors, indicar expressament què queda pendent.
 - Publicar únicament després de les comprovacions disponibles; anotar fitxers tocats, commit, proves realitzades, limitacions i pendents.
 
 ## 3. Lliurables estàndard per tema
 
-**Auditoria (només lectura):** lliurar un ZIP amb **tres fitxers**:
-1. `MI_2ESO_<tema>_families.xlsx` (o taula de dades equivalent si no es pot crear Excel): inventari tipus→família, nivell, descripció, variants, cobertura i enllaços.
-2. `MI_2ESO_<tema>_incidencies.md`: mancances pedagògiques, contradiccions de nivell, errors, riscos i verificacions pendents, prioritzades.
-3. `MI_2ESO_<tema>_especificacio_codex.md`: canvis exactes, fitxers afectats, nous procediments, progressió, teoria, proves i criteris d'acceptació. Cal incloure la matriu de cobertura i una especificació explícita de les seccions/estructura visual segons el model, diferenciant teoria principal visible i ajuda desplegable.
+**Auditoria integral (només lectura):** lliurar un ZIP amb **tres fitxers**. En la **subfase A**, prioritzar l'inventari de famílies, nivell actual/recomanat, adequació curricular i incidències; no requerir especificacions de teoria ni format visual:
+1. `MI_<CURS>_<tema>_families.xlsx` (o taula de dades equivalent si no es pot crear Excel): inventari tipus→família, nivell, descripció, variants, cobertura i enllaços.
+2. `MI_<CURS>_<tema>_incidencies.md`: mancances pedagògiques, contradiccions de nivell, errors, riscos i verificacions pendents, prioritzades.
+3. `MI_<CURS>_<tema>_especificacio_codex.md`: canvis exactes, fitxers afectats, nous procediments, progressió, teoria, proves i criteris d'acceptació. Cal incloure la matriu de cobertura i una especificació explícita de les seccions/estructura visual segons el model, diferenciant teoria principal visible i ajuda desplegable.
 
 **Implementació:** registrar commit(s), resum dels canvis, taula de cobertura final i resultat de proves, separant validat de pendent.
 
 ## 4. Criteris de tancament (checklist)
 
 - [ ] Inventari verificat al commit consultat i famílies definides per procediment.
-- [ ] **≥15 famílies reals; ≥5 N1; ≥5 N2; ≥3 N3**, en tots els cursos i sentits.
+- [ ] Recomptes reals documentats i comparats amb els **objectius no obligatoris** de 15 / 5 / 5 / 3; qualsevol diferència està justificada pedagògicament, sense bloquejar el tancament.
 - [ ] Nivells únics, justificats i coincidents entre els diferents fluxos.
 - [ ] Generadors i correctors correctes, diversos i amb pistes/solucions.
 - [ ] Progressió matemàtica efectiva com al tema de referència.
