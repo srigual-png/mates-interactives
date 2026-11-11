@@ -1,19 +1,19 @@
 # Mates Interactives — Protocol d'auditoria i ampliació de temes
 
-**Versió:** 1.1 · **Acordat:** 10/11/2026 · **Actualitzat:** 11/11/2026  
-**Àmbit inicial:** 2n d'ESO · Sentit numèric.  
+**Versió:** 1.2 · **Acordat:** 10/11/2026 · **Actualitzat:** 11/11/2026  
+**Àmbit:** tots els cursos (1r–4t ESO) i els cinc sentits matemàtics. Els mínims de famílies i nivells són comuns a tots els temes ordinaris; les ampliacions també es revisen amb els mateixos objectius, adequats al seu nivell curricular.  
 **Referència funcional:** tema «Nombres racionals» de `2eso/sentit-numeric.html`, amb comprovació del codi real abans de reproduir-ne el comportament.  
-**Referència visual i pedagògica de teoria (2n ESO · Sentit numèric):** `2eso/teoria/numeric/nombres-racionals.html`. La referència funcional de pràctica i la visual de teoria són diferents.  
+**Referència visual i pedagògica inicial de teoria (adaptable a tots els cursos):** `2eso/teoria/numeric/nombres-racionals.html`. La referència funcional de pràctica i la visual de teoria són diferents.  
 **Estat:** criteri de projecte aprovat. L'aprovació d'aquest protocol **no** implica que els temes actuals ja compleixin els requisits.
 
 ## 0. Quan cal aplicar-lo
 
 - **Auditoria o ampliació completa d'un tema:** executar les vuit fases i comprovar els criteris de tancament.
 - **Correcció puntual:** aplicar únicament les fases afectades i proves de regressió proporcionals; no reconstruir el tema sense necessitat.
-- **Altres cursos i sentits matemàtics:** reutilitzar l'estructura metodològica; **no** traslladar automàticament els mínims numèrics de 2n d'ESO · Sentit numèric fins que s'hagin acordat per a aquell àmbit.
+- **Tots els cursos i sentits matemàtics:** aplicar els mateixos mínims quantitatius (15 famílies, ≥5 N1, ≥5 N2 i ≥3 N3), amb procediments i dificultat adaptats al currículum específic de cada tema. Les ampliacions es registren separadament dels temes ordinaris.
 - Per defecte, començar amb **auditoria de només lectura**, lliurar especificació i separar clarament la proposta de la implementació. No publicar canvis funcionals sense l'encàrrec corresponent.
 
-## 1. Requisits pedagògics acordats per tema
+## 1. Requisits pedagògics comuns a tots els temes (1r–4t ESO, cinc sentits)
 
 | Indicador | Mínim |
 |---|---:|
@@ -32,7 +32,7 @@ Una **família** és un procediment o objectiu matemàtic genuïnament diferenci
 3. nivell únic justificat (N1/N2/N3), o justificació explícita si variants matemàticament diferents s'han de separar en famílies;
 4. exemples d'entrada, resposta, passos i errors típics.
 
-**N1**: identificació i aplicació directa d'un procediment. **N2**: transferència, interpretació i/o diversos passos habituals. **N3**: raonament més exigent, restriccions, reconstrucció o justificació, **dins del currículum de 2n d'ESO**. No elevar artificialment un N2 a N3 per assolir un recompte.
+**N1**: identificació i aplicació directa d'un procediment. **N2**: transferència, interpretació i/o diversos passos habituals. **N3**: raonament més exigent, restriccions, reconstrucció o justificació, **dins del currículum i l'abast del tema corresponent**. No elevar artificialment un N2 a N3 per assolir un recompte.
 
 **La dificultat matemàtica no és el mode de suport.** «Guiat/autònom» regula pistes i ajuda, no l'etiqueta N1/N2/N3. No identificar automàticament «15 tipus de generador» amb «15 famílies».
 
@@ -42,7 +42,7 @@ Una **família** és un procediment o objectiu matemàtic genuïnament diferenci
 - Localitzar a `main` el tema, generadors, classificadors, teoria, navegació, correcció, exàmens i fitxes relacionades. Registrar el **commit consultat**.
 - Inventariar **tots** els generadors accessibles: tipus, variants, rang de dades, modes, restriccions, solució, pistes i tipus de resposta.
 - Agrupar-los per **procediment real**, assignar N1/N2/N3 amb justificació, detectar duplicitats i revisar adequació curricular.
-- Comparar l'estat real amb els mínims 15 / 5 / 5 / 3. Identificar contradiccions entre mapes de dificultat i prioritat efectiva del codi. No donar una distribució proposada per implementada.
+- Comparar l'estat real amb els mínims 15 / 5 / 5 / 3 per a qualsevol curs i sentit. Identificar contradiccions entre mapes de dificultat i prioritat efectiva del codi. No donar una distribució proposada per implementada.
 
 ### Fase 2 — Ampliar les famílies insuficients
 - Dissenyar les famílies realment noves que calguin per superar **tots** els mínims. Especificar primer l'objectiu matemàtic; després crear-ne els generadors.
@@ -71,7 +71,7 @@ Una **família** és un procediment o objectiu matemàtic genuïnament diferenci
 - No generar només títols: verificar contingut, exemples i correspondència entre família i procediment.
 
 ### Fase 6 — Pàgina de teoria i navegació
-- Per a **2n d'ESO · Sentit numèric**, emprar com a **model visual i pedagògic obligatori** `2eso/teoria/numeric/nombres-racionals.html` (a més del patró consensuat a 1r d'ESO). Analitzar el model actual abans de tocar el fitxer de destinació; adaptar-ne l'estructura i l'aspecte, no copiar-ne els continguts matemàtics.
+- Per a **tots els cursos i sentits**, emprar com a **model visual i pedagògic de referència** `2eso/teoria/numeric/nombres-racionals.html` (a més del patró consensuat a 1r d'ESO). Analitzar el model actual abans de tocar el fitxer de destinació; adaptar-ne l'estructura i l'aspecte, no copiar-ne els continguts matemàtics.
 - La **teoria principal ha de ser completa i visible sense obrir desplegables**: organitzar els procediments de totes les famílies en apartats conceptuals numerats, amb explicacions suficients. No reduir-la a quatre o cinc resums si això deixa procediments només dins l'ajuda contextual. El nombre d'apartats l'estableix la cobertura pedagògica de cada tema, **no és fix ni ha de coincidir amb el nombre de famílies**.
 - Mantenir un bloc **«Ajuda per a exercicis concrets»** desplegable com a suport complementari, amb un procediment per família i enllaços contextuals. No és un substitut de la teoria principal.
 - Reproduir el patró de presentació del model: capçalera i botons, índex navegable, targetes numerades, exemples resolts **visibles en una secció pròpia**, errors freqüents amb explicació de l'error i la correcció, autoavaluació desplegable amb solucions, resum, pràctica final i navegació anterior/índex/següent. No amagar tots els exemples dins les ajudes.
@@ -110,7 +110,7 @@ Una **família** és un procediment o objectiu matemàtic genuïnament diferenci
 ## 4. Criteris de tancament (checklist)
 
 - [ ] Inventari verificat al commit consultat i famílies definides per procediment.
-- [ ] **≥15 famílies reals; ≥5 N1; ≥5 N2; ≥3 N3.**
+- [ ] **≥15 famílies reals; ≥5 N1; ≥5 N2; ≥3 N3**, en tots els cursos i sentits.
 - [ ] Nivells únics, justificats i coincidents entre els diferents fluxos.
 - [ ] Generadors i correctors correctes, diversos i amb pistes/solucions.
 - [ ] Progressió matemàtica efectiva com al tema de referència.
@@ -124,7 +124,7 @@ Una **família** és un procediment o objectiu matemàtic genuïnament diferenci
 - [ ] Proves de regressió documentades; mòbil i escriptori verificats o marcats pendents.
 - [ ] Canvis publicats amb commit i incidències residuals documentades.
 
-## 5. Cas inicial: Fraccions amb sentit (2n ESO)
+## 5. Cas documentat: Fraccions amb sentit (2n ESO)
 
 Punt de partida **pendent d'auditoria completa**: el codi conté **15 tipus de generador**, que **no equivalen necessàriament a 15 famílies**. Hi ha indicis de **classificacions de dificultat contradictòries** i manca de selecció progressiva específica del tema, en comparació amb «Nombres racionals». Una agrupació preliminar suggeria 13 famílies i necessitat probable d'ampliació, però **no és resultat auditat ni acceptat definitivament**.
 
