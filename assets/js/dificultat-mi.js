@@ -41,7 +41,6 @@
     const row=OPERATIONS_RATIONAL_FAMILIES.find(f=>f.id===family);
     return row?{...row,anchor:'ajuda-'+family.toLowerCase()}:null;
   }
-  // Punt 3: revisió de les tasques de 1r numèric. Justificacions a docs/dificultats/revisio-1eso-numeric-punt3.json.
   const FIRST_NUMERIC_LEVELS=freeze({"naturals":[[1,2,3,4],[5],[]],"decimal_sys":[[1,2,3,4],[],[]],"ops":[[1,2,3,4],[5,6],[]],"potencies":[[1,2,3,4,5,6,7],[],[]],"jerarquia":[[1,2],[3,4,5,6,7,8,9],[]],"divis":[[1,2,3,4,5,6],[7],[]],"mcmmcd":[[1,2,3],[4,5],[]],"enters":[[1,2,3,4,5,7],[6],[]],"decimals":[[1,2,3,4,7,8],[5,6,9],[]],"fraccions":[[1,2,4,5,7,9,10,11],[3,6,8],[]],"proporcionalitat":[[1,2,5,8],[3,4,6,7],[]],"percentatges":[[1,2,6,7],[4,5],[3]],"notacio2":[[4,5,6],[1,2,3],[]]});
   const NATURAL_PRACTICE_LEVELS=freeze({'recta-graduada':1,'dividend-desconegut':2,'producte-descomposicio':2,'operacions-valor-desconegut':2,'interval-arrodoniment':3,'nombres-amb-condicions':3,'patrons-numerics':3});
   const DECIMAL_PRACTICE_LEVELS=freeze({'lectura-paraules-a-xifres':1,'guionets-numerals-du-c':2,'descomposicio-equivalent-reagrupament':2,'equivalencia-ordres-posicionals':2,'escriure-xifres-a-paraules':3,'auditar-error-de-posicio':3});

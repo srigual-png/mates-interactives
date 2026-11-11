@@ -507,6 +507,18 @@ function ratNeg(a){return rat(-a.n,a.d)}
 function ratText(a){return fracStr(a.n,a.d)}
 function ratValue(a){return a.n/a.d}
 function ratFromTenths(x){return rat(Math.round(x*10),10)}
+function rationalOptionKey(value){
+  let text=String(value).trim().replace(/[−–]/g,'-').replace(/\s*(?:°C|€|km|m|L|litres?)\s*$/i,'').replace(',','.').replace(/\s+/g,'');
+  const match=text.match(/^([+-]?\d+)(?:\/([+-]?\d+))?$/);if(!match)return null;
+  let n=BigInt(match[1]),d=BigInt(match[2]||'1');if(!d)return null;if(d<0n){n=-n;d=-d;}
+  let a=n<0n?-n:n,b=d;while(b){const r=a%b;a=b;b=r;}return `${n/(a||1n)}/${d/(a||1n)}`;
+}
+function uniqRationalOptions4(correct,pool){
+  const out=[String(correct)],seen=new Set([rationalOptionKey(correct)]);
+  for(const value of shuffle(pool)){const key=rationalOptionKey(value);if(key!==null&&!seen.has(key)){seen.add(key);out.push(String(value));}if(out.length===4)break;}
+  for(let n=0;out.length<4;n++){const value=String(n+1),key=rationalOptionKey(value);if(!seen.has(key)){seen.add(key);out.push(value);}}
+  return shuffle(out);
+}
 function supDigits(n){
   const map={'-':'⁻','0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹'};
   return String(n).split('').map(c=>map[c]||c).join('');
@@ -1362,7 +1374,6 @@ function genOperacionsRacionals2ESO(forceType,forceVariant){
     question=`Sense fer el càlcul exacte, quin signe tindrà ${mathSpan(vals.map(v=>'('+v+'/3)').join(' · '))}?`;
     guide=['Observa només els signes dels factors; no cal calcular-ne el valor.','Compta o agrupa els factors que tenen signe negatiu.','Decideix el signe final aplicant la regla del producte de nombres amb signe.'];
     solution=[`Hi ha ${neg} factor${neg===1?'':'s'} negatiu${neg===1?'':'s'}.`,`Per tant, el resultat és ${correct.toLowerCase()}.`];
-    allowOpen=false;
   }
   else if(type===8){
     const a=rnd(-8,12),b=rnd(2,7),c=rnd(-5,6)||3,R=a-b*c,wrong=(a-b)*c;
@@ -1422,17 +1433,19 @@ function genOperacionsRacionals2ESO(forceType,forceVariant){
     openHint='Escriu una fracció equivalent, un enter o un decimal exacte.';
   }
   else if(type===14){
-    const scale=shuffle([
-      {a:rnd(28,32)/10,b:rnd(28,32)/10,c:'1'},
-      {a:rnd(18,22)/10,b:rnd(45,55)/10,c:'10'},
-      {a:rnd(45,55)/10,b:rnd(18,22),c:'100'},
-      {a:rnd(18,22),b:rnd(45,55),c:'1000'}
+    const set=forceVariant==='audit-example'?{a:2.8,b:2.9}:shuffle([
+      {a:2.8,b:2.9},
+      {a:rnd(18,22)/10,b:rnd(45,55)/10},
+      {a:rnd(45,55)/10,b:rnd(18,22)},
+      {a:rnd(18,22),b:rnd(45,55)}
     ])[0];
-    const set=scale;correct=set.c;options=shuffle(['1','10','100','1000']);
+    const product100=Math.round(set.a*set.b*100),milestones=[1,10,100,1000];
+    correct=String(milestones.reduce((best,n)=>Math.abs(product100-n*100)<Math.abs(product100-best*100)?n:best,milestones[0]));
+    options=shuffle(milestones.map(String));
     question=`Sense calcular exactament, a quin valor és més proper ${mathSpan(fmtNum(set.a,1)+' · '+fmtNum(set.b,1))}?`;
-    guide=['Arrodoneix cada factor a un nombre senzill.','Multiplica mentalment els valors aproximats.','Escull l’ordre de magnitud coherent amb aquesta estimació.'];
-    solution=[`Arrodonint els factors obtenim una multiplicació senzilla.`,`L’ordre de magnitud correcte és aproximadament ${correct}.`];
-    allowOpen=false;
+    guide=['Estima cada factor i acota el producte.','Compara el producte aproximat amb les fites 1, 10, 100 i 1.000.','Tria la fita que queda més a prop del producte.'];
+    solution=[`${fmtNum(set.a,1)} · ${fmtNum(set.b,1)} = ${fmtNum(set.a*set.b,2)}.`,`La distància a ${correct} és menor que la distància a les fites veïnes.`,`Per tant, la fita més propera és ${correct}.`];
+    openHint='Escriu la fita més propera: 1, 10, 100 o 1.000.';
   }
   else if(type===15){
     const pairs=[[rat(-1,4),rat(1,4)],[rat(2,5),rat(3,5)],[rat(3,4),rat(5,4)],[rat(5,4),rat(3,4)],[rat(1,3),rat(1,4)],[rat(5,6),rat(7,8)],[rat(-3,4),rat(1,2)]];
@@ -1443,6 +1456,7 @@ function genOperacionsRacionals2ESO(forceType,forceVariant){
     guide=['Estima cada fracció comparant-la amb 0, 1/2, 1 o altres referències senzilles.','Combina aquestes estimacions.','No necessites trobar el resultat exacte.'];
     solution=[`Compare la suma amb nombres de referència: 0, 1 i 2.`,`La suma exacta és ${ratText(R)}, que pertany a ${correct}.`,`La resposta és ${correct}.`];
     allowOpen=false;
+    openHint='Escriu l’interval amb els extrems oberts o tancats com a l’opció correcta.';
   }
   else if(type===16){
     const d1=shuffle([3,4,5,6])[0],d2=shuffle([4,5,7,8])[0],n1=rnd(1,d1-1),n2=rnd(1,d2-1);
@@ -1503,12 +1517,12 @@ function genOperacionsRacionals2ESO(forceType,forceVariant){
   else if(type===20){
     const a=rnd(1,5),b=rnd(2,6),d=rnd(1,4);let c=rnd(3,7);const forms=[`(${a} + ${b}) · ${c} − ${d}`,`${a} + ${b} · (${c} − ${d})`,`(${a} + ${b}) · (${c} − ${d})`],values=[(a+b)*c-d,a+b*(c-d),(a+b)*(c-d)];
     while(new Set(values).size<3){c++;forms[0]=`(${a} + ${b}) · ${c} − ${d}`;forms[1]=`${a} + ${b} · (${c} − ${d})`;forms[2]=`(${a} + ${b}) · (${c} − ${d})`;values[0]=(a+b)*c-d;values[1]=a+b*(c-d);values[2]=(a+b)*(c-d);}
-    const target=rnd(0,2);correct=['A','B','C'][target];const results=values.map((v,i)=>`${String.fromCharCode(65+i)}: ${forms[i]} = ${v}`);
-    options=shuffle(['A','B','C','Cap d’aquestes']);
-    question=`Quina agrupació dona ${values[target]}? Tria A, B, C o «Cap d’aquestes».<ol><li>A: ${forms[0]}</li><li>B: ${forms[1]}</li><li>C: ${forms[2]}</li></ol>`;
+    const target=rnd(0,3),goal=target<3?values[target]:Math.max(...values)+rnd(1,5);correct=target<3?['A','B','C'][target]:'D';const results=values.map((v,i)=>`${String.fromCharCode(65+i)}: ${forms[i]} = ${v}`);
+    options=shuffle(['A','B','C','D']);
+    question=`Quina agrupació dona ${goal}? Tria A, B, C o D si cap no hi arriba.<ol><li>A: ${forms[0]}</li><li>B: ${forms[1]}</li><li>C: ${forms[2]}</li></ol>`;
     guide=['Calcula sempre primer el que queda dins de cada parèntesi.','Respecta la prioritat del producte respecte de la suma i la resta.','Avalua les tres agrupacions i compara els resultats amb l’objectiu.'];
-    solution=[...results,`Només l’opció ${correct} dona l’objectiu ${values[target]}.`,`Els parèntesis canvien l’ordre d’algunes operacions; el producte es fa abans que la suma o la resta quan no hi ha parèntesis que indiquin una altra agrupació.`];
-    openHint='Escriu A, B o C.';
+    solution=[...results,`${correct==='D'?`Cap de les opcions A, B o C`: `Només l’opció ${correct}`} dona l’objectiu ${goal}.`,`Els parèntesis canvien l’ordre d’algunes operacions; el producte es fa abans que la suma o la resta quan no hi ha parèntesis que indiquin una altra agrupació.`];
+    openHint='Escriu A, B, C o D si cap opció no dona l’objectiu.';
   }
   else if(type===21){
     const L=rnd(8,14),U=L+rnd(4,10),used=rnd(1,4),target=rnd(L-used-1,U-used+2),min=L-used,max=U-used;
@@ -1520,6 +1534,7 @@ function genOperacionsRacionals2ESO(forceType,forceVariant){
     openHint='Escriu garantida, possible però no garantida, o impossible.';
   }
 
+  if([13,16,19].includes(type))options=uniqRationalOptions4(correct,options.concat([String(Number(correct)+1),String(Number(correct)-1),String(-Number(correct)),String(Number(correct)+2)]));
   const familyInfo=window.MIDifficulty?.operationsRationalInfo?.({topicId:'operacionsRacionals',type,variantId:difficultyVariant});
   return {topicId:'operacionsRacionals',type,course:'2n',difficultyVariant,variantId:difficultyVariant,familyId:familyInfo?.id,familyName:familyInfo?.name,familyAnchor:familyInfo?.anchor,question,correct,alts,options,guide,solution,openHint,allowOpen};
 }
@@ -2829,11 +2844,12 @@ const THEORY_PAGES={
 const RATIONAL_THEORY_ANCHORS={1:'fraccio-a-decimal',2:'decimal-a-fraccio',3:'fraccio-a-percentatge',4:'percentatge-a-decimal',5:'tres-representacions',6:'comparar-fraccio-decimal',7:'comparar-percentatge-fraccio',8:'ordenar-representacions',9:'llegir-recta',10:'valor-intermedi',11:'identificar-la-forma',12:'proporcio-de-cada',13:'detectar-equivalencia-falsa',14:'comparar-proporcions',15:'decimal-periodic-exacte',16:'llindar-minim',17:'composicio-amb-traspassos',18:'interval-amb-condicions'};
 const FRACTIONS_MEANING_THEORY_ANCHORS={1:'divisio-repartiment',2:'divisio-repartiment',3:'operador-ajuda',4:'reconstruir-total',5:'part-total',6:'complement',7:'rao-entre-grups',8:'rao-i-part-total',9:'escala-part-total',10:'comparar-proporcions',11:'escala-rao',12:'repartiment-proporcional',13:'fraccions-successives',14:'significat-contextual',15:'reconstruir-total',16:'rao-i-diferencia',17:'inversa-successives'};
 function operationsRationalTheoryAnchor(ex){return ex?.familyAnchor||window.MIDifficulty?.operationsRationalInfo?.(ex)?.anchor||'ajuda-or01';}
+const miPracticeSessionToken=(typeof crypto!=='undefined'&&crypto.randomUUID?crypto.randomUUID():String(Date.now())+'-'+Math.random().toString(36).slice(2));
 function miTheoryLinkHtml(topicId,label,type){
   var href=THEORY_PAGES[topicId];if(!href)return '';
   if(topicId==='racionals'&&Number.isFinite(Number(type))&&RATIONAL_THEORY_ANCHORS[Number(type)])href+='#'+RATIONAL_THEORY_ANCHORS[Number(type)];
   if(topicId==='fraccionsSentit'&&FRACTIONS_MEANING_THEORY_ANCHORS[Number(type)])href+='#'+FRACTIONS_MEANING_THEORY_ANCHORS[Number(type)];
-  if(topicId==='operacionsRacionals')href+='#'+operationsRationalTheoryAnchor(type&&typeof type==='object'?type:{type:Number(type),topicId});
+  if(topicId==='operacionsRacionals'){href+='?miReturnToken='+encodeURIComponent(miPracticeSessionToken)+'#'+operationsRationalTheoryAnchor(type&&typeof type==='object'?type:{type:Number(type),topicId});}
   return '<a class="theory-page-link mi-review-theory-link" href="'+href+'" style="margin:12px 0 0">📚 '+(label||'Repassar el procediment')+'</a>';
 }
 
@@ -3060,7 +3076,7 @@ function selectAnswer(idx,btn){
   if(!ok)btn.classList.add('wrong');processAnswer(ok,ans);
 }
 function exactRational(text){
-  let s=String(text??'').trim().replace(/,/g,'.').replace(/\s+/g,'');if(!s)return null;
+  let s=String(text??'').trim().replace(/[−–]/g,'-').replace(/,/g,'.').replace(/\s+/g,'');if(!s)return null;
   let m=s.match(/^([+-]?\d+)\/([+-]?\d+)$/);if(m){let n=BigInt(m[1]),d=BigInt(m[2]);if(!d)return null;if(d<0n){n=-n;d=-d;}return[n,d];}
   m=s.match(/^([+-]?\d+(?:\.\d+)?)(%)?$/);if(!m)return null;
   const decimal=m[1],parts=decimal.split('.'),den=10n**BigInt((parts[1]||'').length),negative=decimal.startsWith('-');let num=BigInt(parts[0].replace(/^[+-]/,''))*den+BigInt((parts[1]||'0'));if(negative)num=-num;
@@ -3076,9 +3092,15 @@ function rationalOpenOk(ex,value){
     return ok;
   }
   if(ex.topicId==='operacionsRacionals'){
-    if(ex.type===20)return /^[abc]$/i.test(String(value).trim())&&String(value).trim().toUpperCase()===String(ex.correct).toUpperCase();
+    if(ex.type===14){const v=exactRational(value),target=exactRational(ex.correct);return !!v&&!!target&&v[0]*target[1]===target[0]*v[1]&&!String(value).includes('%');}
+    if(ex.type===15){const norm=x=>String(x??'').trim().toLowerCase().replace(/\s+/g,'').replace(/<=/g,'≤').replace(/>=/g,'≥').replace(/[−–]/g,'-');return norm(value)===norm(ex.correct);}
+    if(ex.type===20)return /^[abcd]$/i.test(String(value).trim())&&String(value).trim().toUpperCase()===String(ex.correct).toUpperCase();
     if(ex.type===21){const label=String(value).trim().toLowerCase().replace(/\s+/g,' ');return label===String(ex.correct).toLowerCase().replace(/\s+/g,' ');}
-    if([3,4,5,6,11,12,13,19].includes(ex.type)){const input=String(value).trim().replace(/\s*(?:L|litres?)$/i,'').trim(),v=exactRational(input),target=exactRational(ex.correct);return !!v&&!!target&&v[0]*target[1]===target[0]*v[1]&&!input.includes('%');}
+    if([1,2,3,4,5,6,8,9,10,11,12,13,16,18,19].includes(ex.type)){
+      const raw=String(value??'').trim(),suffix=raw.match(/\s*(°C|€|km|m|L|litres?)\s*$/i),required=ex.type===19?'L':ex.type===18?(/°C/.test(ex.question)?'°C':/€/.test(ex.question)?'€':/\bkm\b/.test(ex.question)?'km':/\bm\b/.test(ex.question)?'m':''):'';
+      const unit=suffix?.[1]||'',normalizeUnit=x=>/^litres?$/i.test(x)?'L':x.toLowerCase();if(unit&&(!required||normalizeUnit(unit)!==normalizeUnit(required)))return false;
+      const input=suffix?raw.slice(0,suffix.index).trim():raw,v=exactRational(input),target=exactRational(ex.correct);return !!v&&!!target&&v[0]*target[1]===target[0]*v[1]&&!input.includes('%');
+    }
     return ok;
   }
   if(ex.topicId!=='racionals')return ok;
@@ -3112,8 +3134,11 @@ function markTopicDone(){window.MIAnalytics?.complete();const id=TOPICS[state.cu
 function solvedCount(topicId){return topicId==='racionals'?state.rationalSolved:topicId==='fraccionsSentit'?state.fractionsSolved:state.operationsSolved}
 function answeredCount(topicId){return topicId==='racionals'?state.rationalAnswered:topicId==='fraccionsSentit'?state.fractionsAnswered:state.operationsAnswered}
 function nextExercise(){const goal=state.level===1?10:20,topicId=TOPICS[state.currentTopic].id,progressive=['racionals','fraccionsSentit','operacionsRacionals'].includes(topicId),progress=progressive?(state.level===1?solvedCount(topicId):answeredCount(topicId)):state.correctStreak;if(progress>=goal&&state.done.includes(topicId)){showCongrats()}else showExercise()}
+let pendingPracticeSnapshot=null;
+function capturePracticeSnapshot(){const inp=document.getElementById('openInput'),options=[...document.querySelectorAll('#optionsGrid .opt-btn')];pendingPracticeSnapshot={topic:state.currentTopic,exCount:state.exCount,currentEx,answered:state.answered,input:{value:inp.value,disabled:inp.disabled,className:inp.className},options:options.map(b=>({disabled:b.disabled,className:b.className})),feedback:document.getElementById('feedbackArea').innerHTML,next:document.getElementById('btnNext').style.display,change:document.getElementById('btnChangeTopic').style.display};}
+function continuePractice(){const snapshot=pendingPracticeSnapshot;if(!snapshot){startPractice();return;}state.currentTopic=snapshot.topic;state.exCount=snapshot.exCount;currentEx=snapshot.currentEx;state.answered=snapshot.answered;const inp=document.getElementById('openInput');inp.value=snapshot.input.value;inp.disabled=snapshot.input.disabled;inp.className=snapshot.input.className;document.querySelectorAll('#optionsGrid .opt-btn').forEach((b,i)=>{const saved=snapshot.options[i];if(saved){b.disabled=saved.disabled;b.className=saved.className;}});document.getElementById('feedbackArea').innerHTML=snapshot.feedback;document.getElementById('btnNext').style.display=snapshot.next;document.getElementById('btnChangeTopic').style.display=snapshot.change;setNavContext(TOPICS[state.currentTopic].name,true,true);showScreen('screenExercise');}
 function showCongrats(){
-  if(['racionals','fraccionsSentit','operacionsRacionals'].includes(TOPICS[state.currentTopic]?.id)){const topicId=TOPICS[state.currentTopic].id,goal=state.level===1?10:20,solved=solvedCount(topicId),answered=answeredCount(topicId),points=topicId==='racionals'?state.rationalDifficultyPoints:topicId==='fraccionsSentit'?state.fractionsDifficultyPoints:state.operationsDifficultyPoints,progress=state.level===1?solved:answered,met=progress>=goal;document.getElementById('feedbackArea').innerHTML='<div class="congrats"><div class="trophy">'+(met?'🏆':'📊')+'</div><h2>'+(met?'Bloc superat!':'Resum de la pràctica')+'</h2><p>Encerts: <b>'+solved+'</b> · Errors: <b>'+(answered-solved)+'</b> · Respostes: <b>'+answered+'</b></p><p>Objectiu: '+(state.level===1?'10 encerts acumulats':'20 respostes')+' · '+(met?'Assolit':'No assolit')+'</p><p>Punts de dificultat: <b>'+points+'</b></p><button class="btn-primary" onclick="showHome()">Tornar al Sentit Numèric</button>'+(met?'<button class="btn-secondary" onclick="startPractice()">Una altra pràctica</button>':'<button class="btn-secondary" onclick="startPractice()">Continua practicant</button>')+'</div>';document.getElementById('btnNext').style.display='none';document.getElementById('btnChangeTopic').style.display='none';return}
+  if(['racionals','fraccionsSentit','operacionsRacionals'].includes(TOPICS[state.currentTopic]?.id)){const topicId=TOPICS[state.currentTopic].id,goal=state.level===1?10:20,solved=solvedCount(topicId),answered=answeredCount(topicId),points=topicId==='racionals'?state.rationalDifficultyPoints:topicId==='fraccionsSentit'?state.fractionsDifficultyPoints:state.operationsDifficultyPoints,progress=state.level===1?solved:answered,met=progress>=goal;if(!met)capturePracticeSnapshot();document.getElementById('feedbackArea').innerHTML='<div class="congrats"><div class="trophy">'+(met?'🏆':'📊')+'</div><h2>'+(met?'Bloc superat!':'Resum de la pràctica')+'</h2><p>Encerts: <b>'+solved+'</b> · Errors: <b>'+(answered-solved)+'</b> · Respostes: <b>'+answered+'</b></p><p>Objectiu: '+(state.level===1?'10 encerts acumulats':'20 respostes')+' · '+(met?'Assolit':'No assolit')+'</p><p>Punts de dificultat: <b>'+points+'</b></p><button class="btn-primary" onclick="showHome()">Tornar al Sentit Numèric</button>'+(met?'<button class="btn-secondary" onclick="startPractice()">Una altra pràctica</button>':'<button class="btn-secondary" onclick="continuePractice()">Continua practicant</button>')+'</div>';document.getElementById('btnNext').style.display='none';document.getElementById('btnChangeTopic').style.display='none';return}
   const ni=nextTopicIndex(state.currentTopic),next=ni>=0?TOPICS[ni]:null,current=TOPICS[state.currentTopic];const nextTxt=next?((current.course==='2n'&&next.course!=='2n')?'Ampliació opcional: ':'Següent: '):'';document.getElementById('feedbackArea').innerHTML='<div class="congrats"><div class="trophy">🏆</div><h2>Bloc superat!</h2><p>Has completat <b>'+current.name+'</b>.</p><button class="btn-primary" onclick="showHome()">Tornar al Sentit Numèric</button>'+(next?'<button class="btn-secondary" onclick="selectTopic('+ni+')">'+nextTxt+next.name+' →</button>':'')+'</div>';
   document.getElementById('btnNext').style.display='none';document.getElementById('btnChangeTopic').style.display='none';
 }
@@ -3516,7 +3541,9 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape')miCloseExamC
   // Si ja som exactament a aquella pràctica, només recuperem el focus.
   window.addEventListener('message', function(e){
     var d = e.data;
-    if(!d || d.type !== 'MI_PRACTICA_GOTO' || !d.url) return;
+    if(e.origin!==window.location.origin || !d) return;
+    if(d.type==='MI_PRACTICA_RETURN'&&d.token===miPracticeSessionToken){try{window.focus();}catch(err){}return;}
+    if(d.type !== 'MI_PRACTICA_GOTO' || !d.url) return;
 
     var uDesti;
     try { uDesti = new URL(d.url, window.location.href); }

@@ -50,6 +50,7 @@
     }
     if(id==='operacionsRacionals'){
       text=text.replace(/−\s*-(\d+(?:\/\d+)?)/g,'− (−$1)');
+      if(q.type===20){const items=[...new DOMParser().parseFromString(q.question,'text/html').querySelectorAll('li')].map(x=>plain(x.textContent));if(items.length)text=text.replace(/A:.*/s,'').trim()+'\n'+items.join('\n');}
       if([11,12].includes(q.type))text+=' Escriu el valor que ha de substituir el quadrat □ perquè la igualtat sigui certa.';
     }
     if(id==='potencies'){
