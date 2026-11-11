@@ -93,11 +93,11 @@
     const children=[];
     pages.forEach((items,i)=>{
       if(i)children.push(new d.Paragraph({children:[new d.PageBreak()],spacing:{after:0,before:0}}));
-      items.forEach(b=>{
+      items.forEach((b,blockIndex)=>{
         if(b.title)children.push(para(b.title,{heading:d.HeadingLevel.HEADING_2,keepNext:true}));
         b.lines.flatMap(s=>s.split("\n")).forEach(s=>children.push(para(s,{keepNext:true,keepLines:true})));
         if(b.figure)children.push(new d.Paragraph({children:[new d.ImageRun({type:'png',data:Uint8Array.from(atob(b.figure.data.split(',')[1]),c=>c.charCodeAt(0)),transformation:{width:b.figure.width*96/72,height:b.figure.height*96/72},altText:{title:b.figure.alt,description:b.figure.alt,name:'Recta numèrica'}})],keepNext:true,keepLines:true}));
-        children.push(new d.Paragraph({children:[new d.TextRun(' ')],spacing:{after:0,line:Math.max(240,b.space*20)},keepLines:true}));
+        if(b.space>0&&blockIndex<items.length-1)children.push(new d.Paragraph({children:[new d.TextRun(' ')],spacing:{after:0,line:Math.max(240,b.space*20)},keepLines:true}));
       });
     });
     const header=new d.Header({children:[para('Mates Interactives',{spacing:{after:70}}),para(solution?scope.title.replace('Fitxa d’exercicis','Solucionari'):scope.title,{style:'Title',spacing:{after:90}}),para(solution?(sheet.config.solutions==='steps'?'Resolució pas a pas':'Només respostes'):'Nom: __________________  Grup: _____  Data: __________',{spacing:{after:0}})]});
