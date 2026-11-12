@@ -17,3 +17,11 @@ Aquest repositori conté exercicis interactius i teoria de matemàtiques de l'ES
 - **Qualitat:** no doneu per fet que una publicació a GitHub ja apareix a GitHub Pages; verifiqueu i distingiu els punts pendents.
 
 No pressuposeu que una distribució pedagògica proposada s'ha implementat: cal contrastar-la amb els generadors, la selecció de la pràctica i els exàmens actuals.
+
+## Registre obligatori de famílies validades (Fase A)
+
+- Abans de donar un tema per finalitzat, llegiu `docs/auditoria/README.md`.
+- Les decisions pedagògiques definitives de famílies reals, generadors i N1/N2/N3 es conserven a `docs/auditoria/families-validades.json`. **No s'han de tornar a auditar des de zero** només perquè es reprengui el projecte.
+- **Només després de fusionar i validar** la PR funcional d'un tema, afegiu-ne l'entrada amb el SHA real del merge, la PR, els nivells i les proves. Una PR oberta continua provisional.
+- Executeu `node scripts/exporta-inventari-fase-a.cjs` per regenerar el CSV obriu amb Excel; comproveu `node scripts/exporta-inventari-fase-a.cjs --check` abans del commit. Feu commit conjunt del JSON i del CSV.
+- Una variant de generador no és una família; no inferiu els recomptes definitius directament de `dificultat-mi.js`. Compareu-los amb el codi funcional real.
