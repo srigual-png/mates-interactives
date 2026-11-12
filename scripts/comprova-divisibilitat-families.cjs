@@ -13,6 +13,10 @@ for(const [name,type,practice] of routes)for(let i=0;i<250;i++){
  for(const wrong of q.options.slice(1))assert(!D.matches(q.divisAnswer,wrong),name+' distractor');
  assert.equal(q.diff,D.levelFor(type),name+' level');assert(q.question&&q.solution.length);total++;
 }
+const practiceTypes=D.families.flat(2);
+assert(practiceTypes.includes(1001),'El raonament 1001 ha de ser accessible en pràctica');
+assert.equal(new Set(practiceTypes.map(String)).size,practiceTypes.length,'Tipus adaptatius duplicats');
+for(const type of practiceTypes) assert(type===1001||[1,2,3,4,5,6,7,'factor-error','G','H','I','F02','F05','F03','F08'].includes(type),'Identificador no generable a la pràctica: '+type);
 assert.equal(D.familySpecs.length,12);const count=D.familySpecs.reduce((a,f)=>(a[f.level-1]++,a),[0,0,0]);assert.deepEqual(count,[2,7,3]);
 for(const id of [1,2,3,4,5,6,7,'factor-error','G','H','I','F02','F05','F03','F08','divis-1','divis-2','divis-3','divis-4','divisibilitat-condicions','divis-raonament'])assert(D.levelFor(id),String(id));
 assert.equal(D.classify(0),'Ni primer ni compost');assert.equal(D.classify(1),'Ni primer ni compost');assert.equal(D.classify(2),'Primer');assert.equal(D.classify(9),'Compost');assert.deepEqual(Array.from(D.divisors(36)),[1,2,3,4,6,9,12,18,36]);
