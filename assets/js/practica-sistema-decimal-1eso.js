@@ -215,7 +215,7 @@
     const {n,digit,position}=data;
     if(q.type===1||q.type===4){
       const p=10**position,value=digit*p;
-      const lead=q.type===4?`El número de matrícula és <b>${n}</b>. `:'';
+      const lead=q.type===4?`El nombre de matrícula és <b>${n}</b>. `:'';
       q.question=q.type===4?`${lead}Quin valor representa la xifra ${digit} de les ${orders[position]}?`:
         `Quin valor representa la xifra ${digit} de les ${orders[position]} en el nombre <span class="fc">${fmt(n)}</span>?`;
       q.correct=fmt(value);
