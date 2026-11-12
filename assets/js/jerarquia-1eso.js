@@ -5,7 +5,7 @@ window.MIJerarquia = (() => {
     {id:'identificar-o-fer-el-primer-pas',level:1,generators:['F01','F02'],practiceTypes:['F01','F02']},
     {id:'potencies-dins-expressions-combinades',level:2,generators:[3,6,'B1','B2','B3','jerarquia-1','jerarquia-2','jerarquia-3'],practiceTypes:[3,6,'B1','B2','B3']},
     {id:'operar-amb-parentesis-i-claudators',level:2,generators:[4,5,8,9],practiceTypes:[4,5,8,9]},
-    {id:'modelitzar-i-calcular-contextos',level:2,generators:['B4','jerarquia-4'],practiceTypes:['B4']},
+    {id:'modelitzar-i-calcular-contextos',level:2,generators:[7,'B4','jerarquia-4'],practiceTypes:[7,'B4']},
     {id:'comparar-efectes-dels-parentesis',level:2,generators:['F03'],practiceTypes:['F03']},
     {id:'trobar-signe-amb-resultat-objectiu',level:2,generators:['F07'],practiceTypes:['F07']},
     {id:'optimitzar-resultat-positiu',level:3,generators:['parentesis-resultat-positiu'],practiceTypes:['parentesis-resultat-positiu']},
