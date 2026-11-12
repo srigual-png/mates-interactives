@@ -149,7 +149,7 @@ window.MIDivisibilitat = (() => {
       throw Error('Opcions de divisibilitat incoherents: ' + type);
     }
     return {type, question, correct: String(correct), options: buildOpts(String(correct), choices.slice(1)),
-      divisAnswer: answer, guide: [guide], solution, divisTheory: section, ...extra};
+      divisAnswer: answer, guide: [guide], solution, divisTheory: section, ...extra, diff: levelFor(type)};
   }
 
   function listWrongs(values, invalid) {
