@@ -87,6 +87,7 @@ function main(){
         const [a,b]=k;expected=String(2*b-a);
         assert.equal(Math.abs(a-b),Math.abs(Number(expected)-b),'Symmetric distances E16');
       }else if(type==='E17'){const [a,b,c,d]=k;expected=String(a*(b-c)+d);}
+      if(type==='E12')assert(!q.solution.some(line=>line.includes('1 unitats')),'Singular/plural scale unit');
       assert.equal(String(q.correct),expected,'Independent oracle '+type+' #'+i);
       practiceSamples++;
     }
