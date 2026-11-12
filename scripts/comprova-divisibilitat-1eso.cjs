@@ -65,7 +65,7 @@ async function main() {
       check(reasoning.correct === '1044' && rejects(reasoning,['1404','1764']), 'Mínim amb dues xifres');
 
       const groups = adaptivePracticeGroups(topic('divis'));
-      check(groups.map(level=>level.length).join() === '3,7,3', 'Catàleg adaptatiu');
+      check(groups.map(level=>level.length).join() === '2,7,3', 'Catàleg adaptatiu');
       for (const [level,families] of groups.entries()) for (const type of families.flat()) {
         for (const random of [(min,max)=>min,(min,max)=>max,...Array(4).fill(rnd)]) testOptions(genDivisPractice(type,level+1,random));
       }
