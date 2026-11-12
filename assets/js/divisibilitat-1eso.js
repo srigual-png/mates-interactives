@@ -15,7 +15,10 @@ window.MIDivisibilitat = (() => {
     {id:'demostrar-o-refutar-afirmacions-sobre-multiples',level:3,generators:['F08'],objective:'Valorar una afirmació universal sobre múltiples.',procedure:'Donar una justificació general o un contraexemple.',rationale:'Raonament universal amb prova o contraexemple.'}
   ]);
   const families = [[],[],[]];
-  familySpecs.forEach(f => families[f.level-1].push(f.generators));
+  // Els ID de banc AMP són metadades de família, no tipus que generate() pugui crear.
+  // El raonament adaptatiu es genera exclusivament amb el tipus numèric 1001.
+  const bankOnly = new Set(['divis-1','divis-2','divis-3','divis-4','divisibilitat-condicions','divis-raonament']);
+  familySpecs.forEach(f => families[f.level-1].push(f.generators.filter(id => !bankOnly.has(String(id)))));
   function levelFor(key) {
     const value = String(key);
     const family = familySpecs.find(item => item.generators.some(id => String(id) === value));
