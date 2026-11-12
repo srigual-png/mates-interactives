@@ -2233,11 +2233,9 @@ function genPercentatges(){if(!Array.isArray(percentatgesBag)||percentatgesBag.l
 
 // ── GEN POTÈNCIES I ARRELS ─────────────────────────────────────────────────
 
-const POTENCIES_PRACTICE_FAMILIES=[
-  [[1,2],[3],[4],[5],[6],['base-deu-regularitat']],
-  [[7],['exponent-desconegut'],['acotar-arrel'],['recompte-multiplicatiu']],
-  [['dos-quadrats-invers'],['diagnosticar-potencia-arrel']]
-];
+const POTENCIES_PRACTICE_FAMILIES=[1,2,3].map(level=>
+  MIDifficulty.potenciesFamilies.filter(family=>family.level===level).map(family=>family.practiceTypes)
+);
 const POTENCIES_THEORY=Object.freeze({
   1:'base-exponent',2:'base-exponent',3:'producte',4:'producte',5:'calcular',6:'arrels',7:'inverses',
   'base-deu-regularitat':'base-deu',
@@ -2245,8 +2243,9 @@ const POTENCIES_THEORY=Object.freeze({
   'acotar-arrel':'acotar-arrels',
   'recompte-multiplicatiu':'recompte-multiplicatiu',
   'dos-quadrats-invers':'quadrats-en-context',
-  // The reasoning generator saves this family as numeric type 1001.
-  1001:'quadrats-en-context',
+  'fila-columna':'quadrats-en-context',
+  // Reasoning tasks use numeric types in persisted answers.
+  1001:'quadrats-en-context',1002:'quadrats-en-context',
   'diagnosticar-potencia-arrel':'errors-tipics'
 });
 const POWER_DIGITS='⁰¹²³⁴⁵⁶⁷⁸⁹';
@@ -2376,9 +2375,14 @@ function genPotenciesPractice(type,level,session){
     isProblem=true;
   }else{
     const exercise=MIFirstNumericTasks.generate(type);
-    const {gap,total}=exercise.reasoningData,large=Math.sqrt(Number(exercise.correct));
-    const options=powerOptions(exercise.correct,[(large-gap)**2,total,large]);
-    return {...exercise,options,potenciesAnswer:{form:'integer',values:[large**2]},potenciesTheory:POTENCIES_THEORY[type],taskDifficulty:level};
+    if(type==='dos-quadrats-invers'){
+      const {gap,total}=exercise.reasoningData,large=Math.sqrt(Number(exercise.correct));
+      const options=powerOptions(exercise.correct,[(large-gap)**2,total,large]);
+      return {...exercise,options,potenciesAnswer:{form:'integer',values:[large**2]},potenciesTheory:POTENCIES_THEORY[type],taskDifficulty:level,diff:level};
+    }
+    const side=exercise.reasoningData.side,value=Number(exercise.correct);
+    const options=powerOptions(exercise.correct,[value+1,value-1,side**2]);
+    return {...exercise,options,potenciesAnswer:{form:'integer',values:[value]},potenciesTheory:POTENCIES_THEORY[type],taskDifficulty:level,diff:level};
   }
   return {type,question,correct,options:powerOptions(correct,wrongs),guide,solution,isProblem,
     potenciesAnswer:answer,potenciesTheory:POTENCIES_THEORY[type],taskDifficulty:level,diff:level};
@@ -2413,7 +2417,7 @@ function genPotenciesArrels(type=rnd(1,7)){
     guide=[`La base és el factor que es repeteix.`,`L'exponent indica quantes vegades s'ha d'escriure aquest factor.`];
     solution=[`${b4}^${e4} = ${prod}`,`✅ ${correct}`];
   } else if(type===5){
-    diff=2;var b5=rnd(2,10),e5=[2,3][rnd(0,1)],r5=Math.pow(b5,e5);
+    diff=1;var b5=rnd(2,10),e5=[2,3][rnd(0,1)],r5=Math.pow(b5,e5);
     question=`Calcula <span class="fc">${b5}^${e5}</span>.`;correct=String(r5);
     wrongs=[b5*e5,b5**(e5-1),b5**(e5+1),(b5+1)**e5];
     guide=[`Escriu la potència com un producte de factors iguals.`,`Multiplica la base per ella mateixa tantes vegades com indica l'exponent.`];
@@ -2424,7 +2428,7 @@ function genPotenciesArrels(type=rnd(1,7)){
     guide=[`Busca quin nombre multiplicat per ell mateix dona el radicand.`,`Relaciona l'arrel quadrada amb l'operació inversa d'elevar al quadrat.`];
     solution=[`${root}² = ${sq}`,`✅ √${sq} = ${root}`];
   } else {
-    diff=2;var root7=rnd(2,12),sq7=root7*root7;
+    diff=1;var root7=rnd(2,12),sq7=root7*root7;
     question=`Si <span class="fc">${root7}² = ${sq7}</span>, quina igualtat expressa l'operació inversa?`;correct='√'+sq7+' = '+root7;
     wrongs=['√'+root7+' = '+sq7,'√'+sq7+' = '+sq7,'√'+sq7+' = '+(root7+1)];
     answer={form:'radical',values:[sq7,root7]};
