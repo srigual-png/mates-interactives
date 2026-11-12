@@ -3531,6 +3531,8 @@ function genMcdPractice(type,level,random=rnd){
     exercise=MIFirstNumericTasks.generate('coincidencies-desfasades',()=>random(0,999999)/1000000);
     const {a,b,oa,ob,after}=exercise.reasoningData;
     exercise.practiceKey='A6:'+a+':'+b+':'+oa+':'+ob+':'+after;
+    exercise.mcmTheory=MIMcdMcm.anchors.A6;
+    exercise.mcmFields=[MIMcdMcm.number('Minut de coincidència',Number(exercise.correct),MIMcdMcm.units.minuts)];
   }else{
     const session=adaptivePracticeSessions.mcmmcd;
     if(type==='P4'&&session){
