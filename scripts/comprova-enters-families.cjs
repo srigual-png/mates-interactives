@@ -76,7 +76,7 @@ function main(){
       else if(type==='E12'){const [start,step,target]=k;expected=String(start+step*target);}
       else if(type==='E13'){
         const [initial,up,down]=k;expected=String(initial);
-        const end=Number(q.question.match(/final és de (-?\\d+) °C/)[1]);
+        const end=Number(q.question.match(/final és de (-?\d+) °C/)[1]);
         assert.equal(initial+up-down,end,'Undo ordered changes E13');
       }else if(type==='E14'){
         const [a,b,subtract,left]=k;expected=String(left?a:b);
@@ -109,7 +109,7 @@ function main(){
     bankCounts[type]=0;
     for(let i=0;i<250;i++){
       context.AMP_TYPE_BAGS.enters=[type];
-      const q=context.genEntersProb(),plain=String(q.text).replace(/<[^>]*>/g,' '),nums=(plain.match(/[+-]?\\d+/g)||[]).map(Number);
+      const q=context.genEntersProb(),plain=String(q.text).replace(/<[^>]*>/g,' '),nums=(plain.match(/[+-]?\d+/g)||[]).map(Number);
       assert.equal(q.type,type,'Context variant ID '+type);
       assert.equal(q.diff,bankLevels[type],'Context internal difficulty '+type);
       assert.equal(difficulty.getDifficulty(topic,q),bankLevels[type],'Context shared difficulty '+type);
