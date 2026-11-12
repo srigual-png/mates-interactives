@@ -20,7 +20,7 @@ async function main(){
    check(M.matches(pair,'−16 m; +2 m')&&!M.matches(pair,'−16; 2; 999')&&!M.matches(pair,'-16.0;2')&&!M.matches(pair,'-16 cm;2')&&!M.matches(pair,'-16;')&&!M.matches(pair,'-16;2 text'),'Strict tuple');
    const comparison=make('E01',-7,-2,0,1);
    check(accepts(comparison,'<')&&accepts(comparison,'−7 < −2')&&!accepts(comparison,'-7 > -2')&&!accepts(comparison,'7 < -2'),'Comparison operands and direction');
-   const groups=adaptivePracticeGroups(topic);check(groups.map(g=>g.length).join()==='8,5,4','Catalogue');
+   const groups=adaptivePracticeGroups(topic);check(groups.map(g=>g.length).join()==='8,6,1','Catalogue');
    const links={};
    for(const [li,g] of groups.entries())for(const [id] of g){
     for(let i=0;i<150;i++){
