@@ -79,7 +79,7 @@ async function main(){
           const valid=Array.from({length:hi-lo+1},(_,j)=>lo+j).filter(v=>fn(a,v)===target);
           check(valid.length===1&&q.mcmFields[0].value===valid[0],'Operand únic per enumeració');
         }else if(type==='P6'){
-          const ab=q.question.match(/^(\\d+)\\s*=.*? i (\\d+)\\s*=/);check(ab,'Operands diagnòstic');
+          const ab=q.question.match(/^(\d+)\s*=.*? i (\d+)\s*=/);check(ab,'Operands diagnòstic');
           const nums=[Number(ab[1]),Number(ab[2])],isMcd=/MCD/.test(q.question),expected=isMcd?gcd(...nums):lcm(...nums);
           check(q.mcmFields[1].value===expected,'Diagnòstic i resultat correcte');
         }else{
@@ -142,7 +142,7 @@ async function main(){
       exam.forEach(checkOptions);
       const amp=AMP_CATS.find(c=>c.id==='mcmmcd');
       check(amp.variants===5&&Object.values(amp.diffCounts).join()==='0,4,1','Quatre bancs contextuals i raonament N3');
-      return {practiceRoutes:practiceTypes.length,practiceSamples:practiceTypes.length*250,examBaseRoutes:5,examBaseSamples:baseTypes,bankRoutes:bankRoutes,bankSamples:bankRoutes*250,reasoningSamples:reasonTotal,families:coverage.types,examPlan:plan.slots,examQuestions:exam.length,adaptiveReservations:24,total};
+      return {practiceRoutes:practiceTypes.length,practiceSamples:practiceTypes.length*250,examBaseRoutes:5,examBaseSamples:baseTypes,bankRoutes:bankRoutes,bankSamples:bankRoutes,reasoningSamples:reasonTotal,families:coverage.types,examPlan:plan.slots,examQuestions:exam.length,adaptiveReservations:24,total};
     });
     assert.deepEqual(result.families,[3,6,2]);
     console.log(JSON.stringify(result));
