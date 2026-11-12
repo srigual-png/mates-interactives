@@ -187,6 +187,102 @@
           ]
         }
       ]
+    },
+    {
+      "id": "1eso/numeric/ops",
+      "course": "1r ESO",
+      "sense": "Numèric",
+      "topic": "Operacions bàsiques",
+      "code_topic_id": "ops",
+      "status": "validat",
+      "verified_on": "2026-11-12",
+      "pr": 10,
+      "merge_commit": "ad3f73390b4bcdba35509c08bb95ae0b5931f45a",
+      "validation": "3.000 exercicis automàtics superats amb Node.js al clon local (250 per cadascun dels 12 generadors); comprovació manual al navegador per l'usuari. Sense suite global ni prova automatitzada integral del navegador.",
+      "families": [
+        {
+          "id": "suma-directa",
+          "name": "Suma directa",
+          "level": 1,
+          "generators": [
+            "1"
+          ]
+        },
+        {
+          "id": "resta-directa",
+          "name": "Resta directa",
+          "level": 1,
+          "generators": [
+            "2"
+          ]
+        },
+        {
+          "id": "multiplicacio-directa",
+          "name": "Multiplicació directa",
+          "level": 1,
+          "generators": [
+            "3"
+          ]
+        },
+        {
+          "id": "triar-operacio",
+          "name": "Selecció de l'operació a partir d'un context",
+          "level": 1,
+          "generators": [
+            "triar-operacio"
+          ]
+        },
+        {
+          "id": "divisio-quocient-residu",
+          "name": "Divisió: quocient, residu i diagnòstic",
+          "level": 2,
+          "generators": [
+            "4",
+            "capses",
+            "diagnosticar-divisio"
+          ]
+        },
+        {
+          "id": "cost-i-canvi",
+          "name": "Cost total i canvi",
+          "level": 2,
+          "generators": [
+            "5"
+          ]
+        },
+        {
+          "id": "produccio-per-torns",
+          "name": "Producció per torns",
+          "level": 2,
+          "generators": [
+            "6"
+          ]
+        },
+        {
+          "id": "compensacio-sumands",
+          "name": "Compensació de sumands",
+          "level": 2,
+          "generators": [
+            "compensacio"
+          ]
+        },
+        {
+          "id": "compra-combinada-minim",
+          "name": "Compra combinada de cost mínim",
+          "level": 3,
+          "generators": [
+            "1001"
+          ]
+        },
+        {
+          "id": "reconstruir-total-agrupaments",
+          "name": "Reconstrucció del total a partir d'agrupaments",
+          "level": 3,
+          "generators": [
+            "reconstruir-total"
+          ]
+        }
+      ]
     }
   ]
 }
