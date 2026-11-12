@@ -2158,26 +2158,22 @@ function genEnters(){
     opts=buildOpts(correct,[String(Math.abs(a)+Math.abs(b)),String(-res),String(res+1),String(res-1)]);
     guide=[`Si tenen el mateix signe, suma els valors absoluts i conserva el signe.`,`Si tenen signes diferents, compara els valors absoluts i fes la diferència.`];
     solution=[`(${a})+(${b})=${res}`];
-  } else if(type===3){
-    diff=2;var a2=rnd(-12,12),b2=rnd(-12,12),res2=a2-b2;
+  } else if(type===3){diff=1;var a2=rnd(-12,12),b2=rnd(-12,12),res2=a2-b2;
     question=`Calcula: <span class="fc">(${a2}) - (${b2})</span>`;correct=String(res2);
     opts=buildOpts(correct,[String(a2+b2),String(-res2),String(res2+2),String(res2-2)]);
     guide=[`Transforma la resta en una suma.`,`Canvia el signe del segon nombre i aplica després la regla de la suma d'enters.`];
     solution=[`Canvia a suma: ${a2}+(${-b2})=${res2}`];
-  } else if(type===4){
-    diff=2;var a3=rnd(-8,8),b3=rnd(-8,8),res3=a3*b3;
+  } else if(type===4){diff=1;var a3=rnd(-8,8),b3=rnd(-8,8),res3=a3*b3;
     question=`Calcula: <span class="fc">(${a3}) × (${b3})</span>`;correct=String(res3);
     opts=buildOpts(correct,[String(-res3),String(Math.abs(res3)+1),String(Math.abs(res3))]);
     guide=[`Calcula primer el producte dels valors absoluts.`,`Determina després el signe aplicant la regla dels signes.`];
     solution=[`Valor absolut del producte = ${Math.abs(res3)}`,`Signe = ${res3>=0?'+':'-'}`,`✅ ${res3}`];
-  } else if(type===5){
-    diff=2;isProblem=true;var t1=rnd(-15,5),pujada=rnd(3,20),t2=t1+pujada;
+  } else if(type===5){diff=1;isProblem=true;var t1=rnd(-15,5),pujada=rnd(3,20),t2=t1+pujada;
     question=`<span class="pt">La temperatura és de <b>${t1} graus</b>. Puja <b>${pujada} graus</b>. Quina temperatura fa després?</span>`;
     correct=String(t2)+' graus';opts=buildOpts(correct,[String(t1-pujada)+' graus',String(Math.abs(t1)+pujada)+' graus',String(t2+1)+' graus']);
     guide=[`Representa la temperatura inicial com un nombre enter.`,`Una pujada correspon a avançar cap a la dreta a la recta numèrica.`];
     solution=[`Temperatura final: ${t1}+${pujada}=${t2}`];
-  } else if(type===6){
-    diff=3;isProblem=true;var saldo=rnd(-50,200),ing=rnd(10,100),desp=rnd(10,200),final=saldo+ing-desp;
+  } else if(type===6){diff=2;isProblem=true;var saldo=rnd(-50,200),ing=rnd(10,100),desp=rnd(10,200),final=saldo+ing-desp;
     question=`<span class="pt">Saldo: <b>${saldo} euros</b>. Ingrés <b>${ing}</b>, retirada <b>${desp}</b>. Saldo final?</span>`;
     correct=String(final)+' euros';opts=buildOpts(correct,[
       (saldo+ing+desp)+' euros',
@@ -2834,8 +2830,7 @@ function genMcmMcdProb(){
 // --- NOMBRES ENTERS (5 tipus) ---------------------------------------------
 function genEntersProb(){
   var type=ampNextType('enters',5),diff,text,steps,answer,hints;
-  if(type===1){
-    diff=1;
+  if(type===1){diff=2;
     var t0=rnd(-12,4),puja=rnd(4,13),baixa=rnd(2,10),tm=t0+puja,tn=tm-baixa;
     text='A primera hora la temperatura és de <b>'+t0+' °C</b>. Al migdia puja <b>'+puja+' °C</b> i al vespre baixa <b>'+baixa+' °C</b>. Quina temperatura fa al vespre?';
     steps=[{label:'Migdia',hint:'Suma la pujada a la temperatura inicial',check:function(v){return numEq(v,tm);}},{label:'Vespre',hint:'Resta la baixada a la temperatura del migdia',check:function(v){return numEq(v,tn);}}];
@@ -2848,8 +2843,7 @@ function genEntersProb(){
     steps=[{label:'Després ingrés',hint:'Suma l\'ingrés al saldo inicial',check:function(v){return numEq(v,saldo+ing);}},{label:'Pagament 1',hint:'Resta el primer pagament',check:function(v){return numEq(v,saldo+ing-pag1);}},{label:'Final',hint:'Resta també el segon pagament',check:function(v){return numEq(v,fin);}}];
     answer={check:function(v){return numEq(v,fin);},val:fin+' €'};
     hints=['Després de l\'ingrés: '+saldo+' + '+ing+' = '+(saldo+ing),'Després del primer pagament: '+(saldo+ing)+' − '+pag1+' = '+(saldo+ing-pag1),'Saldo final: '+(saldo+ing-pag1)+' − '+pag2+' = '+fin+' €'];
-  }else if(type===3){
-    diff=2;
+  }else if(type===3){diff=1;
     var alt=rnd(90,420),prof=rnd(20,180),dif=alt+prof;
     text='Un mirador és a <b>+'+alt+' m</b> respecte del nivell del mar i una cova submarina és a <b>−'+prof+' m</b>. Quina diferència d\'altitud hi ha entre tots dos punts?';
     steps=[{label:'Diferència',hint:'Resta l\'altitud negativa de l\'altitud positiva',check:function(v){return numEq(v,dif);}}];
@@ -2862,8 +2856,7 @@ function genEntersProb(){
     steps=[{label:'Moviment 1',hint:'Suma el primer desplaçament',check:function(v){return numEq(v,start+m1);}},{label:'Moviment 2',hint:'Aplica la baixada com un desplaçament negatiu',check:function(v){return numEq(v,start+m1+m2);}},{label:'Final',hint:'Afegeix l\'última pujada',check:function(v){return numEq(v,end);}}];
     answer={check:function(v){return MIEnters.integer(v,'plantes')===end;},val:'Planta '+end};
     hints=['Primer: '+start+' + '+m1+' = '+(start+m1),'Després: '+(start+m1)+' − '+Math.abs(m2)+' = '+(start+m1+m2),'Final: '+(start+m1+m2)+' + '+m3+' = '+end];
-  }else{
-    diff=3;
+  }else{diff=2;
     var depth=-rnd(8,25),up=rnd(3,Math.min(12,-depth-1)),down=rnd(4,15),final5=depth+up-down,change=final5-depth;
     text='Un submarinista és a <b>'+depth+' m</b>. Puja <b>'+up+' m</b> i després baixa <b>'+down+' m</b>. A quina profunditat acaba? Quin desplaçament net ha fet respecte del punt inicial?';
     steps=[{label:'Després pujar',hint:'Suma la pujada a la posició inicial',check:function(v){return numEq(v,depth+up);}},{label:'Profunditat final',hint:'Resta la baixada a la posició anterior',check:function(v){return numEq(v,final5);}},{label:'Canvi net',hint:'Resta la posició inicial a la posició final',check:function(v){return numEq(v,change);}}];
@@ -2951,7 +2944,7 @@ var AMP_CATS=[
   {id:'jerarquia',icon:'📐',name:'Jerarquia d\'operacions',desc:'Expressions i contextos amb parèntesis i potències',variants:4,diffCounts:{1:0,2:2,3:2},gen:genJerProb},
   {id:'divis',icon:'🔍',name:'Divisibilitat',desc:'Divisors, nombres primers i criteris de divisibilitat',variants:4,diffCounts:{1:1,2:3,3:0},gen:genDivisProb},
   {id:'mcmmcd',icon:'🔗',name:'MCD i mcm',desc:'Coincidències, agrupaments i talls màxims',variants:4,diffCounts:{1:0,2:4,3:1},gen:genMcmMcdProb},
-  {id:'enters',icon:'±',name:'Nombres enters',desc:'Temperatures, saldos, plantes, altituds i profunditats',variants:5,diffCounts:{1:1,2:3,3:1},gen:genEntersProb},
+  {id:'enters',icon:'±',name:'Nombres enters',desc:'Temperatures, saldos, plantes, altituds i profunditats',variants:5,diffCounts:{1:1,2:4,3:0},gen:genEntersProb},
   {id:'decimals',icon:'💰',name:'Nombres decimals',desc:'Preus, repartiments, unitats, mitjanes i aproximacions',variants:6,diffCounts:{1:1,2:3,3:2},gen:genDecimalsProb},
   {id:'fraccions',icon:'½',name:'Fraccions',desc:'Parts, restes, comparacions i problemes inversos',variants:7,diffCounts:{1:1,2:4,3:2},gen:genFraccionsProb},
   {id:'proporcionalitat',icon:'⚖️',name:'Proporcionalitat directa',desc:'Valor unitari, receptes, producció i detecció de proporcionalitat',variants:5,diffCounts:{1:1,2:3,3:1},gen:genProporcionalitatProb},

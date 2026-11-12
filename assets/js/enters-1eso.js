@@ -2,7 +2,30 @@
 (function(root){
   'use strict';
   const anchors=['recta','sumar','restar','multiplicar','moviments','problemes','distancia-enters','posicio-canvi','moviments-limits','valor-absolut','oposat','recta-graduada','valor-inicial','operacio-incompleta','errors-signes','simetria','combinades'];
-  const families=[[1,2,3,4,5,10,11,12],[6,7,8,14,17],[9,13,15,16]].map(level=>level.map(n=>['E'+String(n).padStart(2,'0')]));
+  const familySpecs=Object.freeze([
+    {id:'comparar-i-ordenar-enters',level:1,practiceTypes:['E01'],examTypes:[1],bankVariants:[],reasoningTasks:[],objective:'Comparar dos enters o ordenar-ne quatre a la recta numèrica.',procedure:'Comparar les posicions relatives i ordenar segons la direcció demanada.',rationale:'Comparació i ordenació comparteixen el mateix criteri de posició a la recta.'},
+    {id:'sumar-enters',level:1,practiceTypes:['E02'],examTypes:[2],bankVariants:[],reasoningTasks:[],objective:'Calcular una suma d’enters amb signe.',procedure:'Sumar valors absoluts si els signes coincideixen; si difereixen, restar-los i conservar el signe del valor absolut més gran.',rationale:'Aplicació directa de la regla de suma d’enters.'},
+    {id:'restar-enters',level:1,practiceTypes:['E03'],examTypes:[3],bankVariants:[],reasoningTasks:[],objective:'Calcular una resta d’enters.',procedure:'Transformar la resta en suma de l’oposat i aplicar la regla de suma.',rationale:'L’operació requereix transformar el segon terme, diferent de sumar directament.'},
+    {id:'multiplicar-enters',level:1,practiceTypes:['E04'],examTypes:[4],bankVariants:[],reasoningTasks:[],objective:'Multiplicar enters amb signe.',procedure:'Multiplicar valors absoluts i determinar el signe segons els signes dels factors.',rationale:'Regla de signes i càlcul directe d’un producte.'},
+    {id:'aplicar-un-canvi-signe',level:1,practiceTypes:['E05'],examTypes:[5,7],bankVariants:[],reasoningTasks:[],objective:'Trobar una posició després d’un únic canvi positiu o negatiu.',procedure:'Representar el canvi amb signe i sumar-lo a la posició inicial.',rationale:'Un pas directe en context o a la recta; els contextos són variants.'},
+    {id:'combinar-canvis-signes',level:2,practiceTypes:['E06'],examTypes:[6],bankVariants:['enters-1','enters-2','enters-4'],reasoningTasks:[],objective:'Calcular la posició final després de diversos canvis ordenats.',procedure:'Aplicar cada canvi amb signe, en l’ordre temporal indicat.',rationale:'Combina diverses sumes/restes contextualitzades i manté l’estat intermedi.'},
+    {id:'valor-absolut-i-distancia',level:1,practiceTypes:['E07','E10'],examTypes:[],bankVariants:['enters-3'],reasoningTasks:[],objective:'Interpretar el valor absolut com una distància a zero o entre dues posicions.',procedure:'Calcular la diferència entre posicions i prendre el valor absolut; per a una posició negativa a una distància donada, fixar el signe demanat.',rationale:'E07 i E10 mesuren una distància no orientada; l’origen és zero o una altra posició.'},
+    {id:'posicio-i-desplacament-net',level:2,practiceTypes:['E08'],examTypes:[],bankVariants:['enters-5'],reasoningTasks:[],objective:'Calcular posició final i desplaçament net respecte de l’inici.',procedure:'Aplicar els moviments ordenats per trobar el final i restar la posició inicial per obtenir el canvi net.',rationale:'Demana dos resultats relacionats però diferents: una posició i un desplaçament.'},
+    {id:'ordenar-moviments-amb-restriccions',level:3,practiceTypes:['E09'],examTypes:[],bankVariants:['enters-raonament'],reasoningTasks:['moviments-amb-limits'],objective:'Comptar els ordres de tres moviments que compleixen límits en totes les posicions intermèdies.',procedure:'Enumerar els sis ordres, calcular cada estat pas a pas i descartar els que surten de l’interval.',rationale:'Raonament exhaustiu amb restriccions intermèdies; el saldo final per si sol no resol el problema.'},
+    {id:'trobar-oposat-additiu',level:1,practiceTypes:['E11'],examTypes:[],bankVariants:[],reasoningTasks:[],objective:'Trobar l’oposat additiu d’un enter.',procedure:'Canviar el signe perquè la suma amb el nombre donat sigui zero.',rationale:'Reconeixement directe de la relació d’oposats.'},
+    {id:'llegir-escala-de-recta',level:1,practiceTypes:['E12'],examTypes:[],bankVariants:[],reasoningTasks:[],objective:'Llegir la coordenada d’un punt en una recta graduada amb escala.',procedure:'Determinar el valor d’una divisió, comptar intervals fins al punt i aplicar el signe/direcció.',rationale:'Cal descodificar l’escala abans de llegir el valor; no és només ordenar nombres donats.'},
+    {id:'reconstruir-operand-additiu',level:2,practiceTypes:['E13','E14'],examTypes:[],bankVariants:[],reasoningTasks:[],objective:'Reconstruir un enter inicial o un operand desconegut en una relació additiva.',procedure:'Desfer les sumes i restes en ordre invers o aplicar l’operació inversa a l’equació.',rationale:'E13 i E14 comparteixen la reconstrucció mitjançant operacions inverses; el context amb canvis és la variant de més passos.'},
+    {id:'diagnosticar-resta-de-negatiu',level:2,practiceTypes:['E15'],examTypes:[],bankVariants:[],reasoningTasks:[],objective:'Identificar l’error en restar un enter negatiu i corregir el resultat.',procedure:'Transformar la resta del negatiu en suma del positiu i recalcular.',rationale:'Requereix explicar una regla conceptual i donar el resultat corregit, però el cas és guiat i habitual.'},
+    {id:'reflectir-respecte-dun-punt',level:2,practiceTypes:['E16'],examTypes:[],bankVariants:[],reasoningTasks:[],objective:'Trobar el punt simètric respecte d’un punt donat a la recta.',procedure:'Mesurar el desplaçament fins al centre i repetir-lo amb el mateix mòdul cap a l’altra banda.',rationale:'Modelitza una simetria axial a la recta amb una operació de dos passos.'},
+    {id:'operacions-combinades-amb-enters',level:2,practiceTypes:['E17'],examTypes:[],bankVariants:[],reasoningTasks:[],objective:'Resoldre una expressió amb parèntesis, multiplicació i suma/resta d’enters.',procedure:'Resoldre el parèntesi, multiplicar i finalment sumar/restar.',rationale:'Combina operacions amb signes i prioritats, però no introdueix potències ni tècniques fora del curs.'}
+  ]);
+  const families=[[],[],[]];
+  familySpecs.forEach(f=>families[f.level-1].push(f.practiceTypes));
+  function levelFor(key){
+    const value=String(key);
+    const family=familySpecs.find(row=>[...row.practiceTypes,...row.examTypes.map(String),...row.bankVariants,...row.reasoningTasks].some(id=>String(id)===value));
+    return family?.level??null;
+  }
   const sign=n=>n>=0?'+'+n:String(n);
   const normalize=s=>String(s??'').trim().replace(/[−–—﹣]/g,'-');
   function integer(s,unit=''){
@@ -45,7 +68,7 @@
     return '<svg viewBox="0 0 460 96" style="display:block;width:100%;max-width:600px;height:auto" role="img" aria-label="'+alt+'"><line x1="20" y1="43" x2="440" y2="43" stroke="currentColor" stroke-width="2"/>'+labels.map((label,i)=>'<line x1="'+(35+i*65)+'" y1="35" x2="'+(35+i*65)+'" y2="51" stroke="currentColor"/><text x="'+(35+i*65)+'" y="76" text-anchor="middle" font-size="18" fill="currentColor">'+label+'</text>').join('')+'</svg>';
   }
   function generate(id,r=(a,b)=>a+Math.floor(Math.random()*(b-a+1))){
-    const n=Number(id.slice(1)),level=families.findIndex(g=>g.some(f=>f[0]===id))+1;
+    const n=Number(id.slice(1)),level=families.findIndex(g=>g.some(f=>f.includes(id)))+1;
     let a=r(-20,20),b=r(-12,12),c=r(-8,8),answer,question,solution,guide,model,opts,key;
     const fields=(...f)=>({kind:'fields',fields:f});
     if(n===1){
@@ -99,7 +122,7 @@
     }else if(n===12){
       const step=[1,2,5][r(0,2)],target=r(1,5);answer=a+target*step;
       question='Quin nombre representa el punt A?'+recta(a,step,target);
-      solution=[`Entre dues marques consecutives hi ha ${step} unitats.`,`Des de ${a}, avança ${target} intervals: ${a} + ${target} × ${step} = ${answer}.`];guide=['Troba l’escala amb dues referències i compta els intervals fins a A.'];opts=numericOptions(answer,[a+target,a+(target-1)*step,a+(target+1)*step]);key=[a,step,target];
+      solution=[`Entre dues marques consecutives hi ha ${step} ${step===1?'unitat':'unitats'}.`,`Des de ${a}, avança ${target} intervals: ${a} + ${target} × ${step} = ${answer}.`];guide=['Troba l’escala amb dues referències i compta els intervals fins a A.'];opts=numericOptions(answer,[a+target,a+(target-1)*step,a+(target+1)*step]);key=[a,step,target];
     }else if(n===13){
       b=r(1,12);c=r(1,12);const end=a+b-c;answer=a;
       question=`La temperatura puja ${b} °C i després baixa ${c} °C. Al final és de ${end} °C. Quina temperatura hi havia al principi?`;
@@ -135,5 +158,5 @@
       entersOptionLabels:entersFields?.map(f=>f.label),question,correct,options:choices,guide,solution,
       taskDifficulty:level,diff:level,isProblem:[5,6,7,8,9,13,16].includes(n),practiceKey:id+':'+JSON.stringify(key)};
   }
-  root.MIEnters=Object.freeze({anchors,families,integer,matches,generate,recta,number});
+  root.MIEnters=Object.freeze({anchors,families,familySpecs,levelFor,integer,matches,generate,recta,number});
 })(typeof window!=='undefined'?window:globalThis);

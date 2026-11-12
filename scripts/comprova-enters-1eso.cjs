@@ -20,7 +20,7 @@ async function main(){
    check(M.matches(pair,'−16 m; +2 m')&&!M.matches(pair,'−16; 2; 999')&&!M.matches(pair,'-16.0;2')&&!M.matches(pair,'-16 cm;2')&&!M.matches(pair,'-16;')&&!M.matches(pair,'-16;2 text'),'Strict tuple');
    const comparison=make('E01',-7,-2,0,1);
    check(accepts(comparison,'<')&&accepts(comparison,'−7 < −2')&&!accepts(comparison,'-7 > -2')&&!accepts(comparison,'7 < -2'),'Comparison operands and direction');
-   const groups=adaptivePracticeGroups(topic);check(groups.map(g=>g.length).join()==='8,5,4','Catalogue');
+   const groups=adaptivePracticeGroups(topic);check(groups.map(g=>g.length).join()==='8,6,1','Catalogue');
    const links={};
    for(const [li,g] of groups.entries())for(const [id] of g){
     for(let i=0;i<150;i++){
@@ -51,9 +51,16 @@ async function main(){
     scenarios.push({level,correct,wrong});
    }
    for(const [mode,thresholds] of [[1,[3,6]],[2,[6,12]]]){state.level=mode;for(const [i,p] of thresholds.entries()){check(adaptiveLevel(p-1)===i+1&&adaptiveLevel(p)===i+2,'Threshold');}}
-   const session=start(2),keys=new Set(),visited=new Set();let last;
-   for(let i=0;i<20;i++){check(!keys.has(currentEx.practiceKey),'Repeated instance');keys.add(currentEx.practiceKey);check(currentEx.entersFamily!==last,'Repeated family');last=currentEx.entersFamily;visited.add(last);processPracticeAnswer(false,'999');nextEx();}
-   check(visited.size===8,'Twenty errors N1 rotation');
+   const session=start(2),keys=new Set(),visited=new Set(),n1Families=MIEnters.familySpecs.filter(f=>f.level===1);let last;
+   check(n1Families.length===8,'Eight N1 mathematical families');
+   for(let i=0;i<20;i++){
+    check(!keys.has(currentEx.practiceKey),'Repeated instance');keys.add(currentEx.practiceKey);
+    const spec=n1Families.find(f=>f.practiceTypes.includes(currentEx.type));
+    check(spec,'N1 mathematical family for '+currentEx.type);
+    check(spec.id!==last,'Repeated mathematical family '+spec.id);last=spec.id;visited.add(spec.id);
+    processPracticeAnswer(false,'999');nextEx();
+   }
+   check(visited.size===n1Families.length&&n1Families.every(f=>visited.has(f.id)),'Twenty errors cover all eight N1 mathematical families');
    start(2);const s=adaptivePracticeSessions.enters,original=topic.practiceGen;
    try{topic.practiceGen=(id,level,random)=>original(id,level,random||((min,max)=>min));for(let i=0;i<20;i++){processPracticeAnswer(false,'999');nextEx();}check(s.ended&&s.incorrect===20,'Deterministic reserves');}finally{topic.practiceGen=original;}
    start(2);adaptivePracticeSessions.enters.questions={has:()=>true};showEx();check(adaptivePracticeSessions.enters.ended&&el('decimalResultSubtitle').textContent.includes('cap altra pregunta'),'Exhaustion summary');
@@ -78,19 +85,87 @@ async function main(){
    return {families:groups.map(g=>g.length),links,scenarios,exam:[12,20]};
   });
   const theory=fs.readFileSync('1eso/teoria/numeric/nombres-enters-1r-eso.html','utf8');
-  for(const link of Object.values(report.links))assert(theory.includes('id="'+link.split('#')[1]+'"'),link);
+  const anchors=[...new Set(Object.values(report.links).map(link=>link.split('#')[1]))];
+  assert(anchors.length>1,'Procedure links available');
+  for(const anchor of anchors)assert(theory.includes('id="'+anchor+'"'),'Theory anchor '+anchor);
   const theoryPage=await browser.newPage();
   await theoryPage.route(/^https?:/,r=>r.abort());
-  await theoryPage.goto(pathToFileURL(resolve('1eso/teoria/numeric/nombres-enters-1r-eso.html')).href);
-  await theoryPage.addStyleTag({content:'html { scroll-behavior: auto !important; }'});
-  for(const [family,link] of Object.entries(report.links)){
-    await theoryPage.locator('.quick-nav a[href="#'+link.split('#')[1]+'"]').click();
-    assert.equal(new URL(theoryPage.url()).hash,'#'+link.split('#')[1]);
-    const section=theoryPage.locator('section#'+link.split('#')[1]);
-    assert.equal(await section.count(),1,family);assert((await section.innerText()).length>120,family+' procedure');
-    assert((await section.locator('.example').first().innerText()).length>65,family+' worked example');
-    await theoryPage.waitForFunction(anchor=>document.getElementById(anchor).getBoundingClientRect().top<innerHeight,link.split('#')[1]);
+  await theoryPage.addInitScript(()=>{document.documentElement.style.scrollBehavior='auto';});
+  const theoryUrl=pathToFileURL(resolve('1eso/teoria/numeric/nombres-enters-1r-eso.html')).href;
+  async function theoryNavigationState(anchor){
+    return theoryPage.evaluate(id=>{
+      const panel=document.getElementById('ajuda-exercicis'),item=document.getElementById(id);
+      const rect=item?.getBoundingClientRect(),insidePanel=!!(panel&&item&&panel.contains(item));
+      return {
+        expectedHash:'#'+id,actualHash:location.hash,hashMatches:location.hash==='#'+id,
+        anchorExists:!!item,tagName:item?.tagName||null,inHelpPanel:insidePanel,
+        generalDetailsOpen:panel?panel.open:null,
+        individualDetailsOpen:item?.tagName==='DETAILS'?item.open:null,
+        visible:!!(rect&&rect.top<innerHeight&&rect.bottom>0),
+        rect:rect?{top:Math.round(rect.top),bottom:Math.round(rect.bottom),height:Math.round(rect.height)}:null
+      };
+    },anchor);
   }
+  async function waitForTheoryTarget(anchor,stage){
+    try{
+      await theoryPage.waitForFunction(id=>{
+        const panel=document.getElementById('ajuda-exercicis'),item=document.getElementById(id);
+        const insidePanel=!!(panel&&item&&panel.contains(item));
+        const isProcedure=insidePanel&&item.tagName==='DETAILS';
+        const rect=item?.getBoundingClientRect();
+        return location.hash==='#'+id&&!!item&&(!isProcedure||(panel.open&&item.open))&&
+          !!rect&&rect.top<innerHeight&&rect.bottom>0;
+      },anchor,{timeout:5000});
+    }catch(error){
+      const state=await theoryNavigationState(anchor);
+      throw new Error('Theory navigation failed during '+stage+' for #'+anchor+
+        ': '+JSON.stringify(state)+'; wait error: '+error.message);
+    }
+  }
+  async function verifyProcedureTarget(anchor,family){
+    const target=theoryPage.locator('[id="'+anchor+'"]');
+    assert.equal(await target.count(),1,family+' theory anchor');
+    const state=await theoryNavigationState(anchor);
+    if(state.inHelpPanel){
+      assert.equal(state.tagName,'DETAILS',family+' procedure details');
+      assert.equal(state.generalDetailsOpen,true,family+' help details opened');
+      assert.equal(state.individualDetailsOpen,true,family+' procedure details opened');
+      assert.equal(await target.evaluate(node=>node.classList.contains('procedure-item')),true,family+' procedure item');
+      await target.evaluate(node=>{
+        for(let current=node;current;current=current.parentElement){
+          if(current.tagName==='DETAILS')current.open=true;
+        }
+      });
+    }else{
+      assert.equal(state.tagName,'SECTION',family+' general theory section');
+    }
+    assert((await target.innerText()).length>120,family+' procedure content');
+    const example=target.locator('.example').first();
+    assert.equal(await example.count(),1,family+' resolved example');
+    assert((await example.innerText()).length>65,family+' worked example content');
+  }
+  for(const [family,link] of Object.entries(report.links)){
+    const anchor=link.split('#')[1];
+    await theoryPage.goto(theoryUrl+'#'+encodeURIComponent(anchor));
+    await waitForTheoryTarget(anchor,'direct URL');
+    assert.equal(new URL(theoryPage.url()).hash,'#'+anchor,'Direct theory anchor '+family);
+    await verifyProcedureTarget(anchor,family);
+  }
+  const procedureAnchors=await theoryPage.evaluate(ids=>{
+    const panel=document.getElementById('ajuda-exercicis');
+    return ids.filter(id=>{const item=document.getElementById(id);return !!(panel&&item&&panel.contains(item)&&item.tagName==='DETAILS');});
+  },anchors);
+  assert(procedureAnchors.length>1,'Multiple contextual procedure anchors');
+  const directAnchor=procedureAnchors[0],hashchangeAnchor=procedureAnchors[1];
+  await theoryPage.goto(theoryUrl+'#'+encodeURIComponent(directAnchor));
+  await waitForTheoryTarget(directAnchor,'direct procedure URL');
+  await theoryPage.evaluate(()=>{window.__miHashchangeCount=0;window.addEventListener('hashchange',()=>window.__miHashchangeCount++);});
+  await theoryPage.evaluate(anchor=>{location.hash='#'+anchor;},hashchangeAnchor);
+  await waitForTheoryTarget(hashchangeAnchor,'hashchange');
+  const hashchangeCount=await theoryPage.evaluate(()=>window.__miHashchangeCount);
+  assert(hashchangeCount>0,'hashchange event fired');
+  assert.equal(new URL(theoryPage.url()).hash,'#'+hashchangeAnchor,'hashchange URL');
+  await verifyProcedureTarget(hashchangeAnchor,'hashchange');
   await theoryPage.close();
   async function show(id,mode='open'){
    await page.evaluate(({id,mode})=>{const topic=TOPICS.find(t=>t.id==='enters'),gen=topic.practiceGen;selTopic(TOPICS.indexOf(topic));selLv(1);selMode(mode);startP();adaptivePracticeSessions.enters.questions.clear();adaptivePracticeSessions.enters.points=id==='E08'?3:id==='E15'?6:0;try{topic.practiceGen=()=>MIEnters.generate(id);showEx();}finally{topic.practiceGen=gen;}},{id,mode});
