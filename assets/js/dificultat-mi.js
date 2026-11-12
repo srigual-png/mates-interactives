@@ -41,9 +41,10 @@
     const row=OPERATIONS_RATIONAL_FAMILIES.find(f=>f.id===family);
     return row?{...row,anchor:'ajuda-'+family.toLowerCase()}:null;
   }
-  const FIRST_NUMERIC_LEVELS=freeze({"naturals":[[1,2,3,4],[5],[]],"decimal_sys":[[1,2,3,4],[],[]],"ops":[[1,2,3,4],[5,6],[]],"potencies":[[1,2,3,4,5,6,7],[],[]],"jerarquia":[[1,2],[3,4,5,6,7,8,9],[]],"divis":[[1,2,3,4,5,6],[7],[]],"mcmmcd":[[1,2,3],[4,5],[]],"enters":[[1,2,3,4,5,7],[6],[]],"decimals":[[1,2,3,4,7,8],[5,6,9],[]],"fraccions":[[1,2,4,5,7,9,10,11],[3,6,8],[]],"proporcionalitat":[[1,2,5,8],[3,4,6,7],[]],"percentatges":[[1,2,6,7],[4,5],[3]],"notacio2":[[4,5,6],[1,2,3],[]]});
+  const FIRST_NUMERIC_LEVELS=freeze({"naturals":[[1,2,3,4],[5],[]],"decimal_sys":[[1,2,3,4],[],[]],"ops":[[1,2,3],[4,5,6],[]],"potencies":[[1,2,3,4,5,6,7],[],[]],"jerarquia":[[1,2],[3,4,5,6,7,8,9],[]],"divis":[[1,2,3,4,5,6],[7],[]],"mcmmcd":[[1,2,3],[4,5],[]],"enters":[[1,2,3,4,5,7],[6],[]],"decimals":[[1,2,3,4,7,8],[5,6,9],[]],"fraccions":[[1,2,4,5,7,9,10,11],[3,6,8],[]],"proporcionalitat":[[1,2,5,8],[3,4,6,7],[]],"percentatges":[[1,2,6,7],[4,5],[3]],"notacio2":[[4,5,6],[1,2,3],[]]});
   const NATURAL_PRACTICE_LEVELS=freeze({'recta-graduada':1,'dividend-desconegut':2,'producte-descomposicio':2,'operacions-valor-desconegut':2,'interval-arrodoniment':2,'nombres-amb-condicions':3,'patrons-numerics':2});
   const DECIMAL_PRACTICE_LEVELS=freeze({'lectura-paraules-a-xifres':1,'escriure-xifres-a-paraules':1,'guionets-numerals-du-c':1,'descomposicio-equivalent-reagrupament':2,'equivalencia-ordres-posicionals':2,'auditar-error-de-posicio':2});
+  const OPS_PRACTICE_LEVELS=freeze({'triar-operacio':1,'capses':2,'compensacio':2,'diagnosticar-divisio':2,'reconstruir-total':3});
   const BANK_LEVELS=freeze({
   "numericProblems": {
     "naturals-2": 2,
@@ -588,6 +589,7 @@
       if(number===1&&options.sense==='numeric'&&t.id==='percentatges'&&/^Q(?:0[1-9]|1[0-3])$/.test(q.familyId||''))return ['Q03','Q09','Q12'].includes(q.familyId)?3:['Q01','Q02','Q05','Q10'].includes(q.familyId)?1:2;
       if(number===1&&options.sense==='numeric'&&t.id==='enters'&&/^E(?:0[1-9]|1[0-7])$/.test(String(q.type))){const n=Number(q.type.slice(1));return [1,2,3,4,5,10,11,12].includes(n)?1:[6,7,8,14,17].includes(n)?2:3;}
       if(number===1&&options.sense==='numeric'&&t.id==='naturals'&&Object.hasOwn(NATURAL_PRACTICE_LEVELS,q.type))return NATURAL_PRACTICE_LEVELS[q.type];
+      if(number===1&&options.sense==='numeric'&&t.id==='ops'&&Object.hasOwn(OPS_PRACTICE_LEVELS,q.type))return OPS_PRACTICE_LEVELS[q.type];
       if(number===1&&options.sense==='numeric'&&t.id==='decimal_sys'&&Object.hasOwn(DECIMAL_PRACTICE_LEVELS,q.type))return DECIMAL_PRACTICE_LEVELS[q.type];
       const identity=bankIdentity(q);
       if(identity){const [bank,key]=identity,n=bankLevel(bank,key);if(![1,2,3].includes(n))throw new Error('Falta la dificultat d’una plantilla del banc «'+bank+'».');return n;}
