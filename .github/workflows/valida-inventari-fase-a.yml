@@ -1,0 +1,23 @@
+name: Verifica inventari fase A
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/**'
+      - 'scripts/exporta-inventari-fase-a.cjs'
+      - '.github/workflows/valida-inventari-fase-a.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/auditoria/**'
+      - 'scripts/exporta-inventari-fase-a.cjs'
+      - '.github/workflows/valida-inventari-fase-a.yml'
+jobs:
+  verifica-inventari:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprovar registre i Excel CSV
+        run: node scripts/exporta-inventari-fase-a.cjs --check
