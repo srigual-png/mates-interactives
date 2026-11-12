@@ -231,10 +231,13 @@ async function main(){
     await theory.route(/^https?:/,route=>route.abort());
     for(const [family,link] of Object.entries(result.feedbackLinks)){
       await theory.goto(link);
-      const section=theory.locator('section'+new URL(link).hash);
+      const help=theory.locator('#ajuda-exercicis');
+      if(!await help.evaluate(el=>el.open))await help.locator(':scope > summary').click();
+      const section=theory.locator(new URL(link).hash);
       assert.equal(await section.count(),1,family);
-      assert((await section.locator(':scope > p').innerText()).length>60,family+' procediment');
-      assert((await section.locator('.example').innerText()).length>65,family+' exemple');
+      if(await section.evaluate(el=>el.tagName==='DETAILS'&&!el.open))await section.locator(':scope > summary').click();
+      assert((await section.locator(':scope > p').textContent()).length>60,family+' procediment');
+      assert((await section.locator('.example').textContent()).length>65,family+' exemple');
       assert(await section.locator('.example strong').count(),family+' resultat de l’exemple');
     }
     await theory.close();
