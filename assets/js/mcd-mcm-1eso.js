@@ -1,5 +1,27 @@
 window.MIMcdMcm = (() => {
-  const families = [[['P1'],['P2'],['P3']],[['A1'],['A2'],['A3'],['A4'],['A5'],['P4']],[['A6'],['P5'],['P6']]];
+  // La pràctica adaptativa només rep identificadors que genMcdPractice sap gestionar.
+  // examTypes, bankVariants i reasoningTasks són rutes diferents, no valors de generate().
+  const familySpecs = Object.freeze([
+    {id:'llistar-divisors-comuns',level:1,practiceTypes:['P1'],examTypes:[1],bankVariants:[],reasoningTasks:[],objective:'Trobar tots els divisors positius compartits per dos nombres.',procedure:'Enumerar divisors i conservar la intersecció completa, sense repeticions.',rationale:'La sortida és una llista completa; no n’hi ha prou amb trobar només el màxim.'},
+    {id:'llistar-multiples-comuns-positius',level:1,practiceTypes:['P2'],examTypes:[2],bankVariants:[],reasoningTasks:[],objective:'Trobar els múltiples comuns positius fins a un límit inclusiu.',procedure:'Generar múltiples positius, excloure zero i filtrar per coincidència dins el límit.',rationale:'És una cerca ascendent acotada, diferent d’enumerar divisors; inclou el cas MCD=1.'},
+    {id:'reconeixer-relacions-especials-mcd-mcm',level:1,practiceTypes:['P3'],examTypes:[],bankVariants:[],reasoningTasks:[],objective:'Obtenir MCD i mcm en casos de nombres coprimers o d’un operand divisor de l’altre.',procedure:'Aplicar relacions directes sense factoritzar.',rationale:'Reconeixement de casos especials i comprovació de les relacions MCD·mcm=a·b.'},
+    {id:'calcular-mcd-amb-factors-primers',level:2,practiceTypes:['A1'],examTypes:[],bankVariants:['mcmmcd-1'],reasoningTasks:[],objective:'Calcular el MCD mitjançant factorització primera.',procedure:'Seleccionar factors comuns amb l’exponent menor i reconstruir el producte.',rationale:'La selecció d’exponents i el càlcul del producte són passos connectats.'},
+    {id:'calcular-mcm-amb-factors-primers',level:2,practiceTypes:['A2'],examTypes:[3],bankVariants:['mcmmcd-1'],reasoningTasks:[],objective:'Calcular el mcm de dos o tres nombres mitjançant factorització primera.',procedure:'Incloure cada factor necessari amb l’exponent més gran i reconstruir el producte; per a tres nombres, combinar mcm successius.',rationale:'No és el MCD amb una etiqueta canviada: canvia la regla dels exponents i la cobertura dels factors.'},
+    {id:'sincronitzar-inicis-simultanis',level:2,practiceTypes:['A3'],examTypes:[4],bankVariants:['mcmmcd-2'],reasoningTasks:[],objective:'Trobar la primera coincidència d’esdeveniments periòdics que comencen alhora.',procedure:'Modelitzar els temps com a múltiples comuns positius i trobar el mcm.',rationale:'Contextualitza un mcm amb inici compartit, sense desfasaments.'},
+    {id:'maximitzar-repartiment-o-tall',level:2,practiceTypes:['A4','A5'],examTypes:[5],bankVariants:['mcmmcd-3','mcmmcd-4'],reasoningTasks:[],objective:'Maximitzar agrupaments idèntics o la longitud de talls iguals sense sobrants.',procedure:'Calcular el MCD; després dividir les quantitats per obtenir el contingut de cada lot o el nombre de trossos.',rationale:'Lots i cordes comparteixen el mateix MCD i la mateixa divisió derivada; el context i les unitats són variants, no famílies.'},
+    {id:'triar-i-justificar-mcd-o-mcm',level:2,practiceTypes:['P4'],examTypes:[],bankVariants:[],reasoningTasks:[],objective:'Identificar quina operació resol una situació i justificar la tria.',procedure:'Relacionar la condició del resultat amb divisor comú màxim o primer múltiple comú, i calcular el valor demanat.',rationale:'La decisió conceptual s’avalua explícitament, més enllà de calcular una operació donada.'},
+    {id:'diagnosticar-seleccio-de-factors',level:2,practiceTypes:['P6'],examTypes:[],bankVariants:[],reasoningTasks:[],objective:'Detectar una selecció incorrecta d’exponents o factors i donar el resultat correcte.',procedure:'Comparar els exponents per primer factor i aplicar la regla de MCD o mcm.',rationale:'És una verificació guiada de regles conegudes; dues respostes curtes no la converteixen en N3.'},
+    {id:'coincidencies-periodiques-desfasades',level:3,practiceTypes:['A6'],examTypes:[1001],bankVariants:['mcmmcd-raonament'],reasoningTasks:['coincidencies-desfasades'],objective:'Trobar la primera coincidència de dues progressions periòdiques amb inicis diferents i després d’un llindar estricte.',procedure:'Resoldre simultàniament les dues congruències, comprovar l’existència de solució i demostrar que cap coincidència posterior al llindar és anterior.',rationale:'El mcm dels períodes no determina per si sol la coincidència quan els inicis són diferents.'},
+    {id:'reconstruir-operand-amb-mcd-o-mcm',level:3,practiceTypes:['P5'],examTypes:[],bankVariants:[],reasoningTasks:[],objective:'Reconstruir l’operand desconegut a partir d’un MCD o mcm objectiu i un interval.',procedure:'Enumerar tots els candidats de l’interval i verificar la condició exacta i la unicitat.',rationale:'Requereix reconstrucció inversa i una prova exhaustiva de minimalitat/unicitat.'}
+  ]);
+  const families = [[],[],[]];
+  familySpecs.forEach(f => families[f.level-1].push(f.practiceTypes));
+  function levelFor(key) {
+    const value=String(key);
+    const family=familySpecs.find(row=>
+      [...row.practiceTypes,...row.examTypes.map(String),...row.bankVariants,...row.reasoningTasks].some(id=>String(id)===value));
+    return family?.level ?? null;
+  }
   const anchors = {A1:'mcd-factors',A2:'mcm-factors',A3:'coincidencies',A4:'lots',A5:'talls',
     A6:'coincidencies-desfasades',P1:'divisors-comuns',P2:'multiples-comuns',P3:'casos-especials',
     P4:'triar-mcd-mcm',P5:'operand-desconegut',P6:'errors-factors'};
@@ -192,7 +214,7 @@ window.MIMcdMcm = (() => {
   }
 
   function bank(type,rnd){
-    const common={topicId:'mcmmcd',topicName:'MCD i mcm',cat:'MCD i mcm',type,variantId:'mcmmcd-'+type,diff:type===4?3:2,dataBox:null};
+    const common={topicId:'mcmmcd',topicName:'MCD i mcm',cat:'MCD i mcm',type,variantId:'mcmmcd-'+type,diff:2,dataBox:null};
     const reply=fields=>({mcmFields:fields,val:values(fields),check:value=>matches(fields,value)});
     if(type===1){
       const a=rnd(12,60),b=pick(range(12,72).filter(n=>n!==a),rnd);
@@ -221,5 +243,5 @@ window.MIMcdMcm = (() => {
     });
   }
   const isAnchor = value => Object.values(anchors).includes(value);
-  return {families,anchors,units,number,matches,generate,bank,reserve,isAnchor,optionLabels};
+  return {families,familySpecs,levelFor,anchors,units,number,matches,generate,bank,reserve,isAnchor,optionLabels};
 })();

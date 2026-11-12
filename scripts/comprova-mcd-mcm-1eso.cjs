@@ -76,8 +76,8 @@ async function main(){
       check(a6.correct==='23'&&accepts(a6,'23 minuts')&&!accepts(a6,'11'),'A6 límit estricte');
 
       const groups=adaptivePracticeGroups(topic), feedbackLinks={};
-      check(groups.map(level=>level.length).join()==='3,6,3','Catàleg');
-      for(const [level,families] of groups.entries())for(const [type] of families){
+      check(groups.map(level=>level.length).join()==='3,6,2','Catàleg');
+      for(const [level,families] of groups.entries())for(const family of families)for(const type of family){
         for(const random of [(min,max)=>min,(min,max)=>max,rnd,rnd]){
           const q=genMcdPractice(type,level+1,random);
           check(q.options.length===4&&new Set(q.options).size===4&&q.options.filter(v=>accepts(q,v)).length===1,'Opcions de '+type);
@@ -231,10 +231,13 @@ async function main(){
     await theory.route(/^https?:/,route=>route.abort());
     for(const [family,link] of Object.entries(result.feedbackLinks)){
       await theory.goto(link);
-      const section=theory.locator('section'+new URL(link).hash);
+      const help=theory.locator('#ajuda-exercicis');
+      if(!await help.evaluate(el=>el.open))await help.locator(':scope > summary').click();
+      const section=theory.locator(new URL(link).hash);
       assert.equal(await section.count(),1,family);
-      assert((await section.locator(':scope > p').innerText()).length>60,family+' procediment');
-      assert((await section.locator('.example').innerText()).length>65,family+' exemple');
+      if(await section.evaluate(el=>el.tagName==='DETAILS'&&!el.open))await section.locator(':scope > summary').click();
+      assert((await section.locator(':scope > p').textContent()).length>60,family+' procediment');
+      assert((await section.locator('.example').textContent()).length>65,family+' exemple');
       assert(await section.locator('.example strong').count(),family+' resultat de l’exemple');
     }
     await theory.close();
