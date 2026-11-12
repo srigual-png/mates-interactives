@@ -137,7 +137,6 @@ async function main(){
           examBase++;
         }
       }finally{window.rnd=oldRnd;}
-      check(miTaskDifficulty.numericBankEntries?.,'placeholder');
       return {practiceRoutes:types.length,practiceSamples:total,reasoningSamples:reasoning,ampVariants:bankCounts,examBaseSamples:examBase,families:familyCounts,examPlan:miTaskDifficulty.examPlan(topic).slots};
     });
     assert.deepEqual(report.families,[8,6,1]);
