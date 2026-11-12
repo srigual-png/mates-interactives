@@ -58,6 +58,7 @@ if (process.env.MI_SKIP_CLASSIFICATION_SOURCE_CHECKS !== '1') {
   });
   assert(/"decimal_sys":\[\[1,2,3,4\],\[\],\[\]\]/.test(difficultySource), 'nivell central dels generadors base');
   const page = fs.readFileSync(path.join(root, '1eso/sentit-numeric.html'), 'utf8');
+  const decimalModule = fs.readFileSync(path.join(root, 'assets/js/practica-sistema-decimal-1eso.js'), 'utf8');
   const groupsText = page.match(/decimal_sys:(\[[^\r\n]+\])/);
   assert(groupsText, 'grups adaptatius decimal_sys');
   families = Function(`return (${groupsText[1]})`)();
@@ -77,6 +78,7 @@ if (process.env.MI_SKIP_CLASSIFICATION_SOURCE_CHECKS !== '1') {
   assert(generator.includes("'Posició: '"), 'accentuació de la solució');
   assert(generator.includes('centenes de miler') && generator.includes('unitats de miler'), 'posicions escrites sense sigles ambigües');
   assert(generator.includes('El nombre de matrícula és'), 'terminologia catalana a type 4');
+  assert(decimalModule.includes('El nombre de matrícula és') && !decimalModule.includes('El número de matrícula és'), 'etiqueta del generador pràctic de type 4');
   assert.equal((generator.match(/diff=1;/g) || []).length, 4, 'quatre generadors base N1');
   assert(!/diff=[23];/.test(generator), 'cap nivell intern divergent als generadors base');
   assert.equal(R.catalog.find(item => item.id === 'canvi-posicional').level, 2);
