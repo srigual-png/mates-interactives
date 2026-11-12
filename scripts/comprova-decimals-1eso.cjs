@@ -12,7 +12,12 @@ async function main(){
   const report=await page.evaluate(()=>{
    const check=(v,m)=>{if(!v)throw Error(m);},M=MIDecimals,el=id=>document.getElementById(id),topic=TOPICS.find(t=>t.id==='decimals');
    const accepts=(q,v)=>openOk1(q.correct,v,q),groups=M.families,links={};
-   for(const group of groups)for(const [id] of group){const q=M.generate(id);links[id]=miTheoryLinkHtml('decimals',undefined,q.decimalsTheory).match(/href="([^"]+)/)[1];check(accepts(q,q.correct),'Canonical '+id);}
+   for(let index=1;index<=M.anchors.length;index++){const id='D'+String(index).padStart(2,'0');const q=M.generate(id);links[id]=miTheoryLinkHtml('decimals',undefined,q.decimalsTheory).match(/href="([^"]+)/)[1];check(accepts(q,q.correct),'Canonical '+id);}
+   for(const group of groups.flat().filter(group=>group.length>1)){
+    let first=true;const q=topic.practiceGen(group[0],1,(min,max)=>{if(first){first=false;return max;}return min;});
+    check(group.includes(q.decimalsGenerator),'Variant generation stayed in family '+group.join(','));
+    check(q.decimalsGenerator===group.at(-1),'Last variant reachable in '+group.join(','));
+   }
    function start(level,mode='open'){selTopic(TOPICS.indexOf(topic));selLv(level);selMode(mode);startP();return adaptivePracticeSessions.decimals;}
    const scenarios=[];
    for(const [level,answers] of [[1,Array(10).fill(true)],[1,[true,true,false,false,...Array(10).fill(true)]],[2,Array(20).fill(true)],[2,Array(20).fill(false)]]){
@@ -32,13 +37,14 @@ async function main(){
    for(const [mode,thresholds] of [[1,[3,6]],[2,[6,12]]]){state.level=mode;for(const [i,p] of thresholds.entries()){check(adaptiveLevel(p-1)===i+1&&adaptiveLevel(p)===i+2,'Threshold');}}
    const session=start(2),keys=new Set(),visited=new Set();let last;
    for(let i=0;i<20;i++){check(!keys.has(currentEx.practiceKey),'Repeated instance');keys.add(currentEx.practiceKey);check(currentEx.decimalsFamily!==last,'Repeated family');last=currentEx.decimalsFamily;visited.add(last);processPracticeAnswer(false,'999');nextEx();}
-   check(visited.size===11,'Twenty errors N1 rotation');
+   check(visited.size===groups[0].length,'Twenty errors N1 rotation covers every mathematical family');
+   check(groups[0].every(group=>visited.has(M.familyInfo(group[0]).id)),'All N1 family identities visited');
    start(2);const s=adaptivePracticeSessions.decimals,original=topic.practiceGen;
    try{topic.practiceGen=(id,level,random)=>original(id,level,random||((min,max)=>min));for(let i=0;i<20;i++){processPracticeAnswer(false,'999');nextEx();}check(s.ended&&s.incorrect===20,'Deterministic reserves');}finally{topic.practiceGen=original;}
    start(2);adaptivePracticeSessions.decimals.questions={has:()=>true};showEx();check(adaptivePracticeSessions.decimals.ended&&el('decimalResultSubtitle').textContent.includes('cap altra pregunta'),'Exhaustion summary');
    start(1);processPracticeAnswer(true,currentEx.correct);leavePractice();check(el('decimalResultScore').textContent==='1/1','Voluntary finish');
    start(1);const history=adaptivePracticeSessions.decimals;history.points=3;nextAdaptivePractice(topic);const visitedN2=[...history.seen].filter(f=>groups[1].includes(f));history.points=0;nextAdaptivePractice(topic);history.points=3;nextAdaptivePractice(topic);check(visitedN2.every(f=>history.seen.has(f)),'Retained history');
-   miTopicExam.start('decimals');const exam=miTopicExam.getSession();check(exam.questions.length===12,'Topic exam length');check([1,2,3].map(l=>exam.questions.filter(q=>miTaskDifficulty.getDifficulty(topic,q)===l).length).join()==='6,3,3','Exam quotas');
+   miTopicExam.start('decimals');const exam=miTopicExam.getSession();check(exam.questions.length===12,'Topic exam length');check([1,2,3].map(l=>exam.questions.filter(q=>miTaskDifficulty.getDifficulty(topic,q)===l).length).join()==='4,4,4','Exam quotas');
    check(exam.questions.every(q=>!/^D\d/.test(String(q.type))),'Legacy exam generators');
    check(exam.questions.every(q=>q.options.length===4&&new Set(q.options).size===4&&q.options.filter(v=>accepts(q,v)).length===1),'Legacy exam unique options');
    miExamSelectedTopics=['decimals'];miStartConfiguredExam();check(state.examQs.length===20,'Global exam');
@@ -64,15 +70,31 @@ async function main(){
   for(const link of Object.values(report.links))assert(theory.includes('id="'+link.split('#')[1]+'"'),link);
   const theoryPage=await browser.newPage();
   await theoryPage.route(/^https?:/,r=>r.abort());
-  await theoryPage.goto(pathToFileURL(resolve('1eso/teoria/numeric/nombres-decimals-1r-eso.html')).href);
+  const theoryUrl=pathToFileURL(resolve('1eso/teoria/numeric/nombres-decimals-1r-eso.html')).href;
+  await theoryPage.goto(theoryUrl+'#divisio-unitaria');
   await theoryPage.addStyleTag({content:'html { scroll-behavior: auto !important; }'});
+  assert.equal(new URL(theoryPage.url()).hash,'#divisio-unitaria','Direct details anchor URL');
+  assert.equal(await theoryPage.locator('#divisio-unitaria').evaluate(el=>el.open),true,'Direct details anchor opens');
+  await theoryPage.evaluate(()=>new Promise(resolve=>{addEventListener('hashchange',()=>resolve(),{once:true});location.hash='#sumar-decimals';}));
+  assert.equal(new URL(theoryPage.url()).hash,'#sumar-decimals','hashchange anchor URL');
+  assert.equal(await theoryPage.locator('#sumar-decimals').count(),1,'hashchange section anchor');
+  await theoryPage.locator('#ajuda-exercicis').evaluate(el=>{el.open=true;});
   for(const [family,link] of Object.entries(report.links)){
-    await theoryPage.locator('a[href="#'+link.split('#')[1]+'"]').first().click();
-    assert.equal(new URL(theoryPage.url()).hash,'#'+link.split('#')[1]);
-    const section=theoryPage.locator('section#'+link.split('#')[1]);
-    assert.equal(await section.count(),1,family);assert((await section.innerText()).length>120,family+' procedure');
-    assert((await section.locator('.example').first().innerText()).length>20,family+' worked example');
-    await theoryPage.waitForFunction(anchor=>document.getElementById(anchor).getBoundingClientRect().top<innerHeight,link.split('#')[1]);
+    const anchor=link.split('#')[1];
+    await theoryPage.evaluate(anchor=>new Promise(resolve=>{
+      const finish=()=>resolve();
+      if(location.hash==='#'+anchor){finish();return;}
+      addEventListener('hashchange',finish,{once:true});
+      location.hash='#'+anchor;
+    }),anchor);
+    assert.equal(new URL(theoryPage.url()).hash,'#'+anchor,family+' URL');
+    const target=theoryPage.locator('#'+anchor);
+    assert.equal(await target.count(),1,family+' anchor');
+    const targetState=await target.evaluate(el=>({tag:el.tagName,open:el.tagName==='DETAILS'?el.open:true}));
+    assert(targetState.open,family+' details open');
+    assert((await target.innerText()).length>120,family+' procedure');
+    assert((await target.locator('.example').first().innerText()).length>20,family+' worked example');
+    await theoryPage.waitForFunction(anchor=>{const el=document.getElementById(anchor);return !!el&&el.getBoundingClientRect().top<innerHeight;},anchor);
   }
   await theoryPage.close();
   async function show(id,mode='open'){
