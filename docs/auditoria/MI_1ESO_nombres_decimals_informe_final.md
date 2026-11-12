@@ -446,7 +446,8 @@ Els exemples següents provenen de la llavor determinista de la suite; les respo
 - `scripts/comprova-decimals-1eso.cjs`: **PASS a Chrome/Chromium** — sessions adaptatives guiades/autònomes, rotació i cobertura de totes les 8 famílies N1, exàmens de tema/global, banc contextual i teoria; nivells d’examen 4/4/4 i 12/20 preguntes. Execució en còpia aïllada amb els fitxers modificats de la branca.
 - La còpia local del test Edge ha fallat a l’arrencada per restricció del perfil temporal del sandbox (Edge error `-5` en substituir `SiteList-Enterprise.json`). La mateixa suite s’ha executat amb Chrome, disponible a l’entorn, i ha passat.
 - `node --check` ha passat per als dos scripts de test i els mòduls JavaScript modificats.
-- No s’ha executat el workflow de CI de GitHub ni s’ha fet prova d’integració sobre un clone Git local: el workspace actiu no és un checkout del repositori i conté altres còpies de projecte. Les fonts de la prova aïllada s’han recuperat de `main` i s’han verificat contra els fitxers modificats.
+- El workflow GitHub Actions **Verifica inventari fase A** ha acabat amb èxit; només comprova el registre/CSV, no executa els tests del tema. No hi ha altres status checks reportats.
+- No s’ha fet prova des d’un clone Git local: el workspace actiu no és un checkout del repositori i conté altres còpies de projecte. La suite de Chrome s’ha executat en una carpeta temporal amb la pàgina, classificador i generador recuperats de `main` i modificats, i els mòduls de suport no modificats copiats del workspace.
 
 ## Fitxers de la PR
 
