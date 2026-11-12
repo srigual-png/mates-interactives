@@ -41,7 +41,7 @@
     const row=OPERATIONS_RATIONAL_FAMILIES.find(f=>f.id===family);
     return row?{...row,anchor:'ajuda-'+family.toLowerCase()}:null;
   }
-  const FIRST_NUMERIC_LEVELS=freeze({"naturals":[[1,2,3,4],[5],[]],"decimal_sys":[[1,2,3,4],[],[]],"ops":[[1,2,3],[4,5,6],[]],"potencies":[[1,2,3,4,5,6,7],[],[]],"jerarquia":[[1,2],[3,4,5,6,7,8,9],[]],"mcmmcd":[[1,2],[3,4,5],[]],"enters":[[1,2,3,4,5,7],[6],[]],"decimals":[[1,2,3,4,7,8],[5,6,9],[]],"fraccions":[[1,2,4,5,7,9,10,11],[3,6,8],[]],"proporcionalitat":[[1,2,5,8],[3,4,6,7],[]],"percentatges":[[1,2,6,7],[4,5],[3]],"notacio2":[[4,5,6],[1,2,3],[]]});
+  const FIRST_NUMERIC_LEVELS=freeze({"naturals":[[1,2,3,4],[5],[]],"decimal_sys":[[1,2,3,4],[],[]],"ops":[[1,2,3],[4,5,6],[]],"potencies":[[1,2,3,4,5,6,7],[],[]],"jerarquia":[[1,2],[3,4,5,6,7,8,9],[]],"mcmmcd":[[1,2],[3,4,5],[]],"enters":[[1,2,3,4,5,7],[6],[]],"decimals":[[3,8,10,14,15,16,19,20],[1,2,4,5,6,7,9,11,12,17,18,21,22],[13,23]],"fraccions":[[1,2,4,5,7,9,10,11],[3,6,8],[]],"proporcionalitat":[[1,2,5,8],[3,4,6,7],[]],"percentatges":[[1,2,6,7],[4,5],[3]],"notacio2":[[4,5,6],[1,2,3],[]]});
   const NATURAL_PRACTICE_LEVELS=freeze({'recta-graduada':1,'dividend-desconegut':2,'producte-descomposicio':2,'operacions-valor-desconegut':2,'interval-arrodoniment':2,'nombres-amb-condicions':3,'patrons-numerics':2});
   const DECIMAL_PRACTICE_LEVELS=freeze({'lectura-paraules-a-xifres':1,'escriure-xifres-a-paraules':1,'guionets-numerals-du-c':1,'descomposicio-equivalent-reagrupament':2,'equivalencia-ordres-posicionals':2,'auditar-error-de-posicio':2});
   const OPS_PRACTICE_LEVELS=freeze({'triar-operacio':1,'capses':2,'compensacio':2,'diagnosticar-divisio':2,'reconstruir-total':3});
@@ -581,6 +581,7 @@
       if(options.course==='2eso'&&options.sense==='numeric'&&t.id==='operacionsRacionals'){const info=operationsRationalInfo(q);if(!info)throw new Error('Generador d’operacions amb racionals sense família OR assignada (tipus '+q.type+').');return info.level;}
       if(number===1&&options.sense==='numeric'&&t.id==='percentatges'&&/^Q(?:0[1-9]|1[0-3])$/.test(q.familyId||''))return ['Q03','Q09','Q12'].includes(q.familyId)?3:['Q01','Q02','Q05','Q10'].includes(q.familyId)?1:2;
       if(number===1&&options.sense==='numeric'&&t.id==='enters'&&root.MIEnters){const key=q.reasoningFamily||q.entersFamily||q.variantId||q.type;const assigned=root.MIEnters.levelFor(key);if(assigned)return assigned;}
+      if(number===1&&options.sense==='numeric'&&t.id==='decimals'&&root.MIDecimals){const info=root.MIDecimals.familyInfo(q.decimalsFamily||q.decimalsGenerator||q.type);if(info)return info.level;}
       if(number===1&&options.sense==='numeric'&&t.id==='naturals'&&Object.hasOwn(NATURAL_PRACTICE_LEVELS,q.type))return NATURAL_PRACTICE_LEVELS[q.type];
       if(number===1&&options.sense==='numeric'&&t.id==='ops'&&Object.hasOwn(OPS_PRACTICE_LEVELS,q.type))return OPS_PRACTICE_LEVELS[q.type];
       if(number===1&&options.sense==='numeric'&&t.id==='decimal_sys'&&Object.hasOwn(DECIMAL_PRACTICE_LEVELS,q.type))return DECIMAL_PRACTICE_LEVELS[q.type];
