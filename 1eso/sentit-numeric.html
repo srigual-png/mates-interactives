@@ -1152,7 +1152,7 @@ function genDecimalSysType(type,practice=false){
     var posName=posNames[String(posVal)]||('x'+posVal);
     practiceData={n,digit,position:s.length-1-pos};
 
-    question='Quin es el valor posicional de la xifra <b>'+digit+'</b> al nombre <span class="fc">'+n+'</span>?';
+    question='Quin és el valor posicional de la xifra <b>'+digit+'</b> al nombre <span class="fc">'+n+'</span>?';
     correct=String(realVal);
 
     opts=buildOpts(correct,[
@@ -1169,12 +1169,12 @@ function genDecimalSysType(type,practice=false){
     ];
 
     solution=[
-      'Posicio: '+posName,
-      'Valor: '+digit+'x'+posVal+'='+realVal
+      'Posició: '+posName,
+      'Valor: '+digit+' × '+posVal+'='+realVal
     ];
 
   } else if(type===2){
-    diff=2;
+    diff=1;
 
     var a=rnd(1,9),b=rnd(0,9),c=rnd(0,9),d=rnd(practice?0:1,9),e=rnd(0,9),n2=a*10000+b*1000+c*100+d*10+e;
     practiceData={n:n2};
@@ -1199,7 +1199,7 @@ function genDecimalSysType(type,practice=false){
     ];
 
   } else if(type===3){
-    diff=2;
+    diff=1;
 
     var n3=rnd(100000,999999);
     practiceData={n:n3};
@@ -1210,7 +1210,7 @@ function genDecimalSysType(type,practice=false){
         dm3=Math.floor(n3/10000)%10,
         cm3=Math.floor(n3/100000);
 
-    question='Quin nombre correspon a:<br><span class="fc">'+cm3+' cm, '+dm3+' dm, '+mi3+' m, '+ce3+' c, '+de3+' d, '+u3+' u</span>';
+    question='Quin nombre correspon a aquestes xifres?<br><span class="fc">'+cm3+' centenes de miler, '+dm3+' desenes de miler, '+mi3+' unitats de miler, '+ce3+' centenes, '+de3+' desenes i '+u3+' unitats</span>';
 
     correct=String(n3);
 
@@ -1232,7 +1232,7 @@ function genDecimalSysType(type,practice=false){
     ];
 
   } else {
-    diff=3;
+    diff=1;
     isProblem=true;
 
     var pos=rnd(0,3);
@@ -1261,7 +1261,7 @@ function genDecimalSysType(type,practice=false){
     var digitPos=posData[pos].digit;
     practiceData={n:num,digit:digitPos,position:pos};
 
-    question='<span class="pt">El número de matrícula és <b>'+num+
+    question='<span class="pt">El nombre de matrícula és <b>'+num+
       '</b>. Quin valor representa la xifra de les '+posName+
       ' segons la posició que ocupa?</span>';
 
@@ -3482,7 +3482,7 @@ function updateSBar(){
 // Ordenar i comparar són variants d’una mateixa família.
 var adaptivePracticeFamilies={
   naturals:[[1,2],[3],[4],[5],['recta-graduada'],['dividend-desconegut'],['producte-descomposicio'],['operacions-valor-desconegut'],['interval-arrodoniment'],[1001],['nombres-amb-condicions'],['patrons-numerics']],
-  decimal_sys:[[1,4],[2],[3],['lectura-paraules-a-xifres'],[1002],['guionets-numerals-du-c'],['descomposicio-equivalent-reagrupament'],['equivalencia-ordres-posicionals'],[1001],['escriure-xifres-a-paraules'],['auditar-error-de-posicio']]
+  decimal_sys:[[1,4],[2,3],['lectura-paraules-a-xifres','escriure-xifres-a-paraules'],['guionets-numerals-du-c'],['descomposicio-equivalent-reagrupament'],['equivalencia-ordres-posicionals',1002,'auditar-error-de-posicio'],[1001]]
 };
 var adaptivePracticeSessions={};
 var ADAPTIVE_PRACTICE_THRESHOLDS={1:[3,6],2:[6,12]};
