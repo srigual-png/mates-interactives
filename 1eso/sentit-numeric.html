@@ -1403,7 +1403,7 @@ function genOpsType(type,practice=false){
     ];
 
   } else if(type===3){
-    diff=2;
+    diff=1;
     var a3=rnd(10,99),b3=rnd(100,999);
     correct=String(a3*b3);
 
@@ -1476,7 +1476,7 @@ function genOpsType(type,practice=false){
     ];
 
   } else {
-    diff=3;
+    diff=2;
     isProblem=true;
 
     var dies=rnd(5,30),torn=rnd(2,4),perTorn=rnd(100,500),
@@ -1531,9 +1531,9 @@ function genOpsType(type,practice=false){
 
 
 const OPS_PRACTICE_FAMILIES=[
-  [[1],[2],[3],[5],['triar-operacio']],
-  [[4],[6],['capses'],['compensacio']],
-  [[1001],['diagnosticar-divisio'],['reconstruir-total']]
+  [[1],[2],[3],['triar-operacio']],
+  [[4,'capses','diagnosticar-divisio'],[5],[6],['compensacio']],
+  [[1001],['reconstruir-total']]
 ];
 const OPS_THEORY_SECTIONS=Object.freeze({
   1:'sumar',2:'restar',3:'multiplicar',4:'divisio-entera',5:'cost-i-canvi',6:'produccio-per-torns',
