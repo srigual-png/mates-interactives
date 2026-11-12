@@ -149,6 +149,7 @@ Mostra determinista de tres generacions per família, amb enunciat, resposta i n
 |---|---|
 | `node --check scripts/comprova-enters-families.cjs` | PASS |
 | `node scripts/comprova-enters-families.cjs` | PASS |
+| GitHub Actions · “Verifica inventaris fase A” | PASS · run 14 (commit de la branca) |
 | Rutes E01–E17 | 4.250 generacions (250 per ruta), oracles matemàtics independents, opcions/correctors i acord amb el classificador |
 | Raonament amb límits | 250 generacions, recompte independent de les 6 permutacions |
 | Variants contextuals | 1.250 generacions (250 per variant, cinc variants), resposta i nivell |
