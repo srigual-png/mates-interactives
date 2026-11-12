@@ -384,6 +384,122 @@
           ]
         }
       ]
+    },
+    {
+      "id": "1eso/numeric/jerarquia",
+      "course": "1r ESO",
+      "sense": "Numèric",
+      "topic": "Jerarquia d'operacions",
+      "code_topic_id": "jerarquia",
+      "status": "validat",
+      "verified_on": "2026-11-12",
+      "pr": 14,
+      "merge_commit": "fdb76f5000a1e0d17caec94707b3317539974d38",
+      "validation": "10.500 exercicis generats en 42 rutes i 29.279 comprovacions-oracle superades localment amb Node.js, 0 errors; comprovació manual satisfactòria al navegador per l'usuari. No s'ha verificat la publicació a GitHub Pages ni la suite global.",
+      "families": [
+        {
+          "id": "precedencia-productes-i-operacions",
+          "name": "Precedència de productes i operacions",
+          "level": 1,
+          "generators": [
+            "1",
+            "2"
+          ]
+        },
+        {
+          "id": "operacions-equivalents-esquerra-dreta",
+          "name": "Operacions de la mateixa prioritat d'esquerra a dreta",
+          "level": 1,
+          "generators": [
+            "L01"
+          ]
+        },
+        {
+          "id": "identificar-o-fer-el-primer-pas",
+          "name": "Identificar o efectuar el primer pas",
+          "level": 1,
+          "generators": [
+            "F01",
+            "F02"
+          ]
+        },
+        {
+          "id": "potencies-dins-expressions-combinades",
+          "name": "Potències dins d'expressions combinades",
+          "level": 2,
+          "generators": [
+            "3",
+            "6",
+            "B1",
+            "B2",
+            "B3",
+            "jerarquia-1",
+            "jerarquia-2",
+            "jerarquia-3"
+          ]
+        },
+        {
+          "id": "operar-amb-parentesis-i-claudators",
+          "name": "Operar amb parèntesis i claudàtors",
+          "level": 2,
+          "generators": [
+            "4",
+            "5",
+            "8",
+            "9"
+          ]
+        },
+        {
+          "id": "modelitzar-i-calcular-contextos",
+          "name": "Modelitzar i calcular problemes contextualitzats",
+          "level": 2,
+          "generators": [
+            "7",
+            "B4",
+            "jerarquia-4"
+          ]
+        },
+        {
+          "id": "comparar-efectes-dels-parentesis",
+          "name": "Comparar l'efecte dels parèntesis",
+          "level": 2,
+          "generators": [
+            "F03"
+          ]
+        },
+        {
+          "id": "trobar-signe-amb-resultat-objectiu",
+          "name": "Trobar el signe que assoleix un resultat objectiu",
+          "level": 2,
+          "generators": [
+            "F07"
+          ]
+        },
+        {
+          "id": "optimitzar-resultat-positiu",
+          "name": "Optimitzar el mínim resultat estrictament positiu",
+          "level": 3,
+          "generators": [
+            "parentesis-resultat-positiu"
+          ]
+        },
+        {
+          "id": "detectar-i-reparar-primer-error",
+          "name": "Detectar i reparar el primer error",
+          "level": 3,
+          "generators": [
+            "F05"
+          ]
+        },
+        {
+          "id": "reconstruir-expressio-amb-restriccions",
+          "name": "Reconstruir una expressió sota restriccions",
+          "level": 3,
+          "generators": [
+            "F06"
+          ]
+        }
+      ]
     }
   ]
 }
