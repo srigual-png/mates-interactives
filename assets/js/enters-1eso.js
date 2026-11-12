@@ -122,7 +122,7 @@
     }else if(n===12){
       const step=[1,2,5][r(0,2)],target=r(1,5);answer=a+target*step;
       question='Quin nombre representa el punt A?'+recta(a,step,target);
-      solution=[`Entre dues marques consecutives hi ha ${step} unitats.`,`Des de ${a}, avança ${target} intervals: ${a} + ${target} × ${step} = ${answer}.`];guide=['Troba l’escala amb dues referències i compta els intervals fins a A.'];opts=numericOptions(answer,[a+target,a+(target-1)*step,a+(target+1)*step]);key=[a,step,target];
+      solution=[`Entre dues marques consecutives hi ha ${step} ${step===1?'unitat':'unitats'}.`,`Des de ${a}, avança ${target} intervals: ${a} + ${target} × ${step} = ${answer}.`];guide=['Troba l’escala amb dues referències i compta els intervals fins a A.'];opts=numericOptions(answer,[a+target,a+(target-1)*step,a+(target+1)*step]);key=[a,step,target];
     }else if(n===13){
       b=r(1,12);c=r(1,12);const end=a+b-c;answer=a;
       question=`La temperatura puja ${b} °C i després baixa ${c} °C. Al final és de ${end} °C. Quina temperatura hi havia al principi?`;
