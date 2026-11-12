@@ -16,7 +16,7 @@ function unitRandom() {
   return seed / 4294967296;
 }
 const buildOpts = (correct, wrongs) => [correct, ...wrongs.filter(value => value !== correct)].slice(0, 4);
-const checks = { spellingBoundaries: 0, generatedByType: {}, baseTypes: {}, positionalChanges: 0, positionalEquivalences: 0, constrainedConstruction: 0 };
+const checks = { spellingBoundaries: 0, generatedByType: {}, baseTypes: {}, positionalChanges: 0, positionalEquivalences: 0, auditOracles: 0, constrainedConstruction: 0 };
 const examples = {};
 const plain = value => String(value).replace(/<br\s*\/?\s*>/gi, ' ').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 
@@ -96,6 +96,20 @@ for (const type of practiceTypes) {
     const q = M.generate(type, random, buildOpts);
     assert(q.question && q.solution.length && q.guide.length, `contingut ${type}`);
     assert.equal(M.grade(q, q.correct).ok, true, `corrector ${type} #${i}`);
+    if (type === 'auditar-error-de-posicio') {
+      const text = plain(q.question);
+      const match = text.match(/nombre ([\d.]+)\. (.*?) 1\. Quin nombre representa/);
+      assert(match, `expressió de posicions recuperable #${i}`);
+      const target = Number(match[1].replace(/\./g, ''));
+      const terms = [...match[2].matchAll(/(\d+) × ([\d.]+)/g)];
+      assert(terms.length > 0, `termes de l’expressió #${i}`);
+      const represented = terms.reduce((sum, term) => sum + Number(term[1]) * Number(term[2].replace(/\./g, '')), 0);
+      const pair = q.correct.match(/^\(([\d.]+); ([\d.]+)\)$/);
+      assert(pair, `parell ordenat #${i}`);
+      assert.equal(Number(pair[1].replace(/\./g, '')), represented, `valor reconstruït independent #${i}`);
+      assert.equal(Number(pair[2].replace(/\./g, '')), target - represented, `diferència reconstruïda independent #${i}`);
+      checks.auditOracles++;
+    }
     checks.generatedByType[type] = (checks.generatedByType[type] || 0) + 1;
     if (i < 3) sampleRows.push({ question: plain(q.question), answer: q.correct });
   }
