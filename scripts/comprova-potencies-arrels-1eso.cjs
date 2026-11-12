@@ -11,7 +11,8 @@ const familyMatch=difficulty.match(/const POTENCIES_FAMILY_SPECS=freeze\(([\s\S]
 const families=Function('return ('+familyMatch[1]+')')();assert.deepEqual(families.map(f=>f.level),[1,1,1,1,2,2,2,2,3,3]);assert.deepEqual(families.map(f=>f.practiceTypes.length),[2,2,2,2,1,1,1,1,1,1]);
 const ids=families.flatMap(f=>f.generators);assert.equal(ids.length,17);assert.equal(new Set(ids).size,17,'cap generador comptat dues vegades');
 const levels=Object.fromEntries(families.flatMap(f=>f.generators.map(id=>[id,f.level])));
-const legacy=difficulty.match(/"potencies":\[\[([^\]]*)\],\[([^\]]*)\],\[([^\]]*)\]\]/);assert(legacy,'mapa compartit');assert.deepEqual(legacy.slice(1).map(x=>x?Function('return ['+x+']')():[]),[[1,2,3,4,5,6,7],[],[]]);
+const firstNumeric=difficulty.slice(difficulty.indexOf('const FIRST_NUMERIC_LEVELS='));assert(firstNumeric!==difficulty,'mapa de 1r ESO');
+const legacy=firstNumeric.match(/"potencies":\[\[([^\]]*)\],\[([^\]]*)\],\[([^\]]*)\]\]/);assert(legacy,'mapa compartit');assert.deepEqual(legacy.slice(1).map(x=>x?Function('return ['+x+']')():[]),[[1,2,3,4,5,6,7],[],[]]);
 assert(difficulty.includes('POTENCIES_FAMILY_SPECS.find(row=>row.generators.includes(key))'),'classificador comparteix les famílies');assert(difficulty.includes('potenciesFamilies:POTENCIES_FAMILY_SPECS'),'famílies exposades a la pràctica');
 const groupMatch=html.match(/const POTENCIES_PRACTICE_FAMILIES=\[1,2,3\]\.map\(level=>\s*MIDifficulty\.potenciesFamilies\.filter\(family=>family\.level===level\)\.map\(family=>family\.practiceTypes\)\s*\);/);assert(groupMatch,'pràctica derivada del classificador');
 assert.deepEqual([1,2,3].map(n=>families.filter(f=>f.level===n).length),[4,4,2]);
