@@ -598,6 +598,7 @@
       if(number===1&&options.sense==='numeric'&&t.id==='naturals'&&Object.hasOwn(NATURAL_PRACTICE_LEVELS,q.type))return NATURAL_PRACTICE_LEVELS[q.type];
       if(number===1&&options.sense==='numeric'&&t.id==='ops'&&Object.hasOwn(OPS_PRACTICE_LEVELS,q.type))return OPS_PRACTICE_LEVELS[q.type];
       if(number===1&&options.sense==='numeric'&&t.id==='decimal_sys'&&Object.hasOwn(DECIMAL_PRACTICE_LEVELS,q.type))return DECIMAL_PRACTICE_LEVELS[q.type];
+      if(number===1&&options.sense==='numeric'&&t.id==='jerarquia'&&root.MIJerarquia){const key=q.reasoningFamily||q.variantId||q.type;const assigned=root.MIJerarquia.levelFor(key);if(assigned)return assigned;}
       if(number===1&&options.sense==='numeric'&&t.id==='potencies'){
         const key=q.reasoningFamily||q.variantId||q.type;
         const family=POTENCIES_FAMILY_SPECS.find(row=>row.generators.includes(key));
