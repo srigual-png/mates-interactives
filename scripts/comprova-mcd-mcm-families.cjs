@@ -27,8 +27,10 @@ async function main(){
         check(valid.length===1&&String(valid[0])===String(q.correct),'Una resposta correcta i distractors rebutjats: '+q.type);
       };
       const operands=source=>{
-        const m=source.match(/(?:MCD|mcm)\((\d+)\s*,\s*(\d+)(?:\s*,\s*(\d+))?\)/i);
-        return m?[Number(m[1]),Number(m[2]),...(m[3]?[Number(m[3])]:[])]:null;
+        const functional=source.match(/(?:MCD|mcm)\(\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*(\d+))?\s*\)/i);
+        if(functional)return [Number(functional[1]),Number(functional[2]),...(functional[3]?[Number(functional[3])]:[])];
+        const verbal=source.match(/\b(?:MCD|mcm)\s+de\s+(\d+)((?:,\s*\d+|\s+i\s+\d+){1,2})/i);
+        return verbal?verbal[0].match(/\d+/g).map(Number):null;
       };
       const checkFactorField=field=>{
         const target=field.value,text=factorText(target);
