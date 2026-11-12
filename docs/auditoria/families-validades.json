@@ -112,6 +112,81 @@
           "reason": "Variant conservada de patrons del sentit algebraic; no es compta com a família nova de Naturals."
         }
       ]
+    },
+    {
+      "id": "1eso/numeric/decimal_sys",
+      "course": "1r ESO",
+      "sense": "Numèric",
+      "topic": "Sistema de numeració decimal",
+      "code_topic_id": "decimal_sys",
+      "status": "validat",
+      "verified_on": "2026-11-12",
+      "pr": 8,
+      "merge_commit": "b4aecbe600db27a1e21d3e5d41584758e21a4c8f",
+      "validation": "2.274 comprovacions superades amb Node.js al clon local; exercicis revisats per l'usuari al navegador. No consta una prova integral automatitzada de navegador.",
+      "families": [
+        {
+          "id": "valor-posicional",
+          "name": "Valor posicional de xifres",
+          "level": 1,
+          "generators": [
+            "1",
+            "4"
+          ]
+        },
+        {
+          "id": "composicio-descomposicio",
+          "name": "Composició i descomposició posicional",
+          "level": 1,
+          "generators": [
+            "2",
+            "3"
+          ]
+        },
+        {
+          "id": "lectura-escriptura-catala",
+          "name": "Lectura i escriptura de nombres en català",
+          "level": 1,
+          "generators": [
+            "lectura-paraules-a-xifres",
+            "escriure-xifres-a-paraules"
+          ]
+        },
+        {
+          "id": "grafia-duc",
+          "name": "Grafia dels numerals i regla D-U-C",
+          "level": 1,
+          "generators": [
+            "guionets-numerals-du-c"
+          ]
+        },
+        {
+          "id": "reagrupament",
+          "name": "Descomposició equivalent amb reagrupament",
+          "level": 2,
+          "generators": [
+            "descomposicio-equivalent-reagrupament"
+          ]
+        },
+        {
+          "id": "equivalencies-posicionals",
+          "name": "Equivalències i efectes de la posició",
+          "level": 2,
+          "generators": [
+            "equivalencia-ordres-posicionals",
+            "1002",
+            "auditar-error-de-posicio"
+          ]
+        },
+        {
+          "id": "construccio-restriccions",
+          "name": "Construcció de nombres amb restriccions",
+          "level": 3,
+          "generators": [
+            "1001"
+          ]
+        }
+      ]
     }
   ]
 }
