@@ -33,7 +33,7 @@ vm.runInContext(extract('function genJerarquiaPractice(', 'function genDivisPrac
 const MI = context.MIJerarquia;
 function rng(seed) { let x = seed >>> 0; return (min, max) => { x = (1664525 * x + 1013904223) >>> 0; return min + (x % (max - min + 1)); }; }
 function mathEval(source) {
-  const s = String(source).replace(/[×xX·⋅]/g,'*').replace(/[−–]/g,'-').replace(/[÷:]/g,'/').replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, c => '^' + '⁰¹²³⁴⁵⁶⁷⁸⁹'.indexOf(c));
+  const s = String(source).replace(/[×xX·⋅]/g,'*').replace(/[−–]/g,'-').replace(/[÷:]/g,'/').replace(/\[/g,'(').replace(/\]/g,')').replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, c => '^' + '⁰¹²³⁴⁵⁶⁷⁸⁹'.indexOf(c));
   const tokens = s.match(/\d+|[()+\-*/^]/g) || [];
   let i=0; const seen=[];
   const precedence={'+':1,'-':1,'*':2,'/':2,'^':3};
@@ -72,8 +72,8 @@ function checkLevels() {
 }
 function verifyCore(type, q) {
   if(type===7) {
-    const m=plain(q.question).match(/val (\d+) €.*compra (\d+).*germà (\d+).*descompte de (\d+) €.*enviament de (\d+) €/);
-    assert(!!m,'No s’han pogut llegir els imports del problema contextual.');
+    const m=plain(q.question).match(/val (\d+) €.*compra (\d+).*germà (\d+).*descompte de (\d+) €.*afegeixen (\d+) €/);
+    assert(!!m,'No es poden llegir els imports contextuals: '+plain(q.question));
     const expected=Number(m[1])*(Number(m[2])+Number(m[3]))-Number(m[4])+Number(m[5]);
     assert(Number.parseInt(q.correct,10)===expected,'Resultat contextual incorrecte.');
   } else {
@@ -88,7 +88,7 @@ function oracleF07(q) {
   const vals={'+':a+b*c,'−':a-b*c,'×':a*b*c,'÷':a/(b*c)};
   const valid=Object.entries(vals).filter(([,v])=>Number.isSafeInteger(v)&&v===target);
   assert(valid.length===1,'F07 no té un únic signe correcte.');
-  assert(String(q.correct).replace('-','−')===valid[0][0],'F07 ha triat el signe incorrecte.');
+  assert(valid.length===1&&String(q.correct).replace('-','−')===valid[0][0],'F07 incorrecte: '+plain(q.question)+'; resposta '+q.correct+'; signes vàlids '+JSON.stringify(valid));
 }
 function oraclePositive(data) {
   const {a,b,c,d}=data;
@@ -137,7 +137,9 @@ function verifySpecial(type, q) {
     assert(q.correct!==undefined,'Falta resposta al generador '+type+'.');
   if(type==='F01'||type==='F02') {
     const source=q.practiceKey, answer=String(q.correct);
-    assert(source&&answer&&source.includes(answer),'F01/F02 no selecciona una expressió del procediment.');
+    assert(source&&answer,'F01/F02 no retorna una resposta.');
+    if(type==='F01')assert(source.includes(answer),'F01 no selecciona una operació de l’enunciat.');
+    else assert(mathEval(source).value===mathEval(answer).value&&q.solution[1].includes(answer),'F02 no conserva el valor en fer un únic pas.');
     const correct=MI.matches(q.jerarquiaAnswer,answer);
     assert(correct,'La forma de resposta del primer pas no passa la verificació.');
   }
@@ -172,5 +174,7 @@ runGenerator('reasoning-parentesis-resultat-positiu',i=>context.MIFirstNumericTa
   assert(Number(q.correct)===expected&&expected>0,'L’òptim positiu no coincideix amb l’oracle independent.');
   assert(MI.levelFor(q.reasoningFamily)===3&&q.diff===3,'Nivell incorrecte al raonament d’òptim positiu.');
 });
-console.log(JSON.stringify({summary:{generators:tests.generators,generations:tests.generated,oracleChecks:tests.oracleChecks,failures:tests.failures.length},samples},null,2));
+const familyExamples=MI.familySpecs.map((family,index)=>({family:family.id,level:family.level,examples:Array.from({length:3},(_,i)=>{const type=family.practiceTypes[i%family.practiceTypes.length];const q=generatePractice(type,family.level,rng(880000+index*11+i));return {generator:type,question:plain(q.question),answer:plain(q.correct),level:q.taskDifficulty};})}));
+const failureGroups=Object.fromEntries([...new Set(tests.failures.map(x=>x.split(' #')[0]))].map(k=>[k,tests.failures.filter(x=>x.startsWith(k+' #')).length]));
+console.log(JSON.stringify({summary:{generators:tests.generators,generations:tests.generated,oracleChecks:tests.oracleChecks,failures:tests.failures.length,failureGroups},familyExamples,samples},null,2));
 if(tests.failures.length){console.error(tests.failures.slice(0,25).join('\n'));process.exitCode=1;}
