@@ -156,7 +156,7 @@ Mostra determinista de tres generacions per família, amb enunciat, resposta i n
 | Cobertura/catalogació | 17 generadors assignats una sola vegada a 15 famílies; distribució 8/6/1; quotes d’examen 6/3/3 |
 | Casos límit | zero, signe menys Unicode, rebuig de decimals i unitats incompatibles; concordança “1 unitat” |
 | `node --check scripts/comprova-enters-1eso.cjs` | PASS |
-| `node scripts/comprova-enters-1eso.cjs` | NO EXECUTAT fins al final: Playwright no ha pogut iniciar Edge en aquest Windows. El perfil temporal del navegador falla en substituir `SiteList-Enterprise.json` i `SiteList-Consumer.json` (error -5), abans de carregar la pàgina. |
+| `node scripts/comprova-enters-1eso.cjs` | BLOQUEJADA abans de carregar la pàgina: s’ha intentat executar, però Playwright no ha pogut iniciar Edge. El perfil temporal falla en substituir `SiteList-Enterprise.json` i `SiteList-Consumer.json` (error -5). |
 
 La prova nova s’ha executat amb Node 24.22.1 sobre còpies temporals dels fitxers exactes de la branca. El fall d’Edge afecta la prova d’integració del navegador, no les comprovacions de generació que han passat. No s’ha fet una inspecció visual interactiva del tema per aquest bloqueig.
 
