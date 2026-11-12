@@ -1210,7 +1210,7 @@ function genDecimalSysType(type,practice=false){
         dm3=Math.floor(n3/10000)%10,
         cm3=Math.floor(n3/100000);
 
-    question='Quin nombre correspon a:<br><span class="fc">'+cm3+' cm, '+dm3+' dm, '+mi3+' m, '+ce3+' c, '+de3+' d, '+u3+' u</span>';
+    question='Quin nombre correspon a aquestes xifres?<br><span class="fc">'+cm3+' centenes de miler, '+dm3+' desenes de miler, '+mi3+' unitats de miler, '+ce3+' centenes, '+de3+' desenes i '+u3+' unitats</span>';
 
     correct=String(n3);
 
@@ -1261,7 +1261,7 @@ function genDecimalSysType(type,practice=false){
     var digitPos=posData[pos].digit;
     practiceData={n:num,digit:digitPos,position:pos};
 
-    question='<span class="pt">El número de matrícula és <b>'+num+
+    question='<span class="pt">El nombre de matrícula és <b>'+num+
       '</b>. Quin valor representa la xifra de les '+posName+
       ' segons la posició que ocupa?</span>';
 
