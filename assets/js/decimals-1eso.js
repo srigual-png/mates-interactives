@@ -2,7 +2,31 @@
 (function(root){
 'use strict';
 const anchors=['sumar-decimals','multiplicar-decimals','arrodonir','fraccio-a-decimal','decimal-a-fraccio','compra-canvi','problemes','error-absolut','error-relatiu','divisio-unitaria','repartiment-residu','mitjana-decimal','garanties-volum','valor-posicional','comparar','recta-decimal','restar-decimals','dividir','potencies-deu','entre-decimals','reconstruir','errors-decimals','estimar'];
-const families=[[1,2,3,4,5,8,14,15,16,17,19],[6,7,9,10,11,12,18,20],[13,21,22,23]].map(g=>g.map(n=>['D'+String(n).padStart(2,'0')]));
+const familySpecs=[
+ {id:'operacions-addicio-resta-decimals',level:2,generators:['D01','D17'],objective:'Sumar i restar decimals alineant les comes i reagrupant quan cal.'},
+ {id:'multiplicacio-decimals',level:2,generators:['D02','D07'],objective:'Multiplicar nombres decimals; inclou factors decimals i multiplicadors naturals contextualitzats.'},
+ {id:'arrodoniment-decimals',level:1,generators:['D03'],objective:'Arrodonir un decimal a una precisió indicada.'},
+ {id:'conversio-fraccio-decimal',level:2,generators:['D04','D05'],objective:'Convertir entre fraccions amb decimal exacte i la seva representació decimal.'},
+ {id:'compra-i-canvi',level:2,generators:['D06'],objective:'Resoldre una compra sumant imports i calculant el canvi.'},
+ {id:'error-absolut',level:1,generators:['D08'],objective:'Calcular la distància entre el valor exacte i una aproximació.'},
+ {id:'error-relatiu-percentual',level:2,generators:['D09'],objective:'Expressar l’error relatiu com a percentatge del valor exacte.'},
+ {id:'divisio-unitaria-contextual',level:1,generators:['D10'],objective:'Trobar el valor d’una unitat dividint un total decimal per un nombre natural.'},
+ {id:'repartiment-amb-residu-decimal',level:2,generators:['D11'],objective:'Trobar quants trossos complets s’obtenen i interpretar el residu decimal.'},
+ {id:'mitjana-decimal',level:2,generators:['D12'],objective:'Calcular la mitjana de mesures o notes decimals, exacta o arrodonida.'},
+ {id:'garantia-amb-error-de-mesura',level:3,generators:['D13'],objective:'Raonar amb els extrems d’un marge d’error per satisfer simultàniament dues restriccions.'},
+ {id:'valor-posicional-decimal',level:1,generators:['D14'],objective:'Identificar el valor o la posició d’una xifra decimal.'},
+ {id:'comparacio-i-ordenacio-decimal',level:1,generators:['D15'],objective:'Comparar i ordenar decimals mitjançant representacions equivalents.'},
+ {id:'recta-numerica-decimal',level:1,generators:['D16'],objective:'Interpretar una marca decimal en una recta amb intervals iguals.'},
+ {id:'divisio-decimal-per-decimal',level:2,generators:['D18'],objective:'Dividir decimals convertint el divisor en enter amb un factor comú.'},
+ {id:'operar-amb-potencies-de-deu',level:1,generators:['D19'],objective:'Multiplicar o dividir un decimal per una potència de deu.'},
+ {id:'construccio-entre-decimals',level:1,generators:['D20'],objective:'Construir un decimal amb precisió prescrita entre dos nombres.'},
+ {id:'reconstruccio-xifra-amb-cotes',level:2,generators:['D21'],objective:'Reconstruir una xifra que satisfà dues desigualtats estrictes.'},
+ {id:'diagnosi-errors-operacions-decimals',level:2,generators:['D22'],objective:'Detectar la regla vulnerada en un error de càlcul decimal i corregir-lo.'},
+ {id:'estimacio-producte-decimal',level:3,generators:['D23'],objective:'Acotar un producte decimal comparant-ne els factors amb nombres enters de referència.'}
+];
+const generatorSpecs=new Map(familySpecs.flatMap(spec=>spec.generators.map(generator=>[generator,spec])));
+function familyInfo(key){return familySpecs.find(spec=>spec.id===key)||generatorSpecs.get(String(key).startsWith('D')?String(key):'D'+String(key).padStart(2,'0'))||null;}
+const families=[1,2,3].map(level=>familySpecs.filter(spec=>spec.level===level).map(spec=>spec.generators));
 const fmt=(n,p=0)=>{if(!Number.isSafeInteger(n))throw Error('Escala no entera');const sign=n<0?'-':'';const s=String(Math.abs(n)).padStart(p+1,'0');return sign+(p?s.slice(0,-p)+','+s.slice(-p):s);};
 function parse(s){const m=String(s??'').trim().match(/^([+-]?)(\d+)(?:[.,](\d+))?$/);if(!m||m[2].length+(m[3]||'').length>14)return null;return {n:Number((m[1]==='-'?'-':'')+m[2]+(m[3]||'')),p:(m[3]||'').length};}
 function equal(a,b){a=parse(a);b=parse(b);return !!a&&!!b&&BigInt(a.n)*10n**BigInt(b.p)===BigInt(b.n)*10n**BigInt(a.p);}
@@ -19,10 +43,10 @@ function matches(model,input){
 function remainder(length,piece){if(!Number.isSafeInteger(length)||!Number.isSafeInteger(piece)||length<0||piece<=0)throw Error('Longitud invàlida');return {q:Math.floor(length/piece),r:length%piece};}
 function recta(start,target){const alt=`Recta de ${fmt(start,2)} a ${fmt(start+10,2)}, amb deu intervals iguals. A és la marca ${target} després de l’extrem esquerre.`;return `<svg viewBox="0 0 460 100" style="width:100%;max-width:600px;height:auto" role="img" aria-label="${alt}"><title>${alt}</title><line x1="25" y1="40" x2="435" y2="40" stroke="currentColor"/>`+Array.from({length:11},(_,i)=>`<line x1="${25+41*i}" y1="32" x2="${25+41*i}" y2="48" stroke="currentColor"/>`+(i===target?`<circle cx="${25+41*i}" cy="40" r="5" fill="currentColor"/><text x="${25+41*i}" y="22" text-anchor="middle" fill="currentColor">A</text>`:'')+([0,10].includes(i)?`<text x="${25+41*i}" y="78" text-anchor="middle" fill="currentColor" font-size="16">${fmt(start+i,2)}</text>`:'')).join('')+'</svg>';}
 function generate(id,r=(a,b)=>a+Math.floor(Math.random()*(b-a+1))){
- const n=Number(String(id).replace('D','')),family='D'+String(n).padStart(2,'0'),level=families.findIndex(g=>g.some(f=>f[0]===family))+1;
+ const n=Number(String(id).replace('D','')),family='D'+String(n).padStart(2,'0'),spec=generatorSpecs.get(family);if(!spec)throw Error('Identificador de generador desconegut: '+family);const level=spec.level;
  let a,b,c,question,answer,solution,model,choices,key,guide;
  const scalar=(value,label='Resultat',extra={})=>({kind:'fields',fields:[field(label,value,extra)]});
- if(n===1||n===17){const p=r(2,3);a=r(2,9)*10**p+r(1,9);b=r(1,n===17?Math.floor(a/10**(p-1))-1:9)*10**(p-1);answer=fmt(n===1?a+b:a-b,p);question=`Calcula ${fmt(a,p)} ${n===1?'+':'−'} ${fmt(b/10,p-1)}.`;solution=[`Iguala les posicions decimals: ${fmt(a,p)} ${n===1?'+':'−'} ${fmt(b,p)}.`,n===17?'Reagrupa una unitat en deu dècimes i una dècima en deu centèsimes quan calgui.':'Suma cada columna alineant les comes.',`Resultat: ${answer}.`];key=[a,b,p];
+ if(n===1||n===17){const p=r(2,3);a=r(2,9)*10**p+r(1,9);b=r(1,n===17?Math.floor(a/10**(p-1))-1:9)*10**(p-1);answer=fmt(n===1?a+b:a-b,p);question=`Calcula ${fmt(a,p)} ${n===1?'+':'−'} ${fmt(b/10,p-1)}.`;solution=[`Iguala les posicions decimals: ${fmt(a,p)} ${n===1?'+':'−'} ${fmt(b,p)}.`,n===17?'Reagrupa una unitat en deu dècimes i una dècima en deu centèsimes quan calgui.':'Suma cada columna alineant les comes.',`Resultat: ${answer}.`];key=[n,a,b,p];
  }else if(n===2){a=r(11,89);b=r(11,49);answer=fmt(a*b,2);question=`Calcula ${fmt(a,1)} × ${fmt(b,1)}.`;solution=[`Sense comes: ${a} × ${b} = ${a*b}.`,`Els factors tenen dues xifres decimals en total: ${answer}.`];key=[a,b];
  }else if(n===3){a=r(1000,99999);b=r(0,2);answer=round(fmt(a,3),b);model=scalar(answer,'Nombre arrodonit',{precision:b});question=`Arrodoneix ${fmt(a,3)} a ${['les unitats','les dècimes','les centèsimes'][b]}. Escriu ${b} xifres decimals.`;const next=Math.floor(a/10**(2-b))%10;solution=[`La xifra següent és ${next}: ${next>=5?'augmenta una unitat la darrera posició conservada':'conserva la darrera xifra'}.`,`Resultat amb ${b} decimals: ${answer}.`];key=[a,b];
  }else if(n===4||n===5){const ds=[2,4,5,8,10,20,25];b=ds[r(0,6)];a=r(1,b-1);const gcd=(x,y)=>y?gcd(y,x%y):x,g=gcd(a,b);a/=g;b/=g;const decimal=fmt(a*(1000/b),3).replace(/0+$/,'').replace(/,$/,'');answer=n===4?decimal:`${a}/${b}`;question=n===4?`Converteix ${a}/${b} a decimal.`:`Escriu ${decimal} com a fracció irreductible.`;if(n===5)model={kind:'fraction',n:a,d:b};solution=[`${decimal} = ${a*(1000/b)}/1000 = ${a}/${b}.`,`Divideix numerador i denominador pel seu MCD fins que no tinguin cap divisor comú.`];key=[a,b];
@@ -49,7 +73,7 @@ function generate(id,r=(a,b)=>a+Math.floor(Math.random()*(b-a+1))){
  guide??=[hints[n-1]];
  if(!choices){const value=parse(answer);if(!value)choices=[answer,'1/2','1/3','1/5'].filter((v,i,l)=>l.indexOf(v)===i);else choices=[answer,fmt(value.n+1,value.p),fmt(value.n+10,value.p),fmt(value.n+100,value.p)];if(model.kind==='fraction')choices=[answer,`${model.n+1}/${model.d}`,`${model.n+2}/${model.d}`,`${model.n+3}/${model.d}`];if(model.fields?.length===2){const f=model.fields;choices=[answer,`${Number(f[0].value)+1}; ${f[1].value}`,`${f[0].value}; ${fmt(parse(f[1].value).n+1,parse(f[1].value).p)}`,`${Number(f[0].value)+2}; ${f[1].value}`];}}
  for(let i=choices.length-1;i>0;i--){const j=r(0,i);[choices[i],choices[j]]=[choices[j],choices[i]];}
- return {type:family,decimalsFamily:family,decimalsTheory:anchors[n-1],decimalsAnswer:model,decimalsFields:model.fields?.length>1||model.fields?.[0].options?model.fields:undefined,decimalsOptionLabels:model.fields?.length>1?model.fields.map(f=>f.label):undefined,question,correct:answer,options:choices,guide,solution,taskDifficulty:level,diff:level,isProblem:[6,7,10,11,12,13].includes(n),practiceKey:family+':'+JSON.stringify(key)};
+ return {type:family,decimalsFamily:spec.id,decimalsGenerator:family,decimalsTheory:anchors[n-1],decimalsAnswer:model,decimalsFields:model.fields?.length>1||model.fields?.[0].options?model.fields:undefined,decimalsOptionLabels:model.fields?.length>1?model.fields.map(f=>f.label):undefined,question,correct:answer,options:choices,guide,solution,taskDifficulty:level,diff:level,isProblem:[6,7,10,11,12,13].includes(n),practiceKey:spec.id+':'+family+':'+JSON.stringify(key)};
 }
-root.MIDecimals=Object.freeze({anchors,families,fmt,parse,equal,round,matches,remainder,recta,generate});
+root.MIDecimals=Object.freeze({anchors,families,familySpecs,familyInfo,fmt,parse,equal,round,matches,remainder,recta,generate});
 })(typeof window!=='undefined'?window:globalThis);
