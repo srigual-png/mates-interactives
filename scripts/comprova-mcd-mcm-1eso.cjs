@@ -76,8 +76,8 @@ async function main(){
       check(a6.correct==='23'&&accepts(a6,'23 minuts')&&!accepts(a6,'11'),'A6 límit estricte');
 
       const groups=adaptivePracticeGroups(topic), feedbackLinks={};
-      check(groups.map(level=>level.length).join()==='3,6,3','Catàleg');
-      for(const [level,families] of groups.entries())for(const [type] of families){
+      check(groups.map(level=>level.length).join()==='3,6,2','Catàleg');
+      for(const [level,families] of groups.entries())for(const family of families)for(const type of family){
         for(const random of [(min,max)=>min,(min,max)=>max,rnd,rnd]){
           const q=genMcdPractice(type,level+1,random);
           check(q.options.length===4&&new Set(q.options).size===4&&q.options.filter(v=>accepts(q,v)).length===1,'Opcions de '+type);
