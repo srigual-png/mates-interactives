@@ -9,7 +9,7 @@ const hierarchySource = fs.readFileSync(path.join(root, 'assets/js/jerarquia-1es
 const reasoningSource = fs.readFileSync(path.join(root, 'assets/js/raonament-numeric-1eso.js'), 'utf8');
 const difficultySource = fs.readFileSync(path.join(root, 'assets/js/dificultat-mi.js'), 'utf8');
 const tests = { generators: 0, generated: 0, oracleChecks: 0, failures: [] };
-const samples = [];
+const samples = {};
 function assert(ok, message) { if (!ok) throw new Error(message); tests.oracleChecks++; }
 function count(ok, message) { tests.generated++; if (!ok) throw new Error(message); }
 function extract(start, end) {
@@ -85,7 +85,7 @@ function oracleF07(q) {
   const m=plain(q.question).match(/(\d+) □ (\d+) × (\d+) = (\d+)/);
   assert(!!m,'No es pot llegir F07.');
   const [a,b,c,target]=m.slice(1).map(Number);
-  const vals={'+':a+b*c,'−':a-b*c,'×':a*b*c,'÷':a/(b*c)};
+  const vals={'+':a+b*c,'−':a-b*c,'×':a*b*c,'÷':(a/b)*c};
   const valid=Object.entries(vals).filter(([,v])=>Number.isSafeInteger(v)&&v===target);
   assert(valid.length===1,'F07 no té un únic signe correcte.');
   assert(valid.length===1&&String(q.correct).replace('-','−')===valid[0][0],'F07 incorrecte: '+plain(q.question)+'; resposta '+q.correct+'; signes vàlids '+JSON.stringify(valid));
