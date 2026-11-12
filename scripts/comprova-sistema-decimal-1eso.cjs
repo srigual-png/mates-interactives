@@ -75,6 +75,8 @@ if (process.env.MI_SKIP_CLASSIFICATION_SOURCE_CHECKS !== '1') {
   const generator = page.slice(page.indexOf('function genDecimalSysType'), page.indexOf('// ── GEN OPERACIONS'));
   assert(generator.includes("Quin és el valor posicional"), 'accentuació de l’enunciat');
   assert(generator.includes("'Posició: '"), 'accentuació de la solució');
+  assert(generator.includes('centenes de miler') && generator.includes('unitats de miler'), 'posicions escrites sense sigles ambigües');
+  assert(generator.includes('El nombre de matrícula és'), 'terminologia catalana a type 4');
   assert.equal((generator.match(/diff=1;/g) || []).length, 4, 'quatre generadors base N1');
   assert(!/diff=[23];/.test(generator), 'cap nivell intern divergent als generadors base');
   assert.equal(R.catalog.find(item => item.id === 'canvi-posicional').level, 2);
