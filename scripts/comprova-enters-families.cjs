@@ -41,13 +41,13 @@ function main(){
     assert(M.matches(q.entersAnswer,q.correct),'Canonical answer '+q.type);
   };
   const keyOf=q=>JSON.parse(q.practiceKey.slice(q.type.length+1));
-  assert.deepEqual(M.families.map(g=>g.length),[8,6,1],'Adaptive family distribution');
-  assert.deepEqual(difficulty.coverage(topic).types,[8,6,1],'Reviewed family coverage');
-  assert.deepEqual(difficulty.examPlan(topic).slots,[6,3,3],'Preserved topic exam quotas');
+  assert.deepEqual(Array.from(M.families,g=>g.length),[8,6,1],'Adaptive family distribution');
+  assert.deepEqual(Array.from(difficulty.coverage(topic).types),[8,6,1],'Reviewed family coverage');
+  assert.deepEqual(Array.from(difficulty.examPlan(topic).slots),[6,3,3],'Preserved topic exam quotas');
   assert.equal(M.familySpecs.length,15,'Family count');
   assert.equal(new Set(M.familySpecs.map(f=>f.id)).size,15,'Stable unique family IDs');
   const mapping=M.familySpecs.flatMap(f=>f.practiceTypes.map(type=>[type,f.level]));
-  assert.deepEqual(mapping.map(x=>x[0]).sort(),Array.from({length:17},(_,i)=>'E'+String(i+1).padStart(2,'0')).sort(),'All 17 generators assigned once');
+  assert.deepEqual(Array.from(mapping,x=>x[0]).sort(),Array.from({length:17},(_,i)=>'E'+String(i+1).padStart(2,'0')).sort(),'All 17 generators assigned once');
   assert.equal(new Set(mapping.map(x=>x[0])).size,17,'No practice generator counted twice');
   let practiceSamples=0;
   for(let n=1;n<=17;n++){
