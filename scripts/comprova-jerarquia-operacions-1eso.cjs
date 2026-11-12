@@ -32,6 +32,7 @@ vm.runInContext(extract('function genJerProb(', '// --- DIVISIBILITAT'), context
 vm.runInContext(extract('function genJerarquiaPractice(', 'function genDivisPractice('), context, {filename:'genJerarquiaPractice'});
 const MI = context.MIJerarquia;
 function rng(seed) { let x = seed >>> 0; return (min, max) => { x = (1664525 * x + 1013904223) >>> 0; return min + (x % (max - min + 1)); }; }
+function floatRng(seed) { let x=seed>>>0; return () => { x=(1664525*x+1013904223)>>>0; return x/4294967296; }; }
 function mathEval(source) {
   const s = String(source).replace(/[×xX·⋅]/g,'*').replace(/[−–]/g,'-').replace(/[÷:]/g,'/').replace(/\[/g,'(').replace(/\]/g,')').replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹]/g, c => '^' + '⁰¹²³⁴⁵⁶⁷⁸⁹'.indexOf(c));
   const tokens = s.match(/\d+|[()+\-*/^]/g) || [];
@@ -131,7 +132,11 @@ function verifySpecial(type, q) {
     assert(oracleRecon(numbers).some(x=>x.value===target),'L’oracle independent no valida la resposta F06.');
   } else if(type==='B4') {
     const m=String(q.correct).match(/^(.*?) = (\d+)$/);
-    assert(!!m&&mathEval(m[1]).value===Number(m[2]),'B4 expressió/igualtat incorrecta.');
+    const context=plain(q.question).match(/(\d+) lots.*?(\d+) punts bàsics.*?(\d+) punts extra.*?quadrat de (\d+)/);
+    assert(!!m&&!!context,'B4 no expressa les dades del context.');
+    const [packs,basic,extra,cost]=context.slice(1).map(Number);
+    const expected=packs*(basic+extra)-cost**2;
+    assert(mathEval(m[1]).value===Number(m[2])&&Number(m[2])===expected,'B4 expressió/igualtat incorrecta.');
   }
   if(type!=='F01'&&type!=='F02'&&type!=='F03'&&type!=='F05'&&type!=='F06'&&type!=='F07'&&type!=='B4')
     assert(q.correct!==undefined,'Falta resposta al generador '+type+'.');
@@ -144,10 +149,9 @@ function verifySpecial(type, q) {
     assert(correct,'La forma de resposta del primer pas no passa la verificació.');
   }
 }
-function record(label, q, oracle) { if(oracle) oracle(q); count(true,''); tests.oracleChecks++; if(samples[label].length<3)samples[label].push({question:plain(q.question),answer:plain(q.correct),level:q.taskDifficulty||q.diff||null}); }
+function record(label, q, oracle) { if(oracle) oracle(q); count(true,''); tests.oracleChecks++; }
 function runGenerator(label, make, oracle) {
   tests.generators++;
-  samples[label]=[];
   for(let i=0;i<250;i++) {
     const q=make(i);
     try { record(label,q,oracle); }
@@ -174,7 +178,7 @@ runGenerator('reasoning-parentesis-resultat-positiu',i=>context.MIFirstNumericTa
   assert(Number(q.correct)===expected&&expected>0,'L’òptim positiu no coincideix amb l’oracle independent.');
   assert(MI.levelFor(q.reasoningFamily)===3&&q.diff===3,'Nivell incorrecte al raonament d’òptim positiu.');
 });
-const familyExamples=MI.familySpecs.map((family,index)=>({family:family.id,level:family.level,examples:Array.from({length:3},(_,i)=>{const type=family.practiceTypes[i%family.practiceTypes.length];const q=generatePractice(type,family.level,rng(880000+index*11+i));return {generator:type,question:plain(q.question),answer:plain(q.correct),level:q.taskDifficulty};})}));
+const familyExamples=MI.familySpecs.map((family,index)=>({family:family.id,level:family.level,examples:Array.from({length:3},(_,i)=>{const type=family.practiceTypes[i%family.practiceTypes.length];const seed=880000+index*11+i;const q=type==='parentesis-resultat-positiu'?context.MIFirstNumericTasks.generate(type,floatRng(seed)):generatePractice(type,family.level,rng(seed));return {generator:type,question:plain(q.question),answer:plain(q.correct),level:q.taskDifficulty||q.diff};})}));
 const failureGroups=Object.fromEntries([...new Set(tests.failures.map(x=>x.split(' #')[0]))].map(k=>[k,tests.failures.filter(x=>x.startsWith(k+' #')).length]));
-console.log(JSON.stringify({summary:{generators:tests.generators,generations:tests.generated,oracleChecks:tests.oracleChecks,failures:tests.failures.length,failureGroups},familyExamples,samples},null,2));
+console.log(JSON.stringify({summary:{generators:tests.generators,generations:tests.generated,oracleChecks:tests.oracleChecks,failures:tests.failures.length,failureGroups},familyExamples},null,2));
 if(tests.failures.length){console.error(tests.failures.slice(0,25).join('\n'));process.exitCode=1;}
