@@ -1,9 +1,23 @@
 window.MIJerarquia = (() => {
-  const families = [
-    [[1, 2], ['L01'], ['F01']],
-    [[3], [4, 5], [6, 'B1', 'B2', 'B3'], [8, 9], ['B4'], ['F02'], ['F03'], ['F07']],
-    [['parentesis-resultat-positiu'], ['F05'], ['F06']]
-  ];
+  const familySpecs = Object.freeze([
+    {id:'precedencia-productes-i-operacions',level:1,generators:[1,2],practiceTypes:[1,2]},
+    {id:'operacions-equivalents-esquerra-dreta',level:1,generators:['L01'],practiceTypes:['L01']},
+    {id:'identificar-o-fer-el-primer-pas',level:1,generators:['F01','F02'],practiceTypes:['F01','F02']},
+    {id:'potencies-dins-expressions-combinades',level:2,generators:[3,6,'B1','B2','B3','jerarquia-1','jerarquia-2','jerarquia-3'],practiceTypes:[3,6,'B1','B2','B3']},
+    {id:'operar-amb-parentesis-i-claudators',level:2,generators:[4,5,8,9],practiceTypes:[4,5,8,9]},
+    {id:'modelitzar-i-calcular-contextos',level:2,generators:[7,'B4','jerarquia-4'],practiceTypes:[7,'B4']},
+    {id:'comparar-efectes-dels-parentesis',level:2,generators:['F03'],practiceTypes:['F03']},
+    {id:'trobar-signe-amb-resultat-objectiu',level:2,generators:['F07'],practiceTypes:['F07']},
+    {id:'optimitzar-resultat-positiu',level:3,generators:['parentesis-resultat-positiu'],practiceTypes:['parentesis-resultat-positiu']},
+    {id:'detectar-i-reparar-primer-error',level:3,generators:['F05'],practiceTypes:['F05']},
+    {id:'reconstruir-expressio-amb-restriccions',level:3,generators:['F06'],practiceTypes:['F06']}
+  ]);
+  const families = [1,2,3].map(level => familySpecs.filter(family=>family.level===level)
+    .map(family=>family.practiceTypes));
+  function levelFor(type) {
+    const family=familySpecs.find(row=>row.generators.includes(type));
+    return family ? family.level : null;
+  }
   const superscripts = '⁰¹²³⁴⁵⁶⁷⁸⁹';
   const precedence = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3};
   const operators = ['+', '−', '×', '÷'];
@@ -255,5 +269,5 @@ window.MIJerarquia = (() => {
     throw Error('Família de jerarquia desconeguda: ' + type);
   }
 
-  return {families, theorySections, generate, matches, lots, parse, evaluate, operatorSolutions, reconstructions};
+  return {families, familySpecs, levelFor, theorySections, generate, matches, lots, parse, evaluate, operatorSolutions, reconstructions};
 })();

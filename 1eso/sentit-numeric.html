@@ -1826,7 +1826,7 @@ function genJerarquia(type=rnd(1,9),random=rnd){
     ];
 
   } else if(type===6){
-    diff=3;
+    diff=2;
     var a6=random(2,5),b6=random(3,5),c6=random(2,6),d6=random(2,6),e6=random(2,5),f6=random(1,9);
     var pow6=b6*b6,par6=c6+d6,res6=a6*pow6-par6*e6+f6;
     if(res6<f6){
@@ -1860,7 +1860,7 @@ function genJerarquia(type=rnd(1,9),random=rnd){
     ];
 
   } else if(type===7){
-    diff=3;
+    diff=2;
     isProblem=true;
 
     var pU=random(4,14),q1=random(2,6),q2=random(2,6),desc=random(2,7),env=random(1,5);
@@ -1889,7 +1889,7 @@ function genJerarquia(type=rnd(1,9),random=rnd){
       'Amb enviament: '+(cost-desc)+'+'+env+'='+tot4
     ];
   } else if(type===8){
-    diff=3;
+    diff=2;
     var a8=random(2,6),b8=random(2,9),c8=random(2,8),d8=random(1,5),e8=random(1,9);
     var inner8=c8+d8,outer8=b8+inner8,res8=a8*outer8-e8;
     question='Calcula amb parèntesis i claudàtors:<br><span class="fc">'+a8+' x ['+b8+' + ('+c8+' + '+d8+')] - '+e8+'</span>';
@@ -1903,7 +1903,7 @@ function genJerarquia(type=rnd(1,9),random=rnd){
       'Resta final: '+(a8*outer8)+' - '+e8+' = '+res8
     ];
   } else {
-    diff=3;
+    diff=2;
     var a9=random(2,5),b9=random(2,7),c9=random(2,6),d9=random(2,6),e9=random(3,5),f9=random(1,9);
     var inner9=c9+d9,pow9=e9*e9,product9=b9*inner9,outer9=product9+pow9,res9=a9*outer9-f9;
     question='Calcula amb parèntesis i claudàtors:<br><span class="fc">'+a9+' x ['+b9+' x ('+c9+' + '+d9+') + '+e9+'\u00b2] - '+f9+'</span>';
@@ -2752,7 +2752,7 @@ function genJerProb(type=ampNextType('jerarquia',4),random=rnd){
     answer={check:function(v){return numEq(v,res2);},val:String(res2)};
     hints=['Potència: '+b2+'² = '+p,'Parèntesi: '+c2+' − '+d2+' = '+par,'Productes: '+a2+' × '+p+' = '+(a2*p)+' i '+par+' × '+e2+' = '+(par*e2),'Suma final: '+(a2*p)+' + '+(par*e2)+' = '+res2];
   }else if(type===3){
-    diff=3;
+    diff=2;
     var a3=random(2,5),b3=random(2,4),c3=random(2,5),d3=random(2,4),e3=random(2,5),f3=random(1,6),inside=b3*b3+c3*d3;
     f3=Math.min(f3,Math.floor((a3*inside-1)/e3));
     var res3=a3*inside-f3*e3;
@@ -2761,7 +2761,7 @@ function genJerProb(type=ampNextType('jerarquia',4),random=rnd){
     answer={check:function(v){return numEq(v,res3);},val:String(res3)};
     hints=['Dins: '+b3+'² = '+(b3*b3)+' i '+c3+' × '+d3+' = '+(c3*d3),'Parèntesi: '+(b3*b3)+' + '+(c3*d3)+' = '+inside,'Fora: '+a3+' × '+inside+' = '+(a3*inside)+' i '+f3+' × '+e3+' = '+(f3*e3),'Final: '+(a3*inside)+' − '+(f3*e3)+' = '+res3];
   }else{
-    diff=3;
+    diff=2;
     const model=MIJerarquia.lots(random);
     const resultAnswer={kind:'integer',result:model.result};
     text=model.text+' Escriu l’expressió amb parèntesis i potència i calcula la puntuació final.';
