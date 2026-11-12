@@ -1826,7 +1826,7 @@ function genJerarquia(type=rnd(1,9),random=rnd){
     ];
 
   } else if(type===6){
-    diff=3;
+    diff=2;
     var a6=random(2,5),b6=random(3,5),c6=random(2,6),d6=random(2,6),e6=random(2,5),f6=random(1,9);
     var pow6=b6*b6,par6=c6+d6,res6=a6*pow6-par6*e6+f6;
     if(res6<f6){
@@ -2752,7 +2752,7 @@ function genJerProb(type=ampNextType('jerarquia',4),random=rnd){
     answer={check:function(v){return numEq(v,res2);},val:String(res2)};
     hints=['Potència: '+b2+'² = '+p,'Parèntesi: '+c2+' − '+d2+' = '+par,'Productes: '+a2+' × '+p+' = '+(a2*p)+' i '+par+' × '+e2+' = '+(par*e2),'Suma final: '+(a2*p)+' + '+(par*e2)+' = '+res2];
   }else if(type===3){
-    diff=3;
+    diff=2;
     var a3=random(2,5),b3=random(2,4),c3=random(2,5),d3=random(2,4),e3=random(2,5),f3=random(1,6),inside=b3*b3+c3*d3;
     f3=Math.min(f3,Math.floor((a3*inside-1)/e3));
     var res3=a3*inside-f3*e3;
