@@ -241,8 +241,8 @@ async function main() {
     }
     await page.goto(pathToFileURL(resolve('1eso/teoria/numeric/divisibilitat-1r-eso.html')).href);
     for(const id of ['divisibilitat','criteris','primers','factoritzacio','errors-frequents','criteri-incorrecte','prova-contraexemple']) assert.equal(await page.locator('#'+id).count(),1);
-    assert.match(await page.locator('#criteri-incorrecte').innerText(),/234[\s\S]*232/,'Exemples de diagnòstic de criteris');
-    assert.match(await page.locator('#prova-contraexemple').innerText(),/6 són parells[\s\S]*3 són múltiples de 12/,'Exemples de demostració i contraexemple');
+    assert.match(await page.locator('#criteri-incorrecte').textContent(),/234[\s\S]*232/,'Exemples de diagnòstic de criteris');
+    assert.match(await page.locator('#prova-contraexemple').textContent(),/6 són parells[\s\S]*3 són múltiples de 12/,'Exemples de demostració i contraexemple');
     assert.match(await page.locator('#errors-frequents').innerText(),/Confondre múltiple amb divisor[\s\S]*Aturar una factorització/,'Resum d’errors freqüents');
     assert.deepEqual(errors,[]);
     console.log(JSON.stringify({...details,keyboard:true,mobile:true}));
