@@ -2723,7 +2723,7 @@ function genPotenciesProb(){
     answer={potenciesAnswer:{form:'integer',values:[total2],unit:'seqüències'},val:total2+' seqüències'};
     hints=['Expressió: '+base+'^'+exp,'Valor: '+base+'^'+exp+' = '+total2];
   }else{
-    diff=2;
+    diff=1;
     var arrel=rnd(5,20),total3=arrel*arrel;
     text='En una exposició es col·loquen <b>'+total3+' fotografies</b> formant un quadrat perfecte, amb el mateix nombre de files que de columnes. Quantes fotografies hi ha a cada fila?';
     steps=[{label:'Operació',hint:'Busca quin nombre multiplicat per ell mateix dona el total',check:function(v){return readOpsInteger(v)===arrel;} }];
