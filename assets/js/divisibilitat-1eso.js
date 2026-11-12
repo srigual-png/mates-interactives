@@ -1,9 +1,26 @@
 window.MIDivisibilitat = (() => {
-  const families = [
-    [[1, 2, 5], [3], [6]],
-    [[4, 'factor-error'], [7], ['G'], ['H'], ['I'], ['F02'], ['F05']],
-    [[1001], ['F03'], ['F08']]
-  ];
+  // Agrupació per objectiu i procediment matemàtic. Cada ID és un generador o una variant.
+  const familySpecs = Object.freeze([
+    {id:'comprovar-divisibilitat-i-relacio-de-multiples',level:1,generators:[1,2,5,6,7],objective:'Reconèixer i comprovar divisibilitat, divisors i múltiples amb criteris o residu directe.',procedure:'Aplicar un criteri o comprovar una divisió exacta; inclou la comprovació contextual de dos residus.',rationale:'Procediment directe i local; type 7 només combina dues comprovacions senzilles.'},
+    {id:'classificar-primer-compost',level:2,generators:[3],objective:'Classificar enters positius com a primers, compostos o cap dels dos.',procedure:'Analitzar els divisors positius, amb atenció als casos 0 i 1.',rationale:'Cal recórrer diversos divisors i conèixer la definició; s’inclouen explícitament 0 i 1.'},
+    {id:'factoritzar-en-factors-primers',level:2,generators:[4],objective:'Descompondre un nombre en factors primers.',procedure:'Divisions successives i verificació del producte.',rationale:'Procediment multietapa habitual de 1r d’ESO.'},
+    {id:'auditar-una-factoritzacio',level:2,generators:['factor-error'],objective:'Comprovar la validesa d’una factorització proposada.',procedure:'Verificar per separat producte i primalitat dels factors.',rationale:'Combina dos controls explícits, però no requereix una justificació oberta.'},
+    {id:'construir-i-usar-llistes-de-divisors',level:2,generators:['G','divis-1','divis-4'],objective:'Enumerar divisors positius o comptar-los.',procedure:'Trobar parelles de factors i evitar duplicar l’arrel quadrada; la variant AMP combina factorització i enumeració.',rationale:'La variant de banc és el mateix objectiu de llista, amb factorització com a suport.'},
+    {id:'trobar-increment-al-multiple-seguent',level:2,generators:['H','divis-2'],objective:'Trobar el mínim increment no negatiu fins al múltiple següent.',procedure:'Calcular el residu i el complement fins al divisor.',rationale:'Exigeix relacionar residu i complement; la variant AMP conserva el procediment.'},
+    {id:'completar-xifres-amb-un-criteri',level:2,generators:['I','divis-3'],objective:'Trobar totes les xifres que compleixen una condició de divisibilitat.',procedure:'Aplicar un criteri a les deu xifres possibles i comprovar exhaustivitat.',rationale:'Cal combinar el criteri amb una cerca completa de casos.'},
+    {id:'divisibilitat-simultania-en-un-interval',level:2,generators:['F02'],objective:'Trobar un nombre amb dos divisors dins un interval.',procedure:'Filtrar múltiples i verificar la intersecció i els extrems.',rationale:'Combina dos criteris en un interval acotat.'},
+    {id:'demostrar-compost-amb-un-producte',level:2,generators:['F05'],objective:'Justificar que un nombre és compost mitjançant un producte no trivial.',procedure:'Construir dos factors enters més grans que 1.',rationale:'Construcció directa i justificació breu.'},
+    {id:'minim-amb-condicions-de-divisibilitat',level:3,generators:[1001,'divisibilitat-condicions','divis-raonament'],objective:'Reconstruir el mínim nombre que satisfà condicions simultànies.',procedure:'Enumerar candidats, aplicar criteris múltiples i justificar minimalitat.',rationale:'La minimalitat requereix comprovar candidats anteriors i satisfer restriccions simultànies.'},
+    {id:'diagnosticar-criteri-i-conclusio',level:3,generators:['F03'],objective:'Separar la veritat de la conclusió de la validesa del criteri emprat.',procedure:'Comprovar amb el criteri correcte i diagnosticar dues afirmacions diferents.',rationale:'Demana detectar que una conclusió pot ser certa per una justificació incorrecta.'},
+    {id:'demostrar-o-refutar-afirmacions-sobre-multiples',level:3,generators:['F08'],objective:'Valorar una afirmació universal sobre múltiples.',procedure:'Donar una justificació general o un contraexemple.',rationale:'Raonament universal amb prova o contraexemple.'}
+  ]);
+  const families = [[],[],[]];
+  familySpecs.forEach(f => families[f.level-1].push(f.generators));
+  function levelFor(key) {
+    const value = String(key);
+    const family = familySpecs.find(item => item.generators.some(id => String(id) === value));
+    return family ? family.level : null;
+  }
   const theorySections = Object.freeze({
     1:'criteris',2:'criteris',5:'criteris',3:'primers',6:'comprovar-divisor',
     4:'factoritzacio','factor-error':'factoritzacio',7:'repartiment-exacte',
@@ -345,5 +362,5 @@ window.MIDivisibilitat = (() => {
       guide:exercise.guide,review:exercise.guide,solution:exercise.solution,divisTheory:exercise.divisTheory};
   }
 
-  return {families, theorySections, generate, matches, divisors, classify, digitBases, reserves, reasoningReview};
+  return {families, familySpecs, levelFor, theorySections, generate, matches, divisors, classify, digitBases, reserves, reasoningReview};
 })();
