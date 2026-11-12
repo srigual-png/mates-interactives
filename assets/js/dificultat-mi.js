@@ -45,6 +45,18 @@
   const NATURAL_PRACTICE_LEVELS=freeze({'recta-graduada':1,'dividend-desconegut':2,'producte-descomposicio':2,'operacions-valor-desconegut':2,'interval-arrodoniment':2,'nombres-amb-condicions':3,'patrons-numerics':2});
   const DECIMAL_PRACTICE_LEVELS=freeze({'lectura-paraules-a-xifres':1,'escriure-xifres-a-paraules':1,'guionets-numerals-du-c':1,'descomposicio-equivalent-reagrupament':2,'equivalencia-ordres-posicionals':2,'auditar-error-de-posicio':2});
   const OPS_PRACTICE_LEVELS=freeze({'triar-operacio':1,'capses':2,'compensacio':2,'diagnosticar-divisio':2,'reconstruir-total':3});
+  const POTENCIES_FAMILY_SPECS=freeze([
+    {id:'identificar-base-exponent',level:1,generators:[1,2],practiceTypes:[1,2]},
+    {id:'representar-producte-potencia',level:1,generators:[3,4],practiceTypes:[3,4]},
+    {id:'calcular-potencia',level:1,generators:[5,'base-deu-regularitat','potencies-1'],practiceTypes:[5,'base-deu-regularitat']},
+    {id:'arrel-exacta-i-relacio-inversa',level:1,generators:[6,7,'potencies-3'],practiceTypes:[6,7]},
+    {id:'exponent-desconegut',level:2,generators:['exponent-desconegut'],practiceTypes:['exponent-desconegut']},
+    {id:'acotar-arrel',level:2,generators:['acotar-arrel'],practiceTypes:['acotar-arrel']},
+    {id:'recompte-multiplicatiu-contextual',level:2,generators:['recompte-multiplicatiu','potencies-2'],practiceTypes:['recompte-multiplicatiu']},
+    {id:'comptar-quadrat-sense-solapament',level:2,generators:['fila-columna'],practiceTypes:['fila-columna']},
+    {id:'reconstruir-dos-quadrats',level:3,generators:['dos-quadrats-invers'],practiceTypes:['dos-quadrats-invers']},
+    {id:'diagnosticar-potencies-i-arrels',level:3,generators:['diagnosticar-potencia-arrel'],practiceTypes:['diagnosticar-potencia-arrel']}
+  ]);
   const BANK_LEVELS=freeze({
   "numericProblems": {
     "naturals-2": 2,
@@ -54,7 +66,7 @@
     "naturals-4": 2,
     "naturals-1": 2,
     "naturals-3": 2,
-    "potencies-3": 2,
+    "potencies-3": 1,
     "potencies-1": 1,
     "potencies-2": 2,
     "jerarquia-4": 2,
@@ -527,11 +539,6 @@
       const match = q.solution.join(' ').match(/hi ha (\d+) canvi/);
       return match ? Math.min(3, Number(match[1])) : 1;
     }
-    if (t.id === 'potencies') {
-      if (q.type === 6) return 2;
-      if (q.type === 5 && /\^3/.test(plain(q.question))) return 3;
-      if (q.type === 7 && / = (100|121|144)/.test(plain(q.question))) return 3;
-    }
     const declared=legacyLevel(q);
     if(declared===null)throw new Error('Falta la dificultat de la plantilla del tema «'+t.name+'».');
     return declared;
@@ -591,6 +598,11 @@
       if(number===1&&options.sense==='numeric'&&t.id==='naturals'&&Object.hasOwn(NATURAL_PRACTICE_LEVELS,q.type))return NATURAL_PRACTICE_LEVELS[q.type];
       if(number===1&&options.sense==='numeric'&&t.id==='ops'&&Object.hasOwn(OPS_PRACTICE_LEVELS,q.type))return OPS_PRACTICE_LEVELS[q.type];
       if(number===1&&options.sense==='numeric'&&t.id==='decimal_sys'&&Object.hasOwn(DECIMAL_PRACTICE_LEVELS,q.type))return DECIMAL_PRACTICE_LEVELS[q.type];
+      if(number===1&&options.sense==='numeric'&&t.id==='potencies'){
+        const key=q.reasoningFamily||q.variantId||q.type;
+        const family=POTENCIES_FAMILY_SPECS.find(row=>row.generators.includes(key));
+        if(family)return family.level;
+      }
       const identity=bankIdentity(q);
       if(identity){const [bank,key]=identity,n=bankLevel(bank,key);if(![1,2,3].includes(n))throw new Error('Falta la dificultat d’una plantilla del banc «'+bank+'».');return n;}
       if(options.course==='2eso'&&options.sense==='numeric'&&t.id==='fraccionsSentit')return level(t,q);
@@ -687,5 +699,5 @@
     return Object.freeze({getDifficulty:classify,coverage,examPlan,annotate,curriculum,context,bindBanks,bindDisplay,bindExam,refreshErrors,course:options.course,sense:options.sense});
   }
   function independent(q){return {...q,taskDifficulty:null,taskDifficultyStatus:'pending',diff:null,difficulty:null,curriculum:{pageCourse:q.course||null,contentCourse:null,option:null,scope:'standalone',examEligible:false}};}
-  root.MIDifficulty=Object.freeze({attach,independent,rationalDifficulty2ESO,rationalLevels2ESO:Object.freeze(Object.fromEntries(RATIONAL_LEVELS.map((types,i)=>[i+1,types]))),fractionsMeaningDifficulty2ESO,fractionsMeaningFamily,fractionsMeaningLevels:Object.freeze(Object.fromEntries(FRACTIONS_MEANING_LEVELS.map((types,i)=>[i+1,types]))),fractionsMeaningFamilies:FRACTIONS_MEANING_FAMILIES,operationsRationalFamilies:OPERATIONS_RATIONAL_FAMILIES,operationsRationalInfo});
+  root.MIDifficulty=Object.freeze({attach,independent,rationalDifficulty2ESO,rationalLevels2ESO:Object.freeze(Object.fromEntries(RATIONAL_LEVELS.map((types,i)=>[i+1,types]))),fractionsMeaningDifficulty2ESO,fractionsMeaningFamily,fractionsMeaningLevels:Object.freeze(Object.fromEntries(FRACTIONS_MEANING_LEVELS.map((types,i)=>[i+1,types]))),fractionsMeaningFamilies:FRACTIONS_MEANING_FAMILIES,operationsRationalFamilies:OPERATIONS_RATIONAL_FAMILIES,operationsRationalInfo,potenciesFamilies:POTENCIES_FAMILY_SPECS});
 })(typeof window==='undefined'?globalThis:window);
