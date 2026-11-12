@@ -41,7 +41,7 @@
     const row=OPERATIONS_RATIONAL_FAMILIES.find(f=>f.id===family);
     return row?{...row,anchor:'ajuda-'+family.toLowerCase()}:null;
   }
-  const FIRST_NUMERIC_LEVELS=freeze({"naturals":[[1,2,3,4],[5],[]],"decimal_sys":[[1,2,3,4],[],[]],"ops":[[1,2,3],[4,5,6],[]],"potencies":[[1,2,3,4,5,6,7],[],[]],"jerarquia":[[1,2],[3,4,5,6,7,8,9],[]],"divis":[[1,2,3,4,5,6],[7],[]],"mcmmcd":[[1,2,3],[4,5],[]],"enters":[[1,2,3,4,5,7],[6],[]],"decimals":[[1,2,3,4,7,8],[5,6,9],[]],"fraccions":[[1,2,4,5,7,9,10,11],[3,6,8],[]],"proporcionalitat":[[1,2,5,8],[3,4,6,7],[]],"percentatges":[[1,2,6,7],[4,5],[3]],"notacio2":[[4,5,6],[1,2,3],[]]});
+  const FIRST_NUMERIC_LEVELS=freeze({"naturals":[[1,2,3,4],[5],[]],"decimal_sys":[[1,2,3,4],[],[]],"ops":[[1,2,3],[4,5,6],[]],"potencies":[[1,2,3,4,5,6,7],[],[]],"jerarquia":[[1,2],[3,4,5,6,7,8,9],[]],"mcmmcd":[[1,2,3],[4,5],[]],"enters":[[1,2,3,4,5,7],[6],[]],"decimals":[[1,2,3,4,7,8],[5,6,9],[]],"fraccions":[[1,2,4,5,7,9,10,11],[3,6,8],[]],"proporcionalitat":[[1,2,5,8],[3,4,6,7],[]],"percentatges":[[1,2,6,7],[4,5],[3]],"notacio2":[[4,5,6],[1,2,3],[]]});
   const NATURAL_PRACTICE_LEVELS=freeze({'recta-graduada':1,'dividend-desconegut':2,'producte-descomposicio':2,'operacions-valor-desconegut':2,'interval-arrodoniment':2,'nombres-amb-condicions':3,'patrons-numerics':2});
   const DECIMAL_PRACTICE_LEVELS=freeze({'lectura-paraules-a-xifres':1,'escriure-xifres-a-paraules':1,'guionets-numerals-du-c':1,'descomposicio-equivalent-reagrupament':2,'equivalencia-ordres-posicionals':2,'auditar-error-de-posicio':2});
   const OPS_PRACTICE_LEVELS=freeze({'triar-operacio':1,'capses':2,'compensacio':2,'diagnosticar-divisio':2,'reconstruir-total':3});
@@ -72,12 +72,7 @@
     "jerarquia-4": 2,
     "jerarquia-3": 2,
     "jerarquia-2": 2,
-    "jerarquia-1": 2,
-    "divis-3": 2,
-    "divis-1": 2,
-    "divis-2": 2,
-    "divis-4": 2,
-    "mcmmcd-4": 2,
+    "jerarquia-1": 2,    "mcmmcd-4": 2,
     "mcmmcd-2": 2,
     "mcmmcd-1": 2,
     "mcmmcd-3": 2,
@@ -562,7 +557,7 @@
       return bank&&Object.hasOwn(BANK_LEVELS[bank],key)?[bank,key]:null;
     }
     function newNumericTasks(){return number===1&&options.sense==='numeric'?(root.MIFirstNumericTasks?.catalog||[]):[];}
-    function numericBankEntries(){return Object.entries(BANK_LEVELS.numericProblems).concat(newNumericTasks().filter(d=>d.bankKey).map(d=>[d.bankKey,d.level]));}
+    function numericBankEntries(){const divis=Array.isArray(root.MIDivisibilitat?.familySpecs)?root.MIDivisibilitat.familySpecs.flatMap(f=>f.generators.filter(id=>/^divis-\\d+$/.test(String(id))).map(id=>[String(id),f.level])):[];return Object.entries(BANK_LEVELS.numericProblems).concat(divis,newNumericTasks().filter(d=>d.bankKey).map(d=>[d.bankKey,d.level]));}
     function bankLevel(bank,key){return REVIEWED_BANKS[bank]?.[key]??(bank==='numericProblems'?numericBankEntries().find(([k])=>k===key)?.[1]:BANK_LEVELS[bank]?.[key]);}
     function reviewedLevels(t){const compiled=REVIEWED_LEVELS[options.course+'/'+options.sense]?.[t.id];if(compiled)return compiled;const old=number===1&&options.sense==='numeric'?FIRST_NUMERIC_LEVELS[t.id]:null;return old?old.map((types,i)=>types.concat(newNumericTasks().filter(d=>d.topic===t.id&&d.level===i+1).map(d=>d.level===3?1001:1002))):null;}
     function coverage(t){if(options.course==='2eso'&&options.sense==='numeric'&&t.id==='operacionsRacionals')return {reviewed:true,types:[7,6,3],families:OPERATIONS_RATIONAL_FAMILIES.map(f=>f.id),missing:[]};const groups=options.course==='2eso'&&options.sense==='numeric'&&t.id==='fraccionsSentit'?FRACTIONS_MEANING_LEVELS:reviewedLevels(t);if(!groups)return null;const types=groups.map(a=>a.length),variants=REVIEWED_VARIANTS[options.course+'/'+options.sense]?.[t.id]||{};for(const [type,values] of Object.entries(variants))for(const n of new Set(Object.values(values).map(v=>v.level)))if(!groups[n-1].some(v=>String(v)===type))types[n-1]++;return {reviewed:true,types,missing:types.flatMap((n,i)=>n?[]:[i+1])};}
@@ -599,6 +594,7 @@
       if(number===1&&options.sense==='numeric'&&t.id==='ops'&&Object.hasOwn(OPS_PRACTICE_LEVELS,q.type))return OPS_PRACTICE_LEVELS[q.type];
       if(number===1&&options.sense==='numeric'&&t.id==='decimal_sys'&&Object.hasOwn(DECIMAL_PRACTICE_LEVELS,q.type))return DECIMAL_PRACTICE_LEVELS[q.type];
       if(number===1&&options.sense==='numeric'&&t.id==='jerarquia'&&root.MIJerarquia){const key=q.reasoningFamily||q.variantId||q.type;const assigned=root.MIJerarquia.levelFor(key);if(assigned)return assigned;}
+      if(number===1&&options.sense==='numeric'&&t.id==='divis'&&root.MIDivisibilitat){const key=q.reasoningFamily||q.variantId||q.type;const assigned=root.MIDivisibilitat.levelFor(key);if(assigned)return assigned;}
       if(number===1&&options.sense==='numeric'&&t.id==='potencies'){
         const key=q.reasoningFamily||q.variantId||q.type;
         const family=POTENCIES_FAMILY_SPECS.find(row=>row.generators.includes(key));
