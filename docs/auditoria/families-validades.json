@@ -500,6 +500,126 @@
           ]
         }
       ]
+    },
+    {
+      "id": "1eso/numeric/divis",
+      "course": "1r ESO",
+      "sense": "Numèric",
+      "topic": "Divisibilitat",
+      "code_topic_id": "divis",
+      "status": "validat",
+      "verified_on": "2026-11-12",
+      "pr": 16,
+      "merge_commit": "35e8f0fcc0b8afdb9863371f07e8ec29f5d865eb",
+      "validation": "4.000 generacions en 16 rutes (250 per ruta) superades localment amb Node.js, 0 errors; regressió Playwright de pràctica guiada (12), autònoma (20), examen de tema (12), examen global (20), banc, teclat, mòbil i teoria superada; comprovació manual satisfactòria al navegador per l'usuari. No s'ha verificat la publicació a GitHub Pages ni la suite global.",
+      "families": [
+        {
+          "id": "comprovar-divisibilitat-i-relacio-de-multiples",
+          "level": 1,
+          "generators": [
+            "1",
+            "2",
+            "5",
+            "6",
+            "7"
+          ],
+          "name": "Reconèixer i comprovar divisibilitat, divisors i múltiples amb criteris o residu directe."
+        },
+        {
+          "id": "classificar-primer-compost",
+          "level": 1,
+          "generators": [
+            "3"
+          ],
+          "name": "Classificar enters positius com a primers, compostos o cap dels dos."
+        },
+        {
+          "id": "factoritzar-en-factors-primers",
+          "level": 2,
+          "generators": [
+            "4"
+          ],
+          "name": "Descompondre un nombre en factors primers."
+        },
+        {
+          "id": "auditar-una-factoritzacio",
+          "level": 2,
+          "generators": [
+            "factor-error"
+          ],
+          "name": "Comprovar la validesa d’una factorització proposada."
+        },
+        {
+          "id": "construir-i-usar-llistes-de-divisors",
+          "level": 2,
+          "generators": [
+            "G",
+            "divis-1",
+            "divis-4"
+          ],
+          "name": "Enumerar divisors positius o comptar-los."
+        },
+        {
+          "id": "trobar-increment-al-multiple-seguent",
+          "level": 2,
+          "generators": [
+            "H",
+            "divis-2"
+          ],
+          "name": "Trobar el mínim increment no negatiu fins al múltiple següent."
+        },
+        {
+          "id": "completar-xifres-amb-un-criteri",
+          "level": 2,
+          "generators": [
+            "I",
+            "divis-3"
+          ],
+          "name": "Trobar totes les xifres que compleixen una condició de divisibilitat."
+        },
+        {
+          "id": "divisibilitat-simultania-en-un-interval",
+          "level": 2,
+          "generators": [
+            "F02"
+          ],
+          "name": "Trobar un nombre amb dos divisors dins un interval."
+        },
+        {
+          "id": "demostrar-compost-amb-un-producte",
+          "level": 2,
+          "generators": [
+            "F05"
+          ],
+          "name": "Justificar que un nombre és compost mitjançant un producte no trivial."
+        },
+        {
+          "id": "minim-amb-condicions-de-divisibilitat",
+          "level": 3,
+          "generators": [
+            "1001",
+            "divisibilitat-condicions",
+            "divis-raonament"
+          ],
+          "name": "Reconstruir el mínim nombre que satisfà condicions simultànies."
+        },
+        {
+          "id": "diagnosticar-criteri-i-conclusio",
+          "level": 3,
+          "generators": [
+            "F03"
+          ],
+          "name": "Separar la veritat de la conclusió de la validesa del criteri emprat."
+        },
+        {
+          "id": "demostrar-o-refutar-afirmacions-sobre-multiples",
+          "level": 3,
+          "generators": [
+            "F08"
+          ],
+          "name": "Valorar una afirmació universal sobre múltiples."
+        }
+      ]
     }
   ]
 }
