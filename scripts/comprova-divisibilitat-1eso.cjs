@@ -65,7 +65,7 @@ async function main() {
       check(reasoning.correct === '1044' && rejects(reasoning,['1404','1764']), 'Mínim amb dues xifres');
 
       const groups = adaptivePracticeGroups(topic('divis'));
-      check(groups.map(level=>level.length).join() === '3,7,3', 'Catàleg adaptatiu');
+      check(groups.map(level=>level.length).join() === '2,7,3', 'Catàleg adaptatiu');
       for (const [level,families] of groups.entries()) for (const type of families.flat()) {
         for (const random of [(min,max)=>min,(min,max)=>max,...Array(4).fill(rnd)]) testOptions(genDivisPractice(type,level+1,random));
       }
@@ -241,7 +241,9 @@ async function main() {
     }
     await page.goto(pathToFileURL(resolve('1eso/teoria/numeric/divisibilitat-1r-eso.html')).href);
     for(const id of ['divisibilitat','criteris','primers','factoritzacio','errors-frequents','criteri-incorrecte','prova-contraexemple']) assert.equal(await page.locator('#'+id).count(),1);
-    assert.match(await page.locator('#errors-frequents').innerText(),/234[\s\S]*232[\s\S]*6 són parells[\s\S]*3 també són múltiples de 12|234[\s\S]*232[\s\S]*6 són parells[\s\S]*3 són múltiples de 12/);
+    assert.match(await page.locator('#criteri-incorrecte').textContent(),/234[\s\S]*232/,'Exemples de diagnòstic de criteris');
+    assert.match(await page.locator('#prova-contraexemple').textContent(),/6 són parells[\s\S]*3 són múltiples de 12/,'Exemples de demostració i contraexemple');
+    assert.match(await page.locator('#errors-frequents').innerText(),/Confondre múltiple amb divisor[\s\S]*Aturar una factorització/,'Resum d’errors freqüents');
     assert.deepEqual(errors,[]);
     console.log(JSON.stringify({...details,keyboard:true,mobile:true}));
   } finally {
