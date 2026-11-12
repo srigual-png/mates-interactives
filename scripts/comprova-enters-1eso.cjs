@@ -92,48 +92,80 @@ async function main(){
   await theoryPage.route(/^https?:/,r=>r.abort());
   await theoryPage.addInitScript(()=>{document.documentElement.style.scrollBehavior='auto';});
   const theoryUrl=pathToFileURL(resolve('1eso/teoria/numeric/nombres-enters-1r-eso.html')).href;
-  async function waitForOpenedProcedure(anchor){
-    await theoryPage.waitForFunction(id=>{
+  async function theoryNavigationState(anchor){
+    return theoryPage.evaluate(id=>{
       const panel=document.getElementById('ajuda-exercicis'),item=document.getElementById(id);
-      const rect=item?.getBoundingClientRect();
-      return location.hash==='#'+id&&panel?.open&&item?.open&&rect&&rect.top<innerHeight&&rect.bottom>0;
+      const rect=item?.getBoundingClientRect(),insidePanel=!!(panel&&item&&panel.contains(item));
+      return {
+        expectedHash:'#'+id,actualHash:location.hash,hashMatches:location.hash==='#'+id,
+        anchorExists:!!item,tagName:item?.tagName||null,inHelpPanel:insidePanel,
+        generalDetailsOpen:panel?panel.open:null,
+        individualDetailsOpen:item?.tagName==='DETAILS'?item.open:null,
+        visible:!!(rect&&rect.top<innerHeight&&rect.bottom>0),
+        rect:rect?{top:Math.round(rect.top),bottom:Math.round(rect.bottom),height:Math.round(rect.height)}:null
+      };
     },anchor);
   }
-  async function verifyProcedure(anchor,family){
-    const section=theoryPage.locator('details.procedure-item[id="'+anchor+'"]');
-    assert.equal(await section.count(),1,family+' procedure anchor');
-    assert.equal(await section.evaluate(node=>node.tagName),'DETAILS',family+' details element');
-    const panel=theoryPage.locator('details#ajuda-exercicis');
-    assert.equal(await panel.count(),1,'Procedure help details');
-    await section.evaluate(node=>{
-      for(let current=node;current;current=current.parentElement){
-        if(current.tagName==='DETAILS')current.open=true;
-      }
-    });
-    assert((await section.innerText()).length>120,family+' procedure content');
-    const example=section.locator('.example').first();
+  async function waitForTheoryTarget(anchor,stage){
+    try{
+      await theoryPage.waitForFunction(id=>{
+        const panel=document.getElementById('ajuda-exercicis'),item=document.getElementById(id);
+        const insidePanel=!!(panel&&item&&panel.contains(item));
+        const isProcedure=insidePanel&&item.tagName==='DETAILS';
+        const rect=item?.getBoundingClientRect();
+        return location.hash==='#'+id&&!!item&&(!isProcedure||(panel.open&&item.open))&&
+          !!rect&&rect.top<innerHeight&&rect.bottom>0;
+      },anchor,{timeout:5000});
+    }catch(error){
+      const state=await theoryNavigationState(anchor);
+      throw new Error('Theory navigation failed during '+stage+' for #'+anchor+
+        ': '+JSON.stringify(state)+'; wait error: '+error.message);
+    }
+  }
+  async function verifyProcedureTarget(anchor,family){
+    const target=theoryPage.locator('[id="'+anchor+'"]');
+    assert.equal(await target.count(),1,family+' theory anchor');
+    const state=await theoryNavigationState(anchor);
+    if(state.inHelpPanel){
+      assert.equal(state.tagName,'DETAILS',family+' procedure details');
+      assert.equal(state.generalDetailsOpen,true,family+' help details opened');
+      assert.equal(state.individualDetailsOpen,true,family+' procedure details opened');
+      assert.equal(await target.evaluate(node=>node.classList.contains('procedure-item')),true,family+' procedure item');
+      await target.evaluate(node=>{
+        for(let current=node;current;current=current.parentElement){
+          if(current.tagName==='DETAILS')current.open=true;
+        }
+      });
+    }else{
+      assert.equal(state.tagName,'SECTION',family+' general theory section');
+    }
+    assert((await target.innerText()).length>120,family+' procedure content');
+    const example=target.locator('.example').first();
     assert.equal(await example.count(),1,family+' resolved example');
     assert((await example.innerText()).length>65,family+' worked example content');
   }
   for(const [family,link] of Object.entries(report.links)){
     const anchor=link.split('#')[1];
     await theoryPage.goto(theoryUrl+'#'+encodeURIComponent(anchor));
-    await waitForOpenedProcedure(anchor);
+    await waitForTheoryTarget(anchor,'direct URL');
     assert.equal(new URL(theoryPage.url()).hash,'#'+anchor,'Direct theory anchor '+family);
-    await verifyProcedure(anchor,family);
+    await verifyProcedureTarget(anchor,family);
   }
-  const firstAnchor=anchors[0],hashchangeAnchor=anchors[1]||anchors[0];
-  await theoryPage.goto(theoryUrl+'#'+encodeURIComponent(firstAnchor));
-  await waitForOpenedProcedure(firstAnchor);
+  const procedureAnchors=await theoryPage.evaluate(ids=>{
+    const panel=document.getElementById('ajuda-exercicis');
+    return ids.filter(id=>{const item=document.getElementById(id);return !!(panel&&item&&panel.contains(item)&&item.tagName==='DETAILS');});
+  },anchors);
+  assert(procedureAnchors.length>1,'Multiple contextual procedure anchors');
+  const directAnchor=procedureAnchors[0],hashchangeAnchor=procedureAnchors[1];
+  await theoryPage.goto(theoryUrl+'#'+encodeURIComponent(directAnchor));
+  await waitForTheoryTarget(directAnchor,'direct procedure URL');
   await theoryPage.evaluate(()=>{window.__miHashchangeCount=0;window.addEventListener('hashchange',()=>window.__miHashchangeCount++);});
   await theoryPage.evaluate(anchor=>{location.hash='#'+anchor;},hashchangeAnchor);
-  await theoryPage.waitForFunction(id=>{
-    const panel=document.getElementById('ajuda-exercicis'),item=document.getElementById(id);
-    const rect=item?.getBoundingClientRect();
-    return window.__miHashchangeCount>0&&location.hash==='#'+id&&panel?.open&&item?.open&&rect&&rect.top<innerHeight&&rect.bottom>0;
-  },hashchangeAnchor);
-  assert.equal(new URL(theoryPage.url()).hash,'#'+hashchangeAnchor,'hashchange navigation');
-  await verifyProcedure(hashchangeAnchor,'hashchange');
+  await waitForTheoryTarget(hashchangeAnchor,'hashchange');
+  const hashchangeCount=await theoryPage.evaluate(()=>window.__miHashchangeCount);
+  assert(hashchangeCount>0,'hashchange event fired');
+  assert.equal(new URL(theoryPage.url()).hash,'#'+hashchangeAnchor,'hashchange URL');
+  await verifyProcedureTarget(hashchangeAnchor,'hashchange');
   await theoryPage.close();
   async function show(id,mode='open'){
    await page.evaluate(({id,mode})=>{const topic=TOPICS.find(t=>t.id==='enters'),gen=topic.practiceGen;selTopic(TOPICS.indexOf(topic));selLv(1);selMode(mode);startP();adaptivePracticeSessions.enters.questions.clear();adaptivePracticeSessions.enters.points=id==='E08'?3:id==='E15'?6:0;try{topic.practiceGen=()=>MIEnters.generate(id);showEx();}finally{topic.practiceGen=gen;}},{id,mode});
