@@ -51,9 +51,16 @@ async function main(){
     scenarios.push({level,correct,wrong});
    }
    for(const [mode,thresholds] of [[1,[3,6]],[2,[6,12]]]){state.level=mode;for(const [i,p] of thresholds.entries()){check(adaptiveLevel(p-1)===i+1&&adaptiveLevel(p)===i+2,'Threshold');}}
-   const session=start(2),keys=new Set(),visited=new Set();let last;
-   for(let i=0;i<20;i++){check(!keys.has(currentEx.practiceKey),'Repeated instance');keys.add(currentEx.practiceKey);check(currentEx.entersFamily!==last,'Repeated family');last=currentEx.entersFamily;visited.add(last);processPracticeAnswer(false,'999');nextEx();}
-   check(visited.size===8,'Twenty errors N1 rotation');
+   const session=start(2),keys=new Set(),visited=new Set(),n1Families=MIEnters.familySpecs.filter(f=>f.level===1);let last;
+   check(n1Families.length===8,'Eight N1 mathematical families');
+   for(let i=0;i<20;i++){
+    check(!keys.has(currentEx.practiceKey),'Repeated instance');keys.add(currentEx.practiceKey);
+    const spec=n1Families.find(f=>f.practiceTypes.includes(currentEx.type));
+    check(spec,'N1 mathematical family for '+currentEx.type);
+    check(spec.id!==last,'Repeated mathematical family '+spec.id);last=spec.id;visited.add(spec.id);
+    processPracticeAnswer(false,'999');nextEx();
+   }
+   check(visited.size===n1Families.length&&n1Families.every(f=>visited.has(f.id)),'Twenty errors cover all eight N1 mathematical families');
    start(2);const s=adaptivePracticeSessions.enters,original=topic.practiceGen;
    try{topic.practiceGen=(id,level,random)=>original(id,level,random||((min,max)=>min));for(let i=0;i<20;i++){processPracticeAnswer(false,'999');nextEx();}check(s.ended&&s.incorrect===20,'Deterministic reserves');}finally{topic.practiceGen=original;}
    start(2);adaptivePracticeSessions.enters.questions={has:()=>true};showEx();check(adaptivePracticeSessions.enters.ended&&el('decimalResultSubtitle').textContent.includes('cap altra pregunta'),'Exhaustion summary');
