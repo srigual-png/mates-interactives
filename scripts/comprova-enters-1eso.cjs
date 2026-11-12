@@ -79,16 +79,17 @@ async function main(){
   });
   const theory=fs.readFileSync('1eso/teoria/numeric/nombres-enters-1r-eso.html','utf8');
   const anchors=[...new Set(Object.values(report.links).map(link=>link.split('#')[1]))];
-  assert(anchors.length>0,'Procedure links available');
+  assert(anchors.length>1,'Procedure links available');
   for(const anchor of anchors)assert(theory.includes('id="'+anchor+'"'),'Theory anchor '+anchor);
   const theoryPage=await browser.newPage();
   await theoryPage.route(/^https?:/,r=>r.abort());
-  await theoryPage.addStyleTag({content:'html { scroll-behavior: auto !important; }'});
+  await theoryPage.addInitScript(()=>{document.documentElement.style.scrollBehavior='auto';});
   const theoryUrl=pathToFileURL(resolve('1eso/teoria/numeric/nombres-enters-1r-eso.html')).href;
   async function waitForOpenedProcedure(anchor){
     await theoryPage.waitForFunction(id=>{
       const panel=document.getElementById('ajuda-exercicis'),item=document.getElementById(id);
-      return location.hash==='#'+id&&panel?.open&&item?.open;
+      const rect=item?.getBoundingClientRect();
+      return location.hash==='#'+id&&panel?.open&&item?.open&&rect&&rect.top<innerHeight&&rect.bottom>0;
     },anchor);
   }
   async function verifyProcedure(anchor,family){
@@ -121,7 +122,8 @@ async function main(){
   await theoryPage.evaluate(anchor=>{location.hash='#'+anchor;},hashchangeAnchor);
   await theoryPage.waitForFunction(id=>{
     const panel=document.getElementById('ajuda-exercicis'),item=document.getElementById(id);
-    return window.__miHashchangeCount>0&&location.hash==='#'+id&&panel?.open&&item?.open;
+    const rect=item?.getBoundingClientRect();
+    return window.__miHashchangeCount>0&&location.hash==='#'+id&&panel?.open&&item?.open&&rect&&rect.top<innerHeight&&rect.bottom>0;
   },hashchangeAnchor);
   assert.equal(new URL(theoryPage.url()).hash,'#'+hashchangeAnchor,'hashchange navigation');
   await verifyProcedure(hashchangeAnchor,'hashchange');
