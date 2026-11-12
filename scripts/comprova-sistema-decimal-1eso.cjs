@@ -120,6 +120,7 @@ for (const [type, data, family] of [
 ]) {
   const q = M.base({ type, diff: 1, options: [], solution: [] }, data, buildOpts);
   assert.equal(M.grade(q, q.correct).ok, true, `mostra addicional del generador ${type}`);
+  checks.baseTypes[type]++;
   examples[family].push({ question: plain(q.question), answer: q.correct });
 }
 
