@@ -283,6 +283,107 @@
           ]
         }
       ]
+    },
+    {
+      "id": "1eso/numeric/potencies",
+      "course": "1r ESO",
+      "sense": "Numèric",
+      "topic": "Potències i arrels",
+      "code_topic_id": "potencies",
+      "status": "validat",
+      "verified_on": "2026-11-12",
+      "pr": 12,
+      "merge_commit": "e31f257574402959d170bca93998c9cb9af887e4",
+      "validation": "4.250 generacions automàtiques superades localment amb Node.js (250 per identificador dels 17 generadors); comprovació manual dels exercicis i la correcció al navegador per l'usuari. Correcció del test de selecció del mapa de dificultat de 1r ESO (f1e4c24). GitHub Pages i regressió global no verificades per l'assistent.",
+      "families": [
+        {
+          "id": "identificar-base-exponent",
+          "name": "Identificar base i exponent",
+          "level": 1,
+          "generators": [
+            "1",
+            "2"
+          ]
+        },
+        {
+          "id": "representar-producte-potencia",
+          "name": "Convertir entre producte repetit i potència",
+          "level": 1,
+          "generators": [
+            "3",
+            "4"
+          ]
+        },
+        {
+          "id": "calcular-potencia",
+          "name": "Càlcul de potències, inclosa la base 10",
+          "level": 1,
+          "generators": [
+            "5",
+            "base-deu-regularitat",
+            "potencies-1"
+          ]
+        },
+        {
+          "id": "arrel-exacta-i-relacio-inversa",
+          "name": "Arrel quadrada exacta i relació inversa",
+          "level": 1,
+          "generators": [
+            "6",
+            "7",
+            "potencies-3"
+          ]
+        },
+        {
+          "id": "exponent-desconegut",
+          "name": "Identificar un exponent desconegut",
+          "level": 2,
+          "generators": [
+            "exponent-desconegut"
+          ]
+        },
+        {
+          "id": "acotar-arrel",
+          "name": "Acotar una arrel quadrada entre enters",
+          "level": 2,
+          "generators": [
+            "acotar-arrel"
+          ]
+        },
+        {
+          "id": "recompte-multiplicatiu-contextual",
+          "name": "Recompte multiplicatiu i creixement contextualitzat",
+          "level": 2,
+          "generators": [
+            "recompte-multiplicatiu",
+            "potencies-2"
+          ]
+        },
+        {
+          "id": "comptar-quadrat-sense-solapament",
+          "name": "Recompte de quadrat retirant fila i columna sense solapament",
+          "level": 2,
+          "generators": [
+            "fila-columna"
+          ]
+        },
+        {
+          "id": "reconstruir-dos-quadrats",
+          "name": "Reconstrucció de dos quadrats amb restriccions",
+          "level": 3,
+          "generators": [
+            "dos-quadrats-invers"
+          ]
+        },
+        {
+          "id": "diagnosticar-potencies-i-arrels",
+          "name": "Diagnosi d'errors de potències i arrels amb contraexemple",
+          "level": 3,
+          "generators": [
+            "diagnosticar-potencia-arrel"
+          ]
+        }
+      ]
     }
   ]
 }
