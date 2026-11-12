@@ -78,19 +78,53 @@ async function main(){
    return {families:groups.map(g=>g.length),links,scenarios,exam:[12,20]};
   });
   const theory=fs.readFileSync('1eso/teoria/numeric/nombres-enters-1r-eso.html','utf8');
-  for(const link of Object.values(report.links))assert(theory.includes('id="'+link.split('#')[1]+'"'),link);
+  const anchors=[...new Set(Object.values(report.links).map(link=>link.split('#')[1]))];
+  assert(anchors.length>0,'Procedure links available');
+  for(const anchor of anchors)assert(theory.includes('id="'+anchor+'"'),'Theory anchor '+anchor);
   const theoryPage=await browser.newPage();
   await theoryPage.route(/^https?:/,r=>r.abort());
-  await theoryPage.goto(pathToFileURL(resolve('1eso/teoria/numeric/nombres-enters-1r-eso.html')).href);
   await theoryPage.addStyleTag({content:'html { scroll-behavior: auto !important; }'});
-  for(const [family,link] of Object.entries(report.links)){
-    await theoryPage.locator('.quick-nav a[href="#'+link.split('#')[1]+'"]').click();
-    assert.equal(new URL(theoryPage.url()).hash,'#'+link.split('#')[1]);
-    const section=theoryPage.locator('section#'+link.split('#')[1]);
-    assert.equal(await section.count(),1,family);assert((await section.innerText()).length>120,family+' procedure');
-    assert((await section.locator('.example').first().innerText()).length>65,family+' worked example');
-    await theoryPage.waitForFunction(anchor=>document.getElementById(anchor).getBoundingClientRect().top<innerHeight,link.split('#')[1]);
+  const theoryUrl=pathToFileURL(resolve('1eso/teoria/numeric/nombres-enters-1r-eso.html')).href;
+  async function waitForOpenedProcedure(anchor){
+    await theoryPage.waitForFunction(id=>{
+      const panel=document.getElementById('ajuda-exercicis'),item=document.getElementById(id);
+      return location.hash==='#'+id&&panel?.open&&item?.open;
+    },anchor);
   }
+  async function verifyProcedure(anchor,family){
+    const section=theoryPage.locator('details.procedure-item[id="'+anchor+'"]');
+    assert.equal(await section.count(),1,family+' procedure anchor');
+    assert.equal(await section.evaluate(node=>node.tagName),'DETAILS',family+' details element');
+    const panel=theoryPage.locator('details#ajuda-exercicis');
+    assert.equal(await panel.count(),1,'Procedure help details');
+    await section.evaluate(node=>{
+      for(let current=node;current;current=current.parentElement){
+        if(current.tagName==='DETAILS')current.open=true;
+      }
+    });
+    assert((await section.innerText()).length>120,family+' procedure content');
+    const example=section.locator('.example').first();
+    assert.equal(await example.count(),1,family+' resolved example');
+    assert((await example.innerText()).length>65,family+' worked example content');
+  }
+  for(const [family,link] of Object.entries(report.links)){
+    const anchor=link.split('#')[1];
+    await theoryPage.goto(theoryUrl+'#'+encodeURIComponent(anchor));
+    await waitForOpenedProcedure(anchor);
+    assert.equal(new URL(theoryPage.url()).hash,'#'+anchor,'Direct theory anchor '+family);
+    await verifyProcedure(anchor,family);
+  }
+  const firstAnchor=anchors[0],hashchangeAnchor=anchors[1]||anchors[0];
+  await theoryPage.goto(theoryUrl+'#'+encodeURIComponent(firstAnchor));
+  await waitForOpenedProcedure(firstAnchor);
+  await theoryPage.evaluate(()=>{window.__miHashchangeCount=0;window.addEventListener('hashchange',()=>window.__miHashchangeCount++);});
+  await theoryPage.evaluate(anchor=>{location.hash='#'+anchor;},hashchangeAnchor);
+  await theoryPage.waitForFunction(id=>{
+    const panel=document.getElementById('ajuda-exercicis'),item=document.getElementById(id);
+    return window.__miHashchangeCount>0&&location.hash==='#'+id&&panel?.open&&item?.open;
+  },hashchangeAnchor);
+  assert.equal(new URL(theoryPage.url()).hash,'#'+hashchangeAnchor,'hashchange navigation');
+  await verifyProcedure(hashchangeAnchor,'hashchange');
   await theoryPage.close();
   async function show(id,mode='open'){
    await page.evaluate(({id,mode})=>{const topic=TOPICS.find(t=>t.id==='enters'),gen=topic.practiceGen;selTopic(TOPICS.indexOf(topic));selLv(1);selMode(mode);startP();adaptivePracticeSessions.enters.questions.clear();adaptivePracticeSessions.enters.points=id==='E08'?3:id==='E15'?6:0;try{topic.practiceGen=()=>MIEnters.generate(id);showEx();}finally{topic.practiceGen=gen;}},{id,mode});
