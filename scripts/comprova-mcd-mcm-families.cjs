@@ -79,8 +79,8 @@ async function main(){
           const valid=Array.from({length:hi-lo+1},(_,j)=>lo+j).filter(v=>fn(a,v)===target);
           check(valid.length===1&&q.mcmFields[0].value===valid[0],'Operand únic per enumeració');
         }else if(type==='P6'){
-          const ab=operands(q.solution.join(' '));check(ab,'Operands diagnòstic');
-          const isMcd=/MCD/.test(q.question),expected=isMcd?gcd(...ab):lcm(...ab);
+          const ab=q.question.match(/^(\\d+)\\s*=.*? i (\\d+)\\s*=/);check(ab,'Operands diagnòstic');
+          const nums=[Number(ab[1]),Number(ab[2])],isMcd=/MCD/.test(q.question),expected=isMcd?gcd(...nums):lcm(...nums);
           check(q.mcmFields[1].value===expected,'Diagnòstic i resultat correcte');
         }else{
           const {a,b,oa,ob,after}=q.reasoningData,answer=Number(q.correct);
@@ -124,7 +124,7 @@ async function main(){
         const {a,b,oa,ob,after}=q.reasoningData,answer=Number(q.correct);
         const first=Array.from({length:answer+1},(_,t)=>t).find(t=>t>after&&t>=oa&&t>=ob&&(t-oa)%a===0&&(t-ob)%b===0);
         check(first===answer&&M.levelFor(q.reasoningFamily)===3,'Banc de raonament amb oracle independent');
-        check(q.options.length===4&&new Set(q.options).size===4&&q.options[0]===q.correct,'Opcions raonament');
+        check(q.options.length===4&&new Set(q.options).size===4&&q.options.filter(v=>String(v)===String(q.correct)).length===1,'Opcions raonament');
         reasonTotal++;
       }
       for(const id of ['mcmmcd-1','mcmmcd-2','mcmmcd-3','mcmmcd-4','mcmmcd-raonament','coincidencies-desfasades',1,2,3,4,5,1001])check(M.levelFor(id),'Família absent: '+id);
