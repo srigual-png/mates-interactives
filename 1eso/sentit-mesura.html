@@ -642,7 +642,7 @@ function takeVariedExercise(key,make,cycleSize=60){
     fallback=ex;
     const qKey=String(ex&&ex.question!==undefined?ex.question:'');
     const repeated=st.seen.has(qKey);
-    const identity=key==='metric'?(ex&&(ex.metricFamily||ex.familyId||ex.type)):ex&&ex.type;
+    const identity=(key==='metric'||key==='conversions')?(ex&&(ex.metricFamily||ex.conversionsFamily||ex.familyId||ex.type)):ex&&ex.type;
     const sameType=st.lastType!==null&&identity===st.lastType;
 
     if(!repeated&&!sameType){
@@ -659,7 +659,7 @@ function takeVariedExercise(key,make,cycleSize=60){
     const qKey=String(ex&&ex.question!==undefined?ex.question:'');
     if(!st.seen.has(qKey)){
       st.seen.add(qKey);
-      st.lastType=key==='metric'?(ex.metricFamily||ex.familyId||ex.type):ex.type;
+      st.lastType=(key==='metric'||key==='conversions')?(ex.metricFamily||ex.conversionsFamily||ex.familyId||ex.type):ex.type;
       return ex;
     }
   }
@@ -669,7 +669,7 @@ function takeVariedExercise(key,make,cycleSize=60){
   st=VARIETY_STATE[key];
   const ex=fallback||make();
   st.seen.add(String(ex.question||''));
-  st.lastType=key==='metric'?(ex.metricFamily||ex.familyId||ex.type):ex.type;
+  st.lastType=(key==='metric'||key==='conversions')?(ex.metricFamily||ex.conversionsFamily||ex.familyId||ex.type):ex.type;
   return ex;
 }
 
@@ -761,6 +761,7 @@ function genMetricRaw(){
 // 2. CONVERSIONS D'UNITATS (àrees, mesures mixtes, comparacions i context)
 function genConversionsRaw(){
   const type=rnd(1,4);
+  function conversionsMeta(id){const family=MIFirstMeasureTasks.conversionsFamilyInfo(id);return {conversionsFamily:family.id,familyId:family.id,taskDifficulty:family.level,diff:family.level};}
 
   if(type===1){
     const pairs=[
@@ -777,7 +778,7 @@ function genConversionsRaw(){
     const q=`Converteix ${fmtNum(val)} ${it.fr} a ${it.to}`;
     const c=`${fmtNum(res)} ${it.to}`;
     const guide=['Recorda que en unitats quadrades el canvi d’escala també queda elevat al quadrat','Localitza la unitat inicial i la final i decideix si passes a una unitat més gran o més petita','Aplica el canvi d’unitat i comprova que la unitat final sigui quadrada'];
-    return {type,question:q,correct:c,options:distractors(res,it.to,[res*10,res/10,res*100]),guide,solution:[`Factor de conversió entre ${it.fr} i ${it.to}: ${fmtNum(it.factor)}`,`${fmtNum(val)} × ${fmtNum(it.factor)} = ${fmtNum(res)}`,`✅ ${c}`],difficulty:'medium'};
+    return {type,...conversionsMeta('conversio-superficies'),question:q,correct:c,options:distractors(res,it.to,[res*10,res/10,res*100]),guide,solution:[`Factor de conversió entre ${it.fr} i ${it.to}: ${fmtNum(it.factor)}`,`${fmtNum(val)} × ${fmtNum(it.factor)} = ${fmtNum(res)}`,`✅ ${c}`],difficulty:'medium'};
   }
 
   if(type===2){
@@ -792,7 +793,7 @@ function genConversionsRaw(){
     const q=`${context} ${a} ${f.aU} i ${b} ${f.bU}. Quants ${f.to} són en total?`;
     const c=`${fmtNum(res)} ${f.to}`;
     const guide=['Expressa primer les dues mesures amb la mateixa unitat','Converteix només la quantitat que està en una unitat diferent de la demanada','Suma les dues quantitats quan ja tinguin la mateixa unitat'];
-    return {type,question:q,correct:c,options:distractors(res,f.to,[a*f.factorA,b,res+f.factorA]),guide,solution:[`${a} ${f.aU} = ${a*f.factorA} ${f.to}`,`${a*f.factorA} + ${b} = ${res} ${f.to}`,`✅ ${c}`],difficulty:'medium'};
+    return {type,...conversionsMeta('mesura-mixta'),question:q,correct:c,options:distractors(res,f.to,[a*f.factorA,b,res+f.factorA]),guide,solution:[`${a} ${f.aU} = ${a*f.factorA} ${f.to}`,`${a*f.factorA} + ${b} = ${res} ${f.to}`,`✅ ${c}`],difficulty:'medium'};
   }
 
   if(type===3){
@@ -801,8 +802,7 @@ function genConversionsRaw(){
       {u1:'km',u2:'m',factor:1000,vals:[1,2,3,4,5,8,10]},
       {u1:'kg',u2:'g',factor:1000,vals:[1,2,3,4,5,8,10,12]},
       {u1:'l',u2:'ml',factor:1000,vals:[1,2,3,4,5,8,10]},
-      {u1:'dm²',u2:'cm²',factor:100,vals:[1,2,3,4,5,8,10]},
-      {u1:'h',u2:'min',factor:60,vals:[1,2,3,4,5,6]}
+      {u1:'dm²',u2:'cm²',factor:100,vals:[1,2,3,4,5,8,10]}
     ];
     const f=families[rnd(0,families.length-1)],base=f.vals[rnd(0,f.vals.length-1)],eq=rnd(0,1)===0;
     const exact=base*f.factor;
@@ -812,29 +812,28 @@ function genConversionsRaw(){
     const q=`Són iguals ${a} i ${b}?`;
     const c=eq?'Sí, són iguals':'No, no són iguals',otherAns=eq?'No, no són iguals':'Sí, són iguals';
     const guide=['Expressa les dues mesures amb la mateixa unitat','Compara els valors un cop feta la conversió'];
-    return {type,question:q,correct:c,options:shuffle([c,otherAns,'No es poden comparar sense mesurar de nou','Sempre són diferents si les unitats escrites són diferents']),guide,solution:[`${a} = ${fmtNum(exact)} ${f.u2}`,eq?`Coincideix amb ${b}`:`No coincideix amb ${b}`,`✅ ${c}`],difficulty:'medium'};
+    return {type,...conversionsMeta('comparar-equivalencies'),question:q,correct:c,options:shuffle([c,otherAns,'No es poden comparar sense mesurar de nou','Sempre són diferents si les unitats escrites són diferents']),guide,solution:[`${a} = ${fmtNum(exact)} ${f.u2}`,eq?`Coincideix amb ${b}`:`No coincideix amb ${b}`,`✅ ${c}`],difficulty:'medium'};
   }
 
   const contexts=[
-    {obj:'Una habitació',val:4,fr:'m',to:'cm',factor:100,u:'cm',txt:'fa {v} m d’amplada'},
-    {obj:'Una piscina',val:25,fr:'m',to:'dm',factor:10,u:'dm',txt:'té {v} m de llarg'},
-    {obj:'Un cotxe',val:1.5,fr:'t',to:'kg',factor:1000,u:'kg',txt:'pesa {v} t'},
-    {obj:'Una ampolla',val:2,fr:'l',to:'cl',factor:100,u:'cl',txt:'conté {v} l'},
-    {obj:'Un corredor',val:5,fr:'km',to:'m',factor:1000,u:'m',txt:'recorre {v} km'},
-    {obj:'Una cinta',val:3,fr:'m',to:'mm',factor:1000,u:'mm',txt:'mesura {v} m'},
-    {obj:'Una motxilla',val:4,fr:'kg',to:'g',factor:1000,u:'g',txt:'pesa {v} kg'},
-    {obj:'Una gerra',val:15,fr:'dl',to:'ml',factor:100,u:'ml',txt:'conté {v} dl'},
-    {obj:'Un sender',val:12,fr:'hm',to:'m',factor:100,u:'m',txt:'té {v} hm'},
     {obj:'Una rajola',val:6,fr:'dm²',to:'cm²',factor:100,u:'cm²',txt:'té una superfície de {v} dm²'},
     {obj:'Un terreny',val:3,fr:'km²',to:'m²',factor:1000000,u:'m²',txt:'té una superfície de {v} km²'},
-    {obj:'Una cursa',val:2,fr:'h',to:'min',factor:60,u:'min',txt:'dura {v} h'}
-  ];
-  const it=contexts[rnd(0,contexts.length-1)],res=it.val*it.factor;
+    {obj:'Una cartolina',val:4,fr:'m²',to:'dm²',factor:100,u:'dm²',txt:'té una superfície de {v} m²'},
+    {obj:'Un jardí',val:25000,fr:'cm²',to:'m²',factor:0.0001,u:'m²',txt:'ocupa {v} cm²'},
+    {obj:'Un mosaic',val:7500,fr:'cm²',to:'dm²',factor:0.01,u:'dm²',txt:'cobreix {v} cm²'},
+    {obj:'Una placa',val:28,fr:'dm²',to:'cm²',factor:100,u:'cm²',txt:'té una superfície de {v} dm²'},
+    {obj:'Un parc',val:2,fr:'km²',to:'m²',factor:1000000,u:'m²',txt:'ocupa {v} km²'},
+    {obj:'Una taula',val:35000,fr:'cm²',to:'m²',factor:0.0001,u:'m²',txt:'té una superfície de {v} cm²'},
+    {obj:'Un panell',val:12,fr:'dm²',to:'cm²',factor:100,u:'cm²',txt:'cobreix {v} dm²'},
+    {obj:'Una parcel·la',val:5,fr:'m²',to:'cm²',factor:10000,u:'cm²',txt:'ocupa {v} m²'},
+    {obj:'Una peça',val:42000,fr:'mm²',to:'cm²',factor:0.01,u:'cm²',txt:'té una superfície de {v} mm²'},
+    {obj:'Un paviment',val:90000,fr:'cm²',to:'dm²',factor:0.01,u:'dm²',txt:'cobreix {v} cm²'}
+  ];  const it=contexts[rnd(0,contexts.length-1)],res=it.val*it.factor;
   const phrase=it.txt.replace('{v}',fmtNum(it.val));
   const q=`${it.obj} ${phrase}. Quants ${it.u} són?`;
   const c=`${fmtNum(res)} ${it.u}`;
   const guide=['Identifica la unitat inicial i la unitat que et demanen','Decideix si passes a una unitat més gran o més petita','Aplica la conversió i mantén la unitat demanada al resultat'];
-  return {type,question:q,correct:c,options:distractors(res,it.u,[res/10,res*10,res+it.factor]),guide,solution:[`${fmtNum(it.val)} ${it.fr} = ${fmtNum(res)} ${it.to}`,`✅ ${c}`],difficulty:'medium'};
+  return {type,...conversionsMeta('conversio-superficies'),question:q,correct:c,options:distractors(res,it.u,[res/10,res*10,res+it.factor]),guide,solution:[`${fmtNum(it.val)} ${it.fr} = ${fmtNum(res)} ${it.to}`,`✅ ${c}`],difficulty:'medium'};
 }
 
 // 3. MESURA DEL TEMPS (conversions, horaris i sistema sexagesimal)
@@ -1613,17 +1612,17 @@ function timeProblem(id,family,primaryTopic,difficulty,question,totalMinutes,wro
 const MEASURE_PROBLEM_PATTERNS=[
   // CONVERSIONS I MAGNITUDS (6)
   ()=>{const km=rnd(1,4),m=[150,250,350,450,600,750][rnd(0,5)],res=km*1000+m;
-    return numProblem('C01','Conversions','metric','medium',`Una ruta té un primer tram de ${km} km i un segon tram de ${m} m. Quants metres té la ruta en total?`,res,'m',[km+m,km*100+m,res*10],[`Expressa els dos trams amb la mateixa unitat`,`Suma les dues longituds un cop siguin comparables`],[`${km} km = ${km*1000} m`,`${km*1000} + ${m} = ${res} m`,`✅ ${res} m`]);},
+    return numProblem('C01','Conversions','conversions','medium',`Una ruta té un primer tram de ${km} km i un segon tram de ${m} m. Quants metres té la ruta en total?`,res,'m',[km+m,km*100+m,res*10],[`Expressa els dos trams amb la mateixa unitat`,`Suma les dues longituds un cop siguin comparables`],[`${km} km = ${km*1000} m`,`${km*1000} + ${m} = ${res} m`,`✅ ${res} m`]);},
   ()=>{const kg=[3,4,5,6,8,10][rnd(0,5)],g=[100,200,250,500][rnd(0,3)],res=kg*1000/g;
-    return numProblem('C02','Conversions','metric','medium',`Hi ha ${kg} kg d'arròs i es volen fer bosses de ${g} g. Quantes bosses completes es poden omplir?`,res,'bosses',[kg,res/2,res*10,res/10,res*2],[`Converteix tota la massa a grams`,`Divideix la massa total per la massa de cada bossa`],[`${kg} kg = ${kg*1000} g`,`${kg*1000} ÷ ${g} = ${res}`,`✅ ${res} bosses`]);},
+    return numProblem('C02','Conversions','conversions','medium',`Hi ha ${kg} kg d'arròs i es volen fer bosses de ${g} g. Quantes bosses completes es poden omplir?`,res,'bosses',[kg,res/2,res*10,res/10,res*2],[`Converteix tota la massa a grams`,`Divideix la massa total per la massa de cada bossa`],[`${kg} kg = ${kg*1000} g`,`${kg*1000} ÷ ${g} = ${res}`,`✅ ${res} bosses`]);},
   ()=>{const L=[6,9,12,15][rnd(0,3)],ml=[250,500,750][rnd(0,2)],res=L*1000/ml;
-    return numProblem('C03','Conversions','metric','medium',`Un dipòsit conté ${L} l de beguda. Si s'omplen ampolles de ${ml} ml, quantes ampolles completes s'obtenen?`,res,'ampolles',[L,Math.round(L*100/ml),res*2],[`Expressa els litres en mil·lilitres`,`Divideix la capacitat total per la capacitat d'una ampolla`],[`${L} l = ${L*1000} ml`,`${L*1000} ÷ ${ml} = ${res}`,`✅ ${res} ampolles`]);},
+    return numProblem('C03','Conversions','conversions','medium',`Un dipòsit conté ${L} l de beguda. Si s'omplen ampolles de ${ml} ml, quantes ampolles completes s'obtenen?`,res,'ampolles',[L,Math.round(L*100/ml),res*2],[`Expressa els litres en mil·lilitres`,`Divideix la capacitat total per la capacitat d'una ampolla`],[`${L} l = ${L*1000} ml`,`${L*1000} ÷ ${ml} = ${res}`,`✅ ${res} ampolles`]);},
   ()=>{const l=rnd(1,3),cl=[25,50,75][rnd(0,2)],ml=[100,200,300][rnd(0,2)],res=l*1000+cl*10+ml;
-    return numProblem('C04','Conversions','metric','medium',`En una recepta s'utilitzen ${l} l, ${cl} cl i ${ml} ml de líquid. Quants mil·lilitres són en total?`,res,'ml',[l+cl+ml,l*100+cl*10+ml,res/10],[`Converteix totes les quantitats a mil·lilitres`,`Suma les tres quantitats ja expressades amb la mateixa unitat`],[`${l} l = ${l*1000} ml`,`${cl} cl = ${cl*10} ml`,`${l*1000}+${cl*10}+${ml}=${res} ml`,`✅ ${res} ml`]);},
+    return numProblem('C04','Conversions','conversions','medium',`En una recepta s'utilitzen ${l} l, ${cl} cl i ${ml} ml de líquid. Quants mil·lilitres són en total?`,res,'ml',[l+cl+ml,l*100+cl*10+ml,res/10],[`Converteix totes les quantitats a mil·lilitres`,`Suma les tres quantitats ja expressades amb la mateixa unitat`],[`${l} l = ${l*1000} ml`,`${cl} cl = ${cl*10} ml`,`${l*1000}+${cl*10}+${ml}=${res} ml`,`✅ ${res} ml`]);},
   ()=>{const cm=[350,480,625,750,920][rnd(0,4)];let used;do{used=[80,120,175,250][rnd(0,3)];}while(cm===2*used);const left=cm-used;
-    return numProblem('C05','Conversions','metric','easy',`Una cinta fa ${cm} cm. Se'n gasten ${used} cm. Quants centímetres en queden?`,left,'cm',[cm+used,used,cm],[`Comprova que les dues dades ja estan en la mateixa unitat`,`Resta la longitud utilitzada de la longitud inicial`],[`${cm} − ${used} = ${left} cm`,`✅ ${left} cm`]);},
+    return numProblem('C05','Conversions','problemes','easy',`Una cinta fa ${cm} cm. Se'n gasten ${used} cm. Quants centímetres en queden?`,left,'cm',[cm+used,used,cm],[`Comprova que les dues dades ja estan en la mateixa unitat`,`Resta la longitud utilitzada de la longitud inicial`],[`${cm} − ${used} = ${left} cm`,`✅ ${left} cm`]);},
   ()=>{const m=[8,10,12,15][rnd(0,3)],total=m*100;let piece;do{piece=[30,35,40,45][rnd(0,3)];}while(total%piece===0);const full=Math.floor(total/piece);
-    return numProblem('C06','Conversions','metric','hard',`Una corda de ${m} m es talla en trossos de ${piece} cm. Quants trossos complets es poden obtenir?`,full,'trossos',[Math.ceil(total/piece),Math.floor(total/(piece*2)),Math.floor(total/(piece/2))],[`Converteix la longitud total a centímetres`,`Divideix entre la longitud de cada tros`,`Com que es demanen trossos complets, queda't amb la part entera`],[`${m} m = ${total} cm`,`${total} ÷ ${piece} = ${fmtNum(total/piece)}`,`✅ ${full} trossos complets`]);},
+    return numProblem('C06','Conversions','conversions','hard',`Una corda de ${m} m es talla en trossos de ${piece} cm. Quants trossos complets es poden obtenir?`,full,'trossos',[Math.ceil(total/piece),Math.floor(total/(piece*2)),Math.floor(total/(piece/2))],[`Converteix la longitud total a centímetres`,`Divideix entre la longitud de cada tros`,`Com que es demanen trossos complets, queda't amb la part entera`],[`${m} m = ${total} cm`,`${total} ÷ ${piece} = ${fmtNum(total/piece)}`,`✅ ${full} trossos complets`]);},
 
   // TEMPS I SISTEMA SEXAGESIMAL (5)
   ()=>{const startH=rnd(7,10),startM=[0,15,30,45][rnd(0,3)],drive=90+15*rnd(0,6),stop=15+5*rnd(0,6),total=drive+stop,end=startH*60+startM+total,eh=Math.floor(end/60),em=end%60;
