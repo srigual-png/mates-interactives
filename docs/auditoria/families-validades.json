@@ -620,6 +620,866 @@
           "name": "Valorar una afirmació universal sobre múltiples."
         }
       ]
+    },
+    {
+      "id": "1eso/numeric/mcd_mcm",
+      "course": "1r ESO",
+      "sense": "Numèric",
+      "topic": "MCD i mcm",
+      "code_topic_id": "mcmmcd",
+      "status": "validat",
+      "verified_on": "2026-11-12",
+      "pr": 18,
+      "merge_commit": "6c8a6a1facd183b86783523656885ae258a2bca5",
+      "validation": "PR #18 fusionada després de revisió. Sintaxi i comprovacions puntuals del parser (7 casos) i 33 mostres de família superades. Les suites completes es van intentar però Edge/Playwright no va iniciar (error AppContainer/SiteList -5); generacions massives, regressió E2E i oracles complets pendents. Pages no verificat.",
+      "families": [
+        {
+          "id": "llistar-divisors-comuns",
+          "name": "Llistar tots els divisors comuns positius",
+          "level": 1,
+          "generators": [
+            "P1"
+          ],
+          "variants": [
+            "examen:1"
+          ]
+        },
+        {
+          "id": "llistar-multiples-comuns-positius",
+          "name": "Llistar múltiples comuns positius fins a un límit inclusiu",
+          "level": 1,
+          "generators": [
+            "P2"
+          ],
+          "variants": [
+            "examen:2"
+          ]
+        },
+        {
+          "id": "reconeixer-relacions-especials-mcd-mcm",
+          "name": "Reconèixer casos especials de MCD i mcm sense factoritzar",
+          "level": 1,
+          "generators": [
+            "P3"
+          ]
+        },
+        {
+          "id": "calcular-mcd-amb-factors-primers",
+          "name": "Calcular el MCD amb factors primers",
+          "level": 2,
+          "generators": [
+            "A1"
+          ],
+          "variants": [
+            "banc:mcmmcd-1"
+          ]
+        },
+        {
+          "id": "calcular-mcm-amb-factors-primers",
+          "name": "Calcular el mcm amb factors primers (dos o tres operands)",
+          "level": 2,
+          "generators": [
+            "A2"
+          ],
+          "variants": [
+            "examen:3",
+            "banc:mcmmcd-1"
+          ]
+        },
+        {
+          "id": "sincronitzar-inicis-simultanis",
+          "name": "Trobar la primera coincidència d'esdeveniments periòdics amb inici simultani",
+          "level": 2,
+          "generators": [
+            "A3"
+          ],
+          "variants": [
+            "examen:4",
+            "banc:mcmmcd-2"
+          ]
+        },
+        {
+          "id": "maximitzar-repartiment-o-tall",
+          "name": "Maximitzar lots idèntics o la longitud de talls iguals sense sobrants",
+          "level": 2,
+          "generators": [
+            "A4",
+            "A5"
+          ],
+          "variants": [
+            "examen:5",
+            "banc:mcmmcd-3",
+            "banc:mcmmcd-4"
+          ]
+        },
+        {
+          "id": "triar-i-justificar-mcd-o-mcm",
+          "name": "Triar i justificar si cal MCD o mcm",
+          "level": 2,
+          "generators": [
+            "P4"
+          ]
+        },
+        {
+          "id": "diagnosticar-seleccio-de-factors",
+          "name": "Diagnosticar una selecció incorrecta de factors o exponents",
+          "level": 2,
+          "generators": [
+            "P6"
+          ]
+        },
+        {
+          "id": "coincidencies-periodiques-desfasades",
+          "name": "Trobar coincidències periòdiques amb inicis desfasats i un llindar",
+          "level": 3,
+          "generators": [
+            "A6"
+          ],
+          "variants": [
+            "tasca:coincidencies-desfasades",
+            "examen:1001",
+            "banc:mcmmcd-raonament"
+          ]
+        },
+        {
+          "id": "reconstruir-operand-amb-mcd-o-mcm",
+          "name": "Reconstruir l'operand a partir del MCD/mcm objectiu i un interval",
+          "level": 3,
+          "generators": [
+            "P5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/numeric/enters",
+      "course": "1r ESO",
+      "sense": "Numèric",
+      "topic": "Nombres enters",
+      "code_topic_id": "enters",
+      "status": "validat",
+      "verified_on": "2026-11-12",
+      "pr": 19,
+      "merge_commit": "b9f3c1f22090dd55757176844d1f94533adba3e4",
+      "validation": "PR #19 fusionada. Test de famílies: 4.250 generacions de pràctica, 250 de raonament, 1.250 contextuals i 1.750 d’examen amb oracles/comprovacions; GitHub Actions run 14 superat. Test Playwright local d’integració no va iniciar Edge (error -5) i prova visual pendent. Pages no verificat.",
+      "families": [
+        {
+          "id": "comparar-i-ordenar-enters",
+          "name": "Comparar i ordenar nombres enters",
+          "level": 1,
+          "generators": [
+            "E01"
+          ],
+          "variants": [
+            "examen:1"
+          ]
+        },
+        {
+          "id": "sumar-enters",
+          "name": "Sumar enters amb signe",
+          "level": 1,
+          "generators": [
+            "E02"
+          ],
+          "variants": [
+            "examen:2"
+          ]
+        },
+        {
+          "id": "restar-enters",
+          "name": "Restar enters",
+          "level": 1,
+          "generators": [
+            "E03"
+          ],
+          "variants": [
+            "examen:3"
+          ]
+        },
+        {
+          "id": "multiplicar-enters",
+          "name": "Multiplicar enters amb signe",
+          "level": 1,
+          "generators": [
+            "E04"
+          ],
+          "variants": [
+            "examen:4"
+          ]
+        },
+        {
+          "id": "aplicar-un-canvi-signe",
+          "name": "Aplicar un canvi positiu o negatiu a una posició",
+          "level": 1,
+          "generators": [
+            "E05"
+          ],
+          "variants": [
+            "examen:5",
+            "examen:7"
+          ]
+        },
+        {
+          "id": "combinar-canvis-signes",
+          "name": "Combinar canvis ordenats amb signe",
+          "level": 2,
+          "generators": [
+            "E06"
+          ],
+          "variants": [
+            "examen:6",
+            "banc:enters-1",
+            "banc:enters-2",
+            "banc:enters-4"
+          ]
+        },
+        {
+          "id": "valor-absolut-i-distancia",
+          "name": "Interpretar valor absolut i distància",
+          "level": 1,
+          "generators": [
+            "E07",
+            "E10"
+          ],
+          "variants": [
+            "banc:enters-3"
+          ]
+        },
+        {
+          "id": "posicio-i-desplacament-net",
+          "name": "Calcular posició final i desplaçament net",
+          "level": 2,
+          "generators": [
+            "E08"
+          ],
+          "variants": [
+            "banc:enters-5"
+          ]
+        },
+        {
+          "id": "ordenar-moviments-amb-restriccions",
+          "name": "Ordenar moviments subjectes a límits intermedis",
+          "level": 3,
+          "generators": [
+            "E09"
+          ],
+          "variants": [
+            "banc:enters-raonament",
+            "raonament:moviments-amb-limits"
+          ]
+        },
+        {
+          "id": "trobar-oposat-additiu",
+          "name": "Trobar l’oposat additiu",
+          "level": 1,
+          "generators": [
+            "E11"
+          ]
+        },
+        {
+          "id": "llegir-escala-de-recta",
+          "name": "Llegir una escala de recta numèrica",
+          "level": 1,
+          "generators": [
+            "E12"
+          ]
+        },
+        {
+          "id": "reconstruir-operand-additiu",
+          "name": "Reconstruir un operand en operacions additives",
+          "level": 2,
+          "generators": [
+            "E13",
+            "E14"
+          ]
+        },
+        {
+          "id": "diagnosticar-resta-de-negatiu",
+          "name": "Diagnosticar errors en la resta d’un enter negatiu",
+          "level": 2,
+          "generators": [
+            "E15"
+          ]
+        },
+        {
+          "id": "reflectir-respecte-dun-punt",
+          "name": "Reflectir un punt respecte d’un altre punt",
+          "level": 2,
+          "generators": [
+            "E16"
+          ]
+        },
+        {
+          "id": "operacions-combinades-amb-enters",
+          "name": "Resoldre operacions combinades amb enters",
+          "level": 2,
+          "generators": [
+            "E17"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/numeric/decimals",
+      "course": "1r ESO",
+      "sense": "Numèric",
+      "topic": "Nombres decimals",
+      "code_topic_id": "decimals",
+      "status": "validat",
+      "verified_on": "2026-11-13",
+      "pr": 20,
+      "merge_commit": "d7f99a6c3abf45247bb10fe91e66e22086ada49b",
+      "validation": "PR #20 fusionada. Test de famílies: 5.750 mostres, oracles enters escalats/BigInt; E2E Playwright superat amb Chrome/Chromium. Edge no s’iniciava al sandbox i la suite ha fet fallback a Chrome. Pages no verificat.",
+      "families": [
+        {
+          "id": "operacions-addicio-resta-decimals",
+          "name": "Sumar i restar decimals amb alineació i reagrupament",
+          "level": 2,
+          "generators": [
+            "D01",
+            "D17"
+          ]
+        },
+        {
+          "id": "multiplicacio-decimals",
+          "name": "Multiplicar nombres decimals",
+          "level": 2,
+          "generators": [
+            "D02",
+            "D07"
+          ]
+        },
+        {
+          "id": "arrodoniment-decimals",
+          "name": "Arrodonir decimals a una precisió indicada",
+          "level": 1,
+          "generators": [
+            "D03"
+          ]
+        },
+        {
+          "id": "conversio-fraccio-decimal",
+          "name": "Convertir entre fraccions amb decimal exacte i decimals",
+          "level": 2,
+          "generators": [
+            "D04",
+            "D05"
+          ]
+        },
+        {
+          "id": "compra-i-canvi",
+          "name": "Resoldre una compra i calcular el canvi",
+          "level": 2,
+          "generators": [
+            "D06"
+          ]
+        },
+        {
+          "id": "error-absolut",
+          "name": "Calcular l’error absolut d’una aproximació",
+          "level": 1,
+          "generators": [
+            "D08"
+          ]
+        },
+        {
+          "id": "error-relatiu-percentual",
+          "name": "Calcular l’error relatiu percentual",
+          "level": 2,
+          "generators": [
+            "D09"
+          ]
+        },
+        {
+          "id": "divisio-unitaria-contextual",
+          "name": "Calcular valor unitari amb divisió decimal per natural",
+          "level": 1,
+          "generators": [
+            "D10"
+          ]
+        },
+        {
+          "id": "repartiment-amb-residu-decimal",
+          "name": "Repartir amb residu decimal i interpretar-lo",
+          "level": 2,
+          "generators": [
+            "D11"
+          ]
+        },
+        {
+          "id": "mitjana-decimal",
+          "name": "Calcular una mitjana de valors decimals",
+          "level": 2,
+          "generators": [
+            "D12"
+          ]
+        },
+        {
+          "id": "garantia-amb-error-de-mesura",
+          "name": "Raonar amb marges d’error per satisfer dues restriccions",
+          "level": 3,
+          "generators": [
+            "D13"
+          ]
+        },
+        {
+          "id": "valor-posicional-decimal",
+          "name": "Identificar valor o posició d’una xifra decimal",
+          "level": 1,
+          "generators": [
+            "D14"
+          ]
+        },
+        {
+          "id": "comparacio-i-ordenacio-decimal",
+          "name": "Comparar i ordenar nombres decimals",
+          "level": 1,
+          "generators": [
+            "D15"
+          ]
+        },
+        {
+          "id": "recta-numerica-decimal",
+          "name": "Interpretar decimals en una recta numèrica graduada",
+          "level": 1,
+          "generators": [
+            "D16"
+          ]
+        },
+        {
+          "id": "divisio-decimal-per-decimal",
+          "name": "Dividir decimals fent enter el divisor",
+          "level": 2,
+          "generators": [
+            "D18"
+          ]
+        },
+        {
+          "id": "operar-amb-potencies-de-deu",
+          "name": "Multiplicar o dividir per potències de deu",
+          "level": 1,
+          "generators": [
+            "D19"
+          ]
+        },
+        {
+          "id": "construccio-entre-decimals",
+          "name": "Construir un decimal entre dos nombres amb precisió prescrita",
+          "level": 1,
+          "generators": [
+            "D20"
+          ]
+        },
+        {
+          "id": "reconstruccio-xifra-amb-cotes",
+          "name": "Reconstruir una xifra sota dues cotes",
+          "level": 2,
+          "generators": [
+            "D21"
+          ]
+        },
+        {
+          "id": "diagnosi-errors-operacions-decimals",
+          "name": "Diagnosticar i corregir errors d’operacions decimals",
+          "level": 2,
+          "generators": [
+            "D22"
+          ]
+        },
+        {
+          "id": "estimacio-producte-decimal",
+          "name": "Estimar i acotar un producte decimal",
+          "level": 3,
+          "generators": [
+            "D23"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/numeric/proporcionalitat",
+      "course": "1r ESO",
+      "sense": "Numèric",
+      "topic": "Proporcionalitat directa",
+      "code_topic_id": "proporcionalitat",
+      "status": "validat",
+      "verified_on": "2026-11-13",
+      "pr": 21,
+      "merge_commit": "429e8d09952e41c043d68883cbfcd4d7654b9884",
+      "validation": "PR #21 fusionada. Quatre comprovacions de sintaxi; 3.250 generacions pures (250 per 13 generadors) amb oracle independent; E2E complet superat amb Chrome/Chromium, incloent rotació, bancs i exàmens. Pages no verificat.",
+      "families": [
+        {
+          "id": "P01",
+          "name": "Reconèixer proporcionalitat directa",
+          "level": 1,
+          "generators": [
+            "P01"
+          ]
+        },
+        {
+          "id": "P03",
+          "name": "Calcular i interpretar la constant de proporcionalitat",
+          "level": 1,
+          "generators": [
+            "P03",
+            "P06"
+          ]
+        },
+        {
+          "id": "P02-factor",
+          "name": "Aplicar el mateix factor a dues magnituds proporcionals",
+          "level": 1,
+          "generators": [
+            "P02-factor"
+          ]
+        },
+        {
+          "id": "P02",
+          "name": "Trobar el valor unitari i comparar tarifes",
+          "level": 2,
+          "generators": [
+            "P02",
+            "P02-consum",
+            "P07"
+          ]
+        },
+        {
+          "id": "P04",
+          "name": "Comprovar i reparar taules proporcionals",
+          "level": 2,
+          "generators": [
+            "P04",
+            "P08"
+          ]
+        },
+        {
+          "id": "P10",
+          "name": "Diagnosticar un raonament additiu en una situació proporcional",
+          "level": 2,
+          "generators": [
+            "P10"
+          ]
+        },
+        {
+          "id": "P05",
+          "name": "Optimitzar producció amb restriccions",
+          "level": 3,
+          "generators": [
+            "P05"
+          ]
+        },
+        {
+          "id": "P09",
+          "name": "Reconstruir valors a partir de la suma",
+          "level": 3,
+          "generators": [
+            "P09"
+          ]
+        },
+        {
+          "id": "P11",
+          "name": "Valorar si les dades són suficients per determinar una quantitat",
+          "level": 3,
+          "generators": [
+            "P11"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/numeric/percentatges",
+      "course": "1r ESO",
+      "sense": "Numèric",
+      "topic": "Percentatges",
+      "code_topic_id": "percentatges",
+      "status": "validat",
+      "verified_on": "2026-11-13",
+      "pr": 22,
+      "merge_commit": "867ce909f121200bf1552bb75578658936034b88",
+      "validation": "PR #22 fusionada. 5.000 generacions i 50.000 comprovacions bàsiques al test pur; E2E amb Chrome de generadors, classificació, rotació, bancs, exàmens, teoria i mòbil; workflow verifica-inventari superat. Edge no es va iniciar i hi va haver fallback a Chrome. Pages no verificat.",
+      "families": [
+        {
+          "id": "Q01",
+          "name": "Calcular un percentatge d’una quantitat",
+          "level": 1,
+          "generators": [
+            "Q01"
+          ]
+        },
+        {
+          "id": "Q05",
+          "name": "Representacions equivalents de fracció, decimal i percentatge",
+          "level": 1,
+          "generators": [
+            "Q05-fraccio-pct",
+            "Q05-decimal-pct",
+            "Q05-pct-decimal",
+            "Q05-pct-fraccio",
+            "Q10"
+          ]
+        },
+        {
+          "id": "Q02",
+          "name": "Trobar el percentatge que representa una part",
+          "level": 2,
+          "generators": [
+            "Q02"
+          ]
+        },
+        {
+          "id": "Q03",
+          "name": "Reconstruir un total a partir d’una part i el percentatge",
+          "level": 2,
+          "generators": [
+            "Q03-total",
+            "Q03-unitari"
+          ]
+        },
+        {
+          "id": "Q04",
+          "name": "Calcular el preu final després d’un augment o descompte",
+          "level": 2,
+          "generators": [
+            "Q04-augment",
+            "Q04-descompte"
+          ]
+        },
+        {
+          "id": "Q06",
+          "name": "Calcular una taxa de variació",
+          "level": 2,
+          "generators": [
+            "Q06"
+          ]
+        },
+        {
+          "id": "Q07",
+          "name": "Aplicar canvis percentuals successius",
+          "level": 2,
+          "generators": [
+            "Q07"
+          ]
+        },
+        {
+          "id": "Q08",
+          "name": "Calcular el complement fins al 100%",
+          "level": 2,
+          "generators": [
+            "Q08"
+          ]
+        },
+        {
+          "id": "Q11",
+          "name": "Comparar ofertes amb preu inicial conegut",
+          "level": 2,
+          "generators": [
+            "Q11"
+          ]
+        },
+        {
+          "id": "Q13",
+          "name": "Calcular i interpretar una diferència en punts percentuals",
+          "level": 2,
+          "generators": [
+            "Q13"
+          ]
+        },
+        {
+          "id": "Q03-preu-inicial",
+          "name": "Recuperar el preu inicial després d’un augment o descompte",
+          "level": 3,
+          "generators": [
+            "Q03-descompte",
+            "Q03-augment"
+          ]
+        },
+        {
+          "id": "Q09",
+          "name": "Trobar el llindar estricte entre dues ofertes",
+          "level": 3,
+          "generators": [
+            "Q09"
+          ]
+        },
+        {
+          "id": "Q12",
+          "name": "Diagnosticar l’error de base en canvis percentuals successius",
+          "level": 3,
+          "generators": [
+            "Q12"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/numeric/fraccions",
+      "course": "1r ESO",
+      "sense": "Numèric",
+      "topic": "Fraccions",
+      "code_topic_id": "fraccions",
+      "status": "validat",
+      "verified_on": "2026-11-13",
+      "pr": 23,
+      "merge_commit": "502d8d93714cf58e741386ce612167458ffccd7c",
+      "validation": "PR #23 fusionada. Suite d’oracles exactes: 5.750 mostres, 250 per les 23 rutes; Playwright integral superat amb Chrome/Chromium incloent pràctica, rotació, exàmens, banc, teoria, hashchange i mòbil; node --check dels quatre JS sense errors. Edge no va iniciar-se i es va usar fallback Chrome. Pages no s’ha desplegat/verificat segons informe final.",
+      "families": [
+        {
+          "id": "equivalencia-fraccions",
+          "name": "Equivalència i simplificació de fraccions",
+          "level": 1,
+          "generators": [
+            "F01",
+            "F06",
+            "F20"
+          ]
+        },
+        {
+          "id": "suma-fraccions",
+          "name": "Suma de fraccions",
+          "level": 2,
+          "generators": [
+            "F02"
+          ]
+        },
+        {
+          "id": "producte-fraccions",
+          "name": "Multiplicació de fraccions",
+          "level": 1,
+          "generators": [
+            "F03"
+          ]
+        },
+        {
+          "id": "divisio-fraccions",
+          "name": "Divisió de fraccions",
+          "level": 1,
+          "generators": [
+            "F04"
+          ]
+        },
+        {
+          "id": "comparar-fraccions",
+          "name": "Comparació de fraccions",
+          "level": 1,
+          "generators": [
+            "F05"
+          ]
+        },
+        {
+          "id": "fraccio-quantitat",
+          "name": "Fracció d’una quantitat i complement",
+          "level": 1,
+          "generators": [
+            "F07",
+            "F09"
+          ]
+        },
+        {
+          "id": "tipus-fraccio",
+          "name": "Fraccions pròpies i impròpies",
+          "level": 1,
+          "generators": [
+            "F08"
+          ]
+        },
+        {
+          "id": "representacions-fraccio",
+          "name": "Conversió entre representacions de fracció",
+          "level": 1,
+          "generators": [
+            "F10"
+          ]
+        },
+        {
+          "id": "parts-disjuntes",
+          "name": "Parts disjuntes i complement",
+          "level": 2,
+          "generators": [
+            "F11",
+            "F15"
+          ]
+        },
+        {
+          "id": "fraccio-duna-fraccio",
+          "name": "Fracció d’una fracció",
+          "level": 2,
+          "generators": [
+            "F12"
+          ]
+        },
+        {
+          "id": "retirades-successives",
+          "name": "Retirades successives",
+          "level": 2,
+          "generators": [
+            "F13"
+          ]
+        },
+        {
+          "id": "reconstruir-total",
+          "name": "Reconstruir el total",
+          "level": 2,
+          "generators": [
+            "F14"
+          ]
+        },
+        {
+          "id": "comparar-i-restar",
+          "name": "Comparar dues fraccions i trobar-ne la diferència",
+          "level": 2,
+          "generators": [
+            "F16"
+          ]
+        },
+        {
+          "id": "reconstruccio-successiva",
+          "name": "Reconstrucció successiva de quantitats",
+          "level": 3,
+          "generators": [
+            "F17"
+          ]
+        },
+        {
+          "id": "representacio-visual",
+          "name": "Lectura de representacions visuals",
+          "level": 1,
+          "generators": [
+            "F18"
+          ]
+        },
+        {
+          "id": "quocient-nombre-mixt",
+          "name": "Expressar un quocient com a nombre mixt",
+          "level": 1,
+          "generators": [
+            "F19"
+          ]
+        },
+        {
+          "id": "diagnosticar-errors",
+          "name": "Diagnosticar errors amb fraccions",
+          "level": 2,
+          "generators": [
+            "F21"
+          ]
+        },
+        {
+          "id": "sumand-desconegut",
+          "name": "Reconstruir un sumand en una suma de fraccions",
+          "level": 2,
+          "generators": [
+            "F22"
+          ]
+        },
+        {
+          "id": "fraccio-intermedia",
+          "name": "Trobar una fracció intermèdia sota una restricció",
+          "level": 2,
+          "generators": [
+            "F23"
+          ]
+        }
+      ]
     }
   ]
 }
