@@ -1663,14 +1663,15 @@ const MEASURE_PROBLEM_PATTERNS=[
   // MESURAMENT, ESTIMACIÓ I PRECISIÓ (5)
   ()=>{const items=[['el diàmetre d’una moneda amb precisió','Peu de rei',['Cinta mètrica','Balança','Cronòmetre']],['la massa d’una motxilla','Balança',['Transportador','Cronòmetre','Proveta graduada']],['la temperatura de l’aigua','Termòmetre',['Balança','Regle','Cronòmetre']],['el temps d’una cursa curta','Cronòmetre',['Balança','Regle','Transportador']],['l’amplitud d’un angle','Transportador',['Balança','Proveta graduada','Cinta mètrica']]],it=items[rnd(0,items.length-1)];
     return textProblem('M01','Mesurament','mesurament','easy',`Quin instrument és més adequat per mesurar ${it[0]}?`,it[1],it[2],[it[1]],[`Identifica la magnitud que vols mesurar`,`Tria l'instrument adequat al tipus de magnitud i a la precisió necessària`],[`Instrument adequat: ${it[1]}`,`✅ ${it[1]}`]);},
-  ()=>{const items=[['la distància entre dues ciutats','km',['m','cm','mm']],['la massa d’una poma','g',['kg','mg','t']],['la capacitat d’una tassa','ml',['l','kg','cm']],['la superfície d’una aula','m²',['m','cm²','l']],['la durada d’un anunci','s',['h','dies','kg']]],it=items[rnd(0,items.length-1)];
+  ()=>{const items=[['la distància entre dues ciutats','km',['m','cm','mm']],['la massa d’una poma','g',['kg','mg','t']],['la capacitat d’una tassa','ml',['l','kg','cm']],['la superfície d’una aula','m²',['m','cm²','l']],['la massa d’un camió','t',['kg','g','mg']]],it=items[rnd(0,items.length-1)];
     return textProblem('M02','Mesurament','mesurament','easy',`Quina unitat és més adequada per expressar ${it[0]}?`,it[1],it[2],[it[1]],[`Identifica la magnitud`,`Pensa en l'ordre de grandària habitual i tria una unitat pràctica`],[`Unitat adequada: ${it[1]}`,`✅ ${it[1]}`]);},
   ()=>{const real=[20,40,50,80,100][rnd(0,4)],err=[0.5,1,2][rnd(0,2)],measured=real+(rnd(0,1)?err:-err);
     return numProblem('M03','Precisió','mesurament','medium',`El valor de referència és ${fmtNum(real)} cm i una mesura dona ${fmtNum(measured)} cm. Quin és l'error absolut?`,err,'cm',[measured,real,err*2],[`Calcula la diferència entre el valor mesurat i el valor de referència`,`Pren el valor absolut de la diferència`],[`|${fmtNum(measured)}−${real}|=${fmtNum(err)} cm`,`✅ ${fmtNum(err)} cm`]);},
-  ()=>{const real=[20,40,50,100][rnd(0,3)],pct=[2,5,10][rnd(0,2)],err=real*pct/100,measured=real+err;
-    return numProblem('M04','Precisió','mesurament','hard',`Una longitud real és ${real} cm i es mesura com ${fmtNum(measured)} cm. Quin és l'error relatiu percentual?`,pct,'%',[err/real,pct*2,pct/2],[`Calcula l'error absolut`,`Divideix l'error absolut pel valor de referència`,`Converteix aquesta proporció en percentatge`],[`Error absolut = ${fmtNum(err)} cm`,`Error relatiu = ${fmtNum(err)}÷${real}=${fmtNum(err/real)}`,`Percentatge = ${pct}%`,`✅ ${pct}%`]);},
-  ()=>{const q='Es mesura una barra de 100 cm com 98 cm (error del 2%) i una peça de 20 cm com 19,8 cm (error de l\'1%). Quina mesura és relativament més precisa?';
-    return textProblem('M05','Precisió','mesurament','hard',q,'La peça de 20 cm',['La barra de 100 cm','Són igual de precises','No es pot saber'],['la peça de 20 cm','peça de 20 cm','la segona','segona'],[`Compara els errors relatius, no només els errors absoluts`,`La mesura més precisa és la que té un error relatiu menor`],[`Barra: 2% d'error relatiu`,`Peça: 1% d'error relatiu`,`1% < 2%`,`✅ La peça de 20 cm`]);},
+  ()=>{const real=[20,40,50,100][rnd(0,3)],pct=[2,5,10][rnd(0,2)],err=real*pct/100,measured=real+(rnd(0,1)?err:-err);
+    return numProblem('M04','Precisió','mesurament','medium',`Una longitud de referència és ${real} cm i la lectura és ${fmtNum(measured)} cm. Quin és l'error relatiu percentual?`,pct,'%',[err/real,pct*2,pct/2],[`Calcula l'error absolut`,`Divideix l'error absolut pel valor de referència`,`Converteix aquesta proporció en percentatge`],[`Error absolut = |${fmtNum(measured)}−${real}| = ${fmtNum(err)} cm`,`Error relatiu = ${fmtNum(err)}÷${real}=${fmtNum(err/real)}`,`Percentatge = ${pct}%`,`✅ ${pct}%`]);},
+  ()=>{const longA=[80,100,200][rnd(0,2)],longB=[20,40,50][rnd(0,2)],pctA=[2,4,5][rnd(0,2)],pctB=[1,2,3][rnd(0,2)],errA=longA*pctA/100,errB=longB*pctB/100,better=pctA<pctB?'la mesura A':pctB<pctA?'la mesura B':'les dues mesures';
+    const q=`La mesura A té valor de referència ${longA} cm i error absolut ${fmtNum(errA)} cm. La mesura B té valor de referència ${longB} cm i error absolut ${fmtNum(errB)} cm. Quina és relativament més precisa?`;
+    return textProblem('M05','Precisió','mesurament','medium',q,better,['la mesura A','la mesura B','les dues mesures','no es pot determinar'].filter(x=>x!==better),[better,better.toLocaleLowerCase('ca')],[`Error relatiu A = ${fmtNum(errA)}÷${longA} = ${pctA}%.`,`Error relatiu B = ${fmtNum(errB)}÷${longB} = ${pctB}%.`,`És més precisa la mesura amb error relatiu menor: ${better}.`],[`✅ ${better}`]);},
 
   // PROBLEMES INTEGRATS DE COSTOS I MATERIALS (6)
   ()=>{const L=rnd(4,8),W=rnd(3,6),door=1,price=[3,4,5,6][rnd(0,3)],length=2*(L+W)-door,cost=length*price;
@@ -1707,6 +1708,7 @@ function genMesuramentPrecisioRaw(){
     if(arr.length<4)throw new Error('opts4(): menys de 4 opcions pedagògiques');
     return shuffle(arr.slice(0,4));
   }
+  const meta=id=>{const f=MIFirstMeasureTasks.measurementFamilyFor(id);return {measurementFamily:f.id,familyId:f.id,taskDifficulty:f.level,diff:f.level};};
 
   if(type===1){
     const items=[
@@ -1722,7 +1724,7 @@ function genMesuramentPrecisioRaw(){
       {q:'la massa d’un ingredient de cuina',a:'Balança',w:['Cronòmetre','Termòmetre','Cinta mètrica'],mag:'massa'}
     ];
     const it=items[rnd(0,items.length-1)];
-    return {type,question:`Quin instrument és més adequat per mesurar ${it.q}?`,correct:it.a,options:opts4(it.a,it.w),guide:['Identifica quina magnitud vols mesurar','Pensa quin grau de precisió necessites','Tria l’instrument dissenyat per a aquella magnitud i precisió'],solution:[`Magnitud: ${it.mag}`,`Instrument adequat: ${it.a}`,`✅ ${it.a}`],difficulty:'easy'};
+    return {type,...meta(type),question:`Quin instrument és més adequat per mesurar ${it.q}?`,correct:it.a,options:opts4(it.a,it.w),guide:['Identifica quina magnitud vols mesurar','Pensa quin grau de precisió necessites','Tria l’instrument dissenyat per a aquella magnitud i precisió'],solution:[`Magnitud: ${it.mag}`,`Instrument adequat: ${it.a}`,`✅ ${it.a}`],difficulty:'easy'};
   }
 
   if(type===2){
@@ -1733,7 +1735,7 @@ function genMesuramentPrecisioRaw(){
       {q:'la massa d’un camió',a:'t',w:['mg','cm','ml']},
       {q:'la capacitat d’una tassa',a:'ml',w:['km','kg','m²']},
       {q:'la superfície d’una habitació',a:'m²',w:['m','l','g']},
-      {q:'la durada d’una classe',a:'min',w:['kg','cm²','ml']},
+      {q:'la temperatura d’una aula',a:'°C',w:['kg','cm²','ml']},
       {q:'l’amplitud d’un angle',a:'graus',w:['metres','litres','grams']},
       {q:'la longitud d’un carrer',a:'m',w:['mg','ml','s']},
       {q:'la capacitat d’una piscina',a:'l',w:['cm²','kg','min']},
@@ -1741,7 +1743,7 @@ function genMesuramentPrecisioRaw(){
       {q:'la superfície d’una pista esportiva',a:'m²',w:['m','kg','ml']}
     ];
     const it=items[rnd(0,items.length-1)];
-    return {type,question:`Quina unitat és més adequada per expressar ${it.q}?`,correct:it.a,options:opts4(it.a,it.w),guide:['Identifica la magnitud que es vol expressar','Imagina l’ordre de magnitud habitual de l’objecte o situació','Tria una unitat que doni un valor fàcil d’interpretar'],solution:[`Unitat adequada: ${it.a}`,`✅ ${it.a}`],difficulty:'easy'};
+    return {type,...meta(type),question:`Quina unitat és més adequada per expressar ${it.q}?`,correct:it.a,options:opts4(it.a,it.w),guide:['Identifica la magnitud que es vol expressar','Imagina l’ordre de magnitud habitual de l’objecte o situació','Tria una unitat que doni un valor fàcil d’interpretar'],solution:[`Unitat adequada: ${it.a}`,`✅ ${it.a}`],difficulty:'easy'};
   }
 
   if(type===3){
@@ -1750,7 +1752,7 @@ function genMesuramentPrecisioRaw(){
     const real=one*d;
     const q=`En un plànol, 1 cm representa ${one} m reals. Una paret hi mesura ${d} cm. Quina longitud real té?`;
     const c=`${real} m`;
-    return {type,question:q,correct:c,options:distractors(real,'m',[d,one+d,d/one]),guide:['Interpreta què representa una unitat de longitud al plànol','Mantén la mateixa proporció per a la longitud dibuixada','Expressa el resultat amb la unitat real indicada'],solution:[`1 cm del plànol ↔ ${one} m reals`,`${d} cm ↔ ${d} × ${one} = ${real} m`,`✅ ${c}`],difficulty:'medium'};
+    return {type,...meta(type),question:q,correct:c,options:opts4(c,[`${d} m`,`${one+d} m`,`${fmtNum(d/one)} m`,`${real+one} m`]),guide:['Interpreta què representa una unitat de longitud al plànol','Mantén la mateixa proporció per a la longitud dibuixada','Expressa el resultat amb la unitat real indicada'],solution:[`1 cm del plànol ↔ ${one} m reals`,`${d} cm ↔ ${d} × ${one} = ${real} m`,`✅ ${c}`],difficulty:'medium'};
   }
 
   if(type===4){
@@ -1760,7 +1762,7 @@ function genMesuramentPrecisioRaw(){
     const err=Math.abs(measured-real);
     const q=`El valor de referència és ${fmtNum(real)} cm i una mesura dona ${fmtNum(measured)} cm. Quin és l'error absolut?`;
     const c=`${fmtNum(err)} cm`;
-    return {type,question:q,correct:c,options:distractors(err,'cm',[err*2,Math.abs(measured),Math.abs(real)]),guide:['Compara el valor mesurat amb el valor de referència','Calcula la diferència entre tots dos sense tenir en compte el signe','Mantén la mateixa unitat de la mesura'],solution:[`Error absolut = |${fmtNum(measured)} − ${fmtNum(real)}|`,`= ${fmtNum(err)} cm`,`✅ ${c}`],difficulty:'medium'};
+    return {type,...meta(type),question:q,correct:c,options:opts4(c,[`${fmtNum(err*2)} cm`,`${fmtNum(Math.abs(measured))} cm`,`${fmtNum(Math.abs(real))} cm`,`${fmtNum(err+1)} cm`]),guide:['Compara el valor mesurat amb el valor de referència','Calcula la diferència entre tots dos sense tenir en compte el signe','Mantén la mateixa unitat de la mesura'],solution:[`Error absolut = |${fmtNum(measured)} − ${fmtNum(real)}|`,`= ${fmtNum(err)} cm`,`✅ ${c}`],difficulty:'medium'};
   }
 
   if(type===5){
@@ -1771,7 +1773,7 @@ function genMesuramentPrecisioRaw(){
     const q=`El valor de referència és ${fmtNum(real)} cm i la mesura és ${fmtNum(measured)} cm. Quin és l'error relatiu percentual?`;
     const c=`${fmtNum(pct)}%`;
     const wrong=[`${fmtNum(err)}%`,`${fmtNum(pct*2)}%`,`${fmtNum(pct/2)}%`,`${fmtNum(real)}%`];
-    return {type,question:q,correct:c,options:opts4(c,wrong),guide:['Calcula primer l’error absolut','Compara aquest error amb el valor de referència mitjançant una divisió','Expressa la proporció obtinguda en percentatge'],solution:[`Error absolut = |${fmtNum(measured)} − ${fmtNum(real)}| = ${fmtNum(err)} cm`,`Error relatiu = ${fmtNum(err)} ÷ ${fmtNum(real)} = ${fmtNum(err/real)}`,`En percentatge: ${fmtNum(pct)}%`,`✅ ${c}`],difficulty:'hard'};
+    return {type,...meta(type),question:q,correct:c,options:opts4(c,wrong),guide:['Calcula primer l’error absolut','Compara aquest error amb el valor de referència mitjançant una divisió','Expressa la proporció obtinguda en percentatge'],solution:[`Error absolut = |${fmtNum(measured)} − ${fmtNum(real)}| = ${fmtNum(err)} cm`,`Error relatiu = ${fmtNum(err)} ÷ ${fmtNum(real)} = ${fmtNum(err/real)}`,`En percentatge: ${fmtNum(pct)}%`,`✅ ${c}`],difficulty:'medium'};
   }
 
   if(type===6){
@@ -1780,21 +1782,20 @@ function genMesuramentPrecisioRaw(){
       do{a=rnd(30,80);b=rnd(30,80);c=180-a-b;}while(c<=20||c>=120);
       const q=`En un triangle, dos angles mesuren ${a}° i ${b}°. Quant mesura el tercer angle?`;
       const corr=`${c}°`;
-      return {type,question:q,correct:corr,options:opts4(corr,[`${a+b}°`,`${180-a}°`,`${180-b}°`,`${a}°`,`${b}°`,`${Math.abs(a-b)}°`,`${2*c}°`,`${Math.max(1,Math.round(c/2))}°`,`90°`,`180°`]),guide:['Recorda la suma dels angles interiors d’un triangle','Suma els angles que coneixes','Resta aquesta suma del total dels angles interiors'],solution:[`${a}° + ${b}° = ${a+b}°`,`180° − ${a+b}° = ${c}°`,`✅ ${corr}`],difficulty:'medium'};
+      return {type,...meta(type),question:q,correct:corr,options:opts4(corr,[`${a+b}°`,`${180-a}°`,`${180-b}°`,`${a}°`,`${b}°`,`${Math.abs(a-b)}°`,`${2*c}°`,`${Math.max(1,Math.round(c/2))}°`,`90°`,`180°`]),guide:['Recorda la suma dels angles interiors d’un triangle','Suma els angles que coneixes','Resta aquesta suma del total dels angles interiors'],solution:[`${a}° + ${b}° = ${a+b}°`,`180° − ${a+b}° = ${c}°`,`✅ ${corr}`],difficulty:'medium'};
     }
     let a,b,c,d;
     do{a=rnd(70,110);b=rnd(70,110);c=rnd(70,110);d=360-a-b-c;}while(d<=30||d>=160);
     const q=`En un quadrilàter, tres angles mesuren ${a}°, ${b}° i ${c}°. Quant mesura el quart angle?`;
     const corr=`${d}°`;
-    return {type,question:q,correct:corr,options:opts4(corr,[`${a+b+c}°`,`${360-(a+b)}°`,`${360-(a+c)}°`,`${360-(b+c)}°`,`${a}°`,`${b}°`,`${c}°`,`${2*d}°`,`${Math.max(1,Math.round(d/2))}°`,`180°`,`360°`]),guide:['Recorda la suma dels angles interiors d’un quadrilàter','Suma els tres angles coneguts','Resta aquesta suma del total dels angles interiors'],solution:[`${a}° + ${b}° + ${c}° = ${a+b+c}°`,`360° − ${a+b+c}° = ${d}°`,`✅ ${corr}`],difficulty:'medium'};
+    return {type,...meta(type),question:q,correct:corr,options:opts4(corr,[`${a+b+c}°`,`${360-(a+b)}°`,`${360-(a+c)}°`,`${360-(b+c)}°`,`${a}°`,`${b}°`,`${c}°`,`${2*d}°`,`${Math.max(1,Math.round(d/2))}°`,`180°`,`360°`]),guide:['Recorda la suma dels angles interiors d’un quadrilàter','Suma els tres angles coneguts','Resta aquesta suma del total dels angles interiors'],solution:[`${a}° + ${b}° + ${c}° = ${a+b+c}°`,`360° − ${a+b+c}° = ${d}°`,`✅ ${corr}`],difficulty:'medium'};
   }
 
   if(type===7){
-    const d=[5,10,20,25][rnd(0,3)];
-    const C=Math.round(3.14*d*100)/100;
-    const q=`Una circumferència mesura aproximadament ${fmtNum(C)} cm i el seu diàmetre és ${d} cm. Quin valor aproximat s'obté en dividir la longitud de la circumferència pel diàmetre?`;
-    const corr='3,14';
-    return {type,question:q,correct:corr,options:opts4(corr,['6,28','1,57','2','4']),guide:['Forma el quocient entre la longitud de la circumferència i el diàmetre','Calcula aquesta divisió','Relaciona el valor obtingut amb la constant π'],solution:[`${fmtNum(C)} ÷ ${d} ≈ 3,14`,`Aquesta raó és π`,`✅ ${corr}`],difficulty:'medium'};
+    const d=[10,20,40,50][rnd(0,3)],noise=[-0.1,0,0.1][rnd(0,2)],C=Math.round((3.14*d+noise)*100)/100,ratio=C/d,approx=Math.round(ratio*100)/100,corr=fmtNum(approx);
+    const q=`En un experiment, es mesura una circumferència de ${fmtNum(C)} cm i el seu diàmetre de ${d} cm. Quina aproximació de π dona el quocient longitud÷diàmetre, arrodonit a les centèsimes?`;
+    const alternatives=[fmtNum(approx+0.02),fmtNum(approx-0.02),fmtNum(2*approx),fmtNum(approx/2)];
+    return {type,...meta(type),question:q,correct:corr,options:opts4(corr,alternatives),guide:['Divideix la longitud mesurada pel diàmetre mesurat.','Arrodoneix el quocient a les centèsimes i compara’l amb π≈3,14.','Les mesures experimentals poden donar una petita diferència.'],solution:[`${fmtNum(C)} ÷ ${d} ≈ ${fmtNum(ratio)}`,`A les centèsimes: ${corr}. El valor pot variar lleument per l’error de mesura.`,`✅ ${corr}`],difficulty:'easy'};
   }
 
   const items=[
@@ -1808,7 +1809,7 @@ function genMesuramentPrecisioRaw(){
     {q:'Volem enrajolar tota una terrassa. Quina magnitud de la terrassa és rellevant?',a:'Àrea',w:['Perímetre','Temps','Capacitat']}
   ];
   const it=items[rnd(0,items.length-1)];
-  return {type,question:it.q,correct:it.a,options:opts4(it.a,it.w),guide:['Decideix si la situació parla del contorn o de la superfície interior','Relaciona el context amb la magnitud geomètrica adequada'],solution:[`Magnitud adequada: ${it.a}`,`✅ ${it.a}`],difficulty:'easy'};
+  return {type,...meta(type),question:it.q,correct:it.a,options:opts4(it.a,it.w),guide:['Decideix si la situació parla del contorn o de la superfície interior','Relaciona el context amb la magnitud geomètrica adequada'],solution:[`Magnitud adequada: ${it.a}`,`✅ ${it.a}`],difficulty:'easy'};
 }
 
 // ── AMPLIACIÓ 2n ESO · VOLUM I CAPACITAT ─────────────────────────────────
