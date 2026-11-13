@@ -161,6 +161,7 @@ Comprovació sintàctica executada amb `node --check` per als dos scripts nous.
 
 - La pàgina de teoria i el CSS no s’han modificat.
 - No s’ha verificat GitHub Pages: la PR encara no s’ha fusionat i no hi ha un desplegament nou associat a aquests canvis.
+- GitHub no retornava status checks per al commit final en el moment de l’entrega.
 - S’ha executat la prova de navegador a Chrome. Edge no s’ha provat perquè Chrome estava disponible; el test també detecta Edge a Windows.
 - Els tests són mostrejos deterministes (250 per generador), no una demostració formal de totes les entrades possibles.
 - No s’han alterat els registres definitius `families-validades.json` ni l’inventari CSV.
