@@ -315,7 +315,7 @@ node --check superat per assets/js/dificultat-mi.js, assets/js/raonament-mesura-
 
 Modificats: 1eso/sentit-mesura.html, assets/js/dificultat-mi.js, assets/js/raonament-mesura-1eso.js. Nous: scripts/comprova-temps-families-1eso.cjs, scripts/comprova-temps-1eso.cjs i aquest informe. No es modifica teoria, CSS, altres temes ni el registre JSON/CSV.
 
-Chrome local és el navegador verificat; Edge no s’ha provat. GitHub Pages no es considera desplegat ni verificat abans de fusionar. No s’ha executat el workflow remot d’aquesta branca.
+Chrome local és el navegador verificat; Edge no s’ha provat. GitHub Pages no es considera desplegat ni verificat abans de fusionar. A la creació de la PR, el workflow de GitHub Actions «Verifica inventaris fase A» va acabar amb èxit al commit f2042335147492e2c39a2adf150533e4d6cfb9a7.
 
 ## Ordres CMD per repetir
 
