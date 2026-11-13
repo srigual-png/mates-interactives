@@ -642,11 +642,12 @@ function takeVariedExercise(key,make,cycleSize=60){
     fallback=ex;
     const qKey=String(ex&&ex.question!==undefined?ex.question:'');
     const repeated=st.seen.has(qKey);
-    const sameType=st.lastType!==null&&ex&&ex.type===st.lastType;
+    const identity=key==='metric'?(ex&&(ex.metricFamily||ex.familyId||ex.type)):ex&&ex.type;
+    const sameType=st.lastType!==null&&identity===st.lastType;
 
     if(!repeated&&!sameType){
       st.seen.add(qKey);
-      st.lastType=ex.type;
+      st.lastType=identity;
       return ex;
     }
   }
@@ -658,7 +659,7 @@ function takeVariedExercise(key,make,cycleSize=60){
     const qKey=String(ex&&ex.question!==undefined?ex.question:'');
     if(!st.seen.has(qKey)){
       st.seen.add(qKey);
-      st.lastType=ex.type;
+      st.lastType=key==='metric'?(ex.metricFamily||ex.familyId||ex.type):ex.type;
       return ex;
     }
   }
@@ -668,7 +669,7 @@ function takeVariedExercise(key,make,cycleSize=60){
   st=VARIETY_STATE[key];
   const ex=fallback||make();
   st.seen.add(String(ex.question||''));
-  st.lastType=ex.type;
+  st.lastType=key==='metric'?(ex.metricFamily||ex.familyId||ex.type):ex.type;
   return ex;
 }
 
@@ -676,6 +677,10 @@ function takeVariedExercise(key,make,cycleSize=60){
 
 function genMetricRaw(){
   const type=rnd(1,3);
+  function metricMeta(steps=1){
+    const family=MIFirstMeasureTasks.metricFamilyFor(type,steps);
+    return {metricFamily:family.id,familyId:family.id,variantId:`metric-${type}-${steps}`,taskDifficulty:family.level,diff:family.level};
+  }
 
   function metricGuide(fr,to,units){
     const i1=units.indexOf(fr),i2=units.indexOf(to);
@@ -711,7 +716,7 @@ function genMetricRaw(){
     const c=`${fmtMetric(res)} ${to}`;
     const operation=i2>i1?'multiplica':'divideix',factor=Math.pow(10,steps);
     return {
-      type,question:q,correct:c,options:metricDistractors(res,to,10,steps),
+      type,...metricMeta(steps),question:q,correct:c,options:metricDistractors(res,to,10,steps),
       guide:metricGuide(fr,to,units),
       solution:[`Entre ${fr} i ${to} hi ha ${steps} canvi${steps===1?'':'s'} d'unitat`,`${operation.charAt(0).toUpperCase()+operation.slice(1)} ${fmtNum(val)} per ${factor}`,`✅ ${fmtNum(val)} ${fr} = ${c}`],
       difficulty:steps===1?'easy':'medium'
@@ -728,7 +733,7 @@ function genMetricRaw(){
     const c=`${fmtMetric(res)} ${to}`;
     const operation=i2>i1?'multiplica':'divideix';
     return {
-      type,question:q,correct:c,options:metricDistractors(res,to,1000,1),guide:metricGuide(fr,to,units),
+      type,...metricMeta(1),question:q,correct:c,options:metricDistractors(res,to,1000,1),guide:metricGuide(fr,to,units),
       solution:[`En l'escala t ↔ kg ↔ g ↔ mg, ${fr} i ${to} són unitats consecutives`,`${operation.charAt(0).toUpperCase()+operation.slice(1)} ${fmtNum(val)} per 1000`,`✅ ${fmtNum(val)} ${fr} = ${c}`],
       difficulty:'easy'
     };
@@ -747,7 +752,7 @@ function genMetricRaw(){
   const c=`${fmtMetric(res)} ${to}`;
   const operation=i2>i1?'multiplica':'divideix',factor=Math.pow(10,steps);
   return {
-    type,question:q,correct:c,options:metricDistractors(res,to,10,steps),guide:metricGuide(fr,to,units),
+    type,...metricMeta(steps),question:q,correct:c,options:metricDistractors(res,to,10,steps),guide:metricGuide(fr,to,units),
     solution:[`Entre ${fr} i ${to} hi ha ${steps} canvi${steps===1?'':'s'} d'unitat`,`${operation.charAt(0).toUpperCase()+operation.slice(1)} ${fmtNum(val)} per ${factor}`,`✅ ${fmtNum(val)} ${fr} = ${c}`],
     difficulty:steps===1?'easy':'medium'
   };

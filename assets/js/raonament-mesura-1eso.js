@@ -15,7 +15,8 @@
   for(let area=36;area<=160;area++)for(const minSide of [2,3]){const all=[];for(let a=minSide;a*a<=area;a++)if(area%a===0)all.push({a,b:area/a,p:2*(a+area/a)});if(all.length>=3)rectangleCases.push({area,minSide,all});}
   function task(d,data,question,answer,guide,solution){
     if(!Number.isSafeInteger(answer)||answer<0)throw Error('Resposta fora del domini: '+d.id);
-    return {type:d.type,reasoningFamily:d.id,reasoningData:data,question,correct:String(answer),options:[answer,answer+1,answer+2,Math.max(0,answer-1)].map(String),guide,solution,allowOpen:true,isProblem:true,diff:d.level,
+    const metricFamily=d.topic==='metric'?metricFamilySpecs.find(f=>f.generators.includes(d.type))?.id:null;
+    return {type:d.type,reasoningFamily:d.id,reasoningData:data,...(metricFamily?{metricFamily,familyId:metricFamily,taskDifficulty:d.level,difficulty:d.level}:{}),question,correct:String(answer),options:[answer,answer+1,answer+2,Math.max(0,answer-1)].map(String),guide,solution,allowOpen:true,isProblem:true,diff:d.level,
       answerCheck:v=>typeof root.answerNumEq==='function'?root.answerNumEq(v,answer,1e-8):String(v).trim()===String(answer)};
   }
   const catalog=[
@@ -62,7 +63,20 @@
       return task(this,{a,b,c},`L’amplada d’una sala és ${b} m i la llargada està entre ${a} i ${a+1} m. Per calcular una compra suficient s’ha decidit usar l’àrea més gran. Si un paquet cobreix ${c} m², quants paquets sencers cal comprar?`,answer,['Calcula l’àrea amb la llargada màxima indicada.','Divideix per la cobertura i arrodoneix cap amunt.'],[`Àrea màxima: ${a+1}×${b}=${(a+1)*b} m².`,`Compra suficient: ${answer} paquets.`]);
     }}
   ];
+  const metricFamilySpecs=Object.freeze([
+    Object.freeze({id:'escala-decimal-longitud-capacitat',name:'Conversió d’unitats de longitud i capacitat a l’escala decimal',level:1,generators:[1,3],variantRule:'longitud i capacitat; un o més canvis per potències de deu'}),
+    Object.freeze({id:'equivalencies-massa-factor-1000',name:'Conversió d’unitats de massa per equivalències de mil en mil',level:1,generators:[2],variantRule:'t ↔ kg ↔ g ↔ mg; cada pas multiplica o divideix per 1000'}),
+    Object.freeze({id:'mesura-mixta',name:'Operar amb una mesura composta i unitats diferents',level:2,generators:[1002],variantRule:'sumar m i cm, convertir mm i restar'}),
+    Object.freeze({id:'talls-combinats',name:'Optimitzar la distribució de talls sota restriccions',level:3,generators:[1001],variantRule:'reconstruir el mínim de barres comprovant compatibilitat dels talls'})
+  ]);
+  function metricFamilyFor(type,steps=1){
+    if(type===1001)return metricFamilySpecs.find(f=>f.id==='talls-combinats');
+    if(type===1002)return metricFamilySpecs.find(f=>f.id==='mesura-mixta');
+    if(type===2)return metricFamilySpecs.find(f=>f.id==='equivalencies-massa-factor-1000');
+    return metricFamilySpecs.find(f=>f.id==='escala-decimal-longitud-capacitat');
+  }
+  function metricFamilyInfo(key){return metricFamilySpecs.find(f=>f.id===key)||null;}
   function generate(id,random=Math.random){const d=catalog.find(d=>d.id===id);if(!d)throw Error('Família desconeguda');const q=d.build(random);if(new Set(q.options).size!==4)throw Error('Opcions repetides');for(let i=q.options.length-1;i>0;i--){const j=n(random,0,i);[q.options[i],q.options[j]]=[q.options[j],q.options[i]];}return q;}
   function extend(topics,banks){for(const t of topics){if(t.id==='problemes')continue;const ds=catalog.filter(d=>d.topic===t.id);if(!ds.length)continue;const original=t.gen;let turn=ds.length;t.gen=function(...args){const slot=turn++%10;return slot<ds.length?generate(ds[slot].id):original.apply(this,args);};}catalog.filter(d=>d.level===3).forEach((d,i)=>{const key='R'+String(i+1).padStart(2,'0');banks.push(()=>({...generate(d.id),type:key,patternId:key,primaryTopic:d.topic,difficultyBank:'measureProblems',difficultyKey:key,family:'Raonament',examCompatible:true}));});}
-  root.MIFirstMeasureTasks=Object.freeze({catalog:Object.freeze(catalog.map(Object.freeze)),generate,extend});
+  root.MIFirstMeasureTasks=Object.freeze({catalog:Object.freeze(catalog.map(Object.freeze)),metricFamilySpecs,metricFamilyFor,metricFamilyInfo,generate,extend});
 })(typeof window==='undefined'?globalThis:window);
