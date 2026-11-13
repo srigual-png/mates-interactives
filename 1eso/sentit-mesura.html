@@ -983,12 +983,13 @@ function genPerimetresRaw(){
 
 // ── 5. ÀREES (inclou figures compostes) ───────────────────────────────────
 function genAreesRaw(){
-  const type=rnd(1,6);
+  const type=rnd(1,7);
+  const u=rnd(0,1)?'cm':'m',u2=`${u}²`;
+  const meta=id=>{const f=MIFirstMeasureTasks.areaFamilyFor(id);return {areaFamily:f.id,familyId:f.id,taskDifficulty:f.level,diff:f.level};};
 
   function areaOptions(correct,unit,candidates){
     const values=[],used=new Set(),correctNum=Number(correct);used.add(correctNum);values.push(`${fmtNum(correctNum)} ${unit}`);
     for(const v of candidates){const n=Number(v);if(!Number.isFinite(n)||n<=0||used.has(n))continue;used.add(n);values.push(`${fmtNum(n)} ${unit}`);if(values.length===4)break;}
-    // Seguretat: errors de factor, no variants arbitràries correcta ±1.
     for(const n of [correctNum*2,correctNum/2,correctNum*4,correctNum/4,correctNum*10,correctNum/10]){
       if(values.length===4)break;
       if(Number.isFinite(n)&&n>0&&!used.has(n)){used.add(n);values.push(`${fmtNum(n)} ${unit}`);}
@@ -997,47 +998,33 @@ function genAreesRaw(){
     return shuffle(values);
   }
 
-  const u=rnd(0,1)?'cm':'m',u2=`${u}²`;
-
   if(type===1){
     const l=rnd(2,25),res=l*l,c=`${res} ${u2}`;
-    const qs=u==='cm'?[`Àrea d'un quadrat de costat ${l} cm`,`Una rajola quadrada té costat ${l} cm. Quina superfície ocupa?`,`Una peça quadrada té costat ${l} cm. Quina és la seva àrea?`]:[`Àrea d'un quadrat de costat ${l} m`,`Una parcel·la quadrada té costat ${l} m. Quina és la seva àrea?`,`Una zona quadrada té costat ${l} m. Quina superfície ocupa?`];
-    const guide=['Identifica que els dos costats que determinen l’àrea tenen la mateixa longitud','Multiplica el costat per ell mateix'];
-    return {type,question:qs[rnd(0,qs.length-1)],correct:c,options:areaOptions(res,u2,[4*l,res/2,res*2]),guide,solution:[`A = costat²`,`${l}² = ${l} × ${l} = ${res} ${u2}`,`✅ A = ${c}`],difficulty:'easy'};
+    return {type,...meta(type),question:`Àrea d'un quadrat de costat ${l} ${u}`,correct:c,options:areaOptions(res,u2,[4*l,res/2,res*2]),guide:['El quadrat té dos costats de longitud l, perpendiculars.','Multiplica el costat per ell mateix.'],solution:[`A = costat² = ${l}²`,`${l} × ${l} = ${res} ${u2}`,`✅ A = ${c}`],difficulty:'easy'};
   }
-
   if(type===2){
     const b=rnd(2,30),h=rnd(2,25),res=b*h,c=`${res} ${u2}`;
-    const qs=u==='cm'?[`Àrea d'un rectangle de base ${b} cm i alçada ${h} cm`,`Una cartolina rectangular mesura ${b} cm × ${h} cm. Quina és la seva àrea?`,`Una fotografia rectangular fa ${b} cm per ${h} cm. Quina superfície ocupa?`]:[`Àrea d'un rectangle de base ${b} m i alçada ${h} m`,`Una habitació rectangular fa ${b} m per ${h} m. Quina superfície té?`,`Una pista rectangular mesura ${b} m × ${h} m. Quina és la seva àrea?`];
-    const guide=['Identifica la base i l’alçada del rectangle','Multiplica aquestes dues dimensions per obtenir la superfície'];
-    return {type,question:qs[rnd(0,qs.length-1)],correct:c,options:areaOptions(res,u2,[2*(b+h),res/2,b+h,2*res]),guide,solution:[`A = base × alçada`,`${b} × ${h} = ${res} ${u2}`,`✅ A = ${c}`],difficulty:'easy'};
+    return {type,...meta(type),question:`Àrea d'un rectangle de base ${b} ${u} i alçada ${h} ${u}`,correct:c,options:areaOptions(res,u2,[2*(b+h),res/2,b+h,2*res]),guide:['Identifica la base i la seva alçada perpendicular.','Multiplica aquestes dues dimensions.'],solution:[`A = base × alçada`,`${b} × ${h} = ${res} ${u2}`,`✅ A = ${c}`],difficulty:'easy'};
   }
-
   if(type===3){
     const b=rnd(4,30),h=rnd(3,24),res=b*h/2,c=`${fmtNum(res)} ${u2}`;
-    const qs=u==='cm'?[`Àrea d'un triangle de base ${b} cm i alçada ${h} cm`,`Un triangle té base ${b} cm i alçada ${h} cm. Quina àrea té?`,`Una peça triangular té base ${b} cm i alçada perpendicular ${h} cm. Calcula'n l'àrea.`]:[`Àrea d'un triangle de base ${b} m i alçada ${h} m`,`Una parcel·la triangular té base ${b} m i alçada ${h} m. Quina àrea té?`,`Una zona triangular té base ${b} m i alçada perpendicular ${h} m. Calcula'n l'àrea.`];
-    const guide=['Imagina un rectangle amb la mateixa base i la mateixa alçada que el triangle','Calcula primer l’àrea d’aquest rectangle','El triangle ocupa la meitat d’aquesta superfície'];
-    return {type,question:qs[rnd(0,qs.length-1)],correct:c,options:areaOptions(res,u2,[b*h,b+h,(b+h)/2,res/2]),guide,solution:[`A = (base × alçada) / 2`,`(${b} × ${h}) / 2 = ${fmtNum(res)} ${u2}`,`✅ A = ${c}`],difficulty:'easy'};
+    return {type,...meta(type),question:`Àrea d'un triangle de base ${b} ${u} i alçada perpendicular ${h} ${u}`,correct:c,options:areaOptions(res,u2,[b*h,b+h,(b+h)/2,res/2]),guide:['La base i l’alçada corresponent formen un rectangle de la mateixa superfície doble.','Multiplica base per alçada i pren-ne la meitat.'],solution:[`A = (base × alçada) ÷ 2`,`(${b} × ${h}) ÷ 2 = ${fmtNum(res)} ${u2}`,`✅ A = ${c}`],difficulty:'easy'};
   }
-
   if(type===4){
     const d1=rnd(4,20)*2,d2=rnd(3,15)*2,res=d1*d2/2,c=`${fmtNum(res)} ${u2}`;
-    const q=`Àrea d'un rombe de diagonals ${d1} ${u} i ${d2} ${u}`;
-    const guide=['Identifica les dues diagonals del rombe','Multiplica les dues diagonals','Pren la meitat del producte per obtenir l’àrea'];
-    return {type,question:q,correct:c,options:areaOptions(res,u2,[d1*d2,d1+d2,(d1+d2)/2,res/2]),guide,solution:[`A = (diagonal major × diagonal menor) / 2`,`(${d1} × ${d2}) / 2 = ${fmtNum(res)} ${u2}`,`✅ A = ${c}`],difficulty:'medium'};
+    return {type,...meta(type),question:`Àrea d'un rombe de diagonals ${d1} ${u} i ${d2} ${u}`,correct:c,options:areaOptions(res,u2,[d1*d2,d1+d2,(d1+d2)/2,res/2]),guide:['Identifica les dues diagonals del rombe.','Multiplica-les i pren-ne la meitat.'],solution:[`A = (diagonal 1 × diagonal 2) ÷ 2`,`(${d1} × ${d2}) ÷ 2 = ${fmtNum(res)} ${u2}`,`✅ A = ${c}`],difficulty:'easy'};
   }
-
   if(type===5){
     const B=rnd(6,30),b=rnd(2,B-2),h=rnd(3,20),res=(B+b)*h/2,c=`${fmtNum(res)} ${u2}`;
-    const q=`Àrea d'un trapezi de bases ${B} ${u} i ${b} ${u}, alçada ${h} ${u}`;
-    const guide=['Identifica les dues bases paral·leles i l’alçada','Suma les dues bases i combina aquesta suma amb l’alçada','Pren la meitat del producte obtingut'];
-    return {type,question:q,correct:c,options:areaOptions(res,u2,[(B+b)*h,B*h/2,b*h/2,res+h]),guide,solution:[`A = (base major + base menor) × alçada / 2`,`(${B} + ${b}) × ${h} / 2 = ${fmtNum(res)} ${u2}`,`✅ A = ${c}`],difficulty:'medium'};
+    return {type,...meta(type),question:`Àrea d'un trapezi de bases paral·leles ${B} ${u} i ${b} ${u}, i alçada perpendicular ${h} ${u}`,correct:c,options:areaOptions(res,u2,[(B+b)*h,B*h/2,b*h/2,res+h]),guide:['Suma les dues bases paral·leles.','Multiplica la suma per l’alçada perpendicular i divideix per dos.'],solution:[`A = ((base major + base menor) × alçada) ÷ 2`,`((${B}+${b}) × ${h}) ÷ 2 = ${fmtNum(res)} ${u2}`,`✅ A = ${c}`],difficulty:'medium'};
   }
-
-  const w1=rnd(5,16),h1=rnd(5,16),w2=rnd(2,w1-1),h2=rnd(2,h1-1),gran=w1*h1,petit=w2*h2,res=gran-petit,c=`${fmtNum(res)} ${u2}`;
-  const qs=[`Àrea d'una figura en L: rectangle gran ${w1}×${h1} ${u} menys rectangle petit ${w2}×${h2} ${u}`,`D’un rectangle de ${w1}×${h1} ${u} es retalla un rectangle de ${w2}×${h2} ${u}. Quina àrea queda?`];
-  const guide=['Calcula l’àrea del rectangle gran','Calcula l’àrea de la part rectangular que es retira','Resta la part retirada de la superfície inicial'];
-  return {type,question:qs[rnd(0,qs.length-1)],correct:c,options:areaOptions(res,u2,[gran,petit,gran+petit]),guide,solution:[`Àrea gran: ${w1} × ${h1} = ${gran} ${u2}`,`Àrea retirada: ${w2} × ${h2} = ${petit} ${u2}`,`Àrea final = ${gran} − ${petit} = ${res} ${u2}`,`✅ A = ${c}`],difficulty:'hard'};
+  if(type===6){
+    const w1=rnd(5,16),h1=rnd(5,16),w2=rnd(2,w1-1),h2=rnd(2,h1-1),gran=w1*h1,petit=w2*h2,res=gran-petit,c=`${fmtNum(res)} ${u2}`;
+    const qs=[`Figura en L: rectangle gran ${w1}×${h1} ${u}; se n’ha tret un rectangle de ${w2}×${h2} ${u} situat dins d’una cantonada. Quina àrea queda?`,`D’un rectangle de ${w1}×${h1} ${u} es retalla una peça rectangular de ${w2}×${h2} ${u} d’una cantonada. Calcula l’àrea restant.`];
+    return {type,...meta(type),question:qs[rnd(0,qs.length-1)],correct:c,options:areaOptions(res,u2,[gran,petit,gran+petit]),guide:['Calcula l’àrea del rectangle complet.','Calcula l’àrea de la peça que no forma part de la figura.','Resta les dues superfícies; no utilitzis el perímetre.'],solution:[`Rectangle gran: ${w1} × ${h1} = ${gran} ${u2}`,`Peça retirada: ${w2} × ${h2} = ${petit} ${u2}`,`Àrea restant = ${gran} − ${petit} = ${res} ${u2}`,`✅ A = ${c}`],difficulty:'medium'};
+  }
+  const b=rnd(2,30),h=rnd(2,25),res=b*h,c=`${res} ${u2}`;
+  return {type,...meta(type),question:`Àrea d'un paral·lelogram de base ${b} ${u} i alçada perpendicular ${h} ${u}`,correct:c,options:areaOptions(res,u2,[b*h/2,b+h,2*(b+h),res+h]),guide:['Fes servir l’alçada perpendicular a la base, no el costat inclinat.','Multiplica base per alçada.'],solution:[`A = base × alçada perpendicular`,`${b} × ${h} = ${res} ${u2}`,`✅ A = ${c}`],difficulty:'easy'};
 }
 
 // ── 6. ESTIMACIÓ ───────────────────────────────────────────────────────────
@@ -1649,19 +1636,19 @@ const MEASURE_PROBLEM_PATTERNS=[
 
   // ÀREES I FIGURES COMPOSTES (7)
   ()=>{const L=rnd(3,7),W=rnd(3,6),area=L*W;let tile,ta,exact;do{tile=[20,25,30,35,40,45,50][rnd(0,6)];ta=(tile/100)**2;exact=area/ta;}while(Math.abs(exact-Math.round(exact))<1e-9);const n=Math.ceil(exact);
-    return numProblem('A01','Àrees','arees','hard',`Una habitació de ${L} m × ${W} m s'ha de cobrir amb rajoles quadrades de ${tile} cm de costat. Suposant que es poden aprofitar els retalls, quantes rajoles calen com a mínim?`,n,'rajoles',[Math.floor(exact),Math.ceil(area/(tile/100)),Math.ceil(exact/2)],[`Calcula l'àrea de l'habitació`,`Converteix el costat de la rajola a metres i calcula'n l'àrea`,`Divideix les àrees i arrodoneix cap amunt`],[`Àrea habitació = ${area} m²`,`Àrea rajola = ${fmtNum(tile/100)}² = ${fmtNum(ta)} m²`,`Rajoles = ${fmtNum(exact)} → ${n}`,`✅ ${n} rajoles`]);},
+    return numProblem('A01','Àrees','arees','medium',`Una habitació de ${L} m × ${W} m s'ha de cobrir amb rajoles quadrades de ${tile} cm de costat. Suposant que es poden aprofitar els retalls, quantes rajoles calen com a mínim?`,n,'rajoles',[Math.floor(exact),Math.ceil(area/(tile/100)),Math.ceil(exact/2)],[`Calcula l'àrea de l'habitació`,`Converteix el costat de la rajola a metres i calcula'n l'àrea`,`Divideix les àrees i arrodoneix cap amunt`],[`Àrea habitació = ${area} m²`,`Àrea rajola = ${fmtNum(tile/100)}² = ${fmtNum(ta)} m²`,`Rajoles = ${fmtNum(exact)} → ${n}`,`✅ ${n} rajoles`]);},
   ()=>{const wallW=rnd(5,9),wallH=[2,3,4][rnd(0,2)],doorW=1,doorH=2,winW=2,winH=1,cover=[4,5,6][rnd(0,2)],area=wallW*wallH-doorW*doorH-winW*winH,pots=Math.ceil(area/cover);const wNoOpen=Math.ceil(wallW*wallH/cover),wOneOpen=Math.ceil((wallW*wallH-doorW*doorH)/cover),wFloor=Math.floor(area/cover),wPer=Math.ceil(2*(wallW+wallH)/cover),wHalfCover=Math.ceil(area/(cover/2));
-    return numProblem('A02','Àrees','arees','hard',`Una paret fa ${wallW} m d'ample i ${wallH} m d'alt. Té una porta d'1×2 m i una finestra de 2×1 m. Un pot pinta ${cover} m². Quants pots cal comprar?`,pots,'pots',[wNoOpen,wOneOpen,wFloor,wPer,wHalfCover,wallW*wallH,Math.ceil(area*cover)],[`Calcula l'àrea total de la paret`,`Resta les àrees de porta i finestra`,`Divideix l'àrea que es pinta pel rendiment d'un pot i arrodoneix cap amunt`],[`Paret = ${wallW*wallH} m²`,`Obertures = ${doorW*doorH+winW*winH} m²`,`A pintar = ${area} m²`,`Pots = ${fmtNum(area/cover)} → ${pots}`,`✅ ${pots} pots`]);},
+    return numProblem('A02','Àrees','arees','medium',`Una paret fa ${wallW} m d'ample i ${wallH} m d'alt. Té una porta d'1×2 m i una finestra de 2×1 m. Un pot pinta ${cover} m². Quants pots cal comprar?`,pots,'pots',[wNoOpen,wOneOpen,wFloor,wPer,wHalfCover,wallW*wallH,Math.ceil(area*cover)],[`Calcula l'àrea total de la paret`,`Resta les àrees de porta i finestra`,`Divideix l'àrea que es pinta pel rendiment d'un pot i arrodoneix cap amunt`],[`Paret = ${wallW*wallH} m²`,`Obertures = ${doorW*doorH+winW*winH} m²`,`A pintar = ${area} m²`,`Pots = ${fmtNum(area/cover)} → ${pots}`,`✅ ${pots} pots`]);},
   ()=>{const L=rnd(8,15),W=rnd(6,12),pL=rnd(2,5),pW=rnd(2,4),area=L*W-pL*pW;
     return numProblem('A03','Àrees','arees','medium',`Un jardí rectangular de ${L}×${W} m té una zona pavimentada de ${pL}×${pW} m. Quants metres quadrats de gespa queden?`,area,'m²',[L*W+pL*pW,L*W,pL*pW],[`Calcula l'àrea total del jardí`,`Calcula l'àrea pavimentada`,`Resta la zona que no porta gespa`],[`${L}×${W}=${L*W} m²`,`${pL}×${pW}=${pL*pW} m²`,`${L*W}−${pL*pW}=${area} m²`,`✅ ${area} m²`]);},
   ()=>{const b=rnd(4,12),h=rnd(3,9),area=b*h;
     return numProblem('A04','Àrees','arees','medium',`Un rectangle té una àrea de ${area} m² i una base de ${b} m. Quina alçada té?`,h,'m',[area-b,area+b,area/(b*2)],[`Relaciona àrea, base i alçada`,`Si coneixes l'àrea i la base, divideix per trobar l'altra dimensió`],[`A = b·h`,`${area} ÷ ${b} = ${h} m`,`✅ ${h} m`]);},
   ()=>{const b=[10,12,14,16,18,20][rnd(0,5)],h=[6,8,10,12][rnd(0,3)],price=[4,5,6,8][rnd(0,3)],area=b*h/2,cost=area*price;
-    return numProblem('A05','Àrees','arees','hard',`Un terreny triangular té base ${b} m i alçada ${h} m. Posar-hi gespa costa ${price} €/m². Quin és el cost total?`,cost,'€',[b*h*price,area+price,area],[`Calcula l'àrea del triangle`,`Multiplica l'àrea pel preu de cada metre quadrat`],[`Àrea = (${b}×${h})÷2 = ${area} m²`,`Cost = ${area}×${price} = ${cost} €`,`✅ ${cost} €`]);},
+    return numProblem('A05','Àrees','arees','medium',`Un terreny triangular té base ${b} m i alçada ${h} m. Posar-hi gespa costa ${price} €/m². Quin és el cost total?`,cost,'€',[b*h*price,area+price,area],[`Calcula l'àrea del triangle`,`Multiplica l'àrea pel preu de cada metre quadrat`],[`Àrea = (${b}×${h})÷2 = ${area} m²`,`Cost = ${area}×${price} = ${cost} €`,`✅ ${cost} €`]);},
   ()=>{const L=rnd(7,12),W=rnd(5,9),cutL=rnd(2,4),cutW=rnd(2,3),area=L*W-cutL*cutW;
-    return numProblem('A06','Àrees','arees','hard',`Una sala en forma de L es pot veure com un rectangle de ${L}×${W} m al qual s'ha tret un rectangle de ${cutL}×${cutW} m d'una cantonada. Quina és l'àrea de la sala?`,area,'m²',[L*W+cutL*cutW,L*W,2*(L+W)],[`Calcula l'àrea del rectangle gran`,`Calcula l'àrea de la part retirada`,`Resta les dues àrees`],[`Rectangle gran = ${L*W} m²`,`Part retirada = ${cutL*cutW} m²`,`Àrea L = ${area} m²`,`✅ ${area} m²`]);},
+    return numProblem('A06','Àrees','arees','medium',`Una sala en forma de L es pot veure com un rectangle de ${L}×${W} m al qual s'ha tret un rectangle de ${cutL}×${cutW} m d'una cantonada. Quina és l'àrea de la sala?`,area,'m²',[L*W+cutL*cutW,L*W,2*(L+W)],[`Calcula l'àrea del rectangle gran`,`Calcula l'àrea de la part retirada`,`Resta les dues àrees`],[`Rectangle gran = ${L*W} m²`,`Part retirada = ${cutL*cutW} m²`,`Àrea L = ${area} m²`,`✅ ${area} m²`]);},
   ()=>{const a=rnd(6,10),b=rnd(3,a-1),P=2*(a+b),side=P/4,areaR=a*b,areaS=side*side,diff=Math.abs(areaS-areaR);
-    return numProblem('A07','Àrees','arees','hard',`Un rectangle de ${a}×${b} m té el mateix perímetre que un quadrat. Quants m² de diferència hi ha entre les seves àrees?`,diff,'m²',[Math.abs(P-areaR),areaR+areaS,Math.abs(side-areaR)],[`Calcula el perímetre del rectangle`,`Troba el costat del quadrat amb el mateix perímetre`,`Calcula les dues àrees i resta-les`],[`Perímetre rectangle = ${P} m`,`Costat quadrat = ${fmtNum(side)} m`,`Àrees: ${areaR} m² i ${fmtNum(areaS)} m²`,`Diferència = ${fmtNum(diff)} m²`,`✅ ${fmtNum(diff)} m²`]);},
+    return numProblem('A07','Àrees','arees','medium',`Un rectangle de ${a}×${b} m té el mateix perímetre que un quadrat. Quants m² de diferència hi ha entre les seves àrees?`,diff,'m²',[Math.abs(P-areaR),areaR+areaS,Math.abs(side-areaR)],[`Calcula el perímetre del rectangle`,`Troba el costat del quadrat amb el mateix perímetre`,`Calcula les dues àrees i resta-les`],[`Perímetre rectangle = ${P} m`,`Costat quadrat = ${fmtNum(side)} m`,`Àrees: ${areaR} m² i ${fmtNum(areaS)} m²`,`Diferència = ${fmtNum(diff)} m²`,`✅ ${fmtNum(diff)} m²`]);},
 
   // ESCALES I PLÀNOLS (4)
   ()=>{const one=[2,5,10,20][rnd(0,3)],cm=rnd(2,8),real=one*cm;
