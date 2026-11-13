@@ -26,7 +26,7 @@ async function main(){
     for(const ok of answers){
      if(correct===10&&level===1)break;
      check(!session.ended,'Premature end');const before=session.points;
-     processPracticeAnswer(ok,ok?currentEx.correct:'999');ok?correct++:wrong++;
+     check(currentEx,'Missing current exercise in score scenario level '+level);processPracticeAnswer(ok,ok?currentEx.correct:'999');ok?correct++:wrong++;
      check(session.points===Math.max(0,Math.min(NEEDED[level],before+(ok?1:-1))),'Points');
      if(level===1&&correct===10||level===2&&correct+wrong===20){nextEx();break;}nextEx();
     }
@@ -76,7 +76,7 @@ async function main(){
    check(restored.fractionsTheory==='comparacio-diferencia'&&restored.fractionsAnswer,'New error metadata');check(openOk1(restored.correct,restored.correct,restored),'Restored validator');check(!openOk1(restored.correct,restored.correct+';999',restored),'Restored strict validator');
    const legacy={id:'old-fractions',topicId:'fraccions',type:2,question:'Pregunta antiga',correct:'5',answer:'4'};
    state.errors.fraccions=[legacy];state.errors=normalizeErrorStore(state.errors);check(state.errors.fraccions[0].question===legacy.question&&state.errors.fraccions[0].correct==='5','Legacy error preserved');showErrorSummary();
-   for(const id of ['naturals','decimal_sys','ops','potencies','jerarquia','divis','mcmmcd','enters','decimals','proporcionalitat','percentatges']){selTopic(TOPICS.findIndex(t=>t.id===id));selLv(1);selMode('multi');startP();processPracticeAnswer(true,currentEx.correct);leavePractice();check(el('decimalResultScore').textContent==='1/1','Neighbor topic '+id);}
+   for(const id of ['naturals','decimal_sys','ops','potencies','jerarquia','divis','mcmmcd','enters','decimals','proporcionalitat','percentatges']){selTopic(TOPICS.findIndex(t=>t.id===id));selLv(1);selMode('multi');startP();check(currentEx,'Missing current exercise in neighbor topic '+id);processPracticeAnswer(true,currentEx.correct);leavePractice();check(el('decimalResultScore').textContent==='1/1','Neighbor topic '+id);}
    return {families:groups.map(g=>g.length),links,scenarios,exam:[12,20]};
   });
   report.browser=browserEngine;
