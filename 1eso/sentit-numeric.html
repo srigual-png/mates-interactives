@@ -2197,7 +2197,7 @@ function genEnters(){
 
 // ── GEN DECIMALS ───────────────────────────────────────────────────────────
 function genDecimalsBase(){
-  const type=rnd(1,9),q=MIDecimals.generate('D'+String(type).padStart(2,'0'),rnd);
+  const type=rnd(1,23),q=MIDecimals.generate('D'+String(type).padStart(2,'0'),rnd);
   // Keep historical exam identities and their shared difficulty classification.
   q.type=type;delete q.taskDifficulty;delete q.taskDifficultyStatus;
   return q;
@@ -2873,7 +2873,7 @@ function genDecimalsProb(){
   const type=ampNextType('decimals',6),family=[6,7,10,11,12,8][type-1];
   const q=MIDecimals.generate('D'+String(family).padStart(2,'0'),rnd),model=q.decimalsAnswer;
   const answer={val:q.correct,decimalsAnswer:model,check:v=>MIDecimals.matches(model,v)};
-  return {topicId:'decimals',topicName:'Nombres decimals',type,variantId:'decimals-'+type,cat:'Nombres decimals',diff:[1,2,2,3,2,3][type-1],text:q.question,dataBox:null,
+  return {topicId:'decimals',topicName:'Nombres decimals',type,variantId:'decimals-'+type,cat:'Nombres decimals',diff:q.taskDifficulty,taskDifficulty:q.taskDifficulty,text:q.question,dataBox:null,
     decimalsTheory:q.decimalsTheory,steps:model.kind==='fields'?model.fields.map(f=>({label:f.label,hint:q.guide[0],check:v=>MIDecimals.matches({kind:'fields',fields:[f]},v)})):[],answer,hints:q.solution};
 }
 
@@ -2945,7 +2945,7 @@ var AMP_CATS=[
   {id:'divis',icon:'🔍',name:'Divisibilitat',desc:'Divisors, nombres primers i criteris de divisibilitat',variants:4,diffCounts:{1:1,2:3,3:0},gen:genDivisProb},
   {id:'mcmmcd',icon:'🔗',name:'MCD i mcm',desc:'Coincidències, agrupaments i talls màxims',variants:4,diffCounts:{1:0,2:4,3:1},gen:genMcmMcdProb},
   {id:'enters',icon:'±',name:'Nombres enters',desc:'Temperatures, saldos, plantes, altituds i profunditats',variants:5,diffCounts:{1:1,2:4,3:0},gen:genEntersProb},
-  {id:'decimals',icon:'💰',name:'Nombres decimals',desc:'Preus, repartiments, unitats, mitjanes i aproximacions',variants:6,diffCounts:{1:1,2:3,3:2},gen:genDecimalsProb},
+  {id:'decimals',icon:'💰',name:'Nombres decimals',desc:'Preus, repartiments, unitats, mitjanes i aproximacions',variants:6,diffCounts:{1:2,2:4,3:0},gen:genDecimalsProb},
   {id:'fraccions',icon:'½',name:'Fraccions',desc:'Parts, restes, comparacions i problemes inversos',variants:7,diffCounts:{1:1,2:4,3:2},gen:genFraccionsProb},
   {id:'proporcionalitat',icon:'⚖️',name:'Proporcionalitat directa',desc:'Valor unitari, receptes, producció i detecció de proporcionalitat',variants:5,diffCounts:{1:1,2:3,3:1},gen:genProporcionalitatProb},
   {id:'pct',icon:'%',name:'Percentatges',desc:'Part, total, percentatge, descomptes i variacions',variants:6,diffCounts:{1:1,2:4,3:1},gen:genPctProb},
@@ -3546,7 +3546,7 @@ function genMcdPractice(type,level,random=rnd){
 function genPercentatgesPractice(type,level,random=rnd){return MIPercentatges.generate(type,random);}
 function genProporcionalitatPractice(type,level,random=rnd){return MIProporcionalitat.generate(type,random);}
 function genFraccionsPractice(type,level,random=rnd){return MIFraccions.generate(type,random);}
-function genDecimalsPractice(type,level,random=rnd){return MIDecimals.generate(type,random);}
+function genDecimalsPractice(type,level,random=rnd){const spec=MIDecimals.familyInfo(type);if(!spec)return MIDecimals.generate(type,random);const id=spec.generators[Math.floor(random(0,spec.generators.length-1))];return MIDecimals.generate(id,random);}
 function genEntersPractice(type,level,random=rnd){return MIEnters.generate(type,random);}
 function adaptivePracticeGroups(t){
   if(t.id==='percentatges')return MIPercentatges.families;
