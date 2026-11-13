@@ -1152,7 +1152,7 @@ function genDecimalSysType(type,practice=false){
     var posName=posNames[String(posVal)]||('x'+posVal);
     practiceData={n,digit,position:s.length-1-pos};
 
-    question='Quin es el valor posicional de la xifra <b>'+digit+'</b> al nombre <span class="fc">'+n+'</span>?';
+    question='Quin és el valor posicional de la xifra <b>'+digit+'</b> al nombre <span class="fc">'+n+'</span>?';
     correct=String(realVal);
 
     opts=buildOpts(correct,[
@@ -1169,12 +1169,12 @@ function genDecimalSysType(type,practice=false){
     ];
 
     solution=[
-      'Posicio: '+posName,
-      'Valor: '+digit+'x'+posVal+'='+realVal
+      'Posició: '+posName,
+      'Valor: '+digit+' × '+posVal+'='+realVal
     ];
 
   } else if(type===2){
-    diff=2;
+    diff=1;
 
     var a=rnd(1,9),b=rnd(0,9),c=rnd(0,9),d=rnd(practice?0:1,9),e=rnd(0,9),n2=a*10000+b*1000+c*100+d*10+e;
     practiceData={n:n2};
@@ -1199,7 +1199,7 @@ function genDecimalSysType(type,practice=false){
     ];
 
   } else if(type===3){
-    diff=2;
+    diff=1;
 
     var n3=rnd(100000,999999);
     practiceData={n:n3};
@@ -1210,7 +1210,7 @@ function genDecimalSysType(type,practice=false){
         dm3=Math.floor(n3/10000)%10,
         cm3=Math.floor(n3/100000);
 
-    question='Quin nombre correspon a:<br><span class="fc">'+cm3+' cm, '+dm3+' dm, '+mi3+' m, '+ce3+' c, '+de3+' d, '+u3+' u</span>';
+    question='Quin nombre correspon a aquestes xifres?<br><span class="fc">'+cm3+' centenes de miler, '+dm3+' desenes de miler, '+mi3+' unitats de miler, '+ce3+' centenes, '+de3+' desenes i '+u3+' unitats</span>';
 
     correct=String(n3);
 
@@ -1232,7 +1232,7 @@ function genDecimalSysType(type,practice=false){
     ];
 
   } else {
-    diff=3;
+    diff=1;
     isProblem=true;
 
     var pos=rnd(0,3);
@@ -1261,7 +1261,7 @@ function genDecimalSysType(type,practice=false){
     var digitPos=posData[pos].digit;
     practiceData={n:num,digit:digitPos,position:pos};
 
-    question='<span class="pt">El número de matrícula és <b>'+num+
+    question='<span class="pt">El nombre de matrícula és <b>'+num+
       '</b>. Quin valor representa la xifra de les '+posName+
       ' segons la posició que ocupa?</span>';
 
@@ -1403,7 +1403,7 @@ function genOpsType(type,practice=false){
     ];
 
   } else if(type===3){
-    diff=2;
+    diff=1;
     var a3=rnd(10,99),b3=rnd(100,999);
     correct=String(a3*b3);
 
@@ -1476,7 +1476,7 @@ function genOpsType(type,practice=false){
     ];
 
   } else {
-    diff=3;
+    diff=2;
     isProblem=true;
 
     var dies=rnd(5,30),torn=rnd(2,4),perTorn=rnd(100,500),
@@ -1531,9 +1531,9 @@ function genOpsType(type,practice=false){
 
 
 const OPS_PRACTICE_FAMILIES=[
-  [[1],[2],[3],[5],['triar-operacio']],
-  [[4],[6],['capses'],['compensacio']],
-  [[1001],['diagnosticar-divisio'],['reconstruir-total']]
+  [[1],[2],[3],['triar-operacio']],
+  [[4,'capses','diagnosticar-divisio'],[5],[6],['compensacio']],
+  [[1001],['reconstruir-total']]
 ];
 const OPS_THEORY_SECTIONS=Object.freeze({
   1:'sumar',2:'restar',3:'multiplicar',4:'divisio-entera',5:'cost-i-canvi',6:'produccio-per-torns',
@@ -1826,7 +1826,7 @@ function genJerarquia(type=rnd(1,9),random=rnd){
     ];
 
   } else if(type===6){
-    diff=3;
+    diff=2;
     var a6=random(2,5),b6=random(3,5),c6=random(2,6),d6=random(2,6),e6=random(2,5),f6=random(1,9);
     var pow6=b6*b6,par6=c6+d6,res6=a6*pow6-par6*e6+f6;
     if(res6<f6){
@@ -1860,7 +1860,7 @@ function genJerarquia(type=rnd(1,9),random=rnd){
     ];
 
   } else if(type===7){
-    diff=3;
+    diff=2;
     isProblem=true;
 
     var pU=random(4,14),q1=random(2,6),q2=random(2,6),desc=random(2,7),env=random(1,5);
@@ -1889,7 +1889,7 @@ function genJerarquia(type=rnd(1,9),random=rnd){
       'Amb enviament: '+(cost-desc)+'+'+env+'='+tot4
     ];
   } else if(type===8){
-    diff=3;
+    diff=2;
     var a8=random(2,6),b8=random(2,9),c8=random(2,8),d8=random(1,5),e8=random(1,9);
     var inner8=c8+d8,outer8=b8+inner8,res8=a8*outer8-e8;
     question='Calcula amb parèntesis i claudàtors:<br><span class="fc">'+a8+' x ['+b8+' + ('+c8+' + '+d8+')] - '+e8+'</span>';
@@ -1903,7 +1903,7 @@ function genJerarquia(type=rnd(1,9),random=rnd){
       'Resta final: '+(a8*outer8)+' - '+e8+' = '+res8
     ];
   } else {
-    diff=3;
+    diff=2;
     var a9=random(2,5),b9=random(2,7),c9=random(2,6),d9=random(2,6),e9=random(3,5),f9=random(1,9);
     var inner9=c9+d9,pow9=e9*e9,product9=b9*inner9,outer9=product9+pow9,res9=a9*outer9-f9;
     question='Calcula amb parèntesis i claudàtors:<br><span class="fc">'+a9+' x ['+b9+' x ('+c9+' + '+d9+') + '+e9+'\u00b2] - '+f9+'</span>';
@@ -2091,7 +2091,7 @@ function genMcmMcdBase(){
     ];
 
   } else {
-    diff=3;
+    diff=2;
     isProblem=true;
     var common=rnd(2,12);
     const ratios=[[2,3],[2,5],[3,4],[3,5],[4,5],[4,7],[5,6],[5,7],[5,8],[7,8]];
@@ -2158,26 +2158,22 @@ function genEnters(){
     opts=buildOpts(correct,[String(Math.abs(a)+Math.abs(b)),String(-res),String(res+1),String(res-1)]);
     guide=[`Si tenen el mateix signe, suma els valors absoluts i conserva el signe.`,`Si tenen signes diferents, compara els valors absoluts i fes la diferència.`];
     solution=[`(${a})+(${b})=${res}`];
-  } else if(type===3){
-    diff=2;var a2=rnd(-12,12),b2=rnd(-12,12),res2=a2-b2;
+  } else if(type===3){diff=1;var a2=rnd(-12,12),b2=rnd(-12,12),res2=a2-b2;
     question=`Calcula: <span class="fc">(${a2}) - (${b2})</span>`;correct=String(res2);
     opts=buildOpts(correct,[String(a2+b2),String(-res2),String(res2+2),String(res2-2)]);
     guide=[`Transforma la resta en una suma.`,`Canvia el signe del segon nombre i aplica després la regla de la suma d'enters.`];
     solution=[`Canvia a suma: ${a2}+(${-b2})=${res2}`];
-  } else if(type===4){
-    diff=2;var a3=rnd(-8,8),b3=rnd(-8,8),res3=a3*b3;
+  } else if(type===4){diff=1;var a3=rnd(-8,8),b3=rnd(-8,8),res3=a3*b3;
     question=`Calcula: <span class="fc">(${a3}) × (${b3})</span>`;correct=String(res3);
     opts=buildOpts(correct,[String(-res3),String(Math.abs(res3)+1),String(Math.abs(res3))]);
     guide=[`Calcula primer el producte dels valors absoluts.`,`Determina després el signe aplicant la regla dels signes.`];
     solution=[`Valor absolut del producte = ${Math.abs(res3)}`,`Signe = ${res3>=0?'+':'-'}`,`✅ ${res3}`];
-  } else if(type===5){
-    diff=2;isProblem=true;var t1=rnd(-15,5),pujada=rnd(3,20),t2=t1+pujada;
+  } else if(type===5){diff=1;isProblem=true;var t1=rnd(-15,5),pujada=rnd(3,20),t2=t1+pujada;
     question=`<span class="pt">La temperatura és de <b>${t1} graus</b>. Puja <b>${pujada} graus</b>. Quina temperatura fa després?</span>`;
     correct=String(t2)+' graus';opts=buildOpts(correct,[String(t1-pujada)+' graus',String(Math.abs(t1)+pujada)+' graus',String(t2+1)+' graus']);
     guide=[`Representa la temperatura inicial com un nombre enter.`,`Una pujada correspon a avançar cap a la dreta a la recta numèrica.`];
     solution=[`Temperatura final: ${t1}+${pujada}=${t2}`];
-  } else if(type===6){
-    diff=3;isProblem=true;var saldo=rnd(-50,200),ing=rnd(10,100),desp=rnd(10,200),final=saldo+ing-desp;
+  } else if(type===6){diff=2;isProblem=true;var saldo=rnd(-50,200),ing=rnd(10,100),desp=rnd(10,200),final=saldo+ing-desp;
     question=`<span class="pt">Saldo: <b>${saldo} euros</b>. Ingrés <b>${ing}</b>, retirada <b>${desp}</b>. Saldo final?</span>`;
     correct=String(final)+' euros';opts=buildOpts(correct,[
       (saldo+ing+desp)+' euros',
@@ -2201,7 +2197,7 @@ function genEnters(){
 
 // ── GEN DECIMALS ───────────────────────────────────────────────────────────
 function genDecimalsBase(){
-  const type=rnd(1,9),q=MIDecimals.generate('D'+String(type).padStart(2,'0'),rnd);
+  const type=rnd(1,23),q=MIDecimals.generate('D'+String(type).padStart(2,'0'),rnd);
   // Keep historical exam identities and their shared difficulty classification.
   q.type=type;delete q.taskDifficulty;delete q.taskDifficultyStatus;
   return q;
@@ -2233,11 +2229,9 @@ function genPercentatges(){if(!Array.isArray(percentatgesBag)||percentatgesBag.l
 
 // ── GEN POTÈNCIES I ARRELS ─────────────────────────────────────────────────
 
-const POTENCIES_PRACTICE_FAMILIES=[
-  [[1,2],[3],[4],[5],[6],['base-deu-regularitat']],
-  [[7],['exponent-desconegut'],['acotar-arrel'],['recompte-multiplicatiu']],
-  [['dos-quadrats-invers'],['diagnosticar-potencia-arrel']]
-];
+const POTENCIES_PRACTICE_FAMILIES=[1,2,3].map(level=>
+  MIDifficulty.potenciesFamilies.filter(family=>family.level===level).map(family=>family.practiceTypes)
+);
 const POTENCIES_THEORY=Object.freeze({
   1:'base-exponent',2:'base-exponent',3:'producte',4:'producte',5:'calcular',6:'arrels',7:'inverses',
   'base-deu-regularitat':'base-deu',
@@ -2245,8 +2239,9 @@ const POTENCIES_THEORY=Object.freeze({
   'acotar-arrel':'acotar-arrels',
   'recompte-multiplicatiu':'recompte-multiplicatiu',
   'dos-quadrats-invers':'quadrats-en-context',
-  // The reasoning generator saves this family as numeric type 1001.
-  1001:'quadrats-en-context',
+  'fila-columna':'quadrats-en-context',
+  // Reasoning tasks use numeric types in persisted answers.
+  1001:'quadrats-en-context',1002:'quadrats-en-context',
   'diagnosticar-potencia-arrel':'errors-tipics'
 });
 const POWER_DIGITS='⁰¹²³⁴⁵⁶⁷⁸⁹';
@@ -2376,9 +2371,14 @@ function genPotenciesPractice(type,level,session){
     isProblem=true;
   }else{
     const exercise=MIFirstNumericTasks.generate(type);
-    const {gap,total}=exercise.reasoningData,large=Math.sqrt(Number(exercise.correct));
-    const options=powerOptions(exercise.correct,[(large-gap)**2,total,large]);
-    return {...exercise,options,potenciesAnswer:{form:'integer',values:[large**2]},potenciesTheory:POTENCIES_THEORY[type],taskDifficulty:level};
+    if(type==='dos-quadrats-invers'){
+      const {gap,total}=exercise.reasoningData,large=Math.sqrt(Number(exercise.correct));
+      const options=powerOptions(exercise.correct,[(large-gap)**2,total,large]);
+      return {...exercise,options,potenciesAnswer:{form:'integer',values:[large**2]},potenciesTheory:POTENCIES_THEORY[type],taskDifficulty:level,diff:level};
+    }
+    const side=exercise.reasoningData.side,value=Number(exercise.correct);
+    const options=powerOptions(exercise.correct,[value+1,value-1,side**2]);
+    return {...exercise,options,potenciesAnswer:{form:'integer',values:[value]},potenciesTheory:POTENCIES_THEORY[type],taskDifficulty:level,diff:level};
   }
   return {type,question,correct,options:powerOptions(correct,wrongs),guide,solution,isProblem,
     potenciesAnswer:answer,potenciesTheory:POTENCIES_THEORY[type],taskDifficulty:level,diff:level};
@@ -2413,7 +2413,7 @@ function genPotenciesArrels(type=rnd(1,7)){
     guide=[`La base és el factor que es repeteix.`,`L'exponent indica quantes vegades s'ha d'escriure aquest factor.`];
     solution=[`${b4}^${e4} = ${prod}`,`✅ ${correct}`];
   } else if(type===5){
-    diff=2;var b5=rnd(2,10),e5=[2,3][rnd(0,1)],r5=Math.pow(b5,e5);
+    diff=1;var b5=rnd(2,10),e5=[2,3][rnd(0,1)],r5=Math.pow(b5,e5);
     question=`Calcula <span class="fc">${b5}^${e5}</span>.`;correct=String(r5);
     wrongs=[b5*e5,b5**(e5-1),b5**(e5+1),(b5+1)**e5];
     guide=[`Escriu la potència com un producte de factors iguals.`,`Multiplica la base per ella mateixa tantes vegades com indica l'exponent.`];
@@ -2424,7 +2424,7 @@ function genPotenciesArrels(type=rnd(1,7)){
     guide=[`Busca quin nombre multiplicat per ell mateix dona el radicand.`,`Relaciona l'arrel quadrada amb l'operació inversa d'elevar al quadrat.`];
     solution=[`${root}² = ${sq}`,`✅ √${sq} = ${root}`];
   } else {
-    diff=2;var root7=rnd(2,12),sq7=root7*root7;
+    diff=1;var root7=rnd(2,12),sq7=root7*root7;
     question=`Si <span class="fc">${root7}² = ${sq7}</span>, quina igualtat expressa l'operació inversa?`;correct='√'+sq7+' = '+root7;
     wrongs=['√'+root7+' = '+sq7,'√'+sq7+' = '+sq7,'√'+sq7+' = '+(root7+1)];
     answer={form:'radical',values:[sq7,root7]};
@@ -2496,7 +2496,7 @@ function genProporcionalitatBase(){
     guide=[`Determina per quin factor s'ha multiplicat la primera magnitud.`,`En una proporcionalitat directa, aplica exactament el mateix factor a la segona magnitud.`];
     solution=[`Factor = ${xb}/${x8} = ${factor}`,`${y8} × ${factor} = ${yb}`,`✅ ${correct}`];
   }
-  return{familyId:type===1?'P01':type===5?'P03':type===6?'P04':'P02',theorySection:type===1?'proporcionalitat':type===5?'constant':type===6?'factor-i-taules':'unitari',proportionTheory:type===1?'proporcionalitat':type===5?'constant':type===6?'factor-i-taules':'unitari',type:type,question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+  return{familyId:type===1?'P01':type===5?'P03':type===6?'P04':type===8?'P02-factor':'P02',theorySection:type===1?'proporcionalitat':type===5?'constant':type===6?'factor-i-taules':'unitari',proportionTheory:type===1?'proporcionalitat':type===5?'constant':type===6?'factor-i-taules':'unitari',type:type,question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:type===1||type===5||type===8?1:2};
 }
 
 var proporcionalitatBag=[],lastProporcionalitatType=null;
@@ -2719,7 +2719,7 @@ function genPotenciesProb(){
     answer={potenciesAnswer:{form:'integer',values:[total2],unit:'seqüències'},val:total2+' seqüències'};
     hints=['Expressió: '+base+'^'+exp,'Valor: '+base+'^'+exp+' = '+total2];
   }else{
-    diff=2;
+    diff=1;
     var arrel=rnd(5,20),total3=arrel*arrel;
     text='En una exposició es col·loquen <b>'+total3+' fotografies</b> formant un quadrat perfecte, amb el mateix nombre de files que de columnes. Quantes fotografies hi ha a cada fila?';
     steps=[{label:'Operació',hint:'Busca quin nombre multiplicat per ell mateix dona el total',check:function(v){return readOpsInteger(v)===arrel;} }];
@@ -2748,7 +2748,7 @@ function genJerProb(type=ampNextType('jerarquia',4),random=rnd){
     answer={check:function(v){return numEq(v,res2);},val:String(res2)};
     hints=['Potència: '+b2+'² = '+p,'Parèntesi: '+c2+' − '+d2+' = '+par,'Productes: '+a2+' × '+p+' = '+(a2*p)+' i '+par+' × '+e2+' = '+(par*e2),'Suma final: '+(a2*p)+' + '+(par*e2)+' = '+res2];
   }else if(type===3){
-    diff=3;
+    diff=2;
     var a3=random(2,5),b3=random(2,4),c3=random(2,5),d3=random(2,4),e3=random(2,5),f3=random(1,6),inside=b3*b3+c3*d3;
     f3=Math.min(f3,Math.floor((a3*inside-1)/e3));
     var res3=a3*inside-f3*e3;
@@ -2757,7 +2757,7 @@ function genJerProb(type=ampNextType('jerarquia',4),random=rnd){
     answer={check:function(v){return numEq(v,res3);},val:String(res3)};
     hints=['Dins: '+b3+'² = '+(b3*b3)+' i '+c3+' × '+d3+' = '+(c3*d3),'Parèntesi: '+(b3*b3)+' + '+(c3*d3)+' = '+inside,'Fora: '+a3+' × '+inside+' = '+(a3*inside)+' i '+f3+' × '+e3+' = '+(f3*e3),'Final: '+(a3*inside)+' − '+(f3*e3)+' = '+res3];
   }else{
-    diff=3;
+    diff=2;
     const model=MIJerarquia.lots(random);
     const resultAnswer={kind:'integer',result:model.result};
     text=model.text+' Escriu l’expressió amb parèntesis i potència i calcula la puntuació final.';
@@ -2819,7 +2819,7 @@ function genDivisProb(){
     hints=['Divisors positius de '+n+': '+all.join(', '),n+' té '+all.length+' divisors. És '+value.toLowerCase()+'.'];
   }
   return {topicId:'divis',topicName:'Divisibilitat',type,variantId:'divis-'+type,cat:'Divisibilitat',
-    diff:type===2?1:2,text,examText,dataBox:null,steps,answer,examAnswer,hints,divisTheory:section,finalLabel};
+    diff:2,text,examText,dataBox:null,steps,answer,examAnswer,hints,divisTheory:section,finalLabel};
 }
 
 // --- mcm I MCD (4 tipus) ---------------------------------------------------
@@ -2830,8 +2830,7 @@ function genMcmMcdProb(){
 // --- NOMBRES ENTERS (5 tipus) ---------------------------------------------
 function genEntersProb(){
   var type=ampNextType('enters',5),diff,text,steps,answer,hints;
-  if(type===1){
-    diff=1;
+  if(type===1){diff=2;
     var t0=rnd(-12,4),puja=rnd(4,13),baixa=rnd(2,10),tm=t0+puja,tn=tm-baixa;
     text='A primera hora la temperatura és de <b>'+t0+' °C</b>. Al migdia puja <b>'+puja+' °C</b> i al vespre baixa <b>'+baixa+' °C</b>. Quina temperatura fa al vespre?';
     steps=[{label:'Migdia',hint:'Suma la pujada a la temperatura inicial',check:function(v){return numEq(v,tm);}},{label:'Vespre',hint:'Resta la baixada a la temperatura del migdia',check:function(v){return numEq(v,tn);}}];
@@ -2844,8 +2843,7 @@ function genEntersProb(){
     steps=[{label:'Després ingrés',hint:'Suma l\'ingrés al saldo inicial',check:function(v){return numEq(v,saldo+ing);}},{label:'Pagament 1',hint:'Resta el primer pagament',check:function(v){return numEq(v,saldo+ing-pag1);}},{label:'Final',hint:'Resta també el segon pagament',check:function(v){return numEq(v,fin);}}];
     answer={check:function(v){return numEq(v,fin);},val:fin+' €'};
     hints=['Després de l\'ingrés: '+saldo+' + '+ing+' = '+(saldo+ing),'Després del primer pagament: '+(saldo+ing)+' − '+pag1+' = '+(saldo+ing-pag1),'Saldo final: '+(saldo+ing-pag1)+' − '+pag2+' = '+fin+' €'];
-  }else if(type===3){
-    diff=2;
+  }else if(type===3){diff=1;
     var alt=rnd(90,420),prof=rnd(20,180),dif=alt+prof;
     text='Un mirador és a <b>+'+alt+' m</b> respecte del nivell del mar i una cova submarina és a <b>−'+prof+' m</b>. Quina diferència d\'altitud hi ha entre tots dos punts?';
     steps=[{label:'Diferència',hint:'Resta l\'altitud negativa de l\'altitud positiva',check:function(v){return numEq(v,dif);}}];
@@ -2858,8 +2856,7 @@ function genEntersProb(){
     steps=[{label:'Moviment 1',hint:'Suma el primer desplaçament',check:function(v){return numEq(v,start+m1);}},{label:'Moviment 2',hint:'Aplica la baixada com un desplaçament negatiu',check:function(v){return numEq(v,start+m1+m2);}},{label:'Final',hint:'Afegeix l\'última pujada',check:function(v){return numEq(v,end);}}];
     answer={check:function(v){return MIEnters.integer(v,'plantes')===end;},val:'Planta '+end};
     hints=['Primer: '+start+' + '+m1+' = '+(start+m1),'Després: '+(start+m1)+' − '+Math.abs(m2)+' = '+(start+m1+m2),'Final: '+(start+m1+m2)+' + '+m3+' = '+end];
-  }else{
-    diff=3;
+  }else{diff=2;
     var depth=-rnd(8,25),up=rnd(3,Math.min(12,-depth-1)),down=rnd(4,15),final5=depth+up-down,change=final5-depth;
     text='Un submarinista és a <b>'+depth+' m</b>. Puja <b>'+up+' m</b> i després baixa <b>'+down+' m</b>. A quina profunditat acaba? Quin desplaçament net ha fet respecte del punt inicial?';
     steps=[{label:'Després pujar',hint:'Suma la pujada a la posició inicial',check:function(v){return numEq(v,depth+up);}},{label:'Profunditat final',hint:'Resta la baixada a la posició anterior',check:function(v){return numEq(v,final5);}},{label:'Canvi net',hint:'Resta la posició inicial a la posició final',check:function(v){return numEq(v,change);}}];
@@ -2876,7 +2873,7 @@ function genDecimalsProb(){
   const type=ampNextType('decimals',6),family=[6,7,10,11,12,8][type-1];
   const q=MIDecimals.generate('D'+String(family).padStart(2,'0'),rnd),model=q.decimalsAnswer;
   const answer={val:q.correct,decimalsAnswer:model,check:v=>MIDecimals.matches(model,v)};
-  return {topicId:'decimals',topicName:'Nombres decimals',type,variantId:'decimals-'+type,cat:'Nombres decimals',diff:[1,2,2,3,2,3][type-1],text:q.question,dataBox:null,
+  return {topicId:'decimals',topicName:'Nombres decimals',type,variantId:'decimals-'+type,cat:'Nombres decimals',diff:q.taskDifficulty,taskDifficulty:q.taskDifficulty,text:q.question,dataBox:null,
     decimalsTheory:q.decimalsTheory,steps:model.kind==='fields'?model.fields.map(f=>({label:f.label,hint:q.guide[0],check:v=>MIDecimals.matches({kind:'fields',fields:[f]},v)})):[],answer,hints:q.solution};
 }
 
@@ -2894,7 +2891,7 @@ function genFraccionsProb(){
 function genProporcionalitatProb(){
   var type=ampNextType('proporcionalitat',5),diff,text,steps,answer,hints;
   if(type===1){
-    diff=1;
+    diff=2;
     var q1=rnd(2,6),priceUnit=rnd(2,9),cost1=q1*priceUnit,q2=rnd(7,15),cost2=q2*priceUnit;
     text='<b>'+q1+' entrades</b> per a una activitat costen <b>'+cost1+' €</b>. Si totes tenen el mateix preu, quant costaran <b>'+q2+' entrades</b>?';
     steps=[{label:'1 entrada',hint:'Troba primer el preu d\'una entrada',check:function(v){return numEq(v,priceUnit);}},{label:'Nou cost',hint:'Multiplica el preu unitari pel nou nombre d\'entrades',check:function(v){return numEq(v,cost2);}}];
@@ -2922,14 +2919,14 @@ function genProporcionalitatProb(){
     answer={check:function(v){return numEq(v,km2);},val:km2+' km'};
     hints=['Consum per km: '+lit1+' ÷ '+km1+' = '+litPer,'Distància: '+lit2+' ÷ '+litPer+' = '+km2+' km'];
   }else{
-    diff=3;
+    diff=1;
     var fixed=rnd(2,6),per=rnd(1,4),d1=rnd(2,5),c1=fixed+per*d1,d2=rnd(6,10),c2=fixed+per*d2;
     text='Un servei cobra <b>'+fixed+' € fixos</b> més <b>'+per+' € per quilòmetre</b>. Per '+d1+' km costa '+c1+' € i per '+d2+' km costa '+c2+' €. El cost és directament proporcional als quilòmetres?';
     steps=[{label:'Comprova',hint:'En una proporcionalitat directa, el quocient cost/distància ha de ser constant i, si la distància és 0, el cost també ha de ser 0',check:function(v){return String(v).trim()==='No';}}];
     answer={check:function(v){return String(v).trim()==='No';},val:'No'};
     hints=['No és proporcionalitat directa perquè hi ha una quota fixa de '+fixed+' €','Amb 0 km el cost seria '+fixed+' €, no 0 €'];
   }
-  return{familyId:type===5?'P01':'P02',theorySection:type===5?'tarifes-i-constant':'unitari',proportionTheory:type===5?'tarifes-i-constant':'unitari',topicId:'proporcionalitat',topicName:'Proporcionalitat directa',type:type,variantId:'proporcionalitat-'+type,cat:'Proporcionalitat directa',diff:diff,text:text,dataBox:null,steps:steps,answer:answer,hints:hints};
+  return{familyId:type===5?'P01':'P02',theorySection:type===5?'tarifes-i-constant':'unitari',proportionTheory:type===5?'tarifes-i-constant':'unitari',topicId:'proporcionalitat',topicName:'Proporcionalitat directa',type:type,variantId:'proporcionalitat-'+type,cat:'Proporcionalitat directa',diff:diff,taskDifficulty:diff,text:text,dataBox:null,steps:steps,answer:answer,hints:hints};
 }
 
 // --- PERCENTATGES (6 tipus) ------------------------------------------------
@@ -2946,12 +2943,12 @@ var AMP_CATS=[
   {id:'potencies',icon:'²',name:'Potències i arrels',desc:'Quadrats, potències i arrels en situacions contextuals',variants:3,diffCounts:{1:1,2:2,3:0},gen:genPotenciesProb},
   {id:'jerarquia',icon:'📐',name:'Jerarquia d\'operacions',desc:'Expressions i contextos amb parèntesis i potències',variants:4,diffCounts:{1:0,2:2,3:2},gen:genJerProb},
   {id:'divis',icon:'🔍',name:'Divisibilitat',desc:'Divisors, nombres primers i criteris de divisibilitat',variants:4,diffCounts:{1:1,2:3,3:0},gen:genDivisProb},
-  {id:'mcmmcd',icon:'🔗',name:'MCD i mcm',desc:'Coincidències, agrupaments i talls màxims',variants:4,diffCounts:{1:0,2:3,3:1},gen:genMcmMcdProb},
-  {id:'enters',icon:'±',name:'Nombres enters',desc:'Temperatures, saldos, plantes, altituds i profunditats',variants:5,diffCounts:{1:1,2:3,3:1},gen:genEntersProb},
-  {id:'decimals',icon:'💰',name:'Nombres decimals',desc:'Preus, repartiments, unitats, mitjanes i aproximacions',variants:6,diffCounts:{1:1,2:3,3:2},gen:genDecimalsProb},
+  {id:'mcmmcd',icon:'🔗',name:'MCD i mcm',desc:'Coincidències, agrupaments i talls màxims',variants:4,diffCounts:{1:0,2:4,3:1},gen:genMcmMcdProb},
+  {id:'enters',icon:'±',name:'Nombres enters',desc:'Temperatures, saldos, plantes, altituds i profunditats',variants:5,diffCounts:{1:1,2:4,3:0},gen:genEntersProb},
+  {id:'decimals',icon:'💰',name:'Nombres decimals',desc:'Preus, repartiments, unitats, mitjanes i aproximacions',variants:6,diffCounts:{1:2,2:4,3:0},gen:genDecimalsProb},
   {id:'fraccions',icon:'½',name:'Fraccions',desc:'Parts, restes, comparacions i problemes inversos',variants:7,diffCounts:{1:0,2:7,3:0},gen:genFraccionsProb},
-  {id:'proporcionalitat',icon:'⚖️',name:'Proporcionalitat directa',desc:'Valor unitari, receptes, producció i detecció de proporcionalitat',variants:5,diffCounts:{1:1,2:3,3:1},gen:genProporcionalitatProb},
-  {id:'pct',icon:'%',name:'Percentatges',desc:'Part, total, percentatge, descomptes i variacions',variants:6,diffCounts:{1:1,2:4,3:1},gen:genPctProb},
+  {id:'proporcionalitat',icon:'⚖️',name:'Proporcionalitat directa',desc:'Valor unitari, receptes, producció i detecció de proporcionalitat',variants:5,diffCounts:{1:1,2:4,3:0},gen:genProporcionalitatProb},
+  {id:'pct',icon:'%',name:'Percentatges',desc:'Part, total, percentatge, descomptes i variacions',variants:6,diffCounts:{1:0,2:6,3:0},gen:genPctProb},
   {id:'mix',icon:'🎲',name:'Barreja de tot',desc:'Tots els tipus barrejats aleatòriament',gen:null}
 ];
 
@@ -3482,7 +3479,7 @@ function updateSBar(){
 // Ordenar i comparar són variants d’una mateixa família.
 var adaptivePracticeFamilies={
   naturals:[[1,2],[3],[4],[5],['recta-graduada'],['dividend-desconegut'],['producte-descomposicio'],['operacions-valor-desconegut'],['interval-arrodoniment'],[1001],['nombres-amb-condicions'],['patrons-numerics']],
-  decimal_sys:[[1,4],[2],[3],['lectura-paraules-a-xifres'],[1002],['guionets-numerals-du-c'],['descomposicio-equivalent-reagrupament'],['equivalencia-ordres-posicionals'],[1001],['escriure-xifres-a-paraules'],['auditar-error-de-posicio']]
+  decimal_sys:[[1,4],[2,3],['lectura-paraules-a-xifres','escriure-xifres-a-paraules'],['guionets-numerals-du-c'],['descomposicio-equivalent-reagrupament'],['equivalencia-ordres-posicionals',1002,'auditar-error-de-posicio'],[1001]]
 };
 var adaptivePracticeSessions={};
 var ADAPTIVE_PRACTICE_THRESHOLDS={1:[3,6],2:[6,12]};
@@ -3527,6 +3524,8 @@ function genMcdPractice(type,level,random=rnd){
     exercise=MIFirstNumericTasks.generate('coincidencies-desfasades',()=>random(0,999999)/1000000);
     const {a,b,oa,ob,after}=exercise.reasoningData;
     exercise.practiceKey='A6:'+a+':'+b+':'+oa+':'+ob+':'+after;
+    exercise.mcmTheory=MIMcdMcm.anchors.A6;
+    exercise.mcmFields=[MIMcdMcm.number('Minut de coincidència',Number(exercise.correct),MIMcdMcm.units.minuts)];
   }else{
     const session=adaptivePracticeSessions.mcmmcd;
     if(type==='P4'&&session){
@@ -3547,7 +3546,7 @@ function genMcdPractice(type,level,random=rnd){
 function genPercentatgesPractice(type,level,random=rnd){return MIPercentatges.generate(type,random);}
 function genProporcionalitatPractice(type,level,random=rnd){return MIProporcionalitat.generate(type,random);}
 function genFraccionsPractice(type,level,random=rnd){return MIFraccions.generate(type,random);}
-function genDecimalsPractice(type,level,random=rnd){return MIDecimals.generate(type,random);}
+function genDecimalsPractice(type,level,random=rnd){const spec=MIDecimals.familyInfo(type);if(!spec)return MIDecimals.generate(type,random);const id=spec.generators[Math.floor(random(0,spec.generators.length-1))];return MIDecimals.generate(id,random);}
 function genEntersPractice(type,level,random=rnd){return MIEnters.generate(type,random);}
 function adaptivePracticeGroups(t){
   if(t.id==='percentatges')return MIPercentatges.families;
