@@ -1,8 +1,25 @@
-/* Percentatges de 1r ESO: tretze famílies; diners en cèntims enters. */
+/* Percentatges de 1r ESO: 13 famílies matemàtiques; imports exactes en cèntims. */
 (function(root){
 'use strict';
 const anchors=['calcular-part','percentatge-part','reconstruir-total','augments','conversions','taxa-variacio','percentatges-successius','complement-percentual','llindar-ofertes','representacio-percentual','comparar-ofertes','error-base','punts-percentuals'];
-const families=[[['Q01'],['Q02'],['Q05-fraccio-pct','Q05-decimal-pct','Q05-pct-decimal','Q05-pct-fraccio'],['Q10']],[['Q04-augment','Q04-descompte'],['Q06'],['Q07'],['Q08'],['Q11'],['Q13']],[['Q03-total','Q03-unitari','Q03-descompte','Q03-augment'],['Q09'],['Q12']]];
+const families=[[['Q01'],['Q05-fraccio-pct','Q05-decimal-pct','Q05-pct-decimal','Q05-pct-fraccio','Q10']],[['Q02'],['Q03-total','Q03-unitari'],['Q04-augment','Q04-descompte'],['Q06'],['Q07'],['Q08'],['Q11'],['Q13']],[['Q03-descompte','Q03-augment'],['Q09'],['Q12']]];
+const familySpecs=[
+ {id:'Q01',level:1,generators:['Q01'],anchor:'calcular-part'},
+ {id:'Q05',level:1,generators:['Q05-fraccio-pct','Q05-decimal-pct','Q05-pct-decimal','Q05-pct-fraccio','Q10'],anchor:'conversions'},
+ {id:'Q02',level:2,generators:['Q02'],anchor:'percentatge-part'},
+ {id:'Q03',level:2,generators:['Q03-total','Q03-unitari'],anchor:'reconstruir-total'},
+ {id:'Q04',level:2,generators:['Q04-augment','Q04-descompte'],anchor:'augments'},
+ {id:'Q06',level:2,generators:['Q06'],anchor:'taxa-variacio'},
+ {id:'Q07',level:2,generators:['Q07'],anchor:'percentatges-successius'},
+ {id:'Q08',level:2,generators:['Q08'],anchor:'complement-percentual'},
+ {id:'Q11',level:2,generators:['Q11'],anchor:'comparar-ofertes'},
+ {id:'Q13',level:2,generators:['Q13'],anchor:'punts-percentuals'},
+ {id:'Q03-preu-inicial',level:3,generators:['Q03-descompte','Q03-augment'],anchor:'preu-inicial'},
+ {id:'Q09',level:3,generators:['Q09'],anchor:'llindar-ofertes'},
+ {id:'Q12',level:3,generators:['Q12'],anchor:'error-base'}
+];
+function familyInfo(input){const keys=typeof input==='string'?[input]:input?[input.type,input.variantId,input.familyId].filter(x=>x!==undefined&&x!==null):[];let row;for(const key of keys){row=familySpecs.find(x=>x.id===key||x.generators.includes(key));if(row)break;}return row?{...row,generators:[...row.generators]}:null;}
+function levelFor(id){return familyInfo(id)?.level||0;}
 const fmt=n=>String(n).replace('.',','),money=c=>fmt((c/100).toFixed(2));
 const gcd=(a,b)=>b?gcd(b,a%b):a;
 // Decimal strings become exact rational integers; neither loose parsing nor tolerances.
@@ -24,9 +41,9 @@ function matches(model,input){
 }
 function grid(n){return `<figure style="margin:12px 0"><svg role="img" aria-label="Una unitat dividida en 100 cel·les iguals; ${n} pintades" viewBox="0 0 200 200" style="display:block;width:100%;max-width:260px;height:auto">${Array.from({length:100},(_,i)=>`<rect x="${i%10*20}" y="${Math.floor(i/10)*20}" width="20" height="20" fill="${i<n?'#275db3':'#fff'}" stroke="#60718b" stroke-width="1"/>`).join('')}</svg><figcaption>La graella sencera és una unitat: 100 cel·les iguals.</figcaption></figure>`;}
 function generate(id,r=(a,b)=>a+Math.floor(Math.random()*(b-a+1))){
- const familyId=id.split('-')[0],n=Number(familyId.slice(1)),level=families.findIndex(g=>g.some(f=>f.some(v=>v.split('-')[0]===familyId)))+1;
+ const n=Number(id.match(/^Q(\d+)/)?.[1]),info=familyInfo(id),level=info?.level||0,familyId=info?.id||id.split('-')[0];
  if(!level)throw Error('Família desconeguda: '+id);
- let p=[5,10,15,20,25,30,40,50,75][r(0,8)],base=r(2,40)*20,v,q,steps,wrong,unit='',kind='number',section=anchors[n-1],data,integer=false;
+ let p=(n===1?[5,10,15,20,25,30,40,50,75,100,125,150,200]:[5,10,15,20,25,30,40,50,75])[r(0,n===1?12:8)],base=r(2,40)*20,v,q,steps,wrong,unit='',kind='number',section=anchors[n-1],data,integer=false;
  let variantId=id;
  if(n===1){v=base*p/100;q=`Calcula el ${p}% de ${base}.`;steps=[`La base (100%) és ${base}.`,`${p}% = ${fmt(p/100)}.`,`${base} × ${fmt(p/100)} = ${v}.`];if([10,25,50,75].includes(p))steps.push(p===10?'Mentalment: divideix la base per 10.':p===25?'Mentalment: divideix la base per 4.':p===50?'Mentalment: calcula la meitat.':'Mentalment: divideix per 4 i multiplica per 3.');wrong=[base,base-v,base+p];data=[base,p];
  }else if(n===2){const part=base*p/100;unit='%';v=p;q=`En un grup de ${base} persones, ${part} han triat teatre. Quin percentatge del total representen?`;steps=[`El total, ${base} persones, és la base del 100%.`,`${part} ÷ ${base} × 100 = ${p}%.`,`La quantitat absoluta és ${part} persones; el percentatge és ${p}%.`];wrong=[100-p,part,part/base];data=[part,base];
@@ -55,8 +72,8 @@ function generate(id,r=(a,b)=>a+Math.floor(Math.random()*(b-a+1))){
  const candidates=(wrong||[]).map(fmt).filter(x=>x!==correct),options=[correct,...new Set(candidates)];
  if(options.length<4&&kind==='number'){for(const x of [Number(v)*100,Number(v)/100,100-Number(v),Number(v)*10])if(!options.includes(fmt(x)))options.push(fmt(x));}
  if(options.length<4)throw Error('Distractors insuficients: '+id);
- return {topicId:'percentatges',familyId,variantId,type:id,taskDifficulty:level,diff:level,theorySection:section,percentTheory:section,percentAnswer:model,percentFields:[{label:kind==='choice'?(n===12?'Motiu de l’error':'Millor oferta'):kind==='fraction'?'Fracció irreductible':unit==='pp'?'Punts percentuals':`Resultat${unit?' ('+unit+')':''}`,placeholder:kind==='fraction'?'Per exemple, 3/8':undefined,integer,options:kind==='choice'?options.slice(0,4):undefined}],question:q,correct,options:options.slice(0,4),solution:steps,guide:[steps[0]],practiceKey:familyId+':'+JSON.stringify(data),percentData:data};
+ return {topicId:'percentatges',familyId,variantId,type:id,taskDifficulty:level,diff:level,theorySection:section,percentTheory:section,percentAnswer:model,percentFields:[{label:kind==='choice'?(n===12?'Motiu de l’error':'Millor oferta'):kind==='fraction'?'Fracció irreductible':unit==='pp'?'Punts percentuals':`Resultat${unit?' ('+unit+')':''}`,placeholder:kind==='fraction'?'Per exemple, 3/8':undefined,integer,options:kind==='choice'?options.slice(0,4):undefined}],question:q,correct,options:options.slice(0,4),solution:steps,guide:[steps[0]],practiceKey:familyId+':'+id+':'+JSON.stringify(data),percentData:data};
 }
 function decorateThreshold(ex){const d=ex.reasoningData,p=d.p,q=d.q,c=d.coupon,x=Number(ex.correct),a=x*(100-p),b=x*(100-q)-100*c,prev=x-1;return {...ex,options:[x,x-1,c,Math.ceil(100*c/(p+q))].map(String),familyId:'Q09',variantId:'llindar-ofertes',theorySection:'llindar-ofertes',percentTheory:'llindar-ofertes',percentAnswer:{kind:'number',value:String(x),unit:'€',integer:true},percentFields:[{label:'Preu inicial enter (€)'}],taskDifficulty:3,diff:3,practiceKey:'Q09:'+JSON.stringify(d),solution:[`La base comuna és el preu inicial desconegut x.`,`La diferència de descomptes és ${p-q}% de x. A guanya quan ${p-q}% de x > ${c} €.`,`Llindar d'igualtat: ${c} ÷ ${fmt((p-q)/100)} = ${fmt(100*c/(p-q))} €.`,`El menor enter estrictament superior és ${x}.`,`Amb ${x} €: A = ${money(a)} €, B = ${money(b)} €; A < B.`,`Amb ${prev} €: A = ${money(prev*(100-p))} €, B = ${money(prev*(100-q)-100*c)} €; A ≥ B. No s'han arrodonit imports intermedis.`]};}
-root.MIPercentatges={anchors,families,generate,matches,grid,decorateThreshold};
+root.MIPercentatges={anchors,families,familySpecs,familyInfo,levelFor,generate,matches,grid,decorateThreshold};
 })(typeof window==='undefined'?globalThis:window);
