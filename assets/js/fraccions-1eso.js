@@ -2,7 +2,31 @@
 (function(root){
 'use strict';
 const anchors=['simplificar','sumar','multiplicar','dividir','comparar','equivalents','quantitat-restant','tipus','quantitat','equivalencies','parts-disjuntes','fraccio-fraccio','retirades-successives','reconstruir-total','complement-divers','comparacio-diferencia','reconstruccio-successiva','representacio-visual','quocient-impropies','equivalents-restriccions','diagnosticar-errors','operand-desconegut','fraccio-intermedia'];
-const families=[[1,3,4,6,8,9,10,18,19],[2,5,7,11,12,13,15,16,20],[14,17,21,22,23]].map(g=>g.map(n=>['F'+String(n).padStart(2,'0')]));
+const familySpecs=[
+ {id:'equivalencia-fraccions',name:'Equivalència i simplificació de fraccions',level:1,generators:['F01','F06','F20']},
+ {id:'suma-fraccions',name:'Suma de fraccions',level:2,generators:['F02']},
+ {id:'producte-fraccions',name:'Multiplicació de fraccions',level:1,generators:['F03']},
+ {id:'divisio-fraccions',name:'Divisió de fraccions',level:1,generators:['F04']},
+ {id:'comparar-fraccions',name:'Comparació de fraccions',level:1,generators:['F05']},
+ {id:'fraccio-quantitat',name:'Fracció d’una quantitat i complement',level:1,generators:['F07','F09']},
+ {id:'tipus-fraccio',name:'Fraccions pròpies i impròpies',level:1,generators:['F08']},
+ {id:'representacions-fraccio',name:'Conversió entre representacions',level:1,generators:['F10']},
+ {id:'parts-disjuntes',name:'Parts disjuntes i complement',level:2,generators:['F11','F15']},
+ {id:'fraccio-duna-fraccio',name:'Fracció d’una fracció',level:2,generators:['F12']},
+ {id:'retirades-successives',name:'Retirades successives',level:2,generators:['F13']},
+ {id:'reconstruir-total',name:'Reconstruir el total',level:2,generators:['F14']},
+ {id:'comparar-i-restar',name:'Comparar i trobar la diferència',level:2,generators:['F16']},
+ {id:'reconstruccio-successiva',name:'Reconstrucció successiva',level:3,generators:['F17']},
+ {id:'representacio-visual',name:'Lectura de representacions visuals',level:1,generators:['F18']},
+ {id:'quocient-nombre-mixt',name:'Quocient expressat com a nombre mixt',level:1,generators:['F19']},
+ {id:'diagnosticar-errors',name:'Diagnosi d’errors amb fraccions',level:2,generators:['F21']},
+ {id:'sumand-desconegut',name:'Reconstruir un sumand',level:2,generators:['F22']},
+ {id:'fraccio-intermedia',name:'Fracció intermèdia amb restricció',level:2,generators:['F23']}
+].map(f=>Object.freeze({...f,generators:Object.freeze(f.generators.slice())}));
+const familyByGenerator=new Map(familySpecs.flatMap(f=>f.generators.map(id=>[id,f])));
+const families=[1,2,3].map(level=>familySpecs.filter(f=>f.level===level).map(f=>f.generators.slice()));
+function familyInfo(id){return familyByGenerator.get(String(id||''))||familySpecs.find(f=>f.id===id)||null;}
+function levelFor(id){return familyInfo(id)?.level||null;}
 const gcd=(a,b)=>b?gcd(b,a%b):Math.abs(a);
 function rational(s){const m=String(s??'').trim().match(/^([+-]?\d+)(?:\s*\/\s*([+-]?\d+))?$/);if(!m)return null;const n=Number(m[1]),d=Number(m[2]??1);return Number.isSafeInteger(n)&&Number.isSafeInteger(d)&&d!==0?{n,d}:null;}
 const eq=(a,b)=>!!a&&!!b&&BigInt(a.n)*BigInt(b.d)===BigInt(b.n)*BigInt(a.d);
@@ -29,7 +53,7 @@ function options(model,correct,candidates){
 }
 function drawing(n,d){return `<svg viewBox="0 0 ${d*40} 66" style="width:100%;max-width:600px" role="img" aria-label="Una unitat dividida en ${d} parts iguals; ${n} pintades"><title>Una unitat: ${n} de ${d} parts iguals pintades</title>`+Array.from({length:d},(_,i)=>`<rect x="${i*40}" y="1" width="40" height="40" fill="${i<n?'#5b8dee':'white'}" stroke="#24344b"/>`).join('')+`<text x="${d*20}" y="61" text-anchor="middle" font-size="14">Una unitat</text></svg>`;}
 function generate(id,r=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),variant){
- const n=Number(String(id).slice(1)),familyId='F'+String(n).padStart(2,'0'),level=families.findIndex(g=>g.some(f=>f[0]===familyId))+1;
+ const n=Number(String(id).slice(1)),variantId='F'+String(n).padStart(2,'0'),family=familyInfo(variantId);if(!family)throw Error('Generador sense família: '+variantId);const familyId=family.id,level=family.level;
  let a=r(1,5),b=r(3,9),c=r(1,4),d=r(3,8),question,correct,solution,guide,model,candidates,key;
  const set=(q,v,steps,hint,kind='rational',extra={})=>{question=q;correct=String(v);solution=steps;guide=[hint];model={kind,value:correct,...extra};};
  const pair=(q,fields,steps,hint)=>{question=q;model={kind:'fields',fields};correct=fields.map(f=>f.value).join('; ');solution=steps;guide=[hint];};
@@ -44,15 +68,15 @@ function generate(id,r=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),variant){
  }else if(n===6){set(`Escriu una fracció equivalent a ${a}/${b}.`,`${a*2}/${b*2}`,[`Multiplica numerador i denominador pel mateix nombre no nul.`,`${a}/${b} = ${a*2}/${b*2}. Qualsevol fracció equivalent és vàlida.`],'Multiplica o divideix tots dos termes pel mateix factor.');candidates=[`${b}/${a}`,`${a+1}/${b}`,`${a}/${b+1}`,`${a+2}/${b}`,`${a+3}/${b}`];key=[frac(a,b)];
  }else if(n===8){a=r(1,b+3);const v=a<b?'Pròpia':'Impròpia';set(`Classifica ${a}/${b}: considerem impròpia tota fracció amb numerador igual o superior al denominador.`,v,[`${a} ${a<b?'<':'≥'} ${b}.`,`Una pròpia és menor que la unitat; una impròpia és igual o superior a la unitat. Per tant és ${v.toLowerCase()}.`],'Compara el numerador amb el denominador.','choice');candidates=['Pròpia','Impròpia','No és una fracció','No es pot classificar'];key=[a,b];
  }else if(n===10){b=[2,4,5,10][r(0,3)];a=r(1,b);const dec=String(a/b).replace('.',','),pct=a*100/b;pair(`Expressa ${a}/${b} en decimal i en percentatge.`,[field('Decimal',dec,'decimal'),field('Percentatge',pct+'%','percent')],[`${a} ÷ ${b} = ${dec}.`,`${dec} × 100 = ${pct}%; cal que tots dos components siguin correctes.`],'Divideix el numerador pel denominador i multiplica el decimal per 100.');candidates=[`${dec}; ${pct+10}%`,`${String((a+1)/b).replace('.',',')}; ${pct}%`,`${String(a/(b*10)).replace('.',',')}; ${pct/10}%`];key=[a,b];
- }else if([7,9,11,12,13,14,15].includes(n)){a=r(1,b-1);c=r(1,d-1);const k=r(3,16),total=b*d*k;
+ }else if([7,9,11,12,13,14,15].includes(n)){a=r(1,b-1);c=r(1,d-1);const k=r(3,16);let total=b*d*k;
  if(n===7)set(`De ${total} fitxes se'n gasten ${a}/${b}. Quantes en queden?`,total*(b-a)/b,[`Gastades: ${total} ÷ ${b} × ${a} = ${total*a/b}.`,`Restants: ${total} − ${total*a/b} = ${total*(b-a)/b}.`],'Calcula la part gastada i resta-la del total.','integer');
  if(n===9)set(`Un conjunt de ${total} peces es reparteix en ${b} grups iguals. Quantes peces són ${a}/${b} del conjunt?`,total*a/b,[`Cada grup té ${total} ÷ ${b} = ${total/b} peces.`,`Prenem ${a} grups: ${total/b} × ${a} = ${total*a/b}.`],'Divideix pel denominador i multiplica pel numerador.','integer');
- if(n===11){const different=variant==='different'||(!variant&&r(0,1));if(different){a=1;c=r(1,Math.max(1,Math.floor(d*(b-1)/b)));}else{d=b;c=r(1,b-a);}const sum=a*d+c*b,den=b*d;pair(different?`De ${total} alumnes, ${a}/${b} practiquen futbol i ${c}/${d} bàsquet; ningú practica tots dos esports. Quina fracció i quants alumnes practiquen algun esport?`:`De ${total} llibres, ${a}/${b} són novel·les i ${c}/${d} són còmics, sense superposició. Quina fracció representen junts i quants llibres són?`,[field('Fracció conjunta',frac(sum,den)),field(different?'Alumnes':'Llibres',total*sum/den,'integer')],[`Les parts són disjuntes: ${a}/${b} + ${c}/${d} = ${a*d}/${den} + ${c*b}/${den} = ${frac(sum,den)}.`,`Quantitat: ${total} × ${sum}/${den} = ${total*sum/den}.`],'Suma les parts i aplica la fracció al total.');}
+ if(n===11){const different=variant==='different'||(!variant&&r(0,1));if(different){a=1;c=r(1,Math.max(1,Math.floor(d*(b-1)/b)));}else{d=b;total=b*d*k;c=r(1,b-a);}const sum=a*d+c*b,den=b*d;pair(different?`De ${total} alumnes, ${a}/${b} practiquen futbol i ${c}/${d} bàsquet; ningú practica tots dos esports. Quina fracció i quants alumnes practiquen algun esport?`:`De ${total} llibres, ${a}/${b} són novel·les i ${c}/${d} són còmics, sense superposició. Quina fracció representen junts i quants llibres són?`,[field('Fracció conjunta',frac(sum,den)),field(different?'Alumnes':'Llibres',total*sum/den,'integer')],[`Les parts són disjuntes: ${a}/${b} + ${c}/${d} = ${a*d}/${den} + ${c*b}/${den} = ${frac(sum,den)}.`,`Quantitat: ${total} × ${sum}/${den} = ${total*sum/den}.`],'Suma les parts i aplica la fracció al total.');}
 
  if(n===12)pair(`Es destina a regar ${c}/${d} de ${a}/${b} d'un dipòsit de ${total} litres. Quina fracció del dipòsit inicial i quants litres es destinen a regar?`,[field('Fracció del total',frac(a*c,b*d)),field('Litres',a*c*k,'integer')],[`Una fracció d'una fracció és un producte: ${c}/${d} × ${a}/${b} = ${frac(a*c,b*d)}.`,`Litres: ${total} × ${a*c}/${b*d} = ${a*c*k}.`],'Multiplica les fraccions abans d’aplicar-les al total.');
  if(n===13)set(`Hi ha ${total} unitats. Se'n ven ${a}/${b} i després es regala ${c}/${d} de les que queden. Quantes en resten?`,(b-a)*(d-c)*k,[`Després de vendre: ${total} × ${b-a}/${b} = ${(b-a)*d*k}.`,`La segona fracció s'aplica a aquest restant: regalem ${(b-a)*c*k}.`,`Queden ${(b-a)*d*k} − ${(b-a)*c*k} = ${(b-a)*(d-c)*k}.`],'Calcula cada retirada sobre la quantitat que hi ha en aquell moment.','integer');
  if(n===14)set(`${a}/${b} del total són ${a*k} alumnes. Quants alumnes hi ha en total?`,b*k,[`Una part val ${a*k} ÷ ${a} = ${k}.`,`El total conté ${b} parts: ${k} × ${b} = ${b*k}.`],'Divideix la quantitat coneguda pel numerador i multiplica pel denominador.','integer');
- if(n===15){a=r(1,b-2);c=r(1,b-a-1);const rest=b-a-c;pair(`D'un pressupost de ${total} € es gasta ${a}/${b} en material i ${c}/${b} en transport. Quina fracció i quants euros queden?`,[field('Fracció restant',frac(rest,b)),field('Euros restants',total*rest/b,'integer')],[`Gastat: ${a}/${b} + ${c}/${b} = ${frac(a+c,b)}.`,`Restant: 1 − ${a+c}/${b} = ${frac(rest,b)}.`,`Euros: ${total} × ${rest}/${b} = ${total*rest/b}.`],'Suma les parts gastades, resta-les de la unitat i calcula la quantitat.');}
+ if(n===15){d=b;total=b*d*k;a=r(1,b-2);c=r(1,b-a-1);const rest=b-a-c;pair(`D'un pressupost de ${total} € es gasta ${a}/${b} en material i ${c}/${b} en transport. Quina fracció i quants euros queden?`,[field('Fracció restant',frac(rest,b)),field('Euros restants',total*rest/b,'integer')],[`Gastat: ${a}/${b} + ${c}/${b} = ${frac(a+c,b)}.`,`Restant: 1 − ${a+c}/${b} = ${frac(rest,b)}.`,`Euros: ${total} × ${rest}/${b} = ${total*rest/b}.`],'Suma les parts gastades, resta-les de la unitat i calcula la quantitat.');}
  key=[a,b,c,d,k];
  }else if(n===16){a=r(1,b-1);c=r(1,d-1);if(a*d===c*b){d=b+1;c=a;}const who=a*d>c*b?'Laia':'Marc',dif=frac(Math.abs(a*d-c*b),b*d);pair(`La Laia ha llegit ${a}/${b} del seu llibre i en Marc ${c}/${d}. Qui n'ha llegit una fracció més gran? Quina és la diferència entre fraccions?`,[field('Persona',who,'choice',{options:['Laia','Marc']}),field('Diferència entre fraccions',dif)],[`Productes creuats: ${a*d} i ${c*b}; la fracció més gran és la de ${who}.`,`Resta la menor de la major: ${Math.abs(a*d-c*b)}/${b*d} = ${dif}.`],'Compara primer; després resta la fracció menor de la major.');candidates=[`${who==='Laia'?'Marc':'Laia'}; ${dif}`,`${who}; ${a*d+c*b}/${b*d}`,`${who}; ${Math.abs(a*d-c*b)+1}/${b*d}`];key=[a,b,c,d];
  }else if(n===17){const q=root.MIFirstNumericTasks.generate('fraccions-reconstruccio',()=>r(0,999999)/1000000);set(q.question,q.correct,q.solution,q.guide[0],'integer');key=q.reasoningData;
@@ -68,10 +92,10 @@ function generate(id,r=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),variant){
  }else throw Error('Família desconeguda');
  if(!candidates){if(model.kind==='fields'){const f=model.fields;candidates=[`${Number(f[0].value.split('/')[0])+1}; ${f[1].value}`,`${f[0].value}; ${Number(f[1].value)+1}`,`${f[0].value}; ${Number(f[1].value)-1}`];}else{const v=rational(correct);candidates=[v.n+v.d,v.n-v.d,v.n+2*v.d,v.n*2+v.d].map(x=>`${x}/${v.d}`);}}
  const choices=options(model,correct,candidates);for(let i=3;i>0;i--){const j=r(0,i);[choices[i],choices[j]]=[choices[j],choices[i]];}
- return {topicId:'fraccions',type:familyId,familyId,fractionsFamily:familyId,fractionsTheory:anchors[n-1],fractionsAnswer:model,fractionsFields:model.kind==='fields'?model.fields.map(f=>({...f,integer:f.kind==='integer'})):model.kind==='choice'?[{label:n===21?'Motiu de l’error':'Resposta',value:correct,options:choices.slice()}]:undefined,fractionsOptionLabels:model.fields?.map(f=>f.label),question,correct,options:choices,solution,guide,taskDifficulty:n===2&&variant==='equal'?1:level,diff:n===2&&variant==='equal'?1:level,practiceKey:familyId+':'+JSON.stringify(key)};
+ return {topicId:'fraccions',type:familyId,familyId,fractionsFamily:familyId,variantId,fractionsData:key,fractionsTheory:anchors[n-1],fractionsAnswer:model,fractionsFields:model.kind==='fields'?model.fields.map(f=>({...f,integer:f.kind==='integer'})):model.kind==='choice'?[{label:n===21?'Motiu de l’error':'Resposta',value:correct,options:choices.slice()}]:undefined,fractionsOptionLabels:model.fields?.map(f=>f.label),question,correct,options:choices,solution,guide,taskDifficulty:level,diff:level,practiceKey:familyId+':'+variantId+':'+JSON.stringify(key)};
 }
 // Decimal and percentage components are parsed exactly as powers of ten.
 const baseMatches=matches;
 matches=function(model,input){if(model?.kind==='decimal'||model?.kind==='percent'){const s=String(input??'').trim();const pattern=model.kind==='percent'?/^([+-]?\d+(?:[.,]\d+)?)%$/:/^([+-]?\d+(?:[.,]\d+)?)$/;const m=s.match(pattern),e=String(model.value).match(pattern);const parse=v=>{const p=v.replace(',','.').split('.');return {n:Number(p.join('')),d:10**(p[1]?.length||0)};};if(!m||!e)return false;const v=parse(m[1]),w=parse(e[1]);return Number.isSafeInteger(v.n)&&Number.isSafeInteger(v.d)&&eq(v,w);}return baseMatches(model,input);};
-root.MIFraccions=Object.freeze({anchors,families,rational,eq,frac,matches,options,drawing,generate});
+root.MIFraccions=Object.freeze({anchors,families,familySpecs,familyInfo,levelFor,rational,eq,frac,matches,options,drawing,generate});
 })(typeof window!=='undefined'?window:globalThis);

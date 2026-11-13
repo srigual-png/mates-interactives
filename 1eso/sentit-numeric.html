@@ -2209,8 +2209,8 @@ function genDecimals(){if(!Array.isArray(decimalsBag)||decimalsBag.length===0)de
 
 // ── GEN FRACCIONS ──────────────────────────────────────────────────────────
 function genFraccionsBase(){
-  const type=rnd(1,11),ids=['F01','F02','F02','F03','F04','F05','F06','F07','F08','F09','F10'];
-  return {...MIFraccions.generate(ids[type-1],rnd,type===2?'equal':undefined),type};
+  const type=rnd(1,24),ids=['F01','F02','F02','F03','F04','F05','F06','F07','F08','F09','F10',...Array.from({length:13},(_,i)=>'F'+String(i+11).padStart(2,'0'))];
+  return {...MIFraccions.generate(ids[type-1],rnd,type===2?'equal':type===3?'different':undefined),type};
 }
 
 var fraccionsBag=[],lastFraccionsType=null;
@@ -2946,7 +2946,7 @@ var AMP_CATS=[
   {id:'mcmmcd',icon:'🔗',name:'MCD i mcm',desc:'Coincidències, agrupaments i talls màxims',variants:4,diffCounts:{1:0,2:4,3:1},gen:genMcmMcdProb},
   {id:'enters',icon:'±',name:'Nombres enters',desc:'Temperatures, saldos, plantes, altituds i profunditats',variants:5,diffCounts:{1:1,2:4,3:0},gen:genEntersProb},
   {id:'decimals',icon:'💰',name:'Nombres decimals',desc:'Preus, repartiments, unitats, mitjanes i aproximacions',variants:6,diffCounts:{1:2,2:4,3:0},gen:genDecimalsProb},
-  {id:'fraccions',icon:'½',name:'Fraccions',desc:'Parts, restes, comparacions i problemes inversos',variants:7,diffCounts:{1:1,2:4,3:2},gen:genFraccionsProb},
+  {id:'fraccions',icon:'½',name:'Fraccions',desc:'Parts, restes, comparacions i problemes inversos',variants:7,diffCounts:{1:0,2:7,3:0},gen:genFraccionsProb},
   {id:'proporcionalitat',icon:'⚖️',name:'Proporcionalitat directa',desc:'Valor unitari, receptes, producció i detecció de proporcionalitat',variants:5,diffCounts:{1:1,2:4,3:0},gen:genProporcionalitatProb},
   {id:'pct',icon:'%',name:'Percentatges',desc:'Part, total, percentatge, descomptes i variacions',variants:6,diffCounts:{1:0,2:6,3:0},gen:genPctProb},
   {id:'mix',icon:'🎲',name:'Barreja de tot',desc:'Tots els tipus barrejats aleatòriament',gen:null}
