@@ -2192,7 +2192,7 @@ function genEnters(){
   }
   const unit=type===5?'graus':type===6?'euros':'';
   const entersAnswer=type===1?{kind:'order',values:sorted,separator:ascending?'<':'>'}:{kind:'fields',fields:[MIEnters.number('Resultat',parseInt(correct,10),unit)]};
-  return{entersAnswer,entersTheory:MIEnters.anchors[(type===7?5:type)-1],type:type,question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+  return{entersAnswer,entersTheory:MIEnters.anchors[(type===7?5:type)-1],type:type,question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:type===1||type===5||type===8?1:2};
 }
 
 // ── GEN DECIMALS ───────────────────────────────────────────────────────────
@@ -2496,7 +2496,7 @@ function genProporcionalitatBase(){
     guide=[`Determina per quin factor s'ha multiplicat la primera magnitud.`,`En una proporcionalitat directa, aplica exactament el mateix factor a la segona magnitud.`];
     solution=[`Factor = ${xb}/${x8} = ${factor}`,`${y8} × ${factor} = ${yb}`,`✅ ${correct}`];
   }
-  return{familyId:type===1?'P01':type===5?'P03':type===6?'P04':'P02',theorySection:type===1?'proporcionalitat':type===5?'constant':type===6?'factor-i-taules':'unitari',proportionTheory:type===1?'proporcionalitat':type===5?'constant':type===6?'factor-i-taules':'unitari',type:type,question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
+  return{familyId:type===1?'P01':type===5?'P03':type===6?'P04':type===8?'P02-factor':'P02',theorySection:type===1?'proporcionalitat':type===5?'constant':type===6?'factor-i-taules':'unitari',proportionTheory:type===1?'proporcionalitat':type===5?'constant':type===6?'factor-i-taules':'unitari',type:type,question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:type===1||type===5||type===8?1:2};
 }
 
 var proporcionalitatBag=[],lastProporcionalitatType=null;
@@ -2891,7 +2891,7 @@ function genFraccionsProb(){
 function genProporcionalitatProb(){
   var type=ampNextType('proporcionalitat',5),diff,text,steps,answer,hints;
   if(type===1){
-    diff=1;
+    diff=2;
     var q1=rnd(2,6),priceUnit=rnd(2,9),cost1=q1*priceUnit,q2=rnd(7,15),cost2=q2*priceUnit;
     text='<b>'+q1+' entrades</b> per a una activitat costen <b>'+cost1+' €</b>. Si totes tenen el mateix preu, quant costaran <b>'+q2+' entrades</b>?';
     steps=[{label:'1 entrada',hint:'Troba primer el preu d\'una entrada',check:function(v){return numEq(v,priceUnit);}},{label:'Nou cost',hint:'Multiplica el preu unitari pel nou nombre d\'entrades',check:function(v){return numEq(v,cost2);}}];
@@ -2919,14 +2919,14 @@ function genProporcionalitatProb(){
     answer={check:function(v){return numEq(v,km2);},val:km2+' km'};
     hints=['Consum per km: '+lit1+' ÷ '+km1+' = '+litPer,'Distància: '+lit2+' ÷ '+litPer+' = '+km2+' km'];
   }else{
-    diff=3;
+    diff=1;
     var fixed=rnd(2,6),per=rnd(1,4),d1=rnd(2,5),c1=fixed+per*d1,d2=rnd(6,10),c2=fixed+per*d2;
     text='Un servei cobra <b>'+fixed+' € fixos</b> més <b>'+per+' € per quilòmetre</b>. Per '+d1+' km costa '+c1+' € i per '+d2+' km costa '+c2+' €. El cost és directament proporcional als quilòmetres?';
     steps=[{label:'Comprova',hint:'En una proporcionalitat directa, el quocient cost/distància ha de ser constant i, si la distància és 0, el cost també ha de ser 0',check:function(v){return String(v).trim()==='No';}}];
     answer={check:function(v){return String(v).trim()==='No';},val:'No'};
     hints=['No és proporcionalitat directa perquè hi ha una quota fixa de '+fixed+' €','Amb 0 km el cost seria '+fixed+' €, no 0 €'];
   }
-  return{familyId:type===5?'P01':'P02',theorySection:type===5?'tarifes-i-constant':'unitari',proportionTheory:type===5?'tarifes-i-constant':'unitari',topicId:'proporcionalitat',topicName:'Proporcionalitat directa',type:type,variantId:'proporcionalitat-'+type,cat:'Proporcionalitat directa',diff:diff,text:text,dataBox:null,steps:steps,answer:answer,hints:hints};
+  return{familyId:type===5?'P01':'P02',theorySection:type===5?'tarifes-i-constant':'unitari',proportionTheory:type===5?'tarifes-i-constant':'unitari',topicId:'proporcionalitat',topicName:'Proporcionalitat directa',type:type,variantId:'proporcionalitat-'+type,cat:'Proporcionalitat directa',diff:diff,taskDifficulty:diff,text:text,dataBox:null,steps:steps,answer:answer,hints:hints};
 }
 
 // --- PERCENTATGES (6 tipus) ------------------------------------------------
@@ -2947,7 +2947,7 @@ var AMP_CATS=[
   {id:'enters',icon:'±',name:'Nombres enters',desc:'Temperatures, saldos, plantes, altituds i profunditats',variants:5,diffCounts:{1:1,2:4,3:0},gen:genEntersProb},
   {id:'decimals',icon:'💰',name:'Nombres decimals',desc:'Preus, repartiments, unitats, mitjanes i aproximacions',variants:6,diffCounts:{1:2,2:4,3:0},gen:genDecimalsProb},
   {id:'fraccions',icon:'½',name:'Fraccions',desc:'Parts, restes, comparacions i problemes inversos',variants:7,diffCounts:{1:1,2:4,3:2},gen:genFraccionsProb},
-  {id:'proporcionalitat',icon:'⚖️',name:'Proporcionalitat directa',desc:'Valor unitari, receptes, producció i detecció de proporcionalitat',variants:5,diffCounts:{1:1,2:3,3:1},gen:genProporcionalitatProb},
+  {id:'proporcionalitat',icon:'⚖️',name:'Proporcionalitat directa',desc:'Valor unitari, receptes, producció i detecció de proporcionalitat',variants:5,diffCounts:{1:1,2:4,3:0},gen:genProporcionalitatProb},
   {id:'pct',icon:'%',name:'Percentatges',desc:'Part, total, percentatge, descomptes i variacions',variants:6,diffCounts:{1:1,2:4,3:1},gen:genPctProb},
   {id:'mix',icon:'🎲',name:'Barreja de tot',desc:'Tots els tipus barrejats aleatòriament',gen:null}
 ];
