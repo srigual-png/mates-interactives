@@ -16,7 +16,9 @@
   function task(d,data,question,answer,guide,solution){
     if(!Number.isSafeInteger(answer)||answer<0)throw Error('Resposta fora del domini: '+d.id);
     const metricFamily=d.topic==='metric'?metricFamilySpecs.find(f=>f.generators.includes(d.type))?.id:null;
-    return {type:d.type,reasoningFamily:d.id,reasoningData:data,...(metricFamily?{metricFamily,familyId:metricFamily,taskDifficulty:d.level,difficulty:d.level}:{}),question,correct:String(answer),options:[answer,answer+1,answer+2,Math.max(0,answer-1)].map(String),guide,solution,allowOpen:true,isProblem:true,diff:d.level,
+    const conversionsFamily=d.topic==='conversions'?conversionsFamilyFor(d.type)?.id:null;
+    const family=metricFamily||conversionsFamily;
+    return {type:d.type,reasoningFamily:d.id,reasoningData:data,...(family?{...(metricFamily?{metricFamily}:{}),...(conversionsFamily?{conversionsFamily}:{}),familyId:family,taskDifficulty:d.level,difficulty:d.level}:{}),question,correct:String(answer),options:[answer,answer+1,answer+2,Math.max(0,answer-1)].map(String),guide,solution,allowOpen:true,isProblem:true,diff:d.level,
       answerCheck:v=>typeof root.answerNumEq==='function'?root.answerNumEq(v,answer,1e-8):String(v).trim()===String(answer)};
   }
   const catalog=[
@@ -28,6 +30,28 @@
       const shift=n(r,0,5),massA=2+shift,massB=3+shift,litA=3+shift,litB=5+shift,slots=n(r,4,9),limit=massB*slots-2,all=[];
       for(let a=0;a<=slots;a++)for(let b=0;b<=slots-a;b++)if(a*massA+b*massB<=limit)all.push({a,b,lit:a*litA+b*litB});const best=all.reduce((a,b)=>a.lit>=b.lit?a:b);
       return task(this,{massA,massB,litA,litB,slots,limit},`Una caixa A conté ${litA} L i pesa ${massA*1000} g. Una B conté ${litB*1000} mL i pesa ${massB} kg. Pots transportar com a màxim ${slots} caixes i ${limit*1000} g en total. Quants litres pots transportar com a màxim combinant els dos tipus?`,best.lit,['Converteix masses i capacitats a unitats comunes.','Enumera combinacions que compleixin tots dos límits, també les mixtes.'],[`En kg i L: A (${massA}; ${litA}), B (${massB}; ${litB}).`,`Cal a+b ≤ ${slots} i ${massA}a+${massB}b ≤ ${limit}.`,`Compara ${all.length} combinacions admissibles. Una òptima és ${best.a} A i ${best.b} B: ${best.lit} L.`]);
+    }},
+    {id:'ordenar-mesures',topic:'conversions',type:1003,level:2,reason:'Normalitzar tres mesures de superfície, ordenar-les i identificar-ne la mediana.',build(r){
+      const center=n(r,3,8)*100,below=n(r,5,30),above=n(r,5,30),rows=[
+        {label:'A',text:`${center/100} m²`,dm2:center},
+        {label:'B',text:`${center-below} dm²`,dm2:center-below},
+        {label:'C',text:`${(center+above)*100} cm²`,dm2:center+above}
+      ];
+      const ordered=rows.slice().sort((a,b)=>a.dm2-b.dm2),presented=rows.slice();for(let i=presented.length-1;i>0;i--){const j=n(r,0,i);[presented[i],presented[j]]=[presented[j],presented[i]];}const answer=ordered[1].dm2;
+      return task(this,{rows:presented.map(x=>({...x})),ordered:ordered.map(x=>x.label)},`Ordena de més petita a més gran les superfícies A = ${presented[0].text}, B = ${presented[1].text} i C = ${presented[2].text}. Quin valor en dm² queda al mig?`,answer,['Expressa les tres superfícies en dm² abans d’ordenar-les.','Recorda que entre unitats d’àrea el factor és quadràtic.'],[`A = ${rows[0].dm2} dm²; B = ${rows[1].dm2} dm²; C = ${rows[2].dm2} dm².`,`Ordre creixent: ${ordered.map(x=>x.label).join(' < ')}.`,`El valor central és ${answer} dm².`]);
+    }},
+    {id:'operar-arees-mixtes',topic:'conversions',type:1004,level:2,reason:'Convertir mesures d’àrea a una unitat comuna i resoldre una suma seguida d’una resta.',build(r){
+      const m2=n(r,2,7),dm2=n(r,15,95),removed=n(r,1,5),answer=m2*100+dm2-removed;
+      return task(this,{m2,dm2,removed,answer},`Una cartolina té ${m2} m² i ${dm2} dm². Se’n retallen ${removed*100} cm². Quina superfície queda en dm²?`,answer,['Expressa totes les superfícies en dm².','Després de sumar les dues parts, resta la superfície retallada.'],[`${m2} m² = ${m2*100} dm².`,`${removed*100} cm² = ${removed} dm².`,`${m2*100} + ${dm2} − ${removed} = ${answer} dm².`]);
+    }},
+    {id:'diagnosticar-error-superficie',topic:'conversions',type:1005,level:2,reason:'Detectar la confusió entre factor lineal i quadràtic i corregir el factor d’una conversió de superfície.',build(r){
+      const cases=[
+        {from:'m²',to:'dm²',factor:100,wrong:10},
+        {from:'m²',to:'cm²',factor:10000,wrong:100},
+        {from:'dm²',to:'cm²',factor:100,wrong:10}
+      ];
+      const item=cases[n(r,0,cases.length-1)],value=n(r,2,9),reported=value*item.wrong,answer=item.factor;
+      return task(this,{...item,value,reported,answer},`En convertir ${value} ${item.from} a ${item.to}, una alumna aplica el factor ${item.wrong} i obté ${reported} ${item.to}. Quin factor correcte havia d’aplicar per cada unitat ${item.from}?`,answer,['Compara les dues unitats de longitud que formen cada unitat quadrada.','Eleva al quadrat el factor lineal.'],[`El factor lineal del canvi és ${Math.sqrt(item.factor)}.`,`Per a les unitats quadrades, el factor és ${Math.sqrt(item.factor)}² = ${item.factor}.`,`El factor ${item.wrong} és incorrecte. S’ha d’aplicar ${item.factor}.`]);
     }},
     {id:'transbordament-invers',topic:'temps',type:1001,level:3,reason:'Reconstruir el darrer trajecte possible coordinant dues freqüències, transbordament i termini d’arribada.',build(r){
       const base=8*60,periodA=pick(r,[12,15,20]),periodB=pick(r,[15,20,25]),offset=n(r,2,9),rideA=n(r,12,22),walk=n(r,3,7),rideB=n(r,10,18),deadline=base+n(r,100,150),trips=[];
@@ -75,8 +99,19 @@
     if(type===2)return metricFamilySpecs.find(f=>f.id==='equivalencies-massa-factor-1000');
     return metricFamilySpecs.find(f=>f.id==='escala-decimal-longitud-capacitat');
   }
+  const conversionsFamilySpecs=Object.freeze([
+    Object.freeze({id:'conversio-superficies',name:'Convertir unitats de superfície',level:2,generators:[1,4],variantRule:'conversions directes i contextualitzades, en tots dos sentits; factor quadràtic'}),
+    Object.freeze({id:'mesura-mixta',name:'Operar amb mesures mixtes i unitats diferents',level:2,generators:[2],variantRule:'suma de dues mesures; comparteix procediment amb la família de mesura mixta del tema metric'}),
+    Object.freeze({id:'comparar-equivalencies',name:'Comparar mesures equivalents o no equivalents',level:1,generators:[3],variantRule:'longitud, massa, capacitat i superfície; no inclou temps'}),
+    Object.freeze({id:'carrega-amb-dos-limits',name:'Optimitzar una càrrega amb límit de massa i de nombre d’objectes',level:3,generators:[1001],variantRule:'combinar dues caixes sota dues restriccions'}),
+    Object.freeze({id:'ordenar-mesures',name:'Ordenar mesures d’àrea i reconstruir-ne el valor central',level:2,generators:[1003],variantRule:'tres superfícies expressades en unitats diferents'}),
+    Object.freeze({id:'operar-arees-mixtes',name:'Operar amb diverses superfícies en unitats diferents',level:2,generators:[1004],variantRule:'sumar m² i dm², restar cm² i expressar el resultat en dm²'}),
+    Object.freeze({id:'diagnosticar-error-superficie',name:'Diagnosticar i corregir un factor de conversió d’àrea',level:2,generators:[1005],variantRule:'detectar l’ús del factor lineal en lloc del quadràtic'})
+  ]);
+  function conversionsFamilyFor(type){return conversionsFamilySpecs.find(f=>f.generators.includes(Number(type)))||null;}
+  function conversionsFamilyInfo(key){return conversionsFamilySpecs.find(f=>f.id===key)||null;}
   function metricFamilyInfo(key){return metricFamilySpecs.find(f=>f.id===key)||null;}
   function generate(id,random=Math.random){const d=catalog.find(d=>d.id===id);if(!d)throw Error('Família desconeguda');const q=d.build(random);if(new Set(q.options).size!==4)throw Error('Opcions repetides');for(let i=q.options.length-1;i>0;i--){const j=n(random,0,i);[q.options[i],q.options[j]]=[q.options[j],q.options[i]];}return q;}
-  function extend(topics,banks){for(const t of topics){if(t.id==='problemes')continue;const ds=catalog.filter(d=>d.topic===t.id);if(!ds.length)continue;const original=t.gen;let turn=ds.length;t.gen=function(...args){const slot=turn++%10;return slot<ds.length?generate(ds[slot].id):original.apply(this,args);};}catalog.filter(d=>d.level===3).forEach((d,i)=>{const key='R'+String(i+1).padStart(2,'0');banks.push(()=>({...generate(d.id),type:key,patternId:key,primaryTopic:d.topic,difficultyBank:'measureProblems',difficultyKey:key,family:'Raonament',examCompatible:true}));});}
-  root.MIFirstMeasureTasks=Object.freeze({catalog:Object.freeze(catalog.map(Object.freeze)),metricFamilySpecs,metricFamilyFor,metricFamilyInfo,generate,extend});
+  function extend(topics,banks){for(const t of topics){if(t.id==='problemes')continue;const ds=catalog.filter(d=>d.topic===t.id);if(!ds.length)continue;const original=t.gen;let turn=ds.length,lastFamily=null;t.gen=function(...args){for(let tries=0;tries<120;tries++){const slot=turn++%10,q=slot<ds.length?generate(ds[slot].id):original.apply(this,args);if(t.id!=='conversions')return q;const family=q.conversionsFamily||q.metricFamily||q.familyId||q.type;if(family!==lastFamily||tries===119){lastFamily=family;return q;}}return original.apply(this,args);};}catalog.filter(d=>d.level===3).forEach((d,i)=>{const key='R'+String(i+1).padStart(2,'0');banks.push(()=>({...generate(d.id),type:key,patternId:key,primaryTopic:d.topic,difficultyBank:'measureProblems',difficultyKey:key,family:'Raonament',examCompatible:true}));});}
+  root.MIFirstMeasureTasks=Object.freeze({catalog:Object.freeze(catalog.map(Object.freeze)),metricFamilySpecs,metricFamilyFor,metricFamilyInfo,conversionsFamilySpecs,conversionsFamilyFor,conversionsFamilyInfo,generate,extend});
 })(typeof window==='undefined'?globalThis:window);
