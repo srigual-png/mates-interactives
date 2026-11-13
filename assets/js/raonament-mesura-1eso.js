@@ -17,8 +17,9 @@
     if(!Number.isSafeInteger(answer)||answer<0)throw Error('Resposta fora del domini: '+d.id);
     const metricFamily=d.topic==='metric'?metricFamilySpecs.find(f=>f.generators.includes(d.type))?.id:null;
     const conversionsFamily=d.topic==='conversions'?conversionsFamilyFor(d.type)?.id:null;
-    const family=metricFamily||conversionsFamily;
-    return {type:d.type,reasoningFamily:d.id,reasoningData:data,...(family?{...(metricFamily?{metricFamily}:{}),...(conversionsFamily?{conversionsFamily}:{}),familyId:family,taskDifficulty:d.level,difficulty:d.level}:{}),question,correct:String(answer),options:[answer,answer+1,answer+2,Math.max(0,answer-1)].map(String),guide,solution,allowOpen:true,isProblem:true,diff:d.level,
+    const timeFamily=d.topic==='temps'?timeFamilyFor(d.type)?.id:null;
+    const family=metricFamily||conversionsFamily||timeFamily;
+    return {type:d.type,reasoningFamily:d.id,reasoningData:data,...(family?{...(metricFamily?{metricFamily}:{}),...(conversionsFamily?{conversionsFamily}:{}),...(timeFamily?{timeFamily}:{}),familyId:family,taskDifficulty:d.level,difficulty:d.level}:{}),question,correct:String(answer),options:[answer,answer+1,answer+2,Math.max(0,answer-1)].map(String),guide,solution,allowOpen:true,isProblem:true,diff:d.level,
       answerCheck:v=>typeof root.answerNumEq==='function'?root.answerNumEq(v,answer,1e-8):String(v).trim()===String(answer)};
   }
   const catalog=[
@@ -52,6 +53,40 @@
       ];
       const item=cases[n(r,0,cases.length-1)],value=n(r,2,9),reported=value*item.wrong,answer=item.factor;
       return task(this,{...item,value,reported,answer},`En convertir ${value} ${item.from} a ${item.to}, una alumna aplica el factor ${item.wrong} i obté ${reported} ${item.to}. Quin factor correcte havia d’aplicar per cada unitat ${item.from}?`,answer,['Compara les dues unitats de longitud que formen cada unitat quadrada.','Eleva al quadrat el factor lineal.'],[`El factor lineal del canvi és ${Math.sqrt(item.factor)}.`,`Per a les unitats quadrades, el factor és ${Math.sqrt(item.factor)}² = ${item.factor}.`,`El factor ${item.wrong} és incorrecte. S’ha d’aplicar ${item.factor}.`]);
+    }},
+    {id:'reconstruir-hora-inicial',topic:'temps',type:1002,level:2,reason:'Reconstruir l’hora d’inici a partir de la durada i d’una hora final l’endemà.',build(r){
+      const startHour=n(r,21,23),startMinute=pick(r,[0,10,20,30,40,50]),start=startHour*60+startMinute,after=pick(r,[15,30,45,60,75,90,105,120]),duration=1440-start+after,endH=Math.floor(after/60),endM=after%60,h=Math.floor(duration/60),m=duration%60,answer=start;
+      return task(this,{start,startHour,startMinute,duration,after,endH,endM},`Una activitat acaba a les ${String(endH).padStart(2,'0')}:${String(endM).padStart(2,'0')} h de l’endemà i ha durat ${h} h ${m} min. A quants minuts després de les 00:00 del dia anterior havia començat?`,answer,['Situa l’hora final després de les 24:00 del dia inicial.','Treu la durada a aquesta hora final i normalitza el resultat dins del dia anterior.'],[`Final: 1440 + ${after} = ${1440+after} min des de les 00:00 del dia inicial.`,`Inici: ${1440+after} − ${duration} = ${answer} min.`,`Això correspon a ${String(startHour).padStart(2,'0')}:${String(startMinute).padStart(2,'0')} h.`]);
+    }},
+    {id:'operar-durades-i-pausas',topic:'temps',type:1003,level:2,reason:'Sumar tres durades i les pauses intermèdies per obtenir el temps total transcorregut.',build(r){
+      const activities=[pick(r,[35,40,45,50,55,60,65,70,75,80,90]),pick(r,[30,40,45,50,60,65,75,80,90,100]),pick(r,[25,35,45,50,55,60,70,85])],breaks=[pick(r,[5,10,15,20]),pick(r,[5,10,15,20])],answer=activities.reduce((a,b)=>a+b,0)+breaks.reduce((a,b)=>a+b,0);
+      const fmt=m=>{const h=Math.floor(m/60),rest=m%60;return h?`${h} h ${rest} min`:`${rest} min`;};
+      return task(this,{activities,breaks,answer},`Una jornada té tres activitats de ${activities.map(fmt).join(', ')} i dues pauses de ${breaks.join(' i ')} min entre elles. Quant temps transcorre des de l’inici de la primera activitat fins al final de l’última, incloses les pauses? Dona la resposta en minuts.`,answer,['Expressa cada activitat en minuts i suma-les.','Afegeix les dues pauses i comprova si el total supera 60 minuts.'],[`Activitats: ${activities.join(' + ')} = ${activities.reduce((a,b)=>a+b,0)} min.`,`Pauses: ${breaks[0]} + ${breaks[1]} = ${breaks.reduce((a,b)=>a+b,0)} min.`,`Total: ${activities.reduce((a,b)=>a+b,0)} + ${breaks.reduce((a,b)=>a+b,0)} = ${answer} min = ${fmt(answer)}.`]);
+    }},
+    {id:'detectar-error-base-sexagesimal',topic:'temps',type:1004,level:2,reason:'Detectar l’ús de base 100 en una durada mixta i corregir la conversió a minuts.',build(r){
+      const hours=n(r,1,4),minutes=n(r,10,59),reported=hours*100+minutes,answer=hours*60+minutes;
+      return task(this,{hours,minutes,reported,answer},`Un alumne escriu que ${hours} h ${minutes} min són ${reported} min perquè tracta les hores com si fossin desenes de minuts. Quants minuts són realment?`,answer,['Una hora té 60 minuts, no 100.','Multiplica les hores per 60 i després suma els minuts.'],[`${hours} h = ${hours} × 60 = ${hours*60} min.`,`${hours*60} + ${minutes} = ${answer} min.`,`El valor ${reported} min prové de fer servir base 100.`]);
+    }},
+    {id:'seleccionar-unitat-temporal',topic:'temps',type:1005,level:1,reason:'Escollir una unitat habitual adequada per descriure durades quotidianes.',build(r){
+      const cases=[
+        {context:'una classe',amount:'50',unit:'minuts'},
+        {context:'una pausa molt breu',amount:'20',unit:'segons'},
+        {context:'una pel·lícula',amount:'2',unit:'hores'},
+        {context:'un cap de setmana',amount:'2',unit:'dies'},
+        {context:'una cursa curta',amount:'15',unit:'segons'},
+        {context:'una visita al metge',amount:'30',unit:'minuts'}
+      ];
+      const item=pick(r,cases),options=['segons','minuts','hores','dies'];
+      const q=`Per expressar el temps que dura ${item.context} (aproximadament ${item.amount}), quina unitat és la més adequada?`;
+      return {type:this.type,reasoningFamily:this.id,reasoningData:{...item},timeFamily:this.id,familyId:this.id,taskDifficulty:this.level,difficulty:this.level,diff:this.level,question:q,correct:item.unit,options,guide:['Relaciona la durada habitual de l’activitat amb la mida de cada unitat.','Tria la unitat que permet expressar-la de manera clara i habitual.'],solution:[`La durada aproximada és de ${item.amount} ${item.unit}.`,`Per tant, la unitat més adequada és ${item.unit}.`],allowOpen:true,isProblem:true,answerCheck:v=>String(v).trim().toLocaleLowerCase('ca')===item.unit};
+    }},
+    {id:'comparar-durades',topic:'temps',type:1006,level:2,reason:'Comparar durades mixtes després de convertir-les a una unitat comuna.',build(r){
+      const totals=[];
+      while(totals.length<3){const value=n(r,35,240);if(!totals.includes(value))totals.push(value);}
+      const fmtDuration=minutes=>{const h=Math.floor(minutes/60),rest=minutes%60;return h?(rest?`${h} h ${rest} min`:`${h} h`):`${rest} min`;};
+      const rows=totals.map((minutes,index)=>({label:String.fromCharCode(65+index),minutes,text:fmtDuration(minutes)}));
+      const longest=rows.reduce((a,b)=>a.minutes>b.minutes?a:b);
+      return task(this,{rows:rows.map(x=>({...x})),longest:longest.label},`Tres activitats tenen les durades A = ${rows[0].text}, B = ${rows[1].text} i C = ${rows[2].text}. Quina és la més llarga? Respon en minuts.`,longest.minutes,['Expressa totes tres durades en minuts.','Compara els tres totals en la mateixa unitat.'],[`A = ${rows[0].minutes} min; B = ${rows[1].minutes} min; C = ${rows[2].minutes} min.`,`La durada més gran és ${longest.label}: ${longest.minutes} min.`]);
     }},
     {id:'transbordament-invers',topic:'temps',type:1001,level:3,reason:'Reconstruir el darrer trajecte possible coordinant dues freqüències, transbordament i termini d’arribada.',build(r){
       const base=8*60,periodA=pick(r,[12,15,20]),periodB=pick(r,[15,20,25]),offset=n(r,2,9),rideA=n(r,12,22),walk=n(r,3,7),rideB=n(r,10,18),deadline=base+n(r,100,150),trips=[];
@@ -110,8 +145,22 @@
   ]);
   function conversionsFamilyFor(type){return conversionsFamilySpecs.find(f=>f.generators.includes(Number(type)))||null;}
   function conversionsFamilyInfo(key){return conversionsFamilySpecs.find(f=>f.id===key)||null;}
+  const timeFamilySpecs=Object.freeze([
+    Object.freeze({id:'equivalencies-temporals',name:'Convertir i reconèixer equivalències temporals',level:1,generators:[1,5],variantRule:'equivalències de 60 s/min/h, 24 h/dia, 7 dies/setmana, 12 mesos/any; direccions i formats numèrics'}),
+    Object.freeze({id:'hora-final',name:'Calcular l’hora final a partir de l’inici i una durada',level:2,generators:[2],variantRule:'sumar la durada i normalitzar HH:MM; pot travessar la mitjanit amb l’endemà indicat'}),
+    Object.freeze({id:'durada-entre-hores',name:'Calcular la durada entre dues hores',level:2,generators:[3],variantRule:'restar hores inicial i final; inclou l’endemà quan travessa mitjanit'}),
+    Object.freeze({id:'descompondre-durades',name:'Expressar una durada en hores/minuts o minuts/segons',level:2,generators:[4],variantRule:'divisió entera i residu en base 60'}),
+    Object.freeze({id:'reconstruir-hora-inicial',name:'Reconstruir l’hora inicial a partir de la final i la durada',level:2,generators:[1002],variantRule:'restar durada a una hora final l’endemà; l’enunciat fixa els dies'}),
+    Object.freeze({id:'operar-durades-i-pausas',name:'Sumar durades i pauses de diverses activitats',level:2,generators:[1003],variantRule:'tres activitats i dues pauses, resposta en minuts'}),
+    Object.freeze({id:'detectar-error-base-sexagesimal',name:'Detectar i corregir l’error de base 100 en durades',level:2,generators:[1004],variantRule:'convertir hores a minuts amb factor 60 i sumar els minuts'}),
+    Object.freeze({id:'seleccionar-unitat-temporal',name:'Escollir la unitat adequada per a una durada quotidiana',level:1,generators:[1005],variantRule:'segons, minuts, hores i dies en contextos familiars'}),
+    Object.freeze({id:'comparar-durades',name:'Comparar durades expressades en hores i minuts',level:2,generators:[1006],variantRule:'normalitzar tres durades a minuts i identificar la més llarga'}),
+    Object.freeze({id:'transbordament-invers',name:'Reconstruir una sortida amb transbordaments i termini',level:3,generators:[1001],variantRule:'coordinar dues freqüències, trajectes, caminada i hora límit'})
+  ]);
+  function timeFamilyFor(type){return timeFamilySpecs.find(f=>f.generators.includes(Number(type)))||null;}
+  function timeFamilyInfo(key){return timeFamilySpecs.find(f=>f.id===key)||null;}
   function metricFamilyInfo(key){return metricFamilySpecs.find(f=>f.id===key)||null;}
   function generate(id,random=Math.random){const d=catalog.find(d=>d.id===id);if(!d)throw Error('Família desconeguda');const q=d.build(random);if(new Set(q.options).size!==4)throw Error('Opcions repetides');for(let i=q.options.length-1;i>0;i--){const j=n(random,0,i);[q.options[i],q.options[j]]=[q.options[j],q.options[i]];}return q;}
-  function extend(topics,banks){for(const t of topics){if(t.id==='problemes')continue;const ds=catalog.filter(d=>d.topic===t.id);if(!ds.length)continue;const original=t.gen;let turn=ds.length,lastFamily=null;t.gen=function(...args){for(let tries=0;tries<120;tries++){const slot=turn++%10,q=slot<ds.length?generate(ds[slot].id):original.apply(this,args);if(t.id!=='conversions')return q;const family=q.conversionsFamily||q.metricFamily||q.familyId||q.type;if(family!==lastFamily||tries===119){lastFamily=family;return q;}}return original.apply(this,args);};}catalog.filter(d=>d.level===3).forEach((d,i)=>{const key='R'+String(i+1).padStart(2,'0');banks.push(()=>({...generate(d.id),type:key,patternId:key,primaryTopic:d.topic,difficultyBank:'measureProblems',difficultyKey:key,family:'Raonament',examCompatible:true}));});}
-  root.MIFirstMeasureTasks=Object.freeze({catalog:Object.freeze(catalog.map(Object.freeze)),metricFamilySpecs,metricFamilyFor,metricFamilyInfo,conversionsFamilySpecs,conversionsFamilyFor,conversionsFamilyInfo,generate,extend});
+  function extend(topics,banks){for(const t of topics){if(t.id==='problemes')continue;const ds=catalog.filter(d=>d.topic===t.id);if(!ds.length)continue;const original=t.gen;let turn=ds.length,lastFamily=null;t.gen=function(...args){for(let tries=0;tries<120;tries++){const slot=turn++%10,q=slot<ds.length?generate(ds[slot].id):original.apply(this,args);if(!['conversions','temps'].includes(t.id))return q;const family=q.conversionsFamily||q.timeFamily||q.metricFamily||q.familyId||q.type;if(family!==lastFamily||tries===119){lastFamily=family;return q;}}return original.apply(this,args);};}catalog.filter(d=>d.level===3).forEach((d,i)=>{const key='R'+String(i+1).padStart(2,'0');banks.push(()=>({...generate(d.id),type:key,patternId:key,primaryTopic:d.topic,difficultyBank:'measureProblems',difficultyKey:key,family:'Raonament',examCompatible:true}));});}
+  root.MIFirstMeasureTasks=Object.freeze({catalog:Object.freeze(catalog.map(Object.freeze)),metricFamilySpecs,metricFamilyFor,metricFamilyInfo,conversionsFamilySpecs,conversionsFamilyFor,conversionsFamilyInfo,timeFamilySpecs,timeFamilyFor,timeFamilyInfo,generate,extend});
 })(typeof window==='undefined'?globalThis:window);

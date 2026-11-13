@@ -642,7 +642,7 @@ function takeVariedExercise(key,make,cycleSize=60){
     fallback=ex;
     const qKey=String(ex&&ex.question!==undefined?ex.question:'');
     const repeated=st.seen.has(qKey);
-    const identity=(key==='metric'||key==='conversions')?(ex&&(ex.metricFamily||ex.conversionsFamily||ex.familyId||ex.type)):ex&&ex.type;
+    const identity=(key==='metric'||key==='conversions'||key==='temps')?(ex&&(ex.metricFamily||ex.conversionsFamily||ex.timeFamily||ex.familyId||ex.type)):ex&&ex.type;
     const sameType=st.lastType!==null&&identity===st.lastType;
 
     if(!repeated&&!sameType){
@@ -659,7 +659,7 @@ function takeVariedExercise(key,make,cycleSize=60){
     const qKey=String(ex&&ex.question!==undefined?ex.question:'');
     if(!st.seen.has(qKey)){
       st.seen.add(qKey);
-      st.lastType=(key==='metric'||key==='conversions')?(ex.metricFamily||ex.conversionsFamily||ex.familyId||ex.type):ex.type;
+      st.lastType=(key==='metric'||key==='conversions'||key==='temps')?(ex.metricFamily||ex.conversionsFamily||ex.timeFamily||ex.familyId||ex.type):ex.type;
       return ex;
     }
   }
@@ -669,7 +669,7 @@ function takeVariedExercise(key,make,cycleSize=60){
   st=VARIETY_STATE[key];
   const ex=fallback||make();
   st.seen.add(String(ex.question||''));
-  st.lastType=(key==='metric'||key==='conversions')?(ex.metricFamily||ex.conversionsFamily||ex.familyId||ex.type):ex.type;
+  st.lastType=(key==='metric'||key==='conversions'||key==='temps')?(ex.metricFamily||ex.conversionsFamily||ex.timeFamily||ex.familyId||ex.type):ex.type;
   return ex;
 }
 
@@ -839,6 +839,7 @@ function genConversionsRaw(){
 // 3. MESURA DEL TEMPS (conversions, horaris i sistema sexagesimal)
 function genTempsRaw(){
   const type=rnd(1,5);
+  function timeMeta(id){const family=MIFirstMeasureTasks.timeFamilyInfo(id);return {timeFamily:family.id,familyId:family.id,taskDifficulty:family.level,diff:family.level};}
 
   if(type===1){
     const convs=[
@@ -848,49 +849,61 @@ function genTempsRaw(){
       {fr:'setmanes',to:'dies',f:7,mode:'mul',vals:[1,2,3,4,5,6,8]},
       {fr:'anys',to:'mesos',f:12,mode:'mul',vals:[1,2,3,4,5,6,10]},
       {fr:'hores',to:'segons',f:3600,mode:'mul',vals:[1,2,3,4,5]},
-      {fr:'minuts',to:'hores',f:60,mode:'div',vals:[60,120,180,240,300,360]},
-      {fr:'segons',to:'minuts',f:60,mode:'div',vals:[60,120,180,300,600,900]},
-      {fr:'hores',to:'dies',f:24,mode:'div',vals:[24,48,72,96,120,168]},
+      {fr:'dies',to:'segons',f:86400,mode:'mul',vals:[1,2,3],steps:[24,60,60],path:['hores','minuts','segons']},
+      {fr:'setmanes',to:'hores',f:168,mode:'mul',vals:[1,2,3],steps:[7,24],path:['dies','hores']},
+      {fr:'setmanes',to:'minuts',f:10080,mode:'mul',vals:[1,2,3],steps:[7,24,60],path:['dies','hores','minuts']},
+      {fr:'minuts',to:'hores',f:60,mode:'div',vals:[60,90,120,150,180,210,240,300,330,360]},
+      {fr:'segons',to:'minuts',f:60,mode:'div',vals:[60,90,120,150,180,210,300,450,600,900]},
+      {fr:'hores',to:'dies',f:24,mode:'div',vals:[24,36,48,60,72,96,120,168]},
       {fr:'dies',to:'setmanes',f:7,mode:'div',vals:[7,14,21,28,35,42]},
-      {fr:'mesos',to:'anys',f:12,mode:'div',vals:[12,24,36,48,60,72]}
+      {fr:'mesos',to:'anys',f:12,mode:'div',vals:[12,18,24,30,36,48,60,72]}
     ];
     const it=convs[rnd(0,convs.length-1)],val=it.vals[rnd(0,it.vals.length-1)],res=it.mode==='mul'?val*it.f:val/it.f;
-    const q=`Converteix ${val} ${it.fr} a ${it.to}`,corr=`${fmtNum(res)} ${it.to}`;
+    const unitSingular={hores:'hora',minuts:'minut',segons:'segon',dies:'dia',setmanes:'setmana',anys:'any',mesos:'mes'};
+    const unitLabel=(unit,amount)=>amount===1?unitSingular[unit]:unit;
+    const q=`Converteix ${val} ${unitLabel(it.fr,val)} a ${it.to}`,corr=`${fmtNum(res)} ${unitLabel(it.to,res)}`;
     const candidates=[];
-    const add=n=>{if(n>0&&n!==res){const s=`${fmtNum(n)} ${it.to}`;if(!candidates.includes(s))candidates.push(s);}};
+    const add=n=>{if(n>0&&n!==res){const s=`${fmtNum(n)} ${unitLabel(it.to,n)}`;if(!candidates.includes(s))candidates.push(s);}};
     add(val);add(it.mode==='mul'?val*(it.f/2):val/(it.f/2));add(it.mode==='mul'?res+it.f:res+1);add(it.mode==='mul'?Math.max(1,res-it.f):Math.max(0.5,res-1));add(res*2);add(res/2);
     let k=1;while(candidates.length<3){add(res+k);k++;}
     const direction=it.mode==='mul'?'més petita':'més gran';
     const guide=[`Identifica la relació entre ${it.fr} i ${it.to}`,`Decideix l’operació necessària perquè passes a una unitat ${direction}`,'Aplica la conversió a la quantitat inicial'];
-    return {type,question:q,correct:corr,options:shuffle([corr,...candidates.slice(0,3)]),guide,solution:[`Factor entre les unitats: ${it.f}`,it.mode==='mul'?`${val} × ${it.f} = ${fmtNum(res)}`:`${val} ÷ ${it.f} = ${fmtNum(res)}`,`✅ ${corr}`],difficulty:'easy'};
+    let conversionSteps;
+    if(it.steps&&it.path){let amount=val;conversionSteps=it.steps.map((factor,index)=>{const before=index===0?it.fr:it.path[index-1],after=it.path[index];amount*=factor;return `${amount/factor} ${before} × ${factor} = ${amount} ${after}`;});}
+    else conversionSteps=[it.mode==='mul'?`${val} × ${it.f} = ${fmtNum(res)}`:`${val} ÷ ${it.f} = ${fmtNum(res)}`];
+    return {type,...timeMeta('equivalencies-temporals'),question:q,correct:corr,options:shuffle([corr,...candidates.slice(0,3)]),guide,solution:[`Factor entre les unitats: ${it.steps?it.steps.join(' × ')+' = '+it.f:it.f}`,...conversionSteps,`✅ ${corr}`],difficulty:'easy'};
   }
 
   if(type===2){
     const contexts=['Una classe','Una pel·lícula','Un entrenament','Un taller','Una visita guiada','Una reunió','Una activitat extraescolar','Un partit'];
-    const startH=rnd(8,18),startM=[0,10,15,20,30,40,45,50][rnd(0,7)],durH=rnd(0,2),durM=[10,15,20,30,40,45,50][rnd(0,6)];
-    let endH=startH+durH,endM=startM+durM;if(endM>=60){endM-=60;endH++;}
-    const name=contexts[rnd(0,contexts.length-1)],durStr=(durH?`${durH} h `:'')+`${durM} min`;
-    const q=`${name} comença a les ${startH}:${String(startM).padStart(2,'0')} h i dura ${durStr}. A quina hora acaba?`;
-    const corr=`${endH}:${String(endM).padStart(2,'0')} h`,candidates=[];
-    const addTime=(h,m)=>{while(m>=60){m-=60;h++;}while(m<0){m+=60;h--;}if(h>=0&&h<24){const s=`${h}:${String(m).padStart(2,'0')} h`;if(s!==corr&&!candidates.includes(s))candidates.push(s);}};
+    const crossesMidnight=rnd(0,3)===0,startH=crossesMidnight?rnd(21,23):rnd(8,18),startM=[0,10,15,20,30,40,45,50][rnd(0,7)],start=startH*60+startM;
+    let durTotal;
+    if(crossesMidnight){const after=[15,30,45,60,75,90,105,120,135,150][rnd(0,9)];durTotal=1440-start+after;}
+    else{const durH=rnd(0,2),durM=[10,15,20,30,40,45,50][rnd(0,6)];durTotal=durH*60+durM;}
+    const durH=Math.floor(durTotal/60),durM=durTotal%60,end=start+durTotal,endH=Math.floor(end/60)%24,endM=end%60,daySuffix=end>=1440?' de l’endemà':'';
+    const durStr=(durH?`${durH} h `:'')+`${durM} min`;
+    const name=contexts[rnd(0,contexts.length-1)],q=`${name} comença a les ${startH}:${String(startM).padStart(2,'0')} h i dura ${durStr}. A quina hora acaba${daySuffix}?`;
+    const corr=`${String(endH).padStart(2,'0')}:${String(endM).padStart(2,'0')} h`,candidates=[];
+    const addTime=(h,m)=>{while(m>=60){m-=60;h++;}while(m<0){m+=60;h--;}if(h>=0&&h<24){const s=`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')} h`;if(s!==corr&&!candidates.includes(s))candidates.push(s);}};
     addTime(endH,startM);addTime(endH+1,endM);addTime(endH-1,endM);addTime(endH,endM+15);addTime(endH,endM-15);addTime(startH+durH,startM+durM-10);
     let k=5;while(candidates.length<3){addTime(endH,endM+k);k+=5;}
-    const guide=['Suma per separat els minuts de l’hora inicial i de la durada','Si els minuts completen una hora, transforma aquesta part abans de continuar','Suma les hores tenint en compte qualsevol transformació feta'];
-    return {type,question:q,correct:corr,options:shuffle([corr,...candidates.slice(0,3)]),guide,solution:[`Inici: ${startH}:${String(startM).padStart(2,'0')} h`,`Durada: ${durStr}`,`Hora final: ${corr}`,`✅ ${corr}`],difficulty:'medium'};
+    const guide=['Suma per separat els minuts de l’hora inicial i de la durada','Si els minuts completen una hora, transforma aquesta part abans de continuar','Si l’enunciat diu que acaba l’endemà, situa el resultat després de les 24:00'];
+    return {type,...timeMeta('hora-final'),question:q,correct:corr,options:shuffle([corr,...candidates.slice(0,3)]),guide,solution:[`Inici: ${String(startH).padStart(2,'0')}:${String(startM).padStart(2,'0')} h`,`Durada: ${durStr}`,`Hora final: ${corr}${daySuffix}`,`✅ ${corr}`],difficulty:'medium'};
   }
 
   if(type===3){
     const contexts=['un viatge','una prova','una visita','un entrenament','una excursió','una sessió d’estudi','un taller','una activitat'];
-    const hI=rnd(7,17),mI=[0,10,15,20,30,40,45,50][rnd(0,7)],durMins=[35,40,45,50,60,70,75,80,90,100,105,120,135,150,165][rnd(0,14)];
-    const start=hI*60+mI,end=start+durMins,hF=Math.floor(end/60),mF=end%60,dH=Math.floor(durMins/60),dM=durMins%60;
+    const crossesMidnight=rnd(0,3)===0,hI=crossesMidnight?rnd(21,23):rnd(7,17),mI=[0,10,15,20,30,40,45,50][rnd(0,7)],start=hI*60+mI;
+    const durMins=crossesMidnight?1440-start+[10,20,30,45,60,75,90][rnd(0,6)]:[35,40,45,50,60,70,75,80,90,100,105,120,135,150,165][rnd(0,14)];
+    const end=start+durMins,hF=Math.floor(end/60)%24,mF=end%60,dH=Math.floor(durMins/60),dM=durMins%60,daySuffix=end>=1440?' de l’endemà':'';
     const ctx=contexts[rnd(0,contexts.length-1)];
-    const q=`Quant dura ${ctx} que comença a les ${hI}:${String(mI).padStart(2,'0')} h i acaba a les ${hF}:${String(mF).padStart(2,'0')} h?`;
+    const q=`Quant dura ${ctx} que comença a les ${String(hI).padStart(2,'0')}:${String(mI).padStart(2,'0')} h i acaba a les ${String(hF).padStart(2,'0')}:${String(mF).padStart(2,'0')} h${daySuffix}?`;
     const corr=dH?(dM?`${dH} h ${dM} min`:`${dH} h`):`${dM} min`,candidates=[];
     const add=minutes=>{if(minutes<=0)return;const h=Math.floor(minutes/60),m=minutes%60,s=h?(m?`${h} h ${m} min`:`${h} h`):`${m} min`;if(s!==corr&&!candidates.includes(s))candidates.push(s);};
     add(durMins+15);add(durMins-15);add(durMins+30);add(durMins-30);add(durMins+60);add(durMins-60);if(dH)add(dH*60);
     let k=5;while(candidates.length<3){add(durMins+k);k+=5;}
-    const guide=['Compara primer els minuts de l’hora final i inicial','Si cal, transforma una hora en minuts abans de restar','Resta després les hores tenint en compte la transformació','Expressa la durada combinant hores i minuts'];
-    return {type,question:q,correct:corr,options:shuffle([corr,...candidates.slice(0,3)]),guide,solution:[`Inici: ${hI}:${String(mI).padStart(2,'0')} h`,`Final: ${hF}:${String(mF).padStart(2,'0')} h`,`Diferència total: ${durMins} min`,`✅ Durada = ${corr}`],difficulty:'medium'};
+    const guide=['Expressa les hores inicial i final en minuts o calcula el temps fins a la mitjanit.','Si l’hora final és de l’endemà, afegeix el tram després de les 00:00.','Resta l’hora inicial de la final i expressa el residu en minuts.'];
+    return {type,...timeMeta('durada-entre-hores'),question:q,correct:corr,options:shuffle([corr,...candidates.slice(0,3)]),guide,solution:[`Inici: ${String(hI).padStart(2,'0')}:${String(mI).padStart(2,'0')} h`,`Final: ${String(hF).padStart(2,'0')}:${String(mF).padStart(2,'0')} h${daySuffix}`,`Diferència total: ${durMins} min`,`✅ Durada = ${corr}`],difficulty:'medium'};
   }
 
   if(type===4){
@@ -901,14 +914,14 @@ function genTempsRaw(){
       const wrong=[];
       const addHM=(hh,mm)=>{while(mm>=60){mm-=60;hh++;}while(mm<0){mm+=60;hh--;}if(hh>=0){const st=`${hh} h ${mm} min`;if(st!==corr&&!wrong.includes(st))wrong.push(st);}};
       addHM(h+1,m);addHM(h,m+10);addHM(Math.max(0,h-1),m+30);addHM(h,m-10);
-      return {type,question:q,correct:corr,options:shuffle([corr,...wrong.slice(0,3)]),guide:['Determina quantes hores completes es poden formar amb els minuts donats','Separa la part corresponent a hores','Calcula quants minuts queden sense completar una altra hora'],solution:[`${totalMin} ÷ 60 = ${h} hores completes i sobren ${m} minuts`,`✅ ${corr}`],difficulty:'medium'};
+      return {type,...timeMeta('descompondre-durades'),question:q,correct:corr,options:shuffle([corr,...wrong.slice(0,3)]),guide:['Determina quantes hores completes es poden formar amb els minuts donats','Separa la part corresponent a hores','Calcula quants minuts queden sense completar una altra hora'],solution:[`${totalMin} ÷ 60 = ${h} hores completes i sobren ${m} minuts`,`✅ ${corr}`],difficulty:'medium'};
     }
     const totalSec=rnd(1,8)*60+[10,15,20,30,40,45,50][rnd(0,6)],m=Math.floor(totalSec/60),s=totalSec%60;
     const q=`Expressa ${totalSec} segons en minuts i segons`,corr=`${m} min ${s} s`;
     const wrong=[];
     const addMS=(mm,ss)=>{while(ss>=60){ss-=60;mm++;}while(ss<0){ss+=60;mm--;}if(mm>=0){const st=`${mm} min ${ss} s`;if(st!==corr&&!wrong.includes(st))wrong.push(st);}};
     addMS(m+1,s);addMS(m,s+10);addMS(Math.max(0,m-1),s+30);addMS(m,s-10);
-    return {type,question:q,correct:corr,options:shuffle([corr,...wrong.slice(0,3)]),guide:['Determina quants minuts complets es poden formar amb els segons donats','Separa la part corresponent a minuts','Calcula quants segons queden sense completar un altre minut'],solution:[`${totalSec} ÷ 60 = ${m} minuts complets i sobren ${s} segons`,`✅ ${corr}`],difficulty:'medium'};
+    return {type,...timeMeta('descompondre-durades'),question:q,correct:corr,options:shuffle([corr,...wrong.slice(0,3)]),guide:['Determina quants minuts complets es poden formar amb els segons donats','Separa la part corresponent a minuts','Calcula quants segons queden sense completar un altre minut'],solution:[`${totalSec} ÷ 60 = ${m} minuts complets i sobren ${s} segons`,`✅ ${corr}`],difficulty:'medium'};
   }
 
   const qs=[
@@ -926,7 +939,7 @@ function genTempsRaw(){
     {q:'Quants minuts té un quart d’hora?',a:'15 min',w:['10 min','20 min','25 min'],s:['Una hora té 60 minuts','La quarta part de 60 és 15 minuts']}
   ];
   const it=qs[rnd(0,qs.length-1)];
-  return {type,question:it.q,correct:it.a,options:shuffle([it.a,...it.w]),guide:['Recorda la relació entre les unitats de temps implicades','Aplica aquesta relació sense barrejar el sistema decimal amb el sexagesimal'],solution:[...it.s,`✅ ${it.a}`],difficulty:'easy'};
+  return {type,...timeMeta('equivalencies-temporals'),question:it.q,correct:it.a,options:shuffle([it.a,...it.w]),guide:['Recorda la relació entre les unitats de temps implicades','Aplica aquesta relació sense barrejar el sistema decimal amb el sexagesimal'],solution:[...it.s,`✅ ${it.a}`],difficulty:'easy'};
 }
 
 // 4. PERÍMETRES
