@@ -117,13 +117,13 @@ Els exemples següents mostren variants i procediments representatius. Totes les
 
 **14. Reconstruir una dimensió d’una figura composta — N2**
 1. Placa 12×8 cm; en queda una àrea de 84 cm²; retall de fondària 3 cm: ((96-84)÷3) → **4 cm d’amplada**.
-2. Placa 15×10 cm; en queden 132 cm²; retall de fondària 5 cm: ((150-132)÷5) → **3,6 cm d’amplada**.
+2. Placa 15×10 cm; en queden 130 cm²; retall de fondària 5 cm: (150−130)÷5 → **4 cm d’amplada**.
 3. Placa 20×12 cm; en queden 216 cm²; retall de fondària 4 cm: ((240-216)÷4) → **6 cm d’amplada**.
 
 ### N3
 
 **15. Minimitzar el perímetre amb una àrea fixa — N3**
-1. Àrea 36 cm²; parelles enteres: 1×36, 2×18, 3×12, 4×9, 6×6. Perímetre mínim: (2(6+6)) → **24 cm**, quadrat.
+1. Àrea 36 m², costats enters d’almenys 2 m; parelles admissibles: 2×18, 3×12, 4×9, 6×6. Perímetre mínim: 2×(6+6) → **24 m**, quadrat.
 2. Àrea 24 m², costats enters d’almenys 2 m; parelles: 2×12, 3×8, 4×6. Perímetres 28, 22, 20 → **20 m**, dimensions 4×6 m.
 3. Àrea 30 m², costats enters d’almenys 2 m; parelles: 2×15, 3×10, 5×6. Perímetres 34, 26, 22 → **22 m**, dimensions 5×6 m.
 
