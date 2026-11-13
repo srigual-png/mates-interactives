@@ -14,7 +14,7 @@ function uniqueOptions(correct,values,unit=''){const arr=[String(correct)];for(c
 globalThis.numProblem=(id,family,primaryTopic,difficulty,question,answer,unit,wrongs,guide,solution)=>{const correct=fmtNum(answer)+' '+unit,values=wrongs.map(x=>fmtNum(x)+' '+unit);return {type:id,patternId:id,family,primaryTopic,difficulty,question,correct,options:uniqueOptions(correct,values),guide,solution,answerCheck:v=>answerNumEq(v,answer)};};
 globalThis.textProblem=(id,family,primaryTopic,difficulty,question,correct,wrongs,accepted,guide,solution)=>({type:id,patternId:id,family,primaryTopic,difficulty,question,correct,options:uniqueOptions(correct,wrongs),guide,solution,answerCheck:v=>(accepted||[correct]).some(x=>String(v).trim().toLocaleLowerCase('ca')===String(x).trim().toLocaleLowerCase('ca'))});
 for(const p of ['assets/js/raonament-mesura-1eso.js','assets/js/dificultat-mi.js'])vm.runInThisContext(fs.readFileSync(p,'utf8'),{filename:p});
-const html=fs.readFileSync('1eso/sentit-mesura.html','utf8');
+const html=fs.readFileSync('1eso/sentit-mesura.html','utf8').replace(/\r\n?/g,'\n');
 const begin=html.indexOf('function genMesuramentPrecisioRaw(){'),end=html.indexOf('// ── AMPLIACIÓ 2n ESO · VOLUM I CAPACITAT',begin);
 assert(begin>=0&&end>begin,'raw generator boundaries');
 vm.runInThisContext(html.slice(begin,end),{filename:'mesurament-generator.js'});
