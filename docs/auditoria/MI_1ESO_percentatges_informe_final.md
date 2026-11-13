@@ -158,7 +158,7 @@ Validació en una còpia de proves aïllada, alineada amb la pàgina i els scrip
 ## Incidències pendents i límits
 
 - No s’ha pogut executar aquesta prova amb Edge; Chrome ha executat tota la suite E2E.
-- En crear la PR, GitHub ha retornat temporalment `mergeable: false`; una consulta posterior l’ha actualitzat a `mergeable: true`. La comparació confirma 8 commits per davant, 0 per darrere i el mateix merge-base que `main`; no queda cap conflicte de merge pendent.
+- En crear la PR, GitHub ha retornat temporalment `mergeable: false`; una consulta posterior l’ha actualitzat a `mergeable: true`. La comparació confirma `behind_by: 0` i el mateix merge-base que `main`; la consulta actual de PR informa `mergeable: true`.
 - No s’ha publicat ni fusionat aquesta branca, així que GitHub Pages no s’ha validat ni s’ha actualitzat.
 - El catàleg global `docs/auditoria/families-validades.json` i el CSV no es modifiquen abans del merge, d’acord amb el protocol del repositori.
 
