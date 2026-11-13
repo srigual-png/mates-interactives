@@ -18,8 +18,9 @@
     const metricFamily=d.topic==='metric'?metricFamilySpecs.find(f=>f.generators.includes(d.type))?.id:null;
     const conversionsFamily=d.topic==='conversions'?conversionsFamilyFor(d.type)?.id:null;
     const timeFamily=d.topic==='temps'?timeFamilyFor(d.type)?.id:null;
-    const family=metricFamily||conversionsFamily||timeFamily;
-    return {type:d.type,reasoningFamily:d.id,reasoningData:data,...(family?{...(metricFamily?{metricFamily}:{}),...(conversionsFamily?{conversionsFamily}:{}),...(timeFamily?{timeFamily}:{}),familyId:family,taskDifficulty:d.level,difficulty:d.level}:{}),question,correct:String(answer),options:[answer,answer+1,answer+2,Math.max(0,answer-1)].map(String),guide,solution,allowOpen:true,isProblem:true,diff:d.level,
+    const perimeterFamily=d.topic==='perimetres'?perimeterFamilyFor(d.type)?.id:null;
+    const family=metricFamily||conversionsFamily||timeFamily||perimeterFamily;
+    return {type:d.type,reasoningFamily:d.id,reasoningData:data,...(family?{...(metricFamily?{metricFamily}:{}),...(conversionsFamily?{conversionsFamily}:{}),...(timeFamily?{timeFamily}:{}),...(perimeterFamily?{perimeterFamily}:{}),familyId:family,taskDifficulty:d.level,difficulty:d.level}:{}),question,correct:String(answer),options:[answer,answer+1,answer+2,Math.max(0,answer-1)].map(String),guide,solution,allowOpen:true,isProblem:true,diff:d.level,
       answerCheck:v=>typeof root.answerNumEq==='function'?root.answerNumEq(v,answer,1e-8):String(v).trim()===String(answer)};
   }
   const catalog=[
@@ -97,6 +98,49 @@
       const half=n(r,11,22),gate=n(r,1,3),fence=2*half-gate,maxWidth=Math.floor(half/2)-n(r,1,3),area=maxWidth*(half-maxWidth);
       return task(this,{half,gate,fence,maxWidth},`Disposes de ${fence} m de tanca i d’una porta de ${gate} m. Has de fer un recinte rectangular, usant tota la tanca i la porta una sola vegada al contorn. Els costats són metres enters positius i l’amplada no pot superar ${maxWidth} m. Quina és l’àrea màxima, en m²?`,area,['La porta també forma part del perímetre.','Enumera les amplades permeses i dedueix la llargada de cadascuna.'],[`Perímetre total: ${fence}+${gate}=${2*half} m; llargada+amplada=${half}.`,`Àrees admissibles: ${Array.from({length:maxWidth},(_,i)=>`${i+1}×${half-i-1}=${(i+1)*(half-i-1)}`).join('; ')}.`,`Màxim: ${maxWidth}×${half-maxWidth}=${area} m².`]);
     }},
+    {id:'reconstruir-costat-des-del-perimetre',topic:'perimetres',type:1002,level:2,reason:'Invertir la fórmula d’un perímetre per recuperar una longitud que no s’ha donat.',build(r){
+      const kind=n(r,0,3);
+      if(kind===0){const side=n(r,3,18),p=4*side;return task(this,{kind,side,p},`Un quadrat té un perímetre de ${p} cm. Quant mesura cada costat?`,side,['El quadrat té quatre costats iguals.','Reparteix el perímetre en quatre parts iguals.'],[`P = 4 × costat; costat = ${p} ÷ 4`,`✅ costat = ${side} cm`]);}
+      if(kind===1){const a=n(r,4,20),b=n(r,3,16),p=2*(a+b);return task(this,{kind,a,b,p},`Un rectangle té un perímetre de ${p} cm i un costat de ${a} cm. Quant mesura l’altre costat?`,b,['El semiperímetre és la suma d’un costat llarg i un d’ample.','Resta el costat conegut al semiperímetre.'],[`P ÷ 2 = ${p} ÷ 2 = ${a+b} cm`,`L’altre costat = ${a+b} − ${a} = ${b} cm`,`✅ ${b} cm`]);}
+      if(kind===2){let a,b,x;do{a=n(r,5,14);b=n(r,5,14);x=n(r,3,14);}while(a+b<=x||a+x<=b||b+x<=a);const p=a+b+x;return task(this,{kind,a,b,x,p},`Un triangle té perímetre ${p} cm. Dos costats mesuren ${a} cm i ${b} cm. Quant mesura el tercer costat?`,x,['Resta del perímetre les dues longituds conegudes.','Comprova que la longitud trobada pot tancar un triangle.'],[`Tercer costat = ${p} − ${a} − ${b} = ${x} cm`,`Comprovació: ${a}+${b}>${x}, ${a}+${x}>${b} i ${b}+${x}>${a}`,`✅ ${x} cm`]);}
+      const sides=[5,6,8,10,12],side=sides[n(r,0,sides.length-1)],p=side*5;
+      return task(this,{kind,side,p,sides:5},`Un pentàgon regular té perímetre ${p} cm. Quant mesura cada costat?`,side,['En un polígon regular tots els costats són iguals.','Divideix el perímetre pel nombre de costats.'],[`costat = ${p} ÷ 5 = ${side} cm`,`✅ ${side} cm`]);
+    }},
+    {id:'circumferencia-inversa',topic:'perimetres',type:1003,level:2,reason:'Aïllar radi o diàmetre a C=πd quan es coneix la longitud de la circumferència.',build(r){
+      const radius=n(r,3,20),diameter=2*radius,C=Math.round(3.14*diameter*10)/10,askRadius=n(r,0,1)===0,answer=askRadius?radius:diameter;
+      return task(this,{radius,diameter,C,askRadius},`Una circumferència mesura ${fmt(C)} cm (π = 3,14). Quin és el seu ${askRadius?'radi':'diàmetre'}? Dona la resposta en cm, arrodonida al centímetre més proper si cal.`,answer,['La fórmula és C = π × d.','Divideix per 3,14 per trobar el diàmetre; el radi és la meitat.'],[`d ≈ ${fmt(C)} ÷ 3,14 = ${diameter} cm`,`r = d ÷ 2 = ${radius} cm`,`✅ ${askRadius?radius:diameter} cm`]);
+    }},
+    {id:'contorn-entallat',topic:'perimetres',type:1004,level:2,reason:'Calcular el contorn d’un rectangle amb una entallada interior, sumant els dos trams nous de profunditat.',build(r){
+      const W=n(r,12,30),H=n(r,10,24),w=n(r,2,W-2),depth=n(r,2,H-2),p=2*(W+H)+2*depth;
+      return task(this,{W,H,w,depth,p},`A la part superior d’un rectangle de ${W} × ${H} m es fa una entallada rectangular de ${w} m d’amplada i ${depth} m de profunditat. Quin és el nou perímetre?`,p,['La base de l’entallada substitueix un tram superior de la mateixa amplada: aquests trams es cancel·len.','L’entallada afegeix dues vores de profunditat.'],[`Perímetre inicial = 2 × (${W}+${H}) = ${2*(W+H)} m`,`S’afegeixen 2 × ${depth} = ${2*depth} m; ${w} no canvia el total perquè substitueix un tram igual`,`Nou perímetre = ${p} m`]);
+    }},
+    {id:'perimetre-unitats-mixtes',topic:'perimetres',type:1005,level:2,reason:'Convertir longituds a la mateixa unitat abans de sumar els costats.',build(r){
+      const count=n(r,3,5),cm=Array.from({length:count},()=>n(r,2,9)*10),m=Array.from({length:count},()=>n(r,1,4)),all=[...cm.map(v=>v+' cm'),...m.map(v=>v+' m')].sort(()=>r()-.5),totalCm=cm.reduce((a,b)=>a+b,0)+100*m.reduce((a,b)=>a+b,0);
+      return task(this,{cm,m,totalCm},`Un polígon té costats de ${all.join(', ')}. Calcula’n el perímetre i expressa’l en cm.`,totalCm,['Converteix cada longitud en metres a centímetres.','Suma totes les longituds després de la conversió.'],[`Metres a centímetres: ${m.join(' + ')} m = ${100*m.reduce((a,b)=>a+b,0)} cm`,`Costats en cm: ${cm.join(' + ')} cm + ${100*m.reduce((a,b)=>a+b,0)} cm`,`✅ P = ${totalCm} cm`]);
+    }},
+    {id:'comparar-perimetres',topic:'perimetres',type:1006,level:2,reason:'Calcular dos perímetres i comparar-los per trobar-ne la diferència.',build(r){
+      const a=n(r,4,18),b=n(r,4,18),c=n(r,4,18),d=n(r,4,18),p1=2*(a+b),p2=2*(c+d);if(p1===p2)return this.build(()=>r());const answer=Math.abs(p1-p2),bigger=p1>p2?'rectangle A':'rectangle B';
+      return task(this,{a,b,c,d,p1,p2},`El rectangle A fa ${a} × ${b} cm i el rectangle B fa ${c} × ${d} cm. Quina diferència hi ha entre els seus perímetres, en cm?`,answer,['Calcula per separat el perímetre de cada rectangle.','Resta el perímetre més petit del més gran.'],[`P(A) = 2 × (${a}+${b}) = ${p1} cm`,`P(B) = 2 × (${c}+${d}) = ${p2} cm; és més gran ${bigger}`,`Diferència = |${p1} − ${p2}| = ${answer} cm`]);
+    }},
+    {id:'diagnosticar-error-perimetre',topic:'perimetres',type:1007,level:2,reason:'Detectar una fórmula que omet costats o confon perímetre i àrea, i calcular el resultat correcte.',build(r){
+      const kind=n(r,0,2);
+      if(kind===0){const a=n(r,3,18),b=n(r,3,16),p=2*(a+b);return task(this,{kind,a,b,p},`Una alumna calcula el perímetre d’un rectangle de ${a} × ${b} cm fent ${a}+${b}=${a+b} cm. Quin és el perímetre correcte?`,p,['El rectangle té dos costats de cada longitud.','Multiplica per 2 la suma dels costats adjacents.'],[`La suma ${a}+${b} només compta dos costats.`,`P = 2 × (${a}+${b}) = ${p} cm`,`✅ ${p} cm`]);}
+      if(kind===1){const s=n(r,3,14),p=4*s;return task(this,{kind,s,p},`Per a un quadrat de costat ${s} cm, en Marc afirma que P = ${s}² = ${s*s} cm. Quin és el perímetre correcte?`,p,['La fórmula del quadrat és quatre vegades el costat.','El quadrat del costat calcula una àrea, amb unitats cm².'],[`s² = ${s*s} cm² és una àrea, no un perímetre.`,`P = 4 × ${s} = ${p} cm`,`✅ ${p} cm`]);}
+      let a,b,c;do{a=n(r,4,16);b=n(r,4,16);c=n(r,4,16);}while(a+b<=c||a+c<=b||b+c<=a);const p=a+b+c;
+      return task(this,{kind,a,b,c,p},`Un triangle té costats ${a}, ${b} i ${c} cm. La Laia calcula P = 2 × (${a}+${b}+${c}) = ${2*p} cm. Quin és el perímetre correcte?`,p,['Cada costat del triangle forma el contorn una sola vegada.','Suma els tres costats; no hi ha dues parelles iguals.'],[`La fórmula de duplicar la suma només correspon a comptar parelles oposades d’un rectangle.`,`P = ${a}+${b}+${c} = ${p} cm`,`✅ ${p} cm`]);
+    }},
+    {id:'perimetre-amb-obertura',topic:'perimetres',type:1008,level:2,reason:'Distingir el perímetre complet del material de tanca quan una obertura no es cobreix.',build(r){
+      const L=n(r,12,30),W=n(r,6,18),gate=n(r,1,4),p=2*(L+W),fence=p-gate;
+      return task(this,{L,W,gate,p},`Un jardí rectangular fa ${L} m × ${W} m. Es deixa una entrada de ${gate} m sense tanca. Quants metres de tanca calen?`,fence,['Calcula primer tot el perímetre del jardí.','Resta la longitud de l’entrada, on no es posa tanca.'],[`P = 2 × (${L}+${W}) = ${p} m`,`Tanca = ${p} − ${gate} = ${fence} m`,`✅ ${fence} m`]);
+    }},
+    {id:'cost-material-per-contorn',topic:'perimetres',type:1009,level:2,reason:'Calcular el perímetre, convertir-lo a metres i aplicar un preu lineal.',build(r){
+      const a=n(r,2,12)*50,b=n(r,2,10)*50,price=n(r,2,9),cm=2*(a+b),metres=cm/100,cost=metres*price;
+      return task(this,{a,b,cm,metres,price},`Un marc rectangular fa ${a} cm × ${b} cm. El perfil costa ${price} € per metre. Quin és el cost del perfil necessari per tot el contorn?`,cost,['Calcula el perímetre en centímetres.','Converteix el resultat a metres abans de multiplicar pel preu.'],[`P = 2 × (${a}+${b}) = ${cm} cm = ${metres} m`,`Cost = ${metres} × ${price} = ${cost} €`,`✅ ${cost} €`]);
+    }},
+    {id:'voltes-circumferencia',topic:'perimetres',type:1010,level:2,reason:'Calcular la distància recorreguda com el nombre de voltes per la longitud d’una circumferència.',build(r){
+      const d=n(r,1,12)*50,turns=n(r,2,12),one=Math.round(3.14*d),distance=one*turns;
+      return task(this,{d,turns,one},`Una roda de diàmetre ${d} cm fa ${turns} voltes completes (π = 3,14). Quina distància recorre en cm?`,distance,['Calcula la longitud d’una volta amb C = π × d.','Multiplica aquesta longitud pel nombre de voltes.'],[`Una volta: C = 3,14 × ${d} = ${one} cm`,`${turns} voltes: ${one} × ${turns} = ${distance} cm`,`✅ ${distance} cm`]);
+    }},
     {id:'rectangle-area-fixada',topic:'arees',type:1001,level:3,reason:'Reconstruir dimensions enteres a partir de l’àrea i una restricció; comparar contorns de totes les solucions.',build(r){
       const {area,minSide,all}=pick(r,rectangleCases),best=all.reduce((a,b)=>a.p<=b.p?a:b);
       return task(this,{area,minSide},`Un rectangle té ${area} m² d’àrea. Els costats són metres enters i tots dos mesuren almenys ${minSide} m. Quin és el perímetre mínim possible, en metres?`,best.p,['Busca totes les parelles de factors admissibles.','Tenir la mateixa àrea no implica tenir el mateix perímetre.'],[`Parelles (sense repetir l’ordre): ${all.map(p=>`${p.a}×${p.b}, P=${p.p}`).join('; ')}.`,`La parella ${best.a} i ${best.b} dona el perímetre mínim: ${best.p} m.`]);
@@ -145,6 +189,23 @@
   ]);
   function conversionsFamilyFor(type){return conversionsFamilySpecs.find(f=>f.generators.includes(Number(type)))||null;}
   function conversionsFamilyInfo(key){return conversionsFamilySpecs.find(f=>f.id===key)||null;}
+  const perimeterFamilySpecs=Object.freeze([
+    Object.freeze({id:'perimetre-directe',name:'Sumar els costats coneguts del contorn',level:1,generators:[1,2,3,6,7],bankVariants:[],variantRule:'quadrat, rectangle, triangle, polígon regular i polígon irregular; una sola operació de contorn conegut'}),
+    Object.freeze({id:'circumferencia-directa',name:'Calcular la longitud d’una circumferència',level:2,generators:[4],bankVariants:['P03'],variantRule:'radi a diàmetre i C=πd amb π=3,14 i arrodoniment explícit'}),
+    Object.freeze({id:'figura-l-cantonada',name:'Calcular el perímetre d’una figura en L',level:2,generators:[5],bankVariants:[],variantRule:'els trams substituïts per un retall de cantonada es compensen'}),
+    Object.freeze({id:'reconstruir-costat-des-del-perimetre',name:'Reconstruir un costat a partir del perímetre',level:2,generators:[1002],bankVariants:['P05'],variantRule:'aïllar una longitud en les fórmules de quadrat, rectangle, triangle o polígon regular'}),
+    Object.freeze({id:'circumferencia-inversa',name:'Reconstruir radi o diàmetre des de la circumferència',level:2,generators:[1003],bankVariants:[],variantRule:'desfer C=πd i, per al radi, dividir també per 2'}),
+    Object.freeze({id:'contorn-entallat',name:'Calcular el contorn d’una figura amb entallada',level:2,generators:[1004],bankVariants:[],variantRule:'deduir quins trams es cancel·len i afegir les dues profunditats'}),
+    Object.freeze({id:'perimetre-unitats-mixtes',name:'Sumar costats amb unitats diferents',level:2,generators:[1005],bankVariants:[],variantRule:'convertir totes les longituds a cm abans de sumar'}),
+    Object.freeze({id:'comparar-perimetres',name:'Comparar dos perímetres i trobar-ne la diferència',level:2,generators:[1006],bankVariants:[],variantRule:'calcular dos contorns i restar-los'}),
+    Object.freeze({id:'diagnosticar-error-perimetre',name:'Detectar i corregir errors de fórmula del perímetre',level:2,generators:[1007],bankVariants:[],variantRule:'identificar costats omesos, àrea confosa amb perímetre o costats comptats dues vegades'}),
+    Object.freeze({id:'perimetre-amb-obertura',name:'Calcular la tanca necessària amb una obertura',level:2,generators:[1008],bankVariants:['P01'],variantRule:'calcular el contorn complet i restar l’entrada sense tanca'}),
+    Object.freeze({id:'cost-material-per-contorn',name:'Calcular el cost del material que cobreix un contorn',level:2,generators:[1009],bankVariants:['P02'],variantRule:'perímetre en cm, conversió a m i multiplicació pel preu lineal'}),
+    Object.freeze({id:'voltes-circumferencia',name:'Calcular una distància a partir de voltes d’una roda',level:2,generators:[1010],bankVariants:['P04'],variantRule:'longitud d’una circumferència per nombre de voltes; π=3,14'}),
+    Object.freeze({id:'optimitzar-area-amb-tanca',name:'Optimitzar àrea amb perímetre i restricció de dimensions',level:3,generators:[1001],bankVariants:[],variantRule:'incloure la porta en el perímetre i comparar àrees de rectangles enters permesos'})
+  ]);
+  function perimeterFamilyFor(type){return perimeterFamilySpecs.find(f=>f.generators.includes(Number(type)))||null;}
+  function perimeterFamilyInfo(key){return perimeterFamilySpecs.find(f=>f.id===key)||null;}
   const timeFamilySpecs=Object.freeze([
     Object.freeze({id:'equivalencies-temporals',name:'Convertir i reconèixer equivalències temporals',level:1,generators:[1,5],variantRule:'equivalències de 60 s/min/h, 24 h/dia, 7 dies/setmana, 12 mesos/any; direccions i formats numèrics'}),
     Object.freeze({id:'hora-final',name:'Calcular l’hora final a partir de l’inici i una durada',level:2,generators:[2],variantRule:'sumar la durada i normalitzar HH:MM; pot travessar la mitjanit amb l’endemà indicat'}),
@@ -161,6 +222,6 @@
   function timeFamilyInfo(key){return timeFamilySpecs.find(f=>f.id===key)||null;}
   function metricFamilyInfo(key){return metricFamilySpecs.find(f=>f.id===key)||null;}
   function generate(id,random=Math.random){const d=catalog.find(d=>d.id===id);if(!d)throw Error('Família desconeguda');const q=d.build(random);if(new Set(q.options).size!==4)throw Error('Opcions repetides');for(let i=q.options.length-1;i>0;i--){const j=n(random,0,i);[q.options[i],q.options[j]]=[q.options[j],q.options[i]];}return q;}
-  function extend(topics,banks){for(const t of topics){if(t.id==='problemes')continue;const ds=catalog.filter(d=>d.topic===t.id);if(!ds.length)continue;const original=t.gen;let turn=ds.length,lastFamily=null;t.gen=function(...args){for(let tries=0;tries<120;tries++){const slot=turn++%10,q=slot<ds.length?generate(ds[slot].id):original.apply(this,args);if(!['conversions','temps'].includes(t.id))return q;const family=q.conversionsFamily||q.timeFamily||q.metricFamily||q.familyId||q.type;if(family!==lastFamily||tries===119){lastFamily=family;return q;}}return original.apply(this,args);};}catalog.filter(d=>d.level===3).forEach((d,i)=>{const key='R'+String(i+1).padStart(2,'0');banks.push(()=>({...generate(d.id),type:key,patternId:key,primaryTopic:d.topic,difficultyBank:'measureProblems',difficultyKey:key,family:'Raonament',examCompatible:true}));});}
-  root.MIFirstMeasureTasks=Object.freeze({catalog:Object.freeze(catalog.map(Object.freeze)),metricFamilySpecs,metricFamilyFor,metricFamilyInfo,conversionsFamilySpecs,conversionsFamilyFor,conversionsFamilyInfo,timeFamilySpecs,timeFamilyFor,timeFamilyInfo,generate,extend});
+  function extend(topics,banks){for(let i=0;i<banks.length;i++){const make=banks[i];banks[i]=(...args)=>{const q=make(...args);if(q&&q.primaryTopic==='perimetres'){const key=({P01:'perimetre-amb-obertura',P02:'cost-material-per-contorn',P03:'circumferencia-directa',P04:'voltes-circumferencia',P05:'reconstruir-costat-des-del-perimetre'})[String(q.type)];if(key)return {...q,perimeterFamily:key,familyId:key};}return q;};}for(const t of topics){if(t.id==='problemes')continue;const ds=catalog.filter(d=>d.topic===t.id);if(!ds.length)continue;const original=t.gen;let turn=ds.length,lastFamily=null;t.gen=function(...args){for(let tries=0;tries<120;tries++){const slot=turn++%(ds.length+(t.id==='perimetres'?1:0)),q=slot<ds.length?generate(ds[slot].id):original.apply(this,args);if(!['conversions','temps','perimetres'].includes(t.id))return q;const family=q.conversionsFamily||q.timeFamily||q.metricFamily||q.perimeterFamily||q.familyId||q.type;if(family!==lastFamily||tries===119){lastFamily=family;return q;}}return original.apply(this,args);};}catalog.filter(d=>d.level===3).forEach((d,i)=>{const key='R'+String(i+1).padStart(2,'0');banks.push(()=>({...generate(d.id),type:key,patternId:key,primaryTopic:d.topic,difficultyBank:'measureProblems',difficultyKey:key,family:'Raonament',examCompatible:true}));});}
+  root.MIFirstMeasureTasks=Object.freeze({catalog:Object.freeze(catalog.map(Object.freeze)),metricFamilySpecs,metricFamilyFor,metricFamilyInfo,conversionsFamilySpecs,conversionsFamilyFor,conversionsFamilyInfo,timeFamilySpecs,timeFamilyFor,timeFamilyInfo,perimeterFamilySpecs,perimeterFamilyFor,perimeterFamilyInfo,generate,extend});
 })(typeof window==='undefined'?globalThis:window);

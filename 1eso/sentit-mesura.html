@@ -944,55 +944,41 @@ function genTempsRaw(){
 
 // 4. PERÍMETRES
 function genPerimetresRaw(){
-  const type=rnd(1,6);
+  const type=rnd(1,7);
   const unit=rnd(0,1)?'cm':'m';
+  const meta=id=>{const f=MIFirstMeasureTasks.perimeterFamilyFor(id);return {perimeterFamily:f.id,familyId:f.id,taskDifficulty:f.level,diff:f.level};};
 
   if(type===1){
-    const l=rnd(2,30),res=4*l;
-    const templates=unit==='cm'?[`Perímetre d'un quadrat de costat ${l} cm`,`Un marc quadrat té un costat de ${l} cm. Quina longitud té tot el contorn?`,`Una peça quadrada té costat ${l} cm. Quin és el seu perímetre?`]:[`Perímetre d'un quadrat de costat ${l} m`,`Una parcel·la quadrada té costat ${l} m. Quin és el seu perímetre?`,`Una zona quadrada té costat ${l} m. Quants metres fa el contorn?`];
-    const q=templates[rnd(0,templates.length-1)],c=`${res} ${unit}`;
-    const guide=['Recorda que tots els costats d’un quadrat són iguals','Suma la longitud de tots els costats del contorn'];
-    return {type,question:q,correct:c,options:distractors(res,unit,[l*l,2*l,3*l,5*l]),guide,solution:[`P = ${l}+${l}+${l}+${l} = ${res} ${unit}`,`✅ P = ${c}`],difficulty:'easy'};
+    const l=rnd(2,30),res=4*l,c=`${res} ${unit}`;
+    const q=`Perímetre d'un quadrat de costat ${l} ${unit}`;
+    return {type,...meta(type),question:q,correct:c,options:distractors(res,unit,[l*l,2*l,3*l,5*l]),guide:['Recorda que tots els costats del quadrat són iguals','Suma els quatre costats del contorn'],solution:[`P = 4 × ${l} = ${res} ${unit}`,`✅ P = ${c}`],difficulty:'easy'};
   }
-
   if(type===2){
-    const a=rnd(3,35),b=rnd(2,25),res=2*(a+b);
-    const templates=unit==='cm'?[`Perímetre d'un rectangle de ${a} cm × ${b} cm`,`Una cartolina rectangular mesura ${a} cm per ${b} cm. Quin és el perímetre?`,`Un marc rectangular fa ${a} cm × ${b} cm. Quant mesura el contorn?`]:[`Perímetre d'un rectangle de ${a} m × ${b} m`,`Un jardí rectangular fa ${a} m de llarg i ${b} m d'ample. Quants metres té el contorn?`,`Una pista rectangular mesura ${a} m per ${b} m. Quin és el perímetre?`];
-    const q=templates[rnd(0,templates.length-1)],c=`${res} ${unit}`;
-    const guide=['Identifica les dues parelles de costats iguals del rectangle','Suma totes les longituds que formen el contorn'];
-    return {type,question:q,correct:c,options:distractors(res,unit,[a+b,a*b,2*a+b,2*b+a]),guide,solution:[`P = ${a}+${b}+${a}+${b} = ${res} ${unit}`,`✅ P = ${c}`],difficulty:'easy'};
+    const a=rnd(3,35),b=rnd(2,25),res=2*(a+b),c=`${res} ${unit}`;
+    return {type,...meta(type),question:`Perímetre d'un rectangle de ${a} ${unit} × ${b} ${unit}`,correct:c,options:distractors(res,unit,[a+b,a*b,2*a+b,2*b+a]),guide:['El rectangle té dues parelles de costats iguals','Suma els quatre costats'],solution:[`P = ${a}+${b}+${a}+${b} = ${res} ${unit}`,`✅ P = ${c}`],difficulty:'easy'};
   }
-
   if(type===3){
     let a,b,cSide;do{a=rnd(3,20);b=rnd(3,20);cSide=rnd(3,20);}while(a+b<=cSide||a+cSide<=b||b+cSide<=a);
-    const res=a+b+cSide,corr=`${res} ${unit}`;
-    const templates=unit==='cm'?[`Perímetre d'un triangle de costats ${a} cm, ${b} cm i ${cSide} cm`,`Un triangle té costats de ${a} cm, ${b} cm i ${cSide} cm. Quant mesura el contorn?`,`Una peça triangular té costats ${a}, ${b} i ${cSide} cm. Quin perímetre té?`]:[`Perímetre d'un triangle de costats ${a} m, ${b} m i ${cSide} m`,`Una parcel·la triangular té costats de ${a} m, ${b} m i ${cSide} m. Quin és el perímetre?`,`Un recorregut triangular té costats ${a}, ${b} i ${cSide} m. Quina longitud té el contorn?`];
-    const q=templates[rnd(0,templates.length-1)];
-    const guide=['Recorre el contorn del triangle','Suma les longituds dels seus tres costats'];
-    return {type,question:q,correct:corr,options:distractors(res,unit,[a+b,a+cSide,b+cSide,res+a]),guide,solution:[`P = ${a}+${b}+${cSide} = ${res} ${unit}`,`✅ P = ${corr}`],difficulty:'easy'};
+    const res=a+b+cSide,c=`${res} ${unit}`;
+    return {type,...meta(type),question:`Perímetre d'un triangle de costats ${a} ${unit}, ${b} ${unit} i ${cSide} ${unit}`,correct:c,options:distractors(res,unit,[a+b,a+cSide,b+cSide,res+a]),guide:['Comprova que les tres longituds poden formar un triangle','Suma els tres costats del contorn'],solution:[`Desigualtats: ${a}+${b}>${cSide}, ${a}+${cSide}>${b}, ${b}+${cSide}>${a}`,`P = ${a}+${b}+${cSide} = ${res} ${unit}`,`✅ P = ${c}`],difficulty:'easy'};
   }
-
   if(type===4){
     const r=rnd(2,20),res=Math.round(2*3.14*r*10)/10,c=`${fmtNum(res)} ${unit}`;
-    const templates=unit==='cm'?[`Longitud d'una circumferència de radi ${r} cm (π ≈ 3,14)`,`Una roda té radi ${r} cm. Quina longitud fa una volta completa? (π ≈ 3,14)`,`Un cercle té radi ${r} cm. Quant mesura la seva circumferència? (π ≈ 3,14)`]:[`Longitud d'una circumferència de radi ${r} m (π ≈ 3,14)`,`Una zona circular té radi ${r} m. Quant mesura el seu contorn? (π ≈ 3,14)`,`Una pista circular té radi ${r} m. Quina longitud té una volta? (π ≈ 3,14)`];
-    const q=templates[rnd(0,templates.length-1)];
-    const guide=['Relaciona el radi amb el diàmetre','Utilitza la relació entre la longitud de la circumferència, el diàmetre i π','Substitueix les dades només quan tinguis clara la relació que has d’aplicar'];
-    return {type,question:q,correct:c,options:distractors(res,unit,[Math.round(3.14*r*10)/10,2*r,Math.round(3.14*r*r*10)/10]),guide,solution:[`Diàmetre = 2 × ${r} = ${2*r} ${unit}`,`C = π × d ≈ 3,14 × ${2*r} = ${fmtNum(res)} ${unit}`,`✅ C = ${c}`],difficulty:'medium'};
+    return {type,...meta(type),question:`Longitud d'una circumferència de radi ${r} ${unit} (π = 3,14; arrodoneix a 0,1 ${unit})`,correct:c,options:distractors(res,unit,[Math.round(3.14*r*10)/10,2*r,Math.round(3.14*r*r*10)/10]),guide:['Calcula el diàmetre a partir del radi','Aplica C = π × d i arrodoneix a la dècima'],solution:[`d = 2 × ${r} = ${2*r} ${unit}`,`C ≈ 3,14 × ${2*r} = ${fmtNum(res)} ${unit}`,`✅ C = ${c}`],difficulty:'medium'};
   }
-
   if(type===5){
     const W=rnd(6,24),H=rnd(6,24),w=rnd(2,W-2),hh=rnd(2,H-2),P=2*(W+H),c=`${P} ${unit}`;
-    const templates=[`Figura en forma de L: rectangle de ${W}×${H} ${unit} amb un racó de ${w}×${hh} ${unit} retirat. Quin és el perímetre?`,`D’un rectangle de ${W}×${H} ${unit} es retira un racó de ${w}×${hh} ${unit}. Quin perímetre té la figura en L resultant?`];
-    const q=templates[rnd(0,templates.length-1)];
-    const guide=['Recorre tot el contorn exterior de la figura en L','Relaciona els trams interiors amb les dimensions totals del rectangle inicial','Suma totes les longituds del contorn una sola vegada'];
-    return {type,question:q,correct:c,options:distractors(P,unit,[P+2*(w+hh),P-2*(w+hh),W*H,P+w+hh]),guide,solution:[`Rectangle inicial: perímetre = 2 × (${W}+${H}) = ${P} ${unit}`,`Els trams retirats es substitueixen per trams interiors de la mateixa longitud total`,`✅ P = ${c}`],difficulty:'hard'};
+    return {type,...meta(type),question:`Figura en L: a un rectangle de ${W} × ${H} ${unit} es retira un rectangle de ${w} × ${hh} ${unit} d’un racó. Quin és el perímetre de la figura resultant?`,correct:c,options:distractors(P,unit,[P+2*(w+hh),P-2*(w+hh),W*H,P+w+hh]),guide:['Recorre també els trams que queden dins del racó retallat','Els trams retirats i els que apareixen tenen la mateixa longitud total'],solution:[`Perímetre del rectangle: 2 × (${W}+${H}) = ${P} ${unit}`,`En retallar un racó, els dos trams eliminats són substituïts per trams interiors de longitud total ${w}+${hh}; el canvi total és 0`,`✅ P = ${c}`],difficulty:'medium'};
   }
-
-  const n=[5,6,7,8,9,10,12][rnd(0,6)],side=rnd(2,18),res=n*side,c=`${res} ${unit}`;
-  const names={5:'pentàgon',6:'hexàgon',7:'heptàgon',8:'octàgon',9:'eneàgon',10:'decàgon',12:'dodecàgon'};
-  const q=`Un ${names[n]} regular té costat ${side} ${unit}. Quin és el seu perímetre?`;
-  const guide=['Identifica quants costats iguals té el polígon regular','Multiplica la longitud d’un costat pel nombre total de costats'];
-  return {type,question:q,correct:c,options:distractors(res,unit,[n+side,2*n*side,side*side,res+side]),guide,solution:[`P = ${n} × ${side} = ${res} ${unit}`,`✅ P = ${c}`],difficulty:'medium'};
+  if(type===6){
+    const n=[5,6,7,8,9,10,12][rnd(0,6)],side=rnd(2,18),res=n*side,c=`${res} ${unit}`;
+    const names={5:'pentàgon',6:'hexàgon',7:'heptàgon',8:'octàgon',9:'eneàgon',10:'decàgon',12:'dodecàgon'};
+    return {type,...meta(type),question:`Un ${names[n]} regular té costat ${side} ${unit}. Quin és el seu perímetre?`,correct:c,options:distractors(res,unit,[n+side,2*n*side,side*side,res+side]),guide:['Identifica el nombre de costats iguals','Multiplica la longitud d’un costat pel nombre de costats'],solution:[`P = ${n} × ${side} = ${res} ${unit}`,`✅ P = ${c}`],difficulty:'easy'};
+  }
+  let sides=Array.from({length:rnd(4,7)},()=>rnd(3,12));
+  while(Math.max(...sides)>=sides.reduce((a,b)=>a+b,0)-Math.max(...sides))sides=Array.from({length:rnd(4,7)},()=>rnd(3,12));
+  const res=sides.reduce((a,b)=>a+b,0),c=`${res} ${unit}`;
+  return {type,...meta(type),question:`Un polígon irregular té costats de longitud ${sides.join(', ')} ${unit}. Quin és el seu perímetre?`,correct:c,options:distractors(res,unit,[res-sides[0],2*res,res+sides[0],sides.length*sides[0]]),guide:['El polígon no té tots els costats iguals: no multipliquis una sola longitud','Suma una vegada cadascun dels trams del contorn'],solution:[`Costats: ${sides.join(' + ')}`,`P = ${res} ${unit}`,`Comprovació: el costat més llarg és menor que la suma de la resta, així que les longituds poden tancar un polígon`,`✅ P = ${c}`],difficulty:'easy'};
 }
 
 // ── 5. ÀREES (inclou figures compostes) ───────────────────────────────────
