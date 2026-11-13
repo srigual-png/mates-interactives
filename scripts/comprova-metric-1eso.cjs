@@ -42,7 +42,8 @@ async function main(){
     if(trace.length)check(trace[trace.length-1]!==key,'no consecutive repeat of a real family');
     ids.add(key);trace.push(key);
    }
-   check(specs.every(f=>ids.has(f.id)),'all four families reached in topic generator');
+   const absentFamilies=specs.filter(f=>!ids.has(f.id)).map(f=>f.id);
+   check(absentFamilies.length===0,'all four families reached in topic generator; absent='+JSON.stringify(absentFamilies)+'; observed='+JSON.stringify(Object.fromEntries([...ids].map(id=>[id,trace.filter(x=>x===id).length]))));
    check(NEEDED_LVL1===8&&NEEDED_LVL2===15,'existing practice progression thresholds unchanged');
    const idx=TOPICS.indexOf(topic);
    selectTopic(idx);selectLevel(1);selectMode('multi');startPractice();
