@@ -34,15 +34,21 @@ async function main(){
    check(specs.length===15,'15 reviewed measurement procedures');
    check(coverage.families.length===15&&coverage.types.join(',')==='6,8,1','family-level coverage 6/8/1');
    check(D.examPlan(topic).slots.reduce((a,b)=>a+b,0)===12,'topic exam has twelve slots');
-   const trace=[],seen=new Set();let rawSamples=0;
-   for(let i=0;i<320;i++){const q=topic.gen(),key=q.measurementFamily||q.familyId||q.reasoningFamily,level=D.getDifficulty(topic,q);
-    check(key,'stable family metadata');check(specs.some(f=>f.id===key),'known mathematical family '+key);
-    check(level===q.diff||level===q.taskDifficulty,'shared classifier '+key);
-    check(q.options&&q.options.length===4&&new Set(q.options).size===4&&q.options.includes(q.correct),'four unique answers '+key);
-    if(trace.length)check(trace[trace.length-1]!==key,'no consecutive repeat of a mathematical measurement family');
-    trace.push(key);seen.add(key);rawSamples++;
-   }
-   check(specs.every(f=>seen.has(f.id)),'practice reaches all 15 families');
+   const trace=[],seen=new Set(),familyCounts=Object.fromEntries(specs.map(f=>[f.id,0]));let rawSamples=0;
+   const coverageSeed=0x5a31;let randomState=coverageSeed>>>0;
+   const originalRandom=Math.random;
+   Math.random=()=>{randomState=(Math.imul(randomState,1664525)+1013904223)>>>0;return randomState/4294967296;};
+   try{
+    for(let i=0;i<320;i++){const q=topic.gen(),key=q.measurementFamily||q.familyId||q.reasoningFamily,level=D.getDifficulty(topic,q);
+     check(key,'stable family metadata');check(specs.some(f=>f.id===key),'known mathematical family '+key);
+     check(level===q.diff||level===q.taskDifficulty,'shared classifier '+key);
+     check(q.options&&q.options.length===4&&new Set(q.options).size===4&&q.options.includes(q.correct),'four unique answers '+key);
+     if(trace.length)check(trace[trace.length-1]!==key,'no consecutive repeat of a mathematical measurement family');
+     trace.push(key);seen.add(key);familyCounts[key]++;rawSamples++;
+    }
+   }finally{Math.random=originalRandom;}
+   const missingFamilies=specs.filter(f=>!seen.has(f.id)).map(f=>f.id);
+   check(missingFamilies.length===0,'practice reaches all 15 families; missing='+JSON.stringify(missingFamilies)+'; counts='+JSON.stringify(familyCounts));
    check(NEEDED_LVL1===8&&NEEDED_LVL2===15,'existing progression unchanged');
    const contexts={},ids=['M01','M02','M03','M04','M05','S01','S02','S03','S04','T05'];
    const familyByBank={M01:'seleccionar-instrument',M02:'seleccionar-unitat-mesura',M03:'error-absolut',M04:'error-relatiu-percentual',M05:'error-relatiu-percentual',S01:'escala-proporcional',S02:'escala-proporcional',S03:'escala-proporcional',S04:'escala-proporcional',T05:'angle-gir-rellotge'};
@@ -90,7 +96,7 @@ async function main(){
    for(const id of Object.keys(regressions)){const t=TOPICS.find(x=>x.id===id);check(t,id+' regression topic');for(let i=0;i<30;i++){const q=t.gen();check([1,2,3].includes(D.getDifficulty(t,q)),id+' regression classification');regressions[id]++;}}
    check(NEEDED_LVL1===8&&NEEDED_LVL2===15,'session progression values remain unchanged');
    const theoryLink=miTheoryLinkHtml('mesurament','Teoria');check(theoryLink.includes('mesurament-precisio-1r-eso.html'),'measurement theory link');const desktop={width:document.documentElement.scrollWidth,viewport:innerWidth};check(desktop.width<=desktop.viewport+2,'measurement practice desktop layout');
-   return {theoryLink:theoryLink.includes('mesurament-precisio-1r-eso.html'),families:specs.map(f=>({id:f.id,level:f.level,generators:f.generators,bankVariants:f.bankVariants})),coverage:coverage.types,practice:{samples:rawSamples,distinctFamilies:seen.size,noConsecutiveRepeats:true},contextPatterns:contexts,errorRotation:{samples:errorRotation.length,distinctFamilies:new Set(errorRotation).size},topicExam:exam.questions.length,globalExam:ST.examQs.length,regressions,desktop};
+   return {theoryLink:theoryLink.includes('mesurament-precisio-1r-eso.html'),families:specs.map(f=>({id:f.id,level:f.level,generators:f.generators,bankVariants:f.bankVariants})),coverage:coverage.types,practice:{samples:rawSamples,distinctFamilies:seen.size,noConsecutiveRepeats:true,randomSeed:'0x5a31',familyCounts},contextPatterns:contexts,errorRotation:{samples:errorRotation.length,distinctFamilies:new Set(errorRotation).size},topicExam:exam.questions.length,globalExam:ST.examQs.length,regressions,desktop};
   });
   assert.equal(pageErrors.length,0,'practice JS errors: '+pageErrors.join(' | '));
   await page.setViewportSize({width:390,height:844});
