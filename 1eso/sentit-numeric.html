@@ -2192,7 +2192,7 @@ function genEnters(){
   }
   const unit=type===5?'graus':type===6?'euros':'';
   const entersAnswer=type===1?{kind:'order',values:sorted,separator:ascending?'<':'>'}:{kind:'fields',fields:[MIEnters.number('Resultat',parseInt(correct,10),unit)]};
-  return{entersAnswer,entersTheory:MIEnters.anchors[(type===7?5:type)-1],type:type,question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:type===1||type===5||type===8?1:2};
+  return{entersAnswer,entersTheory:MIEnters.anchors[(type===7?5:type)-1],type:type,question:question,correct:correct,options:buildOpts(correct,opts.filter(function(o){return o!==correct;})),guide:guide,solution:solution,isProblem:isProblem,diff:diff};
 }
 
 // ── GEN DECIMALS ───────────────────────────────────────────────────────────
