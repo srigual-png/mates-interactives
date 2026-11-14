@@ -2,6 +2,7 @@
 
 <html lang="ca">
 <head>
+<script src="../assets/js/algebraic-1eso-families.js"></script>
 <script src="../assets/js/dificultat-mi.js"></script>
 <link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
@@ -788,15 +789,16 @@ function genTraduccio(){
       {n:'El consecutiu de x',a:'x+1',w:['x-1','2x','x+2','x+3']},
       {n:'El nombre anterior a x',a:'x-1',w:['x+1','2x-1','x-2','x']},
       {n:'Un nombre menys quatre',a:'x-4',w:['4-x','x+4','4x','x-3']},
-      {n:'Sis vegades un nombre més dos',a:'6x+2',w:['6(x+2)','6x-2','x+8','2x+6']},
+      {n:'Sis vegades un nombre i després suma dos',a:'6x+2',w:['6(x+2)','6x-2','x+8','2x+6']},
       {n:'El quadrat d\'un nombre',a:'x²',w:['2x','x+2','x³','x/2']},
-      {n:'El triple d\'un nombre menys quatre',a:'3x-4',w:['3x+4','4-3x','3x-3','2x-4']},
-      {n:'Tres vegades la suma d\'un nombre i dos',a:'3(x+2)',al:['3x+6'],w:['3x+2','x+6','3(x-2)','6x']},
+      {n:'El triple d\'un nombre i després resta quatre',a:'3x-4',w:['3x+4','4-3x','3x-3','2x-4']},
+      {n:'Tres vegades la suma d\'un nombre i dos',a:'3(x+2)',al:['3x+6'],grouped:true,w:['3x+2','x+6','3(x-2)','6x']},
       {n:'La suma del doble i el triple d\'un nombre',a:'2x+3x',al:['5x'],w:['5x²','6x','2x+3','2(x+3)']}
     ];
 
-    const f=frases[rnd(0,frases.length-1)];
-    if(f.al)difficultyVariant='grouped';
+    let f=frases[rnd(0,frases.length-1)];
+    if(f.grouped){const a=rnd(2,5),b=rnd(1,6);f={...f,n:`${a} vegades la suma d'un nombre i ${b}`,a:`${a}(x+${b})`,al:[`${a}x+${a*b}`],w:[`${a}x+${b}`,`x+${a*b}`,`${a}(x-${b})`,`${a*b}x`]};}
+    difficultyVariant=f.grouped?'grouped':'direct';
 
     question='Tradueix: <b>"'+f.n+'"</b>';
     correct=f.a;
@@ -821,8 +823,8 @@ function genTraduccio(){
       {a:'4x',n:'El quàdruple d\'un nombre'},
       {a:'x/3',n:'Un nombre dividit entre tres'},
       {a:'x²',n:'El quadrat d\'un nombre'},
-      {a:'2x+1',n:'El doble d\'un nombre més u'},
-      {a:'3x-2',n:'El triple d\'un nombre menys dos'}
+      {a:'2x+1',n:'El doble d\'un nombre i després suma una unitat'},
+      {a:'3x-2',n:'El triple d\'un nombre i després resta dos'}
     ];
 
     const ex=exprs[rnd(0,exprs.length-1)];
@@ -926,24 +928,11 @@ function genTraduccio(){
     ];
 
   } else {
+    const pizza=rnd(3,12),delivery=rnd(1,5),taxi=rnd(1,8),fixed=rnd(1,6),books=rnd(2,5),discount=rnd(1,8);
     const probs=[
-      {
-        e:'🍕 Una pizzeria cobra 7 € per pizza i 2 € d\'entrega. Quant es paga per x pizzes?',
-        a:'7x+2',
-        al:['2+7x'],
-        w:['7(x+2)','9x','7x-2','2x+7']
-      },
-      {
-        e:'🚗 Un taxi cobra 2 € de baixada i 1,5 €/km. Quant es paga per x km?',
-        a:'1,5x+2',
-        al:['1.5x+2','2+1,5x','2+1.5x'],
-        w:['2x+1,5','3,5x','1,5(x+2)','1,5x-2']
-      },
-      {
-        e:'📚 Un llibre val x €. Compres 3 llibres i tens 5 € de descompte. Quant pagues?',
-        a:'3x-5',
-        w:['3x+5','3+x-5','3(x-5)','5x-3']
-      }
+      {e:`🍕 Una pizzeria cobra ${pizza} € per pizza i ${delivery} € d'entrega. Quant es paga per x pizzes?`,a:`${pizza}x+${delivery}`,al:[`${delivery}+${pizza}x`],w:[`${pizza}(x+${delivery})`,`${pizza+delivery}x`,`${pizza}x-${delivery}`,`${delivery}x+${pizza}`]},
+      {e:`🚗 Un taxi cobra ${fixed} € de baixada i ${taxi} €/km. Quant es paga per x km?`,a:`${taxi}x+${fixed}`,al:[`${fixed}+${taxi}x`],w:[`${fixed}x+${taxi}`,`${taxi+fixed}x`,`${taxi}(x+${fixed})`,`${taxi}x-${fixed}`]},
+      {e:`📚 Un llibre val x €. Compres ${books} llibres i tens ${discount} € de descompte. Quant pagues?`,a:`${books}x-${discount}`,w:[`${books}x+${discount}`,`${books}+x-${discount}`,`${books}(x-${discount})`,`${discount}x-${books}`]}
     ];
 
     const pr=probs[rnd(0,probs.length-1)];
@@ -977,9 +966,10 @@ function genTraduccio(){
 
 function genPatrons(){
   const type=rnd(1,6);
-  let question,correct,alts=[],opts,guide,solution;
+  let question,correct,alts=[],opts,guide,solution,patternKind;
 
   if(type===1){
+    patternKind='additive';
     const a=rnd(1,15),d=rnd(2,8);
     const decreasing=rnd(0,3)===0 && a+4*d<=50;
     const seq=decreasing?[a+4*d,a+3*d,a+2*d,a+d,a]:[a,a+d,a+2*d,a+3*d,a+4*d];
@@ -1008,13 +998,14 @@ function genPatrons(){
       correct='Cada terme es multiplica per '+m;
       wrong=['Cada terme augmenta en '+m,'Cada terme es multiplica per '+(m+1),'Cada terme disminueix en '+m];
     }
-    question='Quina regla descriu millor el patró?<br><b>'+seq.join(', ')+'…</b>';
+    question='Entre les regles proposades, quina descriu millor el patró?<br><b>'+seq.join(', ')+'…</b>';
     alts=[correct];opts=uniq4(correct,wrong);
     guide=['Compara cada terme amb l’anterior','Comprova si es repeteix una suma, una resta o una multiplicació','Verifica la mateixa regla en més d’un pas'];
     solution=['La regla que es repeteix és: <b>'+correct+'</b>'];
 
   }else if(type===3){
     const mode=rnd(1,2);
+    patternKind=mode===1?'additive':'multiplicative';
     let seq,next,wrong;
     if(mode===1){
       const a=rnd(1,12),d=rnd(2,8);seq=[a,a+d,a+2*d,a+3*d];next=a+4*d;
@@ -1023,14 +1014,14 @@ function genPatrons(){
       const a=rnd(1,4),m=rnd(2,3);seq=[a,a*m,a*m*m,a*m*m*m];next=a*m*m*m*m;
       wrong=[next+m,next-m,seq[3]+m,next/m];
     }
-    question='Continua el patró: <b>'+seq.join(', ')+', …</b>';
+    question='Continua el patró, mantenint el mateix canvi entre termes consecutius: <b>'+seq.join(', ')+', …</b>';
     correct=String(next);alts=[correct];opts=uniq4(correct,wrong.map(String));
     guide=['Descobreix què es repeteix entre termes consecutius','Comprova la regla amb els termes que ja tens','Aplica-la una vegada més'];
     solution=['Aplicant la mateixa regla, el terme següent és <b>'+next+'</b>'];
 
   }else if(type===4){
     const n=rnd(3,10),pals=3*n+1;
-    question='Una fila de quadrats fets amb pals segueix el patró:<br><small>1 quadrat → 4 pals | 2 → 7 | 3 → 10</small><br>Quants pals calen per a <b>'+n+' quadrats</b>?';
+    question='Una fila de quadrats fets amb pals segueix el patró; cada quadrat nou comparteix un costat i afegeix 3 pals:<br><small>1 quadrat → 4 pals | 2 → 7 | 3 → 10</small><br>Quants pals calen per a <b>'+n+' quadrats</b>?';
     correct=String(pals);alts=[correct,pals+' pals'];
     opts=uniq4(correct,[String(4*n),String(3*n),String(3*n+2),String(pals+3)]);
     guide=['Observa quants pals s’afegeixen quan apareix un quadrat nou','Tingues en compte que els quadrats consecutius comparteixen un costat','Continua el patró fins al nombre de quadrats demanat'];
@@ -1041,7 +1032,7 @@ function genPatrons(){
     const totals=[1,3,6,10,15,21,28,36,45];
     const tri=totals[n-1];
     const shown=totals.slice(0,Math.min(5,n-1));
-    question='Patró de punts triangulars: <b>'+shown.join(', ')+', …</b><br>Quants punts té la figura <b>'+n+'</b>?';
+    question='Patró de punts triangulars: cada figura afegeix una fila amb un punt més que l’anterior. <b>'+shown.join(', ')+', …</b><br>Quants punts té la figura <b>'+n+'</b>?';
     correct=String(tri);alts=[correct,tri+' punts'];
     opts=uniq4(correct,[String(tri+n),String(tri-n),String(n*n),String(tri-1)]);
     guide=['Mira quants punts s’afegeixen de cada figura a la següent','Els increments també segueixen un patró','Continua els increments fins a la figura demanada'];
@@ -1049,18 +1040,19 @@ function genPatrons(){
 
   }else{
     const contexts=[
-      {q:'Un cinema té 12 seients a la primera fila, 14 a la segona, 16 a la tercera i 18 a la quarta. Quants en tindrà la cinquena?',a:'20',w:['19','21','22','24'],s:'Cada fila té 2 seients més que l’anterior'},
-      {q:'Una construcció usa 3 peces a la figura 1, 6 a la figura 2, 9 a la figura 3 i 12 a la figura 4. Quantes peces usa la figura 5?',a:'15',w:['13','14','18','24'],s:'Cada figura afegeix 3 peces'},
-      {q:'Una població de bacteris en un model didàctic segueix 2, 4, 8, 16… Quina quantitat ve després?',a:'32',w:['18','24','30','64'],s:'Cada terme és el doble de l’anterior'},
-      {q:'Les rajoles d’un mosaic per files segueixen 20, 17, 14, 11… Quantes n’hi ha a la fila següent?',a:'8',w:['7','9','10','14'],s:'Cada fila té 3 rajoles menys'}
+      {q:'Un cinema té 12 seients a la primera fila, 14 a la segona, 16 a la tercera i 18 a la quarta. Si cada fila manté el mateix augment, quants en tindrà la cinquena?',a:'20',w:['19','21','22','24'],s:'Cada fila té 2 seients més que l’anterior',kind:'additive'},
+      {q:'Una construcció usa 3 peces a la figura 1, 6 a la figura 2, 9 a la figura 3 i 12 a la figura 4. Si es repeteix el mateix augment, quantes peces usa la figura 5?',a:'15',w:['13','14','18','24'],s:'Cada figura afegeix 3 peces',kind:'additive'},
+      {q:'Una població de bacteris en un model didàctic segueix 2, 4, 8, 16… Si cada terme continua sent el doble de l’anterior, quina quantitat ve després?',a:'32',w:['18','24','30','64'],s:'Cada terme és el doble de l’anterior',kind:'multiplicative'},
+      {q:'Les rajoles d’un mosaic per files segueixen 20, 17, 14, 11… Si es manté la mateixa disminució, quantes n’hi ha a la fila següent?',a:'8',w:['7','9','10','14'],s:'Cada fila té 3 rajoles menys',kind:'additive'}
     ];
     const c=contexts[rnd(0,contexts.length-1)];
+    patternKind=c.kind;
     question='🌍 '+c.q;correct=c.a;alts=[correct];opts=uniq4(correct,c.w);
     guide=['Identifica la regularitat que relaciona les dades consecutives','Comprova que la mateixa regla funciona en més d’un pas','Aplica la regla al pas següent'];
     solution=[c.s,'Resposta: <b>'+correct+'</b>'];
   }
 
-  return {topicId:'patrons',type,question,correct,alts,options:opts,guide,solution};
+  return {topicId:'patrons',type,question,correct,alts,options:opts,guide,solution,familyVariant:patternKind};
 }
 
 function genPatronsAmpliacio(){
@@ -1101,7 +1093,7 @@ function genMonomis(forceType){
   let question,correct,alts=[],opts,guide,solution;
 
   if(type===1){
-    const coefs=[-9,-8,-7,-6,-5,-4,-3,-2,-1,1,2,3,4,5,6,7,8,9];
+    const coefs=[-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9];
     const c=coefs[rnd(0,coefs.length-1)];
     const mono=c===1?'x':(c===-1?'−x':c+'x');
     question='A l’expressió <b>'+mono+'</b>, quin és el <b>coeficient</b>?';
@@ -1111,24 +1103,22 @@ function genMonomis(forceType){
     solution=['El factor numèric de '+mono+' és <b>'+c+'</b>'];
 
   }else if(type===2){
-    const a=rnd(2,9),b=rnd(1,12),minus=rnd(0,1)===1;
-    const expr=a+'x '+(minus?'−':' + ')+' '+b;
+    const magnitude=rnd(2,9),a=rnd(0,1)?magnitude:-magnitude,b=rnd(1,12),constant=rnd(0,1)?b:-b;
+    const coeff=a<0?'−'+Math.abs(a):String(a),expr=coeff+'x '+(constant<0?'−':' + ')+' '+Math.abs(constant);
     question='A l’expressió <b>'+expr+'</b>, quin és el <b>terme independent</b>?';
-    correct=String(minus?-b:b);alts=[correct];
-    opts=uniq4(correct,[String(a),String(-a),String(b),String(minus?b:-b),String(a+b),String(-(a+b))]);
+    correct=String(constant);alts=[correct];
+    opts=uniq4(correct,[String(a),String(-a),String(b),String(-constant),String(a+constant),String(-(a+constant))]);
     guide=['Separa el terme que conté x del terme que no en conté','El terme independent és el que no porta cap lletra','Conserva el signe que acompanya aquest terme'];
     solution=['El terme sense x és <b>'+correct+'</b>'];
 
   }else if(type===3){
-    const resta=rnd(0,1)===1;
-    let a,b,res,sign;
-    if(resta){a=rnd(4,12);b=rnd(1,a-1);res=a-b;sign=' − ';}
-    else{a=rnd(2,9);b=rnd(1,8);res=a+b;sign=' + ';}
-    question='Redueix: <b>'+a+'x'+sign+b+'x</b>';
-    correct=res+'x';alts=[correct];
-    opts=uniq4(correct,[(resta?a+b:a*b)+'x',res+'x²',String(res),(res+1)+'x',a+'x',b+'x']);
-    guide=['Comprova que els dos termes tenen la mateixa part literal x','Opera només els coeficients respectant el signe','Conserva la x en el resultat'];
-    solution=['Operem els coeficients: '+a+(resta?' − ':' + ')+b+' = '+res,'Resultat: <b>'+correct+'</b>'];
+    const a=rnd(2,9),b=rnd(1,8),negative=rnd(0,1)===1;
+    const first=a+'x',secondSign=negative?'−':' + ',expression=first+secondSign+b+'x';
+    correct=first+' i '+(negative?'−':' + ')+b+'x';alts=[correct,first+', '+(negative?'−':' + ')+b+'x',first+' i '+(negative?'-':'+')+b+'x'];
+    question='Quins són els termes, amb els signes corresponents, de <b>'+expression+'</b>?';
+    opts=uniq4(correct,[first+' i '+b+'x',first+' i '+(negative?'+':'−')+b+'x',a+' i '+(negative?'−':' + ')+b,first+' i '+(negative?'−':' + ')+(b+1)+'x']);
+    guide=['Els termes se separen pels signes de suma o resta','El signe de resta acompanya el terme que ve després','No confonguis el coeficient amb el terme complet'];
+    solution=['Els termes de '+expression+' són <b>'+first+'</b> i <b>'+(negative?'−':'')+b+'x</b>.'];
 
   }else{
     const casos=[
@@ -1150,7 +1140,9 @@ function genMonomis(forceType){
     guide=['Compara si tots dos termes tenen exactament la mateixa part literal','Els coeficients no han de ser iguals','Un terme sense lletra no és semblant a un terme amb x'];
     solution=[c.why,'<b>'+correct+'</b>'];
   }
-  return {topicId:'monomis',type,question,correct,alts,options:opts,guide,solution};
+  const result={topicId:'monomis',type,question,correct,alts,options:opts,guide,solution};
+  if(type===3)result._openAnswerCheck=input=>String(input).toLowerCase().replace(/[−–]/g,'-').replace(/\s+/g,'').replace(/,/g,'i')===correct.toLowerCase().replace(/[−–]/g,'-').replace(/\s+/g,'').replace(/,/g,'i');
+  return result;
 }
 
 function genMonomisAmpliacio(){
@@ -1781,34 +1773,28 @@ function variationKey(ex){
   return String(ex&&ex.question||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
 }
 function resetVariationSession(topicId){
-  if(topicId) variationMemory[topicId]={seen:new Set(),queue:[],lastType:null};
+  if(topicId) variationMemory[topicId]={seen:new Set(),queue:[],lastType:null,lastFamily:null,familyCounts:Object.create(null)};
   else Object.keys(variationMemory).forEach(k=>delete variationMemory[k]);
 }
 function variedGenerator(topicId,baseGen){
   return function(){
     if(!variationMemory[topicId]) resetVariationSession(topicId);
-    const mem=variationMemory[topicId];
+    const mem=variationMemory[topicId],catalog=window.MIFirstAlgebraicFamilies,rows=catalog&&catalog.topicSpecs(topicId);
     let ex=null,key='',tries=0;
-    while(tries<80){
-      tries++;
-      const cand=baseGen();
-      const candKey=variationKey(cand);
-      const repeat=mem.seen.has(candKey);
-      const sameType=mem.lastType!==null && String(cand.type)===String(mem.lastType);
-      if(!repeat && (!sameType || tries>55)){
-        ex=cand;key=candKey;break;
-      }
+    if(rows){
+      const reachable=rows.filter(f=>(f.generators||[]).some(g=>g.startsWith(topicId+':')));
+      let eligible=reachable.filter(f=>f.id!==mem.lastFamily);if(!eligible.length)eligible=reachable.slice();
+      const least=Math.min(...eligible.map(f=>mem.familyCounts[f.id]||0));eligible=eligible.filter(f=>(mem.familyCounts[f.id]||0)===least);
+      const target=eligible[Math.floor(Math.random()*eligible.length)];
+      while(tries<700){tries++;const cand=baseGen();if(catalog.familyFor(topicId,cand)?.id===target.id&&!mem.seen.has(variationKey(cand))){ex=cand;key=variationKey(cand);break;}}
     }
     if(!ex){
-      // Si el banc temporal queda massa restringit, conservem només les 10 darreres.
-      while(mem.queue.length>10){const old=mem.queue.shift();mem.seen.delete(old);}
-      for(let i=0;i<40;i++){
-        const cand=baseGen(),candKey=variationKey(cand);
-        if(!mem.seen.has(candKey)){ex=cand;key=candKey;break;}
-      }
+      while(tries<780){tries++;const cand=baseGen(),candKey=variationKey(cand),repeat=mem.seen.has(candKey),sameType=mem.lastType!==null&&String(cand.type)===String(mem.lastType);if(!repeat&&(!sameType||tries>755)){ex=cand;key=candKey;break;}}
     }
+    if(!ex){while(mem.queue.length>10){const old=mem.queue.shift();mem.seen.delete(old);}for(let i=0;i<40;i++){const cand=baseGen(),candKey=variationKey(cand);if(!mem.seen.has(candKey)){ex=cand;key=candKey;break;}}}
     if(!ex){ex=baseGen();key=variationKey(ex);}
-    mem.seen.add(key);mem.queue.push(key);mem.lastType=ex.type;
+    const family=catalog?.familyFor(topicId,ex)?.id||ex.familyId||null;
+    mem.seen.add(key);mem.queue.push(key);mem.lastType=ex.type;mem.lastFamily=family;if(family)mem.familyCounts[family]=(mem.familyCounts[family]||0)+1;
     while(mem.queue.length>60){const old=mem.queue.shift();mem.seen.delete(old);}
     return ex;
   };
@@ -1850,7 +1836,7 @@ algAdd('T2','traduccio','traduccio',2,()=>{const f=rnd(2,6),p=rnd(1,4);return al
 algAdd('T3','traduccio','traduccio',1,()=>{const k=rnd(2,9);return algProblem({patternId:'T3',family:'traduccio',topicId:'traduccio',diff:1,question:`En Martí té <b>x anys</b>. Quina expressió representa l'edat que tenia fa <b>${k} anys</b>?`,answer:algExprAnswer(`x-${k}`),hint:['Anar cap enrere en el temps disminueix l’edat actual'],solution:[`Edat de fa ${k} anys: <b>x − ${k}</b>.`]});});
 algAdd('T4','traduccio','traduccio',2,()=>{const h=rnd(2,9);return algProblem({patternId:'T4',family:'traduccio',topicId:'traduccio',diff:2,question:`Un rectangle té base <b>x cm</b> i altura <b>${h} cm</b>. Escriu una expressió simplificada per al perímetre.`,answer:algExprAnswer(`2x+${2*h}`,[`${2*h}+2x`]),hint:['El perímetre suma dues bases i dues altures','Agrupa els dos termes que contenen x'],solution:[`P = 2x + 2·${h} = <b>2x + ${2*h}</b>.`]});});
 algAdd('T5','traduccio','traduccio',1,()=>{const a=rnd(2,7),b=rnd(1,9),x=rnd(1,8),r=a*x+b;return algProblem({patternId:'T5',family:'traduccio',topicId:'traduccio',diff:1,question:`Si <b>x=${x}</b>, quin valor té l'expressió <b>${a}x+${b}</b>?`,answer:algNumAnswer(r),hint:['Substitueix x pel valor indicat','Calcula primer el producte i després incorpora el terme independent'],solution:[`${a}·${x}+${b}=${a*x}+${b}=<b>${r}</b>.`]});});
-algAdd('T6','traduccio','traduccio',2,()=>{const a=rnd(2,6),b=rnd(2,8);return algProblem({patternId:'T6',family:'traduccio',topicId:'traduccio',diff:2,question:`Tradueix al llenguatge algebraic: <b>«${a} vegades un nombre, disminuït en ${b}»</b>.`,answer:algExprAnswer(`${a}x-${b}`),hint:['Representa el nombre amb x','Respecta l’ordre de les operacions descrites'],solution:[`«${a} vegades un nombre» → ${a}x`,`«disminuït en ${b}» → <b>${a}x − ${b}</b>.`]});});
+algAdd('T6','traduccio','traduccio',1,()=>{const a=rnd(2,6),b=rnd(2,8);return algProblem({patternId:'T6',family:'traduccio',topicId:'traduccio',diff:1,question:`Tradueix al llenguatge algebraic: <b>multiplica un nombre per ${a} i després resta ${b}</b>.`,answer:algExprAnswer(`${a}x-${b}`),hint:['Representa el nombre amb x','Aplica primer la multiplicació i després la resta'],solution:[`Multipliquem: ${a}x.`,`Després restem ${b}: <b>${a}x − ${b}</b>.`]});});
 algAdd('T7','traduccio','traduccio',2,()=>{const a=rnd(2,5),b=rnd(1,6);return algProblem({patternId:'T7',family:'traduccio',topicId:'traduccio',diff:2,question:`Quina expressió representa <b>${a} vegades la suma d'un nombre i ${b}</b>?`,answer:algExprAnswer(`${a}(x+${b})`,[`${a}x+${a*b}`]),hint:['La multiplicació afecta tota la suma','Pensa si cal agrupar la suma abans de multiplicar'],solution:[`La suma és x+${b}.`,`Multipliquem tota la suma: <b>${a}(x+${b})</b>.`]});});
 
 // PATRONS (7)
@@ -1860,15 +1846,15 @@ algAdd('P3','patrons','patrons',1,()=>{const a=rnd(1,5),m=rnd(2,4),seq=[a,a*m,a*
 algAdd('P4','patrons','patrons',1,()=>{const start=rnd(8,20),inc=rnd(2,6);const day=rnd(4,7),r=start+(day-1)*inc;return algProblem({patternId:'P4',family:'patrons',topicId:'patrons',diff:1,question:`Una planta fa <b>${start} cm</b> el dia 1 i creix <b>${inc} cm cada dia</b>. Si el patró continua, quant farà el dia <b>${day}</b>?`,answer:algNumAnswer(r,.001,'cm'),hint:['Compta quants creixements hi ha des del dia 1 fins al dia demanat','Aplica el mateix augment a cada pas'],solution:[`Hi ha ${day-1} augments.`,`Altura: ${start}+${day-1}·${inc}=<b>${r} cm</b>.`]});});
 algAdd('P5','patrons','patrons',2,()=>{const n=rnd(3,7),r=3*n+1;return algProblem({patternId:'P5',family:'patrons',topicId:'patrons',diff:2,question:`Es construeix una fila de quadrats amb escuradents: 1 quadrat necessita 4 escuradents i cada quadrat nou comparteix un costat, de manera que n'afegeix 3. Quants escuradents calen per a <b>${n} quadrats</b>?`,answer:algNumAnswer(r),hint:['Parteix del primer quadrat','Compta quants quadrats nous s’afegeixen i què aporta cadascun'],solution:[`Primer quadrat: 4.`,`${n-1} quadrats nous aporten ${n-1}·3.`,`Total: <b>${r}</b>.`]});});
 algAdd('P6','patrons','patrons',2,()=>{const n=rnd(4,8),r=n*(n+1)/2;return algProblem({patternId:'P6',family:'patrons',topicId:'patrons',diff:2,question:`Un patró de punts forma files d'<b>1, 2, 3, …</b> punts. Quants punts hi ha en total en les primeres <b>${n} files</b>?`,answer:algNumAnswer(r),hint:['Suma les quantitats de punts de totes les files fins a la indicada'],solution:[`1+2+…+${n}=<b>${r}</b>.`]});});
-algAdd('P7','patrons','patrons',2,()=>{const a=rnd(3,10),d=rnd(2,6);return algProblem({patternId:'P7',family:'patrons',topicId:'patrons',diff:2,question:`Observa <b>${a}, ${a+d}, ${a+2*d}, ${a+3*d}, …</b>. Escriu amb paraules la regla que permet passar d'un terme al següent.`,answer:algTextAnswer(`sumar ${d}`,[`afegeix ${d}`,`afegir ${d}`,`+${d}`]),hint:['Compara un terme amb el següent','Descriu només l’operació que es repeteix'],solution:[`La regla és <b>sumar ${d}</b> a cada pas.`]});});
+algAdd('P7','patrons','patrons',1,()=>{const a=rnd(3,10),d=rnd(2,6);return algProblem({patternId:'P7',family:'patrons',topicId:'patrons',diff:1,question:`Observa <b>${a}, ${a+d}, ${a+2*d}, ${a+3*d}, …</b>. Escriu amb paraules la regla que permet passar d'un terme al següent.`,answer:algTextAnswer(`sumar ${d}`,[`afegeix ${d}`,`afegir ${d}`,`+${d}`]),hint:['Compara un terme amb el següent','Descriu només l’operació que es repeteix'],solution:[`La regla és <b>sumar ${d}</b> a cada pas.`]});});
 
 // TERMES I COEFICIENTS (6)
-algAdd('M1','monomis','monomis',1,()=>{const a=rnd(2,12);return algProblem({patternId:'M1',family:'monomis',topicId:'monomis',diff:1,question:`Quin és el coeficient del terme <b>${a}x</b>?`,answer:algNumAnswer(a),hint:['El coeficient és el nombre que multiplica la part literal'],solution:[`En ${a}x, el coeficient és <b>${a}</b>.`]});});
-algAdd('M2','monomis','monomis',1,()=>{const a=rnd(2,9),b=rnd(1,12);return algProblem({patternId:'M2',family:'monomis',topicId:'monomis',diff:1,question:`Quin és el terme independent de <b>${a}x + ${b}</b>?`,answer:algNumAnswer(b),hint:['Busca el terme que no conté cap lletra'],solution:[`El terme sense x és <b>${b}</b>.`]});});
-algAdd('M3','monomis','monomis',1,()=>{const a=rnd(2,8),b=rnd(2,8);return algProblem({patternId:'M3',family:'monomis',topicId:'monomis',diff:1,question:`Redueix els termes semblants: <b>${a}x + ${b}x</b>.`,answer:algExprAnswer(`${a+b}x`),hint:['Els dos termes tenen la mateixa part literal','Opera només els coeficients'],solution:[`${a}x+${b}x=(${a}+${b})x=<b>${a+b}x</b>.`]});});
-algAdd('M4','monomis','monomis',1,()=>{const a=rnd(5,12),b=rnd(1,a-1);return algProblem({patternId:'M4',family:'monomis',topicId:'monomis',diff:1,question:`Redueix: <b>${a}x − ${b}x</b>.`,answer:algExprAnswer(`${a-b}x`),hint:['Mantén la x i resta els coeficients'],solution:[`${a}x−${b}x=(${a}−${b})x=<b>${a-b}x</b>.`]});});
-algAdd('M5','monomis','monomis',2,()=>{const a=rnd(2,7),b=rnd(2,9);return algProblem({patternId:'M5',family:'monomis',topicId:'monomis',diff:2,question:`A l'expressió <b>${a}x + ${b}</b>, quants termes hi ha?`,answer:algNumAnswer(2),hint:['Els termes queden separats pels signes de suma o resta'],solution:[`Els termes són ${a}x i ${b}: en total, <b>2 termes</b>.`]});});
-algAdd('M6','monomis','monomis',2,()=>{const a=rnd(2,6),b=rnd(1,9),x=rnd(2,7),r=a*x+b;return algProblem({patternId:'M6',family:'monomis',topicId:'monomis',diff:2,question:`L'expressió <b>${a}x+${b}</b> té coeficient ${a} i terme independent ${b}. Quin valor numèric té si <b>x=${x}</b>?`,answer:algNumAnswer(r),hint:['Substitueix la variable pel valor indicat','Calcula el producte abans de sumar el terme independent'],solution:[`${a}·${x}+${b}=<b>${r}</b>.`]});});
+algAdd('M1','monomis','monomis',1,()=>{const a=[0,1,-1,-3,2,4,6,8][rnd(0,7)],term=a===1?'x':a===-1?'−x':a+'x';return algProblem({patternId:'M1',family:'monomis',topicId:'monomis',diff:1,question:`Quin és el coeficient del terme <b>${term}</b>?`,answer:algNumAnswer(a),hint:['El coeficient és el nombre que multiplica la part literal','El signe forma part del coeficient','Si no hi ha nombre escrit davant de x, el factor implícit és 1'],solution:[`El factor numèric de ${term} és <b>${a}</b>.`]});});
+algAdd('M2','monomis','monomis',1,()=>{const a=[-4,-2,2,5][rnd(0,3)],b=[-7,-3,3,8][rnd(0,3)],expr=(a<0?'−'+Math.abs(a):a)+'x '+(b<0?'− '+Math.abs(b):'+ '+b);return algProblem({patternId:'M2',family:'monomis',topicId:'monomis',diff:1,question:`Quin és el terme independent de <b>${expr}</b>?`,answer:algNumAnswer(b),hint:['Busca el terme que no conté cap lletra','Conserva el signe que acompanya el terme'],solution:[`El terme sense x és <b>${b}</b>.`]});});
+algAdd('M3','simplificacio','simplificacio',1,()=>{const a=rnd(2,8),b=rnd(2,8);return algProblem({patternId:'M3',family:'simplificacio',topicId:'simplificacio',diff:1,question:`Redueix els termes semblants: <b>${a}x + ${b}x</b>.`,answer:algExprAnswer(`${a+b}x`),hint:['Els dos termes tenen la mateixa part literal','Opera només els coeficients'],solution:[`${a}x+${b}x=(${a}+${b})x=<b>${a+b}x</b>.`]});});
+algAdd('M4','simplificacio','simplificacio',1,()=>{const a=rnd(5,12),b=rnd(1,a-1);return algProblem({patternId:'M4',family:'simplificacio',topicId:'simplificacio',diff:1,question:`Redueix: <b>${a}x − ${b}x</b>.`,answer:algExprAnswer(`${a-b}x`),hint:['Mantén la x i resta els coeficients'],solution:[`${a}x−${b}x=(${a}−${b})x=<b>${a-b}x</b>.`]});});
+algAdd('M5','monomis','monomis',1,()=>{const a=rnd(2,7),b=rnd(2,9),negative=rnd(0,1)===1;return algProblem({patternId:'M5',family:'monomis',topicId:'monomis',diff:1,question:`A l’expressió <b>${a}x ${negative?'−':'+'} ${b}</b>, quants termes hi ha?`,answer:algNumAnswer(2),hint:['Els termes queden separats pels signes de suma o resta','El signe no crea un terme addicional'],solution:[`Els termes són ${a}x i ${negative?'−':''}${b}: en total, <b>2 termes</b>.`]});});
+algAdd('M6','monomis','monomis',1,()=>{const a=rnd(2,6),b=rnd(1,9),x=rnd(2,7),r=a*x+b;return algProblem({patternId:'M6',family:'monomis',topicId:'monomis',diff:1,question:`L'expressió <b>${a}x+${b}</b> té coeficient ${a} i terme independent ${b}. Quin valor numèric té si <b>x=${x}</b>?`,answer:algNumAnswer(r),hint:['Substitueix la variable pel valor indicat','Calcula el producte abans de sumar el terme independent'],solution:[`${a}·${x}+${b}=<b>${r}</b>.`]});});
 
 // SIMPLIFICACIÓ (6)
 algAdd('S1','simplificacio','simplificacio',1,()=>{const a=rnd(2,8),b=rnd(2,8);return algProblem({patternId:'S1',family:'simplificacio',topicId:'simplificacio',diff:1,question:`Simplifica <b>${a}x + ${b}x</b>.`,answer:algExprAnswer(`${a+b}x`),hint:['Agrupa els termes que tenen la mateixa part literal'],solution:[`(${a}+${b})x=<b>${a+b}x</b>.`]});});
@@ -1905,21 +1891,28 @@ function algEligiblePatterns(family,diff,topicIds){
   const allowed=new Set(topicIds||algCoreIds());
   return ALG_OPEN_PATTERNS.filter(p=>allowed.has(p.topicId)&&(family==='mix'||p.family===family)&&(!diff||p.diff===diff));
 }
+function algPatternFamily(p){
+  const catalog=window.MIFirstAlgebraicFamilies;
+  return catalog?.topicSpecs(p.topicId)?.length?catalog.familyFor(p.topicId,{type:p.id,patternId:p.id})?.id||p.family:p.family;
+}
 function algPickProblems(n,family='mix',diff=0,topicIds=null){
   const pool=algEligiblePatterns(family,diff,topicIds);if(!pool.length)return [];
-  const chosen=[],used=new Set();let lastFamily=null,tries=0;
+  const chosen=[],used=new Set(),familyCounts=new Map();let lastFamily=null,tries=0;
   while(chosen.length<n&&used.size<pool.length&&tries<2000){
     tries++;
-    const candidates=pool.filter(p=>!used.has(p.id)&&(p.family!==lastFamily||pool.filter(x=>!used.has(x.id)&&x.family!==lastFamily).length===0));
+    let candidates=pool.filter(p=>!used.has(p.id));
+    const different=candidates.filter(p=>algPatternFamily(p)!==lastFamily);if(different.length)candidates=different;
+    const least=Math.min(...candidates.map(p=>familyCounts.get(algPatternFamily(p))||0));
+    candidates=candidates.filter(p=>(familyCounts.get(algPatternFamily(p))||0)===least);
     if(!candidates.length)break;
     const pat=candidates[rnd(0,candidates.length-1)];
     let prob;try{prob=pat.gen();}catch(e){continue;}
     if(!prob||!prob.answer||typeof prob.answer.check!=='function')continue;
-    used.add(pat.id);lastFamily=pat.family;chosen.push(prob);
+    used.add(pat.id);lastFamily=algPatternFamily(pat);familyCounts.set(lastFamily,(familyCounts.get(lastFamily)||0)+1);chosen.push(prob);
   }
   // Només repetim patrons si l'usuari demana més problemes que patrons disponibles.
   while(chosen.length<n&&pool.length&&tries<4000){
-    tries++;const pat=pool[rnd(0,pool.length-1)];let prob;try{prob=pat.gen();}catch(e){continue;}if(prob&&prob.answer)chosen.push(prob);
+    tries++;let candidates=pool.filter(p=>algPatternFamily(p)!==lastFamily);if(!candidates.length)candidates=pool;const least=Math.min(...candidates.map(p=>familyCounts.get(algPatternFamily(p))||0));candidates=candidates.filter(p=>(familyCounts.get(algPatternFamily(p))||0)===least);const pat=candidates[rnd(0,candidates.length-1)];let prob;try{prob=pat.gen();}catch(e){continue;}if(prob&&prob.answer){lastFamily=algPatternFamily(pat);familyCounts.set(lastFamily,(familyCounts.get(lastFamily)||0)+1);chosen.push(prob);}
   }
   return chosen;
 }
@@ -1986,6 +1979,7 @@ function algIntegratedOpenExercise(topicId){
   const p=picked[0];
   return {
     topicId:p.topicId,type:p.patternId,question:p.question,correct:p.answer.val,alts:[],options:[],
+    familyId:p.familyId,familyName:p.familyName,taskDifficulty:p.taskDifficulty,diff:p.diff,
     guide:[...(p.hint||[])],solution:[...(p.solution||[])],isProblem:true,
     _openAnswerCheck:p.answer.check
   };
