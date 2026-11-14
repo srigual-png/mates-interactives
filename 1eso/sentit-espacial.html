@@ -1101,7 +1101,7 @@ function genTriangles(){
     solution=[`${a}° + ${b}° = ${a+b}°.`,`180° − ${a+b}° = ${c}°.`,`✅ ${c}°`];
 
   }else if(q===4){
-    const triples=[[3,4,5,true],[5,5,8,true],[6,8,10,true],[2,3,6,false],[1,2,4,false],[4,4,4,true],[5,12,13,true],[3,3,7,false],[2,2,5,false],[7,8,9,true],[1,1,3,false]];
+    const triples=[[3,4,5,true],[5,5,8,true],[6,8,10,true],[2,3,6,false],[1,2,4,false],[4,4,4,true],[5,12,13,true],[3,3,7,false],[2,2,5,false],[7,8,9,true],[1,1,3,false],[3,4,7,false]];
     const [a,b,c,valid]=triples[rnd(0,triples.length-1)];
     question=`Els costats <b>${a} cm, ${b} cm i ${c} cm</b> poden formar un triangle?`;
     correct=valid?'Sí, formen un triangle':'No, no formen un triangle';
@@ -1786,7 +1786,7 @@ function genQuadrilatersVarietat(){
     const items=[
       {d:'4 costats iguals i 4 angles rectes',a:'Quadrat',w:['Rectangle','Rombe','Trapezi']},
       {d:'4 angles rectes i dos parells de costats oposats iguals, però no tots quatre iguals',a:'Rectangle',w:['Quadrat','Rombe','Romboide']},
-      {d:'4 costats iguals però els angles no han de ser rectes',a:'Rombe',w:['Quadrat','Rectangle','Trapezi']},
+      {d:'4 costats iguals i cap angle recte',a:'Rombe',w:['Quadrat','Rectangle','Trapezi']},
       {d:'dos parells de costats oposats paral·lels, sense ser rectangle ni rombe',a:'Romboide',w:['Trapezi','Rectangle','Quadrat']},
       {d:'exactament un parell de costats paral·lels',a:'Trapezi',w:['Romboide','Rectangle','Trapezoide']},
       {d:'cap parell de costats paral·lels',a:'Trapezoide',w:['Trapezi','Romboide','Rectangle']}
@@ -1864,7 +1864,12 @@ function genQuadrilatersVarietat(){
 // ── FILTRES CURRICULARS: 1r ESO / AMPLIACIÓ ─────────────────────────────
 // El generador original es conserva complet, però el bloc principal de 1r
 // només serveix els tipus que corresponen a 1r ESO.
+function genTriangleBaseAngle1r(){
+  const v=[40,50,60,70,80,100][rnd(0,5)],r=(180-v)/2,correct=`${r}°`;
+  return {topicId:'triangles',type:8,question:`Un triangle isòsceles té l’angle del vèrtex de <b>${v}°</b>. Quant mesura cadascun dels dos angles de la base?`,correct,options:uniq4(correct,[`${180-v}°`,`${v/2}°`,`${90-v/2}°`,`${r+10}°`]),guide:['En un triangle isòsceles, els dos angles de la base són iguals.','Resta l’angle del vèrtex de 180° i reparteix la diferència en dues parts iguals.'],solution:[`Suma dels angles de la base: 180° − ${v}° = ${180-v}°.`,`Cada angle: ${180-v}° ÷ 2 = ${correct}.`,`✅ ${correct}`],svg:''};
+}
 function genTriangles1r(){
+  if(rnd(0,5)===0)return genTriangleBaseAngle1r();
   const allowed=new Set([1,2,3,4,6]);
   let ex,tries=0;
   do{
@@ -1878,7 +1883,17 @@ function genQuadrilaters1r(){ return genQuadrilatersVarietat(); }
 
 function genPitagoresAmpliacio(){ return genPitagoresVarietat(); }
 
+function genCircleInverse1r(){
+  const r=rnd(3,12),c=Math.round(2*3.14*r*100)/100,fmt=n=>String(Number((Math.round(n*100)/100).toFixed(2))).replace('.',',');
+  const correct=`${r} cm`,circ=fmt(c);
+  return {topicId:'cercle',type:8,question:`Una circumferència té una longitud aproximada de <b>${circ} cm</b>. Usant π ≈ 3,14, quin radi té?`,correct,options:uniq4(correct,[`${2*r} cm`,`${fmt(c/3.14)} cm`,`${fmt(c/6.28+1)} cm`,`${r/2} cm`]),guide:['Parteix de C = 2 × π × r.','Divideix la longitud per 2 × 3,14 per aïllar el radi.'],solution:[`r = ${circ} ÷ (2 × 3,14).`,`✅ ${correct}`],svg:''};
+}
+function genCirclePiRatio1r(){
+  const d=[6,8,10,12,20][rnd(0,4)],c=+(3.14*d).toFixed(2),display=String(c).replace('.',',');
+  return {topicId:'cercle',type:9,question:`Una circumferència té diàmetre <b>${d} cm</b> i longitud aproximada <b>${display} cm</b>. Quin valor obtens en dividir la longitud pel diàmetre?`,correct:'3,14',options:uniq4('3,14',['3,41','3,00','3,40','3,10']),guide:['Divideix la longitud mesurada pel diàmetre.','El quocient és aproximadament el mateix per a totes les circumferències.'],solution:[`${display} ÷ ${d} ≈ <b>3,14</b>, que és una aproximació de π.`],svg:''};
+}
 function genCircle1r(){
+  const extra=rnd(0,5);if(extra===0)return genCircleInverse1r();if(extra===1)return genCirclePiRatio1r();
   const allowed=new Set([1,2,3,7]);
   let ex,tries=0;
   do{
@@ -2088,7 +2103,7 @@ const TOPICS=[
    theory:{title:'Polígons',text:'Un polígon és una figura plana tancada formada per segments. Es pot classificar pel nombre de costats, per la regularitat i segons si és convex o còncau.',
    formulas:['• Elements: costats, vèrtexs, angles interiors i diagonals','• Regular: tots els costats i tots els angles són iguals','• Convex: totes les diagonals queden a l’interior | Còncau: alguna diagonal surt de la figura','• Des d’un vèrtex es poden traçar diagonals cap als vèrtexs no consecutius','• La suma dels angles interiors es pot deduir descomponent el polígon en triangles','• Un polígon regular es pot construir repartint una volta completa en angles centrals iguals']},gen:genPoligons1r},
 
-  {id:'triangles',course:'1r',exam1r:true,examTypes:[1,2,3,4,6],icon:'🔺',name:'Triangles',short:'Classificació, angles, desigualtat i rectes notables',
+  {id:'triangles',course:'1r',exam1r:true,examTypes:[1,2,3,4,6,8],icon:'🔺',name:'Triangles',short:'Classificació, angles, desigualtat i rectes notables',
    theory:{title:'Triangles',text:'Polígon de 3 costats. La suma dels seus angles interiors és 180°.',
    formulas:['• Per costats: equilàter (3=), isòsceles (2=), escalè (cap=)','• Per angles: acutangle (<90°), rectangle (=90°), obtusangle (>90°)','• α+β+γ = 180°','• Desigualtat triangular: cada costat < suma dels altres dos','• Rectes notables: mediatriu→circumcentre | bisectriu→incentre | mediana→baricentre | altura→ortocentre']},gen:genTriangles1r},
 
@@ -2096,7 +2111,7 @@ const TOPICS=[
    theory:{title:'Quadrilàters',text:'Polígons de 4 costats. La suma dels angles interiors és 360°.',
    formulas:['• Paral·lelograms: quadrat, rectangle, rombe, romboide','• Quadrat: 4 costats iguals i 4 angles rectes','• Rectangle: 2 parells de costats iguals i 4 angles rectes','• Rombe: 4 costats iguals; angles no necessàriament rectes','• Romboide: 2 parells de costats paral·lels','• Trapezi: 1 parell de costats paral·lels | Trapezoide: cap parell','• Angles interiors: sumen 360°']},gen:genQuadrilaters1r},
 
-  {id:'cercle',course:'1r',exam1r:true,examTypes:[1,2,3,7],icon:'⭕',name:'Circumferència i cercle',short:'Centre, radi, diàmetre, longitud, π, arc, corda i sector',
+  {id:'cercle',course:'1r',exam1r:true,examTypes:[1,2,3,7,8,9],icon:'⭕',name:'Circumferència i cercle',short:'Centre, radi, diàmetre, longitud, π, arc, corda i sector',
    theory:{title:'Circumferència i cercle',text:'Circumferència = línia corba tancada. Cercle = circumferència i regió interior.',
    formulas:['• d = 2r','• Longitud de la circumferència = 2πr','• π és la raó entre la longitud de la circumferència i el diàmetre','• Arc: part de la circumferència','• Corda: segment entre dos punts de la circumferència','• Sector circular: regió limitada per dos radis i un arc','• π ≈ 3,14']},gen:genCircle1r},
 
@@ -2173,7 +2188,7 @@ const SP_OPEN_FAMILIES=[
 ];
 
 const SP_OPEN_PATTERNS=[];
-function spAdd(id,family,topicId,diff,gen){SP_OPEN_PATTERNS.push({id,family,topicId,diff,gen});}
+function spAdd(id,family,topicId,diff,gen){SP_OPEN_PATTERNS.push({id,family,topicId,diff,gen:function(...args){const q=gen.apply(this,args);return q&&window.MIFirstSpatialFamilies?.topicSpecs(topicId)?window.MIFirstSpatialFamilies.decorate(topicId,q):q;}});}
 
 // ELEMENTS I RECTES (5)
 spAdd('E1','elements','elements',1,()=>spProblem({patternId:'E1',family:'elements',topicId:'elements',diff:1,question:'En un plànol, el tram que uneix dos punts A i B té <b>dos extrems</b> i longitud finita. Quin element geomètric és?',answer:spTextAnswer('segment',['segment ab']),hint:['Fixa’t en el nombre d’extrems i si la figura és finita o infinita'],solution:['Un element amb dos extrems i longitud finita és un <b>segment</b>.']}));
@@ -2209,7 +2224,7 @@ spAdd('T6','triangles','triangles',2,()=>{const d=[['mediatriu','perpendicular a
 spAdd('T7','triangles','triangles',2,()=>{const d=[['mediatrius','circumcentre'],['bisectrius','incentre'],['medianes','baricentre'],['altures','ortocentre']][rnd(0,3)];return spProblem({patternId:'T7',family:'triangles',topicId:'triangles',diff:2,question:`Com s’anomena el punt on es tallen les tres <b>${d[0]}</b> d’un triangle?`,answer:spTextAnswer(d[1]),hint:['Recorda l’associació entre cada família de rectes notables i el seu punt d’intersecció'],solution:[`Les ${d[0]} es tallen al <b>${d[1]}</b>.`]});});
 
 // QUADRILÀTERS (6)
-spAdd('Q1','quadrilaters','quadrilaters',1,()=>{const d=[['quadrat','4 costats iguals i 4 angles rectes'],['rectangle','4 angles rectes i costats oposats iguals'],['rombe','4 costats iguals però angles no necessàriament rectes'],['romboide','dos parells de costats oposats paral·lels i angles no rectes'],['trapezi','exactament un parell de costats paral·lels'],['trapezoide','cap parell de costats paral·lels']][rnd(0,5)];return spProblem({patternId:'Q1',family:'quadrilaters',topicId:'quadrilaters',diff:1,question:`Identifica el quadrilàter: <b>${d[1]}</b>.`,answer:spTextAnswer(d[0]),hint:['Classifica primer segons el nombre de parells de costats paral·lels i després segons costats i angles'],solution:[`És un <b>${d[0]}</b>.`]});});
+spAdd('Q1','quadrilaters','quadrilaters',1,()=>{const d=[['quadrat','4 costats iguals i 4 angles rectes'],['rectangle','4 angles rectes, costats oposats iguals i no tots quatre costats iguals'],['rombe','4 costats iguals i cap angle recte'],['romboide','dos parells de costats oposats paral·lels i angles no rectes'],['trapezi','exactament un parell de costats paral·lels'],['trapezoide','cap parell de costats paral·lels']][rnd(0,5)];return spProblem({patternId:'Q1',family:'quadrilaters',topicId:'quadrilaters',diff:1,question:`Identifica el quadrilàter: <b>${d[1]}</b>.`,answer:spTextAnswer(d[0]),hint:['Classifica primer segons el nombre de parells de costats paral·lels i després segons costats i angles'],solution:[`És un <b>${d[0]}</b>.`]});});
 spAdd('Q2','quadrilaters','quadrilaters',1,()=>{const a=rnd(60,120),b=rnd(60,120),c=rnd(60,120),r=360-a-b-c;if(r<=20||r>=160)return SP_OPEN_PATTERNS.find(x=>x.id==='Q2').gen();return spProblem({patternId:'Q2',family:'quadrilaters',topicId:'quadrilaters',diff:1,question:`Tres angles interiors d’un quadrilàter mesuren <b>${a}°</b>, <b>${b}°</b> i <b>${c}°</b>. Quant mesura el quart?`,answer:spNumAnswer(r),hint:['La suma dels angles interiors de qualsevol quadrilàter és fixa','Resta els tres angles coneguts de la suma total'],solution:[`360° − ${a}° − ${b}° − ${c}° = <b>${r}°</b>.`]});});
 spAdd('Q3','quadrilaters','quadrilaters',1,()=>spProblem({patternId:'Q3',family:'quadrilaters',topicId:'quadrilaters',diff:1,question:'Un quadrilàter té <b>dos parells de costats oposats paral·lels</b>. A quina família pertany?',answer:spTextAnswer('paral·lelogram',['paralelogram','paral·lelograms','paralelogramos']),hint:['Classifica els quadrilàters segons quants parells de costats paral·lels tenen'],solution:['Pertany a la família dels <b>paral·lelograms</b>.']}));
 spAdd('Q4','quadrilaters','quadrilaters',2,()=>spProblem({patternId:'Q4',family:'quadrilaters',topicId:'quadrilaters',diff:2,question:'Quin quadrilàter té les diagonals <b>iguals i perpendiculars</b>, a més de quatre costats iguals i quatre angles rectes?',answer:spTextAnswer('quadrat'),hint:['Combina les propietats de costats, angles i diagonals; no n’utilitzis només una'],solution:['L’únic que compleix totes aquestes propietats és el <b>quadrat</b>.']}));
@@ -2222,7 +2237,7 @@ spAdd('C2','cercle','cercle',1,()=>{const r=rnd(2,15),d=2*r;return spProblem({pa
 spAdd('C3','cercle','cercle',2,()=>{const r=rnd(3,12),c=+(2*3.14*r).toFixed(2);return spProblem({patternId:'C3',family:'cercle',topicId:'cercle',diff:2,question:`Una roda té radi <b>${r} cm</b>. Calcula la longitud de la seva circumferència usant π ≈ 3,14.`,answer:spNumAnswer(c,.02),hint:['Relaciona la longitud de la circumferència amb el radi i el nombre π'],solution:[`2 × 3,14 × ${r} = <b>${String(c).replace('.',',')} cm</b>.`]});});
 spAdd('C4','cercle','cercle',2,()=>{const r=rnd(3,12),c=+(2*3.14*r).toFixed(2);return spProblem({patternId:'C4',family:'cercle',topicId:'cercle',diff:2,question:`Una circumferència mesura <b>${String(c).replace('.',',')} cm</b>. Usant π ≈ 3,14, quin és el seu radi?`,answer:spNumAnswer(r,.02),hint:['Desfés la fórmula de la longitud de la circumferència per aïllar el radi'],solution:[`${String(c).replace('.',',')} ÷ (2×3,14) = <b>${r} cm</b>.`]});});
 spAdd('C5','cercle','cercle',1,()=>{const d=[['radi','segment que uneix el centre amb un punt de la circumferència'],['diàmetre','corda que passa pel centre'],['corda','segment que uneix dos punts de la circumferència'],['arc','part de la circumferència compresa entre dos punts'],['sector circular','regió limitada per dos radis i l’arc que uneix els seus extrems']][rnd(0,4)];return spProblem({patternId:'C5',family:'cercle',topicId:'cercle',diff:1,question:`Quin element és: <b>${d[1]}</b>?`,answer:spTextAnswer(d[0],d[0]==='sector circular'?['sector']:[]),hint:['Diferencia els segments de les parts corbes i de les regions interiors'],solution:[`És el/la <b>${d[0]}</b>.`]});});
-spAdd('C6','cercle','cercle',2,()=>{const d=[6,8,10,12,20][rnd(0,4)],c=+(3.14*d).toFixed(2);return spProblem({patternId:'C6',family:'cercle',topicId:'cercle',diff:2,question:`Una circumferència té diàmetre <b>${d} cm</b> i longitud aproximada <b>${String(c).replace('.',',')} cm</b>. Quin valor obtens en dividir longitud entre diàmetre?`,answer:spNumAnswer(3.14,.02),hint:['Calcula la raó entre la longitud de la circumferència i el seu diàmetre','Aquesta raó és pràcticament constant en totes les circumferències'],solution:[`${String(c).replace('.',',')} ÷ ${d} ≈ <b>3,14</b> (π).`]});});
+spAdd('C6','cercle','cercle',1,()=>{const d=[6,8,10,12,20][rnd(0,4)],c=+(3.14*d).toFixed(2);return spProblem({patternId:'C6',family:'cercle',topicId:'cercle',diff:1,question:`Una circumferència té diàmetre <b>${d} cm</b> i longitud aproximada <b>${String(c).replace('.',',')} cm</b>. Quin valor obtens en dividir longitud entre diàmetre?`,answer:spNumAnswer(3.14,.02),hint:['Calcula la raó entre la longitud de la circumferència i el seu diàmetre','Aquesta raó és pràcticament constant en totes les circumferències'],solution:[`${String(c).replace('.',',')} ÷ ${d} ≈ <b>3,14</b> (π).`]});});
 
 // VISUALITZACIÓ I MODELITZACIÓ (5)
 spAdd('V1','visualitzacio','visualitzacio',1,()=>{const a=rnd(3,8),b=rnd(2,6),r=a*b;return spProblem({patternId:'V1',family:'visualitzacio',topicId:'visualitzacio',diff:1,question:`Un model rectangular té <b>${a} columnes</b> i <b>${b} files</b> de quadradets. Quants quadradets conté?`,svg:svgGridModel(a,b),answer:spNumAnswer(r),hint:['Interpreta les files i columnes com una multiplicació'],solution:[`${a} × ${b} = <b>${r}</b>.`]});});
@@ -2256,12 +2271,13 @@ function spBuildProblems(n,family='mix',diff=0,topicIds=null){
   if(!pool.length)return [];
   let chosen=[],used=new Set(),lastFamily=null,tries=0;
   while(chosen.length<n&&tries<3000){tries++;
-    let opts=pool.filter(p=>!used.has(p.id)&&p.family!==lastFamily);
-    if(!opts.length)opts=pool.filter(p=>!used.has(p.id));
-    if(!opts.length){used.clear();opts=pool.filter(p=>p.family!==lastFamily);if(!opts.length)opts=[...pool];}
-    const pat=opts[rnd(0,opts.length-1)];
-    const pr=pat.gen(); if(!pr)continue;
-    chosen.push(pr);used.add(pat.id);lastFamily=pat.family;
+    let candidates=pool.filter(p=>!used.has(p.id)).map(p=>({pat:p,problem:p.gen()})).filter(x=>x.problem);
+    let opts=candidates.filter(x=>(x.problem.familyId||x.pat.family)!==lastFamily);
+    if(!opts.length)opts=pool.map(p=>({pat:p,problem:p.gen()})).filter(x=>x.problem&&(x.problem.familyId||x.pat.family)!==lastFamily);
+    if(!opts.length){if(!candidates.length){used.clear();candidates=pool.map(p=>({pat:p,problem:p.gen()})).filter(x=>x.problem);}opts=candidates;}
+    if(!opts.length)break;
+    const {pat,problem}=opts[rnd(0,opts.length-1)],familyId=problem.familyId||pat.family;
+    chosen.push(problem);used.add(pat.id);lastFamily=familyId;
   }
   return chosen;
 }
@@ -2821,7 +2837,7 @@ function validGeneratedExercise(ex){
 }
 
 function practiceFamilyKey(t,ex){
-  return ['elements','angles','poligons'].includes(t.id)?(ex.familyId||ex.type):ex.type;
+  return ['elements','angles','poligons','triangles','quadrilaters','cercle'].includes(t.id)?(ex.familyId||ex.type):ex.type;
 }
 
 function generateVariedPracticeExercise(t){
