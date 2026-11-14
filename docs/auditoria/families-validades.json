@@ -2259,6 +2259,556 @@
           "note": "R08 i la ruta de catàleg són variants de la mateixa família N3; els 38 patrons contextuals no es compten com a 38 famílies noves."
         }
       ]
+    },
+    {
+      "id": "1eso/espacial/elements",
+      "course": "1r ESO",
+      "sense": "Espacial",
+      "topic": "Elements geomètrics bàsics",
+      "code_topic_id": "elements",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 33,
+      "merge_commit": "33ebff73eacab4c6288610fb40f23a9413825e93",
+      "validation": "Matemàtiques: 2.000 mostres. Playwright: 1.250 patrons contextuals i 1.000 pràctiques; rotació, exàmens, regressions, ancoratges i mòbil. Windows/Edge validat a la revisió final informada per l’usuari.",
+      "families": [
+        {
+          "id": "elements-geometria-bàsics",
+          "name": "Identificar punts, rectes, segments i semirectes",
+          "level": 1,
+          "generators": [
+            "genElementsVarietat:1",
+            "genElementsVarietat:7",
+            "genElementsVarietat:8:elements",
+            "E1"
+          ]
+        },
+        {
+          "id": "posicions-relatives-rectes",
+          "name": "Classificar la posició relativa de dues rectes",
+          "level": 1,
+          "generators": [
+            "genElementsVarietat:2",
+            "E2",
+            "E3"
+          ]
+        },
+        {
+          "id": "punt-mig-segment",
+          "name": "Calcular una meitat coneguda d’un segment",
+          "level": 1,
+          "generators": [
+            "genElementsVarietat:3"
+          ]
+        },
+        {
+          "id": "mediatriu-segment",
+          "name": "Identificar i aplicar la mediatriu d’un segment",
+          "level": 1,
+          "generators": [
+            "genElementsVarietat:4",
+            "genElementsVarietat:8:mediatriu",
+            "E4"
+          ]
+        },
+        {
+          "id": "bisectriu-angle",
+          "name": "Identificar i aplicar la bisectriu d’un angle",
+          "level": 1,
+          "generators": [
+            "genElementsVarietat:5",
+            "genElementsVarietat:8:bisectriu",
+            "E5"
+          ]
+        },
+        {
+          "id": "alineacio-i-incidencia",
+          "name": "Interpretar alineació i pertinença de punts",
+          "level": 1,
+          "generators": [
+            "genElementsVarietat:6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/espacial/angles",
+      "course": "1r ESO",
+      "sense": "Espacial",
+      "topic": "Angles: tipus i relacions",
+      "code_topic_id": "angles",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 33,
+      "merge_commit": "33ebff73eacab4c6288610fb40f23a9413825e93",
+      "validation": "Matemàtiques: 1.750 mostres. Playwright: 1.750 patrons contextuals i 1.000 pràctiques; relacions angulars, rotació, exàmens, regressions, ancoratges i mòbil. Windows/Edge validat a la revisió final informada per l’usuari.",
+      "families": [
+        {
+          "id": "classificar-amplitud-angle",
+          "name": "Classificar angles segons l’amplitud",
+          "level": 1,
+          "generators": [
+            "genAngles:1",
+            "A1"
+          ]
+        },
+        {
+          "id": "angle-que-falta",
+          "name": "Calcular l’angle que falta en una suma coneguda",
+          "level": 1,
+          "generators": [
+            "genAngles:2",
+            "genAngles:3",
+            "genAngles:5",
+            "A2",
+            "A3",
+            "A7"
+          ]
+        },
+        {
+          "id": "completar-volta-amb-tres-angles",
+          "name": "Completar una volta després de combinar tres angles coneguts",
+          "level": 2,
+          "generators": [
+            "A6"
+          ]
+        },
+        {
+          "id": "oposats-pel-vertex",
+          "name": "Aplicar la igualtat dels angles oposats pel vèrtex",
+          "level": 1,
+          "generators": [
+            "genAngles:4",
+            "A4"
+          ]
+        },
+        {
+          "id": "relacions-angles-paral-leles",
+          "name": "Aplicar relacions d’angles en paral·leles amb transversal",
+          "level": 2,
+          "generators": [
+            "genAngles:6",
+            "A5"
+          ]
+        },
+        {
+          "id": "angle-interior-regular",
+          "name": "Calcular l’angle interior d’un polígon regular",
+          "level": 2,
+          "generators": [
+            "genAngles:7",
+            "P5"
+          ],
+          "note": "Família compartida amb Polígons."
+        }
+      ]
+    },
+    {
+      "id": "1eso/espacial/poligons",
+      "course": "1r ESO",
+      "sense": "Espacial",
+      "topic": "Polígons",
+      "code_topic_id": "poligons",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 33,
+      "merge_commit": "33ebff73eacab4c6288610fb40f23a9413825e93",
+      "validation": "Matemàtiques: 2.000 mostres. Playwright: 1.500 patrons contextuals i 1.000 pràctiques; fórmules d’angles, diagonals, rotació, exàmens, ancoratges i mòbil. Windows/Edge validat a la revisió final informada per l’usuari.",
+      "families": [
+        {
+          "id": "nom-i-costats-poligon",
+          "name": "Relacionar el nom d’un polígon amb el nombre de costats",
+          "level": 1,
+          "generators": [
+            "genPoligons1r:1",
+            "genPoligons1r:2",
+            "P1"
+          ]
+        },
+        {
+          "id": "elements-poligon",
+          "name": "Identificar elements i definició de polígon",
+          "level": 1,
+          "generators": [
+            "genPoligons1r:8"
+          ]
+        },
+        {
+          "id": "regularitat-poligons",
+          "name": "Distingir polígons regulars i irregulars",
+          "level": 1,
+          "generators": [
+            "genPoligons1r:3"
+          ]
+        },
+        {
+          "id": "convexitat-poligons",
+          "name": "Distingir polígons convexos i còncaus",
+          "level": 1,
+          "generators": [
+            "genPoligons1r:4"
+          ]
+        },
+        {
+          "id": "diagonals-des-dun-vertex",
+          "name": "Comptar diagonals des d’un vèrtex",
+          "level": 1,
+          "generators": [
+            "genPoligons1r:5",
+            "P2"
+          ]
+        },
+        {
+          "id": "triangulacio-des-dun-vertex",
+          "name": "Comptar triangles en la triangulació des d’un vèrtex",
+          "level": 1,
+          "generators": [
+            "P3"
+          ]
+        },
+        {
+          "id": "suma-angles-interiors",
+          "name": "Calcular la suma dels angles interiors",
+          "level": 2,
+          "generators": [
+            "genPoligons1r:6",
+            "P4"
+          ]
+        },
+        {
+          "id": "angle-interior-regular",
+          "name": "Calcular l’angle interior d’un polígon regular",
+          "level": 2,
+          "generators": [
+            "P5"
+          ],
+          "note": "Família compartida amb Angles."
+        },
+        {
+          "id": "repartir-volta-poligon-regular",
+          "name": "Relacionar angles centrals i nombre de costats",
+          "level": 2,
+          "generators": [
+            "genPoligons1r:7",
+            "P6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/espacial/triangles",
+      "course": "1r ESO",
+      "sense": "Espacial",
+      "topic": "Triangles",
+      "code_topic_id": "triangles",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 34,
+      "merge_commit": "cb7e7f233e84f49ea55dff2d97f1a17e96341608",
+      "validation": "Matemàtiques: 1.500 mostres, 1.000 de wrapper i cas límit. Playwright: 1.750 patrons contextuals i 1.000 pràctiques; desigualtat, rotació, exàmens, ancoratges i mòbil. Windows/Edge validat a la revisió final informada per l’usuari.",
+      "families": [
+        {
+          "id": "classificar-costats-triangle",
+          "name": "Classificar un triangle segons els costats",
+          "level": 1,
+          "generators": [
+            "genTriangles1r:1",
+            "T2"
+          ]
+        },
+        {
+          "id": "classificar-angles-triangle",
+          "name": "Classificar un triangle segons els angles",
+          "level": 1,
+          "generators": [
+            "genTriangles1r:2",
+            "T3"
+          ]
+        },
+        {
+          "id": "angle-que-falta",
+          "name": "Calcular l’angle que falta en una suma coneguda",
+          "level": 1,
+          "generators": [
+            "genTriangles1r:3",
+            "T1"
+          ],
+          "note": "Família compartida amb Angles."
+        },
+        {
+          "id": "desigualtat-triangular",
+          "name": "Decidir si tres longituds poden formar un triangle",
+          "level": 2,
+          "generators": [
+            "genTriangles1r:4",
+            "T4"
+          ]
+        },
+        {
+          "id": "angles-base-isosceles",
+          "name": "Calcular els angles de la base d’un triangle isòsceles",
+          "level": 2,
+          "generators": [
+            "genTriangles1r:8",
+            "T5"
+          ]
+        },
+        {
+          "id": "mediatriu-segment",
+          "name": "Identificar la mediatriu d’un costat de triangle",
+          "level": 1,
+          "generators": [
+            "genTriangles1r:6:mediatriu",
+            "T6"
+          ],
+          "note": "Família compartida amb Elements geomètrics."
+        },
+        {
+          "id": "bisectriu-angle",
+          "name": "Identificar la bisectriu d’un angle de triangle",
+          "level": 1,
+          "generators": [
+            "genTriangles1r:6:bisectriu",
+            "T6"
+          ],
+          "note": "Família compartida amb Elements geomètrics."
+        },
+        {
+          "id": "mediana-triangle",
+          "name": "Identificar la mediana d’un triangle",
+          "level": 1,
+          "generators": [
+            "genTriangles1r:6:mediana",
+            "T6"
+          ]
+        },
+        {
+          "id": "altura-triangle",
+          "name": "Identificar l’altura d’un triangle",
+          "level": 1,
+          "generators": [
+            "genTriangles1r:6:altura",
+            "T6"
+          ]
+        },
+        {
+          "id": "centres-rectes-notables-triangle",
+          "name": "Relacionar rectes notables i centres d’un triangle",
+          "level": 1,
+          "generators": [
+            "genTriangles1r:6:centres",
+            "T7"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/espacial/quadrilaters",
+      "course": "1r ESO",
+      "sense": "Espacial",
+      "topic": "Quadrilàters",
+      "code_topic_id": "quadrilaters",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 34,
+      "merge_commit": "cb7e7f233e84f49ea55dff2d97f1a17e96341608",
+      "validation": "Matemàtiques: 1.500 mostres i cas límit. Playwright: 1.500 patrons contextuals i 1.000 pràctiques; classificació, angles, rotació, exàmens, ancoratges i mòbil. Windows/Edge validat a la revisió final informada per l’usuari.",
+      "families": [
+        {
+          "id": "classificar-quadrilaters-per-propietats",
+          "name": "Classificar quadrilàters i reconèixer-ne les propietats definidores",
+          "level": 1,
+          "generators": [
+            "genQuadrilaters1r:1",
+            "genQuadrilaters1r:4",
+            "genQuadrilaters1r:5",
+            "Q1",
+            "Q3",
+            "Q4",
+            "Q5",
+            "Q6"
+          ]
+        },
+        {
+          "id": "propietats-diagonals-quadrilaters",
+          "name": "Comparar longitud, perpendicularitat i punt mig de les diagonals",
+          "level": 2,
+          "generators": [
+            "genQuadrilaters1r:2"
+          ]
+        },
+        {
+          "id": "angle-interior-quadrilater",
+          "name": "Calcular l’angle que falta en un quadrilàter",
+          "level": 2,
+          "generators": [
+            "genQuadrilaters1r:3",
+            "Q2"
+          ]
+        },
+        {
+          "id": "suma-angles-quadrilater",
+          "name": "Reconèixer la suma dels angles interiors d’un quadrilàter",
+          "level": 1,
+          "generators": [
+            "genQuadrilaters1r:6:suma"
+          ]
+        },
+        {
+          "id": "elements-quadrilater",
+          "name": "Reconèixer i comptar costats, vèrtexs i diagonals",
+          "level": 1,
+          "generators": [
+            "genQuadrilaters1r:6:elements"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/espacial/cercle",
+      "course": "1r ESO",
+      "sense": "Espacial",
+      "topic": "Circumferència i cercle",
+      "code_topic_id": "cercle",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 34,
+      "merge_commit": "cb7e7f233e84f49ea55dff2d97f1a17e96341608",
+      "validation": "Matemàtiques: 1.500 mostres i 1.000 de wrapper. Playwright: 1.500 patrons contextuals, 1.000 pràctiques i comprovacions SVG/etiquetes, exàmens, ancoratges i mòbil. Windows/Edge validat a la revisió final informada per l’usuari.",
+      "families": [
+        {
+          "id": "elements-circumferencia-cercle",
+          "name": "Distingir la circumferència i identificar-ne els elements",
+          "level": 1,
+          "generators": [
+            "genCircle1r:1",
+            "genCircle1r:7",
+            "C5"
+          ]
+        },
+        {
+          "id": "relacio-radi-diametre",
+          "name": "Relacionar el radi i el diàmetre",
+          "level": 1,
+          "generators": [
+            "genCircle1r:1:relacio",
+            "genCircle1r:2",
+            "C1",
+            "C2"
+          ],
+          "note": "Relació entre radi i diàmetre pròpia del tema; no hi ha un ID de família coincident en els registres Numèric o Mesura."
+        },
+        {
+          "id": "circumferencia-directa",
+          "name": "Calcular la longitud d’una circumferència",
+          "level": 2,
+          "generators": [
+            "genCircle1r:3",
+            "C3"
+          ],
+          "note": "Família compartida amb Perímetres."
+        },
+        {
+          "id": "circumferencia-inversa",
+          "name": "Reconstruir el radi a partir de la longitud d’una circumferència",
+          "level": 2,
+          "generators": [
+            "genCircle1r:8",
+            "C4"
+          ],
+          "note": "Família compartida amb Perímetres."
+        },
+        {
+          "id": "raio-circumferencia-diametre",
+          "name": "Aproximar π amb la raó entre circumferència i diàmetre",
+          "level": 1,
+          "generators": [
+            "genCircle1r:9",
+            "C6"
+          ],
+          "note": "Família compartida amb Mesurament i precisió."
+        }
+      ]
+    },
+    {
+      "id": "1eso/espacial/visualitzacio",
+      "course": "1r ESO",
+      "sense": "Espacial",
+      "topic": "Visualització i modelització geomètrica",
+      "code_topic_id": "visualitzacio",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 35,
+      "merge_commit": "13e16701b8febc46bedda9c44bb3543292729939",
+      "validation": "Matemàtiques: 4.000 mostres fixes (1.750 pràctica, 1.250 contextuals i 1.000 wrapper). Playwright: 1.000 pràctiques, 1.250 contextuals, rotació, exàmens, SVG, ancoratges i mòbil. Windows/Edge validat a la revisió final informada per l’usuari.",
+      "families": [
+        {
+          "id": "producte-base-alcada",
+          "name": "Calcular un producte amb un model rectangular de files i columnes",
+          "level": 1,
+          "generators": [
+            "genVisualitzacio1r:1",
+            "V1"
+          ],
+          "note": "Família compartida amb Àrees."
+        },
+        {
+          "id": "distributiva-model-rectangle",
+          "name": "Interpretar visualment la propietat distributiva en un rectangle descompost",
+          "level": 2,
+          "generators": [
+            "genVisualitzacio1r:2",
+            "V2"
+          ]
+        },
+        {
+          "id": "calcular-potencia",
+          "name": "Representar el quadrat d’un nombre amb l’àrea d’un quadrat",
+          "level": 1,
+          "generators": [
+            "genVisualitzacio1r:3"
+          ],
+          "note": "Família compartida amb Potències i arrels."
+        },
+        {
+          "id": "arrel-exacta-i-relacio-inversa",
+          "name": "Reconstruir el costat d’un quadrat a partir de l’àrea",
+          "level": 1,
+          "generators": [
+            "genVisualitzacio1r:4",
+            "V3"
+          ],
+          "note": "Família compartida amb Potències i arrels."
+        },
+        {
+          "id": "suma-senars-model-quadrat",
+          "name": "Interpretar la suma de senars com la construcció de capes d’un quadrat",
+          "level": 2,
+          "generators": [
+            "genVisualitzacio1r:5",
+            "V4"
+          ]
+        },
+        {
+          "id": "producte-fraccions",
+          "name": "Calcular el producte de fraccions representat per una intersecció rectangular",
+          "level": 1,
+          "generators": [
+            "genVisualitzacio1r:6",
+            "V5"
+          ],
+          "note": "Família compartida amb Fraccions."
+        },
+        {
+          "id": "compondre-arees-figures",
+          "name": "Reconstruir una àrea desconeguda a partir del total i la part coneguda",
+          "level": 2,
+          "generators": [
+            "genVisualitzacio1r:7"
+          ],
+          "note": "Família compartida amb Àrees."
+        }
+      ]
     }
   ]
 }
