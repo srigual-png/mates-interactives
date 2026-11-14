@@ -44,7 +44,8 @@ async function main(){
     if(rotation.length)check(rotation[rotation.length-1]!==key,'no consecutive repeated conversion family');
     ids.add(key);rotation.push(key);
    }
-   check(specs.every(f=>ids.has(f.id)),'all seven families reached');
+   const absentFamilies=specs.filter(f=>!ids.has(f.id)).map(f=>f.id);
+   check(absentFamilies.length===0,'all seven families reached; absent='+JSON.stringify(absentFamilies)+'; observed='+JSON.stringify(Object.fromEntries([...ids].map(id=>[id,rotation.filter(x=>x===id).length]))));
    check(M.conversionsFamilyInfo('mesura-mixta').id===M.metricFamilyInfo('mesura-mixta').id,'mixed-measure family shared with metric');
    const cSamples={};
    for(const make of MEASURE_PROBLEM_PATTERNS){const q=make();if(/^C0[1-6]$/.test(q.type))cSamples[q.type]=q.primaryTopic;}

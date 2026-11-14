@@ -43,7 +43,8 @@ async function main(){
     if(q.question.includes('endemà'))overnight++;
     ids.add(key);trace.push(key);
    }
-   check(specs.every(f=>ids.has(f.id)),'all families reached');
+   const absentFamilies=specs.filter(f=>!ids.has(f.id)).map(f=>f.id);
+   check(absentFamilies.length===0,'all families reached; absent='+JSON.stringify(absentFamilies)+'; observed='+JSON.stringify(Object.fromEntries([...ids].map(id=>[id,trace.filter(x=>x===id).length]))));
    check(overnight>0,'practice includes explicit overnight variants');
    check(NEEDED_LVL1===8&&NEEDED_LVL2===15,'existing practice progression unchanged');
    const tPatterns={};

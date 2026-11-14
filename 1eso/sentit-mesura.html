@@ -642,7 +642,7 @@ function takeVariedExercise(key,make,cycleSize=60){
     fallback=ex;
     const qKey=String(ex&&ex.question!==undefined?ex.question:'');
     const repeated=st.seen.has(qKey);
-    const identity=(key==='metric'||key==='conversions'||key==='temps')?(ex&&(ex.metricFamily||ex.conversionsFamily||ex.timeFamily||ex.familyId||ex.type)):ex&&ex.type;
+    const identity=(key==='metric'||key==='conversions'||key==='temps'||key==='problemes')?(ex&&(ex.metricFamily||ex.conversionsFamily||ex.timeFamily||ex.contextualFamily||ex.familyId||ex.type)):ex&&ex.type;
     const sameType=st.lastType!==null&&identity===st.lastType;
 
     if(!repeated&&!sameType){
@@ -659,7 +659,7 @@ function takeVariedExercise(key,make,cycleSize=60){
     const qKey=String(ex&&ex.question!==undefined?ex.question:'');
     if(!st.seen.has(qKey)){
       st.seen.add(qKey);
-      st.lastType=(key==='metric'||key==='conversions'||key==='temps')?(ex.metricFamily||ex.conversionsFamily||ex.timeFamily||ex.familyId||ex.type):ex.type;
+      st.lastType=(key==='metric'||key==='conversions'||key==='temps'||key==='problemes')?(ex.metricFamily||ex.conversionsFamily||ex.timeFamily||ex.contextualFamily||ex.familyId||ex.type):ex.type;
       return ex;
     }
   }
@@ -1244,61 +1244,61 @@ function crearBossaEstimacio(){
 
     {
       type:4,
-      obj:'una postal (15×10 cm)',
+      obj:'una postal',
       real:'150 cm²',
       w:['15 cm²','1500 cm²','50 cm²']
     },
     {
       type:4,
-      obj:'una porta (2×0,8 m)',
+      obj:'una porta interior',
       real:'1,6 m²',
       w:['0,16 m²','8 m²','16 m²']
     },
     {
       type:4,
-      obj:'una taula de classe (60×40 cm)',
+      obj:'una taula de classe',
       real:'2400 cm²',
       w:['240 cm²','24000 cm²','600 cm²']
     },
     {
       type:4,
-      obj:'un camp de futbol (100×60 m)',
+      obj:'un camp de futbol',
       real:'6000 m²',
       w:['600 m²','60000 m²','16000 m²']
     },
     {
       type:4,
-      obj:'una llibreta (20×15 cm)',
+      obj:'una llibreta',
       real:'300 cm²',
       w:['35 cm²','3000 cm²','150 cm²']
     },
     {
       type:4,
-      obj:'una habitació (4×3 m)',
+      obj:'una habitació',
       real:'12 m²',
       w:['7 m²','1,2 m²','120 m²']
     },
     {
       type:4,
-      obj:'una rajola quadrada (30×30 cm)',
+      obj:'una rajola quadrada mitjana',
       real:'900 cm²',
       w:['60 cm²','90 cm²','9000 cm²']
     },
     {
       type:4,
-      obj:'una catifa (2×3 m)',
+      obj:'una catifa de sala',
       real:'6 m²',
       w:['5 m²','0,6 m²','60 m²']
     },
     {
       type:4,
-      obj:'una finestra (1,2×1 m)',
+      obj:'una finestra',
       real:'1,2 m²',
       w:['0,12 m²','2,2 m²','12 m²']
     },
     {
       type:4,
-      obj:'una pissarra (2×1 m)',
+      obj:'una pissarra d’aula',
       real:'2 m²',
       w:['1 m²','3 m²','20 m²']
     }
@@ -1389,12 +1389,12 @@ function genEstimacio(){
     question=`Quina àrea aproximada té ${item.obj}?`;
 
     guide=[
-      'Identifica les dues dimensions que determinen la superfície.',
-      'Multiplica les dues dimensions per obtenir l’àrea.',
-      'Comprova que la unitat final és una unitat quadrada.'
+      'Compara la superfície amb una referència coneguda, com una rajola o una taula.',
+      'Decideix quin ordre de magnitud és raonable abans d’escollir.',
+      'Comprova que la resposta usa unitats quadrades i no lineals.'
     ];
 
-    difficulty='medium';
+    difficulty='easy';
   }
 
   const options=shuffle([
@@ -1404,6 +1404,10 @@ function genEstimacio(){
 
   return {
     type:item.type,
+    estimateFamily:'estimacio-per-referents',
+    familyId:'estimacio-per-referents',
+    taskDifficulty:1,
+    diff:1,
     question,
     correct:item.real,
     options,
@@ -1683,18 +1687,22 @@ const MEASURE_PROBLEM_PATTERNS=[
   ()=>{const L=rnd(50,100),W=rnd(20,50),laps=[3,5,8,10][rnd(0,3)],per=2*(L+W),km=per*laps/1000;
     return numProblem('I04','Integrats','perimetres','medium',`Una pista rectangular fa ${L} m per ${W} m. Una persona hi fa ${laps} voltes completes. Quants quilòmetres recorre?`,km,'km',[per*laps,km*2,km/10],[`Calcula el perímetre d'una volta`,`Multiplica pel nombre de voltes`,`Converteix metres a quilòmetres`],[`Una volta = ${per} m`,`${laps} voltes = ${per*laps} m`,`= ${fmtNum(km)} km`,`✅ ${fmtNum(km)} km`]);},
   ()=>{const L=[3,4,5,6][rnd(0,3)],total=L*1000;let cup;do{cup=[200,250,300,350,450,500][rnd(0,5)];}while(total%cup===0);const cups=Math.floor(total/cup);
-    return numProblem('I05','Integrats','metric','medium',`Hi ha ${L} l de suc i es serveix en gots de ${cup} ml. Quants gots complets es poden omplir?`,cups,'gots',[L,Math.ceil(total/cup),Math.floor(total/(cup*2)),Math.floor(total/(cup/2)),Math.floor(total/(cup*10))],[`Converteix els litres a mil·lilitres`,`Divideix per la capacitat de cada got`,`Com que es demanen gots complets, no comptis un got parcial`],[`${L} l = ${total} ml`,`${total} ÷ ${cup} = ${fmtNum(total/cup)}`,`✅ ${cups} gots complets`]);},
+    return numProblem('I05','Integrats','conversions','medium',`Hi ha ${L} l de suc i es serveix en gots de ${cup} ml. Quants gots complets es poden omplir?`,cups,'gots',[L,Math.ceil(total/cup),Math.floor(total/(cup*2)),Math.floor(total/(cup/2)),Math.floor(total/(cup*10))],[`Converteix els litres a mil·lilitres`,`Divideix per la capacitat de cada got`,`Com que es demanen gots complets, no comptis un got parcial`],[`${L} l = ${total} ml`,`${total} ÷ ${cup} = ${fmtNum(total/cup)}`,`✅ ${cups} gots complets`]);},
   ()=>{const L=rnd(8,15),W=rnd(5,10),fence=[12,15,18][rnd(0,2)],grass=[4,5,6][rnd(0,2)],per=2*(L+W),area=L*W,cost=per*fence+area*grass;
     return numProblem('I06','Integrats','arees','hard',`Un jardí rectangular de ${L}×${W} m s'ha de tancar a ${fence} €/m i cobrir de gespa a ${grass} €/m². Quin és el cost total?`,cost,'€',[per*fence,area*grass,L*W*fence,per*grass+area*fence,cost/2,cost*2],[`Calcula el perímetre per al cost de la tanca`,`Calcula l'àrea per al cost de la gespa`,`Suma els dos costos`],[`Tanca: ${per}×${fence}=${per*fence} €`,`Gespa: ${area}×${grass}=${area*grass} €`,`Total = ${cost} €`,`✅ ${cost} €`]);}
 ];
 
-let MEASURE_PROBLEM_PATTERN_BAG=[];
-function resetMeasureProblemBag(){MEASURE_PROBLEM_PATTERN_BAG=[];}
+let MEASURE_PROBLEM_PATTERN_BAG=[],lastMeasureProblemFamily=null;
+function resetMeasureProblemBag(){MEASURE_PROBLEM_PATTERN_BAG=[];lastMeasureProblemFamily=null;}
 function nextMeasureProblemPattern(){
   if(MEASURE_PROBLEM_PATTERN_BAG.length===0){
-    MEASURE_PROBLEM_PATTERN_BAG=shuffle(MEASURE_PROBLEM_PATTERNS.map((_,i)=>i));
+    MEASURE_PROBLEM_PATTERN_BAG=shuffle(MEASURE_PROBLEM_CONTEXT_PATTERNS.map((_,i)=>i));
   }
-  return MEASURE_PROBLEM_PATTERNS[MEASURE_PROBLEM_PATTERN_BAG.pop()];
+  let pos=MEASURE_PROBLEM_PATTERN_BAG.length-1,chosen=MEASURE_PROBLEM_PATTERN_BAG[pos],sample=MEASURE_PROBLEM_CONTEXT_PATTERNS[chosen]();
+  if(lastMeasureProblemFamily&&sample.familyId===lastMeasureProblemFamily&&MEASURE_PROBLEM_PATTERN_BAG.length>1){
+    for(let i=pos-1;i>=0;i--){const candidate=MEASURE_PROBLEM_CONTEXT_PATTERNS[MEASURE_PROBLEM_PATTERN_BAG[i]]();if(candidate.familyId!==lastMeasureProblemFamily){pos=i;chosen=MEASURE_PROBLEM_PATTERN_BAG[i];sample=candidate;break;}}
+  }
+  MEASURE_PROBLEM_PATTERN_BAG.splice(pos,1);lastMeasureProblemFamily=sample.familyId||sample.type;return ()=>sample;
 }
 function genProblemesRaw(){return nextMeasureProblemPattern()();}
 
@@ -1946,7 +1954,12 @@ const TOPICS=[
     },gen:genVolumCapacitat
   }
 ];
+const MEASURE_CONTEXT_PATTERN_COUNT=MEASURE_PROBLEM_PATTERNS.length;
+let MEASURE_PROBLEM_CONTEXT_PATTERNS=[];
 MIFirstMeasureTasks.extend(TOPICS,MEASURE_PROBLEM_PATTERNS);
+MEASURE_PROBLEM_CONTEXT_PATTERNS=MEASURE_PROBLEM_PATTERNS.slice(0,MEASURE_CONTEXT_PATTERN_COUNT);
+const MEASURE_PROBLEM_N3_PATTERN=MEASURE_PROBLEM_PATTERNS.find(make=>String(make().type)==='R08');
+if(MEASURE_PROBLEM_N3_PATTERN)MEASURE_PROBLEM_CONTEXT_PATTERNS.push(MEASURE_PROBLEM_N3_PATTERN);
 window.miTaskDifficulty=MIDifficulty.attach({course:'1eso',sense:'mesura',topics:TOPICS,option:()=>typeof MATH_OPTION!=='undefined'?MATH_OPTION:null,examFilter:t=>typeof isExamTopic==='function'?isExamTopic(t):true});
 
 
@@ -2468,15 +2481,15 @@ function decorateMeasureProblem(ex){
   return ex;
 }
 function buildOpenProblemSet(n){
-  const idxs=shuffle(MEASURE_PROBLEM_PATTERNS.map((_,i)=>i));
+  const idxs=shuffle(MEASURE_PROBLEM_CONTEXT_PATTERNS.map((_,i)=>i));
   const chosen=[];let lastFamily=null;
   while(chosen.length<n&&idxs.length){
     let pos=idxs.findIndex(i=>{
-      const ex=MEASURE_PROBLEM_PATTERNS[i]();
+      const ex=MEASURE_PROBLEM_CONTEXT_PATTERNS[i]();
       return ex.family!==lastFamily;
     });
     if(pos<0)pos=0;
-    const i=idxs.splice(pos,1)[0],ex=decorateMeasureProblem(MEASURE_PROBLEM_PATTERNS[i]());
+    const i=idxs.splice(pos,1)[0],ex=decorateMeasureProblem(MEASURE_PROBLEM_CONTEXT_PATTERNS[i]());
     chosen.push(ex);lastFamily=ex.family;
   }
   return chosen;
@@ -2486,7 +2499,7 @@ function showOpenProblemsHome(){
   document.getElementById('navTitle').textContent='Problemes oberts · Mesura';
   document.getElementById('appContent').innerHTML=`
     <div class="home-header" style="padding-top:10px"><h2>✍️ Problemes oberts</h2><p>Interpreta, calcula i escriu la resposta sense opcions.</p></div>
-    <div class="intro-card"><p>El banc conté <strong>${MEASURE_PROBLEM_PATTERNS.length} patrons diferents</strong> de conversions, temps, perímetres, àrees, escales, precisió i situacions de cost. Les pistes indiquen el procediment, però no revelen els resultats.</p></div>
+    <div class="intro-card"><p>El banc conté <strong>${MEASURE_PROBLEM_CONTEXT_PATTERNS.length} patrons diferents</strong> de conversions, temps, perímetres, àrees, escales, precisió i situacions de cost. Les pistes indiquen el procediment, però no revelen els resultats.</p></div>
     <div class="app-card"><h3>Quants problemes vols fer?</h3><p>La sessió intenta no repetir ni patró ni família consecutivament.</p>
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <button class="btn-app" style="flex:1;min-width:90px" onclick="startOpenProblems(5)">5 problemes</button>
@@ -2498,7 +2511,7 @@ function showOpenProblemsHome(){
   showScreen('screenApp');
 }
 function startOpenProblems(n){window.MIAnalytics?.start('open');
-  OPENM={queue:buildOpenProblemSet(Math.min(n,MEASURE_PROBLEM_PATTERNS.length)),idx:0,results:[],nq:n,hint:false};
+  OPENM={queue:buildOpenProblemSet(Math.min(n,MEASURE_PROBLEM_CONTEXT_PATTERNS.length)),idx:0,results:[],nq:n,hint:false};
   renderOpenProblem();showScreen('screenApp');
 }
 function renderOpenProblem(){window.MIAnalytics?.shown(OPENM.queue[OPENM.idx].topicId);
