@@ -3,6 +3,7 @@
 <html lang="ca">
 <head>
 <script src="../assets/js/dificultat-mi.js"></script>
+<script src="../assets/js/estocastic-1eso-families.js"></script>
 <link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
 <meta charset="utf-8"/>
@@ -553,6 +554,14 @@ function svgBarChart(cats,vals,highlightIdx){
   return '<svg viewBox="0 0 '+w+' '+h+'" style="width:100%;max-width:320px;display:block;margin:4px auto">'+bars+'</svg>';
 }
 
+function svgScaledBarChart(cats,vals,step){
+  var w=360,h=190,padL=42,padR=8,padT=12,padB=34,maxV=step*5,plotH=h-padT-padB,n=cats.length,gap=(w-padL-padR)/n,bw=gap*0.62,html='';
+  for(var tick=0;tick<=5;tick++){var value=tick*step,y=h-padB-(value/maxV)*plotH;html+='<line x1="'+padL+'" y1="'+y.toFixed(1)+'" x2="'+(w-padR)+'" y2="'+y.toFixed(1)+'" stroke="var(--border)" stroke-width="1"/><text x="'+(padL-5)+'" y="'+(y+3).toFixed(1)+'" font-size="9" text-anchor="end" fill="var(--muted)">'+value+'</text>';}
+  for(var i=0;i<n;i++){var bh=vals[i]/maxV*plotH,x=padL+i*gap+(gap-bw)/2,y=h-padB-bh;html+='<rect data-category="'+cats[i]+'" data-frequency="'+vals[i]+'" x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+bh.toFixed(1)+'" rx="3" fill="var(--primary)"/><text x="'+(x+bw/2).toFixed(1)+'" y="'+(h-padB+14)+'" font-size="9" text-anchor="middle" fill="var(--muted)">'+cats[i]+'</text>';}
+  html+='<line x1="'+padL+'" y1="'+padT+'" x2="'+padL+'" y2="'+(h-padB)+'" stroke="var(--text)"/><text x="'+(padL/2)+'" y="'+(h/2)+'" font-size="9" text-anchor="middle" fill="var(--muted)" transform="rotate(-90 '+(padL/2)+' '+(h/2)+')">Freqüència</text>';
+  return '<svg role="img" aria-label="Diagrama de barres amb escala vertical de '+step+' en '+step+'" viewBox="0 0 '+w+' '+h+'" style="width:100%;max-width:320px;display:block;margin:4px auto">'+html+'</svg>';
+}
+
 function svgHistogram(intervalLabels,vals,highlightIdx){
   var w=300,h=170,padL=14,padR=14,padT=22,padB=28;
   var maxV=Math.max.apply(null,vals)*1.25;
@@ -650,8 +659,9 @@ function freqTableHtml(vals,freqs,rowLabel1,rowLabel2,extraRowLabel,extraRow){
 // ── GENERATORS ───────────────────────────────
 
 // 1. Recollida de dades
-// 1. Recollida i inferència — bossa de 100 preguntes sense repeticions
+// 1. Recollida i inferència — bossa sense repeticions i equilibrada per família
 var recollidaBag=[];
+var lastRecollidaFamily=null;
 
 function buildRecollidaPool(){
   var pool=[];
@@ -894,36 +904,56 @@ function buildRecollidaPool(){
 
   // ── G. DEPURACIÓ, CONCLUSIONS I INFERÈNCIA (8 situacions) ───────────
   var inferenceCases=[
-    {q:'En registrar l’edat d’alumnes de 1r apareix el valor 143 anys. Què convé fer abans d’analitzar les dades?',a:'Revisar i depurar aquesta dada perquè probablement és un error',w:['Acceptar-la sense revisar-la','Eliminar totes les edats altes','Canviar-la directament per la mitjana']},
-    {q:'Una enquesta representativa de 200 alumnes mostra que el 60% prefereix l’opció A. Quina conclusió és més raonable?',a:'Aproximadament un 60% de la població podria preferir l’opció A',w:['Exactament el 60% de tota la població prefereix A','Tota la població prefereix A','No es pot obtenir cap informació de la mostra']},
-    {q:'Per saber l’opinió de tot l’institut s’enquesta només l’equip de bàsquet. Podem generalitzar amb confiança el resultat?',a:'No, la mostra pot no ser representativa',w:['Sí, qualsevol mostra serveix igual','Sí, perquè practiquen esport','Sí, si responen tots els membres de l’equip']},
-    {q:'En una base de dades apareix exactament dues vegades el mateix formulari de la mateixa persona. Què cal fer abans de comptar freqüències?',a:'Comprovar el duplicat i deixar una sola resposta si és el mateix registre',w:['Comptar sempre les dues respostes','Esborrar totes les respostes d’aquella persona','Duplicar també la resta de registres']},
-    {q:'Un estudi conclou «la majoria ve a peu» perquè 38 de 50 persones de la mostra hi venen. Quina dada és essencial per valorar si podem generalitzar?',a:'Com s’ha seleccionat la mostra i si és representativa',w:['El color del gràfic utilitzat','L’ordre alfabètic dels participants','La mida de la lletra de l’informe']},
-    {q:'Una investigació vol saber quin esmorzar és més habitual. Després de recollir les dades, quin pas ajuda a respondre la pregunta?',a:'Organitzar-les, analitzar les freqüències i formular una conclusió',w:['Canviar les dades perquè siguin més regulars','Escollir només les respostes més freqüents abans de comptar','Eliminar les categories minoritàries']},
-    {q:'En una mostra representativa, 42 de 60 alumnes fan activitat física almenys tres dies per setmana. Quina afirmació és adequada?',a:'La mostra suggereix que aquesta pràctica és majoritària a la població',w:['Demostra que exactament 42 persones de tota la població ho fan','Demostra que tots els alumnes ho fan','No permet fer cap interpretació']},
-    {q:'Què hauria d’incloure un informe breu d’un estudi estadístic?',a:'La pregunta, com s’han recollit les dades, els resultats i la conclusió',w:['Només el resultat final','Només els noms dels participants','Només el gràfic, sense explicar la procedència de les dades']}
+    {q:'En registrar l’edat d’alumnes de 1r apareix el valor 143 anys. Què convé fer abans d’analitzar les dades?',variantId:'depuracio',a:'Revisar i depurar aquesta dada perquè probablement és un error',w:['Acceptar-la sense revisar-la','Eliminar totes les edats altes','Canviar-la directament per la mitjana']},
+    {q:'Una enquesta representativa de 200 alumnes mostra que el 60% prefereix l’opció A. Quina conclusió és més raonable?',variantId:'conclusio',a:'Aproximadament un 60% de la població podria preferir l’opció A',w:['Exactament el 60% de tota la població prefereix A','Tota la població prefereix A','No es pot obtenir cap informació de la mostra']},
+    {q:'En una mostra representativa de 120 alumnes, 66 diuen que van a l’institut amb transport públic. Quina conclusió és adequada?',variantId:'conclusio',a:'Les dades suggereixen que aproximadament el 55% de la població podria fer servir transport públic',w:['Exactament 66 alumnes de tota la població hi van','Tots els alumnes hi van amb transport públic','La mostra demostra que ningú hi va caminant']},
+    {q:'Per saber l’opinió de tot l’institut s’enquesta només l’equip de bàsquet. Podem generalitzar amb confiança el resultat?',variantId:'representativitat',a:'No, la mostra pot no ser representativa',w:['Sí, qualsevol mostra serveix igual','Sí, perquè practiquen esport','Sí, si responen tots els membres de l’equip']},
+    {q:'En una base de dades apareix exactament dues vegades el mateix formulari de la mateixa persona. Què cal fer abans de comptar freqüències?',variantId:'depuracio',a:'Comprovar el duplicat i deixar una sola resposta si és el mateix registre',w:['Comptar sempre les dues respostes','Esborrar totes les respostes d’aquella persona','Duplicar també la resta de registres']},
+    {q:'En una llista de temperatures d’un gimnàs apareix 230 °C. Què convé fer abans de calcular-ne la mitjana?',variantId:'depuracio',a:'Comprovar si és un error de registre abans d’analitzar la dada',w:['Acceptar-la sense revisar-la','Esborrar totes les temperatures del gimnàs','Canviar-la directament per la temperatura més freqüent']},
+    {q:'Un estudi conclou «la majoria ve a peu» perquè 38 de 50 persones de la mostra hi venen. Quina dada és essencial per valorar si podem generalitzar?',variantId:'representativitat',a:'Com s’ha seleccionat la mostra i si és representativa',w:['El color del gràfic utilitzat','L’ordre alfabètic dels participants','La mida de la lletra de l’informe']},
+    {q:'Una investigació vol saber quin esmorzar és més habitual. Després de recollir les dades, quin pas ajuda a respondre la pregunta?',variantId:'procediment',a:'Organitzar-les, analitzar les freqüències i formular una conclusió',w:['Canviar les dades perquè siguin més regulars','Escollir només les respostes més freqüents abans de comptar','Eliminar les categories minoritàries']},
+    {q:'En una mostra representativa, 42 de 60 alumnes fan activitat física almenys tres dies per setmana. Quina afirmació és adequada?',variantId:'conclusio',a:'La mostra suggereix que aquesta pràctica és majoritària a la població',w:['Demostra que exactament 42 persones de tota la població ho fan','Demostra que tots els alumnes ho fan','No permet fer cap interpretació']},
+    {q:'Què hauria d’incloure un informe breu d’un estudi estadístic?',variantId:'procediment',a:'La pregunta, com s’han recollit les dades, els resultats i la conclusió',w:['Només el resultat final','Només els noms dels participants','Només el gràfic, sense explicar la procedència de les dades']},
+    {q:'Després d’enquestar l’alumnat sobre el temps de lectura, quin pas ajuda a respondre la pregunta inicial?',variantId:'procediment',a:'Organitzar les respostes, calcular-ne les freqüències i formular una conclusió',w:['Canviar les respostes perquè siguin més semblants','Eliminar les respostes que no coincideixen amb la majoria','Publicar només la resposta d’una persona']}
   ];
   inferenceCases.forEach(function(s){
-    pool.push({topicId:'recollida',type:7,question:s.q,correct:s.a,options:buildOpts(s.a,s.w),
+    pool.push({topicId:'recollida',type:7,variantId:s.variantId,question:s.q,correct:s.a,options:buildOpts(s.a,s.w),
       guide:['Relaciona la decisió amb la qualitat de les dades i amb l’objectiu de l’estudi.','Una conclusió ha d’estar justificada per dades rellevants i una mostra adequada.'],
       solution:['Cal recollir, depurar i interpretar les dades abans de generalitzar.','✅ '+s.a+'.']});
   });
 
-  return shuffle(pool);
+  // ── H. INDIVIDU ESTADÍSTIC (12 contextos) ────────────────────────────
+  var individualCases=[
+    ['els esports preferits de l’alumnat','un alumne'],['l’alçada dels arbres d’un parc','un arbre'],
+    ['el nombre de llibres llegits a la biblioteca','un llibre'],['el temps de trajecte dels vehicles','un vehicle'],
+    ['les temperatures màximes dels dies d’un mes','un dia'],['les mascotes de les famílies d’un barri','una família'],
+    ['els gols marcats en una lliga escolar','un partit'],['la durada de les cançons d’una llista','una cançó'],
+    ['el pes de les motxilles de 1r d’ESO','una motxilla'],['les vendes diàries d’una botiga','un dia'],
+    ['el color de les bicicletes del pati','una bicicleta'],['el nombre de persones de cada habitatge','un habitatge']
+  ];
+  individualCases.forEach(function(c){
+    pool.push({topicId:'recollida',type:8,question:'En l’estudi de '+c[0]+', quin és un individu estadístic?',correct:c[1],
+      options:buildOpts(c[1],['La població completa','La mostra seleccionada','La variable estadística']),
+      guide:['L’individu és cada element concret sobre el qual s’observa o mesura una dada.','No el confonguis amb el conjunt d’elements ni amb la característica estudiada.'],
+      solution:['La unitat estadística és cada element del qual recollim una dada.','✅ Un individu és '+c[1]+'.']});
+  });
+
+  return MIFirstStochasticFamilies.balancePool('recollida',pool);
 }
 
 function genRecollida(){
-  // La bossa només es torna a omplir quan s'han consumit totes les preguntes.
-  // Així, dins d'un mateix cicle de 100 exercicis no es repeteix cap enunciat.
+  // La bossa s'equilibra per família i es reomple després d'esgotar-se.
   if(!Array.isArray(recollidaBag)||recollidaBag.length===0){
     recollidaBag=buildRecollidaPool();
   }
-  return recollidaBag.pop();
+  var pick=recollidaBag.length-1;
+  if(lastRecollidaFamily&&recollidaBag[pick].familyId===lastRecollidaFamily&&recollidaBag.length>1){for(var i=pick-1;i>=0;i--)if(recollidaBag[i].familyId!==lastRecollidaFamily){var tmp=recollidaBag[pick];recollidaBag[pick]=recollidaBag[i];recollidaBag[i]=tmp;break;}}
+  var ex=recollidaBag.pop();lastRecollidaFamily=ex.familyId;return ex;
 }
 
 // 2. Taules de freqüències — bossa de 68 exercicis de 1r ESO
 var taulesBag=[];
-var lastTaulesContext=null;
+var lastTaulesFamily=null;
 
 function buildTaulesPool(){
   var contexts=[
@@ -969,12 +999,22 @@ function buildTaulesPool(){
 
     // 3. Freqüència relativa a partir d'una taula
     var f3=uniqueBarValues(4,2,12),total3=f3.reduce(function(a,b){return a+b;},0),i3=(ci+1)%4;
-    var h3=round2(f3[i3]/total3);
+    var h3=round2(f3[i3]/total3),relativeKind=['decimal','fraccio','percentatge'][ci%3];
+    var relativeAnswer=relativeKind==='fraccio'?f3[i3]+'/'+total3:relativeKind==='percentatge'?round2(f3[i3]/total3*100)+'%':String(h3);
+    var relativeWrongs;
+    if(relativeKind==='fraccio'){
+      relativeWrongs=[];
+      [[f3[i3]+1,total3],[f3[i3]-1,total3],[f3[i3],total3+1],[f3[i3],total3-1],[total3-f3[i3],total3]].forEach(function(pair){
+        if(pair[0]<=0||pair[1]<=0||pair[0]*total3===f3[i3]*pair[1]||relativeWrongs.some(function(x){var parts=x.split('/').map(Number);return parts[0]*pair[1]===pair[0]*parts[1];}))return;
+        relativeWrongs.push(frac(pair[0],pair[1]));
+      });
+      relativeWrongs=relativeWrongs.slice(0,3);
+    }else relativeWrongs=relativeKind==='percentatge'?[round2((f3[i3]+1)/total3*100)+'%',round2(f3[i3]/(total3+1)*100)+'%',round2((total3-f3[i3])/total3*100)+'%']:[String(round2((f3[i3]+1)/total3)),String(round2(f3[i3]/(total3+1))),String(round2((total3-f3[i3])/total3))];
     add(ctx,3,
-      'Observa la taula sobre '+ctx.title+'. Quina és la freqüència relativa de "'+cats[i3]+'"? Arrodoneix a dues xifres decimals si cal.',
-      h3,[String(round2((f3[i3]+1)/total3)),String(round2(f3[i3]/(total3+1))),String(round2((total3-f3[i3])/total3)),String(f3[i3])],
+      'Observa la taula sobre '+ctx.title+'. Expressa la freqüència relativa de "'+cats[i3]+'" com a '+(relativeKind==='fraccio'?'fracció':relativeKind==='percentatge'?'percentatge (arrodoneix a dues xifres decimals si cal)':'nombre decimal (arrodoneix a dues xifres decimals si cal)')+'.',
+      relativeAnswer,relativeWrongs,
       ['Calcula primer el nombre total de dades sumant les freqüències.','Divideix la freqüència de la categoria pel nombre total de dades.'],
-      ['N = '+total3+'.','h = '+f3[i3]+' / '+total3+' = '+h3+'.','✅ Freqüència relativa = '+h3+'.'],
+      ['N = '+total3+'.','h = '+f3[i3]+' / '+total3+' = '+h3+'.',relativeKind==='fraccio'?'✅ Freqüència relativa = '+relativeAnswer+'.':relativeKind==='percentatge'?'✅ '+h3+' × 100 = '+relativeAnswer+'.':'✅ Freqüència relativa = '+h3+'.'],
       freqTableHtml(cats,f3,'Categoria','Freqüència'));
 
     // 4. Freqüència absoluta a partir de N i una freqüència relativa exacta
@@ -1028,22 +1068,14 @@ function buildTaulesPool(){
   pool.push({topicId:'taules',type:11,contextId:'teoria3',question:'Quant ha de sumar la fila de freqüències absolutes d\'una taula completa?',correct:'El nombre total de dades N',options:buildOpts('El nombre total de dades N',['1','100','La freqüència més gran']),guide:['Cada dada queda comptada en una de les categories de la taula.','Quan sumem tots els recomptes recuperem el total de dades.'],solution:['La suma de totes les freqüències absolutes compta totes les dades.','✅ La suma és N.']});
   pool.push({topicId:'taules',type:12,contextId:'teoria4',question:'Quant han de sumar totes les freqüències relatives d\'una taula completa?',correct:'1',options:buildOpts('1',['100','N','0,5']),guide:['Cada freqüència relativa representa una part del conjunt total.','Pensa quin nombre representa el total complet quan treballem amb proporcions.'],solution:['Totes les parts juntes formen el total complet.','✅ La suma de les freqüències relatives és 1.']});
 
-  return shuffle(pool);
+  return MIFirstStochasticFamilies.balancePool('taules',pool);
 }
 
 function genTaules(){
   if(!Array.isArray(taulesBag)||taulesBag.length===0)taulesBag=buildTaulesPool();
   var pick=taulesBag.length-1;
-  if(lastTaulesContext!==null&&taulesBag[pick].contextId===lastTaulesContext&&taulesBag.length>1){
-    for(var i=taulesBag.length-2;i>=0;i--){
-      if(taulesBag[i].contextId!==lastTaulesContext){
-        var tmp=taulesBag[pick];taulesBag[pick]=taulesBag[i];taulesBag[i]=tmp;
-        break;
-      }
-    }
-  }
-  var ex=taulesBag.pop();
-  lastTaulesContext=ex.contextId;
+  if(lastTaulesFamily&&taulesBag[pick].familyId===lastTaulesFamily&&taulesBag.length>1){for(var i=pick-1;i>=0;i--)if(taulesBag[i].familyId!==lastTaulesFamily){var tmp=taulesBag[pick];taulesBag[pick]=taulesBag[i];taulesBag[i]=tmp;break;}}
+  var ex=taulesBag.pop();lastTaulesFamily=ex.familyId;
   return ex;
 }
 
@@ -1089,9 +1121,9 @@ function genAcumulades(){
   return {topicId:'acumulades2',type:type,question:q,correct:String(correct),options:opts,guide:guide,solution:solution,visual:visual};
 }
 
-// 3. Diagrames de barres — bossa de 100 preguntes sense repeticions
+// 3. Diagrames de barres — bossa equilibrada per família (100 originals + 12 d’escala)
 var barresBag=[];
-var lastBarresContext=null;
+var lastBarresFamily=null;
 
 function uniqueBarValues(n,min,max){
   var pool=[];
@@ -1184,6 +1216,10 @@ function buildBarresPool(){
       cats[win8],[cats[lose8],'Tenen la mateixa freqüència','No es pot saber amb el gràfic'],
       ['Compara només les dues barres indicades.','La barra més alta correspon a la freqüència més gran.'],
       ['"'+cats[win8]+'" té freqüència '+v8[win8]+' i "'+cats[lose8]+'" en té '+v8[lose8]+'.','✅ Té més freqüència '+cats[win8]+'.'],v8,-1);
+
+    var step13=[2,5,10][ci%3],v13=Array.from({length:5},function(_,i){return step13*(i+1);}),i13=ci%5;
+    var ex13={topicId:'barres',type:13,contextId:ctx.id,question:'L’eix vertical del diagrama avança de '+step13+' en '+step13+'. Quina freqüència té la categoria "'+cats[i13]+'"?',correct:String(v13[i13]),options:buildOpts(String(v13[i13]),v13.filter(function(v){return v!==v13[i13];}).concat([0,step13*6])),guide:['Localitza la categoria i segueix horitzontalment des de la part superior de la barra fins a l’eix vertical.','Compta els intervals de l’escala; cada interval val '+step13+'.'],solution:['La barra de "'+cats[i13]+'" arriba a '+(i13+1)+' intervals de '+step13+'.','✅ Freqüència = '+(i13+1)+' × '+step13+' = '+v13[i13]+'.'],visual:svgScaledBarChart(cats,v13,step13)};
+    pool.push(ex13);
   });
 
   pool.push({topicId:'barres',type:9,contextId:'teoria1',question:'Per què les barres d\'un diagrama de barres acostumen a estar separades?',correct:'Perquè representen categories o valors discrets diferenciats',options:buildOpts('Perquè representen categories o valors discrets diferenciats',['Perquè representen intervals continus','Per indicar que sempre falten dades','Perquè totes les freqüències són diferents']),guide:['Pensa quin tipus de valors es col·loquen habitualment a l\'eix horitzontal.','Compara aquest gràfic amb un histograma.'],solution:['En un diagrama de barres cada barra representa una categoria o un valor discret separat dels altres.','✅ Per això les barres es dibuixen separades.']});
@@ -1191,22 +1227,14 @@ function buildBarresPool(){
   pool.push({topicId:'barres',type:11,contextId:'teoria3',question:'Quan és especialment útil un diagrama de barres?',correct:'Quan volem comparar freqüències entre categories',options:buildOpts('Quan volem comparar freqüències entre categories',['Quan volem representar intervals continus sense separació','Quan només volem calcular una probabilitat','Quan volem ordenar operacions aritmètiques']),guide:['Pensa què permet comparar visualment l\'alçada de diverses barres.','Diferencia categories de dades contínues agrupades en intervals.'],solution:['Les alçades de les barres permeten comparar ràpidament les freqüències de categories diferents.','✅ És especialment útil per comparar categories.']});
   pool.push({topicId:'barres',type:12,contextId:'teoria4',question:'Quina afirmació descriu correctament un diagrama de barres?',correct:'Cada barra associa una categoria o valor discret amb una freqüència',options:buildOpts('Cada barra associa una categoria o valor discret amb una freqüència',['Cada barra representa sempre un interval continu','Les barres han d\'estar obligatòriament juntes','L\'alçada de les barres no té relació amb la freqüència']),guide:['Relaciona cada barra amb el valor o categoria de l\'eix horitzontal.','Pensa què significa l\'alçada de la barra.'],solution:['Cada barra correspon a una categoria o valor discret i la seva alçada indica la freqüència.','✅ Aquesta és la descripció correcta.']});
 
-  return shuffle(pool);
+  return MIFirstStochasticFamilies.balancePool('barres',pool);
 }
 
 function genBarres(){
   if(!Array.isArray(barresBag)||barresBag.length===0)barresBag=buildBarresPool();
   var pick=barresBag.length-1;
-  if(lastBarresContext!==null&&barresBag[pick].contextId===lastBarresContext&&barresBag.length>1){
-    for(var i=barresBag.length-2;i>=0;i--){
-      if(barresBag[i].contextId!==lastBarresContext){
-        var tmp=barresBag[pick];barresBag[pick]=barresBag[i];barresBag[i]=tmp;
-        break;
-      }
-    }
-  }
-  var ex=barresBag.pop();
-  lastBarresContext=ex.contextId;
+  if(lastBarresFamily&&barresBag[pick].familyId===lastBarresFamily&&barresBag.length>1){for(var i=pick-1;i>=0;i--)if(barresBag[i].familyId!==lastBarresFamily){var tmp=barresBag[pick];barresBag[pick]=barresBag[i];barresBag[i]=tmp;break;}}
+  var ex=barresBag.pop();lastBarresFamily=ex.familyId;
   return ex;
 }
 
@@ -1275,7 +1303,7 @@ function genHistograma(){
 
 // 5. Diagrames de sectors — bossa de 94 preguntes sense repeticions
 var sectorsBag=[];
-var lastSectorsContext=null;
+var lastSectorsFamily=null;
 
 function sectorPercentages(){
   var candidates=[10,15,20,25,30,35,40,45,50];
@@ -1403,22 +1431,14 @@ function buildSectorsPool(){
   pool.push({topicId:'sectors',type:12,contextId:'teoria3',question:'Quan és especialment útil un diagrama de sectors?',correct:'Quan volem comparar les parts d’un total',options:buildOpts('Quan volem comparar les parts d’un total',['Quan volem representar intervals continus','Quan volem mostrar una successió numèrica','Quan volem resoldre una equació']),guide:['Pensa què mostra cadascuna de les porcions del cercle.','Relaciona cada sector amb una part del conjunt total.'],solution:['Cada sector representa una part proporcional del total.','✅ És útil per comparar les parts d\'un total.']});
   pool.push({topicId:'sectors',type:13,contextId:'teoria4',question:'Si un sector representa el 25% del total, quina part del cercle ocupa?',correct:'Una quarta part',options:buildOpts('Una quarta part',['La meitat','Tres quartes parts','Una desena part']),guide:['Expressa el 25% com una fracció senzilla de 100.','Relaciona aquesta fracció amb una part del cercle.'],solution:['25/100 es simplifica a 1/4.','✅ Ocupa una quarta part del cercle.']});
 
-  return shuffle(pool);
+  return MIFirstStochasticFamilies.balancePool('sectors',pool);
 }
 
 function genSectors(){
   if(!Array.isArray(sectorsBag)||sectorsBag.length===0)sectorsBag=buildSectorsPool();
   var pick=sectorsBag.length-1;
-  if(lastSectorsContext!==null&&sectorsBag[pick].contextId===lastSectorsContext&&sectorsBag.length>1){
-    for(var i=sectorsBag.length-2;i>=0;i--){
-      if(sectorsBag[i].contextId!==lastSectorsContext){
-        var tmp=sectorsBag[pick];sectorsBag[pick]=sectorsBag[i];sectorsBag[i]=tmp;
-        break;
-      }
-    }
-  }
-  var ex=sectorsBag.pop();
-  lastSectorsContext=ex.contextId;
+  if(lastSectorsFamily&&sectorsBag[pick].familyId===lastSectorsFamily&&sectorsBag.length>1){for(var i=pick-1;i>=0;i--)if(sectorsBag[i].familyId!==lastSectorsFamily){var tmp=sectorsBag[pick];sectorsBag[pick]=sectorsBag[i];sectorsBag[i]=tmp;break;}}
+  var ex=sectorsBag.pop();lastSectorsFamily=ex.familyId;
   return ex;
 }
 
@@ -2053,6 +2073,7 @@ var NEEDED={1:10,2:20};
 var state={done:[],errors:[],currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0,examLog:[]};
 var currentEx=null;
 var stIntegratedOpenBag={};
+var stIntegratedOpenLastFamily={};
 
 
 function hasCloudStorage(){
@@ -2103,7 +2124,12 @@ var ST_OPEN_FAMILIES=[
   {id:'construccio',name:'Construeix gràfics',icon:'✏️'}
 ];
 var ST_OPEN_PATTERNS=[];
-function stAdd(id,family,topicId,diff,gen,examCompatible){ST_OPEN_PATTERNS.push({id:id,family:family,topicId:topicId,diff:diff,gen:gen,examCompatible:examCompatible!==false});}
+function stAdd(id,family,topicId,diff,gen,examCompatible){
+  var reviewed=MIFirstStochasticFamilies.familyFor(topicId,{patternId:id});
+  if(reviewed){diff=reviewed.level;var original=gen;gen=function(){var q=original();return MIFirstStochasticFamilies.decorate(q.topicId||topicId,Object.assign({},q,{patternId:id}));};}
+  ST_OPEN_PATTERNS.push({id:id,family:family,topicId:topicId,diff:diff,mathFamilyId:reviewed&&reviewed.id||null,gen:gen,examCompatible:examCompatible!==false});
+}
+function stPatternFamilyKey(pattern){return pattern.mathFamilyId||pattern.topicId+':'+pattern.family+':'+pattern.id;}
 function stProblem(o){
   var base={patternId:'',family:'',topicId:'',diff:1,question:'',visual:'',hint:[],solution:[],answer:null,kind:'input',examCompatible:true};
   var out=Object.assign(base,o);out.type=out.patternId;return out;
@@ -2219,7 +2245,7 @@ stAdd('G7','grafics','poligons',1,function(){
   var labels=['1','2','3','4','5'],v=[rnd(2,8),rnd(2,8),rnd(2,8),rnd(2,8),rnd(2,8)],i=v.indexOf(Math.max.apply(null,v));return stProblem({patternId:'G7',family:'grafics',topicId:'poligons',diff:1,question:'Quin valor de la variable té la freqüència més gran en el polígon?',visual:svgPolygon(labels,v,i),answer:stNumAnswer(Number(labels[i])),hint:['El punt més alt correspon a la freqüència màxima','Llegeix a l’eix horitzontal quin valor ocupa aquesta posició'],solution:['El punt més alt correspon al valor <b>'+labels[i]+'</b>.']});
 });
 stAdd('G8','grafics','barres',2,function(){
-  return stProblem({patternId:'G8',family:'grafics',topicId:'barres',diff:2,question:'Un gràfic compara dues quantitats, <b>92 i 96</b>, però l’eix vertical comença a <b>90</b> en lloc de 0. Pot fer que la diferència sembli molt més gran del que és?',answer:stYesNoAnswer(true),hint:['Observa què passa visualment quan l’eix vertical retalla gairebé tota la part comuna de les dues barres'],solution:['<b>Sí</b>. Un eix truncat pot exagerar visualment diferències petites.']});
+  var start=rnd(40,90),a=start+rnd(1,3),b=a+rnd(1,4);return stProblem({patternId:'G8',family:'grafics',topicId:'barres',diff:2,question:'Un gràfic compara dues quantitats, <b>'+a+' i '+b+'</b>, però l’eix vertical comença a <b>'+start+'</b> en lloc de 0. Pot fer que la diferència sembli molt més gran del que és?',answer:stYesNoAnswer(true),hint:['Observa què passa visualment quan l’eix vertical retalla gairebé tota la part comuna de les dues barres'],solution:['<b>Sí</b>. Un eix truncat pot exagerar visualment diferències petites.']});
 });
 stAdd('G9','grafics','barres',2,function(){
   var d=shuffle([
@@ -2327,7 +2353,34 @@ var stOpenCfg={family:'mix',nq:10,diff:0};
 var stOpenSession={active:false,problems:[],idx:0,correct:0,answered:false};
 function stCoreIds(){return TOPICS.map(function(t,i){return {t:t,i:i};}).filter(function(o){return o.t.course==='1r';}).map(function(o){return o.t.id;});}
 function stEligiblePatterns(family,diff,topicIds,examOnly){var allowed=new Set(topicIds||stCoreIds());return ST_OPEN_PATTERNS.filter(function(p){return allowed.has(p.topicId)&&(family==='mix'||p.family===family)&&(!diff||p.diff===diff)&&(!examOnly||p.examCompatible);});}
-function stPickProblems(n,family,diff,topicIds,examOnly){family=family||'mix';diff=diff||0;var allowedIds=topicIds||stCoreIds(),allowed=new Set(allowedIds);var pool=stEligiblePatterns(family,diff,allowedIds,!!examOnly);if(!pool.length)return [];var chosen=[],used=new Set(),lastFamily=null,tries=0;while(chosen.length<n&&used.size<pool.length&&tries<3000){tries++;var candidates=pool.filter(function(p){return !used.has(p.id)&&(p.family!==lastFamily||pool.filter(function(x){return !used.has(x.id)&&x.family!==lastFamily;}).length===0);});if(!candidates.length)break;var pat=candidates[rnd(0,candidates.length-1)],prob;try{prob=pat.gen();}catch(e){continue;}if(!prob||!allowed.has(prob.topicId))continue;used.add(pat.id);lastFamily=pat.family;chosen.push(prob);}while(chosen.length<n&&pool.length&&tries<5000){tries++;var pat2=pool[rnd(0,pool.length-1)],prob2;try{prob2=pat2.gen();}catch(e){continue;}if(prob2&&allowed.has(prob2.topicId))chosen.push(prob2);}return chosen;}
+function stPickProblems(n,family,diff,topicIds,examOnly){
+  family=family||'mix';diff=diff||0;
+  var allowedIds=topicIds||stCoreIds(),allowed=new Set(allowedIds),pool=stEligiblePatterns(family,diff,allowedIds,!!examOnly);
+  if(!pool.length)return [];
+  var chosen=[],used=new Set(),familyCounts={},lastFamily=null,tries=0;
+  function pickFrom(candidates){
+    if(!candidates.length)return null;
+    var least=Math.min.apply(null,candidates.map(function(p){return familyCounts[stPatternFamilyKey(p)]||0;}));
+    var balanced=candidates.filter(function(p){return (familyCounts[stPatternFamilyKey(p)]||0)===least;});
+    var withoutRepeat=balanced.filter(function(p){return stPatternFamilyKey(p)!==lastFamily;});
+    var source=withoutRepeat.length?withoutRepeat:balanced,pat=source[rnd(0,source.length-1)];
+    used.add(pat.id);return pat;
+  }
+  while(chosen.length<n&&used.size<pool.length&&tries<3000){
+    tries++;
+    var pat=pickFrom(pool.filter(function(p){return !used.has(p.id);}));if(!pat)break;
+    var prob;try{prob=pat.gen();}catch(e){continue;}
+    if(!prob||!allowed.has(prob.topicId))continue;
+    var key=prob.familyId||stPatternFamilyKey(pat);familyCounts[key]=(familyCounts[key]||0)+1;lastFamily=key;chosen.push(prob);
+  }
+  while(chosen.length<n&&pool.length&&tries<5000){
+    tries++;
+    var pat2=pickFrom(pool),prob2;try{prob2=pat2&&pat2.gen();}catch(e){continue;}
+    if(!prob2||!allowed.has(prob2.topicId))continue;
+    var key2=prob2.familyId||stPatternFamilyKey(pat2);familyCounts[key2]=(familyCounts[key2]||0)+1;lastFamily=key2;chosen.push(prob2);
+  }
+  return chosen;
+}
 function stRenderOpenHome(){stOpenSession.active=true;var available=new Set(stCoreIds()),families=ST_OPEN_FAMILIES.filter(function(f){if(f.id==='mix')return true;if(f.id==='construccio')return available.has('barres')||available.has('sectors')||available.has('poligons');if(f.id==='grafics')return available.has('barres')||available.has('sectors')||available.has('poligons');if(f.id==='central')return available.has('mitjana')||available.has('mediana')||available.has('moda');return available.has(f.id);});document.getElementById('stOpenHome').innerHTML='<div class="home-header"><h2>✍️ Problemes oberts i construcció</h2><p>Sentit Estocàstic · 1r ESO · Interpreta dades, decideix i justifica</p></div><div class="intro-card"><p>Aquí no tries entre quatre opcions: calcula o escriu la resposta final. També hi ha reptes per construir gràfics. Les pistes expliquen el mètode, però la solució completa només apareix després de comprovar. Els problemes numèrics i d’interpretació poden aparèixer al Mode Examen.</p></div><div class="st-open-toolbar"><select id="stOpenFamily">'+families.map(function(f){return '<option value="'+f.id+'" '+(stOpenCfg.family===f.id?'selected':'')+'>'+f.icon+' '+f.name+'</option>';}).join('')+'</select><select id="stOpenN"><option value="5" '+(stOpenCfg.nq===5?'selected':'')+'>5 problemes</option><option value="10" '+(stOpenCfg.nq===10?'selected':'')+'>10 problemes</option><option value="15" '+(stOpenCfg.nq===15?'selected':'')+'>15 problemes</option></select><select id="stOpenDiff"><option value="0">Totes les dificultats</option><option value="1">Bàsic</option><option value="2">Mitjà</option></select></div><button class="btn-primary" onclick="stStartOpenSession()">Comença →</button><button class="btn-secondary" onclick="stExitOpenProblems()">← Tornar al Sentit Estocàstic</button>';showScreen('screenOpenHome');}
 function startStochasticProblems(){document.getElementById('navBack').style.display='block';document.getElementById('navTitle').textContent='Problemes oberts · Sentit Estocàstic';stRenderOpenHome();}
 function startStochasticConstruction(){
@@ -2579,11 +2632,17 @@ function stNextIntegratedOpen(topicId){
   if(!pool.length)return null;
   if(!Array.isArray(stIntegratedOpenBag[topicId])||!stIntegratedOpenBag[topicId].length){stIntegratedOpenBag[topicId]=shuffle(pool.map(function(p){return p.id;}));}
   var tries=0;
-  while(tries<pool.length+5){
-    tries++;if(!stIntegratedOpenBag[topicId].length)stIntegratedOpenBag[topicId]=shuffle(pool.map(function(p){return p.id;}));
-    var id=stIntegratedOpenBag[topicId].pop(),pat=pool.find(function(p){return p.id===id;}),prob=null;
+  while(tries<pool.length*2+10){
+    tries++;var bag=stIntegratedOpenBag[topicId];if(!bag.length)bag=stIntegratedOpenBag[topicId]=shuffle(pool.map(function(p){return p.id;}));
+    var last=stIntegratedOpenLastFamily[topicId],eligible=bag.filter(function(id){var candidate=pool.find(function(p){return p.id===id;});return !last||!candidate||!candidate.mathFamilyId||candidate.mathFamilyId!==last;});
+    var choices=eligible.length?eligible:bag,index=rnd(0,choices.length-1),id=choices[index],bagIndex=bag.lastIndexOf(id);bag.splice(bagIndex,1);
+    var pat=pool.find(function(p){return p.id===id;}),prob=null;
     try{prob=pat&&pat.gen?pat.gen():null;}catch(e){prob=null;}
-    if(prob&&(prob.kind==='input'||!prob.kind))return prob;
+    var familyKey=prob&&(prob.familyId||stPatternFamilyKey(pat));
+    if(prob&&(prob.kind==='input'||!prob.kind)&&familyKey){
+      if(familyKey===stIntegratedOpenLastFamily[topicId]&&pool.some(function(candidate){return candidate.mathFamilyId&&candidate.mathFamilyId!==familyKey;}))continue;
+      stIntegratedOpenLastFamily[topicId]=familyKey;return prob;
+    }
   }
   return null;
 }
@@ -2591,15 +2650,21 @@ function startPractice(){window.MIAnalytics?.start();
   state.exCount=0;
   state.correctStreak=0;
   var currentTopicId=TOPICS[state.currentTopic]&&TOPICS[state.currentTopic].id;
-  if(state.mode==='open'&&currentTopicId)stIntegratedOpenBag[currentTopicId]=[];
-  // Cada nova sessió de Recollida comença amb la bossa completa i barrejada.
-  // Això garanteix que en 10 o 20 exercicis no es repeteixi cap pregunta.
-  if(TOPICS[state.currentTopic]&&TOPICS[state.currentTopic].id==='recollida'){
+  if(state.mode==='open'&&currentTopicId){stIntegratedOpenBag[currentTopicId]=[];stIntegratedOpenLastFamily[currentTopicId]=null;}
+  var practiceTopic=TOPICS[state.currentTopic]&&TOPICS[state.currentTopic].id;
+  if(practiceTopic==='recollida'){
     recollidaBag=buildRecollidaPool();
+    lastRecollidaFamily=null;
   }
-  if(TOPICS[state.currentTopic]&&TOPICS[state.currentTopic].id==='barres'){
+  if(practiceTopic==='taules'){
+    taulesBag=buildTaulesPool();lastTaulesFamily=null;
+  }
+  if(practiceTopic==='barres'){
     barresBag=buildBarresPool();
-    lastBarresContext=null;
+    lastBarresFamily=null;
+  }
+  if(practiceTopic==='sectors'){
+    sectorsBag=buildSectorsPool();lastSectorsFamily=null;
   }
   showExercise();
 }
