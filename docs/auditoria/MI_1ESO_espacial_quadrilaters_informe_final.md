@@ -6,6 +6,8 @@ Auditoria del codi a la base `33ebff73eacab4c6288610fb40f23a9413825e93`. Resulta
 
 La pràctica activa és `genQuadrilaters1r()` → `genQuadrilatersVarietat()` (tipus 1–6). El generador antic `genQuadrilaters()` no és el punt d'entrada del tema de 1r. L'enunciat actiu del rombe es va precisar perquè digui que no té angles rectes, evitant que inclogui el quadrat.
 
+Inventari inicial verificat: el generador actiu ja ofereix tipus 1 (definicions), 2 (diagonals), 3 (angle restant), 4 (classificació paral·lelisme), 5 (propietats) i 6 (suma/elements); Q1–Q6 són també rutes contextuals actives. Les subpreguntes dels tipus 1/4/5 comparteixen procediment de classificació, mentre el tipus 6 conté suma d'angles i recompte com a variants diferenciades.
+
 ## Famílies definitives
 
 | ID / família | Nivell anterior → final | Generadors accessibles | Justificació pedagògica |

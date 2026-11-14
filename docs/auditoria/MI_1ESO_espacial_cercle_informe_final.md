@@ -6,6 +6,8 @@ Auditoria del codi de pràctica a `33ebff73eacab4c6288610fb40f23a9413825e93`. Re
 
 `genCircle1r()` activa els tipus 1, 2, 3, 7 i les rutes noves 8–9. Àrea, arc i sector dels tipus d'ampliació no s'inclouen en aquest flux de 1r.
 
+Inventari inicial verificat: abans de l'ampliació, la ruta regular filtrava els tipus 1, 2, 3 i 7, i el banc contextual tenia C1–C6. Els tipus 4–6 del generador base (àrea, arc i sector) pertanyen a l'ampliació `cercle2` i continuen exclosos de la pràctica ordinària. S'han afegit únicament la inversió C→r i el quocient C/d≈π com a rutes noves de 1r.
+
 ## Famílies definitives
 
 | ID / família | Nivell anterior → final | Generadors accessibles | Justificació pedagògica |

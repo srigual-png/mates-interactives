@@ -6,6 +6,8 @@ Auditoria del codi de pràctica a la base `33ebff73eacab4c6288610fb40f23a9413825
 
 `genTriangles()` és el generador base; `genTriangles1r()` restringeix l'accés a les variants de 1r ESO i incorpora una variant d'angles de base d'isòsceles. Els generadors `genPitagores*` i de perímetre/àrea continuen fora del flux de pràctica d'aquest tema.
 
+Inventari inicial verificat: la ruta regular seleccionava els tipus 1, 2, 3, 4 i 6; el banc contextual tenia T1–T7. El tipus 6 conté quatre rectes notables i quatre associacions recta/centre. El tipus 5 (Pitàgores) i el tipus 7 (àrea/perímetre) no s'ofereixen a `genTriangles1r()`.
+
 ## Famílies i classificació definitiva
 
 | ID / família | Nivell anterior → final | Generadors accessibles | Justificació del nivell |
