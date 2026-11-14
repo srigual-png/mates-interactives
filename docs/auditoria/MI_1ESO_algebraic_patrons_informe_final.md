@@ -44,7 +44,7 @@ Distribució local: **5 famílies: 3 N1, 2 N2, 0 N3**. La classificació separa 
 | Figura repetitiva | `#geometrics` | 4 pals inicials i 3 per nou quadrat | Comptar 4 pals nous cada vegada i oblidar el costat compartit. |
 | Triangular | `#geometrics` | Sumar files successives | Multiplicar la darrera fila pel nombre de files en lloc d’acumular-les. |
 
-S’ha verificat amb Chrome que els cinc ancoratges existeixen, l’accés directe i `hashchange` funcionen, els enllaços contextuals retornen a teoria relacionada i la pàgina no desborda horitzontalment a 390 px. La teoria no s’ha modificat.
+Amb Chrome s’han comprovat els cinc ancoratges, l’accés directe, `hashchange`, l’`href` contextual i la càrrega directa del destí; també s’ha comprovat que la pàgina no desborda horitzontalment a 390 px. No s’ha pogut validar el clic entre pàgines: Chromium no navega en aquest entorn `file://` i el sandbox bloqueja el servidor HTTP local. La teoria no s’ha modificat.
 
 ## Canvis i validació
 
@@ -54,4 +54,4 @@ S’ha verificat amb Chrome que els cinc ancoratges existeixen, l’accés direc
 - Prova matemàtica: 3.250 generacions (1.500 generadors interns + 1.750 del banc); rotació de 25 exercicis, 5 per família.
 - Playwright/Chrome: 500 generacions internes, famílies i nivells, 12 preguntes de tema, 20 globals, guia, autònom, recuperació, teoria/ancoratges i 390 px superats.
 - Regressions: 30 generacions cadascuna de `simplificacio`, `equacions`, `computacional`, `patrons2`, `monomis2`, `simplificacio2`, `equacions2`.
-- No queden incidències locals pendents. GitHub Actions `Verifica inventaris fase A` (run #76) ha acabat amb èxit; aquest workflow no substitueix les proves matemàtiques ni Playwright, executades localment.
+- No s’han detectat incidències matemàtiques o de classificació en les comprovacions executades. Resta pendent verificar en un navegador amb servidor web el clic de l’ajuda contextual entre pràctica i teoria. GitHub Actions `Verifica inventaris fase A` (run #76, commit `a15af2a`) ha acabat amb èxit; aquest workflow no substitueix les proves matemàtiques ni Playwright, executades localment.

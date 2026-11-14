@@ -49,7 +49,7 @@ Distribució local: **6 famílies: 4 N1, 2 N2, 0 N3**. Famílies úniques del lo
 | Agrupació | `#traduir`, `#estrategia` | El doble de la suma → `2(x + a)` | Ometre parèntesis i obtenir `2x + a`. |
 | Substitució | `#valor` | Substituir cada variable i operar | Ometre un coeficient o sumar abans de multiplicar. |
 
-Els enllaços de teoria contextuals, l’accés directe als ancoratges, el canvi amb `hashchange`, la navegació de retorn i l’amplada mòbil de 390 px s’han exercitat amb Chrome. La pàgina de teoria no s’ha modificat.
+Amb Chrome s’han comprovat l’`href` de l’ajuda contextual, la càrrega directa de la pàgina de teoria, els ancoratges, `hashchange`, els enllaços de retorn i l’amplada de 390 px. No s’ha pogut validar el clic que navega de la pràctica a la teoria: Chromium no navega en aquest entorn `file://` i el sandbox bloqueja el servidor HTTP local. La pàgina de teoria no s’ha modificat.
 
 ## Canvis i validació
 
@@ -59,4 +59,4 @@ Els enllaços de teoria contextuals, l’accés directe als ancoratges, el canvi
 - Prova matemàtica: `node scripts/comprova-algebraic-traduccio-families-1eso.cjs` — 3.250 generacions: 1.500 de generadors interns, 1.750 de banc obert; rotació equilibrada de 30 exercicis, 5 per cadascuna de les 6 famílies.
 - Playwright/Chrome: 500 exercicis de pràctica inspeccionats; les 6 famílies accessibles, 12 preguntes d’examen de tema i 20 de mode examen; pràctica guiada/autònoma, recuperació, teoria i ancoratges superats.
 - Regressions: 30 mostres per cadascun dels 3 temes del Lot 2 i 4 ampliacions en cada execució dels tres tests Playwright.
-- Cap incidència pendent en les comprovacions executades. GitHub Actions `Verifica inventaris fase A` (run #76) ha acabat amb èxit; aquest workflow no substitueix les proves matemàtiques ni Playwright, executades localment.
+- No s’han detectat incidències matemàtiques o de classificació en les comprovacions executades. Resta pendent verificar en un navegador amb servidor web el clic de l’ajuda contextual entre pràctica i teoria. GitHub Actions `Verifica inventaris fase A` (run #76, commit `a15af2a`) ha acabat amb èxit; aquest workflow no substitueix les proves matemàtiques ni Playwright, executades localment.

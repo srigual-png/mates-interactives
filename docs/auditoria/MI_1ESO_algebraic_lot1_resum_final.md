@@ -26,6 +26,7 @@ L’avaluació per substitució és una mateixa família pedagògica i conserva 
 - Regressions: 30 exercicis per `simplificacio`, `equacions`, `computacional`, `patrons2`, `monomis2`, `simplificacio2` i `equacions2` en cada execució dels tres tests de navegador.
 - `node --check` i `git diff --check`: superats.
 - GitHub Actions `Verifica inventaris fase A` (run #76): èxit. És una comprovació d’inventaris, no substitueix els tests matemàtics ni Playwright locals. No s’ha verificat GitHub Pages; no s’ha fet desplegament remot.
+- Limitació del navegador: l’`href` contextual resol i la teoria s’ha carregat directament; no s’ha pogut provar el clic pràctica → teoria perquè Chrome no navega en `file://` i el sandbox bloqueja un servidor HTTP local. Cal repetir aquest clic en un navegador amb servidor web.
 
 ## Fitxers funcionals i informes
 

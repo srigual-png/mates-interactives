@@ -44,7 +44,7 @@ Distribució local: **5 famílies: 5 N1, 0 N2, 0 N3**. IDs únics d’aquest tem
 | Termes semblants | `#semblants` | `3x` i `−2x` són semblants | Exigir que els coeficients siguin iguals. |
 | Substitució compartida | `#valor` (Traducció) | Reemplaçar `x` i operar | Substituir només a una part de l’expressió. |
 
-La teoria existent també explica la reducció de termes (`#reduir`), contingut que es manté sota `simplificacio`; en aquesta PR no es canvia la teoria. Playwright amb Chrome ha verificat els ancoratges, el canvi d’ancoratge, els enllaços contextuals, la tornada i l’amplada de 390 px.
+La teoria existent també explica la reducció de termes (`#reduir`), contingut que es manté sota `simplificacio`; en aquesta PR no es canvia la teoria. Playwright amb Chrome ha comprovat l’`href` contextual, la càrrega directa del destí, els ancoratges, el canvi d’ancoratge, els enllaços de retorn i l’amplada de 390 px. El clic de navegació pràctica → teoria no s’ha pogut verificar: el navegador no navega des de `file://` i el sandbox bloqueja HTTP local.
 
 ## Canvis i validació
 
@@ -54,4 +54,4 @@ La teoria existent també explica la reducció de termes (`#reduir`), contingut 
 - Prova matemàtica: 2.500 generacions (1.000 dels quatre tipus + 1.500 de sis rutes del banc); rotació de les 4 famílies pròpies accessibles a la pràctica, 5 aparicions cadascuna. M6 s’ha cobert com a ruta oberta i d’examen.
 - Playwright/Chrome: 500 generacions, les 4 famílies de pràctica i l’avaluació compartida al banc/examen, 12 preguntes del tema, 20 globals, guia/autònom/recuperació i teoria/390 px superats.
 - Regressions: 30 mostres per cadascun dels 3 temes del Lot 2 i 4 ampliacions en cada execució Playwright.
-- Cap incidència local pendent. GitHub Actions `Verifica inventaris fase A` (run #76) ha acabat amb èxit; aquest workflow no substitueix les proves matemàtiques ni Playwright, executades localment.
+- No s’han detectat incidències matemàtiques o de classificació en les comprovacions executades. Resta pendent verificar en un navegador amb servidor web el clic de l’ajuda contextual entre pràctica i teoria. GitHub Actions `Verifica inventaris fase A` (run #76, commit `a15af2a`) ha acabat amb èxit; aquest workflow no substitueix les proves matemàtiques ni Playwright, executades localment.
