@@ -23,6 +23,23 @@
       {id:'identificar-termes-i-signes',name:'Identificar els termes d’una expressió i els signes que els acompanyen',level:1,types:[3],generators:['monomis:3','M5']},
       {id:'reconeixer-termes-semblants',name:'Reconèixer si dos termes tenen la mateixa part literal',level:1,types:[4],generators:['monomis:4']},
       {id:'avaluar-expressio-per-substitucio',name:'Substituir valors de variables i calcular una expressió',level:1,generators:['M6'],sharedWith:['traduccio']}
+    ],
+    simplificacio:[
+      {id:'reduir-termes-sempre-amb-la-mateixa-part-literal',name:'Reduir termes semblants d’una mateixa part literal',level:1,types:[1,5],generators:['simplificacio:1','simplificacio:5','S1','S2','S4','M3','M4']},
+      {id:'simplificar-expressio-lineal-agrupant-termes',name:'Simplificar una expressió lineal agrupant termes amb x i termes constants',level:2,types:[3,6],generators:['simplificacio:3','simplificacio:6','S3','S5','S6']}
+    ],
+    equacions:[
+      {id:'resoldre-equacio-additiva-dun-pas',name:'Resoldre una equació additiva d’un pas',level:1,types:[1],generators:['equacions:1','E1','E2']},
+      {id:'resoldre-equacio-multiplicativa-dun-pas',name:'Resoldre una equació multiplicativa d’un pas',level:1,types:[2],generators:['equacions:2','E3']},
+      {id:'resoldre-equacio-lineal-de-dos-passos',name:'Resoldre una equació lineal de dos passos',level:2,types:[3,4],generators:['equacions:3','equacions:4','E4','E5']},
+      {id:'modelitzar-i-resoldre-equacio-en-un-context',name:'Modelitzar un context amb una equació i resoldre-la',level:2,types:[7,8],generators:['equacions:7','equacions:8','E6','E7','E8','E9','E10']}
+    ],
+    computacional:[
+      {id:'executar-algorisme-amb-operacions-ordenades',name:'Executar operacions en l’ordre indicat',level:1,types:[1],generators:['computacional:1','C1']},
+      {id:'iterar-instruccio-additiva',name:'Iterar una instrucció additiva un nombre determinat de vegades',level:1,types:[2],generators:['computacional:2','C2']},
+      {id:'executar-branca-condicional',name:'Seleccionar i executar una branca segons una condició',level:2,types:[3,6],generators:['computacional:3','computacional:6','C3','C6']},
+      {id:'detectar-primer-error-dalgorisme',name:'Detectar el primer pas incorrecte d’un algorisme',level:2,types:[4],generators:['computacional:4','C4']},
+      {id:'reconstruir-instruccio-absent',name:'Reconstruir una instrucció a partir dels valors inicial i final',level:1,types:[5],generators:['computacional:5','C5']}
     ]
   };
   function topicSpecs(topic){return specs[typeof topic==='string'?topic:topic&&topic.id]||null;}

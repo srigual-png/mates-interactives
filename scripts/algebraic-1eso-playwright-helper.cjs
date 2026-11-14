@@ -11,7 +11,10 @@ const root=path.resolve(__dirname,'..');
 const topics={
   traduccio:{theory:'llenguatge-algebraic-1r-eso.html',anchors:['variable','traduir','llegir','valor','context'],index:0},
   patrons:{theory:'patrons-numerics-geometrics-1r-eso.html',anchors:['patro','additius','multiplicatius','buits','geometrics'],index:1},
-  monomis:{theory:'expressions-termes-coeficients-1r-eso.html',anchors:['termes','coeficient','independent','semblants','reduir'],index:2}
+  monomis:{theory:'expressions-termes-coeficients-1r-eso.html',anchors:['termes','coeficient','independent','semblants','reduir'],index:2},
+  simplificacio:{theory:'simplificacio-expressions-1r-eso.html',anchors:['idea','x','mixta','signes','valor','estrategia'],index:3},
+  equacions:{theory:'equacions-primer-grau-1r-eso.html',anchors:['igualtat','inverses','tipus','resoldre','problemes','comprovar','estrategia'],index:4},
+  computacional:{theory:'pensament-computacional-1r-eso.html',anchors:['algorisme','descompondre','iteracio','condicio','depuracio','instruccio'],index:5}
 };
 async function launch(){
   const problems=[];
@@ -38,13 +41,16 @@ async function run(topicId){
       const reachable=families.filter(f=>f.generators.some(g=>g.startsWith(id+':'))),seen=new Set(),samples=500;
       for(let i=0;i<samples;i++){const q=D.annotate(topic,topic._baseGen());const f=MIFirstAlgebraicFamilies.familyFor(topic,q);fail(f&&q.familyId===f.id,'família assignada al generador');fail(q.diff===f.level&&q.taskDifficulty===f.level&&D.getDifficulty(topic,q)===f.level,'nivell intern i classificador');fail(q.options?.length===4&&new Set(q.options.map(String)).size===4&&q.options.includes(q.correct),'quatre opcions i una resposta exacta');fail(q.guide?.length>=2&&q.solution?.length,'pistes i solució');seen.add(q.familyId);}
       fail(reachable.every(f=>seen.has(f.id)),'la pràctica accedeix a totes les famílies dels generadors propis');
-      const bankIds=id==='traduccio'?['T1','T2','T3','T4','T5','T6','T7']:id==='patrons'?['P1','P2','P3','P4','P5','P6','P7']:['M1','M2','M3','M4','M5','M6'];
+      resetVariationSession(id);const rotationSeen=new Set();let previousFamily=null;
+      for(let i=0;i<reachable.length*5;i++){const q=D.annotate(topic,topic.gen());fail(q.familyId,'família a la rotació de pràctica');fail(q.familyId!==previousFamily,'la rotació no repeteix família consecutiva');previousFamily=q.familyId;rotationSeen.add(q.familyId);}
+      fail(reachable.every(f=>rotationSeen.has(f.id)),'la rotació cobreix totes les famílies accessibles');
+      const bankIds=id==='traduccio'?['T1','T2','T3','T4','T5','T6','T7']:id==='patrons'?['P1','P2','P3','P4','P5','P6','P7']:id==='monomis'?['M1','M2','M3','M4','M5','M6']:id==='simplificacio'?['S1','S2','S3','S4','S5','S6','M3','M4']:id==='equacions'?Array.from({length:10},(_,i)=>'E'+(i+1)):['C1','C2','C3','C4','C5','C6'];
       const bankCounts={};for(const bankId of bankIds){const p=ALG_OPEN_PATTERNS.find(x=>x.id===bankId);fail(p,'patró de banc '+bankId);for(let i=0;i<50;i++){const q=p.gen();if(q.topicId==='simplificacio'&&(bankId==='M3'||bankId==='M4')){const owner=TOPICS.find(t=>t.id==='simplificacio');fail(owner&&D.getDifficulty(owner,q)!==null,'classificador preservat de simplificació '+bankId);fail(q.topicId==='simplificacio','reassignació explícita del patró '+bankId);continue;}const f=MIFirstAlgebraicFamilies.familyFor(id,q);fail(f,'família del banc '+bankId);const decorated=D.annotate(topic,q);fail(decorated.diff===f.level&&decorated.taskDifficulty===f.level,'nivell intern i classificador del banc '+bankId);bankCounts[f.id]=(bankCounts[f.id]||0)+1;}}
       const exam=miTopicExam.build(topic);fail(exam.length===12,'constructor d’examen específic de 12 preguntes');
       for(const q of exam)fail(q.familyId&&q.taskDifficulty===D.getDifficulty(topic,q),'família i nivell a l’examen específic');
       const topicExamFamilies=[...new Set(exam.map(q=>q.familyId))];fail(reachable.every(f=>topicExamFamilies.includes(f.id)),'examen de tema cobreix totes les famílies disponibles a la pràctica');
       const regressions={};for(const tid of ['simplificacio','equacions','computacional','patrons2','monomis2','simplificacio2','equacions2']){const t=TOPICS.find(x=>x.id===tid);fail(t,'tema de regressió '+tid);let count=0;for(let i=0;i<30;i++){const q=t.gen();fail(q&&q.question&&q.correct!==undefined,'generació '+tid);if(t.course==='1r'){fail(q.options?.length===4&&q.options.includes(q.correct),'opcions correctes '+tid);fail(miTaskDifficulty.getDifficulty(t,q)!==null,'classificador '+tid);}count++;}regressions[tid]=count;}
-      return {levels,families:families.map(f=>({id:f.id,level:f.level})),reachable:reachable.map(f=>f.id),coverage:[...seen],bankCounts,topicExam:exam.length,topicExamFamilies,regressions};
+      return {levels,families:families.map(f=>({id:f.id,level:f.level})),reachable:reachable.map(f=>f.id),coverage:[...seen],rotation:{draws:reachable.length*5,families:[...rotationSeen]},bankCounts,topicExam:exam.length,topicExamFamilies,regressions};
     },topicId);
 
     await page.evaluate(i=>selectTopic(i),cfg.index);
