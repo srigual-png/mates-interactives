@@ -2809,6 +2809,812 @@
           "note": "Família compartida amb Àrees."
         }
       ]
+    },
+    {
+      "id": "1eso/estocastic/recollida",
+      "course": "1r ESO",
+      "sense": "Estocàstic",
+      "topic": "Recollida i inferència",
+      "code_topic_id": "recollida",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 37,
+      "merge_commit": "f1b3491de21f1aa7ba89ef12b1fbac61a3b83336",
+      "validation": "Prova específica documentada a l’informe PR #37: 115 exercicis regulars exhaustius, 2.250 mostres contextuals i 230 extraccions en rotació. Playwright del tema a Chrome: pràctica guiada/oberta, examen de tema de 12 preguntes, viewport 390 px i zero errors JavaScript. Validació de lot (no individualitzada per aquest tema): 4 proves matemàtiques i 4 Playwright superades; regressions dels altres cinc temes (30 mostres per tema i prova). GitHub Pages no consta verificat.",
+      "families": [
+        {
+          "id": "classificar-variable-estadistica",
+          "name": "Classificar una variable qualitativa, quantitativa discreta o contínua",
+          "level": 1,
+          "generators": [
+            "recollida:1",
+            "R1"
+          ]
+        },
+        {
+          "id": "distingir-poblacio-mostra-individu",
+          "name": "Distingir població, mostra i individu estadístic",
+          "level": 1,
+          "generators": [
+            "recollida:2",
+            "recollida:8",
+            "R2"
+          ]
+        },
+        {
+          "id": "distingir-cens-i-mostra",
+          "name": "Distingir un cens d’un estudi amb mostra",
+          "level": 1,
+          "generators": [
+            "recollida:3"
+          ]
+        },
+        {
+          "id": "identificar-metode-recollida",
+          "name": "Identificar el mètode de recollida de dades",
+          "level": 1,
+          "generators": [
+            "recollida:4",
+            "R6"
+          ]
+        },
+        {
+          "id": "seleccionar-mostra-representativa",
+          "name": "Valorar si una mostra representa la població",
+          "level": 2,
+          "generators": [
+            "recollida:5",
+            "recollida:7#representativitat",
+            "R3",
+            "R8"
+          ]
+        },
+        {
+          "id": "detectar-pregunta-esbiaixada",
+          "name": "Detectar i corregir el biaix d’una pregunta d’enquesta",
+          "level": 2,
+          "generators": [
+            "recollida:6",
+            "R4",
+            "R5"
+          ]
+        },
+        {
+          "id": "depurar-dades",
+          "name": "Detectar dades duplicades o incoherents abans d’analitzar-les",
+          "level": 2,
+          "generators": [
+            "recollida:7#depuracio",
+            "R9"
+          ]
+        },
+        {
+          "id": "extreure-conclusio-justificada",
+          "name": "Extreure una conclusió limitada per les dades i la mostra",
+          "level": 2,
+          "generators": [
+            "recollida:7#conclusio"
+          ]
+        },
+        {
+          "id": "organitzar-estudi-estadistic",
+          "name": "Reconèixer les fases bàsiques d’un estudi estadístic",
+          "level": 1,
+          "generators": [
+            "recollida:7#procediment"
+          ]
+        },
+        {
+          "id": "estimar-proporcio-poblacional",
+          "name": "Estimar una proporció de la població a partir d’una mostra",
+          "level": 2,
+          "generators": [
+            "R7"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/estocastic/taules",
+      "course": "1r ESO",
+      "sense": "Estocàstic",
+      "topic": "Taules de freqüències",
+      "code_topic_id": "taules",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 37,
+      "merge_commit": "f1b3491de21f1aa7ba89ef12b1fbac61a3b83336",
+      "validation": "Prova específica documentada a l’informe PR #37: 68 exercicis regulars exhaustius, 1.750 mostres contextuals i 136 extraccions en rotació. Playwright del tema a Chrome: pràctica guiada/oberta, examen de tema de 12 preguntes, viewport 390 px i zero errors JavaScript. Validació de lot (no individualitzada per aquest tema): 4 proves matemàtiques i 4 Playwright superades; regressions dels altres cinc temes (30 mostres per tema i prova). GitHub Pages no consta verificat.",
+      "families": [
+        {
+          "id": "lectura-freq-absoluta-taula",
+          "name": "Llegir una freqüència absoluta en una taula",
+          "level": 1,
+          "generators": [
+            "taules:1",
+            "taules:7",
+            "taules:9"
+          ]
+        },
+        {
+          "id": "totalitzar-freq-absolutes",
+          "name": "Calcular o interpretar el total a partir de freqüències absolutes",
+          "level": 1,
+          "generators": [
+            "taules:2",
+            "taules:11",
+            "T6"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Taules de freqüències, Diagrames de barres i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "identificar-categoria-mes-frequent",
+          "name": "Identificar la categoria de freqüència màxima",
+          "level": 1,
+          "generators": [
+            "taules:6"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Taules de freqüències, Diagrames de barres, Diagrames de sectors i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "freq-relativa-i-representacions",
+          "name": "Calcular i interpretar la freqüència relativa com a fracció, decimal o percentatge",
+          "level": 2,
+          "generators": [
+            "taules:3",
+            "taules:10",
+            "taules:12",
+            "T2"
+          ]
+        },
+        {
+          "id": "recuperar-freq-absoluta-des-de-relativa",
+          "name": "Recuperar una freqüència absoluta a partir de la relativa i del total",
+          "level": 2,
+          "generators": [
+            "taules:4"
+          ]
+        },
+        {
+          "id": "recuperar-total-des-de-freq-i-relativa",
+          "name": "Recuperar el total a partir d’una freqüència absoluta i la relativa",
+          "level": 2,
+          "generators": [
+            "T5"
+          ]
+        },
+        {
+          "id": "reconstruir-part-complementaria",
+          "name": "Reconstruir la freqüència o proporció que falta perquè el total sigui complet",
+          "level": 2,
+          "generators": [
+            "taules:5",
+            "taules:8",
+            "T3",
+            "T4"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Taules de freqüències i Diagrames de sectors; es conserva el recompte local per tema."
+        },
+        {
+          "id": "calcular-diferencia-frequencies",
+          "name": "Calcular la diferència entre freqüències representades",
+          "level": 2,
+          "generators": [
+            "T7"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Taules de freqüències, Diagrames de barres i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "recompte-freq-des-de-dades-brutes",
+          "name": "Comptar una freqüència a partir d’una llista de dades",
+          "level": 1,
+          "generators": [
+            "T1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/estocastic/barres",
+      "course": "1r ESO",
+      "sense": "Estocàstic",
+      "topic": "Diagrames de barres",
+      "code_topic_id": "barres",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 37,
+      "merge_commit": "f1b3491de21f1aa7ba89ef12b1fbac61a3b83336",
+      "validation": "Prova específica documentada a l’informe PR #37: 112 exercicis regulars exhaustius, 1.500 mostres contextuals i 224 extraccions en rotació. Playwright del tema a Chrome: pràctica guiada/oberta, examen de tema de 12 preguntes, viewport 390 px i zero errors JavaScript. Validació de lot (no individualitzada per aquest tema): 4 proves matemàtiques i 4 Playwright superades; regressions dels altres cinc temes (30 mostres per tema i prova). GitHub Pages no consta verificat.",
+      "families": [
+        {
+          "id": "lectura-freq-barra",
+          "name": "Llegir una freqüència o categoria en un diagrama de barres",
+          "level": 1,
+          "generators": [
+            "barres:1",
+            "barres:7",
+            "barres:13",
+            "G1"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Diagrames de barres i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "identificar-categoria-mes-frequent",
+          "name": "Identificar la categoria de freqüència màxima o mínima",
+          "level": 1,
+          "generators": [
+            "barres:2",
+            "barres:3"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Taules de freqüències, Diagrames de barres, Diagrames de sectors i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "comparar-frequencies-barres",
+          "name": "Comparar directament les freqüències de dues categories",
+          "level": 1,
+          "generators": [
+            "barres:8"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Diagrames de barres i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "calcular-diferencia-frequencies",
+          "name": "Calcular la diferència entre freqüències representades",
+          "level": 2,
+          "generators": [
+            "barres:4",
+            "G2"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Taules de freqüències, Diagrames de barres i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "detectar-escala-enganyosa",
+          "name": "Detectar quan una escala truncada exagera visualment una diferència",
+          "level": 2,
+          "generators": [
+            "G8"
+          ]
+        },
+        {
+          "id": "sumar-frequencies-parcials",
+          "name": "Sumar les freqüències d’un subconjunt de categories",
+          "level": 2,
+          "generators": [
+            "barres:5"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Diagrames de barres i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "totalitzar-freq-absolutes",
+          "name": "Calcular o interpretar el total a partir de freqüències absolutes",
+          "level": 1,
+          "generators": [
+            "barres:6",
+            "G3"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Taules de freqüències, Diagrames de barres i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "interpretar-convencions-barres",
+          "name": "Interpretar les convencions bàsiques d’un diagrama de barres",
+          "level": 1,
+          "generators": [
+            "barres:9",
+            "barres:10",
+            "barres:11",
+            "barres:12"
+          ]
+        },
+        {
+          "id": "construir-diagrama-barres",
+          "name": "Construir un diagrama de barres a partir d’una taula",
+          "level": 1,
+          "generators": [
+            "K1"
+          ]
+        },
+        {
+          "id": "triar-representacio-estadistica",
+          "name": "Triar una representació gràfica adequada a les dades",
+          "level": 1,
+          "generators": [
+            "G9"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Diagrames de barres i Diagrames de sectors; es conserva el recompte local per tema."
+        }
+      ]
+    },
+    {
+      "id": "1eso/estocastic/sectors",
+      "course": "1r ESO",
+      "sense": "Estocàstic",
+      "topic": "Diagrames de sectors",
+      "code_topic_id": "sectors",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 37,
+      "merge_commit": "f1b3491de21f1aa7ba89ef12b1fbac61a3b83336",
+      "validation": "Prova específica documentada a l’informe PR #37: 94 exercicis regulars exhaustius, 1.250 mostres contextuals i 188 extraccions en rotació. Playwright del tema a Chrome: pràctica guiada/oberta, examen de tema de 12 preguntes, viewport 390 px i zero errors JavaScript. Validació de lot (no individualitzada per aquest tema): 4 proves matemàtiques i 4 Playwright superades; regressions dels altres cinc temes (30 mostres per tema i prova). GitHub Pages no consta verificat.",
+      "families": [
+        {
+          "id": "lectura-percentatge-sector",
+          "name": "Llegir el percentatge d’una categoria en un diagrama de sectors",
+          "level": 1,
+          "generators": [
+            "sectors:1",
+            "G4"
+          ]
+        },
+        {
+          "id": "identificar-categoria-mes-frequent",
+          "name": "Identificar la categoria de freqüència màxima",
+          "level": 1,
+          "generators": [
+            "sectors:7"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Taules de freqüències, Diagrames de barres, Diagrames de sectors i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "convertir-percentatge-i-angle",
+          "name": "Convertir una proporció entre percentatge i angle central",
+          "level": 2,
+          "generators": [
+            "sectors:2",
+            "sectors:3",
+            "G6",
+            "K3"
+          ]
+        },
+        {
+          "id": "convertir-percentatge-i-freq-absoluta",
+          "name": "Convertir entre percentatge i freqüència absoluta amb el total conegut",
+          "level": 2,
+          "generators": [
+            "sectors:4",
+            "sectors:5",
+            "G5"
+          ]
+        },
+        {
+          "id": "comparar-proporcions-sector",
+          "name": "Comparar proporcions representades en sectors",
+          "level": 2,
+          "generators": [
+            "sectors:6"
+          ]
+        },
+        {
+          "id": "reconstruir-part-complementaria",
+          "name": "Reconstruir la freqüència o proporció que falta perquè el total sigui complet",
+          "level": 2,
+          "generators": [
+            "sectors:8",
+            "sectors:9"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Taules de freqüències i Diagrames de sectors; es conserva el recompte local per tema."
+        },
+        {
+          "id": "interpretar-diagrama-sectors",
+          "name": "Interpretar el total, les parts i l’ús d’un diagrama de sectors",
+          "level": 1,
+          "generators": [
+            "sectors:10",
+            "sectors:11",
+            "sectors:12",
+            "sectors:13"
+          ]
+        },
+        {
+          "id": "triar-representacio-estadistica",
+          "name": "Triar una representació gràfica adequada a les dades",
+          "level": 1,
+          "generators": [
+            "G9"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Diagrames de barres i Diagrames de sectors; es conserva el recompte local per tema."
+        }
+      ]
+    },
+    {
+      "id": "1eso/estocastic/poligons",
+      "course": "1r ESO",
+      "sense": "Estocàstic",
+      "topic": "Polígons de freqüències",
+      "code_topic_id": "poligons",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 38,
+      "merge_commit": "156fceacc57e312d47846f6a536abbf514ba9fc6",
+      "validation": "Prova matemàtica específica: banc finit 84/84, 2.000 mostres contextuals (250 per patró), rotació de 168 extraccions sense repetició familiar consecutiva. Playwright del tema a Chrome: pràctica guiada/autònoma, 20 preguntes obertes, examen de tema 12 i global 20, gràfic SVG visible a 390 px i zero errors JavaScript. Validació agregada PR #38 (evidència de lot, no test específic d’aquest tema): cinc proves matemàtiques i cinc Playwright superades; 281 ítems regulars finits, 2.000 mostres aleatòries i 9.000 contextuals. Les comprovacions de teoria cobreixen 30 ancoratges i cinc hashchange en les cinc pàgines; s’han verificat les destinacions de pràctica per URL, però no el clic entre pàgines en context file://. S’han passat vuit regressions PR #37 i 30 mostres per tema d’ampliació en cada prova de navegador. L’usuari també informa d’una validació local posterior a Windows; no s’atribueix a Edge. GitHub Pages no consta verificat.",
+      "families": [
+        {
+          "id": "lectura-freq-barra",
+          "name": "Llegir una freqüència o categoria en un gràfic",
+          "level": 1,
+          "generators": [
+            "poligons:1",
+            "poligons:8",
+            "G10"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Diagrames de barres i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "identificar-categoria-mes-frequent",
+          "name": "Identificar el valor de freqüència màxima o mínima en un polígon",
+          "level": 1,
+          "generators": [
+            "poligons:2",
+            "poligons:3",
+            "poligons:12",
+            "G7"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Taules de freqüències, Diagrames de barres, Diagrames de sectors i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "comparar-frequencies-barres",
+          "name": "Comparar directament dues freqüències representades",
+          "level": 1,
+          "generators": [
+            "poligons:4",
+            "G13"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Diagrames de barres i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "calcular-diferencia-frequencies",
+          "name": "Calcular la diferència entre dues freqüències",
+          "level": 2,
+          "generators": [
+            "poligons:5",
+            "G11"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Taules de freqüències, Diagrames de barres i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "sumar-frequencies-parcials",
+          "name": "Sumar freqüències de diversos valors",
+          "level": 2,
+          "generators": [
+            "poligons:6",
+            "G12"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Diagrames de barres i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "totalitzar-freq-absolutes",
+          "name": "Calcular el total a partir de les freqüències absolutes",
+          "level": 1,
+          "generators": [
+            "poligons:7",
+            "G14"
+          ],
+          "note": "ID estable compartit dins del Sentit estocàstic amb Taules de freqüències, Diagrames de barres i Polígons de freqüències; es conserva el recompte local per tema."
+        },
+        {
+          "id": "interpretar-convencions-poligon",
+          "name": "Interpretar què representen els punts, eixos i segments del polígon",
+          "level": 1,
+          "generators": [
+            "poligons:9",
+            "poligons:10",
+            "poligons:11",
+            "G15"
+          ]
+        },
+        {
+          "id": "construir-diagrama-poligon",
+          "name": "Construir un polígon de freqüències a partir d’una taula",
+          "level": 2,
+          "generators": [
+            "K2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/estocastic/mitjana",
+      "course": "1r ESO",
+      "sense": "Estocàstic",
+      "topic": "Mitjana aritmètica",
+      "code_topic_id": "mitjana",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 38,
+      "merge_commit": "156fceacc57e312d47846f6a536abbf514ba9fc6",
+      "validation": "Prova matemàtica específica: 1.000 mostres aleatòries (250 per tipus) i 1.500 mostres contextuals (250 per patró), amb oracle independent per llistes, reconstrucció, suma i mitjana ponderada. Playwright del tema a Chrome: pràctica guiada/autònoma, 20 preguntes obertes, exàmens de tema 12 i global 20, viewport 390 px i zero errors JavaScript. Validació agregada PR #38 (evidència de lot, no test específic d’aquest tema): cinc proves matemàtiques i cinc Playwright superades; 281 ítems regulars finits, 2.000 mostres aleatòries i 9.000 contextuals. Les comprovacions de teoria cobreixen 30 ancoratges i cinc hashchange en les cinc pàgines; s’han verificat les destinacions de pràctica per URL, però no el clic entre pàgines en context file://. S’han passat vuit regressions PR #37 i 30 mostres per tema d’ampliació en cada prova de navegador. L’usuari també informa d’una validació local posterior a Windows; no s’atribueix a Edge. GitHub Pages no consta verificat.",
+      "families": [
+        {
+          "id": "calcular-mitjana-llista",
+          "name": "Calcular la mitjana d’una llista de dades",
+          "level": 1,
+          "generators": [
+            "mitjana:1",
+            "C1"
+          ]
+        },
+        {
+          "id": "reconstruir-dada-des-de-mitjana",
+          "name": "Reconstruir una dada desconeguda a partir de la mitjana",
+          "level": 2,
+          "generators": [
+            "mitjana:2",
+            "C2"
+          ]
+        },
+        {
+          "id": "recuperar-suma-des-de-mitjana",
+          "name": "Recuperar la suma total a partir de la mitjana i el nombre de dades",
+          "level": 1,
+          "generators": [
+            "mitjana:3",
+            "C12"
+          ]
+        },
+        {
+          "id": "mitjana-ponderada-frequencies",
+          "name": "Calcular una mitjana ponderada a partir de freqüències",
+          "level": 2,
+          "generators": [
+            "mitjana:4",
+            "C3"
+          ]
+        },
+        {
+          "id": "comparar-mitjanes",
+          "name": "Comparar les mitjanes de dos grups",
+          "level": 2,
+          "generators": [
+            "C4"
+          ]
+        },
+        {
+          "id": "interpretar-efecte-extrem-mitjana",
+          "name": "Interpretar l’efecte d’una dada extrema sobre la mitjana",
+          "level": 2,
+          "generators": [
+            "C5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/estocastic/mediana",
+      "course": "1r ESO",
+      "sense": "Estocàstic",
+      "topic": "Mediana",
+      "code_topic_id": "mediana",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 38,
+      "merge_commit": "156fceacc57e312d47846f6a536abbf514ba9fc6",
+      "validation": "Prova matemàtica específica: 1.000 mostres aleatòries (250 per tipus) i 1.000 mostres contextuals (250 per patró), amb oracles senar/parell i comprovació de la variant parella. Playwright del tema a Chrome: pràctica guiada/autònoma, 20 preguntes obertes, exàmens de tema 12 i global 20, viewport 390 px i zero errors JavaScript. Validació agregada PR #38 (evidència de lot, no test específic d’aquest tema): cinc proves matemàtiques i cinc Playwright superades; 281 ítems regulars finits, 2.000 mostres aleatòries i 9.000 contextuals. Les comprovacions de teoria cobreixen 30 ancoratges i cinc hashchange en les cinc pàgines; s’han verificat les destinacions de pràctica per URL, però no el clic entre pàgines en context file://. S’han passat vuit regressions PR #37 i 30 mostres per tema d’ampliació en cada prova de navegador. L’usuari també informa d’una validació local posterior a Windows; no s’atribueix a Edge. GitHub Pages no consta verificat.",
+      "families": [
+        {
+          "id": "calcular-mediana-senar",
+          "name": "Ordenar i trobar el valor central amb un nombre senar de dades",
+          "level": 1,
+          "generators": [
+            "mediana:1#odd",
+            "mediana:4",
+            "C6"
+          ]
+        },
+        {
+          "id": "calcular-mediana-parella",
+          "name": "Ordenar i calcular la mitjana dels dos valors centrals amb un nombre parell de dades",
+          "level": 2,
+          "generators": [
+            "mediana:1#even",
+            "mediana:3",
+            "C7"
+          ]
+        },
+        {
+          "id": "distingir-mitjana-mediana",
+          "name": "Distingir els procediments de mitjana i mediana",
+          "level": 1,
+          "generators": [
+            "mediana:2",
+            "C13"
+          ]
+        },
+        {
+          "id": "interpretar-efecte-extrem-mediana",
+          "name": "Interpretar la mediana després d’afegir una dada extrema",
+          "level": 2,
+          "generators": [
+            "C8"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/estocastic/moda",
+      "course": "1r ESO",
+      "sense": "Estocàstic",
+      "topic": "Moda",
+      "code_topic_id": "moda",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 38,
+      "merge_commit": "156fceacc57e312d47846f6a536abbf514ba9fc6",
+      "validation": "Prova matemàtica específica: banc finit 56/56, 1.750 mostres contextuals (250 per patró) i rotació de 112 extraccions sense repetició familiar consecutiva; comprovació de modes empatades i absència de moda segons la convenció explícita. Playwright del tema a Chrome: pràctica guiada/autònoma, 20 preguntes obertes, exàmens de tema 12 i global 20, viewport 390 px i zero errors JavaScript. Validació agregada PR #38 (evidència de lot, no test específic d’aquest tema): cinc proves matemàtiques i cinc Playwright superades; 281 ítems regulars finits, 2.000 mostres aleatòries i 9.000 contextuals. Les comprovacions de teoria cobreixen 30 ancoratges i cinc hashchange en les cinc pàgines; s’han verificat les destinacions de pràctica per URL, però no el clic entre pàgines en context file://. S’han passat vuit regressions PR #37 i 30 mostres per tema d’ampliació en cada prova de navegador. L’usuari també informa d’una validació local posterior a Windows; no s’atribueix a Edge. GitHub Pages no consta verificat.",
+      "families": [
+        {
+          "id": "identificar-moda-numerica",
+          "name": "Identificar la moda única en dades numèriques",
+          "level": 1,
+          "generators": [
+            "moda:1",
+            "C9"
+          ]
+        },
+        {
+          "id": "identificar-moda-qualitativa",
+          "name": "Identificar la categoria qualitativa de freqüència màxima",
+          "level": 1,
+          "generators": [
+            "moda:2",
+            "moda:8",
+            "C10",
+            "C17"
+          ]
+        },
+        {
+          "id": "identificar-modes-empatades",
+          "name": "Identificar totes les modes quan hi ha un empat de freqüència màxima",
+          "level": 1,
+          "generators": [
+            "moda:3",
+            "moda:6",
+            "moda:9",
+            "C11"
+          ]
+        },
+        {
+          "id": "actualitzar-moda-amb-noves-dades",
+          "name": "Tornar a determinar la moda després d’afegir dades",
+          "level": 2,
+          "generators": [
+            "moda:4",
+            "C14"
+          ]
+        },
+        {
+          "id": "interpretar-concepte-moda",
+          "name": "Interpretar la definició i les propietats de la moda",
+          "level": 1,
+          "generators": [
+            "moda:5",
+            "C16"
+          ]
+        },
+        {
+          "id": "interpretar-moda-qualitativa",
+          "name": "Reconèixer que la moda també s’aplica a dades qualitatives",
+          "level": 1,
+          "generators": [
+            "moda:7",
+            "moda:10"
+          ]
+        },
+        {
+          "id": "identificar-absencia-moda",
+          "name": "Reconèixer que no hi ha moda si tots els valors apareixen una sola vegada segons la convenció indicada",
+          "level": 1,
+          "generators": [
+            "moda:11",
+            "C15"
+          ],
+          "note": "Convenció del generador: si tots els valors apareixen una vegada, es considera que no hi ha moda; la condició s’explicita a l’enunciat."
+        }
+      ]
+    },
+    {
+      "id": "1eso/estocastic/probabilitat",
+      "course": "1r ESO",
+      "sense": "Estocàstic",
+      "topic": "Probabilitat",
+      "code_topic_id": "probabilitat",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 38,
+      "merge_commit": "156fceacc57e312d47846f6a536abbf514ba9fc6",
+      "validation": "Prova matemàtica específica: banc finit 141/141, 2.750 mostres contextuals (250 per patró) i rotació de 282 extraccions; comprovacions de Laplace, fraccions, urna i ruleta. Playwright del tema a Chrome: pràctica guiada/autònoma, 20 preguntes obertes, exàmens de tema 12 i global 20, viewport 390 px i zero errors JavaScript. Validació agregada PR #38 (evidència de lot, no test específic d’aquest tema): cinc proves matemàtiques i cinc Playwright superades; 281 ítems regulars finits, 2.000 mostres aleatòries i 9.000 contextuals. Les comprovacions de teoria cobreixen 30 ancoratges i cinc hashchange en les cinc pàgines; s’han verificat les destinacions de pràctica per URL, però no el clic entre pàgines en context file://. S’han passat vuit regressions PR #37 i 30 mostres per tema d’ampliació en cada prova de navegador. L’usuari també informa d’una validació local posterior a Windows; no s’atribueix a Edge. GitHub Pages no consta verificat.",
+      "families": [
+        {
+          "id": "classificar-fenomen-aleatori",
+          "name": "Distingir fenòmens aleatoris i deterministes",
+          "level": 1,
+          "generators": [
+            "probabilitat:1"
+          ]
+        },
+        {
+          "id": "determinar-espai-mostral",
+          "name": "Determinar l’espai mostral d’un experiment senzill",
+          "level": 1,
+          "generators": [
+            "probabilitat:2",
+            "P5"
+          ]
+        },
+        {
+          "id": "classificar-probabilitat-qualitativa",
+          "name": "Classificar qualitativament esdeveniments segurs, impossibles o probables",
+          "level": 1,
+          "generators": [
+            "probabilitat:3",
+            "P6"
+          ]
+        },
+        {
+          "id": "regla-laplace-equiprobable",
+          "name": "Aplicar la regla de Laplace a resultats equiprobables",
+          "level": 1,
+          "generators": [
+            "probabilitat:4",
+            "probabilitat:5",
+            "probabilitat:6",
+            "probabilitat:7",
+            "probabilitat:11",
+            "P1",
+            "P2",
+            "P4"
+          ]
+        },
+        {
+          "id": "comparar-probabilitats-esdeveniments",
+          "name": "Comparar probabilitats d’esdeveniments en un mateix experiment",
+          "level": 2,
+          "generators": [
+            "probabilitat:8",
+            "P9"
+          ]
+        },
+        {
+          "id": "calcular-freq-relativa-experimental",
+          "name": "Calcular una freqüència relativa a partir de resultats observats",
+          "level": 2,
+          "generators": [
+            "probabilitat:9",
+            "P7"
+          ]
+        },
+        {
+          "id": "distingir-probabilitat-teorica-experimental",
+          "name": "Distingir probabilitat teòrica de freqüència experimental",
+          "level": 2,
+          "generators": [
+            "probabilitat:10",
+            "P11"
+          ]
+        },
+        {
+          "id": "interpretar-estabilitzacio-freq-relativa",
+          "name": "Interpretar la tendència de la freqüència relativa amb moltes repeticions",
+          "level": 2,
+          "generators": [
+            "P8"
+          ]
+        },
+        {
+          "id": "calcular-esdeveniment-complementari",
+          "name": "Calcular la probabilitat de l’esdeveniment complementari",
+          "level": 1,
+          "generators": [
+            "P3"
+          ]
+        },
+        {
+          "id": "reconstruir-casos-favorables",
+          "name": "Recuperar casos favorables a partir de la probabilitat i del total equiprobable",
+          "level": 2,
+          "generators": [
+            "P10"
+          ]
+        }
+      ]
     }
   ]
 }
