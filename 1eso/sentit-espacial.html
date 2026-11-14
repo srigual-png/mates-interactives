@@ -2025,18 +2025,50 @@ function svgGridModel(cols,rows,splitCol){
   for(let x=0;x<=cols;x++) lines+=`<line x1="${x0+x*cell}" y1="${y0}" x2="${x0+x*cell}" y2="${y0+h}" stroke="#c5cae9" stroke-width="1"/>`;
   for(let y=0;y<=rows;y++) lines+=`<line x1="${x0}" y1="${y0+y*cell}" x2="${x0+w}" y2="${y0+y*cell}" stroke="#c5cae9" stroke-width="1"/>`;
   const split=(Number.isInteger(splitCol)&&splitCol>0&&splitCol<cols)?`<line x1="${x0+splitCol*cell}" y1="${y0}" x2="${x0+splitCol*cell}" y2="${y0+h}" stroke="#e05c5c" stroke-width="3"/>`:'';
-  return `<svg width="${w+42}" height="${h+38}" viewBox="0 0 ${w+42} ${h+38}" xmlns="http://www.w3.org/2000/svg"><rect x="${x0}" y="${y0}" width="${w}" height="${h}" fill="#a0b4ff" fill-opacity=".16" stroke="#6c63d8" stroke-width="2"/>${lines}${split}<text x="${x0+w/2}" y="${y0+h+16}" text-anchor="middle" font-size="10" fill="#555">${cols} columnes</text><text x="${x0+w+5}" y="${y0+h/2}" font-size="10" fill="#555">${rows} files</text></svg>`;
+  return `<svg width="${w+50}" height="${h+38}" viewBox="0 0 ${w+50} ${h+38}" xmlns="http://www.w3.org/2000/svg"><rect x="${x0}" y="${y0}" width="${w}" height="${h}" fill="#a0b4ff" fill-opacity=".16" stroke="#6c63d8" stroke-width="2"/>${lines}${split}<text x="${x0+w/2}" y="${y0+h+16}" text-anchor="middle" font-size="10" fill="#555">${cols} columnes</text><text x="${x0+w+5}" y="${y0+h/2}" font-size="10" fill="#555">${rows} files</text></svg>`;
 }
 
 function svgSquareAreaOnly(area){
   const x0=18,y0=14,s=56;
-  return `<svg width="140" height="110" viewBox="0 0 140 110" xmlns="http://www.w3.org/2000/svg">
+  return `<svg width="170" height="110" viewBox="0 0 170 110" xmlns="http://www.w3.org/2000/svg">
     <rect x="${x0}" y="${y0}" width="${s}" height="${s}" fill="#a0b4ff" fill-opacity=".14" stroke="#6c63d8" stroke-width="2"/>
     <line x1="${x0}" y1="${y0+s+8}" x2="${x0+s}" y2="${y0+s+8}" stroke="#6c63d8" stroke-width="1.5"/>
     <text x="${x0+s/2}" y="${y0+s+22}" text-anchor="middle" font-size="11" fill="#6c63d8">costat = ?</text>
     <text x="92" y="42" font-size="12" fill="#555">Àrea = ${area}</text>
     <text x="92" y="58" font-size="12" fill="#555">unitats²</text>
   </svg>`;
+}
+
+function svgOddSquareLayers(n){
+  const cell=18,x0=8,y0=8,w=n*cell,h=n*cell,colors=['#6c63d8','#74a9e8','#78c99b','#f2c45d','#ed9a6a','#ce78b0','#80b9ae','#c1cf78'];
+  let cells='',lines='';
+  for(let row=0;row<n;row++)for(let col=0;col<n;col++){const layer=Math.max(row,col);cells+=`<rect x="${x0+col*cell}" y="${y0+row*cell}" width="${cell}" height="${cell}" fill="${colors[layer%colors.length]}" fill-opacity=".72"/>`;}
+  for(let x=0;x<=n;x++)lines+=`<line x1="${x0+x*cell}" y1="${y0}" x2="${x0+x*cell}" y2="${y0+h}" stroke="#fff" stroke-width="1"/>`;
+  for(let y=0;y<=n;y++)lines+=`<line x1="${x0}" y1="${y0+y*cell}" x2="${x0+w}" y2="${y0+y*cell}" stroke="#fff" stroke-width="1"/>`;
+  const legend=Array.from({length:n},(_,i)=>`<text x="${x0+w+6}" y="${y0+(i+.68)*cell}" font-size="9" fill="#444">${2*i+1}</text>`).join('');
+  return `<svg width="${w+35}" height="${h+20}" viewBox="0 0 ${w+35} ${h+20}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Quadrat de ${n} per ${n} format per capes senars"><title>Capes de nombres senars</title><desc>Cada capa de color afegeix 1, 3, 5 i successivament ${2*n-1} quadradets.</desc>${cells}${lines}<rect x="${x0}" y="${y0}" width="${w}" height="${h}" fill="none" stroke="#5149a8" stroke-width="2"/>${legend}</svg>`;
+}
+
+function svgFractionProductModel(den1,den2,n2){
+  const cell=22,x0=34,y0=20,w=den1*cell,h=den2*cell;
+  let fills='',lines='';
+  for(let row=0;row<den2;row++)for(let col=0;col<den1;col++){
+    const fill=col===0&&row<n2?'#8d78d8':col===0?'#80b5e8':row<n2?'#f2bf62':'#f3f5fa';
+    fills+=`<rect x="${x0+col*cell}" y="${y0+row*cell}" width="${cell}" height="${cell}" fill="${fill}" fill-opacity=".72"/>`;
+  }
+  for(let x=0;x<=den1;x++)lines+=`<line x1="${x0+x*cell}" y1="${y0}" x2="${x0+x*cell}" y2="${y0+h}" stroke="#667085" stroke-width="1"/>`;
+  for(let y=0;y<=den2;y++)lines+=`<line x1="${x0}" y1="${y0+y*cell}" x2="${x0+w}" y2="${y0+y*cell}" stroke="#667085" stroke-width="1"/>`;
+  const svgWidth=Math.max(w+48,148);
+  return `<svg width="${svgWidth}" height="${h+42}" viewBox="0 0 ${svgWidth} ${h+42}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Model de producte de fraccions en una quadrícula de ${den1} per ${den2}"><title>Intersecció de dues regions</title><desc>Una de ${den1} columnes i ${n2} de ${den2} files se superposen en ${n2} de ${den1*den2} cel·les.</desc>${fills}${lines}<rect x="${x0}" y="${y0}" width="${w}" height="${h}" fill="none" stroke="#5149a8" stroke-width="2"/><text x="${x0+w/2}" y="${y0+h+15}" text-anchor="middle" font-size="10" fill="#444">1/${den1} de l’amplada</text><text x="2" y="${y0+h/2}" font-size="9" fill="#444">${n2}/${den2}</text></svg>`;
+}
+
+function svgMissingRectanglePart(a,b,h,left,total){
+  const cell=18,x0=8,y0=8,cols=a+b,w=cols*cell,ht=h*cell;
+  let fills='',lines='';
+  for(let row=0;row<h;row++)for(let col=0;col<cols;col++)fills+=`<rect x="${x0+col*cell}" y="${y0+row*cell}" width="${cell}" height="${cell}" fill="${col<a?'#80b5e8':'#f2bf62'}" fill-opacity=".65"/>`;
+  for(let x=0;x<=cols;x++)lines+=`<line x1="${x0+x*cell}" y1="${y0}" x2="${x0+x*cell}" y2="${y0+ht}" stroke="#fff" stroke-width="1"/>`;
+  for(let y=0;y<=h;y++)lines+=`<line x1="${x0}" y1="${y0+y*cell}" x2="${x0+w}" y2="${y0+y*cell}" stroke="#fff" stroke-width="1"/>`;
+  return `<svg width="${w+20}" height="${ht+42}" viewBox="0 0 ${w+20} ${ht+42}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Rectangle descompost en una part coneguda de ${left} i una part desconeguda; total ${total}"><title>Part desconeguda d’un rectangle</title><desc>La primera part té àrea ${left}; la segona és la part que falta per completar ${total}.</desc>${fills}${lines}<rect x="${x0}" y="${y0}" width="${w}" height="${ht}" fill="none" stroke="#5149a8" stroke-width="2"/><text x="${x0+a*cell/2}" y="${y0+ht+15}" text-anchor="middle" font-size="10" fill="#444">${left}</text><text x="${x0+(a+b/2)*cell}" y="${y0+ht+15}" text-anchor="middle" font-size="10" fill="#444">?</text><text x="${x0+w/2}" y="${y0+ht+30}" text-anchor="middle" font-size="10" fill="#444">total = ${total}</text></svg>`;
 }
 
 function genVisualitzacio1r(){
@@ -2070,20 +2102,20 @@ function genVisualitzacio1r(){
     question=`Un patró quadrat es construeix afegint els primers <b>${n}</b> nombres senars: 1 + 3 + 5 + … Quants punts té el quadrat final?`;
     correct=String(sum); options=uniq4(correct,[String(n*(n+1)/2),String(n*n+n),String(2*n+1),String((n-1)*(n-1))]);
     guide=['Observa que cada nou nombre senar completa una capa d’un quadrat','Relaciona el nombre de capes amb el costat del quadrat final'];
-    solution=[`La suma dels primers ${n} senars forma un quadrat de costat ${n}`,`${n}² = ${sum}`,`✅ ${sum}`];
+    solution=[`La suma dels primers ${n} senars forma un quadrat de costat ${n}`,`${n}² = ${sum}`,`✅ ${sum}`]; svg=svgOddSquareLayers(n);
   }else if(type===6){
     const den1=[2,3,4][rnd(0,2)],den2=[2,3,5][rnd(0,2)],n1=1,n2=rnd(1,den2-1);
     const num=n1*n2,den=den1*den2; const g=(a,b)=>b?g(b,a%b):a; const gg=g(num,den),sn=num/gg,sd=den/gg;
     question=`En un model rectangular, es pren <b>1/${den1}</b> de l'amplada i <b>${n2}/${den2}</b> de l'alçada. Quina fracció del rectangle queda a la intersecció?`;
     correct=`${sn}/${sd}`; options=uniq4(correct,[`${n1+n2}/${den1+den2}`,`${n2}/${den1+den2}`,`${n2}/${Math.max(1,den2-den1)}`,`${Math.min(den-1,num+1)}/${den}`]);
     guide=['La zona comuna és una fracció d’una fracció','Multiplica les parts horitzontal i vertical i simplifica'];
-    solution=[`(1/${den1}) × (${n2}/${den2}) = ${num}/${den}`,`${num}/${den} = ${sn}/${sd}`,`✅ ${correct}`];
+    solution=[`(1/${den1}) × (${n2}/${den2}) = ${num}/${den}`,`${num}/${den} = ${sn}/${sd}`,`✅ ${correct}`]; svg=svgFractionProductModel(den1,den2,n2);
   }else{
     const h=rnd(2,6),a=rnd(2,5),b=rnd(2,5),left=a*h,right=b*h,total=left+right;
     question=`Un rectangle de dues parts té àrea total <b>${total}</b>. La part esquerra té àrea <b>${left}</b>. Quina àrea té la part dreta?`;
     correct=String(right); options=uniq4(correct,[String(total+left),String(total-left+h),String(left),String(a+b)]);
     guide=['El rectangle total és la suma de les dues parts sense solapament','Troba la part que falta a partir del total'];
-    solution=[`${total} − ${left} = ${right}`,`✅ ${right}`]; svg='';
+    solution=[`${total} − ${left} = ${right}`,`✅ ${right}`]; svg=svgMissingRectanglePart(a,b,h,left,total);
   }
   return {topicId:'visualitzacio',type,question,correct,options,guide,solution,svg};
 }
@@ -2243,8 +2275,8 @@ spAdd('C6','cercle','cercle',1,()=>{const d=[6,8,10,12,20][rnd(0,4)],c=+(3.14*d)
 spAdd('V1','visualitzacio','visualitzacio',1,()=>{const a=rnd(3,8),b=rnd(2,6),r=a*b;return spProblem({patternId:'V1',family:'visualitzacio',topicId:'visualitzacio',diff:1,question:`Un model rectangular té <b>${a} columnes</b> i <b>${b} files</b> de quadradets. Quants quadradets conté?`,svg:svgGridModel(a,b),answer:spNumAnswer(r),hint:['Interpreta les files i columnes com una multiplicació'],solution:[`${a} × ${b} = <b>${r}</b>.`]});});
 spAdd('V2','visualitzacio','visualitzacio',2,()=>{const a=rnd(2,5),b=rnd(2,5),h=rnd(2,6),r=(a+b)*h;return spProblem({patternId:'V2',family:'visualitzacio',topicId:'visualitzacio',diff:2,question:`Un rectangle d’alçada <b>${h}</b> està dividit en amplades <b>${a}</b> i <b>${b}</b>. Quina és l’àrea total?`,svg:svgGridModel(a+b,h,a),answer:spNumAnswer(r),hint:['Pots sumar les dues àrees parcials o sumar primer les amplades','Les dues estratègies representen la mateixa multiplicació'],solution:[`${a}×${h} + ${b}×${h} = ${a*h}+${b*h} = <b>${r}</b>.`]});});
 spAdd('V3','visualitzacio','visualitzacio',1,()=>{const s=rnd(2,12),a=s*s;return spProblem({patternId:'V3',family:'visualitzacio',topicId:'visualitzacio',diff:1,question:`Un quadrat té àrea <b>${a} unitats²</b>. Quina longitud té el costat?`,svg:svgSquareAreaOnly(a),answer:spNumAnswer(s),hint:['Busca el nombre que multiplicat per ell mateix dona l’àrea'],solution:[`√${a} = <b>${s}</b>.`]});});
-spAdd('V4','visualitzacio','visualitzacio',2,()=>{const n=rnd(3,8),r=n*n;return spProblem({patternId:'V4',family:'visualitzacio',topicId:'visualitzacio',diff:2,question:`Afegint capes de punts amb els primers <b>${n}</b> nombres senars es forma un quadrat. Quants punts hi haurà en total?`,answer:spNumAnswer(r),hint:['Cada nombre senar nou completa una nova capa del quadrat','Relaciona el nombre de capes amb el costat final'],solution:[`1+3+…+${2*n-1} = ${n}² = <b>${r}</b>.`]});});
-spAdd('V5','visualitzacio','visualitzacio',2,()=>{const d1=[2,3,4][rnd(0,2)],d2=[2,3,5][rnd(0,2)],n2=rnd(1,d2-1);const n=n2,d=d1*d2;return spProblem({patternId:'V5',family:'visualitzacio',topicId:'visualitzacio',diff:2,question:`En un rectangle, quina fracció representa la intersecció de <b>1/${d1}</b> de l’amplada amb <b>${n2}/${d2}</b> de l’alçada?`,answer:spFracAnswer(n,d),hint:['Interpreta la zona comuna com una fracció d’una altra fracció','Multiplica les dues fraccions i simplifica'],solution:[`(1/${d1})×(${n2}/${d2}) = <b>${spFracAnswer(n,d).val}</b>.`]});});
+spAdd('V4','visualitzacio','visualitzacio',2,()=>{const n=rnd(3,8),r=n*n;return spProblem({patternId:'V4',family:'visualitzacio',topicId:'visualitzacio',diff:2,question:`Afegint capes de punts amb els primers <b>${n}</b> nombres senars es forma un quadrat. Quants punts hi haurà en total?`,svg:svgOddSquareLayers(n),answer:spNumAnswer(r),hint:['Cada nombre senar nou completa una nova capa del quadrat','Relaciona el nombre de capes amb el costat final'],solution:[`1+3+…+${2*n-1} = ${n}² = <b>${r}</b>.`]});});
+spAdd('V5','visualitzacio','visualitzacio',1,()=>{const d1=[2,3,4][rnd(0,2)],d2=[2,3,5][rnd(0,2)],n2=rnd(1,d2-1);const n=n2,d=d1*d2;return spProblem({patternId:'V5',family:'visualitzacio',topicId:'visualitzacio',diff:1,question:`En un rectangle, quina fracció representa la intersecció de <b>1/${d1}</b> de l’amplada amb <b>${n2}/${d2}</b> de l’alçada?`,svg:svgFractionProductModel(d1,d2,n2),answer:spFracAnswer(n,d),hint:['Interpreta la zona comuna com una fracció d’una altra fracció','Multiplica les dues fraccions i simplifica'],solution:[`(1/${d1})×(${n2}/${d2}) = <b>${spFracAnswer(n,d).val}</b>.`]});});
 
 const spCfg={family:'mix',nq:10,diff:0};
 let spSession={active:false,problems:[],idx:0,correct:0,answered:false};
@@ -2837,7 +2869,7 @@ function validGeneratedExercise(ex){
 }
 
 function practiceFamilyKey(t,ex){
-  return ['elements','angles','poligons','triangles','quadrilaters','cercle'].includes(t.id)?(ex.familyId||ex.type):ex.type;
+  return ['elements','angles','poligons','triangles','quadrilaters','cercle','visualitzacio'].includes(t.id)?(ex.familyId||ex.type):ex.type;
 }
 
 function generateVariedPracticeExercise(t){
