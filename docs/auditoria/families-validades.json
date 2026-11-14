@@ -1480,6 +1480,785 @@
           ]
         }
       ]
+    },
+    {
+      "id": "1eso/mesura/metric",
+      "course": "1r ESO",
+      "sense": "Mesura",
+      "topic": "Sistema Mètric Decimal",
+      "code_topic_id": "metric",
+      "status": "validat",
+      "verified_on": "2026-11-13",
+      "pr": 25,
+      "merge_commit": "53d28a93350738dfec2f082bb0bb034e2b2fc776",
+      "validation": "Validació del tema: comprova-metric-families-1eso.cjs, 1.250 mostres. Prova integral amb Chrome: 120 generacions, les 4 famílies, rotació sense repeticions consecutives, pràctica guiada/autònoma, exàmens de 12/20 preguntes, 20 mostres de cadascun dels cinc veïns, teoria/hashchange i mòbil 390 px. Edge no executat; GitHub Pages no verificat.",
+      "families": [
+        {
+          "id": "escala-decimal-longitud-capacitat",
+          "name": "Conversió d’unitats de longitud i capacitat a l’escala decimal",
+          "level": 1,
+          "generators": [
+            "1",
+            "3"
+          ]
+        },
+        {
+          "id": "equivalencies-massa-factor-1000",
+          "name": "Conversió d’unitats de massa per equivalències de mil en mil",
+          "level": 1,
+          "generators": [
+            "2"
+          ]
+        },
+        {
+          "id": "mesura-mixta",
+          "name": "Operar amb una mesura composta i unitats diferents",
+          "level": 2,
+          "generators": [
+            "1002"
+          ],
+          "note": "ID compartit amb Conversions (allà, tipus 2); és una sola família matemàtica i es manté documentada a les dues entrades locals."
+        },
+        {
+          "id": "talls-combinats",
+          "name": "Optimitzar la distribució de talls sota restriccions",
+          "level": 3,
+          "generators": [
+            "1001"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/mesura/conversions",
+      "course": "1r ESO",
+      "sense": "Mesura",
+      "topic": "Conversions d'unitats",
+      "code_topic_id": "conversions",
+      "status": "validat",
+      "verified_on": "2026-11-13",
+      "pr": 26,
+      "merge_commit": "bd1fd1f1fed800f8a10d449db35e1fb594d4dcd2",
+      "validation": "Validació del tema: comprova-conversions-families-1eso.cjs, 2.000 mostres. Prova integral amb Chrome: 150 generacions, les 7 famílies, 25 rotacions després d’error, pràctica guiada/autònoma, exàmens de 12/20, banc C01–C06, regressió de Sistema Mètric Decimal, teoria/ancoratges/hashchange i mòbil 390 px. Edge i GitHub Pages no verificats.",
+      "families": [
+        {
+          "id": "conversio-superficies",
+          "name": "Convertir unitats de superfície",
+          "level": 2,
+          "generators": [
+            "1",
+            "4"
+          ]
+        },
+        {
+          "id": "mesura-mixta",
+          "name": "Operar amb mesures mixtes i unitats diferents",
+          "level": 2,
+          "generators": [
+            "2"
+          ],
+          "note": "ID compartit amb Sistema Mètric Decimal (allà, tipus 1002); mateixa família matemàtica conservada en totes dues entrades.",
+          "variants": [
+            "context:C01",
+            "context:C04"
+          ]
+        },
+        {
+          "id": "comparar-equivalencies",
+          "name": "Comparar mesures equivalents o no equivalents",
+          "level": 1,
+          "generators": [
+            "3"
+          ]
+        },
+        {
+          "id": "carrega-amb-dos-limits",
+          "name": "Optimitzar una càrrega amb límit de massa i de nombre d’objectes",
+          "level": 3,
+          "generators": [
+            "1001"
+          ]
+        },
+        {
+          "id": "ordenar-mesures",
+          "name": "Ordenar mesures d’àrea i reconstruir-ne el valor central",
+          "level": 2,
+          "generators": [
+            "1003"
+          ]
+        },
+        {
+          "id": "operar-arees-mixtes",
+          "name": "Operar amb diverses superfícies en unitats diferents",
+          "level": 2,
+          "generators": [
+            "1004"
+          ]
+        },
+        {
+          "id": "diagnosticar-error-superficie",
+          "name": "Diagnosticar i corregir un factor de conversió d’àrea",
+          "level": 2,
+          "generators": [
+            "1005"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/mesura/temps",
+      "course": "1r ESO",
+      "sense": "Mesura",
+      "topic": "Mesura del temps",
+      "code_topic_id": "temps",
+      "status": "validat",
+      "verified_on": "2026-11-13",
+      "pr": 27,
+      "merge_commit": "2a67563272675b037eed02365048a9725716f6c8",
+      "validation": "Validació del tema: test matemàtic amb 2.750 mostres. Prova integral amb Chrome: 160 generacions i totes les 10 famílies sense repetició consecutiva, variants nocturnes, rotació després de 25 errors, pràctica guiada/autònoma, exàmens de 12/20, 30 regressions cadascun a metric/conversions, teoria/hashchange i mòbil 390 px. Edge i GitHub Pages no verificats.",
+      "families": [
+        {
+          "id": "equivalencies-temporals",
+          "name": "Convertir i reconèixer equivalències temporals",
+          "level": 1,
+          "generators": [
+            "1",
+            "5"
+          ]
+        },
+        {
+          "id": "hora-final",
+          "name": "Calcular l’hora final a partir de l’inici i una durada",
+          "level": 2,
+          "generators": [
+            "2"
+          ],
+          "variants": [
+            "context:T02"
+          ]
+        },
+        {
+          "id": "durada-entre-hores",
+          "name": "Calcular la durada entre dues hores",
+          "level": 2,
+          "generators": [
+            "3"
+          ],
+          "variants": [
+            "context:T01",
+            "context:T04"
+          ]
+        },
+        {
+          "id": "descompondre-durades",
+          "name": "Expressar una durada en hores/minuts o minuts/segons",
+          "level": 2,
+          "generators": [
+            "4"
+          ]
+        },
+        {
+          "id": "reconstruir-hora-inicial",
+          "name": "Reconstruir l’hora inicial a partir de la final i la durada",
+          "level": 2,
+          "generators": [
+            "1002"
+          ]
+        },
+        {
+          "id": "operar-durades-i-pausas",
+          "name": "Sumar durades i pauses de diverses activitats",
+          "level": 2,
+          "generators": [
+            "1003"
+          ],
+          "note": "T01 inclou la resta d’una parada dins del càlcul de durada; es manté com a variant contextual composta, no com a família nova.",
+          "variants": [
+            "context:T01",
+            "context:T03"
+          ]
+        },
+        {
+          "id": "detectar-error-base-sexagesimal",
+          "name": "Detectar i corregir l’error de base 100 en durades",
+          "level": 2,
+          "generators": [
+            "1004"
+          ]
+        },
+        {
+          "id": "seleccionar-unitat-temporal",
+          "name": "Escollir la unitat adequada per a una durada quotidiana",
+          "level": 1,
+          "generators": [
+            "1005"
+          ]
+        },
+        {
+          "id": "comparar-durades",
+          "name": "Comparar durades expressades en hores i minuts",
+          "level": 2,
+          "generators": [
+            "1006"
+          ]
+        },
+        {
+          "id": "transbordament-invers",
+          "name": "Reconstruir una sortida amb transbordaments i termini",
+          "level": 3,
+          "generators": [
+            "1001"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/mesura/perimetres",
+      "course": "1r ESO",
+      "sense": "Mesura",
+      "topic": "Perímetres",
+      "code_topic_id": "perimetres",
+      "status": "validat",
+      "verified_on": "2026-11-13",
+      "pr": 28,
+      "merge_commit": "ec5c6e5cdc3b534d6ae8473120eda20e098b0ea6",
+      "validation": "Validació del tema: test matemàtic, 4.250 casos (1.750 directes i 2.500 de catàleg). Prova integral amb Chrome: 220 exercicis, 13 famílies, rotació/error, pràctica guiada/autònoma, exàmens de 12/20, 30 regressions a metric/conversions/temps, teoria/ancoratges/hashchange i mòbil 390 px. Edge i GitHub Pages no verificats.",
+      "families": [
+        {
+          "id": "perimetre-directe",
+          "name": "Sumar els costats coneguts del contorn",
+          "level": 1,
+          "generators": [
+            "1",
+            "2",
+            "3",
+            "6",
+            "7"
+          ]
+        },
+        {
+          "id": "circumferencia-directa",
+          "name": "Calcular la longitud d’una circumferència",
+          "level": 2,
+          "generators": [
+            "4"
+          ],
+          "variants": [
+            "banc:P03"
+          ]
+        },
+        {
+          "id": "figura-l-cantonada",
+          "name": "Calcular el perímetre d’una figura en L",
+          "level": 2,
+          "generators": [
+            "5"
+          ]
+        },
+        {
+          "id": "reconstruir-costat-des-del-perimetre",
+          "name": "Reconstruir un costat a partir del perímetre",
+          "level": 2,
+          "generators": [
+            "1002"
+          ],
+          "variants": [
+            "banc:P05"
+          ]
+        },
+        {
+          "id": "circumferencia-inversa",
+          "name": "Reconstruir radi o diàmetre des de la circumferència",
+          "level": 2,
+          "generators": [
+            "1003"
+          ]
+        },
+        {
+          "id": "contorn-entallat",
+          "name": "Calcular el contorn d’una figura amb entallada",
+          "level": 2,
+          "generators": [
+            "1004"
+          ]
+        },
+        {
+          "id": "perimetre-unitats-mixtes",
+          "name": "Sumar costats amb unitats diferents",
+          "level": 2,
+          "generators": [
+            "1005"
+          ]
+        },
+        {
+          "id": "comparar-perimetres",
+          "name": "Comparar dos perímetres i trobar-ne la diferència",
+          "level": 2,
+          "generators": [
+            "1006"
+          ]
+        },
+        {
+          "id": "diagnosticar-error-perimetre",
+          "name": "Detectar i corregir errors de fórmula del perímetre",
+          "level": 2,
+          "generators": [
+            "1007"
+          ]
+        },
+        {
+          "id": "perimetre-amb-obertura",
+          "name": "Calcular la tanca necessària amb una obertura",
+          "level": 2,
+          "generators": [
+            "1008"
+          ],
+          "variants": [
+            "banc:P01"
+          ]
+        },
+        {
+          "id": "cost-material-per-contorn",
+          "name": "Calcular el cost del material que cobreix un contorn",
+          "level": 2,
+          "generators": [
+            "1009"
+          ],
+          "variants": [
+            "banc:P02"
+          ]
+        },
+        {
+          "id": "voltes-circumferencia",
+          "name": "Calcular una distància a partir de voltes d’una roda",
+          "level": 2,
+          "generators": [
+            "1010"
+          ],
+          "variants": [
+            "banc:P04",
+            "context:I04"
+          ]
+        },
+        {
+          "id": "optimitzar-area-amb-tanca",
+          "name": "Optimitzar àrea amb perímetre i restricció de dimensions",
+          "level": 3,
+          "generators": [
+            "1001"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/mesura/arees",
+      "course": "1r ESO",
+      "sense": "Mesura",
+      "topic": "Àrees",
+      "code_topic_id": "arees",
+      "status": "validat",
+      "verified_on": "2026-11-13",
+      "pr": 29,
+      "merge_commit": "9062840d294cb0793a391bb96ca589d68f51ce48",
+      "validation": "Validació del tema: test matemàtic, 4.750 mostres. Prova integral amb Chrome: cobertura de les 15 famílies, pràctica guiada/autònoma, exàmens de 12/20, regressions de 30 generacions a metric/conversions/temps/perimetres, teoria/ancoratges/hashchange, viewport 390 px i zero errors JS. Edge i GitHub Pages no verificats.",
+      "families": [
+        {
+          "id": "producte-base-alcada",
+          "name": "Multiplicar base per alçada per calcular una àrea",
+          "level": 1,
+          "generators": [
+            "1",
+            "2",
+            "7"
+          ]
+        },
+        {
+          "id": "meitat-producte-dimensions",
+          "name": "Prendre la meitat del producte de dues dimensions",
+          "level": 1,
+          "generators": [
+            "3",
+            "4"
+          ]
+        },
+        {
+          "id": "comptar-quadrats-unitat",
+          "name": "Mesurar una regió comptant quadrats unitaris",
+          "level": 1,
+          "generators": [
+            "1003"
+          ]
+        },
+        {
+          "id": "area-trapezi",
+          "name": "Calcular l’àrea d’un trapezi",
+          "level": 2,
+          "generators": [
+            "5"
+          ]
+        },
+        {
+          "id": "compondre-arees-figures",
+          "name": "Combinar àrees de parts sense solapament",
+          "level": 2,
+          "generators": [
+            "6",
+            "1002"
+          ],
+          "variants": [
+            "banc:A03",
+            "banc:A06"
+          ]
+        },
+        {
+          "id": "costat-quadrat-des-de-larea",
+          "name": "Reconstruir el costat d’un quadrat a partir de l’àrea",
+          "level": 2,
+          "generators": [
+            "1004"
+          ]
+        },
+        {
+          "id": "reconstruir-dimensio-rectangle-area",
+          "name": "Reconstruir una dimensió rectangular a partir de l’àrea",
+          "level": 2,
+          "generators": [
+            "1005"
+          ],
+          "variants": [
+            "banc:A04"
+          ]
+        },
+        {
+          "id": "reconstruir-dimensio-meitat-producte",
+          "name": "Reconstruir una dimensió d’una àrea de mig producte",
+          "level": 2,
+          "generators": [
+            "1006"
+          ]
+        },
+        {
+          "id": "reconstruir-dimensio-trapezi",
+          "name": "Reconstruir una base o l’alçada del trapezi",
+          "level": 2,
+          "generators": [
+            "1007"
+          ]
+        },
+        {
+          "id": "comparar-arees",
+          "name": "Calcular i comparar dues àrees",
+          "level": 2,
+          "generators": [
+            "1008"
+          ],
+          "variants": [
+            "banc:A07"
+          ]
+        },
+        {
+          "id": "cobrir-superficie",
+          "name": "Calcular peces senceres per cobrir una superfície",
+          "level": 2,
+          "generators": [
+            "1009"
+          ],
+          "variants": [
+            "banc:A01",
+            "banc:A02"
+          ]
+        },
+        {
+          "id": "cost-per-superficie",
+          "name": "Calcular el cost d’una superfície",
+          "level": 2,
+          "generators": [
+            "1010"
+          ],
+          "variants": [
+            "banc:A05"
+          ]
+        },
+        {
+          "id": "diagnosticar-error-area",
+          "name": "Detectar i corregir errors en fórmules d’àrea",
+          "level": 2,
+          "generators": [
+            "1011"
+          ]
+        },
+        {
+          "id": "reconstruir-dimensio-figura-composta",
+          "name": "Reconstruir una dimensió d’una figura composta",
+          "level": 2,
+          "generators": [
+            "1012"
+          ]
+        },
+        {
+          "id": "perimetre-minim-amb-area-fixada",
+          "name": "Minimitzar el perímetre amb una àrea fixa",
+          "level": 3,
+          "generators": [
+            "1001"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/mesura/mesurament",
+      "course": "1r ESO",
+      "sense": "Mesura",
+      "topic": "Mesurament i precisió",
+      "code_topic_id": "mesurament",
+      "status": "validat",
+      "verified_on": "2026-11-13",
+      "pr": 30,
+      "merge_commit": "e725568f58ed925f4ab5f2db1e8f08298ea73103",
+      "validation": "Validació del tema: test matemàtic, 7.000 mostres. Prova integral amb Chrome: 320 seleccions, les 15 famílies, rotació/error, pràctica guiada/autònoma, exàmens de 12/20, regressions de 30 generacions per cadascun dels cinc temes previs, teoria/ancoratges/hashchange, mòbil 390 px i zero errors JS. Edge i GitHub Pages no verificats.",
+      "families": [
+        {
+          "id": "seleccionar-instrument",
+          "name": "Seleccionar un instrument segons la magnitud",
+          "level": 1,
+          "generators": [
+            "1"
+          ],
+          "variants": [
+            "banc:M01"
+          ]
+        },
+        {
+          "id": "seleccionar-unitat-mesura",
+          "name": "Seleccionar una unitat adequada per a una magnitud",
+          "level": 1,
+          "generators": [
+            "2"
+          ],
+          "variants": [
+            "banc:M02"
+          ]
+        },
+        {
+          "id": "identificar-magnitud-plana",
+          "name": "Identificar si cal mesurar contorn o superfície",
+          "level": 1,
+          "generators": [
+            "8"
+          ]
+        },
+        {
+          "id": "llegir-graduacions",
+          "name": "Llegir una escala graduada",
+          "level": 1,
+          "generators": [
+            "1002"
+          ]
+        },
+        {
+          "id": "comparar-resolucio-instruments",
+          "name": "Comparar la resolució d’instruments",
+          "level": 1,
+          "generators": [
+            "1003"
+          ]
+        },
+        {
+          "id": "raio-circumferencia-diametre",
+          "name": "Aproximar π com a raó entre circumferència i diàmetre",
+          "level": 1,
+          "generators": [
+            "7"
+          ]
+        },
+        {
+          "id": "escala-proporcional",
+          "name": "Calcular o interpretar una escala de longitud",
+          "level": 2,
+          "generators": [
+            "3",
+            "1004"
+          ],
+          "variants": [
+            "banc:S01",
+            "banc:S02",
+            "banc:S03",
+            "banc:S04"
+          ]
+        },
+        {
+          "id": "error-absolut",
+          "name": "Calcular o reconstruir una mesura amb error absolut",
+          "level": 2,
+          "generators": [
+            "4",
+            "1005"
+          ],
+          "variants": [
+            "banc:M03"
+          ]
+        },
+        {
+          "id": "error-relatiu-percentual",
+          "name": "Calcular i interpretar l’error relatiu percentual",
+          "level": 2,
+          "generators": [
+            "5",
+            "1006"
+          ],
+          "variants": [
+            "banc:M04",
+            "banc:M05"
+          ]
+        },
+        {
+          "id": "suma-angles-interiors-poligon",
+          "name": "Determinar un angle interior desconegut d’un polígon",
+          "level": 2,
+          "generators": [
+            "6"
+          ]
+        },
+        {
+          "id": "arrodonir-mesura",
+          "name": "Arrodonir una mesura a una precisió indicada",
+          "level": 2,
+          "generators": [
+            "1007"
+          ]
+        },
+        {
+          "id": "interval-incertesa-lectura",
+          "name": "Expressar l’interval compatible amb una lectura arrodonida",
+          "level": 2,
+          "generators": [
+            "1008"
+          ]
+        },
+        {
+          "id": "comparar-mesures-amb-incertesa",
+          "name": "Comparar mesures amb intervals d’incertesa",
+          "level": 2,
+          "generators": [
+            "1009"
+          ]
+        },
+        {
+          "id": "angle-gir-rellotge",
+          "name": "Calcular l’angle girat per l’agulla dels minuts",
+          "level": 2,
+          "generators": [
+            "1010"
+          ],
+          "variants": [
+            "banc:T05"
+          ]
+        },
+        {
+          "id": "encaix-amb-tolerancies",
+          "name": "Garantir l’encaix amb toleràncies de mesura",
+          "level": 3,
+          "generators": [
+            "1001"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/mesura/estimacio",
+      "course": "1r ESO",
+      "sense": "Mesura",
+      "topic": "Estimació",
+      "code_topic_id": "estimacio",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 31,
+      "merge_commit": "d1442311d3b02f91dfcd613edeb2c981ecf9384f",
+      "validation": "Validació local amb Microsoft Edge confirmada: 1.500 mostres matemàtiques i 400 exercicis de pràctica; cobertura de les tres famílies, exàmens temàtic/global de 12/20, regressions dels sis temes anteriors, teoria/ancoratges i mòbil 390 px. Els informes també documenten dues execucions deterministes amb Chrome. GitHub Pages no verificat.",
+      "families": [
+        {
+          "id": "estimacio-per-referents",
+          "name": "Estimar magnituds quotidianes amb referents i ordres de magnitud",
+          "level": 1,
+          "generators": [
+            "1",
+            "2",
+            "3",
+            "4"
+          ]
+        },
+        {
+          "id": "estimacio-amb-limit-superior",
+          "name": "Estimar una quantitat suficient a partir d’un interval",
+          "level": 2,
+          "generators": [
+            "1002",
+            "estimacio-comparada"
+          ]
+        },
+        {
+          "id": "estimacio-amb-garantia",
+          "name": "Garantir una compra amb marges màxims d’estimació",
+          "level": 3,
+          "generators": [
+            "1001"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/mesura/problemes",
+      "course": "1r ESO",
+      "sense": "Mesura",
+      "topic": "Problemes de context",
+      "code_topic_id": "problemes",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 31,
+      "merge_commit": "d1442311d3b02f91dfcd613edeb2c981ecf9384f",
+      "validation": "Validació local amb Microsoft Edge confirmada: 11.500 mostres matemàtiques (250 per cadascun dels 38 patrons contextuals i 8 rutes globals) i 400 exercicis de pràctica; cobertura de les quatre famílies pròpies, comprovació dels patrons contextuals, exàmens 12/20, regressions dels sis temes previs, teoria/ancoratges i mòbil 390 px. Els informes també documenten dues execucions deterministes amb Chrome. GitHub Pages no verificat.",
+      "families": [
+        {
+          "id": "restar-mesures-mateixa-unitat",
+          "name": "Restar mesures ja expressades en una mateixa unitat",
+          "level": 1,
+          "generators": [
+            "C05"
+          ],
+          "note": "És una de les quatre famílies pròpies locals de Problemes; les altres situacions reutilitzen famílies dels temes auditats."
+        },
+        {
+          "id": "repartir-quantitat-amb-conversio",
+          "name": "Convertir una quantitat i repartir-la en unitats completes",
+          "level": 2,
+          "generators": [
+            "C02",
+            "C03",
+            "C06",
+            "I05"
+          ],
+          "note": "Quatre identificadors de patró comparteixen el procediment; els altres patrons contextuals reusen famílies dels temes previs i no s’afegeixen com a famílies pròpies."
+        },
+        {
+          "id": "cost-combinat-area-perimetre",
+          "name": "Combinar el cost de cobrir una superfície i el seu contorn",
+          "level": 2,
+          "generators": [
+            "I03",
+            "I06"
+          ]
+        },
+        {
+          "id": "compra-pintura-combinada",
+          "name": "Minimitzar el cost d’una compra mixta sota una cobertura mínima",
+          "level": 3,
+          "generators": [
+            "R08",
+            "compra-pintura-combinada"
+          ],
+          "note": "R08 i la ruta de catàleg són variants de la mateixa família N3; els 38 patrons contextuals no es compten com a 38 famílies noves."
+        }
+      ]
     }
   ]
 }
