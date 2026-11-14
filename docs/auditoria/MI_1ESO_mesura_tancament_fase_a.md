@@ -10,12 +10,12 @@ Les sis primeres files provenen dels informes finals revisats i el codi correspo
 
 | Tema | Famílies locals | N1 / N2 / N3 | PR fusionada / SHA real de merge | Estat |
 |---|---:|---:|---|---|
-| Sistema Mètric Decimal (`metric`) | 4 | 2 / 1 / 1 | #24 · `b46568a8a2242ffb45ac01221527208789c49e32` | Integrat a main |
-| Conversions d’unitats (`conversions`) | 7 | 1 / 5 / 1 | #25 · `53d28a93350738dfec2f082bb0bb034e2b2fc776` | Integrat a main |
-| Mesura del temps (`temps`) | 10 | 2 / 7 / 1 | #26 · `bd1fd1f1fed800f8a10d449db35e1fb594d4dcd2` | Integrat a main |
-| Perímetres (`perimetres`) | 13 | 1 / 11 / 1 | #27 · `2a67563272675b037eed02365048a9725716f6c8` | Integrat a main |
-| Àrees (`arees`) | 15 | 3 / 11 / 1 | #28 · `ec5c6e5cdc3b534d6ae8473120eda20e098b0ea6` | Integrat a main |
-| Mesurament i precisió (`mesurament`) | 15 | 6 / 8 / 1 | #29 · `9062840d294cb0793a391bb96ca589d68f51ce48` | Integrat a main |
+| Sistema Mètric Decimal (`metric`) | 4 | 2 / 1 / 1 | #25 · `53d28a93350738dfec2f082bb0bb034e2b2fc776` | Integrat a main |
+| Conversions d’unitats (`conversions`) | 7 | 1 / 5 / 1 | #26 · `bd1fd1f1fed800f8a10d449db35e1fb594d4dcd2` | Integrat a main |
+| Mesura del temps (`temps`) | 10 | 2 / 7 / 1 | #27 · `2a67563272675b037eed02365048a9725716f6c8` | Integrat a main |
+| Perímetres (`perimetres`) | 13 | 1 / 11 / 1 | #28 · `ec5c6e5cdc3b534d6ae8473120eda20e098b0ea6` | Integrat a main |
+| Àrees (`arees`) | 15 | 3 / 11 / 1 | #29 · `9062840d294cb0793a391bb96ca589d68f51ce48` | Integrat a main |
+| Mesurament i precisió (`mesurament`) | 15 | 6 / 8 / 1 | #30 · `e725568f58ed925f4ab5f2db1e8f08298ea73103` | Integrat a main |
 | Estimació (`estimacio`) | 3 | 1 / 1 / 1 | — | Provisional en aquesta PR |
 | Problemes de context (`problemes`) | 4 pròpies | 1 / 2 / 1 | — | Provisional en aquesta PR |
 | **Total d’entrades locals** | **71** | **17 / 46 / 8** | — | 64 fusionades + 7 provisionals |
