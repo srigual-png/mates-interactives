@@ -2,6 +2,7 @@
 
 <html lang="ca">
 <head>
+<script src="../assets/js/espacial-1eso-families.js"></script>
 <script src="../assets/js/dificultat-mi.js"></script>
 <link rel="stylesheet" href="../assets/css/dificultat-mi.css">
 <script src="../assets/js/validacio-respostes.js"></script>
@@ -948,7 +949,8 @@ function genAngles(){
       'Recorda si aquesta relació conserva la mesura o completa un angle pla.'
     ];
     solution=[it.rel==='conjugats interns'?'Els conjugats interns sumen 180°.':'Aquesta parella d’angles té la mateixa mesura.',`✅ ${correct}`];
-    svg=svgParalelRec();
+    // El dibuix esquemàtic fix no coincideix amb totes les relacions escollides.
+    svg='';
 
   }else{
     const pols=[{n:3,nom:'triangle',si:60},{n:4,nom:'quadrat',si:90},{n:5,nom:'pentàgon',si:108},{n:6,nom:'hexàgon',si:120},{n:8,nom:'octàgon',si:135}];
@@ -2818,6 +2820,10 @@ function validGeneratedExercise(ex){
   );
 }
 
+function practiceFamilyKey(t,ex){
+  return ['elements','angles','poligons'].includes(t.id)?(ex.familyId||ex.type):ex.type;
+}
+
 function generateVariedPracticeExercise(t){
   if(!practiceVariety || practiceVariety.topicId!==t.id){
     resetPracticeVariety(t.id);
@@ -2831,10 +2837,10 @@ function generateVariedPracticeExercise(t){
     if(!validGeneratedExercise(ex))continue;
     fallback=fallback||ex;
     const key=exerciseQuestionKey(ex);
-    const typeKey=String(ex.type);
+    const typeKey=String(practiceFamilyKey(t,ex));
     if(!practiceVariety.usedQuestions.has(key) && typeKey!==String(practiceVariety.lastType)){
       practiceVariety.usedQuestions.add(key);
-      practiceVariety.lastType=ex.type;
+      practiceVariety.lastType=practiceFamilyKey(t,ex);
       return ex;
     }
   }
@@ -2848,7 +2854,7 @@ function generateVariedPracticeExercise(t){
     const key=exerciseQuestionKey(ex);
     if(!practiceVariety.usedQuestions.has(key)){
       practiceVariety.usedQuestions.add(key);
-      practiceVariety.lastType=ex.type;
+      practiceVariety.lastType=practiceFamilyKey(t,ex);
       return ex;
     }
   }
@@ -2859,14 +2865,14 @@ function generateVariedPracticeExercise(t){
   practiceVariety.lastType=null;
   if(fallback && validGeneratedExercise(fallback)){
     practiceVariety.usedQuestions.add(exerciseQuestionKey(fallback));
-    practiceVariety.lastType=fallback.type;
+    practiceVariety.lastType=practiceFamilyKey(t,fallback);
     return fallback;
   }
 
   const ex=t.gen();
   if(validGeneratedExercise(ex)){
     practiceVariety.usedQuestions.add(exerciseQuestionKey(ex));
-    practiceVariety.lastType=ex.type;
+    practiceVariety.lastType=practiceFamilyKey(t,ex);
   }
   return ex;
 }
