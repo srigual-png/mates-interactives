@@ -1444,7 +1444,7 @@ function genSectors(){
 
 // 6. Polígons de freqüències — bossa de 84 exercicis de lectura i interpretació (1r ESO)
 var poligonsBag=[];
-var lastPoligonsContext=null;
+var lastPoligonsFamily=null;
 
 function buildPoligonsPool(){
   var contexts=[
@@ -1535,22 +1535,22 @@ function buildPoligonsPool(){
   pool.push({topicId:'poligons',type:11,contextId:'teoria3',question:'Què representa habitualment l\'eix vertical d\'un polígon de freqüències?',correct:'Les freqüències',options:buildOpts('Les freqüències',['Els noms de les categories','Els graus d\'un cercle','Només el nombre total de dades']),guide:['Recorda què indica l\'alçada de cada punt.','Compara-ho amb un diagrama de barres de freqüències.'],solution:['L\'alçada de cada punt depèn del nombre de vegades que apareix el valor.','✅ L\'eix vertical representa les freqüències.']});
   pool.push({topicId:'poligons',type:12,contextId:'teoria4',question:'En un polígon de freqüències, què indica el punt més alt?',correct:'El valor amb la freqüència més gran',options:buildOpts('El valor amb la freqüència més gran',['El valor numèric més gran necessàriament','El nombre total de dades','El valor amb freqüència zero']),guide:['Fixa\'t que l\'alçada representa freqüència.','El punt més alt té la freqüència més gran.'],solution:['L\'altura dels punts representa les freqüències.','✅ El punt més alt correspon al valor més freqüent.']});
 
-  return shuffle(pool);
+  return MIFirstStochasticFamilies.balancePool('poligons',pool);
 }
 
 function genPoligons(){
   if(!Array.isArray(poligonsBag)||poligonsBag.length===0)poligonsBag=buildPoligonsPool();
   var pick=poligonsBag.length-1;
-  if(lastPoligonsContext!==null&&poligonsBag[pick].contextId===lastPoligonsContext&&poligonsBag.length>1){
+  if(lastPoligonsFamily!==null&&poligonsBag[pick].familyId===lastPoligonsFamily&&poligonsBag.length>1){
     for(var i=poligonsBag.length-2;i>=0;i--){
-      if(poligonsBag[i].contextId!==lastPoligonsContext){
+      if(poligonsBag[i].familyId!==lastPoligonsFamily){
         var tmp=poligonsBag[pick];poligonsBag[pick]=poligonsBag[i];poligonsBag[i]=tmp;
         break;
       }
     }
   }
   var ex=poligonsBag.pop();
-  lastPoligonsContext=ex.contextId;
+  lastPoligonsFamily=ex.familyId;
   return ex;
 }
 
@@ -1601,7 +1601,7 @@ function genMitjana(){
     solution=['Σ(valor × freqüència) = '+sumProd,'N = '+N,'✅ Mitjana = '+sumProd+' / '+N+' = '+mitjP];
     visual=freqTableHtml(vals,freqs);
   }
-  return {topicId:'mitjana',type:type,question:q,correct:String(correct),options:opts,guide:guide,solution:solution,visual:visual};
+  return MIFirstStochasticFamilies.decorate('mitjana',{topicId:'mitjana',type:type,question:q,correct:String(correct),options:opts,guide:guide,solution:solution,visual:visual});
 }
 
 // 8. Mediana
@@ -1650,12 +1650,12 @@ function genMediana(){
     guide=['Com que les dades ja estan ordenades, no cal tornar-les a ordenar.','Hi ha un nombre senar de dades: localitza directament el valor que queda al centre.'];
     solution=['Hi ha '+n4+' dades, així que el valor central ocupa la posició '+(pos4+1)+'.','✅ Mediana = '+med4];
   }
-  return {topicId:'mediana',type:type,difficultyVariant:type===1&&!isOdd?'even':undefined,question:q,correct:String(correct),options:opts,guide:guide,solution:solution,visual:visual};
+  return MIFirstStochasticFamilies.decorate('mediana',{topicId:'mediana',type:type,difficultyVariant:type===1?(isOdd?'odd':'even'):undefined,question:q,correct:String(correct),options:opts,guide:guide,solution:solution,visual:visual});
 }
 
 // 9. Moda — bossa de 50 exercicis variats (1r ESO)
 var modaBag=[];
-var lastModaContext=null;
+var lastModaFamily=null;
 
 function buildModaPool(){
   var pool=[];
@@ -1742,28 +1742,37 @@ function buildModaPool(){
   add(9,'teoria5','Si el valor 4 apareix 7 vegades i cap altre valor apareix més de 7 vegades, què podem afirmar?','4 és una moda',['4 és necessàriament la mitjana','4 és necessàriament la mediana','No podem dir res sobre la moda'],['La moda depèn de quina freqüència és la més gran.','Compara les 7 aparicions amb les freqüències dels altres valors.'],['Cap altre valor supera la freqüència de 4.','✅ 4 és una moda.']);
   add(10,'teoria6','Quina afirmació és correcta sobre la moda?','Pot ser una categoria no numèrica',['Sempre coincideix amb la mitjana','Sempre és única','Només existeix si les dades estan ordenades'],['Recorda que la moda només depèn del recompte d\'aparicions.','Pensa en exemples com colors o esports preferits.'],['Una categoria qualitativa també pot ser la més freqüent.','✅ La moda pot ser no numèrica.']);
 
-  return shuffle(pool);
+  // 6. Absència de moda única quan totes les dades són diferents (6 casos).
+  // Convenció explícita: si tots els valors apareixen una sola vegada, diem que no hi ha moda.
+  [[1,2,3,4],[2,4,6,8],[3,5,7,9],[1,4,7,10],[0,2,5,8],[3,6,9,12]].forEach(function(dades){
+    add(11,'sense-moda','Segons la convenció del tema, si tots els valors apareixen una sola vegada no hi ha moda. Les dades són '+dades.join(', ')+'. Quina és la moda?',
+      'No hi ha moda',[String(dades[0]),String(dades[1]),'La mitjana de les dades'],
+      ['Compta quantes vegades apareix cada valor.','Tots apareixen una vegada: aplica la convenció indicada a l’enunciat.'],
+      ['Cada valor té freqüència 1 i cap no destaca respecte dels altres.','✅ Segons la convenció indicada, no hi ha moda.']);
+  });
+
+  return MIFirstStochasticFamilies.balancePool('moda',pool);
 }
 
 function genModa(){
   if(!Array.isArray(modaBag)||modaBag.length===0)modaBag=buildModaPool();
   var pick=modaBag.length-1;
-  if(lastModaContext!==null&&modaBag[pick].contextId===lastModaContext&&modaBag.length>1){
+  if(lastModaFamily!==null&&modaBag[pick].familyId===lastModaFamily&&modaBag.length>1){
     for(var i=modaBag.length-2;i>=0;i--){
-      if(modaBag[i].contextId!==lastModaContext){
+      if(modaBag[i].familyId!==lastModaFamily){
         var tmp=modaBag[pick];modaBag[pick]=modaBag[i];modaBag[i]=tmp;
         break;
       }
     }
   }
   var ex=modaBag.pop();
-  lastModaContext=ex.contextId;
+  lastModaFamily=ex.familyId;
   return ex;
 }
 
 // 10. Probabilitat — 1r ESO: bossa àmplia d'atzar, espai mostral, Laplace i experimentació
 var probabilitatBag=[];
-var lastProbContext=null;
+var lastProbFamily=null;
 
 function buildProbabilitatPool(){
   var pool=[];
@@ -2005,7 +2014,7 @@ function buildProbabilitatPool(){
       ['P(A) = casos favorables / casos possibles.','P(A) = '+fav+'/'+total+' = '+correct+'.','✅ P(A) = '+correct]);
   });
 
-  return shuffle(pool);
+  return MIFirstStochasticFamilies.balancePool('probabilitat',pool);
 }
 
 function genProbabilitat(){
@@ -2014,9 +2023,9 @@ function genProbabilitat(){
   }
 
   var pick=probabilitatBag.length-1;
-  if(lastProbContext!==null&&probabilitatBag[pick].contextId===lastProbContext&&probabilitatBag.length>1){
+  if(lastProbFamily!==null&&probabilitatBag[pick].familyId===lastProbFamily&&probabilitatBag.length>1){
     for(var i=probabilitatBag.length-2;i>=0;i--){
-      if(probabilitatBag[i].contextId!==lastProbContext){
+      if(probabilitatBag[i].familyId!==lastProbFamily){
         var tmp=probabilitatBag[pick];probabilitatBag[pick]=probabilitatBag[i];probabilitatBag[i]=tmp;
         break;
       }
@@ -2024,7 +2033,7 @@ function genProbabilitat(){
   }
 
   var ex=probabilitatBag.pop();
-  lastProbContext=ex.contextId;
+  lastProbFamily=ex.familyId;
   return ex;
 }
 
@@ -2244,6 +2253,24 @@ stAdd('G6','grafics','sectors',2,function(){
 stAdd('G7','grafics','poligons',1,function(){
   var labels=['1','2','3','4','5'],v=[rnd(2,8),rnd(2,8),rnd(2,8),rnd(2,8),rnd(2,8)],i=v.indexOf(Math.max.apply(null,v));return stProblem({patternId:'G7',family:'grafics',topicId:'poligons',diff:1,question:'Quin valor de la variable té la freqüència més gran en el polígon?',visual:svgPolygon(labels,v,i),answer:stNumAnswer(Number(labels[i])),hint:['El punt més alt correspon a la freqüència màxima','Llegeix a l’eix horitzontal quin valor ocupa aquesta posició'],solution:['El punt més alt correspon al valor <b>'+labels[i]+'</b>.']});
 });
+stAdd('G10','grafics','poligons',1,function(){
+  var labels=['1','2','3','4','5'],v=uniqueBarValues(5,2,10),i=rnd(0,4);return stProblem({patternId:'G10',family:'grafics',topicId:'poligons',diff:1,question:'En un polígon de freqüències, quina freqüència correspon al valor <b>'+labels[i]+'</b>?',visual:svgPolygon(labels,v,i),answer:stNumAnswer(v[i]),hint:['Localitza el valor a l’eix horitzontal','Llegeix l’alçada del punt corresponent'],solution:['El punt del valor '+labels[i]+' està a l’alçada '+v[i]+'.','✅ Freqüència = <b>'+v[i]+'</b>.']});
+});
+stAdd('G11','grafics','poligons',2,function(){
+  var labels=['1','2','3','4','5'],v=uniqueBarValues(5,2,10),d=Math.max(...v)-Math.min(...v);return stProblem({patternId:'G11',family:'grafics',topicId:'poligons',diff:2,question:'Quina diferència hi ha entre la freqüència màxima i la freqüència mínima del polígon?',visual:svgPolygon(labels,v,-1),answer:stNumAnswer(d),hint:['Llegeix les alçades del punt més alt i del punt més baix','Resta la freqüència mínima de la màxima'],solution:['Màxim = '+Math.max(...v)+'; mínim = '+Math.min(...v)+'.','✅ Diferència = <b>'+d+'</b>.']});
+});
+stAdd('G12','grafics','poligons',2,function(){
+  var labels=['1','2','3','4','5'],v=uniqueBarValues(5,2,10),i=0,j=3,total=v[i]+v[j];return stProblem({patternId:'G12',family:'grafics',topicId:'poligons',diff:2,question:'Quina és la freqüència conjunta dels valors <b>'+labels[i]+'</b> i <b>'+labels[j]+'</b>?',visual:svgPolygon(labels,v,-1),answer:stNumAnswer(total),hint:['Llegeix la freqüència dels dos valors','Suma només aquestes dues freqüències'],solution:['Les freqüències són '+v[i]+' i '+v[j]+'.','✅ Freqüència conjunta = <b>'+total+'</b>.']});
+});
+stAdd('G13','grafics','poligons',1,function(){
+  var labels=['1','2','3','4','5'],v=uniqueBarValues(5,2,10),i=0,j=3,high=v[i]>v[j]?i:j;return stProblem({patternId:'G13',family:'grafics',topicId:'poligons',diff:1,question:'Quin valor té més freqüència: <b>'+labels[i]+'</b> o <b>'+labels[j]+'</b>?',visual:svgPolygon(labels,v,-1),answer:stNumAnswer(Number(labels[high])),hint:['Compara l’alçada dels dos punts indicats','El punt més alt correspon al valor amb freqüència més gran'],solution:['Freqüències: '+labels[i]+' → '+v[i]+' i '+labels[j]+' → '+v[j]+'.','✅ Té més freqüència el valor <b>'+labels[high]+'</b>.']});
+});
+stAdd('G14','grafics','poligons',1,function(){
+  var labels=['1','2','3','4','5'],v=uniqueBarValues(5,2,10),total=v.reduce((a,b)=>a+b,0);return stProblem({patternId:'G14',family:'grafics',topicId:'poligons',diff:1,question:'Quantes dades representa en total el polígon?',visual:svgPolygon(labels,v,-1),answer:stNumAnswer(total),hint:['Cada punt mostra una freqüència absoluta','Suma les cinc freqüències'],solution:['Total = '+v.join(' + ')+' = <b>'+total+'</b>.']});
+});
+stAdd('G15','grafics','poligons',1,function(){
+  return stProblem({patternId:'G15',family:'grafics',topicId:'poligons',diff:1,question:'En un polígon de freqüències, què representa l’eix vertical?',answer:stTextAnswer('La freqüència de cada valor'),hint:['Fixa’t en l’alçada dels punts','Cada punt mostra quantes vegades apareix un valor'],solution:['L’eix horitzontal representa els valors; l’eix vertical, les freqüències.','✅ L’eix vertical representa la freqüència.']});
+});
 stAdd('G8','grafics','barres',2,function(){
   var start=rnd(40,90),a=start+rnd(1,3),b=a+rnd(1,4);return stProblem({patternId:'G8',family:'grafics',topicId:'barres',diff:2,question:'Un gràfic compara dues quantitats, <b>'+a+' i '+b+'</b>, però l’eix vertical comença a <b>'+start+'</b> en lloc de 0. Pot fer que la diferència sembli molt més gran del que és?',answer:stYesNoAnswer(true),hint:['Observa què passa visualment quan l’eix vertical retalla gairebé tota la part comuna de les dues barres'],solution:['<b>Sí</b>. Un eix truncat pot exagerar visualment diferències petites.']});
 });
@@ -2265,10 +2292,13 @@ stAdd('C3','central','mitjana',2,function(){
   var vals=[2,4,6,8],f=[rnd(1,5),rnd(1,5),rnd(1,5),rnd(1,5)],N=f.reduce(function(a,b){return a+b;},0),sum=vals.reduce(function(s,v,i){return s+v*f[i];},0),m=round2(sum/N);return stProblem({patternId:'C3',family:'central',topicId:'mitjana',diff:2,question:'Calcula la mitjana a partir de la taula de freqüències.',visual:stTable(vals,f),answer:stNumAnswer(m,.011),hint:['Multiplica cada valor per la seva freqüència','Suma els productes i divideix pel total de dades'],solution:['Σ(x·f) = '+sum+', N = '+N+'.','Mitjana = <b>'+String(m).replace('.',',')+'</b>.']});
 });
 stAdd('C4','central','mitjana',2,function(){
-  var A=[6,6,7,7,8],B=[5,6,7,8,9],ma=A.reduce(function(a,b){return a+b;},0)/5,mb=B.reduce(function(a,b){return a+b;},0)/5;return stProblem({patternId:'C4',family:'central',topicId:'mitjana',diff:2,question:'Grup A: <b>'+A.join(', ')+'</b><br>Grup B: <b>'+B.join(', ')+'</b><br>Quin grup té una mitjana més alta, o són iguals?',answer:stTextAnswer(ma===mb?'Iguals':ma>mb?'A':'B',ma===mb?['mateixa mitjana','son iguals']:[]),hint:['Calcula la mitjana de cada grup per separat abans de comparar'],solution:['Mitjana A = '+ma+'; mitjana B = '+mb+'.','Resposta: <b>'+(ma===mb?'Iguals':ma>mb?'A':'B')+'</b>.']});
+  var A=Array.from({length:5},function(){return rnd(3,12);}),B=Array.from({length:5},function(){return rnd(3,12);}),ma=A.reduce(function(a,b){return a+b;},0)/A.length,mb=B.reduce(function(a,b){return a+b;},0)/B.length;return stProblem({patternId:'C4',family:'central',topicId:'mitjana',diff:2,question:'Grup A: <b>'+A.join(', ')+'</b><br>Grup B: <b>'+B.join(', ')+'</b><br>Quin grup té una mitjana més alta, o són iguals?',answer:stTextAnswer(ma===mb?'Iguals':ma>mb?'A':'B',ma===mb?['mateixa mitjana','son iguals']:[]),hint:['Calcula la mitjana de cada grup per separat abans de comparar'],solution:['Mitjana A = '+ma+'; mitjana B = '+mb+'.','Resposta: <b>'+(ma===mb?'Iguals':ma>mb?'A':'B')+'</b>.']});
 });
 stAdd('C5','central','mitjana',2,function(){
-  return stProblem({patternId:'C5',family:'central',topicId:'mitjana',diff:2,question:'En el conjunt <b>5, 6, 6, 7, 7</b> afegim el valor <b>30</b>. La mitjana augmentarà, disminuirà o quedarà igual?',answer:stTextAnswer('Augmentarà',['augmenta','pujara','pujarà']),hint:['Compara el nou valor amb el centre aproximat de les dades originals'],solution:['30 és molt superior a les dades inicials, així que la mitjana <b>augmentarà</b>.']});
+  var dades=Array.from({length:5},function(){return rnd(2,10);}),nou=Math.max.apply(null,dades)+rnd(5,20);return stProblem({patternId:'C5',family:'central',topicId:'mitjana',diff:2,question:'En el conjunt <b>'+dades.join(', ')+'</b> afegim el valor <b>'+nou+'</b>. La mitjana augmentarà, disminuirà o quedarà igual?',answer:stTextAnswer('Augmentarà',['augmenta','pujara','pujarà']),hint:['Compara el nou valor amb la mitjana de les dades originals'],solution:['El nou valor '+nou+' és més gran que totes les dades inicials, així que també supera la seva mitjana.','Per tant, la mitjana <b>augmentarà</b>.']});
+});
+stAdd('C12','central','mitjana',1,function(){
+  var n=5,mean=6,known=[5,6,7,4],total=n*mean,missing=total-known.reduce(function(a,b){return a+b;},0);return stProblem({patternId:'C12',family:'central',topicId:'mitjana',diff:1,question:'La mitjana de <b>'+n+' valors</b> és <b>'+mean+'</b>. Quina és la suma total dels valors?',answer:stNumAnswer(total),hint:['La mitjana és la suma dividida pel nombre de dades','Multiplica la mitjana pel nombre de valors'],solution:['Suma total = '+mean+' × '+n+'.','✅ Suma = <b>'+total+'</b>.']});
 });
 stAdd('C6','central','mediana',1,function(){
   var n=shuffle([5,7,9])[0],d=Array.from({length:n},function(){return rnd(1,15);}),s=d.slice().sort(function(a,b){return a-b;}),m=s[Math.floor(n/2)];return stProblem({patternId:'C6',family:'central',topicId:'mediana',diff:1,question:'Calcula la mediana de <b>'+d.join(', ')+'</b>.',answer:stNumAnswer(m),hint:['Ordena les dades de menor a major','Com que hi ha un nombre senar de dades, localitza el valor central'],solution:['Ordenades: '+s.join(', ')+'.','Mediana = <b>'+m+'</b>.']});
@@ -2279,6 +2309,9 @@ stAdd('C7','central','mediana',2,function(){
 stAdd('C8','central','mediana',2,function(){
   return stProblem({patternId:'C8',family:'central',topicId:'mediana',diff:2,question:'Dades ordenades: <b>3, 4, 5, 6, 7</b>. Si afegim el valor <b>100</b>, la mediana nova és 5, 5,5 o 100?',answer:stNumAnswer(5.5,.011),hint:['Torna a considerar el nombre total de dades després d’afegir el nou valor','Amb sis dades, la mediana és la mitjana dels dos valors centrals'],solution:['Queden 3, 4, 5, 6, 7, 100.','Mediana = (5+6)/2 = <b>5,5</b>.']});
 });
+stAdd('C13','central','mediana',1,function(){
+  return stProblem({patternId:'C13',family:'central',topicId:'mediana',diff:1,question:'Quin procediment permet trobar la mediana d’un conjunt de dades?',answer:stTextAnswer('Ordenar les dades i trobar el valor o valors centrals',['ordenar i trobar el centre']),hint:['La mediana depèn de l’ordre de les dades','El nombre de dades determina si hi ha un valor central o dos'],solution:['Ordenem les dades de menor a major.','✅ La mediana és el valor central o la mitjana dels dos valors centrals.']});
+});
 stAdd('C9','central','moda',1,function(){
   // La pregunta i el validador demanen una sola moda: evita empats entre les dades addicionals.
   var mode=rnd(2,8),others=shuffle(Array.from({length:9},(_,i)=>i+1).filter(v=>v!==mode)).slice(0,3),d=[mode,mode,mode].concat(others);return stProblem({patternId:'C9',family:'central',topicId:'moda',diff:1,question:'Quina és la moda de <b>'+shuffle(d).join(', ')+'</b>?',answer:stNumAnswer(mode),hint:['Compta quantes vegades apareix cada valor','La moda és el que té la freqüència més alta'],solution:['El valor més repetit és <b>'+mode+'</b>.']});
@@ -2288,6 +2321,18 @@ stAdd('C10','central','moda',1,function(){
 });
 stAdd('C11','central','moda',2,function(){
   return stProblem({patternId:'C11',family:'central',topicId:'moda',diff:2,question:'Dades: <b>2, 2, 3, 3, 4, 5</b>. La distribució té una sola moda o és bimodal?',answer:stTextAnswer('Bimodal',['dues modes','2 i 3','bimode']),hint:['Compara la freqüència màxima de tots els valors','Comprova si més d’un valor empata en aquesta freqüència'],solution:['2 i 3 apareixen dues vegades i comparteixen la freqüència màxima: és <b>bimodal</b>.']});
+});
+stAdd('C14','central','moda',2,function(){
+  var dades=[2,2,2,4,4,6],updated=[...dades,4,4],counts=new Map();updated.forEach(function(x){counts.set(x,(counts.get(x)||0)+1);});var max=Math.max(...counts.values()),modes=[...counts].filter(x=>x[1]===max).map(x=>x[0]);return stProblem({patternId:'C14',family:'central',topicId:'moda',diff:2,question:'Les dades són <b>'+dades.join(', ')+'</b>. Hi afegim dues dades de valor <b>4</b>. Quina és ara la moda?',answer:stNumAnswer(modes[0]),hint:['Actualitza la freqüència de 4','Compara-la amb la freqüència dels altres valors'],solution:['Ara 2 apareix 3 vegades i 4 apareix 4 vegades.','✅ La nova moda és <b>'+modes.join(' i ')+'</b>.']});
+});
+stAdd('C15','central','moda',1,function(){
+  var dades=[1,3,5,7],d=dades.slice();return stProblem({patternId:'C15',family:'central',topicId:'moda',diff:1,question:'Segons la convenció del tema, si tots els valors apareixen una sola vegada no hi ha moda. Les dades són <b>'+d.join(', ')+'</b>. Quina és la moda?',answer:stTextAnswer('No hi ha moda',['cap moda']),hint:['Compta les aparicions de cada valor','Tots apareixen una sola vegada: aplica la convenció indicada'],solution:['Cada valor té freqüència 1.','✅ Segons la convenció indicada, no hi ha moda.']});
+});
+stAdd('C16','central','moda',1,function(){
+  return stProblem({patternId:'C16',family:'central',topicId:'moda',diff:1,question:'Què descriu la moda d’un conjunt de dades?',answer:stTextAnswer('El valor o categoria amb freqüència més alta'),hint:['La moda es basa en comptar aparicions','No cal sumar ni ordenar les dades'],solution:['Comptem la freqüència de cada valor o categoria.','✅ La moda és el valor o categoria més freqüent.']});
+});
+stAdd('C17','central','moda',1,function(){
+  var values=['vermell','blau','vermell','groc','vermell','blau'],mode='vermell';return stProblem({patternId:'C17',family:'central',topicId:'moda',diff:1,question:'Colors anotats: <b>'+values.join(', ')+'</b>. Quina és la moda?',answer:stTextAnswer(mode),hint:['Compta cada categoria, encara que no sigui numèrica','La moda és la categoria més repetida'],solution:['Vermell apareix 3 cops, blau 2 i groc 1.','✅ Moda = <b>'+mode+'</b>.']});
 });
 
 // ── PROBABILITAT I ATZAR (10) ───────────────────────────────────────────
@@ -2321,7 +2366,10 @@ stAdd('P9','probabilitat','probabilitat',2,function(){
   return stProblem({patternId:'P9',family:'probabilitat',topicId:'probabilitat',diff:2,question:'Joc A: guanyes si surt 1 o 2 en un dau. Joc B: guanyes si surt un nombre parell. Quin joc dona més probabilitat de guanyar?',answer:stTextAnswer('B',['joc B']),hint:['Calcula els casos favorables de cada joc sobre els mateixos 6 resultats possibles'],solution:['P(A)=2/6; P(B)=3/6.','Té més probabilitat el <b>joc B</b>.']});
 });
 stAdd('P10','probabilitat','probabilitat',2,function(){
-  var N=shuffle([8,10,12,20])[0],num=shuffle([1,2,3,4])[0],den=shuffle([4,5])[0];if(N%den!==0)return ST_OPEN_PATTERNS.find(function(x){return x.id==='P10';}).gen();var fav=N*num/den;if(fav>N)return ST_OPEN_PATTERNS.find(function(x){return x.id==='P10';}).gen();return stProblem({patternId:'P10',family:'probabilitat',topicId:'probabilitat',diff:2,question:'Un experiment té <b>'+N+' resultats equiprobables</b>. Un esdeveniment té probabilitat <b>'+num+'/'+den+'</b>. Quants resultats favorables té?',answer:stNumAnswer(fav),hint:['Relaciona probabilitat, casos favorables i casos possibles','Troba la fracció indicada de '+N],solution:['Favorables = '+num+'/'+den+' de '+N+' = <b>'+fav+'</b>.']});
+  var den=shuffle([4,5])[0],N=den===4?shuffle([8,12,20])[0]:shuffle([10,20])[0],num=rnd(1,den),fav=N*num/den;return stProblem({patternId:'P10',family:'probabilitat',topicId:'probabilitat',diff:2,question:'Un experiment té <b>'+N+' resultats equiprobables</b>. Un esdeveniment té probabilitat <b>'+num+'/'+den+'</b>. Quants resultats favorables té?',answer:stNumAnswer(fav),hint:['Relaciona probabilitat, casos favorables i casos possibles','Troba la fracció indicada de '+N],solution:['Favorables = '+num+'/'+den+' de '+N+' = <b>'+fav+'</b>.']});
+});
+stAdd('P11','probabilitat','probabilitat',2,function(){
+  var d=shuffle([['En un dau equilibrat, P(6)=1/6 abans de llançar-lo.','Probabilitat teòrica'],['En 40 llançaments, el 6 ha sortit 9 vegades: 9/40.','Freqüència relativa experimental']])[0];return stProblem({patternId:'P11',family:'probabilitat',topicId:'probabilitat',diff:2,question:'Classifica aquesta informació: <b>'+d[0]+'</b>',answer:stTextAnswer(d[1]),hint:['Pregunta’t si es calcula abans de l’experiment o a partir de resultats observats','Una proporció observada prové de l’experiment; un model equiprobable dona probabilitat teòrica'],solution:['La dada descriu '+d[1].toLowerCase()+'.','✅ '+d[1]+'.']});
 });
 
 // ── CONSTRUCCIÓ DE GRÀFICS (3, no entren a l'examen) ───────────────────

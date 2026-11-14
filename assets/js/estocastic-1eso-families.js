@@ -46,6 +46,51 @@
       {id:'reconstruir-part-complementaria',name:'Reconstruir la freqüència o proporció que falta perquè el total sigui complet',level:2,types:[8,9],generators:['sectors:8','sectors:9'],sharedWith:['taules']},
       {id:'interpretar-diagrama-sectors',name:'Interpretar el total, les parts i l’ús d’un diagrama de sectors',level:1,types:[10,11,12,13],generators:['sectors:10','sectors:11','sectors:12','sectors:13']},
       {id:'triar-representacio-estadistica',name:'Triar una representació gràfica adequada a les dades',level:1,generators:['G9'],sharedWith:['barres']}
+    ],
+    poligons:[
+      {id:'lectura-freq-barra',name:'Llegir una freqüència o categoria en un gràfic',level:1,types:[1,8],generators:['poligons:1','poligons:8','G10'],sharedWith:['barres']},
+      {id:'identificar-categoria-mes-frequent',name:'Identificar el valor de freqüència màxima o mínima en un polígon',level:1,types:[2,3,12],generators:['poligons:2','poligons:3','poligons:12','G7'],sharedWith:['taules','barres','sectors']},
+      {id:'comparar-frequencies-barres',name:'Comparar directament dues freqüències representades',level:1,types:[4],generators:['poligons:4','G13'],sharedWith:['barres']},
+      {id:'calcular-diferencia-frequencies',name:'Calcular la diferència entre dues freqüències',level:2,types:[5],generators:['poligons:5','G11'],sharedWith:['taules','barres']},
+      {id:'sumar-frequencies-parcials',name:'Sumar freqüències de diversos valors',level:2,types:[6],generators:['poligons:6','G12']},
+      {id:'totalitzar-freq-absolutes',name:'Calcular el total a partir de les freqüències absolutes',level:1,types:[7],generators:['poligons:7','G14'],sharedWith:['taules','barres']},
+      {id:'interpretar-convencions-poligon',name:'Interpretar què representen els punts, eixos i segments del polígon',level:1,types:[9,10,11],generators:['poligons:9','poligons:10','poligons:11','G15']},
+      {id:'construir-diagrama-poligon',name:'Construir un polígon de freqüències a partir d’una taula',level:2,generators:['K2']}
+    ],
+    mitjana:[
+      {id:'calcular-mitjana-llista',name:'Calcular la mitjana d’una llista de dades',level:1,types:[1],generators:['mitjana:1','C1']},
+      {id:'reconstruir-dada-des-de-mitjana',name:'Reconstruir una dada desconeguda a partir de la mitjana',level:2,types:[2],generators:['mitjana:2','C2']},
+      {id:'recuperar-suma-des-de-mitjana',name:'Recuperar la suma total a partir de la mitjana i el nombre de dades',level:1,types:[3],generators:['mitjana:3','C12']},
+      {id:'mitjana-ponderada-frequencies',name:'Calcular una mitjana ponderada a partir de freqüències',level:2,types:[4],generators:['mitjana:4','C3']},
+      {id:'comparar-mitjanes',name:'Comparar les mitjanes de dos grups',level:2,generators:['C4']},
+      {id:'interpretar-efecte-extrem-mitjana',name:'Interpretar l’efecte d’una dada extrema sobre la mitjana',level:2,generators:['C5']}
+    ],
+    mediana:[
+      {id:'calcular-mediana-senar',name:'Ordenar i trobar el valor central amb un nombre senar de dades',level:1,types:[4],variants:{1:['odd']},generators:['mediana:1#odd','mediana:4','C6']},
+      {id:'calcular-mediana-parella',name:'Ordenar i calcular la mitjana dels dos valors centrals amb un nombre parell de dades',level:2,types:[3],variants:{1:['even']},generators:['mediana:1#even','mediana:3','C7']},
+      {id:'distingir-mitjana-mediana',name:'Distingir els procediments de mitjana i mediana',level:1,types:[2],generators:['mediana:2','C13']},
+      {id:'interpretar-efecte-extrem-mediana',name:'Interpretar la mediana després d’afegir una dada extrema',level:2,generators:['C8']}
+    ],
+    moda:[
+      {id:'identificar-moda-numerica',name:'Identificar la moda única en dades numèriques',level:1,types:[1],generators:['moda:1','C9']},
+      {id:'identificar-moda-qualitativa',name:'Identificar la categoria qualitativa de freqüència màxima',level:1,types:[2,8],generators:['moda:2','moda:8','C10','C17']},
+      {id:'identificar-modes-empatades',name:'Identificar totes les modes quan hi ha un empat de freqüència màxima',level:1,types:[3,6,9],generators:['moda:3','moda:6','moda:9','C11']},
+      {id:'actualitzar-moda-amb-noves-dades',name:'Tornar a determinar la moda després d’afegir dades',level:2,types:[4],generators:['moda:4','C14']},
+      {id:'interpretar-concepte-moda',name:'Interpretar la definició i les propietats de la moda',level:1,types:[5],generators:['moda:5','C16']},
+      {id:'interpretar-moda-qualitativa',name:'Reconèixer que la moda també s’aplica a dades qualitatives',level:1,types:[7,10],generators:['moda:7','moda:10']},
+      {id:'identificar-absencia-moda',name:'Reconèixer que no hi ha moda si tots els valors apareixen una sola vegada segons la convenció indicada',level:1,types:[11],generators:['moda:11','C15']}
+    ],
+    probabilitat:[
+      {id:'classificar-fenomen-aleatori',name:'Distingir fenòmens aleatoris i deterministes',level:1,types:[1],generators:['probabilitat:1']},
+      {id:'determinar-espai-mostral',name:'Determinar l’espai mostral d’un experiment senzill',level:1,types:[2],generators:['probabilitat:2','P5']},
+      {id:'classificar-probabilitat-qualitativa',name:'Classificar qualitativament esdeveniments segurs, impossibles o probables',level:1,types:[3],generators:['probabilitat:3','P6']},
+      {id:'regla-laplace-equiprobable',name:'Aplicar la regla de Laplace a resultats equiprobables',level:1,types:[4,5,6,7,11],generators:['probabilitat:4','probabilitat:5','probabilitat:6','probabilitat:7','probabilitat:11','P1','P2','P4']},
+      {id:'comparar-probabilitats-esdeveniments',name:'Comparar probabilitats d’esdeveniments en un mateix experiment',level:2,types:[8],generators:['probabilitat:8','P9']},
+      {id:'calcular-freq-relativa-experimental',name:'Calcular una freqüència relativa a partir de resultats observats',level:2,types:[9],generators:['probabilitat:9','P7']},
+      {id:'distingir-probabilitat-teorica-experimental',name:'Distingir probabilitat teòrica de freqüència experimental',level:2,types:[10],generators:['probabilitat:10','P11']},
+      {id:'interpretar-estabilitzacio-freq-relativa',name:'Interpretar la tendència de la freqüència relativa amb moltes repeticions',level:2,generators:['P8']},
+      {id:'calcular-esdeveniment-complementari',name:'Calcular la probabilitat de l’esdeveniment complementari',level:1,generators:['P3']},
+      {id:'reconstruir-casos-favorables',name:'Recuperar casos favorables a partir de la probabilitat i del total equiprobable',level:2,generators:['P10']}
     ]
   };
   function topicSpecs(topic){return specs[typeof topic==='string'?topic:topic&&topic.id]||null;}
@@ -59,7 +104,8 @@
       const hasType=Array.isArray(f.types)&&f.types.includes(type),variantTypes=Object.keys(f.variants||{}).map(Number);
       if(!hasType&&!variantTypes.includes(type))return false;
       const allowed=f.variants&&f.variants[type];
-      return !allowed||allowed.includes(String(q.variantId||''));
+      const variant=q.variantId||q.difficultyVariant||'';
+      return !allowed||allowed.includes(String(variant));
     })||null;
   }
   function decorate(topic,q){const f=familyFor(topic,q);return f?{...q,familyId:f.id,familyName:f.name,taskDifficulty:f.level,taskDifficultyStatus:'assigned',diff:f.level}:q;}
