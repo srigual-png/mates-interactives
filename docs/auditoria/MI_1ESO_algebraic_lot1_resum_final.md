@@ -24,8 +24,8 @@ L’avaluació per substitució és una mateixa família pedagògica i conserva 
 - Tests matemàtics: Traducció 3.250; Patrons 3.250; Monomis 2.500 generacions verificades. Tots superats; cada test usa llavor fixa, oracles independents, nivells, respostes, opcions, solucions, classificació i rotació.
 - Playwright amb **Chrome**: els tres tests cobreixen 500 generacions internes per tema; prova de pràctica guiada i autònoma, recuperació, examen de tema de 12 preguntes, examen global de 20 preguntes, teoria, ajudes, ancoratges directes i `hashchange`, i vista de 390 px. Sense errors JavaScript.
 - Regressions: 30 exercicis per `simplificacio`, `equacions`, `computacional`, `patrons2`, `monomis2`, `simplificacio2` i `equacions2` en cada execució dels tres tests de navegador.
-- `node --check` i `git diff --check`: pendents de la validació final de branca.
-- GitHub Actions: pendent de l’obertura de la PR. No s’ha verificat GitHub Pages; no s’ha fet desplegament remot.
+- `node --check` i `git diff --check`: superats.
+- GitHub Actions `Verifica inventaris fase A` (run #76): èxit. És una comprovació d’inventaris, no substitueix els tests matemàtics ni Playwright locals. No s’ha verificat GitHub Pages; no s’ha fet desplegament remot.
 
 ## Fitxers funcionals i informes
 

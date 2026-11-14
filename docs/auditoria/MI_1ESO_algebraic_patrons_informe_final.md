@@ -54,4 +54,4 @@ S’ha verificat amb Chrome que els cinc ancoratges existeixen, l’accés direc
 - Prova matemàtica: 3.250 generacions (1.500 generadors interns + 1.750 del banc); rotació de 25 exercicis, 5 per família.
 - Playwright/Chrome: 500 generacions internes, famílies i nivells, 12 preguntes de tema, 20 globals, guia, autònom, recuperació, teoria/ancoratges i 390 px superats.
 - Regressions: 30 generacions cadascuna de `simplificacio`, `equacions`, `computacional`, `patrons2`, `monomis2`, `simplificacio2`, `equacions2`.
-- No queden incidències locals pendents. GitHub Actions i remot queden pendents de PR.
+- No queden incidències locals pendents. GitHub Actions `Verifica inventaris fase A` (run #76) ha acabat amb èxit; aquest workflow no substitueix les proves matemàtiques ni Playwright, executades localment.

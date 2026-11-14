@@ -54,4 +54,4 @@ La teoria existent també explica la reducció de termes (`#reduir`), contingut 
 - Prova matemàtica: 2.500 generacions (1.000 dels quatre tipus + 1.500 de sis rutes del banc); rotació de les 4 famílies pròpies accessibles a la pràctica, 5 aparicions cadascuna. M6 s’ha cobert com a ruta oberta i d’examen.
 - Playwright/Chrome: 500 generacions, les 4 famílies de pràctica i l’avaluació compartida al banc/examen, 12 preguntes del tema, 20 globals, guia/autònom/recuperació i teoria/390 px superats.
 - Regressions: 30 mostres per cadascun dels 3 temes del Lot 2 i 4 ampliacions en cada execució Playwright.
-- Cap incidència local pendent. GitHub Actions i remot s’actualitzaran després d’obrir la PR.
+- Cap incidència local pendent. GitHub Actions `Verifica inventaris fase A` (run #76) ha acabat amb èxit; aquest workflow no substitueix les proves matemàtiques ni Playwright, executades localment.

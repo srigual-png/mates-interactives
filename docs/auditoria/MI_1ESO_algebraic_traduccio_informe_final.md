@@ -59,4 +59,4 @@ Els enllaços de teoria contextuals, l’accés directe als ancoratges, el canvi
 - Prova matemàtica: `node scripts/comprova-algebraic-traduccio-families-1eso.cjs` — 3.250 generacions: 1.500 de generadors interns, 1.750 de banc obert; rotació equilibrada de 30 exercicis, 5 per cadascuna de les 6 famílies.
 - Playwright/Chrome: 500 exercicis de pràctica inspeccionats; les 6 famílies accessibles, 12 preguntes d’examen de tema i 20 de mode examen; pràctica guiada/autònoma, recuperació, teoria i ancoratges superats.
 - Regressions: 30 mostres per cadascun dels 3 temes del Lot 2 i 4 ampliacions en cada execució dels tres tests Playwright.
-- Cap incidència pendent en les comprovacions executades. GitHub Actions i l’estat remot es consignaran després d’obrir la PR.
+- Cap incidència pendent en les comprovacions executades. GitHub Actions `Verifica inventaris fase A` (run #76) ha acabat amb èxit; aquest workflow no substitueix les proves matemàtiques ni Playwright, executades localment.
