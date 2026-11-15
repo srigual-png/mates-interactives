@@ -1,6 +1,3 @@
-Warning: truncated output (original token count: 19135)
-Total output lines: 794
-
 /* Classificació compartida de la web. Tasca, suport i currículum són eixos independents.
    Els nivells heretats es centralitzen aquí; això no certifica la revisió pedagògica de cada família. */
 (function(root){
@@ -406,7 +403,120 @@ Total output lines: 794
         sectors:[[1,7,10,11,12,13],[2,3,6],[4,5,8,9]],
         poligons:[[1,2,3,9,10,11,12],[4,8],[5,6,7]],
         mitjana:[[1],[3],[2,4]], mediana:[[2,4],[1],[3]],
-        moda:[[1,5,7],[2,8,9,…1135 tokens truncated… trigRaons4t: [[1,2,3,4,11], [5,6,7], [8,9,10]],
+        moda:[[1,5,7],[2,8,9,10],[3,4,6]],
+        probabilitat:[[1,2,3],[4,5,6,7,10],[8,9,11]]
+      };
+      return mappedLevel(levels,t,q);
+    }
+    if (algebraFourthYear) {
+      const levels = {
+        patrons4t: [[2,4,9,10], [3,5,7], [1,6,8]],
+        equacions2g4t: [[1,2,7,11], [3,5,6], [4,8,9,10]],
+        sistemes4t: [[4,5,10], [1,2,8], [3,6,7,9]],
+        inequacions4t: [[4,5,6,7], [1,3,8], [2,9,10]],
+        funcionsRep4t: [[1,2,5,11], [3,4,6,9], [7,8,10,12]],
+        linealsQuad4t: [[2,4,5,9], [1,7,8,10], [3,6,11,12]],
+        inversaExp4t: [[1,2,8,12], [3,5,6,7], [4,9,10,11]],
+        analisiFunc4t: [[1,3,6,10,12], [2,5,7,8], [4,9,11]]
+      };
+      return mappedLevel(levels,t,q);
+    }
+    if (algebraThirdYear) {
+      const levels = {
+        patrons: [[1,2,6], [4,5], [3,7,8]],
+        expressions: [[1,2,3], [4,8], [5,6,7]],
+        identitats: [[1,2,6,7], [3,8], [4,5]],
+        factoritzacio: [[1,7,8], [2,3,4], [5,6]],
+        equacions2: [[1,2,6], [3,5], [4,7,8]],
+        sistemes: [[1,5,6], [2,3], [4,7,8]],
+        funcions: [[1,2,3], [4,6], [5,7,8]],
+        funcions8: [[1,2,3], [4,6,7], [5,8]],
+        quadratica: [[1,6,7], [2,4,5], [3,8]]
+      };
+      return mappedLevel(levels,t,q);
+    }
+    if (algebraSecondYear) {
+      const levels = {
+        patrons: [[1,3], [2,5,6], [4,7,8]],
+        expressions: [[1,2], [3,4,6,9,10], [5,7,8]],
+        equacions: [[1,2,10], [3,4,5,8,11], [6,7,9,12]],
+        problemes: [[1,2,12], [3,4,5,8,10], [6,7,9,11]],
+        relacions: [[1,2,3,4,11], [5,6,7,8,12], [9,10]],
+        funcionslineals: [[1,2,3,4,5,17], [6,8,9,10,11,12,13,15], [7,14,16]],
+        computacional: [[1,2,11,17], [3,4,5,7,9,10,12,15], [6,8,13,14,16]]
+      };
+      return mappedLevel(levels,t,q);
+    }
+    if (algebraFirstYear) {
+      const levels = {
+        traduccio: [[1,2], [3,4], [5,6]],
+        patrons: [[1,3], [2,6], [4,5]],
+        monomis: [[1], [2,4], [3]],
+        simplificacio: [[1,5], [6], [3]],
+        equacions: [[1,2], [3,4], [7,8]],
+        computacional: [[5], [1,2], [3,4,6]]
+      };
+      return mappedLevel(levels,t,q);
+    }
+    if (spatialThirdYear) {
+      const levels = {
+        translacions: [[1,2,5,8,9], [4,6,10], [3,7]],
+        girs: [[1,2,3,10], [4,5,6], [7,8,9]],
+        simetriaAxial: [[1,2,8,9,10], [5,6,7], [3,4]],
+        simetriaCentral: [[1,4], [2,3,5], [6,7,8,9,10]],
+        mosaics: [[1,3,4,8], [2,7,9], [5,6,10]],
+        transformacionsCoord: [[2,3,8,9], [1,4,5,7], [6,10]],
+        geoAlgebra: [[5,6,7,8], [1,2,9], [3,4,10]],
+        visualitzacio: [[2,3,5,10], [4,7,9], [1,6,8]]
+      };
+      return mappedLevel(levels,t,q);
+    }
+    if (spatialFirstYear) {
+      const levels = {
+        elements: [[1,2,6,7], [3,5], [4,8]],
+        angles: [[1,4], [2,3,5], [6,7]],
+        poligons: [[1,2,8], [3,4,5], [6,7]],
+        triangles: [[1,2], [3], [4,6]],
+        quadrilaters: [[1,6], [4,5], [2,3]],
+        cercle: [[1,7], [2], [3]],
+        visualitzacio: [[1,3,7], [2,4], [5,6]]
+      };
+      return mappedLevel(levels,t,q);
+    }
+    if (spatialSecondYear) {
+      const levels = {
+        semblanca: [[1,2,6,7], [4,5,8,10], [3,9,11]],
+        tales: [[3,4,6], [1,2,5,10], [7,8,9]],
+        pitagores: [[1,2,3], [4,5,6,10], [7,8,9]],
+        cossos: [[1,2,3,6], [7,8,9], [4,5,10]],
+        visual3d: [[3,6], [1,4,5,7,9], [2,8]],
+        coordenades: [[1,2,5,9], [4,6,8], [3,7,10]],
+        modelitzacio: [[6,9], [2,4,8], [1,3,5,7,10]]
+      };
+      return mappedLevel(levels,t,q);
+    }
+    if (spatialFourthYear) {
+      const levels = {
+        figures4t: [[1,3,7], [2,4,6], [5,8,9,10]],
+        vectors4t: [[1,2,3,4,10], [7,9], [5,6,8]],
+        components4t: [[1,2,4,10], [3,5,9], [6,7,8]],
+        operacionsVectors4t: [[1,3,4], [2,5,6], [7,8,9,10]],
+        coordenadesVectors4t: [[1,2,7], [3,5,6,8], [4,9,10]],
+        homotecies4t: [[1,5,6], [7,9,10], [2,3,4,8]],
+        geometriaFuncions4t: [[1,2,3,4,11], [5,6,9], [7,8,10]],
+        regions4t: [[1,2,6], [4,5,7,9], [3,8,10]],
+        rectesAmpA: [[1,4,5], [2,6,7,9], [3,8,10]],
+        geometriaAnaliticaAmpD: [[4,5,7,11], [1,3,6,12], [2,8,9,10]]
+      };
+      return mappedLevel(levels,t,q);
+    }
+    if (fourthYear) {
+      const levels = {
+        angles4t: [[1,6,7,10,11], [2,3,9], [4,5,8]],
+        radians4t: [[1,2,3,11], [4,5,6], [7,8,9,10]],
+        pitagores4t: [[1,2,3,4,11], [5,6,7], [8,9,10]],
+        semblancaRaons4t: [[1,2,3,11], [4,5,6], [7,8,9,10]],
+        trigRaons4t: [[1,2,3,4,11], [5,6,7], [8,9,10]],
         resolTriangles4t: [[1,2,3,10], [4,5,6,11], [7,8,9]],
         mesuresIndirectes4t: [[1,3,4,9], [2,5,6,11], [7,8,10]],
         precisioError4t: [[1,2,6], [3,4,7,9,11], [5,8,10]],
@@ -681,4 +791,3 @@ Total output lines: 794
   function independent(q){return {...q,taskDifficulty:null,taskDifficultyStatus:'pending',diff:null,difficulty:null,curriculum:{pageCourse:q.course||null,contentCourse:null,option:null,scope:'standalone',examEligible:false}};}
   root.MIDifficulty=Object.freeze({attach,independent,rationalDifficulty2ESO,rationalLevels2ESO:Object.freeze(Object.fromEntries(RATIONAL_LEVELS.map((types,i)=>[i+1,types]))),rationalFamilies:RATIONAL_FAMILIES,rationalFamilyInfo,fractionsMeaningDifficulty2ESO,fractionsMeaningFamily,fractionsMeaningLevels:Object.freeze(Object.fromEntries(FRACTIONS_MEANING_LEVELS.map((types,i)=>[i+1,types]))),fractionsMeaningFamilies:FRACTIONS_MEANING_FAMILIES,fractionsMeaningFamilySpecs:FRACTIONS_MEANING_FAMILY_SPECS,operationsRationalFamilies:OPERATIONS_RATIONAL_FAMILIES,operationsRationalInfo,potenciesFamilies:POTENCIES_FAMILY_SPECS,potencies2ESOInfo,potencies2ESOFamilies:POTENCIES_2ESO_FAMILIES});
 })(typeof window==='undefined'?globalThis:window);
-
