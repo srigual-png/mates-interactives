@@ -2,31 +2,31 @@
 
 ## Abast i fonts
 
-Auditoria de la branca iniciada a `main` (`19beace8b55b45c233742fe491354fece9ce4c86`). S’han contrastat els generadors reals, la classificació compartida `MIDifficulty`, la pàgina de pràctica i les seccions de teoria indicades a continuació. Les variants són generadors que comparteixen un procediment, no famílies addicionals.
+Auditoria iniciada des de `main` (`19beace8b55b45c233742fe491354fece9ce4c86`). S’han contrastat tots els generadors accessibles, les dades del classificador compartit `MIDifficulty`, la pràctica i la teoria `2eso/teoria/numeric/aproximacions-errors.html`. Les variants de generador no es compten com a famílies noves.
 
 - **Tema:** `aproximacions`
-- **Pàgina i teoria:** 2eso/sentit-numeric.html#aproximar; teoria 2eso/teoria/numeric/aproximacions-errors.html
-- **Inventari verificat:** 15 tipus de generador coberts, sense solapaments entre famílies.
-- **Famílies definitives:** 6 · N1/N2/N3 = 3/3/0
+- **Inventari:** 15 tipus de generador, repartits sense solapament entre famílies.
+- **Resultat final:** 6 famílies · N1/N2/N3 = 3/3/0.
+- **Nivell anterior:** tots els tipus ja estaven assignats pel classificador compartit als mateixos nivells indicats a la taula. El catàleg de fitxes, en canvi, conservava arrays antics que enviaven tipus a N3; s’ha eliminat aquesta discrepància i ara els nivells de fitxa deriven de les especificacions compartides.
 
-## Classificació definitiva
+## Famílies definitives i justificació
 
-| ID estable | Família | Nivell | Generadors | Justificació |
-|---|---|---:|---|---|
-| `aproximacio-i-arrodoniment` | Aproximació i arrodoniment | N1 | 1, 2, 3, 4 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `seleccio-de-precisio` | Selecció de la precisió | N1 | 5 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `error-absolut` | Error absolut i comparació d’errors | N1 | 6, 7, 13, 14 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `error-relatiu` | Error relatiu i precisió relativa | N2 | 8, 9 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
-| `intervals-arrodoniment` | Intervals compatibles amb l’arrodoniment | N2 | 10, 15 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
-| `estimacio-i-validacio` | Estimació i validació de resultats | N2 | 11, 12 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
+| ID estable | Família | Anterior | Final | Generadors | Justificació pedagògica |
+|---|---|---:|---:|---|---|
+| `aproximacio-i-arrodoniment` | Aproximació i arrodoniment | N1 | N1 | 1, 2, 3, 4 | Arrodonir, aproximar per defecte o per excés són variants de conservar les xifres demanades i aplicar una única regla local. |
+| `seleccio-de-precisio` | Selecció de la precisió | N1 | N1 | 5 | Tria contextual d’una unitat de precisió adequada; és una decisió directa a partir de la magnitud i l’ús. |
+| `error-absolut` | Error absolut i comparació d’errors | N1 | N1 | 6, 7, 13, 14 | Resta entre valor real i aproximat, o comparació d’aquestes diferències; el procediment és directe. |
+| `error-relatiu` | Error relatiu i precisió relativa | N2 | N2 | 8, 9 | Relaciona l’error absolut amb el valor real i interpreta la proporció; afegeix normalització i conversió percentual. |
+| `intervals-arrodoniment` | Intervals compatibles amb l’arrodoniment | N2 | N2 | 10, 15 | Reconstrueix els límits compatibles amb el valor arrodonit i contrasta un valor candidat; requereix dues relacions. |
+| `estimacio-i-validacio` | Estimació i validació de resultats | N2 | N2 | 11, 12 | Estima el resultat i comprova si una solució és plausible; combina estimació amb verificació. |
 
-Els generadors en cada fila són variants del mateix procediment matemàtic. No s’han creat famílies N3 perquè el tema actual no conté cap generador que exigeixi reconstrucció o raonament amb restriccions de nivell avançat; s’ha mantingut la dificultat curricular observada al codi compartit.
+No es força cap objectiu de recompte de famílies. Cap generador actual no requereix N3 per al nivell curricular d’aquest tema; es manté N1/N2 i la fitxa rebutja N3 abans de començar quan cap tema seleccionat pot cobrir la quota.
 
 ## Tres mostres generades per família
 
 ### Aproximació i arrodoniment (`aproximacio-i-arrodoniment`) — N1
 
-**Generadors:** 1, 2, 3, 4 · **Apartat de teoria:** `#aproximar`
+**Generadors / variants:** 1, 2, 3, 4 · **Ajuda teòrica:** `#aproximar`
 
 **Mostra 1 · tipus 1 · N1.** Arrodoneix 6,9616 a les mil·lèsimes .
 
@@ -48,7 +48,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Selecció de la precisió (`seleccio-de-precisio`) — N1
 
-**Generadors:** 5 · **Apartat de teoria:** `#aproximar`
+**Generadors / variants:** 5 · **Ajuda teòrica:** `#aproximar`
 
 **Mostra 1 · tipus 5 · N1.** Quina precisió és més adequada? · · Per donar aproximadament la població d’una ciutat de 250.000 habitants.
 
@@ -70,7 +70,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Error absolut i comparació d’errors (`error-absolut`) — N1
 
-**Generadors:** 6, 7, 13, 14 · **Apartat de teoria:** `#error-absolut`
+**Generadors / variants:** 6, 7, 13, 14 · **Ajuda teòrica:** `#error-absolut`
 
 **Mostra 1 · tipus 6 · N1.** El valor real és 62,2 i l’aproximació és 62,1 . Quin és l’ error absolut ?
 
@@ -92,7 +92,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Error relatiu i precisió relativa (`error-relatiu`) — N2
 
-**Generadors:** 8, 9 · **Apartat de teoria:** `#error-relatiu`
+**Generadors / variants:** 8, 9 · **Ajuda teòrica:** `#error-relatiu`
 
 **Mostra 1 · tipus 8 · N2.** El valor real és 80 i l’aproximació és 81,6 . Quin és l’ error relatiu percentual ?
 
@@ -114,7 +114,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Intervals compatibles amb l’arrodoniment (`intervals-arrodoniment`) — N2
 
-**Generadors:** 10, 15 · **Apartat de teoria:** `#interval`
+**Generadors / variants:** 10, 15 · **Ajuda teòrica:** `#interval`
 
 **Mostra 1 · tipus 10 · N2.** Un nombre arrodonit a les centèsimes dona 6,5 . Quin d’aquests podria ser el valor original?
 
@@ -136,7 +136,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Estimació i validació de resultats (`estimacio-i-validacio`) — N2
 
-**Generadors:** 11, 12 · **Apartat de teoria:** `#estimar`
+**Generadors / variants:** 11, 12 · **Ajuda teòrica:** `#estimar`
 
 **Mostra 1 · tipus 11 · N2.** Sense fer el càlcul exacte, 19,8 · 1,98 és aproximadament...
 
@@ -156,12 +156,10 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 **Resolució:** Podem aproximar 39,7 per 40 i 1,98 per 2. El producte queda al voltant de 80.
 
-## Validació i incidències
+## Validació i limitacions
 
-- Prova matemàtica independent: **250 mostres per tipus**; cada mostra comprova el resultat amb un oracle independent, unicitat de respostes, consistència nivell/família i absència d’errors JavaScript.
-- Prova de navegador: interfície guiada/autònoma, cobertura de famílies, respostes i recuperació d’error, generació d’examen, enllaços de teoria, ancoratges directes/hashchange i viewport mòbil de 390 px.
-- Chrome 157.0.8103.52; la navegació emergent a la pàgina de teoria es verifica fins a l’esdeveniment `window.open` i URL/ancoratge sol·licitat. L’entorn de fitxer local no permet carregar el popup real; aquesta part no es declara verificada.
-- Suite de regressió: 30 exercicis per cadascun dels quatre temes ordinaris i quatre temes d’ampliació, sense errors de pàgina.
-- Fitxes: comprovació de nivells i famílies, temes ordinaris disponibles, combinacions N1/N2, impossibilitat de N3 per a temes sense N3, Word/PDF i solucions amb/sense resolució.
-
-Les dades de resposta d’aquestes mostres també passen la prova matemàtica; són sortides aleatòries documentals i poden repetir-se quan un generador usa una plantilla fixa.
+- Prova matemàtica: **250 mostres per tipus**; oracles independents, exactitud de resposta, unicitat, família i nivell. Resultat d’aquest tema: 3750 mostres; cobertura completa dels 6 IDs i cap error JS.
+- Prova Playwright amb Chrome 157.0.8103.52: pràctica guiada/autònoma, selecció i rotació de famílies, correcció/resposta errònia, examen, enllaços i ancoratges de teoria, hashchange i viewport de 390 px; sense errors JavaScript.
+- Regressions Lot 2: 30 mostres d’aquest tema i 30 de cada un dels altres tres temes ordinaris i de les quatre ampliacions.
+- Fitxes: tots els 8 temes ordinaris, preguntes/solucions, quotes i duplicats; Word/PDF amb i sense solucions. Les fitxes admeten nivells només presents al catàleg real.
+- El codi del popup real de teoria no s’ha pogut carregar des de `file://` en aquest sandbox. S’ha comprovat l’URL i l’ancoratge sol·licitats, i la navegació directa i `hashchange`. Chrome disponible; Edge no executat. No s’afirma que GitHub Pages s’hagi verificat.
