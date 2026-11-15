@@ -2,33 +2,33 @@
 
 ## Abast i fonts
 
-Auditoria de la branca iniciada a `main` (`19beace8b55b45c233742fe491354fece9ce4c86`). S’han contrastat els generadors reals, la classificació compartida `MIDifficulty`, la pàgina de pràctica i les seccions de teoria indicades a continuació. Les variants són generadors que comparteixen un procediment, no famílies addicionals.
+Auditoria iniciada des de `main` (`19beace8b55b45c233742fe491354fece9ce4c86`). S’han contrastat tots els generadors accessibles, les dades del classificador compartit `MIDifficulty`, la pràctica i la teoria `2eso/teoria/numeric/percentatges.html`. Les variants de generador no es compten com a famílies noves.
 
 - **Tema:** `percentatges`
-- **Pàgina i teoria:** 2eso/sentit-numeric.html#percentatges; teoria 2eso/teoria/numeric/percentatges.html
-- **Inventari verificat:** 18 tipus de generador coberts, sense solapaments entre famílies.
-- **Famílies definitives:** 8 · N1/N2/N3 = 4/4/0
+- **Inventari:** 18 tipus de generador, repartits sense solapament entre famílies.
+- **Resultat final:** 8 famílies · N1/N2/N3 = 4/4/0.
+- **Nivell anterior:** tots els tipus ja estaven assignats pel classificador compartit als mateixos nivells indicats a la taula. El catàleg de fitxes, en canvi, conservava arrays antics que enviaven tipus a N3; s’ha eliminat aquesta discrepància i ara els nivells de fitxa deriven de les especificacions compartides.
 
-## Classificació definitiva
+## Famílies definitives i justificació
 
-| ID estable | Família | Nivell | Generadors | Justificació |
-|---|---|---:|---|---|
-| `significat-i-equivalencies` | Significat i representacions equivalents | N1 | 1, 2 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `calcular-part-percentual` | Calcular una part percentual | N1 | 3, 8, 16, 17 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `percentatge-duna-part` | Determinar quin percentatge representa una part | N1 | 4 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `canvi-percentual-directe` | Aplicar un augment o una disminució percentual | N1 | 6, 7 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `reconstruccio-total-inicial` | Reconstruir el total o el valor inicial | N2 | 5, 9, 10 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
-| `taxa-de-variacio` | Determinar una taxa de variació percentual | N2 | 11, 12 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
-| `canvis-successius-i-comparacio` | Analitzar canvis successius i comparar descomptes | N2 | 13, 14, 15 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
-| `percentatge-compost-en-context` | Composició de percentatges en un context | N2 | 18 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
+| ID estable | Família | Anterior | Final | Generadors | Justificació pedagògica |
+|---|---|---:|---:|---|---|
+| `significat-i-equivalencies` | Significat i representacions equivalents | N1 | N1 | 1, 2 | Interpreta el percentatge com a parts de cent i en reconeix les formes fraccionària/decimal equivalents. |
+| `calcular-part-percentual` | Calcular una part percentual | N1 | N1 | 3, 8, 16, 17 | Transforma el percentatge en factor i el multiplica per la quantitat; descompte o context són variants del mateix operador. |
+| `percentatge-duna-part` | Determinar quin percentatge representa una part | N1 | N1 | 4 | Relaciona part i total per determinar la taxa percentual; canvia la incògnita respecte del càlcul d’una part. |
+| `canvi-percentual-directe` | Aplicar un augment o una disminució percentual | N1 | N1 | 6, 7 | Aplica el factor d’augment o disminució a un valor inicial; augment i descompte són variants directes. |
+| `reconstruccio-total-inicial` | Reconstruir el total o el valor inicial | N2 | N2 | 5, 9, 10 | Desfà el factor percentual per recuperar total o valor inicial; és una inversió multiplicativa. |
+| `taxa-de-variacio` | Determinar una taxa de variació percentual | N2 | N2 | 11, 12 | Calcula el canvi relatiu respecte del valor inicial i l’expressa en percentatge. |
+| `canvis-successius-i-comparacio` | Analitzar canvis successius i comparar descomptes | N2 | N2 | 13, 14, 15 | Compon canvis en seqüència o compara descomptes sense sumar percentatges; combina factors. |
+| `percentatge-compost-en-context` | Composició de percentatges en un context | N2 | N2 | 18 | Representa el preu total com a producte de taxa unitària i quantitat; és l’aplicació contextual del factor percentual. |
 
-Els generadors en cada fila són variants del mateix procediment matemàtic. No s’han creat famílies N3 perquè el tema actual no conté cap generador que exigeixi reconstrucció o raonament amb restriccions de nivell avançat; s’ha mantingut la dificultat curricular observada al codi compartit.
+No es força cap objectiu de recompte de famílies. Cap generador actual no requereix N3 per al nivell curricular d’aquest tema; es manté N1/N2 i la fitxa rebutja N3 abans de començar quan cap tema seleccionat pot cobrir la quota.
 
 ## Tres mostres generades per família
 
 ### Significat i representacions equivalents (`significat-i-equivalencies`) — N1
 
-**Generadors:** 1, 2 · **Apartat de teoria:** `#significat`
+**Generadors / variants:** 1, 2 · **Ajuda teòrica:** `#significat`
 
 **Mostra 1 · tipus 1 · N1.** Què significa, en general, 120% ?
 
@@ -50,7 +50,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Calcular una part percentual (`calcular-part-percentual`) — N1
 
-**Generadors:** 3, 8, 16, 17 · **Apartat de teoria:** `#part`
+**Generadors / variants:** 3, 8, 16, 17 · **Ajuda teòrica:** `#part`
 
 **Mostra 1 · tipus 3 · N1.** Calcula el 30% de 80 .
 
@@ -72,7 +72,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Determinar quin percentatge representa una part (`percentatge-duna-part`) — N1
 
-**Generadors:** 4 · **Apartat de teoria:** `#percentatge`
+**Generadors / variants:** 4 · **Ajuda teòrica:** `#percentatge`
 
 **Mostra 1 · tipus 4 · N1.** De 60 alumnes, 15 compleixen una condició. Quin percentatge representen?
 
@@ -94,7 +94,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Aplicar un augment o una disminució percentual (`canvi-percentual-directe`) — N1
 
-**Generadors:** 6, 7 · **Apartat de teoria:** `#augment-disminucio`
+**Generadors / variants:** 6, 7 · **Ajuda teòrica:** `#augment-disminucio`
 
 **Mostra 1 · tipus 6 · N1.** Una quantitat de 40 augmenta un 15% . Quin és el nou valor?
 
@@ -116,7 +116,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Reconstruir el total o el valor inicial (`reconstruccio-total-inicial`) — N2
 
-**Generadors:** 5, 9, 10 · **Apartat de teoria:** `#total`
+**Generadors / variants:** 5, 9, 10 · **Ajuda teòrica:** `#total`
 
 **Mostra 1 · tipus 5 · N2.** El 20% d’una quantitat són 16 . Quina és la quantitat total?
 
@@ -138,7 +138,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Determinar una taxa de variació percentual (`taxa-de-variacio`) — N2
 
-**Generadors:** 11, 12 · **Apartat de teoria:** `#variacio`
+**Generadors / variants:** 11, 12 · **Ajuda teòrica:** `#variacio`
 
 **Mostra 1 · tipus 11 · N2.** Una quantitat passa de 100 a 130 . Quin és el percentatge d’augment?
 
@@ -160,7 +160,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Analitzar canvis successius i comparar descomptes (`canvis-successius-i-comparacio`) — N2
 
-**Generadors:** 13, 14, 15 · **Apartat de teoria:** `#successius`
+**Generadors / variants:** 13, 14, 15 · **Ajuda teòrica:** `#successius`
 
 **Mostra 1 · tipus 13 · N2.** Un producte rep un descompte del 10% i després un altre del 25% sobre el preu ja rebaixat. Quin és el descompte total equivalent?
 
@@ -182,7 +182,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Composició de percentatges en un context (`percentatge-compost-en-context`) — N2
 
-**Generadors:** 18 · **Apartat de teoria:** `#part`
+**Generadors / variants:** 18 · **Ajuda teòrica:** `#part`
 
 **Mostra 1 · tipus 18 · N2.** En un centre hi ha 300 alumnes . El 40% són noies i el 25% de les noies practica un esport. Quantes noies practiquen aquest esport?
 
@@ -202,12 +202,10 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 **Resolució:** Noies: 240. El 20% de 240 és 48. Resposta: 48 noies.
 
-## Validació i incidències
+## Validació i limitacions
 
-- Prova matemàtica independent: **250 mostres per tipus**; cada mostra comprova el resultat amb un oracle independent, unicitat de respostes, consistència nivell/família i absència d’errors JavaScript.
-- Prova de navegador: interfície guiada/autònoma, cobertura de famílies, respostes i recuperació d’error, generació d’examen, enllaços de teoria, ancoratges directes/hashchange i viewport mòbil de 390 px.
-- Chrome 157.0.8103.52; la navegació emergent a la pàgina de teoria es verifica fins a l’esdeveniment `window.open` i URL/ancoratge sol·licitat. L’entorn de fitxer local no permet carregar el popup real; aquesta part no es declara verificada.
-- Suite de regressió: 30 exercicis per cadascun dels quatre temes ordinaris i quatre temes d’ampliació, sense errors de pàgina.
-- Fitxes: comprovació de nivells i famílies, temes ordinaris disponibles, combinacions N1/N2, impossibilitat de N3 per a temes sense N3, Word/PDF i solucions amb/sense resolució.
-
-Les dades de resposta d’aquestes mostres també passen la prova matemàtica; són sortides aleatòries documentals i poden repetir-se quan un generador usa una plantilla fixa.
+- Prova matemàtica: **250 mostres per tipus**; oracles independents, exactitud de resposta, unicitat, família i nivell. Resultat d’aquest tema: 4500 mostres; cobertura completa dels 8 IDs i cap error JS.
+- Prova Playwright amb Chrome 157.0.8103.52: pràctica guiada/autònoma, selecció i rotació de famílies, correcció/resposta errònia, examen, enllaços i ancoratges de teoria, hashchange i viewport de 390 px; sense errors JavaScript.
+- Regressions Lot 2: 30 mostres d’aquest tema i 30 de cada un dels altres tres temes ordinaris i de les quatre ampliacions.
+- Fitxes: tots els 8 temes ordinaris, preguntes/solucions, quotes i duplicats; Word/PDF amb i sense solucions. Les fitxes admeten nivells només presents al catàleg real.
+- El codi del popup real de teoria no s’ha pogut carregar des de `file://` en aquest sandbox. S’ha comprovat l’URL i l’ancoratge sol·licitats, i la navegació directa i `hashchange`. Chrome disponible; Edge no executat. No s’afirma que GitHub Pages s’hagi verificat.
