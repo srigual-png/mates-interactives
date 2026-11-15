@@ -319,5 +319,15 @@ Els ancoratges de procediment s’han contrastat amb la pàgina de teoria. Nombr
 
 Regressions addicionals: node scripts/comprova-numeric-lot2-regressions-2eso.cjs (240 exercicis, 30 per cadascun dels vuit temes de lot 2); node scripts/comprova-numeric-theory-2eso.cjs (ancoratges directes, hashchange, amplada mòbil 390 px i errors JavaScript).
 
-Limitacions: Edge no s’ha pogut executar en aquest entorn; les proves de navegador s’han executat amb Chrome 157. No s’ha comprovat desplegament de GitHub Pages. La prova integral d’exportació global scripts/fitxes/test-2eso.cjs encara requereix ajustar la fixture per al catàleg heterogeni de temes i queda pendent de validació; no s’afirma que hagi passat.
+La suite integral `node scripts/fitxes/test-2eso.cjs` s’ha superat amb Chrome 157: els vuit temes ordinaris, 132 variants de generador, 24 combinacions de nivell/tema, exàmens, exportació Word i PDF, solucions absents, només respostes i resolució pas a pas; també s’ha verificat que Potències funciona amb N1/N2 i rebutja N3. La fixture intercepta únicament la càrrega de la font local perquè Chrome no permet `fetch()` de fitxers locals sota `file://`.
+
+### Incidència investigada i resolta
+
+En una fixture que passava un únic tema com a catàleg, `core.js` considerava suficient que tots els temes tinguessin `families` per activar `generateType()`. El planificador d’aquest mode assumeix `requiredContents`; l’accés a `required.length` a `assets/js/fitxes/core.js:104` fallava perquè les entrades de famílies 2ESO no declaren cobertura obligatòria. `validate()` convertia aquest error en el missatge retornat, que `generateType()` tornava a llançar a `core.js:138`.
+
+La versió de `main` no reproduïa l’error: no tenia `families` en el catàleg de Racionals i la generació filtrada produïa cinc preguntes N1/N2 (`[1,1,2,2,2]`). La PR afegeix famílies; amb el filtre de catàleg de la fixture, això podia activar erròniament el mode pilot, encara que el flux de la interfície —que passa el catàleg complet dels vuit temes— no hi entrava. Per tant, era una regressió potencial del selector de mode introduïda per l’inventari de la PR, exposada per una fixture filtrada, i no un error en els nous nivells o generadors. El selector ara exigeix també `requiredContents` per activar el mode pilot. La prova integral cobreix catàlegs complets i filtrats.
+
+El missatge de validació per a una fitxa N3 amb Potències entre els temes seleccionats indica que no es pot mantenir la representació equilibrada; la interfície desactiva el botó abans de generar. Una fitxa només de Potències funciona amb N1/N2.
+
+Edge no s’ha pogut executar en aquest entorn i no s’ha comprovat el desplegament de GitHub Pages.
 
