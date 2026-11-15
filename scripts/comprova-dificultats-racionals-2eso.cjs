@@ -1,14 +1,14 @@
 const fs=require('fs'),path=require('path'),assert=require('assert');
 const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
 (async()=>{
- const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});
+ const browser=await chromium.launch({executablePath:process.env.MI_BROWSER_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
  try{
  const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('file:///'+path.resolve('2eso/sentit-numeric.html').replace(/\\/g,'/')+'?topic=racionals');
  const result=await page.evaluate(()=>{
-  const check=(ok,msg)=>{if(!ok)throw Error(msg);};let variants=0;const forms=new Set();
-  for(let type=1;type<=18;type++)for(let i=0;i<50;i++){
-   const q=genRacionals2ESO(type);check(q.diff>=1&&q.diff<=3,'classificació');
+  const check=(ok,msg)=>{if(!ok)throw Error(msg);};let variants=0;const forms=new Set(),families=new Set(),levels=[0,0,0];
+  for(let type=1;type<=18;type++)for(let i=0;i<250;i++){
+   const q=genRacionals2ESO(type),family=MIDifficulty.rationalFamilyInfo(q);check(q.diff>=1&&q.diff<=3,'classificació');check(family&&family.level===q.diff,'família i nivell T'+type);check(miTaskDifficulty.getDifficulty(TOPICS.find(t=>t.id==='racionals'),q)===q.diff,'classificador compartit T'+type);families.add(family.id);levels[q.diff-1]++;
    check(q.options.filter(o=>o===q.correct).length===1,'resposta exacta única '+type);
    check(q.solution.length>0&&!/undefined|NaN|Infinity/.test(JSON.stringify(q)),'solució '+type);
    if(type===10){check(q.allowOpen&&q.rationalInterval,'T10 obert');check(q.options.filter(o=>rationalBetween(o,q.rationalInterval)).length===1,'T10 una única opció interior');check(rationalBetween(q.correct,q.rationalInterval),'T10 clau interior');}
@@ -24,7 +24,7 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
    }
    variants++;
   }
-  check(forms.size===4,'T11 cobreix les quatre formes');
+  check(forms.size===4,'T11 cobreix les quatre formes');check(families.size===15,'15 famílies matemàtiques úniques');check(JSON.stringify(MIDifficulty.rationalFamilies.reduce((a,f)=>(a[f.level-1]++,a),[0,0,0]))==='[7,5,3]','Recompte familiar N1/N2/N3 7/5/3');
   // Extrems de l'espai de dades: mínim, màxim, igualtat al llindar.
   for(let b=20;b<=40;b++)for(let a=4;a<=9;a++)for(const p of [50,60,75]){
    const k=Math.floor((p*b-100*a)/(100-p))+1;
@@ -47,3 +47,4 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
  const out={...result,exam,pageErrors:errors};fs.mkdirSync('docs/dificultats',{recursive:true});fs.writeFileSync('docs/dificultats/resultats-racionals-2eso.json',JSON.stringify(out,null,2));console.log(out);
  }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exitCode=1;});
+

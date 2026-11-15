@@ -771,7 +771,7 @@ const TEORIA={
 
 /* ── GENERADOR · BLOC 1: NOMBRES RACIONALS ───────────────── */
 let rationalTypeBag=[];
-const RATIONAL_STANDARD_TYPES=Array.from({length:15},(_,i)=>i+1);
+const RATIONAL_STANDARD_TYPES=Array.from({length:18},(_,i)=>i+1);
 const RATIONAL_OPTIONAL_CHALLENGES=[16,17,18];
 function nextRationalType(){
   if(!rationalTypeBag.length)rationalTypeBag=shuffle(RATIONAL_STANDARD_TYPES.slice());
@@ -1545,9 +1545,9 @@ function nextPowersType(){
   if(!powersTypeBag.length)powersTypeBag=shuffle(Array.from({length:18},(_,i)=>i+1));
   return powersTypeBag.pop();
 }
-function genPotencies2ESO(forceType){
+function genPotencies2ESO(forceType,forceVariant){
   const type=forceType||nextPowersType();
-  let question,correct,options,guide,solution,alts=[],openHint='',allowOpen=true;
+  let question,correct,options,guide,solution,alts=[],openHint='',allowOpen=true,difficultyVariant;
 
   if(type===1){
     const b=shuffle([2,3,4,5,6,7])[0],e=rnd(3,5),prod=Array(e).fill(String(b)).join(' · ');
@@ -1713,7 +1713,7 @@ function genPotencies2ESO(forceType){
     openHint='Escriu només el resultat.';
   }
   else if(type===18){
-    const kind=rnd(1,3);
+    const kind=forceVariant==='square'?1:forceVariant==='cube'?2:forceVariant==='growth'?3:rnd(1,3);
     if(kind===1){
       const side=rnd(3,12),res=side*side;correct=String(res);
       options=uniq4(correct,[String(side*2),String(side*4),String(side+side),String(side*side*side),String(res+side),String(res-side),String(side+4)]);
@@ -1725,7 +1725,7 @@ function genPotencies2ESO(forceType){
       question=`Un cub té aresta <b>${edge} cm</b>. Quin és el seu volum?`;
       solution=[`El volum d’un cub és l’aresta elevada al cub.`,`Volum: ${edge}³ = ${res} cm³.`];
     }else{
-      const start=rnd(2,5),hours=rnd(3,6),res=start*Math.pow(2,hours);correct=String(res);
+      const start=rnd(2,5),hours=rnd(3,6),res=start*Math.pow(2,hours);correct=String(res);difficultyVariant='growth';
       options=uniq4(correct,[String(res/2),String(res+start),String(start*hours),String(res+hours),String(start+hours)]);
       question=`Una població de microorganismes comença amb <b>${start}</b> individus i es <b>duplica</b> cada hora. Quants n’hi haurà després de <b>${hours} hores</b>?`;
       solution=[`Cada hora multipliquem per 2, de manera que apareix una potència de 2.`,`Després de ${hours} duplicacions hi ha ${res} individus.`];
@@ -1734,7 +1734,8 @@ function genPotencies2ESO(forceType){
     openHint='Escriu només el valor numèric.';
   }
 
-  return {topicId:'potencies',type,course:'2n',difficultyVariant:type===18&&question.includes('microorganismes')?'growth':undefined,question,correct,alts,options,guide,solution,openHint,allowOpen};
+  if(type===18&&!difficultyVariant)difficultyVariant=question.includes('Un quadrat')?'square':'cube';
+  return {topicId:'potencies',type,course:'2n',difficultyVariant,variantId:difficultyVariant,question,correct,alts,options,guide,solution,openHint,allowOpen};
 }
 
 
@@ -3015,10 +3016,10 @@ function getExerciseForMode(){
   const difficulty=selectedDifficulty|| (progressive?(points>=requiredPoints[2]?3:points>=requiredPoints[1]?2:1):0);
   const generate=topic.id==='racionals'&&difficulty
     ? ()=>{
-        // Els tipus 16-18 són només per a la selecció explícita de reptes.
+        // N3 (16-18) forma part de la progressió ordinària; el filtre 4 els manté com a repte explícit addicional.
         const types=difficulty===4
           ? RATIONAL_OPTIONAL_CHALLENGES
-          : (RATIONAL_DIFFICULTY_2ESO[difficulty]||[]).filter(type=>RATIONAL_STANDARD_TYPES.includes(type));
+          : (RATIONAL_DIFFICULTY_2ESO[difficulty]||[]);
         const pool=types.length?types:RATIONAL_STANDARD_TYPES;
         return miTaskDifficulty.annotate(topic,genRacionals2ESO(pool[rnd(0,pool.length-1)]));
       }

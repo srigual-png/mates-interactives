@@ -106,7 +106,7 @@
           [1,2,3].every(d=>pool.filter(item=>level(t,item)===d).length >= (reviewed ? requestedPlan.slots[d-1] : 4))) break;
     }
     const result = [], counts = {};
-    const diversityKey=q=>t.id==='fraccionsSentit'?(typeof MIDifficulty?.fractionsMeaningFamily==='function'?MIDifficulty.fractionsMeaningFamily(q.type):String(q.type)):t.id==='operacionsRacionals'?(q.familyId||MIDifficulty?.operationsRationalInfo?.(q)?.id||String(q.type)):spatialFirstYear&&['triangles','quadrilaters','cercle'].includes(t.id)?(q.familyId||String(q.type)):algebraFirstYear&&q.familyId?q.familyId:stochasticFirstYear&&['recollida','taules','barres','sectors','poligons','mitjana','mediana','moda','probabilitat'].includes(t.id)?(q.familyId||String(q.type)):String(q.type);
+    const diversityKey=q=>t.id==='fraccionsSentit'?(typeof MIDifficulty?.fractionsMeaningFamily==='function'?MIDifficulty.fractionsMeaningFamily(q.type):String(q.type)):t.id==='operacionsRacionals'?(q.familyId||MIDifficulty?.operationsRationalInfo?.(q)?.id||String(q.type)):t.id==='potencies'?(q.familyId||MIDifficulty?.potencies2ESOInfo?.(q)?.id||String(q.type)):spatialFirstYear&&['triangles','quadrilaters','cercle'].includes(t.id)?(q.familyId||String(q.type)):algebraFirstYear&&q.familyId?q.familyId:stochasticFirstYear&&['recollida','taules','barres','sectors','poligons','mitjana','mediana','moda','probabilitat'].includes(t.id)?(q.familyId||String(q.type)):String(q.type);
     const slots=topicPlan(t).slots;
     for (let difficulty = 1; difficulty <= 3; difficulty++) {
       const candidates = pool.filter(q => level(t, q) === difficulty);
@@ -192,3 +192,4 @@
   const params=new URLSearchParams(location.search);
   if(params.get('examen')==='tema')start(params.get(advanced?'topic':'tema') || params.get('tema'));
 })();
+
