@@ -11,7 +11,9 @@
   }
   const maximum=(p,i)=>100-p.reduce((s,v,j)=>s+(i===j?0:v),0);
   const worksheetTypes={standard:'Estàndard',extension:'Ampliació'};
-  const pilot=(c,catalog)=>catalog.length>0&&catalog.every(t=>Array.isArray(t.families));
+  // The family-based pilot planner requires an explicit coverage contract;
+  // a 2ESO family inventory alone must not route into typePlan().
+  const pilot=(c,catalog)=>catalog.length>0&&catalog.every(t=>Array.isArray(t.families)&&Array.isArray(t.requiredContents));
   const isStandard=q=>q.standard===true;
   const firstNumeric=c=>(window.MIWorksheetConfig?.id||c.contextId)==='1eso-numeric';
   const secondNumeric=c=>(window.MIWorksheetConfig?.id||c.contextId)==='2eso-numeric';
@@ -281,3 +283,4 @@
   }
   window.MIWorksheets={counts,maximum,validate,allocate,generate,worksheetTypes,minimum,noChallengesMessage,fixedCounts,difficultyQuotas};
 })();
+
