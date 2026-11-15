@@ -24,6 +24,19 @@ Auditoria iniciada des de `main` (`19beace8b55b45c233742fe491354fece9ce4c86`). S
 
 No es força cap objectiu de recompte de famílies. Cap generador actual no requereix N3 per al nivell curricular d’aquest tema; es manté N1/N2 i la fitxa rebutja N3 abans de començar quan cap tema seleccionat pot cobrir la quota.
 
+## Matriu de teoria i errors freqüents
+
+| Família | Generadors/variants | Ancoratge | Ajuda | Exemple de la família | Error freqüent |
+|---|---|---|---|---|---|
+| Significat i representacions equivalents | 1, 2 | `#significat` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Què significa, en general, 120% ? | Tractar p% com p unitats absolutes o invertir numerador i denominador. |
+| Calcular una part percentual | 3, 8, 16, 17 | `#part` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Calcula el 30% de 80 . | Aplicar el percentatge al valor final en lloc de la base indicada. |
+| Determinar quin percentatge representa una part | 4 | `#percentatge` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | De 60 alumnes, 15 compleixen una condició. Quin percentatge representen? | Confondre calcular p% d’un total amb esbrinar quin percentatge és una part. |
+| Aplicar un augment o una disminució percentual | 6, 7 | `#augment-disminucio` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Una quantitat de 40 augmenta un 15% . Quin és el nou valor? | Sumar o restar punts percentuals al valor en lloc d’aplicar un factor. |
+| Reconstruir el total o el valor inicial | 5, 9, 10 | `#total` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | El 20% d’una quantitat són 16 . Quina és la quantitat total? | Desfer una disminució amb el mateix percentatge en lloc d’invertir el factor. |
+| Determinar una taxa de variació percentual | 11, 12 | `#variacio` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Una quantitat passa de 100 a 130 . Quin és el percentatge d’augment? | Dividir el canvi pel valor final en lloc del valor inicial. |
+| Analitzar canvis successius i comparar descomptes | 13, 14, 15 | `#successius` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Un producte rep un descompte del 10% i després un altre del 25% sobre el preu ja rebaixat. Quin és el des | Sumar percentatges successius com si tinguessin la mateixa base. |
+| Composició de percentatges en un context | 18 | `#part` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | En un centre hi ha 300 alumnes . El 40% són noies i el 25% de les noies practica un esport. Quantes noies | Confondre taxa per unitat i preu total, o usar suma en lloc de producte. |
+
 ## Tres mostres generades per família
 
 ### Significat i representacions equivalents (`significat-i-equivalencies`) — N1
@@ -208,4 +221,7 @@ No es força cap objectiu de recompte de famílies. Cap generador actual no requ
 - Prova Playwright amb Chrome 157.0.8103.52: pràctica guiada/autònoma, selecció i rotació de famílies, correcció/resposta errònia, examen, enllaços i ancoratges de teoria, hashchange i viewport de 390 px; sense errors JavaScript.
 - Regressions Lot 2: 30 mostres d’aquest tema i 30 de cada un dels altres tres temes ordinaris i de les quatre ampliacions.
 - Fitxes: tots els 8 temes ordinaris, preguntes/solucions, quotes i duplicats; Word/PDF amb i sense solucions. Les fitxes admeten nivells només presents al catàleg real.
+
+- Les proves cobreixen valors superiors al 100% disponibles al banc, augments/disminucions, percentatges successius i reconstrucció del valor inicial. Els generadors actuals no produeixen els casos límit exactes 0% i 100%; aquesta limitació del banc queda oberta i no es declara validada amb preguntes generades.
+
 - El codi del popup real de teoria no s’ha pogut carregar des de `file://` en aquest sandbox. S’ha comprovat l’URL i l’ancoratge sol·licitats, i la navegació directa i `hashchange`. Chrome disponible; Edge no executat. No s’afirma que GitHub Pages s’hagi verificat.
