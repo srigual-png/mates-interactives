@@ -1,3 +1,6 @@
+Warning: truncated output (original token count: 19135)
+Total output lines: 794
+
 /* Classificació compartida de la web. Tasca, suport i currículum són eixos independents.
    Els nivells heretats es centralitzen aquí; això no certifica la revisió pedagògica de cada família. */
 (function(root){
@@ -6,12 +9,30 @@
   const LABELS=[null,'baixa','mitjana','alta'];
   function freeze(value){if(value&&typeof value==='object'){Object.values(value).forEach(freeze);Object.freeze(value);}return value;}
   /* BEGIN COMPILED PEDAGOGICAL REVIEW */
-  const REVIEWED_LEVELS=freeze({"1eso/algebraic":{"simplificacio":[[1,5],[3,6],[]],"equacions":[[1,2],[3,4,7,8],[]],"computacional":[[1,2,4,5],[3,6],[]],"patrons2":[[2,3],[1],[]],"monomis2":[[1,2,3,4],[],[]],"simplificacio2":[[],[2,4],[]],"equacions2":[[],[5,6],[]]},"1eso/espacial":{"elements":[[1,2,3,4,5,6,7,8],[],[]],"angles":[[1,2,3,4,5],[6,7],[]],"poligons":[[1,2,3,4,5,8],[6,7],[]],"triangles":[[1,2,3,4,6],[],[]],"quadrilaters":[[1,2,3,4,5,6],[],[]],"cercle":[[1,2,3,7],[],[]],"visualitzacio":[[1,3,4,6],[2,5,7],[]],"poliedres":[[1,2,3,4,5,6],[],[]],"cossos":[[1,2,3,4,5,6],[],[]],"pitagores":[[1,2,6],[3,4,5],[]],"cercle2":[[4,5,6],[],[]],"coordenades":[[1,2,3,4,5,6],[],[]]},"1eso/estocastic":{"recollida":[[1,2,3,4],[5,6,7],[]],"taules":[[1,2,4,5,6,7,9,10,11,12],[3,8],[]],"barres":[[1,2,3,7,8,9,10,11,12],[4,5,6],[]],"sectors":[[1,2,3,4,5,7,8,9,10,11,12,13],[6],[]],"poligons":[[1,2,3,4,8,9,10,11,12],[5,6,7],[]],"mitjana":[[1,3],[2,4],[]],"mediana":[[1,2,4],[3],[]],"moda":[[1,2,3,5,6,7,8,9,10],[4],[]],"probabilitat":[[1,2,3,4,5,6,7,8,9,10,11],[],[]],"acumulades2":[[1,2,3,4],[],[]],"histograma":[[1,2,3,4,6],[5],[]]},"1eso/mesura":{"metric":[[1,2,3],[1002],[1001]],"conversions":[[3],[1,2,4,1002,1003,1004,1005],[1001]],"temps":[[1,5,1005],[2,3,4,1002,1003,1004,1006],[1001]],"perimetres":[[1,2,3,6,7],[4,5,1002,1003,1004,1005,1006,1007,1008,1009,1010],[1001]],"arees":[[1,2,3,4,7,1003],[5,6,1002,1004,1005,1006,1007,1008,1009,1010,1011,1012],[1001]],"mesurament":[[1,2,7,8,1002,1003],[3,4,5,6,1004,1005,1006,1007,1008,1009,1010],[1001]],"estimacio":[[1,2,3,4],[1002],[1001]],"volum":[[1,2,3,4,6],[5],[]],"problemes":[["C05","M01","M02"],["C01","C02","C03","C04","C06","T01","T02","T03","T04","T05","P01","P02","P03","P04","P05","A01","A02","A03","A04","A05","A06","A07","S01","S02","S03","S04","M03","M04","M05","I01","I02","I03","I04","I05","I06"],["R01","R02","R03","R04","R05","R06","R07","R08"]]},"2eso/algebraic":{"patrons":[[1,3,5,6],[2,4,7,8],[]],"expressions":[[1,2,3,4,5,6,7,10],[8,9],[]],"equacions":[[11,12],[1,2,3,4,5,6,7,8,9,10],[]],"problemes":[[1,11],[2,3,4,5,6,7,8,9,10,12],[]],"relacions":[[1,2,3,4,5,6,7,8,11,12],[9,10],[]],"funcionslineals":[[1,2,3,4,5,8,10,11,12,15,17],[6,7,9,13,14,16],[]],"computacional":[[5,6,7,9,10,11,12,15,17],[1,2,3,4,8,13,14,16],[]],"productes3r":[[1,2,3,4,5,6,7,8,9,10,11,13,14,16],[12,15],[]],"identitats3r":[[1,2,3,4,5,6,7,8,9,11,13,14,15,16],[10,12],[]],"sistemes3r":[[1,6,11,12,13,14,16],[2,3,4,5,7,8,9,10,15],[]]},"2eso/espacial":{"semblanca":[[2,3,6,7,8,10],[1,4,5,9,11],[]],"tales":[[3,4,5,6,10],[1,2,7,8,9],[]],"pitagores":[[1,2,3,4,5],[6,7,8,9,10],[]],"cossos":[[1,2,3,4,5,6,7,8,9,10],[],[]],"visual3d":[[6,9],[1,2,3,4,5,7],[8]],"coordenades":[[1,2,3,5,8,9,10],[4,6,7],[]],"modelitzacio":[[6,9],[1,2,4,5,7,8,10],[3]],"pitagores3r":[[],[1,2,3,4,5,6,7,8],[]],"semblanca3r":[[1,2,3,4,9],[5,6,7,8],[]],"transformacions3r":[[1,2,3,4,5,6,7,8,9,10],[],[]],"transformacionsAv3r":[[10],[1,2,3,4,5,6,7,8,9],[]]},"2eso/estocastic":{"dades":[[1,2,3,4,5,7],[6,8],[]],"frequencias":[[1,2,3,4,5,7,8,10,11,12],[6,9],[]],"grafics":[[1,2,4,5,6,7,8,9,10,12],[3,11],[]],"centralitzacio":[[1,4,7,8,9,10,11,12],[2,3,5,6],[]],"investigacions":[[1,2,9,12],[3,4,5,6,7,8,10,11],[]],"probabilitat":[[1,2,3,4,5,6,7,8,9,10,11,13,15],[12,14],[]],"experiments":[[1,2,3,4,5,6,13],[7,8,9,10,11,12],[]],"intervals3r":[[1,2,3,4,5,6,7,8,9,10,12,13],[11],[]],"grafics3r":[[1,2,3,4,6,7,8,9,10,11,12],[5],[]],"dispersio3r":[[2,3,4,8,9,10,11,12],[1,5,6,7],[]],"probabilitat3r":[[1,2,3,4,7,11],[5,6,8,9,10,12],[]]},"2eso/mesura":{"unitats":[[1,2,3,4,5,6,7,8,11,12,13,14,16,17,18],[9,10,15],[]],"escales":[[5,11,12,13,14],[1,2,3,4,6,7,8,9,10,15,16,17,18],[]],"pitagores":[[1,2,3,5,9,15,16],[4,6,7,8,10,11,12,13,14],[]],"perimetres":[[1,2,3,4,5,6,7,12,13,14,18],[8,9,10,11,15,16,17],[]],"superficies":[[1,3,5,6,7,8,10,11,18],[2,4,9,12,13,14,15,16,17,19,20],[]],"estimacio":[[1,2,3,4,5,6,10,11,14,15,16,17,18],[7,8,9,12,13],[]],"problemes":[[16,17,18,19],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,20],[]],"semblanca3r":[[1,2,3,4,5,6,7,11,12,13,14],[8,9,10],[]],"talesPitagores3r":[[],[2,4,6,7,9,11,12,13,14],[1,3,5,8,10]],"piramidesCons3r":[[1,2,4,7,8,13,14],[3,5,6,9,10,11,12],[]],"reptesMesura3r":[[11,12,16],[1,2,3,4,5,7,8,9,10,13,14],[6,15]]},"2eso/numeric":{"racionals":[[1,2,3,4,9,11,15],[5,6,7,12,13],[8,10,14]],"fraccionsSentit":[[1,2,3,5,6,7,9,14],[4,8,10,11,12,13,15],[]],"operacionsRacionals":[[1,2,3,4,5,7,8,9,16,17,18],[6,10,11,12,13,14,15],[19,20,21]],"potencies":[[1,2,3,4,5,7,8,9,10,11,12,13,14,15,18],[6,16,17],[]],"aproximacions":[[1,2,3,4,5,6,7,13,14],[8,9,10,11,12,15],[]],"proporcionalitat":[[1,2,4,5,6,7,9,13,14,18],[3,8,10,11,12,15,16,17],[]],"percentatges":[[1,2,3,4,6,7,8,16,17],[5,9,10,11,12,13,14,15,18],[]],"recomptes":[[1,2,3,4,6,9,11,12,15],[5,7,8,10,13,14],[]],"financeraAmp":[[1,2,4,6,11,13,14],[3,5,7,8,9,10,12],[]],"generatriu3r":[[1,2,3,4,5,6,7,8,9,11,12,15],[10,13,14],[]],"notacio3r":[[1,2,3,4,5,6,7,8,9,12,13,14,15],[10,11],[]],"inversa3r":[[1,3,4,5,10,11,15],[2,6,7,8,9,12,13,14],[]]},"3eso/algebraic":{"patrons":[[1,4,6],[2,3,5,7,8],[]],"expressions":[[1,2,3,4,5,6,7],[8],[]],"identitats":[[1,2,3,4,5,6,7,8],[],[]],"factoritzacio":[[1,2,3,4,5,6,7,8],[],[]],"equacions2":[[1,2,6],[3,4,5,7,8],[]],"sistemes":[[1,5],[2,3,4,6,7,8],[]],"funcions":[[1,2,3,4,6,7,8],[5],[]],"funcions8":[[1,2,3,4,6,7],[5,8],[]],"quadratica":[[1,2,3,4,5,6,7,8],[],[]],"inequacionsA":[[1,2,3,4,5,8],[6,7],[]],"discriminantB":[[1,2,4,5,8],[3,6,7],[]],"sistemesC":[[],[1,2,3,4,5,6,7,8],[]],"grafiquesD":[[1,2,4,7,8],[3,5,6],[]]},"3eso/espacial":{"translacions":[[1,2,3,4,5,6,8,9],[7,10],[]],"girs":[[1,2,3,4,5,6,8,10],[7,9],[]],"simetriaAxial":[[1,2,7,8,9,10],[3,4,5,6],[]],"simetriaCentral":[[1,3,4],[2,5,6,7,8,9,10],[]],"mosaics":[[1,2,3,4,6,7,8,9,10],[5],[]],"transformacionsCoord":[[1,2,3,4,5,7,8,9],[6,10],[]],"geoAlgebra":[[1,2,3,4,5,6,7,8,9,10],[],[]],"visualitzacio":[[1,2,3,4,5,6,7,8,9,10],[],[]],"ampliacioA":[[4,10],[1,2,3,5,6,7,8,9],[]],"ampliacioB":[[2,4,6,7,8,9,10],[1,3,5],[]],"ampliacioC":[[1,2,7,8,9,10],[3,4,5,6],[]],"ampliacioD":[[1,3,4,5,6,7,8,10],[2,9],[]]},"3eso/estocastic":{"dades3r":[[1,2,3,4,5,6,7,13,14],[8,9,10,11,12],[]],"taules3r":[[1,2,3,4,5,7,8,10,11,12,13,14,15,16,17,18,19,20,22],[6,9,21],[]],"grafics3r":[[1,2,3,4,6,7,8,9,10,11,12],[5],[]],"centralitzacio3r":[[1,5,6,7,10,16],[2,3,4,8,9,11,12,13,14,15],[]],"quartils3r":[[2,3,4,5,6,7,8,12,13],[1,9,10,11,14],[]],"dispersio3r":[[1,3,4,5,6,8,9,10,11,12,13,15,16,17],[2,7,14],[]],"investigacio3r":[[1,2,9,18,19,20,21],[3,4,5,6,7,8,10,11,12,13,14,15,16,17],[]],"probabilitat3r":[[1,2,3,4,6,11,12,13,14,17,21],[5,7,8,9,10,15,16,18,19,20,22],[]],"ampA3r":[[1,3,7,8,10,11,12],[2,4,5,6,9,13,14],[]],"ampB3r":[[1,2,3,4,5,7,8,10,11,12,13],[6,9,14],[]],"ampC3r":[[10,11,12],[1,2,3,4,5,6,7,8,9,13,14],[]],"ampD3r":[[1,2,3,4,5,9,10,12],[6,7,8,11,13,14],[]]},"3eso/mesura":{"volum":[[1,2,3,4,5,6,9],[7,8,10],[]],"precisio":[[1,2,3,4,6,9,10],[5,7,8],[]],"arees":[[7],[1,2,3,4,5,6,8,9,10],[]],"semblanca":[[1,2,3,4,5,6,7,8,9],[10],[]],"tales":[[],[1,2,3,4,5,6,7,8,9,10],[]],"pitagores":[[],[1,2,3,4,5,6,7,8,9,10],[]],"piramides":[[1,2,3,7,8],[4,5,6,9,10],[]],"errorMesura":[[1,2,3,4,6],[5,7,8,9,10],[]],"escalesA":[[1,2,8],[3,4,5,6,7,9,10],[]],"cossosB":[[1,2,3,5,6,7],[4,8,9,10],[]],"trigC":[[1,2,3,4,10],[5,6,7,8,9],[]],"problemesD":[[8],[1,2,3,4,5,6,7,9,10],[]]},"3eso/numeric":{"racionals3r":[[1,2,3,5,6,9,12],[4,7,8,10,11],[]],"generatriu3r":[[1,2,3,4,5,9,11,12],[6,7,8,10],[]],"reals3r":[[1,2,3,4,5,6,7,8,9,10,11,12],[],[]],"aproximacions3r":[[1,2,3,4,5,6,7,9,11],[8,10,12],[]],"potencies3r":[[1,2,3,4,5,6,7,8,9,12,13,14,16],[10,11,15],[]],"notacio3r":[[1,2,3,4,5,6,7,8,9,12,13,15,16,17,18],[10,11,14],[]],"proporcionalitat3r":[[1,2,4,7,9,10,11,12,15,16],[3,5,6,8,13,14],[]],"recomptes3r":[[1,2,4,5,6,9,11,14,15],[3,7,8,10,12,13,16,17],[]],"radicalsA":[[1,2,3,4,5,6,7,8,9,10,11,13,14],[12],[]],"exponentFraccionariB":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14],[],[]],"logaritmesC":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14],[],[]],"pascalD":[[1,2,3,4,5,9,10,11],[6,7,8,12,13,14],[]]},"4eso/algebraic":{"patrons4t":[[8,5,9,7,4,6,10],[3,2,1],[]],"equacions2g4t":[[7,5,1,2,11],[4,8,9,6,10,3],[]],"sistemes4t":[[6,10],[4,5,3,1,7,8,2,9],[]],"inequacions4t":[[3,6,2,4,8,5,1,7],[10,9],[]],"funcionsRep4t":[[5,2,9,10,3,8,6,1,4,11],[7,12],[]],"linealsQuad4t":[[5,7,1,4,9,8,2,12],[6,11,10,3],[]],"inversaExp4t":[[4,8,11,6,2],[1,12,3,10,5,9,7],[]],"analisiFunc4t":[[5,1,2,4,10,3,6],[9,7,12,11,8],[]],"polinomisAmpA":[[7,3,9,10,1,4,5,2,6,8],[],[]],"equacionsAdvAmpB":[[8,1,4,7,9],[10,2,6,5,3],[]],"parametresAmpC":[[2,5,10,3,4,1],[8,9,7,6],[]],"inequacionsCompAmpD":[[4,9,6,3,8],[1,10,2,5,7],[]]},"4eso/espacial":{"figures4t":[[6,2,7,3,4,1,5],[8,9,10],[]],"vectors4t":[[6,5,3,1,4,7,10,9,2,8],[],[]],"components4t":[[2,5,6,9,4,3,10,1],[7,8],[]],"operacionsVectors4t":[[6,5,1,4,2,8,3,9],[7,10],[]],"coordenadesVectors4t":[[3,1,2,8],[9,7,6,10,5,4],[]],"homotecies4t":[[5,7,8,1,6],[10,9,3,4,2],[]],"geometriaFuncions4t":[[2,1,5,11,3,7,10,8,4,6,9],[],[]],"regions4t":[[2,4,7,9,1,6,5],[3,8,10],[]],"rectesAmpA":[[9,7,8,1,6,4,5],[2,10,3],[]],"elementsRectaAmpB":[[10,8,1,4,5,9,2,7,6,3],[],[]],"posicioRectesAmpC":[[10,6,7,4,8,9,1,3],[5,2],[]],"geometriaAnaliticaAmpD":[[4,7,12,11],[1,8,10,3,6,5,9,2],[]]},"4eso/estocastic":{"dadesVariables4t":[[3,1,2,5,4,6,10,7,8,9],[],[]],"taulesRepresentacions4t":[[1,3,10,4,8,2,6,5],[7,9],[]],"comparacioDistribucions4t":[[8,2,4,5,1,3],[6,9,10,7],[]],"estudisMostreig4t":[[5,1,6,2],[8,10,9,7,4,3],[]],"nuvolsRelacio4t":[[5,2,7,3,1,10,6],[4,9,8],[]],"regressioPrediccions4t":[[1,4,3,2,10],[5,9,6,7,8],[]],"espaiMostralRecompte4t":[[5,8,3,1,6,2,10,4],[7,9],[]],"experimentsCompostos4t":[[5,9,10],[6,7,8,4,1,2,3],[]],"contingenciaBatx4t":[[7,3,9,4,1,10,2],[8,5,6],[]],"correlacioBatx4t":[[1,8,2,9,4,3],[5,7,10,6],[]],"condicionadaBatx4t":[[7,3,5,6,4],[9,1,8,10,2],[]],"bayesBatx4t":[[7,1,8],[6,2,5,9,10,4,3],[]]},"4eso/mesura":{"angles4t":[[1,2,3,4,5,6,7,8,9,10,11],[],[]],"radians4t":[[1,2,3,4,5,6,7,8,10,11],[9],[]],"pitagores4t":[[1,2,3,4,11],[5,6,7,8,9,10],[]],"semblancaRaons4t":[[1,2,5,6,8,9,11],[3,4,7,10],[]],"trigRaons4t":[[1,2,3,4,5,6,7,8,9,10,11],[],[]],"resolTriangles4t":[[1,2,3,4,5,6,7,10,11],[8,9],[]],"mesuresIndirectes4t":[[9],[1,2,3,4,5,6,7,8,11],[10]],"precisioError4t":[[1,2,3,4,6,7,8,9,11],[5,10],[]],"anglesNotablesAmpA":[[1,2,3,4,5,6,7,8,9,10,11],[],[]],"identitatsAmpB":[[1,2,3,6,7,8,10],[4,5,9,11],[]],"circumferenciaAmpC":[[1,2,3,4,5,6,7,8,9,10,11],[],[]],"modelitzacioAmpD":[[10],[1,3,4,5,6,7,8,9,11],[2]]},"4eso/numeric":{"reals4t":[[1,2,3,4,5,6,7,8,9,10],[],[]],"irracionals4t":[[1,2,3,5,6,7,8,9,10],[4],[]],"intervals4t":[[1,2,3,4,5,6,7,8,10],[9],[]],"errors4t":[[1,2,3,4,5,9],[6,7,8,10],[]],"operacions4t":[[1,2,3,4,7,8,10],[5,6,9],[]],"comptatge4t":[[1,2,4,5,7,8,9],[3,6,10],[]],"pascal4t":[[1,2,3,5,6,8,9],[4,7,10],[]],"financera4t":[[1,2,6,8],[3,4,5,7,9,10],[]],"radicalsAmpA":[[1,2,3,4,5,6,7,8,9,10],[],[]],"radicalsAmpB":[[1,2,3,4,5,6,7,8,10],[9],[]],"combinatoriaAmpC":[[1,2,4,5,6,7,10],[3,8,9],[]],"logaritmesAmpD":[[1,2,3,4,5,6,7,8,9,10],[],[]]}});
+  const REVIEWED_LEVELS=freeze({"1eso/algebraic":{"simplificacio":[[1,5],[3,6],[]],"equacions":[[1,2],[3,4,7,8],[]],"computacional":[[1,2,4,5],[3,6],[]],"patrons2":[[2,3],[1],[]],"monomis2":[[1,2,3,4],[],[]],"simplificacio2":[[],[2,4],[]],"equacions2":[[],[5,6],[]]},"1eso/espacial":{"elements":[[1,2,3,4,5,6,7,8],[],[]],"angles":[[1,2,3,4,5],[6,7],[]],"poligons":[[1,2,3,4,5,8],[6,7],[]],"triangles":[[1,2,3,4,6],[],[]],"quadrilaters":[[1,2,3,4,5,6],[],[]],"cercle":[[1,2,3,7],[],[]],"visualitzacio":[[1,3,4,6],[2,5,7],[]],"poliedres":[[1,2,3,4,5,6],[],[]],"cossos":[[1,2,3,4,5,6],[],[]],"pitagores":[[1,2,6],[3,4,5],[]],"cercle2":[[4,5,6],[],[]],"coordenades":[[1,2,3,4,5,6],[],[]]},"1eso/estocastic":{"recollida":[[1,2,3,4],[5,6,7],[]],"taules":[[1,2,4,5,6,7,9,10,11,12],[3,8],[]],"barres":[[1,2,3,7,8,9,10,11,12],[4,5,6],[]],"sectors":[[1,2,3,4,5,7,8,9,10,11,12,13],[6],[]],"poligons":[[1,2,3,4,8,9,10,11,12],[5,6,7],[]],"mitjana":[[1,3],[2,4],[]],"mediana":[[1,2,4],[3],[]],"moda":[[1,2,3,5,6,7,8,9,10],[4],[]],"probabilitat":[[1,2,3,4,5,6,7,8,9,10,11],[],[]],"acumulades2":[[1,2,3,4],[],[]],"histograma":[[1,2,3,4,6],[5],[]]},"1eso/mesura":{"metric":[[1,2,3],[1002],[1001]],"conversions":[[3],[1,2,4,1002,1003,1004,1005],[1001]],"temps":[[1,5,1005],[2,3,4,1002,1003,1004,1006],[1001]],"perimetres":[[1,2,3,6,7],[4,5,1002,1003,1004,1005,1006,1007,1008,1009,1010],[1001]],"arees":[[1,2,3,4,7,1003],[5,6,1002,1004,1005,1006,1007,1008,1009,1010,1011,1012],[1001]],"mesurament":[[1,2,7,8,1002,1003],[3,4,5,6,1004,1005,1006,1007,1008,1009,1010],[1001]],"estimacio":[[1,2,3,4],[1002],[1001]],"volum":[[1,2,3,4,6],[5],[]],"problemes":[["C05","M01","M02"],["C01","C02","C03","C04","C06","T01","T02","T03","T04","T05","P01","P02","P03","P04","P05","A01","A02","A03","A04","A05","A06","A07","S01","S02","S03","S04","M03","M04","M05","I01","I02","I03","I04","I05","I06"],["R01","R02","R03","R04","R05","R06","R07","R08"]]},"2eso/algebraic":{"patrons":[[1,3,5,6],[2,4,7,8],[]],"expressions":[[1,2,3,4,5,6,7,10],[8,9],[]],"equacions":[[11,12],[1,2,3,4,5,6,7,8,9,10],[]],"problemes":[[1,11],[2,3,4,5,6,7,8,9,10,12],[]],"relacions":[[1,2,3,4,5,6,7,8,11,12],[9,10],[]],"funcionslineals":[[1,2,3,4,5,8,10,11,12,15,17],[6,7,9,13,14,16],[]],"computacional":[[5,6,7,9,10,11,12,15,17],[1,2,3,4,8,13,14,16],[]],"productes3r":[[1,2,3,4,5,6,7,8,9,10,11,13,14,16],[12,15],[]],"identitats3r":[[1,2,3,4,5,6,7,8,9,11,13,14,15,16],[10,12],[]],"sistemes3r":[[1,6,11,12,13,14,16],[2,3,4,5,7,8,9,10,15],[]]},"2eso/espacial":{"semblanca":[[2,3,6,7,8,10],[1,4,5,9,11],[]],"tales":[[3,4,5,6,10],[1,2,7,8,9],[]],"pitagores":[[1,2,3,4,5],[6,7,8,9,10],[]],"cossos":[[1,2,3,4,5,6,7,8,9,10],[],[]],"visual3d":[[6,9],[1,2,3,4,5,7],[8]],"coordenades":[[1,2,3,5,8,9,10],[4,6,7],[]],"modelitzacio":[[6,9],[1,2,4,5,7,8,10],[3]],"pitagores3r":[[],[1,2,3,4,5,6,7,8],[]],"semblanca3r":[[1,2,3,4,9],[5,6,7,8],[]],"transformacions3r":[[1,2,3,4,5,6,7,8,9,10],[],[]],"transformacionsAv3r":[[10],[1,2,3,4,5,6,7,8,9],[]]},"2eso/estocastic":{"dades":[[1,2,3,4,5,7],[6,8],[]],"frequencias":[[1,2,3,4,5,7,8,10,11,12],[6,9],[]],"grafics":[[1,2,4,5,6,7,8,9,10,12],[3,11],[]],"centralitzacio":[[1,4,7,8,9,10,11,12],[2,3,5,6],[]],"investigacions":[[1,2,9,12],[3,4,5,6,7,8,10,11],[]],"probabilitat":[[1,2,3,4,5,6,7,8,9,10,11,13,15],[12,14],[]],"experiments":[[1,2,3,4,5,6,13],[7,8,9,10,11,12],[]],"intervals3r":[[1,2,3,4,5,6,7,8,9,10,12,13],[11],[]],"grafics3r":[[1,2,3,4,6,7,8,9,10,11,12],[5],[]],"dispersio3r":[[2,3,4,8,9,10,11,12],[1,5,6,7],[]],"probabilitat3r":[[1,2,3,4,7,11],[5,6,8,9,10,12],[]]},"2eso/mesura":{"unitats":[[1,2,3,4,5,6,7,8,11,12,13,14,16,17,18],[9,10,15],[]],"escales":[[5,11,12,13,14],[1,2,3,4,6,7,8,9,10,15,16,17,18],[]],"pitagores":[[1,2,3,5,9,15,16],[4,6,7,8,10,11,12,13,14],[]],"perimetres":[[1,2,3,4,5,6,7,12,13,14,18],[8,9,10,11,15,16,17],[]],"superficies":[[1,3,5,6,7,8,10,11,18],[2,4,9,12,13,14,15,16,17,19,20],[]],"estimacio":[[1,2,3,4,5,6,10,11,14,15,16,17,18],[7,8,9,12,13],[]],"problemes":[[16,17,18,19],[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,20],[]],"semblanca3r":[[1,2,3,4,5,6,7,11,12,13,14],[8,9,10],[]],"talesPitagores3r":[[],[2,4,6,7,9,11,12,13,14],[1,3,5,8,10]],"piramidesCons3r":[[1,2,4,7,8,13,14],[3,5,6,9,10,11,12],[]],"reptesMesura3r":[[11,12,16],[1,2,3,4,5,7,8,9,10,13,14],[6,15]]},"2eso/numeric":{"racionals":[[1,2,3,4,9,11,15],[5,6,7,8,10,12,13,14],[16,17,18]],"fraccionsSentit":[[1,2,3,5,6,7,14],[4,8,9,11,15,16],[10,12,13,17]],"operacionsRacionals":[[1,2,3,4,5,7,8,9,16,17,18],[6,10,11,12,13,14,15],[19,20,21]],"potencies":[[1,2,3,4,5,6,8,11,12,13,17,18],[7,9,10,14,15,16],[]],"aproximacions":[[1,2,3,4,5,6,7,13,14],[8,9,10,11,12,15],[]],"proporcionalitat":[[1,2,4,5,6,7,9,13,14,18],[3,8,10,11,12,15,16,17],[]],"percentatges":[[1,2,3,4,6,7,8,16,17],[5,9,10,11,12,13,14,15,18],[]],"recomptes":[[1,2,3,4,6,9,11,12,15],[5,7,8,10,13,14],[]],"financeraAmp":[[1,2,4,6,11,13,14],[3,5,7,8,9,10,12],[]],"generatriu3r":[[1,2,3,4,5,6,7,8,9,11,12,15],[10,13,14],[]],"notacio3r":[[1,2,3,4,5,6,7,8,9,12,13,14,15],[10,11],[]],"inversa3r":[[1,3,4,5,10,11,15],[2,6,7,8,9,12,13,14],[]]},"3eso/algebraic":{"patrons":[[1,4,6],[2,3,5,7,8],[]],"expressions":[[1,2,3,4,5,6,7],[8],[]],"identitats":[[1,2,3,4,5,6,7,8],[],[]],"factoritzacio":[[1,2,3,4,5,6,7,8],[],[]],"equacions2":[[1,2,6],[3,4,5,7,8],[]],"sistemes":[[1,5],[2,3,4,6,7,8],[]],"funcions":[[1,2,3,4,6,7,8],[5],[]],"funcions8":[[1,2,3,4,6,7],[5,8],[]],"quadratica":[[1,2,3,4,5,6,7,8],[],[]],"inequacionsA":[[1,2,3,4,5,8],[6,7],[]],"discriminantB":[[1,2,4,5,8],[3,6,7],[]],"sistemesC":[[],[1,2,3,4,5,6,7,8],[]],"grafiquesD":[[1,2,4,7,8],[3,5,6],[]]},"3eso/espacial":{"translacions":[[1,2,3,4,5,6,8,9],[7,10],[]],"girs":[[1,2,3,4,5,6,8,10],[7,9],[]],"simetriaAxial":[[1,2,7,8,9,10],[3,4,5,6],[]],"simetriaCentral":[[1,3,4],[2,5,6,7,8,9,10],[]],"mosaics":[[1,2,3,4,6,7,8,9,10],[5],[]],"transformacionsCoord":[[1,2,3,4,5,7,8,9],[6,10],[]],"geoAlgebra":[[1,2,3,4,5,6,7,8,9,10],[],[]],"visualitzacio":[[1,2,3,4,5,6,7,8,9,10],[],[]],"ampliacioA":[[4,10],[1,2,3,5,6,7,8,9],[]],"ampliacioB":[[2,4,6,7,8,9,10],[1,3,5],[]],"ampliacioC":[[1,2,7,8,9,10],[3,4,5,6],[]],"ampliacioD":[[1,3,4,5,6,7,8,10],[2,9],[]]},"3eso/estocastic":{"dades3r":[[1,2,3,4,5,6,7,13,14],[8,9,10,11,12],[]],"taules3r":[[1,2,3,4,5,7,8,10,11,12,13,14,15,16,17,18,19,20,22],[6,9,21],[]],"grafics3r":[[1,2,3,4,6,7,8,9,10,11,12],[5],[]],"centralitzacio3r":[[1,5,6,7,10,16],[2,3,4,8,9,11,12,13,14,15],[]],"quartils3r":[[2,3,4,5,6,7,8,12,13],[1,9,10,11,14],[]],"dispersio3r":[[1,3,4,5,6,8,9,10,11,12,13,15,16,17],[2,7,14],[]],"investigacio3r":[[1,2,9,18,19,20,21],[3,4,5,6,7,8,10,11,12,13,14,15,16,17],[]],"probabilitat3r":[[1,2,3,4,6,11,12,13,14,17,21],[5,7,8,9,10,15,16,18,19,20,22],[]],"ampA3r":[[1,3,7,8,10,11,12],[2,4,5,6,9,13,14],[]],"ampB3r":[[1,2,3,4,5,7,8,10,11,12,13],[6,9,14],[]],"ampC3r":[[10,11,12],[1,2,3,4,5,6,7,8,9,13,14],[]],"ampD3r":[[1,2,3,4,5,9,10,12],[6,7,8,11,13,14],[]]},"3eso/mesura":{"volum":[[1,2,3,4,5,6,9],[7,8,10],[]],"precisio":[[1,2,3,4,6,9,10],[5,7,8],[]],"arees":[[7],[1,2,3,4,5,6,8,9,10],[]],"semblanca":[[1,2,3,4,5,6,7,8,9],[10],[]],"tales":[[],[1,2,3,4,5,6,7,8,9,10],[]],"pitagores":[[],[1,2,3,4,5,6,7,8,9,10],[]],"piramides":[[1,2,3,7,8],[4,5,6,9,10],[]],"errorMesura":[[1,2,3,4,6],[5,7,8,9,10],[]],"escalesA":[[1,2,8],[3,4,5,6,7,9,10],[]],"cossosB":[[1,2,3,5,6,7],[4,8,9,10],[]],"trigC":[[1,2,3,4,10],[5,6,7,8,9],[]],"problemesD":[[8],[1,2,3,4,5,6,7,9,10],[]]},"3eso/numeric":{"racionals3r":[[1,2,3,5,6,9,12],[4,7,8,10,11],[]],"generatriu3r":[[1,2,3,4,5,9,11,12],[6,7,8,10],[]],"reals3r":[[1,2,3,4,5,6,7,8,9,10,11,12],[],[]],"aproximacions3r":[[1,2,3,4,5,6,7,9,11],[8,10,12],[]],"potencies3r":[[1,2,3,4,5,6,7,8,9,12,13,14,16],[10,11,15],[]],"notacio3r":[[1,2,3,4,5,6,7,8,9,12,13,15,16,17,18],[10,11,14],[]],"proporcionalitat3r":[[1,2,4,7,9,10,11,12,15,16],[3,5,6,8,13,14],[]],"recomptes3r":[[1,2,4,5,6,9,11,14,15],[3,7,8,10,12,13,16,17],[]],"radicalsA":[[1,2,3,4,5,6,7,8,9,10,11,13,14],[12],[]],"exponentFraccionariB":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14],[],[]],"logaritmesC":[[1,2,3,4,5,6,7,8,9,10,11,12,13,14],[],[]],"pascalD":[[1,2,3,4,5,9,10,11],[6,7,8,12,13,14],[]]},"4eso/algebraic":{"patrons4t":[[8,5,9,7,4,6,10],[3,2,1],[]],"equacions2g4t":[[7,5,1,2,11],[4,8,9,6,10,3],[]],"sistemes4t":[[6,10],[4,5,3,1,7,8,2,9],[]],"inequacions4t":[[3,6,2,4,8,5,1,7],[10,9],[]],"funcionsRep4t":[[5,2,9,10,3,8,6,1,4,11],[7,12],[]],"linealsQuad4t":[[5,7,1,4,9,8,2,12],[6,11,10,3],[]],"inversaExp4t":[[4,8,11,6,2],[1,12,3,10,5,9,7],[]],"analisiFunc4t":[[5,1,2,4,10,3,6],[9,7,12,11,8],[]],"polinomisAmpA":[[7,3,9,10,1,4,5,2,6,8],[],[]],"equacionsAdvAmpB":[[8,1,4,7,9],[10,2,6,5,3],[]],"parametresAmpC":[[2,5,10,3,4,1],[8,9,7,6],[]],"inequacionsCompAmpD":[[4,9,6,3,8],[1,10,2,5,7],[]]},"4eso/espacial":{"figures4t":[[6,2,7,3,4,1,5],[8,9,10],[]],"vectors4t":[[6,5,3,1,4,7,10,9,2,8],[],[]],"components4t":[[2,5,6,9,4,3,10,1],[7,8],[]],"operacionsVectors4t":[[6,5,1,4,2,8,3,9],[7,10],[]],"coordenadesVectors4t":[[3,1,2,8],[9,7,6,10,5,4],[]],"homotecies4t":[[5,7,8,1,6],[10,9,3,4,2],[]],"geometriaFuncions4t":[[2,1,5,11,3,7,10,8,4,6,9],[],[]],"regions4t":[[2,4,7,9,1,6,5],[3,8,10],[]],"rectesAmpA":[[9,7,8,1,6,4,5],[2,10,3],[]],"elementsRectaAmpB":[[10,8,1,4,5,9,2,7,6,3],[],[]],"posicioRectesAmpC":[[10,6,7,4,8,9,1,3],[5,2],[]],"geometriaAnaliticaAmpD":[[4,7,12,11],[1,8,10,3,6,5,9,2],[]]},"4eso/estocastic":{"dadesVariables4t":[[3,1,2,5,4,6,10,7,8,9],[],[]],"taulesRepresentacions4t":[[1,3,10,4,8,2,6,5],[7,9],[]],"comparacioDistribucions4t":[[8,2,4,5,1,3],[6,9,10,7],[]],"estudisMostreig4t":[[5,1,6,2],[8,10,9,7,4,3],[]],"nuvolsRelacio4t":[[5,2,7,3,1,10,6],[4,9,8],[]],"regressioPrediccions4t":[[1,4,3,2,10],[5,9,6,7,8],[]],"espaiMostralRecompte4t":[[5,8,3,1,6,2,10,4],[7,9],[]],"experimentsCompostos4t":[[5,9,10],[6,7,8,4,1,2,3],[]],"contingenciaBatx4t":[[7,3,9,4,1,10,2],[8,5,6],[]],"correlacioBatx4t":[[1,8,2,9,4,3],[5,7,10,6],[]],"condicionadaBatx4t":[[7,3,5,6,4],[9,1,8,10,2],[]],"bayesBatx4t":[[7,1,8],[6,2,5,9,10,4,3],[]]},"4eso/mesura":{"angles4t":[[1,2,3,4,5,6,7,8,9,10,11],[],[]],"radians4t":[[1,2,3,4,5,6,7,8,10,11],[9],[]],"pitagores4t":[[1,2,3,4,11],[5,6,7,8,9,10],[]],"semblancaRaons4t":[[1,2,5,6,8,9,11],[3,4,7,10],[]],"trigRaons4t":[[1,2,3,4,5,6,7,8,9,10,11],[],[]],"resolTriangles4t":[[1,2,3,4,5,6,7,10,11],[8,9],[]],"mesuresIndirectes4t":[[9],[1,2,3,4,5,6,7,8,11],[10]],"precisioError4t":[[1,2,3,4,6,7,8,9,11],[5,10],[]],"anglesNotablesAmpA":[[1,2,3,4,5,6,7,8,9,10,11],[],[]],"identitatsAmpB":[[1,2,3,6,7,8,10],[4,5,9,11],[]],"circumferenciaAmpC":[[1,2,3,4,5,6,7,8,9,10,11],[],[]],"modelitzacioAmpD":[[10],[1,3,4,5,6,7,8,9,11],[2]]},"4eso/numeric":{"reals4t":[[1,2,3,4,5,6,7,8,9,10],[],[]],"irracionals4t":[[1,2,3,5,6,7,8,9,10],[4],[]],"intervals4t":[[1,2,3,4,5,6,7,8,10],[9],[]],"errors4t":[[1,2,3,4,5,9],[6,7,8,10],[]],"operacions4t":[[1,2,3,4,7,8,10],[5,6,9],[]],"comptatge4t":[[1,2,4,5,7,8,9],[3,6,10],[]],"pascal4t":[[1,2,3,5,6,8,9],[4,7,10],[]],"financera4t":[[1,2,6,8],[3,4,5,7,9,10],[]],"radicalsAmpA":[[1,2,3,4,5,6,7,8,9,10],[],[]],"radicalsAmpB":[[1,2,3,4,5,6,7,8,10],[9],[]],"combinatoriaAmpC":[[1,2,4,5,6,7,10],[3,8,9],[]],"logaritmesAmpD":[[1,2,3,4,5,6,7,8,9,10],[],[]]}});
   const REVIEWED_BANKS=freeze({"algebraOpen":{"T1":1,"T2":2,"T3":1,"T4":2,"T5":1,"T6":1,"T7":2,"P1":1,"P2":1,"P3":1,"P4":1,"P5":2,"P6":1,"P7":1,"M1":1,"M2":1,"M3":1,"M4":1,"M5":1,"M6":1,"S1":1,"S2":1,"S3":2,"S4":1,"S5":1,"S6":1,"E1":1,"E2":1,"E3":1,"E4":2,"E5":2,"E6":1,"E7":2,"E8":2,"E9":2,"E10":2,"C1":1,"C2":1,"C3":2,"C4":1,"C5":1,"C6":2},"spatialOpen":{"E1":1,"E2":1,"E3":1,"E4":1,"E5":1,"A1":1,"A2":1,"A3":1,"A4":1,"A5":1,"A6":1,"A7":1,"P1":1,"P2":1,"P3":1,"P4":1,"P5":1,"P6":1,"T1":1,"T2":1,"T3":1,"T4":1,"T5":2,"T6":1,"T7":1,"Q1":1,"Q2":1,"Q3":1,"Q4":1,"Q5":1,"Q6":1,"C1":1,"C2":1,"C3":1,"C4":1,"C5":1,"C6":1,"V1":1,"V2":2,"V3":1,"V4":2,"V5":2},"stochasticOpen":{"R1":1,"R2":1,"R3":2,"R4":2,"R5":2,"R6":1,"R7":2,"R8":2,"R9":1,"T1":1,"T2":1,"T3":1,"T4":1,"T5":1,"T6":1,"T7":2,"G1":1,"G2":2,"G3":2,"G4":1,"G5":1,"G6":2,"G7":1,"G8":2,"G9":1,"G10":1,"G11":2,"G12":2,"G13":1,"G14":1,"G15":1,"C1":1,"C2":2,"C3":2,"C4":2,"C5":2,"C6":1,"C7":2,"C8":2,"C9":1,"C10":1,"C11":1,"C12":1,"C13":1,"C14":2,"C15":1,"C16":1,"C17":1,"P1":1,"P2":1,"P3":1,"P4":1,"P5":1,"P6":1,"P7":1,"P8":2,"P9":2,"P10":1,"P11":2,"K1":1,"K2":1,"K3":2},"measureProblems":{"C01":2,"C02":2,"C03":2,"C04":2,"C05":1,"C06":2,"T01":2,"T02":2,"T03":2,"T04":2,"T05":2,"P01":2,"P02":2,"P03":2,"P04":2,"P05":2,"A01":2,"A02":2,"A03":2,"A04":2,"A05":2,"A06":2,"A07":2,"S01":2,"S02":2,"S03":2,"S04":2,"M01":1,"M02":1,"M03":2,"M04":2,"M05":2,"I01":2,"I02":2,"I03":2,"I04":2,"I05":2,"I06":2,"R01":3,"R02":3,"R03":3,"R04":3,"R05":3,"R06":3,"R07":3,"R08":3}});
   const REVIEWED_VARIANTS=freeze({"1eso/algebraic":{"traduccio":{"1":{"grouped":{"level":2,"reason":"Distingir l’abast d’un factor sobre una suma i connectar expressió composta i llenguatge."}}},"equacions":{"7":{"single":{"level":1,"reason":"El context només reformula una operació inversa evident."}},"8":{"single":{"level":1,"reason":"El context només reformula una operació inversa evident."}}}},"1eso/espacial":{"poliedres":{"6":{"triangle":{"level":2,"reason":"Cal obtenir primer l’àrea triangular de la base i després relacionar-la amb l’alçada del prisma."}}},"cossos":{"6":{"scale":{"level":2,"reason":"Relacionar el canvi d’una dimensió amb el volum i conservar l’alçada."}}}},"1eso/estocastic":{"mediana":{"1":{"even":{"level":2,"reason":"Ordenar, localitzar dos valors centrals i calcular-ne la mitjana."}}}},"2eso/algebraic":{"equacions":{"11":{"distribute":{"level":2,"reason":"La branca demana distribuir i sumar el terme independent, dues transformacions connectades; les altres branques resten un únic terme indicat."}}}},"2eso/espacial":{"modelitzacio":{"10":{"scale":{"level":1,"reason":"La branca d’escala només reconeix la multiplicació pel factor donat; no exigeix formular el triangle o la proporció d’ombres."}}}},"2eso/estocastic":{"frequencias":{"6":{"all":{"level":1,"reason":"El llindar és el valor màxim de la taula: inclou tota la mostra i el percentatge és directament 100%."}}},"centralitzacio":{"12":{"outlier":{"level":2,"reason":"Triar un centre representatiu relacionant l’extrem amb la sensibilitat de les mesures, en lloc de reconèixer una afirmació directa."}}},"investigacions":{"8":{"validCount":{"level":1,"reason":"La branca només resta les respostes en blanc del total indicat."}},"12":{"headline":{"level":2,"reason":"Contrastar titular i abast de la mostra; no és la lectura de l’ordre de l’informe."}}},"probabilitat3r":{"6":{"replacement":{"level":1,"reason":"Amb reposició i primera extracció ja donada, la composició es conserva; només es llegeix la proporció original."}},"12":{"repetition":{"level":1,"reason":"Amb repetició permesa s’aplica directament la potència del nombre de símbols al nombre de posicions."}}}},"2eso/mesura":{"pitagores":{"15":{"diagonal":{"level":2,"reason":"Identificar el triangle rectangle dins del rectangle abans d’aplicar el teorema."}}},"superficies":{"17":{"sameBase":{"level":1,"reason":"Amb la mateixa base n’hi ha prou de comparar les altures; no cal calcular dos volums."}}}},"2eso/numeric":{"potencies":{"18":{"growth":{"level":2,"reason":"Relacionar el nombre de duplicacions amb una potència i combinar-la amb la població inicial."}}}},"3eso/algebraic":{"patrons":{"2":{"difference":{"level":1,"reason":"Només es demana una resta entre termes consecutius."}},"5":{"ratio":{"level":1,"reason":"Només es demana el quocient constant entre dos termes."}},"7":{"recursive":{"level":1,"reason":"Continuar la suma dels dos termes anteriors és una pauta immediata."}}},"expressions":{"8":{"tariff":{"level":1,"reason":"Traducció directa de quota fixa més cost unitari, sense reconstruir magnituds."}}},"equacions2":{"3":{"incomplete":{"level":1,"reason":"Els coeficients aleatoris donen una equació incompleta: extracció directa d’arrel o factor x."}},"4":{"incomplete":{"level":1,"reason":"Malgrat el nom del tipus, falta el terme lineal o independent: procediment directe d’equació incompleta."}}}},"3eso/estocastic":{"dades3r":{"14":{"sampling":{"level":2,"reason":"La branca valora evitar un grup específic relacionat amb l’estudi."}}},"investigacio3r":{"8":{"validCount":{"level":1,"reason":"Només resta les respostes en blanc del total."}}},"probabilitat3r":{"16":{"replacement":{"level":1,"reason":"Amb reposició, la segona proporció és la composició inicial."}},"22":{"repetition":{"level":1,"reason":"Amb repetició s’aplica directament la potència."}}},"ampC3r":{"9":{"repetition":{"level":1,"reason":"Nombre fix d’opcions a totes les posicions: potència directa."}}}},"3eso/numeric":{"racionals3r":{"8":{"cancelled":{"level":1,"reason":"El parèntesi es cancel·la: zero multiplicat per qualsevol racional no requereix la cadena general."}},"10":{"integer":{"level":1,"reason":"La diferència és un enter; es localitza directament a l’extrem inclòs de l’interval."}}},"aproximacions3r":{"11":{"transport":{"level":2,"reason":"Interpretar el quocient i la necessitat d’arrodonir cap amunt per no deixar persones sense plaça."}}},"recomptes3r":{"12":{"repetition":{"level":1,"reason":"Si es permet repetir, cada posició manté el mateix nombre d’opcions: producte directe."}}}},"4eso/algebraic":{"equacions2g4t":{"3":{"incomplete":{"level":1,"reason":"Amb coeficient lineal o terme independent nul, la branca és una equació incompleta de resolució directa."}},"4":{"incomplete":{"level":1,"reason":"Amb coeficient lineal o terme independent nul, la branca és una equació incompleta de resolució directa."}}}},"4eso/mesura":{"modelitzacioAmpD":{"10":{"eyeHeight":{"level":2,"reason":"La branca requereix tangent per al desnivell i sumar després l’altura dels ulls."}}}},"4eso/numeric":{"pascal4t":{"4":{"singleSelection":{"level":1,"reason":"Triar una persona o deixar-ne fora una dona directament n opcions."}}}}});
-  const REVIEWED_PLANS=freeze({"1eso/numeric":{"percentatges":[4,4,4],"mcmmcd":[4,4,4],"enters":[6,3,3]},"1eso/algebraic":{"traduccio":[7,5,0]},"3eso/espacial":{"mosaics":[11,1,0]},"4eso/estocastic":{"espaiMostralRecompte4t":[10,2,0],"experimentsCompostos4t":[3,9,0]}});
+  const REVIEWED_PLANS=freeze({"1eso/numeric":{"percentatges":[4,4,4],"mcmmcd":[4,4,4],"enters":[6,3,3]},"1eso/algebraic":{"traduccio":[7,5,0]},"2eso/numeric":{"potencies":[6,6,0]},"3eso/espacial":{"mosaics":[11,1,0]},"4eso/estocastic":{"espaiMostralRecompte4t":[10,2,0],"experimentsCompostos4t":[3,9,0]}});
   /* END COMPILED PEDAGOGICAL REVIEW */
-  const RATIONAL_LEVELS=freeze([[1,2,3,4,9,11,15],[5,6,7,12,13],[8,10,14]]); // Els tipus 16-18 són reptes opcionals, fora dels nivells ordinaris.
+  const RATIONAL_LEVELS=freeze([[1,2,3,4,9,11,15],[5,6,7,8,10,12,13,14],[16,17,18]]);
+  const RATIONAL_FAMILIES=freeze([
+    {id:'RAC01',level:1,name:'Convertir fracció a decimal',types:[1]},
+    {id:'RAC02',level:1,name:'Convertir decimal a fracció irreductible',types:[2]},
+    {id:'RAC03',level:1,name:'Convertir fracció a percentatge',types:[3]},
+    {id:'RAC04',level:1,name:'Convertir percentatge a decimal',types:[4]},
+    {id:'RAC05',level:2,name:'Validar cadenes d’equivalències',types:[5,13]},
+    {id:'RAC06',level:2,name:'Comparar fraccions, decimals i percentatges',types:[6,7,14]},
+    {id:'RAC07',level:2,name:'Ordenar representacions racionals',types:[8]},
+    {id:'RAC08',level:2,name:'Trobar un racional interior amb condicions',types:[10]},
+    {id:'RAC09',level:1,name:'Situar fraccions a la recta numèrica',types:[9]},
+    {id:'RAC10',level:1,name:'Identificar la forma de representació',types:[11]},
+    {id:'RAC11',level:2,name:'Expressar una raó en representacions equivalents',types:[12]},
+    {id:'RAC12',level:1,name:'Reconèixer decimals periòdics exactes',types:[15]},
+    {id:'RAC13',level:3,name:'Reconstruir un mínim amb una proporció estricta',types:[16]},
+    {id:'RAC14',level:3,name:'Reconstruir una proporció abans de traspassos',types:[17]},
+    {id:'RAC15',level:3,name:'Cercar un racional amb restriccions simultànies',types:[18]}
+  ]);
+  function rationalFamilyInfo(value){const type=Number(typeof value==='object'?value?.type:value);return RATIONAL_FAMILIES.find(f=>f.types.includes(type))||null;}
   const FRACTIONS_MEANING_LEVELS=freeze([[1,2,3,5,6,7,14],[4,8,9,11,15,16],[10,12,13,17]]);
   const FRACTIONS_MEANING_FAMILIES=freeze({1:'F01',2:'F01',3:'F02',4:'F03',5:'F04',6:'F05',7:'F06',8:'F07',9:'F08',10:'F09',11:'F10',12:'F11',13:'F12',14:'F13',15:'F03',16:'F14',17:'F15'});
   const OPERATIONS_RATIONAL_FAMILIES=freeze([
@@ -57,6 +78,23 @@
     {id:'reconstruir-dos-quadrats',level:3,generators:['dos-quadrats-invers'],practiceTypes:['dos-quadrats-invers']},
     {id:'diagnosticar-potencies-i-arrels',level:3,generators:['diagnosticar-potencia-arrel'],practiceTypes:['diagnosticar-potencia-arrel']}
   ]);
+  const POTENCIES_2ESO_FAMILIES=freeze([
+    {id:'P2R01',level:1,name:'Representar i identificar base i exponent',types:[1,2,3]},
+    {id:'P2R02',level:1,name:'Calcular potències enteres i interpretar-ne el signe',types:[4,5,6]},
+    {id:'P2R03',level:2,name:'Calcular potències de base racional',types:[7]},
+    {id:'P2R04',level:1,name:'Aplicar exponent zero',types:[8]},
+    {id:'P2R05',level:2,name:'Calcular potències amb exponent negatiu',types:[9,10]},
+    {id:'P2R06',level:1,name:'Producte de potències de la mateixa base',types:[11]},
+    {id:'P2R07',level:1,name:'Quocient de potències de la mateixa base',types:[12]},
+    {id:'P2R08',level:1,name:'Potència d’una potència',types:[13]},
+    {id:'P2R09',level:2,name:'Potència d’un producte',types:[14]},
+    {id:'P2R10',level:2,name:'Reconstruir un exponent en un producte',types:[15]},
+    {id:'P2R11',level:2,name:'Detectar una propietat aplicada incorrectament',types:[16]},
+    {id:'P2R12',level:1,name:'Calcular una expressió amb jerarquia i potències',types:[17]},
+    {id:'P2R13',level:1,name:'Aplicar potències en àrees i volums',types:[18],variants:['square','cube']},
+    {id:'P2R14',level:2,name:'Modelitzar duplicacions successives',types:[18],variants:['growth']}
+  ]);
+  function potencies2ESOInfo(q){if(!q||q.topicId&&q.topicId!=='potencies')return null;const type=Number(q.type),variant=String(q.variantId||q.difficultyVariant||(/microorganismes/.test(String(q.question||''))?'growth':''));return POTENCIES_2ESO_FAMILIES.find(f=>f.types.includes(type)&&(!f.variants||f.variants.includes(variant||(/Un quadrat/.test(String(q.question||''))?'square':'cube'))))||null;}
   const BANK_LEVELS=freeze({
   "numericProblems": {
     "naturals-2": 2,
@@ -281,6 +319,23 @@
   function rationalDifficulty2ESO(type){const i=RATIONAL_LEVELS.findIndex(a=>a.includes(type));return i<0?0:i+1;}
   function fractionsMeaningDifficulty2ESO(type){const i=FRACTIONS_MEANING_LEVELS.findIndex(a=>a.includes(type));return i<0?0:i+1;}
   function fractionsMeaningFamily(type){return FRACTIONS_MEANING_FAMILIES[type]||null;}
+  const FRACTIONS_MEANING_FAMILY_SPECS=freeze([
+    {id:'F01',level:1,name:'Divisió i repartiment com a fracció',types:[1,2]},
+    {id:'F02',level:1,name:'Fracció com a operador',types:[3]},
+    {id:'F03',level:2,name:'Reconstruir total i detectar errors d’inversió',types:[4,15]},
+    {id:'F04',level:1,name:'Trobar una part d’un total',types:[5]},
+    {id:'F05',level:1,name:'Fracció d’una quantitat',types:[6]},
+    {id:'F06',level:1,name:'Representar una raó',types:[7]},
+    {id:'F07',level:2,name:'Interpretar raó part-part i part-total',types:[8]},
+    {id:'F08',level:2,name:'Escalar part i total conservant la proporció',types:[9]},
+    {id:'F09',level:3,name:'Comparar proporcions en representacions diferents',types:[10]},
+    {id:'F10',level:2,name:'Escalar una raó a partir d’un terme',types:[11]},
+    {id:'F11',level:3,name:'Repartir proporcionalment un total',types:[12]},
+    {id:'F12',level:3,name:'Resoldre fraccions successives',types:[13]},
+    {id:'F13',level:1,name:'Interpretar una fracció part-total',types:[14]},
+    {id:'F14',level:2,name:'Reconstruir proporcions amb raó i diferència',types:[16]},
+    {id:'F15',level:3,name:'Reconstruir el total abans de canvis successius',types:[17]}
+  ]);
   function attach(options){
     const plain=value=>{const el=document.createElement('div');el.innerHTML=String(value);return el.textContent.trim();};
     const TOPICS=options.topics,number=Number(options.course[0]),courseName=['','1r','2n','3r','4t'][number];
@@ -300,6 +355,11 @@
     if (secondYear && t.id === 'fraccionsSentit') {
       return mappedLevel({fraccionsSentit:FRACTIONS_MEANING_LEVELS},t,q);
     }
+     if(secondYear&&t.id==='potencies'){
+       const info=potencies2ESOInfo(q);
+       if(!info)throw new Error('Potència de 2n d’ESO sense família assignada (tipus '+q.type+').');
+       return info.level;
+     }
     if (stochasticFourthYear) {
       const levels = {
         dadesVariables4t:[[1,2,3,5],[4,8,9],[6,7,10]],
@@ -346,120 +406,7 @@
         sectors:[[1,7,10,11,12,13],[2,3,6],[4,5,8,9]],
         poligons:[[1,2,3,9,10,11,12],[4,8],[5,6,7]],
         mitjana:[[1],[3],[2,4]], mediana:[[2,4],[1],[3]],
-        moda:[[1,5,7],[2,8,9,10],[3,4,6]],
-        probabilitat:[[1,2,3],[4,5,6,7,10],[8,9,11]]
-      };
-      return mappedLevel(levels,t,q);
-    }
-    if (algebraFourthYear) {
-      const levels = {
-        patrons4t: [[2,4,9,10], [3,5,7], [1,6,8]],
-        equacions2g4t: [[1,2,7,11], [3,5,6], [4,8,9,10]],
-        sistemes4t: [[4,5,10], [1,2,8], [3,6,7,9]],
-        inequacions4t: [[4,5,6,7], [1,3,8], [2,9,10]],
-        funcionsRep4t: [[1,2,5,11], [3,4,6,9], [7,8,10,12]],
-        linealsQuad4t: [[2,4,5,9], [1,7,8,10], [3,6,11,12]],
-        inversaExp4t: [[1,2,8,12], [3,5,6,7], [4,9,10,11]],
-        analisiFunc4t: [[1,3,6,10,12], [2,5,7,8], [4,9,11]]
-      };
-      return mappedLevel(levels,t,q);
-    }
-    if (algebraThirdYear) {
-      const levels = {
-        patrons: [[1,2,6], [4,5], [3,7,8]],
-        expressions: [[1,2,3], [4,8], [5,6,7]],
-        identitats: [[1,2,6,7], [3,8], [4,5]],
-        factoritzacio: [[1,7,8], [2,3,4], [5,6]],
-        equacions2: [[1,2,6], [3,5], [4,7,8]],
-        sistemes: [[1,5,6], [2,3], [4,7,8]],
-        funcions: [[1,2,3], [4,6], [5,7,8]],
-        funcions8: [[1,2,3], [4,6,7], [5,8]],
-        quadratica: [[1,6,7], [2,4,5], [3,8]]
-      };
-      return mappedLevel(levels,t,q);
-    }
-    if (algebraSecondYear) {
-      const levels = {
-        patrons: [[1,3], [2,5,6], [4,7,8]],
-        expressions: [[1,2], [3,4,6,9,10], [5,7,8]],
-        equacions: [[1,2,10], [3,4,5,8,11], [6,7,9,12]],
-        problemes: [[1,2,12], [3,4,5,8,10], [6,7,9,11]],
-        relacions: [[1,2,3,4,11], [5,6,7,8,12], [9,10]],
-        funcionslineals: [[1,2,3,4,5,17], [6,8,9,10,11,12,13,15], [7,14,16]],
-        computacional: [[1,2,11,17], [3,4,5,7,9,10,12,15], [6,8,13,14,16]]
-      };
-      return mappedLevel(levels,t,q);
-    }
-    if (algebraFirstYear) {
-      const levels = {
-        traduccio: [[1,2], [3,4], [5,6]],
-        patrons: [[1,3], [2,6], [4,5]],
-        monomis: [[1], [2,4], [3]],
-        simplificacio: [[1,5], [6], [3]],
-        equacions: [[1,2], [3,4], [7,8]],
-        computacional: [[5], [1,2], [3,4,6]]
-      };
-      return mappedLevel(levels,t,q);
-    }
-    if (spatialThirdYear) {
-      const levels = {
-        translacions: [[1,2,5,8,9], [4,6,10], [3,7]],
-        girs: [[1,2,3,10], [4,5,6], [7,8,9]],
-        simetriaAxial: [[1,2,8,9,10], [5,6,7], [3,4]],
-        simetriaCentral: [[1,4], [2,3,5], [6,7,8,9,10]],
-        mosaics: [[1,3,4,8], [2,7,9], [5,6,10]],
-        transformacionsCoord: [[2,3,8,9], [1,4,5,7], [6,10]],
-        geoAlgebra: [[5,6,7,8], [1,2,9], [3,4,10]],
-        visualitzacio: [[2,3,5,10], [4,7,9], [1,6,8]]
-      };
-      return mappedLevel(levels,t,q);
-    }
-    if (spatialFirstYear) {
-      const levels = {
-        elements: [[1,2,6,7], [3,5], [4,8]],
-        angles: [[1,4], [2,3,5], [6,7]],
-        poligons: [[1,2,8], [3,4,5], [6,7]],
-        triangles: [[1,2], [3], [4,6]],
-        quadrilaters: [[1,6], [4,5], [2,3]],
-        cercle: [[1,7], [2], [3]],
-        visualitzacio: [[1,3,7], [2,4], [5,6]]
-      };
-      return mappedLevel(levels,t,q);
-    }
-    if (spatialSecondYear) {
-      const levels = {
-        semblanca: [[1,2,6,7], [4,5,8,10], [3,9,11]],
-        tales: [[3,4,6], [1,2,5,10], [7,8,9]],
-        pitagores: [[1,2,3], [4,5,6,10], [7,8,9]],
-        cossos: [[1,2,3,6], [7,8,9], [4,5,10]],
-        visual3d: [[3,6], [1,4,5,7,9], [2,8]],
-        coordenades: [[1,2,5,9], [4,6,8], [3,7,10]],
-        modelitzacio: [[6,9], [2,4,8], [1,3,5,7,10]]
-      };
-      return mappedLevel(levels,t,q);
-    }
-    if (spatialFourthYear) {
-      const levels = {
-        figures4t: [[1,3,7], [2,4,6], [5,8,9,10]],
-        vectors4t: [[1,2,3,4,10], [7,9], [5,6,8]],
-        components4t: [[1,2,4,10], [3,5,9], [6,7,8]],
-        operacionsVectors4t: [[1,3,4], [2,5,6], [7,8,9,10]],
-        coordenadesVectors4t: [[1,2,7], [3,5,6,8], [4,9,10]],
-        homotecies4t: [[1,5,6], [7,9,10], [2,3,4,8]],
-        geometriaFuncions4t: [[1,2,3,4,11], [5,6,9], [7,8,10]],
-        regions4t: [[1,2,6], [4,5,7,9], [3,8,10]],
-        rectesAmpA: [[1,4,5], [2,6,7,9], [3,8,10]],
-        geometriaAnaliticaAmpD: [[4,5,7,11], [1,3,6,12], [2,8,9,10]]
-      };
-      return mappedLevel(levels,t,q);
-    }
-    if (fourthYear) {
-      const levels = {
-        angles4t: [[1,6,7,10,11], [2,3,9], [4,5,8]],
-        radians4t: [[1,2,3,11], [4,5,6], [7,8,9,10]],
-        pitagores4t: [[1,2,3,4,11], [5,6,7], [8,9,10]],
-        semblancaRaons4t: [[1,2,3,11], [4,5,6], [7,8,9,10]],
-        trigRaons4t: [[1,2,3,4,11], [5,6,7], [8,9,10]],
+        moda:[[1,5,7],[2,8,9,…1135 tokens truncated… trigRaons4t: [[1,2,3,4,11], [5,6,7], [8,9,10]],
         resolTriangles4t: [[1,2,3,10], [4,5,6,11], [7,8,9]],
         mesuresIndirectes4t: [[1,3,4,9], [2,5,6,11], [7,8,10]],
         precisioError4t: [[1,2,6], [3,4,7,9,11], [5,8,10]],
@@ -580,6 +527,8 @@
       if(options.sense==='mesura'&&t.id==='modelitzacioAmpD'&&q.type===10&&text.includes('altura dels ulls'))return 'eyeHeight';
     }
     function classify(t,q){
+       if(secondYear&&options.sense==='numeric'&&t.id==='racionals')return rationalDifficulty2ESO(q.type)||null;
+       if(secondYear&&options.sense==='numeric'&&t.id==='potencies'){const info=potencies2ESOInfo(q);if(!info)throw new Error('Potència de 2n d’ESO sense família assignada (tipus '+q.type+').');return info.level;}
       if(number===1&&options.sense==='algebraic'&&root.MIFirstAlgebraicFamilies?.topicSpecs(t.id)){const family=root.MIFirstAlgebraicFamilies.familyFor(t,q);if(!family)throw new Error('Generador algebraic sense família: '+t.id+':'+q.type);return family.level;}if(number===1&&options.sense==='estocastic'&&root.MIFirstStochasticFamilies?.topicSpecs(t.id)){const family=root.MIFirstStochasticFamilies.familyFor(t,q);if(family)return family.level;}
       if(number===1&&options.sense==='espacial'&&root.MIFirstSpatialFamilies?.topicSpecs(t.id)){const family=root.MIFirstSpatialFamilies.familyFor(t,q);if(family)return family.level;}
       if(options.course==='2eso'&&options.sense==='numeric'&&t.id==='operacionsRacionals'){const info=operationsRationalInfo(q);if(!info)throw new Error('Generador d’operacions amb racionals sense família OR assignada (tipus '+q.type+').');return info.level;}
@@ -678,7 +627,10 @@
     function annotate(t,q,identity){
       if(!q)return q;
       const copy=number===1&&options.sense==='algebraic'&&root.MIFirstAlgebraicFamilies?.topicSpecs(t.id)?root.MIFirstAlgebraicFamilies.decorate(t,q):number===1&&options.sense==='estocastic'&&root.MIFirstStochasticFamilies?.topicSpecs(t.id)?root.MIFirstStochasticFamilies.decorate(t,q):number===1&&options.sense==='espacial'&&root.MIFirstSpatialFamilies?.topicSpecs(t.id)?root.MIFirstSpatialFamilies.decorate(t,q):{...q};if(identity){copy.difficultyBank=identity[0];copy.difficultyKey=String(identity[1]);}
-      if(options.course==='2eso'&&options.sense==='numeric'&&t.id==='operacionsRacionals'){const info=operationsRationalInfo(copy);if(info){copy.familyId=info.id;copy.familyName=info.name;copy.familyAnchor=info.anchor;copy.taskDifficulty=info.level;copy.taskDifficultyStatus='assigned';copy.diff=info.level;copy.difficulty=WORDS[info.level];copy.curriculum=curriculum(t);return copy;}}
+       if(options.course==='2eso'&&options.sense==='numeric'&&t.id==='operacionsRacionals'){const info=operationsRationalInfo(copy);if(info){copy.familyId=info.id;copy.familyName=info.name;copy.familyAnchor=info.anchor;copy.taskDifficulty=info.level;copy.taskDifficultyStatus='assigned';copy.diff=info.level;copy.difficulty=WORDS[info.level];copy.curriculum=curriculum(t);return copy;}}
+       if(options.course==='2eso'&&options.sense==='numeric'&&t.id==='racionals'){const info=rationalFamilyInfo(copy);if(info){copy.familyId=info.id;copy.familyName=info.name;copy.taskDifficulty=info.level;copy.diff=info.level;copy.difficulty=WORDS[info.level];copy.curriculum=curriculum(t);return {...copy,taskDifficultyStatus:'assigned'};}}
+       if(options.course==='2eso'&&options.sense==='numeric'&&t.id==='fraccionsSentit'){const id=fractionsMeaningFamily(copy.type),info=FRACTIONS_MEANING_FAMILY_SPECS.find(f=>f.id===id);if(info){copy.familyId=info.id;copy.familyName=info.name;copy.taskDifficulty=info.level;copy.diff=info.level;copy.difficulty=WORDS[info.level];copy.curriculum=curriculum(t);return {...copy,taskDifficultyStatus:'assigned'};}}
+       if(options.course==='2eso'&&options.sense==='numeric'&&t.id==='potencies'){const info=potencies2ESOInfo(copy);if(info){copy.familyId=info.id;copy.familyName=info.name;copy.taskDifficulty=info.level;copy.diff=info.level;copy.difficulty=WORDS[info.level];copy.curriculum=curriculum(t);return {...copy,taskDifficultyStatus:'assigned'};}}
       const variant=thirdReviewedVariant(t,copy)||fourthReviewedVariant(t,copy);if(variant)copy.difficultyVariant=variant;
       const n=classify(t,copy);
       return {...copy,taskDifficulty:n,taskDifficultyStatus:n===null?'pending':'assigned',diff:n,difficulty:WORDS[n]||null,curriculum:curriculum(t)};
@@ -727,5 +679,6 @@
     return Object.freeze({getDifficulty:classify,coverage,examPlan,annotate,curriculum,context,bindBanks,bindDisplay,bindExam,refreshErrors,course:options.course,sense:options.sense});
   }
   function independent(q){return {...q,taskDifficulty:null,taskDifficultyStatus:'pending',diff:null,difficulty:null,curriculum:{pageCourse:q.course||null,contentCourse:null,option:null,scope:'standalone',examEligible:false}};}
-  root.MIDifficulty=Object.freeze({attach,independent,rationalDifficulty2ESO,rationalLevels2ESO:Object.freeze(Object.fromEntries(RATIONAL_LEVELS.map((types,i)=>[i+1,types]))),fractionsMeaningDifficulty2ESO,fractionsMeaningFamily,fractionsMeaningLevels:Object.freeze(Object.fromEntries(FRACTIONS_MEANING_LEVELS.map((types,i)=>[i+1,types]))),fractionsMeaningFamilies:FRACTIONS_MEANING_FAMILIES,operationsRationalFamilies:OPERATIONS_RATIONAL_FAMILIES,operationsRationalInfo,potenciesFamilies:POTENCIES_FAMILY_SPECS});
+  root.MIDifficulty=Object.freeze({attach,independent,rationalDifficulty2ESO,rationalLevels2ESO:Object.freeze(Object.fromEntries(RATIONAL_LEVELS.map((types,i)=>[i+1,types]))),rationalFamilies:RATIONAL_FAMILIES,rationalFamilyInfo,fractionsMeaningDifficulty2ESO,fractionsMeaningFamily,fractionsMeaningLevels:Object.freeze(Object.fromEntries(FRACTIONS_MEANING_LEVELS.map((types,i)=>[i+1,types]))),fractionsMeaningFamilies:FRACTIONS_MEANING_FAMILIES,fractionsMeaningFamilySpecs:FRACTIONS_MEANING_FAMILY_SPECS,operationsRationalFamilies:OPERATIONS_RATIONAL_FAMILIES,operationsRationalInfo,potenciesFamilies:POTENCIES_FAMILY_SPECS,potencies2ESOInfo,potencies2ESOFamilies:POTENCIES_2ESO_FAMILIES});
 })(typeof window==='undefined'?globalThis:window);
+
