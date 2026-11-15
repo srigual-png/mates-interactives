@@ -22,6 +22,17 @@ Auditoria iniciada des de `main` (`19beace8b55b45c233742fe491354fece9ce4c86`). S
 
 No es força cap objectiu de recompte de famílies. Cap generador actual no requereix N3 per al nivell curricular d’aquest tema; es manté N1/N2 i la fitxa rebutja N3 abans de començar quan cap tema seleccionat pot cobrir la quota.
 
+## Matriu de teoria i errors freqüents
+
+| Família | Generadors/variants | Ancoratge | Ajuda | Exemple de la família | Error freqüent |
+|---|---|---|---|---|---|
+| Aproximació i arrodoniment | 1, 2, 3, 4 | `#aproximar` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Arrodoneix 6,9616 a les mil·lèsimes . | Canviar només una xifra sense mirar la següent; confondre defecte, excés i arrodoniment. |
+| Selecció de la precisió | 5 | `#aproximar` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Quina precisió és més adequada? · · Per donar aproximadament la població d’una ciutat de 250.000 habitant | Triar una precisió massa fina per al context o presentar una aproximació com a exacta. |
+| Error absolut i comparació d’errors | 6, 7, 13, 14 | `#error-absolut` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | El valor real és 62,2 i l’aproximació és 62,1 . Quin és l’ error absolut ? | Donar una diferència signada negativa com si fos una distància. |
+| Error relatiu i precisió relativa | 8, 9 | `#error-relatiu` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | El valor real és 80 i l’aproximació és 81,6 . Quin és l’ error relatiu percentual ? | Dividir l’error per l’aproximació i no pel valor real. |
+| Intervals compatibles amb l’arrodoniment | 10, 15 | `#interval` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Un nombre arrodonit a les centèsimes dona 6,5 . Quin d’aquests podria ser el valor original? | Incloure el límit superior que ja arrodoneix al valor següent. |
+| Estimació i validació de resultats | 11, 12 | `#estimar` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Sense fer el càlcul exacte, 19,8 · 1,98 és aproximadament... | Donar per bona una resposta de magnitud incompatible amb els factors. |
+
 ## Tres mostres generades per família
 
 ### Aproximació i arrodoniment (`aproximacio-i-arrodoniment`) — N1
@@ -162,4 +173,7 @@ No es força cap objectiu de recompte de famílies. Cap generador actual no requ
 - Prova Playwright amb Chrome 157.0.8103.52: pràctica guiada/autònoma, selecció i rotació de famílies, correcció/resposta errònia, examen, enllaços i ancoratges de teoria, hashchange i viewport de 390 px; sense errors JavaScript.
 - Regressions Lot 2: 30 mostres d’aquest tema i 30 de cada un dels altres tres temes ordinaris i de les quatre ampliacions.
 - Fitxes: tots els 8 temes ordinaris, preguntes/solucions, quotes i duplicats; Word/PDF amb i sense solucions. Les fitxes admeten nivells només presents al catàleg real.
+
+- Casos límit: el generador real s’ha forçat determinísticament a arrodonir 1,5000 a unitats (resultat 2) i s’han comprovat defecte/excés a 1,25. El banc no genera aproximacions negatives; per tant, els empats negatius no es poden provar amb una pregunta real d’aquest tema. El generador d’error relatiu usa referències positives, així que no produeix denominador zero; no s’ha afirmat una prova d’aquest cas.
+
 - El codi del popup real de teoria no s’ha pogut carregar des de `file://` en aquest sandbox. S’ha comprovat l’URL i l’ancoratge sol·licitats, i la navegació directa i `hashchange`. Chrome disponible; Edge no executat. No s’afirma que GitHub Pages s’hagi verificat.
