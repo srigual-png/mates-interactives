@@ -2,25 +2,29 @@
 (function () {
   'use strict';
   const levels={
-    racionals:[[1,2,3,4,9,11,15],[5,6,7,8,10,12,13,14],[16,17,18]],
+    racionals:Object.values(MIDifficulty.rationalLevels2ESO),
     fraccionsSentit:Object.values(MIDifficulty.fractionsMeaningLevels),
     operacionsRacionals:window.MIDifficulty.operationsRationalFamilies.reduce((a,f)=>(a[f.level-1].push(...f.types),a),[[],[],[]]),
-    potencies:[[1,2,3,4,5,8],[6,7,11,12,13,14],[9,10,15,16,17,18]],
+    potencies:[[1,2,3,4,5,6,8,11,12,13,17,18],[7,9,10,14,15,16],[]],
     aproximacions:[[1,2,3,4,5],[6,7,10,11,12],[8,9,13,14,15]],
     proporcionalitat:[[1,2,3,4,5,6],[7,8,9,13,16,18],[10,11,12,14,15,17]],
     percentatges:[[1,2,3,4,8,16],[5,6,7,11,12,17],[9,10,13,14,15,18]],
     recomptes:[[1,2,3,6,12],[4,5,8,9,11,15],[7,10,13,14]]
   };
   const worksheetFamilyBags={};
+  const worksheetSelectedFamilies={};
+  function familySpecs(id){return id==='racionals'?MIDifficulty.rationalFamilies:id==='fraccionsSentit'?MIDifficulty.fractionsMeaningFamilySpecs:id==='operacionsRacionals'?MIDifficulty.operationsRationalFamilies:id==='potencies'?MIDifficulty.potencies2ESOFamilies:null;}
   function typesForWorksheet(id,level){
     const types=levels[id][level-1]||[];
-    if(id!=='fraccionsSentit')return types;
-    const families=[...new Set(types.map(type=>MIDifficulty.fractionsMeaningFamily(type)))];
+    const specs=familySpecs(id);if(!specs)return types;
+    const families=specs.filter(f=>f.level===level).map(f=>f.id);
     let bag=worksheetFamilyBags[level]||[];bag=bag.filter(f=>families.includes(f));
     if(!bag.length)bag=families.slice().sort(()=>Math.random()-0.5);
-    const family=bag.pop();worksheetFamilyBags[level]=bag;
-    return types.filter(type=>MIDifficulty.fractionsMeaningFamily(type)===family);
+    const family=bag.pop();worksheetFamilyBags[level]=bag;worksheetSelectedFamilies[id+':'+level]=family;
+    return specs.find(f=>f.id===family)?.types||[];
   }
+  function familyInfo(id,q){if(id==='racionals')return MIDifficulty.rationalFamilyInfo(q);if(id==='fraccionsSentit'){const family=MIDifficulty.fractionsMeaningFamily(q.type);return MIDifficulty.fractionsMeaningFamilySpecs.find(f=>f.id===family)||null;}if(id==='operacionsRacionals')return MIDifficulty.operationsRationalInfo(q);if(id==='potencies')return MIDifficulty.potencies2ESOInfo(q);return null;}
+  function generateFamily(id,familyId){const row=familySpecs(id)?.find(f=>f.id===familyId),types=row?.types||[],type=types[Math.floor(Math.random()*types.length)],variant=row?.variants?.length?row.variants[Math.floor(Math.random()*row.variants.length)]:undefined;return adapt(id,generators[id](type,variant));}
   const generators={racionals:genRacionals2ESO,fraccionsSentit:genFraccionsSentit2ESO,operacionsRacionals:genOperacionsRacionals2ESO,potencies:genPotencies2ESO,aproximacions:genAproximacions2ESO,proporcionalitat:genProporcionalitat2ESO,percentatges:genPercentatges2ESO,recomptes:genRecomptes2ESO};
   const supers={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-','⁺':'+'};
   function plain(html){
@@ -132,13 +136,14 @@
     if(id==='percentatges'&&q.type===18)answer+=' noies';
     // Una línia final sempre relaciona el procediment amb les dades concretes.
     if(!steps.some(s=>s.includes(answer)))steps.push('Resultat: '+answer);
-    const family=id==='operacionsRacionals'?window.MIDifficulty.operationsRationalInfo(q):null;
+    const family=familyInfo(id,q);
     return {type:q.type,level:family?.level||levels[id].findIndex(types=>types.includes(q.type))+1,familyId:family?.id||q.familyId||null,question,options,answer,steps,figure:svg?await figure(svg):undefined};
   }
   window.MIWorksheetConfig={id:'2eso-numeric',homeId:'screenHome',label:'2n d’ESO · Sentit numèric',title:'Fitxa d’exercicis — 2n d’ESO — Sentit numèric',web:'srigual-png.github.io/mates-interactives',paperQuestion,adapt,levels,
-    topics:TOPICS.filter(t=>t.course==='2n'&&t.exam2n).map(t=>({id:t.id,name:t.name,levels:[1,2,3],capacities:t.id==='recomptes'?[38,49,11]:undefined,
-      families:t.id==='operacionsRacionals'?window.MIDifficulty.operationsRationalFamilies.map(f=>({family:f.id,level:f.level,generatorId:f.id,contents:[f.id]})):undefined,
-      pickFamily:t.id==='operacionsRacionals'?function(l,counts){const rows=window.MIDifficulty.operationsRationalFamilies.filter(f=>f.level===l),min=Math.min(...rows.map(f=>counts[f.id]||0));const options=rows.filter(f=>(counts[f.id]||0)===min);return options[Math.floor(Math.random()*options.length)]?.id;}:undefined,
-      generateFamily:t.id==='operacionsRacionals'?function(familyId){const family=window.MIDifficulty.operationsRationalFamilies.find(f=>f.id===familyId),types=family?.types||[],type=types[Math.floor(Math.random()*types.length)],variant=type===18?family.variants[Math.floor(Math.random()*family.variants.length)]:undefined;return adapt(t.id,generators[t.id](type,variant));}:undefined,
-      generate(l){const types=typesForWorksheet(t.id,l),type=types[Math.floor(Math.random()*types.length)];return adapt(t.id,generators[t.id](type));}}))};
+    topics:TOPICS.filter(t=>t.course==='2n'&&t.exam2n).map(t=>({id:t.id,name:t.name,levels:t.id==='potencies'?[1,2]:[1,2,3],capacities:t.id==='recomptes'?[38,49,11]:t.id==='potencies'?[30,30,0]:undefined,
+      families:familySpecs(t.id)?.map(f=>({family:f.id,level:f.level,generatorId:f.id,contents:[f.id]})),
+      pickFamily:familySpecs(t.id)?function(l,counts){const rows=familySpecs(t.id).filter(f=>f.level===l),min=Math.min(...rows.map(f=>counts[f.id]||0));const options=rows.filter(f=>(counts[f.id]||0)===min);return options[Math.floor(Math.random()*options.length)]?.id;}:undefined,
+      generateFamily:familySpecs(t.id)?function(familyId){return generateFamily(t.id,familyId);}:undefined,
+      generate(l){const rows=familySpecs(t.id);if(rows){typesForWorksheet(t.id,l);return generateFamily(t.id,worksheetSelectedFamilies[t.id+':'+l]||rows.find(f=>f.level===l)?.id);}const types=typesForWorksheet(t.id,l),type=types[Math.floor(Math.random()*types.length)];return adapt(t.id,generators[t.id](type));}}))};
 })();
+
