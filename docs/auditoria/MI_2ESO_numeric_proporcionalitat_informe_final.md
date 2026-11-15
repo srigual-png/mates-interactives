@@ -25,6 +25,20 @@ Auditoria iniciada des de `main` (`19beace8b55b45c233742fe491354fece9ce4c86`). S
 
 No es força cap objectiu de recompte de famílies. Cap generador actual no requereix N3 per al nivell curricular d’aquest tema; es manté N1/N2 i la fitxa rebutja N3 abans de començar quan cap tema seleccionat pot cobrir la quota.
 
+## Matriu de teoria i errors freqüents
+
+| Família | Generadors/variants | Ancoratge | Ajuda | Exemple de la família | Error freqüent |
+|---|---|---|---|---|---|
+| Reconeixement de proporcionalitat directa | 1, 2 | `#que-es` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | La quantitat d’ingredients i el nombre de persones, si mantenim la mateixa recepta. · · Hi ha proporciona | Suposar que qualsevol parella que augmenta manté proporcionalitat; ignorar el valor inicial o la tarifa fixa. |
+| Selecció d’una estratègia de resolució proporcional | 9 | `#proporcio` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Quina estratègia és especialment adequada? · · 3 kg costen 8,40 € i vols saber quant costen 11 kg. | Aplicar regla de tres mecànicament quan un factor o la unitat simplifiquen el càlcul. |
+| Completar taules i escalar quantitats | 3, 8, 16 | `#proporcio` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Completa la taula proporcional: · · 3 unitats → 6 € · 10 unitats → ? | Canviar només una magnitud o emprar un factor diferent a cada columna. |
+| Factors i raons equivalents | 5, 7 | `#factor` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Una taula proporcional passa de 4 a 8 en una de les magnituds. Per quin factor s’ha multiplicat? | Multiplicar només el primer terme d’una raó equivalent. |
+| Taxes unitàries i constant de proporcionalitat | 4, 6, 13, 18 | `#constant` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | 6 quaderns costen 21 € . Quin és el preu d’un quadern ? | Invertir les unitats o dividir el preu per la quantitat equivocada. |
+| Compra amb pressupost limitat | 14 | `#unitat` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Cada entrada costa 2 € . Amb 36 € , quantes entrades pots comprar? | Arrodonir cap amunt i superar el pressupost. |
+| Comparació de preus unitaris | 10 | `#unitat` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Compara dues ofertes: · Oferta A: 6 unitats per 12 € · Oferta B: 8 unitats per 20,8 € · Quina és més bara | Comparar preus totals de paquets diferents en lloc del preu unitari. |
+| Repartiment proporcional | 11, 12 | `#repartiment` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Reparteix 120 € en la raó 2:6 . Quines quantitats corresponen a les dues parts? | Repartir el total entre nombres de la raó sense escalar-los al valor unitari. |
+| Detecció d’errors en relacions proporcionals | 15, 17 | `#errors` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Quin raonament és incorrecte ? | Afegir la mateixa quantitat a dues magnituds en lloc de conservar-ne el factor. |
+
 ## Tres mostres generades per família
 
 ### Reconeixement de proporcionalitat directa (`reconeixement-proporcionalitat`) — N1
@@ -231,4 +245,7 @@ No es força cap objectiu de recompte de famílies. Cap generador actual no requ
 - Prova Playwright amb Chrome 157.0.8103.52: pràctica guiada/autònoma, selecció i rotació de famílies, correcció/resposta errònia, examen, enllaços i ancoratges de teoria, hashchange i viewport de 390 px; sense errors JavaScript.
 - Regressions Lot 2: 30 mostres d’aquest tema i 30 de cada un dels altres tres temes ordinaris i de les quatre ampliacions.
 - Fitxes: tots els 8 temes ordinaris, preguntes/solucions, quotes i duplicats; Word/PDF amb i sense solucions. Les fitxes admeten nivells només presents al catàleg real.
+
+- S’han verificat raons equivalents, taules, constant, preus unitaris i repartiments per càlcul independent. El tema es limita a proporcionalitat directa; no s’hi ha afegit proporcionalitat inversa.
+
 - El codi del popup real de teoria no s’ha pogut carregar des de `file://` en aquest sandbox. S’ha comprovat l’URL i l’ancoratge sol·licitats, i la navegació directa i `hashchange`. Chrome disponible; Edge no executat. No s’afirma que GitHub Pages s’hagi verificat.
