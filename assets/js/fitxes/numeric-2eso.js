@@ -146,4 +146,3 @@
       generateFamily:familySpecs(t.id)?function(familyId){return generateFamily(t.id,familyId);}:undefined,
       generate(l){const rows=familySpecs(t.id);if(rows){typesForWorksheet(t.id,l);return generateFamily(t.id,worksheetSelectedFamilies[t.id+':'+l]||rows.find(f=>f.level===l)?.id);}const types=typesForWorksheet(t.id,l),type=types[Math.floor(Math.random()*types.length)];return adapt(t.id,generators[t.id](type));}}))};
 })();
-
