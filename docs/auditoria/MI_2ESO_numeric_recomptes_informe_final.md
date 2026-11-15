@@ -26,6 +26,21 @@ Auditoria iniciada des de `main` (`19beace8b55b45c233742fe491354fece9ce4c86`). S
 
 No es força cap objectiu de recompte de famílies. Cap generador actual no requereix N3 per al nivell curricular d’aquest tema; es manté N1/N2 i la fitxa rebutja N3 abans de començar quan cap tema seleccionat pot cobrir la quota.
 
+## Matriu de teoria i errors freqüents
+
+| Família | Generadors/variants | Ancoratge | Ajuda | Exemple de la família | Error freqüent |
+|---|---|---|---|---|---|
+| Principi multiplicatiu | 1, 2, 3, 4 | `#producte` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Tens 3 samarretes i 5 pantalons . Quants conjunts diferents pots formar triant una peça de cada tipus? | Sumar les opcions de decisions que s’han de prendre totes. |
+| Completar una llista sistemàtica | 5 | `#llistes` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Amb les lletres A, B i C es formen parelles ordenades de dues lletres diferents. Un alumne ha escrit: · · | Ometre casos o repetir-los en canviar l’ordre d’enumeració. |
+| Detectar casos duplicats | 6 | `#llistes` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | En un recompte apareix la llista AB, AC, BA, BC, CA, CB, CA . Quin problema té la llista? | Confondre dues representacions del mateix cas amb casos diferents. |
+| Comptar parelles sense tenir en compte l’ordre | 7, 13 | `#ordre` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | En un grup de 6 persones , quantes parelles diferents es poden formar si Anna-Biel és la mateixa parella  | Comptar AB i BA com a parelles diferents. |
+| Comptar codis ordenats sense repetició | 8 | `#repeticio` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Amb 6 xifres diferents , quants codis de dues xifres es poden formar sense repetir cap xifra , si l’ordre | Mantenir el mateix nombre d’opcions a totes les posicions. |
+| Comptar codis amb repetició | 9 | `#repeticio` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Amb 2 símbols , quants codis de dues posicions es poden formar si es poden repetir els símbols? | Reduir opcions com si no es poguessin repetir símbols. |
+| Recompte amb restriccions | 10, 14 | `#restriccions` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Hi ha 3 samarretes i 3 pantalons . En principi es poden combinar tots, però una combinació concreta està  | Restar casos prohibits més d’una vegada o oblidar que una restricció depèn de l’ordre. |
+| Reconstruir un factor d’un recompte | 11 | `#producte` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Hi ha 15 combinacions possibles. Si la primera decisió té 3 opcions i per a totes hi ha el mateix nombre  | Dividir pel factor equivocat en reconstruir una quantitat d’opcions. |
+| Representar decisions amb un arbre | 12 | `#arbres` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Quina eina és especialment útil per representar decisions successives i comprovar que no falta cap possib | Ometre una branca o comptar nodes interns com a resultats finals. |
+| Detectar errors en un recompte | 15 | `#errors` | Apartat contextual enllaçat des de la pràctica; ancoratge comprovat al document de teoria. | Un alumne diu: “Hi ha 4 begudes i 3 entrepans, així que hi ha 4 + 3 = 7 menús”. Quin és l’error principal | Sumar les opcions quan cal multiplicar decisions successives. |
+
 ## Tres mostres generades per família
 
 ### Principi multiplicatiu (`principi-multiplicatiu`) — N1
@@ -260,4 +275,7 @@ No es força cap objectiu de recompte de famílies. Cap generador actual no requ
 - Prova Playwright amb Chrome 157.0.8103.52: pràctica guiada/autònoma, selecció i rotació de famílies, correcció/resposta errònia, examen, enllaços i ancoratges de teoria, hashchange i viewport de 390 px; sense errors JavaScript.
 - Regressions Lot 2: 30 mostres d’aquest tema i 30 de cada un dels altres tres temes ordinaris i de les quatre ampliacions.
 - Fitxes: tots els 8 temes ordinaris, preguntes/solucions, quotes i duplicats; Word/PDF amb i sense solucions. Les fitxes admeten nivells només presents al catàleg real.
+
+- Els oracles de recompte enumeren independentment productes cartesians, parelles sense ordre, codis ordenats amb/sense repetició i casos amb restricció. Els codis es tracten com a cadenes, de manera que una primera posició zero és admissible; el banc no presenta un exemple explícit amb zero.
+
 - El codi del popup real de teoria no s’ha pogut carregar des de `file://` en aquest sandbox. S’ha comprovat l’URL i l’ancoratge sol·licitats, i la navegació directa i `hashchange`. Chrome disponible; Edge no executat. No s’afirma que GitHub Pages s’hagi verificat.
