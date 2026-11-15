@@ -14,5 +14,5 @@ No s’han trobat famílies matemàtiques compartides entre els quatre temes: el
 
 Informes detallats: MI_2ESO_numeric_racionals_informe_final.md, MI_2ESO_numeric_fraccions_sentit_informe_final.md, MI_2ESO_numeric_operacions_racionals_informe_final.md, MI_2ESO_numeric_potencies_informe_final.md.
 
-Validacions: els quatre tests matemàtics/de pràctica específics han passat en Chrome 157; les regressions lot 2 (240 mostres) i teoria/hashchange/mòbil també han passat. La suite d’exportació scripts/fitxes/test-2eso.cjs resta pendent després de trobar un error de fixture/catàleg; veure limitacions de l’informe de potències. No s’ha verificat GitHub Pages.
+Validacions: els quatre tests matemàtics/de pràctica específics, la suite integral de fitxes (Word/PDF i modes de solució), les regressions lot 2 (240 mostres) i les comprovacions de teoria/hashchange/mòbil han passat amb Chrome 157. S’ha corregit el selector del mode pilot de fitxes perquè requereixi `requiredContents` a més d’un inventari de famílies; detalls i comparació amb `main` a l’informe de Potències. No s’ha verificat GitHub Pages ni Edge.
 
