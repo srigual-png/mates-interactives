@@ -65,18 +65,18 @@ function oracle(topic,type,q){
  if(topic==='recomptes'){
   if([1,2,3].includes(type)){
    const pattern=type===1?/(\d+) samarretes.*?(\d+) pantalons/:type===2?/(\d+) primers.*?(\d+) segons/ : /(\d+) branques.*?(\d+) branques/;
-   const m=text.match(pattern);assert(m,'opcions de dues decisions');close(a,Number(m[1])*Number(m[2]),'principi multiplicatiu');
+   const m=text.match(pattern);assert(m,'opcions de dues decisions');const cases=Array.from({length:Number(m[1])},(_,x)=>Array.from({length:Number(m[2])},(_,y)=>[x,y])).flat();close(a,cases.length,'enumeració exhaustiva del principi multiplicatiu');
   }
-  if(type===4){const m=text.match(/amb (\d+)\s*,\s*(\d+) i (\d+) opcions/);assert(m,text);close(a,Number(m[1])*Number(m[2])*Number(m[3]),'tres decisions');}
+  if(type===4){const m=text.match(/amb (\d+)\s*,\s*(\d+) i (\d+) opcions/);assert(m,text);const cases=Array.from({length:Number(m[1])},(_,x)=>Array.from({length:Number(m[2])},(_,y)=>Array.from({length:Number(m[3])},(_,z)=>[x,y,z])).flat()).flat();close(a,cases.length,'enumeració exhaustiva de tres decisions');}
   if(type===5){const present=[...text.matchAll(/\b([ABC][ABC])\b/g)].map(m=>m[1]),all=['AB','AC','BA','BC','CA','CB'];assert.equal(present.length,new Set(present).size,'llista sense repetits');assert.deepEqual([...all].filter(x=>!present.includes(x)),[q.correct],'possibilitat que falta');}
   if(type===6)assert(q.correct==='S’ha repetit un cas','cas duplicat');
-  if(type===7){const m=text.match(/grup de (\d+) persones/);assert(m);close(a,Number(m[1])*(Number(m[1])-1)/2,'parelles no ordenades');}
-  if(type===8){const m=text.match(/Amb (\d+) xifres diferents/);assert(m);close(a,Number(m[1])*(Number(m[1])-1),'codis sense repetició');}
-  if(type===9){const m=text.match(/Amb (\d+) símbols/);assert(m);close(a,Number(m[1])**2,'codis amb repetició');}
-  if(type===10)close(a,8,'restricció d’una combinació');
+  if(type===7){const m=text.match(/grup de (\d+) persones/);assert(m);const pairs=Array.from({length:Number(m[1])},(_,i)=>Array.from({length:Number(m[1])},(_,j)=>i<j?[i,j]:null).filter(Boolean)).flat();close(a,pairs.length,'enumeració exhaustiva de parelles no ordenades');}
+  if(type===8){const m=text.match(/Amb (\d+) xifres diferents/);assert(m);const symbols=Array.from({length:Number(m[1])},(_,i)=>i),codes=symbols.flatMap(x=>symbols.filter(y=>y!==x).map(y=>[x,y]));close(a,codes.length,'enumeració exhaustiva de codis sense repetició');}
+  if(type===9){const m=text.match(/Amb (\d+) símbols/);assert(m);const symbols=Array.from({length:Number(m[1])},(_,i)=>i),codes=symbols.flatMap(x=>symbols.map(y=>[x,y]));close(a,codes.length,'enumeració exhaustiva de codis amb repetició');}
+  if(type===10){const m=text.match(/Hi ha (\d+) samarretes i (\d+) pantalons.*?una combinació concreta està prohibida/);assert(m,'restricció amb dues opcions parsejable');const pairs=Array.from({length:Number(m[1])},(_,i)=>i).flatMap(x=>Array.from({length:Number(m[2])},(_,y)=>[x,y]));pairs.pop();close(a,pairs.length,'enumeració exhaustiva amb una combinació prohibida');}
   if(type===11){const m=text.match(/(\d+) combinacions.*?té (\d+) opcions/);assert(m);close(a,Number(m[1])/Number(m[2]),'factor desconegut');}
   if(type===12)assert(q.correct==='Diagrama d’arbre','representació de decisions');
-  if(type===13){const m=text.match(/torneig amb (\d+) equips/);assert(m);close(a,Number(m[1])*(Number(m[1])-1)/2,'partits sense tornada');}
+  if(type===13){const m=text.match(/torneig amb (\d+) equips/);assert(m);const games=Array.from({length:Number(m[1])},(_,i)=>Array.from({length:Number(m[1])},(_,j)=>i<j?[i,j]:null).filter(Boolean)).flat();close(a,games.length,'enumeració exhaustiva de partits sense tornada');}
   if(type===14){const m=text.match(/majors que (\d+)/);assert(m);const threshold=Number(m[1]),expected=[2,4,6,8].flatMap(x=>[2,4,6,8].filter(y=>y!==x&&10*x+y>threshold)).length;close(a,expected,'enumeració de nombres admissibles');}
   if(type===15)assert(q.correct==='Sumar les opcions en lloc de combinar-les','principi additiu en tria successiva');
  }
@@ -95,6 +95,13 @@ async function run(topicId){
    for(const f of specs)for(const type of f.types){check(!expected.has(type),'tipus assignat dues vegades '+type);expected.set(type,f);}
    check(expected.size===total,'cobertura exacta de tipus '+expected.size+'/'+total);
    const generator={aproximacions:genAproximacions2ESO,proporcionalitat:genProporcionalitat2ESO,percentatges:genPercentatges2ESO,recomptes:genRecomptes2ESO}[topicId];
+   const boundary=[];
+   if(topicId==='aproximacions'){
+    const saved=Math.random,seq=[0.01,4999/89999];let i=0;Math.random=()=>seq[i++]??0.5;
+    const half=genAproximacions2ESO(1);Math.random=saved;
+    check(Number(String(half.correct).replace(',','.'))===2,'arrodoniment positiu exacte al mig cap amunt');boundary.push('arrodoniment 1,5000 a unitats = 2');
+    check(roundTo(1.25,1)===1.3&&floorTo(1.25,1)===1.2&&ceilTo(1.25,1)===1.3,'llindar i valors per defecte/excés');boundary.push('defecte/excés a 1,25 verificats');
+   }
    for(let type=1;type<=total;type++)for(let i=0;i<250;i++){
     const raw=generator(type),q=miTaskDifficulty.annotate(topic,raw),family=expected.get(type),key=String(q.correct);
     check(q.familyId===family.id&&q.familyName===family.name,'família estable '+type+' '+q.familyId);
@@ -115,7 +122,7 @@ async function run(topicId){
    const rotated=Array.from({length:specs.length*2},()=>topic.gen());
    check(rotated.every((q,i)=>!i||q.familyId!==rotated[i-1].familyId),'rotació sense famílies consecutives');
    const cycle=new Set(rotated.slice(0,specs.length).map(q=>q.familyId));check(cycle.size===specs.length,'totes les famílies durant la rotació');
-   return {samples:total*250,types:Object.keys(counts.types).length,families:specs.length,familyIds:specs.map(f=>f.id),levels:counts.levels,rotation:rotated.map(q=>q.familyId),probes};
+   return {samples:total*250,types:Object.keys(counts.types).length,families:specs.length,familyIds:specs.map(f=>f.id),levels:counts.levels,rotation:rotated.map(q=>q.familyId),boundary,probes};
   },{topicId,total:CASES[topicId]});
   for(const q of result.probes)oracle(topicId,q.type,q);
   delete result.probes;
