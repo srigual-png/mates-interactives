@@ -3615,6 +3615,356 @@
           ]
         }
       ]
+    },
+    {
+      "id": "1eso/algebraic/traduccio",
+      "course": "1r ESO",
+      "sense": "Algebraic",
+      "topic": "Traducció al llenguatge algebraic",
+      "code_topic_id": "traduccio",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 40,
+      "merge_commit": "b046e8dd6466279b9b8e78cd8144d8f0e3fddde1",
+      "validation": "Validació conjunta del Lot 1 (PR #40): tests matemàtics superats — Traducció 3.250, Patrons 3.250 i Monomis 2.500 (9.000 mostres); tres suites Playwright amb Chrome superades, amb pràctica guiada/autònoma, recuperació, exàmens de tema (12) i global (20), regressions, ancoratges/hashchange i vista de 390 px; sense errors JavaScript detectats. Limitacions: clic pràctica→teoria amb servidor HTTP no verificat, GitHub Pages no verificat i no s’ha utilitzat Edge.",
+      "families": [
+        {
+          "id": "traduir-frase-a-expressio",
+          "name": "Traduir una frase verbal directa a una expressió algebraica",
+          "level": 1,
+          "generators": [
+            "traduccio:1#direct",
+            "T6"
+          ]
+        },
+        {
+          "id": "interpretar-expressio-en-paraules",
+          "name": "Interpretar una expressió algebraica amb paraules",
+          "level": 1,
+          "generators": [
+            "traduccio:2"
+          ]
+        },
+        {
+          "id": "modelitzar-relacio-contextual-simple",
+          "name": "Modelitzar una relació directa d’un context amb una expressió",
+          "level": 1,
+          "generators": [
+            "traduccio:3",
+            "T1",
+            "T3"
+          ]
+        },
+        {
+          "id": "modelitzar-relacio-contextual-composta",
+          "name": "Construir una expressió per a una situació amb diverses quantitats",
+          "level": 2,
+          "generators": [
+            "traduccio:6",
+            "T2",
+            "T4"
+          ]
+        },
+        {
+          "id": "traduir-expressio-amb-agrupacio",
+          "name": "Traduir una frase en què una operació afecta una suma agrupada",
+          "level": 2,
+          "generators": [
+            "traduccio:1#grouped",
+            "T7"
+          ]
+        },
+        {
+          "id": "avaluar-expressio-per-substitucio",
+          "name": "Substituir valors de variables i calcular una expressió",
+          "level": 1,
+          "generators": [
+            "traduccio:4",
+            "traduccio:5",
+            "T5",
+            "M6"
+          ],
+          "note": "Família compartida amb monomis; es compta una sola vegada en el total d’identificadors únics."
+        }
+      ]
+    },
+    {
+      "id": "1eso/algebraic/patrons",
+      "course": "1r ESO",
+      "sense": "Algebraic",
+      "topic": "Patrons numèrics i geomètrics",
+      "code_topic_id": "patrons",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 40,
+      "merge_commit": "b046e8dd6466279b9b8e78cd8144d8f0e3fddde1",
+      "validation": "Validació conjunta del Lot 1 (PR #40): tests matemàtics superats — Traducció 3.250, Patrons 3.250 i Monomis 2.500 (9.000 mostres); tres suites Playwright amb Chrome superades, amb pràctica guiada/autònoma, recuperació, exàmens de tema (12) i global (20), regressions, ancoratges/hashchange i vista de 390 px; sense errors JavaScript detectats. Limitacions: clic pràctica→teoria amb servidor HTTP no verificat, GitHub Pages no verificat i no s’ha utilitzat Edge.",
+      "families": [
+        {
+          "id": "completar-patro-additiu",
+          "name": "Completar o continuar una successió amb canvi additiu constant",
+          "level": 1,
+          "generators": [
+            "patrons:1",
+            "P1",
+            "P2",
+            "P4"
+          ]
+        },
+        {
+          "id": "identificar-regla-recurrent",
+          "name": "Identificar i descriure la regla recurrent d’un patró",
+          "level": 1,
+          "generators": [
+            "patrons:2",
+            "P7"
+          ]
+        },
+        {
+          "id": "continuar-patro-multiplicatiu",
+          "name": "Continuar una successió amb factor multiplicatiu constant",
+          "level": 1,
+          "generators": [
+            "patrons:3",
+            "P3"
+          ]
+        },
+        {
+          "id": "calcular-elements-figura-repetitiva",
+          "name": "Calcular elements d’una figura que n’afegeix una quantitat constant",
+          "level": 2,
+          "generators": [
+            "patrons:4",
+            "P5"
+          ]
+        },
+        {
+          "id": "reconstruir-patro-triangular",
+          "name": "Reconstruir el nombre de punts d’un patró triangular per acumulació",
+          "level": 2,
+          "generators": [
+            "patrons:5",
+            "P6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/algebraic/monomis",
+      "course": "1r ESO",
+      "sense": "Algebraic",
+      "topic": "Expressions: termes i coeficients",
+      "code_topic_id": "monomis",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 40,
+      "merge_commit": "b046e8dd6466279b9b8e78cd8144d8f0e3fddde1",
+      "validation": "Validació conjunta del Lot 1 (PR #40): tests matemàtics superats — Traducció 3.250, Patrons 3.250 i Monomis 2.500 (9.000 mostres); tres suites Playwright amb Chrome superades, amb pràctica guiada/autònoma, recuperació, exàmens de tema (12) i global (20), regressions, ancoratges/hashchange i vista de 390 px; sense errors JavaScript detectats. Limitacions: clic pràctica→teoria amb servidor HTTP no verificat, GitHub Pages no verificat i no s’ha utilitzat Edge.",
+      "families": [
+        {
+          "id": "identificar-coeficient-amb-signe",
+          "name": "Identificar el coeficient d’un terme, inclosos els signes implícits",
+          "level": 1,
+          "generators": [
+            "monomis:1",
+            "M1"
+          ]
+        },
+        {
+          "id": "identificar-terme-independent-amb-signe",
+          "name": "Identificar el terme independent i conservar-ne el signe",
+          "level": 1,
+          "generators": [
+            "monomis:2",
+            "M2"
+          ]
+        },
+        {
+          "id": "identificar-termes-i-signes",
+          "name": "Identificar els termes d’una expressió i els signes que els acompanyen",
+          "level": 1,
+          "generators": [
+            "monomis:3",
+            "M5"
+          ]
+        },
+        {
+          "id": "reconeixer-termes-semblants",
+          "name": "Reconèixer si dos termes tenen la mateixa part literal",
+          "level": 1,
+          "generators": [
+            "monomis:4"
+          ]
+        },
+        {
+          "id": "avaluar-expressio-per-substitucio",
+          "name": "Substituir valors de variables i calcular una expressió",
+          "level": 1,
+          "generators": [
+            "M6"
+          ],
+          "note": "Família compartida amb traduccio; es compta una sola vegada en el total d’identificadors únics."
+        }
+      ]
+    },
+    {
+      "id": "1eso/algebraic/simplificacio",
+      "course": "1r ESO",
+      "sense": "Algebraic",
+      "topic": "Simplificació d’expressions",
+      "code_topic_id": "simplificacio",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 41,
+      "merge_commit": "fae75a6e840cfd1a0a10f546f0a0440f11604967",
+      "validation": "Validació conjunta del Lot 2 (PR #41): tres tests matemàtics superats, 10.000 mostres (Simplificació 3.000, Equacions 4.000, Pensament computacional 3.000); tres suites Playwright amb Chrome superades, amb cobertura i rotació de famílies, pràctica guiada/autònoma, recuperació, exàmens, teoria i viewport 390 px; regressions matemàtiques Lot 1 de 9.000 mostres i tres suites Playwright de regressió superades; sense errors JavaScript detectats. Limitacions: clic pràctica→teoria amb servidor HTTP no verificat, GitHub Pages no verificat i no s’ha utilitzat Edge.",
+      "families": [
+        {
+          "id": "reduir-termes-sempre-amb-la-mateixa-part-literal",
+          "name": "Reduir termes semblants d’una mateixa part literal",
+          "level": 1,
+          "generators": [
+            "simplificacio:1",
+            "simplificacio:5",
+            "S1",
+            "S2",
+            "S4",
+            "M3",
+            "M4"
+          ]
+        },
+        {
+          "id": "simplificar-expressio-lineal-agrupant-termes",
+          "name": "Simplificar una expressió lineal agrupant termes amb x i termes constants",
+          "level": 2,
+          "generators": [
+            "simplificacio:3",
+            "simplificacio:6",
+            "S3",
+            "S5",
+            "S6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/algebraic/equacions",
+      "course": "1r ESO",
+      "sense": "Algebraic",
+      "topic": "Equacions de primer grau",
+      "code_topic_id": "equacions",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 41,
+      "merge_commit": "fae75a6e840cfd1a0a10f546f0a0440f11604967",
+      "validation": "Validació conjunta del Lot 2 (PR #41): tres tests matemàtics superats, 10.000 mostres (Simplificació 3.000, Equacions 4.000, Pensament computacional 3.000); tres suites Playwright amb Chrome superades, amb cobertura i rotació de famílies, pràctica guiada/autònoma, recuperació, exàmens, teoria i viewport 390 px; regressions matemàtiques Lot 1 de 9.000 mostres i tres suites Playwright de regressió superades; sense errors JavaScript detectats. Limitacions: clic pràctica→teoria amb servidor HTTP no verificat, GitHub Pages no verificat i no s’ha utilitzat Edge.",
+      "families": [
+        {
+          "id": "resoldre-equacio-additiva-dun-pas",
+          "name": "Resoldre una equació additiva d’un pas",
+          "level": 1,
+          "generators": [
+            "equacions:1",
+            "E1",
+            "E2"
+          ]
+        },
+        {
+          "id": "resoldre-equacio-multiplicativa-dun-pas",
+          "name": "Resoldre una equació multiplicativa d’un pas",
+          "level": 1,
+          "generators": [
+            "equacions:2",
+            "E3"
+          ]
+        },
+        {
+          "id": "resoldre-equacio-lineal-de-dos-passos",
+          "name": "Resoldre una equació lineal de dos passos",
+          "level": 2,
+          "generators": [
+            "equacions:3",
+            "equacions:4",
+            "E4",
+            "E5"
+          ]
+        },
+        {
+          "id": "modelitzar-i-resoldre-equacio-en-un-context",
+          "name": "Modelitzar un context amb una equació i resoldre-la",
+          "level": 2,
+          "generators": [
+            "equacions:7",
+            "equacions:8",
+            "E6",
+            "E7",
+            "E8",
+            "E9",
+            "E10"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "1eso/algebraic/computacional",
+      "course": "1r ESO",
+      "sense": "Algebraic",
+      "topic": "Pensament computacional",
+      "code_topic_id": "computacional",
+      "status": "validat",
+      "verified_on": "2026-11-14",
+      "pr": 41,
+      "merge_commit": "fae75a6e840cfd1a0a10f546f0a0440f11604967",
+      "validation": "Validació conjunta del Lot 2 (PR #41): tres tests matemàtics superats, 10.000 mostres (Simplificació 3.000, Equacions 4.000, Pensament computacional 3.000); tres suites Playwright amb Chrome superades, amb cobertura i rotació de famílies, pràctica guiada/autònoma, recuperació, exàmens, teoria i viewport 390 px; regressions matemàtiques Lot 1 de 9.000 mostres i tres suites Playwright de regressió superades; sense errors JavaScript detectats. Limitacions: clic pràctica→teoria amb servidor HTTP no verificat, GitHub Pages no verificat i no s’ha utilitzat Edge.",
+      "families": [
+        {
+          "id": "executar-algorisme-amb-operacions-ordenades",
+          "name": "Executar operacions en l’ordre indicat",
+          "level": 1,
+          "generators": [
+            "computacional:1",
+            "C1"
+          ]
+        },
+        {
+          "id": "iterar-instruccio-additiva",
+          "name": "Iterar una instrucció additiva un nombre determinat de vegades",
+          "level": 1,
+          "generators": [
+            "computacional:2",
+            "C2"
+          ]
+        },
+        {
+          "id": "executar-branca-condicional",
+          "name": "Seleccionar i executar una branca segons una condició",
+          "level": 2,
+          "generators": [
+            "computacional:3",
+            "computacional:6",
+            "C3",
+            "C6"
+          ]
+        },
+        {
+          "id": "detectar-primer-error-dalgorisme",
+          "name": "Detectar el primer pas incorrecte d’un algorisme",
+          "level": 2,
+          "generators": [
+            "computacional:4",
+            "C4"
+          ]
+        },
+        {
+          "id": "reconstruir-instruccio-absent",
+          "name": "Reconstruir una instrucció a partir dels valors inicial i final",
+          "level": 1,
+          "generators": [
+            "computacional:5",
+            "C5"
+          ]
+        }
+      ]
     }
   ]
 }
