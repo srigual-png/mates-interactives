@@ -49,4 +49,6 @@ Validació executada amb Chrome 157:
 - Fitxes: vuit temes ordinaris, selecció, quotes, varietat i duplicats; exports Word/PDF amb i sense solucions i sessions només N1/N2 per als temes sense N3.
 - `node --check` als fitxers JavaScript modificats i `git diff --check`: superats.
 
+Casos límit executats: arrodoniment exacte de 1,5000 a 2, valors per defecte/excés a 1,25 i enumeració exhaustiva independent per als procediments de recompte incloses les restriccions. El banc de percentatges no genera 0% ni 100%, i el banc d’aproximacions no genera valors negatius ni errors relatius amb referència zero; aquests casos queden explícitament pendents/no representats pel generador.
+
 Limitacions: els tests de navegador s’han executat amb Chrome 157, no Edge. El sandbox bloqueja la càrrega del popup real de teoria des de `file://`; les proves comproven l’URL/ancoratge sol·licitats pel manejador i després naveguen directament a l’ancoratge amb `hashchange`. GitHub Pages no s’ha verificat localment ni s’afirma que cap desplegament estigui completat.
