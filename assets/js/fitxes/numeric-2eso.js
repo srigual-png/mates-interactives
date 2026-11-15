@@ -6,9 +6,9 @@
     fraccionsSentit:Object.values(MIDifficulty.fractionsMeaningLevels),
     operacionsRacionals:window.MIDifficulty.operationsRationalFamilies.reduce((a,f)=>(a[f.level-1].push(...f.types),a),[[],[],[]]),
     potencies:[[1,2,3,4,5,6,8,11,12,13,17,18],[7,9,10,14,15,16],[]],
-    aproximacions:MIDifficulty.numeric2ESOFamilies.aproximacions.reduce((a,f)=>(a[f.level-1].push(...f.types),a),[[],[],[]])
-    proporcionalitat:MIDifficulty.numeric2ESOFamilies.proporcionalitat.reduce((a,f)=>(a[f.level-1].push(...f.types),a),[[],[],[]])
-    percentatges:MIDifficulty.numeric2ESOFamilies.percentatges.reduce((a,f)=>(a[f.level-1].push(...f.types),a),[[],[],[]])
+    aproximacions:MIDifficulty.numeric2ESOFamilies.aproximacions.reduce((a,f)=>(a[f.level-1].push(...f.types),a),[[],[],[]]),
+    proporcionalitat:MIDifficulty.numeric2ESOFamilies.proporcionalitat.reduce((a,f)=>(a[f.level-1].push(...f.types),a),[[],[],[]]),
+    percentatges:MIDifficulty.numeric2ESOFamilies.percentatges.reduce((a,f)=>(a[f.level-1].push(...f.types),a),[[],[],[]]),
     recomptes:MIDifficulty.numeric2ESOFamilies.recomptes.reduce((a,f)=>(a[f.level-1].push(...f.types),a),[[],[],[]])
   };
   const worksheetFamilyBags={};
