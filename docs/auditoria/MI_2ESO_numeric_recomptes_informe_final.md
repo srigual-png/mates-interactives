@@ -2,35 +2,35 @@
 
 ## Abast i fonts
 
-Auditoria de la branca iniciada a `main` (`19beace8b55b45c233742fe491354fece9ce4c86`). S’han contrastat els generadors reals, la classificació compartida `MIDifficulty`, la pàgina de pràctica i les seccions de teoria indicades a continuació. Les variants són generadors que comparteixen un procediment, no famílies addicionals.
+Auditoria iniciada des de `main` (`19beace8b55b45c233742fe491354fece9ce4c86`). S’han contrastat tots els generadors accessibles, les dades del classificador compartit `MIDifficulty`, la pràctica i la teoria `2eso/teoria/numeric/recomptes-sistematics.html`. Les variants de generador no es compten com a famílies noves.
 
 - **Tema:** `recomptes`
-- **Pàgina i teoria:** 2eso/sentit-numeric.html#recomptes; teoria 2eso/teoria/numeric/recomptes-sistematics.html
-- **Inventari verificat:** 15 tipus de generador coberts, sense solapaments entre famílies.
-- **Famílies definitives:** 10 · N1/N2/N3 = 6/4/0
+- **Inventari:** 15 tipus de generador, repartits sense solapament entre famílies.
+- **Resultat final:** 10 famílies · N1/N2/N3 = 6/4/0.
+- **Nivell anterior:** tots els tipus ja estaven assignats pel classificador compartit als mateixos nivells indicats a la taula. El catàleg de fitxes, en canvi, conservava arrays antics que enviaven tipus a N3; s’ha eliminat aquesta discrepància i ara els nivells de fitxa deriven de les especificacions compartides.
 
-## Classificació definitiva
+## Famílies definitives i justificació
 
-| ID estable | Família | Nivell | Generadors | Justificació |
-|---|---|---:|---|---|
-| `principi-multiplicatiu` | Principi multiplicatiu | N1 | 1, 2, 3, 4 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `llista-sistematica` | Completar una llista sistemàtica | N2 | 5 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
-| `deteccio-duplicats` | Detectar casos duplicats | N1 | 6 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `parelles-sense-ordre` | Comptar parelles sense tenir en compte l’ordre | N2 | 7, 13 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
-| `codis-sense-repeticio` | Comptar codis ordenats sense repetició | N2 | 8 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
-| `codis-amb-repeticio` | Comptar codis amb repetició | N1 | 9 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `recompte-amb-restriccions` | Recompte amb restriccions | N2 | 10, 14 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
-| `desfer-principi-multiplicatiu` | Reconstruir un factor d’un recompte | N1 | 11 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `representacio-arbre` | Representar decisions amb un arbre | N1 | 12 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `errors-de-recompte` | Detectar errors en un recompte | N1 | 15 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
+| ID estable | Família | Anterior | Final | Generadors | Justificació pedagògica |
+|---|---|---:|---:|---|---|
+| `principi-multiplicatiu` | Principi multiplicatiu | N1 | N1 | 1, 2, 3, 4 | Multiplica el nombre d’opcions independents de cada decisió; samarretes/menús són contextos diferents del mateix principi. |
+| `llista-sistematica` | Completar una llista sistemàtica | N2 | N2 | 5 | Enumera possibilitats amb ordre i sense omissions; és N2 perquè cal controlar una representació completa. |
+| `deteccio-duplicats` | Detectar casos duplicats | N1 | N1 | 6 | Revisa si una llista repeteix casos i distingeix repeticions de possibilitats diferents. |
+| `parelles-sense-ordre` | Comptar parelles sense tenir en compte l’ordre | N2 | N2 | 7, 13 | Compta parelles no ordenades i evita comptar dues vegades el mateix parell. |
+| `codis-sense-repeticio` | Comptar codis ordenats sense repetició | N2 | N2 | 8 | Aplica opcions decreixents quan no es poden repetir elements. |
+| `codis-amb-repeticio` | Comptar codis amb repetició | N1 | N1 | 9 | Manté el mateix nombre d’opcions a cada posició quan la repetició és permesa. |
+| `recompte-amb-restriccions` | Recompte amb restriccions | N2 | N2 | 10, 14 | Compta els casos admissibles després d’aplicar una prohibició o una condició. |
+| `desfer-principi-multiplicatiu` | Reconstruir un factor d’un recompte | N1 | N1 | 11 | Recupera un factor desconegut a partir del producte total de possibilitats. |
+| `representacio-arbre` | Representar decisions amb un arbre | N1 | N1 | 12 | Identifica el diagrama d’arbre com a representació exhaustiva de decisions successives. |
+| `errors-de-recompte` | Detectar errors en un recompte | N1 | N1 | 15 | Detecta la suma incorrecta quan les decisions independents s’han de combinar multiplicativament. |
 
-Els generadors en cada fila són variants del mateix procediment matemàtic. No s’han creat famílies N3 perquè el tema actual no conté cap generador que exigeixi reconstrucció o raonament amb restriccions de nivell avançat; s’ha mantingut la dificultat curricular observada al codi compartit.
+No es força cap objectiu de recompte de famílies. Cap generador actual no requereix N3 per al nivell curricular d’aquest tema; es manté N1/N2 i la fitxa rebutja N3 abans de començar quan cap tema seleccionat pot cobrir la quota.
 
 ## Tres mostres generades per família
 
 ### Principi multiplicatiu (`principi-multiplicatiu`) — N1
 
-**Generadors:** 1, 2, 3, 4 · **Apartat de teoria:** `#producte`
+**Generadors / variants:** 1, 2, 3, 4 · **Ajuda teòrica:** `#producte`
 
 **Mostra 1 · tipus 1 · N1.** Tens 3 samarretes i 5 pantalons . Quants conjunts diferents pots formar triant una peça de cada tipus?
 
@@ -52,7 +52,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Completar una llista sistemàtica (`llista-sistematica`) — N2
 
-**Generadors:** 5 · **Apartat de teoria:** `#llistes`
+**Generadors / variants:** 5 · **Ajuda teòrica:** `#llistes`
 
 **Mostra 1 · tipus 5 · N2.** Amb les lletres A, B i C es formen parelles ordenades de dues lletres diferents. Un alumne ha escrit: · · AB · AC · BA · BC · CA · · Quin cas falta?
 
@@ -74,7 +74,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Detectar casos duplicats (`deteccio-duplicats`) — N1
 
-**Generadors:** 6 · **Apartat de teoria:** `#llistes`
+**Generadors / variants:** 6 · **Ajuda teòrica:** `#llistes`
 
 **Mostra 1 · tipus 6 · N1.** En un recompte apareix la llista AB, AC, BA, BC, CA, CB, CA . Quin problema té la llista?
 
@@ -96,7 +96,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Comptar parelles sense tenir en compte l’ordre (`parelles-sense-ordre`) — N2
 
-**Generadors:** 7, 13 · **Apartat de teoria:** `#ordre`
+**Generadors / variants:** 7, 13 · **Ajuda teòrica:** `#ordre`
 
 **Mostra 1 · tipus 7 · N2.** En un grup de 6 persones , quantes parelles diferents es poden formar si Anna-Biel és la mateixa parella que Biel-Anna ?
 
@@ -118,7 +118,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Comptar codis ordenats sense repetició (`codis-sense-repeticio`) — N2
 
-**Generadors:** 8 · **Apartat de teoria:** `#repeticio`
+**Generadors / variants:** 8 · **Ajuda teòrica:** `#repeticio`
 
 **Mostra 1 · tipus 8 · N2.** Amb 6 xifres diferents , quants codis de dues xifres es poden formar sense repetir cap xifra , si l’ordre importa?
 
@@ -140,7 +140,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Comptar codis amb repetició (`codis-amb-repeticio`) — N1
 
-**Generadors:** 9 · **Apartat de teoria:** `#repeticio`
+**Generadors / variants:** 9 · **Ajuda teòrica:** `#repeticio`
 
 **Mostra 1 · tipus 9 · N1.** Amb 2 símbols , quants codis de dues posicions es poden formar si es poden repetir els símbols?
 
@@ -162,7 +162,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Recompte amb restriccions (`recompte-amb-restriccions`) — N2
 
-**Generadors:** 10, 14 · **Apartat de teoria:** `#restriccions`
+**Generadors / variants:** 10, 14 · **Ajuda teòrica:** `#restriccions`
 
 **Mostra 1 · tipus 10 · N2.** Hi ha 3 samarretes i 3 pantalons . En principi es poden combinar tots, però una combinació concreta està prohibida . Quants conjunts són possibles?
 
@@ -182,11 +182,11 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 **Resolució:** Els casos vàlids són 62, 64, 68, 82, 84, 86. En total n’hi ha 6.
 
-*El generador té un enunciat fix en aquest tipus; les execucions repetides retornen la mateixa pregunta i resposta. S’indica per transparència, sense inventar variants que el codi no genera.*
+*El generador retorna una plantilla d’enunciat fixa en aquest tipus; les execucions addicionals produeixen la mateixa pregunta i resposta. Les mostres es reprodueixen literalment per no inventar variants.*
 
 ### Reconstruir un factor d’un recompte (`desfer-principi-multiplicatiu`) — N1
 
-**Generadors:** 11 · **Apartat de teoria:** `#producte`
+**Generadors / variants:** 11 · **Ajuda teòrica:** `#producte`
 
 **Mostra 1 · tipus 11 · N1.** Hi ha 15 combinacions possibles. Si la primera decisió té 3 opcions i per a totes hi ha el mateix nombre d’opcions a la segona decisió, quantes opcions té la segona?
 
@@ -208,7 +208,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Representar decisions amb un arbre (`representacio-arbre`) — N1
 
-**Generadors:** 12 · **Apartat de teoria:** `#arbres`
+**Generadors / variants:** 12 · **Ajuda teòrica:** `#arbres`
 
 **Mostra 1 · tipus 12 · N1.** Quina eina és especialment útil per representar decisions successives i comprovar que no falta cap possibilitat?
 
@@ -228,11 +228,11 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 **Resolució:** Per visualitzar decisions successives utilitzem un diagrama d’arbre.
 
-*El generador té un enunciat fix en aquest tipus; les execucions repetides retornen la mateixa pregunta i resposta. S’indica per transparència, sense inventar variants que el codi no genera.*
+*El generador retorna una plantilla d’enunciat fixa en aquest tipus; les execucions addicionals produeixen la mateixa pregunta i resposta. Les mostres es reprodueixen literalment per no inventar variants.*
 
 ### Detectar errors en un recompte (`errors-de-recompte`) — N1
 
-**Generadors:** 15 · **Apartat de teoria:** `#errors`
+**Generadors / variants:** 15 · **Ajuda teòrica:** `#errors`
 
 **Mostra 1 · tipus 15 · N1.** Un alumne diu: “Hi ha 4 begudes i 3 entrepans, així que hi ha 4 + 3 = 7 menús”. Quin és l’error principal?
 
@@ -252,14 +252,12 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 **Resolució:** L’alumne ha sumat les quantitats d’opcions. Quan triem una beguda i un entrepà, cal combinar les possibilitats de totes dues decisions.
 
-*El generador té un enunciat fix en aquest tipus; les execucions repetides retornen la mateixa pregunta i resposta. S’indica per transparència, sense inventar variants que el codi no genera.*
+*El generador retorna una plantilla d’enunciat fixa en aquest tipus; les execucions addicionals produeixen la mateixa pregunta i resposta. Les mostres es reprodueixen literalment per no inventar variants.*
 
-## Validació i incidències
+## Validació i limitacions
 
-- Prova matemàtica independent: **250 mostres per tipus**; cada mostra comprova el resultat amb un oracle independent, unicitat de respostes, consistència nivell/família i absència d’errors JavaScript.
-- Prova de navegador: interfície guiada/autònoma, cobertura de famílies, respostes i recuperació d’error, generació d’examen, enllaços de teoria, ancoratges directes/hashchange i viewport mòbil de 390 px.
-- Chrome 157.0.8103.52; la navegació emergent a la pàgina de teoria es verifica fins a l’esdeveniment `window.open` i URL/ancoratge sol·licitat. L’entorn de fitxer local no permet carregar el popup real; aquesta part no es declara verificada.
-- Suite de regressió: 30 exercicis per cadascun dels quatre temes ordinaris i quatre temes d’ampliació, sense errors de pàgina.
-- Fitxes: comprovació de nivells i famílies, temes ordinaris disponibles, combinacions N1/N2, impossibilitat de N3 per a temes sense N3, Word/PDF i solucions amb/sense resolució.
-
-Les dades de resposta d’aquestes mostres també passen la prova matemàtica; són sortides aleatòries documentals i poden repetir-se quan un generador usa una plantilla fixa.
+- Prova matemàtica: **250 mostres per tipus**; oracles independents, exactitud de resposta, unicitat, família i nivell. Resultat d’aquest tema: 3750 mostres; cobertura completa dels 10 IDs i cap error JS.
+- Prova Playwright amb Chrome 157.0.8103.52: pràctica guiada/autònoma, selecció i rotació de famílies, correcció/resposta errònia, examen, enllaços i ancoratges de teoria, hashchange i viewport de 390 px; sense errors JavaScript.
+- Regressions Lot 2: 30 mostres d’aquest tema i 30 de cada un dels altres tres temes ordinaris i de les quatre ampliacions.
+- Fitxes: tots els 8 temes ordinaris, preguntes/solucions, quotes i duplicats; Word/PDF amb i sense solucions. Les fitxes admeten nivells només presents al catàleg real.
+- El codi del popup real de teoria no s’ha pogut carregar des de `file://` en aquest sandbox. S’ha comprovat l’URL i l’ancoratge sol·licitats, i la navegació directa i `hashchange`. Chrome disponible; Edge no executat. No s’afirma que GitHub Pages s’hagi verificat.
