@@ -5,7 +5,7 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
 
 (async()=>{
   const profile=path.resolve('tmp','pw-fraccions-sentit');fs.mkdirSync(path.dirname(profile),{recursive:true});
-  const context=await chromium.launchPersistentContext(profile,{executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true,viewport:{width:1440,height:1000}});
+  const context=await chromium.launchPersistentContext(profile,{executablePath:process.env.MI_BROWSER_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,viewport:{width:1440,height:1000}});
   try{
     const page=context.pages()[0]||await context.newPage(),errors=[];
     page.on('pageerror',e=>errors.push(e.message));
@@ -15,9 +15,10 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
       const check=(v,m)=>{if(!v)throw Error(m)};
       const expected={1:1,2:1,3:1,4:2,5:1,6:1,7:1,8:2,9:2,10:3,11:2,12:3,13:3,14:1,15:2,16:2,17:3};
       const families=new Set(),coverage={};
-      for(let type=1;type<=17;type++)for(let i=0;i<40;i++){
-        const q=genFraccionsSentit2ESO(type);coverage[type]=q.diff;families.add(MIDifficulty.fractionsMeaningFamily(type));
+      for(let type=1;type<=17;type++)for(let i=0;i<250;i++){
+        const q=genFraccionsSentit2ESO(type),familyId=MIDifficulty.fractionsMeaningFamily(type),family=MIDifficulty.fractionsMeaningFamilySpecs.find(f=>f.id===familyId);coverage[type]=q.diff;families.add(familyId);
         check(q.diff===expected[type],'nivell tipus '+type);
+        check(family&&family.level===q.diff&&MIDifficulty.fractionsMeaningDifficulty2ESO(type)===q.diff,'família i classificador compartit '+type);
         check(q.options.length===4&&q.options.filter(x=>x===q.correct).length===1,'opcions/clau '+type);
         check(new Set(q.options).size===4,'opcions úniques '+type);
         check(q.guide.length>=2&&q.solution.length>=2&&!/undefined|NaN|Infinity/.test(JSON.stringify(q)),'pistes i solució '+type);
@@ -36,7 +37,9 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
         }
       }
       check(families.size===15,'15 famílies');
-      return {coverage,families:families.size,generatorVariants:17*40};
+      check(families.size===15,'15 famílies pedagògiques úniques');
+      const familyLevels=MIDifficulty.fractionsMeaningFamilySpecs.reduce((a,f)=>(a[f.level-1]++,a),[0,0,0]);check(JSON.stringify(familyLevels)==='[6,5,4]','Recompte familiar N1/N2/N3 6/5/4');
+      return {coverage,families:families.size,familyLevels,generatorVariants:17*250};
     });
     const practice=await page.evaluate(()=>{
       const i=TOPICS.findIndex(t=>t.id==='fraccionsSentit');state.currentTopic=i;
@@ -72,7 +75,7 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
     assert.equal(general.total,20);assert.deepEqual(general.topics,['fraccionsSentit']);assert(general.types.includes(16)&&general.types.includes(17));
     const linkTargets=await page.evaluate(()=>Array.from({length:17},(_,i)=>{const a=new DOMParser().parseFromString(miTheoryLinkHtml('fraccionsSentit',undefined,i+1),'text/html').querySelector('a');return a?new URL(a.getAttribute('href'),location.href).hash.slice(1):''}));
     await page.goto('file:///'+path.resolve('2eso/teoria/numeric/fraccions-amb-sentit.html').replace(/\\/g,'/')+'#inversa-successives');
-    const theory=await page.evaluate(()=>({opened:document.querySelector('#ajuda-exercicis').open,anchor:document.getElementById('inversa-successives')!==null,sections:document.querySelectorAll('#ajuda-exercicis .procedure-list > section').length}));
+    const theory=await page.evaluate(()=>({opened:document.querySelector('#ajuda-exercicis').open,anchor:document.getElementById('inversa-successives')!==null,sections:document.querySelectorAll('#ajuda-exercicis .procedure-item').length}));
     assert.deepEqual(theory,{opened:true,anchor:true,sections:15});
     const missingLinks=await page.evaluate(ids=>ids.filter(id=>!document.getElementById(id)),linkTargets);if(missingLinks.length)throw Error('ancoratges inexistents: '+JSON.stringify({missingLinks,linkTargets}));
     const anchors=['divisio-repartiment','operador-ajuda','reconstruir-total','part-total','complement','rao-entre-grups','rao-i-part-total','escala-part-total','comparar-proporcions','escala-rao','repartiment-proporcional','fraccions-successives','significat-contextual','rao-i-diferencia','inversa-successives'];
@@ -83,3 +86,4 @@ const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-run
     console.log(JSON.stringify({generator:gen,practice,exam,theory,mobile,pageErrors:errors},null,2));
   }finally{await context.close();const root=path.resolve('tmp')+path.sep;if(profile.startsWith(root))fs.rmSync(profile,{recursive:true,force:true});}
 })().catch(e=>{console.error(e);process.exitCode=1;});
+
