@@ -2,34 +2,34 @@
 
 ## Abast i fonts
 
-Auditoria de la branca iniciada a `main` (`19beace8b55b45c233742fe491354fece9ce4c86`). S’han contrastat els generadors reals, la classificació compartida `MIDifficulty`, la pàgina de pràctica i les seccions de teoria indicades a continuació. Les variants són generadors que comparteixen un procediment, no famílies addicionals.
+Auditoria iniciada des de `main` (`19beace8b55b45c233742fe491354fece9ce4c86`). S’han contrastat tots els generadors accessibles, les dades del classificador compartit `MIDifficulty`, la pràctica i la teoria `2eso/teoria/numeric/proporcionalitat-directa.html`. Les variants de generador no es compten com a famílies noves.
 
 - **Tema:** `proporcionalitat`
-- **Pàgina i teoria:** 2eso/sentit-numeric.html#proporcio; teoria 2eso/teoria/numeric/proporcionalitat-directa.html
-- **Inventari verificat:** 18 tipus de generador coberts, sense solapaments entre famílies.
-- **Famílies definitives:** 9 · N1/N2/N3 = 5/4/0
+- **Inventari:** 18 tipus de generador, repartits sense solapament entre famílies.
+- **Resultat final:** 9 famílies · N1/N2/N3 = 5/4/0.
+- **Nivell anterior:** tots els tipus ja estaven assignats pel classificador compartit als mateixos nivells indicats a la taula. El catàleg de fitxes, en canvi, conservava arrays antics que enviaven tipus a N3; s’ha eliminat aquesta discrepància i ara els nivells de fitxa deriven de les especificacions compartides.
 
-## Classificació definitiva
+## Famílies definitives i justificació
 
-| ID estable | Família | Nivell | Generadors | Justificació |
-|---|---|---:|---|---|
-| `reconeixement-proporcionalitat` | Reconeixement de proporcionalitat directa | N1 | 1, 2 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `seleccio-estrategia-proporcional` | Selecció d’una estratègia de resolució proporcional | N1 | 9 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `taules-i-escalatge` | Completar taules i escalar quantitats | N2 | 3, 8, 16 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
-| `factors-i-raons-equivalents` | Factors i raons equivalents | N1 | 5, 7 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `taxes-i-constant` | Taxes unitàries i constant de proporcionalitat | N1 | 4, 6, 13, 18 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `compra-amb-pressupost` | Compra amb pressupost limitat | N1 | 14 | Procediment directe, reconeixement o càlcul amb una relació principal; les variacions de context i representació romanen com a generadors/variants dins la família. |
-| `comparacio-de-taxes` | Comparació de preus unitaris | N2 | 10 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
-| `repartiment-proporcional` | Repartiment proporcional | N2 | 11, 12 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
-| `diagnosi-proporcionalitat` | Detecció d’errors en relacions proporcionals | N2 | 15, 17 | Combina relacions o operacions, inverteix una proporcionalitat, analitza una restricció o valida més d’un cas; es manté a N2 perquè els passos són ensenyables a 2n i no requereixen raonament avançat de N3. |
+| ID estable | Família | Anterior | Final | Generadors | Justificació pedagògica |
+|---|---|---:|---:|---|---|
+| `reconeixement-proporcionalitat` | Reconeixement de proporcionalitat directa | N1 | N1 | 1, 2 | Decideix si el model manté una raó constant (inclòs el test del valor zero); no cal calcular una quantitat desconeguda. |
+| `seleccio-estrategia-proporcional` | Selecció d’una estratègia de resolució proporcional | N1 | N1 | 9 | Tria entre factor, reducció a la unitat o proporció segons les dades; és una selecció d’estratègia directa, separada del reconeixement. |
+| `taules-i-escalatge` | Completar taules i escalar quantitats | N2 | N2 | 3, 8, 16 | Completa parelles proporcionals amb factor o reducció a la unitat; combina representació tabular i càlcul. |
+| `factors-i-raons-equivalents` | Factors i raons equivalents | N1 | N1 | 5, 7 | Determina el factor o aplica’l als dos termes d’una raó equivalent; és una equivalència directa. |
+| `taxes-i-constant` | Taxes unitàries i constant de proporcionalitat | N1 | N1 | 4, 6, 13, 18 | Calcula quant correspon a una unitat i interpreta la constant amb les unitats correctes. |
+| `compra-amb-pressupost` | Compra amb pressupost limitat | N1 | N1 | 14 | Divideix el pressupost pel preu unitari i comprova que la quantitat sigui assequible. |
+| `comparacio-de-taxes` | Comparació de preus unitaris | N2 | N2 | 10 | Calcula dues taxes unitàries i compara-les; necessita dos càlculs coherents. |
+| `repartiment-proporcional` | Repartiment proporcional | N2 | N2 | 11, 12 | Suma les parts de la raó, calcula el valor d’una part i assigna les quantitats (dues o tres parts són variants). |
+| `diagnosi-proporcionalitat` | Detecció d’errors en relacions proporcionals | N2 | N2 | 15, 17 | Detecta un model additiu o una parella que trenca la constant; exigeix comprovar la relació. |
 
-Els generadors en cada fila són variants del mateix procediment matemàtic. No s’han creat famílies N3 perquè el tema actual no conté cap generador que exigeixi reconstrucció o raonament amb restriccions de nivell avançat; s’ha mantingut la dificultat curricular observada al codi compartit.
+No es força cap objectiu de recompte de famílies. Cap generador actual no requereix N3 per al nivell curricular d’aquest tema; es manté N1/N2 i la fitxa rebutja N3 abans de començar quan cap tema seleccionat pot cobrir la quota.
 
 ## Tres mostres generades per família
 
 ### Reconeixement de proporcionalitat directa (`reconeixement-proporcionalitat`) — N1
 
-**Generadors:** 1, 2 · **Apartat de teoria:** `#que-es`
+**Generadors / variants:** 1, 2 · **Ajuda teòrica:** `#que-es`
 
 **Mostra 1 · tipus 1 · N1.** La quantitat d’ingredients i el nombre de persones, si mantenim la mateixa recepta. · · Hi ha proporcionalitat directa?
 
@@ -51,7 +51,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Selecció d’una estratègia de resolució proporcional (`seleccio-estrategia-proporcional`) — N1
 
-**Generadors:** 9 · **Apartat de teoria:** `#proporcio`
+**Generadors / variants:** 9 · **Ajuda teòrica:** `#proporcio`
 
 **Mostra 1 · tipus 9 · N1.** Quina estratègia és especialment adequada? · · 3 kg costen 8,40 € i vols saber quant costen 11 kg.
 
@@ -73,7 +73,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Completar taules i escalar quantitats (`taules-i-escalatge`) — N2
 
-**Generadors:** 3, 8, 16 · **Apartat de teoria:** `#proporcio`
+**Generadors / variants:** 3, 8, 16 · **Ajuda teòrica:** `#proporcio`
 
 **Mostra 1 · tipus 3 · N2.** Completa la taula proporcional: · · 3 unitats → 6 € · 10 unitats → ?
 
@@ -95,7 +95,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Factors i raons equivalents (`factors-i-raons-equivalents`) — N1
 
-**Generadors:** 5, 7 · **Apartat de teoria:** `#factor`
+**Generadors / variants:** 5, 7 · **Ajuda teòrica:** `#factor`
 
 **Mostra 1 · tipus 5 · N1.** Una taula proporcional passa de 4 a 8 en una de les magnituds. Per quin factor s’ha multiplicat?
 
@@ -117,7 +117,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Taxes unitàries i constant de proporcionalitat (`taxes-i-constant`) — N1
 
-**Generadors:** 4, 6, 13, 18 · **Apartat de teoria:** `#constant`
+**Generadors / variants:** 4, 6, 13, 18 · **Ajuda teòrica:** `#constant`
 
 **Mostra 1 · tipus 4 · N1.** 6 quaderns costen 21 € . Quin és el preu d’un quadern ?
 
@@ -139,7 +139,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Compra amb pressupost limitat (`compra-amb-pressupost`) — N1
 
-**Generadors:** 14 · **Apartat de teoria:** `#unitat`
+**Generadors / variants:** 14 · **Ajuda teòrica:** `#unitat`
 
 **Mostra 1 · tipus 14 · N1.** Cada entrada costa 2 € . Amb 36 € , quantes entrades pots comprar?
 
@@ -161,7 +161,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Comparació de preus unitaris (`comparacio-de-taxes`) — N2
 
-**Generadors:** 10 · **Apartat de teoria:** `#unitat`
+**Generadors / variants:** 10 · **Ajuda teòrica:** `#unitat`
 
 **Mostra 1 · tipus 10 · N2.** Compara dues ofertes: · Oferta A: 6 unitats per 12 € · Oferta B: 8 unitats per 20,8 € · Quina és més barata per unitat?
 
@@ -183,7 +183,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Repartiment proporcional (`repartiment-proporcional`) — N2
 
-**Generadors:** 11, 12 · **Apartat de teoria:** `#repartiment`
+**Generadors / variants:** 11, 12 · **Ajuda teòrica:** `#repartiment`
 
 **Mostra 1 · tipus 11 · N2.** Reparteix 120 € en la raó 2:6 . Quines quantitats corresponen a les dues parts?
 
@@ -205,7 +205,7 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 ### Detecció d’errors en relacions proporcionals (`diagnosi-proporcionalitat`) — N2
 
-**Generadors:** 15, 17 · **Apartat de teoria:** `#errors`
+**Generadors / variants:** 15, 17 · **Ajuda teòrica:** `#errors`
 
 **Mostra 1 · tipus 15 · N2.** Quin raonament és incorrecte ?
 
@@ -225,12 +225,10 @@ Els generadors en cada fila són variants del mateix procediment matemàtic. No 
 
 **Resolució:** La constant esperada és 3. La parella que comença per 4 no manté aquesta relació. Resposta: 4.
 
-## Validació i incidències
+## Validació i limitacions
 
-- Prova matemàtica independent: **250 mostres per tipus**; cada mostra comprova el resultat amb un oracle independent, unicitat de respostes, consistència nivell/família i absència d’errors JavaScript.
-- Prova de navegador: interfície guiada/autònoma, cobertura de famílies, respostes i recuperació d’error, generació d’examen, enllaços de teoria, ancoratges directes/hashchange i viewport mòbil de 390 px.
-- Chrome 157.0.8103.52; la navegació emergent a la pàgina de teoria es verifica fins a l’esdeveniment `window.open` i URL/ancoratge sol·licitat. L’entorn de fitxer local no permet carregar el popup real; aquesta part no es declara verificada.
-- Suite de regressió: 30 exercicis per cadascun dels quatre temes ordinaris i quatre temes d’ampliació, sense errors de pàgina.
-- Fitxes: comprovació de nivells i famílies, temes ordinaris disponibles, combinacions N1/N2, impossibilitat de N3 per a temes sense N3, Word/PDF i solucions amb/sense resolució.
-
-Les dades de resposta d’aquestes mostres també passen la prova matemàtica; són sortides aleatòries documentals i poden repetir-se quan un generador usa una plantilla fixa.
+- Prova matemàtica: **250 mostres per tipus**; oracles independents, exactitud de resposta, unicitat, família i nivell. Resultat d’aquest tema: 4500 mostres; cobertura completa dels 9 IDs i cap error JS.
+- Prova Playwright amb Chrome 157.0.8103.52: pràctica guiada/autònoma, selecció i rotació de famílies, correcció/resposta errònia, examen, enllaços i ancoratges de teoria, hashchange i viewport de 390 px; sense errors JavaScript.
+- Regressions Lot 2: 30 mostres d’aquest tema i 30 de cada un dels altres tres temes ordinaris i de les quatre ampliacions.
+- Fitxes: tots els 8 temes ordinaris, preguntes/solucions, quotes i duplicats; Word/PDF amb i sense solucions. Les fitxes admeten nivells només presents al catàleg real.
+- El codi del popup real de teoria no s’ha pogut carregar des de `file://` en aquest sandbox. S’ha comprovat l’URL i l’ancoratge sol·licitats, i la navegació directa i `hashchange`. Chrome disponible; Edge no executat. No s’afirma que GitHub Pages s’hagi verificat.
