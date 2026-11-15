@@ -85,7 +85,8 @@
       {id:'estimacio-i-validacio',name:'Estimació i validació de resultats',level:2,types:[11,12],anchor:'estimar'}
     ],
     proporcionalitat:[
-      {id:'reconeixement-proporcionalitat',name:'Reconeixement i estratègia de proporcionalitat directa',level:1,types:[1,2,9],anchor:'que-es'},
+      {id:'reconeixement-proporcionalitat',name:'Reconeixement de proporcionalitat directa',level:1,types:[1,2],anchor:'que-es'},
+      {id:'seleccio-estrategia-proporcional',name:'Selecció d’una estratègia de resolució proporcional',level:1,types:[9],anchor:'proporcio'},
       {id:'taules-i-escalatge',name:'Completar taules i escalar quantitats',level:2,types:[3,8,16],anchor:'proporcio'},
       {id:'factors-i-raons-equivalents',name:'Factors i raons equivalents',level:1,types:[5,7],anchor:'factor'},
       {id:'taxes-i-constant',name:'Taxes unitàries i constant de proporcionalitat',level:1,types:[4,6,13,18],anchor:'constant'},
