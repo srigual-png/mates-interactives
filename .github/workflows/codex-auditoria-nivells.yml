@@ -12,7 +12,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: codex-auditoria-\u0024{{ github.event.inputs.topic_id }}
+  group: codex-auditoria-${{ github.event.inputs.topic_id }}
   cancel-in-progress: false
 
 jobs:
@@ -22,7 +22,7 @@ jobs:
     permissions:
       contents: read
     outputs:
-      slug: \u0024{{ steps.prepare.outputs.slug }}
+      slug: ${{ steps.prepare.outputs.slug }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,7 +31,7 @@ jobs:
       - name: Validar tema i preparar encàrrec
         id: prepare
         env:
-          TOPIC_ID: \u0024{{ inputs.topic_id }}
+          TOPIC_ID: ${{ inputs.topic_id }}
         shell: bash
         run: |
           python3 - <<'PY'
@@ -50,7 +50,7 @@ jobs:
       - name: Executar Codex amb permisos de només lectura
         uses: openai/codex-action@v1
         with:
-          openai-api-key: \u0024{{ secrets.OPENAI_API_KEY }}
+          openai-api-key: ${{ secrets.OPENAI_API_KEY }}
           prompt-file: codex-audit-prompt.md
           output-file: codex-audit-report.md
           sandbox: read-only
@@ -61,7 +61,7 @@ jobs:
           grep -qi 'provisional' codex-audit-report.md
       - uses: actions/upload-artifact@v4
         with:
-          name: informe-auditoria-\u0024{{ steps.prepare.outputs.slug }}
+          name: informe-auditoria-${{ steps.prepare.outputs.slug }}
           path: codex-audit-report.md
           if-no-files-found: error
 
@@ -77,14 +77,14 @@ jobs:
           persist-credentials: true
       - uses: actions/download-artifact@v4
         with:
-          name: informe-auditoria-\u0024{{ needs.auditar.outputs.slug }}
+          name: informe-auditoria-${{ needs.auditar.outputs.slug }}
           path: artefacte
       - name: Crear PR amb informe provisional (sense tocar exercicis)
         env:
-          GH_TOKEN: \u0024{{ github.token }}
-          SLUG: \u0024{{ needs.auditar.outputs.slug }}
-          TOPIC_ID: \u0024{{ inputs.topic_id }}
-          RUN_ID: \u0024{{ github.run_id }}
+          GH_TOKEN: ${{ github.token }}
+          SLUG: ${{ needs.auditar.outputs.slug }}
+          TOPIC_ID: ${{ inputs.topic_id }}
+          RUN_ID: ${{ github.run_id }}
         shell: bash
         run: |
           set -euo pipefail
