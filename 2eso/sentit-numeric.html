@@ -2864,7 +2864,7 @@ function miTheoryLinkHtml(topicId,label,type){
   if(topicId==='operacionsRacionals'){href+='?miReturnToken='+encodeURIComponent(miPracticeSessionToken)+'#'+operationsRationalTheoryAnchor(type&&typeof type==='object'?type:{type:Number(type),topicId});}
   if(['aproximacions','proporcionalitat','percentatges','recomptes'].includes(topicId)){var family=window.MIDifficulty?.numericFamilyInfo?.(topicId,type&&typeof type==='object'?type:{type:Number(type)});if(family?.anchor)href+='#'+family.anchor;}
   return '<a class="theory-page-link mi-review-theory-link" href="'+href+'" style="margin:12px 0 0">📚 '+(label||'Repassar el procediment')+'</a>';
-}}
+}
 
 
 /* ── ESTAT I ERRORS ────────────────────────────────────────── */
