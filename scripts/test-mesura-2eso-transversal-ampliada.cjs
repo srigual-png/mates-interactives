@@ -39,7 +39,7 @@ const ctx={
 vm.createContext(ctx);
 vm.runInContext(html.slice(start,end),ctx);
 
-const number=s=>Number(String(s).replace(/\./g,'').replace(',','.'));
+const number=s=>{const m=String(s).match(/-?[\d.,]+/);assert(m,'No hi ha xifra: '+s);return Number(m[0].replace(/\./g,'').replace(',','.'));};
 const bolds=q=>[...q.question.matchAll(/<b>(.*?)<\/b>/g)].map(x=>x[1]);
 function check(q,val,unit,label){
   assert.equal(q.correct,answerUnit(val,unit),label+': oracle de càlcul');
