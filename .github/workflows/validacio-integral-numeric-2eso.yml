@@ -1,0 +1,83 @@
+name: Validació integral MI · Sentit numèric 2n ESO
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mi-numeric-2eso-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validacio-integral:
+    name: Matemàtiques, Playwright, fitxes i regressions
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+
+    steps:
+      - name: Obtenir el codi de la PR
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instal·lar Playwright i Chromium
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+          npx playwright install --with-deps chromium
+
+      - name: Comprovar sintaxi dels scripts i de l'HTML
+        run: |
+          node scripts/comprova-inline-js-html.cjs 2eso/sentit-numeric.html
+          node --check assets/js/fitxes/numeric-2eso.js
+          node --check assets/js/dificultat-mi.js
+          node --check assets/js/examen-tema.js
+          node --check scripts/fitxes/test-2eso.cjs
+          node --check scripts/comprova-numeric-family-math-2eso.cjs
+          node --check scripts/comprova-numeric-topic-ui-2eso.cjs
+          node --check scripts/comprova-numeric-lot2-regressions-2eso.cjs
+
+      - name: Comprovar l'inventari persistent i els canvis de la PR
+        env:
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        shell: bash
+        run: |
+          node scripts/exporta-inventari-fase-a.cjs --check
+          if [ -n "$PR_BASE_SHA" ]; then
+            git -c core.whitespace=cr-at-eol diff --check "$PR_BASE_SHA" HEAD
+          else
+            git -c core.whitespace=cr-at-eol diff --check
+          fi
+
+      - name: Verificar els 66 tipus matemàtics del Lot 2
+        run: |
+          node scripts/comprova-numeric-aproximacions-families-2eso.cjs
+          node scripts/comprova-numeric-proporcionalitat-families-2eso.cjs
+          node scripts/comprova-numeric-percentatges-families-2eso.cjs
+          node scripts/comprova-numeric-recomptes-families-2eso.cjs
+
+      - name: Verificar pràctica, exàmens, teoria i mòbil del Lot 2
+        run: |
+          node scripts/comprova-numeric-aproximacions-2eso.cjs
+          node scripts/comprova-numeric-proporcionalitat-2eso.cjs
+          node scripts/comprova-numeric-percentatges-2eso.cjs
+          node scripts/comprova-numeric-recomptes-2eso.cjs
+
+      - name: Verificar fitxes Word i PDF
+        run: node scripts/fitxes/test-2eso.cjs
+
+      - name: Verificar regressions del Lot 1 i ampliacions
+        run: |
+          node scripts/comprova-dificultats-racionals-2eso.cjs
+          node scripts/comprova-fraccions-sentit-2eso.cjs
+          node scripts/comprova-operacions-racionals-2eso.cjs
+          node scripts/comprova-numeric-potencies-families-2eso.cjs
+          node scripts/comprova-numeric-potencies-2eso.cjs
+          node scripts/comprova-numeric-lot2-regressions-2eso.cjs
