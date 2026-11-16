@@ -1738,7 +1738,7 @@ function genProblemesMesura2ESO(forceType){
     ],c=shuffle(cases)[0];
     const total=c.W*c.H,openings=c.dw*c.dh+c.ww*c.wh,paint=total-openings,n=Math.ceil(paint/c.cov),raw=paint/c.cov;
     correct=countAnswer(n,'pot');alts=[String(n),countAnswer(n,'pot')];
-    options=uniq4(correct,[countAnswer(Math.max(1,Math.floor(raw)),'pot'),countAnswer(Math.ceil(total/c.cov),'pot'),countAnswer(n+1,'pot'),countAnswer(n+2,'pot')]);
+    options=uniq4(correct,[countAnswer(Math.max(1,Math.floor(raw)),'pot'),countAnswer(Math.ceil(total/c.cov),'pot'),countAnswer(n+1,'pot'),countAnswer(n+2,'pot'),countAnswer(n+3,'pot'),countAnswer(n+4,'pot')]);
     question=`Una paret de <b>${fmtNum(c.W)} × ${fmtNum(c.H)} m</b> té una porta de <b>${fmtNum(c.dw)} × ${fmtNum(c.dh)} m</b> i una finestra de <b>${fmtNum(c.ww)} × ${fmtNum(c.wh)} m</b>. Un pot de pintura cobreix <b>${c.cov} m²</b>. Quants pots sencers cal comprar?`;
     guide=['Calcula primer la superfície total de la paret.','Calcula les superfícies que no es pintaran i resta-les de la superfície total.','Relaciona la superfície que queda amb el rendiment d’un pot.','Interpreta el resultat: els pots es compren sencers i l’arrodoniment es fa al final.'];
     solution=[`Superfície útil = ${fmtNum(total)} − ${fmtNum(openings)} = ${fmtNum(paint)} m².`,`Pots necessaris = ${fmtNum(paint)} ÷ ${c.cov} = ${fmtNum(raw,3)}.`,`Cal comprar ${correct}.`];openHint='Escriu el nombre de pots sencers.';
