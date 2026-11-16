@@ -1645,7 +1645,11 @@ function genEstimacioError2ESO(forceType){
       {r1:100,a1:102,r2:10,a2:11},
       {r1:200,a1:204,r2:20,a2:21},
       {r1:500,a1:510,r2:50,a2:52},
-      {r1:80,a1:82,r2:8,a2:8.4}
+      {r1:80,a1:82,r2:8,a2:8.4},
+      {r1:10,a1:11,r2:100,a2:102},
+      {r1:20,a1:21,r2:200,a2:204},
+      {r1:50,a1:52,r2:500,a2:510},
+      {r1:8,a1:8.4,r2:80,a2:82}
     ],c=shuffle(cases)[0],e1=Math.abs(c.a1-c.r1)/c.r1,e2=Math.abs(c.a2-c.r2)/c.r2;
     correct=e1<e2?'La mesura A':'La mesura B';options=shuffle([correct,e1<e2?'La mesura B':'La mesura A','Tenen la mateixa precisió relativa','Només es poden comparar els errors absoluts']);
     question=`Mesura A: referència <b>${c.r1}</b>, aproximació <b>${fmtNum(c.a1)}</b>. Mesura B: referència <b>${c.r2}</b>, aproximació <b>${fmtNum(c.a2)}</b>. Quina és proporcionalment més precisa?`;
@@ -1679,12 +1683,12 @@ function genEstimacioError2ESO(forceType){
   }
   else if(type===14){
     const cases=[
-      [2.03,2,'Sí, és coherent: l’error és petit respecte de 2 m'],
-      [198,200,'Sí, és coherent: l’error és petit respecte de 200 cm'],
-      [8,80,'No, probablement hi ha un error d’unitat o de mesura'],
-      [1500,1.5,'No, cal revisar si s’han barrejat mL i L']
+      [2.03,2,'Sí, és coherent: l’error és petit respecte de 2 m','la llargada d’una taula','m'],
+      [198,200,'Sí, és coherent: l’error és petit respecte de 200 cm','la longitud d’un objecte','cm'],
+      [8,80,'No, probablement hi ha un error d’unitat o de mesura','la llargada d’una taula','cm'],
+      [1500,1.5,'No, cal revisar si s’han barrejat mL i L','la capacitat d’un recipient','L']
     ],c=shuffle(cases)[0];correct=c[2];options=shuffle([correct,'Sí, perquè qualsevol aproximació és acceptable','No, perquè una mesura aproximada ha de coincidir exactament','No es pot valorar mai una mesura sense calculadora']);
-    question=`S’esperava un valor proper a <b>${fmtNum(c[1])}</b> i s’ha obtingut <b>${fmtNum(c[0])}</b>. Quina valoració és més adequada?`;
+    question=`En mesurar <b>${c[3]}</b>, s’esperava un valor proper a <b>${fmtNum(c[1])} ${c[4]}</b> i s’ha obtingut <b>${fmtNum(c[0])} ${c[4]}</b>. Quina valoració és més adequada?`;
     guide=['Compara l’ordre de magnitud dels dos valors.','Pregunta’t si la diferència pot ser un petit error de mesura o indica un problema més important.','Tingues present que una confusió d’unitats pot canviar molt el valor numèric.'];solution=[correct+'.'];allowOpen=false;
   }
   else if(type===15){
@@ -1700,7 +1704,7 @@ function genEstimacioError2ESO(forceType){
     guide=['Mantén només una xifra decimal.','Utilitza la xifra següent per decidir si la dècima es manté o augmenta.','No afegeixis precisió que l’informe no demana.'];solution=[`Arrodonint a dècimes: ${correct}.`];openHint='Escriu el valor i la unitat m.';
   }
   else if(type===17){
-    const ref=shuffle([50,80,100,200])[0],a=ref+shuffle([-2,-1,1,2])[0],b=ref+shuffle([-5,-4,4,5])[0],ea=Math.abs(a-ref),eb=Math.abs(b-ref);if(ea===eb)return genEstimacioError2ESO(17);
+    const ref=shuffle([50,80,100,200])[0],reverse=shuffle([false,true])[0],a=ref+shuffle(reverse?[-5,-4,4,5]:[-2,-1,1,2])[0],b=ref+shuffle(reverse?[-2,-1,1,2]:[-5,-4,4,5])[0],ea=Math.abs(a-ref),eb=Math.abs(b-ref);if(ea===eb)return genEstimacioError2ESO(17);
     correct=ea<eb?'L’aproximació A':'L’aproximació B';options=shuffle([correct,ea<eb?'L’aproximació B':'L’aproximació A','Totes dues tenen el mateix error absolut','La que té el valor numèric més gran']);
     question=`El valor de referència és <b>${ref}</b>. Aproximació A: <b>${a}</b>. Aproximació B: <b>${b}</b>. Quina té menys error absolut?`;
     guide=['Calcula la distància de cada aproximació al valor de referència.','Pren sempre la diferència en valor absolut.','La distància més petita correspon a l’error absolut més petit.'];solution=[`Error A = ${ea}; error B = ${eb}.`,`Per tant, ${correct.toLowerCase()} té menys error absolut.`];allowOpen=false;
@@ -1727,7 +1731,10 @@ function genProblemesMesura2ESO(forceType){
     const cases=[
       {W:6,H:3,dw:1,dh:2,ww:1.5,wh:1.2,cov:8},
       {W:5,H:2.8,dw:.9,dh:2,ww:1.2,wh:1.2,cov:7},
-      {W:7,H:3,dw:1,dh:2.1,ww:1.5,wh:1.4,cov:9}
+      {W:7,H:3,dw:1,dh:2.1,ww:1.5,wh:1.4,cov:9},
+      {W:6,H:3,dw:1,dh:2,ww:1.5,wh:1.2,cov:20},
+      {W:6,H:3,dw:1,dh:2,ww:1.5,wh:1.2,cov:5},
+      {W:6,H:3,dw:1,dh:2,ww:1.5,wh:1.2,cov:4}
     ],c=shuffle(cases)[0];
     const total=c.W*c.H,openings=c.dw*c.dh+c.ww*c.wh,paint=total-openings,n=Math.ceil(paint/c.cov),raw=paint/c.cov;
     correct=countAnswer(n,'pot');alts=[String(n),countAnswer(n,'pot')];
@@ -1805,7 +1812,7 @@ function genProblemesMesura2ESO(forceType){
     solution=[`${fmtNum(c.r)} m = ${fmtNum(c.r*100)} cm.`,`La relació és ${c.p}:${fmtNum(c.r*100)}, que simplificada és ${correct}.`];openHint='Escriu l’escala en forma 1:n.';
   }
   else if(type===10){
-    const cases=[{hp:1.5,sp:2,st:8,ht:6},{hp:1.6,sp:2,st:7.5,ht:6},{hp:1.8,sp:1.5,st:5,ht:6},{hp:1.5,sp:1.2,st:4.8,ht:6}],c=shuffle(cases)[0];
+    const cases=[{hp:1.5,sp:2,st:6,ht:4.5},{hp:1.6,sp:2,st:10,ht:8},{hp:1.8,sp:1.5,st:5,ht:6},{hp:1.5,sp:1.2,st:6.4,ht:8}],c=shuffle(cases)[0];
     correct=answerUnit(c.ht,'m');alts=unitAlternatives(c.ht,'m');
     options=uniq4(correct,[answerUnit(roundTo(c.hp*c.sp/c.st,2),'m'),answerUnit(roundTo(c.st/c.sp,2),'m'),answerUnit(c.st-c.sp,'m'),answerUnit(c.ht+1,'m')]);
     question=`Al mateix moment, una persona de <b>${fmtNum(c.hp)} m</b> projecta una ombra de <b>${fmtNum(c.sp)} m</b> i un arbre projecta una ombra de <b>${fmtNum(c.st)} m</b>. Quina altura té l’arbre?`;
@@ -1853,7 +1860,7 @@ function genProblemesMesura2ESO(forceType){
     solution=[`Perímetre = ${fmtNum(2*(c.L+c.W))} m.`,`Sòcol necessari = ${fmtNum(2*(c.L+c.W))} − ${fmtNum(c.d)} = ${correct}.`];openHint='Escriu el valor i la unitat m.';
   }
   else if(type===16){
-    const cases=[{real:120,a:119,b:122},{real:250,a:248,b:255},{real:80,a:79,b:83},{real:150,a:152,b:145}],c=shuffle(cases)[0],ea=Math.abs(c.a-c.real)/c.real,eb=Math.abs(c.b-c.real)/c.real;
+    const cases=[{real:120,a:119,b:122},{real:250,a:248,b:255},{real:80,a:79,b:83},{real:150,a:152,b:145},{real:120,a:122,b:119},{real:250,a:255,b:248}],c=shuffle(cases)[0],ea=Math.abs(c.a-c.real)/c.real,eb=Math.abs(c.b-c.real)/c.real;
     correct=ea<eb?'Mesura A':'Mesura B';options=shuffle([correct,ea<eb?'Mesura B':'Mesura A','Tenen la mateixa precisió','No es poden comparar perquè són valors diferents']);
     question=`La longitud de referència d’un objecte és <b>${c.real} cm</b>. Dos instruments donen: A = <b>${c.a} cm</b> i B = <b>${c.b} cm</b>. Quina mesura té menor error relatiu?`;
     guide=['Calcula l’error absolut de cada mesura respecte del valor de referència.','Divideix cada error absolut pel mateix valor de referència.','Compara els errors relatius: el més petit correspon a la mesura més precisa.'];
