@@ -1,11 +1,11 @@
 const assert=require('assert');
 const fs=require('fs');
 const path=require('path');
-const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('playwright');
 
 (async()=>{
   const profile=path.resolve('tmp','pw-fraccions-sentit');fs.mkdirSync(path.dirname(profile),{recursive:true});
-  const context=await chromium.launchPersistentContext(profile,{executablePath:process.env.MI_BROWSER_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,viewport:{width:1440,height:1000}});
+  const context=await chromium.launchPersistentContext(profile,{...(process.env.MI_BROWSER_PATH?{executablePath:process.env.MI_BROWSER_PATH}:{}),headless:true,viewport:{width:1440,height:1000}});
   try{
     const page=context.pages()[0]||await context.newPage(),errors=[];
     page.on('pageerror',e=>errors.push(e.message));
