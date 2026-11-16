@@ -2,6 +2,8 @@
 
 **Estat: PROVISIONAL — no és cap classificació pedagògica validada.**
 
+**Setena revisió — inventari complet:** examinats els 20 tipus de **Problemes de mesura**. N1=4, N2=16, N3=0; inclou duplicats de procediments amb els sis temes anteriors i incidències de varietat demostrades als tipus 1, 10 i 16. [Auditoria provisional de Problemes de mesura](MI_2ESO_mesura_problemes_auditoria_provisional.md). Això completa la inspecció estàtica dels **7 temes / 128 tipus**; les famílies i els nivells pedagògics continuen pendents de validació final.
+
 **Sisena revisió:** revisats els 18 tipus d'**Estimació, precisió i error**: 13 tipus N1, 5 N2, 0 N3; fins a 10 famílies candidates. Incidències detectades: als tipus 9 i 17 sempre és correcta la primera mesura, precisió de la mitjana (15) i context d'unitats (11/14). [Auditoria provisional d'Estimació i error](MI_2ESO_mesura_estimacio_auditoria_provisional.md).
 
 **Cinquena revisió:** revisats els 20 tipus de **Superfícies i volums**, inclosa la variant `sameBase` del tipus 17, amb fins a 12 famílies candidates i mapa efectiu per defecte N1=9, N2=11, N3=0. [Auditoria provisional de Superfícies i volums](MI_2ESO_mesura_superficies_auditoria_provisional.md).
@@ -24,7 +26,7 @@
 | Perímetres i àrees | `perimetres` | `genPerimetresArees2ESO` | 1307–1425 | 18 | Fins a 12 candidates, provisional | Auditoria provisional |
 | Superfícies i volums | `superficies` | `genSuperficiesVolums2ESO` | 1426–1579 | 20 | Fins a 12 candidates, provisional | Auditoria provisional |
 | Estimació, precisió i error | `estimacio` | `genEstimacioError2ESO` | 1580–1721 | 18 | Fins a 10 candidates, provisional | Auditoria provisional |
-| Problemes de mesura | `problemes` | `genProblemesMesura2ESO` | 1722–1903 | 20 | Pendent | Pendent |
+| Problemes de mesura | `problemes` | `genProblemesMesura2ESO` | 1722–1903 | 20 | Grups provisionals; duplicitats transversals | Auditoria provisional |
 | **Total** | | | | **128** | **No determinat** | **No determinat** |
 
 Els **128 tipus** provenen de branques condicionals `type===N` visibles en cadascun dels set generadors. No equivalen a 128 famílies matemàtiques ni a una validació dels resultats. El curs i la vinculació als exàmens ordinaris es defineixen en `TOPICS` (línies 2319–2330).
