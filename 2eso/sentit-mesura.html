@@ -892,7 +892,7 @@ let unitsTypeBag=[];
 function nextUnitsType(){if(!unitsTypeBag.length)unitsTypeBag=shuffle(Array.from({length:18},(_,i)=>i+1));return unitsTypeBag.pop()}
 function genUnitats2ESO(forceType){
   const type=forceType||nextUnitsType();
-  let question,correct,options,guide,solution,alts=[],openHint='',allowOpen=true;
+  let question,correct,options,guide,solution,alts=[],openHint='',allowOpen=true,difficultyVariant;
 
   if(type===1){
     const i=rnd(1,5),j=pickDifferentIndex(i,LENGTH_UNITS.length,2),fr=LENGTH_UNITS[i],to=LENGTH_UNITS[j],v=shuffle([1.2,2.5,3,4.8,6,7.5,12,25])[0],res=convertByExponent(v,fr.e,to.e,1);
@@ -931,8 +931,8 @@ function genUnitats2ESO(forceType){
   }
   else if(type===6){
     const cases=[
-      {v:2.5,from:'dm³',to:'L',r:2.5},{v:750,from:'cm³',to:'mL',r:750},{v:1.2,from:'m³',to:'L',r:1200},{v:3.4,from:'L',to:'cm³',r:3400},{v:850,from:'mL',to:'cm³',r:850},{v:2400,from:'L',to:'m³',r:2.4}
-    ],c=shuffle(cases)[0];
+      {v:2.5,from:'dm³',to:'L',r:2.5},{v:750,from:'cm³',to:'mL',r:750},{v:1.2,from:'m³',to:'L',r:1200,variant:'encadenada'},{v:3.4,from:'L',to:'cm³',r:3400,variant:'encadenada'},{v:850,from:'mL',to:'cm³',r:850},{v:2400,from:'L',to:'m³',r:2.4,variant:'encadenada'}
+    ],c=shuffle(cases)[0];difficultyVariant=c.variant;
     correct=answerUnit(c.r,c.to);alts=unitAlternatives(c.r,c.to);options=uniq4(correct,metricDistractors(c.r,c.to,[10,.1,1000,.001]));
     question=`Relaciona volum i capacitat: converteix <b>${fmtNum(c.v)} ${c.from}</b> a <b>${c.to}</b>.`;
     guide=['Recorda les equivalències bàsiques entre volum i capacitat.','Busca quina equivalència connecta directament les unitats de la pregunta.','Aplica després la conversió necessària sense barrejar unitats cúbiques i lineals.'];
@@ -1037,7 +1037,7 @@ function genUnitats2ESO(forceType){
     guide=['Relaciona mL amb una unitat cúbica equivalent.','Després converteix aquesta unitat cúbica fins a dm³.','Mantén clar que estàs expressant el mateix contingut amb una altra unitat.'];
     solution=[`${ml} mL = ${ml} cm³.`,`Passem de cm³ a dm³.`,`Resultat: ${correct}.`];openHint='Escriu el valor i la unitat dm³.';
   }
-  return {topicId:'unitats',type,course:'2n',question,correct,alts,options,guide,solution,openHint,allowOpen};
+  return {topicId:'unitats',type,course:'2n',difficultyVariant,question,correct,alts,options,guide,solution,openHint,allowOpen};
 }
 
 /* ── GENERADOR · BLOC 2: ESCALES I MESURES INDIRECTES ─────── */
