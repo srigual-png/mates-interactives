@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "status": "provisional",
+  "topic_id": "2eso/mesura/EXEMPLE_NO_REAL",
+  "course": "2n ESO",
+  "sense": "Mesura",
+  "base_commit": "0000000000000000000000000000000000000000",
+  "curriculum_reference": "EXEMPLE: identificar aquí els sabers curriculars aplicables",
+  "source_files": [
+    "2eso/sentit-mesura.html"
+  ],
+  "generator_types": [
+    "1",
+    "2"
+  ],
+  "families": [
+    {
+      "id": "convertir-unitats-exemple",
+      "name": "EXEMPLE: conversió directa",
+      "procedure": "Convertir una magnitud entre unitats del mateix sistema",
+      "difference_from_similar": "No incorpora comparacions o contextos amb passos addicionals",
+      "curriculum_fit": "EXEMPLE: verificar adequació al curs",
+      "current_level": 1,
+      "proposed_level": 1,
+      "decision": "maintain",
+      "level_rationale": "Aplicació directa d'un factor de conversió conegut",
+      "generator_types": [
+        "1",
+        "2"
+      ],
+      "examples": [
+        {
+          "question": "2 m en cm",
+          "answer": "200 cm",
+          "steps": [
+            "2 × 100 = 200"
+          ]
+        },
+        {
+          "question": "3 km en m",
+          "answer": "3000 m",
+          "steps": [
+            "3 × 1000 = 3000"
+          ]
+        }
+      ],
+      "common_errors": [
+        "Invertir el factor de conversió"
+      ]
+    }
+  ],
+  "shared_procedures": [],
+  "limitations": [
+    "FITXER D'EXEMPLE, NO ÉS UNA AUDITORIA REAL; cal substituir totes les dades"
+  ]
+}
