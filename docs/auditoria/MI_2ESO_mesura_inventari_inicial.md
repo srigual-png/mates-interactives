@@ -2,6 +2,8 @@
 
 **Estat: PROVISIONAL — no és cap classificació pedagògica validada.**
 
+**Cinquena revisió:** revisats els 20 tipus de **Superfícies i volums**, inclosa la variant `sameBase` del tipus 17, amb fins a 12 famílies candidates i mapa efectiu per defecte N1=9, N2=11, N3=0. [Auditoria provisional de Superfícies i volums](MI_2ESO_mesura_superficies_auditoria_provisional.md).
+
 **Quarta revisió:** inspeccionats els 18 tipus de **Perímetres i àrees**, amb fins a 12 famílies candidates. El mapa efectiu és N1=11, N2=7, N3=0. Consulteu [l'auditoria provisional de Perímetres i àrees](MI_2ESO_mesura_perimetres_auditoria_provisional.md).
 
 **Nova revisió:** també s'han inspeccionat els 16 tipus de **Teorema de Pitàgores**, amb fins a 9 famílies candidates. La variant de diagonal del tipus 15 és N2 mentre que la variant de catet és N1. Consulteu [l'auditoria provisional de Pitàgores](MI_2ESO_mesura_pitagores_auditoria_provisional.md).
@@ -18,7 +20,7 @@
 | Escales i mesures indirectes | `escales` | `genEscales2ESO` | 1046–1191 | 18 | Fins a 9 candidates, provisional | Auditoria provisional |
 | Teorema de Pitàgores | `pitagores` | `genPitagores2ESO` | 1192–1306 | 16 | Fins a 9 candidates, provisional | Auditoria provisional |
 | Perímetres i àrees | `perimetres` | `genPerimetresArees2ESO` | 1307–1425 | 18 | Fins a 12 candidates, provisional | Auditoria provisional |
-| Superfícies i volums | `superficies` | `genSuperficiesVolums2ESO` | 1426–1579 | 20 | Pendent | Pendent |
+| Superfícies i volums | `superficies` | `genSuperficiesVolums2ESO` | 1426–1579 | 20 | Fins a 12 candidates, provisional | Auditoria provisional |
 | Estimació, precisió i error | `estimacio` | `genEstimacioError2ESO` | 1580–1721 | 18 | Pendent | Pendent |
 | Problemes de mesura | `problemes` | `genProblemesMesura2ESO` | 1722–1903 | 20 | Pendent | Pendent |
 | **Total** | | | | **128** | **No determinat** | **No determinat** |
