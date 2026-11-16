@@ -1,0 +1,20 @@
+name: Verifica nivells Mesura 2n ESO - unitats18 i cilindre
+
+on:
+  pull_request:
+    paths:
+      - 'assets/js/dificultat-mi.js'
+      - 'scripts/test-mesura-2eso-unitats18-cilindre.cjs'
+      - '.github/workflows/test-mesura-2eso-unitats18-cilindre.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  comprova-nivells:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Executar oracles i nivells
+        run: node scripts/test-mesura-2eso-unitats18-cilindre.cjs
