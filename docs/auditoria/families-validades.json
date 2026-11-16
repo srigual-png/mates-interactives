@@ -3965,6 +3965,931 @@
           ]
         }
       ]
+    },
+    {
+      "id": "2eso/numeric/racionals",
+      "course": "2n ESO",
+      "sense": "Numèric",
+      "topic": "Nombres racionals",
+      "code_topic_id": "racionals",
+      "status": "validat",
+      "verified_on": "2026-11-15",
+      "pr": 43,
+      "merge_commit": "19beace8b55b45c233742fe491354fece9ce4c86",
+      "validation": "PR #43: quatre proves matemàtiques/de pràctica, fitxes Word/PDF amb modes de solució i regressions Lot 2 (240 mostres) superades; teoria, hashchange i mòbil comprovats amb Chrome 157. Edge i GitHub Pages no verificats.",
+      "families": [
+        {
+          "id": "RAC01",
+          "name": "Convertir fracció a decimal",
+          "level": 1,
+          "generators": [
+            "genRacionals2ESO:1"
+          ]
+        },
+        {
+          "id": "RAC02",
+          "name": "Convertir decimal a fracció irreductible",
+          "level": 1,
+          "generators": [
+            "genRacionals2ESO:2"
+          ]
+        },
+        {
+          "id": "RAC03",
+          "name": "Convertir fracció a percentatge",
+          "level": 1,
+          "generators": [
+            "genRacionals2ESO:3"
+          ]
+        },
+        {
+          "id": "RAC04",
+          "name": "Convertir percentatge a decimal",
+          "level": 1,
+          "generators": [
+            "genRacionals2ESO:4"
+          ]
+        },
+        {
+          "id": "RAC05",
+          "name": "Validar cadenes d’equivalències",
+          "level": 2,
+          "generators": [
+            "genRacionals2ESO:5",
+            "genRacionals2ESO:13"
+          ]
+        },
+        {
+          "id": "RAC06",
+          "name": "Comparar fraccions, decimals i percentatges",
+          "level": 2,
+          "generators": [
+            "genRacionals2ESO:6",
+            "genRacionals2ESO:7",
+            "genRacionals2ESO:14"
+          ]
+        },
+        {
+          "id": "RAC07",
+          "name": "Ordenar representacions racionals",
+          "level": 2,
+          "generators": [
+            "genRacionals2ESO:8"
+          ]
+        },
+        {
+          "id": "RAC08",
+          "name": "Trobar un racional interior amb condicions",
+          "level": 2,
+          "generators": [
+            "genRacionals2ESO:10"
+          ]
+        },
+        {
+          "id": "RAC09",
+          "name": "Situar fraccions a la recta numèrica",
+          "level": 1,
+          "generators": [
+            "genRacionals2ESO:9"
+          ]
+        },
+        {
+          "id": "RAC10",
+          "name": "Identificar la forma de representació",
+          "level": 1,
+          "generators": [
+            "genRacionals2ESO:11"
+          ]
+        },
+        {
+          "id": "RAC11",
+          "name": "Expressar una raó en representacions equivalents",
+          "level": 2,
+          "generators": [
+            "genRacionals2ESO:12"
+          ]
+        },
+        {
+          "id": "RAC12",
+          "name": "Reconèixer decimals periòdics exactes",
+          "level": 1,
+          "generators": [
+            "genRacionals2ESO:15"
+          ]
+        },
+        {
+          "id": "RAC13",
+          "name": "Reconstruir un mínim amb una proporció estricta",
+          "level": 3,
+          "generators": [
+            "genRacionals2ESO:16"
+          ]
+        },
+        {
+          "id": "RAC14",
+          "name": "Reconstruir una proporció abans de traspassos",
+          "level": 3,
+          "generators": [
+            "genRacionals2ESO:17"
+          ]
+        },
+        {
+          "id": "RAC15",
+          "name": "Cercar un racional amb restriccions simultànies",
+          "level": 3,
+          "generators": [
+            "genRacionals2ESO:18"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2eso/numeric/fraccionsSentit",
+      "course": "2n ESO",
+      "sense": "Numèric",
+      "topic": "Fraccions amb sentit",
+      "code_topic_id": "fraccionsSentit",
+      "status": "validat",
+      "verified_on": "2026-11-15",
+      "pr": 43,
+      "merge_commit": "19beace8b55b45c233742fe491354fece9ce4c86",
+      "validation": "PR #43: quatre proves matemàtiques/de pràctica, fitxes Word/PDF amb modes de solució i regressions Lot 2 (240 mostres) superades; teoria, hashchange i mòbil comprovats amb Chrome 157. Edge i GitHub Pages no verificats.",
+      "families": [
+        {
+          "id": "F01",
+          "name": "Divisió i repartiment com a fracció",
+          "level": 1,
+          "generators": [
+            "genFraccionsSentit2ESO:1",
+            "genFraccionsSentit2ESO:2"
+          ]
+        },
+        {
+          "id": "F02",
+          "name": "Fracció com a operador",
+          "level": 1,
+          "generators": [
+            "genFraccionsSentit2ESO:3"
+          ]
+        },
+        {
+          "id": "F03",
+          "name": "Reconstruir total i detectar errors d’inversió",
+          "level": 2,
+          "generators": [
+            "genFraccionsSentit2ESO:4",
+            "genFraccionsSentit2ESO:15"
+          ]
+        },
+        {
+          "id": "F04",
+          "name": "Trobar una part d’un total",
+          "level": 1,
+          "generators": [
+            "genFraccionsSentit2ESO:5"
+          ]
+        },
+        {
+          "id": "F05",
+          "name": "Fracció d’una quantitat",
+          "level": 1,
+          "generators": [
+            "genFraccionsSentit2ESO:6"
+          ]
+        },
+        {
+          "id": "F06",
+          "name": "Representar una raó",
+          "level": 1,
+          "generators": [
+            "genFraccionsSentit2ESO:7"
+          ]
+        },
+        {
+          "id": "F07",
+          "name": "Interpretar raó part-part i part-total",
+          "level": 2,
+          "generators": [
+            "genFraccionsSentit2ESO:8"
+          ]
+        },
+        {
+          "id": "F08",
+          "name": "Escalar part i total conservant la proporció",
+          "level": 2,
+          "generators": [
+            "genFraccionsSentit2ESO:9"
+          ]
+        },
+        {
+          "id": "F09",
+          "name": "Comparar proporcions en representacions diferents",
+          "level": 3,
+          "generators": [
+            "genFraccionsSentit2ESO:10"
+          ]
+        },
+        {
+          "id": "F10",
+          "name": "Escalar una raó a partir d’un terme",
+          "level": 2,
+          "generators": [
+            "genFraccionsSentit2ESO:11"
+          ]
+        },
+        {
+          "id": "F11",
+          "name": "Repartir proporcionalment un total",
+          "level": 3,
+          "generators": [
+            "genFraccionsSentit2ESO:12"
+          ]
+        },
+        {
+          "id": "F12",
+          "name": "Resoldre fraccions successives",
+          "level": 3,
+          "generators": [
+            "genFraccionsSentit2ESO:13"
+          ]
+        },
+        {
+          "id": "F13",
+          "name": "Interpretar una fracció part-total",
+          "level": 1,
+          "generators": [
+            "genFraccionsSentit2ESO:14"
+          ]
+        },
+        {
+          "id": "F14",
+          "name": "Reconstruir proporcions amb raó i diferència",
+          "level": 2,
+          "generators": [
+            "genFraccionsSentit2ESO:16"
+          ]
+        },
+        {
+          "id": "F15",
+          "name": "Reconstruir el total abans de canvis successius",
+          "level": 3,
+          "generators": [
+            "genFraccionsSentit2ESO:17"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2eso/numeric/operacionsRacionals",
+      "course": "2n ESO",
+      "sense": "Numèric",
+      "topic": "Operacions amb nombres racionals",
+      "code_topic_id": "operacionsRacionals",
+      "status": "validat",
+      "verified_on": "2026-11-15",
+      "pr": 43,
+      "merge_commit": "19beace8b55b45c233742fe491354fece9ce4c86",
+      "validation": "PR #43: quatre proves matemàtiques/de pràctica, fitxes Word/PDF amb modes de solució i regressions Lot 2 (240 mostres) superades; teoria, hashchange i mòbil comprovats amb Chrome 157. Edge i GitHub Pages no verificats.",
+      "families": [
+        {
+          "id": "OR01",
+          "name": "Suma i resta d’enters amb signe",
+          "level": 1,
+          "generators": [
+            "genOperacionsRacionals2ESO:1",
+            "genOperacionsRacionals2ESO:18:balance",
+            "genOperacionsRacionals2ESO:18:depth"
+          ],
+          "variants": [
+            "balance",
+            "depth"
+          ]
+        },
+        {
+          "id": "OR02",
+          "name": "Suma i resta de decimals amb signe",
+          "level": 1,
+          "generators": [
+            "genOperacionsRacionals2ESO:2",
+            "genOperacionsRacionals2ESO:18:temperature"
+          ],
+          "variants": [
+            "temperature"
+          ]
+        },
+        {
+          "id": "OR03",
+          "name": "Suma i resta de fraccions",
+          "level": 1,
+          "generators": [
+            "genOperacionsRacionals2ESO:3",
+            "genOperacionsRacionals2ESO:16",
+            "genOperacionsRacionals2ESO:18:route"
+          ],
+          "variants": [
+            "route"
+          ]
+        },
+        {
+          "id": "OR04",
+          "name": "Producte de fraccions",
+          "level": 1,
+          "generators": [
+            "genOperacionsRacionals2ESO:4"
+          ]
+        },
+        {
+          "id": "OR05",
+          "name": "Divisió de fraccions",
+          "level": 1,
+          "generators": [
+            "genOperacionsRacionals2ESO:5"
+          ]
+        },
+        {
+          "id": "OR06",
+          "name": "Unificar representacions",
+          "level": 2,
+          "generators": [
+            "genOperacionsRacionals2ESO:6"
+          ]
+        },
+        {
+          "id": "OR07",
+          "name": "Anticipar el signe d’un producte",
+          "level": 1,
+          "generators": [
+            "genOperacionsRacionals2ESO:7"
+          ]
+        },
+        {
+          "id": "OR08",
+          "name": "Aplicar la jerarquia directa",
+          "level": 1,
+          "generators": [
+            "genOperacionsRacionals2ESO:8",
+            "genOperacionsRacionals2ESO:9",
+            "genOperacionsRacionals2ESO:17"
+          ]
+        },
+        {
+          "id": "OR09",
+          "name": "Operar amb parèntesis abans del producte",
+          "level": 2,
+          "generators": [
+            "genOperacionsRacionals2ESO:10"
+          ]
+        },
+        {
+          "id": "OR10",
+          "name": "Reconstruir un sumand",
+          "level": 2,
+          "generators": [
+            "genOperacionsRacionals2ESO:11"
+          ]
+        },
+        {
+          "id": "OR11",
+          "name": "Reconstruir un factor",
+          "level": 2,
+          "generators": [
+            "genOperacionsRacionals2ESO:12",
+            "genOperacionsRacionals2ESO:13"
+          ]
+        },
+        {
+          "id": "OR12",
+          "name": "Estimar un producte decimal",
+          "level": 2,
+          "generators": [
+            "genOperacionsRacionals2ESO:14"
+          ]
+        },
+        {
+          "id": "OR13",
+          "name": "Acotar una suma amb referències",
+          "level": 2,
+          "generators": [
+            "genOperacionsRacionals2ESO:15"
+          ]
+        },
+        {
+          "id": "OR14",
+          "name": "Desfer dos canvis consecutius",
+          "level": 3,
+          "generators": [
+            "genOperacionsRacionals2ESO:19"
+          ]
+        },
+        {
+          "id": "OR15",
+          "name": "Agrupar operacions per obtenir un objectiu",
+          "level": 3,
+          "generators": [
+            "genOperacionsRacionals2ESO:20"
+          ]
+        },
+        {
+          "id": "OR16",
+          "name": "Raonar amb intervals i cotes",
+          "level": 3,
+          "generators": [
+            "genOperacionsRacionals2ESO:21"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2eso/numeric/potencies",
+      "course": "2n ESO",
+      "sense": "Numèric",
+      "topic": "Potències",
+      "code_topic_id": "potencies",
+      "status": "validat",
+      "verified_on": "2026-11-15",
+      "pr": 43,
+      "merge_commit": "19beace8b55b45c233742fe491354fece9ce4c86",
+      "validation": "PR #43: quatre proves matemàtiques/de pràctica, fitxes Word/PDF amb modes de solució i regressions Lot 2 (240 mostres) superades; teoria, hashchange i mòbil comprovats amb Chrome 157. Edge i GitHub Pages no verificats.",
+      "families": [
+        {
+          "id": "P2R01",
+          "name": "Representar i identificar base i exponent",
+          "level": 1,
+          "generators": [
+            "genPotencies2ESO:1",
+            "genPotencies2ESO:2",
+            "genPotencies2ESO:3"
+          ]
+        },
+        {
+          "id": "P2R02",
+          "name": "Calcular potències enteres i interpretar-ne el signe",
+          "level": 1,
+          "generators": [
+            "genPotencies2ESO:4",
+            "genPotencies2ESO:5",
+            "genPotencies2ESO:6"
+          ]
+        },
+        {
+          "id": "P2R03",
+          "name": "Calcular potències de base racional",
+          "level": 2,
+          "generators": [
+            "genPotencies2ESO:7"
+          ]
+        },
+        {
+          "id": "P2R04",
+          "name": "Aplicar exponent zero",
+          "level": 1,
+          "generators": [
+            "genPotencies2ESO:8"
+          ]
+        },
+        {
+          "id": "P2R05",
+          "name": "Calcular potències amb exponent negatiu",
+          "level": 2,
+          "generators": [
+            "genPotencies2ESO:9",
+            "genPotencies2ESO:10"
+          ]
+        },
+        {
+          "id": "P2R06",
+          "name": "Producte de potències de la mateixa base",
+          "level": 1,
+          "generators": [
+            "genPotencies2ESO:11"
+          ]
+        },
+        {
+          "id": "P2R07",
+          "name": "Quocient de potències de la mateixa base",
+          "level": 1,
+          "generators": [
+            "genPotencies2ESO:12"
+          ]
+        },
+        {
+          "id": "P2R08",
+          "name": "Potència d’una potència",
+          "level": 1,
+          "generators": [
+            "genPotencies2ESO:13"
+          ]
+        },
+        {
+          "id": "P2R09",
+          "name": "Potència d’un producte",
+          "level": 2,
+          "generators": [
+            "genPotencies2ESO:14"
+          ]
+        },
+        {
+          "id": "P2R10",
+          "name": "Reconstruir un exponent en un producte",
+          "level": 2,
+          "generators": [
+            "genPotencies2ESO:15"
+          ]
+        },
+        {
+          "id": "P2R11",
+          "name": "Detectar una propietat aplicada incorrectament",
+          "level": 2,
+          "generators": [
+            "genPotencies2ESO:16"
+          ]
+        },
+        {
+          "id": "P2R12",
+          "name": "Calcular una expressió amb jerarquia i potències",
+          "level": 1,
+          "generators": [
+            "genPotencies2ESO:17"
+          ]
+        },
+        {
+          "id": "P2R13",
+          "name": "Aplicar potències en àrees i volums",
+          "level": 1,
+          "generators": [
+            "genPotencies2ESO:18:square",
+            "genPotencies2ESO:18:cube"
+          ],
+          "variants": [
+            "square",
+            "cube"
+          ]
+        },
+        {
+          "id": "P2R14",
+          "name": "Modelitzar duplicacions successives",
+          "level": 2,
+          "generators": [
+            "genPotencies2ESO:18:growth"
+          ],
+          "variants": [
+            "growth"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2eso/numeric/aproximacions",
+      "course": "2n ESO",
+      "sense": "Numèric",
+      "topic": "Aproximacions i errors",
+      "code_topic_id": "aproximacions",
+      "status": "validat",
+      "verified_on": "2026-11-16",
+      "pr": 44,
+      "merge_commit": "e37f403cd170654ad704888836445b7ec38309d0",
+      "validation": "PR #44: 16.500 mostres matemàtiques (66 tipus), quatre suites Playwright, 240 regressions Lot 2, regressions Lot 1 i fitxes Word/PDF superades amb Chrome 157; checker dels 7 scripts inline i GitHub Actions superats. Edge i GitHub Pages no verificats; alguns casos límit no són generats pels bancs (detallats al resum Lot 2).",
+      "families": [
+        {
+          "id": "aproximacio-i-arrodoniment",
+          "name": "Aproximació i arrodoniment",
+          "level": 1,
+          "generators": [
+            "genAproximacions2ESO:1",
+            "genAproximacions2ESO:2",
+            "genAproximacions2ESO:3",
+            "genAproximacions2ESO:4"
+          ]
+        },
+        {
+          "id": "seleccio-de-precisio",
+          "name": "Selecció de la precisió",
+          "level": 1,
+          "generators": [
+            "genAproximacions2ESO:5"
+          ]
+        },
+        {
+          "id": "error-absolut",
+          "name": "Error absolut i comparació d’errors",
+          "level": 1,
+          "generators": [
+            "genAproximacions2ESO:6",
+            "genAproximacions2ESO:7",
+            "genAproximacions2ESO:13",
+            "genAproximacions2ESO:14"
+          ]
+        },
+        {
+          "id": "error-relatiu",
+          "name": "Error relatiu i precisió relativa",
+          "level": 2,
+          "generators": [
+            "genAproximacions2ESO:8",
+            "genAproximacions2ESO:9"
+          ]
+        },
+        {
+          "id": "intervals-arrodoniment",
+          "name": "Intervals compatibles amb l’arrodoniment",
+          "level": 2,
+          "generators": [
+            "genAproximacions2ESO:10",
+            "genAproximacions2ESO:15"
+          ]
+        },
+        {
+          "id": "estimacio-i-validacio",
+          "name": "Estimació i validació de resultats",
+          "level": 2,
+          "generators": [
+            "genAproximacions2ESO:11",
+            "genAproximacions2ESO:12"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2eso/numeric/proporcionalitat",
+      "course": "2n ESO",
+      "sense": "Numèric",
+      "topic": "Proporcionalitat directa",
+      "code_topic_id": "proporcionalitat",
+      "status": "validat",
+      "verified_on": "2026-11-16",
+      "pr": 44,
+      "merge_commit": "e37f403cd170654ad704888836445b7ec38309d0",
+      "validation": "PR #44: 16.500 mostres matemàtiques (66 tipus), quatre suites Playwright, 240 regressions Lot 2, regressions Lot 1 i fitxes Word/PDF superades amb Chrome 157; checker dels 7 scripts inline i GitHub Actions superats. Edge i GitHub Pages no verificats; alguns casos límit no són generats pels bancs (detallats al resum Lot 2).",
+      "families": [
+        {
+          "id": "reconeixement-proporcionalitat",
+          "name": "Reconeixement de proporcionalitat directa",
+          "level": 1,
+          "generators": [
+            "genProporcionalitat2ESO:1",
+            "genProporcionalitat2ESO:2"
+          ]
+        },
+        {
+          "id": "seleccio-estrategia-proporcional",
+          "name": "Selecció d’una estratègia de resolució proporcional",
+          "level": 1,
+          "generators": [
+            "genProporcionalitat2ESO:9"
+          ]
+        },
+        {
+          "id": "taules-i-escalatge",
+          "name": "Completar taules i escalar quantitats",
+          "level": 2,
+          "generators": [
+            "genProporcionalitat2ESO:3",
+            "genProporcionalitat2ESO:8",
+            "genProporcionalitat2ESO:16"
+          ]
+        },
+        {
+          "id": "factors-i-raons-equivalents",
+          "name": "Factors i raons equivalents",
+          "level": 1,
+          "generators": [
+            "genProporcionalitat2ESO:5",
+            "genProporcionalitat2ESO:7"
+          ]
+        },
+        {
+          "id": "taxes-i-constant",
+          "name": "Taxes unitàries i constant de proporcionalitat",
+          "level": 1,
+          "generators": [
+            "genProporcionalitat2ESO:4",
+            "genProporcionalitat2ESO:6",
+            "genProporcionalitat2ESO:13",
+            "genProporcionalitat2ESO:18"
+          ]
+        },
+        {
+          "id": "compra-amb-pressupost",
+          "name": "Compra amb pressupost limitat",
+          "level": 1,
+          "generators": [
+            "genProporcionalitat2ESO:14"
+          ]
+        },
+        {
+          "id": "comparacio-de-taxes",
+          "name": "Comparació de preus unitaris",
+          "level": 2,
+          "generators": [
+            "genProporcionalitat2ESO:10"
+          ]
+        },
+        {
+          "id": "repartiment-proporcional",
+          "name": "Repartiment proporcional",
+          "level": 2,
+          "generators": [
+            "genProporcionalitat2ESO:11",
+            "genProporcionalitat2ESO:12"
+          ]
+        },
+        {
+          "id": "diagnosi-proporcionalitat",
+          "name": "Detecció d’errors en relacions proporcionals",
+          "level": 2,
+          "generators": [
+            "genProporcionalitat2ESO:15",
+            "genProporcionalitat2ESO:17"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2eso/numeric/percentatges",
+      "course": "2n ESO",
+      "sense": "Numèric",
+      "topic": "Percentatges",
+      "code_topic_id": "percentatges",
+      "status": "validat",
+      "verified_on": "2026-11-16",
+      "pr": 44,
+      "merge_commit": "e37f403cd170654ad704888836445b7ec38309d0",
+      "validation": "PR #44: 16.500 mostres matemàtiques (66 tipus), quatre suites Playwright, 240 regressions Lot 2, regressions Lot 1 i fitxes Word/PDF superades amb Chrome 157; checker dels 7 scripts inline i GitHub Actions superats. Edge i GitHub Pages no verificats; alguns casos límit no són generats pels bancs (detallats al resum Lot 2).",
+      "families": [
+        {
+          "id": "significat-i-equivalencies",
+          "name": "Significat i representacions equivalents",
+          "level": 1,
+          "generators": [
+            "genPercentatges2ESO:1",
+            "genPercentatges2ESO:2"
+          ]
+        },
+        {
+          "id": "calcular-part-percentual",
+          "name": "Calcular una part percentual",
+          "level": 1,
+          "generators": [
+            "genPercentatges2ESO:3",
+            "genPercentatges2ESO:8",
+            "genPercentatges2ESO:16",
+            "genPercentatges2ESO:17"
+          ]
+        },
+        {
+          "id": "percentatge-duna-part",
+          "name": "Determinar quin percentatge representa una part",
+          "level": 1,
+          "generators": [
+            "genPercentatges2ESO:4"
+          ]
+        },
+        {
+          "id": "canvi-percentual-directe",
+          "name": "Aplicar un augment o una disminució percentual",
+          "level": 1,
+          "generators": [
+            "genPercentatges2ESO:6",
+            "genPercentatges2ESO:7"
+          ]
+        },
+        {
+          "id": "reconstruccio-total-inicial",
+          "name": "Reconstruir el total o el valor inicial",
+          "level": 2,
+          "generators": [
+            "genPercentatges2ESO:5",
+            "genPercentatges2ESO:9",
+            "genPercentatges2ESO:10"
+          ]
+        },
+        {
+          "id": "taxa-de-variacio",
+          "name": "Determinar una taxa de variació percentual",
+          "level": 2,
+          "generators": [
+            "genPercentatges2ESO:11",
+            "genPercentatges2ESO:12"
+          ]
+        },
+        {
+          "id": "canvis-successius-i-comparacio",
+          "name": "Analitzar canvis successius i comparar descomptes",
+          "level": 2,
+          "generators": [
+            "genPercentatges2ESO:13",
+            "genPercentatges2ESO:14",
+            "genPercentatges2ESO:15"
+          ]
+        },
+        {
+          "id": "percentatge-compost-en-context",
+          "name": "Composició de percentatges en un context",
+          "level": 2,
+          "generators": [
+            "genPercentatges2ESO:18"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2eso/numeric/recomptes",
+      "course": "2n ESO",
+      "sense": "Numèric",
+      "topic": "Recomptes sistemàtics",
+      "code_topic_id": "recomptes",
+      "status": "validat",
+      "verified_on": "2026-11-16",
+      "pr": 44,
+      "merge_commit": "e37f403cd170654ad704888836445b7ec38309d0",
+      "validation": "PR #44: 16.500 mostres matemàtiques (66 tipus), quatre suites Playwright, 240 regressions Lot 2, regressions Lot 1 i fitxes Word/PDF superades amb Chrome 157; checker dels 7 scripts inline i GitHub Actions superats. Edge i GitHub Pages no verificats; alguns casos límit no són generats pels bancs (detallats al resum Lot 2). Nota de conciliació: els noms registrats corresponen al catàleg de producció; l’informe final usa denominacions editorials alternatives per a aquestes famílies, mentre que els identificadors, nivells i tipus coincideixen.",
+      "families": [
+        {
+          "id": "principi-multiplicatiu",
+          "name": "Aplicar el principi multiplicatiu",
+          "level": 1,
+          "generators": [
+            "genRecomptes2ESO:1",
+            "genRecomptes2ESO:2",
+            "genRecomptes2ESO:3",
+            "genRecomptes2ESO:4"
+          ]
+        },
+        {
+          "id": "llista-sistematica",
+          "name": "Construir una llista sistemàtica",
+          "level": 2,
+          "generators": [
+            "genRecomptes2ESO:5"
+          ]
+        },
+        {
+          "id": "deteccio-duplicats",
+          "name": "Detectar duplicats en un recompte",
+          "level": 1,
+          "generators": [
+            "genRecomptes2ESO:6"
+          ]
+        },
+        {
+          "id": "parelles-sense-ordre",
+          "name": "Comptar parelles sense tenir en compte l’ordre",
+          "level": 2,
+          "generators": [
+            "genRecomptes2ESO:7",
+            "genRecomptes2ESO:13"
+          ]
+        },
+        {
+          "id": "codis-sense-repeticio",
+          "name": "Comptar codis sense repetició",
+          "level": 2,
+          "generators": [
+            "genRecomptes2ESO:8"
+          ]
+        },
+        {
+          "id": "codis-amb-repeticio",
+          "name": "Comptar codis amb repetició",
+          "level": 1,
+          "generators": [
+            "genRecomptes2ESO:9"
+          ]
+        },
+        {
+          "id": "recompte-amb-restriccions",
+          "name": "Comptar casos amb restriccions",
+          "level": 2,
+          "generators": [
+            "genRecomptes2ESO:10",
+            "genRecomptes2ESO:14"
+          ]
+        },
+        {
+          "id": "desfer-principi-multiplicatiu",
+          "name": "Reconstruir una quantitat de possibilitats",
+          "level": 1,
+          "generators": [
+            "genRecomptes2ESO:11"
+          ]
+        },
+        {
+          "id": "representacio-arbre",
+          "name": "Representar possibilitats amb un arbre",
+          "level": 1,
+          "generators": [
+            "genRecomptes2ESO:12"
+          ]
+        },
+        {
+          "id": "errors-de-recompte",
+          "name": "Detectar errors de recompte",
+          "level": 1,
+          "generators": [
+            "genRecomptes2ESO:15"
+          ]
+        }
+      ]
     }
   ]
 }

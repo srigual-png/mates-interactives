@@ -30,7 +30,7 @@ Els identificadors locals romanen específics del tema. En comptar procediments 
 | Completar una raó equivalent a partir d’un terme | Fraccions F10 — Escalar una raó a partir d’un terme | Proporcionalitat — `factors-i-raons-equivalents` | Conservar la raó aplicant el mateix factor als termes. |
 | Repartir un total segons una raó | Fraccions F11 — Repartir proporcionalment un total | Proporcionalitat — `repartiment-proporcional` | Sumar parts de la raó, calcular el valor unitari i repartir. |
 
-Per tant, hi ha **0Nombres racionalsFraccions amb sentitOperacions amb nombres racionalsPotènciesAproximacions i errorsProporcionalitat directaPercentatgesRecomptes sistemàtics famílies locals** i **NaN procediments/famílies únics** després de consolidar aquestes cinc coincidències. Les distribucions N1/N2/N3 de la taula són les classificacions locals vigents; no se’n calcula una distribució única després de deduplicar, perquè els nivells locals difereixen en alguns procediments compartits (per exemple, una aplicació contextual simple pot ser N1 mentre que la variant de repartiment de fraccions és N3).
+Per tant, hi ha **93 famílies locals** i **88 procediments/famílies únics** després de consolidar aquestes cinc coincidències. Les distribucions N1/N2/N3 de la taula són les classificacions locals vigents; no se’n calcula una distribució única després de deduplicar, perquè els nivells locals difereixen en alguns procediments compartits (per exemple, una aplicació contextual simple pot ser N1 mentre que la variant de repartiment de fraccions és N3).
 
 ## Informes i proves
 
