@@ -1,0 +1,102 @@
+name: Codex · auditoria pedagògica N1 N2 N3
+
+on:
+  workflow_dispatch:
+    inputs:
+      topic_id:
+        description: "Tema per auditar (p. ex. 2eso/mesura/longituds)"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: codex-auditoria-\u0024{{ github.event.inputs.topic_id }}
+  cancel-in-progress: false
+
+jobs:
+  auditar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    permissions:
+      contents: read
+    outputs:
+      slug: \u0024{{ steps.prepare.outputs.slug }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - name: Validar tema i preparar encàrrec
+        id: prepare
+        env:
+          TOPIC_ID: \u0024{{ inputs.topic_id }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os, re
+          from pathlib import Path
+          t = os.environ['TOPIC_ID']
+          if not re.fullmatch(r'[a-z0-9][a-z0-9._/-]{2,100}',t) or '..' in t or '//' in t or t.endswith('/'):
+              raise SystemExit('topic_id invàlid')
+          slug=t.replace('/','-').replace('.','-')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:
+              f.write('slug='+slug+'\n')
+          p=Path('.github/codex/prompts/auditoria-nivells.md').read_text()
+          Path('codex-audit-prompt.md').write_text(
+              'TEMA SOL·LICITAT: '+t+'\n\nBusca aquest tema al codi real. Si no existeix, informa-ho explícitament i no inventis una auditoria.\n\n'+p)
+          PY
+      - name: Executar Codex amb permisos de només lectura
+        uses: openai/codex-action@v1
+        with:
+          openai-api-key: \u0024{{ secrets.OPENAI_API_KEY }}
+          prompt-file: codex-audit-prompt.md
+          output-file: codex-audit-report.md
+          sandbox: read-only
+          safety-strategy: drop-sudo
+      - name: Comprovar que hi ha informe
+        run: |
+          test -s codex-audit-report.md
+          grep -qi 'provisional' codex-audit-report.md
+      - uses: actions/upload-artifact@v4
+        with:
+          name: informe-auditoria-\u0024{{ steps.prepare.outputs.slug }}
+          path: codex-audit-report.md
+          if-no-files-found: error
+
+  obrir_pr_provisional:
+    needs: auditar
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/download-artifact@v4
+        with:
+          name: informe-auditoria-\u0024{{ needs.auditar.outputs.slug }}
+          path: artefacte
+      - name: Crear PR amb informe provisional (sense tocar exercicis)
+        env:
+          GH_TOKEN: \u0024{{ github.token }}
+          SLUG: \u0024{{ needs.auditar.outputs.slug }}
+          TOPIC_ID: \u0024{{ inputs.topic_id }}
+          RUN_ID: \u0024{{ github.run_id }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s artefacte/codex-audit-report.md
+          branch="codex/auditoria-${SLUG}-${RUN_ID}"
+          target="docs/auditoria/propostes/${SLUG}-${RUN_ID}.md"
+          mkdir -p docs/auditoria/propostes
+          cp artefacte/codex-audit-report.md "$target"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add "$target"
+          git commit -m "docs: proposta provisional d'auditoria ${SLUG}"
+          git push origin "$branch"
+          gh pr create --draft --base main --head "$branch" --title "Auditoria provisional Codex: ${TOPIC_ID}" --body "Informe de només lectura generat per Codex amb GitHub Actions (execució #${RUN_ID}). **Pendent de revisió pedagògica humana**. No modifica exercicis, nivells ni el registre de famílies validades. Per aplicar canvis cal una PR funcional separada."
