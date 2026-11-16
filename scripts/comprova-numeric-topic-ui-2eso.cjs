@@ -1,11 +1,11 @@
 const assert=require('node:assert/strict');
 const path=require('node:path');
-const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('playwright');
 
 const THEORY={aproximacions:'aproximacions-errors.html',proporcionalitat:'proporcionalitat-directa.html',percentatges:'percentatges.html',recomptes:'recomptes-sistematics.html'};
 async function run(topicId){
  const root=process.cwd();
- const browser=await chromium.launch({executablePath:process.env.MI_BROWSER_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
+ const browser=await chromium.launch({...(process.env.MI_BROWSER_PATH?{executablePath:process.env.MI_BROWSER_PATH}:{}),headless:true});
  try{
   const page=await browser.newPage({viewport:{width:1440,height:900}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.addInitScript(()=>{window.__miOpenedTheory=[];window.open=(url,name)=>{window.__miOpenedTheory.push({url:String(url),name});return undefined;};});
