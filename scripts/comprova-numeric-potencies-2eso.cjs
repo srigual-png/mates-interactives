@@ -1,8 +1,8 @@
 const assert=require('node:assert/strict');
 const path=require('node:path');
-const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('playwright');
 (async()=>{
- const browser=await chromium.launch({executablePath:process.env.MI_BROWSER_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
+ const browser=await chromium.launch({...(process.env.MI_BROWSER_PATH?{executablePath:process.env.MI_BROWSER_PATH}:{}),headless:true});
  try{
   const page=await browser.newPage({viewport:{width:1440,height:900}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   const url='file:///'+path.resolve('2eso/sentit-numeric.html').replaceAll(String.fromCharCode(92),'/')+'?topic=potencies';
