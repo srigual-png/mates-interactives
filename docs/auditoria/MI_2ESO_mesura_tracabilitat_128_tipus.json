@@ -1,0 +1,1011 @@
+{
+  "schema_version": 1,
+  "status": "provisional",
+  "scope": "2eso/mesura",
+  "source": "PR #49: seven per-topic static audit reports; candidate labels are local, not validated global family IDs",
+  "limits": [
+    "128 generator types do not imply 128 families",
+    "cross_topic_links indicate potential shared mathematical procedures and require human review",
+    "No UI or external curricular validation",
+    "type variants are recorded separately below and do not inflate type count"
+  ],
+  "counts": {
+    "unitats": 18,
+    "escales": 18,
+    "pitagores": 16,
+    "perimetres": 18,
+    "superficies": 20,
+    "estimacio": 18,
+    "problemes": 20
+  },
+  "candidate_group_warnings": {
+    "PM13": "Grup de treball mixt: el tipus 16 es vincula a EP06; el 17 a EP01",
+    "PM14": "Agrupació residual no genuïna: el 18 es vincula a U02; el 19 és precipitació; el 20 és inversió cilíndrica"
+  },
+  "variants": [
+    {
+      "key": "unitats:6",
+      "case": "directa",
+      "proposed_level": 1,
+      "notes": "dm³↔L, cm³↔mL; PR #51 variant classification"
+    },
+    {
+      "key": "unitats:6",
+      "case": "encadenada",
+      "proposed_level": 2,
+      "notes": "m³→L, L→cm³, L→m³; PR #51"
+    },
+    {
+      "key": "pitagores:15",
+      "case": "diagonal",
+      "proposed_level": 2,
+      "notes": "Existing variant in reviewed classifer"
+    },
+    {
+      "key": "pitagores:15",
+      "case": "catet",
+      "proposed_level": 1,
+      "notes": "Base level"
+    },
+    {
+      "key": "superficies:17",
+      "case": "sameBase",
+      "proposed_level": 1,
+      "notes": "Existing variant"
+    },
+    {
+      "key": "superficies:17",
+      "case": "other",
+      "proposed_level": 2,
+      "notes": "Base level"
+    }
+  ],
+  "types": [
+    {
+      "topic": "unitats",
+      "type": 1,
+      "source_candidate": "U01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 4,
+      "source_candidate": "U01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 5,
+      "source_candidate": "U01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 2,
+      "source_candidate": "U02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 11,
+      "source_candidate": "U02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 3,
+      "source_candidate": "U03",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 7,
+      "source_candidate": "U04",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 8,
+      "source_candidate": "U05",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 14,
+      "source_candidate": "U05",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 12,
+      "source_candidate": "U06",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 16,
+      "source_candidate": "U07",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 6,
+      "source_candidate": "U08",
+      "cross_topic_links": [
+        "unitats:12",
+        "unitats:18"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 18,
+      "source_candidate": "U08",
+      "cross_topic_links": [
+        "unitats:6"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 9,
+      "source_candidate": "U09",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 10,
+      "source_candidate": "U10",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 15,
+      "source_candidate": "U10",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 13,
+      "source_candidate": "U11",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "unitats",
+      "type": 17,
+      "source_candidate": "U11",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 1,
+      "source_candidate": "E01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 2,
+      "source_candidate": "E01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 3,
+      "source_candidate": "E02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 5,
+      "source_candidate": "E02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 4,
+      "source_candidate": "E03",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 12,
+      "source_candidate": "E03",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 15,
+      "source_candidate": "E03",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 13,
+      "source_candidate": "E04",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 6,
+      "source_candidate": "E05",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 7,
+      "source_candidate": "E05",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 8,
+      "source_candidate": "E06",
+      "cross_topic_links": [
+        "problemes:10"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 9,
+      "source_candidate": "E06",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 10,
+      "source_candidate": "E06",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 11,
+      "source_candidate": "E06",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 18,
+      "source_candidate": "E06",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 16,
+      "source_candidate": "E07",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 17,
+      "source_candidate": "E08",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "escales",
+      "type": 14,
+      "source_candidate": "E09",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 1,
+      "source_candidate": "P01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 2,
+      "source_candidate": "P02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 4,
+      "source_candidate": "P02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 5,
+      "source_candidate": "P02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 6,
+      "source_candidate": "P02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 7,
+      "source_candidate": "P02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 8,
+      "source_candidate": "P02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 13,
+      "source_candidate": "P02",
+      "cross_topic_links": [
+        "problemes:6"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 15,
+      "source_candidate": "P02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 3,
+      "source_candidate": "P03",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 9,
+      "source_candidate": "P04",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 10,
+      "source_candidate": "P05",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 11,
+      "source_candidate": "P06",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 12,
+      "source_candidate": "P07",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 14,
+      "source_candidate": "P08",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "pitagores",
+      "type": 16,
+      "source_candidate": "P09",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 1,
+      "source_candidate": "PA01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 2,
+      "source_candidate": "PA01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 3,
+      "source_candidate": "PA01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 4,
+      "source_candidate": "PA02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 5,
+      "source_candidate": "PA03",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 6,
+      "source_candidate": "PA04",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 7,
+      "source_candidate": "PA04",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 8,
+      "source_candidate": "PA05",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 9,
+      "source_candidate": "PA06",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 11,
+      "source_candidate": "PA06",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 16,
+      "source_candidate": "PA06",
+      "cross_topic_links": [
+        "problemes:1"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 10,
+      "source_candidate": "PA07",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 12,
+      "source_candidate": "PA08",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 13,
+      "source_candidate": "PA08",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 14,
+      "source_candidate": "PA09",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 15,
+      "source_candidate": "PA10",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 17,
+      "source_candidate": "PA11",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "perimetres",
+      "type": 18,
+      "source_candidate": "PA12",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 1,
+      "source_candidate": "SV01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 3,
+      "source_candidate": "SV01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 5,
+      "source_candidate": "SV01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 4,
+      "source_candidate": "SV02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 7,
+      "source_candidate": "SV03",
+      "cross_topic_links": [
+        "problemes:4"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 2,
+      "source_candidate": "SV04",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 6,
+      "source_candidate": "SV04",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 16,
+      "source_candidate": "SV04",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 20,
+      "source_candidate": "SV04",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 8,
+      "source_candidate": "SV05",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 19,
+      "source_candidate": "SV05",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 9,
+      "source_candidate": "SV06",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 10,
+      "source_candidate": "SV07",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 11,
+      "source_candidate": "SV07",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 12,
+      "source_candidate": "SV08",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 13,
+      "source_candidate": "SV09",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 14,
+      "source_candidate": "SV09",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 15,
+      "source_candidate": "SV10",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 17,
+      "source_candidate": "SV11",
+      "cross_topic_links": [
+        "superficies:17:sameBase"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "superficies",
+      "type": 18,
+      "source_candidate": "SV12",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 1,
+      "source_candidate": "EP01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 2,
+      "source_candidate": "EP01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 3,
+      "source_candidate": "EP01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 4,
+      "source_candidate": "EP02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 5,
+      "source_candidate": "EP03",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 16,
+      "source_candidate": "EP03",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 6,
+      "source_candidate": "EP04",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 17,
+      "source_candidate": "EP04",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 7,
+      "source_candidate": "EP05",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 8,
+      "source_candidate": "EP05",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 13,
+      "source_candidate": "EP05",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 9,
+      "source_candidate": "EP06",
+      "cross_topic_links": [
+        "problemes:16"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 10,
+      "source_candidate": "EP07",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 12,
+      "source_candidate": "EP07",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 11,
+      "source_candidate": "EP08",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 14,
+      "source_candidate": "EP08",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 15,
+      "source_candidate": "EP09",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "estimacio",
+      "type": 18,
+      "source_candidate": "EP10",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 1,
+      "source_candidate": "PM01",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 2,
+      "source_candidate": "PM02",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 3,
+      "source_candidate": "PM03",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 4,
+      "source_candidate": "PM04",
+      "cross_topic_links": [
+        "superficies:7",
+        "unitats:12"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 5,
+      "source_candidate": "PM05",
+      "cross_topic_links": [
+        "superficies:8"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 6,
+      "source_candidate": "PM06",
+      "cross_topic_links": [
+        "pitagores:13"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 7,
+      "source_candidate": "PM06",
+      "cross_topic_links": [
+        "pitagores:6"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 8,
+      "source_candidate": "PM07",
+      "cross_topic_links": [
+        "escales:2"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 9,
+      "source_candidate": "PM07",
+      "cross_topic_links": [
+        "escales:4"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 10,
+      "source_candidate": "PM08",
+      "cross_topic_links": [
+        "escales:8",
+        "escales:9"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 11,
+      "source_candidate": "PM09",
+      "cross_topic_links": [
+        "perimetres:9",
+        "perimetres:11"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 12,
+      "source_candidate": "PM10",
+      "cross_topic_links": [
+        "perimetres:17"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 13,
+      "source_candidate": "PM11",
+      "cross_topic_links": [
+        "superficies:2",
+        "superficies:16"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 14,
+      "source_candidate": "PM12",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 15,
+      "source_candidate": "PM12",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 16,
+      "source_candidate": "PM13",
+      "cross_topic_links": [
+        "estimacio:9"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 17,
+      "source_candidate": "PM13",
+      "cross_topic_links": [
+        "estimacio:1"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 18,
+      "source_candidate": "PM14",
+      "cross_topic_links": [
+        "unitats:2",
+        "unitats:11"
+      ],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 19,
+      "source_candidate": "PM14",
+      "cross_topic_links": [],
+      "status": "provisional"
+    },
+    {
+      "topic": "problemes",
+      "type": 20,
+      "source_candidate": "PM14",
+      "cross_topic_links": [
+        "superficies:12"
+      ],
+      "status": "provisional"
+    }
+  ]
+}
