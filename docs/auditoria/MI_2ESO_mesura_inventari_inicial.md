@@ -2,6 +2,8 @@
 
 **Estat: PROVISIONAL — no és cap classificació pedagògica validada.**
 
+**Traçabilitat 128/128 tipus:** registre estructurat [JSON](MI_2ESO_mesura_tracabilitat_128_tipus.json) i [guia d'interpretació](MI_2ESO_mesura_tracabilitat_128_tipus.md), amb assignació a agrupacions candidates, vincles entre temes i 6 variants documentades. Prova automàtica d'integritat disponible. **Això no valida encara famílies matemàtiques genuïnes.**
+
 **Revisió transversal posterior:** comprovades coincidències de procediment entre els 7 temes, amb matriu de fusions, casos realment compostos i incidències prioritzades. Vegeu [Revisió transversal del Sentit de la mesura](MI_2ESO_mesura_revisio_transversal.md). **No existeix encara un recompte final de famílies genuïnes validades.**
 
 **Setena revisió — inventari complet:** examinats els 20 tipus de **Problemes de mesura**. N1=4, N2=16, N3=0; inclou duplicats de procediments amb els sis temes anteriors i incidències de varietat demostrades als tipus 1, 10 i 16. [Auditoria provisional de Problemes de mesura](MI_2ESO_mesura_problemes_auditoria_provisional.md). Això completa la inspecció estàtica dels **7 temes / 128 tipus**; les famílies i els nivells pedagògics continuen pendents de validació final.
@@ -22,7 +24,7 @@
 
 | Tema ordinari | ID al codi | Funció | Línies (base inspeccionada) | Tipus numèrics | Famílies genuïnes | N1/N2/N3 |
 |---|---|---|---:|---:|---|---|
-| Unitats i conversions | `unitats` | `genUnitats2ESO` | 893–1045 | 18 | Pendent d'auditar | Pendent |
+| Unitats i conversions | `unitats` | `genUnitats2ESO` | 893–1045 | 18 | 11 candidates, provisional | Auditoria provisional |
 | Escales i mesures indirectes | `escales` | `genEscales2ESO` | 1046–1191 | 18 | Fins a 9 candidates, provisional | Auditoria provisional |
 | Teorema de Pitàgores | `pitagores` | `genPitagores2ESO` | 1192–1306 | 16 | Fins a 9 candidates, provisional | Auditoria provisional |
 | Perímetres i àrees | `perimetres` | `genPerimetresArees2ESO` | 1307–1425 | 18 | Fins a 12 candidates, provisional | Auditoria provisional |
