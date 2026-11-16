@@ -24,3 +24,19 @@
 ## Nombres naturals
 
 La PR #6, fusionada com a `7794721ec05aa51ce1ec42e0c0079b04f2fc2e82`, queda registrada amb **11 famílies: 4 N1, 5 N2 i 2 N3**. Els patrons numèrics són una variant vinculada al sentit algebraic, sense sumar al recompte de Naturals. La prova local Edge continua documentada com a pendent, sense esborrar les altres validacions.
+
+## Auditories provisionals de dificultat N1/N2/N3 (PR #47)
+
+Per a nous temes, utilitzeu [PLANTILLA_AUDITORIA_NIVELLS.md](PLANTILLA_AUDITORIA_NIVELLS.md) per documentar l'inventari de tipus i variants, les famílies genuïnes, el nivell actual versus el proposat, els exemples resolts i les discrepàncies pedagògiques. El model estructurat és [plantilla-proposta-nivells.json](plantilla-proposta-nivells.json), **exclusivament sintètic**: no és un tema real ni una decisió validada.
+
+La comprovació estructural automatitzada és:
+
+```sh
+node scripts/comprova-proposta-auditoria.cjs --self-test
+node scripts/comprova-proposta-auditoria.cjs docs/auditoria/plantilla-proposta-nivells.json
+node scripts/comprova-proposta-auditoria.cjs docs/auditoria/propostes/nom-del-tema.json
+```
+
+GitHub Actions revisa propostes a `docs/auditoria/propostes/*.json`. La comprovació exigeix un inventari de tipus cobert una sola vegada, motius de classificació i exemples resolts; **no avalua la correcció pedagògica del nivell** ni comprova automàticament la cobertura real de generadors dins l'HTML. L'auditoria la fa Codex sobre el codi real seguint el protocol, després es revisa humanament, i una PR funcional separada aplica els canvis. El registre definitiu `families-validades.json` **només** s'actualitza després de la fusió de la PR d'implementació validada.
+
+Aquesta eina **no executa Codex automàticament** i no crea una nova auditoria sense un encàrrec explícit. Els objectius de 15 famílies o de 3 N3 no són quotes obligatòries.

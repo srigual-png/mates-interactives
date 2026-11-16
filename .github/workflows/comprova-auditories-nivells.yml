@@ -1,0 +1,38 @@
+name: Validació estructural d'auditories N1 N2 N3
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/propostes/**'
+      - 'docs/auditoria/plantilla-proposta-nivells.json'
+      - 'docs/auditoria/PLANTILLA_AUDITORIA_NIVELLS.md'
+      - 'scripts/comprova-proposta-auditoria.cjs'
+      - '.github/workflows/comprova-auditories-nivells.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/auditoria/propostes/**'
+      - 'scripts/comprova-proposta-auditoria.cjs'
+      - '.github/workflows/comprova-auditories-nivells.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-auditories:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprovar sintaxi i casos de prova
+        run: |
+          node --check scripts/comprova-proposta-auditoria.cjs
+          node scripts/comprova-proposta-auditoria.cjs --self-test
+      - name: Comprovar l'exemple i totes les propostes existents
+        shell: bash
+        run: |
+          mapfile -d '' files < <(find docs/auditoria/propostes -maxdepth 1 -type f -name '*.json' -print0 2>/dev/null || true)
+          node scripts/comprova-proposta-auditoria.cjs docs/auditoria/plantilla-proposta-nivells.json "${files[@]}"
