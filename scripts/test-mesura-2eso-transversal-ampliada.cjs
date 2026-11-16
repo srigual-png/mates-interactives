@@ -92,7 +92,7 @@ for(iteration=0;iteration<8;iteration++){
   const pA=Math.abs(pNums[1]-pNums[0])/pNums[0];
   const pB=Math.abs(pNums[2]-pNums[0])/pNums[0];
   assert.equal(er.correct,eA<eB?'La mesura A':'La mesura B');
-  assert.equal(pr.correct,pA<pB?'Mesura A':'Mesura B');
+  assert.equal(pr.correct,pA<pB?'Mesura A':'Mesura B',JSON.stringify({iteration,question:pr.question,pNums,pA,pB}));
   for(const [q,label] of [[er,'estimacio:9'],[pr,'problemes:16']]){
     assert(q.options.includes(q.correct),label+': correcta absent');
     assert.equal(new Set(q.options).size,4,label+': quatre respostes úniques');
