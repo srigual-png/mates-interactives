@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict');
 const path=require('node:path');
-const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {chromium}=require('playwright');
 
 const CASES={aproximacions:15,proporcionalitat:18,percentatges:18,recomptes:15};
 function number(s){s=String(s).replace(/\s/g,'');if(s.includes(','))return Number(s.replace(/\./g,'').replace(',','.'));if(/^\d{1,3}(?:\.\d{3})+$/.test(s))return Number(s.replace(/\./g,''));return Number(s);}
@@ -85,7 +85,7 @@ function fmtIndependent(n){return Number.isInteger(n)?String(n):String(n).replac
 
 async function run(topicId){
  assert(CASES[topicId],`tema desconegut ${topicId}`);
- const browser=await chromium.launch({executablePath:process.env.MI_BROWSER_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true});
+ const browser=await chromium.launch({...(process.env.MI_BROWSER_PATH?{executablePath:process.env.MI_BROWSER_PATH}:{}),headless:true});
  try{
   const page=await browser.newPage(),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.addInitScript(()=>{let seed=0x2e50;Math.random=()=>{seed=(seed*1664525+1013904223)>>>0;return seed/4294967296;};});
