@@ -1,0 +1,40 @@
+name: Check inline JavaScript
+
+on:
+  pull_request:
+    paths:
+      - '*.html'
+      - '**/*.html'
+      - 'scripts/comprova-inline-js-html.cjs'
+      - '.github/workflows/comprova-inline-js-html.yml'
+  push:
+    branches: [main]
+    paths:
+      - '*.html'
+      - '**/*.html'
+      - 'scripts/comprova-inline-js-html.cjs'
+      - '.github/workflows/comprova-inline-js-html.yml'
+
+jobs:
+  inline-javascript:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check changed HTML inline scripts
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+        shell: bash
+        run: |
+          if [ -n "$BASE_SHA" ] && git cat-file -e "$BASE_SHA^{commit}" 2>/dev/null; then
+            mapfile -t html_files < <(git diff --name-only "$BASE_SHA" "$GITHUB_SHA" -- '*.html')
+          else
+            html_files=()
+          fi
+          if [ "${#html_files[@]}" -eq 0 ]; then
+            node scripts/comprova-inline-js-html.cjs 2eso/sentit-numeric.html
+          else
+            node scripts/comprova-inline-js-html.cjs "${html_files[@]}"
+          fi

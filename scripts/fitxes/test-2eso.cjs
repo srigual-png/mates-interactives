@@ -47,7 +47,7 @@ const root=process.cwd(),server=http.createServer((req,res)=>{const f=path.join(
    let potenciesN3Blocked=false;try{E.allocate({...base,count:10,percentages:[0,0,100]},C.topics);}catch(e){potenciesN3Blocked=/representació equilibrada|dificultat alta/i.test(e.message);}check(potenciesN3Blocked,'N3 exclusiu amb Potències bloquejat amb diagnòstic');
    // La mateixa quota N3 sí que es pot generar quan només se seleccionen
    // temes que ofereixen aquest nivell, sempre usant el catàleg complet.
-   const n3Topics=C.topics.filter(t=>t.id!=='potencies');
+   const n3Topics=C.topics.filter(t=>t.levels.includes(3));
    for(const n of [10,15,25,30]){
     const percentages=[0,0,100],config={...base,count:n,topics:n3Topics.map(t=>t.id),percentages};
     const sheet=await E.generate(config,C.topics),q=sheet.questions;
@@ -61,12 +61,12 @@ const root=process.cwd(),server=http.createServer((req,res)=>{const f=path.join(
    }
    for(const t of C.topics)for(let level=1;level<=3;level++){
     const config={...base,count:5,topics:[t.id],percentages:[1,2,3].map(l=>l===level?100:0)};
-    if(t.id==='potencies'&&level===3){let unavailable=false;try{E.allocate(config,C.topics);}catch(e){unavailable=/dificultat alta|representació equilibrada/i.test(e.message);}check(unavailable,'potències no ofereix fitxes N3');continue;}
+    if(!t.levels.includes(level)){let unavailable=false;try{E.allocate(config,C.topics);}catch(e){unavailable=/dificultat|representació equilibrada|varietat/i.test(e.message);}check(unavailable,`${t.id} no ofereix fitxes N${level}`);continue;}
     // També força el catàleg seleccionat. Una llista de famílies sense
     // requiredContents no és un catàleg del pilot amb cobertura obligatòria.
     await E.generate(config,[t]);
    }
-  let blocked=false;try{E.allocate({...base,count:15,topics:['recomptes'],percentages:[0,0,100]},C.topics);}catch(e){blocked=e.message.includes('11');}check(blocked,'capacitat finita explicada abans de generar');
+  let blocked=false;try{E.allocate({...base,count:15,topics:['recomptes'],percentages:[0,0,100]},C.topics);}catch(e){blocked=/N3|dificultat|representació equilibrada|varietat/i.test(e.message);}check(blocked,'nivell N3 no disponible amb diagnòstic previ');
   const a=await E.generate({...base,order:'mixed'},C.topics),b=await E.generate({...base,order:'mixed'},C.topics,a.questions.map(q=>q.key));check(a.questions[0].level===1&&b.questions[0].level===1&&a.version!==b.version,'barrejat i nova versió');check(!b.questions.some(q=>a.questions.some(x=>x.key===q.key)),'versió sense repetir');
   window.worksheetPaperSamples=all;return {types:all.length,topics:C.topics.length};
  });console.log('Catàleg i motor 2n:',data);
