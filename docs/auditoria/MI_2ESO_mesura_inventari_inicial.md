@@ -2,6 +2,8 @@
 
 **Estat: PROVISIONAL — no és cap classificació pedagògica validada.**
 
+**Revisió transversal posterior:** comprovades coincidències de procediment entre els 7 temes, amb matriu de fusions, casos realment compostos i incidències prioritzades. Vegeu [Revisió transversal del Sentit de la mesura](MI_2ESO_mesura_revisio_transversal.md). **No existeix encara un recompte final de famílies genuïnes validades.**
+
 **Setena revisió — inventari complet:** examinats els 20 tipus de **Problemes de mesura**. N1=4, N2=16, N3=0; inclou duplicats de procediments amb els sis temes anteriors i incidències de varietat demostrades als tipus 1, 10 i 16. [Auditoria provisional de Problemes de mesura](MI_2ESO_mesura_problemes_auditoria_provisional.md). Això completa la inspecció estàtica dels **7 temes / 128 tipus**; les famílies i els nivells pedagògics continuen pendents de validació final.
 
 **Sisena revisió:** revisats els 18 tipus d'**Estimació, precisió i error**: 13 tipus N1, 5 N2, 0 N3; fins a 10 famílies candidates. Incidències detectades: als tipus 9 i 17 sempre és correcta la primera mesura, precisió de la mitjana (15) i context d'unitats (11/14). [Auditoria provisional d'Estimació i error](MI_2ESO_mesura_estimacio_auditoria_provisional.md).
