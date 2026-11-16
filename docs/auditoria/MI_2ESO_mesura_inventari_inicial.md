@@ -1,6 +1,8 @@
 # 2n ESO · Sentit de la mesura — auditoria Fase A, inventari inicial
 
 **Estat: PROVISIONAL — no és cap classificació pedagògica validada.**
+
+**Actualització:** també s'ha revisat de manera estàtica el tema «Escales i mesures indirectes», amb 18 tipus i **fins a 9 famílies candidates**. Consulteu [l'auditoria provisional d'Escales](MI_2ESO_mesura_escales_auditoria_provisional.md). Cap recompte de famílies ni cap nivell proposat no és definitiu.
 **Font inspeccionada:** `2eso/sentit-mesura.html` de `main` posterior a la fusió de la PR #47.
 **Àmbit:** set temes ordinaris de 2n ESO. Les quatre ampliacions amb `course:'3r'` queden excloses de les quotes i dels recomptes ordinaris.
 
@@ -9,7 +11,7 @@
 | Tema ordinari | ID al codi | Funció | Línies (base inspeccionada) | Tipus numèrics | Famílies genuïnes | N1/N2/N3 |
 |---|---|---|---:|---:|---|---|
 | Unitats i conversions | `unitats` | `genUnitats2ESO` | 893–1045 | 18 | Pendent d'auditar | Pendent |
-| Escales i mesures indirectes | `escales` | `genEscales2ESO` | 1046–1191 | 18 | Pendent | Pendent |
+| Escales i mesures indirectes | `escales` | `genEscales2ESO` | 1046–1191 | 18 | Fins a 9 candidates, provisional | Auditoria provisional |
 | Teorema de Pitàgores | `pitagores` | `genPitagores2ESO` | 1192–1306 | 16 | Pendent | Pendent |
 | Perímetres i àrees | `perimetres` | `genPerimetresArees2ESO` | 1307–1425 | 18 | Pendent | Pendent |
 | Superfícies i volums | `superficies` | `genSuperficiesVolums2ESO` | 1426–1579 | 20 | Pendent | Pendent |
