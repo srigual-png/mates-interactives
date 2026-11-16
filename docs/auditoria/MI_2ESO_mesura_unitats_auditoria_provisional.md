@@ -2,6 +2,9 @@
 
 **ESTAT: PROVISIONAL — PENDENT DE REVISIÓ PEDAGÒGICA. NO IMPLEMENTADA.**
 
+> **Actualització posterior:** la revisió exhaustiva dels tipus 6, 13, 17 i 18 ha detectat que U06/U07 no justifiquen dues famílies independents. El recompte queda rebaixat a **10 famílies candidates com a màxim**, encara provisionals, i cal revisar possibles solapaments addicionals. Vegeu [l'addenda de variants](MI_2ESO_mesura_unitats_variants_addenda.md), que preval sobre el recompte inicial de 11 d'aquest document.
+
+
 **Fitxers inspeccionats:** `2eso/sentit-mesura.html` (línies 893–1045, registre de temes 2319–2330) i `assets/js/dificultat-mi.js` (línies 9, 11, 390–392, 610–620, 657, 686–746, 777–795). **Origen:** `main` després de la PR #47; SHA de referència `086d7b725db59ebb99266352e84ef8d9470a7d17`. Revisió estàtica del codi; no s'han executat proves de navegador ni mostreig aleatori.
 
 ## 1. Quin nivell assigna realment la web?
