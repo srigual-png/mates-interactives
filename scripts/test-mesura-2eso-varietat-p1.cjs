@@ -82,8 +82,9 @@ for (let i = 0; i < 24; i++) {
     assert(q.options.includes(q.correct), 'Problemes ' + type + ': falta resposta correcta');
     assert.equal(new Set(q.options).size, 4, 'Problemes ' + type + ': opcions repetides');
     if (type === 1) {
-      const n = getNumbers(q);
-      assert.equal(n.length, 7, 'Pintura: set magnituds');
+      const match = q.question.match(/paret de <b>([\d,.]+) × ([\d,.]+) m<\/b>.*porta de <b>([\d,.]+) × ([\d,.]+) m<\/b>.*finestra de <b>([\d,.]+) × ([\d,.]+) m<\/b>.*cobreix <b>([\d,.]+) m²<\/b>/);
+      assert(match, 'Pintura: enunciat esperat amb set magnituds');
+      const n = match.slice(1).map(x => Number(x.replace(/\./g, '').replace(',', '.')));
       const expected = Math.ceil((n[0] * n[1] - n[2] * n[3] - n[4] * n[5]) / n[6]);
       assert.equal(parseAnswer(q.correct), expected);
       semantic.pots.add(expected);
