@@ -20,18 +20,18 @@ for (const input of files) {
     continue;
   }
 
-  const tags = /<script\\b([^>]*)>([\\s\\S]*?)<\\/script\\s*>/gi;
+  const tags = /<script\b([^>]*)>([\s\S]*?)<\/script\s*>/gi;
   let match;
   let block = 0;
   let checked = 0;
   while ((match = tags.exec(html)) !== null) {
     const attrs = match[1];
-    if (/(^|\\s)src\\s*=/i.test(attrs)) continue;
+    if (/(^|\s)src\s*=/i.test(attrs)) continue;
 
     block += 1;
     checked += 1;
-    const line = html.slice(0, match.index).split(/\\r\\n|\\r|\\n/).length;
-    const id = (attrs.match(/(?:^|\\s)id\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s>]+))/i) || []).slice(1).find(Boolean);
+    const line = html.slice(0, match.index).split(/\r\n|\r|\n/).length;
+    const id = (attrs.match(/(?:^|\s)id\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s>]+))/i) || []).slice(1).find(Boolean);
     const label = `${input}: inline script #${block}${id ? ` (id="${id}")` : ''}, starts at line ${line}`;
     try {
       new vm.Script(match[2], { filename: label });
