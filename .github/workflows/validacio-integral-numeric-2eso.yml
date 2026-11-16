@@ -51,9 +51,9 @@ jobs:
         run: |
           node scripts/exporta-inventari-fase-a.cjs --check
           if [ -n "$PR_BASE_SHA" ]; then
-            git diff --check "$PR_BASE_SHA" HEAD
+            git -c core.whitespace=cr-at-eol diff --check "$PR_BASE_SHA" HEAD
           else
-            git diff --check
+            git -c core.whitespace=cr-at-eol diff --check
           fi
 
       - name: Verificar els 66 tipus matemàtics del Lot 2
