@@ -329,11 +329,13 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-3-parelles-evidencia-real.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "pending",
-      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "paired_same_parameters": "no_exact_input_overlap_structural_math_verified",
+      "target_mathematical_oracles_for_this_pair": "structural_verified_no_exact_match",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
-      "family_approved": false
+      "family_approved": false,
+      "paired_script": "scripts/test-mesura-2eso-etiquetes5-superficie8-contrast.cjs",
+      "pedagogical_interpretation": "identical lateral cylinder area formula using diameter or radius, but original heights are disjoint and contextual labeling differs"
     },
     {
       "source": "superficies:15",
@@ -508,6 +510,19 @@
     "source_generated_cases": 800,
     "example_comparisons": 4,
     "run_id": 44110440651,
-    "run_status": "success"
+    "run_status": "success",
+    "additional": [
+      {
+        "source": "problemes:5",
+        "targets": [
+          "superficies:8",
+          "superficies:19"
+        ],
+        "run_id": 44111720506,
+        "status": "success",
+        "generated": 800,
+        "exact_parameter_matches": 0
+      }
+    ]
   }
 }
