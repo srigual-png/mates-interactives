@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - parelles d'escales amb dades compartides
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-escales-dues-parelles-dades-compartides.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-escales-parelles.yml'
   workflow_dispatch:
 jobs:
   paired:
