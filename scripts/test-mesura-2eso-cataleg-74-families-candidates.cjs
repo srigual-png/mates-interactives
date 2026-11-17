@@ -36,7 +36,7 @@ for(const group of groups){
  if(group.origin_cluster_ids.length===1)assert(group.members.every(m=>source.get(group.origin_cluster_ids[0]).includes(m)));
  else assert.deepEqual(group.origin_cluster_ids,["ME2-C030","ME2-C042"]);
 }
-assert.deepEqual(Object.keys(proposal.explicit_changes_from_source.splits).length,0); // splits is an array, no implicit functional edits
+assert(Array.isArray(proposal.explicit_changes_from_source.splits));
 assert.equal(proposal.explicit_changes_from_source.splits.length,3);
 assert.equal(proposal.explicit_changes_from_source.joined.length,1);
 for(const val of Object.values(proposal.permissions))assert.equal(val,false);
