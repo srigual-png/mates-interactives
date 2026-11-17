@@ -1,0 +1,18 @@
+name: Mesura 2n ESO - estimacio relativa aparellada 7 8 9
+on:
+  pull_request:
+    paths:
+      - 'scripts/test-mesura-2eso-estimacio7-8-9-parelles.cjs'
+      - '2eso/sentit-mesura.html'
+      - '.github/workflows/test-mesura-2eso-estimacio7-8-9-parelles.yml'
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Contrastar 1200 mostres dels tres generadors
+        run: node scripts/test-mesura-2eso-estimacio7-8-9-parelles.cjs
