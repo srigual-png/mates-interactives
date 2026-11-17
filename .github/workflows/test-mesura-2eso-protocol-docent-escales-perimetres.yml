@@ -1,11 +1,6 @@
 name: Auditoria protocol docent Escales Perimetres 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_protocol_docent_escales_perimetres.json'
-      - 'scripts/test-mesura-2eso-protocol-docent-escales-perimetres.cjs'
-      - '.github/workflows/test-mesura-2eso-protocol-docent-escales-perimetres.yml'
   workflow_dispatch:
 
 permissions:
