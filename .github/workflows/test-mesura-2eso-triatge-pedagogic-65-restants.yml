@@ -1,0 +1,20 @@
+name: Auditoria pedagògica 65 clústers restants Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_triatge_pedagogic_65_restants.json'
+      - 'scripts/test-mesura-2eso-triatge-pedagogic-65-restants.cjs'
+      - '.github/workflows/test-mesura-2eso-triatge-pedagogic-65-restants.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar els 65 grups restants contra el catàleg original
+        run: node scripts/test-mesura-2eso-triatge-pedagogic-65-restants.cjs
