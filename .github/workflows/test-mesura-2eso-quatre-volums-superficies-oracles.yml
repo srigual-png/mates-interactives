@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - quatre volums superficies oracles
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-quatre-volums-superficies-oracles.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-quatre-volums-superficies-oracles.yml'
   workflow_dispatch:
 jobs:
   oracle:
