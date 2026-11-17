@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - etiquetes i area lateral de cilindres
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-etiquetes5-superficie8-contrast.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-etiquetes5-superficie8.yml'
   workflow_dispatch:
 jobs:
   contrast:
