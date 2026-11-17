@@ -1,0 +1,303 @@
+{
+  "schema_version": 1,
+  "status": "evaluation_sheets_blank_unadministered",
+  "scope": "2eso/sentit-mesura/escales-perimetres",
+  "sources": [
+    "MI_2ESO_mesura_protocol_docent_escales_perimetres.json",
+    "MI_2ESO_mesura_guies_observacio_E2_P3.json",
+    "MI_2ESO_mesura_matriu_decisio_docent_3_candidates.json"
+  ],
+  "purpose": "Fitxes per registrar observacions d'exercicis; cap resultat fictici ni aprovació automàtica.",
+  "scoring_rules": {
+    "per_applicable_dimension": "0=no evidencia; 1=parcial/amb ajuda; 2=autonom i coherent, d'acord amb la rubrica base.",
+    "controls": "A E3 i P2 NO puntuar distinct_decision: són controls de procediments coneguts; una manca d'estratègia nova no és un error.",
+    "transfer": "La dimensió transfer es valora a nivell de parella/seqüència de tasques, no com a puntuació aïllada per cadascuna.",
+    "comparison_pairs": [
+      {
+        "topic": "escales",
+        "control": "E3",
+        "focus": "E2",
+        "transfer": "E4",
+        "rotation": "E1"
+      },
+      {
+        "topic": "perimetres",
+        "control": "P2",
+        "focus": "P1",
+        "transfer": "P3",
+        "second_case": "P4"
+      }
+    ],
+    "rule": "Mai convertir puntuacions, percentatges d'encert o quantitat de passos en aprovació de família o N3.",
+    "levels": "N2 només hipòtesi de pilot; N3 pendent de criteri docent i revisió curricular."
+  },
+  "sheets": [
+    {
+      "task_id": "E1",
+      "source_role": "candidate_rotation",
+      "observation_focus": "Compara els dos parells de costats reals i reconeix que girar 90° no altera el rectangle.",
+      "expected_evidence": "[4,3] i [3,4] m són equivalents amb rotació",
+      "likely_misconception": "Rebutjar equivalència perquè l'ordre de les dues dimensions és invers.",
+      "diagnostic_question": "Què passa si gires físicament el segon plànol?",
+      "mathematical_decision": "validates_rotation_invariance",
+      "applied_rubric_dimensions": [
+        "correct_math",
+        "distinct_decision",
+        "justification"
+      ],
+      "relation_to_family_decision": "secondary",
+      "blank_observation": {
+        "anonymous_session_code": null,
+        "administered_at": null,
+        "assessor_code": null,
+        "scores": {
+          "correct_math": null,
+          "distinct_decision": null,
+          "justification": null
+        },
+        "prompting_used": null,
+        "observed_reasoning": null,
+        "error_codes": [],
+        "feedback_notes": null,
+        "observed": null
+      }
+    },
+    {
+      "task_id": "E2",
+      "source_role": "candidate_equal_area_trap",
+      "observation_focus": "Rebutja congruència encara que les àrees siguin iguals, perquè els dos parells de costats no coincideixen.",
+      "expected_evidence": "4×3 m i 6×2 m: àrea 12 m² però geometries diferents",
+      "likely_misconception": "Confondre 12 m² iguals amb el mateix rectangle.",
+      "diagnostic_question": "Poden dos rectangles de 12 m² tenir costats diferents?",
+      "mathematical_decision": "rejects_equal_area_trap",
+      "applied_rubric_dimensions": [
+        "correct_math",
+        "distinct_decision",
+        "justification"
+      ],
+      "relation_to_family_decision": "critical",
+      "blank_observation": {
+        "anonymous_session_code": null,
+        "administered_at": null,
+        "assessor_code": null,
+        "scores": {
+          "correct_math": null,
+          "distinct_decision": null,
+          "justification": null
+        },
+        "prompting_used": null,
+        "observed_reasoning": null,
+        "error_codes": [],
+        "feedback_notes": null,
+        "observed": null
+      }
+    },
+    {
+      "task_id": "E3",
+      "source_role": "baseline_single_plan_area",
+      "observation_focus": "Converteix dues longituds a escala i calcula l'àrea d'un únic plànol.",
+      "expected_evidence": "4×3 m → 12 m²",
+      "likely_misconception": "Aplicar el factor lineal directament al valor de l'àrea.",
+      "diagnostic_question": "Quines són les dues longituds reals abans de multiplicar-les?",
+      "mathematical_decision": "baseline_area_calculation",
+      "applied_rubric_dimensions": [
+        "correct_math",
+        "justification"
+      ],
+      "relation_to_family_decision": "baseline_not_new",
+      "blank_observation": {
+        "anonymous_session_code": null,
+        "administered_at": null,
+        "assessor_code": null,
+        "scores": {
+          "correct_math": null,
+          "justification": null
+        },
+        "prompting_used": null,
+        "observed_reasoning": null,
+        "error_codes": [],
+        "feedback_notes": null,
+        "observed": null
+      }
+    },
+    {
+      "task_id": "E4",
+      "source_role": "transfer_two_new_scales",
+      "observation_focus": "Compara dos plànols d'escales noves fent servir de nou les dimensions, no l'àrea sola.",
+      "expected_evidence": "10×4 m des d'ambdues escales",
+      "likely_misconception": "Confondre la diferència d'escala amb una diferència de sala.",
+      "diagnostic_question": "Quants metres representa cada costat als dos plànols?",
+      "mathematical_decision": "transfer_scaled_plan_validation",
+      "applied_rubric_dimensions": [
+        "correct_math",
+        "distinct_decision",
+        "justification"
+      ],
+      "relation_to_family_decision": "transfer_critical",
+      "blank_observation": {
+        "anonymous_session_code": null,
+        "administered_at": null,
+        "assessor_code": null,
+        "scores": {
+          "correct_math": null,
+          "distinct_decision": null,
+          "justification": null
+        },
+        "prompting_used": null,
+        "observed_reasoning": null,
+        "error_codes": [],
+        "feedback_notes": null,
+        "observed": null
+      }
+    },
+    {
+      "task_id": "P1",
+      "source_role": "candidate_joined_semicircle",
+      "observation_focus": "Selecciona les tres vores del rectangle que són exteriors i l'arc; exclou el diàmetre compartit.",
+      "expected_evidence": "6+6+4+6,28 = 22,28 m",
+      "likely_misconception": "Afegir el diàmetre com si el semicercle fos aïllat.",
+      "diagnostic_question": "Una tanca exterior passaria pel costat on s'uneixen les figures?",
+      "mathematical_decision": "excludes_joined_diameter",
+      "applied_rubric_dimensions": [
+        "correct_math",
+        "distinct_decision",
+        "justification"
+      ],
+      "relation_to_family_decision": "critical",
+      "blank_observation": {
+        "anonymous_session_code": null,
+        "administered_at": null,
+        "assessor_code": null,
+        "scores": {
+          "correct_math": null,
+          "distinct_decision": null,
+          "justification": null
+        },
+        "prompting_used": null,
+        "observed_reasoning": null,
+        "error_codes": [],
+        "feedback_notes": null,
+        "observed": null
+      }
+    },
+    {
+      "task_id": "P2",
+      "source_role": "baseline_isolated_semicircle",
+      "observation_focus": "Reconeix que el diàmetre del semicercle aïllat sí forma part del contorn.",
+      "expected_evidence": "6,28+4 = 10,28 m",
+      "likely_misconception": "Eliminar sempre el diàmetre per memorització del cas compost.",
+      "diagnostic_question": "Sense cap rectangle adossat, el costat recte queda a l'exterior?",
+      "mathematical_decision": "baseline_includes_isolated_diameter",
+      "applied_rubric_dimensions": [
+        "correct_math",
+        "justification"
+      ],
+      "relation_to_family_decision": "baseline_not_new",
+      "blank_observation": {
+        "anonymous_session_code": null,
+        "administered_at": null,
+        "assessor_code": null,
+        "scores": {
+          "correct_math": null,
+          "justification": null
+        },
+        "prompting_used": null,
+        "observed_reasoning": null,
+        "error_codes": [],
+        "feedback_notes": null,
+        "observed": null
+      }
+    },
+    {
+      "task_id": "P3",
+      "source_role": "transfer_two_joined_rectangles",
+      "observation_focus": "Marca com a interior el costat compartit i, si suma perímetres, n'exclou les dues aparicions.",
+      "expected_evidence": "20+12−2×4 = 24 m",
+      "likely_misconception": "Oblidar restar dues còpies de la vora compartida.",
+      "diagnostic_question": "Quantes vegades has comptat el segment comú quan sumes els perímetres?",
+      "mathematical_decision": "transfer_internal_shared_edge",
+      "applied_rubric_dimensions": [
+        "correct_math",
+        "distinct_decision",
+        "justification"
+      ],
+      "relation_to_family_decision": "transfer_critical",
+      "blank_observation": {
+        "anonymous_session_code": null,
+        "administered_at": null,
+        "assessor_code": null,
+        "scores": {
+          "correct_math": null,
+          "distinct_decision": null,
+          "justification": null
+        },
+        "prompting_used": null,
+        "observed_reasoning": null,
+        "error_codes": [],
+        "feedback_notes": null,
+        "observed": null
+      }
+    },
+    {
+      "task_id": "P4",
+      "source_role": "candidate_joined_other_size",
+      "observation_focus": "Aplica la selecció de contorn a noves dimensions del rectangle i del semicercle.",
+      "expected_evidence": "5+5+6+9,42 = 25,42 m",
+      "likely_misconception": "Usar la longitud del diàmetre com a arc o sumar la vora interior.",
+      "diagnostic_question": "Què és recte i què és corb en el contorn que recorreria una tanca?",
+      "mathematical_decision": "repeats_joined_shape_new_dimensions",
+      "applied_rubric_dimensions": [
+        "correct_math",
+        "distinct_decision",
+        "justification"
+      ],
+      "relation_to_family_decision": "secondary",
+      "blank_observation": {
+        "anonymous_session_code": null,
+        "administered_at": null,
+        "assessor_code": null,
+        "scores": {
+          "correct_math": null,
+          "distinct_decision": null,
+          "justification": null
+        },
+        "prompting_used": null,
+        "observed_reasoning": null,
+        "error_codes": [],
+        "feedback_notes": null,
+        "observed": null
+      }
+    }
+  ],
+  "teacher_decision_record": {
+    "escales": {
+      "decision": null,
+      "criteria_C1_C5": null,
+      "justification": null,
+      "approved_level": null,
+      "implementation_authorized": false
+    },
+    "perimetres": {
+      "decision": null,
+      "criteria_C1_C5": null,
+      "justification": null,
+      "approved_level": null,
+      "implementation_authorized": false
+    }
+  },
+  "privacy": "Només codis anònims; no pujar noms, qualificacions identificables ni dades personals d'alumnes al repositori GitHub.",
+  "counts": {
+    "sheets": 8,
+    "control_sheets": 2,
+    "transfer_sheets": 2,
+    "recorded_observations": 0,
+    "recorded_teacher_decisions": 0,
+    "approved_families": 0,
+    "approved_N3": 0
+  },
+  "limits": [
+    "Fitxes preparatòries: cap observació ni revisió docent efectuada.",
+    "L'execució de tests no és prova d'independència matemàtica ni d'adequació curricular.",
+    "Sense canvis als generadors, nivells oficials o famílies certificades; cap fusió ni publicació."
+  ]
+}
