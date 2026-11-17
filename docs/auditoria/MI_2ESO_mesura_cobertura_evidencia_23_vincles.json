@@ -53,11 +53,13 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-3-parelles-evidencia-real.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "pending",
+      "paired_same_parameters": "math_evidence_verified_4_pairs",
       "target_mathematical_oracles_for_this_pair": "not_assessed",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
-      "family_approved": false
+      "family_approved": false,
+      "paired_script": "scripts/test-mesura-2eso-estimacio6-18-aparellades.cjs",
+      "pedagogical_interpretation": "same reference and approximation, arithmetic absolute-error answer versus diagnosing addition error"
     },
     {
       "source": "estimacio:9",
@@ -398,9 +400,9 @@
     "status": "success",
     "generated_examples": 160
   },
-  "paired_math_evidence_unique_groups": 4,
-  "paired_math_evidence_records": 5,
-  "paired_real_cases": 16,
+  "paired_math_evidence_unique_groups": 5,
+  "paired_math_evidence_records": 6,
+  "paired_real_cases": 20,
   "paired_math_evidence_workflow": {
     "run_id": 44103600888,
     "status": "success",
@@ -418,6 +420,12 @@
       "status": "success",
       "generated_examples": 1600,
       "paired_cases": 8
+    },
+    {
+      "run_id": 44105032964,
+      "status": "success",
+      "generated_examples": 640,
+      "paired_cases": 4
     }
   ]
 }
