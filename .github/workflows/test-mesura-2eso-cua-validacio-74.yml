@@ -1,11 +1,6 @@
 name: Auditoria cua revisio 74 grups Mesura 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_cua_validacio_74_families.json'
-      - 'scripts/test-mesura-2eso-cua-validacio-74.cjs'
-      - '.github/workflows/test-mesura-2eso-cua-validacio-74.yml'
   workflow_dispatch:
 
 permissions:
