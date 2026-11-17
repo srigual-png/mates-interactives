@@ -1,0 +1,20 @@
+name: Integracio modes Estimacio 1 i 11 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - '2eso/sentit-mesura.html'
+      - 'scripts/test-mesura-2eso-estimacio-1-11-integracio-modes.cjs'
+      - '.github/workflows/test-mesura-2eso-estimacio-1-11-integracio-modes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Simular guiat, autonom, examen i seleccio correcta i incorrecta
+        run: node scripts/test-mesura-2eso-estimacio-1-11-integracio-modes.cjs
