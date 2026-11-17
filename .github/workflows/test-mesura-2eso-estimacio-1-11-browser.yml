@@ -22,7 +22,7 @@ jobs:
           node-version: '22'
       - name: Install Playwright Chromium
         run: |
-          npm install --no-save --no-package-lock playwright-core
+          npm install --no-save --no-package-lock playwright-core@1.56.1
           npx --yes playwright@1.56.1 install --with-deps chromium
       - name: Serve application
         run: |
