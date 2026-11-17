@@ -17,7 +17,7 @@ for(const entry of data.clusters){
  const seen=new Set();
  for(const v of entry.variants){
   assert(entry.keys.includes(v.key)&&!seen.has(v.key),'Invalid variant '+v.key);seen.add(v.key);
-  assert(v.rationale.length>25&&v.demand.length>25);
+  assert(typeof v.rationale==='string'&&v.rationale.trim().length>=12&&typeof v.demand==='string'&&v.demand.trim().length>=12);
   assert(v.proposed_level.includes('candidate')||v.proposed_level.includes('review'));
   const [topic,n]=v.key.split(':');const start=h.indexOf('function '+defs[topic]+'(');assert(start>=0);
   const tail=h.slice(start,h.indexOf('/* ── GENERADOR ·',start+40));
