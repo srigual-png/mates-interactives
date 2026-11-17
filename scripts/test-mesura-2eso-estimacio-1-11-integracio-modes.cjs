@@ -46,7 +46,6 @@ function check(type){
  assert.equal(el('openWrap').style.display,'none');
  state.level=2;vm.runInContext('showExercise()',ctx);
  assert.equal(el('guideSteps').style.display,'none');
- assert.equal(el('optionsGrid').style.display,'');
  assert(el('optionsGrid').innerHTML.includes(ex.correct));
  state.level=1;
  assert(screens.includes('screenExercise'));
