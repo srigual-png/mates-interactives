@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "status": "provisional_unapproved",
+  "scope": "2eso/sentit-mesura/contrast-transversal-unitats-escales",
+  "sources": [
+    "MI_2ESO_mesura_unitats_escales_grups_candidats.json",
+    "MI_2ESO_mesura_tracabilitat_128_tipus.json",
+    "MI_2ESO_mesura_pitagores_decisions_16_tipus.json",
+    "MI_2ESO_mesura_perimetres_decisions_18_tipus.json",
+    "MI_2ESO_mesura_superficies_decisions_20_tipus.json",
+    "MI_2ESO_mesura_estimacio_decisions_18_tipus.json",
+    "MI_2ESO_mesura_problemes_decisions_20_tipus.json"
+  ],
+  "relation_meaning": {
+    "shared_core": "Nucli matemàtic explícitament compartit; equivalència pedagògica definitiva encara pendent",
+    "component_only": "Una part del procediment es reutilitza, però no tot l'exercici",
+    "related_review": "Relació plausible que demana contrast amb instàncies reals",
+    "related_not_same": "Format o prerequisit semblant però no cal fusionar com a família"
+  },
+  "links": [
+    {
+      "candidate": "U-P01",
+      "source": "unitats:1",
+      "target": "estimacio:2",
+      "relation": "related_not_same",
+      "reason": "La conversió exacta per prefix decimal no és estimar ordre de magnitud",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P02",
+      "source": "unitats:2",
+      "target": "problemes:18",
+      "relation": "shared_core",
+      "reason": "Mateixa conversió de superfície, encara que l'enunciat canviï",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P02",
+      "source": "unitats:11",
+      "target": "problemes:18",
+      "relation": "shared_core",
+      "reason": "Context de sala sense nova operació",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P03",
+      "source": "unitats:3",
+      "target": "superficies:13",
+      "relation": "component_only",
+      "reason": "El factor cúbic pot ser un subpas del càlcul de volum i litres, no el problema complet",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P04",
+      "source": "unitats:7",
+      "target": "estimacio:1",
+      "relation": "related_review",
+      "reason": "Tria d'unitat adequada contra estimació numèrica plausible",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P04",
+      "source": "unitats:7",
+      "target": "estimacio:4",
+      "relation": "related_not_same",
+      "reason": "Seleccionar unitat no és seleccionar instrument i precisió",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P05",
+      "source": "unitats:8",
+      "target": "problemes:18",
+      "relation": "related_not_same",
+      "reason": "Reconeixement de factor vs càlcul efectiu: cal contrast cognitiu",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P06",
+      "source": "unitats:12",
+      "target": "superficies:14",
+      "relation": "component_only",
+      "reason": "L'equivalència dm³=L forma part del càlcul de volum",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P06",
+      "source": "unitats:16",
+      "target": "problemes:4",
+      "relation": "component_only",
+      "reason": "Reconeixement d'igualtat no és volum d'un cilindre",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P07",
+      "source": "unitats:18",
+      "target": "superficies:13",
+      "relation": "component_only",
+      "reason": "Conversió encadenada és subprocés d'un volum amb unitat de capacitat",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P07",
+      "source": "unitats:6",
+      "target": "superficies:13",
+      "relation": "component_only",
+      "reason": "Només els casos encadenats; no confondre amb la variant directa",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P08",
+      "source": "unitats:9",
+      "target": "estimacio:17",
+      "relation": "related_not_same",
+      "reason": "Comparar longituds equival la mateixa magnitud després de conversió, no errors absoluts",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P09",
+      "source": "unitats:10",
+      "target": "problemes:18",
+      "relation": "component_only",
+      "reason": "La conversió és subpas abans de sumar; no basta per equiparar famílies",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P09",
+      "source": "unitats:15",
+      "target": "problemes:2",
+      "relation": "related_not_same",
+      "reason": "Doble conversió i suma d'àrees vs recompte de rajoles",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P10",
+      "source": "unitats:17",
+      "target": "pitagores:16",
+      "relation": "related_not_same",
+      "reason": "Diagnòstic és format compartit però l'error de Pitàgores és d'un altre contingut",
+      "status": "provisional"
+    },
+    {
+      "candidate": "U-P10",
+      "source": "unitats:17",
+      "target": "superficies:18",
+      "relation": "related_not_same",
+      "reason": "Diagnòstic dimensional d'àrea/volum, amb conceptes diferents",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P01",
+      "source": "escales:2",
+      "target": "problemes:8",
+      "relation": "shared_core",
+      "reason": "Mapa 1:n, distància real en quilòmetres",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P01",
+      "source": "escales:17",
+      "target": "problemes:8",
+      "relation": "component_only",
+      "reason": "La distància real segueix una suma prèvia de trams",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P02",
+      "source": "escales:3",
+      "target": "problemes:9",
+      "relation": "related_not_same",
+      "reason": "Recuperar mida al plànol no és determinar l'escala",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P03",
+      "source": "escales:4",
+      "target": "problemes:9",
+      "relation": "shared_core",
+      "reason": "Mateix càlcul del denominador de l'escala",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P03",
+      "source": "escales:15",
+      "target": "problemes:9",
+      "relation": "shared_core",
+      "reason": "Normalitzar dibuix:realitat malgrat canviar formulació",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P04",
+      "source": "escales:13",
+      "target": "escales:10",
+      "relation": "related_not_same",
+      "reason": "Comprovar correspondència vs resoldre costat, encara que sigui mateixa semblança",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P05",
+      "source": "escales:6",
+      "target": "perimetres:1",
+      "relation": "related_not_same",
+      "reason": "Escala i àrea composta de factor bidimensional vs fórmula d'àrea directa",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P05",
+      "source": "escales:7",
+      "target": "unitats:2",
+      "relation": "component_only",
+      "reason": "El factor quadràtic és subpas conceptual; l'àrea a escala requereix model",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P06",
+      "source": "escales:8",
+      "target": "problemes:10",
+      "relation": "shared_core",
+      "reason": "Mateixa semblança ombra-altura",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P06",
+      "source": "escales:9",
+      "target": "problemes:10",
+      "relation": "shared_core",
+      "reason": "Canvi d'objecte, mateixa proporció",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P06",
+      "source": "escales:18",
+      "target": "problemes:10",
+      "relation": "related_review",
+      "reason": "Mateixa proporció amb incògnita a l'ombra, cal provar si és variant real",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P06",
+      "source": "escales:11",
+      "target": "pitagores:10",
+      "relation": "related_not_same",
+      "reason": "Proporció resolta vs Pitàgores i àrea isòsceles",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P07",
+      "source": "escales:16",
+      "target": "perimetres:4",
+      "relation": "component_only",
+      "reason": "Perímetre després de convertir dimensions reals; el perímetre és subpas",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P08",
+      "source": "escales:14",
+      "target": "unitats:17",
+      "relation": "related_not_same",
+      "reason": "Diagnòstic d'escala vs error de conversió dimensional",
+      "status": "provisional"
+    },
+    {
+      "candidate": "E-P08",
+      "source": "escales:14",
+      "target": "perimetres:18",
+      "relation": "related_not_same",
+      "reason": "Igual format de diagnòstic, continguts diferents",
+      "status": "provisional"
+    }
+  ],
+  "counts": {
+    "links": 31,
+    "groups_considered": 18,
+    "source_topics": 2,
+    "other_topics": 5
+  },
+  "review_gates": [
+    "Comprovar dos exemples reals per relació prioritària abans de fusió transversal",
+    "No interpretar identitat d'operació com a identitat automàtica de família curricular",
+    "Mantenir les separacions N1/N2 per càrrega cognitiva i sense forçar N3",
+    "No modificar el registre oficial ni la publicació"
+  ]
+}
