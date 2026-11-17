@@ -17,5 +17,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Generar i validar 50 instancies reals
+      - name: Generar i validar 54 instancies reals
         run: node scripts/test-mesura-2eso-mostres-escissions.cjs
