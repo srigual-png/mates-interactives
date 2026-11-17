@@ -130,4 +130,3 @@ for(turn=0;turn<8;turn++){
 }
 assert.equal(checked,144);
 console.log('OK: 144 exercicis de Superfícies amb oracles per 18 tipus; 7/8 ja comprovats a la suite transversal');
-
