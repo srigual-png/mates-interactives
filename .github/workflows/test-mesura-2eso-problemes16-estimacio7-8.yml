@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - comparacio i error relatiu B
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-problemes16-estimacio7-8-aparellades.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-problemes16-estimacio7-8.yml'
   workflow_dispatch:
 jobs:
   compare:
