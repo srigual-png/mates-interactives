@@ -37,6 +37,8 @@ Hi ha **70 tipus ordinaris** repartits en set temes. Els nivells següents són 
 | Modelització i connexions geomètriques | 10 | 2 (+ branca) | 7 | 1 | El tipus 10 té una variant d’escala a N1 i altres variants a N2; no són 11 tipus diferents. |
 | **Total de tipus únics** | **70** | **37** | **31** | **2** | El tipus 10 de modelització té una branca N1 i altres variants N2; la cobertura per camins compta una branca addicional. No és un recompte de famílies. |
 
+La taula reflecteix la classificació inicial existent. Després d’inspeccionar els exemples, proposo revisar `modelitzacio:3` de N3 a N2; quedaria **37 N1 / 32 N2 / 1 N3** per a tipus únics, amb una branca addicional de `modelitzacio:10` a N1.
+
 ### Agrupacions candidates per contrastar
 
 Els grups d’aquesta taula serveixen per començar la comparació. **No es declaren famílies genuïnes** fins a contrastar procediment, exemples reals i límits de cada generador.
@@ -71,7 +73,7 @@ Els grups d’aquesta taula serveixen per començar la comparació. **No es decl
 
 ## Recomanació provisional de nivells
 
-- **No forçar N3.** Els 2 tipus proposats com a N3 (visualització 3D:8 i modelització:3) necessiten contrast específic. Un tipus amb diversos passos no és N3 automàticament. A modelització, el tipus 10 també té una branca alternativa a N1; cal comptar variants i tipus únics per separat.
+- **No forçar N3.** El candidat més sòlid és visualització 3D:8, perquè cal contrastar tres projeccions simultàniament. Proposo modelització:3 a N2: encadena dos models coneguts amb indicis explícits. Un tipus amb diversos passos no és N3 automàticament. A modelització, el tipus 10 també té una branca alternativa a N1; cal comptar variants i tipus únics per separat.
 - **Revisar la distribució de cossos i coordenades.** Tots els tipus de cossos són N1; en coordenades conviuen tasques diferents sota una explicació comuna de N1. La classificació s’ha de basar en el raonament, no en el tema o el format.
 - **Revisar les connexions transversals sense duplicar famílies:** semblança ↔ escales/Tales; Pitàgores ↔ diagonals/coordenades; coordenades ↔ trajectes; cossos ↔ visualització 3D. Una fórmula compartida no demostra que la tasca sigui la mateixa.
 - Els objectius 15 famílies / 5 N1 / 5 N2 / 3 N3 són orientatius, no quotes. El nivell depèn del procediment i de l’adequació curricular a 2n.
@@ -98,7 +100,7 @@ S’han inspeccionat els set generadors de 2n a `2eso/sentit-espacial.html`; cob
 
 | Tema | Decisió de treball després de veure els enunciats i passos generats |
 |---|---|
-| Semblança | `2` i `3` són la mateixa tasca de trobar la raó, en sentits inversos. `4` i `9` busquen un costat homòleg per proporcionalitat; rectangle i triangle són variants de representació. `1` i `5` comparen figures, però el primer distingeix congruència/semblança i el segon verifica dues raons. `6` conserva angles; `10` aplica la raó al perímetre; `7` tracta girs, translacions i reflexions. No comptar aquests tres darrers com a una família només perquè tots parlin de propietats invariants. |
+| Semblança | `2` i `3` són la mateixa tasca de trobar la raó, en sentits inversos. `4` i `9` busquen un costat homòleg per proporcionalitat; rectangle i triangle són variants de representació. `1` i `5` comparen figures, però el primer distingeix congruència/semblança i el segon verifica dues raons. `6` conserva angles; `10` aplica la raó al perímetre; `7` tracta girs, translacions i reflexions. No comptar aquests tres darrers com a una família només perquè tots parlin de propietats invariants. **Abast curricular per revisar:** el tipus 7 de semblança posa en primer pla girs, translacions i reflexions; la seqüenciació XTEC situa l’estudi sistemàtic dels moviments al 3r curs, mentre 2n sí que inclou la congruència. Proposo mantenir-lo en quarantena curricular i revisar si cal convertir-lo en una pregunta sobre congruència sense exigir identificar transformacions. |
 | Tales i escales | `3`–`6` són conversions d’escala directa/inversa amb canvis d’unitat. `1` i `2` són variants del mateix esquema de Tales amb una incògnita diferent. `7` i `8` són variants d’ombres amb l’alçada o l’ombra com a incògnita; `9` explicita triangles semblants sense el context d’ombres i pot ser una variant del mateix nucli proporcional. `10` parteix d’una escala coneguda i transfereix la proporció a un altre costat. |
 | Pitàgores | `1` és lectura visual de la relació entre àrees; `2` identifica la hipotenusa; `3`–`4` calculen un costat; `5` usa la recíproca per decidir si un triangle és rectangle. Són subtipus diferents del mateix teorema, no cinc famílies. `6`, `7`, `8`, `9` i `10` l’apliquen a diagonals o a un triangle que s’ha d’identificar/construir; el 9 afegeix partir la base per la meitat. |
 | Cossos | `1`, `2`, `3`, `6` i `9` són reconeixement/classificació amb criteris diferents (poliedre o cos rodó; prisma/piràmide; descripció d’esfera). `4` i `5` compten elements de prismes/piràmides; `7` i `8` identifiquen bases de cilindres i cons; `10` reconstrueix el polígon de la base a partir del nombre total de cares d’un prisma. L’N1 és plausible per ser una regla curta i explícita, però el tipus `10` cal contrastar-lo amb la resta inversa. |
@@ -108,7 +110,7 @@ S’han inspeccionat els set generadors de 2n a `2eso/sentit-espacial.html`; cob
 
 **Reclassificació a contrastar:** el tipus `modelitzacio:3` està proposat com a N3 perquè encadena semblança d’ombres i Pitàgores per al cable. Amb l’exemple generat (pal 1,5 m / ombra 2 m; torre amb ombra 8 m; cable ancorat a 8 m de la base), primer s’obté l’altura de la torre: 1,5/2 = h/8, h = 6 m; després el cable: √(6² + 8²) = 10 m. Com que els dos models són explícits i són aplicacions treballades a 2n, proposo **N2 provisional**, pendent de comprovar els extrems de valors i la càrrega de representació.
 
-**Incidència funcional detectada:** a `visual3d:5`, l’enunciat pregunta per la vista des del costat dret i el càlcul usa la projecció lateral, però la figura afegeix el peu “mirada des del DAVANT”. És una contradicció de l’ajuda visual que pot confondre l’alumne. S’ha de corregir en una PR funcional abans de donar per validat aquest exercici; no s’ha canviat el codi en aquesta PR documental.
+**Incidència funcional detectada:** a `visual3d:5`, l’enunciat pregunta per la vista des del costat dret i el càlcul usa la projecció lateral, però la figura afegeix el peu “mirada des del DAVANT”. És una contradicció de l’ajuda visual que pot confondre l’alumne. S’ha de corregir en una PR funcional abans de donar per validat aquest exercici; no s’ha canviat el codi en aquesta PR documental. És un defecte concret detectat en revisar els generadors, no una deducció del recompte de mostres.
 
 ## Evidència de proves disponible i límits
 
