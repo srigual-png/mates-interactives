@@ -77,7 +77,7 @@ for(let iteration=0;iteration<8;iteration++){
     if(t===11){const m=v[0].match(/([\d.,]+)\/([\d.,]+) = ([\d.,]+)\/x/);assert(m,label);expected=num(m[2])*num(m[3])/num(m[1]);unit='';}
     if(t===12){expected=take(v,1).n/take(v,0).n;unit='';}
     if(t===15){expected=take(v,0).n*100/take(v,1).n;unit='scale';}
-    if(t===16){const m=v[0].match(/([\d.,]+) cm × ([\d.,]+) cm/);assert(m,label);expected=2*(num(m[1])+num(m[2]))*scaleN(v[1])/100;unit='m';}
+    if(t===16){const m=v[1].match(/([\d.,]+) cm × ([\d.,]+) cm/);assert(m,label);expected=2*(num(m[1])+num(m[2]))*scaleN(v[0])/100;unit='m';}
     if(t===17){expected=(take(v,1).n+take(v,2).n)*scaleN(v[0])/100000;unit='km';}
     if(t===18){expected=take(v,1).n*take(v,2).n/take(v,0).n;unit='m';}
     if(unit==='scale'){
