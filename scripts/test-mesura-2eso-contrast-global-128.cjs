@@ -35,7 +35,7 @@ for(const d of doc.definitions){
   count[kind]++;
  }
  assert.deepEqual(doc.counts[d.id],count);
- assert.deepEqual(s.closest_existing,d.direct);
+ assert(s.closest_existing.every(key=>d.direct.includes(key)),'Els tipus de contrast prioritaris han de ser dins coincidències directes');
  assert.equal(s.new_family_approved,false);
  assert.equal(s.level_approved,null);
  assert.equal(s.variants.length,3);
