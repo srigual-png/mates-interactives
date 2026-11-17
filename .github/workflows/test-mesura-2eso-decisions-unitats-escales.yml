@@ -1,0 +1,21 @@
+name: Verifica consolidacio Unitats i Escales Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_unitats_decisions_18_tipus.json'
+      - 'docs/auditoria/MI_2ESO_mesura_escales_decisions_18_tipus.json'
+      - 'scripts/test-mesura-2eso-decisions-unitats-escales.cjs'
+      - '.github/workflows/test-mesura-2eso-decisions-unitats-escales.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  comprova-decisions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verifica els 36 tipus d'Unitats i Escales
+        run: node scripts/test-mesura-2eso-decisions-unitats-escales.cjs
