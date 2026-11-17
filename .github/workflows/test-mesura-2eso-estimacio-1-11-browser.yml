@@ -1,0 +1,44 @@
+name: Navegador real Estimacio 1 i 11 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - '2eso/sentit-mesura.html'
+      - 'scripts/test-mesura-2eso-estimacio-1-11-browser.cjs'
+      - '.github/workflows/test-mesura-2eso-estimacio-1-11-browser.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Playwright Chromium
+        run: |
+          npm install --no-save --no-package-lock playwright-core
+          npx --yes playwright@1.56.1 install --with-deps chromium
+      - name: Serve application
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/mi-test-server.log 2>&1 &
+          for attempt in {1..30}; do
+            if curl -fsS http://127.0.0.1:8765/2eso/sentit-mesura.html > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/mi-test-server.log
+          exit 1
+      - name: Run real Chromium desktop and mobile smoke test
+        run: node scripts/test-mesura-2eso-estimacio-1-11-browser.cjs
+      - name: Upload screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: estimacio-1-11-browser-screenshots
+          path: artifacts/mesura-estimacio-ui/*.png
+          if-no-files-found: ignore
