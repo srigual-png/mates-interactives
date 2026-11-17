@@ -1,0 +1,21 @@
+name: Auditoria fitxes avaluacio 8 tasques Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_fitxes_avaluacio_8_tasques.json'
+      - 'docs/auditoria/MI_2ESO_mesura_protocol_docent_escales_perimetres.json'
+      - 'scripts/test-mesura-2eso-fitxes-avaluacio-8.cjs'
+      - '.github/workflows/test-mesura-2eso-fitxes-avaluacio-8.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar vuit fitxes en blanc i controls
+        run: node scripts/test-mesura-2eso-fitxes-avaluacio-8.cjs
