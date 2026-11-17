@@ -21,7 +21,7 @@ for(const name of ['problem','surface'])for(let i=0;i<400;i++){
 }
 const same=[...unique.problem.keys()].filter(k=>unique.surface.has(k));
 assert.equal(same.length,0,'The current fixture sets unexpectedly have matching radius/height; inspect before reporting no match');
-const examples=[...unique.problem.values()].sort((x,y)=>x.radius-y.radius||x.height-y.height).slice(0,4).map(p=>{
+const examples=[...unique.problem.values()].filter(p=>[...unique.surface.values()].some(s=>s.radius===p.radius)).sort((x,y)=>x.radius-y.radius||x.height-y.height).slice(0,4).map(p=>{
  const s=[...unique.surface.values()].find(s=>s.radius===p.radius);
  assert(s,'Expected matching radii for 4 contextual examples');
  return {contextual_label:{question:p.q,answer:p.answer,radius:p.radius,height:p.height},abstract_surface:{question:s.q,answer:s.answer,radius:s.radius,height:s.height},common_formula:'A_lateral = pi * diameter * height = 2 * pi * radius * height',same_radius:p.radius===s.radius,identical_height:p.height===s.height};
