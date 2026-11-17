@@ -1,0 +1,21 @@
+name: Evidencia cognitiva cinc agrupacions Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - '2eso/sentit-mesura.html'
+      - 'docs/auditoria/MI_2ESO_mesura_evidencia_cognitiva_5_clusters_geometria_error.json'
+      - 'scripts/test-mesura-2eso-evidencia-cognitiva-5-clusters.cjs'
+      - '.github/workflows/test-mesura-2eso-evidencia-cognitiva-5-clusters.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprovar cinc grups cognitius amb codi real
+        run: node scripts/test-mesura-2eso-evidencia-cognitiva-5-clusters.cjs
