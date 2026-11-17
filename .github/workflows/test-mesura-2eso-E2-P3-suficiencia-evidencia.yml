@@ -1,11 +1,6 @@
 name: Auditoria suficiencia evidencia E2 P3 Mesura 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_E2_P3_suficiencia_evidencia.json'
-      - 'scripts/test-mesura-2eso-E2-P3-suficiencia-evidencia.cjs'
-      - '.github/workflows/test-mesura-2eso-E2-P3-suficiencia-evidencia.yml'
   workflow_dispatch:
 
 permissions:
