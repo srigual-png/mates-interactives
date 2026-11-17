@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - radi i circumferencia inversa
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-perimetres14-inversa-circumferencia.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-perimetres14-inversa-circumferencia.yml'
   workflow_dispatch:
 jobs:
   oracle:
