@@ -204,3 +204,71 @@ No hi ha hagut canvis de codi; per tant, no s’han executat proves noves ni rep
 ## Conclusió i estat de la PR
 
 La proposta heretada 46 N1 / 42 N2 / cap N3 es manté adequada al nivell de procediment observat. La comparació completa no revela duplicacions exactes que calgui eliminar ni buit prou justificat per afegir una nova família; les coincidències de context/representació s’han documentat com variants quan preserven el procediment. PR #56 resta **oberta i en Draft**, sense fusió ni publicació.
+
+
+## Segon exemple resolt per família
+
+Aquesta taula completa la fitxa anterior: cada família disposa així de dos exemples resolts, a més dels errors típics i límits ja indicats.
+
+| Família | Segon exemple resolt |
+|---|---|
+| P1 | 12, 9, 6 → d=−3; següent terme 3. |
+| P2 | 5, 8, 11,… → a₂₀=5+19·3=62. |
+| P3 | Taula (n,aₙ)=(1,4),(2,9),(3,14) → d=5 i aₙ=4+5(n−1)=5n−1. |
+| P4 | aₙ=2+6(n−1): a₅=26; primers quatre: 2, 8, 14, 20. |
+| E1 | 4ab i −7ab són semblants; 4ab i 4a²b no. |
+| E2 | 9x−2x+4x=11x. |
+| E3 | 2x²+3x−x²−5x+8= x²−2x+8. |
+| E4 | 7x−2y−3x+5y=4x+3y. |
+| E5 | (−2x²)(3x⁴)=−6x⁶. |
+| E6 | 5(x−3)=5x−15. |
+| E7 | 3(x−2)+2x+1=5x−5. |
+| E8 | Error 3(x+2)=3x+2; desenvolupament correcte 3x+6. |
+| Q1 | 3x−5=10 → 3x=15 → x=5. |
+| Q2 | 7x+2=4x+14 → 3x=12 → x=4. |
+| Q3 | 2(x−3)+4=12 → 2x−2=12 → x=7. |
+| Q4 | Per 3x−2=10, x=4 és solució perquè 12−2=10; x=3 no ho és. |
+| Q5 | 5x+4=2x+16; restar 2x dona 3x+4=16. |
+| Q6 | 4(x+2)=20; si s’escriu 4x+2=20, el primer error és no distribuir 4 al 2. |
+| W1 | 2x+6=24: x representa el cost unitari; x=9 €. |
+| W2 | Dos nombres consecutius sumen 51: x+(x+1)=51 → x=25. |
+| W3 | Una germana té 3 anys més que el triple d’un germà; suma 35: 4x+3=35 → x=8. |
+| W4 | Parells consecutius sumen 42: x+(x+2)=42 → x=20. |
+| W5 | 4 viatges a 2 € més 3 € fixos: 2x+3=11 → x=4 viatges. |
+| W6 | Costats x i x+2, perímetre 28: 2x+2(x+2)=28 → x=6. |
+| W7 | Després d’afegir 8 objectes, 4 grups tenen 6 cadascun: (x+8)/4=6 → x=16. |
+| W8 | Descompte 25%, preu final 90: 0,75x=90 → x=120 €. |
+| W9 | 12 km inicials + 4 km/h durant x hores = 28 km → x=4 h. |
+| W10 | x=6 satisfà 2x+8=20; la longitud és positiva i la comprovació contextual és vàlida. |
+| W11 | Amplada x, llargada x+3, perímetre 30: el model correcte és 2x+2(x+3)=30, no x+(x+3)=30. |
+| R1 | El nombre de litres depèn del temps: temps independent, litres dependents. |
+| R2 | {(1,4),(1,7)} no és funció; {(1,4),(2,4)} sí que ho és. |
+| R3 | y=3x+2 i x=4 → y=14; taula amb x=2 i y=9 → imatge 9. |
+| R4 | y=3x+2; si falta y quan x=5, y=17. |
+| R5 | 3 llibretes a 2 €: parella ordenada (3,6). |
+| R6 | x=0,1,2 i y=−2,1,4 → pendent 3, ordenada −2, fórmula y=3x−2. |
+| R7 | y=4x+3 i y=23 → 4x=20 → x=5. |
+| F1 | y=4x és lineal; y=6 és constant (afí amb pendent 0). |
+| F2 | y=7x és directament proporcional perquè b=0; y=7x+1 no. |
+| F3 | En y=4x−3, pendent 4; si y són litres i x minuts, augmenten 4 L/min. |
+| F4 | En y=2x−6, ordenada a l’origen −6. |
+| F5 | Taula x=0,1,2 i y=−1,2,5 → y=3x−1. |
+| F6 | (1,2),(4,8): m=(8−2)/(4−1)=2. |
+| F7 | (2,5) pertany a y=2x+1 perquè 2·2+1=5. |
+| F8 | y=4x−1, x=3 → y=11. |
+| F9 | 3x+2=17 → x=5. |
+| F10 | Amb x=2, A=3x+4=10 i B=5x+1=11; A és més barata. |
+| F11 | y=3x+2 especifica una assignació; 3x+2=11 és una equació per resoldre. |
+| C1 | x=5; x←x+3; x←2x → x=16. |
+| C2 | x=4, si x>4 aleshores +1, si no −1 → x=3 (branca falsa). |
+| C3 | x=10, repetir 3 cops x←x−2 → x=4. |
+| C4 | total=0, quatre iteracions amb +7 → total=28. |
+| C5 | x=1; mentre x<10 sumar 3: 1→4→7→10; tres execucions. |
+| C6 | 2<x<8: el valor 5 compleix; 8 no compleix perquè el límit és estricte. |
+| C7 | x≤0 o x≥10: −2 compleix; 5 no. |
+| C8 | “com a màxim 12” → x≤12, inclou 12. |
+| C9 | Primer restar 3 i després multiplicar per 2: x←x−3; x←2x. |
+| C10 | De posició 1 a posició 6 hi ha 5 salts; repetir 6 salts seria un de més. |
+| C11–C12 | Si A2=6 i B2=4*A2+3, B2=27; amb tarifa 5 fixos + 1,5 per hora, fórmula =5+1,5*A2. |
+| C13 | a₁=2,d=5,n=4: inicialitzar 2 i sumar 5 tres vegades → a₄=17. |
+| C14 | “SI…ALES HORES…SI NO” és selecció/condicional; REPETEIX és iteració. |
