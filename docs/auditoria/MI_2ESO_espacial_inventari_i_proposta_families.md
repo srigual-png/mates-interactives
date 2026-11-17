@@ -97,7 +97,7 @@ Fonts primàries: [XTEC, Orientacions curriculars de Matemàtiques per cursos, 2
 La lectura del codi confirma que els set generadors cobreixen els codis ordinaris 1–11 / 1–10 / 1–10 / 1–10 / 1–9 / 1–10 / 1–10. La classificació s’aplica des de `REVIEWED_LEVELS`; `REVIEWED_VARIANTS` només afegeix una branca específica per al tipus 10 de modelització (escala, N1). Les etiquetes locals `easy/medium/hard` dels generadors no substitueixen el mapa N1/N2/N3.\n\nEl resum existent registra **3.000 mostres generades per tema** i recompte de cobertura/examen. Això és evidència de generació simulada, no una revisió pedagògica de 3.000 exercicis únics. El mateix resum informa `banksReviewed: 0`, `bankChecks: []` i `pageErrors: []`; per tant, encara no acredita una passada de bancs ni una comprovació visual al navegador. Aquest document no executa proves noves ni modifica el comportament de l’aplicació.
 
 Abans de considerar el bloc complet cal:
-1. inspeccionar els generadors i variants reals i vincular 70/70 tipus amb preguntes, respostes, modes i els nivells configurats; 
+1. inspeccionar els generadors i variants reals i vincular 70/70 tipus amb preguntes, respostes, modes i els nivells configurats;
 2. decidir mantenir/reclassificar/fusionar/separar cada família candidata amb almenys dos exercicis reals resolts, errors típics i casos límit;
 3. contrastar cada decisió amb la seqüenciació XTEC específica de 2n;
 4. comprovar modes guiat, autònom i examen, així com opcions/resposta oberta, i fer una validació visual;
