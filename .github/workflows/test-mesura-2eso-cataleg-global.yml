@@ -1,0 +1,23 @@
+name: Auditoria cataleg global Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_cataleg_global_provisional.json'
+      - 'docs/auditoria/MI_2ESO_mesura_tracabilitat_128_tipus.json'
+      - 'docs/auditoria/MI_2ESO_mesura_unitats_escales_contrast_transversal.json'
+      - 'docs/auditoria/MI_2ESO_mesura_cinc_temes_contrast_transversal.json'
+      - 'scripts/test-mesura-2eso-cataleg-global.cjs'
+      - '.github/workflows/test-mesura-2eso-cataleg-global.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integritat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprovar els 128 tipus del cataleg global
+        run: node scripts/test-mesura-2eso-cataleg-global.cjs
