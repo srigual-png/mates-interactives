@@ -1,12 +1,6 @@
 name: Auditoria contrast global 128 Mesura 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_tres_candidates_contrast_global_128.json'
-      - 'docs/auditoria/MI_2ESO_mesura_tres_especificacions_pedagogiques.json'
-      - 'scripts/test-mesura-2eso-contrast-global-128.cjs'
-      - '.github/workflows/test-mesura-2eso-contrast-global-128.yml'
   workflow_dispatch:
 
 permissions:
