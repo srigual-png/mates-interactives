@@ -6,7 +6,21 @@
 
 S’inclouen els set temes ordinaris de `2eso/sentit-espacial.html`: semblança, Tales i escales, Pitàgores, cossos, visualització 3D, coordenades i modelització. S’exclouen els quatre temes etiquetats com a ampliació de 3r (`pitagores3r`, `semblanca3r`, `transformacions3r` i `transformacionsAv3r`).
 
-Fonts del repositori: `2eso/sentit-espacial.html`, `docs/dificultats/revisio-2eso-espacial-punt3.json` i `docs/dificultats/resultats-punt3-2eso-espacial.json`. Referència curricular per contrastar: [XTEC — Orientacions curriculars d’ESO, Matemàtiques, sentit espacial](https://xtec.gencat.cat/ca/curriculum/eso/concrecions-curriculars/). Cal revisar la seqüenciació concreta de 2n per a cada família abans de validar cap nivell.
+Fonts del repositori: `2eso/sentit-espacial.html`, `docs/dificultats/revisio-2eso-espacial-punt3.json` i `docs/dificultats/resultats-punt3-2eso-espacial.json`. Referència curricular consultada: [XTEC — Orientacions curriculars de Matemàtiques per cursos (PDF)](https://xtec.gencat.cat/web/.content/curriculum/eso/concrecions-curriculars/Orientacions-curriculars_MAT_SEC_per-cursos.pdf), apartat **2n ESO, sentit espacial**, p. 12 i visualització, p. 13 (consulta del 17-11-2026). La pàgina [Concrecions curriculars](https://xtec.gencat.cat/ca/curriculum/eso/concrecions-curriculars/) identifica aquest document com a concreció oficial.
+
+## Contrast amb la seqüenciació curricular de 2n
+
+La proposta XTEC situa explícitament a 2n ESO: semblança en el pla i l’espai i raó de semblança; Tales en contextos; descobriment i ús de Pitàgores; propietats/classificació de cossos geomètrics; desenvolupaments plans; coordenades cartesianes; visualització de funcions constant, lineal i afí; i connexions entre sentits. També inclou representació plana de prismes i cilindres. Això dona base curricular als set blocs, però no valida per si sol cada pregunta ni el seu nivell.
+
+| Bloc del repositori | Connexió curricular | Punt de revisió |
+|---|---|---|
+| Semblança | Semblança plana i espacial, raó de semblança. | Comprovar que els ítems tridimensionals treballen la raó i no introdueixen proporcions d’àrea/volum pròpies de l’ampliació de 3r. |
+| Tales i escales | Tales i proporcionalitat geomètrica; hi ha referències creuades amb mesura i numèric. | Escales i conversions també pertanyen al sentit de la mesura; evitar presentar tot l’enunciat contextual com una família geomètrica nova. |
+| Pitàgores | Descoberta, visualització per àrees i resolució de problemes. | Separar la comprensió de la relació de l’aplicació en diagonals/contextos; no elevar només per tenir context. |
+| Cossos | Propietats, elements i classificació de poliedres i cossos rodons. | Recompte de cares/arestes/vèrtexs és una extensió de les propietats; revisar que les fórmules s’hagin treballat a 2n. |
+| Visualització 3D | Desenvolupaments plans i representació de cossos. | Les vistes ortogonals i les restriccions triples són coherents com a visualització; comprovar que la dificultat no depengui de convencions gràfiques no ensenyades. |
+| Coordenades | Localització en el pla cartesià. | Les distàncies euclidianes empren Pitàgores; les funcions de les rectes enllacen també amb el sentit algebraic. |
+| Modelització | Connexions espacials; la visualització de funcions constant, lineal i afí també apareix al sentit espacial. | És un contenidor de connexions, no una família única. Cal vincular cada tipus al procediment curricular concret. |
 
 ## Inventari provisional
 
@@ -45,7 +59,7 @@ Els grups d’aquesta taula serveixen per començar la comparació. **No es decl
 | Visualització 3D | 1, 2 | Plegar desenvolupaments i anticipar cares oposades. | Compartir procediment espacial, però pot requerir subfamílies segons la tasca. |
 | Visualització 3D | 3, 4, 5, 6, 7 | Comptar cubs, llegir vistes i completar un prisma. | Distingir ocupació, alçades per projecció i completar volum. |
 | Visualització 3D | 8 | Reconstruir una construcció que compleixi tres vistes. | Candidat a N3 per restriccions combinades; comprovar que cap pista redundant resol la resposta. |
-| Visualització 3D | 9 | Identificar la base d’un prisma. | Probablement vocabulari/reconeixement de cossos, compartit amb `cossos`. |
+| Visualització 3D | 9 | Identificar la forma de la secció plana d’un cub/cilindre i la base d’un prisma. | Barreja secció paral·lela i identificació de base; separar o justificar com a variants. |
 | Coordenades | 1, 2 | Llegir coordenades i quadrants. | Comprovar si llegir el quadrant és la mateixa tasca amb dades diferents. |
 | Coordenades | 3 | Classificar la figura definida per punts. | Pot implicar identificar propietats geomètriques, no només llegir coordenades. |
 | Coordenades | 4, 6, 7 | Reconstruir quart vèrtex, punt mig o distància. | Tres procediments diferents; el tipus 7 connecta amb Pitàgores. |
@@ -67,7 +81,7 @@ Els grups d’aquesta taula serveixen per començar la comparació. **No es decl
 El resum existent registra **3.000 mostres generades per tema** i recompte de cobertura/examen. Això és evidència de generació simulada, no una revisió pedagògica de 3.000 exercicis únics. El mateix resum informa `banksReviewed: 0`, `bankChecks: []` i `pageErrors: []`; per tant, encara no acredita una passada de bancs ni una comprovació visual al navegador. Aquest document no executa proves noves ni modifica el comportament de l’aplicació.
 
 Abans de considerar el bloc complet cal:
-1. inspeccionar els generadors i variants reals i vincular 70/70 tipus amb les preguntes produïdes;
+1. inspeccionar els generadors i variants reals i vincular 70/70 tipus amb preguntes, respostes, modes i els nivells configurats; 
 2. decidir mantenir/reclassificar/fusionar/separar cada família candidata amb almenys dos exercicis reals resolts, errors típics i casos límit;
 3. contrastar cada decisió amb la seqüenciació XTEC específica de 2n;
 4. comprovar modes guiat, autònom i examen, així com opcions/resposta oberta, i fer una validació visual;
