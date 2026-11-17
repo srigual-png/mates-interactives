@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - integracio pedagogica pendent
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-integracio-pedagogica-diposits.cjs'
-      - 'scripts/test-mesura-2eso-integracio-pedagogica-unitats.cjs'
-      - '.github/workflows/test-mesura-2eso-integracio-pendent.yml'
   workflow_dispatch:
 jobs:
   integracio-pendent:
