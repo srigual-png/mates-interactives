@@ -1,0 +1,21 @@
+name: Auditoria generativa 128 Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/test-mesura-2eso-generacio-128-mostra.cjs'
+      - '2eso/sentit-mesura.html'
+      - '.github/workflows/test-mesura-2eso-generacio-128-mostra.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Executar 12 instancies per tipus i contrastar oracles independents
+        run: node scripts/test-mesura-2eso-generacio-128-mostra.cjs
