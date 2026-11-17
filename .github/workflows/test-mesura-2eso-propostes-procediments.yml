@@ -1,12 +1,6 @@
 name: Auditoria propostes procediments Mesura 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_propostes_procediments_nous.json'
-      - 'docs/auditoria/MI_2ESO_mesura_tracabilitat_128_tipus.json'
-      - 'scripts/test-mesura-2eso-propostes-procediments.cjs'
-      - '.github/workflows/test-mesura-2eso-propostes-procediments.yml'
   workflow_dispatch:
 
 permissions:
