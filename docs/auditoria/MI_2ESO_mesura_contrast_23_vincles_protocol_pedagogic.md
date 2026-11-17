@@ -2,7 +2,7 @@
 
 **Estat:** proposta de revisió pedagògica, no és validació ni autorització d'edicions funcionals. Data: 17/11/2026.
 
-Font: `MI_2ESO_mesura_decisio_44_vincles_unipersonals.json`. Es mantenen els 21 casos no equivalents separats provisionalment. Els altres 23 registres són **19 relacions de variants/subpassos i 4 registres de nucli compartit**, però els dos registres recíprocs `problemes:14/15` representen **una sola parella**, és a dir, **22 comparacions conceptuals**, no 23 fusions. Les observacions de sota són hipòtesis justificades a contrastar amb sortides reals i resolucions, no proves efectuades.
+Font: `MI_2ESO_mesura_decisio_44_vincles_unipersonals.json`. Es mantenen els 21 casos no equivalents separats provisionalment. Els altres 23 registres són **19 relacions de variants/subpassos i 4 registres de nucli compartit**, però els registres recíprocs `problemes:14/15` i `perimetres:4/15` representen **dues parelles repetides**, és a dir, **21 parelles de grups conceptuals**, no 23 fusions. Les observacions de sota són hipòtesis justificades a contrastar amb sortides reals i resolucions, no proves efectuades.
 
 ## Criteris per acceptar una mateixa família
 
@@ -42,7 +42,7 @@ Font: `MI_2ESO_mesura_decisio_44_vincles_unipersonals.json`. Es mantenen els 21 
 
 ## Bloc de validació empírica pendent
 
-Per a cadascuna de les **22 comparacions conceptuals**: (a) identificar els generadors i les branques efectives, (b) obtenir dos enunciats reals de cada variant, (c) resoldre independentment i contrastar amb l'opció correcta, (d) comprovar errors típics, unitats i equivalències de distractors, (e) verificar les pistes i el mode examen, (f) emetre decisió: `mateixa_familia`, `variant_mateixa_familia`, `families_diferents` o `pendent_evidencia` amb nivell candidat i justificació. Evitar comptar dues vegades `problemes:14/15`.
+Per a cadascuna de les **21 parelles de grups conceptuals**: (a) identificar els generadors i les branques efectives, (b) obtenir dos enunciats reals de cada variant, (c) resoldre independentment i contrastar amb l'opció correcta, (d) comprovar errors típics, unitats i equivalències de distractors, (e) verificar les pistes i el mode examen, (f) emetre decisió: `mateixa_familia`, `variant_mateixa_familia`, `families_diferents` o `pendent_evidencia` amb nivell candidat i justificació. Evitar comptar dues vegades `problemes:14/15` i `perimetres:4/15`.
 
 **Prioritat de mostreig:** `problemes:14/15`, `problemes:5/superficies:8`, `estimacio:18` contra càlcul d'error absolut, després Pitàgores directe/invers i les variants de `superficies:17`. La relació amb `superficies:19` és una tercera tasca de reconeixement de desenvolupament, no una equivalència assumida.
 
