@@ -114,6 +114,22 @@ Això deixaria una proposta de **40 N1 / 29 N2 / 1 N3** entre tipus únics; l’
 
 **Varietat a revisar:** `coordenades:7` genera sempre desplaçaments 3 i 4 unitats (en ordre i signes variables), de manera que la resposta sempre és 5. El procediment N2 (Pitàgores sobre les diferències de coordenades) és adient, però la varietat numèrica actual és feble i el volum de mostres no acredita més valors.
 
+### Registres existents de cobertura i examen
+
+El fitxer `resultats-punt3-2eso-espacial.json` conté aquesta simulació prèvia:
+
+| Tema ordinari | Mostres generades | Cobertura N1/N2/N3 | Selecció examen N1/N2/N3 |
+|---|---:|---:|---:|
+| Semblança | 3.000 | 6/5/0 | 6/6/0 |
+| Tales i escales | 3.000 | 5/5/0 | 6/6/0 |
+| Pitàgores | 3.000 | 5/5/0 | 6/6/0 |
+| Cossos | 3.000 | 10/0/0 | 12/0/0 |
+| Visualització 3D | 3.000 | 2/6/1 | 3/6/3 |
+| Coordenades | 3.000 | 7/3/0 | 7/5/0 |
+| Modelització | 3.000 | 3/7/1 | 3/7/2 |
+
+El mateix registre dona una selecció global equilibrada de 20 preguntes (7/7/6) i una selecció només N1 (20/0/0); les polítiques només N2 o només N3 apareixen bloquejades. Aquests són resultats del simulador existent, no validació visual dels modes guiat/autònom/examen. `banksReviewed: 0` i `bankChecks: []` indiquen que no es van revisar bancs d’exercicis; `pageErrors: []` només vol dir que aquella passada automatitzada no va registrar errors de pàgina.
+
 ## Evidència de proves disponible i límits
 
 La lectura del codi confirma que els set generadors cobreixen els codis ordinaris 1–11 / 1–10 / 1–10 / 1–10 / 1–9 / 1–10 / 1–10. La classificació s’aplica des de `REVIEWED_LEVELS`; `REVIEWED_VARIANTS` només afegeix una branca específica per al tipus 10 de modelització (escala, N1). Les etiquetes locals `easy/medium/hard` dels generadors no substitueixen el mapa N1/N2/N3.
