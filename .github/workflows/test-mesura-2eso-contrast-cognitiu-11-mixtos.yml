@@ -1,11 +1,6 @@
 name: Auditoria contrast cognitiu onze grups mixtos 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_contrast_cognitiu_11_grups_mixtos.json'
-      - 'scripts/test-mesura-2eso-contrast-cognitiu-11-mixtos.cjs'
-      - '.github/workflows/test-mesura-2eso-contrast-cognitiu-11-mixtos.yml'
   workflow_dispatch:
 
 permissions:
