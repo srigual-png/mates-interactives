@@ -3,8 +3,8 @@
   "status": "evidence_coverage_not_teacher_approval",
   "records": 23,
   "unique_group_pairs": 21,
-  "source_tests_success": 22,
-  "source_tests_queued": 1,
+  "source_tests_success": 23,
+  "source_tests_queued": 0,
   "completed_paired_evidence": 0,
   "note": "Les mostres verificades proven correcció individual, no equivalència de famílies. Ambdós extrems i dades deliberadament aparellades pendents.",
   "rows": [
@@ -78,7 +78,7 @@
         "perimetres:5"
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-perimetres14-inversa-circumferencia.cjs",
-      "source_math_evidence": "workflow_queued",
+      "source_math_evidence": "workflow_success",
       "paired_same_parameters": "pending",
       "target_mathematical_oracles_for_this_pair": "not_assessed",
       "ui_modes": "pending",
@@ -381,5 +381,11 @@
       "curriculum_judgement": "provisional",
       "family_approved": false
     }
-  ]
+  ],
+  "last_confirmed_workflow": {
+    "name": "Mesura 2n ESO - radi i circumferencia inversa",
+    "run_id": 44102810537,
+    "status": "success",
+    "generated_examples": 160
+  }
 }
