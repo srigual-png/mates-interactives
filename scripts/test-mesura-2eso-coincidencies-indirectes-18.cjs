@@ -25,7 +25,7 @@ const counts={},unique=new Set();
 for(const row of report.reviewed_types){
  assert(!unique.has(row.key),'Duplicated inspection '+row.key);unique.add(row.key);
  assert.equal(row.key,row.key.toLowerCase());
- assert.equal(row.topic,row.key.split(':')[0]===row.topic?row.topic:row.key.split(':')[0]); // candidate's topic, not generator's
+ assert(['escales','perimetres','estimacio'].includes(row.topic),'Unknown candidate topic');
  const [actualTopic,num]=row.key.split(':');
  const caseSource=sourceFor(actualTopic,Number(num));
  const signature=row.question_signature;
