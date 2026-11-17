@@ -44,5 +44,5 @@ for(const split of overlay.splits){
  }
 }
 assert.equal(overlay.splits.length,6);
-assert.equal(n,50);
+assert.equal(n,54);
 console.log('OK: '+n+' instàncies reals, 14 subgrups i 6 clústers revisats. Qualitat curricular pendent.');
