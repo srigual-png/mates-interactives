@@ -154,7 +154,7 @@ Són propostes, no s’han afegit al generador ni s’han executat proves perqu�
 ### Revisió dels modes i nivell de verificació
 
 - **Guiat — revisió estàtica:** els objectes d’exercici inclouen pistes guide i solució pas a pas. El codi de visualització mostra les pistes al nivell guiat. No s’ha inspeccionat cada pantalla renderitzada ni comprovat l’accessibilitat visual.
-- **Autònom — revisió estàtica + registre simulat:** els exercicis amb resposta oberta exposen camp i pista; tipus amb allowOpen=false són només d’opcions. El registre històric compta 7 tipus amb resposta oberta i 5 de només opcions (recompte per tipus de la revisió; les mostres de resultat són 49 obertes/7 només opcions d’un altre resum global, no 56 tipus d’aquest tema). No s’ha fet una sessió nova d’entrada real.
+- **Autònom — revisió estàtica + registre simulat:** els exercicis amb resposta oberta exposen camp i pista; tipus amb allowOpen=false són només d’opcions. En la lectura estàtica dels 12 tipus, 9 permeten resposta oberta i 3 són només d’opcions (tipus 4, 10 i 12). No s’ha fet una sessió nova d’entrada real.
 - **Examen — simulació existent:** 3.000 generacions del tema i selecció de 12 preguntes amb repartiment N1/N2 6/6; les seleccions globals exclusives de N2/N3 consten bloquejades en el lot general. No s’ha validat visualment el DOM d’examen per aquest tema.
 - **Bancs/varietat:** banksReviewed=0 i bankChecks buit; el volum de generacions no acredita unicitat. Els exemples guardats mostren cada tipus, però no totes les combinacions de valors.
 - **Conclusió:** hi ha evidència simulada de cobertura i examen i inspecció estàtica de l’estructura; no hi ha validació visual/interactiva completa. No s’han creat workflows ni repetit proves.
