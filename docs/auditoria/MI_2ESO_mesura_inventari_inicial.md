@@ -2,6 +2,8 @@
 
 **Estat: PROVISIONAL — no és cap classificació pedagògica validada.**
 
+**Consolidació pedagògica provisional de «Problemes de mesura» (20/20):** [matriu de decisions JSON](MI_2ESO_mesura_problemes_decisions_20_tipus.json) i [informe amb exemples contrastius](MI_2ESO_mesura_problemes_consolidacio.md). Es distingeixen 10 nuclis compartits, 5 variants contextuals, 4 problemes compostos candidats i 1 cas per revisar; **són categories de decisió, no recomptes de famílies genuïnes**. Test estructural dedicat afegit.
+
 **Traçabilitat 128/128 tipus:** registre estructurat [JSON](MI_2ESO_mesura_tracabilitat_128_tipus.json) i [guia d'interpretació](MI_2ESO_mesura_tracabilitat_128_tipus.md), amb assignació a agrupacions candidates, vincles entre temes i 6 variants documentades. Prova automàtica d'integritat disponible. **Això no valida encara famílies matemàtiques genuïnes.**
 
 **Revisió transversal posterior:** comprovades coincidències de procediment entre els 7 temes, amb matriu de fusions, casos realment compostos i incidències prioritzades. Vegeu [Revisió transversal del Sentit de la mesura](MI_2ESO_mesura_revisio_transversal.md). **No existeix encara un recompte final de famílies genuïnes validades.**
