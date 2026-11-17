@@ -1,0 +1,20 @@
+name: Auditoria proposta distractors Estimacio 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_proposta_correccio_distractors_estimacio_1_11.json'
+      - 'scripts/test-mesura-2eso-proposta-distractors-estimacio.cjs'
+      - '.github/workflows/test-mesura-2eso-proposta-distractors-estimacio.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar opcions proposades no equivalents
+        run: node scripts/test-mesura-2eso-proposta-distractors-estimacio.cjs
