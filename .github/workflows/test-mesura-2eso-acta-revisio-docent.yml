@@ -1,0 +1,20 @@
+name: Auditoria acta revisio docent Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_acta_revisio_docent_escales_perimetres_en_blanc.json'
+      - 'scripts/test-mesura-2eso-acta-revisio-docent.cjs'
+      - '.github/workflows/test-mesura-2eso-acta-revisio-docent.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprovar acta no signada i decisions independents
+        run: node scripts/test-mesura-2eso-acta-revisio-docent.cjs
