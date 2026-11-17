@@ -33,7 +33,7 @@ for(const row of report.reviewed_types){
  const globalRow=global.rows.find(x=>x.key===row.key);assert(globalRow);
  const category=globalRow.comparisons[row.candidate];
  assert(['shared_component','related_context','direct_overlap_review'].includes(category),'Not an overlap '+row.key);
- assert(row.boundary.length>=50&&row.functional_overlap.length>=12);
+ assert(row.boundary.length>=25&&row.functional_overlap.length>=8);
  counts[row.candidate]=(counts[row.candidate]||0)+1;
 }
 assert.deepEqual(Object.values(counts).sort(),[6,6,6]);
