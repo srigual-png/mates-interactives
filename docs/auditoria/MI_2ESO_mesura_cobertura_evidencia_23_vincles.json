@@ -19,11 +19,13 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-cinc-variants-escales-perimetres-unitats.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "pending",
+      "paired_same_parameters": "math_evidence_verified_4_pairs",
       "target_mathematical_oracles_for_this_pair": "not_assessed",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
-      "family_approved": false
+      "family_approved": false,
+      "paired_script": "scripts/test-mesura-2eso-escales-dues-parelles-dades-compartides.cjs",
+      "pedagogical_interpretation": "scale conversion for one side is a subprocess of real rectangle perimeter"
     },
     {
       "source": "escales:12",
@@ -34,11 +36,13 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-cinc-variants-escales-perimetres-unitats.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "pending",
+      "paired_same_parameters": "math_evidence_verified_4_pairs",
       "target_mathematical_oracles_for_this_pair": "not_assessed",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
-      "family_approved": false
+      "family_approved": false,
+      "paired_script": "scripts/test-mesura-2eso-escales-dues-parelles-dades-compartides.cjs",
+      "pedagogical_interpretation": "infer enlargement factor from two lengths versus apply given factor to length"
     },
     {
       "source": "estimacio:18",
@@ -394,12 +398,26 @@
     "status": "success",
     "generated_examples": 160
   },
-  "paired_math_evidence_unique_groups": 2,
-  "paired_math_evidence_records": 3,
-  "paired_real_cases": 8,
+  "paired_math_evidence_unique_groups": 4,
+  "paired_math_evidence_records": 5,
+  "paired_real_cases": 16,
   "paired_math_evidence_workflow": {
     "run_id": 44103600888,
     "status": "success",
     "tested_instances": 1280
-  }
+  },
+  "paired_math_evidence_workflows": [
+    {
+      "run_id": 44103600888,
+      "status": "success",
+      "generated_examples": 1280,
+      "paired_cases": 8
+    },
+    {
+      "run_id": 44104301110,
+      "status": "success",
+      "generated_examples": 1600,
+      "paired_cases": 8
+    }
+  ]
 }
