@@ -1,0 +1,23 @@
+name: Auditoria proposta nivells 20 variants Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_proposta_nivells_20_variants_pedagogiques.json'
+      - 'docs/auditoria/MI_2ESO_mesura_evidencia_cognitiva_5_clusters_geometria_error.json'
+      - 'docs/auditoria/MI_2ESO_mesura_exemples_cognitius_C011_variants_mixtes.json'
+      - 'docs/auditoria/MI_2ESO_mesura_estimacio_12_convencio_arrodoniment_proposta.json'
+      - 'scripts/test-mesura-2eso-proposta-nivells-20-variants.cjs'
+      - '.github/workflows/test-mesura-2eso-proposta-nivells-20-variants.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprovar les 20 propostes contra evidències originals
+        run: node scripts/test-mesura-2eso-proposta-nivells-20-variants.cjs
