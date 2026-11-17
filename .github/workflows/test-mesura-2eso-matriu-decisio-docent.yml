@@ -1,11 +1,6 @@
 name: Auditoria matriu decisio docent Mesura 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_matriu_decisio_docent_3_candidates.json'
-      - 'scripts/test-mesura-2eso-matriu-decisio-docent.cjs'
-      - '.github/workflows/test-mesura-2eso-matriu-decisio-docent.yml'
   workflow_dispatch:
 
 permissions:
