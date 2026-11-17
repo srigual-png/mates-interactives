@@ -1,11 +1,6 @@
 name: Auditoria estimacio 12 i carrega cognitiva Mesura 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_estimacio12_contrast_cognitiu.json'
-      - 'scripts/test-mesura-2eso-estimacio12-contrast-cognitiu.cjs'
-      - '.github/workflows/test-mesura-2eso-estimacio12-contrast-cognitiu.yml'
   workflow_dispatch:
 
 permissions:
