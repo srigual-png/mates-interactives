@@ -22,7 +22,8 @@ for(const t of consolidated.by_topic){
  assert.equal(t.source_code_checked,t.types);
  assert.equal(t.priority_case_count,actual.filter(x=>priorityKeys.has(x)).length);
  assert.equal(t.independent_oracle_types+t.without_independent_oracle,t.types);
- assert.equal(t.independent_oracle_instances,t.independent_oracle_types*40);
+ assert.equal(t.independent_oracle_instances,(t.independent_oracle_types-t.additional_independent_oracle_types)*40+t.additional_independent_oracle_instances);
+ assert.equal(t.additional_independent_oracle_instances,t.additional_independent_oracle_types*50);
  assert.equal(t.teacher_approved_families,0);assert.equal(t.teacher_approved_levels,0);
  totals.types+=t.types;totals.source_inspected+=t.source_code_checked;
  totals.independent_oracle_types+=t.independent_oracle_types;
@@ -30,11 +31,13 @@ for(const t of consolidated.by_topic){
  totals.priority_case_count+=t.priority_case_count;
  totals.oracle_checks+=t.independent_oracle_instances;
 }
-assert.deepEqual(totals,{types:128,source_inspected:128,independent_oracle_types:20,without_independent_oracle:108,priority_case_count:24,oracle_checks:800});
+assert.deepEqual(totals,{types:128,source_inspected:128,independent_oracle_types:39,without_independent_oracle:89,priority_case_count:24,oracle_checks:1750});
 assert.equal(consolidated.totals.types_fixed_with_authorization,2);
+assert.equal(consolidated.generated_test_evidence.additional_independent_oracle_checks,950);
+assert.equal(consolidated.generated_test_evidence.additional_independent_oracle_types,19);
 assert.equal(consolidated.totals.official_level_changes,0);
 assert.equal(consolidated.totals.official_family_approvals,0);
 assert.equal(consolidated.totals.merged_or_deployed,false);
 assert.equal(consolidated.generated_test_evidence.semantic_duplicates_detected_after_fix,0);
 assert.equal(new Set(consolidated.fixed_items.map(x=>x.key)).size,2);
-console.log('OK: 7 temes, 128 tipus, 20 oracles/800 contrastos, 108 pendents, 24 casos prioritaris, 2 correccions autoritzades.');
+console.log('OK: 7 temes, 128 tipus, 39 oracles/1750 contrastos, 89 pendents, 24 casos prioritaris, 2 correccions autoritzades.');
