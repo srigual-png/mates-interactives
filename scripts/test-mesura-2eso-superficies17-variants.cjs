@@ -14,7 +14,7 @@ const answerUnit=(n,u,p=6)=>fmtNum(n,p)+' '+u;
 const uniq4=(correct,wrong)=>{const out=[String(correct)];for(const x of wrong){if(!out.includes(String(x)))out.push(String(x));if(out.length===4)break;}assert.equal(out.length,4);return out;};
 const cases=[
  {mode:'sameBase',selectors:[0,0,0,1,0,0],expectedA:[4,3,2],expectedB:[4,3,3],level:1},
- {mode:'other',selectors:[2,2,2,0,3,2],expectedA:[6,5,4],expectedB:[3,6,5],level:2},
+ {mode:'other',selectors:[2,2,2,0,2,2],expectedA:[6,5,4],expectedB:[3,6,5],level:2},
  {mode:'sameBase',selectors:[1,1,2,2,1,1],expectedA:[5,4,4],expectedB:[5,4,4],level:1},
  {mode:'other',selectors:[0,2,1,2,0,1],expectedA:[4,5,3],expectedB:[5,3,4],level:2}
 ];
