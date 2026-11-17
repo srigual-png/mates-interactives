@@ -44,6 +44,11 @@ function check(type){
  assert(el('guideSteps').innerHTML.includes(ex.guide[0]));
  assert(el('optionsGrid').innerHTML.includes(ex.correct));
  assert.equal(el('openWrap').style.display,'none');
+ state.level=2;vm.runInContext('showExercise()',ctx);
+ assert.equal(el('guideSteps').style.display,'none');
+ assert.equal(el('optionsGrid').style.display,'');
+ assert(el('optionsGrid').innerHTML.includes(ex.correct));
+ state.level=1;
  assert(screens.includes('screenExercise'));
  vm.runInContext('selectAnswer('+ex.options.indexOf(ex.correct)+',null)',ctx);
  assert.deepEqual(correctEvents.at(-1),{ok:true,answer:ex.correct});
