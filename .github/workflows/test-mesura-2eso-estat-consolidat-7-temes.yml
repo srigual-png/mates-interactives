@@ -1,0 +1,20 @@
+name: Auditoria estat consolidat 7 temes Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_estat_consolidat_7_temes.json'
+      - 'scripts/test-mesura-2eso-estat-consolidat-7-temes.cjs'
+      - '.github/workflows/test-mesura-2eso-estat-consolidat-7-temes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprovar totals de set temes i traçabilitat de les auditories
+        run: node scripts/test-mesura-2eso-estat-consolidat-7-temes.cjs
