@@ -23,7 +23,7 @@ for(const [topic,{count,expected}] of Object.entries(cases)){
     assert(Number.isInteger(x.type)&&x.type>=1&&x.type<=count);
     assert(!covered.has(x.type),'Repetit '+x.key);
     covered.add(x.type);
-    assert.equal(x.old_group,map.get(x.key)?.source_candidate,'Agrupació d'origen incorrecta '+x.key);
+    assert.equal(x.old_group,map.get(x.key)?.source_candidate,'Agrupació d\'origen incorrecta '+x.key);
     assert.equal(x.status,'provisional');
     assert(Object.hasOwn(observed,x.decision),'Tipus de decisió desconeguda');
     observed[x.decision]++;
