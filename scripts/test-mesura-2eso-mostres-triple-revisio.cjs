@@ -43,11 +43,11 @@ const check=(topic,type,tag,q)=>{
   if(type===2)assert(['m²','cm²'].includes(unit),tag+' unitat superficial');
   if(type===3)assert(['mL','L','m³'].includes(unit),tag+' unitat capacitat');
  }else if(topic==='superficies'){
-  assert.equal(b.length,1,tag+' dades');
+  assert.equal(b.length,type===3?2:1,tag+' dades');
   const nums=[...b[0].matchAll(/\d+(?:[.,]\d+)?/g)].map(x=>Number(x[0].replace(',','.')));
   let volume;
   if(type===1){assert.equal(nums.length,3);volume=nums[0]*nums[1]*nums[2];}
-  if(type===3){assert.equal(nums.length,1);const h=q.question.match(/altura de <b>([\d.,]+) cm<\/b>/);assert(h,tag);volume=nums[0]*Number(h[1].replace(',','.'));}
+  if(type===3){assert.equal(nums.length,1);const h=b[1].match(/([\d.,]+) cm/);assert(h,tag);volume=nums[0]*Number(h[1].replace(',','.'));}
   if(type===5){assert.equal(nums.length,1);volume=nums[0]**3;}
   assert.equal(q.correct,answerUnit(volume,'cm³'),tag+' oracle matemàtic');
  }
