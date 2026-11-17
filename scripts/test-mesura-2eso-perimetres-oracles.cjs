@@ -72,7 +72,7 @@ for(turn=0;turn<8;turn++){
       unit='cm';
     } else if(type===15){
       assert.equal(b.length,2,'15: costats i apotema');
-      const dimensions=[...b[0].matchAll(/\\d+(?:[.,]\\d+)?/g)].map(m=>num(m[0]));
+      const dimensions=[...b[0].matchAll(/[0-9]+(?:[.,][0-9]+)?/g)].map(m=>num(m[0]));
       assert.equal(dimensions.length,2,'15: n i costat');
       expected=roundTo(dimensions[0]*dimensions[1]*num(b[1])/2,2);
     } else if(type===16){
@@ -84,7 +84,7 @@ for(turn=0;turn<8;turn++){
       unit='m²';
     } else {
       assert.equal(b.length,2,'18: radi i operació errònia');
-      const radius=num(b[0]), expression=b[1].replace(/\\s/g,'');
+      const radius=num(b[0]), expression=b[1].replace(/\s/g,'');
       assert(expression.startsWith('2·3,14·'+radius+'='),'18: fórmula de longitud indicada');
       const shown=num(expression.split('=')[1]);
       assert.equal(shown,roundTo(2*3.14*radius,2),'18: resultat de longitud');
@@ -101,4 +101,4 @@ for(turn=0;turn<8;turn++){
   }
 }
 assert.equal(checked,136);
-console.log('OK: 136 exercicis de perímetres i àrees; 17 tipus amb oracles (17è tipus de corona circular en suite transversal)');
+console.log('OK: 136 exercicis de perímetres i àrees amb oracles per 17 tipus; el tipus 17 es comprova en suite transversal');
