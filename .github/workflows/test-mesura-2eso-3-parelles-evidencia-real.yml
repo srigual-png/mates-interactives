@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - tres parelles evidencia real
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-3-parelles-evidencia-real.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-3-parelles-evidencia-real.yml'
   workflow_dispatch:
 jobs:
   independent-oracles:
