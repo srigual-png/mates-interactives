@@ -1,13 +1,6 @@
 name: Auditoria contrast transversal Unitat Escales
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_unitats_escales_contrast_transversal.json'
-      - 'docs/auditoria/MI_2ESO_mesura_unitats_escales_grups_candidats.json'
-      - 'docs/auditoria/MI_2ESO_mesura_tracabilitat_128_tipus.json'
-      - 'scripts/test-mesura-2eso-contrast-transversal.cjs'
-      - '.github/workflows/test-mesura-2eso-contrast-transversal.yml'
   workflow_dispatch:
 
 permissions:
