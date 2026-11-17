@@ -2,6 +2,8 @@
 
 **Estat: PROVISIONAL — no és cap classificació pedagògica validada.**
 
+**Consolidació de Pitàgores i Perímetres (34/34 tipus):** [decisions de Pitàgores](MI_2ESO_mesura_pitagores_decisions_16_tipus.json), [decisions de Perímetres](MI_2ESO_mesura_perimetres_decisions_18_tipus.json) i [informe comparatiu](MI_2ESO_mesura_pitagores_perimetres_consolidacio.md). **Acumulat: 90/128 tipus amb decisió de treball**, no pas 90 famílies genuïnes validades.
+
 **Consolidació de «Unitats i conversions» i «Escales» (36/36 tipus):** [matriu d'Unitats](MI_2ESO_mesura_unitats_decisions_18_tipus.json), [matriu d'Escales](MI_2ESO_mesura_escales_decisions_18_tipus.json) i [informe de decisions](MI_2ESO_mesura_unitats_escales_consolidacio.md). Comprovació estructural dedicada; les categories són **candidates, no famílies validades**.
 
 **Consolidació pedagògica provisional de «Problemes de mesura» (20/20):** [matriu de decisions JSON](MI_2ESO_mesura_problemes_decisions_20_tipus.json) i [informe amb exemples contrastius](MI_2ESO_mesura_problemes_consolidacio.md). Es distingeixen 10 nuclis compartits, 5 variants contextuals, 4 problemes compostos candidats i 1 cas per revisar; **són categories de decisió, no recomptes de famílies genuïnes**. Test estructural dedicat afegit.
