@@ -223,11 +223,13 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-pitagores15-dues-branques.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "pending",
+      "paired_same_parameters": "math_evidence_verified_5_pairs",
       "target_mathematical_oracles_for_this_pair": "not_assessed",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
-      "family_approved": false
+      "family_approved": false,
+      "paired_script": "scripts/test-mesura-2eso-pitagores2-3-15-aparellades.cjs",
+      "pedagogical_interpretation": "two branches of same generator: direct diagonal matches basic hypotenuse; inverse side matches basic inverse cathetus"
     },
     {
       "source": "pitagores:3",
@@ -245,11 +247,13 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-pitagores-sis-variants-oracles.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "pending",
+      "paired_same_parameters": "math_evidence_verified_3_pairs",
       "target_mathematical_oracles_for_this_pair": "not_assessed",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
-      "family_approved": false
+      "family_approved": false,
+      "paired_script": "scripts/test-mesura-2eso-pitagores2-3-15-aparellades.cjs",
+      "pedagogical_interpretation": "same triangular data and numerical Pythagorean relation, but inverse cathetus vs direct hypotenuse require differing operations"
     },
     {
       "source": "problemes:14",
@@ -414,9 +418,9 @@
     "status": "success",
     "generated_examples": 160
   },
-  "paired_math_evidence_unique_groups": 12,
-  "paired_math_evidence_records": 13,
-  "paired_real_cases": 46,
+  "paired_math_evidence_unique_groups": 14,
+  "paired_math_evidence_records": 15,
+  "paired_real_cases": 54,
   "paired_math_evidence_workflow": {
     "run_id": 44103600888,
     "status": "success",
@@ -467,6 +471,12 @@
     },
     {
       "run_id": 44108252953,
+      "status": "success",
+      "generated_examples": 1200,
+      "paired_cases": 8
+    },
+    {
+      "run_id": 44109309149,
       "status": "success",
       "generated_examples": 1200,
       "paired_cases": 8
