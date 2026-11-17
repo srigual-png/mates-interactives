@@ -29,7 +29,7 @@ for(const row of report.reviewed_types){
  const [actualTopic,num]=row.key.split(':');
  const caseSource=sourceFor(actualTopic,Number(num));
  const signature=row.question_signature;
- assert(caseSource.includes(signature),'Source signature missing '+row.key+': '+signature);
+ assert(caseSource.replace(/<[^>]*>/g,'').includes(signature),'Source signature missing '+row.key+': '+signature);
  const globalRow=global.rows.find(x=>x.key===row.key);assert(globalRow);
  const category=globalRow.comparisons[row.candidate];
  assert(['shared_component','related_context','direct_overlap_review'].includes(category),'Not an overlap '+row.key);
