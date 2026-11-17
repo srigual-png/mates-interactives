@@ -1,11 +1,6 @@
 name: Auditoria contrast Estimacio 5 11 16
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_contrast_estimacio_5_11_16.json'
-      - 'scripts/test-mesura-2eso-contrast-estimacio-5-11-16.cjs'
-      - '.github/workflows/test-mesura-2eso-contrast-estimacio-5-11-16.yml'
   workflow_dispatch:
 
 permissions:
