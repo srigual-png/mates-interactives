@@ -75,5 +75,59 @@ for(turn=0;turn<8;turn++){
   assert.equal(new Set(q.options).size,4);
   assert(q.options.includes(q.correct));checked++;
 }
-assert.equal(checked,64);
-console.log('OK: 64 exercicis de Superfícies amb oracles inversos, capacitat i desenvolupaments');
+
+// Segona tanda: deu tipus de superfícies i volums encara sense oracle en aquesta suite.
+// Els tipus 7 i 8 ja estan comprovats a la suite transversal original.
+for(turn=0;turn<8;turn++){
+  for(const type of [1,2,3,4,5,6,9,16,17,18]){
+    const q=ctx.genSuperficiesVolums2ESO(type),b=bold(q);
+    let expected,unit='cm²';
+    if(type===1||type===2||type===16){
+      assert.equal(b.length,1,'Dimensions de capsa');
+      const [l,w,h]=b[0].split('×').map(num);
+      if(type===1){expected=l*w*h;unit='cm³';}
+      else expected=2*(l*w+l*h+w*h);
+    } else if(type===3){
+      assert.equal(b.length,2);
+      expected=num(b[0])*num(b[1]);unit='cm³';
+    } else if(type===4){
+      assert.equal(b.length,3);
+      expected=num(b[0])*num(b[1])*num(b[2])/2;unit='cm³';
+    } else if(type===5||type===6){
+      assert.equal(b.length,1);
+      const side=num(b[0]);expected=type===5?side**3:6*side**2;
+      if(type===5)unit='cm³';
+    } else if(type===9){
+      assert.equal(b.length,3,'Cilindre: radi, altura i pi');
+      const r=num(b[0]),h=num(b[1]);expected=Math.round((2*3.14*r*r+2*3.14*r*h)*100)/100;
+    } else if(type===17){
+      assert.equal(b.length,2,'Dos recipients');
+      const a=b[0].split('×').map(num),c=b[1].split('×').map(num);
+      assert.equal(a.length,3);assert.equal(c.length,3);
+      const va=a.reduce((x,y)=>x*y,1),vb=c.reduce((x,y)=>x*y,1);
+      assert.notEqual(va,vb,'Mateix volum descartat pel generador');
+      const winner=va>vb?'El recipient A':'El recipient B';
+      assert.equal(q.correct,winner,'Comparació volum A/B');
+      const variant=a[0]===c[0]&&a[1]===c[1]?'sameBase':undefined;
+      assert.equal(q.difficultyVariant,variant,'Variant de dificultat');
+    } else {
+      assert.equal(b.length,2,'Diagnosi superfície vs volum');
+      const dims=b[0].split('×').map(num);
+      assert.equal(dims.length,3);
+      const [l,w,h]=dims;
+      const shown=num(b[1].split('=')[1]);
+      assert.equal(shown,2*(l*w+l*h+w*h),'Fórmula aplicada calcula superfície');
+      assert.equal(q.correct,'Ha calculat l’àrea total en lloc del volum');
+    }
+    if(type===17||type===18){
+      assert.equal(q.options.length,4,'Quatre distractors');
+      assert.equal(new Set(q.options).size,4,'Opcions úniques');
+      assert(q.options.includes(q.correct),'Correcta present');
+      assert(q.guide.length>=2&&q.solution.length>=2);
+    }else check(q,expected,unit,type);
+    checked++;
+  }
+}
+assert.equal(checked,144);
+console.log('OK: 144 exercicis de Superfícies amb oracles per 18 tipus; 7/8 ja comprovats a la suite transversal');
+
