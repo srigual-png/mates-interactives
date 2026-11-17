@@ -1,6 +1,6 @@
 # Contrast pedagògic de C011 i tres tipus de dificultat mixta
 
-**Data:** 17/11/2026  
+**Data:** 17/11/2026
 **Estat:** evidència pedagògica documentada i contrastada amb el codi actual, **sense aprovació oficial de nivells**.
 
 ## Validació
