@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - tres tasques de cilindre aparellades
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-superficies-8-9-19-aparellades.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-superficies-8-9-19-aparellades.yml'
   workflow_dispatch:
 jobs:
   compare:
