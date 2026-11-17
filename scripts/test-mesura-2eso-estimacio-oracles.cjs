@@ -56,5 +56,53 @@ for(turn=0;turn<8;turn++){
     count++;
   }
 }
-assert.equal(count,64);
-console.log('OK: 64 exercicis reals de precisio i error amb oracle independent per 8 tipus');
+
+// Cobertura complementària: comparacions de precisió, mig pas i diagnòstic d'error.
+const winningRelative=new Set(),winningAbsolute=new Set();
+for(turn=0;turn<8;turn++){
+  for(const type of [9,10,17,18]){
+    const q=ctx.genEstimacioError2ESO(type),b=bold(q),label='estimacio:'+type+' iter='+turn;
+    let expected;
+    switch(type){
+      case 9:{
+        assert.equal(b.length,4,label+' quatre magnituds');
+        const [ra,aa,rb,ab]=b.map(value);
+        const ea=Math.abs(aa-ra)/ra,eb=Math.abs(ab-rb)/rb;
+        assert.notEqual(ea,eb,label+' errors iguals no previstos');
+        expected=ea<eb?'La mesura A':'La mesura B';
+        winningRelative.add(expected);
+        break;
+      }
+      case 10:{
+        assert.equal(b.length,1,label+' una precisió');
+        const tolerance={'a la unitat':'0,5','a la dècima':'0,05','a la centèsima':'0,005'};
+        expected=tolerance[b[0]];
+        assert(expected,label+' precisió desconeguda '+b[0]);
+        break;
+      }
+      case 17:{
+        assert.equal(b.length,3,label+' tres valors');
+        const [ref,a,c]=b.map(value);
+        const ea=Math.abs(a-ref),eb=Math.abs(c-ref);
+        assert.notEqual(ea,eb,label+' empat no previst');
+        expected=ea<eb?'L’aproximació A':'L’aproximació B';
+        winningAbsolute.add(expected);
+        break;
+      }
+      case 18:{
+        assert.equal(b.length,3,label+' dades i operació');
+        const reference=value(b[0]),approximation=value(b[1]);
+        assert.equal(b[2].replace(/\s/g,''),reference+'+'+approximation+'='+(reference+approximation),label+' suma indicada');
+        expected='Ha sumat els valors en lloc de calcular-ne la diferència absoluta';
+        break;
+      }
+    }
+    verify(q,expected,label);
+    count++;
+  }
+}
+assert.equal(winningRelative.size,2,'estimacio:9 ha de poder seleccionar A i B');
+assert.equal(winningAbsolute.size,2,'estimacio:17 ha de poder seleccionar A i B');
+assert.equal(count,96);
+console.log('OK: 96 exercicis reals de precisio i error amb oracles independents per 12 tipus');
+
