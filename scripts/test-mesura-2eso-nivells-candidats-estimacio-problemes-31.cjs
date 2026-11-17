@@ -29,7 +29,8 @@ for(const row of recent.records){
  const [topic,id]=row.key.split(':');
  assert(funcs[topic],'Unexpected topic: '+topic);
  const start=html.indexOf('function '+funcs[topic]+'(');
- const end=html.indexOf('/* ── GENERADOR ·',start+30);
+ const next=html.indexOf('/* ── GENERADOR ·',start+30);
+ const end=next>start?next:html.length;
  assert(start>=0&&end>start);
  const section=html.slice(start,end);
  assert(new RegExp('(?:if|else if)\\(type==='+Number(id)+'\\)\\{').test(section),'No generator branch for '+row.key);
