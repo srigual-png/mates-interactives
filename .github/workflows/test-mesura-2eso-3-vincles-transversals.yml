@@ -1,0 +1,20 @@
+name: Auditoria tres vincles transversals Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_3_vincles_transversals_evidencia.json'
+      - 'scripts/test-mesura-2eso-3-vincles-transversals.cjs'
+      - '.github/workflows/test-mesura-2eso-3-vincles-transversals.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar tres vincles i propostes no aprovades
+        run: node scripts/test-mesura-2eso-3-vincles-transversals.cjs
