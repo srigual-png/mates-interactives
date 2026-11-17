@@ -30,6 +30,7 @@ for(const c of data.cases){
 const seen=new Set();for(let i=0;i<400;i++){
  const ex=generator(12);
  const q=String(ex.question).replace(/<[^>]*>/g,'');
+ assert(q.includes('Si el valor original queda exactament a mig camí entre dues dècimes, s’arrodoneix cap amunt.'),'Missing authorized tie-break clarification');
  const m=q.match(/registrat com ([\d,.]+) cm/);
  assert(m,'Unexpected question '+q);
  const value=asNum(m[1]);seen.add(value);
@@ -41,6 +42,7 @@ const seen=new Set();for(let i=0;i<400;i++){
  assert.equal(new Set(ex.options).size,4);
 }
 assert.equal(seen.size,4);
-assert.equal(data.permission_boundary.source_generator_edited,false);
+assert.equal(data.permission_boundary.source_generator_edited,true);
+assert.equal(data.status,'wording_clarification_user_authorized_and_applied');
 assert.equal(data.level_guidance.approved,false);
-console.log(JSON.stringify({rounding_cases:4,exact_integer_boundary_checks:4*301,generated_questions:400,distinct_scenarios:seen.size,discrepancies:0,source_changed:false},null,2));
+console.log(JSON.stringify({rounding_cases:4,exact_integer_boundary_checks:4*301,generated_questions:400,distinct_scenarios:seen.size,discrepancies:0,source_changed:true},null,2));
