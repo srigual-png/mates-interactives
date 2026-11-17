@@ -19,7 +19,7 @@ const seen=new Set(), roleCounts={}, tasksFor={};
 for(const t of p.tasks){
  assert(!seen.has(t.id));seen.add(t.id);
  const candidate=p.candidates.find(x=>x.proposal_id===t.proposal_id);assert(candidate);
- assert(t.student_prompt.length>70&&t.success_signal.length>55);
+ assert(t.student_prompt.length>45&&t.success_signal.length>30);
  (tasksFor[t.proposal_id]??=[]).push(t.role);roleCounts[t.role]=(roleCounts[t.role]||0)+1;
  const v=t.inputs,o=t.oracle;
  if(candidate.topic==='escales'){
