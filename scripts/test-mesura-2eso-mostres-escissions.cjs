@@ -8,8 +8,8 @@ const html=fs.readFileSync(path.join(root,'2eso/sentit-mesura.html'),'utf8');
 const start=html.indexOf('/* ── UTILITATS DE MESURA');
 const stop=html.indexOf('/* ── AMPLIACIÓ A',start);
 assert(start>=0&&stop>start,'Generadors de Mesura no trobats');
-let turn=0;
-const shuffle=a=>{const k=turn%a.length;return [...a.slice(k),...a.slice(0,k)];};
+let turn=0,sequence=0;
+const shuffle=a=>{const k=(turn+sequence++)%a.length;return [...a.slice(k),...a.slice(0,k)];};
 const fmtNum=(x,max=4)=>Number(x).toFixed(max).replace(/0+$/,'').replace(/\.$/,'').replace('.',',');
 const answerUnit=(x,u,max=6)=>fmtNum(x,max)+' '+u;
 const roundTo=(x,p)=>Math.round((x+Number.EPSILON)*10**p)/10**p;
@@ -18,7 +18,7 @@ const ctx={Math,shuffle,fmtNum,answerUnit,roundTo,uniq4,
   unitAlternatives:(x,u,max)=>[answerUnit(x,u,max)],
   pctStr:x=>fmtNum(x,2)+'%',
   countAnswer:(n,s,p)=>n+' '+(n===1?s:(p||s+'s')),
-  rnd:(min,max)=>min+turn%(max-min+1)};
+  rnd:(min,max)=>min+(turn+sequence++)%(max-min+1)};
 vm.createContext(ctx);vm.runInContext(html.slice(start,stop),ctx);
 const generators={escales:ctx.genEscales2ESO,pitagores:ctx.genPitagores2ESO,problemes:ctx.genProblemesMesura2ESO};
 for(const [topic,gen] of Object.entries(generators))assert.equal(typeof gen,'function','Falta generador '+topic);
