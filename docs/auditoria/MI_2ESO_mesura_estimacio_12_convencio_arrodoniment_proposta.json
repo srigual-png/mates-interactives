@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "pedagogical_wording_fix_proposed_not_authorized",
+  "status": "wording_clarification_user_authorized_and_applied",
   "scope": "2eso/sentit-mesura.html / genEstimacioError2ESO type=12",
   "analysis": "For positive lengths with round-half-up to one decimal, x rounds to y iff y-0.05 <= x < y+0.05. Existing answer already uses this half-open convention. The question does not state how exactly-halfway ties are rounded, so a different tie-breaking rule could yield different inclusion endpoints.",
   "observed_source": {
@@ -83,10 +83,19 @@
     "approved": false
   },
   "permission_boundary": {
-    "source_generator_edited": false,
+    "source_generator_edited": true,
     "levels_changed": false,
     "merge": false,
     "deploy": false
   },
-  "needs_user_authorization": "Aplicar cap canvi funcional a l'enunciat o a les pistes de estimacio:12."
+  "needs_user_authorization": "Autorització explícita rebuda per aclarir únicament l'enunciat d'estimacio:12; aplicada a la PR #49, sense fusió ni publicació.",
+  "applied_change": {
+    "commit_sha": "8738ca2c86a82a2851c83b4a2a891bb281fa7b53",
+    "scope": "Only the question wording, with tie-breaking rule for rounding halfway up.",
+    "answers_changed": false,
+    "options_changed": false,
+    "guide_changed": false,
+    "levels_changed": false,
+    "source_file": "2eso/sentit-mesura.html"
+  }
 }
