@@ -1,13 +1,6 @@
 name: Auditoria nuclis candidats Unitats Escales 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_unitats_escales_grups_candidats.json'
-      - 'docs/auditoria/MI_2ESO_mesura_unitats_decisions_18_tipus.json'
-      - 'docs/auditoria/MI_2ESO_mesura_escales_decisions_18_tipus.json'
-      - 'scripts/test-mesura-2eso-grups-candidats.cjs'
-      - '.github/workflows/test-mesura-2eso-grups-candidats.yml'
   workflow_dispatch:
 
 permissions:
