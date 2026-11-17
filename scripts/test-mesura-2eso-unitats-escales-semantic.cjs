@@ -94,7 +94,7 @@ for(let iteration=0;iteration<12;iteration++){
     if(t===14){const match=v[0].match(/^([\d.,]+)\s*([^\s]+)\s*=\s*\?\s*([^\s]+)$/);assert(match,label+': conversió');
       const pow=match[2].includes('²')?2:3;
       const result=num(match[1])*factor(match[2],lengths,pow)/factor(match[3],lengths,pow);
-      expected=fmtNum(result)+' '+match[3];
+      expected=result.toLocaleString('de-DE')+' '+match[3];
     }
     if(t===16){const valid=q.options.filter(equivalence);assert.equal(valid.length,1,label+': una única equivalència vàlida');expected=valid[0];}
     if(t===17){expected=diagnosticUnit(q);}
