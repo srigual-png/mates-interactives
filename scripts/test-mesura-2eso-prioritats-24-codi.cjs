@@ -28,9 +28,9 @@ for(const c of audit.cases){
  assert(c.evidence.length>=35&&c.recommendation.length>=25);
  assert.equal(c.verified_in_source,true);assert.equal(c.change_applied,false);assert.equal(c.teacher_approved,false);
 }
-assert(html.includes("['la capacitat d’una ampolla','1,5 L',['1,5 L','1,51 L'"));
-assert(html.includes("['el gruix d’una moneda','1,8 mm',['1,8 mm','2 m','0,000018 km','1,81 mm']"));
+assert(!html.includes("['la capacitat d’una ampolla','1,5 L',['1,5 L','1,51 L'"));
+assert(!html.includes("['el gruix d’una moneda','1,8 mm',['1,8 mm','2 m','0,000018 km','1,81 mm']"));
 assert(html.includes('cm (exclòs)'));
 assert.equal(audit.cases.filter(x=>x.diagnosis==='ambiguitat_confirmada').length,1);
 assert.deepEqual(audit.counts,{cases:24,confirmed_ambiguity:1,official_changes:0});
-console.log('OK: 24 branques inspeccionades, una ambigüitat confirmada en estimacio:11, cap canvi oficial.');
+console.log('OK: 24 branques inspeccionades; document històric preservat i ambigüitats originals retirades del codi.');
