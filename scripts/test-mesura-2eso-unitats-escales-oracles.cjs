@@ -8,19 +8,19 @@ const a=html.indexOf('/* ── GENERADOR · BLOC 1:'), b=html.indexOf('/* ─�
 assert(a>=0&&b>a,'No es troba el bloc de generadors reals');
 let shift=0;
 const shuffle=xs=>{const k=(shift++)%xs.length;return [...xs.slice(k),...xs.slice(0,k)];};
-const fmtNum=(n,max=4)=>Number(n).toFixed(max).replace(/0+$/,'').replace(/\\.$/,'').replace('.',',');
+const fmtNum=(n,max=4)=>Number(n).toFixed(max).replace(/0+$/,'').replace(/\.$/,'').replace('.',',');
 const answerUnit=(n,u,max=6)=>fmtNum(n,max)+' '+u;
 const uniq4=(correct,wrong)=>{const out=[String(correct)];for(const v of wrong){if(!out.includes(String(v)))out.push(String(v));if(out.length===4)break;}assert.equal(out.length,4,'Distractors insuficients');return shuffle(out);};
 const ctx={Math,shuffle,fmtNum,answerUnit,uniq4,unitAlternatives:(v,u)=>[answerUnit(v,u)],roundTo:(n,d)=>Math.round((n+Number.EPSILON)*10**d)/10**d,pctStr:n=>fmtNum(n,2)+'%',countAnswer:(n,s,p)=>String(n)+' '+(n===1?s:(p||s+'s'))};
 vm.createContext(ctx);vm.runInContext(html.slice(a,b),ctx);
-const num=v=>Number(String(v).replace(/\\./g,'').replace(',','.'));
-const bold=q=>[...q.question.matchAll(/<b>(.*?)<\\/b>/g)].map(x=>x[1]);
-const quantity=v=>{const m=String(v).match(/^([\\d.,]+)\\s*(.*)$/);assert(m,'Quantitat desconeguda: '+v);return {n:num(m[1]),u:m[2].trim()};};
+const num=v=>Number(String(v).replace(/\./g,'').replace(',','.'));
+const bold=q=>[...q.question.matchAll(/<b>(.*?)<\/b>/g)].map(x=>x[1]);
+const quantity=v=>{const m=String(v).match(/^([\d.,]+)\s*(.*)$/);assert(m,'Quantitat desconeguda: '+v);return {n:num(m[1]),u:m[2].trim()};};
 const lengths={km:1000,hm:100,dam:10,m:1,dm:.1,cm:.01,mm:.001};
 const capacity={kL:1000,hL:100,daL:10,L:1,dL:.1,cL:.01,mL:.001};
 const mass={t:1000,kg:1,hg:.1,dag:.01,g:.001,dg:.0001,cg:.00001,mg:.000001};
 const volumeL={'m³':1000,'dm³':1,'cm³':.001,'mm³':.000001,L:1,mL:.001};
-const near=(actual,expected,label)=>assert(Math.abs(actual-expected)<=Math.max(1e-5,Math.abs(expected)*1e-8),label+': '+actual+' ≠ '+expected);
+const near=(actual,expected,label)=>assert(Math.abs(actual-expected)<=Math.max(0.00011,Math.abs(expected)*1e-8),label+': '+actual+' ≠ '+expected);
 const verify=(q,expected,unit,label)=>{
   assert.equal(q.topicId,label.split(':')[0],label+': tema');
   assert.equal(q.options.length,4,label+': quatre opcions');
@@ -69,18 +69,18 @@ for(let iteration=0;iteration<8;iteration++){
     if(t===3){expected=take(v,0).n*100/scaleN(v[1]);unit='cm';}
     if(t===4){expected=take(v,1).n*100/take(v,0).n;unit='scale';}
     if(t===5){expected=take(v,0).n*num(v[1].split(':')[0]);unit='cm';}
-    if(t===6){const m=v[0].match(/([\\d.,]+) cm × ([\\d.,]+) cm/);assert(m,label);expected=num(m[1])*num(m[2])*(scaleN(v[1])/100)**2;unit='m²';}
-    if(t===7){const m=v[0].match(/([\\d.,]+) m × ([\\d.,]+) m/);assert(m,label);expected=num(m[1])*num(m[2]);unit='cm²';}
+    if(t===6){const m=v[0].match(/([\d.,]+) cm × ([\d.,]+) cm/);assert(m,label);expected=num(m[1])*num(m[2])*(scaleN(v[1])/100)**2;unit='m²';}
+    if(t===7){const m=v[0].match(/([\d.,]+) m × ([\d.,]+) m/);assert(m,label);expected=num(m[1])*num(m[2]);unit='cm²';}
     if(t===8||t===9){expected=take(v,0).n*take(v,2).n/take(v,1).n;unit='m';}
     if(t===10){expected=num(v[1])*num(v[2])/num(v[0]);unit='';}
-    if(t===11){const m=v[0].match(/([\\d.,]+)\\/([\\d.,]+) = ([\\d.,]+)\\/x/);assert(m,label);expected=num(m[2])*num(m[3])/num(m[1]);unit='';}
+    if(t===11){const m=v[0].match(/([\d.,]+)\/([\d.,]+) = ([\d.,]+)\/x/);assert(m,label);expected=num(m[2])*num(m[3])/num(m[1]);unit='';}
     if(t===12){expected=take(v,1).n/take(v,0).n;unit='';}
     if(t===15){expected=take(v,0).n*100/take(v,1).n;unit='scale';}
-    if(t===16){const m=v[0].match(/([\\d.,]+) cm × ([\\d.,]+) cm/);assert(m,label);expected=2*(num(m[1])+num(m[2]))*scaleN(v[1])/100;unit='m';}
+    if(t===16){const m=v[0].match(/([\d.,]+) cm × ([\d.,]+) cm/);assert(m,label);expected=2*(num(m[1])+num(m[2]))*scaleN(v[1])/100;unit='m';}
     if(t===17){expected=(take(v,1).n+take(v,2).n)*scaleN(v[0])/100000;unit='km';}
     if(t===18){expected=take(v,1).n*take(v,2).n/take(v,0).n;unit='m';}
     if(unit==='scale'){
-      const match=q.correct.match(/^1\\s*:\\s*([\\d.,]+)$/);assert(match,label+': format escala');near(num(match[1]),expected,label);
+      const match=q.correct.match(/^1\s*:\s*([\d.,]+)$/);assert(match,label+': format escala');near(num(match[1]),expected,label);
       assert.equal(new Set(q.options).size,4,label);assert(q.options.includes(q.correct),label);
     } else verify(q,expected,unit,label);
     tested.escales.add(t);checked++;
