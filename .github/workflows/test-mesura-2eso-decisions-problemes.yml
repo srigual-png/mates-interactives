@@ -1,0 +1,20 @@
+name: Verifica consolidacio Problemes Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_problemes_decisions_20_tipus.json'
+      - 'scripts/test-mesura-2eso-decisions-problemes.cjs'
+      - '.github/workflows/test-mesura-2eso-decisions-problemes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  comprova-decisions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar decisions dels 20 tipus contra el registre de 128
+        run: node scripts/test-mesura-2eso-decisions-problemes.cjs
