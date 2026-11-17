@@ -28,8 +28,8 @@ jobs:
       - name: Serve application
         run: |
           ./node_modules/.bin/http-server . -p 8765 -a 127.0.0.1 -s > /tmp/mi-test-server.log 2>&1 &
-          for attempt in {1..30}; do
-            if curl -fsS http://127.0.0.1:8765/2eso/sentit-mesura.html > /dev/null; then exit 0; fi
+          for attempt in $(seq 1 30); do
+            if curl -fsS http://127.0.0.1:8765/2eso/sentit-mesura.html > /dev/null 2>&1; then exit 0; fi
             sleep 1
           done
           cat /tmp/mi-test-server.log
