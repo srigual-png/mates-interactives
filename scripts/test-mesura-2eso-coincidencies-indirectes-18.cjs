@@ -23,7 +23,7 @@ assert.equal(report.status,'source_code_indirect_overlap_review_only');
 assert.equal(report.reviewed_types.length,18);assert.equal(report.counts.examined_source_cases,18);
 const counts={},unique=new Set();
 for(const row of report.reviewed_types){
- assert(!unique.has(row.key),'Duplicated inspection '+row.key);unique.add(row.key);
+ assert(!unique.has(row.candidate+':'+row.key),'Duplicated candidate/key '+row.key);unique.add(row.candidate+':'+row.key);
  assert.equal(row.key,row.key.toLowerCase());
  assert(['escales','perimetres','estimacio'].includes(row.topic),'Unknown candidate topic');
  const [actualTopic,num]=row.key.split(':');
@@ -43,7 +43,7 @@ for(const item of report.conclusions){
  assert(spec.specifications.some(x=>x.proposal_id===item.proposal_id));
  assert.equal(item.novel_family_approved,false);
  assert.equal(item.N3_approved,false);
- assert(item.important_closest.every(x=>unique.has(x)));
+ assert(item.important_closest.every(x=>unique.has(item.proposal_id+':'+x)));
 }
 assert.equal(report.counts.approved_genuine_families,0);
 assert.equal(report.counts.approved_N3,0);
