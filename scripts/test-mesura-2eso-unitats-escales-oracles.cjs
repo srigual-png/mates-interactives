@@ -11,8 +11,9 @@ const shuffle=xs=>{const k=(shift++)%xs.length;return [...xs.slice(k),...xs.slic
 const fmtNum=(n,max=4)=>Number(n).toFixed(max).replace(/0+$/,'').replace(/\.$/,'').replace('.',',');
 const answerUnit=(n,u,max=6)=>fmtNum(n,max)+' '+u;
 const uniq4=(correct,wrong)=>{const out=[String(correct)];for(const v of wrong){if(!out.includes(String(v)))out.push(String(v));if(out.length===4)break;}assert.equal(out.length,4,'Distractors insuficients');return shuffle(out);};
-const ctx={Math,shuffle,fmtNum,answerUnit,uniq4,unitAlternatives:(v,u)=>[answerUnit(v,u)],roundTo:(n,d)=>Math.round((n+Number.EPSILON)*10**d)/10**d,pctStr:n=>fmtNum(n,2)+'%',countAnswer:(n,s,p)=>String(n)+' '+(n===1?s:(p||s+'s'))};
-vm.createContext(ctx);vm.runInContext(html.slice(a,b),ctx);
+const ctx={Math,shuffle,fmtNum,answerUnit,uniq4,rnd:(min,max)=>min+(shift++%(max-min+1)),unitAlternatives:(v,u)=>[answerUnit(v,u)],roundTo:(n,d)=>Math.round((n+Number.EPSILON)*10**d)/10**d,pctStr:n=>fmtNum(n,2)+'%',countAnswer:(n,s,p)=>String(n)+' '+(n===1?s:(p||s+'s'))};
+const u=html.indexOf('/* ── UTILITATS DE MESURA');assert(u>=0&&u<a,'No es localitzen les utilitats');
+vm.createContext(ctx);vm.runInContext(html.slice(u,b),ctx);
 const num=v=>Number(String(v).replace(/\./g,'').replace(',','.'));
 const bold=q=>[...q.question.matchAll(/<b>(.*?)<\/b>/g)].map(x=>x[1]);
 const quantity=v=>{const m=String(v).match(/^([\d.,]+)\s*(.*)$/);assert(m,'Quantitat desconeguda: '+v);return {n:num(m[1]),u:m[2].trim()};};
