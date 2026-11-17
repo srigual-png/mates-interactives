@@ -56,5 +56,49 @@ for(turn=0;turn<8;turn++){
     checked++;
   }
 }
-assert.equal(checked,96);
-console.log('OK: 96 exercicis de perímetres i àrees amb oracles de 12 tipus');
+// Tipus pendents: suma de figures, fórmula inversa de trapezi, apotema, pintura i diagnòstic.
+// El 17 (corona circular) ja queda cobert per l'oracle transversal existent.
+for(turn=0;turn<8;turn++){
+  for(const type of [10,13,15,16,18]){
+    const q=ctx.genPerimetresArees2ESO(type),b=bold(q);
+    let expected,unit='cm²';
+    if(type===10){
+      const [W,H]=b[0].split('×').map(num);
+      assert.equal(b.length,2,'10: rectangle i constant pi');
+      expected=roundTo(W*H+3.14*(H/2)**2/2,2);
+    } else if(type===13){
+      assert.equal(b.length,3,'13: àrea i dues bases');
+      expected=2*num(b[0])/(num(b[1])+num(b[2]));
+      unit='cm';
+    } else if(type===15){
+      assert.equal(b.length,2,'15: costats i apotema');
+      const dimensions=[...b[0].matchAll(/\\d+(?:[.,]\\d+)?/g)].map(m=>num(m[0]));
+      assert.equal(dimensions.length,2,'15: n i costat');
+      expected=roundTo(dimensions[0]*dimensions[1]*num(b[1])/2,2);
+    } else if(type===16){
+      assert.equal(b.length,3,'16: paret, porta i finestra');
+      const [W,H]=b[0].split('×').map(num);
+      const [dw,dh]=b[1].split('×').map(num);
+      const [ww,wh]=b[2].split('×').map(num);
+      expected=roundTo(W*H-dw*dh-ww*wh,2);
+      unit='m²';
+    } else {
+      assert.equal(b.length,2,'18: radi i operació errònia');
+      const radius=num(b[0]), expression=b[1].replace(/\\s/g,'');
+      assert(expression.startsWith('2·3,14·'+radius+'='),'18: fórmula de longitud indicada');
+      const shown=num(expression.split('=')[1]);
+      assert.equal(shown,roundTo(2*3.14*radius,2),'18: resultat de longitud');
+      assert.equal(q.correct,'Ha calculat la longitud de la circumferència en lloc de l’àrea');
+      assert.equal(q.options.length,4);
+      assert.equal(new Set(q.options).size,4);
+      assert(q.options.includes(q.correct));
+      assert(q.guide.length>=2&&q.solution.length>=2);
+      checked++;
+      continue;
+    }
+    check(q,expected,unit,type);
+    checked++;
+  }
+}
+assert.equal(checked,136);
+console.log('OK: 136 exercicis de perímetres i àrees; 17 tipus amb oracles (17è tipus de corona circular en suite transversal)');
