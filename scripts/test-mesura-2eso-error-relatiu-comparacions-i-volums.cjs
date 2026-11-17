@@ -8,7 +8,7 @@ math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;assert(++draws<50
 const ctx=vm.createContext({Math:math,console});vm.runInContext(html.slice(a,c),ctx,{timeout:15000});
 const gens=vm.runInContext('({estimacio:genEstimacioError2ESO,problemes:genProblemesMesura2ESO,superficies:genSuperficiesVolums2ESO})',ctx);
 const clean=s=>String(s).replace(/<[^>]*>/g,'').replace(/\s+/g,' ');
-const n=s=>Number(s.replace(',','.'));
+const n=s=>{const value=Number(s.replace(',','.').replace(/\.$/,''));assert(Number.isFinite(value),'Invalid parsed number '+s);return value};
 const match=(q,re)=>{const m=q.match(re);assert(m,'Unable to parse '+q);return m.slice(1).map(n)};
 const counts={estimacio9:0,problemes16:0,superficies17:0,sameBase:0,otherBase:0,estimacio9_A:0,estimacio9_B:0,problemes16_A:0,problemes16_B:0},samples={},issues=[];
 for(const [topic,type,total] of [['estimacio',9,100],['problemes',16,100],['superficies',17,400]]){
