@@ -15,7 +15,7 @@ function el(id){
 const correctEvents=[],examEvents=[],screens=[];
 const document={getElementById:el,querySelectorAll(){return buttons}};
 const state={currentTopic:0,level:1,mode:'multi',exCount:0,correctStreak:0,answered:false,examQs:[],examIdx:0,examScore:0};
-let currentEx;
+let nextEx;
 const api={
  Math:math,console,document,window:{MIAnalytics:{shown(){},answer(){}}},state,
  TOPICS:[{id:'estimacio',name:'Estimació, precisió i error'}],
@@ -23,7 +23,7 @@ const api={
  updateUnitPad(){},registerError(){},miReviewHtml(){return ''},miTheoryLinkHtml(){return ''},markTopicDone(){},
  processAnswer(ok,answer){correctEvents.push({ok,answer})},
  processExamAnswer(ok,answer){examEvents.push({ok,answer})},
- getExerciseForMode(){return currentEx}
+ getExerciseForMode(){return nextEx}
 };
 const ctx=vm.createContext(api);
 vm.runInContext(html.slice(beg,end),ctx,{timeout:10000});
@@ -34,7 +34,7 @@ function check(type){
  assert.equal(ex.allowOpen,false);
  assert.equal(ex.options.length,4);
  assert(ex.options.includes(ex.correct));
- ctx.currentEx=ex;
+ nextEx=ex;ctx.currentEx=ex;
  const optionButtons=ex.options.map(()=>({disabled:false,flags:new Set(),classList:{add(k){this.owner.flags.add(k)}}}));
  for(const b of optionButtons)b.classList.owner=b;
  buttons.length=0;buttons.push(...optionButtons);
