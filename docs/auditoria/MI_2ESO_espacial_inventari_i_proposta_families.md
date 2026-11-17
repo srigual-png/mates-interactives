@@ -37,7 +37,7 @@ Hi ha **70 tipus ordinaris** repartits en set temes. Els nivells següents són 
 | Modelització i connexions geomètriques | 10 | 2 (+ branca) | 7 | 1 | El tipus 10 té una variant d’escala a N1 i altres variants a N2; no són 11 tipus diferents. |
 | **Total de tipus únics** | **70** | **37** | **31** | **2** | El tipus 10 de modelització té una branca N1 i altres variants N2; la cobertura per camins compta una branca addicional. No és un recompte de famílies. |
 
-La taula reflecteix la classificació inicial existent. Després d’inspeccionar els exemples, proposo revisar `modelitzacio:3` de N3 a N2; quedaria **37 N1 / 32 N2 / 1 N3** per a tipus únics, amb una branca addicional de `modelitzacio:10` a N1.
+La taula reflecteix la classificació activa existent. Després d’inspeccionar els generadors, proposo quatre ajustos provisionals: `modelitzacio:3` de N3 a N2; `modelitzacio:2`, `visual3d:3` i `coordenades:6` de N2 a N1. Si la revisió dels exemples confirma aquesta lectura, quedaria **40 N1 / 29 N2 / 1 N3** per a tipus únics, amb una branca addicional N1 de `modelitzacio:10` comptada separadament.
 
 ### Agrupacions candidates per contrastar
 
@@ -111,6 +111,22 @@ S’han inspeccionat els set generadors de 2n a `2eso/sentit-espacial.html`; cob
 **Reclassificació a contrastar:** el tipus `modelitzacio:3` està proposat com a N3 perquè encadena semblança d’ombres i Pitàgores per al cable. Amb l’exemple generat (pal 1,5 m / ombra 2 m; torre amb ombra 8 m; cable ancorat a 8 m de la base), primer s’obté l’altura de la torre: 1,5/2 = h/8, h = 6 m; després el cable: √(6² + 8²) = 10 m. Com que els dos models són explícits i són aplicacions treballades a 2n, proposo **N2 provisional**, pendent de comprovar els extrems de valors i la càrrega de representació.
 
 **Incidència funcional detectada:** a `visual3d:5`, l’enunciat pregunta per la vista des del costat dret i el càlcul usa la projecció lateral, però la figura afegeix el peu “mirada des del DAVANT”. És una contradicció de l’ajuda visual que pot confondre l’alumne. S’ha de corregir en una PR funcional abans de donar per validat aquest exercici; no s’ha canviat el codi en aquesta PR documental. És un defecte concret detectat en revisar els generadors, no una deducció del recompte de mostres.
+
+### Propostes de nivell a verificar amb exercicis resolts
+
+Aquests ajustos sorgeixen del procediment que demana el codi, no del nombre de pantalles o passos escrits a la guia:
+
+| Tipus | Nivell actiu | Proposta | Exemple i justificació |
+|---|---:|---:|---|
+| `modelitzacio:2` | N2 | N1 | Rectangle 4 × 4 cm, ampliació k=3: perímetre inicial 16 cm; perímetre ampliat = 16×3 = 48 cm. És el mateix principi lineal que `semblanca:10`; la solució actual desplega dimensions i suma, però no exigeix un model nou. |
+| `visual3d:3` | N2 | N1 | Una construcció de columnes com [1,2; 2,3] té 1+2+2+3 = 8 cubs. El generador només demana sumar alçades visibles; no hi ha reconstrucció de cap vista. |
+| `coordenades:6` | N2 | N1 | Si A=(-4;2) i B=(4;2), el punt mig és (0;2): es fa la mitjana de les x i es manté la y comuna. El generador limita els segments a una línia horitzontal o vertical. |
+| `modelitzacio:3` | N3 | N2 | Amb ombra de 8 m, l’alçada de la torre és 6 m; amb base del cable a 8 m, la longitud és √(6²+8²)=10 m. Amb ombra de 16 m s’obté alçada 12 m i cable 20 m. El context encadena semblança i Pitàgores explícits, però no imposa restriccions o justificació no immediates. |
+| `visual3d:8` | N3 | N3 provisional | Les tres vistes restringeixen simultàniament les posicions i les altures. Mantenir només si els quatre distractors requereixen realment comparar-les totes i no hi ha una pista que resolgui la resposta sola. |
+
+Això deixaria una proposta de **40 N1 / 29 N2 / 1 N3** entre tipus únics; l’alternativa d’escala de `modelitzacio:10` continua essent una branca addicional a N1. No s’ha aplicat cap canvi als nivells de producció.
+
+**Varietat a revisar:** `coordenades:7` genera sempre desplaçaments 3 i 4 unitats (en ordre i signes variables), de manera que la resposta sempre és 5. El procediment N2 (Pitàgores sobre les diferències de coordenades) és adient, però la varietat numèrica actual és feble i el volum de mostres no acredita més valors.
 
 ## Evidència de proves disponible i límits
 
