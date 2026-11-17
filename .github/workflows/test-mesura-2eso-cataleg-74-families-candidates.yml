@@ -1,11 +1,6 @@
 name: Auditoria cataleg candidat 74 agrupacions Mesura 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_cataleg_74_families_candidates.json'
-      - 'scripts/test-mesura-2eso-cataleg-74-families-candidates.cjs'
-      - '.github/workflows/test-mesura-2eso-cataleg-74-families-candidates.yml'
   workflow_dispatch:
 
 permissions:
