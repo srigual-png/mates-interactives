@@ -62,7 +62,7 @@ for(turn=0;turn<8;turn++){
   const dimensions=b[0].split('×').map(num);
   check(q,Math.round((num(b[1])/1000/dimensions[0]/dimensions[1])*100)/100,'m',15);checked++;
   q=ctx.genSuperficiesVolums2ESO(19);b=bold(q);
-  assert.equal(b.length,3);
+  assert.equal(b.length,4);
   const radius=num(b[1]),height=num(b[2]);
   const length=Math.round(2*3.14*radius*100)/100;
   assert.equal(q.correct,fmtNum(length,2)+' cm × '+height+' cm','superficies:19 desenvolupament');
