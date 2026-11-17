@@ -31,13 +31,13 @@ for(const t of consolidated.by_topic){
  totals.priority_case_count+=t.priority_case_count;
  totals.oracle_checks+=t.independent_oracle_instances;
 }
-assert.deepEqual(totals,{types:128,source_inspected:128,independent_oracle_types:91,without_independent_oracle:37,priority_case_count:24,oracle_checks:4350});
+assert.deepEqual(totals,{types:128,source_inspected:128,independent_oracle_types:112,without_independent_oracle:16,priority_case_count:24,oracle_checks:5400});
 assert.equal(consolidated.totals.types_fixed_with_authorization,2);
-assert.equal(consolidated.generated_test_evidence.additional_independent_oracle_checks,3550);
-assert.equal(consolidated.generated_test_evidence.additional_independent_oracle_types,71);
+assert.equal(consolidated.generated_test_evidence.additional_independent_oracle_checks,4600);
+assert.equal(consolidated.generated_test_evidence.additional_independent_oracle_types,92);
 assert.equal(consolidated.totals.official_level_changes,0);
 assert.equal(consolidated.totals.official_family_approvals,0);
 assert.equal(consolidated.totals.merged_or_deployed,false);
 assert.equal(consolidated.generated_test_evidence.semantic_duplicates_detected_after_fix,0);
 assert.equal(new Set(consolidated.fixed_items.map(x=>x.key)).size,2);
-console.log('OK: 7 temes, 128 tipus, 91 oracles/4350 contrastos, 37 pendents, 24 casos prioritaris, 2 correccions autoritzades.');
+console.log('OK: 7 temes, 128 tipus, 112 oracles/5400 contrastos, 16 pendents, 24 casos prioritaris, 2 correccions autoritzades.');
