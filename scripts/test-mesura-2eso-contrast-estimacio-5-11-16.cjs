@@ -19,10 +19,14 @@ for(const n of [5,11,16]){
 }
 assert(bodies[5].includes('roundTo(value,1)'));
 assert(bodies[16].includes('roundTo(value,1)'));
-assert(bodies[11].includes('precisió i una unitat raonables'));
+assert(bodies[11].includes('menys precís que encara compleix'));
+assert(bodies[11].includes('marges') || bodies[11].includes('margins'));
+assert(bodies[11].includes('errors màxims garantits'));
+assert(bodies[11].includes('correct=c.correct'));
+assert(bodies[11].includes('allowOpen=false'));
 assert(d.comparison.rewrite_to_explicit_rounding.duplicates_existing_core);
 assert(d.comparison.retain_contextual_precision.distinct_possible);
 assert.equal(d.recommendation.family_count_effect,0);
 assert.equal(d.recommendation.implementation_authorized,false);
 assert.equal(d.recommendation.teacher_decision,null);
-console.log('OK: arrodoniment repetit a 5/16; proposta conceptual 11 pendent de revisió, sense aprovacions.');
+console.log('OK: arrodoniment repetit a 5/16; selecció contextual d’instrument a 11; cap aprovació de família.');
