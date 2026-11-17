@@ -1,12 +1,6 @@
 name: Evidència cognitiva C011 i variants mixtes Mesura 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - '2eso/sentit-mesura.html'
-      - 'docs/auditoria/MI_2ESO_mesura_exemples_cognitius_C011_variants_mixtes.json'
-      - 'scripts/test-mesura-2eso-evidencia-cognitiva-C011-mixtes.cjs'
-      - '.github/workflows/test-mesura-2eso-evidencia-cognitiva-C011-mixtes.yml'
   workflow_dispatch:
 
 permissions:
