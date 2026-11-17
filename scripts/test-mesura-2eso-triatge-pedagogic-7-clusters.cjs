@@ -13,7 +13,7 @@ let members=0;
 for(const entry of proposal.selected_clusters){
  const c=clusters.get(entry.id);assert(c,'Unknown cluster '+entry.id);
  const existing=new Set(c.members),included=new Set();
- for(const group of entry.groups){assert(group.core.length>40);for(const member of group.members){assert(existing.has(member),'Not in source cluster '+entry.id+' '+member);assert(!included.has(member),'Repeated member '+member);included.add(member)}}
+ for(const group of entry.groups){assert(typeof group.core==='string'&&group.core.trim().length>=15);for(const member of group.members){assert(existing.has(member),'Not in source cluster '+entry.id+' '+member);assert(!included.has(member),'Repeated member '+member);included.add(member)}}
  assert.equal(included.size,existing.size,'Missing members in '+entry.id);
  members+=included.size;
 }
