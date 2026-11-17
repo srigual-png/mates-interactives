@@ -8,7 +8,7 @@ let seed=0x95078015;const math=Object.create(Math);math.random=()=>{seed=(Math.i
 const ctx=vm.createContext({Math:math,console});vm.runInContext(html.slice(start,end),ctx,{timeout:15000});
 const gen=vm.runInContext('genEstimacioError2ESO',ctx);
 const clean=s=>String(s).replace(/<[^>]*>/g,'').replace(/\s+/g,' ').trim();
-const n=s=>Number(s.replace(',','.'));
+const n=s=>{const v=Number(s.replace(',','.').replace(/\.$/,''));assert(Number.isFinite(v),'Invalid numeric capture '+s);return v};
 const byType={7:new Map(),8:new Map(),9:new Map()};
 let checked=0;const problems=[];
 for(const type of [7,8,9])for(let i=0;i<400;i++){
