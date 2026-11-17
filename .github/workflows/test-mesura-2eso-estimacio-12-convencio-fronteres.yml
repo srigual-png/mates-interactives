@@ -1,0 +1,21 @@
+name: Auditoria frontera arrodoniment Estimacio 12 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - '2eso/sentit-mesura.html'
+      - 'docs/auditoria/MI_2ESO_mesura_estimacio_12_convencio_arrodoniment_proposta.json'
+      - 'scripts/test-mesura-2eso-estimacio-12-convencio-fronteres.cjs'
+      - '.github/workflows/test-mesura-2eso-estimacio-12-convencio-fronteres.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar extrems d'arrodoniment i 400 exercicis
+        run: node scripts/test-mesura-2eso-estimacio-12-convencio-fronteres.cjs
