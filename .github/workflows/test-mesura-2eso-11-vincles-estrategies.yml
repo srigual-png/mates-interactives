@@ -1,0 +1,20 @@
+name: Auditoria 11 vincles restants Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_11_vincles_estrategies_restants.json'
+      - 'scripts/test-mesura-2eso-11-vincles-estrategies.cjs'
+      - '.github/workflows/test-mesura-2eso-11-vincles-estrategies.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar els 11 vincles contra els 14 del catàleg
+        run: node scripts/test-mesura-2eso-11-vincles-estrategies.cjs
