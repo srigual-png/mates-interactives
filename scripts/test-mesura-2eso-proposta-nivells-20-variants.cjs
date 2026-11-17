@@ -27,8 +27,11 @@ for(const r of proposal.records){
  levels[r.level_suggestion]=(levels[r.level_suggestion]||0)+1;
 }
 assert.deepEqual(levels,{N1_o_N2_pendent:5,N2_candidat:10,N1_candidat:5});
-assert.equal(rounding.permission_boundary.source_generator_edited,false);
+assert.equal(rounding.permission_boundary.source_generator_edited,true);
+assert.equal(rounding.permission_boundary.levels_changed,false);
+assert.equal(rounding.permission_boundary.merge,false);
+assert.equal(rounding.permission_boundary.deploy,false);
 assert.equal(rounding.level_guidance.approved,false);
 assert(proposal.unresolved.some(x=>x.key==='estimacio:12'));
 for(const v of Object.values(proposal.gates))assert.equal(v,false);
-console.log(JSON.stringify({traceable_variants:20,candidate_levels:levels,rounding_midpoint_clarification_authorized:false,official_level_changes:0,official_family_approvals:0},null,2));
+console.log(JSON.stringify({traceable_variants:20,candidate_levels:levels,rounding_midpoint_clarification_authorized:true,official_level_changes:0,official_family_approvals:0},null,2));
