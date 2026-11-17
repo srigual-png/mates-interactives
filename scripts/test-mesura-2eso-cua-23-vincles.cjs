@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+'use strict';
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const root=path.join(__dirname,'..','docs','auditoria');
+const load=name=>JSON.parse(fs.readFileSync(path.join(root,name),'utf8'));
+const queue=load('MI_2ESO_mesura_cua_23_vincles_exemples_aparellats.json');
+const source=load('MI_2ESO_mesura_decisio_44_vincles_unipersonals.json');
+const catalog=load('MI_2ESO_mesura_cataleg_74_families_candidates.json');
+const groups=new Map(catalog.groups.map(g=>[g.id,g]));
+const expected=source.records.filter(r=>r.proposed_category!=='distinct_goal_or_non_equivalent_preserve_for_now');
+assert.equal(expected.length,23);
+assert.equal(queue.comparisons.length,23);
+const sources=new Set(), unorderedPairs=new Set();
+let reciprocal=0,shared=0,variants=0;
+for(const row of queue.comparisons){
+  assert(!sources.has(row.source),'Duplicate source '+row.source);
+  sources.add(row.source);
+  const original=expected.find(r=>r.member===row.source);
+  assert(original,'Unknown source '+row.source);
+  assert.equal(row.source_group,original.source_group);
+  assert.equal(row.target_group,original.target_group);
+  assert.equal(row.relation_kind,original.proposed_category);
+  assert.deepEqual(row.target_members,groups.get(row.target_group).members);
+  assert(groups.get(row.source_group).members.includes(row.source));
+  assert.equal(row.required_samples_per_variant,2);
+  assert.equal(row.conclusion,'pending_paired_real_instances');
+  assert.equal(row.teacher_approved,false);
+  assert(row.checks.includes('curricular_fit_2eso'));
+  if(row.relation_kind==='strong_shared_core_candidate')shared++;
+  else variants++;
+  const pair=[row.source_group,row.target_group].sort().join('|');
+  if(unorderedPairs.has(pair))reciprocal++;
+  unorderedPairs.add(pair);
+}
+assert.equal(sources.size,23);
+assert.equal(shared,4);
+assert.equal(variants,19);
+assert.equal(reciprocal,1);
+assert.equal(unorderedPairs.size,22);
+assert.equal(queue.counts.unique_conceptual_comparisons,22);
+assert.equal(queue.counts.validated_comparisons,0);
+assert.equal(queue.counts.approved_family_merges,0);
+console.log(JSON.stringify({records:23,unique_group_pairs:22,shared_core_records:4,variant_records:19,pending_evidence:23,approved_merges:0},null,2));
