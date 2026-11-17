@@ -354,11 +354,13 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-error-relatiu-comparacions-i-volums.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "pending",
+      "paired_same_parameters": "math_evidence_verified_4_pairs",
       "target_mathematical_oracles_for_this_pair": "not_assessed",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
-      "family_approved": false
+      "family_approved": false,
+      "paired_script": "scripts/test-mesura-2eso-superficies1-17-aparellades.cjs",
+      "pedagogical_interpretation": "matching three dimension values but different cm/dm units; compare two capacities vs calculating one orthotope volume; 24 of 500 same-base cases"
     },
     {
       "source": "superficies:4",
@@ -418,9 +420,9 @@
     "status": "success",
     "generated_examples": 160
   },
-  "paired_math_evidence_unique_groups": 14,
-  "paired_math_evidence_records": 15,
-  "paired_real_cases": 54,
+  "paired_math_evidence_unique_groups": 15,
+  "paired_math_evidence_records": 16,
+  "paired_real_cases": 58,
   "paired_math_evidence_workflow": {
     "run_id": 44103600888,
     "status": "success",
@@ -480,6 +482,12 @@
       "status": "success",
       "generated_examples": 1200,
       "paired_cases": 8
+    },
+    {
+      "run_id": 44109822013,
+      "status": "success",
+      "generated_examples": 1000,
+      "paired_cases": 4
     }
   ]
 }
