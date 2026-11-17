@@ -20,7 +20,7 @@ for(const row of proposed.records){
  const [topic,id]=row.key.split(':');const fn={pitagores:'genPitagores2ESO',perimetres:'genPerimetresArees2ESO'}[topic];assert(fn,'Unexpected topic '+topic);
  const i=html.indexOf('function '+fn+'('),j=html.indexOf('/* ── GENERADOR ·',i+40);assert(i>=0);
  assert(new RegExp('(?:if|else if)\\(type==='+Number(id)+'\\)\\{').test(html.slice(i,j>i?j:undefined)),'Missing generator branch '+row.key);
- assert(row.cognitive_reason.trim().length>35);
+ assert(typeof row.cognitive_reason==='string'&&row.cognitive_reason.trim().split(/\s+/).length>=5);
  assert(row.task.trim().length>10&&row.family_core.length>2);
  assert.equal(row.approved,false);
  assert(row.level_candidate in levels);
