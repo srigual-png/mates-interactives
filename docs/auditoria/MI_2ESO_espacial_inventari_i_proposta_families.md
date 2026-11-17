@@ -20,8 +20,8 @@ Hi ha **70 tipus ordinaris** repartits en set temes. Els nivells següents són 
 | Poliedres i cossos rodons | 10 | 10 | 0 | 0 | Nivell uniforme; cal comprovar si les preguntes inverses i de recompte són igualment directes. |
 | Desenvolupaments i visualització 3D | 9 | 2 | 6 | 1 | El tipus 8 incorpora tres projeccions i restriccions simultànies; candidat N3, sense donar-lo per validat. |
 | Coordenades cartesianes | 10 | 7 | 3 | 0 | El tema barreja lectura del pla, classificació de figures, rectes i distàncies. |
-| Modelització i connexions geomètriques | 10 | 3 | 7 | 1 | No sembla una sola família: combina escala, Pitàgores, perímetre, trajectes i cossos. |
-| **Total** | **70** | **38** | **32** | **2** | Recompte de tipus segons la proposta existent; no és un recompte de famílies. |
+| Modelització i connexions geomètriques | 10 | 2 (+ branca) | 7 | 1 | El tipus 10 té una variant d’escala a N1 i altres variants a N2; no són 11 tipus diferents. |
+| **Total de tipus únics** | **70** | **37** | **31** | **2** | El tipus 10 de modelització té una branca N1 i altres variants N2; la cobertura per camins compta una branca addicional. No és un recompte de famílies. |
 
 ### Agrupacions candidates per contrastar
 
@@ -46,7 +46,7 @@ Els grups d’aquesta taula serveixen per començar la comparació. **No es decl
 | Visualització 3D | 3, 4, 5, 6, 7 | Comptar cubs, llegir vistes i completar un prisma. | Distingir ocupació, alçades per projecció i completar volum. |
 | Visualització 3D | 8 | Reconstruir una construcció que compleixi tres vistes. | Candidat a N3 per restriccions combinades; comprovar que cap pista redundant resol la resposta. |
 | Visualització 3D | 9 | Identificar la base d’un prisma. | Probablement vocabulari/reconeixement de cossos, compartit amb `cossos`. |
-| Coordenades | 1, 2 | Llegir coordenades i quadrants. | Comprovar si el quadrat és la mateixa tasca amb dades diferents. |
+| Coordenades | 1, 2 | Llegir coordenades i quadrants. | Comprovar si llegir el quadrant és la mateixa tasca amb dades diferents. |
 | Coordenades | 3 | Classificar la figura definida per punts. | Pot implicar identificar propietats geomètriques, no només llegir coordenades. |
 | Coordenades | 4, 6, 7 | Reconstruir quart vèrtex, punt mig o distància. | Tres procediments diferents; el tipus 7 connecta amb Pitàgores. |
 | Coordenades | 5 | Distància horitzontal/vertical. | Distingir distància axial de distància euclidiana. |
@@ -57,7 +57,7 @@ Els grups d’aquesta taula serveixen per començar la comparació. **No es decl
 
 ## Recomanació provisional de nivells
 
-- **No forçar N3.** Els 2 tipus proposats com a N3 (visualització 3D:8 i modelització:3) necessiten contrast específic. Un tipus amb diversos passos no és N3 automàticament.
+- **No forçar N3.** Els 2 tipus proposats com a N3 (visualització 3D:8 i modelització:3) necessiten contrast específic. Un tipus amb diversos passos no és N3 automàticament. A modelització, el tipus 10 també té una branca alternativa a N1; cal comptar variants i tipus únics per separat.
 - **Revisar la distribució de cossos i coordenades.** Tots els tipus de cossos són N1; en coordenades conviuen tasques diferents sota una explicació comuna de N1. La classificació s’ha de basar en el raonament, no en el tema o el format.
 - **Revisar les connexions transversals sense duplicar famílies:** semblança ↔ escales/Tales; Pitàgores ↔ diagonals/coordenades; coordenades ↔ trajectes; cossos ↔ visualització 3D. Una fórmula compartida no demostra que la tasca sigui la mateixa.
 - Els objectius 15 famílies / 5 N1 / 5 N2 / 3 N3 són orientatius, no quotes. El nivell depèn del procediment i de l’adequació curricular a 2n.
