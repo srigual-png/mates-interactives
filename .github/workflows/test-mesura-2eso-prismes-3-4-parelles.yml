@@ -1,0 +1,18 @@
+name: Mesura 2n ESO - prismes 3 4 aparellats
+on:
+  pull_request:
+    paths:
+      - 'scripts/test-mesura-2eso-prismes-3-4-parelles.cjs'
+      - '2eso/sentit-mesura.html'
+      - '.github/workflows/test-mesura-2eso-prismes-3-4-parelles.yml'
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprovar 800 instancies i parelles de prismes
+        run: node scripts/test-mesura-2eso-prismes-3-4-parelles.cjs
