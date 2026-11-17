@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - cinc variants escala perimetre unitats
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-cinc-variants-escales-perimetres-unitats.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-cinc-variants-escales-perimetres-unitats.yml'
   workflow_dispatch:
 jobs:
   oracle:
