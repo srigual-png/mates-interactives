@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - parelles de parametres iguals
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-dues-parelles-parametres-iguals.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-dues-parelles-parametres-iguals.yml'
   workflow_dispatch:
 jobs:
   paired:
