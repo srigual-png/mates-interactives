@@ -32,7 +32,7 @@ const specs={
  'problemes:7':{unit:'m',formula:q=>{const a=match(q,/fins a ([\d,.]+) m d’altura.*?peu a ([\d,.]+) m/);return Math.hypot(num(a[1]),num(a[2]))}}
 };
 const linear={mm:.001,cm:.01,dm:.1,m:1,dam:10,hm:100,km:1000};
-const cap={ml:.001,cl:.01,dl:.1,l:1,dal:10,hl:100,kl:1000};
+const cap={mL:.001,cL:.01,dL:.1,L:1,daL:10,hL:100,kL:1000};
 const mass={mg:.001,cg:.01,dg:.1,g:1,dag:10,hg:100,kg:1000};
 function num(x){return Number(String(x).replace(/\.(?=\d{3}(?:\D|$))/g,'').replace(',','.'))}
 function match(text,re){const a=text.match(re);if(!a)throw Error('Enunciat no reconegut: '+text);return a}
