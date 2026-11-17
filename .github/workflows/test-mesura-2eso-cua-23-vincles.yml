@@ -1,0 +1,20 @@
+name: Mesura 2n ESO - cua de 23 vincles
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_cua_23_vincles_exemples_aparellats.json'
+      - 'docs/auditoria/MI_2ESO_mesura_decisio_44_vincles_unipersonals.json'
+      - 'docs/auditoria/MI_2ESO_mesura_cataleg_74_families_candidates.json'
+      - 'scripts/test-mesura-2eso-cua-23-vincles.cjs'
+      - '.github/workflows/test-mesura-2eso-cua-23-vincles.yml'
+  workflow_dispatch:
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprovar traçabilitat dels 23 vincles
+        run: node scripts/test-mesura-2eso-cua-23-vincles.cjs
