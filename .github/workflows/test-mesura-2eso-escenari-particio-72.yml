@@ -1,0 +1,20 @@
+name: Auditoria escenari de particio 72 grups Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_escenari_particio_72_agrupacions.json'
+      - 'scripts/test-mesura-2eso-escenari-particio-72.cjs'
+      - '.github/workflows/test-mesura-2eso-escenari-particio-72.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar particio provisional sense perdre tipus
+        run: node scripts/test-mesura-2eso-escenari-particio-72.cjs
