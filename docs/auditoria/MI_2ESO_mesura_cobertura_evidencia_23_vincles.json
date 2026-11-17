@@ -373,11 +373,13 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-quatre-volums-superficies-oracles.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "pending",
+      "paired_same_parameters": "math_evidence_verified_4_triplets",
       "target_mathematical_oracles_for_this_pair": "not_assessed",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
-      "family_approved": false
+      "family_approved": false,
+      "paired_script": "scripts/test-mesura-2eso-superficies-8-9-19-aparellades.cjs",
+      "pedagogical_interpretation": "same radius and height, cylinder lateral area reused in full area, while unfolded dimensions are a different output"
     },
     {
       "source": "unitats:9",
@@ -402,9 +404,9 @@
     "status": "success",
     "generated_examples": 160
   },
-  "paired_math_evidence_unique_groups": 6,
-  "paired_math_evidence_records": 7,
-  "paired_real_cases": 23,
+  "paired_math_evidence_unique_groups": 7,
+  "paired_math_evidence_records": 8,
+  "paired_real_cases": 27,
   "paired_math_evidence_workflow": {
     "run_id": 44103600888,
     "status": "success",
@@ -434,6 +436,12 @@
       "status": "success",
       "generated_examples": 1200,
       "paired_cases": 3
+    },
+    {
+      "run_id": 44106142590,
+      "status": "success",
+      "generated_examples": 1200,
+      "paired_cases": 4
     }
   ]
 }
