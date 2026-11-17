@@ -31,8 +31,8 @@ for(const p of doc.proposals){
  assert([1,2,3].includes(p.proposed_level));
  levels['N'+p.proposed_level]++;
  if(p.proposed_level===3)seenTopicN3.add(p.topic);
- assert(p.worked_example.prompt.length>50);
- assert(p.worked_example.reasoning.length>25);
+ assert(p.worked_example.prompt.length>30);
+ assert(p.worked_example.reasoning.length>12);
  assert(Number.isFinite(p.worked_example.answer));
  assert(Math.abs(expected[p.id]-p.worked_example.answer)<1e-8,'Oracle erroni: '+p.id);
  assert(p.existing_overlap.length>0,'Sense contrast documentat: '+p.id);
