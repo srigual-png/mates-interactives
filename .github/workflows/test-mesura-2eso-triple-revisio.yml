@@ -1,0 +1,25 @@
+name: Auditoria variants Pitagores Estimacio Superficies
+
+on:
+  pull_request:
+    paths:
+      - '2eso/sentit-mesura.html'
+      - 'docs/auditoria/MI_2ESO_mesura_variants_pitagores_estimacio_superficies.json'
+      - 'docs/auditoria/MI_2ESO_mesura_cataleg_global_provisional.json'
+      - 'scripts/test-mesura-2eso-variants-triple-revisio.cjs'
+      - 'scripts/test-mesura-2eso-mostres-triple-revisio.cjs'
+      - '.github/workflows/test-mesura-2eso-triple-revisio.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  revisio:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar les escissions cognitives provisionals
+        run: node scripts/test-mesura-2eso-variants-triple-revisio.cjs
+      - name: Generar i verificar exemples de les variants
+        run: node scripts/test-mesura-2eso-mostres-triple-revisio.cjs
