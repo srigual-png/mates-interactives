@@ -1,0 +1,385 @@
+{
+  "schema_version": 1,
+  "status": "evidence_coverage_not_teacher_approval",
+  "records": 23,
+  "unique_group_pairs": 21,
+  "source_tests_success": 22,
+  "source_tests_queued": 1,
+  "completed_paired_evidence": 0,
+  "note": "Les mostres verificades proven correcció individual, no equivalència de famílies. Ambdós extrems i dades deliberadament aparellades pendents.",
+  "rows": [
+    {
+      "source": "escales:16",
+      "target_group": "MI2-FC-C001",
+      "target_examples_needed": [
+        "escales:1",
+        "escales:2",
+        "escales:17",
+        "problemes:8"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-cinc-variants-escales-perimetres-unitats.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "escales:12",
+      "target_group": "MI2-FC-C005",
+      "target_examples_needed": [
+        "escales:3",
+        "escales:5"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-cinc-variants-escales-perimetres-unitats.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "estimacio:18",
+      "target_group": "MI2-FC-C016",
+      "target_examples_needed": [
+        "estimacio:6",
+        "estimacio:17"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-3-parelles-evidencia-real.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "estimacio:9",
+      "target_group": "MI2-FC-C017",
+      "target_examples_needed": [
+        "estimacio:7",
+        "estimacio:8",
+        "estimacio:13"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-error-relatiu-comparacions-i-volums.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "perimetres:14",
+      "target_group": "MI2-FC-C027",
+      "target_examples_needed": [
+        "perimetres:5"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-perimetres14-inversa-circumferencia.cjs",
+      "source_math_evidence": "workflow_queued",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "perimetres:15",
+      "target_group": "MI2-FC-C026",
+      "target_examples_needed": [
+        "perimetres:4"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-cinc-variants-escales-perimetres-unitats.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "perimetres:4",
+      "target_group": "MI2-FC-C023",
+      "target_examples_needed": [
+        "perimetres:15"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-cinc-variants-escales-perimetres-unitats.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "pitagores:10",
+      "target_group": "MI2-FC-C039",
+      "target_examples_needed": [
+        "pitagores:3"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-pitagores-sis-variants-oracles.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "pitagores:11",
+      "target_group": "MI2-FC-C039",
+      "target_examples_needed": [
+        "pitagores:3"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-pitagores-sis-variants-oracles.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "pitagores:12",
+      "target_group": "MI2-FC-C038",
+      "target_examples_needed": [
+        "pitagores:2",
+        "pitagores:4",
+        "pitagores:5",
+        "pitagores:6",
+        "pitagores:7",
+        "pitagores:8",
+        "pitagores:13",
+        "problemes:6",
+        "problemes:7"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-pitagores-sis-variants-oracles.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "pitagores:14",
+      "target_group": "MI2-FC-C038",
+      "target_examples_needed": [
+        "pitagores:2",
+        "pitagores:4",
+        "pitagores:5",
+        "pitagores:6",
+        "pitagores:7",
+        "pitagores:8",
+        "pitagores:13",
+        "problemes:6",
+        "problemes:7"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-pitagores-sis-variants-oracles.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "pitagores:15",
+      "target_group": "MI2-FC-C038",
+      "target_examples_needed": [
+        "pitagores:2",
+        "pitagores:4",
+        "pitagores:5",
+        "pitagores:6",
+        "pitagores:7",
+        "pitagores:8",
+        "pitagores:13",
+        "problemes:6",
+        "problemes:7"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-pitagores15-dues-branques.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "pitagores:3",
+      "target_group": "MI2-FC-C038",
+      "target_examples_needed": [
+        "pitagores:2",
+        "pitagores:4",
+        "pitagores:5",
+        "pitagores:6",
+        "pitagores:7",
+        "pitagores:8",
+        "pitagores:13",
+        "problemes:6",
+        "problemes:7"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-pitagores-sis-variants-oracles.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "problemes:14",
+      "target_group": "MI2-FC-C045",
+      "target_examples_needed": [
+        "problemes:15"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-3-parelles-evidencia-real.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "problemes:15",
+      "target_group": "MI2-FC-C044",
+      "target_examples_needed": [
+        "problemes:14"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-3-parelles-evidencia-real.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "problemes:16",
+      "target_group": "MI2-FC-C017",
+      "target_examples_needed": [
+        "estimacio:7",
+        "estimacio:8",
+        "estimacio:13"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-error-relatiu-comparacions-i-volums.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "problemes:3",
+      "target_group": "MI2-FC-C054",
+      "target_examples_needed": [
+        "superficies:13",
+        "superficies:14"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-quatre-volums-superficies-oracles.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "problemes:5",
+      "target_group": "MI2-FC-C061",
+      "target_examples_needed": [
+        "superficies:8",
+        "superficies:19"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-3-parelles-evidencia-real.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "superficies:15",
+      "target_group": "MI2-FC-C052",
+      "target_examples_needed": [
+        "superficies:10",
+        "superficies:11"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-quatre-volums-superficies-oracles.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "superficies:17",
+      "target_group": "MI2-FC-C051",
+      "target_examples_needed": [
+        "superficies:1",
+        "superficies:3",
+        "superficies:5"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-error-relatiu-comparacions-i-volums.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "superficies:4",
+      "target_group": "MI2-FC-C051",
+      "target_examples_needed": [
+        "superficies:1",
+        "superficies:3",
+        "superficies:5"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-quatre-volums-superficies-oracles.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "superficies:9",
+      "target_group": "MI2-FC-C061",
+      "target_examples_needed": [
+        "superficies:8",
+        "superficies:19"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-quatre-volums-superficies-oracles.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    },
+    {
+      "source": "unitats:9",
+      "target_group": "MI2-FC-C063",
+      "target_examples_needed": [
+        "unitats:1",
+        "unitats:4",
+        "unitats:5"
+      ],
+      "source_oracle_script": "scripts/test-mesura-2eso-cinc-variants-escales-perimetres-unitats.cjs",
+      "source_math_evidence": "workflow_success",
+      "paired_same_parameters": "pending",
+      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "ui_modes": "pending",
+      "curriculum_judgement": "provisional",
+      "family_approved": false
+    }
+  ]
+}
