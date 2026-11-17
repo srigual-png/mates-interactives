@@ -13,7 +13,7 @@ const context=vm.createContext({Math:math,console});
 vm.runInContext(html.slice(begin,end),context,{timeout:15000});
 const generators=vm.runInContext('({unitats:genUnitats2ESO,escales:genEscales2ESO,pitagores:genPitagores2ESO,perimetres:genPerimetresArees2ESO,superficies:genSuperficiesVolums2ESO,estimacio:genEstimacioError2ESO,problemes:genProblemesMesura2ESO})',context);
 const counts={unitats:18,escales:18,pitagores:16,perimetres:18,superficies:20,estimacio:18,problemes:20};
-const factors={mm:[.001,'length'],cm:[.01,'length'],dm:[.1,'length'],m:[1,'length'],dam:[10,'length'],hm:[100,'length'],km:[1000,'length'],mm2:[1e-6,'area'],cm2:[1e-4,'area'],dm2:[.01,'area'],m2:[1,'area'],dam2:[100,'area'],hm2:[10000,'area'],km2:[1e6,'area'],mm3:[1e-9,'volume'],cm3:[1e-6,'volume'],dm3:[.001,'volume'],m3:[1,'volume'],cl:[.00001,'volume'],ml:[.000001,'volume'],dl:[.0001,'volume'],l:[.001,'volume'],mg:[1e-6,'mass'],g:[.001,'mass'],kg:[1,'mass'],t:[1000,'mass'],'€':[1,'money'],'%':[.01,'ratio'],'' :[1,'scalar']};
+const factors={mm:[.001,'length'],cm:[.01,'length'],dm:[.1,'length'],m:[1,'length'],dam:[10,'length'],hm:[100,'length'],km:[1000,'length'],mm2:[1e-6,'area'],cm2:[1e-4,'area'],dm2:[.01,'area'],m2:[1,'area'],dam2:[100,'area'],hm2:[10000,'area'],km2:[1e6,'area'],mm3:[1e-9,'volume'],cm3:[1e-6,'volume'],dm3:[.001,'volume'],m3:[1,'volume'],cl:[.00001,'volume'],ml:[.000001,'volume'],dl:[.0001,'volume'],l:[.001,'volume'],mg:[1e-6,'mass'],g:[.001,'mass'],kg:[1,'mass'],t:[1000,'mass'],'€':[1,'money'],'%':[.01,'ratio'],'' :[1,'ratio']};
 const normalizeUnit=u=>u.toLowerCase().replace(/²/g,'2').replace(/³/g,'3').replace(/\^2/g,'2').replace(/\^3/g,'3');
 function numericOption(s){
  const v=String(s).trim().replace(/<[^>]+>/g,'');
