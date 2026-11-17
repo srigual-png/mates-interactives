@@ -43,4 +43,4 @@ const seen=new Set();for(let i=0;i<400;i++){
 assert.equal(seen.size,4);
 assert.equal(data.permission_boundary.source_generator_edited,false);
 assert.equal(data.level_guidance.approved,false);
-console.log(JSON.stringify({rounding_cases:4,exact_integer_boundary_checks:4*201,generated_questions:400,distinct_scenarios:seen.size,discrepancies:0,source_changed:false},null,2));
+console.log(JSON.stringify({rounding_cases:4,exact_integer_boundary_checks:4*301,generated_questions:400,distinct_scenarios:seen.size,discrepancies:0,source_changed:false},null,2));
