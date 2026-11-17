@@ -1,0 +1,21 @@
+name: Auditoria matriu variants mixtes Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_matriu_nivells_variants_mixtes.json'
+      - 'docs/auditoria/MI_2ESO_mesura_tracabilitat_128_tipus.json'
+      - 'scripts/test-mesura-2eso-matriu-variants-mixtes.cjs'
+      - '.github/workflows/test-mesura-2eso-matriu-variants-mixtes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integritat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar 6 variants de 3 tipus mixtos
+        run: node scripts/test-mesura-2eso-matriu-variants-mixtes.cjs
