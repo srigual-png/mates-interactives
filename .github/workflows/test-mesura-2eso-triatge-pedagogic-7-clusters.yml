@@ -1,11 +1,6 @@
 name: Auditoria triàtge pedagògic 7 clústers Mesura 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_triatge_pedagogic_7_clusters_prioritaris.json'
-      - 'scripts/test-mesura-2eso-triatge-pedagogic-7-clusters.cjs'
-      - '.github/workflows/test-mesura-2eso-triatge-pedagogic-7-clusters.yml'
   workflow_dispatch:
 
 permissions:
