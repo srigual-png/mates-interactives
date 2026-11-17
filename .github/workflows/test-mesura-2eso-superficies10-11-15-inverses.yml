@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - inverses prismes i profunditat
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-superficies10-11-15-inverses.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-superficies10-11-15-inverses.yml'
   workflow_dispatch:
 jobs:
   compare:
