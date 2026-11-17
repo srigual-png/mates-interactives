@@ -9,7 +9,7 @@ math.random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;if(++calls>600000
 const ctx=vm.createContext({Math:math,console});vm.runInContext(html.slice(beg,end),ctx,{timeout:15000});
 const gens=vm.runInContext('({superficies:genSuperficiesVolums2ESO,unitats:genUnitats2ESO,estimacio:genEstimacioError2ESO,problemes:genProblemesMesura2ESO})',ctx);
 const clean=s=>String(s).replace(/<[^>]+>/g,'').replace(/\s+/g,' ');
-const num=s=>Number(String(s).replace(/\.(?=\d{3}(?:\D|$))/g,'').replace(',','.'));
+const num=s=>{const raw=String(s).replace(/[.,]$/,'').replace(/\.(?=\d{3}(?:\D|$))/g,'').replace(',','.');const value=Number(raw);if(!Number.isFinite(value))throw Error('Invalid numeric value '+s);return value};
 function read(q,re){const m=q.match(re);if(!m)throw Error('Enunciat no reconegut: '+q);return m.slice(1).map(num)}
 const specs={
  'superficies:7':{unit:'cm³',calc:q=>{const [r,h]=read(q,/cilindre té radi ([\d,.]+) cm i altura ([\d,.]+) cm/);return 3.14*r*r*h}},
