@@ -1,0 +1,20 @@
+name: Auditoria nivells candidats Perimetres Superficies 20 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_nivells_candidats_perimetres_superficies_20.json'
+      - 'scripts/test-mesura-2eso-nivells-candidats-perimetres-superficies-20.cjs'
+      - '.github/workflows/test-mesura-2eso-nivells-candidats-perimetres-superficies-20.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify 20 provisional geometry and volume levels
+        run: node scripts/test-mesura-2eso-nivells-candidats-perimetres-superficies-20.cjs
