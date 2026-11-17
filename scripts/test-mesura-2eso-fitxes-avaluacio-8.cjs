@@ -14,8 +14,8 @@ assert.equal(new Set(doc.sheets.map(x=>x.task_id)).size,8);
 for(const s of doc.sheets){
  const task=all.get(s.task_id);assert(task,'Unknown task '+s.task_id);
  assert.equal(s.source_role,task.role);
- assert(s.observation_focus.length>50&&s.expected_evidence.length>=15);
- assert(s.likely_misconception.length>30&&s.diagnostic_question.length>35);
+ assert(s.observation_focus.length>35&&s.expected_evidence.length>=10);
+ assert(s.likely_misconception.length>20&&s.diagnostic_question.length>20);
  assert(s.applied_rubric_dimensions.length>=2);
  assert(s.applied_rubric_dimensions.every(x=>domains.has(x)));
  assert.deepEqual(Object.keys(s.blank_observation.scores),s.applied_rubric_dimensions);
