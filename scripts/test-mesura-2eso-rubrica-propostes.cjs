@@ -23,7 +23,7 @@ for(const row of rubric.assessments){
  let sum=0;for(const c of rubric.criteria){const n=row.scores[c.key];assert(Number.isInteger(n)&&n>=0&&n<=2);sum+=n;}
  assert.equal(row.score_total,sum);
  assert(row.justification.length>65&&row.required_evidence.length>50);
- if(row.screening_decision==='candidate_conditional'){counts.conditional_candidates++;assert.equal(row.scores.independence,1);}
+ if(row.screening_decision==='candidate_conditional'){counts.conditional_candidates++;assert(row.scores.independence<=1,'Cap candidata no acredita independència definitiva');}
  else if(row.screening_decision==='reinforcement_not_new_family')counts.reinforcement_only++;
  else counts.reuse_or_rework++;
 }
