@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - error relatiu i volums comparats
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-error-relatiu-comparacions-i-volums.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-error-relatiu-comparacions-i-volums.yml'
   workflow_dispatch:
 jobs:
   oracle:
