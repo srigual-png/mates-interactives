@@ -1,0 +1,24 @@
+name: Auditoria mancances nivells Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'assets/js/dificultat-mi.js'
+      - 'docs/auditoria/MI_2ESO_mesura_mancances_per_tema_i_nivell.json'
+      - 'docs/auditoria/MI_2ESO_mesura_cataleg_global_provisional.json'
+      - 'docs/auditoria/MI_2ESO_mesura_escissions_prioritaries.json'
+      - 'docs/auditoria/MI_2ESO_mesura_variants_pitagores_estimacio_superficies.json'
+      - 'scripts/test-mesura-2eso-mancances.cjs'
+      - '.github/workflows/test-mesura-2eso-mancances.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprovar mancances dels set temes i nivells
+        run: node scripts/test-mesura-2eso-mancances.cjs
