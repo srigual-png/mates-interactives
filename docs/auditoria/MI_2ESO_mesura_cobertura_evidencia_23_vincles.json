@@ -358,11 +358,13 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-quatre-volums-superficies-oracles.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "pending",
+      "paired_same_parameters": "math_evidence_verified_4_pairs",
       "target_mathematical_oracles_for_this_pair": "not_assessed",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
-      "family_approved": false
+      "family_approved": false,
+      "paired_script": "scripts/test-mesura-2eso-prismes-3-4-parelles.cjs",
+      "pedagogical_interpretation": "identical area of base and height, but triangular prism must derive base area first"
     },
     {
       "source": "superficies:9",
@@ -404,9 +406,9 @@
     "status": "success",
     "generated_examples": 160
   },
-  "paired_math_evidence_unique_groups": 7,
-  "paired_math_evidence_records": 8,
-  "paired_real_cases": 27,
+  "paired_math_evidence_unique_groups": 8,
+  "paired_math_evidence_records": 9,
+  "paired_real_cases": 31,
   "paired_math_evidence_workflow": {
     "run_id": 44103600888,
     "status": "success",
@@ -441,6 +443,12 @@
       "run_id": 44106142590,
       "status": "success",
       "generated_examples": 1200,
+      "paired_cases": 4
+    },
+    {
+      "run_id": 44106878748,
+      "status": "success",
+      "generated_examples": 800,
       "paired_cases": 4
     }
   ]
