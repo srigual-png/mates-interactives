@@ -1,0 +1,21 @@
+name: Auditoria escissions prioritaries Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_escissions_prioritaries.json'
+      - 'docs/auditoria/MI_2ESO_mesura_cataleg_global_provisional.json'
+      - 'scripts/test-mesura-2eso-escissions-prioritaries.cjs'
+      - '.github/workflows/test-mesura-2eso-escissions-prioritaries.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integritat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar escissions de clústers sense pèrdua de tipus
+        run: node scripts/test-mesura-2eso-escissions-prioritaries.cjs
