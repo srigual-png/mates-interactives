@@ -2,6 +2,8 @@
 
 **Estat: PROVISIONAL — no és cap classificació pedagògica validada.**
 
+**Consolidació de «Unitats i conversions» i «Escales» (36/36 tipus):** [matriu d'Unitats](MI_2ESO_mesura_unitats_decisions_18_tipus.json), [matriu d'Escales](MI_2ESO_mesura_escales_decisions_18_tipus.json) i [informe de decisions](MI_2ESO_mesura_unitats_escales_consolidacio.md). Comprovació estructural dedicada; les categories són **candidates, no famílies validades**.
+
 **Consolidació pedagògica provisional de «Problemes de mesura» (20/20):** [matriu de decisions JSON](MI_2ESO_mesura_problemes_decisions_20_tipus.json) i [informe amb exemples contrastius](MI_2ESO_mesura_problemes_consolidacio.md). Es distingeixen 10 nuclis compartits, 5 variants contextuals, 4 problemes compostos candidats i 1 cas per revisar; **són categories de decisió, no recomptes de famílies genuïnes**. Test estructural dedicat afegit.
 
 **Traçabilitat 128/128 tipus:** registre estructurat [JSON](MI_2ESO_mesura_tracabilitat_128_tipus.json) i [guia d'interpretació](MI_2ESO_mesura_tracabilitat_128_tipus.md), amb assignació a agrupacions candidates, vincles entre temes i 6 variants documentades. Prova automàtica d'integritat disponible. **Això no valida encara famílies matemàtiques genuïnes.**
