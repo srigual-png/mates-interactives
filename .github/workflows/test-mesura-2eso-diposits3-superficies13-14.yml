@@ -1,0 +1,18 @@
+name: Mesura 2n ESO - diposits percentatges i capacitats
+on:
+  pull_request:
+    paths:
+      - 'scripts/test-mesura-2eso-diposits3-superficies13-14-contrast.cjs'
+      - '2eso/sentit-mesura.html'
+      - '.github/workflows/test-mesura-2eso-diposits3-superficies13-14.yml'
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar 1200 capacitats i ompliments parcials
+        run: node scripts/test-mesura-2eso-diposits3-superficies13-14-contrast.cjs
