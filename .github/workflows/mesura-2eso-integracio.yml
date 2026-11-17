@@ -35,6 +35,8 @@ jobs:
             echo 'full=true' >> "$GITHUB_OUTPUT"
             echo 'El generador ha canviat: revalidar les suites individuals per blocs'
           fi
+      - name: Contrastar els modes guiat autonom i examen dels vincles
+        run: node scripts/test-mesura-2eso-integracio-modes-vincles.cjs
       - name: Contrast pedagogic pendent - Unitats 1 4 5 9
         run: node scripts/test-mesura-2eso-integracio-pedagogica-unitats-4-5.cjs
       - name: Unitats - suites existents
