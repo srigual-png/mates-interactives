@@ -1,0 +1,20 @@
+name: Auditoria decisio 44 vincles unipersonals 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_decisio_44_vincles_unipersonals.json'
+      - 'scripts/test-mesura-2eso-decisio-44-vincles.cjs'
+      - '.github/workflows/test-mesura-2eso-decisio-44-vincles.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar 44 decisions candidates sense autoritzacions
+        run: node scripts/test-mesura-2eso-decisio-44-vincles.cjs
