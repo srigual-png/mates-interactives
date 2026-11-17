@@ -6,7 +6,7 @@
   "source_tests_success": 23,
   "source_tests_queued": 0,
   "completed_paired_evidence": 0,
-  "note": "Les mostres verificades proven correcció individual, no equivalència de famílies. Ambdós extrems i dades deliberadament aparellades pendents.",
+  "note": "Les mostres verificades proven correcció individual, no equivalència de famílies. Ambdós extrems i dades deliberadament aparellades pendents. Les 23 propostes pedagogiques (21 vincles conceptuals) no equivalen a families aprovades; controls de modes amb DOM simulat, pendent navegador real.",
   "rows": [
     {
       "source": "escales:16",
@@ -25,7 +25,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-escales-dues-parelles-dades-compartides.cjs",
-      "pedagogical_interpretation": "scale conversion for one side is a subprocess of real rectangle perimeter"
+      "pedagogical_interpretation": "scale conversion for one side is a subprocess of real rectangle perimeter",
+      "pedagogical_proposal": {
+        "decision": "variant_mateixa_familia",
+        "level": "N2",
+        "reason": "compondre escala i perimetre",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "escales:12",
@@ -42,7 +50,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-escales-dues-parelles-dades-compartides.cjs",
-      "pedagogical_interpretation": "infer enlargement factor from two lengths versus apply given factor to length"
+      "pedagogical_interpretation": "infer enlargement factor from two lengths versus apply given factor to length",
+      "pedagogical_proposal": {
+        "decision": "variant_mateixa_familia",
+        "level": "N2",
+        "reason": "inferir factor en comptes d'aplicar-lo",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "estimacio:18",
@@ -59,7 +75,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-estimacio6-18-aparellades.cjs",
-      "pedagogical_interpretation": "same reference and approximation, arithmetic absolute-error answer versus diagnosing addition error"
+      "pedagogical_interpretation": "same reference and approximation, arithmetic absolute-error answer versus diagnosing addition error",
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent",
+        "level": "N2",
+        "reason": "diagnosticar error versus calcular-lo",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "estimacio:9",
@@ -77,7 +101,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-estimacio7-8-9-parelles.cjs",
-      "pedagogical_interpretation": "shared first error calculation, but percentage formatting versus comparison with a second measure adds decision"
+      "pedagogical_interpretation": "shared first error calculation, but percentage formatting versus comparison with a second measure adds decision",
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent",
+        "level": "N2",
+        "reason": "comparar dos errors relatius vs calcular-ne un",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "perimetres:14",
@@ -93,7 +125,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-dues-parelles-parametres-iguals.cjs",
-      "pedagogical_interpretation": "same circumference relation, reverse unknown demands inversion"
+      "pedagogical_interpretation": "same circumference relation, reverse unknown demands inversion",
+      "pedagogical_proposal": {
+        "decision": "variant_mateixa_familia",
+        "level": "N2",
+        "reason": "inversio de formula de circumferencia",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "perimetres:15",
@@ -109,7 +149,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-dues-parelles-parametres-iguals.cjs",
-      "pedagogical_interpretation": "perimeter is intermediate step in area, output quantity differs"
+      "pedagogical_interpretation": "perimeter is intermediate step in area, output quantity differs",
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent",
+        "level": "N2",
+        "reason": "area amb apotema vs perimetre",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "perimetres:4",
@@ -125,7 +173,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-dues-parelles-parametres-iguals.cjs",
-      "pedagogical_interpretation": "perimeter is intermediate step in area, output quantity differs"
+      "pedagogical_interpretation": "perimeter is intermediate step in area, output quantity differs",
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent",
+        "level": "N1",
+        "reason": "perimetre vs area final",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "pitagores:10",
@@ -141,7 +197,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-pitagores3-10-11-aparellades.cjs",
-      "pedagogical_interpretation": "inverse Pythagoras core plus triangular area; different final unit and reasoning"
+      "pedagogical_interpretation": "inverse Pythagoras core plus triangular area; different final unit and reasoning",
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent",
+        "level": "N2",
+        "reason": "catet invers mes area",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "pitagores:11",
@@ -157,7 +221,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-pitagores3-10-11-aparellades.cjs",
-      "pedagogical_interpretation": "inverse Pythagoras core plus rectangle perimeter; extra composite operation"
+      "pedagogical_interpretation": "inverse Pythagoras core plus rectangle perimeter; extra composite operation",
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent",
+        "level": "N2",
+        "reason": "catet invers mes perimetre",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "pitagores:12",
@@ -181,7 +253,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs",
-      "pedagogical_interpretation": "same cathets and core hypotenuse calculation, then difference between walking path and direct diagonal; units differ"
+      "pedagogical_interpretation": "same cathets and core hypotenuse calculation, then difference between walking path and direct diagonal; units differ",
+      "pedagogical_proposal": {
+        "decision": "variant_mateixa_familia",
+        "level": "N2",
+        "reason": "hipotenusa mes decisio de recorregut",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "pitagores:14",
@@ -205,7 +285,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs",
-      "pedagogical_interpretation": "same cathets and core hypotenuse calculation, then additional cable length for anchors; units differ"
+      "pedagogical_interpretation": "same cathets and core hypotenuse calculation, then additional cable length for anchors; units differ",
+      "pedagogical_proposal": {
+        "decision": "variant_mateixa_familia",
+        "level": "N2",
+        "reason": "hipotenusa mes marge de cable",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "pitagores:15",
@@ -229,7 +317,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-pitagores2-3-15-aparellades.cjs",
-      "pedagogical_interpretation": "two branches of same generator: direct diagonal matches basic hypotenuse; inverse side matches basic inverse cathetus"
+      "pedagogical_interpretation": "two branches of same generator: direct diagonal matches basic hypotenuse; inverse side matches basic inverse cathetus",
+      "pedagogical_proposal": {
+        "decision": "variant_mateixa_familia",
+        "level": "N1_o_N2_segons_branca",
+        "reason": "diagonal i catet invers separats",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "pitagores:3",
@@ -253,7 +349,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-pitagores2-3-15-aparellades.cjs",
-      "pedagogical_interpretation": "same triangular data and numerical Pythagorean relation, but inverse cathetus vs direct hypotenuse require differing operations"
+      "pedagogical_interpretation": "same triangular data and numerical Pythagorean relation, but inverse cathetus vs direct hypotenuse require differing operations",
+      "pedagogical_proposal": {
+        "decision": "variant_mateixa_familia",
+        "level": "N2",
+        "reason": "catet invers en lloc de hipotenusa",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "problemes:14",
@@ -269,7 +373,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-problemes14-15-estructura.cjs",
-      "pedagogical_interpretation": "identical net-perimeter-minus-door core; fence requires further monetary cost; no identical original dimension fixtures"
+      "pedagogical_interpretation": "identical net-perimeter-minus-door core; fence requires further monetary cost; no identical original dimension fixtures",
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent",
+        "level": "N2",
+        "reason": "perimetre util mes preu",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "problemes:15",
@@ -285,7 +397,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-problemes14-15-estructura.cjs",
-      "pedagogical_interpretation": "identical net-perimeter-minus-door core; fence requires further monetary cost; no identical original dimension fixtures"
+      "pedagogical_interpretation": "identical net-perimeter-minus-door core; fence requires further monetary cost; no identical original dimension fixtures",
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent",
+        "level": "N1",
+        "reason": "perimetre util sense cost",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "problemes:16",
@@ -303,7 +423,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-problemes16-estimacio7-8-aparellades.cjs",
-      "pedagogical_interpretation": "same reference and instrument B measurement reused; compare A/B requires additional error and decision; only one genuine overlap"
+      "pedagogical_interpretation": "same reference and instrument B measurement reused; compare A/B requires additional error and decision; only one genuine overlap",
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent",
+        "level": "N2",
+        "reason": "decisio comparativa d'error",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "problemes:3",
@@ -314,11 +442,21 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-quatre-volums-superficies-oracles.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "pending",
-      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "paired_same_parameters": "structural_math_verified_no_equal_parameter_pair",
+      "target_mathematical_oracles_for_this_pair": "verified_structurally_not_same_input",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
-      "family_approved": false
+      "family_approved": false,
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent",
+        "level": "N2",
+        "reason": "volum parcial mes percentatge",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      },
+      "paired_script": "scripts/test-mesura-2eso-diposits3-superficies13-14-contrast.cjs",
+      "pedagogical_interpretation": "partial volume in litres requires extra percentage, different original dimensions and unit systems"
     },
     {
       "source": "problemes:5",
@@ -335,7 +473,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-etiquetes5-superficie8-contrast.cjs",
-      "pedagogical_interpretation": "identical lateral cylinder area formula using diameter or radius, but original heights are disjoint and contextual labeling differs"
+      "pedagogical_interpretation": "identical lateral cylinder area formula using diameter or radius, but original heights are disjoint and contextual labeling differs",
+      "pedagogical_proposal": {
+        "decision": "variant_mateixa_familia_amb_superficies8_diferent_amb_superficies19",
+        "level": "N2",
+        "reason": "etiqueta lateral vs superficie total",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "superficies:15",
@@ -352,7 +498,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-superficies10-11-15-inverses.cjs",
-      "pedagogical_interpretation": "inverse depth from V/area plus litres-to-cubic-metres and base-area calculations; exact 10/11 inverse prism examples exist, but none established with type 15"
+      "pedagogical_interpretation": "inverse depth from V/area plus litres-to-cubic-metres and base-area calculations; exact 10/11 inverse prism examples exist, but none established with type 15",
+      "pedagogical_proposal": {
+        "decision": "variant_mateixa_familia_amb_superficies10_diferent_amb_superficies11",
+        "level": "N2",
+        "reason": "profunditat amb conversio de litres",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "superficies:17",
@@ -370,7 +524,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-superficies1-17-aparellades.cjs",
-      "pedagogical_interpretation": "matching three dimension values but different cm/dm units; compare two capacities vs calculating one orthotope volume; 24 of 500 same-base cases"
+      "pedagogical_interpretation": "matching three dimension values but different cm/dm units; compare two capacities vs calculating one orthotope volume; 24 of 500 same-base cases",
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent",
+        "level": "N2",
+        "reason": "comparacio de dos volums",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "superficies:4",
@@ -388,7 +550,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-prismes-3-4-parelles.cjs",
-      "pedagogical_interpretation": "identical area of base and height, but triangular prism must derive base area first"
+      "pedagogical_interpretation": "identical area of base and height, but triangular prism must derive base area first",
+      "pedagogical_proposal": {
+        "decision": "variant_mateixa_familia",
+        "level": "N2",
+        "reason": "prisma triangular amb area de base previa",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "superficies:9",
@@ -405,7 +575,15 @@
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-superficies-8-9-19-aparellades.cjs",
-      "pedagogical_interpretation": "same radius and height, cylinder lateral area reused in full area, while unfolded dimensions are a different output"
+      "pedagogical_interpretation": "same radius and height, cylinder lateral area reused in full area, while unfolded dimensions are a different output",
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent_amb_superficies8_variant_amb_19",
+        "level": "N2",
+        "reason": "superficie total vs lateral",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      }
     },
     {
       "source": "unitats:9",
@@ -417,11 +595,21 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-cinc-variants-escales-perimetres-unitats.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "pending",
-      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "paired_same_parameters": "structural_math_verified_no_equal_parameter_pair",
+      "target_mathematical_oracles_for_this_pair": "verified_structurally_not_same_input",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
-      "family_approved": false
+      "family_approved": false,
+      "pedagogical_proposal": {
+        "decision": "tasca_diferent",
+        "level": "N2",
+        "reason": "comparacio vs conversio de magnitud",
+        "approval": "pending_teacher_review",
+        "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
+        "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      },
+      "paired_script": "scripts/test-mesura-2eso-integracio-pedagogica-unitats.cjs",
+      "pedagogical_interpretation": "compare two lengths after conversion vs convert an individual quantity; mass and capacity conversion are separate magnitudes"
     }
   ],
   "last_confirmed_workflow": {
@@ -539,5 +727,24 @@
         "related_subpair_examples": 4
       }
     ]
+  },
+  "provisional_pedagogical_proposals": 23,
+  "unique_conceptual_proposals": 21,
+  "mode_verification": {
+    "run_id": 44128716228,
+    "status": "success",
+    "types": 56,
+    "guided_multiple": 56,
+    "autonomous_multiple": 56,
+    "exam_multiple": 56,
+    "open_practice_rendered": 49,
+    "open_exam_rendered": 49,
+    "closed_only": 7,
+    "kind": "DOM_simulated_not_real_browser"
+  },
+  "additional_pedagogical_contrast": {
+    "run_id": 44114539881,
+    "status": "success",
+    "source_code_unchanged": true
   }
 }
