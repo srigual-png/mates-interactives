@@ -2,6 +2,9 @@
 
 **Estat: PROVISIONAL — no és cap classificació pedagògica validada.**
 
+**Primera consolidació documental dels 128/128 tipus COMPLETADA:** afegides [decisions de Superfícies (20)](MI_2ESO_mesura_superficies_decisions_20_tipus.json), [decisions d'Estimació (18)](MI_2ESO_mesura_estimacio_decisions_18_tipus.json) i [informe de la revisió](MI_2ESO_mesura_superficies_estimacio_consolidacio.md). Els set temes tenen una decisió provisional tipus a tipus. **No són 128 famílies validades**, ni s'ha tancat encara la deduplicació canònica transversal.
+
+
 **Consolidació de Pitàgores i Perímetres (34/34 tipus):** [decisions de Pitàgores](MI_2ESO_mesura_pitagores_decisions_16_tipus.json), [decisions de Perímetres](MI_2ESO_mesura_perimetres_decisions_18_tipus.json) i [informe comparatiu](MI_2ESO_mesura_pitagores_perimetres_consolidacio.md). **Acumulat: 90/128 tipus amb decisió de treball**, no pas 90 famílies genuïnes validades.
 
 **Consolidació de «Unitats i conversions» i «Escales» (36/36 tipus):** [matriu d'Unitats](MI_2ESO_mesura_unitats_decisions_18_tipus.json), [matriu d'Escales](MI_2ESO_mesura_escales_decisions_18_tipus.json) i [informe de decisions](MI_2ESO_mesura_unitats_escales_consolidacio.md). Comprovació estructural dedicada; les categories són **candidates, no famílies validades**.
