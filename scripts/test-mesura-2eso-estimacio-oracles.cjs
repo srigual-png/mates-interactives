@@ -105,4 +105,3 @@ assert.equal(winningRelative.size,2,'estimacio:9 ha de poder seleccionar A i B')
 assert.equal(winningAbsolute.size,2,'estimacio:17 ha de poder seleccionar A i B');
 assert.equal(count,96);
 console.log('OK: 96 exercicis reals de precisio i error amb oracles independents per 12 tipus');
-
