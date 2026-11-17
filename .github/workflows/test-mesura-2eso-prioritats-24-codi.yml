@@ -1,11 +1,6 @@
 name: Auditoria 24 prioritats codi Mesura 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_24_prioritats_revisio_codi.json'
-      - 'scripts/test-mesura-2eso-prioritats-24-codi.cjs'
-      - '.github/workflows/test-mesura-2eso-prioritats-24-codi.yml'
   workflow_dispatch:
 
 permissions:
