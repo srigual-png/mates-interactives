@@ -1,0 +1,21 @@
+name: Auditoria especificacions pedagogiques Mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_tres_especificacions_pedagogiques.json'
+      - 'docs/auditoria/MI_2ESO_mesura_cinc_candidates_diferencials.json'
+      - 'scripts/test-mesura-2eso-especificacions-pedagogiques.cjs'
+      - '.github/workflows/test-mesura-2eso-especificacions-pedagogiques.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integritat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar nou variants i tres especificacions pendents
+        run: node scripts/test-mesura-2eso-especificacions-pedagogiques.cjs
