@@ -1,11 +1,6 @@
 name: Auditoria generativa 128 Mesura 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-generacio-128-mostra.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-generacio-128-mostra.yml'
   workflow_dispatch:
 
 permissions:
