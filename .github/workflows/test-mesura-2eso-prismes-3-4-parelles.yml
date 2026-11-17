@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - prismes 3 4 aparellats
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-prismes-3-4-parelles.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-prismes-3-4-parelles.yml'
   workflow_dispatch:
 jobs:
   compare:
