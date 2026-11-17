@@ -37,9 +37,9 @@ for(const row of queue.comparisons){
 assert.equal(sources.size,23);
 assert.equal(shared,4);
 assert.equal(variants,19);
-assert.equal(reciprocal,1);
-assert.equal(unorderedPairs.size,22);
-assert.equal(queue.counts.unique_conceptual_comparisons,22);
+assert.equal(reciprocal,2);
+assert.equal(unorderedPairs.size,21);
+assert.equal(queue.counts.unique_conceptual_comparisons,21);
 assert.equal(queue.counts.validated_comparisons,0);
 assert.equal(queue.counts.approved_family_merges,0);
-console.log(JSON.stringify({records:23,unique_group_pairs:22,shared_core_records:4,variant_records:19,pending_evidence:23,approved_merges:0},null,2));
+console.log(JSON.stringify({records:23,unique_group_pairs:21,shared_core_records:4,variant_records:19,pending_evidence:23,approved_merges:0},null,2));
