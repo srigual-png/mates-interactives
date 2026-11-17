@@ -76,6 +76,22 @@ Els grups d’aquesta taula serveixen per començar la comparació. **No es decl
 - **Revisar les connexions transversals sense duplicar famílies:** semblança ↔ escales/Tales; Pitàgores ↔ diagonals/coordenades; coordenades ↔ trajectes; cossos ↔ visualització 3D. Una fórmula compartida no demostra que la tasca sigui la mateixa.
 - Els objectius 15 famílies / 5 N1 / 5 N2 / 3 N3 són orientatius, no quotes. El nivell depèn del procediment i de l’adequació curricular a 2n.
 
+### Contrast curricular amb la seqüenciació oficial de 2n
+
+La proposta XTEC per a 2n situa explícitament aquests sabers dins del curs:
+
+| Bloc de l’aplicació | Saber de 2n que el fonamenta | Abast i reserva |
+|---|---|---|
+| Semblança | Reconeixement i estudi de figures semblants al pla i a l’espai; raó de semblança. | Dona suport a raons, dimensions homòlogues i comparació de figures. La congruència i els angles corresponents hi encaixen com a propietats, però cal no confondre-les amb un simple càlcul d’escala. |
+| Tales i escales | Comprensió i aplicació de Tales en diferents contextos; representació a escala i deducció de mesures indirectes. | Escales, segments paral·lels i ombres són contextualitzacions curricularment pertinents; la dificultat ve del model i de la incògnita, no del context per si sol. |
+| Pitàgores | Descoberta, conceptualització i demostració geomètrica; resolució de problemes que l’impliquin; ús per calcular longituds de polígons. | Les diagonals, les escales i les altures són aplicacions si l’alumne identifica el triangle rectangle. La prova matemàtica de Pitàgores és saber de curs, però no equival automàticament a un exercici N3. |
+| Cossos i desenvolupaments | Estudi d’elements i propietats; classificació de poliedres i cossos rodons; visualització a través de desenvolupaments plans. | Els recomptes són pertinents, però cal comprovar que l’element demanat és visible/determinat i que no es tracta només de memoritzar vocabulari. |
+| Coordenades | Localització en el pla mitjançant coordenades cartesianes. | Llegir i situar punts hi encaixa. La classificació de figures per coordenades i la distància euclidiana són connexions amb geometria i Pitàgores; no s’han de presentar com a geometria analítica formal, que la seqüenciació introdueix a 4t. |
+| Rectes dins de coordenades/modelització | Visualització de les funcions constant, lineal i afí com a rectes amb característiques concretes; també lectura i representació de funcions en l’àmbit algebraic de 2n. | Tipus de recta i tendència són adequats si l’ítem només demana interpretar gràficament aquestes funcions. Evitar exigir equacions de recta pròpies de geometria analítica de cursos posteriors. |
+| Modelització i connexions | Reconeixement de connexions entre el sentit espacial i altres sentits; visualització del teorema de Pitàgores; models de funcions i proporcionalitat en contextos. | Els compostos escala+Pitàgores, trajecte+distància i ombres+Pitàgores poden ser adequats. Cal justificar cada cadena pel nombre d’idees que cal seleccionar i coordinar, no pel nombre d’operacions. |
+
+Fonts primàries: [XTEC, Orientacions curriculars de Matemàtiques per cursos, 2n ESO, pp. 11–13](https://xtec.gencat.cat/web/.content/curriculum/eso/concrecions-curriculars/Orientacions-curriculars_MAT_SEC_per-cursos.pdf) i [XTEC, Orientacions curriculars per sentits, sentit espacial, seqüenciació, pp. 21–25](https://xtec.gencat.cat/web/.content/curriculum/eso/concrecions-curriculars/Orientacions-curriculars_MAT_SEC_per-sentits.pdf). La seqüenciació assigna a 2n els sabers indicats; les orientacions generals remarquen visualització, raonament, resolució de problemes i connexions entre sentits.
+
 ## Evidència de proves disponible i límits
 
 La lectura del codi confirma que els set generadors cobreixen els codis ordinaris 1–11 / 1–10 / 1–10 / 1–10 / 1–9 / 1–10 / 1–10. La classificació s’aplica des de `REVIEWED_LEVELS`; `REVIEWED_VARIANTS` només afegeix una branca específica per al tipus 10 de modelització (escala, N1). Les etiquetes locals `easy/medium/hard` dels generadors no substitueixen el mapa N1/N2/N3.\n\nEl resum existent registra **3.000 mostres generades per tema** i recompte de cobertura/examen. Això és evidència de generació simulada, no una revisió pedagògica de 3.000 exercicis únics. El mateix resum informa `banksReviewed: 0`, `bankChecks: []` i `pageErrors: []`; per tant, encara no acredita una passada de bancs ni una comprovació visual al navegador. Aquest document no executa proves noves ni modifica el comportament de l’aplicació.
