@@ -346,11 +346,13 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-quatre-volums-superficies-oracles.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "pending",
-      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "paired_same_parameters": "not_established_structural_math_verified",
+      "target_mathematical_oracles_for_this_pair": "structural_verified_no_exact_match",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
-      "family_approved": false
+      "family_approved": false,
+      "paired_script": "scripts/test-mesura-2eso-superficies10-11-15-inverses.cjs",
+      "pedagogical_interpretation": "inverse depth from V/area plus litres-to-cubic-metres and base-area calculations; exact 10/11 inverse prism examples exist, but none established with type 15"
     },
     {
       "source": "superficies:17",
@@ -522,6 +524,19 @@
         "status": "success",
         "generated": 800,
         "exact_parameter_matches": 0
+      },
+      {
+        "source": "superficies:15",
+        "targets": [
+          "superficies:10",
+          "superficies:11"
+        ],
+        "run_id": 44112545852,
+        "status": "success",
+        "generated": 1200,
+        "exact_parameter_matches": "not_established",
+        "related_subpair_exact_matches": 24,
+        "related_subpair_examples": 4
       }
     ]
   }
