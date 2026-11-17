@@ -6,8 +6,8 @@
   "generated_test_evidence": {
     "samples_all_types_first": 1536,
     "samples_all_types_extended": 5120,
-    "independent_oracle_types": 112,
-    "independent_oracle_checks": 5400,
+    "independent_oracle_types": 128,
+    "independent_oracle_checks": 6200,
     "semantic_distractor_samples_after_fix": 7680,
     "semantic_duplicates_detected_after_fix": 0,
     "chromium_real_browser_types": [
@@ -19,15 +19,15 @@
       "390x844"
     ],
     "chromium_screenshots": 8,
-    "additional_independent_oracle_types": 92,
-    "additional_independent_oracle_checks": 4600
+    "additional_independent_oracle_types": 108,
+    "additional_independent_oracle_checks": 5400
   },
   "interpretation": "Les bateries són diferents i parcialment solapades: no sumar-les com a exercicis únics. Les assercions numèriques independents només cobreixen 20 tipus, i el test semàntic només reconeix expressions numèriques d'una quantitat.",
   "totals": {
     "types": 128,
     "source_inspected": 128,
-    "types_with_independent_numeric_or_choice_oracle": 112,
-    "types_without_independent_oracle": 16,
+    "types_with_independent_numeric_or_choice_oracle": 128,
+    "types_without_independent_oracle": 0,
     "prioritized_source_inspected": 24,
     "types_fixed_with_authorization": 2,
     "official_level_changes": 0,
@@ -40,9 +40,9 @@
       "types": 18,
       "source_code_checked": 18,
       "generated_instances_per_type": 40,
-      "independent_oracle_types": 13,
-      "independent_oracle_instances": 640,
-      "without_independent_oracle": 5,
+      "independent_oracle_types": 18,
+      "independent_oracle_instances": 890,
+      "without_independent_oracle": 0,
       "priority_case_count": 4,
       "priority_case_keys": [
         "unitats:6",
@@ -53,8 +53,8 @@
       "remaining_distinct_families_verified": 0,
       "teacher_approved_families": 0,
       "teacher_approved_levels": 0,
-      "additional_independent_oracle_types": 12,
-      "additional_independent_oracle_instances": 600
+      "additional_independent_oracle_types": 17,
+      "additional_independent_oracle_instances": 850
     },
     {
       "topic": "escales",
@@ -141,9 +141,9 @@
       "types": 18,
       "source_code_checked": 18,
       "generated_instances_per_type": 40,
-      "independent_oracle_types": 13,
-      "independent_oracle_instances": 580,
-      "without_independent_oracle": 5,
+      "independent_oracle_types": 18,
+      "independent_oracle_instances": 830,
+      "without_independent_oracle": 0,
       "priority_case_count": 3,
       "priority_case_keys": [
         "estimacio:11",
@@ -153,17 +153,17 @@
       "remaining_distinct_families_verified": 0,
       "teacher_approved_families": 0,
       "teacher_approved_levels": 0,
-      "additional_independent_oracle_types": 6,
-      "additional_independent_oracle_instances": 300
+      "additional_independent_oracle_types": 11,
+      "additional_independent_oracle_instances": 550
     },
     {
       "topic": "problemes",
       "types": 20,
       "source_code_checked": 20,
       "generated_instances_per_type": 40,
-      "independent_oracle_types": 14,
-      "independent_oracle_instances": 660,
-      "without_independent_oracle": 6,
+      "independent_oracle_types": 20,
+      "independent_oracle_instances": 960,
+      "without_independent_oracle": 0,
       "priority_case_count": 5,
       "priority_case_keys": [
         "problemes:2",
@@ -175,8 +175,8 @@
       "remaining_distinct_families_verified": 0,
       "teacher_approved_families": 0,
       "teacher_approved_levels": 0,
-      "additional_independent_oracle_types": 10,
-      "additional_independent_oracle_instances": 500
+      "additional_independent_oracle_types": 16,
+      "additional_independent_oracle_instances": 800
     }
   ],
   "priority_followup": [
@@ -328,8 +328,8 @@
   "open_issues": [
     {
       "id": "independent_oracle_gap",
-      "status": "open",
-      "detail": "16 tipus sense oracle independent (Unitats 5, Estimació 5 i Problemes 6)."
+      "status": "closed_at_sample_level",
+      "detail": "Cobertura de mostres 128/128; 6.200 comprovacions amb oracles aritmètics o contextuals. Les decisions de plausibilitat de context requereixen validació pedagògica, no és prova de correcció exhaustiva."
     },
     {
       "id": "pedagogical_family_validation",
@@ -399,21 +399,23 @@
     "scripts/test-mesura-2eso-oracles-lot-17.cjs",
     "scripts/test-mesura-2eso-oracles-lot-17b.cjs",
     "scripts/test-mesura-2eso-oracles-lot-18.cjs",
-    "scripts/test-mesura-2eso-oracles-lot-21.cjs"
+    "scripts/test-mesura-2eso-oracles-lot-21.cjs",
+    "scripts/test-mesura-2eso-oracles-ultims-16.cjs"
   ],
   "next_step": "Auditoria matemàtica de risc dels 108 tipus sense oracle, prioritzant unitats, Pitàgores, problemes compostos, i estandarditzar comptatge de famílies sense quotas.",
   "authorization_limit": "No fusionar ni publicar; no modificar altres generadors ni nivells sense aprovació explícita.",
   "latest_validation": {
-    "run_id": 44072540368,
+    "run_id": 44073014393,
     "status": "success",
-    "checked_new_types": 21,
-    "checked_new_instances": 1050,
+    "checked_new_types": 16,
+    "checked_new_instances": 800,
     "prior_batches": [
       20,
       19,
       17,
       17,
-      18
+      18,
+      21
     ],
     "generator_changes": false
   }
