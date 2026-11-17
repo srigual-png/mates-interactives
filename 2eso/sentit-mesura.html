@@ -1683,7 +1683,7 @@ function genEstimacioError2ESO(forceType){
   else if(type===12){
     const measured=shuffle([12.3,18.7,25.4,40.6])[0],step=0.1,lo=roundTo(measured-step/2,2),hi=roundTo(measured+step/2,2);
     correct=`des de ${fmtNum(lo,2)} cm (inclòs) fins a ${fmtNum(hi,2)} cm (exclòs)`;options=shuffle([correct,`entre ${fmtNum(measured-step,2)} cm i ${fmtNum(measured+step,2)} cm`,`entre ${fmtNum(measured,2)} cm i ${fmtNum(measured+step,2)} cm`,`exactament ${fmtNum(measured,2)} cm`]);
-    question=`Una longitud s’ha registrat com <b>${fmtNum(measured,1)} cm</b> arrodonida a la dècima. Quin interval és compatible amb aquest arrodoniment?`;
+    question=`Una longitud s’ha registrat com <b>${fmtNum(measured,1)} cm</b> arrodonida a la dècima. Si el valor original queda exactament a mig camí entre dues dècimes, s’arrodoneix cap amunt. Quin interval és compatible amb aquest arrodoniment?`;
     guide=['Una mesura arrodonida a la dècima pot diferir fins a mitja dècima del valor registrat.','Resta i suma aquest marge al valor indicat.'];solution=[`El marge és de 0,05 cm.`,`L’interval compatible és ${correct}.`];allowOpen=false;
   }
   else if(type===13){
