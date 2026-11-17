@@ -54,7 +54,7 @@ Els 12 ítems tenen un objectiu únic i directe: classificar, traduir notacions,
 - **G4 Periòdic pur (4,5).** 0,\overline8: 10x−x=8, x=8/9. 0,\overline{45}: 100x−x=45, x=45/99=5/11. Error: restar x en comptes de 10^p x. Límit: període d’una o diverses xifres.
 - **G5 Periòdic mixt (6,7,8).** 0,8\overline5: 100x−10x=85−8, x=77/90. 0,28\overline3: 1000x−100x=283−28=255, x=255/900=17/60. Error: alinear període però no part no periòdica. Límit: longituds de període i anteperíode diferents; simplificació final.
 - **G6 Desplaçament (9).** x=0,\overline2 → període d’una xifra: ×10. x=0,\overline{27} → ×100. Error: comptar l’anteperíode com a longitud del període. Límit: distingir periòdic pur de mixt.
-- **G7 Resta eliminadora (10).** x=0,2\overline6; 10x=2,\overline6 i 100x=26,\overline6; resta: 90x=24. Per x=0,7\overline3: 1000x−100x=723−72=651. Error: restar expressions amb períodes no alineats. Límit: triar potències segons anteperíode i període.
+- **G7 Resta eliminadora (10).** x=0,2\overline6; 10x=2,\overline6 i 100x=26,\overline6; resta: 90x=24. Per x=0,7\overline3: 1000x−100x=733−73=660. Error: restar expressions amb períodes no alineats. Límit: triar potències segons anteperíode i període.
 - **G8 Diagnòstic (11).** Per 0,\overline{36}, ×10 no alinea tot el bloc; cal ×100. Per 0,\overline7}, ×10 sí que n’hi ha prou. Error: respondre “cal multiplicar més” sense indicar la potència correcta. Límit: justificar pel nombre de xifres del període.
 - **G9 Classificar decimal generat per fracció (12).** 7/20=0,35, exacte; 1/6=0,1\overline6, periòdic mixt. Error: classificar només mirant el numerador. Límit: denominador reduït amb factors primers diferents de 2 i 5 dona decimal periòdic.
 
