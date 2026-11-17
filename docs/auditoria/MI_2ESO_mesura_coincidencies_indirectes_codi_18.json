@@ -1,0 +1,210 @@
+{
+  "schema_version": 1,
+  "status": "source_code_indirect_overlap_review_only",
+  "scope": "2eso/sentit-mesura/three-prioritized-candidates",
+  "source_code": "2eso/sentit-mesura.html",
+  "descriptive_screening": "MI_2ESO_mesura_tres_candidates_contrast_global_128.json",
+  "reviewed_types": [
+    {
+      "candidate": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "key": "escales:12",
+      "question_signature": "factor d’escala lineal",
+      "functional_overlap": "corresponding-length ratio",
+      "boundary": "Only one ratio; no comparison of two independently drawn rectangles."
+    },
+    {
+      "candidate": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "key": "escales:13",
+      "question_signature": "Quina proporció manté correctament l’ordre",
+      "functional_overlap": "homologous-side matching",
+      "boundary": "Select a correct ratio; no simultaneous consistency test of two plans."
+    },
+    {
+      "candidate": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "key": "escales:15",
+      "question_signature": "Quina escala has d’utilitzar",
+      "functional_overlap": "inverse map scale",
+      "boundary": "One drawing target; not model equivalence."
+    },
+    {
+      "candidate": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "key": "escales:16",
+      "question_signature": "Quin és el seu perímetre real",
+      "functional_overlap": "two real lengths from map",
+      "boundary": "Computes a single rectangle's perimeter without comparing its dimensions with another plan."
+    },
+    {
+      "candidate": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "key": "problemes:9",
+      "question_signature": "Quina és l’escala del plànol",
+      "functional_overlap": "infer scale from one length pair",
+      "boundary": "No independent second drawing to validate."
+    },
+    {
+      "candidate": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "key": "problemes:11",
+      "question_signature": "Quina superfície ocupa només la franja",
+      "functional_overlap": "rectangle dimension modeling",
+      "boundary": "An area subtraction problem, not plan congruence."
+    },
+    {
+      "candidate": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "key": "perimetres:9",
+      "question_signature": "Quina àrea té la figura en L",
+      "functional_overlap": "composite shape decomposition",
+      "boundary": "Subtracts areas; no explicit request to select and sum an external boundary."
+    },
+    {
+      "candidate": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "key": "perimetres:11",
+      "question_signature": "Quina superfície ocupa el marc",
+      "functional_overlap": "inner versus outer distinction",
+      "boundary": "Distinguishes interior surface for an area calculation, not external perimeter of joined figures."
+    },
+    {
+      "candidate": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "key": "problemes:11",
+      "question_signature": "Quina superfície ocupa només la franja",
+      "functional_overlap": "inside and outside rectangles",
+      "boundary": "Again an area calculation, not external perimeter."
+    },
+    {
+      "candidate": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "key": "problemes:14",
+      "question_signature": "quin és el cost total",
+      "functional_overlap": "perimeter plus gate subtraction",
+      "boundary": "Gate is a missing section of a known rectangular perimeter; no shared-edge recognition across two joined figures."
+    },
+    {
+      "candidate": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "key": "problemes:15",
+      "question_signature": "Quants metres de sòcol calen",
+      "functional_overlap": "perimeter minus door opening",
+      "boundary": "Subtracts omitted opening; no curved arc or internal joined edge."
+    },
+    {
+      "candidate": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "key": "escales:16",
+      "question_signature": "Quin és el seu perímetre real",
+      "functional_overlap": "rectangular perimeter after scaling",
+      "boundary": "No joined shape; no shared edge."
+    },
+    {
+      "candidate": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "key": "estimacio:6",
+      "question_signature": "Quin és l’error absolut",
+      "functional_overlap": "absolute deviation",
+      "boundary": "Computes error value but no comparison to tolerance."
+    },
+    {
+      "candidate": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "key": "estimacio:10",
+      "question_signature": "quin és l’error màxim",
+      "functional_overlap": "bound from rounding precision",
+      "boundary": "An internally derived rounding bound, not an external accept/reject specification for observed values."
+    },
+    {
+      "candidate": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "key": "estimacio:12",
+      "question_signature": "Quin interval és compatible",
+      "functional_overlap": "measure acceptance interval",
+      "boundary": "Acceptable interval is derived from rounding; most important indirect overlap. Candidate uses external PERCENTAGE tolerance and comparison of multiple readings."
+    },
+    {
+      "candidate": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "key": "estimacio:14",
+      "question_signature": "Quina valoració és més adequada",
+      "functional_overlap": "coherence and plausibility decision",
+      "boundary": "Qualitative order-of-magnitude plausibility, not quantitative tolerance acceptability."
+    },
+    {
+      "candidate": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "key": "estimacio:17",
+      "question_signature": "Quina té menys error absolut",
+      "functional_overlap": "choose closer measurement",
+      "boundary": "Relative ranking, no fixed acceptance boundary."
+    },
+    {
+      "candidate": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "key": "problemes:16",
+      "question_signature": "Quina mesura té menor error relatiu",
+      "functional_overlap": "relative-error ranking",
+      "boundary": "Choose best reading, not whether it satisfies external threshold."
+    }
+  ],
+  "conclusions": [
+    {
+      "proposal_id": "MI2-MES-E-N3-01",
+      "decision": "independent_strategy_plausible_unvalidated",
+      "important_closest": [
+        "escales:12",
+        "escales:13",
+        "escales:16",
+        "problemes:9"
+      ],
+      "key_differential": "Check congruence of two scaled rectangular representations using BOTH side pairs, not one ratio, area or perimeter.",
+      "risk": "May still be modeled as two repeated conversions plus a direct comparison; teacher review needed.",
+      "novel_family_approved": false,
+      "N3_approved": false
+    },
+    {
+      "proposal_id": "MI2-MES-PA-N3-01",
+      "decision": "independent_strategy_plausible_unvalidated",
+      "important_closest": [
+        "problemes:14",
+        "problemes:15",
+        "perimetres:9",
+        "perimetres:11"
+      ],
+      "key_differential": "Identify internal shared boundary of joined figures rather than a missing door segment or subtraction of an area.",
+      "risk": "If task merely substitutes perimeter formulas, it is a compound variant; need a representation requiring edge-selection judgment.",
+      "novel_family_approved": false,
+      "N3_approved": false
+    },
+    {
+      "proposal_id": "MI2-MES-EST-N3-01",
+      "decision": "independent_strategy_plausible_unvalidated_high_overlap",
+      "important_closest": [
+        "estimacio:10",
+        "estimacio:12",
+        "estimacio:14",
+        "problemes:16"
+      ],
+      "key_differential": "Apply a supplied external relative-percent tolerance to each measurement, including equal-boundary cases.",
+      "risk": "estimacio:12 already tests acceptable rounding intervals, so a separate family based merely on binary acceptance is not established; distinguish relative vs rounding threshold and decision transfer.",
+      "novel_family_approved": false,
+      "N3_approved": false
+    }
+  ],
+  "counts": {
+    "examined_source_cases": 18,
+    "proposals": 3,
+    "approved_genuine_families": 0,
+    "approved_N3": 0
+  },
+  "limitations": [
+    "Source-code comparison is focused on 18 indirect overlaps; it does not execute these 18 generators or audit all 128 implementations.",
+    "The earlier exhaustive screen covers 128 procedure descriptions, not 128 implemented source branches.",
+    "Quotation signatures and differences are documentary classifications; curriculum review remains required.",
+    "No existing generator, classified level, validated family registry, PR merge or web publication was changed."
+  ],
+  "next_gate": "Review risk cases in each candidate, especially estimacio:12, then determine if a genuinely distinct curricular strategy exists before any implementation approval."
+}
