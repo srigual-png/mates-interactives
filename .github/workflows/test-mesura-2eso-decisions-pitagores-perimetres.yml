@@ -1,0 +1,21 @@
+name: Verifica consolidacio Pitagores i Perimetres 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - 'docs/auditoria/MI_2ESO_mesura_pitagores_decisions_16_tipus.json'
+      - 'docs/auditoria/MI_2ESO_mesura_perimetres_decisions_18_tipus.json'
+      - 'scripts/test-mesura-2eso-decisions-pitagores-perimetres.cjs'
+      - '.github/workflows/test-mesura-2eso-decisions-pitagores-perimetres.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  comprova-decisions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprovar 34 decisions i referencies
+        run: node scripts/test-mesura-2eso-decisions-pitagores-perimetres.cjs
