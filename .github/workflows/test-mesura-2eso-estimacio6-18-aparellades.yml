@@ -1,10 +1,5 @@
 name: Mesura 2n ESO - error absolut i diagnostic aparellats
 on:
-  pull_request:
-    paths:
-      - 'scripts/test-mesura-2eso-estimacio6-18-aparellades.cjs'
-      - '2eso/sentit-mesura.html'
-      - '.github/workflows/test-mesura-2eso-estimacio6-18-aparellades.yml'
   workflow_dispatch:
 jobs:
   paired:
