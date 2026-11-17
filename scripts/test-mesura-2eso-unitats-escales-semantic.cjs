@@ -99,7 +99,7 @@ for(let iteration=0;iteration<12;iteration++){
     if(t===16){const valid=q.options.filter(equivalence);assert.equal(valid.length,1,label+': una única equivalència vàlida');expected=valid[0];}
     if(t===17){expected=diagnosticUnit(q);}
     assert.equal(q.correct,expected,label+': oracle semàntic');
-    (variants[label]??=new Set()).add(v[0]??q.question);
+    (variants[label]??=new Set()).add(t===16?q.correct:(v[0]??q.question));
     checked++;
   }
   for(const t of [13,14]){
