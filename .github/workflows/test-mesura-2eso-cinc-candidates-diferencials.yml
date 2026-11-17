@@ -1,12 +1,6 @@
 name: Auditoria diferencial cinc candidates Mesura 2n ESO
 
 on:
-  pull_request:
-    paths:
-      - 'docs/auditoria/MI_2ESO_mesura_cinc_candidates_diferencials.json'
-      - 'docs/auditoria/MI_2ESO_mesura_rubrica_propostes.json'
-      - 'scripts/test-mesura-2eso-cinc-candidates-diferencials.cjs'
-      - '.github/workflows/test-mesura-2eso-cinc-candidates-diferencials.yml'
   workflow_dispatch:
 
 permissions:
