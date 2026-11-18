@@ -1,0 +1,46 @@
+name: Validació integrada · Sentit de la mesura 2n ESO
+
+on:
+  pull_request:
+    paths:
+      - '2eso/sentit-mesura.html'
+      - 'assets/js/dificultat-mi.js'
+      - 'scripts/test-mesura-2eso-*.cjs'
+      - '.github/workflows/test-mesura-2eso-*.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validacio-mesura:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Obtenir el codi
+        uses: actions/checkout@v4
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validar varietat P1
+        run: node scripts/test-mesura-2eso-varietat-p1.cjs
+      - name: Validar variants d'unitats
+        run: node scripts/test-mesura-2eso-unitats-variants.cjs
+      - name: Validar unitats 18 i cilindre
+        run: node scripts/test-mesura-2eso-unitats18-cilindre.cjs
+      - name: Validar oracles transversals
+        run: node scripts/test-mesura-2eso-transversal.cjs
+      - name: Validar oracles transversals ampliats
+        run: node scripts/test-mesura-2eso-transversal-ampliada.cjs
+      - name: Validar superfícies inverses
+        run: node scripts/test-mesura-2eso-superficies-inverses.cjs
+      - name: Validar oracles d'estimació
+        run: node scripts/test-mesura-2eso-estimacio-oracles.cjs
+      - name: Validar oracles de perímetres
+        run: node scripts/test-mesura-2eso-perimetres-oracles.cjs
+      - name: Validar oracles de Pitàgores
+        run: node scripts/test-mesura-2eso-pitagores-oracles.cjs
+      - name: Validar oracles d'unitats i escales
+        run: node scripts/test-mesura-2eso-unitats-escales-oracles.cjs
+      - name: Validar varietat semàntica d'unitats i escales
+        run: node scripts/test-mesura-2eso-unitats-escales-semantic.cjs
