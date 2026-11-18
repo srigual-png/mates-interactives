@@ -42,9 +42,9 @@ Aquesta branca és documental. No s’han de modificar nivells de producció, ge
 - [x] Confirmació estàtica de l’estructura del generador i dels modes.
 - [x] Contrast de les 10 branques del bloc 1 (volum i capacitat).
 - [x] Contrast de les 10 branques del bloc 2 (mesura i precisió).
-- [x] Contrast estàtic de les 10 branques del bloc 3 (àrees compostes).\n- [x] Contrast estàtic de les branques dels blocs 4–5 (20 tipus).\n- [ ] Contrast de les branques dels blocs 6–8.
+- [x] Contrast estàtic de les 10 branques del bloc 3 (àrees compostes).\n- [x] Contrast estàtic de les branques dels blocs 4–5 (20 tipus).\n- [x] Contrast estàtic dels blocs 6–8 (30 tipus).
 - [ ] Consolidació transversal de famílies entre blocs.
-- [ ] Justificació curricular global, buits i propostes (si escau).
+- [x] Justificació curricular global contrastada amb els sabers oficials 1r–3r; buits/propostes documentats per bloc.
 - [ ] Síntesi final de modes i evidències disponibles.
 
 ## Primera comprovació contra el generador (revisió estàtica)
@@ -61,10 +61,10 @@ Aquesta confirmació de l’estructura no certifica encara la correcció de les 
 
 ## Progrés de l’auditoria
 
-- Contrast tipus per tipus: **50/80** branques ordinàries revisades estàticament.
-- Famílies candidates locals documentades fins ara: bloc 1 = 6; bloc 2 = 6; bloc 3 = 3; bloc 4 = 6; bloc 5 = 4. Encara no són famílies globals validades.
+- Contrast tipus per tipus: **80/80** branques ordinàries revisades estàticament.
+- Famílies candidates locals: bloc 1 = 6; bloc 2 = 6; bloc 3 = 3; bloc 4 = 6; bloc 5 = 4; bloc 6 = 4; bloc 7 = 7; bloc 8 = 6 més un enllaç a Pitàgores. Són grups provisionals i resten a consolidar transversalment.
 - No s’han executat proves ni simulacions noves; validació visual pendent.
-- Següent: blocs 6–8 i després deduplicació transversal abans de tancar recompte de famílies.
+- Següent: consolidar els enllaços i duplicacions entre blocs, i tancar la revisió global de modes.
 
 ## Bloc 1 — Volum i capacitat: contrast dels 10 tipus
 
@@ -403,3 +403,221 @@ Errors típics: restar l’antena abans d’escalar o informar l’altura total 
 ### Límits de la proposta dels blocs 4–5
 
 Les decisions són documentals i provisionals. Els exemples de Tales pressuposen triangles realment semblants (mateix instant per ombres; reflexió i distàncies mesurades com en l’esquema del mirall). La validació geomètrica dels diagrames i la revisió visual encara no s’han fet. No es força cap família N3: els tipus actuals no requereixen planificar una estratègia entre opcions múltiples independents.
+
+## Bloc 6 — Pitàgores i mesures indirectes: contrast dels 10 tipus
+
+Contrast estàtic de les branques 1–10 de `genPitagoresMesures3ESO()` (línies 1518–1598).
+
+### Mapa tipus → família
+
+| Tipus | Procediment | Decisió | Nivell proposat |
+|---:|---|---|---|
+| 1 | Escala recolzada: trobar hipotenusa | Variant de P1 | N2, modelització contextual |
+| 2 | Escala: trobar un catet a partir de la hipotenusa | Família P2 | N2, relació inversa |
+| 3 | Diagonal plana d’un rectangle | Variant de P1 | N1, aplicació directa |
+| 4 | Diagonal i catet conegut: trobar l’altre catet | Variant de P2 | N2 |
+| 5 | Rampa: hipotenusa amb dos catets | Variant de P1 | N2, identificar el model contextual |
+| 6 | Cable i pal: hipotenusa | Variant de P1 | N2, identificar catets |
+| 7 | Diagonal espacial d’una caixa | Família P3 | N2, combinar tres dimensions |
+| 8 | Diagonal d’un quadrat | Variant de P1 | N1, cas directe amb catets iguals |
+| 9 | Altura d’un triangle isòsceles amb base partida | Variant de P2 | N2, construir el triangle auxiliar |
+| 10 | Cable diagonal més longitud extra | Família P4 | N2, Pitàgores i suma final |
+
+### Famílies i exemples resolts
+
+**P1 — Trobar hipotenusa amb dos catets (tipus 1, 3, 5, 6 i 8), N1/N2.** Mateix procediment, amb variants de model i context. Els casos de diagonal plana/quadrada són N1; escala, rampa i cable demanen identificar el triangle del context i són N2.
+
+- Catets 7 i 24 cm: diagonal = √(49+576)=**25 cm**.
+- Desnivell 5 m i recorregut 12 m: rampa = √(25+144)=**13 m**.
+- Cas límit del tipus 8: costat 5 cm → diagonal = √50 ≈ **7,07 cm**; no és 10 cm.
+
+Errors típics: sumar costats; prendre la hipotenusa com a catet; fer l’arrel abans de sumar els quadrats. Les unitats dels catets han de coincidir.
+
+**P2 — Recuperar un catet (tipus 2, 4 i 9), N2.** Mateixa relació inversa; el tipus 9 és variant perquè primer divideix la base de l’isòsceles per la meitat.
+
+- Hipotenusa 20 m, catet 16 m: altre catet = √(400−256)=**12 m**.
+- Isòsceles de costats iguals 13 cm i base 10 cm: meitat de base 5; altura = √(169−25)=**12 cm**.
+
+Errors típics: sumar quadrats en lloc de restar; no partir la base; usar el costat conegut com si fos la hipotenusa quan no ho és. Cas límit: hipotenusa ha de ser estrictament més gran que cada catet.
+
+**P3 — Diagonal espacial (tipus 7), N2.** Tasca diferent de la diagonal plana: incorpora una tercera dimensió, equivalent a aplicar Pitàgores dues vegades.
+
+- Caixa 4×4×7 m: D=√(16+16+49)=**9 m**.
+- Caixa 3×4×12 m: D=√(9+16+144)=**13 m**.
+
+Errors típics: usar només la diagonal de la base; sumar dimensions sense quadrar-les. Cas límit: D és més gran que cadascuna de les tres arestes.
+
+**P4 — Hipotenusa i longitud addicional (tipus 10), N2.** Cal calcular primer la distància directa i després afegir cable per connexions. És la mateixa família procedimental que el tipus 9 del bloc 8.
+
+- Catets 5 i 12 m, connexions 1,25 m: hipotenusa 13 m; total **14,25 m**.
+- Catets 8 i 15 m, extra 2 m: hipotenusa 17 m; total **19 m**.
+
+Errors típics: incorporar l’extra com un catet; afegir-la abans de calcular la hipotenusa. Cas límit: la longitud final ha de ser més gran que la distància recta.
+
+### Modes i evidència disponible per al bloc 6
+
+- **Estàtica:** les deu branques tenen pistes i solució; no declaren `allowOpen=false`. El selector mostra N1/N2 i el nivell 1 presenta pistes.
+- **Estàtica prèvia:** 3000 mostres, distribució [0,10,0], examen [0,12,0]. Es proposa N1 només per diagonals planes directes (3 i 8); no es força N3.
+- **Simulació i validació visual:** no fetes.
+- **Enllaç transversal:** el tipus 10 comparteix procediment amb `errorMesura:9`; s’ha de comptar com una família compartida, no dues.
+
+## Bloc 7 — Piràmides i cons: contrast dels 10 tipus
+
+Contrast estàtic de les branques 1–10 de `genPiramidesCons3ESO()` (línies 1599–1676).
+
+### Mapa tipus → família
+
+| Tipus | Procediment | Decisió | Nivell proposat |
+|---:|---|---|---|
+| 1 | Volum de piràmide amb base quadrada | Família V1 | N1 |
+| 2 | Volum de piràmide amb base rectangular | Variant de V1 | N1 |
+| 3 | Àrea lateral de piràmide quadrada | Família V2 | N1 |
+| 4 | Àrea total de piràmide (base + lateral) | Variant de V2 | N2 |
+| 5 | Apotema lateral amb Pitàgores | Família V3 | N2 |
+| 6 | Apotema amb Pitàgores i àrea total | Variant de V3 | N2 |
+| 7 | Volum de con | Família C1 | N1 |
+| 8 | Àrea lateral de con amb generatriu donada | Família C2 | N1 |
+| 9 | Àrea total de con: obtenir generatriu i sumar base | Família C3 | N2 |
+| 10 | Altura de con a partir del volum | Família C4 | N2 |
+
+### Famílies i exemples resolts
+
+**V1 — Volum de piràmide (tipus 1 i 2), N1.** Mateix esquema V=Aᵦ·h/3; quadrat i rectangle són variants de base.
+
+- Base quadrada de costat 6 cm, altura 9 cm: 36·9/3 = **108 cm³**.
+- Base rectangular 8×5 cm, altura 6 cm: 40·6/3 = **80 cm³**.
+
+Errors típics: oblidar dividir entre 3; usar una aresta inclinada en lloc de l’altura perpendicular. Cas límit: la base ha d’estar expressada en unitats d’àrea i el resultat en unitats cúbiques.
+
+**V2 — Àrea lateral/total de piràmide quadrada (tipus 3 i 4), N1/N2.** Mateixa àrea lateral (P·apotema/2); el tipus 4 és variant perquè hi suma la base.
+
+- Costat 6 cm, apotema lateral 5 cm: lateral = 24·5/2 = **60 cm²**.
+- Amb base 6²=36 cm²: àrea total = 60+36 = **96 cm²**.
+
+Errors típics: comptar només una cara triangular; afegir la base al tipus 3, que demana només àrea lateral. Cas límit: apotema lateral no és l’altura vertical.
+
+**V3 — Apotema i àrea total de piràmide (tipus 5 i 6), N2.** Mateix triangle auxiliar (altura vertical i meitat del costat); el 6 continua fins a l’àrea total.
+
+- Costat 12 cm, altura 8 cm: apotema = √(8²+6²)=**10 cm**.
+- Amb aquestes dades: lateral=(48·10)/2=240; base=144; total=**384 cm²**.
+
+Errors típics: usar el costat sencer com a catet horitzontal; sumar lateral i base abans de trobar l’apotema. Cas límit: només per a la piràmide regular quadrada definida a l’enunciat.
+
+**C1 — Volum de con (tipus 7), N1.**
+
+- r=3 cm, h=12 cm: V=3,14·9·12/3=**113,04 cm³**.
+- r=5 cm, h=6 cm: V=3,14·25·6/3=**157 cm³**.
+
+Error típic: oblidar el terç o usar el diàmetre com a radi. Cas límit: mantenir π≈3,14 al càlcul.
+
+**C2 — Àrea lateral de con (tipus 8), N1.**
+
+- r=3 cm, g=5 cm: Aₗ=3,14·3·5=**47,1 cm²**.
+- r=4 cm, g=10 cm: Aₗ=3,14·4·10=**125,6 cm²**.
+
+Errors típics: usar πr² (base) o duplicar l’àrea lateral. Cas límit: no afegir l’àrea de la base perquè l’enunciat demana només lateral.
+
+**C3 — Àrea total de con amb generatriu calculada (tipus 9), N2.**
+
+- r=3 cm, h=4 cm: g=5; Aₗ=47,1; base=28,26; total=**75,36 cm²**.
+- r=5 cm, h=12 cm: g=13; Aₗ=204,1; base=78,5; total=**282,6 cm²**.
+
+Errors típics: confondre g amb h; oblidar la base o comptar-la dues vegades. Cas límit: primer cal validar que g²=r²+h².
+
+**C4 — Recuperar l’altura del con a partir del volum (tipus 10), N2.**
+
+- V=12,56 cm³, r=1 cm: h=3·12,56/(3,14·1²)=**12 cm**.
+- V=314 cm³, r=5 cm: h=3·314/(3,14·25)=**12 cm**.
+
+Errors típics: aïllar malament h; oblidar que radi és al quadrat. Cas límit: radi i volum han de ser positius i coherents amb les unitats.
+
+### Modes i evidència disponible per al bloc 7
+
+- **Estàtica:** pistes i solucions per a les deu branques; cap declara `allowOpen=false`. Es pot usar resposta oberta per a totes segons el codi actual.
+- **Estàtica prèvia:** 3000 mostres, distribució [5,5,0], examen [6,6,0]. S’ha mantingut la progressió N1 per fórmules directes i N2 per apotema/generatriu o inversió.
+- **Simulació i validació visual:** no fetes.
+- **Cobertura:** el generador només tracta piràmides de base quadrada (amb el tipus 2 de base rectangular per volum) i cons; no s’inventa ampliació de bases poligonals perquè els 10 tipus cobreixen els procediments que el bloc anuncia.
+
+## Bloc 8 — Estimació, error i problemes de mesura: contrast dels 10 tipus
+
+Contrast estàtic de les branques 1–10 de `genErrorProblemes3ESO()` (línies 1677–1767).
+
+### Mapa tipus → família
+
+| Tipus | Procediment | Decisió | Nivell proposat |
+|---:|---|---|---|
+| 1 | Triar estimació plausible d’una magnitud | Família E1 | N1 |
+| 2 | Error absolut | Família E2 | N1 |
+| 3 | Error relatiu en forma decimal | Família E3 | N1 |
+| 4 | Error relatiu percentual | Variant de E3 | N1 |
+| 5 | Comparar dues precisions relatives | Variant de E3 | N2 |
+| 6 | Error absolut màxim per arrodoniment | Família E4 | N1 |
+| 7 | Volum d’un dipòsit rectangular parcialment ple → litres | Família E5 | N2 |
+| 8 | Àrea pintable i cobertura per litre | Família E6 | N2 |
+| 9 | Pitàgores i extra de connexió | Mateixa família que `pitagores:10` | N2 |
+| 10 | Volum de con parcialment ple → litres | Variant de E5 | N2 |
+
+### Famílies i exemples resolts
+
+**E1 — Estimació d’ordre de magnitud (tipus 1), N1.**
+
+- Altura d’una porta: estimació plausible **2 m**, no 2 cm ni 20 m.
+- Capacitat d’una ampolla d’aigua: **1 L** és plausible, no 1 m³.
+
+Error típic: confondre unitat o ordre de magnitud. Cas límit: és una estimació contextual, no una mesura exacta. El tipus 1 és d’opcions; el codi declara `allowOpen=false`.
+
+**E2 — Error absolut (tipus 2), N1.** Eₐ=|mesura−referència|, amb la mateixa unitat.
+
+- Referència 80 cm, mesura 79,8 cm: **0,2 cm**.
+- Referència 100 cm, mesura 102,5 cm: **2,5 cm**.
+
+Errors típics: donar error amb signe; canviar d’unitat sense convertir. Cas límit: l’error absolut no indica per si sol quina de dues mesures és relativament millor.
+
+**E3 — Error relatiu decimal, percentual i comparació (tipus 3, 4 i 5), N1/N2.** Mateixa idea d’error absolut dividit pel valor de referència; el tipus 4 n’expressa el resultat en %, i el 5 compara dos quocients (N2).
+
+- Referència 40 cm, mesura 40,5 cm: Eₐ=0,5; Eᵣ=0,5/40=**0,0125**.
+- Referència 20 cm, mesura 19,5 cm: Eᵣ=0,5/20=0,025=**2,5%**.
+- A: error 0,2 sobre 20 → 0,01; B: error 1 sobre 200 → 0,005; **B** és més precisa relativament.
+
+Errors típics: dividir per la mesura en comptes de la referència; confondre 0,025 amb 0,025%; comparar errors absoluts de referències de mida diferent. Cas límit: si els errors relatius coincideixen, no hi ha una mesura més precisa; el generador filtra els empats.
+
+**E4 — Error màxim d’arrodoniment (tipus 6), N1.** L’error màxim és la meitat de la unitat d’arrodoniment.
+
+- Arrodoniment a unitats de cm: error màxim **0,5 cm**.
+- Arrodoniment a dues xifres decimals de cm: error màxim **0,005 cm**.
+
+Error típic: usar una unitat sencera d’error, no la meitat. Cas límit: la pregunta limita el resultat a l’error degut només a l’arrodoniment.
+
+**E5 — Volum parcialment ple i conversió a litres (tipus 7 i 10), N2.** Mateixa família (volum geomètric × fracció d’ompliment i canvi d’unitat), amb variant de cos: prisma rectangular o con.
+
+- Dipòsit 2×1,5×1,2 m al 75%: total 3,6 m³; aigua 2,7 m³=**2700 L**.
+- Con r=25 cm, h=60 cm al 75%: V=39.250 cm³; ocupat 29.437,5 cm³=**29,4375 L** (aprox. 29,44 L si es demana arrodonir a centèsimes).
+
+Errors típics: aplicar percentatge a una sola dimensió; convertir cm³ a L amb factor 100; no aplicar la fracció d’ompliment. Cas límit: el resultat depèn de la capacitat geomètrica interior i del percentatge indicat.
+
+**E6 — Superfície pintable i cobertura (tipus 8), N2.**
+
+- Paret 6×3 m, porta 1×2 m, finestra 1×1 m: superfície pintable 18−2−1=15 m²; a 4 m²/L calen **3,75 L**.
+- Paret 5×3 m, porta 2 m², finestra 1,5 m²: superfície 11,5 m²; a 5 m²/L calen **2,3 L**.
+
+Errors típics: pintar també les obertures; multiplicar per cobertura en lloc de dividir. Cas límit: el tipus demana litres, no quants pots sencers comprar; no s’arrodoneix a un envàs perquè no hi ha mida d’envàs a les dades.
+
+**Enllaç P4 — Cable amb connexions extra (tipus 9), N2.** És la mateixa família que `pitagores:10`, amb valors/context diferents, i no s’ha de comptar com una família nova.
+
+- Catets 3 i 4 m, extra 1 m: diagonal 5 m; longitud total **6 m**.
+- Catets 5 i 12 m, extra 0,5 m: diagonal 13 m; total **13,5 m**.
+
+Errors típics: sumar l’extra dins del radical o afegir-la abans de trobar la diagonal. Cas límit: l’extra correspon al cable físic i se suma a la distància recta.
+
+### Modes i evidència disponible per al bloc 8
+
+- **Estàtica:** tipus 1 declara `allowOpen=false`; els tipus 2–10 poden entrar en mode obert. Tots retornen pistes i solucions; el nivell 1 mostra pistes.
+- **Estàtica prèvia:** 3000 mostres, distribució [5,5,0], examen [6,6,0]. Type 9 s’ha enllaçat a Pitàgores, no duplicat.
+- **Simulació i validació visual:** no fetes.
+- **Casos límit de codi comprovats estàticament:** el tipus 5 de comparació detecta i regenera casos d’empat; el tipus 8 calcula litres fraccionaris perquè l’enunciat demana litres necessaris, no envasos sencers.
+
+## Justificació curricular de nivell i abast
+
+La font oficial del Departament d’Educació agrupa diversos sabers de Matemàtiques per a **1r–3r d’ESO**, no assigna tots aquests procediments exclusivament a 3r. En el sentit de la mesura hi inclou la tria d’unitats/instruments, el càlcul de longituds, àrees i volums, l’ús de Tales i Pitàgores, l’estimació i la precisió. En canvi, les raons trigonomètriques apareixen a la columna de 4t. Per això les ampliacions de trigonometria, escales/cossos avançats i reptes de preparació de 4t es mantenen fora del recomptatge ordinari, i els nivells proposats s’entenen com a progressió interna N1/N2/N3 dins d’aquest marc, no com una afirmació que cada saber pertanyi normativament només a 3r.
+
+Font: [Generalitat de Catalunya, Sabers de l’educació secundària obligatòria — Matemàtiques (PDF)](https://projectes.xtec.cat/nou-curriculum/wp-content/uploads/usu2072/2024/06/20240529-Sabers-MAT-Nodes.pdf), apartats “Sentit de la mesura”, especialment “Mesurament” i “Estimació i relacions”.
