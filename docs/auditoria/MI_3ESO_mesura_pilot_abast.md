@@ -369,7 +369,7 @@ Contrast estàtic de les branques 1–10 de `genTalesMesures3ESO()` (línies 143
 - 6 m del triangle petit corresponen a 30 m del gran; costat petit 8 m: k=5 i costat gran **40 m**.
 - Costats homòlegs del gran 6 cm i 16 cm; el primer al petit és 3 cm: k gran/petit=2; l’altre costat petit és 16/2=**8 cm**.
 
-Errors típics: invertir k; aplicar-lo al costat que no és homòleg. Cas límit: abans de multiplicar o dividir cal explicitar quina longitud pertany al triangle petit/gran. Tipus 1 es proposa N1; tipusos 2 i 6, N2 per la inversió o la identificació contextual.
+Errors típics: invertir k; aplicar-lo al costat que no és homòleg. Cas límit: abans de multiplicar o dividir cal explicitar quina longitud pertany al triangle petit/gran. Tipus 1 es proposa N1; tipus 2 i 6, N2 per la inversió o la identificació contextual.
 
 **T2 — Mesura indirecta amb ombres o mirall (tipus 3, 4, 5, 7 i 8), N2.** Variants d’aplicar la proporció a triangles construïts per raigs solars o reflexió; el tipus 8 afegeix conversió d’unitats.
 
