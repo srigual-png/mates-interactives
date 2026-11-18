@@ -142,3 +142,79 @@ Errors típics: comparar nombres sense homogeneïtzar unitats; marcar “no es p
 ### Incidència detectada per revisar globalment
 
 En el codi actual, el tipus 4 selecciona, entre altres, m³↔mL, però els distractors es construeixen amb factors ×10, ÷10, ×1000 i ÷1000 del resultat. En aquests casos, diversos distractors poden no representar les confusions específiques més útils i cal comprovar que cap coincideixi amb la resposta correcta. És una observació estàtica, no s’ha reproduït amb una prova nova; no s’ha modificat el generador.
+
+## Bloc 2 — Mesura i precisió: contrast dels 10 tipus
+
+Contrast estàtic de les branques 1–10 de `genMesuraPrecisio3ESO()` (línies 1097–1257).
+
+### Mapa tipus → família
+
+| Tipus | Procediment real | Decisió | Nivell proposat | Motiu |
+|---:|---|---|---|---|
+| 1 | Seleccionar instrument per a una longitud segons mida i abast | Família P1 | N1 | Elecció directa a partir de la magnitud i escala |
+| 2 | Seleccionar instrument per mesurar un angle | Variant de P1 | N1 | Mateixa decisió d’instrument, restringida a magnitud angular |
+| 3 | Triar unitat adequada a la magnitud i escala | Família P2 | N1 | Reconeixement de magnitud i ordre de mida |
+| 4 | Llegir la resolució a partir de les divisions de l’instrument | Família P3 | N1 | Identificar l’increment mínim indicat |
+| 5 | Comparar la resolució de dos instruments | Família P4 | N2 | Comparació explícita; cal saber que la resolució menor discrimina més |
+| 6 | Valorar si una lectura és compatible amb la resolució | Família P5 | N1 | Aplicar la posició decimal/interval de lectura permès |
+| 7 | Reconstruir l’interval previ a un arrodoniment a unitats | Família P6 | N2 | Invertir l’arrodoniment i tractar els extrems |
+| 8 | Triar instrument amb equilibri d’abast i resolució | Variant de P1 | N2 | Decisió amb dos criteris i un compromís real |
+| 9 | Triar instrument especialitzat per a una mesura petita o concreta | Variant de P1 | N1 | Mateixa família d’elecció d’instrument |
+| 10 | Expressar una lectura contextual amb precisió coherent | Variant de P5 | N1 | Mateix criteri que el 6, aplicat a contextos diferents |
+
+### Famílies i exemples resolts
+
+**P1 — Selecció d’instrument (tipus 1, 2, 8 i 9), N1/N2.** Mateixa família; variants segons magnitud, abast i especialització. Tipus 8 és N2 perquè obliga a ponderar abast suficient i resolució, no a maximitzar una sola característica.
+
+- Gruix exterior d’una moneda: un **calibre** és més adequat que una cinta mètrica, perquè arriba a la mida i discrimina millor.
+- Mesurar 350 mL d’aigua: una proveta de 500 mL graduada cada 5 mL té abast suficient; un vas sense graduació no permet aquesta lectura.
+- Cas límit: per mesurar una porta, un regle de 15 cm amb resolució d’1 mm no serveix: la resolució és bona, però l’abast és insuficient.
+
+Errors típics: escollir només pel nombre més petit de divisions; ignorar l’abast; confondre instrument angular amb lineal. Els tipus 2 i 9 són variants contextuals, no famílies noves.
+
+**P2 — Elecció d’unitat (tipus 3), N1.** Cal correspondència amb la magnitud i una escala pràctica.
+
+- Gruix d’un full: **mm**; distància entre ciutats: **km**.
+- Capacitat d’una ampolla d’aigua: **L**; superfície d’un pis: **m²**.
+
+Errors típics: triar una unitat d’una magnitud diferent (m³ per una llargada) o una unitat que produeix una quantitat poc manejable. Cas límit: distingir volum (m³) de capacitat (L), encara que es puguin relacionar.
+
+**P3 — Resolució d’un instrument (tipus 4), N1.** La resolució és la diferència entre lectures consecutives.
+
+- Regle amb marques cada 1 mm: resolució **1 mm**.
+- Proveta graduada cada 2 mL: resolució **2 mL**.
+
+Errors típics: donar l’abast total com a resolució; confondre la divisió més petita amb la incertesa total de la mesura. Cas límit: no inferir una resolució més fina de la que indiquen les marques.
+
+**P4 — Comparació de resolucions (tipus 5), N2.** La resolució numèricament més petita permet distingir canvis més petits, si les unitats són comparables.
+
+- A: 1 mm; B: 0,1 mm → **B** permet una lectura més detallada.
+- A: 0,01 g; B: 0,1 g → **A** és més detallat.
+
+Errors típics: pensar que el nombre més gran sempre és més precís. Cas límit: abans de comparar, cal posar les resolucions en la mateixa unitat (1 cm = 10 mm).
+
+**P5 — Lectura coherent amb la resolució (tipus 6 i 10), N1.** Mateixa família; el 10 afegeix context i unitat. S’accepten exemples compatibles, no hi ha un únic valor correcte en resposta oberta.
+
+- Resolució 0,1 cm: **12,3 cm** és coherent; 12,34 cm afirma precisió no disponible.
+- Balança amb resolució d’1 g: **537 g** és coherent; 537,284 g no ho és.
+
+Errors típics: afegir decimals sense suport instrumental o ometre la unitat. Cas límit: una lectura equivalent en una altra unitat pot ser correcta si conserva la mateixa resolució real (0,1 cm = 1 mm).
+
+**P6 — Interval d’una mesura arrodonida (tipus 7), N2.** Per arrodoniment habitual a unitats i valors positius, la lectura 25 representa `[24,5; 25,5)`.
+
+- 18 unitats arrodonides a l’enter més proper: valor previ dins `[17,5;18,5)`.
+- 3,0 cm arrodonits a 0,1 cm: valor previ dins `[2,95;3,05)` (cal confirmar que la implementació del tipus està restringida a unitats, com diu l’enunciat actual).
+
+Errors típics: usar ±1 en comptes de ±0,5 unitat; incloure tots dos extrems; no ajustar la meitat de la resolució. Cas límit: la inclusió del punt de mig depèn de la convenció d’arrodoniment i del signe; el generador descriu la convenció per valors positius.
+
+### Revisió dels modes i evidència disponible per al bloc 2
+
+- **Estàtica:** els tipus 1, 2, 8 i 9 declaren `allowOpen=false`; per tant, el mode de resposta oberta els evita i regenera un altre tipus. Els altres tipus tenen resposta oberta activada. Això redueix l’univers del mode obert i cal tenir-ho present en valorar varietat.
+- **Estàtica:** el codi retorna pistes i solucions per a les deu branques; la interfície mostra pistes al nivell 1.
+- **Estàtica prèvia:** el registre indica 3000 mostres, cobertura [7,3,0] i examen [7,5,0]. No s’han repetit aquestes mostres.
+- **Simulació i validació visual:** no fetes en aquesta passada.
+
+### Casos a contrastar en una passada de qualitat
+
+- El tipus 5 crea les opcions amb una llista barrejada fixa; el codi visible no deriva les opcions de la comparació actual ni garanteix explícitament que la resposta correcta aparegui. Cal inspeccionar aquesta branca amb més detall abans de concloure si és una incidència funcional; no s’ha executat cap prova nova ni s’ha canviat el codi.
+- Al tipus 7, la pregunta diu “arrodonida a la unitat més propera”, però el banc conté unitats diferents. La interpretació d’`[valor−0,5; valor+0,5)` només és correcta si “unitat” vol dir la unitat indicada per cada lectura; cal contrastar els valors/unitats exactes del banc abans de tancar el cas.
