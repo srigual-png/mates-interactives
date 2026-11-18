@@ -38,13 +38,14 @@ Aquesta branca és documental. No s’han de modificar nivells de producció, ge
 
 ## Estat
 
-- [x] Inventari inicial i abast (80 tipus ordinaris; ampliacions excloses).
-- [ ] Contrastar inventari i evidència amb generadors actuals.
-- [ ] Mapa tipus → família i decisions de deduplicació (80/80).
-- [ ] Nivells, justificació curricular i casos (per família).
-- [ ] Buits reals i propostes justificades, si n’hi ha.
-- [ ] Revisió de guiat, autònom i examen; límits de verificació.
-- [ ] Síntesi final amb què s’ha verificat i què queda pendent.
+- [x] Inventari de blocs i 80 tipus ordinaris; ampliacions A–D excloses.
+- [x] Confirmació estàtica de l’estructura del generador i dels modes.
+- [x] Contrast de les 10 branques del bloc 1 (volum i capacitat).
+- [x] Contrast de les 10 branques del bloc 2 (mesura i precisió).
+- [ ] Contrast de les branques dels blocs 3–8.
+- [ ] Consolidació transversal de famílies entre blocs.
+- [ ] Justificació curricular global, buits i propostes (si escau).
+- [ ] Síntesi final de modes i evidències disponibles.
 
 ## Primera comprovació contra el generador (revisió estàtica)
 
@@ -60,13 +61,10 @@ Aquesta confirmació de l’estructura no certifica encara la correcció de les 
 
 ## Progrés de l’auditoria
 
-- [x] Confirmació estàtica de l’abast al codi: 8 blocs de 3r × 10 tipus i 4 ampliacions de 4t × 10 tipus.
-- [ ] Contrast individual de les branques 1–10 dels vuit generadors ordinaris.
-- [ ] Mapa tipus → família i decisions de deduplicació (80/80).
-- [ ] Nivells, justificació curricular i casos (per família).
-- [ ] Buits reals i propostes justificades, si n’hi ha.
-- [ ] Revisió de guiat, autònom i examen amb classificació de l’evidència.
-- [ ] Síntesi final amb què s’ha verificat i què queda pendent.
+- Contrast tipus per tipus: **20/80** branques ordinàries revisades estàticament.
+- Famílies candidates locals documentades fins ara: bloc 1 = 6; bloc 2 = 6. Encara no són famílies globals validades.
+- No s’han executat proves ni simulacions noves; validació visual pendent.
+- Següent: blocs 3–4 i després deduplicació transversal abans de tancar recompte de famílies.
 
 ## Bloc 1 — Volum i capacitat: contrast dels 10 tipus
 
