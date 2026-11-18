@@ -4,7 +4,7 @@
 
 Auditoria documental dels **8 blocs ordinaris** de 3r ESO (80 tipus, segons els registres previs). Les ampliacions A–D de preparació de 4t (40 tipus) queden excloses dels recomptes i de les decisions de família.
 
-| Bloc | Tema | Tipus | N1/N2 provisionals al registre revisat |
+| Bloc | Tema | Tipus | N1/N2/N3 actius al codi |
 |---|---|---:|---:|
 | 1 | Volum i capacitat | 10 | 7 / 3 |
 | 2 | Mesura i precisió | 10 | 7 / 3 |
@@ -16,7 +16,7 @@ Auditoria documental dels **8 blocs ordinaris** de 3r ESO (80 tipus, segons els 
 | 8 | Estimació, error i problemes de mesura | 10 | 5 / 5 |
 | **Total** |  | **80** | **34 / 46 / 0 N3** |
 
-Aquests recomptes descriuen l’estat dels fitxers previs, no són encara una proposta pedagògica ni un recompte de famílies. Cal contrastar-los amb els generadors actuals i separar tipus, variants i famílies.
+Aquests recomptes són els nivells actius llegits de `REVIEWED_LEVELS["3eso/mesura"]`; no són la proposta de l’auditoria ni un recompte de famílies.
 
 ## Evidència prèvia a reutilitzar
 
@@ -43,28 +43,28 @@ Aquesta branca és documental. No s’han de modificar nivells de producció, ge
 - [x] Contrast de les 10 branques del bloc 1 (volum i capacitat).
 - [x] Contrast de les 10 branques del bloc 2 (mesura i precisió).
 - [x] Contrast estàtic de les 10 branques del bloc 3 (àrees compostes).\n- [x] Contrast estàtic de les branques dels blocs 4–5 (20 tipus).\n- [x] Contrast estàtic dels blocs 6–8 (30 tipus).
-- [ ] Consolidació transversal de famílies entre blocs.
+- [x] Consolidació transversal de famílies entre blocs.
 - [x] Justificació curricular global contrastada amb els sabers oficials 1r–3r; buits/propostes documentats per bloc.
-- [ ] Síntesi final de modes i evidències disponibles.
+- [x] Síntesi final de modes i evidències disponibles.
 
 ## Primera comprovació contra el generador (revisió estàtica)
 
-Fitxer contrastat: `3eso/sentit-mesura.html` a la branca base.
+Fitxer contrastat: `3eso/sentit-mesura.html` a la branca base. Aquesta és la comprovació d’estructura inicial; les 80 branques es detallen als apartats de cada bloc.
 
 - El codi declara exactament **8 temes de 3r** amb `exam3r:true` i **4 ampliacions de 4t** amb `exam3r:false` i `ampliacio:true`. Això confirma l’abast 80/40 dels registres previs.
-- Hi ha un generador específic per a cadascun dels 12 temes. Els vuit generadors ordinaris seleccionen un identificador de tipus entre 1 i 10; per tant, els registres previs cobreixen els identificadors esperats, però encara falta contrastar una per una les branques i el procediment matemàtic real de cada tipus.
+- Hi ha un generador específic per a cadascun dels 12 temes. Els vuit generadors ordinaris seleccionen un identificador de tipus entre 1 i 10; el contrast de cada branca s’ha completat i queda documentat als apartats següents.
 - La interfície de pràctica exposa dos nivells (1 i 2); al nivell 1 mostra les pistes. El codi no exposa un selector N3 en aquesta pàgina. Això descriu la implementació actual, no determina si pedagògicament caldria proposar N3.
 - El filtre de contingut d’examen s’aplica sobre la llista de temes; els vuit blocs ordinaris estan marcats com a inclosos i les ampliacions com a excloses.
 - Aquesta passada és **estàtica**. No s’han executat proves ni s’ha fet simulació o validació visual.
 
-Aquesta confirmació de l’estructura no certifica encara la correcció de les 80 branques, la deduplicació per família, la qualitat dels exemples o l’adequació curricular.
+Aquesta passada estructural és estàtica. Les branques i les decisions de família s’han revisat als apartats de cada bloc; no hi ha simulació ni verificació visual.
 
 ## Progrés de l’auditoria
 
 - Contrast tipus per tipus: **80/80** branques ordinàries revisades estàticament.
 - Famílies candidates locals: bloc 1 = 6; bloc 2 = 6; bloc 3 = 3; bloc 4 = 6; bloc 5 = 4; bloc 6 = 4; bloc 7 = 7; bloc 8 = 6 més un enllaç a Pitàgores. Són grups provisionals i resten a consolidar transversalment.
 - No s’han executat proves ni simulacions noves; validació visual pendent.
-- Següent: consolidar els enllaços i duplicacions entre blocs, i tancar la revisió global de modes.
+- Auditoria documental dels vuit blocs completada; simulació i validació visual no realitzades.
 
 ## Bloc 1 — Volum i capacitat: contrast dels 10 tipus
 
@@ -621,3 +621,63 @@ Errors típics: sumar l’extra dins del radical o afegir-la abans de trobar la 
 La font oficial del Departament d’Educació agrupa diversos sabers de Matemàtiques per a **1r–3r d’ESO**, no assigna tots aquests procediments exclusivament a 3r. En el sentit de la mesura hi inclou la tria d’unitats/instruments, el càlcul de longituds, àrees i volums, l’ús de Tales i Pitàgores, l’estimació i la precisió. En canvi, les raons trigonomètriques apareixen a la columna de 4t. Per això les ampliacions de trigonometria, escales/cossos avançats i reptes de preparació de 4t es mantenen fora del recomptatge ordinari, i els nivells proposats s’entenen com a progressió interna N1/N2/N3 dins d’aquest marc, no com una afirmació que cada saber pertanyi normativament només a 3r.
 
 Font: [Generalitat de Catalunya, Sabers de l’educació secundària obligatòria — Matemàtiques (PDF)](https://projectes.xtec.cat/nou-curriculum/wp-content/uploads/usu2072/2024/06/20240529-Sabers-MAT-Nodes.pdf), apartats “Sentit de la mesura”, especialment “Mesurament” i “Estimació i relacions”.
+
+
+## Consolidació transversal dels vuit blocs
+
+### Nivells actius i proposta de l’auditoria
+
+S’ha llegit el mapa actiu `REVIEWED_LEVELS["3eso/mesura"]` de `assets/js/dificultat-mi.js` i s’ha contrastat amb les matrius prèvies. La columna de proposta resumeix els nivells indicats als mapes tipus→família d’aquest document; **no s’ha escrit a la configuració de producció**.
+
+| Bloc | Actiu N1/N2/N3 | Proposat N1/N2/N3 | Canvi principal |
+|---|---:|---:|---|
+| 1 · Volum i capacitat | 7/3/0 | 5/5/0 | Unitats mixtes i volum geomètric compost passen a N2 |
+| 2 · Mesura i precisió | 7/3/0 | 7/3/0 | Es manté; ponderació abast+resolució i interval ja són N2 |
+| 3 · Àrees compostes | 1/9/0 | 1/9/0 | Es manté; només resta directa és N1 |
+| 4 · Semblança | 9/1/0 | 6/4/0 | Recuperar k amb arrels i reducció fraccionària passen a N2 |
+| 5 · Tales | 0/10/0 | 2/8/0 | Proporció directa i reconeixement de l’ordre passen a N1 |
+| 6 · Pitàgores | 0/10/0 | 2/8/0 | Diagonal plana directa i diagonal quadrada passen a N1 |
+| 7 · Piràmides i cons | 5/5/0 | 5/5/0 | Es manté |
+| 8 · Estimació, error i problemes | 5/5/0 | 5/5/0 | Es manté |
+| **Total** | **34/46/0** | **33/47/0** | **No es proposa cap N3** |
+
+El currículum oficial agrupa molts d’aquests sabers a la franja **1r–3r ESO**; per tant, N1/N2 és una proposta de seqüenciació interna del producte, no l’afirmació que un saber concret només es pugui treballar a 3r. La font i l’abast curricular queden indicats més amunt.
+
+### Relacions de família entre blocs
+
+| Vincles | Decisió | Criteri de recompte |
+|---|---|---|
+| `pitagores:10` ↔ `errorMesura:9` | **Mateixa família** | Distància per Pitàgores i suma d’extra de connexió. Un únic nucli de família, dos contextos/tipus. |
+| `volum:6,7,9` ↔ `errorMesura:7,10` | **Variants d’una família de volum-capacitat** | Calcular volum i convertir; els tipus 7/10 hi afegeixen una fracció d’ompliment, i canvia la forma del recipient. |
+| `arees:1,3,5,7,10` ↔ `errorMesura:8` | **Variant integradora** | La paret pintable reutilitza àrea total menys obertures i hi afegeix una taxa de cobertura; no és una família nova per cada context. |
+| `semblanca` ↔ `tales` | **Tasques diferents, principi relacionat** | Semblança aplica una raó coneguda o la recupera entre figures; Tales modelitza una longitud inaccessible a partir d’una configuració de triangles. |
+| `pitagores` ↔ `piramides:5,6` i `piramides:9` | **Tasques diferents amb subprocediment compartit** | Pitàgores obté apotema/generatriu, però la tasca final és àrea de piràmide/con; no es duplica com a família autònoma de Pitàgores. |
+| `precisio:6,10` | **Mateixa família amb contextos/format variants** | Lectura compatible amb la resolució de l’instrument. |
+| `estimacio:3,4,5` | **Mateixa família amb variants** | Error relatiu decimal, percentatge i comparació de precisió relativa. |
+| `piramides:3,4`; `piramides:5,6`; `piramides:7,8,9,10` | **Famílies diferenciades segons l’objectiu** | Àrea lateral/total; apotema i àrea composta; volum, àrea lateral/total i inversió del volum no són el mateix procediment final. |
+
+Els nombres de famílies locals dels blocs no s’han de sumar directament: els enllaços anteriors uneixen famílies equivalents o variants integradores. No s’ha actualitzat el registre oficial `families-validades.json`; les decisions continuen sent candidates documentades.
+
+### Buits curriculars i propostes d’exercicis
+
+No s’ha identificat un procediment imprescindible absent que justifiqui crear exercicis nous dins dels vuit blocs ordinaris. Les branques cobreixen conversions, instruments/resolució, àrees compostes, escala, Tales, Pitàgores, piràmides/cons i estimació/error. No es proposa forçar N3. La trigonometria i altres ampliacions de preparació de 4t romanen fora del bloc ordinari segons la seqüenciació publicada.
+
+### Revisió global dels modes i qualitat de l’evidència
+
+- **Mode guiat / N1 — estàtic:** tots els generadors revisats retornen pistes i passos de solució; la interfície mostra les pistes quan el nivell seleccionat és 1.
+- **Mode autònom / N2 — estàtic:** la interfície amaga les pistes al nivell 2. Això confirma la regla de presentació, no que cada exercici tingui una dificultat N2 pedagogicament calibrada.
+- **Resposta oberta — estàtic:** la majoria de branques són compatibles amb entrada oberta. Excepcions explícites: `precisio:1,2,8,9` i `errorMesura:1` (`allowOpen=false`), que el codi ha de regenerar fora del mode obert. Per tant, el banc de resposta oberta no cobreix literalment els 80 tipus.
+- **Mode Examen — estàtic:** els vuit blocs ordinaris tenen `exam3r:true`; les quatre ampliacions de 4t, `exam3r:false`. Els fitxers previs registren distribucions d’examen per als blocs ordinaris i no per a les ampliacions.
+- **Mostres prèvies — no repetides:** els resultats registren 3.000 generacions per tema i la cobertura d’examen indicada a l’inventari. Són evidència prèvia de generació, no validació pedagògica ni visual.
+- **Simulació de fluxos — no feta en aquesta auditoria.**
+- **Validació visual en navegador — no feta.**
+
+### Estat final de verificació i observacions
+
+- **80/80** branques contrastades estàticament amb els vuit generadors actuals.
+- Exemples resolts, errors típics, casos límit i decisió de família documentats per a cada família candidata local.
+- Nivells actius comprovats al codi i proposta N1/N2 presentada sense escriure-la a producció.
+- No s’ha canviat codi, generadors, nivells ni el registre oficial; tampoc s’han creat workflows ni s’han executat proves noves.
+- Una discrepància de guia/solució a `arees:8` queda documentada a l’apartat del bloc 3 i no s’ha corregit al codi.
+- Les decisions de família són una proposta d’auditoria, no una adopció oficial ni una validació docent.
+
