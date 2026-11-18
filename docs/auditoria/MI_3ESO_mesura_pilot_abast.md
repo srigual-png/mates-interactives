@@ -203,7 +203,7 @@ Errors típics: afegir decimals sense suport instrumental o ometre la unitat. Ca
 **P6 — Interval d’una mesura arrodonida (tipus 7), N2.** Per arrodoniment habitual a unitats i valors positius, la lectura 25 representa `[24,5; 25,5)`.
 
 - 18 unitats arrodonides a l’enter més proper: valor previ dins `[17,5;18,5)`.
-- 3,0 cm arrodonits a 0,1 cm: valor previ dins `[2,95;3,05)` (cal confirmar que la implementació del tipus està restringida a unitats, com diu l’enunciat actual).
+- 18 g arrodonits al gram més proper: valor previ dins `[17,5;18,5)`.
 
 Errors típics: usar ±1 en comptes de ±0,5 unitat; incloure tots dos extrems; no ajustar la meitat de la resolució. Cas límit: la inclusió del punt de mig depèn de la convenció d’arrodoniment i del signe; el generador descriu la convenció per valors positius.
 
