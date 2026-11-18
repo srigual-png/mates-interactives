@@ -42,7 +42,7 @@ Aquesta branca és documental. No s’han de modificar nivells de producció, ge
 - [x] Confirmació estàtica de l’estructura del generador i dels modes.
 - [x] Contrast de les 10 branques del bloc 1 (volum i capacitat).
 - [x] Contrast de les 10 branques del bloc 2 (mesura i precisió).
-- [x] Contrast estàtic de les 10 branques del bloc 3 (àrees compostes).\n- [ ] Contrast de les branques dels blocs 4–8.
+- [x] Contrast estàtic de les 10 branques del bloc 3 (àrees compostes).\n- [x] Contrast estàtic de les branques dels blocs 4–5 (20 tipus).\n- [ ] Contrast de les branques dels blocs 6–8.
 - [ ] Consolidació transversal de famílies entre blocs.
 - [ ] Justificació curricular global, buits i propostes (si escau).
 - [ ] Síntesi final de modes i evidències disponibles.
@@ -61,10 +61,10 @@ Aquesta confirmació de l’estructura no certifica encara la correcció de les 
 
 ## Progrés de l’auditoria
 
-- Contrast tipus per tipus: **30/80** branques ordinàries revisades estàticament.
-- Famílies candidates locals documentades fins ara: bloc 1 = 6; bloc 2 = 6; bloc 3 = 3. Encara no són famílies globals validades.
+- Contrast tipus per tipus: **50/80** branques ordinàries revisades estàticament.
+- Famílies candidates locals documentades fins ara: bloc 1 = 6; bloc 2 = 6; bloc 3 = 3; bloc 4 = 6; bloc 5 = 4. Encara no són famílies globals validades.
 - No s’han executat proves ni simulacions noves; validació visual pendent.
-- Següent: blocs 4–5 i després deduplicació transversal abans de tancar recompte de famílies.
+- Següent: blocs 6–8 i després deduplicació transversal abans de tancar recompte de famílies.
 
 ## Bloc 1 — Volum i capacitat: contrast dels 10 tipus
 
@@ -271,3 +271,135 @@ Errors típics: multiplicar 2,4×35 i donar el resultat en m²; convertir cm a m
 El catàleg concentra 9 dels 10 tipus a N2 perquè gairebé tots combinen àrees parcials. El tipus 7 és un N1 clar. No es detecta, en aquest bloc, un procediment genuïnament N3; augmentar números o afegir un context per si sol no justificaria N3.
 
 **Incidència de codi documentada, no aplicada:** al tipus 8, la guia diu que l’àrea del rectangle ja està donada i no cal calcular-ne l’altura, però la solució mostra `àrea ÷ base` com a primer pas. És un pas superflu que contradiu la guia; queda documentat per valorar una eventual correcció, sense modificar el generador.
+
+
+## Bloc 4 — Semblança i mesures: contrast dels 10 tipus
+
+Contrast estàtic de les branques 1–10 de `genSemblancaMesures3ESO()` (línies 1352–1437).
+
+### Mapa tipus → família
+
+| Tipus | Procediment | Decisió | Nivell proposat | Justificació |
+|---:|---|---|---|---|
+| 1 | Aplicar k a una longitud homòloga | Família S1 | N1 | Escala lineal directa |
+| 2 | Trobar k a partir de dues longituds homòlogues | Família S2 | N1 | Quocient directe entre longituds corresponents |
+| 3 | Aplicar k a un perímetre | Variant de S1 | N1 | El perímetre també escala linealment |
+| 4 | Aplicar k² a una àrea | Família S3 | N1 | Aplicació directa de la regla d’àrees |
+| 5 | Aplicar k³ a un volum | Família S4 | N1 | Aplicació directa de la regla de volums |
+| 6 | Recuperar k a partir de la raó d’àrees, amb arrel quadrada | Família S5 | N2 | Invertir la regla d’àrees |
+| 7 | Recuperar k a partir de la raó de volums, amb arrel cúbica | Variant de S5 | N2 | Mateixa tasca inversa, amb exponent cúbic |
+| 8 | Reducció d’àrea amb raó lineal fraccionària | Variant de S3 | N2 | Cal elevar una fracció al quadrat |
+| 9 | Detectar l’afirmació falsa sobre factors k, k² i k³ | Família S6 | N1 | Diagnòstic conceptual, no càlcul d’una mesura |
+| 10 | Escalar l’aresta d’un cub i calcular-ne el nou volum | Variant de S4 | N2 | Dues vies equivalents: aresta³ o volum·k³ |
+
+### Famílies i exemples resolts
+
+**S1 — Escala lineal directa (tipus 1 i 3), N1.** Mateix procediment; el costat i el perímetre són longituds.
+
+- Costat 8 cm amb k=2,5: 8·2,5 = **20 cm**.
+- Perímetre 36 cm amb k=1,5: 36·1,5 = **54 cm**.
+
+Error típic: multiplicar el perímetre per k². Cas límit: si k<1, la longitud disminueix; el banc actual d’aquests tipus treballa sobretot amb k>1.
+
+**S2 — Recuperar k de longituds homòlogues (tipus 2), N1.** Cal mantenir l’ordre primera→segona figura.
+
+- Un costat passa de 2 cm a 6 cm: k=6/2=**3**.
+- Un costat passa de 5 cm a 7,5 cm: k=7,5/5=**1,5**.
+
+Error típic: dividir en sentit invers i obtenir el factor de reducció quan es demana k de la primera a la segona. Cas límit: k pot ser menor que 1 si la segona figura és més petita; els exemples actuals seleccionen ampliacions.
+
+**S3 — Escala d’àrees (tipus 4 i 8), N1/N2.** Mateixa regla A₂=A₁·k²; el tipus 8 n’és una variant de reducció fraccionària, proposada a N2.
+
+- Àrea 16 cm², k=2: A₂=16·2²=**64 cm²**.
+- Reducció k=1/4 d’una superfície de 48 m²: A₂=48·(1/4)²=48/16=**3 m²**.
+
+Errors típics: aplicar k en lloc de k²; quadrar l’àrea original. Cas límit: “longituds a 1/4” implica àrea a 1/16, no a 1/4.
+
+**S4 — Escala de volums (tipus 5 i 10), N1/N2.** Mateixa regla V₂=V₁·k³; el tipus 10 és variant perquè dona l’aresta i demana calcular el cub nou.
+
+- Volum 20 cm³ amb k=2: 20·2³=**160 cm³**.
+- Cub d’aresta 4 cm, k=3: aresta nova 12 cm; volum nou 12³=**1728 cm³**.
+
+Errors típics: aplicar k o k² al volum. Cas límit: el tipus 10 també es pot resoldre per 64·27=1728 cm³; els dos camins han de coincidir.
+
+**S5 — Recuperar k d’una raó d’àrees o volums (tipus 6 i 7), N2.** Mateixa tasca inversa; arrel quadrada per a àrees, arrel cúbica per a volums.
+
+- Àrees 15 i 135 cm²: A₂/A₁=9; k=√9=**3**.
+- Volums 3 i 24 cm³: V₂/V₁=8; k=∛8=**2**.
+
+Errors típics: prendre directament la raó d’àrees/volums com a k; usar arrel quadrada en un volum. Cas límit: l’ordre de les figures determina si la raó és k o 1/k.
+
+**S6 — Diagnòstic de les lleis d’escala (tipus 9), N1.** Tasca diferent de calcular una mesura: reconèixer quina magnitud usa l’exponent incorrecte.
+
+- Amb k=3: longitud ×3, àrea ×9, volum ×27. És falsa “l’àrea es multiplica per 3”.
+- Amb k=2: perímetre ×2, superfície ×4, volum ×8. És falsa “el volum es multiplica per 4”.
+
+Error típic: confondre la raó lineal amb la de superfície o volum. Cas límit: la regla val per figures/cossos semblants, no per qualsevol parell de formes.
+
+### Revisió dels modes i evidència disponible per al bloc 4
+
+- **Estàtica:** pistes i solucions estan definides per a les deu branques. El nivell 1 mostra les pistes; el nivell 2 les oculta. No s’ha trobat una restricció `allowOpen=false` en aquest generador.
+- **Estàtica prèvia:** 3000 mostres, distribució [9,1,0], examen [9,3,0]. La proposta revisa els tipus 6–8 del N1 registrat cap a N2; cal que la classificació final no es limiti a copiar aquests recomptes.
+- **Simulació i validació visual:** no fetes.
+- **Deduplicació transversal:** comparteix la llei de k, k² i k³ amb els problemes contextuals de Tales, però es manté com a bloc/família d’aplicació de l’escala entre figures semblants; Tales exigeix modelitzar una mesura indirecta concreta.
+
+## Bloc 5 — Tales i mesures indirectes: contrast dels 10 tipus
+
+Contrast estàtic de les branques 1–10 de `genTalesMesures3ESO()` (línies 1438–1517).
+
+### Mapa tipus → família
+
+| Tipus | Procediment | Decisió | Nivell proposat | Justificació |
+|---:|---|---|---|---|
+| 1 | Trobar k amb un parell de costats i aplicar-lo a un altre | Família T1 | N1 | Proporció directa en triangles ja identificats com a semblants |
+| 2 | Recuperar una longitud del triangle petit amb factor invers | Variant de T1 | N2 | Canvia el sentit de l’escala i s’ha de conservar la correspondència |
+| 3 | Trobar altura amb raó d’ombres al mateix instant | Família T2 | N2 | Modelització de triangles semblants a partir del context |
+| 4 | Escalar l’altura d’un pal a un edifici amb ombres | Variant de T2 | N2 | Mateix procediment que 3, altres mesures/context |
+| 5 | Mètode del mirall: altura dels ulls i distàncies al mirall | Variant de T2 | N2 | Proporció de triangles visuals; nova configuració |
+| 6 | Aplicar escala entre triangles per estimar l’amplada d’un riu | Variant de T1 | N2 | Correspondència geomètrica contextualitzada |
+| 7 | Recuperar l’ombra a partir de la raó d’altures | Variant de T2 | N2 | Inverteix la proporció directa dels tipus 3–4 |
+| 8 | Mesura amb ombres i conversió cm↔m | Variant de T2 | N2 | Mateixa modelització, amb normalització d’unitats |
+| 9 | Seleccionar la proporció amb ordre coherent de costats homòlegs | Família T3 | N1 | Interpretar una representació proporcional sense resoldre x |
+| 10 | Trobar altura total per ombres i restar l’antena | Família T4 | N2 | Tasca composta: mesura indirecta i descomposició de l’altura |
+
+### Famílies i exemples resolts
+
+**T1 — Proporció en triangles semblants (tipus 1, 2 i 6), N1/N2.** Mateixa família; 2 és la variant inversa, i 6 aplica el mateix factor a una amplada de riu.
+
+- 6 m del triangle petit corresponen a 30 m del gran; costat petit 8 m: k=5 i costat gran **40 m**.
+- Costats homòlegs del gran 6 cm i 16 cm; el primer al petit és 3 cm: k gran/petit=2; l’altre costat petit és 16/2=**8 cm**.
+
+Errors típics: invertir k; aplicar-lo al costat que no és homòleg. Cas límit: abans de multiplicar o dividir cal explicitar quina longitud pertany al triangle petit/gran. Tipus 1 es proposa N1; tipusos 2 i 6, N2 per la inversió o la identificació contextual.
+
+**T2 — Mesura indirecta amb ombres o mirall (tipus 3, 4, 5, 7 i 8), N2.** Variants d’aplicar la proporció a triangles construïts per raigs solars o reflexió; el tipus 8 afegeix conversió d’unitats.
+
+- Persona 1,6 m, ombra 1,5 m; arbre ombra 9 m: factor 9/1,5=6; altura =1,6·6=**9,6 m**.
+- Mirall: ulls a 1,5 m; persona–mirall 2 m; mirall–edifici 20 m: factor 20/2=10; altura **15 m**.
+- Cas límit tipus 8: 160 cm=1,6 m i 100 cm=1 m; monument amb ombra 4 m → factor 4; altura **6,4 m**.
+
+Errors típics: comparar ombres preses en moments diferents; barrejar cm i m; posar en correspondència altura amb ombra. En el mètode del mirall, la posició del mirall i els segments indicats han de mantenir la configuració assumida pel problema.
+
+**T3 — Construcció/lectura de la proporció (tipus 9), N1.** Tasca conceptual diferenciada: verificar que els quocients conserven el mateix ordre.
+
+- 3 m correspon a 12 m i 5 m a x: proporció petit/gran `3/12 = 5/x`.
+- 4 correspon a 10 i 6 a x: `4/10 = 6/x`; no `4/10 = x/6`.
+
+Errors típics: invertir només un dels dos quocients. Cas límit: una proporció global invertida als dos membres és equivalent; la barreja d’ordres no ho és.
+
+**T4 — Alçada total i part afegida (tipus 10), N2.** Tasca diferent del càlcul directe d’ombra: obtenir l’altura torre+antena i després restar la part que no es demana.
+
+- Persona 1,5 m amb ombra 1,2 m; torre+antena ombra 14,4 m: factor 12; altura total 18 m; si l’antena fa 1,5 m, edifici = **16,5 m**.
+- Persona 1,6 m amb ombra 2 m; torre+antena amb ombra 10 m: factor 5; total 8 m; antena 2 m; edifici **6 m**.
+
+Errors típics: restar l’antena abans d’escalar o informar l’altura total en lloc de la de l’edifici. Cas límit: el resultat ha de ser positiu i l’antena ha de ser una part de l’altura total.
+
+### Revisió dels modes i evidència disponible per al bloc 5
+
+- **Estàtica:** pistes i solucions definides per a les deu branques. El mode guiat correspon al nivell 1; el nivell 2 oculta pistes. No s’ha trobat una restricció `allowOpen=false` a les branques examinades.
+- **Estàtica prèvia:** 3000 mostres, distribució [0,10,0] i examen [0,12,0]. El registre classifica tots els tipus N2; es proposa N1 per als casos de proporció més directa (1 i 9), sense crear N3.
+- **Simulació i validació visual:** no fetes.
+- **Deduplicació transversal:** el factor de semblança és el mateix que al bloc 4, però l’objectiu aquí és construir una proporció per mesurar longitud inaccessible. No es compten com la mateixa família pedagògica.
+
+### Límits de la proposta dels blocs 4–5
+
+Les decisions són documentals i provisionals. Els exemples de Tales pressuposen triangles realment semblants (mateix instant per ombres; reflexió i distàncies mesurades com en l’esquema del mirall). La validació geomètrica dels diagrames i la revisió visual encara no s’han fet. No es força cap família N3: els tipus actuals no requereixen planificar una estratègia entre opcions múltiples independents.
