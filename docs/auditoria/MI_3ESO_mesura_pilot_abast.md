@@ -42,7 +42,7 @@ Aquesta branca és documental. No s’han de modificar nivells de producció, ge
 - [x] Confirmació estàtica de l’estructura del generador i dels modes.
 - [x] Contrast de les 10 branques del bloc 1 (volum i capacitat).
 - [x] Contrast de les 10 branques del bloc 2 (mesura i precisió).
-- [ ] Contrast de les branques dels blocs 3–8.
+- [x] Contrast estàtic de les 10 branques del bloc 3 (àrees compostes).\n- [ ] Contrast de les branques dels blocs 4–8.
 - [ ] Consolidació transversal de famílies entre blocs.
 - [ ] Justificació curricular global, buits i propostes (si escau).
 - [ ] Síntesi final de modes i evidències disponibles.
@@ -61,10 +61,10 @@ Aquesta confirmació de l’estructura no certifica encara la correcció de les 
 
 ## Progrés de l’auditoria
 
-- Contrast tipus per tipus: **20/80** branques ordinàries revisades estàticament.
-- Famílies candidates locals documentades fins ara: bloc 1 = 6; bloc 2 = 6. Encara no són famílies globals validades.
+- Contrast tipus per tipus: **30/80** branques ordinàries revisades estàticament.
+- Famílies candidates locals documentades fins ara: bloc 1 = 6; bloc 2 = 6; bloc 3 = 3. Encara no són famílies globals validades.
 - No s’han executat proves ni simulacions noves; validació visual pendent.
-- Següent: blocs 3–4 i després deduplicació transversal abans de tancar recompte de famílies.
+- Següent: blocs 4–5 i després deduplicació transversal abans de tancar recompte de famílies.
 
 ## Bloc 1 — Volum i capacitat: contrast dels 10 tipus
 
@@ -216,3 +216,58 @@ Errors típics: usar ±1 en comptes de ±0,5 unitat; incloure tots dos extrems; 
 
 - El tipus 5 crea les opcions amb una llista barrejada fixa; el codi visible no deriva les opcions de la comparació actual ni garanteix explícitament que la resposta correcta aparegui. Cal inspeccionar aquesta branca amb més detall abans de concloure si és una incidència funcional; no s’ha executat cap prova nova ni s’ha canviat el codi.
 - Al tipus 7, la pregunta diu “arrodonida a la unitat més propera”, però el banc conté unitats diferents. La interpretació d’`[valor−0,5; valor+0,5)` només és correcta si “unitat” vol dir la unitat indicada per cada lectura; cal contrastar els valors/unitats exactes del banc abans de tancar el cas.
+
+## Bloc 3 — Àrees i figures compostes: contrast dels 10 tipus
+
+Contrast estàtic de les branques 1–10 de `genAreesCompostes3ESO()` (línies 1258–1351).
+
+### Mapa tipus → família
+
+| Tipus | Procediment real | Decisió | Nivell proposat | Motiu |
+|---:|---|---|---|---|
+| 1 | Àrea d’un rectangle menys un rectangle retirat (figura en L) | Variant d’A1 | N2 | Cal calcular dues àrees i restar-les |
+| 2 | Àrea de rectangle més triangle | Variant d’A2 | N2 | Dues fórmules d’àrea i suma |
+| 3 | Àrea de rectangle menys semicercle | Variant d’A1 | N2 | Mateixa estratègia de complement, amb àrea circular |
+| 4 | Àrea de rectangle més dos semicercles (un cercle) | Variant d’A2 | N2 | Composició additiva, amb equivalència de dos semicercles i cercle |
+| 5 | Camí interior: rectangle exterior menys rectangle interior | Variant d’A1 | N2 | Cal reduir cada dimensió en dues amplades abans de restar |
+| 6 | Àrea de trapezi més rectangle | Variant d’A2 | N2 | Dues fórmules i suma |
+| 7 | Àrea completa menys àrea del buit, ambdues donades | Família A1, cas directe | N1 | Resta directa; no cal descompondre ni calcular àrees auxiliars |
+| 8 | Àrea rectangular donada més triangle sobre base comuna | Variant d’A2 | N2 | El rectangle no cal recalcular-lo; cal obtenir l’àrea triangular |
+| 9 | Àrea de rectangle amb longituds en m i cm | Família A3 | N2 | La conversió d’unitats ha de precedir el producte d’àrees |
+| 10 | Àrea de pati menys àrea de piscina | Variant d’A1 | N2 | Mateixa estratègia de superfície restant, en context |
+
+### Famílies i exemples resolts
+
+**A1 — Superfície restant o forat (tipus 1, 3, 5, 7 i 10), N1/N2.** Mateixa estratègia de resta; són variants quan canvia la forma de l’àrea eliminada o cal calcular dimensions interiors. Només el tipus 7 és N1 perquè les dues àrees ja són donades.
+
+- Figura en L: rectangle 12×8 = 96 cm²; rectangle retirat 3×2 = 6 cm²; queda **90 cm²**.
+- Jardí 10×8 m amb camí interior d’1 m: àrea exterior 80 m²; zona interior 8×6=48 m²; camí **32 m²**.
+- Cas límit del tipus 3: si el retall és semicercle de radi 2 cm, se’n resta `π·2²/2=2π≈6,28 cm²`, no l’àrea d’un cercle sencer.
+
+Errors típics: sumar el forat; reduir només una dimensió de cada costat en comptes de dues amplades totals; restar àrees de figures superposades sense comprovar el dibuix i les mesures.
+
+**A2 — Suma d’àrees de parts adjacents (tipus 2, 4, 6 i 8), N2.** Mateixa família: descompondre, calcular àrees parcials i sumar-les. Les parts han de cobrir la figura sense solapament.
+
+- Façana 8×4 m més triangle de base 8 m i altura 3 m: 32 + 12 = **44 m²**.
+- Pista amb rectangle 20×6 m i dos semicercles de radi 3 m: 120 + 9π ≈ **148,27 m²**.
+
+Errors típics: oblidar el factor 1/2 de triangle o trapezi; sumar longituds en lloc d’àrees; comptar els dos semicercles com dos cercles. Cas límit: al tipus 8, l’àrea del rectangle ja es dona; la base comuna del triangle no implica que se n’hagi de tornar a calcular l’àrea rectangular.
+
+**A3 — Àrea rectangular amb canvi previ d’unitat (tipus 9), N2.** Tasca diferent de la suma/resta de components: primer unificar longituds, després multiplicar.
+
+- Placa 2,4 m × 35 cm: 35 cm=0,35 m; àrea = 2,4×0,35 = **0,84 m²**.
+- Taula 1,5 m × 80 cm: 0,80 m; àrea = 1,5×0,8 = **1,2 m²**.
+
+Errors típics: multiplicar 2,4×35 i donar el resultat en m²; convertir cm a m com si fos àrea (factor 100, no 10.000). Cas límit: si el resultat es demana en cm², després de trobar m² encara cal aplicar 1 m²=10.000 cm².
+
+### Revisió dels modes i evidència disponible per al bloc 3
+
+- **Estàtica:** cada tipus retorna pistes i solució; el mode guiat les mostra al nivell 1 i el nivell 2 les amaga durant la resolució. Cap de les deu branques declara `allowOpen=false`; totes poden entrar en la selecció del mode de resposta oberta.
+- **Estàtica prèvia:** el registre informa 3000 mostres, distribució [1,9,0] i examen [3,9,0]. No s’ha repetit la generació.
+- **Simulació i validació visual:** no fetes.
+
+### Observació pedagògica pendent de decisió global
+
+El catàleg concentra 9 dels 10 tipus a N2 perquè gairebé tots combinen àrees parcials. El tipus 7 és un N1 clar. No es detecta, en aquest bloc, un procediment genuïnament N3; augmentar números o afegir un context per si sol no justificaria N3.
+
+**Incidència de codi documentada, no aplicada:** al tipus 8, la guia diu que l’àrea del rectangle ja està donada i no cal calcular-ne l’altura, però la solució mostra `àrea ÷ base` com a primer pas. És un pas superflu que contradiu la guia; queda documentat per valorar una eventual correcció, sense modificar el generador.
