@@ -24,13 +24,13 @@ Aquests recomptes són els nivells actius llegits de `REVIEWED_LEVELS["3eso/mesu
 - `docs/dificultats/resultats-punt3-3eso-mesura.json`: mostres de 3.000 instàncies per bloc, amb resultats d’examen per als 8 blocs ordinaris; els registres previs de les ampliacions no tenen camp d’examen.
 - `3eso/teoria/mesura/index.html`: delimita explícitament el recorregut principal (blocs 1–8) i les ampliacions A–D.
 
-Les xifres i mostres s’han de contrastar amb el codi actual abans de concloure. La generació de mostres documentada prèviament no demostra per si sola l’equivalència pedagògica entre tipus.
+Les xifres i mostres s’han contrastat amb els generadors actuals. Les mostres prèvies acrediten execució/generació, però no demostren per si soles l’equivalència pedagògica entre tipus.
 
 ## Decisions i revisió
 
-Per a cada tipus s’ha de registrar el grup/família candidata i la relació: **mateixa família / variant / tasca diferent**. Per a cada família resultant: nivell proposat i justificació curricular de 3r, dos exemples resolts, errors típics i casos límit. Les propostes de nous exercicis s’han de limitar als procediments absents; no es forçarà N3 ni es duplicaran famílies entre blocs.
+Per als 80 tipus s’ha documentat el grup/família candidata i la relació: **mateixa família / variant / tasca diferent**. Per a cada família resultant consten nivell proposat i justificació curricular de 3r, dos exemples resolts, errors típics i casos límit. Les propostes de nous exercicis s’han limitat als procediments absents; no s’ha forçat N3 ni s’han duplicat famílies entre blocs.
 
-La revisió dels modes guiat, autònom i examen ha d’indicar, per cada afirmació, si l’evidència és **estàtica**, de **simulació** o **visual**. La manca de validació visual s’ha de declarar explícitament.
+La revisió dels modes guiat, autònom i examen distingeix l’evidència **estàtica**, la **simulació** i la validació **visual**. En aquesta auditoria només s’ha fet revisió estàtica; no s’ha fet simulació ni validació visual.
 
 ## Límit de canvis
 
