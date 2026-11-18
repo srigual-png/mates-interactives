@@ -45,3 +45,25 @@ Aquesta branca és documental. No s’han de modificar nivells de producció, ge
 - [ ] Buits reals i propostes justificades, si n’hi ha.
 - [ ] Revisió de guiat, autònom i examen; límits de verificació.
 - [ ] Síntesi final amb què s’ha verificat i què queda pendent.
+
+## Primera comprovació contra el generador (revisió estàtica)
+
+Fitxer contrastat: `3eso/sentit-mesura.html` a la branca base.
+
+- El codi declara exactament **8 temes de 3r** amb `exam3r:true` i **4 ampliacions de 4t** amb `exam3r:false` i `ampliacio:true`. Això confirma l’abast 80/40 dels registres previs.
+- Hi ha un generador específic per a cadascun dels 12 temes. Els vuit generadors ordinaris seleccionen un identificador de tipus entre 1 i 10; per tant, els registres previs cobreixen els identificadors esperats, però encara falta contrastar una per una les branques i el procediment matemàtic real de cada tipus.
+- La interfície de pràctica exposa dos nivells (1 i 2); al nivell 1 mostra les pistes. El codi no exposa un selector N3 en aquesta pàgina. Això descriu la implementació actual, no determina si pedagògicament caldria proposar N3.
+- El filtre de contingut d’examen s’aplica sobre la llista de temes; els vuit blocs ordinaris estan marcats com a inclosos i les ampliacions com a excloses.
+- Aquesta passada és **estàtica**. No s’han executat proves ni s’ha fet simulació o validació visual.
+
+Aquesta confirmació de l’estructura no certifica encara la correcció de les 80 branques, la deduplicació per família, la qualitat dels exemples o l’adequació curricular.
+
+## Progrés de l’auditoria
+
+- [x] Confirmació estàtica de l’abast al codi: 8 blocs de 3r × 10 tipus i 4 ampliacions de 4t × 10 tipus.
+- [ ] Contrast individual de les branques 1–10 dels vuit generadors ordinaris.
+- [ ] Mapa tipus → família i decisions de deduplicació (80/80).
+- [ ] Nivells, justificació curricular i casos (per família).
+- [ ] Buits reals i propostes justificades, si n’hi ha.
+- [ ] Revisió de guiat, autònom i examen amb classificació de l’evidència.
+- [ ] Síntesi final amb què s’ha verificat i què queda pendent.
