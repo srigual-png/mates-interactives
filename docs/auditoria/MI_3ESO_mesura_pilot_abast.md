@@ -67,3 +67,78 @@ Aquesta confirmació de l’estructura no certifica encara la correcció de les 
 - [ ] Buits reals i propostes justificades, si n’hi ha.
 - [ ] Revisió de guiat, autònom i examen amb classificació de l’evidència.
 - [ ] Síntesi final amb què s’ha verificat i què queda pendent.
+
+## Bloc 1 — Volum i capacitat: contrast dels 10 tipus
+
+Contrast estàtic de les branques 1–10 de `genVolumCapacitat3ESO()` (línies 995–1094 del generador). S’han comparat procediment, unitats, resposta i mostra del registre previ. Les famílies següents són decisions de l’auditoria, no entrades al registre oficial.
+
+### Mapa tipus → família
+
+| Tipus | Procediment real | Decisió | Nivell proposat | Motiu |
+|---:|---|---|---|---|
+| 1 | Conversió entre unitats cúbiques amb factor 1000 per salt | Família V1 | N1 | Aplicació directa del factor cúbic i del sentit del canvi |
+| 2 | Equivalència directa dm³↔L, cm³↔mL o m³↔L | Família V2 | N1 | Una equivalència de referència i una conversió |
+| 3 | Conversió L, dL, cL i mL | Família V3 | N1 | Escala de capacitat decimal, factor 10 per salt |
+| 4 | Conversió encadenada entre volum i capacitat (p. ex. m³↔mL) | Variant de V2 | N2 | Cal coordinar més d’una equivalència o un factor global gran |
+| 5 | Reconeixement de l’equivalència m³↔L en opcions | Variant de V2 | N1 | Mateix coneixement i càlcul que el tipus 2, amb resposta de selecció |
+| 6 | Volum d’un prisma rectangular en cm³ i equivalència a mL | Variant de V4 | N2 | Fórmula geomètrica seguida d’una equivalència |
+| 7 | Volum d’un dipòsit rectangular en m³ i conversió a L | Variant de V4 | N2 | Mateix procediment que 6, amb decimal i factor 1000 |
+| 8 | Capacitat total en m³, conversió a L i resta del contingut | Família V5 | N2 | Problema invers de capacitat restant; inclou conversió i resta contextual |
+| 9 | Volum d’un cub amb aresta en dm i equivalència a L | Variant de V4 | N1 | Cas directe de volum geomètric; cub i dm³=L redueixen els passos |
+| 10 | Comparació de cm³ i L després d’expressar-los en una unitat comuna | Família V6 | N2 | La decisió de comparació és el focus, no només convertir |
+
+### Famílies i exemples resolts
+
+**V1 — Conversió d’unitats cúbiques (tipus 1), N1.** Cal distingir el factor cúbic del factor lineal: cada salt entre unitats cúbiques és ×1000 o ÷1000.
+
+- 2,5 dm³ = 2,5 × 1000 = **2500 cm³**.
+- 4500 mm³ = 4500 ÷ 1000 = **4,5 cm³**.
+
+Errors típics: multiplicar per 10 per cada salt; invertir el sentit del factor. Cas límit: canviar dues posicions equival a factor 1.000.000, no 2000.
+
+**V2 — Equivalències volum-capacitat (tipus 2, 4 i 5), N1/N2.** Tipus 2 i 5 són la mateixa família; el 5 és una variant de format d’opcions. El tipus 4 és una variant composta perquè demana encadenar equivalències (cm³↔L, mL↔dm³ o m³↔mL). N1 per l’equivalència immediata; N2 per la cadena.
+
+- 0,75 m³ = 0,75 × 1000 = **750 L**.
+- 3500 mL = 3500 cm³ = 3,5 dm³ = **3,5 dm³**.
+
+Errors típics: confondre 1 m³=1 L; aplicar factor 1000 també a dm³↔L o cm³↔mL. Cas límit: comprovar que el factor global per m³↔mL és 1.000.000.
+
+**V3 — Canvis d’unitat de capacitat (tipus 3), N1.** Família pròpia: escala decimal de litres, diferent de les unitats cúbiques.
+
+- 2,5 L = **250 cL**.
+- 750 mL = **0,75 L**.
+
+Errors típics: usar ×1000 en cada salt (aquí és ×10); moure la coma en el sentit contrari. Cas límit: cL↔dL és un salt, no tres.
+
+**V4 — Volum geomètric convertit en capacitat (tipus 6, 7 i 9), N1/N2.** Mateix esquema (calcular V i aplicar equivalència), amb variants de cos i unitat. N1 per al cub amb aresta en dm i equivalència immediata; N2 per al prisma amb tres dimensions i conversió posterior.
+
+- Capsa 20×15×10 cm: V=3000 cm³ i, com que 1 cm³=1 mL, capacitat **3000 mL**.
+- Dipòsit 2×0,5×0,4 m: V=0,4 m³; 0,4×1000= **400 L**.
+- Cas límit del tipus 9: cub d’aresta 3 dm → V=3³=27 dm³=**27 L**.
+
+Errors típics: sumar dimensions; oblidar elevar al cub en el cas del cub; convertir cada longitud en lloc del volum; confondre dimensions exteriors i interiors. El text “si es pogués omplir completament” limita la resposta a la capacitat geomètrica, sense gruix de paret ni espai lliure.
+
+**V5 — Capacitat restant (tipus 8), N2.** Tasca diferent de V4: primer convertir la capacitat màxima i després restar el contingut.
+
+- Dipòsit de 1,2 m³ amb 450 L: 1,2 m³=1200 L; 1200−450=**750 L**.
+- Dipòsit de 0,8 m³ amb 250 L: 800−250=**550 L**.
+
+Errors típics: restar 1,2−450 abans de convertir; respondre la capacitat total. Cas límit: la quantitat continguda no pot superar la capacitat total (el generador filtra aquest cas).
+
+**V6 — Comparació de volums en unitats diferents (tipus 10), N2.** Tasca diferent de convertir per donar una quantitat: cal establir la relació entre dues mesures.
+
+- 1250 cm³=1250 mL=1,25 L; comparat amb 0,6 L és **més gran**.
+- 600 cm³=600 mL=0,6 L; comparat amb 0,6 L és **igual**.
+
+Errors típics: comparar nombres sense homogeneïtzar unitats; marcar “no es poden comparar” perquè les unitats difereixen. Cas límit: el generador inclou igualtat i, per tant, la resposta no és només més gran/més petit.
+
+### Revisió dels modes i evidència disponible per al bloc 1
+
+- **Estàtica:** el generador retorna pistes i passos de solució als deu tipus; el mode obert només reintenta si un tipus declara `allowOpen:false`. En aquest generador del bloc 1 no s’ha observat aquesta restricció.
+- **Estàtica:** el registre previ informa 3000 mostres generades, cobertura [7,3,0] i examen [7,5,0]. Són recomptes de nivells per al banc, no una demostració de cobertura de famílies.
+- **Simulació:** no feta en aquesta auditoria.
+- **Visual:** no feta; no s’afirma que s’hagi comprovat el navegador.
+
+### Incidència detectada per revisar globalment
+
+En el codi actual, el tipus 4 selecciona, entre altres, m³↔mL, però els distractors es construeixen amb factors ×10, ÷10, ×1000 i ÷1000 del resultat. En aquests casos, diversos distractors poden no representar les confusions específiques més útils i cal comprovar que cap coincideixi amb la resposta correcta. És una observació estàtica, no s’ha reproduït amb una prova nova; no s’ha modificat el generador.
