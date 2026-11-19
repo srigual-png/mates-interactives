@@ -1327,7 +1327,7 @@ function genAreesCompostes3ESO(){
     ({correct,alts,options}=measureOptions(res,'cm²',[area,tri,w*(h+triH),area+w*triH,res*2]));
     question=`Un rectangle té àrea <b>${area} cm²</b> i base <b>${w} cm</b>. Sobre aquesta mateixa base hi ha un triangle d’altura <b>${triH} cm</b>. Quina és l’àrea total de la figura?`;
     guide=['L’àrea del rectangle ja està donada: no cal calcular-ne l’altura.','Calcula l’àrea del triangle amb la base compartida i l’altura indicada.','Suma les dues superfícies.'];
-    solution=[`Altura del rectangle: ${area} ÷ ${w} = ${h} cm.`,`Triangle: ${w} · ${triH} ÷ 2 = ${fmtM(tri)} cm².`,`Total: ${area} + ${fmtM(tri)} = <b>${correct}</b>.`];
+    solution=[`Àrea del rectangle (donada): ${area} cm².`,`Triangle: ${w} · ${triH} ÷ 2 = ${fmtM(tri)} cm².`,`Total: ${area} + ${fmtM(tri)} = <b>${correct}</b>.`];
   }
   else if(type===9){
     const Lm=shuffle([1.2,1.5,2,2.4])[0],Wcm=shuffle([40,50,60,75,80])[0];
