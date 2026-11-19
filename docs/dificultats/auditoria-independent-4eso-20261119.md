@@ -92,13 +92,13 @@ La promoció és de contingut, no de dificultat: el mapa de 4t continua sense N3
 | Mostres i simulació | S’han llegit les mostres i metadades ja desades als JSON. No he llançat cap generació o simulació nova. |
 | Mode guiat / autònom / examen | He contrastat estàticament les opcions i dades de mode en les pàgines i els informes previs; no he repetit cap suite d’interacció ni la passada de quotes. |
 | Validació visual | No s’ha fet en navegador en aquesta auditoria. |
-| GitHub Actions | No s’ha creat cap workflow ni s’ha activat cap execució. |
+| GitHub Actions | No s’ha creat ni iniciat cap prova manual. Els commits a la PR han activat automàticament els workflows configurats pel repositori; un és la comprovació d’inline JavaScript i l’altre és una validació general de Sentit numèric de 2n, fora de l’abast d’aquesta auditoria. |
 
 Els informes previs descriuen suites d’interfície i comprovacions d’oracle, però no les considero revalidades aquí. Aquesta passada tampoc certifica visualment totes les figures, totes les solucions explicades ni totes les combinacions de l’examen.
 
 ## Estat i següents passos
 
-1. Revisar la proposta d’encaix curricular i de famílies de la PR #66; no he modificat el registre oficial de nivells.
-2. Fer una validació integrada dels modes i una passada visual abans de considerar el canvi llest per adoptar. No s’han executat proves ni workflows nous en aquesta passada.
+1. La promoció curricular a estocàstica està aplicada a la branca: blocs 9–11 al nucli ordinari; Bayes continua opcional. El mapa de famílies i l’índex de teoria reflecteixen el canvi.
+2. Per completar la verificació de comportament queden una passada integrada dels modes i una revisió visual. No les he iniciat manualment; els workflows automàtics que s’han activat pel push són comprovacions configurades al repositori i no equivalen per si sols a validar els tres modes.
 
-**A la branca de la PR #66 s’han actualitzat les etiquetes de progrés/examen, el recorregut de teoria i el text explicatiu. No s’ha modificat cap generador, nivell actiu o registre oficial. El mapa cobreix 624 tipus sense omissions ni duplicacions d’IDs. La PR continua Draft, sense fusionar ni publicar.**
+**A la branca de la PR #66 s’han actualitzat la disponibilitat al progrés/examen, el recorregut de teoria i la documentació. No s’ha modificat cap generador, tipus d’exercici, nivell actiu o registre oficial. El mapa cobreix 624 tipus sense omissions ni IDs duplicats. La PR continua Draft, oberta i sense fusionar.**
