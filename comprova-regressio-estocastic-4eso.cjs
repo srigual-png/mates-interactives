@@ -5,7 +5,7 @@ for(const opcio of ['A','B']){
  await p.goto('file:///'+path.resolve('4eso/sentit-estocastic.html').replace(/\\/g,'/')+'?opcio='+opcio+'&topic=dadesVariables4t&examen=tema');await p.waitForSelector('#miTopicExam.active');
  const checks=await p.evaluate(()=>{
   let n=0;const check=(ok,msg)=>{if(!ok)throw Error(msg);n++;};const el=html=>{const e=document.createElement('div');e.innerHTML=html;return e;};const num=s=>Number(String(s).replace('%','').replace(/\s/g,'').replace(',','.'));
-  check(miTopicExam.getTopics().length===8,'Blocs');
+  check(miTopicExam.getTopics().length===11,'Blocs');
   for(const t of miTopicExam.getTopics()){
    for(let k=0;k<3;k++){const qs=miTopicExam.build(t);check(qs.length===12,t.id);check(new Set(qs.map(q=>q.question)).size===12,'Duplicats');for(const q of qs){check(q.options.filter(o=>String(o)===String(q.correct)).length===1,'Correcta única');check(q.options.every(o=>String(o)===String(q.correct)||!validateOpen(q,o)),'Equivalent');check(q.solution.length>0,'Explicació');}}
    miTopicExam.start(t.id);const legends=[...document.querySelectorAll('#miTopicExam legend')].map(e=>e.textContent);for(const level of ['Fàcil','Mitjana','Alta'])check(legends.filter(x=>x.includes(level)).length===4,'Dificultats');
@@ -19,7 +19,7 @@ for(const opcio of ['A','B']){
   const g=genNuvolsRelacio4(9),points=[...el(g.question).querySelectorAll('circle')].map(e=>[Number(e.getAttribute('cx')),-Number(e.getAttribute('cy'))]);const means=[0,1].map(i=>points.reduce((s,p)=>s+p[i],0)/points.length);const cross=points.reduce((s,p)=>s+(p[0]-means[0])*(p[1]-means[1]),0),ss=[0,1].map(i=>points.reduce((s,p)=>s+(p[i]-means[i])**2,0)),corr=cross/Math.sqrt(ss[0]*ss[1]);check(corr>.4&&corr<.75,'Associació moderada');
   const probabilities={1:50,2:75,3:25,4:100/6,6:24,7:30,10:50};for(const [type,want]of Object.entries(probabilities)){const q=genExperimentsCompostos4(Number(type));check(Math.abs(num(q.correct)-want)<.051,'Probabilitat composta');}
   const q={validator:'number',correct:'24 %',alts:['24'],question:'Escriu el percentatge'};check(validateOpen(q,' 24,0 % '),'Format percentatge');check(!validateOpen(q,'-24'),'Signe');check(!validateOpen(q,'25'),'Incorrecta');check(!validateOpen(q,''),'Buida');
-  miExamSelectedTopics=miExamCoreTopics().map(t=>t.id);miRunConfiguredExam();check(state.examQs.length===20,'Examen general');check(state.examQs.every(q=>!q.topicId.includes('Batx')),'Ampliacions');return n;
+  miExamSelectedTopics=miExamCoreTopics().map(t=>t.id);miRunConfiguredExam();check(state.examQs.length===20,'Examen general');check(state.examQs.every(q=>!TOPICS.find(t=>t.id===q.topicId)?.isExpansion),'Ampliacions');return n;
  });
- await p.evaluate(()=>miTopicExam.start('taulesRepresentacions4t'));assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.screenshot({path:'scripts/examens-estocastic-4eso-'+opcio+'-390.png',fullPage:true});console.log(opcio+': '+checks+' comprovacions, vuit blocs, 4/4/4, càlculs independents, gràfics i examen general.');
+ await p.evaluate(()=>miTopicExam.start('taulesRepresentacions4t'));assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.screenshot({path:'scripts/examens-estocastic-4eso-'+opcio+'-390.png',fullPage:true});console.log(opcio+': '+checks+' comprovacions, onze blocs, nivells disponibles, càlculs independents, gràfics i examen general.');
 }await b.close();})().catch(e=>{console.error(e);process.exit(1)});
