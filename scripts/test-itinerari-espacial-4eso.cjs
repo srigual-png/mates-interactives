@@ -29,6 +29,7 @@ const extensionD='geometriaAnaliticaAmpD';
           b:ids(b),
           d:d&&{required:isRequiredTopic(d),exam:isExamTopic(d)},
           nextAfterCore:next<0?null:TOPICS[next].id,
+          nextByRequired:TOPICS.filter(isRequiredTopic).map(t=>{const n=nextTopicIndex(TOPICS.indexOf(t));return n<0?null:TOPICS[n].id}),
           routeNote:[...document.querySelectorAll('.p6-section-note')].map(x=>x.textContent).find(x=>x.includes('recorregut'))
         };
       });
@@ -43,6 +44,9 @@ const extensionD='geometriaAnaliticaAmpD';
         'El bloc D ha de continuar opcional i fora de l’examen a A i B');
       assert.equal(data.nextAfterCore,option==='A'?null:routeB[0],
         'La navegació de progrés ha de tancar A i continuar amb B');
+      const expectedRoute=option==='A'?core:[...core,...routeB];
+      assert.deepEqual(data.nextByRequired,expectedRoute.slice(1).concat(null),
+        'Cada pas de progrés ha de seguir l’ordre complet de l’itinerari');
       assert(data.routeNote?.includes(option==='A'?'Matemàtiques A':'Matemàtiques B'),
         'La pàgina ha d’explicitar l’itinerari seleccionat');
       for(const id of routeB){
