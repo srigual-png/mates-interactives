@@ -672,12 +672,25 @@ No s’ha identificat un procediment imprescindible absent que justifiqui crear 
 - **Simulació de fluxos — no feta en aquesta auditoria.**
 - **Validació visual en navegador — no feta.**
 
+## Resolució de les observacions de qualitat (19-11-2026)
+
+S’han contrastat estàticament les observacions que quedaven obertes; no s’han executat proves ni s’ha modificat cap generador.
+
+| Observació | Contrast amb el codi actual | Dictamen |
+|---|---|---|
+| Bloc 1, tipus 4: distractors en conversions volum-capacitat | measureOptions() elimina del conjunt de distractors qualsevol valor numèric igual a la resposta; uniq4() conserva una resposta correcta i completa quatre opcions úniques. Els factors proposats són errors d’escala (×10, ÷10, ×1000, ÷1000). | No hi ha defecte funcional de resposta correcta absent o duplicada. La qualitat pedagògica dels distractors continua sent un criteri de disseny, no una incidència funcional reproduïda. |
+| Bloc 2, tipus 5: la resposta correcta no semblava lligada a les opcions | La branca tria A o B com a resposta segons la parella de resolucions de la taula; les quatre opcions inclouen sempre “Instrument A” i “Instrument B”. | Falsa alarma: la resposta correcta sempre forma part de les opcions. |
+| Bloc 2, tipus 7: “unitat més propera” amb diverses unitats | El banc genera valors positius en cm, mm, mL o g, i l’enunciat sempre mostra la unitat de la lectura. L’interval de ±0,5 és en aquesta unitat, amb convenció [límit inferior, límit superior) indicada a la guia. | No hi ha ambigüitat: l’interval es refereix a la unitat que acompanya la lectura. |
+| Bloc 3, tipus 8: guia i solució discrepen | L’enunciat dona l’àrea del rectangle. La guia diu correctament que no cal calcular-ne l’altura; el primer pas de la solució calcula àrea ÷ base, un pas superflu i contradictori. El càlcul no canvia la resposta final, però pot confondre sobre el procediment necessari. | Incidència de contingut confirmada. Correcció proposada, pendent d’autorització: substituir el primer pas de la solució per “Àrea del rectangle (donada): ${area} cm²”, i mantenir els passos del triangle i de la suma. No s’ha modificat el codi, d’acord amb els límits d’aquesta PR. |
+
+**Pendents que no són incidències de codi:** la revisió de les branques i les mostres és estàtica; continuen sense simulació dels fluxos ni validació visual de navegador. Cal conservar aquesta limitació fins que es faci una passada de validació autoritzada.
+
 ### Estat final de verificació i observacions
 
 - **80/80** branques contrastades estàticament amb els vuit generadors actuals.
 - Exemples resolts, errors típics, casos límit i decisió de família documentats per a cada família candidata local.
 - Nivells actius comprovats al codi i proposta N1/N2 presentada sense escriure-la a producció.
 - No s’ha canviat codi, generadors, nivells ni el registre oficial; tampoc s’han creat workflows ni s’han executat proves noves.
-- Una discrepància de guia/solució a `arees:8` queda documentada a l’apartat del bloc 3 i no s’ha corregit al codi.
+- Les tres observacions de distractors/resposta i unitat d’arrodoniment s’han tancat per contrast estàtic; la incidència de contingut a `arees:8` està confirmada i té una correcció proposada, encara no aplicada.
 - Les decisions de família són una proposta d’auditoria, no una adopció oficial ni una validació docent.
 
