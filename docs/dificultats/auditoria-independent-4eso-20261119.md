@@ -118,9 +118,8 @@ Els informes previs descriuen suites d’interfície i comprovacions d’oracle,
 
 ## Estat i següents passos
 
-1. Revisar tipus per tipus els tres temes estocàstics etiquetats Batx i decidir quins procediments són nucli curricular de 4t.
-2. Revisar i adoptar el mapa tipus → família de les 624 entrades, sobretot les duplicacions entre ordinari i ampliació i els itineraris A/B.
-3. Decidir si es reubiquen al nucli ordinari els tipus curriculars de correlació, contingència i probabilitat condicionada. Separar aquesta decisió de qualsevol canvi de dificultat.
-4. Completar validació d’interacció i visual en una única passada integrada, si finalment es modifica codi.
+1. Prendre la decisió pedagògica sobre el mapa de famílies de les 624 entrades, especialment les duplicacions entre ordinari i ampliació i els itineraris A/B.
+2. Decidir si es reubiquen al nucli ordinari els tipus curriculars de correlació, contingència i probabilitat condicionada. Separar aquesta decisió de qualsevol canvi de dificultat.
+3. Si s’aprova una proposta concreta de codi, fer una sola validació integrada i una passada visual abans de canviar la PR.
 
 **Cap codi, generador, nivell, examen ni registre oficial ha estat modificat. El mapa cobreix els 624 tipus i passa una comprovació d’IDs sense omissions o duplicats. No s’ha fusionat ni publicat res.**
