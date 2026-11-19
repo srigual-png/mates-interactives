@@ -45,7 +45,7 @@ async function generate() {
             typeof THEORY_PAGES !== 'undefined' ? THEORY_PAGES[topic.id] :
             typeof MI_NAV_THEORY_PAGES !== 'undefined' ? MI_NAV_THEORY_PAGES[topic.id] : topic.theoryPage;
           if (!theory) throw Error('Missing theory mapping: '+topic.id);
-          return {id:topic.id, theory:new URL(theory, location.href).href};
+          return {id:topic.id, bRequired:!!topic.bRequired||topic.scope==='B', theory:new URL(theory, location.href).href};
         });
       });
       page.off('pageerror', onError);
@@ -55,6 +55,7 @@ async function generate() {
           pathToFileURL(path.join(root, e.theory)).href === exam.theory);
         if (matches.length !== 1) throw Error('Ambiguous/missing catalogue mapping: '+practice+' / '+exam.id);
         const params = new URLSearchParams({[practice.startsWith('1eso/')?'tema':'topic']:exam.id, examen:'tema'});
+        if (exam.bRequired && practice.startsWith('4eso/')) params.set('opcio','B');
         matches[0].exam = practice+'?'+params;
       }
     }

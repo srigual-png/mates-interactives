@@ -1519,7 +1519,7 @@ function genPascal4ESO(forceType){
 
 /* ── GENERADOR · BLOC 8: EDUCACIÓ FINANCERA ───────────────── */
 let financera4TypeBag=[];
-function nextFinancera4Type(){if(!financera4TypeBag.length)financera4TypeBag=shuffle(Array.from({length:10},(_,i)=>i+1));return financera4TypeBag.pop()}
+function nextFinancera4Type(){if(!financera4TypeBag.length)financera4TypeBag=shuffle(Array.from({length:11},(_,i)=>i+1));return financera4TypeBag.pop()}
 function moneyStr(x){return fmtNum(x,2)+' €'}
 function genFinancera4ESO(forceType){
   const type=forceType||nextFinancera4Type();
@@ -1611,6 +1611,28 @@ function genFinancera4ESO(forceType){
     question=`Una quantitat de <b>${moneyStr(C)}</b> augmenta un <b>${p}% cada any</b> durant ${years} anys, i cada augment s’aplica sobre el valor de l’any anterior. Quin valor tindrà al final?`;
     guide=['És una variació percentual successiva.','Cada any multipliquem de nou pel factor 1+p/100.','No calculis tots els augments sobre el valor inicial.'];
     solution=[`Factor anual: ${fmtNum(1+p/100,2)}.`,`Factor acumulat en ${years} anys: ${fmtNum(1+p/100,2)}${supDigits(years)} = ${fmtNum(factor,4)}.`,`Valor final = ${C} · ${fmtNum(factor,4)} = <b>${correct}</b>.`];
+  }
+  else if(type===11){
+    const C=shuffle([800,1000,1200,1500,2000])[0],years=shuffle([2,3,4])[0];
+    const scenarios=[
+      {simpleRate:3.5,compoundRate:3.4,fee:8},
+      {simpleRate:3,compoundRate:3.8,fee:6}
+    ];
+    const model=shuffle(scenarios)[0];
+    const simpleFinal=roundTo(C*(1+(model.simpleRate/100)*years),2);
+    const compoundFinal=roundTo(C*Math.pow(1+model.compoundRate/100,years)-model.fee,2);
+    const diff=roundTo(Math.abs(simpleFinal-compoundFinal),2);
+    const winner=simpleFinal>compoundFinal?'A':'B';
+    const winnerText='Opció '+winner;
+    correct=winnerText+' · '+moneyStr(diff)+' més';allowOpen=false;
+    const wrongWinner='Opció '+(winner==='A'?'B':'A')+' · '+moneyStr(diff)+' més';
+    const wrongMargin=moneyStr(roundTo(diff+3,2));
+    const scaledError='Opció '+winner+' · '+wrongMargin+' més';
+    options=shuffle([correct,wrongWinner,scaledError,'Costen exactament el mateix']);
+    question=`Es vol invertir <b>${moneyStr(C)}</b> durant <b>${years} anys</b>. L’opció A ofereix interès simple del <b>${fmtNum(model.simpleRate,2)}% anual</b> i no cobra comissió. L’opció B ofereix interès compost del <b>${fmtNum(model.compoundRate,2)}% anual</b> i cobra una comissió inicial de <b>${moneyStr(model.fee)}</b>. Quina opció deixa més capital al final i per quina diferència?`;
+    guide=['Calcula el capital final de cada opció per al mateix termini.','A l’opció A, aplica l’interès simple al capital inicial; a B, aplica el factor anual repetidament i resta la comissió.','Compara els capitals finals nets i indica la diferència. No n’hi ha prou de comparar les taxes.'];
+    solution=[`Opció A: ${moneyStr(C)} · (1 + ${fmtNum(model.simpleRate/100,4)} · ${years}) = ${moneyStr(simpleFinal)}.`,`Opció B: ${moneyStr(C)} · (1 + ${fmtNum(model.compoundRate/100,4)})^${years} − ${moneyStr(model.fee)} = ${moneyStr(compoundFinal)}.`,`Diferència: |${moneyStr(simpleFinal)} − ${moneyStr(compoundFinal)}| = ${moneyStr(diff)}.`,`Per tant, deixa més capital l’<b>${winnerText}</b>, amb ${moneyStr(diff)} més.`];
+    openHint='Selecciona l’opció més rendible i la diferència final.';
   }
   return {topicId:'financera4t',type,course:'4t',question,correct,alts,options,guide,solution,openHint,allowOpen};
 }

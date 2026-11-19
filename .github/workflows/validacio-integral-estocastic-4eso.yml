@@ -1,0 +1,111 @@
+name: Validació integrada MI · 4t ESO
+
+on:
+  pull_request:
+    paths:
+      - '4eso/sentit-estocastic.html'
+      - '4eso/sentit-numeric.html'
+      - '4eso/sentit-espacial.html'
+      - '4eso/teoria/espacial/**'
+      - 'assets/css/examen-tema.css'
+      - 'scripts/test-itinerari-espacial-4eso.cjs'
+      - 'comprova-regressio-espacial-4eso.cjs'
+      - 'comprova-examens-espacial-4eso.cjs'
+      - 'scripts/genera-index-cerca.cjs'
+      - 'scripts/genera-examens-cerca.cjs'
+      - 'assets/data/index-cerca.json'
+      - 'assets/data/index-cerca-local.js'
+      - 'scripts/fitxes/**'
+      - 'assets/js/dificultat-mi.js'
+      - 'assets/js/dificultat-modes.js'
+      - 'assets/js/dificultat-quotes.js'
+      - '4eso/teoria/estocastic/**'
+      - 'comprova-analitica-estocastic-4eso.cjs'
+      - 'comprova-examens-estocastic-4eso.cjs'
+      - 'comprova-regressio-estocastic-4eso.cjs'
+      - 'comprova-ubicacio-estocastic-4eso.cjs'
+      - 'comprova-practica-estocastic-4eso.cjs'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mi-integral-4eso-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validacio-integral:
+    name: Pràctica, generadors, examen i accessibilitat
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+      - name: Obtenir el codi de la PR
+        uses: actions/checkout@v4
+
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Instal·lar Playwright i Chromium
+        run: |
+          npm install --no-save --no-package-lock --ignore-scripts playwright@1.56.1
+          npx playwright install chromium
+
+      - name: Comprovar sintaxi i contingut del nucli
+        run: |
+          node scripts/comprova-inline-js-html.cjs 4eso/sentit-estocastic.html
+          node --check comprova-analitica-estocastic-4eso.cjs
+          node --check comprova-examens-estocastic-4eso.cjs
+          node --check comprova-regressio-estocastic-4eso.cjs
+          node --check comprova-ubicacio-estocastic-4eso.cjs
+          node --check comprova-practica-estocastic-4eso.cjs
+          node --check scripts/test-itinerari-espacial-4eso.cjs
+          node --check comprova-regressio-espacial-4eso.cjs
+          node --check comprova-examens-espacial-4eso.cjs
+          node --check scripts/genera-index-cerca.cjs
+          node --check scripts/genera-examens-cerca.cjs
+
+      - name: Verificar generadors, mapa i examen general
+        run: node comprova-regressio-estocastic-4eso.cjs
+
+      - name: Validar tipus, nivells i motor de fitxes de 4t
+        run: node scripts/fitxes/test-4eso.cjs
+
+      - name: Verificar itinerari A/B del sentit espacial
+        run: node scripts/test-itinerari-espacial-4eso.cjs
+
+      - name: Contrastar generadors espacials A i B
+        run: |
+          node comprova-regressio-espacial-4eso.cjs A
+          node comprova-regressio-espacial-4eso.cjs B
+
+      - name: Simular exàmens de tema en Matemàtiques A i B
+        run: |
+          node comprova-examens-estocastic-4eso.cjs A
+          node comprova-examens-estocastic-4eso.cjs B
+
+      - name: Simular exàmens espacials complets A i B
+        run: |
+          node comprova-examens-espacial-4eso.cjs A
+          node comprova-examens-espacial-4eso.cjs B
+
+      - name: Comprovar accés a examen en ordinador i mòbil
+        run: node comprova-ubicacio-estocastic-4eso.cjs
+
+      - name: Simular la pràctica guiada i les respostes en tots els blocs
+        run: node comprova-practica-estocastic-4eso.cjs
+
+      - name: Comprovar esdeveniments d’analítica dels exàmens
+        run: node comprova-analitica-estocastic-4eso.cjs
+
+      - name: Publicar captures temporals de revisió de la PR
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: captures-visuals-4eso
+          path: artifacts/visual-4eso/*.png
+          if-no-files-found: error
+          retention-days: 3

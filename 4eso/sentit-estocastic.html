@@ -172,7 +172,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
   <div class="home-header"><h2>📊 Sentit Estocàstic</h2><p>4t d'ESO · Dades, estadística bivariant, mostreig, inferència i probabilitat</p></div>
   <div class="intro-card">
     A <strong>4t d'ESO</strong> l'estadística fa un pas important: ja no només descrivim una variable, sinó que comencem a <strong>estudiar dues variables alhora, comparar distribucions, interpretar possibles relacions i valorar la qualitat dels estudis</strong>. També aprendrem a decidir fins on arriben realment les conclusions i quan una mostra és representativa o esbiaixada.<br><br>
-    Ja estan actius els <strong>Blocs 1–8</strong>: des de l'organització i comparació de dades fins a la <strong>probabilitat en experiments simples i compostos</strong>, passant pels <strong>núvols de punts</strong>, la <strong>regressió lineal</strong>, l'<strong>espai mostral</strong> i les <strong>tècniques de recompte</strong>. El recorregut principal del Sentit Estocàstic de 4t queda així complet.<br><br>També pots treballar l’<strong>Ampliació · Prepara Batxillerat</strong>: <strong>A · Taules de contingència</strong>, <strong>B · Correlació i regressió avançada</strong>, <strong>C · Probabilitat condicionada i independència</strong> i <strong>D · Bayes i primers models probabilístics</strong>. Són blocs opcionals i no compten en el progrés obligatori ni en el Mode Examen de 4t.<br><br>
+    Ja estan actius els <strong>Blocs 1–11</strong>: inclouen taules de contingència, interpretació del coeficient de correlació i probabilitat condicionada, juntament amb anàlisi de dades, regressió, recompte i experiments compostos.<br><br>La <strong>probabilitat de Bayes amb taxes base i falsos positius</strong> queda com a ampliació opcional, fora del progrés obligatori i del Mode Examen de 4t.<br><br>
     Les pistes orienten el procediment sense donar la resposta. Quan hi ha un error, la correcció mostra el <strong>raonament pas a pas</strong>, indica què convé revisar i l'error queda guardat per poder-lo repassar.
   </div>
   <div class="all-theory-wrap"><a class="theory-page-link" href="teoria/estocastic/index.html">📚 Tota la teoria del Sentit Estocàstic</a></div>
@@ -410,8 +410,8 @@ const TEORIA={
     exampleTitle:'Exemple: urna sense reemplaçament',
     exampleSteps:['Una urna té 3 boles vermelles i 2 blaves.','Si volem la probabilitat de treure primer vermella i després blava, el primer pas és P(V) = <b>3/5</b>.','Després de treure una vermella, queden 4 boles, de les quals 2 són blaves, així que P(B després de V) = <b>2/4</b>.','La probabilitat del camí és (3/5)·(2/4) = <b>3/10</b>.','Sense reemplaçament, les probabilitats canvien d’un pas al següent.']  },
   contingenciaBatx4t:{
-    title:'Ampliació A · Taules de contingència',
-    text:'Les <b>taules de contingència</b> organitzen conjuntament dues variables categòriques. A més de llegir les freqüències de cada cel·la, podem estudiar els <b>totals marginals</b> i comparar percentatges calculats respecte d’una fila, una columna o el total general. És un pont directe cap a la probabilitat condicionada de Batxillerat.',
+    title:'Bloc 9 · Taules de contingència',
+    text:'Les <b>taules de contingència</b> organitzen conjuntament dues variables categòriques. A més de llegir les freqüències de cada cel·la, podem estudiar els <b>totals marginals</b> i comparar percentatges calculats respecte d’una fila, una columna o el total general. És una base per interpretar probabilitats condicionades a partir de dades bidimensionals.',
     formulas:[
       '<b>Freqüència conjunta:</b> nombre d’individus que compleixen simultàniament dues condicions.',
       '<b>Freqüència marginal:</b> total d’una fila o d’una columna.',
@@ -426,7 +426,7 @@ const TEORIA={
     exampleSteps:['En una taula hi ha 12 alumnes de 4t A que practiquen esport.','Si 4t A té 20 alumnes, dins de 4t A representen 12/20 = <b>60%</b>.','Si hi ha 30 esportistes en total, entre els esportistes representen 12/30 = <b>40%</b>.','Si l’estudi té 50 alumnes, sobre el total representen 12/50 = <b>24%</b>.','La cel·la és la mateixa; el que canvia és el <b>grup de referència</b>.']
   },
   correlacioBatx4t:{
-    title:'Ampliació B · Correlació i regressió avançada',
+    title:'Bloc 10 · Correlació i relació entre variables',
     text:'El <b>coeficient de correlació lineal r</b> resumeix la direcció i la força d’una relació lineal. Pren valors entre −1 i 1. En aquesta ampliació l’objectiu és <b>interpretar</b> r i relacionar-lo amb el núvol de punts, no calcular-lo manualment amb fórmules llargues.',
     formulas:[
       '<b>−1 ≤ r ≤ 1</b>.',
@@ -442,7 +442,7 @@ const TEORIA={
     exampleSteps:['Si r = <b>0,92</b>, la relació lineal és forta i positiva.','Si r = <b>−0,85</b>, és forta i negativa.','Si r = <b>0,08</b>, la relació lineal és molt feble.','Tot i així, r proper a 0 no descarta una relació corba.','Per això cal combinar <b>núvol de punts + coeficient r</b>.']
   },
   condicionadaBatx4t:{
-    title:'Ampliació C · Probabilitat condicionada i independència',
+    title:'Bloc 11 · Probabilitat condicionada i independència',
     text:'La <b>probabilitat condicionada</b> respon preguntes del tipus “quina probabilitat té A <b>sabent que</b> ha passat B?”. Això vol dir que l’espai de referència canvia: ja no mirem tots els casos possibles, sinó només aquells en què B és certa. Aquesta idea és clau per entendre també la <b>independència</b> de successos.',
     formulas:[
       '<b>P(A|B)</b> es llegeix “probabilitat d’A sabent B”.',
@@ -458,7 +458,7 @@ const TEORIA={
     exampleSteps:['En una taula hi ha 12 alumnes de 4t A que practiquen esport i 20 alumnes a 4t A en total.','La probabilitat que un alumne practiqui esport <b>sabent que és de 4t A</b> és 12/20 = <b>0,6</b>.','Això és <b>P(esport | 4t A)</b>.','El denominador no és el total general, sinó només el grup “4t A”.','Condicionar vol dir mirar el fenomen <b>dins d’un subconjunt</b>.']
   },
   bayesBatx4t:{
-    title:'Ampliació D · Bayes i primers models probabilístics',
+    title:'Ampliació A · Bayes i models probabilístics',
     text:'Aquesta ampliació prepara dues idees importants de Batxillerat. La primera és el raonament de <b>Bayes</b>, que ajuda a invertir condicions i respondre preguntes del tipus “si ha passat B, quina probabilitat hi ha que en realitat passi A?”. La segona és la idea de <b>models de repetició</b>: repetir un mateix experiment independent moltes vegades i estudiar la probabilitat d’obtenir un cert nombre d’èxits.',
     formulas:[
       '<b>P(A|B)</b> i <b>P(B|A)</b> no són, en general, la mateixa probabilitat.',
@@ -871,10 +871,10 @@ const TOPICS=[
  {id:'regressioPrediccions4t',name:'6. Regressió lineal, prediccions i causalitat',icon:'📈',short:'Recta d’ajust, pendent, interpolació, extrapolació i límits de les prediccions.',theoryKey:'regressioPrediccions4t',theoryPage:'teoria/estocastic/regressio-lineal.html',gen:genRegressioPrediccions4,scope:'AB',exam4t:true},
  {id:'espaiMostralRecompte4t',name:'7. Atzar, espai mostral i tècniques de recompte',icon:'🎲',short:'Successos, regla de Laplace, recompte sistemàtic i principi multiplicatiu.',theoryKey:'espaiMostralRecompte4t',theoryPage:'teoria/estocastic/espai-mostral.html',gen:genEspaiMostralRecompte4,scope:'AB',exam4t:true},
  {id:'experimentsCompostos4t',name:'8. Probabilitat en experiments compostos',icon:'🌳',short:'Dos passos, arbres, amb i sense reemplaçament i comparació de probabilitats.',theoryKey:'experimentsCompostos4t',theoryPage:'teoria/estocastic/experiments-compostos.html',gen:genExperimentsCompostos4,scope:'AB',exam4t:true},
- {id:'contingenciaBatx4t',name:'A. Taules de contingència',icon:'🧮',short:'Freqüències conjuntes i marginals, percentatges condicionats i grup de referència.',theoryKey:'contingenciaBatx4t',theoryPage:'teoria/estocastic/contingencia.html',gen:genContingenciaBatx4,scope:'AB',exam4t:false,isExpansion:true},
- {id:'correlacioBatx4t',name:'B. Correlació i regressió avançada',icon:'📉',short:'Coeficient r, força i direcció de la correlació, no-linealitat i valors atípics.',theoryKey:'correlacioBatx4t',theoryPage:'teoria/estocastic/correlacio-regressio.html',gen:genCorrelacioBatx4,scope:'AB',exam4t:false,isExpansion:true},
- {id:'condicionadaBatx4t',name:'C. Probabilitat condicionada i independència',icon:'🔗',short:'P(A|B), canvi de denominador, successos independents i dependents.',theoryKey:'condicionadaBatx4t',theoryPage:'teoria/estocastic/probabilitat-condicionada.html',gen:genCondicionadaBatx4,scope:'AB',exam4t:false,isExpansion:true},
- {id:'bayesBatx4t',name:'D. Bayes i primers models probabilístics',icon:'🧠',short:'Probabilitats inverses, falsos positius, almenys un èxit i primers models binomials.',theoryKey:'bayesBatx4t',theoryPage:'teoria/estocastic/bayes-models.html',gen:genBayesBatx4,scope:'AB',exam4t:false,isExpansion:true}
+ {id:'contingenciaBatx4t',name:'9. Taules de contingència',icon:'🧮',short:'Freqüències conjuntes i marginals, percentatges condicionats i lectura de dades bidimensionals.',theoryKey:'contingenciaBatx4t',theoryPage:'teoria/estocastic/contingencia.html',gen:genContingenciaBatx4,scope:'AB',exam4t:true},
+ {id:'correlacioBatx4t',name:'10. Correlació i relació entre variables',icon:'📉',short:'Coeficient r, signe i intensitat, valors atípics, no-linealitat i causalitat.',theoryKey:'correlacioBatx4t',theoryPage:'teoria/estocastic/correlacio-regressio.html',gen:genCorrelacioBatx4,scope:'AB',exam4t:true},
+ {id:'condicionadaBatx4t',name:'11. Probabilitat condicionada i independència',icon:'🔗',short:'P(A|B), canvi de denominador, successos independents i dependents.',theoryKey:'condicionadaBatx4t',theoryPage:'teoria/estocastic/probabilitat-condicionada.html',gen:genCondicionadaBatx4,scope:'AB',exam4t:true},
+ {id:'bayesBatx4t',name:'Ampliació · Bayes i models probabilístics',icon:'🧠',short:'Probabilitats inverses amb taxa base i primers models binomials.',theoryKey:'bayesBatx4t',theoryPage:'teoria/estocastic/bayes-models.html',gen:genBayesBatx4,scope:'AB',exam4t:false,isExpansion:true}
 ];
 window.miTaskDifficulty=MIDifficulty.attach({course:'4eso',sense:'estocastic',topics:TOPICS,option:()=>typeof MATH_OPTION!=='undefined'?MATH_OPTION:null,examFilter:t=>typeof isExamTopic==='function'?isExamTopic(t):true});
 
@@ -989,7 +989,7 @@ function renderHome(){
   const mainTopics=TOPICS.filter(t=>!t.isExpansion);
   const expansionTopics=TOPICS.filter(t=>t.isExpansion);
   function head(icon,title,note,cls,first){return '<div class="p6-section-head '+(first?'p6-first ':'')+'"><div class="p6-section-title '+(cls||'')+'">'+icon+' '+title+'</div><div class="p6-section-note">'+note+'</div></div>';}
-  let html=head('📘','Continguts de 4t d\'ESO','Blocs 1–8: dades, relacions entre variables, mostreig, regressió, recompte i probabilitat composta.','',true);
+  let html=head('📘','Continguts de 4t d\'ESO','Blocs 1–11: dades, representació bidimensional, regressió, mostreig, recompte, probabilitat condicionada i experiments compostos.','',true);
   mainTopics.forEach(t=>{
     const i=TOPICS.indexOf(t),done=state.done.includes(t.id);
     html+='<div class="topic-card '+(done?'done ':'')+('')+'" '+('onclick="selectTopic('+i+')"')+'>'
@@ -997,7 +997,7 @@ function renderHome(){
       +'<span class="topic-badge '+(done?'badge-done':'badge-active')+'">'+(done?'✓ Fet':'Practicar')+'</span></div>';
   });
   if(expansionTopics.length){
-    html+=head('⭐','Ampliació · prepara Batxillerat','A–D són blocs opcionals. No compten en el progrés obligatori ni entren al Mode Examen de 4t.','p6-extension');
+    html+=head('⭐','Ampliació · prepara Batxillerat','Bayes i els primers models binomials són opcionals; no compten en el progrés obligatori ni entren al Mode Examen de 4t.','p6-extension');
     expansionTopics.forEach(t=>{
       const i=TOPICS.indexOf(t),done=state.done.includes(t.id);
       html+='<div class="topic-card extension-card '+(done?'done ':'')+('')+'" '+('onclick="selectTopic('+i+')"')+'>'
