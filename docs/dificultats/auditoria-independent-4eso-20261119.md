@@ -101,11 +101,11 @@ La promoció és de contingut, no de dificultat: el mapa de 4t continua sense N3
 
 ## Matriu d’adopció acordada després de la revisió crítica
 
-La revisió crítica adopta el mapa de famílies com a classificació de treball i les fronteres curriculars següents. S’accepta que una família contingui variants N1 i N2 quan la demanda procedimental canvia; compartir família no obliga a compartir nivell. Després de revisar els generadors de les famílies mixtes, s’han adoptat a la branca dues reassignacions; la resta de nivells no s’ha modificat.
+La revisió crítica adopta el mapa de famílies com a classificació de treball i les fronteres curriculars següents. S’accepta que una família contingui variants N1 i N2 quan la demanda procedimental canvia; compartir família no obliga a compartir nivell. S’han aplicat dues reassignacions a `patrons4t` i s’ha afegit una família N3 financera; la resta dels nivells existents es manté.
 
 | Sentit | Decisió adoptada | Límits i pendents |
 | --- | --- | --- |
-| Numèric | Mantenir la frontera entre nucli i ampliacions i el mapa de famílies. | Conservar els nivells actuals (59 N1 / 21 N2 / 0 N3); no crear N3 per quota. |
+| Numèric | Mantenir la frontera entre nucli i ampliacions i incorporar F7: comparació neta de productes financers (financera4t:type 11) a N3. | Queda 59 N1 / 21 N2 / 1 N3. És una família nova justificada pel procediment; no s’apugen els tipus previs per quota. |
 | Mesura | Adoptar el mapa de famílies i comptar `mesuresIndirectes4t:type 10` i `modelitzacioAmpD:type 2` com una família N3 amb variants. | La segona entrada és ampliació; mantenir una sola família N3 ordinària. |
 | Algebraic | Mantenir la frontera curricular ordinari/ampliació i el mapa com a classificació de treball. | Nivells actualitzats a (53 / 36 / 0): `patrons4t:type 2` N2→N1 i `patrons4t:type 10` N1→N2. La resta es manté; no crear N3 per quota. |
 | Espacial | Mantenir els 8 blocs comuns; incloure al recorregut B els tres blocs A–C que despleguen els sabers [AMP] de rectes. Mantenir D com a aprofundiment opcional. | La divisió A/B és el criteri organitzatiu del projecte, perquè XTEC marca [AMP] però no assigna aquests continguts a una opció concreta. Nivells: 60 / 21 / 0 al nucli comú; 29 / 13 / 0 als blocs [AMP]. |
@@ -137,8 +137,8 @@ Aquests ajustos inclouen dues reassignacions actives a `assets/js/dificultat-mi.
 
 | Tipus de revisió | Què queda verificat en aquesta passada |
 | --- | --- |
-| Estàtica | Pàgines, generadors declarats, recompte de tipus, registres de dificultat i concordança amb el mapa actiu: sí. |
-| Mostres i simulació | S’han llegit les mostres i metadades ja desades als JSON. S’hi ha afegit una simulació de pràctica amb Playwright; no s’han tornat a generar grans lots de mostres. |
+| Estàtica | Pàgines, generadors declarats, recompte de tipus, registres de dificultat i concordança amb el mapa actiu: sí. El tipus financer 11 s’ha incorporat al registre i al generador. |
+| Mostres i simulació | Les mostres empíriques i simulacions prèvies no inclouen el nou tipus 11. No s’ha executat una validació integrada del generador financer després d’afegir-lo; la seva verificació queda pendent. |
 | Pràctica | La pàgina no té selectors separats anomenats «guiat» i «autònom». S’han simulat els dos formats disponibles (4 opcions i resposta oberta), les pistes disponibles i la correcció pas a pas després d’un error: 154 comprovacions als 11 blocs. Les pistes s’han mostrat en 22 casos i s’ha verificat resposta oberta real en 8 casos; els exercicis que no admeten resposta oberta mantenen les opcions. |
 | Examen | Simulació amb Playwright dels 11 blocs ordinaris, 12 preguntes per tema en Matemàtiques A i B, lliurament, puntuació, reinici i retorn a pràctica. |
 | Validació responsive i visual | S’han capturat i revisat manualment 44 pantalles: 11 blocs × 2 formats seleccionats × escriptori i mòbil. No s’hi veu cap desbordament horitzontal, retall de taules/gràfics ni control de resposta inaccessible. Observacions menors: alguns títols llargs s’abreugen amb punts suspensius a la barra de navegació mòbil, i el teclat matemàtic ocupa dues files quan no hi cap en una. |
