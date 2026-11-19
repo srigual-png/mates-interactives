@@ -693,4 +693,3 @@ S’han contrastat estàticament les observacions que quedaven obertes; no s’h
 - S’ha corregit només el text del primer pas de solució a arees:8. No s’ha canviat la lògica de generació, cap nivell ni el registre oficial; no s’han creat workflows ni s’han executat proves noves.
 - Les tres observacions de distractors/resposta i unitat d’arrodoniment s’han tancat per contrast estàtic; la correcció de contingut d’arees:8 s’ha aplicat.
 - Les decisions de família són una proposta d’auditoria, no una adopció oficial ni una validació docent.
-
