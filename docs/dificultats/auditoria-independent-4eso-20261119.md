@@ -4,9 +4,9 @@
 
 He contrastat de nou els cinc sentits de 4t amb els HTML i generadors actuals, el mapa de nivells actiu, els registres de revisió i mostres desades, i les orientacions curriculars oficials de la Generalitat. No he pres els informes previs com a prova suficient: alguns es contradiuen sobre si els blocs de 4t estaven pendents o ja tancats.
 
-**Resultat:** el cens de tipus i el mapa tècnic de nivells són coherents, però no recomano donar l’auditoria de 4t per tancada ni adoptar canvis de nivell encara. Hi ha una discrepància curricular clara a estocàstica: procediments de correlació i probabilitat condicionada figuren només en temes etiquetats com a ampliació Batx, mentre que les orientacions de 4t els inclouen al currículum ordinari. A mesura també hi ha dues entrades N3 que són variants d’una mateixa família; compten com una sola família de dificultat alta.
+**Resultat:** el cens de tipus, el mapa de famílies i els nivells tècnics són coherents. L’auditoria va detectar una discrepància curricular a estocàstica; en aquesta branca he promogut a contingut ordinari les taules de contingència, la correlació i la probabilitat condicionada. Bayes amb taxes base continua com a ampliació. Les dues entrades N3 de mesura són variants d’una mateixa família i compten com una sola família alta.
 
-La comparació tipus → família dels 624 tipus ja està documentada a [mapa-tipus-familia-4eso-20261119.md](mapa-tipus-familia-4eso-20261119.md). Aquesta és una proposta independent de classificació i cobertura; no canvia nivells, generadors, temes actius ni registres oficials.
+La comparació tipus → família dels 624 tipus és a [mapa-tipus-familia-4eso-20261119.md](mapa-tipus-familia-4eso-20261119.md). El canvi altera l’accés als tres temes estocàstics i la seva inclusió al Mode Examen; conserva els generadors, els tipus d’exercici i els nivells actius.
 
 ## Abast i recompte
 
@@ -18,8 +18,8 @@ He llegit les cinc pàgines de 4t, el mapa compartit de nivells i els deu fitxer
 | Mesura | 8 / 4 | 88 | 44 | 63 / 24 / 1 | 30 / 13 / 1 |
 | Algebraic | 8 / 4 | 89 | 40 | 52 / 37 / 0 | 26 / 14 / 0 |
 | Espacial | 8 / 4 | 81 | 42 | 60 / 21 / 0 | 29 / 13 / 0 |
-| Estocàstic | 8 / 4 | 80 | 40 | 51 / 29 / 0 | 21 / 19 / 0 |
-| **Total** | **40 / 20** | **418** | **206** | **285 / 132 / 1** | **142 / 63 / 1** |
+| Estocàstic | 11 / 1 | 110 | 10 | 69 / 41 / 0 | 3 / 7 / 0 |
+| **Total** | **43 / 17** | **448** | **176** | **303 / 144 / 1** | **124 / 51 / 1** |
 
 Cada identificador tema/tipus és un registre tècnic, no una família pedagògica independent. Per tant, 624 tipus no vol dir 624 procediments diferents.
 
@@ -65,38 +65,18 @@ La distribució és 60 N1 / 21 N2 / 0 N3 al nucli i 29 / 13 / 0 a les ampliacion
 
 **Dictamen:** alineació general plausible; cal mantenir visibles els itineraris A/B i la manca actual de famílies N3.
 
-### Sentit estocàstic — discrepància curricular prioritària
+### Sentit estocàstic — canvi curricular aplicat a la branca
 
-Les orientacions oficials de 4t situen al curs ordinari:
-- la interpretació de distribucions bidimensionals;
-- l’organització en taules de contingència;
-- els núvols de punts i la recta de regressió;
-- el concepte i la utilitat del coeficient de correlació lineal;
-- l’anàlisi de correlació, regressió i causalitat;
-- experiments simples i compostos, probabilitats dependents i independents, i probabilitat condicionada.
+Les orientacions oficials de 4t inclouen la interpretació de distribucions bidimensionals, les taules de contingència, els núvols de punts i la regressió lineal, el concepte i la utilitat de (r), l’anàlisi de correlació/regressió/causalitat i la probabilitat condicionada amb esdeveniments dependents i independents.
 
-Ara bé, els generadors presentsen `contingenciaBatx4t`, `correlacioBatx4t` i `condicionadaBatx4t` com a ampliacions Batx, fora dels exàmens ordinaris. Les mostres confirmen que no són només contingut avançat:
-- `correlacioBatx4t` pregunta pel signe i la intensitat de (r), la interpretació de (r\approx0), i què permet concloure sobre correlació i causalitat.
-- `condicionadaBatx4t` inclou càlculs bàsics com (P(\text{esport}\mid4t\ A)), dependència per extracció sense reemplaçament i independència d’esdeveniments.
-- `contingenciaBatx4t` inclou freqüències conjuntes/marginals i percentatges condicionats per fila o columna.
+La versió anterior presentava `contingenciaBatx4t`, `correlacioBatx4t` i `condicionadaBatx4t` com a ampliacions excloses del progrés obligatori i de l’examen. A la branca d’aquesta PR, els he convertit en els blocs ordinaris 9–11:
+- **Bloc 9 · Taules de contingència:** freqüències conjuntes/marginals i percentatges sobre el total, la fila o la columna. Es conserven 7 N1 i 3 N2.
+- **Bloc 10 · Correlació i relació entre variables:** interpretació de signe/intensitat de (r), no-linealitat, valors atípics i correlació vs causalitat. Es conserven 6 N1 i 4 N2.
+- **Bloc 11 · Probabilitat condicionada i independència:** lectura de (P(A\mid B)), canvi de denominador i independència/dependència. Es conserven 5 N1 i 5 N2.
 
-Els temes ordinaris actuals sí que cobreixen lectura de taules, associació qualitativa, recta de regressió, interpolació/extrapolació i experiments compostos. Però les mostres ordinàries de `nuvolsRelacio4t` i `regressioPrediccions4t` no contenen la interpretació de (r), i `experimentsCompostos4t` no formula probabilitats condicionades amb notació o denominador del grup de referència.
+Els tres blocs ara compten en el progrés obligatori i es poden seleccionar al Mode Examen. **No s’han canviat els generadors, els 30 tipus d’exercici ni cap nivell.** Els blocs de Bayes amb taxa base i falsos positius continuen opcionals; els exercicis simples de monedes, daus i assaigs que hi apareixen se solapen amb les famílies ordinàries i no compten com a famílies noves.
 
-**Proposta per decidir abans de tocar codi:** separar cada generador Batx en dues capes:
-1. **Nucli 4t ordinari:** interpretació bàsica del coeficient (r), causalitat vs correlació, lectures de probabilitat condicionada i freqüències/percentatges condicionats en taules, i independència/dependència en casos simples.
-2. **Ampliació:** inferència Bayesiana mèdica amb prevalença i falsos positius quan exigeixi una modelització de diversos passos; tècniques formals o casos deliberadament no lineals que vagin més enllà del concepte i utilitat bàsics.
-
-Aquesta separació podria donar lloc a variants dins dels temes ordinaris existents o a un tema ordinari nou si no hi caben sense barrejar procediments. **No proposo canviar ara els nivells actius**: la promoció curricular i el nivell de dificultat són eixos separats.
-
-En la lectura tipus per tipus d’aquestes quatre branques, la proposta preliminar és:
-- `correlacioBatx4t`: els 10 tipus interpreten el coeficient, els límits de (r), valors atípics o la relació amb regressió/causalitat; contingut ordinari de 4t, distribuït com està ara en 6 N1 i 4 N2.
-- `condicionadaBatx4t`: els 10 tipus treballen el denominador condicionat, dependència/independència o (P(A\mid B)); contingut ordinari, amb la distribució actual 5 N1 i 5 N2.
-- `contingenciaBatx4t`: els 10 tipus són lectura, freqüència conjunta/marginal o percentatge condicionat en taules; contingut ordinari, amb 7 N1 i 3 N2 actuals.
-- `bayesBatx4t`: tipus 4–6 i 8 se solapen amb el recompte i la probabilitat de monedes/daus/assaigs que ja apareixen a `experimentsCompostos4t`; no els comptaria com a famílies noves. Tipus 1, 7 i 9 són conceptes bàsics de condicionament/Bernoulli. Tipus 2, 3 i 10 afegeixen una reconstrucció de la taxa base amb falsos positius; són bons candidats a N2 contextual del nucli si s’expressen amb taula o arbre, no motiu per etiquetar automàticament tot el tema com a Batx.
-- Cal deduplicar els problemes amb taula de contingència i probabilitat condicionada entre `contingenciaBatx4t` i `condicionadaBatx4t`, i explicitar la frontera entre lectura qualitativa de núvols (`nuvolsRelacio4t`), interpretació de (r) i ús del model de regressió.
-
-Això és una proposta d’encaix curricular per a la revisió; no s’ha canviat la visibilitat dels tipus ni el registre oficial.
-
+La promoció és de contingut, no de dificultat: el mapa de 4t continua sense N3 a numèric, algebraic, espacial i estocàstic; no s’han apujat nivells per completar quotes.
 ## Famílies i dificultat
 
 - No hi ha famílies N3 als sentits numèric, algebraic, espacial ni estocàstic amb el mapa actual.
@@ -118,8 +98,7 @@ Els informes previs descriuen suites d’interfície i comprovacions d’oracle,
 
 ## Estat i següents passos
 
-1. Prendre la decisió pedagògica sobre el mapa de famílies de les 624 entrades, especialment les duplicacions entre ordinari i ampliació i els itineraris A/B.
-2. Decidir si es reubiquen al nucli ordinari els tipus curriculars de correlació, contingència i probabilitat condicionada. Separar aquesta decisió de qualsevol canvi de dificultat.
-3. Si s’aprova una proposta concreta de codi, fer una sola validació integrada i una passada visual abans de canviar la PR.
+1. Revisar la proposta d’encaix curricular i de famílies de la PR #66; no he modificat el registre oficial de nivells.
+2. Fer una validació integrada dels modes i una passada visual abans de considerar el canvi llest per adoptar. No s’han executat proves ni workflows nous en aquesta passada.
 
-**Cap codi, generador, nivell, examen ni registre oficial ha estat modificat. El mapa cobreix els 624 tipus i passa una comprovació d’IDs sense omissions o duplicats. No s’ha fusionat ni publicat res.**
+**A la branca de la PR #66 s’han actualitzat les etiquetes de progrés/examen, el recorregut de teoria i el text explicatiu. No s’ha modificat cap generador, nivell actiu o registre oficial. El mapa cobreix 624 tipus sense omissions ni duplicacions d’IDs. La PR continua Draft, sense fusionar ni publicar.**
