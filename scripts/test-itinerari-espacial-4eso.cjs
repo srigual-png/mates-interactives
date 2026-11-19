@@ -2,6 +2,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const {chromium}=require('playwright');
+const {generate:generateSearchIndex}=require('./genera-index-cerca.cjs');
 
 const url='file:///'+path.resolve('4eso/sentit-espacial.html').replace(/\\/g,'/');
 const core=['figures4t','vectors4t','components4t','operacionsVectors4t','coordenadesVectors4t','homotecies4t','geometriaFuncions4t','regions4t'];
@@ -67,6 +68,11 @@ const extensionD='geometriaAnaliticaAmpD';
     }
     const catalog=JSON.parse(fs.readFileSync('assets/data/index-cerca.json','utf8'));
     const spatial=catalog.filter(e=>e.course===4&&e.sense==='Sentit espacial');
+    const generated=generateSearchIndex({write:false}).entries
+      .filter(e=>e.course===4&&e.sense==='Sentit espacial');
+    const normalize=e=>({title:e.title,theory:e.theory,modes:e.modes,practice:e.practice});
+    assert.deepEqual(generated.map(normalize),spatial.map(normalize),
+      'El generador i l’índex estàtic han de coincidir per als itineraris espacials');
     assert.equal(spatial.length,12,'El cercador ha de tenir vuit blocs comuns, A-C i D');
     const searchableExams=spatial.filter(e=>e.exam);
     const getTopic=e=>new URL(e.exam,'https://mi.invalid').searchParams.get('topic');
