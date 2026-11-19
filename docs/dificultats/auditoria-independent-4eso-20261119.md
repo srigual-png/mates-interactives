@@ -6,7 +6,7 @@ He contrastat de nou els cinc sentits de 4t amb els HTML i generadors actuals, e
 
 **Resultat:** el cens de tipus, el mapa de famílies i els nivells tècnics són coherents. L’auditoria va detectar una discrepància curricular a estocàstica; en aquesta branca he promogut a contingut ordinari les taules de contingència, la correlació i la probabilitat condicionada. Bayes amb taxes base continua com a ampliació. Les dues entrades N3 de mesura són variants d’una mateixa família i compten com una sola família alta. Després del contrast procedimental, s’han aplicat a la branca dues reassignacions a `patrons4t`: el tipus 2 passa a N1 i el tipus 10 a N2.
 
-La comparació tipus → família dels 624 tipus és a [mapa-tipus-familia-4eso-20261119.md](mapa-tipus-familia-4eso-20261119.md). El canvi altera l’accés als tres temes estocàstics i la seva inclusió al Mode Examen; conserva els generadors, els tipus d’exercici i els nivells actius.
+La comparació tipus → família dels 624 tipus és a [mapa-tipus-familia-4eso-20261119.md](mapa-tipus-familia-4eso-20261119.md). El canvi curricular estocàstic altera l’accés als tres temes i la seva inclusió al Mode Examen; conserva els generadors, els tipus d’exercici i els nivells estocàstics. Les dues reassignacions algebraiques de `patrons4t` s’expliquen més avall.
 
 ## Abast i recompte
 
@@ -74,7 +74,7 @@ La versió anterior presentava `contingenciaBatx4t`, `correlacioBatx4t` i `condi
 - **Bloc 10 · Correlació i relació entre variables:** interpretació de signe/intensitat de (r), no-linealitat, valors atípics i correlació vs causalitat. Es conserven 6 N1 i 4 N2.
 - **Bloc 11 · Probabilitat condicionada i independència:** lectura de (P(A\mid B)), canvi de denominador i independència/dependència. Es conserven 5 N1 i 5 N2.
 
-Els tres blocs ara compten en el progrés obligatori i es poden seleccionar al Mode Examen. **No s’han canviat els generadors, els 30 tipus d’exercici ni cap nivell.** La validació integrada ha detectat que `correlacioBatx4t` només ofereix quatre tipus diferents de nivell N2 amb enunciat fix; per mantenir 12 preguntes sense duplicar-les, el seu pla d’examen queda en 8 N1 / 4 N2 / 0 N3. És una quota de l’examen, no un canvi de nivell ni una incorporació de N3. Els blocs de Bayes amb taxa base i falsos positius continuen opcionals; els exercicis simples de monedes, daus i assaigs que hi apareixen se solapen amb les famílies ordinàries i no compten com a famílies noves.
+Els tres blocs ara compten en el progrés obligatori i es poden seleccionar al Mode Examen. **Per a la promoció estocàstica no s’han canviat els generadors, els 30 tipus d’exercici ni cap nivell estocàstic.** La validació integrada ha detectat que `correlacioBatx4t` només ofereix quatre tipus diferents de nivell N2 amb enunciat fix; per mantenir 12 preguntes sense duplicar-les, el seu pla d’examen queda en 8 N1 / 4 N2 / 0 N3. És una quota de l’examen, no un canvi de nivell ni una incorporació de N3. Els blocs de Bayes amb taxa base i falsos positius continuen opcionals; els exercicis simples de monedes, daus i assaigs que hi apareixen se solapen amb les famílies ordinàries i no compten com a famílies noves.
 
 La promoció és de contingut, no de dificultat: el mapa de 4t continua sense N3 a numèric, algebraic, espacial i estocàstic; no s’han apujat nivells per completar quotes.
 ## Famílies i dificultat
