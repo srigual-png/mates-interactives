@@ -1,6 +1,6 @@
 # 3r ESO · Sentit numèric · Bloc 1 — Nombres racionals
 
-> Pilot de revisió completa d’un bloc en una sola línia de treball. Estat: en curs. No s’assumeix que calgui afegir N3 si no hi ha un procediment curricular que el justifiqui.
+> Pilot documental de revisió completa d’un bloc. Estat: documentació completada; validació visual/interactiva no acreditada. No s’assumeix que calgui afegir N3 si no hi ha un procediment curricular que el justifiqui.
 
 ## Abast i inventari inicial
 
@@ -11,7 +11,7 @@ Classificació desada a REVIEWED_LEVELS: 7 N1 i 5 N2, cap N3. Revisió-punt3 té
 ## Evidència existent
 
 - docs/dificultats/revisio-3eso-numeric-punt3.json: 12 tipus de racionals amb propostes de nivell, motius i mostres.
-- docs/dificultats/resultats-punt3-3eso-numeric.json: 3.000 mostres registrades per tema, cobertura i selecció d’examen; per racionals indica cobertura 9/5 i selecció 6/6. banksReviewed=0, bankChecks buit i pageErrors buit: no acrediten revisió visual ni de bancs.
+- docs/dificultats/resultats-punt3-3eso-numeric.json: 3.000 mostres registrades per tema, cobertura i selecció d’examen; per racionals indica 9 camins N1 i 5 N2, amb selecció d’examen 6/6. Els 9 camins N1 són els 7 tipus N1 més dues variants N1: `racionals3r:8` quan es cancel·la el parèntesi i `racionals3r:10` quan la diferència és un enter. banksReviewed=0, bankChecks buit i pageErrors buit: no acrediten revisió visual ni de bancs.
 - El resultat simulat no s’ha de comptar com a validació de 3.000 exercicis únics. No repetir execucions sense canvi material de codi o d’oracle.
 
 ## Contrast curricular
@@ -27,7 +27,7 @@ Font oficial: [XTEC, Orientacions curriculars de Matemàtiques per cursos, propo
 5. Revisar modes guiat, autònom i examen amb la millor evidència existent; deixar explícit què és estàtic, simulat o visual.
 6. Si s’apliquen canvis funcionals, executar una sola integració al final i reutilitzar les evidències vigents sobre codi sense canvis.
 
-El resultat d’aquest pilot servirà per fixar una plantilla eficient per als blocs següents. La PR es manté en Draft; sense fusió, publicació ni canvis de producció abans del dictamen complet.
+El resultat d’aquest pilot servirà per fixar una plantilla eficient per als blocs següents. La PR es manté en Draft durant aquesta passada; no inclou fusió, publicació ni canvis de producció.
 
 ## Resultat del pilot: mapa de famílies i nivells
 
@@ -42,13 +42,13 @@ S’han contrastat els 12 tipus del generador amb les mostres i la reclassificac
 | 5 | Suma/resta de fraccions, F4 | N1 | Mateixa família d’operació additiva amb signes i denominadors diferents; no elevar només per signe negatiu. |
 | 6 | Producte o divisió de fraccions, F5 | N1 | Mateixa família de càlcul multiplicatiu amb la divisió com a variant de recíproc; confirmar cobertura equilibrada de totes dues operacions al banc. |
 | 7 | Suma d’un decimal i una fracció, F4 | N2 | Variant de F4 que exigeix convertir/coordinar representacions. |
-| 8 | Operació combinada amb parèntesis i jerarquia, F6 | N2 | Tasca diferent: seleccionar ordre d’operacions i després operar. |
+| 8 | Operació combinada amb parèntesis i jerarquia, F6 | N2; variant `cancelled` N1 | Tasca diferent: seleccionar ordre d’operacions i després operar; si el parèntesi queda en zero, la branca és un cas directe N1. |
 | 9 | Racional desconegut en x+a=c, F7 | N1 | Operació inversa additiva; família diferent de càlcul directe, però procediment d’un sol pas. |
-| 10 | Acotar resultat en un interval, F8 | N2 | Tasca d’estimació i interpretació d’interval semiobert, no càlcul exacte. |
+| 10 | Acotar resultat en un interval, F8 | N2; variant `integer` N1 | Tasca d’estimació i interpretació d’interval semiobert, no càlcul exacte; si la diferència ja és un enter, localitzar-la a l’extrem inclòs és N1. |
 | 11 | Fracció aplicada a una quantitat ja fraccionària, F9 | N2 | Aplicació contextual en dues etapes; procediment multiplicatiu en context. |
 | 12 | Validar signe i magnitud abans del càlcul, F10 | N1 | Estimació/raonabilitat; tasca diferent del càlcul exacte. |
 
-La classificació revisada existent concorda amb aquests nivells: N1 per 1,2,3,5,6,9,12; N2 per 4,7,8,10,11. Els resultats simulats indiquen 9/5 camins de cobertura, probablement perquè hi ha camins/variants addicionals; no s’ha de confondre amb el recompte dels 12 tipus únics. **No es proposa N3**: no hi ha evidència d’un procediment curricular genuïnament nou d’alta demanda dins d’aquest bloc. Les operacions negatives, fraccions impròpies o nombres més llargs no creen per si sols un nou nivell.
+La classificació revisada existent dona, per tipus únic, N1 per 1,2,3,5,6,9,12 i N2 per 4,7,8,10,11. Els tipus 8 i 10 tenen, a més, les variants N1 indicades a la taula: `cancelled` i `integer`. Això explica exactament la cobertura simulada de 9 camins N1 i 5 N2; no s’ha de confondre amb els 12 tipus únics. **No es proposa N3**: no hi ha evidència d’un procediment curricular genuïnament nou d’alta demanda dins d’aquest bloc. Les operacions negatives, fraccions impròpies o nombres més llargs no creen per si sols un nou nivell.
 
 ### Fitxes pedagògiques
 
@@ -100,7 +100,7 @@ La classificació revisada existent concorda amb aquests nivells: N1 per 1,2,3,5
 #### F6. Jerarquia amb racionals (tipus 8)
 
 - **Decisió:** tasca diferent de F4 perquè cal resoldre parèntesis i prioritat abans d’operar.
-- **Nivell:** N2.
+- **Nivell:** N2 en la branca ordinària; la variant `cancelled` queda a N1 perquè el parèntesi dona zero i no cal resoldre la cadena general.
 - **Exemple A:** (1/2−2/3)×4/5=(−1/6)×4/5=−2/15.
 - **Exemple B:** (3/4+1/2)÷5/2=(5/4)×2/5=1/2.
 - **Errors típics:** multiplicar abans de resoldre parèntesis; oblidar que dividir per fracció és multiplicar pel recíproc.
@@ -118,7 +118,7 @@ La classificació revisada existent concorda amb aquests nivells: N1 per 1,2,3,5
 #### F8. Estimació d’interval (tipus 10)
 
 - **Decisió:** estimació/representació d’interval, diferent del càlcul exacte.
-- **Nivell:** N2 per estimar, situar i interpretar extrems inclosos/exclosos.
+- **Nivell:** N2 per estimar, situar i interpretar extrems inclosos/exclosos; la variant `integer` queda a N1 quan el resultat és enter i només cal localitzar-lo a l’extrem inclòs.
 - **Exemple A:** 1/2−7/3≈0,5−2,33=−1,83, per tant a [−2;−1).
 - **Exemple B:** 5/4+1/2=1,75, per tant a [1;2).
 - **Errors típics:** confondre [a;b) amb (a;b]; calcular exacte però no revisar l’interval.
