@@ -57,6 +57,8 @@ Data de contrast: 19-11-2026. El mapa es basa en els enunciats mostrejats dels g
 
 ## Sentit espacial
 
+**Encaix A/B del projecte:** els blocs comuns 1–8 són compartits. Els blocs interns A–C de geometria de la recta s’assignen a Matemàtiques B, tant a la progressió com a l’examen; a Matemàtiques A són opcionals. D és aprofundiment integrat opcional a totes dues opcions. XTEC marca aquests sabers de rectes [AMP] però no en fixa una assignació A/B; aquesta és la regla organitzativa adoptada pel projecte. Els nivells i la classificació per famílies no canvien.
+
 | Tema | Famílies i tipus agrupats | Decisió |
 | --- | --- | --- |
 | `figures4t` | F1 Angles en triangle/polígons/paral·leles: 1–5. F2 Teorema d’angle inscrit/tangent: 6, 7. F3 Classificar triangle pel teorema recíproc de Pitàgores: 8. F4 Comptar elements de prisma: 9, 10. | F1 variants de relacions angulars; F2 propietats de circumferència; F4 és la mateixa família d’Euler, dos elements desconeguts. |
