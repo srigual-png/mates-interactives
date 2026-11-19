@@ -59,11 +59,18 @@ No he trobat cap discrepància de recompte entre tipus, mostres i mapa actiu. L�
 
 ### Sentit espacial
 
-Els temes ordinaris inclouen figures, vectors, components, operacions, coordenades, homotècies, lectura de funcions i regions. Les equacions de rectes i la seva posició relativa apareixen com a ampliacions, d’acord amb l’etiqueta [AMP] de les orientacions; alguns d’aquests continguts s’ofereixen a l’itinerari B. Cal conservar explícita aquesta diferència d’itinerari i no presentar-la com una mancança comuna a tot 4t.
+Els vuit blocs comuns cobreixen figures, vectors, components, operacions, coordenades, homotècies, lectura geomètrica de funcions i regions. Les orientacions marquen [AMP] quatre sabers sobre rectes: formes d’equació i selecció; elements determinants d’una recta; posició relativa de dues rectes. A la pràctica s’organitzen en tres blocs interns (A–C).
 
-La distribució és 60 N1 / 21 N2 / 0 N3 al nucli i 29 / 13 / 0 a les ampliacions. No és justificable crear N3 només per completar una proporció. Sí que queda pendent decidir, amb la matriu A/B al davant, quins temes són optatius per itinerari i quins formen part de cada pràctica o examen.
+| Itinerari | Contingut obligatori del projecte | Fora del recorregut obligatori |
+| --- | --- | --- |
+| Matemàtiques A | Els 8 blocs comuns A/B. | Els blocs interns A–C de rectes es poden treballar opcionalment; D és aprofundiment opcional. |
+| Matemàtiques B | Els 8 blocs comuns + A–C: equacions de rectes, elements d’una recta i posició relativa. Aquests tres blocs entren a la progressió i al selector d’examen B. | D: problemes integrats de geometria analítica, com a repte de preparació per a Batxillerat. |
 
-**Dictamen:** alineació general plausible; cal mantenir visibles els itineraris A/B i la manca actual de famílies N3.
+Aquesta distribució A/B és una decisió d’organització del projecte, no una assignació literal de les orientacions XTEC: la font marca els sabers de rectes com a [AMP] però no els reparteix explícitament entre les opcions A i B. El bloc D coordina punts, vectors i rectes en problemes integrats; el mantenim opcional perquè les orientacions no el defineixen com un saber separat.
+
+La distribució de nivells continua sent 60 N1 / 21 N2 / 0 N3 al nucli comú i 29 / 13 / 0 als blocs [AMP]. A–C es compten dins els 42 tipus [AMP] encara que siguin obligatoris a l’itinerari B; D resta opcional. No és justificable crear N3 només per completar una proporció.
+
+**Dictamen:** alineació plausible; la matriu d’itineraris queda resolta per al projecte i els nivells de les dues opcions es mantenen visibles.
 
 ### Sentit estocàstic — canvi curricular aplicat a la branca
 
@@ -93,7 +100,7 @@ La revisió crítica adopta el mapa de famílies com a classificació de treball
 | Numèric | Mantenir la frontera entre nucli i ampliacions i el mapa de famílies. | Conservar els nivells actuals (59 N1 / 21 N2 / 0 N3); no crear N3 per quota. |
 | Mesura | Adoptar el mapa de famílies i comptar `mesuresIndirectes4t:type 10` i `modelitzacioAmpD:type 2` com una família N3 amb variants. | La segona entrada és ampliació; mantenir una sola família N3 ordinària. |
 | Algebraic | Mantenir la frontera curricular ordinari/ampliació i el mapa com a classificació de treball. | Nivells actualitzats a (53 / 36 / 0): `patrons4t:type 2` N2→N1 i `patrons4t:type 10` N1→N2. La resta es manté; no crear N3 per quota. |
-| Espacial | Mantenir vectors i homotècies al nucli i rectes/posició relativa com a ampliació, d’acord amb les orientacions. | Conservar els nivells (60 / 21 / 0); aclarir la matriu d’itineraris A/B per a pràctica i examen. |
+| Espacial | Mantenir els 8 blocs comuns; incloure al recorregut B els tres blocs A–C que despleguen els sabers [AMP] de rectes. Mantenir D com a aprofundiment opcional. | La divisió A/B és el criteri organitzatiu del projecte, perquè XTEC marca [AMP] però no assigna aquests continguts a una opció concreta. Nivells: 60 / 21 / 0 al nucli comú; 29 / 13 / 0 als blocs [AMP]. |
 | Estocàstic | Adoptar al nucli els blocs de contingència, correlació/regressió i probabilitat bàsica amb dependència/independència. Bayes amb taxes base continua com a ampliació. | Conservar els nivells (69 / 41 / 0). La lectura de probabilitat condicionada des de taules és una inferència curricular limitada; no s’hi inclouen tècniques avançades de Bayes. |
 
 Les fronteres relatives a taules de contingència, distribucions bidimensionals, regressió/correlació, probabilitat i itineraris d’ampliació s’han contrastat amb les orientacions oficials. La classificació de la probabilitat condicionada bàsica com a ordinària és una interpretació del seu encaix amb taules i dependència/independència, no una formulació explícita del document curricular.
@@ -135,6 +142,7 @@ Els informes previs no es consideren revalidats per defecte. La suite confirma g
 
 1. La promoció curricular, les simulacions i la revisió visual de les captures estan completades. No s’han aplicat retocs visuals perquè els controls continuen accessibles i el contingut es llegeix sense desbordaments.
 2. El pla d’examen de correlació és 8 N1 / 4 N2 / 0 N3 perquè els seus quatre tipus N2 tenen enunciat fix; es mantenen aquestes etiquetes.
-3. El workflow numèric de 2n ara s’activa només amb canvis als seus fitxers pertinents; canvis documentals o d’altres sentits no l’activen.
+3. La matriu A/B del Sentit espacial està reflectida a la pàgina de pràctica i als temes d’examen: A inclou els 8 blocs comuns; B n’afegeix A–C; D és opcional.
+4. El workflow numèric de 2n ara s’activa només amb canvis als seus fitxers pertinents; canvis documentals o d’altres sentits no l’activen.
 
 **A la branca de la PR #66 s’han actualitzat l’accés a progrés/examen, les pàgines de teoria, la documentació, els checks de 4t, el pla de composició de l’examen de correlació i dues etiquetes de nivell de `patrons4t`. No s’ha modificat cap generador ni el registre oficial de famílies. El mapa cobreix 624 tipus sense omissions ni IDs duplicats. La PR continua Draft, oberta i sense fusionar.**
