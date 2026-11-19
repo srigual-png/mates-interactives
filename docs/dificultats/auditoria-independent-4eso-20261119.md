@@ -6,7 +6,7 @@ He contrastat de nou els cinc sentits de 4t amb els HTML i generadors actuals, e
 
 **Resultat:** el cens de tipus i el mapa tècnic de nivells són coherents, però no recomano donar l’auditoria de 4t per tancada ni adoptar canvis de nivell encara. Hi ha una discrepància curricular clara a estocàstica: procediments de correlació i probabilitat condicionada figuren només en temes etiquetats com a ampliació Batx, mentre que les orientacions de 4t els inclouen al currículum ordinari. A mesura també hi ha dues entrades N3 que són variants d’una mateixa família; compten com una sola família de dificultat alta.
 
-Aquest document és una revisió independent de classificació i cobertura. No canvia nivells, generadors, temes actius ni registres oficials.
+La comparació tipus → família dels 624 tipus ja està documentada a [mapa-tipus-familia-4eso-20261119.md](mapa-tipus-familia-4eso-20261119.md). Aquesta és una proposta independent de classificació i cobertura; no canvia nivells, generadors, temes actius ni registres oficials.
 
 ## Abast i recompte
 
@@ -119,8 +119,8 @@ Els informes previs descriuen suites d’interfície i comprovacions d’oracle,
 ## Estat i següents passos
 
 1. Revisar tipus per tipus els tres temes estocàstics etiquetats Batx i decidir quins procediments són nucli curricular de 4t.
-2. Registrar la comparació tipus → família per a les 624 entrades, amb especial atenció a famílies duplicades entre ordinari i ampliació i als itineraris A/B.
-3. Després d’acordar el mapa estocàstic, preparar una proposta de canvis separada; només llavors valorar canvis a generadors o nivells.
+2. Revisar i adoptar el mapa tipus → família de les 624 entrades, sobretot les duplicacions entre ordinari i ampliació i els itineraris A/B.
+3. Decidir si es reubiquen al nucli ordinari els tipus curriculars de correlació, contingència i probabilitat condicionada. Separar aquesta decisió de qualsevol canvi de dificultat.
 4. Completar validació d’interacció i visual en una única passada integrada, si finalment es modifica codi.
 
-**Cap codi, generador, nivell, examen ni registre oficial ha estat modificat. No s’ha fusionat ni publicat res.**
+**Cap codi, generador, nivell, examen ni registre oficial ha estat modificat. El mapa cobreix els 624 tipus i passa una comprovació d’IDs sense omissions o duplicats. No s’ha fusionat ni publicat res.**
