@@ -45,7 +45,7 @@ async function generate() {
             typeof THEORY_PAGES !== 'undefined' ? THEORY_PAGES[topic.id] :
             typeof MI_NAV_THEORY_PAGES !== 'undefined' ? MI_NAV_THEORY_PAGES[topic.id] : topic.theoryPage;
           if (!theory) throw Error('Missing theory mapping: '+topic.id);
-          return {id:topic.id, theory:new URL(theory, location.href).href};
+          return {id:topic.id, bRequired:!!topic.bRequired||topic.scope==='B', theory:new URL(theory, location.href).href};
         });
       });
       page.off('pageerror', onError);
