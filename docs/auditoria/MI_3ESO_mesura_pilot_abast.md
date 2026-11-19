@@ -690,6 +690,6 @@ S’han contrastat estàticament les observacions que quedaven obertes; no s’h
 - **80/80** branques contrastades estàticament amb els vuit generadors actuals.
 - Exemples resolts, errors típics, casos límit i decisió de família documentats per a cada família candidata local.
 - Nivells actius comprovats al codi i proposta N1/N2 presentada sense escriure-la a producció.
-- S’ha corregit només el text del primer pas de solució a arees:8. No s’ha canviat la lògica de generació, cap nivell ni el registre oficial; no s’han creat workflows ni s’han executat proves noves.
+- S’ha corregit només el text del primer pas de solució a arees:8. No s’ha canviat la lògica de generació, cap nivell ni el registre oficial. No s’han creat workflows ni proves específiques de 3r; l’inline JavaScript [#44519464323](https://github.com/srigual-png/mates-interactives/actions/runs/44519464323) i l’inventari [#44519464303](https://github.com/srigual-png/mates-interactives/actions/runs/44519464303) han passat. La integració automàtica de 2n [#44519464343](https://github.com/srigual-png/mates-interactives/actions/runs/44519464343), aliena a aquest canvi, també ha passat.
 - Les tres observacions de distractors/resposta i unitat d’arrodoniment s’han tancat per contrast estàtic; la correcció de contingut d’arees:8 s’ha aplicat.
 - Les decisions de família són una proposta d’auditoria, no una adopció oficial ni una validació docent.
