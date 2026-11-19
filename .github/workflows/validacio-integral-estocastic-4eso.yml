@@ -9,6 +9,7 @@ on:
       - '4eso/teoria/espacial/**'
       - 'scripts/test-itinerari-espacial-4eso.cjs'
       - 'comprova-regressio-espacial-4eso.cjs'
+      - 'comprova-examens-espacial-4eso.cjs'
       - 'scripts/genera-index-cerca.cjs'
       - 'scripts/genera-examens-cerca.cjs'
       - 'assets/data/index-cerca.json'
@@ -62,6 +63,7 @@ jobs:
           node --check comprova-practica-estocastic-4eso.cjs
           node --check scripts/test-itinerari-espacial-4eso.cjs
           node --check comprova-regressio-espacial-4eso.cjs
+          node --check comprova-examens-espacial-4eso.cjs
           node --check scripts/genera-index-cerca.cjs
           node --check scripts/genera-examens-cerca.cjs
 
@@ -74,10 +76,20 @@ jobs:
       - name: Verificar itinerari A/B del sentit espacial
         run: node scripts/test-itinerari-espacial-4eso.cjs
 
+      - name: Contrastar generadors espacials A i B
+        run: |
+          node comprova-regressio-espacial-4eso.cjs A
+          node comprova-regressio-espacial-4eso.cjs B
+
       - name: Simular exàmens de tema en Matemàtiques A i B
         run: |
           node comprova-examens-estocastic-4eso.cjs A
           node comprova-examens-estocastic-4eso.cjs B
+
+      - name: Simular exàmens espacials complets A i B
+        run: |
+          node comprova-examens-espacial-4eso.cjs A
+          node comprova-examens-espacial-4eso.cjs B
 
       - name: Comprovar accés a examen en ordinador i mòbil
         run: node comprova-ubicacio-estocastic-4eso.cjs
