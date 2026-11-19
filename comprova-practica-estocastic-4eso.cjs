@@ -1,7 +1,7 @@
-const assert=require('assert'),path=require('path');
+const assert=require('assert'),path=require('path'),fs=require('fs');
 let chromium;try{({chromium}=require('playwright'));}catch(e){({chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'));}
 const ids=['dadesVariables4t','taulesRepresentacions4t','comparacioDistribucions4t','estudisMostreig4t','nuvolsRelacio4t','regressioPrediccions4t','espaiMostralRecompte4t','experimentsCompostos4t','contingenciaBatx4t','correlacioBatx4t','condicionadaBatx4t'];
-(async()=>{const browser=await chromium.launch({...((process.env.MI_BROWSER_PATH)?{executablePath:process.env.MI_BROWSER_PATH}:{}),headless:true});const page=await browser.newPage({viewport:{width:1280,height:900}});page.setDefaultTimeout(30000);await page.route(/^https?:/,r=>r.abort());const errors=[];page.on('pageerror',e=>errors.push(e.message));let checks=0,openSeen=0,hintSeen=0;
+(async()=>{const browser=await chromium.launch({...((process.env.MI_BROWSER_PATH)?{executablePath:process.env.MI_BROWSER_PATH}:{}),headless:true});const page=await browser.newPage({viewport:{width:1280,height:900}});const screenshotDir=path.resolve('artifacts/visual-estocastic-4eso');fs.mkdirSync(screenshotDir,{recursive:true});page.setDefaultTimeout(30000);await page.route(/^https?:/,r=>r.abort());const errors=[];page.on('pageerror',e=>errors.push(e.message));let checks=0,openSeen=0,hintSeen=0;
 for(const id of ids)for(const mode of ['multi','open']){
  const url='file:///'+path.resolve('4eso/sentit-estocastic.html').replace(/\\/g,'/')+'?opcio=A&topic='+id;
  await page.goto(url);await page.locator('#screenIntro.active').waitFor();
@@ -18,6 +18,13 @@ for(const id of ids)for(const mode of ['multi','open']){
  assert.equal(shape.mode,mode,'Mode seleccionat '+id);
  assert.equal(shape.open,mode==='open'&&shape.allowOpen,'Controls coherents '+id+' '+mode);
  if(shape.open)openSeen++;
+ // Keep branch-only desktop and mobile captures for visual review; no site deployment is involved.
+ const captureLabel=id+'-'+mode+'-'+(shape.open?'open-answer':'multiple-choice');
+ await page.screenshot({path:path.join(screenshotDir,captureLabel+'-desktop.png'),fullPage:true});
+ await page.setViewportSize({width:390,height:844});
+ assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),'Desbordament horitzontal mòbil '+id+' '+mode);
+ await page.screenshot({path:path.join(screenshotDir,captureLabel+'-mobile.png'),fullPage:true});
+ await page.setViewportSize({width:1280,height:900});
  // Answer correctly through the control visible to the learner.
  if(shape.open){await page.locator('#openInput').fill(await page.evaluate(()=>String(currentEx.correct)));await page.evaluate(()=>checkOpenAnswer());}
  else {const i=await page.evaluate(()=>currentEx.options.findIndex(x=>x===currentEx.correct));assert(i>=0,'Opció correcta absent '+id);await page.locator('#optionsArea .opt-btn').nth(i).click();}
