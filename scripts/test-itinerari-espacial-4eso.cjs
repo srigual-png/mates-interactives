@@ -89,7 +89,7 @@ const extensionD='geometriaAnaliticaAmpD';
     assert.deepEqual(dEntry.modes,['A','B']);
     assert.equal(dEntry.exam,undefined,'D no ha d’aparèixer com a examen');
     const local=JSON.parse(fs.readFileSync('assets/data/index-cerca-local.js','utf8')
-      .replace(/^window\\.MICercaLocal = /,'').trim().replace(/;$/,''));
+      .replace(/^window\.MICercaLocal = /,'').trim().replace(/;$/,''));
     assert.deepEqual(local,catalog,'La versió local i la JSON del cercador han de coincidir');
     console.log('Cercador espacial: 12 temes; 11 exàmens; A-C només B; D pràctica opcional.');
   }finally{await browser.close();}
