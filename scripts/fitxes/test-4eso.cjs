@@ -34,7 +34,7 @@ const root=process.cwd(),server=http.createServer((req,res)=>{const f=path.join(
  await p.selectOption('#ws-level-0','20');assert(await p.locator('#ws-generate').isDisabled());await p.selectOption('#ws-level-1','60');assert(await p.locator('#ws-level-0 option[value="30"]').evaluate(e=>e.disabled));await p.selectOption('#ws-level-1','40');await p.selectOption('#ws-level-0','40');
  await p.locator('#ws-generate').click();await p.waitForFunction(()=>!document.querySelector('.mi-worksheet').hasAttribute('aria-busy'),{},{timeout:60000});assert(await p.locator('#ws-results').isVisible(),await p.locator('#ws-status').innerText());assert.equal(await p.locator('.mi-worksheet-downloads a').count(),4);
  const download=p.waitForEvent('download');await p.locator('.mi-worksheet-downloads a').first().click();assert((await download).suggestedFilename().startsWith('fitxa-4eso-numeric-'));
- const all=await p.evaluate(()=>worksheetPaperSamples);fs.writeFileSync('tmp/fitxes/catalog-4eso-paper.json',JSON.stringify(all,null,2));
+ const all=await p.evaluate(()=>worksheetPaperSamples);fs.mkdirSync('tmp/fitxes',{recursive:true});fs.writeFileSync('tmp/fitxes/catalog-4eso-paper.json',JSON.stringify(all,null,2));
  // Mostra comuna amb diagrama, exponents negatius, parèntesis i problemes llargs.
  const samples=await p.evaluate(async()=>{
   const wanted=[['reals4t',4],['irracionals4t',9],['intervals4t',6],['errors4t',10],['errors4t',8],['operacions4t',6],['comptatge4t',4],['pascal4t',4],['financera4t',3],['financera4t',10]];
