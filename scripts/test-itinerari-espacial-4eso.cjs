@@ -1,4 +1,5 @@
 const assert=require('node:assert/strict');
+const fs=require('node:fs');
 const path=require('node:path');
 const {chromium}=require('playwright');
 
@@ -64,5 +65,26 @@ const extensionD='geometriaAnaliticaAmpD';
       console.log(option+': '+data.required.length+' blocs obligatoris i '+data.exam.length+
         ' blocs a l’examen; A-C '+(option==='B'?'inclosos':'opcionals')+'; D opcional i fora de l’examen.');
     }
+    const catalog=JSON.parse(fs.readFileSync('assets/data/index-cerca.json','utf8'));
+    const spatial=catalog.filter(e=>e.course===4&&e.sense==='Sentit espacial');
+    assert.equal(spatial.length,12,'El cercador ha de tenir vuit blocs comuns, A-C i D');
+    const searchableExams=spatial.filter(e=>e.exam);
+    const getTopic=e=>new URL(e.exam,'https://mi.invalid').searchParams.get('topic');
+    assert.deepEqual(searchableExams.map(getTopic),[...core,...routeB],
+      'El cercador ha d’oferir exactament els 11 exàmens obligatoris');
+    for(const id of routeB){
+      const entry=searchableExams.find(e=>getTopic(e)===id);
+      assert.deepEqual(entry.modes,['B'],id+' · cercador només per a B');
+      assert.equal(new URL(entry.exam,'https://mi.invalid').searchParams.get('opcio'),'B',
+        id+' · l’enllaç d’examen ha d’activar B');
+    }
+    const dEntry=spatial.find(e=>e.practice?.includes('topic='+extensionD));
+    assert(dEntry,'D ha de continuar accessible com a pràctica opcional');
+    assert.deepEqual(dEntry.modes,['A','B']);
+    assert.equal(dEntry.exam,undefined,'D no ha d’aparèixer com a examen');
+    const local=JSON.parse(fs.readFileSync('assets/data/index-cerca-local.js','utf8')
+      .replace(/^window\\.MICercaLocal = /,'').trim().replace(/;$/,''));
+    assert.deepEqual(local,catalog,'La versió local i la JSON del cercador han de coincidir');
+    console.log('Cercador espacial: 12 temes; 11 exàmens; A-C només B; D pràctica opcional.');
   }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1);});
