@@ -67,7 +67,7 @@ La distribució és 60 N1 / 21 N2 / 0 N3 al nucli i 29 / 13 / 0 a les ampliacion
 
 ### Sentit estocàstic — canvi curricular aplicat a la branca
 
-Les orientacions oficials de 4t inclouen la interpretació de distribucions bidimensionals, les taules de contingència, els núvols de punts i la regressió lineal, el concepte i la utilitat de (r), l’anàlisi de correlació/regressió/causalitat i la probabilitat condicionada amb esdeveniments dependents i independents.
+Les orientacions oficials de 4t inclouen la interpretació de distribucions bidimensionals, les taules de contingència, els núvols de punts i la regressió lineal, el concepte i la utilitat de (r), l’anàlisi de correlació/regressió/causalitat i la probabilitat d’esdeveniments tenint en compte la independència o incompatibilitat. No anomenen explícitament la fórmula de probabilitat condicionada; incloure’n la lectura bàsica des de taules de contingència és una inferència curricular. Els càlculs formals més avançats i Bayes amb taxes base continuen fora de l’adopció ordinària.
 
 La versió anterior presentava `contingenciaBatx4t`, `correlacioBatx4t` i `condicionadaBatx4t` com a ampliacions excloses del progrés obligatori i de l’examen. A la branca d’aquesta PR, els he convertit en els blocs ordinaris 9–11:
 - **Bloc 9 · Taules de contingència:** freqüències conjuntes/marginals i percentatges sobre el total, la fila o la columna. Es conserven 7 N1 i 3 N2.
@@ -83,6 +83,20 @@ La promoció és de contingut, no de dificultat: el mapa de 4t continua sense N3
 - A mesura hi ha dues entrades N3 que són una sola família de modelització de dues observacions.
 - La manca de N3 no s’ha d’omplir apujant operacions rutinàries, augmentant valors o allargant enunciats. Si es creen tasques, han d’introduir una decisió estratègica, una representació a coordinar o una reconstrucció no present a N1/N2.
 - La classificació per famílies i l’adopció de nous nivells és una decisió pedagògica posterior; aquest informe no canvia les etiquetes actives.
+
+## Matriu d’adopció acordada després de la revisió crítica
+
+La revisió crítica adopta el mapa de famílies com a classificació de treball i les fronteres curriculars següents. **No adopta cap canvi de nivell actiu N1/N2/N3**: la reassignació queda per a una fase posterior, després de revisar els exemples de les famílies mixtes. S’accepta que una família contingui variants N1 i N2 quan la demanda procedimental canvia; compartir família no obliga a compartir nivell.
+
+| Sentit | Decisió adoptada | Límits i pendents |
+| --- | --- | --- |
+| Numèric | Mantenir la frontera entre nucli i ampliacions i el mapa de famílies. | Conservar els nivells actuals (59 N1 / 21 N2 / 0 N3); no crear N3 per quota. |
+| Mesura | Adoptar el mapa de famílies i comptar `mesuresIndirectes4t:type 10` i `modelitzacioAmpD:type 2` com una família N3 amb variants. | La segona entrada és ampliació; mantenir una sola família N3 ordinària. |
+| Algebraic | Mantenir la frontera curricular ordinari/ampliació i el mapa com a classificació de treball. | Conservar els nivells (52 / 37 / 0); revisar les famílies mixtes abans de proposar reassignacions. |
+| Espacial | Mantenir vectors i homotècies al nucli i rectes/posició relativa com a ampliació, d’acord amb les orientacions. | Conservar els nivells (60 / 21 / 0); aclarir la matriu d’itineraris A/B per a pràctica i examen. |
+| Estocàstic | Adoptar al nucli els blocs de contingència, correlació/regressió i probabilitat bàsica amb dependència/independència. Bayes amb taxes base continua com a ampliació. | Conservar els nivells (69 / 41 / 0). La lectura de probabilitat condicionada des de taules és una inferència curricular limitada; no s’hi inclouen tècniques avançades de Bayes. |
+
+Les fronteres relatives a taules de contingència, distribucions bidimensionals, regressió/correlació, probabilitat i itineraris d’ampliació s’han contrastat amb les orientacions oficials. La classificació de la probabilitat condicionada bàsica com a ordinària és una interpretació del seu encaix amb taules i dependència/independència, no una formulació explícita del document curricular.
 
 ## Evidències i límits dels modes
 
