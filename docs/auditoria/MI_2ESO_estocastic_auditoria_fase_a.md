@@ -2,7 +2,7 @@
 
 ## Estat i abast
 
-Revisió documental dels **7 temes ordinaris i 84 tipus** de `2eso/sentit-estocastic.html`. S’exclouen `intervals3r`, `grafics3r`, `dispersio3r` i `probabilitat3r` (52 tipus d’ampliació de 3r, segons el registre actual: 13+12+12+12).
+Revisió documental dels **7 temes ordinaris i 84 tipus** de `2eso/sentit-estocastic.html`. S’exclouen `intervals3r`, `grafics3r`, `dispersio3r` i `probabilitat3r` (49 tipus d’ampliació de 3r, segons el registre actual: 13+12+12+12).
 
 S’han contrastat els generadors actuals, `docs/dificultats/revisio-2eso-estocastic-punt3.json`, `docs/dificultats/resultats-punt3-2eso-estocastic.json` i `assets/js/dificultat-mi.js`. Les mostres prèvies s’han reutilitzat; no s’han repetit proves. **No s’ha modificat codi, nivell actiu, registre oficial de famílies ni workflows.** Aquesta revisió és estàtica; no s’ha fet simulació ni validació visual.
 
