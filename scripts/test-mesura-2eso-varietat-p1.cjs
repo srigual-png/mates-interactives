@@ -48,7 +48,7 @@ const getNumbers = q => [...q.question.matchAll(/<b>([\d,.]+)(?:\s*(?:cm|m))?<\/
   .map(m => Number(m[1].replace(/\./g, '').replace(',', '.')));
 const parseAnswer = s => Number(s.match(/[\d,.]+/)[0].replace(/\./g, '').replace(',', '.'));
 const semantic = {pots: new Set(), ombres: new Set(), relEstimacio: new Set(),
-  absEstimacio: new Set(), relProblemes: new Set()};
+  absEstimacio: new Set(), relProblemes: new Set(), unitMix: false};
 
 for (let i = 0; i < 24; i++) {
   choice = i;
@@ -68,6 +68,13 @@ for (let i = 0; i < 24; i++) {
       assert(/<b>[\d,.]+ (?:m|cm|L)<\/b>/.test(q.question),
         'Estimacio 14: cal mostrar la unitat de mesura');
       assert(!q.question.includes('Quin instrument'), 'Enunciat inesperat');
+      const plain = q.question.replace(/<[^>]*>/g, '');
+      if (plain.includes('la capacitat d’una ampolla')) {
+        assert(plain.includes('1,5 L') && plain.includes('1500 mL') && plain.includes('1500 L'),
+          'Estimacio 14: cal distingir lectura en mL del valor anotat en L');
+        assert(q.correct.includes('barrejat mL i L'), 'Estimacio 14: resposta no concorda amb la barreja indicada');
+        semantic.unitMix = true;
+      }
     }
     if (type === 17) {
       const n = getNumbers(q);
@@ -110,6 +117,7 @@ for (let i = 0; i < 24; i++) {
 assert(semantic.pots.has(1) && semantic.pots.has(2) &&
   semantic.pots.has(3) && semantic.pots.has(4), 'Els pots han de variar 1–4');
 assert(semantic.ombres.size >= 3, 'Calen almenys 3 altures diferents');
+assert(semantic.unitMix, 'Estimacio 14: cal provar explícitament la barreja mL/L');
 for (const key of ['relEstimacio', 'absEstimacio', 'relProblemes']) {
   assert.equal(semantic[key].size, 2, key + ': han de guanyar tant A com B');
 }
