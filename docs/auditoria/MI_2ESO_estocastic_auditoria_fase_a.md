@@ -4,7 +4,7 @@
 
 Revisió documental dels **7 temes ordinaris i 84 tipus** de `2eso/sentit-estocastic.html`. S’exclouen `intervals3r`, `grafics3r`, `dispersio3r` i `probabilitat3r` (49 tipus d’ampliació de 3r, segons el registre actual: 13+12+12+12).
 
-S’han contrastat els generadors actuals, `docs/dificultats/revisio-2eso-estocastic-punt3.json`, `docs/dificultats/resultats-punt3-2eso-estocastic.json` i `assets/js/dificultat-mi.js`. Les mostres prèvies s’han reutilitzat; no s’han repetit proves. **No s’ha modificat codi, nivell actiu, registre oficial de famílies ni workflows.** Aquesta revisió és estàtica; no s’ha fet simulació ni validació visual.
+S’han contrastat els generadors actuals, `docs/dificultats/revisio-2eso-estocastic-punt3.json`, `docs/dificultats/resultats-punt3-2eso-estocastic.json` i `assets/js/dificultat-mi.js`. Les mostres prèvies s’han reutilitzat; no s’han repetit proves. S’ha aplicat una correcció acotada al mode examen per excloure `experiments:13`; no s’han modificat nivells actius ni el registre oficial de famílies. El workflow numèric global es limita en una PR d’infraestructura separada. Aquesta revisió és estàtica; no s’ha fet simulació ni validació visual.
 
 ## Referent curricular
 
@@ -132,7 +132,7 @@ Els grups són locals a aquest informe. **No s’ha actualitzat `families-valida
 
 No es proposen exercicis nous: les set temàtiques cobreixen els procediments centrals descrits a les orientacions consultades. No trobar N3 és una conclusió curricular, no una invitació a etiquetar arbitràriament tasques directes com a avançades.
 
-**Incidència sobre `experiments:13` i el mode examen:** el registre previ diu que aquest tipus queda exclòs de l’examen per ambigüitat de representació. El generador actual, però, `nextCompoundType()` recorre 1–13; `experiments` té `exam2n:true`; i `startExam()` crida `t.gen()` sense filtre per tipus. Per tant, no hi ha exclusió visible al codi actual i el tipus 13 pot aparèixer a l’examen. El tipus demana triar una representació adequada per seguir dues etapes, on més d’una representació pot ser vàlida. **Cal decidir si es concreta l’enunciat/resposta o s’exclou aquesta branca de l’examen; no s’ha aplicat cap correcció.**
+**Incidència sobre `experiments:13` i el mode examen — corregida a la PR:** el registre previ indica que aquest tipus s’exclou de l’examen per ambigüitat de representació. El generador podia seleccionar-lo perquè la bossa recorre 1–13 i `startExam()` no filtrava tipus. Ara el tema declara `examExcludedTypes:[13]` i els dos punts de generació de l’examen descarten aquesta branca. Continua disponible en pràctica. El canvi no altera famílies ni nivells. No s’ha executat una prova nova; la correcció queda pendent de la validació automàtica de la PR.
 
 ## Modes i evidència
 
