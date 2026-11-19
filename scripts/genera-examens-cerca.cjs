@@ -55,6 +55,7 @@ async function generate() {
           pathToFileURL(path.join(root, e.theory)).href === exam.theory);
         if (matches.length !== 1) throw Error('Ambiguous/missing catalogue mapping: '+practice+' / '+exam.id);
         const params = new URLSearchParams({[practice.startsWith('1eso/')?'tema':'topic']:exam.id, examen:'tema'});
+        if (exam.bRequired && practice.startsWith('4eso/')) params.set('opcio','B');
         matches[0].exam = practice+'?'+params;
       }
     }
