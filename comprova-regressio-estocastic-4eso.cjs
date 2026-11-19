@@ -1,6 +1,6 @@
 const assert=require('assert'),path=require('path');
-const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-(async()=>{const b=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});const p=await b.newPage({viewport:{width:390,height:900}});await p.route(/^https?:/,r=>r.abort());
+let chromium;try{({chromium}=require('playwright'));}catch(e){({chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'));}
+(async()=>{const b=await chromium.launch({...(process.env.MI_BROWSER_PATH?{executablePath:process.env.MI_BROWSER_PATH}:{}),headless:true});const p=await b.newPage({viewport:{width:390,height:900}});await p.route(/^https?:/,r=>r.abort());
 for(const opcio of ['A','B']){
  await p.goto('file:///'+path.resolve('4eso/sentit-estocastic.html').replace(/\\/g,'/')+'?opcio='+opcio+'&topic=dadesVariables4t&examen=tema');await p.waitForSelector('#miTopicExam.active');
  const checks=await p.evaluate(()=>{
