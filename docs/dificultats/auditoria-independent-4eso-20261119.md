@@ -82,7 +82,7 @@ La promoció és de contingut, no de dificultat: el mapa de 4t continua sense N3
 - No hi ha famílies N3 als sentits numèric, algebraic, espacial ni estocàstic amb el mapa actual.
 - A mesura hi ha dues entrades N3 que són una sola família de modelització de dues observacions.
 - La manca de N3 no s’ha d’omplir apujant operacions rutinàries, augmentant valors o allargant enunciats. Si es creen tasques, han d’introduir una decisió estratègica, una representació a coordinar o una reconstrucció no present a N1/N2.
-- El mapa de famílies s’adopta com a classificació de treball segons la matriu següent; l’adopció de nous nivells actius és una fase posterior. Aquest informe no canvia les etiquetes actives.
+- El mapa de famílies s’adopta com a classificació de treball segons la matriu següent, amb els ajustos procedimentals descrits més avall; l’adopció de nous nivells actius és una fase posterior. Aquest informe no canvia les etiquetes actives.
 
 ## Matriu d’adopció acordada després de la revisió crítica
 
@@ -97,6 +97,24 @@ La revisió crítica adopta el mapa de famílies com a classificació de treball
 | Estocàstic | Adoptar al nucli els blocs de contingència, correlació/regressió i probabilitat bàsica amb dependència/independència. Bayes amb taxes base continua com a ampliació. | Conservar els nivells (69 / 41 / 0). La lectura de probabilitat condicionada des de taules és una inferència curricular limitada; no s’hi inclouen tècniques avançades de Bayes. |
 
 Les fronteres relatives a taules de contingència, distribucions bidimensionals, regressió/correlació, probabilitat i itineraris d’ampliació s’han contrastat amb les orientacions oficials. La classificació de la probabilitat condicionada bàsica com a ordinària és una interpretació del seu encaix amb taules i dependència/independència, no una formulació explícita del document curricular.
+
+## Contrast procedimental de famílies mixtes
+
+S’han contrastat estàticament els enunciats i les resolucions dels tipus que formen les famílies mixtes amb els generadors actuals. La conclusió és que una diferència de nivell només s’ha de justificar quan canvia el procediment, els passos o les decisions necessàries; un context o una representació nova, per si sols, no fan pujar el nivell.
+
+El contrast ha afinat quatre agrupacions del mapa de famílies:
+
+| Tema | Ajust de classificació documentat |
+| --- | --- |
+| Precisió i error | `precisioError4t:type 8` comunica una diagonal arrodonida amb una precisió coherent amb les dades d’entrada. Es separa de `type 10`, que sí que propaga l’error màxim de les dimensions al perímetre. |
+| Espai mostral | `espaiMostralRecompte4t:type 3–4` aplica la regla de Laplace; `type 9` planifica una estimació experimental amb freqüència relativa. Es documenten com a tasques diferents, no com una progressió dins d’una sola família. |
+| Representacions de funcions | A `funcionsRep4t`, els tipus 7 i 12 identifiquen una família a partir d’una taula; el tipus 9 construeix/selecciona un model afí contextual a partir de quota i cost per sessió. Es documenten en famílies separades. |
+| Anàlisi de funcions | A `analisiFunc4t`, el tipus 1 interpreta creixement/decreixement d’una expressió i el tipus 7 identifica un model a partir d’una taula. Són procediments diferents, no nivells successius d’una família d’identificació exponencial. |
+| Núvols de punts | A `nuvolsRelacio4t`, el tipus 8 anticipa una associació plausible a partir del context sense observar dades. Se separa de la lectura de direcció a partir d’un núvol. |
+
+Els exemples de progressió procedimental que es mantenen com a plausibles inclouen el càlcul de l’interès simple abans de trobar el capital final, aplicar la fórmula d’arc en radians abans d’afegir-hi una conversió de graus, i passar de substituir un valor en una recta d’ajust a calcular el canvi de predicció entre dos valors de x. Són justificacions de treball, no una adopció dels nivells.
+
+Aquests ajustos són **documentals**. No alteren les etiquetes N1/N2/N3, els generadors, la selecció de preguntes ni les suites de proves. El nombre de famílies dels temes afectats s’ha de llegir segons el mapa revisat, no segons una agrupació anterior més àmplia.
 
 ## Evidències i límits dels modes
 
