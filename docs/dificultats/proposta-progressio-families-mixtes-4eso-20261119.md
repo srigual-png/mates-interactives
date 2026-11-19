@@ -35,7 +35,7 @@ La taula mostra els nivells registrats actualment i la proposta. «Mantenir» co
 | Espacial | Homotècies F1 · imatge d’un punt | 1 | 2 | **Mantenir.** Amb centre a l’origen es multipliquen les coordenades; amb un centre qualsevol cal traslladar, escalar i tornar a situar el punt. |
 | Espacial | Regions F1 · zeros i interseccions | 1, 2, 4 | 3 | **Mantenir.** Els tipus 1, 2 i 4 llegeixen o interpreten un gràfic; el 3 troba la intersecció resolent dues expressions. |
 | Espacial | Regions F3 · comprovar pertinença a una regió | 5, 7 | 8, 10 | **Mantenir.** Els tipus 5 i 7 tracten una frontera o una desigualtat; 8 i 10 exigeixen comprovar més d’una condició. |
-| Estocàstic | Distribucions F1 · mediana | 2 | 10 | **Mantenir.** El tipus 2 llegeix el valor central d’una llista ordenada; el 10 requereix obtenir-la des d’una representació de freqüències. |
+| Estocàstic | Distribucions F1 · mediana | 2 | 10 | **Mantenir.** El tipus 2 troba el valor central de cinc dades; el 10 calcula la mitjana de les dues dades centrals d’una llista parella. |
 | Estocàstic | Distribucions F4 · dispersió | 4, 5 | 9 | **Mantenir.** Els tipus 4–5 comparen rangs donats; el 9 calcula dos rangs interquartílics i els compara. |
 | Estocàstic | Mostreig F2 · triar una mostra representativa | 5 | 3, 9 | **Mantenir.** El tipus 5 identifica el mostreig estratificat; 3 i 9 valoren i milloren un pla de selecció. |
 | Estocàstic | Estudis F4 · observació i causalitat | 6 | 7 | **Mantenir.** El tipus 6 classifica un estudi observacional; el 7 raona per què una associació no prova causalitat. |
