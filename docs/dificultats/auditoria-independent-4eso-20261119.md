@@ -82,7 +82,7 @@ La promoció és de contingut, no de dificultat: el mapa de 4t continua sense N3
 - No hi ha famílies N3 als sentits numèric, algebraic, espacial ni estocàstic amb el mapa actual.
 - A mesura hi ha dues entrades N3 que són una sola família de modelització de dues observacions.
 - La manca de N3 no s’ha d’omplir apujant operacions rutinàries, augmentant valors o allargant enunciats. Si es creen tasques, han d’introduir una decisió estratègica, una representació a coordinar o una reconstrucció no present a N1/N2.
-- La classificació per famílies i l’adopció de nous nivells és una decisió pedagògica posterior; aquest informe no canvia les etiquetes actives.
+- El mapa de famílies s’adopta com a classificació de treball segons la matriu següent; l’adopció de nous nivells actius és una fase posterior. Aquest informe no canvia les etiquetes actives.
 
 ## Matriu d’adopció acordada després de la revisió crítica
 
