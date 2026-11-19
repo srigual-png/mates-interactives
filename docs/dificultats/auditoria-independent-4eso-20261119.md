@@ -4,7 +4,7 @@
 
 He contrastat de nou els cinc sentits de 4t amb els HTML i generadors actuals, el mapa de nivells actiu, els registres de revisió i mostres desades, i les orientacions curriculars oficials de la Generalitat. No he pres els informes previs com a prova suficient: alguns es contradiuen sobre si els blocs de 4t estaven pendents o ja tancats.
 
-**Resultat:** el cens de tipus, el mapa de famílies i els nivells tècnics són coherents. L’auditoria va detectar una discrepància curricular a estocàstica; en aquesta branca he promogut a contingut ordinari les taules de contingència, la correlació i la probabilitat condicionada. Bayes amb taxes base continua com a ampliació. Les dues entrades N3 de mesura són variants d’una mateixa família i compten com una sola família alta.
+**Resultat:** el cens de tipus, el mapa de famílies i els nivells tècnics són coherents. L’auditoria va detectar una discrepància curricular a estocàstica; en aquesta branca he promogut a contingut ordinari les taules de contingència, la correlació i la probabilitat condicionada. Bayes amb taxes base continua com a ampliació. Les dues entrades N3 de mesura són variants d’una mateixa família i compten com una sola família alta. Després del contrast procedimental, s’han aplicat a la branca dues reassignacions a `patrons4t`: el tipus 2 passa a N1 i el tipus 10 a N2.
 
 La comparació tipus → família dels 624 tipus és a [mapa-tipus-familia-4eso-20261119.md](mapa-tipus-familia-4eso-20261119.md). El canvi altera l’accés als tres temes estocàstics i la seva inclusió al Mode Examen; conserva els generadors, els tipus d’exercici i els nivells actius.
 
@@ -16,10 +16,10 @@ He llegit les cinc pàgines de 4t, el mapa compartit de nivells i els deu fitxer
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Numèric | 8 / 4 | 80 | 40 | 59 / 21 / 0 | 36 / 4 / 0 |
 | Mesura | 8 / 4 | 88 | 44 | 63 / 24 / 1 | 30 / 13 / 1 |
-| Algebraic | 8 / 4 | 89 | 40 | 52 / 37 / 0 | 26 / 14 / 0 |
+| Algebraic | 8 / 4 | 89 | 40 | 53 / 36 / 0 | 26 / 14 / 0 |
 | Espacial | 8 / 4 | 81 | 42 | 60 / 21 / 0 | 29 / 13 / 0 |
 | Estocàstic | 11 / 1 | 110 | 10 | 69 / 41 / 0 | 3 / 7 / 0 |
-| **Total** | **43 / 17** | **448** | **176** | **303 / 144 / 1** | **124 / 51 / 1** |
+| **Total** | **43 / 17** | **448** | **176** | **304 / 143 / 1** | **124 / 51 / 1** |
 
 Cada identificador tema/tipus és un registre tècnic, no una família pedagògica independent. Per tant, 624 tipus no vol dir 624 procediments diferents.
 
@@ -53,7 +53,7 @@ Les entrades `mesuresIndirectes4t:type 10` i `modelitzacioAmpD:type 2` descriuen
 
 Els temes ordinaris cobreixen patrons, equacions de segon grau, sistemes, inequacions, representacions de funcions, funcions lineals/quadràtiques i exponencials, i anàlisi de funcions. Les ampliacions de polinomis, equacions avançades, paràmetres i sistemes d’inequacions s’han de mantenir separades del nucli quan requereixen contingut marcat com a ampliació a les orientacions.
 
-No he trobat cap discrepància de recompte entre tipus, mostres i mapa actiu. L’absència de N3 és coherent amb no convertir automàticament una fórmula coneguda o un enunciat més llarg en una tasca d’alta dificultat. El mapa encara necessita una revisió familiar més fina abans de considerar adoptada qualsevol redistribució.
+No he trobat cap discrepància de recompte entre tipus, mostres i mapa actiu. L’absència de N3 és coherent amb no convertir automàticament una fórmula coneguda o un enunciat més llarg en una tasca d’alta dificultat. Després de revisar les famílies mixtes, s’han aplicat dues reassignacions a la branca: `patrons4t:type 2` N2→N1 i `patrons4t:type 10` N1→N2. La resta de nivells es mantenen.
 
 **Dictamen:** sense discrepància estructural detectada; N3 i varietat de famílies continuen oberts.
 
@@ -82,17 +82,17 @@ La promoció és de contingut, no de dificultat: el mapa de 4t continua sense N3
 - No hi ha famílies N3 als sentits numèric, algebraic, espacial ni estocàstic amb el mapa actual.
 - A mesura hi ha dues entrades N3 que són una sola família de modelització de dues observacions.
 - La manca de N3 no s’ha d’omplir apujant operacions rutinàries, augmentant valors o allargant enunciats. Si es creen tasques, han d’introduir una decisió estratègica, una representació a coordinar o una reconstrucció no present a N1/N2.
-- El mapa de famílies s’adopta com a classificació de treball segons la matriu següent, amb els ajustos procedimentals descrits més avall; l’adopció de nous nivells actius és una fase posterior. Aquest informe no canvia les etiquetes actives.
+- El mapa de famílies s’adopta com a classificació de treball segons la matriu següent, amb els ajustos procedimentals descrits més avall. Les dues reassignacions indicades a algebraic ja s’han aplicat a aquesta branca; aquest informe no modifica cap altre nivell actiu.
 
 ## Matriu d’adopció acordada després de la revisió crítica
 
-La revisió crítica adopta el mapa de famílies com a classificació de treball i les fronteres curriculars següents. **No adopta cap canvi de nivell actiu N1/N2/N3**: la reassignació queda per a una fase posterior, després de revisar els exemples de les famílies mixtes. S’accepta que una família contingui variants N1 i N2 quan la demanda procedimental canvia; compartir família no obliga a compartir nivell.
+La revisió crítica adopta el mapa de famílies com a classificació de treball i les fronteres curriculars següents. S’accepta que una família contingui variants N1 i N2 quan la demanda procedimental canvia; compartir família no obliga a compartir nivell. Després de revisar els generadors de les famílies mixtes, s’han adoptat a la branca dues reassignacions; la resta de nivells no s’ha modificat.
 
 | Sentit | Decisió adoptada | Límits i pendents |
 | --- | --- | --- |
 | Numèric | Mantenir la frontera entre nucli i ampliacions i el mapa de famílies. | Conservar els nivells actuals (59 N1 / 21 N2 / 0 N3); no crear N3 per quota. |
 | Mesura | Adoptar el mapa de famílies i comptar `mesuresIndirectes4t:type 10` i `modelitzacioAmpD:type 2` com una família N3 amb variants. | La segona entrada és ampliació; mantenir una sola família N3 ordinària. |
-| Algebraic | Mantenir la frontera curricular ordinari/ampliació i el mapa com a classificació de treball. | Conservar els nivells (52 / 37 / 0); revisar les famílies mixtes abans de proposar reassignacions. |
+| Algebraic | Mantenir la frontera curricular ordinari/ampliació i el mapa com a classificació de treball. | Nivells actualitzats a (53 / 36 / 0): `patrons4t:type 2` N2→N1 i `patrons4t:type 10` N1→N2. La resta es manté; no crear N3 per quota. |
 | Espacial | Mantenir vectors i homotècies al nucli i rectes/posició relativa com a ampliació, d’acord amb les orientacions. | Conservar els nivells (60 / 21 / 0); aclarir la matriu d’itineraris A/B per a pràctica i examen. |
 | Estocàstic | Adoptar al nucli els blocs de contingència, correlació/regressió i probabilitat bàsica amb dependència/independència. Bayes amb taxes base continua com a ampliació. | Conservar els nivells (69 / 41 / 0). La lectura de probabilitat condicionada des de taules és una inferència curricular limitada; no s’hi inclouen tècniques avançades de Bayes. |
 
@@ -102,7 +102,7 @@ Les fronteres relatives a taules de contingència, distribucions bidimensionals,
 
 S’han contrastat estàticament els enunciats i les resolucions dels tipus que formen les famílies mixtes amb els generadors actuals. La conclusió és que una diferència de nivell només s’ha de justificar quan canvia el procediment, els passos o les decisions necessàries; un context o una representació nova, per si sols, no fan pujar el nivell.
 
-El contrast ha afinat diverses agrupacions del mapa de famílies. La taula de nivells actuals i proposta concreta de mantenir/canviar tipus és a [proposta-progressio-families-mixtes-4eso-20261119.md](proposta-progressio-families-mixtes-4eso-20261119.md).
+El contrast ha afinat diverses agrupacions del mapa de famílies. La taula de nivells i el resultat de l’adopció són a [proposta-progressio-families-mixtes-4eso-20261119.md](proposta-progressio-families-mixtes-4eso-20261119.md).
 
 | Tema | Ajust de classificació documentat |
 | --- | --- |
@@ -116,7 +116,7 @@ El contrast ha afinat diverses agrupacions del mapa de famílies. La taula de ni
 
 Els exemples de progressió procedimental que es mantenen com a plausibles inclouen el càlcul de l’interès simple abans de trobar el capital final, aplicar la fórmula d’arc en radians abans d’afegir-hi una conversió de graus, i passar de substituir un valor en una recta d’ajust a calcular el canvi de predicció entre dos valors de x. Són justificacions de treball, no una adopció dels nivells.
 
-Aquests ajustos són **documentals**. No alteren les etiquetes N1/N2/N3, els generadors, la selecció de preguntes ni les suites de proves. La proposta inclou dues reassignacions de nivell per revisar —`patrons4t:type 2` N2→N1 i `patrons4t:type 10` N1→N2—, però cap no s’ha aplicat. El nombre de famílies dels temes afectats s’ha de llegir segons el mapa revisat, no segons una agrupació anterior més àmplia.
+Aquests ajustos inclouen canvis documentals i dues reassignacions actives a `assets/js/dificultat-mi.js`: `patrons4t:type 2` N2→N1 i `patrons4t:type 10` N1→N2. No s’han modificat generadors, selecció de preguntes ni suites de proves. El nombre de famílies dels temes afectats s’ha de llegir segons el mapa revisat, no segons una agrupació anterior més àmplia.
 
 ## Evidències i límits dels modes
 
@@ -127,14 +127,14 @@ Aquests ajustos són **documentals**. No alteren les etiquetes N1/N2/N3, els gen
 | Pràctica | La pàgina no té selectors separats anomenats «guiat» i «autònom». S’han simulat els dos formats disponibles (4 opcions i resposta oberta), les pistes disponibles i la correcció pas a pas després d’un error: 154 comprovacions als 11 blocs. Les pistes s’han mostrat en 22 casos i s’ha verificat resposta oberta real en 8 casos; els exercicis que no admeten resposta oberta mantenen les opcions. |
 | Examen | Simulació amb Playwright dels 11 blocs ordinaris, 12 preguntes per tema en Matemàtiques A i B, lliurament, puntuació, reinici i retorn a pràctica. |
 | Validació responsive i visual | S’han capturat i revisat manualment 44 pantalles: 11 blocs × 2 formats seleccionats × escriptori i mòbil. No s’hi veu cap desbordament horitzontal, retall de taules/gràfics ni control de resposta inaccessible. Observacions menors: alguns títols llargs s’abreugen amb punts suspensius a la barra de navegació mòbil, i el teclat matemàtic ocupa dues files quan no hi cap en una. |
-| GitHub Actions | La passada integrada [#44514295009](https://github.com/srigual-png/mates-interactives/actions/runs/44514295009) ha passat amb simulació, captures i analítica. L’[artefacte de captures](https://github.com/srigual-png/mates-interactives/actions/runs/44514295009/artifacts/14523354091) es conserva tres dies. També havien passat la sintaxi inline JS [#44496515346](https://github.com/srigual-png/mates-interactives/actions/runs/44496515346) i la validació de 2n [#44496515419](https://github.com/srigual-png/mates-interactives/actions/runs/44496515419), activada perquè es va tocar el fitxer compartit de dificultats. Després s’ha limitat el disparador de 2n als fitxers del seu àmbit. |
+| GitHub Actions | Les passades integrades [#44514295009](https://github.com/srigual-png/mates-interactives/actions/runs/44514295009), [#44496515346](https://github.com/srigual-png/mates-interactives/actions/runs/44496515346) i [#44496515419](https://github.com/srigual-png/mates-interactives/actions/runs/44496515419) són anteriors a les dues reassignacions aplicades a `dificultat-mi.js`; no les validen. El canvi del fitxer compartit pot activar la validació integrada de 4t. No s’ha iniciat una execució manual de proves en aquesta passada. |
 
 Els informes previs no es consideren revalidats per defecte. La suite confirma generadors, exàmens i fluxos de pràctica. Les captures dels 11 blocs s’han revisat en escriptori i mòbil; les dues observacions visuals anotades no impedeixen respondre ni llegir els exercicis.
 
 ## Estat i següents passos
 
 1. La promoció curricular, les simulacions i la revisió visual de les captures estan completades. No s’han aplicat retocs visuals perquè els controls continuen accessibles i el contingut es llegeix sense desbordaments.
-2. El pla d’examen de correlació és 8 N1 / 4 N2 / 0 N3 perquè els seus quatre tipus N2 tenen enunciat fix. Cap etiqueta de nivell dels exercicis no s’ha alterat.
+2. El pla d’examen de correlació és 8 N1 / 4 N2 / 0 N3 perquè els seus quatre tipus N2 tenen enunciat fix; es mantenen aquestes etiquetes.
 3. El workflow numèric de 2n ara s’activa només amb canvis als seus fitxers pertinents; canvis documentals o d’altres sentits no l’activen.
 
-**A la branca de la PR #66 s’han actualitzat l’accés a progrés/examen, les pàgines de teoria, la documentació, els checks de 4t i el pla de composició de l’examen de correlació. No s’ha modificat cap generador ni nivell actiu o el registre oficial. El mapa cobreix 624 tipus sense omissions ni IDs duplicats. La PR continua Draft, oberta i sense fusionar.**
+**A la branca de la PR #66 s’han actualitzat l’accés a progrés/examen, les pàgines de teoria, la documentació, els checks de 4t, el pla de composició de l’examen de correlació i dues etiquetes de nivell de `patrons4t`. No s’ha modificat cap generador ni el registre oficial de famílies. El mapa cobreix 624 tipus sense omissions ni IDs duplicats. La PR continua Draft, oberta i sense fusionar.**
