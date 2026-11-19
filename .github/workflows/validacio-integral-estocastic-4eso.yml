@@ -1,10 +1,14 @@
-name: Validació integrada MI · Sentit estocàstic 4t ESO
+name: Validació integrada MI · 4t ESO
 
 on:
   pull_request:
     paths:
       - '4eso/sentit-estocastic.html'
+      - '4eso/sentit-numeric.html'
+      - 'scripts/fitxes/**'
       - 'assets/js/dificultat-mi.js'
+      - 'assets/js/dificultat-modes.js'
+      - 'assets/js/dificultat-quotes.js'
       - '4eso/teoria/estocastic/**'
       - 'comprova-analitica-estocastic-4eso.cjs'
       - 'comprova-examens-estocastic-4eso.cjs'
@@ -17,7 +21,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: mi-stochastic-4eso-${{ github.event.pull_request.number || github.ref }}
+  group: mi-integral-4eso-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -51,6 +55,9 @@ jobs:
 
       - name: Verificar generadors, mapa i examen general
         run: node comprova-regressio-estocastic-4eso.cjs
+
+      - name: Validar tipus, nivells i motor de fitxes de 4t
+        run: node scripts/fitxes/test-4eso.cjs
 
       - name: Simular exàmens de tema en Matemàtiques A i B
         run: |
