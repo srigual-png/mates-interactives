@@ -871,10 +871,10 @@ const TOPICS=[
  {id:'regressioPrediccions4t',name:'6. Regressió lineal, prediccions i causalitat',icon:'📈',short:'Recta d’ajust, pendent, interpolació, extrapolació i límits de les prediccions.',theoryKey:'regressioPrediccions4t',theoryPage:'teoria/estocastic/regressio-lineal.html',gen:genRegressioPrediccions4,scope:'AB',exam4t:true},
  {id:'espaiMostralRecompte4t',name:'7. Atzar, espai mostral i tècniques de recompte',icon:'🎲',short:'Successos, regla de Laplace, recompte sistemàtic i principi multiplicatiu.',theoryKey:'espaiMostralRecompte4t',theoryPage:'teoria/estocastic/espai-mostral.html',gen:genEspaiMostralRecompte4,scope:'AB',exam4t:true},
  {id:'experimentsCompostos4t',name:'8. Probabilitat en experiments compostos',icon:'🌳',short:'Dos passos, arbres, amb i sense reemplaçament i comparació de probabilitats.',theoryKey:'experimentsCompostos4t',theoryPage:'teoria/estocastic/experiments-compostos.html',gen:genExperimentsCompostos4,scope:'AB',exam4t:true},
- {id:'contingenciaBatx4t',name:'A. Taules de contingència',icon:'🧮',short:'Freqüències conjuntes i marginals, percentatges condicionats i grup de referència.',theoryKey:'contingenciaBatx4t',theoryPage:'teoria/estocastic/contingencia.html',gen:genContingenciaBatx4,scope:'AB',exam4t:false,isExpansion:true},
- {id:'correlacioBatx4t',name:'B. Correlació i regressió avançada',icon:'📉',short:'Coeficient r, força i direcció de la correlació, no-linealitat i valors atípics.',theoryKey:'correlacioBatx4t',theoryPage:'teoria/estocastic/correlacio-regressio.html',gen:genCorrelacioBatx4,scope:'AB',exam4t:false,isExpansion:true},
- {id:'condicionadaBatx4t',name:'C. Probabilitat condicionada i independència',icon:'🔗',short:'P(A|B), canvi de denominador, successos independents i dependents.',theoryKey:'condicionadaBatx4t',theoryPage:'teoria/estocastic/probabilitat-condicionada.html',gen:genCondicionadaBatx4,scope:'AB',exam4t:false,isExpansion:true},
- {id:'bayesBatx4t',name:'D. Bayes i primers models probabilístics',icon:'🧠',short:'Probabilitats inverses, falsos positius, almenys un èxit i primers models binomials.',theoryKey:'bayesBatx4t',theoryPage:'teoria/estocastic/bayes-models.html',gen:genBayesBatx4,scope:'AB',exam4t:false,isExpansion:true}
+ {id:'contingenciaBatx4t',name:'9. Taules de contingència',icon:'🧮',short:'Freqüències conjuntes i marginals, percentatges condicionats i lectura de dades bidimensionals.',theoryKey:'contingenciaBatx4t',theoryPage:'teoria/estocastic/contingencia.html',gen:genContingenciaBatx4,scope:'AB',exam4t:true},
+ {id:'correlacioBatx4t',name:'10. Correlació i relació entre variables',icon:'📉',short:'Coeficient r, signe i intensitat, valors atípics, no-linealitat i causalitat.',theoryKey:'correlacioBatx4t',theoryPage:'teoria/estocastic/correlacio-regressio.html',gen:genCorrelacioBatx4,scope:'AB',exam4t:true},
+ {id:'condicionadaBatx4t',name:'11. Probabilitat condicionada i independència',icon:'🔗',short:'P(A|B), canvi de denominador, successos independents i dependents.',theoryKey:'condicionadaBatx4t',theoryPage:'teoria/estocastic/probabilitat-condicionada.html',gen:genCondicionadaBatx4,scope:'AB',exam4t:true},
+ {id:'bayesBatx4t',name:'Ampliació · Bayes i models probabilístics',icon:'🧠',short:'Probabilitats inverses amb taxa base i primers models binomials.',theoryKey:'bayesBatx4t',theoryPage:'teoria/estocastic/bayes-models.html',gen:genBayesBatx4,scope:'AB',exam4t:false,isExpansion:true}
 ];
 window.miTaskDifficulty=MIDifficulty.attach({course:'4eso',sense:'estocastic',topics:TOPICS,option:()=>typeof MATH_OPTION!=='undefined'?MATH_OPTION:null,examFilter:t=>typeof isExamTopic==='function'?isExamTopic(t):true});
 
@@ -989,7 +989,7 @@ function renderHome(){
   const mainTopics=TOPICS.filter(t=>!t.isExpansion);
   const expansionTopics=TOPICS.filter(t=>t.isExpansion);
   function head(icon,title,note,cls,first){return '<div class="p6-section-head '+(first?'p6-first ':'')+'"><div class="p6-section-title '+(cls||'')+'">'+icon+' '+title+'</div><div class="p6-section-note">'+note+'</div></div>';}
-  let html=head('📘','Continguts de 4t d\'ESO','Blocs 1–8: dades, relacions entre variables, mostreig, regressió, recompte i probabilitat composta.','',true);
+  let html=head('📘','Continguts de 4t d\'ESO','Blocs 1–11: dades, representació bidimensional, regressió, mostreig, recompte, probabilitat condicionada i experiments compostos.','',true);
   mainTopics.forEach(t=>{
     const i=TOPICS.indexOf(t),done=state.done.includes(t.id);
     html+='<div class="topic-card '+(done?'done ':'')+('')+'" '+('onclick="selectTopic('+i+')"')+'>'
@@ -997,7 +997,7 @@ function renderHome(){
       +'<span class="topic-badge '+(done?'badge-done':'badge-active')+'">'+(done?'✓ Fet':'Practicar')+'</span></div>';
   });
   if(expansionTopics.length){
-    html+=head('⭐','Ampliació · prepara Batxillerat','A–D són blocs opcionals. No compten en el progrés obligatori ni entren al Mode Examen de 4t.','p6-extension');
+    html+=head('⭐','Ampliació · prepara Batxillerat','Bayes i els primers models binomials són opcionals; no compten en el progrés obligatori ni entren al Mode Examen de 4t.','p6-extension');
     expansionTopics.forEach(t=>{
       const i=TOPICS.indexOf(t),done=state.done.includes(t.id);
       html+='<div class="topic-card extension-card '+(done?'done ':'')+('')+'" '+('onclick="selectTopic('+i+')"')+'>'
