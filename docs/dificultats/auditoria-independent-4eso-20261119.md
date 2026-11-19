@@ -131,7 +131,7 @@ El contrast ha afinat diverses agrupacions del mapa de famílies. La taula de ni
 
 Els exemples de progressió procedimental que es mantenen com a plausibles inclouen el càlcul de l’interès simple abans de trobar el capital final, aplicar la fórmula d’arc en radians abans d’afegir-hi una conversió de graus, i passar de substituir un valor en una recta d’ajust a calcular el canvi de predicció entre dos valors de x. Són justificacions de treball, no una adopció dels nivells.
 
-Aquests ajustos inclouen dues reassignacions actives a `assets/js/dificultat-mi.js`: `patrons4t:type 2` N2→N1 i `patrons4t:type 10` N1→N2. També s’ha afegit `financera4t:type 11` al generador i al nivell N3 com a nova F7. No s’han modificat suites de proves ni la selecció general de preguntes. El nombre de famílies dels temes afectats s’ha de llegir segons el mapa revisat.
+Aquests ajustos inclouen dues reassignacions actives a `assets/js/dificultat-mi.js`: `patrons4t:type 2` N2→N1 i `patrons4t:type 10` N1→N2. També s’ha afegit `financera4t:type 11` al generador i al nivell N3 com a nova F7. La integració existent ara inclou una comprovació específica de l’itinerari espacial; no s’ha modificat la selecció general de preguntes. El nombre de famílies dels temes afectats s’ha de llegir segons el mapa revisat.
 
 ## Evidències i límits dels modes
 
