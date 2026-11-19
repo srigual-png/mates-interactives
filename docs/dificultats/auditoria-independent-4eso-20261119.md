@@ -90,15 +90,16 @@ La promoció és de contingut, no de dificultat: el mapa de 4t continua sense N3
 | --- | --- |
 | Estàtica | Pàgines, generadors declarats, recompte de tipus, registres de dificultat i concordança amb el mapa actiu: sí. |
 | Mostres i simulació | S’han llegit les mostres i metadades ja desades als JSON. No he llançat cap generació o simulació nova. |
-| Mode guiat / autònom / examen | He contrastat estàticament les opcions i dades de mode en les pàgines i els informes previs; no he repetit cap suite d’interacció ni la passada de quotes. |
-| Validació visual | No s’ha fet en navegador en aquesta auditoria. |
-| GitHub Actions | No s’ha creat ni iniciat cap prova manual. Els commits a la PR han activat automàticament els workflows configurats pel repositori; un és la comprovació d’inline JavaScript i l’altre és una validació general de Sentit numèric de 2n, fora de l’abast d’aquesta auditoria. |
+| Mode guiat / autònom / examen | Guiat i autònom: revisió estàtica, no simulats. Examen: simulació amb Playwright dels 11 blocs ordinaris, 12 preguntes per tema en Matemàtiques A i B, lliurament, puntuació, reinici i retorn a pràctica. |
+| Validació visual | No hi ha revisió manual de captures. Playwright ha comprovat al navegador la posició, amplada i accés al botó d’examen en escriptori i mòbil per als 11 blocs. |
+| GitHub Actions | La passada integrada d’estocàstica de 4t ha passat: [run #44496515424](https://github.com/srigual-png/mates-interactives/actions/runs/44496515424). També han passat la sintaxi d’inline JS [#44496515346](https://github.com/srigual-png/mates-interactives/actions/runs/44496515346) i la validació de 2n [#44496515419](https://github.com/srigual-png/mates-interactives/actions/runs/44496515419), activada perquè es va tocar el fitxer compartit de dificultats. Després s’ha limitat el disparador de 2n als fitxers del seu àmbit. |
 
-Els informes previs descriuen suites d’interfície i comprovacions d’oracle, però no les considero revalidades aquí. Aquesta passada tampoc certifica visualment totes les figures, totes les solucions explicades ni totes les combinacions de l’examen.
+Els informes previs no es consideren revalidats per defecte. La nova suite confirma els generadors i l’examen temàtic, i comprova la disposició responsive del botó d’accés; no cobreix una simulació específica dels modes guiat/autònom ni una inspecció visual manual de totes les figures i solucions.
 
 ## Estat i següents passos
 
-1. La promoció curricular a estocàstica està aplicada a la branca: blocs 9–11 al nucli ordinari; Bayes continua opcional. El mapa de famílies i l’índex de teoria reflecteixen el canvi.
-2. Per completar la verificació de comportament queden una passada integrada dels modes i una revisió visual. No les he iniciat manualment; els workflows automàtics que s’han activat pel push són comprovacions configurades al repositori i no equivalen per si sols a validar els tres modes.
+1. La promoció curricular està aplicada i la passada integrada d’examen/generadors ha passat. Continuen pendents la simulació específica de guiat/autònom i una inspecció visual manual completa.
+2. El pla d’examen de correlació és 8 N1 / 4 N2 / 0 N3 perquè els seus quatre tipus N2 tenen enunciat fix. Cap etiqueta de nivell dels exercicis no s’ha alterat.
+3. El workflow numèric de 2n ara s’activa només amb canvis als seus fitxers pertinents; canvis documentals o d’altres sentits no l’activen.
 
-**A la branca de la PR #66 s’han actualitzat la disponibilitat al progrés/examen, el recorregut de teoria i la documentació. No s’ha modificat cap generador, tipus d’exercici, nivell actiu o registre oficial. El mapa cobreix 624 tipus sense omissions ni IDs duplicats. La PR continua Draft, oberta i sense fusionar.**
+**A la branca de la PR #66 s’han actualitzat l’accés a progrés/examen, les pàgines de teoria, la documentació, els checks de 4t i el pla de composició de l’examen de correlació. No s’ha modificat cap generador ni nivell actiu o el registre oficial. El mapa cobreix 624 tipus sense omissions ni IDs duplicats. La PR continua Draft, oberta i sense fusionar.**
