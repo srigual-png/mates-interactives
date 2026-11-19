@@ -137,9 +137,9 @@ Errors típics: comparar nombres sense homogeneïtzar unitats; marcar “no es p
 - **Simulació:** no feta en aquesta auditoria.
 - **Visual:** no feta; no s’afirma que s’hagi comprovat el navegador.
 
-### Incidència detectada per revisar globalment
+### Contrast posterior de l’observació (19-11-2026)
 
-En el codi actual, el tipus 4 selecciona, entre altres, m³↔mL, però els distractors es construeixen amb factors ×10, ÷10, ×1000 i ÷1000 del resultat. En aquests casos, diversos distractors poden no representar les confusions específiques més útils i cal comprovar que cap coincideixi amb la resposta correcta. És una observació estàtica, no s’ha reproduït amb una prova nova; no s’ha modificat el generador.
+La revisió estàtica confirma que measureOptions() elimina distractors iguals a la resposta i uniq4() conserva una opció correcta i completa quatre opcions úniques. Els distractors proposats corresponen a errors d’escala; no s’ha trobat cap defecte funcional. La qualitat pedagògica dels distractors no s’ha validat amb estudiants ni amb proves noves.
 
 ## Bloc 2 — Mesura i precisió: contrast dels 10 tipus
 
@@ -212,10 +212,10 @@ Errors típics: usar ±1 en comptes de ±0,5 unitat; incloure tots dos extrems; 
 - **Estàtica prèvia:** el registre indica 3000 mostres, cobertura [7,3,0] i examen [7,5,0]. No s’han repetit aquestes mostres.
 - **Simulació i validació visual:** no fetes en aquesta passada.
 
-### Casos a contrastar en una passada de qualitat
+### Contrast posterior de les observacions (19-11-2026)
 
-- El tipus 5 crea les opcions amb una llista barrejada fixa; el codi visible no deriva les opcions de la comparació actual ni garanteix explícitament que la resposta correcta aparegui. Cal inspeccionar aquesta branca amb més detall abans de concloure si és una incidència funcional; no s’ha executat cap prova nova ni s’ha canviat el codi.
-- Al tipus 7, la pregunta diu “arrodonida a la unitat més propera”, però el banc conté unitats diferents. La interpretació d’`[valor−0,5; valor+0,5)` només és correcta si “unitat” vol dir la unitat indicada per cada lectura; cal contrastar els valors/unitats exactes del banc abans de tancar el cas.
+- El tipus 5 tria A o B com a resposta d’acord amb les resolucions del banc; les opcions inclouen sempre totes dues. La resposta correcta no queda fora del conjunt.
+- El tipus 7 dona una lectura positiva amb la seva unitat explícita (cm, mm, mL o g). L’interval de mig unitat s’aplica a la unitat mostrada i la convenció de límits està indicada a la guia. No s’hi detecta ambigüitat.
 
 ## Bloc 3 — Àrees i figures compostes: contrast dels 10 tipus
 
@@ -270,7 +270,7 @@ Errors típics: multiplicar 2,4×35 i donar el resultat en m²; convertir cm a m
 
 El catàleg concentra 9 dels 10 tipus a N2 perquè gairebé tots combinen àrees parcials. El tipus 7 és un N1 clar. No es detecta, en aquest bloc, un procediment genuïnament N3; augmentar números o afegir un context per si sol no justificaria N3.
 
-**Incidència de codi documentada, no aplicada:** al tipus 8, la guia diu que l’àrea del rectangle ja està donada i no cal calcular-ne l’altura, però la solució mostra `àrea ÷ base` com a primer pas. És un pas superflu que contradiu la guia; queda documentat per valorar una eventual correcció, sense modificar el generador.
+**Correcció aplicada el 19-11-2026:** al tipus 8, el primer pas de la solució ara declara l’àrea del rectangle com a dada donada. Això concorda amb la guia i evita el càlcul superflu de l’altura. No s’han alterat la resposta, les opcions ni la lògica de generació. No s’han executat proves noves en aquest canvi.
 
 
 ## Bloc 4 — Semblança i mesures: contrast dels 10 tipus
@@ -681,7 +681,7 @@ S’han contrastat estàticament les observacions que quedaven obertes; no s’h
 | Bloc 1, tipus 4: distractors en conversions volum-capacitat | measureOptions() elimina del conjunt de distractors qualsevol valor numèric igual a la resposta; uniq4() conserva una resposta correcta i completa quatre opcions úniques. Els factors proposats són errors d’escala (×10, ÷10, ×1000, ÷1000). | No hi ha defecte funcional de resposta correcta absent o duplicada. La qualitat pedagògica dels distractors continua sent un criteri de disseny, no una incidència funcional reproduïda. |
 | Bloc 2, tipus 5: la resposta correcta no semblava lligada a les opcions | La branca tria A o B com a resposta segons la parella de resolucions de la taula; les quatre opcions inclouen sempre “Instrument A” i “Instrument B”. | Falsa alarma: la resposta correcta sempre forma part de les opcions. |
 | Bloc 2, tipus 7: “unitat més propera” amb diverses unitats | El banc genera valors positius en cm, mm, mL o g, i l’enunciat sempre mostra la unitat de la lectura. L’interval de ±0,5 és en aquesta unitat, amb convenció [límit inferior, límit superior) indicada a la guia. | No hi ha ambigüitat: l’interval es refereix a la unitat que acompanya la lectura. |
-| Bloc 3, tipus 8: guia i solució discrepen | L’enunciat dona l’àrea del rectangle. La guia diu correctament que no cal calcular-ne l’altura; el primer pas de la solució calcula àrea ÷ base, un pas superflu i contradictori. El càlcul no canvia la resposta final, però pot confondre sobre el procediment necessari. | Incidència de contingut confirmada. Correcció proposada, pendent d’autorització: substituir el primer pas de la solució per “Àrea del rectangle (donada): ${area} cm²”, i mantenir els passos del triangle i de la suma. No s’ha modificat el codi, d’acord amb els límits d’aquesta PR. |
+| Bloc 3, tipus 8: guia i solució discrepaven | L’enunciat dona l’àrea del rectangle. La guia diu que no cal calcular-ne l’altura; el pas superflu de la solució s’ha substituït per la declaració de l’àrea donada. No canvia la resposta ni la lògica del generador. | Correcció aplicada amb autorització de l’usuari. No s’han executat proves noves; no s’han modificat nivells, altres lògiques de generació ni el registre oficial. |
 
 **Pendents que no són incidències de codi:** la revisió de les branques i les mostres és estàtica; continuen sense simulació dels fluxos ni validació visual de navegador. Cal conservar aquesta limitació fins que es faci una passada de validació autoritzada.
 
@@ -690,7 +690,7 @@ S’han contrastat estàticament les observacions que quedaven obertes; no s’h
 - **80/80** branques contrastades estàticament amb els vuit generadors actuals.
 - Exemples resolts, errors típics, casos límit i decisió de família documentats per a cada família candidata local.
 - Nivells actius comprovats al codi i proposta N1/N2 presentada sense escriure-la a producció.
-- No s’ha canviat codi, generadors, nivells ni el registre oficial; tampoc s’han creat workflows ni s’han executat proves noves.
-- Les tres observacions de distractors/resposta i unitat d’arrodoniment s’han tancat per contrast estàtic; la incidència de contingut a `arees:8` està confirmada i té una correcció proposada, encara no aplicada.
+- S’ha corregit només el text del primer pas de solució a arees:8. No s’ha canviat la lògica de generació, cap nivell ni el registre oficial; no s’han creat workflows ni s’han executat proves noves.
+- Les tres observacions de distractors/resposta i unitat d’arrodoniment s’han tancat per contrast estàtic; la correcció de contingut d’arees:8 s’ha aplicat.
 - Les decisions de família són una proposta d’auditoria, no una adopció oficial ni una validació docent.
 
