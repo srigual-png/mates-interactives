@@ -1,7 +1,8 @@
 const fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert');
-const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {playwright,launchOptions}=require('../genera-examens-cerca.cjs');
+const {chromium}=playwright();
 const root=process.cwd(),server=http.createServer((req,res)=>{const f=path.join(root,decodeURIComponent(req.url.split('?')[0]));if(!f.startsWith(root+path.sep)){res.writeHead(403).end();return;}fs.readFile(f,(err,data)=>{if(err){res.writeHead(404).end();return;}res.setHeader('Content-Type',({'.js':'text/javascript','.css':'text/css','.html':'text/html','.ttf':'font/ttf'})[path.extname(f)]||'application/octet-stream');res.end(data);});});
-(async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});try{
+(async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch(launchOptions());try{
  const p=await browser.newPage(),errors=[],requests=[];p.on('pageerror',e=>errors.push(e.message));p.on('request',r=>requests.push(r.url()));await p.goto('http://127.0.0.1:'+server.address().port+'/4eso/sentit-numeric.html');await p.waitForSelector('#ws-generate');
  assert(!requests.some(u=>u.includes('/vendor/fitxes/')));assert((await p.locator('#ws-summary').innerText()).startsWith('4t d’ESO'));assert.equal(await p.locator('[name="ws-topic"]').count(),8);
  const data=await p.evaluate(async()=>{
