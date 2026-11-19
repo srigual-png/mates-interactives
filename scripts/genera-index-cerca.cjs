@@ -26,7 +26,7 @@ function generate({write=true}={}) {
     const explicit=keywords.match(/Matemàtiques\s+([AB])\s*·/);
     modes=explicit?[explicit[1]]:['A','B'];
     // Exception encoded explicitly in the spatial index's introductory note.
-    if(sense==='espacial'&&/^Ampliació\s*[AD]\s*·/.test(rawTitle))modes=['B'];
+    if(sense==='espacial'&&/^Ampliació\s*[ABC]\s*·/.test(rawTitle))modes=['B'];
    }
    const item={title,course,sense:label,modes,theory,keywords};
    const expected=`${course}eso/sentit-${sense}.html`;

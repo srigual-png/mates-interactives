@@ -1,7 +1,8 @@
 const fs=require('fs'),path=require('path'),http=require('http'),assert=require('assert');
-const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const {playwright,launchOptions}=require('../genera-examens-cerca.cjs');
+const {chromium}=playwright();
 const root=process.cwd(),server=http.createServer((req,res)=>{const f=path.join(root,decodeURIComponent(req.url.split('?')[0]));if(!f.startsWith(root+path.sep)){res.writeHead(403).end();return;}fs.readFile(f,(err,data)=>{if(err){res.writeHead(404).end();return;}res.setHeader('Content-Type',({'.js':'text/javascript','.css':'text/css','.html':'text/html','.ttf':'font/ttf'})[path.extname(f)]||'application/octet-stream');res.end(data);});});
-(async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});try{
+(async()=>{await new Promise(r=>server.listen(0,'127.0.0.1',r));const browser=await chromium.launch(launchOptions());try{
  const p=await browser.newPage(),errors=[],requests=[];p.on('pageerror',e=>errors.push(e.message));p.on('request',r=>requests.push(r.url()));await p.goto('http://127.0.0.1:'+server.address().port+'/4eso/sentit-numeric.html');await p.waitForSelector('#ws-generate');
  assert(!requests.some(u=>u.includes('/vendor/fitxes/')));assert((await p.locator('#ws-summary').innerText()).startsWith('4t d’ESO'));assert.equal(await p.locator('[name="ws-topic"]').count(),8);
  const data=await p.evaluate(async()=>{
@@ -33,7 +34,7 @@ const root=process.cwd(),server=http.createServer((req,res)=>{const f=path.join(
  await p.selectOption('#ws-level-0','20');assert(await p.locator('#ws-generate').isDisabled());await p.selectOption('#ws-level-1','60');assert(await p.locator('#ws-level-0 option[value="30"]').evaluate(e=>e.disabled));await p.selectOption('#ws-level-1','40');await p.selectOption('#ws-level-0','40');
  await p.locator('#ws-generate').click();await p.waitForFunction(()=>!document.querySelector('.mi-worksheet').hasAttribute('aria-busy'),{},{timeout:60000});assert(await p.locator('#ws-results').isVisible(),await p.locator('#ws-status').innerText());assert.equal(await p.locator('.mi-worksheet-downloads a').count(),4);
  const download=p.waitForEvent('download');await p.locator('.mi-worksheet-downloads a').first().click();assert((await download).suggestedFilename().startsWith('fitxa-4eso-numeric-'));
- const all=await p.evaluate(()=>worksheetPaperSamples);fs.writeFileSync('tmp/fitxes/catalog-4eso-paper.json',JSON.stringify(all,null,2));
+ const all=await p.evaluate(()=>worksheetPaperSamples);fs.mkdirSync('tmp/fitxes',{recursive:true});fs.writeFileSync('tmp/fitxes/catalog-4eso-paper.json',JSON.stringify(all,null,2));
  // Mostra comuna amb diagrama, exponents negatius, parèntesis i problemes llargs.
  const samples=await p.evaluate(async()=>{
   const wanted=[['reals4t',4],['irracionals4t',9],['intervals4t',6],['errors4t',10],['errors4t',8],['operacions4t',6],['comptatge4t',4],['pascal4t',4],['financera4t',3],['financera4t',10]];
