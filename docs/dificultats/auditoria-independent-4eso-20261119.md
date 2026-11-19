@@ -35,11 +35,19 @@ Cada identificador tema/tipus és un registre tècnic, no una família pedagògi
 
 ### Sentit numèric
 
-Els vuit temes ordinaris cobreixen conjunts reals, irracionals i recta, intervals, errors, operacions, comptatge, triangle de Pascal i educació financera. L’orientació curricular de 4t inclou aquests continguts. Les ampliacions de radicals i exponents fraccionaris, logaritmes i propietats combinatòries s’ajusten al marcatge d’ampliació de les orientacions.
+Els vuit temes ordinaris cobreixen conjunts reals, irracionals i recta, intervals, errors, operacions, comptatge, triangle de Pascal i educació financera. Les orientacions de 4t inclouen aquests sabers i demanen analitzar mètodes per resoldre situacions financeres reals amb augments, disminucions, interessos i taxes. El full de càlcul per simular compromisos financers apareix com a [AMP]. Les ampliacions de radicals i exponents fraccionaris, logaritmes i propietats combinatòries també es mantenen separades del nucli.
 
-El repartiment 59 N1 / 21 N2 / 0 N3 no és, per si sol, una errada. Els procediments directes i les aplicacions amb pocs passos no s’han de pujar de nivell només per completar una quota. Tanmateix, no hi ha ara cap família N3 al sentit numèric; si l’objectiu és practicar una progressió fins a N3, cal detectar un procediment de planificació o validació realment diferent abans de crear exercicis.
+El repartiment actiu continua en 59 N1 / 21 N2 / 0 N3. No proposo apujar exercicis existents per quota. El contrast dels procediments sí que ha trobat un buit específic dins l’educació financera:
 
-**Dictamen:** alineació curricular general correcta; cobertura de N3 pendent d’una anàlisi de buits, sense forçar-la.
+| Proposta | Procediment absent | Nivell proposat | Encaix i límit |
+| --- | --- | --- | --- |
+| financera4t:type 11 — comparació de productes a termini | Calcular el resultat net de dues opcions amb models d’interès diferents i una comissió; comparar-les sobre el mateix capital i termini i justificar la decisió. Els tipus actuals tracten separadament interès simple, creixement compost i comissió, o comparen només una comissió percentual amb una de fixa. | **N3**, com a nova família F7 de decisió financera integrada. No s’aplica encara al mapa ni al generador. | S’ajusta a l’anàlisi de problemes reals d’interessos i taxes. Es pot resoldre a mà amb pocs períodes; no requereix simulació en full de càlcul, que les orientacions marquen [AMP]. |
+
+**Exemple resolt de la proposta:** invertir 1.200 € durant 3 anys. Opció A: interès simple del 3,5% anual, sense comissió. Opció B: interès compost del 3,4% anual i comissió inicial de 8 €. A dona 1.200 · (1 + 0,035 · 3) = **1.326 €**. B dona 1.200 · 1,034³ − 8 ≈ **1.318,61 €**. Per tant, A acaba amb **7,39 € més**.
+
+La demanda N3 és triar i comparar models sobre una mateixa base, no l’extensió de l’enunciat. Errors típics: tractar l’interès compost com a simple, aplicar la comissió al final com si fos un percentatge, comparar només les taxes o oblidar que els terminis han de coincidir. El cas límit és un capital únic i un termini explícit, sense aportacions periòdiques, impostos, inflació ni amortització de préstecs.
+
+**Dictamen:** no hi ha cap N3 actual al sentit numèric. Hi ha una mancança curricularment defensable d’exercicis de decisió financera que coordinin procediments ja introduïts. Recomano crear aquesta família N3; fins que s’adopti, els nivells actius continuen 59 / 21 / 0.
 
 ### Sentit de la mesura
 
@@ -86,7 +94,7 @@ Els tres blocs ara compten en el progrés obligatori i es poden seleccionar al M
 La promoció és de contingut, no de dificultat: el mapa de 4t continua sense N3 a numèric, algebraic, espacial i estocàstic; no s’han apujat nivells per completar quotes.
 ## Famílies i dificultat
 
-- No hi ha famílies N3 als sentits numèric, algebraic, espacial ni estocàstic amb el mapa actual.
+- No hi ha famílies N3 actives als sentits numèric, algebraic, espacial ni estocàstic. Per a numèric s’ha identificat una candidata concreta de decisió financera integrada (F7), documentada com a proposta, sense modificar el generador ni els nivells actius.
 - A mesura hi ha dues entrades N3 que són una sola família de modelització de dues observacions.
 - La manca de N3 no s’ha d’omplir apujant operacions rutinàries, augmentant valors o allargant enunciats. Si es creen tasques, han d’introduir una decisió estratègica, una representació a coordinar o una reconstrucció no present a N1/N2.
 - El mapa de famílies s’adopta com a classificació de treball segons la matriu següent, amb els ajustos procedimentals descrits més avall. Les dues reassignacions indicades a algebraic ja s’han aplicat a aquesta branca; aquest informe no modifica cap altre nivell actiu.
