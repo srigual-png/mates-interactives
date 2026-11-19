@@ -1,14 +1,14 @@
-# Proposta de progressió procedimental de famílies mixtes · 4t ESO
+# Progressió procedimental de famílies mixtes · 4t ESO
 
 Data: 19-11-2026  
 Branca: `codex/auditoria-independent-4eso-20261119`  
-Estat: proposta per revisar; no canvia els nivells actius.
+Estat: dues reassignacions N1/N2 aplicades a la branca de la PR #66; la PR continua Draft.
 
 ## Criteri
 
 Una família pot tenir variants N1 i N2 quan conserva el mateix objectiu matemàtic i canvia la demanda procedimental. N1 cobreix una lectura o aplicació directa; N2 afegeix una decisió, una inversió, una comparació o més d’un pas coordinat. Un canvi de context o de representació no és suficient per pujar de nivell.
 
-La taula mostra els nivells registrats actualment i la proposta. «Mantenir» conserva l’assignació activa com a proposta de treball. «Canviar» assenyala una discrepància procedimental que convé corregir si s’adopta la proposta. Cap canvi de nivell s’ha aplicat.
+La taula mostra els nivells després d’aplicar les dues reassignacions acordades. La resta d’assignacions mixtes es mantenen com a nivells de treball. Els canvis s’han aplicat només a la branca de la PR #66.
 
 ## Famílies mixtes després del contrast dels generadors
 
@@ -22,9 +22,9 @@ La taula mostra els nivells registrats actualment i la proposta. «Mantenir» co
 | Mesura | Resolució de triangles F4 | 11 | 8, 9 | **Mantenir.** El tipus 11 demana un angle amb una raó directa; els tipus 8–9 resolen totes les parts desconegudes del triangle. |
 | Mesura | Precisió F2 · errors absolut, relatiu i percentual | 2, 3, 4 | 5 | **Mantenir.** Els tipus 2–4 calculen un error; el 5 compara la precisió relativa de dues mesures. |
 | Algebraic | Patrons F1 · regla lineal des de seqüència, taula o punts | 8 | 1, 3 | **Mantenir.** El tipus 8 calcula un coeficient amb dos punts; els tipus 1 i 3 construeixen la regla general des d’una seqüència o una taula. |
-| Algebraic | Model afí de quota fixa i cost per ús (creuament de temes) | `funcionsRep4t:9` | `patrons4t:2` | **Proposar canvi:** `patrons4t:2` N2→N1. Els dos tipus modelitzen el mateix cost amb quota fixa i tarifa unitària; el tipus 2 no demana un procediment addicional que justifiqui un nivell superior. |
+| Algebraic | Model afí de quota fixa i cost per ús (creuament de temes) | `funcionsRep4t:9`, `patrons4t:2` | — | **Aplicat:** `patrons4t:2` N2→N1. Els dos tipus modelitzen el mateix cost amb quota fixa i tarifa unitària; el tipus 2 no demana un procediment addicional que justifiqui un nivell superior. |
 | Algebraic | Equacions quadràtiques F1 · incompletes/directes | 1, 2 | 3 | **Mantenir.** Les incompletes permeten una resolució directa; el tipus 3 requereix factoritzar una quadràtica completa. |
-| Algebraic | Equacions quadràtiques F5 · modelització (creuament de temes) | `patrons4t:10` | `equacions2g4t:8–10` | **Proposar canvi:** `patrons4t:10` N1→N2. Demana exactament trobar dos nombres positius a partir de la suma i el producte, el mateix procediment que `equacions2g4t:10`; no ha de quedar un nivell per sota de la seva variant equivalent. |
+| Algebraic | Equacions quadràtiques F5 · modelització (creuament de temes) | — | `patrons4t:10`, `equacions2g4t:8–10` | **Aplicat:** `patrons4t:10` N1→N2. Demana trobar dos nombres positius a partir de la suma i el producte, el mateix procediment que `equacions2g4t:10`. |
 | Algebraic | Sistemes F3 · classificar nombre de solucions | 6 | 5 | **Mantenir.** El tipus 6 ho llegeix en el gràfic; el 5 analitza les proporcions dels coeficients i dels termes independents. |
 | Algebraic | Rectes F1 · pendent/equació/ordenada | 1, 2, 4, 5 | 3, 6 | **Mantenir.** Els tipus 3 i 6 requereixen reconstruir l’equació a partir de dos punts o d’un gràfic; els altres donen més directament el paràmetre o la forma. |
 | Algebraic | Proporcionalitat inversa F1 | 2, 4 | 1, 3 | **Mantenir provisionalment.** Els tipus 1 i 4 identifiquen el model des d’una taula o un gràfic; el 2 substitueix en una fórmula i el 3 modelitza una situació de treball i temps. Revisar el contrast entre reconeixement i càlcul en una adopció posterior. |
@@ -56,18 +56,18 @@ La taula mostra els nivells registrats actualment i la proposta. «Mantenir» co
 | `espaiMostralRecompte4t` | N1: tipus 3–4; N2: tipus 9 | Laplace teòric i planificació d’una estimació experimental són procediments diferents. |
 | `analisiFunc4t` | N1: tipus 1; N2: tipus 7 | Monotonia des d’una expressió i identificació d’una família des d’una taula són tasques diferents. |
 | `nuvolsRelacio4t` | N2: tipus 8 | Inferir una associació plausible des del context, sense dades, queda separada de llegir la direcció d’un núvol. |
-| `patrons4t` / `equacions2g4t` | N1: `patrons4t:10`; N2: `equacions2g4t:10` | És el mateix procediment de suma i producte per trobar dos nombres; es tracta com una família compartida i es proposa alinear el tipus de patrons a N2. |
-| `patrons4t` / `funcionsRep4t` | N2: `patrons4t:2`; N1: `funcionsRep4t:9` | Modelitzar un cost amb quota fixa i tarifa unitària és la mateixa família; es proposa alinear `patrons4t:2` a N1. |
+| `patrons4t` / `equacions2g4t` | N1: —; N2: `patrons4t:10` i `equacions2g4t:10` | Mateixa família de suma i producte; s’ha alineat el nivell de la variant de patrons. |
+| `patrons4t` / `funcionsRep4t` | N1: `patrons4t:2` i `funcionsRep4t:9`; N2: — | Mateixa família de modelització de cost; s’ha alineat el nivell de la variant de patrons. |
 
 Els tipus d’identificació de models des de taules a `funcionsRep4t:7,12`, `analisiFunc4t:7` i `inversaExp4t:1` també són variants d’una mateixa família de reconeixement, totes actualment N2. No formen una família mixta, però s’enllacen per no comptar-ne el procediment diverses vegades.
 
-## Decisió proposada
+## Decisió aplicada a la branca
 
-- Conservar els nivells actuals en les altres famílies mixtes de la taula.
-- Proposar només dues reassignacions: `patrons4t:2` N2→N1 i `patrons4t:10` N1→N2.
-- Mantenir intactes les etiquetes actives fins que s’aprovi explícitament l’adopció.
-- No crear N3: no hi ha evidència en aquesta passada que justifiqui incorporar-ne cap.
+- `patrons4t:2` ha passat de N2 a N1 per alinear-lo amb la variant equivalent `funcionsRep4t:9`.
+- `patrons4t:10` ha passat de N1 a N2 per alinear-lo amb la variant equivalent `equacions2g4t:10`.
+- La resta de nivells de la taula es mantenen.
+- No s’ha creat cap N3: aquesta passada no ha trobat cap evidència que ho justifiqui.
 
 ## Evidència i límits
 
-La proposta és una lectura estàtica dels enunciats, les branques dels generadors i les resolucions. No s’han generat mostres noves, simulat modes ni fet validació visual. No s’ha modificat cap generador, nivell actiu o registre oficial. Les dues reassignacions proposades s’han de validar sobre la pauta de progressió del producte abans de ser aplicades.
+La decisió es basa en una lectura estàtica dels enunciats, les branques dels generadors i les resolucions. En aquesta passada no s’han generat mostres, simulat modes ni fet validació visual. S’han modificat només les dues assignacions de nivell indicades; no s’han alterat generadors ni el registre oficial de famílies. La validació integrada de la PR, si s’activa automàticament pel canvi del registre compartit, serà posterior a aquesta revisió.
