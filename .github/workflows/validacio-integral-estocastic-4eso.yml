@@ -104,7 +104,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: captures-practica-estocastic-4eso
-          path: artifacts/visual-estocastic-4eso/*.png
+          name: captures-visuals-4eso
+          path: artifacts/visual-4eso/*.png
           if-no-files-found: error
           retention-days: 3
