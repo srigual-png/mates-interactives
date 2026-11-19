@@ -86,7 +86,16 @@ Els temes ordinaris actuals sí que cobreixen lectura de taules, associació qua
 1. **Nucli 4t ordinari:** interpretació bàsica del coeficient (r), causalitat vs correlació, lectures de probabilitat condicionada i freqüències/percentatges condicionats en taules, i independència/dependència en casos simples.
 2. **Ampliació:** inferència Bayesiana mèdica amb prevalença i falsos positius quan exigeixi una modelització de diversos passos; tècniques formals o casos deliberadament no lineals que vagin més enllà del concepte i utilitat bàsics.
 
-Aquesta separació podria donar lloc a variants dins dels temes ordinaris existents o a un tema ordinari nou si no hi caben sense barrejar procediments. No proposo moure sencers els tres temes ni assignar nivells per anticipat: primer cal mapar tipus per tipus i preservar el material d’ampliació.
+Aquesta separació podria donar lloc a variants dins dels temes ordinaris existents o a un tema ordinari nou si no hi caben sense barrejar procediments. **No proposo canviar ara els nivells actius**: la promoció curricular i el nivell de dificultat són eixos separats.
+
+En la lectura tipus per tipus d’aquestes quatre branques, la proposta preliminar és:
+- `correlacioBatx4t`: els 10 tipus interpreten el coeficient, els límits de (r), valors atípics o la relació amb regressió/causalitat; contingut ordinari de 4t, distribuït com està ara en 6 N1 i 4 N2.
+- `condicionadaBatx4t`: els 10 tipus treballen el denominador condicionat, dependència/independència o (P(A\mid B)); contingut ordinari, amb la distribució actual 5 N1 i 5 N2.
+- `contingenciaBatx4t`: els 10 tipus són lectura, freqüència conjunta/marginal o percentatge condicionat en taules; contingut ordinari, amb 7 N1 i 3 N2 actuals.
+- `bayesBatx4t`: tipus 4–6 i 8 se solapen amb el recompte i la probabilitat de monedes/daus/assaigs que ja apareixen a `experimentsCompostos4t`; no els comptaria com a famílies noves. Tipus 1, 7 i 9 són conceptes bàsics de condicionament/Bernoulli. Tipus 2, 3 i 10 afegeixen una reconstrucció de la taxa base amb falsos positius; són bons candidats a N2 contextual del nucli si s’expressen amb taula o arbre, no motiu per etiquetar automàticament tot el tema com a Batx.
+- Cal deduplicar els problemes amb taula de contingència i probabilitat condicionada entre `contingenciaBatx4t` i `condicionadaBatx4t`, i explicitar la frontera entre lectura qualitativa de núvols (`nuvolsRelacio4t`), interpretació de (r) i ús del model de regressió.
+
+Això és una proposta d’encaix curricular per a la revisió; no s’ha canviat la visibilitat dels tipus ni el registre oficial.
 
 ## Famílies i dificultat
 
