@@ -1,5 +1,12 @@
-const fs=require('fs'),path=require('path'),assert=require('assert');const {chromium}=require('C:/Users/srigu/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
-(async()=>{const b=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true});try{const p=await b.newPage({viewport:{width:390,height:844}});await p.route(/^https?:/,r=>r.abort());for(const option of ['A','B']){await p.goto('file:///'+path.resolve('4eso/sentit-espacial.html').replace(/\\/g,'/')+'?opcio='+option+'&topic=figures4t&examen=tema');await p.locator('#miTopicExam.active').waitFor();assert.equal(await p.evaluate(()=>miTopicExam.getTopics().length),option==='A'?8:11);await p.evaluate(()=>{
+const fs=require('fs'),path=require('path'),assert=require('assert');
+const {playwright,launchOptions}=require('./scripts/genera-examens-cerca.cjs');
+const {chromium}=playwright();
+(async()=>{const b=await chromium.launch(launchOptions());try{const p=await b.newPage({viewport:{width:390,height:844}});await p.route(/^https?:/,r=>r.abort());for(const option of ['A','B']){await p.goto('file:///'+path.resolve('4eso/sentit-espacial.html').replace(/\\/g,'/')+'?opcio='+option+'&topic=figures4t&examen=tema');await p.locator('#miTopicExam.active').waitFor();assert.equal(await p.evaluate(()=>miTopicExam.getTopics().length),option==='A'?8:11);
+const visibleIds=await p.evaluate(()=>miTopicExam.getTopics().map(t=>t.id));
+const core=['figures4t','vectors4t','components4t','operacionsVectors4t','coordenadesVectors4t','homotecies4t','geometriaFuncions4t','regions4t'];
+const routeB=['rectesAmpA','elementsRectaAmpB','posicioRectesAmpC'];
+assert.deepEqual(visibleIds,option==='A'?core:[...core,...routeB]);
+await p.evaluate(()=>{
 const check=(ok,msg)=>{if(!ok)throw Error(msg)},pair=s=>String(s).replace(/[−–]/g,'-').match(/\((-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)\)/)?.slice(1).map(Number),pairs=q=>[...stripHtml(q.question).replace(/[−–]/g,'-').matchAll(/\((-?\d+(?:\.\d+)?),\s*(-?\d+(?:\.\d+)?)\)/g)].map(m=>m.slice(1).map(Number)),equal=(a,b)=>a&&a.every((v,i)=>Math.abs(v-b[i])<1e-9);
 for(let i=0;i<100;i++){let q=genOperationsVectors4ESO(),a=pairs(q);if(q.type===1||q.type===2)check(equal(pair(q.correct),[a[0][0]+(q.type===1?1:-1)*a[1][0],a[0][1]+(q.type===1?1:-1)*a[1][1]]),'Suma/resta vectorial');if(q.type===3)check(equal(pair(q.correct),[-a[0][0],-a[0][1]]),'Vector oposat');
 q=genHomothety4ESO();a=pairs(q);const k=Number(stripHtml(q.question).replace(/[−–]/g,'-').match(/k=(-?\d+)/)?.[1]);if([1,2,3].includes(q.type)){const c=a[0],point=a[1],expected=q.type===3?[c[0]+(point[0]-c[0])/k,c[1]+(point[1]-c[1])/k]:[c[0]+k*(point[0]-c[0]),c[1]+k*(point[1]-c[1])];check(equal(pair(q.correct),expected),'Homotècia');}}
