@@ -102,19 +102,21 @@ Les fronteres relatives a taules de contingència, distribucions bidimensionals,
 
 S’han contrastat estàticament els enunciats i les resolucions dels tipus que formen les famílies mixtes amb els generadors actuals. La conclusió és que una diferència de nivell només s’ha de justificar quan canvia el procediment, els passos o les decisions necessàries; un context o una representació nova, per si sols, no fan pujar el nivell.
 
-El contrast ha afinat quatre agrupacions del mapa de famílies:
+El contrast ha afinat diverses agrupacions del mapa de famílies. La taula de nivells actuals i proposta concreta de mantenir/canviar tipus és a [proposta-progressio-families-mixtes-4eso-20261119.md](proposta-progressio-families-mixtes-4eso-20261119.md).
 
 | Tema | Ajust de classificació documentat |
 | --- | --- |
+| Errors | `errors4t:type 9` compara dues aproximacions mitjançant error absolut; es reclassifica a F2 i surt de la família d’error relatiu F3. |
 | Precisió i error | `precisioError4t:type 8` comunica una diagonal arrodonida amb una precisió coherent amb les dades d’entrada. Es separa de `type 10`, que sí que propaga l’error màxim de les dimensions al perímetre. |
 | Espai mostral | `espaiMostralRecompte4t:type 3–4` aplica la regla de Laplace; `type 9` planifica una estimació experimental amb freqüència relativa. Es documenten com a tasques diferents, no com una progressió dins d’una sola família. |
 | Representacions de funcions | A `funcionsRep4t`, els tipus 7 i 12 identifiquen una família a partir d’una taula; el tipus 9 construeix/selecciona un model afí contextual a partir de quota i cost per sessió. Es documenten en famílies separades. |
+| Patrons i equacions | `patrons4t:type 10` és el mateix procediment de suma i producte que `equacions2g4t:type 10`; s’enllaça com a variant equivalent. `patrons4t:type 2` i `funcionsRep4t:type 9` modelitzen el mateix cost amb quota fixa i tarifa unitària, i es documenten com una família compartida. |
 | Anàlisi de funcions | A `analisiFunc4t`, el tipus 1 interpreta creixement/decreixement d’una expressió i el tipus 7 identifica un model a partir d’una taula. Són procediments diferents, no nivells successius d’una família d’identificació exponencial. |
 | Núvols de punts | A `nuvolsRelacio4t`, el tipus 8 anticipa una associació plausible a partir del context sense observar dades. Se separa de la lectura de direcció a partir d’un núvol. |
 
 Els exemples de progressió procedimental que es mantenen com a plausibles inclouen el càlcul de l’interès simple abans de trobar el capital final, aplicar la fórmula d’arc en radians abans d’afegir-hi una conversió de graus, i passar de substituir un valor en una recta d’ajust a calcular el canvi de predicció entre dos valors de x. Són justificacions de treball, no una adopció dels nivells.
 
-Aquests ajustos són **documentals**. No alteren les etiquetes N1/N2/N3, els generadors, la selecció de preguntes ni les suites de proves. El nombre de famílies dels temes afectats s’ha de llegir segons el mapa revisat, no segons una agrupació anterior més àmplia.
+Aquests ajustos són **documentals**. No alteren les etiquetes N1/N2/N3, els generadors, la selecció de preguntes ni les suites de proves. La proposta inclou dues reassignacions de nivell per revisar —`patrons4t:type 2` N2→N1 i `patrons4t:type 10` N1→N2—, però cap no s’ha aplicat. El nombre de famílies dels temes afectats s’ha de llegir segons el mapa revisat, no segons una agrupació anterior més àmplia.
 
 ## Evidències i límits dels modes
 
