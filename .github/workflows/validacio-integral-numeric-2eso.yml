@@ -2,6 +2,19 @@ name: Validació integral MI · Sentit numèric 2n ESO
 
 on:
   pull_request:
+    paths:
+      # Canvis que poden afectar la validació de matemàtiques de 2n ESO.
+      - '2eso/sentit-numeric.html'
+      - '2eso/teoria/numeric/**'
+      - 'assets/js/dificultat-mi.js'
+      - 'assets/js/examen-tema.js'
+      - 'assets/js/fitxes/numeric-2eso.js'
+      - 'scripts/comprova-inline-js-html.cjs'
+      - 'scripts/comprova-*2eso.cjs'
+      - 'scripts/fitxes/**'
+      - 'scripts/exporta-inventari-fase-a.cjs'
+      - 'docs/dificultats/**'
+      - '.github/workflows/validacio-integral-numeric-2eso.yml'
   workflow_dispatch:
 
 permissions:
