@@ -6,7 +6,7 @@ He contrastat de nou els cinc sentits de 4t amb els HTML i generadors actuals, e
 
 **Resultat:** el cens de tipus, el mapa de famílies i els nivells tècnics són coherents. L’auditoria va detectar una discrepància curricular a estocàstica; en aquesta branca he promogut a contingut ordinari les taules de contingència, la correlació i la probabilitat condicionada. Bayes amb taxes base continua com a ampliació. Les dues entrades N3 de mesura són variants d’una mateixa família i compten com una sola família alta. Després del contrast procedimental, s’han aplicat a la branca dues reassignacions a `patrons4t`: el tipus 2 passa a N1 i el tipus 10 a N2.
 
-La comparació tipus → família dels 624 tipus és a [mapa-tipus-familia-4eso-20261119.md](mapa-tipus-familia-4eso-20261119.md). El canvi curricular estocàstic altera l’accés als tres temes i la seva inclusió al Mode Examen; conserva els generadors, els tipus d’exercici i els nivells estocàstics. Les dues reassignacions algebraiques de `patrons4t` s’expliquen més avall.
+La comparació tipus → família dels 625 tipus és a [mapa-tipus-familia-4eso-20261119.md](mapa-tipus-familia-4eso-20261119.md). El canvi curricular estocàstic altera l’accés als tres temes i la seva inclusió al Mode Examen; conserva els generadors, els tipus d’exercici i els nivells estocàstics. Les dues reassignacions algebraiques de `patrons4t` s’expliquen més avall.
 
 ## Abast i recompte
 
@@ -14,21 +14,21 @@ He llegit les cinc pàgines de 4t, el mapa compartit de nivells i els deu fitxer
 
 | Sentit | Temes ordinaris / ampliacions | Tipus ordinaris | Tipus d’ampliació | N1 / N2 / N3 ordinaris | N1 / N2 / N3 ampliació |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Numèric | 8 / 4 | 80 | 40 | 59 / 21 / 0 | 36 / 4 / 0 |
+| Numèric | 8 / 4 | 81 | 40 | 59 / 21 / 1 | 36 / 4 / 0 |
 | Mesura | 8 / 4 | 88 | 44 | 63 / 24 / 1 | 30 / 13 / 1 |
 | Algebraic | 8 / 4 | 89 | 40 | 53 / 36 / 0 | 26 / 14 / 0 |
 | Espacial | 8 / 4 | 81 | 42 | 60 / 21 / 0 | 29 / 13 / 0 |
 | Estocàstic | 11 / 1 | 110 | 10 | 69 / 41 / 0 | 3 / 7 / 0 |
-| **Total** | **43 / 17** | **448** | **176** | **304 / 143 / 1** | **124 / 51 / 1** |
+| **Total** | **43 / 17** | **449** | **176** | **304 / 143 / 2** | **124 / 51 / 1** |
 
-Cada identificador tema/tipus és un registre tècnic, no una família pedagògica independent. Per tant, 624 tipus no vol dir 624 procediments diferents.
+Cada identificador tema/tipus és un registre tècnic, no una família pedagògica independent. Per tant, 625 tipus no vol dir 625 procediments diferents.
 
 ## Comprovació de coherència tècnica
 
-- Els registres contenen 624 parelles tema/tipus i 60 temes.
-- El mapa actiu de `assets/js/dificultat-mi.js` coincideix amb el nivell registrat per a tots els 624 tipus: **0 discrepàncies** en aquesta comparació.
-- Les mostres de resultats cobreixen tots els tipus enumerats, sense buits ni duplicats en els números de tipus; **0 discrepàncies** amb els recomptes dels registres.
-- Les mostres desades indiquen 3.000 generacions per tema a numèric, mesura i algebraic, i 1.000 a espacial i estocàstic. Són dades ja existents; no les he tornat a generar.
+- Els registres contenen 625 parelles tema/tipus i 60 temes.
+- El mapa actiu de `assets/js/dificultat-mi.js` coincideix amb el nivell registrat per a tots els 625 tipus: **0 discrepàncies** en aquesta comparació.
+- Les mostres de resultats cobreixen els 624 tipus anteriors sense buits ni duplicats. El nou `financera4t:type 11` encara no apareix al fitxer de mostres; no se n’ha executat una generació integrada en aquesta passada.
+- Les mostres desades indiquen 3.000 generacions per tema a numèric, mesura i algebraic, i 1.000 a espacial i estocàstic, abans d’afegir el tipus 11. Són dades ja existents; no les he tornat a generar.
 - La coincidència entre registres i mapa actiu confirma consistència tècnica, però no demostra que la classificació pedagògica sigui adequada.
 
 ## Dictamen per sentit
@@ -37,17 +37,17 @@ Cada identificador tema/tipus és un registre tècnic, no una família pedagògi
 
 Els vuit temes ordinaris cobreixen conjunts reals, irracionals i recta, intervals, errors, operacions, comptatge, triangle de Pascal i educació financera. Les orientacions de 4t inclouen aquests sabers i demanen analitzar mètodes per resoldre situacions financeres reals amb augments, disminucions, interessos i taxes. El full de càlcul per simular compromisos financers apareix com a [AMP]. Les ampliacions de radicals i exponents fraccionaris, logaritmes i propietats combinatòries també es mantenen separades del nucli.
 
-El repartiment actiu continua en 59 N1 / 21 N2 / 0 N3. No proposo apujar exercicis existents per quota. El contrast dels procediments sí que ha trobat un buit específic dins l’educació financera:
+El repartiment actiu és 59 N1 / 21 N2 / 1 N3. No proposo apujar exercicis existents per quota. El contrast dels procediments sí que ha trobat un buit específic dins l’educació financera:
 
 | Proposta | Procediment absent | Nivell proposat | Encaix i límit |
 | --- | --- | --- | --- |
-| financera4t:type 11 — comparació de productes a termini | Calcular el resultat net de dues opcions amb models d’interès diferents i una comissió; comparar-les sobre el mateix capital i termini i justificar la decisió. Els tipus actuals tracten separadament interès simple, creixement compost i comissió, o comparen només una comissió percentual amb una de fixa. | **N3**, com a nova família F7 de decisió financera integrada. No s’aplica encara al mapa ni al generador. | S’ajusta a l’anàlisi de problemes reals d’interessos i taxes. Es pot resoldre a mà amb pocs períodes; no requereix simulació en full de càlcul, que les orientacions marquen [AMP]. |
+| financera4t:type 11 — comparació de productes a termini | Calcular el resultat net de dues opcions amb models d’interès diferents i una comissió; comparar-les sobre el mateix capital i termini i justificar la decisió. Els tipus actuals tracten separadament interès simple, creixement compost i comissió, o comparen només una comissió percentual amb una de fixa. | **N3**, com a nova família F7 de decisió financera integrada. Implementada a la branca com a tipus 11 del generador i al mapa actiu. | S’ajusta a l’anàlisi de problemes reals d’interessos i taxes. Es pot resoldre a mà amb pocs períodes; no requereix simulació en full de càlcul, que les orientacions marquen [AMP]. |
 
 **Exemple resolt de la proposta:** invertir 1.200 € durant 3 anys. Opció A: interès simple del 3,5% anual, sense comissió. Opció B: interès compost del 3,4% anual i comissió inicial de 8 €. A dona 1.200 · (1 + 0,035 · 3) = **1.326 €**. B dona 1.200 · 1,034³ − 8 ≈ **1.318,61 €**. Per tant, A acaba amb **7,39 € més**.
 
 La demanda N3 és triar i comparar models sobre una mateixa base, no l’extensió de l’enunciat. Errors típics: tractar l’interès compost com a simple, aplicar la comissió al final com si fos un percentatge, comparar només les taxes o oblidar que els terminis han de coincidir. El cas límit és un capital únic i un termini explícit, sense aportacions periòdiques, impostos, inflació ni amortització de préstecs.
 
-**Dictamen:** no hi ha cap N3 actual al sentit numèric. Hi ha una mancança curricularment defensable d’exercicis de decisió financera que coordinin procediments ja introduïts. Recomano crear aquesta família N3; fins que s’adopti, els nivells actius continuen 59 / 21 / 0.
+**Dictamen:** el tipus 11 implementa una única família N3 de decisió financera. Els altres temes numèrics mantenen els seus nivells; el total passa a 59 / 21 / 1.
 
 ### Sentit de la mesura
 
@@ -94,7 +94,7 @@ Els tres blocs ara compten en el progrés obligatori i es poden seleccionar al M
 La promoció és de contingut, no de dificultat: el mapa de 4t continua sense N3 a numèric, algebraic, espacial i estocàstic; no s’han apujat nivells per completar quotes.
 ## Famílies i dificultat
 
-- No hi ha famílies N3 actives als sentits numèric, algebraic, espacial ni estocàstic. Per a numèric s’ha identificat una candidata concreta de decisió financera integrada (F7), documentada com a proposta, sense modificar el generador ni els nivells actius.
+- Hi ha una família N3 activa a numèric: F7, decisió financera integrada (`financera4t:type 11`). No hi ha famílies N3 als sentits algebraic, espacial ni estocàstic.
 - A mesura hi ha dues entrades N3 que són una sola família de modelització de dues observacions.
 - La manca de N3 no s’ha d’omplir apujant operacions rutinàries, augmentant valors o allargant enunciats. Si es creen tasques, han d’introduir una decisió estratègica, una representació a coordinar o una reconstrucció no present a N1/N2.
 - El mapa de famílies s’adopta com a classificació de treball segons la matriu següent, amb els ajustos procedimentals descrits més avall. Les dues reassignacions indicades a algebraic ja s’han aplicat a aquesta branca; aquest informe no modifica cap altre nivell actiu.
@@ -131,7 +131,7 @@ El contrast ha afinat diverses agrupacions del mapa de famílies. La taula de ni
 
 Els exemples de progressió procedimental que es mantenen com a plausibles inclouen el càlcul de l’interès simple abans de trobar el capital final, aplicar la fórmula d’arc en radians abans d’afegir-hi una conversió de graus, i passar de substituir un valor en una recta d’ajust a calcular el canvi de predicció entre dos valors de x. Són justificacions de treball, no una adopció dels nivells.
 
-Aquests ajustos inclouen canvis documentals i dues reassignacions actives a `assets/js/dificultat-mi.js`: `patrons4t:type 2` N2→N1 i `patrons4t:type 10` N1→N2. No s’han modificat generadors, selecció de preguntes ni suites de proves. El nombre de famílies dels temes afectats s’ha de llegir segons el mapa revisat, no segons una agrupació anterior més àmplia.
+Aquests ajustos inclouen dues reassignacions actives a `assets/js/dificultat-mi.js`: `patrons4t:type 2` N2→N1 i `patrons4t:type 10` N1→N2. També s’ha afegit `financera4t:type 11` al generador i al nivell N3 com a nova F7. No s’han modificat suites de proves ni la selecció general de preguntes. El nombre de famílies dels temes afectats s’ha de llegir segons el mapa revisat.
 
 ## Evidències i límits dels modes
 
@@ -153,4 +153,4 @@ Els informes previs no es consideren revalidats per defecte. La suite confirma g
 3. La matriu A/B del Sentit espacial està reflectida a la pàgina de pràctica i als temes d’examen: A inclou els 8 blocs comuns; B n’afegeix A–C; D és opcional.
 4. El workflow numèric de 2n ara s’activa només amb canvis als seus fitxers pertinents; canvis documentals o d’altres sentits no l’activen.
 
-**A la branca de la PR #66 s’han actualitzat l’accés a progrés/examen, les pàgines de teoria, la documentació, els checks de 4t, el pla de composició de l’examen de correlació i dues etiquetes de nivell de `patrons4t`. No s’ha modificat cap generador ni el registre oficial de famílies. El mapa cobreix 624 tipus sense omissions ni IDs duplicats. La PR continua Draft, oberta i sense fusionar.**
+**A la branca de la PR #66 s’han actualitzat l’accés als itineraris/progrés/examen, les pàgines de teoria, la documentació, els checks de 4t, el pla de composició de l’examen de correlació, dues etiquetes de `patrons4t` i el generador financer amb un tipus N3 nou. El mapa actiu i el registre de dificultats cobreixen 625 tipus. No s’han modificat les suites de proves ni el registre oficial de famílies. Les mostres empíriques encara corresponen als 624 tipus anteriors; el tipus 11 requereix validació pròpia. La PR continua Draft, oberta i sense fusionar.**
