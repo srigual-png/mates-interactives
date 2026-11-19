@@ -58,7 +58,7 @@ const extensionD='geometriaAnaliticaAmpD';
       }
       await page.evaluate(()=>showHome());
       console.log(option+': '+data.required.length+' blocs obligatoris i '+data.exam.length+
-        ' blocs a l’examen; A-C '+(option==='B'?'inclosos':'opcionals'); D opcional i fora de l’examen.');
+        ' blocs a l’examen; A-C '+(option==='B'?'inclosos':'opcionals')+'; D opcional i fora de l’examen.');
     }
   }finally{await browser.close();}
 })().catch(e=>{console.error(e);process.exit(1);});
