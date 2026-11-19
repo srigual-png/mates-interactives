@@ -10,6 +10,7 @@ on:
       - 'comprova-examens-estocastic-4eso.cjs'
       - 'comprova-regressio-estocastic-4eso.cjs'
       - 'comprova-ubicacio-estocastic-4eso.cjs'
+      - 'comprova-practica-estocastic-4eso.cjs'
   workflow_dispatch:
 
 permissions:
@@ -57,6 +58,9 @@ jobs:
 
       - name: Comprovar accés a examen en ordinador i mòbil
         run: node comprova-ubicacio-estocastic-4eso.cjs
+
+      - name: Simular la pràctica guiada i les respostes en tots els blocs
+        run: node comprova-practica-estocastic-4eso.cjs
 
       - name: Comprovar esdeveniments d’analítica dels exàmens
         run: node comprova-analitica-estocastic-4eso.cjs
