@@ -7,7 +7,7 @@ for(const opcio of ['A','B']){
   let n=0;const check=(ok,msg)=>{if(!ok)throw Error(msg);n++;};const el=html=>{const e=document.createElement('div');e.innerHTML=html;return e;};const num=s=>Number(String(s).replace('%','').replace(/\s/g,'').replace(',','.'));
   check(miTopicExam.getTopics().length===11,'Blocs');
   for(const t of miTopicExam.getTopics()){
-   for(let k=0;k<3;k++){const qs=miTopicExam.build(t);check(qs.length===12,t.id);check(new Set(qs.map(q=>q.question)).size===12,'Duplicats');for(const q of qs){check(q.options.filter(o=>String(o)===String(q.correct)).length===1,'Correcta única');check(q.options.every(o=>String(o)===String(q.correct)||!validateOpen(q,o)),'Equivalent');check(q.solution.length>0,'Explicació');}}
+   for(let k=0;k<3;k++){let qs;try{qs=miTopicExam.build(t);}catch(e){throw Error('Examen del bloc '+t.id+': '+e.message);}check(qs.length===12,t.id);check(new Set(qs.map(q=>q.question)).size===12,'Duplicats');for(const q of qs){check(q.options.filter(o=>String(o)===String(q.correct)).length===1,'Correcta única');check(q.options.every(o=>String(o)===String(q.correct)||!validateOpen(q,o)),'Equivalent');check(q.solution.length>0,'Explicació');}}
    miTopicExam.start(t.id);const legends=[...document.querySelectorAll('#miTopicExam legend')].map(e=>e.textContent),counts={1:0,2:0,3:0};for(const q of miTopicExam.getSession().questions){const difficulty=miTopicExam.getDifficulty(t,q);check([1,2,3].includes(difficulty),'Nivell disponible '+t.id);counts[difficulty]++;}const labels={1:'Fàcil',2:'Mitjana',3:'Alta'};for(const level of [1,2,3])check(legends.filter(x=>x.includes(labels[level])).length===counts[level],'Dificultats '+t.id+' N'+level);
   }
   let groupA=0;for(let k=0;k<100;k++){
