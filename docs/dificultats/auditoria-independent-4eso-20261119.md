@@ -89,16 +89,17 @@ La promoció és de contingut, no de dificultat: el mapa de 4t continua sense N3
 | Tipus de revisió | Què queda verificat en aquesta passada |
 | --- | --- |
 | Estàtica | Pàgines, generadors declarats, recompte de tipus, registres de dificultat i concordança amb el mapa actiu: sí. |
-| Mostres i simulació | S’han llegit les mostres i metadades ja desades als JSON. No he llançat cap generació o simulació nova. |
-| Mode guiat / autònom / examen | Guiat i autònom: revisió estàtica, no simulats. Examen: simulació amb Playwright dels 11 blocs ordinaris, 12 preguntes per tema en Matemàtiques A i B, lliurament, puntuació, reinici i retorn a pràctica. |
-| Validació visual | No hi ha revisió manual de captures. Playwright ha comprovat al navegador la posició, amplada i accés al botó d’examen en escriptori i mòbil per als 11 blocs. |
-| GitHub Actions | La passada integrada d’estocàstica de 4t ha passat: [run #44496515424](https://github.com/srigual-png/mates-interactives/actions/runs/44496515424). També han passat la sintaxi d’inline JS [#44496515346](https://github.com/srigual-png/mates-interactives/actions/runs/44496515346) i la validació de 2n [#44496515419](https://github.com/srigual-png/mates-interactives/actions/runs/44496515419), activada perquè es va tocar el fitxer compartit de dificultats. Després s’ha limitat el disparador de 2n als fitxers del seu àmbit. |
+| Mostres i simulació | S’han llegit les mostres i metadades ja desades als JSON. S’hi ha afegit una simulació de pràctica amb Playwright; no s’han tornat a generar grans lots de mostres. |
+| Pràctica | La pàgina no té selectors separats anomenats «guiat» i «autònom». S’han simulat els dos formats disponibles (4 opcions i resposta oberta), les pistes disponibles i la correcció pas a pas després d’un error: 154 comprovacions als 11 blocs. Les pistes s’han mostrat en 22 casos i s’ha verificat resposta oberta real en 8 casos; els exercicis que no admeten resposta oberta mantenen les opcions. |
+| Examen | Simulació amb Playwright dels 11 blocs ordinaris, 12 preguntes per tema en Matemàtiques A i B, lliurament, puntuació, reinici i retorn a pràctica. |
+| Validació responsive | Playwright ha comprovat la posició, amplada i accés al botó d’examen en escriptori i mòbil per als 11 blocs. No és una inspecció visual manual. |
+| GitHub Actions | La passada integrada actual [#44512783420](https://github.com/srigual-png/mates-interactives/actions/runs/44512783420) ha passat amb les proves de pràctica afegides. També havien passat la sintaxi inline JS [#44496515346](https://github.com/srigual-png/mates-interactives/actions/runs/44496515346) i la validació de 2n [#44496515419](https://github.com/srigual-png/mates-interactives/actions/runs/44496515419), activada perquè es va tocar el fitxer compartit de dificultats. Després s’ha limitat el disparador de 2n als fitxers del seu àmbit. |
 
-Els informes previs no es consideren revalidats per defecte. La nova suite confirma els generadors i l’examen temàtic, i comprova la disposició responsive del botó d’accés; no cobreix una simulació específica dels modes guiat/autònom ni una inspecció visual manual de totes les figures i solucions.
+Els informes previs no es consideren revalidats per defecte. La suite confirma generadors i exàmens, i ara també els fluxos pràctics disponibles. No s’ha fet una inspecció visual manual de totes les figures, pàgines, controls i solucions.
 
 ## Estat i següents passos
 
-1. La promoció curricular està aplicada i la passada integrada d’examen/generadors ha passat. Continuen pendents la simulació específica de guiat/autònom i una inspecció visual manual completa.
+1. La promoció curricular i la passada integrada estan completades. La pràctica s’ha simulada en els dos formats de resposta disponibles per als 11 blocs; la revisió visual manual completa continua pendent.
 2. El pla d’examen de correlació és 8 N1 / 4 N2 / 0 N3 perquè els seus quatre tipus N2 tenen enunciat fix. Cap etiqueta de nivell dels exercicis no s’ha alterat.
 3. El workflow numèric de 2n ara s’activa només amb canvis als seus fitxers pertinents; canvis documentals o d’altres sentits no l’activen.
 
