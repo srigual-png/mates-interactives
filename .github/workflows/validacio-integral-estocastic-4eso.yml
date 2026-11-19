@@ -47,6 +47,7 @@ jobs:
           node --check comprova-examens-estocastic-4eso.cjs
           node --check comprova-regressio-estocastic-4eso.cjs
           node --check comprova-ubicacio-estocastic-4eso.cjs
+          node --check comprova-practica-estocastic-4eso.cjs
 
       - name: Verificar generadors, mapa i examen general
         run: node comprova-regressio-estocastic-4eso.cjs
@@ -64,3 +65,12 @@ jobs:
 
       - name: Comprovar esdeveniments d’analítica dels exàmens
         run: node comprova-analitica-estocastic-4eso.cjs
+
+      - name: Publicar captures temporals de revisió de la PR
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: captures-practica-estocastic-4eso
+          path: artifacts/visual-estocastic-4eso/*.png
+          if-no-files-found: error
+          retention-days: 3
