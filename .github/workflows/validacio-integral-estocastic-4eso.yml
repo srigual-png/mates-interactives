@@ -5,6 +5,9 @@ on:
     paths:
       - '4eso/sentit-estocastic.html'
       - '4eso/sentit-numeric.html'
+      - '4eso/sentit-espacial.html'
+      - '4eso/teoria/espacial/**'
+      - 'scripts/test-itinerari-espacial-4eso.cjs'
       - 'scripts/fitxes/**'
       - 'assets/js/dificultat-mi.js'
       - 'assets/js/dificultat-modes.js'
@@ -52,12 +55,16 @@ jobs:
           node --check comprova-regressio-estocastic-4eso.cjs
           node --check comprova-ubicacio-estocastic-4eso.cjs
           node --check comprova-practica-estocastic-4eso.cjs
+          node --check scripts/test-itinerari-espacial-4eso.cjs
 
       - name: Verificar generadors, mapa i examen general
         run: node comprova-regressio-estocastic-4eso.cjs
 
       - name: Validar tipus, nivells i motor de fitxes de 4t
         run: node scripts/fitxes/test-4eso.cjs
+
+      - name: Verificar itinerari A/B del sentit espacial
+        run: node scripts/test-itinerari-espacial-4eso.cjs
 
       - name: Simular exàmens de tema en Matemàtiques A i B
         run: |
