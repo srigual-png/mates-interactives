@@ -1,10 +1,10 @@
 # Proposta pedagògica provisional de 20 tipus o variants · Sentit de la mesura, 2n ESO
 
-**Data:** 17/11/2026. **Estat:** proposta en auditoria; **cap nivell N1/N2/N3 aplicat a la web**.
+**Proposta inicial:** 17/11/2026. **Actualització:** el 20/11/2026 s'han validat quatre nivells interns a la branca de la PR #49; la PR continua sense fusionar-se ni publicar-se.
 
-La matriu `docs/auditoria/MI_2ESO_mesura_proposta_nivells_20_variants_pedagogiques.json` recull **20 tipus o variants** vinculats a 8 exemples de la revisió de C011 i variants mixtes i 12 exemples de les cinc agrupacions C010, C017, C021, C051 i C052. Cada registre inclou tasca, exemple, justificació de càrrega cognitiva, advertiments i estat pendent de decisió docent.
+La matriu `docs/auditoria/MI_2ESO_mesura_proposta_nivells_20_variants_pedagogiques.json` recull **20 tipus o variants** vinculats a 8 exemples de la revisió de C011 i variants mixtes i 12 exemples de les cinc agrupacions C010, C017, C021, C051 i C052. Cada registre inclou tasca, exemple, justificació de càrrega cognitiva i advertiments. Les dues variants de `pitagores:15` ja tenen nivell intern N2 validat; les altres propostes d'aquest informe continuen pendents.
 
-## Proposta inicial
+## Distribució inicial (17/11/2026; històrica)
 
 | Orientació | Nombre de registres | Significat |
 |---|---:|---|
@@ -37,8 +37,8 @@ Els casos de frontera i la proposta detallada són a `docs/auditoria/MI_2ESO_mes
 - **`estimacio:14`:** el context de possible confusió d'unitats no indica explícitament les unitats dels valors; cal millorar-ne la precisió conceptual abans d'aprovar-lo.
 - **C010, C017, C021, C051, C052:** evitar duplicar famílies per la mera variació de figura, incògnita, unitat o format de resposta.
 
-## Límits d'aquesta fase
+## Altres punts encara pendents de decisió\n\n- **`unitats:6`:** directe i encadenat tenen càrrega distinta; es poden considerar N1 i N2 candidats sense convertir-los en famílies noves.\n- **`superficies:17`:** si la base és compartida, comparar altures pot ser més senzill que calcular dos volums de bases diferents.\n- **`estimacio:14`:** el context de possible confusió d'unitats no indica explícitament les unitats dels valors; cal millorar-ne la precisió conceptual abans d'aprovar-lo.\n- **C010, C017, C021, C051, C052:** evitar duplicar famílies per la mera variació de figura, incògnita, unitat o format de resposta.\n\n## Límits d'aquesta fase
 
 S'ha contrastat el codi amb les fitxes d'exemples i els oracles matemàtics previs; les categories N1/N2 són **hipòtesis docents**, no conclusions empíriques amb dades d'alumnat. No s'ha elaborat cap repartiment definitiu de totes les famílies del bloc.
 
-**No s'ha modificat cap generador, família o nivell oficial ni s'ha fusionat o publicat la PR #49.**
+**No s'ha modificat cap generador, família aprovada o nivell oficial; la PR #49 continua oberta i en Draft, sense fusió ni publicació.**
