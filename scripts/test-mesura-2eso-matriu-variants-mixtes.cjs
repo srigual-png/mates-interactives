@@ -33,7 +33,7 @@ const base=/\"2eso\/mesura\":\{\"unitats\":\[\[[^\]]*\]/;
 assert(base.test(src),'No es troba el mapa de nivells 2n ESO Mesura');
 assert(src.includes('"pitagores":{"15":{"diagonal":{"level":2'),'Pitàgores diagonal sense N2 revisat');
 assert(src.includes('"superficies":{"17":{"sameBase":{"level":1'),'Superfícies sameBase sense N1 revisat');
-assert(!src.includes('"unitats":{"6":{"encadenada":{"level":2'),'La proposta PR53 no s’ha de descriure com a vigent a la branca PR49');
+assert(src.includes('"unitats":{"6":{"encadenada":{"level":2'),'La variant unitats:6 encadenada incorporada per PR53 no consta al classificador actual');
 assert(html.includes("difficultyVariant='sameBase'"),'Marca generador de superfícies absent');
 assert(html.includes("difficultyVariant:type===15&&question.includes('diagonal')?'diagonal':undefined"),'Marca Pitàgores absent');
 console.log('OK: 3 tipus mixtos, 6 variants N1/N2 traçables, 128 tipus preservats i separació correcta de PR49 vs PR53.');
