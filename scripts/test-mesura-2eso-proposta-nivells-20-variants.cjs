@@ -21,7 +21,7 @@ for(const r of proposal.records){
  assert.equal(r.task,expected.task);
  assert.equal(r.example,expected.example);
  if(r.type_or_variant.startsWith('pitagores:15:')){
-  assert(r.reason.includes('N2'));
+  assert(r.type_or_variant.endsWith(':diagonal')?r.reason.includes('modelitzar'):r.reason.includes('restar els quadrats'));
  }else assert.equal(r.reason,expected.reason);
  if(r.type_or_variant.startsWith('pitagores:15:')){
   assert.equal(r.teacher_decision,'nivell_intern_validat_2026-11-20');
