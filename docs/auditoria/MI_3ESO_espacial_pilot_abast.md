@@ -105,8 +105,8 @@ La revisió prèvia registra 3.000 o més generacions per tema i mostres d’exa
 
 ### GI6 — Invariants del gir (10)
 - **Exemples:** un segment de 4 cm continua fent 4 cm; un angle de 35° continua fent 35°.
-- **Errors:** marcar la posició o l’orientació com a invariant.
-- **Límits:** una rotació pot canviar l’orientació de la figura en el pla? La transformació manté l’orientació cíclica; el que no conserva és la posició.
+- **Errors:** considerar invariant la posició absoluta de la figura o afirmar que el gir inverteix l’orientació cíclica.
+- **Límits:** el gir conserva l’orientació cíclica, les distàncies i els angles; no conserva la posició absoluta de la figura.
 
 ### AX1/AX2 — Reflexió en eix coordinat o desplaçat (1–4,7)
 - **Exemples:** respecte d’X, (−2,3)→(−2,−3); respecte de x=1, (4,2)→(−2,2), ja que la distància horitzontal 3 es replica a l’altre costat.
