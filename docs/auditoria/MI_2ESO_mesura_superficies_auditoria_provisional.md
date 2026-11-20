@@ -1,6 +1,6 @@
 # Auditoria Fase A · Superfícies i volums (2n ESO)
 
-**ESTAT: PROVISIONAL — inspecció estàtica, no validació pedagògica ni proves executades.** No es modifiquen els exercicis ni els nivells.
+**ESTAT: PROVISIONAL — agrupacions i nivells candidats, pendents de validació pedagògica.** La revisió inclou el mapa efectiu i una prova de modes amb DOM simulat; no es modifiquen exercicis ni nivells.
 
 ## Font i nivells efectius
 
@@ -12,14 +12,14 @@
 - **Excepció real:** tipus **17**, variant `sameBase`, **N1**, perquè només es comparen altures quan les dues primeres dimensions de les caixes coincideixen. Les altres variants del mateix tipus queden a **N2**. El generador ja defineix `difficultyVariant='sameBase'` quan `a[0]===b[0]&&a[1]===b[1]` després de descartar volums idèntics. La prova de detecció textual alternativa del classificador no substitueix la identitat explícita del generador. Comptar el tipus 17 només com a N2 ocultaria una variant N1.
 - El mapa antic `level()` és diferent del mapa revisat; no és l'origen de la dificultat efectiva ordinària.
 
-## Famílies matemàtiques candidates: fins a 12, no validades
+## Nuclis matemàtics candidats: fins a 13, no validades
 
 | Candidat | Procediment genuí proposat | Tipus/variants | Nivell actual | Judici provisional |
 |---|---|---|---|---|
 | SV01 | Volum directe d'un ortoedre, cub o prisma amb àrea de base donada | 1,3,5 | N1 | **N1**: mateixa idea V=Ab·h o producte de tres dimensions |
 | SV02 | Volum de prisma triangular amb construcció d'àrea de base | 4 | N2 | **N2**: base triangular abans de volum |
 | SV03 | Volum directe de cilindre | 7 | N1 | **N1**: aplicar πr²h, discutible si es valora la construcció de la base |
-| SV04 | Superfície total d'ortoedre/cub i recompte de cares | 2,6,16,20 | 2 N2; 6 N1; 16,20 N2 | **N1/N2 segons variant**: comptar cares i sumar-ne àrees; 2/16 són el mateix càlcul amb context diferent |
+| SV04 | Superfície total d'ortoedre/cub | 2,6,16 | 2,16 N2; 6 N1 | **N1/N2 segons figura i dades**: comptar cares i sumar-ne àrees; 2/16 comparteixen el càlcul, 6 és el cas regular de sis quadrats |
 | SV05 | Desenvolupament lateral d'un cilindre i àrea lateral | 8,19 | 8 N1; 19 N2 | **N1/N2 discutible**: 8 aplica fórmula d'àrea, 19 identifica dimensions d'un rectangle desplegat |
 | SV06 | Superfície total d'un cilindre tancat | 9 | N2 | **N2**: àrea lateral més dues bases |
 | SV07 | Invertir V=Ab·h per recuperar altura o àrea de base | 10,11 | N1 | **N1**: divisió directa, mateix esquema invers |
@@ -28,8 +28,9 @@
 | SV10 | Reconstruir profunditat des de litres i superfície de base | 15 | N2 | **N2**: litres→m³, àrea de base, volum invers |
 | SV11 | Comparar volums de dues caixes | 17, incl. `sameBase` | N2, però N1 en `sameBase` | **N1 si base igual** (compara altures), **N2 si base diferent** (dos productes i comparació) |
 | SV12 | Detectar confusió de superfície i volum | 18 | N1 | **N1**: el diagnòstic es dona explícit entre distractors senzills |
+| SV13 | Identificar parelles de cares d'un ortoedre desplegat | 20 | N2 | **Objectiu visual diferent**: identificar tipus i parelles de cares, sense calcular l'àrea total; mantenir-lo separat de SV04 |
 
-Les 12 files **no són 12 famílies validades**. SV01/SV02/SV03 comparteixen l'estructura V=Ab·h; SV07/SV08/SV10 comparteixen inversió de volum; SV04/SV05/SV06 comparteixen descomposició de superfície. La fusió o separació necessita el criteri general de procediments genuïns. **Cobertura de tots els tipus 1–20 sense duplicacions de tipus** (el 17 inclou dues variants pedagògiques).
+Les 13 files **no són 13 famílies validades**. SV01/SV02/SV03 comparteixen l'estructura V=Ab·h; SV07/SV08/SV10 comparteixen inversió de volum; SV04/SV05/SV06 comparteixen descomposició de superfície. La fusió o separació necessita el criteri general de procediments genuïns. **Cobertura de tots els tipus 1–20 sense duplicacions de tipus** (el 17 inclou dues variants pedagògiques).
 
 ## Dos exemples resolts per candidat
 
@@ -58,4 +59,19 @@ Tots són exemples pedagògics **construïts a partir de les fórmules i dominis
 6. **N3:** no s'ha trobat un repte genuí de restriccions o reconstrucció no immediata entre els vint tipus. No inventar N3 per satisfer les quotes.
 7. **Solapaments** amb `Unitats i conversions` (volum–capacitat), `Perímetres i àrees` (superfícies), `Pitàgores` i `Problemes de mesura`; contrast transversal pendent.
 
-**Fet:** inspecció de les 20 branques, mapa efectiu i excepció, exemples aritmètics. **Pendent:** tests específics amb oracle independent, UI guiada/autònoma, fitxes i exàmens, contrast amb normativa curricular i revisió humana. La PR #49 és d'auditoria, no un canvi funcional.
+**Fet anteriorment:** inspecció de les 20 branques i del mapa efectiu, amb exemples aritmètics. La prova ampliada de modes ara cobreix els 20 tipus i totes dues variants de superficies:17 amb DOM simulat; resultat local success, workflow integrat pendent. **No és una prova visual en navegador ni cobreix totes les respostes textuals.** Resten el contrast de nivell per al tipus 7,8,14,18,20, la revisió humana final de famílies, les fitxes/exàmens i la comprovació curricular normativa externa. La PR #49 continua sent d'auditoria, no un canvi funcional.
+
+
+## Revisió del bloc i reconciliació de nivells · 21/11/2026
+
+La lectura comparada de les 20 decisions manté provisionalment: volum rectangular/prisma/cub com a nucli directe (SV01), amb el prisma triangular compost (SV02) i el cilindre (SV03) com a procediments candidats diferenciats; superfície de capsa/cub com a variants de recompte (SV04); desplegament lateral de cilindre (SV05), amb càlcul d'àrea al 8 i identificació de dimensions al 19; superfície total cilíndrica (SV06); inversions de V=Ab·h (SV07), amb l'àrea circular del cilindre com a pas extra a SV08; capacitat de recipient (SV09) amb escalat diferent m³→L o dm³=L; i profunditat inversa (SV10). El tipus 17 és mixt: la branca sameBase compara altures (N1), mentre la resta calcula i compara volums (N2). El diagnòstic 18 no s'agrupa amb el diagnòstic de perímetres 18 només pel format. El tipus 20 s'ha separat de la família de superfície total: demana reconèixer parelles de cares, no sumar-ne les àrees.
+
+| Tipus | Mapa efectiu | Proposta candidata | Estat de la revisió |
+|---|---|---|---|
+| superficies:7 | N1 | N1/N2 | N1 defensable amb dimensions donades i aplicació directa; mantenir candidat pendent de validació. |
+| superficies:8 | N1 | N2 | Discrepància: la identificació del rectangle lateral pot afegir demanda espacial; cal decidir si això puja el nivell intern. |
+| superficies:14 | N2 | N1/N2 | Discrepància: l'equivalència dm³=L és directa, però se suma al càlcul del volum; mantenir N2 fins a decisió explícita. |
+| superficies:18 | N1 | N1/N2 | N1 coherent amb diagnòstic de distractors tancats; valorar si la justificació és realment requerida. |
+| superficies:20 | N2 | N1/N2 | N2 defensable per visualització de les tres parelles de cares; conservar com a objectiu diferent de calcular superfície. |
+
+Aquests candidats no són nivells aprovats i no justifiquen canvis automàtics al mapa. La bateria de modes cobreix ara 104 casos totals: els 20 tipus de Superfícies i Volums, tots els de Unitats, Escales i Perímetres/Àrees, les dues branques de unitats:6 i superficies:17, i mostres dels altres temes. Resultat local success; la integració ha de confirmar el commit.
