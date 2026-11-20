@@ -6,7 +6,7 @@
   "source_tests_success": 23,
   "source_tests_queued": 0,
   "completed_paired_evidence": 2,
-  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 87 casos. El lot 2 completa els vincles d’estimacio:18 amb estimacio:6/17 i d’estimacio:9 amb estimacio:7/8/13; el lot 3 afegeix 24 parelles de Pitàgores basades en sis destinataris i 4.000 instàncies contrastades. Dos dels 21 vincles compleixen ara el criteri estricte. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real.",
+  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 135 casos. Els lots 2–4 afegeixen 4 parelles d’estimació i 72 parelles de Pitàgores; el lot 4 separa les dues branques del tipus 15 i els catets coneguts curt/llarg del tipus 3. Dos dels 21 vincles compleixen ara el criteri estricte. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real.",
   "rows": [
     {
       "source": "escales:16",
@@ -381,8 +381,8 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-pitagores15-dues-branques.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "math_evidence_verified_5_pairs",
-      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "paired_same_parameters": "math_evidence_verified_29_examples_across_8_targets_and_two_branches",
+      "target_mathematical_oracles_for_this_pair": "independent_oracles_for_matched_targets_and_both_branches; structural_no_exact_match_for_pitagores_5_and_problemes_6",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
       "family_approved": false,
@@ -395,7 +395,37 @@
         "approval": "pending_teacher_review",
         "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
         "mode_limits": "not_real_browser_or_full_open_answer_validation"
-      }
+      },
+      "additional_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-pitagores-3-15-lot-4.cjs",
+        "targets": [
+          "pitagores:4",
+          "pitagores:6",
+          "pitagores:7",
+          "pitagores:8",
+          "pitagores:13",
+          "problemes:7"
+        ],
+        "verified_examples": 24,
+        "branches": {
+          "diagonal_direct": 12,
+          "cathet_inverse": 12
+        },
+        "independent_oracle_instances": 4400,
+        "structural_targets_without_exact_pair": [
+          {
+            "target": "pitagores:5",
+            "reason": "equal square legs do not occur in the right-triangle source pool"
+          },
+          {
+            "target": "problemes:6",
+            "reason": "fixed screen dimensions 30–80 cm do not coincide with the source triple legs"
+          }
+        ],
+        "unit_scale_note": "For target types 4, 6, 7, 8 and problemes:7, the same integer triple signature is shown in cm versus m; these are cross-scale mathematical contrasts, not equal physical lengths. Type 13 uses cm in both.",
+        "independent_oracles": true
+      },
+      "completed_paired_evidence": false
     },
     {
       "source": "pitagores:3",
@@ -413,8 +443,8 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-pitagores-sis-variants-oracles.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "math_evidence_verified_3_pairs",
-      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "paired_same_parameters": "math_evidence_verified_27_examples_across_7_targets",
+      "target_mathematical_oracles_for_this_pair": "independent_oracles_for_matched_targets; structural_no_exact_match_for_pitagores_5_and_problemes_6",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
       "family_approved": false,
@@ -427,7 +457,37 @@
         "approval": "pending_teacher_review",
         "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
         "mode_limits": "not_real_browser_or_full_open_answer_validation"
-      }
+      },
+      "additional_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-pitagores-3-15-lot-4.cjs",
+        "targets": [
+          "pitagores:4",
+          "pitagores:6",
+          "pitagores:7",
+          "pitagores:8",
+          "pitagores:13",
+          "problemes:7"
+        ],
+        "verified_examples": 24,
+        "branches": [
+          "known_cathet_short",
+          "known_cathet_long"
+        ],
+        "independent_oracle_instances": 4400,
+        "structural_targets_without_exact_pair": [
+          {
+            "target": "pitagores:5",
+            "reason": "equal square legs do not occur in the right-triangle source pool"
+          },
+          {
+            "target": "problemes:6",
+            "reason": "fixed screen dimensions 30–80 cm do not coincide with the source triple legs"
+          }
+        ],
+        "unit_scale_note": "For target types 4, 6, 7, 8 and problemes:7, the same integer triple signature is shown in cm versus m; these are cross-scale mathematical contrasts, not equal physical lengths. Type 13 uses cm in both.",
+        "independent_oracles": true
+      },
+      "completed_paired_evidence": false
     },
     {
       "source": "problemes:14",
@@ -860,5 +920,37 @@
     ],
     "teacher_approved": false,
     "unit_scale_note": "Pitagores:13 pair examples share integer triple signatures with meter-based source tasks but state lengths in centimeters; they are cross-scale mathematical contrasts."
+  },
+  "paired_evidence_lot_4": {
+    "script": "scripts/test-mesura-2eso-pitagores-3-15-lot-4.cjs",
+    "scope": [
+      "pitagores:3",
+      "pitagores:15"
+    ],
+    "paired_targets": [
+      "pitagores:4",
+      "pitagores:6",
+      "pitagores:7",
+      "pitagores:8",
+      "pitagores:13",
+      "problemes:7"
+    ],
+    "independent_oracle_instances": 4400,
+    "verified_paired_examples": 48,
+    "branch_coverage": {
+      "pitagores_3": [
+        "known_cathet_short",
+        "known_cathet_long"
+      ],
+      "pitagores_15": [
+        "diagonal_direct",
+        "cathet_inverse"
+      ]
+    },
+    "structural_targets_without_exact_pair": [
+      "pitagores:5",
+      "problemes:6"
+    ],
+    "teacher_approved": false
   }
 }
