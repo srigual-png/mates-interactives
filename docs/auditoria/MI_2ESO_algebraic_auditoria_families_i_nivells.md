@@ -1,6 +1,6 @@
 # 2n ESO · Sentit algebraic — auditoria de famílies i nivells
 
-> Dictamen documental complet dels **88 tipus ordinaris**. Les ampliacions productes3r, identitats3r i sistemes3r (48 tipus) són excloses. PR #56 continua en Draft; no s’han canviat generadors, nivells actius ni families-validades.json.
+> Dictamen documental complet dels **88 tipus ordinaris**. Les ampliacions productes3r, identitats3r i sistemes3r (48 tipus) són excloses. PR #56 està llesta per a revisió; no s’han canviat generadors, nivells actius ni families-validades.json.
 
 ## Abast, mètode i criteri curricular
 
@@ -203,7 +203,7 @@ No hi ha hagut canvis de codi; per tant, no s’han executat proves noves ni rep
 
 ## Conclusió i estat de la PR
 
-La proposta heretada 46 N1 / 42 N2 / cap N3 es manté adequada al nivell de procediment observat. La comparació completa no revela duplicacions exactes que calgui eliminar ni buit prou justificat per afegir una nova família; les coincidències de context/representació s’han documentat com variants quan preserven el procediment. PR #56 resta **oberta i en Draft**, sense fusió ni publicació.
+La proposta heretada 46 N1 / 42 N2 / cap N3 es manté adequada al nivell de procediment observat. La comparació completa no revela duplicacions exactes que calgui eliminar ni buit prou justificat per afegir una nova família; les coincidències de context/representació s’han documentat com variants quan preserven el procediment. PR #56 resta **oberta i llesta per a revisió**, sense fusió ni publicació.
 
 
 ## Segon exemple resolt per família
