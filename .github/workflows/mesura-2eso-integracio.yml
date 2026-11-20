@@ -5,6 +5,7 @@ on:
     paths:
       - '2eso/sentit-mesura.html'
       - 'scripts/test-mesura-2eso-integracio-*.cjs'
+      - 'scripts/test-mesura-2eso-dues-parelles-parametres-iguals.cjs'
       - 'scripts/test-mesura-2eso-lot-2-parelles-restants.cjs'
       - 'scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs'
       - 'scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs'
@@ -45,6 +46,8 @@ jobs:
         run: node scripts/test-mesura-2eso-integracio-modes-vincles.cjs
       - name: Evidencia aparellada addicional - estimacio 9 13 17 18
         run: node scripts/test-mesura-2eso-lot-2-parelles-restants.cjs
+      - name: Oracles independents perimetres 14/5 i 4/15
+        run: node scripts/test-mesura-2eso-dues-parelles-parametres-iguals.cjs
       - name: Evidencia aparellada Pitàgores 12 i 14
         run: node scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs
       - name: Nucli directe Pitàgores 12 i 14 amb 2
