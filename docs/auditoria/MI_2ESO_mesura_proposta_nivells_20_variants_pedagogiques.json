@@ -208,24 +208,24 @@
       "type_or_variant": "pitagores:15:diagonal",
       "task": "Diagonal d'un rectangle amb dos costats",
       "example": "Rectangle 8×15 cm",
-      "reason": "Cal modelitzar la diagonal com hipotenusa, tot i que l'algoritme és directe",
-      "level_suggestion": "N1_o_N2_pendent",
-      "level_confidence": "baixa_no_validat",
+      "reason": "Cal modelitzar la diagonal del rectangle com la hipotenusa abans d'aplicar Pitàgores; es manté N2, coherent amb altres diagonals rectangulars.",
+      "level_suggestion": "N2_validat_per_a_mapa_intern",
+      "level_confidence": "revisat_amb_criteri_pedagogic_intern",
       "common_core": "Compartir generador amb recuperació de catet",
-      "warning": "La proposta històrica classifica diagonal N2 i catet N1: cal confirmar que aquesta dificultat relativa és apropiada",
-      "teacher_decision": "pendent"
+      "warning": "Nivell intern MI N2 confirmat; no implica aprovació de família ni nivell oficial curricular.",
+      "teacher_decision": "validat_en_revisio_docent_2026-11-20"
     },
     {
       "cluster_id": "ME2-C036",
       "type_or_variant": "pitagores:15:catet",
       "task": "Recuperar un catet a partir d'hipotenusa i altre catet",
       "example": "Hipotenusa 29 cm i catet 20 cm",
-      "reason": "Fórmula inversa sovint exigeix més control algebraic que calcular hipotenusa",
-      "level_suggestion": "N1_o_N2_pendent",
-      "level_confidence": "baixa_no_validat",
+      "reason": "Cal trobar el quadrat del catet restant per diferència i extreure'n l'arrel; mateixa inversió de Pitàgores que pitagores:3.",
+      "level_suggestion": "N2_validat_per_a_mapa_intern",
+      "level_confidence": "revisat_amb_criteri_pedagogic_intern",
       "common_core": "No validar automàticament catet N1 i diagonal N2",
-      "warning": "Comprovar equilibri pedagògic entre variants i nivell real",
-      "teacher_decision": "pendent"
+      "warning": "Nivell intern MI N2 confirmat; no implica aprovació de família ni nivell oficial curricular.",
+      "teacher_decision": "validat_en_revisio_docent_2026-11-20"
     },
     {
       "cluster_id": "ME2-C056",
@@ -260,10 +260,6 @@
     {
       "key": "estimacio:14",
       "issue": "Observed and reference values lack units despite interpretation of unit mix-ups."
-    },
-    {
-      "key": "pitagores:15",
-      "issue": "Earlier variant labels catet N1 vs diagonal N2 may invert cognitive difficulty; require actual classroom judgment."
     }
   ],
   "gates": {
@@ -271,5 +267,16 @@
     "generator_changed": false,
     "pr_merged": false,
     "deployed": false
+  },
+  "internal_level_decisions": {
+    "date": "2026-11-20",
+    "status": "validated_for_internal_mi_map",
+    "not_official_curriculum": true,
+    "points": [
+      "perimetres:14=N2",
+      "pitagores:3:inverse=N2",
+      "pitagores:15:diagonal=N2",
+      "pitagores:15:catet=N2"
+    ]
   }
 }
