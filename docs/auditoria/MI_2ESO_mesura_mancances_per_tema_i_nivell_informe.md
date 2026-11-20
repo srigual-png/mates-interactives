@@ -8,13 +8,13 @@ La font és el mapa `REVIEWED_LEVELS["2eso/mesura"]` de `assets/js/dificultat-mi
 
 | Tema | Tipus totals | N1 | N2 | N3 | Dèficit mínim de tipus N1/N2/N3 |
 |---|---:|---:|---:|---:|---|
-| Unitats | 18 | 15 | 3 | 0 | 0 / **2** / **3** |
+| Unitats | 18 | 14 | 4 | 0 | 0 / **1** / **3** |
 | Escales | 18 | 5 | 13 | 0 | 0 / 0 / **3** |
 | Pitàgores | 16 | 7 | 9 | 0 | 0 / 0 / **3** |
 | Perímetres | 18 | 11 | 7 | 0 | 0 / 0 / **3** |
 | Superfícies | 20 | 9 | 11 | 0 | 0 / 0 / **3** |
 | Estimació | 18 | 13 | 5 | 0 | 0 / 0 / **3** |
-| Problemes | 20 | 4 | 16 | 0 | **1** / 0 / **3** |
+| Problemes | 20 | 5 | 15 | 0 | 0 / 0 / **3** |
 | **Total** | **128** | **64** | **64** | **0** | — |
 
 **Interpretació correcta:** són dèficits dels **tipus actualment classificats**, comparats amb els llindars N1≥5, N2≥5, N3≥3. **No es poden fer servir per acreditar els mínims de famílies genuïnes**, que necessiten comprovació de procediments independents.
