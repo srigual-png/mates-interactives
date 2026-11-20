@@ -13,6 +13,7 @@ on:
       - 'scripts/test-mesura-2eso-etiquetes5-superficie8-contrast.cjs'
       - 'scripts/test-mesura-2eso-superficies10-11-15-inverses.cjs'
       - 'scripts/test-mesura-2eso-superficies1-17-aparellades.cjs'
+      - 'scripts/test-mesura-2eso-prismes-3-4-parelles.cjs'
       - 'scripts/test-mesura-2eso-lot-2-parelles-restants.cjs'
       - 'scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs'
       - 'scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs'
@@ -69,6 +70,8 @@ jobs:
         run: node scripts/test-mesura-2eso-superficies10-11-15-inverses.cjs
       - name: Contrast de comparacio de capacitats amb volums individuals
         run: node scripts/test-mesura-2eso-superficies1-17-aparellades.cjs
+      - name: Contrast de prismes triangulars amb volums directes
+        run: node scripts/test-mesura-2eso-prismes-3-4-parelles.cjs
       - name: Evidencia aparellada Pitàgores 12 i 14
         run: node scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs
       - name: Nucli directe Pitàgores 12 i 14 amb 2
