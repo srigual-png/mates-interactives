@@ -25,7 +25,7 @@
 | 8 | A7 comparar precisió | diferent | N2 | Comparar errors respecte d’un irracional |
 | 9 | A8 error absolut | diferent | N1 | Valor absolut de la diferència |
 | 10 | A9 reconstruir interval d’arrodoniment | diferent | N2 | Calcular semiamplada i gestionar extrems |
-| 11 | A10 aproximar en context amb restricció | diferent | N1 | Decidir arrodoniment per defecte per no excedir material |
+| 11 | A10 aproximar en context amb restricció | diferent | N1; variant `transport` N2 | El cas de material no excedible és N1; transportar 126 alumnes en autocars requereix quocient i arrodoniment cap amunt (N2) |
 | 12 | A11 jutjar estimació de producte | diferent | N2 | Construir estimació de referència i valorar ordre de magnitud |
 | Potències 1 | P1 exponent zero | nucli | N1 | Aplicar a⁰=1 per a≠0 |
 | 2 | P2 exponent negatiu | nucli | N1 | Invertir base |
@@ -49,7 +49,7 @@
 ### Bloc 4 · Aproximacions
 
 - **A1 Arrodonir.** 6,693 a centèsimes → 6,69; 9139 a milers → 9000. Error: mirar la xifra conservada, no la següent. Límit: xifra següent 5; zeros finals i notació de precisió.
-- **A2 Per defecte.** 6,4337 a centèsimes → 6,43; −2,341 a dècimes, sense superar el valor numèric, requereix cura amb signe. Error: usar arrodoniment ordinari. Límit: nombre negatiu: “per defecte” s’ha de definir clarament al context.
+- **A2 Per defecte.** 6,4337 a centèsimes → 6,43; −2,341 a dècimes per defecte, sense superar el valor numèric, dona **−2,4**. Error: truncar cap a zero i obtenir −2,3, que és superior a −2,341. Límit: nombre negatiu: “per defecte” s’ha de definir clarament al context.
 - **A3 Per excés.** 8,9583 a mil·lèsimes → 8,959; 5,1449 a mil·lèsimes → 5,145. Error: arrodonir al més proper en lloc de prendre el mínim superior. Límit: si el valor ja té la precisió sol·licitada, queda igual.
 - **A4 Excés/defecte.** 2,5 respecte de 2,465 és per excés; 0,12 respecte de 0,124 és per defecte. Error: comparar només xifres decimals. Límit: valors negatius exigeixen convenció explícita.
 - **A5 Precisió d’una mesura.** 3,0502 m a 0,01 m → 3,05 m; 8,2007 m a 0,1 m → 8,2 m. Error: confondre precisió 0,01 amb dues xifres significatives. Límit: conservar unitat i zero final quan sigui significatiu.
@@ -57,7 +57,7 @@
 - **A7 Comparar precisió.** Per √2, 1,414 és més precís que 1,41 (errors aprox. 0,0002 i 0,0042); per √5, 2,236 és més precís que 2,24. Error: escollir només pel nombre de decimals sense considerar el valor exacte. Límit: zeros finals poden ser rellevants per la precisió.
 - **A8 Error absolut.** |17,33−17,3|=0,03; |45,84−45,8|=0,04. Error: deixar resultat negatiu. Límit: unitats han de coincidir.
 - **A9 Interval original.** Arrodonit a centèsimes dona 4,10: interval usual [4,095;4,105); arrodonit a dècimes dona 17,6: [17,55;17,65). Error: usar una unitat completa en lloc de la meitat. Límit: incloure un extrem depèn de la regla d’empats; el generador adopta extrem inferior inclòs i superior exclòs.
-- **A10 Restricció contextual.** Amb 17,8 m i només talls de metres complets sense excedir → 17 m; amb 6,2 kg màxims en paquets d’1 kg → 6 paquets. Error: arrodonir a 18 i excedir el disponible. Límit: cal que l’enunciat expliqui clarament la restricció.
+- **A10 Restricció contextual (tipus 11; base N1, variant `transport` N2).** Amb 17,8 m i només talls de metres complets sense excedir → 17 m; amb 6,2 kg màxims en paquets d’1 kg → 6 paquets. Variant `transport`: 126 alumnes i 50 places per autocar → ⌈126/50⌉=3 autocars; cal arrodonir el quocient cap amunt per no deixar alumnes sense plaça. Error: arrodonir a 2 i deixar-ne 26 sense transport. Límit: cal que l’enunciat expliqui clarament la restricció.
 - **A11 Estimar producte.** 2,8×3≈3×3=9; 5,8×4,7≈6×5=30 i producte exacte 27,26, estimació raonable. Error: confondre estimació amb resultat exacte. Límit: acceptar estratègies diferents si són coherents amb l’ordre de magnitud.
 
 ### Bloc 5 · Potències
@@ -80,15 +80,15 @@ Els nivells N1 de les lleis individuals són adequats perquè el procediment és
 
 No s’ha trobat un buit curricular genuí que exigeixi una família nova: el bloc d’aproximacions cobreix arrodoniment, excés/defecte, precisió, error absolut/màxim, interval d’arrodoniment, comparació i estimació; potències cobreix exponents enters, lleis, signe i jerarquia. No es dupliquen famílies del bloc de nombres reals o racionals: la comparació d’irracionals aquí serveix per a precisió, i les potències són operacions pròpies del bloc 5.
 
-Hi ha variants de tipus 6/11 a aproximacions (precisió de mesura vs restricció “no superar”), però la segona és contextualment diferent i justificadament una altra tasca. Les lleis de potències es relacionen, però no es fusionen quan l’operació/procediment és diferent.
+Hi ha un enllaç entre els tipus 6 i 11 d’aproximacions (precisió de mesura vs restricció “no superar”), però són tasques contextualment diferents. Dins del tipus 11, la branca `transport` és una variant de nivell N2 perquè exigeix arrodonir el quocient cap amunt. Les lleis de potències es relacionen, però no es fusionen quan l’operació/procediment és diferent.
 
 ## Modes i evidència
 
 - **Estàtica:** codi actual defineix aquests generadors, guies i solucions; pàgina inclou pràctica guiada/sense pistes, resposta múltiple/oberta i examen. No s’han recorregut visualment totes les branques.
-- **Simulació existent, no repetida:** `resultats-punt3-3eso-numeric.json` registra 3.000 mostres per tema. Aproximacions: 9/4/0 i examen 6/6/0; potències: 13/3/0 i examen 6/6/0. El resultat heretat del bloc d’aproximacions suma 13 tipus observats en cobertura (les branques comptades són 12) i per tant cal tractar aquest comptatge com a mètrica heretada a revisar, no com a prova de 13 tipus diferents. Potències mostra 13/3/0, que suma els 16 tipus.
+- **Simulació existent, no repetida:** `resultats-punt3-3eso-numeric.json` registra 3.000 mostres per tema. Aproximacions: cobertura per camins 9/4/0 i examen 6/6/0; potències: 13/3/0 i examen 6/6/0. A aproximacions hi ha 12 tipus únics: 9 amb nivell base N1 i 3 amb nivell base N2; la branca `transport` del tipus 11 afegeix un camí N2. Per això la cobertura compta 13 camins de nivell (9/4/0), no 13 tipus diferents ni una anomalia pendent. Potències mostra 13/3/0 per als 16 tipus.
 - **Visual:** cap validació visual completa registrada per aquests bancs; no afirmo qualitat de renderitzat ni accessibilitat visual.
 - No s’ha modificat codi, de manera que no s’han repetit proves ni executat una validació nova.
 
 ## Conclusió
 
-Proposta mantinguda: aproximacions 9 N1 / 3 N2 / 0 N3 (tipus 8,10,12 a N2); potències 13 N1 / 3 N2 / 0 N3 (tipus 10,11,15 a N2). S’han reutilitzat evidències; l’anomalia de cobertura d’aproximacions (13 comptabilitzats per a 12 tipus) queda explícita i pendent de reconciliar si s’edita aquesta mètrica. No es canvien nivells actius ni registre oficial de famílies. Només s’ha completat la documentació de la PR #58.
+Proposta mantinguda per tipus únic: aproximacions 9 N1 / 3 N2 / 0 N3 (tipus 8,10,12 a N2; el tipus 11 té una branca N2 `transport`) i potències 13 N1 / 3 N2 / 0 N3 (tipus 10,11,15 a N2). La cobertura per camins d’aproximacions és 9/4/0 perquè compta aquesta variant addicional; no hi ha una anomalia pendent de reconciliar. No es canvien nivells actius ni registre oficial de famílies. Només s’ha completat la documentació de la PR #58.
