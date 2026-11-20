@@ -151,4 +151,4 @@ No es proposen exercicis nous: les set temàtiques cobreixen els procediments ce
 - **84/84** tipus ordinaris comptabilitzats i vinculats als grups candidats de l’informe.
 - Els 84 nivells de la revisió prèvia coincideixen amb el mapa actiu: **58 N1, 26 N2, 0 N3**. No es proposa reclassificació.
 - No es proposen noves famílies ni canvis de codi. S’ha corregit el registre antic de revisió perquè descrigui el tipus 13 del generador actual; aquesta pregunta N1 continua inclosa al mode examen i a la pràctica.
-- Famílies candidates, no oficials; PR en Draft, sense fusió ni publicació.
+- Famílies candidates, no oficials; PR oberta i Ready for review, sense fusió ni publicació.
