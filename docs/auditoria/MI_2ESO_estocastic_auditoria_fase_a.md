@@ -4,7 +4,7 @@
 
 Revisió documental dels **7 temes ordinaris i 84 tipus** de `2eso/sentit-estocastic.html`. S’exclouen `intervals3r`, `grafics3r`, `dispersio3r` i `probabilitat3r` (49 tipus d’ampliació de 3r, segons el registre actual: 13+12+12+12).
 
-S’han contrastat els generadors actuals, `docs/dificultats/revisio-2eso-estocastic-punt3.json`, `docs/dificultats/resultats-punt3-2eso-estocastic.json` i `assets/js/dificultat-mi.js`. Les mostres prèvies s’han reutilitzat; no s’han repetit proves. S’ha aplicat una correcció acotada al mode examen per excloure `experiments:13`; no s’han modificat nivells actius ni el registre oficial de famílies. El workflow numèric global es limita en una PR d’infraestructura separada. Aquesta revisió és estàtica; no s’ha fet simulació ni validació visual.
+S’han contrastat els generadors actuals, `docs/dificultats/revisio-2eso-estocastic-punt3.json`, `docs/dificultats/resultats-punt3-2eso-estocastic.json` i `assets/js/dificultat-mi.js`. Les mostres prèvies s’han reutilitzat; no s’han repetit proves. S’ha resolt una discrepància entre el registre antic de revisió i el generador actual per a `experiments:13`: és una pregunta de freqüència esperada i continua apta per a l’examen i la pràctica. No s’han modificat nivells actius ni el registre oficial de famílies. El workflow numèric global es limita en una PR d’infraestructura separada. Aquesta revisió és estàtica; no s’ha fet simulació ni validació visual.
 
 ## Referent curricular
 
@@ -64,10 +64,11 @@ Els codis són **grups locals candidats**, no famílies oficials validades. «Va
 |  | P3: 9, 10 | Mateixa família: complement o canvi de representació decimal/percentual | N1 |
 |  | P4: 11, 13, 15 | Tasques diferents: freqüència experimental, freqüència esperada i context històric | N1 |
 |  | P5: 12, 14 | Mateixa família: diferenciar freqüència observada i teòrica i interpretar l’estabilització amb més repeticions | N2 |
-| Experiments compostos | X1: 1, 3, 4, 13 | Mateixa família àmplia de representació d’etapes/espai mostral; arbre, llista i reconeixement són variants; el tipus 13 planteja problema d’ambigüitat per a examen | N1 |
+| Experiments compostos | X1: 1, 3, 4 | Mateixa família àmplia de representació d’etapes/espai mostral; arbre, llista i reconeixement són variants | N1 |
 |  | X2: 2, 6 | Mateixa família de recompte de combinacions/resultats amb producte o taula | N1 |
 |  | X3: 5 | Tasca diferent: llegir la probabilitat d’un camí donat | N1 |
 |  | X4: 7, 8, 9, 10, 11, 12 | Família de probabilitat composta; successos, complement, «almenys», «exactament», «cap» i unió són variants que exigeixen control de casos | N2 |
+|  | X5: 13 | Freqüència esperada p·N; mateixa família que `probabilitat:13`, amb context diferent | N1 |
 
 ## Exemples resolts, errors i límits per família
 
@@ -110,9 +111,10 @@ Els codis són **grups locals candidats**, no famílies oficials validades. «Va
 - **P5:** una moneda equilibrada pot donar 15 cares de 40 (0,375) sense deixar de tenir probabilitat teòrica 0,5; amb més repeticions, la freqüència relativa tendeix a estabilitzar-se prop de 0,5, però no ha de ser exactament 0,5 en cada mostra.
 - **Errors/límits:** els resultats d’una bossa no són equiprobables per color si hi ha proporcions diferents; probabilitat experimental depèn de les dades observades; la llei dels grans nombres descriu tendència, no el resultat de la propera prova; tipus 15 és una pregunta contextual/històrica, no un procediment de càlcul.
 
-### Experiments compostos (X1–X4)
+### Experiments compostos (X1–X4) i freqüència esperada (X5)
 - **X1/X2:** dues monedes tenen espai {CC,CX,XC,XX} i 4 camins; un dau de 4 cares i una ruleta de 3 sectors tenen 4·3=12 combinacions; amb dos daus de 4 cares, la suma 4 té (1,3),(2,2),(3,1): 3 casos.
 - **X3/X4:** si al diagrama cada branca té probabilitat 1/2, un camí de dues branques té 1/4; amb dos daus de 4 cares, suma 5 té 4/16=1/4; tres monedes, «almenys una cara» és 1−1/8=7/8; dues monedes, exactament dues cares és 1/4 i cap cara també 1/4; «cara o múltiple de 3» en moneda+dau és 1/2+2/6−(1/2·2/6)=2/3.
+- **X5:** si p=0,25 i N=200, el recompte esperat és 0,25·200=50; si p=0,4 i N=100, és 40. És una previsió aproximada, no el resultat garantit de l’experiment.
 - **Errors/límits:** distingir parelles ordenades (1,2) i (2,1); no multiplicar probabilitats sense comprovar la independència; «o» pot incloure intersecció; «almenys una» acostuma a ser més fàcil pel complement; la regla de Laplace exigeix casos equiprobables.
 
 ## Deduplicació transversal
@@ -124,6 +126,7 @@ Els codis són **grups locals candidats**, no famílies oficials validades. «Va
 | Freqüències i mitjana ponderada | La taula de freqüències alimenta el càlcul; convertir-la en una mesura central és una família diferent. |
 | Investigacions: valor anòmal i Centralització: mitjana/rang | El context de dades es comparteix, però decidir què verificar és diferent de calcular una estadística. No eliminar valors extrems automàticament. |
 | Probabilitat simple i Experiments compostos | Principi de Laplace compartit; simple (un pas) i compost (espai de resultats de més d’una etapa) són variants relacionades, no la mateixa tasca final. |
+| `probabilitat:13` ↔ `experiments:13` | Mateixa família/procediment de freqüència esperada p·N; canvia el context, no el càlcul. |
 | Arbre i taula de contingència dins d’Experiments | Representacions alternatives de l’espai mostral; si codifiquen els mateixos resultats són variants, no famílies noves per format. |
 
 Els grups són locals a aquest informe. **No s’ha actualitzat `families-validades.json`** perquè cap família d’aquest tema consta encara com a validada al registre oficial.
@@ -132,7 +135,7 @@ Els grups són locals a aquest informe. **No s’ha actualitzat `families-valida
 
 No es proposen exercicis nous: les set temàtiques cobreixen els procediments centrals descrits a les orientacions consultades. No trobar N3 és una conclusió curricular, no una invitació a etiquetar arbitràriament tasques directes com a avançades.
 
-**Incidència sobre `experiments:13` i el mode examen — corregida a la PR:** el registre previ indica que aquest tipus s’exclou de l’examen per ambigüitat de representació. El generador podia seleccionar-lo perquè la bossa recorre 1–13 i `startExam()` no filtrava tipus. Ara el tema declara `examExcludedTypes:[13]` i els dos punts de generació de l’examen descarten aquesta branca. Continua disponible en pràctica. El canvi no altera famílies ni nivells. No s’ha executat una prova nova; la correcció queda pendent de la validació automàtica de la PR.
+**Discrepància de `experiments:13` — resolta:** els exemples del registre antic de revisió descrivien una tasca de triar una representació (arbre/taula), però el generador actual i les mostres desades descriuen una freqüència esperada: multiplicar la probabilitat teòrica pel nombre de repeticions. La classificació i els exemples antics no corresponien al generador actual; s’han actualitzat. Com que l’enunciat demana explícitament una previsió aproximada i les combinacions generades donen resultats enters, no hi ha una ambigüitat de representació que justifiqui excloure aquest tipus de l’examen. S’ha retirat el filtre temporal; el tipus continua disponible tant en pràctica com en examen. No s’han modificat nivells ni famílies oficials.
 
 ## Modes i evidència
 
@@ -147,5 +150,5 @@ No es proposen exercicis nous: les set temàtiques cobreixen els procediments ce
 
 - **84/84** tipus ordinaris comptabilitzats i vinculats als grups candidats de l’informe.
 - Els 84 nivells de la revisió prèvia coincideixen amb el mapa actiu: **58 N1, 26 N2, 0 N3**. No es proposa reclassificació.
-- No es proposen noves famílies ni canvis de codi; sí que es deixa documentada la incidència de `experiments:13` a l’examen per decidir-ne el tractament.
+- No es proposen noves famílies ni canvis de codi. S’ha corregit el registre antic de revisió perquè descrigui el tipus 13 del generador actual; aquesta pregunta N1 continua inclosa al mode examen i a la pràctica.
 - Famílies candidates, no oficials; PR en Draft, sense fusió ni publicació.
