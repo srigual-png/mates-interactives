@@ -6,7 +6,7 @@
 
 S’inclouen els set temes ordinaris de `2eso/sentit-espacial.html`: semblança, Tales i escales, Pitàgores, cossos, visualització 3D, coordenades i modelització. S’exclouen els quatre temes etiquetats com a ampliació de 3r (`pitagores3r`, `semblanca3r`, `transformacions3r` i `transformacionsAv3r`).
 
-Fonts del repositori: `2eso/sentit-espacial.html`, `docs/dificultats/revisio-2eso-espacial-punt3.json` i `docs/dificultats/resultats-punt3-2eso-espacial.json`. Referència curricular consultada: [XTEC — Orientacions curriculars de Matemàtiques per cursos (PDF)](https://xtec.gencat.cat/web/.content/curriculum/eso/concrecions-curriculars/Orientacions-curriculars_MAT_SEC_per-cursos.pdf), apartat **2n ESO, sentit espacial**, p. 12 i visualització, p. 13 (consulta del 17-11-2026). La pàgina [Concrecions curriculars](https://xtec.gencat.cat/ca/curriculum/eso/concrecions-curriculars/) identifica aquest document com a concreció oficial.
+Fonts del repositori: `2eso/sentit-espacial.html`, `docs/dificultats/revisio-2eso-espacial-punt3.json` i `docs/dificultats/resultats-punt3-2eso-espacial.json`. La revisió original és una fotografia del codi de `main` al commit `086d7b725db59ebb99266352e84ef8d9470a7d17`. Després, la contradicció del peu de `visual3d:5` es va corregir a la PR #61: ara indica `COSTAT DRET`. Aquest canvi no acredita una validació visual completa del banc. Referència curricular consultada: [XTEC — Orientacions curriculars de Matemàtiques per cursos (PDF)](https://xtec.gencat.cat/web/.content/curriculum/eso/concrecions-curriculars/Orientacions-curriculars_MAT_SEC_per-cursos.pdf), apartat **2n ESO, sentit espacial**, p. 12 i visualització, p. 13 (consulta del 17-11-2026). La pàgina [Concrecions curriculars](https://xtec.gencat.cat/ca/curriculum/eso/concrecions-curriculars/) identifica aquest document com a concreció oficial.
 
 La classificació efectiva és: **37 tipus únics a N1, 31 a N2 i 2 a N3**. El tipus 10 de modelització té una variant de plànol/escala que també es classifica a N1; per això, el resum de cobertura per camins el compta a N1 i N2. El validador de cobertura informa 38/31/2 camins, però només hi ha 70 tipus ordinaris.
 
@@ -96,7 +96,7 @@ S’han inspeccionat els set generadors de 2n a `2eso/sentit-espacial.html`; cob
 
 **Reclassificació a contrastar:** el tipus `modelitzacio:3` està proposat com a N3 perquè encadena semblança d’ombres i Pitàgores per al cable. Amb l’exemple generat (pal 1,5 m / ombra 2 m; torre amb ombra 8 m; cable ancorat a 8 m de la base), primer s’obté l’altura de la torre: 1,5/2 = h/8, h = 6 m; després el cable: √(6² + 8²) = 10 m. Com que els dos models són explícits i són aplicacions treballades a 2n, proposo **N2 provisional**, pendent de comprovar els extrems de valors i la càrrega de representació.
 
-**Incidència funcional detectada:** a `visual3d:5`, l’enunciat pregunta per la vista des del costat dret i el càlcul usa la projecció lateral, però la figura afegeix el peu “mirada des del DAVANT”. És una contradicció de l’ajuda visual que pot confondre l’alumne. S’ha de corregir en una PR funcional abans de donar per validat aquest exercici; no s’ha canviat el codi en aquesta PR documental. És un defecte concret detectat en revisar els generadors, no una deducció del recompte de mostres.
+**Incidència funcional detectada a la versió auditada:** a `visual3d:5`, l’enunciat preguntava per la vista des del costat dret, però la figura afegia el peu “mirada des del DAVANT”. La PR #61 va corregir el peu a `COSTAT DRET`. La present PR continua sent només documental, i l’auditoria no declara una validació visual completa d’aquest banc.
 
 ### Propostes de nivell a verificar amb exercicis resolts
 
@@ -136,12 +136,7 @@ La lectura del codi confirma que els set generadors cobreixen els codis ordinari
 
 El resum existent registra **3.000 mostres generades per tema** i recompte de cobertura/examen. Això és evidència de generació simulada, no una revisió pedagògica de 3.000 exercicis únics. El mateix resum informa `banksReviewed: 0`, `bankChecks: []` i `pageErrors: []`; per tant, encara no acredita una passada de bancs ni una comprovació visual al navegador. Aquest document no executa proves noves ni modifica el comportament de l’aplicació.
 
-Abans de considerar el bloc complet cal:
-1. inspeccionar els generadors i variants reals i vincular 70/70 tipus amb preguntes, respostes, modes i els nivells configurats;
-2. decidir mantenir/reclassificar/fusionar/separar cada família candidata amb almenys dos exercicis reals resolts, errors típics i casos límit;
-3. contrastar cada decisió amb la seqüenciació XTEC específica de 2n;
-4. comprovar modes guiat, autònom i examen, així com opcions/resposta oberta, i fer una validació visual;
-5. demanar revisió docent final. Fins aleshores, aquesta proposta és provisional i no s’ha de copiar al registre oficial de famílies.
+La passada documental d’aquesta PR ja completa els passos 1–3: inventari i variants reals, decisions d’agrupació amb exemples/ errors/límits i contrast curricular. També revisa estàticament guiat i autònom i reutilitza la simulació d’examen existent. Abans de considerar el bloc validat en producció encara cal una validació visual al navegador i la revisió docent final. Per tant, la proposta continua sent provisional i no s’ha de copiar al registre oficial de famílies.
 
 
 ## Tancament de l’auditoria documental
@@ -192,7 +187,7 @@ Cada parell d’exemples mostra el procediment complet amb nombres triats; no pr
 
 | Família i tipus | Exemples resolts | Errors típics i casos límit |
 |---|---|---|
-| P1. Relació d’àrees (1) | Catets 3,4: àrees 9 i 16; hipotenusa 25 cm². Si falten 9 i 25: l’altra àrea és 16 cm². | Confondre costat i àrea; la unitat demanada és cm² i no cal arrel. |
+| P1. Relació d’àrees (1) | Catets 3 cm i 4 cm: els quadrats sobre els catets tenen àrees 9 cm² i 16 cm²; el quadrat sobre la hipotenusa té àrea 25 cm², de manera que la hipotenusa fa 5 cm. Si falten les àrees 9 cm² i 25 cm², l’altra àrea és 16 cm². | Confondre costat i àrea; la unitat demanada és cm² i no cal arrel. |
 | P2. Identificar hipotenusa (2) | Angle recte a A: hipotenusa BC. Angle recte a R: hipotenusa PQ. | Error: triar el costat que sembla inclinat. El dibuix pot no estar a escala; mana l’angle recte. |
 | P3. Trobar hipotenusa (3) | Catets 3,4: c=√25=5. Catets 5,12: c=13. | Error: sumar catets sense quadrats o oblidar l’arrel. Si no és exacta, cal indicar forma/arrodoniment. |
 | P4. Trobar catet (4) | c=13, b=5: a=√(169−25)=12. c=10, b=6: a=8. | Error: sumar o fer √(c²−b). La hipotenusa sempre és el costat més llarg. |
@@ -224,7 +219,7 @@ Cada parell d’exemples mostra el procediment complet amb nombres triats; no pr
 | V1. Validar xarxa (1) | Sis quadrats ben disposats, sense solapament, poden formar cub. Sis quadrats en una sola tira no tanquen correctament el cub. | No n’hi ha prou amb comptar sis cares; verificar plegat i solapament. |
 | V2. Cara oposada (2) | En xarxa amb una cara central i quatre al voltant, plegar: cares en costats oposats del centre són oposades. En una tira de quatre, primera i tercera queden oposades. | Rotar la xarxa mantenint adjacències; l’etiqueta concreta depèn del dibuix, així que la solució del banc s’ha de validar visualment. |
 | V3. Comptar cubs (3) | Columnes 1,2,3 → 6 cubs. Columnes 2,2,1,1 → 6. | Comptar només cubs davanters o multiplicar alçades; cubs ocults a sota compten. N1 proposat perquè és suma directa. |
-| V4. Llegir projecció (4,5), variants davant/costat | Alçades frontals 2,1,3 → seqüència 2-1-3. Màxims laterals per profunditat 1,3 → 1-3. | Confondre amplada i fons o la direcció de mirada. El tipus 5 demana costat dret però el peu diu DAVANT: defecte funcional pendent, no donar per validat l’ítem. |
+| V4. Llegir projecció (4,5), variants davant/costat | Alçades frontals 2,1,3 → seqüència 2-1-3. Màxims laterals per profunditat 1,3 → 1-3. | Confondre amplada i fons o la direcció de mirada. A la versió auditada, el tipus 5 demanava costat dret però el peu deia DAVANT. La contradicció es va corregir a la PR #61 (peu `COSTAT DRET`); això no equival a validació visual completa de l’ítem. |
 | V5. Petjada superior (6) | 3×2 amb una posició buida → 5 caselles. Petjada 2×3 tota ocupada → 6. | Comptar cubs/alçades en lloc de posicions ocupades; alçada no canvia petjada. |
 | V6. Completar prisma (7; també M5) | Prisma 3×2×3 conté 18; n’hi ha 11 → afegir 7. Prisma 2×2×4 conté 16; n’hi ha 13 → afegir 3. | Donar total en lloc de diferència; el generador imposa almenys dos cubs absents. |
 | V7. Combinar tres vistes (8) | Restriccions de columnes 1,2,1,3 sumen 7: descartar qualsevol candidat que no doni aquesta projecció. Un altre cas 2,1,2,2 suma 7 i s’ha de contrastar també amb vista lateral i superior. | Ignorar una vista; verificar que cap pista sola no reveli la resposta. N3 provisional només si la combinació és imprescindible. |
@@ -272,6 +267,6 @@ Cada parell d’exemples mostra el procediment complet amb nombres triats; no pr
 
 ### Incidències i tancament
 
-La contradicció de visual3d:5 (demana costat dret, el dibuix diu DAVANT) queda documentada per corregir en una PR funcional separada. La varietat numèrica de coordenades:7 i modelitzacio:3 és limitada. Cap canvi s’ha aplicat a codi, generadors, nivells actius o families-validades.json.
+La contradicció de `visual3d:5` es va corregir a la PR #61 (el peu ara indica costat dret); no s’ha fet una validació visual completa del banc. La varietat numèrica de `coordenades:7` i `modelitzacio:3` continua sent limitada. En aquesta PR no s’han aplicat canvis a generadors, nivells actius o `families-validades.json`.
 
 La passada documental queda completa: 70/70 tipus mapejats, decisions d’agrupació, proposta curricular de nivells i fitxa per família amb dos exemples resolts, errors típics i límits. La PR resta oberta i en Draft, sense fusió ni publicació. La correcció funcional i la validació docent/visual són futures tasques independents i no es consideren validades en aquesta auditoria.
