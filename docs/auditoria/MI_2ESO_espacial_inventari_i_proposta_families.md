@@ -136,7 +136,7 @@ La lectura del codi confirma que els set generadors cobreixen els codis ordinari
 
 El resum existent registra **3.000 mostres generades per tema** i recompte de cobertura/examen. Això és evidència de generació simulada, no una revisió pedagògica de 3.000 exercicis únics. El mateix resum informa `banksReviewed: 0`, `bankChecks: []` i `pageErrors: []`; per tant, encara no acredita una passada de bancs ni una comprovació visual al navegador. Aquest document no executa proves noves ni modifica el comportament de l’aplicació.
 
-La passada documental d’aquesta PR ja completa els passos 1–3: inventari i variants reals, decisions d’agrupació amb exemples/ errors/límits i contrast curricular. També revisa estàticament guiat i autònom i reutilitza la simulació d’examen existent. Abans de considerar el bloc validat en producció encara cal una validació visual al navegador i la revisió docent final. Per tant, la proposta continua sent provisional i no s’ha de copiar al registre oficial de famílies.
+La passada documental d’aquesta PR ja completa els passos 1–3: inventari i variants reals, decisions d’agrupació amb exemples resolts, errors i límits i contrast curricular. També revisa estàticament guiat i autònom i reutilitza la simulació d’examen existent. Abans de considerar el bloc validat en producció encara cal una validació visual al navegador i la revisió docent final. Per tant, la proposta continua sent provisional i no s’ha de copiar al registre oficial de famílies.
 
 
 ## Tancament de l’auditoria documental
@@ -269,4 +269,4 @@ Cada parell d’exemples mostra el procediment complet amb nombres triats; no pr
 
 La contradicció de `visual3d:5` es va corregir a la PR #61 (el peu ara indica costat dret); no s’ha fet una validació visual completa del banc. La varietat numèrica de `coordenades:7` i `modelitzacio:3` continua sent limitada. En aquesta PR no s’han aplicat canvis a generadors, nivells actius o `families-validades.json`.
 
-La passada documental queda completa: 70/70 tipus mapejats, decisions d’agrupació, proposta curricular de nivells i fitxa per família amb dos exemples resolts, errors típics i límits. La PR resta oberta i en Draft, sense fusió ni publicació. La correcció funcional i la validació docent/visual són futures tasques independents i no es consideren validades en aquesta auditoria.
+La passada documental queda completa: 70/70 tipus mapejats, decisions d’agrupació, proposta curricular de nivells i fitxa per família amb dos exemples resolts, errors típics i límits. La PR resta oberta i llesta per a revisió, sense fusió ni publicació. La correcció funcional de `visual3d:5` es va completar a la PR #61; la validació docent i la revisió visual completa no s’han acreditat en aquesta auditoria.
