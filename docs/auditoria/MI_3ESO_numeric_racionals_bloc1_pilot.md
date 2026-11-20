@@ -27,7 +27,7 @@ Font oficial: [XTEC, Orientacions curriculars de Matemàtiques per cursos, propo
 5. Revisar modes guiat, autònom i examen amb la millor evidència existent; deixar explícit què és estàtic, simulat o visual.
 6. Si s’apliquen canvis funcionals, executar una sola integració al final i reutilitzar les evidències vigents sobre codi sense canvis.
 
-El resultat d’aquest pilot servirà per fixar una plantilla eficient per als blocs següents. La PR es manté en Draft durant aquesta passada; no inclou fusió, publicació ni canvis de producció.
+El resultat d’aquest pilot servirà per fixar una plantilla eficient per als blocs següents. La PR es manté oberta i llesta per a revisió durant aquesta passada; no inclou fusió, publicació ni canvis de producció.
 
 ## Resultat del pilot: mapa de famílies i nivells
 
@@ -161,4 +161,4 @@ Són propostes, no s’han afegit al generador ni s’han executat proves perqu�
 
 ### Tancament del pilot
 
-Els sis passos s’han completat en l’àmbit documental: inventari de 12, mapa de famílies, nivells proposats amb justificació, dues mostres resoltes per família, errors/límits, dues propostes contextuals per al buit observat i revisió dels modes amb límits explícits. No s’ha alterat codi ni nivell de producció perquè les propostes d’exercicis no s’han validat encara al generador. La PR continua Draft, sense fusió ni publicació.
+Els sis passos s’han completat en l’àmbit documental: inventari de 12, mapa de famílies, nivells proposats amb justificació, dues mostres resoltes per família, errors/límits, dues propostes contextuals per al buit observat i revisió dels modes amb límits explícits. No s’ha alterat codi ni nivell de producció perquè les propostes d’exercicis no s’han validat encara al generador. La PR continua oberta i llesta per a revisió, sense fusió ni publicació.
