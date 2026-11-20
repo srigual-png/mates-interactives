@@ -46,4 +46,4 @@ La distribució inicial dels **131 registres de dificultat** era **27 N1 candida
 
 Les comprovacions de **6.200 mostres matemàtiques/contextuals** de fases anteriors continuen essent un aval del comportament mostrejat dels generadors, **no** una certificació docent del nombre de famílies o de la dificultat.
 
-**Cap generador, família o nivell oficial modificat.** `estimacio:12` continua pendent de la teva autorització explícita. La PR #49 segueix oberta, sense fusió ni publicació.
+**Estat posterior (20/11/2026):** cap generador, família aprovada o nivell oficial modificat. Les quatre assignacions de nivell intern docent validades ja consten al mapa i els recomptes s'han actualitzat. `estimacio:12` continua pendent d'autorització específica. La PR #49 segueix oberta i en Draft, sense fusió ni publicació.
