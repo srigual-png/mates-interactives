@@ -30,5 +30,10 @@ for(const type of [10,11]){
   cases.push({pair:'pitagores:'+type+' vs pitagores:3',common_hypotenuse_and_cathetus_cm:key,source:{question:source.q,correct:source.correct},core:{question:core.q,correct:core.correct},pedagogy:type===10?'Pythagoras inverse gives isosceles height, then triangle area (cm²)':'Pythagoras inverse gives missing side, then rectangle perimeter (cm)'});
  }
 }
-console.log(JSON.stringify({generated:1200,paired_cases:cases.length,cases,approved:false},null,2));
+const pairsByTarget=Object.fromEntries([10,11].map(type=>[
+ `pitagores:${type}`,
+ cases.filter(x=>x.pair===`pitagores:${type} vs pitagores:3`).length
+]));
+for(const [target,count] of Object.entries(pairsByTarget))assert(count>=2,`Need at least two independent paired oracles for ${target}`);
+console.log(JSON.stringify({generated:1200,independent_oracle_instances:1200,paired_cases:cases.length,verified_pairs_by_target:pairsByTarget,cases,approved:false},null,2));
 assert(cases.length>=4);

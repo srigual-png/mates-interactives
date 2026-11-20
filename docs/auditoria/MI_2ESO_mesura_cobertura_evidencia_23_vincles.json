@@ -5,8 +5,8 @@
   "unique_group_pairs": 21,
   "source_tests_success": 23,
   "source_tests_queued": 0,
-  "completed_paired_evidence": 2,
-  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 135 casos. Els lots 2–4 afegeixen 4 parelles d’estimació i 72 parelles de Pitàgores; el lot 4 separa les dues branques del tipus 15 i els catets coneguts curt/llarg del tipus 3. Dos dels 21 vincles compleixen ara el criteri estricte. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real.",
+  "completed_paired_evidence": 4,
+  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 135 casos. Els lots 2–4 afegeixen 4 parelles d’estimació i 72 parelles de Pitàgores; el lot 4 separa les dues branques del tipus 15 i els catets coneguts curt/llarg del tipus 3. El lot 5 verifica amb oracles independents les 7 mostres aparellades ja existents de pitagores:10/11 amb pitagores:3 (1.200 instàncies generades); no afegeix casos aparellats al recompte. Quatre dels 21 vincles compleixen ara el criteri estricte. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real. Pitagores:5 i problemes:6 continuen com a límits estructurals sense parella exacta dins els pools provats; no es compten com a coincidències.",
   "rows": [
     {
       "source": "escales:16",
@@ -210,7 +210,7 @@
       "source_oracle_script": "scripts/test-mesura-2eso-pitagores-sis-variants-oracles.cjs",
       "source_math_evidence": "workflow_success",
       "paired_same_parameters": "math_evidence_verified_3_pairs",
-      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "target_mathematical_oracles_for_this_pair": "independent_oracles_verified_for_both_generators",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
       "family_approved": false,
@@ -223,6 +223,21 @@
         "approval": "pending_teacher_review",
         "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
         "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      },
+      "completed_paired_evidence": true,
+      "completion_basis": "At least two exact examples with pitagores:3; lot 5 verifies 3 matched samples with independent formulas for both generators.",
+      "additional_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-pitagores3-10-11-aparellades.cjs",
+        "lot": "Pythagoras lot 5",
+        "target": "pitagores:3",
+        "verified_examples": 3,
+        "independent_oracle_instances": 1200,
+        "independent_oracles": true,
+        "matched_hypotenuse_and_cathetus_cm": [
+          "10:6",
+          "13:5",
+          "25:7"
+        ]
       }
     },
     {
@@ -234,7 +249,7 @@
       "source_oracle_script": "scripts/test-mesura-2eso-pitagores-sis-variants-oracles.cjs",
       "source_math_evidence": "workflow_success",
       "paired_same_parameters": "math_evidence_verified_4_pairs",
-      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "target_mathematical_oracles_for_this_pair": "independent_oracles_verified_for_both_generators",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
       "family_approved": false,
@@ -247,6 +262,22 @@
         "approval": "pending_teacher_review",
         "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
         "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      },
+      "completed_paired_evidence": true,
+      "completion_basis": "At least two exact examples with pitagores:3; lot 5 verifies 4 matched samples with independent formulas for both generators.",
+      "additional_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-pitagores3-10-11-aparellades.cjs",
+        "lot": "Pythagoras lot 5",
+        "target": "pitagores:3",
+        "verified_examples": 4,
+        "independent_oracle_instances": 1200,
+        "independent_oracles": true,
+        "matched_hypotenuse_and_cathetus_cm": [
+          "10:6",
+          "13:5",
+          "15:9",
+          "17:8"
+        ]
       }
     },
     {
