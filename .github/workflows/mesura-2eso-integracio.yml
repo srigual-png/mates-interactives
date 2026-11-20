@@ -5,6 +5,7 @@ on:
     paths:
       - '2eso/sentit-mesura.html'
       - 'scripts/test-mesura-2eso-integracio-*.cjs'
+      - 'scripts/test-mesura-2eso-lot-2-parelles-restants.cjs'
       - 'scripts/test-mesura-2eso-workflows-centralitzats.cjs'
       - 'scripts/run-mesura-2eso-integracio.cjs'
       - '.github/workflows/mesura-2eso-integracio.yml'
@@ -38,6 +39,8 @@ jobs:
           fi
       - name: Contrastar els modes guiat autonom i examen dels vincles
         run: node scripts/test-mesura-2eso-integracio-modes-vincles.cjs
+      - name: Evidencia aparellada addicional - estimacio 9 13 17 18
+        run: node scripts/test-mesura-2eso-lot-2-parelles-restants.cjs
       - name: Contrast pedagogic pendent - Unitats 1 4 5 9
         run: node scripts/test-mesura-2eso-integracio-pedagogica-unitats-4-5.cjs
       - name: Unitats - suites existents

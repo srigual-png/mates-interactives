@@ -5,8 +5,8 @@
   "unique_group_pairs": 21,
   "source_tests_success": 23,
   "source_tests_queued": 0,
-  "completed_paired_evidence": 0,
-  "note": "Hi ha evidència matemàtica aparellada parcial: 16 grups únics / 17 registres i 59 casos. No equival a relacions completes: cap dels 21 vincles compleix encara el criteri complet de la matriu (tots els destinataris i branques, almenys dues mostres aparellades per parella i oracles independents als dos generadors). Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real.",
+  "completed_paired_evidence": 2,
+  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 63 casos. El lot 2 completa els vincles d’estimacio:18 amb estimacio:6/17 i d’estimacio:9 amb estimacio:7/8/13: 2 dels 21 vincles compleixen ara el criteri estricte. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real.",
   "rows": [
     {
       "source": "escales:16",
@@ -69,8 +69,8 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-3-parelles-evidencia-real.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "math_evidence_verified_4_pairs",
-      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "paired_same_parameters": "math_evidence_verified_6_pairs_across_targets_6_and_17",
+      "target_mathematical_oracles_for_this_pair": "independent_oracles_verified_for_all_targets",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
       "family_approved": false,
@@ -83,7 +83,16 @@
         "approval": "pending_teacher_review",
         "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
         "mode_limits": "not_real_browser_or_full_open_answer_validation"
-      }
+      },
+      "additional_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-lot-2-parelles-restants.cjs",
+        "target": "estimacio:17",
+        "verified_examples": 2,
+        "available_exact_overlaps": 12,
+        "independent_oracles": true
+      },
+      "completed_paired_evidence": true,
+      "completion_basis": "At least 2 exact examples each with estimacio:6 and estimacio:17; independent oracles in both paired test scripts."
     },
     {
       "source": "estimacio:9",
@@ -95,8 +104,8 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-error-relatiu-comparacions-i-volums.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "math_evidence_verified_3_triplets",
-      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "paired_same_parameters": "math_evidence_verified_3_triplets_for_7_8_plus_2_pairs_for_13",
+      "target_mathematical_oracles_for_this_pair": "independent_oracles_verified_for_all_targets",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
       "family_approved": false,
@@ -109,7 +118,16 @@
         "approval": "pending_teacher_review",
         "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
         "mode_limits": "not_real_browser_or_full_open_answer_validation"
-      }
+      },
+      "additional_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-lot-2-parelles-restants.cjs",
+        "target": "estimacio:13",
+        "verified_examples": 2,
+        "available_exact_overlaps": 2,
+        "independent_oracles": true
+      },
+      "completed_paired_evidence": true,
+      "completion_basis": "At least 2 exact examples each with estimacio:7, estimacio:8, and estimacio:13; independent oracles in both paired test scripts; A and B comparison outcomes represented."
     },
     {
       "source": "perimetres:14",
@@ -757,5 +775,15 @@
     "status": "provisional_reconciled_with_current_classification_no_official_level_changes",
     "source": "assets/js/dificultat-mi.js REVIEWED_LEVELS and REVIEWED_VARIANTS at the PR base/head",
     "note": "Reconciled candidates are not applied levels. See dictamen_pedagogic_21_vincles_i_modes.md section Reconciliació dels nivells."
+  },
+  "paired_evidence_lot_2": {
+    "script": "scripts/test-mesura-2eso-lot-2-parelles-restants.cjs",
+    "scope": [
+      "estimacio:18↔17",
+      "estimacio:9↔13"
+    ],
+    "independent_oracle_instances": 1600,
+    "verified_paired_examples": 4,
+    "teacher_approved": false
   }
 }
