@@ -7,6 +7,7 @@ on:
       - 'scripts/test-mesura-2eso-integracio-*.cjs'
       - 'scripts/test-mesura-2eso-lot-2-parelles-restants.cjs'
       - 'scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs'
+      - 'scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs'
       - 'scripts/test-mesura-2eso-pitagores-3-15-lot-4.cjs'
       - 'scripts/test-mesura-2eso-pitagores3-10-11-aparellades.cjs'
       - 'scripts/test-mesura-2eso-workflows-centralitzats.cjs'
@@ -46,6 +47,8 @@ jobs:
         run: node scripts/test-mesura-2eso-lot-2-parelles-restants.cjs
       - name: Evidencia aparellada Pitàgores 12 i 14
         run: node scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs
+      - name: Nucli directe Pitàgores 12 i 14 amb 2
+        run: node scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs
       - name: Evidencia aparellada Pitàgores 3 i 15
         run: node scripts/test-mesura-2eso-pitagores-3-15-lot-4.cjs
       - name: Oracles independents Pitàgores 10 i 11 amb 3

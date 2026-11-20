@@ -6,7 +6,7 @@
   "source_tests_success": 23,
   "source_tests_queued": 0,
   "completed_paired_evidence": 4,
-  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 135 casos. Els lots 2–4 afegeixen 4 parelles d’estimació i 72 parelles de Pitàgores; el lot 4 separa les dues branques del tipus 15 i els catets coneguts curt/llarg del tipus 3. El lot 5 verifica amb oracles independents les 7 mostres aparellades ja existents de pitagores:10/11 amb pitagores:3 (1.200 instàncies generades); no afegeix casos aparellats al recompte. Quatre dels 21 vincles compleixen ara el criteri estricte. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real. Pitagores:5 i problemes:6 continuen com a límits estructurals sense parella exacta dins els pools provats; no es compten com a coincidències.",
+  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 135 casos. Els lots 2–4 afegeixen 4 parelles d’estimació i 72 parelles de Pitàgores; el lot 4 separa les dues branques del tipus 15 i els catets coneguts curt/llarg del tipus 3. El lot 5 verifica amb oracles independents les 7 mostres aparellades ja existents de pitagores:10/11 amb pitagores:3 (1.200 instàncies generades); no afegeix casos aparellats al recompte. El lot 6 verifica també amb oracles independents les 8 parelles ja existents de pitagores:12/14 amb pitagores:2 (1.200 instàncies); no afegeix casos al recompte. Pitagores:12/14 continuen parcials per les destinacions estructuralment no aparellables pitagores:5 i problemes:6. Quatre dels 21 vincles compleixen ara el criteri estricte. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real. Pitagores:5 i problemes:6 continuen com a límits estructurals sense parella exacta dins els pools provats; no es compten com a coincidències.",
   "rows": [
     {
       "source": "escales:16",
@@ -336,7 +336,21 @@
         "independent_oracles": true,
         "unit_scale_note": "For pitagores:13 the common integer triple is shown in cm versus m; values identify the same triple signature, not the same physical lengths."
       },
-      "completed_paired_evidence": false
+      "completed_paired_evidence": false,
+      "direct_core_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs",
+        "target": "pitagores:2",
+        "verified_examples": 4,
+        "independent_oracle_instances": 1200,
+        "independent_oracles": true,
+        "matched_cathet_signatures": [
+          "12:16",
+          "3:4",
+          "5:12",
+          "6:8"
+        ],
+        "adds_new_examples_to_existing_135_case_count": false
+      }
     },
     {
       "source": "pitagores:14",
@@ -394,7 +408,21 @@
         "independent_oracles": true,
         "unit_scale_note": "For pitagores:13 the common integer triple is shown in cm versus m; values identify the same triple signature, not the same physical lengths."
       },
-      "completed_paired_evidence": false
+      "completed_paired_evidence": false,
+      "direct_core_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs",
+        "target": "pitagores:2",
+        "verified_examples": 4,
+        "independent_oracle_instances": 1200,
+        "independent_oracles": true,
+        "matched_cathet_signatures": [
+          "12:16",
+          "20:21",
+          "3:4",
+          "5:12"
+        ],
+        "adds_new_examples_to_existing_135_case_count": false
+      }
     },
     {
       "source": "pitagores:15",
