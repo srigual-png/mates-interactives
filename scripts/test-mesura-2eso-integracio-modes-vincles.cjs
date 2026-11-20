@@ -14,12 +14,13 @@ const ctx=vm.createContext(api);
 vm.runInContext(html.slice(beg,end),ctx,{timeout:15000});
 vm.runInContext(slice('function showExercise(){','function insertMath(')+slice('function selectAnswer(','function checkOpen(')+slice('function renderExamQ(){','function selectExamAnswer(')+slice('function selectExamAnswer(','function checkExamOpen('),ctx,{timeout:15000});
 const generators=vm.runInContext('({unitats:genUnitats2ESO,escales:genEscales2ESO,pitagores:genPitagores2ESO,perimetres:genPerimetresArees2ESO,superficies:genSuperficiesVolums2ESO,estimacio:genEstimacioError2ESO,problemes:genProblemesMesura2ESO})',ctx);
-const types={unitats:[1,4,5,9],escales:[1,2,3,5,12,16,17],pitagores:[2,3,4,5,6,7,8,10,11,12,13,14,15],perimetres:[4,5,14,15],superficies:[1,3,4,5,8,9,10,11,13,14,15,17,19],estimacio:[6,7,8,9,13,17,18],problemes:[3,5,6,7,8,14,15,16]};
+const types={unitats:Array.from({length:18},(_,i)=>i+1),escales:Array.from({length:18},(_,i)=>i+1),pitagores:[2,3,4,5,6,7,8,10,11,12,13,14,15],perimetres:[4,5,14,15],superficies:[1,3,4,5,8,9,10,11,13,14,15,17,19],estimacio:[6,7,8,9,13,17,18],problemes:[3,5,6,7,8,14,15,16]};
 let n=0,openAllowed=0,closedOnly=0;const samples=[];
 function freshButtons(ex){buttons.length=0;buttons.push(...ex.options.map(()=>({disabled:false,flags:new Set(),classList:{add(k){this.owner.flags.add(k)}}})));for(const b of buttons)b.classList.owner=b;}
-for(const [topic,arr] of Object.entries(types)){
- for(const type of arr){
-  const ex=generators[topic](type);assert(ex.question&&ex.correct&&ex.guide?.length&&ex.solution?.length,topic+':'+type);
+function unit6Branches(){const found=new Map();for(let attempt=0;attempt<200&&found.size<2;attempt++){const ex=generators.unitats(6),variant=ex.difficultyVariant==='encadenada'?'encadenada':'directa';if(!found.has(variant))found.set(variant,ex);}assert.deepEqual([...found.keys()].sort(),['directa','encadenada'],'unitats:6 must expose direct and chained variants');return [...found.entries()].map(([variant,ex])=>({topic:'unitats',type:6,variant,ex}));}
+const cases=[];for(const [topic,arr] of Object.entries(types))for(const type of arr){if(topic==='unitats'&&type===6)continue;cases.push({topic,type,ex:generators[topic](type)});}cases.push(...unit6Branches());
+for(const {topic,type,variant,ex} of cases){
+  assert(ex.question&&ex.correct&&ex.guide?.length&&ex.solution?.length,topic+':'+type+(variant?':'+variant:''));
   assert.equal(ex.options.length,4,topic+':'+type);assert.equal(new Set(ex.options).size,4,topic+':'+type);assert(ex.options.includes(ex.correct),topic+':'+type);
   nextEx=ex;ctx.currentEx=ex;api.TOPICS[0]={id:topic,name:topic};state.currentTopic=0;
   freshButtons(ex);state.level=1;state.mode='multi';state.answered=false;vm.runInContext('showExercise()',ctx);
@@ -40,8 +41,7 @@ for(const [topic,arr] of Object.entries(types)){
    state.mode='multi';freshButtons(ex);math.random=()=>0;vm.runInContext('renderExamQ()',ctx);math.random=savedRandom;
    assert.equal(state.examQs[0]._examOpen,true);assert.equal(el('examOpenWrap').style.display,'block');
   }
-  samples.push({type:topic+':'+type,open:ex.allowOpen!==false,answer:ex.correct});n++;
- }
+  samples.push({type:topic+':'+type,...variant?{variant}:{},open:ex.allowOpen!==false,answer:ex.correct});n++;
 }
-assert(n>=50,'Coverage too narrow');assert(openAllowed>0&&closedOnly>0);
+assert(n>=75,'Coverage too narrow');assert(openAllowed>0&&closedOnly>0);
 console.log(JSON.stringify({scope:'simulated DOM, not visual/browser validation',types:n,guided_multiple:n,autonomous_multiple:n,exam_multiple:n,guided_open:openAllowed,exam_open_rendered:openAllowed,closed_only:closedOnly,example_subset:samples.slice(0,10),teacher_approved:false},null,2));
