@@ -6,7 +6,7 @@
   "source_tests_success": 23,
   "source_tests_queued": 0,
   "completed_paired_evidence": 0,
-  "note": "Les mostres verificades proven correcció individual, no equivalència de famílies. Ambdós extrems i dades deliberadament aparellades pendents. Les 23 propostes pedagogiques (21 vincles conceptuals) no equivalen a families aprovades; controls de modes amb DOM simulat, pendent navegador real.",
+  "note": "Hi ha evidència matemàtica aparellada parcial: 16 grups únics / 17 registres i 59 casos. No equival a relacions completes: cap dels 21 vincles compleix encara el criteri complet de la matriu (tots els destinataris i branques, almenys dues mostres aparellades per parella i oracles independents als dos generadors). Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real.",
   "rows": [
     {
       "source": "escales:16",
@@ -746,5 +746,10 @@
     "run_id": 44114539881,
     "status": "success",
     "source_code_unchanged": true
+  },
+  "evidence_definitions": {
+    "paired_math_evidence": "Comptabilitza casos amb dades realment aparellades entre generadors. Pot cobrir només alguns destinataris o branques d'una fila; per si sola no acredita tots dos oracles ni una relació completa.",
+    "completed_paired_evidence": "Comptabilitza relacions que cobreixen tots els destinataris i branques indicats, amb almenys dues mostres aparellades per cada parella i oracles independents dels dos generadors. No inclou l'aprovació docent ni la validació d'interfície.",
+    "ui_modes": "El valor pending a cada fila vol dir que no hi ha una validació completa dels modes per a aquella relació concreta. L'evidència agregada de la matriu prova 56 tipus amb DOM simulat; no és una prova de navegador real."
   }
 }
