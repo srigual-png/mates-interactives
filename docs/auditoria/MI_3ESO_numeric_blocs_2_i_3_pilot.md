@@ -1,6 +1,6 @@
 # 3r ESO · Sentit numèric · Blocs 2 i 3
 
-> Dictamen documental complet de 24 tipus ordinaris. Les ampliacions de 4t queden fora. PR #57 resta oberta i en Draft.
+> Dictamen documental complet de 24 tipus ordinaris. Les ampliacions de 4t queden fora. PR #57 oberta i llesta per a revisió.
 
 ## Abast i currículum
 
@@ -86,4 +86,4 @@ No s’ha detectat un buit curricular genuí dins l’abast: hi ha exemples d’
 
 ## Conclusió
 
-Es manté la proposta de 8 N1 / 4 N2 / 0 N3 per fracció generatriu i 12 N1 / 0 N2 / 0 N3 per nombres reals. Els dotze N1 de reals són tasques d’entrada directa curricularment adequades; la diversitat d’objectius no implica per si sola dificultat N2. No s’ha identificat cap procediment curricular absent prou fonamentat per afegir exercicis. Només s’ha ampliat aquest dictamen documental. **PR #57 oberta i en Draft, sense fusió ni publicació.**
+Es manté la proposta de 8 N1 / 4 N2 / 0 N3 per fracció generatriu i 12 N1 / 0 N2 / 0 N3 per nombres reals. Els dotze N1 de reals són tasques d’entrada directa curricularment adequades; la diversitat d’objectius no implica per si sola dificultat N2. No s’ha identificat cap procediment curricular absent prou fonamentat per afegir exercicis. Només s’ha ampliat aquest dictamen documental. **PR #57 oberta i llesta per a revisió, sense fusió ni publicació.**
