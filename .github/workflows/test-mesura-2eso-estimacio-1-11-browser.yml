@@ -2,17 +2,6 @@ name: Navegador real · Mesura 2n ESO
 
 on:
   workflow_dispatch:
-  pull_request:
-    branches: [main]
-    paths:
-      - '2eso/sentit-mesura.html'
-      - 'assets/js/dificultat-mi.js'
-      - 'assets/js/validacio-respostes.js'
-      - 'assets/js/examen-tema.js'
-      - 'assets/js/dificultat-quotes.js'
-      - 'assets/js/dificultat-modes.js'
-      - 'scripts/test-mesura-2eso-estimacio-1-11-browser.cjs'
-      - '.github/workflows/test-mesura-2eso-estimacio-1-11-browser.yml'
 
 permissions:
   contents: read
