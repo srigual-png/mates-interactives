@@ -1287,7 +1287,7 @@ function genVisual3D2ESO(forceType){
     options=uniq4(correct,seqDistractors(v));guide=['Per cada posició horitzontal, mira totes les columnes que queden una darrere de l’altra.','Des del davant només destaca la columna més alta de cada posició.','Llegeix les altures d’esquerra a dreta.'];solution=[`La vista frontal pren el màxim de cada columna en profunditat.`,`✅ ${correct}.`];
   }else if(type===5){
     const g=randomHeightGrid(),v=gridSide(g);correct=seqStr(v);allowOpen=false;
-    question='Mirant aquesta construcció <b>des del costat dret</b>, quina seqüència d’altures es veu de davant cap al fons?'+svgCubeConstruction(g,'DAVANT');
+    question='Mirant aquesta construcció <b>des del costat dret</b>, quina seqüència d’altures es veu de davant cap al fons?'+svgCubeConstruction(g,'COSTAT DRET');
     options=uniq4(correct,seqDistractors(v));guide=['Ara agrupa els cubs per files de profunditat.','Des del costat dret es veu l’altura màxima de cada fila.','Llegeix les files de davant cap al fons.'];solution=[`La vista lateral pren el màxim de cada fila.`,`✅ ${correct}.`];
   }else if(type===6){
     const g=randomHeightGrid(),occ=g.flat().filter(x=>x>0).length;correct=String(occ);alts=[String(occ)];openHint='Escriu només el nombre de caselles ocupades.';difficulty='easy';
