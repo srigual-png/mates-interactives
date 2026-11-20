@@ -21,12 +21,20 @@ for(const r of proposal.records){
  assert.equal(r.task,expected.task);
  assert.equal(r.example,expected.example);
  assert.equal(r.reason,expected.reason);
- assert.equal(r.teacher_decision,'pendent');
- assert.equal(r.level_confidence,'baixa_no_validat');
- assert(['N1_candidat','N2_candidat','N1_o_N2_pendent'].includes(r.level_suggestion));
+ if(r.type_or_variant.startsWith('pitagores:15:')){
+  assert.equal(r.teacher_decision,'nivell_intern_validat_2026-11-20');
+  assert.equal(r.level_confidence,'mitjana_revisio_docent');
+  assert.equal(r.level_suggestion,'N2_candidat');
+ }else{
+  assert.equal(r.teacher_decision,'pendent');
+  assert.equal(r.level_confidence,'baixa_no_validat');
+  assert(['N1_candidat','N2_candidat','N1_o_N2_pendent'].includes(r.level_suggestion));
+ }
  levels[r.level_suggestion]=(levels[r.level_suggestion]||0)+1;
 }
-assert.deepEqual(levels,{N1_o_N2_pendent:5,N2_candidat:10,N1_candidat:5});
+assert.deepEqual(levels,{N1_o_N2_pendent:3,N2_candidat:12,N1_candidat:5});
+assert.equal(proposal.internal_level_decisions.status,'validated_for_internal_mi_map');
+assert(proposal.unresolved.every(x=>x.key!=='pitagores:15'));
 assert.equal(rounding.permission_boundary.source_generator_edited,true);
 assert.equal(rounding.permission_boundary.levels_changed,false);
 assert.equal(rounding.permission_boundary.merge,false);
