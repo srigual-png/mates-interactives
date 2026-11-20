@@ -6,7 +6,7 @@
   "source_tests_success": 23,
   "source_tests_queued": 0,
   "completed_paired_evidence": 6,
-  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 135 casos. Els lots 2–4 aporten 4 parelles d’estimació i 72 parelles de Pitàgores; els lots 5 i 6 verifiquen amb oracles independents 7 parelles de pitagores:10/11 amb pitagores:3 i 8 de pitagores:12/14 amb pitagores:2, sense afegir casos al recompte. El lot 7 verifica 4 parelles de perimetres:14/5 i 4 de perimetres:4/15 amb oracles independents (1.280 instàncies); perimetres:4↔15 són dos registres recíprocs d’una sola relació conceptual i tampoc no afegeixen casos al recompte. El lot 8 verifica amb oracles independents 2.000 instàncies de escales:16 i les destinacions; confirma 4 mostres amb escales:1 i documenta que escales:2, escales:17 i problemes:8 tenen dominis d’escala disjunts. El lot 9 valida 1.200 instàncies de escales:12/3/5 i quatre parelles amb escales:5; els dominis de factor de escales:12 i escales:3 són disjunts. El lot 10 valida 1.600 instàncies de problemes:16 i estimacio:7/8/13, amb una terna aparellada amb 7/8 i domini de referència disjunt amb 13. El lot 11 valida 4.400 instàncies de problemes:3/superficies:13/14 amb dimensions normalitzades: confirma dues parelles físiques exactes amb superficies:14 i cap amb superficies:13. El lot 12 valida 4.400 instàncies de problemes:5/superficies:8/19, normalitza diàmetre a radi i confirma que els dominis d’altura són disjunts. Cap dels lots 5–12 afegeix casos al recompte de 135. Sis de les 21 relacions conceptuals compleixen ara el criteri estricte; les altres 15 continuen parcials o sense aparellar. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real. Pitagores:5 i problemes:6 continuen com a límits estructurals sense parella exacta dins els pools provats; no es compten com a coincidències.",
+  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 135 casos. Els lots 2–4 aporten 4 parelles d’estimació i 72 parelles de Pitàgores; els lots 5 i 6 verifiquen amb oracles independents 7 parelles de pitagores:10/11 amb pitagores:3 i 8 de pitagores:12/14 amb pitagores:2, sense afegir casos al recompte. El lot 7 verifica 4 parelles de perimetres:14/5 i 4 de perimetres:4/15 amb oracles independents (1.280 instàncies); perimetres:4↔15 són dos registres recíprocs d’una sola relació conceptual i tampoc no afegeixen casos al recompte. El lot 8 verifica amb oracles independents 2.000 instàncies de escales:16 i les destinacions; confirma 4 mostres amb escales:1 i documenta que escales:2, escales:17 i problemes:8 tenen dominis d’escala disjunts. El lot 9 valida 1.200 instàncies de escales:12/3/5 i quatre parelles amb escales:5; els dominis de factor de escales:12 i escales:3 són disjunts. El lot 10 valida 1.600 instàncies de problemes:16 i estimacio:7/8/13, amb una terna aparellada amb 7/8 i domini de referència disjunt amb 13. El lot 11 valida 4.400 instàncies de problemes:3/superficies:13/14 amb dimensions normalitzades: confirma dues parelles físiques exactes amb superficies:14 i cap amb superficies:13. El lot 12 valida 4.400 instàncies de problemes:5/superficies:8/19, normalitza diàmetre a radi i confirma que els dominis d’altura són disjunts. El lot 13 revalida 1.200 instàncies de superficies:10/11/15, enumera exhaustivament els dominis amb unitats normalitzades i confirma que 15 no té parella física exacta amb 10/11; 10/11 conserven 24 combinacions inverses coincidents. Cap dels lots 5–13 afegeix casos al recompte de 135. Sis de les 21 relacions conceptuals compleixen ara el criteri estricte; les altres 15 continuen parcials o sense aparellar. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real. Pitagores:5 i problemes:6 continuen com a límits estructurals sense parella exacta dins els pools provats; no es compten com a coincidències.",
   "rows": [
     {
       "source": "escales:16",
@@ -966,13 +966,13 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-quatre-volums-superficies-oracles.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "not_established_structural_math_verified",
-      "target_mathematical_oracles_for_this_pair": "structural_verified_no_exact_match",
+      "paired_same_parameters": "no_exact_physical_fixture_after_unit_normalization; exhaustive_finite_domain_comparison; shared_inverse_height_relation_with_10_but_extra_base_area_and_L_to_m3; 11_solves_different_unknown",
+      "target_mathematical_oracles_for_this_pair": "1200_independent_oracle_checks; 24_exact_10_11_inverse_pairs; exhaustive_normalized_domains_show_no_15_overlap_with_10_or_11",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-superficies10-11-15-inverses.cjs",
-      "pedagogical_interpretation": "inverse depth from V/area plus litres-to-cubic-metres and base-area calculations; exact 10/11 inverse prism examples exist, but none established with type 15",
+      "pedagogical_interpretation": "superficies:15 shares solving V=A_base*h for height with 10 after unit conversion, but additionally derives base area and converts L to m3; 11 solves for base area, so it is a different inverse task; finite physical parameter domains do not overlap",
       "pedagogical_proposal": {
         "decision": "variant_mateixa_familia_amb_superficies10_diferent_amb_superficies11",
         "level": "N2",
@@ -980,6 +980,66 @@
         "approval": "pending_teacher_review",
         "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
         "mode_limits": "not_real_browser_or_full_open_answer_validation"
+      },
+      "additional_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-superficies10-11-15-inverses.cjs",
+        "targets": [
+          "superficies:10",
+          "superficies:11"
+        ],
+        "independent_oracle_instances": 1200,
+        "verified_by_type": {
+          "superficies:10": 400,
+          "superficies:11": 400,
+          "superficies:15": 400
+        },
+        "exact_inverse_pairs_10_11": 24,
+        "exhaustive_domain_check": true,
+        "superficies15_base_area_cm2": [
+          20000,
+          25000,
+          30000,
+          37500,
+          40000,
+          45000,
+          50000,
+          60000,
+          80000
+        ],
+        "superficies10_11_base_area_cm2": [
+          12,
+          15,
+          18,
+          20,
+          24,
+          30
+        ],
+        "superficies15_depth_cm": [
+          20,
+          30,
+          40,
+          50
+        ],
+        "superficies10_height_cm": [
+          4,
+          5,
+          6,
+          8,
+          10
+        ],
+        "superficies11_height_cm": [
+          4,
+          5,
+          6,
+          8
+        ],
+        "exact_normalized_parameter_overlap": {
+          "15_vs_10_base_area_cm2": [],
+          "15_vs_11_base_area_cm2": [],
+          "15_vs_10_height_cm": [],
+          "15_vs_11_height_cm": []
+        },
+        "adds_new_cases_to_existing_135_case_count": false
       }
     },
     {

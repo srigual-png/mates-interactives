@@ -20,5 +20,27 @@ const overlap=[...data[10].keys()].filter(k=>data[11].has(k)).sort();
 assert(overlap.length>=4,'Need four direct same-volume-and-base inverse pairs');
 const pairs=overlap.slice(0,4).map(k=>{const h=data[10].get(k),b=data[11].get(k);assert.equal(h.vol,b.vol);return {same_base_area_and_height:k,find_height:{q:h.q,answer:h.answer},find_base_area:{q:b.q,answer:b.answer},distinction:'Same V=A_base*h, but inverse tasks solve different unknowns'};});
 const examples15=[...data[15].values()].slice(0,4).map(e=>({q:e.q,answer:e.answer,volume_m3:e.vol,base_area_m2:e.area,depth_m:e.height,distinction:'Depth in m requires litre to cubic metre conversion and area from two lengths; not equal-data pairing with cm-scale prism inverses'}));
-console.log(JSON.stringify({checked:total,exact_inverse_pairs_available:overlap.length,paired_inverse_examples:pairs,structural_examples_15:examples15,teacher_approved:false},null,2));
+// Enumerate the finite parameter pools directly from the generator source. This
+// establishes that 15 has no exact physical fixture with 10/11 after unit
+// normalization, rather than inferring disjointness from 400 random samples.
+const domains={
+  area10_11_cm2:[12,15,18,20,24,30],
+  height10_cm:[4,5,6,8,10],
+  height11_cm:[4,5,6,8],
+  base15_length_m:[2,2.5,3,4],
+  base15_width_m:[1,1.5,2],
+  depth15_m:[0.2,0.3,0.4,0.5]
+};
+const area15_m2=[...new Set(domains.base15_length_m.flatMap(l=>domains.base15_width_m.map(w=>+(l*w).toFixed(4))))].sort((a,b)=>a-b);
+const height15_cm=domains.depth15_m.map(x=>x*100).sort((a,b)=>a-b);
+const area15_cm2=area15_m2.map(x=>x*10000).sort((a,b)=>a-b);
+const common=(a,b)=>a.filter(x=>b.includes(x));
+const noExactPhysicalPairs={
+  superficies15_base_area_cm2_vs_10_11:common(area15_cm2,domains.area10_11_cm2),
+  superficies15_depth_cm_vs_10:common(height15_cm,domains.height10_cm),
+  superficies15_depth_cm_vs_11:common(height15_cm,domains.height11_cm)
+};
+assert.deepEqual(noExactPhysicalPairs,{superficies15_base_area_cm2_vs_10_11:[],superficies15_depth_cm_vs_10:[],superficies15_depth_cm_vs_11:[]});
+const sameFormulaDifferentWork={superficies15_vs_10:'same unknown (height/depth) and V=A_base·h after conversion, but 15 computes base area from two lengths and converts L to m³',superficies15_vs_11:'same volume relation, but 15 solves depth while 11 solves base area; input domains and units differ'};
+console.log(JSON.stringify({checked:total,exact_inverse_pairs_available:overlap.length,paired_inverse_examples:pairs,structural_examples_15:examples15,finite_domains:{...domains,area15_m2,area15_cm2,height15_cm},normalized_parameter_overlap:noExactPhysicalPairs,interpretation:sameFormulaDifferentWork,teacher_approved:false},null,2));
 assert.equal(total,1200);
