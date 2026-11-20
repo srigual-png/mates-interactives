@@ -1535,7 +1535,7 @@ const TOPICS=[
   {id:'centralitzacio',course:'2n',exam2n:true,icon:'🎯',name:'Centralització i dispersió',short:'Mitjana · mediana · moda · màxim · mínim · rang · comparar i interpretar distribucions',theoryKey:'centralitzacio',gen:genCentralitzacioVariat},
   {id:'investigacions',course:'2n',exam2n:true,icon:'🔎',name:'Investigacions estadístiques',short:'Mostres · enquestes · biaix · depuració de dades · conclusions justificades · informe',theoryKey:'investigacions',gen:genInvestigacionsVariat},
   {id:'probabilitat',course:'2n',exam2n:true,icon:'🎲',name:'Probabilitat teòrica i experimental',short:'Atzar · Laplace · probabilitat experimental · simulacions · llei dels grans nombres',theoryKey:'probabilitat',gen:genProbabilitatVariat},
-  {id:'experiments',course:'2n',exam2n:true,examExcludedTypes:[13],icon:'🌳',name:'Experiments compostos',short:'Diagrames d’arbre · taules de contingència · dos daus · almenys, exactament i cap · casos equiprobables',theoryKey:'experiments',gen:genExperimentsVariat},
+  {id:'experiments',course:'2n',exam2n:true,icon:'🌳',name:'Experiments compostos',short:'Diagrames d’arbre · taules de contingència · dos daus · almenys, exactament i cap · casos equiprobables',theoryKey:'experiments',gen:genExperimentsVariat},
   {id:'intervals3r',course:'3r',exam2n:false,icon:'📐',name:'A · Variables contínues i intervals',short:'Prepara 3r · discreta/contínua · intervals · nombre de classes · freqüències agrupades · amplitud · marca de classe',theoryKey:'intervals3r',gen:genIntervals3rVariat},
   {id:'grafics3r',course:'3r',exam2n:false,icon:'📈',name:'B · Nous gràfics estadístics',short:'Prepara 3r · histogrames · polígons de freqüències · diagrames de caixa · comparar distribucions',theoryKey:'grafics3r',gen:genGrafics3rVariat},
   {id:'dispersio3r',course:'3r',exam2n:false,icon:'📏',name:'C · Quartils i dispersió',short:'Prepara 3r · quartils · recorregut interquartílic · variància · desviació típica · coeficient de variació',theoryKey:'dispersio3r',gen:genDispersio3rVariat},
@@ -1807,13 +1807,13 @@ function startExam(){
       const need=base+(idx<extra?1:0);let got=0,tries=0;
       while(got<need&&tries<1000){
         tries++;
-        const ex=t.gen();if((t.examExcludedTypes||[]).includes(ex.type))continue;const sig=t.id+'|'+signatureOf(ex);
+        const ex=t.gen(),sig=t.id+'|'+signatureOf(ex);
         if(!used.has(sig)){used.add(sig);state.examQs.push({...ex,topicName:t.name});got++}
       }
     });
     let fill=0;
     while(state.examQs.length<target&&fill<3000){
-      const t=examTopics[fill%examTopics.length],ex=t.gen();fill++;if((t.examExcludedTypes||[]).includes(ex.type))continue;const sig=t.id+'|'+signatureOf(ex);
+      const t=examTopics[fill%examTopics.length],ex=t.gen(),sig=t.id+'|'+signatureOf(ex);
       if(!used.has(sig)){used.add(sig);state.examQs.push({...ex,topicName:t.name})}
     }
   }
