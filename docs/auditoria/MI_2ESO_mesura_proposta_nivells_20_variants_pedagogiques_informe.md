@@ -13,6 +13,8 @@ La matriu `docs/auditoria/MI_2ESO_mesura_proposta_nivells_20_variants_pedagogiqu
 | N1 o N2 pendent | 5 | La dificultat pot dependre de les dades, del suport o de la formulació |
 | **Total** | **20** | **0 nivells oficials canviats** |
 
+**Recompte actual d'aquestes 20 fitxes:** N1 5, N2 12, N1/N2 pendent 3. La diferència respecte de la taula inicial prové de les dues variants de `pitagores:15`, ara resoltes a N2.
+
 Això **no** és una distribució de nivells de tot el tema ni serveix per exigir una proporció 5–5–3. La dificultat s'ha de justificar per la feina cognitiva que efectivament demana una instància a l'alumnat de **2n ESO**.
 
 ## Arrodoniment d'`estimacio:12`
@@ -29,15 +31,18 @@ Per exemple, per **12,3 cm** dona **[12,25 cm, 12,35 cm)**: inclou 12,25 i exclo
 
 Els casos de frontera i la proposta detallada són a `docs/auditoria/MI_2ESO_mesura_estimacio_12_convencio_arrodoniment_proposta.json`. La prova automàtica de límits d'arrodoniment ha superat el CI [#44077549100](https://github.com/srigual-png/mates-interactives/actions/runs/44077549100). Aquest test comprova també 400 instàncies generades del tipus 12; no substitueix la revisió didàctica.
 
+## Revisió docent posterior (20/11/2026)
+
+- **`pitagores:15`:** diagonal N2 (es manté perquè cal modelitzar-la com a hipotenusa) i catet N2 (inversió de Pitàgores). Les dues branques ja no són punts pendents.
+
 ## Altres punts encara pendents de decisió
 
-- **`pitagores:15`:** cal revisar el supòsit anterior que recuperar un catet és N1 i la diagonal és N2. La fórmula inversa no és necessàriament més fàcil.
 - **`unitats:6`:** directe i encadenat tenen càrrega distinta; es poden considerar N1 i N2 candidats sense convertir-los en famílies noves.
 - **`superficies:17`:** si la base és compartida, comparar altures pot ser més senzill que calcular dos volums de bases diferents.
 - **`estimacio:14`:** el context de possible confusió d'unitats no indica explícitament les unitats dels valors; cal millorar-ne la precisió conceptual abans d'aprovar-lo.
 - **C010, C017, C021, C051, C052:** evitar duplicar famílies per la mera variació de figura, incògnita, unitat o format de resposta.
 
-## Altres punts encara pendents de decisió\n\n- **`unitats:6`:** directe i encadenat tenen càrrega distinta; es poden considerar N1 i N2 candidats sense convertir-los en famílies noves.\n- **`superficies:17`:** si la base és compartida, comparar altures pot ser més senzill que calcular dos volums de bases diferents.\n- **`estimacio:14`:** el context de possible confusió d'unitats no indica explícitament les unitats dels valors; cal millorar-ne la precisió conceptual abans d'aprovar-lo.\n- **C010, C017, C021, C051, C052:** evitar duplicar famílies per la mera variació de figura, incògnita, unitat o format de resposta.\n\n## Límits d'aquesta fase
+## Límits d'aquesta fase
 
 S'ha contrastat el codi amb les fitxes d'exemples i els oracles matemàtics previs; les categories N1/N2 són **hipòtesis docents**, no conclusions empíriques amb dades d'alumnat. No s'ha elaborat cap repartiment definitiu de totes les famílies del bloc.
 
