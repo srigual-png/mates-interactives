@@ -1,12 +1,12 @@
 # Creuament pedagògic dels 128 tipus · 131 fitxes i 72 agrupacions
 
-**Data:** 17/11/2026. **Estat:** revisió d'estratègies matemàtiques i propostes de deduplicació, **sense cap família ni nivell aprovat o aplicat**.
+**Dades inicials:** 17/11/2026. **Actualització:** el 20/11/2026 s'han validat quatre assignacions de nivell intern a la branca; les famílies continuen provisionals i cap nivell oficial ha canviat.
 
 ## Dades reconciliades
 
 - **128 tipus de generador** de Sentit de la mesura de 2n ESO, amb **131 fitxes de dificultat** perquè tres tipus tenen variants desdoblades.
 - **72 agrupacions provisionals**, amb identificadors de treball que no equivalen a famílies docents certificades.
-- Propostes per registre: **27 N1**, **80 N2** i **24 N1/N2 encara indeterminades**. No hi ha N3 assignats en les fitxes inicials, fet que no impedeix trobar tasques N3 adequades a 2n ESO en una revisió posterior.
+- Distribució inicial dels 131 registres: **27 N1**, **80 N2** i **24 N1/N2 indeterminades**. Després de resoldre les dues variants de `pitagores:15`, la distribució de treball és **27 N1**, **82 N2** i **22 N1/N2 pendents**. No hi ha N3 assignats en aquestes fitxes. No hi ha N3 assignats en les fitxes inicials, fet que no impedeix trobar tasques N3 adequades a 2n ESO en una revisió posterior.
 - **14 vincles de solapament o diferència d'estratègia revisats**, **3 dels quals travessen agrupacions provisionals diferents**. La resta reforcen o matisen agrupacions ja conegudes.
 
 ## Famílies o variants que probablement comparteixen estratègia
