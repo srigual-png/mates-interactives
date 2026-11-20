@@ -16,6 +16,7 @@ on:
       - 'scripts/test-mesura-2eso-prismes-3-4-parelles.cjs'
       - 'scripts/test-mesura-2eso-superficies-8-9-19-aparellades.cjs'
       - 'scripts/test-mesura-2eso-integracio-pedagogica-unitats.cjs'
+      - 'scripts/test-mesura-2eso-problemes14-15-estructura.cjs'
       - 'scripts/test-mesura-2eso-lot-2-parelles-restants.cjs'
       - 'scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs'
       - 'scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs'
@@ -88,6 +89,8 @@ jobs:
         run: node scripts/test-mesura-2eso-integracio-pedagogica-unitats-4-5.cjs
       - name: Contrastar unitats 9 amb la conversio directa de longitud
         run: node scripts/test-mesura-2eso-integracio-pedagogica-unitats.cjs
+      - name: Contrastar tanca i socol amb perimetre net
+        run: node scripts/test-mesura-2eso-problemes14-15-estructura.cjs
       - name: Unitats - suites existents
         if: steps.detection.outputs.full == 'true'
         run: node scripts/run-mesura-2eso-integracio.cjs unitats
