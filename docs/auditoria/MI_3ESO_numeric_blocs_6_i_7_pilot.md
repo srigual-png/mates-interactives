@@ -1,6 +1,6 @@
 # 3r ESO · Sentit numèric · Blocs 6 i 7
 
-> Auditoria documental completa dels 34 tipus ordinaris. PR Draft, sense canvis de producció.
+> Auditoria documental completa dels 34 tipus ordinaris. PR llesta per a revisió, sense canvis de producció.
 
 ## Abast i contrast
 
@@ -105,4 +105,4 @@ Nivells actius segons la revisió: notació científica 15 N1 / 3 N2 / 0 N3 (N2 
 
 ## Conclusió
 
-El mapa de 34 tipus queda documentat. Es mantenen els nivells 15/3/0 i 10/6/0. No es proposen exercicis nous ni N3 artificials. PR #59 queda oberta i en Draft, sense fusió ni publicació.
+El mapa de 34 tipus queda documentat. Es mantenen els nivells 15/3/0 i 10/6/0. No es proposen exercicis nous ni N3 artificials. PR #59 queda oberta i llesta per a revisió, sense fusió ni publicació.
