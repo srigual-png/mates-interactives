@@ -49,7 +49,12 @@ function selectionCorrect(key,q,ex){
   const found=Object.entries(cases).filter(([k])=>q.includes(k));if(found.length!==1)throw Error('Unmatched or ambiguous real-world context '+q);return found[0][1];
  }
  if(key==='estimacio:14'){
-  const [target,observed]=match(q,/S’esperava un valor proper a ([\d,.]+) i s’ha obtingut ([\d,.]+)/).map(value);
+  const target=value(match(q,/s’esperava un valor proper a ([\d,.]+)/)[0]);
+  if(q.includes('al registre s’ha anotat')){
+   const units=match(q,/recipient graduat indica [\d,.]+ (\S+), però al registre s’ha anotat [\d,.]+ (\S+)/);
+   if(units[0]!==units[1])return 'No, cal revisar si s’han barrejat mL i L';
+  }
+  const observed=value(match(q,/s’ha obtingut ([\d,.]+)/)[0]);
   const err=Math.abs(target-observed)/Math.max(Math.abs(target),1e-10);
   if(err<.05)return target===2?'Sí, és coherent: l’error és petit respecte de 2 m':'Sí, és coherent: l’error és petit respecte de 200 cm';
   return target>observed?'No, probablement hi ha un error d’unitat o de mesura':'No, cal revisar si s’han barrejat mL i L';
