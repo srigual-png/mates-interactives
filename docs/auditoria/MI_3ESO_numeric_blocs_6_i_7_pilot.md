@@ -15,24 +15,24 @@
 
 | Tema | Tipus → família | Relació | Nivell | Justificació |
 |---|---|---|---|---|
-| Notació | 1 → N1 escriure enter positiu en notació científica | nucli | N1 | Desplaçar coma i comptar posicions |
-| 2 → N1 | variant | N1 | Mateixa conversió per nombre petit i exponent negatiu |
-| 15 → N1 | variant contextual | N1 | Dada decimal petita a forma científica |
-| 3 → N2 decimal des de forma científica | tasca diferent | N1 | Desplaçar coma cap a la dreta |
-| 4 → N2 | variant | N1 | Exponent negatiu |
-| 5 → N3 reconèixer forma normalitzada | diferent | N1 | Coeficient entre 1 i 10 |
-| 6 → N4 normalitzar coeficient no normalitzat | diferent | N1 | Reequilibrar coeficient i exponent |
-| 7 → N5 comparar coeficients amb exponent igual | diferent | N1 | Comparar mantisses |
-| 8 → N6 comparar ordres diferents | diferent | N1 | Interpretar exponents positius/negatius |
-| 9 → N7 ordre de magnitud | diferent | N1 | Aplicar convenció del tema |
-| 10 → N8 producte | diferent | N2 | Multiplicar coeficients i sumar exponents |
-| 11 → N9 quocient | diferent | N2 | Dividir coeficients i restar exponents |
-| 12 → N10 suma amb exponent igual | diferent | N1 | Sumar coeficients |
-| 13 → N10 | variant | N1 | Restar coeficients |
-| 14 → N11 suma amb exponents diferents | diferent | N2 | Reescriure un terme abans d’operar |
-| 16 → N12 diferència d’ordres de magnitud | diferent | N1 | Restar exponents segons convenció |
-| 17 → N13 notació de pantalla E a científica | diferent | N1 | Interpretar E com ×10^n |
-| 18 → N13 | variant inversa | N1 | Científica a notació de pantalla |
+| Notació | 1 → NC1 escriure enter positiu en notació científica | nucli | N1 | Desplaçar coma i comptar posicions |
+| 2 → NC1 | variant | N1 | Mateixa conversió per nombre petit i exponent negatiu |
+| 15 → NC1 | variant contextual | N1 | Dada decimal petita a forma científica |
+| 3 → NC2 decimal des de forma científica | tasca diferent | N1 | Desplaçar coma cap a la dreta |
+| 4 → NC2 | variant | N1 | Exponent negatiu |
+| 5 → NC3 reconèixer forma normalitzada | diferent | N1 | Coeficient entre 1 i 10 |
+| 6 → NC4 normalitzar coeficient no normalitzat | diferent | N1 | Reequilibrar coeficient i exponent |
+| 7 → NC5 comparar coeficients amb exponent igual | diferent | N1 | Comparar mantisses |
+| 8 → NC6 comparar ordres diferents | diferent | N1 | Interpretar exponents positius/negatius |
+| 9 → NC7 ordre de magnitud | diferent | N1 | Aplicar convenció del tema |
+| 10 → NC8 producte | diferent | N2 | Multiplicar coeficients i sumar exponents |
+| 11 → NC9 quocient | diferent | N2 | Dividir coeficients i restar exponents |
+| 12 → NC10 suma amb exponent igual | diferent | N1 | Sumar coeficients |
+| 13 → NC10 | variant | N1 | Restar coeficients |
+| 14 → NC11 suma amb exponents diferents | diferent | N2 | Reescriure un terme abans d’operar |
+| 16 → NC12 diferència d’ordres de magnitud | diferent | N1 | Restar exponents segons convenció |
+| 17 → NC13 notació de pantalla E a científica | diferent | N1 | Interpretar E com ×10^n |
+| 18 → NC13 | variant inversa | N1 | Científica a notació de pantalla |
 | Proporcionalitat | 1 → P1 reconèixer directa en taula | nucli | N1 | Quocient y/x constant |
 | 2 → P2 reconèixer inversa en taula | diferent | N1 | Producte x·y constant |
 | 3 → P3 verificar si una relació és proporcional | diferent | N2 | Contrastar quocients/productes i rebutjar |
@@ -58,19 +58,19 @@ A notació científica, comparar coeficients amb el mateix exponent (7) és proc
 
 ### Notació científica
 
-- **N1 Enter → científica (1,2,15).** 5.600.000=5,6·10⁶; 0,000000025=2,5·10⁻⁸. Error: comptar salts de coma una posició de més. Límit: zeros interns i signes.
-- **N2 Científica → decimal (3,4).** 7,5·10⁵=750.000; 4,2·10⁻⁵=0,000042. Error: moure coma en sentit contrari. Límit: afegir zeros sense perdre valor.
-- **N3 Forma normalitzada (5).** 9,1·10⁻³ és normalitzada; 91·10⁻⁴ no. 3,4·10² sí; 0,34·10³ no. Error: oblidar 1≤|a|<10. Límit: coeficient negatiu també pot estar normalitzat.
-- **N4 Normalitzar (6).** 350·100=350·10²=3,5·10⁴; 850·10⁰=8,5·10². Error: canviar coeficient sense compensar exponent. Límit: un sol pas pot moure coma en ambdós sentits.
-- **N5 Comparar mateix exponent (7).** 6,2·10⁵ > 5,4·10⁵; 4,1·10⁵ < 5,4·10⁵. Error: comparar exponent quan és igual. Límit: signes i coeficients negatius.
-- **N6 Comparar exponents diferents (8).** 9,1·10⁴ < 1,1·10⁵; 7,2·10⁻⁶ < 1,6·10⁻⁵. Error: creure que −6 és més gran que −5 pel valor absolut. Límit: comparar exponent primer quan coeficients normalitzats positius.
-- **N7 Ordre de magnitud (9).** Segons la convenció del bloc, 2,7·10⁷ → ordre 10⁷; 8,6·10⁻³ → 10⁻³. Error: donar coeficient en lloc de potència. Límit: la definició pot variar entre cursos; cal mantenir la convenció explícita.
-- **N8 Producte (10).** (4·10⁻²)(4·10¹)=16·10⁻¹=1,6·10⁰; (2·10⁴)(2·10²)=4·10⁶. Error: multiplicar exponents. Límit: normalització posterior obligada quan coeficient queda fora d’[1,10).
-- **N9 Quocient (11).** (9·10²)/(3·10¹)=3·10¹; (4·10⁵)/(2·10¹)=2·10⁴. Error: sumar exponents. Límit: divisor no nul.
-- **N10 Suma/resta exponent igual (12,13).** 3,4·10⁵+3,1·10⁵=6,5·10⁵; 6,8·10⁻⁵−1,2·10⁻⁵=5,6·10⁻⁵. Error: sumar exponents. Límit: el coeficient resultant pot requerir normalitzar.
-- **N11 Suma exponent diferent (14).** 2,1·10⁻⁵+1,2·10⁻⁶=2,1·10⁻⁵+0,12·10⁻⁵=2,22·10⁻⁵; 3,4·10²+2,5·10¹=3,4·10²+0,25·10²=3,65·10². Error: sumar mantisses directament. Límit: triar exponent comú i normalitzar.
-- **N12 Diferència d’exponents (16).** 1,2·10⁻⁸ i 6,4·10⁻⁶ difereixen en |−8−(−6)|=2 ordres; 10⁷ i 10¹¹, 4 ordres. Error: ometre valor absolut/direcció. Límit: això compara ordres, no distància exacta entre nombres.
-- **N13 Notació E (17,18).** 1,2E−6=1,2·10⁻⁶; 7,2·10⁴ es pot mostrar 7,2E4. Error: interpretar E com nombre d’Euler. Límit: la pantalla pot ometre signe + de l’exponent positiu.
+- **NC1 Enter → científica (1,2,15).** 5.600.000=5,6·10⁶; 0,000000025=2,5·10⁻⁸. Error: comptar salts de coma una posició de més. Límit: zeros interns i signes.
+- **NC2 Científica → decimal (3,4).** 7,5·10⁵=750.000; 4,2·10⁻⁵=0,000042. Error: moure coma en sentit contrari. Límit: afegir zeros sense perdre valor.
+- **NC3 Forma normalitzada (5).** 9,1·10⁻³ és normalitzada; 91·10⁻⁴ no. 3,4·10² sí; 0,34·10³ no. Error: oblidar 1≤|a|<10. Límit: coeficient negatiu també pot estar normalitzat.
+- **NC4 Normalitzar (6).** 350·100=350·10²=3,5·10⁴; 850·10⁰=8,5·10². Error: canviar coeficient sense compensar exponent. Límit: un sol pas pot moure coma en ambdós sentits.
+- **NC5 Comparar mateix exponent (7).** 6,2·10⁵ > 5,4·10⁵; 4,1·10⁵ < 5,4·10⁵. Error: comparar exponent quan és igual. Límit: signes i coeficients negatius.
+- **NC6 Comparar exponents diferents (8).** 9,1·10⁴ < 1,1·10⁵; 7,2·10⁻⁶ < 1,6·10⁻⁵. Error: creure que −6 és més gran que −5 pel valor absolut. Límit: comparar exponent primer quan coeficients normalitzats positius.
+- **NC7 Ordre de magnitud (9).** Segons la convenció del bloc, 2,7·10⁷ → ordre 10⁷; 8,6·10⁻³ → 10⁻³. Error: donar coeficient en lloc de potència. Límit: la definició pot variar entre cursos; cal mantenir la convenció explícita.
+- **NC8 Producte (10).** (4·10⁻²)(4·10¹)=16·10⁻¹=1,6·10⁰; (2·10⁴)(2·10²)=4·10⁶. Error: multiplicar exponents. Límit: normalització posterior obligada quan coeficient queda fora d’[1,10).
+- **NC9 Quocient (11).** (9·10²)/(3·10¹)=3·10¹; (4·10⁵)/(2·10¹)=2·10⁴. Error: sumar exponents. Límit: divisor no nul.
+- **NC10 Suma/resta exponent igual (12,13).** 3,4·10⁵+3,1·10⁵=6,5·10⁵; 6,8·10⁻⁵−1,2·10⁻⁵=5,6·10⁻⁵. Error: sumar exponents. Límit: el coeficient resultant pot requerir normalitzar.
+- **NC11 Suma exponent diferent (14).** 2,1·10⁻⁵+1,2·10⁻⁶=2,1·10⁻⁵+0,12·10⁻⁵=2,22·10⁻⁵; 3,4·10²+2,5·10¹=3,4·10²+0,25·10²=3,65·10². Error: sumar mantisses directament. Límit: triar exponent comú i normalitzar.
+- **NC12 Diferència d’exponents (16).** 1,2·10⁻⁸ i 6,4·10⁻⁶ difereixen en |−8−(−6)|=2 ordres; 10⁷ i 10¹¹, 4 ordres. Error: ometre valor absolut/direcció. Límit: això compara ordres, no distància exacta entre nombres.
+- **NC13 Notació E (17,18).** 1,2E−6=1,2·10⁻⁶; 7,2·10⁴ es pot mostrar 7,2E4. Error: interpretar E com nombre d’Euler. Límit: la pantalla pot ometre signe + de l’exponent positiu.
 
 ### Proporcionalitat
 
