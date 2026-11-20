@@ -171,7 +171,7 @@ La decisió és coherent amb el criteri intern de MI (inversions i modelització
 
 ## Revisió dels modes
 
-La suite `scripts/test-mesura-2eso-integracio-modes-vincles.cjs` s'ha ampliat i ha passat localment sobre codi JavaScript real i **DOM simulat**: **96 casos** (18 tipus d'Unitats, 18 d'Escales, 18 de Perímetres i Àrees, mostres dels altres quatre temes i ambdues branques de `unitats:6`). En tots comprova pantalles guiada, autònoma i d'examen tancat, incloent respostes correcta i incorrecta; 80 també permeten resposta oberta i 16 són tancats per disseny. Resultat local: **success**. Les execucions integrades d'aquest nou abast estan pendents al cap actual.
+La suite `scripts/test-mesura-2eso-integracio-modes-vincles.cjs` s'ha ampliat i ha passat localment sobre codi JavaScript real i **DOM simulat**: **104 casos** (18 tipus cadascun d'Unitats, Escales i Perímetres/Àrees; 20 de Superfícies/Volums; mostres dels altres tres temes; i ambdues branques de `unitats:6` i `superficies:17`). En tots comprova pantalles guiada, autònoma i d'examen tancat, incloent respostes correcta i incorrecta; 85 també permeten resposta oberta i 19 són tancats per disseny. Resultat local: **success**. Les execucions integrades d'aquest nou abast estan pendents al cap actual.
 
 **Límit important:** aquesta és cobertura agregada de representació en DOM simulat, no una comprovació visual en navegador real ni una verificació completa de cada vincle; per això `ui_modes` resta `pending` a les files de la matriu. Les respostes obertes es comproven pel renderitzat i l'activació del camp, no per l'acceptació de totes les formes textuals. Tampoc s'han comprovat selecció probabilística de 20 preguntes, navegació completa, efectes visuals, accessibilitat o mòbil.
 
