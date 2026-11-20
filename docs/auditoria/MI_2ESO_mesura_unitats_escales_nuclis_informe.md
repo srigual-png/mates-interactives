@@ -43,3 +43,18 @@ L'objectiu segueix sent **almenys 15 famílies genuïnes per tema** i, per dific
 4. Passar la revisió curricular i els modes guiat/autònom/examen/fitxes abans de qualsevol validació definitiva.
 
 **No fusionar ni publicar canvis per aquest document.**
+
+
+## Passada focalitzada: agrupacions i modes (21/11/2026)
+
+S'ha fet una revisió comparativa dels 18 nuclis candidats, contrastant procediment, magnitud final i càrrega cognitiva. La conclusió és de **consistència de les hipòtesis**, no d'aprovació de famílies:
+
+- **Unitats:** mantenir separats els factors quadràtic (U-P02) i cúbic (U-P03); agrupar provisionalment les conversions decimals de longitud/massa/capacitat (U-P01) i els reconeixements de factors (U-P05) sense donar-los rang canònic. Separar unitats:6 en casos directes (U-P06) i encadenats (U-P07); unitats:18 és procedimentalment proper al segon. Conversió més comparació (U-P08) i conversió més suma (U-P09) són tasques compostes, no simples variants de canvi d'unitat. Mantenir oberta la identitat de verificació/reconeixement entre unitats:13/17 (U-P10) fins a comparar els enunciats i solucions complets.
+- **Escales:** E-P01 comparteix el càlcul distància real amb escala; sumar trams a escales:17 és una composició afegida, no prova per si sola una família nova. E-P02 comparteix l'esquema d'aplicar o invertir l'escala, tot preservant la diferència entre reducció i ampliació i els nivells candidats. E-P03 manté separades les càrregues de reconèixer el factor (escales:12) i normalitzar/invertir (4/15). E-P04 (correspondència de costats) no es fusiona amb càlcul proporcional. E-P05 (escala bidimensional i àrea) i E-P07 (perímetre) es mantenen com a compostos candidats. E-P06 continua subdividit en proporció ja donada, semblança construïda i ombres; el canvi d'incògnita o objecte no basta per crear famílies. E-P08 és diagnòstic d'escala i no es fusiona amb el diagnòstic dimensional unitats:17.
+- **Límits de nivell:** el camp working_level de la matriu de grups no és coherent en tots els tipus amb MI_2ESO_mesura_nivells_candidats_unitats_escales_20.json ni amb el mapa intern de dificultat. Per exemple, els candidats de unitats:2/3/8/11/13/14/17 divergeixen. Aquests valors continuen sent propostes no aprovades; aquesta passada no canvia nivells ni el mapa de producció. Cal reconciliar-los en una passada específica abans de publicar cap recompte per N.
+
+### Verificació dels modes
+
+La prova scripts/test-mesura-2eso-integracio-modes-vincles.cjs cobreix ara **82 casos**: els 18 tipus d'Unitats, els 18 d'Escales, una mostra de cadascun dels altres cinc temes i les dues branques internes de unitats:6 (directa i encadenada). En els 82 casos comprova guia amb pistes, pràctica autònoma sense pistes i examen tancat amb quatre opcions, incloent respostes correcta i incorrecta. En 67 casos també comprova que es renderitzi la resposta oberta; 15 queden tancats per disseny. **Resultat local: success.** És una prova DOM simulada: no és una comprovació visual en navegador real, i ui_modes continua pendent per a les relacions que no han estat cobertes cas a cas. El workflow integrat encara ha de confirmar aquest canvi.
+
+Les 18 agrupacions continuen candidate_not_validated; no s'aprova cap família, no s'actualitzen families-validades.json i no es modifica cap generador.
