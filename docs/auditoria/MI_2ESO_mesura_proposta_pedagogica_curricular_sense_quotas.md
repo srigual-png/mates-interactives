@@ -47,4 +47,6 @@ Aquestes són valoracions tècnico-pedagògiques, **no** conclusions d'una prova
 
 La matriu de mancances de 5–5–3 conservada a la PR #49 passa a ser **històrica**, no una llista de tasques obligatòries. Els clústers provisionals (72; fins a 85 amb escissions hipotètiques) **no són famílies validades**. Cal una passada final de revisió per a cada tema abans de declarar-ne un recompte definitiu.
 
-**Límits:** no autoritza reclassificar els 128 tipus de manera automàtica, modificar `assets/js/dificultat-mi.js`, registrar famílies, crear generadors, fusionar PR o publicar. Aquesta és la proposta a revisar.
+**Actualització de la revisió docent (20/11/2026):** s'han validat i aplicat al mapa intern de dificultat de la branca quatre assignacions concretes: `perimetres:14` N2; `pitagores:3` (branca inversa) N2; `pitagores:15` (diagonal) N2; i `pitagores:15` (catet) N2. Són nivells interns de MI, no classificacions oficials del currículum, i no aproven les famílies candidates.
+
+**Límits de la proposta general:** aquesta revisió concreta no autoritza reclassificar automàticament els altres tipus, aprovar famílies, crear generadors, fusionar la PR o publicar. La resta de la proposta continua pendent de revisió.
