@@ -4,7 +4,7 @@
 
 ## Abast i currículum
 
-S’han contrastat els 17 tipus i la variant interna del tipus 12 amb el generador actual, la revisió pedagògica, els resultats simulats i els nivells actius. XTEC inclou a 3r l’ús de patrons en recomptes sistemàtics en diferents contextos mitjançant diagrames d’arbre, tècniques de combinatòria o altres estratègies. citeturn809081209search12
+S’han contrastat els 17 tipus i la variant interna del tipus 12 amb el generador actual, la revisió pedagògica, els resultats simulats i els nivells actius. XTEC inclou a 3r l’ús de patrons en recomptes sistemàtics en diferents contextos mitjançant diagrames d’arbre, tècniques de combinatòria o altres estratègies ([Orientacions curriculars de matemàtiques per cursos, 3r d’ESO, p. 18](https://xtec.gencat.cat/web/.content/curriculum/eso/concrecions-curriculars/Orientacions-curriculars_MAT_SEC_per-cursos.pdf)).
 
 “Mateixa família” conserva procediment/objectiu; “variant” canvia dades o context; “tasca diferent” requereix un procediment o decisió diferent.
 
@@ -56,7 +56,7 @@ La varietat cobreix productes d’etapes, suma d’alternatives, repetició/no r
 
 - **Nivells:** inventari de 17 tipus base. La revisió classifica 9 tipus N1 i 8 N2; la variant de repetició permesa del tipus 12 afegeix una branca N1, per això la cobertura simulada apareix com 10/8/0.
 - **Estàtica:** inspecció del generador, estructura de preguntes, solucions, guies i opcions; a la pàgina hi ha pràctica guiada/sense pistes, resposta oberta/múltiple i mode examen.
-- **Simulació existent, no repetida:** `resultats-punt3-3eso-numeric.json` registra 3.000 generacions, cobertura 10/8/0 i examen 6/6/0. Mostres inclouen 17 tipus, però no són una prova exhaustiva de totes les respostes obertes.
+- **Simulació existent, no repetida:** `resultats-punt3-3eso-numeric.json` registra **4.503 generacions** per a `recomptes3r` (recompte que coincideix amb la suma dels camps `n` de les 17 mostres), cobertura 10/8/0 i examen 6/6/0. Les mostres inclouen els 17 tipus, però no són una prova exhaustiva de totes les respostes obertes.
 - **Visual:** no consta revisió visual de tots els arbres, taules, opcions o pantalles petites; no es declara validació visual.
 - No s’ha canviat codi, nivell actiu ni registre oficial de famílies; no s’han repetit proves.
 
