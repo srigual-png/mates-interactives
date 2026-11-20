@@ -83,6 +83,7 @@ async function run(){
      if(idx<0||!generators[item.topic])throw Error('Missing topic generator '+item.topic);
      const ex=generators[item.topic](item.id);
      if(ex.allowOpen===false)throw Error('Expected an open-answer example: '+item.label);
+     window.__mesuraBrowserOpenExample=ex;
      state.currentTopic=idx;state.mode='open';state.level=1;TOPICS[idx].gen=()=>ex;showExercise();
      return {correct:ex.correct,question:ex.question,allowOpen:ex.allowOpen};
     },item);
@@ -103,7 +104,8 @@ async function run(){
 
     await page.evaluate(item=>{
      const generators={unitats:genUnitats2ESO,escales:genEscales2ESO,pitagores:genPitagores2ESO,perimetres:genPerimetresArees2ESO,superficies:genSuperficiesVolums2ESO,estimacio:genEstimacioError2ESO,problemes:genProblemesMesura2ESO};
-     const idx=TOPICS.findIndex(t=>t.id===item.topic&&t.course==='2n'),ex=generators[item.topic](item.id);
+     const idx=TOPICS.findIndex(t=>t.id===item.topic&&t.course==='2n'),ex=window.__mesuraBrowserOpenExample;
+     if(!ex||ex.type!==item.id)throw Error('Open-answer example changed before exam: '+item.label);
      state.examQs=[{...ex,topicName:TOPICS[idx].name}];state.examIdx=0;
      const originalRandom=Math.random;Math.random=()=>0;
      try{renderExamQ()}finally{Math.random=originalRandom}
