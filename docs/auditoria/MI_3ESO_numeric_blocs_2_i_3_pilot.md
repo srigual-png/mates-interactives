@@ -34,11 +34,11 @@
 |  | 5 | R4 acotar arrel entre enters | N1 | Comparar quadrats/arrel i localitzar |
 |  | 6 | R5 desigualtat → interval | N1 | Traducció directa de dos extrems |
 |  | 7 | R6 interval → desigualtat | tasca diferent; N1 | Traducció inversa i lectura de claudàtors |
-|  | 8 | R7 desigualtat de semirecta → interval | variant de R5; N1 | Un extrem i infinit |
-|  | 9 | R8 semirecta → desigualtat | variant de R6; N1 | Invertir notació d’interval |
-|  | 10 | R9 pertinença a interval | tasca diferent; N1 | Comprovar límits oberts/tancats |
-|  | 11 | R10 gràfic de recta → interval | tasca diferent; N1 | Llegir extrems i inclusió visual |
-|  | 12 | R11 detectar notació invàlida amb infinit | tasca diferent; N1 | Aplicar convenció que infinit no és extrem inclòs |
+|  | 8 | R5 desigualtat → interval | variant; N1 | Semirecta amb un extrem finit; mateix pas de traducció que el tipus 6 |
+|  | 9 | R6 interval → desigualtat | variant; N1 | Semirecta amb un extrem finit i l’altre infinit; mateix pas invers que el tipus 7 |
+|  | 10 | R7 pertinença a interval | tasca diferent; N1 | Comprovar límits oberts/tancats |
+|  | 11 | R8 gràfic de recta → interval | tasca diferent; N1 | Llegir extrems i inclusió visual |
+|  | 12 | R9 detectar notació invàlida amb infinit | tasca diferent; N1 | Aplicar convenció que infinit no és extrem inclòs |
 
 ### Lectura crítica dels 12 tipus N1 de reals3r
 
@@ -55,7 +55,7 @@ Els 12 ítems tenen un objectiu únic i directe: classificar, traduir notacions,
 - **G5 Periòdic mixt (6,7,8).** 0,8\overline5: 100x−10x=85−8, x=77/90. 0,28\overline3: 1000x−100x=283−28=255, x=255/900=17/60. Error: alinear període però no part no periòdica. Límit: longituds de període i anteperíode diferents; simplificació final.
 - **G6 Desplaçament (9).** x=0,\overline2 → període d’una xifra: ×10. x=0,\overline{27} → ×100. Error: comptar l’anteperíode com a longitud del període. Límit: distingir periòdic pur de mixt.
 - **G7 Resta eliminadora (10).** x=0,2\overline6; 10x=2,\overline6 i 100x=26,\overline6; resta: 90x=24. Per x=0,7\overline3: 1000x−100x=733−73=660. Error: restar expressions amb períodes no alineats. Límit: triar potències segons anteperíode i període.
-- **G8 Diagnòstic (11).** Per 0,\overline{36}, ×10 no alinea tot el bloc; cal ×100. Per 0,\overline7}, ×10 sí que n’hi ha prou. Error: respondre “cal multiplicar més” sense indicar la potència correcta. Límit: justificar pel nombre de xifres del període.
+- **G8 Diagnòstic (11).** Per 0,\overline{36}, ×10 no alinea tot el bloc; cal ×100. Per 0,\overline7, ×10 sí que n’hi ha prou. Error: respondre “cal multiplicar més” sense indicar la potència correcta. Límit: justificar pel nombre de xifres del període.
 - **G9 Classificar decimal generat per fracció (12).** 7/20=0,35, exacte; 1/6=0,1\overline6, periòdic mixt. Error: classificar només mirant el numerador. Límit: denominador reduït amb factors primers diferents de 2 i 5 dona decimal periòdic.
 
 Les relacions entre famílies no són duplicacions: tipus 4–8 calculen la fracció; tipus 9–11 seleccionen/diagnostiquen passos del mètode; tipus 12 classifica el decimal obtingut. Procediment i producte esperat difereixen.
@@ -68,11 +68,9 @@ Les relacions entre famílies no són duplicacions: tipus 4–8 calculen la frac
 - **R4 Acotar arrel (5).** 3²<10<4², per tant 3<√10<4; 4²<20<5², així 4<√20<5. Error: estimar l’arrel com si fos el radicand. Límit: arrel exacta quadrat perfecte cau sobre enter, no entre dos enters.
 - **R5 Desigualtat a interval (6,8).** −5≤x<1 → [−5,1); x>2 → (2,+∞). Error: posar claudàtor a extrem no inclòs. Límit: infinit sempre amb parèntesi.
 - **R6 Interval a desigualtat (7,9).** (−2,4] → −2<x≤4; (−∞,1] → x≤1. Error: invertir sentit dels símbols. Límit: dos extrems, semirecta i infinit.
-- **R7 Semirecta a interval (8).** x≥2 → [2,+∞); x<−3 → (−∞,−3). Error: incloure infinit. Límit: extrem finit obert/tancat.
-- **R8 Semirecta a desigualtat (9).** [2,+∞) → x≥2; (−∞,1] → x≤1. Error: llegir l’extrem finit al costat incorrecte. Límit: semirectes esquerra/dreta.
-- **R9 Pertinença (10).** −2∉(−2,2] perquè extrem esquerre és obert; 2∈(−2,2]. Error: comparar només que el valor és entre els extrems. Límit: igualtat a extrems és el cas diagnòstic.
-- **R10 Gràfic a interval (11).** Dos cercles oberts a −5 i 2 amb tram pintat entre ells → (−5,2); cercle tancat a −5 i obert a 2 → [−5,2). Error: interpretar cercle buit com a inclòs. Límit: distingir tram i semirecta.
-- **R11 Notació impossible (12).** [2,+∞] és invàlid; [2,+∞) és vàlid. També (−∞,4] és vàlid. Error: marcar tots dos infinits com impossibles. Límit: només ±∞ no es poden incloure.
+- **R7 Pertinença (10).** −2∉(−2,2] perquè extrem esquerre és obert; 2∈(−2,2]. Error: comparar només que el valor és entre els extrems. Límit: igualtat a extrems és el cas diagnòstic.
+- **R8 Gràfic a interval (11).** Dos cercles oberts a −5 i 2 amb tram pintat entre ells → (−5,2); cercle tancat a −5 i obert a 2 → [−5,2). Error: interpretar cercle buit com a inclòs. Límit: distingir tram i semirecta.
+- **R9 Notació impossible (12).** [2,+∞] és invàlid; [2,+∞) és vàlid. També (−∞,4] és vàlid. Error: marcar tots dos infinits com impossibles. Límit: només ±∞ no es poden incloure.
 
 ## Buits i exercicis nous
 
