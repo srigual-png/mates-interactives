@@ -32,6 +32,8 @@ for(const type of [8,9,19])for(let i=0;i<400;i++){
  generated++;
 }
 const shared=[...obs[9].keys()].filter(key=>obs[8].has(key)&&obs[19].has(key)).sort();
+const finiteParameterDomain={radius_cm:[2,3,4,5],height_cm:{superficies8:[4,5,6,8,10],superficies9:[4,5,6,8],superficies19:[4,5,6,8,10]},shared_triplets:4*4};
+assert.equal(shared.length,finiteParameterDomain.shared_triplets,'The sample must cover the full 16-combination common parameter domain');
 assert(shared.length>=4,'No 4 instances with exactly same radius and height');
 const triples=shared.slice(0,4).map(key=>{
  const a=obs[8].get(key),b=obs[9].get(key),c=obs[19].get(key);
@@ -40,5 +42,5 @@ const triples=shared.slice(0,4).map(key=>{
  assert(Math.abs(total-(l+2*3.14*a.r*a.r))<.00501);
  return {radius_cm:a.r,height_cm:a.h,lateral:{q:a.q,answer:a.correct},total:{q:b.q,answer:b.correct},unfolded:{q:c.q,answer:c.correct},interpretation:'Common cylinder lateral geometry; lateral area, full area with two bases, and unfolded dimensions assess distinct outputs'};
 });
-console.log(JSON.stringify({generated,shared_data_triplets:shared.length,paired_triplets:triples.length,triples,teacher_approved:false},null,2));
+console.log(JSON.stringify({generated,shared_data_triplets:shared.length,finite_parameter_domain:finiteParameterDomain,paired_triplets:triples.length,triples,teacher_approved:false},null,2));
 assert.equal(generated,1200);assert.equal(triples.length,4);
