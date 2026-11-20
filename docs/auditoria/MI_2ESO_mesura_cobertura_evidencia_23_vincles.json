@@ -6,7 +6,7 @@
   "source_tests_success": 23,
   "source_tests_queued": 0,
   "completed_paired_evidence": 6,
-  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 135 casos. Els lots 2–4 aporten 4 parelles d’estimació i 72 parelles de Pitàgores; els lots 5 i 6 verifiquen amb oracles independents 7 parelles de pitagores:10/11 amb pitagores:3 i 8 de pitagores:12/14 amb pitagores:2, sense afegir casos al recompte. El lot 7 verifica 4 parelles de perimetres:14/5 i 4 de perimetres:4/15 amb oracles independents (1.280 instàncies); perimetres:4↔15 són dos registres recíprocs d’una sola relació conceptual i tampoc no afegeixen casos al recompte. El lot 8 verifica amb oracles independents 2.000 instàncies de escales:16 i les destinacions; confirma 4 mostres amb escales:1 i documenta que escales:2, escales:17 i problemes:8 tenen dominis d’escala disjunts. El lot 9 valida 1.200 instàncies de escales:12/3/5 i quatre parelles amb escales:5; els dominis de factor de escales:12 i escales:3 són disjunts. El lot 10 valida 1.600 instàncies de problemes:16 i estimacio:7/8/13, amb una terna aparellada amb 7/8 i domini de referència disjunt amb 13. Cap dels lots 5–10 afegeix casos al recompte de 135. Sis de les 21 relacions conceptuals compleixen ara el criteri estricte; les altres 15 continuen parcials o sense aparellar. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real. Pitagores:5 i problemes:6 continuen com a límits estructurals sense parella exacta dins els pools provats; no es compten com a coincidències.",
+  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 135 casos. Els lots 2–4 aporten 4 parelles d’estimació i 72 parelles de Pitàgores; els lots 5 i 6 verifiquen amb oracles independents 7 parelles de pitagores:10/11 amb pitagores:3 i 8 de pitagores:12/14 amb pitagores:2, sense afegir casos al recompte. El lot 7 verifica 4 parelles de perimetres:14/5 i 4 de perimetres:4/15 amb oracles independents (1.280 instàncies); perimetres:4↔15 són dos registres recíprocs d’una sola relació conceptual i tampoc no afegeixen casos al recompte. El lot 8 verifica amb oracles independents 2.000 instàncies de escales:16 i les destinacions; confirma 4 mostres amb escales:1 i documenta que escales:2, escales:17 i problemes:8 tenen dominis d’escala disjunts. El lot 9 valida 1.200 instàncies de escales:12/3/5 i quatre parelles amb escales:5; els dominis de factor de escales:12 i escales:3 són disjunts. El lot 10 valida 1.600 instàncies de problemes:16 i estimacio:7/8/13, amb una terna aparellada amb 7/8 i domini de referència disjunt amb 13. El lot 11 valida 4.400 instàncies de problemes:3/superficies:13/14 amb dimensions normalitzades: confirma dues parelles físiques exactes amb superficies:14 i cap amb superficies:13. Cap dels lots 5–11 afegeix casos al recompte de 135. Sis de les 21 relacions conceptuals compleixen ara el criteri estricte; les altres 15 continuen parcials o sense aparellar. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real. Pitagores:5 i problemes:6 continuen com a límits estructurals sense parella exacta dins els pools provats; no es compten com a coincidències.",
   "rows": [
     {
       "source": "escales:16",
@@ -807,21 +807,81 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-quatre-volums-superficies-oracles.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "structural_math_verified_no_equal_parameter_pair",
-      "target_mathematical_oracles_for_this_pair": "verified_structurally_not_same_input",
+      "paired_same_parameters": "math_evidence_verified_2_exact_physical_dimension_pairs_with_superficies_14; exhaustive_structural_no_match_with_superficies_13",
+      "target_mathematical_oracles_for_this_pair": "independent_oracles_verified_for_all_targets; physical_dimension_domains_exhaustively_normalized",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "pedagogical_proposal": {
-        "decision": "tasca_diferent",
+        "decision": "variant_mateixa_familia",
         "level": "N2",
-        "reason": "Volum, conversió de capacitat i percentatge; el mapa vigent situa els tipus comparats a N2.",
+        "reason": "Tots parteixen de V = llargada × amplada × altura i acaben en litres; problemes:3 afegeix el percentatge d’ompliment. La conversió d’unitats i la modelització mantenen N2.",
         "approval": "pending_teacher_review",
         "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
         "mode_limits": "not_real_browser_or_full_open_answer_validation"
       },
       "paired_script": "scripts/test-mesura-2eso-diposits3-superficies13-14-contrast.cjs",
-      "pedagogical_interpretation": "partial volume in litres requires extra percentage, different original dimensions and unit systems"
+      "pedagogical_interpretation": "same volume-capacity family and litre output; problemes:3 adds fill percentage; two exact physical dimension pairs with superficies:14; no exact dimensions with superficies:13",
+      "additional_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-diposits3-superficies13-14-contrast.cjs",
+        "targets": [
+          "superficies:13",
+          "superficies:14"
+        ],
+        "independent_oracle_instances": 4400,
+        "independent_oracles": true,
+        "verified_by_type": {
+          "problemes:3": 400,
+          "superficies:13": 2000,
+          "superficies:14": 2000
+        },
+        "exact_physical_dimension_pairs_with_superficies_14": 2,
+        "exact_physical_dimension_pairs_with_superficies_13": 0,
+        "exact_pair_examples": [
+          {
+            "problemes3_cm": [
+              60,
+              40,
+              50
+            ],
+            "fill_percent": 50,
+            "water_litres": 60,
+            "superficies14_dm": [
+              6,
+              5,
+              4
+            ],
+            "total_capacity_litres": 120
+          },
+          {
+            "problemes3_cm": [
+              80,
+              50,
+              40
+            ],
+            "fill_percent": 75,
+            "water_litres": 120,
+            "superficies14_dm": [
+              8,
+              5,
+              4
+            ],
+            "total_capacity_litres": 160
+          }
+        ],
+        "physical_units_normalized_to_m_before_comparison": true,
+        "structural_target_without_exact_pair": {
+          "target": "superficies:13",
+          "reason": "all dimensions are in m; superficies:13 uses 3–6 × 2–4 × 1–2 m, while problemes:3 source dimensions convert from 0.4–1.2 × 0.4–0.6 × 0.4–0.5 m; finite dimension domains have no equal unordered triples"
+        },
+        "same_full_capacity_litre_pairs": {
+          "superficies13": 0,
+          "superficies14": 3
+        },
+        "adds_new_cases_to_existing_135_case_count": false,
+        "dimensions_compared_without_order_sensitivity": true
+      },
+      "completed_paired_evidence": false
     },
     {
       "source": "problemes:5",
