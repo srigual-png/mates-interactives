@@ -135,22 +135,22 @@
 
 ## Reconciliació dels nivells amb el mapa vigent (20/11/2026)
 
-La passada contrasta els nivells candidats amb els passos matemàtics reals i amb `REVIEWED_LEVELS`/`REVIEWED_VARIANTS` de `main` a la base de la PR. El nivell candidat no modifica el nivell actiu. Les discrepàncies són propostes pendents de revisió docent.
+La taula conserva la comparació amb `REVIEWED_LEVELS`/`REVIEWED_VARIANTS` de `main` a la base de la PR abans de resoldre les discrepàncies. A petició de l’usuari, s’han validat els quatre punts i actualitzat tres assignacions a `REVIEWED_LEVELS` de la branca. Són nivells interns de dificultat de MI, no nivells oficials del currículum; les propostes de famílies continuen provisionals.
 
-| Relació | Candidat reconciliat | Mapa vigent | Resultat |
+| Relació | Candidat reconciliat | Mapa abans de validar | Resultat |
 |---|---|---|---|
 | 1 · `escales:16` ↔ escales 1/2/17, problemes 8 | N2 | N2 | Coincideix. |
 | 2 · `escales:12` ↔ escales 3/5 | N1 (12/5); N2 (3) | N1 / N2 / N1 | Coincideix per a 12/5; 3 suma conversió. |
 | 3 · `estimacio:18` ↔ 6/17 | N1 | N1 | Coincideix. |
 | 4 · `estimacio:9` ↔ 7/8/13 | N2 | N2 | Coincideix. |
-| 5 · `perimetres:14` ↔ 5 | N2 invers; N1 directe | N1 / N1 | N2 invers és proposta pendent. |
+| 5 · `perimetres:14` ↔ 5 | N2 invers; N1 directe | N1 / N1 | Validat: 14 puja a N2; el càlcul directe continua N1. |
 | 6 · `perimetres:4` ↔ 15 | N1 / N2 | N1 / N2 | Coincideix. |
-| 7 · `pitagores:10` ↔ 3 | N2 / N2 invers | N2 / N1 | Revisar el nivell de 3. |
-| 8 · `pitagores:11` ↔ 3 | N2 / N2 invers | N2 / N1 | Revisar el nivell de 3. |
+| 7 · `pitagores:10` ↔ 3 | N2 / N2 invers | N2 / N1 | Validat: la inversió del tipus 3 és N2. |
+| 8 · `pitagores:11` ↔ 3 | N2 / N2 invers | N2 / N1 | Validat: la inversió del tipus 3 és N2. |
 | 9 · `pitagores:12` ↔ 2/contextos | N2 | N2 | Coincideix per al tipus 12. |
 | 10 · `pitagores:14` ↔ 2/contextos | N2 | N2 | Coincideix. |
-| 11 · `pitagores:15` diagonal ↔ 2 | N1 / N1 | N2 / N1 | Revisar l’excepció de diagonal. |
-| 12 · `pitagores:15` catet ↔ 3; 3 ↔ 2 | N2 invers / N1 directe | N1 / N1 / N1 | Revisar la branca catet i el tipus 3. |
+| 11 · `pitagores:15` diagonal ↔ 2 | N2 / N1 | N2 / N1 | Es manté N2: cal modelar la diagonal com a hipotenusa. |
+| 12 · `pitagores:15` catet ↔ 3; 3 ↔ 2 | N2 invers / N1 directe | N1 / N1 / N1 | Validat: tipus 15 catet i tipus 3 invers són N2; tipus 2 directe és N1. |
 | 13 · `problemes:14` ↔ 15 | N2 / N2 | N2 / N2 | Coincideix. |
 | 14 · `problemes:16` ↔ estimació 7/8/13 | N1 / N2 | N1 / N2 | Coincideix; referència comuna simplifica la comparació. |
 | 15 · `problemes:3` ↔ superfícies 13/14 | N2 | N2 | Coincideix. |
@@ -161,7 +161,13 @@ La passada contrasta els nivells candidats amb els passos matemàtics reals i am
 | 20 · `superficies:9` ↔ 8/19 | N2 / N1 / N2 | N2 / N1 / N2 | Coincideix. |
 | 21 · `unitats:9` ↔ 1/4/5 | N2 / N1 | N2 / N1 | Coincideix. |
 
-**Pendents que podrien requerir una decisió docent abans de tocar el mapa oficial:** `perimetres:14` (candidat N2, actual N1); `pitagores:3` i branca catet de `pitagores:15` (candidat N2, actual N1); i branca diagonal de `pitagores:15` (candidat N1, actual N2). Cap canvi oficial s’ha aplicat.
+**Validació dels quatre punts (20/11/2026):**
+- `perimetres:14` queda a **N2**: aïlla el radi a partir de la longitud de la circumferència, una inversió respecte del càlcul directe de N1.
+- `pitagores:3` queda a **N2**: trobar un catet desconegut exigeix restar quadrats i després extreure l’arrel; és la inversió del càlcul directe de la hipotenusa.
+- `pitagores:15`, branca **diagonal**, es manté a **N2**: cal identificar dins del rectangle el triangle rectangle i el paper de la diagonal com a hipotenusa. La proposta de baixar-la a N1 no s’accepta; la tasca directa de `pitagores:2` continua N1.
+- `pitagores:15`, branca **catet**, queda a **N2** per la mateixa inversió que el tipus 3.
+
+La decisió és coherent amb el criteri intern de MI (inversions i modelització són N2). Les orientacions de 2n d’ESO inclouen descobrir Pitàgores i usar-lo per calcular longituds d’elements de polígons, però no defineixen els nivells interns N1/N2; aquesta separació és una classificació pedagògica del projecte ([orientacions curriculars de 2n, mesurament](https://projectes.edigital.cat/orientacions-curriculars/mat_sec/mesurament1.html)). S’han mogut a N2 `perimetres:14`, `pitagores:3` i `pitagores:15` a `REVIEWED_LEVELS`; es manté l’override N2 de la variant diagonal.
 
 ## Revisió dels modes
 
@@ -175,6 +181,6 @@ La suite `scripts/test-mesura-2eso-integracio-modes-vincles.cjs`, executada amb 
 - **Mantenir les variants** de Pitàgores 15 (diagonal/catet), Superfícies 17 (sameBase/other), el context de radi/diàmetre i les fórmules inverses quan tenen el mateix objectiu central.
 - **Nivells candidats:** tots els enllaços revisats s'expliquen amb coneixements de 2n d'ESO i orientació N1/N2; no cal inventar N3 per omplir una quota. La distribució final requereix la revisió de l'experiència real de l'alumnat.
 - **Cobertura:** la matriu compta 18 grups / 19 registres amb evidència aparellada (135 casos), amb **7/21 relacions conceptuals completes** segons el criteri estricte indicat a dalt. Les altres 14 relacions conceptuals (15 registres per la reciprocitat `problemes:14↔15`) continuen parcials: els falta almenys un destinatari o branca amb dues mostres aparellades i oracles independents als dos generadors; també falta contrastar distractors i respostes obertes en els recorreguts finals i fer proves de navegador reals. L'aprovació docent continua pendent abans de modificar `REVIEWED_LEVELS` o `families-validades.json`.
-- **Cap canvi funcional**, de nivell oficial, de famílies aprovades ni d'estat de la PR. Es manté **oberta i Draft**, sense fusió ni publicació.
+- **Canvi de classificació interna aplicat:** `perimetres:14`, `pitagores:3` i `pitagores:15` queden a N2; cap nivell oficial del currículum ni família aprovada no s’ha canviat. Es manté **oberta i Draft**, sense fusió ni publicació.
 
 **Nota sobre exemples:** quan una xifra és un exemple aritmètic il·lustratiu i no coincideix necessàriament amb una fixture existent, no representa un aparellament real addicional; el camp «Abast de les proves» n'aclareix la verificació.
