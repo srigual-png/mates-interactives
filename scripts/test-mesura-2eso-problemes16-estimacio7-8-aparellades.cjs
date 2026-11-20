@@ -82,7 +82,8 @@ assert.deepEqual([...problemReferences].sort((a, b) => a - b), [80, 120, 150, 25
 assert.deepEqual([...estimate13References].sort((a, b) => a - b), [100, 200, 500, 1000]);
 assert([...problemReferences].every(value => !estimate13References.has(value)), 'Unexpected reference overlap with estimacio:13');
 
-// Exhaust both finite domains: random sampling alone could miss a shared input.
+// Enumerate both finite parameter domains so the count of exact shared
+// reference/approximation inputs does not depend on the random sample above.
 const problem16Cases = [
   { real: 120, a: 119, b: 122 }, { real: 250, a: 248, b: 255 },
   { real: 80, a: 79, b: 83 }, { real: 150, a: 152, b: 145 },
@@ -99,7 +100,7 @@ const exhaustiveSharedInputs = [...new Set(problem16Cases.map(c => `${c.real}:${
 assert.deepEqual(exhaustiveSharedInputs, ['250:255'], 'Finite generator domains must contain exactly one shared reference/B input');
 
 const shared = [...decisions.keys()].filter(key => calc[7].has(key) && calc[8].has(key)).sort();
-assert.deepEqual(shared, exhaustiveSharedInputs, 'Sampled pairings must match the exhaustive finite-domain result');
+assert.deepEqual(shared, exhaustiveSharedInputs, 'Randomly sampled pairings must match the exhaustive finite-domain result');
 const paired = shared.map(key => {
   const decision = decisions.get(key);
   const decimal = calc[7].get(key);
@@ -119,36 +120,11 @@ console.log(JSON.stringify({
   verified: Object.values(checked).reduce((sum, value) => sum + value, 0),
   verified_by_type: { 'estimacio:7': checked[7], 'estimacio:8': checked[8], 'estimacio:13': checked[13], 'problemes:16': checked[16] },
   shared_with_estimacio_7_and_8: paired.length,
-  exhaustive_domain: { problemes16_cases: problem16Cases.length, estimacio7_and_8_reference_approximation_pairs: estimate7And8Inputs.size, exact_shared_reference_approximation_inputs: exhaustiveSharedInputs },
-  paired_examples: paired,
-  structural_targets_without_exact_pair: [{
-    target: 'estimacio:13',
-    reason: 'reference domains are disjoint: problemes:16 uses 80/120/150/250 cm; estimacio:13 uses 100/200/500/1000'
-  }],
-  teacher_approved: false
-}, null, 2));
-assert.equal(Object.values(checked).reduce((sum, value) => sum + value, 0), 1600);
-
-assert.equal(shared.length, 1, 'Expected the one genuine shared reference/B fixture');
-const paired = shared.map(key => {
-  const decision = decisions.get(key);
-  const decimal = calc[7].get(key);
-  const percent = calc[8].get(key);
-  assert(Math.abs(decision.relativeB - decimal.relative) < 1e-8);
-  assert(Math.abs(decimal.relative - percent.relative) < 1e-8);
-  return {
-    shared_reference_and_instrument_B: key,
-    decision: { question: decision.question, answer: decision.answer, relative_error_B: decision.relativeB },
-    relative_decimal: { question: decimal.question, answer: decimal.answer },
-    relative_percent: { question: percent.question, answer: percent.answer },
-    interpretation: 'The shared B error is a subcalculation; choosing between A and B additionally compares both errors and makes a decision.'
-  };
-});
-
-console.log(JSON.stringify({
-  verified: Object.values(checked).reduce((sum, value) => sum + value, 0),
-  verified_by_type: { 'estimacio:7': checked[7], 'estimacio:8': checked[8], 'estimacio:13': checked[13], 'problemes:16': checked[16] },
-  shared_with_estimacio_7_and_8: paired.length,
+  exhaustive_domain: {
+    problemes16_cases: problem16Cases.length,
+    estimacio7_and_8_reference_approximation_pairs: estimate7And8Inputs.size,
+    exact_shared_reference_approximation_inputs: exhaustiveSharedInputs
+  },
   paired_examples: paired,
   structural_targets_without_exact_pair: [{
     target: 'estimacio:13',
