@@ -65,7 +65,7 @@ La revisió prèvia registra 3.000 o més generacions per tema i mostres d’exa
 |  | GA3: 6 | Tasca diferent: completar una identitat notable | N1 |
 |  | GA4: 7 | Variant aplicada: substituir el valor de x en una àrea | N1 |
 |  | GA5: 8 | Tasca diferent: expressar un perímetre algebraic | N1 |
-| Visualització i modelització | VI1: 1, 10 | Mateixa família: llegir/interpretrar la intersecció de dues rectes | N1 |
+| Visualització i modelització | VI1: 1, 10 | Mateixa família: llegir/interpretar la intersecció de dues rectes | N1 |
 |  | VI2: 2, 3 | Mateixa família amb resultats diferents: classificar un sistema de rectes com a únic o sense solució | N2 |
 |  | VI3: 4, 5, 9 | Mateixa família: nombres figurats i successions explícites, amb triangular/quadrada/lineal com a variants | N1 |
 |  | VI4: 6 | Tasca diferent: comprovar si un punt satisfà y=x² per substitució | N1 |
@@ -99,7 +99,7 @@ La revisió prèvia registra 3.000 o més generacions per tema i mostres d’exa
 - **Límits:** 0°/360° és identitat; recuperar l’angle pot tenir equivalències modulars; no s’ha d’acceptar un sentit si el sistema en demana un altre sense indicar equivalència.
 
 ### GI3/GI4/GI5 — Composició o centre (7–9)
-- **Exemples:** quatre girs de 90° antihoraris retornen el punt inicial; A(4,2) amb centre C(1,1) a 180° dona A′=(-2,0). Si A=(3,1), A′=(1,5), el centre és el punt mig C=(2,3).
+- **Exemples:** quatre girs de 90° antihoraris retornen el punt inicial; A(4,2) amb centre C(1,1) a 180° dona A′=(-2,0). En un gir de 180°, si A=(3,1) i A′=(1,5), el centre és el punt mig C=(2,3).
 - **Errors:** sumar angles sense modular 360°; girar al voltant de l’origen quan el centre és C; donar el doble del vector en lloc del punt mig.
 - **Límits:** dos girs amb centres diferents no són automàticament un gir igual; s’ha d’usar el cas concret que demana el tipus.
 
