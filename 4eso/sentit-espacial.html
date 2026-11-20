@@ -307,7 +307,7 @@ button:focus-visible,a:focus-visible,[onclick]:focus-visible{outline:3px solid c
     <p>
       A <strong>4t d'ESO</strong> el sentit espacial fa el pas de la geometria visual a una geometria cada vegada més <strong>argumentada i analítica</strong>. L'objectiu és reconèixer propietats, justificar conclusions i començar a utilitzar els <strong>vectors</strong> com a eina per descriure moviments i relacions al pla.
       <br><br>
-      Ja pots treballar els <strong>8 blocs comuns a Matemàtiques A i B</strong>: <strong>Figures i raonament geomètric</strong>, <strong>Vectors: concepte i representació</strong>, <strong>Components i mòdul d’un vector</strong>, <strong>Operacions amb vectors</strong>, <strong>Coordenades i problemes geomètrics amb vectors</strong>, <strong>Homotècies</strong>, <strong>Geometria de les funcions</strong> i <strong>Zeros, interseccions i regions del pla</strong>. A la secció final hi ha les ampliacions <strong>A–D</strong>: <strong>A</strong> i <strong>D</strong> incorporen els dos sabers espacials addicionals de <strong>Matemàtiques B</strong> (rectes i transformacions amb geometria analítica), mentre que <strong>B</strong> i <strong>C</strong> són aprofundiment opcional i preparació per a Batxillerat.
+      Ja pots treballar els <strong>8 blocs comuns a Matemàtiques A i B</strong>: <strong>Figures i raonament geomètric</strong>, <strong>Vectors: concepte i representació</strong>, <strong>Components i mòdul d’un vector</strong>, <strong>Operacions amb vectors</strong>, <strong>Coordenades i problemes geomètrics amb vectors</strong>, <strong>Homotècies</strong>, <strong>Geometria de les funcions</strong> i <strong>Zeros, interseccions i regions del pla</strong>. A la secció final, els tres blocs de rectes <strong>A–C</strong> desenvolupen els sabers que les orientacions marquen <strong>[AMP]</strong> i que aquest projecte incorpora a l’itinerari de <strong>Matemàtiques B</strong>. El bloc <strong>D</strong> integra diverses eines de geometria analítica com a aprofundiment opcional. Les lletres A–D són etiquetes internes, no les opcions del curs.
       <br><br>
       Les pistes indiquen el <strong>procediment sense revelar la resposta</strong>. Si t'equivoques, la correcció mostra el desenvolupament complet pas a pas i assenyala què convé revisar.
     </p>
@@ -561,7 +561,7 @@ function getMathOption4(){
   }catch(e){return ''}
 }
 const MATH_OPTION=getMathOption4();
-function optionLabel(){return MATH_OPTION?(' · Matemàtiques '+MATH_OPTION):' · A+B'}
+function optionLabel(){return MATH_OPTION?(' · Matemàtiques '+MATH_OPTION):' · Recorregut comú A/B'}
 
 /* ── TEORIA · BLOCS 1–8 ───────────────────────────────────── */
 const TEORIA={
@@ -1868,9 +1868,9 @@ const TOPICS=[
   {id:'geometriaFuncions4t',course:'4t',scope:'AB',exam4t:true,icon:'📈',name:'Bloc 7 · Geometria de les funcions',short:'Rectes · paràboles · hipèrboles · forma · simetria · translacions gràfiques',theoryKey:'geometriaFuncions4t',gen:genGeometryFunctions4Variat},
   {id:'regions4t',course:'4t',scope:'AB',exam4t:true,icon:'🎯',name:'Bloc 8 · Zeros, interseccions i regions del pla',short:'Talls · zeros · interseccions · inequacions · fronteres · regions solució',theoryKey:'regions4t',gen:genRegions4Variat},
   {id:'rectesAmpA',course:'4t',scope:'B',bRequired:true,exam4t:true,isExtension:true,icon:'📏',name:'Ampliació A · Equacions de la recta',short:'Forma reduïda · punt-pendent · general · vectorial · rectes verticals i horitzontals · dos punts',theoryKey:'rectesAmpA',gen:genRectesAmpAVariat},
-  {id:'elementsRectaAmpB',course:'4t',scope:'AMP',exam4t:false,isExtension:true,icon:'🧭',name:'Ampliació B · Elements d’una recta',short:'Pendent · vector director · punts · talls amb els eixos · angle · paral·lelisme · perpendicularitat',theoryKey:'elementsRectaAmpB',gen:genElementsRectaAmpBVariat},
-  {id:'posicioRectesAmpC',course:'4t',scope:'AMP',exam4t:false,isExtension:true,icon:'∥',name:'Ampliació C · Posició relativa de rectes',short:'Secants · paral·leles · coincidents · perpendiculars · punt d’intersecció · paràmetres',theoryKey:'posicioRectesAmpC',gen:genPosicioRectesAmpCVariat},
-  {id:'geometriaAnaliticaAmpD',course:'4t',scope:'B',bRequired:true,exam4t:true,isExtension:true,icon:'★',name:'Ampliació D · Geometria analítica · Prepara Batxillerat',short:'Problemes integrats · punts mitjans · vectors · rectes paral·leles i perpendiculars · interseccions',theoryKey:'geometriaAnaliticaAmpD',gen:genGeometriaAnaliticaAmpDVariat}
+  {id:'elementsRectaAmpB',course:'4t',scope:'B',bRequired:true,exam4t:true,isExtension:true,icon:'🧭',name:'Ampliació B · Elements d’una recta',short:'Pendent · vector director · punts · talls amb els eixos · angle · paral·lelisme · perpendicularitat',theoryKey:'elementsRectaAmpB',gen:genElementsRectaAmpBVariat},
+  {id:'posicioRectesAmpC',course:'4t',scope:'B',bRequired:true,exam4t:true,isExtension:true,icon:'∥',name:'Ampliació C · Posició relativa de rectes',short:'Secants · paral·leles · coincidents · perpendiculars · punt d’intersecció · paràmetres',theoryKey:'posicioRectesAmpC',gen:genPosicioRectesAmpCVariat},
+  {id:'geometriaAnaliticaAmpD',course:'4t',scope:'AMP',exam4t:false,isExtension:true,icon:'★',name:'Ampliació D · Geometria analítica · Prepara Batxillerat',short:'Problemes integrats · punts mitjans · vectors · rectes paral·leles i perpendiculars · interseccions',theoryKey:'geometriaAnaliticaAmpD',gen:genGeometriaAnaliticaAmpDVariat}
 ];
 window.miTaskDifficulty=MIDifficulty.attach({course:'4eso',sense:'espacial',topics:TOPICS,option:()=>typeof MATH_OPTION!=='undefined'?MATH_OPTION:null,examFilter:t=>typeof isExamTopic==='function'?isExamTopic(t):true});
 
@@ -2035,8 +2035,8 @@ function renderHome(){
   const routeNote=MATH_OPTION==='A'
     ?'Matemàtiques A: els 8 blocs comuns formen el recorregut obligatori.'
     :MATH_OPTION==='B'
-      ?'Matemàtiques B: els 8 blocs comuns més Rectes (A) i Geometria analítica (D) formen el recorregut curricular del projecte.'
-      :'Els 8 blocs són comuns A/B; Rectes (A) i Geometria analítica (D) són sabers curriculars addicionals de Matemàtiques B.';
+      ?'Matemàtiques B: els 8 blocs comuns més els tres blocs de rectes (A–C) formen el recorregut curricular del projecte.'
+      :'Recorregut comú A/B: els 8 blocs formen la base compartida; cal triar A o B per activar els continguts B a la pràctica i a l’examen.';
   let html=head('📘','Continguts de 4t d\'ESO',routeNote,'',true);
   mainTopics.forEach(t=>{
     const i=TOPICS.indexOf(t),done=state.done.includes(t.id);
@@ -2046,9 +2046,9 @@ function renderHome(){
   });
   if(expansionTopics.length){
     const extNote=MATH_OPTION==='B'
-      ?'A i D són curriculars de Matemàtiques B; B i C són aprofundiment opcional [AMP]. Les lletres A–D són noms interns de l’ampliació.'
-      :'A i D identifiquen també sabers addicionals de Matemàtiques B; B i C són aprofundiment opcional [AMP].';
-    html+=head('⭐','Geometria analítica i ampliació',extNote,'p6-extension');
+      ?'Els blocs interns A–C desenvolupen els sabers de rectes [AMP] incorporats al recorregut B. El bloc D és un repte integrat opcional de preparació per a Batxillerat.'
+      :'Els blocs A–C són continguts del recorregut B i opcionalment es poden treballar a Matemàtiques A. El bloc D és aprofundiment opcional. Les lletres A–D són etiquetes internes del projecte.';
+    html+=head('⭐','Matemàtiques B i aprofundiment',extNote,'p6-extension');
     expansionTopics.forEach(t=>{
       const i=TOPICS.indexOf(t),done=state.done.includes(t.id);
       html+='<div class="topic-card extension-card '+(done?'done ':'')+('')+'" '+('onclick="selectTopic('+i+')"')+'>'
