@@ -2,7 +2,7 @@
 
 ## Abast i estat
 
-Auditoria documental dels **8 temes ordinaris (80 tipus)** de `3eso/sentit-espacial.html`. Les ampliacions A–D (40 tipus) queden excloses. Branca de treball separada de `main`; PR en Draft, sense fusió ni publicació. No es canvien generadors, nivells de producció ni `families-validades.json`.
+Auditoria documental dels **8 temes ordinaris (80 tipus)** de `3eso/sentit-espacial.html`. Les ampliacions A–D (40 tipus) queden excloses. Branca de treball separada de `main`; PR oberta per a revisió, sense fusió ni publicació. No es canvien generadors, nivells de producció ni `families-validades.json`.
 
 S’han contrastat el codi actual de cada generador, `docs/dificultats/revisio-3eso-espacial-punt3.json` i `docs/dificultats/resultats-punt3-3eso-espacial.json`. Les mostres prèvies es reutilitzen; no s’han repetit proves.
 
@@ -219,4 +219,4 @@ La revisió prèvia registra 3.000 o més generacions per tema i mostres d’exa
 - Mapa tipus→família candidat, decisions mateixa/variant/diferent, propostes N1/N2, exemples resolts, errors i límits documentats.
 - Proposta global: 54 N1, 26 N2, 0 N3; cap canvi aplicat a la configuració de producció.
 - Cap generador, nivell actiu, registre oficial ni workflow modificat; cap prova nova executada.
-- PR en Draft i sense fusió ni publicació. Les famílies continuen candidates fins a validació docent i eventual adopció.
+- PR Ready for review, sense fusió ni publicació. Les famílies continuen candidates fins a validació docent i eventual adopció.
