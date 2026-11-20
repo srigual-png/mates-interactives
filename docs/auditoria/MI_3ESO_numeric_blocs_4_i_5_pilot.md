@@ -1,6 +1,6 @@
 # 3r ESO · Sentit numèric · Blocs 4 i 5
 
-> Dictamen documental complet dels 28 tipus ordinaris. PR #58 oberta i en Draft; cap fusió ni publicació.
+> Dictamen documental complet dels 28 tipus ordinaris. PR #58 oberta i llesta per a revisió; cap fusió ni publicació.
 
 ## Abast i referent curricular
 
@@ -34,7 +34,7 @@
 | 5 | P4 quocient de potències igual base | diferent | N1 | Restar exponents |
 | 9 | P4 | variant | N1 | Obtenir valor numèric amb exponent negatiu |
 | 12 | P3 | variant | N1 | Trobar exponent desconegut |
-| 16 | P3/P4 | variant | N1 | Expressar producte com a potència amb exponent negatiu |
+| 16 | P2, P3, P4 i P5 | tasca transversal de reconeixement | N1 | Identificar la llei que correspon a cada expressió, sense calcular-ne el valor final |
 | 6 | P5 potència d’una potència | diferent | N1 | Multiplicar exponents |
 | 7 | P6 potència d’un producte | diferent | N1 | Distribuir exponent sobre factors |
 | 8 | P7 potència d’un quocient | diferent | N1 | Elevar numerador i denominador |
@@ -73,6 +73,7 @@
 - **P9 Diagnosticar propietat.** 3⁴+3²≠3⁶; en canvi 3⁴·3²=3⁶. 2³+2³=16, no 2⁶. Error: estendre la regla del producte a sumes. Límit: confondre suma de potències amb potència d’una suma.
 - **P10 Avaluar expressió.** 3⁴·3⁻⁹=3⁻⁵=1/243; 5²·5⁻³=1/5. Error: aturar-se en potència negativa quan es demana valor numèric final. Límit: base negativa i parèntesis.
 - **P11 Jerarquia.** 2⁴−2·2²=16−8=8; 5⁴−5·5³=625−625=0. Error: fer primer la resta o tractar exponents com a multiplicacions tardanes. Límit: resultat zero i parèntesis addicionals.
+- **Reconeixement transversal (tipus 16; P2/P3/P4/P5).** En `5⁻²·5³`, cal reconèixer el producte de potències de la mateixa base; en `(3²)⁻²`, la potència d’una potència; en `7²÷7⁵`, el quocient de potències. Error: aplicar una propietat d’una operació diferent. Límit: l’ítem demana identificar l’equivalència, no sempre calcular-ne el valor numèric.
 
 Els nivells N1 de les lleis individuals són adequats perquè el procediment és aplicar una propietat en una expressió curta. N2 es reserva per distingir signes/parèntesis, diagnosticar una falsa propietat o encadenar jerarquia. No es força N3.
 
@@ -91,4 +92,4 @@ Hi ha un enllaç entre els tipus 6 i 11 d’aproximacions (precisió de mesura v
 
 ## Conclusió
 
-Proposta mantinguda per tipus únic: aproximacions 9 N1 / 3 N2 / 0 N3 (tipus 8,10,12 a N2; el tipus 11 té una branca N2 `transport`) i potències 13 N1 / 3 N2 / 0 N3 (tipus 10,11,15 a N2). La cobertura per camins d’aproximacions és 9/4/0 perquè compta aquesta variant addicional; no hi ha una anomalia pendent de reconciliar. No es canvien nivells actius ni registre oficial de famílies. Només s’ha completat la documentació de la PR #58.
+Proposta mantinguda per tipus únic: aproximacions 9 N1 / 3 N2 / 0 N3 (tipus 8,10,12 a N2; el tipus 11 té una branca N2 `transport`) i potències 13 N1 / 3 N2 / 0 N3 (tipus 10,11,15 a N2). La cobertura per camins d’aproximacions és 9/4/0 perquè compta aquesta variant addicional; no hi ha una anomalia pendent de reconciliar. No es canvien nivells actius ni registre oficial de famílies. Només s’ha completat la documentació de la PR #58. La PR queda oberta i llesta per a revisió, sense fusió ni publicació.
