@@ -44,7 +44,7 @@ Les etiquetes “mateixa” i “variant” es refereixen a la família indicada
 |  | 6 → Q3 | variant; N2 | Distributiva més constant |
 |  | 7 → Q3 | variant; N2 | Distributiva i x als dos membres |
 |  | 10 → Q4 comprovar solució | diferent; N2 | Substituir candidats en una igualtat |
-|  | 11 → Q5 transformació equivalent | diferent; N1 | Aplicar la mateixa operació als dos membres o distribuir |
+|  | 11 → Q5 transformació equivalent | diferent; N1; variant `distribute` N2 | Les branques que demanen una sola operació són N1; distribuir i després sumar el terme independent és N2. |
 |  | 12 → Q6 diagnosticar resolució | diferent; N1 | Localitzar el primer pas invàlid |
 | Problemes | 1 → W1 significat de la incògnita | diferent; N1 | Interpretar x en un model ja escrit |
 |  | 2 → W2 consecutius | diferent; N2 | Traduir x i x+1 a una equació |
@@ -133,7 +133,7 @@ Els exemples són representatius dels procediments existents; no afegeixen gener
 - **Q2 Incògnita en ambdós membres (3,4).** 4x−2=3x+3 → x=5. Error: canviar de membre sense canviar signe. Límit: coeficients iguals poden donar cap solució o identitat, no forçar si el generador no ho tracta.
 - **Q3 Parèntesis i equació composta (5,6,7).** 3(x+2)=30 → x=8; 4(x+1)+6=42 → 4x=32 → x=8. Error: distribuir només a un terme. Límit: signes externs i x als dos membres.
 - **Q4 Comprovar una candidata (10).** Per 5x+4=−6, x=−2 perquè 5(−2)+4=−6. Error: “resoldre” de nou quan només es demana verificar. Límit: candidats diversos i cap candidat correcte.
-- **Q5 Transformació equivalent (11).** 2x+7=4x+3, restar 4x dona −2x+7=3. Error: fer operació en un sol membre. Límit: distingir “aplica distributiva” de “resta el terme”.
+- **Q5 Transformació equivalent (11).** N1: a 2x+7=4x+3, restar 4x dona −2x+7=3. La variant `distribute` és N2: a 2(x+7)+4=30, distribuir i sumar el terme independent dona 2x+18=30. Error: fer una operació en un sol membre. Límit: distingir les branques d’una sola operació de la seqüència de dues transformacions.
 - **Q6 Diagnòstic de pas (12).** −2x+5=13; després de restar 5: −2x=8; dividir per −2 dona x=−4. Error típic és perdre el signe negatiu en dividir. Límit: identificar el primer error, no un error posterior inventat.
 
 ### Problemes amb equacions
@@ -195,7 +195,7 @@ No s’ha trobat un buit que justifiqui crear exercicis nous: el conjunt cobreix
 ## Revisió de modes i evidència
 
 - **Estàtica (codi actual):** la pàgina defineix set generadors amb 8/10/12/12/12/17/17 opcions de tipus; les branques retornen pregunta, resposta, alternatives, passos guia i solució. Hi ha selecció de pràctica guiada/sense pistes, resposta múltiple/oberta i mode examen general i d’examen per tema. Les ampliacions 3ESO estan marcades fora de l’examen ordinari de 2n. Inspecció del codi, no recorregut visual.
-- **Simulació desada, no repetida:** `resultats-punt3-2eso-algebraic.json` registra 3.000 generacions per tema (30.000 incloent 3 temes 3ESO). A 2n, cobertura observada per nivell: patrons 4/4/0; expressions 8/2/0; equacions 2/11/0; problemes 2/10/0; relacions 10/2/0; funcions 11/6/0; computacional 9/8/0. En conjunt, els nivells actius proposats són 46 N1, 42 N2 i 0 N3. Distribució d’examen observada: patrons 6/6/0; expressions 8/4/0; equacions 6/6/0; problemes 2/10/0; relacions 10/2/0; funcions 6/6/0; computacional 6/6/0. Examen equilibrat o només N3 queda bloquejat per absència de N3. Són comptatges de resultats desats, no garantia que totes les branques i tots els modes siguin perfectes.
+- **Simulació desada, no repetida:** `resultats-punt3-2eso-algebraic.json` registra 3.000 generacions per tema (30.000 incloent 3 temes 3ESO). A 2n, cobertura observada per camins i nivell: patrons 4/4/0; expressions 8/2/0; equacions 2/11/0; problemes 2/10/0; relacions 10/2/0; funcions 11/6/0; computacional 9/8/0. A `equacions`, el 11 N2 inclou la variant `distribute` de `equacions:11`; els recomptes 46 N1 / 42 N2 són per tipus únic, amb aquesta variant addicional N2 als camins. Distribució d’examen observada: patrons 6/6/0; expressions 8/4/0; equacions 6/6/0; problemes 2/10/0; relacions 10/2/0; funcions 6/6/0; computacional 6/6/0. Examen equilibrat o només N3 queda bloquejat per absència de N3. Són comptatges de resultats desats, no garantia que totes les branques i tots els modes siguin perfectes.
 - **Auditoria heretada:** la continuació registra 8.332 solucions d’equacions contrastades per substitució; 637 expansions d’identitats a quatre valors de x i rebuig de 557 respostes amb coeficients intercanviats; 1.156 gràfics contrastats amb punts SVG; 844 variants d’equacions amb/sense metadades d’error; set exàmens de tema amb lliurament, nota, reinici i retorn a pràctica; regressió de 500 generacions, equivalències, opcions úniques, mòbil, examen general i accessos del cercador. Són evidències de la passada prèvia sobre el codi revisat allí; no s’atribueix una revalidació nova a aquest dictamen.
 - **Visual:** no consta prova de navegador amb revisió de cada banc/portada/diagrama. El registre disponible indicava 0 bancs revisats; per tant, la qualitat visual, els estats accessibles i tots els casos de pantalla petita resten sense certificació visual.
 
