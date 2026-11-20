@@ -131,7 +131,7 @@ Els codis són **grups locals candidats**, no famílies oficials validades. «Va
 
 Els grups són locals a aquest informe. **No s’ha actualitzat `families-validades.json`** perquè cap família d’aquest tema consta encara com a validada al registre oficial.
 
-## Mancances i incidència a revisar
+## Mancances i resolució de la discrepància
 
 No es proposen exercicis nous: les set temàtiques cobreixen els procediments centrals descrits a les orientacions consultades. No trobar N3 és una conclusió curricular, no una invitació a etiquetar arbitràriament tasques directes com a avançades.
 
@@ -142,7 +142,7 @@ No es proposen exercicis nous: les set temàtiques cobreixen els procediments ce
 - **Guiat — revisió estàtica:** els generadors preparen `guide` i `solution`; la interfície existent exposa pistes/solució segons el mode. No s’ha recorregut visualment cada branca.
 - **Autònom — revisió estàtica:** el nivell N2 es filtra amb l’anotació de dificultat i les pistes segueixen la configuració de mode. La classificació activa no prova per si sola que cada tasca sigui pedagògicament òptima.
 - **Resposta oberta:** `allowOpen` depèn de la branca; `investigacions` retorna opcions per defecte, i altres temes alternen formats. No es pot afirmar que els 84 tipus siguin tots de resposta oberta.
-- **Examen — revisió estàtica:** els set temes ordinaris tenen `exam2n:true`; les ampliacions de 3r, `exam2n:false`. El registre de resultats conté plans per tema amb distribucions N1/N2 que sumen 12; el codi actual de `startExam()` en genera 20. No s’han tractat aquestes dues evidències com si fossin equivalents. A més, s’ha detectat que el tipus 13 d’Experiments no es filtra a la selecció actual.
+- **Examen — revisió estàtica:** els set temes ordinaris tenen `exam2n:true`; les ampliacions de 3r, `exam2n:false`. El registre de resultats conté plans per tema amb distribucions N1/N2 que sumen 12; el codi actual de `startExam()` en genera 20. No s’han tractat aquestes dues evidències com si fossin equivalents. `experiments:13` es manté seleccionable perquè el tipus actual és de freqüència esperada, no de representació de l’espai mostral.
 - **Mostres reutilitzades:** generacions prèvies de 3.000–4.786 per tema ordinari; això és evidència de generació, no una simulació feta ara ni validació visual.
 - **Simulació i validació visual:** no fetes en aquesta auditoria. No s’han executat proves ni workflows nous.
 
