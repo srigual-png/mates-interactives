@@ -6,7 +6,7 @@
   "source_tests_success": 23,
   "source_tests_queued": 0,
   "completed_paired_evidence": 6,
-  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 135 casos. Els lots 2–4 aporten 4 parelles d’estimació i 72 parelles de Pitàgores; els lots 5 i 6 verifiquen amb oracles independents 7 parelles de pitagores:10/11 amb pitagores:3 i 8 de pitagores:12/14 amb pitagores:2, sense afegir casos al recompte. El lot 7 verifica 4 parelles de perimetres:14/5 i 4 de perimetres:4/15 amb oracles independents (1.280 instàncies); perimetres:4↔15 són dos registres recíprocs d’una sola relació conceptual i tampoc no afegeixen casos al recompte. El lot 8 verifica amb oracles independents 2.000 instàncies de escales:16 i les destinacions; confirma 4 mostres amb escales:1 i documenta que escales:2, escales:17 i problemes:8 tenen dominis d’escala disjunts. El lot 9 valida 1.200 instàncies de escales:12/3/5 i quatre parelles amb escales:5; els dominis de factor de escales:12 i escales:3 són disjunts. El lot 10 valida 1.600 instàncies de problemes:16 i estimacio:7/8/13, amb una terna aparellada amb 7/8 i domini de referència disjunt amb 13. El lot 11 valida 4.400 instàncies de problemes:3/superficies:13/14 amb dimensions normalitzades: confirma dues parelles físiques exactes amb superficies:14 i cap amb superficies:13. Cap dels lots 5–11 afegeix casos al recompte de 135. Sis de les 21 relacions conceptuals compleixen ara el criteri estricte; les altres 15 continuen parcials o sense aparellar. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real. Pitagores:5 i problemes:6 continuen com a límits estructurals sense parella exacta dins els pools provats; no es compten com a coincidències.",
+  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 135 casos. Els lots 2–4 aporten 4 parelles d’estimació i 72 parelles de Pitàgores; els lots 5 i 6 verifiquen amb oracles independents 7 parelles de pitagores:10/11 amb pitagores:3 i 8 de pitagores:12/14 amb pitagores:2, sense afegir casos al recompte. El lot 7 verifica 4 parelles de perimetres:14/5 i 4 de perimetres:4/15 amb oracles independents (1.280 instàncies); perimetres:4↔15 són dos registres recíprocs d’una sola relació conceptual i tampoc no afegeixen casos al recompte. El lot 8 verifica amb oracles independents 2.000 instàncies de escales:16 i les destinacions; confirma 4 mostres amb escales:1 i documenta que escales:2, escales:17 i problemes:8 tenen dominis d’escala disjunts. El lot 9 valida 1.200 instàncies de escales:12/3/5 i quatre parelles amb escales:5; els dominis de factor de escales:12 i escales:3 són disjunts. El lot 10 valida 1.600 instàncies de problemes:16 i estimacio:7/8/13, amb una terna aparellada amb 7/8 i domini de referència disjunt amb 13. El lot 11 valida 4.400 instàncies de problemes:3/superficies:13/14 amb dimensions normalitzades: confirma dues parelles físiques exactes amb superficies:14 i cap amb superficies:13. El lot 12 valida 4.400 instàncies de problemes:5/superficies:8/19, normalitza diàmetre a radi i confirma que els dominis d’altura són disjunts. Cap dels lots 5–12 afegeix casos al recompte de 135. Sis de les 21 relacions conceptuals compleixen ara el criteri estricte; les altres 15 continuen parcials o sense aparellar. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real. Pitagores:5 i problemes:6 continuen com a límits estructurals sense parella exacta dins els pools provats; no es compten com a coincidències.",
   "rows": [
     {
       "source": "escales:16",
@@ -892,13 +892,13 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-3-parelles-evidencia-real.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "no_exact_input_overlap_structural_math_verified",
-      "target_mathematical_oracles_for_this_pair": "structural_verified_no_exact_match",
+      "paired_same_parameters": "no_exact_radius_height_pair_after_d_over_2_normalization; lateral_formula_shared_with_superficies_8; superficies_19_returns_unfolded_rectangle_dimensions",
+      "target_mathematical_oracles_for_this_pair": "independent_oracles_verified_for_all_three_generators; finite_height_domains_disjoint",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
       "family_approved": false,
       "paired_script": "scripts/test-mesura-2eso-etiquetes5-superficie8-contrast.cjs",
-      "pedagogical_interpretation": "identical lateral cylinder area formula using diameter or radius, but original heights are disjoint and contextual labeling differs",
+      "pedagogical_interpretation": "problemes:5 and superficies:8 calculate lateral area with equivalent diameter/radius formulas; superficies:19 returns the rectangle dimensions, not area; physical heights do not overlap",
       "pedagogical_proposal": {
         "decision": "variant_mateixa_familia_amb_superficies8_diferent_amb_superficies19",
         "level": "N2",
@@ -906,7 +906,56 @@
         "approval": "pending_teacher_review",
         "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
         "mode_limits": "not_real_browser_or_full_open_answer_validation"
-      }
+      },
+      "additional_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-etiquetes5-superficie8-contrast.cjs",
+        "targets": [
+          "superficies:8",
+          "superficies:19"
+        ],
+        "independent_oracle_instances": 4400,
+        "independent_oracles": true,
+        "verified_by_type": {
+          "problemes:5": 400,
+          "superficies:8": 2000,
+          "superficies:19": 2000
+        },
+        "exact_radius_height_pairs": {
+          "problemes:5↔superficies:8": 0,
+          "problemes:5↔superficies:19": 0
+        },
+        "finite_parameter_domains": {
+          "problemes5_radius_cm": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "problemes5_height_cm": [
+            12,
+            14,
+            15,
+            20
+          ],
+          "superficies8_and19_radius_cm": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "superficies8_and19_height_cm": [
+            4,
+            5,
+            6,
+            8,
+            10
+          ]
+        },
+        "same_radius_different_height_comparisons": 3,
+        "diameter_normalized_to_radius": true,
+        "adds_new_cases_to_existing_135_case_count": false
+      },
+      "completed_paired_evidence": false
     },
     {
       "source": "superficies:15",
