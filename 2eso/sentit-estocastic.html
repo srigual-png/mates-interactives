@@ -1813,7 +1813,7 @@ function startExam(){
     });
     let fill=0;
     while(state.examQs.length<target&&fill<3000){
-      const t=examTopics[fill%examTopics.length],ex=t.gen(),sig=t.id+'|'+signatureOf(ex);
+      const t=examTopics[fill%examTopics.length],ex=t.gen(),sig=t.id+'|'+signatureOf(ex);fill++;
       if(!used.has(sig)){used.add(sig);state.examQs.push({...ex,topicName:t.name})}
     }
   }
