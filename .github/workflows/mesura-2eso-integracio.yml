@@ -6,6 +6,7 @@ on:
       - '2eso/sentit-mesura.html'
       - 'scripts/test-mesura-2eso-integracio-*.cjs'
       - 'scripts/test-mesura-2eso-lot-2-parelles-restants.cjs'
+      - 'scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs'
       - 'scripts/test-mesura-2eso-workflows-centralitzats.cjs'
       - 'scripts/run-mesura-2eso-integracio.cjs'
       - '.github/workflows/mesura-2eso-integracio.yml'
@@ -41,6 +42,8 @@ jobs:
         run: node scripts/test-mesura-2eso-integracio-modes-vincles.cjs
       - name: Evidencia aparellada addicional - estimacio 9 13 17 18
         run: node scripts/test-mesura-2eso-lot-2-parelles-restants.cjs
+      - name: Evidencia aparellada Pitàgores 12 i 14
+        run: node scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs
       - name: Contrast pedagogic pendent - Unitats 1 4 5 9
         run: node scripts/test-mesura-2eso-integracio-pedagogica-unitats-4-5.cjs
       - name: Unitats - suites existents
@@ -72,6 +75,6 @@ jobs:
         shell: bash
         run: |
           echo '## Sentit de la mesura, 2n ESO' >> "$GITHUB_STEP_SUMMARY"
-          echo '92 workflows legacy en execucio manual; suites agrupades tematicament en una integracio.' >> "$GITHUB_STEP_SUMMARY"
+          echo '93 workflows legacy en execucio manual; suites agrupades tematicament en una integracio.' >> "$GITHUB_STEP_SUMMARY"
           echo 'Les suites antigues nomes es reexecuten quan canvia el codi del generador respecte de la referencia validada.' >> "$GITHUB_STEP_SUMMARY"
           echo 'Les proves de navegador continuen disponibles en els workflows manuals especifics.' >> "$GITHUB_STEP_SUMMARY"

@@ -6,7 +6,7 @@
   "source_tests_success": 23,
   "source_tests_queued": 0,
   "completed_paired_evidence": 2,
-  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 63 casos. El lot 2 completa els vincles d’estimacio:18 amb estimacio:6/17 i d’estimacio:9 amb estimacio:7/8/13: 2 dels 21 vincles compleixen ara el criteri estricte. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real.",
+  "note": "Hi ha evidència matemàtica aparellada parcial o completa per a 18 grups únics / 19 registres i 87 casos. El lot 2 completa els vincles d’estimacio:18 amb estimacio:6/17 i d’estimacio:9 amb estimacio:7/8/13; el lot 3 afegeix 24 parelles de Pitàgores basades en sis destinataris i 4.000 instàncies contrastades. Dos dels 21 vincles compleixen ara el criteri estricte. Les propostes pedagògiques continuen provisionals. La prova agregada de modes cobreix 56 tipus amb DOM simulat; no valida completament cada relació ni substitueix la prova de navegador real.",
   "rows": [
     {
       "source": "escales:16",
@@ -265,8 +265,8 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-pitagores-sis-variants-oracles.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "math_evidence_verified_4_pairs",
-      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "paired_same_parameters": "math_evidence_verified_16_shared_triple_signatures_across_7_targets",
+      "target_mathematical_oracles_for_this_pair": "independent_oracles_for_matched_targets; structural_no_exact_match_for_pitagores_5_and_problemes_6",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
       "family_approved": false,
@@ -279,7 +279,33 @@
         "approval": "pending_teacher_review",
         "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
         "mode_limits": "not_real_browser_or_full_open_answer_validation"
-      }
+      },
+      "additional_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs",
+        "targets": [
+          "pitagores:4",
+          "pitagores:6",
+          "pitagores:7",
+          "pitagores:8",
+          "pitagores:13",
+          "problemes:7"
+        ],
+        "verified_examples": 12,
+        "independent_oracle_instances": 4000,
+        "structural_targets_without_exact_pair": [
+          {
+            "target": "pitagores:5",
+            "reason": "square-diagonal inputs have equal legs; no equal-leg right triangle occurs in the source triple pool"
+          },
+          {
+            "target": "problemes:6",
+            "reason": "screen dimensions convert to 0.30–0.80 m, with no same-parameter fixture in the meter-scale source pool"
+          }
+        ],
+        "independent_oracles": true,
+        "unit_scale_note": "For pitagores:13 the common integer triple is shown in cm versus m; values identify the same triple signature, not the same physical lengths."
+      },
+      "completed_paired_evidence": false
     },
     {
       "source": "pitagores:14",
@@ -297,8 +323,8 @@
       ],
       "source_oracle_script": "scripts/test-mesura-2eso-pitagores-sis-variants-oracles.cjs",
       "source_math_evidence": "workflow_success",
-      "paired_same_parameters": "math_evidence_verified_4_pairs",
-      "target_mathematical_oracles_for_this_pair": "not_assessed",
+      "paired_same_parameters": "math_evidence_verified_16_shared_triple_signatures_across_7_targets",
+      "target_mathematical_oracles_for_this_pair": "independent_oracles_for_matched_targets; structural_no_exact_match_for_pitagores_5_and_problemes_6",
       "ui_modes": "pending",
       "curriculum_judgement": "provisional",
       "family_approved": false,
@@ -311,7 +337,33 @@
         "approval": "pending_teacher_review",
         "mode_evidence": "simulated_DOM_56_types_success_run_44128716228",
         "mode_limits": "not_real_browser_or_full_open_answer_validation"
-      }
+      },
+      "additional_paired_evidence": {
+        "script": "scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs",
+        "targets": [
+          "pitagores:4",
+          "pitagores:6",
+          "pitagores:7",
+          "pitagores:8",
+          "pitagores:13",
+          "problemes:7"
+        ],
+        "verified_examples": 12,
+        "independent_oracle_instances": 4000,
+        "structural_targets_without_exact_pair": [
+          {
+            "target": "pitagores:5",
+            "reason": "square-diagonal inputs have equal legs; no equal-leg right triangle occurs in the source triple pool"
+          },
+          {
+            "target": "problemes:6",
+            "reason": "screen dimensions convert to 0.30–0.80 m, with no same-parameter fixture in the meter-scale source pool"
+          }
+        ],
+        "independent_oracles": true,
+        "unit_scale_note": "For pitagores:13 the common integer triple is shown in cm versus m; values identify the same triple signature, not the same physical lengths."
+      },
+      "completed_paired_evidence": false
     },
     {
       "source": "pitagores:15",
@@ -785,5 +837,28 @@
     "independent_oracle_instances": 1600,
     "verified_paired_examples": 4,
     "teacher_approved": false
+  },
+  "paired_evidence_lot_3": {
+    "script": "scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs",
+    "scope": [
+      "pitagores:12",
+      "pitagores:14"
+    ],
+    "paired_targets": [
+      "pitagores:4",
+      "pitagores:6",
+      "pitagores:7",
+      "pitagores:8",
+      "pitagores:13",
+      "problemes:7"
+    ],
+    "independent_oracle_instances": 4000,
+    "verified_paired_examples": 24,
+    "structural_targets_without_exact_pair": [
+      "pitagores:5",
+      "problemes:6"
+    ],
+    "teacher_approved": false,
+    "unit_scale_note": "Pitagores:13 pair examples share integer triple signatures with meter-based source tasks but state lengths in centimeters; they are cross-scale mathematical contrasts."
   }
 }
