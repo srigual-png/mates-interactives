@@ -24,7 +24,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verificar 92 workflows manuals i un sol automatic
+      - name: Verificar 93 workflows manuals i un sol automatic
         run: node scripts/test-mesura-2eso-workflows-centralitzats.cjs
       - name: Comprovar si ha canviat el generador ja validat
         id: detection
