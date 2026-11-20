@@ -1,13 +1,13 @@
 # Auditoria Fase A · Perímetres i àrees (2n ESO)
 
-**ESTAT: PROVISIONAL — PENDENT DE REVISIÓ PEDAGÒGICA. NO IMPLEMENTAT.**
+**ESTAT: PROVISIONAL — FAMÍLIES PENDENTS DE VALIDACIÓ PEDAGÒGICA.** Els generadors no s'han modificat en aquesta passada; els canvis interns de nivell ja acordats consten al mapa efectiu.
 
 ## Fonts, classificació efectiva i límits
 
 Font principal: `2eso/sentit-mesura.html:1307–1425`, funció `genPerimetresArees2ESO(forceType)`, tipus 1–18, `PI=3.14`, i registre `TOPICS` del mateix document. Dificultat efectiva: `assets/js/dificultat-mi.js`, `REVIEWED_LEVELS['2eso/mesura'].perimetres` a la línia 9 i precedència de `reviewedLevels` dins `classify`. Inspecció estàtica, sense execució del navegador.
 
-- **N1 efectiu: 11 tipus** — 1,2,3,4,5,6,7,12,13,14,18.
-- **N2 efectiu: 7 tipus** — 8,9,10,11,15,16,17.
+- **N1 efectiu: 10 tipus** — 1,2,3,4,5,6,7,12,13,18.
+- **N2 efectiu: 8 tipus** — 8,9,10,11,14,15,16,17.
 - **N3 efectiu: 0 tipus.**
 - Sense excepcions de variant `REVIEWED_VARIANTS` per a aquest tema. El mapa antic dins `level()` no substitueix el mapa `REVIEWED_LEVELS` en la pràctica ordinària.
 - **Els 18 tipus són formes de generació, no necessàriament 18 famílies**. A continuació hi ha fins a 12 famílies candidates, no validades.
@@ -24,7 +24,7 @@ Font principal: `2eso/sentit-mesura.html:1307–1425`, funció `genPerimetresAre
 | PA06 | Àrea de figura composta per sostracció (L, marc, obertures de paret) | 9,11,16 | N2 | **N2**: àrea exterior menys una o més àrees interiors; el context no crea família nova |
 | PA07 | Àrea de figura composta per suma de rectangle i semicercle | 10 | N2 | **N2**: interpretar diàmetre, obtenir radi i sumar àrees de dues figures |
 | PA08 | Reconstruir dimensió a partir d'una fórmula d'àrea (base triangle, altura trapezi) | 12,13 | N1 | **N1/N2 pendent**: aïllar una incògnita coneguda és directe; la fórmula de trapezi té agrupació i pot justificar N2 si s'exigeix raonament més complex |
-| PA09 | Recuperar radi a partir de la circumferència | 14 | N1 | **N1** provisional: desfer 2πr; no és per si sol una reconstrucció N3 |
+| PA09 | Recuperar radi a partir de la circumferència | 14 | N2 | **N2 validat internament (20/11/2026)**: la fórmula s'ha d'invertir per aïllar el radi. És un nivell intern, no oficial. |
 | PA10 | Àrea de polígon regular emprant perímetre i apotema donada | 15 | N2 | **N2**: primer P=n·c i després A=P·a/2; no es demana calcular l'apotema |
 | PA11 | Àrea de corona circular amb radi exterior obtingut d'amplada | 17 | N2 | **N2**: radi exterior r+w, després πR²−πr² |
 | PA12 | Detectar confusió entre fórmula de circumferència i d'àrea | 18 | N1 | **N1** actual defensable: pregunta explícita i resposta diagnòstica entre distractors evidents |
@@ -51,7 +51,7 @@ Els exemples són **construïts a partir de les fórmules i dominis del generado
 ## Discrepàncies i riscos específics
 
 1. **Tipus 12 i 13:** se'ls ha assignat N1, però invertir una fórmula pot ser més laboriós que aplicar-la; **no reclassificar per complexitat superficial** sense contrastar passos, expectatives del curs i temps de resposta. El trapezi requereix tenir clar `B+b` com un sol factor.
-2. **Tipus 14:** inversió `r=L/(2π)` directa, N1 plausible, encara que una altra auditoria pugui agrupar-la en una família d'inversió de fórmules.
+2. **Tipus 14:** l'antiga assignació N1 d'aquest resum era obsoleta. La revisió docent del 20/11/2026 va validar N2 perquè cal invertir `L=2πr` per aïllar el radi; el mapa efectiu ja reflecteix N2. No és un nivell oficial.
 3. **Tipus 15:** el codi calcula internament l'apotema amb tangent, però **l'alumne ja rep l'apotema arrodonida**: no és una tasca trigonomètrica. El resultat usa l'apotema presentada. Cal provar arrodoniment i alternatives.
 4. **Tipus 17:** la corona circular comparteix resta de superfícies amb 9/11/16, però obliga a derivar un radi exterior abans; es pot defensar subfamília N2 amb passos diferenciats.
 5. **Tipus 18:** distractors evidents, diagnosi gairebé explícita; N1. Fer-lo N2 exigiria redissenyar la tasca.
@@ -61,6 +61,11 @@ Els exemples són **construïts a partir de les fórmules i dominis del generado
 
 ## Proves pendents i criteris de tancament
 
-- **Comprovat en aquesta passada:** les 18 branques, el mapa efectiu N1/N2, fórmules i exemples aritmètics representatius.
-- **Encara no comprovat:** execució dels generadors amb llavors i oracles independents, navegació de modes, fitxes, exàmens, precisió de totes les combinacions i font curricular normativa externa.
-- **No modificar ara:** ni els exercicis, ni `assets/js/dificultat-mi.js`, ni `docs/auditoria/families-validades.json`. Correccions funcionals i eventual canvi de nivell únicament en una PR específica, després de revisió pedagògica.
+undefined
+
+
+## Revisió del bloc i modes · 21/11/2026
+
+La matriu continua classificant els 18 registres com a **provisionals** i la taula PA01–PA12 és un màxim de nuclis candidates, no un recompte de famílies validades. En aquesta passada es manté la distinció entre fórmules directes de figures diferents (PA01, pendent de decidir si és un nucli prou coherent), les composicions de suma/resta (PA06/PA07), les inversions (PA08/PA09), i el diagnòstic PA12. PA06 i PA11 comparteixen resta d'àrees però PA11 incorpora un radi exterior derivat; PA05 i PA03 comparteixen longitud d'arc/perímetre parcial, però PA05 afegeix el diàmetre; PA10 combina perímetre i àrea amb apotema donada. Aquestes semblances són evidència per revisar agrupacions, no aprovació automàtica.
+
+La prova de modes simulats cobreix ara els 18 tipus de Perímetres i Àrees, juntament amb els blocs ja ampliats: 96 casos en total; comprovats guia, pràctica autònoma i examen tancat, i resposta oberta quan està permesa. Resultat local: success. La suite integrada de Mesura 2n haurà de confirmar el commit. Aquesta prova no és visual en navegador real ni cobreix totes les formes textuals de resposta.
