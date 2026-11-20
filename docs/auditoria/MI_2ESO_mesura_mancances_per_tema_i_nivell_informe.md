@@ -57,4 +57,4 @@ Els totals 64 N1 + 64 N2 són els nivells **base per tipus**, no l'estadística 
 
 El validador `scripts/test-mesura-2eso-mancances.cjs` recalcula les xifres directament del classificador i de les capes de revisió, incloses les 85 agrupacions hipotètiques. GitHub Actions **#44048157867: correcte**.
 
-**Sense canvis** a `families-validades.json`, als generadors, als nivells del classificador, a la web publicada o a l'estat de fusió de les PR.
+**Estat posterior (20/11/2026):** `REVIEWED_LEVELS` s'ha actualitzat per als quatre punts interns validats; no s'han canviat `families-validades.json`, els generadors, els nivells oficials ni la web publicada. La PR #49 continua oberta i en Draft.
