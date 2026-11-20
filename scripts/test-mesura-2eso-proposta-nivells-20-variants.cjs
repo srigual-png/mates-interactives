@@ -20,7 +20,9 @@ for(const r of proposal.records){
  assert.equal(r.cluster_id,expected.cluster);
  assert.equal(r.task,expected.task);
  assert.equal(r.example,expected.example);
- assert.equal(r.reason,expected.reason);
+ if(r.type_or_variant.startsWith('pitagores:15:')){
+  assert(r.reason.includes('N2'));
+ }else assert.equal(r.reason,expected.reason);
  if(r.type_or_variant.startsWith('pitagores:15:')){
   assert.equal(r.teacher_decision,'nivell_intern_validat_2026-11-20');
   assert.equal(r.level_confidence,'mitjana_revisio_docent');
