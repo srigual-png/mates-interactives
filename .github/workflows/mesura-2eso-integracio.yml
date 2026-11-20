@@ -15,6 +15,7 @@ on:
       - 'scripts/test-mesura-2eso-superficies1-17-aparellades.cjs'
       - 'scripts/test-mesura-2eso-prismes-3-4-parelles.cjs'
       - 'scripts/test-mesura-2eso-superficies-8-9-19-aparellades.cjs'
+      - 'scripts/test-mesura-2eso-integracio-pedagogica-unitats.cjs'
       - 'scripts/test-mesura-2eso-lot-2-parelles-restants.cjs'
       - 'scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs'
       - 'scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs'
@@ -85,6 +86,8 @@ jobs:
         run: node scripts/test-mesura-2eso-pitagores3-10-11-aparellades.cjs
       - name: Contrast pedagogic pendent - Unitats 1 4 5 9
         run: node scripts/test-mesura-2eso-integracio-pedagogica-unitats-4-5.cjs
+      - name: Contrastar unitats 9 amb la conversio directa de longitud
+        run: node scripts/test-mesura-2eso-integracio-pedagogica-unitats.cjs
       - name: Unitats - suites existents
         if: steps.detection.outputs.full == 'true'
         run: node scripts/run-mesura-2eso-integracio.cjs unitats
