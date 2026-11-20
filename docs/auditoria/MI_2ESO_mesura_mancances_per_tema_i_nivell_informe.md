@@ -39,7 +39,7 @@ Partint dels **72 clústers inicials**, els dos conjunts d'escissions proposats 
 
 La matriu de variants proposa N1/N2 dins de tres tipus mixtos:
 
-- `unitats:6`: conversió directa N1 / encadenada N2. **La segona assignació està proposta a la PR #53 encara sense fusionar**, no és un canvi vigent en el mapa base de la PR #49.
+- `unitats:6`: conversió directa N1 / encadenada N2. La variant encadenada s'ha incorporat a `REVIEWED_VARIANTS` mitjançant la PR #53, fusionada el 19/11/2026; aquesta assignació és vigent al `main` actual i s'ha d'entendre com a canvi posterior a l'estat original de la PR #49.
 - `pitagores:15`: catet N1 / diagonal N2.
 - `superficies:17`: bases iguals N1 / diferents N2.
 
