@@ -1548,9 +1548,34 @@
   },
   "level_reconciliation": {
     "date": "2026-11-20",
-    "status": "provisional_reconciled_with_current_classification_no_official_level_changes",
-    "source": "assets/js/dificultat-mi.js REVIEWED_LEVELS and REVIEWED_VARIANTS at the PR base/head",
-    "note": "Reconciled candidates are not applied levels. See dictamen_pedagogic_21_vincles_i_modes.md section Reconciliació dels nivells."
+    "status": "four_internal_level_decisions_validated_and_applied",
+    "source": "Teacher review of four discrepancies; assets/js/dificultat-mi.js REVIEWED_LEVELS on PR branch",
+    "note": "The four internal MI level decisions are applied to the branch map; no official curriculum levels or family approvals changed. Evidence-coverage counts are unaffected.",
+    "validated_points": [
+      {
+        "key": "perimetres:14",
+        "level": "N2",
+        "reason": "Invert L=2πr to recover radius; direct circumference remains N1."
+      },
+      {
+        "key": "pitagores:3",
+        "variant": "inverse",
+        "level": "N2",
+        "reason": "Subtract squares then take the square root to recover the unknown leg."
+      },
+      {
+        "key": "pitagores:15",
+        "variant": "diagonal",
+        "level": "N2",
+        "reason": "Model the rectangle diagonal as the right-triangle hypotenuse; retain N2."
+      },
+      {
+        "key": "pitagores:15",
+        "variant": "catet",
+        "level": "N2",
+        "reason": "Inverse Pythagoras, aligned with pitagores:3."
+      }
+    ]
   },
   "paired_evidence_lot_2": {
     "script": "scripts/test-mesura-2eso-lot-2-parelles-restants.cjs",
