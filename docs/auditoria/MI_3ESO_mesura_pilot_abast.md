@@ -42,7 +42,9 @@ Aquesta branca és documental. No s’han de modificar nivells de producció, ge
 - [x] Confirmació estàtica de l’estructura del generador i dels modes.
 - [x] Contrast de les 10 branques del bloc 1 (volum i capacitat).
 - [x] Contrast de les 10 branques del bloc 2 (mesura i precisió).
-- [x] Contrast estàtic de les 10 branques del bloc 3 (àrees compostes).\n- [x] Contrast estàtic de les branques dels blocs 4–5 (20 tipus).\n- [x] Contrast estàtic dels blocs 6–8 (30 tipus).
+- [x] Contrast estàtic de les 10 branques del bloc 3 (àrees compostes).
+- [x] Contrast estàtic de les branques dels blocs 4–5 (20 tipus).
+- [x] Contrast estàtic dels blocs 6–8 (30 tipus).
 - [x] Consolidació transversal de famílies entre blocs.
 - [x] Justificació curricular global contrastada amb els sabers oficials 1r–3r; buits/propostes documentats per bloc.
 - [x] Síntesi final de modes i evidències disponibles.
@@ -62,7 +64,7 @@ Aquesta passada estructural és estàtica. Les branques i les decisions de famí
 ## Progrés de l’auditoria
 
 - Contrast tipus per tipus: **80/80** branques ordinàries revisades estàticament.
-- Famílies candidates locals: bloc 1 = 6; bloc 2 = 6; bloc 3 = 3; bloc 4 = 6; bloc 5 = 4; bloc 6 = 4; bloc 7 = 7; bloc 8 = 6 més un enllaç a Pitàgores. Són grups provisionals i resten a consolidar transversalment.
+- Famílies candidates locals: bloc 1 = 6; bloc 2 = 6; bloc 3 = 3; bloc 4 = 6; bloc 5 = 4; bloc 6 = 4; bloc 7 = 7; bloc 8 = 6 més un enllaç a Pitàgores. Són grups provisionals; la consolidació transversal i els vincles entre blocs es detallen més avall.
 - No s’han executat proves ni simulacions noves; validació visual pendent.
 - Auditoria documental dels vuit blocs completada; simulació i validació visual no realitzades.
 
