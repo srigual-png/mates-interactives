@@ -1,0 +1,13 @@
+name: Mesura 2n ESO - quatre volums superficies oracles
+on:
+  workflow_dispatch:
+jobs:
+  oracle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar 240 resultats de quatre tipus
+        run: node scripts/test-mesura-2eso-quatre-volums-superficies-oracles.cjs

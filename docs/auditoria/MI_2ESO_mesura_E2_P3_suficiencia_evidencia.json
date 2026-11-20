@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "status": "evidence_insufficient_for_teacher_decision",
+  "scope": "2eso/sentit-mesura/E2-P3",
+  "sources": [
+    "MI_2ESO_mesura_acta_revisio_docent_escales_perimetres_en_blanc.json",
+    "MI_2ESO_mesura_fitxes_avaluacio_8_tasques.json",
+    "MI_2ESO_mesura_guies_observacio_E2_P3.json"
+  ],
+  "finding": "Les evidències matemàtiques i documentals permeten valorar la plausibilitat de les dues estratègies però no atribuir-ne independència pedagògica validada, nivell N3 ni decisions docents. Els instruments d'observació continuen sense dades i l'acta sense signatura.",
+  "cases": [
+    {
+      "task": "E2",
+      "candidate": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "math_oracle_verified": true,
+      "source_comparison_documented": true,
+      "observation_guide_prepared": true,
+      "student_responses_available": false,
+      "control_E3_comparison_observed": false,
+      "transfer_E4_observed": false,
+      "teacher_C1_to_C5_assessed": false,
+      "teacher_decision": null,
+      "readiness": "not_ready_for_family_approval",
+      "basis": "No hi ha cap registre de si l'alumne identifica que 4×3 i 6×2 m tenen 12 m² però no representen el mateix rectangle; ni contrast d'aprenentatge amb E3/E4."
+    },
+    {
+      "task": "P3",
+      "candidate": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "math_oracle_verified": true,
+      "source_comparison_documented": true,
+      "observation_guide_prepared": true,
+      "student_responses_available": false,
+      "control_P2_comparison_observed": false,
+      "transfer_P1_P4_observed": false,
+      "teacher_C1_to_C5_assessed": false,
+      "teacher_decision": null,
+      "readiness": "not_ready_for_family_approval",
+      "basis": "No hi ha cap registre de si l'alumne elimina de manera raonada les dues còpies del costat compartit de 4 m; ni prova observada de transferència a P1/P4."
+    }
+  ],
+  "evidence_inventory": {
+    "documented": [
+      "Auditoria dels 128 procediments descriptius.",
+      "Contrast de fragments de codi de tipus directes i indirectes.",
+      "Oracles numèrics i tasques de contrast E1–E4/P1–P4.",
+      "Rúbrica, guies E2/P3, fitxes en blanc i acta no signada."
+    ],
+    "not_documented": [
+      "Cap resposta o raonament real d'alumnat o revisió equivalent experta de resolucions.",
+      "Cap comparació docent registrada amb controls i transferències.",
+      "Cap criteri C1–C5 valorat i signat per docent.",
+      "Cap decisió explícita sobre família independent, variant o pràctica composta.",
+      "Cap valoració curricular docent del nivell N2/N3."
+    ]
+  },
+  "decision_threshold": "Quan el docent revisi de manera explícita els criteris C1–C5 amb raonaments i casos contrastats, podrà registrar una decisió; l'ús d'alumnat és opcional si la revisió experta és suficient i queda documentada.",
+  "next_required_external_input": "Revisió i decisió docent explícita (amb observacions o raonaments experts documentats), especialment sobre si E2 i P3 tenen un nucli no cosmètic independent dels generadors existents.",
+  "allowed_interim_status": "insufficient_evidence",
+  "count": {
+    "cases": 2,
+    "teacher_observations": 0,
+    "teacher_reviews": 0,
+    "approved_new_families": 0,
+    "approved_levels": 0
+  },
+  "constraints": [
+    "No omplir les fitxes o l'acta amb resultats hipotètics.",
+    "No inferir N3 per nombre de passos o coherència del codi.",
+    "No implementació, fusió de PR ni publicació sense autorització diferenciada."
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "schema_version": 1,
+  "status": "source_review_24_cases_provisional",
+  "scope": "2eso/sentit-mesura/priority-24",
+  "source": "2eso/sentit-mesura.html",
+  "method": "Inspecció de les branques type===N de 24 casos prioritaris i dels seus enunciats, opcions, guies i solucions. Diagnòstic qualitatiu; sense executar totes les combinacions ni canviar el codi.",
+  "cases": [
+    {
+      "key": "unitats:6",
+      "diagnosis": "correcte_amb_millora_pedagogica",
+      "evidence": "Tres conversions directes i tres encadenades comparteixen tipus; cal nivell per variant.",
+      "recommendation": "Mantenir i comprovar classificació N1/N2 per variant.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "unitats:13",
+      "diagnosis": "correcte_distractors_febles",
+      "evidence": "Quatre casos amb 3 afirmacions correctes i 1 errònia; la resposta explicativa pot facilitar el diagnòstic.",
+      "recommendation": "Enfortir distractors, sense canviar el càlcul.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "unitats:17",
+      "diagnosis": "correcte_distractors_febles",
+      "evidence": "Diversos distractors són absurds (kg per litres, sumar 100, impossibilitat de convertir volums).",
+      "recommendation": "Crear alternatives matemàticament plausibles quan s'autoritzi.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "unitats:18",
+      "diagnosis": "correcte_revisar_nivell",
+      "evidence": "mL->cm³->dm³ dóna ml/1000, equivalència també directa via 1L=1dm³.",
+      "recommendation": "N1/N2 a decidir per estratègia real; no forçar N2 per dues conversions.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "escales:11",
+      "diagnosis": "correcte_revisar_nivell",
+      "evidence": "La proporció a/b=c/x ja està escrita i el generador torna a provar si x és enter.",
+      "recommendation": "N1 sembla raonable; revisar complexitat dels valors.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "escales:14",
+      "diagnosis": "correcte_distractors_febles",
+      "evidence": "Diagnòstic d'escala plausible, però algunes respostes descarregables són òbviament falses.",
+      "recommendation": "Proposar alternatives properes en unitats/factors.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "pitagores:5",
+      "diagnosis": "correcte_revisar_nivell",
+      "evidence": "Diagonal de quadrat via √2 amb Pitàgores; el guia aporta el triangle.",
+      "recommendation": "N1 o N2 segons grau d'autonomia, no elevar per arrel irracional.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "pitagores:9",
+      "diagnosis": "correcte_amb_verificacio_pendent",
+      "evidence": "Triple pitagòric aleatori o c+1 i test a²+b²=c²; no es comprova al cos local que c+1 segueixi triangle viable.",
+      "recommendation": "Verificar exhaustivament PYTH_TRIPLES i desigualtat triangular en proves.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "pitagores:15",
+      "diagnosis": "correcte_nivell_mixt",
+      "evidence": "Una branca calcula diagonal (hipotenusa), l'altra catet; branques difícils diferents.",
+      "recommendation": "Conservar la distinció de variants ja auditada.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "perimetres:8",
+      "diagnosis": "correcte",
+      "evidence": "Perímetre de semicercle = πr+2r amb π=3,14; inclou explícitament el diàmetre.",
+      "recommendation": "Conservar com a control de frontera.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "perimetres:13",
+      "diagnosis": "correcte_revisar_nivell",
+      "evidence": "h=2A/(B+b), solució i distractors concordants.",
+      "recommendation": "Considerar N2 si exigeix deducció no guiada, no per nombre de passos.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "perimetres:15",
+      "diagnosis": "correcte_curricular",
+      "evidence": "Apotema es calcula internament amb tan, però l'enunciat en dóna el valor aproximat, sense exigir trigonometria a l'alumne.",
+      "recommendation": "Conservar i assegurar que només es requereix l'apotema facilitada.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "superficies:14",
+      "diagnosis": "correcte_revisar_nivell",
+      "evidence": "V=lwh en dm³ i 1dm³=1L, cap factor de 1000.",
+      "recommendation": "Considerar nivell N1 si model directe i dades visibles.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "superficies:17",
+      "diagnosis": "correcte_nivell_mixt",
+      "evidence": "Bases exactament iguals impliquen comparar altures; altres casos comparar dos productes.",
+      "recommendation": "Preservar variants sameBase N1 vs other N2; casos iguals descartats.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "superficies:19",
+      "diagnosis": "correcte_curricular",
+      "evidence": "Desenvolupament lateral del cilindre rectangular: costat 2πr i altura h; π≈3,14 indicat.",
+      "recommendation": "Mantenir; no exigir fórmules no treballades a classe.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "superficies:20",
+      "diagnosis": "correcte_revisar_nivell",
+      "evidence": "Tres parelles de cares oposades de l'ortoedre, identificació conceptual.",
+      "recommendation": "N1 possible; revisar si la pregunta discrimina N2.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "estimacio:11",
+      "diagnosis": "ambiguitat_confirmada",
+      "evidence": "A l'ampolla, 1,5 L i 1,51 L són ambdues mesures plausibles; moneda 1,8 mm i 1,81 mm també sense instrument/protocol indicat.",
+      "recommendation": "Modificar exemples o precisar instrument/marge de precisió; no mantenir únic encert ambigu.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "estimacio:12",
+      "diagnosis": "convencio_a_explicitar",
+      "evidence": "Arrodoniment a dècima codificat com interval [r-0,05,r+0,05); regla de desempat no consta al text.",
+      "recommendation": "Indicar convenció de semioobertura o evitar preguntar inclusió dels extrems.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "estimacio:15",
+      "diagnosis": "precisio_a_justificar",
+      "evidence": "Mitjana (x+x+0,1)/3 acaba en decimal periòdic i se'n mostra 0,01 cm mentre lectures a 0,1 cm.",
+      "recommendation": "Explicitar arrodoniment de la mitjana a centèsimes com a càlcul, distingint-ho de precisió instrumental.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "problemes:2",
+      "diagnosis": "correcte_varietat_limitada",
+      "evidence": "Tots cinc casos de rajoles divideixen exactament cada dimensió i coincideixen amb n.",
+      "recommendation": "Conservar l'objectiu; no introduir retalls fins tenir objectiu curricular clar.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "problemes:3",
+      "diagnosis": "correcte_compost",
+      "evidence": "Volum d'ortoedre cm³, litres i percentatge omplert; els quatre casos concorden amb resultat.",
+      "recommendation": "Conservar N2; no N3 només pels passos.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "problemes:14",
+      "diagnosis": "correcte_compost",
+      "evidence": "P=2(L+W)-porta; cost=metres*€/m; mateix nucli que problemes:15 amb cost afegit.",
+      "recommendation": "Conservar variant contextual sense família nova automàtica.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "problemes:16",
+      "diagnosis": "correcte_revisar_nivell",
+      "evidence": "Referència comuna per dos errors: la comparació relatiu equival a comparar abs(lectura-referència).",
+      "recommendation": "N1 o N2 segons si exigeix interpretar el quocient, no promocionar.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    },
+    {
+      "key": "problemes:19",
+      "diagnosis": "correcte_curricular",
+      "evidence": "Equivalent 1mm de pluja en 1m² =1L es proporciona explícitament i resultat és A*mm.",
+      "recommendation": "Conservar contextualització amb dimensió física correcta.",
+      "verified_in_source": true,
+      "change_applied": false,
+      "teacher_approved": false
+    }
+  ],
+  "counts": {
+    "cases": 24,
+    "confirmed_ambiguity": 1,
+    "official_changes": 0
+  },
+  "conclusion": "La majoria de casos tenen un procediment coherent; estimacio:11 conté alternatives plausibles que fan ambigu el test de resposta única. Altres observacions són de nivell, precisió o qualitat de distractors.",
+  "next_steps": [
+    "Prioritzar correcció futura d'estimacio:11 per ambigüitat confirmada.",
+    "Aclarir la convenció en estimacio:12 i la precisió de la mitjana en estimacio:15.",
+    "Fer proves sistemàtiques de triples pitagòrics i oracles numèrics amb casos generats.",
+    "Després continuar l'auditoria dels 104 tipus restants, sense pressió 5-5-3."
+  ],
+  "limits": [
+    "No es valida automàticament cap família N3.",
+    "No s'ha canviat cap generador ni classificador.",
+    "Les qüestions de nivell són recomanacions no aprovades."
+  ]
+}

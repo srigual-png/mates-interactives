@@ -1,0 +1,422 @@
+{
+  "schema_version": 1,
+  "status": "consolidated_audit_checkpoint_not_curricular_signoff",
+  "scope": "2eso/sentit-mesura/128-types",
+  "policy": "Adequació a 2n ESO i diversitat matemàtica abans de quotes; 5-5-3 només orientatiu.",
+  "generated_test_evidence": {
+    "samples_all_types_first": 1536,
+    "samples_all_types_extended": 5120,
+    "independent_oracle_types": 128,
+    "independent_oracle_checks": 6200,
+    "semantic_distractor_samples_after_fix": 7680,
+    "semantic_duplicates_detected_after_fix": 0,
+    "chromium_real_browser_types": [
+      "estimacio:1",
+      "estimacio:11"
+    ],
+    "chromium_viewports": [
+      "1280x800",
+      "390x844"
+    ],
+    "chromium_screenshots": 8,
+    "additional_independent_oracle_types": 108,
+    "additional_independent_oracle_checks": 5400
+  },
+  "interpretation": "Les bateries són diferents i parcialment solapades: no sumar-les com a exercicis únics. Les assercions numèriques independents només cobreixen 20 tipus, i el test semàntic només reconeix expressions numèriques d'una quantitat.",
+  "totals": {
+    "types": 128,
+    "source_inspected": 128,
+    "types_with_independent_numeric_or_choice_oracle": 128,
+    "types_without_independent_oracle": 0,
+    "prioritized_source_inspected": 24,
+    "types_fixed_with_authorization": 2,
+    "official_level_changes": 0,
+    "official_family_approvals": 0,
+    "merged_or_deployed": false
+  },
+  "by_topic": [
+    {
+      "topic": "unitats",
+      "types": 18,
+      "source_code_checked": 18,
+      "generated_instances_per_type": 40,
+      "independent_oracle_types": 18,
+      "independent_oracle_instances": 890,
+      "without_independent_oracle": 0,
+      "priority_case_count": 4,
+      "priority_case_keys": [
+        "unitats:6",
+        "unitats:13",
+        "unitats:17",
+        "unitats:18"
+      ],
+      "remaining_distinct_families_verified": 0,
+      "teacher_approved_families": 0,
+      "teacher_approved_levels": 0,
+      "additional_independent_oracle_types": 17,
+      "additional_independent_oracle_instances": 850
+    },
+    {
+      "topic": "escales",
+      "types": 18,
+      "source_code_checked": 18,
+      "generated_instances_per_type": 40,
+      "independent_oracle_types": 18,
+      "independent_oracle_instances": 890,
+      "without_independent_oracle": 0,
+      "priority_case_count": 2,
+      "priority_case_keys": [
+        "escales:11",
+        "escales:14"
+      ],
+      "remaining_distinct_families_verified": 0,
+      "teacher_approved_families": 0,
+      "teacher_approved_levels": 0,
+      "additional_independent_oracle_types": 17,
+      "additional_independent_oracle_instances": 850
+    },
+    {
+      "topic": "pitagores",
+      "types": 16,
+      "source_code_checked": 16,
+      "generated_instances_per_type": 40,
+      "independent_oracle_types": 16,
+      "independent_oracle_instances": 790,
+      "without_independent_oracle": 0,
+      "priority_case_count": 3,
+      "priority_case_keys": [
+        "pitagores:5",
+        "pitagores:9",
+        "pitagores:15"
+      ],
+      "remaining_distinct_families_verified": 0,
+      "teacher_approved_families": 0,
+      "teacher_approved_levels": 0,
+      "additional_independent_oracle_types": 15,
+      "additional_independent_oracle_instances": 750
+    },
+    {
+      "topic": "perimetres",
+      "types": 18,
+      "source_code_checked": 18,
+      "generated_instances_per_type": 40,
+      "independent_oracle_types": 18,
+      "independent_oracle_instances": 850,
+      "without_independent_oracle": 0,
+      "priority_case_count": 3,
+      "priority_case_keys": [
+        "perimetres:8",
+        "perimetres:13",
+        "perimetres:15"
+      ],
+      "remaining_distinct_families_verified": 0,
+      "teacher_approved_families": 0,
+      "teacher_approved_levels": 0,
+      "additional_independent_oracle_types": 13,
+      "additional_independent_oracle_instances": 650
+    },
+    {
+      "topic": "superficies",
+      "types": 20,
+      "source_code_checked": 20,
+      "generated_instances_per_type": 40,
+      "independent_oracle_types": 20,
+      "independent_oracle_instances": 990,
+      "without_independent_oracle": 0,
+      "priority_case_count": 4,
+      "priority_case_keys": [
+        "superficies:14",
+        "superficies:17",
+        "superficies:19",
+        "superficies:20"
+      ],
+      "remaining_distinct_families_verified": 0,
+      "teacher_approved_families": 0,
+      "teacher_approved_levels": 0,
+      "additional_independent_oracle_types": 19,
+      "additional_independent_oracle_instances": 950
+    },
+    {
+      "topic": "estimacio",
+      "types": 18,
+      "source_code_checked": 18,
+      "generated_instances_per_type": 40,
+      "independent_oracle_types": 18,
+      "independent_oracle_instances": 830,
+      "without_independent_oracle": 0,
+      "priority_case_count": 3,
+      "priority_case_keys": [
+        "estimacio:11",
+        "estimacio:12",
+        "estimacio:15"
+      ],
+      "remaining_distinct_families_verified": 0,
+      "teacher_approved_families": 0,
+      "teacher_approved_levels": 0,
+      "additional_independent_oracle_types": 11,
+      "additional_independent_oracle_instances": 550
+    },
+    {
+      "topic": "problemes",
+      "types": 20,
+      "source_code_checked": 20,
+      "generated_instances_per_type": 40,
+      "independent_oracle_types": 20,
+      "independent_oracle_instances": 960,
+      "without_independent_oracle": 0,
+      "priority_case_count": 5,
+      "priority_case_keys": [
+        "problemes:2",
+        "problemes:3",
+        "problemes:14",
+        "problemes:16",
+        "problemes:19"
+      ],
+      "remaining_distinct_families_verified": 0,
+      "teacher_approved_families": 0,
+      "teacher_approved_levels": 0,
+      "additional_independent_oracle_types": 16,
+      "additional_independent_oracle_instances": 800
+    }
+  ],
+  "priority_followup": [
+    {
+      "key": "unitats:6",
+      "archived_source_audit_diagnosis": "correcte_amb_millora_pedagogica",
+      "status": "proposal_only_or_followup_review",
+      "note": "Mantenir i comprovar classificació N1/N2 per variant."
+    },
+    {
+      "key": "unitats:13",
+      "archived_source_audit_diagnosis": "correcte_distractors_febles",
+      "status": "proposal_only_or_followup_review",
+      "note": "Enfortir distractors, sense canviar el càlcul."
+    },
+    {
+      "key": "unitats:17",
+      "archived_source_audit_diagnosis": "correcte_distractors_febles",
+      "status": "proposal_only_or_followup_review",
+      "note": "Crear alternatives matemàticament plausibles quan s'autoritzi."
+    },
+    {
+      "key": "unitats:18",
+      "archived_source_audit_diagnosis": "correcte_revisar_nivell",
+      "status": "proposal_only_or_followup_review",
+      "note": "N1/N2 a decidir per estratègia real; no forçar N2 per dues conversions."
+    },
+    {
+      "key": "escales:11",
+      "archived_source_audit_diagnosis": "correcte_revisar_nivell",
+      "status": "proposal_only_or_followup_review",
+      "note": "N1 sembla raonable; revisar complexitat dels valors."
+    },
+    {
+      "key": "escales:14",
+      "archived_source_audit_diagnosis": "correcte_distractors_febles",
+      "status": "proposal_only_or_followup_review",
+      "note": "Proposar alternatives properes en unitats/factors."
+    },
+    {
+      "key": "pitagores:5",
+      "archived_source_audit_diagnosis": "correcte_revisar_nivell",
+      "status": "proposal_only_or_followup_review",
+      "note": "N1 o N2 segons grau d'autonomia, no elevar per arrel irracional."
+    },
+    {
+      "key": "pitagores:9",
+      "archived_source_audit_diagnosis": "correcte_amb_verificacio_pendent",
+      "status": "proposal_only_or_followup_review",
+      "note": "Verificar exhaustivament PYTH_TRIPLES i desigualtat triangular en proves."
+    },
+    {
+      "key": "pitagores:15",
+      "archived_source_audit_diagnosis": "correcte_nivell_mixt",
+      "status": "proposal_only_or_followup_review",
+      "note": "Conservar la distinció de variants ja auditada."
+    },
+    {
+      "key": "perimetres:8",
+      "archived_source_audit_diagnosis": "correcte",
+      "status": "proposal_only_or_followup_review",
+      "note": "Conservar com a control de frontera."
+    },
+    {
+      "key": "perimetres:13",
+      "archived_source_audit_diagnosis": "correcte_revisar_nivell",
+      "status": "proposal_only_or_followup_review",
+      "note": "Considerar N2 si exigeix deducció no guiada, no per nombre de passos."
+    },
+    {
+      "key": "perimetres:15",
+      "archived_source_audit_diagnosis": "correcte_curricular",
+      "status": "proposal_only_or_followup_review",
+      "note": "Conservar i assegurar que només es requereix l'apotema facilitada."
+    },
+    {
+      "key": "superficies:14",
+      "archived_source_audit_diagnosis": "correcte_revisar_nivell",
+      "status": "proposal_only_or_followup_review",
+      "note": "Considerar nivell N1 si model directe i dades visibles."
+    },
+    {
+      "key": "superficies:17",
+      "archived_source_audit_diagnosis": "correcte_nivell_mixt",
+      "status": "proposal_only_or_followup_review",
+      "note": "Preservar variants sameBase N1 vs other N2; casos iguals descartats."
+    },
+    {
+      "key": "superficies:19",
+      "archived_source_audit_diagnosis": "correcte_curricular",
+      "status": "proposal_only_or_followup_review",
+      "note": "Mantenir; no exigir fórmules no treballades a classe."
+    },
+    {
+      "key": "superficies:20",
+      "archived_source_audit_diagnosis": "correcte_revisar_nivell",
+      "status": "proposal_only_or_followup_review",
+      "note": "N1 possible; revisar si la pregunta discrimina N2."
+    },
+    {
+      "key": "estimacio:11",
+      "archived_source_audit_diagnosis": "ambiguitat_confirmada",
+      "status": "implemented_and_tested",
+      "note": "Les antigues ambigüitats es conserven als informes històrics, però el nou exercici d'elecció d'instrument ha estat provat al navegador."
+    },
+    {
+      "key": "estimacio:12",
+      "archived_source_audit_diagnosis": "convencio_a_explicitar",
+      "status": "proposal_only_or_followup_review",
+      "note": "Indicar convenció de semioobertura o evitar preguntar inclusió dels extrems."
+    },
+    {
+      "key": "estimacio:15",
+      "archived_source_audit_diagnosis": "precisio_a_justificar",
+      "status": "proposal_only_or_followup_review",
+      "note": "Explicitar arrodoniment de la mitjana a centèsimes com a càlcul, distingint-ho de precisió instrumental."
+    },
+    {
+      "key": "problemes:2",
+      "archived_source_audit_diagnosis": "correcte_varietat_limitada",
+      "status": "proposal_only_or_followup_review",
+      "note": "Conservar l'objectiu; no introduir retalls fins tenir objectiu curricular clar."
+    },
+    {
+      "key": "problemes:3",
+      "archived_source_audit_diagnosis": "correcte_compost",
+      "status": "proposal_only_or_followup_review",
+      "note": "Conservar N2; no N3 només pels passos."
+    },
+    {
+      "key": "problemes:14",
+      "archived_source_audit_diagnosis": "correcte_compost",
+      "status": "proposal_only_or_followup_review",
+      "note": "Conservar variant contextual sense família nova automàtica."
+    },
+    {
+      "key": "problemes:16",
+      "archived_source_audit_diagnosis": "correcte_revisar_nivell",
+      "status": "proposal_only_or_followup_review",
+      "note": "N1 o N2 segons si exigeix interpretar el quocient, no promocionar."
+    },
+    {
+      "key": "problemes:19",
+      "archived_source_audit_diagnosis": "correcte_curricular",
+      "status": "proposal_only_or_followup_review",
+      "note": "Conservar contextualització amb dimensió física correcta."
+    }
+  ],
+  "open_issues": [
+    {
+      "id": "independent_oracle_gap",
+      "status": "closed_at_sample_level",
+      "detail": "Cobertura de mostres 128/128; 6.200 comprovacions amb oracles aritmètics o contextuals. Les decisions de plausibilitat de context requereixen validació pedagògica, no és prova de correcció exhaustiva."
+    },
+    {
+      "id": "pedagogical_family_validation",
+      "status": "open",
+      "detail": "Les 72 agrupacions provisionals no són famílies certificades; cal judici docent de diferència d'estratègia."
+    },
+    {
+      "id": "level_validation",
+      "status": "open",
+      "detail": "No s'ha aprovat cap reclassificació N1/N2/N3 ni s'ha d'inventar N3 per quota."
+    },
+    {
+      "id": "precision_convention",
+      "status": "open",
+      "keys": [
+        "estimacio:12",
+        "estimacio:15"
+      ],
+      "detail": "Convenció de frontera d'arrodoniment i precisió que convé explicar millor."
+    },
+    {
+      "id": "distractor_quality",
+      "status": "open",
+      "keys": [
+        "unitats:13",
+        "unitats:17",
+        "escales:14"
+      ],
+      "detail": "Distractors massa evidents, tot i ser textualment diferents."
+    },
+    {
+      "id": "full_browser_coverage",
+      "status": "open",
+      "detail": "Només Estimació 1 i 11 s'ha provat amb Chromium; els altres 126 tipus no tenen prova visual específica."
+    },
+    {
+      "id": "retries_proof",
+      "status": "open",
+      "keys": [
+        "unitats:9",
+        "escales:15",
+        "escales:18",
+        "estimacio:17"
+      ],
+      "detail": "El mostreig va finalitzar però no és prova formal de terminació per tots els valors."
+    }
+  ],
+  "fixed_items": [
+    {
+      "key": "estimacio:1",
+      "status": "implemented_tested_in_branch",
+      "detail": "Distractor equivalent reemplaçat."
+    },
+    {
+      "key": "estimacio:11",
+      "status": "implemented_tested_in_branch",
+      "detail": "Redisseny amb decisió de precisió basada en toleràncies explicites, validat a navegador real."
+    }
+  ],
+  "evidence": [
+    "docs/auditoria/MI_2ESO_mesura_triatge_curricular_128_sense_quotes.json",
+    "docs/auditoria/MI_2ESO_mesura_24_prioritats_revisio_codi.json",
+    "docs/auditoria/MI_2ESO_mesura_104_restants_verificacio_estructural_codi.json",
+    "docs/auditoria/MI_2ESO_mesura_oracles_ampliats_20_resultats.md",
+    "docs/auditoria/MI_2ESO_mesura_estimacio_1_11_navegador_real_resultats.md",
+    "scripts/test-mesura-2eso-oracles-lot-19.cjs",
+    "scripts/test-mesura-2eso-oracles-lot-17.cjs",
+    "scripts/test-mesura-2eso-oracles-lot-17b.cjs",
+    "scripts/test-mesura-2eso-oracles-lot-18.cjs",
+    "scripts/test-mesura-2eso-oracles-lot-21.cjs",
+    "scripts/test-mesura-2eso-oracles-ultims-16.cjs"
+  ],
+  "next_step": "Auditoria matemàtica de risc dels 108 tipus sense oracle, prioritzant unitats, Pitàgores, problemes compostos, i estandarditzar comptatge de famílies sense quotas.",
+  "authorization_limit": "No fusionar ni publicar; no modificar altres generadors ni nivells sense aprovació explícita.",
+  "latest_validation": {
+    "run_id": 44073014393,
+    "status": "success",
+    "checked_new_types": 16,
+    "checked_new_instances": 800,
+    "prior_batches": [
+      20,
+      19,
+      17,
+      17,
+      18,
+      21
+    ],
+    "generator_changes": false
+  }
+}

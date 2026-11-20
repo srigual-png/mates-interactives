@@ -1,0 +1,13 @@
+name: Mesura 2n ESO - parelles de parametres iguals
+on:
+  workflow_dispatch:
+jobs:
+  paired:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar 1280 mostres i 8 comparacions reals
+        run: node scripts/test-mesura-2eso-dues-parelles-parametres-iguals.cjs

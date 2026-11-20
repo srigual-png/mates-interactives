@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "status": "teacher_review_matrix_no_approvals",
+  "scope": "2eso/sentit-mesura/3-candidates",
+  "sources": [
+    "MI_2ESO_mesura_estimacio12_contrast_cognitiu.json",
+    "MI_2ESO_mesura_tres_especificacions_pedagogiques.json",
+    "MI_2ESO_mesura_cinc_candidates_diferencials.json"
+  ],
+  "criteria": [
+    {
+      "code": "C1",
+      "name": "Nucli matemàtic diferencial",
+      "pass": "La resolució exigeix una decisió o representació que els tipus comparadors no exigeixen; evidència en una solució raonada."
+    },
+    {
+      "code": "C2",
+      "name": "Independència no cosmètica",
+      "pass": "La tasca no és una substitució de context, de nombres o un simple encadenament d'operacions ja catalogades."
+    },
+    {
+      "code": "C3",
+      "name": "Dues instàncies contrastades",
+      "pass": "Dos problemes diferents comparteixen la mateixa decisió diferenciadora, incloent un cas contrari o enganyós."
+    },
+    {
+      "code": "C4",
+      "name": "Currículum i nivell",
+      "pass": "Un docent valida l'objectiu de 2n ESO i justifica N1/N2/N3 amb decisions cognitives observables."
+    },
+    {
+      "code": "C5",
+      "name": "Límit amb famílies existents",
+      "pass": "Es documenten explícitament els tipus i famílies més pròxims, els contraexemples i la raó per separar o agrupar."
+    }
+  ],
+  "records": [
+    {
+      "proposal_id": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "tentative_family_path": "candidate_independent_not_validated",
+      "nearest_types": [
+        "escales:6",
+        "escales:7",
+        "escales:12",
+        "escales:13",
+        "escales:14",
+        "escales:16"
+      ],
+      "distinguishing_question": "Poden dos plànols d'escales diferents representar el mateix rectangle quan es permet girar el paper?",
+      "required_demonstrations": [
+        {
+          "test": "positive_rotation",
+          "task": "8×6 cm a 1:50 i 3×4 cm a 1:100; són el mateix rectangle?",
+          "expected": "sí: tots dos representen 4×3 m, amb gir"
+        },
+        {
+          "test": "same_area_trap",
+          "task": "8×6 cm a 1:50 i 6×2 cm a 1:100; són el mateix rectangle?",
+          "expected": "no: 4×3 m i 6×2 m tenen àrea 12 m² però costats diferents"
+        }
+      ],
+      "novelty_decision": "El contrast de congruència de dues parelles de longituds sembla una pregunta diferent del càlcul d'una única àrea, però cal descartar que només sigui conversió + comparació.",
+      "rubric_status": {
+        "C1": "partial",
+        "C2": "pending",
+        "C3": "documentary_only",
+        "C4": "pending",
+        "C5": "partial"
+      },
+      "pilot_level_hypothesis": 2,
+      "N3_requires": "Enunciat sense indicació de l'algorisme, detecció i justificació d'una falsa equivalència basada en àrees iguals, i evidència docent que la modelització no és rutinària.",
+      "teacher_choice_options": [
+        "candidate_new_family",
+        "variant_of_existing_family",
+        "compound_reuse",
+        "reject"
+      ],
+      "preferred_review_order": 1
+    },
+    {
+      "proposal_id": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "tentative_family_path": "candidate_independent_not_validated",
+      "nearest_types": [
+        "perimetres:8",
+        "perimetres:10",
+        "problemes:14",
+        "problemes:15"
+      ],
+      "distinguishing_question": "Quines vores formen realment el contorn exterior de la unió d'un rectangle i un semicercle?",
+      "required_demonstrations": [
+        {
+          "test": "joined_boundary",
+          "task": "Rectangle 6×4 m i semicercle exterior de diàmetre 4 m: perímetre amb π=3,14?",
+          "expected": "22,28 m: només tres costats del rectangle més l'arc"
+        },
+        {
+          "test": "unjoined_semi",
+          "task": "Semicercle aïllat de diàmetre 4 m: perímetre amb π=3,14?",
+          "expected": "10,28 m: arc 6,28 m + diàmetre 4 m; ara sí que el diàmetre és exterior"
+        }
+      ],
+      "novelty_decision": "Identificar vora compartida en una unió és diferenciable de restar una porta i de trobar àrea, però una sola plantilla rectangle+semicercle encara pot ser variant d'aplicar perímetres coneguts.",
+      "rubric_status": {
+        "C1": "partial",
+        "C2": "pending",
+        "C3": "documentary_only",
+        "C4": "pending",
+        "C5": "partial"
+      },
+      "pilot_level_hypothesis": 2,
+      "N3_requires": "Generalitzar a més d'una unió de figures i justificar visualment la frontera exterior sense fórmula proporcionada; N3 no equival a sumar arc i rectes.",
+      "teacher_choice_options": [
+        "candidate_new_family",
+        "variant_of_existing_family",
+        "compound_reuse",
+        "reject"
+      ],
+      "preferred_review_order": 2
+    },
+    {
+      "proposal_id": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "tentative_family_path": "likely_related_variant",
+      "nearest_types": [
+        "estimacio:7",
+        "estimacio:8",
+        "estimacio:9",
+        "estimacio:10",
+        "estimacio:12",
+        "estimacio:13",
+        "problemes:16"
+      ],
+      "distinguishing_question": "Una mesura és acceptable segons una tolerància percentual externa, encara que sigui la més precisa?",
+      "required_demonstrations": [
+        {
+          "test": "relative_none_acceptable",
+          "task": "Referència 100 cm; lectures 99 cm i 98 cm; tolerància relativa 0,5%. N'hi ha cap d'acceptable?",
+          "expected": "no: errors de l'1% i del 2%; la més precisa també queda exclosa"
+        },
+        {
+          "test": "rounding_vs_tolerance",
+          "task": "12,3 cm arrodonits a dècimes; lectura 12,35 cm i tolerància relativa 1% sobre 12,3 cm: quines dues regles la poden admetre?",
+          "expected": "arrodoniment semiobert [12,25,12,35): no; tolerància percentual inclusiva: sí"
+        }
+      ],
+      "novelty_decision": "La pertinença a intervals admissibles ja està present a estimacio:12; la tolerància relativa externa canvia el càlcul de les cotes però encara no acredita una família diferenciada.",
+      "rubric_status": {
+        "C1": "partial",
+        "C2": "fails_current_screen",
+        "C3": "documentary_only",
+        "C4": "pending",
+        "C5": "substantial_overlap"
+      },
+      "pilot_level_hypothesis": 2,
+      "N3_requires": "Acreditar una necessitat de modelització independent, no únicament calcular l'error i aplicar una desigualtat; comparació explícita amb estimacio:12.",
+      "teacher_choice_options": [
+        "variant_of_existing_family",
+        "compound_reuse",
+        "candidate_new_family_with_new_evidence",
+        "reject"
+      ],
+      "preferred_review_order": 3
+    }
+  ],
+  "counts": {
+    "candidates": 3,
+    "unapproved_families": 3,
+    "validated_new_families": 0,
+    "approved_levels_N3": 0
+  },
+  "review_protocol": [
+    "Docent revisa primer C1 i C2 per garantir identitat matemàtica; si no se superen, no comptar família nova.",
+    "Docent resol i compara les dues demostracions proposades de cada fitxa, cercant contraexemples i errors específics.",
+    "Assignar N2/N3 només després de concretar grau d'autonomia, justificació i contingut curricular.",
+    "Registrar tria explícita de família nova, variant, reutilització composta o rebuig; cap tria s'ha efectuat.",
+    "Implementació, fusió i publicació constitueixen una autorització posterior i separada."
+  ],
+  "non_authorization": "Aquesta matriu no és formulari d'aprovació automàtica; qualsevol decisió docent continua pendent."
+}

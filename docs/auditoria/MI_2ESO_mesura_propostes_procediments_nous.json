@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "status": "ideas_only_unapproved",
+  "scope": "2eso/sentit-mesura/7-topics",
+  "date": "2026-11-17",
+  "source_basis": [
+    "https://projectes.edigital.cat/orientacions-curriculars/mat_sec/magnitud1.html",
+    "https://projectes.edigital.cat/orientacions-curriculars/mat_sec/mesurament1.html",
+    "https://projectes.edigital.cat/orientacions-curriculars/mat_sec/estimaci_i_relacions1.html",
+    "docs/auditoria/MI_2ESO_mesura_mancances_per_tema_i_nivell.json"
+  ],
+  "counts": {
+    "ideas": 11,
+    "N1": 2,
+    "N2": 2,
+    "N3": 7
+  },
+  "proposals": [
+    {
+      "id": "MI2-MES-U-N2-01",
+      "topic": "unitats",
+      "proposed_level": 2,
+      "purpose": "Comparar capacitats en unitats de volum i capacitat",
+      "worked_example": {
+        "prompt": "Un dipòsit A conté 1,2 dm³ i el B 950 mL. Quina diferència hi ha en mL?",
+        "answer": 250,
+        "unit": "mL",
+        "reasoning": "1,2 dm³ = 1.200 mL; 1.200−950=250"
+      },
+      "existing_overlap": [
+        "unitats:6",
+        "unitats:9"
+      ],
+      "novelty_assessment": "La comparació ja existeix per longituds i la conversió volum-capacitat existeix: només és nova si requereix una decisió conceptual addicional.",
+      "decision": "pending_curricular_and_pedagogical_review",
+      "not_approved": true,
+      "curricular_alignment": "2.MES.MA.B"
+    },
+    {
+      "id": "MI2-MES-U-N2-02",
+      "topic": "unitats",
+      "proposed_level": 2,
+      "purpose": "Determinar el volum restant després de trasvasar",
+      "worked_example": {
+        "prompt": "Un recipient tenia 0,75 m³ d'aigua; se'n retiren 180 L. Quants litres hi resten?",
+        "answer": 570,
+        "unit": "L",
+        "reasoning": "0,75 m³=750 L; 750−180=570 L"
+      },
+      "existing_overlap": [
+        "unitats:6",
+        "problemes:3"
+      ],
+      "novelty_assessment": "Conversió i resta: possible problema compost transversal, no una família nova automàtica.",
+      "decision": "pending_curricular_and_pedagogical_review",
+      "not_approved": true,
+      "curricular_alignment": "2.MES.MA.B"
+    },
+    {
+      "id": "MI2-MES-U-N3-01",
+      "topic": "unitats",
+      "proposed_level": 3,
+      "purpose": "Escollir un recipient viable després de sumar quantitats i comparar capacitats",
+      "worked_example": {
+        "prompt": "Cal guardar 480 L i 120 L. Hi ha recipients de 0,5 m³ i de 650 L. Quin és el de menor capacitat suficient?",
+        "answer": 650,
+        "unit": "L",
+        "reasoning": "480+120=600 L; 0,5 m³=500 L no és suficient; 650 L sí"
+      },
+      "existing_overlap": [
+        "unitats:6",
+        "problemes:3"
+      ],
+      "novelty_assessment": "Decisió amb una restricció i una conversió; pot reutilitzar procediments i requereix validar si N3 és proporcional.",
+      "decision": "pending_curricular_and_pedagogical_review",
+      "not_approved": true,
+      "curricular_alignment": "2.MES.MA.B"
+    },
+    {
+      "id": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "proposed_level": 3,
+      "purpose": "Validar dos plànols de la mateixa sala i calcular-ne l'àrea",
+      "worked_example": {
+        "prompt": "Plànol A: 8×6 cm a 1:50. Plànol B: 4×3 cm a 1:100. Representen la mateixa sala? Quants m² té?",
+        "answer": 12,
+        "unit": "m²",
+        "reasoning": "A: 8 cm×50=4 m i 6 cm×50=3 m; B: 4 cm×100=4 m i 3 cm×100=3 m; ambdós representen la mateixa sala de 12 m²"
+      },
+      "existing_overlap": [
+        "escales:6",
+        "escales:7",
+        "escales:14"
+      ],
+      "novelty_assessment": "La verificació de dos models i la justificació poden diferir del càlcul únic, però no s'ha acreditat família genuïna.",
+      "decision": "pending_curricular_and_pedagogical_review",
+      "not_approved": true,
+      "curricular_alignment": "2.MES.ME"
+    },
+    {
+      "id": "MI2-MES-P-N3-01",
+      "topic": "pitagores",
+      "proposed_level": 3,
+      "purpose": "Composar dues distàncies diagonals independents",
+      "worked_example": {
+        "prompt": "Un recorregut consta de diagonals de rectangles 6×8 m i 5×12 m. Quants metres fan tots dos trams?",
+        "answer": 23,
+        "unit": "m",
+        "reasoning": "√(6²+8²)=10 m; √(5²+12²)=13 m; total 23 m"
+      },
+      "existing_overlap": [
+        "pitagores:2",
+        "pitagores:12"
+      ],
+      "novelty_assessment": "Dues aplicacions consecutives i una agregació; risc elevat de ser mera composició d'una mateixa família.",
+      "decision": "pending_curricular_and_pedagogical_review",
+      "not_approved": true,
+      "curricular_alignment": "2.MES.ME"
+    },
+    {
+      "id": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "proposed_level": 3,
+      "purpose": "Determinar contorn compost amb frontera interna exclosa i pressupost",
+      "worked_example": {
+        "prompt": "Un rectangle de 6×4 m té un semicercle adossat a un costat de 4 m. El contorn exterior és inferior a 22,5 m? Usa π≈3,14.",
+        "answer": 22.28,
+        "unit": "m",
+        "reasoning": "Costats externs: 6+6+4=16 m; arc semicircular=π·2≈6,28 m; total 22,28 m <22,5"
+      },
+      "existing_overlap": [
+        "perimetres:8",
+        "perimetres:10"
+      ],
+      "novelty_assessment": "El contorn compost exigeix reconèixer que el costat compartit és intern; contrastar amb sumes de figures ja existents.",
+      "decision": "pending_curricular_and_pedagogical_review",
+      "not_approved": true,
+      "curricular_alignment": "2.MES.ME"
+    },
+    {
+      "id": "MI2-MES-S-N3-01",
+      "topic": "superficies",
+      "proposed_level": 3,
+      "purpose": "Combinar capacitat i superfície de material d'una capsa oberta",
+      "worked_example": {
+        "prompt": "Una capsa sense tapa fa 4×3×2 dm. Pot contenir 20 L i construir-se amb menys de 42 dm² de material?",
+        "answer": 40,
+        "unit": "dm²",
+        "reasoning": "Volum=4·3·2=24 L≥20; material=4·3+2·4·2+2·3·2=40 dm²<42"
+      },
+      "existing_overlap": [
+        "superficies:1",
+        "superficies:2",
+        "problemes:13"
+      ],
+      "novelty_assessment": "Problema de dues restriccions; subpassos coneguts, possible problema compost genuí pendent de prova.",
+      "decision": "pending_curricular_and_pedagogical_review",
+      "not_approved": true,
+      "curricular_alignment": "2.MES.ME"
+    },
+    {
+      "id": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "proposed_level": 3,
+      "purpose": "Decidir quin mesurament compleix tolerància relativa",
+      "worked_example": {
+        "prompt": "Referència 100 cm. L'aparell A dona 99 cm i el B 98,5 cm. La tolerància és 1,2% d'error relatiu. Quin és acceptable?",
+        "answer": 1,
+        "unit": "%",
+        "reasoning": "A: |99−100|/100·100=1%; B: |98,5−100|/100·100=1,5%; només A"
+      },
+      "existing_overlap": [
+        "estimacio:7",
+        "estimacio:9",
+        "problemes:16"
+      ],
+      "novelty_assessment": "Càlcul d'error conegut més comparació amb una tolerància; cal veure si la decisió és genuïnament nova.",
+      "decision": "pending_curricular_and_pedagogical_review",
+      "not_approved": true,
+      "curricular_alignment": "2.MES.ER"
+    },
+    {
+      "id": "MI2-MES-PR-N3-01",
+      "topic": "problemes",
+      "proposed_level": 3,
+      "purpose": "Integrar escala, perímetre, obertura i compra en paquets",
+      "worked_example": {
+        "prompt": "Plànol 1:50 d'un pati rectangular 8×6 cm; cal tancar-ne tot el contorn excepte una porta d'1 m. Els rotlles són de 5 m. Quants se'n necessiten?",
+        "answer": 3,
+        "unit": "rotlles",
+        "reasoning": "Pati real: 4×3 m; perímetre=14 m; tanca=13 m; ceil(13/5)=3"
+      },
+      "existing_overlap": [
+        "problemes:14",
+        "problemes:15",
+        "escales:16"
+      ],
+      "novelty_assessment": "Diversos passos, però tots ja existents per separat: no acreditar nova família sense avaluar modelització i autonomia.",
+      "decision": "pending_curricular_and_pedagogical_review",
+      "not_approved": true,
+      "curricular_alignment": "2.MES.ME"
+    },
+    {
+      "id": "MI2-MES-PR-N1-01",
+      "topic": "problemes",
+      "proposed_level": 1,
+      "purpose": "Repartir superfície coneguda en cobertura per pot",
+      "worked_example": {
+        "prompt": "Una paret de 12 m² ja mesurada es pinta amb pots que cobreixen 4 m² cadascun. Quants pots calen?",
+        "answer": 3,
+        "unit": "pots",
+        "reasoning": "12/4=3, sense conversió, construcció d'àrea ni arrodoniment"
+      },
+      "existing_overlap": [
+        "problemes:1"
+      ],
+      "novelty_assessment": "Versió reduïda d'un tipus existent: proposta de reforç N1, NO família nova.",
+      "decision": "pending_curricular_and_pedagogical_review",
+      "not_approved": true,
+      "curricular_alignment": "2.MES.ME"
+    },
+    {
+      "id": "MI2-MES-PR-N1-02",
+      "topic": "problemes",
+      "proposed_level": 1,
+      "purpose": "Traduir volum donat a capacitat coneguda",
+      "worked_example": {
+        "prompt": "Una capsa té un volum ja calculat de 3 dm³. Quants litres hi caben?",
+        "answer": 3,
+        "unit": "L",
+        "reasoning": "1 dm³=1 L; 3 dm³=3 L"
+      },
+      "existing_overlap": [
+        "unitats:12",
+        "unitats:16",
+        "superficies:14"
+      ],
+      "novelty_assessment": "Duplicat funcional transversal evident: només reutilització com a pràctica N1; NO família genuïna.",
+      "decision": "pending_curricular_and_pedagogical_review",
+      "not_approved": true,
+      "curricular_alignment": "2.MES.MA.B"
+    }
+  ],
+  "explicit_exclusions": [
+    "Cap proposta s'ha afegit a cap banc ni genera exercicis",
+    "Cap proposta acredita una família genuïna: totes les coincidències s'han de revisar amb els 128 tipus",
+    "Els casos de Problemes N1 són explícitament reforços/duplicats; no comptar com a noves famílies",
+    "No totes les composicions multietapa són N3 ni totes són procediments genuïnament nous",
+    "Els codis curriculars de mesurament/estimació són marcadors de bloc; cal validar l'epígraf precís abans d'implementar"
+  ],
+  "decision_gates": [
+    "Revisar diferenciació matemàtica (operacions, decisions, representacions) respecte al catàleg complet",
+    "Validar adequació real a 2n ESO i nivell N1/N2/N3 amb rúbrica docent",
+    "Definir com a mínim 2 generacions realment diferents i 4 distractors plausibles",
+    "Verificar correcció amb oracles independents i proves de varietat",
+    "Només després d'aprovació explícita crear generadors, modificar famílies o fusionar PR"
+  ]
+}

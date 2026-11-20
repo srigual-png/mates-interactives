@@ -1,0 +1,273 @@
+{
+  "schema_version": 1,
+  "scope": "2eso/mesura/problemes",
+  "status": "provisional",
+  "source": "Seven topic reports, revised cross-topic report and 128-type mapping in PR #49",
+  "decision_types": {
+    "shared_core": "Shared mathematical core; candidate merge across topics",
+    "contextual_variant": "Shared core with potentially meaningful contextual or mathematical variant",
+    "compound_candidate": "Composed procedure may merit separate family after pedagogical review",
+    "review_distinct": "No clearly adequate equivalent established in present audit"
+  },
+  "limitations": [
+    "These 20 classifications are decisions for investigation, not validated families",
+    "A contextual_variant is not automatically a new family",
+    "A compound_candidate is not automatically N3",
+    "Old groups PM13 and PM14 were mixtures, and are not to be counted as genuine families",
+    "No code, difficulty map or family registry changes"
+  ],
+  "rows": [
+    {
+      "type": 1,
+      "key": "problemes:1",
+      "old_group": "PM01",
+      "decision": "compound_candidate",
+      "shared_with": [],
+      "procedure": "Àrea útil de paret → rendiment d'un pot → arrodoniment superior",
+      "comparison": "perimetres:16",
+      "rationale": "El sostre d'unitats comercialitzables (pots enters) és una decisió absent al càlcul d'àrea nu.",
+      "status": "provisional"
+    },
+    {
+      "type": 2,
+      "key": "problemes:2",
+      "old_group": "PM02",
+      "decision": "compound_candidate",
+      "shared_with": [],
+      "procedure": "Dues dimensions i canvi d'unitats → recompte bidimensional de rajoles",
+      "comparison": "unitats:2",
+      "rationale": "Les rajoles actuals encaixen exactament; no es prova una família de retalls o residus.",
+      "status": "provisional"
+    },
+    {
+      "type": 3,
+      "key": "problemes:3",
+      "old_group": "PM03",
+      "decision": "compound_candidate",
+      "shared_with": [],
+      "procedure": "Volum d'ortoedre → litres → percentatge d'ompliment",
+      "comparison": "superficies:1",
+      "rationale": "La combinació de tres conceptes no és una família nova automàticament; verificar la transferència.",
+      "status": "provisional"
+    },
+    {
+      "type": 4,
+      "key": "problemes:4",
+      "old_group": "PM04",
+      "decision": "shared_core",
+      "shared_with": [
+        "superficies:7"
+      ],
+      "procedure": "Volum directe de cilindre, amb equivalència dm³=L",
+      "comparison": "unitats:12",
+      "rationale": "Mateix nucli πr²h, sense canvi de valor en convertir dm³ a litres.",
+      "status": "provisional"
+    },
+    {
+      "type": 5,
+      "key": "problemes:5",
+      "old_group": "PM05",
+      "decision": "contextual_variant",
+      "shared_with": [
+        "superficies:8"
+      ],
+      "procedure": "Àrea lateral de cilindre amb diàmetre i etiqueta",
+      "comparison": "superficies:8",
+      "rationale": "La representació per diàmetre i coberta lateral pot afegir interpretació; no decretar mateixa dificultat.",
+      "status": "provisional"
+    },
+    {
+      "type": 6,
+      "key": "problemes:6",
+      "old_group": "PM06",
+      "decision": "shared_core",
+      "shared_with": [
+        "pitagores:13"
+      ],
+      "procedure": "Diagonal rectangular mitjançant hipotenusa",
+      "comparison": "pitagores:13",
+      "rationale": "Canvia la pantalla, no c=√(a²+b²).",
+      "status": "provisional"
+    },
+    {
+      "type": 7,
+      "key": "problemes:7",
+      "old_group": "PM06",
+      "decision": "shared_core",
+      "shared_with": [
+        "pitagores:6"
+      ],
+      "procedure": "Escala recolzada: hipotenusa contextual",
+      "comparison": "pitagores:6",
+      "rationale": "El triangle rectangle està implícit en paret-terra.",
+      "status": "provisional"
+    },
+    {
+      "type": 8,
+      "key": "problemes:8",
+      "old_group": "PM07",
+      "decision": "shared_core",
+      "shared_with": [
+        "escales:2"
+      ],
+      "procedure": "Mapa 1:n: distància real i km",
+      "comparison": "escales:2",
+      "rationale": "Multiplicar cm pel denominador i convertir a km.",
+      "status": "provisional"
+    },
+    {
+      "type": 9,
+      "key": "problemes:9",
+      "old_group": "PM07",
+      "decision": "shared_core",
+      "shared_with": [
+        "escales:4"
+      ],
+      "procedure": "Recuperar escala de plànol a partir de dues longituds",
+      "comparison": "escales:4",
+      "rationale": "Cal unificar unitats i normalitzar 1:n.",
+      "status": "provisional"
+    },
+    {
+      "type": 10,
+      "key": "problemes:10",
+      "old_group": "PM08",
+      "decision": "shared_core",
+      "shared_with": [
+        "escales:8",
+        "escales:9"
+      ],
+      "procedure": "Proporció entre altures i ombres",
+      "comparison": "escales:8",
+      "rationale": "No canvia procediment entre arbre i edifici.",
+      "status": "provisional"
+    },
+    {
+      "type": 11,
+      "key": "problemes:11",
+      "old_group": "PM09",
+      "decision": "contextual_variant",
+      "shared_with": [
+        "perimetres:9",
+        "perimetres:11"
+      ],
+      "procedure": "Franja exterior rectangular: reconstruir dimensions externes i restar àrees",
+      "comparison": "perimetres:9",
+      "rationale": "S'aplica la sostracció d'àrees però també cal construir L+2w i H+2w.",
+      "status": "provisional"
+    },
+    {
+      "type": 12,
+      "key": "problemes:12",
+      "old_group": "PM10",
+      "decision": "shared_core",
+      "shared_with": [
+        "perimetres:17"
+      ],
+      "procedure": "Corona circular: π[(r+w)²−r²]",
+      "comparison": "perimetres:17",
+      "rationale": "Mateix esquema, diferent context.",
+      "status": "provisional"
+    },
+    {
+      "type": 13,
+      "key": "problemes:13",
+      "old_group": "PM11",
+      "decision": "contextual_variant",
+      "shared_with": [
+        "superficies:2",
+        "superficies:16"
+      ],
+      "procedure": "Recompte de base + quatre laterals sense tapa",
+      "comparison": "superficies:2",
+      "rationale": "La manca de tapa és una restricció de cares diferent de capsa tancada.",
+      "status": "provisional"
+    },
+    {
+      "type": 14,
+      "key": "problemes:14",
+      "old_group": "PM12",
+      "decision": "compound_candidate",
+      "shared_with": [],
+      "procedure": "Perímetre amb porta → metres de tanca → cost proporcional",
+      "comparison": "problemes:15",
+      "rationale": "El cost per metre afegeix una etapa proporcional; contrastar amb el tipus 15.",
+      "status": "provisional"
+    },
+    {
+      "type": 15,
+      "key": "problemes:15",
+      "old_group": "PM12",
+      "decision": "contextual_variant",
+      "shared_with": [],
+      "procedure": "Perímetre rectangular menys amplada de porta (sòcol)",
+      "comparison": "problemes:14",
+      "rationale": "Nucli de perímetre útil sense cost; no obligar a unificar-lo amb cost de tanca.",
+      "status": "provisional"
+    },
+    {
+      "type": 16,
+      "key": "problemes:16",
+      "old_group": "PM13",
+      "decision": "contextual_variant",
+      "shared_with": [
+        "estimacio:9"
+      ],
+      "procedure": "Error relatiu per dues mesures amb referència comuna",
+      "comparison": "estimacio:9",
+      "rationale": "El denominador és idèntic i es poden comparar només els errors absoluts: N1 pot ser raonable.",
+      "status": "provisional"
+    },
+    {
+      "type": 17,
+      "key": "problemes:17",
+      "old_group": "PM13",
+      "decision": "shared_core",
+      "shared_with": [
+        "estimacio:1"
+      ],
+      "procedure": "Estimació de magnitud i ordre de mida",
+      "comparison": "estimacio:1",
+      "rationale": "Un context canviant no crea una família nova per si mateix.",
+      "status": "provisional"
+    },
+    {
+      "type": 18,
+      "key": "problemes:18",
+      "old_group": "PM14",
+      "decision": "shared_core",
+      "shared_with": [
+        "unitats:2",
+        "unitats:11"
+      ],
+      "procedure": "Conversió d'unitats de superfície",
+      "comparison": "unitats:2",
+      "rationale": "La paraula pressupost no afegeix un càlcul de pressupost.",
+      "status": "provisional"
+    },
+    {
+      "type": 19,
+      "key": "problemes:19",
+      "old_group": "PM14",
+      "decision": "review_distinct",
+      "shared_with": [],
+      "procedure": "Precipitació: mm × m² mitjançant equivalència 1 mm·m² = 1 L",
+      "comparison": null,
+      "rationale": "Equivalència facilitada explícitament; comprovar si és transferència directa o família específica.",
+      "status": "provisional"
+    },
+    {
+      "type": 20,
+      "key": "problemes:20",
+      "old_group": "PM14",
+      "decision": "shared_core",
+      "shared_with": [
+        "superficies:12"
+      ],
+      "procedure": "Recuperar altura de cilindre des de V i r",
+      "comparison": "superficies:12",
+      "rationale": "L=dm³ és equivalència immediata abans d'aïllar h.",
+      "status": "provisional"
+    }
+  ]
+}

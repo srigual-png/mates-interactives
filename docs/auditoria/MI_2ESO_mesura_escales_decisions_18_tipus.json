@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "status": "provisional",
+  "scope": "2eso/mesura/escales",
+  "source": "PR #49: escales initial audit + transversal review and 128-type master",
+  "decision_types": {
+    "shared_local_core": "Nucli intern o transversal semblant; possible fusió",
+    "contextual_variant": "Nucli compartit amb variant matemàtica o interpretativa a contrastar",
+    "compound_candidate": "Composició que podria aportar família diferenciada",
+    "review_distinct": "Procediment amb identitat a revisar abans de considerar-lo independent",
+    "variant_mixed": "Tipus amb casos diferents; cal consolidar per variant"
+  },
+  "limitations": [
+    "Agrupacions candidates, no famílies matemàtiques validades",
+    "La mateixa etiqueta de grup no implica nivell idèntic",
+    "Les notes de PR #51/#52/#53 són canvis proposats en altres branques encara no fusionades",
+    "Cap canvi funcional en aquest fitxer"
+  ],
+  "rows": [
+    {
+      "key": "escales:1",
+      "type": 1,
+      "old_group": "E01",
+      "decision": "shared_local_core",
+      "procedure": "Plànol 1:n → longitud real en metres",
+      "shared_with": [
+        "escales:2"
+      ],
+      "rationale": "Mateix esquema d'escala i unitat final diferent.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:2",
+      "type": 2,
+      "old_group": "E01",
+      "decision": "shared_local_core",
+      "procedure": "Mapa 1:n → distància real en quilòmetres",
+      "shared_with": [
+        "escales:1",
+        "problemes:8"
+      ],
+      "rationale": "La conversió cm→km no implica família separada de la distància real.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:3",
+      "type": 3,
+      "old_group": "E02",
+      "decision": "contextual_variant",
+      "procedure": "Longitud real → longitud reduïda en un plànol",
+      "shared_with": [
+        "escales:5"
+      ],
+      "rationale": "Inversió d'escala i m→cm; contrastar amb ampliació k:1 directa.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:4",
+      "type": 4,
+      "old_group": "E03",
+      "decision": "shared_local_core",
+      "procedure": "Calcular denominador de l'escala 1:n",
+      "shared_with": [
+        "escales:15",
+        "problemes:9"
+      ],
+      "rationale": "Unificar unitats i simplificar dibuix:realitat.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:5",
+      "type": 5,
+      "old_group": "E02",
+      "decision": "contextual_variant",
+      "procedure": "Ampliar una dimensió amb escala k:1",
+      "shared_with": [
+        "escales:3"
+      ],
+      "rationale": "Multiplicar directament, sense haver de convertir m→cm.",
+      "current_level_note": "N1",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:6",
+      "type": 6,
+      "old_group": "E05",
+      "decision": "shared_local_core",
+      "procedure": "Dues longituds a escala → superfície real",
+      "shared_with": [
+        "escales:7"
+      ],
+      "rationale": "Aplicar factor a dues dimensions i calcular àrea.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:7",
+      "type": 7,
+      "old_group": "E05",
+      "decision": "shared_local_core",
+      "procedure": "Superfície representada a partir de mesures reals",
+      "shared_with": [
+        "escales:6"
+      ],
+      "rationale": "Inverteix el sentit real/plànol, però manté l'escala en dues dimensions.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:8",
+      "type": 8,
+      "old_group": "E06",
+      "decision": "shared_local_core",
+      "procedure": "Altura indirecta d'arbre per ombres",
+      "shared_with": [
+        "escales:9",
+        "problemes:10"
+      ],
+      "rationale": "Mateixa proporció al mateix moment i amb magnituds corresponents.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:9",
+      "type": 9,
+      "old_group": "E06",
+      "decision": "shared_local_core",
+      "procedure": "Altura indirecta d'edifici per ombres",
+      "shared_with": [
+        "escales:8",
+        "problemes:10"
+      ],
+      "rationale": "Canvia objecte, no la semblança.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:10",
+      "type": 10,
+      "old_group": "E06",
+      "decision": "contextual_variant",
+      "procedure": "Resoldre un costat desconegut per raó de semblança",
+      "shared_with": [
+        "escales:11"
+      ],
+      "rationale": "Cal identificar correspondències i calcular factor; no només multiplicar dades donades.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:11",
+      "type": 11,
+      "old_group": "E06",
+      "decision": "contextual_variant",
+      "procedure": "Resoldre una proporció ja plantejada",
+      "shared_with": [
+        "escales:10"
+      ],
+      "rationale": "La relació a/b=c/x ja està formulada: N1 defensable.",
+      "current_level_note": "N1",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:12",
+      "type": 12,
+      "old_group": "E03",
+      "decision": "contextual_variant",
+      "procedure": "Factor lineal gran/petit per divisió directa",
+      "shared_with": [
+        "escales:4"
+      ],
+      "rationale": "No cal normalitzar unitats diferents; N1 defensable.",
+      "current_level_note": "N1",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:13",
+      "type": 13,
+      "old_group": "E04",
+      "decision": "review_distinct",
+      "procedure": "Identificar proporcions homòlogues correctes",
+      "shared_with": [
+        "escales:10"
+      ],
+      "rationale": "Validar correspondència de costats no equival a buscar una mesura.",
+      "current_level_note": "N1",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:14",
+      "type": 14,
+      "old_group": "E09",
+      "decision": "review_distinct",
+      "procedure": "Diagnosticar error d'escala (longitud/àrea/unitats)",
+      "shared_with": [
+        "unitats:17"
+      ],
+      "rationale": "Comparteix format amb diagnòstic de conversió, NO mateixa família matemàtica.",
+      "current_level_note": "N1",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:15",
+      "type": 15,
+      "old_group": "E03",
+      "decision": "shared_local_core",
+      "procedure": "Reconstruir escala amb segment desitjat",
+      "shared_with": [
+        "escales:4",
+        "problemes:9"
+      ],
+      "rationale": "Relació dibuix:real i simplificació amb unitats comunes.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:16",
+      "type": 16,
+      "old_group": "E07",
+      "decision": "compound_candidate",
+      "procedure": "Obtenir dues dimensions reals → perímetre",
+      "shared_with": [
+        "escales:6"
+      ],
+      "rationale": "Composició d'escala i contorn, diferent de calcular només longitud.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:17",
+      "type": 17,
+      "old_group": "E08",
+      "decision": "compound_candidate",
+      "procedure": "Sumar trams d'un mapa → longitud real",
+      "shared_with": [
+        "escales:2"
+      ],
+      "rationale": "Suma de trams abans d'aplicar escala i conversió; no automàticament nova família.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    },
+    {
+      "key": "escales:18",
+      "type": 18,
+      "old_group": "E06",
+      "decision": "contextual_variant",
+      "procedure": "Calcular ombra desconeguda amb proporcionalitat",
+      "shared_with": [
+        "escales:8",
+        "escales:9"
+      ],
+      "rationale": "Inverteix la incògnita respecte a calcular altura; mateix model semblant.",
+      "current_level_note": "N2",
+      "status": "provisional"
+    }
+  ]
+}

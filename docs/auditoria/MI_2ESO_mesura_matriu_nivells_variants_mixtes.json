@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "status": "provisional_unapproved",
+  "scope": "2eso/sentit-mesura/mixed-variants",
+  "source_branches": {
+    "audit": "codex/auditoria-mesura-2eso-fase-a-lot1",
+    "integration": "integration/mesura-2eso-pr50-51-52"
+  },
+  "meaning": "Nivells observats al classificador i proposta de PR d'integració, no validació curricular ni duplicació de famílies",
+  "type_count": 3,
+  "variant_count": 6,
+  "types": [
+    {
+      "key": "unitats:6",
+      "parent_candidate": "ME2-C? (consultar catàleg global)",
+      "source": "Equivalències volum-capacitat",
+      "code_status": "N1 base en la branca d'auditoria; N2 encadenada proposat en PR #53, no fusionada",
+      "variants": [
+        {
+          "variant": "directa",
+          "proposed_level": 1,
+          "classifier": "base",
+          "source_examples": [
+            "2,5 dm³ → L",
+            "750 cm³ → mL",
+            "850 mL → cm³"
+          ],
+          "procedure": "Equivalència directa entre dm³ i L o cm³ i mL",
+          "evidence": "Audit variants inventory; source generator PR #53",
+          "status": "provisional"
+        },
+        {
+          "variant": "encadenada",
+          "proposed_level": 2,
+          "classifier": "reviewed_variant_in_unmerged_pr53",
+          "source_examples": [
+            "1,2 m³ → L",
+            "3,4 L → cm³",
+            "2.400 L → m³"
+          ],
+          "procedure": "Equivalència volum-capacitat i transformació addicional d'unitat",
+          "evidence": "PR #53 classifier REVIEWED_VARIANTS unitats:6/encadenada",
+          "status": "provisional"
+        }
+      ]
+    },
+    {
+      "key": "pitagores:15",
+      "source": "Teorema de Pitàgores amb dues incògnites alternatives",
+      "code_status": "N1 base i N2 diagonal revisat en codi de la branca d'auditoria",
+      "variants": [
+        {
+          "variant": "catet",
+          "proposed_level": 1,
+          "classifier": "base",
+          "source_examples": [
+            "Hipotenusa 29 cm, catet 20 cm → 21 cm"
+          ],
+          "procedure": "Recuperar catet per resta de quadrats",
+          "evidence": "CI #44046115207: branca catet real",
+          "status": "provisional"
+        },
+        {
+          "variant": "diagonal",
+          "proposed_level": 2,
+          "classifier": "reviewed_variant",
+          "source_examples": [
+            "Rectangle 8 × 15 cm → diagonal 17 cm"
+          ],
+          "procedure": "Identificar triangle rectangle al rectangle i obtenir hipotenusa",
+          "evidence": "CI #44046115207: branca diagonal real; classificador REVIEWED_VARIANTS",
+          "status": "provisional"
+        }
+      ]
+    },
+    {
+      "key": "superficies:17",
+      "source": "Comparar capacitats de dos recipients rectangulars",
+      "code_status": "N2 base, N1 sameBase revisat a la branca d'auditoria",
+      "variants": [
+        {
+          "variant": "sameBase",
+          "proposed_level": 1,
+          "classifier": "reviewed_variant",
+          "source_examples": [
+            "4×3×2 vs 4×3×3 dm → B",
+            "5×4×4 vs 5×4×3 dm → A"
+          ],
+          "procedure": "Bases iguals: comparar només les altures",
+          "evidence": "CI #44046713429: classificador i fallback sense metadades",
+          "status": "provisional"
+        },
+        {
+          "variant": "other",
+          "proposed_level": 2,
+          "classifier": "base",
+          "source_examples": [
+            "6×5×4 vs 3×6×5 dm → A",
+            "4×5×3 vs 5×3×5 dm → B"
+          ],
+          "procedure": "Bases diferents: calcular o comparar els productes de tres dimensions",
+          "evidence": "CI #44046713429: classificador i fallback sense metadades",
+          "status": "provisional"
+        }
+      ]
+    }
+  ],
+  "evidence_gates": [
+    "No convertir variants del mateix tipus en famílies noves automàticament",
+    "La variant unitats:6/encadenada es proposa a la PR #53 encara sense fusió; no consta vigent al classificador de la branca PR #49",
+    "No es pot acreditar N3 per cap d'aquests sis casos",
+    "Mantenir el recompte de 128 tipus; les sis variants són anotacions de tres tipus mixtos",
+    "Revisió curricular i modes guiat/autònom/examen pendents"
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "schema_version": 1,
+  "scope": "2eso/mesura/estimacio",
+  "status": "provisional",
+  "source": "PR #49 seven static topic reports and 128-type master",
+  "decision_types": {
+    "shared_local_core": "Mathematical core shared with another exercise",
+    "contextual_variant": "Shared core with variant potentially affecting level or task",
+    "compound_candidate": "Multiple decisions or operations requiring pedagogical review",
+    "review_distinct": "Identity still to review separately",
+    "variant_mixed": "Cases from one type correspond to different mathematical tasks"
+  },
+  "limitations": [
+    "These are decisions for review, not validated genuine families",
+    "References to another type do not prove identical difficulty",
+    "No N3 classification or validated families registered",
+    "This document does not change generator code or level mapping"
+  ],
+  "rows": [
+    {
+      "key": "estimacio:1",
+      "type": 1,
+      "old_group": "EP01",
+      "decision": "shared_local_core",
+      "procedure": "Estimació de magnitud plausible",
+      "shared_with": [
+        "estimacio:2",
+        "estimacio:3",
+        "problemes:17"
+      ],
+      "rationale": "N1; context i magnitud canvien sense necessàriament crear família",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:2",
+      "type": 2,
+      "old_group": "EP01",
+      "decision": "shared_local_core",
+      "procedure": "Estimació per ordre de magnitud",
+      "shared_with": [
+        "estimacio:1"
+      ],
+      "rationale": "N1; mateixa tria contextual",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:3",
+      "type": 3,
+      "old_group": "EP01",
+      "decision": "shared_local_core",
+      "procedure": "Estimació de volum/capacitat plausible",
+      "shared_with": [
+        "estimacio:1",
+        "problemes:17"
+      ],
+      "rationale": "N1; mateix judici d'ordre de mida",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:4",
+      "type": 4,
+      "old_group": "EP02",
+      "decision": "review_distinct",
+      "procedure": "Triar instrument apropiat per precisió i magnitud",
+      "shared_with": [
+        "unitats:7"
+      ],
+      "rationale": "N1; unitat adequada no equival necessàriament a instrument adequat",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:5",
+      "type": 5,
+      "old_group": "EP03",
+      "decision": "shared_local_core",
+      "procedure": "Arrodonir lectura segons xifres requerides",
+      "shared_with": [
+        "estimacio:16"
+      ],
+      "rationale": "N1; transferència de mateix arrodoniment",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:6",
+      "type": 6,
+      "old_group": "EP04",
+      "decision": "shared_local_core",
+      "procedure": "Calcular error absolut |mesura−referència|",
+      "shared_with": [
+        "estimacio:17"
+      ],
+      "rationale": "N1; mesurar distància absoluta",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:7",
+      "type": 7,
+      "old_group": "EP05",
+      "decision": "shared_local_core",
+      "procedure": "Calcular error relatiu d'una lectura",
+      "shared_with": [
+        "estimacio:8",
+        "estimacio:13"
+      ],
+      "rationale": "N2; dividir error absolut per referència",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:8",
+      "type": 8,
+      "old_group": "EP05",
+      "decision": "contextual_variant",
+      "procedure": "Expressar error relatiu percentual",
+      "shared_with": [
+        "estimacio:7",
+        "estimacio:13"
+      ],
+      "rationale": "N2; ×100 complementari",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:9",
+      "type": 9,
+      "old_group": "EP06",
+      "decision": "compound_candidate",
+      "procedure": "Comparar dos errors relatius amb referències distintes",
+      "shared_with": [
+        "problemes:16"
+      ],
+      "rationale": "N2; dos quocients; amb referència comuna a problemes:16 es pot simplificar",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:10",
+      "type": 10,
+      "old_group": "EP07",
+      "decision": "contextual_variant",
+      "procedure": "Mig pas de l'arrodoniment com error màxim",
+      "shared_with": [
+        "estimacio:12"
+      ],
+      "rationale": "N1; recordar tolerància de la precisió",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:11",
+      "type": 11,
+      "old_group": "EP08",
+      "decision": "review_distinct",
+      "procedure": "Valorar unitat i xifres creïbles segons context",
+      "shared_with": [
+        "estimacio:14"
+      ],
+      "rationale": "N1 provisional; 1,5 L i 1,51 L poden ser totes dues plausibles sense instrument",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:12",
+      "type": 12,
+      "old_group": "EP07",
+      "decision": "compound_candidate",
+      "procedure": "Construir interval semiobert compatible amb arrodoniment",
+      "shared_with": [
+        "estimacio:10"
+      ],
+      "rationale": "N2; aplica mitja unitat i límits, no només reconeix tolerància",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:13",
+      "type": 13,
+      "old_group": "EP05",
+      "decision": "contextual_variant",
+      "procedure": "Error relatiu percentual amb error absolut donat",
+      "shared_with": [
+        "estimacio:8"
+      ],
+      "rationale": "N2; menys passos perquè error absolut és conegut",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:14",
+      "type": 14,
+      "old_group": "EP08",
+      "decision": "contextual_variant",
+      "procedure": "Comprovar coherència de valor esperat i observat amb unitat",
+      "shared_with": [
+        "estimacio:11"
+      ],
+      "rationale": "N1; PR #50 explicita unitats, no modifica necessàriament unicitat de criteri",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:15",
+      "type": 15,
+      "old_group": "EP09",
+      "decision": "review_distinct",
+      "procedure": "Mitjana aritmètica de mesures repetides",
+      "shared_with": [],
+      "rationale": "N1; format a centèsimes amb lectures a dècimes requereix revisió de precisió",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:16",
+      "type": 16,
+      "old_group": "EP03",
+      "decision": "shared_local_core",
+      "procedure": "Arrodonir longitud a dècimes",
+      "shared_with": [
+        "estimacio:5"
+      ],
+      "rationale": "N1; mateix procediment en context digital",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:17",
+      "type": 17,
+      "old_group": "EP04",
+      "decision": "contextual_variant",
+      "procedure": "Comparar dos errors absoluts",
+      "shared_with": [
+        "estimacio:6"
+      ],
+      "rationale": "N1; s'afegeix selecció de menor error",
+      "status": "provisional"
+    },
+    {
+      "key": "estimacio:18",
+      "type": 18,
+      "old_group": "EP10",
+      "decision": "contextual_variant",
+      "procedure": "Diagnosticar suma en lloc de diferència absoluta",
+      "shared_with": [
+        "estimacio:6"
+      ],
+      "rationale": "N1; principi de l'error absolut, tasca de diagnòstic explícit",
+      "status": "provisional"
+    }
+  ]
+}

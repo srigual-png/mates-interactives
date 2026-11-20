@@ -1,0 +1,15 @@
+name: Auditoria contrast Estimacio 5 11 16
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Contrast de criteri de precisio i arrodoniments
+        run: node scripts/test-mesura-2eso-contrast-estimacio-5-11-16.cjs

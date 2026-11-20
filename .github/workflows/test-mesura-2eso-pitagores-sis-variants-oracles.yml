@@ -1,0 +1,13 @@
+name: Mesura 2n ESO - sis variants Pitagores
+on:
+  workflow_dispatch:
+jobs:
+  oracle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprovar sis tipus de Pitagores amb oracles independents
+        run: node scripts/test-mesura-2eso-pitagores-sis-variants-oracles.cjs

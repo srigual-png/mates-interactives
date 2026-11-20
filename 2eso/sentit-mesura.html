@@ -1583,7 +1583,7 @@ function genEstimacioError2ESO(forceType){
   if(type===1){
     const cases=[
       ['l’alçada d’una porta','2 m',['2 m','20 cm','20 m','200 m']],
-      ['el gruix d’un telèfon mòbil','8 mm',['8 mm','8 cm','80 cm','0,8 m']],
+      ['el gruix d’un telèfon mòbil','8 mm',['8 mm','8 cm','80 cm','0,8 mm']],
       ['la llargada d’una aula','8 m',['8 m','80 cm','80 m','800 m']],
       ['l’amplada d’un full A4','21 cm',['21 cm','2,1 cm','2,1 m','21 m']]
     ],c=shuffle(cases)[0];correct=c[1];options=shuffle(c[2]);question=`Quina és una estimació raonable per a <b>${c[0]}</b>?`;
@@ -1661,18 +1661,33 @@ function genEstimacioError2ESO(forceType){
     guide=['Pensa en l’interval de valors que arrodonirien al mateix nombre.','El límit queda a mig camí entre dues marques consecutives de la precisió utilitzada.'];solution=[`L’error màxim és la meitat de la unitat d’arrodoniment: ${correct}.`];allowOpen=false;
   }
   else if(type===11){
+    // Tria contextual de la precisió: cal decidir quin aparell és suficient
+    // sense exigir més precisió de la necessària. No és un altre arrodoniment.
     const cases=[
-      ['l’alçada d’una persona','1,72 m',['1,72 m','1,723456 m','2 m','172 m']],
-      ['la distància entre dues ciutats per carretera','84 km',['84 km','84,000001 km','84 m','0,084 km']],
-      ['el gruix d’una moneda','1,8 mm',['1,8 mm','2 m','0,000018 km','1,81 mm']],
-      ['la capacitat d’una ampolla','1,5 L',['1,5 L','1,51 L','1500 m³','0,0015 mL']]
-    ],c=shuffle(cases)[0];correct=c[1];options=shuffle(c[2]);question=`Quina manera d’expressar <b>${c[0]}</b> té una precisió i una unitat raonables?`;
-    guide=['Tria primer una unitat adequada al context.','Evita donar decimals que no aporten informació real.','La precisió ha de ser útil i creïble segons la mesura.'];solution=[`Una expressió adequada és ${correct}.`];allowOpen=false;
+      {context:'Per tallar una peça de fusta, el marge màxim d’error admès és de 2 mm.',
+       unit:'mm',limit:2,margins:[5,2,1,0.5],correct:'Instrument B'},
+      {context:'Per mesurar la profunditat d’una piscina, el marge màxim d’error admès és de 2 cm.',
+       unit:'cm',limit:2,margins:[10,5,2,1],correct:'Instrument C'},
+      {context:'Per mesurar aigua en un recipient, el marge màxim d’error admès és de 0,1 L.',
+       unit:'L',limit:0.1,margins:[0.5,0.2,0.1,0.05],correct:'Instrument C'},
+      {context:'Per senyalitzar la llargada d’un recorregut, el marge màxim d’error admès és de 1 m.',
+       unit:'m',limit:1,margins:[5,1,0.5,0.1],correct:'Instrument B'}
+    ],c=shuffle(cases)[0],names=['Instrument A','Instrument B','Instrument C','Instrument D'];
+    const margins=c.margins.map((value,i)=>names[i]+': ±'+fmtNum(value,2)+' '+c.unit);
+    correct=c.correct;options=shuffle(names);
+    question=c.context+' Quatre instruments tenen aquests errors màxims garantits: <b>'+margins.join('; ')+'</b>. Quin instrument és el <b>menys precís que encara compleix</b> el marge d’error admès?';
+    guide=['Compara l’error màxim admès amb l’error màxim garantit de cada instrument.',
+      'Descarta els instruments que poden superar el marge admès.',
+      'Dels que compleixen el requisit, tria el que permet el marge d’error més gran: no cal més precisió de la necessària.'];
+    solution=['El marge d’error màxim admès és ±'+fmtNum(c.limit,2)+' '+c.unit+'.',
+      'Són vàlids els instruments amb error garantit menor o igual que aquest límit.',
+      'El menys precís entre els vàlids és '+correct+': ±'+fmtNum(c.margins[names.indexOf(correct)],2)+' '+c.unit+'.'];
+    allowOpen=false;
   }
   else if(type===12){
     const measured=shuffle([12.3,18.7,25.4,40.6])[0],step=0.1,lo=roundTo(measured-step/2,2),hi=roundTo(measured+step/2,2);
     correct=`des de ${fmtNum(lo,2)} cm (inclòs) fins a ${fmtNum(hi,2)} cm (exclòs)`;options=shuffle([correct,`entre ${fmtNum(measured-step,2)} cm i ${fmtNum(measured+step,2)} cm`,`entre ${fmtNum(measured,2)} cm i ${fmtNum(measured+step,2)} cm`,`exactament ${fmtNum(measured,2)} cm`]);
-    question=`Una longitud s’ha registrat com <b>${fmtNum(measured,1)} cm</b> arrodonida a la dècima. Quin interval és compatible amb aquest arrodoniment?`;
+    question=`Una longitud s’ha registrat com <b>${fmtNum(measured,1)} cm</b> arrodonida a la dècima. Si el valor original queda exactament a mig camí entre dues dècimes, s’arrodoneix cap amunt. Quin interval és compatible amb aquest arrodoniment?`;
     guide=['Una mesura arrodonida a la dècima pot diferir fins a mitja dècima del valor registrat.','Resta i suma aquest marge al valor indicat.'];solution=[`El marge és de 0,05 cm.`,`L’interval compatible és ${correct}.`];allowOpen=false;
   }
   else if(type===13){

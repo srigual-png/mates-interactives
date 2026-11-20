@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "status": "draft_cognitive_evidence_pending_teacher_approval",
+  "scope": "2eso/sentit-mesura/5-provisional-clusters",
+  "based_on": "Direct inspection of source generator branches on PR #49 audit branch",
+  "clusters": [
+    {
+      "cluster": "ME2-C010",
+      "keys": [
+        "estimacio:10",
+        "estimacio:12"
+      ],
+      "finding": "related_but_cognitive_demand_differs",
+      "common": "Arrodoniment amb una unitat de precisió establerta",
+      "variants": [
+        {
+          "key": "estimacio:10",
+          "demand": "Identificar mitja unitat de precisió com a error màxim",
+          "proposed_level": "N1_N2_review",
+          "example": "Arrodonir a dècimes implica error màxim 0,05",
+          "rationale": "No cal reconstruir un interval; reconèixer regla de mitja unitat"
+        },
+        {
+          "key": "estimacio:12",
+          "demand": "Construir interval semiobert de valors compatibles amb una dada arrodonida",
+          "proposed_level": "N2_review",
+          "example": "12,3 cm -> [12,25 cm, 12,35 cm)",
+          "rationale": "Dues fronteres i convenció de punt mig; no és simple arrodoniment"
+        }
+      ],
+      "risks": [
+        "La convenció de seminterval superior exclòs pressuposa un criteri específic per als punts exactament equidistants; explicitar el criteri a l'enunciat o al material teòric abans de consolidar una resposta única"
+      ],
+      "recommendation": "Mantenir nucli relacionat però distingir reconeixement del marge i interpretació de l'interval; pendent resolució de convenció."
+    },
+    {
+      "cluster": "ME2-C017",
+      "keys": [
+        "estimacio:7",
+        "estimacio:8",
+        "estimacio:13"
+      ],
+      "finding": "same_relative_error_core_with_variants",
+      "common": "Raó entre error absolut i valor de referència",
+      "variants": [
+        {
+          "key": "estimacio:7",
+          "demand": "Calcular diferència absoluta i dividir pel valor real",
+          "proposed_level": "N2_candidate",
+          "example": "100 real, 98 mesurat -> 2/100 = 0,02",
+          "rationale": "Dos passos amb sortida decimal"
+        },
+        {
+          "key": "estimacio:8",
+          "demand": "Calcular error absolut, dividir i convertir a percentatge",
+          "proposed_level": "N2_candidate",
+          "example": "100 real, 98 mesurat -> 2 %",
+          "rationale": "Afegeix conversió percentual, però nucli compartit"
+        },
+        {
+          "key": "estimacio:13",
+          "demand": "Usar error absolut ja donat, dividir i convertir a percentatge",
+          "proposed_level": "N1_N2_review",
+          "example": "Error absolut 2 de referència 100 -> 2 %",
+          "rationale": "Una dada intermitja ja està proporcionada, menys passos"
+        }
+      ],
+      "risks": [
+        "Comparar amb els criteris curriculars sobre tractament de l'error relatiu a 2n ESO; les expressions percentuals no han de forçar un nivell N3"
+      ],
+      "recommendation": "Tractar com variants de la mateixa estratègia. Nivell individual dependrà dels passos i suport donat."
+    },
+    {
+      "cluster": "ME2-C021",
+      "keys": [
+        "perimetres:12",
+        "perimetres:13"
+      ],
+      "finding": "formula_inverse_models_distinct",
+      "common": "Aïllament d'una dimensió a partir de l'àrea d'una figura",
+      "variants": [
+        {
+          "key": "perimetres:12",
+          "demand": "Desfer producte i meitat de l'àrea triangular per trobar base",
+          "proposed_level": "N2_candidate",
+          "example": "A=24 cm², h=6 cm -> base 8 cm",
+          "rationale": "Inversió de fórmula A=b·h/2"
+        },
+        {
+          "key": "perimetres:13",
+          "demand": "Aïllar altura a partir de l'àrea de trapezi i la suma de bases",
+          "proposed_level": "N2_candidate",
+          "example": "A=40 cm², bases 12 i 8 cm -> h=4 cm",
+          "rationale": "Cal agrupar dues bases abans de dividir; una decisió de model distinta"
+        }
+      ],
+      "risks": [
+        "No certificar família separada només per fórmula diferent: comparar estratègia d'aïllament, nombre de dades i transferència"
+      ],
+      "recommendation": "Separació candidata de submodels triangular i trapezoidal dins de les inversions d'àrea; no aprovada."
+    },
+    {
+      "cluster": "ME2-C051",
+      "keys": [
+        "superficies:1",
+        "superficies:3",
+        "superficies:5"
+      ],
+      "finding": "shared_base_area_times_height_with_representation_variants",
+      "common": "Volum d'un prisma o d'un cas particular de prisma",
+      "variants": [
+        {
+          "key": "superficies:1",
+          "demand": "Multiplicar llargada, amplada i altura d'ortoedre",
+          "proposed_level": "N1_candidate",
+          "example": "4×3×2 cm -> 24 cm³",
+          "rationale": "Tres dimensions explícites; aplicar volum d'ortoedre"
+        },
+        {
+          "key": "superficies:3",
+          "demand": "Multiplicar àrea de base ja calculada per altura",
+          "proposed_level": "N1_candidate",
+          "example": "A_base=12 cm², h=4 cm -> 48 cm³",
+          "rationale": "Dos factors, la base ja és una àrea"
+        },
+        {
+          "key": "superficies:5",
+          "demand": "Calcular cub d'aresta",
+          "proposed_level": "N1_candidate",
+          "example": "Aresta 3 cm -> 27 cm³",
+          "rationale": "Cas especial amb tres dimensions iguals"
+        }
+      ],
+      "risks": [
+        "Els distractors han de comprovar superfície versus volum i unitat cúbica, no només errors numèrics evidents"
+      ],
+      "recommendation": "Probable nucli comú de volum de prisma; conservar variants de representació, no inflar recompte de famílies."
+    },
+    {
+      "cluster": "ME2-C052",
+      "keys": [
+        "superficies:10",
+        "superficies:11"
+      ],
+      "finding": "one_inverse_volume_family_with_different_unknown",
+      "common": "V = A_base·h, amb divisió per recuperar factor desconegut",
+      "variants": [
+        {
+          "key": "superficies:10",
+          "demand": "Dividir volum per àrea de base per recuperar altura",
+          "proposed_level": "N2_candidate",
+          "example": "V=60 cm³, A_base=12 cm² -> h=5 cm",
+          "rationale": "Aplicar relació inversa i interpretar unitat lineal"
+        },
+        {
+          "key": "superficies:11",
+          "demand": "Dividir volum per altura per recuperar àrea de base",
+          "proposed_level": "N2_candidate",
+          "example": "V=60 cm³, h=5 cm -> A_base=12 cm²",
+          "rationale": "Mateixa divisió, interpretar unitat quadrada"
+        }
+      ],
+      "risks": [
+        "Canviar incògnita no garanteix una família nova si la mateixa relació algebraica es resol amb una divisió"
+      ],
+      "recommendation": "Retenir una família candidata amb dues variants i reclassificació pendent."
+    }
+  ],
+  "counts": {
+    "clusters": 5,
+    "type_members": 12,
+    "official_approvals": 0
+  },
+  "policy": "Els nivells N1 N2 N3 són hipòtesis per variant. No forçar 5-5-3 ni crear noves famílies per diferències superficials.",
+  "gates": {
+    "generator_changes": false,
+    "official_level_changes": false,
+    "official_family_changes": false,
+    "pr_merged": false,
+    "deployed": false
+  }
+}

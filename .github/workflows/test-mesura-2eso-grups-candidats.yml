@@ -1,0 +1,15 @@
+name: Auditoria nuclis candidats Unitats Escales 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  integritat:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Revisar traçabilitat 36 tipus i nuclis candidats
+        run: node scripts/test-mesura-2eso-grups-candidats.cjs

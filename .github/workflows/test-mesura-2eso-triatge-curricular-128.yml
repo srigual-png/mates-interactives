@@ -1,0 +1,15 @@
+name: Auditoria triatge curricular 128 Mesura 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar els 128 registres i les 24 prioritats
+        run: node scripts/test-mesura-2eso-triatge-curricular-128.cjs

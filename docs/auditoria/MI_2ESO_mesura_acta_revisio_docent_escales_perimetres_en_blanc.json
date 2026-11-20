@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "status": "blank_teacher_review_minute_not_signed",
+  "document_type": "pedagogical_review_minute_template",
+  "scope": "2eso/sentit-mesura/escales-perimetres",
+  "source_files": [
+    "MI_2ESO_mesura_fitxes_avaluacio_8_tasques.json",
+    "MI_2ESO_mesura_matriu_decisio_docent_3_candidates.json",
+    "MI_2ESO_mesura_protocol_docent_escales_perimetres.json"
+  ],
+  "meeting": {
+    "date": null,
+    "reviewer_code": null,
+    "meeting_reference": null,
+    "notes": null,
+    "review_completed": false
+  },
+  "principles": [
+    "La identitat de família es decideix abans i independentment de la dificultat.",
+    "Una puntuació numèrica o un nombre de passos no aprova ni una família ni N3.",
+    "Les tasques E3 i P2 són controls; no exigir-hi decisió diferencial.",
+    "Si no hi ha observacions docents, cal mantenir estat 'evidència insuficient', sense registrar un resultat fictici.",
+    "L'aprovació pedagògica no autoritza implementació, fusió de PR o desplegament.",
+    "No registrar identitats d'alumnat ni dades personals al repositori."
+  ],
+  "decision_vocabulary": {
+    "family": [
+      "independent_family",
+      "variant_of_existing",
+      "compound_practice",
+      "reject",
+      "insufficient_evidence"
+    ],
+    "level": [
+      1,
+      2,
+      3
+    ],
+    "criteria_status": [
+      "verified",
+      "partially_verified",
+      "not_verified",
+      "not_assessed"
+    ],
+    "teacher_signature_required": true,
+    "implementation_requires_separate_permission": true
+  },
+  "cases": [
+    {
+      "proposal_id": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "review_task_ids": [
+        "E1",
+        "E2",
+        "E3",
+        "E4"
+      ],
+      "comparison_baseline": "escales:6",
+      "critical_evidence": "E2 (igualtat d'àrea sense congruència) i E4 (transferència a escales noves)",
+      "candidate_description": "Validar la congruència de dos plànols rectangulars després de reconstruir els dos parells de dimensions reals.",
+      "evidence_review": {
+        "teacher_observations_available": null,
+        "control_vs_candidate_comparison": null,
+        "transfer_observation": null,
+        "misconceptions_reviewed": null,
+        "source_overlap_reviewed": null,
+        "remaining_doubts": null
+      },
+      "family_decision": {
+        "criteria": {
+          "C1": {
+            "status": null,
+            "evidence_reference": null,
+            "teacher_justification": null
+          },
+          "C2": {
+            "status": null,
+            "evidence_reference": null,
+            "teacher_justification": null
+          },
+          "C3": {
+            "status": null,
+            "evidence_reference": null,
+            "teacher_justification": null
+          },
+          "C4": {
+            "status": null,
+            "evidence_reference": null,
+            "teacher_justification": null
+          },
+          "C5": {
+            "status": null,
+            "evidence_reference": null,
+            "teacher_justification": null
+          }
+        },
+        "outcome": null,
+        "family_id_if_approved": null,
+        "justification": null,
+        "reviewer_signoff": null,
+        "approved": false
+      },
+      "difficulty_decision": {
+        "assessed_separately_from_family": true,
+        "provisional_pilot_hypothesis": 2,
+        "recommended_level": null,
+        "cognitive_demand_evidence": null,
+        "curricular_review": null,
+        "justification": null,
+        "reviewer_signoff": null,
+        "approved": false
+      },
+      "implementation_gate": {
+        "requested": false,
+        "explicit_authorization": null,
+        "pr_merge_authorized": false,
+        "web_publish_authorized": false
+      }
+    },
+    {
+      "proposal_id": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "review_task_ids": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ],
+      "comparison_baseline": "perimetres:8",
+      "critical_evidence": "P3 (vora compartida entre rectangles) i P1/P4 (unió amb semicercle)",
+      "candidate_description": "Identificar les vores exteriors i descartar les fronteres internes d'una figura composta.",
+      "evidence_review": {
+        "teacher_observations_available": null,
+        "control_vs_candidate_comparison": null,
+        "transfer_observation": null,
+        "misconceptions_reviewed": null,
+        "source_overlap_reviewed": null,
+        "remaining_doubts": null
+      },
+      "family_decision": {
+        "criteria": {
+          "C1": {
+            "status": null,
+            "evidence_reference": null,
+            "teacher_justification": null
+          },
+          "C2": {
+            "status": null,
+            "evidence_reference": null,
+            "teacher_justification": null
+          },
+          "C3": {
+            "status": null,
+            "evidence_reference": null,
+            "teacher_justification": null
+          },
+          "C4": {
+            "status": null,
+            "evidence_reference": null,
+            "teacher_justification": null
+          },
+          "C5": {
+            "status": null,
+            "evidence_reference": null,
+            "teacher_justification": null
+          }
+        },
+        "outcome": null,
+        "family_id_if_approved": null,
+        "justification": null,
+        "reviewer_signoff": null,
+        "approved": false
+      },
+      "difficulty_decision": {
+        "assessed_separately_from_family": true,
+        "provisional_pilot_hypothesis": 2,
+        "recommended_level": null,
+        "cognitive_demand_evidence": null,
+        "curricular_review": null,
+        "justification": null,
+        "reviewer_signoff": null,
+        "approved": false
+      },
+      "implementation_gate": {
+        "requested": false,
+        "explicit_authorization": null,
+        "pr_merge_authorized": false,
+        "web_publish_authorized": false
+      }
+    }
+  ],
+  "summary": {
+    "cases": 2,
+    "criteria_per_case": 5,
+    "recorded_teacher_decisions": 0,
+    "approved_families": 0,
+    "approved_levels": 0,
+    "approved_N3": 0,
+    "implementations_authorized": 0
+  },
+  "completion_checklist": [
+    "Contrastar exercicis de control i candidats amb justificació docent.",
+    "Documentar per separat cadascun dels C1–C5.",
+    "Emetre decisió explícita de família o registrar evidència insuficient.",
+    "Examinar N1/N2/N3 sense derivar-lo de l'aprovació de família.",
+    "Signar l'acta després de la revisió real, sense dades identificables d'alumnat.",
+    "Demanar autorització separada abans de qualsevol implementació o publicació."
+  ]
+}

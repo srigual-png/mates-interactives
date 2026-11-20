@@ -1,0 +1,41 @@
+#!/usr/bin/env node
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const dir=path.join(__dirname,'..','docs','auditoria'),read=p=>JSON.parse(fs.readFileSync(path.join(dir,p),'utf8'));
+const original=read('MI_2ESO_mesura_cataleg_global_provisional.json');
+const scenario=read('MI_2ESO_mesura_escenari_particio_72_agrupacions.json');
+const cross=read('MI_2ESO_mesura_creuament_131_fitxes_72_agrupacions.json');
+const byId=new Map(original.clusters.map(c=>[c.id,c]));
+assert.equal(original.clusters.length,72);
+assert.equal(original.counts.assignment_records,129);
+assert.equal(scenario.splits.length,8);
+const parts=new Map(original.clusters.map(c=>[c.id,[...c.members]]));
+let added=0;
+for(const entry of scenario.splits){
+ const initial=byId.get(entry.id);assert(initial,'Unknown source cluster '+entry.id);
+ assert(parts.has(entry.id),'Duplicate split of '+entry.id);
+ const pieces=entry.parts.flat();
+ assert.equal(new Set(pieces).size,pieces.length,'Duplicate member in '+entry.id);
+ assert.deepEqual([...pieces].sort(),[...initial.members].sort(),'Split loses or adds members '+entry.id);
+ parts.delete(entry.id);
+ entry.parts.forEach((p,i)=>parts.set(entry.id+'-part'+(i+1),p));
+ added+=entry.parts.length-1;
+}
+const join=scenario.cross_group_join;
+assert.equal(join.sources.length,2);
+assert(join.sources.every(id=>parts.has(id)));
+const knownLink=cross.reviewed_links.find(x=>x.id==='DEDUPE-02');
+assert(knownLink&&knownLink.relation==='same_core_with_complexity_variants');
+assert.deepEqual([...join.sources].sort(),[...knownLink.member_clusters].sort());
+const joined=join.sources.flatMap(id=>parts.get(id));
+join.sources.forEach(id=>parts.delete(id));parts.set('joined-'+join.sources.join('-'),joined);
+const all=Array.from(parts.values()).flat(),originalMembers=original.clusters.flatMap(c=>c.members);
+assert.equal(new Set(all).size,all.length,'Unexpected duplicate type/variant');
+assert.deepEqual(all.sort(),originalMembers.sort(),'Changed member inventory');
+assert.equal(parts.size,72+added-1);
+assert.equal(parts.size,81);
+assert.equal(all.length,129);
+assert.equal(scenario.counts.scenario_groups,81);
+assert.equal(scenario.counts.official_approved_families,0);
+for(const allowed of Object.values(scenario.permissions))assert.equal(allowed,false);
+console.log(JSON.stringify({initial_groups:72,scenario_groups:parts.size,assignments:all.length,complete_nonoverlapping_partition:true,teacher_approved_families:0,code_changes:0},null,2));
