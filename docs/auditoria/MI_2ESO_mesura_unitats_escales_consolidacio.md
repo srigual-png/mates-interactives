@@ -48,7 +48,7 @@ Són exemples matemàtics construïts, no mostres de navegador.
 
 
 
-**Actualització docent (21/11/2026):** el mapa vigent assigna `unitats:6` N1 per defecte i N2 a la variant `encadenada`, i `unitats:18` N2. El contrast posterior agrupa U06/U07/U08 en dues famílies candidates: U-P06 directa i U-P07 composta; proposa `unitats:16` N2 per la cadena de conversió inclosa a cada igualtat, tot i que el mapa vigent encara el manté a N1. Els tests de variants i d'Unitats de la integració al commit `194b99c` van passar ([run #44944032974](https://github.com/srigual-png/mates-interactives/runs/44944032974)); la verificació de modes és simulada. La discrepància de nivell de 16 continua sense aplicar i la validació de famílies continua pendent.
+**Actualització docent (21/11/2026):** el mapa vigent assigna `unitats:6` N1 per defecte i N2 a la variant `encadenada`, i `unitats:18` N2. El contrast posterior agrupa U06/U07/U08 en dues famílies candidates: U-P06 directa i U-P07 composta; proposa `unitats:16` N2 per la cadena de conversió inclosa a cada igualtat, tot i que el mapa vigent encara el manté a N1. Els tests de variants i d'Unitats de la integració al commit `194b99c` van passar ([run #44944032974](https://github.com/srigual-png/mates-interactives/actions/runs/44944032974)); la verificació de modes és simulada. La discrepància de nivell de 16 continua sense aplicar i la validació de famílies continua pendent.
 
 ## Què està verificat i què queda pendent
 
