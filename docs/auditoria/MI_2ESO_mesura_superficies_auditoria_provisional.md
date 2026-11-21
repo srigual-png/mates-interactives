@@ -75,4 +75,4 @@ La lectura comparada de les 20 decisions manté provisionalment: volum rectangul
 | superficies:18 | N1 | N1 | Reconciliat: diagnòstic tancat, amb error i distractors explícits. |
 | superficies:20 | N2 | N2 | Reconciliat: cal associar les tres parelles de cares amb les dimensions de la capsa. |
 
-Aquests candidats no són nivells aprovats i no justifiquen canvis automàtics al mapa. La bateria de modes cobreix ara 104 casos totals: els 20 tipus de Superfícies i Volums, tots els de Unitats, Escales i Perímetres/Àrees, les dues branques de unitats:6 i superficies:17, i mostres dels altres temes. Resultat local success; la integració ha de confirmar el commit.
+Aquests candidats no són nivells aprovats i no justifiquen canvis automàtics al mapa. La bateria de modes cobreix ara 104 casos totals: els 20 tipus de Superfícies i Volums, tots els de Unitats, Escales i Perímetres/Àrees, les dues branques de unitats:6 i superficies:17, i mostres dels altres temes. Resultat local success; la integració de Mesura 2n ha confirmat aquesta ampliació al cap 1b4dc11bd6db2179d858d83beee568c7716b4bd2 (run #44841917400), també amb success.
