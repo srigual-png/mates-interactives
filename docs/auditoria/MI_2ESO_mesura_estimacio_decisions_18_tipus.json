@@ -146,12 +146,12 @@
       "key": "estimacio:11",
       "type": 11,
       "old_group": "EP08",
-      "decision": "review_distinct",
+      "decision": "contextual_variant",
       "procedure": "Valorar unitat i xifres creïbles segons context",
       "shared_with": [
-        "estimacio:14"
+        "estimacio:4"
       ],
-      "rationale": "N1 provisional; 1,5 L i 1,51 L poden ser totes dues plausibles sense instrument",
+      "rationale": "Tria l’instrument menys precís que compleix una tolerància explícita: comparteix el domini de selecció d’instrument amb estimacio:4, però hi afegeix una restricció i una decisió d’optimització. El mapa actual la conserva a N1; l’N2 és només una hipòtesi per contrastar.",
       "status": "provisional"
     },
     {
@@ -182,12 +182,10 @@
       "key": "estimacio:14",
       "type": 14,
       "old_group": "EP08",
-      "decision": "contextual_variant",
+      "decision": "review_distinct",
       "procedure": "Comprovar coherència de valor esperat i observat amb unitat",
-      "shared_with": [
-        "estimacio:11"
-      ],
-      "rationale": "N1; PR #50 explicita unitats, no modifica necessàriament unicitat de criteri",
+      "shared_with": [],
+      "rationale": "Valora si una lectura és plausible o indica una incoherència d’escala/unitat. No comparteix l’estratègia d’estimacio:11 (selecció amb tolerància); el criteri de «valor proper/error petit» encara és qualitatiu. El mapa actual la conserva a N1.",
       "status": "provisional"
     },
     {
@@ -197,7 +195,7 @@
       "decision": "review_distinct",
       "procedure": "Mitjana aritmètica de mesures repetides",
       "shared_with": [],
-      "rationale": "N1; format a centèsimes amb lectures a dècimes requereix revisió de precisió",
+      "rationale": "Calcula la mitjana aritmètica de lectures repetides; és diferent d’arrodonir una sola lectura (estimacio:5/16). El generador expressa centèsimes tot i que les lectures són a dècimes; cal resoldre aquest criteri de precisió.",
       "status": "provisional"
     },
     {
