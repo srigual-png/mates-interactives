@@ -30,7 +30,7 @@ I **una unió candidata**, encara no aprovada:
 
 **11 grups** contenen orientacions de dificultat diferents entre els membres (o variants desdoblades): són prioritats de revisió docent, no errors. Per exemple, `superficies:17` conserva variants N1 i N2, mentre `C058-1` conté l'àrea directa del cub i la superfície exterior més elaborada d'un ortoedre.
 
-La distribució inicial dels **131 registres de dificultat** era **27 N1 candidats, 80 N2 candidats i 24 N1/N2 pendents**. Després de validar les dues variants de `pitagores:15` el 20/11/2026, el recompte de treball és **27 N1, 82 N2 i 22 N1/N2 pendents**. Són nivells interns; cap nivell oficial ni família s'ha aprovat. La quota 5–5–3 continua orientativa, mai obligatòria.
+La distribució inicial dels **131 registres de dificultat** era **27 N1 candidats, 80 N2 candidats i 24 N1/N2 pendents**. Després dels quatre acords docents del 20/11/2026, era **27 N1, 82 N2 i 22 N1/N2 pendents**. La reconciliació provisional de sis casos el 21/11/2026 (perimetres:18, superficies:7/8/14/18/20) la deixa en **31 N1, 83 N2 i 17 N1/N2 pendents**. Són propostes internes; cap nivell oficial ni família s'ha aprovat, i superfícies:8/14 continuen en conflicte amb el mapa efectiu. La quota 5–5–3 continua orientativa, mai obligatòria.
 
 ## Prioritats abans d'aprovar famílies
 
