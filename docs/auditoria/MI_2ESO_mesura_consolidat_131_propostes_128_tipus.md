@@ -1,6 +1,6 @@
 # Consolidació de propostes de dificultat — 2n ESO · Sentit de la mesura
 
-**Data:** 17/11/2026. **Estat:** revisió pedagògica documental completada per als 128 tipus de generador; **nivells i famílies encara pendents d'aprovació i aplicació**.
+**Data:** 17/11/2026. **Estat:** revisió pedagògica documental completada per als 128 tipus. Les famílies i les propostes generals continuen provisionals; els nivells interns de `superficies:8` i `superficies:14` s’han validat i aplicat al mapa.
 
 ## Cobertura dels sis lots
 
@@ -41,9 +41,9 @@ El recompte **no s'ha d'utilitzar com a distribució definitiva** de la pràctic
 4. Contrastar les famílies candidates segons **decisió matemàtica real**, no segons context, figura o nombre de passos.
 5. Preparar una classificació N1/N2/N3 per **família o variant validada**, sense forçar cap quota ni continguts fora de curs.
 
-**Cap nivell oficial canviat, cap generador modificat en aquesta fase, PR #49 oberta i no publicada.**
+**Cap nivell oficial ni família canviats; el mapa intern sí que s’ha actualitzat per `superficies:8/14`. Cap generador no s’ha modificat en aquesta fase. PR #49 oberta en Draft, sense publicar.**
 
 
 ## Reconciliació de propostes · 21/11/2026
 
-S'han revisat sis registres abans oberts o discutits: `perimetres:18`→N1, `superficies:7`→N1, `superficies:8`→N2, `superficies:14`→N1, `superficies:18`→N1 i `superficies:20`→N2. La distribució candidata passa a 31 N1, 83 N2 i 17 N1/N2 (131 registres), sense aprovació formal ni canvi de `REVIEWED_LEVELS`. Continuen dues discrepàncies entre proposta i mapa efectiu: `superficies:8` proposat N2/mapa N1 i `superficies:14` proposat N1/mapa N2; cal validació docent abans de qualsevol canvi. `problemes:4` té una proposta pròpia N1/N2 pendent, de manera que la comparació amb `superficies:14` és procedimental, no un nivell transversal ja acordat.
+S'han revisat sis registres abans oberts o discutits: `perimetres:18`→N1, `superficies:7`→N1, `superficies:8`→N2, `superficies:14`→N1, `superficies:18`→N1 i `superficies:20`→N2. La distribució candidata passa a 31 N1, 83 N2 i 17 N1/N2 (131 registres), sense canviar els recomptes candidats. Les discrepàncies de `superficies:8` (proposta N2) i `superficies:14` (proposta N1) s’han resolt i aplicat a `REVIEWED_LEVELS` el 21/11/2026; la resta de les sis propostes continua pendent de revisió. Cap nivell oficial ni família no s’ha aprovat. `problemes:4` té una proposta pròpia N1/N2 pendent; la semblança procedimental amb `superficies:14` no n’implica la mateixa classificació.

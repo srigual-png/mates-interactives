@@ -41,7 +41,7 @@ Que es comprovi la correcció d'algunes instàncies **no implica** que s'hagi de
 1. **`problemes:13`:** capsa sense tapa. El càlcul és base + quatre laterals, diferent de sumar sis cares d'una capsa tancada. La decisió sobre família pròpia depèn de si l'alumne ha de reconstruir la xarxa de cares.
 2. **`problemes:16`:** compara errors relatius d'A i B respecte d'un **mateix** valor de referència. A diferència d'`estimacio:9`, on hi ha dues referències, es pot decidir comparant errors absoluts sense dos quocients. No elevar N1→N2 només perquè els títols siguin iguals.
 
-La variant `problemes:5` parteix del **diàmetre** i demana identificar la cobertura lateral d'una etiqueta, mentre `superficies:8` dona el **radi**: examinar si és una transferència N2 o una aplicació directa N1 abans de canviar el mapa.
+La variant `problemes:5` parteix del **diàmetre** i demana identificar la cobertura lateral d'una etiqueta, mentre `superficies:8` dona el **radi**. La decisió interna validada deixa tots dos a **N2**: `superficies:8` requereix modelitzar el lateral com un rectangle desplegat, i `problemes:5` afegeix el context de cobertura d’una etiqueta.
 
 ## Proves i decisions pendents
 
@@ -49,4 +49,4 @@ La variant `problemes:5` parteix del **diàmetre** i demana identificar la cober
 - **Pendent:** almenys dos casos **generats realment** per cada procediment consolidat, amb solució pas a pas; oracles específics dels compostos, revisió del docent, currículum, modes guiat/autònom, examen i fitxes.
 - **Prohibit concloure ara:** que hi ha exactament 10 famílies compartides, 4 noves, que s'assoleix la quota de 15, que apareix algun N3, o que aquestes classificacions ja són definitives.
 
-No es canvien `2eso/sentit-mesura.html`, `assets/js/dificultat-mi.js` ni `docs/auditoria/families-validades.json`. Les reparacions funcionals són a la PR #53 i la consolidació provisional, aquí a la PR #49.
+Aquesta consolidació no modifica `2eso/sentit-mesura.html` ni `docs/auditoria/families-validades.json`. En una actualització posterior del 21/11/2026, s’ha canviat només el mapa intern a `assets/js/dificultat-mi.js` per aplicar `superficies:8` N2 i `superficies:14` N1. Les reparacions funcionals són a la PR #53; les agrupacions de la PR #49 continuen provisionals.

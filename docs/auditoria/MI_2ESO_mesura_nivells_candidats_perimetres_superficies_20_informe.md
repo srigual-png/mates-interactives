@@ -39,10 +39,10 @@ Aquesta prova verifica traçabilitat documental i correspondència amb el codi; 
 
 ## Reconciliació de sis casos · 21/11/2026
 
-Després de comparar enunciats, guies, respostes i criteri N1/N2, la proposta interna queda en **5 N1 i 15 N2**, sense registres N1/N2 indecisos. Això no és una aprovació docent ni altera el mapa efectiu.
+Després de comparar enunciats, guies, respostes i criteri N1/N2, la proposta interna queda en **5 N1 i 15 N2**, sense registres N1/N2 indecisos. D’aquesta proposta, `superficies:8` N2 i `superficies:14` N1 ja s’han aplicat al mapa intern després de validació docent; això no aprova les famílies candidates ni canvia nivells oficials.
 
 - **N1 proposat:** `perimetres:18` (diagnòstic tancat i explícit); `superficies:7` (fórmula directa de volum cilíndric amb dades donades); `superficies:14` (producte de dimensions en dm i equivalència directa 1 dm³=1 L); `superficies:18` (reconeixement tancat de fórmula de superfície en lloc de volum).
 - **N2 proposat:** `superficies:20` (construir les tres parelles de cares a partir de les dimensions i relacionar-les amb el desplegament). L'esforç espacial i les tres correspondències el diferencien de la simple suma de superfícies.
-- **Discrepàncies que requereixen decisió docent abans de canviar el mapa:** `superficies:8` queda proposat N2 per haver de desplegar conceptualment la superfície lateral com a rectangle i identificar-ne la base circular, però el mapa actual és N1; `superficies:14` queda proposat N1 perquè el pas dm³=L és directe i s'alinea amb `problemes:4`, però el mapa actual és N2. Els altres quatre casos proposats coincideixen amb el mapa efectiu.
+- **Resolució de les discrepàncies (21/11/2026):** `superficies:8` queda a N2 per la modelització espacial del lateral desplegat; `superficies:14` queda a N1 pel producte directe en dm i l’equivalència dm³=L. Les dues assignacions ja s’han aplicat al mapa intern. Els altres quatre casos proposats coincideixen amb el mapa o continuen subjectes a revisió segons el seu informe.
 
-Totes les files mantenen `approval: pending`, `official_levels_changed: 0` i `official_families_approved: 0`. La reclassificació és una proposta documentada; no s'ha aplicat a `REVIEWED_LEVELS`.
+`approval: pending` i `official_families_approved: 0` mantenen les agrupacions de famílies pendents. `official_levels_changed: 0` significa que no s’han modificat nivells oficials; en canvi, `superficies:8/14` sí que s’han aplicat al mapa intern `REVIEWED_LEVELS`.

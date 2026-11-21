@@ -1,6 +1,6 @@
 # Revisió transversal · 2n ESO · Sentit de la mesura
 
-**FASE A — PROPOSTA PROVISIONAL.** Inventari de 7 temes i 128 tipus ja completat. Aquest document contrasta els set informes; **no declara famílies validades**, no modifica nivells ni generadors, i no incorpora cap família a `families-validades.json`.
+**FASE A — PROPOSTA PROVISIONAL.** Inventari de 7 temes i 128 tipus ja completat. Aquest document contrasta els set informes i **no declara famílies validades** ni incorpora cap família a `families-validades.json`. Una actualització docent del 21/11/2026 ha aplicat al mapa intern les assignacions `superficies:8` N2 i `superficies:14` N1; els generadors no s’han modificat.
 
 ## 1. Regla de consolidació
 
@@ -53,8 +53,8 @@ No declarar-les noves automàticament. Cal demostrar que incorporen **una decisi
 2. **`unitats:18`**: mL→dm³ N1 actual, N2 candidat; validar si l'equivalència s'utilitza directament o s'han d'encadenar unitats.
 3. **`pitagores:15`**: excepció `diagonal` N2 existent, `catet` N1. Conservar i provar totes dues variants.
 4. **`superficies:17`**: excepció `sameBase` N1 existent, altres casos N2. Conservar i provar totes dues.
-5. **`superficies:8` N1 versus `problemes:5` N2:** mateixa superfície lateral de cilindre amb radi/diàmetre donats; decidir si recuperar radi del diàmetre justifica N2 o només variant N1.
-6. **`superficies:7` N1 versus `problemes:4` N2:** volum directe de cilindre amb r i h; la conversió dm³=L és immediata. **Discrepància clara a revisar**, no elevar sense raonament.
+5. **`superficies:8` i `problemes:5` — tots dos N2 al mapa intern:** comparteixen el nucli d’àrea lateral del cilindre; el tipus 8 modelitza el rectangle desplegat abans del càlcul, i el tipus 5 contextualitza la cobertura d’una etiqueta. La diferència de representació no deixa una discrepància de mapa pendent.
+6. **`superficies:7` N1 versus `problemes:4` N2:** volum directe de cilindre amb r i h; la conversió dm³=L és immediata. **La diferència queda pendent de contrast docent**; no elevar sense raonament.
 7. **`superficies:12` N2 versus `problemes:20` N2:** coherència ja existent en fórmula inversa de cilindre; comparar resposta i unitats.
 8. **`estimacio:9` N2 versus `problemes:16` N1:** en aquest últim la referència és comuna; pot justificar N1 via comparar errors absoluts. Documentar simplificació, no declarar-ho un error de nivell sense més.
 9. **`perimetres:12,13,14` N1:** inversions de fórmules; cal examinar si la manipulació simbòlica exigida és immediata en 2n ESO.
@@ -91,4 +91,4 @@ No declarar-les noves automàticament. Cal demostrar que incorporen **una decisi
 - **No fet:** deduplicació matemàtica exhaustiva amb una família final única assignada a cada tipus; mostres reals de cada generador, proves automàtiques específiques, contrast normatiu curricular i aprovació humana.
 - **No executar de moment:** actualització del registre oficial `docs/auditoria/families-validades.json` o declaració de conformitat pedagògica. Els workflows existents de numeració o integritat documental no certifiquen les famílies de mesura.
 
-**Decisió editorial:** la PR #49 pot continuar documentant aquests resultats en Draft; les correccions de codi i els nivells s'han de preparar i validar en PRs separades.
+**Actualització docent (21/11/2026):** `superficies:8` N2 i `superficies:14` N1 s’han aplicat a `REVIEWED_LEVELS` dins la PR #49. La resta de propostes de nivell i totes les agrupacions continuen pendents; no s’ha aprovat cap família. La PR es manté en Draft.

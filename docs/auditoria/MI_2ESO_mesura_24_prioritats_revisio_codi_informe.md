@@ -19,7 +19,7 @@ S'han revisat les branques de **24 dels 128 generadors**, concretament els casos
 
 - **`unitats:6/18`**, **`pitagores:15`** i **`superficies:17`**: variants directes, encadenades o de geometria diferent que no s'han de classificar automàticament al mateix nivell.
 - **`escales:11`**: la proporció ja s'ofereix plantejada; N1 pot ser justificable.
-- **`superficies:14/20`**: l'equivalència directa dm³=L i el reconeixement de parelles de cares podrien ser N1.
+- **`superficies:14/20`**: `superficies:14` queda validat internament a N1 per l’equivalència directa dm³=L; `superficies:20` continua com a candidata N1/N2 perquè requereix reconèixer parelles de cares.
 - **`problemes:16`**: amb una referència comuna, comparar errors relatius equival a comparar distàncies absolutes a la referència.
 - **`pitagores:5`** i **`perimetres:13`**: valorar si la representació i el despejament requereixen autonomia real.
 
@@ -44,3 +44,6 @@ Aquests canvis **no** s'han implementat; tampoc no s'ha certificat cap família 
 La verificació automàtica `scripts/test-mesura-2eso-prioritats-24-codi.cjs` comprova la traçabilitat de les 24 branques i confirma que les dues alternatives raonables de `estimacio:11` són presents en el codi.
 
 **No s'ha fusionat la PR #49 ni publicat la web.**
+
+
+**Actualització (21/11/2026):** aquest informe audita el codi i conserva les propostes pedagògiques; les assignacions de nivell intern de `superficies:8` N2 i `superficies:14` N1 s’han validat i aplicat després d’aquesta passada. No s’han alterat els generadors ni aprovat famílies.

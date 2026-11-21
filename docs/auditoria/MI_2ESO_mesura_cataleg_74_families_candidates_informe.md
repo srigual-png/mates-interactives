@@ -30,7 +30,7 @@ I **una unió candidata**, encara no aprovada:
 
 **11 grups** contenen orientacions de dificultat diferents entre els membres (o variants desdoblades): són prioritats de revisió docent, no errors. Per exemple, `superficies:17` conserva variants N1 i N2, mentre `C058-1` conté l'àrea directa del cub i la superfície exterior més elaborada d'un ortoedre.
 
-La distribució inicial dels **131 registres de dificultat** era **27 N1 candidats, 80 N2 candidats i 24 N1/N2 pendents**. Després dels quatre acords docents del 20/11/2026, era **27 N1, 82 N2 i 22 N1/N2 pendents**. La reconciliació provisional de sis casos el 21/11/2026 (perimetres:18, superficies:7/8/14/18/20) la deixa en **31 N1, 83 N2 i 17 N1/N2 pendents**. Són propostes internes; cap nivell oficial ni família s'ha aprovat, i superfícies:8/14 continuen en conflicte amb el mapa efectiu. La quota 5–5–3 continua orientativa, mai obligatòria.
+La distribució inicial dels **131 registres de dificultat** era **27 N1 candidats, 80 N2 candidats i 24 N1/N2 pendents**. Després dels quatre acords docents del 20/11/2026, era **27 N1, 82 N2 i 22 N1/N2 pendents**. La reconciliació provisional de sis casos el 21/11/2026 (perimetres:18, superficies:7/8/14/18/20) la deixa en **31 N1, 83 N2 i 17 N1/N2 pendents**. Són propostes internes; cap nivell oficial ni família s'ha aprovat. Les dues discrepàncies amb el mapa de dificultat intern, `superficies:8` N2 i `superficies:14` N1, es van resoldre i aplicar el 21/11/2026. La quota 5–5–3 continua orientativa, mai obligatòria.
 
 ## Prioritats abans d'aprovar famílies
 
@@ -46,4 +46,4 @@ La distribució inicial dels **131 registres de dificultat** era **27 N1 candida
 
 Les comprovacions de **6.200 mostres matemàtiques/contextuals** de fases anteriors continuen essent un aval del comportament mostrejat dels generadors, **no** una certificació docent del nombre de famílies o de la dificultat.
 
-**Estat posterior (20/11/2026):** cap generador, família aprovada o nivell oficial modificat. Les quatre assignacions de nivell intern docent validades ja consten al mapa i els recomptes s'han actualitzat. `estimacio:12` continua pendent d'autorització específica. La PR #49 segueix oberta i en Draft, sense fusió ni publicació.
+**Estat posterior (20/11/2026):** cap generador, família aprovada o nivell oficial modificat. Les sis decisions internes de nivell docent validades ja consten al mapa; les agrupacions i l’aprovació de famílies continuen pendents. `estimacio:12` continua pendent d'autorització específica. La PR #49 segueix oberta i en Draft, sense fusió ni publicació.
