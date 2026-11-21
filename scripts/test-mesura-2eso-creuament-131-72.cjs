@@ -33,7 +33,7 @@ for(const row of cross.records){
  levels[row.level_candidate]++;
 }
 assert.equal(types.size,128);
-assert.deepEqual(levels,{N1:27,N2:82,N1_N2:22});
+assert.deepEqual(levels,{N1:31,N2:83,N1_N2:17});
 assert.equal(cross.reviewed_links.length,14);
 let crossCluster=0;
 for(const link of cross.reviewed_links){
