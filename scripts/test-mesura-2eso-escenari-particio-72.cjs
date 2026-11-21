@@ -8,7 +8,7 @@ const cross=read('MI_2ESO_mesura_creuament_131_fitxes_72_agrupacions.json');
 const byId=new Map(original.clusters.map(c=>[c.id,c]));
 assert.equal(original.clusters.length,72);
 assert.equal(original.counts.assignment_records,129);
-assert.equal(scenario.splits.length,8);
+assert.equal(scenario.splits.length,7);
 const parts=new Map(original.clusters.map(c=>[c.id,[...c.members]]));
 let added=0;
 for(const entry of scenario.splits){
@@ -33,9 +33,9 @@ const all=Array.from(parts.values()).flat(),originalMembers=original.clusters.fl
 assert.equal(new Set(all).size,all.length,'Unexpected duplicate type/variant');
 assert.deepEqual(all.sort(),originalMembers.sort(),'Changed member inventory');
 assert.equal(parts.size,72+added-1);
-assert.equal(parts.size,81);
+assert.equal(parts.size,80);
 assert.equal(all.length,129);
-assert.equal(scenario.counts.scenario_groups,81);
+assert.equal(scenario.counts.scenario_groups,80);
 assert.equal(scenario.counts.official_approved_families,0);
 for(const allowed of Object.values(scenario.permissions))assert.equal(allowed,false);
 console.log(JSON.stringify({initial_groups:72,scenario_groups:parts.size,assignments:all.length,complete_nonoverlapping_partition:true,teacher_approved_families:0,code_changes:0},null,2));

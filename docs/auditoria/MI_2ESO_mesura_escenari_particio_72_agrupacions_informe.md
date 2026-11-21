@@ -8,9 +8,9 @@ La prova de creuament de **131 fitxes de dificultat** amb **72 agrupacions provi
 
 ## Exemple explícit de reorganització, per revisar
 
-Per comprovar la integritat del catàleg es proposa un **escenari mecànic de treball**, no una decisió pedagògica: partir de 72 agrupacions, examinar la divisió de 8 grups, que afegeix 10 subgrups, i combinar dos grups que comparteixen el model de superfície exterior menys retall. El resultat **serien 81 unitats de treball provisionals** si s'apliquessin exclusivament aquestes operacions.
+Per comprovar la integritat del catàleg es proposa un **escenari mecànic de treball**, no una decisió pedagògica: partir de 72 agrupacions, examinar la divisió de 7 grups, que afegeix 9 subgrups, i combinar dos grups que comparteixen el model de superfície exterior menys retall. El resultat **serien 80 unitats de treball provisionals** si s'apliquessin exclusivament aquestes operacions.
 
-**Important:** 81 **no és el nombre recomanat de famílies matemàtiques**. Aquest escenari ignora altres possibles unions i separacions, i algunes subdivisions són només hipòtesis que poden resultar massa fines.
+**Important:** 80 **no és el nombre recomanat de famílies matemàtiques**. Aquest escenari ignora altres possibles unions i separacions, i algunes subdivisions són només hipòtesis que poden resultar massa fines.
 
 | Agrupació | Separació candidata | Precaució |
 |---|---|---|
@@ -21,7 +21,6 @@ Per comprovar la integritat del catàleg es proposa un **escenari mecànic de tr
 | C019 | Fórmules d'àrea de paral·lelogram, rombe i trapezi | Una fórmula diferent no implica necessàriament família nova |
 | C038 | Hipotenusa general i diagonal de quadrat amb √2 | Cal comprovar si es tracta de cas especial o família |
 | C058 | Superfície exterior i reconeixement de cares d'un desenvolupament pla | Objectius cognitius possiblement diferents |
-| C065 | Conversió directa volum-capacitat i reconeixement d'igualtat | Cal distingir format de resposta i procediment |
 
 La combinació transversal candidata és **C030 amb C042**: àrea exterior menys àrea interior, amb un cas de franja al voltant d'una piscina que exigeix construir dimensions exteriors. La seva complexitat específica s'ha de conservar com a variant si es confirma la unió.
 
@@ -34,4 +33,7 @@ La combinació transversal candidata és **C030 amb C042**: àrea exterior menys
 
 **Fitxa de l'escenari:** `docs/auditoria/MI_2ESO_mesura_escenari_particio_72_agrupacions.json`.
 
-**Sense modificacions de generadors, nivells o famílies oficials. PR #49 no fusionada, web no desplegada.**
+Sense canvis als generadors ni a famílies oficials. El mapa intern de dificultat ara situa `unitats:16` a N2 i el seu grup U-P07; per això s'ha retirat la separació C065 d'aquest escenari. PR #49 no fusionada, web no desplegada.**
+
+
+**Actualització (21/11/2026):** després del contrast U06/U07/U08, `unitats:16` s'agrupa amb U-P07 (conversió composta) i no es divideix com a família pròpia. L'escenari mecànic baixa de 81 a 80 unitats provisionals; continua sent només una prova d'integritat, no un recompte de famílies.
