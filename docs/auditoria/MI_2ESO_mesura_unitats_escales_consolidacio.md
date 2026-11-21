@@ -22,7 +22,7 @@ Aquestes categories no són nivells N1/N2/N3 ni un catàleg final de famílies. 
 - **U03** (3) exigeix factor cúbic i ha de diferenciar-se conceptualment del factor quadràtic, sense inventar una nova família per cada prefix.
 - **U05** (8,14) pregunta quin factor o equivalència és correcte; és una variant de reconeixement i no automàticament un procés de càlcul nou.
 - **U06/U07** (12,16): proposta de fusionar **equivalències volum–capacitat i comprovació d'igualtats**, condicionada a contrast pedagògic. El tipus 6 també conté casos directes del mateix coneixement.
-- **U08** (6,18): el tipus **6 barreja tres equivalències directes N1 i tres conversions encadenades N2 candidates**; la PR [#51](https://github.com/srigual-png/mates-interactives/pull/51), integrada a [#53](https://github.com/srigual-png/mates-interactives/pull/53), separa variants. El tipus **18** passa de mL a dm³ i és candidat N2 a la PR [#52](https://github.com/srigual-png/mates-interactives/pull/52). A la branca documental de la PR #49, el mapa de producció base continua N1 per a tots dos: distingir proposta de canvi publicat.
+- **U08** (6,18): el tipus **6 barreja tres equivalències directes N1 i tres conversions encadenades N2**; `REVIEWED_VARIANTS` aplica el nivell a cada branca. El tipus **18** (mL→dm³) és N2 al mapa vigent. Les branques encadenades de 6 i el tipus 18 comparteixen una família candidata de conversió volum–capacitat composta; la branca directa de 6 és una subvariant N1. No s'ha d'interpretar U08 com una família per cada identificador. La classificació és interna, no oficial, i no valida cap agrupació final.
 - **U09** (9) requereix **convertir i comparar**, no sols canviar una unitat.
 - **U10** (10,15) combina conversió i suma. La magnitud passa de longitud a superfície i el nombre de conversions canvia; no hi ha justificació automàtica de crear dues famílies.
 - **U11** (13,17) és reconeixement o diagnòstic de factor. Al tipus 13 la branca incorrecta pot requerir identificar el factor dimensional, però els distractors ja indiquen l'error. **Mantenir N1 provisional**, sense elevar tot el tipus.
@@ -46,6 +46,10 @@ Són exemples matemàtics construïts, no mostres de navegador.
 2. **Escala i direcció:** mapa 1:25.000, 4 cm → 4×25.000 cm = **1 km** real. En canvi, 2 m reals al plànol 1:100 → 200/100 = **2 cm** dibuixats. Comparar el sentit de l'operació, no només el resultat.
 3. **Factor lineal i àrea:** rectangle de 4×3 cm a 1:100 → 4×3 m reals → **12 m²**. Multiplicar l'àrea del dibuix per 100, sense elevar el factor, seria un error conceptual.
 4. **Compost amb suma de trams:** mapa 1:50.000 i ruta de 2+3 cm → 5×50.000 cm = 250.000 cm = **2,5 km**. La suma prèvia pot ser una variant del procediment de distància real, no nova família automàtica.
+
+
+
+**Actualització docent (21/11/2026):** el mapa vigent ja assigna `unitats:6` N1 per defecte i N2 a la variant `encadenada`, i `unitats:18` N2. Els tests de variants i d'Unitats de la integració al commit `194b99c` van passar ([run #44944032974](https://github.com/srigual-png/mates-interactives/actions/runs/44944032974)); la verificació de modes és simulada, i la fusió de famílies continua pendent.
 
 ## Què està verificat i què queda pendent
 
