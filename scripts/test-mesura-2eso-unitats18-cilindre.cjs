@@ -20,15 +20,16 @@ const levelOf = (topic, type) => {
   return found[0];
 };
 assert.equal(levelOf('unitats', 18), 2);
+assert.equal(levelOf('unitats', 16), 2);
 assert.equal(levelOf('problemes', 4), 1);
 assert.equal(levelOf('superficies', 7), 1);
 assert.equal(levelOf('superficies', 8), 2);
 assert.equal(levelOf('superficies', 14), 1);
 assert.equal(levelOf('problemes', 5), 2);
 
-// Comprovar que els mapes d'Unitats i Problemes romanen intactes i que Superfícies reflecteix els dos canvis resolts.
-const oldUnitatsN1 = [1,2,3,4,5,6,7,8,11,12,13,14,16,17];
-const oldUnitatsN2 = [9,10,15,18];
+// Comprovar que el mapa intern inclou `unitats:16` a N2 i que Problemes roman intacte; Superfícies reflecteix els dos canvis resolts.
+const oldUnitatsN1 = [1,2,3,4,5,6,7,8,11,12,13,14,17];
+const oldUnitatsN2 = [9,10,15,16,18];
 assert.deepEqual(levels.unitats, [oldUnitatsN1,oldUnitatsN2,[]]);
 assert.deepEqual(levels.problemes, [[4,16,17,18,19],[1,2,3,5,6,7,8,9,10,11,12,13,14,15,20],[]]);
 assert.deepEqual(levels.superficies, [[1,3,5,6,7,10,11,14,18],[2,4,8,9,12,13,15,16,17,19,20],[]]);
