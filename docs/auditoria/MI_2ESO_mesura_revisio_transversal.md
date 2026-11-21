@@ -49,8 +49,8 @@ No declarar-les noves automàticament. Cal demostrar que incorporen **una decisi
 
 ## 4. Decisions de nivell que demanen comparació
 
-1. **`unitats:6`**: branca directa N1 i branca encadenada candidata N2; separar variants abans de canviar el nivell.
-2. **`unitats:18`**: mL→dm³ N1 actual, N2 candidat; validar si l'equivalència s'utilitza directament o s'han d'encadenar unitats.
+1. **`unitats:6`**: N1 per a les tres conversions directes; la variant `encadenada` és N2. El classificador ja aplica aquesta distinció per `difficultyVariant`.
+2. **`unitats:18`**: mL→dm³ és N2 al mapa vigent. Comparteix el nucli de conversió composta amb les tres branques encadenades de `unitats:6`; és una variant del mateix procediment candidat, no una família separada per identificador.
 3. **`pitagores:15`**: excepció `diagonal` N2 existent, `catet` N1. Conservar i provar totes dues variants.
 4. **`superficies:17`**: excepció `sameBase` N1 existent, altres casos N2. Conservar i provar totes dues.
 5. **`superficies:8` i `problemes:5` — tots dos N2 al mapa intern:** comparteixen el nucli d’àrea lateral del cilindre; el tipus 8 modelitza el rectangle desplegat abans del càlcul, i el tipus 5 contextualitza la cobertura d’una etiqueta. La diferència de representació no deixa una discrepància de mapa pendent.
@@ -81,7 +81,7 @@ No declarar-les noves automàticament. Cal demostrar que incorporen **una decisi
 ## 6. Pla recomanat de validació
 
 1. **Lot funcional A (primer):** tests amb oracle i reparació en una PR separada dels casos de varietat fixa `problemes:1,10,16`, `estimacio:9,17`; afegir context a `estimacio:14`. Provar que la resposta semàntica varia i que els distractors són únics.
-2. **Lot pedagògic B:** queda pendent decidir les variants i el nivell d'`unitats:6,18`. El contrast `superficies:7`↔`problemes:4` queda reconciliat com a família candidata comuna N1, i `superficies:8`↔`problemes:5` com a nucli comú N2. Si aquests nivells s'han de canviar, cal justificar-los amb les demandes reals i validar la regressió abans d'alterar `REVIEWED_LEVELS`.
+2. **Lot pedagògic B:** queda pendent consolidar els nuclis volum–capacitat U06/U07/U08 i revisar-ne l'agrupació familiar. Els nivells de `unitats:6` (N1 directe; N2 encadenat) i `unitats:18` (N2) ja estan distingits al classificador. Les relacions `superficies:7/8`↔`problemes:4/5` també estan reconciliades. La revisió de modes continua limitada a la cobertura simulada; no alterar `REVIEWED_LEVELS` sense una justificació nova i proves de regressió.
 3. **Lot transversal C:** resoldre les fusions de la matriu amb justificació família per família, dos exemples **reals** de generador per cada família amb proves, i comprovar el criteri de genuïnitat amb `Problemes de mesura`.
 4. **Lot de validació final:** proves de UI, examen, fitxes, coherència de classificació, dades límit i contrast del currículum de 2n ESO. Només després de revisió humana, fusionar eventual PR d'implementació i registrar famílies com a validades.
 
@@ -91,4 +91,4 @@ No declarar-les noves automàticament. Cal demostrar que incorporen **una decisi
 - **No fet:** deduplicació matemàtica exhaustiva amb una família final única assignada a cada tipus; mostres reals de cada generador, proves automàtiques específiques, contrast normatiu curricular i aprovació humana.
 - **No executar de moment:** actualització del registre oficial `docs/auditoria/families-validades.json` o declaració de conformitat pedagògica. Els workflows existents de numeració o integritat documental no certifiquen les famílies de mesura.
 
-**Actualització docent (21/11/2026):** `superficies:8` N2 i `superficies:14` N1 s’han aplicat a `REVIEWED_LEVELS` dins la PR #49. El contrast `superficies:7`↔`problemes:4` confirma el nivell N1 existent en tots dos i una família candidata amb variant contextual de capacitat; no cal tocar el mapa. La resta de propostes de nivell i totes les agrupacions continuen pendents; no s’ha aprovat cap família. La PR es manté en Draft.
+**Actualització docent (21/11/2026):** `superficies:8` N2 i `superficies:14` N1 s’han aplicat a `REVIEWED_LEVELS` dins la PR #49. El contrast `superficies:7`↔`problemes:4` confirma N1 en tots dos i una variant contextual de capacitat dins la mateixa família candidata. Per Unitats, `unitats:6` queda N1 en les variants directes i N2 en les encadenades; `unitats:18` és N2 i comparteix el nucli de conversió encadenada. Els scripts d'oracle i nivells d'aquests casos, la suite d'Unitats i la prova simulada de modes han passat a la integració [#44944032974](https://github.com/srigual-png/mates-interactives/actions/runs/44944032974). No s'ha canviat el codi en aquesta revisió; les famílies continuen provisionals i la PR es manté en Draft.
