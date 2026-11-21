@@ -49,15 +49,20 @@ function selectionCorrect(key,q,ex){
   const found=Object.entries(cases).filter(([k])=>q.includes(k));if(found.length!==1)throw Error('Unmatched or ambiguous real-world context '+q);return found[0][1];
  }
  if(key==='estimacio:14'){
-  const target=value(match(q,/s’esperava un valor proper a ([\d,.]+)/)[0]);
-  if(q.includes('al registre s’ha anotat')){
-   const units=match(q,/recipient graduat indica [\d,.]+ (\S+), però al registre s’ha anotat [\d,.]+ (\S+)/);
-   if(units[0]!==units[1])return 'No, cal revisar si s’han barrejat mL i L';
+  const format=x=>Number(x).toFixed(2).replace(/0+$/,'').replace(/\.$/,'').replace('.',',');
+  if(q.includes('recipient indica')){
+   assert.match(q,/recipient indica 1500 mL, però al registre s’ha anotat 1500 L/,'explicit mL-to-L recording case');
+   return 'Cal registrar 1,5 L: 1500 mL equivalen a 1,5 L.';
   }
-  const observed=value(match(q,/s’ha obtingut ([\d,.]+)/)[0]);
-  const err=Math.abs(target-observed)/Math.max(Math.abs(target),1e-10);
-  if(err<.05)return target===2?'Sí, és coherent: l’error és petit respecte de 2 m':'Sí, és coherent: l’error és petit respecte de 200 cm';
-  return target>observed?'No, probablement hi ha un error d’unitat o de mesura':'No, cal revisar si s’han barrejat mL i L';
+  const m=match(q,/s’esperava un valor de ([\d,.]+) (\S+) i el marge d’error admès és de ±([\d,.]+) (\S+)\. S’ha obtingut ([\d,.]+) (\S+)\. La mesura compleix el marge\?/);
+  const [reference,referenceUnit,tolerance,toleranceUnit,reading,readingUnit]=m;
+  assert.equal(referenceUnit,toleranceUnit,'reference and tolerance units');
+  assert.equal(referenceUnit,readingUnit,'reference and reading units');
+  const difference=Math.round(Math.abs(value(reading)-value(reference))*100)/100;
+  const limit=value(tolerance),within=difference<=limit;
+  return within
+   ? `Sí: l’error absolut és ${format(difference)} ${referenceUnit} i no supera el marge de ${format(limit)} ${referenceUnit}.`
+   : `No: l’error absolut és ${format(difference)} ${referenceUnit} i supera el marge de ${format(limit)} ${referenceUnit}; cal revisar la lectura o la unitat.`;
  }
  if(key==='problemes:17'){
   if(q.includes('Una aula de 6 m × 8 m'))return '48 m²';
