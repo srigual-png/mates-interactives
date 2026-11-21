@@ -24,6 +24,8 @@ assert.equal(seen.size,129);
 assert.deepEqual([...seen.keys()].sort(),originalMembers.sort());
 assert.equal(proposal.assignments.length,129);
 const levels=new Map(cross.records.map(x=>[x.key,x.level_candidate]));
+const reconciledLevels={'perimetres:18':'N1','superficies:7':'N1','superficies:8':'N2','superficies:14':'N1','superficies:18':'N1','superficies:20':'N2'};
+for(const [key,level] of Object.entries(reconciledLevels))assert.equal(levels.get(key),level,'Reconciled candidate level '+key);
 for(const item of proposal.assignments){
  assert.equal(seen.get(item.member),item.group_id);
  const desired=levels.has(item.member)?[levels.get(item.member)]:cross.records.filter(x=>x.generator_type===item.member).map(x=>x.level_candidate);
