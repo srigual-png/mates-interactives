@@ -71,7 +71,7 @@ La lectura comparada de les 20 decisions manté provisionalment: volum rectangul
 | perimetres:18 | N1 | N1 | Reconciliat: el diagnòstic tancat de confusió circumferència/àrea és reconeixement directe. |
 | superficies:7 | N1 | N1 | Reconciliat: fórmula directa amb dades donades. |
 | superficies:8 | N1 | N2 | **Discrepància pendent:** desplegar la superfície lateral i identificar el rectangle afegeix una modelització espacial; recomanació N2, pendent de validació docent. |
-| superficies:14 | N2 | N1 | **Discrepància pendent:** el producte de dimensions i la identitat dm³=L són directes; recomanació N1, coherent amb problemes:4. |
+| superficies:14 | N2 | N1 | **Discrepància pendent:** el producte de dimensions i la identitat dm³=L són directes; recomanació N1. Problemes:4 també usa dm³=L, però la seva pròpia proposta de nivell continua N1/N2. |
 | superficies:18 | N1 | N1 | Reconciliat: diagnòstic tancat, amb error i distractors explícits. |
 | superficies:20 | N2 | N2 | Reconciliat: cal associar les tres parelles de cares amb les dimensions de la capsa. |
 
