@@ -68,6 +68,7 @@ La lectura comparada de les 20 decisions manté provisionalment: volum rectangul
 
 | Tipus | Mapa efectiu | Proposta candidata | Estat de la revisió |
 |---|---|---|---|
+| perimetres:18 | N1 | N1 | Reconciliat: el diagnòstic tancat de confusió circumferència/àrea és reconeixement directe. |
 | superficies:7 | N1 | N1 | Reconciliat: fórmula directa amb dades donades. |
 | superficies:8 | N1 | N2 | **Discrepància pendent:** desplegar la superfície lateral i identificar el rectangle afegeix una modelització espacial; recomanació N2, pendent de validació docent. |
 | superficies:14 | N2 | N1 | **Discrepància pendent:** el producte de dimensions i la identitat dm³=L són directes; recomanació N1, coherent amb problemes:4. |
