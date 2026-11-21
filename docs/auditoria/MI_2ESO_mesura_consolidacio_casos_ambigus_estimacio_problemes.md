@@ -1,6 +1,6 @@
 # Consolidació de casos ambigus — Estimació i Problemes (2n ESO)
 
-**Estat:** addenda de revisió i canvis de redacció aplicats el 21/11/2026. Les decisions de família i de nivell continuen provisionals; no s’han modificat REVIEWED_LEVELS, famílies validades ni modes de producció.
+**Estat:** addenda de revisió i canvis de redacció aplicats el 21/11/2026. Les agrupacions de famílies continuen provisionals. Les discrepàncies internes de nivell de `superficies:8/14` s’han resolt i aplicat a `REVIEWED_LEVELS` el 21/11/2026; no s’han modificat famílies validades ni modes de producció.
 
 Aquesta addenda consolida el contrast del codi actual de 2eso/sentit-mesura.html. Substitueix les agrupacions anteriors que quedaven desfasades per les correccions funcionals posteriors, especialment l’agrupació conjunta d’estimacio:11 i estimacio:14.
 
@@ -38,4 +38,11 @@ Al commit `3a01e93`, la [integració única de Mesura 2n ESO · run #118](https:
 
 La [validació integrada de 4t ESO · run #136](https://github.com/srigual-png/mates-interactives/actions/runs/44930880452) també ha passat. A més, el [test de pràctica de 1r ESO amb Chromium · run #1](https://github.com/srigual-png/mates-interactives/actions/runs/44930880500) valida 6 temes, 12 modalitats i una resposta oberta corregida per la interfície; és una prova de 1r ESO, no evidencia de navegador per als generadors de 2n.
 
-Aquests resultats no canvien els nivells interns ni les famílies, que continuen provisionals. La PR #49 es manté oberta en Draft, sense fusió ni publicació.
+Aquests resultats no aproven les famílies, que continuen provisionals. La PR #49 es manté oberta en Draft, sense fusió ni publicació.
+
+
+## Resolució de `superficies:8/14` · 21/11/2026
+
+- `superficies:8` queda a **N2**: abans d’aplicar `2πrh`, cal modelitzar el lateral del cilindre com el rectangle del desenvolupament i identificar que la seva base és la circumferència. Aquesta decisió també s’alinea amb `superficies:19` i `problemes:5`, que treballen el mateix nucli amb outputs diferents.
+- `superficies:14` queda a **N1**: es multipliquen les tres dimensions interiors en dm i s’aplica directament `1 dm³ = 1 L`; no hi ha canvi de prefix ni operació inversa. `superficies:13` continua a N2 per la conversió m³→L, i `problemes:3` a N2 perquè hi afegeix cm³→L i el percentatge d’ompliment.
+- El mapa efectiu manté 9 tipus a N1, 11 a N2 i cap a N3. Les dues assignacions s’han intercanviat; els recomptes no canvien. Les agrupacions de famílies continuen provisionals.

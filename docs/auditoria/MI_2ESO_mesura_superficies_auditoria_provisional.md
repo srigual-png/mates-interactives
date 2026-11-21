@@ -1,13 +1,13 @@
 # Auditoria Fase A · Superfícies i volums (2n ESO)
 
-**ESTAT: PROVISIONAL — agrupacions i nivells candidats, pendents de validació pedagògica.** La revisió inclou el mapa efectiu i una prova de modes amb DOM simulat; no es modifiquen exercicis ni nivells.
+**ESTAT: PROVISIONAL — agrupacions de famílies pendents de validació pedagògica.** La revisió inclou el mapa efectiu i una prova de modes amb DOM simulat. El 21/11/2026 s’han resolt i aplicat dues classificacions internes de nivell (tipus 8 i 14); això no valida les famílies candidates.
 
 ## Font i nivells efectius
 
 - Generador: `2eso/sentit-mesura.html:1426–1579`, `genSuperficiesVolums2ESO`, tipus **1–20**.
 - Classificació prioritària: `assets/js/dificultat-mi.js:9`, `REVIEWED_LEVELS['2eso/mesura'].superficies` i `REVIEWED_VARIANTS` a la línia 11; `classify` aplica aquesta excepció abans del mapa general.
-- **N1 per defecte (9 tipus):** 1,3,5,6,7,8,10,11,18.
-- **N2 per defecte (11 tipus):** 2,4,9,12,13,14,15,16,17,19,20.
+- **N1 per defecte (9 tipus):** 1,3,5,6,7,10,11,14,18.
+- **N2 per defecte (11 tipus):** 2,4,8,9,12,13,15,16,17,19,20.
 - **N3 per defecte:** cap.
 - **Excepció real:** tipus **17**, variant `sameBase`, **N1**, perquè només es comparen altures quan les dues primeres dimensions de les caixes coincideixen. Les altres variants del mateix tipus queden a **N2**. El generador ja defineix `difficultyVariant='sameBase'` quan `a[0]===b[0]&&a[1]===b[1]` després de descartar volums idèntics. La prova de detecció textual alternativa del classificador no substitueix la identitat explícita del generador. Comptar el tipus 17 només com a N2 ocultaria una variant N1.
 - El mapa antic `level()` és diferent del mapa revisat; no és l'origen de la dificultat efectiva ordinària.
@@ -20,11 +20,11 @@
 | SV02 | Volum de prisma triangular amb construcció d'àrea de base | 4 | N2 | **N2**: base triangular abans de volum |
 | SV03 | Volum directe de cilindre | 7 | N1 | **N1**: aplicar πr²h, discutible si es valora la construcció de la base |
 | SV04 | Superfície total d'ortoedre/cub | 2,6,16 | 2,16 N2; 6 N1 | **N1/N2 segons figura i dades**: comptar cares i sumar-ne àrees; 2/16 comparteixen el càlcul, 6 és el cas regular de sis quadrats |
-| SV05 | Desenvolupament lateral d'un cilindre i àrea lateral | 8,19 | 8 N1; 19 N2 | **N1/N2 discutible**: 8 aplica fórmula d'àrea, 19 identifica dimensions d'un rectangle desplegat |
+| SV05 | Desenvolupament lateral d'un cilindre i àrea lateral | 8,19 | 8 N2; 19 N2 | **N2**: 8 modelitza el lateral com a rectangle desplegat i identifica la circumferència; 19 n'identifica les dimensions sense calcular-ne l'àrea |
 | SV06 | Superfície total d'un cilindre tancat | 9 | N2 | **N2**: àrea lateral més dues bases |
 | SV07 | Invertir V=Ab·h per recuperar altura o àrea de base | 10,11 | N1 | **N1**: divisió directa, mateix esquema invers |
 | SV08 | Recuperar altura d'un cilindre amb volum i radi donats | 12 | N2 | **N2**: identificar πr² i aïllar h; possible solapament amb SV07 |
-| SV09 | Calcular capacitat d'un recipient a partir del volum | 13,14 | N2 | **N2**, amb dos subcasos: m³→L i dm³→L; 14 és una equivalència directa després de volum |
+| SV09 | Calcular capacitat d'un recipient a partir del volum | 13,14 | 13 N2; 14 N1 | **N2 per 13** perquè converteix m³→L; **N1 per 14**, producte directe en dm i equivalència dm³=L |
 | SV10 | Reconstruir profunditat des de litres i superfície de base | 15 | N2 | **N2**: litres→m³, àrea de base, volum invers |
 | SV11 | Comparar volums de dues caixes | 17, incl. `sameBase` | N2, però N1 en `sameBase` | **N1 si base igual** (compara altures), **N2 si base diferent** (dos productes i comparació) |
 | SV12 | Detectar confusió de superfície i volum | 18 | N1 | **N1**: el diagnòstic es dona explícit entre distractors senzills |
@@ -59,19 +59,19 @@ Tots són exemples pedagògics **construïts a partir de les fórmules i dominis
 6. **N3:** no s'ha trobat un repte genuí de restriccions o reconstrucció no immediata entre els vint tipus. No inventar N3 per satisfer les quotes.
 7. **Solapaments** amb `Unitats i conversions` (volum–capacitat), `Perímetres i àrees` (superfícies), `Pitàgores` i `Problemes de mesura`; contrast transversal pendent.
 
-**Fet anteriorment:** inspecció de les 20 branques i del mapa efectiu, amb exemples aritmètics. La prova ampliada de modes ara cobreix els 20 tipus i totes dues variants de superficies:17 amb DOM simulat; resultat local success, workflow integrat pendent. **No és una prova visual en navegador ni cobreix totes les respostes textuals.** Resten la decisió docent sobre els dos canvis de mapa proposats (superficies:8 i 14), la revisió humana final de famílies, les fitxes/exàmens i la comprovació curricular normativa externa. La PR #49 continua sent d'auditoria, no un canvi funcional.
+**Fet anteriorment:** inspecció de les 20 branques i del mapa efectiu, amb exemples aritmètics. La prova ampliada de modes cobreix els 20 tipus i totes dues variants de superficies:17 amb DOM simulat; no és una prova visual en navegador ni cobreix totes les respostes textuals. Les dues discrepàncies internes de nivell (superficies:8 i 14) s’han resolt i aplicat el 21/11/2026. Continuen pendents la revisió humana final de famílies, les fitxes/exàmens i la comprovació curricular normativa externa.
 
 
 ## Revisió del bloc i reconciliació de nivells · 21/11/2026
 
-La lectura comparada de les 20 decisions manté provisionalment: volum rectangular/prisma/cub com a nucli directe (SV01), amb el prisma triangular compost (SV02) i el cilindre (SV03) com a procediments candidats diferenciats; superfície de capsa/cub com a variants de recompte (SV04); desplegament lateral de cilindre (SV05), amb càlcul d'àrea al 8 i identificació de dimensions al 19; superfície total cilíndrica (SV06); inversions de V=Ab·h (SV07), amb l'àrea circular del cilindre com a pas extra a SV08; capacitat de recipient (SV09) amb escalat diferent m³→L o dm³=L; i profunditat inversa (SV10). El tipus 17 és mixt: la branca sameBase compara altures (N1), mentre la resta calcula i compara volums (N2). El diagnòstic 18 no s'agrupa amb el diagnòstic de perímetres 18 només pel format. El tipus 20 s'ha separat de la família de superfície total: demana reconèixer parelles de cares, no sumar-ne les àrees.
+La lectura comparada de les 20 decisions manté provisionalment: volum rectangular/prisma/cub com a nucli directe (SV01), amb el prisma triangular compost (SV02) i el cilindre (SV03) com a procediments candidats diferenciats; superfície de capsa/cub com a variants de recompte (SV04); desplegament lateral de cilindre (SV05), amb modelització del rectangle i càlcul d’àrea al 8 (N2) i identificació de dimensions al 19 (N2); superfície total cilíndrica (SV06); inversions de V=Ab·h (SV07), amb l'àrea circular del cilindre com a pas extra a SV08; capacitat de recipient (SV09), amb 13 N2 per l’escalat m³→L i 14 N1 per producte directe en dm i equivalència dm³=L; i profunditat inversa (SV10). El tipus 17 és mixt: la branca sameBase compara altures (N1), mentre la resta calcula i compara volums (N2). El diagnòstic 18 no s'agrupa amb el diagnòstic de perímetres 18 només pel format. El tipus 20 s'ha separat de la família de superfície total: demana reconèixer parelles de cares, no sumar-ne les àrees.
 
 | Tipus | Mapa efectiu | Proposta candidata | Estat de la revisió |
 |---|---|---|---|
 | perimetres:18 | N1 | N1 | Reconciliat: el diagnòstic tancat de confusió circumferència/àrea és reconeixement directe. |
 | superficies:7 | N1 | N1 | Reconciliat: fórmula directa amb dades donades. |
-| superficies:8 | N1 | N2 | **Discrepància pendent:** desplegar la superfície lateral i identificar el rectangle afegeix una modelització espacial; recomanació N2, pendent de validació docent. |
-| superficies:14 | N2 | N1 | **Discrepància pendent:** el producte de dimensions i la identitat dm³=L són directes; recomanació N1. Problemes:4 també usa dm³=L, però la seva pròpia proposta de nivell continua N1/N2. |
+| superficies:8 | N1 | N2 | **Resolut: N2 aplicat.** Cal modelitzar la superfície lateral com un rectangle desplegat, amb la circumferència com a base, abans de calcular l’àrea. |
+| superficies:14 | N2 | N1 | **Resolut: N1 aplicat.** Producte directe de les dimensions interiors en dm i equivalència exacta dm³=L. |
 | superficies:18 | N1 | N1 | Reconciliat: diagnòstic tancat, amb error i distractors explícits. |
 | superficies:20 | N2 | N2 | Reconciliat: cal associar les tres parelles de cares amb les dimensions de la capsa. |
 
