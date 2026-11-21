@@ -44,3 +44,6 @@ La continuació ha de **revisar les 72 agrupacions amb els enllaços transversal
 
 
 **Actualització (21/11/2026):** s'han validat dues assignacions internes més: `superficies:8` N2 i `superficies:14` N1. El total és de sis decisions internes docents; les famílies continuen provisionals, no s'ha canviat cap nivell oficial i la PR #49 continua en Draft, sense fusió ni publicació.
+
+
+**Actualització interna del tipus `unitats:16` (21/11/2026):** el contrast U06/U07/U08 ha situat 16 a N2 i a la candidata U-P07, al costat de les conversions compostes de `unitats:6` i `unitats:18`. El mapa intern i la reconciliació agregada ara reflecteixen aquesta decisió; això no valida oficialment la família ni altera els 131 registres.
