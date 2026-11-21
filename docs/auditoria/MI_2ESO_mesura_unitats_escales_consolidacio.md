@@ -13,7 +13,7 @@
 | Tipus mixt amb variants internes | 2 | 0 | Necessita identificador de cas o justificació granular |
 | **Total de tipus revisats** | **18** | **18** | **36**, sense cap tipus omès |
 
-Aquestes categories no són nivells N1/N2/N3 ni un catàleg final de famílies. Per exemple, «Unitats» U06 i U07 compartien el coneixement volum–capacitat i l'addenda ja recomanava fusionar-los com a **candidat**; no s'han de comptar com dues famílies genuïnes només perquè una pregunta sigui de reconeixement.
+Aquestes categories no són nivells N1/N2/N3 ni un catàleg final de famílies. Per exemple, «Unitats» U06/U07/U08 queden en dues famílies candidates: equivalència directa (U-P06) i conversió composta (U-P07). El format de reconeixement del tipus 16 no el separa de la conversió composta que comparteix amb les branques encadenades del tipus 6 i el tipus 18.
 
 ## Unitats i conversions: decisions que importen
 
@@ -21,8 +21,7 @@ Aquestes categories no són nivells N1/N2/N3 ni un catàleg final de famílies. 
 - **U02** (2,11) coincideix en factor de superfície amb `problemes:18`; el pressupost no obliga a fer cap pressupost.
 - **U03** (3) exigeix factor cúbic i ha de diferenciar-se conceptualment del factor quadràtic, sense inventar una nova família per cada prefix.
 - **U05** (8,14) pregunta quin factor o equivalència és correcte; és una variant de reconeixement i no automàticament un procés de càlcul nou.
-- **U06/U07** (12,16): proposta de fusionar **equivalències volum–capacitat i comprovació d'igualtats**, condicionada a contrast pedagògic. El tipus 6 també conté casos directes del mateix coneixement.
-- **U08** (6,18): el tipus **6 barreja tres equivalències directes N1 i tres conversions encadenades N2**; `REVIEWED_VARIANTS` aplica el nivell a cada branca. El tipus **18** (mL→dm³) és N2 al mapa vigent. Les branques encadenades de 6 i el tipus 18 comparteixen una família candidata de conversió volum–capacitat composta; la branca directa de 6 és una subvariant N1. No s'ha d'interpretar U08 com una família per cada identificador. La classificació és interna, no oficial, i no valida cap agrupació final.
+- **U06/U07/U08** (12,16,6,18): contrastats com dues famílies candidates, no tres: **U-P06 directa** (`unitats:12` i branca directa de `unitats:6`, N1) i **U-P07 composta** (branca encadenada de `unitats:6`, `unitats:16` i `unitats:18`, N2 proposat). El tipus 16 demana seleccionar una igualtat que incorpora també un canvi de prefix/escala; per això s'agrupa amb la conversió composta, encara que el format sigui de tria múltiple. El mapa vigent continua amb 16 a N1: la discrepància es documenta i no s'ha aplicat en aquesta revisió. Vegeu l'addenda, que conté els casos i la justificació.
 - **U09** (9) requereix **convertir i comparar**, no sols canviar una unitat.
 - **U10** (10,15) combina conversió i suma. La magnitud passa de longitud a superfície i el nombre de conversions canvia; no hi ha justificació automàtica de crear dues famílies.
 - **U11** (13,17) és reconeixement o diagnòstic de factor. Al tipus 13 la branca incorrecta pot requerir identificar el factor dimensional, però els distractors ja indiquen l'error. **Mantenir N1 provisional**, sense elevar tot el tipus.
@@ -49,7 +48,7 @@ Són exemples matemàtics construïts, no mostres de navegador.
 
 
 
-**Actualització docent (21/11/2026):** el mapa vigent ja assigna `unitats:6` N1 per defecte i N2 a la variant `encadenada`, i `unitats:18` N2. Els tests de variants i d'Unitats de la integració al commit `194b99c` van passar ([run #44944032974](https://github.com/srigual-png/mates-interactives/actions/runs/44944032974)); la verificació de modes és simulada, i la fusió de famílies continua pendent.
+**Actualització docent (21/11/2026):** el mapa vigent assigna `unitats:6` N1 per defecte i N2 a la variant `encadenada`, i `unitats:18` N2. El contrast posterior agrupa U06/U07/U08 en dues famílies candidates: U-P06 directa i U-P07 composta; proposa `unitats:16` N2 per la cadena de conversió inclosa a cada igualtat, tot i que el mapa vigent encara el manté a N1. Els tests de variants i d'Unitats de la integració al commit `194b99c` van passar ([run #44944032974](https://github.com/srigual-png/mates-interactives/runs/44944032974)); la verificació de modes és simulada. La discrepància de nivell de 16 continua sense aplicar i la validació de famílies continua pendent.
 
 ## Què està verificat i què queda pendent
 
