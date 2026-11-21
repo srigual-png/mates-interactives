@@ -48,7 +48,8 @@ for(turn=0;turn<8;turn++){
       case 15:{
         const nums=b[0].split(' cm, ').map(value);
         assert.equal(nums.length,3,'tres lectures');
-        expected=answerUnit(roundTo(nums.reduce((a,c)=>a+c,0)/3,2),'cm',2);break;
+        assert.match(q.question,/arrodoneix el resultat a <b>dècimes de centímetre<\/b>/,'estimacio:15 precisió explícita');
+        expected=answerUnit(roundTo(nums.reduce((a,c)=>a+c,0)/3,1),'cm',1);break;
       }
       case 16: expected=answerUnit(roundTo(value(b[0]),1),'m',1);break;
     }
