@@ -106,7 +106,19 @@ async function main() {
         card.querySelector('.errtag').textContent===state.errors.naturals.length+' errors','Distintiu i errors a la portada');
       run('jerarquia',1,[true,true,false,false,...repeat(8,true)],true,8);
       result(10,2,'83,3','Objectiu completat: 10 encerts acumulats.');
-      return {topics:topics.length,modalities:topics.length*2};
+
+      // Cas determinista: una resposta oberta real entra pel camp i pel corrector de la interfície.
+      const naturalFamilies=adaptivePracticeFamilies.naturals;
+      adaptivePracticeFamilies.naturals=[[1]];
+      let openSession;
+      try{openSession=start('naturals',1);}finally{adaptivePracticeFamilies.naturals=naturalFamilies;}
+      check(currentEx.type===1,'Cas obert conegut de nombres naturals');
+      check(element('openWrap').style.display==='block','Camp de resposta oberta visible');
+      element('openInput').value=String(currentEx.correct);
+      checkOpen();
+      check(state.answered&&element('openInput').classList.contains('ok'),'Resposta oberta correcta via interfície');
+      check(openSession.correct===1&&openSession.incorrect===0,'Registre de resposta oberta correcta');
+      return {topics:topics.length,modalities:topics.length*2,openAnswerUi:true};
     });
     if(process.env.MI_RESULT_SCREENSHOTS){
       await page.screenshot({fullPage:true,path:resolve(process.env.MI_RESULT_SCREENSHOTS,'resultat-10-de-12.png')});
