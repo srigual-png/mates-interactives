@@ -31,11 +31,18 @@ La revisió efectiva distingeix les variants del tipus 6: la branca base queda a
 
 ## 3. Ajust de l'inventari de famílies
 
-En revisar la distinció procedimental, **U06 (equivalència directa dm³–L)** i **U07 (reconeixement d'igualtats volum–capacitat)** de l'informe inicial comparteixen el mateix coneixement i no està demostrat que siguin famílies genuïnament independents. La diferència és sobretot de format i d'abast dels factors.
+El contrast dels tipus **12, 16 i 18** amb les tres variants directes i les tres encadenades del tipus 6 resol la consolidació provisional de U06/U07/U08. La clau és el procediment que demana cada cas, no el format de resposta:
 
-**Proposta més conservadora:** fusionar U06+U07 en una família candidata d'«equivalències volum–capacitat i reconeixement d'igualtats» (tipus 12 i 16). Això reduiria el recompte de **11 a 10 famílies candidates**, però no és una validació final. A U08 (`unitats:6,18`), les variants directes del tipus 6 comparteixen el nucli d'equivalència directa (N1); les variants encadenades del tipus 6 i el tipus 18 comparteixen conversió composta (N2). És més defensable tractar-ho com una família candidata amb subvariants de demanda i nivells diferents que no pas comptar una família per cada tipus o per cada direcció. La consolidació amb U06/U07 continua pendent.
+| Família candidata | Tipus/variants vinculats | Nivell proposat | Procediment distintiu |
+|---|---|---|---|
+| **U-P06 · equivalència directa volum–capacitat** | `unitats:12`; variants directes de `unitats:6` | **N1** | Aplicar directament `dm³↔L` o `cm³↔mL`, sense canviar després a una altra escala |
+| **U-P07 · conversió volum–capacitat composta** | variants `encadenada` de `unitats:6`; `unitats:16`; `unitats:18` | **N2** | Enllaçar l'equivalència volum–capacitat amb un canvi de prefix/escala, o reconèixer el resultat correcte d'aquesta cadena |
 
-No es reporta una distribució N1/N2/N3 definitiva de famílies mentre hi hagi variants mixtes i possibles solapaments. El nombre de tipus no és el nombre de famílies. No s'ha detectat cap N3 justificable en aquests quatre tipus.
+El tipus **16 no pertany a U-P06 només perquè sigui de tria múltiple**. Les quatre igualtats correctes són `0,75 m³=750 L`, `2.400 cm³=2,4 L`, `3,5 dm³=3.500 mL` i `1,2 L=1.200 cm³`; cadascuna combina l'equivalència volum–capacitat amb un canvi d'escala. Això el fa procedimentalment més proper a la branca encadenada de `unitats:6` i al tipus 18 que a les equivalències directes del tipus 12. Que l'alumne seleccioni en lloc d'escriure el resultat no elimina aquest pas de raonament.
+
+Per tant, U06/U07/U08 **no es compten com tres famílies ni com una sola família indiferenciada**: queden dues famílies candidates per demanda procedimental (directa i composta). Les famílies continuen provisionals. El mapa intern encara classifica `unitats:16` a N1; aquesta discrepància amb la proposta N2 queda documentada per a una decisió d'aplicació separada. No s'ha modificat el classificador ni s'ha reclassificat cap nivell en aquesta addenda.
+
+No es reporta un recompte final de famílies N1/N2/N3 per al tema. El nombre de tipus no és el nombre de famílies, i no s'ha detectat cap N3 justificable en aquests tipus.
 
 ## 4. Resolució del contrast 6/18 i pendents
 
@@ -45,4 +52,4 @@ No es reporta una distribució N1/N2/N3 definitiva de famílies mentre hi hagi v
 4. El test `test-mesura-2eso-unitats-variants.cjs` verifica els sis casos reals del tipus 6 (resposta, opcions úniques i N1/N2 per variant). `test-mesura-2eso-unitats18-cilindre.cjs` verifica els sis valors de 18 i quatre casos de `problemes:4`, amb oracles, opcions úniques i nivells. Tots dos formen part de la suite d'Unitats del workflow integrat, que va passar al commit `194b99c` ([run #44944032974](https://github.com/srigual-png/mates-interactives/actions/runs/44944032974)).
 5. La prova integrada dels modes guiat, autònom i examen també va acabar correctament en aquella execució; la cobertura documentada és simulada amb DOM. No equival a una validació visual completa de cada variant en navegador.
 
-**Famílies i currículum:** la proposta continua provisional. Cal una revisió humana final de la fusió U06/U07/U08 i la comprovació curricular; no s'aprova cap recompte ni es crea una família oficial.
+**Famílies i currículum:** U-P06 (directa) i U-P07 (composta) són dues famílies candidates provisionals; la presentació de tipus 16 en format de tria múltiple no el separa de la conversió composta. Cal revisió humana abans d'aplicar el canvi N2 a `unitats:16` o declarar famílies oficials.
