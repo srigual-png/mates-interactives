@@ -70,20 +70,20 @@
     {
       "id": "U-P06",
       "topic": "unitats",
-      "procedure": "Equivalències volum-capacitat directes i reconeixement",
+      "procedure": "Equivalències volum-capacitat directes",
       "working_level": 1,
       "types": [
-        12,
-        16
+        12
       ],
       "status": "candidate_not_validated"
     },
     {
       "id": "U-P07",
       "topic": "unitats",
-      "procedure": "Conversió encadenada volum-capacitat",
+      "procedure": "Conversió volum-capacitat composta (inclou reconèixer igualtats)",
       "working_level": 2,
       "types": [
+        16,
         18
       ],
       "status": "candidate_not_validated"
@@ -264,7 +264,7 @@
     },
     {
       "key": "unitats:16",
-      "candidate": "U-P06",
+      "candidate": "U-P07",
       "provisional": true
     },
     {
@@ -435,10 +435,6 @@
     }
   ],
   "open_reviews": [
-    {
-      "key": "unitats:6",
-      "question": "La variant directa és equivalent a unitats:12/16 o exigeix subfamília pròpia?"
-    },
     {
       "key": "unitats:10,15",
       "question": "La doble conversió de superfícies abans de sumar és una família genuïna diferent de suma de longituds?"

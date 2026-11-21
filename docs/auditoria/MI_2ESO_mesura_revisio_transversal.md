@@ -50,7 +50,7 @@ No declarar-les noves automàticament. Cal demostrar que incorporen **una decisi
 ## 4. Decisions de nivell que demanen comparació
 
 1. **`unitats:6`**: N1 per a les tres conversions directes; la variant `encadenada` és N2. El classificador ja aplica aquesta distinció per `difficultyVariant`.
-2. **`unitats:18` i `unitats:16`**: 18 (mL→dm³) és N2 al mapa vigent. Comparteix el nucli de conversió composta amb les tres branques encadenades de `unitats:6`. El tipus 16 també exigeix validar una igualtat amb canvi de prefix addicional (p. ex. `0,75 m³=750 L` o `2.400 cm³=2,4 L`); encara que sigui de tria múltiple, s'agrupa amb la mateixa candidata composta U-P07. Es proposa N2 per 16; el classificador el manté a N1 i no s'ha modificat en aquesta revisió. U-P06 queda per a `unitats:12` i les variants directes de 6 (N1).
+2. **`unitats:18` i `unitats:16`**: 18 (mL→dm³) és N2 al mapa vigent. Comparteix el nucli de conversió composta amb les tres branques encadenades de `unitats:6`. El tipus 16 també exigeix validar una igualtat amb canvi de prefix addicional (p. ex. `0,75 m³=750 L` o `2.400 cm³=2,4 L`); encara que sigui de tria múltiple, s'agrupa amb la mateixa candidata composta U-P07. S'ha aplicat N2 per 16 al classificador intern; no és una assignació oficial. U-P06 queda per a `unitats:12` i les variants directes de 6 (N1).
 3. **`pitagores:15`**: excepció `diagonal` N2 existent, `catet` N1. Conservar i provar totes dues variants.
 4. **`superficies:17`**: excepció `sameBase` N1 existent, altres casos N2. Conservar i provar totes dues.
 5. **`superficies:8` i `problemes:5` — tots dos N2 al mapa intern:** comparteixen el nucli d’àrea lateral del cilindre; el tipus 8 modelitza el rectangle desplegat abans del càlcul, i el tipus 5 contextualitza la cobertura d’una etiqueta. La diferència de representació no deixa una discrepància de mapa pendent.
@@ -81,13 +81,13 @@ No declarar-les noves automàticament. Cal demostrar que incorporen **una decisi
 ## 6. Pla recomanat de validació
 
 1. **Lot funcional A (primer):** tests amb oracle i reparació en una PR separada dels casos de varietat fixa `problemes:1,10,16`, `estimacio:9,17`; afegir context a `estimacio:14`. Provar que la resposta semàntica varia i que els distractors són únics.
-2. **Lot pedagògic B:** consolidació provisional d'U06/U07/U08 completada en dues candidates: U-P06 directa (`unitats:12` i branca directa de 6, N1) i U-P07 composta (branca encadenada de 6, `unitats:16/18`, N2 proposat). El mapa manté `unitats:16` N1; aquesta discrepància queda pendent d'aplicar, no de justificar. Les relacions `superficies:7/8`↔`problemes:4/5` també estan reconciliades. La revisió de modes continua limitada a la cobertura simulada.
+2. **Lot pedagògic B:** consolidació provisional d'U06/U07/U08 completada en dues candidates: U-P06 directa (`unitats:12` i branca directa de 6, N1) i U-P07 composta (branca encadenada de 6, `unitats:16/18`, N2 proposat). `unitats:16` ja s'ha aplicat a N2 al mapa intern; la proposta de família continua provisional. Les relacions `superficies:7/8`↔`problemes:4/5` també estan reconciliades. La revisió de modes continua limitada a la cobertura simulada.
 3. **Lot transversal C:** resoldre les fusions de la matriu amb justificació família per família, dos exemples **reals** de generador per cada família amb proves, i comprovar el criteri de genuïnitat amb `Problemes de mesura`.
 4. **Lot de validació final:** proves de UI, examen, fitxes, coherència de classificació, dades límit i contrast del currículum de 2n ESO. Només després de revisió humana, fusionar eventual PR d'implementació i registrar famílies com a validades.
 
 ## 7. Estat i traçabilitat
 
-- **Fet:** revisió conjunta dels informes dels set temes i del protocol `PLANTILLA_AUDITORIA_NIVELLS.md`; correspondències explícites de tipus i casos dubtosos identificats. U06/U07/U08 s'han consolidat provisionalment en les candidates U-P06 directa i U-P07 composta; es proposa N2 per `unitats:16`, sense canviar-ne el classificador.
+- **Fet:** revisió conjunta dels informes dels set temes i del protocol `PLANTILLA_AUDITORIA_NIVELLS.md`; correspondències explícites de tipus i casos dubtosos identificats. U06/U07/U08 s'han consolidat provisionalment en les candidates U-P06 directa i U-P07 composta; s'ha aplicat N2 intern per `unitats:16`; no s'han aprovat famílies oficials.
 - **No fet:** deduplicació matemàtica exhaustiva amb una família final única assignada a cada tipus; mostres reals de cada generador, proves automàtiques específiques, contrast normatiu curricular i aprovació humana.
 - **No executar de moment:** actualització del registre oficial `docs/auditoria/families-validades.json` o declaració de conformitat pedagògica. Els workflows existents de numeració o integritat documental no certifiquen les famílies de mesura.
 

@@ -30,7 +30,7 @@ for(const row of p.records){
  actual[row.level_candidate]++;
  uniqueCores.add(row.family_candidate);
 }
-assert.deepEqual(actual,{N1:5,N2:13,N1_N2:2});
+assert.deepEqual(actual,{N1:5,N2:14,N1_N2:1});
 assert.equal(p.counts.official_level_assignments,0);
 assert.equal(p.counts.official_family_approvals,0);
 assert(p.not_authorized.some(x=>x.includes('estimacio:12')));
