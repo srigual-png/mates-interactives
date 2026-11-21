@@ -41,3 +41,6 @@ La continuació ha de **revisar les 72 agrupacions amb els enllaços transversal
 **Fonts estructurades:** `docs/auditoria/MI_2ESO_mesura_creuament_131_fitxes_72_agrupacions.json`, amb el vincle de cada fitxa a l'agrupació i els 14 contrastos d'estratègia.
 
 **Estat posterior (20/11/2026):** no s'ha canviat cap generador, família aprovada ni nivell oficial. Les quatre assignacions internes docents validades consten al mapa i a la matriu. La proposta de redacció d'`estimacio:12` continua pendent d'aprovació específica. PR #49 en Draft, sense fusió ni publicació.
+
+
+**Actualització (21/11/2026):** s'han validat dues assignacions internes més: `superficies:8` N2 i `superficies:14` N1. El total és de sis decisions internes docents; les famílies continuen provisionals, no s'ha canviat cap nivell oficial i la PR #49 continua en Draft, sense fusió ni publicació.
