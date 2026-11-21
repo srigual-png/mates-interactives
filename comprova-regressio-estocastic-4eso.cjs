@@ -10,7 +10,14 @@ for(const opcio of ['A','B']){
    for(let k=0;k<3;k++){let qs;try{qs=miTopicExam.build(t);}catch(e){throw Error('Examen del bloc '+t.id+': '+e.message);}check(qs.length===12,t.id);check(new Set(qs.map(q=>q.question)).size===12,'Duplicats');for(const q of qs){check(q.options.filter(o=>String(o)===String(q.correct)).length===1,'Correcta única');check(q.options.every(o=>String(o)===String(q.correct)||!validateOpen(q,o)),'Equivalent');check(q.solution.length>0,'Explicació');}}
    miTopicExam.start(t.id);const legends=[...document.querySelectorAll('#miTopicExam legend')].map(e=>e.textContent),counts={1:0,2:0,3:0};for(const q of miTopicExam.getSession().questions){const difficulty=miTopicExam.getDifficulty(t,q);check([1,2,3].includes(difficulty),'Nivell disponible '+t.id);counts[difficulty]++;}const labels={1:'Fàcil',2:'Mitjana',3:'Alta'};for(const level of [1,2,3])check(legends.filter(x=>x.includes(labels[level])).length===counts[level],'Dificultats '+t.id+' N'+level);
   }
-  let groupA=0;for(let k=0;k<100;k++){
+  let groupA=0;
+  const originalRandom=Math.random;let forcedRandom=[.999,0],forcedA;
+  try{Math.random=()=>forcedRandom.length?forcedRandom.shift():.5;forcedA=genComparacioDistribucions4(1);}
+  finally{Math.random=originalRandom;}
+  const forcedValues=[...el(forcedA.question).querySelectorAll('b')].slice(0,2).map(x=>num(x.textContent.split('=')[1]));
+  check(forcedValues[0]>forcedValues[1]&&forcedA.correct==='Grup A','Comparació forçada: A més alt');
+  check(forcedA.solution.join(' ').includes('Grup A'),'Explicació comparació forçada');
+  groupA=1;for(let k=0;k<100;k++){
    const q=genComparacioDistribucions4(1),values=[...el(q.question).querySelectorAll('b')].slice(0,2).map(x=>num(x.textContent.split('=')[1]));const want=values[0]>values[1]?'Grup A':values[0]<values[1]?'Grup B':'Tenen la mateixa mitjana';check(q.correct===want,'Comparació mitjanes');check(q.solution.join(' ').includes(want),'Explicació comparació');if(want==='Grup A')groupA++;
    for(const type of [2,10]){const q=genComparacioDistribucions4(type),a=el(q.question).querySelector('b').textContent.split(', ').map(num).sort((a,b)=>a-b),m=a.length%2?a[Math.floor(a.length/2)]:(a[a.length/2-1]+a[a.length/2])/2;check(num(q.correct)===m,'Mediana');}
    for(const type of [4,8]){const q=genTaulesRepresentacions4(type),rows=[...el(q.question).querySelectorAll('tr')],v=[...rows[type===4?1:2].querySelectorAll('td')].map(x=>num(x.textContent));check(Math.abs(num(q.correct)-Math.round(v[0]/(v[0]+v[1])*1000)/10)<1e-9,'Percentatge i grup de referència');}
