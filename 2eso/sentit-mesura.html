@@ -1705,7 +1705,7 @@ function genEstimacioError2ESO(forceType){
     ],c=shuffle(cases)[0];
     if(c.readingUnit){
       correct='Cal registrar 1,5 L: 1500 mL equivalen a 1,5 L.';
-      options=shuffle([correct,'Cal registrar 1.500 L perquè el nombre es manté en convertir unitats.','Cal registrar 1500 L perquè el recipient indica aquest valor.','No es poden convertir mil·lilitres a litres.']);
+      options=shuffle([correct,'Cal registrar 1.500 L perquè es manté el valor numèric en canviar d’unitat.','Cal registrar 150 L: en passar de mL a L, es divideix per 10.','Cal registrar 15 L: en passar de mL a L, es divideix per 100.']);
       question=`En mesurar <b>${c.context}</b>, s’esperava un valor proper a <b>${fmtNum(c.reference)} ${c.unit}</b>. El recipient indica <b>${fmtNum(c.reading)} ${c.readingUnit}</b>, però al registre s’ha anotat <b>${fmtNum(c.recorded)} ${c.unit}</b>. Quina anotació és correcta?`;
       guide=['Expressa la lectura del recipient en la mateixa unitat que el registre.','Recorda que 1.000 mL = 1 L.','Compara el valor convertit amb el valor esperat i corregeix la unitat anotada.'];
       solution=['1.500 mL = 1,5 L.','Per tant, cal registrar 1,5 L, no 1.500 L.'];
@@ -1732,7 +1732,7 @@ function genEstimacioError2ESO(forceType){
       answerUnit(roundTo(readings[0]+readings[1]+readings[2],1),'cm',1),answerUnit(roundTo(mean+0.1,1),'cm',1),answerUnit(roundTo(mean-0.1,1),'cm',1)]);
     question=`S’han fet tres mesures d’una longitud: <b>${readings.map(x=>fmtNum(x,1)).join(' cm, ')} cm</b>. Calcula’n la mitjana i arrodoneix el resultat a <b>dècimes de centímetre</b>, la mateixa precisió que les mesures.`;
     guide=['Suma les tres mesures.','Divideix la suma pel nombre de mesures.','Arrodoneix la mitjana a la dècima més propera, igual que la precisió de les lectures.'];
-    solution=[`Mitjana = (${readings.map(x=>fmtNum(x,1)).join(' + ')})/3 = ${fmtNum(rawMean,3)} cm.`,`Arrodonida a dècimes: ${correct}.`];openHint='Escriu el valor i la unitat cm.';
+    solution=[`Mitjana = (${readings.map(x=>fmtNum(x,1)).join(' + ')})/3 ≈ ${fmtNum(rawMean,3)} cm.`,`Arrodonida a dècimes: ${correct}.`];openHint='Escriu el valor i la unitat cm.';
   }
   else if(type===16){
     const value=shuffle([4.83,7.26,12.74,18.36])[0],floor=floorTo(value,1),ceil=ceilTo(value,1),correctVal=roundTo(value,1);
