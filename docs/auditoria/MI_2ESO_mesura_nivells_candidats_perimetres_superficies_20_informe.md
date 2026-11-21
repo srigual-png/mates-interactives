@@ -8,9 +8,9 @@ S'han inspeccionat els enunciats, les pistes i les solucions dels tipus **Perím
 
 | Nivell candidat | Registres | Justificació general |
 |---|---:|---|
-| **N1** | **1** | Superfície de cub com a aplicació directa de sis cares quadrades |
-| **N2** | **14** | Fórmules inverses, composicions de cares o figures, canvi d'unitats i modelització geomètrica |
-| **N1/N2 pendent** | **5** | Diagnòstic de fórmules, volum de cilindre amb dades explícites, volum-capacitat en dm³ i visualització de cares |
+| **N1** | **5** | Aplicacions directes i diagnòstic tancat de fórmules |
+| **N2** | **15** | Composicions, inversions, conversions amb demanda addicional i visualització de parelles de cares |
+| **N1/N2 pendent** | **0** | Les propostes internes dels sis casos revisats s'han reconciliat; l'aprovació docent continua pendent |
 | **Total** | **20** | **Cap nivell oficial aplicat** |
 
 ## Diferències matemàtiques que importen
@@ -35,3 +35,14 @@ Aquesta prova verifica traçabilitat documental i correspondència amb el codi; 
 **Dades estructurades:** `docs/auditoria/MI_2ESO_mesura_nivells_candidats_perimetres_superficies_20.json`.
 
 **Autoritzacions respectades:** no s'han modificat generadors, famílies o nivells oficials; `estimacio:12` continua pendent d'autorització; la PR #49 no s'ha fusionat ni publicat.
+
+
+## Reconciliació de sis casos · 21/11/2026
+
+Després de comparar enunciats, guies, respostes i criteri N1/N2, la proposta interna queda en **5 N1 i 15 N2**, sense registres N1/N2 indecisos. Això no és una aprovació docent ni altera el mapa efectiu.
+
+- **N1 proposat:** `perimetres:18` (diagnòstic tancat i explícit); `superficies:7` (fórmula directa de volum cilíndric amb dades donades); `superficies:14` (producte de dimensions en dm i equivalència directa 1 dm³=1 L); `superficies:18` (reconeixement tancat de fórmula de superfície en lloc de volum).
+- **N2 proposat:** `superficies:20` (construir les tres parelles de cares a partir de les dimensions i relacionar-les amb el desplegament). L'esforç espacial i les tres correspondències el diferencien de la simple suma de superfícies.
+- **Discrepàncies que requereixen decisió docent abans de canviar el mapa:** `superficies:8` queda proposat N2 per haver de desplegar conceptualment la superfície lateral com a rectangle i identificar-ne la base circular, però el mapa actual és N1; `superficies:14` queda proposat N1 perquè el pas dm³=L és directe i s'alinea amb `problemes:4`, però el mapa actual és N2. Els altres quatre casos proposats coincideixen amb el mapa efectiu.
+
+Totes les files mantenen `approval: pending`, `official_levels_changed: 0` i `official_families_approved: 0`. La reclassificació és una proposta documentada; no s'ha aplicat a `REVIEWED_LEVELS`.
