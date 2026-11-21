@@ -22,7 +22,7 @@ Notació `tema:tipus` i variants indicades quan cal. Les equivalències següent
 | Hipotenusa contextual | `pitagores:4,6,7,8,13,15-diagonal`; `problemes:6,7` | Diagonal, cable, escala i rampa reutilitzen (c=√(a²+b²)); importa si el triangle està implícit |
 | Sostracció de superfícies / corona circular | `perimetres:9,11,16,17`; `problemes:11,12` | Construir superfície exterior i restar buits; `problemes:12` és pràcticament el mateix que `perimetres:17` |
 | Àrea lateral de cilindre | `superficies:8,19`; `problemes:5` | Etiqueta sobre llauna i cilindre desplegat reutilitzen (2πrh); `superficies:19` pregunta les dimensions del rectangle, no el producte |
-| Volum del cilindre / altura inversa | `superficies:7,12`; `problemes:4,20` | `problemes:20` equival a aïllar `h=V/(πr²)` després de (L=dm³) |
+| Volum del cilindre / altura inversa | `superficies:7,12`; `problemes:4,20` | `superficies:7` i `problemes:4` comparteixen `V=πr²h`; el segon és una variant de capacitat amb equivalència directa dm³=L. `superficies:12` i `problemes:20` comparteixen la inversió `h=V/(πr²)`, amb conversió L→dm³ en el segon. |
 | Superfície de capsa i recompte de cares | `superficies:2,6,16,20`; `problemes:13` | Diferenciar capsa **tancada** (sis cares) de **sense tapa** (cinc), però no generar una família per cada objecte |
 | Estimació plausible | `estimacio:1,2,3`; `problemes:17`; `unitats:7` | Identificar unitat i ordre de magnitud és un coneixement transversal; comparar després les demandes concretes |
 | Error relatiu i comparació | `estimacio:7,8,9,13`; `problemes:16` | Si es compara respecte a la **mateixa referència**, com a `problemes:16`, n'hi ha prou de comparar errors absoluts; no equiparar necessàriament la dificultat amb `estimacio:9` |
@@ -54,7 +54,7 @@ No declarar-les noves automàticament. Cal demostrar que incorporen **una decisi
 3. **`pitagores:15`**: excepció `diagonal` N2 existent, `catet` N1. Conservar i provar totes dues variants.
 4. **`superficies:17`**: excepció `sameBase` N1 existent, altres casos N2. Conservar i provar totes dues.
 5. **`superficies:8` i `problemes:5` — tots dos N2 al mapa intern:** comparteixen el nucli d’àrea lateral del cilindre; el tipus 8 modelitza el rectangle desplegat abans del càlcul, i el tipus 5 contextualitza la cobertura d’una etiqueta. La diferència de representació no deixa una discrepància de mapa pendent.
-6. **`superficies:7` N1 versus `problemes:4` N2:** volum directe de cilindre amb r i h; la conversió dm³=L és immediata. **La diferència queda pendent de contrast docent**; no elevar sense raonament.
+6. **`superficies:7` i `problemes:4`: mateixa família candidata, amb `problemes:4` com a variant contextual de capacitat.** Tots dos són N1 al mapa intern vigent. A `superficies:7` es calcula `V=πr²h` amb radi i altura en cm i es dona el resultat en cm³; a `problemes:4` s'aplica la mateixa fórmula amb dimensions en dm i es llegeix el resultat com a litres perquè `1 dm³ = 1 L`. El context obliga a reconèixer volum com a capacitat, però no afegeix una conversió numèrica ni un procediment independent. No hi ha motiu per separar la família ni pujar `problemes:4` a N2. La validació de famílies continua pendent.
 7. **`superficies:12` N2 versus `problemes:20` N2:** coherència ja existent en fórmula inversa de cilindre; comparar resposta i unitats.
 8. **`estimacio:9` N2 versus `problemes:16` N1:** en aquest últim la referència és comuna; pot justificar N1 via comparar errors absoluts. Documentar simplificació, no declarar-ho un error de nivell sense més.
 9. **`perimetres:12,13,14` N1:** inversions de fórmules; cal examinar si la manipulació simbòlica exigida és immediata en 2n ESO.
@@ -81,7 +81,7 @@ No declarar-les noves automàticament. Cal demostrar que incorporen **una decisi
 ## 6. Pla recomanat de validació
 
 1. **Lot funcional A (primer):** tests amb oracle i reparació en una PR separada dels casos de varietat fixa `problemes:1,10,16`, `estimacio:9,17`; afegir context a `estimacio:14`. Provar que la resposta semàntica varia i que els distractors són únics.
-2. **Lot pedagògic B:** decisió sobre variants i nivell d'`unitats:6,18` i coherència `superficies:7/8` versus `problemes:4/5`; tests de N1/N2 guiats i autònoms. No alterar `REVIEWED_LEVELS` sense proves de regressió.
+2. **Lot pedagògic B:** queda pendent decidir les variants i el nivell d'`unitats:6,18`. El contrast `superficies:7`↔`problemes:4` queda reconciliat com a família candidata comuna N1, i `superficies:8`↔`problemes:5` com a nucli comú N2. Si aquests nivells s'han de canviar, cal justificar-los amb les demandes reals i validar la regressió abans d'alterar `REVIEWED_LEVELS`.
 3. **Lot transversal C:** resoldre les fusions de la matriu amb justificació família per família, dos exemples **reals** de generador per cada família amb proves, i comprovar el criteri de genuïnitat amb `Problemes de mesura`.
 4. **Lot de validació final:** proves de UI, examen, fitxes, coherència de classificació, dades límit i contrast del currículum de 2n ESO. Només després de revisió humana, fusionar eventual PR d'implementació i registrar famílies com a validades.
 
@@ -91,4 +91,4 @@ No declarar-les noves automàticament. Cal demostrar que incorporen **una decisi
 - **No fet:** deduplicació matemàtica exhaustiva amb una família final única assignada a cada tipus; mostres reals de cada generador, proves automàtiques específiques, contrast normatiu curricular i aprovació humana.
 - **No executar de moment:** actualització del registre oficial `docs/auditoria/families-validades.json` o declaració de conformitat pedagògica. Els workflows existents de numeració o integritat documental no certifiquen les famílies de mesura.
 
-**Actualització docent (21/11/2026):** `superficies:8` N2 i `superficies:14` N1 s’han aplicat a `REVIEWED_LEVELS` dins la PR #49. La resta de propostes de nivell i totes les agrupacions continuen pendents; no s’ha aprovat cap família. La PR es manté en Draft.
+**Actualització docent (21/11/2026):** `superficies:8` N2 i `superficies:14` N1 s’han aplicat a `REVIEWED_LEVELS` dins la PR #49. El contrast `superficies:7`↔`problemes:4` confirma el nivell N1 existent en tots dos i una família candidata amb variant contextual de capacitat; no cal tocar el mapa. La resta de propostes de nivell i totes les agrupacions continuen pendents; no s’ha aprovat cap família. La PR es manté en Draft.
