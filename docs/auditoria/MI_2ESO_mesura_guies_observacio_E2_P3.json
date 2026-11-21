@@ -1,0 +1,212 @@
+{
+  "schema_version": 1,
+  "status": "observation_guides_not_administered",
+  "scope": "2eso/sentit-mesura/escales-perimetres",
+  "source_protocol": "MI_2ESO_mesura_protocol_docent_escales_perimetres.json",
+  "source_matrix": "MI_2ESO_mesura_matriu_decisio_docent_3_candidates.json",
+  "method": "Observar procés, resposta, justificació espontània i transferència. Codificar l'evidència, no convertir l'encert o una puntuació en una nova família.",
+  "guides": [
+    {
+      "guide_id": "E2-observacio",
+      "task_id": "E2",
+      "candidate": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "teacher_setup": "Presentar els dos plànols sense suggerir que cal comparar els dos costats. Permetre gir de 90° i prohibir deduir equivalència només per les àrees.",
+      "mathematical_oracle": {
+        "a_real_m": [
+          4,
+          3
+        ],
+        "b_real_m": [
+          6,
+          2
+        ],
+        "area_a_m2": 12,
+        "area_b_m2": 12,
+        "equivalent": false,
+        "rotation_allowed": true
+      },
+      "essential_reasoning": [
+        "Converteix 8×6 cm a 1:50 en 4×3 m.",
+        "Converteix 6×2 cm a 1:100 en 6×2 m.",
+        "Detecta que les àrees són iguals a 12 m².",
+        "Refuta la congruència perquè ni girant les dimensions coincideixen."
+      ],
+      "observable_indicators": [
+        {
+          "id": "E2-model",
+          "check": "Representa dues parelles de longituds reals diferenciades, no només dos productes d'àrea.",
+          "evidence": "Dues parelles 4×3 m i 6×2 m amb escala aplicada correctament"
+        },
+        {
+          "id": "E2-refutation",
+          "check": "Explica per què mateixa àrea no implica mateixa forma rectangular.",
+          "evidence": "Afirma explícitament 12=12 però 4×3 ≠ 6×2 en costats"
+        },
+        {
+          "id": "E2-transfer",
+          "check": "En E1 i E4 accepta els plànols equivalents encara que s'hagin girat o canviï l'escala.",
+          "evidence": "Compara els costats sense ordre i aplica el mateix criteri sense indicacions"
+        }
+      ],
+      "error_codes": [
+        {
+          "id": "E2-AREA",
+          "label": "Confon àrea igual amb rectangles equivalents",
+          "diagnosis": "Domina l'àrea però no verifica forma/dimensions",
+          "corrective_probe": "Poden dos rectangles diferents tenir tots dos 12 m²? Mostra'n un exemple."
+        },
+        {
+          "id": "E2-SCALE",
+          "label": "Conversió d'escala errònia",
+          "diagnosis": "Possible dificultat instrumental anterior al problema de congruència",
+          "corrective_probe": "Quants metres reals representa 1 cm en cadascuna de les escales?"
+        },
+        {
+          "id": "E2-ROT",
+          "label": "Rebutja gir admissible",
+          "diagnosis": "Fixa l'orientació en lloc de comparar parelles de longituds",
+          "corrective_probe": "Si gires un plànol un quart de volta, canvia la sala real?"
+        },
+        {
+          "id": "E2-ANSWER",
+          "label": "Resposta sense prova dels dos costats",
+          "diagnosis": "L'encert final no permet inferir la decisió diferenciadora",
+          "corrective_probe": "Quines dues mesures t'han fet decidir que no són el mateix rectangle?"
+        }
+      ],
+      "contrast_tasks": [
+        "E1",
+        "E3",
+        "E4"
+      ],
+      "decision_observation": "Només hi ha evidència de procediment transferible si el contrast E2 vs E1/E4 evita simultàniament la trampa de l'àrea i la del gir. La resolució E3 per si sola no separa famílies.",
+      "teacher_record_fields": [
+        "task_id",
+        "anonymous_session_code",
+        "correctness_0_2",
+        "distinct_decision_0_2",
+        "justification_0_2",
+        "transfer_0_2",
+        "prompting_used_none_minor_major",
+        "observed_steps",
+        "error_codes",
+        "teacher_notes"
+      ],
+      "level_gate": "N2 és hipòtesi; N3 requeriria justificació de models no rutinària i autonomia corroborada en casos de transferència. Cap assignació automàtica.",
+      "family_gate": "Si l'alumne resol E2 repetint conversions i comparacions estàndard, considerar variant/problema compost. Cal criteri docent sobre independència cognitiva.",
+      "approval": null
+    },
+    {
+      "guide_id": "P3-observacio",
+      "task_id": "P3",
+      "candidate": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "teacher_setup": "Donar dos rectangles de 6×4 m i 2×4 m units al llarg de tot un costat de 4 m. Demanar que expliquin explícitament per què la unió no forma part del contorn, sense aportar fórmula.",
+      "mathematical_oracle": {
+        "rectangle_a_perimeter_m": 20,
+        "rectangle_b_perimeter_m": 12,
+        "internal_shared_length_m": 4,
+        "external_perimeter_m": 24,
+        "formula": "20+12-2·4=24 = 2·(8+4)"
+      },
+      "essential_reasoning": [
+        "Comprova que les dues peces s'uneixen en una vora sencera de 4 m.",
+        "Troba els perímetres aïllats, 20 m i 12 m, o dibuixa el rectangle exterior de 8×4 m.",
+        "Exclou les dues còpies del costat de 4 m perquè formen una frontera interna.",
+        "Calcula 20+12−8=24 m i justifica la mateixa resposta pel contorn de 8×4 m."
+      ],
+      "observable_indicators": [
+        {
+          "id": "P3-boundary",
+          "check": "Distingeix de forma explícita línies interiors i frontera exterior de la figura unida.",
+          "evidence": "Marca o anomena l'aresta de 4 m compartida com a interior"
+        },
+        {
+          "id": "P3-double",
+          "check": "Justifica per què cal retirar dues aparicions de la vora comuna si ha sumat perímetres independents.",
+          "evidence": "20+12−2×4=24 m, no 20+12−4"
+        },
+        {
+          "id": "P3-transfer",
+          "check": "Aplica el mateix criteri a P1 i P4 amb rectangle i semicercle.",
+          "evidence": "Exclou el diàmetre interior, conserva l'arc i altres vores"
+        }
+      ],
+      "error_codes": [
+        {
+          "id": "P3-DOUBLE",
+          "label": "Suma 20+12 sense eliminar la unió",
+          "diagnosis": "Tracta les dues peces com si fossin independents",
+          "corrective_probe": "El segment de 4 m es pot recórrer per fora de la figura ja unida?"
+        },
+        {
+          "id": "P3-SINGLE",
+          "label": "Resta només una aparició del costat compartit",
+          "diagnosis": "No reconeix que el costat és comptat una vegada per cada rectangle",
+          "corrective_probe": "Quan sumes els dos perímetres, quantes vegades hi apareix el segment compartit?"
+        },
+        {
+          "id": "P3-AREA",
+          "label": "Calcula superfície en lloc de contorn",
+          "diagnosis": "Confusió entre magnitud bidimensional i longitud",
+          "corrective_probe": "Què mesuraria una tanca posada al voltant de la figura?"
+        },
+        {
+          "id": "P3-MEM",
+          "label": "Fa servir una fórmula sense identificar cap vora",
+          "diagnosis": "El resultat correcte pot no acreditar transferència de selecció de fronteres",
+          "corrective_probe": "Assenyala quines arestes no tocaria una tanca exterior."
+        }
+      ],
+      "contrast_tasks": [
+        "P1",
+        "P2",
+        "P4"
+      ],
+      "decision_observation": "La transferència es pot defensar si P3 identifica frontera compartida amb rectangles i P1/P4 fa el mateix amb una vora recta i una corba. P2 comprova que un semicercle aïllat sí compta el diàmetre.",
+      "teacher_record_fields": [
+        "task_id",
+        "anonymous_session_code",
+        "correctness_0_2",
+        "distinct_decision_0_2",
+        "justification_0_2",
+        "transfer_0_2",
+        "prompting_used_none_minor_major",
+        "observed_steps",
+        "error_codes",
+        "teacher_notes"
+      ],
+      "level_gate": "N2 és hipòtesi; N3 només si identifica fronteres i justifica la generalització sense plantilla, amb validació docent posterior.",
+      "family_gate": "Si l'observació només mostra suma/resta mecànica de perímetres, classificar com a pràctica composta; no comptar família independent sense una estratègia nova demostrada.",
+      "approval": null
+    }
+  ],
+  "observation_protocol": {
+    "before": "No comunicar la resposta ni la fórmula; oferir l'enunciat i recursos habituals, i registrar condicions d'administració.",
+    "during": "Anotar les passes de l'alumne abans de donar pistes, codificar errors específics i registrar la dependència d'ajuda.",
+    "after": "Comparar cada candidata amb tasques control i de transferència i registrar interpretacions pedagògiques, no deduir famílies noves de respostes correctes.",
+    "privacy": "Usar codis anònims i no introduir noms ni informació personal de menors als informes de GitHub.",
+    "decision_options": [
+      "independent_family_after_teacher_validation",
+      "variant",
+      "compound_practice",
+      "insufficient_evidence"
+    ],
+    "decision_status": "unreviewed"
+  },
+  "counts": {
+    "guides": 2,
+    "observable_indicators": 6,
+    "error_codes": 8,
+    "teacher_observations": 0,
+    "approved_new_families": 0,
+    "approved_N3": 0
+  },
+  "limitations": [
+    "Les guies són una preparació per a observació, no observacions reals.",
+    "La puntuació 0-2 per dimensió no es converteix automàticament en nivell N2/N3.",
+    "Una classificació pedagògica i una implementació funcional requereixen decisions posteriors separades.",
+    "No s'han canviat generadors, nivells oficials, registres, PR fusionades ni web."
+  ]
+}

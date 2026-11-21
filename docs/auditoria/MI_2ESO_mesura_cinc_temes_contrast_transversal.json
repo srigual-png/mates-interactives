@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "status": "provisional_unapproved",
+  "scope": "2eso/sentit-mesura/five-topics-cross-comparison",
+  "topics": [
+    "pitagores",
+    "perimetres",
+    "superficies",
+    "estimacio",
+    "problemes"
+  ],
+  "source_files": [
+    "MI_2ESO_mesura_pitagores_decisions_16_tipus.json",
+    "MI_2ESO_mesura_perimetres_decisions_18_tipus.json",
+    "MI_2ESO_mesura_superficies_decisions_20_tipus.json",
+    "MI_2ESO_mesura_estimacio_decisions_18_tipus.json",
+    "MI_2ESO_mesura_problemes_decisions_20_tipus.json"
+  ],
+  "relation_types": {
+    "shared_core": "Mateix nucli matemàtic amb diferències contextuals menors; pendent de contrast pedagògic",
+    "shared_core_review": "Nucli aparentment igual, però amb variants de modelització a revisar",
+    "related_variant": "Procés pròxim amb una diferència d'entrada o de magnitud potencialment significativa",
+    "component_only": "Un subpas és el mateix, però el procés complet inclou decisions addicionals",
+    "distinct_format": "Comparteix format de diagnòstic, no el procediment matemàtic"
+  },
+  "links": [
+    {
+      "source": "pitagores:4",
+      "target": "problemes:6",
+      "relation": "shared_core",
+      "reason": "Diagonal rectangular resolta amb hipotenusa; el context no afegeix una estratègia nova",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "pitagores:13",
+      "target": "problemes:6",
+      "relation": "shared_core",
+      "reason": "Diagonal de pantalla i diagonal de rectangle utilitzen el mateix triangle",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "pitagores:6",
+      "target": "problemes:7",
+      "relation": "shared_core",
+      "reason": "Escala recolzada: hipotenusa contextual",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "pitagores:10",
+      "target": "perimetres:1",
+      "relation": "component_only",
+      "reason": "La fórmula d'àrea és subpas després de trobar una altura amb Pitàgores",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "pitagores:11",
+      "target": "perimetres:4",
+      "relation": "component_only",
+      "reason": "El perímetre és posterior al catet recuperat, no l'exercici complet",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "pitagores:16",
+      "target": "perimetres:18",
+      "relation": "distinct_format",
+      "reason": "Tots dos diagnostiquen errors, però els continguts són diferents",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "pitagores:16",
+      "target": "superficies:18",
+      "relation": "distinct_format",
+      "reason": "Diagnòstic de Pitàgores contra diagnòstic de superfície/volum",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "perimetres:9",
+      "target": "problemes:11",
+      "relation": "shared_core_review",
+      "reason": "Resta d'àrees, amb franja exterior que pot requerir reconstrucció de mides",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "perimetres:11",
+      "target": "problemes:11",
+      "relation": "shared_core_review",
+      "reason": "Marc i franja poden compartir la resta d'interior; revisar reconstrucció",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "perimetres:16",
+      "target": "problemes:1",
+      "relation": "component_only",
+      "reason": "Àrea útil de paret; el problema afegeix rendiment i arrodoniment de pots",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "perimetres:17",
+      "target": "problemes:12",
+      "relation": "shared_core",
+      "reason": "Corona circular amb radi exterior recuperat",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "perimetres:4",
+      "target": "problemes:14",
+      "relation": "component_only",
+      "reason": "Perímetre és subpas d'un problema de cost i porta",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "perimetres:4",
+      "target": "problemes:15",
+      "relation": "component_only",
+      "reason": "Perímetre inicial, després cal descomptar porta",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "perimetres:18",
+      "target": "superficies:18",
+      "relation": "distinct_format",
+      "reason": "Confusió àrea/circumferència no és la mateixa que àrea/volum",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "superficies:2",
+      "target": "problemes:13",
+      "relation": "related_variant",
+      "reason": "Caixa tancada vs sense tapa: comptar cares és comú però canvia l'estructura",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "superficies:16",
+      "target": "problemes:13",
+      "relation": "related_variant",
+      "reason": "Recompte de cares amb/sense tapa requereix comparar representació",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "superficies:7",
+      "target": "problemes:4",
+      "relation": "shared_core",
+      "reason": "Cilindre πr²h; l'equivalència dm³=L pot ser subpas",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "superficies:8",
+      "target": "problemes:5",
+      "relation": "related_variant",
+      "reason": "Lateral cilíndrica amb radi vs diàmetre i etiqueta: contrastar càlcul",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "superficies:12",
+      "target": "problemes:20",
+      "relation": "shared_core",
+      "reason": "Inversió de V=πr²h per recuperar altura",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "superficies:1",
+      "target": "problemes:3",
+      "relation": "component_only",
+      "reason": "Volum de prisma rectangular; el problema afegeix capacitat i percentatge",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "superficies:13",
+      "target": "problemes:3",
+      "relation": "component_only",
+      "reason": "Conversió a litres compartida; el problema afegeix percentatge d'ompliment",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "estimacio:1",
+      "target": "problemes:17",
+      "relation": "shared_core",
+      "reason": "Estimació de magnitud plausible",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "estimacio:3",
+      "target": "problemes:17",
+      "relation": "shared_core_review",
+      "reason": "Cal contrastar estimació específica de volum/capacitat",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "estimacio:9",
+      "target": "problemes:16",
+      "relation": "related_variant",
+      "reason": "Comparar errors relatius amb dues referències distintes o comuna",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "estimacio:7",
+      "target": "problemes:16",
+      "relation": "component_only",
+      "reason": "Calcular error relatiu és subpas abans de comparar dues mesures",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "estimacio:6",
+      "target": "problemes:16",
+      "relation": "component_only",
+      "reason": "Error absolut com a etapa del càlcul d'error relatiu",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "perimetres:1",
+      "target": "superficies:4",
+      "relation": "component_only",
+      "reason": "Àrea plana de base és només un pas cap al volum del prisma",
+      "status": "provisional_unapproved"
+    },
+    {
+      "source": "perimetres:6",
+      "target": "superficies:7",
+      "relation": "component_only",
+      "reason": "Àrea circular πr² és subpas per al volum del cilindre",
+      "status": "provisional_unapproved"
+    }
+  ],
+  "counts": {
+    "types_in_five_topics": 92,
+    "comparison_links": 28
+  },
+  "limits": [
+    "Matriu de contrast dirigida, no comparació exhaustiva de les 92x91/2 parelles",
+    "No es fusionen automàticament totes les relacions transitives",
+    "No s'assignen identitats de famílies genuïnes ni nivells definitius",
+    "Queden pendents mostres reals, contrast amb Unitats/Escales, currículum i UI"
+  ]
+}

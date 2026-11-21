@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "status": "candidate_not_approved",
+  "scope": "2eso/sentit-mesura.html",
+  "batch": "escales_4_18_and_pitagores_1_5",
+  "method": "Source review of question, guide and solution per generator type; mathematical oracles completed previously; no official difficulty changes.",
+  "counts": {
+    "records": 20,
+    "N2": 14,
+    "N1_N2": 4,
+    "N1": 2,
+    "official_levels_applied": 0,
+    "official_families_approved": 0
+  },
+  "records": [
+    {
+      "key": "escales:4",
+      "level_candidate": "N2",
+      "task": "Escala inversa",
+      "example": "Un plànol expressa cm i realitat en m: unificar unitats i reduir a 1:n.",
+      "reason": "Deducció de relació i simplificació després de conversió",
+      "family_candidate": "E-INV",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:5",
+      "level_candidate": "N1_N2",
+      "task": "Ampliació k:1",
+      "example": "Peça real en cm, ampliació k:1: multiplicar directament pel factor.",
+      "reason": "Regla directa, però el sentit k:1 pot requerir interpretació",
+      "family_candidate": "E-LIN",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:6",
+      "level_candidate": "N2",
+      "task": "Àrea real d'un plànol",
+      "example": "Convertir dos costats del plànol a dimensions reals i multiplicar.",
+      "reason": "Escala lineal aplicada dues vegades abans de calcular àrea",
+      "family_candidate": "E-AREA",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:7",
+      "level_candidate": "N2",
+      "task": "Àrea representada",
+      "example": "Passar dues dimensions reals a les representades i calcular superfície.",
+      "reason": "Raonament invers a escala d'àrees",
+      "family_candidate": "E-AREA",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:8",
+      "level_candidate": "N2",
+      "task": "Altura indirecta d'arbre",
+      "example": "Persona i arbre projectant ombres simultànies; trobar altura amb semblança.",
+      "reason": "Identificar magnituds homòlogues i plantejar proporció",
+      "family_candidate": "E-SOMBRA",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:9",
+      "level_candidate": "N2",
+      "task": "Altura indirecta d'edifici",
+      "example": "Vara i edifici amb ombres simultànies; calcular altura.",
+      "reason": "Mateixa estructura proporcional que escales:8, context diferent",
+      "family_candidate": "E-SOMBRA",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:10",
+      "level_candidate": "N2",
+      "task": "Costat de triangles semblants",
+      "example": "Donats dos costats petits i un corresponent gran, recuperar l'altre.",
+      "reason": "Trobar factor de semblança i aplicar-lo a costat homòleg",
+      "family_candidate": "E-TALES",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:11",
+      "level_candidate": "N1_N2",
+      "task": "Proporció explícita",
+      "example": "Donada a/b=c/x, resoldre la incògnita.",
+      "reason": "Amb model ja formulat es redueix a proporció, però exigeix aïllament",
+      "family_candidate": "E-TALES",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:12",
+      "level_candidate": "N1",
+      "task": "Factor lineal",
+      "example": "Una longitud passa de 5 cm a 15 cm: factor 3.",
+      "reason": "Divisió directa de dues longituds homòlogues",
+      "family_candidate": "E-FACTOR",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:13",
+      "level_candidate": "N1_N2",
+      "task": "Correspondència de raons",
+      "example": "Reconèixer que a/A=b/B manté parells homòlegs.",
+      "reason": "La identificació és directa si els parells estan marcats; distractors poden exigir anàlisi",
+      "family_candidate": "E-TALES",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:14",
+      "level_candidate": "N2",
+      "task": "Diagnòstic d'error d'escala",
+      "example": "Valorar un raonament amb longitud, superfície i unitats.",
+      "reason": "Detectar i explicar error conceptual, no sols calcular",
+      "family_candidate": "E-ERROR",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:15",
+      "level_candidate": "N2",
+      "task": "Escala a partir d'un segment desitjat",
+      "example": "Donada longitud real en m i mida del segment en cm, obtenir 1:n.",
+      "reason": "Unificar unitats i normalitzar raó",
+      "family_candidate": "E-INV",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:16",
+      "level_candidate": "N2",
+      "task": "Perímetre real en plànol",
+      "example": "Convertir llarg i ample reals i calcular perímetre de jardí.",
+      "reason": "Conjugar escala lineal i perímetre, operacions encadenades",
+      "family_candidate": "E-PER",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:17",
+      "level_candidate": "N2",
+      "task": "Itinerari a escala",
+      "example": "Suma de dos trams del mapa, aplicar escala i expressar en km.",
+      "reason": "Diversos passos sense model no rutinari de N3",
+      "family_candidate": "E-LIN",
+      "approval": "pending"
+    },
+    {
+      "key": "escales:18",
+      "level_candidate": "N2",
+      "task": "Ombra desconeguda",
+      "example": "Vara i pal amb alçades i ombres; calcular ombra del pal.",
+      "reason": "Mateixa semblança que altura indirecta, incògnita canviada",
+      "family_candidate": "E-SOMBRA",
+      "approval": "pending"
+    },
+    {
+      "key": "pitagores:1",
+      "level_candidate": "N1",
+      "task": "Identificar hipotenusa",
+      "example": "El costat oposat a l'angle recte està identificat: seleccionar-lo.",
+      "reason": "Reconeixement geomètric directe, sense arrels",
+      "family_candidate": "P-IDENT",
+      "approval": "pending"
+    },
+    {
+      "key": "pitagores:2",
+      "level_candidate": "N1_N2",
+      "task": "Hipotenusa amb catets explícits",
+      "example": "Triangle rectangle amb dos catets coneguts: arrel de suma de quadrats.",
+      "reason": "Fórmula directa; dificultat depèn del domini de quadrats i arrel",
+      "family_candidate": "P-HIP",
+      "approval": "pending"
+    },
+    {
+      "key": "pitagores:3",
+      "level_candidate": "N2",
+      "task": "Catet desconegut",
+      "example": "Hipotenusa i catet coneguts: arrel de diferència de quadrats.",
+      "reason": "Cal diferenciar catet de la hipotenusa i usar inversió",
+      "family_candidate": "P-CAT",
+      "approval": "pending"
+    },
+    {
+      "key": "pitagores:4",
+      "level_candidate": "N2",
+      "task": "Diagonal rectangle",
+      "example": "Llargada i amplada de l'habitació: identificar triangle i calcular diagonal.",
+      "reason": "Identificació del model més enllà d'un triangle donat explícitament",
+      "family_candidate": "P-HIP",
+      "approval": "pending"
+    },
+    {
+      "key": "pitagores:5",
+      "level_candidate": "N2",
+      "task": "Diagonal quadrat",
+      "example": "Costat de quadrat: obtenir √2·costat i aproximar a centèsimes.",
+      "reason": "Identificar dos catets iguals i efectuar aproximació, sense superar 2n ESO",
+      "family_candidate": "P-HIP",
+      "approval": "pending"
+    }
+  ],
+  "uncertainties": [
+    "Pitàgores:3 (catet invers) requereix repensar l'anterior proposta N1 per a la branca catet de pitagores:15.",
+    "Escales:14 pot tenir distractors massa transparents: una classificació N2 no prova la qualitat dels distractors.",
+    "Escales:11 i 13 són sobre proporcions explicitades o reconeixement; poden variar entre N1 i N2 amb suport."
+  ],
+  "principles": [
+    "No crear una família per cada canvi de context.",
+    "No forçar quota N3.",
+    "Adequació estricta a 2n ESO.",
+    "Classificació candidata, no assignació al codi."
+  ],
+  "permissions": {
+    "generators_changed": false,
+    "official_levels_changed": false,
+    "official_families_changed": false,
+    "estimacio12_wording_changed": false,
+    "pr_merged": false,
+    "web_published": false
+  }
+}

@@ -1,0 +1,13 @@
+name: Mesura 2n ESO - Pitagores 2 12 14 aparellats
+on:
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar 1200 exercicis i 8 parelles amb catets iguals
+        run: node scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs

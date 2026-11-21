@@ -1,0 +1,482 @@
+{
+  "schema_version": 1,
+  "status": "provisional_unapproved",
+  "scope": "2eso/sentit-mesura/unitats-escales",
+  "source": "PR #49: matrius de 18 decisions per tema; PR #53: oracles numèrics i semàntics",
+  "meaning": "Agrupació de procediments candidats; no són famílies genuïnes certificades ni el recompte oficial",
+  "counts": {
+    "generator_types": 36,
+    "candidate_groups": 18,
+    "topic_candidate_groups": {
+      "unitats": 10,
+      "escales": 8
+    }
+  },
+  "groups": [
+    {
+      "id": "U-P01",
+      "topic": "unitats",
+      "procedure": "Prefixos decimals per longitud, massa i capacitat",
+      "working_level": 1,
+      "types": [
+        1,
+        4,
+        5
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "U-P02",
+      "topic": "unitats",
+      "procedure": "Conversió de superfície amb factor quadràtic",
+      "working_level": 1,
+      "types": [
+        2,
+        11
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "U-P03",
+      "topic": "unitats",
+      "procedure": "Conversió de volum amb factor cúbic",
+      "working_level": 1,
+      "types": [
+        3
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "U-P04",
+      "topic": "unitats",
+      "procedure": "Selecció contextual de magnitud i unitat",
+      "working_level": 1,
+      "types": [
+        7
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "U-P05",
+      "topic": "unitats",
+      "procedure": "Reconeixement de factor quadràtic o cúbic",
+      "working_level": 1,
+      "types": [
+        8,
+        14
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "U-P06",
+      "topic": "unitats",
+      "procedure": "Equivalències volum-capacitat directes i reconeixement",
+      "working_level": 1,
+      "types": [
+        12,
+        16
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "U-P07",
+      "topic": "unitats",
+      "procedure": "Conversió encadenada volum-capacitat",
+      "working_level": 2,
+      "types": [
+        18
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "U-P08",
+      "topic": "unitats",
+      "procedure": "Conversió i comparació de longituds",
+      "working_level": 2,
+      "types": [
+        9
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "U-P09",
+      "topic": "unitats",
+      "procedure": "Conversió i suma de magnituds homogènies",
+      "working_level": 2,
+      "types": [
+        10,
+        15
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "U-P10",
+      "topic": "unitats",
+      "procedure": "Diagnòstic d'errors dimensionals",
+      "working_level": 1,
+      "types": [
+        13,
+        17
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "E-P01",
+      "topic": "escales",
+      "procedure": "Escala de reducció a distància real",
+      "working_level": 2,
+      "types": [
+        1,
+        2,
+        17
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "E-P02",
+      "topic": "escales",
+      "procedure": "Escala aplicada de realitat a representació",
+      "working_level": 2,
+      "types": [
+        3,
+        5
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "E-P03",
+      "topic": "escales",
+      "procedure": "Determinar o reconèixer el factor d'escala",
+      "working_level": 2,
+      "types": [
+        4,
+        12,
+        15
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "E-P04",
+      "topic": "escales",
+      "procedure": "Comprovar correspondència de costats homòlegs",
+      "working_level": 1,
+      "types": [
+        13
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "E-P05",
+      "topic": "escales",
+      "procedure": "Escala en dues dimensions i càlcul d'àrea",
+      "working_level": 2,
+      "types": [
+        6,
+        7
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "E-P06",
+      "topic": "escales",
+      "procedure": "Semblança i proporcions de costats o ombres",
+      "working_level": 2,
+      "types": [
+        8,
+        9,
+        10,
+        11,
+        18
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "E-P07",
+      "topic": "escales",
+      "procedure": "Escala de dues dimensions i perímetre",
+      "working_level": 2,
+      "types": [
+        16
+      ],
+      "status": "candidate_not_validated"
+    },
+    {
+      "id": "E-P08",
+      "topic": "escales",
+      "procedure": "Diagnòstic d'errors d'escala",
+      "working_level": 1,
+      "types": [
+        14
+      ],
+      "status": "candidate_not_validated"
+    }
+  ],
+  "assignments": [
+    {
+      "key": "unitats:1",
+      "candidate": "U-P01",
+      "provisional": true
+    },
+    {
+      "key": "unitats:4",
+      "candidate": "U-P01",
+      "provisional": true
+    },
+    {
+      "key": "unitats:5",
+      "candidate": "U-P01",
+      "provisional": true
+    },
+    {
+      "key": "unitats:2",
+      "candidate": "U-P02",
+      "provisional": true
+    },
+    {
+      "key": "unitats:11",
+      "candidate": "U-P02",
+      "provisional": true
+    },
+    {
+      "key": "unitats:3",
+      "candidate": "U-P03",
+      "provisional": true
+    },
+    {
+      "key": "unitats:7",
+      "candidate": "U-P04",
+      "provisional": true
+    },
+    {
+      "key": "unitats:8",
+      "candidate": "U-P05",
+      "provisional": true
+    },
+    {
+      "key": "unitats:14",
+      "candidate": "U-P05",
+      "provisional": true
+    },
+    {
+      "key": "unitats:12",
+      "candidate": "U-P06",
+      "provisional": true
+    },
+    {
+      "key": "unitats:16",
+      "candidate": "U-P06",
+      "provisional": true
+    },
+    {
+      "key": "unitats:18",
+      "candidate": "U-P07",
+      "provisional": true
+    },
+    {
+      "key": "unitats:9",
+      "candidate": "U-P08",
+      "provisional": true
+    },
+    {
+      "key": "unitats:10",
+      "candidate": "U-P09",
+      "provisional": true
+    },
+    {
+      "key": "unitats:15",
+      "candidate": "U-P09",
+      "provisional": true
+    },
+    {
+      "key": "unitats:13",
+      "candidate": "U-P10",
+      "provisional": true
+    },
+    {
+      "key": "unitats:17",
+      "candidate": "U-P10",
+      "provisional": true
+    },
+    {
+      "key": "escales:1",
+      "candidate": "E-P01",
+      "provisional": true
+    },
+    {
+      "key": "escales:2",
+      "candidate": "E-P01",
+      "provisional": true
+    },
+    {
+      "key": "escales:17",
+      "candidate": "E-P01",
+      "provisional": true
+    },
+    {
+      "key": "escales:3",
+      "candidate": "E-P02",
+      "provisional": true
+    },
+    {
+      "key": "escales:5",
+      "candidate": "E-P02",
+      "provisional": true
+    },
+    {
+      "key": "escales:4",
+      "candidate": "E-P03",
+      "provisional": true
+    },
+    {
+      "key": "escales:12",
+      "candidate": "E-P03",
+      "provisional": true
+    },
+    {
+      "key": "escales:15",
+      "candidate": "E-P03",
+      "provisional": true
+    },
+    {
+      "key": "escales:13",
+      "candidate": "E-P04",
+      "provisional": true
+    },
+    {
+      "key": "escales:6",
+      "candidate": "E-P05",
+      "provisional": true
+    },
+    {
+      "key": "escales:7",
+      "candidate": "E-P05",
+      "provisional": true
+    },
+    {
+      "key": "escales:8",
+      "candidate": "E-P06",
+      "provisional": true
+    },
+    {
+      "key": "escales:9",
+      "candidate": "E-P06",
+      "provisional": true
+    },
+    {
+      "key": "escales:10",
+      "candidate": "E-P06",
+      "provisional": true
+    },
+    {
+      "key": "escales:11",
+      "candidate": "E-P06",
+      "provisional": true
+    },
+    {
+      "key": "escales:18",
+      "candidate": "E-P06",
+      "provisional": true
+    },
+    {
+      "key": "escales:16",
+      "candidate": "E-P07",
+      "provisional": true
+    },
+    {
+      "key": "escales:14",
+      "candidate": "E-P08",
+      "provisional": true
+    },
+    {
+      "key": "unitats:6",
+      "variant": "directa",
+      "candidate": "U-P06",
+      "provisional": true
+    },
+    {
+      "key": "unitats:6",
+      "variant": "encadenada",
+      "candidate": "U-P07",
+      "provisional": true
+    }
+  ],
+  "level_exceptions": [
+    {
+      "key": "escales:5",
+      "level": 1,
+      "why": "Ampliació directa, mentre escales:3 incorpora conversió d'unitats"
+    },
+    {
+      "key": "escales:11",
+      "level": 1,
+      "why": "La proporció ja ve escrita; altres casos requereixen modelitzar"
+    },
+    {
+      "key": "escales:12",
+      "level": 1,
+      "why": "Raó directa amb unitats homogènies"
+    },
+    {
+      "key": "unitats:6",
+      "variant": "directa",
+      "level": 1,
+      "why": "Equivalència elemental"
+    },
+    {
+      "key": "unitats:6",
+      "variant": "encadenada",
+      "level": 2,
+      "why": "Hi ha canvi addicional de prefix"
+    },
+    {
+      "key": "unitats:18",
+      "level": 2,
+      "why": "mL a dm³ requereix dos conceptes; proposta de PR #52"
+    }
+  ],
+  "open_reviews": [
+    {
+      "key": "unitats:6",
+      "question": "La variant directa és equivalent a unitats:12/16 o exigeix subfamília pròpia?"
+    },
+    {
+      "key": "unitats:10,15",
+      "question": "La doble conversió de superfícies abans de sumar és una família genuïna diferent de suma de longituds?"
+    },
+    {
+      "key": "unitats:13,17",
+      "question": "Verificar equivalències i diagnosticar error són el mateix procediment mental?"
+    },
+    {
+      "key": "escales:3,5",
+      "question": "Reducció amb normalització i ampliació directa: mateixa família amb nivells diferents?"
+    },
+    {
+      "key": "escales:4,12,15",
+      "question": "Reconèixer una raó directa i construir escala 1:n: compartir nucli sense homogeneïtzar nivells?"
+    },
+    {
+      "key": "escales:8,9,10,11,18",
+      "question": "Distingir proporció proporcionada, modelització de triangles i ombra inversa sense inflar famílies?"
+    },
+    {
+      "key": "escales:17",
+      "question": "La suma de trams és variant contextual de distància real, o composició independent?"
+    },
+    {
+      "key": "escales:14",
+      "question": "No fusionar amb unitats:17: conceptes matemàtics diferents encara que el format sigui diagnòstic"
+    }
+  ],
+  "gates": [
+    "Mostres reals de dues configuracions/variants per grup candidat",
+    "Contrastar famílies entre els set temes, incloses les coincidències amb Problemes",
+    "Revisar rigor, variació i nivell a la UI en modalitats guiada, autònoma i examen",
+    "Aprovació pedagògica explícita abans de modificar families-validades.json"
+  ],
+  "limitations": [
+    "Els 10+8 grups són hipòtesis revisables, no objectiu de mínim de 15 assolit",
+    "La baixa diversitat de procediments no es corregeix fragmentant artificialment un mateix mètode",
+    "No es mou cap nivell ni es publica la proposta"
+  ]
+}

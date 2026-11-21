@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "status": "diagnostic_not_curricular_validation",
+  "scope": "2eso/sentit-mesura/7-topics",
+  "sources": {
+    "classifier": "assets/js/dificultat-mi.js (REVIEWED_LEVELS, branch PR49)",
+    "master": "MI_2ESO_mesura_tracabilitat_128_tipus.json",
+    "global_working_clusters": "MI_2ESO_mesura_cataleg_global_provisional.json",
+    "splits": [
+      "MI_2ESO_mesura_escissions_prioritaries.json",
+      "MI_2ESO_mesura_variants_pitagores_estimacio_superficies.json"
+    ],
+    "mixed_variants": "MI_2ESO_mesura_matriu_nivells_variants_mixtes.json"
+  },
+  "targets": {
+    "genuine_families_per_topic": 15,
+    "level_family_minima": {
+      "N1": 5,
+      "N2": 5,
+      "N3": 3
+    }
+  },
+  "counts": {
+    "topics": 7,
+    "generator_types": 128,
+    "baseline_working_clusters": 72,
+    "hypothetical_split_working_clusters": 85,
+    "unclassified_genuine_family_count": "unknown"
+  },
+  "topic_records": [
+    {
+      "topic": "unitats",
+      "generator_types": 18,
+      "base_type_levels": {
+        "N1": 14,
+        "N2": 4,
+        "N3": 0
+      },
+      "type_level_floor_gaps": {
+        "N1": 0,
+        "N2": 1,
+        "N3": 3
+      },
+      "working_cluster_touch_count": 10,
+      "provisional_gap_to_15_working_clusters": 5,
+      "validated_genuine_families": null,
+      "validated_family_levels": {
+        "N1": null,
+        "N2": null,
+        "N3": null
+      },
+      "genuine_family_gap": "not_measurable_before_pedagogical_validation",
+      "variant_note": "unitats:6"
+    },
+    {
+      "topic": "escales",
+      "generator_types": 18,
+      "base_type_levels": {
+        "N1": 5,
+        "N2": 13,
+        "N3": 0
+      },
+      "type_level_floor_gaps": {
+        "N1": 0,
+        "N2": 0,
+        "N3": 3
+      },
+      "working_cluster_touch_count": 14,
+      "provisional_gap_to_15_working_clusters": 1,
+      "validated_genuine_families": null,
+      "validated_family_levels": {
+        "N1": null,
+        "N2": null,
+        "N3": null
+      },
+      "genuine_family_gap": "not_measurable_before_pedagogical_validation",
+      "variant_note": null
+    },
+    {
+      "topic": "pitagores",
+      "generator_types": 16,
+      "base_type_levels": {
+        "N1": 5,
+        "N2": 11,
+        "N3": 0
+      },
+      "type_level_floor_gaps": {
+        "N1": 0,
+        "N2": 0,
+        "N3": 3
+      },
+      "working_cluster_touch_count": 13,
+      "provisional_gap_to_15_working_clusters": 2,
+      "validated_genuine_families": null,
+      "validated_family_levels": {
+        "N1": null,
+        "N2": null,
+        "N3": null
+      },
+      "genuine_family_gap": "not_measurable_before_pedagogical_validation",
+      "variant_note": "pitagores:15"
+    },
+    {
+      "topic": "perimetres",
+      "generator_types": 18,
+      "base_type_levels": {
+        "N1": 10,
+        "N2": 8,
+        "N3": 0
+      },
+      "type_level_floor_gaps": {
+        "N1": 0,
+        "N2": 0,
+        "N3": 3
+      },
+      "working_cluster_touch_count": 12,
+      "provisional_gap_to_15_working_clusters": 3,
+      "validated_genuine_families": null,
+      "validated_family_levels": {
+        "N1": null,
+        "N2": null,
+        "N3": null
+      },
+      "genuine_family_gap": "not_measurable_before_pedagogical_validation",
+      "variant_note": null
+    },
+    {
+      "topic": "superficies",
+      "generator_types": 20,
+      "base_type_levels": {
+        "N1": 9,
+        "N2": 11,
+        "N3": 0
+      },
+      "type_level_floor_gaps": {
+        "N1": 0,
+        "N2": 0,
+        "N3": 3
+      },
+      "working_cluster_touch_count": 14,
+      "provisional_gap_to_15_working_clusters": 1,
+      "validated_genuine_families": null,
+      "validated_family_levels": {
+        "N1": null,
+        "N2": null,
+        "N3": null
+      },
+      "genuine_family_gap": "not_measurable_before_pedagogical_validation",
+      "variant_note": "superficies:17"
+    },
+    {
+      "topic": "estimacio",
+      "generator_types": 18,
+      "base_type_levels": {
+        "N1": 13,
+        "N2": 5,
+        "N3": 0
+      },
+      "type_level_floor_gaps": {
+        "N1": 0,
+        "N2": 0,
+        "N3": 3
+      },
+      "working_cluster_touch_count": 12,
+      "provisional_gap_to_15_working_clusters": 3,
+      "validated_genuine_families": null,
+      "validated_family_levels": {
+        "N1": null,
+        "N2": null,
+        "N3": null
+      },
+      "genuine_family_gap": "not_measurable_before_pedagogical_validation",
+      "variant_note": null
+    },
+    {
+      "topic": "problemes",
+      "generator_types": 20,
+      "base_type_levels": {
+        "N1": 5,
+        "N2": 15,
+        "N3": 0
+      },
+      "type_level_floor_gaps": {
+        "N1": 0,
+        "N2": 0,
+        "N3": 3
+      },
+      "working_cluster_touch_count": 20,
+      "provisional_gap_to_15_working_clusters": 0,
+      "validated_genuine_families": null,
+      "validated_family_levels": {
+        "N1": null,
+        "N2": null,
+        "N3": null
+      },
+      "genuine_family_gap": "not_measurable_before_pedagogical_validation",
+      "variant_note": null
+    }
+  ],
+  "interpretation": [
+    "Base type levels count generator types (not unique pedagogical families), and do not double-count mixed variants.",
+    "N3=0 is verified in the baseline level arrays of PR49. N3 family shortfall is not computable without validated families.",
+    "A working-cluster touch count can overlap across topics and is NOT a count of genuine independent families; its gap to 15 is an audit heuristic only.",
+    "The 85-cluster overlay is hypothetical pending review, not a validated taxonomy; 128 types remain unchanged.",
+    "unitats:6/encadenada N2 is pending in the unmerged PR53. The base array still counts type 6 under N1; pitagores:15 and superficies:17 have alternate N1/N2 branches.",
+    "Even a topic with 15+ types or working clusters does not meet the per-topic 15 genuinely distinct family target without evaluation.",
+    "Do not force N3 or create superficial new families merely to satisfy a numerical floor."
+  ],
+  "next_actions": [
+    "Verify pedagogical independence with at least two real instances for each working cluster and document curriculum outcome, cognitive strategy, distractors.",
+    "Identify legitimate new procedures where evidence indicates a genuine gap after deduplication.",
+    "Review N3 curricular suitability, including whether target needs an explicitly approved exception for this content.",
+    "Test guided, autonomous, exam modes; seek explicit approval before changing families-validades.json or publishing."
+  ]
+}

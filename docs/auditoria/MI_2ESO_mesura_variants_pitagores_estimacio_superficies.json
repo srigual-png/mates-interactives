@@ -1,0 +1,126 @@
+{
+  "schema_version": 1,
+  "status": "provisional_split_review_only",
+  "baseline": "MI_2ESO_mesura_cataleg_global_provisional.json",
+  "prior_overlay": "MI_2ESO_mesura_escissions_prioritaries.json",
+  "topic_scope": [
+    "pitagores",
+    "estimacio",
+    "superficies"
+  ],
+  "counts": {
+    "reviewed_parent_clusters": 3,
+    "variant_rows": 8,
+    "derived_working_clusters_if_ratified": 85
+  },
+  "proposals": [
+    {
+      "parent": "ME2-C009",
+      "reason": "Les tres seleccions comparteixen judici d'ordre de magnitud, però canvien la magnitud: dimensió lineal, superfície i volum/capacitat. Separació només com a pistes d'auditoria, no famílies certificades.",
+      "parts": [
+        {
+          "id": "ME2-R009A",
+          "members": [
+            "estimacio:1",
+            "problemes:17"
+          ],
+          "procedure": "Estimar longitud o magnitud contextual amb referències quotidianes",
+          "classification": "related_variant_review"
+        },
+        {
+          "id": "ME2-R009B",
+          "members": [
+            "estimacio:2"
+          ],
+          "procedure": "Estimar superfície amb unitats quadrades i dues dimensions",
+          "classification": "related_variant_review"
+        },
+        {
+          "id": "ME2-R009C",
+          "members": [
+            "estimacio:3"
+          ],
+          "procedure": "Estimar capacitat o volum amb unitats cúbiques i litres",
+          "classification": "related_variant_review"
+        }
+      ]
+    },
+    {
+      "parent": "ME2-C051",
+      "reason": "Les tres formes es resolen amb producte de dimensions però el prisma amb base ja donada requereix interpretar A_base, l'ortoedre multiplicar tres dimensions i el cub identificar arestes iguals. No necessàriament tres famílies.",
+      "parts": [
+        {
+          "id": "ME2-R051A",
+          "members": [
+            "superficies:1"
+          ],
+          "procedure": "Calcular volum d'ortoedre des de tres longituds",
+          "classification": "related_variant_review"
+        },
+        {
+          "id": "ME2-R051B",
+          "members": [
+            "superficies:3"
+          ],
+          "procedure": "Calcular volum de prisma amb àrea de base ja indicada",
+          "classification": "related_variant_review"
+        },
+        {
+          "id": "ME2-R051C",
+          "members": [
+            "superficies:5"
+          ],
+          "procedure": "Calcular volum de cub com aresta al cub",
+          "classification": "related_variant_review"
+        }
+      ]
+    },
+    {
+      "parent": "ME2-C036",
+      "reason": "El tipus 15 de Pitàgores tria aleatòriament diagonal o catet desconegut, per tant cal conservar explícitament les dues rutes en lloc d'assignar-los un sol procediment.",
+      "parts": [
+        {
+          "id": "ME2-R036A",
+          "members": [
+            "pitagores:15:diagonal"
+          ],
+          "procedure": "Hipotenusa/diagonal de rectangle a partir de dos catets",
+          "classification": "variant_pedagogic_review"
+        },
+        {
+          "id": "ME2-R036B",
+          "members": [
+            "pitagores:15:catet"
+          ],
+          "procedure": "Catet desconegut des d'hipotenusa i catet",
+          "classification": "variant_pedagogic_review"
+        }
+      ]
+    }
+  ],
+  "additional_variant_checks": [
+    {
+      "key": "superficies:17",
+      "variants": [
+        "sameBase",
+        "other"
+      ],
+      "reason": "Comparar dues caixes, amb bases iguals o diferents; encara no és una escissió del clúster perquè només hi ha un tipus, però pot canviar el nivell."
+    },
+    {
+      "key": "pitagores:15",
+      "variants": [
+        "diagonal",
+        "catet"
+      ],
+      "reason": "S'han de verificar les dues branques reals del generador, amb control explícit de Math.random."
+    }
+  ],
+  "limitations": [
+    "Les tres categories d'estimació són pistes de revisió i no tres famílies genuïnes",
+    "Els tres volums comparteixen nucli de producte; les diferències d'entrada poden ser variants N1/N2 sense famílies separades",
+    "Per a pitagores:15 cal conservar el tipus únic però dues rutes funcionals",
+    "Les 85 agrupacions no són un recompte aprovat de famílies, ni una meta",
+    "La prova d'integritat i de mostres no verifica exhaustivament la càrrega cognitiva ni el currículum"
+  ]
+}

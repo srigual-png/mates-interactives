@@ -1,0 +1,26 @@
+name: Mesura 2n ESO - integracio pedagogica pendent
+on:
+  workflow_dispatch:
+jobs:
+  integracio-pendent:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: No repetir proves ja superades sobre el mateix codi
+        run: |
+          git diff --quiet 5b7e7ea10ff3bf8cfba35f3339c08074990f32df HEAD -- 2eso/sentit-mesura.html
+          echo 'Generadors inalterats respecte de les 1200 comprovacions superades al commit de referencia'
+      - name: Suite diferenciada diposits i percentatges
+        run: node scripts/test-mesura-2eso-integracio-pedagogica-diposits.cjs
+      - name: Suite diferenciada comparacio d'unitats
+        run: node scripts/test-mesura-2eso-integracio-pedagogica-unitats.cjs
+      - name: Resum del lot
+        if: always()
+        run: |
+          echo '## Integracio pedagogica pendent de Mesura 2n ESO' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Les dues suites continuen en fitxers independents i les proves superades anteriorment no es repeteixen en aquest lot.' >> "$GITHUB_STEP_SUMMARY"

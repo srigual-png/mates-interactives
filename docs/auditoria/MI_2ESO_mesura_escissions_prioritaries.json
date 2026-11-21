@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "status": "splits_for_review_only",
+  "scope": "2eso/sentit-mesura/split-of-oversized-working-clusters",
+  "baseline": "MI_2ESO_mesura_cataleg_global_provisional.json",
+  "interpretation": "Escissió de clústers de treball per evitar unions transitives injustificades; les subagrupacions no acrediten famílies pedagògiques independents",
+  "counts": {
+    "reviewed_parent_clusters": 6,
+    "proposed_subclusters": 14,
+    "baseline_clusters": 72,
+    "derived_working_clusters": 80
+  },
+  "splits": [
+    {
+      "parent": "ME2-C001",
+      "reason": "L'escala directa i la ruta de dos trams tenen el mateix factor, però la segona imposa una composició prèvia.",
+      "parts": [
+        {
+          "id": "ME2-R001A",
+          "members": [
+            "escales:1",
+            "escales:2",
+            "problemes:8"
+          ],
+          "procedure": "Escala 1:n: convertir una sola distància dibuixada a real",
+          "level_note": "N2 al codi auditat d'Escales; pendent de verificar Problemes"
+        },
+        {
+          "id": "ME2-R001B",
+          "members": [
+            "escales:17"
+          ],
+          "procedure": "Ruta composta: sumar trams de mapa i després escalar",
+          "level_note": "N2 provisional; identitat com a família pendent"
+        }
+      ]
+    },
+    {
+      "parent": "ME2-C005",
+      "reason": "La reducció realitat→plànol normalitza unitats i divideix; l'ampliació k:1 multiplica directament.",
+      "parts": [
+        {
+          "id": "ME2-R005A",
+          "members": [
+            "escales:3"
+          ],
+          "procedure": "Representació a escala de reducció amb conversió de m a cm",
+          "level_note": "N2 provisional"
+        },
+        {
+          "id": "ME2-R005B",
+          "members": [
+            "escales:5"
+          ],
+          "procedure": "Ampliació directa k:1 en la mateixa unitat",
+          "level_note": "N1 provisional"
+        }
+      ]
+    },
+    {
+      "parent": "ME2-C006",
+      "reason": "Construir una escala 1:n des de mesures amb unitats diferents no és igual que llegir un factor gran/petit.",
+      "parts": [
+        {
+          "id": "ME2-R006A",
+          "members": [
+            "escales:4",
+            "escales:15",
+            "problemes:9"
+          ],
+          "procedure": "Deducció de l'escala normalitzant i simplificant les longituds",
+          "level_note": "N2 provisional en Escales"
+        },
+        {
+          "id": "ME2-R006B",
+          "members": [
+            "escales:12"
+          ],
+          "procedure": "Factor lineal entre dos costats en la mateixa unitat",
+          "level_note": "N1 provisional"
+        }
+      ]
+    },
+    {
+      "parent": "ME2-C007",
+      "reason": "El càlcul d'àrea real a partir de plànol i el d'àrea dibuixada a partir de realitat són inversos i cal verificar si mereixen família diferenciada.",
+      "parts": [
+        {
+          "id": "ME2-R007A",
+          "members": [
+            "escales:6"
+          ],
+          "procedure": "Escala de plànol a superfície real",
+          "level_note": "N2 provisional"
+        },
+        {
+          "id": "ME2-R007B",
+          "members": [
+            "escales:7"
+          ],
+          "procedure": "Escala de realitat a superfície representada",
+          "level_note": "N2 provisional"
+        }
+      ]
+    },
+    {
+      "parent": "ME2-C008",
+      "reason": "Un model d'ombres contextual, l'obtenció d'un costat homòleg i una proporció ja plantejada exigeixen decisions inicials diferents.",
+      "parts": [
+        {
+          "id": "ME2-R008A",
+          "members": [
+            "escales:8",
+            "escales:9",
+            "escales:18",
+            "problemes:10"
+          ],
+          "procedure": "Model d'ombres i altures amb triangles semblants",
+          "level_note": "N2 provisional; incògnita inversa a contrastar"
+        },
+        {
+          "id": "ME2-R008B",
+          "members": [
+            "escales:10"
+          ],
+          "procedure": "Identificar correspondències i calcular costat homòleg",
+          "level_note": "N2 provisional"
+        },
+        {
+          "id": "ME2-R008C",
+          "members": [
+            "escales:11"
+          ],
+          "procedure": "Aïllar x d'una proporció ja formulada",
+          "level_note": "N1 provisional"
+        }
+      ]
+    },
+    {
+      "parent": "ME2-C038",
+      "reason": "Hipotenusa explícita, diagonal de figura i modelització física són variants de Pitàgores amb habilitats inicials potencialment diferents.",
+      "parts": [
+        {
+          "id": "ME2-R038A",
+          "members": [
+            "pitagores:2"
+          ],
+          "procedure": "Hipotenusa directa amb catets ja identificats",
+          "level_note": "Nivell a confirmar a l'auditoria funcional"
+        },
+        {
+          "id": "ME2-R038B",
+          "members": [
+            "pitagores:4",
+            "pitagores:5",
+            "pitagores:13",
+            "problemes:6"
+          ],
+          "procedure": "Diagonal de rectangle, quadrat o pantalla com a hipotenusa",
+          "level_note": "Nivell segons complexitat del plantejament"
+        },
+        {
+          "id": "ME2-R038C",
+          "members": [
+            "pitagores:6",
+            "pitagores:7",
+            "pitagores:8",
+            "problemes:7"
+          ],
+          "procedure": "Modelitzar escales, cables i rampes amb triangle rectangle",
+          "level_note": "Nivell segons identificació de dades i context"
+        }
+      ]
+    }
+  ],
+  "not_split_yet": [
+    "pitagores:15 té variants aleatòries diagonal/catet; conservar com tipus mixt separat fins a inspecció específica",
+    "unitats:6 conserva directa i encadenada com dues assignacions provisionals",
+    "estimacio:1/2/3 i superficies:1/3/5 necessiten contrast abans de decidir escissions"
+  ],
+  "limitations": [
+    "Les escissions NO són fusions ni famílies genuïnes validades",
+    "Els nivells són notes de treball, no canvi de classificadors",
+    "Cal comparació de dues instàncies reals i criteri curricular abans de declarar independència",
+    "No modificar families-validades.json, cap generador ni publicar"
+  ]
+}

@@ -1,0 +1,15 @@
+name: Auditoria rubrica propostes Mesura 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rubrica:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprovar rubrica i estats provisionals
+        run: node scripts/test-mesura-2eso-rubrica-propostes.cjs

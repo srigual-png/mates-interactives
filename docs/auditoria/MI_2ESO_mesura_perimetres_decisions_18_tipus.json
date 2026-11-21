@@ -1,0 +1,239 @@
+{
+  "schema_version": 1,
+  "scope": "2eso/mesura/perimetres",
+  "status": "provisional",
+  "source": "PR #49 static audit; 128-type traceability; cross-topic comparison",
+  "decision_types": {
+    "shared_local_core": "Shared procedure or provisional candidate merge",
+    "contextual_variant": "Variant that may preserve core but change mathematical demand or difficulty",
+    "compound_candidate": "Multi-step task with candidate separate procedural identity",
+    "review_distinct": "Distinct target or diagnostic that requires curriculum comparison",
+    "variant_mixed": "One generator type with different branches and different procedural identity"
+  },
+  "limitations": [
+    "These are decision categories, NOT validated genuine family counts",
+    "Similar-looking error-diagnosis question formats are not automatically shared mathematics",
+    "No N3 inferred from complexity or family quotas",
+    "Production exercise generators and validated family register unchanged; selected internal difficulty-map assignments updated after teacher review on 2026-11-20."
+  ],
+  "rows": [
+    {
+      "key": "perimetres:1",
+      "type": 1,
+      "old_group": "PA01",
+      "decision": "shared_local_core",
+      "procedure": "Àrea directa de paral·lelogram",
+      "shared_with": [
+        "perimetres:2",
+        "perimetres:3"
+      ],
+      "rationale": "PA01, N1; substituir dades, però figures diferents poden requerir fórmula pròpia",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:2",
+      "type": 2,
+      "old_group": "PA01",
+      "decision": "shared_local_core",
+      "procedure": "Àrea directa de rombe a partir de diagonals",
+      "shared_with": [
+        "perimetres:1"
+      ],
+      "rationale": "PA01, N1; contrastar coneixement de fórmula específica",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:3",
+      "type": 3,
+      "old_group": "PA01",
+      "decision": "shared_local_core",
+      "procedure": "Àrea directa de trapezi amb dues bases i altura",
+      "shared_with": [
+        "perimetres:1"
+      ],
+      "rationale": "PA01, N1; contrastar fórmula amb divisió per 2",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:4",
+      "type": 4,
+      "old_group": "PA02",
+      "decision": "review_distinct",
+      "procedure": "Perímetre directe de polígon regular",
+      "shared_with": [],
+      "rationale": "PA02, N1, producte costat per nombre de costats",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:5",
+      "type": 5,
+      "old_group": "PA03",
+      "decision": "review_distinct",
+      "procedure": "Longitud de circumferència",
+      "shared_with": [
+        "perimetres:14"
+      ],
+      "rationale": "PA03, N1; fórmula 2πr i inversa al tipus 14",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:6",
+      "type": 6,
+      "old_group": "PA04",
+      "decision": "shared_local_core",
+      "procedure": "Àrea de cercle",
+      "shared_with": [
+        "perimetres:7"
+      ],
+      "rationale": "PA04, N1; semicercle és una variant de factor mitja àrea",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:7",
+      "type": 7,
+      "old_group": "PA04",
+      "decision": "contextual_variant",
+      "procedure": "Àrea de semicercle, meitat de cercle",
+      "shared_with": [
+        "perimetres:6"
+      ],
+      "rationale": "PA04, N1; identificar part de figura",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:8",
+      "type": 8,
+      "old_group": "PA05",
+      "decision": "compound_candidate",
+      "procedure": "Perímetre de semicercle amb arc més diàmetre",
+      "shared_with": [
+        "perimetres:5"
+      ],
+      "rationale": "PA05, N2; el contorn no és només semicircumferència",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:9",
+      "type": 9,
+      "old_group": "PA06",
+      "decision": "shared_local_core",
+      "procedure": "Sostracció d'àrees en figura L",
+      "shared_with": [
+        "perimetres:11",
+        "problemes:11"
+      ],
+      "rationale": "PA06, N2; exterior menys buit",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:10",
+      "type": 10,
+      "old_group": "PA07",
+      "decision": "compound_candidate",
+      "procedure": "Àrea de rectangle més semicercle",
+      "shared_with": [
+        "perimetres:6"
+      ],
+      "rationale": "PA07, N2; obtenir radi del diàmetre, després sumar figures",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:11",
+      "type": 11,
+      "old_group": "PA06",
+      "decision": "shared_local_core",
+      "procedure": "Àrea de marc per resta d'interior",
+      "shared_with": [
+        "perimetres:9",
+        "problemes:11"
+      ],
+      "rationale": "PA06, N2; mateix nucli de sostracció d'àrees",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:12",
+      "type": 12,
+      "old_group": "PA08",
+      "decision": "contextual_variant",
+      "procedure": "Invertir fórmula d'àrea triangular per trobar base",
+      "shared_with": [
+        "perimetres:13"
+      ],
+      "rationale": "PA08, N1; comparar complexitat amb inversió del trapezi",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:13",
+      "type": 13,
+      "old_group": "PA08",
+      "decision": "contextual_variant",
+      "procedure": "Invertir fórmula d'àrea de trapezi per trobar altura",
+      "shared_with": [
+        "perimetres:12"
+      ],
+      "rationale": "PA08, N1 actual; agrupació B+b pot exigir justificació diferent",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:14",
+      "type": 14,
+      "old_group": "PA09",
+      "decision": "contextual_variant",
+      "procedure": "Recuperar radi de longitud de circumferència",
+      "shared_with": [
+        "perimetres:5"
+      ],
+      "rationale": "N2; invertir L=2πr per aïllar el radi, en contrast amb el càlcul directe N1 del tipus 5. Nivell intern validat el 2026-11-20; agrupació familiar encara provisional.",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:15",
+      "type": 15,
+      "old_group": "PA10",
+      "decision": "compound_candidate",
+      "procedure": "Perímetre d'un polígon i àrea per apotema donada",
+      "shared_with": [
+        "perimetres:4"
+      ],
+      "rationale": "PA10, N2; NO es demana deduir apotema trigonomètricament",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:16",
+      "type": 16,
+      "old_group": "PA06",
+      "decision": "contextual_variant",
+      "procedure": "Àrea útil de paret restant obertures",
+      "shared_with": [
+        "perimetres:9",
+        "problemes:1"
+      ],
+      "rationale": "PA06, N2; compost de retalls, però el rendiment de pintura només a problemes:1",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:17",
+      "type": 17,
+      "old_group": "PA11",
+      "decision": "shared_local_core",
+      "procedure": "Corona circular amb radi exterior recuperat d'amplada",
+      "shared_with": [
+        "problemes:12"
+      ],
+      "rationale": "PA11, N2; expressió π((r+w)²-r²)",
+      "status": "provisional"
+    },
+    {
+      "key": "perimetres:18",
+      "type": 18,
+      "old_group": "PA12",
+      "decision": "review_distinct",
+      "procedure": "Diagnosticar confusió de circumferència i àrea",
+      "shared_with": [
+        "pitagores:16"
+      ],
+      "rationale": "PA12, N1; format semblant a diagnòstic Pitàgores però diferent coneixement",
+      "status": "provisional"
+    }
+  ]
+}

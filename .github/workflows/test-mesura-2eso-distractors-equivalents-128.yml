@@ -1,0 +1,16 @@
+name: Auditoria distractors equivalents Mesura 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Examinar equivalencia numerica i unitats en 7680 exercicis
+        run: node scripts/test-mesura-2eso-distractors-equivalents-128.cjs

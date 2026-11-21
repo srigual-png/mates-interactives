@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+'use strict';
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const folder=path.join(__dirname,'..','docs','auditoria');
+const read=name=>JSON.parse(fs.readFileSync(path.join(folder,name),'utf8'));
+const consolidated=read('MI_2ESO_mesura_estat_consolidat_7_temes.json');
+const triage=read('MI_2ESO_mesura_triatge_curricular_128_sense_quotes.json');
+const priority=read('MI_2ESO_mesura_24_prioritats_revisio_codi.json');
+const remaining=read('MI_2ESO_mesura_104_restants_verificacio_estructural_codi.json');
+const allKeys=new Set(triage.records.map(x=>x.key));
+assert.equal(allKeys.size,128);
+assert.equal(consolidated.by_topic.length,7);
+assert.equal(priority.cases.length,24);
+assert.equal(remaining.records.length,104);
+const priorityKeys=new Set(priority.cases.map(x=>x.key));
+const remainingKeys=new Set(remaining.records.map(x=>x.key));
+for(const key of allKeys)assert(priorityKeys.has(key)!==remainingKeys.has(key),'Missing or overlapping source audit: '+key);
+const totals={types:0,source_inspected:0,independent_oracle_types:0,without_independent_oracle:0,priority_case_count:0,oracle_checks:0};
+for(const t of consolidated.by_topic){
+ const actual=triage.records.filter(x=>x.topic===t.topic).map(x=>x.key);
+ assert.equal(t.types,actual.length);
+ assert.equal(t.source_code_checked,t.types);
+ assert.equal(t.priority_case_count,actual.filter(x=>priorityKeys.has(x)).length);
+ assert.equal(t.independent_oracle_types+t.without_independent_oracle,t.types);
+ assert.equal(t.independent_oracle_instances,(t.independent_oracle_types-t.additional_independent_oracle_types)*40+t.additional_independent_oracle_instances);
+ assert.equal(t.additional_independent_oracle_instances,t.additional_independent_oracle_types*50);
+ assert.equal(t.teacher_approved_families,0);assert.equal(t.teacher_approved_levels,0);
+ totals.types+=t.types;totals.source_inspected+=t.source_code_checked;
+ totals.independent_oracle_types+=t.independent_oracle_types;
+ totals.without_independent_oracle+=t.without_independent_oracle;
+ totals.priority_case_count+=t.priority_case_count;
+ totals.oracle_checks+=t.independent_oracle_instances;
+}
+assert.deepEqual(totals,{types:128,source_inspected:128,independent_oracle_types:128,without_independent_oracle:0,priority_case_count:24,oracle_checks:6200});
+assert.equal(consolidated.totals.types_fixed_with_authorization,2);
+assert.equal(consolidated.generated_test_evidence.additional_independent_oracle_checks,5400);
+assert.equal(consolidated.generated_test_evidence.additional_independent_oracle_types,108);
+assert.equal(consolidated.totals.official_level_changes,0);
+assert.equal(consolidated.totals.official_family_approvals,0);
+assert.equal(consolidated.totals.merged_or_deployed,false);
+assert.equal(consolidated.generated_test_evidence.semantic_duplicates_detected_after_fix,0);
+assert.equal(new Set(consolidated.fixed_items.map(x=>x.key)).size,2);
+console.log('OK: 7 temes, 128 tipus, 128 oracles/6200 contrastos, 0 pendents, 24 casos prioritaris, 2 correccions autoritzades.');

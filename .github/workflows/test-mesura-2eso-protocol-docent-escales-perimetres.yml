@@ -1,0 +1,15 @@
+name: Auditoria protocol docent Escales Perimetres 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprovar tasques de contrast, controls i transferencies
+        run: node scripts/test-mesura-2eso-protocol-docent-escales-perimetres.cjs

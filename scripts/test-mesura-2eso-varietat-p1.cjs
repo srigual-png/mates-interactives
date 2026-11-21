@@ -72,7 +72,7 @@ for (let i = 0; i < 24; i++) {
       if (plain.includes('la capacitat d’una ampolla')) {
         assert(plain.includes('1,5 L') && plain.includes('1500 mL') && plain.includes('1500 L'),
           'Estimacio 14: cal distingir lectura en mL del valor anotat en L');
-        assert(q.correct.includes('barrejat mL i L'), 'Estimacio 14: resposta no concorda amb la barreja indicada');
+        assert(q.correct.includes('1,5 L') && q.correct.includes('1500 mL'), 'Estimacio 14: no valida la conversio de mL a L');
         semantic.unitMix = true;
       }
     }

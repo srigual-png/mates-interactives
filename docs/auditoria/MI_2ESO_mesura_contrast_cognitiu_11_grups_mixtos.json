@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "status": "cognitive_differences_reviewed_provisionally_not_approved",
+  "scope": "2eso/sentit-mesura",
+  "source": "docs/auditoria/MI_2ESO_mesura_cua_validacio_74_families.json",
+  "count": {
+    "reviewed_groups": 11,
+    "approved_groups": 0,
+    "official_level_changes": 0
+  },
+  "cases": [
+    {
+      "group_id": "MI2-FC-C005",
+      "members": [
+        "escales:3",
+        "escales:5"
+      ],
+      "representative_members": [
+        "escales:3",
+        "escales:5"
+      ],
+      "relationship": "same_proportional_structure_different_direction",
+      "evidence": "Reducció 1:n amb conversió m→cm requereix dos passos; ampliació k:1 amb dades en cm exigeix multiplicació directa.",
+      "level_interpretation": "escales:3 N2; escales:5 N1/N2 segons comprensió del sentit k:1.",
+      "provisional_recommendation": "Keep as related variants; do not force one level across group",
+      "current_level_candidates": [
+        "N1_N2",
+        "N2"
+      ],
+      "teacher_approval": "pending",
+      "code_changed": false
+    },
+    {
+      "group_id": "MI2-FC-C008",
+      "members": [
+        "escales:8",
+        "escales:9",
+        "escales:10",
+        "escales:11",
+        "escales:18",
+        "problemes:10"
+      ],
+      "representative_members": [
+        "escales:8",
+        "escales:9",
+        "escales:10",
+        "escales:11",
+        "escales:18",
+        "problemes:10"
+      ],
+      "relationship": "same_proportionality_family_with_implicit_explicit_model",
+      "evidence": "Ombres requereixen construir raons de magnituds homòlogues; escales:11 dona a/b=c/x directament i només exigeix aïllament.",
+      "level_interpretation": "Escales:11 candidat N1/N2, altres N2; no eliminar ajuda ni imposar N1 automàtic.",
+      "provisional_recommendation": "Keep proportionality variants separated by model supplied vs inferred",
+      "current_level_candidates": [
+        "N1_N2",
+        "N2"
+      ],
+      "teacher_approval": "pending",
+      "code_changed": false
+    },
+    {
+      "group_id": "MI2-FC-C010",
+      "members": [
+        "estimacio:10",
+        "estimacio:12"
+      ],
+      "representative_members": [
+        "estimacio:10",
+        "estimacio:12"
+      ],
+      "relationship": "related_rounding_core_distinct_endpoint_task",
+      "evidence": "Meitat d'una unitat d'arrodoniment no exigeix valorar inclusió dels extrems; estimacio:12 exigeix interval amb convenció d'empat ja explicitada al codi.",
+      "level_interpretation": "estimacio:10 N1/N2 segons precisió; estimacio:12 N2 candidata.",
+      "provisional_recommendation": "Retain linked but different cognitive tasks; clarify interval pedagogy",
+      "current_level_candidates": [
+        "N1_N2",
+        "N2"
+      ],
+      "teacher_approval": "pending",
+      "code_changed": false
+    },
+    {
+      "group_id": "MI2-FC-C016",
+      "members": [
+        "estimacio:6",
+        "estimacio:17"
+      ],
+      "representative_members": [
+        "estimacio:6",
+        "estimacio:17"
+      ],
+      "relationship": "same_absolute_error_with_comparison_extension",
+      "evidence": "Error absolut únic amb unitats contra comparar dos errors absoluts de dues aproximacions.",
+      "level_interpretation": "estimacio:6 N1, estimacio:17 N1/N2.",
+      "provisional_recommendation": "Keep common core with comparative variant",
+      "current_level_candidates": [
+        "N1",
+        "N1_N2"
+      ],
+      "teacher_approval": "pending",
+      "code_changed": false
+    },
+    {
+      "group_id": "MI2-FC-C017",
+      "members": [
+        "estimacio:7",
+        "estimacio:8",
+        "estimacio:13"
+      ],
+      "representative_members": [
+        "estimacio:7",
+        "estimacio:8",
+        "estimacio:13"
+      ],
+      "relationship": "same_relative_error_core_different_known_data",
+      "evidence": "Error relatiu en decimal i percentatge exigeixen càlcul previ d'error absolut, però estimacio:13 dona aquest error ja calculat.",
+      "level_interpretation": "estimacio:7/8 N2, estimacio:13 N1/N2.",
+      "provisional_recommendation": "Retain common quotient strategy with data-given variants",
+      "current_level_candidates": [
+        "N1_N2",
+        "N2"
+      ],
+      "teacher_approval": "pending",
+      "code_changed": false
+    },
+    {
+      "group_id": "MI2-FC-C028",
+      "members": [
+        "perimetres:6",
+        "perimetres:7"
+      ],
+      "representative_members": [
+        "perimetres:6",
+        "perimetres:7"
+      ],
+      "relationship": "circle_to_semicircle_fraction_variant",
+      "evidence": "Àrea de cercle πr² i àrea de semicercle πr²/2; l'única transformació és la meitat.",
+      "level_interpretation": "perimetres:6 N1; perimetres:7 N1/N2 segons presentació i ajudes.",
+      "provisional_recommendation": "Common core, retaining half-area variant",
+      "current_level_candidates": [
+        "N1",
+        "N1_N2"
+      ],
+      "teacher_approval": "pending",
+      "code_changed": false
+    },
+    {
+      "group_id": "MI2-FC-C038",
+      "members": [
+        "pitagores:2",
+        "pitagores:4",
+        "pitagores:5",
+        "pitagores:6",
+        "pitagores:7",
+        "pitagores:8",
+        "pitagores:13",
+        "problemes:6",
+        "problemes:7"
+      ],
+      "representative_members": [
+        "pitagores:2",
+        "pitagores:4",
+        "pitagores:5",
+        "pitagores:6",
+        "pitagores:7",
+        "pitagores:8",
+        "pitagores:13",
+        "problemes:6",
+        "problemes:7"
+      ],
+      "relationship": "same_hypotenuse_equation_different_model_discovery",
+      "evidence": "Triangle explícit per calcular hipotenusa vs diagonals, escala o rampa implícites; quadrat demana reconèixer dos catets iguals i aproximar √2.",
+      "level_interpretation": "pitagores:2 N1/N2; contexts i diagonal quadrat N2 candidats.",
+      "provisional_recommendation": "Common formula; separate contextual and approximation variants",
+      "current_level_candidates": [
+        "N1_N2",
+        "N2"
+      ],
+      "teacher_approval": "pending",
+      "code_changed": false
+    },
+    {
+      "group_id": "MI2-FC-C054",
+      "members": [
+        "superficies:13",
+        "superficies:14"
+      ],
+      "representative_members": [
+        "superficies:13",
+        "superficies:14"
+      ],
+      "relationship": "same_prism_volume_different_conversion",
+      "evidence": "Dos volums rectangulars: en m³ requereix multiplicar per 1000 per passar a L; en dm³ s'aplica equivalència directa 1 dm³=1 L.",
+      "level_interpretation": "Candidate contrast: superficies:13 N2; superficies:14 N1/N2 remains a family-level proposal, while the teacher-validated internal map assigns superficies:14 N1 (21/11/2026).",
+      "provisional_recommendation": "Keep capacity model with distinct conversion burden",
+      "current_level_candidates": [
+        "N1_N2",
+        "N2"
+      ],
+      "teacher_approval": "pending",
+      "code_changed": false
+    },
+    {
+      "group_id": "MI2-FC-C056",
+      "members": [
+        "superficies:17"
+      ],
+      "representative_members": [
+        "superficies:17:sameBase",
+        "superficies:17:other"
+      ],
+      "relationship": "same_volume_comparison_generator_conditionally_different",
+      "evidence": "Amb mateixa base es poden comparar només altures; amb bases diferents s'han de comparar productes de dimensions.",
+      "level_interpretation": "sameBase N1 candidata; other N2 candidata.",
+      "provisional_recommendation": "Preserve conditional variants, not separate official generator types",
+      "current_level_candidates": [
+        "N1",
+        "N2"
+      ],
+      "teacher_approval": "pending",
+      "code_changed": false
+    },
+    {
+      "group_id": "MI2-FC-C058-1",
+      "members": [
+        "superficies:2",
+        "superficies:6",
+        "superficies:16"
+      ],
+      "representative_members": [
+        "superficies:2",
+        "superficies:6",
+        "superficies:16"
+      ],
+      "relationship": "same_surface_formula_special_case_cube",
+      "evidence": "Ortoedre tancat requereix tres parelles de cares; cub només exigeix 6·s².",
+      "level_interpretation": "superficies:6 N1, superficies:2/16 N2.",
+      "provisional_recommendation": "Retain cube as simpler special case; do not claim a new family simply because all faces equal",
+      "current_level_candidates": [
+        "N1",
+        "N2"
+      ],
+      "teacher_approval": "pending",
+      "code_changed": false
+    },
+    {
+      "group_id": "MI2-FC-C065",
+      "members": [
+        "unitats:12",
+        "unitats:16",
+        "unitats:6:directa"
+      ],
+      "representative_members": [
+        "unitats:12",
+        "unitats:16",
+        "unitats:6:directa"
+      ],
+      "relationship": "volume_capacity_equivalence_recognition_variant",
+      "evidence": "Equivalència dm³=L amb quantitat donada o reconeixement de la igualtat entre alternatives; unitats:16 pot incorporar prefixos addicionals.",
+      "level_interpretation": "unitats:12 i unitats:6:directa N1; unitats:16 N1/N2 segons alternatives.",
+      "provisional_recommendation": "Preserve equivalence core and decision/option variant",
+      "current_level_candidates": [
+        "N1",
+        "N1_N2"
+      ],
+      "teacher_approval": "pending",
+      "code_changed": false
+    }
+  ],
+  "policy": "One mathematical family may contain variants at different cognitive levels; levels require appropriate learner examples, not a fixed 5-5-3 quota.",
+  "current_source_change_note": "estimacio:12 midpoint tie-breaking wording was explicitly authorized, applied, and tested in PR #49; it is no longer an outstanding permission.",
+  "permissions": {
+    "new_generator_edits": false,
+    "level_changes": false,
+    "family_changes": false,
+    "merged": false,
+    "deployed": false
+  }
+}

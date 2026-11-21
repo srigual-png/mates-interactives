@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "status": "comparative_examples_only",
+  "baseline": "MI_2ESO_mesura_rubrica_propostes.json",
+  "scope": "2eso/sentit-mesura/six-conditional-candidates",
+  "counts": {
+    "candidates": 6,
+    "contrasted_cases": 12,
+    "pending_distinct_strategy": 5,
+    "likely_composite_reuse": 1,
+    "validated_new_families": 0
+  },
+  "cases": [
+    {
+      "id": "U-A",
+      "proposal": "MI2-MES-U-N3-01",
+      "scenario": "Viable; triar la menor capacitat suficient",
+      "input": {
+        "amounts_l": [
+          480,
+          120
+        ],
+        "containers_l": [
+          500,
+          650,
+          800
+        ]
+      },
+      "expected": {
+        "required_l": 600,
+        "choice_l": 650,
+        "feasible": true
+      },
+      "reason": "Un recipient de 500 L no arriba al volum requerit; 650 L és la menor opció viable."
+    },
+    {
+      "id": "U-B",
+      "proposal": "MI2-MES-U-N3-01",
+      "scenario": "Cap alternativa no satisfà la restricció",
+      "input": {
+        "amounts_l": [
+          310,
+          270
+        ],
+        "containers_l": [
+          450,
+          550
+        ]
+      },
+      "expected": {
+        "required_l": 580,
+        "choice_l": null,
+        "feasible": false
+      },
+      "reason": "La suma és 580 L, superior a totes les alternatives; no es pot inventar cap resposta viable."
+    },
+    {
+      "id": "E-A",
+      "proposal": "MI2-MES-E-N3-01",
+      "scenario": "Dos plànols compatibles",
+      "input": {
+        "a_cm": [
+          8,
+          6
+        ],
+        "a_scale": 50,
+        "b_cm": [
+          4,
+          3
+        ],
+        "b_scale": 100
+      },
+      "expected": {
+        "same": true,
+        "area_m2": 12
+      },
+      "reason": "Ambdues representacions donen dimensions reals 4 m per 3 m."
+    },
+    {
+      "id": "E-B",
+      "proposal": "MI2-MES-E-N3-01",
+      "scenario": "Plànols amb diferència en una dimensió",
+      "input": {
+        "a_cm": [
+          8,
+          6
+        ],
+        "a_scale": 50,
+        "b_cm": [
+          4,
+          4
+        ],
+        "b_scale": 100
+      },
+      "expected": {
+        "same": false,
+        "area_m2": null
+      },
+      "reason": "El primer representa 4 per 3 m i el segon 4 per 4 m: no són la mateixa sala."
+    },
+    {
+      "id": "PA-A",
+      "proposal": "MI2-MES-PA-N3-01",
+      "scenario": "Contorn exterior inferior al llindar",
+      "input": {
+        "length_m": 6,
+        "width_m": 4,
+        "semicircle_diameter_m": 4,
+        "threshold_m": 22.5,
+        "pi": 3.14
+      },
+      "expected": {
+        "perimeter_m": 22.28,
+        "below": true
+      },
+      "reason": "S'elimina la vora comuna de 4 m i s'afegeix únicament l'arc semicircular."
+    },
+    {
+      "id": "PA-B",
+      "proposal": "MI2-MES-PA-N3-01",
+      "scenario": "Contorn exterior superior al llindar",
+      "input": {
+        "length_m": 5,
+        "width_m": 6,
+        "semicircle_diameter_m": 6,
+        "threshold_m": 24,
+        "pi": 3.14
+      },
+      "expected": {
+        "perimeter_m": 25.42,
+        "below": false
+      },
+      "reason": "Les tres vores rectangulars visibles fan 16 m i l'arc semicircular 9,42 m."
+    },
+    {
+      "id": "S-A",
+      "proposal": "MI2-MES-S-N3-01",
+      "scenario": "Compleix volum i material",
+      "input": {
+        "l_dm": 4,
+        "w_dm": 3,
+        "h_dm": 2,
+        "min_l": 20,
+        "max_area_dm2": 42
+      },
+      "expected": {
+        "volume_l": 24,
+        "area_dm2": 40,
+        "viable": true
+      },
+      "reason": "24 L supera 20 L i la superfície de material 40 dm² és inferior a 42."
+    },
+    {
+      "id": "S-B",
+      "proposal": "MI2-MES-S-N3-01",
+      "scenario": "Volum suficient però material insuficient",
+      "input": {
+        "l_dm": 4,
+        "w_dm": 3,
+        "h_dm": 2,
+        "min_l": 20,
+        "max_area_dm2": 39
+      },
+      "expected": {
+        "volume_l": 24,
+        "area_dm2": 40,
+        "viable": false
+      },
+      "reason": "El volum supera el mínim però l'àrea necessària, 40 dm², excedeix el màxim de 39."
+    },
+    {
+      "id": "EST-A",
+      "proposal": "MI2-MES-EST-N3-01",
+      "scenario": "Una mesura supera el llindar",
+      "input": {
+        "reference": 100,
+        "measurements": [
+          99,
+          98.5
+        ],
+        "tolerance_pct": 1.2
+      },
+      "expected": {
+        "errors_pct": [
+          1,
+          1.5
+        ],
+        "accepted": [
+          true,
+          false
+        ]
+      },
+      "reason": "Error relatiu percentual 1% per A i 1,5% per B; només el primer és admissible."
+    },
+    {
+      "id": "EST-B",
+      "proposal": "MI2-MES-EST-N3-01",
+      "scenario": "Acceptació exacta al llindar",
+      "input": {
+        "reference": 200,
+        "measurements": [
+          198,
+          197
+        ],
+        "tolerance_pct": 1
+      },
+      "expected": {
+        "errors_pct": [
+          1,
+          1.5
+        ],
+        "accepted": [
+          true,
+          false
+        ]
+      },
+      "reason": "L'error exacte de l'1% queda admès si la condició és error <= tolerància."
+    },
+    {
+      "id": "PR-A",
+      "proposal": "MI2-MES-PR-N3-01",
+      "scenario": "Es necessita arrodonir rotlles a l'alça",
+      "input": {
+        "drawing_cm": [
+          8,
+          6
+        ],
+        "scale": 50,
+        "gate_m": 1,
+        "roll_m": 5
+      },
+      "expected": {
+        "fence_m": 13,
+        "rolls": 3
+      },
+      "reason": "Pati 4 per 3 m, perímetre 14 m, porta 1 m i compra de 3 rotlles de 5 m."
+    },
+    {
+      "id": "PR-B",
+      "proposal": "MI2-MES-PR-N3-01",
+      "scenario": "Longitud exactament múltiple de rotlles",
+      "input": {
+        "drawing_cm": [
+          10,
+          10
+        ],
+        "scale": 50,
+        "gate_m": 0,
+        "roll_m": 5
+      },
+      "expected": {
+        "fence_m": 20,
+        "rolls": 4
+      },
+      "reason": "Un pati de 5 per 5 m té perímetre 20 m, que requereix exactament 4 rotlles."
+    }
+  ],
+  "reviews": [
+    {
+      "proposal_id": "MI2-MES-U-N3-01",
+      "classification": "pending_distinct_strategy",
+      "reason": "La selecció entre capacitats viables aporta un criteri d'optimització, però sumes, comparació i conversió ja existeixen. Cal comparar amb problemes:3.",
+      "novel_family_proven": false,
+      "level_N3_proven": false
+    },
+    {
+      "proposal_id": "MI2-MES-E-N3-01",
+      "classification": "pending_distinct_strategy",
+      "reason": "La coherència entre dos plànols és una pregunta de validació diferent del càlcul d'un únic plànol. Contrastar amb escales:14.",
+      "novel_family_proven": false,
+      "level_N3_proven": false
+    },
+    {
+      "proposal_id": "MI2-MES-PA-N3-01",
+      "classification": "pending_distinct_strategy",
+      "reason": "Identificar el contorn exterior evitant la vora comuna és central; contrastar amb semicercle de perimetres:8.",
+      "novel_family_proven": false,
+      "level_N3_proven": false
+    },
+    {
+      "proposal_id": "MI2-MES-S-N3-01",
+      "classification": "pending_distinct_strategy",
+      "reason": "La decisió amb dues restriccions no figura a la resposta dels tipus simples, però superfície i volum ja són procediments existents.",
+      "novel_family_proven": false,
+      "level_N3_proven": false
+    },
+    {
+      "proposal_id": "MI2-MES-EST-N3-01",
+      "classification": "pending_distinct_strategy",
+      "reason": "El llindar i la igualtat al límit afegeixen decisió, mentre els errors relatius estan representats a estimacio:9.",
+      "novel_family_proven": false,
+      "level_N3_proven": false
+    },
+    {
+      "proposal_id": "MI2-MES-PR-N3-01",
+      "classification": "likely_composite_reuse",
+      "reason": "Els dos casos encaixen la cadena escala→perímetre→porta→arrodoniment, procediments ja inventariats; no s'ha provat independència.",
+      "novel_family_proven": false,
+      "level_N3_proven": false
+    }
+  ],
+  "guardrails": [
+    "Els casos són exemples calculats i contrastats, NO mostres d'un generador nou",
+    "Els casos negatius i els límits eviten biaix de resposta sempre afirmativa",
+    "La rúbrica N3 és hipòtesi i no s'ha demostrat la independència d'una família matemàtica",
+    "Cal formalitzar un objectiu curricular diferencial per cada candidata i revisar els solapaments",
+    "Sense aprovació ni canvis de generadors, registres o web"
+  ]
+}

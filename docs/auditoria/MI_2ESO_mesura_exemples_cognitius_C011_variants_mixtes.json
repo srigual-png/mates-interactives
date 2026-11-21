@@ -1,0 +1,144 @@
+{
+  "schema_version": 1,
+  "status": "evidence_exercises_reviewed_unapproved",
+  "sources": [
+    "2eso/sentit-mesura.html",
+    "docs/auditoria/MI_2ESO_mesura_matriu_nivells_variants_mixtes.json",
+    "docs/auditoria/MI_2ESO_mesura_matriu_decisio_pedagogica_72_clusters.json"
+  ],
+  "checks": [
+    {
+      "key": "estimacio:11",
+      "cluster": "ME2-C011",
+      "task": "Triar l'instrument menys precís que compleix un límit màxim d'error",
+      "example": "Fusta: marge 2 mm; instruments A ±5, B ±2, C ±1, D ±0,5 mm",
+      "expected": "Instrument B",
+      "procedure": "Descartar errors garantits >2 i, dels restants, seleccionar el major error admès",
+      "provisional_level": "N2_possible",
+      "cognitive_rationale": "Cal interpretar dues condicions, comparar toleràncies i optimitzar sense sobreprecisió",
+      "relation_to_other": "estimacio:14 no compara instruments: és coherència entre valor esperat i observat",
+      "risks": [
+        "Revisar llegibilitat de ± i de 'menys precís que compleix' per alumnat de 2n ESO"
+      ],
+      "approval": false
+    },
+    {
+      "key": "estimacio:14",
+      "cluster": "ME2-C011",
+      "task": "Valorar si una mesura és coherent amb una referència",
+      "example": "S'esperaven 80 i s'obtenen 8, sense unitats explicitades",
+      "expected": "No, probablement hi ha un error d'unitat o de mesura",
+      "procedure": "Comparar ordre de magnitud i valorar si la diferència és petita o gran respecte de la referència",
+      "provisional_level": "N1_or_N2_pending",
+      "cognitive_rationale": "Interpretació de l'ordre de magnitud, sense instrument ni càlcul formal obligatori",
+      "relation_to_other": "Separació conceptual proposta de selecció d'instrument (estimacio:11)",
+      "risks": [
+        "Les unitats no apareixen als dos valors; la hipòtesi d'error d'unitat no es pot confirmar",
+        "En el cas 1500 davant 1,5, l'ordre dels números en el text pot fer menys natural l'explicació de mL i L"
+      ],
+      "approval": false
+    },
+    {
+      "key": "unitats:6:directa",
+      "cluster": "ME2-C065",
+      "task": "Equivalència directa volum-capacitat",
+      "example": "2,5 dm³ → L",
+      "expected": "2,5 L",
+      "procedure": "Reconeixement 1 dm³=1 L",
+      "provisional_level": "N1_possible",
+      "cognitive_rationale": "Una equivalència i sense prefix adicional",
+      "relation_to_other": "Mateixa funció generadora que la variant encadenada",
+      "risks": [
+        "No hi ha etiqueta de dificultat explícita dins de l'enunciat"
+      ],
+      "approval": false
+    },
+    {
+      "key": "unitats:6:encadenada",
+      "cluster": "ME2-C069",
+      "task": "Conversió encadenada volum-capacitat",
+      "example": "1,2 m³ → L",
+      "expected": "1.200 L",
+      "procedure": "Passar m³ a dm³ i establir equivalència dm³=L",
+      "provisional_level": "N2_possible",
+      "cognitive_rationale": "Dues transformacions o factor cúbic aplicat correctament",
+      "relation_to_other": "No és una família nova automàtica; diferent càrrega cognitiva",
+      "risks": [
+        "No confondre variació d'unitat amb N3"
+      ],
+      "approval": false
+    },
+    {
+      "key": "pitagores:15:diagonal",
+      "cluster": "ME2-C036",
+      "task": "Diagonal d'un rectangle amb dos costats",
+      "example": "Rectangle 8×15 cm",
+      "expected": "17 cm",
+      "procedure": "Identificar triangle rectangle dins del rectangle, sumar quadrats i extreure arrel",
+      "provisional_level": "N1_or_N2_pending",
+      "cognitive_rationale": "Cal modelitzar la diagonal com hipotenusa, tot i que l'algoritme és directe",
+      "relation_to_other": "Compartir generador amb recuperació de catet",
+      "risks": [
+        "La proposta històrica classifica diagonal N2 i catet N1: cal confirmar que aquesta dificultat relativa és apropiada"
+      ],
+      "approval": false
+    },
+    {
+      "key": "pitagores:15:catet",
+      "cluster": "ME2-C036",
+      "task": "Recuperar un catet a partir d'hipotenusa i altre catet",
+      "example": "Hipotenusa 29 cm i catet 20 cm",
+      "expected": "21 cm",
+      "procedure": "Restar quadrats i extreure arrel",
+      "provisional_level": "N1_or_N2_pending",
+      "cognitive_rationale": "Fórmula inversa sovint exigeix més control algebraic que calcular hipotenusa",
+      "relation_to_other": "No validar automàticament catet N1 i diagonal N2",
+      "risks": [
+        "Comprovar equilibri pedagògic entre variants i nivell real"
+      ],
+      "approval": false
+    },
+    {
+      "key": "superficies:17:sameBase",
+      "cluster": "ME2-C056",
+      "task": "Comparació de volums amb les dues dimensions de base iguals",
+      "example": "A 4×3×2 dm, B 4×3×3 dm",
+      "expected": "El recipient B",
+      "procedure": "Comparar directament altures amb base idèntica",
+      "provisional_level": "N1_possible",
+      "cognitive_rationale": "No cal multiplicar els tres factors si es reconeix la base comuna",
+      "relation_to_other": "Variant del tipus 17 amb bases diferents",
+      "risks": [
+        "Mantenir codificació real de sameBase; no inferir-ne una proporció elevada de casos"
+      ],
+      "approval": false
+    },
+    {
+      "key": "superficies:17:other",
+      "cluster": "ME2-C056",
+      "task": "Comparació de volums amb bases diferents",
+      "example": "A 5×4×2 dm, B 3×4×5 dm",
+      "expected": "El recipient B",
+      "procedure": "Cal calcular dos productes o comparar factors",
+      "provisional_level": "N2_possible",
+      "cognitive_rationale": "La base no és comuna i cal coordinar més dades",
+      "relation_to_other": "No comptar com a família nova per defecte",
+      "risks": [
+        "La sortida pot tenir un altre factor compartit, cal examinar casos reals"
+      ],
+      "approval": false
+    }
+  ],
+  "recommendations": {
+    "ME2_C011": "Separar provisionalment les estratègies de tria instrumental i judici de coherència; revisar l'ambigüitat d'unitats d'estimacio:14 abans d'aprovar-la",
+    "mixed_variants": "Conservar N1/N2 com a hipòtesis; sospitar que la inversió del teorema de Pitàgores pot ser igual o més difícil que diagonal directa",
+    "level_policy": "No aplicar cap quota mínima N3 si no hi ha tasques apropiades a 2n ESO"
+  },
+  "gates": {
+    "official_level_changes": 0,
+    "approved_families": 0,
+    "source_generators_changed": false,
+    "pr_merged": false,
+    "web_deployed": false
+  }
+}

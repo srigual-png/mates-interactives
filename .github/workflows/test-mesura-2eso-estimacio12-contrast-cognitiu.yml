@@ -1,0 +1,15 @@
+name: Auditoria estimacio 12 i carrega cognitiva Mesura 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comparar intervals d'arrodoniment i tolerancia amb 4 contraexemples
+        run: node scripts/test-mesura-2eso-estimacio12-contrast-cognitiu.cjs

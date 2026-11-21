@@ -1,0 +1,15 @@
+name: Auditoria 17 oracles nous Mesura 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprovar 17 oracles independents i 850 exercicis
+        run: node scripts/test-mesura-2eso-oracles-lot-17.cjs

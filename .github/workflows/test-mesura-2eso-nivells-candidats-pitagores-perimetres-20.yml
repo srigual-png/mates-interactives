@@ -1,0 +1,15 @@
+name: Auditoria nivells candidats Pitagores Perimetres 20 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar 20 propostes de dificultat
+        run: node scripts/test-mesura-2eso-nivells-candidats-pitagores-perimetres-20.cjs

@@ -1,0 +1,228 @@
+{
+  "schema_version": 1,
+  "status": "pedagogical_specification_pending_teacher_review",
+  "scope": "2eso/sentit-mesura",
+  "source": "MI_2ESO_mesura_cinc_candidates_diferencials.json",
+  "interpretation": "Especificacions documentals, no famílies ni nivells validats.",
+  "guardrails": [
+    "No modificar generadors ni classificador.",
+    "No fusionar PR ni publicar.",
+    "N3 és hipòtesi, no resultat aprovat.",
+    "Una decisió diferencial no demostra per si sola família genuïna."
+  ],
+  "specifications": [
+    {
+      "proposal_id": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "name": "Validació de dos plànols rectangulars",
+      "objective": "Reconstruir les dimensions reals de dos plànols i verificar que representen el mateix rectangle.",
+      "closest_existing": [
+        "escales:6",
+        "escales:7",
+        "escales:14"
+      ],
+      "differential": "A diferència de calcular una sola àrea o detectar un error tipificat, cal contrastar dues geometries independents; les àrees iguals no són suficients.",
+      "input_contract": "Dos parells de costats en cm i escales 1:n positives; admetre rotació de 90 graus i comparar dimensions reals sense ordre.",
+      "variants": [
+        {
+          "id": "equivalent_rotated",
+          "a_cm": [
+            8,
+            6
+          ],
+          "a_scale": 50,
+          "b_cm": [
+            3,
+            4
+          ],
+          "b_scale": 100,
+          "equivalent": true
+        },
+        {
+          "id": "same_area_non_equivalent",
+          "a_cm": [
+            8,
+            6
+          ],
+          "a_scale": 50,
+          "b_cm": [
+            6,
+            2
+          ],
+          "b_scale": 100,
+          "equivalent": false
+        },
+        {
+          "id": "different_area",
+          "a_cm": [
+            8,
+            6
+          ],
+          "a_scale": 50,
+          "b_cm": [
+            4,
+            4
+          ],
+          "b_scale": 100,
+          "equivalent": false
+        }
+      ],
+      "oracle": "Cada costat real en metres és costat_cm*escala/100; comparar els dos parells ordenats.",
+      "errors": [
+        "Decidir només per igualtat d'àrea.",
+        "Descartar plànols amb escales diferents encara que representin la mateixa geometria.",
+        "No reconèixer equivalència per rotació."
+      ],
+      "scaffold": [
+        "Troba els dos costats reals de cada plànol.",
+        "Considera girar un plànol si està permès.",
+        "Compara els dos costats i justifica la decisió."
+      ],
+      "level_hypothesis": 3,
+      "level_approved": null,
+      "uncertainty": "Pot correspondre a N2 o N3 segons la justificació exigida; verificar abans d'aprovar.",
+      "new_family_approved": false
+    },
+    {
+      "proposal_id": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "name": "Contorn exterior d'una figura composta",
+      "objective": "Distingir la frontera exterior d'una figura rectangle+semicercle del costat interior compartit.",
+      "closest_existing": [
+        "perimetres:8",
+        "perimetres:10"
+      ],
+      "differential": "El semicercle aïllat inclou diàmetre en el perímetre; quan s'adossa al rectangle, aquesta vora esdevé interior.",
+      "input_contract": "Rectangle L×D i semicercle adossat al costat D, amb L,D>0 i PI especificat; llindar opcional estricte.",
+      "variants": [
+        {
+          "id": "below",
+          "length_m": 6,
+          "width_m": 4,
+          "pi": 3.14,
+          "limit_m": 22.5,
+          "perimeter_m": 22.28,
+          "below": true
+        },
+        {
+          "id": "above",
+          "length_m": 5,
+          "width_m": 6,
+          "pi": 3.14,
+          "limit_m": 24,
+          "perimeter_m": 25.42,
+          "below": false
+        },
+        {
+          "id": "exact_limit",
+          "length_m": 6,
+          "width_m": 4,
+          "pi": 3.14,
+          "limit_m": 22.28,
+          "perimeter_m": 22.28,
+          "below": false
+        }
+      ],
+      "oracle": "Perímetre exterior P=2L+D+πD/2; comptar només les tres vores externes rectangulars i l'arc.",
+      "errors": [
+        "Sumar els dos perímetres complets i comptar dues vegades la frontera compartida.",
+        "Eliminar només una aparició del costat compartit.",
+        "Confondre arc i superfície.",
+        "Interpretar inferior a com inferior o igual."
+      ],
+      "scaffold": [
+        "Marca les vores que són exteriors.",
+        "Elimina el costat compartit.",
+        "Calcula l'arc i les tres vores rectangulars.",
+        "Contrasta amb el límit."
+      ],
+      "level_hypothesis": 3,
+      "level_approved": null,
+      "uncertainty": "La detecció de frontera pot ser N2; afegir comparació no prova N3.",
+      "new_family_approved": false
+    },
+    {
+      "proposal_id": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "name": "Acceptació de mesures amb tolerància",
+      "objective": "Calcular error relatiu i determinar si cada lectura compleix una tolerància percentual inclusiva.",
+      "closest_existing": [
+        "estimacio:7",
+        "estimacio:9",
+        "problemes:16"
+      ],
+      "differential": "Ser la lectura més precisa no garanteix superar la condició de tolerància; diferenciar comparar rendiment i verificar admissibilitat.",
+      "input_contract": "Referència R>0, dues lectures i tolerància >=0; acceptar si 100*abs(x-R)/R <= tolerància, sense arrodonir prematurament.",
+      "variants": [
+        {
+          "id": "one_accepted",
+          "reference": 100,
+          "measurements": [
+            99,
+            98.5
+          ],
+          "tolerance_pct": 1.2,
+          "accepted": [
+            true,
+            false
+          ]
+        },
+        {
+          "id": "exact_limit",
+          "reference": 200,
+          "measurements": [
+            198,
+            197
+          ],
+          "tolerance_pct": 1,
+          "accepted": [
+            true,
+            false
+          ]
+        },
+        {
+          "id": "none_accepted",
+          "reference": 100,
+          "measurements": [
+            99,
+            98
+          ],
+          "tolerance_pct": 0.5,
+          "accepted": [
+            false,
+            false
+          ]
+        }
+      ],
+      "oracle": "Error relatiu percentual = 100·|lectura−referència|/referència, comparat amb límit inclusiu.",
+      "errors": [
+        "Triar automàticament la lectura més precisa.",
+        "Confondre error absolut amb percentual.",
+        "Rebutjar igualtat amb el llindar.",
+        "Arrodonir abans de la decisió."
+      ],
+      "scaffold": [
+        "Identifica referència i tolerància.",
+        "Calcula error absolut i percentual.",
+        "Compara cada valor amb el llindar inclusiu.",
+        "Justifica lectures admissibles."
+      ],
+      "level_hypothesis": 3,
+      "level_approved": null,
+      "uncertainty": "Aplicar el llindar podria ser N2; N3 necessita una justificació cognitiva addicional.",
+      "new_family_approved": false
+    }
+  ],
+  "counts": {
+    "specifications": 3,
+    "variants": 9,
+    "approved_genuine_families": 0,
+    "approved_N3": 0
+  },
+  "review_gates": [
+    "Comparar amb el catàleg complet de 128 tipus i provar que l'estratègia no és una simple variant.",
+    "Revisar encaix curricular a 2n ESO i nivell sense forçar N3.",
+    "Si es decideix implementar, exigir diversos generadors, oracles independents, quatre distractors i proves dels modes guiat/autònom/examen.",
+    "Canvis al registre oficial, fusió o publicació requereixen aprovació explícita."
+  ]
+}

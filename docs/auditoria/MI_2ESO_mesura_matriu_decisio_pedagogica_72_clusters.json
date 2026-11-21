@@ -1,0 +1,1106 @@
+{
+  "schema_version": 1,
+  "status": "working_72_cluster_decision_matrix_not_approved",
+  "scope": "2eso/sentit-mesura",
+  "basis": [
+    "docs/auditoria/MI_2ESO_mesura_cataleg_global_provisional.json",
+    "docs/auditoria/MI_2ESO_mesura_triatge_pedagogic_7_clusters_prioritaris.json",
+    "docs/auditoria/MI_2ESO_mesura_triatge_pedagogic_65_restants.json"
+  ],
+  "counts": {
+    "working_clusters": 72,
+    "type_variant_assignments": 129,
+    "generator_types": 128,
+    "exigeix_revisio_docent": 46,
+    "candidata_separacio": 8,
+    "variant_o_procediment_compartit": 18
+  },
+  "policy": "La relació entre clústers no autoritza nous nivells ni famílies. Dificultat segons estratègia matemàtica i adequació a 2n ESO, sense mínims forçats 5-5-3.",
+  "rubric": {
+    "N1": "Recordar o aplicar una sola regla, fórmula o equivalència explícita; identificar una dada o magnitud directa.",
+    "N2": "Triar model, formular una proporció, aïllar incògnita, justificar comparació o encadenar passos accessibles a 2n ESO.",
+    "N3": "Resoldre un context no rutinari amb diverses decisions realment necessàries, sense exigir procediments de cursos superiors.",
+    "rule": "No assignar nivell únic a un tipus mixt sense separar-ne variants i exemples."
+  },
+  "rows": [
+    {
+      "cluster_id": "ME2-C001",
+      "members": [
+        "escales:1",
+        "escales:2",
+        "escales:17",
+        "problemes:8"
+      ],
+      "source": "set_prioritari_7",
+      "hypothesis": "review_split_complexity",
+      "rationale": "Una sola distància a escala i conversió d'unitats, amb variants de context i magnitud de sortida | Sumar dos trams d'un itinerari i aplicar l'escala; una demanda de coordinació de passos addicional",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "No fer pujar automàticament a N3 per tenir dos passos; escales:17 pot ser variant N2.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C002",
+      "members": [
+        "escales:13"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C003",
+      "members": [
+        "escales:14"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C004",
+      "members": [
+        "escales:16"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C005",
+      "members": [
+        "escales:3",
+        "escales:5"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "different_direction",
+      "rationale": "Reducció 1:n de metres a centímetres davant ampliació k:1; procediment proporcional semblant, però orientació i representació diferents.",
+      "pedagogical_direction": "candidata_separacio",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C006",
+      "members": [
+        "escales:4",
+        "escales:12",
+        "escales:15",
+        "problemes:9"
+      ],
+      "source": "set_prioritari_7",
+      "hypothesis": "split_inverse_vs_factor",
+      "rationale": "Deducció de l'escala 1:n a partir de dos valors en unitats consistents | Trobar el factor d'ampliació entre figures semblants, sense escala 1:n",
+      "pedagogical_direction": "candidata_separacio",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Potser mateix principi proporcional, però format de relació i normalització 1:n exigeix una operació diferent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C007",
+      "members": [
+        "escales:6",
+        "escales:7"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "review_inverse_area_scaling",
+      "rationale": "Escala d'àrees amb factor quadràtic: de dibuix a realitat i inversa; conservar com a variants, no duplicar famílies.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C008",
+      "members": [
+        "escales:8",
+        "escales:9",
+        "escales:10",
+        "escales:11",
+        "escales:18",
+        "problemes:10"
+      ],
+      "source": "set_prioritari_7",
+      "hypothesis": "split_proportional_models",
+      "rationale": "Trobar una altura a partir de raons altura/ombra sota les mateixes condicions | Trobar una ombra a partir de la mateixa proporció; incògnita diferent, revisar si és família o variant | Proporcionalitat abstracta entre costats corresponents, sense context d'ombres",
+      "pedagogical_direction": "candidata_separacio",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "El model és proporcional, però la interpretació de les dades i de la incògnita ha de determinar el nivell real.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C009",
+      "members": [
+        "estimacio:1",
+        "estimacio:2",
+        "estimacio:3",
+        "problemes:17"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "retain_context_variants",
+      "rationale": "Estimar ordres de magnitud de longitud, superfície, volum i capacitat; valoritzar magnitud i ordre de mida, no cada objecte com a família.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C010",
+      "members": [
+        "estimacio:10",
+        "estimacio:12"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "related_not_identical",
+      "rationale": "Error màxim de mitja unitat d'arrodoniment vs interval semiobert de valors compatibles; segon exigeix interpretar límits i convenció.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C011",
+      "members": [
+        "estimacio:11",
+        "estimacio:14"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "split_after_real_fix",
+      "rationale": "ATENCIÓ: estimacio:11 ja no tracta xifres creïbles; després de la correcció autoritzada compara toleràncies d'instruments, mentre estimacio:14 jutja coherència d'una mesura.",
+      "pedagogical_direction": "candidata_separacio",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "El generador estimacio:11 ha canviat; no reutilitzar l'etiqueta històrica sobre xifres creïbles.",
+      "needs_current_code_recheck": true,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C012",
+      "members": [
+        "estimacio:15"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C013",
+      "members": [
+        "estimacio:18"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C014",
+      "members": [
+        "estimacio:4"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C015",
+      "members": [
+        "estimacio:5",
+        "estimacio:16"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "retain_context_variants",
+      "rationale": "Mateixa regla d'arrodoniment a precisió indicada; lectures i situacions diferents, sense necessitat de família nova.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C016",
+      "members": [
+        "estimacio:6",
+        "estimacio:17"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "related_variants",
+      "rationale": "Error absolut amb una comparació vs contrast de dos errors absoluts; procediment base compartit però un pas addicional.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C017",
+      "members": [
+        "estimacio:7",
+        "estimacio:8",
+        "estimacio:13"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "related_variants",
+      "rationale": "Error relatiu com a quocient, expressió percentual i cas amb error absolut proporcionat; graduar procediments dins de la mateixa habilitat.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C018",
+      "members": [
+        "estimacio:9"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C019",
+      "members": [
+        "perimetres:1",
+        "perimetres:2",
+        "perimetres:3"
+      ],
+      "source": "set_prioritari_7",
+      "hypothesis": "split_formulas",
+      "rationale": "Àrea de paral·lelogram base×altura | Àrea de rombe a partir de dues diagonals i divisor 2 | Àrea de trapezi a partir de suma de bases, altura i divisor 2",
+      "pedagogical_direction": "candidata_separacio",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Les tres són aplicacions directes de fórmules, però no la mateixa família computacional independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C020",
+      "members": [
+        "perimetres:10"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C021",
+      "members": [
+        "perimetres:12",
+        "perimetres:13"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "different_inverse_formulas",
+      "rationale": "Aïllar base de triangle vs altura de trapezi; mateixa idea d'inversió però models geomètrics diferents; revisar variants per nivell.",
+      "pedagogical_direction": "candidata_separacio",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C022",
+      "members": [
+        "perimetres:14"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C023",
+      "members": [
+        "perimetres:15"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C024",
+      "members": [
+        "perimetres:17",
+        "problemes:12"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "same_core",
+      "rationale": "Corona circular d'un estany o parterre: obtenir radi exterior i restar dues àrees circulars; context diferent, mateixa estratègia.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C025",
+      "members": [
+        "perimetres:18"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C026",
+      "members": [
+        "perimetres:4"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C027",
+      "members": [
+        "perimetres:5"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C028",
+      "members": [
+        "perimetres:6",
+        "perimetres:7"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "same_core",
+      "rationale": "Àrea de cercle i de semicercle; la segona exigeix dividir per dos, no una competència completament nova.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C029",
+      "members": [
+        "perimetres:8"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C030",
+      "members": [
+        "perimetres:9",
+        "perimetres:11",
+        "perimetres:16"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "retain_related_variants",
+      "rationale": "Restar àrees: L, marc interior i paret amb porta/finestra; d'una sostracció a diverses, graduar per complexitat.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C031",
+      "members": [
+        "pitagores:1"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C032",
+      "members": [
+        "pitagores:10"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C033",
+      "members": [
+        "pitagores:11"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C034",
+      "members": [
+        "pitagores:12"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C035",
+      "members": [
+        "pitagores:14"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C036",
+      "members": [
+        "pitagores:15"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C037",
+      "members": [
+        "pitagores:16"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C038",
+      "members": [
+        "pitagores:2",
+        "pitagores:4",
+        "pitagores:5",
+        "pitagores:6",
+        "pitagores:7",
+        "pitagores:8",
+        "pitagores:13",
+        "problemes:6",
+        "problemes:7"
+      ],
+      "source": "set_prioritari_7",
+      "hypothesis": "retain_core_mark_variants",
+      "rationale": "Identificar catets perpendiculars i obtenir hipotenusa; context variable (diagonal, escala, rampa o objecte) | Diagonal d'un quadrat: cas especial a√2; sortida possiblement irracional i més càrrega d'aproximació",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "No confondre moltes presentacions del mateix càlcul amb moltes famílies; prioritzar variació de representació, arrodoniment i identificació.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C039",
+      "members": [
+        "pitagores:3"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C040",
+      "members": [
+        "pitagores:9"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C041",
+      "members": [
+        "problemes:1"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C042",
+      "members": [
+        "problemes:11"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C043",
+      "members": [
+        "problemes:13"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C044",
+      "members": [
+        "problemes:14"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C045",
+      "members": [
+        "problemes:15"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C046",
+      "members": [
+        "problemes:16"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C047",
+      "members": [
+        "problemes:19"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C048",
+      "members": [
+        "problemes:2"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C049",
+      "members": [
+        "problemes:3"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C050",
+      "members": [
+        "problemes:5"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C051",
+      "members": [
+        "superficies:1",
+        "superficies:3",
+        "superficies:5"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "split_or_variant",
+      "rationale": "Volum d'ortoedre i cub mitjançant dimensions, prisma amb àrea de base; fórmula base×altura comuna, representacions distintes.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C052",
+      "members": [
+        "superficies:10",
+        "superficies:11"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "same_core_inverse_roles",
+      "rationale": "Aïllar altura o àrea base de V=Ab·h; mateixa família probable amb incògnites diferents.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C053",
+      "members": [
+        "superficies:12",
+        "problemes:20"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "same_core",
+      "rationale": "Aïllar h=V/(πr²) en cilindre, amb possible conversió L↔dm³; variants de context i canvi d'unitat.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C054",
+      "members": [
+        "superficies:13",
+        "superficies:14"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "same_core",
+      "rationale": "Volum rectangular i pas m³→L o dm³→L; dues rutes de conversió sobre model compartit.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C055",
+      "members": [
+        "superficies:15"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C056",
+      "members": [
+        "superficies:17"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C057",
+      "members": [
+        "superficies:18"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C058",
+      "members": [
+        "superficies:2",
+        "superficies:6",
+        "superficies:16",
+        "superficies:20"
+      ],
+      "source": "set_prioritari_7",
+      "hypothesis": "split_visual_vs_formula",
+      "rationale": "Superfície exterior a partir de les cares; variants de cub o ortoedre i context de cartró | Reconèixer les tres parelles de cares d'un desenvolupament pla sense calcular àrees",
+      "pedagogical_direction": "candidata_separacio",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "La representació espacial del desenvolupament pla és una competència diferent; no comptar com una altra família de càlcul d'àrees.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C059",
+      "members": [
+        "superficies:4"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C060",
+      "members": [
+        "superficies:7",
+        "problemes:4"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "same_core",
+      "rationale": "Volum de cilindre πr²h; en problema també es demanen litres des de dm³, sense família pròpia només per context.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C061",
+      "members": [
+        "superficies:8",
+        "superficies:19"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "review_representation",
+      "rationale": "Àrea lateral calculada vs identificació de dimensions del rectangle desplegat; mateixa relació circumferència–altura, demanda espacial diferent.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C062",
+      "members": [
+        "superficies:9"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C063",
+      "members": [
+        "unitats:1",
+        "unitats:4",
+        "unitats:5"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "retain_magnitude_variants",
+      "rationale": "Conversió decimal de longitud, capacitat i massa: factor per potències de deu i magnitud diferent; no comptar prefixos com famílies.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C064",
+      "members": [
+        "unitats:10",
+        "unitats:15"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "different_dimension",
+      "rationale": "Suma de longituds vs suma d'àrees amb conversions; mateixa decisió d'unificar unitats però factor al quadrat en àrees.",
+      "pedagogical_direction": "candidata_separacio",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C065",
+      "members": [
+        "unitats:12",
+        "unitats:16",
+        "unitats:6:directa"
+      ],
+      "source": "set_prioritari_7",
+      "hypothesis": "retain_core_mixed_task_formats",
+      "rationale": "Conversió directa entre volum i capacitat equivalent | Selecció d'una igualtat volum-capacitat correcta entre alternatives; reconèixer possibles unitats diferents",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Mateixa equivalència base, però tasca de reconeixement versus càlcul; revisar diferència de nivell com a variant, no obligatòriament família nova.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C066",
+      "members": [
+        "unitats:13",
+        "unitats:17"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "related_error_diagnosis",
+      "rationale": "Validar una conversió i identificar error de factor dimensional: compartir idea, però tasca d'avaluació/diagnòstic diferent.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C067",
+      "members": [
+        "unitats:2",
+        "unitats:11",
+        "problemes:18"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "same_core",
+      "rationale": "Conversió d'àrees contextualitzada o directa: factor quadràtic idèntic, variant narrativa.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C068",
+      "members": [
+        "unitats:3"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C069",
+      "members": [
+        "unitats:6:encadenada",
+        "unitats:18"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "mixed_variant_review",
+      "rationale": "unitats:6:encadenada i unitats:18 requereixen equivalència volum–capacitat i/o conversió encadenada; preservar variants N1/N2 sense aprovar.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C070",
+      "members": [
+        "unitats:7"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C071",
+      "members": [
+        "unitats:8",
+        "unitats:14"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "related_recognition",
+      "rationale": "Reconèixer multiplicador de superfície/volum i equivalència escrita; no duplicar una família per format pregunta.",
+      "pedagogical_direction": "variant_o_procediment_compartit",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": null,
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    },
+    {
+      "cluster_id": "ME2-C072",
+      "members": [
+        "unitats:9"
+      ],
+      "source": "segona_passada_65",
+      "hypothesis": "singleton_provisional",
+      "rationale": "Un únic tipus en aquesta agrupació; la singularitat no demostra família independent ni nivell.",
+      "pedagogical_direction": "exigeix_revisio_docent",
+      "level_status": "pendent_evidencia_no_aprovat",
+      "specific_warning": "Un membre únic no demostra família independent.",
+      "needs_current_code_recheck": false,
+      "decision": "pendent_docent"
+    }
+  ],
+  "gates": {
+    "docent_level_approval": false,
+    "official_families_approved": 0,
+    "official_levels_changed": 0,
+    "generator_changes": false,
+    "pr_merged": false,
+    "web_published": false
+  },
+  "next_steps": [
+    "Validar amb enunciats representatius el grup C011 segons el codi actual.",
+    "Contrastar les candidates de separació amb criteri de família real i evitar duplicar contextos.",
+    "Escollir N1/N2/N3 per variants després de documentar un exemple de càrrega cognitiva i casos límit.",
+    "Mantenir els altres grups en estat pendent si no hi ha evidència suficient."
+  ]
+}

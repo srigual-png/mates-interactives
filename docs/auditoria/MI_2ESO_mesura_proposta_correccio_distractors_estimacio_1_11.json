@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "status": "proposed_not_approved_not_implemented",
+  "scope": "2eso/sentit-mesura/estimacio-1-11",
+  "context": "Correccions dels distractors equivalents i de la manca d'un criteri inequívoc de precisió",
+  "existing_issues": {
+    "est1": "0,8 m i 80 cm són equivalents, tot i semblar opcions diferents; són distractors incorrectes.",
+    "est11": "84 m i 0,084 km són equivalents; i en altres casos 1,5 L/1,51 L o 1,8 mm/1,81 mm poden ser respostes igualment raonables sense resolució instrumental."
+  },
+  "principles": [
+    "Conservar continguts apropiats a 2n ESO sense exigir xifres significatives avançades ni instruments inexistents.",
+    "No fer servir el mateix valor numèric en unitats diferents com a dues opcions de resposta.",
+    "Per a precisió, declarar la resolució de l'instrument o una pauta explícita d'arrodoniment; evitar criteri subjectiu de 'raonable' amb un únic encert.",
+    "No fer distractors absurds només per omplir quatre opcions.",
+    "Aquest document conté propostes de casos i oracles, no resultats d'alumnat ni autorització d'edició del generador."
+  ],
+  "est1": {
+    "target": "estimacio:1",
+    "recommended_edit": "Canviar només la quarta opció del cas 'gruix d'un telèfon mòbil' mantenint context i resposta correcta.",
+    "current": [
+      "8 mm",
+      "8 cm",
+      "80 cm",
+      "0,8 m"
+    ],
+    "oracle": "8 mm",
+    "proposed": [
+      "8 mm",
+      "8 cm",
+      "80 cm",
+      "0,8 mm"
+    ],
+    "rationale": "0,8 mm és deu vegades menor que 8 mm. El conjunt té 4 valors físics diferents, tot i que convé revisar si els distractors són massa evidents."
+  },
+  "est11": {
+    "target": "estimacio:11",
+    "recommended_edit": "Redissenyar els quatre enunciats perquè cada exercici inclogui valor llegit i precisió instrumental; demanar representació/arrodoniment inequívoc a la unitat especificada. Prioritzar decisió de mesura, no memorització de contexts.",
+    "cases": [
+      {
+        "id": "height",
+        "question": "Un mesurador d'alçada dona 1,723 m i el registre s'ha d'expressar en centímetres sencers. Quin valor s'ha d'anotar?",
+        "options": [
+          "172 cm",
+          "173 cm",
+          "1,72 cm",
+          "1720 cm"
+        ],
+        "correct": "172 cm",
+        "reason": "1,723 m = 172,3 cm, arrodonit a centímetre."
+      },
+      {
+        "id": "distance",
+        "question": "Un comptaquilòmetres indica 84,36 km i el mapa resum demana quilòmetres sencers. Quin valor s'ha d'anotar?",
+        "options": [
+          "84 km",
+          "85 km",
+          "843 km",
+          "83 km"
+        ],
+        "correct": "84 km",
+        "reason": "84,36 km arrodonit a quilòmetre és 84 km; cap opció equivalent."
+      },
+      {
+        "id": "coin",
+        "question": "Un peu de rei mesura el gruix d'una moneda com 1,83 mm i l'informe només admet dècimes de mil·límetre. Quina dada s'hi escriu?",
+        "options": [
+          "1,8 mm",
+          "1,9 mm",
+          "1,83 cm",
+          "18 mm"
+        ],
+        "correct": "1,8 mm",
+        "reason": "1,83 mm arrodonit a dècima és 1,8 mm; un altre grau de precisió no és acceptable."
+      },
+      {
+        "id": "bottle",
+        "question": "Una proveta marca 1,54 L i una etiqueta només admet dècimes de litre. Què hi ha de figurar?",
+        "options": [
+          "1,5 L",
+          "1,6 L",
+          "15,4 L",
+          "1,4 L"
+        ],
+        "correct": "1,5 L",
+        "reason": "1,54 L arrodonit a dècimes és 1,5 L; no s'admet indicar 1,51 L sense haver-lo llegit."
+      }
+    ],
+    "notes": [
+      "Canvia una pregunta contextual molt subjectiva per una pregunta de lectura i precisió explícita, alineada amb l'ESO.",
+      "Revisar amb docent la conveniència de no duplicar estimacio:5 i estimacio:16, que ja practiquen arrodoniments explícits.",
+      "Alternativa a estudiar si es vol preservar família de 'precisió raonable': indicar aparell i rang de lectura i demanar justificació oberta sense única opció correcta."
+    ]
+  },
+  "checks": {
+    "case_count_est11": 4,
+    "suggested_generator_changes_applied": 0,
+    "official_levels_changed": 0,
+    "pedagogical_approval": null,
+    "implementation_authorized": false
+  },
+  "next_step": "Demanar decisió docent sobre preservar la competència de criteri de precisió vs substituir per arrodoniment determinat; no tocar els generadors fins a autorització explícita."
+}

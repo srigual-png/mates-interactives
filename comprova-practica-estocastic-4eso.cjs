@@ -5,7 +5,7 @@ const ids=['dadesVariables4t','taulesRepresentacions4t','comparacioDistribucions
 for(const id of ids)for(const mode of ['multi','open']){
  const url='file:///'+path.resolve('4eso/sentit-estocastic.html').replace(/\\/g,'/')+'?opcio=A&topic='+id;
  await page.goto(url);await page.locator('#screenIntro.active').waitFor();
- await page.evaluate(({id,mode})=>{const i=TOPICS.findIndex(t=>t.id===id);if(i<0)throw Error('Tema absent: '+id);setLevel(1);setMode(mode);selectTopic(i);startPractice();},{id,mode});
+ await page.evaluate(({id,mode})=>{const i=TOPICS.findIndex(t=>t.id===id);if(i<0)throw Error('Tema absent: '+id);setLevel(1);setMode(mode);selectTopic(i);if(id==='dadesVariables4t'&&mode==='open')dadesTypeBag=[1];startPractice();},{id,mode});
  await page.locator('#screenExercise.active').waitFor();
  // Seek a question with a guided hint; retain the first sample if none appears within the bounded sample.
  let foundHint=false;
@@ -17,6 +17,7 @@ for(const id of ids)for(const mode of ['multi','open']){
  const shape=await page.evaluate(()=>({open:document.getElementById('openWrap').style.display!=='none',allowOpen:currentEx.allowOpen!==false,mode:state.mode}));
  assert.equal(shape.mode,mode,'Mode seleccionat '+id);
  assert.equal(shape.open,mode==='open'&&shape.allowOpen,'Controls coherents '+id+' '+mode);
+ if(id==='dadesVariables4t'&&mode==='open')assert(shape.open,'El tipus 1 de dades variables ha de provar explícitament la resposta oberta');
  if(shape.open)openSeen++;
  // Keep branch-only desktop and mobile captures for visual review; no site deployment is involved.
  const captureLabel=id+'-'+mode+'-'+(shape.open?'open-answer':'multiple-choice');

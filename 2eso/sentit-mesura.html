@@ -1583,7 +1583,7 @@ function genEstimacioError2ESO(forceType){
   if(type===1){
     const cases=[
       ['l’alçada d’una porta','2 m',['2 m','20 cm','20 m','200 m']],
-      ['el gruix d’un telèfon mòbil','8 mm',['8 mm','8 cm','80 cm','0,8 m']],
+      ['el gruix d’un telèfon mòbil','8 mm',['8 mm','8 cm','80 cm','0,8 mm']],
       ['la llargada d’una aula','8 m',['8 m','80 cm','80 m','800 m']],
       ['l’amplada d’un full A4','21 cm',['21 cm','2,1 cm','2,1 m','21 m']]
     ],c=shuffle(cases)[0];correct=c[1];options=shuffle(c[2]);question=`Quina és una estimació raonable per a <b>${c[0]}</b>?`;
@@ -1661,18 +1661,33 @@ function genEstimacioError2ESO(forceType){
     guide=['Pensa en l’interval de valors que arrodonirien al mateix nombre.','El límit queda a mig camí entre dues marques consecutives de la precisió utilitzada.'];solution=[`L’error màxim és la meitat de la unitat d’arrodoniment: ${correct}.`];allowOpen=false;
   }
   else if(type===11){
+    // Tria contextual de la precisió: cal decidir quin aparell és suficient
+    // sense exigir més precisió de la necessària. No és un altre arrodoniment.
     const cases=[
-      ['l’alçada d’una persona','1,72 m',['1,72 m','1,723456 m','2 m','172 m']],
-      ['la distància entre dues ciutats per carretera','84 km',['84 km','84,000001 km','84 m','0,084 km']],
-      ['el gruix d’una moneda','1,8 mm',['1,8 mm','2 m','0,000018 km','1,81 mm']],
-      ['la capacitat d’una ampolla','1,5 L',['1,5 L','1,51 L','1500 m³','0,0015 mL']]
-    ],c=shuffle(cases)[0];correct=c[1];options=shuffle(c[2]);question=`Quina manera d’expressar <b>${c[0]}</b> té una precisió i una unitat raonables?`;
-    guide=['Tria primer una unitat adequada al context.','Evita donar decimals que no aporten informació real.','La precisió ha de ser útil i creïble segons la mesura.'];solution=[`Una expressió adequada és ${correct}.`];allowOpen=false;
+      {context:'Per tallar una peça de fusta, el marge màxim d’error admès és de 2 mm.',
+       unit:'mm',limit:2,margins:[5,2,1,0.5],correct:'Instrument B'},
+      {context:'Per mesurar la profunditat d’una piscina, el marge màxim d’error admès és de 2 cm.',
+       unit:'cm',limit:2,margins:[10,5,2,1],correct:'Instrument C'},
+      {context:'Per mesurar aigua en un recipient, el marge màxim d’error admès és de 0,1 L.',
+       unit:'L',limit:0.1,margins:[0.5,0.2,0.1,0.05],correct:'Instrument C'},
+      {context:'Per senyalitzar la llargada d’un recorregut, el marge màxim d’error admès és de 1 m.',
+       unit:'m',limit:1,margins:[5,1,0.5,0.1],correct:'Instrument B'}
+    ],c=shuffle(cases)[0],names=['Instrument A','Instrument B','Instrument C','Instrument D'];
+    const margins=c.margins.map((value,i)=>names[i]+': ±'+fmtNum(value,2)+' '+c.unit);
+    correct=c.correct;options=shuffle(names);
+    question=c.context+' Quatre instruments tenen aquests errors màxims garantits: <b>'+margins.join('; ')+'</b>. Quin instrument és el <b>menys precís que encara compleix</b> el marge d’error admès?';
+    guide=['Compara l’error màxim admès amb l’error màxim garantit de cada instrument.',
+      'Descarta els instruments que poden superar el marge admès.',
+      'Dels que compleixen el requisit, tria el que permet el marge d’error més gran: no cal més precisió de la necessària.'];
+    solution=['El marge d’error màxim admès és ±'+fmtNum(c.limit,2)+' '+c.unit+'.',
+      'Són vàlids els instruments amb error garantit menor o igual que aquest límit.',
+      'El menys precís entre els vàlids és '+correct+': ±'+fmtNum(c.margins[names.indexOf(correct)],2)+' '+c.unit+'.'];
+    allowOpen=false;
   }
   else if(type===12){
     const measured=shuffle([12.3,18.7,25.4,40.6])[0],step=0.1,lo=roundTo(measured-step/2,2),hi=roundTo(measured+step/2,2);
     correct=`des de ${fmtNum(lo,2)} cm (inclòs) fins a ${fmtNum(hi,2)} cm (exclòs)`;options=shuffle([correct,`entre ${fmtNum(measured-step,2)} cm i ${fmtNum(measured+step,2)} cm`,`entre ${fmtNum(measured,2)} cm i ${fmtNum(measured+step,2)} cm`,`exactament ${fmtNum(measured,2)} cm`]);
-    question=`Una longitud s’ha registrat com <b>${fmtNum(measured,1)} cm</b> arrodonida a la dècima. Quin interval és compatible amb aquest arrodoniment?`;
+    question=`Una longitud s’ha registrat com <b>${fmtNum(measured,1)} cm</b> arrodonida a la dècima. Si el valor original queda exactament a mig camí entre dues dècimes, s’arrodoneix cap amunt. Quin interval és compatible amb aquest arrodoniment?`;
     guide=['Una mesura arrodonida a la dècima pot diferir fins a mitja dècima del valor registrat.','Resta i suma aquest marge al valor indicat.'];solution=[`El marge és de 0,05 cm.`,`L’interval compatible és ${correct}.`];allowOpen=false;
   }
   else if(type===13){
@@ -1683,21 +1698,41 @@ function genEstimacioError2ESO(forceType){
   }
   else if(type===14){
     const cases=[
-      [2.03,2,'Sí, és coherent: l’error és petit respecte de 2 m','la llargada d’una taula','m'],
-      [198,200,'Sí, és coherent: l’error és petit respecte de 200 cm','la longitud d’un objecte','cm'],
-      [8,80,'No, probablement hi ha un error d’unitat o de mesura','la llargada d’una taula','cm'],
-      [1500,1.5,'No, cal revisar si s’han barrejat mL i L','la capacitat d’una ampolla','L','mL']
-    ],c=shuffle(cases)[0];correct=c[2];options=shuffle([correct,'Sí, perquè qualsevol aproximació és acceptable','No, perquè una mesura aproximada ha de coincidir exactament','No es pot valorar mai una mesura sense calculadora']);
-    question=c[5]
-      ? `En mesurar <b>${c[3]}</b>, s’esperava un valor proper a <b>${fmtNum(c[1])} ${c[4]}</b>. El recipient graduat indica <b>${fmtNum(c[0])} ${c[5]}</b>, però al registre s’ha anotat <b>${fmtNum(c[0])} ${c[4]}</b>. Quina valoració és més adequada?`
-      : `En mesurar <b>${c[3]}</b>, s’esperava un valor proper a <b>${fmtNum(c[1])} ${c[4]}</b> i s’ha obtingut <b>${fmtNum(c[0])} ${c[4]}</b>. Quina valoració és més adequada?`;
-    guide=['Compara l’ordre de magnitud dels dos valors.','Pregunta’t si la diferència pot ser un petit error de mesura o indica un problema més important.','Tingues present que una confusió d’unitats pot canviar molt el valor numèric.'];solution=[correct+'.'];allowOpen=false;
+      {context:'la llargada d’una taula',reference:2,reading:2.03,tolerance:0.05,unit:'m'},
+      {context:'la longitud d’un objecte',reference:200,reading:198,tolerance:3,unit:'cm'},
+      {context:'la llargada d’una taula',reference:80,reading:8,tolerance:5,unit:'cm'},
+      {context:'la capacitat d’una ampolla',reference:1.5,reading:1500,recorded:1500,unit:'L',readingUnit:'mL'}
+    ],c=shuffle(cases)[0];
+    if(c.readingUnit){
+      correct='Cal registrar 1,5 L: 1500 mL equivalen a 1,5 L.';
+      options=shuffle([correct,'Cal registrar 1.500 L perquè es manté el valor numèric en canviar d’unitat.','Cal registrar 150 L: en passar de mL a L, es divideix per 10.','Cal registrar 15 L: en passar de mL a L, es divideix per 100.']);
+      question=`En mesurar <b>${c.context}</b>, s’esperava un valor proper a <b>${fmtNum(c.reference)} ${c.unit}</b>. El recipient indica <b>${fmtNum(c.reading)} ${c.readingUnit}</b>, però al registre s’ha anotat <b>${fmtNum(c.recorded)} ${c.unit}</b>. Quina anotació és correcta?`;
+      guide=['Expressa la lectura del recipient en la mateixa unitat que el registre.','Recorda que 1.000 mL = 1 L.','Compara el valor convertit amb el valor esperat i corregeix la unitat anotada.'];
+      solution=['1.500 mL = 1,5 L.','Per tant, cal registrar 1,5 L, no 1.500 L.'];
+    }else{
+      const difference=roundTo(Math.abs(c.reading-c.reference),2),within=difference<=c.tolerance;
+      correct=within
+        ? `Sí: l’error absolut és ${fmtNum(difference,2)} ${c.unit} i no supera el marge de ${fmtNum(c.tolerance,2)} ${c.unit}.`
+        : `No: l’error absolut és ${fmtNum(difference,2)} ${c.unit} i supera el marge de ${fmtNum(c.tolerance,2)} ${c.unit}; cal revisar la lectura o la unitat.`;
+      options=shuffle([correct,
+        within?'No, perquè una mesura només és vàlida si coincideix exactament amb el valor de referència.':'Sí, perquè qualsevol aproximació és acceptable encara que superi el marge.',
+        'No es pot valorar la mesura perquè no es dona cap marge d’error.',
+        'Cal sumar el valor de referència i la lectura per comprovar-ne la coherència.']);
+      question=`En mesurar <b>${c.context}</b>, s’esperava un valor de <b>${fmtNum(c.reference)} ${c.unit}</b> i el marge d’error admès és de <b>±${fmtNum(c.tolerance,2)} ${c.unit}</b>. S’ha obtingut <b>${fmtNum(c.reading)} ${c.unit}</b>. La mesura compleix el marge?`;
+      guide=['Calcula la diferència absoluta entre la lectura i el valor de referència.','Compara aquesta diferència amb el marge d’error admès.','La mesura compleix el marge si la diferència és menor o igual que aquest valor.'];
+      solution=[`Error absolut = |${fmtNum(c.reading)} − ${fmtNum(c.reference)}| = ${fmtNum(difference,2)} ${c.unit}.`,`Marge admès = ${fmtNum(c.tolerance,2)} ${c.unit}; ${within?'la diferència no el supera':'la diferència el supera'}.`,correct];
+    }
+    allowOpen=false;
   }
   else if(type===15){
-    const readings=shuffle([[10.2,10.3,10.2],[5.8,5.9,5.8],[25.1,25.2,25.1],[7.4,7.5,7.4]])[0],mean=roundTo((readings[0]+readings[1]+readings[2])/3,2);
-    correct=answerUnit(mean,'cm',2);alts=unitAlternatives(mean,'cm',2);options=uniq4(correct,[answerUnit(Math.max(...readings),'cm',1),answerUnit(Math.min(...readings),'cm',1),answerUnit(roundTo(readings[0]+readings[1]+readings[2],2),'cm',2),answerUnit(roundTo(mean+0.1,2),'cm',2),answerUnit(roundTo(mean-0.1,2),'cm',2)]);
-    question=`S’han fet tres mesures d’una longitud: <b>${readings.map(x=>fmtNum(x,1)).join(' cm, ')} cm</b>. Quina és la mitjana de les tres mesures, usada com a estimació de la longitud?`;
-    guide=['Suma les tres mesures.','Divideix la suma pel nombre de mesures.','Mantén una precisió coherent amb les dades originals.'];solution=[`Mitjana = (${readings.map(x=>fmtNum(x,1)).join(' + ')})/3.`,`Resultat: ${correct}.`];openHint='Escriu el valor i la unitat cm.';
+    const readings=shuffle([[10.2,10.3,10.2],[5.8,5.9,5.8],[25.1,25.2,25.1],[7.4,7.5,7.4]])[0],
+      rawMean=(readings[0]+readings[1]+readings[2])/3,mean=roundTo(rawMean,1);
+    correct=answerUnit(mean,'cm',1);alts=unitAlternatives(mean,'cm',1);
+    options=uniq4(correct,[answerUnit(Math.max(...readings),'cm',1),answerUnit(Math.min(...readings),'cm',1),
+      answerUnit(roundTo(readings[0]+readings[1]+readings[2],1),'cm',1),answerUnit(roundTo(mean+0.1,1),'cm',1),answerUnit(roundTo(mean-0.1,1),'cm',1)]);
+    question=`S’han fet tres mesures d’una longitud: <b>${readings.map(x=>fmtNum(x,1)).join(' cm, ')} cm</b>. Calcula’n la mitjana i arrodoneix el resultat a <b>dècimes de centímetre</b>, la mateixa precisió que les mesures.`;
+    guide=['Suma les tres mesures.','Divideix la suma pel nombre de mesures.','Arrodoneix la mitjana a la dècima més propera, igual que la precisió de les lectures.'];
+    solution=[`Mitjana = (${readings.map(x=>fmtNum(x,1)).join(' + ')})/3 ≈ ${fmtNum(rawMean,3)} cm.`,`Arrodonida a dècimes: ${correct}.`];openHint='Escriu el valor i la unitat cm.';
   }
   else if(type===16){
     const value=shuffle([4.83,7.26,12.74,18.36])[0],floor=floorTo(value,1),ceil=ceilTo(value,1),correctVal=roundTo(value,1);
@@ -1890,9 +1925,9 @@ function genProblemesMesura2ESO(forceType){
     const cases=[{A:80,mm:12},{A:120,mm:8},{A:65,mm:20},{A:150,mm:6}],c=shuffle(cases)[0],res=c.A*c.mm;
     correct=answerUnit(res,'L');alts=unitAlternatives(res,'L');
     options=uniq4(correct,[answerUnit(res/10,'L'),answerUnit(res*10,'L'),answerUnit(c.A,'L'),answerUnit(c.mm,'L')]);
-    question=`En una teulada de <b>${c.A} m²</b> cauen <b>${c.mm} mm</b> de pluja. Sabent que <b>1 mm de pluja sobre 1 m² equival a 1 L</b>, quants litres d’aigua han caigut sobre la teulada?`;
-    guide=['Utilitza directament l’equivalència proporcionada al problema.','Relaciona cada metre quadrat de superfície amb els litres corresponents als mil·límetres de pluja.','Multiplica la superfície per la precipitació i conserva la unitat de capacitat demanada.'];
-    solution=[`${c.mm} mm sobre cada m² equivalen a ${c.mm} L/m².`,`Sobre ${c.A} m² cauen ${c.A} · ${c.mm} = ${correct}.`];openHint='Escriu el valor i la unitat L.';
+    question=`La <b>projecció horitzontal</b> d’una teulada té una superfície de <b>${c.A} m²</b>. Hi cauen <b>${c.mm} mm</b> de pluja. Sabent que <b>1 mm de pluja sobre 1 m² horitzontal equival a 1 L</b>, quants litres d’aigua corresponen a aquesta superfície?`;
+    guide=['Utilitza l’àrea de la projecció horitzontal de la teulada, no l’àrea inclinada.','Aplica l’equivalència indicada: cada mm de pluja sobre 1 m² horitzontal correspon a 1 L.','Multiplica l’àrea per la precipitació i expressa el resultat en litres.'];
+    solution=[`${c.mm} mm sobre cada m² horitzontal equivalen a ${c.mm} L/m².`,`Sobre ${c.A} m² cauen ${c.A} · ${c.mm} = ${correct}.`];openHint='Escriu el valor i la unitat L.';
   }
   else if(type===20){
     const cases=[{r:2,h:5},{r:2.5,h:4},{r:3,h:3},{r:1.5,h:8}],c=shuffle(cases)[0],V=roundTo(3.14*c.r*c.r*c.h,2);

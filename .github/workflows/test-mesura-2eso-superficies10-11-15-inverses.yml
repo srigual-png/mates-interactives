@@ -1,0 +1,13 @@
+name: Mesura 2n ESO - inverses prismes i profunditat
+on:
+  workflow_dispatch:
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validar 1200 inverses i quatre parelles de prismes
+        run: node scripts/test-mesura-2eso-superficies10-11-15-inverses.cjs
