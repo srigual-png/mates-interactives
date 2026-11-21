@@ -8,14 +8,14 @@ La font és el mapa `REVIEWED_LEVELS["2eso/mesura"]` de `assets/js/dificultat-mi
 
 | Tema | Tipus totals | N1 | N2 | N3 | Dèficit mínim de tipus N1/N2/N3 |
 |---|---:|---:|---:|---:|---|
-| Unitats | 18 | 14 | 4 | 0 | 0 / **1** / **3** |
+| Unitats | 18 | 13 | 5 | 0 | 0 / 0 / **3** |
 | Escales | 18 | 5 | 13 | 0 | 0 / 0 / **3** |
 | Pitàgores | 16 | 5 | 11 | 0 | 0 / 0 / **3** |
 | Perímetres | 18 | 10 | 8 | 0 | 0 / 0 / **3** |
 | Superfícies | 20 | 9 | 11 | 0 | 0 / 0 / **3** |
 | Estimació | 18 | 13 | 5 | 0 | 0 / 0 / **3** |
 | Problemes | 20 | 5 | 15 | 0 | 0 / 0 / **3** |
-| **Total** | **128** | **61** | **67** | **0** | — |
+| **Total** | **128** | **60** | **68** | **0** | — |
 
 **Interpretació correcta:** són dèficits dels **tipus actualment classificats**, comparats amb els llindars N1≥5, N2≥5, N3≥3. **No es poden fer servir per acreditar els mínims de famílies genuïnes**, que necessiten comprovació de procediments independents.
 
@@ -39,7 +39,7 @@ Partint dels **72 clústers inicials**, els dos conjunts d'escissions proposats 
 
 La matriu de variants proposa N1/N2 dins de tres tipus mixtos:
 
-- `unitats:6`: conversió directa N1 / encadenada N2. La variant encadenada s'ha incorporat a `REVIEWED_VARIANTS` mitjançant la PR #53, fusionada el 19/11/2026; aquesta assignació és vigent al `main` actual i s'ha d'entendre com a canvi posterior a l'estat original de la PR #49.
+- `unitats:6`: conversió directa N1 / encadenada N2. La variant encadenada s'ha incorporat a `REVIEWED_VARIANTS` mitjançant la PR #53, fusionada el 19/11/2026. El tipus `unitats:16` també queda classificat internament a N2 en aquesta branca per la conversió composta; no és una validació curricular oficial ni una decisió sobre famílies genuïnes.
 - `pitagores:15`: diagonal N2 / catet N2, segons les dues estratègies diferents i la validació interna del 20/11/2026.
 - `superficies:17`: bases iguals N1 / diferents N2.
 
@@ -57,4 +57,4 @@ Els totals 64 N1 + 64 N2 són els nivells **base per tipus**, no l'estadística 
 
 El validador `scripts/test-mesura-2eso-mancances.cjs` recalcula les xifres directament del classificador i de les capes de revisió, incloses les 85 agrupacions hipotètiques. GitHub Actions **#44048157867: correcte**.
 
-**Estat posterior (20/11/2026):** `REVIEWED_LEVELS` s'ha actualitzat per als quatre punts interns validats; no s'han canviat `families-validades.json`, els generadors, els nivells oficials ni la web publicada. La PR #49 continua oberta i en Draft.
+**Estat posterior (21/11/2026):** `REVIEWED_LEVELS` s'ha actualitzat, inclòs `unitats:16` a N2 per la conversió composta; no s'han canviat `families-validades.json`, els generadors, els nivells oficials ni la web publicada. La PR #49 continua oberta i en Draft.
