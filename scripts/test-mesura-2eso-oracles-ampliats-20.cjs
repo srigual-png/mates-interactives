@@ -44,7 +44,7 @@ for(const [topic,n] of Object.entries(kinds)){
    if(key==='estimacio:7'){const m=q.match(/és ([\d,.]+) i una aproximació és ([\d,.]+)/);if(m)expected=Math.abs(cnumber(m[2])-cnumber(m[1]))/cnumber(m[1])}
    if(key==='estimacio:8'){const m=q.match(/referència és ([\d,.]+) i una aproximació és ([\d,.]+)/);if(m)expected=100*Math.abs(cnumber(m[2])-cnumber(m[1]))/cnumber(m[1])}
    if(key==='estimacio:13'){const m=q.match(/error absolut de ([\d,.]+) sobre un valor de referència de ([\d,.]+)/);if(m)expected=100*cnumber(m[1])/cnumber(m[2])}
-   if(key==='estimacio:15'){const m=q.match(/longitud: ([\d,.]+) cm, ([\d,.]+) cm, ([\d,.]+) cm/);if(m)expected=(cnumber(m[1])+cnumber(m[2])+cnumber(m[3]))/3}
+   if(key==='estimacio:15'){const m=q.match(/longitud: ([\d,.]+) cm, ([\d,.]+) cm, ([\d,.]+) cm/);if(m)expected=Math.round(((cnumber(m[1])+cnumber(m[2])+cnumber(m[3]))/3)*10)/10}
    if(key==='estimacio:16'){const m=q.match(/indica ([\d,.]+) m/);if(m)expected=Math.round(cnumber(m[1])*10)/10}
    if(key==='perimetres:4'){const m=q.match(/té ([\d,.]+) costats de ([\d,.]+) cm/);if(m)expected=cnumber(m[1])*cnumber(m[2])}
    if(key==='perimetres:5'){const m=q.match(/radi ([\d,.]+) cm/);if(m)expected=2*3.14*cnumber(m[1])}
