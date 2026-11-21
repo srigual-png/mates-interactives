@@ -1,6 +1,6 @@
 # Auditoria Fase A · Estimació, precisió i error (2n ESO)
 
-**ESTAT: PROVISIONAL. Revisió estàtica, no validació funcional ni pedagògica definitiva. No es modifica el codi.**
+**ESTAT: PROVISIONAL.** Informe estàtic de Fase A; els tipus 11, 14 i 15 s’han actualitzat posteriorment al codi i es descriuen a la [consolidació de casos ambigus](MI_2ESO_mesura_consolidacio_casos_ambigus_estimacio_problemes.md). Les proves corresponents encara no s’han tornat a executar.
 
 ## Font i classificació efectiva
 
@@ -15,14 +15,14 @@
 | Candidat | Raonament matemàtic genuí | Tipus | Nivells reals | Criteri provisional |
 |---|---|---|---|---|
 | EP01 | Estimar una magnitud plausible per ordre de mida i unitat | 1,2,3 | N1 | **N1**: mateixa selecció contextual, independentment de longitud, superfície o volum |
-| EP02 | Triar instrument de mesura segons magnitud i escala | 4 | N1 | **N1**: adequació d'instrument, reconeixement |
+| EP02 | Triar instrument de mesura segons magnitud, escala i tolerància | 4,11 | N1 | **N1** al mapa actual; 11 afegeix triar l’instrument menys precís que compleix el marge admès |
 | EP03 | Arrodonir una lectura a la precisió exigida | 5,16 | N1 | **N1**: mateix procediment i canvi de context |
 | EP04 | Error absolut directe i comparació de dos errors absoluts | 6,17 | N1 | **N1**: distància absoluta a la referència, amb comparació opcional |
 | EP05 | Calcular error relatiu (decimal o percentual) | 7,8,13 | N2 | **N2**: diferència absoluta/referència, i ×100 si percentual; 13 dona l'error absolut |
 | EP06 | Comparar precisió relativa entre dues mesures | 9 | N2 | **N2**: comparar dos quocients, no només errors absoluts |
 | EP07 | Interpretar interval d'arrodoniment i error màxim | 10,12 | N1,N2 | **N1/N2 segons variant**: reconèixer mig pas (10), construir interval compatible amb inclusió/exclusió (12) |
-| EP08 | Validar coherència de magnitud, unitat i precisió d'una lectura | 11,14 | N1 | **N1** actual, però l'enunciat 14 no explicita les unitats en tots els casos |
-| EP09 | Estimar longitud amb mitjana de lectures repetides | 15 | N1 | **N1**: mitjana aritmètica directa; revisar xifres reportades |
+| EP08 | Validar una lectura respecte d’un valor esperat i una tolerància | 14 | N1 | **N1** al mapa actual; diferent de la selecció d’instrument de 11 i relacionada amb unitats |
+| EP09 | Estimar longitud amb mitjana de lectures repetides | 15 | N1 | **N1**: mitjana directa, arrodonida a la mateixa precisió d’una dècima que les lectures |
 | EP10 | Diagnosticar confusió entre suma i error absolut | 18 | N1 | **N1**: error explicitat; distractors febles |
 
 **Recompte correcte: 10 famílies candidates (EP01–EP10), no nou.** Aquestes categories són encara provisionals. EP04/EP10 podrien ser variants del mateix coneixement; EP03/EP07 comparteixen arrodoniment però exigeixen procediments diferents; EP01/EP08 comparteixen coherència contextual però no la mateixa demanda. Es cobreixen tots els tipus **1–18** una sola vegada en la matriu. No se'n fabrica cap N3.
@@ -38,8 +38,8 @@ Exemples **construïts a partir dels procediments i dominis del codi**. No repre
 - **EP05 — Error relatiu:** referència 200, mesura 204 → error 4, relatiu 4/200=**0,02** = **2 %**; error absolut 5 sobre referència 500 → (5/500)·100=**1 %**. Error: confondre decimal i percentatge. Línies 1637–1642, 1643–1653, 1680–1689.
 - **EP06 — Comparar errors relatius:** A 102/100 → **2 %** i B 11/10 → **10 %**, A més precisa; A 204/200=**2 %** i B 21/20=**5 %**, A més precisa. Error: comparar només diferències absolutes. Línies 1654–1658.
 - **EP07 — Mig pas i interval:** arrodonir a la dècima dona límit d'error **0,05**; una lectura 12,3 cm a la dècima és compatible amb **[12,25; 12,35) cm** sota arrodoniment habitual per a nombres positius. Error: incloure el límit superior o usar ±0,1. Línies 1659–1667 i 1674–1679.
-- **EP08 — Coherència d'una mesura:** «una distància de carretera de 84 km» és una precisió raonable davant 84,000001 km sense evidència; esperat 80 i llegit 8 → **sospita de desajust d'escala o unitat**. Error: confondre precisió aparent amb precisió real. Línies 1668–1673 i 1690–1695.
-- **EP09 — Mitjana de mesures:** 10,2;10,3;10,2 cm → (30,7)/3=10,2333… → **10,23 cm** segons el generador; 5,8;5,9;5,8 cm → 17,5/3=5,8333… → **5,83 cm** segons el generador. Cal diferenciar el càlcul intern de l'expressió amb xifres coherents. Línies 1696–1701 (verificar font exacta de tipus 15 en línies 1696 aproximades).
+- **EP08 — Validació de lectura:** lectura de 2,03 m davant referència 2 m i tolerància ±0,05 m → compleix; lectura de 8 cm davant 80 cm amb tolerància ±5 cm → no compleix. La tolerància fa explícit el criteri; el cas d’unitats converteix 1500 mL a 1,5 L abans de revisar el registre.
+- **EP09 — Mitjana de mesures:** 10,2;10,3;10,2 cm → (30,7)/3=10,2333… → **10,2 cm** arrodonit a dècimes. Les lectures i el resultat reportat comparteixen la precisió d’una dècima.
 - **EP10 — Diagnosticar error:** amb referència 20 i mesura 21, l'alumne suma 20+21=41, però error |21−20|=**1**; amb 50 i 54 l'alumne suma 104, error **4**. Error: confondre distància numèrica amb suma. Línies 1708–1717.
 
 ## Incidències amb evidència i prioritat
@@ -51,9 +51,9 @@ Exemples **construïts a partir dels procediments i dominis del codi**. No repre
    - 80→82 vs 8→8,4: 2,5% < 5%.
    El codi dona sempre `La mesura A`. El barrejament de les opcions de resposta **no** arregla el fet que sigui sempre A. Proposta: incloure casos amb precisió B millor i, si escau, empats contextuals justificats.
 2. **TIPUS 17 — resposta sempre A (alta prioritat de varietat):** la desviació d'A pertany a {1,2}, mentre que la de B a {4,5}; així `ea<eb` en qualsevol combinació. `L'aproximació B` mai pot ser la correcta. Proposta: alternar els marges amb casos on B sigui millor; preservar la comparació d'errors absoluts.
-3. **TIPUS 15 — precisió reportada (pendent de criteri pedagògic):** tres lectures amb una decimal sempre donen una mitjana periòdica en els patrons disponibles; la web retorna `roundTo(...,2)` i dues decimals. Una mitjana pot expressar-se amb més xifres de càlcul però presentar-la com una **mesura** pot suggerir una precisió instrumental no sostinguda. Proposta: distingir «mitjana numèrica arrodonida a centèsimes» de «resultat amb precisió instrumental»; revisar enunciat i expectatives del curs.
-4. **TIPUS 14 — unitats i context insuficientment explícits:** en els quatre casos l'enunciat imprimeix valors sense especificar-hi les unitats; les justificacions de les branques fan referència a m, cm, mL i L. Especialment 1.500 vs 1,5 és ambigüitat matemàtica sense unitats. Proposta: incloure magnitud i unitats inicials/finals en cada cas o preguntar explícitament per possible confusió de representació.
-5. **TIPUS 11 — criteri d'«adequació» contextual:** 1,5 L i 1,51 L poden ser totes dues lectures raonables segons instrument; l'enunciat no aporta resolució de la mesura. L'elecció de l'opció correcta està predefinida i pot no ser unívoca conceptualment. Proposta: contextualitzar resolució/ús abans de considerar les respostes incorrectes.
+3. **TIPUS 15 — precisió reportada: resolt al codi.** L’enunciat demana arrodonir la mitjana a dècimes i el generador ja expressa la resposta amb una dècima, igual que les lectures.
+4. **TIPUS 14 — tolerància i unitats: resolt a la redacció.** Els tres casos de comparació indiquen marge d’error i el quart explicita la conversió 1500 mL = 1,5 L. Es manté pendent la validació pedagògica del tipus.
+5. **TIPUS 11 — criteri d’instrument: actualitzat prèviament.** Ara demana triar l’instrument menys precís que encara compleix un marge d’error explícit; és una variant de la selecció d’instrument, no una tasca de plausibilitat com la 14.
 6. **TIPUS 10/12:** diferenciar error de quantització d'arrodoniment de tolerància instrumental; en lectura arrodonida positiva l'interval semiobert es justifica però la semàntica de frontera ha d'estar definida.
 7. **N3:** cap tipus actual justifica problemàtiques de múltiples restriccions no immediates. No afegir-ne per quota.
 
@@ -63,4 +63,4 @@ Exemples **construïts a partir dels procediments i dominis del codi**. No repre
 
 **Pendent:** tests amb oracle d'errors i arrodoniments, UI, modes guiat/autònom, preguntes d'examen i fitxes, validació curricular normativa externa i consens docent. Els workflows d'altres blocs no substitueixen aquesta validació.
 
-**No fer en aquesta PR:** canviar els exercicis, pujar nivells sense justificació o incorporar famílies provisionals al registre `families-validades.json`. Les incidències funcionals requereixen PR separada i proves de regressió.
+**Canvis posteriors documentats:** les redaccions d’estimacio:14/15 i problemes:19 s’han aplicat a la branca de la PR; l’oracle existent d’estimacio:15 s’ha alineat a les dècimes. No s’han canviat nivells ni s’han incorporat famílies al registre `families-validades.json`. Les proves actualitzades encara no s’han executat.
