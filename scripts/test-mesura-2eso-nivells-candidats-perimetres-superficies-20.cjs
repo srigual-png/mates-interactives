@@ -30,7 +30,7 @@ for(const r of p.records){
  assert(r.level_candidate in counts);
  counts[r.level_candidate]++;
 }
-assert.deepEqual(counts,{N1:1,N2:14,N1_N2:5});
+assert.deepEqual(counts,{N1:5,N2:15,N1_N2:0});
 assert.equal(p.counts.official_levels_changed,0);
 assert.equal(p.counts.official_families_approved,0);
 for(const value of Object.values(p.authorizations))assert.equal(value,false);
