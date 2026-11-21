@@ -50,3 +50,6 @@ La matriu de mancances de 5–5–3 conservada a la PR #49 passa a ser **històr
 **Actualització de la revisió docent (20/11/2026):** s'han validat i aplicat al mapa intern de dificultat de la branca quatre assignacions concretes: `perimetres:14` N2; `pitagores:3` (branca inversa) N2; `pitagores:15` (diagonal) N2; i `pitagores:15` (catet) N2. Són nivells interns de MI, no classificacions oficials del currículum, i no aproven les famílies candidates.
 
 **Límits de la proposta general:** aquesta revisió concreta no autoritza reclassificar automàticament els altres tipus, aprovar famílies, crear generadors, fusionar la PR o publicar. La resta de la proposta continua pendent de revisió.
+
+
+**Actualització de la revisió docent (21/11/2026):** s'han afegit al mapa intern `superficies:8` N2 i `superficies:14` N1. El recompte passa de quatre a sis assignacions internes docents validades. Aquesta actualització no aprova famílies ni modifica nivells oficials; la PR #49 continua en Draft, sense fusió ni publicació.
