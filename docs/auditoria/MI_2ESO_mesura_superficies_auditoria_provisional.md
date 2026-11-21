@@ -59,7 +59,7 @@ Tots són exemples pedagògics **construïts a partir de les fórmules i dominis
 6. **N3:** no s'ha trobat un repte genuí de restriccions o reconstrucció no immediata entre els vint tipus. No inventar N3 per satisfer les quotes.
 7. **Solapaments** amb `Unitats i conversions` (volum–capacitat), `Perímetres i àrees` (superfícies), `Pitàgores` i `Problemes de mesura`; contrast transversal pendent.
 
-**Fet anteriorment:** inspecció de les 20 branques i del mapa efectiu, amb exemples aritmètics. La prova ampliada de modes ara cobreix els 20 tipus i totes dues variants de superficies:17 amb DOM simulat; resultat local success, workflow integrat pendent. **No és una prova visual en navegador ni cobreix totes les respostes textuals.** Resten el contrast de nivell per al tipus 7,8,14,18,20, la revisió humana final de famílies, les fitxes/exàmens i la comprovació curricular normativa externa. La PR #49 continua sent d'auditoria, no un canvi funcional.
+**Fet anteriorment:** inspecció de les 20 branques i del mapa efectiu, amb exemples aritmètics. La prova ampliada de modes ara cobreix els 20 tipus i totes dues variants de superficies:17 amb DOM simulat; resultat local success, workflow integrat pendent. **No és una prova visual en navegador ni cobreix totes les respostes textuals.** Resten la decisió docent sobre els dos canvis de mapa proposats (superficies:8 i 14), la revisió humana final de famílies, les fitxes/exàmens i la comprovació curricular normativa externa. La PR #49 continua sent d'auditoria, no un canvi funcional.
 
 
 ## Revisió del bloc i reconciliació de nivells · 21/11/2026
@@ -68,10 +68,10 @@ La lectura comparada de les 20 decisions manté provisionalment: volum rectangul
 
 | Tipus | Mapa efectiu | Proposta candidata | Estat de la revisió |
 |---|---|---|---|
-| superficies:7 | N1 | N1/N2 | N1 defensable amb dimensions donades i aplicació directa; mantenir candidat pendent de validació. |
-| superficies:8 | N1 | N2 | Discrepància: la identificació del rectangle lateral pot afegir demanda espacial; cal decidir si això puja el nivell intern. |
-| superficies:14 | N2 | N1/N2 | Discrepància: l'equivalència dm³=L és directa, però se suma al càlcul del volum; mantenir N2 fins a decisió explícita. |
-| superficies:18 | N1 | N1/N2 | N1 coherent amb diagnòstic de distractors tancats; valorar si la justificació és realment requerida. |
-| superficies:20 | N2 | N1/N2 | N2 defensable per visualització de les tres parelles de cares; conservar com a objectiu diferent de calcular superfície. |
+| superficies:7 | N1 | N1 | Reconciliat: fórmula directa amb dades donades. |
+| superficies:8 | N1 | N2 | **Discrepància pendent:** desplegar la superfície lateral i identificar el rectangle afegeix una modelització espacial; recomanació N2, pendent de validació docent. |
+| superficies:14 | N2 | N1 | **Discrepància pendent:** el producte de dimensions i la identitat dm³=L són directes; recomanació N1, coherent amb problemes:4. |
+| superficies:18 | N1 | N1 | Reconciliat: diagnòstic tancat, amb error i distractors explícits. |
+| superficies:20 | N2 | N2 | Reconciliat: cal associar les tres parelles de cares amb les dimensions de la capsa. |
 
 Aquests candidats no són nivells aprovats i no justifiquen canvis automàtics al mapa. La bateria de modes cobreix ara 104 casos totals: els 20 tipus de Superfícies i Volums, tots els de Unitats, Escales i Perímetres/Àrees, les dues branques de unitats:6 i superficies:17, i mostres dels altres temes. Resultat local success; la integració ha de confirmar el commit.
