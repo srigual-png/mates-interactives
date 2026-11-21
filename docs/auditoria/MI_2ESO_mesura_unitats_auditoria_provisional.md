@@ -2,7 +2,7 @@
 
 **ESTAT: PROVISIONAL — PENDENT DE REVISIÓ PEDAGÒGICA. NO IMPLEMENTADA.**
 
-> **Actualització posterior:** la revisió exhaustiva dels tipus 6, 13, 17 i 18 ha detectat que U06/U07 no justifiquen dues famílies independents. El recompte queda rebaixat a **10 famílies candidates com a màxim**, encara provisionals, i cal revisar possibles solapaments addicionals. Vegeu [l'addenda de variants](MI_2ESO_mesura_unitats_variants_addenda.md), que preval sobre el recompte inicial de 11 d'aquest document.
+> **Reconciliació vigent (21/11/2026):** el contrast posterior assigna `unitats:16` a N2 intern i consolida U06/U07/U08 en dues candidates: U-P06 directa (`unitats:12` i `unitats:6` directa) i U-P07 composta (`unitats:6` encadenada, `unitats:16`, `unitats:18`). El mapa efectiu de la branca té 13 tipus N1 i 5 N2; `unitats:6` manté nivells diferents per variant. Les famílies són provisionals. L'anàlisi que segueix conserva el primer tall de `main` i queda superada per l'[addenda de variants](MI_2ESO_mesura_unitats_variants_addenda.md) en aquests casos.
 
 
 **Fitxers inspeccionats:** `2eso/sentit-mesura.html` (línies 893–1045, registre de temes 2319–2330) i `assets/js/dificultat-mi.js` (línies 9, 11, 390–392, 610–620, 657, 686–746, 777–795). **Origen:** `main` després de la PR #47; SHA de referència `086d7b725db59ebb99266352e84ef8d9470a7d17`. Revisió estàtica del codi; no s'han executat proves de navegador ni mostreig aleatori.
@@ -11,11 +11,11 @@
 
 Per a `2eso/mesura`, el mapa `REVIEWED_LEVELS` de `assets/js/dificultat-mi.js:9` s'utilitza en `classify` via `reviewedLevels` i `mappedLevel` (línies 657 i 744–795). A diferència del mapa històric de `level()` (línies 611–620), **aquest mapa revisat té prioritat**.
 
-- **N1 efectiu — 15 tipus:** 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 16, 17, 18.
-- **N2 efectiu — 3 tipus:** 9, 10, 15.
+- **N1 efectiu — 13 tipus base:** 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 17.
+- **N2 efectiu — 5 tipus:** 9, 10, 15, 16, 18; el tipus 6 també té una variant encadenada N2, mentre que la base és N1.
 - **N3 efectiu:** cap.
 - Un mapa antic de `level()` encara especifica N1={1,2,3,7,8}, N2={4,5,6,9,11,12,14,16}, N3={10,13,15,17,18}. **No és correcte presentar-lo com a nivell efectiu de l'exercici ordinari.** Cal retirar-lo o conciliar-lo en una futura PR de codi, només quan s'acordi la nova classificació.
-- No s'ha identificat cap excepció `REVIEWED_VARIANTS` per a `unitats`. Alguns tipus barregen casos realment diferents, però la web els tracta igual.
+- `REVIEWED_VARIANTS` separa ara la branca encadenada de `unitats:6` com a N2; la classificació N2 de `unitats:16` queda aplicada al mapa intern, no al currículum oficial.
 
 ## 2. Matriu provisional: 11 famílies genuïnes candidates, 18 tipus coberts
 
@@ -26,14 +26,13 @@ Per a `2eso/mesura`, el mapa `REVIEWED_LEVELS` de `assets/js/dificultat-mi.js:9`
 | U03 | Conversió d'unitats de volum | 3 | N1 | **N1** | Factor per tres dimensions, error conceptual específic respecte a la superfície |
 | U04 | Triar la magnitud i una unitat adequada al context | 7 | N1 | **N1** | Reconeixement directe, distractors majoritàriament d'altres magnituds |
 | U05 | Reconèixer factors dimensionals d'àrea i volum | 8,14 | N1 | **N1** | Identificar factor i equivalència unitària; 8 i 14 són formats de resposta del mateix principi |
-| U06 | Identificar equivalència directa dm³ = L | 12 | N1 | **N1** | Substitució d'una equivalència coneguda sense conversió intermèdia |
-| U07 | Reconèixer una igualtat correcta volum–capacitat | 16 | N1 | **N1** | Escollir la igualtat correcta entre distractors; reconeixement i comprovació conceptual |
-| U08 | Encadenar equivalències volum–capacitat amb canvis de prefix | 6,18 | N1 | **N2 parcial** | 18 exigeix mL→cm³→dm³; 6 barreja casos directes N1 amb casos encadenats N2: **cal separar les variants abans de reclassificar tot el tipus 6** |
+| U06 | Equivalència volum–capacitat directa | 12, 6 directa | N1 | **N1** | Aplicar `dm³↔L` o `cm³↔mL` sense canvi de prefix addicional |
+| U08 | Conversió volum–capacitat composta | 6 encadenada, 16, 18 | N2 | **N2** | Enllaçar equivalència amb canvi d'escala; `unitats:16` manté aquest procediment encara que es respongui amb una selecció |
 | U09 | Comparar magnituds després d'unificar unitats | 9 | N2 | **N2** | Una conversió i una decisió de comparació |
 | U10 | Combinar magnituds homogènies expressades en diferents unitats | 10,15 | N2 | **N2** | Conversió prèvia i suma; en 15 cal convertir dues superfícies |
 | U11 | Comprovar conversions i diagnosticar errors | 13,17 | N1 | **N1/N2 segons variant** | 13 barreja igualtats correctes (validació directa) i una errònia amb diagnòstic; 17 revela força la resposta amb distractors poc plausibles. **No elevar indiscriminadament aquests tipus a N2** |
 
-**Distribució orientativa de famílies, abans de separar variants:** 7 N1 clares (U01–U07), 3 N2 (U08–U10, amb salvetat U08), 1 mixta pendent (U11). **No és una distribució final**. Cap N3 genuí no està justificat per les branques inspeccionades. El fet de tenir menys de 15 famílies o 0 N3 no autoritza crear-ne d'artificials.
+**Distribució orientativa després del contrast:** U01–U06 són candidates N1; U08–U10 són candidates N2; U11 continua mixt. Són **10 famílies candidates com a màxim**, no un recompte final. Cap N3 genuí no està justificat per les branques inspeccionades. El fet de tenir menys de 15 famílies o 0 N3 no autoritza crear-ne d'artificials.
 
 Les onze famílies es diferencien per l'objectiu o el raonament; dins U01 i U10 hi ha variants de magnitud, però no necessàriament un nou procediment. U05 i U11 són famílies de valoració de regles o errors i no de càlcul directe. Les coincidències amb els altres sis temes de mesura resten pendents de contrastar.
 
@@ -71,15 +70,10 @@ Error: oblidar elevar el factor al quadrat o al cub. Font: línies 948–957 i 9
 2. 8,75 dm³ → **8,75 L** per la mateixa equivalència.
 Error: multiplicar per 1.000 en una equivalència directa. Font: línies 979–984.
 
-**U07 — Reconèixer igualtats volum–capacitat (N1).**
-1. 0,75 m³ = **750 L**: 1 m³ = 1.000 L.
-2. 2.400 cm³ = **2,4 L**: 1.000 cm³ = 1 L.
-Error: confondre cm³ amb L sense ajustar el prefix. Font: línies 1013–1023.
-
-**U08 — Encadenar relacions volum–capacitat (N1 directe; N2 encadenat).**
-1. 750 cm³ → **750 mL**, utilitzant 1 cm³ = 1 mL (**variant directa, N1**).
-2. 1.250 mL → 1.250 cm³ → **1,25 dm³** (**variant de dos passos, candidata N2**).
-Error: passar de mL a dm³ sense dividir per 1.000. Font: línies 932–940 i 1033–1044.
+**U08 — Conversió volum–capacitat composta (N2).**
+1. 0,75 m³ = **750 L**: passar de m³ a dm³ i aplicar 1 dm³ = 1 L. És el mateix procediment que la branca encadenada de `unitats:6`.
+2. 2.400 cm³ = **2,4 L**: passar de cm³ a mL i aplicar 1.000 mL = 1 L. El tipus 16 demana reconèixer aquesta cadena dins una igualtat; `unitats:18` també enllaça mL=cm³ amb cm³→dm³.
+Error: tractar `cm³`, `dm³` i `L` com si compartissin el mateix factor. Font: tipus 16 (línies 1013–1023), variant encadenada 6 (932–940) i tipus 18 (1033–1044).
 
 **U09 — Comparació entre unitats (N2).**
 1. 1,8 m versus 165 cm: 1,8 m = 180 cm, per tant **la primera és més gran**.
@@ -112,4 +106,7 @@ Error: donar per vàlida qualsevol multiplicació per 100 sense considerar les d
 - Fet: lectura del codi del generador, dels 18 tipus, de la llista `TOPICS` i dels mapes de dificultat amb la seva precedència efectiva; càlcul manual dels exemples.
 - No fet: execució de mostres automàtiques amb Playwright, oracles independents de cada tipus, comprovació de la rotació/famílies, exàmens, fitxes ni avaluació humana dels nivells.
 - **Estat del tema: PROVISIONAL**. No editar `docs/auditoria/families-validades.json`, ni declarar les onze famílies com a validades.
-- **Següent canvi separat:** fixar el tractament de variants 6/13/17 i, si s'accepta, l'eventual reclassificació de 18, amb proves i PR funcional posterior.
+- **Canvi aplicat en aquesta branca:** tipus 6 separat per variants, `unitats:16` N2 intern i `unitats:18` N2. Resten per contrastar millor les variants i els distractors de 13/17; no impliquen una reclassificació automàtica. Les famílies continuen provisionals.
+
+
+**Actualització posterior (21/11/2026):** el mapa intern actual té 13 tipus N1 i 5 tipus N2; `unitats:6` conserva la branca directa a N1 i la branca encadenada a N2. El tipus 16 s'ha aplicat a N2 i s'agrupa provisionalment amb la conversió composta U-P07. La família és candidata, no oficial.
