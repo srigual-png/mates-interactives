@@ -27,6 +27,15 @@ Aquesta addenda consolida el contrast del codi actual de 2eso/sentit-mesura.html
 - estimacio:15 no s’agrupa amb l’arrodoniment directe de 5/16: incorpora mitjana de lectures; ara reporta el resultat a dècimes, com les dades.
 - Els casos de Problemes 1, 3 i 19 són aplicacions o cadenes de procediments coneguts; no es proposa crear famílies només per tenir més passos o un context nou.
 - Els casos 5/8 comparteixen fórmula lateral; no es compten execucions ni exemples construïts com a dades aparellades.
-- Els canvis aplicats ajusten enunciats, opcions, pistes i solucions dels generadors estimacio:14/15 i problemes:19; també s’ha alineat l’oracle existent d’estimacio:15. No canvien els nivells interns ni les famílies oficials. El 21/11/2026 han passat dues comprovacions focalitzades sobre el codi de la branca: l’oracle dels últims 16 tipus (800 mostres, incloent-hi estimacio:14) i el mostreig dels 128 tipus (1.536 generacions, incloent-hi l’aritmètica de problemes:19); ambdues han acabat amb zero errors. No s’ha executat la integració completa ni la suite visual de navegador. PR #49 continua en Draft, sense fusionar ni publicar.
+- Els canvis aplicats ajusten enunciats, opcions, pistes i solucions dels generadors estimacio:14/15 i problemes:19; també s’ha alineat l’oracle existent d’estimacio:15. No canvien els nivells interns ni les famílies oficials. El 21/11/2026 han passat dues comprovacions focalitzades sobre el codi de la branca: l’oracle dels últims 16 tipus (800 mostres, incloent-hi estimacio:14) i el mostreig dels 128 tipus (1.536 generacions, incloent-hi l’aritmètica de problemes:19); ambdues han acabat amb zero errors. En el moment d’aquestes comprovacions focalitzades encara no s’havien executat la integració completa ni una prova visual d’aquest conjunt de canvis de 2n ESO. PR #49 continua en Draft, sense fusionar ni publicar.
 
 **Base del contrast:** codi actual a 2eso/sentit-mesura.html, MI_2ESO_mesura_estimacio_decisions_18_tipus.json, MI_2ESO_mesura_problemes_decisions_20_tipus.json i l’informe de contrast MI_2ESO_mesura_etiquetes_area_lateral_contrast.md.
+
+
+## Actualització de la validació (21/11/2026)
+
+Al commit `3a01e93`, la [integració única de Mesura 2n ESO · run #118](https://github.com/srigual-png/mates-interactives/actions/runs/44930880463) i la [validació integral de Sentit numèric 2n ESO · run #670](https://github.com/srigual-png/mates-interactives/actions/runs/44930880428) han passat. La suite integrada de modes hi ha executat 104 casos amb DOM simulat: 104 en guiat, 104 en autònom i 104 en examen; 85 permeten resposta oberta i 19 són tancats per disseny. Per tant, la comprovació integrada ja no és pendent, però continua sense ser una prova visual real de 2n ESO ni cobertura completa de cada vincle.
+
+La [validació integrada de 4t ESO · run #136](https://github.com/srigual-png/mates-interactives/actions/runs/44930880452) també ha passat. A més, el [test de pràctica de 1r ESO amb Chromium · run #1](https://github.com/srigual-png/mates-interactives/actions/runs/44930880500) valida 6 temes, 12 modalitats i una resposta oberta corregida per la interfície; és una prova de 1r ESO, no evidencia de navegador per als generadors de 2n.
+
+Aquests resultats no canvien els nivells interns ni les famílies, que continuen provisionals. La PR #49 es manté oberta en Draft, sense fusió ni publicació.
