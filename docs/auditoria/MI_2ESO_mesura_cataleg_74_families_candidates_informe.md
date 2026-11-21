@@ -47,3 +47,6 @@ La distribució inicial dels **131 registres de dificultat** era **27 N1 candida
 Les comprovacions de **6.200 mostres matemàtiques/contextuals** de fases anteriors continuen essent un aval del comportament mostrejat dels generadors, **no** una certificació docent del nombre de famílies o de la dificultat.
 
 **Estat posterior (20/11/2026):** cap generador, família aprovada o nivell oficial modificat. Les sis decisions internes de nivell docent validades ja consten al mapa; les agrupacions i l’aprovació de famílies continuen pendents. `estimacio:12` continua pendent d'autorització específica. La PR #49 segueix oberta i en Draft, sense fusió ni publicació.
+
+
+**Actualització interna (21/11/2026):** `unitats:16` s'ha classificat com a N2 al mapa intern i s'ha mogut de U-P06 a U-P07, al costat de la conversió composta de `unitats:6` i `unitats:18`. U-P06 queda homogènia N1; per això deixa de figurar entre els grups de dificultat mixta. La matriu agregada passa de **31 N1, 83 N2 i 17 N1/N2** a **31 N1, 84 N2 i 16 N1/N2**; els grups mixtos pendents són 10. No s'aproven famílies ni nivells oficials.
