@@ -185,7 +185,7 @@
       "decision": "review_distinct",
       "procedure": "Comprovar coherència de valor esperat i observat amb unitat",
       "shared_with": [],
-      "rationale": "Valora si una lectura és plausible o indica una incoherència d’escala/unitat. No comparteix l’estratègia d’estimacio:11 (selecció amb tolerància); el criteri de «valor proper/error petit» encara és qualitatiu. El mapa actual la conserva a N1.",
+      "rationale": "Compara la diferència absoluta de la lectura amb un marge d’error explícit; el cas d’unitats converteix 1500 mL a 1,5 L abans de validar el registre. És diferent de seleccionar un instrument amb tolerància (estimacio:11). El mapa actual la conserva a N1.",
       "status": "provisional"
     },
     {
@@ -195,7 +195,7 @@
       "decision": "review_distinct",
       "procedure": "Mitjana aritmètica de mesures repetides",
       "shared_with": [],
-      "rationale": "Calcula la mitjana aritmètica de lectures repetides; és diferent d’arrodonir una sola lectura (estimacio:5/16). El generador expressa centèsimes tot i que les lectures són a dècimes; cal resoldre aquest criteri de precisió.",
+      "rationale": "Calcula la mitjana aritmètica de lectures repetides i l’arrodoneix a la mateixa precisió d’una dècima que les dades d’entrada. Es diferencia d’arrodonir una sola lectura (estimacio:5/16); N1 es manté al mapa actual.",
       "status": "provisional"
     },
     {
