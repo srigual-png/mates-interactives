@@ -1202,17 +1202,15 @@
       "name": "U-P06",
       "members": [
         "unitats:12",
-        "unitats:16",
         "unitats:6:directa"
       ],
-      "rationale": "Conservació provisional de l'agrupació original; encara pot compartir família amb altres grups",
+      "rationale": "Agrupa les equivalències volum-capacitat immediates de unitats:12 i de la branca directa de unitats:6; nivell candidat N1. La relació amb la conversió composta es manté en U-P07.",
       "decision": "retained_original_pending_comparison",
       "needs_teacher_review": true,
       "level_candidates": [
-        "N1",
-        "N1_N2"
+        "N1"
       ],
-      "level_variation_review_required": true
+      "level_variation_review_required": false
     },
     {
       "id": "MI2-FC-C066",
@@ -1276,9 +1274,10 @@
       "name": "U-P07",
       "members": [
         "unitats:6:encadenada",
-        "unitats:18"
+        "unitats:18",
+        "unitats:16"
       ],
-      "rationale": "Conservació provisional de l'agrupació original; encara pot compartir família amb altres grups",
+      "rationale": "Agrupa la conversió volum-capacitat composta: branca encadenada de unitats:6, unitats:16 (igualtats que també canvien de prefix) i unitats:18. N2 candidat, encara subjecte a revisió de família.",
       "decision": "retained_original_pending_comparison",
       "needs_teacher_review": true,
       "level_candidates": [
@@ -2149,9 +2148,9 @@
     },
     {
       "member": "unitats:16",
-      "group_id": "MI2-FC-C065",
+      "group_id": "MI2-FC-C069",
       "level_candidates": [
-        "N1_N2"
+        "N2"
       ]
     },
     {
