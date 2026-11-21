@@ -1,8 +1,8 @@
-# Contrast de dificultat cognitiva — 11 grups mixtos · 2n ESO
+# Contrast de dificultat cognitiva — grups mixtos · 2n ESO
 
 **Estat:** revisió qualitativa documentada, sense aprovació curricular ni canvis oficials.
 
-S'han contrastat els **11 grups del catàleg provisional de 74 agrupacions** que contenen variants amb diferents orientacions de dificultat N1/N2, utilitzant els enunciats, les pistes i els procediments dels generadors actuals. L'objectiu és **explicar diferències d'estratègia i de suport**, no imposar un únic nivell a tota una família.
+La revisió inicial va contrastar 11 grups del catàleg provisional de 74 agrupacions. Després d'aplicar `unitats:16 → N2` i traslladar-lo de U-P06 a U-P07, U-P06 queda homogènia N1; per tant, resten **10 grups mixtos** per revisar. L'objectiu és **explicar diferències d'estratègia i de suport**, no imposar un únic nivell a tota una família.
 
 | Grup | Tipus o variants | Contrast cognitiu |
 |---|---|---|
@@ -16,7 +16,6 @@ S'han contrastat els **11 grups del catàleg provisional de 74 agrupacions** que
 | C054 | Superfícies 13, 14 | Volum rectangular en m³→L vs dm³=L |
 | C056 | Superfícies 17 | Bases iguals: comparar altures; altres bases: comparar volums |
 | C058-1 | Superfícies 2, 6, 16 | Cub com a sis quadrats vs tres parelles de cares d'un ortoedre |
-| C065 | Unitats 12, 16, 6 directa | Equivalència de volum-capacitat directa vs reconèixer igualtats alternatives |
 
 ## Conclusions preliminars
 
@@ -31,3 +30,6 @@ La fitxa estructurada és `docs/auditoria/MI_2ESO_mesura_contrast_cognitiu_11_gr
 Revisar els **44 grups amb un únic tipus** en comparació amb la resta del catàleg i comprovar si alguns són el mateix procediment en context diferent. Després, proposar un conjunt final de famílies reals i possibles variants N1/N2/N3, sense cap quota forçada i respectant estrictament els continguts de **2n ESO**.
 
 **No s'ha editat cap generador ni modificat cap nivell o família oficial. La PR #49 no s'ha fusionat ni publicat.**
+
+
+**Actualització (21/11/2026):** s'ha resolt el cas que abans figurava com C065. `unitats:16` comparteix amb `unitats:6` encadenada i `unitats:18` la conversió composta (N2); U-P06 queda amb `unitats:12` i `unitats:6` directa (N1). Aquesta revisió és interna i provisional; no aprova cap família oficial.

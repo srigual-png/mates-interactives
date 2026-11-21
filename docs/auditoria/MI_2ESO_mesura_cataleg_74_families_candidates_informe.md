@@ -28,13 +28,13 @@ I **una unió candidata**, encara no aprovada:
 | Amb nou membres | **1** |
 | **Total** | **74** |
 
-**11 grups** contenen orientacions de dificultat diferents entre els membres (o variants desdoblades): són prioritats de revisió docent, no errors. Per exemple, `superficies:17` conserva variants N1 i N2, mentre `C058-1` conté l'àrea directa del cub i la superfície exterior més elaborada d'un ortoedre.
+Inicialment **11 grups** contenien orientacions de dificultat diferents. Després d'aplicar `unitats:16 → N2` i fer U-P06 homogènia N1, en queden **10** per revisar; són prioritats docents, no errors. Per exemple, `superficies:17` conserva variants N1 i N2, mentre `C058-1` conté l'àrea directa del cub i la superfície exterior més elaborada d'un ortoedre.
 
-La distribució inicial dels **131 registres de dificultat** era **27 N1 candidats, 80 N2 candidats i 24 N1/N2 pendents**. Després dels quatre acords docents del 20/11/2026, era **27 N1, 82 N2 i 22 N1/N2 pendents**. La reconciliació provisional de sis casos el 21/11/2026 (perimetres:18, superficies:7/8/14/18/20) la deixa en **31 N1, 83 N2 i 17 N1/N2 pendents**. Són propostes internes; cap nivell oficial ni família s'ha aprovat. Les dues discrepàncies amb el mapa de dificultat intern, `superficies:8` N2 i `superficies:14` N1, es van resoldre i aplicar el 21/11/2026. La quota 5–5–3 continua orientativa, mai obligatòria.
+La distribució inicial dels **131 registres de dificultat** era **27 N1 candidats, 80 N2 candidats i 24 N1/N2 pendents**. Després dels quatre acords docents del 20/11/2026, era **27 N1, 82 N2 i 22 N1/N2 pendents**. La reconciliació provisional de sis casos el 21/11/2026 (perimetres:18, superficies:7/8/14/18/20) la deixava en 31 N1, 83 N2 i 17 N1/N2. Després de `unitats:16 → N2`, els recomptes són **31 N1, 84 N2 i 16 N1/N2**. Són propostes internes; cap nivell oficial ni família s'ha aprovat. Les dues discrepàncies amb el mapa de dificultat intern, `superficies:8` N2 i `superficies:14` N1, es van resoldre i aplicar el 21/11/2026. La quota 5–5–3 continua orientativa, mai obligatòria.
 
 ## Prioritats abans d'aprovar famílies
 
-1. **11 grups de dificultat mixta:** decidir si cal mantenir subvariants dins de la mateixa família, canviar les ajudes o separar procediments.
+1. **10 grups de dificultat mixta:** decidir si cal mantenir subvariants dins de la mateixa família, canviar les ajudes o separar procediments.
 2. **44 grups unipersonals:** buscar duplicacions matemàtiques amb altres famílies abans de donar-los rang propi.
 3. **Tres subdivisions i una unió candidates:** comprovar amb enunciats representatius i decisions cognitives, no només amb fórmules.
 4. **Distractors i ambigüitats:** revisar especialment `estimacio:12` (convenció d'arrodoniment als empats) i `estimacio:14` (unitats del context).
