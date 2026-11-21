@@ -18,9 +18,9 @@ Aquests **131 registres** es corresponen amb els **128 tipus reals** perquè tre
 
 | Classificació candidata dels registres | Nombre |
 |---|---:|
-| N1 | **27** |
-| N2 | **80** |
-| N1/N2 encara pendent | **24** |
+| N1 | **31** |
+| N2 | **83** |
+| N1/N2 encara pendent | **17** |
 | N3 decidit en aquesta fase | **0** |
 | **Total** | **131** |
 
@@ -42,3 +42,8 @@ El recompte **no s'ha d'utilitzar com a distribució definitiva** de la pràctic
 5. Preparar una classificació N1/N2/N3 per **família o variant validada**, sense forçar cap quota ni continguts fora de curs.
 
 **Cap nivell oficial canviat, cap generador modificat en aquesta fase, PR #49 oberta i no publicada.**
+
+
+## Reconciliació de propostes · 21/11/2026
+
+S'han resolt provisionalment sis registres abans classificats N1/N2: `perimetres:18`→N1, `superficies:7`→N1, `superficies:14`→N1, `superficies:18`→N1 i `superficies:20`→N2. La distribució candidata passa a 31 N1, 83 N2 i 17 N1/N2 (131 registres), sense aprovació formal ni canvi de `REVIEWED_LEVELS`. Continuen dues discrepàncies entre proposta i mapa efectiu: `superficies:8` proposat N2/mapa N1 i `superficies:14` proposat N1/mapa N2; cal validació docent abans de qualsevol canvi.
