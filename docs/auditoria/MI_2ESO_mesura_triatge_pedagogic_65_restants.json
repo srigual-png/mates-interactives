@@ -1541,7 +1541,7 @@
     },
     {
       "cluster_id": "ME2-C069",
-      "member_count": 2,
+      "member_count": 3,
       "members": [
         {
           "key": "unitats:6:encadenada",
@@ -1554,6 +1554,12 @@
           "procedure": "Convertir mL a dm³ passant per cm³",
           "first_pass_action": "revisar_nivell",
           "level_review_required": true
+        },
+        {
+          "key": "unitats:16",
+          "procedure": "Conversió composta entre capacitat i unitats cúbiques",
+          "first_pass_action": "revisar_nivell",
+          "level_review_required": true
         }
       ],
       "source_working_labels": [
@@ -1562,7 +1568,7 @@
       "cross_topic": false,
       "review_kind": "multi_member_contrast",
       "proposed_relation": "mixed_variant_review",
-      "pedagogical_rationale": "unitats:6:encadenada i unitats:18 requereixen equivalència volum–capacitat i/o conversió encadenada; preservar variants N1/N2 sense aprovar.",
+      "pedagogical_rationale": "unitats:6:encadenada, unitats:16 i unitats:18 requereixen equivalència volum–capacitat i/o conversió encadenada; preservar variants N1/N2 sense aprovar.",
       "level_proposal": "not_assigned",
       "curricular_approval": "pending",
       "functionality_changed": false

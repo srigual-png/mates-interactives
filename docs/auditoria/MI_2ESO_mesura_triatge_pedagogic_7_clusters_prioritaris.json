@@ -193,7 +193,6 @@
       "id": "ME2-C065",
       "members": [
         "unitats:12",
-        "unitats:16",
         "unitats:6:directa"
       ],
       "proposal": "retain_core_mixed_task_formats",
@@ -204,15 +203,9 @@
             "unitats:6:directa"
           ],
           "core": "Conversió directa entre volum i capacitat equivalent"
-        },
-        {
-          "members": [
-            "unitats:16"
-          ],
-          "core": "Selecció d'una igualtat volum-capacitat correcta entre alternatives; reconèixer possibles unitats diferents"
         }
       ],
-      "level_caveat": "Mateixa equivalència base, però tasca de reconeixement versus càlcul; revisar diferència de nivell com a variant, no obligatòriament família nova."
+      "level_caveat": "El grup directe conserva la conversió i el reconeixement d'equivalències; unitats:16 es tracta al grup de conversió composta ME2-C069."
     }
   ],
   "selected_cluster_count": 7,
