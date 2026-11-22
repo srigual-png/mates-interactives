@@ -43,7 +43,7 @@ La matriu de variants proposa N1/N2 dins de tres tipus mixtos:
 - `pitagores:15`: diagonal N2 / catet N2, segons les dues estratègies diferents i la validació interna del 20/11/2026.
 - `superficies:17`: bases iguals N1 / diferents N2.
 
-Els totals 64 N1 + 64 N2 són els nivells **base per tipus**, no l'estadística real de totes les instàncies generades. Una branca N2 dins un tipus N1 no augmenta el recompte de tipus N2.
+Els totals actuals **60 N1 + 68 N2** són els nivells base per tipus (amb `unitats:16` a N2), no l'estadística real de totes les instàncies generades. Una branca N2 dins un tipus N1 no augmenta el recompte de tipus N2.
 
 ## 4. Prioritats de desenvolupament i revisió
 
