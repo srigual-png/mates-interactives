@@ -27,8 +27,8 @@ Cada identificador tema/tipus és un registre tècnic, no una família pedagògi
 
 - Els registres contenen 625 parelles tema/tipus i 60 temes.
 - El mapa actiu de `assets/js/dificultat-mi.js` coincideix amb el nivell registrat per a tots els 625 tipus: **0 discrepàncies** en aquesta comparació.
-- Les mostres de resultats cobreixen els 624 tipus anteriors sense buits ni duplicats. El nou `financera4t:type 11` encara no apareix al fitxer de mostres; no se n’ha executat una generació integrada en aquesta passada.
-- Les mostres desades indiquen 3.000 generacions per tema a numèric, mesura i algebraic, i 1.000 a espacial i estocàstic, abans d’afegir el tipus 11. Són dades ja existents; no les he tornat a generar.
+- Les mostres de resultats cobreixen els 625 tipus sense buits ni duplicats. `financera4t:type 11` incorpora una tanda addicional i reproduïble de 500 generacions, amb enunciat, resposta, opcions i solució guardats a `resultats-punt3-4eso-numeric.json`.
+- Les mostres prèvies indiquen 3.000 generacions per tema a numèric, mesura i algebraic, i 1.000 a espacial i estocàstic. El nou lot afegeix 500 generacions independents al tema financer, que en registra 3.500 en total. És una mostra de regressió, no una validació exhaustiva de totes les variants possibles.
 - La coincidència entre registres i mapa actiu confirma consistència tècnica, però no demostra que la classificació pedagògica sigui adequada.
 
 ## Dictamen per sentit

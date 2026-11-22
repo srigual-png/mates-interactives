@@ -9,6 +9,7 @@ on:
       - '4eso/teoria/espacial/**'
       - 'assets/css/examen-tema.css'
       - 'scripts/test-itinerari-espacial-4eso.cjs'
+      - 'scripts/fitxes/comprova-oracle-financera4t.cjs'
       - 'comprova-regressio-espacial-4eso.cjs'
       - 'comprova-examens-espacial-4eso.cjs'
       - 'scripts/genera-index-cerca.cjs'
@@ -63,6 +64,7 @@ jobs:
           node --check comprova-ubicacio-estocastic-4eso.cjs
           node --check comprova-practica-estocastic-4eso.cjs
           node --check scripts/test-itinerari-espacial-4eso.cjs
+          node --check scripts/fitxes/comprova-oracle-financera4t.cjs
           node --check comprova-regressio-espacial-4eso.cjs
           node --check comprova-examens-espacial-4eso.cjs
           node --check scripts/genera-index-cerca.cjs
@@ -73,6 +75,9 @@ jobs:
 
       - name: Validar tipus, nivells i motor de fitxes de 4t
         run: node scripts/fitxes/test-4eso.cjs
+
+      - name: Contrastar l'oracle financer N3 de 4t
+        run: node scripts/fitxes/comprova-oracle-financera4t.cjs
 
       - name: Verificar itinerari A/B del sentit espacial
         run: node scripts/test-itinerari-espacial-4eso.cjs
