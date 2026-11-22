@@ -64,7 +64,7 @@ const {playwright,launchOptions}=require('../genera-examens-cerca.cjs');
     assert.equal(financial.types,11,'cens financer actualitzat');
     assert.deepEqual(financial.coverage,[4,6,1],'cobertura N1/N2/N3 actualitzada');
     assert.equal(saved.n,report.samples,'nombre de mostres persistents');
-    assert.deepEqual({question:saved.question,correct:saved.correct,options:saved.options,solution:saved.solution},report.sample,'la mostra persistent coincideix amb la primera mostra reproduïble');
+    assert.deepEqual({question:saved.question,correct:saved.correct,options:saved.options,solution:saved.solution},report.sample,'la mostra persistent coincideix amb la primera mostra reproduïble: '+JSON.stringify({saved:{question:saved.question,correct:saved.correct,options:saved.options,solution:saved.solution},generated:report.sample}));
     console.log(`financera4t:type 11: ${report.samples} mostres, 5 capitals, 2 escenaris, terminis 2–4, guanyadors A/B; oracle matemàtic i distractors OK`);
   }finally{await browser.close();}
 })().catch(error=>{console.error(error);process.exitCode=1;});
