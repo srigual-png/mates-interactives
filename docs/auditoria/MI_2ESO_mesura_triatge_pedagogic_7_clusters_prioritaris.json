@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "status": "pedagogical_triage_proposals_unapproved",
+  "scope": "2eso/sentit-mesura/7-selected-large-clusters",
+  "evidence": "Review of actual exercise branches for the selected clusters plus earlier provisional 72-cluster catalogue; no pupil observations",
+  "selection_criteria": "Large clusters likely to overmerge distinct algorithms, context-only repetition or mixed procedural/recognition tasks",
+  "selected_clusters": [
+    {
+      "id": "ME2-C001",
+      "members": [
+        "escales:1",
+        "escales:2",
+        "escales:17",
+        "problemes:8"
+      ],
+      "proposal": "review_split_complexity",
+      "groups": [
+        {
+          "members": [
+            "escales:1",
+            "escales:2",
+            "problemes:8"
+          ],
+          "core": "Una sola distància a escala i conversió d'unitats, amb variants de context i magnitud de sortida"
+        },
+        {
+          "members": [
+            "escales:17"
+          ],
+          "core": "Sumar dos trams d'un itinerari i aplicar l'escala; una demanda de coordinació de passos addicional"
+        }
+      ],
+      "level_caveat": "No fer pujar automàticament a N3 per tenir dos passos; escales:17 pot ser variant N2."
+    },
+    {
+      "id": "ME2-C006",
+      "members": [
+        "escales:4",
+        "escales:12",
+        "escales:15",
+        "problemes:9"
+      ],
+      "proposal": "split_inverse_vs_factor",
+      "groups": [
+        {
+          "members": [
+            "escales:4",
+            "escales:15",
+            "problemes:9"
+          ],
+          "core": "Deducció de l'escala 1:n a partir de dos valors en unitats consistents"
+        },
+        {
+          "members": [
+            "escales:12"
+          ],
+          "core": "Trobar el factor d'ampliació entre figures semblants, sense escala 1:n"
+        }
+      ],
+      "level_caveat": "Potser mateix principi proporcional, però format de relació i normalització 1:n exigeix una operació diferent."
+    },
+    {
+      "id": "ME2-C008",
+      "members": [
+        "escales:8",
+        "escales:9",
+        "escales:10",
+        "escales:11",
+        "escales:18",
+        "problemes:10"
+      ],
+      "proposal": "split_proportional_models",
+      "groups": [
+        {
+          "members": [
+            "escales:8",
+            "escales:9",
+            "problemes:10"
+          ],
+          "core": "Trobar una altura a partir de raons altura/ombra sota les mateixes condicions"
+        },
+        {
+          "members": [
+            "escales:18"
+          ],
+          "core": "Trobar una ombra a partir de la mateixa proporció; incògnita diferent, revisar si és família o variant"
+        },
+        {
+          "members": [
+            "escales:10",
+            "escales:11"
+          ],
+          "core": "Proporcionalitat abstracta entre costats corresponents, sense context d'ombres"
+        }
+      ],
+      "level_caveat": "El model és proporcional, però la interpretació de les dades i de la incògnita ha de determinar el nivell real."
+    },
+    {
+      "id": "ME2-C019",
+      "members": [
+        "perimetres:1",
+        "perimetres:2",
+        "perimetres:3"
+      ],
+      "proposal": "split_formulas",
+      "groups": [
+        {
+          "members": [
+            "perimetres:1"
+          ],
+          "core": "Àrea de paral·lelogram base×altura"
+        },
+        {
+          "members": [
+            "perimetres:2"
+          ],
+          "core": "Àrea de rombe a partir de dues diagonals i divisor 2"
+        },
+        {
+          "members": [
+            "perimetres:3"
+          ],
+          "core": "Àrea de trapezi a partir de suma de bases, altura i divisor 2"
+        }
+      ],
+      "level_caveat": "Les tres són aplicacions directes de fórmules, però no la mateixa família computacional independent."
+    },
+    {
+      "id": "ME2-C038",
+      "members": [
+        "pitagores:2",
+        "pitagores:4",
+        "pitagores:5",
+        "pitagores:6",
+        "pitagores:7",
+        "pitagores:8",
+        "pitagores:13",
+        "problemes:6",
+        "problemes:7"
+      ],
+      "proposal": "retain_core_mark_variants",
+      "groups": [
+        {
+          "members": [
+            "pitagores:2",
+            "pitagores:4",
+            "pitagores:6",
+            "pitagores:7",
+            "pitagores:8",
+            "pitagores:13",
+            "problemes:6",
+            "problemes:7"
+          ],
+          "core": "Identificar catets perpendiculars i obtenir hipotenusa; context variable (diagonal, escala, rampa o objecte)"
+        },
+        {
+          "members": [
+            "pitagores:5"
+          ],
+          "core": "Diagonal d'un quadrat: cas especial a√2; sortida possiblement irracional i més càrrega d'aproximació"
+        }
+      ],
+      "level_caveat": "No confondre moltes presentacions del mateix càlcul amb moltes famílies; prioritzar variació de representació, arrodoniment i identificació."
+    },
+    {
+      "id": "ME2-C058",
+      "members": [
+        "superficies:2",
+        "superficies:6",
+        "superficies:16",
+        "superficies:20"
+      ],
+      "proposal": "split_visual_vs_formula",
+      "groups": [
+        {
+          "members": [
+            "superficies:2",
+            "superficies:6",
+            "superficies:16"
+          ],
+          "core": "Superfície exterior a partir de les cares; variants de cub o ortoedre i context de cartró"
+        },
+        {
+          "members": [
+            "superficies:20"
+          ],
+          "core": "Reconèixer les tres parelles de cares d'un desenvolupament pla sense calcular àrees"
+        }
+      ],
+      "level_caveat": "La representació espacial del desenvolupament pla és una competència diferent; no comptar com una altra família de càlcul d'àrees."
+    },
+    {
+      "id": "ME2-C065",
+      "members": [
+        "unitats:12",
+        "unitats:6:directa"
+      ],
+      "proposal": "retain_core_mixed_task_formats",
+      "groups": [
+        {
+          "members": [
+            "unitats:12",
+            "unitats:6:directa"
+          ],
+          "core": "Conversió directa entre volum i capacitat equivalent"
+        }
+      ],
+      "level_caveat": "El grup directe conserva la conversió i el reconeixement d'equivalències; unitats:16 es tracta al grup de conversió composta ME2-C069."
+    }
+  ],
+  "selected_cluster_count": 7,
+  "source_catalogue_working_clusters": 72,
+  "effects": {
+    "official_families_approved": 0,
+    "official_levels_changed": 0,
+    "generator_code_changed": false,
+    "provisional_cluster_count_changed": false
+  },
+  "gates": [
+    "Confirm actual independent mathematical strategy for each proposed split (not merely narrative or units)",
+    "Compare cognitive demand using explicit examples at 2n ESO level",
+    "Review mixed variants and quality of options before N1/N2/N3 assignment",
+    "Obtain user's explicit approval for changes to official classifications or generators"
+  ],
+  "next": "Complete reasoned pedagogical triage of remaining provisional clusters and prepare variant-specific level proposals, without automatically enforcing 5-5-3"
+}

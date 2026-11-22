@@ -1,0 +1,302 @@
+{
+  "schema_version": 1,
+  "status": "review_protocol_not_administered",
+  "scope": "2eso/sentit-mesura/escales-perimetres",
+  "source": "MI_2ESO_mesura_matriu_decisio_docent_3_candidates.json",
+  "purpose": "Protocol d'observació i revisió docent de possibles famílies genuïnes, sense aprovar nivells o generadors.",
+  "protocol_version": "1.0",
+  "participants": "Pendent de definir amb el docent; no hi ha mostres reals d'alumnes ni resultats simulats.",
+  "administration": {
+    "sequence": [
+      "Presentar les tasques candidates sense fórmula ni algoritme.",
+      "Registrar resultat, raonament i dependència de pistes per tasca.",
+      "Intercalar tasques control ja presents a la web.",
+      "Presentar un contraexemple i una tasca de transferència per tema.",
+      "Contrastar codificacions amb el professorat i revisar les famílies existents."
+    ],
+    "scoring": "Quatre dimensions puntuades de 0 a 2 per a observació; no transformar la suma automàticament en N3 ni família.",
+    "quality_gate": "Cal evidència docent de C1-C5 de la matriu i, sobretot, demostrar C2 independència no cosmètica."
+  },
+  "candidates": [
+    {
+      "proposal_id": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "nearest_baseline": "escales:6",
+      "decision_under_test": "Congruència de dos rectangles representats a escala, fins i tot girats; una mateixa àrea no basta.",
+      "required_roles": [
+        "candidate_rotation",
+        "candidate_equal_area_trap",
+        "baseline_single_plan_area",
+        "transfer_two_new_scales"
+      ],
+      "observation": "Estudiar si la resposta correcta requereix comparar dues longituds reals independents o només repetir dues conversions d'escala.",
+      "review_options": [
+        "family_independent",
+        "variant_of_existing",
+        "compound_practice",
+        "insufficient_evidence"
+      ],
+      "provisional_level_hypothesis": 2,
+      "approved_level": null,
+      "approved_family": false
+    },
+    {
+      "proposal_id": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "nearest_baseline": "perimetres:8",
+      "decision_under_test": "Determinar quines vores són contorn exterior segons si les figures estan separades o unides.",
+      "required_roles": [
+        "candidate_joined_semicircle",
+        "baseline_isolated_semicircle",
+        "transfer_two_joined_rectangles",
+        "candidate_joined_other_size"
+      ],
+      "observation": "Estudiar si l'alumne selecciona una frontera geomètrica o només aplica una fórmula fixada.",
+      "review_options": [
+        "family_independent",
+        "variant_of_existing",
+        "compound_practice",
+        "insufficient_evidence"
+      ],
+      "provisional_level_hypothesis": 2,
+      "approved_level": null,
+      "approved_family": false
+    }
+  ],
+  "rubric": [
+    {
+      "criterion": "correct_math",
+      "score_0": "Resultat incorrecte sense estratègia útil.",
+      "score_1": "Resultat parcial amb error de conversió/càlcul.",
+      "score_2": "Resultat correcte amb unitats i precisió definides."
+    },
+    {
+      "criterion": "distinct_decision",
+      "score_0": "No identifica el criteri diferencial.",
+      "score_1": "Identifica el criteri però no l'aplica sempre.",
+      "score_2": "Aplica la comprovació de dos costats (Escales) o l'exclusió de frontera (Perímetres) de forma explícita."
+    },
+    {
+      "criterion": "justification",
+      "score_0": "Resposta numèrica sense justificar.",
+      "score_1": "Justificació incompleta o depenent de pistes.",
+      "score_2": "Justificació autònoma que refuta una trampa plausible i diferencia el control."
+    },
+    {
+      "criterion": "transfer",
+      "score_0": "No generalitza fora de la plantilla inicial.",
+      "score_1": "Transfereix amb pistes o amb un error.",
+      "score_2": "Transfereix la mateixa decisió matemàtica a dimensions, escales o formes noves."
+    }
+  ],
+  "tasks": [
+    {
+      "id": "E1",
+      "proposal_id": "MI2-MES-E-N3-01",
+      "role": "candidate_rotation",
+      "inputs": {
+        "a_cm": [
+          8,
+          6
+        ],
+        "scale_a": 50,
+        "b_cm": [
+          3,
+          4
+        ],
+        "scale_b": 100,
+        "rotation_allowed": true
+      },
+      "oracle": {
+        "a_real_m": [
+          4,
+          3
+        ],
+        "b_real_m": [
+          3,
+          4
+        ],
+        "same": true,
+        "area_a_m2": 12,
+        "area_b_m2": 12
+      },
+      "student_prompt": "Dos plànols d'una sala rectangular: A mostra 8×6 cm a escala 1:50 i B mostra 3×4 cm a 1:100. Si es poden girar, són equivalents? Justifica-ho amb les dues longituds.",
+      "success_signal": "Compara ambdós costats i accepta gir, no exigeix igualtat literal d'orientació."
+    },
+    {
+      "id": "E2",
+      "proposal_id": "MI2-MES-E-N3-01",
+      "role": "candidate_equal_area_trap",
+      "inputs": {
+        "a_cm": [
+          8,
+          6
+        ],
+        "scale_a": 50,
+        "b_cm": [
+          6,
+          2
+        ],
+        "scale_b": 100,
+        "rotation_allowed": true
+      },
+      "oracle": {
+        "a_real_m": [
+          4,
+          3
+        ],
+        "b_real_m": [
+          6,
+          2
+        ],
+        "same": false,
+        "area_a_m2": 12,
+        "area_b_m2": 12
+      },
+      "student_prompt": "A mostra 8×6 cm a 1:50; B mostra 6×2 cm a 1:100. Tenen la mateixa àrea real. Poden ser el mateix rectangle? Refuta o confirma.",
+      "success_signal": "Rebutja la falsa equivalència malgrat la mateixa àrea i presenta les dimensions incompatibles."
+    },
+    {
+      "id": "E3",
+      "proposal_id": "MI2-MES-E-N3-01",
+      "role": "baseline_single_plan_area",
+      "inputs": {
+        "a_cm": [
+          8,
+          6
+        ],
+        "scale_a": 50
+      },
+      "oracle": {
+        "a_real_m": [
+          4,
+          3
+        ],
+        "area_a_m2": 12
+      },
+      "student_prompt": "Un únic plànol a escala 1:50 mostra 8×6 cm. Quina és l'àrea real de la sala?",
+      "success_signal": "Resol conversió i àrea sense haver de validar dos models; control comparable a escales:6."
+    },
+    {
+      "id": "E4",
+      "proposal_id": "MI2-MES-E-N3-01",
+      "role": "transfer_two_new_scales",
+      "inputs": {
+        "a_cm": [
+          5,
+          2
+        ],
+        "scale_a": 200,
+        "b_cm": [
+          10,
+          4
+        ],
+        "scale_b": 100,
+        "rotation_allowed": true
+      },
+      "oracle": {
+        "a_real_m": [
+          10,
+          4
+        ],
+        "b_real_m": [
+          10,
+          4
+        ],
+        "same": true,
+        "area_a_m2": 40,
+        "area_b_m2": 40
+      },
+      "student_prompt": "Plànols A de 5×2 cm a 1:200 i B de 10×4 cm a 1:100: són representacions del mateix rectangle? Argumenta sense comparar només l'àrea.",
+      "success_signal": "Transfereix la validació de les dues dimensions a escales diferents sense pauta."
+    },
+    {
+      "id": "P1",
+      "proposal_id": "MI2-MES-PA-N3-01",
+      "role": "candidate_joined_semicircle",
+      "inputs": {
+        "shape": "rectangle_semicircle_join",
+        "length_m": 6,
+        "width_m": 4,
+        "pi": 3.14
+      },
+      "oracle": {
+        "perimeter_m": 22.28,
+        "shared_edge_m": 4
+      },
+      "student_prompt": "Rectangle 6×4 m amb un semicercle exterior adossat pel costat de 4 m. Quin és el contorn total? Indica expressament quina vora no compta.",
+      "success_signal": "Exclou diàmetre compartit i calcula 6+6+4+6,28."
+    },
+    {
+      "id": "P2",
+      "proposal_id": "MI2-MES-PA-N3-01",
+      "role": "baseline_isolated_semicircle",
+      "inputs": {
+        "shape": "isolated_semicircle",
+        "diameter_m": 4,
+        "pi": 3.14
+      },
+      "oracle": {
+        "perimeter_m": 10.28,
+        "shared_edge_m": 0
+      },
+      "student_prompt": "Un semicercle aïllat té diàmetre 4 m. Calcula'n el perímetre complet incloent la recta del diàmetre.",
+      "success_signal": "Manté el diàmetre com a frontera exterior en el cas aïllat; control comparable a perimetres:8."
+    },
+    {
+      "id": "P3",
+      "proposal_id": "MI2-MES-PA-N3-01",
+      "role": "transfer_two_joined_rectangles",
+      "inputs": {
+        "shape": "two_rectangles_join",
+        "length_a_m": 6,
+        "length_b_m": 2,
+        "shared_height_m": 4
+      },
+      "oracle": {
+        "perimeter_m": 24,
+        "shared_edge_m": 4
+      },
+      "student_prompt": "S'uneixen dos rectangles de 6×4 m i 2×4 m pel costat de 4 m, sense superposar interiors. Troba el contorn exterior i justifica per què no compten els dos costats de la unió.",
+      "success_signal": "Generalitza frontera interna a figures sense arc: perímetre extern 2·(6+2+4)=24."
+    },
+    {
+      "id": "P4",
+      "proposal_id": "MI2-MES-PA-N3-01",
+      "role": "candidate_joined_other_size",
+      "inputs": {
+        "shape": "rectangle_semicircle_join",
+        "length_m": 5,
+        "width_m": 6,
+        "pi": 3.14
+      },
+      "oracle": {
+        "perimeter_m": 25.42,
+        "shared_edge_m": 6
+      },
+      "student_prompt": "Rectangle 5×6 m amb semicercle adossat exteriorment pel costat de 6 m. Calcula el contorn exterior i explica què passa amb el costat comú.",
+      "success_signal": "Canvia dimensions, manté el criteri d'exclusió de frontera comuna."
+    }
+  ],
+  "counts": {
+    "candidates": 2,
+    "tasks": 8,
+    "controls": 2,
+    "transfer_tasks": 2,
+    "teacher_decisions_recorded": 0,
+    "new_families_approved": 0,
+    "N3_approved": 0
+  },
+  "acceptance_conditions": [
+    "No declarar família independent sense justificació que el nucli matemàtic no es troba en cap família ja catalogada.",
+    "No comptar una tasca control o una variació superficial com a família nova.",
+    "Nivell N3 només si hi ha evidència de modelització/justificació no rutinària, revisada per professorat.",
+    "Si manca evidència, classificar insufficient_evidence, no inferir family_independent.",
+    "Autorització d'implementar i publicar és independent de la revisió pedagògica."
+  ],
+  "exclusions": [
+    "No s'ha administrat cap prova amb alumnat.",
+    "No s'han generat nous exercicis a l'aplicació.",
+    "No s'han modificat nivells, famílies oficials ni la web."
+  ]
+}

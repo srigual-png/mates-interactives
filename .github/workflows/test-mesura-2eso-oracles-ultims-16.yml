@@ -1,0 +1,15 @@
+name: Auditoria oracles ultims 16 Mesura 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Contrast matematic i contextual de 16 tipus pendents
+        run: node scripts/test-mesura-2eso-oracles-ultims-16.cjs

@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "status": "pedagogical_differential_review_unapproved",
+  "scope": "2eso/sentit-mesura/three-prioritized-candidates",
+  "primary_source": "2eso/sentit-mesura.html",
+  "prior_spec": "MI_2ESO_mesura_tres_especificacions_pedagogiques.json",
+  "core_comparison": {
+    "existing_type": "estimacio:12",
+    "existing_task": "Trobar l'interval semiobert de valors compatibles amb una longitud arrodonida a la dècima.",
+    "existing_rule": "per a r arrodonit a dècimes: [r-0.05,r+0.05) cm (assumpció explícita del generador, mig interval superior exclòs)",
+    "candidate_type": "MI2-MES-EST-N3-01",
+    "candidate_task": "Calcular errors relatius percentats respecte a una referència i aplicar una tolerància externa inclusiva a lectures individuals.",
+    "candidate_rule": "[R*(1-t/100),R*(1+t/100)] quan R>0, tolerància t>=0, i sense arrodonir abans de comparar",
+    "shared_core": "Pertinença a un interval de valors admissibles; comparar contra una cota.",
+    "difference": "Origen i estructura de la tolerància: la primera es deriva de la precisió de l'arrodoniment i fa servir interval semiobert, mentre que la segona prové d'una especificació percentual i fa servir interval tancat.",
+    "screening_decision": "likely_variant_of_acceptance_under_bounds_pending_teacher_review",
+    "new_family_approved": false,
+    "comparison_cases": [
+      {
+        "id": "rounding_upper_excluded_but_percent_accepted",
+        "reference_cm": 12.3,
+        "reading_cm": 12.35,
+        "rounding_reported_cm": 12.3,
+        "step_cm": 0.1,
+        "tolerance_pct": 1,
+        "rounding_compatible": false,
+        "relative_percent_compatible": true
+      },
+      {
+        "id": "rounding_lower_included_and_percent_accepted",
+        "reference_cm": 12.3,
+        "reading_cm": 12.25,
+        "rounding_reported_cm": 12.3,
+        "step_cm": 0.1,
+        "tolerance_pct": 1,
+        "rounding_compatible": true,
+        "relative_percent_compatible": true
+      },
+      {
+        "id": "percent_accepts_beyond_rounding_interval",
+        "reference_cm": 12.3,
+        "reading_cm": 12.18,
+        "rounding_reported_cm": 12.3,
+        "step_cm": 0.1,
+        "tolerance_pct": 1,
+        "rounding_compatible": false,
+        "relative_percent_compatible": true
+      },
+      {
+        "id": "rounding_accepts_but_percent_rejects_at_tight_tolerance",
+        "reference_cm": 12.3,
+        "reading_cm": 12.28,
+        "rounding_reported_cm": 12.3,
+        "step_cm": 0.1,
+        "tolerance_pct": 0.1,
+        "rounding_compatible": true,
+        "relative_percent_compatible": false
+      }
+    ],
+    "caveat": "La semàntica half-open de l'exercici d'arrodoniment és una convenció concreta del codi i no descriu universalment totes les regles de desempats de l'arrodoniment."
+  },
+  "cognitive_review": [
+    {
+      "proposal_id": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "baseline_steps": [
+        "convertir quatre longituds segons escala",
+        "normalitzar l'ordre del parell de dimensions, admetent gir",
+        "validar dues dimensions o refutar equivalència"
+      ],
+      "N2_evidence": "Una comparació directa de dues parelles de dimensions recuperades pot ser un procediment rutinari de conversió i comparació.",
+      "N3_gate": "Exigir justificació/refutació de models amb distractor d'igual àrea i admissibilitat de gir; demostrar que la decisió geomètrica és substantiva, no només augment de càlcul.",
+      "suggested_level_for_pilot": 2,
+      "approved_level": null,
+      "family_status": "distinct_candidate_still_unvalidated"
+    },
+    {
+      "proposal_id": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "baseline_steps": [
+        "representar un rectangle unit a semicercle",
+        "identificar i excloure la frontera compartida",
+        "sumar les tres arestes exteriors rectangulars i arc semicircular"
+      ],
+      "N2_evidence": "Si l'enunciat i la figura indiquen explícitament la vora comuna, substituir P=2L+D+πD/2 és una rutina composta.",
+      "N3_gate": "Demanar que l'alumnat triï quines vores són fronteres exteriors en més d'una geometria i justifiqui l'exclusió, sense donar la fórmula.",
+      "suggested_level_for_pilot": 2,
+      "approved_level": null,
+      "family_status": "distinct_candidate_still_unvalidated"
+    },
+    {
+      "proposal_id": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "baseline_steps": [
+        "obtenir l'error relatiu de cada lectura",
+        "expressar-lo en percentatge",
+        "comparar amb la tolerància externa inclusiva"
+      ],
+      "N2_evidence": "El nucli d'acceptació per cotes ja és present a estimacio:12; variant de límit percentual vs límit d'arrodoniment.",
+      "N3_gate": "Caldria una decisió de modelització independent (p.ex. interpretar una especificació, justificar tolerància/precisió en diferents referències) i provar que no duplica estimacio:12.",
+      "suggested_level_for_pilot": 2,
+      "approved_level": null,
+      "family_status": "likely_related_variant_not_new_family"
+    }
+  ],
+  "counts": {
+    "proposals": 3,
+    "rounding_tolerance_counterexamples": 4,
+    "approved_families": 0,
+    "approved_levels_N3": 0
+  },
+  "next_gate": [
+    "Revisar l'estatus de família d'Estimació com a variant d'admissibilitat per cotes; confirmar amb docència.",
+    "Provar Escales i Perímetres amb enunciats que requereixin justificació i no proporcionin l'algorisme.",
+    "Decidir amb criteri docent si els pilots serien N2 o N3; no promocionar N3 per tres passos.",
+    "No canviar el codi funcional ni les famílies oficials sense autorització."
+  ]
+}

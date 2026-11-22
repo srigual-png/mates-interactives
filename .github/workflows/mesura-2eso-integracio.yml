@@ -1,0 +1,128 @@
+# Workflow automàtic únic per PR; valida workflows legacy manuals, dades curriculars sincronitzades i suites existents.
+name: Integracio unica MI - Mesura 2n ESO
+on:
+  pull_request:
+    paths:
+      - '2eso/sentit-mesura.html'
+      - 'scripts/test-mesura-2eso-integracio-*.cjs'
+      - 'scripts/test-mesura-2eso-dues-parelles-parametres-iguals.cjs'
+      - 'scripts/test-mesura-2eso-escales16-destinacions.cjs'
+      - 'scripts/test-mesura-2eso-escales12-destinacions.cjs'
+      - 'scripts/test-mesura-2eso-problemes16-estimacio7-8-aparellades.cjs'
+      - 'scripts/test-mesura-2eso-diposits3-superficies13-14-contrast.cjs'
+      - 'scripts/test-mesura-2eso-etiquetes5-superficie8-contrast.cjs'
+      - 'scripts/test-mesura-2eso-superficies10-11-15-inverses.cjs'
+      - 'scripts/test-mesura-2eso-superficies1-17-aparellades.cjs'
+      - 'scripts/test-mesura-2eso-prismes-3-4-parelles.cjs'
+      - 'scripts/test-mesura-2eso-superficies-8-9-19-aparellades.cjs'
+      - 'scripts/test-mesura-2eso-integracio-pedagogica-unitats.cjs'
+      - 'scripts/test-mesura-2eso-problemes14-15-estructura.cjs'
+      - 'scripts/test-mesura-2eso-lot-2-parelles-restants.cjs'
+      - 'scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs'
+      - 'scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs'
+      - 'scripts/test-mesura-2eso-pitagores-3-15-lot-4.cjs'
+      - 'scripts/test-mesura-2eso-pitagores2-3-15-aparellades.cjs'
+      - 'scripts/test-mesura-2eso-pitagores3-10-11-aparellades.cjs'
+      - 'scripts/test-mesura-2eso-workflows-centralitzats.cjs'
+      - 'scripts/run-mesura-2eso-integracio.cjs'
+      - '.github/workflows/mesura-2eso-integracio.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  mesura:
+    name: Suites separades, una execucio
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verificar 93 workflows manuals i un sol automatic
+        run: node scripts/test-mesura-2eso-workflows-centralitzats.cjs
+      - name: Comprovar si ha canviat el generador ja validat
+        id: detection
+        shell: bash
+        run: |
+          if git diff --quiet 5b7e7ea10ff3bf8cfba35f3339c08074990f32df HEAD -- 2eso/sentit-mesura.html; then
+            echo 'full=false' >> "$GITHUB_OUTPUT"
+            echo 'Les suites antigues continuen avalades pel mateix codi i no es repeteixen'
+          else
+            echo 'full=true' >> "$GITHUB_OUTPUT"
+            echo 'El generador ha canviat: revalidar les suites individuals per blocs'
+          fi
+      - name: Contrastar els modes guiat autonom i examen dels vincles
+        run: node scripts/test-mesura-2eso-integracio-modes-vincles.cjs
+      - name: Evidencia aparellada addicional - estimacio 9 13 17 18
+        run: node scripts/test-mesura-2eso-lot-2-parelles-restants.cjs
+      - name: Oracles independents perimetres 14/5 i 4/15
+        run: node scripts/test-mesura-2eso-dues-parelles-parametres-iguals.cjs
+      - name: Contrast escales 16 amb destinacions 1/2/17 i problemes 8
+        run: node scripts/test-mesura-2eso-escales16-destinacions.cjs
+      - name: Contrast escales 12 amb destinacions 3 i 5
+        run: node scripts/test-mesura-2eso-escales12-destinacions.cjs
+      - name: Contrast problemes 16 amb estimacio 7 8 i 13
+        run: node scripts/test-mesura-2eso-problemes16-estimacio7-8-aparellades.cjs
+      - name: Contrast diposit parcial amb capacitat de recipients
+        run: node scripts/test-mesura-2eso-diposits3-superficies13-14-contrast.cjs
+      - name: Contrast etiquetes i superficie lateral desplegada
+        run: node scripts/test-mesura-2eso-etiquetes5-superficie8-contrast.cjs
+      - name: Contrast inverses de volum i profunditat amb conversio d unitats
+        run: node scripts/test-mesura-2eso-superficies10-11-15-inverses.cjs
+      - name: Contrast de comparacio de capacitats amb volums individuals
+        run: node scripts/test-mesura-2eso-superficies1-17-aparellades.cjs
+      - name: Contrast de prismes triangulars amb volums directes
+        run: node scripts/test-mesura-2eso-prismes-3-4-parelles.cjs
+      - name: Contrast entre area lateral, area total i desplegament cilindric
+        run: node scripts/test-mesura-2eso-superficies-8-9-19-aparellades.cjs
+      - name: Evidencia aparellada Pitàgores 12 i 14
+        run: node scripts/test-mesura-2eso-pitagores-12-14-lot-3.cjs
+      - name: Nucli directe Pitàgores 12 i 14 amb 2
+        run: node scripts/test-mesura-2eso-pitagores2-12-14-aparellades.cjs
+      - name: Evidencia aparellada Pitàgores 3 i 15
+        run: node scripts/test-mesura-2eso-pitagores-3-15-lot-4.cjs
+      - name: Parelles directes i inverses Pitàgores 2 3 i 15
+        run: node scripts/test-mesura-2eso-pitagores2-3-15-aparellades.cjs
+      - name: Oracles independents Pitàgores 10 i 11 amb 3
+        run: node scripts/test-mesura-2eso-pitagores3-10-11-aparellades.cjs
+      - name: Contrast pedagogic pendent - Unitats 1 4 5 9
+        run: node scripts/test-mesura-2eso-integracio-pedagogica-unitats-4-5.cjs
+      - name: Contrastar unitats 9 amb la conversio directa de longitud
+        run: node scripts/test-mesura-2eso-integracio-pedagogica-unitats.cjs
+      - name: Contrastar tanca i socol amb perimetre net
+        run: node scripts/test-mesura-2eso-problemes14-15-estructura.cjs
+      - name: Unitats - suites existents
+        if: steps.detection.outputs.full == 'true'
+        run: node scripts/run-mesura-2eso-integracio.cjs unitats
+      - name: Escales - suites existents
+        if: steps.detection.outputs.full == 'true'
+        run: node scripts/run-mesura-2eso-integracio.cjs escales
+      - name: Pitagores - suites existents
+        if: steps.detection.outputs.full == 'true'
+        run: node scripts/run-mesura-2eso-integracio.cjs pitagores
+      - name: Perimetres - suites existents
+        if: steps.detection.outputs.full == 'true'
+        run: node scripts/run-mesura-2eso-integracio.cjs perimetres
+      - name: Superficies - suites existents
+        if: steps.detection.outputs.full == 'true'
+        run: node scripts/run-mesura-2eso-integracio.cjs superficies
+      - name: Estimacio - suites existents
+        if: steps.detection.outputs.full == 'true'
+        run: node scripts/run-mesura-2eso-integracio.cjs estimacio
+      - name: Problemes - suites existents
+        if: steps.detection.outputs.full == 'true'
+        run: node scripts/run-mesura-2eso-integracio.cjs problemes
+      - name: Contrast transversal i consolidacions - suites existents
+        if: steps.detection.outputs.full == 'true'
+        run: node scripts/run-mesura-2eso-integracio.cjs transversal
+      - name: Resum de cobertura
+        if: always()
+        shell: bash
+        run: |
+          echo '## Sentit de la mesura, 2n ESO' >> "$GITHUB_STEP_SUMMARY"
+          echo '93 workflows legacy en execucio manual; suites agrupades tematicament en una integracio.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Les suites antigues nomes es reexecuten quan canvia el codi del generador respecte de la referencia validada.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Les proves de navegador continuen disponibles en els workflows manuals especifics.' >> "$GITHUB_STEP_SUMMARY"

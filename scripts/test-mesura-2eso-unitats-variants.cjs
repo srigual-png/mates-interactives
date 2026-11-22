@@ -19,6 +19,8 @@ const variants = readReviewed('REVIEWED_VARIANTS')['2eso/mesura'].unitats;
 assert(levels[0].includes(6), 'El tipus 6 ha de mantenir N1 com a nivell base');
 assert(!levels[1].includes(6), 'El nivell N2 només pot venir de la variant');
 assert.equal(variants[6].encadenada.level, 2);
+assert(!levels[0].includes(16), 'El tipus 16 ja no és N1');
+assert(levels[1].includes(16), 'El tipus 16 demana conversió volum-capacitat composta i és N2');
 
 const start = html.indexOf('function genUnitats2ESO(forceType)');
 const end = html.indexOf('/* ── GENERADOR · BLOC 2:', start);

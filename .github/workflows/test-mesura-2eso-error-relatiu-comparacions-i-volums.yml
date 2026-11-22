@@ -1,0 +1,13 @@
+name: Mesura 2n ESO - error relatiu i volums comparats
+on:
+  workflow_dispatch:
+jobs:
+  oracle:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprovar 600 instancies i dues variants de volum
+        run: node scripts/test-mesura-2eso-error-relatiu-comparacions-i-volums.cjs

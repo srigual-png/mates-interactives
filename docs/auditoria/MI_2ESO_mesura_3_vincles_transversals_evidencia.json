@@ -1,0 +1,115 @@
+{
+  "schema_version": 1,
+  "status": "three_cross_group_links_reviewed_pending_teacher_decision",
+  "basis": "Actual source-based procedure review and prior 131-to-72 crosswalk",
+  "cases": [
+    {
+      "id": "DEDUPE-02",
+      "member_clusters": [
+        "ME2-C030",
+        "ME2-C042"
+      ],
+      "members": [
+        "perimetres:9",
+        "perimetres:11",
+        "perimetres:16",
+        "problemes:11"
+      ],
+      "relation": "common_subtraction_of_areas",
+      "shared_strategy": "Calcular superfície externa i restar zones no incloses",
+      "differences": [
+        {
+          "key": "perimetres:9",
+          "demand": "Rectangle gran menys retall interior rectangular"
+        },
+        {
+          "key": "perimetres:11",
+          "demand": "Àrea de quadrat exterior menys obertura quadrada"
+        },
+        {
+          "key": "perimetres:16",
+          "demand": "Paret rectangular menys porta i finestra, dues subtraccions"
+        },
+        {
+          "key": "problemes:11",
+          "demand": "Afegir dues vegades amplada de franja a cada dimensió, calcular rectangle exterior i restar piscina"
+        }
+      ],
+      "suggestion": "Mantenir vinculació de família candidata amb variants per reconstrucció de mides i nombre de retalls; verificar N2/N3 només amb raonament real i curs.",
+      "merge_ready": false
+    },
+    {
+      "id": "DEDUPE-06",
+      "member_clusters": [
+        "ME2-C050",
+        "ME2-C061"
+      ],
+      "members": [
+        "superficies:8",
+        "superficies:19",
+        "problemes:5"
+      ],
+      "relation": "related_geometry_different_outputs",
+      "shared_strategy": "El lateral d'un cilindre desplegat és un rectangle amb base longitud 2πr (o πd) i altura h",
+      "differences": [
+        {
+          "key": "superficies:8",
+          "demand": "Calcular àrea lateral multiplicant circumferència per altura"
+        },
+        {
+          "key": "superficies:19",
+          "demand": "Identificar les dues dimensions del rectangle del desenvolupament, sense necessitar multiplicar àrea"
+        },
+        {
+          "key": "problemes:5",
+          "demand": "Trobar superfície d'etiqueta amb diàmetre donat, excloent les bases"
+        }
+      ],
+      "suggestion": "Relacionar sota un model visual comú però conservar distinció entre reconèixer mides del desplegament i calcular superfície; fusió no justificada automàticament.",
+      "merge_ready": false
+    },
+    {
+      "id": "DEDUPE-13",
+      "member_clusters": [
+        "ME2-C027",
+        "ME2-C028",
+        "ME2-C029"
+      ],
+      "members": [
+        "perimetres:5",
+        "perimetres:6",
+        "perimetres:8"
+      ],
+      "relation": "do_not_merge_distinct_quantities",
+      "shared_strategy": "Figures circulars i valor aproximat de π, però objectius no equivalents",
+      "differences": [
+        {
+          "key": "perimetres:5",
+          "demand": "Longitud de circumferència = 2πr, magnitud lineal"
+        },
+        {
+          "key": "perimetres:6",
+          "demand": "Àrea de cercle = πr², magnitud quadrada"
+        },
+        {
+          "key": "perimetres:8",
+          "demand": "Perímetre de semicercle = πr+2r, arc més costat recte"
+        }
+      ],
+      "suggestion": "No fusionar únicament per compartir π, radi o cercle; verificar separadament la decisió de magnitud i el contorn.",
+      "merge_ready": false
+    }
+  ],
+  "count": {
+    "links": 3,
+    "teacher_approved_merges": 0
+  },
+  "gate": {
+    "source_generator_changed": false,
+    "official_family_classification_changed": false,
+    "official_level_classification_changed": false,
+    "estimacio12_edited": false,
+    "pr_merged": false,
+    "deployed": false
+  }
+}

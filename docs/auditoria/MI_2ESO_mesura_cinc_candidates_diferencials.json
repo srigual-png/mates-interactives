@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "status": "screened_not_approved",
+  "scope": "2eso/sentit-mesura/five-candidate-differential",
+  "source_files": [
+    "MI_2ESO_mesura_sis_candidates_contrast_12_casos.json",
+    "MI_2ESO_mesura_rubrica_propostes.json",
+    "2eso/sentit-mesura.html"
+  ],
+  "method": "Comparison against closest real generator prompts and solution guides, emphasizing an observable mathematical decision and a falsifiable counterexample",
+  "counts": {
+    "proposals": 5,
+    "promising_distinct_family_to_review": 3,
+    "compound_problem_not_independent_family_yet": 2,
+    "validated_new_families": 0,
+    "approved_N3": 0
+  },
+  "records": [
+    {
+      "id": "MI2-MES-U-N3-01",
+      "topic": "unitats",
+      "closest": [
+        "unitats:6",
+        "unitats:9",
+        "problemes:3"
+      ],
+      "existing_required_decision": "Executar una equivalència de volum/capacitat o comparar dues mesures un cop normalitzades; problemes:3 calcula el percentatge d'ompliment.",
+      "candidate_addition": "Optimitzar: descartar recipients que no compleixen una restricció i triar la menor capacitat viable, o declarar que no n'hi ha cap.",
+      "distinctness": "new_decision_combining_known_procedures",
+      "classification": "compound_problem_not_independent_family_yet",
+      "reason": "El criteri 'menor viable' no és una conversió, però l'estratègia matemàtica és suma, comparació i selecció. Falta demostrar una família independent i no només una decisió sobre resultats coneguts.",
+      "falsifiable_test": "Si dues opcions són viables cal escollir la mínima; si cap no ho és, no pot haver-hi resposta numèrica viable. Comparar amb problemes:3.",
+      "level_status": "N3 not confirmed"
+    },
+    {
+      "id": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "closest": [
+        "escales:6",
+        "escales:7",
+        "escales:14"
+      ],
+      "existing_required_decision": "Obtenir una única àrea des d'una escala, obtenir l'àrea dibuixada o detectar un error tipificat en un raonament.",
+      "candidate_addition": "Contrast de dues representacions independents d'una mateixa sala: reconstruir dues parelles de dimensions i provar si són compatibles, no només si tenen la mateixa àrea.",
+      "distinctness": "explicit_model_consistency_validation",
+      "classification": "promising_distinct_family_to_review",
+      "reason": "La igualtat d'àrea no garanteix igualtat de dimensions. El criteri d'equivalència entre dos plànols és verificable i no es demana explícitament en escales:6/7/14.",
+      "falsifiable_test": "Contracas amb àrees iguals però dimensions diferents (4×3 m i 6×2 m): no són la mateixa sala sota la mateixa orientació. Valorar també rotació per evitar falsos negatius.",
+      "level_status": "N3 not confirmed"
+    },
+    {
+      "id": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "closest": [
+        "perimetres:8",
+        "perimetres:10"
+      ],
+      "existing_required_decision": "Perímetre d'un semicercle sumant arc i diàmetre, o àrea composta rectangle+semicercle.",
+      "candidate_addition": "Modelar la frontera exterior d'una unió de figures i eliminar el diàmetre interior compartit; després contrastar el contorn amb una restricció.",
+      "distinctness": "exterior_boundary_identification",
+      "classification": "promising_distinct_family_to_review",
+      "reason": "L'activitat 8 inclou el diàmetre com a frontera externa del semicercle aïllat, mentre la figura unida l'exclou. Canvia la decisió geomètrica sobre quines vores són contorn.",
+      "falsifiable_test": "Un alumne que sumi els dos perímetres compta dues vegades la vora compartida; el criteri diferencial és reconèixer-la i restar-la en context de figura composta.",
+      "level_status": "N3 not confirmed"
+    },
+    {
+      "id": "MI2-MES-S-N3-01",
+      "topic": "superficies",
+      "closest": [
+        "superficies:1",
+        "superficies:2",
+        "superficies:16",
+        "problemes:13"
+      ],
+      "existing_required_decision": "Calcular volum de l'ortoedre o superfície d'una capsa tancada; problemes:13 ja calcula material per a capsa sense tapa.",
+      "candidate_addition": "Comprovar simultàniament un llindar de capacitat i un límit estricte de cartró per acceptar/rebutjar un disseny.",
+      "distinctness": "two_constraint_viability_on_known_formulas",
+      "classification": "compound_problem_not_independent_family_yet",
+      "reason": "La capsa oberta està representada en problemes:13. La nova tasca combina dos subprocediments coneguts i dos judicis; és una possible variant composta, no una nova família acreditada.",
+      "falsifiable_test": "Incloure casos en què només passa un dels dos criteris i casos al límit exacte; comprovar si l'estratègia va més enllà de dues fórmules i un AND lògic.",
+      "level_status": "N3 not confirmed"
+    },
+    {
+      "id": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "closest": [
+        "estimacio:7",
+        "estimacio:9",
+        "problemes:16"
+      ],
+      "existing_required_decision": "Calcular error relatiu, comparar errors amb referències diferents o amb la mateixa referència, i determinar quina mesura és proporcionalment més precisa.",
+      "candidate_addition": "Comparar cada error percentual amb una tolerància externa, incloent-hi l'acceptació exacta al llindar i la possibilitat que cap lectura sigui acceptable.",
+      "distinctness": "threshold_based_acceptance",
+      "classification": "promising_distinct_family_to_review",
+      "reason": "Decidir quin mesurament és millor no és el mateix que decidir si compleix una especificació fixa; una mesura pot ser la millor i igualment inacceptable.",
+      "falsifiable_test": "Fer un cas on A és més precís que B però A supera la tolerància: la resposta 'cap admissible' distingeix la nova estratègia de estimacio:9.",
+      "level_status": "N3 not confirmed"
+    }
+  ],
+  "decision_rule": "Promising means the candidate asks for a previously unasked comparison/representation, not proof of independent family: demonstrate reproducible, curricular, non-cosmetic strategy in varied examples and evaluate N1/N2/N3 before approval.",
+  "exclusions": [
+    "No production code or levels modified",
+    "No family counts inflated",
+    "No N3 promoted solely by multi-step arithmetic",
+    "Unitats and Superficies remain suitable compound practice candidates, not independent families",
+    "PR49 left open; no merge or publishing"
+  ]
+}

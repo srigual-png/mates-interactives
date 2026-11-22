@@ -1,0 +1,1568 @@
+{
+  "schema_version": 1,
+  "status": "global_inventory_screening_only",
+  "audit_scope": {
+    "types": 128,
+    "topics": [
+      "unitats",
+      "escales",
+      "pitagores",
+      "perimetres",
+      "superficies",
+      "estimacio",
+      "problemes"
+    ],
+    "proposals": 3
+  },
+  "source": "seven MI_2ESO_mesura_*_decisions_*_tipus.json files in PR49",
+  "method": "Reviewed all 128 documented procedural descriptions; flagged direct overlap, shared subprocedure, related context or no identified overlap for each candidate.",
+  "definitions": [
+    {
+      "id": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "tag": "dual_plan_model_validation",
+      "direct": [
+        "escales:6",
+        "escales:7",
+        "escales:14"
+      ],
+      "component": [
+        "unitats:2",
+        "unitats:11",
+        "unitats:13",
+        "escales:1",
+        "escales:2",
+        "escales:3",
+        "escales:4",
+        "escales:5",
+        "escales:12",
+        "escales:13",
+        "escales:15",
+        "escales:16",
+        "escales:17",
+        "problemes:8",
+        "problemes:9",
+        "problemes:18"
+      ],
+      "related": [
+        "perimetres:11",
+        "problemes:10",
+        "problemes:11"
+      ],
+      "criteria": "Compare BOTH pairs of actual dimensions and account for rotation; reject equal area but different sides."
+    },
+    {
+      "id": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "tag": "composite_external_boundary",
+      "direct": [
+        "perimetres:8",
+        "perimetres:10"
+      ],
+      "component": [
+        "perimetres:4",
+        "perimetres:5",
+        "perimetres:7",
+        "perimetres:9",
+        "perimetres:11",
+        "perimetres:14",
+        "perimetres:15",
+        "escales:16",
+        "problemes:11",
+        "problemes:14",
+        "problemes:15"
+      ],
+      "related": [
+        "perimetres:16",
+        "perimetres:17",
+        "problemes:12"
+      ],
+      "criteria": "Identify joined edge as internal and exclude it from exterior boundary."
+    },
+    {
+      "id": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "tag": "threshold_measurement_acceptance",
+      "direct": [
+        "estimacio:7",
+        "estimacio:8",
+        "estimacio:9",
+        "estimacio:13",
+        "problemes:16"
+      ],
+      "component": [
+        "estimacio:6",
+        "estimacio:10",
+        "estimacio:12",
+        "estimacio:14",
+        "estimacio:17",
+        "estimacio:18",
+        "unitats:13",
+        "unitats:17"
+      ],
+      "related": [
+        "estimacio:4",
+        "estimacio:5",
+        "estimacio:11",
+        "superficies:17"
+      ],
+      "criteria": "Compare each relative error against inclusive fixed tolerance; best sample can fail."
+    }
+  ],
+  "counts": {
+    "MI2-MES-E-N3-01": {
+      "direct": 3,
+      "component": 16,
+      "related": 3,
+      "none": 106
+    },
+    "MI2-MES-PA-N3-01": {
+      "direct": 2,
+      "component": 11,
+      "related": 3,
+      "none": 112
+    },
+    "MI2-MES-EST-N3-01": {
+      "direct": 5,
+      "component": 8,
+      "related": 4,
+      "none": 111
+    }
+  },
+  "rows": [
+    {
+      "key": "unitats:1",
+      "topic": "unitats",
+      "type": 1,
+      "source_procedure": "Conversió decimal de longitud per potències de deu",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:2",
+      "topic": "unitats",
+      "type": 2,
+      "source_procedure": "Conversió de superfície amb factor quadràtic",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:3",
+      "topic": "unitats",
+      "type": 3,
+      "source_procedure": "Conversió de volum amb factor cúbic",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:4",
+      "topic": "unitats",
+      "type": 4,
+      "source_procedure": "Conversió de capacitat per potències de deu",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:5",
+      "topic": "unitats",
+      "type": 5,
+      "source_procedure": "Conversió de massa per potències de deu",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:6",
+      "topic": "unitats",
+      "type": 6,
+      "source_procedure": "Equivalència volum-capacitat directa o encadenada",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:7",
+      "topic": "unitats",
+      "type": 7,
+      "source_procedure": "Triar unitat adient segons magnitud i escala física",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:8",
+      "topic": "unitats",
+      "type": 8,
+      "source_procedure": "Reconèixer factor de conversió dimensional",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:9",
+      "topic": "unitats",
+      "type": 9,
+      "source_procedure": "Comparar longituds després d'unificar unitats",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:10",
+      "topic": "unitats",
+      "type": 10,
+      "source_procedure": "Sumar longituds amb unitats diferents",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:11",
+      "topic": "unitats",
+      "type": 11,
+      "source_procedure": "Conversió contextual de superfície",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:12",
+      "topic": "unitats",
+      "type": 12,
+      "source_procedure": "Relació directa dm³=L",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:13",
+      "topic": "unitats",
+      "type": 13,
+      "source_procedure": "Verificar una equivalència correcta o diagnosticar un factor erroni",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "shared_component"
+      }
+    },
+    {
+      "key": "unitats:14",
+      "topic": "unitats",
+      "type": 14,
+      "source_procedure": "Identificar una equivalència dimensional",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:15",
+      "topic": "unitats",
+      "type": 15,
+      "source_procedure": "Sumar superfícies amb dues unitats d'origen",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:16",
+      "topic": "unitats",
+      "type": 16,
+      "source_procedure": "Reconèixer igualtat volum-capacitat",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "unitats:17",
+      "topic": "unitats",
+      "type": 17,
+      "source_procedure": "Identificar error de conversió en una afirmació d'alumne",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "shared_component"
+      }
+    },
+    {
+      "key": "unitats:18",
+      "topic": "unitats",
+      "type": 18,
+      "source_procedure": "Convertir mL a dm³ passant per cm³",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:1",
+      "topic": "escales",
+      "type": 1,
+      "source_procedure": "Plànol 1:n → longitud real en metres",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:2",
+      "topic": "escales",
+      "type": 2,
+      "source_procedure": "Mapa 1:n → distància real en quilòmetres",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:3",
+      "topic": "escales",
+      "type": 3,
+      "source_procedure": "Longitud real → longitud reduïda en un plànol",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:4",
+      "topic": "escales",
+      "type": 4,
+      "source_procedure": "Calcular denominador de l'escala 1:n",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:5",
+      "topic": "escales",
+      "type": 5,
+      "source_procedure": "Ampliar una dimensió amb escala k:1",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:6",
+      "topic": "escales",
+      "type": 6,
+      "source_procedure": "Dues longituds a escala → superfície real",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "direct_overlap_review",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:7",
+      "topic": "escales",
+      "type": 7,
+      "source_procedure": "Superfície representada a partir de mesures reals",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "direct_overlap_review",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:8",
+      "topic": "escales",
+      "type": 8,
+      "source_procedure": "Altura indirecta d'arbre per ombres",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:9",
+      "topic": "escales",
+      "type": 9,
+      "source_procedure": "Altura indirecta d'edifici per ombres",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:10",
+      "topic": "escales",
+      "type": 10,
+      "source_procedure": "Resoldre un costat desconegut per raó de semblança",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:11",
+      "topic": "escales",
+      "type": 11,
+      "source_procedure": "Resoldre una proporció ja plantejada",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:12",
+      "topic": "escales",
+      "type": 12,
+      "source_procedure": "Factor lineal gran/petit per divisió directa",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:13",
+      "topic": "escales",
+      "type": 13,
+      "source_procedure": "Identificar proporcions homòlogues correctes",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:14",
+      "topic": "escales",
+      "type": 14,
+      "source_procedure": "Diagnosticar error d'escala (longitud/àrea/unitats)",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "direct_overlap_review",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:15",
+      "topic": "escales",
+      "type": 15,
+      "source_procedure": "Reconstruir escala amb segment desitjat",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:16",
+      "topic": "escales",
+      "type": 16,
+      "source_procedure": "Obtenir dues dimensions reals → perímetre",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "shared_component",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:17",
+      "topic": "escales",
+      "type": 17,
+      "source_procedure": "Sumar trams d'un mapa → longitud real",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "escales:18",
+      "topic": "escales",
+      "type": 18,
+      "source_procedure": "Calcular ombra desconeguda amb proporcionalitat",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:1",
+      "topic": "pitagores",
+      "type": 1,
+      "source_procedure": "Reconeixement explícit de la hipotenusa",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:2",
+      "topic": "pitagores",
+      "type": 2,
+      "source_procedure": "Hipotenusa amb triangle rectangle explícit",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:3",
+      "topic": "pitagores",
+      "type": 3,
+      "source_procedure": "Catet desconegut per resta de quadrats",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:4",
+      "topic": "pitagores",
+      "type": 4,
+      "source_procedure": "Diagonal de rectangle mitjançant Pitàgores",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:5",
+      "topic": "pitagores",
+      "type": 5,
+      "source_procedure": "Diagonal del quadrat a partir de costat",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:6",
+      "topic": "pitagores",
+      "type": 6,
+      "source_procedure": "Hipotenusa d'escala recolzada",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:7",
+      "topic": "pitagores",
+      "type": 7,
+      "source_procedure": "Cable com hipotenusa de triangle contextual",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:8",
+      "topic": "pitagores",
+      "type": 8,
+      "source_procedure": "Rampa com hipotenusa de triangle contextual",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:9",
+      "topic": "pitagores",
+      "type": 9,
+      "source_procedure": "Verificar triangle rectangle comparant quadrats",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:10",
+      "topic": "pitagores",
+      "type": 10,
+      "source_procedure": "Mitja base i Pitàgores invers per altura; calcular àrea isòsceles",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:11",
+      "topic": "pitagores",
+      "type": 11,
+      "source_procedure": "Pitàgores invers per costat, seguit de perímetre",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:12",
+      "topic": "pitagores",
+      "type": 12,
+      "source_procedure": "Hipotenusa i comparació d'estalvi de recorregut",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:13",
+      "topic": "pitagores",
+      "type": 13,
+      "source_procedure": "Diagonal contextual de pantalla",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:14",
+      "topic": "pitagores",
+      "type": 14,
+      "source_procedure": "Hipotenusa més marges per cable d'ancoratge",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:15",
+      "topic": "pitagores",
+      "type": 15,
+      "source_procedure": "Diagonal de rectangle o catet desconegut segons variant",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "pitagores:16",
+      "topic": "pitagores",
+      "type": 16,
+      "source_procedure": "Diagnosticar suma de catets en lloc de Pitàgores",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:1",
+      "topic": "perimetres",
+      "type": 1,
+      "source_procedure": "Àrea directa de paral·lelogram",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:2",
+      "topic": "perimetres",
+      "type": 2,
+      "source_procedure": "Àrea directa de rombe a partir de diagonals",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:3",
+      "topic": "perimetres",
+      "type": 3,
+      "source_procedure": "Àrea directa de trapezi amb dues bases i altura",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:4",
+      "topic": "perimetres",
+      "type": 4,
+      "source_procedure": "Perímetre directe de polígon regular",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "shared_component",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:5",
+      "topic": "perimetres",
+      "type": 5,
+      "source_procedure": "Longitud de circumferència",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "shared_component",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:6",
+      "topic": "perimetres",
+      "type": 6,
+      "source_procedure": "Àrea de cercle",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:7",
+      "topic": "perimetres",
+      "type": 7,
+      "source_procedure": "Àrea de semicercle, meitat de cercle",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "shared_component",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:8",
+      "topic": "perimetres",
+      "type": 8,
+      "source_procedure": "Perímetre de semicercle amb arc més diàmetre",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "direct_overlap_review",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:9",
+      "topic": "perimetres",
+      "type": 9,
+      "source_procedure": "Sostracció d'àrees en figura L",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "shared_component",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:10",
+      "topic": "perimetres",
+      "type": 10,
+      "source_procedure": "Àrea de rectangle més semicercle",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "direct_overlap_review",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:11",
+      "topic": "perimetres",
+      "type": 11,
+      "source_procedure": "Àrea de marc per resta d'interior",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "related_context",
+        "MI2-MES-PA-N3-01": "shared_component",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:12",
+      "topic": "perimetres",
+      "type": 12,
+      "source_procedure": "Invertir fórmula d'àrea triangular per trobar base",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:13",
+      "topic": "perimetres",
+      "type": 13,
+      "source_procedure": "Invertir fórmula d'àrea de trapezi per trobar altura",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:14",
+      "topic": "perimetres",
+      "type": 14,
+      "source_procedure": "Recuperar radi de longitud de circumferència",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "shared_component",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:15",
+      "topic": "perimetres",
+      "type": 15,
+      "source_procedure": "Perímetre d'un polígon i àrea per apotema donada",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "shared_component",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:16",
+      "topic": "perimetres",
+      "type": 16,
+      "source_procedure": "Àrea útil de paret restant obertures",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "related_context",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:17",
+      "topic": "perimetres",
+      "type": 17,
+      "source_procedure": "Corona circular amb radi exterior recuperat d'amplada",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "related_context",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "perimetres:18",
+      "topic": "perimetres",
+      "type": 18,
+      "source_procedure": "Diagnosticar confusió de circumferència i àrea",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:1",
+      "topic": "superficies",
+      "type": 1,
+      "source_procedure": "Volum ortoedre per producte de tres dimensions",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:2",
+      "topic": "superficies",
+      "type": 2,
+      "source_procedure": "Àrea total de caixa tancada, sis cares",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:3",
+      "topic": "superficies",
+      "type": 3,
+      "source_procedure": "Volum prisma amb àrea de base coneguda",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:4",
+      "topic": "superficies",
+      "type": 4,
+      "source_procedure": "Construir àrea de triangle i multiplicar per llargada de prisma",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:5",
+      "topic": "superficies",
+      "type": 5,
+      "source_procedure": "Calcular volum del cub amb l'aresta elevada al cub",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:6",
+      "topic": "superficies",
+      "type": 6,
+      "source_procedure": "Superfície del cub com sis quadrats",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:7",
+      "topic": "superficies",
+      "type": 7,
+      "source_procedure": "Volum directe de cilindre πr²h",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:8",
+      "topic": "superficies",
+      "type": 8,
+      "source_procedure": "Superfície lateral del cilindre",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:9",
+      "topic": "superficies",
+      "type": 9,
+      "source_procedure": "Superfície total del cilindre: lateral i dues bases",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:10",
+      "topic": "superficies",
+      "type": 10,
+      "source_procedure": "Invertir volum de prisma per recuperar altura",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:11",
+      "topic": "superficies",
+      "type": 11,
+      "source_procedure": "Invertir volum de prisma per recuperar Ab",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:12",
+      "topic": "superficies",
+      "type": 12,
+      "source_procedure": "Recuperar altura del cilindre per inversió πr²h",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:13",
+      "topic": "superficies",
+      "type": 13,
+      "source_procedure": "Càlcul de volum i conversió m³→litres",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:14",
+      "topic": "superficies",
+      "type": 14,
+      "source_procedure": "Càlcul de volum i equivalència dm³=L",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:15",
+      "topic": "superficies",
+      "type": 15,
+      "source_procedure": "Litres→m³, base rectangular, profunditat inversa",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:16",
+      "topic": "superficies",
+      "type": 16,
+      "source_procedure": "Àrea de caixa tancada amb recompte de cares",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:17",
+      "topic": "superficies",
+      "type": 17,
+      "source_procedure": "Comparar volums de dues caixes amb bases iguals o diferents",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "related_context"
+      }
+    },
+    {
+      "key": "superficies:18",
+      "topic": "superficies",
+      "type": 18,
+      "source_procedure": "Diagnosticar confusió d'àrea i volum",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:19",
+      "topic": "superficies",
+      "type": 19,
+      "source_procedure": "Dimensions del rectangle lateral d'un cilindre desplegat",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "superficies:20",
+      "topic": "superficies",
+      "type": 20,
+      "source_procedure": "Recompte conceptual de cares parelles de caixa",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "estimacio:1",
+      "topic": "estimacio",
+      "type": 1,
+      "source_procedure": "Estimació de magnitud plausible",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "estimacio:2",
+      "topic": "estimacio",
+      "type": 2,
+      "source_procedure": "Estimació per ordre de magnitud",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "estimacio:3",
+      "topic": "estimacio",
+      "type": 3,
+      "source_procedure": "Estimació de volum/capacitat plausible",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "estimacio:4",
+      "topic": "estimacio",
+      "type": 4,
+      "source_procedure": "Triar instrument apropiat per precisió i magnitud",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "related_context"
+      }
+    },
+    {
+      "key": "estimacio:5",
+      "topic": "estimacio",
+      "type": 5,
+      "source_procedure": "Arrodonir lectura segons xifres requerides",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "related_context"
+      }
+    },
+    {
+      "key": "estimacio:6",
+      "topic": "estimacio",
+      "type": 6,
+      "source_procedure": "Calcular error absolut |mesura−referència|",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "shared_component"
+      }
+    },
+    {
+      "key": "estimacio:7",
+      "topic": "estimacio",
+      "type": 7,
+      "source_procedure": "Calcular error relatiu d'una lectura",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "direct_overlap_review"
+      }
+    },
+    {
+      "key": "estimacio:8",
+      "topic": "estimacio",
+      "type": 8,
+      "source_procedure": "Expressar error relatiu percentual",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "direct_overlap_review"
+      }
+    },
+    {
+      "key": "estimacio:9",
+      "topic": "estimacio",
+      "type": 9,
+      "source_procedure": "Comparar dos errors relatius amb referències distintes",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "direct_overlap_review"
+      }
+    },
+    {
+      "key": "estimacio:10",
+      "topic": "estimacio",
+      "type": 10,
+      "source_procedure": "Mig pas de l'arrodoniment com error màxim",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "shared_component"
+      }
+    },
+    {
+      "key": "estimacio:11",
+      "topic": "estimacio",
+      "type": 11,
+      "source_procedure": "Valorar unitat i xifres creïbles segons context",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "related_context"
+      }
+    },
+    {
+      "key": "estimacio:12",
+      "topic": "estimacio",
+      "type": 12,
+      "source_procedure": "Construir interval semiobert compatible amb arrodoniment",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "shared_component"
+      }
+    },
+    {
+      "key": "estimacio:13",
+      "topic": "estimacio",
+      "type": 13,
+      "source_procedure": "Error relatiu percentual amb error absolut donat",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "direct_overlap_review"
+      }
+    },
+    {
+      "key": "estimacio:14",
+      "topic": "estimacio",
+      "type": 14,
+      "source_procedure": "Comprovar coherència de valor esperat i observat amb unitat",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "shared_component"
+      }
+    },
+    {
+      "key": "estimacio:15",
+      "topic": "estimacio",
+      "type": 15,
+      "source_procedure": "Mitjana aritmètica de mesures repetides",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "estimacio:16",
+      "topic": "estimacio",
+      "type": 16,
+      "source_procedure": "Arrodonir longitud a dècimes",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "estimacio:17",
+      "topic": "estimacio",
+      "type": 17,
+      "source_procedure": "Comparar dos errors absoluts",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "shared_component"
+      }
+    },
+    {
+      "key": "estimacio:18",
+      "topic": "estimacio",
+      "type": 18,
+      "source_procedure": "Diagnosticar suma en lloc de diferència absoluta",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "shared_component"
+      }
+    },
+    {
+      "key": "problemes:1",
+      "topic": "problemes",
+      "type": 1,
+      "source_procedure": "Àrea útil de paret → rendiment d'un pot → arrodoniment superior",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:2",
+      "topic": "problemes",
+      "type": 2,
+      "source_procedure": "Dues dimensions i canvi d'unitats → recompte bidimensional de rajoles",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:3",
+      "topic": "problemes",
+      "type": 3,
+      "source_procedure": "Volum d'ortoedre → litres → percentatge d'ompliment",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:4",
+      "topic": "problemes",
+      "type": 4,
+      "source_procedure": "Volum directe de cilindre, amb equivalència dm³=L",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:5",
+      "topic": "problemes",
+      "type": 5,
+      "source_procedure": "Àrea lateral de cilindre amb diàmetre i etiqueta",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:6",
+      "topic": "problemes",
+      "type": 6,
+      "source_procedure": "Diagonal rectangular mitjançant hipotenusa",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:7",
+      "topic": "problemes",
+      "type": 7,
+      "source_procedure": "Escala recolzada: hipotenusa contextual",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:8",
+      "topic": "problemes",
+      "type": 8,
+      "source_procedure": "Mapa 1:n: distància real i km",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:9",
+      "topic": "problemes",
+      "type": 9,
+      "source_procedure": "Recuperar escala de plànol a partir de dues longituds",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:10",
+      "topic": "problemes",
+      "type": 10,
+      "source_procedure": "Proporció entre altures i ombres",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "related_context",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:11",
+      "topic": "problemes",
+      "type": 11,
+      "source_procedure": "Franja exterior rectangular: reconstruir dimensions externes i restar àrees",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "related_context",
+        "MI2-MES-PA-N3-01": "shared_component",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:12",
+      "topic": "problemes",
+      "type": 12,
+      "source_procedure": "Corona circular: π[(r+w)²−r²]",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "related_context",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:13",
+      "topic": "problemes",
+      "type": 13,
+      "source_procedure": "Recompte de base + quatre laterals sense tapa",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:14",
+      "topic": "problemes",
+      "type": 14,
+      "source_procedure": "Perímetre amb porta → metres de tanca → cost proporcional",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "shared_component",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:15",
+      "topic": "problemes",
+      "type": 15,
+      "source_procedure": "Perímetre rectangular menys amplada de porta (sòcol)",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "shared_component",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:16",
+      "topic": "problemes",
+      "type": 16,
+      "source_procedure": "Error relatiu per dues mesures amb referència comuna",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "direct_overlap_review"
+      }
+    },
+    {
+      "key": "problemes:17",
+      "topic": "problemes",
+      "type": 17,
+      "source_procedure": "Estimació de magnitud i ordre de mida",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:18",
+      "topic": "problemes",
+      "type": 18,
+      "source_procedure": "Conversió d'unitats de superfície",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "shared_component",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:19",
+      "topic": "problemes",
+      "type": 19,
+      "source_procedure": "Precipitació: mm × m² mitjançant equivalència 1 mm·m² = 1 L",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    },
+    {
+      "key": "problemes:20",
+      "topic": "problemes",
+      "type": 20,
+      "source_procedure": "Recuperar altura de cilindre des de V i r",
+      "comparisons": {
+        "MI2-MES-E-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-PA-N3-01": "no_overlap_identified_in_inventory",
+        "MI2-MES-EST-N3-01": "no_overlap_identified_in_inventory"
+      }
+    }
+  ],
+  "novelty_findings": [
+    {
+      "proposal": "MI2-MES-E-N3-01",
+      "screening": "possible_distinct_model_validation",
+      "finding": "Existing scale-area generators and error diagnosis do not explicitly require comparing both side pairs from two independent plans.",
+      "mandatory_counterexample": "4x3m vs 6x2m have same area but not the same rectangle; rotations must be accepted."
+    },
+    {
+      "proposal": "MI2-MES-PA-N3-01",
+      "screening": "possible_distinct_boundary_identification",
+      "finding": "Existing semicircle perimeter includes its diameter, while rectangle+semicircle tasks ask for area not combined exterior perimeter.",
+      "mandatory_counterexample": "Summing two complete perimeters double-counts the joined diameter."
+    },
+    {
+      "proposal": "MI2-MES-EST-N3-01",
+      "screening": "possible_distinct_threshold_decision",
+      "finding": "Existing relative-error comparisons identify precision, not admissibility against a fixed external tolerance.",
+      "mandatory_counterexample": "The more precise measurement can still exceed tolerance, and exact equality must pass."
+    }
+  ],
+  "limitations": [
+    "Full set of 128 descriptive records checked, NOT full implementation audits for all 128 types.",
+    "Screening flags do not prove independent pedagogical families.",
+    "No family/new generator or levels approved; N3 remains hypothetical.",
+    "Absence of a feature in a short description does not prove it is absent in full implementation."
+  ]
+}

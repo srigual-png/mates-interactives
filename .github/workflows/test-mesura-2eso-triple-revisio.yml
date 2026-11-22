@@ -1,0 +1,17 @@
+name: Auditoria variants Pitagores Estimacio Superficies
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  revisio:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar les escissions cognitives provisionals
+        run: node scripts/test-mesura-2eso-variants-triple-revisio.cjs
+      - name: Generar i verificar exemples de les variants
+        run: node scripts/test-mesura-2eso-mostres-triple-revisio.cjs
