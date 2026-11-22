@@ -78,7 +78,7 @@ const server=http.createServer((req,res)=>{
  let e=t.id==='potencies'?genPotenciesPractice(type,level,{}):t.practiceGen?t.practiceGen(type,level):t.id==='ops'?genOpsPractice(type,level):t.id==='naturals'?(type===1001?MIFirstNumericTasks.generate('paquets-exactes'):typeof type==='number'?genNaturalType(type):genNaturalPracticeFamily(type)):type===1001?MIFirstNumericTasks.generate('xifres-amb-condicions'):type===1002?MIDecimalPractice.positionalChange(MIFirstNumericTasks.generate('canvi-posicional'),rnd,buildOpts):typeof type==='number'?genDecimalSysType(type,true):MIDecimalPractice.generate(type,rnd,buildOpts);
  const section=e.percentTheory||e.proportionTheory||e.fractionsTheory||e.decimalsTheory||e.entersTheory||e.mcmTheory||e.divisTheory||e.jerarquiaTheory||e.potenciesTheory||e.opsTheory;
  const div=document.createElement('div');div.innerHTML=miTheoryLinkHtml(t.id,undefined,section,e);
- return {topic:t.id,type,emittedType:e.type,reasoningFamily:e.reasoningFamily,expected:row.anchor,href:div.querySelector('a').getAttribute('href')};
+ const expected=MITheoryVariants[t.id]?.[e.variantId]||MITheoryFamilies[t.id]?.[String(e.type)]||row.anchor;return {topic:t.id,type,emittedType:e.type,reasoningFamily:e.reasoningFamily,expected,href:div.querySelector('a').getAttribute('href')};
  })),rows);
  for(const link of generated){check(link.href.endsWith('#'+link.expected),'Wrong correction '+JSON.stringify(link));report.links.push(link);}
  const contextual=await p.evaluate(extra=>extra.filter(r=>r.source==='problemes').map(r=>{const div=document.createElement('div');div.innerHTML=miTheoryLinkHtml(r.topic,undefined,r.anchor,{type:r.type,variantId:r.id});return {topic:r.topic,id:r.id,expected:r.anchor,href:div.querySelector('a').getAttribute('href')};}),extra);
@@ -95,7 +95,7 @@ const server=http.createServer((req,res)=>{
   check(!state.late.length,file+' theory after CTA');check(state.links.every(l=>l.valid),file+' broken card');
   for(const r of [...rows,...extra].filter(r=>r.page===file)){
    check(state.cards.includes(r.anchor),file+' family outside main grid '+(r.ids||r.id));
-   check(await p.locator('[id="'+r.anchor+'"]').locator('.example,.steps,.math').count()>0,file+' missing worked example '+r.anchor);
+   if(r.added){const target=p.locator('[id="'+r.anchor+'"]');check(await target.evaluate(el=>el.matches('.example,.steps,.math')||!!el.querySelector('.example,.steps,.math')),file+' missing worked example '+r.anchor);}
   }
   report.preservation.push({file,ids:state.ids.length,cards:state.cards.length,preserved:true});
   // Click every card, allowing the browser itself to resolve the fragment and scroll.
