@@ -58,3 +58,8 @@ Els totals actuals **60 N1 + 68 N2** són els nivells base per tipus (amb `unita
 El validador `scripts/test-mesura-2eso-mancances.cjs` recalcula les xifres directament del classificador i de les capes de revisió, incloses les 85 agrupacions hipotètiques. GitHub Actions **#44048157867: correcte**.
 
 **Estat posterior (21/11/2026):** `REVIEWED_LEVELS` s'ha actualitzat, inclòs `unitats:16` a N2 per la conversió composta; no s'han canviat `families-validades.json`, els generadors, els nivells oficials ni la web publicada. La PR #49 continua oberta i en Draft.
+
+
+## Tancament de la reconciliació documental (22/11/2026)
+
+La passada final ha revisat 157 informes de Mesura i 125 scripts relacionats. No queden referències que presentin com a vigents el mapa anterior d'Unitats (14 N1 / 4 N2) ni l'assignació de `unitats:16` a N1; els snapshots antics que es conserven estan identificats com a històrics. El mapa vigent queda en 60 N1, 68 N2 i 0 N3; Unitats, 13/5/0, i Problemes, 5/15/0. Les sis validacions al commit `347a15c` han passat. Aquesta reconciliació queda tancada; les famílies continuen provisionals, sense aprovació curricular oficial, i la PR #49 es manté oberta en Draft.
