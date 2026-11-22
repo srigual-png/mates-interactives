@@ -113,7 +113,7 @@ const server=http.createServer((req,res)=>{
   }
   if(file.includes('proporcionalitat-directa')){
    for(const width of [1440,390]){
-    await p.setViewportSize({width,height:1000});await p.locator('#produccio-pressupost').screenshot({path:out+'/captures/proporcionalitat-exemple-'+width+'.png'});
+    await p.setViewportSize({width,height:1000});await p.locator('#ajuda-exercicis').evaluate(el=>el.open=true);await p.locator('#produccio-pressupost').evaluate(el=>el.open=true);await p.locator('#produccio-pressupost').screenshot({path:out+'/captures/proporcionalitat-exemple-'+width+'.png'});
     await p.locator('.final-cta').scrollIntoViewIfNeeded();await p.screenshot({path:out+'/captures/proporcionalitat-final-'+width+'.png'});
    }
   }
