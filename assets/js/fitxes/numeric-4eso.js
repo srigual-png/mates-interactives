@@ -9,7 +9,7 @@ errors4t:[[1,2,3,4],[5,9],[6,7,8,10]],
 operacions4t:[[1,2,4],[3,5,7],[6,8,9,10]],
 comptatge4t:[[1,4,5,7],[2,3,8,9],[6,10]],
 pascal4t:[[1,2,6,8],[3,5,9],[4,7,10]],
-financera4t:[[1,2,8],[4,6,7],[3,5,9,10]]};
+financera4t:[[1,2,6,8],[3,4,5,7,9,10],[11]]};
 const generators={reals4t:genReals4ESO,irracionals4t:genIrracionals4ESO,intervals4t:genIntervals4ESO,errors4t:genErrors4ESO,operacions4t:genOperacions4ESO,comptatge4t:genComptatge4ESO,pascal4t:genPascal4ESO,financera4t:genFinancera4ESO};
 const supers={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-','⁺':'+'};
 function plain(html){
