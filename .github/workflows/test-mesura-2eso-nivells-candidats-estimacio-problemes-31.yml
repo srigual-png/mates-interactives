@@ -1,0 +1,15 @@
+name: Auditoria nivells candidats Estimacio Problemes 31 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificar 31 tipus nous i cobertura total de 128 tipus
+        run: node scripts/test-mesura-2eso-nivells-candidats-estimacio-problemes-31.cjs

@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "status": "candidate_levels_unapproved",
+  "scope": "2eso/sentit-mesura.html",
+  "batch": "remaining_estimacio_11_and_problemes_20",
+  "method": "Direct inspection of questions, hints and solutions plus prior math-oracle audits. Levels represent provisional cognitive demand, not empirical student data.",
+  "counts": {
+    "records": 31,
+    "N1": 8,
+    "N1_N2": 6,
+    "N2": 17,
+    "official_levels_changed": 0,
+    "official_families_approved": 0
+  },
+  "records": [
+    {
+      "key": "estimacio:1",
+      "level_candidate": "N1",
+      "task": "Estimació plausible de longitud",
+      "cognitive_reason": "Reconèixer la magnitud d'un objecte quotidià i triar una mida plausible.",
+      "family_core": "EST-ORDRE",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "estimacio:2",
+      "level_candidate": "N1",
+      "task": "Estimació plausible d'àrea",
+      "cognitive_reason": "Valorar l'ordre de magnitud d'una superfície quotidiana.",
+      "family_core": "EST-ORDRE",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "estimacio:3",
+      "level_candidate": "N1",
+      "task": "Estimació plausible de capacitat",
+      "cognitive_reason": "Comparar amb recipients i volums habituals.",
+      "family_core": "EST-ORDRE",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "estimacio:4",
+      "level_candidate": "N1_N2",
+      "task": "Selecció d'instrument",
+      "cognitive_reason": "Reconèixer la magnitud i triar instrument segons mida i precisió requerida.",
+      "family_core": "EST-INST",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "estimacio:5",
+      "level_candidate": "N1",
+      "task": "Arrodonir longitud a dècimes",
+      "cognitive_reason": "Observar la centèsima i arrodonir una lectura expressada en cm.",
+      "family_core": "EST-ARROD",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "estimacio:6",
+      "level_candidate": "N1",
+      "task": "Calcular error absolut",
+      "cognitive_reason": "Restar lectura i referència i prendre valor absolut.",
+      "family_core": "EST-ERRABS",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "estimacio:9",
+      "level_candidate": "N2",
+      "task": "Comparar precisió relativa de dues mesures",
+      "cognitive_reason": "Calcular dos errors relatius amb referències distintes i seleccionar el menor.",
+      "family_core": "EST-ERRREL",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "estimacio:15",
+      "level_candidate": "N1_N2",
+      "task": "Mitjana de tres lectures",
+      "cognitive_reason": "Sumar tres mesures decimals i dividir per tres, amb prudència sobre la precisió resultant.",
+      "family_core": "EST-MITJANA",
+      "approval": "pending",
+      "review_risk": "No afirmar més precisió que la lectura original."
+    },
+    {
+      "key": "estimacio:16",
+      "level_candidate": "N1",
+      "task": "Arrodoniment d'una cinta digital",
+      "cognitive_reason": "Mateixa regla decimal que estimacio:5, amb canvi de context i unitat.",
+      "family_core": "EST-ARROD",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "estimacio:17",
+      "level_candidate": "N1_N2",
+      "task": "Comparar errors absoluts",
+      "cognitive_reason": "Obtenir dues distàncies al valor de referència i comparar-les.",
+      "family_core": "EST-ERRABS",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "estimacio:18",
+      "level_candidate": "N1",
+      "task": "Diagnosticar una suma errònia",
+      "cognitive_reason": "Identificar que l'error absolut exigeix diferència i no suma.",
+      "family_core": "EST-ERRABS",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:1",
+      "level_candidate": "N2",
+      "task": "Pots de pintura per paret amb obertures",
+      "cognitive_reason": "Restar obertures, dividir pel rendiment i arrodonir cap amunt per pots enters.",
+      "family_core": "PR-PINT",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:2",
+      "level_candidate": "N2",
+      "task": "Rajoles d'habitació",
+      "cognitive_reason": "Unificar cm i m i comparar àrees o quantitats de rajoles en ambdues direccions.",
+      "family_core": "PR-RAJOLES",
+      "approval": "pending",
+      "review_risk": "L'enunciat assumeix encaix sense retalls: les mostres no comproven casos no divisibles."
+    },
+    {
+      "key": "problemes:3",
+      "level_candidate": "N2",
+      "task": "Dipòsit amb percentatge d'ompliment",
+      "cognitive_reason": "Volum rectangular en cm³, conversió a litres i percentatge; no N3 automàtic.",
+      "family_core": "PR-VOLPCT",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:4",
+      "level_candidate": "N1_N2",
+      "task": "Dipòsit cilíndric en litres",
+      "cognitive_reason": "Volum πr²h en dm³ i equivalència directa dm³=L.",
+      "family_core": "SV-CIL-V",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:5",
+      "level_candidate": "N2",
+      "task": "Etiqueta lateral de llauna",
+      "cognitive_reason": "Identificar àrea lateral i usar π·diàmetre·altura, sense les dues bases.",
+      "family_core": "SV-CIL-LATERAL",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:6",
+      "level_candidate": "N2",
+      "task": "Diagonal de pantalla",
+      "cognitive_reason": "Identificar diagonal com a hipotenusa i calcular-la amb catets donats.",
+      "family_core": "P-HIP-CONTEXT",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:7",
+      "level_candidate": "N2",
+      "task": "Longitud d'escala recolzada",
+      "cognitive_reason": "Reconèixer triangle rectangle entre paret, terra i escala.",
+      "family_core": "P-HIP-CONTEXT",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:8",
+      "level_candidate": "N2",
+      "task": "Distància real en mapa",
+      "cognitive_reason": "Interpretar l'escala 1:n i convertir centímetres a quilòmetres.",
+      "family_core": "E-LIN",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:9",
+      "level_candidate": "N2",
+      "task": "Reconstruir escala 1:n",
+      "cognitive_reason": "Normalitzar la relació plànol/realitat després d'unificar unitats.",
+      "family_core": "E-INV",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:10",
+      "level_candidate": "N2",
+      "task": "Alçada indirecta per ombres",
+      "cognitive_reason": "Plantejar proporció entre altures i ombres equivalents.",
+      "family_core": "E-SOMBRA",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:11",
+      "level_candidate": "N2",
+      "task": "Franja al voltant de piscina",
+      "cognitive_reason": "Construir dimensions exteriors amb dues amplades, restar àrea interior.",
+      "family_core": "PA-REST",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:12",
+      "level_candidate": "N2",
+      "task": "Corona circular de camí",
+      "cognitive_reason": "Calcular radi exterior i diferència d'àrees de dos cercles.",
+      "family_core": "PA-CORONA",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:13",
+      "level_candidate": "N2",
+      "task": "Capsa sense tapa",
+      "cognitive_reason": "Distingir base i quatre laterals d'una capsa oberta; excloure la tapa.",
+      "family_core": "SV-SUPERF",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:14",
+      "level_candidate": "N2",
+      "task": "Cost de tanca amb porta",
+      "cognitive_reason": "Perímetre del jardí menys porta i cost per metre.",
+      "family_core": "PR-PERICOST",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:15",
+      "level_candidate": "N2",
+      "task": "Longitud de sòcol sense porta",
+      "cognitive_reason": "Perímetre rectangular menys amplada d'una porta, sense cost addicional.",
+      "family_core": "PR-PER",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:16",
+      "level_candidate": "N1_N2",
+      "task": "Comparar error relatiu amb referència comuna",
+      "cognitive_reason": "Comparar els errors absoluts és suficient perquè el denominador és el mateix; veure si s'identifica simplificació.",
+      "family_core": "EST-ERRREL",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:17",
+      "level_candidate": "N1",
+      "task": "Estimació contextual d'ordre de magnitud",
+      "cognitive_reason": "Seleccionar mida plausible; mateix objectiu que estimacio:1–3.",
+      "family_core": "EST-ORDRE",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:18",
+      "level_candidate": "N2",
+      "task": "Conversió de superfície en pressupost",
+      "cognitive_reason": "Aplicar factor quadràtic m²→cm²; la paraula pressupost no afegeix cap operació monetària.",
+      "family_core": "U-A2",
+      "approval": "pending",
+      "review_risk": null
+    },
+    {
+      "key": "problemes:19",
+      "level_candidate": "N1_N2",
+      "task": "Precipitació en litres",
+      "cognitive_reason": "Interpretar equivalència donada 1 mm·m²=1 L i multiplicar les dues dades.",
+      "family_core": "PR-PLUJA",
+      "approval": "pending",
+      "review_risk": "Equivalència proporcionada; valorar si el seu sentit físic s'entén."
+    },
+    {
+      "key": "problemes:20",
+      "level_candidate": "N2",
+      "task": "Altura de cilindre des de capacitat",
+      "cognitive_reason": "Interpretar L=dm³ i aïllar h=V/(πr²).",
+      "family_core": "SV-CIL-INV",
+      "approval": "pending",
+      "review_risk": null
+    }
+  ],
+  "warnings": [
+    "These 31 are the remaining generator types not in the earlier five level-proposal batches; the earlier 100 records include three extra variant splits.",
+    "Repeated contexts should not inflate mathematical family count; family_core labels are provisional.",
+    "No N3 assignment is forced by 5–5–3 targets; 2n ESO suitability is decisive.",
+    "estimacio:12 rounding wording remains proposed but not authorized.",
+    "Revisit qualitative distractors and potential ambiguity before official classification."
+  ],
+  "permissions": {
+    "generator_changed": false,
+    "official_levels_changed": false,
+    "families_changed": false,
+    "estimacio_12_changed": false,
+    "pr_merged": false,
+    "deployed": false
+  }
+}

@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "status": "wording_clarification_user_authorized_and_applied",
+  "scope": "2eso/sentit-mesura.html / genEstimacioError2ESO type=12",
+  "analysis": "For positive lengths with round-half-up to one decimal, x rounds to y iff y-0.05 <= x < y+0.05. Existing answer already uses this half-open convention. The question does not state how exactly-halfway ties are rounded, so a different tie-breaking rule could yield different inclusion endpoints.",
+  "observed_source": {
+    "prompt": "Una longitud s’ha registrat com y cm arrodonida a la dècima. Quin interval és compatible amb aquest arrodoniment?",
+    "answer": "des de (y−0,05) cm (inclòs) fins a (y+0,05) cm (exclòs)",
+    "issue": "No explicita com es resolen els casos exactament a mig camí."
+  },
+  "proposed_minimal_change": {
+    "prompt": "Una longitud positiva s’ha registrat com y cm arrodonida a la dècima. En cas de quedar exactament a mig camí entre dues dècimes, s’arrodoneix cap amunt. Quin interval de valors originals és compatible amb aquest resultat?",
+    "guide_addition": "En els punts exactament a mig camí, el límit inferior s'inclou i el superior s'exclou segons la convenció indicada.",
+    "answer_change_required": false
+  },
+  "alternatives": [
+    {
+      "name": "half_up_for_positive_values",
+      "pro": "Conserva l'actual resposta i fa explícita una convenció habitual a l'ESO",
+      "con": "Cal indicar que es tracta de longituds positives"
+    },
+    {
+      "name": "avoid_exact_midpoints",
+      "pro": "Permet treballar l'interval sense discutir ties",
+      "con": "Perdria precisió en la inclusió dels extrems; caldria canviar la pregunta i les opcions"
+    },
+    {
+      "name": "round_half_to_even",
+      "pro": "Convenció usada en alguns entorns computacionals",
+      "con": "La inclusió dels extrems dependria del dígit final i requeriria reescriure diversos casos i respostes"
+    }
+  ],
+  "cases": [
+    {
+      "measured_cm": 12.3,
+      "lower_cm": 12.25,
+      "upper_cm": 12.35,
+      "lower_included": true,
+      "upper_included": false,
+      "example_below": 12.249,
+      "example_lower": 12.25,
+      "example_upper": 12.35,
+      "example_inside": 12.349
+    },
+    {
+      "measured_cm": 18.7,
+      "lower_cm": 18.65,
+      "upper_cm": 18.75,
+      "lower_included": true,
+      "upper_included": false,
+      "example_below": 18.649,
+      "example_lower": 18.65,
+      "example_upper": 18.75,
+      "example_inside": 18.749
+    },
+    {
+      "measured_cm": 25.4,
+      "lower_cm": 25.35,
+      "upper_cm": 25.45,
+      "lower_included": true,
+      "upper_included": false,
+      "example_below": 25.349,
+      "example_lower": 25.35,
+      "example_upper": 25.45,
+      "example_inside": 25.449
+    },
+    {
+      "measured_cm": 40.6,
+      "lower_cm": 40.55,
+      "upper_cm": 40.65,
+      "lower_included": true,
+      "upper_included": false,
+      "example_below": 40.549,
+      "example_lower": 40.55,
+      "example_upper": 40.65,
+      "example_inside": 40.649
+    }
+  ],
+  "level_guidance": {
+    "provisional": "N2_candidate",
+    "reason": "Requereix comprendre dos límits, el marge ±0,05 i el tractament de punts frontera, no només arrodonir.",
+    "curriculum_warning": "Confirmar que la justificació formal d'interval semiobert s'ha introduït a l'alumnat de 2n ESO; simplificar si no.",
+    "approved": false
+  },
+  "permission_boundary": {
+    "source_generator_edited": true,
+    "levels_changed": false,
+    "merge": false,
+    "deploy": false
+  },
+  "needs_user_authorization": "Autorització explícita rebuda per aclarir únicament l'enunciat d'estimacio:12; aplicada a la PR #49, sense fusió ni publicació.",
+  "applied_change": {
+    "commit_sha": "8738ca2c86a82a2851c83b4a2a891bb281fa7b53",
+    "scope": "Only the question wording, with tie-breaking rule for rounding halfway up.",
+    "answers_changed": false,
+    "options_changed": false,
+    "guide_changed": false,
+    "levels_changed": false,
+    "source_file": "2eso/sentit-mesura.html"
+  }
+}

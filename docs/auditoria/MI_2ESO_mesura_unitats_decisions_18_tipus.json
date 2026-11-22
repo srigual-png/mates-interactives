@@ -1,0 +1,258 @@
+{
+  "schema_version": 1,
+  "status": "provisional",
+  "scope": "2eso/mesura/unitats",
+  "source": "PR #49: unitats initial audit + transversal review and 128-type master",
+  "decision_types": {
+    "shared_local_core": "Nucli intern o transversal semblant; possible fusió",
+    "contextual_variant": "Nucli compartit amb variant matemàtica o interpretativa a contrastar",
+    "compound_candidate": "Composició que podria aportar família diferenciada",
+    "review_distinct": "Procediment amb identitat a revisar abans de considerar-lo independent",
+    "variant_mixed": "Tipus amb casos diferents; cal consolidar per variant"
+  },
+  "limitations": [
+    "Agrupacions candidates, no famílies matemàtiques validades",
+    "La mateixa etiqueta de grup no implica nivell idèntic",
+    "Les notes de PR #51/#52/#53 són canvis proposats en altres branques encara no fusionades",
+    "Cap canvi funcional en aquest fitxer"
+  ],
+  "rows": [
+    {
+      "key": "unitats:1",
+      "type": 1,
+      "old_group": "U01",
+      "decision": "shared_local_core",
+      "procedure": "Conversió decimal de longitud per potències de deu",
+      "shared_with": [
+        "unitats:4",
+        "unitats:5"
+      ],
+      "rationale": "Mateix esquema decimal que massa/capacitat, encara que l'exponent difereixi.",
+      "current_level_note": "N1 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:2",
+      "type": 2,
+      "old_group": "U02",
+      "decision": "shared_local_core",
+      "procedure": "Conversió de superfície amb factor quadràtic",
+      "shared_with": [
+        "unitats:11",
+        "problemes:18"
+      ],
+      "rationale": "Canvia el context però el factor s'eleva al quadrat.",
+      "current_level_note": "N1 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:3",
+      "type": 3,
+      "old_group": "U03",
+      "decision": "review_distinct",
+      "procedure": "Conversió de volum amb factor cúbic",
+      "shared_with": [],
+      "rationale": "L'efecte de tres dimensions requereix distingir-lo del factor quadràtic.",
+      "current_level_note": "N1 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:4",
+      "type": 4,
+      "old_group": "U01",
+      "decision": "shared_local_core",
+      "procedure": "Conversió de capacitat per potències de deu",
+      "shared_with": [
+        "unitats:1",
+        "unitats:5"
+      ],
+      "rationale": "Canvi de magnitud no implica per si sol canvi de procediment.",
+      "current_level_note": "N1 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:5",
+      "type": 5,
+      "old_group": "U01",
+      "decision": "shared_local_core",
+      "procedure": "Conversió de massa per potències de deu",
+      "shared_with": [
+        "unitats:1",
+        "unitats:4"
+      ],
+      "rationale": "Mateixa transformació de prefix decimal.",
+      "current_level_note": "N1 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:6",
+      "type": 6,
+      "old_group": "U08",
+      "decision": "variant_mixed",
+      "procedure": "Equivalència volum-capacitat directa o encadenada",
+      "shared_with": [
+        "unitats:12",
+        "unitats:18"
+      ],
+      "rationale": "Tres casos directes i tres encadenats; documentar-los separadament.",
+      "current_level_note": "N1 base; N2 a variant encadenada en PR #51/#53",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:7",
+      "type": 7,
+      "old_group": "U04",
+      "decision": "review_distinct",
+      "procedure": "Triar unitat adient segons magnitud i escala física",
+      "shared_with": [
+        "estimacio:1"
+      ],
+      "rationale": "Identificació de magnitud i unitat, no càlcul de conversió; comparar amb estimació contextual.",
+      "current_level_note": "N1 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:8",
+      "type": 8,
+      "old_group": "U05",
+      "decision": "contextual_variant",
+      "procedure": "Reconèixer factor de conversió dimensional",
+      "shared_with": [
+        "unitats:14"
+      ],
+      "rationale": "Triar l'operació correcta en lloc de fer el càlcul, però mateixa relació dimensional.",
+      "current_level_note": "N1 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:9",
+      "type": 9,
+      "old_group": "U09",
+      "decision": "review_distinct",
+      "procedure": "Comparar longituds després d'unificar unitats",
+      "shared_with": [],
+      "rationale": "Una conversió i una comparació, no només aplicar un factor.",
+      "current_level_note": "N2 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:10",
+      "type": 10,
+      "old_group": "U10",
+      "decision": "compound_candidate",
+      "procedure": "Sumar longituds amb unitats diferents",
+      "shared_with": [
+        "unitats:15"
+      ],
+      "rationale": "La suma s'efectua després d'unificar unitats; contrastar amb suma d'àrees.",
+      "current_level_note": "N2 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:11",
+      "type": 11,
+      "old_group": "U02",
+      "decision": "shared_local_core",
+      "procedure": "Conversió contextual de superfície",
+      "shared_with": [
+        "unitats:2",
+        "problemes:18"
+      ],
+      "rationale": "La sala no introdueix cap procés nou.",
+      "current_level_note": "N1 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:12",
+      "type": 12,
+      "old_group": "U06",
+      "decision": "shared_local_core",
+      "procedure": "Relació directa dm³=L",
+      "shared_with": [
+        "unitats:16"
+      ],
+      "rationale": "Comparteix el coneixement de volum-capacitat amb el reconeixement d'igualtats.",
+      "current_level_note": "N1 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:13",
+      "type": 13,
+      "old_group": "U11",
+      "decision": "variant_mixed",
+      "procedure": "Verificar una equivalència correcta o diagnosticar un factor erroni",
+      "shared_with": [
+        "unitats:17"
+      ],
+      "rationale": "Tres afirmacions correctes i una errònia; distractors fan dubtosa l'elevació a N2.",
+      "current_level_note": "N1 base; mantenir provisional",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:14",
+      "type": 14,
+      "old_group": "U05",
+      "decision": "contextual_variant",
+      "procedure": "Identificar una equivalència dimensional",
+      "shared_with": [
+        "unitats:8"
+      ],
+      "rationale": "Mateix canvi quadràtic/cúbic en format d'equivalència.",
+      "current_level_note": "N1 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:15",
+      "type": 15,
+      "old_group": "U10",
+      "decision": "compound_candidate",
+      "procedure": "Sumar superfícies amb dues unitats d'origen",
+      "shared_with": [
+        "unitats:10"
+      ],
+      "rationale": "Cal convertir dues quantitats abans de sumar; diferent magnitud i més conversions.",
+      "current_level_note": "N2 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:16",
+      "type": 16,
+      "old_group": "U07",
+      "decision": "shared_local_core",
+      "procedure": "Reconèixer una igualtat volum-capacitat composta",
+      "shared_with": [
+        "unitats:6",
+        "unitats:18"
+      ],
+      "rationale": "Les igualtats correctes incorporen un canvi addicional de prefix/escala; el format de selecció múltiple no elimina el procediment compost. Es vincula amb la branca encadenada de 6 i el tipus 18.",
+      "current_level_note": "N2 intern aplicat al mapa (no és nivell oficial); família provisional.",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:17",
+      "type": 17,
+      "old_group": "U11",
+      "decision": "contextual_variant",
+      "procedure": "Identificar error de conversió en una afirmació d'alumne",
+      "shared_with": [
+        "unitats:13"
+      ],
+      "rationale": "L'explicació correcta figura explícitament entre distractors poc exigents.",
+      "current_level_note": "N1 base",
+      "status": "provisional"
+    },
+    {
+      "key": "unitats:18",
+      "type": 18,
+      "old_group": "U08",
+      "decision": "shared_local_core",
+      "procedure": "Convertir mL a dm³ passant per cm³",
+      "shared_with": [
+        "unitats:6"
+      ],
+      "rationale": "Coincideix amb la branca encadenada del tipus 6, no amb les equivalències directes.",
+      "current_level_note": "N1 al codi base de #49; N2 proposat a #52/#53",
+      "status": "provisional"
+    }
+  ]
+}

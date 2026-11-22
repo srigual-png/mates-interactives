@@ -1,0 +1,15 @@
+name: Auditoria contrast global 128 Mesura 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cross-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar traçabilitat de 128 tipus i nou variants
+        run: node scripts/test-mesura-2eso-contrast-global-128.cjs

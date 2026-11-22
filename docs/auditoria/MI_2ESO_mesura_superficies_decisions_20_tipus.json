@@ -1,0 +1,267 @@
+{
+  "schema_version": 1,
+  "scope": "2eso/mesura/superficies",
+  "status": "provisional",
+  "source": "PR #49 seven static topic reports and 128-type master",
+  "decision_types": {
+    "shared_local_core": "Mathematical core shared with another exercise",
+    "contextual_variant": "Shared core with variant potentially affecting level or task",
+    "compound_candidate": "Multiple decisions or operations requiring pedagogical review",
+    "review_distinct": "Identity still to review separately",
+    "variant_mixed": "Cases from one type correspond to different mathematical tasks"
+  },
+  "limitations": [
+    "These are decisions for review, not validated genuine families",
+    "References to another type do not prove identical difficulty",
+    "No N3 classification or validated families registered",
+    "This document does not change generator code or level mapping"
+  ],
+  "rows": [
+    {
+      "key": "superficies:1",
+      "type": 1,
+      "old_group": "SV01",
+      "decision": "shared_local_core",
+      "procedure": "Volum ortoedre per producte de tres dimensions",
+      "shared_with": [
+        "superficies:3",
+        "superficies:5"
+      ],
+      "rationale": "N1; s'aplica directament el producte de les tres dimensions, equivalent a V=Ab·h.",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:2",
+      "type": 2,
+      "old_group": "SV04",
+      "decision": "shared_local_core",
+      "procedure": "Àrea total de caixa tancada, sis cares",
+      "shared_with": [
+        "superficies:16",
+        "problemes:13"
+      ],
+      "rationale": "N2; capsa sense tapa és una variant de recompte, no la mateixa fórmula",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:3",
+      "type": 3,
+      "old_group": "SV01",
+      "decision": "shared_local_core",
+      "procedure": "Volum prisma amb àrea de base coneguda",
+      "shared_with": [
+        "superficies:1"
+      ],
+      "rationale": "N1; multiplicació Ab·h",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:4",
+      "type": 4,
+      "old_group": "SV02",
+      "decision": "compound_candidate",
+      "procedure": "Construir àrea de triangle i multiplicar per llargada de prisma",
+      "shared_with": [
+        "superficies:3"
+      ],
+      "rationale": "N2; cal trobar prèviament la base triangular",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:5",
+      "type": 5,
+      "old_group": "SV01",
+      "decision": "shared_local_core",
+      "procedure": "Calcular volum del cub amb l'aresta elevada al cub",
+      "shared_with": [
+        "superficies:1"
+      ],
+      "rationale": "N1; cas d'ortoedre amb tres arestes iguals",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:6",
+      "type": 6,
+      "old_group": "SV04",
+      "decision": "contextual_variant",
+      "procedure": "Superfície del cub com sis quadrats",
+      "shared_with": [
+        "superficies:2"
+      ],
+      "rationale": "N1; nombre de cares constant, caixa general més exigent",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:7",
+      "type": 7,
+      "old_group": "SV03",
+      "decision": "shared_local_core",
+      "procedure": "Volum directe de cilindre πr²h",
+      "shared_with": [
+        "problemes:4"
+      ],
+      "rationale": "N1; mateix nucli que capacitat en litres quan dimensions són dm",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:8",
+      "type": 8,
+      "old_group": "SV05",
+      "decision": "shared_local_core",
+      "procedure": "Superfície lateral del cilindre",
+      "shared_with": [
+        "problemes:5",
+        "superficies:19"
+      ],
+      "rationale": "N2 intern validat: cal modelitzar el lateral com un rectangle desplegat i identificar-ne la base com la circumferència abans d’aplicar 2πrh.",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:9",
+      "type": 9,
+      "old_group": "SV06",
+      "decision": "compound_candidate",
+      "procedure": "Superfície total del cilindre: lateral i dues bases",
+      "shared_with": [
+        "superficies:8"
+      ],
+      "rationale": "N2; composa dues contribucions diferents",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:10",
+      "type": 10,
+      "old_group": "SV07",
+      "decision": "contextual_variant",
+      "procedure": "Invertir volum de prisma per recuperar altura",
+      "shared_with": [
+        "superficies:11"
+      ],
+      "rationale": "N1; divisió de volum entre Ab",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:11",
+      "type": 11,
+      "old_group": "SV07",
+      "decision": "contextual_variant",
+      "procedure": "Invertir volum de prisma per recuperar Ab",
+      "shared_with": [
+        "superficies:10"
+      ],
+      "rationale": "N1; mateix esquema invers però incògnita distinta",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:12",
+      "type": 12,
+      "old_group": "SV08",
+      "decision": "contextual_variant",
+      "procedure": "Recuperar altura del cilindre per inversió πr²h",
+      "shared_with": [
+        "problemes:20",
+        "superficies:10"
+      ],
+      "rationale": "N2; calcular πr² abans d'aïllar h",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:13",
+      "type": 13,
+      "old_group": "SV09",
+      "decision": "compound_candidate",
+      "procedure": "Càlcul de volum i conversió m³→litres",
+      "shared_with": [
+        "superficies:14",
+        "unitats:6"
+      ],
+      "rationale": "N2; conversió de prefix després del volum",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:14",
+      "type": 14,
+      "old_group": "SV09",
+      "decision": "contextual_variant",
+      "procedure": "Càlcul de volum i equivalència dm³=L",
+      "shared_with": [
+        "superficies:13",
+        "problemes:4"
+      ],
+      "rationale": "N1 intern validat: producte directe de les tres dimensions en dm i equivalència exacta dm³=L, sense conversió addicional.",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:15",
+      "type": 15,
+      "old_group": "SV10",
+      "decision": "compound_candidate",
+      "procedure": "Litres→m³, base rectangular, profunditat inversa",
+      "shared_with": [
+        "superficies:10"
+      ],
+      "rationale": "N2; combina escala volumètrica i inversió",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:16",
+      "type": 16,
+      "old_group": "SV04",
+      "decision": "shared_local_core",
+      "procedure": "Àrea de caixa tancada amb recompte de cares",
+      "shared_with": [
+        "superficies:2"
+      ],
+      "rationale": "N2; mateix càlcul amb context diferent",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:17",
+      "type": 17,
+      "old_group": "SV11",
+      "decision": "variant_mixed",
+      "procedure": "Comparar volums de dues caixes amb bases iguals o diferents",
+      "shared_with": [
+        "superficies:1"
+      ],
+      "rationale": "sameBase N1 compara altures; altres N2 calculen dos volums",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:18",
+      "type": 18,
+      "old_group": "SV12",
+      "decision": "review_distinct",
+      "procedure": "Diagnosticar confusió d'àrea i volum",
+      "shared_with": [
+        "perimetres:18"
+      ],
+      "rationale": "N1; comparteix format d'error però contingut diferent",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:19",
+      "type": 19,
+      "old_group": "SV05",
+      "decision": "contextual_variant",
+      "procedure": "Dimensions del rectangle lateral d'un cilindre desplegat",
+      "shared_with": [
+        "superficies:8"
+      ],
+      "rationale": "N2 actual; identificar circumferència i altura, no calcular-ne producte",
+      "status": "provisional"
+    },
+    {
+      "key": "superficies:20",
+      "type": 20,
+      "old_group": "SV04",
+      "decision": "contextual_variant",
+      "procedure": "Recompte conceptual de cares parelles de caixa",
+      "shared_with": [
+        "superficies:2"
+      ],
+      "rationale": "N2; no se sol·licita exactament àrea total, verificar objectiu diferent",
+      "status": "provisional"
+    }
+  ]
+}

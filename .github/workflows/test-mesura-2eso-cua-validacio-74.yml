@@ -1,0 +1,15 @@
+name: Auditoria cua revisio 74 grups Mesura 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar prioritats dels 11 mixtos i 44 unipersonals
+        run: node scripts/test-mesura-2eso-cua-validacio-74.cjs

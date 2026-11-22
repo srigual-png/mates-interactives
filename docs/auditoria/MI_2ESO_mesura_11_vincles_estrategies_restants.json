@@ -1,0 +1,457 @@
+{
+  "schema_version": 1,
+  "status": "eleven_links_reviewed_provisionally_not_teacher_approved",
+  "source_crosswalk": "docs/auditoria/MI_2ESO_mesura_creuament_131_fitxes_72_agrupacions.json",
+  "case_count": 11,
+  "cases": [
+    {
+      "members": [
+        "pitagores:2",
+        "pitagores:4",
+        "pitagores:6",
+        "pitagores:7",
+        "pitagores:8",
+        "pitagores:13",
+        "problemes:6",
+        "problemes:7"
+      ],
+      "relation": "same_core",
+      "reason": "Hipotenusa de triangle rectangle amb catets explícits o inferits del context; les representacions poden alterar el nivell però no el càlcul.",
+      "id": "DEDUPE-01",
+      "member_clusters": [
+        "ME2-C038"
+      ],
+      "pending_teacher": true,
+      "mathematical_model": "c²=a²+b²",
+      "cognitive_difference": "Triangle explicit versus diagonal, rampa, escala o cable implícits",
+      "working_judgment": "same_strategy_with_representation_variants",
+      "pedagogical_risk": "El fet que calgui inferir el triangle pot incrementar la dificultat sense convertir automàticament el context en una família nova.",
+      "candidate_level_by_member": [
+        {
+          "key": "pitagores:2",
+          "levels": [
+            "N1_N2"
+          ]
+        },
+        {
+          "key": "pitagores:4",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "pitagores:6",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "pitagores:7",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "pitagores:8",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "pitagores:13",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "problemes:6",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "problemes:7",
+          "levels": [
+            "N2"
+          ]
+        }
+      ],
+      "teacher_approved": false
+    },
+    {
+      "members": [
+        "perimetres:17",
+        "problemes:12"
+      ],
+      "relation": "same_core",
+      "reason": "Corona circular com diferència d'àrees amb radi exterior obtingut de l'amplada.",
+      "id": "DEDUPE-03",
+      "member_clusters": [
+        "ME2-C024"
+      ],
+      "pending_teacher": true,
+      "mathematical_model": "π(R²−r²), amb R=r+amplada",
+      "cognitive_difference": "Estany i parterre són contextos diferents per a una corona circular",
+      "working_judgment": "same_mathematical_family_candidate",
+      "pedagogical_risk": "Conservar varietat de contextos, però evitar comptar dos procediments inexistents.",
+      "candidate_level_by_member": [
+        {
+          "key": "perimetres:17",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "problemes:12",
+          "levels": [
+            "N2"
+          ]
+        }
+      ],
+      "teacher_approved": false
+    },
+    {
+      "members": [
+        "superficies:2",
+        "superficies:16"
+      ],
+      "relation": "same_core",
+      "reason": "Superfície d'un ortoedre tancat: tres parelles de cares i el mateix càlcul, amb context de cartró o capsa.",
+      "id": "DEDUPE-04",
+      "member_clusters": [
+        "ME2-C058"
+      ],
+      "pending_teacher": true,
+      "mathematical_model": "2(ab+ac+bc)",
+      "cognitive_difference": "Capsa tancada versus cartró necessari per construir-la",
+      "working_judgment": "same_mathematical_family_candidate",
+      "pedagogical_risk": "Examinar que els enunciats indiquin si la capsa és tancada; si és oberta, la fórmula canvia.",
+      "candidate_level_by_member": [
+        {
+          "key": "superficies:2",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "superficies:16",
+          "levels": [
+            "N2"
+          ]
+        }
+      ],
+      "teacher_approved": false
+    },
+    {
+      "members": [
+        "superficies:7",
+        "problemes:4"
+      ],
+      "relation": "same_core_units_variant",
+      "reason": "Volum de cilindre πr²h; dimensió en dm i equivalència dm³=L a l'aplicació de capacitat.",
+      "id": "DEDUPE-05",
+      "member_clusters": [
+        "ME2-C060"
+      ],
+      "pending_teacher": true,
+      "mathematical_model": "πr²h i 1 dm³ = 1 L",
+      "cognitive_difference": "Volum en cm³ versus capacitat en L amb dades en dm",
+      "working_judgment": "same_core_with_unit_equivalence_variant",
+      "pedagogical_risk": "La conversió d'unitats pot incrementar la càrrega, però aquí la igualtat dm³=L és directa.",
+      "candidate_level_by_member": [
+        {
+          "key": "superficies:7",
+          "levels": [
+            "N1"
+          ]
+        },
+        {
+          "key": "problemes:4",
+          "levels": [
+            "N1_N2"
+          ]
+        }
+      ],
+      "teacher_approved": false
+    },
+    {
+      "members": [
+        "superficies:12",
+        "problemes:20"
+      ],
+      "relation": "same_core",
+      "reason": "Fórmula inversa del volum del cilindre per obtenir altura; litres = dm³ és conversió contextual de l'aplicació.",
+      "id": "DEDUPE-07",
+      "member_clusters": [
+        "ME2-C053"
+      ],
+      "pending_teacher": true,
+      "mathematical_model": "h=V/(πr²)",
+      "cognitive_difference": "Volum ja numèric versus litres transformats en dm³",
+      "working_judgment": "same_inverse_model_candidate",
+      "pedagogical_risk": "La presència de capacitat requereix comprovar l'equivalència d'unitats abans de dividir.",
+      "candidate_level_by_member": [
+        {
+          "key": "superficies:12",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "problemes:20",
+          "levels": [
+            "N2"
+          ]
+        }
+      ],
+      "teacher_approved": false
+    },
+    {
+      "members": [
+        "estimacio:1",
+        "estimacio:2",
+        "estimacio:3",
+        "problemes:17"
+      ],
+      "relation": "same_estimation_strategy_magnitude_variants",
+      "reason": "Plausibilitat d'ordres de magnitud amb magnituds diferents; mantenir unitats i escala com a variants.",
+      "id": "DEDUPE-08",
+      "member_clusters": [
+        "ME2-C009"
+      ],
+      "pending_teacher": true,
+      "mathematical_model": "Triar valor i unitat plausibles a partir de referents reals",
+      "cognitive_difference": "Longitud, superfície i capacitat; un problema contextual reutilitza els mateixos ordres de magnitud",
+      "working_judgment": "same_reasoning_family_with_magnitude_variants",
+      "pedagogical_risk": "No assumir que el criteri de volum s'infereix automàticament del de longitud, especialment si hi ha distractors d'unitat.",
+      "candidate_level_by_member": [
+        {
+          "key": "estimacio:1",
+          "levels": [
+            "N1"
+          ]
+        },
+        {
+          "key": "estimacio:2",
+          "levels": [
+            "N1"
+          ]
+        },
+        {
+          "key": "estimacio:3",
+          "levels": [
+            "N1"
+          ]
+        },
+        {
+          "key": "problemes:17",
+          "levels": [
+            "N1"
+          ]
+        }
+      ],
+      "teacher_approved": false
+    },
+    {
+      "members": [
+        "unitats:2",
+        "unitats:11",
+        "problemes:18"
+      ],
+      "relation": "same_core",
+      "reason": "Conversió de superfície mitjançant potències quadrades del factor; el pressupost no introdueix cost.",
+      "id": "DEDUPE-09",
+      "member_clusters": [
+        "ME2-C067"
+      ],
+      "pending_teacher": true,
+      "mathematical_model": "Si el factor lineal és 100, el factor d'àrea és 100²",
+      "cognitive_difference": "Conversió directa versus superfície contextualitzada i 'pressupost' sense càlcul monetari",
+      "working_judgment": "same_dimension_conversion_family_candidate",
+      "pedagogical_risk": "El nom 'pressupost' no incorpora una competència de preus, costos ni diners.",
+      "candidate_level_by_member": [
+        {
+          "key": "unitats:2",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "unitats:11",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "problemes:18",
+          "levels": [
+            "N2"
+          ]
+        }
+      ],
+      "teacher_approved": false
+    },
+    {
+      "members": [
+        "escales:1",
+        "escales:2",
+        "problemes:8"
+      ],
+      "relation": "same_core",
+      "reason": "Distància real a partir d'una escala 1:n i transformació a m o km.",
+      "id": "DEDUPE-10",
+      "member_clusters": [
+        "ME2-C001"
+      ],
+      "pending_teacher": true,
+      "mathematical_model": "distància real (cm) = distància al mapa (cm) × denominador",
+      "cognitive_difference": "Distància real en metres o quilòmetres i un context de ruta",
+      "working_judgment": "same_scale_distance_family_candidate",
+      "pedagogical_risk": "El canvi cm→km pot exigir més passos però no necessàriament un model nou.",
+      "candidate_level_by_member": [
+        {
+          "key": "escales:1",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "escales:2",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "problemes:8",
+          "levels": [
+            "N2"
+          ]
+        }
+      ],
+      "teacher_approved": false
+    },
+    {
+      "members": [
+        "escales:4",
+        "escales:15",
+        "problemes:9"
+      ],
+      "relation": "same_core",
+      "reason": "Trobar escala 1:n a partir de longitud real i representada, amb normalització d'unitats.",
+      "id": "DEDUPE-11",
+      "member_clusters": [
+        "ME2-C006"
+      ],
+      "pending_teacher": true,
+      "mathematical_model": "n = distància real convertida a cm / distància dibuixada en cm",
+      "cognitive_difference": "Calcular denominador 1:n amb context de plànol o segment",
+      "working_judgment": "same_inverse_scale_family_candidate",
+      "pedagogical_risk": "L'escala inversa no és el mateix que obtenir una distància amb 1:n donat.",
+      "candidate_level_by_member": [
+        {
+          "key": "escales:4",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "escales:15",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "problemes:9",
+          "levels": [
+            "N2"
+          ]
+        }
+      ],
+      "teacher_approved": false
+    },
+    {
+      "members": [
+        "escales:8",
+        "escales:9",
+        "problemes:10"
+      ],
+      "relation": "same_core",
+      "reason": "Altura estimada per comparació de dues ombres i triangles semblants.",
+      "id": "DEDUPE-12",
+      "member_clusters": [
+        "ME2-C008"
+      ],
+      "pending_teacher": true,
+      "mathematical_model": "altura1/ombra1=altura2/ombra2",
+      "cognitive_difference": "Altura de l'arbre, edifici o objecte a partir d'ombres",
+      "working_judgment": "same_similarity_height_family_candidate",
+      "pedagogical_risk": "Si algun exercici exigeix ombra desconeguda en comptes d'altura, conservar la variant d'incògnita.",
+      "candidate_level_by_member": [
+        {
+          "key": "escales:8",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "escales:9",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "problemes:10",
+          "levels": [
+            "N2"
+          ]
+        }
+      ],
+      "teacher_approved": false
+    },
+    {
+      "members": [
+        "estimacio:11",
+        "estimacio:14"
+      ],
+      "relation": "must_split_current_code",
+      "reason": "Després de la correcció d'estimació 11, triar instrument per tolerància no és jutjar coherència d'una lectura.",
+      "id": "DEDUPE-14",
+      "member_clusters": [
+        "ME2-C011"
+      ],
+      "pending_teacher": true,
+      "mathematical_model": "Error instrumental màxim admissible ≠ coherència d'una lectura",
+      "cognitive_difference": "Estimar instrument que compleix tolerància versus judici contextual d'una diferència",
+      "working_judgment": "different_strategy_do_not_merge",
+      "pedagogical_risk": "El catàleg original de C011 és històric; el generador estimacio:11 va ser redissenyat amb autorització.",
+      "candidate_level_by_member": [
+        {
+          "key": "estimacio:11",
+          "levels": [
+            "N2"
+          ]
+        },
+        {
+          "key": "estimacio:14",
+          "levels": [
+            "N1_N2"
+          ]
+        }
+      ],
+      "teacher_approved": false
+    }
+  ],
+  "limits": [
+    "A mathematical equality is not enough to guarantee identical cognitive demand or appropriate distractors.",
+    "No new N3 assignments are inferred by complexity alone.",
+    "The current link review does not determine a final count of mathematical families."
+  ],
+  "pending_permission": {
+    "generator_changed": false,
+    "levels_changed": false,
+    "families_changed": false,
+    "estimacio12_edited": false,
+    "merged": false,
+    "deployed": false
+  }
+}

@@ -1,0 +1,13 @@
+name: Mesura 2n ESO - parelles d'escales amb dades compartides
+on:
+  workflow_dispatch:
+jobs:
+  paired:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Comprovar 1600 instancies i 8 parelles
+        run: node scripts/test-mesura-2eso-escales-dues-parelles-dades-compartides.cjs

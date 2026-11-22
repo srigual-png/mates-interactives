@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "status": "illustrative_not_approved_no_implementation",
+  "basis": "72 provisional groups, 129 assignments and 14 review links; only explicit evidence-backed splits and one cross-group shared-core candidate are modeled",
+  "splits": [
+    {
+      "id": "ME2-C001",
+      "parts": [
+        [
+          "escales:1",
+          "escales:2",
+          "problemes:8"
+        ],
+        [
+          "escales:17"
+        ]
+      ],
+      "reason": "Itinerari amb dos trams vs distància única",
+      "provisional": true
+    },
+    {
+      "id": "ME2-C006",
+      "parts": [
+        [
+          "escales:4",
+          "escales:15",
+          "problemes:9"
+        ],
+        [
+          "escales:12"
+        ]
+      ],
+      "reason": "Escala 1:n deduïda vs factor directe d'ampliació",
+      "provisional": true
+    },
+    {
+      "id": "ME2-C008",
+      "parts": [
+        [
+          "escales:8",
+          "escales:9",
+          "problemes:10"
+        ],
+        [
+          "escales:18"
+        ],
+        [
+          "escales:10",
+          "escales:11"
+        ]
+      ],
+      "reason": "Altures per ombres, ombra com incògnita i proporció entre figures abstractes",
+      "provisional": true
+    },
+    {
+      "id": "ME2-C011",
+      "parts": [
+        [
+          "estimacio:11"
+        ],
+        [
+          "estimacio:14"
+        ]
+      ],
+      "reason": "Codi actual: selecció de tolerància instrumental vs judici de coherència",
+      "provisional": true
+    },
+    {
+      "id": "ME2-C019",
+      "parts": [
+        [
+          "perimetres:1"
+        ],
+        [
+          "perimetres:2"
+        ],
+        [
+          "perimetres:3"
+        ]
+      ],
+      "reason": "Fórmules directes de paral·lelogram, rombe i trapezi (separació pendent de validar)",
+      "provisional": true
+    },
+    {
+      "id": "ME2-C038",
+      "parts": [
+        [
+          "pitagores:2",
+          "pitagores:4",
+          "pitagores:6",
+          "pitagores:7",
+          "pitagores:8",
+          "pitagores:13",
+          "problemes:6",
+          "problemes:7"
+        ],
+        [
+          "pitagores:5"
+        ]
+      ],
+      "reason": "Hipotenusa amb catets i cas especial de diagonal de quadrat √2",
+      "provisional": true
+    },
+    {
+      "id": "ME2-C058",
+      "parts": [
+        [
+          "superficies:2",
+          "superficies:6",
+          "superficies:16"
+        ],
+        [
+          "superficies:20"
+        ]
+      ],
+      "reason": "Calcular superfície exterior vs identificar parelles de cares d'un desenvolupament pla",
+      "provisional": true
+    }
+  ],
+  "cross_group_join": {
+    "sources": [
+      "ME2-C030",
+      "ME2-C042"
+    ],
+    "reason": "Àrea exterior menys retall, amb variants de complexitat; la piscina exigeix calcular dimensions externes",
+    "approval": "pending"
+  },
+  "counts": {
+    "initial_groups": 72,
+    "initial_assignments": 129,
+    "split_operations": 8,
+    "additional_groups_from_splits": 10,
+    "join_operations": 1,
+    "scenario_groups": 80,
+    "official_approved_families": 0
+  },
+  "cautions": [
+    "81 és únicament el recompte d'un escenari mecànic de partició, NO una proposta de 81 famílies curriculars finals.",
+    "Altres similituds entre grups no s'han convertit automàticament en fusions, i altres membres podrien compartir família.",
+    "La separació de les tres fórmules d'àrea dins de C019 necessita contrast docent perquè fórmula diferent no implica necessàriament família distinta.",
+    "La divisió dels dos casos d'escales:8/9/10/11/18 pot reflectir variants i no famílies noves.",
+    "No confondre el tipus unitats:6 amb dues generacions diferents: es registren dues variants."
+  ],
+  "next": "Contrastar amb exemples reals cadascuna de les separacions i unions; només llavors preparar proposta curricular de famílies i N1/N2/N3 sense quota forçada 5–5–3",
+  "permissions": {
+    "generator_edited": false,
+    "official_levels_edited": false,
+    "official_families_edited": false,
+    "estimacio12_edited": false,
+    "pr_merged": false,
+    "deployed": false
+  }
+}

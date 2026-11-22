@@ -1,0 +1,16 @@
+name: Auditoria oracles ampliats 20 Mesura 2n ESO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Executar 40 mostres de 128 tipus i validar 20 oracles
+        run: node scripts/test-mesura-2eso-oracles-ampliats-20.cjs

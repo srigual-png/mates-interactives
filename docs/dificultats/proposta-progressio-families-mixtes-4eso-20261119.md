@@ -1,7 +1,7 @@
 # Progressió procedimental de famílies mixtes · 4t ESO
 
-Data: 19-11-2026  
-Branca: `codex/auditoria-independent-4eso-20261119`  
+Data: 19-11-2026
+Branca: `codex/auditoria-independent-4eso-20261119`
 Estat: dues reassignacions N1/N2 aplicades a la branca de la PR #66; la PR continua Draft.
 
 ## Criteri

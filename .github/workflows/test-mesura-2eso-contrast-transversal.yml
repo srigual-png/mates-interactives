@@ -1,0 +1,15 @@
+name: Auditoria contrast transversal Unitat Escales
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contrast:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprovar 31 relacions transversals
+        run: node scripts/test-mesura-2eso-contrast-transversal.cjs

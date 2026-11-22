@@ -1,0 +1,293 @@
+{
+  "schema_version": 1,
+  "status": "screening_not_approval",
+  "scope": "2eso/sentit-mesura/novelty-and-difficulty-rubric",
+  "baseline": "MI_2ESO_mesura_propostes_procediments_nous.json",
+  "criteria": [
+    {
+      "key": "strategy_novelty",
+      "description": "0 mateix procediment; 1 decisió/representació potencialment addicional; 2 procediment clarament diferent dels tipus inventariats"
+    },
+    {
+      "key": "independence",
+      "description": "0 combinació o simplificació; 1 autonomia possible però sense proves; 2 diferenciació verificada amb instàncies i oracles"
+    },
+    {
+      "key": "curricular_fit",
+      "description": "0 desalineat; 1 necessita ajust; 2 sembla adequat a 2n ESO (provisional, no homologació)"
+    },
+    {
+      "key": "complexity_evidence",
+      "description": "0 activitat directa N1; 1 multi-pas sense modelització autònoma; 2 incorpora restricció, verificació o decisió que pot justificar dificultat major"
+    }
+  ],
+  "counts": {
+    "proposals": 11,
+    "conditional_candidates": 6,
+    "reuse_or_rework": 3,
+    "reinforcement_only": 2,
+    "validated_new_families": 0
+  },
+  "assessments": [
+    {
+      "proposal_id": "MI2-MES-U-N2-01",
+      "topic": "unitats",
+      "initial_level": 2,
+      "scores": {
+        "strategy_novelty": 0,
+        "independence": 0,
+        "curricular_fit": 2,
+        "complexity_evidence": 1
+      },
+      "score_total": 3,
+      "screening_decision": "rework_or_reuse",
+      "justification": "Comparar després de convertir ja està representat a unitats:9; només canvia longitud per capacitat. No és un procediment nou per si mateix.",
+      "required_evidence": "Reformular amb una decisió de selecció d'unitat/equivalència que no es resolgui amb el mateix patró.",
+      "validated_new_family": false,
+      "approved_level": null,
+      "proposed_level_remains_hypothesis": true,
+      "overlap": [
+        "unitats:6",
+        "unitats:9"
+      ]
+    },
+    {
+      "proposal_id": "MI2-MES-U-N2-02",
+      "topic": "unitats",
+      "initial_level": 2,
+      "scores": {
+        "strategy_novelty": 0,
+        "independence": 0,
+        "curricular_fit": 2,
+        "complexity_evidence": 1
+      },
+      "score_total": 3,
+      "screening_decision": "reuse_as_compound_practice",
+      "justification": "Conversió de m³ a L i resta; són dos passos coneguts i no introdueix cap criteri matemàtic nou.",
+      "required_evidence": "Per considerar una família, mostrar una estratègia diferent de la conversió i operació seqüencial.",
+      "validated_new_family": false,
+      "approved_level": null,
+      "proposed_level_remains_hypothesis": true,
+      "overlap": [
+        "unitats:6",
+        "problemes:3"
+      ]
+    },
+    {
+      "proposal_id": "MI2-MES-U-N3-01",
+      "topic": "unitats",
+      "initial_level": 3,
+      "scores": {
+        "strategy_novelty": 1,
+        "independence": 1,
+        "curricular_fit": 2,
+        "complexity_evidence": 2
+      },
+      "score_total": 6,
+      "screening_decision": "candidate_conditional",
+      "justification": "La selecció del recipient mínim viable afegeix comparació amb restriccions, però les conversions i sumes són conegudes.",
+      "required_evidence": "Crear dos casos amb diverses alternatives i justificar inequívocament per què la selecció òptima és l'objectiu; contrastar amb problemes existents.",
+      "validated_new_family": false,
+      "approved_level": null,
+      "proposed_level_remains_hypothesis": true,
+      "overlap": [
+        "unitats:6",
+        "problemes:3"
+      ]
+    },
+    {
+      "proposal_id": "MI2-MES-E-N3-01",
+      "topic": "escales",
+      "initial_level": 3,
+      "scores": {
+        "strategy_novelty": 1,
+        "independence": 1,
+        "curricular_fit": 2,
+        "complexity_evidence": 2
+      },
+      "score_total": 6,
+      "screening_decision": "candidate_conditional",
+      "justification": "Exigeix validar la coherència de dues representacions del mateix espai i comunicar evidència, no sols obtenir una longitud.",
+      "required_evidence": "Incloure casos de plànols compatibles i incompatibles, amb criteri de comprovació no trivial.",
+      "validated_new_family": false,
+      "approved_level": null,
+      "proposed_level_remains_hypothesis": true,
+      "overlap": [
+        "escales:6",
+        "escales:7",
+        "escales:14"
+      ]
+    },
+    {
+      "proposal_id": "MI2-MES-P-N3-01",
+      "topic": "pitagores",
+      "initial_level": 3,
+      "scores": {
+        "strategy_novelty": 0,
+        "independence": 0,
+        "curricular_fit": 2,
+        "complexity_evidence": 1
+      },
+      "score_total": 3,
+      "screening_decision": "reuse_as_compound_practice",
+      "justification": "Dues diagonals independents i una suma no alteren el model de Pitàgores; més càlcul no implica N3.",
+      "required_evidence": "Proposar una decisió geomètrica no present, com determinar quina ruta satisfà una restricció i justificar el model.",
+      "validated_new_family": false,
+      "approved_level": null,
+      "proposed_level_remains_hypothesis": true,
+      "overlap": [
+        "pitagores:2",
+        "pitagores:12"
+      ]
+    },
+    {
+      "proposal_id": "MI2-MES-PA-N3-01",
+      "topic": "perimetres",
+      "initial_level": 3,
+      "scores": {
+        "strategy_novelty": 1,
+        "independence": 1,
+        "curricular_fit": 2,
+        "complexity_evidence": 2
+      },
+      "score_total": 6,
+      "screening_decision": "candidate_conditional",
+      "justification": "Determinar el contorn extern d'una figura composta exigeix descartar explícitament la vora comuna.",
+      "required_evidence": "Contrastar amb perimetres:8; exigir una justificació de quines vores compten i variants amb figures diferents.",
+      "validated_new_family": false,
+      "approved_level": null,
+      "proposed_level_remains_hypothesis": true,
+      "overlap": [
+        "perimetres:8",
+        "perimetres:10"
+      ]
+    },
+    {
+      "proposal_id": "MI2-MES-S-N3-01",
+      "topic": "superficies",
+      "initial_level": 3,
+      "scores": {
+        "strategy_novelty": 1,
+        "independence": 1,
+        "curricular_fit": 2,
+        "complexity_evidence": 2
+      },
+      "score_total": 6,
+      "screening_decision": "candidate_conditional",
+      "justification": "Dues restriccions diferenciades (volum interior i material exterior) afegeixen una decisió de viabilitat.",
+      "required_evidence": "Examinar problemes:13 i comparar caixes amb/sense tapa; provar decisions mixtes sí/no i distractors coherents.",
+      "validated_new_family": false,
+      "approved_level": null,
+      "proposed_level_remains_hypothesis": true,
+      "overlap": [
+        "superficies:1",
+        "superficies:2",
+        "problemes:13"
+      ]
+    },
+    {
+      "proposal_id": "MI2-MES-EST-N3-01",
+      "topic": "estimacio",
+      "initial_level": 3,
+      "scores": {
+        "strategy_novelty": 1,
+        "independence": 1,
+        "curricular_fit": 2,
+        "complexity_evidence": 2
+      },
+      "score_total": 6,
+      "screening_decision": "candidate_conditional",
+      "justification": "La tolerància crea una decisió d'acceptació amb límit, per sobre del simple càlcul d'error relatiu.",
+      "required_evidence": "Comparar amb estimacio:9 i problemes:16; incorporar casos de llindar exacte i referències diferents.",
+      "validated_new_family": false,
+      "approved_level": null,
+      "proposed_level_remains_hypothesis": true,
+      "overlap": [
+        "estimacio:7",
+        "estimacio:9",
+        "problemes:16"
+      ]
+    },
+    {
+      "proposal_id": "MI2-MES-PR-N3-01",
+      "topic": "problemes",
+      "initial_level": 3,
+      "scores": {
+        "strategy_novelty": 1,
+        "independence": 0,
+        "curricular_fit": 2,
+        "complexity_evidence": 2
+      },
+      "score_total": 5,
+      "screening_decision": "candidate_conditional",
+      "justification": "Interpretació d'un plànol i planificació de compra; però tots els subpassos apareixen en problemes:14/15 i escales:16.",
+      "required_evidence": "Delimitar el criteri de modelització que el diferenciaria de problemes:14, no només incrementar el nombre de passos.",
+      "validated_new_family": false,
+      "approved_level": null,
+      "proposed_level_remains_hypothesis": true,
+      "overlap": [
+        "problemes:14",
+        "problemes:15",
+        "escales:16"
+      ]
+    },
+    {
+      "proposal_id": "MI2-MES-PR-N1-01",
+      "topic": "problemes",
+      "initial_level": 1,
+      "scores": {
+        "strategy_novelty": 0,
+        "independence": 0,
+        "curricular_fit": 2,
+        "complexity_evidence": 0
+      },
+      "score_total": 2,
+      "screening_decision": "reinforcement_not_new_family",
+      "justification": "Simplifica problemes:1 eliminant càlcul d'àrea i arrodoniment; útil com a pràctica N1, no procediment nou.",
+      "required_evidence": "No afegir com a família; si s'aprova, usar-ho com a variant de reforç del procés de cobertura.",
+      "validated_new_family": false,
+      "approved_level": null,
+      "proposed_level_remains_hypothesis": true,
+      "overlap": [
+        "problemes:1"
+      ]
+    },
+    {
+      "proposal_id": "MI2-MES-PR-N1-02",
+      "topic": "problemes",
+      "initial_level": 1,
+      "scores": {
+        "strategy_novelty": 0,
+        "independence": 0,
+        "curricular_fit": 2,
+        "complexity_evidence": 0
+      },
+      "score_total": 2,
+      "screening_decision": "reinforcement_not_new_family",
+      "justification": "La relació directa dm³=L ja existeix a unitats:12/16; duplicat transversal explícit.",
+      "required_evidence": "No afegir com a família de Problemes; reutilitzar l'exercici d'Unitats si escau.",
+      "validated_new_family": false,
+      "approved_level": null,
+      "proposed_level_remains_hypothesis": true,
+      "overlap": [
+        "unitats:12",
+        "unitats:16",
+        "superficies:14"
+      ]
+    }
+  ],
+  "interpretation": [
+    "La puntuació ajuda a prioritzar l'auditoria; no és una nota de qualitat ni un certificat de família nova.",
+    "Nivell N3 proposat no equival a N3 validat; sumar passos repetits no justifica augmentar el nivell.",
+    "Cap proposta arriba a independència=2 perquè falten comparacions exhaustives i validació curricular concreta.",
+    "Les propostes N1 de Problemes són reforços, no famílies noves.",
+    "No canvia cap generador ni family register; cal decisió docent explícita per implementar."
+  ],
+  "next_actions": [
+    "Examinar primer les candidates condicionals amb dos nous exemples per proposta, incloent-hi cas contrari o llindar.",
+    "Contrastar-les individualment amb els tipus existents citats i justificar novetat no cosmètica.",
+    "Dissenyar 4 distractors i oracles independents només per a les candidates que superin la revisió.",
+    "Deixar N3 en estat pendent fins a validar necessitat cognitiva i currículum.",
+    "No fusionar ni publicar canvis sense aprovació expressa."
+  ]
+}

@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+'use strict';
+const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const root=path.join(__dirname,'..'),p=path.join(root,'docs/auditoria','MI_2ESO_mesura_exemples_cognitius_C011_variants_mixtes.json');
+const data=JSON.parse(fs.readFileSync(p,'utf8'));const h=fs.readFileSync(path.join(root,'2eso/sentit-mesura.html'),'utf8');
+assert.equal(data.checks.length,8);
+assert(data.checks.every(x=>x.approval===false&&x.cognitive_rationale.length>30));
+const ids=new Set(data.checks.map(x=>x.key));assert.equal(ids.size,8);
+for(const key of ['estimacio:11','estimacio:14','unitats:6:directa','unitats:6:encadenada','pitagores:15:diagonal','pitagores:15:catet','superficies:17:sameBase','superficies:17:other'])assert(ids.has(key));
+const a=h.indexOf('function genEstimacioError2ESO('),b=h.indexOf('  else if(type===11){',a),c=h.indexOf('  else if(type===12){',b);
+assert(b>a&&c>b);const actual=h.slice(b,c);
+assert(actual.includes('menys precís que encara compleix'));assert(actual.includes('marge màxim d’error'));
+assert(actual.includes("correct:'Instrument B'")&&actual.includes("correct:'Instrument C'"));
+assert(h.includes("difficultyVariant='sameBase'"));
+assert(h.includes('Un triangle rectangle té hipotenusa'));
+assert(h.includes('Relaciona volum i capacitat'));
+assert.equal(data.gates.official_level_changes,0);
+assert.equal(data.gates.approved_families,0);
+assert.equal(data.gates.source_generators_changed,false);
+console.log(JSON.stringify({evidence_examples:8,source_current:true,estimation_11_updated:true,mixed_types:3,approved_levels:0},null,2));

@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "status": "nonbinding_20_variants_level_review",
+  "scope": "2eso/sentit-mesura.html",
+  "selection": "Five additional groups and mixed-variant cases with concrete examples",
+  "rule": "Level is assigned by decisions and methods necessary for a learner in 2n ESO, not by count of steps alone; no forced 5–5–3 quota.",
+  "counts": {
+    "records": 20,
+    "unique_variant_records": 20,
+    "official_level_assignments": 0,
+    "official_family_approvals": 0
+  },
+  "records": [
+    {
+      "cluster_id": "ME2-C010",
+      "type_or_variant": "estimacio:10",
+      "task": "Identificar mitja unitat de precisió com a error màxim",
+      "example": "Arrodonir a dècimes implica error màxim 0,05",
+      "reason": "No cal reconstruir un interval; reconèixer regla de mitja unitat",
+      "level_suggestion": "N1_o_N2_pendent",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Arrodoniment amb una unitat de precisió establerta",
+      "warning": "La convenció de seminterval superior exclòs pressuposa un criteri específic per als punts exactament equidistants; explicitar el criteri a l'enunciat o al material teòric abans de consolidar una resposta única",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C010",
+      "type_or_variant": "estimacio:12",
+      "task": "Construir interval semiobert de valors compatibles amb una dada arrodonida",
+      "example": "12,3 cm -> [12,25 cm, 12,35 cm)",
+      "reason": "Dues fronteres i convenció de punt mig; no és simple arrodoniment",
+      "level_suggestion": "N2_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Arrodoniment amb una unitat de precisió establerta",
+      "warning": "La convenció de seminterval superior exclòs pressuposa un criteri específic per als punts exactament equidistants; explicitar el criteri a l'enunciat o al material teòric abans de consolidar una resposta única",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C017",
+      "type_or_variant": "estimacio:7",
+      "task": "Calcular diferència absoluta i dividir pel valor real",
+      "example": "100 real, 98 mesurat -> 2/100 = 0,02",
+      "reason": "Dos passos amb sortida decimal",
+      "level_suggestion": "N2_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Raó entre error absolut i valor de referència",
+      "warning": "Comparar amb els criteris curriculars sobre tractament de l'error relatiu a 2n ESO; les expressions percentuals no han de forçar un nivell N3",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C017",
+      "type_or_variant": "estimacio:8",
+      "task": "Calcular error absolut, dividir i convertir a percentatge",
+      "example": "100 real, 98 mesurat -> 2 %",
+      "reason": "Afegeix conversió percentual, però nucli compartit",
+      "level_suggestion": "N2_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Raó entre error absolut i valor de referència",
+      "warning": "Comparar amb els criteris curriculars sobre tractament de l'error relatiu a 2n ESO; les expressions percentuals no han de forçar un nivell N3",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C017",
+      "type_or_variant": "estimacio:13",
+      "task": "Usar error absolut ja donat, dividir i convertir a percentatge",
+      "example": "Error absolut 2 de referència 100 -> 2 %",
+      "reason": "Una dada intermitja ja està proporcionada, menys passos",
+      "level_suggestion": "N1_o_N2_pendent",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Raó entre error absolut i valor de referència",
+      "warning": "Comparar amb els criteris curriculars sobre tractament de l'error relatiu a 2n ESO; les expressions percentuals no han de forçar un nivell N3",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C021",
+      "type_or_variant": "perimetres:12",
+      "task": "Desfer producte i meitat de l'àrea triangular per trobar base",
+      "example": "A=24 cm², h=6 cm -> base 8 cm",
+      "reason": "Inversió de fórmula A=b·h/2",
+      "level_suggestion": "N2_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Aïllament d'una dimensió a partir de l'àrea d'una figura",
+      "warning": "No certificar família separada només per fórmula diferent: comparar estratègia d'aïllament, nombre de dades i transferència",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C021",
+      "type_or_variant": "perimetres:13",
+      "task": "Aïllar altura a partir de l'àrea de trapezi i la suma de bases",
+      "example": "A=40 cm², bases 12 i 8 cm -> h=4 cm",
+      "reason": "Cal agrupar dues bases abans de dividir; una decisió de model distinta",
+      "level_suggestion": "N2_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Aïllament d'una dimensió a partir de l'àrea d'una figura",
+      "warning": "No certificar família separada només per fórmula diferent: comparar estratègia d'aïllament, nombre de dades i transferència",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C051",
+      "type_or_variant": "superficies:1",
+      "task": "Multiplicar llargada, amplada i altura d'ortoedre",
+      "example": "4×3×2 cm -> 24 cm³",
+      "reason": "Tres dimensions explícites; aplicar volum d'ortoedre",
+      "level_suggestion": "N1_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Volum d'un prisma o d'un cas particular de prisma",
+      "warning": "Els distractors han de comprovar superfície versus volum i unitat cúbica, no només errors numèrics evidents",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C051",
+      "type_or_variant": "superficies:3",
+      "task": "Multiplicar àrea de base ja calculada per altura",
+      "example": "A_base=12 cm², h=4 cm -> 48 cm³",
+      "reason": "Dos factors, la base ja és una àrea",
+      "level_suggestion": "N1_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Volum d'un prisma o d'un cas particular de prisma",
+      "warning": "Els distractors han de comprovar superfície versus volum i unitat cúbica, no només errors numèrics evidents",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C051",
+      "type_or_variant": "superficies:5",
+      "task": "Calcular cub d'aresta",
+      "example": "Aresta 3 cm -> 27 cm³",
+      "reason": "Cas especial amb tres dimensions iguals",
+      "level_suggestion": "N1_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Volum d'un prisma o d'un cas particular de prisma",
+      "warning": "Els distractors han de comprovar superfície versus volum i unitat cúbica, no només errors numèrics evidents",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C052",
+      "type_or_variant": "superficies:10",
+      "task": "Dividir volum per àrea de base per recuperar altura",
+      "example": "V=60 cm³, A_base=12 cm² -> h=5 cm",
+      "reason": "Aplicar relació inversa i interpretar unitat lineal",
+      "level_suggestion": "N2_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "V = A_base·h, amb divisió per recuperar factor desconegut",
+      "warning": "Canviar incògnita no garanteix una família nova si la mateixa relació algebraica es resol amb una divisió",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C052",
+      "type_or_variant": "superficies:11",
+      "task": "Dividir volum per altura per recuperar àrea de base",
+      "example": "V=60 cm³, h=5 cm -> A_base=12 cm²",
+      "reason": "Mateixa divisió, interpretar unitat quadrada",
+      "level_suggestion": "N2_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "V = A_base·h, amb divisió per recuperar factor desconegut",
+      "warning": "Canviar incògnita no garanteix una família nova si la mateixa relació algebraica es resol amb una divisió",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C011",
+      "type_or_variant": "estimacio:11",
+      "task": "Triar l'instrument menys precís que compleix un límit màxim d'error",
+      "example": "Fusta: marge 2 mm; instruments A ±5, B ±2, C ±1, D ±0,5 mm",
+      "reason": "Cal interpretar dues condicions, comparar toleràncies i optimitzar sense sobreprecisió",
+      "level_suggestion": "N2_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "estimacio:14 no compara instruments: és coherència entre valor esperat i observat",
+      "warning": "Revisar llegibilitat de ± i de 'menys precís que compleix' per alumnat de 2n ESO",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C011",
+      "type_or_variant": "estimacio:14",
+      "task": "Valorar si una mesura és coherent amb una referència",
+      "example": "S'esperaven 80 i s'obtenen 8, sense unitats explicitades",
+      "reason": "Interpretació de l'ordre de magnitud, sense instrument ni càlcul formal obligatori",
+      "level_suggestion": "N1_o_N2_pendent",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Separació conceptual proposta de selecció d'instrument (estimacio:11)",
+      "warning": "Les unitats no apareixen als dos valors; la hipòtesi d'error d'unitat no es pot confirmar / En el cas 1500 davant 1,5, l'ordre dels números en el text pot fer menys natural l'explicació de mL i L",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C065",
+      "type_or_variant": "unitats:6:directa",
+      "task": "Equivalència directa volum-capacitat",
+      "example": "2,5 dm³ → L",
+      "reason": "Una equivalència i sense prefix adicional",
+      "level_suggestion": "N1_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Mateixa funció generadora que la variant encadenada",
+      "warning": "No hi ha etiqueta de dificultat explícita dins de l'enunciat",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C069",
+      "type_or_variant": "unitats:6:encadenada",
+      "task": "Conversió encadenada volum-capacitat",
+      "example": "1,2 m³ → L",
+      "reason": "Dues transformacions o factor cúbic aplicat correctament",
+      "level_suggestion": "N2_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "No és una família nova automàtica; diferent càrrega cognitiva",
+      "warning": "No confondre variació d'unitat amb N3",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C036",
+      "type_or_variant": "pitagores:15:diagonal",
+      "task": "Diagonal d'un rectangle amb dos costats",
+      "example": "Rectangle 8×15 cm",
+      "reason": "Cal modelitzar la diagonal del rectangle com la hipotenusa abans d'aplicar Pitàgores; es manté N2, coherent amb altres diagonals rectangulars.",
+      "level_suggestion": "N2_candidat",
+      "level_confidence": "mitjana_revisio_docent",
+      "common_core": "Compartir generador amb recuperació de catet",
+      "warning": "Nivell intern MI N2 confirmat; no implica aprovació de família ni nivell oficial curricular.",
+      "teacher_decision": "nivell_intern_validat_2026-11-20"
+    },
+    {
+      "cluster_id": "ME2-C036",
+      "type_or_variant": "pitagores:15:catet",
+      "task": "Recuperar un catet a partir d'hipotenusa i altre catet",
+      "example": "Hipotenusa 29 cm i catet 20 cm",
+      "reason": "Cal trobar el quadrat del catet restant per diferència i extreure'n l'arrel; mateixa inversió de Pitàgores que pitagores:3.",
+      "level_suggestion": "N2_candidat",
+      "level_confidence": "mitjana_revisio_docent",
+      "common_core": "Dues variants diferenciades del mateix generador; les dues queden a N2 en el mapa intern validat.",
+      "warning": "Nivell intern MI N2 confirmat; no implica aprovació de família ni nivell oficial curricular.",
+      "teacher_decision": "nivell_intern_validat_2026-11-20"
+    },
+    {
+      "cluster_id": "ME2-C056",
+      "type_or_variant": "superficies:17:sameBase",
+      "task": "Comparació de volums amb les dues dimensions de base iguals",
+      "example": "A 4×3×2 dm, B 4×3×3 dm",
+      "reason": "No cal multiplicar els tres factors si es reconeix la base comuna",
+      "level_suggestion": "N1_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "Variant del tipus 17 amb bases diferents",
+      "warning": "Mantenir codificació real de sameBase; no inferir-ne una proporció elevada de casos",
+      "teacher_decision": "pendent"
+    },
+    {
+      "cluster_id": "ME2-C056",
+      "type_or_variant": "superficies:17:other",
+      "task": "Comparació de volums amb bases diferents",
+      "example": "A 5×4×2 dm, B 3×4×5 dm",
+      "reason": "La base no és comuna i cal coordinar més dades",
+      "level_suggestion": "N2_candidat",
+      "level_confidence": "baixa_no_validat",
+      "common_core": "No comptar com a família nova per defecte",
+      "warning": "La sortida pot tenir un altre factor compartit, cal examinar casos reals",
+      "teacher_decision": "pendent"
+    }
+  ],
+  "unresolved": [
+    {
+      "key": "estimacio:12",
+      "issue": "Midpoint rounding convention not stated; separate minimal wording proposal pending explicit approval."
+    },
+    {
+      "key": "estimacio:14",
+      "issue": "Observed and reference values lack units despite interpretation of unit mix-ups."
+    }
+  ],
+  "gates": {
+    "official_changes": false,
+    "generator_changed": false,
+    "pr_merged": false,
+    "deployed": false
+  },
+  "internal_level_decisions": {
+    "date": "2026-11-20",
+    "status": "validated_for_internal_mi_map",
+    "not_official_curriculum": true,
+    "points": [
+      "perimetres:14=N2",
+      "pitagores:3:inverse=N2",
+      "pitagores:15:diagonal=N2",
+      "pitagores:15:catet=N2"
+    ]
+  }
+}

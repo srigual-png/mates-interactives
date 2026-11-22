@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "status": "pedagogical_overlap_recommendation_not_approved",
+  "scope": "2eso/sentit-mesura/estimacio:5,11,16",
+  "sources": [
+    "2eso/sentit-mesura.html",
+    "MI_2ESO_mesura_proposta_correccio_distractors_estimacio_1_11.json"
+  ],
+  "observed": {
+    "estimacio:5": {
+      "question_core": "Arrodonir una longitud mesurada a dècimes de centímetre amb dues xifres decimals donades",
+      "decision": "llegir centèsima i aplicar regla d'arrodoniment",
+      "level_hypothesis": "N1",
+      "family_role": "direct_rounding"
+    },
+    "estimacio:16": {
+      "question_core": "Informació de cinta digital amb dues xifres decimals; informe que exigeix dècimes de metre",
+      "decision": "arrodonir a dècimes, canvia únicament el context i la unitat respecte de tipus 5",
+      "level_hypothesis": "N1",
+      "family_role": "contextual_variant_of_direct_rounding"
+    },
+    "estimacio:11": {
+      "question_core": "Escollir precisió i unitat raonables per a objectes sense donar instrument, tolerància ni criteri de mesurament",
+      "decision": "jutjar precisió contextual, però el disseny de resposta única deixa diverses opcions plausibles",
+      "level_hypothesis": "N1_or_N2_pending_redesign",
+      "family_role": "contextual_measurement_quality_unresolved"
+    }
+  },
+  "comparison": {
+    "rewrite_to_explicit_rounding": {
+      "duplicates_existing_core": true,
+      "evidence": "Les quatre propostes d'arrodoniment de tipus 11 utilitzen exactament la mateixa decisió que 5/16, encara que les unitats i els contextos siguin diferents.",
+      "recommendation": "No recomanada com a nova família ni com a nova estratègia; útil únicament si es vol mantenir una pràctica repetida."
+    },
+    "retain_contextual_precision": {
+      "distinct_possible": true,
+      "conditions": [
+        "Cal indicar instrument, resolució, objectiu de la mesura i tolerància o ús concret",
+        "La pregunta ha de requerir justificar el grau de precisió adequat, no només executar l'arrodoniment",
+        "Resposta única només si les condicions garanteixen inequívocament una opció; si no, utilitzar resposta oberta o acceptar més d'una justificació"
+      ],
+      "risk": "Pot quedar com a variant conceptual d'estimació si només es tria una unitat òbvia; no comptar automàticament com a família independent.",
+      "recommendation": "Preferida per mantenir diversitat cognitiva sempre que es pugui construir un enunciat inequívoc a nivell de 2n ESO."
+    }
+  },
+  "recommendation": {
+    "est1": "Canvi simple del distractor equivalent: 0,8 m → 0,8 mm, pendent d'autorització.",
+    "est11": "No substituir directament pels quatre casos de simple arrodoniment: preservar, si es redissenya, el criteri de precisió adequat a un instrument o a una finalitat real amb justificació observable.",
+    "family_count_effect": 0,
+    "level_change": "none_proposed_as_official",
+    "implementation_authorized": false,
+    "teacher_decision": null
+  },
+  "limits": [
+    "No s'ha aplicat cap canvi a l'HTML o al classificador.",
+    "No s'aproven famílies ni nivells oficials.",
+    "Cal validació docent de la nova pregunta abans de canviar l'exercici."
+  ]
+}
