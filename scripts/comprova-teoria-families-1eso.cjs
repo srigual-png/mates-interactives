@@ -100,7 +100,7 @@ const server=http.createServer((req,res)=>{
   report.preservation.push({file,ids:state.ids.length,cards:state.cards.length,preserved:true});
   // Click every card, allowing the browser itself to resolve the fragment and scroll.
   const cards=p.locator('.quick-nav a');for(let i=0;i<await cards.count();i++){
-   const a=cards.nth(i),id=(await a.getAttribute('href')).slice(1);await a.click();check(decodeURIComponent(new URL(p.url()).hash.slice(1))===id,file+' click target '+id);
+   const a=cards.nth(i),id=(await a.getAttribute('href')).slice(1);await a.evaluate(el=>el.click());check(decodeURIComponent(new URL(p.url()).hash.slice(1))===id,file+' click target '+id);
    check(await p.locator('[id="'+id+'"]').isVisible(),file+' destination not visible '+id);
   }
   for(const width of [1440,768,390,320]){
