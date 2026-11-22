@@ -43,7 +43,7 @@ La continuació ha de **revisar les 72 agrupacions amb els enllaços transversal
 **Estat posterior (20/11/2026):** no s'ha canviat cap generador, família aprovada ni nivell oficial. Les quatre assignacions internes docents validades consten al mapa i a la matriu. La proposta de redacció d'`estimacio:12` continua pendent d'aprovació específica. PR #49 en Draft, sense fusió ni publicació.
 
 
-**Actualització (21/11/2026):** s'han validat dues assignacions internes més: `superficies:8` N2 i `superficies:14` N1. El total és de sis decisions internes docents; les famílies continuen provisionals, no s'ha canviat cap nivell oficial i la PR #49 continua en Draft, sense fusió ni publicació.
+**Actualització (21/11/2026):** s'han validat dues assignacions internes més: `superficies:8` N2 i `superficies:14` N1; en aquell tall el total era de sis decisions internes docents. El contrast posterior d'U06/U07/U08 ha afegit `unitats:16` → N2, de manera que el total vigent és de set. Les famílies continuen provisionals, no s'ha canviat cap nivell oficial i la PR #49 continua en Draft, sense fusió ni publicació.
 
 
-**Actualització interna del tipus `unitats:16` (21/11/2026):** el contrast U06/U07/U08 ha situat 16 a N2 i a la candidata U-P07, al costat de les conversions compostes de `unitats:6` i `unitats:18`. El mapa intern i la reconciliació agregada ara reflecteixen aquesta decisió; això no valida oficialment la família ni altera els 131 registres.
+**Actualització interna del tipus `unitats:16` (21/11/2026):** el contrast U06/U07/U08 ha situat 16 a N2 i a la candidata U-P07, al costat de les conversions compostes de `unitats:6` i `unitats:18`. Aquesta és la setena decisió interna de nivell; el mapa i la reconciliació agregada la reflecteixen. No valida oficialment la família ni altera els 131 registres.

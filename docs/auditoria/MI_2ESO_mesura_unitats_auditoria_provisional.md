@@ -14,7 +14,7 @@ Per a `2eso/mesura`, el mapa `REVIEWED_LEVELS` de `assets/js/dificultat-mi.js:9`
 - **N1 efectiu — 13 tipus base:** 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 17.
 - **N2 efectiu — 5 tipus:** 9, 10, 15, 16, 18; el tipus 6 també té una variant encadenada N2, mentre que la base és N1.
 - **N3 efectiu:** cap.
-- Un mapa antic de `level()` encara especifica N1={1,2,3,7,8}, N2={4,5,6,9,11,12,14,16}, N3={10,13,15,17,18}. **No és correcte presentar-lo com a nivell efectiu de l'exercici ordinari.** Cal retirar-lo o conciliar-lo en una futura PR de codi, només quan s'acordi la nova classificació.
+- El mapa històric de `level()` encara especifica N1={1,2,3,7,8}, N2={4,5,6,9,11,12,14,16}, N3={10,13,15,17,18}. **No descriu el nivell efectiu de l'exercici ordinari:** `REVIEWED_LEVELS` té prioritat i, en aquesta branca, classifica `unitats:16` a N2. La discrepància del mapa duplicat queda com a deute tècnic; no hi ha cap decisió pendent sobre l'assignació de nivell 16.
 - `REVIEWED_VARIANTS` separa ara la branca encadenada de `unitats:6` com a N2; la classificació N2 de `unitats:16` queda aplicada al mapa intern, no al currículum oficial.
 
 ## 2. Matriu provisional: 11 famílies genuïnes candidates, 18 tipus coberts

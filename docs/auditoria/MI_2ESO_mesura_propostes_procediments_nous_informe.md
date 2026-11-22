@@ -4,7 +4,7 @@
 
 ## Punt de partida
 
-L'auditoria del classificador existent mostra 128 tipus repartits en 64 N1, 64 N2 i cap N3. **Aquestes xifres no equivalen a famílies independents.** Hi ha un dèficit de tipus N2 a Unitats i de N1 a Problemes; per als set temes falta avaluar la viabilitat de N3 sense forçar el currículum.
+L'auditoria actualitzada del classificador mostra 128 tipus repartits en **60 N1, 68 N2 i cap N3** (21/11/2026, amb `unitats:16` a N2). Aquestes xifres no equivalen a famílies independents. Els set temes assoleixen el mínim intern de cinc tipus N1 i cinc N2; Unitats queda en 13/5 i Problemes en 5/15. Les propostes de nous procediments que segueixen són exploratòries, no responen a un dèficit actual de tipus N1/N2. Encara cal valorar la viabilitat curricular de N3 sense forçar el currículum.
 
 La revisió de referència ha utilitzat les **orientacions curriculars de matemàtiques de Catalunya, Sentit de la mesura 2n ESO**:
 

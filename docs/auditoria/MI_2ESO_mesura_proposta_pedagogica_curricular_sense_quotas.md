@@ -52,4 +52,4 @@ La matriu de mancances de 5–5–3 conservada a la PR #49 passa a ser **històr
 **Límits de la proposta general:** aquesta revisió concreta no autoritza reclassificar automàticament els altres tipus, aprovar famílies, crear generadors, fusionar la PR o publicar. La resta de la proposta continua pendent de revisió.
 
 
-**Actualització de la revisió docent (21/11/2026):** s'han afegit al mapa intern `superficies:8` N2 i `superficies:14` N1. El recompte passa de quatre a sis assignacions internes docents validades. Aquesta actualització no aprova famílies ni modifica nivells oficials; la PR #49 continua en Draft, sense fusió ni publicació.
+**Actualització de la revisió docent (21/11/2026):** s'han afegit al mapa intern `superficies:8` N2 i `superficies:14` N1; en aquell tall el recompte va passar de quatre a sis assignacions internes docents validades. Posteriorment, `unitats:16` s'ha classificat a N2; el total vigent és de set. Això no aprova famílies ni modifica nivells oficials; la PR #49 continua en Draft, sense fusió ni publicació.

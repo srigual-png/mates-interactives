@@ -73,7 +73,7 @@ Els exemples són càlculs construïts d'acord amb el codi, **no sortides de nav
 
 ## Abast verificat i feina pendent
 
-**Revisat:** 20/20 branques de codi, 4/16/0 nivells efectius, comparació del procediment amb els sis temes anteriors, exemples aritmètics i tres errors de varietat demostrables per domini finit dels casos.
+**Revisat:** 20/20 branques de codi, comparació del procediment amb els sis temes anteriors, exemples aritmètics i tres errors de varietat demostrables per domini finit dels casos. **Actualització (22/11/2026):** el mapa `REVIEWED_LEVELS` vigent classifica Problemes en 5 N1, 15 N2 i 0 N3; el recompte 4/16/0 del primer tall ha quedat superat.
 
 **No executat:** els generadors reals al navegador, proves d'oracle independents, UI, mode examen, test dels distractors i comprovació normativa curricular. La validació pedagògica definitiva i les correccions de funcionament seran fases posteriors i PRs específiques.
 
