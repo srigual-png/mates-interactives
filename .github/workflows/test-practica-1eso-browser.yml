@@ -1,0 +1,55 @@
+name: Test pràctica i teoria de famílies de 1r ESO amb Chromium
+
+on:
+  pull_request:
+    paths:
+      - '1eso/**'
+      - 'assets/**'
+      - 'docs/teoria-families/**'
+      - 'scripts/comprova-resultats-practica-1eso.cjs'
+      - 'scripts/comprova-teoria-families-1eso.cjs'
+      - '.github/workflows/test-practica-1eso-browser.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  practica-i-teoria-1eso:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install Playwright
+        run: npm install --no-save --package-lock=false playwright
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run practice UI test
+        env:
+          MI_PLAYWRIGHT: playwright
+        run: |
+          MI_BROWSER="$(node -e "process.stdout.write(require('playwright').chromium.executablePath())")" \
+            node scripts/comprova-resultats-practica-1eso.cjs
+
+      - name: Validate theory family mappings
+        env:
+          PLAYWRIGHT_MODULE: playwright
+        run: node scripts/comprova-teoria-families-1eso.cjs --static-only
+
+      - name: Run Chromium theory navigation test
+        env:
+          PLAYWRIGHT_MODULE: playwright
+        run: |
+          PLAYWRIGHT_EXECUTABLE_PATH="$(node -e "process.stdout.write(require('playwright').chromium.executablePath())")" \
+            node scripts/comprova-teoria-families-1eso.cjs
