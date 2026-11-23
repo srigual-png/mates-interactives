@@ -39,14 +39,14 @@ const root=process.cwd(),server=http.createServer((req,res)=>{const f=path.join(
  // Mostra comuna amb diagrama, exponents negatius, parèntesis i problemes llargs.
  const samples=await p.evaluate(async()=>{
   const wanted=[['reals4t',4],['irracionals4t',9],['intervals4t',6],['errors4t',10],['errors4t',8],['operacions4t',6],['comptatge4t',4],['pascal4t',4],['financera4t',3],['financera4t',10],['financera4t',11]];
-  const sheet={version:'mostra-4eso',config:{count:10,topics:MIWorksheetConfig.topics.map(t=>t.id),percentages:[40,40,20],order:'mixed',space:'normal',format:'both',solutions:'steps'},questions:wanted.map(([id,type],i)=>({...worksheetPaperSamples.find(q=>q.topicId===id&&q.type===type),number:i+1}))};
+  const sheet={version:'mostra-4eso',config:{count:11,topics:MIWorksheetConfig.topics.map(t=>t.id),percentages:[40,40,20],order:'mixed',space:'normal',format:'both',solutions:'steps'},questions:wanted.map(([id,type],i)=>({...worksheetPaperSamples.find(q=>q.topicId===id&&q.type===type),number:i+1}))};
   const files=await MIWorksheetExport.create(sheet,MIWorksheetConfig);return {sheet,files:await Promise.all(files.map(async f=>({name:f.name,data:Array.from(new Uint8Array(await f.blob.arrayBuffer()))})))};
  });fs.mkdirSync('output/fitxes-4eso',{recursive:true});for(const f of samples.files)fs.writeFileSync('output/fitxes-4eso/'+f.name,Buffer.from(f.data));fs.writeFileSync('output/fitxes-4eso/model.json',JSON.stringify(samples.sheet,null,2));
  const audit=await p.evaluate(async()=>{
   const decimalFraction=MIWorksheetExport.tokens('0,4/10').find(t=>t.kind==='fraction');if(!decimalFraction||decimalFraction.parts[0]!=='0,4')throw Error('Fracció amb numerador decimal íntegre');
   const bytes=await (await fetch('../assets/vendor/fitxes/LiberationSans-Regular.ttf')).arrayBuffer(),font=fontkit.create(new Uint8Array(bytes));
   const missing=[...new Set([...worksheetPaperSamples,...worksheetAuditVariants].flatMap(q=>[q.question,q.answer,...q.options,...q.steps]).join(''))].filter(c=>!/[\s]/.test(c)&&font.glyphForCodePoint(c.codePointAt(0)).id===0);
-  const sheet={version:'audit',config:{count:80,order:'mixed',space:'compact',format:'pdf',solutions:'steps'},questions:worksheetPaperSamples.map((q,i)=>({...q,number:i+1}))};
+  const sheet={version:'audit',config:{count:81,order:'mixed',space:'compact',format:'pdf',solutions:'steps'},questions:worksheetPaperSamples.map((q,i)=>({...q,number:i+1}))};
   await MIWorksheetExport.create(sheet,MIWorksheetConfig);return {missing};
  });console.log('Glifs absents:',audit.missing);assert.deepEqual(audit.missing,[],'glifs matemàtics disponibles');
  const v=await p.evaluate(()=>MIWorksheetUI.getCurrent().version);await p.locator('#ws-another').click();await p.waitForFunction(v=>MIWorksheetUI.getCurrent()?.version!==v,v);await p.selectOption('#ws-space','wide');assert(await p.locator('#ws-results').isHidden());
