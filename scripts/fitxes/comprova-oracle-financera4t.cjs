@@ -61,6 +61,7 @@ const {playwright,launchOptions}=require('../genera-examens-cerca.cjs');
     const financial=results.topics.find(topic=>topic.topic==='financera4t');
     const saved=financial?.variants.find(sample=>sample.type===11);
     assert(saved,'mostra persistent de financera4t:type 11');
+    assert.equal(saved.seed,'0x4f3a21','llavor de la mostra persistent');
     assert.equal(financial.types,11,'cens financer actualitzat');
     assert.deepEqual(financial.coverage,[4,6,1],'cobertura N1/N2/N3 actualitzada');
     assert.equal(saved.n,report.samples,'nombre de mostres persistents');
