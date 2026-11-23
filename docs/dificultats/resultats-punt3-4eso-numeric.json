@@ -895,13 +895,13 @@
     },
     {
       "topic": "financera4t",
-      "types": 10,
+      "types": 11,
       "coverage": [
         4,
         6,
-        0
+        1
       ],
-      "generated": 3000,
+      "generated": 3500,
       "exam": [
         6,
         6,
@@ -1017,6 +1017,25 @@
             "Interès: I = 1500 · 0,05 · 1 = 75 €.",
             "Capital final = 1500 + 75.",
             "Capital final = <b>1575 €</b>."
+          ]
+        },
+        {
+          "type": 11,
+          "n": 500,
+          "seed": "0x4f3a21",
+          "question": "Es vol invertir <b>1500 €</b> durant <b>4 anys</b>. L’opció A ofereix interès simple del <b>3,5% anual</b> i no cobra comissió. L’opció B ofereix interès compost del <b>3,4% anual</b> i cobra una comissió inicial de <b>8 €</b>. Quina opció deixa més capital al final i per quina diferència?",
+          "correct": "Opció A · 3,36 € més",
+          "options": [
+            "Opció B · 3,36 € més",
+            "Opció A · 3,36 € més",
+            "Opció A · 6,36 € més",
+            "Costen exactament el mateix"
+          ],
+          "solution": [
+            "Opció A: 1500 € · (1 + 0,035 · 4) = 1710 €.",
+            "Opció B: 1500 € · (1 + 0,034)^4 − 8 € = 1706,64 €.",
+            "Diferència: |1710 € − 1706,64 €| = 3,36 €.",
+        "Per tant, deixa més capital l’<b>Opció A</b>, amb 3,36 € més."
           ]
         }
       ]
