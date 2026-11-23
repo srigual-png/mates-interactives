@@ -15,6 +15,7 @@ const root=process.cwd(),server=http.createServer((req,res)=>{const f=path.join(
    if(t.id==='reals4t'&&[4,8].includes(type))check(/^-?\d+; /.test(q.answer),'valor i classificació');
    if(t.id==='errors4t'&&type===10)check(q.answer.includes(';'),'extrems decimals separats');
    if(t.id==='operacions4t'&&type===6){const [a,r,y]=q.question.match(/\d+/g).map(Number);check(q.answer===Math.round(a*(1+r/100)**y)+' habitants','creixement sense arrodonir passos');}
+   if(t.id==='financera4t'&&type===11){check(q.level===3&&q.options.length===4&&q.options.includes(q.answer),'comparació financera N3 accessible a la fitxa');check(q.steps.length>=4&&q.steps[0].includes('Opció A:')&&q.steps[1].includes('Opció B:')&&q.steps.at(-1).includes('més'),'solució completa de la comparació financera');}
    if(t.id==='reals4t'&&type===9)check(q.question.includes(q.steps[0].includes('producte')?'×':q.steps[0].includes('quocient')?'÷':'+'),'operació coherent');
    all.push({...q,topicId:t.id,topicName:t.name});
    for(let sample=0;sample<5;sample++){const extra=await C.adapt(t.id,gens[t.id](type));check(extra.answer&&extra.question,'variants completes');window.worksheetAuditVariants=(window.worksheetAuditVariants||[]).concat(extra);}
@@ -37,20 +38,20 @@ const root=process.cwd(),server=http.createServer((req,res)=>{const f=path.join(
  const all=await p.evaluate(()=>worksheetPaperSamples);fs.mkdirSync('tmp/fitxes',{recursive:true});fs.writeFileSync('tmp/fitxes/catalog-4eso-paper.json',JSON.stringify(all,null,2));
  // Mostra comuna amb diagrama, exponents negatius, parèntesis i problemes llargs.
  const samples=await p.evaluate(async()=>{
-  const wanted=[['reals4t',4],['irracionals4t',9],['intervals4t',6],['errors4t',10],['errors4t',8],['operacions4t',6],['comptatge4t',4],['pascal4t',4],['financera4t',3],['financera4t',10]];
-  const sheet={version:'mostra-4eso',config:{count:10,topics:MIWorksheetConfig.topics.map(t=>t.id),percentages:[40,40,20],order:'mixed',space:'normal',format:'both',solutions:'steps'},questions:wanted.map(([id,type],i)=>({...worksheetPaperSamples.find(q=>q.topicId===id&&q.type===type),number:i+1}))};
+  const wanted=[['reals4t',4],['irracionals4t',9],['intervals4t',6],['errors4t',10],['errors4t',8],['operacions4t',6],['comptatge4t',4],['pascal4t',4],['financera4t',3],['financera4t',10],['financera4t',11]];
+  const sheet={version:'mostra-4eso',config:{count:11,topics:MIWorksheetConfig.topics.map(t=>t.id),percentages:[40,40,20],order:'mixed',space:'normal',format:'both',solutions:'steps'},questions:wanted.map(([id,type],i)=>({...worksheetPaperSamples.find(q=>q.topicId===id&&q.type===type),number:i+1}))};
   const files=await MIWorksheetExport.create(sheet,MIWorksheetConfig);return {sheet,files:await Promise.all(files.map(async f=>({name:f.name,data:Array.from(new Uint8Array(await f.blob.arrayBuffer()))})))};
  });fs.mkdirSync('output/fitxes-4eso',{recursive:true});for(const f of samples.files)fs.writeFileSync('output/fitxes-4eso/'+f.name,Buffer.from(f.data));fs.writeFileSync('output/fitxes-4eso/model.json',JSON.stringify(samples.sheet,null,2));
  const audit=await p.evaluate(async()=>{
   const decimalFraction=MIWorksheetExport.tokens('0,4/10').find(t=>t.kind==='fraction');if(!decimalFraction||decimalFraction.parts[0]!=='0,4')throw Error('Fracció amb numerador decimal íntegre');
   const bytes=await (await fetch('../assets/vendor/fitxes/LiberationSans-Regular.ttf')).arrayBuffer(),font=fontkit.create(new Uint8Array(bytes));
   const missing=[...new Set([...worksheetPaperSamples,...worksheetAuditVariants].flatMap(q=>[q.question,q.answer,...q.options,...q.steps]).join(''))].filter(c=>!/[\s]/.test(c)&&font.glyphForCodePoint(c.codePointAt(0)).id===0);
-  const sheet={version:'audit',config:{count:80,order:'mixed',space:'compact',format:'pdf',solutions:'steps'},questions:worksheetPaperSamples.map((q,i)=>({...q,number:i+1}))};
+  const sheet={version:'audit',config:{count:81,order:'mixed',space:'compact',format:'pdf',solutions:'steps'},questions:worksheetPaperSamples.map((q,i)=>({...q,number:i+1}))};
   await MIWorksheetExport.create(sheet,MIWorksheetConfig);return {missing};
  });console.log('Glifs absents:',audit.missing);assert.deepEqual(audit.missing,[],'glifs matemàtics disponibles');
  const v=await p.evaluate(()=>MIWorksheetUI.getCurrent().version);await p.locator('#ws-another').click();await p.waitForFunction(v=>MIWorksheetUI.getCurrent()?.version!==v,v);await p.selectOption('#ws-space','wide');assert(await p.locator('#ws-results').isHidden());
  await p.setViewportSize({width:390,height:844});assert(await p.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));await p.locator('#ws-topic-summary').click();await p.locator('#ws-all').focus();await p.keyboard.press('Space');await p.keyboard.press('Escape');assert(!await p.locator('#ws-topics').getAttribute('open'));await p.locator('#ws-generate').scrollIntoViewIfNeeded();await p.screenshot({path:'tmp/fitxes/4eso-mobile.png'});
  await p.evaluate(()=>{selectTopic(TOPICS.findIndex(t=>t.id==='operacions4t'));});await p.evaluate(()=>{showHome();miExamSelectedTopics=['reals4t'];miStartConfiguredExam();});assert(await p.evaluate(()=>state.examQs.length===20));assert.deepEqual(errors,[]);
  for(const option of ['A','B']){await p.goto('http://127.0.0.1:'+server.address().port+'/4eso/sentit-numeric.html?opcio='+option);await p.waitForSelector('#ws-generate');assert((await p.locator('#ws-summary').innerText()).includes('Opció '+option));assert.equal(await p.locator('[name="ws-topic"]').count(),8);}
- console.log('4t: 80 tipus, 24 combinacions individuals, figures, Word/PDF/solucionaris, mòbil, teclat i examen OK');
+ console.log('4t: 81 tipus, inclòs financera4t:11 N3, 24 combinacions individuals, figures, Word/PDF/solucionaris, mòbil, teclat i examen OK');
 }finally{await browser.close();server.close();}})().catch(e=>{console.error(e);server.close();process.exitCode=1;});
