@@ -5,6 +5,7 @@
     elements:[
       {id:'elements-geometria-bàsics',name:'Identificar punts, rectes, segments i semirectes',level:1,generators:['genElementsVarietat:1','genElementsVarietat:7','genElementsVarietat:8:elements','E1']},
       {id:'posicions-relatives-rectes',name:'Classificar la posició relativa de dues rectes',level:1,generators:['genElementsVarietat:2','E2','E3']},
+      {id:'compondre-relacions-entre-rectes',name:'Compondre relacions de paral·lelisme i perpendicularitat',level:2,generators:['genElementsVarietat:9','genElementsVarietat:10','genElementsVarietat:11','genElementsVarietat:12','genElementsVarietat:13']},
       {id:'punt-mig-segment',name:'Calcular una meitat coneguda d’un segment',level:1,generators:['genElementsVarietat:3']},
       {id:'mediatriu-segment',name:'Identificar i aplicar la mediatriu d’un segment',level:1,generators:['genElementsVarietat:4','genElementsVarietat:8:mediatriu','E4']},
       {id:'bisectriu-angle',name:'Identificar i aplicar la bisectriu d’un angle',level:1,generators:['genElementsVarietat:5','genElementsVarietat:8:bisectriu','E5']},
@@ -72,7 +73,7 @@
     const type=Number(q&&q.type),text=String((q&&q.question||'')+' '+(q&&q.correct||'')).replace(/<[^>]*>/g,' ').toLowerCase();let key;
     if(id==='elements'){
       if(type===8){key=/mediatriu/.test(text)?'mediatriu-segment':/bisectriu/.test(text)?'bisectriu-angle':'elements-geometria-bàsics';}
-      else key={1:'elements-geometria-bàsics',2:'posicions-relatives-rectes',3:'punt-mig-segment',4:'mediatriu-segment',5:'bisectriu-angle',6:'alineacio-i-incidencia',7:'elements-geometria-bàsics'}[type];
+      else key={1:'elements-geometria-bàsics',2:'posicions-relatives-rectes',3:'punt-mig-segment',4:'mediatriu-segment',5:'bisectriu-angle',6:'alineacio-i-incidencia',7:'elements-geometria-bàsics',9:'compondre-relacions-entre-rectes',10:'compondre-relacions-entre-rectes',11:'compondre-relacions-entre-rectes',12:'compondre-relacions-entre-rectes',13:'compondre-relacions-entre-rectes'}[type];
     }else if(id==='angles')key=({1:'classificar-amplitud-angle',2:'angle-que-falta',3:'angle-que-falta',4:'oposats-pel-vertex',5:'angle-que-falta',6:'relacions-angles-paral-leles',7:'angle-interior-regular'})[type];
     else if(id==='poligons')key=({1:'nom-i-costats-poligon',2:'nom-i-costats-poligon',3:'regularitat-poligons',4:'convexitat-poligons',5:'diagonals-des-dun-vertex',6:'suma-angles-interiors',7:'repartir-volta-poligon-regular',8:'elements-poligon',10:'angle-interior-regular',11:'repartir-volta-poligon-regular'})[type];
     else if(id==='triangles'){
