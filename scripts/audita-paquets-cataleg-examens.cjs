@@ -92,9 +92,10 @@ async function main() {
         const output=[];
         for (const id of ids) {
           const [course,sense]=id.split('/');
-          const topicId=familyMetadata[id]?.code_topic_id;
+          const registryTopicId=familyMetadata[id]?.code_topic_id||id.split('/')[2];
+          const topicId=({mcd_mcm:'mcmmcd'})[registryTopicId]||registryTopicId;
           const topic=TOPICS.find(item=>item.id===topicId);
-          if(!topic) throw Error('TOPICS no conté '+id);
+          if(!topic) throw Error(`TOPICS no conté el codi "${topicId}" del registre "${id}"`);
           const keepMarkup=visualQuestion(course,sense);
           const byLevel={1:new Map(),2:new Map(),3:new Map()}, familyByGenerator=new Map();
           const metadata=familyMetadata[id]||null;
