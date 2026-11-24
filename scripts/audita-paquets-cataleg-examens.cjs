@@ -91,7 +91,8 @@ async function main() {
         };
         const output=[];
         for (const id of ids) {
-          const [course,sense,topicId]=id.split('/');
+          const [course,sense]=id.split('/');
+          const topicId=familyMetadata[id]?.code_topic_id;
           const topic=TOPICS.find(item=>item.id===topicId);
           if(!topic) throw Error('TOPICS no conté '+id);
           const keepMarkup=visualQuestion(course,sense);
