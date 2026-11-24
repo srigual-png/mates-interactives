@@ -1609,12 +1609,26 @@ function genPoligons1r(){
 // Generador ampliat amb famílies conceptuals i petites situacions geomètriques.
 // Evita que el tema quedi reduït a un banc fix de preguntes de definició.
 function genElementsVarietat(){
-  const type=rnd(1,8);
+  // Vuit grups legacy i un grup per a la família N2; dins de N2, cinc patrons.
+  // Això evita que afegir cinc tipus multipliqui per cinc el seu pes global.
+  const bucket=rnd(1,9);
+  const type=bucket===9?rnd(9,13):bucket;
   let question,correct,opts,guide,solution,svg='';
   const letters='ABDEFGHJKLNPQRSTUVWXYZ'; // C i M es reserven per al tercer punt i el punt mig.
   const A=letters[rnd(0,letters.length-1)];
   let B=letters[rnd(0,letters.length-1)];
   while(B===A)B=letters[rnd(0,letters.length-1)];
+  const positionNames=['Paral·leles','Perpendiculars','Secants obliqües','Coincidents'];
+  const relationOptions=answer=>uniq4(answer,positionNames.filter(name=>name!==answer));
+  const lineLabels=count=>{
+    const pool='rstuvwxyzabcdefghjklmnpq',picked=[];
+    while(picked.length<count){const label=pool[rnd(0,pool.length-1)];if(!picked.includes(label))picked.push(label);}
+    return picked;
+  };
+  const shuffleFacts=facts=>{
+    for(let i=facts.length-1;i>0;i--){const j=rnd(0,i);[facts[i],facts[j]]=[facts[j],facts[i]];}
+    return facts;
+  };
 
   if(type===1){
     const variants=[
@@ -1692,7 +1706,7 @@ function genElementsVarietat(){
     guide=['Identifica les propietats essencials de l’element.','Descarta les opcions que li atribueixen extrems o dimensions que no té.'];
     solution=[`✅ ${correct}`];
 
-  }else{
+  }else if(type===8){
     const items=[
       {q:'Quina construcció utilitzaries per dividir un <b>angle</b> en dues parts iguals?',a:'Bisectriu',w:['Mediatriu','Paral·lela','Segment']},
       {q:'Quina construcció utilitzaries per dividir perpendicularment un <b>segment</b> pel seu punt mig?',a:'Mediatriu',w:['Bisectriu','Semirecta','Corda']},
@@ -1702,6 +1716,64 @@ function genElementsVarietat(){
     const it=items[rnd(0,items.length-1)];question=it.q;correct=it.a;opts=uniq4(correct,it.w);
     guide=['Identifica si la situació parla d’un angle, un segment o una direcció infinita.','Relaciona aquesta necessitat amb la definició geomètrica adequada.'];
     solution=[`✅ ${correct}`];
+
+  }else if(type===9){
+    const [r,s,t]=lineLabels(3),facts=shuffleFacts([`${r} ∥ ${s}`,`${s} ∥ ${t}`]);
+    question=`En un mateix pla, les rectes <b>${r}, ${s} i ${t}</b> són diferents. Sabem que <b>${facts[0]}</b> i <b>${facts[1]}</b>. Quina relació hi ha entre <b>${r}</b> i <b>${t}</b>?`;
+    correct='Paral·leles';opts=relationOptions(correct);
+    guide=['Busca la recta que apareix a les dues dades.','Les altres dues rectes són paral·leles a aquesta recta.'];
+    solution=[`${facts[0]} i ${facts[1]}.`, `Per tant, ${r} ∥ ${t}: són <b>paral·leles</b>.`,`✅ ${correct}`];
+
+  }else if(type===10){
+    const [r,s,t]=lineLabels(3),knownPerpendicular=rnd(0,1)===0?r:s,unknownParallel=knownPerpendicular===r?s:r;
+    const parallelFact=rnd(0,1)===0?`${r} ∥ ${s}`:`${s} ∥ ${r}`;
+    const facts=shuffleFacts([parallelFact,`${t} ⟂ ${knownPerpendicular}`]);
+    question=`En un mateix pla, les rectes <b>${r}, ${s} i ${t}</b> són diferents. Sabem que <b>${facts[0]}</b> i <b>${facts[1]}</b>. Quina relació hi ha entre <b>${t}</b> i <b>${unknownParallel}</b>?`;
+    correct='Perpendiculars';opts=relationOptions(correct);
+    guide=['Compara les dues rectes paral·leles: tenen la mateixa direcció.','Si una tercera recta forma 90° amb una, també en forma amb l’altra.'];
+    solution=[`${parallelFact} i ${t} ⟂ ${knownPerpendicular}.`,`La recta ${t} també és perpendicular a ${unknownParallel}.`,`✅ ${correct}`];
+
+  }else if(type===11){
+    const [r,s,t]=lineLabels(3),facts=shuffleFacts([`${r} ⟂ ${t}`,`${s} ⟂ ${t}`]);
+    question=`En un mateix pla, <b>${r}, ${s} i ${t}</b> són tres rectes diferents. Sabem que <b>${facts[0]}</b> i <b>${facts[1]}</b>. Com són <b>${r}</b> i <b>${s}</b>?`;
+    correct='Paral·leles';opts=relationOptions(correct);
+    guide=[`Compara els angles que formen ${r} i ${s} amb ${t}.`,'Dues rectes diferents perpendiculars a una mateixa recta tenen la mateixa direcció.'];
+    solution=[`${facts[0]} i ${facts[1]}.`,`Com que ${r} i ${s} són diferents i totes dues són perpendiculars a ${t}, ${r} ∥ ${s}.`,`✅ ${correct}`];
+
+  }else if(type===12){
+    const useParallelChain=rnd(0,1)===0;
+    let facts,firstStep,secondStep,targetA,targetB;
+    if(useParallelChain){
+      const [a,b,c,d]=lineLabels(4);
+      facts=shuffleFacts([`${a} ∥ ${b}`,`${b} ∥ ${c}`,`${c} ∥ ${d}`]);
+      targetA=a;targetB=d;correct='Paral·leles';
+      firstStep=`De ${a} ∥ ${b} i ${b} ∥ ${c}, deduïm ${a} ∥ ${c}.`;
+      secondStep=`Com que ${c} ∥ ${d}, deduïm ${a} ∥ ${d}.`;
+    }else{
+      const [m,n,p,q]=lineLabels(4);
+      facts=shuffleFacts([`${m} ∥ ${n}`,`${p} ⟂ ${m}`,`${q} ∥ ${p}`]);
+      targetA=q;targetB=n;correct='Perpendiculars';
+      firstStep=`De ${m} ∥ ${n} i ${p} ⟂ ${m}, deduïm ${p} ⟂ ${n}.`;
+      secondStep=`Com que ${q} ∥ ${p}, també ${q} ⟂ ${n}.`;
+    }
+    question=`Les rectes de cada dada són diferents i són en un mateix pla. Sabem que <b>${facts.join('</b>, <b>')}</b>. Quina relació hi ha entre <b>${targetA}</b> i <b>${targetB}</b>?`;
+    opts=relationOptions(correct);
+    guide=['Ordena les dades i busca quina recta connecta cada parella.','Aplica una regla per obtenir una relació intermèdia; després aplica’n una altra.'];
+    solution=[firstStep,secondStep,`✅ ${correct}`];
+
+  }else if(type===13){
+    const seed=rnd(1,3),[a,b,c]=lineLabels(3);
+    let facts,targetA,targetB,actual;
+    if(seed===1){facts=shuffleFacts([`${a} ∥ ${b}`,`${b} ∥ ${c}`]);targetA=a;targetB=c;actual='Paral·leles';}
+    else if(seed===2){facts=shuffleFacts([`${a} ∥ ${b}`,`${c} ⟂ ${b}`]);targetA=c;targetB=a;actual='Perpendiculars';}
+    else{facts=shuffleFacts([`${a} ⟂ ${c}`,`${b} ⟂ ${c}`]);targetA=a;targetB=b;actual='Paral·leles';}
+    const claimed=positionNames.filter(name=>name!==actual)[rnd(0,2)];
+    const correction=`No: ${targetA} i ${targetB} són ${actual.toLowerCase()}.`;
+    const errorOptions=[`Sí: són ${claimed.toLowerCase()}.`,...positionNames.filter(name=>name!==claimed&&name!==actual).map(name=>`No: són ${name.toLowerCase()}.`)];
+    question=`En un mateix pla, les rectes són diferents. Sabem que <b>${facts[0]}</b> i <b>${facts[1]}</b>. La Jana conclou que <b>${targetA}</b> i <b>${targetB}</b> són ${claimed.toLowerCase()}. Quina valoració és correcta?`;
+    correct=correction;opts=uniq4(correct,errorOptions);
+    guide=['Identifica la recta que connecta les dues premisses.','Aplica la regla i compara la relació deduïda amb la conclusió de la Jana.'];
+    solution=[`${facts[0]} i ${facts[1]}.`,`Per tant, ${targetA} i ${targetB} són ${actual.toLowerCase()}.`,`La conclusió de la Jana és incorrecta: ${correction}`,`✅ ${correct}`];
   }
 
   return {topicId:'elements',type,question,correct,options:opts,guide,solution,svg};
@@ -2710,9 +2782,10 @@ var MI_THEORY_PAGES={
   poliedres:'teoria/espacial/poliedres-ampliacio-2n-eso.html',
   cossos:'teoria/espacial/cossos-rodons-ampliacio-2n-eso.html'
 };
-function miTheoryLinkHtml(topicId,label){
+function miTheoryLinkHtml(topicId,label,exercise){
   var href=MI_THEORY_PAGES[topicId];
   if(!href)return '';
+  if(topicId==='elements'&&exercise&&Number(exercise.type)>=9&&Number(exercise.type)<=13)href+='#compondre';
   return '<a class="theory-page-link mi-review-theory-link" href="'+href+'" style="margin:12px 0 0">📚 '+(label||"Repassar la teoria d\'aquest tema")+'</a>';
 }
 
@@ -3058,7 +3131,7 @@ function processPracticeAnswer(isCorrect,studentAnswer){
   }else{
     state.correctStreak=0;
     const solution=Array.isArray(currentEx.solution)?currentEx.solution:[];
-    fb.innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4><div>La teva resposta: <b style="color:var(--error)">'+String(studentAnswer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+currentEx.correct+'</b></div>'+miReviewHtml(currentEx)+(solution.length?'<button class="sol-btn" onclick="toggleSolution(this)">📘 Veure explicació</button><div class="solution-box" id="solBox">'+solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>':'')+miTheoryLinkHtml(currentEx.topicId)+'</div>';
+    fb.innerHTML='<div class="feedback-box ko"><h4>❌ No és correcte</h4><div>La teva resposta: <b style="color:var(--error)">'+String(studentAnswer??'—')+'</b></div><div>Resposta correcta: <b style="color:var(--success)">'+currentEx.correct+'</b></div>'+miReviewHtml(currentEx)+(solution.length?'<button class="sol-btn" onclick="toggleSolution(this)">📘 Veure explicació</button><div class="solution-box" id="solBox">'+solution.map((x,i)=>'<div class="step"><b>Pas '+(i+1)+':</b> <span class="highlight">'+x+'</span></div>').join('')+'</div>':'')+miTheoryLinkHtml(currentEx.topicId,undefined,currentEx)+'</div>';
   }
 
   renderStreakBar();
