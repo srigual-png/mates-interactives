@@ -97,9 +97,17 @@ async function main() {
           const topic=TOPICS.find(item=>item.id===topicId);
           if(!topic) throw Error(`TOPICS no conté el codi "${topicId}" del registre "${id}"`);
           const keepMarkup=visualQuestion(course,sense);
-          const byLevel={1:new Map(),2:new Map(),3:new Map()}, familyByGenerator=new Map();
+          const byLevel={1:new Map(),2:new Map(),3:new Map()}, familyByGenerator=new Map(), familyIds=new Set();
           const metadata=familyMetadata[id]||null;
-          if(metadata) for(const family of metadata.families||[]) for(const generator of family.generators||[]) familyByGenerator.set(String(generator),family.id);
+          if(metadata) for(const family of metadata.families||[]) {
+            familyIds.add(String(family.id));
+            for(const generator of family.generators||[]) familyByGenerator.set(String(generator),family.id);
+            // Alguns temes separen els generadors de pràctica de les variants d'examen.
+            for(const variant of family.variants||[]) {
+              const match=String(variant).match(/^examen:(.+)$/);
+              if(match) familyByGenerator.set(match[1],family.id);
+            }
+          }
           const problems=[];
           for(let i=0;i<attempts;i++){
             if(typeof resetVariationSession==='function') resetVariationSession();
@@ -108,7 +116,9 @@ async function main() {
             if(![1,2,3].includes(Number(difficulty))) continue;
             const prompt=makeKey(q.question,keepMarkup);
             if(!prompt || !Array.isArray(q.options) || q.options.filter(option=>String(option)===String(q.correct)).length!==1 || !q.solution?.length) continue;
-            const family=String(q.familyId||familyByGenerator.get(String(q.type))||familyByGenerator.get(String(q.generatorId))||familyByGenerator.get(String(q.variantId))||'');
+            const familyCandidates=[q.familyId,q.decimalsFamily,q.decimalsGenerator,q.generatorId,q.variantId,q.type]
+              .filter(value=>value!==undefined&&value!==null).map(String);
+            const family=familyCandidates.map(value=>familyIds.has(value)?value:familyByGenerator.get(value)).find(Boolean)||'';
             if(!family) problems.push(`família no identificada per ${id}, tipus ${q.type}`);
             const bucket=byLevel[difficulty];
             if(!bucket.has(prompt)) bucket.set(prompt,new Set());
