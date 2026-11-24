@@ -2785,7 +2785,23 @@ var MI_THEORY_PAGES={
 function miTheoryLinkHtml(topicId,label,exercise){
   var href=MI_THEORY_PAGES[topicId];
   if(!href)return '';
-  if(topicId==='elements'&&exercise&&Number(exercise.type)>=9&&Number(exercise.type)<=13)href+='#compondre';
+  if(topicId==='elements'&&exercise){
+    var type=Number(exercise.type),familyAnchors={
+      'elements-geometria-bàsics':'elements',
+      'posicions-relatives-rectes':'rectes',
+      'punt-mig-segment':'mediatriu',
+      'mediatriu-segment':'mediatriu',
+      'bisectriu-angle':'bisectriu',
+      'alineacio-i-incidencia':'elements',
+      'compondre-relacions-entre-rectes':'compondre'
+    };
+    var anchor=familyAnchors[exercise.familyId]||({1:'elements',2:'rectes',3:'mediatriu',4:'mediatriu',5:'bisectriu',6:'elements',7:'elements',9:'compondre',10:'compondre',11:'compondre',12:'compondre',13:'compondre'})[type];
+    if(type===8&&!anchor){
+      var text=String((exercise.question||'')+' '+(exercise.correct||'')).replace(/<[^>]*>/g,' ').toLowerCase();
+      anchor=/mediatriu/.test(text)?'mediatriu':/bisectriu|angle/.test(text)?'bisectriu':'elements';
+    }
+    if(anchor)href+='#'+anchor;
+  }
   return '<a class="theory-page-link mi-review-theory-link" href="'+href+'" style="margin:12px 0 0">📚 '+(label||"Repassar la teoria d\'aquest tema")+'</a>';
 }
 
