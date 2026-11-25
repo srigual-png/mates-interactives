@@ -108,7 +108,7 @@ async function main() {
               if(match) familyByGenerator.set(match[1],family.id);
             }
           }
-          const problems=[];
+          const problemsByLevel={1:[],2:[],3:[]};
           for(let i=0;i<attempts;i++){
             if(typeof resetVariationSession==='function') resetVariationSession();
             const q=topic.gen();
@@ -119,12 +119,12 @@ async function main() {
             const familyCandidates=[q.familyId,q.decimalsFamily,q.decimalsGenerator,q.generatorId,q.variantId,q.type]
               .filter(value=>value!==undefined&&value!==null).map(String);
             const family=familyCandidates.map(value=>familyIds.has(value)?value:familyByGenerator.get(value)).find(Boolean)||'';
-            if(!family) problems.push(`família no identificada per ${id}, tipus ${q.type}`);
+            if(!family) problemsByLevel[difficulty].push(`família no identificada per ${id}, tipus ${q.type}`);
             const bucket=byLevel[difficulty];
             if(!bucket.has(prompt)) bucket.set(prompt,new Set());
             if(family) bucket.get(prompt).add(family);
           }
-          output.push({id,attempts,keepMarkup,byLevel:Object.fromEntries(Object.entries(byLevel).map(([level,map])=>[level,[...map].map(([question,families])=>({question,families:[...families]}))])),problems:[...new Set(problems)].slice(0,20)});
+          output.push({id,attempts,keepMarkup,byLevel:Object.fromEntries(Object.entries(byLevel).map(([level,map])=>[level,[...map].map(([question,families])=>({question,families:[...families]}))])),problemsByLevel:Object.fromEntries(Object.entries(problemsByLevel).map(([level,items])=>[level,[...new Set(items)].slice(0,20)]))});
         }
         return output;
       }, {ids, attempts:ATTEMPTS, initialSeed:seed, familyMetadata});
@@ -148,7 +148,7 @@ async function main() {
         if(!questions.has(sample.question)) questions.set(sample.question,new Set());
         for(const family of sample.families) questions.get(sample.question).add(family);
       }
-      diagnostics.push(...observation.problems);
+      diagnostics.push(...(observation.problemsByLevel[level]||[]));
     }
     const count=questions.size;
     const families=observedFamilies.size;
@@ -162,7 +162,7 @@ async function main() {
     for(const level of [1,2,3]){
       const questions=observation.byLevel[level]||[];
       const families=new Set(questions.flatMap(question=>question.families));
-      topicResults.push({id,topic:topic.topic,level,uniquePromptsObserved:questions.length,distinctFamiliesObserved:families.size,attempts:ATTEMPTS,diagnostics:observation.problems});
+      topicResults.push({id,topic:topic.topic,level,uniquePromptsObserved:questions.length,distinctFamiliesObserved:families.size,attempts:ATTEMPTS,diagnostics:observation.problemsByLevel[level]||[]});
     }
   }
   const report={generatedAt:new Date().toISOString(),method:{attemptsPerTopic:ATTEMPTS,normalization:'Enunciats de text: HTML reduït a text visible i espais normalitzats. Enunciats visuals: es conserva el markup i els atributs SVG, es treuen els id i s’ometen class/style només fora dels SVG. Les dades numèriques i els elements geomètrics es mantenen.',interpretation:'Els recomptes són límits inferiors observats amb una mostra determinista, no el cardinal total del generador. Un resultat de 12 o més confirma que s’han trobat 12 enunciats diferents; un resultat inferior és inconcloent.'},packages:packageResults,topicLevels:topicResults};
