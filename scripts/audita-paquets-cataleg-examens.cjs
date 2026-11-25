@@ -108,6 +108,8 @@ async function main() {
               if(match) familyByGenerator.set(match[1],family.id);
             }
           }
+          // La pregunta de raonament volum-amb-error també és el generador D13 de decimals.
+          if(registryTopicId==='decimals'&&familyByGenerator.has('D13')) familyByGenerator.set('volum-amb-error',familyByGenerator.get('D13'));
           const problemsByLevel={1:[],2:[],3:[]};
           for(let i=0;i<attempts;i++){
             if(typeof resetVariationSession==='function') resetVariationSession();
