@@ -104,7 +104,7 @@ async function main() {
             for(const generator of family.generators||[]) familyByGenerator.set(String(generator),family.id);
             // Alguns temes separen els generadors de pràctica de les variants d'examen.
             for(const variant of family.variants||[]) {
-              const match=String(variant).match(/^examen:(.+)$/);
+              const match=String(variant).match(/^(?:examen|raonament):(.+)$/);
               if(match) familyByGenerator.set(match[1],family.id);
             }
           }
@@ -116,7 +116,7 @@ async function main() {
             if(![1,2,3].includes(Number(difficulty))) continue;
             const prompt=makeKey(q.question,keepMarkup);
             if(!prompt || !Array.isArray(q.options) || q.options.filter(option=>String(option)===String(q.correct)).length!==1 || !q.solution?.length) continue;
-            const familyCandidates=[q.familyId,q.decimalsFamily,q.decimalsGenerator,q.generatorId,q.variantId,q.type]
+            const familyCandidates=[q.familyId,q.reasoningFamily,q.fractionsFamily,q.decimalsFamily,q.decimalsGenerator,q.generatorId,q.variantId,q.type]
               .filter(value=>value!==undefined&&value!==null).map(String);
             const family=familyCandidates.map(value=>familyIds.has(value)?value:familyByGenerator.get(value)).find(Boolean)||'';
             if(!family) problemsByLevel[difficulty].push(`família no identificada per ${id}, tipus ${q.type}`);
