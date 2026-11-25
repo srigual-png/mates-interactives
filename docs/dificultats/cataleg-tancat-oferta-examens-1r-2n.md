@@ -105,7 +105,7 @@ Els nivells són ordinaris: **N1 bàsic, N2 intermedi i N3 avançat**. No s’of
 
 ## Paquets combinats tancats
 
-Cada paquet s’ofereix només al nivell indicat. El nombre entre parèntesis és el recompte de famílies diferents identificades en la unió de temes, després de descomptar famílies compartides.
+Cada paquet s’ofereix només al nivell indicat. La columna «Famílies diferents» mostra el recompte de famílies identificades en la unió de temes, després de descomptar famílies compartides.
 
 | Codi | Nivell | Temes que s’inclouen | Famílies diferents | Preguntes úniques observades |
 |---|---|---|---:|---|
