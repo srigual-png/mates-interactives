@@ -38,6 +38,47 @@ const PACKAGES = [
   ['B24',2,5,['1eso/algebraic/traduccio','1eso/algebraic/simplificacio','1eso/algebraic/equacions']],
   ['B25',2,4,['1eso/algebraic/patrons','1eso/algebraic/computacional']],
   ['B26',1,4,['1eso/numeric/jerarquia','1eso/numeric/ops']],
+ ];
+
+// Cel·les individuals marcades amb I al catàleg tancat. Es mostregen
+// amb el mateix nombre d'intents que els paquets per poder comprovar volum.
+const INDIVIDUALS = [
+  ...[
+    '1eso/numeric/naturals','1eso/numeric/ops','1eso/numeric/potencies',
+    '1eso/numeric/enters','1eso/numeric/decimals','1eso/numeric/proporcionalitat',
+    '1eso/numeric/fraccions','1eso/mesura/arees','1eso/mesura/mesurament',
+    '1eso/mesura/problemes','1eso/espacial/elements','1eso/espacial/angles',
+    '1eso/espacial/poligons','1eso/espacial/triangles','1eso/espacial/quadrilaters',
+    '1eso/espacial/cercle','1eso/espacial/visualitzacio',
+    '1eso/estocastic/recollida','1eso/estocastic/taules','1eso/estocastic/barres',
+    '1eso/estocastic/sectors','1eso/estocastic/moda','1eso/estocastic/probabilitat',
+    '1eso/algebraic/traduccio','1eso/algebraic/patrons','1eso/algebraic/monomis',
+    '1eso/algebraic/computacional',
+  ].map(id=>[1,id]),
+  ...[
+    '1eso/numeric/ops','1eso/numeric/jerarquia','1eso/numeric/mcd_mcm',
+    '1eso/numeric/decimals','1eso/numeric/percentatges','1eso/numeric/fraccions',
+    '1eso/mesura/conversions','1eso/mesura/temps','1eso/mesura/perimetres',
+    '1eso/mesura/arees','1eso/mesura/mesurament','1eso/mesura/problemes',
+    '1eso/espacial/visualitzacio','1eso/estocastic/recollida','1eso/estocastic/taules',
+    '1eso/estocastic/sectors','1eso/estocastic/probabilitat',
+  ].map(id=>[2,id]),
+  ...[
+    '2eso/numeric/racionals','2eso/numeric/fraccionsSentit',
+    '2eso/numeric/operacionsRacionals','2eso/numeric/potencies',
+    '2eso/numeric/aproximacions','2eso/numeric/proporcionalitat',
+    '2eso/numeric/percentatges','2eso/numeric/recomptes',
+  ].map(id=>[1,id]),
+  ...[
+    '2eso/numeric/racionals','2eso/numeric/fraccionsSentit',
+    '2eso/numeric/operacionsRacionals','2eso/numeric/potencies',
+    '2eso/numeric/aproximacions','2eso/numeric/proporcionalitat',
+    '2eso/numeric/percentatges','2eso/numeric/recomptes',
+  ].map(id=>[2,id]),
+  ...[
+    '2eso/numeric/racionals','2eso/numeric/fraccionsSentit',
+    '2eso/numeric/operacionsRacionals',
+  ].map(id=>[3,id]),
 ];
 
 function checkCatalogDefinitions() {
@@ -54,7 +95,9 @@ function checkCatalogDefinitions() {
 
 async function main() {
   const {topics: registryTopics} = checkCatalogDefinitions();
-  const selectedIds = [...new Set(PACKAGES.flatMap(row => row[3]))];
+  const selectedIds = [...new Set([...PACKAGES.flatMap(row => row[3]), ...INDIVIDUALS.map(([,id])=>id)])];
+  const missingIndividualMetadata=[...new Set(INDIVIDUALS.map(([,id])=>id).filter(id=>!registryTopics.has(id)))];
+  if(missingIndividualMetadata.length) console.warn('Temes individuals absents del registre validat; la varietat quedarà pendent:', missingIndividualMetadata.join(', '));
   const browser = await playwright().chromium.launch(launchOptions());
   const observations = new Map();
   const pageErrors = [];
@@ -158,19 +201,32 @@ async function main() {
     const eligible=count>=12&&families>=3&&familyCountMatches&&diagnostics.length===0;
     return {code,level,topics:ids,uniquePromptsObserved:count,distinctFamiliesObserved:families,declaredFamilies:expectedFamilies,familyCountMatches,attemptsPerTopic:ATTEMPTS,diagnostics:[...new Set(diagnostics)],status:eligible?'llindar assolit en la mostra':'revisió manual: llindar no demostrat'};
   });
+  const individualResults=INDIVIDUALS.map(([level,id])=>{
+    const observation=observations.get(id);
+    assert(observation, `No s'ha mostrejat ${id}`);
+    const metadata=registryTopics.get(id);
+    const questions=observation.byLevel[level]||[];
+    const families=new Set(questions.flatMap(question=>question.families));
+    const diagnostics=[...(observation.problemsByLevel[level]||[])];
+    if(!metadata) diagnostics.unshift(`tema absent del registre validat: ${id}; varietat no comprovada`);
+    const eligible=questions.length>=12&&families.size>=3&&diagnostics.length===0;
+    return {id,topic:metadata?.topic||id,level,uniquePromptsObserved:questions.length,distinctFamiliesObserved:families.size,attempts:ATTEMPTS,diagnostics,status:eligible?'llindar assolit en la mostra':'revisió manual: llindar no demostrat'};
+  });
   const topicResults=[];
   for(const [id,observation] of observations){
-    const topic=registryTopics.get(id);
+    const topic=registryTopics.get(id)||{topic:id};
     for(const level of [1,2,3]){
       const questions=observation.byLevel[level]||[];
       const families=new Set(questions.flatMap(question=>question.families));
       topicResults.push({id,topic:topic.topic,level,uniquePromptsObserved:questions.length,distinctFamiliesObserved:families.size,attempts:ATTEMPTS,diagnostics:observation.problemsByLevel[level]||[]});
     }
   }
-  const report={generatedAt:new Date().toISOString(),method:{attemptsPerTopic:ATTEMPTS,normalization:'Enunciats de text: HTML reduït a text visible i espais normalitzats. Enunciats visuals: es conserva el markup i els atributs SVG, es treuen els id i s’ometen class/style només fora dels SVG. Les dades numèriques i els elements geomètrics es mantenen.',interpretation:'Els recomptes són límits inferiors observats amb una mostra determinista, no el cardinal total del generador. Un resultat de 12 o més confirma que s’han trobat 12 enunciats diferents; un resultat inferior és inconcloent.'},packages:packageResults,topicLevels:topicResults};
+  const report={generatedAt:new Date().toISOString(),method:{attemptsPerTopic:ATTEMPTS,normalization:'Enunciats de text: HTML reduït a text visible i espais normalitzats. Enunciats visuals: es conserva el markup i els atributs SVG, es treuen els id i s’ometen class/style només fora dels SVG. Les dades numèriques i els elements geomètrics es mantenen.',interpretation:'Els recomptes són límits inferiors observats amb una mostra determinista, no el cardinal total del generador. Un resultat de 12 o més confirma que s’han trobat 12 enunciats diferents; un resultat inferior és inconcloent.'},packages:packageResults,individuals:individualResults,topicLevels:topicResults};
   fs.writeFileSync(OUTPUT,JSON.stringify(report,null,2)+'\n');
   console.log('Paquet | nivell | preguntes diferents observades | famílies observades | estat');
   for(const result of packageResults) console.log(`${result.code} | N${result.level} | ${result.uniquePromptsObserved} | ${result.distinctFamiliesObserved}/${result.declaredFamilies}${result.familyCountMatches?'':' (recompte diferent)'} | ${result.status}`);
+  console.log('\nIndividual | nivell | preguntes úniques | famílies | estat');
+  for(const result of individualResults) console.log(`${result.id} | N${result.level} | ${result.uniquePromptsObserved} | ${result.distinctFamiliesObserved} | ${result.status}`);
   console.log(`\nInforme desat a ${path.relative(ROOT,OUTPUT)}`);
 }
 
