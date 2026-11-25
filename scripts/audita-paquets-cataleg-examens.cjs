@@ -96,6 +96,8 @@ function checkCatalogDefinitions() {
 async function main() {
   const {topics: registryTopics} = checkCatalogDefinitions();
   const selectedIds = [...new Set([...PACKAGES.flatMap(row => row[3]), ...INDIVIDUALS.map(([,id])=>id)])];
+  const missingIndividualMetadata=[...new Set(INDIVIDUALS.map(([,id])=>id).filter(id=>!registryTopics.has(id)))];
+  if(missingIndividualMetadata.length) console.warn('Temes individuals absents del registre validat; la varietat quedarà pendent:', missingIndividualMetadata.join(', '));
   const browser = await playwright().chromium.launch(launchOptions());
   const observations = new Map();
   const pageErrors = [];
@@ -202,15 +204,17 @@ async function main() {
   const individualResults=INDIVIDUALS.map(([level,id])=>{
     const observation=observations.get(id);
     assert(observation, `No s'ha mostrejat ${id}`);
+    const metadata=registryTopics.get(id);
     const questions=observation.byLevel[level]||[];
     const families=new Set(questions.flatMap(question=>question.families));
-    const diagnostics=observation.problemsByLevel[level]||[];
+    const diagnostics=[...(observation.problemsByLevel[level]||[])];
+    if(!metadata) diagnostics.unshift(`tema absent del registre validat: ${id}; varietat no comprovada`);
     const eligible=questions.length>=12&&families.size>=3&&diagnostics.length===0;
-    return {id,topic:registryTopics.get(id).topic,level,uniquePromptsObserved:questions.length,distinctFamiliesObserved:families.size,attempts:ATTEMPTS,diagnostics,status:eligible?'llindar assolit en la mostra':'revisió manual: llindar no demostrat'};
+    return {id,topic:metadata?.topic||id,level,uniquePromptsObserved:questions.length,distinctFamiliesObserved:families.size,attempts:ATTEMPTS,diagnostics,status:eligible?'llindar assolit en la mostra':'revisió manual: llindar no demostrat'};
   });
   const topicResults=[];
   for(const [id,observation] of observations){
-    const topic=registryTopics.get(id);
+    const topic=registryTopics.get(id)||{topic:id};
     for(const level of [1,2,3]){
       const questions=observation.byLevel[level]||[];
       const families=new Set(questions.flatMap(question=>question.families));
